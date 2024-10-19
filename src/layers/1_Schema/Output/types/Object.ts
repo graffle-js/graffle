@@ -1,5 +1,5 @@
 import type { Grafaid } from '../../../../lib/grafaid/__.js'
-import { __typename } from './__typename.js'
+import type { __typename } from './__typename.js'
 import type { Field, SomeFields } from './Field.js'
 
 export interface ObjectQuery<
