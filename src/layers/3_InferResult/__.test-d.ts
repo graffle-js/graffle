@@ -140,6 +140,6 @@ assertEqual<$<{ stringWithArgs: { $: { string: '' } } }>, { stringWithArgs: null
 // @ts-expect-error invalid query
 type Result =  $<{ id2: true }>
 // unknown field
-assertEqual<Result, { id2: InferResult.Errors.UnknownFieldName<'id2', Schema.Root.Query> }>()
+assertEqual<Result, { id2: InferResult.Errors.UnknownFieldName<'id2', Schema.Query> }>()
 
 }
