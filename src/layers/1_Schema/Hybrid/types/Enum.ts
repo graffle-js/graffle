@@ -6,12 +6,3 @@ export interface Enum<
   name: $Name
   members: $Members
 }
-
-export const Enum = <$Name extends string, const $Members extends [string, ...string[]]>(
-  name: $Name,
-  members: $Members,
-): Enum<$Name, $Members> => ({
-  kind: `Enum`,
-  name,
-  members,
-})

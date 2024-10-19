@@ -1,7 +1,6 @@
 import type { Grafaid } from '../../../../lib/grafaid/__.js'
 import { __typename } from './__typename.js'
 import type { Field, SomeFields } from './Field.js'
-import { field } from './Field.js'
 
 export interface ObjectQuery<
   $Fields extends SomeFields = SomeFields,
@@ -26,19 +25,3 @@ export interface Object$2<
     __typename: Field<'__typename', __typename<$Name>, null>
   } & $Fields
 }
-
-// Naming this "Object" breaks Vitest: https://github.com/vitest-dev/vitest/issues/5463
-export const Object$ = <$Name extends string, $Fields extends Record<keyof $Fields, Field<any, any, any>>>(
-  name: $Name,
-  fields: $Fields,
-  // eslint-disable-next-line
-  // @ts-ignore infinite depth issue
-): Object$2<$Name, $Fields> => ({
-  kind: `Object`,
-  fields: {
-    __typename: field(`__typename`, __typename(name)),
-    ...fields,
-  },
-})
-
-export { Object$ as Object }
