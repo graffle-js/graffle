@@ -31,7 +31,7 @@ export const ModuleGeneratorGlobal = createModuleGenerator(
     const customScalarsProperties = config.schema.kindMap.GraphQLScalarTypeCustom
       .map((_) => [_.name, `${identifiers.Scalar}.${_.name}`])
 
-    const ClientFields = Code.termObjectFields({
+    const Clients = Code.termObjectFields({
       [config.name]: {
         name: `Data.Name`,
         schema: identifiers.Schema,
@@ -48,17 +48,14 @@ export const ModuleGeneratorGlobal = createModuleGenerator(
       },
     })
 
-    // todo rename "Schemas" to "Clients"
     code(`
       declare global {
         export namespace GraffleGlobal {
-          export interface Schemas {
-            ${ClientFields}
+          export interface Clients {
+            ${Clients}
           }
         }
       }
     `)
-
-    return code
   },
 )
