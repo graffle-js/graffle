@@ -4,7 +4,7 @@ import type { AssertConstraint } from '../../../lib/prelude.js'
 import type { TypeFunction } from '../../../lib/type-function/__.js'
 import type { Fn } from '../../../lib/type-function/TypeFunction.js'
 import type { Select } from '../../2_Select/__.js'
-import type { GlobalRegistry } from '../../4_generator/globalRegistry.js'
+import type { GlobalRegistry } from '../../4_generator/GlobalRegistry.js'
 import type { RequestCore } from '../../5_request/__.js'
 import type { Client } from '../client.js'
 import type { GraffleExecutionResultEnvelope } from '../handleOutput.js'
@@ -61,7 +61,7 @@ export namespace Extension {
     export namespace OnRequestResult {
       export interface Params<$Extensions extends GlobalRegistry.Extensions = GlobalRegistry.Extensions> {
         result: GraffleExecutionResultEnvelope
-        registeredSchema: GlobalRegistry.RegisteredSchema<$Extensions>
+        registeredSchema: GlobalRegistry.Client<$Extensions>
       }
     }
   }

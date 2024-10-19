@@ -9,7 +9,7 @@ import {
   type GetOrNever,
   type Values,
 } from '../../lib/prelude.js'
-import type { GlobalRegistry } from '../4_generator/globalRegistry.js'
+import type { GlobalRegistry } from '../4_generator/GlobalRegistry.js'
 import type { TransportHttp } from '../5_request/types.js'
 import type { RunTypeHookOnRequestResult } from './extension/extension.js'
 import type { State } from './fluent.js'

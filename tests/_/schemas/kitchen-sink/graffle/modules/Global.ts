@@ -7,7 +7,7 @@ import type { Schema } from './Schema.js'
 
 declare global {
   export namespace GraffleGlobal {
-    export interface Schemas {
+    export interface Clients {
       default: {
         name: Data.Name
         schema: Schema

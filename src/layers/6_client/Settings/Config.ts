@@ -1,7 +1,7 @@
 import type { GraphQLSchema } from 'graphql'
 import type { SchemaDrivenDataMap } from '../../../extensions/CustomScalars/schemaDrivenDataMap/__.js'
 import type { RequireProperties } from '../../../lib/prelude.js'
-import type { GlobalRegistry } from '../../4_generator/globalRegistry.js'
+import type { GlobalRegistry } from '../../4_generator/GlobalRegistry.js'
 import type { TransportHttp, TransportMemory } from '../../5_request/types.js'
 import type { Extension } from '../extension/extension.js'
 import type { TransportHttpInput } from '../transportHttp/request.js'
@@ -115,7 +115,7 @@ export type Config = {
   typeHooks: {
     onRequestResult: Extension.Hooks.OnRequestResult[]
   }
-  name: GlobalRegistry.SchemaNames
+  name: GlobalRegistry.ClientNames
   output: OutputConfig
   schemaMap: SchemaDrivenDataMap | null
   transport: TransportConfigHttp | TransportConfigMemory

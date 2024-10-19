@@ -1,7 +1,7 @@
 import type { HasRequiredKeys } from 'type-fest'
 import type { SchemaDrivenDataMap } from '../../extensions/CustomScalars/schemaDrivenDataMap/__.js'
 import type { Exact } from '../../lib/prelude.js'
-import type { GlobalRegistry } from '../4_generator/globalRegistry.js'
+import type { GlobalRegistry } from '../4_generator/GlobalRegistry.js'
 import { type Client, create } from './client.js'
 import type { InputBase } from './Settings/Input.js'
 import type { NormalizeInput } from './Settings/InputToConfig.js'
@@ -20,7 +20,7 @@ export const createPrefilled: CreatePrefilled = (name, schemaMap, schemaUrl) => 
 
 // dprint-ignore
 export type CreatePrefilled =
-<const $Name extends GlobalRegistry.SchemaNames>(name: $Name, sddm: SchemaDrivenDataMap, schemaUrl?: URL) =>
+<const $Name extends GlobalRegistry.ClientNames>(name: $Name, sddm: SchemaDrivenDataMap, schemaUrl?: URL) =>
 	<
 		// eslint-disable-next-line
 		// @ts-ignore passes after generation

@@ -4,7 +4,7 @@ import { Grafaid } from '../../../lib/grafaid/__.js'
 import { entries, isObjectEmpty, values } from '../../../lib/prelude.js'
 import type { SchemaKit } from '../../1_Schema/__.js'
 import type { Config } from '../config/config.js'
-import type { GlobalRegistry } from '../globalRegistry.js'
+import type { GlobalRegistry } from '../GlobalRegistry.js'
 import { identifiers } from '../helpers/identifiers.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 import { createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
@@ -20,7 +20,7 @@ import { ModuleGeneratorScalar } from './Scalar.js'
 export interface Schema<
   $Extensions extends GlobalRegistry.TypeExtensions = GlobalRegistry.TypeExtensions,
 > {
-  name: GlobalRegistry.SchemaNames
+  name: GlobalRegistry.ClientNames
   RootTypesPresent: ('Query' | 'Mutation' | 'Subscription')[]
   RootUnion: SchemaKit.Output.RootType
   Root: {

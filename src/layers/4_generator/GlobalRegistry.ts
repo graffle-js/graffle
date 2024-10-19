@@ -1,3 +1,4 @@
+import type { IsNever } from 'type-fest'
 import type { TypeFunction } from '../../entrypoints/utilities-for-generated.js'
 import type { ConfigManager } from '../../lib/config-manager/__.js'
 import type { Values } from '../../lib/prelude.js'
@@ -6,14 +7,12 @@ import type { Schema } from './generators/Schema.js'
 
 declare global {
   export namespace GraffleGlobal {
-    interface Schemas {}
-    // Use this is for manual internal type testing.
-    interface SchemasAlwaysEmpty {}
+    interface Clients {}
   }
 }
 
-interface ZeroClient extends GlobalRegistry.RegisteredSchema {
-  name: GlobalRegistry.DefaultSchemaName
+interface ZeroClient extends GlobalRegistry.Client {
+  name: GlobalRegistry.DefaultClientName
   schema: Schema
   interfaces: {
     Root: TypeFunction.Fn
@@ -23,7 +22,7 @@ interface ZeroClient extends GlobalRegistry.RegisteredSchema {
   defaultSchemaUrl: null
 }
 
-export type GlobalRegistry = Record<string, GlobalRegistry.RegisteredSchema>
+export type GlobalRegistry = Record<string, GlobalRegistry.Client>
 
 export namespace GlobalRegistry {
   export type TypeExtensions = Record<string, Record<string, unknown>>
@@ -36,7 +35,7 @@ export namespace GlobalRegistry {
     Schema: ConfigManager.OrDefault<$Extensions['Schema'], TypeExtensions>
   }
 
-  export interface RegisteredSchema<$Extensions extends Extensions = Extensions> {
+  export interface Client<$Extensions extends Extensions = Extensions> {
     name: string
     schema: Schema<$Extensions['Schema']>
     interfaces: {
@@ -50,17 +49,17 @@ export namespace GlobalRegistry {
     defaultSchemaUrl: string | null
   }
 
-  export type DefaultSchemaName = 'default'
+  export type DefaultClientName = 'default'
 
-  export type Clients = GraffleGlobal.Schemas // todo rename to Clients
+  export type Clients = GraffleGlobal.Clients
 
-  export type IsEmpty = keyof Clients extends never ? true : false
+  export type IsEmpty = IsNever<keyof Clients> extends true ? true : false
 
   export type ClientUnion = IsEmpty extends true ? ZeroClient : Values<Clients>
 
-  export type SchemaNames = keyof GraffleGlobal.Schemas extends never
+  export type ClientNames = keyof GraffleGlobal.Clients extends never
     ? TSErrorDescriptive<'SchemaNames', 'No schemas have been registered. Did you run graffle generate?'>
-    : keyof GraffleGlobal.Schemas
+    : keyof GraffleGlobal.Clients
 
   // dprint-ignore
   export type HasDefaultUrlForSchema<$Schema extends ClientUnion> =
@@ -70,25 +69,25 @@ export namespace GlobalRegistry {
 
   // eslint-disable-next-line
   // @ts-ignore passes after generation
-  export type GetSchema<$Name extends SchemaNames> = GraffleGlobal.Schemas[$Name]['schema']
+  export type GetSchema<$Name extends ClientNames> = GraffleGlobal.Clients[$Name]['schema']
 
   // eslint-disable-next-line
   // @ts-ignore passes after generation
-  export type SchemaDefault = GetSchema<DefaultSchemaName>
+  export type SchemaDefault = GetSchema<DefaultClientName>
 
   // dprint-ignore
-  export type GetOrDefault<$Name extends SchemaNames | undefined> =
-    $Name extends SchemaNames
+  export type GetOrDefault<$Name extends ClientNames | undefined> =
+    $Name extends ClientNames
       // eslint-disable-next-line
       // @ts-ignore passes after generation
-      ? GraffleGlobal.Schemas[$Name]
+      ? GraffleGlobal.Clients[$Name]
       // eslint-disable-next-line
       // @ts-ignore passes after generation
-      : GraffleGlobal.Schemas[DefaultSchemaName]
+      : GraffleGlobal.Clients[DefaultClientName]
 
   // dprint-ignore
-  export type GetSchemaOrDefault<$Name extends SchemaNames | undefined> =
-    $Name extends SchemaNames
+  export type GetSchemaOrDefault<$Name extends ClientNames | undefined> =
+    $Name extends ClientNames
       ? GetSchema<$Name>
       : SchemaDefault
 }

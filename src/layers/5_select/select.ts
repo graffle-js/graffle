@@ -1,8 +1,8 @@
 import { identityProxy } from '../../lib/prelude.js'
-import type { GlobalRegistry } from '../4_generator/globalRegistry.js'
+import type { GlobalRegistry } from '../4_generator/GlobalRegistry.js'
 
 // dprint-ignore
-type Create = <$Name extends GlobalRegistry.SchemaNames>(name: $Name) =>
+type Create = <$Name extends GlobalRegistry.ClientNames>(name: $Name) =>
   // eslint-disable-next-line
   // @ts-ignore passes after generation
   GlobalRegistry.GetOrDefault<$Name>['interfaces']['MethodsSelect']

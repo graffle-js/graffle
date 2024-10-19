@@ -1,4 +1,4 @@
-import type { GlobalRegistry } from '../../../4_generator/globalRegistry.js'
+import type { GlobalRegistry } from '../../../4_generator/GlobalRegistry.js'
 import type { Transport, TransportMemory } from '../../../5_request/types.js'
 import type { TransportHttpInput } from '../../transportHttp/request.js'
 import type { Config } from '../Config.js'
@@ -20,7 +20,7 @@ export type WithInput<$Context extends IncrementableInputContext = Incrementable
     )
 
 export type IncrementableInputContext = {
-  name: GlobalRegistry.SchemaNames
+  name: GlobalRegistry.ClientNames
   transport: {
     type: Transport
   }

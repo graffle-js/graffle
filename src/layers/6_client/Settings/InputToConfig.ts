@@ -1,6 +1,6 @@
 import type { IsUnknown } from 'type-fest'
 import type { ConfigManager } from '../../../lib/config-manager/__.js'
-import type { GlobalRegistry } from '../../4_generator/globalRegistry.js'
+import type { GlobalRegistry } from '../../4_generator/GlobalRegistry.js'
 import { Transport } from '../../5_request/types.js'
 import { defaultMethodMode } from '../transportHttp/request.js'
 import { outputConfigDefault, type TransportConfigHttp, type TransportConfigMemory } from './Config.js'
@@ -41,7 +41,7 @@ export type NormalizeInput<$Input extends InputStatic> = {
   }
 }
 
-export const defaultSchemaName: GlobalRegistry.DefaultSchemaName = `default`
+export const defaultSchemaName: GlobalRegistry.DefaultClientName = `default`
 
 export const inputToConfig = <$Input extends InputStatic>(
   input: $Input,
@@ -94,7 +94,7 @@ export const inputToConfig = <$Input extends InputStatic>(
 }
 
 type HandleName<$Input extends InputStatic> = $Input['name'] extends string ? $Input['name']
-  : GlobalRegistry.DefaultSchemaName
+  : GlobalRegistry.DefaultClientName
 
 // dprint-ignore
 type HandleTransport<$Input extends InputStatic> =
