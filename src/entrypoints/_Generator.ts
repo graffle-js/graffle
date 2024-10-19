@@ -1,2 +1,2 @@
-export { generate } from '../layers/4_generator/_.js'
-export { create } from '../layers/4_generator/configFile/builder.js'
+export { generate } from '../generator/_.js'
+export { create } from '../generator/configFile/builder.js'

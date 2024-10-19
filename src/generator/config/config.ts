@@ -1,16 +1,16 @@
 import fs from 'node:fs/promises'
 import * as Path from 'node:path'
-import { Graffle } from '../../../entrypoints/__Graffle.js'
-import { Introspection } from '../../../entrypoints/extensions.js'
-import { ConfigManager } from '../../../lib/config-manager/__.js'
-import { fileExists, isPathToADirectory, toAbsolutePath, toFilePath } from '../../../lib/fs.js'
-import { Grafaid } from '../../../lib/grafaid/__.js'
-import { isString } from '../../../lib/prelude.js'
+import { Graffle } from '../../entrypoints/__Graffle.js'
+import { Introspection } from '../../entrypoints/extensions.js'
+import { ConfigManager } from '../../lib/config-manager/__.js'
+import { fileExists, isPathToADirectory, toAbsolutePath, toFilePath } from '../../lib/fs.js'
+import { Grafaid } from '../../lib/grafaid/__.js'
+import { isString } from '../../lib/prelude.js'
 import {
   type Formatter,
   getTypescriptFormatterOrPassthrough,
   passthroughFormatter,
-} from '../../../lib/typescript-formatter.js'
+} from '../../lib/typescript-formatter.js'
 import type { Extension } from '../extension/types.js'
 import { defaultLibraryPaths } from './defaults.js'
 import { defaultName } from './defaults.js'

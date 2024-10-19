@@ -1,5 +1,5 @@
 import { createGeneratorExtension } from '../../entrypoints/extensionkit.js'
-import type { Config as GeneratorConfig } from '../../layers/4_generator/config/config.js'
+import type { Config as GeneratorConfig } from '../../generator/config/config.js'
 import { Code } from '../../lib/Code.js'
 import { ConfigManager } from '../../lib/config-manager/__.js'
 import { Grafaid } from '../../lib/grafaid/__.js'

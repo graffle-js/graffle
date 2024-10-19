@@ -1,5 +1,5 @@
 import { join } from 'node:path'
-import { Generator } from '../../../src/layers/4_generator/__.js'
+import { Generator } from '../../../src/generator/__.js'
 import { Grafaid } from '../../../src/lib/grafaid/__.js'
 
 const generate = async (

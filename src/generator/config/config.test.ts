@@ -1,5 +1,5 @@
 import { expect } from 'vitest'
-import { test } from '../../../../tests/_/helpers.js'
+import { test } from '../../../tests/_/helpers.js'
 import { createConfig } from './config.js'
 
 test(`can load schema from custom path`, async () => {

@@ -1,9 +1,9 @@
 import type { IsNever } from 'type-fest'
-import type { TypeFunction } from '../../entrypoints/utilities-for-generated.js'
-import type { ConfigManager } from '../../lib/config-manager/__.js'
-import type { Values } from '../../lib/prelude.js'
-import type { TSErrorDescriptive } from '../../lib/ts-error.js'
-import type { Schema } from './generators/Schema.js'
+import type { TypeFunction } from '../entrypoints/utilities-for-generated.js'
+import type { Schema } from '../generator/generators/Schema.js'
+import type { ConfigManager } from '../lib/config-manager/__.js'
+import type { Values } from '../lib/prelude.js'
+import type { TSErrorDescriptive } from '../lib/ts-error.js'
 
 declare global {
   export namespace GraffleGlobal {

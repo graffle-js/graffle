@@ -1,7 +1,7 @@
+import type { Schema } from '../../generator/generators/Schema.js'
 import type { mergeObjectArray, ValuesOrEmptyObject } from '../../lib/prelude.js'
 import type { SchemaKit } from '../1_Schema/__.js'
 import type { Select } from '../2_Select/__.js'
-import type { Schema } from '../4_generator/generators/Schema.js'
 import type { Field } from './Field.js'
 
 // dprint-ignore

@@ -3,9 +3,9 @@
 import { Command } from '@molt/command'
 import * as Path from 'node:path'
 import { z } from 'zod'
-import { Generator } from '../layers/4_generator/__.js'
-import { toAbsolutePath } from '../lib/fs.js'
-import { isError, urlParseSafe } from '../lib/prelude.js'
+import { toAbsolutePath } from '../../lib/fs.js'
+import { isError, urlParseSafe } from '../../lib/prelude.js'
+import { Generator } from '../__.js'
 
 const args = Command.create().description(`Generate a type safe GraphQL client.`)
   .parameter(

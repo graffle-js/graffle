@@ -1,11 +1,11 @@
 // todo: generate in JSDoc how the feature maps to GQL syntax.
 // todo: on union fields, JSDoc that mentions the syntax `on*`
 
-import { Code } from '../../../lib/Code.js'
-import { Grafaid } from '../../../lib/grafaid/__.js'
-import { analyzeArgsNullability } from '../../../lib/grafaid/schema/args.js'
-import { RootTypeName } from '../../../lib/grafaid/schema/schema.js'
-import { Select } from '../../2_Select/__.js'
+import { Select } from '../../layers/2_Select/__.js'
+import { Code } from '../../lib/Code.js'
+import { Grafaid } from '../../lib/grafaid/__.js'
+import { analyzeArgsNullability } from '../../lib/grafaid/schema/args.js'
+import { RootTypeName } from '../../lib/grafaid/schema/schema.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 import { createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
 import { getDocumentation, renderDocumentation, renderName, title1, typeTitle2SelectionSet } from '../helpers/render.js'

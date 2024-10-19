@@ -1,7 +1,7 @@
-import { Code } from '../../../lib/Code.js'
-import { Grafaid } from '../../../lib/grafaid/__.js'
-import { getNodeDisplayName } from '../../../lib/grafaid/graphql.js'
-import { borderThickFullWidth, borderThinFullWidth, centerTo } from '../../../lib/text.js'
+import { Code } from '../../lib/Code.js'
+import { Grafaid } from '../../lib/grafaid/__.js'
+import { getNodeDisplayName } from '../../lib/grafaid/graphql.js'
+import { borderThickFullWidth, borderThinFullWidth, centerTo } from '../../lib/text.js'
 import type { Config } from '../config/config.js'
 
 export const title1 = (title: string, subTitle?: string) => {

@@ -1,5 +1,5 @@
 import { identityProxy } from '../../lib/prelude.js'
-import type { GlobalRegistry } from '../4_generator/GlobalRegistry.js'
+import type { GlobalRegistry } from '../GlobalRegistry.js'
 
 // dprint-ignore
 type Create = <$Name extends GlobalRegistry.ClientNames>(name: $Name) =>

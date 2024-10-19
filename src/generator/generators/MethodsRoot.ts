@@ -1,5 +1,5 @@
 // todo remove use of Utils.Aug when schema errors not in use
-import { Grafaid } from '../../../lib/grafaid/__.js'
+import { Grafaid } from '../../lib/grafaid/__.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 import { createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
 import { renderDocumentation, renderName } from '../helpers/render.js'

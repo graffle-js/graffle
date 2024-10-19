@@ -306,6 +306,18 @@ export namespace Schema {
   //
   //
 
+  // todo generate code like this:
+  export interface DateInterface2 extends $.Interface {
+    name: 'DateInterface1'
+    implementors: [DateObject1]
+    fields: {
+      date1: {
+        inlineType: [0]
+        namedType: $Scalar.Date
+      }
+    }
+  }
+
   export type DateInterface1 = $.Interface<'DateInterface1', {
     date1: $.Field<'date1', $.Output.Nullable<$Scalar.Date>, null>
   }, [DateObject1]>

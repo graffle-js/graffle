@@ -1,4 +1,4 @@
-import type { Grafaid } from '../../../lib/grafaid/__.js'
+import type { Grafaid } from '../../lib/grafaid/__.js'
 import type { Extension } from '../extension/types.js'
 
 export interface InputLint {

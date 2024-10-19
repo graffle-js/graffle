@@ -1,5 +1,5 @@
 // todo jsdoc
-import { Grafaid } from '../../../lib/grafaid/__.js'
+import { Grafaid } from '../../lib/grafaid/__.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 import { renderName, title1 } from '../helpers/render.js'
 import { ModuleGeneratorSelectionSets } from './SelectionSets.js'
