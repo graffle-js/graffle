@@ -54,7 +54,6 @@ export const ModuleGeneratorSchema = createModuleGenerator(
     code(`\n\n`)
 
     code(`export namespace ${identifiers.Schema} {`)
-    // todo do we need kind namespaces?
     for (const [name, types] of entries(config.schema.kindMap)) {
       if (name === `GraphQLScalarType`) continue
       if (name === `GraphQLScalarTypeCustom`) continue
@@ -64,16 +63,13 @@ export const ModuleGeneratorSchema = createModuleGenerator(
       code()
       code(title1(namespaceName))
       code()
-      code(Code.export$(
-        Code.namespace(
-          namespaceName,
-          types.length === 0
-            ? `// -- no types --\n`
-            : types
-              .map((_) => dispatchToConcreteRenderer(config, _))
-              .join(`\n\n`),
-        ),
-      ))
+      code(
+        types.length === 0
+          ? `// -- no types --\n`
+          : types
+            .map((_) => dispatchToConcreteRenderer(config, _))
+            .join(`\n\n`),
+      )
     }
     code(`}`)
 
@@ -101,32 +97,28 @@ export const SchemaGenerator = createCodeGenerator(
       Subscription: Grafaid.Schema.KindMap.hasSubscription(config.schema.kindMap),
     }
 
-    const root = config.schema.kindMap.GraphQLRootType.map(_ =>
-      [_.name, `${identifiers.Schema}.Root.${_.name}`] as const
-    )
+    const root = config.schema.kindMap.GraphQLRootType.map(_ => [_.name, `${identifiers.Schema}.${_.name}`] as const)
 
     const objects = config.schema.kindMap.GraphQLObjectType.map(_ =>
-      [_.name, `${identifiers.Schema}.Object.${_.name}`] as const
+      [_.name, `${identifiers.Schema}.${_.name}`] as const
     )
-    const unions = config.schema.kindMap.GraphQLUnionType.map(_ =>
-      [_.name, `${identifiers.Schema}.Union.${_.name}`] as const
-    )
+    const unions = config.schema.kindMap.GraphQLUnionType.map(_ => [_.name, `${identifiers.Schema}.${_.name}`] as const)
     const interfaces = config.schema.kindMap.GraphQLInterfaceType.map(
-      _ => [_.name, `${identifiers.Schema}.Interface.${_.name}`] as const,
+      _ => [_.name, `${identifiers.Schema}.${_.name}`] as const,
     )
     const enums = config.schema.kindMap.GraphQLEnumType.map(
-      _ => [_.name, `${identifiers.Schema}.Enum.${_.name}`] as const,
+      _ => [_.name, `${identifiers.Schema}.${_.name}`] as const,
     )
 
     const schema: Code.TermObject = {
       name: `Data.Name`,
       RootTypesPresent: `[${config.schema.kindMap.GraphQLRootType.map((_) => Code.string(_.name)).join(`, `)}]`,
-      RootUnion: config.schema.kindMap.GraphQLRootType.map(_ => `${identifiers.Schema}.Root.${_.name}`)
+      RootUnion: config.schema.kindMap.GraphQLRootType.map(_ => `${identifiers.Schema}.${_.name}`)
         .join(`|`),
       Root: {
-        Query: rootTypesPresence.Query ? `${identifiers.Schema}.Root.Query` : null,
-        Mutation: rootTypesPresence.Mutation ? `${identifiers.Schema}.Root.Mutation` : null,
-        Subscription: rootTypesPresence.Subscription ? `${identifiers.Schema}.Root.Subscription` : null,
+        Query: rootTypesPresence.Query ? `${identifiers.Schema}.Query` : null,
+        Mutation: rootTypesPresence.Mutation ? `${identifiers.Schema}.Mutation` : null,
+        Subscription: rootTypesPresence.Subscription ? `${identifiers.Schema}.Subscription` : null,
       },
       allTypes: Code.objectFromEntries([
         ...root,
@@ -229,13 +221,11 @@ const dispatchToReferenceRenderer = (config: Config, type: Grafaid.Schema.Types)
 }
 
 const referenceRenderers = defineReferenceRenderers({
-  GraphQLEnumType: (_, node) => Code.propertyAccess(namespaceNames.GraphQLEnumType, node.name),
-  GraphQLInputObjectType: (_, node) => Code.propertyAccess(namespaceNames.GraphQLInputObjectType, node.name),
-  GraphQLInterfaceType: (_, node) => Code.propertyAccess(namespaceNames.GraphQLInterfaceType, node.name),
-  GraphQLObjectType: (_, node) => {
-    return Code.propertyAccess(namespaceNames.GraphQLObjectType, node.name)
-  },
-  GraphQLUnionType: (_, node) => Code.propertyAccess(namespaceNames.GraphQLUnionType, node.name),
+  GraphQLEnumType: (_, node) => node.name,
+  GraphQLInputObjectType: (_, node) => node.name,
+  GraphQLInterfaceType: (_, node) => node.name,
+  GraphQLObjectType: (_, node) => node.name,
+  GraphQLUnionType: (_, node) => node.name,
   GraphQLScalarType: (_, node) => `$Scalar.${node.name}`,
 })
 
@@ -282,7 +272,7 @@ const concreteRenderers = defineConcreteRenderers({
       Code.export$(Code.type(
         node.name,
         `$.Interface<${Code.string(node.name)}, ${renderOutputFields(config, node)}, ${
-          Code.tuple(implementors.map(_ => `Object.${_.name}`))
+          Code.tuple(implementors.map(_ => _.name))
         }>`,
       )),
     )

@@ -18,12 +18,10 @@ export namespace Schema {
   //
   //
 
-  export namespace Root {
-    export type Query = $.Output.ObjectQuery<{
-      id: $.Field<'id', $.Output.Nullable<$Scalar.ID>, null>
-      idNonNull: $.Field<'idNonNull', $Scalar.ID, null>
-    }>
-  }
+  export type Query = $.Output.ObjectQuery<{
+    id: $.Field<'id', $.Output.Nullable<$Scalar.ID>, null>
+    idNonNull: $.Field<'idNonNull', $Scalar.ID, null>
+  }>
 
   //
   //
@@ -41,9 +39,7 @@ export namespace Schema {
   //
   //
 
-  export namespace Enum {
-    // -- no types --
-  }
+  // -- no types --
 
   //
   //
@@ -61,9 +57,7 @@ export namespace Schema {
   //
   //
 
-  export namespace InputObject {
-    // -- no types --
-  }
+  // -- no types --
 
   //
   //
@@ -81,9 +75,7 @@ export namespace Schema {
   //
   //
 
-  export namespace Interface {
-    // -- no types --
-  }
+  // -- no types --
 
   //
   //
@@ -101,9 +93,7 @@ export namespace Schema {
   //
   //
 
-  export namespace Object {
-    // -- no types --
-  }
+  // -- no types --
 
   //
   //
@@ -121,9 +111,7 @@ export namespace Schema {
   //
   //
 
-  export namespace Union {
-    // -- no types --
-  }
+  // -- no types --
 }
 //
 //
@@ -148,14 +136,14 @@ import type * as MethodsRoot from './MethodsRoot.js'
 export interface Schema extends Utilities.SchemaIndexBase {
   name: Data.Name
   RootTypesPresent: ['Query']
-  RootUnion: Schema.Root.Query
+  RootUnion: Schema.Query
   Root: {
-    Query: Schema.Root.Query
+    Query: Schema.Query
     Mutation: null
     Subscription: null
   }
   allTypes: {
-    Query: Schema.Root.Query
+    Query: Schema.Query
   }
   objects: {}
   unions: {}
