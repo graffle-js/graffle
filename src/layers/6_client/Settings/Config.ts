@@ -115,7 +115,7 @@ export type Config = {
   typeHooks: {
     onRequestResult: Extension.Hooks.OnRequestResult[]
   }
-  name: GlobalRegistry.ClientNames
+  name: GlobalRegistry.ClientNames // todo remove? it is in context
   output: OutputConfig
   schemaMap: SchemaDrivenDataMap | null
   transport: TransportConfigHttp | TransportConfigMemory

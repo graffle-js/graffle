@@ -1,13 +1,13 @@
 import type { Mock } from 'vitest'
 import { test as testBase, vi } from 'vitest'
 import { Graffle } from '../../src/entrypoints/main.js'
-import type { Config } from '../../src/entrypoints/utilities-for-generated.js'
+import type { ClientContext } from '../../src/entrypoints/utilities-for-generated.js'
 import type { Client } from '../../src/layers/6_client/client.js'
+import type { ConfigManager } from '../../src/lib/config-manager/__.js'
 import { CONTENT_TYPE_REC } from '../../src/lib/grafaid/http/http.js'
 import { type SchemaService, serveSchema } from './lib/serveSchema.js'
 import { db } from './schemas/db.js'
 import { Graffle as KitchenSink } from './schemas/kitchen-sink/graffle/__.js'
-import { type Schema as KitchenSinkSchema } from './schemas/kitchen-sink/graffle/modules/Schema.js'
 import { schema as kitchenSinkSchema } from './schemas/kitchen-sink/schema.js'
 import { schema } from './schemas/pokemon/schema.js'
 
@@ -19,9 +19,9 @@ export const createResponse = (body: object) =>
 interface Fixtures {
   fetch: Mock<(request: Request) => Promise<Response>>
   pokemonService: SchemaService
-  graffle: Client<{ config: Config; schemaIndex: null }>
-  kitchenSink: Client<{ config: Config & { name: 'default' }; schemaIndex: KitchenSinkSchema }>
-  kitchenSinkHttp: Client<{ config: Config & { name: 'default' }; schemaIndex: KitchenSinkSchema }>
+  graffle: Client<ClientContext>
+  kitchenSink: Client<ConfigManager.SetAtPath<ClientContext, ['config', 'name'], 'default'>>
+  kitchenSinkHttp: Client<ConfigManager.SetAtPath<ClientContext, ['config', 'name'], 'default'>>
   kitchenSinkData: typeof db
 }
 

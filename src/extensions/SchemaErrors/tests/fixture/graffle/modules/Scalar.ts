@@ -1,4 +1,4 @@
-import type { SchemaKit } from '../../../../../../entrypoints/schema.js'
+import type * as $$Utilities from '../../../../../../entrypoints/utilities-for-generated.js'
 
 export * from '../../../../../../layers/1_Schema/Hybrid/types/Scalar/Scalar.js'
 
@@ -14,8 +14,4 @@ export * from '../../../../../../layers/1_Schema/Hybrid/types/Scalar/Scalar.js'
 //
 //
 
-import type { String as Date } from '../../../../../../layers/1_Schema/Hybrid/types/Scalar/Scalar.js'
-
-export { String as Date } from '../../../../../../layers/1_Schema/Hybrid/types/Scalar/Scalar.js'
-export type DateDecoded = SchemaKit.Scalar.GetDecoded<Date>
-export type DateEncoded = SchemaKit.Scalar.GetEncoded<Date>
+export type Date = $$Utilities.SchemaKit.Scalar.ScalarCodecless<'Date'>

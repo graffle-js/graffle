@@ -1,5 +1,6 @@
 import { Scalar, type Scalar as SchemaScalar } from '../../../layers/1_Schema/_.js'
 import type { Grafaid } from '../../../lib/grafaid/__.js'
+import { isString } from '../../../lib/prelude.js'
 
 declare global {
   namespace GraffleGlobal {
@@ -99,6 +100,8 @@ export type ArgumentsOrInputObjectFields = GraffleGlobal.SchemaDrivenDataMap.Arg
 
 export type Scalar = SchemaScalar.Scalar
 
+export type CustomScalarName = string
+
 export type ArgumentOrInputField = GraffleGlobal.SchemaDrivenDataMap.ArgumentOrInputField
 
 export const propertyNames = {
@@ -128,15 +131,19 @@ export type NonNull = 1
 export const isEnum = (
   node?: Node,
 ): node is Enum => {
-  return node ? `k` in node && node.k === `enum` : false
+  return node ? !isString(node) && `k` in node && node.k === `enum` : false
 }
 
+export const isCustomScalarName = (value: unknown): value is CustomScalarName => isString(value)
+
 export const isScalar = Scalar.isScalar
+
+export const isScalarLike = (value: unknown): value is ScalarLike => Scalar.isScalar(value) || isCustomScalarName(value)
 
 export const isOutputObject = (
   node?: Node,
 ): node is OutputObject => {
-  return node ? propertyNames.f in node : false
+  return node ? !isString(node) && propertyNames.f in node : false
 }
 
 export const nullabilityFlags = {
@@ -151,20 +158,22 @@ export const nullabilityFlags = {
 export const isInputObject = (
   node?: InputLike,
 ): node is InputObject => {
-  return node ? propertyNames.f in node : false
+  return node ? !isString(node) && propertyNames.f in node : false
 }
 
 export const isOutputField = (
   node?: Node,
 ): node is GraffleGlobal.SchemaDrivenDataMap.OutputField => {
-  return node ? `a` in node : false
+  return node ? !isString(node) && propertyNames.a in node : false
 }
 
-export type NamedLike = SchemaScalar.Scalar | OutputObject | Enum | InputObject
+export type NamedLike = ScalarLike | OutputObject | Enum | InputObject
 
-export type OutputLike = SchemaScalar.Scalar | OutputObject | Enum
+export type OutputLike = SchemaScalar.Scalar | OutputObject | Enum | CustomScalarName
 
-export type InputLike = SchemaScalar.Scalar | InputObject | Enum
+export type ScalarLike = SchemaScalar.Scalar | CustomScalarName
+
+export type InputLike = ScalarLike | InputObject | Enum
 
 export type Node =
   | OutputObject
@@ -175,3 +184,4 @@ export type Node =
   | SchemaDrivenDataMap
   | Scalar
   | Enum
+  | CustomScalarName

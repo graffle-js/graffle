@@ -9,15 +9,15 @@ import {
 } from '../../../lib/template-string.js'
 import { RequestCore } from '../../5_request/__.js'
 import type { InterfaceRaw } from '../../5_request/types.js'
-import { defineTerminus } from '../fluent.js'
+import { type ClientContext, defineTerminus } from '../fluent.js'
 import { handleOutput } from '../handleOutput.js'
 import type { Config } from '../Settings/Config.js'
 import { type DocumentController, resolveSendArguments, type sendArgumentsImplementation } from './send.js'
 
 // dprint-ignore
-export interface gql<$Config extends Config = Config> {
-  <$Document extends Grafaid.Document.Typed.TypedDocumentLike>(document: $Document                            ): DocumentController<$Config, $Document>
-  <$Document extends Grafaid.Document.Typed.TypedDocumentLike>(parts: TemplateStringsArray, ...args: unknown[]): DocumentController<$Config, $Document>
+export interface gql<$Context extends ClientContext = ClientContext> {
+  <$Document extends Grafaid.Document.Typed.TypedDocumentLike>(document: $Document                            ): DocumentController<$Context, $Document>
+  <$Document extends Grafaid.Document.Typed.TypedDocumentLike>(parts: TemplateStringsArray, ...args: unknown[]): DocumentController<$Context, $Document>
 }
 
 type gqlArguments = [Grafaid.Document.Typed.TypedDocumentLike] | TemplateStringsArguments

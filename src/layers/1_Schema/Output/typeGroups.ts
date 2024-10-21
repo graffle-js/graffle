@@ -9,7 +9,13 @@ import type { Union } from './types/Union.js'
 
 export type ObjectLike = Object$2 | Interface
 
-export type Named = Interface | Enum | Object$2 | Union<string, [Object$2, ...Object$2[]]> | Hybrid.Scalar.$Any
+export type Named =
+  | Interface
+  | Enum
+  | Object$2
+  | Union<string, [Object$2, ...Object$2[]]>
+  | Hybrid.Scalar.Scalar
+  | Hybrid.Scalar.ScalarCodecless
 
 export type Unnamed = List<any> | Nullable<any>
 

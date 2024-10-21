@@ -1,11 +1,13 @@
 import type { SchemaDrivenDataMap } from '../../extensions/CustomScalars/schemaDrivenDataMap/__.js'
 import type { Grafaid } from '../../lib/grafaid/__.js'
 import { Nodes } from '../../lib/grafaid/_Nodes.js'
+import type { SchemaKit } from '../1_Schema/__.js'
 import { inferVariableType } from './inferVariableType.js'
 import type { Options } from './nodes/1_Document.js'
 
 export interface OperationContext {
   sddm?: SchemaDrivenDataMap
+  scalars: SchemaKit.Hybrid.Scalar.ScalarMap
   variables: {
     /**
      * Should variables be used for arguments?
@@ -33,6 +35,7 @@ export interface Captures {
 export const createOperationContext = (options?: Options): OperationContext => {
   const context: OperationContext = {
     sddm: options?.sddm ?? undefined,
+    scalars: options?.scalars ?? {},
     variables: {
       enabled: options?.operationVariables ?? true,
       capture: (input) => {

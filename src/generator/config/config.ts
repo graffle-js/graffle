@@ -25,6 +25,10 @@ export interface Config {
     operationVariables: boolean
   }
   options: {
+    /**
+     * Does the generated client import custom scalars statically from the user's project?
+     */
+    isImportsCustomScalars: boolean
     defaultSchemaUrl: URL | null
     format: boolean
     customScalars: boolean
@@ -79,16 +83,15 @@ export const createConfig = async (input: Input): Promise<Config> => {
     ? toAbsolutePath(cwd, input.customScalarCodecs)
     : Path.join(sourceDirPath, `customScalarCodecs.ts`)
 
-  const customScalarCodecsPathExists = await fileExists(inputPathCustomScalarCodecs)
-  if (!customScalarCodecsPathExists && input.customScalarCodecs) {
+  const isCustomScalarsModuleExists = await fileExists(inputPathCustomScalarCodecs)
+  if (!isCustomScalarsModuleExists && input.customScalarCodecs) {
+    // dprint-ignore
     throw new Error(
-      `Custom scalar codecs file not found. Given path: ${
-        String(input.customScalarCodecs)
-      }. Resolved to and looked at: ${inputPathCustomScalarCodecs}`,
+      `Custom scalar codecs file not found. Given path: ${String(input.customScalarCodecs)}. Resolved to and looked at: ${inputPathCustomScalarCodecs}`,
     )
   }
 
-  const customScalarCodecsImportPath = Path.relative(
+  const customScalarsImportPath = Path.relative(
     outputDirPathModules,
     inputPathCustomScalarCodecs.replace(/\.ts$/, `.js`),
   )
@@ -148,6 +151,8 @@ export const createConfig = async (input: Input): Promise<Config> => {
 
   // --- Config ---
 
+  // const customScalarsEnabled = input.customScalars ?? false
+
   return {
     extensions: input.extensions ?? [],
     lint,
@@ -159,9 +164,10 @@ export const createConfig = async (input: Input): Promise<Config> => {
     name: input.name ?? defaultName,
     schema,
     options: {
+      isImportsCustomScalars: isCustomScalarsModuleExists,
       defaultSchemaUrl,
       format: formattingEnabled,
-      customScalars: customScalarCodecsPathExists,
+      customScalars: isCustomScalarsModuleExists,
       TSDoc: {
         noDocPolicy: input.TSDoc?.noDocPolicy ?? `ignore`,
       },
@@ -180,7 +186,7 @@ export const createConfig = async (input: Input): Promise<Config> => {
         },
       },
       imports: {
-        customScalarCodecs: customScalarCodecsImportPath,
+        customScalarCodecs: customScalarsImportPath,
         grafflePackage: ConfigManager.mergeDefaults(
           defaultLibraryPaths,
           libraryPaths,

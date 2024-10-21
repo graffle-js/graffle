@@ -118,9 +118,14 @@ export const getDocumentation = (config: Config, node: Grafaid.Schema.Describabl
  * this guards against GraphQL type or property names that
  * would be illegal in TypeScript such as `namespace` or `interface`.
  */
-export const renderName = (type: Grafaid.Schema.NamedTypes | Grafaid.Schema.Field<any, any>) => {
+export const renderName = (type: string | Grafaid.Schema.NamedTypes | Grafaid.Schema.Field<any, any>) => {
+  if (typeof type === `string`) {
+    return type
+  }
+
   if (Code.reservedTypeScriptInterfaceNames.includes(type.name as any)) {
     return `$${type.name}`
   }
+
   return type.name
 }

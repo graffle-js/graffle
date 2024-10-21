@@ -59,6 +59,6 @@ await generate({
 await generate({
   dirName: `kitchen-sink`,
   input: {
-    customScalarCodecs: `./kitchen-sink/customScalarCodecs.ts`,
+    // customScalarCodecs: `./kitchen-sink/customScalarCodecs.ts`,
   },
 })

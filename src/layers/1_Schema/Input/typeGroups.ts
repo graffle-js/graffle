@@ -3,7 +3,7 @@ import type { InputObject } from './types/InputObject.js'
 import type { List } from './types/List.js'
 import type { Nullable } from './types/Nullable.js'
 
-export type Named = Hybrid.Enum | Hybrid.Scalar.$Any | InputObject
+export type Named = Hybrid.Enum | Hybrid.Scalar.Scalar | InputObject | Hybrid.Scalar.ScalarCodecless
 
 export type Any = AnyExceptNull | Nullable<any>
 

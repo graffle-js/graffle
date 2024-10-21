@@ -1,8 +1,10 @@
 import { expect, test } from 'vitest'
+import { Date } from '../../../tests/_/fixtures/scalars.js'
 import { db } from '../../../tests/_/schemas/db.js'
 import { schemaDrivenDataMap } from '../../../tests/_/schemas/kitchen-sink/graffle/modules/SchemaDrivenDataMap.js'
 import type * as SelectionSets from '../../../tests/_/schemas/kitchen-sink/graffle/modules/SelectionSets.js'
 import { Grafaid } from '../../lib/grafaid/__.js'
+import type { SchemaKit } from '../1_Schema/__.js'
 import { Select } from '../2_Select/__.js'
 import { toGraphQLDocument } from './nodes/1_Document.js'
 
@@ -13,10 +15,21 @@ type CasesDescriptiveQuery = [
 ]
 const testEachQueryWithDescription = test.for.bind(test)<CasesDescriptiveQuery>
 
-const tester = (input: { variables: boolean }) =>
-  [
-    `( variables: ${String(input.variables)} ) - Query - %s`,
-    (args: CasesDescriptiveQuery) => {
+type CasesDescriptiveQueryWithCustomScalars = [
+  description: string,
+  selectionSet: SelectionSets.Query<{ Date: typeof Date }>,
+  options?: { operationName?: string },
+]
+const testEachQueryWithDescriptionWithCustomScalars = test.for.bind(test)<CasesDescriptiveQueryWithCustomScalars>
+
+const tester = <$Scalars extends SchemaKit.Hybrid.Scalar.ScalarMap>(
+  input: { variables: boolean; scalars: $Scalars },
+) => {
+  // dprint-ignore
+  const message = `( variables: ${String(input.variables)}; scalars: ${Object.keys(input.scalars).join(`, `) || `(none)`} ) - Query - %s`
+  return [
+    message,
+    (args: {} extends $Scalars ? CasesDescriptiveQuery : CasesDescriptiveQueryWithCustomScalars) => {
       const [description, graffleQuery, options] = args
 
       const { document, operationsVariables } = toGraphQLDocument(
@@ -42,6 +55,7 @@ const tester = (input: { variables: boolean }) =>
       expect(beforeAndAfter).toMatchSnapshot(description)
     },
   ] as const
+}
 
 // todo test a case where we provide an operation name
 // dprint-ignore
@@ -67,20 +81,20 @@ const cases = testEachQueryWithDescription([
   [`args - alias`                                , { stringWithArgs: [[`a`, { $: { id: `` }}]] }],
   [`args - x2 same`                              , { stringWithArgs: [[`a`, { $: { id: `` }}], [`b`,{$:{id:``}}]] }],
   [`args - string with args (empty object)`      , { stringWithArgs: { $: {} } }],
-  // arguments custom scalars
-  [`args - custom scalar - arg field`                                , { dateArg: { $: { date: db.date0 } } }],
-  [`args - custom scalar - arg field in non-null`                    , { dateArgNonNull: { $: { date: db.date0 } } }], 
-  [`args - custom scalar - arg field in list`                        , { dateArgList: { $: { date: [db.date0, new Date(1)] } } }], 
+  [`args - object with args`                     , { objectWithArgs: { $: { id: `` }, id: true } }],
+  [`args - object with args (empty object)`      , { objectWithArgs: { $: {}, id: true } }],
+  // arguments - custom scalars
+  [`args - custom scalar - arg field`                                , { dateArg: { $: { date: db.date0.toString() } } }],
+  [`args - custom scalar - arg field in non-null`                    , { dateArgNonNull: { $: { date: db.date0.toString() } } }], 
+  [`args - custom scalar - arg field in list`                        , { dateArgList: { $: { date: [db.date0.toString(), db.date1.toString()] } } }], 
   [`args - custom scalar - arg field in list (null)`                 , { dateArgList: { $: { date: null } } }],
-  [`args - custom scalar - arg field in non-null list (with list)`   , { dateArgNonNullList: { $: { date: [db.date0, new Date(1)] } } }],
-  [`args - custom scalar - arg field in non-null list (with null)`   , { dateArgNonNullList: { $: { date: [null, db.date0] } } }],
-  [`args - custom scalar - arg field in non-null list non-null`      , { dateArgNonNullListNonNull: { $: { date: [db.date0, new Date(1)] } } }],
-  [`args - custom scalar - input object field`                       , { dateArgInputObject: { $: { input: { idRequired: ``, dateRequired: db.date0, date: new Date(1) } } } }],
-  [`args - custom scalar - nested input object field`                , { InputObjectNested: { $: { input: { InputObject: { idRequired: ``, dateRequired: db.date0, date: new Date(1) } } } } }],
+  [`args - custom scalar - arg field in non-null list (with list)`   , { dateArgNonNullList: { $: { date: [db.date0.toString(), db.date1.toString()] } } }],
+  [`args - custom scalar - arg field in non-null list (with null)`   , { dateArgNonNullList: { $: { date: [null, db.date0.toString()] } } }],
+  [`args - custom scalar - arg field in non-null list non-null`      , { dateArgNonNullListNonNull: { $: { date: [db.date0.toString(), db.date1.toString()] } } }],
+  [`args - custom scalar - input object field`                       , { dateArgInputObject: { $: { input: { idRequired: ``, dateRequired: db.date0.toString(), date: db.date1.toString() } } } }],
+  [`args - custom scalar - nested input object field`                , { InputObjectNested: { $: { input: { InputObject: { idRequired: ``, dateRequired: db.date0.toString(), date: db.date1.toString() } } } } }],
   // s({ objectWithArgs: { $: { id: `` } } }), // todo should be static error
   // s({ objectWithArgs: { $: {} } }), // todo should be static error
-  [`args - object with args`, { objectWithArgs: { $: { id: `` }, id: true } }],
-  [`args - object with args (empty object)`      , { objectWithArgs: { $: {}, id: true } }],
   // $include
   [`$include`                             , { object: { $include: true, id: true } }],
   [`$include (false)`                     , { object: { $include: false, id: true } }],
@@ -110,5 +124,20 @@ const cases = testEachQueryWithDescription([
   [`object scalar`                        , { object: { id: true } }],
   [`object nested`                        , { objectNested: { object: { string: true, id: true, int: false } } }],
 ])
-cases(...tester({ variables: true }))
-cases(...tester({ variables: false }))
+cases(...tester({ variables: true, scalars: {} }))
+cases(...tester({ variables: false, scalars: {} }))
+
+// dprint-ignore
+const customScalarWithCodecCases = testEachQueryWithDescriptionWithCustomScalars([
+  [`args - custom scalar - arg field`                                , { dateArg: { $: { date: db.date0 } } }],
+  [`args - custom scalar - arg field in non-null`                    , { dateArgNonNull: { $: { date: db.date0 } } }], 
+  [`args - custom scalar - arg field in list`                        , { dateArgList: { $: { date: [db.date0, db.date1] } } }], 
+  [`args - custom scalar - arg field in list (null)`                 , { dateArgList: { $: { date: null } } }],
+  [`args - custom scalar - arg field in non-null list (with list)`   , { dateArgNonNullList: { $: { date: [db.date0, db.date1] } } }],
+  [`args - custom scalar - arg field in non-null list (with null)`   , { dateArgNonNullList: { $: { date: [null, db.date0] } } }],
+  [`args - custom scalar - arg field in non-null list non-null`      , { dateArgNonNullListNonNull: { $: { date: [db.date0, db.date1] } } }],
+  [`args - custom scalar - input object field`                       , { dateArgInputObject: { $: { input: { idRequired: ``, dateRequired: db.date0, date: db.date1 } } } }],
+  [`args - custom scalar - nested input object field`                , { InputObjectNested: { $: { input: { InputObject: { idRequired: ``, dateRequired: db.date0, date: db.date1 } } } } }],
+])
+customScalarWithCodecCases(...tester({ variables: true, scalars: { Date } }))
+customScalarWithCodecCases(...tester({ variables: false, scalars: { Date } }))

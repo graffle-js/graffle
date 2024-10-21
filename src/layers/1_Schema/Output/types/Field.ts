@@ -12,7 +12,8 @@ export type Field<$Name extends string, $Type extends Output.Any, $Args extends 
 
 type FieldType =
   | Hybrid.Enum
-  | Hybrid.Scalar.$Any
+  | Hybrid.Scalar.Scalar
+  | Hybrid.Scalar.ScalarCodecless
   // | Output.__typename
   | Output.List<any>
   | Output.Nullable<any>

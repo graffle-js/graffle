@@ -72,6 +72,8 @@ export const anyware = Anyware.create<HookSequence, HookMap, ExecutionResult>({
         request = graffleMappedResultToRequest(
           SelectionSetGraphqlMapper.toGraphQL(input.request.document, {
             sddm: input.state.config.schemaMap,
+            // todo test that when custom scalars are used they are mapped correctly
+            scalars: input.state.scalars,
           }),
           input.request.operationName,
         )

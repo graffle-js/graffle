@@ -58,7 +58,7 @@ export const toGraphQLField: GraphQLPostOperationMapper<
       }
       default: {
         // dprint-ignore
-        if (SchemaDrivenDataMap.isScalar(sddm?.nt) || SchemaDrivenDataMap.isOutputField(sddm?.nt) || SchemaDrivenDataMap.isEnum(sddm?.nt)) throw new Error(`schema map scalar on non-scalar graffle selection.`)
+        if (SchemaDrivenDataMap.isScalarLike(sddm?.nt) || SchemaDrivenDataMap.isOutputField(sddm?.nt) || SchemaDrivenDataMap.isEnum(sddm?.nt)) throw new Error(`schema map scalar on non-scalar graffle selection.`)
         collectForInlineFragmentLike(context, sddm?.nt, keyParsed, {
           directives,
           selections,

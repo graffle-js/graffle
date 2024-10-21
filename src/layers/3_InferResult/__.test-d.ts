@@ -1,3 +1,4 @@
+import type { Date } from '../../../tests/_/fixtures/scalars.js'
 import type { Schema } from '../../../tests/_/schemas/kitchen-sink/graffle/modules/Schema.js'
 import type * as SelectionSets from '../../../tests/_/schemas/kitchen-sink/graffle/modules/SelectionSets.js'
 import { assertEqual } from '../../lib/assert-equal.js'
@@ -5,6 +6,11 @@ import type { InferResult } from './__.js'
 import type { PickSelectsPositiveIndicatorAndNotSelectAlias } from './Object.js'
 
 type $<$SelectionSet extends SelectionSets.Query> = InferResult.Query<$SelectionSet, Schema>
+
+type $WithDate<$SelectionSet extends SelectionSets.Query<{ Date: typeof Date }>> = InferResult.Query<
+  $SelectionSet,
+  Schema<{ Date: typeof Date }>
+>
 
 // dprint-ignore
 {
@@ -30,7 +36,8 @@ assertEqual<$<{ id: true; string: false }>, { id: null | string }>()
 assertEqual<$<{ id: true; string: undefined }>, { id: null | string }>()
 
 // Custom Scalar
-assertEqual<$<{ date: true }>, { date: null | Date }>()
+assertEqual<$<{ date: true }>, { date: null | string }>()
+assertEqual<$WithDate<{ date: true }>, { date: null | Date }>()
 
 // List
 assertEqual<$<{ listIntNonNull: true }>, { listIntNonNull: number[] }>()

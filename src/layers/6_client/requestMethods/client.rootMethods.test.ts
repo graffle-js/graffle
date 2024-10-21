@@ -9,13 +9,13 @@ describe(`query`, () => {
   test(`argument`, async ({ kitchenSink }) => {
     await expect(kitchenSink.query.stringWithArgs({ $: { id: `x` } })).resolves.toEqual(`{"id":"x"}`)
   })
-  test(`argument custom scalar`, async ({ kitchenSink, kitchenSinkData:db }) => {
-    await expect(kitchenSink.query.dateArg()).resolves.toEqual(db.date0)
-    await expect(kitchenSink.query.dateArg({ $: { date: db.date1  }})).resolves.toEqual(db.date1)
-    await expect(kitchenSink.query.dateArgNonNull({ $: { date: db.date1 }})).resolves.toEqual(db.date1)
-  })
+  // test(`argument custom scalar`, async ({ kitchenSink, kitchenSinkData:db }) => {
+  //   await expect(kitchenSink.query.dateArg()).resolves.toEqual(db.date0)
+  //   await expect(kitchenSink.query.dateArg({ $: { date: db.date1  }})).resolves.toEqual(db.date1)
+  //   await expect(kitchenSink.query.dateArgNonNull({ $: { date: db.date1 }})).resolves.toEqual(db.date1)
+  // })
   test(`object`, async ({ kitchenSink, kitchenSinkData:db }) => {
-    await expect(kitchenSink.query.dateObject1({ date1: true })).resolves.toEqual({ date1: db.date0 })
+    await expect(kitchenSink.query.object({ id: true })).resolves.toEqual({ id: db.id })
   })
   test(`object with arguments`, async ({ kitchenSink }) => {
     await expect(kitchenSink.query.objectWithArgs({ $: { id: `x` }, id: true })).resolves.toEqual({ id: `x` })

@@ -40,6 +40,11 @@ export type CreatePrefilled =
 		// eslint-disable-next-line
 		// @ts-ignore passes after generation
  		Client<{
+			name: $Name
+			input: $Input & { name: $Name, schemaMap: SchemaDrivenDataMap }
+			retry: null
+			extensions: []
+			scalars: {}
 			// @ts-expect-error fixme - TS cannot figure out that name input meets constraint
 			config: NormalizeInput<$Input & { name: $Name, schemaMap: SchemaDrivenDataMap }>,
 		}>

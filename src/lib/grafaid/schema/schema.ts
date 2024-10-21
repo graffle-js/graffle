@@ -117,6 +117,16 @@ export const standardScalarTypeNames = {
   Boolean: `Boolean`,
 }
 
+export interface StandardScalarRuntimeTypeMap {
+  String: string
+  ID: string
+  Int: number
+  Float: number
+  Boolean: boolean
+}
+
+export type StandardScalarRuntimeTypes = StandardScalarRuntimeTypeMap[keyof StandardScalarRuntimeTypeMap]
+
 export const isScalarTypeAndCustom = (node: unknown): node is GraphQLScalarType => {
   return isScalarType(node) && isScalarTypeCustom(node)
 }

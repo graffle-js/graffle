@@ -16,9 +16,6 @@ declare global {
           Document: MethodsDocument.BuilderMethodsDocumentFn
           Root: MethodsRoot.BuilderMethodsRootFn
         }
-        customScalars: {
-          Date: Scalar.Date
-        }
         defaultSchemaUrl: null
       }
     }

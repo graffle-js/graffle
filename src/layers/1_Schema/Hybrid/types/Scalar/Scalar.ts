@@ -1,16 +1,16 @@
+import type { IsAny, IsNever } from 'type-fest'
+import type { Grafaid } from '../../../../../lib/grafaid/__.js'
 import type { GlobalRegistry } from '../../../../GlobalRegistry.js'
 import type { Codec, Mapper } from './codec.js'
 import { JavaScriptScalarCodecs } from './nativeScalarCodecs.js'
 
 export { JavaScriptScalarCodecs } from './nativeScalarCodecs.js'
 
-export const ScalarKind = `Scalar`
+const ScalarKind = `Scalar`
 
-export type ScalarKind = typeof ScalarKind
+type ScalarKind = typeof ScalarKind
 
-export type StandardScalarRuntimeTypes = boolean | number | string
-
-export const create = <$Name extends string, $Decoded, $Encoded extends StandardScalarRuntimeTypes>(
+export const create = <$Name extends string, $Decoded, $Encoded extends Grafaid.Schema.StandardScalarRuntimeTypes>(
   name: $Name,
   codec: {
     encode: (value: $Decoded) => $Encoded
@@ -36,14 +36,33 @@ export type GetEncoded<$Scalar> = $Scalar extends Scalar<infer _, infer _, infer
 export type GetDecoded<$Scalar> = $Scalar extends Scalar<infer _, infer $Decoded, infer __> ? $Decoded
   : never
 
+export interface ScalarCodecless<
+  $Name extends string = string,
+> {
+  kind: ScalarKind
+  name: $Name
+}
+
 export interface Scalar<
   $Name extends string = string,
   $Decoded = unknown,
-  $Encoded extends StandardScalarRuntimeTypes = StandardScalarRuntimeTypes,
+  $Encoded extends Grafaid.Schema.StandardScalarRuntimeTypes = Grafaid.Schema.StandardScalarRuntimeTypes,
 > {
   kind: ScalarKind
   name: $Name
   codec: Codec<$Decoded, $Encoded>
+}
+
+export type ScalarMap = Record<string, Scalar>
+
+// dprint-ignore
+export type LookupCustomScalarOrFallbackToString<$Name extends string, $Scalars extends ScalarMap> =
+  $Name extends keyof $Scalars ? $Scalars[$Name] : String
+
+export const lookupCustomScalarOrFallbackToString = (scalars: ScalarMap, name: string): Scalar => {
+  const scalar = scalars[name]
+  if (scalar) return scalar
+  return String
 }
 
 /**
@@ -90,22 +109,3 @@ export type Int = typeof Int
 export type Boolean = typeof Boolean
 
 export type Float = typeof Float
-
-export const Scalars = {
-  String,
-  ID,
-  Int,
-  Float,
-  Boolean,
-}
-
-// todo this mixes scalars from different schemas
-export type $Any =
-  | String
-  | Int
-  | Boolean
-  | ID
-  | Float
-  | Values<GlobalRegistry.Clients[keyof GlobalRegistry.Clients]['customScalars']>
-
-type Values<T> = T extends any ? keyof T extends never ? never : T[keyof T] : never

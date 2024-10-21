@@ -1,5 +1,5 @@
 import type { Select as $Select } from '../../../../../../src/entrypoints/schema.js'
-import type * as $Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
+import type * as $$Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
 
 //
 //
@@ -18,9 +18,9 @@ import type * as $Utilities from '../../../../../../src/entrypoints/utilities-fo
 //
 
 // Prefix with $ because this is not a schema type. A user could have a schema type named "Document" that this would conflict with.
-export interface $Document {
-  query?: Record<string, Query>
-  mutation?: Record<string, Mutation>
+export interface $Document<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+  query?: Record<string, Query<$Scalars>>
+  mutation?: Record<string, Mutation<$Scalars>>
 }
 
 //
@@ -53,11 +53,11 @@ export interface $Document {
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface Mutation {
+export interface Mutation<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
   /**
    * Select the `addPokemon` field on the `Mutation` object. Its type is Object.
    */
-  addPokemon?: Mutation.addPokemon | $Select.SelectAlias.SelectAlias<Mutation.addPokemon>
+  addPokemon?: Mutation.addPokemon<$Scalars> | $Select.SelectAlias.SelectAlias<Mutation.addPokemon<$Scalars>>
 
   /**
    * Inline fragments for field groups.
@@ -67,7 +67,9 @@ export interface Mutation {
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: Mutation$FragmentInline | Mutation$FragmentInline[]
+  ___?:
+    | Mutation$FragmentInline<$Scalars>
+    | Mutation$FragmentInline<$Scalars>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -79,25 +81,44 @@ export interface Mutation {
     | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
 }
 
-export interface Mutation$FragmentInline extends Mutation, $Select.Directive.$Groups.InlineFragment.Fields {}
+export interface Mutation$FragmentInline<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  extends Mutation<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
+{}
 
-// ----------------------------------------| Fields Interfaces |
+// ----------------------------------------| Fields |
 
 export namespace Mutation {
-  export interface addPokemon extends _RefDefs._Pokemon {
+  export type addPokemon<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = addPokemon$SelectionSet<
+    $Scalars
+  >
+
+  export interface addPokemon$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base, $NamedTypes.$Pokemon<$Scalars>
+  {
     /**
-     * Arguments for `addPokemon` field.
-     * Some (2/5) arguments are required so you must include this.
+     * Arguments for `addPokemon` field. Some (2/5) arguments are required so you must include this.
      */
-    $: {
-      attack?: number | undefined | null
-      defense?: number | undefined | null
-      hp?: number | undefined | null
-      name: string
-      $type: _RefDefs._PokemonType
-    }
+    $: addPokemon$Arguments<$Scalars>
   }
-  export type addPokemon$Expanded = addPokemon
+
+  export interface addPokemon$Arguments<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+    attack?: number | undefined | null
+    defense?: number | undefined | null
+    hp?: number | undefined | null
+    name: string
+    $type: $NamedTypes.$PokemonType
+  }
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `addPokemon` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type addPokemon$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    addPokemon$SelectionSet<$Scalars>
+  >
 }
 
 //
@@ -114,35 +135,35 @@ export namespace Mutation {
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface Query {
+export interface Query<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
   /**
    * Select the `battles` field on the `Query` object. Its type is Union.
    */
-  battles?: Query.battles$Expanded | $Select.SelectAlias.SelectAlias<Query.battles>
+  battles?: Query.battles$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.battles<$Scalars>>
   /**
    * Select the `beings` field on the `Query` object. Its type is Interface.
    */
-  beings?: Query.beings$Expanded | $Select.SelectAlias.SelectAlias<Query.beings>
+  beings?: Query.beings$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.beings<$Scalars>>
   /**
    * Select the `pokemon` field on the `Query` object. Its type is Object.
    */
-  pokemon?: Query.pokemon$Expanded | $Select.SelectAlias.SelectAlias<Query.pokemon>
+  pokemon?: Query.pokemon$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.pokemon<$Scalars>>
   /**
    * Select the `pokemonByName` field on the `Query` object. Its type is Object.
    */
-  pokemonByName?: Query.pokemonByName | $Select.SelectAlias.SelectAlias<Query.pokemonByName>
+  pokemonByName?: Query.pokemonByName<$Scalars> | $Select.SelectAlias.SelectAlias<Query.pokemonByName<$Scalars>>
   /**
    * Select the `pokemons` field on the `Query` object. Its type is Object.
    */
-  pokemons?: Query.pokemons$Expanded | $Select.SelectAlias.SelectAlias<Query.pokemons>
+  pokemons?: Query.pokemons$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.pokemons<$Scalars>>
   /**
    * Select the `trainerByName` field on the `Query` object. Its type is Object.
    */
-  trainerByName?: Query.trainerByName | $Select.SelectAlias.SelectAlias<Query.trainerByName>
+  trainerByName?: Query.trainerByName<$Scalars> | $Select.SelectAlias.SelectAlias<Query.trainerByName<$Scalars>>
   /**
    * Select the `trainers` field on the `Query` object. Its type is Object.
    */
-  trainers?: Query.trainers$Expanded | $Select.SelectAlias.SelectAlias<Query.trainers>
+  trainers?: Query.trainers$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.trainers<$Scalars>>
 
   /**
    * Inline fragments for field groups.
@@ -152,7 +173,9 @@ export interface Query {
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: Query$FragmentInline | Query$FragmentInline[]
+  ___?:
+    | Query$FragmentInline<$Scalars>
+    | Query$FragmentInline<$Scalars>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -164,49 +187,176 @@ export interface Query {
     | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
 }
 
-export interface Query$FragmentInline extends Query, $Select.Directive.$Groups.InlineFragment.Fields {}
+export interface Query$FragmentInline<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  extends Query<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
+{}
 
-// ----------------------------------------| Fields Interfaces |
+// ----------------------------------------| Fields |
 
 export namespace Query {
-  export interface battles extends _RefDefs._Battle {}
-  export type battles$Expanded = battles
-  export interface beings extends _RefDefs._Being {}
-  export type beings$Expanded = beings
-  export interface pokemon extends _RefDefs._Pokemon {}
-  export type pokemon$Expanded = pokemon
-  export interface pokemonByName extends _RefDefs._Pokemon {
+  export type battles<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = battles$SelectionSet<$Scalars>
+
+  export interface battles$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base, $NamedTypes.$Battle<$Scalars>
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `battles` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type battles$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    battles$SelectionSet<$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type beings<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = beings$SelectionSet<$Scalars>
+
+  export interface beings$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base, $NamedTypes.$Being<$Scalars>
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `beings` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type beings$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    beings$SelectionSet<$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type pokemon<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = pokemon$SelectionSet<$Scalars>
+
+  export interface pokemon$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base, $NamedTypes.$Pokemon<$Scalars>
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `pokemon` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type pokemon$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    pokemon$SelectionSet<$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type pokemonByName<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = pokemonByName$SelectionSet<
+    $Scalars
+  >
+
+  export interface pokemonByName$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base, $NamedTypes.$Pokemon<$Scalars>
+  {
     /**
-     * Arguments for `pokemonByName` field.
-     * All arguments are required so you must include this.
+     * Arguments for `pokemonByName` field. All arguments are required so you must include this.
      */
-    $: {
-      name: string
-    }
+    $: pokemonByName$Arguments<$Scalars>
   }
-  export type pokemonByName$Expanded = pokemonByName
-  export interface pokemons extends _RefDefs._Pokemon {
+
+  export interface pokemonByName$Arguments<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+    name: string
+  }
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `pokemonByName` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type pokemonByName$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+    $$Utilities.Simplify<
+      pokemonByName$SelectionSet<$Scalars>
+    >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type pokemons<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = pokemons$SelectionSet<$Scalars>
+
+  export interface pokemons$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base, $NamedTypes.$Pokemon<$Scalars>
+  {
     /**
-     * Arguments for `pokemons` field.
-     * No arguments are required so you may omit this.
+     * Arguments for `pokemons` field. No arguments are required so you may omit this.
      */
-    $?: {
-      filter?: _RefDefs._PokemonFilter | undefined | null
-    }
+    $?: pokemons$Arguments<$Scalars>
   }
-  export type pokemons$Expanded = pokemons
-  export interface trainerByName extends _RefDefs._Trainer {
+
+  export interface pokemons$Arguments<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+    filter?: $NamedTypes.$PokemonFilter<$Scalars> | undefined | null
+  }
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `pokemons` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type pokemons$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    pokemons$SelectionSet<$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type trainerByName<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = trainerByName$SelectionSet<
+    $Scalars
+  >
+
+  export interface trainerByName$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base, $NamedTypes.$Trainer<$Scalars>
+  {
     /**
-     * Arguments for `trainerByName` field.
-     * All arguments are required so you must include this.
+     * Arguments for `trainerByName` field. All arguments are required so you must include this.
      */
-    $: {
-      name: string
-    }
+    $: trainerByName$Arguments<$Scalars>
   }
-  export type trainerByName$Expanded = trainerByName
-  export interface trainers extends _RefDefs._Trainer {}
-  export type trainers$Expanded = trainers
+
+  export interface trainerByName$Arguments<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+    name: string
+  }
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `trainerByName` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type trainerByName$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+    $$Utilities.Simplify<
+      trainerByName$SelectionSet<$Scalars>
+    >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type trainers<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = trainers$SelectionSet<$Scalars>
+
+  export interface trainers$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base, $NamedTypes.$Trainer<$Scalars>
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `trainers` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type trainers$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    trainers$SelectionSet<$Scalars>
+  >
 }
 
 //
@@ -260,17 +410,17 @@ export type TrainerClass =
 //
 //
 
-export interface DateFilter {
+export interface DateFilter<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
   gte?: number | undefined | null
   lte?: number | undefined | null
 }
 
-export interface PokemonFilter {
-  birthday?: _RefDefs._DateFilter | undefined | null
-  name?: _RefDefs._StringFilter | undefined | null
+export interface PokemonFilter<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+  birthday?: $NamedTypes.$DateFilter<$Scalars> | undefined | null
+  name?: $NamedTypes.$StringFilter<$Scalars> | undefined | null
 }
 
-export interface StringFilter {
+export interface StringFilter<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
   contains?: string | undefined | null
   in?: Array<string | undefined | null> | undefined | null
 }
@@ -291,16 +441,15 @@ export interface StringFilter {
 //
 //
 
-// --------------
-// Interface Type Being
-// --------------
+// Interface Type: Being
+// --------------------------------------------------------------------------------------------------
 
-export interface Being extends $Select.Bases.ObjectLike {
-  id?: Being.id
-  name?: Being.name
-  ___on_Patron?: Patron
-  ___on_Pokemon?: Pokemon
-  ___on_Trainer?: Trainer
+export interface Being<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
+  id?: Being.id<$Scalars>
+  name?: Being.name<$Scalars>
+  ___on_Patron?: Patron<$Scalars>
+  ___on_Pokemon?: Pokemon<$Scalars>
+  ___on_Trainer?: Trainer<$Scalars>
 
   /**
    * Inline fragments for field groups.
@@ -310,7 +459,9 @@ export interface Being extends $Select.Bases.ObjectLike {
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: Being$FragmentInline | Being$FragmentInline[]
+  ___?:
+    | Being$FragmentInline<$Scalars>
+    | Being$FragmentInline<$Scalars>[]
 
   /**
    * A meta field. Is the name of the type being selected. Since this is a interface type and thus polymorphic,
@@ -323,26 +474,50 @@ export interface Being extends $Select.Bases.ObjectLike {
     | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
 }
 
-export interface Being$FragmentInline extends Being, $Select.Directive.$Groups.InlineFragment.Fields {}
+export interface Being$FragmentInline<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  extends Being<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
+{}
 
 export namespace Being {
+  export type id<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | id$SelectionSet<$Scalars>
+
+  export interface id$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
   /**
    * This is the "expanded" version of the `id` type. It is identical except for the fact
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type id$Expanded = $Select.Indicator.NoArgsIndicator$Expanded
+  export type id$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | id$SelectionSet<$Scalars>
+  >
 
-  export type id = $Select.Indicator.NoArgsIndicator
+  export type name<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | name$SelectionSet<$Scalars>
+
+  export interface name$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
 
   /**
    * This is the "expanded" version of the `name` type. It is identical except for the fact
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type name$Expanded = $Select.Indicator.NoArgsIndicator$Expanded
-
-  export type name = $Select.Indicator.NoArgsIndicator
+  export type name$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | name$SelectionSet<$Scalars>
+  >
 }
 
 //
@@ -375,23 +550,27 @@ export namespace Being {
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface BattleRoyale extends $Select.Bases.ObjectLike {
+export interface BattleRoyale<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  extends $Select.Bases.ObjectLike
+{
   /**
    * Select the `combatants` field on the `BattleRoyale` object. Its type is Object.
    */
-  combatants?: BattleRoyale.combatants$Expanded | $Select.SelectAlias.SelectAlias<BattleRoyale.combatants>
+  combatants?:
+    | BattleRoyale.combatants$Expanded<$Scalars>
+    | $Select.SelectAlias.SelectAlias<BattleRoyale.combatants<$Scalars>>
   /**
    * Select the `date` field on the `BattleRoyale` object. Its type is `Float` (a `Scalar`).
    */
-  date?: BattleRoyale.date$Expanded | $Select.SelectAlias.SelectAlias<BattleRoyale.date>
+  date?: BattleRoyale.date$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<BattleRoyale.date<$Scalars>>
   /**
    * Select the `id` field on the `BattleRoyale` object. Its type is `ID` (a `Scalar`).
    */
-  id?: BattleRoyale.id$Expanded | $Select.SelectAlias.SelectAlias<BattleRoyale.id>
+  id?: BattleRoyale.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<BattleRoyale.id<$Scalars>>
   /**
    * Select the `winner` field on the `BattleRoyale` object. Its type is Object.
    */
-  winner?: BattleRoyale.winner$Expanded | $Select.SelectAlias.SelectAlias<BattleRoyale.winner>
+  winner?: BattleRoyale.winner$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<BattleRoyale.winner<$Scalars>>
 
   /**
    * Inline fragments for field groups.
@@ -401,7 +580,9 @@ export interface BattleRoyale extends $Select.Bases.ObjectLike {
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: BattleRoyale$FragmentInline | BattleRoyale$FragmentInline[]
+  ___?:
+    | BattleRoyale$FragmentInline<$Scalars>
+    | BattleRoyale$FragmentInline<$Scalars>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -413,33 +594,94 @@ export interface BattleRoyale extends $Select.Bases.ObjectLike {
     | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
 }
 
-export interface BattleRoyale$FragmentInline extends BattleRoyale, $Select.Directive.$Groups.InlineFragment.Fields {}
+export interface BattleRoyale$FragmentInline<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  extends BattleRoyale<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
+{}
 
-// ----------------------------------------| Fields Interfaces |
+// ----------------------------------------| Fields |
 
 export namespace BattleRoyale {
-  export interface combatants extends _RefDefs._CombatantMultiPokemon {}
-  export type combatants$Expanded = combatants
+  export type combatants<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = combatants$SelectionSet<
+    $Scalars
+  >
+
+  export interface combatants$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base, $NamedTypes.$CombatantMultiPokemon<$Scalars>
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `combatants` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type combatants$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    combatants$SelectionSet<$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type date<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | date$SelectionSet<$Scalars>
+
+  export interface date$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
   /**
    * This is the "expanded" version of the `date` type. It is identical except for the fact
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type date$Expanded = $Select.Indicator.NoArgsIndicator$Expanded
+  export type date$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | date$SelectionSet<$Scalars>
+  >
 
-  export type date = $Select.Indicator.NoArgsIndicator
+  // --------------------------------------------------------------------------------------------------
+
+  export type id<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | id$SelectionSet<$Scalars>
+
+  export interface id$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
 
   /**
    * This is the "expanded" version of the `id` type. It is identical except for the fact
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type id$Expanded = $Select.Indicator.NoArgsIndicator$Expanded
+  export type id$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | id$SelectionSet<$Scalars>
+  >
 
-  export type id = $Select.Indicator.NoArgsIndicator
+  // --------------------------------------------------------------------------------------------------
 
-  export interface winner extends _RefDefs._Trainer {}
-  export type winner$Expanded = winner
+  export type winner<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = winner$SelectionSet<$Scalars>
+
+  export interface winner$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base, $NamedTypes.$Trainer<$Scalars>
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `winner` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type winner$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    winner$SelectionSet<$Scalars>
+  >
 }
 
 //
@@ -456,27 +698,33 @@ export namespace BattleRoyale {
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface BattleTrainer extends $Select.Bases.ObjectLike {
+export interface BattleTrainer<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  extends $Select.Bases.ObjectLike
+{
   /**
    * Select the `combatant1` field on the `BattleTrainer` object. Its type is Object.
    */
-  combatant1?: BattleTrainer.combatant1$Expanded | $Select.SelectAlias.SelectAlias<BattleTrainer.combatant1>
+  combatant1?:
+    | BattleTrainer.combatant1$Expanded<$Scalars>
+    | $Select.SelectAlias.SelectAlias<BattleTrainer.combatant1<$Scalars>>
   /**
    * Select the `combatant2` field on the `BattleTrainer` object. Its type is Object.
    */
-  combatant2?: BattleTrainer.combatant2$Expanded | $Select.SelectAlias.SelectAlias<BattleTrainer.combatant2>
+  combatant2?:
+    | BattleTrainer.combatant2$Expanded<$Scalars>
+    | $Select.SelectAlias.SelectAlias<BattleTrainer.combatant2<$Scalars>>
   /**
    * Select the `date` field on the `BattleTrainer` object. Its type is `Float` (a `Scalar`).
    */
-  date?: BattleTrainer.date$Expanded | $Select.SelectAlias.SelectAlias<BattleTrainer.date>
+  date?: BattleTrainer.date$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<BattleTrainer.date<$Scalars>>
   /**
    * Select the `id` field on the `BattleTrainer` object. Its type is `ID` (a `Scalar`).
    */
-  id?: BattleTrainer.id$Expanded | $Select.SelectAlias.SelectAlias<BattleTrainer.id>
+  id?: BattleTrainer.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<BattleTrainer.id<$Scalars>>
   /**
    * Select the `winner` field on the `BattleTrainer` object. Its type is Object.
    */
-  winner?: BattleTrainer.winner$Expanded | $Select.SelectAlias.SelectAlias<BattleTrainer.winner>
+  winner?: BattleTrainer.winner$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<BattleTrainer.winner<$Scalars>>
 
   /**
    * Inline fragments for field groups.
@@ -486,7 +734,9 @@ export interface BattleTrainer extends $Select.Bases.ObjectLike {
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: BattleTrainer$FragmentInline | BattleTrainer$FragmentInline[]
+  ___?:
+    | BattleTrainer$FragmentInline<$Scalars>
+    | BattleTrainer$FragmentInline<$Scalars>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -498,35 +748,115 @@ export interface BattleTrainer extends $Select.Bases.ObjectLike {
     | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
 }
 
-export interface BattleTrainer$FragmentInline extends BattleTrainer, $Select.Directive.$Groups.InlineFragment.Fields {}
+export interface BattleTrainer$FragmentInline<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  extends BattleTrainer<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
+{}
 
-// ----------------------------------------| Fields Interfaces |
+// ----------------------------------------| Fields |
 
 export namespace BattleTrainer {
-  export interface combatant1 extends _RefDefs._CombatantSinglePokemon {}
-  export type combatant1$Expanded = combatant1
-  export interface combatant2 extends _RefDefs._CombatantSinglePokemon {}
-  export type combatant2$Expanded = combatant2
+  export type combatant1<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = combatant1$SelectionSet<
+    $Scalars
+  >
+
+  export interface combatant1$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base, $NamedTypes.$CombatantSinglePokemon<$Scalars>
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `combatant1` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type combatant1$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    combatant1$SelectionSet<$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type combatant2<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = combatant2$SelectionSet<
+    $Scalars
+  >
+
+  export interface combatant2$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base, $NamedTypes.$CombatantSinglePokemon<$Scalars>
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `combatant2` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type combatant2$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    combatant2$SelectionSet<$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type date<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | date$SelectionSet<$Scalars>
+
+  export interface date$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
   /**
    * This is the "expanded" version of the `date` type. It is identical except for the fact
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type date$Expanded = $Select.Indicator.NoArgsIndicator$Expanded
+  export type date$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | date$SelectionSet<$Scalars>
+  >
 
-  export type date = $Select.Indicator.NoArgsIndicator
+  // --------------------------------------------------------------------------------------------------
+
+  export type id<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | id$SelectionSet<$Scalars>
+
+  export interface id$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
 
   /**
    * This is the "expanded" version of the `id` type. It is identical except for the fact
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type id$Expanded = $Select.Indicator.NoArgsIndicator$Expanded
+  export type id$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | id$SelectionSet<$Scalars>
+  >
 
-  export type id = $Select.Indicator.NoArgsIndicator
+  // --------------------------------------------------------------------------------------------------
 
-  export interface winner extends _RefDefs._Trainer {}
-  export type winner$Expanded = winner
+  export type winner<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = winner$SelectionSet<$Scalars>
+
+  export interface winner$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base, $NamedTypes.$Trainer<$Scalars>
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `winner` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type winner$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    winner$SelectionSet<$Scalars>
+  >
 }
 
 //
@@ -543,31 +873,35 @@ export namespace BattleTrainer {
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface BattleWild extends $Select.Bases.ObjectLike {
+export interface BattleWild<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  extends $Select.Bases.ObjectLike
+{
   /**
    * Select the `date` field on the `BattleWild` object. Its type is `Float` (a `Scalar`).
    */
-  date?: BattleWild.date$Expanded | $Select.SelectAlias.SelectAlias<BattleWild.date>
+  date?: BattleWild.date$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<BattleWild.date<$Scalars>>
   /**
    * Select the `id` field on the `BattleWild` object. Its type is `ID` (a `Scalar`).
    */
-  id?: BattleWild.id$Expanded | $Select.SelectAlias.SelectAlias<BattleWild.id>
+  id?: BattleWild.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<BattleWild.id<$Scalars>>
   /**
    * Select the `pokemon` field on the `BattleWild` object. Its type is Object.
    */
-  pokemon?: BattleWild.pokemon$Expanded | $Select.SelectAlias.SelectAlias<BattleWild.pokemon>
+  pokemon?: BattleWild.pokemon$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<BattleWild.pokemon<$Scalars>>
   /**
    * Select the `result` field on the `BattleWild` object. Its type is Enum.
    */
-  result?: BattleWild.result$Expanded | $Select.SelectAlias.SelectAlias<BattleWild.result>
+  result?: BattleWild.result$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<BattleWild.result<$Scalars>>
   /**
    * Select the `trainer` field on the `BattleWild` object. Its type is Object.
    */
-  trainer?: BattleWild.trainer$Expanded | $Select.SelectAlias.SelectAlias<BattleWild.trainer>
+  trainer?: BattleWild.trainer$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<BattleWild.trainer<$Scalars>>
   /**
    * Select the `wildPokemons` field on the `BattleWild` object. Its type is Object.
    */
-  wildPokemons?: BattleWild.wildPokemons$Expanded | $Select.SelectAlias.SelectAlias<BattleWild.wildPokemons>
+  wildPokemons?:
+    | BattleWild.wildPokemons$Expanded<$Scalars>
+    | $Select.SelectAlias.SelectAlias<BattleWild.wildPokemons<$Scalars>>
 
   /**
    * Inline fragments for field groups.
@@ -577,7 +911,9 @@ export interface BattleWild extends $Select.Bases.ObjectLike {
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: BattleWild$FragmentInline | BattleWild$FragmentInline[]
+  ___?:
+    | BattleWild$FragmentInline<$Scalars>
+    | BattleWild$FragmentInline<$Scalars>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -589,44 +925,136 @@ export interface BattleWild extends $Select.Bases.ObjectLike {
     | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
 }
 
-export interface BattleWild$FragmentInline extends BattleWild, $Select.Directive.$Groups.InlineFragment.Fields {}
+export interface BattleWild$FragmentInline<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  extends BattleWild<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
+{}
 
-// ----------------------------------------| Fields Interfaces |
+// ----------------------------------------| Fields |
 
 export namespace BattleWild {
+  export type date<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | date$SelectionSet<$Scalars>
+
+  export interface date$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
   /**
    * This is the "expanded" version of the `date` type. It is identical except for the fact
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type date$Expanded = $Select.Indicator.NoArgsIndicator$Expanded
+  export type date$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | date$SelectionSet<$Scalars>
+  >
 
-  export type date = $Select.Indicator.NoArgsIndicator
+  // --------------------------------------------------------------------------------------------------
+
+  export type id<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | id$SelectionSet<$Scalars>
+
+  export interface id$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
 
   /**
    * This is the "expanded" version of the `id` type. It is identical except for the fact
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type id$Expanded = $Select.Indicator.NoArgsIndicator$Expanded
+  export type id$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | id$SelectionSet<$Scalars>
+  >
 
-  export type id = $Select.Indicator.NoArgsIndicator
+  // --------------------------------------------------------------------------------------------------
 
-  export interface pokemon extends _RefDefs._Pokemon {}
-  export type pokemon$Expanded = pokemon
+  export type pokemon<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = pokemon$SelectionSet<$Scalars>
+
+  export interface pokemon$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base, $NamedTypes.$Pokemon<$Scalars>
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `pokemon` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type pokemon$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    pokemon$SelectionSet<$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type result<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | result$SelectionSet<$Scalars>
+
+  export interface result$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
   /**
    * This is the "expanded" version of the `result` type. It is identical except for the fact
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type result$Expanded = $Select.Indicator.NoArgsIndicator$Expanded
+  export type result$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | result$SelectionSet<$Scalars>
+  >
 
-  export type result = $Select.Indicator.NoArgsIndicator
+  // --------------------------------------------------------------------------------------------------
 
-  export interface trainer extends _RefDefs._Trainer {}
-  export type trainer$Expanded = trainer
-  export interface wildPokemons extends _RefDefs._Pokemon {}
-  export type wildPokemons$Expanded = wildPokemons
+  export type trainer<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = trainer$SelectionSet<$Scalars>
+
+  export interface trainer$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base, $NamedTypes.$Trainer<$Scalars>
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `trainer` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type trainer$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    trainer$SelectionSet<$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type wildPokemons<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = wildPokemons$SelectionSet<
+    $Scalars
+  >
+
+  export interface wildPokemons$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base, $NamedTypes.$Pokemon<$Scalars>
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `wildPokemons` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type wildPokemons$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+    $$Utilities.Simplify<
+      wildPokemons$SelectionSet<$Scalars>
+    >
 }
 
 //
@@ -643,15 +1071,21 @@ export namespace BattleWild {
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface CombatantMultiPokemon extends $Select.Bases.ObjectLike {
+export interface CombatantMultiPokemon<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  extends $Select.Bases.ObjectLike
+{
   /**
    * Select the `pokemons` field on the `CombatantMultiPokemon` object. Its type is Object.
    */
-  pokemons?: CombatantMultiPokemon.pokemons$Expanded | $Select.SelectAlias.SelectAlias<CombatantMultiPokemon.pokemons>
+  pokemons?:
+    | CombatantMultiPokemon.pokemons$Expanded<$Scalars>
+    | $Select.SelectAlias.SelectAlias<CombatantMultiPokemon.pokemons<$Scalars>>
   /**
    * Select the `trainer` field on the `CombatantMultiPokemon` object. Its type is Object.
    */
-  trainer?: CombatantMultiPokemon.trainer$Expanded | $Select.SelectAlias.SelectAlias<CombatantMultiPokemon.trainer>
+  trainer?:
+    | CombatantMultiPokemon.trainer$Expanded<$Scalars>
+    | $Select.SelectAlias.SelectAlias<CombatantMultiPokemon.trainer<$Scalars>>
 
   /**
    * Inline fragments for field groups.
@@ -661,7 +1095,9 @@ export interface CombatantMultiPokemon extends $Select.Bases.ObjectLike {
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: CombatantMultiPokemon$FragmentInline | CombatantMultiPokemon$FragmentInline[]
+  ___?:
+    | CombatantMultiPokemon$FragmentInline<$Scalars>
+    | CombatantMultiPokemon$FragmentInline<$Scalars>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -673,17 +1109,48 @@ export interface CombatantMultiPokemon extends $Select.Bases.ObjectLike {
     | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
 }
 
-export interface CombatantMultiPokemon$FragmentInline
-  extends CombatantMultiPokemon, $Select.Directive.$Groups.InlineFragment.Fields
+export interface CombatantMultiPokemon$FragmentInline<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  extends CombatantMultiPokemon<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
 {}
 
-// ----------------------------------------| Fields Interfaces |
+// ----------------------------------------| Fields |
 
 export namespace CombatantMultiPokemon {
-  export interface pokemons extends _RefDefs._Pokemon {}
-  export type pokemons$Expanded = pokemons
-  export interface trainer extends _RefDefs._Trainer {}
-  export type trainer$Expanded = trainer
+  export type pokemons<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = pokemons$SelectionSet<$Scalars>
+
+  export interface pokemons$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base, $NamedTypes.$Pokemon<$Scalars>
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `pokemons` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type pokemons$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    pokemons$SelectionSet<$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type trainer<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = trainer$SelectionSet<$Scalars>
+
+  export interface trainer$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base, $NamedTypes.$Trainer<$Scalars>
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `trainer` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type trainer$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    trainer$SelectionSet<$Scalars>
+  >
 }
 
 //
@@ -700,15 +1167,21 @@ export namespace CombatantMultiPokemon {
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface CombatantSinglePokemon extends $Select.Bases.ObjectLike {
+export interface CombatantSinglePokemon<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  extends $Select.Bases.ObjectLike
+{
   /**
    * Select the `pokemon` field on the `CombatantSinglePokemon` object. Its type is Object.
    */
-  pokemon?: CombatantSinglePokemon.pokemon$Expanded | $Select.SelectAlias.SelectAlias<CombatantSinglePokemon.pokemon>
+  pokemon?:
+    | CombatantSinglePokemon.pokemon$Expanded<$Scalars>
+    | $Select.SelectAlias.SelectAlias<CombatantSinglePokemon.pokemon<$Scalars>>
   /**
    * Select the `trainer` field on the `CombatantSinglePokemon` object. Its type is Object.
    */
-  trainer?: CombatantSinglePokemon.trainer$Expanded | $Select.SelectAlias.SelectAlias<CombatantSinglePokemon.trainer>
+  trainer?:
+    | CombatantSinglePokemon.trainer$Expanded<$Scalars>
+    | $Select.SelectAlias.SelectAlias<CombatantSinglePokemon.trainer<$Scalars>>
 
   /**
    * Inline fragments for field groups.
@@ -718,7 +1191,9 @@ export interface CombatantSinglePokemon extends $Select.Bases.ObjectLike {
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: CombatantSinglePokemon$FragmentInline | CombatantSinglePokemon$FragmentInline[]
+  ___?:
+    | CombatantSinglePokemon$FragmentInline<$Scalars>
+    | CombatantSinglePokemon$FragmentInline<$Scalars>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -730,17 +1205,48 @@ export interface CombatantSinglePokemon extends $Select.Bases.ObjectLike {
     | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
 }
 
-export interface CombatantSinglePokemon$FragmentInline
-  extends CombatantSinglePokemon, $Select.Directive.$Groups.InlineFragment.Fields
+export interface CombatantSinglePokemon$FragmentInline<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  extends CombatantSinglePokemon<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
 {}
 
-// ----------------------------------------| Fields Interfaces |
+// ----------------------------------------| Fields |
 
 export namespace CombatantSinglePokemon {
-  export interface pokemon extends _RefDefs._Pokemon {}
-  export type pokemon$Expanded = pokemon
-  export interface trainer extends _RefDefs._Trainer {}
-  export type trainer$Expanded = trainer
+  export type pokemon<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = pokemon$SelectionSet<$Scalars>
+
+  export interface pokemon$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base, $NamedTypes.$Pokemon<$Scalars>
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `pokemon` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type pokemon$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    pokemon$SelectionSet<$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type trainer<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = trainer$SelectionSet<$Scalars>
+
+  export interface trainer$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base, $NamedTypes.$Trainer<$Scalars>
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `trainer` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type trainer$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    trainer$SelectionSet<$Scalars>
+  >
 }
 
 //
@@ -757,19 +1263,19 @@ export namespace CombatantSinglePokemon {
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface Patron extends $Select.Bases.ObjectLike {
+export interface Patron<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
   /**
    * Select the `id` field on the `Patron` object. Its type is `ID` (a `Scalar`).
    */
-  id?: Patron.id$Expanded | $Select.SelectAlias.SelectAlias<Patron.id>
+  id?: Patron.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Patron.id<$Scalars>>
   /**
    * Select the `money` field on the `Patron` object. Its type is `Int` (a `Scalar`).
    */
-  money?: Patron.money$Expanded | $Select.SelectAlias.SelectAlias<Patron.money>
+  money?: Patron.money$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Patron.money<$Scalars>>
   /**
    * Select the `name` field on the `Patron` object. Its type is `String` (a `Scalar`).
    */
-  name?: Patron.name$Expanded | $Select.SelectAlias.SelectAlias<Patron.name>
+  name?: Patron.name$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Patron.name<$Scalars>>
 
   /**
    * Inline fragments for field groups.
@@ -779,7 +1285,9 @@ export interface Patron extends $Select.Bases.ObjectLike {
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: Patron$FragmentInline | Patron$FragmentInline[]
+  ___?:
+    | Patron$FragmentInline<$Scalars>
+    | Patron$FragmentInline<$Scalars>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -791,37 +1299,76 @@ export interface Patron extends $Select.Bases.ObjectLike {
     | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
 }
 
-export interface Patron$FragmentInline extends Patron, $Select.Directive.$Groups.InlineFragment.Fields {}
+export interface Patron$FragmentInline<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  extends Patron<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
+{}
 
-// ----------------------------------------| Fields Interfaces |
+// ----------------------------------------| Fields |
 
 export namespace Patron {
+  export type id<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | id$SelectionSet<$Scalars>
+
+  export interface id$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
   /**
    * This is the "expanded" version of the `id` type. It is identical except for the fact
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type id$Expanded = $Select.Indicator.NoArgsIndicator$Expanded
+  export type id$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | id$SelectionSet<$Scalars>
+  >
 
-  export type id = $Select.Indicator.NoArgsIndicator
+  // --------------------------------------------------------------------------------------------------
+
+  export type money<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | money$SelectionSet<$Scalars>
+
+  export interface money$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
 
   /**
    * This is the "expanded" version of the `money` type. It is identical except for the fact
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type money$Expanded = $Select.Indicator.NoArgsIndicator$Expanded
+  export type money$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | money$SelectionSet<$Scalars>
+  >
 
-  export type money = $Select.Indicator.NoArgsIndicator
+  // --------------------------------------------------------------------------------------------------
+
+  export type name<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | name$SelectionSet<$Scalars>
+
+  export interface name$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
 
   /**
    * This is the "expanded" version of the `name` type. It is identical except for the fact
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type name$Expanded = $Select.Indicator.NoArgsIndicator$Expanded
-
-  export type name = $Select.Indicator.NoArgsIndicator
+  export type name$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | name$SelectionSet<$Scalars>
+  >
 }
 
 //
@@ -838,39 +1385,41 @@ export namespace Patron {
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface Pokemon extends $Select.Bases.ObjectLike {
+export interface Pokemon<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  extends $Select.Bases.ObjectLike
+{
   /**
    * Select the `attack` field on the `Pokemon` object. Its type is `Int` (a `Scalar`).
    */
-  attack?: Pokemon.attack$Expanded | $Select.SelectAlias.SelectAlias<Pokemon.attack>
+  attack?: Pokemon.attack$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Pokemon.attack<$Scalars>>
   /**
    * Select the `birthday` field on the `Pokemon` object. Its type is `Int` (a `Scalar`).
    */
-  birthday?: Pokemon.birthday$Expanded | $Select.SelectAlias.SelectAlias<Pokemon.birthday>
+  birthday?: Pokemon.birthday$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Pokemon.birthday<$Scalars>>
   /**
    * Select the `defense` field on the `Pokemon` object. Its type is `Int` (a `Scalar`).
    */
-  defense?: Pokemon.defense$Expanded | $Select.SelectAlias.SelectAlias<Pokemon.defense>
+  defense?: Pokemon.defense$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Pokemon.defense<$Scalars>>
   /**
    * Select the `hp` field on the `Pokemon` object. Its type is `Int` (a `Scalar`).
    */
-  hp?: Pokemon.hp$Expanded | $Select.SelectAlias.SelectAlias<Pokemon.hp>
+  hp?: Pokemon.hp$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Pokemon.hp<$Scalars>>
   /**
    * Select the `id` field on the `Pokemon` object. Its type is `ID` (a `Scalar`).
    */
-  id?: Pokemon.id$Expanded | $Select.SelectAlias.SelectAlias<Pokemon.id>
+  id?: Pokemon.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Pokemon.id<$Scalars>>
   /**
    * Select the `name` field on the `Pokemon` object. Its type is `String` (a `Scalar`).
    */
-  name?: Pokemon.name$Expanded | $Select.SelectAlias.SelectAlias<Pokemon.name>
+  name?: Pokemon.name$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Pokemon.name<$Scalars>>
   /**
    * Select the `trainer` field on the `Pokemon` object. Its type is Object.
    */
-  trainer?: Pokemon.trainer$Expanded | $Select.SelectAlias.SelectAlias<Pokemon.trainer>
+  trainer?: Pokemon.trainer$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Pokemon.trainer<$Scalars>>
   /**
    * Select the `type` field on the `Pokemon` object. Its type is Enum.
    */
-  type?: Pokemon.type$Expanded | $Select.SelectAlias.SelectAlias<Pokemon.type>
+  type?: Pokemon.type$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Pokemon.type<$Scalars>>
 
   /**
    * Inline fragments for field groups.
@@ -880,7 +1429,9 @@ export interface Pokemon extends $Select.Bases.ObjectLike {
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: Pokemon$FragmentInline | Pokemon$FragmentInline[]
+  ___?:
+    | Pokemon$FragmentInline<$Scalars>
+    | Pokemon$FragmentInline<$Scalars>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -892,75 +1443,183 @@ export interface Pokemon extends $Select.Bases.ObjectLike {
     | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
 }
 
-export interface Pokemon$FragmentInline extends Pokemon, $Select.Directive.$Groups.InlineFragment.Fields {}
+export interface Pokemon$FragmentInline<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  extends Pokemon<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
+{}
 
-// ----------------------------------------| Fields Interfaces |
+// ----------------------------------------| Fields |
 
 export namespace Pokemon {
+  export type attack<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | attack$SelectionSet<$Scalars>
+
+  export interface attack$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
   /**
    * This is the "expanded" version of the `attack` type. It is identical except for the fact
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type attack$Expanded = $Select.Indicator.NoArgsIndicator$Expanded
+  export type attack$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | attack$SelectionSet<$Scalars>
+  >
 
-  export type attack = $Select.Indicator.NoArgsIndicator
+  // --------------------------------------------------------------------------------------------------
+
+  export type birthday<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | birthday$SelectionSet<$Scalars>
+
+  export interface birthday$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
 
   /**
    * This is the "expanded" version of the `birthday` type. It is identical except for the fact
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type birthday$Expanded = $Select.Indicator.NoArgsIndicator$Expanded
+  export type birthday$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | birthday$SelectionSet<$Scalars>
+  >
 
-  export type birthday = $Select.Indicator.NoArgsIndicator
+  // --------------------------------------------------------------------------------------------------
+
+  export type defense<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | defense$SelectionSet<$Scalars>
+
+  export interface defense$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
 
   /**
    * This is the "expanded" version of the `defense` type. It is identical except for the fact
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type defense$Expanded = $Select.Indicator.NoArgsIndicator$Expanded
+  export type defense$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | defense$SelectionSet<$Scalars>
+  >
 
-  export type defense = $Select.Indicator.NoArgsIndicator
+  // --------------------------------------------------------------------------------------------------
+
+  export type hp<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | hp$SelectionSet<$Scalars>
+
+  export interface hp$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
 
   /**
    * This is the "expanded" version of the `hp` type. It is identical except for the fact
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type hp$Expanded = $Select.Indicator.NoArgsIndicator$Expanded
+  export type hp$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | hp$SelectionSet<$Scalars>
+  >
 
-  export type hp = $Select.Indicator.NoArgsIndicator
+  // --------------------------------------------------------------------------------------------------
+
+  export type id<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | id$SelectionSet<$Scalars>
+
+  export interface id$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
 
   /**
    * This is the "expanded" version of the `id` type. It is identical except for the fact
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type id$Expanded = $Select.Indicator.NoArgsIndicator$Expanded
+  export type id$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | id$SelectionSet<$Scalars>
+  >
 
-  export type id = $Select.Indicator.NoArgsIndicator
+  // --------------------------------------------------------------------------------------------------
+
+  export type name<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | name$SelectionSet<$Scalars>
+
+  export interface name$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
 
   /**
    * This is the "expanded" version of the `name` type. It is identical except for the fact
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type name$Expanded = $Select.Indicator.NoArgsIndicator$Expanded
+  export type name$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | name$SelectionSet<$Scalars>
+  >
 
-  export type name = $Select.Indicator.NoArgsIndicator
+  // --------------------------------------------------------------------------------------------------
 
-  export interface trainer extends _RefDefs._Trainer {}
-  export type trainer$Expanded = trainer
+  export type trainer<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = trainer$SelectionSet<$Scalars>
+
+  export interface trainer$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base, $NamedTypes.$Trainer<$Scalars>
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `trainer` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type trainer$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    trainer$SelectionSet<$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type type<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | type$SelectionSet<$Scalars>
+
+  export interface type$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
   /**
    * This is the "expanded" version of the `type` type. It is identical except for the fact
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type type$Expanded = $Select.Indicator.NoArgsIndicator$Expanded
-
-  export type type = $Select.Indicator.NoArgsIndicator
+  export type type$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | type$SelectionSet<$Scalars>
+  >
 }
 
 //
@@ -977,27 +1636,29 @@ export namespace Pokemon {
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface Trainer extends $Select.Bases.ObjectLike {
+export interface Trainer<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  extends $Select.Bases.ObjectLike
+{
   /**
    * Select the `class` field on the `Trainer` object. Its type is Enum.
    */
-  class?: Trainer.$class$Expanded | $Select.SelectAlias.SelectAlias<Trainer.$class>
+  class?: Trainer.$class$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Trainer.$class<$Scalars>>
   /**
    * Select the `fans` field on the `Trainer` object. Its type is Object.
    */
-  fans?: Trainer.fans$Expanded | $Select.SelectAlias.SelectAlias<Trainer.fans>
+  fans?: Trainer.fans$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Trainer.fans<$Scalars>>
   /**
    * Select the `id` field on the `Trainer` object. Its type is `ID` (a `Scalar`).
    */
-  id?: Trainer.id$Expanded | $Select.SelectAlias.SelectAlias<Trainer.id>
+  id?: Trainer.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Trainer.id<$Scalars>>
   /**
    * Select the `name` field on the `Trainer` object. Its type is `String` (a `Scalar`).
    */
-  name?: Trainer.name$Expanded | $Select.SelectAlias.SelectAlias<Trainer.name>
+  name?: Trainer.name$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Trainer.name<$Scalars>>
   /**
    * Select the `pokemon` field on the `Trainer` object. Its type is Object.
    */
-  pokemon?: Trainer.pokemon$Expanded | $Select.SelectAlias.SelectAlias<Trainer.pokemon>
+  pokemon?: Trainer.pokemon$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Trainer.pokemon<$Scalars>>
 
   /**
    * Inline fragments for field groups.
@@ -1007,7 +1668,9 @@ export interface Trainer extends $Select.Bases.ObjectLike {
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: Trainer$FragmentInline | Trainer$FragmentInline[]
+  ___?:
+    | Trainer$FragmentInline<$Scalars>
+    | Trainer$FragmentInline<$Scalars>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -1019,42 +1682,114 @@ export interface Trainer extends $Select.Bases.ObjectLike {
     | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
 }
 
-export interface Trainer$FragmentInline extends Trainer, $Select.Directive.$Groups.InlineFragment.Fields {}
+export interface Trainer$FragmentInline<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  extends Trainer<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
+{}
 
-// ----------------------------------------| Fields Interfaces |
+// ----------------------------------------| Fields |
 
 export namespace Trainer {
+  export type $class<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | $class$SelectionSet<$Scalars>
+
+  export interface $class$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
   /**
    * This is the "expanded" version of the `$class` type. It is identical except for the fact
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type $class$Expanded = $Select.Indicator.NoArgsIndicator$Expanded
+  export type $class$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | $class$SelectionSet<$Scalars>
+  >
 
-  export type $class = $Select.Indicator.NoArgsIndicator
+  // --------------------------------------------------------------------------------------------------
 
-  export interface fans extends _RefDefs._Patron {}
-  export type fans$Expanded = fans
+  export type fans<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = fans$SelectionSet<$Scalars>
+
+  export interface fans$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base, $NamedTypes.$Patron<$Scalars>
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `fans` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type fans$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    fans$SelectionSet<$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type id<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | id$SelectionSet<$Scalars>
+
+  export interface id$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
   /**
    * This is the "expanded" version of the `id` type. It is identical except for the fact
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type id$Expanded = $Select.Indicator.NoArgsIndicator$Expanded
+  export type id$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | id$SelectionSet<$Scalars>
+  >
 
-  export type id = $Select.Indicator.NoArgsIndicator
+  // --------------------------------------------------------------------------------------------------
+
+  export type name<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | name$SelectionSet<$Scalars>
+
+  export interface name$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
 
   /**
    * This is the "expanded" version of the `name` type. It is identical except for the fact
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type name$Expanded = $Select.Indicator.NoArgsIndicator$Expanded
+  export type name$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | name$SelectionSet<$Scalars>
+  >
 
-  export type name = $Select.Indicator.NoArgsIndicator
+  // --------------------------------------------------------------------------------------------------
 
-  export interface pokemon extends _RefDefs._Pokemon {}
-  export type pokemon$Expanded = pokemon
+  export type pokemon<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = pokemon$SelectionSet<$Scalars>
+
+  export interface pokemon$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base, $NamedTypes.$Pokemon<$Scalars>
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `pokemon` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type pokemon$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    pokemon$SelectionSet<$Scalars>
+  >
 }
 
 //
@@ -1073,10 +1808,10 @@ export namespace Trainer {
 //
 //
 
-export interface Battle {
-  ___on_BattleRoyale?: BattleRoyale
-  ___on_BattleTrainer?: BattleTrainer
-  ___on_BattleWild?: BattleWild
+export interface Battle<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+  ___on_BattleRoyale?: BattleRoyale<$Scalars>
+  ___on_BattleTrainer?: BattleTrainer<$Scalars>
+  ___on_BattleWild?: BattleWild<$Scalars>
 
   /**
    * Inline fragments for field groups.
@@ -1086,7 +1821,9 @@ export interface Battle {
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: Battle$FragmentInline | Battle$FragmentInline[]
+  ___?:
+    | Battle$FragmentInline<$Scalars>
+    | Battle$FragmentInline<$Scalars>[]
 
   /**
    * A meta field. Is the name of the type being selected. Since this is a union type and thus polymorphic,
@@ -1098,7 +1835,9 @@ export interface Battle {
     | $Select.Indicator.NoArgsIndicator$Expanded
     | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
 }
-export interface Battle$FragmentInline extends Battle, $Select.Directive.$Groups.InlineFragment.Fields {}
+export interface Battle$FragmentInline<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  extends Battle<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
+{}
 
 /**
  * [1] These definitions serve to allow field selection interfaces to extend their respective object type without
@@ -1107,23 +1846,25 @@ export interface Battle$FragmentInline extends Battle, $Select.Directive.$Groups
  *     For example imagine `Query.Foo` field with type also called `Foo`. Our generated interfaces for each field
  *     would end up with an error of `export interface Foo extends Foo ...`
  */
-export namespace _RefDefs {
-  export type _Mutation = Mutation
-  export type _Query = Query
-  export type _BattleWildResult = BattleWildResult
-  export type _PokemonType = PokemonType
-  export type _TrainerClass = TrainerClass
-  export type _DateFilter = DateFilter
-  export type _PokemonFilter = PokemonFilter
-  export type _StringFilter = StringFilter
-  export type _Being = Being
-  export type _BattleRoyale = BattleRoyale
-  export type _BattleTrainer = BattleTrainer
-  export type _BattleWild = BattleWild
-  export type _CombatantMultiPokemon = CombatantMultiPokemon
-  export type _CombatantSinglePokemon = CombatantSinglePokemon
-  export type _Patron = Patron
-  export type _Pokemon = Pokemon
-  export type _Trainer = Trainer
-  export type _Battle = Battle
+export namespace $NamedTypes {
+  export type $Mutation<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = Mutation<$Scalars>
+  export type $Query<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = Query<$Scalars>
+  export type $BattleWildResult = BattleWildResult
+  export type $PokemonType = PokemonType
+  export type $TrainerClass = TrainerClass
+  export type $DateFilter<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = DateFilter<$Scalars>
+  export type $PokemonFilter<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = PokemonFilter<$Scalars>
+  export type $StringFilter<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = StringFilter<$Scalars>
+  export type $Being<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = Being<$Scalars>
+  export type $BattleRoyale<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = BattleRoyale<$Scalars>
+  export type $BattleTrainer<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = BattleTrainer<$Scalars>
+  export type $BattleWild<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = BattleWild<$Scalars>
+  export type $CombatantMultiPokemon<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+    CombatantMultiPokemon<$Scalars>
+  export type $CombatantSinglePokemon<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+    CombatantSinglePokemon<$Scalars>
+  export type $Patron<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = Patron<$Scalars>
+  export type $Pokemon<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = Pokemon<$Scalars>
+  export type $Trainer<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = Trainer<$Scalars>
+  export type $Battle<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = Battle<$Scalars>
 }

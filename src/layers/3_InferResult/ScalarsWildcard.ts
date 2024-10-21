@@ -14,7 +14,7 @@ export type ScalarsWildcard<
 type PickScalarFields<$Object extends SchemaKit.Output.Object$2> = {
   [
     $Key in keyof $Object['fields']
-    as SchemaKit.Output.UnwrapToNamed<$Object['fields'][$Key]['type']> extends SchemaKit.Hybrid.Scalar.$Any | SchemaKit.Output.__typename
+    as SchemaKit.Output.UnwrapToNamed<$Object['fields'][$Key]['type']> extends SchemaKit.Hybrid.Scalar.Scalar | SchemaKit.Output.__typename
       ? $Key
       : never
   ]: $Object['fields'][$Key]

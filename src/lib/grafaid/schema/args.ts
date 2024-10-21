@@ -12,6 +12,7 @@ export const analyzeArgsNullability = (args: readonly GraphQLArgument[]) => {
   let required = 0
   let optional = 0
   const total = args.length
+
   args.forEach(_ => {
     if (isNonNullType(_.type)) {
       required++

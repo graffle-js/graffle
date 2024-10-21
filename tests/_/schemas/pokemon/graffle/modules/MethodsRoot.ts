@@ -4,30 +4,32 @@ import type * as Utils from '../../../../../../src/entrypoints/utilities-for-gen
 import type { Schema } from './Schema.js'
 import type * as SelectionSet from './SelectionSets.js'
 
-export interface MutationMethods<$Config extends Utils.Config> {
-  // todo Use a static type here?
-  $batch: <$SelectionSet>(selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Mutation>) => Promise<
+export interface MutationMethods<$Context extends Utils.ClientContext> {
+  $batch: <$SelectionSet>(
+    selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Mutation<$Context['scalars']>>,
+  ) => Promise<
     Simplify<
       Utils.HandleOutput<
-        $Config,
+        $Context,
         InferResult.Mutation<$SelectionSet, Schema>
       >
     >
   >
-  // todo Use a static type here?
   __typename: () => Promise<
     Simplify<
       Utils.HandleOutputGraffleRootField<
-        $Config,
+        $Context,
         { __typename: 'Mutation' },
         '__typename'
       >
     >
   >
-  addPokemon: <$SelectionSet>(selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Mutation.addPokemon>) => Promise<
+  addPokemon: <$SelectionSet>(
+    selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Mutation.addPokemon<$Context['scalars']>>,
+  ) => Promise<
     Simplify<
       Utils.HandleOutputGraffleRootField<
-        $Config,
+        $Context,
         InferResult.Mutation<{ addPokemon: $SelectionSet }, Schema>,
         'addPokemon'
       >
@@ -35,84 +37,96 @@ export interface MutationMethods<$Config extends Utils.Config> {
   >
 }
 
-export interface QueryMethods<$Config extends Utils.Config> {
-  // todo Use a static type here?
-  $batch: <$SelectionSet>(selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Query>) => Promise<
+export interface QueryMethods<$Context extends Utils.ClientContext> {
+  $batch: <$SelectionSet>(selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Query<$Context['scalars']>>) => Promise<
     Simplify<
       Utils.HandleOutput<
-        $Config,
+        $Context,
         InferResult.Query<$SelectionSet, Schema>
       >
     >
   >
-  // todo Use a static type here?
   __typename: () => Promise<
     Simplify<
       Utils.HandleOutputGraffleRootField<
-        $Config,
+        $Context,
         { __typename: 'Query' },
         '__typename'
       >
     >
   >
-  battles: <$SelectionSet>(selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Query.battles>) => Promise<
+  battles: <$SelectionSet>(
+    selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Query.battles<$Context['scalars']>>,
+  ) => Promise<
     Simplify<
       Utils.HandleOutputGraffleRootField<
-        $Config,
+        $Context,
         InferResult.Query<{ battles: $SelectionSet }, Schema>,
         'battles'
       >
     >
   >
-  beings: <$SelectionSet>(selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Query.beings>) => Promise<
+  beings: <$SelectionSet>(
+    selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Query.beings<$Context['scalars']>>,
+  ) => Promise<
     Simplify<
       Utils.HandleOutputGraffleRootField<
-        $Config,
+        $Context,
         InferResult.Query<{ beings: $SelectionSet }, Schema>,
         'beings'
       >
     >
   >
-  pokemon: <$SelectionSet>(selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Query.pokemon>) => Promise<
+  pokemon: <$SelectionSet>(
+    selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Query.pokemon<$Context['scalars']>>,
+  ) => Promise<
     Simplify<
       Utils.HandleOutputGraffleRootField<
-        $Config,
+        $Context,
         InferResult.Query<{ pokemon: $SelectionSet }, Schema>,
         'pokemon'
       >
     >
   >
-  pokemonByName: <$SelectionSet>(selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Query.pokemonByName>) => Promise<
+  pokemonByName: <$SelectionSet>(
+    selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Query.pokemonByName<$Context['scalars']>>,
+  ) => Promise<
     Simplify<
       Utils.HandleOutputGraffleRootField<
-        $Config,
+        $Context,
         InferResult.Query<{ pokemonByName: $SelectionSet }, Schema>,
         'pokemonByName'
       >
     >
   >
-  pokemons: <$SelectionSet>(selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Query.pokemons>) => Promise<
+  pokemons: <$SelectionSet>(
+    selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Query.pokemons<$Context['scalars']>>,
+  ) => Promise<
     Simplify<
       Utils.HandleOutputGraffleRootField<
-        $Config,
+        $Context,
         InferResult.Query<{ pokemons: $SelectionSet }, Schema>,
         'pokemons'
       >
     >
   >
-  trainerByName: <$SelectionSet>(selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Query.trainerByName>) => Promise<
+  trainerByName: <$SelectionSet>(
+    selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Query.trainerByName<$Context['scalars']>>,
+  ) => Promise<
     Simplify<
       Utils.HandleOutputGraffleRootField<
-        $Config,
+        $Context,
         InferResult.Query<{ trainerByName: $SelectionSet }, Schema>,
         'trainerByName'
       >
     >
   >
-  trainers: <$SelectionSet>(selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Query.trainers>) => Promise<
+  trainers: <$SelectionSet>(
+    selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Query.trainers<$Context['scalars']>>,
+  ) => Promise<
     Simplify<
       Utils.HandleOutputGraffleRootField<
-        $Config,
+        $Context,
         InferResult.Query<{ trainers: $SelectionSet }, Schema>,
         'trainers'
       >
@@ -120,12 +134,12 @@ export interface QueryMethods<$Config extends Utils.Config> {
   >
 }
 
-export interface BuilderMethodsRoot<$Config extends Utils.Config> {
-  mutation: MutationMethods<$Config>
-  query: QueryMethods<$Config>
+export interface BuilderMethodsRoot<$Context extends Utils.ClientContext> {
+  mutation: MutationMethods<$Context>
+  query: QueryMethods<$Context>
 }
 
 export interface BuilderMethodsRootFn extends Utils.TypeFunction.Fn {
   // @ts-expect-error parameter is Untyped.
-  return: BuilderMethodsRoot<this['params']['config']>
+  return: BuilderMethodsRoot<this['params']>
 }

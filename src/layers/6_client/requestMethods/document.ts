@@ -3,12 +3,12 @@ import type { Schema } from '../../../generator/generators/Schema.js'
 import type { IsTupleMultiple } from '../../../lib/prelude.js'
 import type { Select } from '../../2_Select/__.js'
 import type { InferResult } from '../../3_InferResult/__.js'
+import type { ClientContext } from '../fluent.js'
 import { type HandleOutput } from '../handleOutput.js'
-import type { Config } from '../Settings/Config.js'
 
 // dprint-ignore
 export type DocumentRunner<
-  $$Config extends Config,
+  $$ClientContext extends ClientContext,
   $$Schema extends Schema,
   $$Document extends Select.Document.SomeDocument,
   $$Name extends Select.Document.GetOperationNames<$$Document> = Select.Document.GetOperationNames<$$Document>
@@ -19,7 +19,7 @@ export type DocumentRunner<
   >(...params: $Params) =>
     Promise<
       HandleOutput<
-        $$Config,
+        $$ClientContext,
         InferResult.Root<
           Select.Document.GetOperation<$$Document, $Name>,
           $$Schema,

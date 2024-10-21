@@ -76,6 +76,12 @@ export namespace GlobalRegistry {
   export type SchemaDefault = GetSchema<DefaultClientName>
 
   // dprint-ignore
+  export type Has<$Name extends string> =
+    $Name extends ClientNames
+      ? true
+      : false
+
+  // dprint-ignore
   export type GetOrDefault<$Name extends ClientNames | undefined> =
     $Name extends ClientNames
       // eslint-disable-next-line

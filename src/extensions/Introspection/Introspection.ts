@@ -60,5 +60,5 @@ interface IntrospectFn extends Fluent.FnProperty<`introspect`> {
 }
 
 interface Introspect<$Args extends FnParametersProperty> {
-  (): Promise<SimplifyNullable<HandleOutput<$Args['state']['context']['config'], IntrospectionQuery>>>
+  (): Promise<SimplifyNullable<HandleOutput<$Args['state']['context'], IntrospectionQuery>>>
 }

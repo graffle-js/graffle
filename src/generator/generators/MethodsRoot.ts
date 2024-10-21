@@ -8,13 +8,14 @@ import { ModuleGeneratorSelectionSets } from './SelectionSets.js'
 
 const identifiers = {
   Schema: `Schema`,
+  Utils: `Utils`,
 }
 
 export const ModuleGeneratorMethodsRoot = createModuleGenerator(
   `MethodsRoot`,
   ({ config, code }) => {
     code(`import { type Simplify } from 'type-fest'`)
-    code(`import type * as Utils  from '${config.paths.imports.grafflePackage.utilitiesForGenerated}';`)
+    code(`import type * as ${identifiers.Utils}  from '${config.paths.imports.grafflePackage.utilitiesForGenerated}';`)
     code(`import type { InferResult } from '${config.paths.imports.grafflePackage.schema}';`)
     code(`import type { ${identifiers.Schema} } from './${ModuleGeneratorSchema.name}.js'`)
     code(`import type * as SelectionSet from './${ModuleGeneratorSelectionSets.name}.js'`)
@@ -28,12 +29,12 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
     })
 
     code(`
-      export interface BuilderMethodsRoot<$Config extends Utils.Config> {
+      export interface BuilderMethodsRoot<$Context extends ${identifiers.Utils}.ClientContext> {
         ${
       config.schema.kindMap.GraphQLRootType.map(node => {
         const operationName =
           Grafaid.RootTypeNameToOperationName[node.name as keyof typeof Grafaid.RootTypeNameToOperationName]
-        return `${operationName}: ${node.name}Methods<$Config>`
+        return `${operationName}: ${node.name}Methods<$Context>`
       }).join(`\n`)
     }
       }
@@ -41,13 +42,11 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
     code()
 
     code(`
-      export interface BuilderMethodsRootFn extends Utils.TypeFunction.Fn {
+      export interface BuilderMethodsRootFn extends ${identifiers.Utils}.TypeFunction.Fn {
         // @ts-expect-error parameter is Untyped.
-        return: BuilderMethodsRoot<this['params']['config']>
+        return: BuilderMethodsRoot<this['params']>
       }
     `)
-
-    // console.log(code.join(`\n`))
   },
 )
 
@@ -55,23 +54,21 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
   const fieldMethods = renderFieldMethods({ config, node })
 
   code(`
-    export interface ${node.name}Methods<$Config extends Utils.Config> {
-      // todo Use a static type here?
-      $batch: <$SelectionSet>(selectionSet: Utils.Exact<$SelectionSet, SelectionSet.${node.name}>) =>
+    export interface ${node.name}Methods<$Context extends ${identifiers.Utils}.ClientContext> {
+      $batch: <$SelectionSet>(selectionSet: ${identifiers.Utils}.Exact<$SelectionSet, SelectionSet.${node.name}<$Context['scalars']>>) =>
         Promise<
           Simplify<
-            Utils.HandleOutput<
-              $Config,
+            ${identifiers.Utils}.HandleOutput<
+              $Context,
               InferResult.${node.name}<$SelectionSet, ${identifiers.Schema}>
             >
           >
         >
-      // todo Use a static type here?
       __typename: () =>
         Promise<
           Simplify<
-            Utils.HandleOutputGraffleRootField<
-              $Config,
+            ${identifiers.Utils}.HandleOutputGraffleRootField<
+              $Context,
               { __typename: '${node.name}' },
               '__typename'
             >
@@ -93,7 +90,7 @@ const renderFieldMethods = createCodeGenerator<{ node: Grafaid.Schema.ObjectType
 
     // dprint-ignore
     code(`
-      ${field.name}: <$SelectionSet>(selectionSet${isOptional ? `?` : ``}: Utils.Exact<$SelectionSet, SelectionSet.${renderName(node)}.${renderName(field)}>) =>
+      ${field.name}: <$SelectionSet>(selectionSet${isOptional ? `?` : ``}: ${identifiers.Utils}.Exact<$SelectionSet, SelectionSet.${renderName(node)}.${renderName(field)}<$Context['scalars']>>) =>
         ${Helpers.returnType(node.name, field.name, `$SelectionSet`)}
     `)
   }
@@ -104,8 +101,8 @@ namespace Helpers {
     return `
       Promise<
         Simplify<
-          Utils.HandleOutputGraffleRootField<
-            $Config,
+          ${identifiers.Utils}.HandleOutputGraffleRootField<
+            $Context,
             InferResult.${rootName}<{ ${fieldName}: ${selectionSet}}, ${identifiers.Schema}>,
             '${fieldName}'
           >

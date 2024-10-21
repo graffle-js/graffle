@@ -1,5 +1,4 @@
-import type { SchemaDrivenDataMap } from '../../extensions/CustomScalars/schemaDrivenDataMap/__.js'
-import { isScalar } from '../../layers/1_Schema/Hybrid/types/Scalar/Scalar.js'
+import { SchemaDrivenDataMap } from '../../extensions/CustomScalars/schemaDrivenDataMap/__.js'
 
 /**
  * Infer the type of a variable for the given argument.
@@ -24,8 +23,11 @@ const inferTypeInline = (sddmInlineType: undefined | SchemaDrivenDataMap.InlineT
 }
 
 const inferNamedType = (sddmNode: SchemaDrivenDataMap.ArgumentOrInputField): string => {
-  if (isScalar(sddmNode.nt)) {
+  if (SchemaDrivenDataMap.isScalar(sddmNode.nt)) {
     return sddmNode.nt.name
+  }
+  if (SchemaDrivenDataMap.isCustomScalarName(sddmNode.nt)) {
+    return sddmNode.nt
   }
 
   if (sddmNode.nt?.n) {

@@ -29,11 +29,21 @@ type FieldType<
   $Type extends SchemaKit.Output.Nullable<infer $InnerType>    ? null | FieldType<$SelectionSet, $InnerType, $Schema> :
   $Type extends SchemaKit.Output.List<infer $InnerType>        ? Array<FieldType<$SelectionSet, $InnerType, $Schema>> :
   $Type extends SchemaKit.Enum<infer _, infer $Members>        ? $Members[number] :
-  $Type extends SchemaKit.Scalar.$Any                          ? ReturnType<$Type['codec']['decode']> :
+  $Type extends SchemaKit.Scalar.Scalar                        ? ReturnType<$Type['codec']['decode']> :
+  $Type extends SchemaKit.Scalar.ScalarCodecless               ? ReturnType<GetCodecForCodecless<$Type, $Schema>['codec']['decode']> :
   $Type extends SchemaKit.Object$2                             ? Object<$SelectionSet, $Schema, $Type> :
   $Type extends SchemaKit.Interface                            ? Interface<$SelectionSet, $Schema, $Type> :
   $Type extends SchemaKit.Union                                ? Union<$SelectionSet, $Schema, $Type> :
-                                                              TSErrorDescriptive<'FieldType', `Unknown type`, { $Type: $Type; $SelectionSet: $SelectionSet; $Schema:$Schema }>
+                                                                 TSErrorDescriptive<'FieldType', `Unknown type`, { $Type: $Type; $SelectionSet: $SelectionSet; $Schema:$Schema }>
+
+// dprint-ignore
+type GetCodecForCodecless<
+  $Type extends SchemaKit.Scalar.ScalarCodecless,
+  $Schema extends Schema
+> =
+  $Type['name'] extends keyof $Schema['scalars']
+    ? $Schema['scalars'][$Type['name']]
+    : SchemaKit.Scalar.String
 
 // dprint-ignore
 type FieldDirectiveInclude<$SelectionSet> =

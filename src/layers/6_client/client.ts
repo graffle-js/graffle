@@ -1,4 +1,5 @@
 import { CustomScalars } from '../../extensions/CustomScalars/CustomScalars.js'
+import type { ConfigManager } from '../../lib/config-manager/__.js'
 import type { Fluent } from '../../lib/fluent/__.js'
 import { proxyGet } from '../../lib/prelude.js'
 import { type UseFn, useProperties } from './extension/use.js'
@@ -7,6 +8,7 @@ import { type FnGql, gqlProperties } from './gql/gql.js'
 import { anywareProperties, type FnAnyware } from './properties/anyware.js'
 import type { FnInternal } from './properties/internal.js'
 import { type FnRetry, retryProperties } from './properties/retry.js'
+import { type ScalarFn, scalarProperties } from './properties/scalar.js'
 import { type FnWith, withProperties } from './properties/with.js'
 import { type FnRequestMethods, requestMethodsProperties } from './requestMethods/requestMethods.js'
 import { type InputStatic } from './Settings/Input.js'
@@ -23,6 +25,7 @@ export type Client<$Context extends ClientContext> = Fluent.Materialize<
       UseFn,
       FnAnyware,
       FnGql,
+      ScalarFn,
     ]
   >
 >
@@ -32,9 +35,7 @@ export type IncrementWthNewConfig<
   $ConfigNew extends ClientContext['config'],
 > = Fluent.IncrementWthNewContext<
   $Parameters,
-  {
-    config: $ConfigNew
-  }
+  ConfigManager.SetProperty<$Parameters['state']['context'], 'config', $ConfigNew>
 >
 
 // dprint-ignore
@@ -42,11 +43,20 @@ type Create = <$Input extends InputStatic>(input: $Input) =>
   // todo fixme
   // eslint-disable-next-line
   // @ts-ignore
-  Client<{ config: NormalizeInput<$Input> }>
+  Client<{
+    name: $Input['name']
+    input: $Input
+    config: NormalizeInput<$Input>
+    retry: null
+    extensions: []
+    scalars: {}
+  }>
 
 export const create: Create = (input) => {
   const initialState = createState({
+    name: input.name ?? `default`, // todo import from shared constants
     extensions: [CustomScalars()],
+    scalars: {},
     retry: null,
     input,
   })
@@ -66,6 +76,7 @@ const createWithState = (
     ...useProperties(createWithState, state),
     ...anywareProperties(createWithState, state),
     ...retryProperties(createWithState, state),
+    ...scalarProperties(createWithState, state),
   }
 
   // todo, these methods will become available even without a schema index present.

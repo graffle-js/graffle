@@ -4,7 +4,7 @@ export interface Directive {
   name: string
   arguments: Record<string, {
     name: string
-    type: Hybrid.Scalar.$Any
+    type: Hybrid.Scalar.Scalar
   }>
 }
 

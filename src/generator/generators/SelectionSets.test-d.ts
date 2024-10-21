@@ -1,7 +1,10 @@
 import { assertType, test } from 'vitest'
+import type { Date } from '../../../tests/_/fixtures/scalars.js'
+import { db } from '../../../tests/_/schemas/db.js'
 import type * as SelectionSets from '../../../tests/_/schemas/kitchen-sink/graffle/modules/SelectionSets.js'
 
 type Q = SelectionSets.Query
+type QWithDate = SelectionSets.Query<{ Date: typeof Date }>
 
 // dprint-ignore
 test(`Query`, () => {
@@ -220,12 +223,17 @@ test(`Query`, () => {
   // @ts-expect-error wrong type
   assertType<Q>({ dateArg: { $: { date: 0 } } })
   assertType<Q>({ dateArg: { $: { date: null } } })
-  assertType<Q>({ dateArg: { $: { date: new Date(0) } } })
+  assertType<Q>({ dateArg: { $: { date: db.date0Encoded } } })
+  assertType<QWithDate>({ dateArg: { $: { date: db.date0 } } })
 
   // input object arg
-  assertType<Q>({ stringWithArgInputObjectRequired: { $: { input: { id: ``, idRequired: ``, dateRequired: new Date(0) } } } })
-  assertType<Q>({ stringWithArgInputObjectRequired: { $: { input: { id: null, idRequired: ``, dateRequired: new Date(0) } } } })
-  assertType<Q>({ stringWithArgInputObjectRequired: { $: { input: { idRequired: ``, dateRequired: new Date(0) } } } })
+  assertType<Q>({ stringWithArgInputObjectRequired: { $: { input: { id: ``, idRequired: ``, dateRequired: db.date0Encoded } } } })
+  assertType<Q>({ stringWithArgInputObjectRequired: { $: { input: { id: null, idRequired: ``, dateRequired: db.date0Encoded } } } })
+  assertType<Q>({ stringWithArgInputObjectRequired: { $: { input: { idRequired: ``, dateRequired: db.date0Encoded } } } })
+  assertType<QWithDate>({ stringWithArgInputObjectRequired: { $: { input: { id: ``, idRequired: ``, dateRequired: db.date0 } } } })
+  assertType<QWithDate>({ stringWithArgInputObjectRequired: { $: { input: { id: null, idRequired: ``, dateRequired: db.date0 } } } })
+  assertType<QWithDate>({ stringWithArgInputObjectRequired: { $: { input: { idRequired: ``, dateRequired: db.date0 } } } })
+
   // @ts-expect-error missing "idRequired" field
   assertType<Q>({ stringWithArgInputObjectRequired: { $: { input: {} } } })
   // type x = Exclude<Q['stringWithArgInputObjectRequired'],undefined>['$']['input']

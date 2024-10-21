@@ -3,13 +3,13 @@ import type { Grafaid } from '../../lib/grafaid/__.js'
 import type { getRequestEncodeSearchParameters, postRequestEncodeBody } from '../../lib/grafaid/http/http.js'
 import type { httpMethodGet, httpMethodPost } from '../../lib/http.js'
 import type { Select } from '../2_Select/__.js'
-import type { State } from '../6_client/fluent.js'
+import type { ClientContext } from '../6_client/fluent.js'
 import type { Config } from '../6_client/Settings/Config.js'
 import type { MethodModeGetReads, MethodModePost } from '../6_client/transportHttp/request.js'
 import type { InterfaceRaw, InterfaceTyped, TransportHttp, TransportMemory } from './types.js'
 
 interface HookInputBase {
-  state: State
+  state: ClientContext
 }
 
 type InterfaceInput<TypedProperties = {}, RawProperties = {}> =

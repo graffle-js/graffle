@@ -7,25 +7,12 @@ import { Graffle } from '../../entrypoints/main.js'
 import { Upload } from './Upload.js'
 
 import { type SchemaService, serveSchema } from '../../../tests/_/lib/serveSchema.js'
+import type { ClientContext } from '../../entrypoints/utilities-for-generated.js'
 import type { Client } from '../../layers/6_client/client.js'
-import type { OutputConfigDefault, TransportConfigHttp } from '../../layers/6_client/Settings/Config.js'
 
 let schemaServer: SchemaService
 
-let graffle: Client<{
-  config: {
-    schemaMap: null
-    transport: TransportConfigHttp
-    output: OutputConfigDefault
-    initialInput: { schema: URL }
-    name: 'default'
-    typeHooks: {
-      property: []
-      onRequestDocumentRootType: []
-      onRequestResult: []
-    }
-  }
-}>
+let graffle: Client<ClientContext>
 
 beforeAll(async () => {
   schemaServer = await serveSchema({ schema })

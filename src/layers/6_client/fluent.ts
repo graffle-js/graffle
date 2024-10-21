@@ -1,14 +1,11 @@
 import type { Anyware } from '../../lib/anyware/__.js'
 import type { Fluent } from '../../lib/fluent/__.js'
+import type { SchemaKit } from '../1_Schema/__.js'
 import type { RequestCore } from '../5_request/__.js'
 import type { Extension } from './extension/extension.js'
 import type { Config } from './Settings/Config.js'
 import type { InputStatic } from './Settings/Input.js'
 import { inputToConfig } from './Settings/InputToConfig.js'
-
-export type ClientContext = {
-  config: Config
-}
 
 export type FnClient<$Context extends ClientContext = ClientContext> = Fluent.Create<$Context>
 
@@ -18,13 +15,13 @@ export type FnParametersProperty = Fluent.FnParametersProperty<FnClient, FnClien
 
 export type FnParametersMerge = Fluent.ParametersFnMerge<FnClientState['context']>
 
-export type Builder = (state: State) => Builder
+export type Builder = (state: ClientContext) => Builder
 
 type PropertyDefinitions = Record<string, ((...args: any[]) => Builder)>
 
 export const defineProperties = (
-  definition: (builder: Builder, state: State) => PropertyDefinitions,
-): (builder: Builder, state: State) => PropertyDefinitions => {
+  definition: (builder: Builder, state: ClientContext) => PropertyDefinitions,
+): (builder: Builder, state: ClientContext) => PropertyDefinitions => {
   return (builder, state) => {
     return definition(builder, state) as any
   }
@@ -40,20 +37,27 @@ export const defineProperties = (
 
 type TerminusDefinitions = Record<string, unknown>
 
-export const defineTerminus = (property: (state: State) => TerminusDefinitions) => {
-  return (state: State) => {
+/**
+ * Create a property or method that does NOT return the chain.
+ */
+export const defineTerminus = (property: (state: ClientContext) => TerminusDefinitions) => {
+  return (state: ClientContext) => {
     return property(state)
   }
 }
 
-export interface State {
+export interface ClientContext {
+  name: string
   input: InputStatic
   config: Config
   retry: Anyware.Extension2<RequestCore.Core, { retrying: true }> | null
   extensions: Extension[]
+  scalars: RegisteredScalars
 }
 
-export const createState = (stateWithoutConfig: StateWithoutConfig): State => {
+export type RegisteredScalars = Record<string, SchemaKit.Scalar.Scalar>
+
+export const createState = (stateWithoutConfig: StateWithoutConfig): ClientContext => {
   let config: Config | null
 
   return {
@@ -65,4 +69,4 @@ export const createState = (stateWithoutConfig: StateWithoutConfig): State => {
   }
 }
 
-export type StateWithoutConfig = Omit<State, 'config'>
+export type StateWithoutConfig = Omit<ClientContext, 'config'>

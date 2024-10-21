@@ -10,6 +10,7 @@ export const CustomScalars = () =>
     // documentNode: true,
     onRequest: (async ({ pack }) => {
       const sddm = pack.input.state.config.schemaMap
+      const scalars = pack.input.state.scalars
       if (!sddm) return pack()
 
       const request = normalizeRequestToNode(pack.input.request)
@@ -17,7 +18,7 @@ export const CustomScalars = () =>
       // We will mutate query. Assign it back to input for it to be carried forward.
       pack.input.request.query = request.query
 
-      encodeRequestVariables({ sddm, request })
+      encodeRequestVariables({ sddm, scalars, request })
 
       const { exchange } = await pack()
       const { unpack } = await exchange()
@@ -33,6 +34,7 @@ export const CustomScalars = () =>
           sddm,
           request,
           data: decode.input.result.data,
+          scalars,
         })
       }
 

@@ -12,10 +12,9 @@ export const ModuleGeneratorMethodsDocument = createModuleGenerator(
     code(`import type * as Utilities from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'`)
     code(`import type { ${identifiers.Schema} } from './${ModuleGeneratorSchema.name}.js'`)
     code()
-
-    code(`export interface Document<$Config extends Utilities.Config> {
-			<$Document>(document: Utilities.ExactNonEmpty<$Document, SelectionSets.$Document>): Utilities.DocumentRunner<
-				$Config,
+    code(`export interface Document<$Context extends Utilities.ClientContext> {
+			<$Document>(document: Utilities.ExactNonEmpty<$Document, SelectionSets.$Document<$Context['scalars']>>): Utilities.DocumentRunner<
+				$Context,
 				${identifiers.Schema},
 				// @ts-expect-error We use Exact instead of constraint on this function. TypeScript does not see that as
 				// Satisfying the constraint on the DocumentRunner type.
@@ -23,11 +22,10 @@ export const ModuleGeneratorMethodsDocument = createModuleGenerator(
 			>
 		}`)
     code()
-
     code(`
       export interface BuilderMethodsDocumentFn extends Utilities.TypeFunction.Fn {
         // @ts-expect-error parameter is Untyped.
-        return: Document<this['params']['config']>
+        return: Document<this['params']>
       }
     `)
   },

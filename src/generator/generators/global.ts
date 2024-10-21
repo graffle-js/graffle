@@ -28,9 +28,6 @@ export const ModuleGeneratorGlobal = createModuleGenerator(
       ? `\n${Code.TSDoc(config.options.defaultSchemaUrl.href)}`
       : ``
 
-    const customScalarsProperties = config.schema.kindMap.GraphQLScalarTypeCustom
-      .map((_) => [_.name, `${identifiers.Scalar}.${_.name}`])
-
     const Clients = Code.termObjectFields({
       [config.name]: {
         name: `Data.Name`,
@@ -40,7 +37,6 @@ export const ModuleGeneratorGlobal = createModuleGenerator(
           Document: `MethodsDocument.BuilderMethodsDocumentFn`,
           Root: `MethodsRoot.BuilderMethodsRootFn`,
         },
-        customScalars: Object.fromEntries(customScalarsProperties),
         defaultSchemaUrl: {
           $TS_DOC: defaultSchemaUrlTsDoc,
           $VALUE: config.options.defaultSchemaUrl ? `string` : `null`,

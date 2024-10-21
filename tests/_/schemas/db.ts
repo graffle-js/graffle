@@ -51,7 +51,9 @@ export const db = {
   id1: id,
   string,
   date0: new Date(0),
+  date0Encoded: new Date(0).toISOString(),
   date1: new Date(1),
+  date1Encoded: new Date(1).toISOString(),
   Foo,
   Bar: {
     int,

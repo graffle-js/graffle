@@ -4,39 +4,43 @@ import type * as Utils from '../../../../../../src/entrypoints/utilities-for-gen
 import type { Schema } from './Schema.js'
 import type * as SelectionSet from './SelectionSets.js'
 
-export interface MutationMethods<$Config extends Utils.Config> {
-  // todo Use a static type here?
-  $batch: <$SelectionSet>(selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Mutation>) => Promise<
+export interface MutationMethods<$Context extends Utils.ClientContext> {
+  $batch: <$SelectionSet>(
+    selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Mutation<$Context['scalars']>>,
+  ) => Promise<
     Simplify<
       Utils.HandleOutput<
-        $Config,
+        $Context,
         InferResult.Mutation<$SelectionSet, Schema>
       >
     >
   >
-  // todo Use a static type here?
   __typename: () => Promise<
     Simplify<
       Utils.HandleOutputGraffleRootField<
-        $Config,
+        $Context,
         { __typename: 'Mutation' },
         '__typename'
       >
     >
   >
-  id: <$SelectionSet>(selectionSet?: Utils.Exact<$SelectionSet, SelectionSet.Mutation.id>) => Promise<
+  id: <$SelectionSet>(
+    selectionSet?: Utils.Exact<$SelectionSet, SelectionSet.Mutation.id<$Context['scalars']>>,
+  ) => Promise<
     Simplify<
       Utils.HandleOutputGraffleRootField<
-        $Config,
+        $Context,
         InferResult.Mutation<{ id: $SelectionSet }, Schema>,
         'id'
       >
     >
   >
-  idNonNull: <$SelectionSet>(selectionSet?: Utils.Exact<$SelectionSet, SelectionSet.Mutation.idNonNull>) => Promise<
+  idNonNull: <$SelectionSet>(
+    selectionSet?: Utils.Exact<$SelectionSet, SelectionSet.Mutation.idNonNull<$Context['scalars']>>,
+  ) => Promise<
     Simplify<
       Utils.HandleOutputGraffleRootField<
-        $Config,
+        $Context,
         InferResult.Mutation<{ idNonNull: $SelectionSet }, Schema>,
         'idNonNull'
       >
@@ -44,11 +48,11 @@ export interface MutationMethods<$Config extends Utils.Config> {
   >
 }
 
-export interface BuilderMethodsRoot<$Config extends Utils.Config> {
-  mutation: MutationMethods<$Config>
+export interface BuilderMethodsRoot<$Context extends Utils.ClientContext> {
+  mutation: MutationMethods<$Context>
 }
 
 export interface BuilderMethodsRootFn extends Utils.TypeFunction.Fn {
   // @ts-expect-error parameter is Untyped.
-  return: BuilderMethodsRoot<this['params']['config']>
+  return: BuilderMethodsRoot<this['params']>
 }

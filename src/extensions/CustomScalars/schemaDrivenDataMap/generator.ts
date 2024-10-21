@@ -147,11 +147,24 @@ const inputTypeCondition = (config: Config) => {
 //
 //
 //
+
 const ScalarType = createCodeGenerator<
   { type: Grafaid.Schema.ScalarType }
 >(
   ({ code, type }) => {
     code(Code.termConst(type.name, `${identifiers.$Scalar}.${type.name}`))
+  },
+)
+
+const ScalarTypeCustom = createCodeGenerator<
+  { type: Grafaid.Schema.ScalarType }
+>(
+  ({ config, code, type }) => {
+    if (config.options.isImportsCustomScalars) {
+      code(Code.termConst(type.name, `${identifiers.$Scalar}.${type.name}`))
+    } else {
+      code(Code.termConst(type.name, Code.string(type.name)))
+    }
   },
 )
 
@@ -363,7 +376,7 @@ const InputObjectType = createCodeGenerator<
 
 const kindRenders = {
   GraphQLScalarTypeStandard: ScalarType,
-  GraphQLScalarTypeCustom: ScalarType,
+  GraphQLScalarTypeCustom: ScalarTypeCustom,
   GraphQLEnumType: EnumType,
   GraphQLUnionType: UnionType,
   GraphQLInterfaceType: InterfaceType,

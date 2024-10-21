@@ -1,4 +1,5 @@
 import { describe, expect } from 'vitest'
+import { Date } from '../../../tests/_/fixtures/scalars.js'
 import { createResponse, test } from '../../../tests/_/helpers.js'
 import { db } from '../../../tests/_/schemas/db.js'
 import type { Graffle } from '../../../tests/_/schemas/kitchen-sink/graffle/__.js'
@@ -6,11 +7,9 @@ import { Select } from '../../layers/2_Select/__.js'
 import { SelectionSetGraphqlMapper } from '../../layers/3_SelectGraphQLMapper/__.js'
 import { Grafaid } from '../../lib/grafaid/__.js'
 
-const date0Encoded = db.date0.toISOString()
-
 type TestCase = [
   describe: string,
-  query: Graffle.SelectionSets.Query,
+  query: Graffle.SelectionSets.Query<{}>,
   responseData: object,
   expectedData: object,
 ]
@@ -22,7 +21,7 @@ const withBatch: TestCaseWith = [
   {},
   async ([_, query, responseData, expectedData], { fetch, kitchenSinkHttp: kitchenSink }) => {
     fetch.mockResolvedValueOnce(createResponse({ data: responseData }))
-    expect(await kitchenSink.query.$batch(query)).toEqual(expectedData)
+    expect(await kitchenSink.scalar(Date).query.$batch(query)).toEqual(expectedData)
   },
 ]
 
@@ -34,7 +33,7 @@ const withGqlDocument: TestCaseWith = [
     const { document } = SelectionSetGraphqlMapper.toGraphQL(
       Select.Document.createDocumentNormalizedFromQuerySelection(query as any),
     )
-    expect(await kitchenSink.gql(document).send()).toEqual(expectedData)
+    expect(await kitchenSink.scalar(Date).gql(document).send()).toEqual(expectedData)
   },
 ]
 
@@ -46,47 +45,47 @@ const withGqlString: TestCaseWith = [
     const { document } = SelectionSetGraphqlMapper.toGraphQL(
       Select.Document.normalizeOrThrow({ query: { foo: query as any } }),
     )
-    expect(await kitchenSink.gql(Grafaid.Document.print(document)).send()).toEqual(expectedData)
+    expect(await kitchenSink.scalar(Date).gql(Grafaid.Document.print(document)).send()).toEqual(expectedData)
   },
 ]
 
 // dprint-ignore
 const testGeneralCases = test.for<TestCase>([
-  [`nullable null`,              { date: true },                                              { date: null },                               { date: null }],
-  [`nullable value`,             { date: true },                                              { date: date0Encoded },                       { date: db.date0 }],
-  [`non-null`,                   { dateNonNull: true },                                       { dateNonNull: date0Encoded },                { dateNonNull: db.date0 }],
-  [`list`,                       { dateList: true },                                          { dateList: [0, 1] },                         { dateList: [db.date0, new Date(1)] }],
-  [`list list`,                  { dateListList: true },                                      { dateListList: [[0, 1],[0,1]] },             { dateListList: [[db.date0, new Date(1)],[db.date0, new Date(1)]] }],
-  [`list non-null`,              { dateListNonNull: true },                                   { dateListNonNull: [0, 1] },                  { dateListNonNull: [db.date0, new Date(1)] }],
-  [`object field`,               { dateObject1: { date1: true } },                            { dateObject1: { date1: date0Encoded } },     { dateObject1: { date1: db.date0 } }],
-  [`interface field`,            { dateInterface1: { date1: true } },                         { dateInterface1: { date1: date0Encoded } },  { dateInterface1: { date1: db.date0 } }],
-  [`interface inline fragment`,  { dateInterface1: { ___on_DateObject1: { date1: true } } },  { dateInterface1: { date1: date0Encoded } },  { dateInterface1: { date1: db.date0 } }],
+  [`nullable null`,              { date: true },                                              { date: null },                                  { date: null }],
+  [`nullable value`,             { date: true },                                              { date: db.date0Encoded },                       { date: db.date0 }],
+  [`non-null`,                   { dateNonNull: true },                                       { dateNonNull: db.date0Encoded },                { dateNonNull: db.date0 }],
+  [`list`,                       { dateList: true },                                          { dateList: [0, 1] },                            { dateList: [db.date0, db.date1] }],
+  [`list list`,                  { dateListList: true },                                      { dateListList: [[0, 1],[0,1]] },                { dateListList: [[db.date0, db.date1],[db.date0, db.date1]] }],
+  [`list non-null`,              { dateListNonNull: true },                                   { dateListNonNull: [0, 1] },                     { dateListNonNull: [db.date0, db.date1] }],
+  [`object field`,               { dateObject1: { date1: true } },                            { dateObject1: { date1: db.date0Encoded } },     { dateObject1: { date1: db.date0 } }],
+  [`interface field`,            { dateInterface1: { date1: true } },                         { dateInterface1: { date1: db.date0Encoded } },  { dateInterface1: { date1: db.date0 } }],
+  [`interface inline fragment`,  { dateInterface1: { ___on_DateObject1: { date1: true } } },  { dateInterface1: { date1: db.date0Encoded } },  { dateInterface1: { date1: db.date0 } }],
 ])
 
 // dprint-ignore
 const testAliasCases = test.for<TestCase>([
-  [`alias`,                                                  { date: [`x`, true] },                { x: date0Encoded },                                          { x: db.date0 }],
-  [`interface inline fragment alias`,                        { dateInterface1: { ___on_DateObject1: { date1: [`x`, true] } } },                                  { dateInterface1: { x: date0Encoded }},                          { dateInterface1: { x: db.date0 }}],
-  [`interface inline fragment nested alias`,                 { dateInterface1: { ___on_DateObject1: { ___: { date1: [`x`, true] } } } },                         { dateInterface1: { x: date0Encoded }},                          { dateInterface1: { x: db.date0 }}],
-  [`inline fragment interface alias`,                        { ___: { dateInterface1: { ___on_DateObject1: { date1: [`x`, true] } } } },                         { dateInterface1: { x: date0Encoded }},                          { dateInterface1: { x: db.date0 }}],
-  [`inline fragment x2 interface alias & nullable value`,    { ___: [{ dateInterface1: { ___on_DateObject1: { date1: [`x`, true] } } }, {date: [`y`,true]}] },   { dateInterface1: { x: date0Encoded }, y: date0Encoded },        { dateInterface1: { x: db.date0 }, y: db.date0 }],
+  [`alias`,                                                  { date: [`x`, true] },                { x: db.date0Encoded },                                       { x: db.date0 }],
+  [`interface inline fragment alias`,                        { dateInterface1: { ___on_DateObject1: { date1: [`x`, true] } } },                                  { dateInterface1: { x: db.date0Encoded }},                          { dateInterface1: { x: db.date0 }}],
+  [`interface inline fragment nested alias`,                 { dateInterface1: { ___on_DateObject1: { ___: { date1: [`x`, true] } } } },                         { dateInterface1: { x: db.date0Encoded }},                          { dateInterface1: { x: db.date0 }}],
+  [`inline fragment interface alias`,                        { ___: { dateInterface1: { ___on_DateObject1: { date1: [`x`, true] } } } },                         { dateInterface1: { x: db.date0Encoded }},                          { dateInterface1: { x: db.date0 }}],
+  [`inline fragment x2 interface alias & nullable value`,    { ___: [{ dateInterface1: { ___on_DateObject1: { date1: [`x`, true] } } }, {date: [`y`,true]}] },   { dateInterface1: { x: db.date0Encoded }, y: db.date0Encoded },     { dateInterface1: { x: db.date0 }, y: db.date0 }],
 ])
 
 // dprint-ignore
 const testUnionCases = test.for<TestCase>([
   [`case 1with __typename`,
     { dateUnion: { __typename: true, ___on_DateObject1: { date1: true } } },
-    { dateUnion: { __typename: `DateObject1`, date1: date0Encoded } },
+    { dateUnion: { __typename: `DateObject1`, date1: db.date0Encoded } },
     { dateUnion: { __typename: `DateObject1`, date1: db.date0 }}
   ],
   [`case 1 without __typename`,
     { dateUnion: { ___on_DateObject1: { date1: true } } },
-    { dateUnion: { date1: date0Encoded } },
+    { dateUnion: { date1: db.date0Encoded } },
     { dateUnion: { date1: db.date0 } }
   ],
   [`case 2`,
     { dateUnion: { ___on_DateObject1: { date1: true }, ___on_DateObject2: { date2: true } } },
-    { dateUnion: { date2: date0Encoded } },
+    { dateUnion: { date2: db.date0Encoded } },
     { dateUnion: { date2: db.date0 } }
   ],
   [`case 2 miss`,
@@ -103,7 +102,7 @@ describe(`$batch`, () => {
   describe(`object field in union`, () => {
     testUnionCases(`%s`, async ([_, query, responseData, expectedData], { fetch, kitchenSinkHttp: kitchenSink }) => {
       fetch.mockResolvedValueOnce(createResponse({ data: responseData }))
-      expect(await kitchenSink.query.$batch(query)).toEqual(expectedData)
+      expect(await kitchenSink.scalar(Date).query.$batch(query)).toEqual(expectedData)
     })
   })
 })

@@ -33,6 +33,20 @@ export const createMerger = <$CustomScalars extends CustomScalarGuard[]>(
   return (defaults, input) => mergeDefaults_(defaults, input, customScalars) as any
 }
 
+// dprint-ignore
+export type SetAtPath<$Object extends object, $Path extends string[], $Value> =
+  $Path extends []
+    ? $Object
+    : $Path extends [infer $Key extends string, ...infer $PathRest extends string[]]
+      ? $PathRest extends []
+        ? Omit<$Object, $Key> & { [_ in $Key]: $Value }
+        : $Key extends keyof $Object
+          ? $Object[$Key] extends object
+            ? Omit<$Object, $Key> & { [_ in $Key]: SetAtPath<$Object[$Key], $PathRest, $Value> }
+            : Omit<$Object, $Key> & { [_ in $Key]: SetAtPath<{}, $PathRest, $Value> }
+        : $Object & { [_ in $Key]: SetAtPath<{}, $PathRest, $Value> }
+      : never
+
 type MergeDefaultsFn<$CustomScalars> = <$Defaults extends object, $Input extends undefined | PartialDeep<$Defaults>>(
   defaults: $Defaults,
   input?: $Input,

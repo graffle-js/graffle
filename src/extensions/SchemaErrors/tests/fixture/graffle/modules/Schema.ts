@@ -446,11 +446,13 @@ export namespace Schema {
 //
 //
 
-import type * as Utilities from '../../../../../../entrypoints/utilities-for-generated.js'
+import type * as $$Utilities from '../../../../../../entrypoints/utilities-for-generated.js'
 import type * as Data from './Data.js'
 import type * as MethodsRoot from './MethodsRoot.js'
 
-export interface Schema extends Utilities.SchemaIndexBase {
+export interface Schema<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  extends $$Utilities.SchemaIndexBase
+{
   name: Data.Name
   RootTypesPresent: ['Mutation', 'Query']
   RootUnion: Schema.Mutation | Schema.Query
@@ -511,7 +513,7 @@ export interface Schema extends Utilities.SchemaIndexBase {
     Error: Schema.Error
     Interface: Schema.Interface
   }
-  customScalars: Utilities.SchemaIndexBase['customScalars']
+  scalars: $Scalars
   extensions: {
     SchemaErrors: {
       objectNames: 'ErrorOne' | 'ErrorTwo'

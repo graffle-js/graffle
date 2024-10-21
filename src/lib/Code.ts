@@ -4,9 +4,10 @@ import { linesPrepend, linesTrim } from './text.js'
 type FieldTuple = [k: string, v: string | null, tsDoc?: string | null]
 
 export namespace Code {
-  export const field = (name: string, type: string, options?: { optional?: boolean }) => {
-    if (options?.optional) return `${name}?: ${type}`
-    return `${name}: ${type}`
+  export const field = (name: string, type: string, options?: { tsDoc?: string | null; optional?: boolean }) => {
+    const tsDoc = options?.tsDoc ? TSDoc(options.tsDoc) + `\n` : ``
+    const optional = options?.optional ? `?` : ``
+    return `${tsDoc}${name}${optional}: ${type}`
   }
   export interface DirectiveTermObject {
     $spread?: string[]
@@ -111,7 +112,7 @@ export namespace Code {
   // type
   export const nullable = (type: string) => `${type} | null`
   export const union = (name: string, types: string[]) => `type ${name} =\n| ${Code.unionItems(types)}`
-  export const unionItems = (types: string[]) => types.join(`\n| `)
+  export const unionItems = (types: (string | null)[]) => types.filter(_ => _ !== null).join(`\n| `)
   export const tuple = (types: string[]) => termList(types)
   export const list = (type: string) => `Array<${type}>`
   export const optionalField = (name: string, type: string) => Code.field(name, type, { optional: true })

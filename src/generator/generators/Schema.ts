@@ -1,4 +1,3 @@
-import type { SchemaDrivenDataMap } from '../../entrypoints/utilities-for-generated.js'
 import type { SchemaKit } from '../../layers/1_Schema/__.js'
 import type { GlobalRegistry } from '../../layers/GlobalRegistry.js'
 import { Code } from '../../lib/Code.js'
@@ -19,6 +18,7 @@ import { ModuleGeneratorScalar } from './Scalar.js'
  */
 export interface Schema<
   $Extensions extends GlobalRegistry.TypeExtensions = GlobalRegistry.TypeExtensions,
+  $Scalars extends SchemaKit.Scalar.ScalarMap = SchemaKit.Scalar.ScalarMap,
 > {
   name: GlobalRegistry.ClientNames
   RootTypesPresent: ('Query' | 'Mutation' | 'Subscription')[]
@@ -40,9 +40,10 @@ export interface Schema<
   objects: Record<string, SchemaKit.Output.Object$2>
   unions: Record<string, SchemaKit.Output.Union>
   interfaces: Record<string, SchemaKit.Output.Interface>
-  customScalars: {
-    input: SchemaDrivenDataMap
-  }
+  /**
+   * A map of scalar definitions. Useful for custom scalars.
+   */
+  scalars: $Scalars
   extensions: $Extensions
 }
 
@@ -87,7 +88,7 @@ export const SchemaGenerator = createCodeGenerator(
     code(`
       import type * as Data from './${ModuleGeneratorData.name}.js'
       import type * as ${identifiers.MethodsRoot} from './${ModuleGeneratorMethodsRoot.name}.js'
-      import type * as ${identifiers.Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
+      import type * as ${identifiers.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
     `)
     code()
 
@@ -130,8 +131,8 @@ export const SchemaGenerator = createCodeGenerator(
       objects: Code.objectFromEntries(objects),
       unions: Code.objectFromEntries(unions),
       interfaces: Code.objectFromEntries(interfaces),
-      customScalars: `${identifiers.Utilities}.SchemaIndexBase['customScalars']`,
-      extensions: `Utilities.GlobalRegistry.TypeExtensions`,
+      scalars: `$Scalars`,
+      extensions: `${identifiers.$$Utilities}.GlobalRegistry.TypeExtensions`,
     }
 
     // --- Extensions ---
@@ -149,7 +150,7 @@ export const SchemaGenerator = createCodeGenerator(
     // ---
 
     code(
-      `export interface ${identifiers.Schema} extends Utilities.SchemaIndexBase
+      `export interface ${identifiers.Schema}<$Scalars extends ${identifiers.$$Utilities}.SchemaKit.Scalar.ScalarMap = {}> extends ${identifiers.$$Utilities}.SchemaIndexBase
         ${Code.termObject(schema)}
       `,
     )
