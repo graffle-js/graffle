@@ -20,14 +20,14 @@ export const createPrefilled: CreatePrefilled = (name, schemaMap, schemaUrl) => 
 
 // dprint-ignore
 export type CreatePrefilled =
-<const $Name extends GlobalRegistry.ClientNames>(name: $Name, sddm: SchemaDrivenDataMap, schemaUrl?: URL) =>
-	<$Input extends InputBase<GlobalRegistry.Get<$Name>>>(...args:
+<const $Name extends string>(name: $Name, sddm: SchemaDrivenDataMap, schemaUrl?: URL) =>
+	<$Input extends InputBase<GlobalRegistry.GetOrGeneric<$Name>>>(...args:
 		// TODO test that input optional when no required properties
 		// eslint-disable-next-line
 		// @ts-ignore passes after generation
-		HasRequiredKeys<InputBase<GlobalRegistry.Get<$Name>>> extends true
-			? ([input: Exact<$Input, InputBase<GlobalRegistry.Get<$Name>>>])
-			: ([input: Exact<$Input, InputBase<GlobalRegistry.Get<$Name>>>] | [])
+		HasRequiredKeys<InputBase<GlobalRegistry.GetOrGeneric<$Name>>> extends true
+			? ([input: Exact<$Input, InputBase<GlobalRegistry.GetOrGeneric<$Name>>>])
+			: ([input: Exact<$Input, InputBase<GlobalRegistry.GetOrGeneric<$Name>>>] | [])
 	) =>
 		// eslint-disable-next-line
 		// @ts-ignore passes after generation

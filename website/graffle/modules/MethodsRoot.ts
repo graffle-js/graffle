@@ -1,90 +1,102 @@
 import type { InferResult } from 'graffle/schema'
-import type * as Utils from 'graffle/utilities-for-generated'
+import type * as $$Utilities from 'graffle/utilities-for-generated'
 import { type Simplify } from 'type-fest'
 import type { Schema } from './Schema.js'
 import type * as SelectionSet from './SelectionSets.js'
 
-export interface QueryMethods<$Config extends Utils.Config> {
-  // todo Use a static type here?
-  $batch: <$SelectionSet>(selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Query>) => Promise<
+export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
+  $batch: <$SelectionSet>(
+    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query<$Context['scalars']>>,
+  ) => Promise<
     Simplify<
-      Utils.HandleOutput<
-        $Config,
-        InferResult.Query<$SelectionSet, Schema>
+      $$Utilities.HandleOutput<
+        $Context,
+        InferResult.Query<$SelectionSet, Schema<$Context['scalars']>>
       >
     >
   >
-  // todo Use a static type here?
   __typename: () => Promise<
     Simplify<
-      Utils.HandleOutputGraffleRootField<
-        $Config,
+      $$Utilities.HandleOutputGraffleRootField<
+        $Context,
         { __typename: 'Query' },
         '__typename'
       >
     >
   >
-  continent: <$SelectionSet>(selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Query.continent>) => Promise<
+  continent: <$SelectionSet>(
+    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.continent<$Context['scalars']>>,
+  ) => Promise<
     Simplify<
-      Utils.HandleOutputGraffleRootField<
-        $Config,
-        InferResult.Query<{ continent: $SelectionSet }, Schema>,
+      $$Utilities.HandleOutputGraffleRootField<
+        $Context,
+        InferResult.Query<{ continent: $SelectionSet }, Schema<$Context['scalars']>>,
         'continent'
       >
     >
   >
-  continents: <$SelectionSet>(selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Query.continents>) => Promise<
+  continents: <$SelectionSet>(
+    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.continents<$Context['scalars']>>,
+  ) => Promise<
     Simplify<
-      Utils.HandleOutputGraffleRootField<
-        $Config,
-        InferResult.Query<{ continents: $SelectionSet }, Schema>,
+      $$Utilities.HandleOutputGraffleRootField<
+        $Context,
+        InferResult.Query<{ continents: $SelectionSet }, Schema<$Context['scalars']>>,
         'continents'
       >
     >
   >
-  countries: <$SelectionSet>(selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Query.countries>) => Promise<
+  countries: <$SelectionSet>(
+    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.countries<$Context['scalars']>>,
+  ) => Promise<
     Simplify<
-      Utils.HandleOutputGraffleRootField<
-        $Config,
-        InferResult.Query<{ countries: $SelectionSet }, Schema>,
+      $$Utilities.HandleOutputGraffleRootField<
+        $Context,
+        InferResult.Query<{ countries: $SelectionSet }, Schema<$Context['scalars']>>,
         'countries'
       >
     >
   >
-  country: <$SelectionSet>(selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Query.country>) => Promise<
+  country: <$SelectionSet>(
+    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.country<$Context['scalars']>>,
+  ) => Promise<
     Simplify<
-      Utils.HandleOutputGraffleRootField<
-        $Config,
-        InferResult.Query<{ country: $SelectionSet }, Schema>,
+      $$Utilities.HandleOutputGraffleRootField<
+        $Context,
+        InferResult.Query<{ country: $SelectionSet }, Schema<$Context['scalars']>>,
         'country'
       >
     >
   >
-  language: <$SelectionSet>(selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Query.language>) => Promise<
+  language: <$SelectionSet>(
+    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.language<$Context['scalars']>>,
+  ) => Promise<
     Simplify<
-      Utils.HandleOutputGraffleRootField<
-        $Config,
-        InferResult.Query<{ language: $SelectionSet }, Schema>,
+      $$Utilities.HandleOutputGraffleRootField<
+        $Context,
+        InferResult.Query<{ language: $SelectionSet }, Schema<$Context['scalars']>>,
         'language'
       >
     >
   >
-  languages: <$SelectionSet>(selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Query.languages>) => Promise<
+  languages: <$SelectionSet>(
+    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.languages<$Context['scalars']>>,
+  ) => Promise<
     Simplify<
-      Utils.HandleOutputGraffleRootField<
-        $Config,
-        InferResult.Query<{ languages: $SelectionSet }, Schema>,
+      $$Utilities.HandleOutputGraffleRootField<
+        $Context,
+        InferResult.Query<{ languages: $SelectionSet }, Schema<$Context['scalars']>>,
         'languages'
       >
     >
   >
 }
 
-export interface BuilderMethodsRoot<$Config extends Utils.Config> {
-  query: QueryMethods<$Config>
+export interface BuilderMethodsRoot<$Context extends $$Utilities.ClientContext> {
+  query: QueryMethods<$Context>
 }
 
-export interface BuilderMethodsRootFn extends Utils.TypeFunction.Fn {
+export interface BuilderMethodsRootFn extends $$Utilities.TypeFunction.Fn {
   // @ts-expect-error parameter is Untyped.
-  return: BuilderMethodsRoot<this['params']['config']>
+  return: BuilderMethodsRoot<this['params']>
 }

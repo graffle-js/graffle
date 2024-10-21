@@ -15,7 +15,6 @@ declare global {
           Document: MethodsDocument.BuilderMethodsDocumentFn
           Root: MethodsRoot.BuilderMethodsRootFn
         }
-        customScalars: {}
         defaultSchemaUrl: null
       }
     }

@@ -1,4 +1,4 @@
-import type { IsNever } from 'type-fest'
+import type { IsNever, IsUnknown } from 'type-fest'
 import type { TypeFunction } from '../entrypoints/utilities-for-generated.js'
 import type { Schema } from '../generator/generators/Schema.js'
 import type { ConfigManager } from '../lib/config-manager/__.js'
@@ -86,6 +86,14 @@ export namespace GlobalRegistry {
     // @ts-ignore passes after generation
     ? GraffleGlobal.Clients[$Name]
     : never
+
+  // dprint-ignore
+  export type GetOrGeneric<$Name extends string> =
+    IsEmpty extends true
+      ? Client
+      : $Name extends keyof Clients
+        ? Clients[$Name]
+        : Client
 
   // dprint-ignore
   export type GetOrDefault<$Name extends ClientNames | undefined> =

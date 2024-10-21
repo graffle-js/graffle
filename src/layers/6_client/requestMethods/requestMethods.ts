@@ -19,6 +19,8 @@ export type BuilderRequestMethods<$Context extends ClientContext> =
   & (
     // todo
     // GlobalRegistry.Has<$Context['name']> extends false
+    // eslint-disable-next-line
+    // @ts-ignore passes after generation
     GlobalRegistry.Has<$Context['config']['name']> extends false
       ? {}
       :
