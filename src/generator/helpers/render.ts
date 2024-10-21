@@ -27,7 +27,7 @@ export const title1 = (title: string, subTitle?: string) => {
 export const typeTitle2 = (category: string) => (type: Grafaid.Schema.NamedTypes) => {
   const typeKind = Grafaid.getTypeAndKind(type)
   const nameOrKind = typeKind.kindName === `ScalarCustom` || typeKind.kindName === `ScalarStandard`
-    ? typeKind.name
+    ? typeKind.typeName
     : typeKind.kindName
   const typeLabel = nameOrKind
   const title = `

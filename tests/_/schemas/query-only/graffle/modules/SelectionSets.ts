@@ -54,11 +54,11 @@ export interface $Document<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap 
 
 export interface Query<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
   /**
-   * Select the `id` field on the `Query` object. Its type is `ID` (a `Scalar`).
+   * Select the `id` field on the `Query` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
   id?: Query.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.id<$Scalars>>
   /**
-   * Select the `idNonNull` field on the `Query` object. Its type is `ID` (a `Scalar`).
+   * Select the `idNonNull` field on the `Query` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
   idNonNull?: Query.idNonNull$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.idNonNull<$Scalars>>
 

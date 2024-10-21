@@ -55,7 +55,7 @@ export interface $Document<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap 
 
 export interface Mutation<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
   /**
-   * Select the `addPokemon` field on the `Mutation` object. Its type is OutputObject.
+   * Select the `addPokemon` field on the `Mutation` object. Its type is `Pokemon` (a `OutputObject` kind of type).
    */
   addPokemon?: Mutation.addPokemon<$Scalars> | $Select.SelectAlias.SelectAlias<Mutation.addPokemon<$Scalars>>
 
@@ -135,31 +135,31 @@ export namespace Mutation {
 
 export interface Query<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
   /**
-   * Select the `battles` field on the `Query` object. Its type is Union.
+   * Select the `battles` field on the `Query` object. Its type is `Battle` (a `Union` kind of type).
    */
   battles?: Query.battles$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.battles<$Scalars>>
   /**
-   * Select the `beings` field on the `Query` object. Its type is Interface.
+   * Select the `beings` field on the `Query` object. Its type is `Being` (a `Interface` kind of type).
    */
   beings?: Query.beings$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.beings<$Scalars>>
   /**
-   * Select the `pokemon` field on the `Query` object. Its type is OutputObject.
+   * Select the `pokemon` field on the `Query` object. Its type is `Pokemon` (a `OutputObject` kind of type).
    */
   pokemon?: Query.pokemon$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.pokemon<$Scalars>>
   /**
-   * Select the `pokemonByName` field on the `Query` object. Its type is OutputObject.
+   * Select the `pokemonByName` field on the `Query` object. Its type is `Pokemon` (a `OutputObject` kind of type).
    */
   pokemonByName?: Query.pokemonByName<$Scalars> | $Select.SelectAlias.SelectAlias<Query.pokemonByName<$Scalars>>
   /**
-   * Select the `pokemons` field on the `Query` object. Its type is OutputObject.
+   * Select the `pokemons` field on the `Query` object. Its type is `Pokemon` (a `OutputObject` kind of type).
    */
   pokemons?: Query.pokemons$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.pokemons<$Scalars>>
   /**
-   * Select the `trainerByName` field on the `Query` object. Its type is OutputObject.
+   * Select the `trainerByName` field on the `Query` object. Its type is `Trainer` (a `OutputObject` kind of type).
    */
   trainerByName?: Query.trainerByName<$Scalars> | $Select.SelectAlias.SelectAlias<Query.trainerByName<$Scalars>>
   /**
-   * Select the `trainers` field on the `Query` object. Its type is OutputObject.
+   * Select the `trainers` field on the `Query` object. Its type is `Trainer` (a `OutputObject` kind of type).
    */
   trainers?: Query.trainers$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.trainers<$Scalars>>
 
@@ -455,21 +455,21 @@ export interface BattleRoyale<$Scalars extends $$Utilities.Schema.Scalar.ScalarM
   extends $Select.Bases.ObjectLike
 {
   /**
-   * Select the `combatants` field on the `BattleRoyale` object. Its type is OutputObject.
+   * Select the `combatants` field on the `BattleRoyale` object. Its type is `CombatantMultiPokemon` (a `OutputObject` kind of type).
    */
   combatants?:
     | BattleRoyale.combatants$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<BattleRoyale.combatants<$Scalars>>
   /**
-   * Select the `date` field on the `BattleRoyale` object. Its type is `Float` (a `Scalar`).
+   * Select the `date` field on the `BattleRoyale` object. Its type is `Float` (a `ScalarStandard` kind of type).
    */
   date?: BattleRoyale.date$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<BattleRoyale.date<$Scalars>>
   /**
-   * Select the `id` field on the `BattleRoyale` object. Its type is `ID` (a `Scalar`).
+   * Select the `id` field on the `BattleRoyale` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
   id?: BattleRoyale.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<BattleRoyale.id<$Scalars>>
   /**
-   * Select the `winner` field on the `BattleRoyale` object. Its type is OutputObject.
+   * Select the `winner` field on the `BattleRoyale` object. Its type is `Trainer` (a `OutputObject` kind of type).
    */
   winner?: BattleRoyale.winner$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<BattleRoyale.winner<$Scalars>>
 
@@ -601,27 +601,27 @@ export interface BattleTrainer<$Scalars extends $$Utilities.Schema.Scalar.Scalar
   extends $Select.Bases.ObjectLike
 {
   /**
-   * Select the `combatant1` field on the `BattleTrainer` object. Its type is OutputObject.
+   * Select the `combatant1` field on the `BattleTrainer` object. Its type is `CombatantSinglePokemon` (a `OutputObject` kind of type).
    */
   combatant1?:
     | BattleTrainer.combatant1$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<BattleTrainer.combatant1<$Scalars>>
   /**
-   * Select the `combatant2` field on the `BattleTrainer` object. Its type is OutputObject.
+   * Select the `combatant2` field on the `BattleTrainer` object. Its type is `CombatantSinglePokemon` (a `OutputObject` kind of type).
    */
   combatant2?:
     | BattleTrainer.combatant2$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<BattleTrainer.combatant2<$Scalars>>
   /**
-   * Select the `date` field on the `BattleTrainer` object. Its type is `Float` (a `Scalar`).
+   * Select the `date` field on the `BattleTrainer` object. Its type is `Float` (a `ScalarStandard` kind of type).
    */
   date?: BattleTrainer.date$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<BattleTrainer.date<$Scalars>>
   /**
-   * Select the `id` field on the `BattleTrainer` object. Its type is `ID` (a `Scalar`).
+   * Select the `id` field on the `BattleTrainer` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
   id?: BattleTrainer.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<BattleTrainer.id<$Scalars>>
   /**
-   * Select the `winner` field on the `BattleTrainer` object. Its type is OutputObject.
+   * Select the `winner` field on the `BattleTrainer` object. Its type is `Trainer` (a `OutputObject` kind of type).
    */
   winner?: BattleTrainer.winner$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<BattleTrainer.winner<$Scalars>>
 
@@ -772,27 +772,27 @@ export interface BattleWild<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap
   extends $Select.Bases.ObjectLike
 {
   /**
-   * Select the `date` field on the `BattleWild` object. Its type is `Float` (a `Scalar`).
+   * Select the `date` field on the `BattleWild` object. Its type is `Float` (a `ScalarStandard` kind of type).
    */
   date?: BattleWild.date$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<BattleWild.date<$Scalars>>
   /**
-   * Select the `id` field on the `BattleWild` object. Its type is `ID` (a `Scalar`).
+   * Select the `id` field on the `BattleWild` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
   id?: BattleWild.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<BattleWild.id<$Scalars>>
   /**
-   * Select the `pokemon` field on the `BattleWild` object. Its type is OutputObject.
+   * Select the `pokemon` field on the `BattleWild` object. Its type is `Pokemon` (a `OutputObject` kind of type).
    */
   pokemon?: BattleWild.pokemon$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<BattleWild.pokemon<$Scalars>>
   /**
-   * Select the `result` field on the `BattleWild` object. Its type is Enum.
+   * Select the `result` field on the `BattleWild` object. Its type is `BattleWildResult` (a `Enum` kind of type).
    */
   result?: BattleWild.result$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<BattleWild.result<$Scalars>>
   /**
-   * Select the `trainer` field on the `BattleWild` object. Its type is OutputObject.
+   * Select the `trainer` field on the `BattleWild` object. Its type is `Trainer` (a `OutputObject` kind of type).
    */
   trainer?: BattleWild.trainer$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<BattleWild.trainer<$Scalars>>
   /**
-   * Select the `wildPokemons` field on the `BattleWild` object. Its type is OutputObject.
+   * Select the `wildPokemons` field on the `BattleWild` object. Its type is `Pokemon` (a `OutputObject` kind of type).
    */
   wildPokemons?:
     | BattleWild.wildPokemons$Expanded<$Scalars>
@@ -969,13 +969,13 @@ export interface CombatantMultiPokemon<$Scalars extends $$Utilities.Schema.Scala
   extends $Select.Bases.ObjectLike
 {
   /**
-   * Select the `pokemons` field on the `CombatantMultiPokemon` object. Its type is OutputObject.
+   * Select the `pokemons` field on the `CombatantMultiPokemon` object. Its type is `Pokemon` (a `OutputObject` kind of type).
    */
   pokemons?:
     | CombatantMultiPokemon.pokemons$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<CombatantMultiPokemon.pokemons<$Scalars>>
   /**
-   * Select the `trainer` field on the `CombatantMultiPokemon` object. Its type is OutputObject.
+   * Select the `trainer` field on the `CombatantMultiPokemon` object. Its type is `Trainer` (a `OutputObject` kind of type).
    */
   trainer?:
     | CombatantMultiPokemon.trainer$Expanded<$Scalars>
@@ -1065,13 +1065,13 @@ export interface CombatantSinglePokemon<$Scalars extends $$Utilities.Schema.Scal
   extends $Select.Bases.ObjectLike
 {
   /**
-   * Select the `pokemon` field on the `CombatantSinglePokemon` object. Its type is OutputObject.
+   * Select the `pokemon` field on the `CombatantSinglePokemon` object. Its type is `Pokemon` (a `OutputObject` kind of type).
    */
   pokemon?:
     | CombatantSinglePokemon.pokemon$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<CombatantSinglePokemon.pokemon<$Scalars>>
   /**
-   * Select the `trainer` field on the `CombatantSinglePokemon` object. Its type is OutputObject.
+   * Select the `trainer` field on the `CombatantSinglePokemon` object. Its type is `Trainer` (a `OutputObject` kind of type).
    */
   trainer?:
     | CombatantSinglePokemon.trainer$Expanded<$Scalars>
@@ -1159,15 +1159,15 @@ export namespace CombatantSinglePokemon {
 
 export interface Patron<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
   /**
-   * Select the `id` field on the `Patron` object. Its type is `ID` (a `Scalar`).
+   * Select the `id` field on the `Patron` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
   id?: Patron.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Patron.id<$Scalars>>
   /**
-   * Select the `money` field on the `Patron` object. Its type is `Int` (a `Scalar`).
+   * Select the `money` field on the `Patron` object. Its type is `Int` (a `ScalarStandard` kind of type).
    */
   money?: Patron.money$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Patron.money<$Scalars>>
   /**
-   * Select the `name` field on the `Patron` object. Its type is `String` (a `Scalar`).
+   * Select the `name` field on the `Patron` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   name?: Patron.name$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Patron.name<$Scalars>>
 
@@ -1281,35 +1281,35 @@ export namespace Patron {
 
 export interface Pokemon<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
   /**
-   * Select the `attack` field on the `Pokemon` object. Its type is `Int` (a `Scalar`).
+   * Select the `attack` field on the `Pokemon` object. Its type is `Int` (a `ScalarStandard` kind of type).
    */
   attack?: Pokemon.attack$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Pokemon.attack<$Scalars>>
   /**
-   * Select the `birthday` field on the `Pokemon` object. Its type is `Int` (a `Scalar`).
+   * Select the `birthday` field on the `Pokemon` object. Its type is `Int` (a `ScalarStandard` kind of type).
    */
   birthday?: Pokemon.birthday$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Pokemon.birthday<$Scalars>>
   /**
-   * Select the `defense` field on the `Pokemon` object. Its type is `Int` (a `Scalar`).
+   * Select the `defense` field on the `Pokemon` object. Its type is `Int` (a `ScalarStandard` kind of type).
    */
   defense?: Pokemon.defense$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Pokemon.defense<$Scalars>>
   /**
-   * Select the `hp` field on the `Pokemon` object. Its type is `Int` (a `Scalar`).
+   * Select the `hp` field on the `Pokemon` object. Its type is `Int` (a `ScalarStandard` kind of type).
    */
   hp?: Pokemon.hp$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Pokemon.hp<$Scalars>>
   /**
-   * Select the `id` field on the `Pokemon` object. Its type is `ID` (a `Scalar`).
+   * Select the `id` field on the `Pokemon` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
   id?: Pokemon.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Pokemon.id<$Scalars>>
   /**
-   * Select the `name` field on the `Pokemon` object. Its type is `String` (a `Scalar`).
+   * Select the `name` field on the `Pokemon` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   name?: Pokemon.name$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Pokemon.name<$Scalars>>
   /**
-   * Select the `trainer` field on the `Pokemon` object. Its type is OutputObject.
+   * Select the `trainer` field on the `Pokemon` object. Its type is `Trainer` (a `OutputObject` kind of type).
    */
   trainer?: Pokemon.trainer$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Pokemon.trainer<$Scalars>>
   /**
-   * Select the `type` field on the `Pokemon` object. Its type is Enum.
+   * Select the `type` field on the `Pokemon` object. Its type is `PokemonType` (a `Enum` kind of type).
    */
   type?: Pokemon.type$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Pokemon.type<$Scalars>>
 
@@ -1530,23 +1530,23 @@ export namespace Pokemon {
 
 export interface Trainer<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
   /**
-   * Select the `class` field on the `Trainer` object. Its type is Enum.
+   * Select the `class` field on the `Trainer` object. Its type is `TrainerClass` (a `Enum` kind of type).
    */
   class?: Trainer.$class$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Trainer.$class<$Scalars>>
   /**
-   * Select the `fans` field on the `Trainer` object. Its type is OutputObject.
+   * Select the `fans` field on the `Trainer` object. Its type is `Patron` (a `OutputObject` kind of type).
    */
   fans?: Trainer.fans$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Trainer.fans<$Scalars>>
   /**
-   * Select the `id` field on the `Trainer` object. Its type is `ID` (a `Scalar`).
+   * Select the `id` field on the `Trainer` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
   id?: Trainer.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Trainer.id<$Scalars>>
   /**
-   * Select the `name` field on the `Trainer` object. Its type is `String` (a `Scalar`).
+   * Select the `name` field on the `Trainer` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   name?: Trainer.name$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Trainer.name<$Scalars>>
   /**
-   * Select the `pokemon` field on the `Trainer` object. Its type is OutputObject.
+   * Select the `pokemon` field on the `Trainer` object. Its type is `Pokemon` (a `OutputObject` kind of type).
    */
   pokemon?: Trainer.pokemon$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Trainer.pokemon<$Scalars>>
 

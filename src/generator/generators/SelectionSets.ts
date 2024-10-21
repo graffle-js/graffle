@@ -171,13 +171,9 @@ const renderKindOutputObject = createCodeGenerator<{ type: Grafaid.Schema.Object
     code()
 
     const fieldKeys = fields.map(field => {
-      const fieldTypeInfo = Grafaid.getTypeAndKind(Grafaid.Schema.getNamedType(field.type))
-      const fieldTypeKindOrScalarType = fieldTypeInfo.kindName === Grafaid.Schema.KindMap.Name.ScalarCustom
-          || fieldTypeInfo.kindName === Grafaid.Schema.KindMap.Name.ScalarStandard
-        ? `\`${fieldTypeInfo.name}\` (a \`Scalar\`)`
-        : fieldTypeInfo.kindName
+      const typeKind = Grafaid.getTypeAndKind(Grafaid.Schema.getNamedType(field.type))
       const doc = Code.TSDoc(`
-        Select the \`${field.name}\` field on the \`${type.name}\` object. Its type is ${fieldTypeKindOrScalarType}.
+        Select the \`${field.name}\` field on the \`${type.name}\` object. Its type is \`${typeKind.typeName}\` (a \`${typeKind.kindName}\` kind of type).
       `)
       const key = H.outputFieldKey(
         field.name,

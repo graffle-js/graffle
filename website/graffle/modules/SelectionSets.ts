@@ -54,27 +54,27 @@ export interface $Document<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap 
 
 export interface Query<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
   /**
-   * Select the `continent` field on the `Query` object. Its type is OutputObject.
+   * Select the `continent` field on the `Query` object. Its type is `Continent` (a `OutputObject` kind of type).
    */
   continent?: Query.continent<$Scalars> | $Select.SelectAlias.SelectAlias<Query.continent<$Scalars>>
   /**
-   * Select the `continents` field on the `Query` object. Its type is OutputObject.
+   * Select the `continents` field on the `Query` object. Its type is `Continent` (a `OutputObject` kind of type).
    */
   continents?: Query.continents$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.continents<$Scalars>>
   /**
-   * Select the `countries` field on the `Query` object. Its type is OutputObject.
+   * Select the `countries` field on the `Query` object. Its type is `Country` (a `OutputObject` kind of type).
    */
   countries?: Query.countries$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.countries<$Scalars>>
   /**
-   * Select the `country` field on the `Query` object. Its type is OutputObject.
+   * Select the `country` field on the `Query` object. Its type is `Country` (a `OutputObject` kind of type).
    */
   country?: Query.country<$Scalars> | $Select.SelectAlias.SelectAlias<Query.country<$Scalars>>
   /**
-   * Select the `language` field on the `Query` object. Its type is OutputObject.
+   * Select the `language` field on the `Query` object. Its type is `Language` (a `OutputObject` kind of type).
    */
   language?: Query.language<$Scalars> | $Select.SelectAlias.SelectAlias<Query.language<$Scalars>>
   /**
-   * Select the `languages` field on the `Query` object. Its type is OutputObject.
+   * Select the `languages` field on the `Query` object. Its type is `Language` (a `OutputObject` kind of type).
    */
   languages?: Query.languages$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.languages<$Scalars>>
 
@@ -345,15 +345,15 @@ export interface StringQueryOperatorInput<$Scalars extends $$Utilities.Schema.Sc
 
 export interface Continent<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
   /**
-   * Select the `code` field on the `Continent` object. Its type is `ID` (a `Scalar`).
+   * Select the `code` field on the `Continent` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
   code?: Continent.code$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Continent.code<$Scalars>>
   /**
-   * Select the `countries` field on the `Continent` object. Its type is OutputObject.
+   * Select the `countries` field on the `Continent` object. Its type is `Country` (a `OutputObject` kind of type).
    */
   countries?: Continent.countries$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Continent.countries<$Scalars>>
   /**
-   * Select the `name` field on the `Continent` object. Its type is `String` (a `Scalar`).
+   * Select the `name` field on the `Continent` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   name?: Continent.name$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Continent.name<$Scalars>>
 
@@ -464,63 +464,63 @@ export namespace Continent {
 
 export interface Country<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
   /**
-   * Select the `awsRegion` field on the `Country` object. Its type is `String` (a `Scalar`).
+   * Select the `awsRegion` field on the `Country` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   awsRegion?: Country.awsRegion$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Country.awsRegion<$Scalars>>
   /**
-   * Select the `capital` field on the `Country` object. Its type is `String` (a `Scalar`).
+   * Select the `capital` field on the `Country` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   capital?: Country.capital$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Country.capital<$Scalars>>
   /**
-   * Select the `code` field on the `Country` object. Its type is `ID` (a `Scalar`).
+   * Select the `code` field on the `Country` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
   code?: Country.code$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Country.code<$Scalars>>
   /**
-   * Select the `continent` field on the `Country` object. Its type is OutputObject.
+   * Select the `continent` field on the `Country` object. Its type is `Continent` (a `OutputObject` kind of type).
    */
   continent?: Country.continent$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Country.continent<$Scalars>>
   /**
-   * Select the `currencies` field on the `Country` object. Its type is `String` (a `Scalar`).
+   * Select the `currencies` field on the `Country` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   currencies?: Country.currencies$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Country.currencies<$Scalars>>
   /**
-   * Select the `currency` field on the `Country` object. Its type is `String` (a `Scalar`).
+   * Select the `currency` field on the `Country` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   currency?: Country.currency$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Country.currency<$Scalars>>
   /**
-   * Select the `emoji` field on the `Country` object. Its type is `String` (a `Scalar`).
+   * Select the `emoji` field on the `Country` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   emoji?: Country.emoji$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Country.emoji<$Scalars>>
   /**
-   * Select the `emojiU` field on the `Country` object. Its type is `String` (a `Scalar`).
+   * Select the `emojiU` field on the `Country` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   emojiU?: Country.emojiU$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Country.emojiU<$Scalars>>
   /**
-   * Select the `languages` field on the `Country` object. Its type is OutputObject.
+   * Select the `languages` field on the `Country` object. Its type is `Language` (a `OutputObject` kind of type).
    */
   languages?: Country.languages$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Country.languages<$Scalars>>
   /**
-   * Select the `name` field on the `Country` object. Its type is `String` (a `Scalar`).
+   * Select the `name` field on the `Country` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   name?: Country.name$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Country.name<$Scalars>>
   /**
-   * Select the `native` field on the `Country` object. Its type is `String` (a `Scalar`).
+   * Select the `native` field on the `Country` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   native?: Country.native$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Country.native<$Scalars>>
   /**
-   * Select the `phone` field on the `Country` object. Its type is `String` (a `Scalar`).
+   * Select the `phone` field on the `Country` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   phone?: Country.phone$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Country.phone<$Scalars>>
   /**
-   * Select the `phones` field on the `Country` object. Its type is `String` (a `Scalar`).
+   * Select the `phones` field on the `Country` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   phones?: Country.phones$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Country.phones<$Scalars>>
   /**
-   * Select the `states` field on the `Country` object. Its type is OutputObject.
+   * Select the `states` field on the `Country` object. Its type is `State` (a `OutputObject` kind of type).
    */
   states?: Country.states$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Country.states<$Scalars>>
   /**
-   * Select the `subdivisions` field on the `Country` object. Its type is OutputObject.
+   * Select the `subdivisions` field on the `Country` object. Its type is `Subdivision` (a `OutputObject` kind of type).
    */
   subdivisions?:
     | Country.subdivisions$Expanded<$Scalars>
@@ -899,19 +899,19 @@ export namespace Country {
 
 export interface Language<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
   /**
-   * Select the `code` field on the `Language` object. Its type is `ID` (a `Scalar`).
+   * Select the `code` field on the `Language` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
   code?: Language.code$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Language.code<$Scalars>>
   /**
-   * Select the `name` field on the `Language` object. Its type is `String` (a `Scalar`).
+   * Select the `name` field on the `Language` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   name?: Language.name$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Language.name<$Scalars>>
   /**
-   * Select the `native` field on the `Language` object. Its type is `String` (a `Scalar`).
+   * Select the `native` field on the `Language` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   native?: Language.native$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Language.native<$Scalars>>
   /**
-   * Select the `rtl` field on the `Language` object. Its type is `Boolean` (a `Scalar`).
+   * Select the `rtl` field on the `Language` object. Its type is `Boolean` (a `ScalarStandard` kind of type).
    */
   rtl?: Language.rtl$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Language.rtl<$Scalars>>
 
@@ -1047,15 +1047,15 @@ export namespace Language {
 
 export interface State<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
   /**
-   * Select the `code` field on the `State` object. Its type is `String` (a `Scalar`).
+   * Select the `code` field on the `State` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   code?: State.code$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<State.code<$Scalars>>
   /**
-   * Select the `country` field on the `State` object. Its type is OutputObject.
+   * Select the `country` field on the `State` object. Its type is `Country` (a `OutputObject` kind of type).
    */
   country?: State.country$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<State.country<$Scalars>>
   /**
-   * Select the `name` field on the `State` object. Its type is `String` (a `Scalar`).
+   * Select the `name` field on the `State` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   name?: State.name$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<State.name<$Scalars>>
 
@@ -1168,15 +1168,15 @@ export interface Subdivision<$Scalars extends $$Utilities.Schema.Scalar.ScalarMa
   extends $Select.Bases.ObjectLike
 {
   /**
-   * Select the `code` field on the `Subdivision` object. Its type is `ID` (a `Scalar`).
+   * Select the `code` field on the `Subdivision` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
   code?: Subdivision.code$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Subdivision.code<$Scalars>>
   /**
-   * Select the `emoji` field on the `Subdivision` object. Its type is `String` (a `Scalar`).
+   * Select the `emoji` field on the `Subdivision` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   emoji?: Subdivision.emoji$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Subdivision.emoji<$Scalars>>
   /**
-   * Select the `name` field on the `Subdivision` object. Its type is `String` (a `Scalar`).
+   * Select the `name` field on the `Subdivision` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   name?: Subdivision.name$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Subdivision.name<$Scalars>>
 

@@ -68,10 +68,10 @@ export const isStandardScalarType = (type: GraphQLScalarType) => {
 export const getTypeAndKind = (
   node: GraphQLNamedType,
 ): {
-  name: string
+  typeName: string
   kindName: KindMap.KindName
 } => {
-  const name = node.name
+  const typeName = node.name
 
   let kindName: KindMap.KindName
 
@@ -92,5 +92,5 @@ export const getTypeAndKind = (
   } else {
     throw casesExhausted(node)
   }
-  return { name, kindName }
+  return { typeName, kindName }
 }
