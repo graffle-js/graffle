@@ -1,6 +1,9 @@
 import type { Grafaid } from '../../lib/grafaid/__.js'
 import { isString } from '../../lib/prelude.js'
 import { Schema } from '../Schema/__.js'
+import type { InlineType } from './InlineType.js'
+
+export * from './InlineType.js'
 
 declare global {
   namespace GraffleGlobal {
@@ -113,20 +116,6 @@ export const propertyNames = {
   a: `a`,
   nt: `nt`,
 } as const
-
-/**
- * Inline types for a field-like (directive argument, field argument, input/output field) type.
- *
- * Nested tuple. Each nesting represents a list. First tuple member represents nullability of the list.
- *
- * The outer most tuple represents not a list but the nullability for the named type itself. E.g. `[0]` would indicate
- * that a scalar field is nullable while `[1]` would indicate that it is non-nullable.
- */
-export type InlineType = [Nullable | NonNull, InlineType?]
-
-export type Nullable = 0
-
-export type NonNull = 1
 
 export const isEnum = (
   node?: Node,

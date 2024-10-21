@@ -58,7 +58,7 @@ export {
 
 export * as Args from './args.js'
 export * as CustomScalars from './customScalars.js'
-export * as KindMap from './kindMap.js'
+export * from './KindMap/__.js'
 
 export type DeprecatableNodes = GraphQLEnumValue | InputOrOutputField
 
@@ -93,15 +93,17 @@ export type DescribableTypes =
   | GraphQLNamedType
   | InputOrOutputField
 
-export const isGraphQLOutputField = (object: object): object is GraphQLField<any, any> => {
-  return `args` in object
-}
+type InputFieldLikeTypes = GraphQLArgument | GraphQLInputField
 
-export const isGraphQLArgumentOrInputField = (value: object): value is GraphQLArgument | GraphQLInputField => {
+export const isInputFieldLike = (value: object): value is InputFieldLikeTypes => {
   return `defaultValue` in value
 }
 
-export const isGraphQLField = (value: object): value is GraphQLField<any, any> => {
+export const isField = (value: object): value is GraphQLField<any, any> | InputFieldLikeTypes => {
+  return isOutputField(value) || isInputFieldLike(value)
+}
+
+export const isOutputField = (value: object): value is GraphQLField<any, any> => {
   return `args` in value
 }
 
@@ -165,8 +167,6 @@ export const isRootType = (value: unknown): value is GraphQLObjectType => {
 }
 
 export type NodeName = keyof NameToClass
-
-export type NodeNamePlus = NodeName | 'GraphQLField'
 
 // export type AnyClass = InstanceType<NameToClass[keyof NameToClass]>
 

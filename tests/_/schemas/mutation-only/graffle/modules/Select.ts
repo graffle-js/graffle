@@ -45,8 +45,8 @@ export namespace Select {
     Schema,
     'Mutation'
   >
-  // Object Types
-  // ------------
+  // OutputObject Types
+  // ------------------
 
   // -- None --
 

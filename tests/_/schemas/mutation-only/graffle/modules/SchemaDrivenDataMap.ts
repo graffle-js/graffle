@@ -1,4 +1,4 @@
-import type * as $Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
+import type * as $$Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
 import * as $Scalar from './Scalar.js'
 //
 //
@@ -7,7 +7,7 @@ import * as $Scalar from './Scalar.js'
 //
 //
 // ==================================================================================================
-//                                     GraphQLScalarTypeStandard
+//                                           ScalarStandard
 // ==================================================================================================
 //
 //
@@ -33,7 +33,7 @@ const String = $Scalar.String
 //
 //
 // ==================================================================================================
-//                                      GraphQLScalarTypeCustom
+//                                            ScalarCustom
 // ==================================================================================================
 //
 //
@@ -42,7 +42,7 @@ const String = $Scalar.String
 //
 //
 
-// None of your GraphQLScalarTypeCustoms have custom scalars.
+// None of your ScalarCustoms have custom scalars.
 
 //
 //
@@ -51,7 +51,7 @@ const String = $Scalar.String
 //
 //
 // ==================================================================================================
-//                                          GraphQLEnumType
+//                                                Enum
 // ==================================================================================================
 //
 //
@@ -60,7 +60,7 @@ const String = $Scalar.String
 //
 //
 
-// None of your GraphQLEnumTypes have custom scalars.
+// None of your Enums have custom scalars.
 
 //
 //
@@ -69,7 +69,7 @@ const String = $Scalar.String
 //
 //
 // ==================================================================================================
-//                                       GraphQLInputObjectType
+//                                            InputObject
 // ==================================================================================================
 //
 //
@@ -78,7 +78,7 @@ const String = $Scalar.String
 //
 //
 
-// None of your GraphQLInputObjectTypes have custom scalars.
+// None of your InputObjects have custom scalars.
 
 //
 //
@@ -87,7 +87,7 @@ const String = $Scalar.String
 //
 //
 // ==================================================================================================
-//                                         GraphQLObjectType
+//                                            OutputObject
 // ==================================================================================================
 //
 //
@@ -96,7 +96,7 @@ const String = $Scalar.String
 //
 //
 
-// None of your GraphQLObjectTypes have custom scalars.
+// None of your OutputObjects have custom scalars.
 
 //
 //
@@ -105,7 +105,7 @@ const String = $Scalar.String
 //
 //
 // ==================================================================================================
-//                                        GraphQLInterfaceType
+//                                             Interface
 // ==================================================================================================
 //
 //
@@ -114,7 +114,7 @@ const String = $Scalar.String
 //
 //
 
-// None of your GraphQLInterfaceTypes have custom scalars.
+// None of your Interfaces have custom scalars.
 
 //
 //
@@ -123,7 +123,7 @@ const String = $Scalar.String
 //
 //
 // ==================================================================================================
-//                                          GraphQLUnionType
+//                                               Union
 // ==================================================================================================
 //
 //
@@ -132,7 +132,7 @@ const String = $Scalar.String
 //
 //
 
-// None of your GraphQLUnionTypes have custom scalars.
+// None of your Unions have custom scalars.
 
 //
 //
@@ -141,7 +141,7 @@ const String = $Scalar.String
 //
 //
 // ==================================================================================================
-//                                          GraphQLRootType
+//                                                Root
 // ==================================================================================================
 //
 //
@@ -150,7 +150,7 @@ const String = $Scalar.String
 //
 //
 
-const Mutation: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const Mutation: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     id: {},
     idNonNull: {},
@@ -192,7 +192,7 @@ const Mutation: $Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 
-const $schemaDrivenDataMap: $Utilities.SchemaDrivenDataMap = {
+const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
   roots: {
     Mutation,
   },

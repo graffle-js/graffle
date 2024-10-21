@@ -21,19 +21,19 @@ export namespace Schema {
   //
 
   export type Mutation = $.StandardTypes.Mutation<{
-    id: $.Field<'id', $.Nullable<$Scalar.ID>, null>
-    idNonNull: $.Field<'idNonNull', $Scalar.ID, null>
+    id: $.OutputField<'id', $.Nullable<$Scalar.ID>, null>
+    idNonNull: $.OutputField<'idNonNull', $Scalar.ID, null>
   }>
 
   export type Query = $.StandardTypes.Query<{
-    InputObjectNested: $.Field<
+    InputObjectNested: $.OutputField<
       'InputObjectNested',
       $.Nullable<$Scalar.ID>,
       $.Args<{
         input: $.InputField<$.Nullable<InputObjectNested>>
       }, true>
     >
-    InputObjectNestedNonNull: $.Field<
+    InputObjectNestedNonNull: $.OutputField<
       'InputObjectNestedNonNull',
       $.Nullable<$Scalar.ID>,
       $.Args<{
@@ -43,93 +43,93 @@ export namespace Schema {
     /**
      * Query enum field documentation.
      */
-    abcEnum: $.Field<'abcEnum', $.Nullable<ABCEnum>, null>
-    argInputObjectCircular: $.Field<
+    abcEnum: $.OutputField<'abcEnum', $.Nullable<ABCEnum>, null>
+    argInputObjectCircular: $.OutputField<
       'argInputObjectCircular',
       $.Nullable<$Scalar.String>,
       $.Args<{
         input: $.InputField<$.Nullable<InputObjectCircular>>
       }, true>
     >
-    date: $.Field<'date', $.Nullable<$Scalar.Date>, null>
-    dateArg: $.Field<
+    date: $.OutputField<'date', $.Nullable<$Scalar.Date>, null>
+    dateArg: $.OutputField<
       'dateArg',
       $.Nullable<$Scalar.Date>,
       $.Args<{
         date: $.InputField<$.Nullable<$Scalar.Date>>
       }, true>
     >
-    dateArgInputObject: $.Field<
+    dateArgInputObject: $.OutputField<
       'dateArgInputObject',
       $.Nullable<$Scalar.Date>,
       $.Args<{
         input: $.InputField<$.Nullable<InputObject>>
       }, true>
     >
-    dateArgList: $.Field<
+    dateArgList: $.OutputField<
       'dateArgList',
       $.Nullable<$Scalar.Date>,
       $.Args<{
         date: $.InputField<$.Nullable<$.List<$Scalar.Date>>>
       }, true>
     >
-    dateArgNonNull: $.Field<
+    dateArgNonNull: $.OutputField<
       'dateArgNonNull',
       $.Nullable<$Scalar.Date>,
       $.Args<{
         date: $.InputField<$Scalar.Date>
       }, false>
     >
-    dateArgNonNullList: $.Field<
+    dateArgNonNullList: $.OutputField<
       'dateArgNonNullList',
       $.Nullable<$Scalar.Date>,
       $.Args<{
         date: $.InputField<$.List<$.Nullable<$Scalar.Date>>>
       }, false>
     >
-    dateArgNonNullListNonNull: $.Field<
+    dateArgNonNullListNonNull: $.OutputField<
       'dateArgNonNullListNonNull',
       $.Nullable<$Scalar.Date>,
       $.Args<{
         date: $.InputField<$.List<$Scalar.Date>>
       }, false>
     >
-    dateInterface1: $.Field<'dateInterface1', $.Nullable<DateInterface1>, null>
-    dateList: $.Field<'dateList', $.Nullable<$.List<$Scalar.Date>>, null>
-    dateListList: $.Field<'dateListList', $.Nullable<$.List<$.List<$Scalar.Date>>>, null>
-    dateListNonNull: $.Field<'dateListNonNull', $.List<$Scalar.Date>, null>
-    dateNonNull: $.Field<'dateNonNull', $Scalar.Date, null>
-    dateObject1: $.Field<'dateObject1', $.Nullable<DateObject1>, null>
-    dateUnion: $.Field<'dateUnion', $.Nullable<DateUnion>, null>
-    error: $.Field<
+    dateInterface1: $.OutputField<'dateInterface1', $.Nullable<DateInterface1>, null>
+    dateList: $.OutputField<'dateList', $.Nullable<$.List<$Scalar.Date>>, null>
+    dateListList: $.OutputField<'dateListList', $.Nullable<$.List<$.List<$Scalar.Date>>>, null>
+    dateListNonNull: $.OutputField<'dateListNonNull', $.List<$Scalar.Date>, null>
+    dateNonNull: $.OutputField<'dateNonNull', $Scalar.Date, null>
+    dateObject1: $.OutputField<'dateObject1', $.Nullable<DateObject1>, null>
+    dateUnion: $.OutputField<'dateUnion', $.Nullable<DateUnion>, null>
+    error: $.OutputField<
       'error',
       $.Nullable<$Scalar.String>,
       $.Args<{
         case: $.InputField<$.Nullable<$Scalar.String>>
       }, true>
     >
-    id: $.Field<'id', $.Nullable<$Scalar.ID>, null>
-    idNonNull: $.Field<'idNonNull', $Scalar.ID, null>
-    interface: $.Field<'interface', $.Nullable<Interface>, null>
-    interfaceNonNull: $.Field<'interfaceNonNull', Interface, null>
-    interfaceWithArgs: $.Field<
+    id: $.OutputField<'id', $.Nullable<$Scalar.ID>, null>
+    idNonNull: $.OutputField<'idNonNull', $Scalar.ID, null>
+    interface: $.OutputField<'interface', $.Nullable<Interface>, null>
+    interfaceNonNull: $.OutputField<'interfaceNonNull', Interface, null>
+    interfaceWithArgs: $.OutputField<
       'interfaceWithArgs',
       $.Nullable<Interface>,
       $.Args<{
         id: $.InputField<$Scalar.ID>
       }, false>
     >
-    listInt: $.Field<'listInt', $.Nullable<$.List<$.Nullable<$Scalar.Int>>>, null>
-    listIntNonNull: $.Field<'listIntNonNull', $.List<$Scalar.Int>, null>
-    listListInt: $.Field<'listListInt', $.Nullable<$.List<$.Nullable<$.List<$.Nullable<$Scalar.Int>>>>>, null>
-    listListIntNonNull: $.Field<'listListIntNonNull', $.List<$.List<$Scalar.Int>>, null>
-    lowerCaseUnion: $.Field<'lowerCaseUnion', $.Nullable<lowerCaseUnion>, null>
-    object: $.Field<'object', $.Nullable<Object1>, null>
-    objectList: $.Field<'objectList', $.Nullable<$.List<Object1>>, null>
-    objectListNonNull: $.Field<'objectListNonNull', $.List<Object1>, null>
-    objectNested: $.Field<'objectNested', $.Nullable<ObjectNested>, null>
-    objectNonNull: $.Field<'objectNonNull', Object1, null>
-    objectWithArgs: $.Field<
+    listInt: $.OutputField<'listInt', $.Nullable<$.List<$.Nullable<$Scalar.Int>>>, null>
+    listIntNonNull: $.OutputField<'listIntNonNull', $.List<$Scalar.Int>, null>
+    listListInt: $.OutputField<'listListInt', $.Nullable<$.List<$.Nullable<$.List<$.Nullable<$Scalar.Int>>>>>, null>
+    listListIntNonNull: $.OutputField<'listListIntNonNull', $.List<$.List<$Scalar.Int>>, null>
+    lowerCaseUnion: $.OutputField<'lowerCaseUnion', $.Nullable<lowerCaseUnion>, null>
+    object: $.OutputField<'object', $.Nullable<Object1>, null>
+    objectList: $.OutputField<'objectList', $.Nullable<$.List<Object1>>, null>
+    objectListNonNull: $.OutputField<'objectListNonNull', $.List<Object1>, null>
+    objectNested: $.OutputField<'objectNested', $.Nullable<ObjectNested>, null>
+    objectNonNull: $.OutputField<'objectNonNull', Object1, null>
+    objectWithArgs: $.OutputField<
       'objectWithArgs',
       $.Nullable<Object1>,
       $.Args<{
@@ -140,36 +140,36 @@ export namespace Schema {
         string: $.InputField<$.Nullable<$Scalar.String>>
       }, true>
     >
-    result: $.Field<
+    result: $.OutputField<
       'result',
       $.Nullable<Result>,
       $.Args<{
         case: $.InputField<Case>
       }, false>
     >
-    resultNonNull: $.Field<
+    resultNonNull: $.OutputField<
       'resultNonNull',
       Result,
       $.Args<{
         case: $.InputField<$.Nullable<Case>>
       }, true>
     >
-    string: $.Field<'string', $.Nullable<$Scalar.String>, null>
-    stringWithArgEnum: $.Field<
+    string: $.OutputField<'string', $.Nullable<$Scalar.String>, null>
+    stringWithArgEnum: $.OutputField<
       'stringWithArgEnum',
       $.Nullable<$Scalar.String>,
       $.Args<{
         ABCEnum: $.InputField<$.Nullable<ABCEnum>>
       }, true>
     >
-    stringWithArgInputObject: $.Field<
+    stringWithArgInputObject: $.OutputField<
       'stringWithArgInputObject',
       $.Nullable<$Scalar.String>,
       $.Args<{
         input: $.InputField<$.Nullable<InputObject>>
       }, true>
     >
-    stringWithArgInputObjectRequired: $.Field<
+    stringWithArgInputObjectRequired: $.OutputField<
       'stringWithArgInputObjectRequired',
       $.Nullable<$Scalar.String>,
       $.Args<{
@@ -179,7 +179,7 @@ export namespace Schema {
     /**
      * The given arguments are reflected back as a JSON string.
      */
-    stringWithArgs: $.Field<
+    stringWithArgs: $.OutputField<
       'stringWithArgs',
       $.Nullable<$Scalar.String>,
       $.Args<{
@@ -190,38 +190,38 @@ export namespace Schema {
         string: $.InputField<$.Nullable<$Scalar.String>>
       }, true>
     >
-    stringWithListArg: $.Field<
+    stringWithListArg: $.OutputField<
       'stringWithListArg',
       $.Nullable<$Scalar.String>,
       $.Args<{
         ints: $.InputField<$.Nullable<$.List<$.Nullable<$Scalar.Int>>>>
       }, true>
     >
-    stringWithListArgRequired: $.Field<
+    stringWithListArgRequired: $.OutputField<
       'stringWithListArgRequired',
       $.Nullable<$Scalar.String>,
       $.Args<{
         ints: $.InputField<$.List<$Scalar.Int>>
       }, false>
     >
-    stringWithRequiredArg: $.Field<
+    stringWithRequiredArg: $.OutputField<
       'stringWithRequiredArg',
       $.Nullable<$Scalar.String>,
       $.Args<{
         string: $.InputField<$Scalar.String>
       }, false>
     >
-    unionFooBar: $.Field<'unionFooBar', $.Nullable<FooBarUnion>, null>
-    unionFooBarNonNull: $.Field<'unionFooBarNonNull', FooBarUnion, null>
-    unionFooBarWithArgs: $.Field<
+    unionFooBar: $.OutputField<'unionFooBar', $.Nullable<FooBarUnion>, null>
+    unionFooBarNonNull: $.OutputField<'unionFooBarNonNull', FooBarUnion, null>
+    unionFooBarWithArgs: $.OutputField<
       'unionFooBarWithArgs',
       $.Nullable<FooBarUnion>,
       $.Args<{
         id: $.InputField<$.Nullable<$Scalar.ID>>
       }, true>
     >
-    unionObject: $.Field<'unionObject', $.Nullable<ObjectUnion>, null>
-    unionObjectNonNull: $.Field<'unionObjectNonNull', ObjectUnion, null>
+    unionObject: $.OutputField<'unionObject', $.Nullable<ObjectUnion>, null>
+    unionObjectNonNull: $.OutputField<'unionObjectNonNull', ObjectUnion, null>
   }>
 
   //
@@ -231,7 +231,7 @@ export namespace Schema {
   //
   //
   // ==================================================================================================
-  //                                                Enum
+  //                                            OutputObject
   // ==================================================================================================
   //
   //
@@ -240,17 +240,75 @@ export namespace Schema {
   //
   //
 
-  /**
-   * Enum documentation.
-   *
-   * Members
-   * "A" - (DEPRECATED: Enum value A is deprecated.)
-   * "B" - Enum B member documentation.
-   * "C" - (DEPRECATED: Enum value C is deprecated.)
-   */
-  export type ABCEnum = $.Enum<'ABCEnum', ['A', 'B', 'C']>
+  export type Bar = $.OutputObject<'Bar', {
+    int: $.OutputField<'int', $.Nullable<$Scalar.Int>, null>
+  }>
 
-  export type Case = $.Enum<'Case', ['ErrorOne', 'ErrorTwo', 'Object1']>
+  export type DateObject1 = $.OutputObject<'DateObject1', {
+    date1: $.OutputField<'date1', $.Nullable<$Scalar.Date>, null>
+  }>
+
+  export type DateObject2 = $.OutputObject<'DateObject2', {
+    date2: $.OutputField<'date2', $.Nullable<$Scalar.Date>, null>
+  }>
+
+  export type ErrorOne = $.OutputObject<'ErrorOne', {
+    infoId: $.OutputField<'infoId', $.Nullable<$Scalar.ID>, null>
+    message: $.OutputField<'message', $Scalar.String, null>
+  }>
+
+  export type ErrorTwo = $.OutputObject<'ErrorTwo', {
+    infoInt: $.OutputField<'infoInt', $.Nullable<$Scalar.Int>, null>
+    message: $.OutputField<'message', $Scalar.String, null>
+  }>
+
+  /**
+   * Object documentation.
+   */
+  export type Foo = $.OutputObject<'Foo', {
+    /**
+     * Field documentation.
+     *
+     * @deprecated Field a is deprecated.
+     */
+    id: $.OutputField<'id', $.Nullable<$Scalar.ID>, null>
+  }>
+
+  export type Object1 = $.OutputObject<'Object1', {
+    ABCEnum: $.OutputField<'ABCEnum', $.Nullable<ABCEnum>, null>
+    boolean: $.OutputField<'boolean', $.Nullable<$Scalar.Boolean>, null>
+    float: $.OutputField<'float', $.Nullable<$Scalar.Float>, null>
+    id: $.OutputField<'id', $.Nullable<$Scalar.ID>, null>
+    int: $.OutputField<'int', $.Nullable<$Scalar.Int>, null>
+    string: $.OutputField<'string', $.Nullable<$Scalar.String>, null>
+  }>
+
+  export type Object1ImplementingInterface = $.OutputObject<'Object1ImplementingInterface', {
+    id: $.OutputField<'id', $.Nullable<$Scalar.ID>, null>
+    int: $.OutputField<'int', $.Nullable<$Scalar.Int>, null>
+  }>
+
+  export type Object2ImplementingInterface = $.OutputObject<'Object2ImplementingInterface', {
+    boolean: $.OutputField<'boolean', $.Nullable<$Scalar.Boolean>, null>
+    id: $.OutputField<'id', $.Nullable<$Scalar.ID>, null>
+  }>
+
+  export type ObjectNested = $.OutputObject<'ObjectNested', {
+    id: $.OutputField<'id', $.Nullable<$Scalar.ID>, null>
+    object: $.OutputField<'object', $.Nullable<Object1>, null>
+  }>
+
+  export type ObjectUnion = $.OutputObject<'ObjectUnion', {
+    fooBarUnion: $.OutputField<'fooBarUnion', $.Nullable<FooBarUnion>, null>
+  }>
+
+  export type lowerCaseObject = $.OutputObject<'lowerCaseObject', {
+    id: $.OutputField<'id', $.Nullable<$Scalar.ID>, null>
+  }>
+
+  export type lowerCaseObject2 = $.OutputObject<'lowerCaseObject2', {
+    int: $.OutputField<'int', $.Nullable<$Scalar.Int>, null>
+  }>
 
   //
   //
@@ -305,102 +363,16 @@ export namespace Schema {
   //
 
   export type DateInterface1 = $.Interface<'DateInterface1', {
-    date1: $.Field<'date1', $.Nullable<$Scalar.Date>, null>
+    date1: $.OutputField<'date1', $.Nullable<$Scalar.Date>, null>
   }, [DateObject1]>
 
   export type Error = $.Interface<'Error', {
-    message: $.Field<'message', $Scalar.String, null>
+    message: $.OutputField<'message', $Scalar.String, null>
   }, [ErrorOne, ErrorTwo]>
 
   export type Interface = $.Interface<'Interface', {
-    id: $.Field<'id', $.Nullable<$Scalar.ID>, null>
+    id: $.OutputField<'id', $.Nullable<$Scalar.ID>, null>
   }, [Object1ImplementingInterface, Object2ImplementingInterface]>
-
-  //
-  //
-  //
-  //
-  //
-  //
-  // ==================================================================================================
-  //                                               Object
-  // ==================================================================================================
-  //
-  //
-  //
-  //
-  //
-  //
-
-  export type Bar = $.OutputObject<'Bar', {
-    int: $.Field<'int', $.Nullable<$Scalar.Int>, null>
-  }>
-
-  export type DateObject1 = $.OutputObject<'DateObject1', {
-    date1: $.Field<'date1', $.Nullable<$Scalar.Date>, null>
-  }>
-
-  export type DateObject2 = $.OutputObject<'DateObject2', {
-    date2: $.Field<'date2', $.Nullable<$Scalar.Date>, null>
-  }>
-
-  export type ErrorOne = $.OutputObject<'ErrorOne', {
-    infoId: $.Field<'infoId', $.Nullable<$Scalar.ID>, null>
-    message: $.Field<'message', $Scalar.String, null>
-  }>
-
-  export type ErrorTwo = $.OutputObject<'ErrorTwo', {
-    infoInt: $.Field<'infoInt', $.Nullable<$Scalar.Int>, null>
-    message: $.Field<'message', $Scalar.String, null>
-  }>
-
-  /**
-   * Object documentation.
-   */
-  export type Foo = $.OutputObject<'Foo', {
-    /**
-     * Field documentation.
-     *
-     * @deprecated Field a is deprecated.
-     */
-    id: $.Field<'id', $.Nullable<$Scalar.ID>, null>
-  }>
-
-  export type Object1 = $.OutputObject<'Object1', {
-    ABCEnum: $.Field<'ABCEnum', $.Nullable<ABCEnum>, null>
-    boolean: $.Field<'boolean', $.Nullable<$Scalar.Boolean>, null>
-    float: $.Field<'float', $.Nullable<$Scalar.Float>, null>
-    id: $.Field<'id', $.Nullable<$Scalar.ID>, null>
-    int: $.Field<'int', $.Nullable<$Scalar.Int>, null>
-    string: $.Field<'string', $.Nullable<$Scalar.String>, null>
-  }>
-
-  export type Object1ImplementingInterface = $.OutputObject<'Object1ImplementingInterface', {
-    id: $.Field<'id', $.Nullable<$Scalar.ID>, null>
-    int: $.Field<'int', $.Nullable<$Scalar.Int>, null>
-  }>
-
-  export type Object2ImplementingInterface = $.OutputObject<'Object2ImplementingInterface', {
-    boolean: $.Field<'boolean', $.Nullable<$Scalar.Boolean>, null>
-    id: $.Field<'id', $.Nullable<$Scalar.ID>, null>
-  }>
-
-  export type ObjectNested = $.OutputObject<'ObjectNested', {
-    id: $.Field<'id', $.Nullable<$Scalar.ID>, null>
-    object: $.Field<'object', $.Nullable<Object1>, null>
-  }>
-
-  export type ObjectUnion = $.OutputObject<'ObjectUnion', {
-    fooBarUnion: $.Field<'fooBarUnion', $.Nullable<FooBarUnion>, null>
-  }>
-
-  export type lowerCaseObject = $.OutputObject<'lowerCaseObject', {
-    id: $.Field<'id', $.Nullable<$Scalar.ID>, null>
-  }>
-
-  export type lowerCaseObject2 = $.OutputObject<'lowerCaseObject2', {
-    int: $.Field<'int', $.Nullable<$Scalar.Int>, null>
-  }>
 
   //
   //
@@ -428,6 +400,34 @@ export namespace Schema {
   export type Result = $.Union<'Result', [ErrorOne, ErrorTwo, Object1]>
 
   export type lowerCaseUnion = $.Union<'lowerCaseUnion', [lowerCaseObject, lowerCaseObject2]>
+
+  //
+  //
+  //
+  //
+  //
+  //
+  // ==================================================================================================
+  //                                                Enum
+  // ==================================================================================================
+  //
+  //
+  //
+  //
+  //
+  //
+
+  /**
+   * Enum documentation.
+   *
+   * Members
+   * "A" - (DEPRECATED: Enum value A is deprecated.)
+   * "B" - Enum B member documentation.
+   * "C" - (DEPRECATED: Enum value C is deprecated.)
+   */
+  export type ABCEnum = $.Enum<'ABCEnum', ['A', 'B', 'C']>
+
+  export type Case = $.Enum<'Case', ['ErrorOne', 'ErrorTwo', 'Object1']>
 }
 
 //

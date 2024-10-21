@@ -63,7 +63,7 @@ interface ConfigSchema {
   sdl: string
   sdlFilePath: null | string
   instance: Grafaid.Schema.Schema
-  kindMap: Grafaid.Schema.KindMap.KindMap
+  kindMap: Grafaid.Schema.KindMap
 }
 
 export const createConfig = async (input: Input): Promise<Config> => {

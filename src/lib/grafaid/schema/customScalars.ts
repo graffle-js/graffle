@@ -12,12 +12,12 @@ import {
 } from 'graphql'
 import type { GraphQLInputObjectType, GraphQLNamedOutputType } from 'graphql'
 import { casesExhausted } from '../../prelude.js'
-import { isGraphQLArgumentOrInputField, isGraphQLField, isScalarTypeAndCustom } from './schema.js'
+import { isInputFieldLike, isOutputField, isScalarTypeAndCustom } from './schema.js'
 
 export const isHasCustomScalars = (
   node: GraphQLNamedOutputType | GraphQLField<any, any> | GraphQLInputObjectType | GraphQLInputField | GraphQLArgument,
 ): boolean => {
-  if (isInputObjectType(node) || isGraphQLArgumentOrInputField(node)) {
+  if (isInputObjectType(node) || isInputFieldLike(node)) {
     return isHasCustomScalarInputs(node)
   }
 
@@ -36,7 +36,7 @@ const isHasCustomScalarOutputs_ = (
   node: GraphQLNamedOutputType | GraphQLField<any, any>,
   typePath: string[],
 ): boolean => {
-  if (isGraphQLField(node)) {
+  if (isOutputField(node)) {
     const fieldType = getNamedType(node.type)
     return isHasCustomScalarOutputs_(fieldType, typePath)
   }
@@ -82,11 +82,11 @@ const isHasCustomScalarInputs_ = (
   node: GraphQLInputObjectType | GraphQLNamedOutputType | GraphQLArgument | GraphQLField<any, any>,
   typePath: string[],
 ): boolean => {
-  if (isGraphQLArgumentOrInputField(node)) {
+  if (isInputFieldLike(node)) {
     return isHasCustomScalarInputs_(getNamedType(node.type), typePath)
   }
 
-  if (isGraphQLField(node)) {
+  if (isOutputField(node)) {
     const fieldType = getNamedType(node.type)
     return node.args.some(arg => isHasCustomScalarInputs_(arg, typePath))
       || (isObjectType(fieldType) && isHasCustomScalarInputs_(fieldType, typePath))

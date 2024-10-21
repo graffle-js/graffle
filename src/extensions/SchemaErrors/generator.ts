@@ -57,5 +57,5 @@ export const SchemaErrors = (input?: Input) => {
 
 // todo memoize
 const getErrorObjects = (config: Config, genConfig: GeneratorConfig) => {
-  return Object.values(genConfig.schema.kindMap.GraphQLObjectType).filter(config.isErrorType)
+  return Object.values(genConfig.schema.kindMap.OutputObject).filter(config.isErrorType)
 }

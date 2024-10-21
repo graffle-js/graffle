@@ -1,3 +1,4 @@
+import { omit } from 'es-toolkit'
 import { Code } from '../../lib/Code.js'
 import { Grafaid } from '../../lib/grafaid/__.js'
 import { entries, isObjectEmpty, values } from '../../lib/prelude.js'
@@ -13,6 +14,9 @@ import { ModuleGeneratorScalar } from './Scalar.js'
 export const ModuleGeneratorSchema = createModuleGenerator(
   `Schema`,
   ({ config, code }) => {
+    const kindMap = omit(config.schema.kindMap, [`ScalarCustom`, `ScalarStandard`])
+    const kinds = entries(kindMap)
+
     // todo methods root is unused
     code(`
       import type * as Data from './${ModuleGeneratorData.name}.js'
@@ -23,14 +27,9 @@ export const ModuleGeneratorSchema = createModuleGenerator(
     `)
 
     code(`export namespace ${identifiers.Schema} {`)
-    for (const [name, types] of entries(config.schema.kindMap)) {
-      if (name === `GraphQLScalarType`) continue
-      if (name === `GraphQLScalarTypeCustom`) continue
-      if (name === `GraphQLScalarTypeStandard`) continue
-
-      const namespaceName = name === `GraphQLRootType` ? `Root` : namespaceNames[name]
+    for (const [name, types] of kinds) {
       code()
-      code(title1(namespaceName))
+      code(title1(name))
       code()
       code(
         types.length === 0
@@ -57,23 +56,21 @@ export const SchemaGenerator = createCodeGenerator(
       Subscription: Grafaid.Schema.KindMap.hasSubscription(config.schema.kindMap),
     }
 
-    const root = config.schema.kindMap.GraphQLRootType.map(_ => [_.name, `${identifiers.Schema}.${_.name}`] as const)
+    const root = config.schema.kindMap.Root.map(_ => [_.name, `${identifiers.Schema}.${_.name}`] as const)
 
-    const objects = config.schema.kindMap.GraphQLObjectType.map(_ =>
-      [_.name, `${identifiers.Schema}.${_.name}`] as const
-    )
-    const unions = config.schema.kindMap.GraphQLUnionType.map(_ => [_.name, `${identifiers.Schema}.${_.name}`] as const)
-    const interfaces = config.schema.kindMap.GraphQLInterfaceType.map(
+    const objects = config.schema.kindMap.OutputObject.map(_ => [_.name, `${identifiers.Schema}.${_.name}`] as const)
+    const unions = config.schema.kindMap.Union.map(_ => [_.name, `${identifiers.Schema}.${_.name}`] as const)
+    const interfaces = config.schema.kindMap.Interface.map(
       _ => [_.name, `${identifiers.Schema}.${_.name}`] as const,
     )
-    const enums = config.schema.kindMap.GraphQLEnumType.map(
+    const enums = config.schema.kindMap.Enum.map(
       _ => [_.name, `${identifiers.Schema}.${_.name}`] as const,
     )
 
     const schema: Code.TermObject = {
       name: `Data.Name`,
-      RootTypesPresent: `[${config.schema.kindMap.GraphQLRootType.map((_) => Code.string(_.name)).join(`, `)}]`,
-      RootUnion: config.schema.kindMap.GraphQLRootType.map(_ => `${identifiers.Schema}.${_.name}`)
+      RootTypesPresent: `[${config.schema.kindMap.Root.map((_) => Code.string(_.name)).join(`, `)}]`,
+      RootUnion: config.schema.kindMap.Root.map(_ => `${identifiers.Schema}.${_.name}`)
         .join(`|`),
       Root: {
         Query: rootTypesPresence.Query ? `${identifiers.Schema}.Query` : null,
@@ -115,15 +112,6 @@ export const SchemaGenerator = createCodeGenerator(
     )
   },
 )
-
-const namespaceNames = {
-  GraphQLEnumType: `Enum`,
-  GraphQLInputObjectType: `InputObject`,
-  GraphQLInterfaceType: `Interface`,
-  GraphQLObjectType: `Object`,
-  GraphQLScalarType: `Scalar`,
-  GraphQLUnionType: `Union`,
-} satisfies Record<Grafaid.Schema.AnyNamedClassName, string>
 
 type AnyGraphQLFieldsType =
   | Grafaid.Schema.ObjectType
@@ -292,11 +280,11 @@ const renderInputFields = (config: Config, node: AnyGraphQLFieldsType): string =
 const renderOutputField = (config: Config, field: Grafaid.Schema.InputOrOutputField): string => {
   const type = buildType(config, field.type)
 
-  const args = Grafaid.Schema.isGraphQLOutputField(field) && field.args.length > 0
+  const args = Grafaid.Schema.isOutputField(field) && field.args.length > 0
     ? renderArgs(config, field.args)
     : null
 
-  return `$.Field<'${field.name}', ${type}${args ? `, ${args}` : `, null`}>`
+  return `$.OutputField<'${field.name}', ${type}${args ? `, ${args}` : `, null`}>`
 }
 
 const renderInputField = (config: Config, field: Grafaid.Schema.InputOrOutputField): string => {

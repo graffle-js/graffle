@@ -29,7 +29,7 @@ export interface $Document<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap 
 //
 //
 // ==================================================================================================
-//                                      GraphQLObjectType Types
+//                                                Root
 // ==================================================================================================
 //
 //
@@ -43,7 +43,7 @@ export interface $Document<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap 
 //
 //
 // GRAPHQL SELECTION SET
-// OBJECT
+// ROOT
 // --------------------------------------------------------------------------------------------------
 //                                               Query
 // --------------------------------------------------------------------------------------------------
@@ -54,11 +54,11 @@ export interface $Document<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap 
 
 export interface Query<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
   /**
-   * Select the `id` field on the `Query` object. Its type is `ID` (a `Scalar`).
+   * Select the `id` field on the `Query` object. Its type is ScalarStandard.
    */
   id?: Query.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.id<$Scalars>>
   /**
-   * Select the `idNonNull` field on the `Query` object. Its type is `ID` (a `Scalar`).
+   * Select the `idNonNull` field on the `Query` object. Its type is ScalarStandard.
    */
   idNonNull?: Query.idNonNull$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.idNonNull<$Scalars>>
 

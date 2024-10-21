@@ -30,7 +30,7 @@ export interface $Document<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap 
 //
 //
 // ==================================================================================================
-//                                      GraphQLObjectType Types
+//                                                Root
 // ==================================================================================================
 //
 //
@@ -44,7 +44,7 @@ export interface $Document<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap 
 //
 //
 // GRAPHQL SELECTION SET
-// OBJECT
+// ROOT
 // --------------------------------------------------------------------------------------------------
 //                                              Mutation
 // --------------------------------------------------------------------------------------------------
@@ -55,7 +55,7 @@ export interface $Document<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap 
 
 export interface Mutation<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
   /**
-   * Select the `addPokemon` field on the `Mutation` object. Its type is Object.
+   * Select the `addPokemon` field on the `Mutation` object. Its type is OutputObject.
    */
   addPokemon?: Mutation.addPokemon<$Scalars> | $Select.SelectAlias.SelectAlias<Mutation.addPokemon<$Scalars>>
 
@@ -124,7 +124,7 @@ export namespace Mutation {
 //
 //
 // GRAPHQL SELECTION SET
-// OBJECT
+// ROOT
 // --------------------------------------------------------------------------------------------------
 //                                               Query
 // --------------------------------------------------------------------------------------------------
@@ -143,23 +143,23 @@ export interface Query<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}
    */
   beings?: Query.beings$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.beings<$Scalars>>
   /**
-   * Select the `pokemon` field on the `Query` object. Its type is Object.
+   * Select the `pokemon` field on the `Query` object. Its type is OutputObject.
    */
   pokemon?: Query.pokemon$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.pokemon<$Scalars>>
   /**
-   * Select the `pokemonByName` field on the `Query` object. Its type is Object.
+   * Select the `pokemonByName` field on the `Query` object. Its type is OutputObject.
    */
   pokemonByName?: Query.pokemonByName<$Scalars> | $Select.SelectAlias.SelectAlias<Query.pokemonByName<$Scalars>>
   /**
-   * Select the `pokemons` field on the `Query` object. Its type is Object.
+   * Select the `pokemons` field on the `Query` object. Its type is OutputObject.
    */
   pokemons?: Query.pokemons$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.pokemons<$Scalars>>
   /**
-   * Select the `trainerByName` field on the `Query` object. Its type is Object.
+   * Select the `trainerByName` field on the `Query` object. Its type is OutputObject.
    */
   trainerByName?: Query.trainerByName<$Scalars> | $Select.SelectAlias.SelectAlias<Query.trainerByName<$Scalars>>
   /**
-   * Select the `trainers` field on the `Query` object. Its type is Object.
+   * Select the `trainers` field on the `Query` object. Its type is OutputObject.
    */
   trainers?: Query.trainers$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.trainers<$Scalars>>
 
@@ -362,7 +362,7 @@ export namespace Query {
 //
 //
 // ==================================================================================================
-//                                       GraphQLEnumType Types
+//                                                Enum
 // ==================================================================================================
 //
 //
@@ -397,7 +397,7 @@ export type TrainerClass =
 //
 //
 // ==================================================================================================
-//                                    GraphQLInputObjectType Types
+//                                            InputObject
 // ==================================================================================================
 //
 //
@@ -428,102 +428,7 @@ export interface StringFilter<$Scalars extends $$Utilities.Schema.Scalar.ScalarM
 //
 //
 // ==================================================================================================
-//                                     GraphQLInterfaceType Types
-// ==================================================================================================
-//
-//
-//
-//
-//
-//
-
-// Interface Type: Being
-// --------------------------------------------------------------------------------------------------
-
-export interface Being<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
-  id?: Being.id<$Scalars>
-  name?: Being.name<$Scalars>
-  ___on_Patron?: Patron<$Scalars>
-  ___on_Pokemon?: Pokemon<$Scalars>
-  ___on_Trainer?: Trainer<$Scalars>
-
-  /**
-   * Inline fragments for field groups.
-   *
-   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
-   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
-   *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
-   */
-  ___?:
-    | Being$FragmentInline<$Scalars>
-    | Being$FragmentInline<$Scalars>[]
-
-  /**
-   * A meta field. Is the name of the type being selected. Since this is a interface type and thus polymorphic,
-   * the name is one of the implementor type names, whichever is ultimately returned at runtime.
-   *
-   * @see https://graphql.org/learn/queries/#meta-fields
-   */
-  __typename?:
-    | $Select.Indicator.NoArgsIndicator$Expanded
-    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
-}
-
-export interface Being$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-  extends Being<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
-{}
-
-export namespace Being {
-  export type id<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
-    | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
-
-  export interface id$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
-
-  // --- expanded ---
-
-  /**
-   * This is the "expanded" version of the `id` type. It is identical except for the fact
-   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
-   * In some cases, this is a preferable DX, making the types easier to read for users.
-   */
-  export type id$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
-  >
-
-  export type name<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
-    | $Select.Indicator.NoArgsIndicator
-    | name$SelectionSet<$Scalars>
-
-  export interface name$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
-
-  // --- expanded ---
-
-  /**
-   * This is the "expanded" version of the `name` type. It is identical except for the fact
-   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
-   * In some cases, this is a preferable DX, making the types easier to read for users.
-   */
-  export type name$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    | $Select.Indicator.NoArgsIndicator
-    | name$SelectionSet<$Scalars>
-  >
-}
-
-//
-//
-//
-//
-//
-//
-// ==================================================================================================
-//                                      GraphQLObjectType Types
+//                                            OutputObject
 // ==================================================================================================
 //
 //
@@ -537,7 +442,7 @@ export namespace Being {
 //
 //
 // GRAPHQL SELECTION SET
-// OBJECT
+// OUTPUTOBJECT
 // --------------------------------------------------------------------------------------------------
 //                                            BattleRoyale
 // --------------------------------------------------------------------------------------------------
@@ -550,21 +455,21 @@ export interface BattleRoyale<$Scalars extends $$Utilities.Schema.Scalar.ScalarM
   extends $Select.Bases.ObjectLike
 {
   /**
-   * Select the `combatants` field on the `BattleRoyale` object. Its type is Object.
+   * Select the `combatants` field on the `BattleRoyale` object. Its type is OutputObject.
    */
   combatants?:
     | BattleRoyale.combatants$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<BattleRoyale.combatants<$Scalars>>
   /**
-   * Select the `date` field on the `BattleRoyale` object. Its type is `Float` (a `Scalar`).
+   * Select the `date` field on the `BattleRoyale` object. Its type is ScalarStandard.
    */
   date?: BattleRoyale.date$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<BattleRoyale.date<$Scalars>>
   /**
-   * Select the `id` field on the `BattleRoyale` object. Its type is `ID` (a `Scalar`).
+   * Select the `id` field on the `BattleRoyale` object. Its type is ScalarStandard.
    */
   id?: BattleRoyale.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<BattleRoyale.id<$Scalars>>
   /**
-   * Select the `winner` field on the `BattleRoyale` object. Its type is Object.
+   * Select the `winner` field on the `BattleRoyale` object. Its type is OutputObject.
    */
   winner?: BattleRoyale.winner$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<BattleRoyale.winner<$Scalars>>
 
@@ -683,7 +588,7 @@ export namespace BattleRoyale {
 //
 //
 // GRAPHQL SELECTION SET
-// OBJECT
+// OUTPUTOBJECT
 // --------------------------------------------------------------------------------------------------
 //                                           BattleTrainer
 // --------------------------------------------------------------------------------------------------
@@ -696,27 +601,27 @@ export interface BattleTrainer<$Scalars extends $$Utilities.Schema.Scalar.Scalar
   extends $Select.Bases.ObjectLike
 {
   /**
-   * Select the `combatant1` field on the `BattleTrainer` object. Its type is Object.
+   * Select the `combatant1` field on the `BattleTrainer` object. Its type is OutputObject.
    */
   combatant1?:
     | BattleTrainer.combatant1$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<BattleTrainer.combatant1<$Scalars>>
   /**
-   * Select the `combatant2` field on the `BattleTrainer` object. Its type is Object.
+   * Select the `combatant2` field on the `BattleTrainer` object. Its type is OutputObject.
    */
   combatant2?:
     | BattleTrainer.combatant2$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<BattleTrainer.combatant2<$Scalars>>
   /**
-   * Select the `date` field on the `BattleTrainer` object. Its type is `Float` (a `Scalar`).
+   * Select the `date` field on the `BattleTrainer` object. Its type is ScalarStandard.
    */
   date?: BattleTrainer.date$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<BattleTrainer.date<$Scalars>>
   /**
-   * Select the `id` field on the `BattleTrainer` object. Its type is `ID` (a `Scalar`).
+   * Select the `id` field on the `BattleTrainer` object. Its type is ScalarStandard.
    */
   id?: BattleTrainer.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<BattleTrainer.id<$Scalars>>
   /**
-   * Select the `winner` field on the `BattleTrainer` object. Its type is Object.
+   * Select the `winner` field on the `BattleTrainer` object. Its type is OutputObject.
    */
   winner?: BattleTrainer.winner$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<BattleTrainer.winner<$Scalars>>
 
@@ -854,7 +759,7 @@ export namespace BattleTrainer {
 //
 //
 // GRAPHQL SELECTION SET
-// OBJECT
+// OUTPUTOBJECT
 // --------------------------------------------------------------------------------------------------
 //                                             BattleWild
 // --------------------------------------------------------------------------------------------------
@@ -867,15 +772,15 @@ export interface BattleWild<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap
   extends $Select.Bases.ObjectLike
 {
   /**
-   * Select the `date` field on the `BattleWild` object. Its type is `Float` (a `Scalar`).
+   * Select the `date` field on the `BattleWild` object. Its type is ScalarStandard.
    */
   date?: BattleWild.date$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<BattleWild.date<$Scalars>>
   /**
-   * Select the `id` field on the `BattleWild` object. Its type is `ID` (a `Scalar`).
+   * Select the `id` field on the `BattleWild` object. Its type is ScalarStandard.
    */
   id?: BattleWild.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<BattleWild.id<$Scalars>>
   /**
-   * Select the `pokemon` field on the `BattleWild` object. Its type is Object.
+   * Select the `pokemon` field on the `BattleWild` object. Its type is OutputObject.
    */
   pokemon?: BattleWild.pokemon$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<BattleWild.pokemon<$Scalars>>
   /**
@@ -883,11 +788,11 @@ export interface BattleWild<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap
    */
   result?: BattleWild.result$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<BattleWild.result<$Scalars>>
   /**
-   * Select the `trainer` field on the `BattleWild` object. Its type is Object.
+   * Select the `trainer` field on the `BattleWild` object. Its type is OutputObject.
    */
   trainer?: BattleWild.trainer$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<BattleWild.trainer<$Scalars>>
   /**
-   * Select the `wildPokemons` field on the `BattleWild` object. Its type is Object.
+   * Select the `wildPokemons` field on the `BattleWild` object. Its type is OutputObject.
    */
   wildPokemons?:
     | BattleWild.wildPokemons$Expanded<$Scalars>
@@ -1051,7 +956,7 @@ export namespace BattleWild {
 //
 //
 // GRAPHQL SELECTION SET
-// OBJECT
+// OUTPUTOBJECT
 // --------------------------------------------------------------------------------------------------
 //                                       CombatantMultiPokemon
 // --------------------------------------------------------------------------------------------------
@@ -1064,13 +969,13 @@ export interface CombatantMultiPokemon<$Scalars extends $$Utilities.Schema.Scala
   extends $Select.Bases.ObjectLike
 {
   /**
-   * Select the `pokemons` field on the `CombatantMultiPokemon` object. Its type is Object.
+   * Select the `pokemons` field on the `CombatantMultiPokemon` object. Its type is OutputObject.
    */
   pokemons?:
     | CombatantMultiPokemon.pokemons$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<CombatantMultiPokemon.pokemons<$Scalars>>
   /**
-   * Select the `trainer` field on the `CombatantMultiPokemon` object. Its type is Object.
+   * Select the `trainer` field on the `CombatantMultiPokemon` object. Its type is OutputObject.
    */
   trainer?:
     | CombatantMultiPokemon.trainer$Expanded<$Scalars>
@@ -1147,7 +1052,7 @@ export namespace CombatantMultiPokemon {
 //
 //
 // GRAPHQL SELECTION SET
-// OBJECT
+// OUTPUTOBJECT
 // --------------------------------------------------------------------------------------------------
 //                                       CombatantSinglePokemon
 // --------------------------------------------------------------------------------------------------
@@ -1160,13 +1065,13 @@ export interface CombatantSinglePokemon<$Scalars extends $$Utilities.Schema.Scal
   extends $Select.Bases.ObjectLike
 {
   /**
-   * Select the `pokemon` field on the `CombatantSinglePokemon` object. Its type is Object.
+   * Select the `pokemon` field on the `CombatantSinglePokemon` object. Its type is OutputObject.
    */
   pokemon?:
     | CombatantSinglePokemon.pokemon$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<CombatantSinglePokemon.pokemon<$Scalars>>
   /**
-   * Select the `trainer` field on the `CombatantSinglePokemon` object. Its type is Object.
+   * Select the `trainer` field on the `CombatantSinglePokemon` object. Its type is OutputObject.
    */
   trainer?:
     | CombatantSinglePokemon.trainer$Expanded<$Scalars>
@@ -1243,7 +1148,7 @@ export namespace CombatantSinglePokemon {
 //
 //
 // GRAPHQL SELECTION SET
-// OBJECT
+// OUTPUTOBJECT
 // --------------------------------------------------------------------------------------------------
 //                                               Patron
 // --------------------------------------------------------------------------------------------------
@@ -1254,15 +1159,15 @@ export namespace CombatantSinglePokemon {
 
 export interface Patron<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
   /**
-   * Select the `id` field on the `Patron` object. Its type is `ID` (a `Scalar`).
+   * Select the `id` field on the `Patron` object. Its type is ScalarStandard.
    */
   id?: Patron.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Patron.id<$Scalars>>
   /**
-   * Select the `money` field on the `Patron` object. Its type is `Int` (a `Scalar`).
+   * Select the `money` field on the `Patron` object. Its type is ScalarStandard.
    */
   money?: Patron.money$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Patron.money<$Scalars>>
   /**
-   * Select the `name` field on the `Patron` object. Its type is `String` (a `Scalar`).
+   * Select the `name` field on the `Patron` object. Its type is ScalarStandard.
    */
   name?: Patron.name$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Patron.name<$Scalars>>
 
@@ -1365,7 +1270,7 @@ export namespace Patron {
 //
 //
 // GRAPHQL SELECTION SET
-// OBJECT
+// OUTPUTOBJECT
 // --------------------------------------------------------------------------------------------------
 //                                              Pokemon
 // --------------------------------------------------------------------------------------------------
@@ -1376,31 +1281,31 @@ export namespace Patron {
 
 export interface Pokemon<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
   /**
-   * Select the `attack` field on the `Pokemon` object. Its type is `Int` (a `Scalar`).
+   * Select the `attack` field on the `Pokemon` object. Its type is ScalarStandard.
    */
   attack?: Pokemon.attack$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Pokemon.attack<$Scalars>>
   /**
-   * Select the `birthday` field on the `Pokemon` object. Its type is `Int` (a `Scalar`).
+   * Select the `birthday` field on the `Pokemon` object. Its type is ScalarStandard.
    */
   birthday?: Pokemon.birthday$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Pokemon.birthday<$Scalars>>
   /**
-   * Select the `defense` field on the `Pokemon` object. Its type is `Int` (a `Scalar`).
+   * Select the `defense` field on the `Pokemon` object. Its type is ScalarStandard.
    */
   defense?: Pokemon.defense$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Pokemon.defense<$Scalars>>
   /**
-   * Select the `hp` field on the `Pokemon` object. Its type is `Int` (a `Scalar`).
+   * Select the `hp` field on the `Pokemon` object. Its type is ScalarStandard.
    */
   hp?: Pokemon.hp$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Pokemon.hp<$Scalars>>
   /**
-   * Select the `id` field on the `Pokemon` object. Its type is `ID` (a `Scalar`).
+   * Select the `id` field on the `Pokemon` object. Its type is ScalarStandard.
    */
   id?: Pokemon.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Pokemon.id<$Scalars>>
   /**
-   * Select the `name` field on the `Pokemon` object. Its type is `String` (a `Scalar`).
+   * Select the `name` field on the `Pokemon` object. Its type is ScalarStandard.
    */
   name?: Pokemon.name$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Pokemon.name<$Scalars>>
   /**
-   * Select the `trainer` field on the `Pokemon` object. Its type is Object.
+   * Select the `trainer` field on the `Pokemon` object. Its type is OutputObject.
    */
   trainer?: Pokemon.trainer$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Pokemon.trainer<$Scalars>>
   /**
@@ -1614,7 +1519,7 @@ export namespace Pokemon {
 //
 //
 // GRAPHQL SELECTION SET
-// OBJECT
+// OUTPUTOBJECT
 // --------------------------------------------------------------------------------------------------
 //                                              Trainer
 // --------------------------------------------------------------------------------------------------
@@ -1629,19 +1534,19 @@ export interface Trainer<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = 
    */
   class?: Trainer.$class$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Trainer.$class<$Scalars>>
   /**
-   * Select the `fans` field on the `Trainer` object. Its type is Object.
+   * Select the `fans` field on the `Trainer` object. Its type is OutputObject.
    */
   fans?: Trainer.fans$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Trainer.fans<$Scalars>>
   /**
-   * Select the `id` field on the `Trainer` object. Its type is `ID` (a `Scalar`).
+   * Select the `id` field on the `Trainer` object. Its type is ScalarStandard.
    */
   id?: Trainer.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Trainer.id<$Scalars>>
   /**
-   * Select the `name` field on the `Trainer` object. Its type is `String` (a `Scalar`).
+   * Select the `name` field on the `Trainer` object. Its type is ScalarStandard.
    */
   name?: Trainer.name$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Trainer.name<$Scalars>>
   /**
-   * Select the `pokemon` field on the `Trainer` object. Its type is Object.
+   * Select the `pokemon` field on the `Trainer` object. Its type is OutputObject.
    */
   pokemon?: Trainer.pokemon$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Trainer.pokemon<$Scalars>>
 
@@ -1784,7 +1689,7 @@ export namespace Trainer {
 //
 //
 // ==================================================================================================
-//                                       GraphQLUnionType Types
+//                                               Union
 // ==================================================================================================
 //
 //
@@ -1824,6 +1729,101 @@ export interface Battle$FragmentInline<$Scalars extends $$Utilities.Schema.Scala
   extends Battle<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
 {}
 
+//
+//
+//
+//
+//
+//
+// ==================================================================================================
+//                                             Interface
+// ==================================================================================================
+//
+//
+//
+//
+//
+//
+
+// Interface Type: Being
+// --------------------------------------------------------------------------------------------------
+
+export interface Being<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
+  id?: Being.id<$Scalars>
+  name?: Being.name<$Scalars>
+  ___on_Patron?: Patron<$Scalars>
+  ___on_Pokemon?: Pokemon<$Scalars>
+  ___on_Trainer?: Trainer<$Scalars>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | Being$FragmentInline<$Scalars>
+    | Being$FragmentInline<$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected. Since this is a interface type and thus polymorphic,
+   * the name is one of the implementor type names, whichever is ultimately returned at runtime.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+
+export interface Being$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+  extends Being<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
+{}
+
+export namespace Being {
+  export type id<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | id$SelectionSet<$Scalars>
+
+  export interface id$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `id` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type id$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | id$SelectionSet<$Scalars>
+  >
+
+  export type name<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | name$SelectionSet<$Scalars>
+
+  export interface name$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `name` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type name$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | name$SelectionSet<$Scalars>
+  >
+}
+
 /**
  * [1] These definitions serve to allow field selection interfaces to extend their respective object type without
  *     name clashing between the field name and the object name.
@@ -1840,7 +1840,6 @@ export namespace $NamedTypes {
   export type $DateFilter<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = DateFilter<$Scalars>
   export type $PokemonFilter<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = PokemonFilter<$Scalars>
   export type $StringFilter<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = StringFilter<$Scalars>
-  export type $Being<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = Being<$Scalars>
   export type $BattleRoyale<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = BattleRoyale<$Scalars>
   export type $BattleTrainer<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = BattleTrainer<$Scalars>
   export type $BattleWild<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = BattleWild<$Scalars>
@@ -1853,4 +1852,5 @@ export namespace $NamedTypes {
   export type $Pokemon<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = Pokemon<$Scalars>
   export type $Trainer<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = Trainer<$Scalars>
   export type $Battle<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = Battle<$Scalars>
+  export type $Being<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = Being<$Scalars>
 }

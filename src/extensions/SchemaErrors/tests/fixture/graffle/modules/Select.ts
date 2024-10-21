@@ -46,8 +46,8 @@ export namespace Select {
     'Mutation'
   >
   export type Query<$SelectionSet extends SelectionSets.Query> = InferResult.Root<$SelectionSet, Schema, 'Query'>
-  // Object Types
-  // ------------
+  // OutputObject Types
+  // ------------------
   export type Bar<$SelectionSet extends SelectionSets.Bar> = InferResult.Object<
     $SelectionSet,
     Schema,

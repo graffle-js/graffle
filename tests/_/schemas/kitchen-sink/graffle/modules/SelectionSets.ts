@@ -31,7 +31,7 @@ export interface $Document<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap 
 //
 //
 // ==================================================================================================
-//                                      GraphQLObjectType Types
+//                                                Root
 // ==================================================================================================
 //
 //
@@ -45,7 +45,7 @@ export interface $Document<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap 
 //
 //
 // GRAPHQL SELECTION SET
-// OBJECT
+// ROOT
 // --------------------------------------------------------------------------------------------------
 //                                              Mutation
 // --------------------------------------------------------------------------------------------------
@@ -56,11 +56,11 @@ export interface $Document<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap 
 
 export interface Mutation<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
   /**
-   * Select the `id` field on the `Mutation` object. Its type is `ID` (a `Scalar`).
+   * Select the `id` field on the `Mutation` object. Its type is ScalarStandard.
    */
   id?: Mutation.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Mutation.id<$Scalars>>
   /**
-   * Select the `idNonNull` field on the `Mutation` object. Its type is `ID` (a `Scalar`).
+   * Select the `idNonNull` field on the `Mutation` object. Its type is ScalarStandard.
    */
   idNonNull?: Mutation.idNonNull$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Mutation.idNonNull<$Scalars>>
 
@@ -141,7 +141,7 @@ export namespace Mutation {
 //
 //
 // GRAPHQL SELECTION SET
-// OBJECT
+// ROOT
 // --------------------------------------------------------------------------------------------------
 //                                               Query
 // --------------------------------------------------------------------------------------------------
@@ -152,13 +152,13 @@ export namespace Mutation {
 
 export interface Query<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
   /**
-   * Select the `InputObjectNested` field on the `Query` object. Its type is `ID` (a `Scalar`).
+   * Select the `InputObjectNested` field on the `Query` object. Its type is ScalarStandard.
    */
   InputObjectNested?:
     | Query.InputObjectNested$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.InputObjectNested<$Scalars>>
   /**
-   * Select the `InputObjectNestedNonNull` field on the `Query` object. Its type is `ID` (a `Scalar`).
+   * Select the `InputObjectNestedNonNull` field on the `Query` object. Its type is ScalarStandard.
    */
   InputObjectNestedNonNull?:
     | Query.InputObjectNestedNonNull<$Scalars>
@@ -168,41 +168,41 @@ export interface Query<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}
    */
   abcEnum?: Query.abcEnum$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.abcEnum<$Scalars>>
   /**
-   * Select the `argInputObjectCircular` field on the `Query` object. Its type is `String` (a `Scalar`).
+   * Select the `argInputObjectCircular` field on the `Query` object. Its type is ScalarStandard.
    */
   argInputObjectCircular?:
     | Query.argInputObjectCircular$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.argInputObjectCircular<$Scalars>>
   /**
-   * Select the `date` field on the `Query` object. Its type is `Date` (a `Scalar`).
+   * Select the `date` field on the `Query` object. Its type is ScalarCustom.
    */
   date?: Query.date$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.date<$Scalars>>
   /**
-   * Select the `dateArg` field on the `Query` object. Its type is `Date` (a `Scalar`).
+   * Select the `dateArg` field on the `Query` object. Its type is ScalarCustom.
    */
   dateArg?: Query.dateArg$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.dateArg<$Scalars>>
   /**
-   * Select the `dateArgInputObject` field on the `Query` object. Its type is `Date` (a `Scalar`).
+   * Select the `dateArgInputObject` field on the `Query` object. Its type is ScalarCustom.
    */
   dateArgInputObject?:
     | Query.dateArgInputObject$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.dateArgInputObject<$Scalars>>
   /**
-   * Select the `dateArgList` field on the `Query` object. Its type is `Date` (a `Scalar`).
+   * Select the `dateArgList` field on the `Query` object. Its type is ScalarCustom.
    */
   dateArgList?: Query.dateArgList$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.dateArgList<$Scalars>>
   /**
-   * Select the `dateArgNonNull` field on the `Query` object. Its type is `Date` (a `Scalar`).
+   * Select the `dateArgNonNull` field on the `Query` object. Its type is ScalarCustom.
    */
   dateArgNonNull?: Query.dateArgNonNull<$Scalars> | $Select.SelectAlias.SelectAlias<Query.dateArgNonNull<$Scalars>>
   /**
-   * Select the `dateArgNonNullList` field on the `Query` object. Its type is `Date` (a `Scalar`).
+   * Select the `dateArgNonNullList` field on the `Query` object. Its type is ScalarCustom.
    */
   dateArgNonNullList?:
     | Query.dateArgNonNullList<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.dateArgNonNullList<$Scalars>>
   /**
-   * Select the `dateArgNonNullListNonNull` field on the `Query` object. Its type is `Date` (a `Scalar`).
+   * Select the `dateArgNonNullListNonNull` field on the `Query` object. Its type is ScalarCustom.
    */
   dateArgNonNullListNonNull?:
     | Query.dateArgNonNullListNonNull<$Scalars>
@@ -214,25 +214,25 @@ export interface Query<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}
     | Query.dateInterface1$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.dateInterface1<$Scalars>>
   /**
-   * Select the `dateList` field on the `Query` object. Its type is `Date` (a `Scalar`).
+   * Select the `dateList` field on the `Query` object. Its type is ScalarCustom.
    */
   dateList?: Query.dateList$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.dateList<$Scalars>>
   /**
-   * Select the `dateListList` field on the `Query` object. Its type is `Date` (a `Scalar`).
+   * Select the `dateListList` field on the `Query` object. Its type is ScalarCustom.
    */
   dateListList?: Query.dateListList$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.dateListList<$Scalars>>
   /**
-   * Select the `dateListNonNull` field on the `Query` object. Its type is `Date` (a `Scalar`).
+   * Select the `dateListNonNull` field on the `Query` object. Its type is ScalarCustom.
    */
   dateListNonNull?:
     | Query.dateListNonNull$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.dateListNonNull<$Scalars>>
   /**
-   * Select the `dateNonNull` field on the `Query` object. Its type is `Date` (a `Scalar`).
+   * Select the `dateNonNull` field on the `Query` object. Its type is ScalarCustom.
    */
   dateNonNull?: Query.dateNonNull$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.dateNonNull<$Scalars>>
   /**
-   * Select the `dateObject1` field on the `Query` object. Its type is Object.
+   * Select the `dateObject1` field on the `Query` object. Its type is OutputObject.
    */
   dateObject1?: Query.dateObject1$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.dateObject1<$Scalars>>
   /**
@@ -240,15 +240,15 @@ export interface Query<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}
    */
   dateUnion?: Query.dateUnion$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.dateUnion<$Scalars>>
   /**
-   * Select the `error` field on the `Query` object. Its type is `String` (a `Scalar`).
+   * Select the `error` field on the `Query` object. Its type is ScalarStandard.
    */
   error?: Query.error$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.error<$Scalars>>
   /**
-   * Select the `id` field on the `Query` object. Its type is `ID` (a `Scalar`).
+   * Select the `id` field on the `Query` object. Its type is ScalarStandard.
    */
   id?: Query.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.id<$Scalars>>
   /**
-   * Select the `idNonNull` field on the `Query` object. Its type is `ID` (a `Scalar`).
+   * Select the `idNonNull` field on the `Query` object. Its type is ScalarStandard.
    */
   idNonNull?: Query.idNonNull$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.idNonNull<$Scalars>>
   /**
@@ -268,21 +268,21 @@ export interface Query<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}
     | Query.interfaceWithArgs<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.interfaceWithArgs<$Scalars>>
   /**
-   * Select the `listInt` field on the `Query` object. Its type is `Int` (a `Scalar`).
+   * Select the `listInt` field on the `Query` object. Its type is ScalarStandard.
    */
   listInt?: Query.listInt$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.listInt<$Scalars>>
   /**
-   * Select the `listIntNonNull` field on the `Query` object. Its type is `Int` (a `Scalar`).
+   * Select the `listIntNonNull` field on the `Query` object. Its type is ScalarStandard.
    */
   listIntNonNull?:
     | Query.listIntNonNull$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.listIntNonNull<$Scalars>>
   /**
-   * Select the `listListInt` field on the `Query` object. Its type is `Int` (a `Scalar`).
+   * Select the `listListInt` field on the `Query` object. Its type is ScalarStandard.
    */
   listListInt?: Query.listListInt$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.listListInt<$Scalars>>
   /**
-   * Select the `listListIntNonNull` field on the `Query` object. Its type is `Int` (a `Scalar`).
+   * Select the `listListIntNonNull` field on the `Query` object. Its type is ScalarStandard.
    */
   listListIntNonNull?:
     | Query.listListIntNonNull$Expanded<$Scalars>
@@ -294,31 +294,31 @@ export interface Query<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}
     | Query.lowerCaseUnion$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.lowerCaseUnion<$Scalars>>
   /**
-   * Select the `object` field on the `Query` object. Its type is Object.
+   * Select the `object` field on the `Query` object. Its type is OutputObject.
    */
   object?: Query.$object$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.$object<$Scalars>>
   /**
-   * Select the `objectList` field on the `Query` object. Its type is Object.
+   * Select the `objectList` field on the `Query` object. Its type is OutputObject.
    */
   objectList?: Query.objectList$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.objectList<$Scalars>>
   /**
-   * Select the `objectListNonNull` field on the `Query` object. Its type is Object.
+   * Select the `objectListNonNull` field on the `Query` object. Its type is OutputObject.
    */
   objectListNonNull?:
     | Query.objectListNonNull$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.objectListNonNull<$Scalars>>
   /**
-   * Select the `objectNested` field on the `Query` object. Its type is Object.
+   * Select the `objectNested` field on the `Query` object. Its type is OutputObject.
    */
   objectNested?: Query.objectNested$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.objectNested<$Scalars>>
   /**
-   * Select the `objectNonNull` field on the `Query` object. Its type is Object.
+   * Select the `objectNonNull` field on the `Query` object. Its type is OutputObject.
    */
   objectNonNull?:
     | Query.objectNonNull$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.objectNonNull<$Scalars>>
   /**
-   * Select the `objectWithArgs` field on the `Query` object. Its type is Object.
+   * Select the `objectWithArgs` field on the `Query` object. Its type is OutputObject.
    */
   objectWithArgs?:
     | Query.objectWithArgs$Expanded<$Scalars>
@@ -334,47 +334,47 @@ export interface Query<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}
     | Query.resultNonNull$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.resultNonNull<$Scalars>>
   /**
-   * Select the `string` field on the `Query` object. Its type is `String` (a `Scalar`).
+   * Select the `string` field on the `Query` object. Its type is ScalarStandard.
    */
   string?: Query.$string$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.$string<$Scalars>>
   /**
-   * Select the `stringWithArgEnum` field on the `Query` object. Its type is `String` (a `Scalar`).
+   * Select the `stringWithArgEnum` field on the `Query` object. Its type is ScalarStandard.
    */
   stringWithArgEnum?:
     | Query.stringWithArgEnum$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.stringWithArgEnum<$Scalars>>
   /**
-   * Select the `stringWithArgInputObject` field on the `Query` object. Its type is `String` (a `Scalar`).
+   * Select the `stringWithArgInputObject` field on the `Query` object. Its type is ScalarStandard.
    */
   stringWithArgInputObject?:
     | Query.stringWithArgInputObject$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.stringWithArgInputObject<$Scalars>>
   /**
-   * Select the `stringWithArgInputObjectRequired` field on the `Query` object. Its type is `String` (a `Scalar`).
+   * Select the `stringWithArgInputObjectRequired` field on the `Query` object. Its type is ScalarStandard.
    */
   stringWithArgInputObjectRequired?:
     | Query.stringWithArgInputObjectRequired<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.stringWithArgInputObjectRequired<$Scalars>>
   /**
-   * Select the `stringWithArgs` field on the `Query` object. Its type is `String` (a `Scalar`).
+   * Select the `stringWithArgs` field on the `Query` object. Its type is ScalarStandard.
    */
   stringWithArgs?:
     | Query.stringWithArgs$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.stringWithArgs<$Scalars>>
   /**
-   * Select the `stringWithListArg` field on the `Query` object. Its type is `String` (a `Scalar`).
+   * Select the `stringWithListArg` field on the `Query` object. Its type is ScalarStandard.
    */
   stringWithListArg?:
     | Query.stringWithListArg$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.stringWithListArg<$Scalars>>
   /**
-   * Select the `stringWithListArgRequired` field on the `Query` object. Its type is `String` (a `Scalar`).
+   * Select the `stringWithListArgRequired` field on the `Query` object. Its type is ScalarStandard.
    */
   stringWithListArgRequired?:
     | Query.stringWithListArgRequired<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.stringWithListArgRequired<$Scalars>>
   /**
-   * Select the `stringWithRequiredArg` field on the `Query` object. Its type is `String` (a `Scalar`).
+   * Select the `stringWithRequiredArg` field on the `Query` object. Its type is ScalarStandard.
    */
   stringWithRequiredArg?:
     | Query.stringWithRequiredArg<$Scalars>
@@ -396,11 +396,11 @@ export interface Query<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}
     | Query.unionFooBarWithArgs$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.unionFooBarWithArgs<$Scalars>>
   /**
-   * Select the `unionObject` field on the `Query` object. Its type is Object.
+   * Select the `unionObject` field on the `Query` object. Its type is OutputObject.
    */
   unionObject?: Query.unionObject$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.unionObject<$Scalars>>
   /**
-   * Select the `unionObjectNonNull` field on the `Query` object. Its type is Object.
+   * Select the `unionObjectNonNull` field on the `Query` object. Its type is OutputObject.
    */
   unionObjectNonNull?:
     | Query.unionObjectNonNull$Expanded<$Scalars>
@@ -1748,7 +1748,7 @@ export namespace Query {
 //
 //
 // ==================================================================================================
-//                                       GraphQLEnumType Types
+//                                                Enum
 // ==================================================================================================
 //
 //
@@ -1776,7 +1776,7 @@ export type Case = 'ErrorOne' | 'ErrorTwo' | 'Object1'
 //
 //
 // ==================================================================================================
-//                                    GraphQLInputObjectType Types
+//                                            InputObject
 // ==================================================================================================
 //
 //
@@ -1824,7 +1824,1358 @@ export interface InputObjectNestedNonNull<$Scalars extends $$Utilities.Schema.Sc
 //
 //
 // ==================================================================================================
-//                                     GraphQLInterfaceType Types
+//                                            OutputObject
+// ==================================================================================================
+//
+//
+//
+//
+//
+//
+
+//
+//
+//
+//
+// GRAPHQL SELECTION SET
+// OUTPUTOBJECT
+// --------------------------------------------------------------------------------------------------
+//                                                Bar
+// --------------------------------------------------------------------------------------------------
+//
+//
+
+// ----------------------------------------| Entrypoint Interface |
+
+export interface Bar<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
+  /**
+   * Select the `int` field on the `Bar` object. Its type is ScalarStandard.
+   */
+  int?: Bar.int$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Bar.int<$Scalars>>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | Bar$FragmentInline<$Scalars>
+    | Bar$FragmentInline<$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+
+export interface Bar$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+  extends Bar<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
+{}
+
+// ----------------------------------------| Fields |
+
+export namespace Bar {
+  export type int<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | int$SelectionSet<$Scalars>
+
+  export interface int$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `int` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type int$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | int$SelectionSet<$Scalars>
+  >
+}
+
+//
+//
+//
+//
+// GRAPHQL SELECTION SET
+// OUTPUTOBJECT
+// --------------------------------------------------------------------------------------------------
+//                                            DateObject1
+// --------------------------------------------------------------------------------------------------
+//
+//
+
+// ----------------------------------------| Entrypoint Interface |
+
+export interface DateObject1<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+  extends $Select.Bases.ObjectLike
+{
+  /**
+   * Select the `date1` field on the `DateObject1` object. Its type is ScalarCustom.
+   */
+  date1?: DateObject1.date1$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<DateObject1.date1<$Scalars>>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | DateObject1$FragmentInline<$Scalars>
+    | DateObject1$FragmentInline<$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+
+export interface DateObject1$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+  extends DateObject1<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
+{}
+
+// ----------------------------------------| Fields |
+
+export namespace DateObject1 {
+  export type date1<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | date1$SelectionSet<$Scalars>
+
+  export interface date1$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `date1` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type date1$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | date1$SelectionSet<$Scalars>
+  >
+}
+
+//
+//
+//
+//
+// GRAPHQL SELECTION SET
+// OUTPUTOBJECT
+// --------------------------------------------------------------------------------------------------
+//                                            DateObject2
+// --------------------------------------------------------------------------------------------------
+//
+//
+
+// ----------------------------------------| Entrypoint Interface |
+
+export interface DateObject2<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+  extends $Select.Bases.ObjectLike
+{
+  /**
+   * Select the `date2` field on the `DateObject2` object. Its type is ScalarCustom.
+   */
+  date2?: DateObject2.date2$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<DateObject2.date2<$Scalars>>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | DateObject2$FragmentInline<$Scalars>
+    | DateObject2$FragmentInline<$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+
+export interface DateObject2$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+  extends DateObject2<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
+{}
+
+// ----------------------------------------| Fields |
+
+export namespace DateObject2 {
+  export type date2<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | date2$SelectionSet<$Scalars>
+
+  export interface date2$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `date2` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type date2$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | date2$SelectionSet<$Scalars>
+  >
+}
+
+//
+//
+//
+//
+// GRAPHQL SELECTION SET
+// OUTPUTOBJECT
+// --------------------------------------------------------------------------------------------------
+//                                              ErrorOne
+// --------------------------------------------------------------------------------------------------
+//
+//
+
+// ----------------------------------------| Entrypoint Interface |
+
+export interface ErrorOne<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
+  /**
+   * Select the `infoId` field on the `ErrorOne` object. Its type is ScalarStandard.
+   */
+  infoId?: ErrorOne.infoId$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<ErrorOne.infoId<$Scalars>>
+  /**
+   * Select the `message` field on the `ErrorOne` object. Its type is ScalarStandard.
+   */
+  message?: ErrorOne.message$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<ErrorOne.message<$Scalars>>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | ErrorOne$FragmentInline<$Scalars>
+    | ErrorOne$FragmentInline<$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+
+export interface ErrorOne$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+  extends ErrorOne<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
+{}
+
+// ----------------------------------------| Fields |
+
+export namespace ErrorOne {
+  export type infoId<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | infoId$SelectionSet<$Scalars>
+
+  export interface infoId$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `infoId` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type infoId$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | infoId$SelectionSet<$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type message<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | message$SelectionSet<$Scalars>
+
+  export interface message$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `message` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type message$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | message$SelectionSet<$Scalars>
+  >
+}
+
+//
+//
+//
+//
+// GRAPHQL SELECTION SET
+// OUTPUTOBJECT
+// --------------------------------------------------------------------------------------------------
+//                                              ErrorTwo
+// --------------------------------------------------------------------------------------------------
+//
+//
+
+// ----------------------------------------| Entrypoint Interface |
+
+export interface ErrorTwo<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
+  /**
+   * Select the `infoInt` field on the `ErrorTwo` object. Its type is ScalarStandard.
+   */
+  infoInt?: ErrorTwo.infoInt$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<ErrorTwo.infoInt<$Scalars>>
+  /**
+   * Select the `message` field on the `ErrorTwo` object. Its type is ScalarStandard.
+   */
+  message?: ErrorTwo.message$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<ErrorTwo.message<$Scalars>>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | ErrorTwo$FragmentInline<$Scalars>
+    | ErrorTwo$FragmentInline<$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+
+export interface ErrorTwo$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+  extends ErrorTwo<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
+{}
+
+// ----------------------------------------| Fields |
+
+export namespace ErrorTwo {
+  export type infoInt<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | infoInt$SelectionSet<$Scalars>
+
+  export interface infoInt$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `infoInt` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type infoInt$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | infoInt$SelectionSet<$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type message<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | message$SelectionSet<$Scalars>
+
+  export interface message$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `message` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type message$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | message$SelectionSet<$Scalars>
+  >
+}
+
+//
+//
+//
+//
+// GRAPHQL SELECTION SET
+// OUTPUTOBJECT
+// --------------------------------------------------------------------------------------------------
+//                                                Foo
+// --------------------------------------------------------------------------------------------------
+//
+//
+
+// ----------------------------------------| Entrypoint Interface |
+
+/**
+ * Object documentation.
+ */
+export interface Foo<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
+  /**
+   * Select the `id` field on the `Foo` object. Its type is ScalarStandard.
+   */
+  id?: Foo.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Foo.id<$Scalars>>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | Foo$FragmentInline<$Scalars>
+    | Foo$FragmentInline<$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+
+export interface Foo$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+  extends Foo<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
+{}
+
+// ----------------------------------------| Fields |
+
+export namespace Foo {
+  export type id<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | id$SelectionSet<$Scalars>
+
+  export interface id$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `id` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type id$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | id$SelectionSet<$Scalars>
+  >
+}
+
+//
+//
+//
+//
+// GRAPHQL SELECTION SET
+// OUTPUTOBJECT
+// --------------------------------------------------------------------------------------------------
+//                                              Object1
+// --------------------------------------------------------------------------------------------------
+//
+//
+
+// ----------------------------------------| Entrypoint Interface |
+
+export interface Object1<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
+  /**
+   * Select the `ABCEnum` field on the `Object1` object. Its type is Enum.
+   */
+  ABCEnum?: Object1.ABCEnum$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Object1.ABCEnum<$Scalars>>
+  /**
+   * Select the `boolean` field on the `Object1` object. Its type is ScalarStandard.
+   */
+  boolean?: Object1.$boolean$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Object1.$boolean<$Scalars>>
+  /**
+   * Select the `float` field on the `Object1` object. Its type is ScalarStandard.
+   */
+  float?: Object1.float$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Object1.float<$Scalars>>
+  /**
+   * Select the `id` field on the `Object1` object. Its type is ScalarStandard.
+   */
+  id?: Object1.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Object1.id<$Scalars>>
+  /**
+   * Select the `int` field on the `Object1` object. Its type is ScalarStandard.
+   */
+  int?: Object1.int$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Object1.int<$Scalars>>
+  /**
+   * Select the `string` field on the `Object1` object. Its type is ScalarStandard.
+   */
+  string?: Object1.$string$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Object1.$string<$Scalars>>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | Object1$FragmentInline<$Scalars>
+    | Object1$FragmentInline<$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+
+export interface Object1$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+  extends Object1<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
+{}
+
+// ----------------------------------------| Fields |
+
+export namespace Object1 {
+  export type ABCEnum<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | ABCEnum$SelectionSet<$Scalars>
+
+  export interface ABCEnum$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `ABCEnum` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type ABCEnum$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | ABCEnum$SelectionSet<$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type $boolean<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | $boolean$SelectionSet<$Scalars>
+
+  export interface $boolean$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `$boolean` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $boolean$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | $boolean$SelectionSet<$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type float<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | float$SelectionSet<$Scalars>
+
+  export interface float$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `float` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type float$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | float$SelectionSet<$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type id<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | id$SelectionSet<$Scalars>
+
+  export interface id$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `id` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type id$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | id$SelectionSet<$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type int<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | int$SelectionSet<$Scalars>
+
+  export interface int$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `int` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type int$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | int$SelectionSet<$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type $string<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | $string$SelectionSet<$Scalars>
+
+  export interface $string$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `$string` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $string$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | $string$SelectionSet<$Scalars>
+  >
+}
+
+//
+//
+//
+//
+// GRAPHQL SELECTION SET
+// OUTPUTOBJECT
+// --------------------------------------------------------------------------------------------------
+//                                    Object1ImplementingInterface
+// --------------------------------------------------------------------------------------------------
+//
+//
+
+// ----------------------------------------| Entrypoint Interface |
+
+export interface Object1ImplementingInterface<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+  extends $Select.Bases.ObjectLike
+{
+  /**
+   * Select the `id` field on the `Object1ImplementingInterface` object. Its type is ScalarStandard.
+   */
+  id?:
+    | Object1ImplementingInterface.id$Expanded<$Scalars>
+    | $Select.SelectAlias.SelectAlias<Object1ImplementingInterface.id<$Scalars>>
+  /**
+   * Select the `int` field on the `Object1ImplementingInterface` object. Its type is ScalarStandard.
+   */
+  int?:
+    | Object1ImplementingInterface.int$Expanded<$Scalars>
+    | $Select.SelectAlias.SelectAlias<Object1ImplementingInterface.int<$Scalars>>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | Object1ImplementingInterface$FragmentInline<$Scalars>
+    | Object1ImplementingInterface$FragmentInline<$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+
+export interface Object1ImplementingInterface$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+  extends Object1ImplementingInterface<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
+{}
+
+// ----------------------------------------| Fields |
+
+export namespace Object1ImplementingInterface {
+  export type id<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | id$SelectionSet<$Scalars>
+
+  export interface id$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `id` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type id$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | id$SelectionSet<$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type int<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | int$SelectionSet<$Scalars>
+
+  export interface int$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `int` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type int$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | int$SelectionSet<$Scalars>
+  >
+}
+
+//
+//
+//
+//
+// GRAPHQL SELECTION SET
+// OUTPUTOBJECT
+// --------------------------------------------------------------------------------------------------
+//                                    Object2ImplementingInterface
+// --------------------------------------------------------------------------------------------------
+//
+//
+
+// ----------------------------------------| Entrypoint Interface |
+
+export interface Object2ImplementingInterface<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+  extends $Select.Bases.ObjectLike
+{
+  /**
+   * Select the `boolean` field on the `Object2ImplementingInterface` object. Its type is ScalarStandard.
+   */
+  boolean?:
+    | Object2ImplementingInterface.$boolean$Expanded<$Scalars>
+    | $Select.SelectAlias.SelectAlias<Object2ImplementingInterface.$boolean<$Scalars>>
+  /**
+   * Select the `id` field on the `Object2ImplementingInterface` object. Its type is ScalarStandard.
+   */
+  id?:
+    | Object2ImplementingInterface.id$Expanded<$Scalars>
+    | $Select.SelectAlias.SelectAlias<Object2ImplementingInterface.id<$Scalars>>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | Object2ImplementingInterface$FragmentInline<$Scalars>
+    | Object2ImplementingInterface$FragmentInline<$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+
+export interface Object2ImplementingInterface$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+  extends Object2ImplementingInterface<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
+{}
+
+// ----------------------------------------| Fields |
+
+export namespace Object2ImplementingInterface {
+  export type $boolean<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | $boolean$SelectionSet<$Scalars>
+
+  export interface $boolean$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `$boolean` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $boolean$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | $boolean$SelectionSet<$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type id<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | id$SelectionSet<$Scalars>
+
+  export interface id$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `id` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type id$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | id$SelectionSet<$Scalars>
+  >
+}
+
+//
+//
+//
+//
+// GRAPHQL SELECTION SET
+// OUTPUTOBJECT
+// --------------------------------------------------------------------------------------------------
+//                                            ObjectNested
+// --------------------------------------------------------------------------------------------------
+//
+//
+
+// ----------------------------------------| Entrypoint Interface |
+
+export interface ObjectNested<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+  extends $Select.Bases.ObjectLike
+{
+  /**
+   * Select the `id` field on the `ObjectNested` object. Its type is ScalarStandard.
+   */
+  id?: ObjectNested.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<ObjectNested.id<$Scalars>>
+  /**
+   * Select the `object` field on the `ObjectNested` object. Its type is OutputObject.
+   */
+  object?: ObjectNested.$object$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<ObjectNested.$object<$Scalars>>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | ObjectNested$FragmentInline<$Scalars>
+    | ObjectNested$FragmentInline<$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+
+export interface ObjectNested$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+  extends ObjectNested<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
+{}
+
+// ----------------------------------------| Fields |
+
+export namespace ObjectNested {
+  export type id<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | id$SelectionSet<$Scalars>
+
+  export interface id$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `id` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type id$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | id$SelectionSet<$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type $object<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $object$SelectionSet<$Scalars>
+
+  export interface $object$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base, $NamedTypes.$Object1<$Scalars>
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `$object` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $object$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    $object$SelectionSet<$Scalars>
+  >
+}
+
+//
+//
+//
+//
+// GRAPHQL SELECTION SET
+// OUTPUTOBJECT
+// --------------------------------------------------------------------------------------------------
+//                                            ObjectUnion
+// --------------------------------------------------------------------------------------------------
+//
+//
+
+// ----------------------------------------| Entrypoint Interface |
+
+export interface ObjectUnion<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+  extends $Select.Bases.ObjectLike
+{
+  /**
+   * Select the `fooBarUnion` field on the `ObjectUnion` object. Its type is Union.
+   */
+  fooBarUnion?:
+    | ObjectUnion.fooBarUnion$Expanded<$Scalars>
+    | $Select.SelectAlias.SelectAlias<ObjectUnion.fooBarUnion<$Scalars>>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | ObjectUnion$FragmentInline<$Scalars>
+    | ObjectUnion$FragmentInline<$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+
+export interface ObjectUnion$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+  extends ObjectUnion<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
+{}
+
+// ----------------------------------------| Fields |
+
+export namespace ObjectUnion {
+  export type fooBarUnion<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = fooBarUnion$SelectionSet<
+    $Scalars
+  >
+
+  export interface fooBarUnion$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base, $NamedTypes.$FooBarUnion<$Scalars>
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `fooBarUnion` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type fooBarUnion$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    fooBarUnion$SelectionSet<$Scalars>
+  >
+}
+
+//
+//
+//
+//
+// GRAPHQL SELECTION SET
+// OUTPUTOBJECT
+// --------------------------------------------------------------------------------------------------
+//                                          lowerCaseObject
+// --------------------------------------------------------------------------------------------------
+//
+//
+
+// ----------------------------------------| Entrypoint Interface |
+
+export interface lowerCaseObject<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+  extends $Select.Bases.ObjectLike
+{
+  /**
+   * Select the `id` field on the `lowerCaseObject` object. Its type is ScalarStandard.
+   */
+  id?: lowerCaseObject.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<lowerCaseObject.id<$Scalars>>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | lowerCaseObject$FragmentInline<$Scalars>
+    | lowerCaseObject$FragmentInline<$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+
+export interface lowerCaseObject$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+  extends lowerCaseObject<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
+{}
+
+// ----------------------------------------| Fields |
+
+export namespace lowerCaseObject {
+  export type id<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | id$SelectionSet<$Scalars>
+
+  export interface id$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `id` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type id$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | id$SelectionSet<$Scalars>
+  >
+}
+
+//
+//
+//
+//
+// GRAPHQL SELECTION SET
+// OUTPUTOBJECT
+// --------------------------------------------------------------------------------------------------
+//                                          lowerCaseObject2
+// --------------------------------------------------------------------------------------------------
+//
+//
+
+// ----------------------------------------| Entrypoint Interface |
+
+export interface lowerCaseObject2<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+  extends $Select.Bases.ObjectLike
+{
+  /**
+   * Select the `int` field on the `lowerCaseObject2` object. Its type is ScalarStandard.
+   */
+  int?: lowerCaseObject2.int$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<lowerCaseObject2.int<$Scalars>>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | lowerCaseObject2$FragmentInline<$Scalars>
+    | lowerCaseObject2$FragmentInline<$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+
+export interface lowerCaseObject2$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+  extends lowerCaseObject2<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
+{}
+
+// ----------------------------------------| Fields |
+
+export namespace lowerCaseObject2 {
+  export type int<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | int$SelectionSet<$Scalars>
+
+  export interface int$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `int` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type int$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | int$SelectionSet<$Scalars>
+  >
+}
+
+//
+//
+//
+//
+//
+//
+// ==================================================================================================
+//                                               Union
+// ==================================================================================================
+//
+//
+//
+//
+//
+//
+
+export interface DateUnion<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
+  ___on_DateObject1?: DateObject1<$Scalars>
+  ___on_DateObject2?: DateObject2<$Scalars>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | DateUnion$FragmentInline<$Scalars>
+    | DateUnion$FragmentInline<$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected. Since this is a union type and thus polymorphic,
+   * the name is one of the member type names, whichever is ultimately returned at runtime.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+export interface DateUnion$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+  extends DateUnion<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
+{}
+
+/**
+ * Union documentation.
+ */
+export interface FooBarUnion<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
+  ___on_Bar?: Bar<$Scalars>
+  ___on_Foo?: Foo<$Scalars>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | FooBarUnion$FragmentInline<$Scalars>
+    | FooBarUnion$FragmentInline<$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected. Since this is a union type and thus polymorphic,
+   * the name is one of the member type names, whichever is ultimately returned at runtime.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+export interface FooBarUnion$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+  extends FooBarUnion<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
+{}
+
+export interface Result<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
+  ___on_ErrorOne?: ErrorOne<$Scalars>
+  ___on_ErrorTwo?: ErrorTwo<$Scalars>
+  ___on_Object1?: Object1<$Scalars>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | Result$FragmentInline<$Scalars>
+    | Result$FragmentInline<$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected. Since this is a union type and thus polymorphic,
+   * the name is one of the member type names, whichever is ultimately returned at runtime.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+export interface Result$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+  extends Result<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
+{}
+
+export interface lowerCaseUnion<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
+  ___on_lowerCaseObject?: lowerCaseObject<$Scalars>
+  ___on_lowerCaseObject2?: lowerCaseObject2<$Scalars>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | lowerCaseUnion$FragmentInline<$Scalars>
+    | lowerCaseUnion$FragmentInline<$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected. Since this is a union type and thus polymorphic,
+   * the name is one of the member type names, whichever is ultimately returned at runtime.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+export interface lowerCaseUnion$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+  extends lowerCaseUnion<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
+{}
+
+//
+//
+//
+//
+//
+//
+// ==================================================================================================
+//                                             Interface
 // ==================================================================================================
 //
 //
@@ -2005,1357 +3356,6 @@ export namespace Interface {
   >
 }
 
-//
-//
-//
-//
-//
-//
-// ==================================================================================================
-//                                      GraphQLObjectType Types
-// ==================================================================================================
-//
-//
-//
-//
-//
-//
-
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OBJECT
-// --------------------------------------------------------------------------------------------------
-//                                                Bar
-// --------------------------------------------------------------------------------------------------
-//
-//
-
-// ----------------------------------------| Entrypoint Interface |
-
-export interface Bar<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
-  /**
-   * Select the `int` field on the `Bar` object. Its type is `Int` (a `Scalar`).
-   */
-  int?: Bar.int$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Bar.int<$Scalars>>
-
-  /**
-   * Inline fragments for field groups.
-   *
-   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
-   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
-   *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
-   */
-  ___?:
-    | Bar$FragmentInline<$Scalars>
-    | Bar$FragmentInline<$Scalars>[]
-
-  /**
-   * A meta field. Is the name of the type being selected.
-   *
-   * @see https://graphql.org/learn/queries/#meta-fields
-   */
-  __typename?:
-    | $Select.Indicator.NoArgsIndicator$Expanded
-    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
-}
-
-export interface Bar$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-  extends Bar<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
-{}
-
-// ----------------------------------------| Fields |
-
-export namespace Bar {
-  export type int<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
-    | $Select.Indicator.NoArgsIndicator
-    | int$SelectionSet<$Scalars>
-
-  export interface int$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
-
-  // --- expanded ---
-
-  /**
-   * This is the "expanded" version of the `int` type. It is identical except for the fact
-   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
-   * In some cases, this is a preferable DX, making the types easier to read for users.
-   */
-  export type int$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    | $Select.Indicator.NoArgsIndicator
-    | int$SelectionSet<$Scalars>
-  >
-}
-
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OBJECT
-// --------------------------------------------------------------------------------------------------
-//                                            DateObject1
-// --------------------------------------------------------------------------------------------------
-//
-//
-
-// ----------------------------------------| Entrypoint Interface |
-
-export interface DateObject1<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-  extends $Select.Bases.ObjectLike
-{
-  /**
-   * Select the `date1` field on the `DateObject1` object. Its type is `Date` (a `Scalar`).
-   */
-  date1?: DateObject1.date1$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<DateObject1.date1<$Scalars>>
-
-  /**
-   * Inline fragments for field groups.
-   *
-   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
-   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
-   *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
-   */
-  ___?:
-    | DateObject1$FragmentInline<$Scalars>
-    | DateObject1$FragmentInline<$Scalars>[]
-
-  /**
-   * A meta field. Is the name of the type being selected.
-   *
-   * @see https://graphql.org/learn/queries/#meta-fields
-   */
-  __typename?:
-    | $Select.Indicator.NoArgsIndicator$Expanded
-    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
-}
-
-export interface DateObject1$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-  extends DateObject1<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
-{}
-
-// ----------------------------------------| Fields |
-
-export namespace DateObject1 {
-  export type date1<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
-    | $Select.Indicator.NoArgsIndicator
-    | date1$SelectionSet<$Scalars>
-
-  export interface date1$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
-
-  // --- expanded ---
-
-  /**
-   * This is the "expanded" version of the `date1` type. It is identical except for the fact
-   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
-   * In some cases, this is a preferable DX, making the types easier to read for users.
-   */
-  export type date1$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    | $Select.Indicator.NoArgsIndicator
-    | date1$SelectionSet<$Scalars>
-  >
-}
-
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OBJECT
-// --------------------------------------------------------------------------------------------------
-//                                            DateObject2
-// --------------------------------------------------------------------------------------------------
-//
-//
-
-// ----------------------------------------| Entrypoint Interface |
-
-export interface DateObject2<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-  extends $Select.Bases.ObjectLike
-{
-  /**
-   * Select the `date2` field on the `DateObject2` object. Its type is `Date` (a `Scalar`).
-   */
-  date2?: DateObject2.date2$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<DateObject2.date2<$Scalars>>
-
-  /**
-   * Inline fragments for field groups.
-   *
-   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
-   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
-   *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
-   */
-  ___?:
-    | DateObject2$FragmentInline<$Scalars>
-    | DateObject2$FragmentInline<$Scalars>[]
-
-  /**
-   * A meta field. Is the name of the type being selected.
-   *
-   * @see https://graphql.org/learn/queries/#meta-fields
-   */
-  __typename?:
-    | $Select.Indicator.NoArgsIndicator$Expanded
-    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
-}
-
-export interface DateObject2$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-  extends DateObject2<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
-{}
-
-// ----------------------------------------| Fields |
-
-export namespace DateObject2 {
-  export type date2<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
-    | $Select.Indicator.NoArgsIndicator
-    | date2$SelectionSet<$Scalars>
-
-  export interface date2$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
-
-  // --- expanded ---
-
-  /**
-   * This is the "expanded" version of the `date2` type. It is identical except for the fact
-   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
-   * In some cases, this is a preferable DX, making the types easier to read for users.
-   */
-  export type date2$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    | $Select.Indicator.NoArgsIndicator
-    | date2$SelectionSet<$Scalars>
-  >
-}
-
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OBJECT
-// --------------------------------------------------------------------------------------------------
-//                                              ErrorOne
-// --------------------------------------------------------------------------------------------------
-//
-//
-
-// ----------------------------------------| Entrypoint Interface |
-
-export interface ErrorOne<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
-  /**
-   * Select the `infoId` field on the `ErrorOne` object. Its type is `ID` (a `Scalar`).
-   */
-  infoId?: ErrorOne.infoId$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<ErrorOne.infoId<$Scalars>>
-  /**
-   * Select the `message` field on the `ErrorOne` object. Its type is `String` (a `Scalar`).
-   */
-  message?: ErrorOne.message$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<ErrorOne.message<$Scalars>>
-
-  /**
-   * Inline fragments for field groups.
-   *
-   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
-   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
-   *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
-   */
-  ___?:
-    | ErrorOne$FragmentInline<$Scalars>
-    | ErrorOne$FragmentInline<$Scalars>[]
-
-  /**
-   * A meta field. Is the name of the type being selected.
-   *
-   * @see https://graphql.org/learn/queries/#meta-fields
-   */
-  __typename?:
-    | $Select.Indicator.NoArgsIndicator$Expanded
-    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
-}
-
-export interface ErrorOne$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-  extends ErrorOne<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
-{}
-
-// ----------------------------------------| Fields |
-
-export namespace ErrorOne {
-  export type infoId<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
-    | $Select.Indicator.NoArgsIndicator
-    | infoId$SelectionSet<$Scalars>
-
-  export interface infoId$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
-
-  // --- expanded ---
-
-  /**
-   * This is the "expanded" version of the `infoId` type. It is identical except for the fact
-   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
-   * In some cases, this is a preferable DX, making the types easier to read for users.
-   */
-  export type infoId$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    | $Select.Indicator.NoArgsIndicator
-    | infoId$SelectionSet<$Scalars>
-  >
-
-  // --------------------------------------------------------------------------------------------------
-
-  export type message<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
-    | $Select.Indicator.NoArgsIndicator
-    | message$SelectionSet<$Scalars>
-
-  export interface message$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
-
-  // --- expanded ---
-
-  /**
-   * This is the "expanded" version of the `message` type. It is identical except for the fact
-   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
-   * In some cases, this is a preferable DX, making the types easier to read for users.
-   */
-  export type message$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    | $Select.Indicator.NoArgsIndicator
-    | message$SelectionSet<$Scalars>
-  >
-}
-
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OBJECT
-// --------------------------------------------------------------------------------------------------
-//                                              ErrorTwo
-// --------------------------------------------------------------------------------------------------
-//
-//
-
-// ----------------------------------------| Entrypoint Interface |
-
-export interface ErrorTwo<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
-  /**
-   * Select the `infoInt` field on the `ErrorTwo` object. Its type is `Int` (a `Scalar`).
-   */
-  infoInt?: ErrorTwo.infoInt$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<ErrorTwo.infoInt<$Scalars>>
-  /**
-   * Select the `message` field on the `ErrorTwo` object. Its type is `String` (a `Scalar`).
-   */
-  message?: ErrorTwo.message$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<ErrorTwo.message<$Scalars>>
-
-  /**
-   * Inline fragments for field groups.
-   *
-   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
-   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
-   *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
-   */
-  ___?:
-    | ErrorTwo$FragmentInline<$Scalars>
-    | ErrorTwo$FragmentInline<$Scalars>[]
-
-  /**
-   * A meta field. Is the name of the type being selected.
-   *
-   * @see https://graphql.org/learn/queries/#meta-fields
-   */
-  __typename?:
-    | $Select.Indicator.NoArgsIndicator$Expanded
-    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
-}
-
-export interface ErrorTwo$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-  extends ErrorTwo<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
-{}
-
-// ----------------------------------------| Fields |
-
-export namespace ErrorTwo {
-  export type infoInt<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
-    | $Select.Indicator.NoArgsIndicator
-    | infoInt$SelectionSet<$Scalars>
-
-  export interface infoInt$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
-
-  // --- expanded ---
-
-  /**
-   * This is the "expanded" version of the `infoInt` type. It is identical except for the fact
-   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
-   * In some cases, this is a preferable DX, making the types easier to read for users.
-   */
-  export type infoInt$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    | $Select.Indicator.NoArgsIndicator
-    | infoInt$SelectionSet<$Scalars>
-  >
-
-  // --------------------------------------------------------------------------------------------------
-
-  export type message<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
-    | $Select.Indicator.NoArgsIndicator
-    | message$SelectionSet<$Scalars>
-
-  export interface message$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
-
-  // --- expanded ---
-
-  /**
-   * This is the "expanded" version of the `message` type. It is identical except for the fact
-   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
-   * In some cases, this is a preferable DX, making the types easier to read for users.
-   */
-  export type message$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    | $Select.Indicator.NoArgsIndicator
-    | message$SelectionSet<$Scalars>
-  >
-}
-
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OBJECT
-// --------------------------------------------------------------------------------------------------
-//                                                Foo
-// --------------------------------------------------------------------------------------------------
-//
-//
-
-// ----------------------------------------| Entrypoint Interface |
-
-/**
- * Object documentation.
- */
-export interface Foo<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
-  /**
-   * Select the `id` field on the `Foo` object. Its type is `ID` (a `Scalar`).
-   */
-  id?: Foo.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Foo.id<$Scalars>>
-
-  /**
-   * Inline fragments for field groups.
-   *
-   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
-   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
-   *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
-   */
-  ___?:
-    | Foo$FragmentInline<$Scalars>
-    | Foo$FragmentInline<$Scalars>[]
-
-  /**
-   * A meta field. Is the name of the type being selected.
-   *
-   * @see https://graphql.org/learn/queries/#meta-fields
-   */
-  __typename?:
-    | $Select.Indicator.NoArgsIndicator$Expanded
-    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
-}
-
-export interface Foo$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-  extends Foo<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
-{}
-
-// ----------------------------------------| Fields |
-
-export namespace Foo {
-  export type id<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
-    | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
-
-  export interface id$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
-
-  // --- expanded ---
-
-  /**
-   * This is the "expanded" version of the `id` type. It is identical except for the fact
-   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
-   * In some cases, this is a preferable DX, making the types easier to read for users.
-   */
-  export type id$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
-  >
-}
-
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OBJECT
-// --------------------------------------------------------------------------------------------------
-//                                              Object1
-// --------------------------------------------------------------------------------------------------
-//
-//
-
-// ----------------------------------------| Entrypoint Interface |
-
-export interface Object1<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
-  /**
-   * Select the `ABCEnum` field on the `Object1` object. Its type is Enum.
-   */
-  ABCEnum?: Object1.ABCEnum$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Object1.ABCEnum<$Scalars>>
-  /**
-   * Select the `boolean` field on the `Object1` object. Its type is `Boolean` (a `Scalar`).
-   */
-  boolean?: Object1.$boolean$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Object1.$boolean<$Scalars>>
-  /**
-   * Select the `float` field on the `Object1` object. Its type is `Float` (a `Scalar`).
-   */
-  float?: Object1.float$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Object1.float<$Scalars>>
-  /**
-   * Select the `id` field on the `Object1` object. Its type is `ID` (a `Scalar`).
-   */
-  id?: Object1.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Object1.id<$Scalars>>
-  /**
-   * Select the `int` field on the `Object1` object. Its type is `Int` (a `Scalar`).
-   */
-  int?: Object1.int$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Object1.int<$Scalars>>
-  /**
-   * Select the `string` field on the `Object1` object. Its type is `String` (a `Scalar`).
-   */
-  string?: Object1.$string$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Object1.$string<$Scalars>>
-
-  /**
-   * Inline fragments for field groups.
-   *
-   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
-   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
-   *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
-   */
-  ___?:
-    | Object1$FragmentInline<$Scalars>
-    | Object1$FragmentInline<$Scalars>[]
-
-  /**
-   * A meta field. Is the name of the type being selected.
-   *
-   * @see https://graphql.org/learn/queries/#meta-fields
-   */
-  __typename?:
-    | $Select.Indicator.NoArgsIndicator$Expanded
-    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
-}
-
-export interface Object1$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-  extends Object1<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
-{}
-
-// ----------------------------------------| Fields |
-
-export namespace Object1 {
-  export type ABCEnum<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
-    | $Select.Indicator.NoArgsIndicator
-    | ABCEnum$SelectionSet<$Scalars>
-
-  export interface ABCEnum$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
-
-  // --- expanded ---
-
-  /**
-   * This is the "expanded" version of the `ABCEnum` type. It is identical except for the fact
-   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
-   * In some cases, this is a preferable DX, making the types easier to read for users.
-   */
-  export type ABCEnum$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    | $Select.Indicator.NoArgsIndicator
-    | ABCEnum$SelectionSet<$Scalars>
-  >
-
-  // --------------------------------------------------------------------------------------------------
-
-  export type $boolean<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
-    | $Select.Indicator.NoArgsIndicator
-    | $boolean$SelectionSet<$Scalars>
-
-  export interface $boolean$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
-
-  // --- expanded ---
-
-  /**
-   * This is the "expanded" version of the `$boolean` type. It is identical except for the fact
-   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
-   * In some cases, this is a preferable DX, making the types easier to read for users.
-   */
-  export type $boolean$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    | $Select.Indicator.NoArgsIndicator
-    | $boolean$SelectionSet<$Scalars>
-  >
-
-  // --------------------------------------------------------------------------------------------------
-
-  export type float<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
-    | $Select.Indicator.NoArgsIndicator
-    | float$SelectionSet<$Scalars>
-
-  export interface float$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
-
-  // --- expanded ---
-
-  /**
-   * This is the "expanded" version of the `float` type. It is identical except for the fact
-   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
-   * In some cases, this is a preferable DX, making the types easier to read for users.
-   */
-  export type float$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    | $Select.Indicator.NoArgsIndicator
-    | float$SelectionSet<$Scalars>
-  >
-
-  // --------------------------------------------------------------------------------------------------
-
-  export type id<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
-    | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
-
-  export interface id$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
-
-  // --- expanded ---
-
-  /**
-   * This is the "expanded" version of the `id` type. It is identical except for the fact
-   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
-   * In some cases, this is a preferable DX, making the types easier to read for users.
-   */
-  export type id$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
-  >
-
-  // --------------------------------------------------------------------------------------------------
-
-  export type int<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
-    | $Select.Indicator.NoArgsIndicator
-    | int$SelectionSet<$Scalars>
-
-  export interface int$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
-
-  // --- expanded ---
-
-  /**
-   * This is the "expanded" version of the `int` type. It is identical except for the fact
-   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
-   * In some cases, this is a preferable DX, making the types easier to read for users.
-   */
-  export type int$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    | $Select.Indicator.NoArgsIndicator
-    | int$SelectionSet<$Scalars>
-  >
-
-  // --------------------------------------------------------------------------------------------------
-
-  export type $string<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
-    | $Select.Indicator.NoArgsIndicator
-    | $string$SelectionSet<$Scalars>
-
-  export interface $string$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
-
-  // --- expanded ---
-
-  /**
-   * This is the "expanded" version of the `$string` type. It is identical except for the fact
-   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
-   * In some cases, this is a preferable DX, making the types easier to read for users.
-   */
-  export type $string$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    | $Select.Indicator.NoArgsIndicator
-    | $string$SelectionSet<$Scalars>
-  >
-}
-
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OBJECT
-// --------------------------------------------------------------------------------------------------
-//                                    Object1ImplementingInterface
-// --------------------------------------------------------------------------------------------------
-//
-//
-
-// ----------------------------------------| Entrypoint Interface |
-
-export interface Object1ImplementingInterface<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-  extends $Select.Bases.ObjectLike
-{
-  /**
-   * Select the `id` field on the `Object1ImplementingInterface` object. Its type is `ID` (a `Scalar`).
-   */
-  id?:
-    | Object1ImplementingInterface.id$Expanded<$Scalars>
-    | $Select.SelectAlias.SelectAlias<Object1ImplementingInterface.id<$Scalars>>
-  /**
-   * Select the `int` field on the `Object1ImplementingInterface` object. Its type is `Int` (a `Scalar`).
-   */
-  int?:
-    | Object1ImplementingInterface.int$Expanded<$Scalars>
-    | $Select.SelectAlias.SelectAlias<Object1ImplementingInterface.int<$Scalars>>
-
-  /**
-   * Inline fragments for field groups.
-   *
-   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
-   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
-   *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
-   */
-  ___?:
-    | Object1ImplementingInterface$FragmentInline<$Scalars>
-    | Object1ImplementingInterface$FragmentInline<$Scalars>[]
-
-  /**
-   * A meta field. Is the name of the type being selected.
-   *
-   * @see https://graphql.org/learn/queries/#meta-fields
-   */
-  __typename?:
-    | $Select.Indicator.NoArgsIndicator$Expanded
-    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
-}
-
-export interface Object1ImplementingInterface$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-  extends Object1ImplementingInterface<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
-{}
-
-// ----------------------------------------| Fields |
-
-export namespace Object1ImplementingInterface {
-  export type id<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
-    | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
-
-  export interface id$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
-
-  // --- expanded ---
-
-  /**
-   * This is the "expanded" version of the `id` type. It is identical except for the fact
-   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
-   * In some cases, this is a preferable DX, making the types easier to read for users.
-   */
-  export type id$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
-  >
-
-  // --------------------------------------------------------------------------------------------------
-
-  export type int<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
-    | $Select.Indicator.NoArgsIndicator
-    | int$SelectionSet<$Scalars>
-
-  export interface int$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
-
-  // --- expanded ---
-
-  /**
-   * This is the "expanded" version of the `int` type. It is identical except for the fact
-   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
-   * In some cases, this is a preferable DX, making the types easier to read for users.
-   */
-  export type int$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    | $Select.Indicator.NoArgsIndicator
-    | int$SelectionSet<$Scalars>
-  >
-}
-
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OBJECT
-// --------------------------------------------------------------------------------------------------
-//                                    Object2ImplementingInterface
-// --------------------------------------------------------------------------------------------------
-//
-//
-
-// ----------------------------------------| Entrypoint Interface |
-
-export interface Object2ImplementingInterface<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-  extends $Select.Bases.ObjectLike
-{
-  /**
-   * Select the `boolean` field on the `Object2ImplementingInterface` object. Its type is `Boolean` (a `Scalar`).
-   */
-  boolean?:
-    | Object2ImplementingInterface.$boolean$Expanded<$Scalars>
-    | $Select.SelectAlias.SelectAlias<Object2ImplementingInterface.$boolean<$Scalars>>
-  /**
-   * Select the `id` field on the `Object2ImplementingInterface` object. Its type is `ID` (a `Scalar`).
-   */
-  id?:
-    | Object2ImplementingInterface.id$Expanded<$Scalars>
-    | $Select.SelectAlias.SelectAlias<Object2ImplementingInterface.id<$Scalars>>
-
-  /**
-   * Inline fragments for field groups.
-   *
-   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
-   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
-   *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
-   */
-  ___?:
-    | Object2ImplementingInterface$FragmentInline<$Scalars>
-    | Object2ImplementingInterface$FragmentInline<$Scalars>[]
-
-  /**
-   * A meta field. Is the name of the type being selected.
-   *
-   * @see https://graphql.org/learn/queries/#meta-fields
-   */
-  __typename?:
-    | $Select.Indicator.NoArgsIndicator$Expanded
-    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
-}
-
-export interface Object2ImplementingInterface$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-  extends Object2ImplementingInterface<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
-{}
-
-// ----------------------------------------| Fields |
-
-export namespace Object2ImplementingInterface {
-  export type $boolean<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
-    | $Select.Indicator.NoArgsIndicator
-    | $boolean$SelectionSet<$Scalars>
-
-  export interface $boolean$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
-
-  // --- expanded ---
-
-  /**
-   * This is the "expanded" version of the `$boolean` type. It is identical except for the fact
-   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
-   * In some cases, this is a preferable DX, making the types easier to read for users.
-   */
-  export type $boolean$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    | $Select.Indicator.NoArgsIndicator
-    | $boolean$SelectionSet<$Scalars>
-  >
-
-  // --------------------------------------------------------------------------------------------------
-
-  export type id<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
-    | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
-
-  export interface id$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
-
-  // --- expanded ---
-
-  /**
-   * This is the "expanded" version of the `id` type. It is identical except for the fact
-   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
-   * In some cases, this is a preferable DX, making the types easier to read for users.
-   */
-  export type id$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
-  >
-}
-
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OBJECT
-// --------------------------------------------------------------------------------------------------
-//                                            ObjectNested
-// --------------------------------------------------------------------------------------------------
-//
-//
-
-// ----------------------------------------| Entrypoint Interface |
-
-export interface ObjectNested<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-  extends $Select.Bases.ObjectLike
-{
-  /**
-   * Select the `id` field on the `ObjectNested` object. Its type is `ID` (a `Scalar`).
-   */
-  id?: ObjectNested.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<ObjectNested.id<$Scalars>>
-  /**
-   * Select the `object` field on the `ObjectNested` object. Its type is Object.
-   */
-  object?: ObjectNested.$object$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<ObjectNested.$object<$Scalars>>
-
-  /**
-   * Inline fragments for field groups.
-   *
-   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
-   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
-   *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
-   */
-  ___?:
-    | ObjectNested$FragmentInline<$Scalars>
-    | ObjectNested$FragmentInline<$Scalars>[]
-
-  /**
-   * A meta field. Is the name of the type being selected.
-   *
-   * @see https://graphql.org/learn/queries/#meta-fields
-   */
-  __typename?:
-    | $Select.Indicator.NoArgsIndicator$Expanded
-    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
-}
-
-export interface ObjectNested$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-  extends ObjectNested<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
-{}
-
-// ----------------------------------------| Fields |
-
-export namespace ObjectNested {
-  export type id<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
-    | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
-
-  export interface id$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
-
-  // --- expanded ---
-
-  /**
-   * This is the "expanded" version of the `id` type. It is identical except for the fact
-   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
-   * In some cases, this is a preferable DX, making the types easier to read for users.
-   */
-  export type id$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
-  >
-
-  // --------------------------------------------------------------------------------------------------
-
-  export type $object<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $object$SelectionSet<$Scalars>
-
-  export interface $object$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base, $NamedTypes.$Object1<$Scalars>
-  {}
-
-  // --- expanded ---
-
-  /**
-   * This is the "expanded" version of the `$object` type. It is identical except for the fact
-   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
-   * In some cases, this is a preferable DX, making the types easier to read for users.
-   */
-  export type $object$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    $object$SelectionSet<$Scalars>
-  >
-}
-
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OBJECT
-// --------------------------------------------------------------------------------------------------
-//                                            ObjectUnion
-// --------------------------------------------------------------------------------------------------
-//
-//
-
-// ----------------------------------------| Entrypoint Interface |
-
-export interface ObjectUnion<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-  extends $Select.Bases.ObjectLike
-{
-  /**
-   * Select the `fooBarUnion` field on the `ObjectUnion` object. Its type is Union.
-   */
-  fooBarUnion?:
-    | ObjectUnion.fooBarUnion$Expanded<$Scalars>
-    | $Select.SelectAlias.SelectAlias<ObjectUnion.fooBarUnion<$Scalars>>
-
-  /**
-   * Inline fragments for field groups.
-   *
-   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
-   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
-   *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
-   */
-  ___?:
-    | ObjectUnion$FragmentInline<$Scalars>
-    | ObjectUnion$FragmentInline<$Scalars>[]
-
-  /**
-   * A meta field. Is the name of the type being selected.
-   *
-   * @see https://graphql.org/learn/queries/#meta-fields
-   */
-  __typename?:
-    | $Select.Indicator.NoArgsIndicator$Expanded
-    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
-}
-
-export interface ObjectUnion$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-  extends ObjectUnion<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
-{}
-
-// ----------------------------------------| Fields |
-
-export namespace ObjectUnion {
-  export type fooBarUnion<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = fooBarUnion$SelectionSet<
-    $Scalars
-  >
-
-  export interface fooBarUnion$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base, $NamedTypes.$FooBarUnion<$Scalars>
-  {}
-
-  // --- expanded ---
-
-  /**
-   * This is the "expanded" version of the `fooBarUnion` type. It is identical except for the fact
-   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
-   * In some cases, this is a preferable DX, making the types easier to read for users.
-   */
-  export type fooBarUnion$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    fooBarUnion$SelectionSet<$Scalars>
-  >
-}
-
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OBJECT
-// --------------------------------------------------------------------------------------------------
-//                                          lowerCaseObject
-// --------------------------------------------------------------------------------------------------
-//
-//
-
-// ----------------------------------------| Entrypoint Interface |
-
-export interface lowerCaseObject<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-  extends $Select.Bases.ObjectLike
-{
-  /**
-   * Select the `id` field on the `lowerCaseObject` object. Its type is `ID` (a `Scalar`).
-   */
-  id?: lowerCaseObject.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<lowerCaseObject.id<$Scalars>>
-
-  /**
-   * Inline fragments for field groups.
-   *
-   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
-   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
-   *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
-   */
-  ___?:
-    | lowerCaseObject$FragmentInline<$Scalars>
-    | lowerCaseObject$FragmentInline<$Scalars>[]
-
-  /**
-   * A meta field. Is the name of the type being selected.
-   *
-   * @see https://graphql.org/learn/queries/#meta-fields
-   */
-  __typename?:
-    | $Select.Indicator.NoArgsIndicator$Expanded
-    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
-}
-
-export interface lowerCaseObject$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-  extends lowerCaseObject<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
-{}
-
-// ----------------------------------------| Fields |
-
-export namespace lowerCaseObject {
-  export type id<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
-    | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
-
-  export interface id$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
-
-  // --- expanded ---
-
-  /**
-   * This is the "expanded" version of the `id` type. It is identical except for the fact
-   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
-   * In some cases, this is a preferable DX, making the types easier to read for users.
-   */
-  export type id$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
-  >
-}
-
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OBJECT
-// --------------------------------------------------------------------------------------------------
-//                                          lowerCaseObject2
-// --------------------------------------------------------------------------------------------------
-//
-//
-
-// ----------------------------------------| Entrypoint Interface |
-
-export interface lowerCaseObject2<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-  extends $Select.Bases.ObjectLike
-{
-  /**
-   * Select the `int` field on the `lowerCaseObject2` object. Its type is `Int` (a `Scalar`).
-   */
-  int?: lowerCaseObject2.int$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<lowerCaseObject2.int<$Scalars>>
-
-  /**
-   * Inline fragments for field groups.
-   *
-   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
-   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
-   *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
-   */
-  ___?:
-    | lowerCaseObject2$FragmentInline<$Scalars>
-    | lowerCaseObject2$FragmentInline<$Scalars>[]
-
-  /**
-   * A meta field. Is the name of the type being selected.
-   *
-   * @see https://graphql.org/learn/queries/#meta-fields
-   */
-  __typename?:
-    | $Select.Indicator.NoArgsIndicator$Expanded
-    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
-}
-
-export interface lowerCaseObject2$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-  extends lowerCaseObject2<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
-{}
-
-// ----------------------------------------| Fields |
-
-export namespace lowerCaseObject2 {
-  export type int<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
-    | $Select.Indicator.NoArgsIndicator
-    | int$SelectionSet<$Scalars>
-
-  export interface int$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
-
-  // --- expanded ---
-
-  /**
-   * This is the "expanded" version of the `int` type. It is identical except for the fact
-   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
-   * In some cases, this is a preferable DX, making the types easier to read for users.
-   */
-  export type int$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    | $Select.Indicator.NoArgsIndicator
-    | int$SelectionSet<$Scalars>
-  >
-}
-
-//
-//
-//
-//
-//
-//
-// ==================================================================================================
-//                                       GraphQLUnionType Types
-// ==================================================================================================
-//
-//
-//
-//
-//
-//
-
-export interface DateUnion<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
-  ___on_DateObject1?: DateObject1<$Scalars>
-  ___on_DateObject2?: DateObject2<$Scalars>
-
-  /**
-   * Inline fragments for field groups.
-   *
-   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
-   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
-   *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
-   */
-  ___?:
-    | DateUnion$FragmentInline<$Scalars>
-    | DateUnion$FragmentInline<$Scalars>[]
-
-  /**
-   * A meta field. Is the name of the type being selected. Since this is a union type and thus polymorphic,
-   * the name is one of the member type names, whichever is ultimately returned at runtime.
-   *
-   * @see https://graphql.org/learn/queries/#meta-fields
-   */
-  __typename?:
-    | $Select.Indicator.NoArgsIndicator$Expanded
-    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
-}
-export interface DateUnion$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-  extends DateUnion<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
-{}
-
-/**
- * Union documentation.
- */
-export interface FooBarUnion<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
-  ___on_Bar?: Bar<$Scalars>
-  ___on_Foo?: Foo<$Scalars>
-
-  /**
-   * Inline fragments for field groups.
-   *
-   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
-   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
-   *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
-   */
-  ___?:
-    | FooBarUnion$FragmentInline<$Scalars>
-    | FooBarUnion$FragmentInline<$Scalars>[]
-
-  /**
-   * A meta field. Is the name of the type being selected. Since this is a union type and thus polymorphic,
-   * the name is one of the member type names, whichever is ultimately returned at runtime.
-   *
-   * @see https://graphql.org/learn/queries/#meta-fields
-   */
-  __typename?:
-    | $Select.Indicator.NoArgsIndicator$Expanded
-    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
-}
-export interface FooBarUnion$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-  extends FooBarUnion<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
-{}
-
-export interface Result<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
-  ___on_ErrorOne?: ErrorOne<$Scalars>
-  ___on_ErrorTwo?: ErrorTwo<$Scalars>
-  ___on_Object1?: Object1<$Scalars>
-
-  /**
-   * Inline fragments for field groups.
-   *
-   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
-   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
-   *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
-   */
-  ___?:
-    | Result$FragmentInline<$Scalars>
-    | Result$FragmentInline<$Scalars>[]
-
-  /**
-   * A meta field. Is the name of the type being selected. Since this is a union type and thus polymorphic,
-   * the name is one of the member type names, whichever is ultimately returned at runtime.
-   *
-   * @see https://graphql.org/learn/queries/#meta-fields
-   */
-  __typename?:
-    | $Select.Indicator.NoArgsIndicator$Expanded
-    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
-}
-export interface Result$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-  extends Result<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
-{}
-
-export interface lowerCaseUnion<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
-  ___on_lowerCaseObject?: lowerCaseObject<$Scalars>
-  ___on_lowerCaseObject2?: lowerCaseObject2<$Scalars>
-
-  /**
-   * Inline fragments for field groups.
-   *
-   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
-   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
-   *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
-   */
-  ___?:
-    | lowerCaseUnion$FragmentInline<$Scalars>
-    | lowerCaseUnion$FragmentInline<$Scalars>[]
-
-  /**
-   * A meta field. Is the name of the type being selected. Since this is a union type and thus polymorphic,
-   * the name is one of the member type names, whichever is ultimately returned at runtime.
-   *
-   * @see https://graphql.org/learn/queries/#meta-fields
-   */
-  __typename?:
-    | $Select.Indicator.NoArgsIndicator$Expanded
-    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
-}
-export interface lowerCaseUnion$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-  extends lowerCaseUnion<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
-{}
-
 /**
  * [1] These definitions serve to allow field selection interfaces to extend their respective object type without
  *     name clashing between the field name and the object name.
@@ -3377,9 +3377,6 @@ export namespace $NamedTypes {
   >
   export type $InputObjectNestedNonNull<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     InputObjectNestedNonNull<$Scalars>
-  export type $DateInterface1<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = DateInterface1<$Scalars>
-  export type $Error<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = Error<$Scalars>
-  export type $Interface<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = Interface<$Scalars>
   export type $Bar<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = Bar<$Scalars>
   export type $DateObject1<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = DateObject1<$Scalars>
   export type $DateObject2<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = DateObject2<$Scalars>
@@ -3399,4 +3396,7 @@ export namespace $NamedTypes {
   export type $FooBarUnion<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = FooBarUnion<$Scalars>
   export type $Result<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = Result<$Scalars>
   export type $lowerCaseUnion<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = lowerCaseUnion<$Scalars>
+  export type $DateInterface1<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = DateInterface1<$Scalars>
+  export type $Error<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = Error<$Scalars>
+  export type $Interface<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = Interface<$Scalars>
 }

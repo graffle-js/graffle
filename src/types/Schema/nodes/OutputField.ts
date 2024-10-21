@@ -9,7 +9,7 @@ import type { OutputObject } from './OutputObject.js'
 import type { ScalarCodecless } from './Scalar/_.js'
 import type { Union } from './Union.js'
 
-export type Field<
+export type OutputField<
   $Name extends string,
   $Type extends OutputTypes,
   $Args extends Args<any> | null,
@@ -29,10 +29,10 @@ type FieldType =
   | Nullable
   | OutputObject<string, any>
   | Union<string, [any, ...any[]]>
-  | Interface<string, Record<string, Field<string, any, Args<any> | null>>, [any, ...any[]]>
+  | Interface<string, Record<string, OutputField<string, any, Args<any> | null>>, [any, ...any[]]>
 
 // todo test non null interface fields
-export type SomeField = Field<string, FieldType, Args<any> | null>
+export type SomeField = OutputField<string, FieldType, Args<any> | null>
 
 export type SomeFields<$Keys extends SomeKey = SomeKey> = Record<$Keys, SomeField>
 

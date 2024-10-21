@@ -3,7 +3,7 @@ export const identifiers = {
   $Schema: `$Schema`,
   $$Utilities: `$$Utilities`,
   MethodsRoot: `MethodsRoot`,
-  Scalar: `Scalar`,
+  $Scalar: `$Scalar`,
   CustomScalars: `CustomScalars`,
   StandardScalar: `StandardScalar`,
 }

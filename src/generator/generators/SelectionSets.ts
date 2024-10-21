@@ -1,42 +1,42 @@
 // todo: generate in JSDoc how the feature maps to GQL syntax.
 // todo: on union fields, JSDoc that mentions the syntax `on*`
 
+import { pick } from 'es-toolkit'
 import { Select } from '../../layers/2_Select/__.js'
 import { Code } from '../../lib/Code.js'
 import { Grafaid } from '../../lib/grafaid/__.js'
 import { analyzeArgsNullability } from '../../lib/grafaid/schema/args.js'
 import { RootTypeName } from '../../lib/grafaid/schema/schema.js'
-import { isString } from '../../lib/prelude.js'
+import { entries, isString } from '../../lib/prelude.js'
 import { borderThinFullWidth } from '../../lib/text.js'
 import { identifiers } from '../helpers/identifiers.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 import { createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
 import { getDocumentation, renderDocumentation, renderName, title1, typeTitle2SelectionSet } from '../helpers/render.js'
+import type { KindRenderers } from '../helpers/types.js'
 import { ModuleGeneratorScalar } from './Scalar.js'
 
 const $ScalarsTypeParameter = `$Scalars extends ${identifiers.$$Utilities}.Schema.Scalar.ScalarMap = {}`
-// `$Scalars extends ${identifiers.$$Utilities}.Schema.Scalar.ScalarMap`
 
 export const ModuleGeneratorSelectionSets = createModuleGenerator(
   `SelectionSets`,
   ({ config, code }) => {
-    code()
+    const kindMap = pick(config.schema.kindMap, [`Root`, `Enum`, `InputObject`, `OutputObject`, `Union`, `Interface`])
+    const kindEntries = entries(kindMap).filter(_ => _[1].length > 0)
+    const kinds = kindEntries.map(_ => _[1])
 
-    code(`import type { Select as $Select } from '${config.paths.imports.grafflePackage.schema}'`)
     code(
+      `import type { Select as $Select } from '${config.paths.imports.grafflePackage.schema}'`,
       `import type * as ${identifiers.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'`,
     )
     if (Grafaid.Schema.KindMap.hasCustomScalars(config.schema.kindMap)) {
       code(`import type * as $Scalar from './${ModuleGeneratorScalar.name}.js'`)
     }
     code()
-
     code(title1(`Document`))
     code()
     code(
       `// Prefix with $ because this is not a schema type. A user could have a schema type named "Document" that this would conflict with.`,
-    )
-    code(
       `export interface $Document<${$ScalarsTypeParameter}> {`,
       Grafaid.Schema.KindMap.hasQuery(config.schema.kindMap) ? `query?: Record<string, Query<$Scalars>>` : null,
       Grafaid.Schema.KindMap.hasMutation(config.schema.kindMap)
@@ -46,23 +46,11 @@ export const ModuleGeneratorSelectionSets = createModuleGenerator(
     )
     code()
 
-    const typesToRender = [
-      config.schema.kindMap.GraphQLRootType,
-      config.schema.kindMap.GraphQLEnumType,
-      config.schema.kindMap.GraphQLInputObjectType,
-      config.schema.kindMap.GraphQLInterfaceType,
-      config.schema.kindMap.GraphQLObjectType,
-      config.schema.kindMap.GraphQLUnionType,
-    ].filter(_ => _.length > 0)
-
-    typesToRender.forEach((types) => {
-      const kind = Grafaid.Schema.getTypeKind(types[0]!)
-
-      code(title1(`${kind} Types`))
+    kindEntries.forEach(([name, kind]) => {
+      code(title1(name))
       code()
-
-      types.forEach(type => {
-        code(GraphQLKindRenderMap[kind]({ config, type: type as never }))
+      kind.forEach(type => {
+        code(kindRenderMap[name]({ config, type: type as never }))
         code()
       })
     })
@@ -76,7 +64,7 @@ export const ModuleGeneratorSelectionSets = createModuleGenerator(
        *     would end up with an error of \`export interface Foo extends Foo ...\`
        */
     `)
-    code(renderNamedTypesIndex({ config, types: typesToRender.flat() }))
+    code(renderNamedTypesIndex({ config, types: kinds.flat() }))
   },
 )
 
@@ -172,7 +160,7 @@ const renderKindInterface = createCodeGenerator<{ type: Grafaid.Schema.Interface
   },
 )
 
-const renderKindObject = createCodeGenerator<{ type: Grafaid.Schema.ObjectType }>(
+const renderKindOutputObject = createCodeGenerator<{ type: Grafaid.Schema.ObjectType }>(
   ({ config, type, code }) => {
     const fields = Object.values(type.getFields())
 
@@ -183,12 +171,13 @@ const renderKindObject = createCodeGenerator<{ type: Grafaid.Schema.ObjectType }
     code()
 
     const fieldKeys = fields.map(field => {
-      const fieldTypeInfo = Grafaid.getTypeNameAndKind(Grafaid.Schema.getNamedType(field.type))
-      const fieldKindOrScalarType = fieldTypeInfo.kind === `Scalar`
+      const fieldTypeInfo = Grafaid.getTypeAndKind(Grafaid.Schema.getNamedType(field.type))
+      const fieldTypeKindOrScalarType = fieldTypeInfo.kindName === Grafaid.Schema.KindMap.Name.ScalarCustom
+          || fieldTypeInfo.kindName === Grafaid.Schema.KindMap.Name.ScalarStandard
         ? `\`${fieldTypeInfo.name}\` (a \`Scalar\`)`
-        : fieldTypeInfo.kind
+        : fieldTypeInfo.kindName
       const doc = Code.TSDoc(`
-        Select the \`${field.name}\` field on the \`${type.name}\` object. Its type is ${fieldKindOrScalarType}.
+        Select the \`${field.name}\` field on the \`${type.name}\` object. Its type is ${fieldTypeKindOrScalarType}.
       `)
       const key = H.outputFieldKey(
         field.name,
@@ -231,14 +220,16 @@ const renderKindObject = createCodeGenerator<{ type: Grafaid.Schema.ObjectType }
   },
 )
 
-const GraphQLKindRenderMap = {
-  GraphQLInputObjectType: renderKindInputObject,
-  GraphQLRootType: renderKindObject,
-  GraphQLObjectType: renderKindObject,
-  GraphQLEnumType: renderKindEnum,
-  GraphQLInterfaceType: renderKindInterface,
-  GraphQLUnionType: renderKindUnion,
-}
+const kindRenderMap = {
+  OutputObject: renderKindOutputObject,
+  InputObject: renderKindInputObject,
+  Enum: renderKindEnum,
+  Root: renderKindOutputObject,
+  Interface: renderKindInterface,
+  Union: renderKindUnion,
+  ScalarCustom: null,
+  ScalarStandard: null,
+} satisfies KindRenderers
 
 const renderOutputField = createCodeGenerator<{ field: Grafaid.Schema.Field<any, any> }>(
   ({ config, field, code }) => {

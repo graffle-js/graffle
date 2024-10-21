@@ -3,14 +3,12 @@ import { Grafaid } from '../../lib/grafaid/__.js'
 import { entries } from '../../lib/prelude.js'
 import { nullabilityFlags, propertyNames } from '../../types/SchemaDrivenDataMap/SchemaDrivenDataMap.js'
 import type { Config } from '../config/config.js'
+import { identifiers } from '../helpers/identifiers.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 import { createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
 import { title1 } from '../helpers/render.js'
+import type { KindRenderers } from '../helpers/types.js'
 import { ModuleGeneratorScalar } from './Scalar.js'
-
-const identifiers = {
-  $Scalar: `$Scalar`,
-}
 
 type ReferenceAssignments = string[]
 
@@ -19,15 +17,15 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
   ({ config, code }) => {
     code(`
       import * as ${identifiers.$Scalar} from './${ModuleGeneratorScalar.name}.js'
-      import type * as $Utilities from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
+      import type * as ${identifiers.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
     `)
 
-    const kinds = getKinds(config)
-    const kindsList = entries(kinds)
+    const kindMap: Grafaid.Schema.KindMap = getKindMap(config)
+    const kinds = entries(kindMap)
 
     const referenceAssignments: ReferenceAssignments = []
 
-    for (const [kindName, nodes] of kindsList) {
+    for (const [kindName, nodes] of kinds) {
       code(title1(kindName))
       code()
       if (nodes.length === 0) {
@@ -53,15 +51,15 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
 
     code(title1(`Index`))
     code()
-    code(`const $schemaDrivenDataMap: $Utilities.SchemaDrivenDataMap =`)
+    code(`const $schemaDrivenDataMap: ${identifiers.$$Utilities}.SchemaDrivenDataMap =`)
     code(Code.termObject({
       roots: Code.directiveTermObject({
-        $literal: kinds.GraphQLRootType.map(type => type.name + `,`).join(`\n`),
+        $literal: kindMap.Root.map(type => type.name + `,`).join(`\n`),
       }),
       directives: `{}`,
       types: Code.directiveTermObject({
         $literal: [
-          ...kindsList.map(([, _]) => _).flat().map((_) => _.name),
+          ...kinds.map(([, _]) => _).flat().map((_) => _.name),
           // We also include the custom scalars here to facilitate encoding. Encoding has names of variables and
           // that need to be looked up to determine which are/have custom scalars.
           // ...config.schema.typeMapByKind.GraphQLScalarTypeCustom.map(_ => {
@@ -91,21 +89,19 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
  * If feature customScalars is enabled then we need to emit all paths to customs scalar inputs AND outputs.
  * If both are enabled the merged requirement is: all paths to inputs AND custom scalar outputs.
  */
-const getKinds = (config: Config) => {
+const getKindMap = (config: Config) => {
   const { schema: { kindMap } } = config
   const condition = typeCondition(config)
   return {
     // When "variables" enabled, we need to know all named types to be able to write them out.
-    GraphQLScalarTypeStandard: kindMap.GraphQLScalarTypeStandard.filter(() =>
-      config.runtimeFeatures.operationVariables
-    ),
-    GraphQLScalarTypeCustom: kindMap.GraphQLScalarTypeCustom.filter(() => config.runtimeFeatures.customScalars),
-    GraphQLEnumType: kindMap.GraphQLEnumType.filter(() => config.runtimeFeatures.operationVariables),
-    GraphQLInputObjectType: kindMap.GraphQLInputObjectType.filter(condition),
-    GraphQLObjectType: kindMap.GraphQLObjectType.filter(condition),
-    GraphQLInterfaceType: kindMap.GraphQLInterfaceType.filter(condition),
-    GraphQLUnionType: kindMap.GraphQLUnionType.filter(condition),
-    GraphQLRootType: kindMap.GraphQLRootType.filter(condition),
+    ScalarStandard: kindMap.ScalarStandard.filter(() => config.runtimeFeatures.operationVariables),
+    ScalarCustom: kindMap.ScalarCustom.filter(() => config.runtimeFeatures.customScalars),
+    Enum: kindMap.Enum.filter(() => config.runtimeFeatures.operationVariables),
+    InputObject: kindMap.InputObject.filter(condition),
+    OutputObject: kindMap.OutputObject.filter(condition),
+    Interface: kindMap.Interface.filter(condition),
+    Union: kindMap.Union.filter(condition),
+    Root: kindMap.Root.filter(condition),
   }
 }
 
@@ -182,7 +178,7 @@ const UnionType = createCodeGenerator<
     // that they could never conflict.
     code(Code.termConstTyped(
       type.name,
-      `$Utilities.SchemaDrivenDataMap.OutputObject`,
+      `${identifiers.$$Utilities}.SchemaDrivenDataMap.OutputObject`,
       Code.termObject({
         [propertyNames.f]: Code.directiveTermObject({
           $spread: type.getTypes().filter(Grafaid.Schema.CustomScalars.isHasCustomScalars).map(memberType =>
@@ -201,7 +197,7 @@ const InterfaceType = createCodeGenerator<
     const implementorTypes = Grafaid.Schema.KindMap.getInterfaceImplementors(config.schema.kindMap, type)
     code(Code.termConstTyped(
       type.name,
-      `$Utilities.SchemaDrivenDataMap.OutputObject`,
+      `${identifiers.$$Utilities}.SchemaDrivenDataMap.OutputObject`,
       Code.termObject({
         [propertyNames.f]: Code.directiveTermObject({
           $spread: implementorTypes.filter(Grafaid.Schema.CustomScalars.isHasCustomScalars).map(memberType =>
@@ -299,7 +295,9 @@ const ObjectType = createCodeGenerator<
       }
     }
 
-    code(Code.termConstTyped(type.name, `$Utilities.SchemaDrivenDataMap.OutputObject`, Code.termObject(o)))
+    code(
+      Code.termConstTyped(type.name, `${identifiers.$$Utilities}.SchemaDrivenDataMap.OutputObject`, Code.termObject(o)),
+    )
   },
 )
 
@@ -309,7 +307,7 @@ const EnumType = createCodeGenerator<
   ({ code, type }) => {
     code(Code.termConstTyped(
       type.name,
-      `$Utilities.SchemaDrivenDataMap.Enum`,
+      `${identifiers.$$Utilities}.SchemaDrivenDataMap.Enum`,
       Code.termObject({
         [propertyNames.k]: Code.string(`enum`),
         [propertyNames.n]: Code.string(type.name),
@@ -370,20 +368,22 @@ const InputObjectType = createCodeGenerator<
       }
     }
 
-    code(Code.termConstTyped(type.name, `$Utilities.SchemaDrivenDataMap.InputObject`, Code.termObject(o)))
+    code(
+      Code.termConstTyped(type.name, `${identifiers.$$Utilities}.SchemaDrivenDataMap.InputObject`, Code.termObject(o)),
+    )
   },
 )
 
 const kindRenders = {
-  GraphQLScalarTypeStandard: ScalarType,
-  GraphQLScalarTypeCustom: ScalarTypeCustom,
-  GraphQLEnumType: EnumType,
-  GraphQLUnionType: UnionType,
-  GraphQLInterfaceType: InterfaceType,
-  GraphQLInputObjectType: InputObjectType,
-  GraphQLObjectType: ObjectType,
-  GraphQLRootType: ObjectType,
-}
+  ScalarStandard: ScalarType,
+  ScalarCustom: ScalarTypeCustom,
+  Enum: EnumType,
+  Union: UnionType,
+  Interface: InterfaceType,
+  InputObject: InputObjectType,
+  OutputObject: ObjectType,
+  Root: ObjectType,
+} satisfies KindRenderers
 
 const inlineType = (type: Grafaid.Schema.InputTypes): string => {
   const [ofType, nonNull] = Grafaid.Schema.isNonNullType(type)

@@ -1,4 +1,4 @@
-import type * as $Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
+import type * as $$Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
 import * as $Scalar from './Scalar.js'
 //
 //
@@ -7,7 +7,7 @@ import * as $Scalar from './Scalar.js'
 //
 //
 // ==================================================================================================
-//                                     GraphQLScalarTypeStandard
+//                                           ScalarStandard
 // ==================================================================================================
 //
 //
@@ -33,7 +33,7 @@ const String = $Scalar.String
 //
 //
 // ==================================================================================================
-//                                      GraphQLScalarTypeCustom
+//                                            ScalarCustom
 // ==================================================================================================
 //
 //
@@ -51,7 +51,7 @@ const Date = 'Date'
 //
 //
 // ==================================================================================================
-//                                          GraphQLEnumType
+//                                                Enum
 // ==================================================================================================
 //
 //
@@ -60,12 +60,12 @@ const Date = 'Date'
 //
 //
 
-const ABCEnum: $Utilities.SchemaDrivenDataMap.Enum = {
+const ABCEnum: $$Utilities.SchemaDrivenDataMap.Enum = {
   k: 'enum',
   n: 'ABCEnum',
 }
 
-const Case: $Utilities.SchemaDrivenDataMap.Enum = {
+const Case: $$Utilities.SchemaDrivenDataMap.Enum = {
   k: 'enum',
   n: 'Case',
 }
@@ -77,7 +77,7 @@ const Case: $Utilities.SchemaDrivenDataMap.Enum = {
 //
 //
 // ==================================================================================================
-//                                       GraphQLInputObjectType
+//                                            InputObject
 // ==================================================================================================
 //
 //
@@ -86,7 +86,7 @@ const Case: $Utilities.SchemaDrivenDataMap.Enum = {
 //
 //
 
-const InputObject: $Utilities.SchemaDrivenDataMap.InputObject = {
+const InputObject: $$Utilities.SchemaDrivenDataMap.InputObject = {
   n: 'InputObject',
   fcs: ['date', 'dateRequired'],
   f: {
@@ -101,7 +101,7 @@ const InputObject: $Utilities.SchemaDrivenDataMap.InputObject = {
   },
 }
 
-const InputObjectCircular: $Utilities.SchemaDrivenDataMap.InputObject = {
+const InputObjectCircular: $$Utilities.SchemaDrivenDataMap.InputObject = {
   n: 'InputObjectCircular',
   fcs: ['circular', 'date'],
   f: {
@@ -114,7 +114,7 @@ const InputObjectCircular: $Utilities.SchemaDrivenDataMap.InputObject = {
   },
 }
 
-const InputObjectNested: $Utilities.SchemaDrivenDataMap.InputObject = {
+const InputObjectNested: $$Utilities.SchemaDrivenDataMap.InputObject = {
   n: 'InputObjectNested',
   fcs: ['InputObject'],
   f: {
@@ -124,7 +124,7 @@ const InputObjectNested: $Utilities.SchemaDrivenDataMap.InputObject = {
   },
 }
 
-const InputObjectNestedNonNull: $Utilities.SchemaDrivenDataMap.InputObject = {
+const InputObjectNestedNonNull: $$Utilities.SchemaDrivenDataMap.InputObject = {
   n: 'InputObjectNestedNonNull',
   fcs: ['InputObject'],
   f: {
@@ -141,7 +141,7 @@ const InputObjectNestedNonNull: $Utilities.SchemaDrivenDataMap.InputObject = {
 //
 //
 // ==================================================================================================
-//                                         GraphQLObjectType
+//                                            OutputObject
 // ==================================================================================================
 //
 //
@@ -150,13 +150,13 @@ const InputObjectNestedNonNull: $Utilities.SchemaDrivenDataMap.InputObject = {
 //
 //
 
-const Bar: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const Bar: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     int: {},
   },
 }
 
-const DateObject1: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const DateObject1: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     date1: {
       nt: Date,
@@ -164,7 +164,7 @@ const DateObject1: $Utilities.SchemaDrivenDataMap.OutputObject = {
   },
 }
 
-const DateObject2: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const DateObject2: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     date2: {
       nt: Date,
@@ -172,27 +172,27 @@ const DateObject2: $Utilities.SchemaDrivenDataMap.OutputObject = {
   },
 }
 
-const ErrorOne: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const ErrorOne: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     infoId: {},
     message: {},
   },
 }
 
-const ErrorTwo: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const ErrorTwo: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     infoInt: {},
     message: {},
   },
 }
 
-const Foo: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const Foo: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     id: {},
   },
 }
 
-const Object1: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const Object1: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     ABCEnum: {},
     boolean: {},
@@ -203,21 +203,21 @@ const Object1: $Utilities.SchemaDrivenDataMap.OutputObject = {
   },
 }
 
-const Object1ImplementingInterface: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const Object1ImplementingInterface: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     id: {},
     int: {},
   },
 }
 
-const Object2ImplementingInterface: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const Object2ImplementingInterface: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     boolean: {},
     id: {},
   },
 }
 
-const ObjectNested: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const ObjectNested: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     id: {},
     object: {
@@ -226,7 +226,7 @@ const ObjectNested: $Utilities.SchemaDrivenDataMap.OutputObject = {
   },
 }
 
-const ObjectUnion: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const ObjectUnion: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     fooBarUnion: {
       // nt: FooBarUnion, <-- Assigned later to avoid potential circular dependency.
@@ -234,13 +234,13 @@ const ObjectUnion: $Utilities.SchemaDrivenDataMap.OutputObject = {
   },
 }
 
-const lowerCaseObject: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const lowerCaseObject: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     id: {},
   },
 }
 
-const lowerCaseObject2: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const lowerCaseObject2: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     int: {},
   },
@@ -253,7 +253,7 @@ const lowerCaseObject2: $Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 // ==================================================================================================
-//                                        GraphQLInterfaceType
+//                                             Interface
 // ==================================================================================================
 //
 //
@@ -262,17 +262,17 @@ const lowerCaseObject2: $Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 
-const DateInterface1: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const DateInterface1: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     ...DateObject1.f,
   },
 }
 
-const Error: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const Error: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {},
 }
 
-const Interface: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const Interface: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {},
 }
 
@@ -283,7 +283,7 @@ const Interface: $Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 // ==================================================================================================
-//                                          GraphQLUnionType
+//                                               Union
 // ==================================================================================================
 //
 //
@@ -292,22 +292,22 @@ const Interface: $Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 
-const DateUnion: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const DateUnion: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     ...DateObject1.f,
     ...DateObject2.f,
   },
 }
 
-const FooBarUnion: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const FooBarUnion: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {},
 }
 
-const Result: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const Result: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {},
 }
 
-const lowerCaseUnion: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const lowerCaseUnion: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {},
 }
 
@@ -318,7 +318,7 @@ const lowerCaseUnion: $Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 // ==================================================================================================
-//                                          GraphQLRootType
+//                                                Root
 // ==================================================================================================
 //
 //
@@ -327,14 +327,14 @@ const lowerCaseUnion: $Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 
-const Mutation: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const Mutation: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     id: {},
     idNonNull: {},
   },
 }
 
-const Query: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const Query: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     InputObjectNested: {
       a: {
@@ -685,7 +685,7 @@ Query.f[`unionObjectNonNull`]!.nt = ObjectUnion
 //
 //
 
-const $schemaDrivenDataMap: $Utilities.SchemaDrivenDataMap = {
+const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
   roots: {
     Mutation,
     Query,

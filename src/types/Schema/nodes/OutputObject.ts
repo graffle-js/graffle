@@ -1,5 +1,5 @@
 import type { __typename } from './__typename.js'
-import type { Field, SomeFields } from './OutputField.js'
+import type { OutputField, SomeFields } from './OutputField.js'
 
 export interface OutputObject<
   $Name extends string = string,
@@ -7,6 +7,6 @@ export interface OutputObject<
 > {
   kind: 'Object'
   fields: {
-    __typename: Field<'__typename', __typename<$Name>, null>
+    __typename: OutputField<'__typename', __typename<$Name>, null>
   } & $Fields
 }

@@ -1,5 +1,7 @@
 // todo jsdoc
+import { pick } from 'es-toolkit'
 import { Grafaid } from '../../lib/grafaid/__.js'
+import { entries } from '../../lib/prelude.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 import { renderName, title1 } from '../helpers/render.js'
 import { ModuleGeneratorSelectionSets } from './SelectionSets.js'
@@ -7,37 +9,32 @@ import { ModuleGeneratorSelectionSets } from './SelectionSets.js'
 export const ModuleGeneratorMethodsSelect = createModuleGenerator(
   `MethodsSelect`,
   ({ config, code }) => {
+    const kindMap = pick(config.schema.kindMap, [`Root`, `OutputObject`, `Union`, `Interface`])
+    const kinds = entries(kindMap)
+
     code(`import type * as $SelectionSets from './${ModuleGeneratorSelectionSets.name}.js'`)
     code(`import type * as $Utilities from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'`)
     code()
-
-    const graphqlTypeGroups = [
-      config.schema.kindMap.GraphQLRootType,
-      config.schema.kindMap.GraphQLObjectType,
-      config.schema.kindMap.GraphQLUnionType,
-      config.schema.kindMap.GraphQLInterfaceType,
-    ].filter(_ => _.length > 0)
 
     code(title1(`Select Methods Interface`))
     code()
 
     code(`export interface $MethodsSelect {`)
-    for (const graphqlTypeGroup of graphqlTypeGroups) {
-      for (const graphqlType of graphqlTypeGroup) {
+    for (const [_, kind] of kinds) {
+      for (const type of kind) {
         // dprint-ignore
-        code(`${graphqlType.name}: ${renderName(graphqlType)}`)
+        code(`${type.name}: ${renderName(type)}`)
       }
     }
     code(`}`)
     code()
 
-    for (const graphqlTypeGroup of graphqlTypeGroups) {
-      const { kind } = Grafaid.getTypeNameAndKind(graphqlTypeGroup[0]!)
-      const titleText = Grafaid.Schema.isRootType(graphqlTypeGroup[0]!) ? `Root` : kind
+    for (const [name, kind] of kinds) {
+      const titleText = Grafaid.Schema.isRootType(kind[0]!) ? `Root` : name
       code(title1(titleText))
       code()
 
-      for (const graphqlType of graphqlTypeGroup) {
+      for (const graphqlType of kind) {
         // dprint-ignore
         code(`
           export interface ${renderName(graphqlType)} {

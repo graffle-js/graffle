@@ -19,9 +19,9 @@ export const ModuleGeneratorScalar = createModuleGenerator(
       code(`import * as ${identifiers.CustomScalars} from '${config.paths.imports.customScalarCodecs}'`)
       code()
       code(`export * from '${config.paths.imports.customScalarCodecs}'`)
-      const names = config.schema.kindMap.GraphQLScalarTypeCustom.map((scalar) => scalar.name).join(`, `)
+      const names = config.schema.kindMap.ScalarCustom.map((scalar) => scalar.name).join(`, `)
       code(`export { ${names} } from '${config.paths.imports.customScalarCodecs}'`)
-      for (const scalar of config.schema.kindMap.GraphQLScalarTypeCustom) {
+      for (const scalar of config.schema.kindMap.ScalarCustom) {
         code(typeTitle2(`custom scalar type`)(scalar))
         code()
         code(`export type ${scalar.name} = typeof ${identifiers.CustomScalars}.${scalar.name}`)
@@ -50,7 +50,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
         )
       }
 
-      for (const scalar of config.schema.kindMap.GraphQLScalarTypeCustom) {
+      for (const scalar of config.schema.kindMap.ScalarCustom) {
         code(typeTitle2(`custom scalar type`)(scalar))
         code()
         code(`export type ${scalar.name} = ${identifiers.$$Utilities}.Schema.Scalar.ScalarCodecless<'Date'>`)

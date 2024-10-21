@@ -8,7 +8,9 @@ import {
   isUnionType,
   OperationTypeNode,
 } from 'graphql'
-import type { DescribableTypes, NodeNamePlus } from './schema/schema.js'
+import { casesExhausted } from '../prelude.js'
+import type { KindMap } from './schema/schema.js'
+import { isRootType, isScalarTypeCustom } from './schema/schema.js'
 
 export * from './_Nodes.js'
 export * from './request.js'
@@ -63,42 +65,32 @@ export const isStandardScalarType = (type: GraphQLScalarType) => {
  * Groups
  */
 
-export const getTypeNameAndKind = (
+export const getTypeAndKind = (
   node: GraphQLNamedType,
-): { name: string; kind: 'Object' | 'Interface' | 'Union' | 'Enum' | 'Scalar' } => {
+): {
+  name: string
+  kindName: KindMap.KindName
+} => {
   const name = node.name
-  const kind = getNodeKindOld(node).replace(`GraphQL`, ``).replace(`Type`, ``) as
-    | 'Object'
-    | 'Interface'
-    | 'Union'
-    | 'Enum'
-    | 'Scalar'
-  return { name, kind }
-}
 
-export const getNodeKindOld = (node: DescribableTypes): NodeNamePlus => {
-  switch (true) {
-    case isObjectType(node):
-      return `GraphQLObjectType`
-    case isInputObjectType(node):
-      return `GraphQLInputObjectType`
-    case isUnionType(node):
-      return `GraphQLUnionType`
-    case isInterfaceType(node):
-      return `GraphQLInterfaceType`
-    case isEnumType(node):
-      return `GraphQLEnumType`
-    case isScalarType(node):
-      return `GraphQLScalarType`
-    default:
-      return `GraphQLField`
+  let kindName: KindMap.KindName
+
+  if (isRootType(node)) {
+    kindName = `Root`
+  } else if (isScalarType(node)) {
+    kindName = isScalarTypeCustom(node) ? `ScalarCustom` : `ScalarStandard`
+  } else if (isUnionType(node)) {
+    kindName = `Union`
+  } else if (isInterfaceType(node)) {
+    kindName = `Interface`
+  } else if (isObjectType(node)) {
+    kindName = `OutputObject`
+  } else if (isInputObjectType(node)) {
+    kindName = `InputObject`
+  } else if (isEnumType(node)) {
+    kindName = `Enum`
+  } else {
+    throw casesExhausted(node)
   }
-}
-
-export const getNodeDisplayName = (node: DescribableTypes) => {
-  return toDisplayName(getNodeKindOld(node))
-}
-
-const toDisplayName = (nodeName: NodeNamePlus) => {
-  return nodeName.replace(/^GraphQL/, ``).replace(/Type$/, ``)
+  return { name, kindName }
 }

@@ -1,6 +1,5 @@
 import { Code } from '../../lib/Code.js'
 import { Grafaid } from '../../lib/grafaid/__.js'
-import { getNodeDisplayName } from '../../lib/grafaid/graphql.js'
 import { borderThickFullWidth, borderThinFullWidth, centerTo } from '../../lib/text.js'
 import type { Config } from '../config/config.js'
 
@@ -26,8 +25,10 @@ export const title1 = (title: string, subTitle?: string) => {
 }
 
 export const typeTitle2 = (category: string) => (type: Grafaid.Schema.NamedTypes) => {
-  const typeKind = Grafaid.getTypeNameAndKind(type)
-  const nameOrKind = typeKind.kind === `Scalar` ? typeKind.name : typeKind.kind
+  const typeKind = Grafaid.getTypeAndKind(type)
+  const nameOrKind = typeKind.kindName === `ScalarCustom` || typeKind.kindName === `ScalarStandard`
+    ? typeKind.name
+    : typeKind.kindName
   const typeLabel = nameOrKind
   const title = `
     //
@@ -48,9 +49,9 @@ export const typeTitle2 = (category: string) => (type: Grafaid.Schema.NamedTypes
 
 export const typeTitle2SelectionSet = typeTitle2(`GRAPHQL SELECTION SET`)
 
-export const typeTitle = (config: Config, typeKind: Grafaid.Schema.NamedTypeKind) => {
-  const hasItems = config.schema.kindMap[`GraphQL${typeKind}Type`].length > 0
-  const title = `${typeKind} Types`
+export const typeTitle = (config: Config, kindName: Grafaid.Schema.KindMap.KindName) => {
+  const hasItems = config.schema.kindMap[kindName].length > 0
+  const title = `${kindName} Types`
   const titleDecorated = `// ${title}\n// ${`-`.repeat(title.length)}\n`
   if (hasItems) {
     return titleDecorated
@@ -59,8 +60,10 @@ export const typeTitle = (config: Config, typeKind: Grafaid.Schema.NamedTypeKind
   }
 }
 
-const defaultDescription = (node: Grafaid.Schema.DescribableTypes) =>
-  `There is no documentation for this ${getNodeDisplayName(node)}.`
+const defaultDescription = (node: Grafaid.Schema.DescribableTypes) => {
+  const entity = Grafaid.Schema.isField(node) ? `Field` : Grafaid.getTypeAndKind(node).kindName
+  return `There is no documentation for this ${entity}.`
+}
 
 export const renderDocumentation = (config: Config, node: Grafaid.Schema.DescribableTypes) => {
   return Code.TSDoc(getDocumentation(config, node))

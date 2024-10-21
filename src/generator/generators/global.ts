@@ -19,8 +19,8 @@ export const ModuleGeneratorGlobal = createModuleGenerator(
       `import type { ${identifiers.Schema} } from './${ModuleGeneratorSchema.name}.js'`,
     )
 
-    if (config.schema.kindMap.GraphQLScalarTypeCustom.length > 0) {
-      code(`import type * as ${identifiers.Scalar} from './${ModuleGeneratorScalar.name}.js'`)
+    if (config.schema.kindMap.ScalarCustom.length > 0) {
+      code(`import type * as ${identifiers.$Scalar} from './${ModuleGeneratorScalar.name}.js'`)
     }
     code()
 
