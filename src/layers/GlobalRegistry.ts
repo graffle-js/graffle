@@ -1,4 +1,4 @@
-import type { IsNever, IsUnknown } from 'type-fest'
+import type { IsNever } from 'type-fest'
 import type { TypeFunction } from '../entrypoints/utilities-for-generated.js'
 import type { Schema } from '../generator/generators/Schema.js'
 import type { ConfigManager } from '../lib/config-manager/__.js'
