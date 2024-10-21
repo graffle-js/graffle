@@ -41,8 +41,8 @@ export namespace Select {
   // Root Types
   // ----------
   export type Query<$SelectionSet extends SelectionSets.Query> = InferResult.Root<$SelectionSet, Schema, 'Query'>
-  // Object Types
-  // ------------
+  // OutputObject Types
+  // ------------------
   export type Continent<$SelectionSet extends SelectionSets.Continent> = InferResult.Object<
     $SelectionSet,
     Schema,

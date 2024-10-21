@@ -54,11 +54,11 @@ export interface $Document<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap 
 
 export interface Mutation<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
   /**
-   * Select the `id` field on the `Mutation` object. Its type is ScalarStandard.
+   * Select the `id` field on the `Mutation` object. Its type is `ID` (a `Scalar`).
    */
   id?: Mutation.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Mutation.id<$Scalars>>
   /**
-   * Select the `idNonNull` field on the `Mutation` object. Its type is ScalarStandard.
+   * Select the `idNonNull` field on the `Mutation` object. Its type is `ID` (a `Scalar`).
    */
   idNonNull?: Mutation.idNonNull$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Mutation.idNonNull<$Scalars>>
 

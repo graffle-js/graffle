@@ -42,7 +42,7 @@ exports[`kitchen-sink generated modules > modules/Global.ts 1`] = `
 import type * as MethodsDocument from './MethodsDocument.js'
 import type * as MethodsRoot from './MethodsRoot.js'
 import type * as MethodsSelect from './MethodsSelect.js'
-import type * as Scalar from './Scalar.js'
+import type * as $Scalar from './Scalar.js'
 import type { Schema } from './Schema.js'
 
 declare global {
@@ -808,7 +808,7 @@ export interface Query {
 //
 //
 // ==================================================================================================
-//                                               Object
+//                                            OutputObject
 // ==================================================================================================
 //
 //
@@ -938,7 +938,7 @@ export interface Interface {
 exports[`kitchen-sink generated modules > modules/Scalar.ts 1`] = `
 "import type * as $$Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
 
-export * from '../../../../../../src/types/Schema/types/Scalar/scalars.js'
+export * from '../../../../../../src/types/Schema/StandardTypes/scalar.js'
 
 //
 //
@@ -952,12 +952,12 @@ export * from '../../../../../../src/types/Schema/types/Scalar/scalars.js'
 //
 //
 
-export type Date = $$Utilities.SchemaKit.Scalar.ScalarCodecless<'Date'>
+export type Date = $$Utilities.Schema.Scalar.ScalarCodecless<'Date'>
 "
 `;
 
 exports[`kitchen-sink generated modules > modules/Schema.ts 1`] = `
-"import type { SchemaKit as $ } from '../../../../../../src/entrypoints/utilities-for-generated.js'
+"import type { Schema as $ } from '../../../../../../src/entrypoints/utilities-for-generated.js'
 import type * as $$Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
 import type * as Data from './Data.js'
 import type * as MethodsRoot from './MethodsRoot.js'
@@ -979,20 +979,20 @@ export namespace Schema {
   //
   //
 
-  export type Mutation = $.ObjectMutation<{
-    id: $.Field<'id', $.Nullable<$Scalar.ID>, null>
-    idNonNull: $.Field<'idNonNull', $Scalar.ID, null>
+  export type Mutation = $.StandardTypes.Mutation<{
+    id: $.OutputField<'id', $.Nullable<$Scalar.ID>, null>
+    idNonNull: $.OutputField<'idNonNull', $Scalar.ID, null>
   }>
 
-  export type Query = $.ObjectQuery<{
-    InputObjectNested: $.Field<
+  export type Query = $.StandardTypes.Query<{
+    InputObjectNested: $.OutputField<
       'InputObjectNested',
       $.Nullable<$Scalar.ID>,
       $.Args<{
         input: $.InputField<$.Nullable<InputObjectNested>>
       }, true>
     >
-    InputObjectNestedNonNull: $.Field<
+    InputObjectNestedNonNull: $.OutputField<
       'InputObjectNestedNonNull',
       $.Nullable<$Scalar.ID>,
       $.Args<{
@@ -1002,93 +1002,93 @@ export namespace Schema {
     /**
      * Query enum field documentation.
      */
-    abcEnum: $.Field<'abcEnum', $.Nullable<ABCEnum>, null>
-    argInputObjectCircular: $.Field<
+    abcEnum: $.OutputField<'abcEnum', $.Nullable<ABCEnum>, null>
+    argInputObjectCircular: $.OutputField<
       'argInputObjectCircular',
       $.Nullable<$Scalar.String>,
       $.Args<{
         input: $.InputField<$.Nullable<InputObjectCircular>>
       }, true>
     >
-    date: $.Field<'date', $.Nullable<$Scalar.Date>, null>
-    dateArg: $.Field<
+    date: $.OutputField<'date', $.Nullable<$Scalar.Date>, null>
+    dateArg: $.OutputField<
       'dateArg',
       $.Nullable<$Scalar.Date>,
       $.Args<{
         date: $.InputField<$.Nullable<$Scalar.Date>>
       }, true>
     >
-    dateArgInputObject: $.Field<
+    dateArgInputObject: $.OutputField<
       'dateArgInputObject',
       $.Nullable<$Scalar.Date>,
       $.Args<{
         input: $.InputField<$.Nullable<InputObject>>
       }, true>
     >
-    dateArgList: $.Field<
+    dateArgList: $.OutputField<
       'dateArgList',
       $.Nullable<$Scalar.Date>,
       $.Args<{
         date: $.InputField<$.Nullable<$.List<$Scalar.Date>>>
       }, true>
     >
-    dateArgNonNull: $.Field<
+    dateArgNonNull: $.OutputField<
       'dateArgNonNull',
       $.Nullable<$Scalar.Date>,
       $.Args<{
         date: $.InputField<$Scalar.Date>
       }, false>
     >
-    dateArgNonNullList: $.Field<
+    dateArgNonNullList: $.OutputField<
       'dateArgNonNullList',
       $.Nullable<$Scalar.Date>,
       $.Args<{
         date: $.InputField<$.List<$.Nullable<$Scalar.Date>>>
       }, false>
     >
-    dateArgNonNullListNonNull: $.Field<
+    dateArgNonNullListNonNull: $.OutputField<
       'dateArgNonNullListNonNull',
       $.Nullable<$Scalar.Date>,
       $.Args<{
         date: $.InputField<$.List<$Scalar.Date>>
       }, false>
     >
-    dateInterface1: $.Field<'dateInterface1', $.Nullable<DateInterface1>, null>
-    dateList: $.Field<'dateList', $.Nullable<$.List<$Scalar.Date>>, null>
-    dateListList: $.Field<'dateListList', $.Nullable<$.List<$.List<$Scalar.Date>>>, null>
-    dateListNonNull: $.Field<'dateListNonNull', $.List<$Scalar.Date>, null>
-    dateNonNull: $.Field<'dateNonNull', $Scalar.Date, null>
-    dateObject1: $.Field<'dateObject1', $.Nullable<DateObject1>, null>
-    dateUnion: $.Field<'dateUnion', $.Nullable<DateUnion>, null>
-    error: $.Field<
+    dateInterface1: $.OutputField<'dateInterface1', $.Nullable<DateInterface1>, null>
+    dateList: $.OutputField<'dateList', $.Nullable<$.List<$Scalar.Date>>, null>
+    dateListList: $.OutputField<'dateListList', $.Nullable<$.List<$.List<$Scalar.Date>>>, null>
+    dateListNonNull: $.OutputField<'dateListNonNull', $.List<$Scalar.Date>, null>
+    dateNonNull: $.OutputField<'dateNonNull', $Scalar.Date, null>
+    dateObject1: $.OutputField<'dateObject1', $.Nullable<DateObject1>, null>
+    dateUnion: $.OutputField<'dateUnion', $.Nullable<DateUnion>, null>
+    error: $.OutputField<
       'error',
       $.Nullable<$Scalar.String>,
       $.Args<{
         case: $.InputField<$.Nullable<$Scalar.String>>
       }, true>
     >
-    id: $.Field<'id', $.Nullable<$Scalar.ID>, null>
-    idNonNull: $.Field<'idNonNull', $Scalar.ID, null>
-    interface: $.Field<'interface', $.Nullable<Interface>, null>
-    interfaceNonNull: $.Field<'interfaceNonNull', Interface, null>
-    interfaceWithArgs: $.Field<
+    id: $.OutputField<'id', $.Nullable<$Scalar.ID>, null>
+    idNonNull: $.OutputField<'idNonNull', $Scalar.ID, null>
+    interface: $.OutputField<'interface', $.Nullable<Interface>, null>
+    interfaceNonNull: $.OutputField<'interfaceNonNull', Interface, null>
+    interfaceWithArgs: $.OutputField<
       'interfaceWithArgs',
       $.Nullable<Interface>,
       $.Args<{
         id: $.InputField<$Scalar.ID>
       }, false>
     >
-    listInt: $.Field<'listInt', $.Nullable<$.List<$.Nullable<$Scalar.Int>>>, null>
-    listIntNonNull: $.Field<'listIntNonNull', $.List<$Scalar.Int>, null>
-    listListInt: $.Field<'listListInt', $.Nullable<$.List<$.Nullable<$.List<$.Nullable<$Scalar.Int>>>>>, null>
-    listListIntNonNull: $.Field<'listListIntNonNull', $.List<$.List<$Scalar.Int>>, null>
-    lowerCaseUnion: $.Field<'lowerCaseUnion', $.Nullable<lowerCaseUnion>, null>
-    object: $.Field<'object', $.Nullable<Object1>, null>
-    objectList: $.Field<'objectList', $.Nullable<$.List<Object1>>, null>
-    objectListNonNull: $.Field<'objectListNonNull', $.List<Object1>, null>
-    objectNested: $.Field<'objectNested', $.Nullable<ObjectNested>, null>
-    objectNonNull: $.Field<'objectNonNull', Object1, null>
-    objectWithArgs: $.Field<
+    listInt: $.OutputField<'listInt', $.Nullable<$.List<$.Nullable<$Scalar.Int>>>, null>
+    listIntNonNull: $.OutputField<'listIntNonNull', $.List<$Scalar.Int>, null>
+    listListInt: $.OutputField<'listListInt', $.Nullable<$.List<$.Nullable<$.List<$.Nullable<$Scalar.Int>>>>>, null>
+    listListIntNonNull: $.OutputField<'listListIntNonNull', $.List<$.List<$Scalar.Int>>, null>
+    lowerCaseUnion: $.OutputField<'lowerCaseUnion', $.Nullable<lowerCaseUnion>, null>
+    object: $.OutputField<'object', $.Nullable<Object1>, null>
+    objectList: $.OutputField<'objectList', $.Nullable<$.List<Object1>>, null>
+    objectListNonNull: $.OutputField<'objectListNonNull', $.List<Object1>, null>
+    objectNested: $.OutputField<'objectNested', $.Nullable<ObjectNested>, null>
+    objectNonNull: $.OutputField<'objectNonNull', Object1, null>
+    objectWithArgs: $.OutputField<
       'objectWithArgs',
       $.Nullable<Object1>,
       $.Args<{
@@ -1099,36 +1099,36 @@ export namespace Schema {
         string: $.InputField<$.Nullable<$Scalar.String>>
       }, true>
     >
-    result: $.Field<
+    result: $.OutputField<
       'result',
       $.Nullable<Result>,
       $.Args<{
         case: $.InputField<Case>
       }, false>
     >
-    resultNonNull: $.Field<
+    resultNonNull: $.OutputField<
       'resultNonNull',
       Result,
       $.Args<{
         case: $.InputField<$.Nullable<Case>>
       }, true>
     >
-    string: $.Field<'string', $.Nullable<$Scalar.String>, null>
-    stringWithArgEnum: $.Field<
+    string: $.OutputField<'string', $.Nullable<$Scalar.String>, null>
+    stringWithArgEnum: $.OutputField<
       'stringWithArgEnum',
       $.Nullable<$Scalar.String>,
       $.Args<{
         ABCEnum: $.InputField<$.Nullable<ABCEnum>>
       }, true>
     >
-    stringWithArgInputObject: $.Field<
+    stringWithArgInputObject: $.OutputField<
       'stringWithArgInputObject',
       $.Nullable<$Scalar.String>,
       $.Args<{
         input: $.InputField<$.Nullable<InputObject>>
       }, true>
     >
-    stringWithArgInputObjectRequired: $.Field<
+    stringWithArgInputObjectRequired: $.OutputField<
       'stringWithArgInputObjectRequired',
       $.Nullable<$Scalar.String>,
       $.Args<{
@@ -1138,7 +1138,7 @@ export namespace Schema {
     /**
      * The given arguments are reflected back as a JSON string.
      */
-    stringWithArgs: $.Field<
+    stringWithArgs: $.OutputField<
       'stringWithArgs',
       $.Nullable<$Scalar.String>,
       $.Args<{
@@ -1149,38 +1149,38 @@ export namespace Schema {
         string: $.InputField<$.Nullable<$Scalar.String>>
       }, true>
     >
-    stringWithListArg: $.Field<
+    stringWithListArg: $.OutputField<
       'stringWithListArg',
       $.Nullable<$Scalar.String>,
       $.Args<{
         ints: $.InputField<$.Nullable<$.List<$.Nullable<$Scalar.Int>>>>
       }, true>
     >
-    stringWithListArgRequired: $.Field<
+    stringWithListArgRequired: $.OutputField<
       'stringWithListArgRequired',
       $.Nullable<$Scalar.String>,
       $.Args<{
         ints: $.InputField<$.List<$Scalar.Int>>
       }, false>
     >
-    stringWithRequiredArg: $.Field<
+    stringWithRequiredArg: $.OutputField<
       'stringWithRequiredArg',
       $.Nullable<$Scalar.String>,
       $.Args<{
         string: $.InputField<$Scalar.String>
       }, false>
     >
-    unionFooBar: $.Field<'unionFooBar', $.Nullable<FooBarUnion>, null>
-    unionFooBarNonNull: $.Field<'unionFooBarNonNull', FooBarUnion, null>
-    unionFooBarWithArgs: $.Field<
+    unionFooBar: $.OutputField<'unionFooBar', $.Nullable<FooBarUnion>, null>
+    unionFooBarNonNull: $.OutputField<'unionFooBarNonNull', FooBarUnion, null>
+    unionFooBarWithArgs: $.OutputField<
       'unionFooBarWithArgs',
       $.Nullable<FooBarUnion>,
       $.Args<{
         id: $.InputField<$.Nullable<$Scalar.ID>>
       }, true>
     >
-    unionObject: $.Field<'unionObject', $.Nullable<ObjectUnion>, null>
-    unionObjectNonNull: $.Field<'unionObjectNonNull', ObjectUnion, null>
+    unionObject: $.OutputField<'unionObject', $.Nullable<ObjectUnion>, null>
+    unionObjectNonNull: $.OutputField<'unionObjectNonNull', ObjectUnion, null>
   }>
 
   //
@@ -1190,7 +1190,7 @@ export namespace Schema {
   //
   //
   // ==================================================================================================
-  //                                                Enum
+  //                                            OutputObject
   // ==================================================================================================
   //
   //
@@ -1199,17 +1199,75 @@ export namespace Schema {
   //
   //
 
-  /**
-   * Enum documentation.
-   *
-   * Members
-   * "A" - (DEPRECATED: Enum value A is deprecated.)
-   * "B" - Enum B member documentation.
-   * "C" - (DEPRECATED: Enum value C is deprecated.)
-   */
-  export type ABCEnum = $.Enum<'ABCEnum', ['A', 'B', 'C']>
+  export type Bar = $.OutputObject<'Bar', {
+    int: $.OutputField<'int', $.Nullable<$Scalar.Int>, null>
+  }>
 
-  export type Case = $.Enum<'Case', ['ErrorOne', 'ErrorTwo', 'Object1']>
+  export type DateObject1 = $.OutputObject<'DateObject1', {
+    date1: $.OutputField<'date1', $.Nullable<$Scalar.Date>, null>
+  }>
+
+  export type DateObject2 = $.OutputObject<'DateObject2', {
+    date2: $.OutputField<'date2', $.Nullable<$Scalar.Date>, null>
+  }>
+
+  export type ErrorOne = $.OutputObject<'ErrorOne', {
+    infoId: $.OutputField<'infoId', $.Nullable<$Scalar.ID>, null>
+    message: $.OutputField<'message', $Scalar.String, null>
+  }>
+
+  export type ErrorTwo = $.OutputObject<'ErrorTwo', {
+    infoInt: $.OutputField<'infoInt', $.Nullable<$Scalar.Int>, null>
+    message: $.OutputField<'message', $Scalar.String, null>
+  }>
+
+  /**
+   * Object documentation.
+   */
+  export type Foo = $.OutputObject<'Foo', {
+    /**
+     * Field documentation.
+     *
+     * @deprecated Field a is deprecated.
+     */
+    id: $.OutputField<'id', $.Nullable<$Scalar.ID>, null>
+  }>
+
+  export type Object1 = $.OutputObject<'Object1', {
+    ABCEnum: $.OutputField<'ABCEnum', $.Nullable<ABCEnum>, null>
+    boolean: $.OutputField<'boolean', $.Nullable<$Scalar.Boolean>, null>
+    float: $.OutputField<'float', $.Nullable<$Scalar.Float>, null>
+    id: $.OutputField<'id', $.Nullable<$Scalar.ID>, null>
+    int: $.OutputField<'int', $.Nullable<$Scalar.Int>, null>
+    string: $.OutputField<'string', $.Nullable<$Scalar.String>, null>
+  }>
+
+  export type Object1ImplementingInterface = $.OutputObject<'Object1ImplementingInterface', {
+    id: $.OutputField<'id', $.Nullable<$Scalar.ID>, null>
+    int: $.OutputField<'int', $.Nullable<$Scalar.Int>, null>
+  }>
+
+  export type Object2ImplementingInterface = $.OutputObject<'Object2ImplementingInterface', {
+    boolean: $.OutputField<'boolean', $.Nullable<$Scalar.Boolean>, null>
+    id: $.OutputField<'id', $.Nullable<$Scalar.ID>, null>
+  }>
+
+  export type ObjectNested = $.OutputObject<'ObjectNested', {
+    id: $.OutputField<'id', $.Nullable<$Scalar.ID>, null>
+    object: $.OutputField<'object', $.Nullable<Object1>, null>
+  }>
+
+  export type ObjectUnion = $.OutputObject<'ObjectUnion', {
+    fooBarUnion: $.OutputField<'fooBarUnion', $.Nullable<FooBarUnion>, null>
+  }>
+
+  export type lowerCaseObject = $.OutputObject<'lowerCaseObject', {
+    id: $.OutputField<'id', $.Nullable<$Scalar.ID>, null>
+  }>
+
+  export type lowerCaseObject2 = $.OutputObject<'lowerCaseObject2', {
+    int: $.OutputField<'int', $.Nullable<$Scalar.Int>, null>
+  }>
 
   //
   //
@@ -1264,102 +1322,16 @@ export namespace Schema {
   //
 
   export type DateInterface1 = $.Interface<'DateInterface1', {
-    date1: $.Field<'date1', $.Nullable<$Scalar.Date>, null>
+    date1: $.OutputField<'date1', $.Nullable<$Scalar.Date>, null>
   }, [DateObject1]>
 
   export type Error = $.Interface<'Error', {
-    message: $.Field<'message', $Scalar.String, null>
+    message: $.OutputField<'message', $Scalar.String, null>
   }, [ErrorOne, ErrorTwo]>
 
   export type Interface = $.Interface<'Interface', {
-    id: $.Field<'id', $.Nullable<$Scalar.ID>, null>
+    id: $.OutputField<'id', $.Nullable<$Scalar.ID>, null>
   }, [Object1ImplementingInterface, Object2ImplementingInterface]>
-
-  //
-  //
-  //
-  //
-  //
-  //
-  // ==================================================================================================
-  //                                               Object
-  // ==================================================================================================
-  //
-  //
-  //
-  //
-  //
-  //
-
-  export type Bar = $.OutputObject<'Bar', {
-    int: $.Field<'int', $.Nullable<$Scalar.Int>, null>
-  }>
-
-  export type DateObject1 = $.OutputObject<'DateObject1', {
-    date1: $.Field<'date1', $.Nullable<$Scalar.Date>, null>
-  }>
-
-  export type DateObject2 = $.OutputObject<'DateObject2', {
-    date2: $.Field<'date2', $.Nullable<$Scalar.Date>, null>
-  }>
-
-  export type ErrorOne = $.OutputObject<'ErrorOne', {
-    infoId: $.Field<'infoId', $.Nullable<$Scalar.ID>, null>
-    message: $.Field<'message', $Scalar.String, null>
-  }>
-
-  export type ErrorTwo = $.OutputObject<'ErrorTwo', {
-    infoInt: $.Field<'infoInt', $.Nullable<$Scalar.Int>, null>
-    message: $.Field<'message', $Scalar.String, null>
-  }>
-
-  /**
-   * Object documentation.
-   */
-  export type Foo = $.OutputObject<'Foo', {
-    /**
-     * Field documentation.
-     *
-     * @deprecated Field a is deprecated.
-     */
-    id: $.Field<'id', $.Nullable<$Scalar.ID>, null>
-  }>
-
-  export type Object1 = $.OutputObject<'Object1', {
-    ABCEnum: $.Field<'ABCEnum', $.Nullable<ABCEnum>, null>
-    boolean: $.Field<'boolean', $.Nullable<$Scalar.Boolean>, null>
-    float: $.Field<'float', $.Nullable<$Scalar.Float>, null>
-    id: $.Field<'id', $.Nullable<$Scalar.ID>, null>
-    int: $.Field<'int', $.Nullable<$Scalar.Int>, null>
-    string: $.Field<'string', $.Nullable<$Scalar.String>, null>
-  }>
-
-  export type Object1ImplementingInterface = $.OutputObject<'Object1ImplementingInterface', {
-    id: $.Field<'id', $.Nullable<$Scalar.ID>, null>
-    int: $.Field<'int', $.Nullable<$Scalar.Int>, null>
-  }>
-
-  export type Object2ImplementingInterface = $.OutputObject<'Object2ImplementingInterface', {
-    boolean: $.Field<'boolean', $.Nullable<$Scalar.Boolean>, null>
-    id: $.Field<'id', $.Nullable<$Scalar.ID>, null>
-  }>
-
-  export type ObjectNested = $.OutputObject<'ObjectNested', {
-    id: $.Field<'id', $.Nullable<$Scalar.ID>, null>
-    object: $.Field<'object', $.Nullable<Object1>, null>
-  }>
-
-  export type ObjectUnion = $.OutputObject<'ObjectUnion', {
-    fooBarUnion: $.Field<'fooBarUnion', $.Nullable<FooBarUnion>, null>
-  }>
-
-  export type lowerCaseObject = $.OutputObject<'lowerCaseObject', {
-    id: $.Field<'id', $.Nullable<$Scalar.ID>, null>
-  }>
-
-  export type lowerCaseObject2 = $.OutputObject<'lowerCaseObject2', {
-    int: $.Field<'int', $.Nullable<$Scalar.Int>, null>
-  }>
 
   //
   //
@@ -1387,6 +1359,34 @@ export namespace Schema {
   export type Result = $.Union<'Result', [ErrorOne, ErrorTwo, Object1]>
 
   export type lowerCaseUnion = $.Union<'lowerCaseUnion', [lowerCaseObject, lowerCaseObject2]>
+
+  //
+  //
+  //
+  //
+  //
+  //
+  // ==================================================================================================
+  //                                                Enum
+  // ==================================================================================================
+  //
+  //
+  //
+  //
+  //
+  //
+
+  /**
+   * Enum documentation.
+   *
+   * Members
+   * "A" - (DEPRECATED: Enum value A is deprecated.)
+   * "B" - Enum B member documentation.
+   * "C" - (DEPRECATED: Enum value C is deprecated.)
+   */
+  export type ABCEnum = $.Enum<'ABCEnum', ['A', 'B', 'C']>
+
+  export type Case = $.Enum<'Case', ['ErrorOne', 'ErrorTwo', 'Object1']>
 }
 
 //
@@ -1404,9 +1404,7 @@ export namespace Schema {
 //
 //
 //
-export interface Schema<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
-  extends $$Utilities.SchemaIndexBase
-{
+export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> extends $$Utilities.Schema {
   name: Data.Name
   RootTypesPresent: ['Mutation', 'Query']
   RootUnion: Schema.Mutation | Schema.Query
@@ -1474,7 +1472,7 @@ export interface Schema<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap 
 `;
 
 exports[`kitchen-sink generated modules > modules/SchemaDrivenDataMap.ts 1`] = `
-"import type * as $Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
+"import type * as $$Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
 import * as $Scalar from './Scalar.js'
 //
 //
@@ -1483,7 +1481,7 @@ import * as $Scalar from './Scalar.js'
 //
 //
 // ==================================================================================================
-//                                     GraphQLScalarTypeStandard
+//                                           ScalarStandard
 // ==================================================================================================
 //
 //
@@ -1509,7 +1507,7 @@ const String = $Scalar.String
 //
 //
 // ==================================================================================================
-//                                      GraphQLScalarTypeCustom
+//                                            ScalarCustom
 // ==================================================================================================
 //
 //
@@ -1527,7 +1525,7 @@ const Date = 'Date'
 //
 //
 // ==================================================================================================
-//                                          GraphQLEnumType
+//                                                Enum
 // ==================================================================================================
 //
 //
@@ -1536,12 +1534,12 @@ const Date = 'Date'
 //
 //
 
-const ABCEnum: $Utilities.SchemaDrivenDataMap.Enum = {
+const ABCEnum: $$Utilities.SchemaDrivenDataMap.Enum = {
   k: 'enum',
   n: 'ABCEnum',
 }
 
-const Case: $Utilities.SchemaDrivenDataMap.Enum = {
+const Case: $$Utilities.SchemaDrivenDataMap.Enum = {
   k: 'enum',
   n: 'Case',
 }
@@ -1553,7 +1551,7 @@ const Case: $Utilities.SchemaDrivenDataMap.Enum = {
 //
 //
 // ==================================================================================================
-//                                       GraphQLInputObjectType
+//                                            InputObject
 // ==================================================================================================
 //
 //
@@ -1562,7 +1560,7 @@ const Case: $Utilities.SchemaDrivenDataMap.Enum = {
 //
 //
 
-const InputObject: $Utilities.SchemaDrivenDataMap.InputObject = {
+const InputObject: $$Utilities.SchemaDrivenDataMap.InputObject = {
   n: 'InputObject',
   fcs: ['date', 'dateRequired'],
   f: {
@@ -1577,7 +1575,7 @@ const InputObject: $Utilities.SchemaDrivenDataMap.InputObject = {
   },
 }
 
-const InputObjectCircular: $Utilities.SchemaDrivenDataMap.InputObject = {
+const InputObjectCircular: $$Utilities.SchemaDrivenDataMap.InputObject = {
   n: 'InputObjectCircular',
   fcs: ['circular', 'date'],
   f: {
@@ -1590,7 +1588,7 @@ const InputObjectCircular: $Utilities.SchemaDrivenDataMap.InputObject = {
   },
 }
 
-const InputObjectNested: $Utilities.SchemaDrivenDataMap.InputObject = {
+const InputObjectNested: $$Utilities.SchemaDrivenDataMap.InputObject = {
   n: 'InputObjectNested',
   fcs: ['InputObject'],
   f: {
@@ -1600,7 +1598,7 @@ const InputObjectNested: $Utilities.SchemaDrivenDataMap.InputObject = {
   },
 }
 
-const InputObjectNestedNonNull: $Utilities.SchemaDrivenDataMap.InputObject = {
+const InputObjectNestedNonNull: $$Utilities.SchemaDrivenDataMap.InputObject = {
   n: 'InputObjectNestedNonNull',
   fcs: ['InputObject'],
   f: {
@@ -1617,7 +1615,7 @@ const InputObjectNestedNonNull: $Utilities.SchemaDrivenDataMap.InputObject = {
 //
 //
 // ==================================================================================================
-//                                         GraphQLObjectType
+//                                            OutputObject
 // ==================================================================================================
 //
 //
@@ -1626,13 +1624,13 @@ const InputObjectNestedNonNull: $Utilities.SchemaDrivenDataMap.InputObject = {
 //
 //
 
-const Bar: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const Bar: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     int: {},
   },
 }
 
-const DateObject1: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const DateObject1: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     date1: {
       nt: Date,
@@ -1640,7 +1638,7 @@ const DateObject1: $Utilities.SchemaDrivenDataMap.OutputObject = {
   },
 }
 
-const DateObject2: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const DateObject2: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     date2: {
       nt: Date,
@@ -1648,27 +1646,27 @@ const DateObject2: $Utilities.SchemaDrivenDataMap.OutputObject = {
   },
 }
 
-const ErrorOne: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const ErrorOne: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     infoId: {},
     message: {},
   },
 }
 
-const ErrorTwo: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const ErrorTwo: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     infoInt: {},
     message: {},
   },
 }
 
-const Foo: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const Foo: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     id: {},
   },
 }
 
-const Object1: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const Object1: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     ABCEnum: {},
     boolean: {},
@@ -1679,21 +1677,21 @@ const Object1: $Utilities.SchemaDrivenDataMap.OutputObject = {
   },
 }
 
-const Object1ImplementingInterface: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const Object1ImplementingInterface: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     id: {},
     int: {},
   },
 }
 
-const Object2ImplementingInterface: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const Object2ImplementingInterface: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     boolean: {},
     id: {},
   },
 }
 
-const ObjectNested: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const ObjectNested: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     id: {},
     object: {
@@ -1702,7 +1700,7 @@ const ObjectNested: $Utilities.SchemaDrivenDataMap.OutputObject = {
   },
 }
 
-const ObjectUnion: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const ObjectUnion: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     fooBarUnion: {
       // nt: FooBarUnion, <-- Assigned later to avoid potential circular dependency.
@@ -1710,13 +1708,13 @@ const ObjectUnion: $Utilities.SchemaDrivenDataMap.OutputObject = {
   },
 }
 
-const lowerCaseObject: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const lowerCaseObject: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     id: {},
   },
 }
 
-const lowerCaseObject2: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const lowerCaseObject2: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     int: {},
   },
@@ -1729,7 +1727,7 @@ const lowerCaseObject2: $Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 // ==================================================================================================
-//                                        GraphQLInterfaceType
+//                                             Interface
 // ==================================================================================================
 //
 //
@@ -1738,17 +1736,17 @@ const lowerCaseObject2: $Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 
-const DateInterface1: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const DateInterface1: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     ...DateObject1.f,
   },
 }
 
-const Error: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const Error: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {},
 }
 
-const Interface: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const Interface: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {},
 }
 
@@ -1759,7 +1757,7 @@ const Interface: $Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 // ==================================================================================================
-//                                          GraphQLUnionType
+//                                               Union
 // ==================================================================================================
 //
 //
@@ -1768,22 +1766,22 @@ const Interface: $Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 
-const DateUnion: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const DateUnion: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     ...DateObject1.f,
     ...DateObject2.f,
   },
 }
 
-const FooBarUnion: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const FooBarUnion: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {},
 }
 
-const Result: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const Result: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {},
 }
 
-const lowerCaseUnion: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const lowerCaseUnion: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {},
 }
 
@@ -1794,7 +1792,7 @@ const lowerCaseUnion: $Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 // ==================================================================================================
-//                                          GraphQLRootType
+//                                                Root
 // ==================================================================================================
 //
 //
@@ -1803,14 +1801,14 @@ const lowerCaseUnion: $Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 
-const Mutation: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const Mutation: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     id: {},
     idNonNull: {},
   },
 }
 
-const Query: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const Query: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     InputObjectNested: {
       a: {
@@ -2161,7 +2159,7 @@ Query.f[\`unionObjectNonNull\`]!.nt = ObjectUnion
 //
 //
 
-const $schemaDrivenDataMap: $Utilities.SchemaDrivenDataMap = {
+const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
   roots: {
     Mutation,
     Query,
@@ -2258,8 +2256,8 @@ export namespace Select {
     'Mutation'
   >
   export type Query<$SelectionSet extends SelectionSets.Query> = InferResult.Root<$SelectionSet, Schema, 'Query'>
-  // Object Types
-  // ------------
+  // OutputObject Types
+  // ------------------
   export type Bar<$SelectionSet extends SelectionSets.Bar> = InferResult.Object<
     $SelectionSet,
     Schema,
@@ -2384,7 +2382,7 @@ import type * as $Scalar from './Scalar.js'
 //
 
 // Prefix with $ because this is not a schema type. A user could have a schema type named "Document" that this would conflict with.
-export interface $Document<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+export interface $Document<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
   query?: Record<string, Query<$Scalars>>
   mutation?: Record<string, Mutation<$Scalars>>
 }
@@ -2396,7 +2394,7 @@ export interface $Document<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarM
 //
 //
 // ==================================================================================================
-//                                      GraphQLObjectType Types
+//                                                Root
 // ==================================================================================================
 //
 //
@@ -2410,7 +2408,7 @@ export interface $Document<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarM
 //
 //
 // GRAPHQL SELECTION SET
-// OBJECT
+// ROOT
 // --------------------------------------------------------------------------------------------------
 //                                              Mutation
 // --------------------------------------------------------------------------------------------------
@@ -2419,13 +2417,13 @@ export interface $Document<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarM
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface Mutation<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+export interface Mutation<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
   /**
-   * Select the \`id\` field on the \`Mutation\` object. Its type is \`ID\` (a \`Scalar\`).
+   * Select the \`id\` field on the \`Mutation\` object. Its type is ScalarStandard.
    */
   id?: Mutation.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Mutation.id<$Scalars>>
   /**
-   * Select the \`idNonNull\` field on the \`Mutation\` object. Its type is \`ID\` (a \`Scalar\`).
+   * Select the \`idNonNull\` field on the \`Mutation\` object. Its type is ScalarStandard.
    */
   idNonNull?: Mutation.idNonNull$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Mutation.idNonNull<$Scalars>>
 
@@ -2451,18 +2449,18 @@ export interface Mutation<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMa
     | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
 }
 
-export interface Mutation$FragmentInline<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+export interface Mutation$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
   extends Mutation<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
 {}
 
 // ----------------------------------------| Fields |
 
 export namespace Mutation {
-  export type id<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type id<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | id$SelectionSet<$Scalars>
 
-  export interface id$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface id$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {}
 
@@ -2473,18 +2471,18 @@ export namespace Mutation {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type id$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type id$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
     | id$SelectionSet<$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type idNonNull<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type idNonNull<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | idNonNull$SelectionSet<$Scalars>
 
-  export interface idNonNull$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface idNonNull$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {}
 
@@ -2495,7 +2493,7 @@ export namespace Mutation {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type idNonNull$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type idNonNull$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
     | idNonNull$SelectionSet<$Scalars>
   >
@@ -2506,7 +2504,7 @@ export namespace Mutation {
 //
 //
 // GRAPHQL SELECTION SET
-// OBJECT
+// ROOT
 // --------------------------------------------------------------------------------------------------
 //                                               Query
 // --------------------------------------------------------------------------------------------------
@@ -2515,15 +2513,15 @@ export namespace Mutation {
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface Query<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+export interface Query<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
   /**
-   * Select the \`InputObjectNested\` field on the \`Query\` object. Its type is \`ID\` (a \`Scalar\`).
+   * Select the \`InputObjectNested\` field on the \`Query\` object. Its type is ScalarStandard.
    */
   InputObjectNested?:
     | Query.InputObjectNested$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.InputObjectNested<$Scalars>>
   /**
-   * Select the \`InputObjectNestedNonNull\` field on the \`Query\` object. Its type is \`ID\` (a \`Scalar\`).
+   * Select the \`InputObjectNestedNonNull\` field on the \`Query\` object. Its type is ScalarStandard.
    */
   InputObjectNestedNonNull?:
     | Query.InputObjectNestedNonNull<$Scalars>
@@ -2533,41 +2531,41 @@ export interface Query<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap =
    */
   abcEnum?: Query.abcEnum$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.abcEnum<$Scalars>>
   /**
-   * Select the \`argInputObjectCircular\` field on the \`Query\` object. Its type is \`String\` (a \`Scalar\`).
+   * Select the \`argInputObjectCircular\` field on the \`Query\` object. Its type is ScalarStandard.
    */
   argInputObjectCircular?:
     | Query.argInputObjectCircular$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.argInputObjectCircular<$Scalars>>
   /**
-   * Select the \`date\` field on the \`Query\` object. Its type is \`Date\` (a \`Scalar\`).
+   * Select the \`date\` field on the \`Query\` object. Its type is ScalarCustom.
    */
   date?: Query.date$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.date<$Scalars>>
   /**
-   * Select the \`dateArg\` field on the \`Query\` object. Its type is \`Date\` (a \`Scalar\`).
+   * Select the \`dateArg\` field on the \`Query\` object. Its type is ScalarCustom.
    */
   dateArg?: Query.dateArg$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.dateArg<$Scalars>>
   /**
-   * Select the \`dateArgInputObject\` field on the \`Query\` object. Its type is \`Date\` (a \`Scalar\`).
+   * Select the \`dateArgInputObject\` field on the \`Query\` object. Its type is ScalarCustom.
    */
   dateArgInputObject?:
     | Query.dateArgInputObject$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.dateArgInputObject<$Scalars>>
   /**
-   * Select the \`dateArgList\` field on the \`Query\` object. Its type is \`Date\` (a \`Scalar\`).
+   * Select the \`dateArgList\` field on the \`Query\` object. Its type is ScalarCustom.
    */
   dateArgList?: Query.dateArgList$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.dateArgList<$Scalars>>
   /**
-   * Select the \`dateArgNonNull\` field on the \`Query\` object. Its type is \`Date\` (a \`Scalar\`).
+   * Select the \`dateArgNonNull\` field on the \`Query\` object. Its type is ScalarCustom.
    */
   dateArgNonNull?: Query.dateArgNonNull<$Scalars> | $Select.SelectAlias.SelectAlias<Query.dateArgNonNull<$Scalars>>
   /**
-   * Select the \`dateArgNonNullList\` field on the \`Query\` object. Its type is \`Date\` (a \`Scalar\`).
+   * Select the \`dateArgNonNullList\` field on the \`Query\` object. Its type is ScalarCustom.
    */
   dateArgNonNullList?:
     | Query.dateArgNonNullList<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.dateArgNonNullList<$Scalars>>
   /**
-   * Select the \`dateArgNonNullListNonNull\` field on the \`Query\` object. Its type is \`Date\` (a \`Scalar\`).
+   * Select the \`dateArgNonNullListNonNull\` field on the \`Query\` object. Its type is ScalarCustom.
    */
   dateArgNonNullListNonNull?:
     | Query.dateArgNonNullListNonNull<$Scalars>
@@ -2579,25 +2577,25 @@ export interface Query<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap =
     | Query.dateInterface1$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.dateInterface1<$Scalars>>
   /**
-   * Select the \`dateList\` field on the \`Query\` object. Its type is \`Date\` (a \`Scalar\`).
+   * Select the \`dateList\` field on the \`Query\` object. Its type is ScalarCustom.
    */
   dateList?: Query.dateList$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.dateList<$Scalars>>
   /**
-   * Select the \`dateListList\` field on the \`Query\` object. Its type is \`Date\` (a \`Scalar\`).
+   * Select the \`dateListList\` field on the \`Query\` object. Its type is ScalarCustom.
    */
   dateListList?: Query.dateListList$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.dateListList<$Scalars>>
   /**
-   * Select the \`dateListNonNull\` field on the \`Query\` object. Its type is \`Date\` (a \`Scalar\`).
+   * Select the \`dateListNonNull\` field on the \`Query\` object. Its type is ScalarCustom.
    */
   dateListNonNull?:
     | Query.dateListNonNull$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.dateListNonNull<$Scalars>>
   /**
-   * Select the \`dateNonNull\` field on the \`Query\` object. Its type is \`Date\` (a \`Scalar\`).
+   * Select the \`dateNonNull\` field on the \`Query\` object. Its type is ScalarCustom.
    */
   dateNonNull?: Query.dateNonNull$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.dateNonNull<$Scalars>>
   /**
-   * Select the \`dateObject1\` field on the \`Query\` object. Its type is Object.
+   * Select the \`dateObject1\` field on the \`Query\` object. Its type is OutputObject.
    */
   dateObject1?: Query.dateObject1$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.dateObject1<$Scalars>>
   /**
@@ -2605,15 +2603,15 @@ export interface Query<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap =
    */
   dateUnion?: Query.dateUnion$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.dateUnion<$Scalars>>
   /**
-   * Select the \`error\` field on the \`Query\` object. Its type is \`String\` (a \`Scalar\`).
+   * Select the \`error\` field on the \`Query\` object. Its type is ScalarStandard.
    */
   error?: Query.error$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.error<$Scalars>>
   /**
-   * Select the \`id\` field on the \`Query\` object. Its type is \`ID\` (a \`Scalar\`).
+   * Select the \`id\` field on the \`Query\` object. Its type is ScalarStandard.
    */
   id?: Query.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.id<$Scalars>>
   /**
-   * Select the \`idNonNull\` field on the \`Query\` object. Its type is \`ID\` (a \`Scalar\`).
+   * Select the \`idNonNull\` field on the \`Query\` object. Its type is ScalarStandard.
    */
   idNonNull?: Query.idNonNull$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.idNonNull<$Scalars>>
   /**
@@ -2633,21 +2631,21 @@ export interface Query<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap =
     | Query.interfaceWithArgs<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.interfaceWithArgs<$Scalars>>
   /**
-   * Select the \`listInt\` field on the \`Query\` object. Its type is \`Int\` (a \`Scalar\`).
+   * Select the \`listInt\` field on the \`Query\` object. Its type is ScalarStandard.
    */
   listInt?: Query.listInt$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.listInt<$Scalars>>
   /**
-   * Select the \`listIntNonNull\` field on the \`Query\` object. Its type is \`Int\` (a \`Scalar\`).
+   * Select the \`listIntNonNull\` field on the \`Query\` object. Its type is ScalarStandard.
    */
   listIntNonNull?:
     | Query.listIntNonNull$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.listIntNonNull<$Scalars>>
   /**
-   * Select the \`listListInt\` field on the \`Query\` object. Its type is \`Int\` (a \`Scalar\`).
+   * Select the \`listListInt\` field on the \`Query\` object. Its type is ScalarStandard.
    */
   listListInt?: Query.listListInt$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.listListInt<$Scalars>>
   /**
-   * Select the \`listListIntNonNull\` field on the \`Query\` object. Its type is \`Int\` (a \`Scalar\`).
+   * Select the \`listListIntNonNull\` field on the \`Query\` object. Its type is ScalarStandard.
    */
   listListIntNonNull?:
     | Query.listListIntNonNull$Expanded<$Scalars>
@@ -2659,31 +2657,31 @@ export interface Query<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap =
     | Query.lowerCaseUnion$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.lowerCaseUnion<$Scalars>>
   /**
-   * Select the \`object\` field on the \`Query\` object. Its type is Object.
+   * Select the \`object\` field on the \`Query\` object. Its type is OutputObject.
    */
   object?: Query.$object$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.$object<$Scalars>>
   /**
-   * Select the \`objectList\` field on the \`Query\` object. Its type is Object.
+   * Select the \`objectList\` field on the \`Query\` object. Its type is OutputObject.
    */
   objectList?: Query.objectList$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.objectList<$Scalars>>
   /**
-   * Select the \`objectListNonNull\` field on the \`Query\` object. Its type is Object.
+   * Select the \`objectListNonNull\` field on the \`Query\` object. Its type is OutputObject.
    */
   objectListNonNull?:
     | Query.objectListNonNull$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.objectListNonNull<$Scalars>>
   /**
-   * Select the \`objectNested\` field on the \`Query\` object. Its type is Object.
+   * Select the \`objectNested\` field on the \`Query\` object. Its type is OutputObject.
    */
   objectNested?: Query.objectNested$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.objectNested<$Scalars>>
   /**
-   * Select the \`objectNonNull\` field on the \`Query\` object. Its type is Object.
+   * Select the \`objectNonNull\` field on the \`Query\` object. Its type is OutputObject.
    */
   objectNonNull?:
     | Query.objectNonNull$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.objectNonNull<$Scalars>>
   /**
-   * Select the \`objectWithArgs\` field on the \`Query\` object. Its type is Object.
+   * Select the \`objectWithArgs\` field on the \`Query\` object. Its type is OutputObject.
    */
   objectWithArgs?:
     | Query.objectWithArgs$Expanded<$Scalars>
@@ -2699,47 +2697,47 @@ export interface Query<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap =
     | Query.resultNonNull$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.resultNonNull<$Scalars>>
   /**
-   * Select the \`string\` field on the \`Query\` object. Its type is \`String\` (a \`Scalar\`).
+   * Select the \`string\` field on the \`Query\` object. Its type is ScalarStandard.
    */
   string?: Query.$string$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.$string<$Scalars>>
   /**
-   * Select the \`stringWithArgEnum\` field on the \`Query\` object. Its type is \`String\` (a \`Scalar\`).
+   * Select the \`stringWithArgEnum\` field on the \`Query\` object. Its type is ScalarStandard.
    */
   stringWithArgEnum?:
     | Query.stringWithArgEnum$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.stringWithArgEnum<$Scalars>>
   /**
-   * Select the \`stringWithArgInputObject\` field on the \`Query\` object. Its type is \`String\` (a \`Scalar\`).
+   * Select the \`stringWithArgInputObject\` field on the \`Query\` object. Its type is ScalarStandard.
    */
   stringWithArgInputObject?:
     | Query.stringWithArgInputObject$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.stringWithArgInputObject<$Scalars>>
   /**
-   * Select the \`stringWithArgInputObjectRequired\` field on the \`Query\` object. Its type is \`String\` (a \`Scalar\`).
+   * Select the \`stringWithArgInputObjectRequired\` field on the \`Query\` object. Its type is ScalarStandard.
    */
   stringWithArgInputObjectRequired?:
     | Query.stringWithArgInputObjectRequired<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.stringWithArgInputObjectRequired<$Scalars>>
   /**
-   * Select the \`stringWithArgs\` field on the \`Query\` object. Its type is \`String\` (a \`Scalar\`).
+   * Select the \`stringWithArgs\` field on the \`Query\` object. Its type is ScalarStandard.
    */
   stringWithArgs?:
     | Query.stringWithArgs$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.stringWithArgs<$Scalars>>
   /**
-   * Select the \`stringWithListArg\` field on the \`Query\` object. Its type is \`String\` (a \`Scalar\`).
+   * Select the \`stringWithListArg\` field on the \`Query\` object. Its type is ScalarStandard.
    */
   stringWithListArg?:
     | Query.stringWithListArg$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.stringWithListArg<$Scalars>>
   /**
-   * Select the \`stringWithListArgRequired\` field on the \`Query\` object. Its type is \`String\` (a \`Scalar\`).
+   * Select the \`stringWithListArgRequired\` field on the \`Query\` object. Its type is ScalarStandard.
    */
   stringWithListArgRequired?:
     | Query.stringWithListArgRequired<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.stringWithListArgRequired<$Scalars>>
   /**
-   * Select the \`stringWithRequiredArg\` field on the \`Query\` object. Its type is \`String\` (a \`Scalar\`).
+   * Select the \`stringWithRequiredArg\` field on the \`Query\` object. Its type is ScalarStandard.
    */
   stringWithRequiredArg?:
     | Query.stringWithRequiredArg<$Scalars>
@@ -2761,11 +2759,11 @@ export interface Query<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap =
     | Query.unionFooBarWithArgs$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.unionFooBarWithArgs<$Scalars>>
   /**
-   * Select the \`unionObject\` field on the \`Query\` object. Its type is Object.
+   * Select the \`unionObject\` field on the \`Query\` object. Its type is OutputObject.
    */
   unionObject?: Query.unionObject$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.unionObject<$Scalars>>
   /**
-   * Select the \`unionObjectNonNull\` field on the \`Query\` object. Its type is Object.
+   * Select the \`unionObjectNonNull\` field on the \`Query\` object. Its type is OutputObject.
    */
   unionObjectNonNull?:
     | Query.unionObjectNonNull$Expanded<$Scalars>
@@ -2793,18 +2791,18 @@ export interface Query<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap =
     | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
 }
 
-export interface Query$FragmentInline<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+export interface Query$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
   extends Query<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
 {}
 
 // ----------------------------------------| Fields |
 
 export namespace Query {
-  export type InputObjectNested<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type InputObjectNested<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | InputObjectNested$SelectionSet<$Scalars>
 
-  export interface InputObjectNested$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface InputObjectNested$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {
     /**
@@ -2813,7 +2811,7 @@ export namespace Query {
     $?: InputObjectNested$Arguments<$Scalars>
   }
 
-  export interface InputObjectNested$Arguments<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+  export interface InputObjectNested$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
     input?: $NamedTypes.$InputObjectNested<$Scalars> | undefined | null
   }
 
@@ -2824,7 +2822,7 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type InputObjectNested$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type InputObjectNested$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     $$Utilities.Simplify<
       | $Select.Indicator.NoArgsIndicator
       | InputObjectNested$SelectionSet<$Scalars>
@@ -2832,10 +2830,10 @@ export namespace Query {
 
   // --------------------------------------------------------------------------------------------------
 
-  export type InputObjectNestedNonNull<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type InputObjectNestedNonNull<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     InputObjectNestedNonNull$SelectionSet<$Scalars>
 
-  export interface InputObjectNestedNonNull$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface InputObjectNestedNonNull$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {
     /**
@@ -2844,7 +2842,7 @@ export namespace Query {
     $: InputObjectNestedNonNull$Arguments<$Scalars>
   }
 
-  export interface InputObjectNestedNonNull$Arguments<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+  export interface InputObjectNestedNonNull$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
     input: $NamedTypes.$InputObjectNestedNonNull<$Scalars>
   }
 
@@ -2855,18 +2853,18 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type InputObjectNestedNonNull$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type InputObjectNestedNonNull$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     $$Utilities.Simplify<
       InputObjectNestedNonNull$SelectionSet<$Scalars>
     >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type abcEnum<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type abcEnum<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | abcEnum$SelectionSet<$Scalars>
 
-  export interface abcEnum$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface abcEnum$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {}
 
@@ -2877,18 +2875,18 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type abcEnum$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type abcEnum$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
     | abcEnum$SelectionSet<$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type argInputObjectCircular<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type argInputObjectCircular<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | argInputObjectCircular$SelectionSet<$Scalars>
 
-  export interface argInputObjectCircular$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface argInputObjectCircular$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {
     /**
@@ -2897,7 +2895,7 @@ export namespace Query {
     $?: argInputObjectCircular$Arguments<$Scalars>
   }
 
-  export interface argInputObjectCircular$Arguments<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+  export interface argInputObjectCircular$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
     input?: $NamedTypes.$InputObjectCircular<$Scalars> | undefined | null
   }
 
@@ -2908,7 +2906,7 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type argInputObjectCircular$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type argInputObjectCircular$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     $$Utilities.Simplify<
       | $Select.Indicator.NoArgsIndicator
       | argInputObjectCircular$SelectionSet<$Scalars>
@@ -2916,11 +2914,11 @@ export namespace Query {
 
   // --------------------------------------------------------------------------------------------------
 
-  export type date<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type date<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | date$SelectionSet<$Scalars>
 
-  export interface date$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface date$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {}
 
@@ -2931,18 +2929,18 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type date$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type date$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
     | date$SelectionSet<$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type dateArg<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type dateArg<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | dateArg$SelectionSet<$Scalars>
 
-  export interface dateArg$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface dateArg$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {
     /**
@@ -2951,10 +2949,10 @@ export namespace Query {
     $?: dateArg$Arguments<$Scalars>
   }
 
-  export interface dateArg$Arguments<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+  export interface dateArg$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
     date?:
-      | $$Utilities.SchemaKit.Scalar.GetDecoded<
-        $$Utilities.SchemaKit.Scalar.LookupCustomScalarOrFallbackToString<'Date', $Scalars>
+      | $$Utilities.Schema.Scalar.GetDecoded<
+        $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', $Scalars>
       >
       | undefined
       | null
@@ -2967,18 +2965,18 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type dateArg$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type dateArg$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
     | dateArg$SelectionSet<$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type dateArgInputObject<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type dateArgInputObject<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | dateArgInputObject$SelectionSet<$Scalars>
 
-  export interface dateArgInputObject$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface dateArgInputObject$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {
     /**
@@ -2987,7 +2985,7 @@ export namespace Query {
     $?: dateArgInputObject$Arguments<$Scalars>
   }
 
-  export interface dateArgInputObject$Arguments<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+  export interface dateArgInputObject$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
     input?: $NamedTypes.$InputObject<$Scalars> | undefined | null
   }
 
@@ -2998,7 +2996,7 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type dateArgInputObject$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type dateArgInputObject$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     $$Utilities.Simplify<
       | $Select.Indicator.NoArgsIndicator
       | dateArgInputObject$SelectionSet<$Scalars>
@@ -3006,11 +3004,11 @@ export namespace Query {
 
   // --------------------------------------------------------------------------------------------------
 
-  export type dateArgList<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type dateArgList<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | dateArgList$SelectionSet<$Scalars>
 
-  export interface dateArgList$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface dateArgList$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {
     /**
@@ -3019,11 +3017,11 @@ export namespace Query {
     $?: dateArgList$Arguments<$Scalars>
   }
 
-  export interface dateArgList$Arguments<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+  export interface dateArgList$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
     date?:
       | Array<
-        | $$Utilities.SchemaKit.Scalar.GetDecoded<
-          $$Utilities.SchemaKit.Scalar.LookupCustomScalarOrFallbackToString<'Date', $Scalars>
+        | $$Utilities.Schema.Scalar.GetDecoded<
+          $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', $Scalars>
         >
         | undefined
         | null
@@ -3039,17 +3037,18 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type dateArgList$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type dateArgList$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
     | dateArgList$SelectionSet<$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type dateArgNonNull<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
-    dateArgNonNull$SelectionSet<$Scalars>
+  export type dateArgNonNull<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = dateArgNonNull$SelectionSet<
+    $Scalars
+  >
 
-  export interface dateArgNonNull$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface dateArgNonNull$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {
     /**
@@ -3058,9 +3057,9 @@ export namespace Query {
     $: dateArgNonNull$Arguments<$Scalars>
   }
 
-  export interface dateArgNonNull$Arguments<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
-    date: $$Utilities.SchemaKit.Scalar.GetDecoded<
-      $$Utilities.SchemaKit.Scalar.LookupCustomScalarOrFallbackToString<'Date', $Scalars>
+  export interface dateArgNonNull$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
+    date: $$Utilities.Schema.Scalar.GetDecoded<
+      $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', $Scalars>
     >
   }
 
@@ -3071,17 +3070,16 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type dateArgNonNull$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
-    $$Utilities.Simplify<
-      dateArgNonNull$SelectionSet<$Scalars>
-    >
+  export type dateArgNonNull$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    dateArgNonNull$SelectionSet<$Scalars>
+  >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type dateArgNonNullList<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type dateArgNonNullList<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     dateArgNonNullList$SelectionSet<$Scalars>
 
-  export interface dateArgNonNullList$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface dateArgNonNullList$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {
     /**
@@ -3090,10 +3088,10 @@ export namespace Query {
     $: dateArgNonNullList$Arguments<$Scalars>
   }
 
-  export interface dateArgNonNullList$Arguments<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+  export interface dateArgNonNullList$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
     date: Array<
-      | $$Utilities.SchemaKit.Scalar.GetDecoded<
-        $$Utilities.SchemaKit.Scalar.LookupCustomScalarOrFallbackToString<'Date', $Scalars>
+      | $$Utilities.Schema.Scalar.GetDecoded<
+        $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', $Scalars>
       >
       | undefined
       | null
@@ -3107,17 +3105,17 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type dateArgNonNullList$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type dateArgNonNullList$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     $$Utilities.Simplify<
       dateArgNonNullList$SelectionSet<$Scalars>
     >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type dateArgNonNullListNonNull<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type dateArgNonNullListNonNull<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     dateArgNonNullListNonNull$SelectionSet<$Scalars>
 
-  export interface dateArgNonNullListNonNull$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface dateArgNonNullListNonNull$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {
     /**
@@ -3126,10 +3124,10 @@ export namespace Query {
     $: dateArgNonNullListNonNull$Arguments<$Scalars>
   }
 
-  export interface dateArgNonNullListNonNull$Arguments<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+  export interface dateArgNonNullListNonNull$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
     date: Array<
-      | $$Utilities.SchemaKit.Scalar.GetDecoded<
-        $$Utilities.SchemaKit.Scalar.LookupCustomScalarOrFallbackToString<'Date', $Scalars>
+      | $$Utilities.Schema.Scalar.GetDecoded<
+        $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', $Scalars>
       >
       | undefined
       | null
@@ -3143,17 +3141,18 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type dateArgNonNullListNonNull$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type dateArgNonNullListNonNull$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     $$Utilities.Simplify<
       dateArgNonNullListNonNull$SelectionSet<$Scalars>
     >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type dateInterface1<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
-    dateInterface1$SelectionSet<$Scalars>
+  export type dateInterface1<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = dateInterface1$SelectionSet<
+    $Scalars
+  >
 
-  export interface dateInterface1$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface dateInterface1$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base, $NamedTypes.$DateInterface1<$Scalars>
   {}
 
@@ -3164,18 +3163,17 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type dateInterface1$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
-    $$Utilities.Simplify<
-      dateInterface1$SelectionSet<$Scalars>
-    >
+  export type dateInterface1$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    dateInterface1$SelectionSet<$Scalars>
+  >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type dateList<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type dateList<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | dateList$SelectionSet<$Scalars>
 
-  export interface dateList$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface dateList$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {}
 
@@ -3186,18 +3184,18 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type dateList$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type dateList$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
     | dateList$SelectionSet<$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type dateListList<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type dateListList<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | dateListList$SelectionSet<$Scalars>
 
-  export interface dateListList$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface dateListList$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {}
 
@@ -3208,19 +3206,18 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type dateListList$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
-    $$Utilities.Simplify<
-      | $Select.Indicator.NoArgsIndicator
-      | dateListList$SelectionSet<$Scalars>
-    >
+  export type dateListList$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | dateListList$SelectionSet<$Scalars>
+  >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type dateListNonNull<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type dateListNonNull<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | dateListNonNull$SelectionSet<$Scalars>
 
-  export interface dateListNonNull$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface dateListNonNull$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {}
 
@@ -3231,7 +3228,7 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type dateListNonNull$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type dateListNonNull$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     $$Utilities.Simplify<
       | $Select.Indicator.NoArgsIndicator
       | dateListNonNull$SelectionSet<$Scalars>
@@ -3239,11 +3236,11 @@ export namespace Query {
 
   // --------------------------------------------------------------------------------------------------
 
-  export type dateNonNull<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type dateNonNull<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | dateNonNull$SelectionSet<$Scalars>
 
-  export interface dateNonNull$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface dateNonNull$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {}
 
@@ -3254,18 +3251,18 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type dateNonNull$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type dateNonNull$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
     | dateNonNull$SelectionSet<$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type dateObject1<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = dateObject1$SelectionSet<
+  export type dateObject1<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = dateObject1$SelectionSet<
     $Scalars
   >
 
-  export interface dateObject1$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface dateObject1$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base, $NamedTypes.$DateObject1<$Scalars>
   {}
 
@@ -3276,15 +3273,15 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type dateObject1$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type dateObject1$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     dateObject1$SelectionSet<$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type dateUnion<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = dateUnion$SelectionSet<$Scalars>
+  export type dateUnion<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = dateUnion$SelectionSet<$Scalars>
 
-  export interface dateUnion$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface dateUnion$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base, $NamedTypes.$DateUnion<$Scalars>
   {}
 
@@ -3295,17 +3292,17 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type dateUnion$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type dateUnion$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     dateUnion$SelectionSet<$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type error<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type error<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | error$SelectionSet<$Scalars>
 
-  export interface error$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface error$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {
     /**
@@ -3314,7 +3311,7 @@ export namespace Query {
     $?: error$Arguments<$Scalars>
   }
 
-  export interface error$Arguments<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+  export interface error$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
     case?: string | undefined | null
   }
 
@@ -3325,18 +3322,18 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type error$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type error$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
     | error$SelectionSet<$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type id<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type id<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | id$SelectionSet<$Scalars>
 
-  export interface id$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface id$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {}
 
@@ -3347,18 +3344,18 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type id$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type id$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
     | id$SelectionSet<$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type idNonNull<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type idNonNull<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | idNonNull$SelectionSet<$Scalars>
 
-  export interface idNonNull$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface idNonNull$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {}
 
@@ -3369,18 +3366,16 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type idNonNull$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type idNonNull$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
     | idNonNull$SelectionSet<$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type $interface<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $interface$SelectionSet<
-    $Scalars
-  >
+  export type $interface<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $interface$SelectionSet<$Scalars>
 
-  export interface $interface$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface $interface$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base, $NamedTypes.$Interface<$Scalars>
   {}
 
@@ -3391,16 +3386,16 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type $interface$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type $interface$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     $interface$SelectionSet<$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type interfaceNonNull<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type interfaceNonNull<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     interfaceNonNull$SelectionSet<$Scalars>
 
-  export interface interfaceNonNull$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface interfaceNonNull$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base, $NamedTypes.$Interface<$Scalars>
   {}
 
@@ -3411,17 +3406,17 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type interfaceNonNull$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type interfaceNonNull$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     $$Utilities.Simplify<
       interfaceNonNull$SelectionSet<$Scalars>
     >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type interfaceWithArgs<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type interfaceWithArgs<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     interfaceWithArgs$SelectionSet<$Scalars>
 
-  export interface interfaceWithArgs$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface interfaceWithArgs$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base, $NamedTypes.$Interface<$Scalars>
   {
     /**
@@ -3430,7 +3425,7 @@ export namespace Query {
     $: interfaceWithArgs$Arguments<$Scalars>
   }
 
-  export interface interfaceWithArgs$Arguments<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+  export interface interfaceWithArgs$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
     id: string
   }
 
@@ -3441,18 +3436,18 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type interfaceWithArgs$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type interfaceWithArgs$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     $$Utilities.Simplify<
       interfaceWithArgs$SelectionSet<$Scalars>
     >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type listInt<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type listInt<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | listInt$SelectionSet<$Scalars>
 
-  export interface listInt$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface listInt$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {}
 
@@ -3463,18 +3458,18 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type listInt$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type listInt$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
     | listInt$SelectionSet<$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type listIntNonNull<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type listIntNonNull<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | listIntNonNull$SelectionSet<$Scalars>
 
-  export interface listIntNonNull$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface listIntNonNull$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {}
 
@@ -3485,19 +3480,18 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type listIntNonNull$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
-    $$Utilities.Simplify<
-      | $Select.Indicator.NoArgsIndicator
-      | listIntNonNull$SelectionSet<$Scalars>
-    >
+  export type listIntNonNull$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | listIntNonNull$SelectionSet<$Scalars>
+  >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type listListInt<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type listListInt<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | listListInt$SelectionSet<$Scalars>
 
-  export interface listListInt$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface listListInt$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {}
 
@@ -3508,18 +3502,18 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type listListInt$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type listListInt$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
     | listListInt$SelectionSet<$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type listListIntNonNull<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type listListIntNonNull<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | listListIntNonNull$SelectionSet<$Scalars>
 
-  export interface listListIntNonNull$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface listListIntNonNull$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {}
 
@@ -3530,7 +3524,7 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type listListIntNonNull$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type listListIntNonNull$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     $$Utilities.Simplify<
       | $Select.Indicator.NoArgsIndicator
       | listListIntNonNull$SelectionSet<$Scalars>
@@ -3538,10 +3532,11 @@ export namespace Query {
 
   // --------------------------------------------------------------------------------------------------
 
-  export type lowerCaseUnion<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
-    lowerCaseUnion$SelectionSet<$Scalars>
+  export type lowerCaseUnion<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = lowerCaseUnion$SelectionSet<
+    $Scalars
+  >
 
-  export interface lowerCaseUnion$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface lowerCaseUnion$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base, $NamedTypes.$lowerCaseUnion<$Scalars>
   {}
 
@@ -3552,16 +3547,15 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type lowerCaseUnion$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
-    $$Utilities.Simplify<
-      lowerCaseUnion$SelectionSet<$Scalars>
-    >
+  export type lowerCaseUnion$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    lowerCaseUnion$SelectionSet<$Scalars>
+  >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type $object<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $object$SelectionSet<$Scalars>
+  export type $object<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $object$SelectionSet<$Scalars>
 
-  export interface $object$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface $object$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base, $NamedTypes.$Object1<$Scalars>
   {}
 
@@ -3572,17 +3566,15 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type $object$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type $object$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     $object$SelectionSet<$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type objectList<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = objectList$SelectionSet<
-    $Scalars
-  >
+  export type objectList<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = objectList$SelectionSet<$Scalars>
 
-  export interface objectList$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface objectList$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base, $NamedTypes.$Object1<$Scalars>
   {}
 
@@ -3593,16 +3585,16 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type objectList$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type objectList$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     objectList$SelectionSet<$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type objectListNonNull<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type objectListNonNull<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     objectListNonNull$SelectionSet<$Scalars>
 
-  export interface objectListNonNull$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface objectListNonNull$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base, $NamedTypes.$Object1<$Scalars>
   {}
 
@@ -3613,18 +3605,18 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type objectListNonNull$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type objectListNonNull$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     $$Utilities.Simplify<
       objectListNonNull$SelectionSet<$Scalars>
     >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type objectNested<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = objectNested$SelectionSet<
+  export type objectNested<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = objectNested$SelectionSet<
     $Scalars
   >
 
-  export interface objectNested$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface objectNested$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base, $NamedTypes.$ObjectNested<$Scalars>
   {}
 
@@ -3635,18 +3627,17 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type objectNested$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
-    $$Utilities.Simplify<
-      objectNested$SelectionSet<$Scalars>
-    >
+  export type objectNested$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    objectNested$SelectionSet<$Scalars>
+  >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type objectNonNull<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = objectNonNull$SelectionSet<
+  export type objectNonNull<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = objectNonNull$SelectionSet<
     $Scalars
   >
 
-  export interface objectNonNull$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface objectNonNull$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base, $NamedTypes.$Object1<$Scalars>
   {}
 
@@ -3657,17 +3648,17 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type objectNonNull$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
-    $$Utilities.Simplify<
-      objectNonNull$SelectionSet<$Scalars>
-    >
+  export type objectNonNull$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    objectNonNull$SelectionSet<$Scalars>
+  >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type objectWithArgs<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
-    objectWithArgs$SelectionSet<$Scalars>
+  export type objectWithArgs<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = objectWithArgs$SelectionSet<
+    $Scalars
+  >
 
-  export interface objectWithArgs$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface objectWithArgs$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base, $NamedTypes.$Object1<$Scalars>
   {
     /**
@@ -3676,7 +3667,7 @@ export namespace Query {
     $?: objectWithArgs$Arguments<$Scalars>
   }
 
-  export interface objectWithArgs$Arguments<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+  export interface objectWithArgs$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
     boolean?: boolean | undefined | null
     float?: number | undefined | null
     id?: string | undefined | null
@@ -3691,16 +3682,15 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type objectWithArgs$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
-    $$Utilities.Simplify<
-      objectWithArgs$SelectionSet<$Scalars>
-    >
+  export type objectWithArgs$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    objectWithArgs$SelectionSet<$Scalars>
+  >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type result<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = result$SelectionSet<$Scalars>
+  export type result<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = result$SelectionSet<$Scalars>
 
-  export interface result$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface result$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base, $NamedTypes.$Result<$Scalars>
   {
     /**
@@ -3709,7 +3699,7 @@ export namespace Query {
     $: result$Arguments<$Scalars>
   }
 
-  export interface result$Arguments<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+  export interface result$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
     $case: $NamedTypes.$Case
   }
 
@@ -3720,17 +3710,17 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type result$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type result$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     result$SelectionSet<$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type resultNonNull<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = resultNonNull$SelectionSet<
+  export type resultNonNull<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = resultNonNull$SelectionSet<
     $Scalars
   >
 
-  export interface resultNonNull$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface resultNonNull$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base, $NamedTypes.$Result<$Scalars>
   {
     /**
@@ -3739,7 +3729,7 @@ export namespace Query {
     $?: resultNonNull$Arguments<$Scalars>
   }
 
-  export interface resultNonNull$Arguments<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+  export interface resultNonNull$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
     $case?: $NamedTypes.$Case | undefined | null
   }
 
@@ -3750,18 +3740,17 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type resultNonNull$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
-    $$Utilities.Simplify<
-      resultNonNull$SelectionSet<$Scalars>
-    >
+  export type resultNonNull$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    resultNonNull$SelectionSet<$Scalars>
+  >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type $string<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type $string<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | $string$SelectionSet<$Scalars>
 
-  export interface $string$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface $string$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {}
 
@@ -3772,18 +3761,18 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type $string$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type $string$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
     | $string$SelectionSet<$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type stringWithArgEnum<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type stringWithArgEnum<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | stringWithArgEnum$SelectionSet<$Scalars>
 
-  export interface stringWithArgEnum$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface stringWithArgEnum$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {
     /**
@@ -3792,7 +3781,7 @@ export namespace Query {
     $?: stringWithArgEnum$Arguments<$Scalars>
   }
 
-  export interface stringWithArgEnum$Arguments<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+  export interface stringWithArgEnum$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
     $ABCEnum?: $NamedTypes.$ABCEnum | undefined | null
   }
 
@@ -3803,7 +3792,7 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type stringWithArgEnum$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type stringWithArgEnum$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     $$Utilities.Simplify<
       | $Select.Indicator.NoArgsIndicator
       | stringWithArgEnum$SelectionSet<$Scalars>
@@ -3811,11 +3800,11 @@ export namespace Query {
 
   // --------------------------------------------------------------------------------------------------
 
-  export type stringWithArgInputObject<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type stringWithArgInputObject<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | stringWithArgInputObject$SelectionSet<$Scalars>
 
-  export interface stringWithArgInputObject$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface stringWithArgInputObject$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {
     /**
@@ -3824,7 +3813,7 @@ export namespace Query {
     $?: stringWithArgInputObject$Arguments<$Scalars>
   }
 
-  export interface stringWithArgInputObject$Arguments<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+  export interface stringWithArgInputObject$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
     input?: $NamedTypes.$InputObject<$Scalars> | undefined | null
   }
 
@@ -3835,7 +3824,7 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type stringWithArgInputObject$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type stringWithArgInputObject$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     $$Utilities.Simplify<
       | $Select.Indicator.NoArgsIndicator
       | stringWithArgInputObject$SelectionSet<$Scalars>
@@ -3843,11 +3832,11 @@ export namespace Query {
 
   // --------------------------------------------------------------------------------------------------
 
-  export type stringWithArgInputObjectRequired<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type stringWithArgInputObjectRequired<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     stringWithArgInputObjectRequired$SelectionSet<$Scalars>
 
   export interface stringWithArgInputObjectRequired$SelectionSet<
-    $Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {},
+    $Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {},
   > extends $Select.Bases.Base {
     /**
      * Arguments for \`stringWithArgInputObjectRequired\` field. All arguments are required so you must include this.
@@ -3856,7 +3845,7 @@ export namespace Query {
   }
 
   export interface stringWithArgInputObjectRequired$Arguments<
-    $Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {},
+    $Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {},
   > {
     input: $NamedTypes.$InputObject<$Scalars>
   }
@@ -3868,18 +3857,18 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type stringWithArgInputObjectRequired$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type stringWithArgInputObjectRequired$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     $$Utilities.Simplify<
       stringWithArgInputObjectRequired$SelectionSet<$Scalars>
     >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type stringWithArgs<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type stringWithArgs<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | stringWithArgs$SelectionSet<$Scalars>
 
-  export interface stringWithArgs$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface stringWithArgs$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {
     /**
@@ -3888,7 +3877,7 @@ export namespace Query {
     $?: stringWithArgs$Arguments<$Scalars>
   }
 
-  export interface stringWithArgs$Arguments<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+  export interface stringWithArgs$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
     boolean?: boolean | undefined | null
     float?: number | undefined | null
     id?: string | undefined | null
@@ -3903,19 +3892,18 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type stringWithArgs$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
-    $$Utilities.Simplify<
-      | $Select.Indicator.NoArgsIndicator
-      | stringWithArgs$SelectionSet<$Scalars>
-    >
+  export type stringWithArgs$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | stringWithArgs$SelectionSet<$Scalars>
+  >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type stringWithListArg<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type stringWithListArg<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | stringWithListArg$SelectionSet<$Scalars>
 
-  export interface stringWithListArg$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface stringWithListArg$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {
     /**
@@ -3924,7 +3912,7 @@ export namespace Query {
     $?: stringWithListArg$Arguments<$Scalars>
   }
 
-  export interface stringWithListArg$Arguments<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+  export interface stringWithListArg$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
     ints?: Array<number | undefined | null> | undefined | null
   }
 
@@ -3935,7 +3923,7 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type stringWithListArg$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type stringWithListArg$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     $$Utilities.Simplify<
       | $Select.Indicator.NoArgsIndicator
       | stringWithListArg$SelectionSet<$Scalars>
@@ -3943,10 +3931,10 @@ export namespace Query {
 
   // --------------------------------------------------------------------------------------------------
 
-  export type stringWithListArgRequired<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type stringWithListArgRequired<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     stringWithListArgRequired$SelectionSet<$Scalars>
 
-  export interface stringWithListArgRequired$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface stringWithListArgRequired$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {
     /**
@@ -3955,7 +3943,7 @@ export namespace Query {
     $: stringWithListArgRequired$Arguments<$Scalars>
   }
 
-  export interface stringWithListArgRequired$Arguments<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+  export interface stringWithListArgRequired$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
     ints: Array<number | undefined | null>
   }
 
@@ -3966,17 +3954,17 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type stringWithListArgRequired$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type stringWithListArgRequired$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     $$Utilities.Simplify<
       stringWithListArgRequired$SelectionSet<$Scalars>
     >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type stringWithRequiredArg<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type stringWithRequiredArg<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     stringWithRequiredArg$SelectionSet<$Scalars>
 
-  export interface stringWithRequiredArg$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface stringWithRequiredArg$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {
     /**
@@ -3985,7 +3973,7 @@ export namespace Query {
     $: stringWithRequiredArg$Arguments<$Scalars>
   }
 
-  export interface stringWithRequiredArg$Arguments<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+  export interface stringWithRequiredArg$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
     string: string
   }
 
@@ -3996,18 +3984,18 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type stringWithRequiredArg$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type stringWithRequiredArg$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     $$Utilities.Simplify<
       stringWithRequiredArg$SelectionSet<$Scalars>
     >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type unionFooBar<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = unionFooBar$SelectionSet<
+  export type unionFooBar<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = unionFooBar$SelectionSet<
     $Scalars
   >
 
-  export interface unionFooBar$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface unionFooBar$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base, $NamedTypes.$FooBarUnion<$Scalars>
   {}
 
@@ -4018,16 +4006,16 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type unionFooBar$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type unionFooBar$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     unionFooBar$SelectionSet<$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type unionFooBarNonNull<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type unionFooBarNonNull<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     unionFooBarNonNull$SelectionSet<$Scalars>
 
-  export interface unionFooBarNonNull$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface unionFooBarNonNull$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base, $NamedTypes.$FooBarUnion<$Scalars>
   {}
 
@@ -4038,17 +4026,17 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type unionFooBarNonNull$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type unionFooBarNonNull$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     $$Utilities.Simplify<
       unionFooBarNonNull$SelectionSet<$Scalars>
     >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type unionFooBarWithArgs<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type unionFooBarWithArgs<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     unionFooBarWithArgs$SelectionSet<$Scalars>
 
-  export interface unionFooBarWithArgs$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface unionFooBarWithArgs$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base, $NamedTypes.$FooBarUnion<$Scalars>
   {
     /**
@@ -4057,7 +4045,7 @@ export namespace Query {
     $?: unionFooBarWithArgs$Arguments<$Scalars>
   }
 
-  export interface unionFooBarWithArgs$Arguments<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+  export interface unionFooBarWithArgs$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
     id?: string | undefined | null
   }
 
@@ -4068,18 +4056,18 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type unionFooBarWithArgs$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type unionFooBarWithArgs$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     $$Utilities.Simplify<
       unionFooBarWithArgs$SelectionSet<$Scalars>
     >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type unionObject<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = unionObject$SelectionSet<
+  export type unionObject<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = unionObject$SelectionSet<
     $Scalars
   >
 
-  export interface unionObject$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface unionObject$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base, $NamedTypes.$ObjectUnion<$Scalars>
   {}
 
@@ -4090,16 +4078,16 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type unionObject$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type unionObject$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     unionObject$SelectionSet<$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type unionObjectNonNull<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type unionObjectNonNull<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     unionObjectNonNull$SelectionSet<$Scalars>
 
-  export interface unionObjectNonNull$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface unionObjectNonNull$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base, $NamedTypes.$ObjectUnion<$Scalars>
   {}
 
@@ -4110,7 +4098,7 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type unionObjectNonNull$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type unionObjectNonNull$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     $$Utilities.Simplify<
       unionObjectNonNull$SelectionSet<$Scalars>
     >
@@ -4123,7 +4111,7 @@ export namespace Query {
 //
 //
 // ==================================================================================================
-//                                       GraphQLEnumType Types
+//                                                Enum
 // ==================================================================================================
 //
 //
@@ -4151,7 +4139,7 @@ export type Case = 'ErrorOne' | 'ErrorTwo' | 'Object1'
 //
 //
 // ==================================================================================================
-//                                    GraphQLInputObjectType Types
+//                                            InputObject
 // ==================================================================================================
 //
 //
@@ -4160,35 +4148,35 @@ export type Case = 'ErrorOne' | 'ErrorTwo' | 'Object1'
 //
 //
 
-export interface InputObject<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+export interface InputObject<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
   date?:
-    | $$Utilities.SchemaKit.Scalar.GetDecoded<
-      $$Utilities.SchemaKit.Scalar.LookupCustomScalarOrFallbackToString<'Date', $Scalars>
+    | $$Utilities.Schema.Scalar.GetDecoded<
+      $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', $Scalars>
     >
     | undefined
     | null
-  dateRequired: $$Utilities.SchemaKit.Scalar.GetDecoded<
-    $$Utilities.SchemaKit.Scalar.LookupCustomScalarOrFallbackToString<'Date', $Scalars>
+  dateRequired: $$Utilities.Schema.Scalar.GetDecoded<
+    $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', $Scalars>
   >
   id?: string | undefined | null
   idRequired: string
 }
 
-export interface InputObjectCircular<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+export interface InputObjectCircular<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
   circular?: $NamedTypes.$InputObjectCircular<$Scalars> | undefined | null
   date?:
-    | $$Utilities.SchemaKit.Scalar.GetDecoded<
-      $$Utilities.SchemaKit.Scalar.LookupCustomScalarOrFallbackToString<'Date', $Scalars>
+    | $$Utilities.Schema.Scalar.GetDecoded<
+      $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', $Scalars>
     >
     | undefined
     | null
 }
 
-export interface InputObjectNested<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+export interface InputObjectNested<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
   InputObject?: $NamedTypes.$InputObject<$Scalars> | undefined | null
 }
 
-export interface InputObjectNestedNonNull<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+export interface InputObjectNestedNonNull<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
   InputObject: $NamedTypes.$InputObject<$Scalars>
 }
 
@@ -4199,197 +4187,7 @@ export interface InputObjectNestedNonNull<$Scalars extends $$Utilities.SchemaKit
 //
 //
 // ==================================================================================================
-//                                     GraphQLInterfaceType Types
-// ==================================================================================================
-//
-//
-//
-//
-//
-//
-
-// Interface Type: DateInterface1
-// --------------------------------------------------------------------------------------------------
-
-export interface DateInterface1<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
-  extends $Select.Bases.ObjectLike
-{
-  date1?: DateInterface1.date1<$Scalars>
-  ___on_DateObject1?: DateObject1<$Scalars>
-
-  /**
-   * Inline fragments for field groups.
-   *
-   * Generally a niche feature. This can be useful for example to apply an \`@include\` directive to a subset of the
-   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
-   *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
-   */
-  ___?:
-    | DateInterface1$FragmentInline<$Scalars>
-    | DateInterface1$FragmentInline<$Scalars>[]
-
-  /**
-   * A meta field. Is the name of the type being selected. Since this is a interface type and thus polymorphic,
-   * the name is one of the implementor type names, whichever is ultimately returned at runtime.
-   *
-   * @see https://graphql.org/learn/queries/#meta-fields
-   */
-  __typename?:
-    | $Select.Indicator.NoArgsIndicator$Expanded
-    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
-}
-
-export interface DateInterface1$FragmentInline<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
-  extends DateInterface1<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
-{}
-
-export namespace DateInterface1 {
-  export type date1<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
-    | $Select.Indicator.NoArgsIndicator
-    | date1$SelectionSet<$Scalars>
-
-  export interface date1$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
-
-  // --- expanded ---
-
-  /**
-   * This is the "expanded" version of the \`date1\` type. It is identical except for the fact
-   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
-   * In some cases, this is a preferable DX, making the types easier to read for users.
-   */
-  export type date1$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    | $Select.Indicator.NoArgsIndicator
-    | date1$SelectionSet<$Scalars>
-  >
-}
-
-// Interface Type: Error
-// --------------------------------------------------------------------------------------------------
-
-export interface Error<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
-  message?: Error.message<$Scalars>
-  ___on_ErrorOne?: ErrorOne<$Scalars>
-  ___on_ErrorTwo?: ErrorTwo<$Scalars>
-
-  /**
-   * Inline fragments for field groups.
-   *
-   * Generally a niche feature. This can be useful for example to apply an \`@include\` directive to a subset of the
-   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
-   *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
-   */
-  ___?:
-    | Error$FragmentInline<$Scalars>
-    | Error$FragmentInline<$Scalars>[]
-
-  /**
-   * A meta field. Is the name of the type being selected. Since this is a interface type and thus polymorphic,
-   * the name is one of the implementor type names, whichever is ultimately returned at runtime.
-   *
-   * @see https://graphql.org/learn/queries/#meta-fields
-   */
-  __typename?:
-    | $Select.Indicator.NoArgsIndicator$Expanded
-    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
-}
-
-export interface Error$FragmentInline<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
-  extends Error<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
-{}
-
-export namespace Error {
-  export type message<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
-    | $Select.Indicator.NoArgsIndicator
-    | message$SelectionSet<$Scalars>
-
-  export interface message$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
-
-  // --- expanded ---
-
-  /**
-   * This is the "expanded" version of the \`message\` type. It is identical except for the fact
-   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
-   * In some cases, this is a preferable DX, making the types easier to read for users.
-   */
-  export type message$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    | $Select.Indicator.NoArgsIndicator
-    | message$SelectionSet<$Scalars>
-  >
-}
-
-// Interface Type: Interface
-// --------------------------------------------------------------------------------------------------
-
-export interface Interface<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
-  extends $Select.Bases.ObjectLike
-{
-  id?: Interface.id<$Scalars>
-  ___on_Object1ImplementingInterface?: Object1ImplementingInterface<$Scalars>
-  ___on_Object2ImplementingInterface?: Object2ImplementingInterface<$Scalars>
-
-  /**
-   * Inline fragments for field groups.
-   *
-   * Generally a niche feature. This can be useful for example to apply an \`@include\` directive to a subset of the
-   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
-   *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
-   */
-  ___?:
-    | Interface$FragmentInline<$Scalars>
-    | Interface$FragmentInline<$Scalars>[]
-
-  /**
-   * A meta field. Is the name of the type being selected. Since this is a interface type and thus polymorphic,
-   * the name is one of the implementor type names, whichever is ultimately returned at runtime.
-   *
-   * @see https://graphql.org/learn/queries/#meta-fields
-   */
-  __typename?:
-    | $Select.Indicator.NoArgsIndicator$Expanded
-    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
-}
-
-export interface Interface$FragmentInline<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
-  extends Interface<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
-{}
-
-export namespace Interface {
-  export type id<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
-    | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
-
-  export interface id$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
-
-  // --- expanded ---
-
-  /**
-   * This is the "expanded" version of the \`id\` type. It is identical except for the fact
-   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
-   * In some cases, this is a preferable DX, making the types easier to read for users.
-   */
-  export type id$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
-  >
-}
-
-//
-//
-//
-//
-//
-//
-// ==================================================================================================
-//                                      GraphQLObjectType Types
+//                                            OutputObject
 // ==================================================================================================
 //
 //
@@ -4403,7 +4201,7 @@ export namespace Interface {
 //
 //
 // GRAPHQL SELECTION SET
-// OBJECT
+// OUTPUTOBJECT
 // --------------------------------------------------------------------------------------------------
 //                                                Bar
 // --------------------------------------------------------------------------------------------------
@@ -4412,9 +4210,9 @@ export namespace Interface {
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface Bar<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
+export interface Bar<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
   /**
-   * Select the \`int\` field on the \`Bar\` object. Its type is \`Int\` (a \`Scalar\`).
+   * Select the \`int\` field on the \`Bar\` object. Its type is ScalarStandard.
    */
   int?: Bar.int$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Bar.int<$Scalars>>
 
@@ -4440,18 +4238,18 @@ export interface Bar<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {
     | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
 }
 
-export interface Bar$FragmentInline<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+export interface Bar$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
   extends Bar<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
 {}
 
 // ----------------------------------------| Fields |
 
 export namespace Bar {
-  export type int<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type int<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | int$SelectionSet<$Scalars>
 
-  export interface int$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface int$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {}
 
@@ -4462,7 +4260,7 @@ export namespace Bar {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type int$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type int$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
     | int$SelectionSet<$Scalars>
   >
@@ -4473,7 +4271,7 @@ export namespace Bar {
 //
 //
 // GRAPHQL SELECTION SET
-// OBJECT
+// OUTPUTOBJECT
 // --------------------------------------------------------------------------------------------------
 //                                            DateObject1
 // --------------------------------------------------------------------------------------------------
@@ -4482,11 +4280,11 @@ export namespace Bar {
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface DateObject1<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+export interface DateObject1<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
   extends $Select.Bases.ObjectLike
 {
   /**
-   * Select the \`date1\` field on the \`DateObject1\` object. Its type is \`Date\` (a \`Scalar\`).
+   * Select the \`date1\` field on the \`DateObject1\` object. Its type is ScalarCustom.
    */
   date1?: DateObject1.date1$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<DateObject1.date1<$Scalars>>
 
@@ -4512,18 +4310,18 @@ export interface DateObject1<$Scalars extends $$Utilities.SchemaKit.Scalar.Scala
     | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
 }
 
-export interface DateObject1$FragmentInline<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+export interface DateObject1$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
   extends DateObject1<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
 {}
 
 // ----------------------------------------| Fields |
 
 export namespace DateObject1 {
-  export type date1<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type date1<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | date1$SelectionSet<$Scalars>
 
-  export interface date1$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface date1$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {}
 
@@ -4534,7 +4332,7 @@ export namespace DateObject1 {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type date1$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type date1$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
     | date1$SelectionSet<$Scalars>
   >
@@ -4545,7 +4343,7 @@ export namespace DateObject1 {
 //
 //
 // GRAPHQL SELECTION SET
-// OBJECT
+// OUTPUTOBJECT
 // --------------------------------------------------------------------------------------------------
 //                                            DateObject2
 // --------------------------------------------------------------------------------------------------
@@ -4554,11 +4352,11 @@ export namespace DateObject1 {
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface DateObject2<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+export interface DateObject2<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
   extends $Select.Bases.ObjectLike
 {
   /**
-   * Select the \`date2\` field on the \`DateObject2\` object. Its type is \`Date\` (a \`Scalar\`).
+   * Select the \`date2\` field on the \`DateObject2\` object. Its type is ScalarCustom.
    */
   date2?: DateObject2.date2$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<DateObject2.date2<$Scalars>>
 
@@ -4584,18 +4382,18 @@ export interface DateObject2<$Scalars extends $$Utilities.SchemaKit.Scalar.Scala
     | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
 }
 
-export interface DateObject2$FragmentInline<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+export interface DateObject2$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
   extends DateObject2<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
 {}
 
 // ----------------------------------------| Fields |
 
 export namespace DateObject2 {
-  export type date2<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type date2<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | date2$SelectionSet<$Scalars>
 
-  export interface date2$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface date2$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {}
 
@@ -4606,7 +4404,7 @@ export namespace DateObject2 {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type date2$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type date2$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
     | date2$SelectionSet<$Scalars>
   >
@@ -4617,7 +4415,7 @@ export namespace DateObject2 {
 //
 //
 // GRAPHQL SELECTION SET
-// OBJECT
+// OUTPUTOBJECT
 // --------------------------------------------------------------------------------------------------
 //                                              ErrorOne
 // --------------------------------------------------------------------------------------------------
@@ -4626,15 +4424,13 @@ export namespace DateObject2 {
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface ErrorOne<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
-  extends $Select.Bases.ObjectLike
-{
+export interface ErrorOne<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
   /**
-   * Select the \`infoId\` field on the \`ErrorOne\` object. Its type is \`ID\` (a \`Scalar\`).
+   * Select the \`infoId\` field on the \`ErrorOne\` object. Its type is ScalarStandard.
    */
   infoId?: ErrorOne.infoId$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<ErrorOne.infoId<$Scalars>>
   /**
-   * Select the \`message\` field on the \`ErrorOne\` object. Its type is \`String\` (a \`Scalar\`).
+   * Select the \`message\` field on the \`ErrorOne\` object. Its type is ScalarStandard.
    */
   message?: ErrorOne.message$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<ErrorOne.message<$Scalars>>
 
@@ -4660,18 +4456,18 @@ export interface ErrorOne<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMa
     | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
 }
 
-export interface ErrorOne$FragmentInline<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+export interface ErrorOne$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
   extends ErrorOne<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
 {}
 
 // ----------------------------------------| Fields |
 
 export namespace ErrorOne {
-  export type infoId<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type infoId<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | infoId$SelectionSet<$Scalars>
 
-  export interface infoId$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface infoId$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {}
 
@@ -4682,18 +4478,18 @@ export namespace ErrorOne {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type infoId$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type infoId$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
     | infoId$SelectionSet<$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type message<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type message<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | message$SelectionSet<$Scalars>
 
-  export interface message$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface message$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {}
 
@@ -4704,7 +4500,7 @@ export namespace ErrorOne {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type message$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type message$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
     | message$SelectionSet<$Scalars>
   >
@@ -4715,7 +4511,7 @@ export namespace ErrorOne {
 //
 //
 // GRAPHQL SELECTION SET
-// OBJECT
+// OUTPUTOBJECT
 // --------------------------------------------------------------------------------------------------
 //                                              ErrorTwo
 // --------------------------------------------------------------------------------------------------
@@ -4724,15 +4520,13 @@ export namespace ErrorOne {
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface ErrorTwo<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
-  extends $Select.Bases.ObjectLike
-{
+export interface ErrorTwo<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
   /**
-   * Select the \`infoInt\` field on the \`ErrorTwo\` object. Its type is \`Int\` (a \`Scalar\`).
+   * Select the \`infoInt\` field on the \`ErrorTwo\` object. Its type is ScalarStandard.
    */
   infoInt?: ErrorTwo.infoInt$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<ErrorTwo.infoInt<$Scalars>>
   /**
-   * Select the \`message\` field on the \`ErrorTwo\` object. Its type is \`String\` (a \`Scalar\`).
+   * Select the \`message\` field on the \`ErrorTwo\` object. Its type is ScalarStandard.
    */
   message?: ErrorTwo.message$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<ErrorTwo.message<$Scalars>>
 
@@ -4758,18 +4552,18 @@ export interface ErrorTwo<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMa
     | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
 }
 
-export interface ErrorTwo$FragmentInline<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+export interface ErrorTwo$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
   extends ErrorTwo<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
 {}
 
 // ----------------------------------------| Fields |
 
 export namespace ErrorTwo {
-  export type infoInt<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type infoInt<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | infoInt$SelectionSet<$Scalars>
 
-  export interface infoInt$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface infoInt$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {}
 
@@ -4780,18 +4574,18 @@ export namespace ErrorTwo {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type infoInt$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type infoInt$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
     | infoInt$SelectionSet<$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type message<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type message<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | message$SelectionSet<$Scalars>
 
-  export interface message$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface message$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {}
 
@@ -4802,7 +4596,7 @@ export namespace ErrorTwo {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type message$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type message$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
     | message$SelectionSet<$Scalars>
   >
@@ -4813,7 +4607,7 @@ export namespace ErrorTwo {
 //
 //
 // GRAPHQL SELECTION SET
-// OBJECT
+// OUTPUTOBJECT
 // --------------------------------------------------------------------------------------------------
 //                                                Foo
 // --------------------------------------------------------------------------------------------------
@@ -4825,9 +4619,9 @@ export namespace ErrorTwo {
 /**
  * Object documentation.
  */
-export interface Foo<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
+export interface Foo<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
   /**
-   * Select the \`id\` field on the \`Foo\` object. Its type is \`ID\` (a \`Scalar\`).
+   * Select the \`id\` field on the \`Foo\` object. Its type is ScalarStandard.
    */
   id?: Foo.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Foo.id<$Scalars>>
 
@@ -4853,18 +4647,18 @@ export interface Foo<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {
     | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
 }
 
-export interface Foo$FragmentInline<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+export interface Foo$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
   extends Foo<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
 {}
 
 // ----------------------------------------| Fields |
 
 export namespace Foo {
-  export type id<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type id<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | id$SelectionSet<$Scalars>
 
-  export interface id$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface id$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {}
 
@@ -4875,7 +4669,7 @@ export namespace Foo {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type id$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type id$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
     | id$SelectionSet<$Scalars>
   >
@@ -4886,7 +4680,7 @@ export namespace Foo {
 //
 //
 // GRAPHQL SELECTION SET
-// OBJECT
+// OUTPUTOBJECT
 // --------------------------------------------------------------------------------------------------
 //                                              Object1
 // --------------------------------------------------------------------------------------------------
@@ -4895,31 +4689,29 @@ export namespace Foo {
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface Object1<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
-  extends $Select.Bases.ObjectLike
-{
+export interface Object1<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
   /**
    * Select the \`ABCEnum\` field on the \`Object1\` object. Its type is Enum.
    */
   ABCEnum?: Object1.ABCEnum$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Object1.ABCEnum<$Scalars>>
   /**
-   * Select the \`boolean\` field on the \`Object1\` object. Its type is \`Boolean\` (a \`Scalar\`).
+   * Select the \`boolean\` field on the \`Object1\` object. Its type is ScalarStandard.
    */
   boolean?: Object1.$boolean$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Object1.$boolean<$Scalars>>
   /**
-   * Select the \`float\` field on the \`Object1\` object. Its type is \`Float\` (a \`Scalar\`).
+   * Select the \`float\` field on the \`Object1\` object. Its type is ScalarStandard.
    */
   float?: Object1.float$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Object1.float<$Scalars>>
   /**
-   * Select the \`id\` field on the \`Object1\` object. Its type is \`ID\` (a \`Scalar\`).
+   * Select the \`id\` field on the \`Object1\` object. Its type is ScalarStandard.
    */
   id?: Object1.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Object1.id<$Scalars>>
   /**
-   * Select the \`int\` field on the \`Object1\` object. Its type is \`Int\` (a \`Scalar\`).
+   * Select the \`int\` field on the \`Object1\` object. Its type is ScalarStandard.
    */
   int?: Object1.int$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Object1.int<$Scalars>>
   /**
-   * Select the \`string\` field on the \`Object1\` object. Its type is \`String\` (a \`Scalar\`).
+   * Select the \`string\` field on the \`Object1\` object. Its type is ScalarStandard.
    */
   string?: Object1.$string$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Object1.$string<$Scalars>>
 
@@ -4945,18 +4737,18 @@ export interface Object1<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap
     | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
 }
 
-export interface Object1$FragmentInline<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+export interface Object1$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
   extends Object1<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
 {}
 
 // ----------------------------------------| Fields |
 
 export namespace Object1 {
-  export type ABCEnum<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type ABCEnum<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | ABCEnum$SelectionSet<$Scalars>
 
-  export interface ABCEnum$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface ABCEnum$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {}
 
@@ -4967,18 +4759,18 @@ export namespace Object1 {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type ABCEnum$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type ABCEnum$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
     | ABCEnum$SelectionSet<$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type $boolean<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type $boolean<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | $boolean$SelectionSet<$Scalars>
 
-  export interface $boolean$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface $boolean$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {}
 
@@ -4989,18 +4781,18 @@ export namespace Object1 {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type $boolean$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type $boolean$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
     | $boolean$SelectionSet<$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type float<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type float<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | float$SelectionSet<$Scalars>
 
-  export interface float$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface float$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {}
 
@@ -5011,18 +4803,18 @@ export namespace Object1 {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type float$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type float$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
     | float$SelectionSet<$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type id<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type id<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | id$SelectionSet<$Scalars>
 
-  export interface id$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface id$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {}
 
@@ -5033,18 +4825,18 @@ export namespace Object1 {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type id$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type id$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
     | id$SelectionSet<$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type int<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type int<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | int$SelectionSet<$Scalars>
 
-  export interface int$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface int$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {}
 
@@ -5055,18 +4847,18 @@ export namespace Object1 {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type int$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type int$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
     | int$SelectionSet<$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type $string<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type $string<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | $string$SelectionSet<$Scalars>
 
-  export interface $string$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface $string$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {}
 
@@ -5077,7 +4869,7 @@ export namespace Object1 {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type $string$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type $string$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
     | $string$SelectionSet<$Scalars>
   >
@@ -5088,7 +4880,7 @@ export namespace Object1 {
 //
 //
 // GRAPHQL SELECTION SET
-// OBJECT
+// OUTPUTOBJECT
 // --------------------------------------------------------------------------------------------------
 //                                    Object1ImplementingInterface
 // --------------------------------------------------------------------------------------------------
@@ -5097,17 +4889,17 @@ export namespace Object1 {
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface Object1ImplementingInterface<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+export interface Object1ImplementingInterface<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
   extends $Select.Bases.ObjectLike
 {
   /**
-   * Select the \`id\` field on the \`Object1ImplementingInterface\` object. Its type is \`ID\` (a \`Scalar\`).
+   * Select the \`id\` field on the \`Object1ImplementingInterface\` object. Its type is ScalarStandard.
    */
   id?:
     | Object1ImplementingInterface.id$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<Object1ImplementingInterface.id<$Scalars>>
   /**
-   * Select the \`int\` field on the \`Object1ImplementingInterface\` object. Its type is \`Int\` (a \`Scalar\`).
+   * Select the \`int\` field on the \`Object1ImplementingInterface\` object. Its type is ScalarStandard.
    */
   int?:
     | Object1ImplementingInterface.int$Expanded<$Scalars>
@@ -5135,18 +4927,18 @@ export interface Object1ImplementingInterface<$Scalars extends $$Utilities.Schem
     | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
 }
 
-export interface Object1ImplementingInterface$FragmentInline<
-  $Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {},
-> extends Object1ImplementingInterface<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {}
+export interface Object1ImplementingInterface$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+  extends Object1ImplementingInterface<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
+{}
 
 // ----------------------------------------| Fields |
 
 export namespace Object1ImplementingInterface {
-  export type id<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type id<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | id$SelectionSet<$Scalars>
 
-  export interface id$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface id$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {}
 
@@ -5157,18 +4949,18 @@ export namespace Object1ImplementingInterface {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type id$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type id$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
     | id$SelectionSet<$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type int<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type int<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | int$SelectionSet<$Scalars>
 
-  export interface int$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface int$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {}
 
@@ -5179,7 +4971,7 @@ export namespace Object1ImplementingInterface {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type int$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type int$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
     | int$SelectionSet<$Scalars>
   >
@@ -5190,7 +4982,7 @@ export namespace Object1ImplementingInterface {
 //
 //
 // GRAPHQL SELECTION SET
-// OBJECT
+// OUTPUTOBJECT
 // --------------------------------------------------------------------------------------------------
 //                                    Object2ImplementingInterface
 // --------------------------------------------------------------------------------------------------
@@ -5199,17 +4991,17 @@ export namespace Object1ImplementingInterface {
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface Object2ImplementingInterface<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+export interface Object2ImplementingInterface<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
   extends $Select.Bases.ObjectLike
 {
   /**
-   * Select the \`boolean\` field on the \`Object2ImplementingInterface\` object. Its type is \`Boolean\` (a \`Scalar\`).
+   * Select the \`boolean\` field on the \`Object2ImplementingInterface\` object. Its type is ScalarStandard.
    */
   boolean?:
     | Object2ImplementingInterface.$boolean$Expanded<$Scalars>
     | $Select.SelectAlias.SelectAlias<Object2ImplementingInterface.$boolean<$Scalars>>
   /**
-   * Select the \`id\` field on the \`Object2ImplementingInterface\` object. Its type is \`ID\` (a \`Scalar\`).
+   * Select the \`id\` field on the \`Object2ImplementingInterface\` object. Its type is ScalarStandard.
    */
   id?:
     | Object2ImplementingInterface.id$Expanded<$Scalars>
@@ -5237,18 +5029,18 @@ export interface Object2ImplementingInterface<$Scalars extends $$Utilities.Schem
     | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
 }
 
-export interface Object2ImplementingInterface$FragmentInline<
-  $Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {},
-> extends Object2ImplementingInterface<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {}
+export interface Object2ImplementingInterface$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+  extends Object2ImplementingInterface<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
+{}
 
 // ----------------------------------------| Fields |
 
 export namespace Object2ImplementingInterface {
-  export type $boolean<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type $boolean<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | $boolean$SelectionSet<$Scalars>
 
-  export interface $boolean$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface $boolean$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {}
 
@@ -5259,18 +5051,18 @@ export namespace Object2ImplementingInterface {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type $boolean$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type $boolean$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
     | $boolean$SelectionSet<$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type id<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type id<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | id$SelectionSet<$Scalars>
 
-  export interface id$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface id$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {}
 
@@ -5281,7 +5073,7 @@ export namespace Object2ImplementingInterface {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type id$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type id$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
     | id$SelectionSet<$Scalars>
   >
@@ -5292,7 +5084,7 @@ export namespace Object2ImplementingInterface {
 //
 //
 // GRAPHQL SELECTION SET
-// OBJECT
+// OUTPUTOBJECT
 // --------------------------------------------------------------------------------------------------
 //                                            ObjectNested
 // --------------------------------------------------------------------------------------------------
@@ -5301,15 +5093,15 @@ export namespace Object2ImplementingInterface {
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface ObjectNested<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+export interface ObjectNested<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
   extends $Select.Bases.ObjectLike
 {
   /**
-   * Select the \`id\` field on the \`ObjectNested\` object. Its type is \`ID\` (a \`Scalar\`).
+   * Select the \`id\` field on the \`ObjectNested\` object. Its type is ScalarStandard.
    */
   id?: ObjectNested.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<ObjectNested.id<$Scalars>>
   /**
-   * Select the \`object\` field on the \`ObjectNested\` object. Its type is Object.
+   * Select the \`object\` field on the \`ObjectNested\` object. Its type is OutputObject.
    */
   object?: ObjectNested.$object$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<ObjectNested.$object<$Scalars>>
 
@@ -5335,18 +5127,18 @@ export interface ObjectNested<$Scalars extends $$Utilities.SchemaKit.Scalar.Scal
     | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
 }
 
-export interface ObjectNested$FragmentInline<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+export interface ObjectNested$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
   extends ObjectNested<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
 {}
 
 // ----------------------------------------| Fields |
 
 export namespace ObjectNested {
-  export type id<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type id<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | id$SelectionSet<$Scalars>
 
-  export interface id$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface id$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {}
 
@@ -5357,16 +5149,16 @@ export namespace ObjectNested {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type id$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type id$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
     | id$SelectionSet<$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type $object<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $object$SelectionSet<$Scalars>
+  export type $object<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $object$SelectionSet<$Scalars>
 
-  export interface $object$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface $object$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base, $NamedTypes.$Object1<$Scalars>
   {}
 
@@ -5377,7 +5169,7 @@ export namespace ObjectNested {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type $object$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type $object$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     $object$SelectionSet<$Scalars>
   >
 }
@@ -5387,7 +5179,7 @@ export namespace ObjectNested {
 //
 //
 // GRAPHQL SELECTION SET
-// OBJECT
+// OUTPUTOBJECT
 // --------------------------------------------------------------------------------------------------
 //                                            ObjectUnion
 // --------------------------------------------------------------------------------------------------
@@ -5396,7 +5188,7 @@ export namespace ObjectNested {
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface ObjectUnion<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+export interface ObjectUnion<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
   extends $Select.Bases.ObjectLike
 {
   /**
@@ -5428,18 +5220,18 @@ export interface ObjectUnion<$Scalars extends $$Utilities.SchemaKit.Scalar.Scala
     | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
 }
 
-export interface ObjectUnion$FragmentInline<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+export interface ObjectUnion$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
   extends ObjectUnion<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
 {}
 
 // ----------------------------------------| Fields |
 
 export namespace ObjectUnion {
-  export type fooBarUnion<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = fooBarUnion$SelectionSet<
+  export type fooBarUnion<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = fooBarUnion$SelectionSet<
     $Scalars
   >
 
-  export interface fooBarUnion$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface fooBarUnion$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base, $NamedTypes.$FooBarUnion<$Scalars>
   {}
 
@@ -5450,7 +5242,7 @@ export namespace ObjectUnion {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type fooBarUnion$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type fooBarUnion$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     fooBarUnion$SelectionSet<$Scalars>
   >
 }
@@ -5460,7 +5252,7 @@ export namespace ObjectUnion {
 //
 //
 // GRAPHQL SELECTION SET
-// OBJECT
+// OUTPUTOBJECT
 // --------------------------------------------------------------------------------------------------
 //                                          lowerCaseObject
 // --------------------------------------------------------------------------------------------------
@@ -5469,11 +5261,11 @@ export namespace ObjectUnion {
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface lowerCaseObject<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+export interface lowerCaseObject<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
   extends $Select.Bases.ObjectLike
 {
   /**
-   * Select the \`id\` field on the \`lowerCaseObject\` object. Its type is \`ID\` (a \`Scalar\`).
+   * Select the \`id\` field on the \`lowerCaseObject\` object. Its type is ScalarStandard.
    */
   id?: lowerCaseObject.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<lowerCaseObject.id<$Scalars>>
 
@@ -5499,18 +5291,18 @@ export interface lowerCaseObject<$Scalars extends $$Utilities.SchemaKit.Scalar.S
     | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
 }
 
-export interface lowerCaseObject$FragmentInline<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+export interface lowerCaseObject$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
   extends lowerCaseObject<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
 {}
 
 // ----------------------------------------| Fields |
 
 export namespace lowerCaseObject {
-  export type id<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type id<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | id$SelectionSet<$Scalars>
 
-  export interface id$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface id$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {}
 
@@ -5521,7 +5313,7 @@ export namespace lowerCaseObject {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type id$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type id$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
     | id$SelectionSet<$Scalars>
   >
@@ -5532,7 +5324,7 @@ export namespace lowerCaseObject {
 //
 //
 // GRAPHQL SELECTION SET
-// OBJECT
+// OUTPUTOBJECT
 // --------------------------------------------------------------------------------------------------
 //                                          lowerCaseObject2
 // --------------------------------------------------------------------------------------------------
@@ -5541,11 +5333,11 @@ export namespace lowerCaseObject {
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface lowerCaseObject2<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+export interface lowerCaseObject2<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
   extends $Select.Bases.ObjectLike
 {
   /**
-   * Select the \`int\` field on the \`lowerCaseObject2\` object. Its type is \`Int\` (a \`Scalar\`).
+   * Select the \`int\` field on the \`lowerCaseObject2\` object. Its type is ScalarStandard.
    */
   int?: lowerCaseObject2.int$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<lowerCaseObject2.int<$Scalars>>
 
@@ -5571,18 +5363,18 @@ export interface lowerCaseObject2<$Scalars extends $$Utilities.SchemaKit.Scalar.
     | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
 }
 
-export interface lowerCaseObject2$FragmentInline<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+export interface lowerCaseObject2$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
   extends lowerCaseObject2<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
 {}
 
 // ----------------------------------------| Fields |
 
 export namespace lowerCaseObject2 {
-  export type int<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type int<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | int$SelectionSet<$Scalars>
 
-  export interface int$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+  export interface int$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
     extends $Select.Bases.Base
   {}
 
@@ -5593,7 +5385,7 @@ export namespace lowerCaseObject2 {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type int$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type int$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
     | int$SelectionSet<$Scalars>
   >
@@ -5606,7 +5398,7 @@ export namespace lowerCaseObject2 {
 //
 //
 // ==================================================================================================
-//                                       GraphQLUnionType Types
+//                                               Union
 // ==================================================================================================
 //
 //
@@ -5615,7 +5407,7 @@ export namespace lowerCaseObject2 {
 //
 //
 
-export interface DateUnion<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+export interface DateUnion<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
   ___on_DateObject1?: DateObject1<$Scalars>
   ___on_DateObject2?: DateObject2<$Scalars>
 
@@ -5641,14 +5433,14 @@ export interface DateUnion<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarM
     | $Select.Indicator.NoArgsIndicator$Expanded
     | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
 }
-export interface DateUnion$FragmentInline<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+export interface DateUnion$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
   extends DateUnion<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
 {}
 
 /**
  * Union documentation.
  */
-export interface FooBarUnion<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+export interface FooBarUnion<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
   ___on_Bar?: Bar<$Scalars>
   ___on_Foo?: Foo<$Scalars>
 
@@ -5674,11 +5466,11 @@ export interface FooBarUnion<$Scalars extends $$Utilities.SchemaKit.Scalar.Scala
     | $Select.Indicator.NoArgsIndicator$Expanded
     | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
 }
-export interface FooBarUnion$FragmentInline<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+export interface FooBarUnion$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
   extends FooBarUnion<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
 {}
 
-export interface Result<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+export interface Result<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
   ___on_ErrorOne?: ErrorOne<$Scalars>
   ___on_ErrorTwo?: ErrorTwo<$Scalars>
   ___on_Object1?: Object1<$Scalars>
@@ -5705,11 +5497,11 @@ export interface Result<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap 
     | $Select.Indicator.NoArgsIndicator$Expanded
     | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
 }
-export interface Result$FragmentInline<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+export interface Result$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
   extends Result<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
 {}
 
-export interface lowerCaseUnion<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> {
+export interface lowerCaseUnion<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
   ___on_lowerCaseObject?: lowerCaseObject<$Scalars>
   ___on_lowerCaseObject2?: lowerCaseObject2<$Scalars>
 
@@ -5735,9 +5527,197 @@ export interface lowerCaseUnion<$Scalars extends $$Utilities.SchemaKit.Scalar.Sc
     | $Select.Indicator.NoArgsIndicator$Expanded
     | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
 }
-export interface lowerCaseUnion$FragmentInline<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+export interface lowerCaseUnion$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
   extends lowerCaseUnion<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
 {}
+
+//
+//
+//
+//
+//
+//
+// ==================================================================================================
+//                                             Interface
+// ==================================================================================================
+//
+//
+//
+//
+//
+//
+
+// Interface Type: DateInterface1
+// --------------------------------------------------------------------------------------------------
+
+export interface DateInterface1<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+  extends $Select.Bases.ObjectLike
+{
+  date1?: DateInterface1.date1<$Scalars>
+  ___on_DateObject1?: DateObject1<$Scalars>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an \`@include\` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | DateInterface1$FragmentInline<$Scalars>
+    | DateInterface1$FragmentInline<$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected. Since this is a interface type and thus polymorphic,
+   * the name is one of the implementor type names, whichever is ultimately returned at runtime.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+
+export interface DateInterface1$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+  extends DateInterface1<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
+{}
+
+export namespace DateInterface1 {
+  export type date1<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | date1$SelectionSet<$Scalars>
+
+  export interface date1$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the \`date1\` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type date1$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | date1$SelectionSet<$Scalars>
+  >
+}
+
+// Interface Type: Error
+// --------------------------------------------------------------------------------------------------
+
+export interface Error<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
+  message?: Error.message<$Scalars>
+  ___on_ErrorOne?: ErrorOne<$Scalars>
+  ___on_ErrorTwo?: ErrorTwo<$Scalars>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an \`@include\` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | Error$FragmentInline<$Scalars>
+    | Error$FragmentInline<$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected. Since this is a interface type and thus polymorphic,
+   * the name is one of the implementor type names, whichever is ultimately returned at runtime.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+
+export interface Error$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+  extends Error<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
+{}
+
+export namespace Error {
+  export type message<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | message$SelectionSet<$Scalars>
+
+  export interface message$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the \`message\` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type message$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | message$SelectionSet<$Scalars>
+  >
+}
+
+// Interface Type: Interface
+// --------------------------------------------------------------------------------------------------
+
+export interface Interface<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
+  id?: Interface.id<$Scalars>
+  ___on_Object1ImplementingInterface?: Object1ImplementingInterface<$Scalars>
+  ___on_Object2ImplementingInterface?: Object2ImplementingInterface<$Scalars>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an \`@include\` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | Interface$FragmentInline<$Scalars>
+    | Interface$FragmentInline<$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected. Since this is a interface type and thus polymorphic,
+   * the name is one of the implementor type names, whichever is ultimately returned at runtime.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+
+export interface Interface$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+  extends Interface<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
+{}
+
+export namespace Interface {
+  export type id<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | id$SelectionSet<$Scalars>
+
+  export interface id$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the \`id\` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type id$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | id$SelectionSet<$Scalars>
+  >
+}
 
 /**
  * [1] These definitions serve to allow field selection interfaces to extend their respective object type without
@@ -5747,43 +5727,41 @@ export interface lowerCaseUnion$FragmentInline<$Scalars extends $$Utilities.Sche
  *     would end up with an error of \`export interface Foo extends Foo ...\`
  */
 export namespace $NamedTypes {
-  export type $Mutation<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = Mutation<$Scalars>
-  export type $Query<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = Query<$Scalars>
+  export type $Mutation<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = Mutation<$Scalars>
+  export type $Query<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = Query<$Scalars>
   export type $ABCEnum = ABCEnum
   export type $Case = Case
-  export type $InputObject<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = InputObject<$Scalars>
-  export type $InputObjectCircular<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = InputObjectCircular<
+  export type $InputObject<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = InputObject<$Scalars>
+  export type $InputObjectCircular<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = InputObjectCircular<
     $Scalars
   >
-  export type $InputObjectNested<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = InputObjectNested<
+  export type $InputObjectNested<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = InputObjectNested<
     $Scalars
   >
-  export type $InputObjectNestedNonNull<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type $InputObjectNestedNonNull<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     InputObjectNestedNonNull<$Scalars>
-  export type $DateInterface1<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = DateInterface1<$Scalars>
-  export type $Error<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = Error<$Scalars>
-  export type $Interface<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = Interface<$Scalars>
-  export type $Bar<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = Bar<$Scalars>
-  export type $DateObject1<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = DateObject1<$Scalars>
-  export type $DateObject2<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = DateObject2<$Scalars>
-  export type $ErrorOne<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = ErrorOne<$Scalars>
-  export type $ErrorTwo<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = ErrorTwo<$Scalars>
-  export type $Foo<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = Foo<$Scalars>
-  export type $Object1<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = Object1<$Scalars>
-  export type $Object1ImplementingInterface<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type $Bar<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = Bar<$Scalars>
+  export type $DateObject1<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = DateObject1<$Scalars>
+  export type $DateObject2<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = DateObject2<$Scalars>
+  export type $ErrorOne<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = ErrorOne<$Scalars>
+  export type $ErrorTwo<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = ErrorTwo<$Scalars>
+  export type $Foo<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = Foo<$Scalars>
+  export type $Object1<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = Object1<$Scalars>
+  export type $Object1ImplementingInterface<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     Object1ImplementingInterface<$Scalars>
-  export type $Object2ImplementingInterface<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+  export type $Object2ImplementingInterface<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
     Object2ImplementingInterface<$Scalars>
-  export type $ObjectNested<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = ObjectNested<$Scalars>
-  export type $ObjectUnion<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = ObjectUnion<$Scalars>
-  export type $lowerCaseObject<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = lowerCaseObject<$Scalars>
-  export type $lowerCaseObject2<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = lowerCaseObject2<
-    $Scalars
-  >
-  export type $DateUnion<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = DateUnion<$Scalars>
-  export type $FooBarUnion<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = FooBarUnion<$Scalars>
-  export type $Result<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = Result<$Scalars>
-  export type $lowerCaseUnion<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = lowerCaseUnion<$Scalars>
+  export type $ObjectNested<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = ObjectNested<$Scalars>
+  export type $ObjectUnion<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = ObjectUnion<$Scalars>
+  export type $lowerCaseObject<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = lowerCaseObject<$Scalars>
+  export type $lowerCaseObject2<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = lowerCaseObject2<$Scalars>
+  export type $DateUnion<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = DateUnion<$Scalars>
+  export type $FooBarUnion<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = FooBarUnion<$Scalars>
+  export type $Result<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = Result<$Scalars>
+  export type $lowerCaseUnion<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = lowerCaseUnion<$Scalars>
+  export type $DateInterface1<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = DateInterface1<$Scalars>
+  export type $Error<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = Error<$Scalars>
+  export type $Interface<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = Interface<$Scalars>
 }
 "
 `;

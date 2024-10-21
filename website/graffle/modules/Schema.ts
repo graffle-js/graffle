@@ -20,43 +20,43 @@ export namespace Schema {
   //
   //
 
-  export type Query = $.ObjectQuery<{
-    continent: $.Field<
+  export type Query = $.StandardTypes.Query<{
+    continent: $.OutputField<
       'continent',
       $.Nullable<Continent>,
       $.Args<{
         code: $.InputField<$Scalar.ID>
       }, false>
     >
-    continents: $.Field<
+    continents: $.OutputField<
       'continents',
       $.List<Continent>,
       $.Args<{
         filter: $.InputField<$.Nullable<ContinentFilterInput>>
       }, true>
     >
-    countries: $.Field<
+    countries: $.OutputField<
       'countries',
       $.List<Country>,
       $.Args<{
         filter: $.InputField<$.Nullable<CountryFilterInput>>
       }, true>
     >
-    country: $.Field<
+    country: $.OutputField<
       'country',
       $.Nullable<Country>,
       $.Args<{
         code: $.InputField<$Scalar.ID>
       }, false>
     >
-    language: $.Field<
+    language: $.OutputField<
       'language',
       $.Nullable<Language>,
       $.Args<{
         code: $.InputField<$Scalar.ID>
       }, false>
     >
-    languages: $.Field<
+    languages: $.OutputField<
       'languages',
       $.List<Language>,
       $.Args<{
@@ -72,7 +72,7 @@ export namespace Schema {
   //
   //
   // ==================================================================================================
-  //                                                Enum
+  //                                            OutputObject
   // ==================================================================================================
   //
   //
@@ -81,7 +81,54 @@ export namespace Schema {
   //
   //
 
-  // -- no types --
+  export type Continent = $.OutputObject<'Continent', {
+    code: $.OutputField<'code', $Scalar.ID, null>
+    countries: $.OutputField<'countries', $.List<Country>, null>
+    name: $.OutputField<'name', $Scalar.String, null>
+  }>
+
+  export type Country = $.OutputObject<'Country', {
+    awsRegion: $.OutputField<'awsRegion', $Scalar.String, null>
+    capital: $.OutputField<'capital', $.Nullable<$Scalar.String>, null>
+    code: $.OutputField<'code', $Scalar.ID, null>
+    continent: $.OutputField<'continent', Continent, null>
+    currencies: $.OutputField<'currencies', $.List<$Scalar.String>, null>
+    currency: $.OutputField<'currency', $.Nullable<$Scalar.String>, null>
+    emoji: $.OutputField<'emoji', $Scalar.String, null>
+    emojiU: $.OutputField<'emojiU', $Scalar.String, null>
+    languages: $.OutputField<'languages', $.List<Language>, null>
+    name: $.OutputField<
+      'name',
+      $Scalar.String,
+      $.Args<{
+        lang: $.InputField<$.Nullable<$Scalar.String>>
+      }, true>
+    >
+    native: $.OutputField<'native', $Scalar.String, null>
+    phone: $.OutputField<'phone', $Scalar.String, null>
+    phones: $.OutputField<'phones', $.List<$Scalar.String>, null>
+    states: $.OutputField<'states', $.List<State>, null>
+    subdivisions: $.OutputField<'subdivisions', $.List<Subdivision>, null>
+  }>
+
+  export type Language = $.OutputObject<'Language', {
+    code: $.OutputField<'code', $Scalar.ID, null>
+    name: $.OutputField<'name', $Scalar.String, null>
+    native: $.OutputField<'native', $Scalar.String, null>
+    rtl: $.OutputField<'rtl', $Scalar.Boolean, null>
+  }>
+
+  export type State = $.OutputObject<'State', {
+    code: $.OutputField<'code', $.Nullable<$Scalar.String>, null>
+    country: $.OutputField<'country', Country, null>
+    name: $.OutputField<'name', $Scalar.String, null>
+  }>
+
+  export type Subdivision = $.OutputObject<'Subdivision', {
+    code: $.OutputField<'code', $Scalar.ID, null>
+    emoji: $.OutputField<'emoji', $.Nullable<$Scalar.String>, null>
+    name: $.OutputField<'name', $Scalar.String, null>
+  }>
 
   //
   //
@@ -147,72 +194,25 @@ export namespace Schema {
   //
   //
   // ==================================================================================================
-  //                                               Object
-  // ==================================================================================================
-  //
-  //
-  //
-  //
-  //
-  //
-
-  export type Continent = $.OutputObject<'Continent', {
-    code: $.Field<'code', $Scalar.ID, null>
-    countries: $.Field<'countries', $.List<Country>, null>
-    name: $.Field<'name', $Scalar.String, null>
-  }>
-
-  export type Country = $.OutputObject<'Country', {
-    awsRegion: $.Field<'awsRegion', $Scalar.String, null>
-    capital: $.Field<'capital', $.Nullable<$Scalar.String>, null>
-    code: $.Field<'code', $Scalar.ID, null>
-    continent: $.Field<'continent', Continent, null>
-    currencies: $.Field<'currencies', $.List<$Scalar.String>, null>
-    currency: $.Field<'currency', $.Nullable<$Scalar.String>, null>
-    emoji: $.Field<'emoji', $Scalar.String, null>
-    emojiU: $.Field<'emojiU', $Scalar.String, null>
-    languages: $.Field<'languages', $.List<Language>, null>
-    name: $.Field<
-      'name',
-      $Scalar.String,
-      $.Args<{
-        lang: $.InputField<$.Nullable<$Scalar.String>>
-      }, true>
-    >
-    native: $.Field<'native', $Scalar.String, null>
-    phone: $.Field<'phone', $Scalar.String, null>
-    phones: $.Field<'phones', $.List<$Scalar.String>, null>
-    states: $.Field<'states', $.List<State>, null>
-    subdivisions: $.Field<'subdivisions', $.List<Subdivision>, null>
-  }>
-
-  export type Language = $.OutputObject<'Language', {
-    code: $.Field<'code', $Scalar.ID, null>
-    name: $.Field<'name', $Scalar.String, null>
-    native: $.Field<'native', $Scalar.String, null>
-    rtl: $.Field<'rtl', $Scalar.Boolean, null>
-  }>
-
-  export type State = $.OutputObject<'State', {
-    code: $.Field<'code', $.Nullable<$Scalar.String>, null>
-    country: $.Field<'country', Country, null>
-    name: $.Field<'name', $Scalar.String, null>
-  }>
-
-  export type Subdivision = $.OutputObject<'Subdivision', {
-    code: $.Field<'code', $Scalar.ID, null>
-    emoji: $.Field<'emoji', $.Nullable<$Scalar.String>, null>
-    name: $.Field<'name', $Scalar.String, null>
-  }>
-
-  //
-  //
-  //
-  //
-  //
-  //
-  // ==================================================================================================
   //                                               Union
+  // ==================================================================================================
+  //
+  //
+  //
+  //
+  //
+  //
+
+  // -- no types --
+
+  //
+  //
+  //
+  //
+  //
+  //
+  // ==================================================================================================
+  //                                                Enum
   // ==================================================================================================
   //
   //

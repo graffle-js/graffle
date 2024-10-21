@@ -1,4 +1,4 @@
-import type * as $Utilities from 'graffle/utilities-for-generated'
+import type * as $$Utilities from 'graffle/utilities-for-generated'
 import * as $Scalar from './Scalar.js'
 //
 //
@@ -7,7 +7,7 @@ import * as $Scalar from './Scalar.js'
 //
 //
 // ==================================================================================================
-//                                     GraphQLScalarTypeStandard
+//                                           ScalarStandard
 // ==================================================================================================
 //
 //
@@ -33,7 +33,7 @@ const String = $Scalar.String
 //
 //
 // ==================================================================================================
-//                                      GraphQLScalarTypeCustom
+//                                            ScalarCustom
 // ==================================================================================================
 //
 //
@@ -42,7 +42,7 @@ const String = $Scalar.String
 //
 //
 
-// None of your GraphQLScalarTypeCustoms have custom scalars.
+// None of your ScalarCustoms have custom scalars.
 
 //
 //
@@ -51,7 +51,7 @@ const String = $Scalar.String
 //
 //
 // ==================================================================================================
-//                                          GraphQLEnumType
+//                                                Enum
 // ==================================================================================================
 //
 //
@@ -60,7 +60,7 @@ const String = $Scalar.String
 //
 //
 
-// None of your GraphQLEnumTypes have custom scalars.
+// None of your Enums have custom scalars.
 
 //
 //
@@ -69,7 +69,7 @@ const String = $Scalar.String
 //
 //
 // ==================================================================================================
-//                                       GraphQLInputObjectType
+//                                            InputObject
 // ==================================================================================================
 //
 //
@@ -78,14 +78,14 @@ const String = $Scalar.String
 //
 //
 
-const ContinentFilterInput: $Utilities.SchemaDrivenDataMap.InputObject = {
+const ContinentFilterInput: $$Utilities.SchemaDrivenDataMap.InputObject = {
   n: 'ContinentFilterInput',
   f: {
     code: {},
   },
 }
 
-const CountryFilterInput: $Utilities.SchemaDrivenDataMap.InputObject = {
+const CountryFilterInput: $$Utilities.SchemaDrivenDataMap.InputObject = {
   n: 'CountryFilterInput',
   f: {
     code: {},
@@ -95,14 +95,14 @@ const CountryFilterInput: $Utilities.SchemaDrivenDataMap.InputObject = {
   },
 }
 
-const LanguageFilterInput: $Utilities.SchemaDrivenDataMap.InputObject = {
+const LanguageFilterInput: $$Utilities.SchemaDrivenDataMap.InputObject = {
   n: 'LanguageFilterInput',
   f: {
     code: {},
   },
 }
 
-const StringQueryOperatorInput: $Utilities.SchemaDrivenDataMap.InputObject = {
+const StringQueryOperatorInput: $$Utilities.SchemaDrivenDataMap.InputObject = {
   n: 'StringQueryOperatorInput',
   f: {
     eq: {},
@@ -120,7 +120,7 @@ const StringQueryOperatorInput: $Utilities.SchemaDrivenDataMap.InputObject = {
 //
 //
 // ==================================================================================================
-//                                         GraphQLObjectType
+//                                            OutputObject
 // ==================================================================================================
 //
 //
@@ -129,7 +129,7 @@ const StringQueryOperatorInput: $Utilities.SchemaDrivenDataMap.InputObject = {
 //
 //
 
-const Continent: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const Continent: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     code: {},
     countries: {
@@ -139,7 +139,7 @@ const Continent: $Utilities.SchemaDrivenDataMap.OutputObject = {
   },
 }
 
-const Country: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const Country: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     awsRegion: {},
     capital: {},
@@ -174,7 +174,7 @@ const Country: $Utilities.SchemaDrivenDataMap.OutputObject = {
   },
 }
 
-const Language: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const Language: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     code: {},
     name: {},
@@ -183,7 +183,7 @@ const Language: $Utilities.SchemaDrivenDataMap.OutputObject = {
   },
 }
 
-const State: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const State: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     code: {},
     country: {
@@ -193,7 +193,7 @@ const State: $Utilities.SchemaDrivenDataMap.OutputObject = {
   },
 }
 
-const Subdivision: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const Subdivision: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     code: {},
     emoji: {},
@@ -208,7 +208,7 @@ const Subdivision: $Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 // ==================================================================================================
-//                                        GraphQLInterfaceType
+//                                             Interface
 // ==================================================================================================
 //
 //
@@ -217,7 +217,7 @@ const Subdivision: $Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 
-// None of your GraphQLInterfaceTypes have custom scalars.
+// None of your Interfaces have custom scalars.
 
 //
 //
@@ -226,7 +226,7 @@ const Subdivision: $Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 // ==================================================================================================
-//                                          GraphQLUnionType
+//                                               Union
 // ==================================================================================================
 //
 //
@@ -235,7 +235,7 @@ const Subdivision: $Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 
-// None of your GraphQLUnionTypes have custom scalars.
+// None of your Unions have custom scalars.
 
 //
 //
@@ -244,7 +244,7 @@ const Subdivision: $Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 // ==================================================================================================
-//                                          GraphQLRootType
+//                                                Root
 // ==================================================================================================
 //
 //
@@ -253,7 +253,7 @@ const Subdivision: $Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 
-const Query: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const Query: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     continent: {
       a: {
@@ -358,7 +358,7 @@ Query.f[`languages`]!.nt = Language
 //
 //
 
-const $schemaDrivenDataMap: $Utilities.SchemaDrivenDataMap = {
+const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
   roots: {
     Query,
   },

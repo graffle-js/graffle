@@ -1,4 +1,4 @@
-import type * as $Utilities from 'graffle/utilities-for-generated'
+import type * as $$Utilities from 'graffle/utilities-for-generated'
 import * as $Scalar from './Scalar.js'
 //
 //
@@ -7,7 +7,7 @@ import * as $Scalar from './Scalar.js'
 //
 //
 // ==================================================================================================
-//                                     GraphQLScalarTypeStandard
+//                                           ScalarStandard
 // ==================================================================================================
 //
 //
@@ -33,7 +33,7 @@ const Boolean = $Scalar.Boolean
 //
 //
 // ==================================================================================================
-//                                      GraphQLScalarTypeCustom
+//                                            ScalarCustom
 // ==================================================================================================
 //
 //
@@ -42,7 +42,7 @@ const Boolean = $Scalar.Boolean
 //
 //
 
-// None of your GraphQLScalarTypeCustoms have custom scalars.
+// None of your ScalarCustoms have custom scalars.
 
 //
 //
@@ -51,7 +51,7 @@ const Boolean = $Scalar.Boolean
 //
 //
 // ==================================================================================================
-//                                          GraphQLEnumType
+//                                                Enum
 // ==================================================================================================
 //
 //
@@ -60,17 +60,17 @@ const Boolean = $Scalar.Boolean
 //
 //
 
-const BattleWildResult: $Utilities.SchemaDrivenDataMap.Enum = {
+const BattleWildResult: $$Utilities.SchemaDrivenDataMap.Enum = {
   k: 'enum',
   n: 'BattleWildResult',
 }
 
-const PokemonType: $Utilities.SchemaDrivenDataMap.Enum = {
+const PokemonType: $$Utilities.SchemaDrivenDataMap.Enum = {
   k: 'enum',
   n: 'PokemonType',
 }
 
-const TrainerClass: $Utilities.SchemaDrivenDataMap.Enum = {
+const TrainerClass: $$Utilities.SchemaDrivenDataMap.Enum = {
   k: 'enum',
   n: 'TrainerClass',
 }
@@ -82,7 +82,7 @@ const TrainerClass: $Utilities.SchemaDrivenDataMap.Enum = {
 //
 //
 // ==================================================================================================
-//                                       GraphQLInputObjectType
+//                                            InputObject
 // ==================================================================================================
 //
 //
@@ -91,7 +91,7 @@ const TrainerClass: $Utilities.SchemaDrivenDataMap.Enum = {
 //
 //
 
-const DateFilter: $Utilities.SchemaDrivenDataMap.InputObject = {
+const DateFilter: $$Utilities.SchemaDrivenDataMap.InputObject = {
   n: 'DateFilter',
   f: {
     gte: {},
@@ -99,7 +99,7 @@ const DateFilter: $Utilities.SchemaDrivenDataMap.InputObject = {
   },
 }
 
-const PokemonFilter: $Utilities.SchemaDrivenDataMap.InputObject = {
+const PokemonFilter: $$Utilities.SchemaDrivenDataMap.InputObject = {
   n: 'PokemonFilter',
   f: {
     birthday: {},
@@ -107,7 +107,7 @@ const PokemonFilter: $Utilities.SchemaDrivenDataMap.InputObject = {
   },
 }
 
-const StringFilter: $Utilities.SchemaDrivenDataMap.InputObject = {
+const StringFilter: $$Utilities.SchemaDrivenDataMap.InputObject = {
   n: 'StringFilter',
   f: {
     contains: {},
@@ -122,7 +122,7 @@ const StringFilter: $Utilities.SchemaDrivenDataMap.InputObject = {
 //
 //
 // ==================================================================================================
-//                                         GraphQLObjectType
+//                                            OutputObject
 // ==================================================================================================
 //
 //
@@ -131,7 +131,7 @@ const StringFilter: $Utilities.SchemaDrivenDataMap.InputObject = {
 //
 //
 
-const BattleRoyale: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const BattleRoyale: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     combatants: {
       // nt: CombatantMultiPokemon, <-- Assigned later to avoid potential circular dependency.
@@ -144,7 +144,7 @@ const BattleRoyale: $Utilities.SchemaDrivenDataMap.OutputObject = {
   },
 }
 
-const BattleTrainer: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const BattleTrainer: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     combatant1: {
       // nt: CombatantSinglePokemon, <-- Assigned later to avoid potential circular dependency.
@@ -160,7 +160,7 @@ const BattleTrainer: $Utilities.SchemaDrivenDataMap.OutputObject = {
   },
 }
 
-const BattleWild: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const BattleWild: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     date: {},
     id: {},
@@ -177,7 +177,7 @@ const BattleWild: $Utilities.SchemaDrivenDataMap.OutputObject = {
   },
 }
 
-const CombatantMultiPokemon: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const CombatantMultiPokemon: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     pokemons: {
       // nt: Pokemon, <-- Assigned later to avoid potential circular dependency.
@@ -188,7 +188,7 @@ const CombatantMultiPokemon: $Utilities.SchemaDrivenDataMap.OutputObject = {
   },
 }
 
-const CombatantSinglePokemon: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const CombatantSinglePokemon: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     pokemon: {
       // nt: Pokemon, <-- Assigned later to avoid potential circular dependency.
@@ -199,7 +199,7 @@ const CombatantSinglePokemon: $Utilities.SchemaDrivenDataMap.OutputObject = {
   },
 }
 
-const Patron: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const Patron: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     id: {},
     money: {},
@@ -207,7 +207,7 @@ const Patron: $Utilities.SchemaDrivenDataMap.OutputObject = {
   },
 }
 
-const Pokemon: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const Pokemon: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     attack: {},
     birthday: {},
@@ -222,7 +222,7 @@ const Pokemon: $Utilities.SchemaDrivenDataMap.OutputObject = {
   },
 }
 
-const Trainer: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const Trainer: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     class: {},
     fans: {
@@ -243,7 +243,7 @@ const Trainer: $Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 // ==================================================================================================
-//                                        GraphQLInterfaceType
+//                                             Interface
 // ==================================================================================================
 //
 //
@@ -252,7 +252,7 @@ const Trainer: $Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 
-const Being: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const Being: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {},
 }
 
@@ -263,7 +263,7 @@ const Being: $Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 // ==================================================================================================
-//                                          GraphQLUnionType
+//                                               Union
 // ==================================================================================================
 //
 //
@@ -272,7 +272,7 @@ const Being: $Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 
-const Battle: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const Battle: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {},
 }
 
@@ -283,7 +283,7 @@ const Battle: $Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 // ==================================================================================================
-//                                          GraphQLRootType
+//                                                Root
 // ==================================================================================================
 //
 //
@@ -292,7 +292,7 @@ const Battle: $Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 
-const Mutation: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const Mutation: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     addPokemon: {
       a: {
@@ -322,7 +322,7 @@ const Mutation: $Utilities.SchemaDrivenDataMap.OutputObject = {
   },
 }
 
-const Query: $Utilities.SchemaDrivenDataMap.OutputObject = {
+const Query: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     battles: {
       // nt: Battle, <-- Assigned later to avoid potential circular dependency.
@@ -423,7 +423,7 @@ Query.f[`trainers`]!.nt = Trainer
 //
 //
 
-const $schemaDrivenDataMap: $Utilities.SchemaDrivenDataMap = {
+const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
   roots: {
     Mutation,
     Query,

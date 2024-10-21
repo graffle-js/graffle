@@ -29,7 +29,7 @@ export interface $Document<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap 
 //
 //
 // ==================================================================================================
-//                                      GraphQLObjectType Types
+//                                                Root
 // ==================================================================================================
 //
 //
@@ -43,7 +43,7 @@ export interface $Document<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap 
 //
 //
 // GRAPHQL SELECTION SET
-// OBJECT
+// ROOT
 // --------------------------------------------------------------------------------------------------
 //                                               Query
 // --------------------------------------------------------------------------------------------------
@@ -54,27 +54,27 @@ export interface $Document<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap 
 
 export interface Query<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
   /**
-   * Select the `continent` field on the `Query` object. Its type is Object.
+   * Select the `continent` field on the `Query` object. Its type is OutputObject.
    */
   continent?: Query.continent<$Scalars> | $Select.SelectAlias.SelectAlias<Query.continent<$Scalars>>
   /**
-   * Select the `continents` field on the `Query` object. Its type is Object.
+   * Select the `continents` field on the `Query` object. Its type is OutputObject.
    */
   continents?: Query.continents$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.continents<$Scalars>>
   /**
-   * Select the `countries` field on the `Query` object. Its type is Object.
+   * Select the `countries` field on the `Query` object. Its type is OutputObject.
    */
   countries?: Query.countries$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.countries<$Scalars>>
   /**
-   * Select the `country` field on the `Query` object. Its type is Object.
+   * Select the `country` field on the `Query` object. Its type is OutputObject.
    */
   country?: Query.country<$Scalars> | $Select.SelectAlias.SelectAlias<Query.country<$Scalars>>
   /**
-   * Select the `language` field on the `Query` object. Its type is Object.
+   * Select the `language` field on the `Query` object. Its type is OutputObject.
    */
   language?: Query.language<$Scalars> | $Select.SelectAlias.SelectAlias<Query.language<$Scalars>>
   /**
-   * Select the `languages` field on the `Query` object. Its type is Object.
+   * Select the `languages` field on the `Query` object. Its type is OutputObject.
    */
   languages?: Query.languages$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.languages<$Scalars>>
 
@@ -281,7 +281,7 @@ export namespace Query {
 //
 //
 // ==================================================================================================
-//                                    GraphQLInputObjectType Types
+//                                            InputObject
 // ==================================================================================================
 //
 //
@@ -320,7 +320,7 @@ export interface StringQueryOperatorInput<$Scalars extends $$Utilities.Schema.Sc
 //
 //
 // ==================================================================================================
-//                                      GraphQLObjectType Types
+//                                            OutputObject
 // ==================================================================================================
 //
 //
@@ -334,7 +334,7 @@ export interface StringQueryOperatorInput<$Scalars extends $$Utilities.Schema.Sc
 //
 //
 // GRAPHQL SELECTION SET
-// OBJECT
+// OUTPUTOBJECT
 // --------------------------------------------------------------------------------------------------
 //                                             Continent
 // --------------------------------------------------------------------------------------------------
@@ -349,7 +349,7 @@ export interface Continent<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap 
    */
   code?: Continent.code$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Continent.code<$Scalars>>
   /**
-   * Select the `countries` field on the `Continent` object. Its type is Object.
+   * Select the `countries` field on the `Continent` object. Its type is OutputObject.
    */
   countries?: Continent.countries$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Continent.countries<$Scalars>>
   /**
@@ -453,7 +453,7 @@ export namespace Continent {
 //
 //
 // GRAPHQL SELECTION SET
-// OBJECT
+// OUTPUTOBJECT
 // --------------------------------------------------------------------------------------------------
 //                                              Country
 // --------------------------------------------------------------------------------------------------
@@ -476,7 +476,7 @@ export interface Country<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = 
    */
   code?: Country.code$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Country.code<$Scalars>>
   /**
-   * Select the `continent` field on the `Country` object. Its type is Object.
+   * Select the `continent` field on the `Country` object. Its type is OutputObject.
    */
   continent?: Country.continent$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Country.continent<$Scalars>>
   /**
@@ -496,7 +496,7 @@ export interface Country<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = 
    */
   emojiU?: Country.emojiU$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Country.emojiU<$Scalars>>
   /**
-   * Select the `languages` field on the `Country` object. Its type is Object.
+   * Select the `languages` field on the `Country` object. Its type is OutputObject.
    */
   languages?: Country.languages$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Country.languages<$Scalars>>
   /**
@@ -516,11 +516,11 @@ export interface Country<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = 
    */
   phones?: Country.phones$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Country.phones<$Scalars>>
   /**
-   * Select the `states` field on the `Country` object. Its type is Object.
+   * Select the `states` field on the `Country` object. Its type is OutputObject.
    */
   states?: Country.states$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Country.states<$Scalars>>
   /**
-   * Select the `subdivisions` field on the `Country` object. Its type is Object.
+   * Select the `subdivisions` field on the `Country` object. Its type is OutputObject.
    */
   subdivisions?:
     | Country.subdivisions$Expanded<$Scalars>
@@ -888,7 +888,7 @@ export namespace Country {
 //
 //
 // GRAPHQL SELECTION SET
-// OBJECT
+// OUTPUTOBJECT
 // --------------------------------------------------------------------------------------------------
 //                                              Language
 // --------------------------------------------------------------------------------------------------
@@ -1036,7 +1036,7 @@ export namespace Language {
 //
 //
 // GRAPHQL SELECTION SET
-// OBJECT
+// OUTPUTOBJECT
 // --------------------------------------------------------------------------------------------------
 //                                               State
 // --------------------------------------------------------------------------------------------------
@@ -1051,7 +1051,7 @@ export interface State<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}
    */
   code?: State.code$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<State.code<$Scalars>>
   /**
-   * Select the `country` field on the `State` object. Its type is Object.
+   * Select the `country` field on the `State` object. Its type is OutputObject.
    */
   country?: State.country$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<State.country<$Scalars>>
   /**
@@ -1155,7 +1155,7 @@ export namespace State {
 //
 //
 // GRAPHQL SELECTION SET
-// OBJECT
+// OUTPUTOBJECT
 // --------------------------------------------------------------------------------------------------
 //                                            Subdivision
 // --------------------------------------------------------------------------------------------------
