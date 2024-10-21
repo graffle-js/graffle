@@ -460,13 +460,13 @@ exports[`( variables: false; scalars: (none) ) - Query - args - custom scalar - 
 {
   "dateArg": {
     "$": {
-      "date": "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)"
+      "date": "0"
     }
   }
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
 {
-  dateArg(date: "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)")
+  dateArg(date: "0")
 }
 ----------------
 {
@@ -505,17 +505,15 @@ exports[`( variables: false; scalars: (none) ) - Query - args - custom scalar - 
   "dateArgList": {
     "$": {
       "date": [
-        "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)",
-        "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)"
+        "0",
+        "1"
       ]
     }
   }
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
 {
-  dateArgList(
-    date: ["Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)", "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)"]
-  )
+  dateArgList(date: ["0", "1"])
 }
 ----------------
 {
@@ -531,15 +529,13 @@ exports[`( variables: false; scalars: (none) ) - Query - args - custom scalar - 
 {
   "dateArgNonNull": {
     "$": {
-      "date": "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)"
+      "date": "0"
     }
   }
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
 {
-  dateArgNonNull(
-    date: "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)"
-  )
+  dateArgNonNull(date: "0")
 }
 ----------------
 {
@@ -556,17 +552,15 @@ exports[`( variables: false; scalars: (none) ) - Query - args - custom scalar - 
   "dateArgNonNullList": {
     "$": {
       "date": [
-        "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)",
-        "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)"
+        "0",
+        "1"
       ]
     }
   }
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
 {
-  dateArgNonNullList(
-    date: ["Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)", "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)"]
-  )
+  dateArgNonNullList(date: ["0", "1"])
 }
 ----------------
 {
@@ -584,16 +578,14 @@ exports[`( variables: false; scalars: (none) ) - Query - args - custom scalar - 
     "$": {
       "date": [
         null,
-        "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)"
+        "0"
       ]
     }
   }
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
 {
-  dateArgNonNullList(
-    date: [null, "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)"]
-  )
+  dateArgNonNullList(date: [null, "0"])
 }
 ----------------
 {
@@ -610,17 +602,15 @@ exports[`( variables: false; scalars: (none) ) - Query - args - custom scalar - 
   "dateArgNonNullListNonNull": {
     "$": {
       "date": [
-        "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)",
-        "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)"
+        "0",
+        "1"
       ]
     }
   }
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
 {
-  dateArgNonNullListNonNull(
-    date: ["Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)", "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)"]
-  )
+  dateArgNonNullListNonNull(date: ["0", "1"])
 }
 ----------------
 {
@@ -638,17 +628,15 @@ exports[`( variables: false; scalars: (none) ) - Query - args - custom scalar - 
     "$": {
       "input": {
         "idRequired": "",
-        "dateRequired": "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)",
-        "date": "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)"
+        "dateRequired": "0",
+        "date": "1"
       }
     }
   }
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
 {
-  dateArgInputObject(
-    input: {idRequired: "", dateRequired: "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)", date: "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)"}
-  )
+  dateArgInputObject(input: {idRequired: "", dateRequired: "0", date: "1"})
 }
 ----------------
 {
@@ -667,8 +655,8 @@ exports[`( variables: false; scalars: (none) ) - Query - args - custom scalar - 
       "input": {
         "InputObject": {
           "idRequired": "",
-          "dateRequired": "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)",
-          "date": "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)"
+          "dateRequired": "0",
+          "date": "1"
         }
       }
     }
@@ -677,7 +665,7 @@ exports[`( variables: false; scalars: (none) ) - Query - args - custom scalar - 
 --------GRAPHQL DOCUMENT & VARIABLES--------
 {
   InputObjectNested(
-    input: {InputObject: {idRequired: "", dateRequired: "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)", date: "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)"}}
+    input: {InputObject: {idRequired: "", dateRequired: "0", date: "1"}}
   )
 }
 ----------------
@@ -1899,7 +1887,7 @@ exports[`( variables: true; scalars: (none) ) - Query - args - custom scalar - a
 {
   "dateArg": {
     "$": {
-      "date": "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)"
+      "date": "0"
     }
   }
 }
@@ -1910,7 +1898,7 @@ query ($date: Date) {
 ----------------
 {
   "$default": {
-    "date": "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)"
+    "date": "0"
   }
 }
 "
@@ -1948,8 +1936,8 @@ exports[`( variables: true; scalars: (none) ) - Query - args - custom scalar - a
   "dateArgList": {
     "$": {
       "date": [
-        "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)",
-        "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)"
+        "0",
+        "1"
       ]
     }
   }
@@ -1962,8 +1950,8 @@ query ($date: [Date!]) {
 {
   "$default": {
     "date": [
-      "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)",
-      "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)"
+      "0",
+      "1"
     ]
   }
 }
@@ -1977,7 +1965,7 @@ exports[`( variables: true; scalars: (none) ) - Query - args - custom scalar - a
 {
   "dateArgNonNull": {
     "$": {
-      "date": "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)"
+      "date": "0"
     }
   }
 }
@@ -1988,7 +1976,7 @@ query ($date: Date!) {
 ----------------
 {
   "$default": {
-    "date": "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)"
+    "date": "0"
   }
 }
 "
@@ -2002,8 +1990,8 @@ exports[`( variables: true; scalars: (none) ) - Query - args - custom scalar - a
   "dateArgNonNullList": {
     "$": {
       "date": [
-        "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)",
-        "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)"
+        "0",
+        "1"
       ]
     }
   }
@@ -2016,8 +2004,8 @@ query ($date: [Date]!) {
 {
   "$default": {
     "date": [
-      "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)",
-      "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)"
+      "0",
+      "1"
     ]
   }
 }
@@ -2033,7 +2021,7 @@ exports[`( variables: true; scalars: (none) ) - Query - args - custom scalar - a
     "$": {
       "date": [
         null,
-        "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)"
+        "0"
       ]
     }
   }
@@ -2047,7 +2035,7 @@ query ($date: [Date]!) {
   "$default": {
     "date": [
       null,
-      "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)"
+      "0"
     ]
   }
 }
@@ -2062,8 +2050,8 @@ exports[`( variables: true; scalars: (none) ) - Query - args - custom scalar - a
   "dateArgNonNullListNonNull": {
     "$": {
       "date": [
-        "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)",
-        "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)"
+        "0",
+        "1"
       ]
     }
   }
@@ -2076,8 +2064,8 @@ query ($date: [Date!]!) {
 {
   "$default": {
     "date": [
-      "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)",
-      "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)"
+      "0",
+      "1"
     ]
   }
 }
@@ -2093,8 +2081,8 @@ exports[`( variables: true; scalars: (none) ) - Query - args - custom scalar - i
     "$": {
       "input": {
         "idRequired": "",
-        "dateRequired": "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)",
-        "date": "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)"
+        "dateRequired": "0",
+        "date": "1"
       }
     }
   }
@@ -2108,8 +2096,8 @@ query ($input: InputObject) {
   "$default": {
     "input": {
       "idRequired": "",
-      "dateRequired": "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)",
-      "date": "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)"
+      "dateRequired": "0",
+      "date": "1"
     }
   }
 }
@@ -2126,8 +2114,8 @@ exports[`( variables: true; scalars: (none) ) - Query - args - custom scalar - n
       "input": {
         "InputObject": {
           "idRequired": "",
-          "dateRequired": "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)",
-          "date": "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)"
+          "dateRequired": "0",
+          "date": "1"
         }
       }
     }
@@ -2143,8 +2131,8 @@ query ($input: InputObjectNested) {
     "input": {
       "InputObject": {
         "idRequired": "",
-        "dateRequired": "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)",
-        "date": "Wed Dec 31 1969 19:00:00 GMT-0500 (Eastern Standard Time)"
+        "dateRequired": "0",
+        "date": "1"
       }
     }
   }

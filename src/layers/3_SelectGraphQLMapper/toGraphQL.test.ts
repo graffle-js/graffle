@@ -84,15 +84,15 @@ const cases = testEachQueryWithDescription([
   [`args - object with args`                     , { objectWithArgs: { $: { id: `` }, id: true } }],
   [`args - object with args (empty object)`      , { objectWithArgs: { $: {}, id: true } }],
   // arguments - custom scalars
-  [`args - custom scalar - arg field`                                , { dateArg: { $: { date: db.date0.toString() } } }],
-  [`args - custom scalar - arg field in non-null`                    , { dateArgNonNull: { $: { date: db.date0.toString() } } }], 
-  [`args - custom scalar - arg field in list`                        , { dateArgList: { $: { date: [db.date0.toString(), db.date1.toString()] } } }], 
+  [`args - custom scalar - arg field`                                , { dateArg: { $: { date: db.date0.getTime().toString() } } }],
+  [`args - custom scalar - arg field in non-null`                    , { dateArgNonNull: { $: { date: db.date0.getTime().toString() } } }], 
+  [`args - custom scalar - arg field in list`                        , { dateArgList: { $: { date: [db.date0.getTime().toString(), db.date1.getTime().toString()] } } }], 
   [`args - custom scalar - arg field in list (null)`                 , { dateArgList: { $: { date: null } } }],
-  [`args - custom scalar - arg field in non-null list (with list)`   , { dateArgNonNullList: { $: { date: [db.date0.toString(), db.date1.toString()] } } }],
-  [`args - custom scalar - arg field in non-null list (with null)`   , { dateArgNonNullList: { $: { date: [null, db.date0.toString()] } } }],
-  [`args - custom scalar - arg field in non-null list non-null`      , { dateArgNonNullListNonNull: { $: { date: [db.date0.toString(), db.date1.toString()] } } }],
-  [`args - custom scalar - input object field`                       , { dateArgInputObject: { $: { input: { idRequired: ``, dateRequired: db.date0.toString(), date: db.date1.toString() } } } }],
-  [`args - custom scalar - nested input object field`                , { InputObjectNested: { $: { input: { InputObject: { idRequired: ``, dateRequired: db.date0.toString(), date: db.date1.toString() } } } } }],
+  [`args - custom scalar - arg field in non-null list (with list)`   , { dateArgNonNullList: { $: { date: [db.date0.getTime().toString(), db.date1.getTime().toString()] } } }],
+  [`args - custom scalar - arg field in non-null list (with null)`   , { dateArgNonNullList: { $: { date: [null, db.date0.getTime().toString()] } } }],
+  [`args - custom scalar - arg field in non-null list non-null`      , { dateArgNonNullListNonNull: { $: { date: [db.date0.getTime().toString(), db.date1.getTime().toString()] } } }],
+  [`args - custom scalar - input object field`                       , { dateArgInputObject: { $: { input: { idRequired: ``, dateRequired: db.date0.getTime().toString(), date: db.date1.getTime().toString() } } } }],
+  [`args - custom scalar - nested input object field`                , { InputObjectNested: { $: { input: { InputObject: { idRequired: ``, dateRequired: db.date0.getTime().toString(), date: db.date1.getTime().toString() } } } } }],
   // s({ objectWithArgs: { $: { id: `` } } }), // todo should be static error
   // s({ objectWithArgs: { $: {} } }), // todo should be static error
   // $include
