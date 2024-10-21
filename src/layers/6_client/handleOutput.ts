@@ -128,7 +128,7 @@ type HandleOutput_Extensions<$Context extends ClientContext, $Envelope extends G
     $Context,
     // eslint-disable-next-line
     // @ts-ignore fixme
-    RunTypeHookOnRequestResult<$Config, {
+    RunTypeHookOnRequestResult<$Context, {
       result: $Envelope
       registeredSchema: GlobalRegistry.GetOrDefault<$Context['config']['name']>
     }>['result']

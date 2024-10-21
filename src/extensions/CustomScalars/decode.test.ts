@@ -9,7 +9,7 @@ import { Grafaid } from '../../lib/grafaid/__.js'
 
 type TestCase = [
   describe: string,
-  query: Graffle.SelectionSets.Query<{}>,
+  query: Graffle.SelectionSets.Query<{ Date: typeof Date }>,
   responseData: object,
   expectedData: object,
 ]

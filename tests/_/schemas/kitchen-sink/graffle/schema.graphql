@@ -89,6 +89,7 @@ type Mutation {
 }
 
 type Object1 {
+  ABCEnum: ABCEnum
   boolean: Boolean
   float: Float
   id: ID

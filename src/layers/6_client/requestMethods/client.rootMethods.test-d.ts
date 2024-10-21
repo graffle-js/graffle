@@ -1,9 +1,11 @@
 /* eslint-disable */
 import { expectTypeOf, test } from 'vitest'
+import { Date } from '../../../../tests/_/fixtures/scalars.js'
+import type { db } from '../../../../tests/_/schemas/db.js'
 import { Graffle } from '../../../../tests/_/schemas/kitchen-sink/graffle/__.js'
 import * as Schema from '../../../../tests/_/schemas/kitchen-sink/schema.js'
 
-const graffle = Graffle.create({ schema: Schema.schema })
+const graffle = Graffle.create({ schema: Schema.schema }).scalar(Date)
 
 const x = await graffle.query.id({ $include: false })
 // dprint-ignore
@@ -29,12 +31,15 @@ test(`query`, async () => {
   // todo
   // expectTypeOf(await graffle.query.idNonNull({ $skip: false })).toEqualTypeOf<null>()
 
+  const x = await graffle.query.dateObject1({ $scalars: true })
+
   // object
   expectTypeOf(graffle.query.dateObject1({ date1: true })).resolves.toEqualTypeOf<{ date1: Date | null } | null>()
-  expectTypeOf(graffle.query.dateObject1({ $scalars: true })).resolves.toEqualTypeOf<{ __typename: "DateObject1"; date1: Date | null } | null>()
   expectTypeOf(graffle.query.unionFooBar({ ___on_Foo: { id: true }})).resolves.toEqualTypeOf<{} | { id: string | null } | null>()
   expectTypeOf(graffle.query.interface({ id: true })).resolves.toEqualTypeOf<null | { id: string | null }>()
   expectTypeOf(graffle.query.interface({ ___on_Object1ImplementingInterface: { int: true }})).resolves.toEqualTypeOf<{} | { int: number | null } | null>()
+  // object with scalars wildcard
+  expectTypeOf(graffle.query.dateObject1({ $scalars: true })).resolves.toEqualTypeOf<{ __typename: `DateObject1`; date1: Date | null } | null>()
 
   // @ts-expect-error missing input selection set
   graffle.query.dateObject1()  

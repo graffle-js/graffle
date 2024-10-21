@@ -1,4 +1,5 @@
 import type { Date } from '../../../tests/_/fixtures/scalars.js'
+import type { db } from '../../../tests/_/schemas/db.js'
 import type { Schema } from '../../../tests/_/schemas/kitchen-sink/graffle/modules/Schema.js'
 import type * as SelectionSets from '../../../tests/_/schemas/kitchen-sink/graffle/modules/SelectionSets.js'
 import { assertEqual } from '../../lib/assert-equal.js'
@@ -56,7 +57,7 @@ assertEqual<$<{ objectNonNull: { id: true } }>, { objectNonNull: { id: string | 
 assertEqual<$<{ objectWithArgs: { $: { id: 'abc' }; id: true }}>, { objectWithArgs: null | { id: string | null } }>()
 
 // scalars-wildcard
-assertEqual<$<{ objectNonNull: { $scalars: true } }>, { objectNonNull: { __typename: "Object1"; string: null|string; int: null|number; float: null|number; boolean: null|boolean; id: null|string } }>()
+assertEqual<$<{ objectNonNull: { $scalars: true } }>, { objectNonNull: { __typename: "Object1"; string: null|string; int: null|number; float: null|number; boolean: null|boolean; id: null|string; ABCEnum: null|db.ABCEnum } }>()
 // scalars-wildcard with nested object
 assertEqual<$<{ objectNested: { $scalars: true } }>, { objectNested: null | { __typename: "ObjectNested"; id: null|string } }>()
 // __typename

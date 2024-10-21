@@ -369,6 +369,7 @@ export namespace Schema {
   }>
 
   export type Object1 = $.Object$2<'Object1', {
+    ABCEnum: $.Field<'ABCEnum', $.Output.Nullable<ABCEnum>, null>
     boolean: $.Field<'boolean', $.Output.Nullable<$Scalar.Boolean>, null>
     float: $.Field<'float', $.Output.Nullable<$Scalar.Float>, null>
     id: $.Field<'id', $.Output.Nullable<$Scalar.ID>, null>

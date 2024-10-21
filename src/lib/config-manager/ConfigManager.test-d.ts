@@ -1,3 +1,4 @@
+import type { ClientContext } from '../../entrypoints/utilities-for-generated.js'
 import { assertEqual } from '../assert-equal.js'
 import type { ConfigManager } from './__.js'
 
@@ -41,3 +42,12 @@ assertEqual<ConfigManager.SetAtPath<a1, ['a', 'b', 'c'], 9>  , { a: { b: { c: 9 
 assertEqual<ConfigManager.SetAtPath<a1, ['a', 'b2', 'c'], 9> , { a: { b: number; b2: { c: 9 } }; b: string }>()
 assertEqual<ConfigManager.SetAtPath<a1, ['c'], 9>            , { a: { b: number }; b: string; c: 9 }>()
 }
+
+assertEqual<
+  ConfigManager.SetAtPath<
+    ClientContext,
+    ['config', 'typeHooks', 'onRequestResult'],
+    ClientContext['config']['typeHooks']['onRequestResult']
+  >,
+  ClientContext
+>()

@@ -12,21 +12,23 @@ export interface Use<$Args extends FnParametersProperty> {
   /**
    * TODO Docs.
    */
+  // @ts-expect-error todo
   <$Extension extends Extension>(extension?: $Extension): Fluent.IncrementWithStateSet<ClientContext, $Args, {
+    // context: $Args['state']['context'],
     // If the extension adds type hooks, merge them into the config.
-    context: ConfigManager.SetProperties<$Args['state']['context'], {
-      config: {
-        typeHooks: ConfigManager.SetProperties<$Args['state']['context']['config']['typeHooks'], {
-          onRequestResult: $Extension['typeHooks']['onRequestResult'] extends undefined
-            ? $Args['state']['context']['config']['typeHooks']['onRequestResult']
-            // dprint-ignore
-            : [
-                ...$Args['state']['context']['config']['typeHooks']['onRequestResult'],
-                $Extension['typeHooks']['onRequestResult'],
-              ]
-        }>
-      }
-    }>
+    context: ConfigManager.SetAtPath<
+      $Args['state']['context'],
+      ['config', 'typeHooks', 'onRequestResult'],
+      (
+        $Extension['typeHooks']['onRequestResult'] extends undefined
+          ? $Args['state']['context']['config']['typeHooks']['onRequestResult']
+          // dprint-ignore
+          : [
+            ...$Args['state']['context']['config']['typeHooks']['onRequestResult'],
+              $Extension['typeHooks']['onRequestResult'],
+            ]
+      )
+    >
     // If the extension adds properties, merge them into the state.
     properties:
       & $Args['state']['properties']

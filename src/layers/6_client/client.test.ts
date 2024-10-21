@@ -7,8 +7,8 @@ import { Throws } from '../../extensions/Throws/Throws.js'
 
 const endpoint = new URL(`https://foo.io/api/graphql`)
 
-describe(`without schemaIndex only raw is available`, () => {
-  const graffle = Graffle.create({ schema: endpoint }).use(Throws())
+describe(`without a registered client, only raw is available`, () => {
+  const graffle = Graffle.create({ name: `unknown`, schema: endpoint }).use(Throws())
 
   test(`unavailable methods`, () => {
     // @ts-expect-error

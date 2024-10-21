@@ -21,21 +21,13 @@ export const createPrefilled: CreatePrefilled = (name, schemaMap, schemaUrl) => 
 // dprint-ignore
 export type CreatePrefilled =
 <const $Name extends GlobalRegistry.ClientNames>(name: $Name, sddm: SchemaDrivenDataMap, schemaUrl?: URL) =>
-	<
+	<$Input extends InputBase<GlobalRegistry.Get<$Name>>>(...args:
+		// TODO test that input optional when no required properties
 		// eslint-disable-next-line
 		// @ts-ignore passes after generation
-		$Input extends InputPrefilled<GlobalRegistry.Clients[$Name]>,
-	>(...args:
-		// eslint-disable-next-line
-		// @ts-ignore passes after generation
-		HasRequiredKeys<InputPrefilled<GlobalRegistry.Clients[$Name]>> extends true
-			// eslint-disable-next-line
-			// @ts-ignore passes after generation
-			? [input: Exact<$Input, InputPrefilled<GlobalRegistry.Clients[$Name]>>]
-			// TODO test that input optional when no required properties
-			// eslint-disable-next-line
-			// @ts-ignore passes after generation
-			: ([input: Exact<$Input, InputPrefilled<GlobalRegistry.Clients[$Name]>>] | [])
+		HasRequiredKeys<InputBase<GlobalRegistry.Get<$Name>>> extends true
+			? ([input: Exact<$Input, InputBase<GlobalRegistry.Get<$Name>>>])
+			: ([input: Exact<$Input, InputBase<GlobalRegistry.Get<$Name>>>] | [])
 	) =>
 		// eslint-disable-next-line
 		// @ts-ignore passes after generation
@@ -48,9 +40,3 @@ export type CreatePrefilled =
 			// @ts-expect-error fixme - TS cannot figure out that name input meets constraint
 			config: NormalizeInput<$Input & { name: $Name, schemaMap: SchemaDrivenDataMap }>,
 		}>
-
-// dprint-ignore
-export type InputPrefilled<$Schema extends GlobalRegistry.ClientUnion> =
-	$Schema extends any
-		? InputBase<$Schema>
-		: never

@@ -47,6 +47,7 @@ const Object1 = builder.simpleObject(`Object1`, {
     float: t.float(),
     boolean: t.boolean(),
     id: t.id(),
+    ABCEnum: t.field({ type: ABCEnum }),
   }),
 })
 

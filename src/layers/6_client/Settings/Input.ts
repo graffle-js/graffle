@@ -19,8 +19,8 @@ export type InputOutputEnvelopeLonghand = {
 /**
  * @remarks This input extends base with properties that can be filled with exports from the generated client.
  */
-export type InputStatic<$RegisteredClient extends GlobalRegistry.ClientUnion = GlobalRegistry.ClientUnion> =
-  & InputBase<$RegisteredClient>
+export type InputStatic<$Client extends GlobalRegistry.Client = GlobalRegistry.Client> =
+  & InputBase<$Client>
   & {
     /**
      * The schema to use.
@@ -29,7 +29,7 @@ export type InputStatic<$RegisteredClient extends GlobalRegistry.ClientUnion = G
      *
      * @defaultValue 'default'
      */
-    name?: $RegisteredClient['name']
+    name?: $Client['name']
     /**
      * todo
      */
@@ -39,10 +39,10 @@ export type InputStatic<$RegisteredClient extends GlobalRegistry.ClientUnion = G
 // TODO use code generation to display
 // TODO test that schema is optional when introspection was used to generate client.
 // dprint-ignore
-export type InputBase<$RegisteredClient extends GlobalRegistry.ClientUnion> =
+export type InputBase<$Client extends GlobalRegistry.Client> =
   | (
       & (
-          GlobalRegistry.HasDefaultUrlForSchema<$RegisteredClient> extends true
+          GlobalRegistry.HasDefaultUrlForSchema<$Client> extends true
           ? {
               /**
                * @defaultValue The introspection URL used to generate this Graffle client.
@@ -55,11 +55,11 @@ export type InputBase<$RegisteredClient extends GlobalRegistry.ClientUnion> =
         )
       // eslint-disable-next-line
       // @ts-ignore passes after generation
-      & WithInput<{ name: $RegisteredClient['name']; transport: { type: 'http'} }>
+      & WithInput<{ name: $Client['name']; transport: { type: 'http'} }>
     )
   | (
       & (
-          GlobalRegistry.HasDefaultUrlForSchema<$RegisteredClient> extends true
+          GlobalRegistry.HasDefaultUrlForSchema<$Client> extends true
           ? {
               /**
                * TODO this TSDoc is never rendered in VSCode...
@@ -71,5 +71,5 @@ export type InputBase<$RegisteredClient extends GlobalRegistry.ClientUnion> =
         )
       // eslint-disable-next-line
       // @ts-ignore passes after generation
-      & WithInput<{ name: $RegisteredClient['name']; transport: { type: 'memory'} }>
+      & WithInput<{ name: $Client['name']; transport: { type: 'memory'} }>
     )

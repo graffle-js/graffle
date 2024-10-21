@@ -1,23 +1,23 @@
 import { type Simplify } from 'type-fest'
 import type { InferResult } from '../../../../../../src/entrypoints/schema.js'
-import type * as Utils from '../../../../../../src/entrypoints/utilities-for-generated.js'
+import type * as $$Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
 import type { Schema } from './Schema.js'
 import type * as SelectionSet from './SelectionSets.js'
 
-export interface MutationMethods<$Context extends Utils.ClientContext> {
+export interface MutationMethods<$Context extends $$Utilities.ClientContext> {
   $batch: <$SelectionSet>(
-    selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Mutation<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Mutation<$Context['scalars']>>,
   ) => Promise<
     Simplify<
-      Utils.HandleOutput<
+      $$Utilities.HandleOutput<
         $Context,
-        InferResult.Mutation<$SelectionSet, Schema>
+        InferResult.Mutation<$SelectionSet, Schema<$Context['scalars']>>
       >
     >
   >
   __typename: () => Promise<
     Simplify<
-      Utils.HandleOutputGraffleRootField<
+      $$Utilities.HandleOutputGraffleRootField<
         $Context,
         { __typename: 'Mutation' },
         '__typename'
@@ -25,30 +25,32 @@ export interface MutationMethods<$Context extends Utils.ClientContext> {
     >
   >
   addPokemon: <$SelectionSet>(
-    selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Mutation.addPokemon<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Mutation.addPokemon<$Context['scalars']>>,
   ) => Promise<
     Simplify<
-      Utils.HandleOutputGraffleRootField<
+      $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Mutation<{ addPokemon: $SelectionSet }, Schema>,
+        InferResult.Mutation<{ addPokemon: $SelectionSet }, Schema<$Context['scalars']>>,
         'addPokemon'
       >
     >
   >
 }
 
-export interface QueryMethods<$Context extends Utils.ClientContext> {
-  $batch: <$SelectionSet>(selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Query<$Context['scalars']>>) => Promise<
+export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
+  $batch: <$SelectionSet>(
+    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query<$Context['scalars']>>,
+  ) => Promise<
     Simplify<
-      Utils.HandleOutput<
+      $$Utilities.HandleOutput<
         $Context,
-        InferResult.Query<$SelectionSet, Schema>
+        InferResult.Query<$SelectionSet, Schema<$Context['scalars']>>
       >
     >
   >
   __typename: () => Promise<
     Simplify<
-      Utils.HandleOutputGraffleRootField<
+      $$Utilities.HandleOutputGraffleRootField<
         $Context,
         { __typename: 'Query' },
         '__typename'
@@ -56,90 +58,90 @@ export interface QueryMethods<$Context extends Utils.ClientContext> {
     >
   >
   battles: <$SelectionSet>(
-    selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Query.battles<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.battles<$Context['scalars']>>,
   ) => Promise<
     Simplify<
-      Utils.HandleOutputGraffleRootField<
+      $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ battles: $SelectionSet }, Schema>,
+        InferResult.Query<{ battles: $SelectionSet }, Schema<$Context['scalars']>>,
         'battles'
       >
     >
   >
   beings: <$SelectionSet>(
-    selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Query.beings<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.beings<$Context['scalars']>>,
   ) => Promise<
     Simplify<
-      Utils.HandleOutputGraffleRootField<
+      $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ beings: $SelectionSet }, Schema>,
+        InferResult.Query<{ beings: $SelectionSet }, Schema<$Context['scalars']>>,
         'beings'
       >
     >
   >
   pokemon: <$SelectionSet>(
-    selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Query.pokemon<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.pokemon<$Context['scalars']>>,
   ) => Promise<
     Simplify<
-      Utils.HandleOutputGraffleRootField<
+      $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ pokemon: $SelectionSet }, Schema>,
+        InferResult.Query<{ pokemon: $SelectionSet }, Schema<$Context['scalars']>>,
         'pokemon'
       >
     >
   >
   pokemonByName: <$SelectionSet>(
-    selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Query.pokemonByName<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.pokemonByName<$Context['scalars']>>,
   ) => Promise<
     Simplify<
-      Utils.HandleOutputGraffleRootField<
+      $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ pokemonByName: $SelectionSet }, Schema>,
+        InferResult.Query<{ pokemonByName: $SelectionSet }, Schema<$Context['scalars']>>,
         'pokemonByName'
       >
     >
   >
   pokemons: <$SelectionSet>(
-    selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Query.pokemons<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.pokemons<$Context['scalars']>>,
   ) => Promise<
     Simplify<
-      Utils.HandleOutputGraffleRootField<
+      $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ pokemons: $SelectionSet }, Schema>,
+        InferResult.Query<{ pokemons: $SelectionSet }, Schema<$Context['scalars']>>,
         'pokemons'
       >
     >
   >
   trainerByName: <$SelectionSet>(
-    selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Query.trainerByName<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.trainerByName<$Context['scalars']>>,
   ) => Promise<
     Simplify<
-      Utils.HandleOutputGraffleRootField<
+      $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ trainerByName: $SelectionSet }, Schema>,
+        InferResult.Query<{ trainerByName: $SelectionSet }, Schema<$Context['scalars']>>,
         'trainerByName'
       >
     >
   >
   trainers: <$SelectionSet>(
-    selectionSet: Utils.Exact<$SelectionSet, SelectionSet.Query.trainers<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.trainers<$Context['scalars']>>,
   ) => Promise<
     Simplify<
-      Utils.HandleOutputGraffleRootField<
+      $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ trainers: $SelectionSet }, Schema>,
+        InferResult.Query<{ trainers: $SelectionSet }, Schema<$Context['scalars']>>,
         'trainers'
       >
     >
   >
 }
 
-export interface BuilderMethodsRoot<$Context extends Utils.ClientContext> {
+export interface BuilderMethodsRoot<$Context extends $$Utilities.ClientContext> {
   mutation: MutationMethods<$Context>
   query: QueryMethods<$Context>
 }
 
-export interface BuilderMethodsRootFn extends Utils.TypeFunction.Fn {
+export interface BuilderMethodsRootFn extends $$Utilities.TypeFunction.Fn {
   // @ts-expect-error parameter is Untyped.
   return: BuilderMethodsRoot<this['params']>
 }

@@ -196,6 +196,7 @@ const Foo: $Utilities.SchemaDrivenDataMap.OutputObject = {
 
 const Object1: $Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
+    ABCEnum: {},
     boolean: {},
     float: {},
     id: {},

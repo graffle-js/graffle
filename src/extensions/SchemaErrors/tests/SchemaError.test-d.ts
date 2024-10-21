@@ -13,7 +13,6 @@ test(`config type is augmented with type hook`, () => {
 
 test(`config type is augmented with type hook after "with"`, () => {
   const g2 = g.with({ output: { defaults: { errorChannel: `throw` } } })
-  g2._.config.typeHooks.onRequestResult
   expectTypeOf<typeof g2._.config.typeHooks.onRequestResult>().toMatchTypeOf<[Extension.Hooks.OnRequestResult]>()
 })
 

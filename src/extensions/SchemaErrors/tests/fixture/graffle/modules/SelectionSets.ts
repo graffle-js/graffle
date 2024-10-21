@@ -2534,6 +2534,10 @@ export interface Object1<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap
   extends $Select.Bases.ObjectLike
 {
   /**
+   * Select the `ABCEnum` field on the `Object1` object. Its type is Enum.
+   */
+  ABCEnum?: Object1.ABCEnum$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Object1.ABCEnum<$Scalars>>
+  /**
    * Select the `boolean` field on the `Object1` object. Its type is `Boolean` (a `Scalar`).
    */
   boolean?: Object1.$boolean$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Object1.$boolean<$Scalars>>
@@ -2583,6 +2587,28 @@ export interface Object1$FragmentInline<$Scalars extends $$Utilities.SchemaKit.S
 // ----------------------------------------| Fields |
 
 export namespace Object1 {
+  export type ABCEnum<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
+    | $Select.Indicator.NoArgsIndicator
+    | ABCEnum$SelectionSet<$Scalars>
+
+  export interface ABCEnum$SelectionSet<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `ABCEnum` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type ABCEnum$Expanded<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | ABCEnum$SelectionSet<$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
   export type $boolean<$Scalars extends $$Utilities.SchemaKit.Scalar.ScalarMap = {}> =
     | $Select.Indicator.NoArgsIndicator
     | $boolean$SelectionSet<$Scalars>

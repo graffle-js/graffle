@@ -14,8 +14,14 @@ export type ScalarsWildcard<
 type PickScalarFields<$Object extends SchemaKit.Output.Object$2> = {
   [
     $Key in keyof $Object['fields']
-    as SchemaKit.Output.UnwrapToNamed<$Object['fields'][$Key]['type']> extends SchemaKit.Hybrid.Scalar.Scalar | SchemaKit.Output.__typename
+    as SchemaKit.Output.UnwrapToNamed<$Object['fields'][$Key]['type']> extends ScalarLikeNode 
       ? $Key
       : never
   ]: $Object['fields'][$Key]
 }
+
+type ScalarLikeNode =
+  | SchemaKit.Hybrid.Scalar.ScalarCodecless
+  | SchemaKit.Hybrid.Scalar.Scalar
+  | SchemaKit.Output.__typename
+  | SchemaKit.Hybrid.Enum

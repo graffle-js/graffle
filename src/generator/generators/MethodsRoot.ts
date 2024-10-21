@@ -1,21 +1,19 @@
 // todo remove use of Utils.Aug when schema errors not in use
 import { Grafaid } from '../../lib/grafaid/__.js'
+import { identifiers } from '../helpers/identifiers.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 import { createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
 import { renderDocumentation, renderName } from '../helpers/render.js'
 import { ModuleGeneratorSchema } from './Schema.js'
 import { ModuleGeneratorSelectionSets } from './SelectionSets.js'
 
-const identifiers = {
-  Schema: `Schema`,
-  Utils: `Utils`,
-}
-
 export const ModuleGeneratorMethodsRoot = createModuleGenerator(
   `MethodsRoot`,
   ({ config, code }) => {
     code(`import { type Simplify } from 'type-fest'`)
-    code(`import type * as ${identifiers.Utils}  from '${config.paths.imports.grafflePackage.utilitiesForGenerated}';`)
+    code(
+      `import type * as ${identifiers.$$Utilities}  from '${config.paths.imports.grafflePackage.utilitiesForGenerated}';`,
+    )
     code(`import type { InferResult } from '${config.paths.imports.grafflePackage.schema}';`)
     code(`import type { ${identifiers.Schema} } from './${ModuleGeneratorSchema.name}.js'`)
     code(`import type * as SelectionSet from './${ModuleGeneratorSelectionSets.name}.js'`)
@@ -29,7 +27,7 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
     })
 
     code(`
-      export interface BuilderMethodsRoot<$Context extends ${identifiers.Utils}.ClientContext> {
+      export interface BuilderMethodsRoot<$Context extends ${identifiers.$$Utilities}.ClientContext> {
         ${
       config.schema.kindMap.GraphQLRootType.map(node => {
         const operationName =
@@ -42,7 +40,7 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
     code()
 
     code(`
-      export interface BuilderMethodsRootFn extends ${identifiers.Utils}.TypeFunction.Fn {
+      export interface BuilderMethodsRootFn extends ${identifiers.$$Utilities}.TypeFunction.Fn {
         // @ts-expect-error parameter is Untyped.
         return: BuilderMethodsRoot<this['params']>
       }
@@ -54,20 +52,20 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
   const fieldMethods = renderFieldMethods({ config, node })
 
   code(`
-    export interface ${node.name}Methods<$Context extends ${identifiers.Utils}.ClientContext> {
-      $batch: <$SelectionSet>(selectionSet: ${identifiers.Utils}.Exact<$SelectionSet, SelectionSet.${node.name}<$Context['scalars']>>) =>
+    export interface ${node.name}Methods<$Context extends ${identifiers.$$Utilities}.ClientContext> {
+      $batch: <$SelectionSet>(selectionSet: ${identifiers.$$Utilities}.Exact<$SelectionSet, SelectionSet.${node.name}<$Context['scalars']>>) =>
         Promise<
           Simplify<
-            ${identifiers.Utils}.HandleOutput<
+            ${identifiers.$$Utilities}.HandleOutput<
               $Context,
-              InferResult.${node.name}<$SelectionSet, ${identifiers.Schema}>
+              InferResult.${node.name}<$SelectionSet, ${identifiers.Schema}<$Context['scalars']>>
             >
           >
         >
       __typename: () =>
         Promise<
           Simplify<
-            ${identifiers.Utils}.HandleOutputGraffleRootField<
+            ${identifiers.$$Utilities}.HandleOutputGraffleRootField<
               $Context,
               { __typename: '${node.name}' },
               '__typename'
@@ -90,7 +88,7 @@ const renderFieldMethods = createCodeGenerator<{ node: Grafaid.Schema.ObjectType
 
     // dprint-ignore
     code(`
-      ${field.name}: <$SelectionSet>(selectionSet${isOptional ? `?` : ``}: ${identifiers.Utils}.Exact<$SelectionSet, SelectionSet.${renderName(node)}.${renderName(field)}<$Context['scalars']>>) =>
+      ${field.name}: <$SelectionSet>(selectionSet${isOptional ? `?` : ``}: ${identifiers.$$Utilities}.Exact<$SelectionSet, SelectionSet.${renderName(node)}.${renderName(field)}<$Context['scalars']>>) =>
         ${Helpers.returnType(node.name, field.name, `$SelectionSet`)}
     `)
   }
@@ -101,9 +99,9 @@ namespace Helpers {
     return `
       Promise<
         Simplify<
-          ${identifiers.Utils}.HandleOutputGraffleRootField<
+          ${identifiers.$$Utilities}.HandleOutputGraffleRootField<
             $Context,
-            InferResult.${rootName}<{ ${fieldName}: ${selectionSet}}, ${identifiers.Schema}>,
+            InferResult.${rootName}<{ ${fieldName}: ${selectionSet}}, ${identifiers.Schema}<$Context['scalars']>>,
             '${fieldName}'
           >
         >

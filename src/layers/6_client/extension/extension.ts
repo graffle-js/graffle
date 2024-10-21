@@ -9,7 +9,6 @@ import type { GlobalRegistry } from '../../GlobalRegistry.js'
 import type { Client } from '../client.js'
 import type { ClientContext } from '../fluent.js'
 import type { GraffleExecutionResultEnvelope } from '../handleOutput.js'
-import type { Config } from '../Settings/Config.js'
 
 export interface TypeHooks {
   /**
@@ -34,11 +33,13 @@ export interface TypeHooks {
   onRequestDocumentRootType?: Extension.Hooks.OnRequestDocumentRootType
 }
 
-export type RunTypeHookOnRequestResult<$Config extends Config, $Params extends Extension.Hooks.OnRequestResult.Params> =
-  AssertConstraint<
-    Extension.Hooks.OnRequestResult.Params,
-    TypeFunction.CallPipeline<$Config['typeHooks']['onRequestResult'], $Params>
-  >
+export type RunTypeHookOnRequestResult<
+  $Context extends ClientContext,
+  $Params extends Extension.Hooks.OnRequestResult.Params,
+> = AssertConstraint<
+  Extension.Hooks.OnRequestResult.Params,
+  TypeFunction.CallPipeline<$Context['config']['typeHooks']['onRequestResult'], $Params>
+>
 
 export interface EmptyTypeHooks {
   property: undefined
