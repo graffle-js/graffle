@@ -1,11 +1,11 @@
 import fs from 'node:fs/promises'
 
 export interface Formatter {
-  formatText(content: string, customFormatterConfig?: object): string
+  formatText(content: string, customFormatterConfig?: object): Promise<string>
 }
 
 export const passthroughFormatter: Formatter = {
-  formatText: (content) => content,
+  formatText: (content) => Promise.resolve(content),
 }
 
 export const getTypescriptFormatterOrPassthrough = async (): Promise<Formatter> => {
@@ -28,7 +28,7 @@ export const getTypeScriptFormatter = async (): Promise<Formatter | null> => {
       semiColons: `asi`,
     }
     return {
-      formatText: (content, customFormatterConfig) => {
+      formatText: async (content, customFormatterConfig) => {
         const config = {
           ...defaultDprintConfig,
           ...customFormatterConfig,
@@ -36,7 +36,11 @@ export const getTypeScriptFormatter = async (): Promise<Formatter | null> => {
         try {
           return formatter.formatText(`memory.ts`, content, config)
         } catch (error) {
-          console.log(`----------\n\n\n\n${content}\n\n\n\n----------`)
+          if (process.env[`DEBUG`]) {
+            const path = `./syntax-error.ts`
+            await fs.writeFile(path, content)
+            console.log(`Wrote contents to ${path} for debugging.`)
+          }
           throw error
         }
       },

@@ -37,12 +37,14 @@ const moduleGenerators = [
 export const generate = async (input: Input) => {
   const config = await createConfig(input)
 
-  const generatedModules = moduleGenerators
-    .map(generator => generator.generate(config))
-    .map(code => ({
-      ...code,
-      content: config.formatter.formatText(code.content),
-    }))
+  const generatedModules = await Promise.all(
+    moduleGenerators
+      .map(generator => generator.generate(config))
+      .map(async code => ({
+        ...code,
+        content: await config.formatter.formatText(code.content),
+      })),
+  )
 
   if (config.paths.project.outputs.sdl && config.schema.via !== `sdl`) {
     await fs.writeFile(config.paths.project.outputs.sdl, config.schema.sdl)

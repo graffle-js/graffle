@@ -44,8 +44,10 @@ export namespace Code {
 
   type Field = TermPrimitive | DirectiveTermObject | TermObject
 
+  export const directiveField = (input: { $TS_DOC?: null | string; $VALUE: Field }): DirectiveField => input
+
   interface DirectiveField {
-    $TS_DOC?: string
+    $TS_DOC?: string | null
     $VALUE: Field
   }
 
@@ -80,27 +82,27 @@ export namespace Code {
   }
 
   export const termObjectFields = (object: TermObject | DirectiveTermObject): string =>
-    termFieldsFromTuples(
-      entries(object).map(([key, value]): FieldTuple => {
+    entries(object)
+      .map(([key, value]): FieldTuple => {
         if (value === null) return [key, null]
 
         const [valueNormalized, tsDoc] = isDirectiveTermObject(value)
           ? [directiveTermObject(value), null]
           : isDirectiveField(value)
-          ? [termObjectField(value.$VALUE), value.$TS_DOC]
+          ? [termObjectField(value.$VALUE), value.$TS_DOC ? TSDoc(value.$TS_DOC) : null]
           : isString(value) || typeof value === `number` || typeof value === `boolean`
           ? [String(value), null]
           : [termObject(value as any), null]
         return [key, valueNormalized, tsDoc]
-      }),
-    )
+      })
+      .map(termFieldFromTuple)
+      .join(`\n`)
 
   const termObjectField = (field: Field): string => {
     if (isFieldPrimitive(field)) return String(field)
     return termObject(field)
   }
 
-  export const termFieldsFromTuples = (fields: FieldTuple[]) => fields.map(termFieldFromTuple).join(`\n`)
   export const termList = (value: string[]) => `[${value.join(`, `)}]`
   export const termFieldFromTuple = (tuple: FieldTuple) => Code.termField(tuple[0], tuple[1], { tsDoc: tuple[2] })
   export const termField = (
@@ -167,14 +169,34 @@ export namespace Code {
     extendsClause: ExtendsClauseInput,
     fields: string | TermObject,
   ) => {
-    const typeParametersClause = tsTypeParameters(typeParameters)
-    const extendsClause_ = extendsClause === null
-      ? ``
-      : ` extends ${toArray(extendsClause).filter(_ => _ !== null).join(`, `)}`
+    return tsInterface$({
+      name,
+      typeParameters,
+      extends: extendsClause,
+      fields,
+    })
+  }
 
-    const block = typeof fields === `string` ? `{${fields}}` : termObject(fields)
+  export const tsInterface$ = (
+    { name, typeParameters, extends: extends_, fields, tsDoc, export: export_ }: {
+      name: string
+      typeParameters?: TypeParametersInput
+      extends?: ExtendsClauseInput
+      fields?: string | TermObject
+      tsDoc?: string | null
+      export?: boolean
+    },
+  ) => {
+    const tsDoc_ = tsDoc ? TSDoc(tsDoc) + `\n` : ``
+    const export__ = export_ ? `export ` : ``
+    const typeParametersClause = tsTypeParameters(typeParameters ?? null)
+    const extends__ = toArray(extends_).filter(_ => Boolean(_))
+    const extends___ = extends__.length > 0
+      ? ` extends ${extends__.join(`, `)}`
+      : ``
+    const block = typeof fields === `string` ? `{${fields}}` : termObject(fields ?? {})
     const name_ = renderName(name)
-    return `interface ${name_} ${typeParametersClause} ${extendsClause_} ${block}`
+    return `${tsDoc_} ${export__} interface ${name_} ${typeParametersClause} ${extends___} ${block}`
   }
 
   export const esmExport = (thing: string) => {
@@ -189,12 +211,8 @@ export namespace Code {
   export const string = (str: string) => `"${str}"`
   export const block = (content: string) => `{\n${content}\n}`
   export const boolean = (value: boolean) => value ? `true` : `false`
-  export const TSDoc = <$Content extends string | null>(content: $Content): $Content => {
-    return (content === null ? null : `/**\n${linesPrepend(`* `, linesTrim(content)) || `*`}\n*/`) as $Content
-  }
-  export const TSDocWithBlock = (content: string | null, block: string) => {
-    const tsDoc = TSDoc(content)
-    return tsDoc === null ? block : `${tsDoc}\n${block}`
+  export const TSDoc = (content: string | null): string => {
+    return content === null ? `` : `/**\n${linesPrepend(`* `, linesTrim(content)) || `*`}\n*/`
   }
 
   export const group = (...content: string[]) => content.join(`\n`)

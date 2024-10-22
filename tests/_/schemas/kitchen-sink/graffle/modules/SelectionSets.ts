@@ -448,7 +448,9 @@ export namespace Query {
     $?: InputObjectNested$Arguments<$Scalars>
   }
 
-  export interface InputObjectNested$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
+  export interface InputObjectNested$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {
     input?: $NamedTypes.$InputObjectNested<$Scalars> | undefined | null
   }
 
@@ -479,7 +481,9 @@ export namespace Query {
     $: InputObjectNestedNonNull$Arguments<$Scalars>
   }
 
-  export interface InputObjectNestedNonNull$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
+  export interface InputObjectNestedNonNull$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {
     input: $NamedTypes.$InputObjectNestedNonNull<$Scalars>
   }
 
@@ -532,7 +536,9 @@ export namespace Query {
     $?: argInputObjectCircular$Arguments<$Scalars>
   }
 
-  export interface argInputObjectCircular$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
+  export interface argInputObjectCircular$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {
     input?: $NamedTypes.$InputObjectCircular<$Scalars> | undefined | null
   }
 
@@ -586,7 +592,9 @@ export namespace Query {
     $?: dateArg$Arguments<$Scalars>
   }
 
-  export interface dateArg$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
+  export interface dateArg$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {
     date?:
       | $$Utilities.Schema.Scalar.GetDecoded<
         $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', $Scalars>
@@ -622,7 +630,9 @@ export namespace Query {
     $?: dateArgInputObject$Arguments<$Scalars>
   }
 
-  export interface dateArgInputObject$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
+  export interface dateArgInputObject$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {
     input?: $NamedTypes.$InputObject<$Scalars> | undefined | null
   }
 
@@ -654,7 +664,9 @@ export namespace Query {
     $?: dateArgList$Arguments<$Scalars>
   }
 
-  export interface dateArgList$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
+  export interface dateArgList$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {
     date?:
       | Array<
         | $$Utilities.Schema.Scalar.GetDecoded<
@@ -694,7 +706,9 @@ export namespace Query {
     $: dateArgNonNull$Arguments<$Scalars>
   }
 
-  export interface dateArgNonNull$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
+  export interface dateArgNonNull$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {
     date: $$Utilities.Schema.Scalar.GetDecoded<
       $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', $Scalars>
     >
@@ -725,7 +739,9 @@ export namespace Query {
     $: dateArgNonNullList$Arguments<$Scalars>
   }
 
-  export interface dateArgNonNullList$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
+  export interface dateArgNonNullList$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {
     date: Array<
       | $$Utilities.Schema.Scalar.GetDecoded<
         $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', $Scalars>
@@ -761,7 +777,9 @@ export namespace Query {
     $: dateArgNonNullListNonNull$Arguments<$Scalars>
   }
 
-  export interface dateArgNonNullListNonNull$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
+  export interface dateArgNonNullListNonNull$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {
     date: Array<
       | $$Utilities.Schema.Scalar.GetDecoded<
         $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', $Scalars>
@@ -948,7 +966,9 @@ export namespace Query {
     $?: error$Arguments<$Scalars>
   }
 
-  export interface error$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
+  export interface error$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {
     case?: string | undefined | null
   }
 
@@ -1062,7 +1082,9 @@ export namespace Query {
     $: interfaceWithArgs$Arguments<$Scalars>
   }
 
-  export interface interfaceWithArgs$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
+  export interface interfaceWithArgs$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {
     id: string
   }
 
@@ -1304,11 +1326,17 @@ export namespace Query {
     $?: objectWithArgs$Arguments<$Scalars>
   }
 
-  export interface objectWithArgs$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
+  export interface objectWithArgs$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {
     boolean?: boolean | undefined | null
+
     float?: number | undefined | null
+
     id?: string | undefined | null
+
     int?: number | undefined | null
+
     string?: string | undefined | null
   }
 
@@ -1336,7 +1364,9 @@ export namespace Query {
     $: result$Arguments<$Scalars>
   }
 
-  export interface result$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
+  export interface result$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {
     $case: $NamedTypes.$Case
   }
 
@@ -1366,7 +1396,9 @@ export namespace Query {
     $?: resultNonNull$Arguments<$Scalars>
   }
 
-  export interface resultNonNull$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
+  export interface resultNonNull$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {
     $case?: $NamedTypes.$Case | undefined | null
   }
 
@@ -1418,7 +1450,9 @@ export namespace Query {
     $?: stringWithArgEnum$Arguments<$Scalars>
   }
 
-  export interface stringWithArgEnum$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
+  export interface stringWithArgEnum$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {
     $ABCEnum?: $NamedTypes.$ABCEnum | undefined | null
   }
 
@@ -1450,7 +1484,9 @@ export namespace Query {
     $?: stringWithArgInputObject$Arguments<$Scalars>
   }
 
-  export interface stringWithArgInputObject$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
+  export interface stringWithArgInputObject$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {
     input?: $NamedTypes.$InputObject<$Scalars> | undefined | null
   }
 
@@ -1481,9 +1517,9 @@ export namespace Query {
     $: stringWithArgInputObjectRequired$Arguments<$Scalars>
   }
 
-  export interface stringWithArgInputObjectRequired$Arguments<
-    $Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {},
-  > {
+  export interface stringWithArgInputObjectRequired$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {
     input: $NamedTypes.$InputObject<$Scalars>
   }
 
@@ -1514,11 +1550,21 @@ export namespace Query {
     $?: stringWithArgs$Arguments<$Scalars>
   }
 
-  export interface stringWithArgs$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
+  export interface stringWithArgs$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {
     boolean?: boolean | undefined | null
+
     float?: number | undefined | null
+
     id?: string | undefined | null
+    /**
+     * @deprecated Example of argument deprecation reason here.
+     */
     int?: number | undefined | null
+    /**
+     * Example of some argument documentation here.
+     */
     string?: string | undefined | null
   }
 
@@ -1549,7 +1595,9 @@ export namespace Query {
     $?: stringWithListArg$Arguments<$Scalars>
   }
 
-  export interface stringWithListArg$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
+  export interface stringWithListArg$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {
     ints?: Array<number | undefined | null> | undefined | null
   }
 
@@ -1580,7 +1628,9 @@ export namespace Query {
     $: stringWithListArgRequired$Arguments<$Scalars>
   }
 
-  export interface stringWithListArgRequired$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
+  export interface stringWithListArgRequired$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {
     ints: Array<number | undefined | null>
   }
 
@@ -1610,7 +1660,9 @@ export namespace Query {
     $: stringWithRequiredArg$Arguments<$Scalars>
   }
 
-  export interface stringWithRequiredArg$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
+  export interface stringWithRequiredArg$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {
     string: string
   }
 
@@ -1682,7 +1734,9 @@ export namespace Query {
     $?: unionFooBarWithArgs$Arguments<$Scalars>
   }
 
-  export interface unionFooBarWithArgs$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
+  export interface unionFooBarWithArgs$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {
     id?: string | undefined | null
   }
 
@@ -1792,15 +1846,19 @@ export interface InputObject<$Scalars extends $$Utilities.Schema.Scalar.ScalarMa
     >
     | undefined
     | null
+
   dateRequired: $$Utilities.Schema.Scalar.GetDecoded<
     $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', $Scalars>
   >
+
   id?: string | undefined | null
+
   idRequired: string
 }
 
 export interface InputObjectCircular<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
   circular?: $NamedTypes.$InputObjectCircular<$Scalars> | undefined | null
+
   date?:
     | $$Utilities.Schema.Scalar.GetDecoded<
       $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', $Scalars>

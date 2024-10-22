@@ -25,7 +25,7 @@ export const ModuleGeneratorGlobal = createModuleGenerator(
     code()
 
     const defaultSchemaUrlTsDoc = config.options.defaultSchemaUrl
-      ? `\n${Code.TSDoc(config.options.defaultSchemaUrl.href)}`
+      ? config.options.defaultSchemaUrl.href
       : ``
 
     const Clients = Code.termObjectFields({

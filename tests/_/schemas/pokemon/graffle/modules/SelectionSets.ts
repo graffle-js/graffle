@@ -99,11 +99,17 @@ export namespace Mutation {
     $: addPokemon$Arguments<$Scalars>
   }
 
-  export interface addPokemon$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
+  export interface addPokemon$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {
     attack?: number | undefined | null
+
     defense?: number | undefined | null
+
     hp?: number | undefined | null
+
     name: string
+
     $type: $NamedTypes.$PokemonType
   }
 
@@ -262,7 +268,9 @@ export namespace Query {
     $: pokemonByName$Arguments<$Scalars>
   }
 
-  export interface pokemonByName$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
+  export interface pokemonByName$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {
     name: string
   }
 
@@ -290,7 +298,9 @@ export namespace Query {
     $?: pokemons$Arguments<$Scalars>
   }
 
-  export interface pokemons$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
+  export interface pokemons$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {
     filter?: $NamedTypes.$PokemonFilter<$Scalars> | undefined | null
   }
 
@@ -320,7 +330,9 @@ export namespace Query {
     $: trainerByName$Arguments<$Scalars>
   }
 
-  export interface trainerByName$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
+  export interface trainerByName$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
+    extends $Select.Bases.Base
+  {
     name: string
   }
 
@@ -408,16 +420,19 @@ export type TrainerClass =
 
 export interface DateFilter<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
   gte?: number | undefined | null
+
   lte?: number | undefined | null
 }
 
 export interface PokemonFilter<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
   birthday?: $NamedTypes.$DateFilter<$Scalars> | undefined | null
+
   name?: $NamedTypes.$StringFilter<$Scalars> | undefined | null
 }
 
 export interface StringFilter<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
   contains?: string | undefined | null
+
   in?: Array<string | undefined | null> | undefined | null
 }
 

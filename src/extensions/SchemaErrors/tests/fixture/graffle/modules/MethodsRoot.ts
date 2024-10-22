@@ -24,6 +24,7 @@ export interface MutationMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   id: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Mutation.id<$Context['scalars']>>,
   ) => Promise<
@@ -35,6 +36,7 @@ export interface MutationMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   idNonNull: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Mutation.idNonNull<$Context['scalars']>>,
   ) => Promise<
@@ -68,6 +70,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   InputObjectNested: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.InputObjectNested<$Context['scalars']>>,
   ) => Promise<
@@ -79,6 +82,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   InputObjectNestedNonNull: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.InputObjectNestedNonNull<$Context['scalars']>>,
   ) => Promise<
@@ -104,6 +108,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   argInputObjectCircular: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.argInputObjectCircular<$Context['scalars']>>,
   ) => Promise<
@@ -115,6 +120,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   date: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.date<$Context['scalars']>>,
   ) => Promise<
@@ -126,6 +132,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   dateArg: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.dateArg<$Context['scalars']>>,
   ) => Promise<
@@ -137,6 +144,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   dateArgInputObject: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.dateArgInputObject<$Context['scalars']>>,
   ) => Promise<
@@ -148,6 +156,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   dateArgList: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.dateArgList<$Context['scalars']>>,
   ) => Promise<
@@ -159,6 +168,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   dateArgNonNull: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.dateArgNonNull<$Context['scalars']>>,
   ) => Promise<
@@ -170,6 +180,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   dateArgNonNullList: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.dateArgNonNullList<$Context['scalars']>>,
   ) => Promise<
@@ -181,6 +192,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   dateArgNonNullListNonNull: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.dateArgNonNullListNonNull<$Context['scalars']>>,
   ) => Promise<
@@ -192,6 +204,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   dateInterface1: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.dateInterface1<$Context['scalars']>>,
   ) => Promise<
@@ -203,6 +216,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   dateList: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.dateList<$Context['scalars']>>,
   ) => Promise<
@@ -214,6 +228,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   dateListList: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.dateListList<$Context['scalars']>>,
   ) => Promise<
@@ -225,6 +240,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   dateListNonNull: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.dateListNonNull<$Context['scalars']>>,
   ) => Promise<
@@ -236,6 +252,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   dateNonNull: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.dateNonNull<$Context['scalars']>>,
   ) => Promise<
@@ -247,6 +264,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   dateObject1: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.dateObject1<$Context['scalars']>>,
   ) => Promise<
@@ -258,6 +276,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   dateUnion: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.dateUnion<$Context['scalars']>>,
   ) => Promise<
@@ -269,6 +288,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   error: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.error<$Context['scalars']>>,
   ) => Promise<
@@ -280,6 +300,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   id: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.id<$Context['scalars']>>,
   ) => Promise<
@@ -291,6 +312,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   idNonNull: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.idNonNull<$Context['scalars']>>,
   ) => Promise<
@@ -302,6 +324,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   interface: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.$interface<$Context['scalars']>>,
   ) => Promise<
@@ -313,6 +336,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   interfaceNonNull: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.interfaceNonNull<$Context['scalars']>>,
   ) => Promise<
@@ -324,6 +348,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   interfaceWithArgs: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.interfaceWithArgs<$Context['scalars']>>,
   ) => Promise<
@@ -335,6 +360,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   listInt: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.listInt<$Context['scalars']>>,
   ) => Promise<
@@ -346,6 +372,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   listIntNonNull: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.listIntNonNull<$Context['scalars']>>,
   ) => Promise<
@@ -357,6 +384,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   listListInt: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.listListInt<$Context['scalars']>>,
   ) => Promise<
@@ -368,6 +396,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   listListIntNonNull: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.listListIntNonNull<$Context['scalars']>>,
   ) => Promise<
@@ -379,6 +408,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   lowerCaseUnion: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.lowerCaseUnion<$Context['scalars']>>,
   ) => Promise<
@@ -390,6 +420,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   object: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.$object<$Context['scalars']>>,
   ) => Promise<
@@ -401,6 +432,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   objectList: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.objectList<$Context['scalars']>>,
   ) => Promise<
@@ -412,6 +444,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   objectListNonNull: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.objectListNonNull<$Context['scalars']>>,
   ) => Promise<
@@ -423,6 +456,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   objectNested: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.objectNested<$Context['scalars']>>,
   ) => Promise<
@@ -434,6 +468,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   objectNonNull: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.objectNonNull<$Context['scalars']>>,
   ) => Promise<
@@ -445,6 +480,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   objectWithArgs: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.objectWithArgs<$Context['scalars']>>,
   ) => Promise<
@@ -456,6 +492,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   result: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.result<$Context['scalars']>>,
   ) => Promise<
@@ -467,6 +504,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   resultNonNull: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.resultNonNull<$Context['scalars']>>,
   ) => Promise<
@@ -478,6 +516,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   string: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.$string<$Context['scalars']>>,
   ) => Promise<
@@ -489,6 +528,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   stringWithArgEnum: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.stringWithArgEnum<$Context['scalars']>>,
   ) => Promise<
@@ -500,6 +540,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   stringWithArgInputObject: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.stringWithArgInputObject<$Context['scalars']>>,
   ) => Promise<
@@ -511,6 +552,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   stringWithArgInputObjectRequired: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<
       $SelectionSet,
@@ -539,6 +581,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   stringWithListArg: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.stringWithListArg<$Context['scalars']>>,
   ) => Promise<
@@ -550,6 +593,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   stringWithListArgRequired: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.stringWithListArgRequired<$Context['scalars']>>,
   ) => Promise<
@@ -561,6 +605,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   stringWithRequiredArg: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.stringWithRequiredArg<$Context['scalars']>>,
   ) => Promise<
@@ -572,6 +617,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   unionFooBar: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.unionFooBar<$Context['scalars']>>,
   ) => Promise<
@@ -583,6 +629,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   unionFooBarNonNull: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.unionFooBarNonNull<$Context['scalars']>>,
   ) => Promise<
@@ -594,6 +641,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   unionFooBarWithArgs: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.unionFooBarWithArgs<$Context['scalars']>>,
   ) => Promise<
@@ -605,6 +653,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   unionObject: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.unionObject<$Context['scalars']>>,
   ) => Promise<
@@ -616,6 +665,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   unionObjectNonNull: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.unionObjectNonNull<$Context['scalars']>>,
   ) => Promise<

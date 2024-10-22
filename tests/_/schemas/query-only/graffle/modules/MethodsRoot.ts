@@ -24,6 +24,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   id: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.id<$Context['scalars']>>,
   ) => Promise<
@@ -35,6 +36,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   idNonNull: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.idNonNull<$Context['scalars']>>,
   ) => Promise<

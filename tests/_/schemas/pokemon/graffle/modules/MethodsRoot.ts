@@ -24,6 +24,7 @@ export interface MutationMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   addPokemon: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Mutation.addPokemon<$Context['scalars']>>,
   ) => Promise<
@@ -57,6 +58,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   battles: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.battles<$Context['scalars']>>,
   ) => Promise<
@@ -68,6 +70,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   beings: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.beings<$Context['scalars']>>,
   ) => Promise<
@@ -79,6 +82,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   pokemon: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.pokemon<$Context['scalars']>>,
   ) => Promise<
@@ -90,6 +94,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   pokemonByName: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.pokemonByName<$Context['scalars']>>,
   ) => Promise<
@@ -101,6 +106,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   pokemons: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.pokemons<$Context['scalars']>>,
   ) => Promise<
@@ -112,6 +118,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   trainerByName: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.trainerByName<$Context['scalars']>>,
   ) => Promise<
@@ -123,6 +130,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   trainers: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.trainers<$Context['scalars']>>,
   ) => Promise<

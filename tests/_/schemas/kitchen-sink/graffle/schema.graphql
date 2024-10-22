@@ -162,7 +162,15 @@ type Query {
   stringWithArgInputObjectRequired(input: InputObject!): String
 
   """The given arguments are reflected back as a JSON string."""
-  stringWithArgs(boolean: Boolean, float: Float, id: ID, int: Int, string: String): String
+  stringWithArgs(
+    boolean: Boolean
+    float: Float
+    id: ID
+    int: Int @deprecated(reason: "Example of argument deprecation reason here.")
+
+    """Example of some argument documentation here."""
+    string: String
+  ): String
   stringWithListArg(ints: [Int]): String
   stringWithListArgRequired(ints: [Int!]!): String
   stringWithRequiredArg(string: String!): String

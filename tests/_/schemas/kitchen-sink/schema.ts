@@ -302,8 +302,8 @@ builder.queryType({
       type: `String`,
       description: `The given arguments are reflected back as a JSON string.`,
       args: {
-        string: t.arg.string(),
-        int: t.arg.int(),
+        string: t.arg.string({ description: `Example of some argument documentation here.` }),
+        int: t.arg.int({ deprecationReason: `Example of argument deprecation reason here.` }),
         float: t.arg.float(),
         boolean: t.arg.boolean(),
         id: t.arg.id(),

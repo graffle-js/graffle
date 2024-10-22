@@ -62,9 +62,9 @@ const defaultDescription = (node: Grafaid.Schema.DescribableTypes) => {
 }
 
 export const renderDocumentation = (config: Config, node: Grafaid.Schema.DescribableTypes) => {
-  return Code.TSDoc(getDocumentation(config, node))
+  return Code.TSDoc(getTsDocContents(config, node))
 }
-export const getDocumentation = (config: Config, node: Grafaid.Schema.DescribableTypes) => {
+export const getTsDocContents = (config: Config, node: Grafaid.Schema.DescribableTypes) => {
   const generalDescription = node.description
     ?? (config.options.TSDoc.noDocPolicy === `message` ? defaultDescription(node) : null)
 

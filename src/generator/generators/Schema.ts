@@ -5,7 +5,7 @@ import { Tex } from '../../lib/tex/__.js'
 import { identifiers } from '../helpers/identifiers.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 import { type CodeGenerator, createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
-import { renderInlineType, renderName } from '../helpers/render.js'
+import { getTsDocContents, renderInlineType, renderName } from '../helpers/render.js'
 import type { KindRenderers } from '../helpers/types.js'
 import { ModuleGeneratorData } from './Data.js'
 import { ModuleGeneratorMethodsRoot } from './MethodsRoot.js'
@@ -91,34 +91,50 @@ const OutputObject = createCodeGenerator<{ type: Grafaid.Schema.ObjectType }>(({
 
   code(Code.esmExport(Code.tsNamespace(
     type.name,
-    [Code.tsInterface(`__typename`, null, `$.OutputField`, {
-      name: Code.string(`__typename`),
-      arguments: {},
-      inlineType: `[1]`,
-      namedType: {
-        kind: Code.string(`__typename`),
-        value: Code.string(type.name),
+    [Code.tsInterface$({
+      export: true,
+      name: `__typename`,
+      extends: `$.OutputField`,
+      fields: {
+        name: Code.string(`__typename`),
+        arguments: {},
+        inlineType: `[1]`,
+        namedType: {
+          kind: Code.string(`__typename`),
+          value: Code.string(type.name),
+        },
       },
     })].concat(
       values(type.getFields())
         .map((field) => {
           const namedType = Grafaid.Schema.getNamedType(field.type)
-          return Code.tsInterface(field.name, null, `$.OutputField`, {
-            name: Code.string(field.name),
-            arguments: Object.fromEntries(field.args.map(arg => {
-              return [arg.name, {
-                kind: Code.string(`InputField`),
-                name: Code.string(arg.name),
-                inlineType: renderInlineType(arg.type),
-                namedType: namedTypesTypeReference(Grafaid.Schema.getNamedType(arg.type)),
-              }]
-            })),
-            inlineType: renderInlineType(field.type),
-            namedType: namedTypesTypeReference(namedType),
+          return Code.tsInterface$({
+            tsDoc: getTsDocContents(config, field),
+            export: true,
+            name: field.name,
+            extends: `$.OutputField`,
+            fields: {
+              name: Code.string(field.name),
+              arguments: Object.fromEntries(field.args.map(arg => {
+                return [
+                  arg.name,
+                  Code.directiveField({
+                    $TS_DOC: getTsDocContents(config, arg),
+                    $VALUE: {
+                      kind: Code.string(`InputField`),
+                      name: Code.string(arg.name),
+                      inlineType: renderInlineType(arg.type),
+                      namedType: namedTypesTypeReference(Grafaid.Schema.getNamedType(arg.type)),
+                    },
+                  }),
+                ]
+              })),
+              inlineType: renderInlineType(field.type),
+              namedType: namedTypesTypeReference(namedType),
+            },
           })
         }),
     )
-      .map(Code.esmExport)
       .join(`\n\n`),
   )))
   code()

@@ -160,6 +160,9 @@ export namespace Schema {
       namedType: $$NamedTypes.$$ID
     }
 
+    /**
+     * Query enum field documentation.
+     */
     export interface abcEnum extends $.OutputField {
       name: 'abcEnum'
       arguments: {}
@@ -562,6 +565,9 @@ export namespace Schema {
       namedType: $$NamedTypes.$$String
     }
 
+    /**
+     * The given arguments are reflected back as a JSON string.
+     */
     export interface stringWithArgs extends $.OutputField {
       name: 'stringWithArgs'
       arguments: {
@@ -583,12 +589,18 @@ export namespace Schema {
           inlineType: [0]
           namedType: $$NamedTypes.$$ID
         }
+        /**
+         * @deprecated Example of argument deprecation reason here.
+         */
         int: {
           kind: 'InputField'
           name: 'int'
           inlineType: [0]
           namedType: $$NamedTypes.$$Int
         }
+        /**
+         * Example of some argument documentation here.
+         */
         string: {
           kind: 'InputField'
           name: 'string'
@@ -895,6 +907,11 @@ export namespace Schema {
       }
     }
 
+    /**
+     * Field documentation.
+     *
+     * @deprecated Field a is deprecated.
+     */
     export interface id extends $.OutputField {
       name: 'id'
       arguments: {}

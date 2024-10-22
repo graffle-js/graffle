@@ -24,6 +24,7 @@ export interface MutationMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   id: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Mutation.id<$Context['scalars']>>,
   ) => Promise<
@@ -35,6 +36,7 @@ export interface MutationMethods<$Context extends $$Utilities.ClientContext> {
       >
     >
   >
+
   idNonNull: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Mutation.idNonNull<$Context['scalars']>>,
   ) => Promise<
