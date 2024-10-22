@@ -7,7 +7,7 @@ import { Code } from '../../lib/Code.js'
 import { Grafaid } from '../../lib/grafaid/__.js'
 import { analyzeArgsNullability } from '../../lib/grafaid/schema/args.js'
 import { RootTypeName } from '../../lib/grafaid/schema/schema.js'
-import { entries, isString } from '../../lib/prelude.js'
+import { entries } from '../../lib/prelude.js'
 import { Tex } from '../../lib/tex/__.js'
 import { borderThin } from '../../lib/tex/tex.js'
 import { identifiers } from '../helpers/identifiers.js'
@@ -91,13 +91,6 @@ const renderKindUnion = createCodeGenerator<{ type: Grafaid.Schema.UnionType }>(
         ${H.__typenameField(`union`)}
       `,
     }))
-    // code(`
-    //   export interface ${renderName(type)}<${$ScalarsTypeParameter}> {
-    //     ${fragmentsInlineType}
-    //     ${H.fragmentInlineField(type)}
-    //     ${H.__typenameField(`union`)}
-    //   }
-    // `)
 
     code(H.fragmentInlineInterface(type))
     code()
@@ -404,15 +397,6 @@ namespace H {
   export const maybeList = (type: string) => {
     return `${type} | Array<${type}>`
   }
-
-  // export const tsInterface = (name: Name, extendsClause: null | (string | null)[], fields: string) => {
-  //   return Code.tsInterface$({
-  //     export: true,
-  //     name: referenceSig(name),
-  //     extends: extendsClause,
-  //     fields,
-  //   })
-  // }
 
   export const tsType = (name: Name, type: string) => {
     return tsTypeTerminal(referenceSig(name), type)

@@ -888,6 +888,9 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
+  /**
+   * Object documentation.
+   */
   export interface Foo extends $.OutputObject {
     name: 'Foo'
     fields: {
@@ -1422,6 +1425,9 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
+  /**
+   * Union documentation.
+   */
   export interface FooBarUnion extends $.Union {
     name: 'FooBarUnion'
     members: [Bar, Foo]
@@ -1488,6 +1494,14 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
+  /**
+   * Enum documentation.
+   *
+   * Members
+   * "A" - (DEPRECATED: Enum value A is deprecated.)
+   * "B" - Enum B member documentation.
+   * "C" - (DEPRECATED: Enum value C is deprecated.)
+   */
   export interface ABCEnum extends $.Enum {
     name: 'ABCEnum'
     members: ['A', 'B', 'C']

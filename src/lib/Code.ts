@@ -188,7 +188,7 @@ export namespace Code {
     },
   ) => {
     const tsDoc_ = tsDoc ? TSDoc(tsDoc) + `\n` : ``
-    const export__ = export_ ? `export ` : ``
+    const export__ = export_ === false ? `` : `export `
     const typeParametersClause = tsTypeParameters(typeParameters ?? null)
     const extends__ = toArray(extends_).filter(_ => Boolean(_))
     const extends___ = extends__.length > 0

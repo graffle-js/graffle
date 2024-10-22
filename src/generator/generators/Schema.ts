@@ -83,10 +83,15 @@ const OutputObject = createCodeGenerator<{ type: Grafaid.Schema.ObjectType }>(({
       }),
     ),
   )
-  code(Code.esmExport(Code.tsInterface(type.name, null, `$.OutputObject`, {
-    name: Code.string(type.name),
-    fields: interfaceFields,
-  })))
+  code(Code.tsInterface$({
+    tsDoc: getTsDocContents(config, type),
+    name: type.name,
+    extends: `$.OutputObject`,
+    fields: {
+      name: Code.string(type.name),
+      fields: interfaceFields,
+    },
+  }))
   code()
 
   code(Code.esmExport(Code.tsNamespace(
@@ -142,34 +147,36 @@ const OutputObject = createCodeGenerator<{ type: Grafaid.Schema.ObjectType }>(({
 
 const Enum = createCodeGenerator<{ type: Grafaid.Schema.EnumType }>(({ config, code, type }) => {
   code(
-    Code.esmExport(
-      Code.tsInterface(type.name, null, `$.Enum`, {
+    Code.tsInterface$({
+      tsDoc: getTsDocContents(config, type),
+      export: true,
+      name: type.name,
+      extends: `$.Enum`,
+      fields: {
         name: Code.string(type.name),
         members: Code.tsTuple(type.getValues().map((_) => Code.string(_.name))),
         membersUnion: Code.tsUnionItems(type.getValues().map((_) => Code.string(_.name))),
-      }),
-    ),
+      },
+    }),
   )
   code()
 })
 const InputObject = createCodeGenerator<{ type: Grafaid.Schema.InputObjectType }>(({ config, code, type }) => {
   code(
-    Code.esmExport(
-      Code.tsInterface(
-        type.name,
-        null,
-        `$.InputObject`,
-        {
-          name: Code.string(type.name),
-          isAllFieldsNullable: Code.boolean(Grafaid.Schema.isAllInputObjectFieldsNullable(type)),
-          fields: Object.fromEntries(
-            values(type.getFields()).map(field => {
-              return [field.name, `${renderName(type)}.${renderName(field)}`]
-            }),
-          ),
-        },
-      ),
-    ),
+    Code.tsInterface$({
+      tsDoc: getTsDocContents(config, type),
+      name: type.name,
+      extends: `$.InputObject`,
+      fields: {
+        name: Code.string(type.name),
+        isAllFieldsNullable: Code.boolean(Grafaid.Schema.isAllInputObjectFieldsNullable(type)),
+        fields: Object.fromEntries(
+          values(type.getFields()).map(field => {
+            return [field.name, `${renderName(type)}.${renderName(field)}`]
+          }),
+        ),
+      },
+    }),
   )
   code()
   code(Code.esmExport(Code.tsNamespace(
@@ -177,48 +184,63 @@ const InputObject = createCodeGenerator<{ type: Grafaid.Schema.InputObjectType }
     values(type.getFields())
       .map((field) => {
         const namedType = Grafaid.Schema.getNamedType(field.type)
-        return Code.tsInterface(field.name, null, `$.InputField`, {
-          name: Code.string(field.name),
-          inlineType: renderInlineType(field.type),
-          namedType: namedTypesTypeReference(namedType),
+        return Code.tsInterface$({
+          tsDoc: getTsDocContents(config, field),
+          name: field.name,
+          extends: `$.InputField`,
+          fields: {
+            name: Code.string(field.name),
+            inlineType: renderInlineType(field.type),
+            namedType: namedTypesTypeReference(namedType),
+          },
         })
       })
-      .map(Code.esmExport)
       .join(`\n\n`),
   )))
   code()
 })
 
-const ScalarStandard = createCodeGenerator<{ type: Grafaid.Schema.ScalarType }>(({ config, code, type }) => {
+const ScalarStandard = createCodeGenerator<{ type: Grafaid.Schema.ScalarType }>(({ code, type }) => {
   code(Code.esmExport(Code.tsType(type.name, `$.StandardTypes.${type.name}`)))
   code()
 })
 
-const ScalarCustom = createCodeGenerator<{ type: Grafaid.Schema.ScalarType }>(({ config, code, type }) => {
+const ScalarCustom = createCodeGenerator<{ type: Grafaid.Schema.ScalarType }>(({ code, type }) => {
   code(Code.esmExport(Code.tsType(type.name, `$Scalar.${type.name}`)))
   code()
 })
 
 const Union = createCodeGenerator<{ type: Grafaid.Schema.UnionType }>(({ config, code, type }) => {
   const memberNames = type.getTypes().map((_) => renderName(_))
-  code(Code.esmExport(Code.tsInterface(type.name, null, `$.Union`, {
-    name: Code.string(type.name),
-    members: Code.tsTuple(memberNames),
-    membersUnion: Code.tsUnionItems(memberNames),
-    membersIndex: Object.fromEntries(memberNames.map(n => [n, renderName(n)])),
-  })))
+  code(Code.tsInterface$({
+    tsDoc: getTsDocContents(config, type),
+    export: true,
+    name: type.name,
+    extends: `$.Union`,
+    fields: {
+      name: Code.string(type.name),
+      members: Code.tsTuple(memberNames),
+      membersUnion: Code.tsUnionItems(memberNames),
+      membersIndex: Object.fromEntries(memberNames.map(n => [n, renderName(n)])),
+    },
+  }))
   code()
 })
 
 const Interface = createCodeGenerator<{ type: Grafaid.Schema.InterfaceType }>(({ config, code, type }) => {
   const implementorTypes = Grafaid.Schema.KindMap.getInterfaceImplementors(config.schema.kindMap, type)
   const implementorNames = implementorTypes.map((_) => _.name)
-  code(Code.esmExport(Code.tsInterface(type.name, null, `$.Interface`, {
-    name: Code.string(type.name),
-    implementors: Code.tsTuple(implementorNames),
-    implementorsUnion: Code.tsUnionItems(implementorNames),
-    implementorsIndex: Object.fromEntries(implementorNames.map(n => [n, renderName(n)])),
-  })))
+  code(Code.tsInterface$({
+    tsDoc: getTsDocContents(config, type),
+    name: type.name,
+    extends: `$.Interface`,
+    fields: {
+      name: Code.string(type.name),
+      implementors: Code.tsTuple(implementorNames),
+      implementorsUnion: Code.tsUnionItems(implementorNames),
+      implementorsIndex: Object.fromEntries(implementorNames.map(n => [n, renderName(n)])),
+    },
+  }))
   code()
 })
 
@@ -293,14 +315,12 @@ export const SchemaGenerator = createCodeGenerator(
     // ---
 
     code(
-      Code.esmExport(
-        Code.tsInterface(
-          identifiers.Schema,
-          `$Scalars extends ${identifiers.$$Utilities}.Schema.Scalar.ScalarMap = {}`,
-          `$`,
-          schema,
-        ),
-      ),
+      Code.tsInterface$({
+        name: identifiers.Schema,
+        typeParameters: `$Scalars extends ${identifiers.$$Utilities}.Schema.Scalar.ScalarMap = {}`,
+        extends: `$`,
+        fields: schema,
+      }),
     )
   },
 )
