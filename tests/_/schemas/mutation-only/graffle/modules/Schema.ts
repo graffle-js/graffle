@@ -35,8 +35,14 @@ export namespace Schema {
   }
 
   export namespace Mutation {
-    export interface __typename extends $.__typename {
-      value: 'Mutation'
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'Mutation'
+      }
     }
 
     export interface id extends $.OutputField {

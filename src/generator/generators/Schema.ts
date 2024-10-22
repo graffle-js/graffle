@@ -91,7 +91,15 @@ const OutputObject = createCodeGenerator<{ type: Grafaid.Schema.ObjectType }>(({
 
   code(Code.esmExport(Code.tsNamespace(
     type.name,
-    [Code.tsInterface(`__typename`, null, `$.__typename`, { value: Code.string(type.name) })].concat(
+    [Code.tsInterface(`__typename`, null, `$.OutputField`, {
+      name: Code.string(`__typename`),
+      arguments: {},
+      inlineType: `[1]`,
+      namedType: {
+        kind: Code.string(`__typename`),
+        value: Code.string(type.name),
+      },
+    })].concat(
       values(type.getFields())
         .map((field) => {
           const namedType = Grafaid.Schema.getNamedType(field.type)
@@ -122,6 +130,7 @@ const Enum = createCodeGenerator<{ type: Grafaid.Schema.EnumType }>(({ config, c
       Code.tsInterface(type.name, null, `$.Enum`, {
         name: Code.string(type.name),
         members: Code.tsTuple(type.getValues().map((_) => Code.string(_.name))),
+        membersUnion: Code.tsUnionItems(type.getValues().map((_) => Code.string(_.name))),
       }),
     ),
   )

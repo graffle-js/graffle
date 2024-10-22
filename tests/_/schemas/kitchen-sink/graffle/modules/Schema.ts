@@ -35,8 +35,14 @@ export namespace Schema {
   }
 
   export namespace Mutation {
-    export interface __typename extends $.__typename {
-      value: 'Mutation'
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'Mutation'
+      }
     }
 
     export interface id extends $.OutputField {
@@ -116,8 +122,14 @@ export namespace Schema {
   }
 
   export namespace Query {
-    export interface __typename extends $.__typename {
-      value: 'Query'
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'Query'
+      }
     }
 
     export interface InputObjectNested extends $.OutputField {
@@ -702,8 +714,14 @@ export namespace Schema {
   }
 
   export namespace Bar {
-    export interface __typename extends $.__typename {
-      value: 'Bar'
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'Bar'
+      }
     }
 
     export interface int extends $.OutputField {
@@ -727,8 +745,14 @@ export namespace Schema {
   }
 
   export namespace DateObject1 {
-    export interface __typename extends $.__typename {
-      value: 'DateObject1'
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'DateObject1'
+      }
     }
 
     export interface date1 extends $.OutputField {
@@ -752,8 +776,14 @@ export namespace Schema {
   }
 
   export namespace DateObject2 {
-    export interface __typename extends $.__typename {
-      value: 'DateObject2'
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'DateObject2'
+      }
     }
 
     export interface date2 extends $.OutputField {
@@ -778,8 +808,14 @@ export namespace Schema {
   }
 
   export namespace ErrorOne {
-    export interface __typename extends $.__typename {
-      value: 'ErrorOne'
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'ErrorOne'
+      }
     }
 
     export interface infoId extends $.OutputField {
@@ -811,8 +847,14 @@ export namespace Schema {
   }
 
   export namespace ErrorTwo {
-    export interface __typename extends $.__typename {
-      value: 'ErrorTwo'
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'ErrorTwo'
+      }
     }
 
     export interface infoInt extends $.OutputField {
@@ -843,8 +885,14 @@ export namespace Schema {
   }
 
   export namespace Foo {
-    export interface __typename extends $.__typename {
-      value: 'Foo'
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'Foo'
+      }
     }
 
     export interface id extends $.OutputField {
@@ -873,8 +921,14 @@ export namespace Schema {
   }
 
   export namespace Object1 {
-    export interface __typename extends $.__typename {
-      value: 'Object1'
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'Object1'
+      }
     }
 
     export interface ABCEnum extends $.OutputField {
@@ -934,8 +988,14 @@ export namespace Schema {
   }
 
   export namespace Object1ImplementingInterface {
-    export interface __typename extends $.__typename {
-      value: 'Object1ImplementingInterface'
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'Object1ImplementingInterface'
+      }
     }
 
     export interface id extends $.OutputField {
@@ -967,8 +1027,14 @@ export namespace Schema {
   }
 
   export namespace Object2ImplementingInterface {
-    export interface __typename extends $.__typename {
-      value: 'Object2ImplementingInterface'
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'Object2ImplementingInterface'
+      }
     }
 
     export interface $boolean extends $.OutputField {
@@ -1000,8 +1066,14 @@ export namespace Schema {
   }
 
   export namespace ObjectNested {
-    export interface __typename extends $.__typename {
-      value: 'ObjectNested'
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'ObjectNested'
+      }
     }
 
     export interface id extends $.OutputField {
@@ -1032,8 +1104,14 @@ export namespace Schema {
   }
 
   export namespace ObjectUnion {
-    export interface __typename extends $.__typename {
-      value: 'ObjectUnion'
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'ObjectUnion'
+      }
     }
 
     export interface fooBarUnion extends $.OutputField {
@@ -1057,8 +1135,14 @@ export namespace Schema {
   }
 
   export namespace lowerCaseObject {
-    export interface __typename extends $.__typename {
-      value: 'lowerCaseObject'
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'lowerCaseObject'
+      }
     }
 
     export interface id extends $.OutputField {
@@ -1082,8 +1166,14 @@ export namespace Schema {
   }
 
   export namespace lowerCaseObject2 {
-    export interface __typename extends $.__typename {
-      value: 'lowerCaseObject2'
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'lowerCaseObject2'
+      }
     }
 
     export interface int extends $.OutputField {
@@ -1384,6 +1474,10 @@ export namespace Schema {
   export interface ABCEnum extends $.Enum {
     name: 'ABCEnum'
     members: ['A', 'B', 'C']
+    membersUnion:
+      | 'A'
+      | 'B'
+      | 'C'
   }
 
   //                                                Case
@@ -1393,6 +1487,10 @@ export namespace Schema {
   export interface Case extends $.Enum {
     name: 'Case'
     members: ['ErrorOne', 'ErrorTwo', 'Object1']
+    membersUnion:
+      | 'ErrorOne'
+      | 'ErrorTwo'
+      | 'Object1'
   }
 
   //

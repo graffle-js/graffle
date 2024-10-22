@@ -1,4 +1,4 @@
 export interface __typename<$TypeName extends string = string> {
-  kind: 'typename'
+  kind: '__typename'
   value: $TypeName
 }

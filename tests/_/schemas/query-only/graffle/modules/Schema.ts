@@ -35,8 +35,14 @@ export namespace Schema {
   }
 
   export namespace Query {
-    export interface __typename extends $.__typename {
-      value: 'Query'
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'Query'
+      }
     }
 
     export interface id extends $.OutputField {

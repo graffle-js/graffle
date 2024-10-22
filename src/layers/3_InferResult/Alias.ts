@@ -1,13 +1,13 @@
 import type { mergeObjectArray, ValuesOrEmptyObject } from '../../lib/prelude.js'
 import type { Schema } from '../../types/Schema/__.js'
 import type { Select } from '../2_Select/__.js'
-import type { Field } from './Field.js'
+import type { OutputField } from './OutputField.js'
 
 // dprint-ignore
 export type Alias<
-	$SelectionSet,
 	$Schema extends Schema,
-	$Node extends Schema.OutputObject
+	$Node extends Schema.OutputObject,
+	$SelectionSet,
 > =
   ValuesOrEmptyObject<
     {
@@ -54,5 +54,5 @@ type InferSelectAliasOne<
   $Schema extends Schema,
   $Node extends Schema.OutputObject,
 > = {
-  [_ in $SelectAliasOne[0]]: Field<$SelectAliasOne[1], $Node['fields'][$FieldName], $Schema>
+  [_ in $SelectAliasOne[0]]: OutputField<$SelectAliasOne[1], $Node['fields'][$FieldName], $Schema>
 }

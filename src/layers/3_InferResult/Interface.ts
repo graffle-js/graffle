@@ -3,4 +3,4 @@ import type { InlineFragmentTypeConditional } from './InlineFragment.js'
 
 // dprint-ignore
 export type Interface<$SelectionSet, $Schema extends Schema, $Node extends Schema.Interface> =
-  InlineFragmentTypeConditional<$SelectionSet, $Node['implementors'][number], $Schema>
+  InlineFragmentTypeConditional<$SelectionSet, $Node['implementorsUnion'], $Schema>

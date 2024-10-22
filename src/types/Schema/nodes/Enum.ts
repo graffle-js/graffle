@@ -5,4 +5,5 @@ export interface Enum<
   kind: 'Enum'
   name: $Name
   members: $Members
+  membersUnion: $Members[number]
 }

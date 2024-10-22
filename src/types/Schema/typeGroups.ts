@@ -22,6 +22,7 @@ export type NamedOutputTypes =
   | Union<string, [OutputObject, ...OutputObject[]]>
   | Scalar
   | Scalar.ScalarCodecless
+  | __typename
 
 export type InputTypes =
   | InlineTypes

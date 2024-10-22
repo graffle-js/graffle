@@ -4,7 +4,7 @@ import type { Schema } from '../../../tests/_/schemas/kitchen-sink/graffle/modul
 import type * as SelectionSets from '../../../tests/_/schemas/kitchen-sink/graffle/modules/SelectionSets.js'
 import { assertEqual } from '../../lib/assert-equal.js'
 import type { InferResult } from './__.js'
-import type { PickSelectsPositiveIndicatorAndNotSelectAlias } from './Object.js'
+import type { PickSelectsPositiveIndicatorAndNotSelectAlias } from './OutputObject.js'
 
 type $<$SelectionSet extends SelectionSets.Query> = InferResult.Query<$SelectionSet, Schema>
 

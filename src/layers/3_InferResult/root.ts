@@ -1,7 +1,7 @@
 import type { Grafaid } from '../../lib/grafaid/__.js'
 import { type ExcludeNull } from '../../lib/prelude.js'
 import type { Schema } from '../../types/Schema/__.js'
-import type { Object } from './Object.js'
+import type { Object } from './OutputObject.js'
 
 export type RootViaObject<
   $SelectionSet,
@@ -10,7 +10,7 @@ export type RootViaObject<
 > = Root<
   $SelectionSet,
   $Schema,
-  $RootType['fields']['__typename']['type']['type']
+  $RootType['name']
 >
 
 // dprint-ignore

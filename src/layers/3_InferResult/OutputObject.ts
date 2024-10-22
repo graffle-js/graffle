@@ -4,7 +4,7 @@ import type { TSErrorDescriptive } from '../../lib/ts-error.js'
 import type { Schema } from '../../types/Schema/__.js'
 import type { Select } from '../2_Select/__.js'
 import type { Alias } from './Alias.js'
-import type { Field } from './Field.js'
+import type { OutputField } from './OutputField.js'
 import type { ScalarsWildcard } from './ScalarsWildcard.js'
 
 // dprint-ignore
@@ -15,7 +15,7 @@ export type Object<$SelectionSet, $Schema extends Schema, $Node extends Schema.O
     :
       Simplify<
         & SelectionNonSelectAlias<$SelectionSet, $Schema, $Node>
-        & Alias<$SelectionSet, $Schema, $Node>
+        & Alias<$Schema, $Node, $SelectionSet>
       >
 
 // dprint-ignore
@@ -23,14 +23,14 @@ type SelectionNonSelectAlias<$SelectionSet , $Schema extends Schema, $SchemaNode
   {
     [$Key in PickSelectsPositiveIndicatorAndNotSelectAlias<$SelectionSet>]:
       $Key extends keyof $SchemaNode['fields']
-        ? Field<$SelectionSet[$Key], $SchemaNode['fields'][$Key], $Schema>
+        ? OutputField<$SelectionSet[$Key], $SchemaNode['fields'][$Key], $Schema>
         : Errors.UnknownFieldName<$Key, $SchemaNode>
   }
 
 // dprint-ignore
 export namespace Errors {
   export type UnknownFieldName<$FieldName extends string, $Object extends Schema.StandardTypes.RootType | Schema.OutputObject> =
-    TSErrorDescriptive<'Object', `field "${$FieldName}" does not exist on object "${$Object['fields']['__typename']['type']['type']}"`>
+    TSErrorDescriptive<'Object', `field "${$FieldName}" does not exist on object "${$Object['name']}"`>
 }
 
 // dprint-ignore
