@@ -89,6 +89,7 @@ export const NameToClass = {
   ...NamedNameToClass,
 } as const
 
+export type FieldTypes = GraphQLField<any, any> | GraphQLInputField
 export type DescribableTypes =
   | GraphQLNamedType
   | InputOrOutputField

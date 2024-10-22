@@ -1,27 +1,23 @@
 import { Code } from '../../lib/Code.js'
 import { Grafaid } from '../../lib/grafaid/__.js'
-import { borderThickFullWidth, borderThinFullWidth, centerTo } from '../../lib/text.js'
+import { Tex } from '../../lib/tex/__.js'
+import { SchemaDrivenDataMap } from '../../types/SchemaDrivenDataMap/__.js'
 import type { Config } from '../config/config.js'
 
-export const title1 = (title: string, subTitle?: string) => {
-  const titleDecorated = `
-    //
-    //
-    //
-    //
-    //
-    //
-    // ${borderThickFullWidth}
-    // ${centerTo(borderThickFullWidth, title)}${subTitle ? `\n// ${centerTo(borderThickFullWidth, subTitle)}` : ``}
-    // ${borderThickFullWidth}
-    //
-    //
-    //
-    //
-    //
-    //
-  `
-  return titleDecorated
+export const renderInlineType = (type: Grafaid.Schema.Types): string => {
+  const [ofType, nonNull] = Grafaid.Schema.isNonNullType(type)
+    ? [type.ofType, true]
+    : [type, false]
+
+  const nullFlag = nonNull
+    ? SchemaDrivenDataMap.nullabilityFlags.nonNull
+    : SchemaDrivenDataMap.nullabilityFlags.nullable
+
+  const rest = Grafaid.Schema.isListType(ofType)
+    ? renderInlineType(ofType.ofType)
+    : ``
+
+  return `[${nullFlag.toString()}, ${rest}]`
 }
 
 export const typeTitle2 = (category: string) => (type: Grafaid.Schema.NamedTypes) => {
@@ -37,9 +33,9 @@ export const typeTitle2 = (category: string) => (type: Grafaid.Schema.NamedTypes
     //
     // ${category.toUpperCase()}
     // ${typeLabel.toUpperCase()}
-    // ${borderThinFullWidth}
-    // ${centerTo(borderThinFullWidth, type.name)}
-    // ${borderThinFullWidth}
+    // ${Tex.borderThin}
+    // ${Tex.centerTo(Tex.borderThin, type.name)}
+    // ${Tex.borderThin}
     //
     //
   `.trim()
@@ -121,14 +117,14 @@ export const getDocumentation = (config: Config, node: Grafaid.Schema.Describabl
  * this guards against GraphQL type or property names that
  * would be illegal in TypeScript such as `namespace` or `interface`.
  */
-export const renderName = (type: string | Grafaid.Schema.NamedTypes | Grafaid.Schema.Field<any, any>) => {
-  if (typeof type === `string`) {
-    return type
+export const renderName = (type: string | Grafaid.Schema.NamedTypes | Grafaid.Schema.FieldTypes) => {
+  const name_ = typeof type === `string` ? type : type.name
+
+  if (Code.reservedTypeScriptInterfaceNames.includes(name_ as any)) {
+    // todo this could name clash with $ prefix imports.
+    // either make imports use $$ or put the $ here in suffix.
+    return `$${name_}`
   }
 
-  if (Code.reservedTypeScriptInterfaceNames.includes(type.name as any)) {
-    return `$${type.name}`
-  }
-
-  return type.name
+  return name_
 }

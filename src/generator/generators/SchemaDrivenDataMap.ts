@@ -1,12 +1,13 @@
 import { Code } from '../../lib/Code.js'
 import { Grafaid } from '../../lib/grafaid/__.js'
 import { entries } from '../../lib/prelude.js'
-import { nullabilityFlags, propertyNames } from '../../types/SchemaDrivenDataMap/SchemaDrivenDataMap.js'
+import { Tex } from '../../lib/tex/__.js'
+import { propertyNames } from '../../types/SchemaDrivenDataMap/SchemaDrivenDataMap.js'
 import type { Config } from '../config/config.js'
 import { identifiers } from '../helpers/identifiers.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 import { createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
-import { title1 } from '../helpers/render.js'
+import { renderInlineType } from '../helpers/render.js'
 import type { KindRenderers } from '../helpers/types.js'
 import { ModuleGeneratorScalar } from './Scalar.js'
 
@@ -26,7 +27,7 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
     const referenceAssignments: ReferenceAssignments = []
 
     for (const [kindName, nodes] of kinds) {
-      code(title1(kindName))
+      code(Tex.title1(kindName))
       code()
       if (nodes.length === 0) {
         code(`// None of your ${kindName}s have custom scalars.`)
@@ -39,7 +40,7 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
       code()
     }
 
-    code(title1(`Reference Assignments`, `(avoids circular assignment issues)`))
+    code(Tex.title1(`Reference Assignments`, `(avoids circular assignment issues)`))
     code()
     if (referenceAssignments.length === 0) {
       code(`// None of your types have references to other non-scalar/enum types.`)
@@ -49,7 +50,7 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
     }
     code()
 
-    code(title1(`Index`))
+    code(Tex.title1(`Index`))
     code()
     code(`const $schemaDrivenDataMap: ${identifiers.$$Utilities}.SchemaDrivenDataMap =`)
     code(Code.termObject({
@@ -259,7 +260,7 @@ const ObjectType = createCodeGenerator<
               ofItemA[propertyNames.nt] = argType.name
               // For variables, we need to know the variable type to write it out, so we always need the inline type.
               if (config.runtimeFeatures.operationVariables) {
-                ofItemA[propertyNames.it] = inlineType(arg.type)
+                ofItemA[propertyNames.it] = renderInlineType(arg.type)
               }
             }
         }
@@ -384,19 +385,3 @@ const kindRenders = {
   OutputObject: ObjectType,
   Root: ObjectType,
 } satisfies KindRenderers
-
-const inlineType = (type: Grafaid.Schema.InputTypes): string => {
-  const [ofType, nonNull] = Grafaid.Schema.isNonNullType(type)
-    ? [type.ofType, true]
-    : [type, false]
-
-  const nullFlag = nonNull
-    ? nullabilityFlags.nonNull
-    : nullabilityFlags.nullable
-
-  const rest = Grafaid.Schema.isListType(ofType)
-    ? inlineType(ofType.ofType)
-    : ``
-
-  return `[${nullFlag.toString()}, ${rest}]`
-}

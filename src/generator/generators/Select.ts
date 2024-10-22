@@ -1,7 +1,8 @@
 // todo jsdoc
+import { Tex } from '../../lib/tex/__.js'
 import { identifiers } from '../helpers/identifiers.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
-import { renderName, title1, typeTitle } from '../helpers/render.js'
+import { renderName, typeTitle } from '../helpers/render.js'
 import { ModuleGeneratorData } from './Data.js'
 import { ModuleGeneratorSchema } from './Schema.js'
 import { ModuleGeneratorSelectionSets } from './SelectionSets.js'
@@ -15,12 +16,12 @@ export const ModuleGeneratorSelect = createModuleGenerator(
     code(`import type * as SelectionSets from './${ModuleGeneratorSelectionSets.name}.js'`)
     code()
 
-    code(title1(`Runtime`))
+    code(Tex.title1(`Runtime`))
     code(`import { createSelect } from '${config.paths.imports.grafflePackage.client}'`)
     code(`export const Select = createSelect(Data.Name)`)
     code()
 
-    code(title1(`Buildtime`))
+    code(Tex.title1(`Buildtime`))
     code()
 
     code(`export namespace Select {`)

@@ -1,4 +1,4 @@
-export type InputFields = Record<string, any>
+import type { InputFields } from './InputField.js'
 
 export interface InputObject<
   $Name extends string = string,

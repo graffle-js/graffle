@@ -15,8 +15,40 @@ export const indent = (size: number, value: string) => {
   return `${indentSpace}${value}`
 }
 
-export const borderThickFullWidth =
+export const borderThick =
   `==================================================================================================`
 
-export const borderThinFullWidth =
+export const borderThin =
   `--------------------------------------------------------------------------------------------------`
+
+export const title1 = (title: string, subTitle?: string) => {
+  const subTitle_ = subTitle ? `\n// ${centerTo(borderThick, subTitle)}` : ``
+  const titleDecorated = `
+    //
+    //
+    //
+    //
+    //
+    //
+    // ${borderThick}
+    // ${centerTo(borderThick, title)}${subTitle_}
+    // ${borderThick}
+    //
+    //
+    //
+    //
+    //
+    //
+  `
+  return titleDecorated
+}
+
+export const title2 = (title: string, subTitle?: string) => {
+  const subTitle_ = subTitle ? `\n// ${centerTo(borderThick, subTitle)}` : ``
+  const titleDecorated = `
+    // ${centerTo(borderThick, title)}${subTitle_}
+    // ${borderThin}
+    //
+  `
+  return titleDecorated
+}

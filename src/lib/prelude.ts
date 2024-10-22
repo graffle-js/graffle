@@ -617,3 +617,5 @@ export const isDate = (value: unknown): value is Date => {
 export const isObjectEmpty = (object: Record<string, unknown>) => {
   return Object.keys(object).length === 0
 }
+
+export const toArray = <T>(value: T | T[]) => Array.isArray(value) ? value : [value]

@@ -2,8 +2,9 @@
 import { pick } from 'es-toolkit'
 import { Grafaid } from '../../lib/grafaid/__.js'
 import { entries } from '../../lib/prelude.js'
+import { Tex } from '../../lib/tex/__.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
-import { renderName, title1 } from '../helpers/render.js'
+import { renderName } from '../helpers/render.js'
 import { ModuleGeneratorSelectionSets } from './SelectionSets.js'
 
 export const ModuleGeneratorMethodsSelect = createModuleGenerator(
@@ -15,10 +16,8 @@ export const ModuleGeneratorMethodsSelect = createModuleGenerator(
     code(`import type * as $SelectionSets from './${ModuleGeneratorSelectionSets.name}.js'`)
     code(`import type * as $Utilities from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'`)
     code()
-
-    code(title1(`Select Methods Interface`))
+    code(Tex.title1(`Select Methods Interface`))
     code()
-
     code(`export interface $MethodsSelect {`)
     for (const [_, kind] of kinds) {
       for (const type of kind) {
@@ -31,7 +30,7 @@ export const ModuleGeneratorMethodsSelect = createModuleGenerator(
 
     for (const [name, kind] of kinds) {
       const titleText = Grafaid.Schema.isRootType(kind[0]!) ? `Root` : name
-      code(title1(titleText))
+      code(Tex.title1(titleText))
       code()
 
       for (const graphqlType of kind) {

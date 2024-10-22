@@ -1,13 +1,19 @@
-import { entries, isString } from './prelude.js'
-import { linesPrepend, linesTrim } from './text.js'
+import { renderName } from '../generator/helpers/render.js'
+import { entries, isString, toArray } from './prelude.js'
+import { linesPrepend, linesTrim } from './tex/tex.js'
 
 type FieldTuple = [k: string, v: string | null, tsDoc?: string | null]
 
 export namespace Code {
-  export const field = (name: string, type: string, options?: { tsDoc?: string | null; optional?: boolean }) => {
+  export const field = (
+    name: string,
+    type: string | TermObject,
+    options?: { tsDoc?: string | null; optional?: boolean },
+  ) => {
     const tsDoc = options?.tsDoc ? TSDoc(options.tsDoc) + `\n` : ``
     const optional = options?.optional ? `?` : ``
-    return `${tsDoc}${name}${optional}: ${type}`
+    const type_ = typeof type === `string` ? type : termObject(type)
+    return `${tsDoc}${name}${optional}: ${type_}`
   }
   export interface DirectiveTermObject {
     $spread?: string[]
@@ -111,9 +117,9 @@ export namespace Code {
 
   // type
   export const nullable = (type: string) => `${type} | null`
-  export const union = (name: string, types: string[]) => `type ${name} =\n| ${Code.unionItems(types)}`
-  export const unionItems = (types: (string | null)[]) => types.filter(_ => _ !== null).join(`\n| `)
-  export const tuple = (types: string[]) => termList(types)
+  export const union = (name: string, types: string[]) => `type ${name} =\n| ${Code.tsUnionItems(types)}`
+  export const tsUnionItems = (types: (string | null)[]) => types.filter(_ => _ !== null).join(`\n| `)
+  export const tsTuple = (types: string[]) => termList(types)
   export const list = (type: string) => `Array<${type}>`
   export const optionalField = (name: string, type: string) => Code.field(name, type, { optional: true })
   export const fields = (fieldTypes: string[]) => fieldTypes.join(`\n`)
@@ -139,10 +145,45 @@ export namespace Code {
       ),
     )
   }
-  export const type = (name: string, type: string) => `type ${name} = ${type}`
-  export const interface$ = (name: string, object: string) => `interface ${name} ${object}`
-  export const export$ = (thing: string) => `export ${thing}`
-  export const namespace = (name: string, content: string) => `namespace ${name} ${Code.object(content)}`
+
+  export const tsType = (name: string, type: string | TermObject) => {
+    const type_ = typeof type === `string` ? type : termObject(type)
+    return `type ${renderName(name)} = ${type_}`
+  }
+
+  type TypeParametersInput = string | null | (string | null)[]
+
+  const tsTypeParameters = (typeParameters: TypeParametersInput): string => {
+    if (typeParameters === null) return ``
+    if (Array.isArray(typeParameters) && typeParameters.length === 0) return ``
+    return `<${toArray(typeParameters).filter(_ => _ !== null).join(`, `)}>`
+  }
+
+  type ExtendsClauseInput = string | null | (string | null)[]
+
+  export const tsInterface = (
+    name: string,
+    typeParameters: TypeParametersInput,
+    extendsClause: ExtendsClauseInput,
+    fields: string | TermObject,
+  ) => {
+    const typeParametersClause = tsTypeParameters(typeParameters)
+    const extendsClause_ = extendsClause === null
+      ? ``
+      : ` extends ${toArray(extendsClause).filter(_ => _ !== null).join(`, `)}`
+
+    const block = typeof fields === `string` ? `{${fields}}` : termObject(fields)
+    const name_ = renderName(name)
+    return `interface ${name_} ${typeParametersClause} ${extendsClause_} ${block}`
+  }
+
+  export const esmExport = (thing: string) => {
+    return `export ${thing}`
+  }
+
+  export const tsNamespace = (name: string, content: string) => {
+    return `namespace ${renderName(name)} ${Code.object(content)}`
+  }
   // term or type
   export const propertyAccess = (object: string, name: string) => `${object}.${name}`
   export const string = (str: string) => `"${str}"`

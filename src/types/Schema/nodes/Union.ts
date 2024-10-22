@@ -7,16 +7,6 @@ export type Union<
   kind: `Union`
   name: $Name
   members: $Members
+  membersUnion: $Members[number]
+  membersIndex: Record<$Members[number]['name'], $Members[number]>
 }
-
-export const Union = <
-  $Name extends string,
-  $Members extends [OutputObject, ...OutputObject[]],
->(
-  name: $Name,
-  members: $Members,
-): Union<$Name, $Members> => ({
-  kind: `Union`,
-  name,
-  members,
-})
