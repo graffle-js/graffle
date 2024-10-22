@@ -6,7 +6,7 @@ const { Layout } = DefaultTheme
 <template>
   <Layout>
     <template #nav-bar-content-before>
-      <div id="graffle-warning-message">Graffle is a work in progress. <a href="https://github.com/jasonkuhrt/graffle/discussions/1026">Learn more</a>.</div>
+      <div id="graffle-warning-message">Graffle is a work in progress. <a href="https://github.com/graffle-js/graffle/discussions/1026">Learn more</a>.</div>
     </template>
   </Layout>
 </template>

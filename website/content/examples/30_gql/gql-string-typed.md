@@ -20,7 +20,7 @@ const graffle = Graffle.create({
  * @remarks Typically this type would come from your code generation tool.
  *
  * @see https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#documentmode
- * @see https://github.com/jasonkuhrt/graffle/issues/997
+ * @see https://github.com/graffle-js/graffle/issues/997
  */
 type Document = TypedDocument.String<
   {

@@ -133,7 +133,7 @@ export default defineConfig({
       ...sidebars,
     },
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/jasonkuhrt/graffle' },
+      { icon: 'github', link: 'https://github.com/graffle-js/graffle' },
     ],
   },
 })

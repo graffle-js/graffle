@@ -6,7 +6,7 @@ Welcome to Graffle's collection of examples. Here you will find an assortment of
 
 2. [Twoslash](https://twoslash.netlify.app) is used so take advantage! Hover over code parts to see their types. This also gives you access to JSDoc which Graffle uses. You will find useful details in it, at a resolution that is not covered in the website docs.
 
-3. The source code for all examples can be found in the Graffle repository [here](https://github.com/jasonkuhrt/graffle/tree/main/examples). You can try any example out locally instantly by simply running:
+3. The source code for all examples can be found in the Graffle repository [here](https://github.com/graffle-js/graffle/tree/main/examples). You can try any example out locally instantly by simply running:
 
    ```sh
    npx graffle try <example-slug>

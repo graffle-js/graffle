@@ -6,7 +6,7 @@ The `$batch` method appears on the client interface for every root type in the G
 
 > [!Note]
 > This is not the same thing as [request batching](https://the-guild.dev/graphql/yoga-server/docs/features/request-batching).
-> That is a feature [Graffle does not yet support](https://github.com/jasonkuhrt/graffle/issues/1017).
+> That is a feature [Graffle does not yet support](https://github.com/graffle-js/graffle/issues/1017).
 
 For example the [pokemon schema](../../examples/01_about/pokemon-schema.md) has these two root fields:
 
