@@ -23,14 +23,14 @@ const pokemons = await graffle.query.pokemons({
   birthday: true,
 })
 
-console.log(`pokemons[0].birthday instanceof Date = ${String(pokemons?.[0]?.birthday instanceof Date)}`)
+console.log(pokemons?.[0]?.birthday instanceof Date)
 console.log(pokemons)
 ```
 <!-- dprint-ignore-end -->
 
 <!-- dprint-ignore-start -->
 ```txt
-pokemons[0].birthday instanceof Date = true
+true
 ```
 <!-- dprint-ignore-end -->
 <!-- dprint-ignore-start -->
