@@ -22,5 +22,5 @@ const pokemons = await graffle.query.pokemons({
   birthday: true,
 })
 
-show(`pokemons[0].birthday instanceof Date = ${String(pokemons?.[0]?.birthday instanceof Date)}`) // eslint-disable-line
+show(`pokemons[0].birthday instanceof Date = ${String(pokemons?.[0]?.birthday instanceof Date)}`)
 show(pokemons)

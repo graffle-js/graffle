@@ -3,7 +3,7 @@ import tsEslint from 'typescript-eslint'
 
 export default tsEslint.config({
   ignores: [
-    'examples/55_document-buildergenerated_document__document.ts',
+    'examples/35_custom-scalar/custom-scalar.ts',
     'eslint.config.js',
     'vite.config.ts',
     'vitest*.config.ts',
