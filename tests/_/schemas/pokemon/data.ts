@@ -101,10 +101,7 @@ export namespace DatabaseServer {
     hp: number
     attack: number
     defense: number
-    /**
-     * Milliseconds since Unix epoch.
-     */
-    birthday: number
+    birthday: Date
     trainerId: string | null // Nullable, as a Pokémon may not be captured by a trainer
   }
 
@@ -164,12 +161,12 @@ export namespace DatabaseServer {
 
     // dprint-ignore
     database.pokemon.push(
-      { id: `1`, name: `Pikachu`, type: `electric`, hp: 35, attack: 55, defense: 40, trainerId: `1`, birthday: new Date(Date.UTC(1850, 0, 1)).getTime(), kind: `Pokemon` },
-      { id: `2`, name: `Charizard`, type: `fire`, hp: 78, attack: 84, defense: 78, trainerId: `1`, birthday: new Date(Date.now() - day * 5).getTime(), kind: `Pokemon` },
-      { id: `3`, name: `Squirtle`, type: `water`, hp: 44, attack: 48, defense: 65, trainerId: `2`, birthday: new Date(Date.UTC(1910, 0, 1)).getTime(), kind: `Pokemon` },
-      { id: `4`, name: `Bulbasaur`, type: `grass`, hp: 45, attack: 49, defense: 49, trainerId: null, birthday: new Date(Date.UTC(2000, 0, 1)).getTime(), kind: `Pokemon` },
-      { id: `5`, name: `Caterpie`, type: `bug`, hp: 45, attack: 30, defense: 35, trainerId: null, birthday: new Date(Date.UTC(2000, 0, 1)).getTime(), kind: `Pokemon` },
-      { id: `6`, name: `Weedle`, type: `bug`, hp: 40, attack: 35, defense: 50, trainerId: null, birthday: new Date(Date.UTC(2000, 0, 1)).getTime(), kind: `Pokemon` },
+      { id: `1`, name: `Pikachu`, type: `electric`, hp: 35, attack: 55, defense: 40, trainerId: `1`, birthday: new Date(Date.UTC(1850, 0, 1)), kind: `Pokemon` },
+      { id: `2`, name: `Charizard`, type: `fire`, hp: 78, attack: 84, defense: 78, trainerId: `1`, birthday: new Date(Date.now() - day * 5), kind: `Pokemon` },
+      { id: `3`, name: `Squirtle`, type: `water`, hp: 44, attack: 48, defense: 65, trainerId: `2`, birthday: new Date(Date.UTC(1910, 0, 1)), kind: `Pokemon` },
+      { id: `4`, name: `Bulbasaur`, type: `grass`, hp: 45, attack: 49, defense: 49, trainerId: null, birthday: new Date(Date.UTC(2000, 0, 1)), kind: `Pokemon` },
+      { id: `5`, name: `Caterpie`, type: `bug`, hp: 45, attack: 30, defense: 35, trainerId: null, birthday: new Date(Date.UTC(2000, 0, 1)), kind: `Pokemon` },
+      { id: `6`, name: `Weedle`, type: `bug`, hp: 40, attack: 35, defense: 50, trainerId: null, birthday: new Date(Date.UTC(2000, 0, 1)), kind: `Pokemon` },
       
     )
 

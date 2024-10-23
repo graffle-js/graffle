@@ -42,7 +42,7 @@ const String = $Scalar.String
 //
 //
 
-// None of your ScalarCustoms have custom scalars.
+const Date = 'Date'
 
 //
 //
@@ -93,16 +93,24 @@ const TrainerClass: $$Utilities.SchemaDrivenDataMap.Enum = {
 
 const DateFilter: $$Utilities.SchemaDrivenDataMap.InputObject = {
   n: 'DateFilter',
+  fcs: ['gte', 'lte'],
   f: {
-    gte: {},
-    lte: {},
+    gte: {
+      nt: Date,
+    },
+    lte: {
+      nt: Date,
+    },
   },
 }
 
 const PokemonFilter: $$Utilities.SchemaDrivenDataMap.InputObject = {
   n: 'PokemonFilter',
+  fcs: ['birthday'],
   f: {
-    birthday: {},
+    birthday: {
+      // nt: DateFilter, <-- Assigned later to avoid potential circular dependency.
+    },
     name: {},
   },
 }
@@ -210,7 +218,9 @@ const Patron: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 const Pokemon: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     attack: {},
-    birthday: {},
+    birthday: {
+      nt: Date,
+    },
     defense: {},
     hp: {},
     id: {},
@@ -253,7 +263,10 @@ const Trainer: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 
 const Being: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {},
+  f: {
+    ...Pokemon.f,
+    ...Trainer.f,
+  },
 }
 
 //
@@ -273,7 +286,11 @@ const Being: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 
 const Battle: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {},
+  f: {
+    ...BattleRoyale.f,
+    ...BattleTrainer.f,
+    ...BattleWild.f,
+  },
 }
 
 //
@@ -383,6 +400,7 @@ const Query: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 
+PokemonFilter.f![`birthday`]!.nt = DateFilter
 BattleRoyale.f[`combatants`]!.nt = CombatantMultiPokemon
 BattleRoyale.f[`winner`]!.nt = Trainer
 BattleTrainer.f[`combatant1`]!.nt = CombatantSinglePokemon
@@ -435,6 +453,7 @@ const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
     ID,
     Int,
     String,
+    Date,
     BattleWildResult,
     PokemonType,
     TrainerClass,

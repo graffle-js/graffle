@@ -351,6 +351,16 @@ console.log(data)
         possibleTypes: null
       },
       {
+        kind: 'SCALAR',
+        name: 'Date',
+        description: 'A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.This scalar is serialized to a string in ISO 8601 format and parsed from a string in ISO 8601 format.',
+        fields: null,
+        inputFields: null,
+        interfaces: null,
+        enumValues: null,
+        possibleTypes: null
+      },
+      {
         kind: 'INPUT_OBJECT',
         name: 'DateFilter',
         description: null,
@@ -359,13 +369,13 @@ console.log(data)
           {
             name: 'gte',
             description: null,
-            type: { kind: 'SCALAR', name: 'Float', ofType: null },
+            type: { kind: 'SCALAR', name: 'Date', ofType: null },
             defaultValue: null
           },
           {
             name: 'lte',
             description: null,
-            type: { kind: 'SCALAR', name: 'Float', ofType: null },
+            type: { kind: 'SCALAR', name: 'Date', ofType: null },
             defaultValue: null
           }
         ],
@@ -513,7 +523,7 @@ console.log(data)
             name: 'birthday',
             description: null,
             args: [],
-            type: { kind: 'SCALAR', name: 'Int', ofType: null },
+            type: { kind: 'SCALAR', name: 'Date', ofType: null },
             isDeprecated: false,
             deprecationReason: null
           },

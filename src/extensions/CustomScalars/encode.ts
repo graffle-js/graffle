@@ -35,7 +35,7 @@ const encodeInputFieldLike = (
   args: Record<string, any>,
   argName: any,
   argValue: any,
-  sddmNode: SchemaDrivenDataMap.InputLike,
+  sddmNode: SchemaDrivenDataMap.InputNodes,
   scalars: RegisteredScalars,
 ) => {
   /**

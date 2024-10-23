@@ -13,7 +13,7 @@ declare global {
         [Grafaid.Schema.RootTypeName.Query]?: SchemaDrivenDataMap.OutputObject
         [Grafaid.Schema.RootTypeName.Subscription]?: SchemaDrivenDataMap.OutputObject
       }
-      types: Record<string, NamedLike>
+      types: Record<string, NamedNodes>
       directives: Record<string, SchemaDrivenDataMap.ArgumentsOrInputObjectFields>
     }
 
@@ -48,7 +48,7 @@ declare global {
          * - `CodecString` when customScalars enabled and this field's named type is a custom scalar.
          * - `OutputObject` when customScalars enabled and this field's type contains custom scalars.
          */
-        nt?: OutputLike
+        nt?: OutputNodes
       }
 
       export interface ArgumentsOrInputObjectFields {
@@ -63,7 +63,7 @@ declare global {
         /**
          * Named type of this argument or input field. Only present when customScalars is enabled.
          */
-        nt?: InputLike
+        nt?: InputNodes
       }
 
       export interface InputObject {
@@ -127,7 +127,7 @@ export const isCustomScalarName = (value: unknown): value is CustomScalarName =>
 
 export const isScalar = Schema.Scalar.isScalar
 
-export const isScalarLike = (value: unknown): value is ScalarLike =>
+export const isScalarLike = (value: unknown): value is ScalarLikeNodes =>
   Schema.Scalar.isScalar(value) || isCustomScalarName(value)
 
 export const isOutputObject = (
@@ -146,7 +146,7 @@ export const nullabilityFlags = {
 // fixing this 1) means branding the data which means more bytes in the sddm
 // or 2) means using a different key hint like `if` for "input field".
 export const isInputObject = (
-  node?: InputLike,
+  node?: InputNodes,
 ): node is InputObject => {
   return node ? !isString(node) && propertyNames.f in node : false
 }
@@ -157,13 +157,13 @@ export const isOutputField = (
   return node ? !isString(node) && propertyNames.a in node : false
 }
 
-export type NamedLike = ScalarLike | OutputObject | Enum | InputObject
+export type NamedNodes = ScalarLikeNodes | OutputObject | Enum | InputObject
 
-export type OutputLike = Scalar | OutputObject | Enum | CustomScalarName
+export type OutputNodes = Scalar | OutputObject | Enum | CustomScalarName
 
-export type ScalarLike = Scalar | CustomScalarName
+export type ScalarLikeNodes = Scalar | CustomScalarName
 
-export type InputLike = ScalarLike | InputObject | Enum
+export type InputNodes = ScalarLikeNodes | InputObject | Enum
 
 export type Node =
   | OutputObject

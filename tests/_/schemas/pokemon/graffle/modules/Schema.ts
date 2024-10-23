@@ -554,7 +554,7 @@ export namespace Schema {
       name: 'birthday'
       arguments: {}
       inlineType: [0]
-      namedType: $$NamedTypes.$$Int
+      namedType: $$NamedTypes.$$Date
     }
 
     export interface defense extends $.OutputField {
@@ -696,13 +696,13 @@ export namespace Schema {
     export interface gte extends $.InputField {
       name: 'gte'
       inlineType: [0]
-      namedType: $$NamedTypes.$$Float
+      namedType: $$NamedTypes.$$Date
     }
 
     export interface lte extends $.InputField {
       name: 'lte'
       inlineType: [0]
-      namedType: $$NamedTypes.$$Float
+      namedType: $$NamedTypes.$$Date
     }
   }
 
@@ -925,6 +925,12 @@ export namespace Schema {
   //
   //
 
+  //                                                Date
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export type Date = $Scalar.Date
+
   //
   //
   //
@@ -1014,6 +1020,7 @@ export namespace Schema {
     export type $$BattleWildResult = BattleWildResult
     export type $$PokemonType = PokemonType
     export type $$TrainerClass = TrainerClass
+    export type $$Date = Date
     export type $$Boolean = Boolean
     export type $$Float = Float
     export type $$ID = ID

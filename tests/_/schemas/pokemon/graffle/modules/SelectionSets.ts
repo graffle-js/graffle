@@ -1,5 +1,6 @@
 import type { Select as $Select } from '../../../../../../src/entrypoints/schema.js'
 import type * as $$Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
+import type * as $Scalar from './Scalar.js'
 
 //
 //
@@ -419,9 +420,19 @@ export type TrainerClass =
 //
 
 export interface DateFilter<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
-  gte?: number | undefined | null
+  gte?:
+    | $$Utilities.Schema.Scalar.GetDecoded<
+      $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', $Scalars>
+    >
+    | undefined
+    | null
 
-  lte?: number | undefined | null
+  lte?:
+    | $$Utilities.Schema.Scalar.GetDecoded<
+      $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', $Scalars>
+    >
+    | undefined
+    | null
 }
 
 export interface PokemonFilter<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
@@ -1300,7 +1311,7 @@ export interface Pokemon<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = 
    */
   attack?: Pokemon.attack$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Pokemon.attack<$Scalars>>
   /**
-   * Select the `birthday` field on the `Pokemon` object. Its type is `Int` (a `ScalarStandard` kind of type).
+   * Select the `birthday` field on the `Pokemon` object. Its type is `Date` (a `ScalarCustom` kind of type).
    */
   birthday?: Pokemon.birthday$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Pokemon.birthday<$Scalars>>
   /**

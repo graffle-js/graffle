@@ -1,6 +1,7 @@
 import SchemaBuilder from '@pothos/core'
 import SimpleObjectsPlugin from '@pothos/plugin-simple-objects'
 import ZodPlugin from '@pothos/plugin-zod'
+import { DateTimeISOResolver } from 'graphql-scalars'
 import { DatabaseServer } from './data.js'
 
 export const builder = new SchemaBuilder<{
@@ -16,6 +17,8 @@ export const builder = new SchemaBuilder<{
 }>({
   plugins: [SimpleObjectsPlugin, ZodPlugin],
 })
+
+builder.addScalarType(`Date`, DateTimeISOResolver, {})
 
 const TrainerClass = builder.enumType(`TrainerClass`, { values: Object.values(DatabaseServer.TrainerClass) })
 
@@ -61,7 +64,7 @@ const Pokemon = builder.objectRef<DatabaseServer.Pokemon>(`Pokemon`).implement({
     hp: t.int({ resolve: (pokemon) => pokemon.hp }),
     attack: t.int({ resolve: (pokemon) => pokemon.attack }),
     defense: t.int({ resolve: (pokemon) => pokemon.defense }),
-    birthday: t.int({ resolve: (pokemon) => pokemon.birthday }),
+    birthday: t.field({ type: `Date`, resolve: (pokemon) => pokemon.birthday }),
     trainer: t.field({
       type: Trainer,
       nullable: true,
@@ -218,8 +221,8 @@ const StringFilter = builder.inputType(`StringFilter`, {
 
 const DateFilter = builder.inputType(`DateFilter`, {
   fields: (t) => ({
-    lte: t.float(),
-    gte: t.float(),
+    lte: t.field({ type: `Date` }),
+    gte: t.field({ type: `Date` }),
   }),
 })
 
@@ -242,8 +245,8 @@ builder.queryField(`pokemons`, (t) =>
       filter: t.arg({ type: PokemonFilter, required: false }),
     },
     type: [Pokemon],
-    resolve: (_, args, ctx) =>
-      DatabaseServer.tenant(ctx.tenant).pokemon.filter((p) => {
+    resolve: (_, args, ctx) => {
+      return DatabaseServer.tenant(ctx.tenant).pokemon.filter((p) => {
         if (args.filter?.name) {
           if (args.filter.name.contains) {
             return p.name.includes(args.filter.name.contains)
@@ -261,7 +264,8 @@ builder.queryField(`pokemons`, (t) =>
           }
         }
         return true
-      }),
+      })
+    },
   }))
 
 builder.queryField(`battles`, (t) =>
@@ -341,7 +345,7 @@ builder.mutationField(`addPokemon`, (t) =>
         attack: attack || 0,
         defense: defense || 0,
         trainerId: null,
-        birthday: new Date().getTime(),
+        birthday: new Date(),
       }
       DatabaseServer.tenant(ctx.tenant).pokemon.push(newPokemon)
       return newPokemon
