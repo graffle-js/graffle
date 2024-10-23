@@ -48,42 +48,36 @@ export namespace Select {
   export type Query<$SelectionSet extends SelectionSets.Query> = InferResult.Root<$SelectionSet, Schema, 'Query'>
   // OutputObject Types
   // ------------------
-  export type BattleRoyale<$SelectionSet extends SelectionSets.BattleRoyale> = InferResult.Object<
+  export type BattleRoyale<$SelectionSet extends SelectionSets.BattleRoyale> = InferResult.OutputObject<
     $SelectionSet,
     Schema,
     Schema['allTypes']['BattleRoyale']
   >
-  export type BattleTrainer<$SelectionSet extends SelectionSets.BattleTrainer> = InferResult.Object<
+  export type BattleTrainer<$SelectionSet extends SelectionSets.BattleTrainer> = InferResult.OutputObject<
     $SelectionSet,
     Schema,
     Schema['allTypes']['BattleTrainer']
   >
-  export type BattleWild<$SelectionSet extends SelectionSets.BattleWild> = InferResult.Object<
+  export type BattleWild<$SelectionSet extends SelectionSets.BattleWild> = InferResult.OutputObject<
     $SelectionSet,
     Schema,
     Schema['allTypes']['BattleWild']
   >
-  export type CombatantMultiPokemon<$SelectionSet extends SelectionSets.CombatantMultiPokemon> = InferResult.Object<
-    $SelectionSet,
-    Schema,
-    Schema['allTypes']['CombatantMultiPokemon']
-  >
-  export type CombatantSinglePokemon<$SelectionSet extends SelectionSets.CombatantSinglePokemon> = InferResult.Object<
-    $SelectionSet,
-    Schema,
-    Schema['allTypes']['CombatantSinglePokemon']
-  >
-  export type Patron<$SelectionSet extends SelectionSets.Patron> = InferResult.Object<
+  export type CombatantMultiPokemon<$SelectionSet extends SelectionSets.CombatantMultiPokemon> =
+    InferResult.OutputObject<$SelectionSet, Schema, Schema['allTypes']['CombatantMultiPokemon']>
+  export type CombatantSinglePokemon<$SelectionSet extends SelectionSets.CombatantSinglePokemon> =
+    InferResult.OutputObject<$SelectionSet, Schema, Schema['allTypes']['CombatantSinglePokemon']>
+  export type Patron<$SelectionSet extends SelectionSets.Patron> = InferResult.OutputObject<
     $SelectionSet,
     Schema,
     Schema['allTypes']['Patron']
   >
-  export type Pokemon<$SelectionSet extends SelectionSets.Pokemon> = InferResult.Object<
+  export type Pokemon<$SelectionSet extends SelectionSets.Pokemon> = InferResult.OutputObject<
     $SelectionSet,
     Schema,
     Schema['allTypes']['Pokemon']
   >
-  export type Trainer<$SelectionSet extends SelectionSets.Trainer> = InferResult.Object<
+  export type Trainer<$SelectionSet extends SelectionSets.Trainer> = InferResult.OutputObject<
     $SelectionSet,
     Schema,
     Schema['allTypes']['Trainer']

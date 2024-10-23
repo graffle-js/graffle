@@ -17,7 +17,8 @@ import { getTsDocContents, renderDocumentation, renderName, typeTitle2SelectionS
 import type { KindRenderers } from '../helpers/types.js'
 import { ModuleGeneratorScalar } from './Scalar.js'
 
-const $ScalarsTypeParameter = `$Scalars extends ${identifiers.$$Utilities}.Schema.Scalar.ScalarMap = {}`
+const $ScalarsTypeParameter =
+  `$Scalars extends ${identifiers.$$Utilities}.Schema.Scalar.Registry = ${identifiers.$$Utilities}.Schema.Scalar.Registry.Empty`
 
 export const ModuleGeneratorSelectionSets = createModuleGenerator(
   `SelectionSets`,

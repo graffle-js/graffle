@@ -52,10 +52,8 @@ export interface ClientContext {
   config: Config
   retry: Anyware.Extension2<RequestCore.Core, { retrying: true }> | null
   extensions: Extension[]
-  scalars: RegisteredScalars
+  scalars: Schema.Scalar.Registry
 }
-
-export type RegisteredScalars = Record<string, Schema.Scalar>
 
 export const createState = (stateWithoutConfig: StateWithoutConfig): ClientContext => {
   let config: Config | null

@@ -2,9 +2,10 @@ import { assertType, test } from 'vitest'
 import type { Date } from '../../../tests/_/fixtures/scalars.js'
 import { db } from '../../../tests/_/schemas/db.js'
 import type * as SelectionSets from '../../../tests/_/schemas/kitchen-sink/graffle/modules/SelectionSets.js'
+import type { Schema } from '../../types/Schema/__.js'
 
 type Q = SelectionSets.Query
-type QWithDate = SelectionSets.Query<{ Date: typeof Date }>
+type QWithDate = SelectionSets.Query<Schema.Scalar.Registry.AddScalar<Schema.Scalar.Registry.Empty, typeof Date>>
 
 // dprint-ignore
 test(`Query`, () => {

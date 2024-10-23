@@ -39,7 +39,7 @@ export const ModuleGeneratorSelect = createModuleGenerator(
     code(...config.schema.kindMap.OutputObject.map((type) => {
       return `export type ${type.name}<$SelectionSet extends SelectionSets.${
         renderName(type)
-      }> = InferResult.Object<$SelectionSet, ${identifiers.Schema}, ${identifiers.Schema}['allTypes']['${type.name}']>`
+      }> = InferResult.OutputObject<$SelectionSet, ${identifiers.Schema}, ${identifiers.Schema}['allTypes']['${type.name}']>`
     }))
 
     code(typeTitle(config, `Union`))

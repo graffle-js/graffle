@@ -2,6 +2,7 @@ import { CustomScalars } from '../../extensions/CustomScalars/CustomScalars.js'
 import type { ConfigManager } from '../../lib/config-manager/__.js'
 import type { Fluent } from '../../lib/fluent/__.js'
 import { proxyGet } from '../../lib/prelude.js'
+import { Schema } from '../../types/Schema/__.js'
 import { type UseFn, useProperties } from './extension/use.js'
 import { type ClientContext, createState, type FnParametersProperty, type StateWithoutConfig } from './fluent.js'
 import { type FnGql, gqlProperties } from './gql/gql.js'
@@ -56,7 +57,7 @@ export const create: Create = (input) => {
   const initialState = createState({
     name: input.name ?? `default`, // todo import from shared constants
     extensions: [CustomScalars()],
-    scalars: {},
+    scalars: Schema.Scalar.Registry.empty,
     retry: null,
     input,
   })

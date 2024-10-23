@@ -14,7 +14,7 @@ import { ModuleGeneratorScalar } from './Scalar.js'
 export const ModuleGeneratorSchema = createModuleGenerator(
   `Schema`,
   ({ config, code }) => {
-    const kindMap = config.schema.kindMap // omit(config.schema.kindMap, [`ScalarCustom`, `ScalarStandard`])
+    const kindMap = config.schema.kindMap
     const kinds = entries(kindMap)
 
     // todo methods root is unused
@@ -317,7 +317,8 @@ export const SchemaGenerator = createCodeGenerator(
     code(
       Code.tsInterface$({
         name: identifiers.Schema,
-        typeParameters: `$Scalars extends ${identifiers.$$Utilities}.Schema.Scalar.ScalarMap = {}`,
+        typeParameters:
+          `$Scalars extends ${identifiers.$$Utilities}.Schema.Scalar.Registry = ${identifiers.$$Utilities}.Schema.Scalar.Registry.Empty`,
         extends: `$`,
         fields: schema,
       }),

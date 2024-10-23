@@ -1,11 +1,10 @@
 import { Schema } from '../../entrypoints/schema.js'
-import type { RegisteredScalars } from '../../layers/6_client/fluent.js'
 import { Grafaid } from '../../lib/grafaid/__.js'
 import { SchemaDrivenDataMap } from '../../types/SchemaDrivenDataMap/__.js'
 
 export const encodeRequestVariables = ({ sddm, request, scalars }: {
   sddm: SchemaDrivenDataMap
-  scalars: RegisteredScalars
+  scalars: Schema.Scalar.ScalarMap
   request: Grafaid.RequestAnalyzedDocumentNodeInput
 }): void => {
   const variableDefinitions = request.operation.variableDefinitions
@@ -36,7 +35,7 @@ const encodeInputFieldLike = (
   argName: any,
   argValue: any,
   sddmNode: SchemaDrivenDataMap.InputNodes,
-  scalars: RegisteredScalars,
+  scalars: Schema.Scalar.ScalarMap,
 ) => {
   /**
    * The SDDM for custom scalars can take two forms:

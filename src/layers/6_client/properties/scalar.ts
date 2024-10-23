@@ -16,8 +16,8 @@ export interface Scalar<$Args extends FnParametersProperty> {
   <$Scalar extends Schema.Scalar.Scalar>(scalar: $Scalar): Fluent.IncrementWithStateSet<ClientContext, $Args, {
     context: ConfigManager.SetAtPath<
       $Args['state']['context'],
-      ['scalars', $Scalar['name']],
-      $Scalar
+      ['scalars'],
+      Schema.Scalar.Registry.AddScalar<$Args['state']['context']['scalars'], $Scalar>
     >
     properties: $Args['state']['properties']
   }>
@@ -30,7 +30,10 @@ export const scalarProperties = defineProperties((builder, state) => {
         ...state,
         scalars: {
           ...state.scalars,
-          [scalar.name]: scalar,
+          map: {
+            ...state.scalars.map,
+            [scalar.name]: scalar,
+          },
         },
       })
     },

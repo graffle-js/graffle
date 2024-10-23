@@ -3,14 +3,17 @@ import type { db } from '../../../tests/_/schemas/db.js'
 import type { Schema } from '../../../tests/_/schemas/kitchen-sink/graffle/modules/Schema.js'
 import type * as SelectionSets from '../../../tests/_/schemas/kitchen-sink/graffle/modules/SelectionSets.js'
 import { assertEqual } from '../../lib/assert-equal.js'
+import type { Registry } from '../../types/Schema/nodes/Scalar/helpers.js'
 import type { InferResult } from './__.js'
 import type { PickSelectsPositiveIndicatorAndNotSelectAlias } from './OutputObject.js'
 
 type $<$SelectionSet extends SelectionSets.Query> = InferResult.Query<$SelectionSet, Schema>
 
-type $WithDate<$SelectionSet extends SelectionSets.Query<{ Date: typeof Date }>> = InferResult.Query<
+type $Registry = Registry.AddScalar<Registry.Empty, typeof Date>
+
+type $WithDate<$SelectionSet extends SelectionSets.Query<$Registry>> = InferResult.Query<
   $SelectionSet,
-  Schema<{ Date: typeof Date }>
+  Schema<$Registry>
 >
 
 // dprint-ignore

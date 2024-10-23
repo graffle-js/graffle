@@ -1,6 +1,5 @@
 import { Kind } from 'graphql'
 import { Schema } from '../../entrypoints/schema.js'
-import type { RegisteredScalars } from '../../layers/6_client/fluent.js'
 import type { Grafaid } from '../../lib/grafaid/__.js'
 import { SchemaDrivenDataMap } from '../../types/SchemaDrivenDataMap/__.js'
 
@@ -23,7 +22,7 @@ export const decodeResultData = ({ request, data, sddm, scalars }: {
   /**
    * Registered custom scalars.
    */
-  scalars: RegisteredScalars
+  scalars: Schema.Scalar.ScalarMap
 }) => {
   const sddmOutputObject = sddm.roots[request.rootType]
   if (!sddmOutputObject) return
@@ -54,7 +53,7 @@ const decodeResultValue = (input: {
   value: Value
   sddmNode: SchemaDrivenDataMap.OutputNodes
   documentPart: null | Grafaid.Document.SelectionSetNode
-  scalars: RegisteredScalars
+  scalars: Schema.Scalar.ScalarMap
 }): void => {
   const { parentContext, value, sddmNode, documentPart, scalars } = input
 

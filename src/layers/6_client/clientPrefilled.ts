@@ -1,6 +1,7 @@
 import type { HasRequiredKeys } from 'type-fest'
 import type { Exact } from '../../lib/prelude.js'
 import type { GlobalRegistry } from '../../types/GlobalRegistry/GlobalRegistry.js'
+import type { Schema } from '../../types/Schema/__.js'
 import type { SchemaDrivenDataMap } from '../../types/SchemaDrivenDataMap/__.js'
 import { type Client, create } from './client.js'
 import type { InputBase } from './Settings/Input.js'
@@ -36,7 +37,7 @@ export type CreatePrefilled =
 			input: $Input & { name: $Name, schemaMap: SchemaDrivenDataMap }
 			retry: null
 			extensions: []
-			scalars: {}
+			scalars: Schema.Scalar.Registry.Empty
 			// @ts-expect-error fixme - TS cannot figure out that name input meets constraint
 			config: NormalizeInput<$Input & { name: $Name, schemaMap: SchemaDrivenDataMap }>,
 		}>

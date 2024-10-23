@@ -15,9 +15,11 @@ type CasesDescriptiveQuery = [
 ]
 const testEachQueryWithDescription = test.for.bind(test)<CasesDescriptiveQuery>
 
+type QueryWithDate = SelectionSets.Query<Schema.Scalar.Registry.AddScalar<Schema.Scalar.Registry.Empty, typeof Date>>
+
 type CasesDescriptiveQueryWithCustomScalars = [
   description: string,
-  selectionSet: SelectionSets.Query<{ Date: typeof Date }>,
+  selectionSet: QueryWithDate,
   options?: { operationName?: string },
 ]
 const testEachQueryWithDescriptionWithCustomScalars = test.for.bind(test)<CasesDescriptiveQueryWithCustomScalars>

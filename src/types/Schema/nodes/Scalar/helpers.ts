@@ -2,16 +2,47 @@ import { String } from '../../StandardTypes/scalar.js'
 import type { Mapper } from './codec.js'
 import type { Scalar } from './Scalar.js'
 
-export type GetEncoded<$Scalar> = $Scalar extends Scalar<infer _, infer _, infer $Encoded> ? $Encoded : never
+// dprint-ignore
+export type GetEncoded<$Scalar extends Scalar> =
+  $Scalar extends Scalar<infer _, infer __, infer $Encoded>
+    ? $Encoded
+    : never
 
-export type GetDecoded<$Scalar> = $Scalar extends Scalar<infer _, infer $Decoded, infer __> ? $Decoded
-  : never
+// dprint-ignore
+export type GetDecoded<$Scalar extends Scalar> =
+  $Scalar extends Scalar<infer _, infer $Decoded, infer __>
+    ? $Decoded
+    : never
+
+export interface Registry {
+  map: ScalarMap
+  typesEncoded: any
+  typesDecoded: any
+}
+
+export namespace Registry {
+  export type Empty = {
+    map: {}
+    typesEncoded: never
+    typesDecoded: never
+  }
+
+  export const empty = {
+    map: {},
+  } as Registry.Empty
+
+  export type AddScalar<$Registry extends Registry, $Scalar extends Scalar> = {
+    map: $Registry['map'] & { [$Key in $Scalar['name']]: $Scalar }
+    typesEncoded: $Registry['typesEncoded'] | GetEncoded<$Scalar>
+    typesDecoded: $Registry['typesDecoded'] | GetDecoded<$Scalar>
+  }
+}
 
 export type ScalarMap = Record<string, Scalar>
 
 // dprint-ignore
-export type LookupCustomScalarOrFallbackToString<$Name extends string, $Scalars extends ScalarMap> =
-  $Name extends keyof $Scalars ? $Scalars[$Name] : String
+export type LookupCustomScalarOrFallbackToString<$Name extends string, $Scalars extends Registry> =
+  $Name extends keyof $Scalars['map'] ? $Scalars['map'][$Name] : String
 
 export const lookupCustomScalarOrFallbackToString = (scalars: ScalarMap, name: string): Scalar => {
   const scalar = scalars[name]

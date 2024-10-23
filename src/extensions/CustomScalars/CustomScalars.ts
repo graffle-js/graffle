@@ -10,7 +10,7 @@ export const CustomScalars = () =>
     // documentNode: true,
     onRequest: (async ({ pack }) => {
       const sddm = pack.input.state.config.schemaMap
-      const scalars = pack.input.state.scalars
+      const scalars = pack.input.state.scalars.map
       if (!sddm) return pack()
 
       const request = normalizeRequestToNode(pack.input.request)

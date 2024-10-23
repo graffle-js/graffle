@@ -6,10 +6,15 @@ import type { Graffle } from '../../../tests/_/schemas/kitchen-sink/graffle/__.j
 import { Select } from '../../documentBuilder/Select/__.js'
 import { SelectionSetGraphqlMapper } from '../../documentBuilder/SelectGraphQLMapper/__.js'
 import { Grafaid } from '../../lib/grafaid/__.js'
+import type { Schema } from '../../types/Schema/__.js'
+
+type QueryWithDate = Graffle.SelectionSets.Query<
+  Schema.Scalar.Registry.AddScalar<Schema.Scalar.Registry.Empty, typeof Date>
+>
 
 type TestCase = [
   describe: string,
-  query: Graffle.SelectionSets.Query<{ Date: typeof Date }>,
+  query: QueryWithDate,
   responseData: object,
   expectedData: object,
 ]

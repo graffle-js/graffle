@@ -14,7 +14,7 @@ import type { Mutation, Query, RootType, Subscription } from './StandardTypes/ob
  */
 export interface Schema<
   $Extensions extends GlobalRegistry.TypeExtensions = GlobalRegistry.TypeExtensions,
-  $Scalars extends Scalar.ScalarMap = Scalar.ScalarMap,
+  $Scalars extends Scalar.Registry = Scalar.Registry,
 > {
   name: GlobalRegistry.ClientNames
   RootTypesPresent: ('Query' | 'Mutation' | 'Subscription')[]
