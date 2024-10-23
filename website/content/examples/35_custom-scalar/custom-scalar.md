@@ -9,17 +9,14 @@ have arguments and data automatically encoded and decoded respectively.
 
 <!-- dprint-ignore-start -->
 ```ts twoslash
-import { Graffle } from 'graffle/__Graffle'
 import { Pokemon } from './pokemon/__.js'
 
 const graffle = Pokemon
   .create()
-  .scalar(Graffle.Scalars.create(`Date`, {
-    encode: (value: globalThis.Date) => value.toISOString(),
-    decode: (value: string) => {
-      return new globalThis.Date(value)
-    },
-  }))
+  .scalar(`Date`, {
+    decode: (value) => new globalThis.Date(value),
+    encode: (value) => value.toISOString(),
+  })
 
 const pokemons = await graffle.query.pokemons({
   $: { filter: { birthday: { lte: new Date(`1987-01-13`) } } },
