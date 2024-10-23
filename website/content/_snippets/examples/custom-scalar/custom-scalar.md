@@ -16,12 +16,12 @@ const graffle = Pokemon
   }))
 
 const pokemons = await graffle.query.pokemons({
-  $: { filter: { birthday: { gte: new Date(`1987-01-13`) } } },
+  $: { filter: { birthday: { lte: new Date(`1987-01-13`) } } },
   name: true,
   birthday: true,
 })
 
-console.log(`pokemons[0].birthday instanceof Date = ${String(pokemons?.[0]?.birthday instanceof Date)}`) // eslint-disable-line
+console.log(`pokemons[0].birthday instanceof Date = ${String(pokemons?.[0]?.birthday instanceof Date)}`)
 console.log(pokemons)
 ```
 <!-- dprint-ignore-end -->
@@ -34,10 +34,8 @@ pokemons[0].birthday instanceof Date = true
 <!-- dprint-ignore-start -->
 ```txt
 [
-  { name: 'Charizard', birthday: 2024-10-18T03:28:50.156Z },
-  { name: 'Bulbasaur', birthday: 2000-01-01T00:00:00.000Z },
-  { name: 'Caterpie', birthday: 2000-01-01T00:00:00.000Z },
-  { name: 'Weedle', birthday: 2000-01-01T00:00:00.000Z }
+  { name: 'Pikachu', birthday: 1850-01-01T00:00:00.000Z },
+  { name: 'Squirtle', birthday: 1910-01-01T00:00:00.000Z }
 ]
 ```
 <!-- dprint-ignore-end -->

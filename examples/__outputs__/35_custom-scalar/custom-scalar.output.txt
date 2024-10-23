@@ -2,8 +2,6 @@
 pokemons[0].birthday instanceof Date = true
 ---------------------------------------- SHOW ----------------------------------------
 [
-  { name: 'Charizard', birthday: 2024-10-18T03:28:50.156Z },
-  { name: 'Bulbasaur', birthday: 2000-01-01T00:00:00.000Z },
-  { name: 'Caterpie', birthday: 2000-01-01T00:00:00.000Z },
-  { name: 'Weedle', birthday: 2000-01-01T00:00:00.000Z }
+  { name: 'Pikachu', birthday: 1850-01-01T00:00:00.000Z },
+  { name: 'Squirtle', birthday: 1910-01-01T00:00:00.000Z }
 ]
