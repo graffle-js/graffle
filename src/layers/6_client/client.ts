@@ -1,4 +1,4 @@
-import { CustomScalars } from '../../extensions/CustomScalars/CustomScalars.js'
+import { CustomScalars } from '../../extensions/CustomScalars/CustomScalars.js' // todo
 import type { ConfigManager } from '../../lib/config-manager/__.js'
 import type { Fluent } from '../../lib/fluent/__.js'
 import { proxyGet } from '../../lib/prelude.js'
@@ -11,7 +11,7 @@ import type { FnInternal } from './properties/internal.js'
 import { type FnRetry, retryProperties } from './properties/retry.js'
 import { type ScalarFn, scalarProperties } from './properties/scalar.js'
 import { type FnWith, withProperties } from './properties/with.js'
-import { type FnRequestMethods, requestMethodsProperties } from './requestMethods/requestMethods.js'
+import { type FnRequestMethods, requestMethodsProperties } from './requestMethods/requestMethods.js' // todo
 import { type InputStatic } from './Settings/Input.js'
 import { type NormalizeInput } from './Settings/InputToConfig.js'
 

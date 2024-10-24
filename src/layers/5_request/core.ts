@@ -1,10 +1,8 @@
-import { type ExecutionResult } from 'graphql'
 import { SelectionSetGraphqlMapper } from '../../documentBuilder/SelectGraphQLMapper/__.js'
 import { Anyware } from '../../lib/anyware/__.js'
-import type { Grafaid } from '../../lib/grafaid/__.js'
+import { Grafaid } from '../../lib/grafaid/__.js'
 import { getOperationDefinition, OperationTypeToAccessKind, print } from '../../lib/grafaid/document.js'
-import { execute } from '../../lib/grafaid/execute.js'
-import { operationTypeToRootType } from '../../lib/grafaid/graphql.js'
+import { execute } from '../../lib/grafaid/execute.js' // todo
 import {
   getRequestEncodeSearchParameters,
   getRequestHeadersRec,
@@ -44,7 +42,7 @@ export const graffleMappedResultToRequest = (
   if (!operation_) throw new Error(`Unknown operation named "${String(operationName)}".`)
 
   return {
-    rootType: operationTypeToRootType[operation_.operation],
+    rootType: Grafaid.Document.OperationTypeToRootType[operation_.operation],
     operationName,
     operation: operation_,
     query: document,
@@ -52,7 +50,8 @@ export const graffleMappedResultToRequest = (
   }
 }
 
-export const anyware = Anyware.create<HookSequence, HookMap, ExecutionResult>({
+// todo execution result only if transport is memory
+export const anyware = Anyware.create<HookSequence, HookMap, Grafaid.FormattedExecutionResult>({
   // If core errors caused by an abort error then raise it as a direct error.
   // This is an expected possible error. Possible when user cancels a request.
   passthroughErrorWith: (signal) => {

@@ -1,13 +1,12 @@
 import type { Fluent } from '../../../lib/fluent/__.js'
 import type { Grafaid } from '../../../lib/grafaid/__.js'
-import { getOperationType } from '../../../lib/grafaid/document.js'
-import { operationTypeToRootType } from '../../../lib/grafaid/graphql.js'
+import { getOperationType, OperationTypeToRootType } from '../../../lib/grafaid/document.js'
 import {
   isTemplateStringArguments,
   joinTemplateStringArrayAndArgs,
   type TemplateStringsArguments,
 } from '../../../lib/template-string.js'
-import { RequestCore } from '../../5_request/__.js'
+import { RequestCore } from '../../5_request/__.js' // todo
 import type { InterfaceRaw } from '../../5_request/types.js'
 import { type ClientContext, defineTerminus } from '../fluent.js'
 import { handleOutput } from '../handleOutput.js'
@@ -55,7 +54,7 @@ export const gqlProperties = defineTerminus((state) => {
           if (!operationType) throw new Error(`Could not get operation type`)
 
           const analyzedRequest = {
-            rootType: operationTypeToRootType[operationType],
+            rootType: OperationTypeToRootType[operationType],
             operation: operationType,
             query,
             variables,

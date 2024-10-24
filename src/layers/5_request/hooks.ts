@@ -1,4 +1,4 @@
-import type { ExecutionResult, GraphQLSchema } from 'graphql'
+import type { FormattedExecutionResult, GraphQLSchema } from 'graphql'
 import type { Select } from '../../documentBuilder/Select/__.js'
 import type { Grafaid } from '../../lib/grafaid/__.js'
 import type { getRequestEncodeSearchParameters, postRequestEncodeBody } from '../../lib/grafaid/http/http.js'
@@ -96,7 +96,7 @@ export type HookDefUnpack<$Config extends Config> = {
     & TransportInput<
       $Config,
       { response: Response },
-      { result: ExecutionResult }
+      { result: FormattedExecutionResult }
     >
 }
 
@@ -108,7 +108,7 @@ export type HookDefDecode<$Config extends Config> = {
       $Config,
       { response: Response }
     >
-    & { result: ExecutionResult }
+    & { result: FormattedExecutionResult }
 }
 
 export type HookMap<$Config extends Config = Config> = {

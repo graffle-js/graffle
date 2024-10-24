@@ -80,7 +80,7 @@ export const createDocumentNormalizedFromRootTypeSelection = (
     operations: {
       [operationName ?? defaultOperationName]: {
         name: operationName ?? null,
-        type: Grafaid.RootTypeNameToOperationName[rootTypeName],
+        type: Grafaid.Document.RootTypeToOperationType[rootTypeName],
         rootType: rootTypeName,
         selectionSet,
       },
@@ -100,7 +100,7 @@ export const normalizeOrThrow = (document: DocumentObject): DocumentNormalized =
     [name, selectionSet],
   ): [name: string, OperationNormalized] => [name, {
     name,
-    type: Grafaid.RootTypeNameToOperationName[Grafaid.Schema.RootTypeName.Query],
+    type: Grafaid.Document.RootTypeToOperationType[Grafaid.Schema.RootTypeName.Query],
     rootType: Grafaid.Schema.RootTypeName.Query,
     selectionSet,
   }])
@@ -108,7 +108,7 @@ export const normalizeOrThrow = (document: DocumentObject): DocumentNormalized =
     [name, selectionSet],
   ): [name: string, OperationNormalized] => [name, {
     name,
-    type: Grafaid.RootTypeNameToOperationName[Grafaid.Schema.RootTypeName.Mutation],
+    type: Grafaid.Document.RootTypeToOperationType[Grafaid.Schema.RootTypeName.Mutation],
     rootType: Grafaid.Schema.RootTypeName.Mutation,
     selectionSet,
   }])

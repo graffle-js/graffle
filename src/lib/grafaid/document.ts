@@ -9,7 +9,6 @@ import {
   type FragmentSpreadNode,
   type InlineFragmentNode,
   type IntValueNode,
-  Kind,
   type ListValueNode,
   type NamedTypeNode,
   type NameNode,
@@ -17,7 +16,6 @@ import {
   type ObjectFieldNode,
   type ObjectValueNode,
   type OperationDefinitionNode,
-  OperationTypeNode,
   parse,
   print as graphqlPrint,
   type SelectionSetNode,
@@ -29,7 +27,10 @@ import {
 } from 'graphql'
 import type { HasRequiredKeys } from 'type-fest'
 import { isString } from '../prelude.js'
+import { Kind } from './document/kind.js'
+import { OperationTypeNode } from './document/OperationTypeNode.js'
 import type { RequestDocumentNodeInput, RequestInput } from './graphql.js'
+import { RootTypeName } from './schema/schema.js'
 import { TypedDocument } from './typed-document/__.js'
 
 export type {
@@ -50,7 +51,6 @@ export type {
   ObjectValueNode,
   OperationDefinitionNode,
   OperationTypeDefinitionNode,
-  OperationTypeNode,
   SelectionNode,
   SelectionSetNode,
   StringValueNode,
@@ -59,7 +59,9 @@ export type {
   VariableNode,
 } from 'graphql'
 
-export { Kind } from 'graphql'
+export { OperationTypeNode } from './document/OperationTypeNode.js'
+
+export { Kind } from './document/kind.js'
 
 export * as Typed from './typed-document/TypedDocument.js'
 
@@ -253,10 +255,23 @@ export const ObjectField: Constructor<ObjectFieldNode> = (objectField) => {
   }
 }
 
+export const RootTypeToOperationType = {
+  Query: OperationTypeNode.QUERY,
+  Mutation: OperationTypeNode.MUTATION,
+  Subscription: OperationTypeNode.SUBSCRIPTION,
+} as const
+export type RootTypeNameToOperationName = typeof RootTypeToOperationType
+
 export const OperationTypeToAccessKind = {
   query: `read`,
   mutation: `write`,
   subscription: `read`,
+} as const
+
+export const OperationTypeToRootType = {
+  query: RootTypeName.Query,
+  mutation: RootTypeName.Mutation,
+  subscription: RootTypeName.Subscription,
 } as const
 
 export const print = (document: TypedDocument.TypedDocumentLike): string => {
@@ -291,6 +306,7 @@ const definedOperationPattern = new RegExp(`^\\b(${Object.values(OperationTypeNo
  * to avoid document encode/decode performance costs.
  */
 export const getOperationType = (request: RequestInput): OperationTypeNode | null => {
+  // return null
   const { operationName, query: document } = request
 
   const documentUntyped = TypedDocument.unType(document)

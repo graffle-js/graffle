@@ -1,18 +1,18 @@
 import type { GraphQLNamedType, GraphQLScalarType } from 'graphql'
-import {
-  isEnumType,
-  isInputObjectType,
-  isInterfaceType,
-  isObjectType,
-  isScalarType,
-  isUnionType,
-  OperationTypeNode,
-} from 'graphql'
+import { isEnumType, isInputObjectType, isInterfaceType, isObjectType, isScalarType, isUnionType } from 'graphql'
 import { casesExhausted } from '../prelude.js'
 import type { KindMap } from './schema/schema.js'
 import { isRootType, isScalarTypeCustom } from './schema/schema.js'
 
+export {
+  type ExecutionResult,
+  type FormattedExecutionResult,
+  GraphQLError,
+  type GraphQLFormattedError as FormattedExecutionResultError,
+} from 'graphql'
+
 export * from './_Nodes.js'
+
 export * from './request.js'
 
 export const StandardScalarTypeNames = {
@@ -42,20 +42,6 @@ export const StandardScalarTypeTypeScriptMapping = {
   StandardScalarTypeNames,
   TypeScriptPrimitiveTypeNames
 >
-
-export const operationTypeToRootType = {
-  query: `Query`,
-  mutation: `Mutation`,
-  subscription: `Subscription`,
-} as const
-
-export const RootTypeNameToOperationName = {
-  Query: OperationTypeNode.QUERY,
-  Mutation: OperationTypeNode.MUTATION,
-  Subscription: OperationTypeNode.SUBSCRIPTION,
-} as const
-
-export type RootTypeNameToOperationName = typeof RootTypeNameToOperationName
 
 export const isStandardScalarType = (type: GraphQLScalarType) => {
   return type.name in StandardScalarTypeNames

@@ -1,5 +1,6 @@
 import type { GraphQLError } from 'graphql'
 import { Errors } from '../../lib/errors/__.js'
+import type { Grafaid } from '../../lib/grafaid/__.js'
 import type { SomeObjectData } from '../../lib/grafaid/graphql.js'
 import type { GraphQLExecutionResultError } from '../../lib/grafaid/graphql.js'
 import {
@@ -32,7 +33,12 @@ export type ErrorsOther =
 export type GraffleExecutionResultEnvelope<$Config extends Config = Config> =
   // & ExecutionResult
   & {
-    errors?: ReadonlyArray<GraphQLError>
+    errors?: ReadonlyArray<
+      // formatted comes from http transport
+      | Grafaid.FormattedExecutionResultError
+      // unformatted comes from memory transport
+      | Grafaid.GraphQLError
+    >
     data?: SomeObjectData | null
     extensions?: ObjMap
   }
@@ -91,7 +97,7 @@ export const handleOutput = (
     const error = new Errors.ContextualAggregateError(
       `One or more errors in the execution result.`,
       {},
-      result.errors,
+      result.errors.map(e => e instanceof Error ? e : new Errors.ContextualError(e.message, e)),
     )
     if (isThrowExecution) throw error
     if (isReturnExecution) return error

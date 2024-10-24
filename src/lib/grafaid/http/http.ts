@@ -1,5 +1,4 @@
-import type { GraphQLFormattedError } from 'graphql'
-import { type ExecutionResult, GraphQLError } from 'graphql'
+import type { FormattedExecutionResult, GraphQLFormattedError } from 'graphql'
 import { CONTENT_TYPE_GQL, CONTENT_TYPE_JSON } from '../../http.js'
 import { isRecordLikeObject } from '../../prelude.js'
 import type { Variables } from '../graphql.js'
@@ -10,14 +9,10 @@ export interface RequestConfig {
   operationName?: string
 }
 
-export const parseExecutionResult = (result: unknown): ExecutionResult => {
+export const parseExecutionResult = (result: unknown): FormattedExecutionResult => {
   if (typeof result !== `object` || result === null) {
     throw new Error(`Invalid execution result: result is not object`)
   }
-
-  let errors = undefined
-  let data = undefined
-  let extensions = undefined
 
   if (`errors` in result) {
     if (
@@ -28,9 +23,11 @@ export const parseExecutionResult = (result: unknown): ExecutionResult => {
     ) {
       throw new Error(`Invalid execution result: errors is not array of formatted errors`) // prettier-ignore
     }
-    errors = result.errors.map((error: GraphQLFormattedError) =>
-      error instanceof GraphQLError ? error : new GraphQLError(error.message, error)
-    )
+    result.errors.forEach(maybeError => {
+      if (!isFormattedError(maybeError)) {
+        throw new Error(`Invalid value in errors array.`) // prettier-ignore
+      }
+    })
   }
 
   // todo add test coverage for case of null. @see https://github.com/graffle-js/graffle/issues/739
@@ -38,21 +35,15 @@ export const parseExecutionResult = (result: unknown): ExecutionResult => {
     if (!isRecordLikeObject(result.data) && result.data !== null) {
       throw new Error(`Invalid execution result: data is not plain object`) // prettier-ignore
     }
-    data = result.data
   }
 
   if (`extensions` in result) {
     if (!isRecordLikeObject(result.extensions)) {
       throw new Error(`Invalid execution result: extensions is not plain object`) // prettier-ignore
     }
-    extensions = result.extensions
   }
 
-  return {
-    data,
-    errors,
-    extensions,
-  }
+  return result
 }
 
 /**
@@ -93,3 +84,8 @@ export const postRequestEncodeBody = (input: RequestConfig): BodyInit => {
 }
 
 export type postRequestEncodeBody = typeof postRequestEncodeBody
+
+// todo make this more robust
+export const isFormattedError = (error: unknown): error is GraphQLFormattedError => {
+  return isRecordLikeObject(error) && `message` in error && typeof error[`message`] === `string`
+}

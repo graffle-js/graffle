@@ -30,8 +30,8 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
       export interface BuilderMethodsRoot<$Context extends ${identifiers.$$Utilities}.ClientContext> {
         ${
       config.schema.kindMap.Root.map(node => {
-        const operationName =
-          Grafaid.RootTypeNameToOperationName[node.name as keyof typeof Grafaid.RootTypeNameToOperationName]
+        const operationName = Grafaid.Document
+          .RootTypeToOperationType[node.name as keyof typeof Grafaid.Document.RootTypeToOperationType]
         return `${operationName}: ${node.name}Methods<$Context>`
       }).join(`\n`)
     }
