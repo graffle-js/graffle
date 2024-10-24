@@ -97,7 +97,11 @@ export const handleOutput = (
     const error = new Errors.ContextualAggregateError(
       `One or more errors in the execution result.`,
       {},
-      result.errors.map(e => e instanceof Error ? e : new Errors.ContextualError(e.message, e)),
+      result.errors.map(e => {
+        if (e instanceof Error) return e
+        const { message, ...context } = e
+        return new Errors.ContextualError(message, context)
+      }),
     )
     if (isThrowExecution) throw error
     if (isReturnExecution) return error

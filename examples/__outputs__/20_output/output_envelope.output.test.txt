@@ -10,8 +10,6 @@
       { name: 'Weedle' }
     ]
   },
-  errors: undefined,
-  extensions: undefined,
   response: Response {
     status: 200,
     statusText: 'OK',
