@@ -84,6 +84,7 @@
     "check:publint": "publint run --strict",
     "prepublishOnly": "pnpm build",
     "build:docs": "doctoc README.md --notitle && dprint fmt README.md",
+    "build:emit": "pnpm clean && pnpm tsc --noCheck --project tsconfig.build.json && chmod +x ./build/generator/cli/generate.js",
     "build": "pnpm clean && pnpm tsc --project tsconfig.build.json && chmod +x ./build/generator/cli/generate.js",
     "clean": "tsc --build --clean && rm -rf build",
     "test:unit": "vitest --exclude tests/examples",
