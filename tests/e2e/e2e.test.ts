@@ -87,3 +87,16 @@ test(`client uses dprint formatter if installed`, async ({ project }) => {
 
   await project.run`pnpm dprint check graffle/**/*`
 })
+
+test(`client uses prettier formatter if installed`, async ({ project }) => {
+  // await project.addDprintConfig()
+  const path = await project.addPokemonSchemaSDL()
+
+  await project.run`pnpm add --save-dev prettier`
+
+  const genResult = await project.run`pnpm graffle --schema ${path.relative} --format`
+  const genResultStdout = genResult.stdout as string
+  expect(genResultStdout.includes(`No TypeScript formatter found`)).toEqual(false)
+
+  await project.run`pnpm prettier --check graffle/**/*`
+})

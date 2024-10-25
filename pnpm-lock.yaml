@@ -135,6 +135,9 @@ importers:
       jsdom:
         specifier: ^25.0.1
         version: 25.0.1
+      prettier:
+        specifier: ^3.3.3
+        version: 3.3.3
       publint:
         specifier: ^0.2.12
         version: 0.2.12
