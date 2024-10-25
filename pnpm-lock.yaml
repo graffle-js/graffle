@@ -111,6 +111,9 @@ importers:
       execa:
         specifier: ^9.4.1
         version: 9.4.1
+      fs-jetpack:
+        specifier: ^5.1.0
+        version: 5.1.0
       get-port:
         specifier: ^7.1.0
         version: 7.1.0
@@ -2263,6 +2266,9 @@ packages:
 
   fs-jetpack@3.2.0:
     resolution: {integrity: sha512-LMUQxf85b3y/IuQZM9gz7bPMH60Y+NpulmHdhv8nHvgu6daYd7DiSZJSgiHKk1h6vfv1VCOqpdJcR+ThO7sFVA==}
+
+  fs-jetpack@5.1.0:
+    resolution: {integrity: sha512-Xn4fDhLydXkuzepZVsr02jakLlmoARPy+YWIclo4kh0GyNGUHnTqeH/w/qIsVn50dFxtp8otPL2t/HcPJBbxUA==}
 
   fs.realpath@1.0.0:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
@@ -6351,6 +6357,10 @@ snapshots:
     dependencies:
       minimatch: 3.1.2
       rimraf: 2.7.1
+
+  fs-jetpack@5.1.0:
+    dependencies:
+      minimatch: 5.1.6
 
   fs.realpath@1.0.0: {}
 

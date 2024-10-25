@@ -80,15 +80,10 @@ const createWithState = (
     ...scalarProperties(createWithState, state),
   }
 
-  // todo, these methods will become available even without a schema index present.
-  // The schema index nullability will affect more granular features within..
-  // So, we are going to need a different check than this one.
-
-  if (state.input.schemaMap) {
-    Object.assign(clientDirect, {
-      ...requestMethodsProperties(state),
-    })
-  }
+  // todo test that access to this works without generation in a unit like test. We discovered bug and covered this in an e2e test.
+  Object.assign(clientDirect, {
+    ...requestMethodsProperties(state),
+  })
 
   const clientProxy = proxyGet(clientDirect, ({ path, property }) => {
     // eslint-disable-next-line

@@ -52,3 +52,7 @@ export const title2 = (title: string, subTitle?: string) => {
   `
   return titleDecorated
 }
+
+export const title3 = (title: string) => {
+  return `// ----------------------------------------| ${title} |`
+}

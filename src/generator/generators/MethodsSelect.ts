@@ -1,7 +1,6 @@
 // todo jsdoc
-import { pick } from 'es-toolkit'
 import { Grafaid } from '../../lib/grafaid/__.js'
-import { entries } from '../../lib/prelude.js'
+import { entries, pick } from '../../lib/prelude.js'
 import { Tex } from '../../lib/tex/__.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 import { renderName } from '../helpers/render.js'

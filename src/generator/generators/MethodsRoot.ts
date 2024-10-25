@@ -10,7 +10,6 @@ import { ModuleGeneratorSelectionSets } from './SelectionSets.js'
 export const ModuleGeneratorMethodsRoot = createModuleGenerator(
   `MethodsRoot`,
   ({ config, code }) => {
-    code(`import { type Simplify } from 'type-fest'`)
     code(
       `import type * as ${identifiers.$$Utilities}  from '${config.paths.imports.grafflePackage.utilitiesForGenerated}';`,
     )
@@ -55,7 +54,7 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
     export interface ${node.name}Methods<$Context extends ${identifiers.$$Utilities}.ClientContext> {
       $batch: <$SelectionSet>(selectionSet: ${identifiers.$$Utilities}.Exact<$SelectionSet, SelectionSet.${node.name}<$Context['scalars']>>) =>
         Promise<
-          Simplify<
+          ${identifiers.$$Utilities}.Simplify<
             ${identifiers.$$Utilities}.HandleOutput<
               $Context,
               InferResult.${node.name}<$SelectionSet, ${identifiers.Schema}<$Context['scalars']>>
@@ -64,7 +63,7 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
         >
       __typename: () =>
         Promise<
-          Simplify<
+          ${identifiers.$$Utilities}.Simplify<
             ${identifiers.$$Utilities}.HandleOutputGraffleRootField<
               $Context,
               { __typename: '${node.name}' },
@@ -98,7 +97,7 @@ namespace Helpers {
   export const returnType = (rootName: string, fieldName: string, selectionSet: string) => {
     return `
       Promise<
-        Simplify<
+        ${identifiers.$$Utilities}.Simplify<
           ${identifiers.$$Utilities}.HandleOutputGraffleRootField<
             $Context,
             InferResult.${rootName}<{ ${fieldName}: ${selectionSet}}, ${identifiers.Schema}<$Context['scalars']>>,

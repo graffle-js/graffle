@@ -1,6 +1,5 @@
 import type { Select as $Select } from '../../../../../../src/entrypoints/schema.js'
 import type * as $$Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
-import type * as $Scalar from './Scalar.js'
 
 //
 //
@@ -18,12 +17,11 @@ import type * as $Scalar from './Scalar.js'
 //
 //
 
-// Prefix with $ because this is not a schema type. A user could have a schema type named "Document" that this would conflict with.
 export interface $Document<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
 > {
-  query?: Record<string, Query<$Scalars>>
-  mutation?: Record<string, Mutation<$Scalars>>
+  query?: Record<string, Query<_$Scalars>>
+  mutation?: Record<string, Mutation<_$Scalars>>
 }
 
 //
@@ -57,16 +55,16 @@ export interface $Document<
 // ----------------------------------------| Entrypoint Interface |
 
 export interface Mutation<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
 > {
   /**
    * Select the `id` field on the `Mutation` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
-  id?: Mutation.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Mutation.id<$Scalars>>
+  id?: Mutation.id$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Mutation.id<_$Scalars>>
   /**
    * Select the `idNonNull` field on the `Mutation` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
-  idNonNull?: Mutation.idNonNull$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Mutation.idNonNull<$Scalars>>
+  idNonNull?: Mutation.idNonNull$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Mutation.idNonNull<_$Scalars>>
 
   /**
    * Inline fragments for field groups.
@@ -77,8 +75,8 @@ export interface Mutation<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | Mutation$FragmentInline<$Scalars>
-    | Mutation$FragmentInline<$Scalars>[]
+    | Mutation$FragmentInline<_$Scalars>
+    | Mutation$FragmentInline<_$Scalars>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -91,18 +89,19 @@ export interface Mutation<
 }
 
 export interface Mutation$FragmentInline<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends Mutation<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {}
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends Mutation<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
 
 // ----------------------------------------| Fields |
 
 export namespace Mutation {
-  export type id<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type id<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
+    | id$SelectionSet<_$Scalars>
 
   export interface id$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -113,22 +112,22 @@ export namespace Mutation {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
+    | id$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type idNonNull<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > =
     | $Select.Indicator.NoArgsIndicator
-    | idNonNull$SelectionSet<$Scalars>
+    | idNonNull$SelectionSet<_$Scalars>
 
   export interface idNonNull$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -139,10 +138,10 @@ export namespace Mutation {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type idNonNull$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | idNonNull$SelectionSet<$Scalars>
+    | idNonNull$SelectionSet<_$Scalars>
   >
 }
 
@@ -160,261 +159,263 @@ export namespace Mutation {
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface Query<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> {
+export interface Query<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> {
   /**
    * Select the `InputObjectNested` field on the `Query` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
   InputObjectNested?:
-    | Query.InputObjectNested$Expanded<$Scalars>
-    | $Select.SelectAlias.SelectAlias<Query.InputObjectNested<$Scalars>>
+    | Query.InputObjectNested$Expanded<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.InputObjectNested<_$Scalars>>
   /**
    * Select the `InputObjectNestedNonNull` field on the `Query` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
   InputObjectNestedNonNull?:
-    | Query.InputObjectNestedNonNull<$Scalars>
-    | $Select.SelectAlias.SelectAlias<Query.InputObjectNestedNonNull<$Scalars>>
+    | Query.InputObjectNestedNonNull<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.InputObjectNestedNonNull<_$Scalars>>
   /**
    * Select the `abcEnum` field on the `Query` object. Its type is `ABCEnum` (a `Enum` kind of type).
    */
-  abcEnum?: Query.abcEnum$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.abcEnum<$Scalars>>
+  abcEnum?: Query.abcEnum$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Query.abcEnum<_$Scalars>>
   /**
    * Select the `argInputObjectCircular` field on the `Query` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   argInputObjectCircular?:
-    | Query.argInputObjectCircular$Expanded<$Scalars>
-    | $Select.SelectAlias.SelectAlias<Query.argInputObjectCircular<$Scalars>>
+    | Query.argInputObjectCircular$Expanded<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.argInputObjectCircular<_$Scalars>>
   /**
    * Select the `date` field on the `Query` object. Its type is `Date` (a `ScalarCustom` kind of type).
    */
-  date?: Query.date$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.date<$Scalars>>
+  date?: Query.date$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Query.date<_$Scalars>>
   /**
    * Select the `dateArg` field on the `Query` object. Its type is `Date` (a `ScalarCustom` kind of type).
    */
-  dateArg?: Query.dateArg$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.dateArg<$Scalars>>
+  dateArg?: Query.dateArg$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Query.dateArg<_$Scalars>>
   /**
    * Select the `dateArgInputObject` field on the `Query` object. Its type is `Date` (a `ScalarCustom` kind of type).
    */
   dateArgInputObject?:
-    | Query.dateArgInputObject$Expanded<$Scalars>
-    | $Select.SelectAlias.SelectAlias<Query.dateArgInputObject<$Scalars>>
+    | Query.dateArgInputObject$Expanded<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.dateArgInputObject<_$Scalars>>
   /**
    * Select the `dateArgList` field on the `Query` object. Its type is `Date` (a `ScalarCustom` kind of type).
    */
-  dateArgList?: Query.dateArgList$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.dateArgList<$Scalars>>
+  dateArgList?: Query.dateArgList$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Query.dateArgList<_$Scalars>>
   /**
    * Select the `dateArgNonNull` field on the `Query` object. Its type is `Date` (a `ScalarCustom` kind of type).
    */
-  dateArgNonNull?: Query.dateArgNonNull<$Scalars> | $Select.SelectAlias.SelectAlias<Query.dateArgNonNull<$Scalars>>
+  dateArgNonNull?: Query.dateArgNonNull<_$Scalars> | $Select.SelectAlias.SelectAlias<Query.dateArgNonNull<_$Scalars>>
   /**
    * Select the `dateArgNonNullList` field on the `Query` object. Its type is `Date` (a `ScalarCustom` kind of type).
    */
   dateArgNonNullList?:
-    | Query.dateArgNonNullList<$Scalars>
-    | $Select.SelectAlias.SelectAlias<Query.dateArgNonNullList<$Scalars>>
+    | Query.dateArgNonNullList<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.dateArgNonNullList<_$Scalars>>
   /**
    * Select the `dateArgNonNullListNonNull` field on the `Query` object. Its type is `Date` (a `ScalarCustom` kind of type).
    */
   dateArgNonNullListNonNull?:
-    | Query.dateArgNonNullListNonNull<$Scalars>
-    | $Select.SelectAlias.SelectAlias<Query.dateArgNonNullListNonNull<$Scalars>>
+    | Query.dateArgNonNullListNonNull<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.dateArgNonNullListNonNull<_$Scalars>>
   /**
    * Select the `dateInterface1` field on the `Query` object. Its type is `DateInterface1` (a `Interface` kind of type).
    */
   dateInterface1?:
-    | Query.dateInterface1$Expanded<$Scalars>
-    | $Select.SelectAlias.SelectAlias<Query.dateInterface1<$Scalars>>
+    | Query.dateInterface1$Expanded<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.dateInterface1<_$Scalars>>
   /**
    * Select the `dateList` field on the `Query` object. Its type is `Date` (a `ScalarCustom` kind of type).
    */
-  dateList?: Query.dateList$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.dateList<$Scalars>>
+  dateList?: Query.dateList$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Query.dateList<_$Scalars>>
   /**
    * Select the `dateListList` field on the `Query` object. Its type is `Date` (a `ScalarCustom` kind of type).
    */
-  dateListList?: Query.dateListList$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.dateListList<$Scalars>>
+  dateListList?: Query.dateListList$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Query.dateListList<_$Scalars>>
   /**
    * Select the `dateListNonNull` field on the `Query` object. Its type is `Date` (a `ScalarCustom` kind of type).
    */
   dateListNonNull?:
-    | Query.dateListNonNull$Expanded<$Scalars>
-    | $Select.SelectAlias.SelectAlias<Query.dateListNonNull<$Scalars>>
+    | Query.dateListNonNull$Expanded<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.dateListNonNull<_$Scalars>>
   /**
    * Select the `dateNonNull` field on the `Query` object. Its type is `Date` (a `ScalarCustom` kind of type).
    */
-  dateNonNull?: Query.dateNonNull$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.dateNonNull<$Scalars>>
+  dateNonNull?: Query.dateNonNull$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Query.dateNonNull<_$Scalars>>
   /**
    * Select the `dateObject1` field on the `Query` object. Its type is `DateObject1` (a `OutputObject` kind of type).
    */
-  dateObject1?: Query.dateObject1$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.dateObject1<$Scalars>>
+  dateObject1?: Query.dateObject1$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Query.dateObject1<_$Scalars>>
   /**
    * Select the `dateUnion` field on the `Query` object. Its type is `DateUnion` (a `Union` kind of type).
    */
-  dateUnion?: Query.dateUnion$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.dateUnion<$Scalars>>
+  dateUnion?: Query.dateUnion$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Query.dateUnion<_$Scalars>>
   /**
    * Select the `error` field on the `Query` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
-  error?: Query.error$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.error<$Scalars>>
+  error?: Query.error$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Query.error<_$Scalars>>
   /**
    * Select the `id` field on the `Query` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
-  id?: Query.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.id<$Scalars>>
+  id?: Query.id$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Query.id<_$Scalars>>
   /**
    * Select the `idNonNull` field on the `Query` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
-  idNonNull?: Query.idNonNull$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.idNonNull<$Scalars>>
+  idNonNull?: Query.idNonNull$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Query.idNonNull<_$Scalars>>
   /**
    * Select the `interface` field on the `Query` object. Its type is `Interface` (a `Interface` kind of type).
    */
-  interface?: Query.$interface$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.$interface<$Scalars>>
+  interface?: Query.$interface$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Query.$interface<_$Scalars>>
   /**
    * Select the `interfaceNonNull` field on the `Query` object. Its type is `Interface` (a `Interface` kind of type).
    */
   interfaceNonNull?:
-    | Query.interfaceNonNull$Expanded<$Scalars>
-    | $Select.SelectAlias.SelectAlias<Query.interfaceNonNull<$Scalars>>
+    | Query.interfaceNonNull$Expanded<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.interfaceNonNull<_$Scalars>>
   /**
    * Select the `interfaceWithArgs` field on the `Query` object. Its type is `Interface` (a `Interface` kind of type).
    */
   interfaceWithArgs?:
-    | Query.interfaceWithArgs<$Scalars>
-    | $Select.SelectAlias.SelectAlias<Query.interfaceWithArgs<$Scalars>>
+    | Query.interfaceWithArgs<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.interfaceWithArgs<_$Scalars>>
   /**
    * Select the `listInt` field on the `Query` object. Its type is `Int` (a `ScalarStandard` kind of type).
    */
-  listInt?: Query.listInt$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.listInt<$Scalars>>
+  listInt?: Query.listInt$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Query.listInt<_$Scalars>>
   /**
    * Select the `listIntNonNull` field on the `Query` object. Its type is `Int` (a `ScalarStandard` kind of type).
    */
   listIntNonNull?:
-    | Query.listIntNonNull$Expanded<$Scalars>
-    | $Select.SelectAlias.SelectAlias<Query.listIntNonNull<$Scalars>>
+    | Query.listIntNonNull$Expanded<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.listIntNonNull<_$Scalars>>
   /**
    * Select the `listListInt` field on the `Query` object. Its type is `Int` (a `ScalarStandard` kind of type).
    */
-  listListInt?: Query.listListInt$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.listListInt<$Scalars>>
+  listListInt?: Query.listListInt$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Query.listListInt<_$Scalars>>
   /**
    * Select the `listListIntNonNull` field on the `Query` object. Its type is `Int` (a `ScalarStandard` kind of type).
    */
   listListIntNonNull?:
-    | Query.listListIntNonNull$Expanded<$Scalars>
-    | $Select.SelectAlias.SelectAlias<Query.listListIntNonNull<$Scalars>>
+    | Query.listListIntNonNull$Expanded<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.listListIntNonNull<_$Scalars>>
   /**
    * Select the `lowerCaseUnion` field on the `Query` object. Its type is `lowerCaseUnion` (a `Union` kind of type).
    */
   lowerCaseUnion?:
-    | Query.lowerCaseUnion$Expanded<$Scalars>
-    | $Select.SelectAlias.SelectAlias<Query.lowerCaseUnion<$Scalars>>
+    | Query.lowerCaseUnion$Expanded<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.lowerCaseUnion<_$Scalars>>
   /**
    * Select the `object` field on the `Query` object. Its type is `Object1` (a `OutputObject` kind of type).
    */
-  object?: Query.$object$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.$object<$Scalars>>
+  object?: Query.$object$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Query.$object<_$Scalars>>
   /**
    * Select the `objectList` field on the `Query` object. Its type is `Object1` (a `OutputObject` kind of type).
    */
-  objectList?: Query.objectList$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.objectList<$Scalars>>
+  objectList?: Query.objectList$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Query.objectList<_$Scalars>>
   /**
    * Select the `objectListNonNull` field on the `Query` object. Its type is `Object1` (a `OutputObject` kind of type).
    */
   objectListNonNull?:
-    | Query.objectListNonNull$Expanded<$Scalars>
-    | $Select.SelectAlias.SelectAlias<Query.objectListNonNull<$Scalars>>
+    | Query.objectListNonNull$Expanded<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.objectListNonNull<_$Scalars>>
   /**
    * Select the `objectNested` field on the `Query` object. Its type is `ObjectNested` (a `OutputObject` kind of type).
    */
-  objectNested?: Query.objectNested$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.objectNested<$Scalars>>
+  objectNested?: Query.objectNested$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Query.objectNested<_$Scalars>>
   /**
    * Select the `objectNonNull` field on the `Query` object. Its type is `Object1` (a `OutputObject` kind of type).
    */
   objectNonNull?:
-    | Query.objectNonNull$Expanded<$Scalars>
-    | $Select.SelectAlias.SelectAlias<Query.objectNonNull<$Scalars>>
+    | Query.objectNonNull$Expanded<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.objectNonNull<_$Scalars>>
   /**
    * Select the `objectWithArgs` field on the `Query` object. Its type is `Object1` (a `OutputObject` kind of type).
    */
   objectWithArgs?:
-    | Query.objectWithArgs$Expanded<$Scalars>
-    | $Select.SelectAlias.SelectAlias<Query.objectWithArgs<$Scalars>>
+    | Query.objectWithArgs$Expanded<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.objectWithArgs<_$Scalars>>
   /**
    * Select the `result` field on the `Query` object. Its type is `Result` (a `Union` kind of type).
    */
-  result?: Query.result<$Scalars> | $Select.SelectAlias.SelectAlias<Query.result<$Scalars>>
+  result?: Query.result<_$Scalars> | $Select.SelectAlias.SelectAlias<Query.result<_$Scalars>>
   /**
    * Select the `resultNonNull` field on the `Query` object. Its type is `Result` (a `Union` kind of type).
    */
   resultNonNull?:
-    | Query.resultNonNull$Expanded<$Scalars>
-    | $Select.SelectAlias.SelectAlias<Query.resultNonNull<$Scalars>>
+    | Query.resultNonNull$Expanded<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.resultNonNull<_$Scalars>>
   /**
    * Select the `string` field on the `Query` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
-  string?: Query.$string$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.$string<$Scalars>>
+  string?: Query.$string$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Query.$string<_$Scalars>>
   /**
    * Select the `stringWithArgEnum` field on the `Query` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   stringWithArgEnum?:
-    | Query.stringWithArgEnum$Expanded<$Scalars>
-    | $Select.SelectAlias.SelectAlias<Query.stringWithArgEnum<$Scalars>>
+    | Query.stringWithArgEnum$Expanded<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.stringWithArgEnum<_$Scalars>>
   /**
    * Select the `stringWithArgInputObject` field on the `Query` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   stringWithArgInputObject?:
-    | Query.stringWithArgInputObject$Expanded<$Scalars>
-    | $Select.SelectAlias.SelectAlias<Query.stringWithArgInputObject<$Scalars>>
+    | Query.stringWithArgInputObject$Expanded<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.stringWithArgInputObject<_$Scalars>>
   /**
    * Select the `stringWithArgInputObjectRequired` field on the `Query` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   stringWithArgInputObjectRequired?:
-    | Query.stringWithArgInputObjectRequired<$Scalars>
-    | $Select.SelectAlias.SelectAlias<Query.stringWithArgInputObjectRequired<$Scalars>>
+    | Query.stringWithArgInputObjectRequired<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.stringWithArgInputObjectRequired<_$Scalars>>
   /**
    * Select the `stringWithArgs` field on the `Query` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   stringWithArgs?:
-    | Query.stringWithArgs$Expanded<$Scalars>
-    | $Select.SelectAlias.SelectAlias<Query.stringWithArgs<$Scalars>>
+    | Query.stringWithArgs$Expanded<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.stringWithArgs<_$Scalars>>
   /**
    * Select the `stringWithListArg` field on the `Query` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   stringWithListArg?:
-    | Query.stringWithListArg$Expanded<$Scalars>
-    | $Select.SelectAlias.SelectAlias<Query.stringWithListArg<$Scalars>>
+    | Query.stringWithListArg$Expanded<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.stringWithListArg<_$Scalars>>
   /**
    * Select the `stringWithListArgRequired` field on the `Query` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   stringWithListArgRequired?:
-    | Query.stringWithListArgRequired<$Scalars>
-    | $Select.SelectAlias.SelectAlias<Query.stringWithListArgRequired<$Scalars>>
+    | Query.stringWithListArgRequired<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.stringWithListArgRequired<_$Scalars>>
   /**
    * Select the `stringWithRequiredArg` field on the `Query` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   stringWithRequiredArg?:
-    | Query.stringWithRequiredArg<$Scalars>
-    | $Select.SelectAlias.SelectAlias<Query.stringWithRequiredArg<$Scalars>>
+    | Query.stringWithRequiredArg<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.stringWithRequiredArg<_$Scalars>>
   /**
    * Select the `unionFooBar` field on the `Query` object. Its type is `FooBarUnion` (a `Union` kind of type).
    */
-  unionFooBar?: Query.unionFooBar$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.unionFooBar<$Scalars>>
+  unionFooBar?: Query.unionFooBar$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Query.unionFooBar<_$Scalars>>
   /**
    * Select the `unionFooBarNonNull` field on the `Query` object. Its type is `FooBarUnion` (a `Union` kind of type).
    */
   unionFooBarNonNull?:
-    | Query.unionFooBarNonNull$Expanded<$Scalars>
-    | $Select.SelectAlias.SelectAlias<Query.unionFooBarNonNull<$Scalars>>
+    | Query.unionFooBarNonNull$Expanded<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.unionFooBarNonNull<_$Scalars>>
   /**
    * Select the `unionFooBarWithArgs` field on the `Query` object. Its type is `FooBarUnion` (a `Union` kind of type).
    */
   unionFooBarWithArgs?:
-    | Query.unionFooBarWithArgs$Expanded<$Scalars>
-    | $Select.SelectAlias.SelectAlias<Query.unionFooBarWithArgs<$Scalars>>
+    | Query.unionFooBarWithArgs$Expanded<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.unionFooBarWithArgs<_$Scalars>>
   /**
    * Select the `unionObject` field on the `Query` object. Its type is `ObjectUnion` (a `OutputObject` kind of type).
    */
-  unionObject?: Query.unionObject$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.unionObject<$Scalars>>
+  unionObject?: Query.unionObject$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Query.unionObject<_$Scalars>>
   /**
    * Select the `unionObjectNonNull` field on the `Query` object. Its type is `ObjectUnion` (a `OutputObject` kind of type).
    */
   unionObjectNonNull?:
-    | Query.unionObjectNonNull$Expanded<$Scalars>
-    | $Select.SelectAlias.SelectAlias<Query.unionObjectNonNull<$Scalars>>
+    | Query.unionObjectNonNull$Expanded<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.unionObjectNonNull<_$Scalars>>
 
   /**
    * Inline fragments for field groups.
@@ -425,8 +426,8 @@ export interface Query<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$U
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | Query$FragmentInline<$Scalars>
-    | Query$FragmentInline<$Scalars>[]
+    | Query$FragmentInline<_$Scalars>
+    | Query$FragmentInline<_$Scalars>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -439,31 +440,32 @@ export interface Query<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$U
 }
 
 export interface Query$FragmentInline<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends Query<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {}
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends Query<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
 
 // ----------------------------------------| Fields |
 
 export namespace Query {
   export type InputObjectNested<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > =
     | $Select.Indicator.NoArgsIndicator
-    | InputObjectNested$SelectionSet<$Scalars>
+    | InputObjectNested$SelectionSet<_$Scalars>
 
   export interface InputObjectNested$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {
     /**
      * Arguments for `InputObjectNested` field. No arguments are required so you may omit this.
      */
-    $?: InputObjectNested$Arguments<$Scalars>
+    $?: InputObjectNested$Arguments<_$Scalars>
   }
 
   export interface InputObjectNested$Arguments<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base {
-    input?: $NamedTypes.$InputObjectNested<$Scalars> | undefined | null
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
+    input?: $NamedTypes.$InputObjectNested<_$Scalars> | undefined | null
   }
 
   // --- expanded ---
@@ -474,31 +476,31 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type InputObjectNested$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | InputObjectNested$SelectionSet<$Scalars>
+    | InputObjectNested$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type InputObjectNestedNonNull<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = InputObjectNestedNonNull$SelectionSet<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = InputObjectNestedNonNull$SelectionSet<_$Scalars>
 
   export interface InputObjectNestedNonNull$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {
     /**
      * Arguments for `InputObjectNestedNonNull` field. All arguments are required so you must include this.
      */
-    $: InputObjectNestedNonNull$Arguments<$Scalars>
+    $: InputObjectNestedNonNull$Arguments<_$Scalars>
   }
 
   export interface InputObjectNestedNonNull$Arguments<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base {
-    input: $NamedTypes.$InputObjectNestedNonNull<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
+    input: $NamedTypes.$InputObjectNestedNonNull<_$Scalars>
   }
 
   // --- expanded ---
@@ -509,19 +511,19 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type InputObjectNestedNonNull$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
-    InputObjectNestedNonNull$SelectionSet<$Scalars>
+    InputObjectNestedNonNull$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type abcEnum<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type abcEnum<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | abcEnum$SelectionSet<$Scalars>
+    | abcEnum$SelectionSet<_$Scalars>
 
   export interface abcEnum$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -532,33 +534,33 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type abcEnum$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | abcEnum$SelectionSet<$Scalars>
+    | abcEnum$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type argInputObjectCircular<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > =
     | $Select.Indicator.NoArgsIndicator
-    | argInputObjectCircular$SelectionSet<$Scalars>
+    | argInputObjectCircular$SelectionSet<_$Scalars>
 
   export interface argInputObjectCircular$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {
     /**
      * Arguments for `argInputObjectCircular` field. No arguments are required so you may omit this.
      */
-    $?: argInputObjectCircular$Arguments<$Scalars>
+    $?: argInputObjectCircular$Arguments<_$Scalars>
   }
 
   export interface argInputObjectCircular$Arguments<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base {
-    input?: $NamedTypes.$InputObjectCircular<$Scalars> | undefined | null
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
+    input?: $NamedTypes.$InputObjectCircular<_$Scalars> | undefined | null
   }
 
   // --- expanded ---
@@ -569,20 +571,20 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type argInputObjectCircular$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | argInputObjectCircular$SelectionSet<$Scalars>
+    | argInputObjectCircular$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type date<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type date<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | date$SelectionSet<$Scalars>
+    | date$SelectionSet<_$Scalars>
 
   export interface date$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -593,33 +595,33 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type date$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | date$SelectionSet<$Scalars>
+    | date$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type dateArg<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type dateArg<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | dateArg$SelectionSet<$Scalars>
+    | dateArg$SelectionSet<_$Scalars>
 
   export interface dateArg$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {
     /**
      * Arguments for `dateArg` field. No arguments are required so you may omit this.
      */
-    $?: dateArg$Arguments<$Scalars>
+    $?: dateArg$Arguments<_$Scalars>
   }
 
   export interface dateArg$Arguments<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base {
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
     date?:
       | $$Utilities.Schema.Scalar.GetDecoded<
-        $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', $Scalars>
+        $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', _$Scalars>
       >
       | undefined
       | null
@@ -633,33 +635,33 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateArg$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | dateArg$SelectionSet<$Scalars>
+    | dateArg$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type dateArgInputObject<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > =
     | $Select.Indicator.NoArgsIndicator
-    | dateArgInputObject$SelectionSet<$Scalars>
+    | dateArgInputObject$SelectionSet<_$Scalars>
 
   export interface dateArgInputObject$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {
     /**
      * Arguments for `dateArgInputObject` field. No arguments are required so you may omit this.
      */
-    $?: dateArgInputObject$Arguments<$Scalars>
+    $?: dateArgInputObject$Arguments<_$Scalars>
   }
 
   export interface dateArgInputObject$Arguments<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base {
-    input?: $NamedTypes.$InputObject<$Scalars> | undefined | null
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
+    input?: $NamedTypes.$InputObject<_$Scalars> | undefined | null
   }
 
   // --- expanded ---
@@ -670,36 +672,36 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateArgInputObject$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | dateArgInputObject$SelectionSet<$Scalars>
+    | dateArgInputObject$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type dateArgList<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > =
     | $Select.Indicator.NoArgsIndicator
-    | dateArgList$SelectionSet<$Scalars>
+    | dateArgList$SelectionSet<_$Scalars>
 
   export interface dateArgList$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {
     /**
      * Arguments for `dateArgList` field. No arguments are required so you may omit this.
      */
-    $?: dateArgList$Arguments<$Scalars>
+    $?: dateArgList$Arguments<_$Scalars>
   }
 
   export interface dateArgList$Arguments<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base {
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
     date?:
       | Array<
         | $$Utilities.Schema.Scalar.GetDecoded<
-          $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', $Scalars>
+          $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', _$Scalars>
         >
         | undefined
         | null
@@ -716,32 +718,32 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateArgList$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | dateArgList$SelectionSet<$Scalars>
+    | dateArgList$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type dateArgNonNull<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = dateArgNonNull$SelectionSet<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = dateArgNonNull$SelectionSet<_$Scalars>
 
   export interface dateArgNonNull$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {
     /**
      * Arguments for `dateArgNonNull` field. All arguments are required so you must include this.
      */
-    $: dateArgNonNull$Arguments<$Scalars>
+    $: dateArgNonNull$Arguments<_$Scalars>
   }
 
   export interface dateArgNonNull$Arguments<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base {
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
     date: $$Utilities.Schema.Scalar.GetDecoded<
-      $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', $Scalars>
+      $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', _$Scalars>
     >
   }
 
@@ -753,32 +755,32 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateArgNonNull$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
-    dateArgNonNull$SelectionSet<$Scalars>
+    dateArgNonNull$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type dateArgNonNullList<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = dateArgNonNullList$SelectionSet<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = dateArgNonNullList$SelectionSet<_$Scalars>
 
   export interface dateArgNonNullList$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {
     /**
      * Arguments for `dateArgNonNullList` field. All arguments are required so you must include this.
      */
-    $: dateArgNonNullList$Arguments<$Scalars>
+    $: dateArgNonNullList$Arguments<_$Scalars>
   }
 
   export interface dateArgNonNullList$Arguments<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base {
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
     date: Array<
       | $$Utilities.Schema.Scalar.GetDecoded<
-        $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', $Scalars>
+        $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', _$Scalars>
       >
       | undefined
       | null
@@ -793,32 +795,32 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateArgNonNullList$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
-    dateArgNonNullList$SelectionSet<$Scalars>
+    dateArgNonNullList$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type dateArgNonNullListNonNull<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = dateArgNonNullListNonNull$SelectionSet<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = dateArgNonNullListNonNull$SelectionSet<_$Scalars>
 
   export interface dateArgNonNullListNonNull$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {
     /**
      * Arguments for `dateArgNonNullListNonNull` field. All arguments are required so you must include this.
      */
-    $: dateArgNonNullListNonNull$Arguments<$Scalars>
+    $: dateArgNonNullListNonNull$Arguments<_$Scalars>
   }
 
   export interface dateArgNonNullListNonNull$Arguments<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base {
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
     date: Array<
       | $$Utilities.Schema.Scalar.GetDecoded<
-        $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', $Scalars>
+        $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', _$Scalars>
       >
       | undefined
       | null
@@ -833,20 +835,20 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateArgNonNullListNonNull$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
-    dateArgNonNullListNonNull$SelectionSet<$Scalars>
+    dateArgNonNullListNonNull$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type dateInterface1<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = dateInterface1$SelectionSet<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = dateInterface1$SelectionSet<_$Scalars>
 
   export interface dateInterface1$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base, $NamedTypes.$DateInterface1<$Scalars> {}
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$DateInterface1<_$Scalars> {}
 
   // --- expanded ---
 
@@ -856,19 +858,21 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateInterface1$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
-    dateInterface1$SelectionSet<$Scalars>
+    dateInterface1$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type dateList<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type dateList<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > =
     | $Select.Indicator.NoArgsIndicator
-    | dateList$SelectionSet<$Scalars>
+    | dateList$SelectionSet<_$Scalars>
 
   export interface dateList$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -879,22 +883,22 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateList$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | dateList$SelectionSet<$Scalars>
+    | dateList$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type dateListList<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > =
     | $Select.Indicator.NoArgsIndicator
-    | dateListList$SelectionSet<$Scalars>
+    | dateListList$SelectionSet<_$Scalars>
 
   export interface dateListList$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -905,22 +909,22 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateListList$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | dateListList$SelectionSet<$Scalars>
+    | dateListList$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type dateListNonNull<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > =
     | $Select.Indicator.NoArgsIndicator
-    | dateListNonNull$SelectionSet<$Scalars>
+    | dateListNonNull$SelectionSet<_$Scalars>
 
   export interface dateListNonNull$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -931,22 +935,22 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateListNonNull$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | dateListNonNull$SelectionSet<$Scalars>
+    | dateListNonNull$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type dateNonNull<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > =
     | $Select.Indicator.NoArgsIndicator
-    | dateNonNull$SelectionSet<$Scalars>
+    | dateNonNull$SelectionSet<_$Scalars>
 
   export interface dateNonNull$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -957,21 +961,21 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateNonNull$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | dateNonNull$SelectionSet<$Scalars>
+    | dateNonNull$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type dateObject1<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = dateObject1$SelectionSet<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = dateObject1$SelectionSet<_$Scalars>
 
   export interface dateObject1$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base, $NamedTypes.$DateObject1<$Scalars> {}
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$DateObject1<_$Scalars> {}
 
   // --- expanded ---
 
@@ -981,20 +985,20 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateObject1$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
-    dateObject1$SelectionSet<$Scalars>
+    dateObject1$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type dateUnion<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = dateUnion$SelectionSet<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = dateUnion$SelectionSet<_$Scalars>
 
   export interface dateUnion$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base, $NamedTypes.$DateUnion<$Scalars> {}
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$DateUnion<_$Scalars> {}
 
   // --- expanded ---
 
@@ -1004,29 +1008,29 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateUnion$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
-    dateUnion$SelectionSet<$Scalars>
+    dateUnion$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type error<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type error<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | error$SelectionSet<$Scalars>
+    | error$SelectionSet<_$Scalars>
 
   export interface error$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {
     /**
      * Arguments for `error` field. No arguments are required so you may omit this.
      */
-    $?: error$Arguments<$Scalars>
+    $?: error$Arguments<_$Scalars>
   }
 
   export interface error$Arguments<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base {
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
     case?: string | undefined | null
   }
 
@@ -1038,20 +1042,20 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type error$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | error$SelectionSet<$Scalars>
+    | error$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type id<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type id<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
+    | id$SelectionSet<_$Scalars>
 
   export interface id$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -1062,22 +1066,22 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
+    | id$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type idNonNull<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > =
     | $Select.Indicator.NoArgsIndicator
-    | idNonNull$SelectionSet<$Scalars>
+    | idNonNull$SelectionSet<_$Scalars>
 
   export interface idNonNull$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -1088,21 +1092,21 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type idNonNull$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | idNonNull$SelectionSet<$Scalars>
+    | idNonNull$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type $interface<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = $interface$SelectionSet<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $interface$SelectionSet<_$Scalars>
 
   export interface $interface$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base, $NamedTypes.$Interface<$Scalars> {}
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$Interface<_$Scalars> {}
 
   // --- expanded ---
 
@@ -1112,20 +1116,20 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type $interface$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
-    $interface$SelectionSet<$Scalars>
+    $interface$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type interfaceNonNull<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = interfaceNonNull$SelectionSet<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = interfaceNonNull$SelectionSet<_$Scalars>
 
   export interface interfaceNonNull$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base, $NamedTypes.$Interface<$Scalars> {}
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$Interface<_$Scalars> {}
 
   // --- expanded ---
 
@@ -1135,29 +1139,29 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type interfaceNonNull$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
-    interfaceNonNull$SelectionSet<$Scalars>
+    interfaceNonNull$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type interfaceWithArgs<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = interfaceWithArgs$SelectionSet<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = interfaceWithArgs$SelectionSet<_$Scalars>
 
   export interface interfaceWithArgs$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base, $NamedTypes.$Interface<$Scalars> {
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$Interface<_$Scalars> {
     /**
      * Arguments for `interfaceWithArgs` field. All arguments are required so you must include this.
      */
-    $: interfaceWithArgs$Arguments<$Scalars>
+    $: interfaceWithArgs$Arguments<_$Scalars>
   }
 
   export interface interfaceWithArgs$Arguments<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base {
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
     id: string
   }
 
@@ -1169,19 +1173,19 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type interfaceWithArgs$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
-    interfaceWithArgs$SelectionSet<$Scalars>
+    interfaceWithArgs$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type listInt<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type listInt<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | listInt$SelectionSet<$Scalars>
+    | listInt$SelectionSet<_$Scalars>
 
   export interface listInt$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -1192,22 +1196,22 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type listInt$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | listInt$SelectionSet<$Scalars>
+    | listInt$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type listIntNonNull<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > =
     | $Select.Indicator.NoArgsIndicator
-    | listIntNonNull$SelectionSet<$Scalars>
+    | listIntNonNull$SelectionSet<_$Scalars>
 
   export interface listIntNonNull$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -1218,22 +1222,22 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type listIntNonNull$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | listIntNonNull$SelectionSet<$Scalars>
+    | listIntNonNull$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type listListInt<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > =
     | $Select.Indicator.NoArgsIndicator
-    | listListInt$SelectionSet<$Scalars>
+    | listListInt$SelectionSet<_$Scalars>
 
   export interface listListInt$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -1244,22 +1248,22 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type listListInt$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | listListInt$SelectionSet<$Scalars>
+    | listListInt$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type listListIntNonNull<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > =
     | $Select.Indicator.NoArgsIndicator
-    | listListIntNonNull$SelectionSet<$Scalars>
+    | listListIntNonNull$SelectionSet<_$Scalars>
 
   export interface listListIntNonNull$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -1270,21 +1274,21 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type listListIntNonNull$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | listListIntNonNull$SelectionSet<$Scalars>
+    | listListIntNonNull$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type lowerCaseUnion<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = lowerCaseUnion$SelectionSet<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = lowerCaseUnion$SelectionSet<_$Scalars>
 
   export interface lowerCaseUnion$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base, $NamedTypes.$lowerCaseUnion<$Scalars> {}
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$lowerCaseUnion<_$Scalars> {}
 
   // --- expanded ---
 
@@ -1294,19 +1298,19 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type lowerCaseUnion$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
-    lowerCaseUnion$SelectionSet<$Scalars>
+    lowerCaseUnion$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type $object<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    $object$SelectionSet<$Scalars>
+  export type $object<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    $object$SelectionSet<_$Scalars>
 
   export interface $object$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base, $NamedTypes.$Object1<$Scalars> {}
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$Object1<_$Scalars> {}
 
   // --- expanded ---
 
@@ -1316,20 +1320,20 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type $object$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
-    $object$SelectionSet<$Scalars>
+    $object$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type objectList<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = objectList$SelectionSet<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = objectList$SelectionSet<_$Scalars>
 
   export interface objectList$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base, $NamedTypes.$Object1<$Scalars> {}
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$Object1<_$Scalars> {}
 
   // --- expanded ---
 
@@ -1339,20 +1343,20 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type objectList$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
-    objectList$SelectionSet<$Scalars>
+    objectList$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type objectListNonNull<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = objectListNonNull$SelectionSet<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = objectListNonNull$SelectionSet<_$Scalars>
 
   export interface objectListNonNull$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base, $NamedTypes.$Object1<$Scalars> {}
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$Object1<_$Scalars> {}
 
   // --- expanded ---
 
@@ -1362,20 +1366,20 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type objectListNonNull$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
-    objectListNonNull$SelectionSet<$Scalars>
+    objectListNonNull$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type objectNested<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = objectNested$SelectionSet<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = objectNested$SelectionSet<_$Scalars>
 
   export interface objectNested$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base, $NamedTypes.$ObjectNested<$Scalars> {}
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$ObjectNested<_$Scalars> {}
 
   // --- expanded ---
 
@@ -1385,20 +1389,20 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type objectNested$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
-    objectNested$SelectionSet<$Scalars>
+    objectNested$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type objectNonNull<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = objectNonNull$SelectionSet<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = objectNonNull$SelectionSet<_$Scalars>
 
   export interface objectNonNull$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base, $NamedTypes.$Object1<$Scalars> {}
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$Object1<_$Scalars> {}
 
   // --- expanded ---
 
@@ -1408,37 +1412,33 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type objectNonNull$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
-    objectNonNull$SelectionSet<$Scalars>
+    objectNonNull$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type objectWithArgs<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = objectWithArgs$SelectionSet<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = objectWithArgs$SelectionSet<_$Scalars>
 
   export interface objectWithArgs$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base, $NamedTypes.$Object1<$Scalars> {
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$Object1<_$Scalars> {
     /**
      * Arguments for `objectWithArgs` field. No arguments are required so you may omit this.
      */
-    $?: objectWithArgs$Arguments<$Scalars>
+    $?: objectWithArgs$Arguments<_$Scalars>
   }
 
   export interface objectWithArgs$Arguments<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base {
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
     boolean?: boolean | undefined | null
-
     float?: number | undefined | null
-
     id?: string | undefined | null
-
     int?: number | undefined | null
-
     string?: string | undefined | null
   }
 
@@ -1450,28 +1450,28 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type objectWithArgs$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
-    objectWithArgs$SelectionSet<$Scalars>
+    objectWithArgs$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type result<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    result$SelectionSet<$Scalars>
+  export type result<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    result$SelectionSet<_$Scalars>
 
   export interface result$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base, $NamedTypes.$Result<$Scalars> {
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$Result<_$Scalars> {
     /**
      * Arguments for `result` field. All arguments are required so you must include this.
      */
-    $: result$Arguments<$Scalars>
+    $: result$Arguments<_$Scalars>
   }
 
   export interface result$Arguments<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base {
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
     $case: $NamedTypes.$Case
   }
 
@@ -1483,29 +1483,29 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type result$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
-    result$SelectionSet<$Scalars>
+    result$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type resultNonNull<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = resultNonNull$SelectionSet<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = resultNonNull$SelectionSet<_$Scalars>
 
   export interface resultNonNull$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base, $NamedTypes.$Result<$Scalars> {
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$Result<_$Scalars> {
     /**
      * Arguments for `resultNonNull` field. No arguments are required so you may omit this.
      */
-    $?: resultNonNull$Arguments<$Scalars>
+    $?: resultNonNull$Arguments<_$Scalars>
   }
 
   export interface resultNonNull$Arguments<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base {
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
     $case?: $NamedTypes.$Case | undefined | null
   }
 
@@ -1517,19 +1517,19 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type resultNonNull$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
-    resultNonNull$SelectionSet<$Scalars>
+    resultNonNull$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type $string<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type $string<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | $string$SelectionSet<$Scalars>
+    | $string$SelectionSet<_$Scalars>
 
   export interface $string$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -1540,32 +1540,32 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type $string$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | $string$SelectionSet<$Scalars>
+    | $string$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type stringWithArgEnum<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > =
     | $Select.Indicator.NoArgsIndicator
-    | stringWithArgEnum$SelectionSet<$Scalars>
+    | stringWithArgEnum$SelectionSet<_$Scalars>
 
   export interface stringWithArgEnum$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {
     /**
      * Arguments for `stringWithArgEnum` field. No arguments are required so you may omit this.
      */
-    $?: stringWithArgEnum$Arguments<$Scalars>
+    $?: stringWithArgEnum$Arguments<_$Scalars>
   }
 
   export interface stringWithArgEnum$Arguments<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base {
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
     $ABCEnum?: $NamedTypes.$ABCEnum | undefined | null
   }
 
@@ -1577,33 +1577,33 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type stringWithArgEnum$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | stringWithArgEnum$SelectionSet<$Scalars>
+    | stringWithArgEnum$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type stringWithArgInputObject<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > =
     | $Select.Indicator.NoArgsIndicator
-    | stringWithArgInputObject$SelectionSet<$Scalars>
+    | stringWithArgInputObject$SelectionSet<_$Scalars>
 
   export interface stringWithArgInputObject$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {
     /**
      * Arguments for `stringWithArgInputObject` field. No arguments are required so you may omit this.
      */
-    $?: stringWithArgInputObject$Arguments<$Scalars>
+    $?: stringWithArgInputObject$Arguments<_$Scalars>
   }
 
   export interface stringWithArgInputObject$Arguments<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base {
-    input?: $NamedTypes.$InputObject<$Scalars> | undefined | null
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
+    input?: $NamedTypes.$InputObject<_$Scalars> | undefined | null
   }
 
   // --- expanded ---
@@ -1614,31 +1614,31 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type stringWithArgInputObject$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | stringWithArgInputObject$SelectionSet<$Scalars>
+    | stringWithArgInputObject$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type stringWithArgInputObjectRequired<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = stringWithArgInputObjectRequired$SelectionSet<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = stringWithArgInputObjectRequired$SelectionSet<_$Scalars>
 
   export interface stringWithArgInputObjectRequired$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {
     /**
      * Arguments for `stringWithArgInputObjectRequired` field. All arguments are required so you must include this.
      */
-    $: stringWithArgInputObjectRequired$Arguments<$Scalars>
+    $: stringWithArgInputObjectRequired$Arguments<_$Scalars>
   }
 
   export interface stringWithArgInputObjectRequired$Arguments<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base {
-    input: $NamedTypes.$InputObject<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
+    input: $NamedTypes.$InputObject<_$Scalars>
   }
 
   // --- expanded ---
@@ -1649,35 +1649,33 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type stringWithArgInputObjectRequired$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
-    stringWithArgInputObjectRequired$SelectionSet<$Scalars>
+    stringWithArgInputObjectRequired$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type stringWithArgs<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > =
     | $Select.Indicator.NoArgsIndicator
-    | stringWithArgs$SelectionSet<$Scalars>
+    | stringWithArgs$SelectionSet<_$Scalars>
 
   export interface stringWithArgs$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {
     /**
      * Arguments for `stringWithArgs` field. No arguments are required so you may omit this.
      */
-    $?: stringWithArgs$Arguments<$Scalars>
+    $?: stringWithArgs$Arguments<_$Scalars>
   }
 
   export interface stringWithArgs$Arguments<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base {
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
     boolean?: boolean | undefined | null
-
     float?: number | undefined | null
-
     id?: string | undefined | null
     /**
      * @deprecated Example of argument deprecation reason here.
@@ -1697,32 +1695,32 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type stringWithArgs$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | stringWithArgs$SelectionSet<$Scalars>
+    | stringWithArgs$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type stringWithListArg<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > =
     | $Select.Indicator.NoArgsIndicator
-    | stringWithListArg$SelectionSet<$Scalars>
+    | stringWithListArg$SelectionSet<_$Scalars>
 
   export interface stringWithListArg$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {
     /**
      * Arguments for `stringWithListArg` field. No arguments are required so you may omit this.
      */
-    $?: stringWithListArg$Arguments<$Scalars>
+    $?: stringWithListArg$Arguments<_$Scalars>
   }
 
   export interface stringWithListArg$Arguments<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base {
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
     ints?: Array<number | undefined | null> | undefined | null
   }
 
@@ -1734,30 +1732,30 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type stringWithListArg$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | stringWithListArg$SelectionSet<$Scalars>
+    | stringWithListArg$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type stringWithListArgRequired<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = stringWithListArgRequired$SelectionSet<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = stringWithListArgRequired$SelectionSet<_$Scalars>
 
   export interface stringWithListArgRequired$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {
     /**
      * Arguments for `stringWithListArgRequired` field. All arguments are required so you must include this.
      */
-    $: stringWithListArgRequired$Arguments<$Scalars>
+    $: stringWithListArgRequired$Arguments<_$Scalars>
   }
 
   export interface stringWithListArgRequired$Arguments<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base {
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
     ints: Array<number | undefined | null>
   }
 
@@ -1769,29 +1767,29 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type stringWithListArgRequired$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
-    stringWithListArgRequired$SelectionSet<$Scalars>
+    stringWithListArgRequired$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type stringWithRequiredArg<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = stringWithRequiredArg$SelectionSet<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = stringWithRequiredArg$SelectionSet<_$Scalars>
 
   export interface stringWithRequiredArg$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {
     /**
      * Arguments for `stringWithRequiredArg` field. All arguments are required so you must include this.
      */
-    $: stringWithRequiredArg$Arguments<$Scalars>
+    $: stringWithRequiredArg$Arguments<_$Scalars>
   }
 
   export interface stringWithRequiredArg$Arguments<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base {
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
     string: string
   }
 
@@ -1803,20 +1801,20 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type stringWithRequiredArg$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
-    stringWithRequiredArg$SelectionSet<$Scalars>
+    stringWithRequiredArg$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type unionFooBar<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = unionFooBar$SelectionSet<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = unionFooBar$SelectionSet<_$Scalars>
 
   export interface unionFooBar$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base, $NamedTypes.$FooBarUnion<$Scalars> {}
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$FooBarUnion<_$Scalars> {}
 
   // --- expanded ---
 
@@ -1826,20 +1824,20 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type unionFooBar$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
-    unionFooBar$SelectionSet<$Scalars>
+    unionFooBar$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type unionFooBarNonNull<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = unionFooBarNonNull$SelectionSet<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = unionFooBarNonNull$SelectionSet<_$Scalars>
 
   export interface unionFooBarNonNull$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base, $NamedTypes.$FooBarUnion<$Scalars> {}
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$FooBarUnion<_$Scalars> {}
 
   // --- expanded ---
 
@@ -1849,29 +1847,29 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type unionFooBarNonNull$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
-    unionFooBarNonNull$SelectionSet<$Scalars>
+    unionFooBarNonNull$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type unionFooBarWithArgs<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = unionFooBarWithArgs$SelectionSet<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = unionFooBarWithArgs$SelectionSet<_$Scalars>
 
   export interface unionFooBarWithArgs$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base, $NamedTypes.$FooBarUnion<$Scalars> {
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$FooBarUnion<_$Scalars> {
     /**
      * Arguments for `unionFooBarWithArgs` field. No arguments are required so you may omit this.
      */
-    $?: unionFooBarWithArgs$Arguments<$Scalars>
+    $?: unionFooBarWithArgs$Arguments<_$Scalars>
   }
 
   export interface unionFooBarWithArgs$Arguments<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base {
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
     id?: string | undefined | null
   }
 
@@ -1883,20 +1881,20 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type unionFooBarWithArgs$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
-    unionFooBarWithArgs$SelectionSet<$Scalars>
+    unionFooBarWithArgs$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type unionObject<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = unionObject$SelectionSet<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = unionObject$SelectionSet<_$Scalars>
 
   export interface unionObject$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base, $NamedTypes.$ObjectUnion<$Scalars> {}
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$ObjectUnion<_$Scalars> {}
 
   // --- expanded ---
 
@@ -1906,20 +1904,20 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type unionObject$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
-    unionObject$SelectionSet<$Scalars>
+    unionObject$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type unionObjectNonNull<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = unionObjectNonNull$SelectionSet<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = unionObjectNonNull$SelectionSet<_$Scalars>
 
   export interface unionObjectNonNull$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base, $NamedTypes.$ObjectUnion<$Scalars> {}
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$ObjectUnion<_$Scalars> {}
 
   // --- expanded ---
 
@@ -1929,9 +1927,9 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type unionObjectNonNull$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
-    unionObjectNonNull$SelectionSet<$Scalars>
+    unionObjectNonNull$SelectionSet<_$Scalars>
   >
 }
 
@@ -1959,9 +1957,15 @@ export namespace Query {
  * "B" - Enum B member documentation.
  * "C" - (DEPRECATED: Enum value C is deprecated.)
  */
-export type ABCEnum = 'A' | 'B' | 'C'
+export type ABCEnum =
+  | 'A'
+  | 'B'
+  | 'C'
 
-export type Case = 'ErrorOne' | 'ErrorTwo' | 'Object1'
+export type Case =
+  | 'ErrorOne'
+  | 'ErrorTwo'
+  | 'Object1'
 
 //
 //
@@ -1980,47 +1984,43 @@ export type Case = 'ErrorOne' | 'ErrorTwo' | 'Object1'
 //
 
 export interface InputObject<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
 > {
   date?:
     | $$Utilities.Schema.Scalar.GetDecoded<
-      $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', $Scalars>
+      $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', _$Scalars>
     >
     | undefined
     | null
-
   dateRequired: $$Utilities.Schema.Scalar.GetDecoded<
-    $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', $Scalars>
+    $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', _$Scalars>
   >
-
   id?: string | undefined | null
-
   idRequired: string
 }
 
 export interface InputObjectCircular<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
 > {
-  circular?: $NamedTypes.$InputObjectCircular<$Scalars> | undefined | null
-
+  circular?: $NamedTypes.$InputObjectCircular<_$Scalars> | undefined | null
   date?:
     | $$Utilities.Schema.Scalar.GetDecoded<
-      $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', $Scalars>
+      $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', _$Scalars>
     >
     | undefined
     | null
 }
 
 export interface InputObjectNested<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
 > {
-  InputObject?: $NamedTypes.$InputObject<$Scalars> | undefined | null
+  InputObject?: $NamedTypes.$InputObject<_$Scalars> | undefined | null
 }
 
 export interface InputObjectNestedNonNull<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
 > {
-  InputObject: $NamedTypes.$InputObject<$Scalars>
+  InputObject: $NamedTypes.$InputObject<_$Scalars>
 }
 
 //
@@ -2053,13 +2053,13 @@ export interface InputObjectNestedNonNull<
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface Bar<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty>
+export interface Bar<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty>
   extends $Select.Bases.ObjectLike
 {
   /**
    * Select the `int` field on the `Bar` object. Its type is `Int` (a `ScalarStandard` kind of type).
    */
-  int?: Bar.int$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Bar.int<$Scalars>>
+  int?: Bar.int$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Bar.int<_$Scalars>>
 
   /**
    * Inline fragments for field groups.
@@ -2070,8 +2070,8 @@ export interface Bar<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Uti
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | Bar$FragmentInline<$Scalars>
-    | Bar$FragmentInline<$Scalars>[]
+    | Bar$FragmentInline<_$Scalars>
+    | Bar$FragmentInline<_$Scalars>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -2084,18 +2084,19 @@ export interface Bar<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Uti
 }
 
 export interface Bar$FragmentInline<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends Bar<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {}
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends Bar<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
 
 // ----------------------------------------| Fields |
 
 export namespace Bar {
-  export type int<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type int<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | int$SelectionSet<$Scalars>
+    | int$SelectionSet<_$Scalars>
 
   export interface int$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -2106,10 +2107,10 @@ export namespace Bar {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type int$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | int$SelectionSet<$Scalars>
+    | int$SelectionSet<_$Scalars>
   >
 }
 
@@ -2128,12 +2129,12 @@ export namespace Bar {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface DateObject1<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
 > extends $Select.Bases.ObjectLike {
   /**
    * Select the `date1` field on the `DateObject1` object. Its type is `Date` (a `ScalarCustom` kind of type).
    */
-  date1?: DateObject1.date1$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<DateObject1.date1<$Scalars>>
+  date1?: DateObject1.date1$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<DateObject1.date1<_$Scalars>>
 
   /**
    * Inline fragments for field groups.
@@ -2144,8 +2145,8 @@ export interface DateObject1<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | DateObject1$FragmentInline<$Scalars>
-    | DateObject1$FragmentInline<$Scalars>[]
+    | DateObject1$FragmentInline<_$Scalars>
+    | DateObject1$FragmentInline<_$Scalars>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -2158,18 +2159,19 @@ export interface DateObject1<
 }
 
 export interface DateObject1$FragmentInline<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends DateObject1<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {}
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends DateObject1<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
 
 // ----------------------------------------| Fields |
 
 export namespace DateObject1 {
-  export type date1<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type date1<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | date1$SelectionSet<$Scalars>
+    | date1$SelectionSet<_$Scalars>
 
   export interface date1$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -2180,10 +2182,10 @@ export namespace DateObject1 {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type date1$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | date1$SelectionSet<$Scalars>
+    | date1$SelectionSet<_$Scalars>
   >
 }
 
@@ -2202,12 +2204,12 @@ export namespace DateObject1 {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface DateObject2<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
 > extends $Select.Bases.ObjectLike {
   /**
    * Select the `date2` field on the `DateObject2` object. Its type is `Date` (a `ScalarCustom` kind of type).
    */
-  date2?: DateObject2.date2$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<DateObject2.date2<$Scalars>>
+  date2?: DateObject2.date2$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<DateObject2.date2<_$Scalars>>
 
   /**
    * Inline fragments for field groups.
@@ -2218,8 +2220,8 @@ export interface DateObject2<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | DateObject2$FragmentInline<$Scalars>
-    | DateObject2$FragmentInline<$Scalars>[]
+    | DateObject2$FragmentInline<_$Scalars>
+    | DateObject2$FragmentInline<_$Scalars>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -2232,18 +2234,19 @@ export interface DateObject2<
 }
 
 export interface DateObject2$FragmentInline<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends DateObject2<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {}
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends DateObject2<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
 
 // ----------------------------------------| Fields |
 
 export namespace DateObject2 {
-  export type date2<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type date2<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | date2$SelectionSet<$Scalars>
+    | date2$SelectionSet<_$Scalars>
 
   export interface date2$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -2254,10 +2257,10 @@ export namespace DateObject2 {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type date2$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | date2$SelectionSet<$Scalars>
+    | date2$SelectionSet<_$Scalars>
   >
 }
 
@@ -2276,16 +2279,16 @@ export namespace DateObject2 {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface ErrorOne<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
 > extends $Select.Bases.ObjectLike {
   /**
    * Select the `infoId` field on the `ErrorOne` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
-  infoId?: ErrorOne.infoId$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<ErrorOne.infoId<$Scalars>>
+  infoId?: ErrorOne.infoId$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<ErrorOne.infoId<_$Scalars>>
   /**
    * Select the `message` field on the `ErrorOne` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
-  message?: ErrorOne.message$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<ErrorOne.message<$Scalars>>
+  message?: ErrorOne.message$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<ErrorOne.message<_$Scalars>>
 
   /**
    * Inline fragments for field groups.
@@ -2296,8 +2299,8 @@ export interface ErrorOne<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | ErrorOne$FragmentInline<$Scalars>
-    | ErrorOne$FragmentInline<$Scalars>[]
+    | ErrorOne$FragmentInline<_$Scalars>
+    | ErrorOne$FragmentInline<_$Scalars>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -2310,18 +2313,19 @@ export interface ErrorOne<
 }
 
 export interface ErrorOne$FragmentInline<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends ErrorOne<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {}
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends ErrorOne<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
 
 // ----------------------------------------| Fields |
 
 export namespace ErrorOne {
-  export type infoId<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type infoId<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | infoId$SelectionSet<$Scalars>
+    | infoId$SelectionSet<_$Scalars>
 
   export interface infoId$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -2332,20 +2336,20 @@ export namespace ErrorOne {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type infoId$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | infoId$SelectionSet<$Scalars>
+    | infoId$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type message<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type message<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | message$SelectionSet<$Scalars>
+    | message$SelectionSet<_$Scalars>
 
   export interface message$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -2356,10 +2360,10 @@ export namespace ErrorOne {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type message$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | message$SelectionSet<$Scalars>
+    | message$SelectionSet<_$Scalars>
   >
 }
 
@@ -2378,16 +2382,16 @@ export namespace ErrorOne {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface ErrorTwo<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
 > extends $Select.Bases.ObjectLike {
   /**
    * Select the `infoInt` field on the `ErrorTwo` object. Its type is `Int` (a `ScalarStandard` kind of type).
    */
-  infoInt?: ErrorTwo.infoInt$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<ErrorTwo.infoInt<$Scalars>>
+  infoInt?: ErrorTwo.infoInt$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<ErrorTwo.infoInt<_$Scalars>>
   /**
    * Select the `message` field on the `ErrorTwo` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
-  message?: ErrorTwo.message$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<ErrorTwo.message<$Scalars>>
+  message?: ErrorTwo.message$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<ErrorTwo.message<_$Scalars>>
 
   /**
    * Inline fragments for field groups.
@@ -2398,8 +2402,8 @@ export interface ErrorTwo<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | ErrorTwo$FragmentInline<$Scalars>
-    | ErrorTwo$FragmentInline<$Scalars>[]
+    | ErrorTwo$FragmentInline<_$Scalars>
+    | ErrorTwo$FragmentInline<_$Scalars>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -2412,18 +2416,19 @@ export interface ErrorTwo<
 }
 
 export interface ErrorTwo$FragmentInline<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends ErrorTwo<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {}
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends ErrorTwo<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
 
 // ----------------------------------------| Fields |
 
 export namespace ErrorTwo {
-  export type infoInt<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type infoInt<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | infoInt$SelectionSet<$Scalars>
+    | infoInt$SelectionSet<_$Scalars>
 
   export interface infoInt$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -2434,20 +2439,20 @@ export namespace ErrorTwo {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type infoInt$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | infoInt$SelectionSet<$Scalars>
+    | infoInt$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type message<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type message<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | message$SelectionSet<$Scalars>
+    | message$SelectionSet<_$Scalars>
 
   export interface message$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -2458,10 +2463,10 @@ export namespace ErrorTwo {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type message$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | message$SelectionSet<$Scalars>
+    | message$SelectionSet<_$Scalars>
   >
 }
 
@@ -2482,13 +2487,13 @@ export namespace ErrorTwo {
 /**
  * Object documentation.
  */
-export interface Foo<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty>
+export interface Foo<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty>
   extends $Select.Bases.ObjectLike
 {
   /**
    * Select the `id` field on the `Foo` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
-  id?: Foo.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Foo.id<$Scalars>>
+  id?: Foo.id$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Foo.id<_$Scalars>>
 
   /**
    * Inline fragments for field groups.
@@ -2499,8 +2504,8 @@ export interface Foo<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Uti
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | Foo$FragmentInline<$Scalars>
-    | Foo$FragmentInline<$Scalars>[]
+    | Foo$FragmentInline<_$Scalars>
+    | Foo$FragmentInline<_$Scalars>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -2513,18 +2518,19 @@ export interface Foo<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Uti
 }
 
 export interface Foo$FragmentInline<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends Foo<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {}
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends Foo<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
 
 // ----------------------------------------| Fields |
 
 export namespace Foo {
-  export type id<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type id<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
+    | id$SelectionSet<_$Scalars>
 
   export interface id$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -2535,10 +2541,10 @@ export namespace Foo {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
+    | id$SelectionSet<_$Scalars>
   >
 }
 
@@ -2556,33 +2562,33 @@ export namespace Foo {
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface Object1<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty>
-  extends $Select.Bases.ObjectLike
-{
+export interface Object1<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends $Select.Bases.ObjectLike {
   /**
    * Select the `ABCEnum` field on the `Object1` object. Its type is `ABCEnum` (a `Enum` kind of type).
    */
-  ABCEnum?: Object1.ABCEnum$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Object1.ABCEnum<$Scalars>>
+  ABCEnum?: Object1.ABCEnum$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Object1.ABCEnum<_$Scalars>>
   /**
    * Select the `boolean` field on the `Object1` object. Its type is `Boolean` (a `ScalarStandard` kind of type).
    */
-  boolean?: Object1.$boolean$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Object1.$boolean<$Scalars>>
+  boolean?: Object1.$boolean$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Object1.$boolean<_$Scalars>>
   /**
    * Select the `float` field on the `Object1` object. Its type is `Float` (a `ScalarStandard` kind of type).
    */
-  float?: Object1.float$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Object1.float<$Scalars>>
+  float?: Object1.float$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Object1.float<_$Scalars>>
   /**
    * Select the `id` field on the `Object1` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
-  id?: Object1.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Object1.id<$Scalars>>
+  id?: Object1.id$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Object1.id<_$Scalars>>
   /**
    * Select the `int` field on the `Object1` object. Its type is `Int` (a `ScalarStandard` kind of type).
    */
-  int?: Object1.int$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Object1.int<$Scalars>>
+  int?: Object1.int$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Object1.int<_$Scalars>>
   /**
    * Select the `string` field on the `Object1` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
-  string?: Object1.$string$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Object1.$string<$Scalars>>
+  string?: Object1.$string$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Object1.$string<_$Scalars>>
 
   /**
    * Inline fragments for field groups.
@@ -2593,8 +2599,8 @@ export interface Object1<$Scalars extends $$Utilities.Schema.Scalar.Registry = $
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | Object1$FragmentInline<$Scalars>
-    | Object1$FragmentInline<$Scalars>[]
+    | Object1$FragmentInline<_$Scalars>
+    | Object1$FragmentInline<_$Scalars>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -2607,18 +2613,19 @@ export interface Object1<$Scalars extends $$Utilities.Schema.Scalar.Registry = $
 }
 
 export interface Object1$FragmentInline<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends Object1<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {}
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends Object1<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
 
 // ----------------------------------------| Fields |
 
 export namespace Object1 {
-  export type ABCEnum<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type ABCEnum<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | ABCEnum$SelectionSet<$Scalars>
+    | ABCEnum$SelectionSet<_$Scalars>
 
   export interface ABCEnum$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -2629,20 +2636,22 @@ export namespace Object1 {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type ABCEnum$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | ABCEnum$SelectionSet<$Scalars>
+    | ABCEnum$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type $boolean<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type $boolean<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > =
     | $Select.Indicator.NoArgsIndicator
-    | $boolean$SelectionSet<$Scalars>
+    | $boolean$SelectionSet<_$Scalars>
 
   export interface $boolean$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -2653,20 +2662,20 @@ export namespace Object1 {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type $boolean$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | $boolean$SelectionSet<$Scalars>
+    | $boolean$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type float<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type float<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | float$SelectionSet<$Scalars>
+    | float$SelectionSet<_$Scalars>
 
   export interface float$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -2677,20 +2686,20 @@ export namespace Object1 {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type float$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | float$SelectionSet<$Scalars>
+    | float$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type id<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type id<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
+    | id$SelectionSet<_$Scalars>
 
   export interface id$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -2701,20 +2710,20 @@ export namespace Object1 {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
+    | id$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type int<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type int<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | int$SelectionSet<$Scalars>
+    | int$SelectionSet<_$Scalars>
 
   export interface int$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -2725,20 +2734,20 @@ export namespace Object1 {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type int$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | int$SelectionSet<$Scalars>
+    | int$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type $string<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type $string<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | $string$SelectionSet<$Scalars>
+    | $string$SelectionSet<_$Scalars>
 
   export interface $string$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -2749,10 +2758,10 @@ export namespace Object1 {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type $string$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | $string$SelectionSet<$Scalars>
+    | $string$SelectionSet<_$Scalars>
   >
 }
 
@@ -2771,20 +2780,20 @@ export namespace Object1 {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface Object1ImplementingInterface<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
 > extends $Select.Bases.ObjectLike {
   /**
    * Select the `id` field on the `Object1ImplementingInterface` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
   id?:
-    | Object1ImplementingInterface.id$Expanded<$Scalars>
-    | $Select.SelectAlias.SelectAlias<Object1ImplementingInterface.id<$Scalars>>
+    | Object1ImplementingInterface.id$Expanded<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Object1ImplementingInterface.id<_$Scalars>>
   /**
    * Select the `int` field on the `Object1ImplementingInterface` object. Its type is `Int` (a `ScalarStandard` kind of type).
    */
   int?:
-    | Object1ImplementingInterface.int$Expanded<$Scalars>
-    | $Select.SelectAlias.SelectAlias<Object1ImplementingInterface.int<$Scalars>>
+    | Object1ImplementingInterface.int$Expanded<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Object1ImplementingInterface.int<_$Scalars>>
 
   /**
    * Inline fragments for field groups.
@@ -2795,8 +2804,8 @@ export interface Object1ImplementingInterface<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | Object1ImplementingInterface$FragmentInline<$Scalars>
-    | Object1ImplementingInterface$FragmentInline<$Scalars>[]
+    | Object1ImplementingInterface$FragmentInline<_$Scalars>
+    | Object1ImplementingInterface$FragmentInline<_$Scalars>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -2809,18 +2818,19 @@ export interface Object1ImplementingInterface<
 }
 
 export interface Object1ImplementingInterface$FragmentInline<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends Object1ImplementingInterface<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {}
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends Object1ImplementingInterface<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
 
 // ----------------------------------------| Fields |
 
 export namespace Object1ImplementingInterface {
-  export type id<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type id<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
+    | id$SelectionSet<_$Scalars>
 
   export interface id$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -2831,20 +2841,20 @@ export namespace Object1ImplementingInterface {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
+    | id$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type int<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type int<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | int$SelectionSet<$Scalars>
+    | int$SelectionSet<_$Scalars>
 
   export interface int$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -2855,10 +2865,10 @@ export namespace Object1ImplementingInterface {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type int$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | int$SelectionSet<$Scalars>
+    | int$SelectionSet<_$Scalars>
   >
 }
 
@@ -2877,20 +2887,20 @@ export namespace Object1ImplementingInterface {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface Object2ImplementingInterface<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
 > extends $Select.Bases.ObjectLike {
   /**
    * Select the `boolean` field on the `Object2ImplementingInterface` object. Its type is `Boolean` (a `ScalarStandard` kind of type).
    */
   boolean?:
-    | Object2ImplementingInterface.$boolean$Expanded<$Scalars>
-    | $Select.SelectAlias.SelectAlias<Object2ImplementingInterface.$boolean<$Scalars>>
+    | Object2ImplementingInterface.$boolean$Expanded<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Object2ImplementingInterface.$boolean<_$Scalars>>
   /**
    * Select the `id` field on the `Object2ImplementingInterface` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
   id?:
-    | Object2ImplementingInterface.id$Expanded<$Scalars>
-    | $Select.SelectAlias.SelectAlias<Object2ImplementingInterface.id<$Scalars>>
+    | Object2ImplementingInterface.id$Expanded<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Object2ImplementingInterface.id<_$Scalars>>
 
   /**
    * Inline fragments for field groups.
@@ -2901,8 +2911,8 @@ export interface Object2ImplementingInterface<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | Object2ImplementingInterface$FragmentInline<$Scalars>
-    | Object2ImplementingInterface$FragmentInline<$Scalars>[]
+    | Object2ImplementingInterface$FragmentInline<_$Scalars>
+    | Object2ImplementingInterface$FragmentInline<_$Scalars>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -2915,18 +2925,21 @@ export interface Object2ImplementingInterface<
 }
 
 export interface Object2ImplementingInterface$FragmentInline<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends Object2ImplementingInterface<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {}
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends Object2ImplementingInterface<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
 
 // ----------------------------------------| Fields |
 
 export namespace Object2ImplementingInterface {
-  export type $boolean<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type $boolean<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > =
     | $Select.Indicator.NoArgsIndicator
-    | $boolean$SelectionSet<$Scalars>
+    | $boolean$SelectionSet<_$Scalars>
 
   export interface $boolean$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -2937,20 +2950,20 @@ export namespace Object2ImplementingInterface {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type $boolean$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | $boolean$SelectionSet<$Scalars>
+    | $boolean$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type id<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type id<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
+    | id$SelectionSet<_$Scalars>
 
   export interface id$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -2961,10 +2974,10 @@ export namespace Object2ImplementingInterface {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
+    | id$SelectionSet<_$Scalars>
   >
 }
 
@@ -2983,16 +2996,16 @@ export namespace Object2ImplementingInterface {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface ObjectNested<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
 > extends $Select.Bases.ObjectLike {
   /**
    * Select the `id` field on the `ObjectNested` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
-  id?: ObjectNested.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<ObjectNested.id<$Scalars>>
+  id?: ObjectNested.id$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<ObjectNested.id<_$Scalars>>
   /**
    * Select the `object` field on the `ObjectNested` object. Its type is `Object1` (a `OutputObject` kind of type).
    */
-  object?: ObjectNested.$object$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<ObjectNested.$object<$Scalars>>
+  object?: ObjectNested.$object$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<ObjectNested.$object<_$Scalars>>
 
   /**
    * Inline fragments for field groups.
@@ -3003,8 +3016,8 @@ export interface ObjectNested<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | ObjectNested$FragmentInline<$Scalars>
-    | ObjectNested$FragmentInline<$Scalars>[]
+    | ObjectNested$FragmentInline<_$Scalars>
+    | ObjectNested$FragmentInline<_$Scalars>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -3017,18 +3030,19 @@ export interface ObjectNested<
 }
 
 export interface ObjectNested$FragmentInline<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends ObjectNested<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {}
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends ObjectNested<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
 
 // ----------------------------------------| Fields |
 
 export namespace ObjectNested {
-  export type id<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type id<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
+    | id$SelectionSet<_$Scalars>
 
   export interface id$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -3039,20 +3053,20 @@ export namespace ObjectNested {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
+    | id$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type $object<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    $object$SelectionSet<$Scalars>
+  export type $object<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    $object$SelectionSet<_$Scalars>
 
   export interface $object$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base, $NamedTypes.$Object1<$Scalars> {}
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$Object1<_$Scalars> {}
 
   // --- expanded ---
 
@@ -3062,9 +3076,9 @@ export namespace ObjectNested {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type $object$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
-    $object$SelectionSet<$Scalars>
+    $object$SelectionSet<_$Scalars>
   >
 }
 
@@ -3083,14 +3097,14 @@ export namespace ObjectNested {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface ObjectUnion<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
 > extends $Select.Bases.ObjectLike {
   /**
    * Select the `fooBarUnion` field on the `ObjectUnion` object. Its type is `FooBarUnion` (a `Union` kind of type).
    */
   fooBarUnion?:
-    | ObjectUnion.fooBarUnion$Expanded<$Scalars>
-    | $Select.SelectAlias.SelectAlias<ObjectUnion.fooBarUnion<$Scalars>>
+    | ObjectUnion.fooBarUnion$Expanded<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<ObjectUnion.fooBarUnion<_$Scalars>>
 
   /**
    * Inline fragments for field groups.
@@ -3101,8 +3115,8 @@ export interface ObjectUnion<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | ObjectUnion$FragmentInline<$Scalars>
-    | ObjectUnion$FragmentInline<$Scalars>[]
+    | ObjectUnion$FragmentInline<_$Scalars>
+    | ObjectUnion$FragmentInline<_$Scalars>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -3115,19 +3129,20 @@ export interface ObjectUnion<
 }
 
 export interface ObjectUnion$FragmentInline<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends ObjectUnion<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {}
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends ObjectUnion<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
 
 // ----------------------------------------| Fields |
 
 export namespace ObjectUnion {
   export type fooBarUnion<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = fooBarUnion$SelectionSet<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = fooBarUnion$SelectionSet<_$Scalars>
 
   export interface fooBarUnion$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base, $NamedTypes.$FooBarUnion<$Scalars> {}
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$FooBarUnion<_$Scalars> {}
 
   // --- expanded ---
 
@@ -3137,9 +3152,9 @@ export namespace ObjectUnion {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type fooBarUnion$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
-    fooBarUnion$SelectionSet<$Scalars>
+    fooBarUnion$SelectionSet<_$Scalars>
   >
 }
 
@@ -3158,12 +3173,12 @@ export namespace ObjectUnion {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface lowerCaseObject<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
 > extends $Select.Bases.ObjectLike {
   /**
    * Select the `id` field on the `lowerCaseObject` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
-  id?: lowerCaseObject.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<lowerCaseObject.id<$Scalars>>
+  id?: lowerCaseObject.id$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<lowerCaseObject.id<_$Scalars>>
 
   /**
    * Inline fragments for field groups.
@@ -3174,8 +3189,8 @@ export interface lowerCaseObject<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | lowerCaseObject$FragmentInline<$Scalars>
-    | lowerCaseObject$FragmentInline<$Scalars>[]
+    | lowerCaseObject$FragmentInline<_$Scalars>
+    | lowerCaseObject$FragmentInline<_$Scalars>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -3188,18 +3203,19 @@ export interface lowerCaseObject<
 }
 
 export interface lowerCaseObject$FragmentInline<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends lowerCaseObject<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {}
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends lowerCaseObject<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
 
 // ----------------------------------------| Fields |
 
 export namespace lowerCaseObject {
-  export type id<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type id<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
+    | id$SelectionSet<_$Scalars>
 
   export interface id$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -3210,10 +3226,10 @@ export namespace lowerCaseObject {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
+    | id$SelectionSet<_$Scalars>
   >
 }
 
@@ -3232,12 +3248,12 @@ export namespace lowerCaseObject {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface lowerCaseObject2<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
 > extends $Select.Bases.ObjectLike {
   /**
    * Select the `int` field on the `lowerCaseObject2` object. Its type is `Int` (a `ScalarStandard` kind of type).
    */
-  int?: lowerCaseObject2.int$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<lowerCaseObject2.int<$Scalars>>
+  int?: lowerCaseObject2.int$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<lowerCaseObject2.int<_$Scalars>>
 
   /**
    * Inline fragments for field groups.
@@ -3248,8 +3264,8 @@ export interface lowerCaseObject2<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | lowerCaseObject2$FragmentInline<$Scalars>
-    | lowerCaseObject2$FragmentInline<$Scalars>[]
+    | lowerCaseObject2$FragmentInline<_$Scalars>
+    | lowerCaseObject2$FragmentInline<_$Scalars>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -3262,18 +3278,19 @@ export interface lowerCaseObject2<
 }
 
 export interface lowerCaseObject2$FragmentInline<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends lowerCaseObject2<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {}
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends lowerCaseObject2<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
 
 // ----------------------------------------| Fields |
 
 export namespace lowerCaseObject2 {
-  export type int<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type int<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | int$SelectionSet<$Scalars>
+    | int$SelectionSet<_$Scalars>
 
   export interface int$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -3284,10 +3301,10 @@ export namespace lowerCaseObject2 {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type int$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | int$SelectionSet<$Scalars>
+    | int$SelectionSet<_$Scalars>
   >
 }
 
@@ -3308,10 +3325,20 @@ export namespace lowerCaseObject2 {
 //
 
 export interface DateUnion<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
 > {
-  ___on_DateObject1?: DateObject1<$Scalars>
-  ___on_DateObject2?: DateObject2<$Scalars>
+  /**
+   * A meta field. Is the name of the type being selected. Since this is a union type and thus polymorphic,
+   * the name is one of the member type names, whichever is ultimately returned at runtime.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+
+  ___on_DateObject1?: DateObject1<_$Scalars>
+  ___on_DateObject2?: DateObject2<_$Scalars>
 
   /**
    * Inline fragments for field groups.
@@ -3322,31 +3349,32 @@ export interface DateUnion<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | DateUnion$FragmentInline<$Scalars>
-    | DateUnion$FragmentInline<$Scalars>[]
-
-  /**
-   * A meta field. Is the name of the type being selected. Since this is a union type and thus polymorphic,
-   * the name is one of the member type names, whichever is ultimately returned at runtime.
-   *
-   * @see https://graphql.org/learn/queries/#meta-fields
-   */
-  __typename?:
-    | $Select.Indicator.NoArgsIndicator$Expanded
-    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+    | DateUnion$FragmentInline<_$Scalars>
+    | DateUnion$FragmentInline<_$Scalars>[]
 }
 export interface DateUnion$FragmentInline<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends DateUnion<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {}
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends DateUnion<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
 
 /**
  * Union documentation.
  */
 export interface FooBarUnion<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
 > {
-  ___on_Bar?: Bar<$Scalars>
-  ___on_Foo?: Foo<$Scalars>
+  /**
+   * A meta field. Is the name of the type being selected. Since this is a union type and thus polymorphic,
+   * the name is one of the member type names, whichever is ultimately returned at runtime.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+
+  ___on_Bar?: Bar<_$Scalars>
+  ___on_Foo?: Foo<_$Scalars>
 
   /**
    * Inline fragments for field groups.
@@ -3357,29 +3385,30 @@ export interface FooBarUnion<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | FooBarUnion$FragmentInline<$Scalars>
-    | FooBarUnion$FragmentInline<$Scalars>[]
-
-  /**
-   * A meta field. Is the name of the type being selected. Since this is a union type and thus polymorphic,
-   * the name is one of the member type names, whichever is ultimately returned at runtime.
-   *
-   * @see https://graphql.org/learn/queries/#meta-fields
-   */
-  __typename?:
-    | $Select.Indicator.NoArgsIndicator$Expanded
-    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+    | FooBarUnion$FragmentInline<_$Scalars>
+    | FooBarUnion$FragmentInline<_$Scalars>[]
 }
 export interface FooBarUnion$FragmentInline<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends FooBarUnion<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {}
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends FooBarUnion<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
 
 export interface Result<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
 > {
-  ___on_ErrorOne?: ErrorOne<$Scalars>
-  ___on_ErrorTwo?: ErrorTwo<$Scalars>
-  ___on_Object1?: Object1<$Scalars>
+  /**
+   * A meta field. Is the name of the type being selected. Since this is a union type and thus polymorphic,
+   * the name is one of the member type names, whichever is ultimately returned at runtime.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+
+  ___on_ErrorOne?: ErrorOne<_$Scalars>
+  ___on_ErrorTwo?: ErrorTwo<_$Scalars>
+  ___on_Object1?: Object1<_$Scalars>
 
   /**
    * Inline fragments for field groups.
@@ -3390,28 +3419,29 @@ export interface Result<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | Result$FragmentInline<$Scalars>
-    | Result$FragmentInline<$Scalars>[]
-
-  /**
-   * A meta field. Is the name of the type being selected. Since this is a union type and thus polymorphic,
-   * the name is one of the member type names, whichever is ultimately returned at runtime.
-   *
-   * @see https://graphql.org/learn/queries/#meta-fields
-   */
-  __typename?:
-    | $Select.Indicator.NoArgsIndicator$Expanded
-    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+    | Result$FragmentInline<_$Scalars>
+    | Result$FragmentInline<_$Scalars>[]
 }
 export interface Result$FragmentInline<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends Result<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {}
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends Result<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
 
 export interface lowerCaseUnion<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
 > {
-  ___on_lowerCaseObject?: lowerCaseObject<$Scalars>
-  ___on_lowerCaseObject2?: lowerCaseObject2<$Scalars>
+  /**
+   * A meta field. Is the name of the type being selected. Since this is a union type and thus polymorphic,
+   * the name is one of the member type names, whichever is ultimately returned at runtime.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+
+  ___on_lowerCaseObject?: lowerCaseObject<_$Scalars>
+  ___on_lowerCaseObject2?: lowerCaseObject2<_$Scalars>
 
   /**
    * Inline fragments for field groups.
@@ -3422,22 +3452,13 @@ export interface lowerCaseUnion<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | lowerCaseUnion$FragmentInline<$Scalars>
-    | lowerCaseUnion$FragmentInline<$Scalars>[]
-
-  /**
-   * A meta field. Is the name of the type being selected. Since this is a union type and thus polymorphic,
-   * the name is one of the member type names, whichever is ultimately returned at runtime.
-   *
-   * @see https://graphql.org/learn/queries/#meta-fields
-   */
-  __typename?:
-    | $Select.Indicator.NoArgsIndicator$Expanded
-    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+    | lowerCaseUnion$FragmentInline<_$Scalars>
+    | lowerCaseUnion$FragmentInline<_$Scalars>[]
 }
 export interface lowerCaseUnion$FragmentInline<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends lowerCaseUnion<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {}
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends lowerCaseUnion<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
 
 //
 //
@@ -3455,14 +3476,15 @@ export interface lowerCaseUnion$FragmentInline<
 //
 //
 
-// Interface Type: DateInterface1
+//                                           DateInterface1
 // --------------------------------------------------------------------------------------------------
+//
 
 export interface DateInterface1<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
 > extends $Select.Bases.ObjectLike {
-  date1?: DateInterface1.date1<$Scalars>
-  ___on_DateObject1?: DateObject1<$Scalars>
+  date1?: DateInterface1.date1<_$Scalars>
+  ___on_DateObject1?: DateObject1<_$Scalars>
 
   /**
    * Inline fragments for field groups.
@@ -3473,8 +3495,8 @@ export interface DateInterface1<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | DateInterface1$FragmentInline<$Scalars>
-    | DateInterface1$FragmentInline<$Scalars>[]
+    | DateInterface1$FragmentInline<_$Scalars>
+    | DateInterface1$FragmentInline<_$Scalars>[]
 
   /**
    * A meta field. Is the name of the type being selected. Since this is a interface type and thus polymorphic,
@@ -3488,16 +3510,17 @@ export interface DateInterface1<
 }
 
 export interface DateInterface1$FragmentInline<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends DateInterface1<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {}
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends DateInterface1<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
 
 export namespace DateInterface1 {
-  export type date1<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type date1<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | date1$SelectionSet<$Scalars>
+    | date1$SelectionSet<_$Scalars>
 
   export interface date1$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -3508,22 +3531,23 @@ export namespace DateInterface1 {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type date1$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | date1$SelectionSet<$Scalars>
+    | date1$SelectionSet<_$Scalars>
   >
 }
 
-// Interface Type: Error
+//                                               Error
 // --------------------------------------------------------------------------------------------------
+//
 
-export interface Error<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty>
+export interface Error<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty>
   extends $Select.Bases.ObjectLike
 {
-  message?: Error.message<$Scalars>
-  ___on_ErrorOne?: ErrorOne<$Scalars>
-  ___on_ErrorTwo?: ErrorTwo<$Scalars>
+  message?: Error.message<_$Scalars>
+  ___on_ErrorOne?: ErrorOne<_$Scalars>
+  ___on_ErrorTwo?: ErrorTwo<_$Scalars>
 
   /**
    * Inline fragments for field groups.
@@ -3534,8 +3558,8 @@ export interface Error<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$U
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | Error$FragmentInline<$Scalars>
-    | Error$FragmentInline<$Scalars>[]
+    | Error$FragmentInline<_$Scalars>
+    | Error$FragmentInline<_$Scalars>[]
 
   /**
    * A meta field. Is the name of the type being selected. Since this is a interface type and thus polymorphic,
@@ -3549,16 +3573,17 @@ export interface Error<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$U
 }
 
 export interface Error$FragmentInline<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends Error<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {}
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends Error<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
 
 export namespace Error {
-  export type message<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type message<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | message$SelectionSet<$Scalars>
+    | message$SelectionSet<_$Scalars>
 
   export interface message$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -3569,22 +3594,23 @@ export namespace Error {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type message$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | message$SelectionSet<$Scalars>
+    | message$SelectionSet<_$Scalars>
   >
 }
 
-// Interface Type: Interface
+//                                             Interface
 // --------------------------------------------------------------------------------------------------
+//
 
 export interface Interface<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
 > extends $Select.Bases.ObjectLike {
-  id?: Interface.id<$Scalars>
-  ___on_Object1ImplementingInterface?: Object1ImplementingInterface<$Scalars>
-  ___on_Object2ImplementingInterface?: Object2ImplementingInterface<$Scalars>
+  id?: Interface.id<_$Scalars>
+  ___on_Object1ImplementingInterface?: Object1ImplementingInterface<_$Scalars>
+  ___on_Object2ImplementingInterface?: Object2ImplementingInterface<_$Scalars>
 
   /**
    * Inline fragments for field groups.
@@ -3595,8 +3621,8 @@ export interface Interface<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | Interface$FragmentInline<$Scalars>
-    | Interface$FragmentInline<$Scalars>[]
+    | Interface$FragmentInline<_$Scalars>
+    | Interface$FragmentInline<_$Scalars>[]
 
   /**
    * A meta field. Is the name of the type being selected. Since this is a interface type and thus polymorphic,
@@ -3610,16 +3636,17 @@ export interface Interface<
 }
 
 export interface Interface$FragmentInline<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends Interface<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {}
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends Interface<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
 
 export namespace Interface {
-  export type id<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type id<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
+    | id$SelectionSet<_$Scalars>
 
   export interface id$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -3630,10 +3657,10 @@ export namespace Interface {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
+    | id$SelectionSet<_$Scalars>
   >
 }
 
@@ -3646,77 +3673,78 @@ export namespace Interface {
  */
 export namespace $NamedTypes {
   export type $Mutation<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = Mutation<$Scalars>
-  export type $Query<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    Query<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = Mutation<_$Scalars>
+  export type $Query<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    Query<_$Scalars>
   export type $ABCEnum = ABCEnum
   export type $Case = Case
   export type $InputObject<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = InputObject<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = InputObject<_$Scalars>
   export type $InputObjectCircular<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = InputObjectCircular<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = InputObjectCircular<_$Scalars>
   export type $InputObjectNested<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = InputObjectNested<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = InputObjectNested<_$Scalars>
   export type $InputObjectNestedNonNull<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = InputObjectNestedNonNull<$Scalars>
-  export type $Bar<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    Bar<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = InputObjectNestedNonNull<_$Scalars>
+  export type $Bar<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    Bar<_$Scalars>
   export type $DateObject1<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = DateObject1<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = DateObject1<_$Scalars>
   export type $DateObject2<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = DateObject2<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = DateObject2<_$Scalars>
   export type $ErrorOne<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = ErrorOne<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = ErrorOne<_$Scalars>
   export type $ErrorTwo<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = ErrorTwo<$Scalars>
-  export type $Foo<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    Foo<$Scalars>
-  export type $Object1<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    Object1<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = ErrorTwo<_$Scalars>
+  export type $Foo<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    Foo<_$Scalars>
+  export type $Object1<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = Object1<_$Scalars>
   export type $Object1ImplementingInterface<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = Object1ImplementingInterface<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = Object1ImplementingInterface<_$Scalars>
   export type $Object2ImplementingInterface<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = Object2ImplementingInterface<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = Object2ImplementingInterface<_$Scalars>
   export type $ObjectNested<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = ObjectNested<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = ObjectNested<_$Scalars>
   export type $ObjectUnion<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = ObjectUnion<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = ObjectUnion<_$Scalars>
   export type $lowerCaseObject<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = lowerCaseObject<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = lowerCaseObject<_$Scalars>
   export type $lowerCaseObject2<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = lowerCaseObject2<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = lowerCaseObject2<_$Scalars>
   export type $DateUnion<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = DateUnion<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = DateUnion<_$Scalars>
   export type $FooBarUnion<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = FooBarUnion<$Scalars>
-  export type $Result<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    Result<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = FooBarUnion<_$Scalars>
+  export type $Result<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    Result<_$Scalars>
   export type $lowerCaseUnion<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = lowerCaseUnion<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = lowerCaseUnion<_$Scalars>
   export type $DateInterface1<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = DateInterface1<$Scalars>
-  export type $Error<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    Error<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = DateInterface1<_$Scalars>
+  export type $Error<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    Error<_$Scalars>
   export type $Interface<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = Interface<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = Interface<_$Scalars>
 }

@@ -1,7 +1,6 @@
 import type { Schema as $ } from '../../../../../../src/entrypoints/utilities-for-generated.js'
 import type * as $$Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
 import type * as Data from './Data.js'
-import type * as MethodsRoot from './MethodsRoot.js'
 import type * as $Scalar from './Scalar.js'
 
 export namespace Schema {

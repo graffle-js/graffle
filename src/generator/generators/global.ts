@@ -5,7 +5,6 @@ import { ModuleGeneratorData } from './Data.js'
 import { ModuleGeneratorMethodsDocument } from './MethodsDocument.js'
 import { ModuleGeneratorMethodsRoot } from './MethodsRoot.js'
 import { ModuleGeneratorMethodsSelect } from './MethodsSelect.js'
-import { ModuleGeneratorScalar } from './Scalar.js'
 import { ModuleGeneratorSchema } from './Schema.js'
 
 export const ModuleGeneratorGlobal = createModuleGenerator(
@@ -19,9 +18,6 @@ export const ModuleGeneratorGlobal = createModuleGenerator(
       `import type { ${identifiers.Schema} } from './${ModuleGeneratorSchema.name}.js'`,
     )
 
-    if (config.schema.kindMap.ScalarCustom.length > 0) {
-      code(`import type * as ${identifiers.$Scalar} from './${ModuleGeneratorScalar.name}.js'`)
-    }
     code()
 
     const defaultSchemaUrlTsDoc = config.options.defaultSchemaUrl

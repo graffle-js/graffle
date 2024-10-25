@@ -1,3 +1,7 @@
+import { execa, type ExecaMethod } from 'execa'
+import * as FsJetpack from 'fs-jetpack'
+import type { FSJetpack } from 'fs-jetpack/types.js'
+import * as Path from 'node:path'
 import type { Mock } from 'vitest'
 import { test as testBase, vi } from 'vitest'
 import { Graffle } from '../../src/entrypoints/main.js'
@@ -11,6 +15,11 @@ import { Graffle as KitchenSink } from './schemas/kitchen-sink/graffle/__.js'
 import { schema as kitchenSinkSchema } from './schemas/kitchen-sink/schema.js'
 import { schema } from './schemas/pokemon/schema.js'
 
+interface Project {
+  fs: FSJetpack
+  run: ExecaMethod
+}
+
 export const kitchenSink = KitchenSink.create({ schema: kitchenSinkSchema })
 
 export const createResponse = (body: object) =>
@@ -23,9 +32,50 @@ interface Fixtures {
   kitchenSink: Client<ConfigManager.SetAtPath<ClientContext, ['config', 'name'], 'default'>>
   kitchenSinkHttp: Client<ConfigManager.SetAtPath<ClientContext, ['config', 'name'], 'default'>>
   kitchenSinkData: typeof db
+  project: Project
 }
 
 export const test = testBase.extend<Fixtures>({
+  project: async ({}, use) => { // eslint-disable-line
+    const fs = await FsJetpack.tmpDirAsync()
+    const run = execa({ cwd: fs.cwd() })
+    const project: Project = {
+      fs,
+      run,
+    }
+    const relativePathToGraffle = Path.join(`..`, Path.relative(fs.cwd(), Path.join(import.meta.dirname, `../../`)))
+    await fs.writeAsync(`package.json`, {
+      name: `test`,
+      type: `module`,
+      scripts: {
+        'check:types': `tsc --noEmit`,
+        // rollup: `rollup --configPlugin typescript --config rollup.config.ts`,
+      },
+      dependencies: {
+        tsx: `4.19.1`,
+        typescript: `5.6.3`,
+        '@tsconfig/strictest': `2.0.5`,
+        // '@rollup/plugin-node-resolve': `^15.3.0`,
+        // '@rollup/plugin-terser': `^0.4.4`,
+        // '@rollup/plugin-typescript': `^12.1.1`,
+        // 'graffle': `link:..`,
+        // 'rollup': `^4.24.0`,
+        // 'rollup-plugin-visualizer': `^5.12.0`,
+        // 'tslib': `^2.8.0`,
+      },
+    })
+    await fs.writeAsync(`tsconfig.json`, {
+      extends: `@tsconfig/strictest/tsconfig.json`,
+      compilerOptions: {
+        module: `Node16`,
+        moduleResolution: `Node16`,
+        target: `ES2023`,
+      },
+    })
+    await run`pnpm add ${relativePathToGraffle} tsx @tsconfig/strictest/tsconfig.json`
+    console.log(`Scaffolded project at: ${project.fs.cwd()}\n`)
+    await use(project)
+  },
   // eslint-disable-next-line
   fetch: async ({}, use) => {
     const fetch = globalThis.fetch

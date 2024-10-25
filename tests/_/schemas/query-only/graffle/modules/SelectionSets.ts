@@ -17,11 +17,10 @@ import type * as $$Utilities from '../../../../../../src/entrypoints/utilities-f
 //
 //
 
-// Prefix with $ because this is not a schema type. A user could have a schema type named "Document" that this would conflict with.
 export interface $Document<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
 > {
-  query?: Record<string, Query<$Scalars>>
+  query?: Record<string, Query<_$Scalars>>
 }
 
 //
@@ -54,15 +53,17 @@ export interface $Document<
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface Query<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> {
+export interface Query<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> {
   /**
    * Select the `id` field on the `Query` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
-  id?: Query.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.id<$Scalars>>
+  id?: Query.id$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Query.id<_$Scalars>>
   /**
    * Select the `idNonNull` field on the `Query` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
-  idNonNull?: Query.idNonNull$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.idNonNull<$Scalars>>
+  idNonNull?: Query.idNonNull$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Query.idNonNull<_$Scalars>>
 
   /**
    * Inline fragments for field groups.
@@ -73,8 +74,8 @@ export interface Query<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$U
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | Query$FragmentInline<$Scalars>
-    | Query$FragmentInline<$Scalars>[]
+    | Query$FragmentInline<_$Scalars>
+    | Query$FragmentInline<_$Scalars>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -87,18 +88,19 @@ export interface Query<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$U
 }
 
 export interface Query$FragmentInline<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends Query<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {}
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends Query<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
 
 // ----------------------------------------| Fields |
 
 export namespace Query {
-  export type id<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type id<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
+    | id$SelectionSet<_$Scalars>
 
   export interface id$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -109,22 +111,22 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
+    | id$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type idNonNull<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > =
     | $Select.Indicator.NoArgsIndicator
-    | idNonNull$SelectionSet<$Scalars>
+    | idNonNull$SelectionSet<_$Scalars>
 
   export interface idNonNull$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -135,10 +137,10 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type idNonNull$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | idNonNull$SelectionSet<$Scalars>
+    | idNonNull$SelectionSet<_$Scalars>
   >
 }
 
@@ -150,6 +152,6 @@ export namespace Query {
  *     would end up with an error of `export interface Foo extends Foo ...`
  */
 export namespace $NamedTypes {
-  export type $Query<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    Query<$Scalars>
+  export type $Query<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    Query<_$Scalars>
 }

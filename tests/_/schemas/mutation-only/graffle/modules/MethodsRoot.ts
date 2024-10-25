@@ -1,4 +1,3 @@
-import { type Simplify } from 'type-fest'
 import type { InferResult } from '../../../../../../src/entrypoints/schema.js'
 import type * as $$Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
 import type { Schema } from './Schema.js'
@@ -8,7 +7,7 @@ export interface MutationMethods<$Context extends $$Utilities.ClientContext> {
   $batch: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Mutation<$Context['scalars']>>,
   ) => Promise<
-    Simplify<
+    $$Utilities.Simplify<
       $$Utilities.HandleOutput<
         $Context,
         InferResult.Mutation<$SelectionSet, Schema<$Context['scalars']>>
@@ -16,7 +15,7 @@ export interface MutationMethods<$Context extends $$Utilities.ClientContext> {
     >
   >
   __typename: () => Promise<
-    Simplify<
+    $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
         { __typename: 'Mutation' },
@@ -28,7 +27,7 @@ export interface MutationMethods<$Context extends $$Utilities.ClientContext> {
   id: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Mutation.id<$Context['scalars']>>,
   ) => Promise<
-    Simplify<
+    $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
         InferResult.Mutation<{ id: $SelectionSet }, Schema<$Context['scalars']>>,
@@ -40,7 +39,7 @@ export interface MutationMethods<$Context extends $$Utilities.ClientContext> {
   idNonNull: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Mutation.idNonNull<$Context['scalars']>>,
   ) => Promise<
-    Simplify<
+    $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
         InferResult.Mutation<{ idNonNull: $SelectionSet }, Schema<$Context['scalars']>>,

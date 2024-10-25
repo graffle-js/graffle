@@ -17,11 +17,10 @@ import type * as $$Utilities from '../../../../../../src/entrypoints/utilities-f
 //
 //
 
-// Prefix with $ because this is not a schema type. A user could have a schema type named "Document" that this would conflict with.
 export interface $Document<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
 > {
-  mutation?: Record<string, Mutation<$Scalars>>
+  mutation?: Record<string, Mutation<_$Scalars>>
 }
 
 //
@@ -55,16 +54,16 @@ export interface $Document<
 // ----------------------------------------| Entrypoint Interface |
 
 export interface Mutation<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
 > {
   /**
    * Select the `id` field on the `Mutation` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
-  id?: Mutation.id$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Mutation.id<$Scalars>>
+  id?: Mutation.id$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Mutation.id<_$Scalars>>
   /**
    * Select the `idNonNull` field on the `Mutation` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
-  idNonNull?: Mutation.idNonNull$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Mutation.idNonNull<$Scalars>>
+  idNonNull?: Mutation.idNonNull$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Mutation.idNonNull<_$Scalars>>
 
   /**
    * Inline fragments for field groups.
@@ -75,8 +74,8 @@ export interface Mutation<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | Mutation$FragmentInline<$Scalars>
-    | Mutation$FragmentInline<$Scalars>[]
+    | Mutation$FragmentInline<_$Scalars>
+    | Mutation$FragmentInline<_$Scalars>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -89,18 +88,19 @@ export interface Mutation<
 }
 
 export interface Mutation$FragmentInline<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends Mutation<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {}
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends Mutation<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
 
 // ----------------------------------------| Fields |
 
 export namespace Mutation {
-  export type id<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type id<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
+    | id$SelectionSet<_$Scalars>
 
   export interface id$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -111,22 +111,22 @@ export namespace Mutation {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<$Scalars>
+    | id$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type idNonNull<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > =
     | $Select.Indicator.NoArgsIndicator
-    | idNonNull$SelectionSet<$Scalars>
+    | idNonNull$SelectionSet<_$Scalars>
 
   export interface idNonNull$SelectionSet<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > extends $Select.Bases.Base {}
 
   // --- expanded ---
@@ -137,10 +137,10 @@ export namespace Mutation {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type idNonNull$Expanded<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | idNonNull$SelectionSet<$Scalars>
+    | idNonNull$SelectionSet<_$Scalars>
   >
 }
 
@@ -153,6 +153,6 @@ export namespace Mutation {
  */
 export namespace $NamedTypes {
   export type $Mutation<
-    $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = Mutation<$Scalars>
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = Mutation<_$Scalars>
 }

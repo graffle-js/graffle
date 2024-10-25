@@ -29,7 +29,11 @@ touch tsconfig.json main.ts
 
 ```json tsconfig.json
 {
-  "extends": "@tsconfig/strictest/tsconfig.json"
+  "extends": "@tsconfig/strictest/tsconfig.json",
+  "compilerOptions": {
+    "module": "Node16",
+    "moduleResolution": "Node16"
+  }
 }
 ```
 
@@ -40,6 +44,14 @@ Graffle has a peer dependency on `graphql` so you will need to install that too.
 ```sh
 pnpm add graffle graphql
 ```
+
+## 💀 Verify Project Configuration
+
+Graffle is an [ESM only package built around package `exports`](https://github.com/graffle-js/graffle/discussions/863). This imposes a few requirements on your project configuration.
+
+1. Your `package.json` must set `type` to `module`.
+2. If you are using TypeScript your `tsconfig.json` must set `module` and `moduleResolution` to `Node16` or `Bundler`. Otherwise TypeScript will not be able to find the types when you attempt to import entrypoints from `graffle`.
+3. If you are using React Native you need to [do this](https://reactnative.dev/blog/2023/06/21/package-exports-support#enabling-package-exports-beta).
 
 ## 🚀 Send Your First Document
 

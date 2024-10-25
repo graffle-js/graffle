@@ -6,6 +6,14 @@ export type RemoveIndex<T> = {
   [K in keyof T as string extends K ? never : number extends K ? never : K]: T[K]
 }
 
+export const pick = <T, K extends keyof T>(obj: T, keys: K[]): Pick<T, K> => {
+  const result: Partial<T> = {}
+  keys.forEach(key => {
+    result[key] = obj[key]
+  })
+  return result as Pick<T, K>
+}
+
 export const uppercase = <S extends string>(str: S): Uppercase<S> => str.toUpperCase() as Uppercase<S>
 
 export const callOrIdentity = <T>(value: MaybeLazy<T>) => {

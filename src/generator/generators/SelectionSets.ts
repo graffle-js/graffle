@@ -1,24 +1,27 @@
 // todo: generate in JSDoc how the feature maps to GQL syntax.
 // todo: on union fields, JSDoc that mentions the syntax `on*`
 
-import { pick } from 'es-toolkit'
 import { Select } from '../../documentBuilder/Select/__.js'
 import { Code } from '../../lib/Code.js'
 import { Grafaid } from '../../lib/grafaid/__.js'
 import { analyzeArgsNullability } from '../../lib/grafaid/schema/args.js'
 import { RootTypeName } from '../../lib/grafaid/schema/schema.js'
-import { entries } from '../../lib/prelude.js'
+import { entries, pick, values } from '../../lib/prelude.js'
 import { Tex } from '../../lib/tex/__.js'
 import { borderThin } from '../../lib/tex/tex.js'
+import type { Config } from '../config/config.js'
 import { identifiers } from '../helpers/identifiers.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 import { createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
-import { getTsDocContents, renderDocumentation, renderName, typeTitle2SelectionSet } from '../helpers/render.js'
+import { getTsDocContents, renderName, typeTitle2SelectionSet } from '../helpers/render.js'
 import type { KindRenderers } from '../helpers/types.js'
-import { ModuleGeneratorScalar } from './Scalar.js'
 
+const i = {
+  ...identifiers,
+  _$Scalars: `_$Scalars`,
+}
 const $ScalarsTypeParameter =
-  `$Scalars extends ${identifiers.$$Utilities}.Schema.Scalar.Registry = ${identifiers.$$Utilities}.Schema.Scalar.Registry.Empty`
+  `${i._$Scalars} extends ${identifiers.$$Utilities}.Schema.Scalar.Registry = ${identifiers.$$Utilities}.Schema.Scalar.Registry.Empty`
 
 export const ModuleGeneratorSelectionSets = createModuleGenerator(
   `SelectionSets`,
@@ -31,21 +34,18 @@ export const ModuleGeneratorSelectionSets = createModuleGenerator(
       `import type { Select as $Select } from '${config.paths.imports.grafflePackage.schema}'`,
       `import type * as ${identifiers.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'`,
     )
-    if (Grafaid.Schema.KindMap.hasCustomScalars(config.schema.kindMap)) {
-      code(`import type * as $Scalar from './${ModuleGeneratorScalar.name}.js'`)
-    }
     code()
     code(Tex.title1(`Document`))
     code()
-    code(
-      `// Prefix with $ because this is not a schema type. A user could have a schema type named "Document" that this would conflict with.`,
-      `export interface $Document<${$ScalarsTypeParameter}> {`,
-      Grafaid.Schema.KindMap.hasQuery(config.schema.kindMap) ? `query?: Record<string, Query<$Scalars>>` : null,
-      Grafaid.Schema.KindMap.hasMutation(config.schema.kindMap)
-        ? `mutation?: Record<string, Mutation<$Scalars>>`
-        : null,
-      `}`,
-    )
+    code(Code.tsInterface$({
+      name: `$Document`,
+      parameters: $ScalarsTypeParameter,
+      // dprint-ignore
+      fields: `
+        ${Grafaid.Schema.KindMap.hasQuery(config.schema.kindMap) ? `query?: Record<string, Query<${i._$Scalars}>>` : ``}
+        ${Grafaid.Schema.KindMap.hasMutation(config.schema.kindMap) ? `mutation?: Record<string, Mutation<${i._$Scalars}>>` : ``}
+      `,
+    }))
     code()
 
     kindEntries.forEach(([name, kind]) => {
@@ -66,30 +66,42 @@ export const ModuleGeneratorSelectionSets = createModuleGenerator(
        *     would end up with an error of \`export interface Foo extends Foo ...\`
        */
     `)
-    code(renderNamedTypesIndex({ config, types: kinds.flat() }))
+    const namedTypes = kinds.flat().map(type => {
+      if (Grafaid.Schema.isEnumType(type)) {
+        return Code.tsAlias$({
+          name: `$${renderName(type)}`,
+          type: renderName(type),
+        })
+      }
+      return Code.tsAlias$({
+        name: `$${renderName(type)}`,
+        parameters: $ScalarsTypeParameter,
+        type: H.reference(type),
+      })
+    }).join(`\n`)
+
+    code(`
+      export namespace $NamedTypes {
+        ${namedTypes}
+      }
+    `)
+    code()
   },
 )
 
-const renderKindUnion = createCodeGenerator<{ type: Grafaid.Schema.UnionType }>(
+const Union = createCodeGenerator<{ type: Grafaid.Schema.UnionType }>(
   ({ config, type, code }) => {
-    const doc = renderDocumentation(config, type)
-    code(doc)
-
-    const memberTypes = type.getTypes()
-    const fragmentsInlineType = memberTypes.map((type) =>
-      `${Select.InlineFragment.typeConditionPRefix}${type.name}?: ${renderName(type)}<$Scalars>`
-    )
-      .join(
-        `\n`,
-      )
+    const fragmentsInlineType = type.getTypes().map((type) =>
+      `${Select.InlineFragment.typeConditionPRefix}${type.name}?: ${H.forwardTypeParameter$Scalars(type)}`
+    ).join(`\n`)
     code(Code.tsInterface$({
-      export: true,
+      tsDoc: getTsDocContents(config, type),
       name: type.name,
-      typeParameters: $ScalarsTypeParameter,
+      parameters: $ScalarsTypeParameter,
       fields: `
+        ${H.__typenameField(`union`)}
         ${fragmentsInlineType}
         ${H.fragmentInlineField(type)}
-        ${H.__typenameField(`union`)}
       `,
     }))
 
@@ -98,64 +110,55 @@ const renderKindUnion = createCodeGenerator<{ type: Grafaid.Schema.UnionType }>(
   },
 )
 
-const renderKindEnum = createCodeGenerator<{ type: Grafaid.Schema.EnumType }>(
+const Enum = createCodeGenerator<{ type: Grafaid.Schema.EnumType }>(
   ({ config, type, code }) => {
-    const doc = renderDocumentation(config, type)
-    code(doc)
-
-    const values = Object.values(type.getValues())
-    code(H.tsTypeTerminal(type, values.map((value) => Code.string(value.name)).join(` | `)))
+    code(Code.tsAlias$({
+      tsDoc: getTsDocContents(config, type),
+      name: type.name,
+      type: Code.tsUnionItems(type.getValues().map((value) => Code.string(value.name))),
+    }))
   },
 )
 
-const renderKindInputObject = createCodeGenerator<{ type: Grafaid.Schema.InputObjectType }>(
+const InputObject = createCodeGenerator<{ type: Grafaid.Schema.InputObjectType }>(
   ({ config, type, code }) => {
-    const doc = renderDocumentation(config, type)
-    code(doc)
-
-    const fields = Object.values(type.getFields())
-    code(`
-      export interface ${renderName(type)}<${$ScalarsTypeParameter}> {
-        ${fields.map((field) => renderArgumentLike({ config, arg: field })).join(`\n`)}
-      }
-    `)
+    code(Code.tsInterface$({
+      tsDoc: getTsDocContents(config, type),
+      name: type.name,
+      parameters: $ScalarsTypeParameter,
+      fields: values(type.getFields()).map(field => getInputFieldLike(config, field)),
+    }))
   },
 )
 
-const renderKindInterface = createCodeGenerator<{ type: Grafaid.Schema.InterfaceType }>(
+const Interface = createCodeGenerator<{ type: Grafaid.Schema.InterfaceType }>(
   ({ config, type, code }) => {
-    const fields = Object.values(type.getFields())
+    const fields = values(type.getFields())
     const fieldsRendered = fields.map(field => {
       return H.outputFieldReference(field.name, `${renderName(type)}.${renderName(field)}`)
     }).join(`\n`)
     const implementorTypes = Grafaid.Schema.KindMap.getInterfaceImplementors(config.schema.kindMap, type)
     const onTypesRendered = implementorTypes.map(type =>
       H.outputFieldReference(`${Select.InlineFragment.typeConditionPRefix}${type.name}`, renderName(type))
-    ).join(
-      ` \n `,
-    )
-
+    ).join(`\n`)
     code()
-    code(`// Interface Type: ${type.name}`)
-    code(`// ${borderThin}`)
+    code(Tex.title2(type.name))
     code()
-
-    const doc = renderDocumentation(config, type)
-    code(doc)
-
-    code(`
-      export interface ${H.referenceSig(type)} extends $Select.Bases.ObjectLike {
+    code(Code.tsInterface$({
+      tsDoc: getTsDocContents(config, type),
+      name: type.name,
+      parameters: $ScalarsTypeParameter,
+      extends: [`$Select.Bases.ObjectLike`],
+      fields: `
         ${fieldsRendered}
         ${onTypesRendered}
         ${H.fragmentInlineField(type)}
         ${H.__typenameField(`interface`)}
-      }
-    `)
+      `,
+    }))
     code()
-
     code(H.fragmentInlineInterface(type))
     code()
-
     code(`
       export namespace ${renderName(type)} {
         ${fields.map((field) => renderOutputField({ config, field })).join(`\n`)}
@@ -165,14 +168,13 @@ const renderKindInterface = createCodeGenerator<{ type: Grafaid.Schema.Interface
   },
 )
 
-const renderKindOutputObject = createCodeGenerator<{ type: Grafaid.Schema.ObjectType }>(
+const OutputObject = createCodeGenerator<{ type: Grafaid.Schema.ObjectType }>(
   ({ config, type, code }) => {
     const fields = Object.values(type.getFields())
 
     code(typeTitle2SelectionSet(type))
     code()
-
-    code(`// ----------------------------------------| Entrypoint Interface |`)
+    code(Tex.title3(`Entrypoint Interface`))
     code()
 
     const fieldKeys = fields.map(field => {
@@ -192,26 +194,24 @@ const renderKindOutputObject = createCodeGenerator<{ type: Grafaid.Schema.Object
     }).join(`\n`)
 
     const isRootType = type.name in RootTypeName
-    const extendsClause = isRootType ? `` : `extends $Select.Bases.ObjectLike`
+    const extendsClause = isRootType ? null : `$Select.Bases.ObjectLike`
 
-    const doc = renderDocumentation(config, type)
-    code(doc)
-
-    code(`
-      export interface ${H.referenceSig(type)} ${extendsClause} {
+    code(Code.tsInterface$({
+      tsDoc: getTsDocContents(config, type),
+      name: type.name,
+      parameters: $ScalarsTypeParameter,
+      extends: [extendsClause],
+      fields: `
         ${fieldKeys}
         ${H.fragmentInlineField(type)}
         ${H.__typenameField(`object`)}
-      }
-    `)
+      `,
+    }))
     code()
-
     code(H.fragmentInlineInterface(type))
     code()
-
-    code(`// ----------------------------------------| Fields |`)
+    code(Tex.title3(`Fields`))
     code()
-
     code(`
       export namespace ${renderName(type)} {
         ${fields.map((field) => renderOutputField({ config, field })).join(`\n// ${borderThin}\n\n`)}
@@ -222,12 +222,12 @@ const renderKindOutputObject = createCodeGenerator<{ type: Grafaid.Schema.Object
 )
 
 const kindRenderMap = {
-  OutputObject: renderKindOutputObject,
-  InputObject: renderKindInputObject,
-  Enum: renderKindEnum,
-  Root: renderKindOutputObject,
-  Interface: renderKindInterface,
-  Union: renderKindUnion,
+  OutputObject: OutputObject,
+  InputObject: InputObject,
+  Enum: Enum,
+  Root: OutputObject,
+  Interface: Interface,
+  Union: Union,
   ScalarCustom: null,
   ScalarStandard: null,
 } satisfies KindRenderers
@@ -246,7 +246,11 @@ const renderOutputField = createCodeGenerator<{ field: Grafaid.Schema.Field<any,
       && argsAnalysis.isAllNullable
     const indicator = isCanBeIndicator ? `$Select.Indicator.NoArgsIndicator` : ``
 
-    code(H.tsType(field, Code.tsUnionItems([indicator, selectionSetRef])))
+    code(Code.tsAlias$({
+      name: field.name,
+      parameters: $ScalarsTypeParameter,
+      type: Code.tsUnionItems([indicator, selectionSetRef]),
+    }))
     code()
 
     const propertyArguments = renderFieldPropertyArguments({
@@ -263,30 +267,26 @@ const renderOutputField = createCodeGenerator<{ field: Grafaid.Schema.Field<any,
       : null
 
     code(Code.tsInterface$({
-      export: true,
-      name: H.referenceSig(selectionSetName),
+      name: selectionSetName,
+      parameters: $ScalarsTypeParameter,
       extends: [`$Select.Bases.Base`, objectLikeTypeReference],
       fields: propertyArguments,
     }))
     code()
 
     if (argsAnalysis.hasAny) {
-      const fields = field.args.map(arg => renderArgumentLike({ config, arg })).join(`\n`)
       code(Code.tsInterface$({
-        export: true,
-        name: H.referenceSig(argumentsName),
-        extends: `$Select.Bases.Base`,
-        fields,
+        name: argumentsName,
+        parameters: $ScalarsTypeParameter,
+        fields: field.args.map(arg => getInputFieldLike(config, arg)),
       }))
       code()
     }
 
     code(`// --- expanded ---`)
     code()
-
     code(H.tsTypeExpanded(field, Code.tsUnionItems([indicator, selectionSetRef])))
     code()
-
     code()
   },
 )
@@ -315,18 +315,22 @@ const renderFieldPropertyArguments = createCodeGenerator<
   },
 )
 
-const renderArgumentLike = createCodeGenerator<{ arg: Grafaid.Schema.Argument | Grafaid.Schema.InputField }>(
-  ({ config, arg, code }) => {
-    // todo do not import whole of graphql package here. Just import getNamedType.
-    const enumKeyPrefix = Grafaid.Schema.isEnumType(Grafaid.Schema.getNamedType(arg.type))
-      ? Select.Arguments.enumKeyPrefix
-      : ``
-    const typeRendered = renderArgumentType(arg.type)
-    const tsDoc = getTsDocContents(config, arg)
-    code(Code.TSDoc(tsDoc))
-    code(`${enumKeyPrefix}${arg.name}${H.propOpt(arg.type)}: ${typeRendered}`)
-  },
-)
+const getInputFieldLike = (config: Config, inputFieldLike: Grafaid.Schema.Argument | Grafaid.Schema.InputField) => {
+  return [
+    getInputFieldKey(inputFieldLike),
+    Code.objectField$({
+      tsDoc: getTsDocContents(config, inputFieldLike),
+      optional: Grafaid.Schema.isNullableType(inputFieldLike.type),
+      value: renderArgumentType(inputFieldLike.type),
+    }),
+  ] as const
+}
+
+const getInputFieldKey = (inputFieldLike: Grafaid.Schema.Argument | Grafaid.Schema.InputField) => {
+  return Grafaid.Schema.isEnumType(Grafaid.Schema.getNamedType(inputFieldLike.type))
+    ? Select.Arguments.enumKeyPrefix + inputFieldLike.name
+    : inputFieldLike.name
+}
 
 const renderArgumentType = (type: Grafaid.Schema.InputTypes): string => {
   const sansNullabilityType = Grafaid.Schema.getNullableType(type)
@@ -341,7 +345,7 @@ const renderArgumentType = (type: Grafaid.Schema.InputTypes): string => {
   if (Grafaid.Schema.isScalarType(sansNullabilityType)) {
     if (Grafaid.Schema.isScalarTypeCustom(sansNullabilityType)) {
       const scalarTypeRendered =
-        `${identifiers.$$Utilities}.Schema.Scalar.GetDecoded<${identifiers.$$Utilities}.Schema.Scalar.LookupCustomScalarOrFallbackToString<'${sansNullabilityType.name}', $Scalars>>`
+        `${i.$$Utilities}.Schema.Scalar.GetDecoded<${i.$$Utilities}.Schema.Scalar.LookupCustomScalarOrFallbackToString<'${sansNullabilityType.name}', ${i._$Scalars}>>`
       return `${scalarTypeRendered} ${nullableRendered}`
     }
     const scalarTypeRendered =
@@ -352,31 +356,13 @@ const renderArgumentType = (type: Grafaid.Schema.InputTypes): string => {
   return `${H.namedTypesReference(sansNullabilityType)} ${nullableRendered}`
 }
 
-const renderNamedTypesIndex = createCodeGenerator<{ types: Grafaid.Schema.NamedTypes[] }>(
-  ({ types, code }) => {
-    const namedTypes = types.map(type => {
-      if (Grafaid.Schema.isEnumType(type)) {
-        return H.tsTypeTerminal(`$${renderName(type)}`, renderName(type))
-      }
-      return H.tsType(`$${renderName(type)}`, H.reference(type))
-    }).join(`\n`)
-
-    code(`
-      export namespace $NamedTypes {
-        ${namedTypes}
-      }
-    `)
-    code()
-  },
-)
-
 // --------------------------------------------------------------------------------------------------
 
 namespace H {
   export type Name = string | Grafaid.Schema.NamedTypes | Grafaid.Schema.Field<any, any>
 
-  export const referenceSig = (type: Name) => {
-    return `${renderName(type)}<${$ScalarsTypeParameter}>`
+  export const forwardTypeParameter$Scalars = (type: Name) => {
+    return `${renderName(type)}<${i._$Scalars}>`
   }
 
   export const namedTypesReference = (type: Grafaid.Schema.NamedTypes) => {
@@ -388,34 +374,25 @@ namespace H {
     if (Grafaid.Schema.isEnumType(name)) {
       return renderName(name)
     }
-    return `${renderName(name)}<$Scalars>`
+    return `${renderName(name)}<${i._$Scalars}>`
   }
 
   export const propOpt = (type: Grafaid.Schema.Types) => {
     return Grafaid.Schema.isNullableType(type) ? `?` : ``
   }
 
-  export const maybeList = (type: string) => {
-    return `${type} | Array<${type}>`
-  }
-
-  export const tsType = (name: Name, type: string) => {
-    return tsTypeTerminal(referenceSig(name), type)
-  }
-
   export const tsTypeExpanded = (name: Name, type: string) => {
     const name_ = renderName(name)
-    const tsDoc = Code.TSDoc(`
-      This is the "expanded" version of the \`${name_}\` type. It is identical except for the fact
-      that IDEs will display its contents (a union type) directly, rather than the name of this type.
-      In some cases, this is a preferable DX, making the types easier to read for users.
-    `)
-    return tsTypeTerminal(referenceSig(`${name_}$Expanded`), `${identifiers.$$Utilities}.Simplify<${type}>`, tsDoc)
-  }
-
-  export const tsTypeTerminal = (name: Name, type: string, tsDoc?: string) => {
-    const tsDoc_ = tsDoc ? `${tsDoc}\n` : ``
-    return `${tsDoc_}export type ${renderName(name)} = ${type}`
+    return Code.tsAlias$({
+      name: `${name_}$Expanded`,
+      parameters: $ScalarsTypeParameter,
+      type: `${i.$$Utilities}.Simplify<${type}>`,
+      tsDoc: `
+        This is the "expanded" version of the \`${name_}\` type. It is identical except for the fact
+        that IDEs will display its contents (a union type) directly, rather than the name of this type.
+        In some cases, this is a preferable DX, making the types easier to read for users.
+      `,
+    })
   }
 
   export const outputFieldReference = (name: string, type: string) => {
@@ -469,9 +446,12 @@ namespace H {
   export const fragmentInlineInterface = (
     node: Grafaid.Schema.ObjectType | Grafaid.Schema.UnionType | Grafaid.Schema.InterfaceType,
   ) => {
-    const name = `${renderName(node)}${fragmentInlineNameSuffix}`
-    // dprint-ignore
-    return `export interface ${name}<${$ScalarsTypeParameter}> extends ${renderName(node)}<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {}`
+    return Code.tsInterface$({
+      name: `${renderName(node)}${fragmentInlineNameSuffix}`,
+      parameters: $ScalarsTypeParameter,
+      extends: [forwardTypeParameter$Scalars(node), `$Select.Directive.$Groups.InlineFragment.Fields`],
+      fields: {},
+    })
   }
 
   const __typenameDoc = (kind: 'union' | 'interface' | 'object') => {

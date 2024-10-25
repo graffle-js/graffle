@@ -5,16 +5,6 @@ import { linesPrepend, linesTrim } from './tex/tex.js'
 type FieldTuple = [k: string, v: string | null, tsDoc?: string | null]
 
 export namespace Code {
-  export const field = (
-    name: string,
-    type: string | TermObject,
-    options?: { tsDoc?: string | null; optional?: boolean },
-  ) => {
-    const tsDoc = options?.tsDoc ? TSDoc(options.tsDoc) + `\n` : ``
-    const optional = options?.optional ? `?` : ``
-    const type_ = typeof type === `string` ? type : termObject(type)
-    return `${tsDoc}${name}${optional}: ${type_}`
-  }
   export interface DirectiveTermObject {
     $spread?: string[]
     $fields?: TermObject | DirectiveTermObject
@@ -33,22 +23,35 @@ export namespace Code {
     return Object.keys(value).some(key => key === `$spread` || key === `$fields` || key === `$fieldsMerge`)
   }
 
+  // Field
+
+  const isFieldPrimitive = (value: unknown): value is TermPrimitive => {
+    return isString(value) || typeof value === `number` || typeof value === `boolean` || value === null
+  }
+
+  type FieldValue = TermPrimitive | DirectiveTermObject | TermObject
+
+  interface DirectiveField {
+    $TS_DOC?: string | null
+    $OPTIONAL?: boolean
+    $VALUE: FieldValue
+  }
+
   const isDirectiveField = (value: unknown): value is DirectiveField => {
     if (typeof value !== `object` || value === null) return false
     return DirectiveFieldKeys.$VALUE in value
   }
 
-  const isFieldPrimitive = (value: unknown): value is TermPrimitive => {
-    return isString(value) || typeof value === `number` || typeof value === `boolean`
-  }
-
-  type Field = TermPrimitive | DirectiveTermObject | TermObject
-
-  export const directiveField = (input: { $TS_DOC?: null | string; $VALUE: Field }): DirectiveField => input
-
-  interface DirectiveField {
-    $TS_DOC?: string | null
-    $VALUE: Field
+  export const objectField$ = (input: {
+    tsDoc?: null | string
+    optional?: boolean
+    value: FieldValue
+  }): DirectiveField => {
+    return {
+      $TS_DOC: input.tsDoc,
+      $OPTIONAL: input.optional,
+      $VALUE: input.value,
+    }
   }
 
   const DirectiveFieldKeys = {
@@ -57,7 +60,7 @@ export namespace Code {
   }
 
   export interface TermObject {
-    [key: string]: Field | DirectiveField
+    [key: string]: FieldValue | DirectiveField
   }
 
   export type TermObjectOf<T> = {
@@ -83,26 +86,30 @@ export namespace Code {
 
   export const termObjectFields = (object: TermObject | DirectiveTermObject): string =>
     entries(object)
-      .map(([key, value]): FieldTuple => {
-        if (value === null) return [key, null]
-
-        const [valueNormalized, tsDoc] = isDirectiveTermObject(value)
-          ? [directiveTermObject(value), null]
-          : isDirectiveField(value)
-          ? [termObjectField(value.$VALUE), value.$TS_DOC ? TSDoc(value.$TS_DOC) : null]
-          : isString(value) || typeof value === `number` || typeof value === `boolean`
-          ? [String(value), null]
-          : [termObject(value as any), null]
-        return [key, valueNormalized, tsDoc]
+      .map(([key, value]): [string, DirectiveField] => {
+        if (value === null) return [key, { $VALUE: null }]
+        if (isDirectiveTermObject(value)) return [key, { $VALUE: directiveTermObject(value) }]
+        if (isDirectiveField(value)) return [key, value]
+        // dprint-ignore
+        if (isString(value) || typeof value === `number` || typeof value === `boolean`) return [key, {$VALUE: String(value)}]
+        return [key, { $VALUE: termObject(value as any) }]
       })
-      .map(termFieldFromTuple)
-      .join(`\n`)
+      .map(([key, field]) => {
+        return fromDirectiveField(key, field)
+      })
+      .join(`,\n`)
 
-  const termObjectField = (field: Field): string => {
+  const termObjectField = (field: FieldValue): string => {
     if (isFieldPrimitive(field)) return String(field)
     return termObject(field)
   }
 
+  export const fromDirectiveField = (key: string, field: DirectiveField): string => {
+    const tsDoc = field.$TS_DOC ? TSDoc(field.$TS_DOC) + `\n` : ``
+    const optional = field.$OPTIONAL ? `?` : ``
+    const value = termObjectField(field.$VALUE)
+    return `${tsDoc}${key}${optional}: ${value}`
+  }
   export const termList = (value: string[]) => `[${value.join(`, `)}]`
   export const termFieldFromTuple = (tuple: FieldTuple) => Code.termField(tuple[0], tuple[1], { tsDoc: tuple[2] })
   export const termField = (
@@ -117,7 +124,16 @@ export namespace Code {
   export const termConstTyped = (name: string, type: string | null, value?: string) =>
     `const ${name} ${type ? `:${type}` : ``} = ${value ?? ``}`
 
-  // type
+  export const field = (
+    name: string,
+    value: string | TermObject,
+    options?: { tsDoc?: string | null; optional?: boolean },
+  ) => {
+    const tsDoc = options?.tsDoc ? TSDoc(options.tsDoc) + `\n` : ``
+    const optional = options?.optional ? `?` : ``
+    const type_ = typeof value === `string` ? value : termObject(value)
+    return `${tsDoc}${name}${optional}: ${type_}`
+  }
   export const nullable = (type: string) => `${type} | null`
   export const union = (name: string, types: string[]) => `type ${name} =\n| ${Code.tsUnionItems(types)}`
   export const tsUnionItems = (types: (string | null)[]) => types.filter(_ => _ !== null).join(`\n| `)
@@ -163,39 +179,49 @@ export namespace Code {
 
   type ExtendsClauseInput = string | null | (string | null)[]
 
-  export const tsInterface = (
-    name: string,
-    typeParameters: TypeParametersInput,
-    extendsClause: ExtendsClauseInput,
-    fields: string | TermObject,
-  ) => {
-    return tsInterface$({
-      name,
-      typeParameters,
-      extends: extendsClause,
-      fields,
-    })
+  interface AliasDefinitionInput extends TypeDefinitionInput {
+    type: string | TermObject
   }
 
+  export const tsAlias$ = ({ name, parameters, type, tsDoc, export: export_ }: AliasDefinitionInput) => {
+    const tsDoc_ = tsDoc ? TSDoc(tsDoc) + `\n` : ``
+    const export__ = export_ === false ? `` : `export `
+    const name_ = renderName(name)
+    const typeParametersClause = tsTypeParameters(parameters ?? null)
+    const type_ = typeof type === `string` ? type : termObject(type)
+    return `${tsDoc_} ${export__} type ${name_} ${typeParametersClause} = ${type_}`
+  }
+
+  interface TypeDefinitionInput {
+    name: string
+    parameters?: TypeParametersInput
+    tsDoc?: string | null
+    export?: boolean
+  }
+
+  interface InterfaceDefinitionInput extends TypeDefinitionInput {
+    extends?: ExtendsClauseInput
+    fields?: FieldsInput
+  }
+
+  type FieldsInput = string | TermObject | (readonly [name: string, field: DirectiveField])[]
+
   export const tsInterface$ = (
-    { name, typeParameters, extends: extends_, fields, tsDoc, export: export_ }: {
-      name: string
-      typeParameters?: TypeParametersInput
-      extends?: ExtendsClauseInput
-      fields?: string | TermObject
-      tsDoc?: string | null
-      export?: boolean
-    },
+    { name, parameters, extends: extends_, fields, tsDoc, export: export_ }: InterfaceDefinitionInput,
   ) => {
     const tsDoc_ = tsDoc ? TSDoc(tsDoc) + `\n` : ``
     const export__ = export_ === false ? `` : `export `
-    const typeParametersClause = tsTypeParameters(typeParameters ?? null)
+    const name_ = renderName(name)
+    const typeParametersClause = tsTypeParameters(parameters ?? null)
     const extends__ = toArray(extends_).filter(_ => Boolean(_))
     const extends___ = extends__.length > 0
       ? ` extends ${extends__.join(`, `)}`
       : ``
-    const block = typeof fields === `string` ? `{${fields}}` : termObject(fields ?? {})
-    const name_ = renderName(name)
+    const block = typeof fields === `string`
+      ? `{${fields}}`
+      : Array.isArray(fields)
+      ? termObject(Object.fromEntries(fields))
+      : termObject(fields ?? {})
     return `${tsDoc_} ${export__} interface ${name_} ${typeParametersClause} ${extends___} ${block}`
   }
 

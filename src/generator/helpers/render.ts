@@ -20,6 +20,10 @@ export const renderInlineType = (type: Grafaid.Schema.Types): string => {
   return `[${nullFlag.toString()}, ${rest}]`
 }
 
+export const maybeList = (type: string) => {
+  return `${type} | Array<${type}>`
+}
+
 export const typeTitle2 = (category: string) => (type: Grafaid.Schema.NamedTypes) => {
   const typeKind = Grafaid.getTypeAndKind(type)
   const nameOrKind = typeKind.kindName === `ScalarCustom` || typeKind.kindName === `ScalarStandard`

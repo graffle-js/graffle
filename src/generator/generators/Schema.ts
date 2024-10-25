@@ -8,7 +8,6 @@ import { type CodeGenerator, createCodeGenerator } from '../helpers/moduleGenera
 import { getTsDocContents, renderInlineType, renderName } from '../helpers/render.js'
 import type { KindRenderers } from '../helpers/types.js'
 import { ModuleGeneratorData } from './Data.js'
-import { ModuleGeneratorMethodsRoot } from './MethodsRoot.js'
 import { ModuleGeneratorScalar } from './Scalar.js'
 
 export const ModuleGeneratorSchema = createModuleGenerator(
@@ -20,7 +19,6 @@ export const ModuleGeneratorSchema = createModuleGenerator(
     // todo methods root is unused
     code(`
       import type * as Data from './${ModuleGeneratorData.name}.js'
-      import type * as ${identifiers.MethodsRoot} from './${ModuleGeneratorMethodsRoot.name}.js'
       import type { Schema as $ } from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
       import type * as ${identifiers.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
       import type * as $Scalar from './${ModuleGeneratorScalar.name}.js'
@@ -123,9 +121,9 @@ const OutputObject = createCodeGenerator<{ type: Grafaid.Schema.ObjectType }>(({
               arguments: Object.fromEntries(field.args.map(arg => {
                 return [
                   arg.name,
-                  Code.directiveField({
-                    $TS_DOC: getTsDocContents(config, arg),
-                    $VALUE: {
+                  Code.objectField$({
+                    tsDoc: getTsDocContents(config, arg),
+                    value: {
                       kind: Code.string(`InputField`),
                       name: Code.string(arg.name),
                       inlineType: renderInlineType(arg.type),
@@ -317,7 +315,7 @@ export const SchemaGenerator = createCodeGenerator(
     code(
       Code.tsInterface$({
         name: identifiers.Schema,
-        typeParameters:
+        parameters:
           `$Scalars extends ${identifiers.$$Utilities}.Schema.Scalar.Registry = ${identifiers.$$Utilities}.Schema.Scalar.Registry.Empty`,
         extends: `$`,
         fields: schema,
