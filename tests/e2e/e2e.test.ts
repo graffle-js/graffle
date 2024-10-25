@@ -57,7 +57,7 @@ test(`client works without generation`, async ({ project, pokemonService }) => {
   `)
 })
 
-test.only(`client works with generation`, async ({ project, pokemonService }) => {
+test(`client works with generation`, async ({ project, pokemonService }) => {
   await project.fs.writeAsync(
     `main.ts`,
     `
