@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises'
-import { readJsonFile } from './fsp.js'
 import type { JsonObject } from 'type-fest'
+import { readJsonFile } from './fsp.js'
 
 export interface Formatter {
   formatText(content: string, customFormatterConfig?: object): Promise<string>
@@ -9,8 +9,6 @@ export interface Formatter {
 export const passthroughFormatter: Formatter = {
   formatText: (content) => Promise.resolve(content),
 }
-  
-
 
 /**
  * Attempt to get a TypeScript formatter using dynamic imports. If none succeed then returns null.
@@ -26,7 +24,7 @@ export const getTypeScriptFormatter = async (): Promise<Formatter | null> => {
       formatText: async (fileText, customFormatterConfig) => {
         // todo handle failing to read configuration file gracefully.
         // TODO don't read config file manually? https://github.com/dprint/js-formatter/issues/13
-        const localConfig = await readJsonFile<{ typescript?:JsonObject }>(`dprint.json`) ?? {}
+        const localConfig = await readJsonFile<{ typescript?: JsonObject }>(`dprint.json`) ?? {}
         const overrideConfig = {
           ...localConfig.typescript,
           ...customFormatterConfig,

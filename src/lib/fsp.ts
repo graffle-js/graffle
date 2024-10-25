@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises'
 import { extname, isAbsolute, join } from 'node:path'
-import { errorFromMaybeError } from './prelude.js'
 import type { JsonValue } from 'type-fest'
+import { errorFromMaybeError } from './prelude.js'
 
 export const statMaybeExists = async (path: string) => {
   return await fs.stat(path).catch((_: unknown) => {
@@ -37,7 +37,7 @@ export const toFilePath = (fileName: string, path: string) => {
 }
 
 export const readJsonFile = async <$Json extends JsonValue>(path: string): Promise<$Json | null> => {
-  let content: string 
+  let content: string
 
   try {
     content = await fs.readFile(path, `utf8`)
