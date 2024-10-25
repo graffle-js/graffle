@@ -51,10 +51,30 @@ The CLI has built in help that you can use to learn about all its inputs.
 pnpm graffle --help
 ```
 
+## Configuration File
+
+The CLI will by default look for a `graffle.config.{js,ts,mts,mjs}` file in your project. If found, it will use the default export as configuration. Any arguments you provide on the command line will take precedence over the configuration file.
+
+```ts
+// graffle.config.ts
+import { SchemaErrors } from 'graffle/extensions/schema-errors/generator'
+import { Generator } from 'graffle/generator'
+
+export default Generator.configure({
+  lint: {
+    missingCustomScalarCodec: false,
+  },
+})
+```
+
 ## API
 
 If you need to script graffle client generation then you can drop to the underlying Graffle generator API. It is largely one-to-one with the CLI. Use its JSDoc to learn about all its inputs.
 
 ```ts
-import { generate } from 'graffle/generator'
+import { Generator } from 'graffle/generator'
+
+await Generator.generate({
+  // ...
+})
 ```

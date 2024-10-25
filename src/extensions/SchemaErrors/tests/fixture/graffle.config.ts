@@ -3,7 +3,7 @@ import { Generator } from '../../../../entrypoints/generator.js'
 import { SchemaErrors } from '../../generator.js'
 
 export default Generator
-  .create({
+  .configure({
     name: `GraffleSchemaErrors`,
     schema,
     lint: {

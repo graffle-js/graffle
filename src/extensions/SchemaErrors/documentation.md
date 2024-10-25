@@ -10,9 +10,9 @@ This extension requires generation and also itself extends the generator. You mu
 // graffle.config.ts
 
 import { SchemaErrors } from 'graffle/extensions'
-import { Graffle } from 'graffle/generator'
+import { Generator } from 'graffle/generator'
 
-export default Graffle
+export default Generator
   .create()
   .use(SchemaErrors())
 ```
@@ -38,10 +38,10 @@ By default all objects whose name begin with `Error` will be considered to be "e
 ```ts
 // graffle.config.ts
 import { SchemaErrors } from 'graffle/extensions/schema-errors/generator'
-import { Graffle } from 'graffle/generator'
+import { Generator } from 'graffle/generator'
 
-export default Graffle
-  .create()
+export default Generator
+  .configure()
   .use(SchemaErrors({
     isErrorType: (type) => type.name.match(/^Foo/),
   }))

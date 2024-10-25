@@ -1,2 +1,2 @@
 export { generate } from '../generator/_.js'
-export { create } from '../generator/configFile/builder.js'
+export { configure } from '../generator/configFile/builder.js'

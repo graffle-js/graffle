@@ -15,7 +15,7 @@ export interface Builder {
   use: (extension: Extension) => Builder
 }
 
-export const create = (input: BuilderInput): Builder => {
+export const configure = (input: BuilderInput): Builder => {
   return {
     _: {
       input,
@@ -24,7 +24,7 @@ export const create = (input: BuilderInput): Builder => {
      * todo
      */
     use: (extension) => {
-      return create({
+      return configure({
         ...input,
         extensions: [...(input.extensions ?? []), extension],
       })
