@@ -69,3 +69,17 @@ jobs:
           node-version: ${{ matrix.node }}
       - run: pnpm build
       - run: pnpm test:examples -- --environment ${{ matrix.environment }}
+  test-e2e:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [22]
+        environment: [node]
+    name: test e2e usingNode ${{ matrix.node }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+        with:
+          node-version: ${{ matrix.node }}
+      - run: pnpm build
+      - run: pnpm test:e2e
