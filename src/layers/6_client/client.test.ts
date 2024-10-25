@@ -7,18 +7,16 @@ import { Throws } from '../../extensions/Throws/Throws.js'
 
 const endpoint = new URL(`https://foo.io/api/graphql`)
 
-describe(`without a registered client, only raw is available`, () => {
+describe(`without a registered client, document builder is not statically available but still works at runtime`, () => {
   const graffle = Graffle.create({ name: `unknown`, schema: endpoint }).use(Throws())
 
   test(`unavailable methods`, () => {
     // @ts-expect-error
-    expect(graffle.document).toBeUndefined()
+    expect(typeof graffle.document).toEqual(`function`)
     // @ts-expect-error
-    expect(graffle.query).toBeUndefined()
+    expect(typeof graffle.query).toEqual(`object`)
     // @ts-expect-error
-    expect(graffle.subscription).toBeUndefined()
-    // @ts-expect-error
-    expect(graffle.mutation).toBeUndefined()
+    expect(typeof graffle.mutation).toEqual(`object`)
   })
 
   test(`available methods`, () => {
