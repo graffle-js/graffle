@@ -169,6 +169,7 @@
     "@typescript-eslint/parser": "^8.11.0",
     "async-cleanup": "^1.0.0",
     "doctoc": "^2.2.1",
+    "dprint": "^0.47.4",
     "dripip": "^0.10.0",
     "es-toolkit": "^1.26.1",
     "eslint": "^9.13.0",
