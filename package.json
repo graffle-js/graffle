@@ -18,9 +18,34 @@
         "default": "./build/entrypoints/generator.js"
       }
     },
-    "./extensions": {
+    "./extensions/upload": {
       "import": {
-        "default": "./build/entrypoints/extensions.js"
+        "default": "./build/entrypoints/extensions/upload/runtime.js"
+      }
+    },
+    "./extensions/throws": {
+      "import": {
+        "default": "./build/entrypoints/extensions/throws/runtime.js"
+      }
+    },
+    "./extensions/opentelemetry": {
+      "import": {
+        "default": "./build/entrypoints/extensions/opentelemetry/runtime.js"
+      }
+    },
+    "./extensions/introspection": {
+      "import": {
+        "default": "./build/entrypoints/extensions/introspection/runtime.js"
+      }
+    },
+    "./extensions/schema-errors": {
+      "import": {
+        "default": "./build/entrypoints/extensions/schema-errors/runtime.js"
+      }
+    },
+    "./extensions/schema-errors/generator": {
+      "import": {
+        "default": "./build/entrypoints/extensions/schema-errors/gentime.js"
       }
     },
     "./client": {

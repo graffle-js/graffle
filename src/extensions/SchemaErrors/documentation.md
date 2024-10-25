@@ -9,7 +9,7 @@ This extension requires generation and also itself extends the generator. You mu
 ```ts
 // graffle.config.ts
 
-import { SchemaErrors } from 'graffle/extensions'
+import { SchemaErrors } from 'graffle/extensions/schema-errors/generator'
 import { Generator } from 'graffle/generator'
 
 export default Generator
@@ -20,7 +20,7 @@ export default Generator
 ```ts twoslash
 // your/app/code.ts
 import { Graffle } from 'graffle'
-import { SchemaErrors } from 'graffle/extensions'
+import { SchemaErrors } from 'graffle/extensions/schema-errors'
 
 const graffle = Graffle.create({ schema: '...' }).use(SchemaErrors())
 ```

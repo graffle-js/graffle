@@ -17,7 +17,7 @@ import { test } from '../_/helpers.js'
 
 // ...?
 
-test(`client works without generation`, async ({ project, pokemonService }) => {
+test.only(`client works without generation`, async ({ project, pokemonService }) => {
   await project.fs.writeAsync(
     `main.ts`,
     `

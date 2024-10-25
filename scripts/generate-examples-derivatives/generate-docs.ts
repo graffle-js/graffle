@@ -132,6 +132,14 @@ const transformRewriteGraffleImports = (example: Example) => {
   const newContent = example.file.content
     .replaceAll(/from '.+\/tests\/_\/schemas\/(.*)\/graffle\/(.+)\.js'/g, `from './$1/$2.js'`)
     .replaceAll(
+      /from '.*entrypoints\/extensions\/(.*?)\/runtime.js'/g,
+      `from 'graffle/extensions/$1'`,
+    )
+    .replaceAll(
+      /from '.*entrypoints\/extensions\/(.*?)\/gentime.js'/g,
+      `from 'graffle/extensions/$1/generator'`,
+    )
+    .replaceAll(
       /from '.*entrypoints\/main.js'/g,
       `from 'graffle'`,
     )

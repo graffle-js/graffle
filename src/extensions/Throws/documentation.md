@@ -36,7 +36,7 @@ graffle.throws().query.foo()
 
 ```ts twoslash
 import { Graffle } from 'graffle'
-import { Throws } from 'graffle/extensions'
+import { Throws } from 'graffle/extensions/throws'
 
 const graffle = Graffle.create({ schema: '...' }).use(Throws())
 ```

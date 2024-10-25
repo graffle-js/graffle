@@ -5,7 +5,7 @@
 
 <!-- dprint-ignore-start -->
 ```ts twoslash
-import { Throws } from 'graffle/extensions'
+import { Throws } from 'graffle/extensions/throws'
 import { Pokemon } from './pokemon/__.js'
 
 const pokemon = Pokemon

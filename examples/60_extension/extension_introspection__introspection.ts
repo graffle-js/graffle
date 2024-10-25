@@ -2,7 +2,7 @@
  * This example shows how to use the Introspection extension to easily introspect your schema.
  */
 
-import { Introspection } from '../../src/entrypoints/extensions.js'
+import { Introspection } from '../../src/entrypoints/extensions/introspection/runtime.js'
 import { Pokemon } from '../../tests/_/schemas/pokemon/graffle/__.js'
 import { interceptAndShowUncaughtErrors, show } from '../$/show.js'
 

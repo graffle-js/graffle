@@ -30,15 +30,13 @@ console.log(result)
       { name: 'Weedle' }
     ]
   },
-  errors: undefined,
-  extensions: undefined,
   response: Response {
     status: 200,
     statusText: 'OK',
     headers: Headers {
       'content-type': 'application/graphql-response+json; charset=utf-8',
       'content-length': '142',
-      date: 'Wed, 23 Oct 2024 15:20:39 GMT',
+      date: 'Fri, 25 Oct 2024 02:49:44 GMT',
       connection: 'keep-alive',
       'keep-alive': 'timeout=5'
     },

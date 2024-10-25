@@ -2,7 +2,7 @@
  * This example shows how to use the Throws extension to throw errors for one-off cases.
  */
 
-import { Throws } from '../../src/entrypoints/extensions.js'
+import { Throws } from '../../src/entrypoints/extensions/throws/runtime.js'
 import { Pokemon } from '../../tests/_/schemas/pokemon/graffle/__.js'
 import { interceptAndShowUncaughtErrors, show } from '../$/show.js'
 

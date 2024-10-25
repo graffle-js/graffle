@@ -3,7 +3,7 @@
 
 <!-- dprint-ignore-start -->
 ```ts twoslash
-import { Introspection } from 'graffle/extensions'
+import { Introspection } from 'graffle/extensions/introspection'
 import { Pokemon } from './pokemon/__.js'
 
 const pokemon = Pokemon.create().use(Introspection())

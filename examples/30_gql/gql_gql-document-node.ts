@@ -3,7 +3,8 @@
  */
 
 import { parse } from 'graphql'
-import { Opentelemetry, Throws } from '../../src/entrypoints/extensions.js'
+import { Opentelemetry } from '../../src/entrypoints/extensions/opentelemetry/runtime.js'
+import { Throws } from '../../src/entrypoints/extensions/throws/runtime.js'
 import { Graffle } from '../../src/entrypoints/main.js'
 import { publicGraphQLSchemaEndpoints, show } from '../$/helpers.js'
 

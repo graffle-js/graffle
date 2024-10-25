@@ -52,7 +52,7 @@ ContextualAggregateError: One or more errors in the execution result.
   context: {},
   cause: undefined,
   errors: [
-    GraphQLError: [
+    ContextualError: [
       {
         "code": "too_small",
         "minimum": 1,
@@ -65,15 +65,15 @@ ContextualAggregateError: One or more errors in the execution result.
         ]
       }
     ]
-        at <anonymous> (/some/path/to/http.ts:XX:XX:47)
+        at <anonymous> (/some/path/to/handleOutput.ts:XX:XX:16)
         at Array.map (<anonymous>)
-        at parseExecutionResult (/some/path/to/http.ts:XX:XX:28)
-        at Object.unpack (/some/path/to/core.ts:XX:XX:26)
+        at handleOutput (/some/path/to/handleOutput.ts:XX:XX:21)
+        at executeDocument (/some/path/to/requestMethods.ts:XX:XX:10)
         at process.processTicksAndRejections (node:internal/process/task_queues:XX:XX)
-        at async runHook (/some/path/to/runHook.ts:XX:XX:16) {
-      path: [ 'addPokemon' ],
-      locations: undefined,
-      extensions: [Object: null prototype] {}
+        at async executeRootField (/some/path/to/requestMethods.ts:XX:XX:18)
+        at async <anonymous> (/some/path/to/output_return-error_return-error-execution__return-error-execution.ts:XX:XX:16) {
+      context: { locations: [ { line: 2, column: 3 } ], path: [ 'addPokemon' ] },
+      cause: undefined
     }
   ]
 }

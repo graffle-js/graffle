@@ -12,7 +12,7 @@ import { createConfig, type Input } from './config.js'
  * @example
  *
  * ```ts
- * import { Introspection } from 'graffle/extensions'
+ * import { Introspection } from 'graffle/extensions/introspection'
  *
  * const graffle = new Graffle({
  *   schema: 'http://localhost:3000/graphql',

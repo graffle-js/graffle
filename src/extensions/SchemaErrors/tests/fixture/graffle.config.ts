@@ -1,6 +1,6 @@
 import { schema } from '../../../../../tests/_/schemas/kitchen-sink/schema.js'
 import { Generator } from '../../../../entrypoints/generator.js'
-import { SchemaErrors } from '../../generator.js'
+import { SchemaErrors } from '../../gentime.js'
 
 export default Generator
   .configure({

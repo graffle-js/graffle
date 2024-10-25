@@ -8,7 +8,7 @@ This example shows how to use the Throws extension to throw errors for one-off c
 
 <!-- dprint-ignore-start -->
 ```ts twoslash
-import { Throws } from 'graffle/extensions'
+import { Throws } from 'graffle/extensions/throws'
 import { Pokemon } from './pokemon/__.js'
 
 const pokemon = Pokemon

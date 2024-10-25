@@ -16,7 +16,7 @@ pnpm add @opentelemetry/api
 
 ```ts twoslash
 import { Graffle } from 'graffle'
-import { Opentelemetry } from 'graffle/extensions'
+import { Opentelemetry } from 'graffle/extensions/opentelemetry'
 
 const graffle = Graffle.create({ schema: '...' }).use(Opentelemetry())
 ```
