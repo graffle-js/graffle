@@ -3,14 +3,10 @@ import * as Path from 'node:path'
 import { Graffle } from '../../entrypoints/__Graffle.js'
 import { Introspection } from '../../extensions/Introspection/Introspection.js'
 import { ConfigManager } from '../../lib/config-manager/__.js'
-import { fileExists, isPathToADirectory, toAbsolutePath, toFilePath } from '../../lib/fs.js'
+import { fileExists, isPathToADirectory, toAbsolutePath, toFilePath } from '../../lib/fsp.js'
 import { Grafaid } from '../../lib/grafaid/__.js'
 import { isString } from '../../lib/prelude.js'
-import {
-  type Formatter,
-  getTypescriptFormatterOrPassthrough,
-  passthroughFormatter,
-} from '../../lib/typescript-formatter.js'
+import { type Formatter, getTypeScriptFormatter, passthroughFormatter } from '../../lib/typescript-formatter.js'
 import type { Extension } from '../extension/types.js'
 import { defaultLibraryPaths } from './defaults.js'
 import { defaultName } from './defaults.js'
@@ -115,7 +111,27 @@ export const createConfig = async (input: Input): Promise<Config> => {
   // --- Formatting ---
 
   const formattingEnabled = input.format ?? true
-  const formatter = formattingEnabled ? await getTypescriptFormatterOrPassthrough() : passthroughFormatter
+  let formatter = passthroughFormatter
+  if (formattingEnabled) {
+    const formatterReal = await getTypeScriptFormatter()
+    if (!formatterReal) {
+      // todo use floggy
+      console.log(`
+WARNING: No TypeScript formatter found. Generated code will remain ugly. To have code automatically formatted do one of the following things:
+
+- pnpm add --save-dev @dprint/formatter @dprint/typescript
+- pnpm add --save-dev prettier
+
+To suppress this warning disable formatting in one of the following ways:
+
+- CLI: graffle --no-format
+- Configuration file: Generator.configuration({ format: false })
+- API: Generator.generate({ format: false })
+`.trim())
+    } else {
+      formatter = formatterReal
+    }
+  }
 
   // --- Library Paths ---
 

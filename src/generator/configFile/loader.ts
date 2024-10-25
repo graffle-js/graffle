@@ -1,6 +1,6 @@
 import * as Path from 'node:path'
 import { Errors } from '../../lib/errors/__.js'
-import { isPathToADirectory, toAbsolutePath } from '../../lib/fs.js'
+import { isPathToADirectory, toAbsolutePath } from '../../lib/fsp.js'
 import { importFirst } from '../../lib/import-first.js'
 import { isError } from '../../lib/prelude.js'
 import { type Builder, isBuilder } from './builder.js'

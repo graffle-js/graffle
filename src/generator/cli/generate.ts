@@ -3,7 +3,7 @@
 import { Command } from '@molt/command'
 import * as Path from 'node:path'
 import { z } from 'zod'
-import { toAbsolutePath } from '../../lib/fs.js'
+import { toAbsolutePath } from '../../lib/fsp.js'
 import { isError, urlParseSafe } from '../../lib/prelude.js'
 import { Generator } from '../__.js'
 

@@ -8,6 +8,7 @@ import { Graffle } from '../../src/entrypoints/main.js'
 import type { ClientContext } from '../../src/entrypoints/utilities-for-generated.js'
 import type { Client } from '../../src/layers/6_client/client.js'
 import type { ConfigManager } from '../../src/lib/config-manager/__.js'
+import { Grafaid } from '../../src/lib/grafaid/__.js'
 import { CONTENT_TYPE_REC } from '../../src/lib/grafaid/http/http.js'
 import { type SchemaService, serveSchema } from './lib/serveSchema.js'
 import { db } from './schemas/db.js'
@@ -18,6 +19,11 @@ import { schema } from './schemas/pokemon/schema.js'
 interface Project {
   fs: FSJetpack
   run: ExecaMethod
+  addDprintConfig: () => Promise<void>
+  addPokemonSchemaSDL: (relativePath?: string) => Promise<{
+    relative: string
+    absolute: string
+  }>
 }
 
 export const kitchenSink = KitchenSink.create({ schema: kitchenSinkSchema })
@@ -42,8 +48,24 @@ export const test = testBase.extend<Fixtures>({
     const project: Project = {
       fs,
       run,
+      addDprintConfig: async () => {
+        await fs.writeAsync(`dprint.json`, {
+          typescript: {},
+          plugins: [`https://plugins.dprint.dev/typescript-0.93.0.wasm`],
+        })
+      },
+      addPokemonSchemaSDL: async (relativePath) => {
+        const pathRelative = relativePath
+          ? Path.join(relativePath, `schema.graphql`)
+          : Path.join(`./`, `schema.graphql`)
+        const contents = Grafaid.Schema.print(schema)
+        await fs.writeAsync(pathRelative, contents)
+        return {
+          relative: pathRelative,
+          absolute: Path.join(fs.cwd(), pathRelative),
+        }
+      },
     }
-    const relativePathToGraffle = Path.join(`..`, Path.relative(fs.cwd(), Path.join(import.meta.dirname, `../../`)))
     await fs.writeAsync(`package.json`, {
       name: `test`,
       type: `module`,
@@ -72,7 +94,11 @@ export const test = testBase.extend<Fixtures>({
         target: `ES2023`,
       },
     })
-    await run`pnpm add ${relativePathToGraffle} tsx @tsconfig/strictest/tsconfig.json`
+
+    const isLink = Boolean(process.env[`e2e_link`])
+    const graffleInstallPath = (isLink ? `` : `file:`)
+      + Path.join(`..`, Path.relative(fs.cwd(), Path.join(import.meta.dirname, `../../`)))
+    await run`pnpm add ${graffleInstallPath} tsx @tsconfig/strictest/tsconfig.json`
     console.log(`Scaffolded project at: ${project.fs.cwd()}\n`)
     await use(project)
   },

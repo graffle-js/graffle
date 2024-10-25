@@ -14,13 +14,15 @@ If you don't already have a project, create one:
 pnpm init
 ```
 
+<!-- TODO use formatter to make generated code readable -->
+
 We're going to use TypeScript for this project but you don't have to.
 
 - [`tsx`](https://github.com/privatenumber/tsx) makes it to easy run TypeScript files.
 - [`@tsconfig/strictest`](https://github.com/tsconfig/bases/blob/main/bases/strictest.json) is optional but makes sure we have a good default settings.
 
 ```sh
-pnpm add --development typescript tsx @tsconfig/strictest
+pnpm add --save-dev typescript tsx @tsconfig/strictest
 ```
 
 ```sh

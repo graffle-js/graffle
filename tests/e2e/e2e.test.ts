@@ -40,21 +40,7 @@ test(`client works without generation`, async ({ project, pokemonService }) => {
 		`,
   )
   const result = await project.run`pnpm tsx main`
-  expect(result.stdio).toMatchInlineSnapshot(`
-    [
-      undefined,
-      "[
-      {
-        name: 'Pikachu',
-        hp: 35,
-        attack: 55,
-        defense: 40,
-        trainer: { name: 'Ash' }
-      }
-    ]",
-      "",
-    ]
-  `)
+  expect(result.stdio).toMatchSnapshot()
 })
 
 test(`client works with generation`, async ({ project, pokemonService }) => {
@@ -78,33 +64,26 @@ test(`client works with generation`, async ({ project, pokemonService }) => {
   )
   {
     const result = await project.run`pnpm graffle --schema http://localhost:3001/graphql`
-    expect(result.stdio).toMatchInlineSnapshot(`
-      [
-        undefined,
-        "WARNING: Custom scalars detected in the schema, but you have not created a custom scalars module to import implementations from.",
-        "",
-      ]
-    `)
+    expect(result.stdio).toMatchSnapshot()
   }
   {
     await project.run`pnpm check:types`
   }
   {
     const result = await project.run`pnpm tsx main`
-    expect(result.stdio).toMatchInlineSnapshot(`
-      [
-        undefined,
-        "[
-        {
-          name: 'Pikachu',
-          hp: 35,
-          attack: 55,
-          defense: 40,
-          trainer: { name: 'Ash' }
-        }
-      ]",
-        "",
-      ]
-    `)
+    expect(result.stdio).toMatchSnapshot()
   }
+})
+
+test(`client uses dprint formatter if installed`, async ({ project }) => {
+  await project.addDprintConfig()
+  const path = await project.addPokemonSchemaSDL()
+
+  await project.run`pnpm add --save-dev dprint @dprint/formatter @dprint/typescript`
+
+  const genResult = await project.run`pnpm graffle --schema ${path.relative} --format`
+  const genResultStdout = genResult.stdout as string
+  expect(genResultStdout.includes(`No TypeScript formatter found`)).toEqual(false)
+
+  await project.run`pnpm dprint check graffle/**/*`
 })
