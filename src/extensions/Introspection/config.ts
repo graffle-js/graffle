@@ -1,4 +1,5 @@
 import type { GraphQLSchema, IntrospectionOptions } from 'graphql'
+import type { InputIntrospectionOptions } from '../../generator/_.js'
 
 export type Input = {
   /**
@@ -6,9 +7,13 @@ export type Input = {
    */
   schema?: string | URL | GraphQLSchema
   /**
-   * The introspection query options. By default only some kinds of information are included. See JSDoc for each option's own default value.
+   * The introspection query options. By default all kinds of information are sought.
+   *
+   * Where those options are known to be optional by valid GraphQL servers then they start enabled but are
+   * progressively disabled upon introspection failure until success or no more known potentially
+   * unsupported features remain.
    */
-  options?: IntrospectionOptions
+  options?: InputIntrospectionOptions
 }
 
 export type Config = {
@@ -18,7 +23,14 @@ export type Config = {
 
 export const defaults = {
   schema: null,
-  options: {},
+  options: {
+    descriptions: true,
+    specifiedByUrl: true,
+    directiveIsRepeatable: true,
+    schemaDescription: true,
+    inputValueDeprecation: true,
+    oneOf: true,
+  },
 } satisfies Config
 
 export const createConfig = (input?: Input): Config => {

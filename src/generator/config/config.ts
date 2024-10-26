@@ -245,21 +245,15 @@ const createConfigSchema = async (
       kindMap: Grafaid.Schema.KindMap.getKindMap(instance),
     }
   } else {
-    const graffle = Graffle.create({ schema: input.schema.url }).use(Introspection({
-      options: {
-        directiveIsRepeatable: true,
-        schemaDescription: true,
-        specifiedByUrl: true,
-        inputValueDeprecation: true,
-        // todo oneOf
-      },
-    }))
+    const graffle = Graffle.create({ schema: input.schema.url }).use(Introspection())
     const data = await graffle.introspect()
+    // console.log(data)
     if (!data) {
       throw new Error(`No data returned for introspection query.`)
     }
     const instance = Grafaid.Schema.buildClientSchema(data)
     const sdl = Grafaid.Schema.print(instance)
+    console.log(sdl)
     return {
       via: `introspection`,
       sdl,

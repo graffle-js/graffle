@@ -6,6 +6,8 @@ import type { HandleOutput } from '../../layers/6_client/handleOutput.js'
 import type { Fluent } from '../../lib/fluent/__.js'
 import { createConfig, type Input } from './config.js'
 
+const knownPotentiallyUnsupportedFeatures = [`inputValueDeprecation`, `oneOf`] as const
+
 /**
  * This extension adds a `.introspect` method to the client that will return the introspected schema.
  *
@@ -29,21 +31,33 @@ export const Introspection = (input?: Input) => {
     name: `Introspection`,
     onBuilderGet: ({ path, property, client }) => {
       if (!(path.length === 0 && property === `introspect`)) return
+      const clientCatching = client.with({ output: { envelope: false, errors: { execution: `return` } } })
 
       return async () => {
-        const introspectionQueryDocument = getIntrospectionQuery(config.options)
+        let introspectionQueryDocument = getIntrospectionQuery(config.options)
+        const result = await clientCatching.gql(introspectionQueryDocument).send()
+        const featuresDropped: string[] = []
+        const enabledKnownPotentiallyUnsupportedFeatures = knownPotentiallyUnsupportedFeatures.filter(_ =>
+          config.options[_] !== false
+        )
 
-        // todo use config schema override.
-        // This will require being able to change the configured schema.
-        // If moving between transports (e.g. endpoint / instance) then it could break anyware
-        // that assumes a certain transport is being used.
-        // Solutions:
-        // 1. Don't narrow hook types of inline anyware. Safe. Harder to write anyware for all cases.
-        // 2. Somehow make this extensions input inherit the transport constraint of the instance it is being used on.
-        //    Meaning the input would not allow any schema source but only those compatible with the transport.
-        //    Note: This would still require some kind of unsafe internal way to change the already set schema.
-        //    Maybe make it safe using with wherein with allows changing as described above _within the transport constraint_.
-        // 3. Don't make this safe. Rely on users not hitting case of mixing transports + having an anyware not expecting it.
+        // Try to find a working introspection query.
+        if (result instanceof Error) {
+          for (const feature of enabledKnownPotentiallyUnsupportedFeatures) {
+            featuresDropped.push(feature)
+            introspectionQueryDocument = getIntrospectionQuery({
+              ...config.options,
+              [feature]: false,
+            })
+            const result = await clientCatching.gql(introspectionQueryDocument).send()
+            if (!(result instanceof Error)) break
+          }
+        }
+
+        // Send the query again with the host configuration for output.
+        // TODO rather than having to make this query again expose a way to send a value through the output handler here.
+        // TODO expose the featuresDropped info on the envelope so that upstream can communicate to users what happened
+        // finally at runtime.
         return await client.gql(introspectionQueryDocument).send()
       }
     },
