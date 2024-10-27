@@ -1,3 +1,4 @@
+import type { OperationTypeNode } from 'graphql'
 import type { InferResult } from '../../../../../../src/entrypoints/schema.js'
 import * as Data from './Data.js'
 import type { Schema } from './Schema.js'
@@ -38,21 +39,23 @@ export const Select = createSelect(Data.Name)
 //
 
 export namespace Select {
-  // Root Types
-  // ----------
-  export type Query<$SelectionSet extends SelectionSets.Query> = InferResult.Root<$SelectionSet, Schema, 'Query'>
-  // OutputObject Types
-  // ------------------
+  //                                                Root
+  // --------------------------------------------------------------------------------------------------
+  //
+  export type Query<$SelectionSet extends SelectionSets.Query> = InferResult.Operation<
+    $SelectionSet,
+    Schema,
+    OperationTypeNode.QUERY
+  >
+  //                                            OutputObject
+  // --------------------------------------------------------------------------------------------------
+  //
 
-  // -- None --
+  //                                               Union
+  // --------------------------------------------------------------------------------------------------
+  //
 
-  // Union Types
-  // -----------
-
-  // -- None --
-
-  // Interface Types
-  // ---------------
-
-  // -- None --
+  //                                             Interface
+  // --------------------------------------------------------------------------------------------------
+  //
 }

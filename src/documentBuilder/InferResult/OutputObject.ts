@@ -26,7 +26,7 @@ type SelectionNonSelectAlias<$SelectionSet, $Schema extends Schema, $Node extend
 export namespace Errors {
   export type UnknownFieldName<
     $FieldName extends string,
-    $Object extends Schema.StandardTypes.RootType | Schema.OutputObject,
+    $Object extends Schema.OutputObject,
   > = TSErrorDescriptive<'Object', `field "${$FieldName}" does not exist on object "${$Object['name']}"`>
 }
 

@@ -13,7 +13,7 @@ export const toGraphQLDocument = (
   const operationsAndVariables = Object
     .values(graffleDocument.operations)
     .map(graffleOperation => {
-      const sddm = options?.sddm?.roots[graffleOperation.rootType]
+      const sddm = options?.sddm?.operations[graffleOperation.type]
       return toGraphQLOperationDefinition(sddm, graffleOperation, options)
     })
 

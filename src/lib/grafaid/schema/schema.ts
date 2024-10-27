@@ -149,24 +149,6 @@ export const NameToClassNamedType = {
 
 export type NameToClassNamedType = typeof NameToClassNamedType
 
-export const RootTypeName = {
-  Query: `Query`,
-  Mutation: `Mutation`,
-  Subscription: `Subscription`,
-} as const
-
-export type RootTypeName = keyof typeof RootTypeName
-
-export type RootTypeNameQuery = typeof RootTypeName['Query']
-
-export type RootTypeNameMutation = typeof RootTypeName['Mutation']
-
-export type RootTypeNameSubscription = typeof RootTypeName['Subscription']
-
-export const isRootType = (value: unknown): value is GraphQLObjectType => {
-  return isObjectType(value) && value.name in RootTypeName
-}
-
 export type NodeName = keyof NameToClass
 
 // export type AnyClass = InstanceType<NameToClass[keyof NameToClass]>

@@ -2,7 +2,6 @@ import type { GraphQLError, OperationDefinitionNode, OperationTypeNode } from 'g
 import type { Errors } from '../errors/__.js'
 import type { Grafaid } from './__.js'
 import { getOperationDefinition, normalizeDocumentToNode } from './document.js'
-import type { RootTypeName } from './schema/schema.js'
 import type { TypedDocument } from './typed-document/__.js'
 
 export interface RequestInput {
@@ -19,12 +18,10 @@ export interface RequestDocumentNodeInput {
 
 export interface RequestAnalyzedInput extends RequestInput {
   operation: OperationTypeNode | OperationDefinitionNode
-  rootType: RootTypeName
 }
 
 export interface RequestAnalyzedDocumentNodeInput extends RequestDocumentNodeInput {
   operation: OperationDefinitionNode
-  rootType: RootTypeName
 }
 
 export type Variables = {

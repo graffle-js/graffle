@@ -1,6 +1,6 @@
 import { SelectionSetGraphqlMapper } from '../../documentBuilder/SelectGraphQLMapper/__.js'
 import { Anyware } from '../../lib/anyware/__.js'
-import { Grafaid } from '../../lib/grafaid/__.js'
+import type { Grafaid } from '../../lib/grafaid/__.js'
 import { getOperationDefinition, OperationTypeToAccessKind, print } from '../../lib/grafaid/document.js'
 import { execute } from '../../lib/grafaid/execute.js' // todo
 import {
@@ -42,7 +42,6 @@ export const graffleMappedResultToRequest = (
   if (!operation_) throw new Error(`Unknown operation named "${String(operationName)}".`)
 
   return {
-    rootType: Grafaid.Document.OperationTypeToRootType[operation_.operation],
     operationName,
     operation: operation_,
     query: document,

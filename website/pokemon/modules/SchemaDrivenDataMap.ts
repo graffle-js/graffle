@@ -1,5 +1,5 @@
-import type * as $$Utilities from 'graffle/utilities-for-generated'
-import * as $Scalar from './Scalar.js'
+import type * as $$Utilities from "graffle/utilities-for-generated";
+import * as $Scalar from "./Scalar.js";
 //
 //
 //
@@ -16,15 +16,15 @@ import * as $Scalar from './Scalar.js'
 //
 //
 
-const Float = $Scalar.Float
+const Float = $Scalar.Float;
 
-const ID = $Scalar.ID
+const ID = $Scalar.ID;
 
-const String = $Scalar.String
+const String = $Scalar.String;
 
-const Int = $Scalar.Int
+const Int = $Scalar.Int;
 
-const Boolean = $Scalar.Boolean
+const Boolean = $Scalar.Boolean;
 
 //
 //
@@ -42,7 +42,7 @@ const Boolean = $Scalar.Boolean
 //
 //
 
-// None of your ScalarCustoms have custom scalars.
+const Date = "Date";
 
 //
 //
@@ -61,19 +61,19 @@ const Boolean = $Scalar.Boolean
 //
 
 const BattleWildResult: $$Utilities.SchemaDrivenDataMap.Enum = {
-  k: 'enum',
-  n: 'BattleWildResult',
-}
+  k: "enum",
+  n: "BattleWildResult",
+};
 
 const PokemonType: $$Utilities.SchemaDrivenDataMap.Enum = {
-  k: 'enum',
-  n: 'PokemonType',
-}
+  k: "enum",
+  n: "PokemonType",
+};
 
 const TrainerClass: $$Utilities.SchemaDrivenDataMap.Enum = {
-  k: 'enum',
-  n: 'TrainerClass',
-}
+  k: "enum",
+  n: "TrainerClass",
+};
 
 //
 //
@@ -92,28 +92,36 @@ const TrainerClass: $$Utilities.SchemaDrivenDataMap.Enum = {
 //
 
 const DateFilter: $$Utilities.SchemaDrivenDataMap.InputObject = {
-  n: 'DateFilter',
+  n: "DateFilter",
+  fcs: ["gte", "lte"],
   f: {
-    gte: {},
-    lte: {},
+    gte: {
+      nt: Date,
+    },
+    lte: {
+      nt: Date,
+    },
   },
-}
+};
 
 const PokemonFilter: $$Utilities.SchemaDrivenDataMap.InputObject = {
-  n: 'PokemonFilter',
+  n: "PokemonFilter",
+  fcs: ["birthday"],
   f: {
-    birthday: {},
+    birthday: {
+      // nt: DateFilter, <-- Assigned later to avoid potential circular dependency.
+    },
     name: {},
   },
-}
+};
 
 const StringFilter: $$Utilities.SchemaDrivenDataMap.InputObject = {
-  n: 'StringFilter',
+  n: "StringFilter",
   f: {
     contains: {},
     in: {},
   },
-}
+};
 
 //
 //
@@ -142,7 +150,7 @@ const BattleRoyale: $$Utilities.SchemaDrivenDataMap.OutputObject = {
       // nt: Trainer, <-- Assigned later to avoid potential circular dependency.
     },
   },
-}
+};
 
 const BattleTrainer: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
@@ -158,7 +166,7 @@ const BattleTrainer: $$Utilities.SchemaDrivenDataMap.OutputObject = {
       // nt: Trainer, <-- Assigned later to avoid potential circular dependency.
     },
   },
-}
+};
 
 const BattleWild: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
@@ -175,7 +183,7 @@ const BattleWild: $$Utilities.SchemaDrivenDataMap.OutputObject = {
       // nt: Pokemon, <-- Assigned later to avoid potential circular dependency.
     },
   },
-}
+};
 
 const CombatantMultiPokemon: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
@@ -186,7 +194,7 @@ const CombatantMultiPokemon: $$Utilities.SchemaDrivenDataMap.OutputObject = {
       // nt: Trainer, <-- Assigned later to avoid potential circular dependency.
     },
   },
-}
+};
 
 const CombatantSinglePokemon: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
@@ -197,7 +205,7 @@ const CombatantSinglePokemon: $$Utilities.SchemaDrivenDataMap.OutputObject = {
       // nt: Trainer, <-- Assigned later to avoid potential circular dependency.
     },
   },
-}
+};
 
 const Patron: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
@@ -205,12 +213,14 @@ const Patron: $$Utilities.SchemaDrivenDataMap.OutputObject = {
     money: {},
     name: {},
   },
-}
+};
 
 const Pokemon: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     attack: {},
-    birthday: {},
+    birthday: {
+      nt: Date,
+    },
     defense: {},
     hp: {},
     id: {},
@@ -220,7 +230,7 @@ const Pokemon: $$Utilities.SchemaDrivenDataMap.OutputObject = {
     },
     type: {},
   },
-}
+};
 
 const Trainer: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
@@ -234,7 +244,7 @@ const Trainer: $$Utilities.SchemaDrivenDataMap.OutputObject = {
       // nt: Pokemon, <-- Assigned later to avoid potential circular dependency.
     },
   },
-}
+};
 
 //
 //
@@ -253,8 +263,11 @@ const Trainer: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 
 const Being: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {},
-}
+  f: {
+    ...Pokemon.f,
+    ...Trainer.f,
+  },
+};
 
 //
 //
@@ -273,8 +286,12 @@ const Being: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 
 const Battle: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {},
-}
+  f: {
+    ...BattleRoyale.f,
+    ...BattleTrainer.f,
+    ...BattleWild.f,
+  },
+};
 
 //
 //
@@ -291,36 +308,6 @@ const Battle: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 //
-
-const Mutation: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
-    addPokemon: {
-      a: {
-        attack: {
-          nt: Int,
-          it: [0],
-        },
-        defense: {
-          nt: Int,
-          it: [0],
-        },
-        hp: {
-          nt: Int,
-          it: [0],
-        },
-        name: {
-          nt: String,
-          it: [1],
-        },
-        type: {
-          nt: PokemonType,
-          it: [1],
-        },
-      },
-      // nt: Pokemon, <-- Assigned later to avoid potential circular dependency.
-    },
-  },
-}
 
 const Query: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
@@ -364,7 +351,37 @@ const Query: $$Utilities.SchemaDrivenDataMap.OutputObject = {
       // nt: Trainer, <-- Assigned later to avoid potential circular dependency.
     },
   },
-}
+};
+
+const Mutation: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+  f: {
+    addPokemon: {
+      a: {
+        attack: {
+          nt: Int,
+          it: [0],
+        },
+        defense: {
+          nt: Int,
+          it: [0],
+        },
+        hp: {
+          nt: Int,
+          it: [0],
+        },
+        name: {
+          nt: String,
+          it: [1],
+        },
+        type: {
+          nt: PokemonType,
+          it: [1],
+        },
+      },
+      // nt: Pokemon, <-- Assigned later to avoid potential circular dependency.
+    },
+  },
+};
 
 //
 //
@@ -383,29 +400,30 @@ const Query: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 
-BattleRoyale.f[`combatants`]!.nt = CombatantMultiPokemon
-BattleRoyale.f[`winner`]!.nt = Trainer
-BattleTrainer.f[`combatant1`]!.nt = CombatantSinglePokemon
-BattleTrainer.f[`combatant2`]!.nt = CombatantSinglePokemon
-BattleTrainer.f[`winner`]!.nt = Trainer
-BattleWild.f[`pokemon`]!.nt = Pokemon
-BattleWild.f[`trainer`]!.nt = Trainer
-BattleWild.f[`wildPokemons`]!.nt = Pokemon
-CombatantMultiPokemon.f[`pokemons`]!.nt = Pokemon
-CombatantMultiPokemon.f[`trainer`]!.nt = Trainer
-CombatantSinglePokemon.f[`pokemon`]!.nt = Pokemon
-CombatantSinglePokemon.f[`trainer`]!.nt = Trainer
-Pokemon.f[`trainer`]!.nt = Trainer
-Trainer.f[`fans`]!.nt = Patron
-Trainer.f[`pokemon`]!.nt = Pokemon
-Mutation.f[`addPokemon`]!.nt = Pokemon
-Query.f[`battles`]!.nt = Battle
-Query.f[`beings`]!.nt = Being
-Query.f[`pokemon`]!.nt = Pokemon
-Query.f[`pokemonByName`]!.nt = Pokemon
-Query.f[`pokemons`]!.nt = Pokemon
-Query.f[`trainerByName`]!.nt = Trainer
-Query.f[`trainers`]!.nt = Trainer
+PokemonFilter.f![`birthday`]!.nt = DateFilter;
+BattleRoyale.f[`combatants`]!.nt = CombatantMultiPokemon;
+BattleRoyale.f[`winner`]!.nt = Trainer;
+BattleTrainer.f[`combatant1`]!.nt = CombatantSinglePokemon;
+BattleTrainer.f[`combatant2`]!.nt = CombatantSinglePokemon;
+BattleTrainer.f[`winner`]!.nt = Trainer;
+BattleWild.f[`pokemon`]!.nt = Pokemon;
+BattleWild.f[`trainer`]!.nt = Trainer;
+BattleWild.f[`wildPokemons`]!.nt = Pokemon;
+CombatantMultiPokemon.f[`pokemons`]!.nt = Pokemon;
+CombatantMultiPokemon.f[`trainer`]!.nt = Trainer;
+CombatantSinglePokemon.f[`pokemon`]!.nt = Pokemon;
+CombatantSinglePokemon.f[`trainer`]!.nt = Trainer;
+Pokemon.f[`trainer`]!.nt = Trainer;
+Trainer.f[`fans`]!.nt = Patron;
+Trainer.f[`pokemon`]!.nt = Pokemon;
+Query.f[`battles`]!.nt = Battle;
+Query.f[`beings`]!.nt = Being;
+Query.f[`pokemon`]!.nt = Pokemon;
+Query.f[`pokemonByName`]!.nt = Pokemon;
+Query.f[`pokemons`]!.nt = Pokemon;
+Query.f[`trainerByName`]!.nt = Trainer;
+Query.f[`trainers`]!.nt = Trainer;
+Mutation.f[`addPokemon`]!.nt = Pokemon;
 
 //
 //
@@ -424,9 +442,9 @@ Query.f[`trainers`]!.nt = Trainer
 //
 
 const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
-  roots: {
-    Mutation,
-    Query,
+  operations: {
+    query: Query,
+    mutation: Mutation,
   },
   directives: {},
   types: {
@@ -435,6 +453,7 @@ const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
     String,
     Int,
     Boolean,
+    Date,
     BattleWildResult,
     PokemonType,
     TrainerClass,
@@ -451,9 +470,9 @@ const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
     Trainer,
     Being,
     Battle,
-    Mutation,
     Query,
+    Mutation,
   },
-}
+};
 
-export { $schemaDrivenDataMap as schemaDrivenDataMap }
+export { $schemaDrivenDataMap as schemaDrivenDataMap };

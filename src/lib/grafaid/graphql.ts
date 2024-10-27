@@ -2,7 +2,7 @@ import type { GraphQLNamedType, GraphQLScalarType } from 'graphql'
 import { isEnumType, isInputObjectType, isInterfaceType, isObjectType, isScalarType, isUnionType } from 'graphql'
 import { casesExhausted } from '../prelude.js'
 import type { KindMap } from './schema/schema.js'
-import { isRootType, isScalarTypeCustom } from './schema/schema.js'
+import { isScalarTypeCustom } from './schema/schema.js'
 
 export {
   type ExecutionResult,
@@ -61,9 +61,7 @@ export const getTypeAndKind = (
 
   let kindName: KindMap.KindName
 
-  if (isRootType(node)) {
-    kindName = `Root`
-  } else if (isScalarType(node)) {
+  if (isScalarType(node)) {
     kindName = isScalarTypeCustom(node) ? `ScalarCustom` : `ScalarStandard`
   } else if (isUnionType(node)) {
     kindName = `Union`

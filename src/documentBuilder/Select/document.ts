@@ -1,6 +1,6 @@
 import type { OperationTypeNode } from 'graphql'
 import { Grafaid } from '../../lib/grafaid/__.js'
-import type { FirstNonUnknownNever, IsKeyInObjectOptional, Values } from '../../lib/prelude.js'
+import type { FirstNonUnknownNever, Values } from '../../lib/prelude.js'
 import type { Select } from './__.js'
 
 export type OperationName = string
@@ -33,10 +33,10 @@ export type GetOperationNames<$Document extends SomeDocument> = Values<
 >
 
 // dprint-ignore
-export type GetRootTypeNameOfOperation<$Document extends SomeDocument, $Name extends OperationName> =
-  IsKeyInObjectOptional<$Document[OperationTypeNode.MUTATION], $Name> extends true  ? Grafaid.Schema.RootTypeNameMutation :
-  IsKeyInObjectOptional<$Document[OperationTypeNode.QUERY], $Name> extends true     ? Grafaid.Schema.RootTypeNameQuery    :
-                                                                                  never
+export type GetOperationType<$Document extends SomeDocument, $Name extends string> =
+  $Name extends keyof $Document[OperationTypeNode.MUTATION] ? OperationTypeNode.MUTATION :
+  $Name extends keyof $Document[OperationTypeNode.QUERY]    ? OperationTypeNode.QUERY    :
+                                                              never
 
 // dprint-ignore
 export type GetOperation<$Document extends SomeDocument, $Name extends string> =
@@ -50,7 +50,6 @@ export type GetOperation<$Document extends SomeDocument, $Name extends string> =
 export interface OperationNormalized {
   name: string | null
   type: OperationTypeNode
-  rootType: Grafaid.Schema.RootTypeName
   selectionSet: Select.SelectionSet.AnySelectionSet
 }
 
@@ -58,21 +57,17 @@ export interface DocumentNormalized {
   operations: Record<string, OperationNormalized>
   facts: {
     hasMultipleOperations: boolean
-    hasRootType: {
-      query: boolean
-      mutation: boolean
-      subscription: boolean
-    }
   }
 }
 
 export const createDocumentNormalizedFromQuerySelection = (
   selectionSet: Select.SelectionSet.AnySelectionSet,
   operationName?: string,
-): DocumentNormalized => createDocumentNormalizedFromRootTypeSelection(`Query`, selectionSet, operationName)
+): DocumentNormalized =>
+  createDocumentNormalizedFromRootTypeSelection(Grafaid.Document.OperationTypeNode.QUERY, selectionSet, operationName)
 
 export const createDocumentNormalizedFromRootTypeSelection = (
-  rootTypeName: Grafaid.Schema.RootTypeName,
+  operationType: Grafaid.Document.OperationTypeNode,
   selectionSet: Select.SelectionSet.AnySelectionSet,
   operationName?: string,
 ): DocumentNormalized =>
@@ -80,18 +75,12 @@ export const createDocumentNormalizedFromRootTypeSelection = (
     operations: {
       [operationName ?? defaultOperationName]: {
         name: operationName ?? null,
-        type: Grafaid.Document.RootTypeToOperationType[rootTypeName],
-        rootType: rootTypeName,
+        type: operationType,
         selectionSet,
       },
     },
     facts: {
       hasMultipleOperations: false,
-      hasRootType: {
-        query: rootTypeName === Grafaid.Schema.RootTypeName.Query,
-        mutation: rootTypeName === Grafaid.Schema.RootTypeName.Mutation,
-        subscription: rootTypeName === Grafaid.Schema.RootTypeName.Subscription,
-      },
     },
   })
 
@@ -100,16 +89,14 @@ export const normalizeOrThrow = (document: DocumentObject): DocumentNormalized =
     [name, selectionSet],
   ): [name: string, OperationNormalized] => [name, {
     name,
-    type: Grafaid.Document.RootTypeToOperationType[Grafaid.Schema.RootTypeName.Query],
-    rootType: Grafaid.Schema.RootTypeName.Query,
+    type: Grafaid.Document.OperationTypeNode.QUERY,
     selectionSet,
   }])
   const mutationOperations = Object.entries(document.mutation ?? {}).map((
     [name, selectionSet],
   ): [name: string, OperationNormalized] => [name, {
     name,
-    type: Grafaid.Document.RootTypeToOperationType[Grafaid.Schema.RootTypeName.Mutation],
-    rootType: Grafaid.Schema.RootTypeName.Mutation,
+    type: Grafaid.Document.OperationTypeNode.MUTATION,
     selectionSet,
   }])
   const operations = [
@@ -144,11 +131,6 @@ export const normalizeOrThrow = (document: DocumentObject): DocumentNormalized =
     operations: Object.fromEntries(operations),
     facts: {
       hasMultipleOperations,
-      hasRootType: {
-        query: queryOperations.length > 0,
-        mutation: mutationOperations.length > 0,
-        subscription: false,
-      },
     },
   })
 }

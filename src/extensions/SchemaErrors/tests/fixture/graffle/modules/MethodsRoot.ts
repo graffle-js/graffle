@@ -3,52 +3,6 @@ import type * as $$Utilities from '../../../../../../entrypoints/utilities-for-g
 import type { Schema } from './Schema.js'
 import type * as SelectionSet from './SelectionSets.js'
 
-export interface MutationMethods<$Context extends $$Utilities.ClientContext> {
-  $batch: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Mutation<$Context['scalars']>>,
-  ) => Promise<
-    $$Utilities.Simplify<
-      $$Utilities.HandleOutput<
-        $Context,
-        InferResult.Mutation<$SelectionSet, Schema<$Context['scalars']>>
-      >
-    >
-  >
-  __typename: () => Promise<
-    $$Utilities.Simplify<
-      $$Utilities.HandleOutputGraffleRootField<
-        $Context,
-        { __typename: 'Mutation' },
-        '__typename'
-      >
-    >
-  >
-
-  id: <$SelectionSet>(
-    selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Mutation.id<$Context['scalars']>>,
-  ) => Promise<
-    $$Utilities.Simplify<
-      $$Utilities.HandleOutputGraffleRootField<
-        $Context,
-        InferResult.Mutation<{ id: $SelectionSet }, Schema<$Context['scalars']>>,
-        'id'
-      >
-    >
-  >
-
-  idNonNull: <$SelectionSet>(
-    selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Mutation.idNonNull<$Context['scalars']>>,
-  ) => Promise<
-    $$Utilities.Simplify<
-      $$Utilities.HandleOutputGraffleRootField<
-        $Context,
-        InferResult.Mutation<{ idNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
-        'idNonNull'
-      >
-    >
-  >
-}
-
 export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
   $batch: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query<$Context['scalars']>>,
@@ -678,9 +632,55 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
   >
 }
 
+export interface MutationMethods<$Context extends $$Utilities.ClientContext> {
+  $batch: <$SelectionSet>(
+    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Mutation<$Context['scalars']>>,
+  ) => Promise<
+    $$Utilities.Simplify<
+      $$Utilities.HandleOutput<
+        $Context,
+        InferResult.Mutation<$SelectionSet, Schema<$Context['scalars']>>
+      >
+    >
+  >
+  __typename: () => Promise<
+    $$Utilities.Simplify<
+      $$Utilities.HandleOutputGraffleRootField<
+        $Context,
+        { __typename: 'Mutation' },
+        '__typename'
+      >
+    >
+  >
+
+  id: <$SelectionSet>(
+    selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Mutation.id<$Context['scalars']>>,
+  ) => Promise<
+    $$Utilities.Simplify<
+      $$Utilities.HandleOutputGraffleRootField<
+        $Context,
+        InferResult.Mutation<{ id: $SelectionSet }, Schema<$Context['scalars']>>,
+        'id'
+      >
+    >
+  >
+
+  idNonNull: <$SelectionSet>(
+    selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Mutation.idNonNull<$Context['scalars']>>,
+  ) => Promise<
+    $$Utilities.Simplify<
+      $$Utilities.HandleOutputGraffleRootField<
+        $Context,
+        InferResult.Mutation<{ idNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
+        'idNonNull'
+      >
+    >
+  >
+}
+
 export interface BuilderMethodsRoot<$Context extends $$Utilities.ClientContext> {
-  mutation: MutationMethods<$Context>
   query: QueryMethods<$Context>
+  mutation: MutationMethods<$Context>
 }
 
 export interface BuilderMethodsRootFn extends $$Utilities.TypeFunction.Fn {

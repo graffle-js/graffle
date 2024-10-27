@@ -1,5 +1,5 @@
-import type * as $Utilities from 'graffle/utilities-for-generated'
-import type * as $SelectionSets from './SelectionSets.js'
+import type * as $Utilities from "graffle/utilities-for-generated";
+import type * as $SelectionSets from "./SelectionSets.js";
 
 //
 //
@@ -18,12 +18,12 @@ import type * as $SelectionSets from './SelectionSets.js'
 //
 
 export interface $MethodsSelect {
-  Query: Query
-  Continent: Continent
-  Country: Country
-  Language: Language
-  State: State
-  Subdivision: Subdivision
+  Query: Query;
+  Continent: Continent;
+  Country: Country;
+  Language: Language;
+  State: State;
+  Subdivision: Subdivision;
 }
 
 //
@@ -43,7 +43,7 @@ export interface $MethodsSelect {
 //
 
 export interface Query {
-  <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.Query>): $SelectionSet
+  <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.Query>): $SelectionSet;
 }
 
 //
@@ -63,23 +63,23 @@ export interface Query {
 //
 
 export interface Continent {
-  <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.Continent>): $SelectionSet
+  <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.Continent>): $SelectionSet;
 }
 
 export interface Country {
-  <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.Country>): $SelectionSet
+  <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.Country>): $SelectionSet;
 }
 
 export interface Language {
-  <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.Language>): $SelectionSet
+  <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.Language>): $SelectionSet;
 }
 
 export interface State {
-  <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.State>): $SelectionSet
+  <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.State>): $SelectionSet;
 }
 
 export interface Subdivision {
-  <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.Subdivision>): $SelectionSet
+  <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.Subdivision>): $SelectionSet;
 }
 
 //

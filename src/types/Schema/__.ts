@@ -1,12 +1,13 @@
 export * as Schema from './_.js'
 
+import type { Grafaid } from '../../lib/grafaid/__.js'
 import type { GlobalRegistry } from '../GlobalRegistry/GlobalRegistry.js'
 import type { Enum } from './nodes/Enum.js'
 import type { Interface } from './nodes/Interface.js'
 import type { OutputObject } from './nodes/OutputObject.js'
 import type { Scalar } from './nodes/Scalar/Scalar.js'
 import type { Union } from './nodes/Union.js'
-import type { Mutation, Query, RootType, Subscription } from './StandardTypes/object.js'
+// import type { Mutation, Query, RootType, Subscription } from './StandardTypes/object.js'
 
 /**
  * A generic schema type. Any particular schema will be a subtype of this, with
@@ -17,18 +18,16 @@ export interface Schema<
   $Scalars extends Scalar.Registry = Scalar.Registry,
 > {
   name: GlobalRegistry.ClientNames
-  operationsAvailable: ('Query' | 'Mutation' | 'Subscription')[]
-  RootUnion: RootType
+  operationsAvailable: Grafaid.Document.OperationType[]
+  RootUnion: OutputObject
   Root: {
-    Query: null | Query
-    Mutation: null | Mutation
-    Subscription: null | Subscription
+    query: null | OutputObject
+    mutation: null | OutputObject
+    subscription: null | OutputObject
   }
   allTypes: Record<
     string,
     | Enum
-    | Query
-    | Mutation
     | OutputObject
     | Union
     | Interface

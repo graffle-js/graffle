@@ -1,6 +1,6 @@
 // todo jsdoc
-import { Grafaid } from '../../lib/grafaid/__.js'
-import { entries, pick } from '../../lib/prelude.js'
+import { Code } from '../../lib/Code.js'
+import { entries, pick, values } from '../../lib/prelude.js'
 import { Tex } from '../../lib/tex/__.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 import { renderName } from '../helpers/render.js'
@@ -17,29 +17,26 @@ export const ModuleGeneratorMethodsSelect = createModuleGenerator(
     code()
     code(Tex.title1(`Select Methods Interface`))
     code()
-    code(`export interface $MethodsSelect {`)
-    for (const [_, kind] of kinds) {
-      for (const type of kind) {
-        // dprint-ignore
-        code(`${type.name}: ${renderName(type)}`)
-      }
-    }
-    code(`}`)
+    code(Code.tsInterface({
+      name: `$MethodsSelect`,
+      fields: values(kindMap).flatMap(type => {
+        return type.map(type => {
+          return [type.name, renderName(type)] as const
+        })
+      }),
+    }))
     code()
-
-    for (const [name, kind] of kinds) {
-      const titleText = Grafaid.Schema.isRootType(kind[0]!) ? `Root` : name
-      code(Tex.title1(titleText))
+    for (const [kindName, kind] of kinds) {
+      code(Tex.title1(kindName))
       code()
-
-      for (const graphqlType of kind) {
-        // dprint-ignore
-        code(`
-          export interface ${renderName(graphqlType)} {
-            <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.${renderName(graphqlType)}>):
+      for (const type of kind) {
+        code(Code.tsInterface({
+          name: type.name,
+          fields: `
+            <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.${renderName(type)}>):
               $SelectionSet
-          }`
-        )
+          `,
+        }))
         code()
       }
     }

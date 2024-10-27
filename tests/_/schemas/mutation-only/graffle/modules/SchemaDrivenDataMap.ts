@@ -193,8 +193,8 @@ const Mutation: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 
 const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
-  roots: {
-    Mutation,
+  operations: {
+    mutation: Mutation,
   },
   directives: {},
   types: {

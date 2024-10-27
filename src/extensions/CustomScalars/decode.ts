@@ -24,7 +24,7 @@ export const decodeResultData = ({ request, data, sddm, scalars }: {
    */
   scalars: Schema.Scalar.ScalarMap
 }) => {
-  const sddmOutputObject = sddm.roots[request.rootType]
+  const sddmOutputObject = sddm.operations[request.operation.operation]
   if (!sddmOutputObject) return
   if (!data) return
 

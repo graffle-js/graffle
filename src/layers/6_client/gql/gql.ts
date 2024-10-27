@@ -1,6 +1,6 @@
 import type { Fluent } from '../../../lib/fluent/__.js'
 import type { Grafaid } from '../../../lib/grafaid/__.js'
-import { getOperationType, OperationTypeToRootType } from '../../../lib/grafaid/document.js'
+import { getOperationType } from '../../../lib/grafaid/document.js'
 import {
   isTemplateStringArguments,
   joinTemplateStringArrayAndArgs,
@@ -54,7 +54,6 @@ export const gqlProperties = defineTerminus((state) => {
           if (!operationType) throw new Error(`Could not get operation type`)
 
           const analyzedRequest = {
-            rootType: OperationTypeToRootType[operationType],
             operation: operationType,
             query,
             variables,

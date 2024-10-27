@@ -18,8 +18,8 @@ import type * as $SelectionSets from './SelectionSets.js'
 //
 
 export interface $MethodsSelect {
-  Mutation: Mutation
   Query: Query
+  Mutation: Mutation
   BattleRoyale: BattleRoyale
   BattleTrainer: BattleTrainer
   BattleWild: BattleWild
@@ -48,12 +48,12 @@ export interface $MethodsSelect {
 //
 //
 
-export interface Mutation {
-  <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.Mutation>): $SelectionSet
-}
-
 export interface Query {
   <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.Query>): $SelectionSet
+}
+
+export interface Mutation {
+  <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.Mutation>): $SelectionSet
 }
 
 //

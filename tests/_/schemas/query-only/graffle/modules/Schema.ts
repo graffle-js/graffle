@@ -255,12 +255,12 @@ export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$
   extends $
 {
   name: Data.Name
-  operationsAvailable: ['Query']
+  operationsAvailable: ['query']
   RootUnion: Schema.Query
   Root: {
-    Query: Schema.Query
-    Mutation: null
-    Subscription: null
+    query: Schema.Query
+    mutation: null
+    subscription: null
   }
   allTypes: {
     Query: Schema.Query

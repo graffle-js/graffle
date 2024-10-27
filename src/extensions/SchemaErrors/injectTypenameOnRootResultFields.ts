@@ -10,22 +10,22 @@ export const injectTypenameOnRootResultFields = (
 ): void => {
   injectTypenameOnRootResultFields_({
     sddm,
-    rootTypeName: request.rootType,
+    operationType: request.operation.operation,
     selectionSet: request.operation.selectionSet,
   })
 }
 
 const injectTypenameOnRootResultFields_ = (
-  { selectionSet, sddm, rootTypeName }: {
+  { selectionSet, sddm, operationType }: {
     sddm: SchemaDrivenDataMap
-    rootTypeName: Grafaid.Schema.RootTypeName
+    operationType: Grafaid.Document.OperationTypeNode
     selectionSet: Nodes.SelectionSetNode
   },
 ): void => {
   for (const selection of selectionSet.selections) {
     switch (selection.kind) {
       case Nodes.Kind.FIELD: {
-        const isResultField = Boolean(sddm.roots[rootTypeName]?.f[selection.name.value]?.r)
+        const isResultField = Boolean(sddm.operations[operationType]?.f[selection.name.value]?.r)
         if (isResultField) {
           // @ts-expect-error selections is typed as readonly
           // @see https://github.com/graphql/graphql-js/discussions/4212
@@ -35,7 +35,7 @@ const injectTypenameOnRootResultFields_ = (
       }
       case Nodes.Kind.INLINE_FRAGMENT: {
         injectTypenameOnRootResultFields_({
-          rootTypeName,
+          operationType,
           sddm,
           selectionSet: selection.selectionSet,
         })

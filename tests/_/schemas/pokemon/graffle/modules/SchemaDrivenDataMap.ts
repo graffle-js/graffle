@@ -309,36 +309,6 @@ const Battle: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 
-const Mutation: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
-    addPokemon: {
-      a: {
-        attack: {
-          nt: Int,
-          it: [0],
-        },
-        defense: {
-          nt: Int,
-          it: [0],
-        },
-        hp: {
-          nt: Int,
-          it: [0],
-        },
-        name: {
-          nt: String,
-          it: [1],
-        },
-        type: {
-          nt: PokemonType,
-          it: [1],
-        },
-      },
-      // nt: Pokemon, <-- Assigned later to avoid potential circular dependency.
-    },
-  },
-}
-
 const Query: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     battles: {
@@ -383,6 +353,36 @@ const Query: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   },
 }
 
+const Mutation: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+  f: {
+    addPokemon: {
+      a: {
+        attack: {
+          nt: Int,
+          it: [0],
+        },
+        defense: {
+          nt: Int,
+          it: [0],
+        },
+        hp: {
+          nt: Int,
+          it: [0],
+        },
+        name: {
+          nt: String,
+          it: [1],
+        },
+        type: {
+          nt: PokemonType,
+          it: [1],
+        },
+      },
+      // nt: Pokemon, <-- Assigned later to avoid potential circular dependency.
+    },
+  },
+}
+
 //
 //
 //
@@ -416,7 +416,6 @@ CombatantSinglePokemon.f[`trainer`]!.nt = Trainer
 Pokemon.f[`trainer`]!.nt = Trainer
 Trainer.f[`fans`]!.nt = Patron
 Trainer.f[`pokemon`]!.nt = Pokemon
-Mutation.f[`addPokemon`]!.nt = Pokemon
 Query.f[`battles`]!.nt = Battle
 Query.f[`beings`]!.nt = Being
 Query.f[`pokemon`]!.nt = Pokemon
@@ -424,6 +423,7 @@ Query.f[`pokemonByName`]!.nt = Pokemon
 Query.f[`pokemons`]!.nt = Pokemon
 Query.f[`trainerByName`]!.nt = Trainer
 Query.f[`trainers`]!.nt = Trainer
+Mutation.f[`addPokemon`]!.nt = Pokemon
 
 //
 //
@@ -442,9 +442,9 @@ Query.f[`trainers`]!.nt = Trainer
 //
 
 const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
-  roots: {
-    Mutation,
-    Query,
+  operations: {
+    query: Query,
+    mutation: Mutation,
   },
   directives: {},
   types: {
@@ -470,8 +470,8 @@ const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
     Trainer,
     Being,
     Battle,
-    Mutation,
     Query,
+    Mutation,
   },
 }
 

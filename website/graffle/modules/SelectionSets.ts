@@ -1,5 +1,5 @@
-import type { Select as $Select } from 'graffle/schema'
-import type * as $$Utilities from 'graffle/utilities-for-generated'
+import type { Select as $Select } from "graffle/schema";
+import type * as $$Utilities from "graffle/utilities-for-generated";
 
 //
 //
@@ -17,9 +17,10 @@ import type * as $$Utilities from 'graffle/utilities-for-generated'
 //
 //
 
-// Prefix with $ because this is not a schema type. A user could have a schema type named "Document" that this would conflict with.
-export interface $Document<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
-  query?: Record<string, Query<$Scalars>>
+export interface $Document<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> {
+  query?: Record<string, Query<_$Scalars>>;
 }
 
 //
@@ -38,45 +39,39 @@ export interface $Document<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap 
 //
 //
 
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// ROOT
-// --------------------------------------------------------------------------------------------------
 //                                               Query
 // --------------------------------------------------------------------------------------------------
-//
 //
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface Query<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
+export interface Query<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> {
   /**
    * Select the `continent` field on the `Query` object. Its type is `Continent` (a `OutputObject` kind of type).
    */
-  continent?: Query.continent<$Scalars> | $Select.SelectAlias.SelectAlias<Query.continent<$Scalars>>
+  continent?: Query.continent<_$Scalars> | $Select.SelectAlias.SelectAlias<Query.continent<_$Scalars>>;
   /**
    * Select the `continents` field on the `Query` object. Its type is `Continent` (a `OutputObject` kind of type).
    */
-  continents?: Query.continents$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.continents<$Scalars>>
+  continents?: Query.continents$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Query.continents<_$Scalars>>;
   /**
    * Select the `countries` field on the `Query` object. Its type is `Country` (a `OutputObject` kind of type).
    */
-  countries?: Query.countries$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.countries<$Scalars>>
+  countries?: Query.countries$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Query.countries<_$Scalars>>;
   /**
    * Select the `country` field on the `Query` object. Its type is `Country` (a `OutputObject` kind of type).
    */
-  country?: Query.country<$Scalars> | $Select.SelectAlias.SelectAlias<Query.country<$Scalars>>
+  country?: Query.country<_$Scalars> | $Select.SelectAlias.SelectAlias<Query.country<_$Scalars>>;
   /**
    * Select the `language` field on the `Query` object. Its type is `Language` (a `OutputObject` kind of type).
    */
-  language?: Query.language<$Scalars> | $Select.SelectAlias.SelectAlias<Query.language<$Scalars>>
+  language?: Query.language<_$Scalars> | $Select.SelectAlias.SelectAlias<Query.language<_$Scalars>>;
   /**
    * Select the `languages` field on the `Query` object. Its type is `Language` (a `OutputObject` kind of type).
    */
-  languages?: Query.languages$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Query.languages<$Scalars>>
+  languages?: Query.languages$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Query.languages<_$Scalars>>;
 
   /**
    * Inline fragments for field groups.
@@ -87,8 +82,8 @@ export interface Query<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | Query$FragmentInline<$Scalars>
-    | Query$FragmentInline<$Scalars>[]
+    | Query$FragmentInline<_$Scalars>
+    | Query$FragmentInline<_$Scalars>[];
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -97,29 +92,34 @@ export interface Query<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}
    */
   __typename?:
     | $Select.Indicator.NoArgsIndicator$Expanded
-    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>;
 }
 
-export interface Query$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-  extends Query<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
-{}
+export interface Query$FragmentInline<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends Query<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
 
 // ----------------------------------------| Fields |
 
 export namespace Query {
-  export type continent<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = continent$SelectionSet<$Scalars>
+  export type continent<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = continent$SelectionSet<_$Scalars>;
 
-  export interface continent$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base, $NamedTypes.$Continent<$Scalars>
-  {
+  export interface continent$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$Continent<_$Scalars> {
     /**
      * Arguments for `continent` field. All arguments are required so you must include this.
      */
-    $: continent$Arguments<$Scalars>
+    $: continent$Arguments<_$Scalars>;
   }
 
-  export interface continent$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
-    code: string
+  export interface continent$Arguments<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
+    code: string;
   }
 
   // --- expanded ---
@@ -129,25 +129,31 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type continent$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    continent$SelectionSet<$Scalars>
-  >
+  export type continent$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    continent$SelectionSet<_$Scalars>
+  >;
 
   // --------------------------------------------------------------------------------------------------
 
-  export type continents<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = continents$SelectionSet<$Scalars>
+  export type continents<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = continents$SelectionSet<_$Scalars>;
 
-  export interface continents$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base, $NamedTypes.$Continent<$Scalars>
-  {
+  export interface continents$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$Continent<_$Scalars> {
     /**
      * Arguments for `continents` field. No arguments are required so you may omit this.
      */
-    $?: continents$Arguments<$Scalars>
+    $?: continents$Arguments<_$Scalars>;
   }
 
-  export interface continents$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
-    filter?: $NamedTypes.$ContinentFilterInput<$Scalars> | undefined | null
+  export interface continents$Arguments<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
+    filter?: $NamedTypes.$ContinentFilterInput<_$Scalars> | undefined | null;
   }
 
   // --- expanded ---
@@ -157,25 +163,31 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type continents$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    continents$SelectionSet<$Scalars>
-  >
+  export type continents$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    continents$SelectionSet<_$Scalars>
+  >;
 
   // --------------------------------------------------------------------------------------------------
 
-  export type countries<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = countries$SelectionSet<$Scalars>
+  export type countries<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = countries$SelectionSet<_$Scalars>;
 
-  export interface countries$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base, $NamedTypes.$Country<$Scalars>
-  {
+  export interface countries$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$Country<_$Scalars> {
     /**
      * Arguments for `countries` field. No arguments are required so you may omit this.
      */
-    $?: countries$Arguments<$Scalars>
+    $?: countries$Arguments<_$Scalars>;
   }
 
-  export interface countries$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
-    filter?: $NamedTypes.$CountryFilterInput<$Scalars> | undefined | null
+  export interface countries$Arguments<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
+    filter?: $NamedTypes.$CountryFilterInput<_$Scalars> | undefined | null;
   }
 
   // --- expanded ---
@@ -185,25 +197,30 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type countries$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    countries$SelectionSet<$Scalars>
-  >
+  export type countries$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    countries$SelectionSet<_$Scalars>
+  >;
 
   // --------------------------------------------------------------------------------------------------
 
-  export type country<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = country$SelectionSet<$Scalars>
+  export type country<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    country$SelectionSet<_$Scalars>;
 
-  export interface country$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base, $NamedTypes.$Country<$Scalars>
-  {
+  export interface country$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$Country<_$Scalars> {
     /**
      * Arguments for `country` field. All arguments are required so you must include this.
      */
-    $: country$Arguments<$Scalars>
+    $: country$Arguments<_$Scalars>;
   }
 
-  export interface country$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
-    code: string
+  export interface country$Arguments<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
+    code: string;
   }
 
   // --- expanded ---
@@ -213,25 +230,31 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type country$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    country$SelectionSet<$Scalars>
-  >
+  export type country$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    country$SelectionSet<_$Scalars>
+  >;
 
   // --------------------------------------------------------------------------------------------------
 
-  export type language<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = language$SelectionSet<$Scalars>
+  export type language<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = language$SelectionSet<_$Scalars>;
 
-  export interface language$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base, $NamedTypes.$Language<$Scalars>
-  {
+  export interface language$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$Language<_$Scalars> {
     /**
      * Arguments for `language` field. All arguments are required so you must include this.
      */
-    $: language$Arguments<$Scalars>
+    $: language$Arguments<_$Scalars>;
   }
 
-  export interface language$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
-    code: string
+  export interface language$Arguments<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
+    code: string;
   }
 
   // --- expanded ---
@@ -241,25 +264,31 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type language$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    language$SelectionSet<$Scalars>
-  >
+  export type language$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    language$SelectionSet<_$Scalars>
+  >;
 
   // --------------------------------------------------------------------------------------------------
 
-  export type languages<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = languages$SelectionSet<$Scalars>
+  export type languages<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = languages$SelectionSet<_$Scalars>;
 
-  export interface languages$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base, $NamedTypes.$Language<$Scalars>
-  {
+  export interface languages$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$Language<_$Scalars> {
     /**
      * Arguments for `languages` field. No arguments are required so you may omit this.
      */
-    $?: languages$Arguments<$Scalars>
+    $?: languages$Arguments<_$Scalars>;
   }
 
-  export interface languages$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
-    filter?: $NamedTypes.$LanguageFilterInput<$Scalars> | undefined | null
+  export interface languages$Arguments<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
+    filter?: $NamedTypes.$LanguageFilterInput<_$Scalars> | undefined | null;
   }
 
   // --- expanded ---
@@ -269,9 +298,11 @@ export namespace Query {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type languages$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    languages$SelectionSet<$Scalars>
-  >
+  export type languages$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    languages$SelectionSet<_$Scalars>
+  >;
 }
 
 //
@@ -290,27 +321,35 @@ export namespace Query {
 //
 //
 
-export interface ContinentFilterInput<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
-  code?: $NamedTypes.$StringQueryOperatorInput<$Scalars> | undefined | null
+export interface ContinentFilterInput<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> {
+  code?: $NamedTypes.$StringQueryOperatorInput<_$Scalars> | undefined | null;
 }
 
-export interface CountryFilterInput<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
-  code?: $NamedTypes.$StringQueryOperatorInput<$Scalars> | undefined | null
-  continent?: $NamedTypes.$StringQueryOperatorInput<$Scalars> | undefined | null
-  currency?: $NamedTypes.$StringQueryOperatorInput<$Scalars> | undefined | null
-  name?: $NamedTypes.$StringQueryOperatorInput<$Scalars> | undefined | null
+export interface CountryFilterInput<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> {
+  code?: $NamedTypes.$StringQueryOperatorInput<_$Scalars> | undefined | null;
+  continent?: $NamedTypes.$StringQueryOperatorInput<_$Scalars> | undefined | null;
+  currency?: $NamedTypes.$StringQueryOperatorInput<_$Scalars> | undefined | null;
+  name?: $NamedTypes.$StringQueryOperatorInput<_$Scalars> | undefined | null;
 }
 
-export interface LanguageFilterInput<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
-  code?: $NamedTypes.$StringQueryOperatorInput<$Scalars> | undefined | null
+export interface LanguageFilterInput<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> {
+  code?: $NamedTypes.$StringQueryOperatorInput<_$Scalars> | undefined | null;
 }
 
-export interface StringQueryOperatorInput<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
-  eq?: string | undefined | null
-  in?: Array<string | undefined | null> | undefined | null
-  ne?: string | undefined | null
-  nin?: Array<string | undefined | null> | undefined | null
-  regex?: string | undefined | null
+export interface StringQueryOperatorInput<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> {
+  eq?: string | undefined | null;
+  in?: Array<string | undefined | null> | undefined | null;
+  ne?: string | undefined | null;
+  nin?: Array<string | undefined | null> | undefined | null;
+  regex?: string | undefined | null;
 }
 
 //
@@ -329,33 +368,27 @@ export interface StringQueryOperatorInput<$Scalars extends $$Utilities.Schema.Sc
 //
 //
 
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OUTPUTOBJECT
-// --------------------------------------------------------------------------------------------------
 //                                             Continent
 // --------------------------------------------------------------------------------------------------
-//
 //
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface Continent<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
+export interface Continent<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends $Select.Bases.ObjectLike {
   /**
    * Select the `code` field on the `Continent` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
-  code?: Continent.code$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Continent.code<$Scalars>>
+  code?: Continent.code$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Continent.code<_$Scalars>>;
   /**
    * Select the `countries` field on the `Continent` object. Its type is `Country` (a `OutputObject` kind of type).
    */
-  countries?: Continent.countries$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Continent.countries<$Scalars>>
+  countries?: Continent.countries$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Continent.countries<_$Scalars>>;
   /**
    * Select the `name` field on the `Continent` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
-  name?: Continent.name$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Continent.name<$Scalars>>
+  name?: Continent.name$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Continent.name<_$Scalars>>;
 
   /**
    * Inline fragments for field groups.
@@ -366,8 +399,8 @@ export interface Continent<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap 
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | Continent$FragmentInline<$Scalars>
-    | Continent$FragmentInline<$Scalars>[]
+    | Continent$FragmentInline<_$Scalars>
+    | Continent$FragmentInline<_$Scalars>[];
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -376,23 +409,24 @@ export interface Continent<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap 
    */
   __typename?:
     | $Select.Indicator.NoArgsIndicator$Expanded
-    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>;
 }
 
-export interface Continent$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-  extends Continent<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
-{}
+export interface Continent$FragmentInline<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends Continent<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
 
 // ----------------------------------------| Fields |
 
 export namespace Continent {
-  export type code<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+  export type code<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | code$SelectionSet<$Scalars>
+    | code$SelectionSet<_$Scalars>;
 
-  export interface code$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
+  export interface code$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
 
   // --- expanded ---
 
@@ -401,18 +435,22 @@ export namespace Continent {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type code$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type code$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | code$SelectionSet<$Scalars>
-  >
+    | code$SelectionSet<_$Scalars>
+  >;
 
   // --------------------------------------------------------------------------------------------------
 
-  export type countries<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = countries$SelectionSet<$Scalars>
+  export type countries<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = countries$SelectionSet<_$Scalars>;
 
-  export interface countries$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base, $NamedTypes.$Country<$Scalars>
-  {}
+  export interface countries$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$Country<_$Scalars> {}
 
   // --- expanded ---
 
@@ -421,19 +459,21 @@ export namespace Continent {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type countries$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    countries$SelectionSet<$Scalars>
-  >
+  export type countries$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    countries$SelectionSet<_$Scalars>
+  >;
 
   // --------------------------------------------------------------------------------------------------
 
-  export type name<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+  export type name<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | name$SelectionSet<$Scalars>
+    | name$SelectionSet<_$Scalars>;
 
-  export interface name$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
+  export interface name$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
 
   // --- expanded ---
 
@@ -442,89 +482,85 @@ export namespace Continent {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type name$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type name$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | name$SelectionSet<$Scalars>
-  >
+    | name$SelectionSet<_$Scalars>
+  >;
 }
 
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OUTPUTOBJECT
-// --------------------------------------------------------------------------------------------------
 //                                              Country
 // --------------------------------------------------------------------------------------------------
-//
 //
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface Country<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
+export interface Country<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends $Select.Bases.ObjectLike {
   /**
    * Select the `awsRegion` field on the `Country` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
-  awsRegion?: Country.awsRegion$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Country.awsRegion<$Scalars>>
+  awsRegion?: Country.awsRegion$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Country.awsRegion<_$Scalars>>;
   /**
    * Select the `capital` field on the `Country` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
-  capital?: Country.capital$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Country.capital<$Scalars>>
+  capital?: Country.capital$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Country.capital<_$Scalars>>;
   /**
    * Select the `code` field on the `Country` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
-  code?: Country.code$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Country.code<$Scalars>>
+  code?: Country.code$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Country.code<_$Scalars>>;
   /**
    * Select the `continent` field on the `Country` object. Its type is `Continent` (a `OutputObject` kind of type).
    */
-  continent?: Country.continent$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Country.continent<$Scalars>>
+  continent?: Country.continent$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Country.continent<_$Scalars>>;
   /**
    * Select the `currencies` field on the `Country` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
-  currencies?: Country.currencies$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Country.currencies<$Scalars>>
+  currencies?: Country.currencies$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Country.currencies<_$Scalars>>;
   /**
    * Select the `currency` field on the `Country` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
-  currency?: Country.currency$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Country.currency<$Scalars>>
+  currency?: Country.currency$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Country.currency<_$Scalars>>;
   /**
    * Select the `emoji` field on the `Country` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
-  emoji?: Country.emoji$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Country.emoji<$Scalars>>
+  emoji?: Country.emoji$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Country.emoji<_$Scalars>>;
   /**
    * Select the `emojiU` field on the `Country` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
-  emojiU?: Country.emojiU$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Country.emojiU<$Scalars>>
+  emojiU?: Country.emojiU$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Country.emojiU<_$Scalars>>;
   /**
    * Select the `languages` field on the `Country` object. Its type is `Language` (a `OutputObject` kind of type).
    */
-  languages?: Country.languages$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Country.languages<$Scalars>>
+  languages?: Country.languages$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Country.languages<_$Scalars>>;
   /**
    * Select the `name` field on the `Country` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
-  name?: Country.name$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Country.name<$Scalars>>
+  name?: Country.name$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Country.name<_$Scalars>>;
   /**
    * Select the `native` field on the `Country` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
-  native?: Country.native$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Country.native<$Scalars>>
+  native?: Country.native$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Country.native<_$Scalars>>;
   /**
    * Select the `phone` field on the `Country` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
-  phone?: Country.phone$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Country.phone<$Scalars>>
+  phone?: Country.phone$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Country.phone<_$Scalars>>;
   /**
    * Select the `phones` field on the `Country` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
-  phones?: Country.phones$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Country.phones<$Scalars>>
+  phones?: Country.phones$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Country.phones<_$Scalars>>;
   /**
    * Select the `states` field on the `Country` object. Its type is `State` (a `OutputObject` kind of type).
    */
-  states?: Country.states$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Country.states<$Scalars>>
+  states?: Country.states$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Country.states<_$Scalars>>;
   /**
    * Select the `subdivisions` field on the `Country` object. Its type is `Subdivision` (a `OutputObject` kind of type).
    */
   subdivisions?:
-    | Country.subdivisions$Expanded<$Scalars>
-    | $Select.SelectAlias.SelectAlias<Country.subdivisions<$Scalars>>
+    | Country.subdivisions$Expanded<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Country.subdivisions<_$Scalars>>;
 
   /**
    * Inline fragments for field groups.
@@ -535,8 +571,8 @@ export interface Country<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = 
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | Country$FragmentInline<$Scalars>
-    | Country$FragmentInline<$Scalars>[]
+    | Country$FragmentInline<_$Scalars>
+    | Country$FragmentInline<_$Scalars>[];
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -545,23 +581,26 @@ export interface Country<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = 
    */
   __typename?:
     | $Select.Indicator.NoArgsIndicator$Expanded
-    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>;
 }
 
-export interface Country$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-  extends Country<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
-{}
+export interface Country$FragmentInline<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends Country<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
 
 // ----------------------------------------| Fields |
 
 export namespace Country {
-  export type awsRegion<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+  export type awsRegion<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > =
     | $Select.Indicator.NoArgsIndicator
-    | awsRegion$SelectionSet<$Scalars>
+    | awsRegion$SelectionSet<_$Scalars>;
 
-  export interface awsRegion$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
+  export interface awsRegion$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
 
   // --- expanded ---
 
@@ -570,20 +609,22 @@ export namespace Country {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type awsRegion$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type awsRegion$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | awsRegion$SelectionSet<$Scalars>
-  >
+    | awsRegion$SelectionSet<_$Scalars>
+  >;
 
   // --------------------------------------------------------------------------------------------------
 
-  export type capital<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+  export type capital<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | capital$SelectionSet<$Scalars>
+    | capital$SelectionSet<_$Scalars>;
 
-  export interface capital$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
+  export interface capital$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
 
   // --- expanded ---
 
@@ -592,20 +633,22 @@ export namespace Country {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type capital$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type capital$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | capital$SelectionSet<$Scalars>
-  >
+    | capital$SelectionSet<_$Scalars>
+  >;
 
   // --------------------------------------------------------------------------------------------------
 
-  export type code<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+  export type code<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | code$SelectionSet<$Scalars>
+    | code$SelectionSet<_$Scalars>;
 
-  export interface code$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
+  export interface code$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
 
   // --- expanded ---
 
@@ -614,18 +657,22 @@ export namespace Country {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type code$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type code$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | code$SelectionSet<$Scalars>
-  >
+    | code$SelectionSet<_$Scalars>
+  >;
 
   // --------------------------------------------------------------------------------------------------
 
-  export type continent<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = continent$SelectionSet<$Scalars>
+  export type continent<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = continent$SelectionSet<_$Scalars>;
 
-  export interface continent$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base, $NamedTypes.$Continent<$Scalars>
-  {}
+  export interface continent$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$Continent<_$Scalars> {}
 
   // --- expanded ---
 
@@ -634,19 +681,23 @@ export namespace Country {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type continent$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    continent$SelectionSet<$Scalars>
-  >
+  export type continent$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    continent$SelectionSet<_$Scalars>
+  >;
 
   // --------------------------------------------------------------------------------------------------
 
-  export type currencies<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+  export type currencies<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > =
     | $Select.Indicator.NoArgsIndicator
-    | currencies$SelectionSet<$Scalars>
+    | currencies$SelectionSet<_$Scalars>;
 
-  export interface currencies$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
+  export interface currencies$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
 
   // --- expanded ---
 
@@ -655,20 +706,24 @@ export namespace Country {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type currencies$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type currencies$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | currencies$SelectionSet<$Scalars>
-  >
+    | currencies$SelectionSet<_$Scalars>
+  >;
 
   // --------------------------------------------------------------------------------------------------
 
-  export type currency<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+  export type currency<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > =
     | $Select.Indicator.NoArgsIndicator
-    | currency$SelectionSet<$Scalars>
+    | currency$SelectionSet<_$Scalars>;
 
-  export interface currency$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
+  export interface currency$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
 
   // --- expanded ---
 
@@ -677,20 +732,22 @@ export namespace Country {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type currency$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type currency$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | currency$SelectionSet<$Scalars>
-  >
+    | currency$SelectionSet<_$Scalars>
+  >;
 
   // --------------------------------------------------------------------------------------------------
 
-  export type emoji<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+  export type emoji<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | emoji$SelectionSet<$Scalars>
+    | emoji$SelectionSet<_$Scalars>;
 
-  export interface emoji$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
+  export interface emoji$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
 
   // --- expanded ---
 
@@ -699,20 +756,22 @@ export namespace Country {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type emoji$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type emoji$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | emoji$SelectionSet<$Scalars>
-  >
+    | emoji$SelectionSet<_$Scalars>
+  >;
 
   // --------------------------------------------------------------------------------------------------
 
-  export type emojiU<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+  export type emojiU<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | emojiU$SelectionSet<$Scalars>
+    | emojiU$SelectionSet<_$Scalars>;
 
-  export interface emojiU$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
+  export interface emojiU$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
 
   // --- expanded ---
 
@@ -721,18 +780,22 @@ export namespace Country {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type emojiU$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type emojiU$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | emojiU$SelectionSet<$Scalars>
-  >
+    | emojiU$SelectionSet<_$Scalars>
+  >;
 
   // --------------------------------------------------------------------------------------------------
 
-  export type languages<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = languages$SelectionSet<$Scalars>
+  export type languages<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = languages$SelectionSet<_$Scalars>;
 
-  export interface languages$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base, $NamedTypes.$Language<$Scalars>
-  {}
+  export interface languages$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$Language<_$Scalars> {}
 
   // --- expanded ---
 
@@ -741,27 +804,31 @@ export namespace Country {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type languages$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    languages$SelectionSet<$Scalars>
-  >
+  export type languages$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    languages$SelectionSet<_$Scalars>
+  >;
 
   // --------------------------------------------------------------------------------------------------
 
-  export type name<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+  export type name<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | name$SelectionSet<$Scalars>
+    | name$SelectionSet<_$Scalars>;
 
-  export interface name$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {
+  export interface name$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {
     /**
      * Arguments for `name` field. No arguments are required so you may omit this.
      */
-    $?: name$Arguments<$Scalars>
+    $?: name$Arguments<_$Scalars>;
   }
 
-  export interface name$Arguments<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> {
-    lang?: string | undefined | null
+  export interface name$Arguments<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
+    lang?: string | undefined | null;
   }
 
   // --- expanded ---
@@ -771,20 +838,22 @@ export namespace Country {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type name$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type name$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | name$SelectionSet<$Scalars>
-  >
+    | name$SelectionSet<_$Scalars>
+  >;
 
   // --------------------------------------------------------------------------------------------------
 
-  export type native<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+  export type native<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | native$SelectionSet<$Scalars>
+    | native$SelectionSet<_$Scalars>;
 
-  export interface native$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
+  export interface native$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
 
   // --- expanded ---
 
@@ -793,20 +862,22 @@ export namespace Country {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type native$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type native$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | native$SelectionSet<$Scalars>
-  >
+    | native$SelectionSet<_$Scalars>
+  >;
 
   // --------------------------------------------------------------------------------------------------
 
-  export type phone<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+  export type phone<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | phone$SelectionSet<$Scalars>
+    | phone$SelectionSet<_$Scalars>;
 
-  export interface phone$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
+  export interface phone$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
 
   // --- expanded ---
 
@@ -815,20 +886,22 @@ export namespace Country {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type phone$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type phone$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | phone$SelectionSet<$Scalars>
-  >
+    | phone$SelectionSet<_$Scalars>
+  >;
 
   // --------------------------------------------------------------------------------------------------
 
-  export type phones<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+  export type phones<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | phones$SelectionSet<$Scalars>
+    | phones$SelectionSet<_$Scalars>;
 
-  export interface phones$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
+  export interface phones$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
 
   // --- expanded ---
 
@@ -837,18 +910,21 @@ export namespace Country {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type phones$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type phones$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | phones$SelectionSet<$Scalars>
-  >
+    | phones$SelectionSet<_$Scalars>
+  >;
 
   // --------------------------------------------------------------------------------------------------
 
-  export type states<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = states$SelectionSet<$Scalars>
+  export type states<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    states$SelectionSet<_$Scalars>;
 
-  export interface states$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base, $NamedTypes.$State<$Scalars>
-  {}
+  export interface states$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$State<_$Scalars> {}
 
   // --- expanded ---
 
@@ -857,19 +933,21 @@ export namespace Country {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type states$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    states$SelectionSet<$Scalars>
-  >
+  export type states$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    states$SelectionSet<_$Scalars>
+  >;
 
   // --------------------------------------------------------------------------------------------------
 
-  export type subdivisions<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = subdivisions$SelectionSet<
-    $Scalars
-  >
+  export type subdivisions<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = subdivisions$SelectionSet<_$Scalars>;
 
-  export interface subdivisions$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base, $NamedTypes.$Subdivision<$Scalars>
-  {}
+  export interface subdivisions$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$Subdivision<_$Scalars> {}
 
   // --- expanded ---
 
@@ -878,42 +956,38 @@ export namespace Country {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type subdivisions$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    subdivisions$SelectionSet<$Scalars>
-  >
+  export type subdivisions$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    subdivisions$SelectionSet<_$Scalars>
+  >;
 }
 
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OUTPUTOBJECT
-// --------------------------------------------------------------------------------------------------
 //                                              Language
 // --------------------------------------------------------------------------------------------------
-//
 //
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface Language<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
+export interface Language<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends $Select.Bases.ObjectLike {
   /**
    * Select the `code` field on the `Language` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
-  code?: Language.code$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Language.code<$Scalars>>
+  code?: Language.code$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Language.code<_$Scalars>>;
   /**
    * Select the `name` field on the `Language` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
-  name?: Language.name$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Language.name<$Scalars>>
+  name?: Language.name$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Language.name<_$Scalars>>;
   /**
    * Select the `native` field on the `Language` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
-  native?: Language.native$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Language.native<$Scalars>>
+  native?: Language.native$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Language.native<_$Scalars>>;
   /**
    * Select the `rtl` field on the `Language` object. Its type is `Boolean` (a `ScalarStandard` kind of type).
    */
-  rtl?: Language.rtl$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Language.rtl<$Scalars>>
+  rtl?: Language.rtl$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Language.rtl<_$Scalars>>;
 
   /**
    * Inline fragments for field groups.
@@ -924,8 +998,8 @@ export interface Language<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap =
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | Language$FragmentInline<$Scalars>
-    | Language$FragmentInline<$Scalars>[]
+    | Language$FragmentInline<_$Scalars>
+    | Language$FragmentInline<_$Scalars>[];
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -934,23 +1008,24 @@ export interface Language<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap =
    */
   __typename?:
     | $Select.Indicator.NoArgsIndicator$Expanded
-    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>;
 }
 
-export interface Language$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-  extends Language<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
-{}
+export interface Language$FragmentInline<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends Language<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
 
 // ----------------------------------------| Fields |
 
 export namespace Language {
-  export type code<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+  export type code<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | code$SelectionSet<$Scalars>
+    | code$SelectionSet<_$Scalars>;
 
-  export interface code$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
+  export interface code$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
 
   // --- expanded ---
 
@@ -959,20 +1034,22 @@ export namespace Language {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type code$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type code$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | code$SelectionSet<$Scalars>
-  >
+    | code$SelectionSet<_$Scalars>
+  >;
 
   // --------------------------------------------------------------------------------------------------
 
-  export type name<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+  export type name<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | name$SelectionSet<$Scalars>
+    | name$SelectionSet<_$Scalars>;
 
-  export interface name$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
+  export interface name$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
 
   // --- expanded ---
 
@@ -981,20 +1058,22 @@ export namespace Language {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type name$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type name$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | name$SelectionSet<$Scalars>
-  >
+    | name$SelectionSet<_$Scalars>
+  >;
 
   // --------------------------------------------------------------------------------------------------
 
-  export type native<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+  export type native<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | native$SelectionSet<$Scalars>
+    | native$SelectionSet<_$Scalars>;
 
-  export interface native$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
+  export interface native$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
 
   // --- expanded ---
 
@@ -1003,20 +1082,22 @@ export namespace Language {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type native$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type native$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | native$SelectionSet<$Scalars>
-  >
+    | native$SelectionSet<_$Scalars>
+  >;
 
   // --------------------------------------------------------------------------------------------------
 
-  export type rtl<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+  export type rtl<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | rtl$SelectionSet<$Scalars>
+    | rtl$SelectionSet<_$Scalars>;
 
-  export interface rtl$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
+  export interface rtl$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
 
   // --- expanded ---
 
@@ -1025,39 +1106,35 @@ export namespace Language {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type rtl$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type rtl$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | rtl$SelectionSet<$Scalars>
-  >
+    | rtl$SelectionSet<_$Scalars>
+  >;
 }
 
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OUTPUTOBJECT
-// --------------------------------------------------------------------------------------------------
 //                                               State
 // --------------------------------------------------------------------------------------------------
-//
 //
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface State<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> extends $Select.Bases.ObjectLike {
+export interface State<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty>
+  extends $Select.Bases.ObjectLike
+{
   /**
    * Select the `code` field on the `State` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
-  code?: State.code$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<State.code<$Scalars>>
+  code?: State.code$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<State.code<_$Scalars>>;
   /**
    * Select the `country` field on the `State` object. Its type is `Country` (a `OutputObject` kind of type).
    */
-  country?: State.country$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<State.country<$Scalars>>
+  country?: State.country$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<State.country<_$Scalars>>;
   /**
    * Select the `name` field on the `State` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
-  name?: State.name$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<State.name<$Scalars>>
+  name?: State.name$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<State.name<_$Scalars>>;
 
   /**
    * Inline fragments for field groups.
@@ -1068,8 +1145,8 @@ export interface State<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | State$FragmentInline<$Scalars>
-    | State$FragmentInline<$Scalars>[]
+    | State$FragmentInline<_$Scalars>
+    | State$FragmentInline<_$Scalars>[];
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -1078,23 +1155,24 @@ export interface State<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}
    */
   __typename?:
     | $Select.Indicator.NoArgsIndicator$Expanded
-    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>;
 }
 
-export interface State$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-  extends State<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
-{}
+export interface State$FragmentInline<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends State<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
 
 // ----------------------------------------| Fields |
 
 export namespace State {
-  export type code<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+  export type code<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | code$SelectionSet<$Scalars>
+    | code$SelectionSet<_$Scalars>;
 
-  export interface code$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
+  export interface code$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
 
   // --- expanded ---
 
@@ -1103,18 +1181,21 @@ export namespace State {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type code$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type code$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | code$SelectionSet<$Scalars>
-  >
+    | code$SelectionSet<_$Scalars>
+  >;
 
   // --------------------------------------------------------------------------------------------------
 
-  export type country<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = country$SelectionSet<$Scalars>
+  export type country<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    country$SelectionSet<_$Scalars>;
 
-  export interface country$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base, $NamedTypes.$Country<$Scalars>
-  {}
+  export interface country$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$Country<_$Scalars> {}
 
   // --- expanded ---
 
@@ -1123,19 +1204,21 @@ export namespace State {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type country$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
-    country$SelectionSet<$Scalars>
-  >
+  export type country$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    country$SelectionSet<_$Scalars>
+  >;
 
   // --------------------------------------------------------------------------------------------------
 
-  export type name<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+  export type name<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | name$SelectionSet<$Scalars>
+    | name$SelectionSet<_$Scalars>;
 
-  export interface name$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
+  export interface name$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
 
   // --- expanded ---
 
@@ -1144,41 +1227,35 @@ export namespace State {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type name$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type name$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | name$SelectionSet<$Scalars>
-  >
+    | name$SelectionSet<_$Scalars>
+  >;
 }
 
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OUTPUTOBJECT
-// --------------------------------------------------------------------------------------------------
 //                                            Subdivision
 // --------------------------------------------------------------------------------------------------
-//
 //
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface Subdivision<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-  extends $Select.Bases.ObjectLike
-{
+export interface Subdivision<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends $Select.Bases.ObjectLike {
   /**
    * Select the `code` field on the `Subdivision` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
-  code?: Subdivision.code$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Subdivision.code<$Scalars>>
+  code?: Subdivision.code$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Subdivision.code<_$Scalars>>;
   /**
    * Select the `emoji` field on the `Subdivision` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
-  emoji?: Subdivision.emoji$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Subdivision.emoji<$Scalars>>
+  emoji?: Subdivision.emoji$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Subdivision.emoji<_$Scalars>>;
   /**
    * Select the `name` field on the `Subdivision` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
-  name?: Subdivision.name$Expanded<$Scalars> | $Select.SelectAlias.SelectAlias<Subdivision.name<$Scalars>>
+  name?: Subdivision.name$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Subdivision.name<_$Scalars>>;
 
   /**
    * Inline fragments for field groups.
@@ -1189,8 +1266,8 @@ export interface Subdivision<$Scalars extends $$Utilities.Schema.Scalar.ScalarMa
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | Subdivision$FragmentInline<$Scalars>
-    | Subdivision$FragmentInline<$Scalars>[]
+    | Subdivision$FragmentInline<_$Scalars>
+    | Subdivision$FragmentInline<_$Scalars>[];
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -1199,23 +1276,24 @@ export interface Subdivision<$Scalars extends $$Utilities.Schema.Scalar.ScalarMa
    */
   __typename?:
     | $Select.Indicator.NoArgsIndicator$Expanded
-    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>;
 }
 
-export interface Subdivision$FragmentInline<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-  extends Subdivision<$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields
-{}
+export interface Subdivision$FragmentInline<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends Subdivision<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
 
 // ----------------------------------------| Fields |
 
 export namespace Subdivision {
-  export type code<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+  export type code<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | code$SelectionSet<$Scalars>
+    | code$SelectionSet<_$Scalars>;
 
-  export interface code$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
+  export interface code$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
 
   // --- expanded ---
 
@@ -1224,20 +1302,22 @@ export namespace Subdivision {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type code$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type code$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | code$SelectionSet<$Scalars>
-  >
+    | code$SelectionSet<_$Scalars>
+  >;
 
   // --------------------------------------------------------------------------------------------------
 
-  export type emoji<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+  export type emoji<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | emoji$SelectionSet<$Scalars>
+    | emoji$SelectionSet<_$Scalars>;
 
-  export interface emoji$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
+  export interface emoji$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
 
   // --- expanded ---
 
@@ -1246,20 +1326,22 @@ export namespace Subdivision {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type emoji$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type emoji$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | emoji$SelectionSet<$Scalars>
-  >
+    | emoji$SelectionSet<_$Scalars>
+  >;
 
   // --------------------------------------------------------------------------------------------------
 
-  export type name<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
+  export type name<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
     | $Select.Indicator.NoArgsIndicator
-    | name$SelectionSet<$Scalars>
+    | name$SelectionSet<_$Scalars>;
 
-  export interface name$SelectionSet<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}>
-    extends $Select.Bases.Base
-  {}
+  export interface name$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
 
   // --- expanded ---
 
@@ -1268,10 +1350,12 @@ export namespace Subdivision {
    * that IDEs will display its contents (a union type) directly, rather than the name of this type.
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  export type name$Expanded<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = $$Utilities.Simplify<
+  export type name$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
     | $Select.Indicator.NoArgsIndicator
-    | name$SelectionSet<$Scalars>
-  >
+    | name$SelectionSet<_$Scalars>
+  >;
 }
 
 /**
@@ -1282,21 +1366,32 @@ export namespace Subdivision {
  *     would end up with an error of `export interface Foo extends Foo ...`
  */
 export namespace $NamedTypes {
-  export type $Query<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = Query<$Scalars>
-  export type $ContinentFilterInput<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = ContinentFilterInput<
-    $Scalars
-  >
-  export type $CountryFilterInput<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = CountryFilterInput<
-    $Scalars
-  >
-  export type $LanguageFilterInput<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = LanguageFilterInput<
-    $Scalars
-  >
-  export type $StringQueryOperatorInput<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> =
-    StringQueryOperatorInput<$Scalars>
-  export type $Continent<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = Continent<$Scalars>
-  export type $Country<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = Country<$Scalars>
-  export type $Language<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = Language<$Scalars>
-  export type $State<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = State<$Scalars>
-  export type $Subdivision<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> = Subdivision<$Scalars>
+  export type $Query<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    Query<_$Scalars>;
+  export type $ContinentFilterInput<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = ContinentFilterInput<_$Scalars>;
+  export type $CountryFilterInput<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = CountryFilterInput<_$Scalars>;
+  export type $LanguageFilterInput<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = LanguageFilterInput<_$Scalars>;
+  export type $StringQueryOperatorInput<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = StringQueryOperatorInput<_$Scalars>;
+  export type $Continent<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = Continent<_$Scalars>;
+  export type $Country<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = Country<_$Scalars>;
+  export type $Language<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = Language<_$Scalars>;
+  export type $State<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    State<_$Scalars>;
+  export type $Subdivision<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = Subdivision<_$Scalars>;
 }

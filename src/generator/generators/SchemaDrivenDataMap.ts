@@ -16,13 +16,18 @@ type ReferenceAssignments = string[]
 export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
   `SchemaDrivenDataMap`,
   ({ config, code }) => {
+    const rootsWithOpType = entries(config.schema.kindMap.index.Root)
+      .map(_ => {
+        if (_[1] === null) return null
+        return { operationType: _[0], objectType: _[1] }
+      }).filter(_ => _ !== null)
+    const kindMap: Grafaid.Schema.KindMap['list'] = getKindMap(config)
+    const kinds = entries(kindMap)
+
     code(`
       import * as ${identifiers.$Scalar} from './${ModuleGeneratorScalar.name}.js'
       import type * as ${identifiers.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
     `)
-
-    const kindMap: Grafaid.Schema.KindMap['list'] = getKindMap(config)
-    const kinds = entries(kindMap)
 
     const referenceAssignments: ReferenceAssignments = []
 
@@ -54,10 +59,12 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
     code()
     code(`const $schemaDrivenDataMap: ${identifiers.$$Utilities}.SchemaDrivenDataMap =`)
     code(Code.termObject({
-      roots: Code.directiveTermObject({
-        $literal: kindMap.Root.map(type => type.name + `,`).join(`\n`),
+      operations: kindMap.Root.map(type => {
+        const operationType = rootsWithOpType.find(({ objectType }) => objectType.name === type.name)?.operationType
+        if (!operationType) throw new Error(`Operation type not found for ${type.name}`)
+        return [operationType, type.name] as const
       }),
-      directives: `{}`,
+      directives: {},
       types: Code.directiveTermObject({
         $literal: [
           ...kinds.map(([, _]) => _).flat().map((_) => _.name),

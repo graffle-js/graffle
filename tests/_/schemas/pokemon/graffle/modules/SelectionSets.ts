@@ -40,105 +40,8 @@ export interface $Document<
 //
 //
 
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// ROOT
-// --------------------------------------------------------------------------------------------------
-//                                              Mutation
-// --------------------------------------------------------------------------------------------------
-//
-//
-
-// ----------------------------------------| Entrypoint Interface |
-
-export interface Mutation<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> {
-  /**
-   * Select the `addPokemon` field on the `Mutation` object. Its type is `Pokemon` (a `OutputObject` kind of type).
-   */
-  addPokemon?: Mutation.addPokemon<_$Scalars> | $Select.SelectAlias.SelectAlias<Mutation.addPokemon<_$Scalars>>
-
-  /**
-   * Inline fragments for field groups.
-   *
-   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
-   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
-   *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
-   */
-  ___?:
-    | Mutation$FragmentInline<_$Scalars>
-    | Mutation$FragmentInline<_$Scalars>[]
-
-  /**
-   * A meta field. Is the name of the type being selected.
-   *
-   * @see https://graphql.org/learn/queries/#meta-fields
-   */
-  __typename?:
-    | $Select.Indicator.NoArgsIndicator$Expanded
-    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
-}
-
-export interface Mutation$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends Mutation<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
-}
-
-// ----------------------------------------| Fields |
-
-export namespace Mutation {
-  export type addPokemon<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = addPokemon$SelectionSet<_$Scalars>
-
-  export interface addPokemon$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base, $NamedTypes.$Pokemon<_$Scalars> {
-    /**
-     * Arguments for `addPokemon` field. Some (2/5) arguments are required so you must include this.
-     */
-    $: addPokemon$Arguments<_$Scalars>
-  }
-
-  export interface addPokemon$Arguments<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > {
-    attack?: number | undefined | null
-    defense?: number | undefined | null
-    hp?: number | undefined | null
-    name: string
-    $type: $NamedTypes.$PokemonType
-  }
-
-  // --- expanded ---
-
-  /**
-   * This is the "expanded" version of the `addPokemon` type. It is identical except for the fact
-   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
-   * In some cases, this is a preferable DX, making the types easier to read for users.
-   */
-  export type addPokemon$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = $$Utilities.Simplify<
-    addPokemon$SelectionSet<_$Scalars>
-  >
-}
-
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// ROOT
-// --------------------------------------------------------------------------------------------------
 //                                               Query
 // --------------------------------------------------------------------------------------------------
-//
 //
 
 // ----------------------------------------| Entrypoint Interface |
@@ -395,6 +298,87 @@ export namespace Query {
   >
 }
 
+//                                              Mutation
+// --------------------------------------------------------------------------------------------------
+//
+
+// ----------------------------------------| Entrypoint Interface |
+
+export interface Mutation<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> {
+  /**
+   * Select the `addPokemon` field on the `Mutation` object. Its type is `Pokemon` (a `OutputObject` kind of type).
+   */
+  addPokemon?: Mutation.addPokemon<_$Scalars> | $Select.SelectAlias.SelectAlias<Mutation.addPokemon<_$Scalars>>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | Mutation$FragmentInline<_$Scalars>
+    | Mutation$FragmentInline<_$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+
+export interface Mutation$FragmentInline<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends Mutation<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
+
+// ----------------------------------------| Fields |
+
+export namespace Mutation {
+  export type addPokemon<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = addPokemon$SelectionSet<_$Scalars>
+
+  export interface addPokemon$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$Pokemon<_$Scalars> {
+    /**
+     * Arguments for `addPokemon` field. Some (2/5) arguments are required so you must include this.
+     */
+    $: addPokemon$Arguments<_$Scalars>
+  }
+
+  export interface addPokemon$Arguments<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
+    attack?: number | undefined | null
+    defense?: number | undefined | null
+    hp?: number | undefined | null
+    name: string
+    $type: $NamedTypes.$PokemonType
+  }
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `addPokemon` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type addPokemon$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    addPokemon$SelectionSet<_$Scalars>
+  >
+}
+
 //
 //
 //
@@ -501,16 +485,8 @@ export interface StringFilter<
 //
 //
 
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OUTPUTOBJECT
-// --------------------------------------------------------------------------------------------------
 //                                            BattleRoyale
 // --------------------------------------------------------------------------------------------------
-//
 //
 
 // ----------------------------------------| Entrypoint Interface |
@@ -659,16 +635,8 @@ export namespace BattleRoyale {
   >
 }
 
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OUTPUTOBJECT
-// --------------------------------------------------------------------------------------------------
 //                                           BattleTrainer
 // --------------------------------------------------------------------------------------------------
-//
 //
 
 // ----------------------------------------| Entrypoint Interface |
@@ -846,16 +814,8 @@ export namespace BattleTrainer {
   >
 }
 
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OUTPUTOBJECT
-// --------------------------------------------------------------------------------------------------
 //                                             BattleWild
 // --------------------------------------------------------------------------------------------------
-//
 //
 
 // ----------------------------------------| Entrypoint Interface |
@@ -1058,16 +1018,8 @@ export namespace BattleWild {
   >
 }
 
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OUTPUTOBJECT
-// --------------------------------------------------------------------------------------------------
 //                                       CombatantMultiPokemon
 // --------------------------------------------------------------------------------------------------
-//
 //
 
 // ----------------------------------------| Entrypoint Interface |
@@ -1162,16 +1114,8 @@ export namespace CombatantMultiPokemon {
   >
 }
 
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OUTPUTOBJECT
-// --------------------------------------------------------------------------------------------------
 //                                       CombatantSinglePokemon
 // --------------------------------------------------------------------------------------------------
-//
 //
 
 // ----------------------------------------| Entrypoint Interface |
@@ -1265,16 +1209,8 @@ export namespace CombatantSinglePokemon {
   >
 }
 
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OUTPUTOBJECT
-// --------------------------------------------------------------------------------------------------
 //                                               Patron
 // --------------------------------------------------------------------------------------------------
-//
 //
 
 // ----------------------------------------| Entrypoint Interface |
@@ -1396,16 +1332,8 @@ export namespace Patron {
   >
 }
 
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OUTPUTOBJECT
-// --------------------------------------------------------------------------------------------------
 //                                              Pokemon
 // --------------------------------------------------------------------------------------------------
-//
 //
 
 // ----------------------------------------| Entrypoint Interface |
@@ -1667,16 +1595,8 @@ export namespace Pokemon {
   >
 }
 
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OUTPUTOBJECT
-// --------------------------------------------------------------------------------------------------
 //                                              Trainer
 // --------------------------------------------------------------------------------------------------
-//
 //
 
 // ----------------------------------------| Entrypoint Interface |
@@ -2011,11 +1931,11 @@ export namespace Being {
  *     would end up with an error of `export interface Foo extends Foo ...`
  */
 export namespace $NamedTypes {
+  export type $Query<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    Query<_$Scalars>
   export type $Mutation<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = Mutation<_$Scalars>
-  export type $Query<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    Query<_$Scalars>
   export type $BattleWildResult = BattleWildResult
   export type $PokemonType = PokemonType
   export type $TrainerClass = TrainerClass

@@ -40,121 +40,8 @@ export interface $Document<
 //
 //
 
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// ROOT
-// --------------------------------------------------------------------------------------------------
-//                                              Mutation
-// --------------------------------------------------------------------------------------------------
-//
-//
-
-// ----------------------------------------| Entrypoint Interface |
-
-export interface Mutation<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> {
-  /**
-   * Select the `id` field on the `Mutation` object. Its type is `ID` (a `ScalarStandard` kind of type).
-   */
-  id?: Mutation.id$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Mutation.id<_$Scalars>>
-  /**
-   * Select the `idNonNull` field on the `Mutation` object. Its type is `ID` (a `ScalarStandard` kind of type).
-   */
-  idNonNull?: Mutation.idNonNull$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Mutation.idNonNull<_$Scalars>>
-
-  /**
-   * Inline fragments for field groups.
-   *
-   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
-   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
-   *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
-   */
-  ___?:
-    | Mutation$FragmentInline<_$Scalars>
-    | Mutation$FragmentInline<_$Scalars>[]
-
-  /**
-   * A meta field. Is the name of the type being selected.
-   *
-   * @see https://graphql.org/learn/queries/#meta-fields
-   */
-  __typename?:
-    | $Select.Indicator.NoArgsIndicator$Expanded
-    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
-}
-
-export interface Mutation$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends Mutation<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
-}
-
-// ----------------------------------------| Fields |
-
-export namespace Mutation {
-  export type id<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
-
-  export interface id$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base {}
-
-  // --- expanded ---
-
-  /**
-   * This is the "expanded" version of the `id` type. It is identical except for the fact
-   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
-   * In some cases, this is a preferable DX, making the types easier to read for users.
-   */
-  export type id$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = $$Utilities.Simplify<
-    | $Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
-  >
-
-  // --------------------------------------------------------------------------------------------------
-
-  export type idNonNull<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > =
-    | $Select.Indicator.NoArgsIndicator
-    | idNonNull$SelectionSet<_$Scalars>
-
-  export interface idNonNull$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base {}
-
-  // --- expanded ---
-
-  /**
-   * This is the "expanded" version of the `idNonNull` type. It is identical except for the fact
-   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
-   * In some cases, this is a preferable DX, making the types easier to read for users.
-   */
-  export type idNonNull$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = $$Utilities.Simplify<
-    | $Select.Indicator.NoArgsIndicator
-    | idNonNull$SelectionSet<_$Scalars>
-  >
-}
-
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// ROOT
-// --------------------------------------------------------------------------------------------------
 //                                               Query
 // --------------------------------------------------------------------------------------------------
-//
 //
 
 // ----------------------------------------| Entrypoint Interface |
@@ -1933,6 +1820,103 @@ export namespace Query {
   >
 }
 
+//                                              Mutation
+// --------------------------------------------------------------------------------------------------
+//
+
+// ----------------------------------------| Entrypoint Interface |
+
+export interface Mutation<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> {
+  /**
+   * Select the `id` field on the `Mutation` object. Its type is `ID` (a `ScalarStandard` kind of type).
+   */
+  id?: Mutation.id$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Mutation.id<_$Scalars>>
+  /**
+   * Select the `idNonNull` field on the `Mutation` object. Its type is `ID` (a `ScalarStandard` kind of type).
+   */
+  idNonNull?: Mutation.idNonNull$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Mutation.idNonNull<_$Scalars>>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | Mutation$FragmentInline<_$Scalars>
+    | Mutation$FragmentInline<_$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+
+export interface Mutation$FragmentInline<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends Mutation<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
+
+// ----------------------------------------| Fields |
+
+export namespace Mutation {
+  export type id<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | id$SelectionSet<_$Scalars>
+
+  export interface id$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `id` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type id$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | id$SelectionSet<_$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type idNonNull<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > =
+    | $Select.Indicator.NoArgsIndicator
+    | idNonNull$SelectionSet<_$Scalars>
+
+  export interface idNonNull$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `idNonNull` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type idNonNull$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | idNonNull$SelectionSet<_$Scalars>
+  >
+}
+
 //
 //
 //
@@ -2039,16 +2023,8 @@ export interface InputObjectNestedNonNull<
 //
 //
 
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OUTPUTOBJECT
-// --------------------------------------------------------------------------------------------------
 //                                                Bar
 // --------------------------------------------------------------------------------------------------
-//
 //
 
 // ----------------------------------------| Entrypoint Interface |
@@ -2114,16 +2090,8 @@ export namespace Bar {
   >
 }
 
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OUTPUTOBJECT
-// --------------------------------------------------------------------------------------------------
 //                                            DateObject1
 // --------------------------------------------------------------------------------------------------
-//
 //
 
 // ----------------------------------------| Entrypoint Interface |
@@ -2189,16 +2157,8 @@ export namespace DateObject1 {
   >
 }
 
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OUTPUTOBJECT
-// --------------------------------------------------------------------------------------------------
 //                                            DateObject2
 // --------------------------------------------------------------------------------------------------
-//
 //
 
 // ----------------------------------------| Entrypoint Interface |
@@ -2264,16 +2224,8 @@ export namespace DateObject2 {
   >
 }
 
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OUTPUTOBJECT
-// --------------------------------------------------------------------------------------------------
 //                                              ErrorOne
 // --------------------------------------------------------------------------------------------------
-//
 //
 
 // ----------------------------------------| Entrypoint Interface |
@@ -2367,16 +2319,8 @@ export namespace ErrorOne {
   >
 }
 
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OUTPUTOBJECT
-// --------------------------------------------------------------------------------------------------
 //                                              ErrorTwo
 // --------------------------------------------------------------------------------------------------
-//
 //
 
 // ----------------------------------------| Entrypoint Interface |
@@ -2470,16 +2414,8 @@ export namespace ErrorTwo {
   >
 }
 
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OUTPUTOBJECT
-// --------------------------------------------------------------------------------------------------
 //                                                Foo
 // --------------------------------------------------------------------------------------------------
-//
 //
 
 // ----------------------------------------| Entrypoint Interface |
@@ -2548,16 +2484,8 @@ export namespace Foo {
   >
 }
 
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OUTPUTOBJECT
-// --------------------------------------------------------------------------------------------------
 //                                              Object1
 // --------------------------------------------------------------------------------------------------
-//
 //
 
 // ----------------------------------------| Entrypoint Interface |
@@ -2765,16 +2693,8 @@ export namespace Object1 {
   >
 }
 
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OUTPUTOBJECT
-// --------------------------------------------------------------------------------------------------
 //                                    Object1ImplementingInterface
 // --------------------------------------------------------------------------------------------------
-//
 //
 
 // ----------------------------------------| Entrypoint Interface |
@@ -2872,16 +2792,8 @@ export namespace Object1ImplementingInterface {
   >
 }
 
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OUTPUTOBJECT
-// --------------------------------------------------------------------------------------------------
 //                                    Object2ImplementingInterface
 // --------------------------------------------------------------------------------------------------
-//
 //
 
 // ----------------------------------------| Entrypoint Interface |
@@ -2981,16 +2893,8 @@ export namespace Object2ImplementingInterface {
   >
 }
 
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OUTPUTOBJECT
-// --------------------------------------------------------------------------------------------------
 //                                            ObjectNested
 // --------------------------------------------------------------------------------------------------
-//
 //
 
 // ----------------------------------------| Entrypoint Interface |
@@ -3082,16 +2986,8 @@ export namespace ObjectNested {
   >
 }
 
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OUTPUTOBJECT
-// --------------------------------------------------------------------------------------------------
 //                                            ObjectUnion
 // --------------------------------------------------------------------------------------------------
-//
 //
 
 // ----------------------------------------| Entrypoint Interface |
@@ -3158,16 +3054,8 @@ export namespace ObjectUnion {
   >
 }
 
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OUTPUTOBJECT
-// --------------------------------------------------------------------------------------------------
 //                                          lowerCaseObject
 // --------------------------------------------------------------------------------------------------
-//
 //
 
 // ----------------------------------------| Entrypoint Interface |
@@ -3233,16 +3121,8 @@ export namespace lowerCaseObject {
   >
 }
 
-//
-//
-//
-//
-// GRAPHQL SELECTION SET
-// OUTPUTOBJECT
-// --------------------------------------------------------------------------------------------------
 //                                          lowerCaseObject2
 // --------------------------------------------------------------------------------------------------
-//
 //
 
 // ----------------------------------------| Entrypoint Interface |
@@ -3672,11 +3552,11 @@ export namespace Interface {
  *     would end up with an error of `export interface Foo extends Foo ...`
  */
 export namespace $NamedTypes {
+  export type $Query<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    Query<_$Scalars>
   export type $Mutation<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = Mutation<_$Scalars>
-  export type $Query<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    Query<_$Scalars>
   export type $ABCEnum = ABCEnum
   export type $Case = Case
   export type $InputObject<

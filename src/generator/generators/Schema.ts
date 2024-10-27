@@ -81,7 +81,7 @@ const OutputObject = createCodeGenerator<{ type: Grafaid.Schema.ObjectType }>(({
       }),
     ),
   )
-  code(Code.tsInterface$({
+  code(Code.tsInterface({
     tsDoc: getTsDocContents(config, type),
     name: type.name,
     extends: `$.OutputObject`,
@@ -94,7 +94,7 @@ const OutputObject = createCodeGenerator<{ type: Grafaid.Schema.ObjectType }>(({
 
   code(Code.esmExport(Code.tsNamespace(
     type.name,
-    [Code.tsInterface$({
+    [Code.tsInterface({
       export: true,
       name: `__typename`,
       extends: `$.OutputField`,
@@ -111,7 +111,7 @@ const OutputObject = createCodeGenerator<{ type: Grafaid.Schema.ObjectType }>(({
       values(type.getFields())
         .map((field) => {
           const namedType = Grafaid.Schema.getNamedType(field.type)
-          return Code.tsInterface$({
+          return Code.tsInterface({
             tsDoc: getTsDocContents(config, field),
             export: true,
             name: field.name,
@@ -145,7 +145,7 @@ const OutputObject = createCodeGenerator<{ type: Grafaid.Schema.ObjectType }>(({
 
 const Enum = createCodeGenerator<{ type: Grafaid.Schema.EnumType }>(({ config, code, type }) => {
   code(
-    Code.tsInterface$({
+    Code.tsInterface({
       tsDoc: getTsDocContents(config, type),
       export: true,
       name: type.name,
@@ -161,7 +161,7 @@ const Enum = createCodeGenerator<{ type: Grafaid.Schema.EnumType }>(({ config, c
 })
 const InputObject = createCodeGenerator<{ type: Grafaid.Schema.InputObjectType }>(({ config, code, type }) => {
   code(
-    Code.tsInterface$({
+    Code.tsInterface({
       tsDoc: getTsDocContents(config, type),
       name: type.name,
       extends: `$.InputObject`,
@@ -182,7 +182,7 @@ const InputObject = createCodeGenerator<{ type: Grafaid.Schema.InputObjectType }
     values(type.getFields())
       .map((field) => {
         const namedType = Grafaid.Schema.getNamedType(field.type)
-        return Code.tsInterface$({
+        return Code.tsInterface({
           tsDoc: getTsDocContents(config, field),
           name: field.name,
           extends: `$.InputField`,
@@ -210,7 +210,7 @@ const ScalarCustom = createCodeGenerator<{ type: Grafaid.Schema.ScalarType }>(({
 
 const Union = createCodeGenerator<{ type: Grafaid.Schema.UnionType }>(({ config, code, type }) => {
   const memberNames = type.getTypes().map((_) => renderName(_))
-  code(Code.tsInterface$({
+  code(Code.tsInterface({
     tsDoc: getTsDocContents(config, type),
     export: true,
     name: type.name,
@@ -228,7 +228,7 @@ const Union = createCodeGenerator<{ type: Grafaid.Schema.UnionType }>(({ config,
 const Interface = createCodeGenerator<{ type: Grafaid.Schema.InterfaceType }>(({ config, code, type }) => {
   const implementorTypes = Grafaid.Schema.KindMap.getInterfaceImplementors(config.schema.kindMap, type)
   const implementorNames = implementorTypes.map((_) => _.name)
-  code(Code.tsInterface$({
+  code(Code.tsInterface({
     tsDoc: getTsDocContents(config, type),
     name: type.name,
     extends: `$.Interface`,
@@ -314,7 +314,7 @@ export const SchemaGenerator = createCodeGenerator(
     code(Tex.title1(`Schema`))
     code()
     code(
-      Code.tsInterface$({
+      Code.tsInterface({
         name: identifiers.Schema,
         parameters:
           `$Scalars extends ${identifiers.$$Utilities}.Schema.Scalar.Registry = ${identifiers.$$Utilities}.Schema.Scalar.Registry.Empty`,

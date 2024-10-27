@@ -30,8 +30,8 @@ import { isString } from '../prelude.js'
 import { Kind } from './document/kind.js'
 import { OperationTypeNode } from './document/OperationTypeNode.js'
 import type { RequestDocumentNodeInput, RequestInput } from './graphql.js'
-import { RootTypeName } from './schema/schema.js'
 import { TypedDocument } from './typed-document/__.js'
+export { OperationType } from './schema/OperationType/__.js'
 
 export type {
   ArgumentNode,
@@ -266,12 +266,6 @@ export const OperationTypeToAccessKind = {
   query: `read`,
   mutation: `write`,
   subscription: `read`,
-} as const
-
-export const OperationTypeToRootType = {
-  query: RootTypeName.Query,
-  mutation: RootTypeName.Mutation,
-  subscription: RootTypeName.Subscription,
 } as const
 
 export const print = (document: TypedDocument.TypedDocumentLike): string => {

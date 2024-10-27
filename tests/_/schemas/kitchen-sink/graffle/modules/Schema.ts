@@ -20,45 +20,6 @@ export namespace Schema {
   //
   //
 
-  //                                              Mutation
-  // --------------------------------------------------------------------------------------------------
-  //
-
-  export interface Mutation extends $.OutputObject {
-    name: 'Mutation'
-    fields: {
-      __typename: Mutation.__typename
-      id: Mutation.id
-      idNonNull: Mutation.idNonNull
-    }
-  }
-
-  export namespace Mutation {
-    export interface __typename extends $.OutputField {
-      name: '__typename'
-      arguments: {}
-      inlineType: [1]
-      namedType: {
-        kind: '__typename'
-        value: 'Mutation'
-      }
-    }
-
-    export interface id extends $.OutputField {
-      name: 'id'
-      arguments: {}
-      inlineType: [0]
-      namedType: $$NamedTypes.$$ID
-    }
-
-    export interface idNonNull extends $.OutputField {
-      name: 'idNonNull'
-      arguments: {}
-      inlineType: [1]
-      namedType: $$NamedTypes.$$ID
-    }
-  }
-
   //                                               Query
   // --------------------------------------------------------------------------------------------------
   //
@@ -693,6 +654,45 @@ export namespace Schema {
       arguments: {}
       inlineType: [1]
       namedType: $$NamedTypes.$$ObjectUnion
+    }
+  }
+
+  //                                              Mutation
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export interface Mutation extends $.OutputObject {
+    name: 'Mutation'
+    fields: {
+      __typename: Mutation.__typename
+      id: Mutation.id
+      idNonNull: Mutation.idNonNull
+    }
+  }
+
+  export namespace Mutation {
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'Mutation'
+      }
+    }
+
+    export interface id extends $.OutputField {
+      name: 'id'
+      arguments: {}
+      inlineType: [0]
+      namedType: $$NamedTypes.$$ID
+    }
+
+    export interface idNonNull extends $.OutputField {
+      name: 'idNonNull'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$ID
     }
   }
 
@@ -1616,8 +1616,8 @@ export namespace Schema {
    */
 
   namespace $$NamedTypes {
-    export type $$Mutation = Mutation
     export type $$Query = Query
+    export type $$Mutation = Mutation
     export type $$Bar = Bar
     export type $$DateObject1 = DateObject1
     export type $$DateObject2 = DateObject2
@@ -1673,16 +1673,18 @@ export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$
   extends $
 {
   name: Data.Name
-  operationsAvailable: ['Mutation', 'Query']
-  RootUnion: Schema.Mutation | Schema.Query
+  operationsAvailable: ['query', 'mutation']
+  RootUnion:
+    | Schema.Query
+    | Schema.Mutation
   Root: {
-    Query: Schema.Query
-    Mutation: Schema.Mutation
-    Subscription: null
+    query: Schema.Query
+    mutation: Schema.Mutation
+    subscription: null
   }
   allTypes: {
-    Mutation: Schema.Mutation
     Query: Schema.Query
+    Mutation: Schema.Mutation
     ABCEnum: Schema.ABCEnum
     Case: Schema.Case
     Bar: Schema.Bar

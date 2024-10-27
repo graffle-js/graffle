@@ -327,13 +327,6 @@ const lowerCaseUnion: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 
-const Mutation: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
-    id: {},
-    idNonNull: {},
-  },
-}
-
 const Query: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     InputObjectNested: {
@@ -626,6 +619,13 @@ const Query: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   },
 }
 
+const Mutation: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+  f: {
+    id: {},
+    idNonNull: {},
+  },
+}
+
 //
 //
 //
@@ -686,9 +686,9 @@ Query.f[`unionObjectNonNull`]!.nt = ObjectUnion
 //
 
 const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
-  roots: {
-    Mutation,
-    Query,
+  operations: {
+    query: Query,
+    mutation: Mutation,
   },
   directives: {},
   types: {
@@ -724,8 +724,8 @@ const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
     FooBarUnion,
     Result,
     lowerCaseUnion,
-    Mutation,
     Query,
+    Mutation,
   },
 }
 

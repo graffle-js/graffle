@@ -8,10 +8,10 @@ export * from './InlineType.js'
 declare global {
   namespace GraffleGlobal {
     export interface SchemaDrivenDataMap {
-      roots: {
-        [Grafaid.Schema.RootTypeName.Mutation]?: SchemaDrivenDataMap.OutputObject
-        [Grafaid.Schema.RootTypeName.Query]?: SchemaDrivenDataMap.OutputObject
-        [Grafaid.Schema.RootTypeName.Subscription]?: SchemaDrivenDataMap.OutputObject
+      operations: {
+        [Grafaid.Document.OperationTypeNode.MUTATION]?: SchemaDrivenDataMap.OutputObject
+        [Grafaid.Document.OperationTypeNode.QUERY]?: SchemaDrivenDataMap.OutputObject
+        [Grafaid.Document.OperationTypeNode.SUBSCRIPTION]?: SchemaDrivenDataMap.OutputObject
       }
       types: Record<string, NamedNodes>
       directives: Record<string, SchemaDrivenDataMap.ArgumentsOrInputObjectFields>

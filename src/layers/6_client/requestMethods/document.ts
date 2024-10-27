@@ -20,10 +20,10 @@ export type DocumentRunner<
     Promise<
       HandleOutput<
         $$ClientContext,
-        InferResult.Root<
+        InferResult.Operation<
           Select.Document.GetOperation<$$Document, $Name>,
           $$Schema,
-          Select.Document.GetRootTypeNameOfOperation<$$Document, $Name>
+          Select.Document.GetOperationType<$$Document, $Name>
         >
       >
       & {}

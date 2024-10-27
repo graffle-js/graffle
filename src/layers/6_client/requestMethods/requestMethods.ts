@@ -1,3 +1,4 @@
+import { OperationTypeNode } from 'graphql'
 import { Select } from '../../../documentBuilder/Select/__.js'
 import type { TypeFunction } from '../../../entrypoints/utilities-for-generated.js'
 import type { Fluent } from '../../../lib/fluent/__.js'
@@ -39,8 +40,8 @@ export type BuilderRequestMethods<$Context extends ClientContext> =
 export const requestMethodsProperties = defineTerminus((state) => {
   return {
     document: createMethodDocument(state),
-    query: createMethodRootType(state, `Query`),
-    mutation: createMethodRootType(state, `Mutation`),
+    query: createMethodOperationType(state, OperationTypeNode.QUERY),
+    mutation: createMethodOperationType(state, OperationTypeNode.MUTATION),
     // todo
     // subscription: async () => {},
   }
@@ -55,18 +56,18 @@ export const createMethodDocument = (state: ClientContext) => (document: Select.
   }
 }
 
-const createMethodRootType = (state: ClientContext, rootTypeName: Grafaid.Schema.RootTypeName) => {
+const createMethodOperationType = (state: ClientContext, operationType: OperationTypeNode) => {
   return new Proxy({}, {
     get: (_, key) => {
       if (isSymbol(key)) throw new Error(`Symbols not supported.`)
 
       if (key.startsWith(`$batch`)) {
         return async (selectionSetOrIndicator: Select.SelectionSet.AnySelectionSet) =>
-          executeRootType(state, rootTypeName, selectionSetOrIndicator)
+          executeOperation(state, operationType, selectionSetOrIndicator)
       } else {
         const fieldName = key
         return (selectionSetOrArgs: Select.SelectionSet.AnySelectionSet) =>
-          executeRootField(state, rootTypeName, fieldName, selectionSetOrArgs)
+          executeRootField(state, operationType, fieldName, selectionSetOrArgs)
       }
     },
   })
@@ -74,11 +75,11 @@ const createMethodRootType = (state: ClientContext, rootTypeName: Grafaid.Schema
 
 const executeRootField = async (
   state: ClientContext,
-  rootTypeName: Grafaid.Schema.RootTypeName,
+  operationType: OperationTypeNode,
   rootFieldName: string,
   rootFieldSelectionSet?: Select.SelectionSet.AnySelectionSet,
 ) => {
-  const result = await executeRootType(state, rootTypeName, {
+  const result = await executeOperation(state, operationType, {
     [rootFieldName]: rootFieldSelectionSet ?? {},
   })
 
@@ -90,15 +91,15 @@ const executeRootField = async (
     : result[rootFieldName]
 }
 
-const executeRootType = async (
+const executeOperation = async (
   state: ClientContext,
-  rootTypeName: Grafaid.Schema.RootTypeName,
+  operationType: OperationTypeNode,
   rootTypeSelectionSet: Select.SelectionSet.AnySelectionSet,
 ) => {
   return executeDocument(
     state,
     Select.Document.createDocumentNormalizedFromRootTypeSelection(
-      rootTypeName,
+      operationType,
       rootTypeSelectionSet,
     ),
   )

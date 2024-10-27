@@ -29,12 +29,18 @@ export namespace Code {
     return isString(value) || typeof value === `number` || typeof value === `boolean` || value === null
   }
 
-  type FieldValue = TermPrimitive | DirectiveTermObject | TermObject
+  type FieldValue =
+    | DirectiveField
+    | FieldValueNonDirective
+
+  type FieldValueNonDirective = TermPrimitive | TermObjectLike
+
+  type TermFieldTuple = readonly [string, FieldValue]
 
   interface DirectiveField {
     $TS_DOC?: string | null
     $OPTIONAL?: boolean
-    $VALUE: FieldValue
+    $VALUE: FieldValueNonDirective
   }
 
   const isDirectiveField = (value: unknown): value is DirectiveField => {
@@ -45,7 +51,7 @@ export namespace Code {
   export const objectField$ = (input: {
     tsDoc?: null | string
     optional?: boolean
-    value: FieldValue
+    value: FieldValueNonDirective
   }): DirectiveField => {
     return {
       $TS_DOC: input.tsDoc,
@@ -60,7 +66,7 @@ export namespace Code {
   }
 
   export interface TermObject {
-    [key: string]: FieldValue | DirectiveField
+    [key: string]: FieldValue
   }
 
   export type TermObjectOf<T> = {
@@ -77,9 +83,10 @@ export namespace Code {
     )
   }
 
-  // terms
+  type TermObjectLike = TermObject | DirectiveTermObject | TermFieldTuple[]
 
-  export const termObject = (object: TermObject | DirectiveTermObject): string => {
+  export const termObject = (object: TermObjectLike): string => {
+    if (Array.isArray(object)) return termObject(Object.fromEntries(object))
     if (isDirectiveTermObject(object)) return directiveTermObject(object)
     return block(termObjectFields(object))
   }
@@ -87,6 +94,7 @@ export namespace Code {
   export const termObjectFields = (object: TermObject | DirectiveTermObject): string =>
     entries(object)
       .map(([key, value]): [string, DirectiveField] => {
+        value
         if (value === null) return [key, { $VALUE: null }]
         if (isDirectiveTermObject(value)) return [key, { $VALUE: directiveTermObject(value) }]
         if (isDirectiveField(value)) return [key, value]
@@ -99,7 +107,12 @@ export namespace Code {
       })
       .join(`,\n`)
 
-  const termObjectField = (field: FieldValue): string => {
+  const isFieldTuples = (value: unknown): value is TermFieldTuple[] => {
+    return Array.isArray(value) && value.every(([key, _]) => isString(key))
+  }
+
+  const termObjectField = (field: FieldValueNonDirective): string => {
+    if (isFieldTuples(field)) return termObjectField(Object.fromEntries(field))
     if (isFieldPrimitive(field)) return String(field)
     return termObject(field)
   }
@@ -204,9 +217,9 @@ export namespace Code {
     fields?: FieldsInput
   }
 
-  type FieldsInput = string | TermObject | (readonly [name: string, field: DirectiveField])[]
+  type FieldsInput = string | TermObject | (readonly [name: string, field: string | DirectiveField])[]
 
-  export const tsInterface$ = (
+  export const tsInterface = (
     { name, parameters, extends: extends_, fields, tsDoc, export: export_ }: InterfaceDefinitionInput,
   ) => {
     const tsDoc_ = tsDoc ? TSDoc(tsDoc) + `\n` : ``

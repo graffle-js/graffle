@@ -20,68 +20,6 @@ export namespace Schema {
   //
   //
 
-  //                                              Mutation
-  // --------------------------------------------------------------------------------------------------
-  //
-
-  export interface Mutation extends $.OutputObject {
-    name: 'Mutation'
-    fields: {
-      __typename: Mutation.__typename
-      addPokemon: Mutation.addPokemon
-    }
-  }
-
-  export namespace Mutation {
-    export interface __typename extends $.OutputField {
-      name: '__typename'
-      arguments: {}
-      inlineType: [1]
-      namedType: {
-        kind: '__typename'
-        value: 'Mutation'
-      }
-    }
-
-    export interface addPokemon extends $.OutputField {
-      name: 'addPokemon'
-      arguments: {
-        attack: {
-          kind: 'InputField'
-          name: 'attack'
-          inlineType: [0]
-          namedType: $$NamedTypes.$$Int
-        }
-        defense: {
-          kind: 'InputField'
-          name: 'defense'
-          inlineType: [0]
-          namedType: $$NamedTypes.$$Int
-        }
-        hp: {
-          kind: 'InputField'
-          name: 'hp'
-          inlineType: [0]
-          namedType: $$NamedTypes.$$Int
-        }
-        name: {
-          kind: 'InputField'
-          name: 'name'
-          inlineType: [1]
-          namedType: $$NamedTypes.$$String
-        }
-        type: {
-          kind: 'InputField'
-          name: 'type'
-          inlineType: [1]
-          namedType: $$NamedTypes.$$PokemonType
-        }
-      }
-      inlineType: [0]
-      namedType: $$NamedTypes.$$Pokemon
-    }
-  }
-
   //                                               Query
   // --------------------------------------------------------------------------------------------------
   //
@@ -179,6 +117,68 @@ export namespace Schema {
       arguments: {}
       inlineType: [0, [1]]
       namedType: $$NamedTypes.$$Trainer
+    }
+  }
+
+  //                                              Mutation
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export interface Mutation extends $.OutputObject {
+    name: 'Mutation'
+    fields: {
+      __typename: Mutation.__typename
+      addPokemon: Mutation.addPokemon
+    }
+  }
+
+  export namespace Mutation {
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'Mutation'
+      }
+    }
+
+    export interface addPokemon extends $.OutputField {
+      name: 'addPokemon'
+      arguments: {
+        attack: {
+          kind: 'InputField'
+          name: 'attack'
+          inlineType: [0]
+          namedType: $$NamedTypes.$$Int
+        }
+        defense: {
+          kind: 'InputField'
+          name: 'defense'
+          inlineType: [0]
+          namedType: $$NamedTypes.$$Int
+        }
+        hp: {
+          kind: 'InputField'
+          name: 'hp'
+          inlineType: [0]
+          namedType: $$NamedTypes.$$Int
+        }
+        name: {
+          kind: 'InputField'
+          name: 'name'
+          inlineType: [1]
+          namedType: $$NamedTypes.$$String
+        }
+        type: {
+          kind: 'InputField'
+          name: 'type'
+          inlineType: [1]
+          namedType: $$NamedTypes.$$PokemonType
+        }
+      }
+      inlineType: [0]
+      namedType: $$NamedTypes.$$Pokemon
     }
   }
 
@@ -1001,8 +1001,8 @@ export namespace Schema {
    */
 
   namespace $$NamedTypes {
-    export type $$Mutation = Mutation
     export type $$Query = Query
+    export type $$Mutation = Mutation
     export type $$BattleRoyale = BattleRoyale
     export type $$BattleTrainer = BattleTrainer
     export type $$BattleWild = BattleWild
@@ -1048,16 +1048,18 @@ export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$
   extends $
 {
   name: Data.Name
-  operationsAvailable: ['Mutation', 'Query']
-  RootUnion: Schema.Mutation | Schema.Query
+  operationsAvailable: ['query', 'mutation']
+  RootUnion:
+    | Schema.Query
+    | Schema.Mutation
   Root: {
-    Query: Schema.Query
-    Mutation: Schema.Mutation
-    Subscription: null
+    query: Schema.Query
+    mutation: Schema.Mutation
+    subscription: null
   }
   allTypes: {
-    Mutation: Schema.Mutation
     Query: Schema.Query
+    Mutation: Schema.Mutation
     BattleWildResult: Schema.BattleWildResult
     PokemonType: Schema.PokemonType
     TrainerClass: Schema.TrainerClass

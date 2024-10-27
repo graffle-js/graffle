@@ -1,1 +1,1 @@
-export * as Pokemon from './_.js'
+export * as Pokemon from "./_.js";

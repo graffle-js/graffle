@@ -1,5 +1,5 @@
-import type * as $$Utilities from 'graffle/utilities-for-generated'
-import * as $Scalar from './Scalar.js'
+import type * as $$Utilities from "graffle/utilities-for-generated";
+import * as $Scalar from "./Scalar.js";
 //
 //
 //
@@ -16,15 +16,15 @@ import * as $Scalar from './Scalar.js'
 //
 //
 
-const Boolean = $Scalar.Boolean
+const Boolean = $Scalar.Boolean;
 
-const Float = $Scalar.Float
+const Float = $Scalar.Float;
 
-const ID = $Scalar.ID
+const ID = $Scalar.ID;
 
-const Int = $Scalar.Int
+const Int = $Scalar.Int;
 
-const String = $Scalar.String
+const String = $Scalar.String;
 
 //
 //
@@ -79,31 +79,31 @@ const String = $Scalar.String
 //
 
 const ContinentFilterInput: $$Utilities.SchemaDrivenDataMap.InputObject = {
-  n: 'ContinentFilterInput',
+  n: "ContinentFilterInput",
   f: {
     code: {},
   },
-}
+};
 
 const CountryFilterInput: $$Utilities.SchemaDrivenDataMap.InputObject = {
-  n: 'CountryFilterInput',
+  n: "CountryFilterInput",
   f: {
     code: {},
     continent: {},
     currency: {},
     name: {},
   },
-}
+};
 
 const LanguageFilterInput: $$Utilities.SchemaDrivenDataMap.InputObject = {
-  n: 'LanguageFilterInput',
+  n: "LanguageFilterInput",
   f: {
     code: {},
   },
-}
+};
 
 const StringQueryOperatorInput: $$Utilities.SchemaDrivenDataMap.InputObject = {
-  n: 'StringQueryOperatorInput',
+  n: "StringQueryOperatorInput",
   f: {
     eq: {},
     in: {},
@@ -111,7 +111,7 @@ const StringQueryOperatorInput: $$Utilities.SchemaDrivenDataMap.InputObject = {
     nin: {},
     regex: {},
   },
-}
+};
 
 //
 //
@@ -137,7 +137,7 @@ const Continent: $$Utilities.SchemaDrivenDataMap.OutputObject = {
     },
     name: {},
   },
-}
+};
 
 const Country: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
@@ -172,7 +172,7 @@ const Country: $$Utilities.SchemaDrivenDataMap.OutputObject = {
       // nt: Subdivision, <-- Assigned later to avoid potential circular dependency.
     },
   },
-}
+};
 
 const Language: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
@@ -181,7 +181,7 @@ const Language: $$Utilities.SchemaDrivenDataMap.OutputObject = {
     native: {},
     rtl: {},
   },
-}
+};
 
 const State: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
@@ -191,7 +191,7 @@ const State: $$Utilities.SchemaDrivenDataMap.OutputObject = {
     },
     name: {},
   },
-}
+};
 
 const Subdivision: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
@@ -199,7 +199,7 @@ const Subdivision: $$Utilities.SchemaDrivenDataMap.OutputObject = {
     emoji: {},
     name: {},
   },
-}
+};
 
 //
 //
@@ -310,7 +310,7 @@ const Query: $$Utilities.SchemaDrivenDataMap.OutputObject = {
       // nt: Language, <-- Assigned later to avoid potential circular dependency.
     },
   },
-}
+};
 
 //
 //
@@ -329,18 +329,18 @@ const Query: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 
-Continent.f[`countries`]!.nt = Country
-Country.f[`continent`]!.nt = Continent
-Country.f[`languages`]!.nt = Language
-Country.f[`states`]!.nt = State
-Country.f[`subdivisions`]!.nt = Subdivision
-State.f[`country`]!.nt = Country
-Query.f[`continent`]!.nt = Continent
-Query.f[`continents`]!.nt = Continent
-Query.f[`countries`]!.nt = Country
-Query.f[`country`]!.nt = Country
-Query.f[`language`]!.nt = Language
-Query.f[`languages`]!.nt = Language
+Continent.f[`countries`]!.nt = Country;
+Country.f[`continent`]!.nt = Continent;
+Country.f[`languages`]!.nt = Language;
+Country.f[`states`]!.nt = State;
+Country.f[`subdivisions`]!.nt = Subdivision;
+State.f[`country`]!.nt = Country;
+Query.f[`continent`]!.nt = Continent;
+Query.f[`continents`]!.nt = Continent;
+Query.f[`countries`]!.nt = Country;
+Query.f[`country`]!.nt = Country;
+Query.f[`language`]!.nt = Language;
+Query.f[`languages`]!.nt = Language;
 
 //
 //
@@ -359,8 +359,8 @@ Query.f[`languages`]!.nt = Language
 //
 
 const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
-  roots: {
-    Query,
+  operations: {
+    query: Query,
   },
   directives: {},
   types: {
@@ -380,6 +380,6 @@ const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
     Subdivision,
     Query,
   },
-}
+};
 
-export { $schemaDrivenDataMap as schemaDrivenDataMap }
+export { $schemaDrivenDataMap as schemaDrivenDataMap };

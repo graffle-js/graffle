@@ -1,32 +1,23 @@
+import type { OperationTypeNode } from 'graphql'
 import type { Grafaid } from '../../lib/grafaid/__.js'
 import { type ExcludeNull } from '../../lib/prelude.js'
 import type { Schema } from '../../types/Schema/__.js'
 import type { OutputObject } from './OutputObject.js'
 
-export type RootViaObject<
-  $SelectionSet,
-  $Schema extends Schema,
-  $RootType extends Schema.StandardTypes.RootType,
-> = Root<
-  $SelectionSet,
-  $Schema,
-  $RootType['name']
->
-
 // dprint-ignore
 export type Query<$SelectionSet, $Schema extends Schema> =
-  Root<$SelectionSet, $Schema, 'Query'>
+  Operation<$SelectionSet, $Schema, OperationTypeNode.QUERY>
 
 // dprint-ignore
 export type Mutation<$SelectionSet, $Schema extends Schema> =
-  Root<$SelectionSet, $Schema, 'Mutation'>
+  Operation<$SelectionSet, $Schema, OperationTypeNode.MUTATION>
 
 // dprint-ignore
 export type Subscription<$SelectionSet, $Schema extends Schema> =
-  Root<$SelectionSet, $Schema, 'Subscription'>
+  Operation<$SelectionSet, $Schema, OperationTypeNode.SUBSCRIPTION>
 
-export type Root<
+export type Operation<
   $SelectionSet,
   $Schema extends Schema,
-  $RootTypeName extends Grafaid.Schema.RootTypeName,
-> = OutputObject<$SelectionSet, $Schema, ExcludeNull<$Schema['Root'][$RootTypeName]>>
+  $OperationType extends Grafaid.Document.OperationTypeNode,
+> = OutputObject<$SelectionSet, $Schema, ExcludeNull<$Schema['Root'][$OperationType]>>

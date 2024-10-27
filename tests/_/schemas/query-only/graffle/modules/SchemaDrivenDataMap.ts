@@ -193,8 +193,8 @@ const Query: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 
 const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
-  roots: {
-    Query,
+  operations: {
+    query: Query,
   },
   directives: {},
   types: {

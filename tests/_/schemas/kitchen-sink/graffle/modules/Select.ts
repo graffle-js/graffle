@@ -1,3 +1,4 @@
+import type { OperationTypeNode } from 'graphql'
 import type { InferResult } from '../../../../../../src/entrypoints/schema.js'
 import * as Data from './Data.js'
 import type { Schema } from './Schema.js'
@@ -38,16 +39,22 @@ export const Select = createSelect(Data.Name)
 //
 
 export namespace Select {
-  // Root Types
-  // ----------
-  export type Mutation<$SelectionSet extends SelectionSets.Mutation> = InferResult.Root<
+  //                                                Root
+  // --------------------------------------------------------------------------------------------------
+  //
+  export type Query<$SelectionSet extends SelectionSets.Query> = InferResult.Operation<
     $SelectionSet,
     Schema,
-    'Mutation'
+    OperationTypeNode.QUERY
   >
-  export type Query<$SelectionSet extends SelectionSets.Query> = InferResult.Root<$SelectionSet, Schema, 'Query'>
-  // OutputObject Types
-  // ------------------
+  export type Mutation<$SelectionSet extends SelectionSets.Mutation> = InferResult.Operation<
+    $SelectionSet,
+    Schema,
+    OperationTypeNode.MUTATION
+  >
+  //                                            OutputObject
+  // --------------------------------------------------------------------------------------------------
+  //
   export type Bar<$SelectionSet extends SelectionSets.Bar> = InferResult.OutputObject<
     $SelectionSet,
     Schema,
@@ -107,8 +114,9 @@ export namespace Select {
     Schema,
     Schema['allTypes']['lowerCaseObject2']
   >
-  // Union Types
-  // -----------
+  //                                               Union
+  // --------------------------------------------------------------------------------------------------
+  //
   export type DateUnion<$SelectionSet extends SelectionSets.DateUnion> = InferResult.Union<
     $SelectionSet,
     Schema,
@@ -129,8 +137,9 @@ export namespace Select {
     Schema,
     Schema['allTypes']['lowerCaseUnion']
   >
-  // Interface Types
-  // ---------------
+  //                                             Interface
+  // --------------------------------------------------------------------------------------------------
+  //
   export type DateInterface1<$SelectionSet extends SelectionSets.DateInterface1> = InferResult.Interface<
     $SelectionSet,
     Schema,
