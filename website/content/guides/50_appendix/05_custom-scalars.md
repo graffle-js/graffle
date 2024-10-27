@@ -22,7 +22,7 @@ pnpm graffle generate --schema ...
 Then you augment your Graffle instance with the SDDM, and finally register your scalars:
 
 ```ts
-import { schemaDrivenDataMap as schemaMap } from './graffle/__.js'
+import { schemaMap } from './graffle/__.js'
 
 const graffle = Graffle
   .create({

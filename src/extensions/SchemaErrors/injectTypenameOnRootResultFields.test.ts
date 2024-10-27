@@ -43,7 +43,7 @@ test.each<CasesQuery>([
   )
   injectTypenameOnRootResultFields({
     request: graffleMappedResultToRequest(docWithout),
-    sddm: GraffleSchemaErrors.schemaDrivenDataMap,
+    sddm: GraffleSchemaErrors.schemaMap,
   })
   expect(docWithout.document).toMatchObject(docWith.document)
 })

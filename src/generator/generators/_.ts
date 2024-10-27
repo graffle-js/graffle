@@ -20,7 +20,9 @@ export const ModuleGenerator_ = createModuleGenerator(
       `export { Select } from './modules/${getImportName(config, ModuleGeneratorSelect)}'`,
       `export { create } from './modules/${getImportName(config, ModuleGeneratorClient)}'`,
       `export * as SelectionSets from './modules/${getImportName(config, ModuleGeneratorSelectionSets)}'`,
-      `export { schemaDrivenDataMap } from './modules/${getImportName(config, ModuleGeneratorSchemaDrivenDataMap)}'`,
+      `export { schemaDrivenDataMap as schemaMap } from './modules/${
+        getImportName(config, ModuleGeneratorSchemaDrivenDataMap)
+      }'`,
     )
 
     return code
