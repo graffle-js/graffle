@@ -24,6 +24,7 @@ console.log(data)
 ```txt
 {
   __schema: {
+    description: null,
     queryType: { name: 'Query' },
     mutationType: { name: 'Mutation' },
     subscriptionType: null,
@@ -32,6 +33,8 @@ console.log(data)
         kind: 'UNION',
         name: 'Battle',
         description: null,
+        specifiedByURL: null,
+        isOneOf: null,
         fields: null,
         inputFields: null,
         interfaces: null,
@@ -46,6 +49,8 @@ console.log(data)
         kind: 'OBJECT',
         name: 'BattleRoyale',
         description: null,
+        specifiedByURL: null,
+        isOneOf: null,
         fields: [
           {
             name: 'combatants',
@@ -101,6 +106,8 @@ console.log(data)
         kind: 'OBJECT',
         name: 'BattleTrainer',
         description: null,
+        specifiedByURL: null,
+        isOneOf: null,
         fields: [
           {
             name: 'combatant1',
@@ -160,6 +167,8 @@ console.log(data)
         kind: 'OBJECT',
         name: 'BattleWild',
         description: null,
+        specifiedByURL: null,
+        isOneOf: null,
         fields: [
           {
             name: 'date',
@@ -227,6 +236,8 @@ console.log(data)
         kind: 'ENUM',
         name: 'BattleWildResult',
         description: null,
+        specifiedByURL: null,
+        isOneOf: null,
         fields: null,
         inputFields: null,
         interfaces: null,
@@ -256,6 +267,8 @@ console.log(data)
         kind: 'INTERFACE',
         name: 'Being',
         description: null,
+        specifiedByURL: null,
+        isOneOf: null,
         fields: [
           {
             name: 'id',
@@ -287,6 +300,8 @@ console.log(data)
         kind: 'SCALAR',
         name: 'Boolean',
         description: 'The `Boolean` scalar type represents `true` or `false`.',
+        specifiedByURL: null,
+        isOneOf: null,
         fields: null,
         inputFields: null,
         interfaces: null,
@@ -297,6 +312,8 @@ console.log(data)
         kind: 'OBJECT',
         name: 'CombatantMultiPokemon',
         description: null,
+        specifiedByURL: null,
+        isOneOf: null,
         fields: [
           {
             name: 'pokemons',
@@ -332,6 +349,8 @@ console.log(data)
         kind: 'OBJECT',
         name: 'CombatantSinglePokemon',
         description: null,
+        specifiedByURL: null,
+        isOneOf: null,
         fields: [
           {
             name: 'pokemon',
@@ -359,6 +378,8 @@ console.log(data)
         kind: 'SCALAR',
         name: 'Date',
         description: 'A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.This scalar is serialized to a string in ISO 8601 format and parsed from a string in ISO 8601 format.',
+        specifiedByURL: null,
+        isOneOf: null,
         fields: null,
         inputFields: null,
         interfaces: null,
@@ -369,19 +390,25 @@ console.log(data)
         kind: 'INPUT_OBJECT',
         name: 'DateFilter',
         description: null,
+        specifiedByURL: null,
+        isOneOf: false,
         fields: null,
         inputFields: [
           {
             name: 'gte',
             description: null,
             type: { kind: 'SCALAR', name: 'Date', ofType: null },
-            defaultValue: null
+            defaultValue: null,
+            isDeprecated: false,
+            deprecationReason: null
           },
           {
             name: 'lte',
             description: null,
             type: { kind: 'SCALAR', name: 'Date', ofType: null },
-            defaultValue: null
+            defaultValue: null,
+            isDeprecated: false,
+            deprecationReason: null
           }
         ],
         interfaces: null,
@@ -392,6 +419,8 @@ console.log(data)
         kind: 'SCALAR',
         name: 'Float',
         description: 'The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).',
+        specifiedByURL: null,
+        isOneOf: null,
         fields: null,
         inputFields: null,
         interfaces: null,
@@ -402,6 +431,8 @@ console.log(data)
         kind: 'SCALAR',
         name: 'ID',
         description: 'The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.',
+        specifiedByURL: null,
+        isOneOf: null,
         fields: null,
         inputFields: null,
         interfaces: null,
@@ -412,6 +443,8 @@ console.log(data)
         kind: 'SCALAR',
         name: 'Int',
         description: 'The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.',
+        specifiedByURL: null,
+        isOneOf: null,
         fields: null,
         inputFields: null,
         interfaces: null,
@@ -422,6 +455,8 @@ console.log(data)
         kind: 'OBJECT',
         name: 'Mutation',
         description: null,
+        specifiedByURL: null,
+        isOneOf: null,
         fields: [
           {
             name: 'addPokemon',
@@ -431,19 +466,25 @@ console.log(data)
                 name: 'attack',
                 description: null,
                 type: { kind: 'SCALAR', name: 'Int', ofType: null },
-                defaultValue: null
+                defaultValue: null,
+                isDeprecated: false,
+                deprecationReason: null
               },
               {
                 name: 'defense',
                 description: null,
                 type: { kind: 'SCALAR', name: 'Int', ofType: null },
-                defaultValue: null
+                defaultValue: null,
+                isDeprecated: false,
+                deprecationReason: null
               },
               {
                 name: 'hp',
                 description: null,
                 type: { kind: 'SCALAR', name: 'Int', ofType: null },
-                defaultValue: null
+                defaultValue: null,
+                isDeprecated: false,
+                deprecationReason: null
               },
               {
                 name: 'name',
@@ -453,7 +494,9 @@ console.log(data)
                   name: null,
                   ofType: { kind: 'SCALAR', name: 'String', ofType: null }
                 },
-                defaultValue: null
+                defaultValue: null,
+                isDeprecated: false,
+                deprecationReason: null
               },
               {
                 name: 'type',
@@ -463,7 +506,9 @@ console.log(data)
                   name: null,
                   ofType: { kind: 'ENUM', name: 'PokemonType', ofType: null }
                 },
-                defaultValue: null
+                defaultValue: null,
+                isDeprecated: false,
+                deprecationReason: null
               }
             ],
             type: { kind: 'OBJECT', name: 'Pokemon', ofType: null },
@@ -480,6 +525,8 @@ console.log(data)
         kind: 'OBJECT',
         name: 'Patron',
         description: null,
+        specifiedByURL: null,
+        isOneOf: null,
         fields: [
           {
             name: 'id',
@@ -515,6 +562,8 @@ console.log(data)
         kind: 'OBJECT',
         name: 'Pokemon',
         description: null,
+        specifiedByURL: null,
+        isOneOf: null,
         fields: [
           {
             name: 'attack',
@@ -590,13 +639,17 @@ console.log(data)
         kind: 'INPUT_OBJECT',
         name: 'PokemonFilter',
         description: null,
+        specifiedByURL: null,
+        isOneOf: false,
         fields: null,
         inputFields: [
           {
             name: 'birthday',
             description: null,
             type: { kind: 'INPUT_OBJECT', name: 'DateFilter', ofType: null },
-            defaultValue: null
+            defaultValue: null,
+            isDeprecated: false,
+            deprecationReason: null
           },
           {
             name: 'name',
@@ -606,7 +659,9 @@ console.log(data)
               name: 'StringFilter',
               ofType: null
             },
-            defaultValue: null
+            defaultValue: null,
+            isDeprecated: false,
+            deprecationReason: null
           }
         ],
         interfaces: null,
@@ -617,6 +672,8 @@ console.log(data)
         kind: 'ENUM',
         name: 'PokemonType',
         description: null,
+        specifiedByURL: null,
+        isOneOf: null,
         fields: null,
         inputFields: null,
         interfaces: null,
@@ -658,6 +715,8 @@ console.log(data)
         kind: 'OBJECT',
         name: 'Query',
         description: null,
+        specifiedByURL: null,
+        isOneOf: null,
         fields: [
           {
             name: 'battles',
@@ -727,7 +786,9 @@ console.log(data)
                   name: null,
                   ofType: { kind: 'SCALAR', name: 'String', ofType: null }
                 },
-                defaultValue: null
+                defaultValue: null,
+                isDeprecated: false,
+                deprecationReason: null
               }
             ],
             type: {
@@ -754,7 +815,9 @@ console.log(data)
                   name: 'PokemonFilter',
                   ofType: null
                 },
-                defaultValue: null
+                defaultValue: null,
+                isDeprecated: false,
+                deprecationReason: null
               }
             ],
             type: {
@@ -781,7 +844,9 @@ console.log(data)
                   name: null,
                   ofType: { kind: 'SCALAR', name: 'String', ofType: null }
                 },
-                defaultValue: null
+                defaultValue: null,
+                isDeprecated: false,
+                deprecationReason: null
               }
             ],
             type: { kind: 'OBJECT', name: 'Trainer', ofType: null },
@@ -814,6 +879,8 @@ console.log(data)
         kind: 'SCALAR',
         name: 'String',
         description: 'The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.',
+        specifiedByURL: null,
+        isOneOf: null,
         fields: null,
         inputFields: null,
         interfaces: null,
@@ -824,13 +891,17 @@ console.log(data)
         kind: 'INPUT_OBJECT',
         name: 'StringFilter',
         description: null,
+        specifiedByURL: null,
+        isOneOf: false,
         fields: null,
         inputFields: [
           {
             name: 'contains',
             description: null,
             type: { kind: 'SCALAR', name: 'String', ofType: null },
-            defaultValue: null
+            defaultValue: null,
+            isDeprecated: false,
+            deprecationReason: null
           },
           {
             name: 'in',
@@ -844,7 +915,9 @@ console.log(data)
                 ofType: { kind: 'SCALAR', name: 'String', ofType: null }
               }
             },
-            defaultValue: null
+            defaultValue: null,
+            isDeprecated: false,
+            deprecationReason: null
           }
         ],
         interfaces: null,
@@ -855,6 +928,8 @@ console.log(data)
         kind: 'OBJECT',
         name: 'Trainer',
         description: null,
+        specifiedByURL: null,
+        isOneOf: null,
         fields: [
           {
             name: 'class',
@@ -922,6 +997,8 @@ console.log(data)
         kind: 'ENUM',
         name: 'TrainerClass',
         description: null,
+        specifiedByURL: null,
+        isOneOf: null,
         fields: null,
         inputFields: null,
         interfaces: null,
@@ -1013,6 +1090,8 @@ console.log(data)
         description: 'A Directive provides a way to describe alternate runtime execution and type validation behavior in a GraphQL document.\n' +
           '\n' +
           "In some cases, you need to provide options to alter GraphQL's execution behavior in ways field arguments will not suffice, such as conditionally including or skipping a field. Directives provide this by describing additional information to the executor.",
+        specifiedByURL: null,
+        isOneOf: null,
         fields: [
           {
             name: 'name',
@@ -1078,7 +1157,9 @@ console.log(data)
                 name: 'includeDeprecated',
                 description: null,
                 type: { kind: 'SCALAR', name: 'Boolean', ofType: null },
-                defaultValue: 'false'
+                defaultValue: 'false',
+                isDeprecated: false,
+                deprecationReason: null
               }
             ],
             type: {
@@ -1111,6 +1192,8 @@ console.log(data)
         kind: 'ENUM',
         name: '__DirectiveLocation',
         description: 'A Directive can be adjacent to many parts of the GraphQL language, a __DirectiveLocation describes one such possible adjacencies.',
+        specifiedByURL: null,
+        isOneOf: null,
         fields: null,
         inputFields: null,
         interfaces: null,
@@ -1236,6 +1319,8 @@ console.log(data)
         kind: 'OBJECT',
         name: '__EnumValue',
         description: 'One possible value for a given Enum. Enum values are unique values, not a placeholder for a string or numeric value. However an Enum value is returned in a JSON response as a string.',
+        specifiedByURL: null,
+        isOneOf: null,
         fields: [
           {
             name: 'name',
@@ -1287,6 +1372,8 @@ console.log(data)
         kind: 'OBJECT',
         name: '__Field',
         description: 'Object and Interface types are described by a list of Fields, each of which has a name, potentially a list of arguments, and a return type.',
+        specifiedByURL: null,
+        isOneOf: null,
         fields: [
           {
             name: 'name',
@@ -1316,7 +1403,9 @@ console.log(data)
                 name: 'includeDeprecated',
                 description: null,
                 type: { kind: 'SCALAR', name: 'Boolean', ofType: null },
-                defaultValue: 'false'
+                defaultValue: 'false',
+                isDeprecated: false,
+                deprecationReason: null
               }
             ],
             type: {
@@ -1381,6 +1470,8 @@ console.log(data)
         kind: 'OBJECT',
         name: '__InputValue',
         description: 'Arguments provided to Fields or Directives and the input fields of an InputObject are represented as Input Values which describe their type and optionally a default value.',
+        specifiedByURL: null,
+        isOneOf: null,
         fields: [
           {
             name: 'name',
@@ -1452,6 +1543,8 @@ console.log(data)
         kind: 'OBJECT',
         name: '__Schema',
         description: 'A GraphQL Schema defines the capabilities of a GraphQL server. It exposes all available types and directives on the server, as well as the entry points for query, mutation, and subscription operations.',
+        specifiedByURL: null,
+        isOneOf: null,
         fields: [
           {
             name: 'description',
@@ -1541,6 +1634,8 @@ console.log(data)
         description: 'The fundamental unit of any GraphQL Schema is the type. There are many kinds of types in GraphQL as represented by the `__TypeKind` enum.\n' +
           '\n' +
           'Depending on the kind of a type, certain fields describe information about that type. Scalar types provide no information beyond a name, description and optional `specifiedByURL`, while Enum types provide their values. Object and Interface types provide the fields they describe. Abstract types, Union and Interface, provide the Object types possible at runtime. List and NonNull types compose other types.',
+        specifiedByURL: null,
+        isOneOf: null,
         fields: [
           {
             name: 'kind',
@@ -1586,7 +1681,9 @@ console.log(data)
                 name: 'includeDeprecated',
                 description: null,
                 type: { kind: 'SCALAR', name: 'Boolean', ofType: null },
-                defaultValue: 'false'
+                defaultValue: 'false',
+                isDeprecated: false,
+                deprecationReason: null
               }
             ],
             type: {
@@ -1641,7 +1738,9 @@ console.log(data)
                 name: 'includeDeprecated',
                 description: null,
                 type: { kind: 'SCALAR', name: 'Boolean', ofType: null },
-                defaultValue: 'false'
+                defaultValue: 'false',
+                isDeprecated: false,
+                deprecationReason: null
               }
             ],
             type: {
@@ -1664,7 +1763,9 @@ console.log(data)
                 name: 'includeDeprecated',
                 description: null,
                 type: { kind: 'SCALAR', name: 'Boolean', ofType: null },
-                defaultValue: 'false'
+                defaultValue: 'false',
+                isDeprecated: false,
+                deprecationReason: null
               }
             ],
             type: {
@@ -1705,6 +1806,8 @@ console.log(data)
         kind: 'ENUM',
         name: '__TypeKind',
         description: 'An enum describing what kind of type a given `__Type` is.',
+        specifiedByURL: null,
+        isOneOf: null,
         fields: null,
         inputFields: null,
         interfaces: null,
@@ -1765,6 +1868,7 @@ console.log(data)
       {
         name: 'deprecated',
         description: 'Marks an element of a GraphQL schema as no longer supported.',
+        isRepeatable: false,
         locations: [
           'ARGUMENT_DEFINITION',
           'ENUM_VALUE',
@@ -1776,13 +1880,16 @@ console.log(data)
             name: 'reason',
             description: 'Explains why this element was deprecated, usually also including a suggestion for how to access supported similar data. Formatted using the Markdown syntax, as specified by [CommonMark](https://commonmark.org/).',
             type: { kind: 'SCALAR', name: 'String', ofType: null },
-            defaultValue: '"No longer supported"'
+            defaultValue: '"No longer supported"',
+            isDeprecated: false,
+            deprecationReason: null
           }
         ]
       },
       {
         name: 'include',
         description: 'Directs the executor to include this field or fragment only when the `if` argument is true.',
+        isRepeatable: false,
         locations: [ 'FIELD', 'FRAGMENT_SPREAD', 'INLINE_FRAGMENT' ],
         args: [
           {
@@ -1793,19 +1900,23 @@ console.log(data)
               name: null,
               ofType: { kind: 'SCALAR', name: 'Boolean', ofType: null }
             },
-            defaultValue: null
+            defaultValue: null,
+            isDeprecated: false,
+            deprecationReason: null
           }
         ]
       },
       {
         name: 'oneOf',
         description: 'Indicates exactly one field must be supplied and this field must not be `null`.',
+        isRepeatable: false,
         locations: [ 'INPUT_OBJECT' ],
         args: []
       },
       {
         name: 'skip',
         description: 'Directs the executor to skip this field or fragment when the `if` argument is true.',
+        isRepeatable: false,
         locations: [ 'FIELD', 'FRAGMENT_SPREAD', 'INLINE_FRAGMENT' ],
         args: [
           {
@@ -1816,13 +1927,16 @@ console.log(data)
               name: null,
               ofType: { kind: 'SCALAR', name: 'Boolean', ofType: null }
             },
-            defaultValue: null
+            defaultValue: null,
+            isDeprecated: false,
+            deprecationReason: null
           }
         ]
       },
       {
         name: 'specifiedBy',
         description: 'Exposes a URL that specifies the behavior of this scalar.',
+        isRepeatable: false,
         locations: [ 'SCALAR' ],
         args: [
           {
@@ -1833,7 +1947,9 @@ console.log(data)
               name: null,
               ofType: { kind: 'SCALAR', name: 'String', ofType: null }
             },
-            defaultValue: null
+            defaultValue: null,
+            isDeprecated: false,
+            deprecationReason: null
           }
         ]
       }
