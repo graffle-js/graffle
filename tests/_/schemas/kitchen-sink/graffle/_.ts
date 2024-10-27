@@ -2,9 +2,9 @@
 // It at least helps with Twoslash wherein without this import here Twoslash will not include the global module.
 // In real TypeScript projects it seems the global module is included automatically. But there could be certain tsconfig
 // setups where this still indeed does help.
-import './modules2/global.js'
+import './modules/global.js'
 
-export { create } from './modules2/client.js'
-export { schemaDrivenDataMap } from './modules2/schema-driven-data-map.js'
-export { Select } from './modules2/select.js'
-export * as SelectionSets from './modules2/selection-sets.js'
+export { create } from './modules/client.js'
+export { schemaDrivenDataMap } from './modules/schema-driven-data-map.js'
+export { Select } from './modules/select.js'
+export * as SelectionSets from './modules/selection-sets.js'
