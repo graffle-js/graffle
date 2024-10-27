@@ -9,7 +9,7 @@ import { ModuleGeneratorSelectionSets } from './SelectionSets.js'
 export const ModuleGeneratorMethodsSelect = createModuleGenerator(
   `MethodsSelect`,
   ({ config, code }) => {
-    const kindMap = pick(config.schema.kindMap, [`Root`, `OutputObject`, `Union`, `Interface`])
+    const kindMap = pick(config.schema.kindMap.list, [`Root`, `OutputObject`, `Union`, `Interface`])
     const kinds = entries(kindMap)
 
     code(`import type * as $SelectionSets from './${ModuleGeneratorSelectionSets.name}.js'`)

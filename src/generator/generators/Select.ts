@@ -28,7 +28,7 @@ export const ModuleGeneratorSelect = createModuleGenerator(
 
     code(typeTitle(config, `Root`))
 
-    code(...config.schema.kindMap.Root.map((type) => {
+    code(...config.schema.kindMap.list.Root.map((type) => {
       return `export type ${type.name}<$SelectionSet extends SelectionSets.${
         renderName(type)
       }> = InferResult.Root<$SelectionSet, ${identifiers.Schema}, '${type.name}'>`
@@ -36,7 +36,7 @@ export const ModuleGeneratorSelect = createModuleGenerator(
 
     code(typeTitle(config, `OutputObject`))
 
-    code(...config.schema.kindMap.OutputObject.map((type) => {
+    code(...config.schema.kindMap.list.OutputObject.map((type) => {
       return `export type ${type.name}<$SelectionSet extends SelectionSets.${
         renderName(type)
       }> = InferResult.OutputObject<$SelectionSet, ${identifiers.Schema}, ${identifiers.Schema}['allTypes']['${type.name}']>`
@@ -44,7 +44,7 @@ export const ModuleGeneratorSelect = createModuleGenerator(
 
     code(typeTitle(config, `Union`))
 
-    code(...config.schema.kindMap.Union.map((type) => {
+    code(...config.schema.kindMap.list.Union.map((type) => {
       return `export type ${type.name}<$SelectionSet extends SelectionSets.${
         renderName(type)
       }> = InferResult.Union<$SelectionSet, ${identifiers.Schema}, ${identifiers.Schema}['allTypes']['${type.name}']>`
@@ -52,7 +52,7 @@ export const ModuleGeneratorSelect = createModuleGenerator(
 
     code(typeTitle(config, `Interface`))
 
-    code(...config.schema.kindMap.Interface.map((type) => {
+    code(...config.schema.kindMap.list.Interface.map((type) => {
       return `export type ${type.name}<$SelectionSet extends SelectionSets.${
         renderName(type)
       }> = InferResult.Interface<$SelectionSet, ${identifiers.Schema}, ${identifiers.Schema}['allTypes']['${type.name}']>`

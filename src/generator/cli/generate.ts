@@ -78,7 +78,7 @@ const url = args.schema ? urlParseSafe(args.schema) : null
 const schemaViaCLI = args.schema
   ? url
     ? { type: `url` as const, url }
-    : { type: `sdl` as const, dirOrFilePath: Path.join(process.cwd(), args.schema) }
+    : { type: `sdlFile` as const, dirOrFilePath: Path.join(process.cwd(), args.schema) }
   : undefined
 
 const schema = schemaViaCLI ?? configModule.builder?._.input.schema

@@ -13,7 +13,7 @@ import { ModuleGeneratorScalar } from './Scalar.js'
 export const ModuleGeneratorSchema = createModuleGenerator(
   `Schema`,
   ({ config, code }) => {
-    const kindMap = config.schema.kindMap
+    const kindMap = config.schema.kindMap.list
     const kinds = entries(kindMap)
 
     // todo methods root is unused
@@ -260,29 +260,28 @@ const namedTypesTypeReference = (name: string | Grafaid.Schema.NamedTypes) => {
 
 export const SchemaGenerator = createCodeGenerator(
   ({ config, code }) => {
-    code(Tex.title1(`Schema`))
-    code()
-
-    const rootTypesPresence = {
-      Query: Grafaid.Schema.KindMap.hasQuery(config.schema.kindMap),
-      Mutation: Grafaid.Schema.KindMap.hasMutation(config.schema.kindMap),
-      Subscription: Grafaid.Schema.KindMap.hasSubscription(config.schema.kindMap),
-    }
-
-    const root = config.schema.kindMap.Root.map(_ => [_.name, `${identifiers.Schema}.${_.name}`])
-    const objects = config.schema.kindMap.OutputObject.map(_ => [_.name, `${identifiers.Schema}.${_.name}`])
-    const unions = config.schema.kindMap.Union.map(_ => [_.name, `${identifiers.Schema}.${_.name}`])
-    const interfaces = config.schema.kindMap.Interface.map(_ => [_.name, `${identifiers.Schema}.${_.name}`])
-    const enums = config.schema.kindMap.Enum.map(_ => [_.name, `${identifiers.Schema}.${_.name}`])
+    const kindMap = config.schema.kindMap
+    // dprint-ignore
+    const root = kindMap.list.Root.map(_ => [_.name, `${identifiers.Schema}.${_.name}`])
+    const objects = kindMap.list.OutputObject.map(_ => [_.name, `${identifiers.Schema}.${_.name}`])
+    const unions = kindMap.list.Union.map(_ => [_.name, `${identifiers.Schema}.${_.name}`])
+    const interfaces = kindMap.list.Interface.map(_ => [_.name, `${identifiers.Schema}.${_.name}`])
+    const enums = kindMap.list.Enum.map(_ => [_.name, `${identifiers.Schema}.${_.name}`])
+    const operationsAvailable = entries(kindMap.index.Root).filter(_ => _[1] !== null).map(_ => _[0])
     const schema: Code.TermObject = {
       name: `Data.Name`,
-      RootTypesPresent: `[${config.schema.kindMap.Root.map((_) => Code.string(_.name)).join(`, `)}]`,
-      RootUnion: config.schema.kindMap.Root.map(_ => `${identifiers.Schema}.${_.name}`)
-        .join(`|`),
+      operationsAvailable: Code.tsTuple(operationsAvailable.map(_ => Code.string(_))),
+      RootUnion: Code.tsUnionItems(kindMap.list.Root.map(_ => `${identifiers.Schema}.${_.name}`)),
       Root: {
-        Query: rootTypesPresence.Query ? `${identifiers.Schema}.Query` : null,
-        Mutation: rootTypesPresence.Mutation ? `${identifiers.Schema}.Mutation` : null,
-        Subscription: rootTypesPresence.Subscription ? `${identifiers.Schema}.Subscription` : null,
+        [Grafaid.Document.OperationTypeNode.QUERY]: kindMap.index.Root.query?.name
+          ? `${identifiers.Schema}.${kindMap.index.Root.query.name}`
+          : null,
+        [Grafaid.Document.OperationTypeNode.MUTATION]: kindMap.index.Root.mutation?.name
+          ? `${identifiers.Schema}.${kindMap.index.Root.mutation.name}`
+          : null,
+        [Grafaid.Document.OperationTypeNode.SUBSCRIPTION]: kindMap.index.Root.subscription?.name
+          ? `${identifiers.Schema}.${kindMap.index.Root.subscription.name}`
+          : null,
       },
       allTypes: Object.fromEntries([
         ...root,
@@ -312,6 +311,8 @@ export const SchemaGenerator = createCodeGenerator(
 
     // ---
 
+    code(Tex.title1(`Schema`))
+    code()
     code(
       Code.tsInterface$({
         name: identifiers.Schema,

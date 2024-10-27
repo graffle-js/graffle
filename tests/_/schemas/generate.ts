@@ -17,7 +17,10 @@ const generate = async (
 
   await Generator.generate({
     currentWorkingDirectory: import.meta.dirname,
-    schema,
+    schema: {
+      type: `instance`,
+      instance: schema,
+    },
     // todo funky between this and passing path to sdl
     sourceDirPath: inputPathRootDir,
     outputSDL: true,

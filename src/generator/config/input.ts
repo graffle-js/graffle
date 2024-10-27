@@ -1,4 +1,5 @@
 import type { IntrospectionOptions } from 'graphql'
+import type { Fs } from '../../lib/fsp.js'
 import type { Grafaid } from '../../lib/grafaid/__.js'
 import type { Extension } from '../extension/types.js'
 
@@ -12,6 +13,10 @@ export interface InputLint {
 }
 
 export interface Input {
+  /**
+   * File system API to use. By default uses the Node.js file system API.
+   */
+  fs?: Fs
   /**
    * The name of the client. This will affect:
    *
@@ -37,8 +42,14 @@ export interface Input {
   /**
    * The schema to use for generation. Can be an existing SDL file on disk, a schema instance already in memory, or an endpoint that will be introspected.
    */
-  schema: Grafaid.Schema.Schema | {
+  schema: {
     type: 'sdl'
+    sdl: string
+  } | {
+    type: 'instance'
+    instance: Grafaid.Schema.Schema
+  } | {
+    type: 'sdlFile'
     /**
      * Defaults to the source directory if set, otherwise the current working directory.
      */

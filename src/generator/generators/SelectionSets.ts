@@ -26,7 +26,14 @@ const $ScalarsTypeParameter =
 export const ModuleGeneratorSelectionSets = createModuleGenerator(
   `SelectionSets`,
   ({ config, code }) => {
-    const kindMap = pick(config.schema.kindMap, [`Root`, `Enum`, `InputObject`, `OutputObject`, `Union`, `Interface`])
+    const kindMap = pick(config.schema.kindMap.list, [
+      `Root`,
+      `Enum`,
+      `InputObject`,
+      `OutputObject`,
+      `Union`,
+      `Interface`,
+    ])
     const kindEntries = entries(kindMap).filter(_ => _[1].length > 0)
     const kinds = kindEntries.map(_ => _[1])
 
@@ -42,8 +49,8 @@ export const ModuleGeneratorSelectionSets = createModuleGenerator(
       parameters: $ScalarsTypeParameter,
       // dprint-ignore
       fields: `
-        ${Grafaid.Schema.KindMap.hasQuery(config.schema.kindMap) ? `query?: Record<string, Query<${i._$Scalars}>>` : ``}
-        ${Grafaid.Schema.KindMap.hasMutation(config.schema.kindMap) ? `mutation?: Record<string, Mutation<${i._$Scalars}>>` : ``}
+        ${config.schema.kindMap.index.Root.query ? `query?: Record<string, Query<${i._$Scalars}>>` : ``}
+        ${config.schema.kindMap.index.Root.mutation ? `mutation?: Record<string, Mutation<${i._$Scalars}>>` : ``}
       `,
     }))
     code()

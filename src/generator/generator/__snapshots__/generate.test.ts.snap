@@ -2680,7 +2680,7 @@ export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$
   extends $
 {
   name: Data.Name
-  RootTypesPresent: ['Mutation', 'Query']
+  operationsAvailable: ['Mutation', 'Query']
   RootUnion: Schema.Mutation | Schema.Query
   Root: {
     Query: Schema.Query
@@ -7384,6 +7384,261 @@ export namespace $NamedTypes {
   export type $Interface<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = Interface<_$Scalars>
+}
+"
+`;
+
+exports[`root-types-mapped 1`] = `
+"import type { Schema as $ } from 'graffle/utilities-for-generated'
+import type * as $$Utilities from 'graffle/utilities-for-generated'
+import type * as Data from './Data.js'
+import type * as $Scalar from './Scalar.js'
+
+export namespace Schema {
+  //
+  //
+  //
+  //
+  //
+  //
+  // ==================================================================================================
+  //                                                Root
+  // ==================================================================================================
+  //
+  //
+  //
+  //
+  //
+  //
+
+  //                                             QueryRoot
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export interface QueryRoot extends $.OutputObject {
+    name: 'QueryRoot'
+    fields: {
+      __typename: QueryRoot.__typename
+      id: QueryRoot.id
+    }
+  }
+
+  export namespace QueryRoot {
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'QueryRoot'
+      }
+    }
+
+    export interface id extends $.OutputField {
+      name: 'id'
+      arguments: {}
+      inlineType: [0]
+      namedType: $$NamedTypes.$$ID
+    }
+  }
+
+  //
+  //
+  //
+  //
+  //
+  //
+  // ==================================================================================================
+  //                                            OutputObject
+  // ==================================================================================================
+  //
+  //
+  //
+  //
+  //
+  //
+
+  //
+  //
+  //
+  //
+  //
+  //
+  // ==================================================================================================
+  //                                            InputObject
+  // ==================================================================================================
+  //
+  //
+  //
+  //
+  //
+  //
+
+  //
+  //
+  //
+  //
+  //
+  //
+  // ==================================================================================================
+  //                                             Interface
+  // ==================================================================================================
+  //
+  //
+  //
+  //
+  //
+  //
+
+  //
+  //
+  //
+  //
+  //
+  //
+  // ==================================================================================================
+  //                                               Union
+  // ==================================================================================================
+  //
+  //
+  //
+  //
+  //
+  //
+
+  //
+  //
+  //
+  //
+  //
+  //
+  // ==================================================================================================
+  //                                                Enum
+  // ==================================================================================================
+  //
+  //
+  //
+  //
+  //
+  //
+
+  //
+  //
+  //
+  //
+  //
+  //
+  // ==================================================================================================
+  //                                            ScalarCustom
+  // ==================================================================================================
+  //
+  //
+  //
+  //
+  //
+  //
+
+  //
+  //
+  //
+  //
+  //
+  //
+  // ==================================================================================================
+  //                                           ScalarStandard
+  // ==================================================================================================
+  //
+  //
+  //
+  //
+  //
+  //
+
+  //                                                 ID
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export type ID = $.StandardTypes.ID
+
+  //                                              Boolean
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export type Boolean = $.StandardTypes.Boolean
+
+  //                                               String
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export type String = $.StandardTypes.String
+
+  //
+  //
+  //
+  //
+  //
+  //
+  // ==================================================================================================
+  //                                         Named Types Index
+  // ==================================================================================================
+  //
+  //
+  //
+  //
+  //
+  //
+
+  /**
+   * [1] These definitions serve to allow field selection interfaces to extend their respective object type without
+   *     name clashing between the field name and the object name.
+   *
+   *     For example imagine \`Query.Foo\` field with type also called \`Foo\`. Our generated interfaces for each field
+   *     would end up with an error of \`export interface Foo extends Foo ...\`
+   */
+
+  namespace $$NamedTypes {
+    export type $$QueryRoot = QueryRoot
+    export type $$ID = ID
+    export type $$Boolean = Boolean
+    export type $$String = String
+  }
+}
+
+//
+//
+//
+//
+//
+//
+// ==================================================================================================
+//                                               Schema
+// ==================================================================================================
+//
+//
+//
+//
+//
+//
+
+export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty>
+  extends $
+{
+  name: Data.Name
+  operationsAvailable: ['query']
+  RootUnion: Schema.QueryRoot
+  Root: {
+    query: Schema.QueryRoot
+    mutation: null
+    subscription: null
+  }
+  allTypes: {
+    QueryRoot: Schema.QueryRoot
+  }
+  objects: {}
+  unions: {}
+  interfaces: {}
+  scalars: $Scalars
+  extensions: $$Utilities.GlobalRegistry.TypeExtensions
 }
 "
 `;

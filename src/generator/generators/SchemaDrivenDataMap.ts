@@ -21,7 +21,7 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
       import type * as ${identifiers.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
     `)
 
-    const kindMap: Grafaid.Schema.KindMap = getKindMap(config)
+    const kindMap: Grafaid.Schema.KindMap['list'] = getKindMap(config)
     const kinds = entries(kindMap)
 
     const referenceAssignments: ReferenceAssignments = []
@@ -95,14 +95,14 @@ const getKindMap = (config: Config) => {
   const condition = typeCondition(config)
   return {
     // When "variables" enabled, we need to know all named types to be able to write them out.
-    ScalarStandard: kindMap.ScalarStandard.filter(() => config.runtimeFeatures.operationVariables),
-    ScalarCustom: kindMap.ScalarCustom.filter(() => config.runtimeFeatures.customScalars),
-    Enum: kindMap.Enum.filter(() => config.runtimeFeatures.operationVariables),
-    InputObject: kindMap.InputObject.filter(condition),
-    OutputObject: kindMap.OutputObject.filter(condition),
-    Interface: kindMap.Interface.filter(condition),
-    Union: kindMap.Union.filter(condition),
-    Root: kindMap.Root.filter(condition),
+    ScalarStandard: kindMap.list.ScalarStandard.filter(() => config.runtimeFeatures.operationVariables),
+    ScalarCustom: kindMap.list.ScalarCustom.filter(() => config.runtimeFeatures.customScalars),
+    Enum: kindMap.list.Enum.filter(() => config.runtimeFeatures.operationVariables),
+    InputObject: kindMap.list.InputObject.filter(condition),
+    OutputObject: kindMap.list.OutputObject.filter(condition),
+    Interface: kindMap.list.Interface.filter(condition),
+    Union: kindMap.list.Union.filter(condition),
+    Root: kindMap.list.Root.filter(condition),
   }
 }
 

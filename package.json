@@ -190,6 +190,7 @@
     "graphql-upload-minimal": "^1.6.1",
     "graphql-yoga": "^5.7.0",
     "jsdom": "^25.0.1",
+    "memfs": "^4.14.0",
     "prettier": "^3.3.3",
     "publint": "^0.2.12",
     "strip-ansi": "^7.1.0",

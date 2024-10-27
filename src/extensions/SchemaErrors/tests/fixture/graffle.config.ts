@@ -5,7 +5,10 @@ import { SchemaErrors } from '../../gentime.js'
 export default Generator
   .configure({
     name: `GraffleSchemaErrors`,
-    schema,
+    schema: {
+      type: `instance`,
+      instance: schema,
+    },
     lint: {
       missingCustomScalarCodec: false,
     },

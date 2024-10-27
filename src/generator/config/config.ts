@@ -3,7 +3,7 @@ import * as Path from 'node:path'
 import { Graffle } from '../../entrypoints/__Graffle.js'
 import { Introspection } from '../../extensions/Introspection/Introspection.js'
 import { ConfigManager } from '../../lib/config-manager/__.js'
-import { fileExists, isPathToADirectory, toAbsolutePath, toFilePath } from '../../lib/fsp.js'
+import { fileExists, type Fs, isPathToADirectory, toAbsolutePath, toFilePath } from '../../lib/fsp.js'
 import { Grafaid } from '../../lib/grafaid/__.js'
 import { isString } from '../../lib/prelude.js'
 import { type Formatter, getTypeScriptFormatter, passthroughFormatter } from '../../lib/typescript-formatter.js'
@@ -13,6 +13,7 @@ import { defaultName } from './defaults.js'
 import type { Input, InputLibraryPaths, InputLint } from './input.js'
 
 export interface Config {
+  fs: Fs
   name: string
   lint: Required<InputLint>
   schema: ConfigSchema
@@ -55,7 +56,7 @@ export interface Config {
 }
 
 interface ConfigSchema {
-  via: 'sdl' | 'introspection' | 'instance'
+  via: Input['schema']['type']
   sdl: string
   sdlFilePath: null | string
   instance: Grafaid.Schema.Schema
@@ -165,11 +166,14 @@ To suppress this warning disable formatting in one of the following ways:
         : Path.join(outputDirPathRoot, `schema.graphql`)
       : null
 
+  // --- Fs ---
+  const fs = input.fs ?? await import(`node:fs/promises`)
   // --- Config ---
 
   // const customScalarsEnabled = input.customScalars ?? false
 
   return {
+    fs,
     extensions: input.extensions ?? [],
     lint,
     formatter,
@@ -219,47 +223,59 @@ const createConfigSchema = async (
   sourceDirPath: string,
   input: Input,
 ): Promise<ConfigSchema> => {
-  if (input.schema instanceof Grafaid.Schema.Schema) {
-    const sdl = Grafaid.Schema.print(input.schema)
-    const instance = input.schema
-    return {
-      via: `instance`,
-      sdl,
-      sdlFilePath: null,
-      instance,
-      kindMap: Grafaid.Schema.KindMap.getKindMap(instance),
+  switch (input.schema.type) {
+    case `instance`: {
+      const sdl = Grafaid.Schema.print(input.schema.instance)
+      const instance = input.schema.instance
+      const kindMap = Grafaid.Schema.KindMap.getKindMap(instance)
+      return {
+        via: input.schema.type,
+        sdlFilePath: null,
+        sdl,
+        instance,
+        kindMap,
+      }
     }
-  } else if (input.schema.type === `sdl`) {
-    const fileOrDirPath = input.schema.dirOrFilePath
-      ? toAbsolutePath(cwd, input.schema.dirOrFilePath)
-      : sourceDirPath
-    const isDir = await isPathToADirectory(fileOrDirPath)
-    const sdlFilePath = isDir ? Path.join(fileOrDirPath, defaultSchemaFileName) : fileOrDirPath
-    const sdl = await fs.readFile(sdlFilePath, `utf8`)
-    const instance = Grafaid.Schema.buildSchema(sdl)
-    return {
-      via: `sdl`,
-      sdlFilePath,
-      sdl,
-      instance,
-      kindMap: Grafaid.Schema.KindMap.getKindMap(instance),
+    case `sdl`:
+    case `sdlFile`: {
+      let sdl
+      let sdlFilePath: null | string = null
+      if (input.schema.type === `sdlFile`) {
+        const fileOrDirPath = input.schema.dirOrFilePath
+          ? toAbsolutePath(cwd, input.schema.dirOrFilePath)
+          : sourceDirPath
+        const isDir = await isPathToADirectory(fileOrDirPath)
+        sdlFilePath = isDir ? Path.join(fileOrDirPath, defaultSchemaFileName) : fileOrDirPath
+        sdl = await fs.readFile(sdlFilePath, `utf8`)
+      } else {
+        sdl = input.schema.sdl
+      }
+      const instance = Grafaid.Schema.buildSchema(sdl)
+      const kindMap = Grafaid.Schema.KindMap.getKindMap(instance)
+      return {
+        via: input.schema.type,
+        sdlFilePath,
+        sdl,
+        instance,
+        kindMap,
+      }
     }
-  } else {
-    const graffle = Graffle.create({ schema: input.schema.url }).use(Introspection())
-    const data = await graffle.introspect()
-    // console.log(data)
-    if (!data) {
-      throw new Error(`No data returned for introspection query.`)
-    }
-    const instance = Grafaid.Schema.buildClientSchema(data)
-    const sdl = Grafaid.Schema.print(instance)
-    console.log(sdl)
-    return {
-      via: `introspection`,
-      sdl,
-      sdlFilePath: null,
-      instance,
-      kindMap: Grafaid.Schema.KindMap.getKindMap(instance),
+    case `url`: {
+      const graffle = Graffle.create({ schema: input.schema.url }).use(Introspection())
+      const data = await graffle.introspect()
+      if (!data) {
+        throw new Error(`No data returned for introspection query.`)
+      }
+      const instance = Grafaid.Schema.buildClientSchema(data)
+      const sdl = Grafaid.Schema.print(instance)
+      const kindMap = Grafaid.Schema.KindMap.getKindMap(instance)
+      return {
+        via: `url`,
+        sdlFilePath: null,
+        sdl,
+        instance,
+        kindMap,
+      }
     }
   }
 }

@@ -50,7 +50,7 @@ export const typeTitle2 = (category: string) => (type: Grafaid.Schema.NamedTypes
 export const typeTitle2SelectionSet = typeTitle2(`GRAPHQL SELECTION SET`)
 
 export const typeTitle = (config: Config, kindName: Grafaid.Schema.KindMap.KindName) => {
-  const hasItems = config.schema.kindMap[kindName].length > 0
+  const hasItems = config.schema.kindMap.list[kindName].length > 0
   const title = `${kindName} Types`
   const titleDecorated = `// ${title}\n// ${`-`.repeat(title.length)}\n`
   if (hasItems) {

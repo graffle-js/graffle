@@ -173,7 +173,7 @@ export const Query = $.Object$(`Query`, {
 })
 export const $Index: Index = {
   name: Data.Name,
-  RootTypesPresent: ['Mutation', 'Query'] as const,
+  operationsAvailable: ['Mutation', 'Query'] as const,
   RootUnion: undefined as any, // Type level only.
   Root: {
     Query,

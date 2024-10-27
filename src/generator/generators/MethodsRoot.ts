@@ -20,7 +20,7 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
 
     code()
 
-    config.schema.kindMap.Root.forEach(node => {
+    config.schema.kindMap.list.Root.forEach(node => {
       code(renderRootType({ config, node }))
       code()
     })
@@ -28,7 +28,7 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
     code(`
       export interface BuilderMethodsRoot<$Context extends ${identifiers.$$Utilities}.ClientContext> {
         ${
-      config.schema.kindMap.Root.map(node => {
+      config.schema.kindMap.list.Root.map(node => {
         const operationName = Grafaid.Document
           .RootTypeToOperationType[node.name as keyof typeof Grafaid.Document.RootTypeToOperationType]
         return `${operationName}: ${node.name}Methods<$Context>`

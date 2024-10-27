@@ -1,4 +1,3 @@
-import fs from 'node:fs/promises'
 import { createConfig } from '../config/config.js'
 import type { Input } from '../config/input.js'
 import { ModuleGenerator_ } from '../generators/_.js'
@@ -47,19 +46,19 @@ export const generate = async (input: Input) => {
   )
 
   if (config.paths.project.outputs.sdl && config.schema.via !== `sdl`) {
-    await fs.writeFile(config.paths.project.outputs.sdl, config.schema.sdl)
+    await config.fs.writeFile(config.paths.project.outputs.sdl, config.schema.sdl)
   }
 
   // todo clear directory before generating so that removed or renamed files are cleaned up.
-  await fs.mkdir(config.paths.project.outputs.root, { recursive: true })
-  await fs.mkdir(config.paths.project.outputs.modules, { recursive: true })
+  await config.fs.mkdir(config.paths.project.outputs.root, { recursive: true })
+  await config.fs.mkdir(config.paths.project.outputs.modules, { recursive: true })
 
   await Promise.all(
     generatedModules.map((generatedModule) => {
       const isExportsModule = generatedModule.name.match(/^_+$/) !== null
       // dprint-ignore
       const filePath = `${config.paths.project.outputs.root}/${isExportsModule ? `` : `modules/`}${generatedModule.name}.ts`
-      return fs.writeFile(filePath, generatedModule.content)
+      return config.fs.writeFile(filePath, generatedModule.content)
     }),
   )
 }

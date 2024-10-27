@@ -241,7 +241,7 @@ export namespace Schema {
 //
 export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> extends $$Utilities.Schema {
   name: Data.Name
-  RootTypesPresent: ['Query']
+  operationsAvailable: ['Query']
   RootUnion: Schema.Query
   Root: {
     Query: Schema.Query

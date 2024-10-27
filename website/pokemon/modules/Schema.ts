@@ -264,7 +264,7 @@ export namespace Schema {
 //
 export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.ScalarMap = {}> extends $$Utilities.Schema {
   name: Data.Name
-  RootTypesPresent: ['Mutation', 'Query']
+  operationsAvailable: ['Mutation', 'Query']
   RootUnion: Schema.Mutation | Schema.Query
   Root: {
     Query: Schema.Query

@@ -1,10 +1,12 @@
-import fs from 'node:fs/promises'
+import * as Fs from 'node:fs/promises'
 import { extname, isAbsolute, join } from 'node:path'
 import type { JsonValue } from 'type-fest'
 import { errorFromMaybeError } from './prelude.js'
 
+export type Fs = typeof Fs
+
 export const statMaybeExists = async (path: string) => {
-  return await fs.stat(path).catch((_: unknown) => {
+  return await Fs.stat(path).catch((_: unknown) => {
     const error = errorFromMaybeError(_)
     return `code` in error && typeof error.code === `string` && error.code === `ENOENT`
       ? null
@@ -17,7 +19,7 @@ export const fileExists = async (path: string) => {
 }
 
 export const isPathToADirectory = async (path: string) => {
-  const stat = await fs.stat(path)
+  const stat = await Fs.stat(path)
   return stat.isDirectory()
 }
 
@@ -40,7 +42,7 @@ export const readJsonFile = async <$Json extends JsonValue>(path: string): Promi
   let content: string
 
   try {
-    content = await fs.readFile(path, `utf8`)
+    content = await Fs.readFile(path, `utf8`)
   } catch (error) {
     return null
   }

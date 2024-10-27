@@ -31,7 +31,7 @@ export const SchemaErrors = (input?: Input) => {
     onSchema: ({ config: genConfig, schema }) => {
       const errorObjects = getErrorObjects(config, genConfig)
       schema[`SchemaErrors`] = {
-        objectNames: errorObjects.map(_ => Code.string(_.name)).join(` | `),
+        objectNames: errorObjects.map(type => Code.string(type.name)).join(` | `),
       }
     },
     schemaDrivenDataMap: {
@@ -57,5 +57,5 @@ export const SchemaErrors = (input?: Input) => {
 
 // todo memoize
 const getErrorObjects = (config: Config, genConfig: GeneratorConfig) => {
-  return Object.values(genConfig.schema.kindMap.OutputObject).filter(config.isErrorType)
+  return Object.values(genConfig.schema.kindMap.list.OutputObject).filter(config.isErrorType)
 }

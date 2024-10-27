@@ -255,7 +255,7 @@ export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$
   extends $
 {
   name: Data.Name
-  RootTypesPresent: ['Query']
+  operationsAvailable: ['Query']
   RootUnion: Schema.Query
   Root: {
     Query: Schema.Query

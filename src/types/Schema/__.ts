@@ -17,7 +17,7 @@ export interface Schema<
   $Scalars extends Scalar.Registry = Scalar.Registry,
 > {
   name: GlobalRegistry.ClientNames
-  RootTypesPresent: ('Query' | 'Mutation' | 'Subscription')[]
+  operationsAvailable: ('Query' | 'Mutation' | 'Subscription')[]
   RootUnion: RootType
   Root: {
     Query: null | Query
