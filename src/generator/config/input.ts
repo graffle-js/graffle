@@ -17,7 +17,7 @@ export const OutputCase = {
   camel: `camel`,
   kebab: `kebab`,
   snake: `snake`,
-}
+} as const
 export type InputOutputCase = keyof typeof OutputCase
 
 export interface Input {
