@@ -6,6 +6,7 @@ import { z } from 'zod'
 import { toAbsolutePath } from '../../lib/fsp.js'
 import { isError, urlParseSafe } from '../../lib/prelude.js'
 import { Generator } from '../__.js'
+import { type Input, OutputCase } from '../config/input.js'
 
 const args = Command.create().description(`Generate a type safe GraphQL client.`)
   .parameter(
@@ -41,6 +42,12 @@ const args = Command.create().description(`Generate a type safe GraphQL client.`
     `output`,
     z.string().min(1).optional().describe(
       `Directory path for where to output the generated TypeScript files. By default will be './graffle' in the project root.`,
+    ),
+  )
+  .parameter(
+    `outputCase`,
+    z.nativeEnum(OutputCase).default(`kebab`).describe(
+      `The case format to use for the generated file names.`,
     ),
   )
   .parameter(
@@ -91,10 +98,11 @@ const currentWorkingDirectory = configModule.path ? Path.dirname(configModule.pa
 
 // --- Merge Inputs ---
 
-const input = {
+const input: Input = {
   ...configModule.builder?._.input,
   currentWorkingDirectory,
   schema,
+  outputCase: args.outputCase,
 }
 
 if (defaultSchemaUrl !== undefined) input.defaultSchemaUrl = defaultSchemaUrl

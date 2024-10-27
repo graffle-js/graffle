@@ -12,7 +12,13 @@ export interface InputLint {
   missingCustomScalarCodec?: boolean
 }
 
-export type InputOutputCase = `pascal` | `camel` | `kebab` | `snake`
+export const OutputCase = {
+  pascal: `pascal`,
+  camel: `camel`,
+  kebab: `kebab`,
+  snake: `snake`,
+}
+export type InputOutputCase = keyof typeof OutputCase
 
 export interface Input {
   /**
