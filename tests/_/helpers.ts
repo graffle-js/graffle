@@ -75,6 +75,7 @@ export const test = testBase.extend<Fixtures>({
       },
       dependencies: {
         tsx: `4.19.1`,
+        graphql: `16.9.0`,
         typescript: `5.6.3`,
         '@tsconfig/strictest': `2.0.5`,
         // '@rollup/plugin-node-resolve': `^15.3.0`,

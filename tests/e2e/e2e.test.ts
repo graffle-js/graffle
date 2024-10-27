@@ -24,18 +24,18 @@ test(`client works without generation`, async ({ project, pokemonService }) => {
 		import { Graffle } from 'graffle'
 		const graffle = Graffle.create({ schema: '${pokemonService.url.href}' })
 		const data = await graffle.gql\`
-				query ($name: String!) {
-					pokemonByName (name: $name) {
-						name
-						hp
-						attack
-						defense
-						trainer {
-							name
-						}
-					}
-				}
-			\`.send({ name: 'Pikachu' })
+      query ($name: String!) {
+        pokemonByName (name: $name) {
+          name
+          hp
+          attack
+          defense
+          trainer {
+            name
+          }
+        }
+      }
+    \`.send({ name: 'Pikachu' })
 		console.log(data?.pokemonByName)
 		`,
   )
