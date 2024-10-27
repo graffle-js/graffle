@@ -5,12 +5,12 @@ exports[`kitchen-sink generated modules > _.ts 1`] = `
 // It at least helps with Twoslash wherein without this import here Twoslash will not include the global module.
 // In real TypeScript projects it seems the global module is included automatically. But there could be certain tsconfig
 // setups where this still indeed does help.
-import './modules/Global.js'
+import './modules/global.js.js'
 
-export { create } from './modules/Client.js'
-export { schemaDrivenDataMap } from './modules/SchemaDrivenDataMap.js'
-export { Select } from './modules/Select.js'
-export * as SelectionSets from './modules/SelectionSets.js'
+export { create } from './modules/client.js'
+export { schemaDrivenDataMap } from './modules/schema-driven-data-map.js'
+export { Select } from './modules/select.js'
+export * as SelectionSets from './modules/selection-sets.js'
 "
 `;
 
@@ -19,16 +19,15 @@ exports[`kitchen-sink generated modules > __.ts 1`] = `
 "
 `;
 
-exports[`kitchen-sink generated modules > modules/Client.ts 1`] = `
+exports[`kitchen-sink generated modules > modules/client.ts 1`] = `
 "import { createPrefilled } from '../../../../../../src/entrypoints/client.js'
-import { defaultSchemaUrl } from './Data.js'
-import { Name } from './Data.js'
-import { schemaDrivenDataMap } from './SchemaDrivenDataMap.js'
-export const create = createPrefilled(Name, schemaDrivenDataMap, defaultSchemaUrl)
+import * as $$Data from './data.js'
+import * as $$SchemaDrivenDataMap from './schema-driven-data-map.js'
+export const create = createPrefilled($$Data.Name, $$SchemaDrivenDataMap.schemaDrivenDataMap, $$Data.defaultSchemaUrl)
 "
 `;
 
-exports[`kitchen-sink generated modules > modules/Data.ts 1`] = `
+exports[`kitchen-sink generated modules > modules/data.ts 1`] = `
 "export const Name = \`default\`
 export type Name = 'default'
 
@@ -36,23 +35,23 @@ export const defaultSchemaUrl = undefined
 "
 `;
 
-exports[`kitchen-sink generated modules > modules/Global.ts 1`] = `
-"import type * as Data from './Data.js'
-import type * as MethodsDocument from './MethodsDocument.js'
-import type * as MethodsRoot from './MethodsRoot.js'
-import type * as MethodsSelect from './MethodsSelect.js'
-import type { Schema } from './Schema.js'
+exports[`kitchen-sink generated modules > modules/global.ts 1`] = `
+"import * as $$Data from './data.js'
+import * as $$MethodsDocument from './methods-document.js'
+import * as $$MethodsRoot from './methods-root.js'
+import * as $$MethodsSelect from './methods-select.js'
+import * as $$Schema from './schema.js'
 
 declare global {
   export namespace GraffleGlobal {
     export interface Clients {
       default: {
-        name: Data.Name
-        schema: Schema
+        name: $$Data.Name
+        schema: $$Schema.Schema
         interfaces: {
-          MethodsSelect: MethodsSelect.$MethodsSelect
-          Document: MethodsDocument.BuilderMethodsDocumentFn
-          Root: MethodsRoot.BuilderMethodsRootFn
+          MethodsSelect: $$MethodsSelect.$MethodsSelect
+          Document: $$MethodsDocument.BuilderMethodsDocumentFn
+          Root: $$MethodsRoot.BuilderMethodsRootFn
         }
         defaultSchemaUrl: null
       }
@@ -62,43 +61,44 @@ declare global {
 "
 `;
 
-exports[`kitchen-sink generated modules > modules/MethodsDocument.ts 1`] = `
-"import type * as Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
-import type { Schema } from './Schema.js'
-import type * as SelectionSets from './SelectionSets.js'
-export interface Document<$Context extends Utilities.ClientContext> {
+exports[`kitchen-sink generated modules > modules/methods-document.ts 1`] = `
+"import type * as $$Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
+import * as $$Schema from './schema.js'
+import * as $$SelectionSets from './selection-sets.js'
+
+export interface Document<$Context extends $$Utilities.ClientContext> {
   <$Document>(
-    document: Utilities.ExactNonEmpty<$Document, SelectionSets.$Document<$Context['scalars']>>,
-  ): Utilities.DocumentRunner<
+    document: $$Utilities.ExactNonEmpty<$Document, $$SelectionSets.$Document<$Context['scalars']>>,
+  ): $$Utilities.DocumentRunner<
     $Context,
-    Schema,
+    $$Schema.Schema,
     // @ts-expect-error We use Exact instead of constraint on this function. TypeScript does not see that as
     // Satisfying the constraint on the DocumentRunner type.
     $Document
   >
 }
 
-export interface BuilderMethodsDocumentFn extends Utilities.TypeFunction.Fn {
+export interface BuilderMethodsDocumentFn extends $$Utilities.TypeFunction.Fn {
   // @ts-expect-error parameter is Untyped.
   return: Document<this['params']>
 }
 "
 `;
 
-exports[`kitchen-sink generated modules > modules/MethodsRoot.ts 1`] = `
+exports[`kitchen-sink generated modules > modules/methods-root.ts 1`] = `
 "import type { InferResult } from '../../../../../../src/entrypoints/schema.js'
 import type * as $$Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
-import type { Schema } from './Schema.js'
-import type * as SelectionSet from './SelectionSets.js'
+import * as $$Schema from './schema.js'
+import * as $$SelectionSets from './selection-sets.js'
 
 export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
   $batch: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutput<
         $Context,
-        InferResult.OperationQuery<$SelectionSet, Schema<$Context['scalars']>>
+        InferResult.OperationQuery<$SelectionSet, $$Schema.Schema<$Context['scalars']>>
       >
     >
   >
@@ -113,24 +113,24 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
   >
 
   InputObjectNested: <$SelectionSet>(
-    selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.InputObjectNested<$Context['scalars']>>,
+    selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.InputObjectNested<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ InputObjectNested: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ InputObjectNested: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'InputObjectNested'
       >
     >
   >
 
   InputObjectNestedNonNull: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.InputObjectNestedNonNull<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.InputObjectNestedNonNull<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ InputObjectNestedNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ InputObjectNestedNonNull: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'InputObjectNestedNonNull'
       >
     >
@@ -139,456 +139,462 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
    * Query enum field documentation.
    */
   abcEnum: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.abcEnum<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.abcEnum<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ abcEnum: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ abcEnum: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'abcEnum'
       >
     >
   >
 
   argInputObjectCircular: <$SelectionSet>(
-    selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.argInputObjectCircular<$Context['scalars']>>,
+    selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.argInputObjectCircular<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ argInputObjectCircular: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ argInputObjectCircular: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'argInputObjectCircular'
       >
     >
   >
 
   date: <$SelectionSet>(
-    selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.date<$Context['scalars']>>,
+    selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.date<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ date: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ date: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'date'
       >
     >
   >
 
   dateArg: <$SelectionSet>(
-    selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.dateArg<$Context['scalars']>>,
+    selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateArg<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ dateArg: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ dateArg: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'dateArg'
       >
     >
   >
 
   dateArgInputObject: <$SelectionSet>(
-    selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.dateArgInputObject<$Context['scalars']>>,
+    selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateArgInputObject<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ dateArgInputObject: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ dateArgInputObject: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'dateArgInputObject'
       >
     >
   >
 
   dateArgList: <$SelectionSet>(
-    selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.dateArgList<$Context['scalars']>>,
+    selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateArgList<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ dateArgList: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ dateArgList: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'dateArgList'
       >
     >
   >
 
   dateArgNonNull: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.dateArgNonNull<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateArgNonNull<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ dateArgNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ dateArgNonNull: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'dateArgNonNull'
       >
     >
   >
 
   dateArgNonNullList: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.dateArgNonNullList<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateArgNonNullList<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ dateArgNonNullList: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ dateArgNonNullList: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'dateArgNonNullList'
       >
     >
   >
 
   dateArgNonNullListNonNull: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.dateArgNonNullListNonNull<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<
+      $SelectionSet,
+      $$SelectionSets.Query.dateArgNonNullListNonNull<$Context['scalars']>
+    >,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ dateArgNonNullListNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ dateArgNonNullListNonNull: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'dateArgNonNullListNonNull'
       >
     >
   >
 
   dateInterface1: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.dateInterface1<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateInterface1<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ dateInterface1: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ dateInterface1: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'dateInterface1'
       >
     >
   >
 
   dateList: <$SelectionSet>(
-    selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.dateList<$Context['scalars']>>,
+    selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateList<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ dateList: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ dateList: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'dateList'
       >
     >
   >
 
   dateListList: <$SelectionSet>(
-    selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.dateListList<$Context['scalars']>>,
+    selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateListList<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ dateListList: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ dateListList: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'dateListList'
       >
     >
   >
 
   dateListNonNull: <$SelectionSet>(
-    selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.dateListNonNull<$Context['scalars']>>,
+    selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateListNonNull<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ dateListNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ dateListNonNull: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'dateListNonNull'
       >
     >
   >
 
   dateNonNull: <$SelectionSet>(
-    selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.dateNonNull<$Context['scalars']>>,
+    selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateNonNull<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ dateNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ dateNonNull: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'dateNonNull'
       >
     >
   >
 
   dateObject1: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.dateObject1<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateObject1<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ dateObject1: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ dateObject1: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'dateObject1'
       >
     >
   >
 
   dateUnion: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.dateUnion<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateUnion<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ dateUnion: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ dateUnion: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'dateUnion'
       >
     >
   >
 
   error: <$SelectionSet>(
-    selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.error<$Context['scalars']>>,
+    selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.error<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ error: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ error: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'error'
       >
     >
   >
 
   id: <$SelectionSet>(
-    selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.id<$Context['scalars']>>,
+    selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.id<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ id: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ id: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'id'
       >
     >
   >
 
   idNonNull: <$SelectionSet>(
-    selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.idNonNull<$Context['scalars']>>,
+    selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.idNonNull<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ idNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ idNonNull: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'idNonNull'
       >
     >
   >
 
   interface: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.$interface<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.$interface<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ interface: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ interface: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'interface'
       >
     >
   >
 
   interfaceNonNull: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.interfaceNonNull<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.interfaceNonNull<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ interfaceNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ interfaceNonNull: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'interfaceNonNull'
       >
     >
   >
 
   interfaceWithArgs: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.interfaceWithArgs<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.interfaceWithArgs<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ interfaceWithArgs: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ interfaceWithArgs: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'interfaceWithArgs'
       >
     >
   >
 
   listInt: <$SelectionSet>(
-    selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.listInt<$Context['scalars']>>,
+    selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.listInt<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ listInt: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ listInt: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'listInt'
       >
     >
   >
 
   listIntNonNull: <$SelectionSet>(
-    selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.listIntNonNull<$Context['scalars']>>,
+    selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.listIntNonNull<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ listIntNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ listIntNonNull: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'listIntNonNull'
       >
     >
   >
 
   listListInt: <$SelectionSet>(
-    selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.listListInt<$Context['scalars']>>,
+    selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.listListInt<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ listListInt: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ listListInt: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'listListInt'
       >
     >
   >
 
   listListIntNonNull: <$SelectionSet>(
-    selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.listListIntNonNull<$Context['scalars']>>,
+    selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.listListIntNonNull<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ listListIntNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ listListIntNonNull: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'listListIntNonNull'
       >
     >
   >
 
   lowerCaseUnion: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.lowerCaseUnion<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.lowerCaseUnion<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ lowerCaseUnion: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ lowerCaseUnion: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'lowerCaseUnion'
       >
     >
   >
 
   object: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.$object<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.$object<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ object: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ object: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'object'
       >
     >
   >
 
   objectList: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.objectList<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.objectList<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ objectList: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ objectList: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'objectList'
       >
     >
   >
 
   objectListNonNull: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.objectListNonNull<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.objectListNonNull<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ objectListNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ objectListNonNull: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'objectListNonNull'
       >
     >
   >
 
   objectNested: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.objectNested<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.objectNested<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ objectNested: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ objectNested: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'objectNested'
       >
     >
   >
 
   objectNonNull: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.objectNonNull<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.objectNonNull<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ objectNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ objectNonNull: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'objectNonNull'
       >
     >
   >
 
   objectWithArgs: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.objectWithArgs<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.objectWithArgs<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ objectWithArgs: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ objectWithArgs: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'objectWithArgs'
       >
     >
   >
 
   result: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.result<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.result<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ result: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ result: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'result'
       >
     >
   >
 
   resultNonNull: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.resultNonNull<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.resultNonNull<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ resultNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ resultNonNull: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'resultNonNull'
       >
     >
   >
 
   string: <$SelectionSet>(
-    selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.$string<$Context['scalars']>>,
+    selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.$string<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ string: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ string: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'string'
       >
     >
   >
 
   stringWithArgEnum: <$SelectionSet>(
-    selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.stringWithArgEnum<$Context['scalars']>>,
+    selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.stringWithArgEnum<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ stringWithArgEnum: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ stringWithArgEnum: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'stringWithArgEnum'
       >
     >
   >
 
   stringWithArgInputObject: <$SelectionSet>(
-    selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.stringWithArgInputObject<$Context['scalars']>>,
+    selectionSet?: $$Utilities.Exact<
+      $SelectionSet,
+      $$SelectionSets.Query.stringWithArgInputObject<$Context['scalars']>
+    >,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ stringWithArgInputObject: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ stringWithArgInputObject: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'stringWithArgInputObject'
       >
     >
@@ -597,13 +603,16 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
   stringWithArgInputObjectRequired: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<
       $SelectionSet,
-      SelectionSet.Query.stringWithArgInputObjectRequired<$Context['scalars']>
+      $$SelectionSets.Query.stringWithArgInputObjectRequired<$Context['scalars']>
     >,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ stringWithArgInputObjectRequired: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<
+          { stringWithArgInputObjectRequired: $SelectionSet },
+          $$Schema.Schema<$Context['scalars']>
+        >,
         'stringWithArgInputObjectRequired'
       >
     >
@@ -612,108 +621,111 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
    * The given arguments are reflected back as a JSON string.
    */
   stringWithArgs: <$SelectionSet>(
-    selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.stringWithArgs<$Context['scalars']>>,
+    selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.stringWithArgs<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ stringWithArgs: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ stringWithArgs: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'stringWithArgs'
       >
     >
   >
 
   stringWithListArg: <$SelectionSet>(
-    selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.stringWithListArg<$Context['scalars']>>,
+    selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.stringWithListArg<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ stringWithListArg: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ stringWithListArg: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'stringWithListArg'
       >
     >
   >
 
   stringWithListArgRequired: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.stringWithListArgRequired<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<
+      $SelectionSet,
+      $$SelectionSets.Query.stringWithListArgRequired<$Context['scalars']>
+    >,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ stringWithListArgRequired: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ stringWithListArgRequired: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'stringWithListArgRequired'
       >
     >
   >
 
   stringWithRequiredArg: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.stringWithRequiredArg<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.stringWithRequiredArg<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ stringWithRequiredArg: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ stringWithRequiredArg: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'stringWithRequiredArg'
       >
     >
   >
 
   unionFooBar: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.unionFooBar<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.unionFooBar<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ unionFooBar: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ unionFooBar: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'unionFooBar'
       >
     >
   >
 
   unionFooBarNonNull: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.unionFooBarNonNull<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.unionFooBarNonNull<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ unionFooBarNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ unionFooBarNonNull: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'unionFooBarNonNull'
       >
     >
   >
 
   unionFooBarWithArgs: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.unionFooBarWithArgs<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.unionFooBarWithArgs<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ unionFooBarWithArgs: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ unionFooBarWithArgs: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'unionFooBarWithArgs'
       >
     >
   >
 
   unionObject: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.unionObject<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.unionObject<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ unionObject: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ unionObject: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'unionObject'
       >
     >
   >
 
   unionObjectNonNull: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.unionObjectNonNull<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.unionObjectNonNull<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ unionObjectNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ unionObjectNonNull: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'unionObjectNonNull'
       >
     >
@@ -722,12 +734,12 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
 
 export interface MutationMethods<$Context extends $$Utilities.ClientContext> {
   $batch: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Mutation<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutput<
         $Context,
-        InferResult.OperationMutation<$SelectionSet, Schema<$Context['scalars']>>
+        InferResult.OperationMutation<$SelectionSet, $$Schema.Schema<$Context['scalars']>>
       >
     >
   >
@@ -742,24 +754,24 @@ export interface MutationMethods<$Context extends $$Utilities.ClientContext> {
   >
 
   id: <$SelectionSet>(
-    selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Mutation.id<$Context['scalars']>>,
+    selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.id<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationMutation<{ id: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationMutation<{ id: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'id'
       >
     >
   >
 
   idNonNull: <$SelectionSet>(
-    selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Mutation.idNonNull<$Context['scalars']>>,
+    selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.idNonNull<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationMutation<{ idNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationMutation<{ idNonNull: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'idNonNull'
       >
     >
@@ -778,9 +790,9 @@ export interface BuilderMethodsRootFn extends $$Utilities.TypeFunction.Fn {
 "
 `;
 
-exports[`kitchen-sink generated modules > modules/MethodsSelect.ts 1`] = `
-"import type * as $Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
-import type * as $SelectionSets from './SelectionSets.js'
+exports[`kitchen-sink generated modules > modules/methods-select.ts 1`] = `
+"import type * as $$Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
+import * as $$SelectionSets from './selection-sets.js'
 
 //
 //
@@ -840,11 +852,11 @@ export interface $MethodsSelect {
 //
 
 export interface Query {
-  <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.Query>): $SelectionSet
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query>): $SelectionSet
 }
 
 export interface Mutation {
-  <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.Mutation>): $SelectionSet
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation>): $SelectionSet
 }
 
 //
@@ -864,59 +876,59 @@ export interface Mutation {
 //
 
 export interface Bar {
-  <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.Bar>): $SelectionSet
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Bar>): $SelectionSet
 }
 
 export interface DateObject1 {
-  <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.DateObject1>): $SelectionSet
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.DateObject1>): $SelectionSet
 }
 
 export interface DateObject2 {
-  <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.DateObject2>): $SelectionSet
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.DateObject2>): $SelectionSet
 }
 
 export interface ErrorOne {
-  <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.ErrorOne>): $SelectionSet
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.ErrorOne>): $SelectionSet
 }
 
 export interface ErrorTwo {
-  <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.ErrorTwo>): $SelectionSet
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.ErrorTwo>): $SelectionSet
 }
 
 export interface Foo {
-  <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.Foo>): $SelectionSet
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Foo>): $SelectionSet
 }
 
 export interface Object1 {
-  <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.Object1>): $SelectionSet
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Object1>): $SelectionSet
 }
 
 export interface Object1ImplementingInterface {
   <$SelectionSet>(
-    selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.Object1ImplementingInterface>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Object1ImplementingInterface>,
   ): $SelectionSet
 }
 
 export interface Object2ImplementingInterface {
   <$SelectionSet>(
-    selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.Object2ImplementingInterface>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Object2ImplementingInterface>,
   ): $SelectionSet
 }
 
 export interface ObjectNested {
-  <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.ObjectNested>): $SelectionSet
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.ObjectNested>): $SelectionSet
 }
 
 export interface ObjectUnion {
-  <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.ObjectUnion>): $SelectionSet
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.ObjectUnion>): $SelectionSet
 }
 
 export interface lowerCaseObject {
-  <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.lowerCaseObject>): $SelectionSet
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.lowerCaseObject>): $SelectionSet
 }
 
 export interface lowerCaseObject2 {
-  <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.lowerCaseObject2>): $SelectionSet
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.lowerCaseObject2>): $SelectionSet
 }
 
 //
@@ -936,19 +948,19 @@ export interface lowerCaseObject2 {
 //
 
 export interface DateUnion {
-  <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.DateUnion>): $SelectionSet
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.DateUnion>): $SelectionSet
 }
 
 export interface FooBarUnion {
-  <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.FooBarUnion>): $SelectionSet
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.FooBarUnion>): $SelectionSet
 }
 
 export interface Result {
-  <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.Result>): $SelectionSet
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Result>): $SelectionSet
 }
 
 export interface lowerCaseUnion {
-  <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.lowerCaseUnion>): $SelectionSet
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.lowerCaseUnion>): $SelectionSet
 }
 
 //
@@ -968,20 +980,20 @@ export interface lowerCaseUnion {
 //
 
 export interface DateInterface1 {
-  <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.DateInterface1>): $SelectionSet
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.DateInterface1>): $SelectionSet
 }
 
 export interface Error {
-  <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.Error>): $SelectionSet
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Error>): $SelectionSet
 }
 
 export interface Interface {
-  <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.Interface>): $SelectionSet
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Interface>): $SelectionSet
 }
 "
 `;
 
-exports[`kitchen-sink generated modules > modules/Scalar.ts 1`] = `
+exports[`kitchen-sink generated modules > modules/scalar.ts 1`] = `
 "import type * as $$Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
 
 export * from '../../../../../../src/types/Schema/StandardTypes/scalar.js'
@@ -1002,11 +1014,11 @@ export type Date = $$Utilities.Schema.Scalar.ScalarCodecless<'Date'>
 "
 `;
 
-exports[`kitchen-sink generated modules > modules/Schema.ts 1`] = `
+exports[`kitchen-sink generated modules > modules/schema.ts 1`] = `
 "import type { Schema as $ } from '../../../../../../src/entrypoints/utilities-for-generated.js'
 import type * as $$Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
-import type * as Data from './Data.js'
-import type * as $Scalar from './Scalar.js'
+import * as $$Data from './data.js'
+import * as $$Scalar from './scalar.js'
 
 export namespace Schema {
   //
@@ -2548,7 +2560,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export type Date = $Scalar.Date
+  export type Date = $$Scalar.Date
 
   //
   //
@@ -2677,7 +2689,7 @@ export namespace Schema {
 export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty>
   extends $
 {
-  name: Data.Name
+  name: $$Data.Name
   operationsAvailable: ['query', 'mutation']
   RootUnion:
     | Schema.Query
@@ -2745,9 +2757,9 @@ export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$
 "
 `;
 
-exports[`kitchen-sink generated modules > modules/SchemaDrivenDataMap.ts 1`] = `
+exports[`kitchen-sink generated modules > modules/schema-driven-data-map.ts 1`] = `
 "import type * as $$Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
-import * as $Scalar from './Scalar.js'
+import * as $$Scalar from './scalar.js'
 //
 //
 //
@@ -2764,15 +2776,15 @@ import * as $Scalar from './Scalar.js'
 //
 //
 
-const Boolean = $Scalar.Boolean
+const Boolean = $$Scalar.Boolean
 
-const Float = $Scalar.Float
+const Float = $$Scalar.Float
 
-const ID = $Scalar.ID
+const ID = $$Scalar.ID
 
-const Int = $Scalar.Int
+const Int = $$Scalar.Int
 
-const String = $Scalar.String
+const String = $$Scalar.String
 
 //
 //
@@ -3481,12 +3493,12 @@ export { $schemaDrivenDataMap as schemaDrivenDataMap }
 "
 `;
 
-exports[`kitchen-sink generated modules > modules/Select.ts 1`] = `
+exports[`kitchen-sink generated modules > modules/select.ts 1`] = `
 "import type { OperationTypeNode } from 'graphql'
 import type { InferResult } from '../../../../../../src/entrypoints/schema.js'
-import * as Data from './Data.js'
-import type { Schema } from './Schema.js'
-import type * as SelectionSets from './SelectionSets.js'
+import * as $$Data from './data.js'
+import * as $$Schema from './schema.js'
+import * as $$SelectionSets from './selection-sets.js'
 
 //
 //
@@ -3504,7 +3516,7 @@ import type * as SelectionSets from './SelectionSets.js'
 //
 //
 import { createSelect } from '../../../../../../src/entrypoints/client.js'
-export const Select = createSelect(Data.Name)
+export const Select = createSelect($$Data.Name)
 
 //
 //
@@ -3526,124 +3538,132 @@ export namespace Select {
   //                                                Root
   // --------------------------------------------------------------------------------------------------
   //
-  export type Query<$SelectionSet extends SelectionSets.Query> = InferResult.Operation<
+  export type Query<$SelectionSet extends $$SelectionSets.Query> = InferResult.Operation<
     $SelectionSet,
-    Schema,
+    $$Schema.Schema,
     OperationTypeNode.QUERY
   >
-  export type Mutation<$SelectionSet extends SelectionSets.Mutation> = InferResult.Operation<
+  export type Mutation<$SelectionSet extends $$SelectionSets.Mutation> = InferResult.Operation<
     $SelectionSet,
-    Schema,
+    $$Schema.Schema,
     OperationTypeNode.MUTATION
   >
   //                                            OutputObject
   // --------------------------------------------------------------------------------------------------
   //
-  export type Bar<$SelectionSet extends SelectionSets.Bar> = InferResult.OutputObject<
+  export type Bar<$SelectionSet extends $$SelectionSets.Bar> = InferResult.OutputObject<
     $SelectionSet,
-    Schema,
-    Schema['allTypes']['Bar']
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['Bar']
   >
-  export type DateObject1<$SelectionSet extends SelectionSets.DateObject1> = InferResult.OutputObject<
+  export type DateObject1<$SelectionSet extends $$SelectionSets.DateObject1> = InferResult.OutputObject<
     $SelectionSet,
-    Schema,
-    Schema['allTypes']['DateObject1']
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['DateObject1']
   >
-  export type DateObject2<$SelectionSet extends SelectionSets.DateObject2> = InferResult.OutputObject<
+  export type DateObject2<$SelectionSet extends $$SelectionSets.DateObject2> = InferResult.OutputObject<
     $SelectionSet,
-    Schema,
-    Schema['allTypes']['DateObject2']
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['DateObject2']
   >
-  export type ErrorOne<$SelectionSet extends SelectionSets.ErrorOne> = InferResult.OutputObject<
+  export type ErrorOne<$SelectionSet extends $$SelectionSets.ErrorOne> = InferResult.OutputObject<
     $SelectionSet,
-    Schema,
-    Schema['allTypes']['ErrorOne']
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['ErrorOne']
   >
-  export type ErrorTwo<$SelectionSet extends SelectionSets.ErrorTwo> = InferResult.OutputObject<
+  export type ErrorTwo<$SelectionSet extends $$SelectionSets.ErrorTwo> = InferResult.OutputObject<
     $SelectionSet,
-    Schema,
-    Schema['allTypes']['ErrorTwo']
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['ErrorTwo']
   >
-  export type Foo<$SelectionSet extends SelectionSets.Foo> = InferResult.OutputObject<
+  export type Foo<$SelectionSet extends $$SelectionSets.Foo> = InferResult.OutputObject<
     $SelectionSet,
-    Schema,
-    Schema['allTypes']['Foo']
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['Foo']
   >
-  export type Object1<$SelectionSet extends SelectionSets.Object1> = InferResult.OutputObject<
+  export type Object1<$SelectionSet extends $$SelectionSets.Object1> = InferResult.OutputObject<
     $SelectionSet,
-    Schema,
-    Schema['allTypes']['Object1']
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['Object1']
   >
-  export type Object1ImplementingInterface<$SelectionSet extends SelectionSets.Object1ImplementingInterface> =
-    InferResult.OutputObject<$SelectionSet, Schema, Schema['allTypes']['Object1ImplementingInterface']>
-  export type Object2ImplementingInterface<$SelectionSet extends SelectionSets.Object2ImplementingInterface> =
-    InferResult.OutputObject<$SelectionSet, Schema, Schema['allTypes']['Object2ImplementingInterface']>
-  export type ObjectNested<$SelectionSet extends SelectionSets.ObjectNested> = InferResult.OutputObject<
+  export type Object1ImplementingInterface<$SelectionSet extends $$SelectionSets.Object1ImplementingInterface> =
+    InferResult.OutputObject<
+      $SelectionSet,
+      $$Schema.Schema,
+      $$Schema.Schema['allTypes']['Object1ImplementingInterface']
+    >
+  export type Object2ImplementingInterface<$SelectionSet extends $$SelectionSets.Object2ImplementingInterface> =
+    InferResult.OutputObject<
+      $SelectionSet,
+      $$Schema.Schema,
+      $$Schema.Schema['allTypes']['Object2ImplementingInterface']
+    >
+  export type ObjectNested<$SelectionSet extends $$SelectionSets.ObjectNested> = InferResult.OutputObject<
     $SelectionSet,
-    Schema,
-    Schema['allTypes']['ObjectNested']
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['ObjectNested']
   >
-  export type ObjectUnion<$SelectionSet extends SelectionSets.ObjectUnion> = InferResult.OutputObject<
+  export type ObjectUnion<$SelectionSet extends $$SelectionSets.ObjectUnion> = InferResult.OutputObject<
     $SelectionSet,
-    Schema,
-    Schema['allTypes']['ObjectUnion']
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['ObjectUnion']
   >
-  export type lowerCaseObject<$SelectionSet extends SelectionSets.lowerCaseObject> = InferResult.OutputObject<
+  export type lowerCaseObject<$SelectionSet extends $$SelectionSets.lowerCaseObject> = InferResult.OutputObject<
     $SelectionSet,
-    Schema,
-    Schema['allTypes']['lowerCaseObject']
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['lowerCaseObject']
   >
-  export type lowerCaseObject2<$SelectionSet extends SelectionSets.lowerCaseObject2> = InferResult.OutputObject<
+  export type lowerCaseObject2<$SelectionSet extends $$SelectionSets.lowerCaseObject2> = InferResult.OutputObject<
     $SelectionSet,
-    Schema,
-    Schema['allTypes']['lowerCaseObject2']
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['lowerCaseObject2']
   >
   //                                               Union
   // --------------------------------------------------------------------------------------------------
   //
-  export type DateUnion<$SelectionSet extends SelectionSets.DateUnion> = InferResult.Union<
+  export type DateUnion<$SelectionSet extends $$SelectionSets.DateUnion> = InferResult.Union<
     $SelectionSet,
-    Schema,
-    Schema['allTypes']['DateUnion']
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['DateUnion']
   >
-  export type FooBarUnion<$SelectionSet extends SelectionSets.FooBarUnion> = InferResult.Union<
+  export type FooBarUnion<$SelectionSet extends $$SelectionSets.FooBarUnion> = InferResult.Union<
     $SelectionSet,
-    Schema,
-    Schema['allTypes']['FooBarUnion']
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['FooBarUnion']
   >
-  export type Result<$SelectionSet extends SelectionSets.Result> = InferResult.Union<
+  export type Result<$SelectionSet extends $$SelectionSets.Result> = InferResult.Union<
     $SelectionSet,
-    Schema,
-    Schema['allTypes']['Result']
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['Result']
   >
-  export type lowerCaseUnion<$SelectionSet extends SelectionSets.lowerCaseUnion> = InferResult.Union<
+  export type lowerCaseUnion<$SelectionSet extends $$SelectionSets.lowerCaseUnion> = InferResult.Union<
     $SelectionSet,
-    Schema,
-    Schema['allTypes']['lowerCaseUnion']
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['lowerCaseUnion']
   >
   //                                             Interface
   // --------------------------------------------------------------------------------------------------
   //
-  export type DateInterface1<$SelectionSet extends SelectionSets.DateInterface1> = InferResult.Interface<
+  export type DateInterface1<$SelectionSet extends $$SelectionSets.DateInterface1> = InferResult.Interface<
     $SelectionSet,
-    Schema,
-    Schema['allTypes']['DateInterface1']
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['DateInterface1']
   >
-  export type Error<$SelectionSet extends SelectionSets.Error> = InferResult.Interface<
+  export type Error<$SelectionSet extends $$SelectionSets.Error> = InferResult.Interface<
     $SelectionSet,
-    Schema,
-    Schema['allTypes']['Error']
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['Error']
   >
-  export type Interface<$SelectionSet extends SelectionSets.Interface> = InferResult.Interface<
+  export type Interface<$SelectionSet extends $$SelectionSets.Interface> = InferResult.Interface<
     $SelectionSet,
-    Schema,
-    Schema['allTypes']['Interface']
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['Interface']
   >
 }
 "
 `;
 
-exports[`kitchen-sink generated modules > modules/SelectionSets.ts 1`] = `
+exports[`kitchen-sink generated modules > modules/selection-sets.ts 1`] = `
 "import type { Select as $Select } from '../../../../../../src/entrypoints/schema.js'
 import type * as $$Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
 
@@ -7280,8 +7300,8 @@ export namespace $NamedTypes {
 exports[`root-types-mapped 1`] = `
 "import type { Schema as $ } from 'graffle/utilities-for-generated'
 import type * as $$Utilities from 'graffle/utilities-for-generated'
-import type * as Data from './Data.js'
-import type * as $Scalar from './Scalar.js'
+import * as $$Data from './data.js'
+import * as $$Scalar from './scalar.js'
 
 export namespace Schema {
   //
@@ -7512,7 +7532,7 @@ export namespace Schema {
 export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty>
   extends $
 {
-  name: Data.Name
+  name: $$Data.Name
   operationsAvailable: ['query']
   RootUnion: Schema.QueryRoot
   Root: {
@@ -7535,17 +7555,17 @@ export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$
 exports[`root-types-mapped 2`] = `
 "import type { InferResult } from 'graffle/schema'
 import type * as $$Utilities from 'graffle/utilities-for-generated'
-import type { Schema } from './Schema.js'
-import type * as SelectionSet from './SelectionSets.js'
+import * as $$Schema from './schema.js'
+import * as $$SelectionSets from './selection-sets.js'
 
 export interface QueryRootMethods<$Context extends $$Utilities.ClientContext> {
   $batch: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.QueryRoot<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.QueryRoot<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutput<
         $Context,
-        InferResult.OperationQuery<$SelectionSet, Schema<$Context['scalars']>>
+        InferResult.OperationQuery<$SelectionSet, $$Schema.Schema<$Context['scalars']>>
       >
     >
   >
@@ -7560,12 +7580,12 @@ export interface QueryRootMethods<$Context extends $$Utilities.ClientContext> {
   >
 
   id: <$SelectionSet>(
-    selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.QueryRoot.id<$Context['scalars']>>,
+    selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.QueryRoot.id<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ id: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ id: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'id'
       >
     >
