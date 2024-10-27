@@ -5,7 +5,7 @@ import { Tex } from '../../lib/tex/__.js'
 import { propertyNames } from '../../types/SchemaDrivenDataMap/SchemaDrivenDataMap.js'
 import type { Config } from '../config/config.js'
 import { identifiers } from '../helpers/identifiers.js'
-import { createModuleGenerator } from '../helpers/moduleGenerator.js'
+import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
 import { renderInlineType } from '../helpers/render.js'
 import type { KindRenderers } from '../helpers/types.js'
@@ -25,7 +25,7 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
     const kinds = entries(kindMap)
 
     code(`
-      import * as ${identifiers.$Scalar} from './${ModuleGeneratorScalar.name}.js'
+      ${importModuleGenerator(config, ModuleGeneratorScalar)}
       import type * as ${identifiers.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
     `)
 
@@ -156,7 +156,7 @@ const ScalarType = createCodeGenerator<
   { type: Grafaid.Schema.ScalarType }
 >(
   ({ code, type }) => {
-    code(Code.termConst(type.name, `${identifiers.$Scalar}.${type.name}`))
+    code(Code.termConst(type.name, `${identifiers.$$Scalar}.${type.name}`))
   },
 )
 
@@ -165,7 +165,7 @@ const ScalarTypeCustom = createCodeGenerator<
 >(
   ({ config, code, type }) => {
     if (config.options.isImportsCustomScalars) {
-      code(Code.termConst(type.name, `${identifiers.$Scalar}.${type.name}`))
+      code(Code.termConst(type.name, `${identifiers.$$Scalar}.${type.name}`))
     } else {
       code(Code.termConst(type.name, Code.string(type.name)))
     }

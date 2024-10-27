@@ -1,3 +1,5 @@
+import type { InputOutputCase } from './input.js'
+
 export const defaultName = `default`
 
 export const defaultLibraryPaths = {
@@ -6,3 +8,5 @@ export const defaultLibraryPaths = {
   schema: `graffle/schema`,
   utilitiesForGenerated: `graffle/utilities-for-generated`,
 }
+
+export const defaultOutputCase: InputOutputCase = `kebab`

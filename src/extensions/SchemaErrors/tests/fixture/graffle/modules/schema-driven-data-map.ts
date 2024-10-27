@@ -1,5 +1,5 @@
-import type * as $$Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
-import * as $Scalar from './Scalar.js'
+import type * as $$Utilities from '../../../../../../entrypoints/utilities-for-generated.js'
+import * as $$Scalar from './scalar.js'
 //
 //
 //
@@ -16,15 +16,15 @@ import * as $Scalar from './Scalar.js'
 //
 //
 
-const Boolean = $Scalar.Boolean
+const Boolean = $$Scalar.Boolean
 
-const Float = $Scalar.Float
+const Float = $$Scalar.Float
 
-const ID = $Scalar.ID
+const ID = $$Scalar.ID
 
-const Int = $Scalar.Int
+const Int = $$Scalar.Int
 
-const String = $Scalar.String
+const String = $$Scalar.String
 
 //
 //
@@ -173,6 +173,7 @@ const DateObject2: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 }
 
 const ErrorOne: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+  e: 1,
   f: {
     infoId: {},
     message: {},
@@ -180,6 +181,7 @@ const ErrorOne: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 }
 
 const ErrorTwo: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+  e: 1,
   f: {
     infoInt: {},
     message: {},
@@ -511,6 +513,7 @@ const Query: $$Utilities.SchemaDrivenDataMap.OutputObject = {
           it: [1],
         },
       },
+      r: 1,
       // nt: Result, <-- Assigned later to avoid potential circular dependency.
     },
     resultNonNull: {
@@ -520,6 +523,7 @@ const Query: $$Utilities.SchemaDrivenDataMap.OutputObject = {
           it: [0],
         },
       },
+      r: 1,
       // nt: Result, <-- Assigned later to avoid potential circular dependency.
     },
     string: {},

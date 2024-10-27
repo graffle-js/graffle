@@ -1,7 +1,7 @@
 import type { Schema as $ } from '../../../../../../src/entrypoints/utilities-for-generated.js'
 import type * as $$Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
-import type * as Data from './Data.js'
-import type * as $Scalar from './Scalar.js'
+import * as $$Data from './data.js'
+import * as $$Scalar from './scalar.js'
 
 export namespace Schema {
   //
@@ -1543,7 +1543,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export type Date = $Scalar.Date
+  export type Date = $$Scalar.Date
 
   //
   //
@@ -1672,7 +1672,7 @@ export namespace Schema {
 export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty>
   extends $
 {
-  name: Data.Name
+  name: $$Data.Name
   operationsAvailable: ['query', 'mutation']
   RootUnion:
     | Schema.Query

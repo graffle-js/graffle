@@ -1,7 +1,7 @@
 import { assertType, test } from 'vitest'
 import type { Date } from '../../../tests/_/fixtures/scalars.js'
 import { db } from '../../../tests/_/schemas/db.js'
-import type * as SelectionSets from '../../../tests/_/schemas/kitchen-sink/graffle/modules/SelectionSets.js'
+import type * as SelectionSets from '../../../tests/_/schemas/kitchen-sink/graffle/modules/selection-sets.js'
 import type { Schema } from '../../types/Schema/__.js'
 
 type Q = SelectionSets.Query

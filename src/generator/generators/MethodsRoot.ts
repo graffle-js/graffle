@@ -3,7 +3,7 @@ import { Grafaid } from '../../lib/grafaid/__.js'
 import { capitalizeFirstLetter, entries } from '../../lib/prelude.js'
 import type { Config } from '../config/config.js'
 import { identifiers } from '../helpers/identifiers.js'
-import { createModuleGenerator } from '../helpers/moduleGenerator.js'
+import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
 import { renderDocumentation, renderName } from '../helpers/render.js'
 import { ModuleGeneratorSchema } from './Schema.js'
@@ -12,11 +12,11 @@ import { ModuleGeneratorSelectionSets } from './SelectionSets.js'
 export const ModuleGeneratorMethodsRoot = createModuleGenerator(
   `MethodsRoot`,
   ({ config, code }) => {
+    code(importModuleGenerator(config, ModuleGeneratorSelectionSets))
+    code(importModuleGenerator(config, ModuleGeneratorSchema))
     code(
       `import type * as ${identifiers.$$Utilities}  from '${config.paths.imports.grafflePackage.utilitiesForGenerated}';`,
       `import type { InferResult } from '${config.paths.imports.grafflePackage.schema}'`,
-      `import type { ${identifiers.Schema} } from './${ModuleGeneratorSchema.name}.js'`,
-      `import type * as SelectionSet from './${ModuleGeneratorSelectionSets.name}.js'`,
     )
     code()
     code()
@@ -52,12 +52,12 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
   // dprint-ignore
   code(`
     export interface ${node.name}Methods<$Context extends ${identifiers.$$Utilities}.ClientContext> {
-      $batch: <$SelectionSet>(selectionSet: ${identifiers.$$Utilities}.Exact<$SelectionSet, SelectionSet.${node.name}<$Context['scalars']>>) =>
+      $batch: <$SelectionSet>(selectionSet: ${identifiers.$$Utilities}.Exact<$SelectionSet, ${identifiers.$$SelectionSets}.${node.name}<$Context['scalars']>>) =>
         Promise<
           ${identifiers.$$Utilities}.Simplify<
             ${identifiers.$$Utilities}.HandleOutput<
               $Context,
-              InferResult.Operation${capitalizeFirstLetter(operationType)}<$SelectionSet, ${identifiers.Schema}<$Context['scalars']>>
+              InferResult.Operation${capitalizeFirstLetter(operationType)}<$SelectionSet, ${identifiers.$$Schema}.${identifiers.Schema}<$Context['scalars']>>
             >
           >
         >
@@ -88,12 +88,12 @@ const renderFieldMethods = createCodeGenerator<{ node: Grafaid.Schema.ObjectType
     const operationType = getOperationTypeOrThrow(config, node)
     // dprint-ignore
     code(`
-      ${field.name}: <$SelectionSet>(selectionSet${isOptional ? `?` : ``}: ${identifiers.$$Utilities}.Exact<$SelectionSet, SelectionSet.${renderName(node)}.${renderName(field)}<$Context['scalars']>>) =>
+      ${field.name}: <$SelectionSet>(selectionSet${isOptional ? `?` : ``}: ${identifiers.$$Utilities}.Exact<$SelectionSet, ${identifiers.$$SelectionSets}.${renderName(node)}.${renderName(field)}<$Context['scalars']>>) =>
         Promise<
           ${identifiers.$$Utilities}.Simplify<
             ${identifiers.$$Utilities}.HandleOutputGraffleRootField<
               $Context,
-              InferResult.Operation${capitalizeFirstLetter(operationType)}<{ ${field.name}: $SelectionSet}, ${identifiers.Schema}<$Context['scalars']>>,
+              InferResult.Operation${capitalizeFirstLetter(operationType)}<{ ${field.name}: $SelectionSet}, ${identifiers.$$Schema}.${identifiers.Schema}<$Context['scalars']>>,
               '${field.name}'
             >
           >

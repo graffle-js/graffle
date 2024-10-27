@@ -1,16 +1,16 @@
 import type { InferResult } from "graffle/schema";
 import type * as $$Utilities from "graffle/utilities-for-generated";
-import type { Schema } from "./Schema.js";
-import type * as SelectionSet from "./SelectionSets.js";
+import * as $$Schema from "./schema.js";
+import * as $$SelectionSets from "./selection-sets.js";
 
 export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
   $batch: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query<$Context["scalars"]>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query<$Context["scalars"]>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutput<
         $Context,
-        InferResult.OperationQuery<$SelectionSet, Schema<$Context["scalars"]>>
+        InferResult.OperationQuery<$SelectionSet, $$Schema.Schema<$Context["scalars"]>>
       >
     >
   >;
@@ -25,84 +25,84 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
   >;
 
   battles: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.battles<$Context["scalars"]>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.battles<$Context["scalars"]>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ battles: $SelectionSet }, Schema<$Context["scalars"]>>,
+        InferResult.OperationQuery<{ battles: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
         "battles"
       >
     >
   >;
 
   beings: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.beings<$Context["scalars"]>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.beings<$Context["scalars"]>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ beings: $SelectionSet }, Schema<$Context["scalars"]>>,
+        InferResult.OperationQuery<{ beings: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
         "beings"
       >
     >
   >;
 
   pokemon: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.pokemon<$Context["scalars"]>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.pokemon<$Context["scalars"]>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ pokemon: $SelectionSet }, Schema<$Context["scalars"]>>,
+        InferResult.OperationQuery<{ pokemon: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
         "pokemon"
       >
     >
   >;
 
   pokemonByName: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.pokemonByName<$Context["scalars"]>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.pokemonByName<$Context["scalars"]>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ pokemonByName: $SelectionSet }, Schema<$Context["scalars"]>>,
+        InferResult.OperationQuery<{ pokemonByName: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
         "pokemonByName"
       >
     >
   >;
 
   pokemons: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.pokemons<$Context["scalars"]>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.pokemons<$Context["scalars"]>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ pokemons: $SelectionSet }, Schema<$Context["scalars"]>>,
+        InferResult.OperationQuery<{ pokemons: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
         "pokemons"
       >
     >
   >;
 
   trainerByName: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.trainerByName<$Context["scalars"]>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.trainerByName<$Context["scalars"]>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ trainerByName: $SelectionSet }, Schema<$Context["scalars"]>>,
+        InferResult.OperationQuery<{ trainerByName: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
         "trainerByName"
       >
     >
   >;
 
   trainers: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Query.trainers<$Context["scalars"]>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.trainers<$Context["scalars"]>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ trainers: $SelectionSet }, Schema<$Context["scalars"]>>,
+        InferResult.OperationQuery<{ trainers: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
         "trainers"
       >
     >
@@ -111,12 +111,12 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
 
 export interface MutationMethods<$Context extends $$Utilities.ClientContext> {
   $batch: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Mutation<$Context["scalars"]>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation<$Context["scalars"]>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutput<
         $Context,
-        InferResult.OperationMutation<$SelectionSet, Schema<$Context["scalars"]>>
+        InferResult.OperationMutation<$SelectionSet, $$Schema.Schema<$Context["scalars"]>>
       >
     >
   >;
@@ -131,12 +131,12 @@ export interface MutationMethods<$Context extends $$Utilities.ClientContext> {
   >;
 
   addPokemon: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Mutation.addPokemon<$Context["scalars"]>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.addPokemon<$Context["scalars"]>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationMutation<{ addPokemon: $SelectionSet }, Schema<$Context["scalars"]>>,
+        InferResult.OperationMutation<{ addPokemon: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
         "addPokemon"
       >
     >

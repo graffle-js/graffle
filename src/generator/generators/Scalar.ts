@@ -16,11 +16,11 @@ export const ModuleGeneratorScalar = createModuleGenerator(
     code()
 
     if (Grafaid.Schema.KindMap.hasCustomScalars(config.schema.kindMap) && config.options.customScalars) {
-      code(`import * as ${identifiers.CustomScalars} from '${config.paths.imports.customScalarCodecs}'`)
+      code(`import * as ${identifiers.CustomScalars} from '${config.paths.imports.scalars}'`)
       code()
-      code(`export * from '${config.paths.imports.customScalarCodecs}'`)
+      code(`export * from '${config.paths.imports.scalars}'`)
       const names = config.schema.kindMap.list.ScalarCustom.map((scalar) => scalar.name).join(`, `)
-      code(`export { ${names} } from '${config.paths.imports.customScalarCodecs}'`)
+      code(`export { ${names} } from '${config.paths.imports.scalars}'`)
       for (const scalar of config.schema.kindMap.list.ScalarCustom) {
         code(typeTitle2(`custom scalar type`)(scalar))
         code()

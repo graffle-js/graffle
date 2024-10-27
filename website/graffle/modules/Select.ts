@@ -1,8 +1,8 @@
 import type { InferResult } from "graffle/schema";
 import type { OperationTypeNode } from "graphql";
-import * as Data from "./Data.js";
-import type { Schema } from "./Schema.js";
-import type * as SelectionSets from "./SelectionSets.js";
+import * as $$Data from "./data.js";
+import * as $$Schema from "./schema.js";
+import * as $$SelectionSets from "./selection-sets.js";
 
 //
 //
@@ -20,7 +20,7 @@ import type * as SelectionSets from "./SelectionSets.js";
 //
 //
 import { createSelect } from "graffle/client";
-export const Select = createSelect(Data.Name);
+export const Select = createSelect($$Data.Name);
 
 //
 //
@@ -42,38 +42,38 @@ export namespace Select {
   //                                                Root
   // --------------------------------------------------------------------------------------------------
   //
-  export type Query<$SelectionSet extends SelectionSets.Query> = InferResult.Operation<
+  export type Query<$SelectionSet extends $$SelectionSets.Query> = InferResult.Operation<
     $SelectionSet,
-    Schema,
+    $$Schema.Schema,
     OperationTypeNode.QUERY
   >;
   //                                            OutputObject
   // --------------------------------------------------------------------------------------------------
   //
-  export type Continent<$SelectionSet extends SelectionSets.Continent> = InferResult.OutputObject<
+  export type Continent<$SelectionSet extends $$SelectionSets.Continent> = InferResult.OutputObject<
     $SelectionSet,
-    Schema,
-    Schema["allTypes"]["Continent"]
+    $$Schema.Schema,
+    $$Schema.Schema["allTypes"]["Continent"]
   >;
-  export type Country<$SelectionSet extends SelectionSets.Country> = InferResult.OutputObject<
+  export type Country<$SelectionSet extends $$SelectionSets.Country> = InferResult.OutputObject<
     $SelectionSet,
-    Schema,
-    Schema["allTypes"]["Country"]
+    $$Schema.Schema,
+    $$Schema.Schema["allTypes"]["Country"]
   >;
-  export type Language<$SelectionSet extends SelectionSets.Language> = InferResult.OutputObject<
+  export type Language<$SelectionSet extends $$SelectionSets.Language> = InferResult.OutputObject<
     $SelectionSet,
-    Schema,
-    Schema["allTypes"]["Language"]
+    $$Schema.Schema,
+    $$Schema.Schema["allTypes"]["Language"]
   >;
-  export type State<$SelectionSet extends SelectionSets.State> = InferResult.OutputObject<
+  export type State<$SelectionSet extends $$SelectionSets.State> = InferResult.OutputObject<
     $SelectionSet,
-    Schema,
-    Schema["allTypes"]["State"]
+    $$Schema.Schema,
+    $$Schema.Schema["allTypes"]["State"]
   >;
-  export type Subdivision<$SelectionSet extends SelectionSets.Subdivision> = InferResult.OutputObject<
+  export type Subdivision<$SelectionSet extends $$SelectionSets.Subdivision> = InferResult.OutputObject<
     $SelectionSet,
-    Schema,
-    Schema["allTypes"]["Subdivision"]
+    $$Schema.Schema,
+    $$Schema.Schema["allTypes"]["Subdivision"]
   >;
   //                                               Union
   // --------------------------------------------------------------------------------------------------

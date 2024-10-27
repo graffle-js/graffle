@@ -1,5 +1,5 @@
-import type * as $Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
-import * as CustomScalars from './Scalar.js'
+import type * as $$Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
+import * as $$Scalar from './scalar.js'
 //
 //
 //
@@ -7,25 +7,7 @@ import * as CustomScalars from './Scalar.js'
 //
 //
 // ==================================================================================================
-//                                          GraphQLEnumType
-// ==================================================================================================
-//
-//
-//
-//
-//
-//
-
-// None of your GraphQLEnumTypes have custom scalars.
-
-//
-//
-//
-//
-//
-//
-// ==================================================================================================
-//                                       GraphQLInputObjectType
+//                                           ScalarStandard
 // ==================================================================================================
 //
 //
@@ -34,7 +16,15 @@ import * as CustomScalars from './Scalar.js'
 //
 //
 
-// None of your GraphQLInputObjectTypes have custom scalars.
+const Boolean = $$Scalar.Boolean
+
+const Float = $$Scalar.Float
+
+const ID = $$Scalar.ID
+
+const Int = $$Scalar.Int
+
+const String = $$Scalar.String
 
 //
 //
@@ -43,7 +33,7 @@ import * as CustomScalars from './Scalar.js'
 //
 //
 // ==================================================================================================
-//                                         GraphQLObjectType
+//                                            ScalarCustom
 // ==================================================================================================
 //
 //
@@ -52,7 +42,7 @@ import * as CustomScalars from './Scalar.js'
 //
 //
 
-// None of your GraphQLObjectTypes have custom scalars.
+// None of your ScalarCustoms have custom scalars.
 
 //
 //
@@ -61,7 +51,7 @@ import * as CustomScalars from './Scalar.js'
 //
 //
 // ==================================================================================================
-//                                        GraphQLInterfaceType
+//                                                Enum
 // ==================================================================================================
 //
 //
@@ -70,7 +60,7 @@ import * as CustomScalars from './Scalar.js'
 //
 //
 
-// None of your GraphQLInterfaceTypes have custom scalars.
+// None of your Enums have custom scalars.
 
 //
 //
@@ -79,7 +69,7 @@ import * as CustomScalars from './Scalar.js'
 //
 //
 // ==================================================================================================
-//                                          GraphQLUnionType
+//                                            InputObject
 // ==================================================================================================
 //
 //
@@ -88,7 +78,7 @@ import * as CustomScalars from './Scalar.js'
 //
 //
 
-// None of your GraphQLUnionTypes have custom scalars.
+// None of your InputObjects have custom scalars.
 
 //
 //
@@ -97,7 +87,7 @@ import * as CustomScalars from './Scalar.js'
 //
 //
 // ==================================================================================================
-//                                          GraphQLRootType
+//                                            OutputObject
 // ==================================================================================================
 //
 //
@@ -106,7 +96,61 @@ import * as CustomScalars from './Scalar.js'
 //
 //
 
-const Query: $Utilities.SchemaDrivenDataMap.OutputObject = {
+// None of your OutputObjects have custom scalars.
+
+//
+//
+//
+//
+//
+//
+// ==================================================================================================
+//                                             Interface
+// ==================================================================================================
+//
+//
+//
+//
+//
+//
+
+// None of your Interfaces have custom scalars.
+
+//
+//
+//
+//
+//
+//
+// ==================================================================================================
+//                                               Union
+// ==================================================================================================
+//
+//
+//
+//
+//
+//
+
+// None of your Unions have custom scalars.
+
+//
+//
+//
+//
+//
+//
+// ==================================================================================================
+//                                                Root
+// ==================================================================================================
+//
+//
+//
+//
+//
+//
+
+const Query: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     id: {},
     idNonNull: {},
@@ -148,6 +192,19 @@ const Query: $Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 
-export const $index = {
-  Query,
+const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
+  operations: {
+    query: Query,
+  },
+  directives: {},
+  types: {
+    Boolean,
+    Float,
+    ID,
+    Int,
+    String,
+    Query,
+  },
 }
+
+export { $schemaDrivenDataMap as schemaDrivenDataMap }

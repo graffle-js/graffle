@@ -13,6 +13,7 @@ import { ModuleGeneratorSchema } from '../generators/Schema.js'
 import { ModuleGeneratorSchemaDrivenDataMap } from '../generators/SchemaDrivenDataMap.js'
 import { ModuleGeneratorSelect } from '../generators/Select.js'
 import { ModuleGeneratorSelectionSets } from '../generators/SelectionSets.js'
+import { getFileName, isExportsModule } from '../helpers/moduleGenerator.js'
 
 const moduleGenerators = [
   ModuleGeneratorGlobal,
@@ -55,9 +56,8 @@ export const generate = async (input: Input) => {
 
   await Promise.all(
     generatedModules.map((generatedModule) => {
-      const isExportsModule = generatedModule.name.match(/^_+$/) !== null
       // dprint-ignore
-      const filePath = `${config.paths.project.outputs.root}/${isExportsModule ? `` : `modules/`}${generatedModule.name}.ts`
+      const filePath = `${config.paths.project.outputs.root}/${isExportsModule(generatedModule.name) ? `` : `modules/`}${getFileName(config, generatedModule)}`
       return config.fs.writeFile(filePath, generatedModule.content)
     }),
   )

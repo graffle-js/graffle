@@ -1,9 +1,14 @@
 export const identifiers = {
-  Schema: `Schema`,
-  $Schema: `$Schema`,
+  $$Schema: `$$Schema`,
+  $$Scalar: `$$Scalar`,
+  $$SelectionSets: `$$SelectionSets`,
+  $$MethodsSelect: `$$MethodsSelect`,
+  $$MethodsDocument: `$$MethodsDocument`,
+  $$MethodsRoot: `$$MethodsRoot`,
+  $$Data: `$$Data`,
+  $$SchemaDrivenDataMap: `$$SchemaDrivenDataMap`,
   $$Utilities: `$$Utilities`,
-  MethodsRoot: `MethodsRoot`,
-  $Scalar: `$Scalar`,
+  Schema: `Schema`,
   CustomScalars: `CustomScalars`,
   StandardScalar: `StandardScalar`,
 }

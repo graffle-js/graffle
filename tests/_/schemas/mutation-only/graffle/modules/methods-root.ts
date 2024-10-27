@@ -1,16 +1,16 @@
 import type { InferResult } from '../../../../../../src/entrypoints/schema.js'
 import type * as $$Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
-import type { Schema } from './Schema.js'
-import type * as SelectionSet from './SelectionSets.js'
+import * as $$Schema from './schema.js'
+import * as $$SelectionSets from './selection-sets.js'
 
 export interface MutationMethods<$Context extends $$Utilities.ClientContext> {
   $batch: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, SelectionSet.Mutation<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutput<
         $Context,
-        InferResult.OperationMutation<$SelectionSet, Schema<$Context['scalars']>>
+        InferResult.OperationMutation<$SelectionSet, $$Schema.Schema<$Context['scalars']>>
       >
     >
   >
@@ -25,24 +25,24 @@ export interface MutationMethods<$Context extends $$Utilities.ClientContext> {
   >
 
   id: <$SelectionSet>(
-    selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Mutation.id<$Context['scalars']>>,
+    selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.id<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationMutation<{ id: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationMutation<{ id: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'id'
       >
     >
   >
 
   idNonNull: <$SelectionSet>(
-    selectionSet?: $$Utilities.Exact<$SelectionSet, SelectionSet.Mutation.idNonNull<$Context['scalars']>>,
+    selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.idNonNull<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationMutation<{ idNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationMutation<{ idNonNull: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'idNonNull'
       >
     >

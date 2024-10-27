@@ -1,3 +1,5 @@
+import { camelCase, kebabCase, pascalCase, snakeCase } from 'es-toolkit'
+import type { Config } from '../config/config.js'
 import {
   createCodeGenerator,
   type ModuleGeneratorRunner,
@@ -41,3 +43,32 @@ export const createModuleGenerator: FactoryModuleGenerator = (name, runnerImplem
     generate,
   }
 }
+
+export const importModuleGenerator = (config: Config, generator: ModuleGenerator) => {
+  return `import * as $$${pascalCase(generator.name)} from './${getImportName(config, generator)}'`
+}
+
+export const getBaseName = (config: Config, generator: ModuleGenerator | GeneratedModule) => {
+  return isExportsModule(generator.name)
+    ? generator.name
+    : caseFormatters[config.outputCase](generator.name)
+}
+
+export const getFileName = (config: Config, generator: ModuleGenerator | GeneratedModule) => {
+  const name = getBaseName(config, generator)
+  return `${name}.ts`
+}
+
+export const getImportName = (config: Config, generator: ModuleGenerator | GeneratedModule) => {
+  const name = getBaseName(config, generator)
+  return `${name}.js`
+}
+
+export const caseFormatters = {
+  pascal: pascalCase,
+  camel: camelCase,
+  kebab: kebabCase,
+  snake: snakeCase,
+}
+
+export const isExportsModule = (name: string) => name.match(/^_+$/) !== null

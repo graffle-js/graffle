@@ -214,13 +214,13 @@ export namespace Code {
 
   interface InterfaceDefinitionInput extends TypeDefinitionInput {
     extends?: ExtendsClauseInput
-    fields?: FieldsInput
+    block?: FieldsInput
   }
 
   type FieldsInput = string | TermObject | (readonly [name: string, field: string | DirectiveField])[]
 
   export const tsInterface = (
-    { name, parameters, extends: extends_, fields, tsDoc, export: export_ }: InterfaceDefinitionInput,
+    { name, parameters, extends: extends_, block, tsDoc, export: export_ }: InterfaceDefinitionInput,
   ) => {
     const tsDoc_ = tsDoc ? TSDoc(tsDoc) + `\n` : ``
     const export__ = export_ === false ? `` : `export `
@@ -230,12 +230,12 @@ export namespace Code {
     const extends___ = extends__.length > 0
       ? ` extends ${extends__.join(`, `)}`
       : ``
-    const block = typeof fields === `string`
-      ? `{${fields}}`
-      : Array.isArray(fields)
-      ? termObject(Object.fromEntries(fields))
-      : termObject(fields ?? {})
-    return `${tsDoc_} ${export__} interface ${name_} ${typeParametersClause} ${extends___} ${block}`
+    const block_ = typeof block === `string`
+      ? `{${block}}`
+      : Array.isArray(block)
+      ? termObject(Object.fromEntries(block))
+      : termObject(block ?? {})
+    return `${tsDoc_} ${export__} interface ${name_} ${typeParametersClause} ${extends___} ${block_}`
   }
 
   export const esmExport = (thing: string) => {

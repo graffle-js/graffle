@@ -1,16 +1,18 @@
-import { createModuleGenerator } from '../helpers/moduleGenerator.js'
+import { identifiers } from '../helpers/identifiers.js'
+import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { ModuleGeneratorData } from './Data.js'
 import { ModuleGeneratorSchemaDrivenDataMap } from './SchemaDrivenDataMap.js'
 
 export const ModuleGeneratorClient = createModuleGenerator(
   `Client`,
   ({ config, code }) => {
+    code(importModuleGenerator(config, ModuleGeneratorSchemaDrivenDataMap))
+    code(importModuleGenerator(config, ModuleGeneratorData))
     code(
       `import { createPrefilled } from '${config.paths.imports.grafflePackage.client}'`,
-      `import { defaultSchemaUrl } from './${ModuleGeneratorData.name}.js'`,
-      `import { schemaDrivenDataMap } from './${ModuleGeneratorSchemaDrivenDataMap.name}.js'`,
-      `import { Name } from './${ModuleGeneratorData.name}.js'`,
     )
-    code(`export const create = createPrefilled(Name, schemaDrivenDataMap, defaultSchemaUrl)`)
+    code(
+      `export const create = createPrefilled(${identifiers.$$Data}.Name, ${identifiers.$$SchemaDrivenDataMap}.schemaDrivenDataMap, ${identifiers.$$Data}.defaultSchemaUrl)`,
+    )
   },
 )

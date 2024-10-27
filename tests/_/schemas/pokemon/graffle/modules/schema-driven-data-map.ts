@@ -1,5 +1,5 @@
 import type * as $$Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
-import * as $Scalar from './Scalar.js'
+import * as $$Scalar from './scalar.js'
 //
 //
 //
@@ -16,15 +16,15 @@ import * as $Scalar from './Scalar.js'
 //
 //
 
-const Boolean = $Scalar.Boolean
+const Boolean = $$Scalar.Boolean
 
-const Float = $Scalar.Float
+const Float = $$Scalar.Float
 
-const ID = $Scalar.ID
+const ID = $$Scalar.ID
 
-const Int = $Scalar.Int
+const Int = $$Scalar.Int
 
-const String = $Scalar.String
+const String = $$Scalar.String
 
 //
 //

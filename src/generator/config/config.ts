@@ -8,13 +8,14 @@ import { Grafaid } from '../../lib/grafaid/__.js'
 import { isString } from '../../lib/prelude.js'
 import { type Formatter, getTypeScriptFormatter, passthroughFormatter } from '../../lib/typescript-formatter.js'
 import type { Extension } from '../extension/types.js'
-import { defaultLibraryPaths } from './defaults.js'
+import { defaultLibraryPaths, defaultOutputCase } from './defaults.js'
 import { defaultName } from './defaults.js'
-import type { Input, InputLibraryPaths, InputLint } from './input.js'
+import type { Input, InputLibraryPaths, InputLint, InputOutputCase } from './input.js'
 
 export interface Config {
   fs: Fs
   name: string
+  outputCase: InputOutputCase
   lint: Required<InputLint>
   schema: ConfigSchema
   runtimeFeatures: {
@@ -40,7 +41,7 @@ export interface Config {
       inputs: {
         root: string
         schema: null | string
-        customScalarCodecs: string
+        scalars: string
       }
       outputs: {
         sdl: null | string
@@ -49,7 +50,7 @@ export interface Config {
       }
     }
     imports: {
-      customScalarCodecs: string
+      scalars: string
       grafflePackage: Required<InputLibraryPaths>
     }
   }
@@ -64,6 +65,10 @@ interface ConfigSchema {
 }
 
 export const createConfig = async (input: Input): Promise<Config> => {
+  // --- Output Case ---
+
+  const outputCase = input.outputCase ?? defaultOutputCase
+
   // --- Paths ---
 
   const cwd = input.currentWorkingDirectory ?? process.cwd()
@@ -76,21 +81,21 @@ export const createConfig = async (input: Input): Promise<Config> => {
 
   const outputDirPathModules = Path.join(outputDirPathRoot, `/modules`)
 
-  const inputPathCustomScalarCodecs = input.customScalarCodecs
-    ? toAbsolutePath(cwd, input.customScalarCodecs)
-    : Path.join(sourceDirPath, `customScalarCodecs.ts`)
+  const inputPathScalars = input.scalars
+    ? toAbsolutePath(cwd, input.scalars)
+    : Path.join(sourceDirPath, `scalars` + `.ts`)
 
-  const isCustomScalarsModuleExists = await fileExists(inputPathCustomScalarCodecs)
-  if (!isCustomScalarsModuleExists && input.customScalarCodecs) {
+  const isCustomScalarsModuleExists = await fileExists(inputPathScalars)
+  if (!isCustomScalarsModuleExists && input.scalars) {
     // dprint-ignore
     throw new Error(
-      `Custom scalar codecs file not found. Given path: ${String(input.customScalarCodecs)}. Resolved to and looked at: ${inputPathCustomScalarCodecs}`,
+      `Custom scalar codecs file not found. Given path: ${String(input.scalars)}. Resolved to and looked at: ${inputPathScalars}`,
     )
   }
 
-  const customScalarsImportPath = Path.relative(
+  const scalarsImportPath = Path.relative(
     outputDirPathModules,
-    inputPathCustomScalarCodecs.replace(/\.ts$/, `.js`),
+    inputPathScalars.replace(/\.ts$/, `.js`),
   )
 
   // --- Schema ---
@@ -167,7 +172,9 @@ To suppress this warning disable formatting in one of the following ways:
       : null
 
   // --- Fs ---
+
   const fs = input.fs ?? await import(`node:fs/promises`)
+
   // --- Config ---
 
   // const customScalarsEnabled = input.customScalars ?? false
@@ -175,6 +182,7 @@ To suppress this warning disable formatting in one of the following ways:
   return {
     fs,
     extensions: input.extensions ?? [],
+    outputCase,
     lint,
     formatter,
     runtimeFeatures: {
@@ -202,11 +210,11 @@ To suppress this warning disable formatting in one of the following ways:
         inputs: {
           root: sourceDirPath,
           schema: schema.sdlFilePath,
-          customScalarCodecs: inputPathCustomScalarCodecs,
+          scalars: inputPathScalars,
         },
       },
       imports: {
-        customScalarCodecs: customScalarsImportPath,
+        scalars: scalarsImportPath,
         grafflePackage: ConfigManager.mergeDefaults(
           defaultLibraryPaths,
           libraryPaths,

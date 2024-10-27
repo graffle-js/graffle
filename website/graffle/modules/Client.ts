@@ -1,5 +1,4 @@
 import { createPrefilled } from "graffle/client";
-import { defaultSchemaUrl } from "./Data.js";
-import { Name } from "./Data.js";
-import { schemaDrivenDataMap } from "./SchemaDrivenDataMap.js";
-export const create = createPrefilled(Name, schemaDrivenDataMap, defaultSchemaUrl);
+import * as $$Data from "./data.js";
+import * as $$SchemaDrivenDataMap from "./schema-driven-data-map.js";
+export const create = createPrefilled($$Data.Name, $$SchemaDrivenDataMap.schemaDrivenDataMap, $$Data.defaultSchemaUrl);

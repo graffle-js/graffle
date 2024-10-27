@@ -1,21 +1,5 @@
-import * as CustomScalars from './Scalar.js'
-//
-//
-//
-//
-//
-//
-// ==================================================================================================
-//                                       GraphQLInputObjectType
-// ==================================================================================================
-//
-//
-//
-//
-//
-//
-
-// None of your GraphQLInputObjectTypes have custom scalars.
+import type * as $$Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
+import * as $$SelectionSets from './selection-sets.js'
 
 //
 //
@@ -24,7 +8,7 @@ import * as CustomScalars from './Scalar.js'
 //
 //
 // ==================================================================================================
-//                                         GraphQLObjectType
+//                                      Select Methods Interface
 // ==================================================================================================
 //
 //
@@ -33,7 +17,9 @@ import * as CustomScalars from './Scalar.js'
 //
 //
 
-// None of your GraphQLObjectTypes have custom scalars.
+export interface $MethodsSelect {
+  Mutation: Mutation
+}
 
 //
 //
@@ -42,7 +28,7 @@ import * as CustomScalars from './Scalar.js'
 //
 //
 // ==================================================================================================
-//                                        GraphQLInterfaceType
+//                                                Root
 // ==================================================================================================
 //
 //
@@ -51,7 +37,9 @@ import * as CustomScalars from './Scalar.js'
 //
 //
 
-// None of your GraphQLInterfaceTypes have custom scalars.
+export interface Mutation {
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation>): $SelectionSet
+}
 
 //
 //
@@ -60,7 +48,7 @@ import * as CustomScalars from './Scalar.js'
 //
 //
 // ==================================================================================================
-//                                          GraphQLUnionType
+//                                            OutputObject
 // ==================================================================================================
 //
 //
@@ -69,8 +57,6 @@ import * as CustomScalars from './Scalar.js'
 //
 //
 
-// None of your GraphQLUnionTypes have custom scalars.
-
 //
 //
 //
@@ -78,7 +64,7 @@ import * as CustomScalars from './Scalar.js'
 //
 //
 // ==================================================================================================
-//                                          GraphQLRootType
+//                                               Union
 // ==================================================================================================
 //
 //
@@ -87,8 +73,6 @@ import * as CustomScalars from './Scalar.js'
 //
 //
 
-// None of your GraphQLRootTypes have custom scalars.
-
 //
 //
 //
@@ -96,7 +80,7 @@ import * as CustomScalars from './Scalar.js'
 //
 //
 // ==================================================================================================
-//                                               Index
+//                                             Interface
 // ==================================================================================================
 //
 //
@@ -104,5 +88,3 @@ import * as CustomScalars from './Scalar.js'
 //
 //
 //
-
-export const $index = {}

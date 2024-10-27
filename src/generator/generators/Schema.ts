@@ -3,7 +3,7 @@ import { Grafaid } from '../../lib/grafaid/__.js'
 import { entries, isObjectEmpty, values } from '../../lib/prelude.js'
 import { Tex } from '../../lib/tex/__.js'
 import { identifiers } from '../helpers/identifiers.js'
-import { createModuleGenerator } from '../helpers/moduleGenerator.js'
+import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { type CodeGenerator, createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
 import { getTsDocContents, renderInlineType, renderName } from '../helpers/render.js'
 import type { KindRenderers } from '../helpers/types.js'
@@ -18,10 +18,10 @@ export const ModuleGeneratorSchema = createModuleGenerator(
 
     // todo methods root is unused
     code(`
-      import type * as Data from './${ModuleGeneratorData.name}.js'
+      ${importModuleGenerator(config, ModuleGeneratorData)}
+      ${importModuleGenerator(config, ModuleGeneratorScalar)}
       import type { Schema as $ } from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
       import type * as ${identifiers.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
-      import type * as $Scalar from './${ModuleGeneratorScalar.name}.js'
     `)
     code()
 
@@ -85,7 +85,7 @@ const OutputObject = createCodeGenerator<{ type: Grafaid.Schema.ObjectType }>(({
     tsDoc: getTsDocContents(config, type),
     name: type.name,
     extends: `$.OutputObject`,
-    fields: {
+    block: {
       name: Code.string(type.name),
       fields: interfaceFields,
     },
@@ -98,7 +98,7 @@ const OutputObject = createCodeGenerator<{ type: Grafaid.Schema.ObjectType }>(({
       export: true,
       name: `__typename`,
       extends: `$.OutputField`,
-      fields: {
+      block: {
         name: Code.string(`__typename`),
         arguments: {},
         inlineType: `[1]`,
@@ -116,7 +116,7 @@ const OutputObject = createCodeGenerator<{ type: Grafaid.Schema.ObjectType }>(({
             export: true,
             name: field.name,
             extends: `$.OutputField`,
-            fields: {
+            block: {
               name: Code.string(field.name),
               arguments: Object.fromEntries(field.args.map(arg => {
                 return [
@@ -150,7 +150,7 @@ const Enum = createCodeGenerator<{ type: Grafaid.Schema.EnumType }>(({ config, c
       export: true,
       name: type.name,
       extends: `$.Enum`,
-      fields: {
+      block: {
         name: Code.string(type.name),
         members: Code.tsTuple(type.getValues().map((_) => Code.string(_.name))),
         membersUnion: Code.tsUnionItems(type.getValues().map((_) => Code.string(_.name))),
@@ -165,7 +165,7 @@ const InputObject = createCodeGenerator<{ type: Grafaid.Schema.InputObjectType }
       tsDoc: getTsDocContents(config, type),
       name: type.name,
       extends: `$.InputObject`,
-      fields: {
+      block: {
         name: Code.string(type.name),
         isAllFieldsNullable: Code.boolean(Grafaid.Schema.isAllInputObjectFieldsNullable(type)),
         fields: Object.fromEntries(
@@ -186,7 +186,7 @@ const InputObject = createCodeGenerator<{ type: Grafaid.Schema.InputObjectType }
           tsDoc: getTsDocContents(config, field),
           name: field.name,
           extends: `$.InputField`,
-          fields: {
+          block: {
             name: Code.string(field.name),
             inlineType: renderInlineType(field.type),
             namedType: namedTypesTypeReference(namedType),
@@ -204,7 +204,7 @@ const ScalarStandard = createCodeGenerator<{ type: Grafaid.Schema.ScalarType }>(
 })
 
 const ScalarCustom = createCodeGenerator<{ type: Grafaid.Schema.ScalarType }>(({ code, type }) => {
-  code(Code.esmExport(Code.tsType(type.name, `$Scalar.${type.name}`)))
+  code(Code.esmExport(Code.tsType(type.name, `$$Scalar.${type.name}`)))
   code()
 })
 
@@ -215,7 +215,7 @@ const Union = createCodeGenerator<{ type: Grafaid.Schema.UnionType }>(({ config,
     export: true,
     name: type.name,
     extends: `$.Union`,
-    fields: {
+    block: {
       name: Code.string(type.name),
       members: Code.tsTuple(memberNames),
       membersUnion: Code.tsUnionItems(memberNames),
@@ -232,7 +232,7 @@ const Interface = createCodeGenerator<{ type: Grafaid.Schema.InterfaceType }>(({
     tsDoc: getTsDocContents(config, type),
     name: type.name,
     extends: `$.Interface`,
-    fields: {
+    block: {
       name: Code.string(type.name),
       implementors: Code.tsTuple(implementorNames),
       implementorsUnion: Code.tsUnionItems(implementorNames),
@@ -269,7 +269,7 @@ export const SchemaGenerator = createCodeGenerator(
     const enums = kindMap.list.Enum.map(_ => [_.name, `${identifiers.Schema}.${_.name}`])
     const operationsAvailable = entries(kindMap.index.Root).filter(_ => _[1] !== null).map(_ => _[0])
     const schema: Code.TermObject = {
-      name: `Data.Name`,
+      name: `$$Data.Name`,
       operationsAvailable: Code.tsTuple(operationsAvailable.map(_ => Code.string(_))),
       RootUnion: Code.tsUnionItems(kindMap.list.Root.map(_ => `${identifiers.Schema}.${_.name}`)),
       Root: {
@@ -319,7 +319,7 @@ export const SchemaGenerator = createCodeGenerator(
         parameters:
           `$Scalars extends ${identifiers.$$Utilities}.Schema.Scalar.Registry = ${identifiers.$$Utilities}.Schema.Scalar.Registry.Empty`,
         extends: `$`,
-        fields: schema,
+        block: schema,
       }),
     )
   },

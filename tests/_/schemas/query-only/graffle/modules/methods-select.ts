@@ -1,5 +1,5 @@
-import type * as $Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
-import type * as $SelectionSets from './SelectionSets.js'
+import type * as $$Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
+import * as $$SelectionSets from './selection-sets.js'
 
 //
 //
@@ -38,7 +38,7 @@ export interface $MethodsSelect {
 //
 
 export interface Query {
-  <$SelectionSet>(selectionSet: $Utilities.Exact<$SelectionSet, $SelectionSets.Query>): $SelectionSet
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query>): $SelectionSet
 }
 
 //

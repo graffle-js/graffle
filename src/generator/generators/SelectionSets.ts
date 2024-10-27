@@ -47,7 +47,7 @@ export const ModuleGeneratorSelectionSets = createModuleGenerator(
       name: `$Document`,
       parameters: $ScalarsTypeParameter,
       // dprint-ignore
-      fields: `
+      block: `
         ${config.schema.kindMap.index.Root.query ? `query?: Record<string, Query<${i._$Scalars}>>` : ``}
         ${config.schema.kindMap.index.Root.mutation ? `mutation?: Record<string, Mutation<${i._$Scalars}>>` : ``}
       `,
@@ -104,7 +104,7 @@ const Union = createCodeGenerator<{ type: Grafaid.Schema.UnionType }>(
       tsDoc: getTsDocContents(config, type),
       name: type.name,
       parameters: $ScalarsTypeParameter,
-      fields: `
+      block: `
         ${H.__typenameField(`union`)}
         ${fragmentsInlineType}
         ${H.fragmentInlineField(type)}
@@ -132,7 +132,7 @@ const InputObject = createCodeGenerator<{ type: Grafaid.Schema.InputObjectType }
       tsDoc: getTsDocContents(config, type),
       name: type.name,
       parameters: $ScalarsTypeParameter,
-      fields: values(type.getFields()).map(field => getInputFieldLike(config, field)),
+      block: values(type.getFields()).map(field => getInputFieldLike(config, field)),
     }))
   },
 )
@@ -155,7 +155,7 @@ const Interface = createCodeGenerator<{ type: Grafaid.Schema.InterfaceType }>(
       name: type.name,
       parameters: $ScalarsTypeParameter,
       extends: [`$Select.Bases.ObjectLike`],
-      fields: `
+      block: `
         ${fieldsRendered}
         ${onTypesRendered}
         ${H.fragmentInlineField(type)}
@@ -207,7 +207,7 @@ const OutputObject = createCodeGenerator<{ type: Grafaid.Schema.ObjectType }>(
       name: type.name,
       parameters: $ScalarsTypeParameter,
       extends: [extendsClause],
-      fields: `
+      block: `
         ${fieldKeys}
         ${H.fragmentInlineField(type)}
         ${H.__typenameField(`object`)}
@@ -276,7 +276,7 @@ const renderOutputField = createCodeGenerator<{ field: Grafaid.Schema.Field<any,
       name: selectionSetName,
       parameters: $ScalarsTypeParameter,
       extends: [`$Select.Bases.Base`, objectLikeTypeReference],
-      fields: propertyArguments,
+      block: propertyArguments,
     }))
     code()
 
@@ -284,7 +284,7 @@ const renderOutputField = createCodeGenerator<{ field: Grafaid.Schema.Field<any,
       code(Code.tsInterface({
         name: argumentsName,
         parameters: $ScalarsTypeParameter,
-        fields: field.args.map(arg => getInputFieldLike(config, arg)),
+        block: field.args.map(arg => getInputFieldLike(config, arg)),
       }))
       code()
     }
@@ -456,7 +456,7 @@ namespace H {
       name: `${renderName(node)}${fragmentInlineNameSuffix}`,
       parameters: $ScalarsTypeParameter,
       extends: [forwardTypeParameter$Scalars(node), `$Select.Directive.$Groups.InlineFragment.Fields`],
-      fields: {},
+      block: {},
     })
   }
 

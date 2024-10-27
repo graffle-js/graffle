@@ -1,7 +1,7 @@
 import type { Schema as $ } from "graffle/utilities-for-generated";
 import type * as $$Utilities from "graffle/utilities-for-generated";
-import type * as Data from "./Data.js";
-import type * as $Scalar from "./Scalar.js";
+import * as $$Data from "./data.js";
+import * as $$Scalar from "./scalar.js";
 
 export namespace Schema {
   //
@@ -812,7 +812,7 @@ export namespace Schema {
 export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty>
   extends $
 {
-  name: Data.Name;
+  name: $$Data.Name;
   operationsAvailable: ["query"];
   RootUnion: Schema.Query;
   Root: {
