@@ -1,4 +1,3 @@
-import fs from 'node:fs/promises'
 import * as Path from 'node:path'
 import { Graffle } from '../../entrypoints/__Graffle.js'
 import { Introspection } from '../../extensions/Introspection/Introspection.js'
@@ -65,6 +64,10 @@ interface ConfigSchema {
 }
 
 export const createConfig = async (input: Input): Promise<Config> => {
+  // --- Fs ---
+
+  const fs = input.fs ?? await import(`node:fs/promises`)
+
   // --- Output Case ---
 
   const outputCase = input.outputCase ?? defaultOutputCase
@@ -85,7 +88,7 @@ export const createConfig = async (input: Input): Promise<Config> => {
     ? toAbsolutePath(cwd, input.scalars)
     : Path.join(sourceDirPath, `scalars` + `.ts`)
 
-  const isCustomScalarsModuleExists = await fileExists(inputPathScalars)
+  const isCustomScalarsModuleExists = await fileExists(fs, inputPathScalars)
   if (!isCustomScalarsModuleExists && input.scalars) {
     // dprint-ignore
     throw new Error(
@@ -100,7 +103,7 @@ export const createConfig = async (input: Input): Promise<Config> => {
 
   // --- Schema ---
 
-  const schema = await createConfigSchema(cwd, sourceDirPath, input)
+  const schema = await createConfigSchema(fs, cwd, sourceDirPath, input)
 
   // --- Default Schema URL ---
 
@@ -119,7 +122,7 @@ export const createConfig = async (input: Input): Promise<Config> => {
   const formattingEnabled = input.format ?? true
   let formatter = passthroughFormatter
   if (formattingEnabled) {
-    const formatterReal = await getTypeScriptFormatter()
+    const formatterReal = await getTypeScriptFormatter(fs)
     if (!formatterReal) {
       // todo use floggy
       console.log(`
@@ -170,10 +173,6 @@ To suppress this warning disable formatting in one of the following ways:
         ? toFilePath(`schema.graphql`, toAbsolutePath(cwd, input.outputSDL))
         : Path.join(outputDirPathRoot, `schema.graphql`)
       : null
-
-  // --- Fs ---
-
-  const fs = input.fs ?? await import(`node:fs/promises`)
 
   // --- Config ---
 
@@ -227,6 +226,7 @@ To suppress this warning disable formatting in one of the following ways:
 const defaultSchemaFileName = `schema.graphql`
 
 const createConfigSchema = async (
+  fs: Fs,
   cwd: string,
   sourceDirPath: string,
   input: Input,
@@ -252,7 +252,7 @@ const createConfigSchema = async (
         const fileOrDirPath = input.schema.dirOrFilePath
           ? toAbsolutePath(cwd, input.schema.dirOrFilePath)
           : sourceDirPath
-        const isDir = await isPathToADirectory(fileOrDirPath)
+        const isDir = await isPathToADirectory(fs, fileOrDirPath)
         sdlFilePath = isDir ? Path.join(fileOrDirPath, defaultSchemaFileName) : fileOrDirPath
         sdl = await fs.readFile(sdlFilePath, `utf8`)
       } else {

@@ -64,10 +64,10 @@ export const create: Create = (input) => {
   return createWithState(initialState)
 }
 
-const createWithState = (
-  stateWithoutConfig: StateWithoutConfig,
+export const createWithState = (
+  initialState: StateWithoutConfig,
 ) => {
-  const state = createState(stateWithoutConfig)
+  const state = createState(initialState)
 
   // @ts-expect-error ignoreme
   const clientDirect: Client = {

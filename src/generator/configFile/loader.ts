@@ -83,6 +83,8 @@ export const load = async (
 }
 
 const processInput = async (input?: string) => {
+  const fs = await import(`node:fs/promises`)
+
   if (!input) {
     const directoryPath = process.cwd()
     const path = Path.join(directoryPath, loadDefaults.fileName)
@@ -91,7 +93,7 @@ const processInput = async (input?: string) => {
 
   const absolutePath = toAbsolutePath(process.cwd(), input)
 
-  if (await isPathToADirectory(absolutePath)) {
+  if (await isPathToADirectory(fs, absolutePath)) {
     const directoryPath = absolutePath
     const path = Path.join(directoryPath, loadDefaults.fileName)
     return extensionCandidates.map(ext => `${path}.${ext}`)

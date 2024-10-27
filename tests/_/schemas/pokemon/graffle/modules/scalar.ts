@@ -15,3 +15,23 @@ export * from '../../../../../../src/types/Schema/StandardTypes/scalar.js'
 //
 
 export type Date = $$Utilities.Schema.Scalar.ScalarCodecless<'Date'>
+
+//
+//
+//
+//
+//
+//
+// ==================================================================================================
+//                                              Registry
+// ==================================================================================================
+//
+//
+//
+//
+//
+//
+
+export const $registry = {
+  map: {},
+} as $$Utilities.Schema.Scalar.Registry

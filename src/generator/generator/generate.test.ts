@@ -42,3 +42,42 @@ test(`root-types-mapped`, async () => {
   expect(MethodsRootTs).includes(`InferResult.OperationQuery<$SelectionSet`)
   expect(MethodsRootTs).toMatchSnapshot()
 })
+
+test(`custom scalars module results in client prefilling those custom scalars`, async () => {
+  await Memfs.fs.promises.mkdir(process.cwd(), { recursive: true })
+  await Memfs.fs.promises.writeFile(
+    `./scalars.ts`,
+    `
+      import { Graffle } from 'graffle'
+      export const Date = Graffle.Scalar.create(\`Date\`, {
+        decode: (value) => new globalThis.Date(value),
+        encode: (value) => value.toISOString(),
+      })
+    `,
+  )
+  await generate({
+    fs: Memfs.fs.promises as any,
+    schema: {
+      type: `sdl`,
+      sdl: `
+        scalar Date
+        type Query {
+          date: Date
+        }
+      `,
+    },
+  })
+  const ScalarTs = Memfs.fs.readFileSync(`./graffle/modules/scalar.ts`, `utf8`)
+  expect(ScalarTs).includes(`
+export const $registry = {
+  map: {
+    Date: Date,
+  },
+} as $$Utilities.Schema.Scalar.Registry<
+  {
+    Date: Date;
+  },
+  $$Utilities.Schema.Scalar.GetEncoded<Date>,
+  $$Utilities.Schema.Scalar.GetDecoded<Date>
+>`)
+})

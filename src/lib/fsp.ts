@@ -1,12 +1,12 @@
-import * as Fs from 'node:fs/promises'
+import type * as Fs from 'node:fs/promises'
 import { extname, isAbsolute, join } from 'node:path'
 import type { JsonValue } from 'type-fest'
 import { errorFromMaybeError } from './prelude.js'
 
 export type Fs = typeof Fs
 
-export const statMaybeExists = async (path: string) => {
-  return await Fs.stat(path).catch((_: unknown) => {
+export const statMaybeExists = async (fs: Fs, path: string) => {
+  return await fs.stat(path).catch((_: unknown) => {
     const error = errorFromMaybeError(_)
     return `code` in error && typeof error.code === `string` && error.code === `ENOENT`
       ? null
@@ -14,12 +14,12 @@ export const statMaybeExists = async (path: string) => {
   })
 }
 
-export const fileExists = async (path: string) => {
-  return Boolean(await statMaybeExists(path))
+export const fileExists = async (fs: Fs, path: string) => {
+  return Boolean(await statMaybeExists(fs, path))
 }
 
-export const isPathToADirectory = async (path: string) => {
-  const stat = await Fs.stat(path)
+export const isPathToADirectory = async (fs: Fs, path: string) => {
+  const stat = await fs.stat(path)
   return stat.isDirectory()
 }
 
@@ -38,11 +38,11 @@ export const toFilePath = (fileName: string, path: string) => {
   }
 }
 
-export const readJsonFile = async <$Json extends JsonValue>(path: string): Promise<$Json | null> => {
+export const readJsonFile = async <$Json extends JsonValue>(fs: Fs, path: string): Promise<$Json | null> => {
   let content: string
 
   try {
-    content = await Fs.readFile(path, `utf8`)
+    content = await fs.readFile(path, `utf8`)
   } catch (error) {
     return null
   }

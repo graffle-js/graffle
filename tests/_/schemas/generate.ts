@@ -62,6 +62,6 @@ await generate({
 await generate({
   dirName: `kitchen-sink`,
   // input: {
-  //   // scalars: `./kitchen-sink/scalars.ts`,
+  //   scalars: `./kitchen-sink/scalars.ts`,
   // },
 })

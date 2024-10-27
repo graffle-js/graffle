@@ -1,7 +1,9 @@
 import type * as $$Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
 
-export * from '../../../../../../src/types/Schema/StandardTypes/scalar.js'
+import * as CustomScalars from '../../scalars.js'
 
+export * from '../../scalars.js'
+export { Date } from '../../scalars.js'
 //
 //
 //
@@ -14,4 +16,39 @@ export * from '../../../../../../src/types/Schema/StandardTypes/scalar.js'
 //
 //
 
-export type Date = $$Utilities.Schema.Scalar.ScalarCodecless<'Date'>
+export type Date = typeof CustomScalars.Date
+// Without this we get error:
+// "Exported type alias 'DateDecoded' has or is using private name 'Date'."
+type Date_ = typeof CustomScalars.Date
+export type DateDecoded = $$Utilities.Schema.Scalar.GetDecoded<Date_>
+export type DateEncoded = $$Utilities.Schema.Scalar.GetEncoded<Date_>
+
+export * from '../../../../../../src/types/Schema/StandardTypes/scalar.js'
+
+//
+//
+//
+//
+//
+//
+// ==================================================================================================
+//                                              Registry
+// ==================================================================================================
+//
+//
+//
+//
+//
+//
+
+export const $registry = {
+  map: {
+    Date: Date,
+  },
+} as $$Utilities.Schema.Scalar.Registry<
+  {
+    Date: Date
+  },
+  $$Utilities.Schema.Scalar.GetEncoded<Date>,
+  $$Utilities.Schema.Scalar.GetDecoded<Date>
+>

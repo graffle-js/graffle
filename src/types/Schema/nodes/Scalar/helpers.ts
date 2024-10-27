@@ -14,18 +14,14 @@ export type GetDecoded<$Scalar extends Scalar> =
     ? $Decoded
     : never
 
-export interface Registry {
-  map: ScalarMap
-  typesEncoded: any
-  typesDecoded: any
+export interface Registry<$Map extends ScalarMap = ScalarMap, $TypesEncoded = any, $TypesDecoded = any> {
+  map: $Map
+  typesEncoded: $TypesEncoded
+  typesDecoded: $TypesDecoded
 }
 
 export namespace Registry {
-  export type Empty = {
-    map: {}
-    typesEncoded: never
-    typesDecoded: never
-  }
+  export type Empty = Registry<{}, never, never>
 
   export const empty = {
     map: {},
