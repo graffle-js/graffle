@@ -17,10 +17,10 @@ export const ModuleGenerator_ = createModuleGenerator(
     `)
     code()
     code(
-      `export { Select } from './modules/${getImportName(config, ModuleGeneratorSelect)}.js'`,
-      `export { create } from './modules/${getImportName(config, ModuleGeneratorClient)}.js'`,
-      `export * as SelectionSets from './modules/${getImportName(config, ModuleGeneratorSelectionSets)}.js'`,
-      `export { schemaDrivenDataMap } from './modules/${getImportName(config, ModuleGeneratorSchemaDrivenDataMap)}.js'`,
+      `export { Select } from './modules/${getImportName(config, ModuleGeneratorSelect)}'`,
+      `export { create } from './modules/${getImportName(config, ModuleGeneratorClient)}'`,
+      `export * as SelectionSets from './modules/${getImportName(config, ModuleGeneratorSelectionSets)}'`,
+      `export { schemaDrivenDataMap } from './modules/${getImportName(config, ModuleGeneratorSchemaDrivenDataMap)}'`,
     )
 
     return code

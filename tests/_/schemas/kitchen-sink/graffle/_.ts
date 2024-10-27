@@ -4,7 +4,7 @@
 // setups where this still indeed does help.
 import './modules/global.js.js'
 
-export { create } from './modules/client.js.js'
-export { schemaDrivenDataMap } from './modules/schema-driven-data-map.js.js'
-export { Select } from './modules/select.js.js'
-export * as SelectionSets from './modules/selection-sets.js.js'
+export { create } from './modules/client.js'
+export { schemaDrivenDataMap } from './modules/schema-driven-data-map.js'
+export { Select } from './modules/select.js'
+export * as SelectionSets from './modules/selection-sets.js'
