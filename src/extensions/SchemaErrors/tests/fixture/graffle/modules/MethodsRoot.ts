@@ -10,7 +10,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutput<
         $Context,
-        InferResult.Query<$SelectionSet, Schema<$Context['scalars']>>
+        InferResult.OperationQuery<$SelectionSet, Schema<$Context['scalars']>>
       >
     >
   >
@@ -30,7 +30,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ InputObjectNested: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ InputObjectNested: $SelectionSet }, Schema<$Context['scalars']>>,
         'InputObjectNested'
       >
     >
@@ -42,7 +42,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ InputObjectNestedNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ InputObjectNestedNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
         'InputObjectNestedNonNull'
       >
     >
@@ -56,7 +56,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ abcEnum: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ abcEnum: $SelectionSet }, Schema<$Context['scalars']>>,
         'abcEnum'
       >
     >
@@ -68,7 +68,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ argInputObjectCircular: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ argInputObjectCircular: $SelectionSet }, Schema<$Context['scalars']>>,
         'argInputObjectCircular'
       >
     >
@@ -80,7 +80,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ date: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ date: $SelectionSet }, Schema<$Context['scalars']>>,
         'date'
       >
     >
@@ -92,7 +92,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ dateArg: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ dateArg: $SelectionSet }, Schema<$Context['scalars']>>,
         'dateArg'
       >
     >
@@ -104,7 +104,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ dateArgInputObject: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ dateArgInputObject: $SelectionSet }, Schema<$Context['scalars']>>,
         'dateArgInputObject'
       >
     >
@@ -116,7 +116,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ dateArgList: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ dateArgList: $SelectionSet }, Schema<$Context['scalars']>>,
         'dateArgList'
       >
     >
@@ -128,7 +128,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ dateArgNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ dateArgNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
         'dateArgNonNull'
       >
     >
@@ -140,7 +140,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ dateArgNonNullList: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ dateArgNonNullList: $SelectionSet }, Schema<$Context['scalars']>>,
         'dateArgNonNullList'
       >
     >
@@ -152,7 +152,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ dateArgNonNullListNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ dateArgNonNullListNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
         'dateArgNonNullListNonNull'
       >
     >
@@ -164,7 +164,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ dateInterface1: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ dateInterface1: $SelectionSet }, Schema<$Context['scalars']>>,
         'dateInterface1'
       >
     >
@@ -176,7 +176,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ dateList: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ dateList: $SelectionSet }, Schema<$Context['scalars']>>,
         'dateList'
       >
     >
@@ -188,7 +188,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ dateListList: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ dateListList: $SelectionSet }, Schema<$Context['scalars']>>,
         'dateListList'
       >
     >
@@ -200,7 +200,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ dateListNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ dateListNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
         'dateListNonNull'
       >
     >
@@ -212,7 +212,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ dateNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ dateNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
         'dateNonNull'
       >
     >
@@ -224,7 +224,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ dateObject1: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ dateObject1: $SelectionSet }, Schema<$Context['scalars']>>,
         'dateObject1'
       >
     >
@@ -236,7 +236,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ dateUnion: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ dateUnion: $SelectionSet }, Schema<$Context['scalars']>>,
         'dateUnion'
       >
     >
@@ -248,7 +248,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ error: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ error: $SelectionSet }, Schema<$Context['scalars']>>,
         'error'
       >
     >
@@ -260,7 +260,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ id: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ id: $SelectionSet }, Schema<$Context['scalars']>>,
         'id'
       >
     >
@@ -272,7 +272,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ idNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ idNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
         'idNonNull'
       >
     >
@@ -284,7 +284,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ interface: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ interface: $SelectionSet }, Schema<$Context['scalars']>>,
         'interface'
       >
     >
@@ -296,7 +296,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ interfaceNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ interfaceNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
         'interfaceNonNull'
       >
     >
@@ -308,7 +308,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ interfaceWithArgs: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ interfaceWithArgs: $SelectionSet }, Schema<$Context['scalars']>>,
         'interfaceWithArgs'
       >
     >
@@ -320,7 +320,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ listInt: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ listInt: $SelectionSet }, Schema<$Context['scalars']>>,
         'listInt'
       >
     >
@@ -332,7 +332,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ listIntNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ listIntNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
         'listIntNonNull'
       >
     >
@@ -344,7 +344,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ listListInt: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ listListInt: $SelectionSet }, Schema<$Context['scalars']>>,
         'listListInt'
       >
     >
@@ -356,7 +356,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ listListIntNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ listListIntNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
         'listListIntNonNull'
       >
     >
@@ -368,7 +368,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ lowerCaseUnion: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ lowerCaseUnion: $SelectionSet }, Schema<$Context['scalars']>>,
         'lowerCaseUnion'
       >
     >
@@ -380,7 +380,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ object: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ object: $SelectionSet }, Schema<$Context['scalars']>>,
         'object'
       >
     >
@@ -392,7 +392,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ objectList: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ objectList: $SelectionSet }, Schema<$Context['scalars']>>,
         'objectList'
       >
     >
@@ -404,7 +404,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ objectListNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ objectListNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
         'objectListNonNull'
       >
     >
@@ -416,7 +416,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ objectNested: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ objectNested: $SelectionSet }, Schema<$Context['scalars']>>,
         'objectNested'
       >
     >
@@ -428,7 +428,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ objectNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ objectNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
         'objectNonNull'
       >
     >
@@ -440,7 +440,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ objectWithArgs: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ objectWithArgs: $SelectionSet }, Schema<$Context['scalars']>>,
         'objectWithArgs'
       >
     >
@@ -452,7 +452,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ result: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ result: $SelectionSet }, Schema<$Context['scalars']>>,
         'result'
       >
     >
@@ -464,7 +464,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ resultNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ resultNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
         'resultNonNull'
       >
     >
@@ -476,7 +476,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ string: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ string: $SelectionSet }, Schema<$Context['scalars']>>,
         'string'
       >
     >
@@ -488,7 +488,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ stringWithArgEnum: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ stringWithArgEnum: $SelectionSet }, Schema<$Context['scalars']>>,
         'stringWithArgEnum'
       >
     >
@@ -500,7 +500,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ stringWithArgInputObject: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ stringWithArgInputObject: $SelectionSet }, Schema<$Context['scalars']>>,
         'stringWithArgInputObject'
       >
     >
@@ -515,7 +515,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ stringWithArgInputObjectRequired: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ stringWithArgInputObjectRequired: $SelectionSet }, Schema<$Context['scalars']>>,
         'stringWithArgInputObjectRequired'
       >
     >
@@ -529,7 +529,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ stringWithArgs: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ stringWithArgs: $SelectionSet }, Schema<$Context['scalars']>>,
         'stringWithArgs'
       >
     >
@@ -541,7 +541,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ stringWithListArg: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ stringWithListArg: $SelectionSet }, Schema<$Context['scalars']>>,
         'stringWithListArg'
       >
     >
@@ -553,7 +553,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ stringWithListArgRequired: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ stringWithListArgRequired: $SelectionSet }, Schema<$Context['scalars']>>,
         'stringWithListArgRequired'
       >
     >
@@ -565,7 +565,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ stringWithRequiredArg: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ stringWithRequiredArg: $SelectionSet }, Schema<$Context['scalars']>>,
         'stringWithRequiredArg'
       >
     >
@@ -577,7 +577,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ unionFooBar: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ unionFooBar: $SelectionSet }, Schema<$Context['scalars']>>,
         'unionFooBar'
       >
     >
@@ -589,7 +589,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ unionFooBarNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ unionFooBarNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
         'unionFooBarNonNull'
       >
     >
@@ -601,7 +601,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ unionFooBarWithArgs: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ unionFooBarWithArgs: $SelectionSet }, Schema<$Context['scalars']>>,
         'unionFooBarWithArgs'
       >
     >
@@ -613,7 +613,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ unionObject: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ unionObject: $SelectionSet }, Schema<$Context['scalars']>>,
         'unionObject'
       >
     >
@@ -625,7 +625,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ unionObjectNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ unionObjectNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
         'unionObjectNonNull'
       >
     >
@@ -639,7 +639,7 @@ export interface MutationMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutput<
         $Context,
-        InferResult.Mutation<$SelectionSet, Schema<$Context['scalars']>>
+        InferResult.OperationMutation<$SelectionSet, Schema<$Context['scalars']>>
       >
     >
   >
@@ -659,7 +659,7 @@ export interface MutationMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Mutation<{ id: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationMutation<{ id: $SelectionSet }, Schema<$Context['scalars']>>,
         'id'
       >
     >
@@ -671,7 +671,7 @@ export interface MutationMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Mutation<{ idNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationMutation<{ idNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
         'idNonNull'
       >
     >

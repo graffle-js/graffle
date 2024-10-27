@@ -8,10 +8,11 @@ import { ModuleGeneratorSelectionSets } from './SelectionSets.js'
 export const ModuleGeneratorMethodsDocument = createModuleGenerator(
   `MethodsDocument`,
   ({ config, code }) => {
-    code(`import type * as SelectionSets from './${ModuleGeneratorSelectionSets.name}.js'`)
-    code(`import type * as Utilities from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'`)
-    code(`import type { ${identifiers.Schema} } from './${ModuleGeneratorSchema.name}.js'`)
-    code()
+    code(`
+      import type * as SelectionSets from './${ModuleGeneratorSelectionSets.name}.js'
+      import type * as Utilities from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
+      import type { ${identifiers.Schema} } from './${ModuleGeneratorSchema.name}.js'
+    `)
     code(`export interface Document<$Context extends Utilities.ClientContext> {
 			<$Document>(document: Utilities.ExactNonEmpty<$Document, SelectionSets.$Document<$Context['scalars']>>): Utilities.DocumentRunner<
 				$Context,

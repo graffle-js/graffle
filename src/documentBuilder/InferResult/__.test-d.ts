@@ -7,11 +7,11 @@ import type { Registry } from '../../types/Schema/nodes/Scalar/helpers.js'
 import type { InferResult } from './__.js'
 import type { PickSelectsPositiveIndicatorAndNotSelectAlias } from './OutputObject.js'
 
-type $<$SelectionSet extends SelectionSets.Query> = InferResult.Query<$SelectionSet, Schema>
+type $<$SelectionSet extends SelectionSets.Query> = InferResult.OperationQuery<$SelectionSet, Schema>
 
 type $Registry = Registry.AddScalar<Registry.Empty, typeof Date>
 
-type $WithDate<$SelectionSet extends SelectionSets.Query<$Registry>> = InferResult.Query<
+type $WithDate<$SelectionSet extends SelectionSets.Query<$Registry>> = InferResult.OperationQuery<
   $SelectionSet,
   Schema<$Registry>
 >

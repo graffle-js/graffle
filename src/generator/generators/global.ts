@@ -17,7 +17,6 @@ export const ModuleGeneratorGlobal = createModuleGenerator(
       `import type * as MethodsRoot from './${ModuleGeneratorMethodsRoot.name}.js'`,
       `import type { ${identifiers.Schema} } from './${ModuleGeneratorSchema.name}.js'`,
     )
-
     code()
 
     const defaultSchemaUrlTsDoc = config.options.defaultSchemaUrl

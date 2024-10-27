@@ -10,7 +10,7 @@ export interface MutationMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutput<
         $Context,
-        InferResult.Mutation<$SelectionSet, Schema<$Context['scalars']>>
+        InferResult.OperationMutation<$SelectionSet, Schema<$Context['scalars']>>
       >
     >
   >
@@ -30,7 +30,7 @@ export interface MutationMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Mutation<{ id: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationMutation<{ id: $SelectionSet }, Schema<$Context['scalars']>>,
         'id'
       >
     >
@@ -42,7 +42,7 @@ export interface MutationMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Mutation<{ idNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationMutation<{ idNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
         'idNonNull'
       >
     >

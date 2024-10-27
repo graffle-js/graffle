@@ -10,7 +10,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutput<
         $Context,
-        InferResult.Query<$SelectionSet, Schema<$Context["scalars"]>>
+        InferResult.OperationQuery<$SelectionSet, Schema<$Context["scalars"]>>
       >
     >
   >;
@@ -30,7 +30,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ continent: $SelectionSet }, Schema<$Context["scalars"]>>,
+        InferResult.OperationQuery<{ continent: $SelectionSet }, Schema<$Context["scalars"]>>,
         "continent"
       >
     >
@@ -42,7 +42,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ continents: $SelectionSet }, Schema<$Context["scalars"]>>,
+        InferResult.OperationQuery<{ continents: $SelectionSet }, Schema<$Context["scalars"]>>,
         "continents"
       >
     >
@@ -54,7 +54,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ countries: $SelectionSet }, Schema<$Context["scalars"]>>,
+        InferResult.OperationQuery<{ countries: $SelectionSet }, Schema<$Context["scalars"]>>,
         "countries"
       >
     >
@@ -66,7 +66,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ country: $SelectionSet }, Schema<$Context["scalars"]>>,
+        InferResult.OperationQuery<{ country: $SelectionSet }, Schema<$Context["scalars"]>>,
         "country"
       >
     >
@@ -78,7 +78,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ language: $SelectionSet }, Schema<$Context["scalars"]>>,
+        InferResult.OperationQuery<{ language: $SelectionSet }, Schema<$Context["scalars"]>>,
         "language"
       >
     >
@@ -90,7 +90,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ languages: $SelectionSet }, Schema<$Context["scalars"]>>,
+        InferResult.OperationQuery<{ languages: $SelectionSet }, Schema<$Context["scalars"]>>,
         "languages"
       >
     >

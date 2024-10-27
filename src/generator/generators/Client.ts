@@ -10,8 +10,7 @@ export const ModuleGeneratorClient = createModuleGenerator(
       `import { defaultSchemaUrl } from './${ModuleGeneratorData.name}.js'`,
       `import { schemaDrivenDataMap } from './${ModuleGeneratorSchemaDrivenDataMap.name}.js'`,
       `import { Name } from './${ModuleGeneratorData.name}.js'`,
-      ``,
-      `export const create = createPrefilled(Name, schemaDrivenDataMap, defaultSchemaUrl)`,
     )
+    code(`export const create = createPrefilled(Name, schemaDrivenDataMap, defaultSchemaUrl)`)
   },
 )

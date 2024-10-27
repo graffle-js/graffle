@@ -1,7 +1,6 @@
 import type * as Utilities from '../../../../../../entrypoints/utilities-for-generated.js'
 import type { Schema } from './Schema.js'
 import type * as SelectionSets from './SelectionSets.js'
-
 export interface Document<$Context extends Utilities.ClientContext> {
   <$Document>(
     document: Utilities.ExactNonEmpty<$Document, SelectionSets.$Document<$Context['scalars']>>,

@@ -1,5 +1,7 @@
 // todo remove use of Utils.Aug when schema errors not in use
 import { Grafaid } from '../../lib/grafaid/__.js'
+import { capitalizeFirstLetter, entries } from '../../lib/prelude.js'
+import type { Config } from '../config/config.js'
 import { identifiers } from '../helpers/identifiers.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 import { createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
@@ -12,19 +14,16 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
   ({ config, code }) => {
     code(
       `import type * as ${identifiers.$$Utilities}  from '${config.paths.imports.grafflePackage.utilitiesForGenerated}';`,
+      `import type { InferResult } from '${config.paths.imports.grafflePackage.schema}'`,
+      `import type { ${identifiers.Schema} } from './${ModuleGeneratorSchema.name}.js'`,
+      `import type * as SelectionSet from './${ModuleGeneratorSelectionSets.name}.js'`,
     )
-    code(`import type { InferResult } from '${config.paths.imports.grafflePackage.schema}';`)
-    code(`import type { ${identifiers.Schema} } from './${ModuleGeneratorSchema.name}.js'`)
-    code(`import type * as SelectionSet from './${ModuleGeneratorSelectionSets.name}.js'`)
     code()
-
     code()
-
     config.schema.kindMap.list.Root.forEach(node => {
       code(renderRootType({ config, node }))
       code()
     })
-
     code(`
       export interface BuilderMethodsRoot<$Context extends ${identifiers.$$Utilities}.ClientContext> {
         ${
@@ -37,7 +36,6 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
       }
     `)
     code()
-
     code(`
       export interface BuilderMethodsRootFn extends ${identifiers.$$Utilities}.TypeFunction.Fn {
         // @ts-expect-error parameter is Untyped.
@@ -49,7 +47,9 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
 
 const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(({ node, config, code }) => {
   const fieldMethods = renderFieldMethods({ config, node })
+  const operationType = getOperationTypeOrThrow(config, node)
 
+  // dprint-ignore
   code(`
     export interface ${node.name}Methods<$Context extends ${identifiers.$$Utilities}.ClientContext> {
       $batch: <$SelectionSet>(selectionSet: ${identifiers.$$Utilities}.Exact<$SelectionSet, SelectionSet.${node.name}<$Context['scalars']>>) =>
@@ -57,7 +57,7 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
           ${identifiers.$$Utilities}.Simplify<
             ${identifiers.$$Utilities}.HandleOutput<
               $Context,
-              InferResult.${node.name}<$SelectionSet, ${identifiers.Schema}<$Context['scalars']>>
+              InferResult.Operation${capitalizeFirstLetter(operationType)}<$SelectionSet, ${identifiers.Schema}<$Context['scalars']>>
             >
           >
         >
@@ -85,26 +85,30 @@ const renderFieldMethods = createCodeGenerator<{ node: Grafaid.Schema.ObjectType
     const isOptional = Grafaid.Schema.isScalarType(fieldTypeUnwrapped)
       && Grafaid.Schema.Args.isAllArgsNullable(field.args)
 
+    const operationType = getOperationTypeOrThrow(config, node)
     // dprint-ignore
     code(`
       ${field.name}: <$SelectionSet>(selectionSet${isOptional ? `?` : ``}: ${identifiers.$$Utilities}.Exact<$SelectionSet, SelectionSet.${renderName(node)}.${renderName(field)}<$Context['scalars']>>) =>
-        ${Helpers.returnType(node.name, field.name, `$SelectionSet`)}
+        Promise<
+          ${identifiers.$$Utilities}.Simplify<
+            ${identifiers.$$Utilities}.HandleOutputGraffleRootField<
+              $Context,
+              InferResult.Operation${capitalizeFirstLetter(operationType)}<{ ${field.name}: $SelectionSet}, ${identifiers.Schema}<$Context['scalars']>>,
+              '${field.name}'
+            >
+          >
+        >
     `)
   }
 })
 
-namespace Helpers {
-  export const returnType = (rootName: string, fieldName: string, selectionSet: string) => {
-    return `
-      Promise<
-        ${identifiers.$$Utilities}.Simplify<
-          ${identifiers.$$Utilities}.HandleOutputGraffleRootField<
-            $Context,
-            InferResult.${rootName}<{ ${fieldName}: ${selectionSet}}, ${identifiers.Schema}<$Context['scalars']>>,
-            '${fieldName}'
-          >
-        >
-      >
-    `
-  }
+const getOperationTypeOrThrow = (config: Config, node: Grafaid.Schema.ObjectType) => {
+  const rootsWithOpType = entries(config.schema.kindMap.index.Root)
+    .map(_ => {
+      if (_[1] === null) return null
+      return { operationType: _[0], objectType: _[1] }
+    }).filter(_ => _ !== null)
+  const operationType = rootsWithOpType.find(({ objectType }) => objectType.name === node.name)?.operationType
+  if (!operationType) throw new Error(`Operation type not found for ${node.name}`)
+  return operationType
 }

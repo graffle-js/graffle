@@ -10,7 +10,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutput<
         $Context,
-        InferResult.Query<$SelectionSet, Schema<$Context['scalars']>>
+        InferResult.OperationQuery<$SelectionSet, Schema<$Context['scalars']>>
       >
     >
   >
@@ -30,7 +30,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ id: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ id: $SelectionSet }, Schema<$Context['scalars']>>,
         'id'
       >
     >
@@ -42,7 +42,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.Query<{ idNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
+        InferResult.OperationQuery<{ idNonNull: $SelectionSet }, Schema<$Context['scalars']>>,
         'idNonNull'
       >
     >

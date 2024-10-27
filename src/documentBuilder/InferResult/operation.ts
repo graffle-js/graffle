@@ -5,15 +5,15 @@ import type { Schema } from '../../types/Schema/__.js'
 import type { OutputObject } from './OutputObject.js'
 
 // dprint-ignore
-export type Query<$SelectionSet, $Schema extends Schema> =
+export type OperationQuery<$SelectionSet, $Schema extends Schema> =
   Operation<$SelectionSet, $Schema, OperationTypeNode.QUERY>
 
 // dprint-ignore
-export type Mutation<$SelectionSet, $Schema extends Schema> =
+export type OperationMutation<$SelectionSet, $Schema extends Schema> =
   Operation<$SelectionSet, $Schema, OperationTypeNode.MUTATION>
 
 // dprint-ignore
-export type Subscription<$SelectionSet, $Schema extends Schema> =
+export type OperationSubscription<$SelectionSet, $Schema extends Schema> =
   Operation<$SelectionSet, $Schema, OperationTypeNode.SUBSCRIPTION>
 
 export type Operation<

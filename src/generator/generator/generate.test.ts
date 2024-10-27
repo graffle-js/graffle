@@ -31,5 +31,14 @@ test(`root-types-mapped`, async () => {
       `,
     },
   })
-  expect(Memfs.fs.readFileSync(`./graffle/modules/Schema.ts`, `utf8`)).toMatchSnapshot()
+
+  const SchemaTs = Memfs.fs.readFileSync(`./graffle/modules/Schema.ts`, `utf8`)
+  expect(SchemaTs).includes(`operationsAvailable: ['query']`)
+  expect(SchemaTs).includes(`RootUnion: Schema.QueryRoot`)
+  expect(SchemaTs).toMatchSnapshot()
+
+  const MethodsRootTs = Memfs.fs.readFileSync(`./graffle/modules/MethodsRoot.ts`, `utf8`)
+  expect(MethodsRootTs).includes(`__typename: 'QueryRoot'`)
+  expect(MethodsRootTs).includes(`InferResult.OperationQuery<$SelectionSet`)
+  expect(MethodsRootTs).toMatchSnapshot()
 })
