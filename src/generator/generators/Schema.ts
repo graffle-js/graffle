@@ -317,7 +317,7 @@ export const SchemaGenerator = createCodeGenerator(
       Code.tsInterface({
         name: identifiers.Schema,
         parameters:
-          `$Scalars extends ${identifiers.$$Utilities}.Schema.Scalar.Registry = ${identifiers.$$Utilities}.Schema.Scalar.Registry.Empty`,
+          `$Scalars extends ${identifiers.$$Utilities}.Schema.Scalar.Registry = ${identifiers.$$Scalar}.$Registry`,
         extends: `$`,
         block: schema,
       }),

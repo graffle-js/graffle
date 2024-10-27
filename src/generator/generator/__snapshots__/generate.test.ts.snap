@@ -1,5 +1,65 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`custom scalars module results in client prefilling those custom scalars 1`] = `
+"import type * as $$Utilities from "graffle/utilities-for-generated";
+
+import * as CustomScalars from "../../scalars.js";
+
+export * from "../../scalars.js";
+export { Date } from "../../scalars.js";
+//
+//
+//
+//
+// CUSTOM SCALAR TYPE
+// DATE
+// --------------------------------------------------------------------------------------------------
+//                                                Date
+// --------------------------------------------------------------------------------------------------
+//
+//
+
+export type Date = typeof CustomScalars.Date;
+// Without this we get error:
+// "Exported type alias 'DateDecoded' has or is using private name 'Date'."
+type Date_ = typeof CustomScalars.Date;
+export type DateDecoded = $$Utilities.Schema.Scalar.GetDecoded<Date_>;
+export type DateEncoded = $$Utilities.Schema.Scalar.GetEncoded<Date_>;
+
+export * from "graffle/generator-helpers/standard-scalar-types";
+
+//
+//
+//
+//
+//
+//
+// ==================================================================================================
+//                                              Registry
+// ==================================================================================================
+//
+//
+//
+//
+//
+//
+
+export const $registry = {
+  map: {
+    Date: Date,
+  },
+} as $Registry;
+
+export type $Registry = $$Utilities.Schema.Scalar.Registry<
+  {
+    Date: Date_;
+  },
+  $$Utilities.Schema.Scalar.GetEncoded<Date_>,
+  $$Utilities.Schema.Scalar.GetDecoded<Date_>
+>;
+"
+`;
+
 exports[`kitchen-sink generated modules > _.ts 1`] = `
 "// We import the global module for good measure although it is not clear it is always needed.
 // It at least helps with Twoslash wherein without this import here Twoslash will not include the global module.
@@ -22,8 +82,15 @@ exports[`kitchen-sink generated modules > __.ts 1`] = `
 exports[`kitchen-sink generated modules > modules/client.ts 1`] = `
 "import { createPrefilled } from '../../../../../../src/entrypoints/client.js'
 import * as $$Data from './data.js'
+import * as $$Scalar from './scalar.js'
 import * as $$SchemaDrivenDataMap from './schema-driven-data-map.js'
-export const create = createPrefilled($$Data.Name, $$SchemaDrivenDataMap.schemaDrivenDataMap, $$Data.defaultSchemaUrl)
+
+export const create = createPrefilled(
+  $$Data.Name,
+  $$SchemaDrivenDataMap.schemaDrivenDataMap,
+  $$Scalar.$registry,
+  $$Data.defaultSchemaUrl,
+)
 "
 `;
 
@@ -996,8 +1063,10 @@ export interface Interface {
 exports[`kitchen-sink generated modules > modules/scalar.ts 1`] = `
 "import type * as $$Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
 
-export * from '../../../../../../src/types/Schema/StandardTypes/scalar.js'
+import * as CustomScalars from '../../scalars.js'
 
+export * from '../../scalars.js'
+export { Date } from '../../scalars.js'
 //
 //
 //
@@ -1010,7 +1079,44 @@ export * from '../../../../../../src/types/Schema/StandardTypes/scalar.js'
 //
 //
 
-export type Date = $$Utilities.Schema.Scalar.ScalarCodecless<'Date'>
+export type Date = typeof CustomScalars.Date
+// Without this we get error:
+// "Exported type alias 'DateDecoded' has or is using private name 'Date'."
+type Date_ = typeof CustomScalars.Date
+export type DateDecoded = $$Utilities.Schema.Scalar.GetDecoded<Date_>
+export type DateEncoded = $$Utilities.Schema.Scalar.GetEncoded<Date_>
+
+export * from '../../../../../../src/types/Schema/StandardTypes/scalar.js'
+
+//
+//
+//
+//
+//
+//
+// ==================================================================================================
+//                                              Registry
+// ==================================================================================================
+//
+//
+//
+//
+//
+//
+
+export const $registry = {
+  map: {
+    Date: Date,
+  },
+} as $Registry
+
+export type $Registry = $$Utilities.Schema.Scalar.Registry<
+  {
+    Date: Date_
+  },
+  $$Utilities.Schema.Scalar.GetEncoded<Date_>,
+  $$Utilities.Schema.Scalar.GetDecoded<Date_>
+>
 "
 `;
 
@@ -2686,9 +2792,7 @@ export namespace Schema {
 //
 //
 
-export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty>
-  extends $
-{
+export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Scalar.$Registry> extends $ {
   name: $$Data.Name
   operationsAvailable: ['query', 'mutation']
   RootUnion:
@@ -2802,7 +2906,7 @@ const String = $$Scalar.String
 //
 //
 
-const Date = 'Date'
+const Date = $$Scalar.Date
 
 //
 //
@@ -7298,10 +7402,10 @@ export namespace $NamedTypes {
 `;
 
 exports[`root-types-mapped 1`] = `
-"import type { Schema as $ } from 'graffle/utilities-for-generated'
-import type * as $$Utilities from 'graffle/utilities-for-generated'
-import * as $$Data from './data.js'
-import * as $$Scalar from './scalar.js'
+"import * as $$Data from "./data.js";
+import * as $$Scalar from "./scalar.js";
+import type { Schema as $ } from "graffle/utilities-for-generated";
+import type * as $$Utilities from "graffle/utilities-for-generated";
 
 export namespace Schema {
   //
@@ -7325,29 +7429,29 @@ export namespace Schema {
   //
 
   export interface QueryRoot extends $.OutputObject {
-    name: 'QueryRoot'
+    name: "QueryRoot";
     fields: {
-      __typename: QueryRoot.__typename
-      id: QueryRoot.id
-    }
+      __typename: QueryRoot.__typename;
+      id: QueryRoot.id;
+    };
   }
 
   export namespace QueryRoot {
     export interface __typename extends $.OutputField {
-      name: '__typename'
-      arguments: {}
-      inlineType: [1]
+      name: "__typename";
+      arguments: {};
+      inlineType: [1];
       namedType: {
-        kind: '__typename'
-        value: 'QueryRoot'
-      }
+        kind: "__typename";
+        value: "QueryRoot";
+      };
     }
 
     export interface id extends $.OutputField {
-      name: 'id'
-      arguments: {}
-      inlineType: [0]
-      namedType: $$NamedTypes.$$ID
+      name: "id";
+      arguments: {};
+      inlineType: [0];
+      namedType: $$NamedTypes.$$ID;
     }
   }
 
@@ -7467,19 +7571,19 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export type ID = $.StandardTypes.ID
+  export type ID = $.StandardTypes.ID;
 
   //                                              Boolean
   // --------------------------------------------------------------------------------------------------
   //
 
-  export type Boolean = $.StandardTypes.Boolean
+  export type Boolean = $.StandardTypes.Boolean;
 
   //                                               String
   // --------------------------------------------------------------------------------------------------
   //
 
-  export type String = $.StandardTypes.String
+  export type String = $.StandardTypes.String;
 
   //
   //
@@ -7506,10 +7610,10 @@ export namespace Schema {
    */
 
   namespace $$NamedTypes {
-    export type $$QueryRoot = QueryRoot
-    export type $$ID = ID
-    export type $$Boolean = Boolean
-    export type $$String = String
+    export type $$QueryRoot = QueryRoot;
+    export type $$ID = ID;
+    export type $$Boolean = Boolean;
+    export type $$String = String;
   }
 }
 
@@ -7529,76 +7633,90 @@ export namespace Schema {
 //
 //
 
-export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty>
-  extends $
-{
-  name: $$Data.Name
-  operationsAvailable: ['query']
-  RootUnion: Schema.QueryRoot
+export interface Schema<
+  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Scalar.$Registry,
+> extends $ {
+  name: $$Data.Name;
+  operationsAvailable: ["query"];
+  RootUnion: Schema.QueryRoot;
   Root: {
-    query: Schema.QueryRoot
-    mutation: null
-    subscription: null
-  }
+    query: Schema.QueryRoot;
+    mutation: null;
+    subscription: null;
+  };
   allTypes: {
-    QueryRoot: Schema.QueryRoot
-  }
-  objects: {}
-  unions: {}
-  interfaces: {}
-  scalars: $Scalars
-  extensions: $$Utilities.GlobalRegistry.TypeExtensions
+    QueryRoot: Schema.QueryRoot;
+  };
+  objects: {};
+  unions: {};
+  interfaces: {};
+  scalars: $Scalars;
+  extensions: $$Utilities.GlobalRegistry.TypeExtensions;
 }
 "
 `;
 
 exports[`root-types-mapped 2`] = `
-"import type { InferResult } from 'graffle/schema'
-import type * as $$Utilities from 'graffle/utilities-for-generated'
-import * as $$Schema from './schema.js'
-import * as $$SelectionSets from './selection-sets.js'
+"import * as $$SelectionSets from "./selection-sets.js";
+import * as $$Schema from "./schema.js";
+import type * as $$Utilities from "graffle/utilities-for-generated";
+import type { InferResult } from "graffle/schema";
 
 export interface QueryRootMethods<$Context extends $$Utilities.ClientContext> {
   $batch: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.QueryRoot<$Context['scalars']>>,
+    selectionSet: $$Utilities.Exact<
+      $SelectionSet,
+      $$SelectionSets.QueryRoot<$Context["scalars"]>
+    >,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutput<
         $Context,
-        InferResult.OperationQuery<$SelectionSet, $$Schema.Schema<$Context['scalars']>>
+        InferResult.OperationQuery<
+          $SelectionSet,
+          $$Schema.Schema<$Context["scalars"]>
+        >
       >
     >
-  >
+  >;
   __typename: () => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        { __typename: 'QueryRoot' },
-        '__typename'
+        { __typename: "QueryRoot" },
+        "__typename"
       >
     >
-  >
+  >;
 
   id: <$SelectionSet>(
-    selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.QueryRoot.id<$Context['scalars']>>,
+    selectionSet?: $$Utilities.Exact<
+      $SelectionSet,
+      $$SelectionSets.QueryRoot.id<$Context["scalars"]>
+    >,
   ) => Promise<
     $$Utilities.Simplify<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ id: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
-        'id'
+        InferResult.OperationQuery<
+          { id: $SelectionSet },
+          $$Schema.Schema<$Context["scalars"]>
+        >,
+        "id"
       >
     >
-  >
+  >;
 }
 
-export interface BuilderMethodsRoot<$Context extends $$Utilities.ClientContext> {
-  undefined: QueryRootMethods<$Context>
+export interface BuilderMethodsRoot<
+  $Context extends $$Utilities.ClientContext,
+> {
+  undefined: QueryRootMethods<$Context>;
 }
 
 export interface BuilderMethodsRootFn extends $$Utilities.TypeFunction.Fn {
   // @ts-expect-error parameter is Untyped.
-  return: BuilderMethodsRoot<this['params']>
+  return: BuilderMethodsRoot<this["params"]>;
 }
 "
 `;

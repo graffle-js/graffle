@@ -45,10 +45,12 @@ export const $registry = {
   map: {
     Date: Date,
   },
-} as $$Utilities.Schema.Scalar.Registry<
+} as $Registry
+
+export type $Registry = $$Utilities.Schema.Scalar.Registry<
   {
-    Date: Date
+    Date: Date_
   },
-  $$Utilities.Schema.Scalar.GetEncoded<Date>,
-  $$Utilities.Schema.Scalar.GetDecoded<Date>
+  $$Utilities.Schema.Scalar.GetEncoded<Date_>,
+  $$Utilities.Schema.Scalar.GetDecoded<Date_>
 >

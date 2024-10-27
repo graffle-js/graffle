@@ -33,13 +33,13 @@ test(`root-types-mapped`, async () => {
   })
 
   const SchemaTs = Memfs.fs.readFileSync(`./graffle/modules/schema.ts`, `utf8`)
-  expect(SchemaTs).includes(`operationsAvailable: ['query']`)
+  expect(SchemaTs).includes(`operationsAvailable: ["query"]`)
   expect(SchemaTs).includes(`RootUnion: Schema.QueryRoot`)
   expect(SchemaTs).toMatchSnapshot()
 
   const MethodsRootTs = Memfs.fs.readFileSync(`./graffle/modules/methods-root.ts`, `utf8`)
-  expect(MethodsRootTs).includes(`__typename: 'QueryRoot'`)
-  expect(MethodsRootTs).includes(`InferResult.OperationQuery<$SelectionSet`)
+  expect(MethodsRootTs).includes(`__typename: "QueryRoot"`)
+  expect(MethodsRootTs).includes(`InferResult.OperationQuery<`)
   expect(MethodsRootTs).toMatchSnapshot()
 })
 
@@ -68,16 +68,5 @@ test(`custom scalars module results in client prefilling those custom scalars`, 
     },
   })
   const ScalarTs = Memfs.fs.readFileSync(`./graffle/modules/scalar.ts`, `utf8`)
-  expect(ScalarTs).includes(`
-export const $registry = {
-  map: {
-    Date: Date,
-  },
-} as $$Utilities.Schema.Scalar.Registry<
-  {
-    Date: Date;
-  },
-  $$Utilities.Schema.Scalar.GetEncoded<Date>,
-  $$Utilities.Schema.Scalar.GetDecoded<Date>
->`)
+  expect(ScalarTs).toMatchSnapshot()
 })
