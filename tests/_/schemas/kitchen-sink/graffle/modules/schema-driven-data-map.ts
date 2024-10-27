@@ -42,7 +42,7 @@ const String = $$Scalar.String
 //
 //
 
-const Date = $$Scalar.Date
+const Date = 'Date'
 
 //
 //

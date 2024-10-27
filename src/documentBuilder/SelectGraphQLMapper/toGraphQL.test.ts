@@ -41,6 +41,7 @@ const tester = <$Scalars extends Schema.Scalar.ScalarMap>(
         ),
         {
           sddm: schemaDrivenDataMap,
+          scalars: input.scalars,
           operationVariables: input.variables,
         },
       )

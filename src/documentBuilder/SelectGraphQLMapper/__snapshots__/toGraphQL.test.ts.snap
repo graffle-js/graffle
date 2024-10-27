@@ -1216,7 +1216,7 @@ exports[`( variables: false; scalars: Date ) - Query - args - custom scalar - ar
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
 {
-  dateArg(date: {})
+  dateArg(date: "1970-01-01T00:00:00.000Z")
 }
 ----------------
 {
@@ -1263,7 +1263,7 @@ exports[`( variables: false; scalars: Date ) - Query - args - custom scalar - ar
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
 {
-  dateArgList(date: [{}, {}])
+  dateArgList(date: ["1970-01-01T00:00:00.000Z", "1970-01-01T00:00:00.001Z"])
 }
 ----------------
 {
@@ -1285,7 +1285,7 @@ exports[`( variables: false; scalars: Date ) - Query - args - custom scalar - ar
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
 {
-  dateArgNonNull(date: {})
+  dateArgNonNull(date: "1970-01-01T00:00:00.000Z")
 }
 ----------------
 {
@@ -1310,7 +1310,9 @@ exports[`( variables: false; scalars: Date ) - Query - args - custom scalar - ar
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
 {
-  dateArgNonNullList(date: [{}, {}])
+  dateArgNonNullList(
+    date: ["1970-01-01T00:00:00.000Z", "1970-01-01T00:00:00.001Z"]
+  )
 }
 ----------------
 {
@@ -1335,7 +1337,7 @@ exports[`( variables: false; scalars: Date ) - Query - args - custom scalar - ar
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
 {
-  dateArgNonNullList(date: [null, {}])
+  dateArgNonNullList(date: [null, "1970-01-01T00:00:00.000Z"])
 }
 ----------------
 {
@@ -1360,7 +1362,9 @@ exports[`( variables: false; scalars: Date ) - Query - args - custom scalar - ar
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
 {
-  dateArgNonNullListNonNull(date: [{}, {}])
+  dateArgNonNullListNonNull(
+    date: ["1970-01-01T00:00:00.000Z", "1970-01-01T00:00:00.001Z"]
+  )
 }
 ----------------
 {
@@ -1386,7 +1390,9 @@ exports[`( variables: false; scalars: Date ) - Query - args - custom scalar - in
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
 {
-  dateArgInputObject(input: {idRequired: "", dateRequired: {}, date: {}})
+  dateArgInputObject(
+    input: {idRequired: "", dateRequired: "1970-01-01T00:00:00.000Z", date: "1970-01-01T00:00:00.001Z"}
+  )
 }
 ----------------
 {
@@ -1415,7 +1421,7 @@ exports[`( variables: false; scalars: Date ) - Query - args - custom scalar - ne
 --------GRAPHQL DOCUMENT & VARIABLES--------
 {
   InputObjectNested(
-    input: {InputObject: {idRequired: "", dateRequired: {}, date: {}}}
+    input: {InputObject: {idRequired: "", dateRequired: "1970-01-01T00:00:00.000Z", date: "1970-01-01T00:00:00.001Z"}}
   )
 }
 ----------------

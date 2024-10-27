@@ -95,7 +95,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
           ${Code.tsUnionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${identifiers.$$Utilities}.Schema.Scalar.GetEncoded<${_.name}_>`))},
           ${Code.tsUnionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${identifiers.$$Utilities}.Schema.Scalar.GetDecoded<${_.name}_>`))},
         >`
-      : `$$Utilities.Schema.Scalar.Registry`
+      : `$$Utilities.Schema.Scalar.Registry.Empty`
 
     code(Code.tsAlias$({
       name: `$Registry`,

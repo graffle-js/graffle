@@ -22,4 +22,4 @@ export const $registry = {
   map: {},
 } as $Registry
 
-export type $Registry = $$Utilities.Schema.Scalar.Registry
+export type $Registry = $$Utilities.Schema.Scalar.Registry.Empty
