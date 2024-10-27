@@ -1044,9 +1044,7 @@ export namespace Schema {
 //
 //
 
-export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty>
-  extends $
-{
+export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Scalar.$Registry> extends $ {
   name: $$Data.Name;
   operationsAvailable: ["query", "mutation"];
   RootUnion:

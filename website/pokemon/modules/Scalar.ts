@@ -34,4 +34,6 @@ export type Date = $$Utilities.Schema.Scalar.ScalarCodecless<"Date">;
 
 export const $registry = {
   map: {},
-} as $$Utilities.Schema.Scalar.Registry;
+} as $Registry;
+
+export type $Registry = $$Utilities.Schema.Scalar.Registry.Empty;

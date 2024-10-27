@@ -47,13 +47,12 @@ You can give the Graffle generator access to your scalar definitions. This is sl
 
    Note that these features are always available to you after generation, but with knowledge of your custom scalars, their types in the above features will be correct, rather than always just `string`.
 
-### Getting Started
-
-To use custom scalars you do the following:
+### Steps
 
 1. Create a module that exports your scalar definitions. The export names MUST match exactly the scalar name in the schema. By default the generator will look for `./scalars.ts`. A scalars module for the above [getting started](#getting-started) would look like this:
 
    ```ts
+   // @filename: scalars.ts
    import { Graffle } from 'graffle'
 
    export const Date = Graffle.Scalar.create(`Date`, {
@@ -62,19 +61,27 @@ To use custom scalars you do the following:
    })
    ```
 
-2. If you use the generated client constructor, is has the scalars registered for you automatically so you don't have to do this manually now. For that matter, the Schema Map is also already applied.
+2. Update your client configuration. There are technically multiple approaches here but we recommend the first.
 
-   ```diff
-   -import { schemaDrivenDataMap as schemaMap } from './graffle/__.js'
-   +import { Graffle } from './graffle/__.js'
+   - **Recommended**: Take advantage of the generated constructor which has some properties prefilled for you. We are able to omit registering the custom scalars as well as passing the schema map.
 
-   const graffle = Graffle
-   	.create({
-   		schema: '...',
-   -    schemaMap,
-   	})
-   -  .scalar(`Date`, {
-   -    decode: (value) => new globalThis.Date(value),
-   -    encode: (value) => value.toISOString(),
-   -  })
-   ```
+     ```ts
+     import { Graffle } from './graffle/__.js'
+
+     const graffle = Graffle.create({ schema: '...' })
+     ```
+
+   - Technically you can also keep it as it was before. Just import your scalar definitions now instead of having them inline:
+
+     ```ts
+     import { schemaDrivenDataMap as schemaMap } from './graffle/__.js'
+     import { Date } from './scalars.js'
+
+     const graffle = Graffle
+       .create({
+         schema: '...',
+         schemaMap,
+       })
+       .scalar(Date)
+     ```
+   - Technically you could do nothing to your initial configuration. While not DRY it will work.

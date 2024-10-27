@@ -20,4 +20,6 @@ export * from "graffle/generator-helpers/standard-scalar-types";
 
 export const $registry = {
   map: {},
-} as $$Utilities.Schema.Scalar.Registry;
+} as $Registry;
+
+export type $Registry = $$Utilities.Schema.Scalar.Registry.Empty;
