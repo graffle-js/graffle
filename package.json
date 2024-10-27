@@ -126,6 +126,7 @@
   "dependencies": {
     "@graphql-typed-document-node/core": "^3.2.0",
     "@molt/command": "^0.9.0",
+    "es-toolkit": "^1.26.1",
     "is-plain-obj": "^4.1.0"
   },
   "peerDependencies": {
@@ -171,7 +172,6 @@
     "doctoc": "^2.2.1",
     "dprint": "^0.47.4",
     "dripip": "^0.10.0",
-    "es-toolkit": "^1.26.1",
     "eslint": "^9.13.0",
     "eslint-config-prisma": "^0.6.0",
     "eslint-plugin-deprecation": "^3.0.0",

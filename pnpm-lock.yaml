@@ -14,6 +14,9 @@ importers:
       '@molt/command':
         specifier: ^0.9.0
         version: 0.9.0
+      es-toolkit:
+        specifier: ^1.26.1
+        version: 1.26.1
       is-plain-obj:
         specifier: ^4.1.0
         version: 4.1.0
@@ -81,9 +84,6 @@ importers:
       dripip:
         specifier: ^0.10.0
         version: 0.10.0
-      es-toolkit:
-        specifier: ^1.26.1
-        version: 1.26.1
       eslint:
         specifier: ^9.13.0
         version: 9.13.0
