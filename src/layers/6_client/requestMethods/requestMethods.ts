@@ -1,11 +1,12 @@
 import { OperationTypeNode } from 'graphql'
 import { Select } from '../../../documentBuilder/Select/__.js'
+import { SelectionSetGraphqlMapper } from '../../../documentBuilder/SelectGraphQLMapper/__.js'
 import type { TypeFunction } from '../../../entrypoints/utilities-for-generated.js'
 import type { Fluent } from '../../../lib/fluent/__.js'
-import type { Grafaid } from '../../../lib/grafaid/__.js'
 import { isSymbol } from '../../../lib/prelude.js'
 import type { GlobalRegistry } from '../../../types/GlobalRegistry/GlobalRegistry.js'
 import { RequestCore } from '../../5_request/__.js'
+import { graffleMappedResultToRequest } from '../../5_request/core.js'
 import { type ClientContext, defineTerminus } from '../fluent.js'
 import { handleOutput } from '../handleOutput.js'
 import type { Config } from '../Settings/Config.js'
@@ -47,7 +48,7 @@ export const requestMethodsProperties = defineTerminus((state) => {
   }
 })
 
-export const createMethodDocument = (state: ClientContext) => (document: Select.Document.DocumentObject) => {
+const createMethodDocument = (state: ClientContext) => (document: Select.Document.DocumentObject) => {
   const documentNormalized = Select.Document.normalizeOrThrow(document)
   return {
     run: async (maybeOperationName?: string) => {
@@ -105,28 +106,30 @@ const executeOperation = async (
   )
 }
 
-export const executeDocument = async (
+const executeDocument = async (
   state: ClientContext,
   document: Select.Document.DocumentNormalized,
   operationName?: string,
-  variables?: Grafaid.Variables,
 ) => {
   const transportType = state.config.transport.type
-  const interfaceType = `typed`
   const url = state.config.transport.type === `http` ? state.config.transport.url : undefined
   const schema = state.config.transport.type === `http` ? undefined : state.config.transport.schema
 
+  const request = graffleMappedResultToRequest(
+    SelectionSetGraphqlMapper.toGraphQL(document, {
+      sddm: state.config.schemaMap,
+      // todo test that when custom scalars are used they are mapped correctly
+      scalars: state.scalars.map,
+    }),
+    operationName,
+  )
+
   const initialInput = {
     state,
-    interfaceType,
     transportType,
     url,
     schema,
-    request: {
-      document,
-      operationName,
-      variables,
-    },
+    request,
   } as RequestCore.Hooks.HookDefEncode<Config>['input']
 
   const result = await RequestCore.anyware.run({

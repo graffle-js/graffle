@@ -1,4 +1,4 @@
-import { SelectionSetGraphqlMapper } from '../../documentBuilder/SelectGraphQLMapper/__.js'
+import type { SelectionSetGraphqlMapper } from '../../documentBuilder/SelectGraphQLMapper/__.js'
 import { Anyware } from '../../lib/anyware/__.js'
 import type { Grafaid } from '../../lib/grafaid/__.js'
 import { getOperationDefinition, OperationTypeToAccessKind, print } from '../../lib/grafaid/document.js'
@@ -62,25 +62,7 @@ export const anyware = Anyware.create<HookSequence, HookMap, Grafaid.FormattedEx
   hookNamesOrderedBySequence,
   hooks: {
     encode: ({ input }) => {
-      let request: Grafaid.RequestAnalyzedInput
-
-      if (input.interfaceType === `raw`) {
-        request = input.request
-      } else {
-        request = graffleMappedResultToRequest(
-          SelectionSetGraphqlMapper.toGraphQL(input.request.document, {
-            sddm: input.state.config.schemaMap,
-            // todo test that when custom scalars are used they are mapped correctly
-            scalars: input.state.scalars.map,
-          }),
-          input.request.operationName,
-        )
-      }
-
-      return {
-        ...input,
-        request,
-      }
+      return input
     },
     pack: {
       slots: {

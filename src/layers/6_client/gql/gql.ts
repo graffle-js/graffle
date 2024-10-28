@@ -37,7 +37,6 @@ export const gqlProperties = defineTerminus((state) => {
   return {
     gql: (...args: gqlArguments) => {
       const { document: query } = resolveGqlArguments(args)
-      const interfaceType: InterfaceRaw = `raw`
       const transportType = state.config.transport.type
       const url = state.config.transport.type === `http` ? state.config.transport.url : undefined
       const schema = state.config.transport.type === `http` ? undefined : state.config.transport.schema
@@ -61,7 +60,6 @@ export const gqlProperties = defineTerminus((state) => {
           }
 
           const initialInput = {
-            interfaceType,
             transportType,
             state,
             url,

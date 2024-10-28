@@ -1,24 +1,15 @@
 import type { FormattedExecutionResult, GraphQLSchema } from 'graphql'
-import type { Select } from '../../documentBuilder/Select/__.js'
 import type { Grafaid } from '../../lib/grafaid/__.js'
 import type { getRequestEncodeSearchParameters, postRequestEncodeBody } from '../../lib/grafaid/http/http.js'
 import type { httpMethodGet, httpMethodPost } from '../../lib/http.js'
 import type { ClientContext } from '../6_client/fluent.js'
 import type { Config } from '../6_client/Settings/Config.js'
 import type { MethodModeGetReads, MethodModePost } from '../6_client/transportHttp/request.js'
-import type { InterfaceRaw, InterfaceTyped, TransportHttp, TransportMemory } from './types.js'
+import type { TransportHttp, TransportMemory } from './types.js'
 
 interface HookInputBase {
   state: ClientContext
 }
-
-type InterfaceInput<TypedProperties = {}, RawProperties = {}> =
-  | ({
-    interfaceType: InterfaceTyped
-  } & TypedProperties)
-  | ({
-    interfaceType: InterfaceRaw
-  } & RawProperties)
 
 // dprint-ignore
 
@@ -44,19 +35,14 @@ type TransportInput<$Config extends Config, $HttpProperties = {}, $MemoryPropert
 
 export type HookDefEncode<$Config extends Config> = {
   input:
+    & { request: Grafaid.RequestAnalyzedInput }
     & HookInputBase
-    & InterfaceInput<
-      { request: { document: Select.Document.DocumentNormalized; operationName?: string } },
-      // { request: Grafaid.RequestInput }
-      { request: Grafaid.RequestAnalyzedInput }
-    >
     & TransportInput<$Config>
 }
 
 export type HookDefPack<$Config extends Config> = {
   input:
     & HookInputBase
-    & InterfaceInput
     & TransportInput<
       $Config,
       // todo why is headers here but not other http request properties?
@@ -81,7 +67,6 @@ export type HookDefExchange<$Config extends Config> = {
   }
   input:
     & HookInputBase
-    & InterfaceInput
     & TransportInput<
       $Config,
       { request: CoreExchangePostRequest | CoreExchangeGetRequest; headers?: HeadersInit },
@@ -92,7 +77,6 @@ export type HookDefExchange<$Config extends Config> = {
 export type HookDefUnpack<$Config extends Config> = {
   input:
     & HookInputBase
-    & InterfaceInput
     & TransportInput<
       $Config,
       { response: Response },
@@ -103,7 +87,6 @@ export type HookDefUnpack<$Config extends Config> = {
 export type HookDefDecode<$Config extends Config> = {
   input:
     & HookInputBase
-    & InterfaceInput
     & TransportInput<
       $Config,
       { response: Response }

@@ -47,7 +47,7 @@ describe(`document with two queries`, () => {
     const { run } = withTwo
     // @ts-expect-error
     const error = await run(`boo`).catch((e: unknown) => e) as Errors.ContextualAggregateError
-    expect(error.cause?.message).toEqual(`Unknown operation named "boo".`)
+    expect(error.message).toEqual(`Unknown operation named "boo".`)
   })
   test(`error if no operations provided`, () => {
     expect(() => {
