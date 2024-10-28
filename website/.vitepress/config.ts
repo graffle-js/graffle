@@ -96,23 +96,26 @@ export default defineConfig({
       md.use(tabsMarkdownPlugin)
     },
     codeTransformers: [
-      transformerTwoslash({
-        twoslashOptions: {
-          handbookOptions: {
-            noErrorValidation: process.env.NODE_ENV === 'development',
+      ...(process.env.disable_twoslash ? [] : [
+        transformerTwoslash({
+          twoslashOptions: {
+            handbookOptions: {
+              noErrors: true,
+              noErrorValidation: process.env.NODE_ENV === 'development',
+            },
+            compilerOptions: {
+              moduleResolution: ModuleResolutionKind.Bundler,
+              module: ModuleKind.ESNext,
+              // noErrorTruncation: true,
+            },
+            // Instead of automatically putting underlines over every property and variable,
+            // only do so for the ones we explicitly ask for in our markdown.
+            // shouldGetHoverInfo: (x) => {
+            //   return false
+            // },
           },
-          compilerOptions: {
-            moduleResolution: ModuleResolutionKind.Bundler,
-            module: ModuleKind.ESNext,
-            // noErrorTruncation: true,
-          },
-          // Instead of automatically putting underlines over every property and variable,
-          // only do so for the ones we explicitly ask for in our markdown.
-          // shouldGetHoverInfo: (x) => {
-          //   return false
-          // },
-        },
-      }) as any,
+        }),
+      ]) as any,
     ],
   },
   srcDir: './content',
