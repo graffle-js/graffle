@@ -144,5 +144,5 @@ const customScalarWithCodecCases = testEachQueryWithDescriptionWithCustomScalars
   [`args - custom scalar - input object field`                       , { dateArgInputObject: { $: { input: { idRequired: ``, dateRequired: db.date0, date: db.date1 } } } }],
   [`args - custom scalar - nested input object field`                , { InputObjectNested: { $: { input: { InputObject: { idRequired: ``, dateRequired: db.date0, date: db.date1 } } } } }],
 ])
-customScalarWithCodecCases(...tester({ variables: true, scalars: { DateScalar } }))
-customScalarWithCodecCases(...tester({ variables: false, scalars: { DateScalar } }))
+customScalarWithCodecCases(...tester({ variables: true, scalars: { Date: DateScalar } }))
+customScalarWithCodecCases(...tester({ variables: false, scalars: { Date: DateScalar } }))
