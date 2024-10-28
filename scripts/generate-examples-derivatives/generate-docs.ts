@@ -1,4 +1,4 @@
-import { groupBy } from 'es-toolkit'
+import { groupBy, pascalCase } from 'es-toolkit'
 import * as FS from 'node:fs/promises'
 import { documentQueryContinents, publicGraphQLSchemaEndpoints } from '../../examples/$/helpers.js'
 import { deleteFiles } from '../lib/deleteFiles.js'
@@ -129,6 +129,8 @@ const generateExampleLinksSnippets = async (examplesTransformed: ExampleTransfor
  */
 
 const transformRewriteGraffleImports = (example: Example) => {
+  const defaultSchema = `pokemon`
+
   const newContent = example.file.content
     .replaceAll(/from '.+\/tests\/_\/schemas\/(.*)\/graffle\/(.+)\.js'/g, `from './$1/$2.js'`)
     .replaceAll(
@@ -147,6 +149,10 @@ const transformRewriteGraffleImports = (example: Example) => {
       /from '.*entrypoints\/(.*?).js'/g,
       `from 'graffle/$1'`,
     )
+    // The examples that use Pokemon schema are mapped to the default schema in the documentation.
+    // This works with Twoslash because we generate a pokemon schema in the website root directory.
+    .replaceAll(new RegExp(`(import.*./)${defaultSchema}`, `g`), `$1graffle`)
+    .replaceAll(new RegExp(`(import.*{.*)${pascalCase(defaultSchema)}(.*})`, `g`), `$1Graffle$2`)
     // Any $ imports are entirely removed.
     .replaceAll(/import.*'.*\$.*'\n/g, ``)
 

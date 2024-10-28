@@ -25,80 +25,129 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
     >
   >;
 
-  continent: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.continent<$Context["scalars"]>>,
+  battles: <$SelectionSet>(
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.battles<$Context["scalars"]>>,
   ) => Promise<
     $$Utilities.SimplifyExcept<
       $Context["scalars"]["typesDecoded"],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ continent: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
-        "continent"
+        InferResult.OperationQuery<{ battles: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
+        "battles"
       >
     >
   >;
 
-  continents: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.continents<$Context["scalars"]>>,
+  beings: <$SelectionSet>(
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.beings<$Context["scalars"]>>,
   ) => Promise<
     $$Utilities.SimplifyExcept<
       $Context["scalars"]["typesDecoded"],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ continents: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
-        "continents"
+        InferResult.OperationQuery<{ beings: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
+        "beings"
       >
     >
   >;
 
-  countries: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.countries<$Context["scalars"]>>,
+  pokemon: <$SelectionSet>(
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.pokemon<$Context["scalars"]>>,
   ) => Promise<
     $$Utilities.SimplifyExcept<
       $Context["scalars"]["typesDecoded"],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ countries: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
-        "countries"
+        InferResult.OperationQuery<{ pokemon: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
+        "pokemon"
       >
     >
   >;
 
-  country: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.country<$Context["scalars"]>>,
+  pokemonByName: <$SelectionSet>(
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.pokemonByName<$Context["scalars"]>>,
   ) => Promise<
     $$Utilities.SimplifyExcept<
       $Context["scalars"]["typesDecoded"],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ country: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
-        "country"
+        InferResult.OperationQuery<{ pokemonByName: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
+        "pokemonByName"
       >
     >
   >;
 
-  language: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.language<$Context["scalars"]>>,
+  pokemons: <$SelectionSet>(
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.pokemons<$Context["scalars"]>>,
   ) => Promise<
     $$Utilities.SimplifyExcept<
       $Context["scalars"]["typesDecoded"],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ language: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
-        "language"
+        InferResult.OperationQuery<{ pokemons: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
+        "pokemons"
       >
     >
   >;
 
-  languages: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.languages<$Context["scalars"]>>,
+  trainerByName: <$SelectionSet>(
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.trainerByName<$Context["scalars"]>>,
   ) => Promise<
     $$Utilities.SimplifyExcept<
       $Context["scalars"]["typesDecoded"],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ languages: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
-        "languages"
+        InferResult.OperationQuery<{ trainerByName: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
+        "trainerByName"
+      >
+    >
+  >;
+
+  trainers: <$SelectionSet>(
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.trainers<$Context["scalars"]>>,
+  ) => Promise<
+    $$Utilities.SimplifyExcept<
+      $Context["scalars"]["typesDecoded"],
+      $$Utilities.HandleOutputGraffleRootField<
+        $Context,
+        InferResult.OperationQuery<{ trainers: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
+        "trainers"
+      >
+    >
+  >;
+}
+
+export interface MutationMethods<$Context extends $$Utilities.ClientContext> {
+  $batch: <$SelectionSet>(
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation<$Context["scalars"]>>,
+  ) => Promise<
+    $$Utilities.SimplifyExcept<
+      $Context["scalars"]["typesDecoded"],
+      $$Utilities.HandleOutput<
+        $Context,
+        InferResult.OperationMutation<$SelectionSet, $$Schema.Schema<$Context["scalars"]>>
+      >
+    >
+  >;
+  __typename: () => Promise<
+    $$Utilities.Simplify<
+      $$Utilities.HandleOutputGraffleRootField<
+        $Context,
+        { __typename: "Mutation" },
+        "__typename"
+      >
+    >
+  >;
+
+  addPokemon: <$SelectionSet>(
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.addPokemon<$Context["scalars"]>>,
+  ) => Promise<
+    $$Utilities.SimplifyExcept<
+      $Context["scalars"]["typesDecoded"],
+      $$Utilities.HandleOutputGraffleRootField<
+        $Context,
+        InferResult.OperationMutation<{ addPokemon: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
+        "addPokemon"
       >
     >
   >;
@@ -106,6 +155,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
 
 export interface BuilderMethodsRoot<$Context extends $$Utilities.ClientContext> {
   query: QueryMethods<$Context>;
+  mutation: MutationMethods<$Context>;
 }
 
 export interface BuilderMethodsRootFn extends $$Utilities.TypeFunction.Fn {

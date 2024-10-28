@@ -3,7 +3,8 @@
     "**/build": true,
     "**/__snapshots__": true,
     "**/pnpm-lock.yaml": true,
-    "**/*.tsbuildinfo": true
+    "**/*.tsbuildinfo": true,
+    "**/.vitepress/dist": true
   },
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,

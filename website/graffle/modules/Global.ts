@@ -7,7 +7,7 @@ import * as $$Schema from "./schema.js";
 declare global {
   export namespace GraffleGlobal {
     export interface Clients {
-      default: {
+      Pokemon: {
         name: $$Data.Name;
         schema: $$Schema.Schema;
         interfaces: {
@@ -15,7 +15,10 @@ declare global {
           Document: $$MethodsDocument.BuilderMethodsDocumentFn;
           Root: $$MethodsRoot.BuilderMethodsRootFn;
         };
-        defaultSchemaUrl: null;
+        /**
+         * http://localhost:3000/graphql
+         */
+        defaultSchemaUrl: string;
       };
     }
   }

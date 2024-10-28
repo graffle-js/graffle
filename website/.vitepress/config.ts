@@ -108,11 +108,10 @@ export default defineConfig({
               module: ModuleKind.ESNext,
               // noErrorTruncation: true,
             },
-            // Instead of automatically putting underlines over every property and variable,
-            // only do so for the ones we explicitly ask for in our markdown.
-            // shouldGetHoverInfo: (x) => {
-            //   return false
-            // },
+            shouldGetHoverInfo: (x, b, c) => {
+              const ignoreIdentifiers = ['console', 'log']
+              return !ignoreIdentifiers.includes(x)
+            },
           },
         }),
       ]) as any,

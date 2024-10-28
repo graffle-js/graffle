@@ -16,15 +16,15 @@ import * as $$Scalar from "./scalar.js";
 //
 //
 
-const Boolean = $$Scalar.Boolean;
-
 const Float = $$Scalar.Float;
 
 const ID = $$Scalar.ID;
 
+const String = $$Scalar.String;
+
 const Int = $$Scalar.Int;
 
-const String = $$Scalar.String;
+const Boolean = $$Scalar.Boolean;
 
 //
 //
@@ -42,7 +42,7 @@ const String = $$Scalar.String;
 //
 //
 
-// None of your ScalarCustoms have custom scalars.
+const Date = "Date";
 
 //
 //
@@ -60,7 +60,20 @@ const String = $$Scalar.String;
 //
 //
 
-// None of your Enums have custom scalars.
+const BattleWildResult: $$Utilities.SchemaDrivenDataMap.Enum = {
+  k: "enum",
+  n: "BattleWildResult",
+};
+
+const PokemonType: $$Utilities.SchemaDrivenDataMap.Enum = {
+  k: "enum",
+  n: "PokemonType",
+};
+
+const TrainerClass: $$Utilities.SchemaDrivenDataMap.Enum = {
+  k: "enum",
+  n: "TrainerClass",
+};
 
 //
 //
@@ -78,38 +91,35 @@ const String = $$Scalar.String;
 //
 //
 
-const ContinentFilterInput: $$Utilities.SchemaDrivenDataMap.InputObject = {
-  n: "ContinentFilterInput",
+const DateFilter: $$Utilities.SchemaDrivenDataMap.InputObject = {
+  n: "DateFilter",
+  fcs: ["gte", "lte"],
   f: {
-    code: {},
+    gte: {
+      nt: Date,
+    },
+    lte: {
+      nt: Date,
+    },
   },
 };
 
-const CountryFilterInput: $$Utilities.SchemaDrivenDataMap.InputObject = {
-  n: "CountryFilterInput",
+const PokemonFilter: $$Utilities.SchemaDrivenDataMap.InputObject = {
+  n: "PokemonFilter",
+  fcs: ["birthday"],
   f: {
-    code: {},
-    continent: {},
-    currency: {},
+    birthday: {
+      // nt: DateFilter, <-- Assigned later to avoid potential circular dependency.
+    },
     name: {},
   },
 };
 
-const LanguageFilterInput: $$Utilities.SchemaDrivenDataMap.InputObject = {
-  n: "LanguageFilterInput",
+const StringFilter: $$Utilities.SchemaDrivenDataMap.InputObject = {
+  n: "StringFilter",
   f: {
-    code: {},
-  },
-};
-
-const StringQueryOperatorInput: $$Utilities.SchemaDrivenDataMap.InputObject = {
-  n: "StringQueryOperatorInput",
-  f: {
-    eq: {},
+    contains: {},
     in: {},
-    ne: {},
-    nin: {},
-    regex: {},
   },
 };
 
@@ -129,75 +139,110 @@ const StringQueryOperatorInput: $$Utilities.SchemaDrivenDataMap.InputObject = {
 //
 //
 
-const Continent: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+const BattleRoyale: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
-    code: {},
-    countries: {
-      // nt: Country, <-- Assigned later to avoid potential circular dependency.
+    combatants: {
+      // nt: CombatantMultiPokemon, <-- Assigned later to avoid potential circular dependency.
     },
-    name: {},
-  },
-};
-
-const Country: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
-    awsRegion: {},
-    capital: {},
-    code: {},
-    continent: {
-      // nt: Continent, <-- Assigned later to avoid potential circular dependency.
-    },
-    currencies: {},
-    currency: {},
-    emoji: {},
-    emojiU: {},
-    languages: {
-      // nt: Language, <-- Assigned later to avoid potential circular dependency.
-    },
-    name: {
-      a: {
-        lang: {
-          nt: String,
-          it: [0],
-        },
-      },
-    },
-    native: {},
-    phone: {},
-    phones: {},
-    states: {
-      // nt: State, <-- Assigned later to avoid potential circular dependency.
-    },
-    subdivisions: {
-      // nt: Subdivision, <-- Assigned later to avoid potential circular dependency.
+    date: {},
+    id: {},
+    winner: {
+      // nt: Trainer, <-- Assigned later to avoid potential circular dependency.
     },
   },
 };
 
-const Language: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+const BattleTrainer: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
-    code: {},
-    name: {},
-    native: {},
-    rtl: {},
-  },
-};
-
-const State: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  f: {
-    code: {},
-    country: {
-      // nt: Country, <-- Assigned later to avoid potential circular dependency.
+    combatant1: {
+      // nt: CombatantSinglePokemon, <-- Assigned later to avoid potential circular dependency.
     },
+    combatant2: {
+      // nt: CombatantSinglePokemon, <-- Assigned later to avoid potential circular dependency.
+    },
+    date: {},
+    id: {},
+    winner: {
+      // nt: Trainer, <-- Assigned later to avoid potential circular dependency.
+    },
+  },
+};
+
+const BattleWild: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+  f: {
+    date: {},
+    id: {},
+    pokemon: {
+      // nt: Pokemon, <-- Assigned later to avoid potential circular dependency.
+    },
+    result: {},
+    trainer: {
+      // nt: Trainer, <-- Assigned later to avoid potential circular dependency.
+    },
+    wildPokemons: {
+      // nt: Pokemon, <-- Assigned later to avoid potential circular dependency.
+    },
+  },
+};
+
+const CombatantMultiPokemon: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+  f: {
+    pokemons: {
+      // nt: Pokemon, <-- Assigned later to avoid potential circular dependency.
+    },
+    trainer: {
+      // nt: Trainer, <-- Assigned later to avoid potential circular dependency.
+    },
+  },
+};
+
+const CombatantSinglePokemon: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+  f: {
+    pokemon: {
+      // nt: Pokemon, <-- Assigned later to avoid potential circular dependency.
+    },
+    trainer: {
+      // nt: Trainer, <-- Assigned later to avoid potential circular dependency.
+    },
+  },
+};
+
+const Patron: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+  f: {
+    id: {},
+    money: {},
     name: {},
   },
 };
 
-const Subdivision: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+const Pokemon: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
-    code: {},
-    emoji: {},
+    attack: {},
+    birthday: {
+      nt: Date,
+    },
+    defense: {},
+    hp: {},
+    id: {},
     name: {},
+    trainer: {
+      // nt: Trainer, <-- Assigned later to avoid potential circular dependency.
+    },
+    type: {},
+  },
+};
+
+const Trainer: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+  f: {
+    class: {},
+    fans: {
+      // nt: Patron, <-- Assigned later to avoid potential circular dependency.
+    },
+    id: {},
+    name: {},
+    pokemon: {
+      // nt: Pokemon, <-- Assigned later to avoid potential circular dependency.
+    },
   },
 };
 
@@ -217,7 +262,12 @@ const Subdivision: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 
-// None of your Interfaces have custom scalars.
+const Being: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+  f: {
+    ...Pokemon.f,
+    ...Trainer.f,
+  },
+};
 
 //
 //
@@ -235,7 +285,13 @@ const Subdivision: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 
-// None of your Unions have custom scalars.
+const Battle: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+  f: {
+    ...BattleRoyale.f,
+    ...BattleTrainer.f,
+    ...BattleWild.f,
+  },
+};
 
 //
 //
@@ -255,59 +311,74 @@ const Subdivision: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 
 const Query: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
-    continent: {
+    battles: {
+      // nt: Battle, <-- Assigned later to avoid potential circular dependency.
+    },
+    beings: {
+      // nt: Being, <-- Assigned later to avoid potential circular dependency.
+    },
+    pokemon: {
+      // nt: Pokemon, <-- Assigned later to avoid potential circular dependency.
+    },
+    pokemonByName: {
       a: {
-        code: {
-          nt: ID,
+        name: {
+          nt: String,
           it: [1],
         },
       },
-      // nt: Continent, <-- Assigned later to avoid potential circular dependency.
+      // nt: Pokemon, <-- Assigned later to avoid potential circular dependency.
     },
-    continents: {
+    pokemons: {
       a: {
         filter: {
-          nt: ContinentFilterInput,
+          nt: PokemonFilter,
           it: [0],
         },
       },
-      // nt: Continent, <-- Assigned later to avoid potential circular dependency.
+      // nt: Pokemon, <-- Assigned later to avoid potential circular dependency.
     },
-    countries: {
+    trainerByName: {
       a: {
-        filter: {
-          nt: CountryFilterInput,
-          it: [0],
-        },
-      },
-      // nt: Country, <-- Assigned later to avoid potential circular dependency.
-    },
-    country: {
-      a: {
-        code: {
-          nt: ID,
+        name: {
+          nt: String,
           it: [1],
         },
       },
-      // nt: Country, <-- Assigned later to avoid potential circular dependency.
+      // nt: Trainer, <-- Assigned later to avoid potential circular dependency.
     },
-    language: {
+    trainers: {
+      // nt: Trainer, <-- Assigned later to avoid potential circular dependency.
+    },
+  },
+};
+
+const Mutation: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+  f: {
+    addPokemon: {
       a: {
-        code: {
-          nt: ID,
+        attack: {
+          nt: Int,
+          it: [0],
+        },
+        defense: {
+          nt: Int,
+          it: [0],
+        },
+        hp: {
+          nt: Int,
+          it: [0],
+        },
+        name: {
+          nt: String,
+          it: [1],
+        },
+        type: {
+          nt: PokemonType,
           it: [1],
         },
       },
-      // nt: Language, <-- Assigned later to avoid potential circular dependency.
-    },
-    languages: {
-      a: {
-        filter: {
-          nt: LanguageFilterInput,
-          it: [0],
-        },
-      },
-      // nt: Language, <-- Assigned later to avoid potential circular dependency.
+      // nt: Pokemon, <-- Assigned later to avoid potential circular dependency.
     },
   },
 };
@@ -329,18 +400,30 @@ const Query: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 
-Continent.f[`countries`]!.nt = Country;
-Country.f[`continent`]!.nt = Continent;
-Country.f[`languages`]!.nt = Language;
-Country.f[`states`]!.nt = State;
-Country.f[`subdivisions`]!.nt = Subdivision;
-State.f[`country`]!.nt = Country;
-Query.f[`continent`]!.nt = Continent;
-Query.f[`continents`]!.nt = Continent;
-Query.f[`countries`]!.nt = Country;
-Query.f[`country`]!.nt = Country;
-Query.f[`language`]!.nt = Language;
-Query.f[`languages`]!.nt = Language;
+PokemonFilter.f![`birthday`]!.nt = DateFilter;
+BattleRoyale.f[`combatants`]!.nt = CombatantMultiPokemon;
+BattleRoyale.f[`winner`]!.nt = Trainer;
+BattleTrainer.f[`combatant1`]!.nt = CombatantSinglePokemon;
+BattleTrainer.f[`combatant2`]!.nt = CombatantSinglePokemon;
+BattleTrainer.f[`winner`]!.nt = Trainer;
+BattleWild.f[`pokemon`]!.nt = Pokemon;
+BattleWild.f[`trainer`]!.nt = Trainer;
+BattleWild.f[`wildPokemons`]!.nt = Pokemon;
+CombatantMultiPokemon.f[`pokemons`]!.nt = Pokemon;
+CombatantMultiPokemon.f[`trainer`]!.nt = Trainer;
+CombatantSinglePokemon.f[`pokemon`]!.nt = Pokemon;
+CombatantSinglePokemon.f[`trainer`]!.nt = Trainer;
+Pokemon.f[`trainer`]!.nt = Trainer;
+Trainer.f[`fans`]!.nt = Patron;
+Trainer.f[`pokemon`]!.nt = Pokemon;
+Query.f[`battles`]!.nt = Battle;
+Query.f[`beings`]!.nt = Being;
+Query.f[`pokemon`]!.nt = Pokemon;
+Query.f[`pokemonByName`]!.nt = Pokemon;
+Query.f[`pokemons`]!.nt = Pokemon;
+Query.f[`trainerByName`]!.nt = Trainer;
+Query.f[`trainers`]!.nt = Trainer;
+Mutation.f[`addPokemon`]!.nt = Pokemon;
 
 //
 //
@@ -361,24 +444,34 @@ Query.f[`languages`]!.nt = Language;
 const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
   operations: {
     query: Query,
+    mutation: Mutation,
   },
   directives: {},
   types: {
-    Boolean,
     Float,
     ID,
-    Int,
     String,
-    ContinentFilterInput,
-    CountryFilterInput,
-    LanguageFilterInput,
-    StringQueryOperatorInput,
-    Continent,
-    Country,
-    Language,
-    State,
-    Subdivision,
+    Int,
+    Boolean,
+    Date,
+    BattleWildResult,
+    PokemonType,
+    TrainerClass,
+    DateFilter,
+    PokemonFilter,
+    StringFilter,
+    BattleRoyale,
+    BattleTrainer,
+    BattleWild,
+    CombatantMultiPokemon,
+    CombatantSinglePokemon,
+    Patron,
+    Pokemon,
+    Trainer,
+    Being,
+    Battle,
     Query,
+    Mutation,
   },
 };
 

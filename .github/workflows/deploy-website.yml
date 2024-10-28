@@ -43,6 +43,10 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
+# TODO Go back to building website in CI and NOT committing the dist to the repo.
+# Currently, the Twoslash results in CI are not consistent with local results.
+# E.g. We'll get some variable as `any` in CI versus an actual data type in local.
+
 # name: Deploy Website
 # on:
 #   push:

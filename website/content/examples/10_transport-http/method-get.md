@@ -9,7 +9,7 @@ to be sent over HTTP GET method. Note write-kind operations (mutation) are still
 
 <!-- dprint-ignore-start -->
 ```ts twoslash
-import { Pokemon } from './pokemon/__.js'
+import { Graffle } from './graffle/__.js'
 
 const graffle = Pokemon
   .create({

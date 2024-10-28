@@ -47,39 +47,62 @@ export namespace Select {
     $$Schema.Schema,
     OperationTypeNode.QUERY
   >;
+  export type Mutation<$SelectionSet extends $$SelectionSets.Mutation> = InferResult.Operation<
+    $SelectionSet,
+    $$Schema.Schema,
+    OperationTypeNode.MUTATION
+  >;
   //                                            OutputObject
   // --------------------------------------------------------------------------------------------------
   //
-  export type Continent<$SelectionSet extends $$SelectionSets.Continent> = InferResult.OutputObject<
+  export type BattleRoyale<$SelectionSet extends $$SelectionSets.BattleRoyale> = InferResult.OutputObject<
     $SelectionSet,
     $$Schema.Schema,
-    $$Schema.Schema["allTypes"]["Continent"]
+    $$Schema.Schema["allTypes"]["BattleRoyale"]
   >;
-  export type Country<$SelectionSet extends $$SelectionSets.Country> = InferResult.OutputObject<
+  export type BattleTrainer<$SelectionSet extends $$SelectionSets.BattleTrainer> = InferResult.OutputObject<
     $SelectionSet,
     $$Schema.Schema,
-    $$Schema.Schema["allTypes"]["Country"]
+    $$Schema.Schema["allTypes"]["BattleTrainer"]
   >;
-  export type Language<$SelectionSet extends $$SelectionSets.Language> = InferResult.OutputObject<
+  export type BattleWild<$SelectionSet extends $$SelectionSets.BattleWild> = InferResult.OutputObject<
     $SelectionSet,
     $$Schema.Schema,
-    $$Schema.Schema["allTypes"]["Language"]
+    $$Schema.Schema["allTypes"]["BattleWild"]
   >;
-  export type State<$SelectionSet extends $$SelectionSets.State> = InferResult.OutputObject<
+  export type CombatantMultiPokemon<$SelectionSet extends $$SelectionSets.CombatantMultiPokemon> =
+    InferResult.OutputObject<$SelectionSet, $$Schema.Schema, $$Schema.Schema["allTypes"]["CombatantMultiPokemon"]>;
+  export type CombatantSinglePokemon<$SelectionSet extends $$SelectionSets.CombatantSinglePokemon> =
+    InferResult.OutputObject<$SelectionSet, $$Schema.Schema, $$Schema.Schema["allTypes"]["CombatantSinglePokemon"]>;
+  export type Patron<$SelectionSet extends $$SelectionSets.Patron> = InferResult.OutputObject<
     $SelectionSet,
     $$Schema.Schema,
-    $$Schema.Schema["allTypes"]["State"]
+    $$Schema.Schema["allTypes"]["Patron"]
   >;
-  export type Subdivision<$SelectionSet extends $$SelectionSets.Subdivision> = InferResult.OutputObject<
+  export type Pokemon<$SelectionSet extends $$SelectionSets.Pokemon> = InferResult.OutputObject<
     $SelectionSet,
     $$Schema.Schema,
-    $$Schema.Schema["allTypes"]["Subdivision"]
+    $$Schema.Schema["allTypes"]["Pokemon"]
+  >;
+  export type Trainer<$SelectionSet extends $$SelectionSets.Trainer> = InferResult.OutputObject<
+    $SelectionSet,
+    $$Schema.Schema,
+    $$Schema.Schema["allTypes"]["Trainer"]
   >;
   //                                               Union
   // --------------------------------------------------------------------------------------------------
   //
-
+  export type Battle<$SelectionSet extends $$SelectionSets.Battle> = InferResult.Union<
+    $SelectionSet,
+    $$Schema.Schema,
+    $$Schema.Schema["allTypes"]["Battle"]
+  >;
   //                                             Interface
   // --------------------------------------------------------------------------------------------------
   //
+  export type Being<$SelectionSet extends $$SelectionSets.Being> = InferResult.Interface<
+    $SelectionSet,
+    $$Schema.Schema,
+    $$Schema.Schema["allTypes"]["Being"]
+  >;
 }

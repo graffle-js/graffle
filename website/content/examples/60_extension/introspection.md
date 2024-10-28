@@ -9,7 +9,7 @@ This example shows how to use the Introspection extension to easily introspect y
 <!-- dprint-ignore-start -->
 ```ts twoslash
 import { Introspection } from 'graffle/extensions/introspection'
-import { Pokemon } from './pokemon/__.js'
+import { Graffle } from './graffle/__.js'
 
 const pokemon = Pokemon.create().use(Introspection())
 

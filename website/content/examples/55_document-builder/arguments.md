@@ -8,7 +8,7 @@ This example shows how to write field arguments in TypeScript interface.
 
 <!-- dprint-ignore-start -->
 ```ts twoslash
-import { Pokemon } from './pokemon/__.js'
+import { Graffle } from './graffle/__.js'
 
 const atlas = Pokemon.create()
 
