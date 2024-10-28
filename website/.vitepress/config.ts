@@ -71,14 +71,9 @@ sidebars['/guides/'].items.unshift(...rootItems)
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  /**
-   * @see https://github.com/pillarjs/path-to-regexp/blob/8b7440438f726cce7a891f9325dd79a65978347f/Readme.md
-   */
-  // dprint-ignore
-  rewrites: {
-    ':section/{:_(\\d+_)}?:one/{:_(\\d+_)}?:two/{:_(\\d+_)}?:three'   : ':section/:one/:two/:three',
-    ':section/{:_(\\d+_)}?:one/{:_(\\d+_)}?:two'                      : ':section/:one/:two',
-    ':section/{:_(\\d+_)}?:one'                                       : ':section/:one'
+  rewrites: (path) => {
+    const newPath = path.replaceAll(prefixPattern, '')
+    return newPath
   },
   title: 'Graffle',
   description: 'Minimalist Progressively Type Safe GraphQL Client For JavaScript.',
