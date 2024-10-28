@@ -1,5 +1,5 @@
 import { expect } from 'vitest'
-import { Date } from '../../../tests/_/fixtures/scalars.js'
+import { DateScalar } from '../../../tests/_/fixtures/scalars.js'
 import { test } from '../../../tests/_/helpers.js'
 import { db } from '../../../tests/_/schemas/db.js'
 import type { Graffle } from '../../../tests/_/schemas/kitchen-sink/graffle/__.js'
@@ -11,7 +11,7 @@ import { Grafaid } from '../../lib/grafaid/__.js'
 import type { Schema } from '../../types/Schema/__.js'
 
 type QueryWithDate = Graffle.SelectionSets.Query<
-  Schema.Scalar.Registry.AddScalar<Schema.Scalar.Registry.Empty, typeof Date>
+  Schema.Scalar.Registry.AddScalar<Schema.Scalar.Registry.Empty, typeof DateScalar>
 >
 
 type TestCase = [
@@ -36,7 +36,7 @@ const testCases = test.for<TestCase>([
 ])
 
 testCases(`%s`, async ([_, query, expectedVariables], { kitchenSink }) => {
-  const g = kitchenSink.use(Spy()).scalar(Date)
+  const g = kitchenSink.use(Spy()).scalar(DateScalar)
   const { document, operationsVariables } = SelectionSetGraphqlMapper.toGraphQL(
     Select.Document.createDocumentNormalizedFromQuerySelection(query as any),
     {

@@ -54,11 +54,12 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
     export interface ${node.name}Methods<$Context extends ${identifiers.$$Utilities}.ClientContext> {
       $batch: <$SelectionSet>(selectionSet: ${identifiers.$$Utilities}.Exact<$SelectionSet, ${identifiers.$$SelectionSets}.${node.name}<$Context['scalars']>>) =>
         Promise<
-          ${identifiers.$$Utilities}.Simplify<
+          ${identifiers.$$Utilities}.ConditionalSimplify<
             ${identifiers.$$Utilities}.HandleOutput<
               $Context,
               InferResult.Operation${capitalizeFirstLetter(operationType)}<$SelectionSet, ${identifiers.$$Schema}.${identifiers.Schema}<$Context['scalars']>>
-            >
+            >,
+            $Context['scalars']['typesDecoded']
           >
         >
       __typename: () =>
@@ -90,12 +91,13 @@ const renderFieldMethods = createCodeGenerator<{ node: Grafaid.Schema.ObjectType
     code(`
       ${field.name}: <$SelectionSet>(selectionSet${isOptional ? `?` : ``}: ${identifiers.$$Utilities}.Exact<$SelectionSet, ${identifiers.$$SelectionSets}.${renderName(node)}.${renderName(field)}<$Context['scalars']>>) =>
         Promise<
-          ${identifiers.$$Utilities}.Simplify<
+          ${identifiers.$$Utilities}.ConditionalSimplify<
             ${identifiers.$$Utilities}.HandleOutputGraffleRootField<
               $Context,
               InferResult.Operation${capitalizeFirstLetter(operationType)}<{ ${field.name}: $SelectionSet}, ${identifiers.$$Schema}.${identifiers.Schema}<$Context['scalars']>>,
               '${field.name}'
-            >
+            >,
+            $Context['scalars']['typesDecoded']
           >
         >
     `)

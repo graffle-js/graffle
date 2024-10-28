@@ -1,5 +1,5 @@
 import { describe, expect } from 'vitest'
-import { Date } from '../../../tests/_/fixtures/scalars.js'
+import { DateScalar } from '../../../tests/_/fixtures/scalars.js'
 import { createResponse, test } from '../../../tests/_/helpers.js'
 import { db } from '../../../tests/_/schemas/db.js'
 import type { Graffle } from '../../../tests/_/schemas/kitchen-sink/graffle/__.js'
@@ -9,7 +9,7 @@ import { Grafaid } from '../../lib/grafaid/__.js'
 import type { Schema } from '../../types/Schema/__.js'
 
 type QueryWithDate = Graffle.SelectionSets.Query<
-  Schema.Scalar.Registry.AddScalar<Schema.Scalar.Registry.Empty, typeof Date>
+  Schema.Scalar.Registry.AddScalar<Schema.Scalar.Registry.Empty, typeof DateScalar>
 >
 
 type TestCase = [
@@ -26,7 +26,7 @@ const withBatch: TestCaseWith = [
   {},
   async ([_, query, responseData, expectedData], { fetch, kitchenSinkHttp: kitchenSink }) => {
     fetch.mockResolvedValueOnce(createResponse({ data: responseData }))
-    expect(await kitchenSink.scalar(Date).query.$batch(query)).toEqual(expectedData)
+    expect(await kitchenSink.scalar(DateScalar).query.$batch(query)).toEqual(expectedData)
   },
 ]
 
@@ -38,7 +38,7 @@ const withGqlDocument: TestCaseWith = [
     const { document } = SelectionSetGraphqlMapper.toGraphQL(
       Select.Document.createDocumentNormalizedFromQuerySelection(query as any),
     )
-    expect(await kitchenSink.scalar(Date).gql(document).send()).toEqual(expectedData)
+    expect(await kitchenSink.scalar(DateScalar).gql(document).send()).toEqual(expectedData)
   },
 ]
 
@@ -50,7 +50,7 @@ const withGqlString: TestCaseWith = [
     const { document } = SelectionSetGraphqlMapper.toGraphQL(
       Select.Document.normalizeOrThrow({ query: { foo: query as any } }),
     )
-    expect(await kitchenSink.scalar(Date).gql(Grafaid.Document.print(document)).send()).toEqual(expectedData)
+    expect(await kitchenSink.scalar(DateScalar).gql(Grafaid.Document.print(document)).send()).toEqual(expectedData)
   },
 ]
 
@@ -107,7 +107,7 @@ describe(`$batch`, () => {
   describe(`object field in union`, () => {
     testUnionCases(`%s`, async ([_, query, responseData, expectedData], { fetch, kitchenSinkHttp: kitchenSink }) => {
       fetch.mockResolvedValueOnce(createResponse({ data: responseData }))
-      expect(await kitchenSink.scalar(Date).query.$batch(query)).toEqual(expectedData)
+      expect(await kitchenSink.scalar(DateScalar).query.$batch(query)).toEqual(expectedData)
     })
   })
 })

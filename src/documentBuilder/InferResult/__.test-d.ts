@@ -1,4 +1,4 @@
-import type { Date } from '../../../tests/_/fixtures/scalars.js'
+import type { DateScalar } from '../../../tests/_/fixtures/scalars.js'
 import type { db } from '../../../tests/_/schemas/db.js'
 import type { Schema } from '../../../tests/_/schemas/kitchen-sink/graffle/modules/schema.js'
 import type * as SelectionSets from '../../../tests/_/schemas/kitchen-sink/graffle/modules/selection-sets.js'
@@ -9,7 +9,7 @@ import type { PickSelectsPositiveIndicatorAndNotSelectAlias } from './OutputObje
 
 type $<$SelectionSet extends SelectionSets.Query> = InferResult.OperationQuery<$SelectionSet, Schema>
 
-type $Registry = Registry.AddScalar<Registry.Empty, typeof Date>
+type $Registry = Registry.AddScalar<Registry.Empty, typeof DateScalar>
 
 type $WithDate<$SelectionSet extends SelectionSets.Query<$Registry>> = InferResult.OperationQuery<
   $SelectionSet,

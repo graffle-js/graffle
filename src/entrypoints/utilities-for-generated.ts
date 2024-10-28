@@ -1,4 +1,5 @@
 export { type Simplify } from 'type-fest'
+export type { ConditionalSimplify } from 'type-fest/source/conditional-simplify.js'
 export * from '../documentBuilder/Select/__.js'
 export { type ClientContext } from '../layers/6_client/fluent.js'
 export type {

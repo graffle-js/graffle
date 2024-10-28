@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import { Date } from '../../../tests/_/fixtures/scalars.js'
+import { DateScalar } from '../../../tests/_/fixtures/scalars.js'
 import { db } from '../../../tests/_/schemas/db.js'
 import { schemaDrivenDataMap } from '../../../tests/_/schemas/kitchen-sink/graffle/modules/schema-driven-data-map.js'
 import type * as SelectionSets from '../../../tests/_/schemas/kitchen-sink/graffle/modules/selection-sets.js'
@@ -15,7 +15,9 @@ type CasesDescriptiveQuery = [
 ]
 const testEachQueryWithDescription = test.for.bind(test)<CasesDescriptiveQuery>
 
-type QueryWithDate = SelectionSets.Query<Schema.Scalar.Registry.AddScalar<Schema.Scalar.Registry.Empty, typeof Date>>
+type QueryWithDate = SelectionSets.Query<
+  Schema.Scalar.Registry.AddScalar<Schema.Scalar.Registry.Empty, typeof DateScalar>
+>
 
 type CasesDescriptiveQueryWithCustomScalars = [
   description: string,
@@ -142,5 +144,5 @@ const customScalarWithCodecCases = testEachQueryWithDescriptionWithCustomScalars
   [`args - custom scalar - input object field`                       , { dateArgInputObject: { $: { input: { idRequired: ``, dateRequired: db.date0, date: db.date1 } } } }],
   [`args - custom scalar - nested input object field`                , { InputObjectNested: { $: { input: { InputObject: { idRequired: ``, dateRequired: db.date0, date: db.date1 } } } } }],
 ])
-customScalarWithCodecCases(...tester({ variables: true, scalars: { Date } }))
-customScalarWithCodecCases(...tester({ variables: false, scalars: { Date } }))
+customScalarWithCodecCases(...tester({ variables: true, scalars: { DateScalar } }))
+customScalarWithCodecCases(...tester({ variables: false, scalars: { DateScalar } }))

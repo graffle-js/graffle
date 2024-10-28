@@ -26,7 +26,9 @@ interface Project {
   }>
 }
 
-export const kitchenSink = KitchenSink.create({ schema: kitchenSinkSchema })
+export const kitchenSink = KitchenSink.create({
+  schema: kitchenSinkSchema,
+})
 
 export const createResponse = (body: object) =>
   new Response(JSON.stringify(body), { status: 200, headers: { 'content-type': CONTENT_TYPE_REC } })
