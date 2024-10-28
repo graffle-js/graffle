@@ -101,7 +101,7 @@ export default defineConfig({
           twoslashOptions: {
             handbookOptions: {
               noErrors: true,
-              noErrorValidation: process.env.NODE_ENV === 'development',
+              noErrorValidation: process.env.NODE_ENV !== 'development',
             },
             compilerOptions: {
               moduleResolution: ModuleResolutionKind.Bundler,
