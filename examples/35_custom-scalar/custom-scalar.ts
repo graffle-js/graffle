@@ -9,8 +9,8 @@ import { show } from '../$/helpers.js'
 const graffle = Pokemon
   .create()
   .scalar(`Date`, {
-    decode: (value) => new globalThis.Date(value),
-    encode: (value) => value.toISOString(),
+    decode: (value: string) => new Date(value),
+    encode: (value: Date) => value.toISOString(),
   })
 
 const pokemons = await graffle.query.pokemons({
