@@ -2,14 +2,22 @@ import { describe, expect, expectTypeOf } from 'vitest'
 import { DateScalar } from '../../../../tests/_/fixtures/scalars.js'
 import { kitchenSink, test } from '../../../../tests/_/helpers.js'
 
-describe(`query`, () => {
+describe(`query batch`, () => {
+  test(`success`, async ({ kitchenSinkData: db }) => {
+    expect(await kitchenSink.query.$batch({ id: true })).toMatchObject({ id: db.id })
+  })
+  test(`error`, async ({ kitchenSinkData: db }) => {
+    await expect(kitchenSink.query.$batch({ error: true })).rejects.toMatchObject(db.errorAggregate)
+  })
+})
+
+describe(`query root field`, () => {
   test(`scalar`, async ({ kitchenSink, kitchenSinkData: db }) => {
     await expect(kitchenSink.query.id()).resolves.toEqual(db.id1)
   })
   test(`argument`, async ({ kitchenSink }) => {
     await expect(kitchenSink.query.stringWithArgs({ $: { id: `x` } })).resolves.toEqual(`{"id":"x"}`)
   })
-
   test(`object`, async ({ kitchenSink, kitchenSinkData: db }) => {
     await expect(kitchenSink.query.object({ id: true })).resolves.toEqual({ id: db.id })
   })
@@ -43,6 +51,10 @@ describe(`query`, () => {
       const result = await kitchenSink.scalar(DateScalar).query.dateArg()
       expect(result).toEqual(db.date0)
       expectTypeOf(result).toEqualTypeOf<Date | null>()
+
+      const result2 = await kitchenSink.scalar(DateScalar).query.dateObject1({ date1: true })
+      expect(result2).toEqual({ date1: db.date1 })
+      expectTypeOf(result2).toEqualTypeOf<{ date1: Date | null } | null>()
     })
     test(`argument without codec`, async ({ kitchenSinkData: db }) => {
       await kitchenSink.query.dateArg({ $: { date: db.date0Encoded } })
