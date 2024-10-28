@@ -2,10 +2,10 @@
  * This example shows how to configure output to use the envelope.
  */
 
-import { Pokemon } from '../../tests/_/schemas/pokemon/graffle/__.js'
+import { Graffle } from '../../tests/_/schemas/pokemon/graffle/__.js'
 import { show } from '../$/helpers.js'
 
-const pokemon = Pokemon.create({
+const pokemon = Graffle.create({
   output: {
     envelope: true,
   },

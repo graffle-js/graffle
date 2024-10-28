@@ -7,7 +7,7 @@
 ```ts twoslash
 import { Graffle } from './graffle/__.js'
 
-const pokemon = Pokemon
+const pokemon = Graffle
   .create({
     output: {
       envelope: false,

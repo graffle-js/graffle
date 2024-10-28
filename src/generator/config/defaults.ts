@@ -1,5 +1,7 @@
 import type { InputOutputCase } from './input.js'
 
+export const defaultNamespace = `Graffle`
+
 export const defaultName = `default`
 
 export const defaultLibraryPaths = {

@@ -1,7 +1,7 @@
 import { describe, expect, expectTypeOf } from 'vitest'
 import { createResponse, test } from '../../../tests/_/helpers.js'
 import { serveSchema } from '../../../tests/_/lib/serveSchema.js'
-import { Pokemon } from '../../../tests/_/schemas/pokemon/graffle/__.js'
+import { Graffle as Pokemon } from '../../../tests/_/schemas/pokemon/graffle/__.js'
 import { Graffle } from '../../entrypoints/main.js'
 import { ACCEPT_REC, CONTENT_TYPE_REC } from '../../lib/grafaid/http/http.js'
 import { Transport } from '../5_request/types.js'

@@ -11,7 +11,7 @@ This example shows how to use special fields to write GraphQL document directive
 // import { parse, print } from 'graphql'
 import { Graffle } from './graffle/__.js'
 
-const pokemon = Pokemon.create()
+const pokemon = Graffle.create()
 
 const pokemons = await pokemon.query.$batch({
   ___: {

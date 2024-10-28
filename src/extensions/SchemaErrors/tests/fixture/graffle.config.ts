@@ -4,7 +4,8 @@ import { SchemaErrors } from '../../gentime.js'
 
 export default Generator
   .configure({
-    name: `GraffleSchemaErrors`,
+    name: `graffleSchemaErrors`,
+    nameNamespace: true,
     schema: {
       type: `instance`,
       instance: schema,

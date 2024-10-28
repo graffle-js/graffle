@@ -10,7 +10,7 @@ This example shows how to configure output to throw errors even when using the e
 ```ts twoslash
 import { Graffle } from './graffle/__.js'
 
-const pokemon = Pokemon
+const pokemon = Graffle
   .create({
     output: {
       envelope: {

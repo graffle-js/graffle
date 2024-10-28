@@ -46,6 +46,16 @@ export interface Input {
    */
   name?: string
   /**
+   * The namespace name to use.
+   *
+   * - If `true` then match the `name` if given.
+   * - If `false` then use the default value.
+   * - If a string then use that value.
+   *
+   * @defaultValue `Graffle`
+   */
+  nameNamespace?: boolean | string
+  /**
    * Control various checks that Graffle performs. For example you could disable the warning about missing custom scalar codecs.
    */
   lint?: InputLint

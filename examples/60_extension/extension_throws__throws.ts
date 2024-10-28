@@ -3,12 +3,12 @@
  */
 
 import { Throws } from '../../src/entrypoints/extensions/throws/runtime.js'
-import { Pokemon } from '../../tests/_/schemas/pokemon/graffle/__.js'
+import { Graffle } from '../../tests/_/schemas/pokemon/graffle/__.js'
 import { interceptAndShowUncaughtErrors, show } from '../$/show.js'
 
 interceptAndShowUncaughtErrors()
 
-const pokemon = Pokemon
+const pokemon = Graffle
   .create({ output: { defaults: { errorChannel: `return` } } })
   .use(Throws())
   .anyware(({ encode: _ }) => {

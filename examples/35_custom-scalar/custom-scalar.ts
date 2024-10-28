@@ -3,10 +3,10 @@
  * have arguments and data automatically encoded and decoded respectively.
  */
 
-import { Pokemon } from '../../tests/_/schemas/pokemon/graffle/__.js'
+import { Graffle } from '../../tests/_/schemas/pokemon/graffle/__.js'
 import { show } from '../$/helpers.js'
 
-const graffle = Pokemon
+const graffle = Graffle
   .create()
   .scalar(`Date`, {
     decode: (value: string) => new Date(value),

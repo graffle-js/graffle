@@ -7,7 +7,7 @@
 ```ts twoslash
 import { Graffle } from './graffle/__.js'
 
-const pokemon = Pokemon.create()
+const pokemon = Graffle.create()
 
 const day = 1000 * 60 * 60 * 24
 const year = day * 365.25

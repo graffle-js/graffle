@@ -18,7 +18,7 @@ describe(`select`, () => {
 })
 
 describe(`create`, () => {
-  const select = create(`QueryOnly`)
+  const select = create(`queryOnly`)
   test(`does not have root types if not in schema`, () => {
     // fine
     select.Query

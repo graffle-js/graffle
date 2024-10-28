@@ -10,7 +10,7 @@ This example shows how to work with interface types.
 ```ts twoslash
 import { Graffle } from './graffle/__.js'
 
-const pokemon = Pokemon.create()
+const pokemon = Graffle.create()
 
 const beings = await pokemon.query.beings({
   __typename: true,

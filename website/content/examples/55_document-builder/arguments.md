@@ -10,7 +10,7 @@ This example shows how to write field arguments in TypeScript interface.
 ```ts twoslash
 import { Graffle } from './graffle/__.js'
 
-const atlas = Pokemon.create()
+const atlas = Graffle.create()
 
 const pokemons = await atlas.query.pokemons({
   $: { filter: { name: { in: [`Pikachu`, `Charizard`] } } },  // [!code highlight]

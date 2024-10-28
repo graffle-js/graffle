@@ -20,7 +20,7 @@ type Mutation {
 And you could select both with `$batch` in a single request:
 
 ```ts twoslash
-import { Pokemon } from './pokemon/__.js'
+import { Graffle } from './graffle/__.js'
 const pokemon = Pokemon.create()
 // ---cut---
 const result = await pokemon.query.$batch({

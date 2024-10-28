@@ -5,7 +5,7 @@
 ```ts twoslash
 import { Graffle } from './graffle/__.js'
 
-const graffle = Pokemon
+const graffle = Graffle
   .create({
     transport: {
       methodMode: `getReads`, // [!code highlight]

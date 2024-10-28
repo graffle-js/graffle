@@ -2,10 +2,10 @@
  * This example shows how to write whole GraphQL documents in the TypeScript interface.
  */
 
-import { Pokemon } from '../../tests/_/schemas/pokemon/graffle/__.js'
+import { Graffle } from '../../tests/_/schemas/pokemon/graffle/__.js'
 import { showJson } from '../$/helpers.js'
 
-const pokemon = Pokemon.create()
+const pokemon = Graffle.create()
 
 const pokemons = await pokemon.document({
   //                           ^^^^^^^^

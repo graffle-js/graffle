@@ -7,7 +7,7 @@
 ```ts twoslash
 import { Graffle } from './graffle/__.js'
 
-const pokemon = Pokemon.create()
+const pokemon = Graffle.create()
 
 const pokemons = await pokemon.query.$batch({
   //                                 ^^^^^^

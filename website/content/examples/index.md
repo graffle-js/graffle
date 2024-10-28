@@ -23,7 +23,7 @@ Welcome to Graffle's collection of examples. Here you will find an assortment of
    Of these examples, some use a generated client while others the static. For generated client examples, you can assume all of them began with:
 
    ```sh
-   pnpm graffle generate --schema http://localhost:4000/graphql --output ./pokemon
+   pnpm graffle generate --schema http://localhost:4000/graphql
    ```
 
 5. The Pokemon GraphQL schema source can be found [here](https://github.com/jasonkuhrt/graphql-try/tree/main/schemas/pokemon). As seen above, you can run it locally with just:

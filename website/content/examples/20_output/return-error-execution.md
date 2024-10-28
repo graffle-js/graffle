@@ -10,7 +10,7 @@ This example shows how to configure output to have only certain kinds of errors 
 ```ts twoslash
 import { Graffle } from './graffle/__.js'
 
-const pokemon = Pokemon
+const pokemon = Graffle
   .create({
     output: {
       envelope: false,

@@ -1,4 +1,4 @@
-export const Name = `MutationOnly`
-export type Name = 'MutationOnly'
+export const Name = `mutationOnly`
+export type Name = 'mutationOnly'
 
 export const defaultSchemaUrl = undefined

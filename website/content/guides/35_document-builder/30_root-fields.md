@@ -16,7 +16,7 @@ type Mutation {
 Then the generated client would include a `addPokemon` method.
 
 ```ts twoslash
-import { Pokemon } from './pokemon/__.js'
+import { Graffle } from './graffle/__.js'
 const pokemon = Pokemon.create()
 // ---cut---
 const result = await pokemon.mutation.addPokemon({

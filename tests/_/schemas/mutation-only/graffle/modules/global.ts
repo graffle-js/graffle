@@ -7,7 +7,7 @@ import * as $$Schema from './schema.js'
 declare global {
   export namespace GraffleGlobal {
     export interface Clients {
-      MutationOnly: {
+      mutationOnly: {
         name: $$Data.Name
         schema: $$Schema.Schema
         interfaces: {

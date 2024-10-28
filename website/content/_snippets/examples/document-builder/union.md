@@ -5,7 +5,7 @@
 ```ts twoslash
 import { Graffle } from './graffle/__.js'
 
-const pokemon = Pokemon.create()
+const pokemon = Graffle.create()
 
 const battles = await pokemon.query.battles({
   __typename: true,

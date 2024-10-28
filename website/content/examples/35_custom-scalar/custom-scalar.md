@@ -11,7 +11,7 @@ have arguments and data automatically encoded and decoded respectively.
 ```ts twoslash
 import { Graffle } from './graffle/__.js'
 
-const graffle = Pokemon
+const graffle = Graffle
   .create()
   .scalar(`Date`, {
     decode: (value: string) => new Date(value),

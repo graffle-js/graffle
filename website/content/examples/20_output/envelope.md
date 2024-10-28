@@ -10,7 +10,7 @@ This example shows how to configure output to use the envelope.
 ```ts twoslash
 import { Graffle } from './graffle/__.js'
 
-const pokemon = Pokemon.create({
+const pokemon = Graffle.create({
   output: {
     envelope: true,
   },
@@ -43,7 +43,7 @@ console.log(result)
     headers: Headers {
       'content-type': 'application/graphql-response+json; charset=utf-8',
       'content-length': '142',
-      date: 'Mon, 28 Oct 2024 13:51:28 GMT',
+      date: 'Mon, 28 Oct 2024 14:28:09 GMT',
       connection: 'keep-alive',
       'keep-alive': 'timeout=5'
     },

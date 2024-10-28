@@ -2,10 +2,10 @@
  * This example shows how to work with interface types.
  */
 
-import { Pokemon } from '../../tests/_/schemas/pokemon/graffle/__.js'
+import { Graffle } from '../../tests/_/schemas/pokemon/graffle/__.js'
 import { show } from '../$/helpers.js'
 
-const pokemon = Pokemon.create()
+const pokemon = Graffle.create()
 
 // dprint-ignore
 const beings = await pokemon.query.beings({

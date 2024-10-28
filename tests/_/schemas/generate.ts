@@ -1,3 +1,4 @@
+import { camelCase } from 'es-toolkit'
 import { join } from 'node:path'
 import { Generator } from '../../../src/generator/__.js'
 import { Grafaid } from '../../../src/lib/grafaid/__.js'
@@ -5,6 +6,7 @@ import { Grafaid } from '../../../src/lib/grafaid/__.js'
 const generate = async (
   input: {
     dirName: string
+    dirNameName?: boolean
     input?: Generator.Config.BuilderInput
   },
 ) => {
@@ -16,6 +18,7 @@ const generate = async (
   const inputPathRootDir = join(import.meta.dirname, input.dirName)
 
   await Generator.generate({
+    name: input.dirNameName === false ? undefined : camelCase(input.dirName),
     currentWorkingDirectory: import.meta.dirname,
     schema: {
       type: `instance`,
@@ -38,29 +41,30 @@ const generate = async (
 }
 
 await generate({
-  dirName: `pokemon`,
-  input: {
-    defaultSchemaUrl: new URL(`http://localhost:3000/graphql`),
-    name: `Pokemon`,
-  },
-})
-
-await generate({
   dirName: `query-only`,
   input: {
-    name: `QueryOnly`,
+    nameNamespace: true,
   },
 })
 
 await generate({
   dirName: `mutation-only`,
   input: {
-    name: `MutationOnly`,
+    nameNamespace: true,
+  },
+})
+
+await generate({
+  dirName: `pokemon`,
+  input: {
+    defaultSchemaUrl: new URL(`http://localhost:3000/graphql`),
+    // name: `Pokemon`,
   },
 })
 
 await generate({
   dirName: `kitchen-sink`,
+  dirNameName: false,
   // input: {
   //   scalars: `./kitchen-sink/scalars.ts`,
   // },

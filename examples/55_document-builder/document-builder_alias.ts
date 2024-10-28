@@ -2,10 +2,10 @@
  * This example shows how to write GraphQL aliases in the TypeScript interface.
  */
 
-import { Pokemon } from '../../tests/_/schemas/pokemon/graffle/__.js'
+import { Graffle } from '../../tests/_/schemas/pokemon/graffle/__.js'
 import { showJson } from '../$/helpers.js'
 
-const pokemon = Pokemon.create()
+const pokemon = Graffle.create()
 
 const day = 1000 * 60 * 60 * 24
 const year = day * 365.25

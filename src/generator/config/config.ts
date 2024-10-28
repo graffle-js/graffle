@@ -1,3 +1,4 @@
+import { pascalCase } from 'es-toolkit'
 import * as Path from 'node:path'
 import { Graffle } from '../../entrypoints/__Graffle.js'
 import { Introspection } from '../../extensions/Introspection/Introspection.js'
@@ -7,13 +8,14 @@ import { Grafaid } from '../../lib/grafaid/__.js'
 import { isString } from '../../lib/prelude.js'
 import { type Formatter, getTypeScriptFormatter, passthroughFormatter } from '../../lib/typescript-formatter.js'
 import type { Extension } from '../extension/types.js'
-import { defaultLibraryPaths, defaultOutputCase } from './defaults.js'
+import { defaultLibraryPaths, defaultNamespace, defaultOutputCase } from './defaults.js'
 import { defaultName } from './defaults.js'
 import type { Input, InputLibraryPaths, InputLint, InputOutputCase } from './input.js'
 
 export interface Config {
   fs: Fs
   name: string
+  nameNamespace: string
   outputCase: InputOutputCase
   lint: Required<InputLint>
   schema: ConfigSchema
@@ -174,12 +176,24 @@ To suppress this warning disable formatting in one of the following ways:
         : Path.join(outputDirPathRoot, `schema.graphql`)
       : null
 
-  // --- Config ---
+  // --- name ---
 
-  // const customScalarsEnabled = input.customScalars ?? false
+  const name = input.name ?? defaultName
+
+  const nameNamespace = input.nameNamespace === true
+    ? input.name
+      ? pascalCase(input.name)
+      : defaultNamespace
+    : isString(input.nameNamespace)
+    ? input.nameNamespace
+    : defaultNamespace
+
+  // --- Config ---
 
   return {
     fs,
+    name,
+    nameNamespace,
     extensions: input.extensions ?? [],
     outputCase,
     lint,
@@ -188,7 +202,6 @@ To suppress this warning disable formatting in one of the following ways:
       customScalars: true, // todo do not assume true
       operationVariables: true, // todo do not assume true
     },
-    name: input.name ?? defaultName,
     schema,
     options: {
       isImportsCustomScalars: isCustomScalarsModuleExists,

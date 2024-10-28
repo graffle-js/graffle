@@ -3,12 +3,12 @@
  */
 
 import { Introspection } from '../../src/entrypoints/extensions/introspection/runtime.js'
-import { Pokemon } from '../../tests/_/schemas/pokemon/graffle/__.js'
+import { Graffle } from '../../tests/_/schemas/pokemon/graffle/__.js'
 import { interceptAndShowUncaughtErrors, show } from '../$/show.js'
 
 interceptAndShowUncaughtErrors()
 
-const pokemon = Pokemon.create().use(Introspection())
+const pokemon = Graffle.create().use(Introspection())
 
 const data = await pokemon.introspect()
 show(data)

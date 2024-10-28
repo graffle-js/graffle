@@ -2,10 +2,10 @@
  * This example shows how to work with GraphQL union types in the TypeScript interface.
  */
 
-import { Pokemon } from '../../tests/_/schemas/pokemon/graffle/__.js'
+import { Graffle } from '../../tests/_/schemas/pokemon/graffle/__.js'
 import { show } from '../$/helpers.js'
 
-const pokemon = Pokemon.create()
+const pokemon = Graffle.create()
 
 // dprint-ignore
 const battles = await pokemon.query.battles({

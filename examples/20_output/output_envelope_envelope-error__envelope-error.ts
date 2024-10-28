@@ -2,11 +2,11 @@
  * This example shows how to configure output to embed errors into the envelope.
  */
 
-import { Pokemon } from '../../tests/_/schemas/pokemon/graffle/__.js'
+import { Graffle } from '../../tests/_/schemas/pokemon/graffle/__.js'
 import { show } from '../$/helpers.js'
 
 // dprint-ignore
-const pokemon = Pokemon
+const pokemon = Graffle
   .create({
     output: {
       envelope: {
