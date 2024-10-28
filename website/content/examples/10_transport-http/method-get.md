@@ -20,7 +20,7 @@ const graffle = Pokemon
   })
   .anyware(async ({ exchange }) => {
     console.log(exchange.input.request)
-    return exchange()
+    return await exchange()
   })
 
 // The following request will use an HTTP POST method because it is
