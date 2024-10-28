@@ -71,7 +71,8 @@ The type of data flowing through the request pipeline is polymorphic reflecting 
 
 Discriminated unions are used to model this. All hook inputs share a base interface type which carries the discriminated properties of `interface` and `transport`. You can use these properties to narrow data in your anyware as needed.
 
-```ts twoslash
+```ts
+// todo twoslash
 import { Graffle } from 'graffle'
 // ---cut---
 Graffle

@@ -13,6 +13,7 @@
     "@shikijs/twoslash": "^1.22.0",
     "@shikijs/vitepress-twoslash": "^1.22.0",
     "@tsconfig/node20": "^20.1.4",
+    "@tsconfig/node22": "^22.0.0",
     "@tsconfig/strictest": "^2.0.5",
     "es-toolkit": "^1.24.0",
     "floating-vue": "^5.2.2",

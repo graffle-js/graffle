@@ -23,7 +23,7 @@ const result = await pokemon.mutation.addPokemon({
   //                         ^^^^^^^^^^^^^^^^^^^
   $: {
     name: 'Charmander',
-    type: 'fire',
+    $type: 'fire',
   },
   name: true,
 })

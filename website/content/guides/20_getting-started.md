@@ -117,7 +117,8 @@ You will see a directory named `graffle` has been created in the current working
 
 Let's rewrite our code to use the document builder. You should notice some new methods in your IDE like `.document` and `.query.countries`.
 
-```ts twoslash
+```ts
+// todo twoslash
 // @filename: main.ts
 
 import { Graffle } from 'graffle'
