@@ -1,5 +1,4 @@
-import type { IsEmptyObject, IsNever, IsUnknown, Simplify } from 'type-fest'
-import type { ConditionalSimplify, ConditionalSimplifyDeep } from 'type-fest/source/conditional-simplify.js'
+import type { IsAny, IsEmptyObject, IsNever, IsUnknown, Simplify } from 'type-fest'
 
 /* eslint-disable */
 export type RemoveIndex<T> = {
@@ -387,15 +386,15 @@ export type PickRequiredProperties<T extends object> = {
 
 export type Negate<T extends boolean> = T extends true ? false : true
 
-export type SimplifyExceptError<T extends unknown> = ConditionalSimplify<T, Error>
+// export type SimplifyExceptError<T extends unknown> = ConditionalSimplify<T, Error>
 
-export type SimplifyExceptErrorUnion<T> = T extends any ? SimplifyExceptError<T> : never
+// export type SimplifyExceptErrorUnion<T> = T extends any ? SimplifyExceptError<T> : never
 
-export type SimplifyUnion<T> = T extends any ? Simplify<T> : never
+// export type SimplifyUnion<T> = T extends any ? Simplify<T> : never
 
-export type SimplifyDeep<T> = ConditionalSimplifyDeep<T, Function | Iterable<unknown> | Date, object>
+// export type SimplifyDeep<T> = ConditionalSimplifyDeep<T, Function | Iterable<unknown> | Date, object>
 
-export type SimplifyDeepUnion<T> = T extends any ? SimplifyDeep<T> : never
+// export type SimplifyDeepUnion<T> = T extends any ? SimplifyDeep<T> : never
 
 export type RequireProperties<O extends object, K extends keyof O> = Simplify<O & { [P in K]-?: O[P] }>
 
@@ -629,3 +628,11 @@ export const isObjectEmpty = (object: Record<string, unknown>) => {
 }
 
 export const toArray = <T>(value: T | T[]) => Array.isArray(value) ? value : [value]
+
+// dprint-ignore
+export type SimplifyExcept<$ExcludeType, $Type> =
+  IsAny<$ExcludeType> extends true
+    ? Simplify<$Type>
+    : $Type extends $ExcludeType
+      ? $Type
+      : {[TypeKey in keyof $Type]: $Type[TypeKey]}

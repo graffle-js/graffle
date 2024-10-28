@@ -21,7 +21,7 @@ export interface Registry<$Map extends ScalarMap = ScalarMap, $TypesEncoded = an
 }
 
 export namespace Registry {
-  export type Empty = Registry<{}, never, never>
+  export type Empty = Registry<{}>
 
   export const empty = {
     map: {},

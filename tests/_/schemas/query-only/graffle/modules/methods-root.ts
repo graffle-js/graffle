@@ -7,12 +7,12 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
   $batch: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.ConditionalSimplify<
+    $$Utilities.SimplifyExcept<
+      $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutput<
         $Context,
         InferResult.OperationQuery<$SelectionSet, $$Schema.Schema<$Context['scalars']>>
-      >,
-      $Context['scalars']['typesDecoded']
+      >
     >
   >
   __typename: () => Promise<
@@ -28,26 +28,26 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
   id: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.id<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.ConditionalSimplify<
+    $$Utilities.SimplifyExcept<
+      $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
         InferResult.OperationQuery<{ id: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'id'
-      >,
-      $Context['scalars']['typesDecoded']
+      >
     >
   >
 
   idNonNull: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.idNonNull<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.ConditionalSimplify<
+    $$Utilities.SimplifyExcept<
+      $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
         InferResult.OperationQuery<{ idNonNull: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
         'idNonNull'
-      >,
-      $Context['scalars']['typesDecoded']
+      >
     >
   >
 }

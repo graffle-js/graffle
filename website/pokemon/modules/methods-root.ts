@@ -7,7 +7,8 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
   $batch: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query<$Context["scalars"]>>,
   ) => Promise<
-    $$Utilities.Simplify<
+    $$Utilities.SimplifyExcept<
+      $Context["scalars"]["typesDecoded"],
       $$Utilities.HandleOutput<
         $Context,
         InferResult.OperationQuery<$SelectionSet, $$Schema.Schema<$Context["scalars"]>>
@@ -27,7 +28,8 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
   battles: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.battles<$Context["scalars"]>>,
   ) => Promise<
-    $$Utilities.Simplify<
+    $$Utilities.SimplifyExcept<
+      $Context["scalars"]["typesDecoded"],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
         InferResult.OperationQuery<{ battles: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
@@ -39,7 +41,8 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
   beings: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.beings<$Context["scalars"]>>,
   ) => Promise<
-    $$Utilities.Simplify<
+    $$Utilities.SimplifyExcept<
+      $Context["scalars"]["typesDecoded"],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
         InferResult.OperationQuery<{ beings: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
@@ -51,7 +54,8 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
   pokemon: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.pokemon<$Context["scalars"]>>,
   ) => Promise<
-    $$Utilities.Simplify<
+    $$Utilities.SimplifyExcept<
+      $Context["scalars"]["typesDecoded"],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
         InferResult.OperationQuery<{ pokemon: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
@@ -63,7 +67,8 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
   pokemonByName: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.pokemonByName<$Context["scalars"]>>,
   ) => Promise<
-    $$Utilities.Simplify<
+    $$Utilities.SimplifyExcept<
+      $Context["scalars"]["typesDecoded"],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
         InferResult.OperationQuery<{ pokemonByName: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
@@ -75,7 +80,8 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
   pokemons: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.pokemons<$Context["scalars"]>>,
   ) => Promise<
-    $$Utilities.Simplify<
+    $$Utilities.SimplifyExcept<
+      $Context["scalars"]["typesDecoded"],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
         InferResult.OperationQuery<{ pokemons: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
@@ -87,7 +93,8 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
   trainerByName: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.trainerByName<$Context["scalars"]>>,
   ) => Promise<
-    $$Utilities.Simplify<
+    $$Utilities.SimplifyExcept<
+      $Context["scalars"]["typesDecoded"],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
         InferResult.OperationQuery<{ trainerByName: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
@@ -99,7 +106,8 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
   trainers: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.trainers<$Context["scalars"]>>,
   ) => Promise<
-    $$Utilities.Simplify<
+    $$Utilities.SimplifyExcept<
+      $Context["scalars"]["typesDecoded"],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
         InferResult.OperationQuery<{ trainers: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
@@ -113,7 +121,8 @@ export interface MutationMethods<$Context extends $$Utilities.ClientContext> {
   $batch: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation<$Context["scalars"]>>,
   ) => Promise<
-    $$Utilities.Simplify<
+    $$Utilities.SimplifyExcept<
+      $Context["scalars"]["typesDecoded"],
       $$Utilities.HandleOutput<
         $Context,
         InferResult.OperationMutation<$SelectionSet, $$Schema.Schema<$Context["scalars"]>>
@@ -133,7 +142,8 @@ export interface MutationMethods<$Context extends $$Utilities.ClientContext> {
   addPokemon: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.addPokemon<$Context["scalars"]>>,
   ) => Promise<
-    $$Utilities.Simplify<
+    $$Utilities.SimplifyExcept<
+      $Context["scalars"]["typesDecoded"],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
         InferResult.OperationMutation<{ addPokemon: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,

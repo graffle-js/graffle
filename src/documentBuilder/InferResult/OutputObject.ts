@@ -1,5 +1,4 @@
-import type { ConditionalSimplify } from 'type-fest/source/conditional-simplify.js'
-import type { StringKeyof } from '../../lib/prelude.js'
+import type { SimplifyExcept, StringKeyof } from '../../lib/prelude.js'
 import type { TSErrorDescriptive } from '../../lib/ts-error.js'
 import type { Schema } from '../../types/Schema/__.js'
 import type { Select } from '../Select/__.js'
@@ -11,10 +10,10 @@ export type OutputObject<$SelectionSet, $Schema extends Schema, $Node extends Sc
   Select.SelectScalarsWildcard.IsSelectScalarsWildcard<$SelectionSet> extends true
     // todo what about when scalars wildcard is combined with other fields like relations?
     ? ScalarsWildcard<$SelectionSet, $Schema, $Node>
-    : ConditionalSimplify<
+    : SimplifyExcept<
+      $Schema['scalars']['typesDecoded'],
       & SelectionNonSelectAlias<$SelectionSet, $Schema, $Node>
-      & Alias<$Schema, $Node, $SelectionSet>,
-      $Schema['scalars']['typesDecoded']
+      & Alias<$Schema, $Node, $SelectionSet>
     >
 
 type SelectionNonSelectAlias<$SelectionSet, $Schema extends Schema, $Node extends Schema.OutputObject> = {

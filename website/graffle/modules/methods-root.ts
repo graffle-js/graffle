@@ -7,7 +7,8 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
   $batch: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query<$Context["scalars"]>>,
   ) => Promise<
-    $$Utilities.Simplify<
+    $$Utilities.SimplifyExcept<
+      $Context["scalars"]["typesDecoded"],
       $$Utilities.HandleOutput<
         $Context,
         InferResult.OperationQuery<$SelectionSet, $$Schema.Schema<$Context["scalars"]>>
@@ -27,7 +28,8 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
   continent: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.continent<$Context["scalars"]>>,
   ) => Promise<
-    $$Utilities.Simplify<
+    $$Utilities.SimplifyExcept<
+      $Context["scalars"]["typesDecoded"],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
         InferResult.OperationQuery<{ continent: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
@@ -39,7 +41,8 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
   continents: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.continents<$Context["scalars"]>>,
   ) => Promise<
-    $$Utilities.Simplify<
+    $$Utilities.SimplifyExcept<
+      $Context["scalars"]["typesDecoded"],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
         InferResult.OperationQuery<{ continents: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
@@ -51,7 +54,8 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
   countries: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.countries<$Context["scalars"]>>,
   ) => Promise<
-    $$Utilities.Simplify<
+    $$Utilities.SimplifyExcept<
+      $Context["scalars"]["typesDecoded"],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
         InferResult.OperationQuery<{ countries: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
@@ -63,7 +67,8 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
   country: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.country<$Context["scalars"]>>,
   ) => Promise<
-    $$Utilities.Simplify<
+    $$Utilities.SimplifyExcept<
+      $Context["scalars"]["typesDecoded"],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
         InferResult.OperationQuery<{ country: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
@@ -75,7 +80,8 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
   language: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.language<$Context["scalars"]>>,
   ) => Promise<
-    $$Utilities.Simplify<
+    $$Utilities.SimplifyExcept<
+      $Context["scalars"]["typesDecoded"],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
         InferResult.OperationQuery<{ language: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
@@ -87,7 +93,8 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
   languages: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.languages<$Context["scalars"]>>,
   ) => Promise<
-    $$Utilities.Simplify<
+    $$Utilities.SimplifyExcept<
+      $Context["scalars"]["typesDecoded"],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
         InferResult.OperationQuery<{ languages: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
