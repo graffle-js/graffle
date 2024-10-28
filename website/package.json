@@ -1,7 +1,7 @@
 {
   "type": "module",
   "scripts": {
-    "dev": "vitepress dev",
+    "dev": "NODE_ENV=development vitepress dev",
     "build": "vitepress build",
     "preview": "vitepress preview",
     "gen:graffle": "graffle --schema https://countries.trevorblades.com/graphql && graffle --defaultSchemaUrl http://localhost:3000/graphql --schema ../tests/_/schemas/pokemon/graffle/schema.graphql --name Pokemon --output ./pokemon"

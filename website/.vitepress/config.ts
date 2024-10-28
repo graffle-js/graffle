@@ -99,6 +99,7 @@ export default defineConfig({
       transformerTwoslash({
         twoslashOptions: {
           compilerOptions: {
+            noErrorValidation: process.env.NODE_ENV === 'development',
             moduleResolution: ModuleResolutionKind.Bundler,
             module: ModuleKind.ESNext,
             // noErrorTruncation: true,
