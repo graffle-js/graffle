@@ -22,7 +22,7 @@ import {
   hookNamesOrderedBySequence,
   type HookSequence,
 } from './hooks.js'
-import { Transport } from './types.js'
+import { Transport } from './Transport.js'
 
 export const graffleMappedResultToRequest = (
   { document, operationsVariables }: SelectionSetGraphqlMapper.Encoded,

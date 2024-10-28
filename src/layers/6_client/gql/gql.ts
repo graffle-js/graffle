@@ -7,7 +7,6 @@ import {
   type TemplateStringsArguments,
 } from '../../../lib/template-string.js'
 import { RequestCore } from '../../5_request/__.js' // todo
-import type { InterfaceRaw } from '../../5_request/types.js'
 import { type ClientContext, defineTerminus } from '../fluent.js'
 import { handleOutput } from '../handleOutput.js'
 import type { Config } from '../Settings/Config.js'

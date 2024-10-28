@@ -1,7 +1,7 @@
 import type { IsUnknown } from 'type-fest'
 import type { ConfigManager } from '../../../lib/config-manager/__.js'
 import type { GlobalRegistry } from '../../../types/GlobalRegistry/GlobalRegistry.js'
-import { Transport } from '../../5_request/types.js'
+import { Transport } from '../../5_request/Transport.js'
 import { defaultMethodMode } from '../transportHttp/request.js'
 import { outputConfigDefault, type TransportConfigHttp, type TransportConfigMemory } from './Config.js'
 import type { InputOutputEnvelopeLonghand, InputStatic, URLInput } from './Input.js'

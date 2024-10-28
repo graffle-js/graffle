@@ -5,7 +5,7 @@ import type { httpMethodGet, httpMethodPost } from '../../lib/http.js'
 import type { ClientContext } from '../6_client/fluent.js'
 import type { Config } from '../6_client/Settings/Config.js'
 import type { MethodModeGetReads, MethodModePost } from '../6_client/transportHttp/request.js'
-import type { TransportHttp, TransportMemory } from './types.js'
+import type { TransportHttp, TransportMemory } from './Transport.js'
 
 interface HookInputBase {
   state: ClientContext
