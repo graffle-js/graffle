@@ -74,8 +74,6 @@ const dateFormatter = new Intl.DateTimeFormat(`en-US`, { timeZone: `UTC` })
 for (const battle of battles) {
   switch (battle.__typename) {
     case `BattleRoyale`: {
-      // eslint-disable-next-line
-      // @ts-ignore-error fixme
       const trainers = battle.combatants?.map(_ => _.trainer?.name)
       let info = ``
       info += `${battle.__typename} on ${dateFormatter.format(new Date(battle.date ?? 0))}\n`

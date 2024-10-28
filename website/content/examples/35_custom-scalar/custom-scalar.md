@@ -20,6 +20,7 @@ const graffle = Pokemon
 
 const pokemons = await graffle.query.pokemons({
   $: { filter: { birthday: { lte: new Date(`1987-01-13`) } } },
+  //                              ^^^^^^^^^^^^^^^^^^^^^^
   name: true,
   birthday: true,
 })

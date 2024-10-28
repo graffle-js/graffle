@@ -43,7 +43,7 @@ console.log(result)
     headers: Headers {
       'content-type': 'application/graphql-response+json; charset=utf-8',
       'content-length': '142',
-      date: 'Mon, 28 Oct 2024 02:30:37 GMT',
+      date: 'Mon, 28 Oct 2024 02:53:23 GMT',
       connection: 'keep-alive',
       'keep-alive': 'timeout=5'
     },
