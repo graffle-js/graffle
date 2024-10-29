@@ -1,1 +1,1 @@
-export * as RequestCore from './_.js'
+export * as RequestPipeline from './_.js'

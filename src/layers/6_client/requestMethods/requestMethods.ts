@@ -3,9 +3,10 @@ import { Select } from '../../../documentBuilder/Select/__.js'
 import { SelectionSetGraphqlMapper } from '../../../documentBuilder/SelectGraphQLMapper/__.js'
 import type { TypeFunction } from '../../../entrypoints/utilities-for-generated.js'
 import type { Fluent } from '../../../lib/fluent/__.js'
+import type { Grafaid } from '../../../lib/grafaid/__.js'
+import { getOperationDefinition } from '../../../lib/grafaid/document.js'
 import { isSymbol } from '../../../lib/prelude.js'
-import { RequestCore } from '../../../requestPipeline/__.js'
-import { graffleMappedResultToRequest } from '../../../requestPipeline/core.js'
+import { RequestPipeline } from '../../../requestPipeline/__.js'
 import type { GlobalRegistry } from '../../../types/GlobalRegistry/GlobalRegistry.js'
 import { type ClientContext, defineTerminus } from '../fluent.js'
 import { handleOutput } from '../handleOutput.js'
@@ -130,13 +131,38 @@ const executeDocument = async (
     url,
     schema,
     request,
-  } as RequestCore.Hooks.HookDefEncode<Config>['input']
+  } as RequestPipeline.Hooks.HookDefEncode<Config>['input']
 
-  const result = await RequestCore.anyware.run({
+  const result = await RequestPipeline.anyware.run({
     initialInput,
     retryingExtension: state.retry as any,
     extensions: state.extensions.filter(_ => _.onRequest !== undefined).map(_ => _.onRequest!) as any,
   })
 
   return handleOutput(state, result)
+}
+
+export const graffleMappedResultToRequest = (
+  { document, operationsVariables }: SelectionSetGraphqlMapper.Encoded,
+  operationName?: string,
+): Grafaid.RequestAnalyzedDocumentNodeInput => {
+  // We get back variables for every operation in the Graffle document.
+  // However, we only need the variables for the operation that was selected to be executed.
+  // If there was NO operation name provided then we assume that the first operation in the document is the one that should be executed.
+  // If there are MULTIPLE operations in the Graffle document AND the user has supplied an invalid operation name (either none or given matches none)
+  // then what happens here is the variables from one operation can be mixed into another operation.
+  // This shouldn't matter because such a state would be rejected by the server since it wouldn't know what operation to execute.
+  const variables_ = operationName
+    ? operationsVariables[operationName]
+    : Object.values(operationsVariables)[0]
+
+  const operation_ = getOperationDefinition({ query: document, operationName })
+  if (!operation_) throw new Error(`Unknown operation named "${String(operationName)}".`)
+
+  return {
+    operationName,
+    operation: operation_,
+    query: document,
+    variables: variables_,
+  }
 }

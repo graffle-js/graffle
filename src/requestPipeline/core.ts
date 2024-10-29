@@ -1,10 +1,9 @@
-import type { SelectionSetGraphqlMapper } from '../documentBuilder/SelectGraphQLMapper/__.js'
 import type { GraffleExecutionResultVar } from '../layers/6_client/handleOutput.js'
 import type { Config } from '../layers/6_client/Settings/Config.js'
 import { MethodMode, type MethodModeGetReads } from '../layers/6_client/transportHttp/request.js'
 import { Anyware } from '../lib/anyware/__.js'
 import type { Grafaid } from '../lib/grafaid/__.js'
-import { getOperationDefinition, OperationTypeToAccessKind, print } from '../lib/grafaid/document.js'
+import { OperationTypeToAccessKind, print } from '../lib/grafaid/document.js'
 import { execute } from '../lib/grafaid/execute.js' // todo
 import {
   getRequestEncodeSearchParameters,
@@ -27,32 +26,6 @@ import {
 } from './hooks.js'
 import { Transport } from './Transport.js'
 
-export const graffleMappedResultToRequest = (
-  { document, operationsVariables }: SelectionSetGraphqlMapper.Encoded,
-  operationName?: string,
-): Grafaid.RequestAnalyzedDocumentNodeInput => {
-  // We get back variables for every operation in the Graffle document.
-  // However, we only need the variables for the operation that was selected to be executed.
-  // If there was NO operation name provided then we assume that the first operation in the document is the one that should be executed.
-  // If there are MULTIPLE operations in the Graffle document AND the user has supplied an invalid operation name (either none or given matches none)
-  // then what happens here is the variables from one operation can be mixed into another operation.
-  // This shouldn't matter because such a state would be rejected by the server since it wouldn't know what operation to execute.
-  const variables_ = operationName
-    ? operationsVariables[operationName]
-    : Object.values(operationsVariables)[0]
-
-  const operation_ = getOperationDefinition({ query: document, operationName })
-  if (!operation_) throw new Error(`Unknown operation named "${String(operationName)}".`)
-
-  return {
-    operationName,
-    operation: operation_,
-    query: document,
-    variables: variables_,
-  }
-}
-
-// todo execution result only if transport is memory
 export const anyware = Anyware.create<HookSequence, HookMap, Grafaid.FormattedExecutionResult>({
   // If core errors caused by an abort error then raise it as a direct error.
   // This is an expected possible error. Possible when user cancels a request.

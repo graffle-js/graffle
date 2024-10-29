@@ -6,7 +6,7 @@ import {
   joinTemplateStringArrayAndArgs,
   type TemplateStringsArguments,
 } from '../../../lib/template-string.js'
-import { RequestCore } from '../../../requestPipeline/__.js' // todo
+import { RequestPipeline } from '../../../requestPipeline/__.js' // todo
 import { type ClientContext, defineTerminus } from '../fluent.js'
 import { handleOutput } from '../handleOutput.js'
 import type { Config } from '../Settings/Config.js'
@@ -65,9 +65,9 @@ export const gqlProperties = defineTerminus((state) => {
             schema,
             // request,
             request: analyzedRequest,
-          } as RequestCore.Hooks.HookDefEncode<Config>['input']
+          } as RequestPipeline.Hooks.HookDefEncode<Config>['input']
 
-          const result = await RequestCore.anyware.run({
+          const result = await RequestPipeline.anyware.run({
             initialInput,
             retryingExtension: state.retry as any,
             extensions: state.extensions.filter(_ => _.onRequest !== undefined).map(_ => _.onRequest!) as any,

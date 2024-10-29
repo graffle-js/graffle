@@ -4,7 +4,7 @@ import type { FnProperty } from '../../../lib/fluent/Fluent.js'
 import type { AssertConstraint } from '../../../lib/prelude.js'
 import type { TypeFunction } from '../../../lib/type-function/__.js'
 import type { Fn } from '../../../lib/type-function/TypeFunction.js'
-import type { RequestCore } from '../../../requestPipeline/__.js'
+import type { RequestPipeline } from '../../../requestPipeline/__.js'
 import type { GlobalRegistry } from '../../../types/GlobalRegistry/GlobalRegistry.js'
 import type { Client } from '../client.js'
 import type { ClientContext } from '../fluent.js'
@@ -77,7 +77,7 @@ interface Base {
   /**
    * Anyware executed on every request.
    */
-  onRequest?: Anyware.Extension2<RequestCore.Core>
+  onRequest?: Anyware.Extension2<RequestPipeline.Core>
   /**
    * Hook into "get" events on the builder proxy. Useful for adding new methods or manipulating existing ones.
    *
