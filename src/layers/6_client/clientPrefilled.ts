@@ -1,5 +1,4 @@
 import type { HasRequiredKeys } from 'type-fest'
-import { CustomScalars } from '../../extensions/CustomScalars/CustomScalars.js'
 import { type Exact } from '../../lib/prelude.js'
 import type { GlobalRegistry } from '../../types/GlobalRegistry/GlobalRegistry.js'
 import { type Schema } from '../../types/Schema/__.js'
@@ -16,7 +15,7 @@ export const createPrefilled: CreatePrefilled = (name, schemaMap, scalars, schem
   const constructor = (input: any) => { // todo generic input type
     const initialState = createState({
       name,
-      extensions: [CustomScalars()],
+      extensions: [],
       scalars,
       retry: null,
       input: {

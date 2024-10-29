@@ -1,6 +1,6 @@
 import type { Anyware, Anyware as AnywareLib } from '../../../lib/anyware/__.js'
 import type { Fluent } from '../../../lib/fluent/__.js'
-import type { RequestCore } from '../../5_request/__.js'
+import type { RequestCore } from '../../../requestPipeline/__.js'
 import { createExtension } from '../extension/extension.js'
 import { defineProperties, type FnParametersProperty } from '../fluent.js'
 

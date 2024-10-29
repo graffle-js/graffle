@@ -1,20 +1,23 @@
-import type { SelectionSetGraphqlMapper } from '../../documentBuilder/SelectGraphQLMapper/__.js'
-import { Anyware } from '../../lib/anyware/__.js'
-import type { Grafaid } from '../../lib/grafaid/__.js'
-import { getOperationDefinition, OperationTypeToAccessKind, print } from '../../lib/grafaid/document.js'
-import { execute } from '../../lib/grafaid/execute.js' // todo
+import type { SelectionSetGraphqlMapper } from '../documentBuilder/SelectGraphQLMapper/__.js'
+import type { GraffleExecutionResultVar } from '../layers/6_client/handleOutput.js'
+import type { Config } from '../layers/6_client/Settings/Config.js'
+import { MethodMode, type MethodModeGetReads } from '../layers/6_client/transportHttp/request.js'
+import { Anyware } from '../lib/anyware/__.js'
+import type { Grafaid } from '../lib/grafaid/__.js'
+import { getOperationDefinition, OperationTypeToAccessKind, print } from '../lib/grafaid/document.js'
+import { execute } from '../lib/grafaid/execute.js' // todo
 import {
   getRequestEncodeSearchParameters,
   getRequestHeadersRec,
   parseExecutionResult,
   postRequestEncodeBody,
   postRequestHeadersRec,
-} from '../../lib/grafaid/http/http.js'
-import { mergeRequestInit, searchParamsAppendAll } from '../../lib/http.js'
-import { casesExhausted, isString } from '../../lib/prelude.js'
-import type { GraffleExecutionResultVar } from '../6_client/handleOutput.js'
-import type { Config } from '../6_client/Settings/Config.js'
-import { MethodMode, type MethodModeGetReads } from '../6_client/transportHttp/request.js'
+} from '../lib/grafaid/http/http.js'
+import { normalizeRequestToNode } from '../lib/grafaid/request.js'
+import { mergeRequestInit, searchParamsAppendAll } from '../lib/http.js'
+import { casesExhausted, isString } from '../lib/prelude.js'
+import { decodeResultData } from './CustomScalars/decode.js'
+import { encodeRequestVariables } from './CustomScalars/encode.js'
 import {
   type CoreExchangeGetRequest,
   type CoreExchangePostRequest,
@@ -62,6 +65,17 @@ export const anyware = Anyware.create<HookSequence, HookMap, Grafaid.FormattedEx
   hookNamesOrderedBySequence,
   hooks: {
     encode: ({ input }) => {
+      const sddm = input.state.config.schemaMap
+      const scalars = input.state.scalars.map
+      if (sddm) {
+        const request = normalizeRequestToNode(input.request)
+
+        // We will mutate query. Assign it back to input for it to be carried forward.
+        input.request.query = request.query
+
+        encodeRequestVariables({ sddm, scalars, request })
+      }
+
       return input
     },
     pack: {
@@ -189,7 +203,20 @@ export const anyware = Anyware.create<HookSequence, HookMap, Grafaid.FormattedEx
           throw casesExhausted(input)
       }
     },
-    decode: ({ input }) => {
+    decode: ({ input, previous }) => {
+      // If there has been an error and we definitely don't have any data, such as when
+      // giving an operation name that doesn't match any in the document,
+      // then don't attempt to decode.
+      const isError = !input.result.data && (input.result.errors?.length ?? 0) > 0
+      if (input.state.config.schemaMap && !isError) {
+        decodeResultData({
+          sddm: input.state.config.schemaMap,
+          request: normalizeRequestToNode(previous.pack.input.request),
+          data: input.result.data,
+          scalars: input.state.scalars.map,
+        })
+      }
+
       const result = input.transportType === `http`
         ? {
           ...input.result,

@@ -1,7 +1,7 @@
 import { beforeEach } from 'vitest'
 import { createExtension } from '../../src/entrypoints/main.js'
 import type { Config } from '../../src/entrypoints/utilities-for-generated.js'
-import type { HookDefEncode, HookDefExchange, HookDefPack } from '../../src/layers/5_request/hooks.js'
+import type { HookDefEncode, HookDefExchange, HookDefPack } from '../../src/requestPipeline/hooks.js'
 
 export const Spy = () =>
   createExtension({

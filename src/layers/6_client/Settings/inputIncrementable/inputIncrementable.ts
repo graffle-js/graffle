@@ -1,5 +1,5 @@
+import type { Transport, TransportMemory } from '../../../../requestPipeline/Transport.js'
 import type { GlobalRegistry } from '../../../../types/GlobalRegistry/GlobalRegistry.js'
-import type { Transport, TransportMemory } from '../../../5_request/Transport.js'
 import type { TransportHttpInput } from '../../transportHttp/request.js'
 import type { Config } from '../Config.js'
 import type { NormalizeInput } from '../InputToConfig.js'

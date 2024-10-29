@@ -1,7 +1,7 @@
 import type { Anyware } from '../../lib/anyware/__.js'
 import type { Fluent } from '../../lib/fluent/__.js'
+import type { RequestCore } from '../../requestPipeline/__.js'
 import type { Schema } from '../../types/Schema/__.js'
-import type { RequestCore } from '../5_request/__.js'
 import type { Extension } from './extension/extension.js'
 import type { Config } from './Settings/Config.js'
 import type { InputStatic } from './Settings/Input.js'

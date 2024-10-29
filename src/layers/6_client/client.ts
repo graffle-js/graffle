@@ -1,4 +1,3 @@
-import { CustomScalars } from '../../extensions/CustomScalars/CustomScalars.js' // todo
 import type { ConfigManager } from '../../lib/config-manager/__.js'
 import type { Fluent } from '../../lib/fluent/__.js'
 import { proxyGet } from '../../lib/prelude.js'
@@ -56,7 +55,7 @@ type Create = <$Input extends InputStatic>(input: $Input) =>
 export const create: Create = (input) => {
   const initialState = createState({
     name: input.name ?? `default`, // todo import from shared constants
-    extensions: [CustomScalars()],
+    extensions: [],
     scalars: Schema.Scalar.Registry.empty,
     retry: null,
     input,

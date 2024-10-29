@@ -2,7 +2,7 @@ import { expectTypeOf } from 'vitest'
 import { test } from '../../../tests/_/helpers.js'
 import { schema } from '../../../tests/_/schemas/kitchen-sink/schema.js'
 import { Graffle } from '../../entrypoints/main.js'
-import { Transport } from '../5_request/Transport.js'
+import { Transport } from '../../requestPipeline/Transport.js'
 
 test(`anyware hooks are typed to memory transport`, () => {
   Graffle.create({ schema }).anyware(async ({ encode }) => {

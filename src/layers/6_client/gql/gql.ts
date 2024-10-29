@@ -6,7 +6,7 @@ import {
   joinTemplateStringArrayAndArgs,
   type TemplateStringsArguments,
 } from '../../../lib/template-string.js'
-import { RequestCore } from '../../5_request/__.js' // todo
+import { RequestCore } from '../../../requestPipeline/__.js' // todo
 import { type ClientContext, defineTerminus } from '../fluent.js'
 import { handleOutput } from '../handleOutput.js'
 import type { Config } from '../Settings/Config.js'
