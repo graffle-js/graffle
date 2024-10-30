@@ -1,4 +1,5 @@
 import { OperationTypeNode } from 'graphql'
+import type { SimplifyDeep } from 'type-fest'
 import { Select } from '../../../documentBuilder/Select/__.js'
 import { SelectionSetGraphqlMapper } from '../../../documentBuilder/SelectGraphQLMapper/__.js'
 import type { TypeFunction } from '../../../entrypoints/utilities-for-generated.js'
@@ -20,25 +21,27 @@ export interface RequestMethods_ extends Chain.Extension {
 
 // dprint-ignore
 export type RequestMethods<$Arguments extends Chain.Extension.Parameters<RequestMethods_>> =
-  & (
-    // todo
-    // GlobalRegistry.Has<$Context['name']> extends false
-    // eslint-disable-next-line
-    // @ts-ignore passes after generation
-    GlobalRegistry.Has<$Arguments['context']['config']['name']> extends false
-      ? {}
-      :
-        (
-          // eslint-disable-next-line
-          // @ts-ignore Passes after generation
-          & TypeFunction.Call<GlobalRegistry.GetOrDefault<$Arguments['context']['config']['name']>['interfaces']['Root'], $Arguments>
-          & {
-              // eslint-disable-next-line
-              // @ts-ignore Passes after generation
-              document: TypeFunction.Call<GlobalRegistry.GetOrDefault<$Arguments['context']['config']['name']>['interfaces']['Document'], $Arguments>
-            }
-        )
-  )
+  SimplifyDeep<
+    & (
+      // todo
+      // GlobalRegistry.Has<$Context['name']> extends false
+      // eslint-disable-next-line
+      // @ts-ignore passes after generation
+      GlobalRegistry.Has<$Arguments['context']['config']['name']> extends false
+        ? {}
+        :
+          (
+            // eslint-disable-next-line
+            // @ts-ignore Passes after generation
+            & TypeFunction.Call<GlobalRegistry.GetOrDefault<$Arguments['context']['config']['name']>['interfaces']['Root'], $Arguments['context']>
+            & {
+                // eslint-disable-next-line
+                // @ts-ignore Passes after generation
+                document: TypeFunction.Call<GlobalRegistry.GetOrDefault<$Arguments['context']['config']['name']>['interfaces']['Document'], $Arguments['context']>
+              }
+          )
+    )
+  >
 
 export const requestMethodsProperties = Chain.Extension.create<RequestMethods_>((_, context) => {
   return {

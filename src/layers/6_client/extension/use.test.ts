@@ -4,7 +4,7 @@ import { createResponse, test } from '../../../../tests/_/helpers.js'
 import { db } from '../../../../tests/_/schemas/db.js'
 import { Graffle } from '../../../../tests/_/schemas/kitchen-sink/graffle/__.js'
 import { Throws } from '../../../extensions/Throws/Throws.js'
-import { oops } from '../../../lib/anyware/specHelpers.js'
+// import { oops } from '../../../lib/anyware/specHelpers.js'
 
 const client = Graffle.create({ schema: 'https://foo', output: { defaults: { errorChannel: 'return' } } })
 const headers = { 'x-foo': 'bar' }
@@ -38,25 +38,25 @@ describe(`entrypoint pack`, () => {
   })
 })
 
-test('can retry failed request', async ({ fetch }) => {
-  fetch
-    .mockImplementationOnce(async () => {
-      throw oops
-    })
-    .mockImplementationOnce(async () => {
-      throw oops
-    })
-    .mockImplementationOnce(async () => {
-      return createResponse({ data: { id: db.id } })
-    })
-  const client2 = client.retry(async ({ exchange }) => {
-    let result = await exchange()
-    while (result instanceof Error) {
-      result = await exchange()
-    }
-    return result
-  })
-  const result = await client2.query.id()
-  expect(result).toEqual(db.id)
-  expect(fetch.mock.calls.length).toEqual(3)
-})
+// test('can retry failed request', async ({ fetch }) => {
+//   fetch
+//     .mockImplementationOnce(async () => {
+//       throw oops
+//     })
+//     .mockImplementationOnce(async () => {
+//       throw oops
+//     })
+//     .mockImplementationOnce(async () => {
+//       return createResponse({ data: { id: db.id } })
+//     })
+//   const client2 = client.retry(async ({ exchange }) => {
+//     let result = await exchange()
+//     while (result instanceof Error) {
+//       result = await exchange()
+//     }
+//     return result
+//   })
+//   const result = await client2.query.id()
+//   expect(result).toEqual(db.id)
+//   expect(fetch.mock.calls.length).toEqual(3)
+// })

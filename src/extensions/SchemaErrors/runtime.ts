@@ -71,38 +71,38 @@ export const SchemaErrors = () => {
 }
 
 type SchemaErrorsExtension = Extension<{
-  onRequestDocumentRootType: OnRequestDocumentRootTypeFn
-  onRequestResult: OnRequestResultFn
+  onRequestDocumentRootType: OnRequestDocumentRootType_
+  onRequestResult: OnRequestResult_
 }>
 
 type OnRequestDocumentRootType<$Params extends Extension.Hooks.OnRequestDocumentRootType.Params> =
   $Params['selectionRootType']
 
 // dprint-ignore
-interface OnRequestResult<$Params extends Extension.Hooks.OnRequestResult.Params<GeneratedExtensions>>
+interface OnRequestResult<$Arguments extends Extension.Hooks.OnRequestResult.Params<GeneratedExtensions>>
   {
     result: {
       data?:
         | null
         | {
-            [$Key in keyof ExcludeNullAndUndefined<$Params['result']['data']>]:
+            [$Key in keyof ExcludeNullAndUndefined<$Arguments['result']['data']>]:
               Exclude<
-                ExcludeNullAndUndefined<$Params['result']['data']>[$Key],
-                { __typename: $Params['registeredSchema']['schema']['extensions']['SchemaErrors']['objectNames'] }
+                ExcludeNullAndUndefined<$Arguments['result']['data']>[$Key],
+                { __typename: $Arguments['registeredSchema']['schema']['extensions']['SchemaErrors']['objectNames'] }
               >
           }
-    } & Omit<$Params['result'], 'data'>
-    registeredSchema: $Params['registeredSchema']
+    } & Omit<$Arguments['result'], 'data'>
+    registeredSchema: $Arguments['registeredSchema']
   }
 
 // --------- Boilerplate Types ---------
 
-interface OnRequestDocumentRootTypeFn extends Extension.Hooks.OnRequestDocumentRootType {
+interface OnRequestDocumentRootType_ extends Extension.Hooks.OnRequestDocumentRootType {
   // @ts-expect-error untyped params
   return: OnRequestDocumentRootType<this['params']>
 }
 
-interface OnRequestResultFn extends Extension.Hooks.OnRequestResult {
+interface OnRequestResult_ extends Extension.Hooks.OnRequestResult {
   // @ts-expect-error untyped params
   return: OnRequestResult<this['params']>
 }

@@ -1,3 +1,4 @@
+import type { Simplify } from 'type-fest'
 import { Chain } from '../../../lib/chain/__.js'
 import type { ConfigManager } from '../../../lib/config-manager/__.js'
 import { Schema } from '../../../types/Schema/__.js'
@@ -22,7 +23,9 @@ type Scalar<$Args extends Chain.Extension.Parameters<Scalar_>> = {
     ConfigManager.SetAtPath<
       $Args['context'],
       ['scalars'],
-      Schema.Scalar.Registry.AddScalar<$Args['context']['scalars'], Schema.Scalar<$Name, $Decoded, string>>
+      Simplify<
+        Schema.Scalar.Registry.AddScalar<$Args['context']['scalars'], Schema.Scalar<$Name, $Decoded, string>>
+      >
     >
   >
 
@@ -34,7 +37,9 @@ type Scalar<$Args extends Chain.Extension.Parameters<Scalar_>> = {
     ConfigManager.SetAtPath<
       $Args['context'],
       ['scalars'],
-      Schema.Scalar.Registry.AddScalar<$Args['context']['scalars'], $Scalar>
+      Simplify<
+        Schema.Scalar.Registry.AddScalar<$Args['context']['scalars'], $Scalar>
+      >
     >
   >
 }
