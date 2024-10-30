@@ -1,6 +1,6 @@
 export { type Simplify } from 'type-fest'
 export * from '../documentBuilder/Select/__.js'
-export { type ClientContext } from '../layers/6_client/fluent.js'
+export { type Context } from '../layers/6_client/context.js'
 export type {
   ConfigGetOutputError,
   HandleOutput,

@@ -12,8 +12,8 @@ import {
 } from '../../lib/prelude.js'
 import type { TransportHttp } from '../../requestPipeline/Transport.js'
 import type { GlobalRegistry } from '../../types/GlobalRegistry/GlobalRegistry.js'
+import type { Context } from './context.js'
 import type { RunTypeHookOnRequestResult } from './extension/extension.js'
-import type { ClientContext } from './fluent.js'
 import {
   type Config,
   type ErrorCategory,
@@ -61,7 +61,7 @@ export type GraffleExecutionResultVar<$Config extends Config = Config> =
   | ErrorsOther
 
 export const handleOutput = (
-  state: ClientContext,
+  state: Context,
   result: GraffleExecutionResultVar,
 ) => {
   if (isContextConfigTraditionalGraphQLOutput(state.config)) {
@@ -120,7 +120,7 @@ export const handleOutput = (
  */
 
 // dprint-ignore
-export type HandleOutputGraffleRootField<$Context extends ClientContext, $Data extends SomeObjectData, $RootFieldName extends string> =
+export type HandleOutputGraffleRootField<$Context extends Context, $Data extends SomeObjectData, $RootFieldName extends string> =
   HandleOutputGraffleRootField_Data<ExcludeNull<HandleOutput<$Context, $Data>>, $RootFieldName>
 
 // dprint-ignore
@@ -130,10 +130,10 @@ type HandleOutputGraffleRootField_Data<$Output extends Error | SomeObjectData | 
     : GetOrNever<ExcludeNullAndUndefined<$Output>, $RootFieldName>
 
 // dprint-ignore
-export type HandleOutput<$Context extends ClientContext, $Data extends SomeObjectData> =
+export type HandleOutput<$Context extends Context, $Data extends SomeObjectData> =
   HandleOutput_Extensions<$Context, Envelope<$Context, $Data>>
 
-type HandleOutput_Extensions<$Context extends ClientContext, $Envelope extends GraffleExecutionResultEnvelope> =
+type HandleOutput_Extensions<$Context extends Context, $Envelope extends GraffleExecutionResultEnvelope> =
   HandleOutput_ErrorsReturn<
     $Context,
     // eslint-disable-next-line
@@ -144,12 +144,12 @@ type HandleOutput_Extensions<$Context extends ClientContext, $Envelope extends G
     }>['result']
   >
 
-type HandleOutput_ErrorsReturn<$Context extends ClientContext, $Envelope extends GraffleExecutionResultEnvelope> =
+type HandleOutput_ErrorsReturn<$Context extends Context, $Envelope extends GraffleExecutionResultEnvelope> =
   | IfConfiguredGetOutputErrorReturns<$Context>
   | HandleOutput_Envelope<$Context, $Envelope>
 
 // dprint-ignore
-type HandleOutput_Envelope<$Context extends ClientContext, $Envelope extends GraffleExecutionResultEnvelope> =
+type HandleOutput_Envelope<$Context extends Context, $Envelope extends GraffleExecutionResultEnvelope> =
   $Context['config']['output']['envelope']['enabled'] extends true
     ? $Envelope
     : ExcludeUndefined<$Envelope['data']> // todo make data field not undefinable
@@ -194,30 +194,30 @@ type HandleOutput_Envelope<$Context extends ClientContext, $Envelope extends Gra
 //       )
 
 // dprint-ignore
-type IfConfiguredGetOutputErrorReturns<$Context extends ClientContext> =
+type IfConfiguredGetOutputErrorReturns<$Context extends Context> =
   | (ConfigGetOutputError<$Context, 'execution'>  extends 'return'  ? GraphQLExecutionResultError  : never)
   | (ConfigGetOutputError<$Context, 'other'>      extends 'return'  ? ErrorsOther                  : never)
 
 // dprint-ignore
-export type ConfigGetOutputError<$Context extends ClientContext, $ErrorCategory extends ErrorCategory> =
+export type ConfigGetOutputError<$Context extends Context, $ErrorCategory extends ErrorCategory> =
   $Context['config']['output']['envelope']['enabled'] extends true
     ? ConfigGetOutputEnvelopeErrorChannel<$Context, $ErrorCategory>
     : ConfigResolveOutputErrorChannel<$Context, $Context['config']['output']['errors'][$ErrorCategory]>
 
 // dprint-ignore
-type ConfigGetOutputEnvelopeErrorChannel<$Context extends ClientContext, $ErrorCategory extends ErrorCategory> =
+type ConfigGetOutputEnvelopeErrorChannel<$Context extends Context, $ErrorCategory extends ErrorCategory> =
   $Context['config']['output']['envelope']['errors'][$ErrorCategory] extends true
     ? false
     : ConfigResolveOutputErrorChannel<$Context, $Context['config']['output']['errors'][$ErrorCategory]>
 
-type ConfigResolveOutputErrorChannel<$Context extends ClientContext, $Channel extends OutputChannelConfig | false> =
+type ConfigResolveOutputErrorChannel<$Context extends Context, $Channel extends OutputChannelConfig | false> =
   $Channel extends 'default' ? $Context['config']['output']['defaults']['errorChannel']
     : $Channel extends false ? false
     : $Channel
 
 // dprint-ignore
 // todo use ObjMap for $Data
-export type Envelope<$Context extends ClientContext, $Data = unknown, $Errors extends ReadonlyArray<Error> = ReadonlyArray<GraphQLError>> = 
+export type Envelope<$Context extends Context, $Data = unknown, $Errors extends ReadonlyArray<Error> = ReadonlyArray<GraphQLError>> = 
 	& {
 			data?: $Data | null
 			extensions?: ObjMap
@@ -243,7 +243,7 @@ type ObjMap<T = unknown> = {
 }
 
 // dprint-ignore
-type IsEnvelopeWithoutErrors<$Context extends ClientContext> =
+type IsEnvelopeWithoutErrors<$Context extends Context> =
   $Context['config']['output']['envelope']['enabled'] extends true
     ? Values<$Context['config']['output']['envelope']['errors']> extends false
       ? true

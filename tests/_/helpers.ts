@@ -5,7 +5,7 @@ import * as Path from 'node:path'
 import type { Mock } from 'vitest'
 import { test as testBase, vi } from 'vitest'
 import { Graffle } from '../../src/entrypoints/main.js'
-import type { ClientContext } from '../../src/entrypoints/utilities-for-generated.js'
+import type { Context } from '../../src/entrypoints/utilities-for-generated.js'
 import type { Client } from '../../src/layers/6_client/client.js'
 import type { ConfigManager } from '../../src/lib/config-manager/__.js'
 import { Grafaid } from '../../src/lib/grafaid/__.js'
@@ -36,9 +36,9 @@ export const createResponse = (body: object) =>
 interface Fixtures {
   fetch: Mock<(request: Request) => Promise<Response>>
   pokemonService: SchemaService
-  graffle: Client<ClientContext>
-  kitchenSink: Client<ConfigManager.SetAtPath<ClientContext, ['config', 'name'], 'default'>>
-  kitchenSinkHttp: Client<ConfigManager.SetAtPath<ClientContext, ['config', 'name'], 'default'>>
+  graffle: Client<Context>
+  kitchenSink: Client<ConfigManager.SetAtPath<Context, ['config', 'name'], 'default'>>
+  kitchenSinkHttp: Client<ConfigManager.SetAtPath<Context, ['config', 'name'], 'default'>>
   kitchenSinkData: typeof db
   project: Project
 }

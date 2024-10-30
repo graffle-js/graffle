@@ -458,8 +458,8 @@ export const shallowMergeDefaults = <$Defaults extends object, $Input extends ob
   return merged as any
 }
 
-export type mergeObjectArray<T extends [...any[]]> = T extends [infer $First, ...infer $Rest extends any[]]
-  ? $First & mergeObjectArray<$Rest>
+export type mergeArrayOfObjects<T extends [...any[]]> = T extends [infer $First, ...infer $Rest extends any[]]
+  ? $First & mergeArrayOfObjects<$Rest>
   : {}
 
 export const identityProxy = new Proxy({}, {
@@ -636,3 +636,5 @@ export type SimplifyExcept<$ExcludeType, $Type> =
     : $Type extends $ExcludeType
       ? $Type
       : {[TypeKey in keyof $Type]: $Type[TypeKey]}
+
+export type ForceExtends<T, U> = T extends U ? T : U

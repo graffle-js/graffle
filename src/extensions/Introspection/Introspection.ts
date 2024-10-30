@@ -1,9 +1,9 @@
 import { getIntrospectionQuery, type IntrospectionQuery } from 'graphql'
 import type { Extension, SimplifyNullable } from '../../entrypoints/main.js'
+import type { Context } from '../../layers/6_client/context.js'
 import { createExtension } from '../../layers/6_client/extension/extension.js'
-import type { FnParametersProperty } from '../../layers/6_client/fluent.js'
 import type { HandleOutput } from '../../layers/6_client/handleOutput.js'
-import type { Fluent } from '../../lib/fluent/__.js'
+import type { Chain } from '../../lib/chain/__.js'
 import { createConfig, type Input } from './config.js'
 
 const knownPotentiallyUnsupportedFeatures = [`inputValueDeprecation`, `oneOf`] as const
@@ -65,14 +65,15 @@ export const Introspection = (input?: Input) => {
 }
 
 type IntrospectionExtension = Extension<{
-  property: IntrospectFn
+  property: Introspect_
 }>
 
-interface IntrospectFn extends Fluent.FnProperty<`introspect`> {
+interface Introspect_ extends Chain.Extension {
+  context: Context
   // @ts-expect-error untyped params
   return: Introspect<this['params']>
 }
 
-interface Introspect<$Args extends FnParametersProperty> {
-  (): Promise<SimplifyNullable<HandleOutput<$Args['state']['context'], IntrospectionQuery>>>
+interface Introspect<$Args extends Chain.Extension.Parameters<Introspect_>> {
+  introspect: () => Promise<SimplifyNullable<HandleOutput<$Args['context'], IntrospectionQuery>>>
 }

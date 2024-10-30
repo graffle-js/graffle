@@ -3,7 +3,7 @@ import type * as $$Utilities from '../../../../../../src/entrypoints/utilities-f
 import * as $$Schema from './schema.js'
 import * as $$SelectionSets from './selection-sets.js'
 
-export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
+export interface QueryMethods<$Context extends $$Utilities.Context> {
   $batch: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query<$Context['scalars']>>,
   ) => Promise<
@@ -52,7 +52,7 @@ export interface QueryMethods<$Context extends $$Utilities.ClientContext> {
   >
 }
 
-export interface BuilderMethodsRoot<$Context extends $$Utilities.ClientContext> {
+export interface BuilderMethodsRoot<$Context extends $$Utilities.Context> {
   query: QueryMethods<$Context>
 }
 

@@ -1,4 +1,4 @@
-import type { mergeObjectArray, ValuesOrEmptyObject } from '../../lib/prelude.js'
+import type { mergeArrayOfObjects, ValuesOrEmptyObject } from '../../lib/prelude.js'
 import type { Schema } from '../../types/Schema/__.js'
 import type { Select } from '../Select/__.js'
 import type { OutputField } from './OutputField.js'
@@ -42,7 +42,7 @@ type InferSelectAliasMultiple<
   $FieldName extends string,
   $Schema extends Schema,
   $Node extends Schema.OutputObject,
-> = mergeObjectArray<
+> = mergeArrayOfObjects<
   {
     [_ in keyof $SelectAliasMultiple]: InferSelectAliasOne<$SelectAliasMultiple[_], $FieldName, $Schema, $Node>
   }

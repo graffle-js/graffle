@@ -1,27 +1,31 @@
-import type { Fluent } from '../../../lib/fluent/__.js'
+import { Chain } from '../../../lib/chain/__.js'
+import type { ConfigManager } from '../../../lib/config-manager/__.js'
 import { mergeHeadersInit, mergeRequestInit } from '../../../lib/http.js'
-import type { IncrementWthNewConfig } from '../client.js'
-import { defineProperties, type FnParametersProperty } from '../fluent.js'
+import { type Context } from '../context.js'
 import type { AddIncrementalInput, WithInput } from '../Settings/inputIncrementable/inputIncrementable.js'
 
-export interface FnWith extends Fluent.FnProperty<`with`> {
+export interface With_ extends Chain.Extension {
+  context: Context
   // @ts-expect-error untyped params
   return: With<this['params']>
 }
 
-export interface With<$Args extends FnParametersProperty> {
+export interface With<$Args extends Chain.Extension.Parameters<With_>> {
   /**
    * TODO With Docs.
    */
-  <$Input extends WithInput<$Args['state']['context']['config']>>(
+  with: <$Input extends WithInput<$Args['context']['config']>>(
     input: $Input,
     // todo fixme
     // eslint-disable-next-line
     // @ts-ignore Passes after generation
-  ): IncrementWthNewConfig<$Args, AddIncrementalInput<$Args['state']['context']['config'], $Input>>
+  ) => Chain.Definition.MaterializeWithNewContext<
+    $Args['chain'],
+    ConfigManager.SetAtPath<$Args['context'], ['config'], AddIncrementalInput<$Args['context']['config'], $Input>>
+  >
 }
 
-export const withProperties = defineProperties((builder, state) => {
+export const withProperties = Chain.Extension.create<With_>((builder, state) => {
   return {
     with: (input: WithInput) => {
       return builder({

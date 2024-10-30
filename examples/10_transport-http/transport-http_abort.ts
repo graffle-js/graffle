@@ -12,6 +12,8 @@ const graffle = Graffle.create({
   schema: publicGraphQLSchemaEndpoints.Pokemon,
 })
 
+graffle
+
 const resultPromise = graffle
   .with({ transport: { signal: abortController.signal } })
   //                           ^^^^^^^^^^^^^^^

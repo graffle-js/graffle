@@ -1,23 +1,15 @@
-import type { Fluent } from '../../../lib/fluent/__.js'
-import { type FnParametersMerge } from '../fluent.js'
+import type { Chain } from '../../../lib/chain/__.js'
+import type { Context } from '../context.js'
 
-export interface FnInternal extends Fluent.FnMerge {
+export interface Internal_ extends Chain.Extension {
+  context: Context
   // @ts-expect-error untyped params
   return: Internal<this['params']>
 }
 
-export type Internal<$Args extends FnParametersMerge> = {
+type Internal<$Args extends Chain.Extension.Parameters> = {
   /**
    * TODO
    */
-  _: $Args
+  _: $Args['context']
 }
-
-// todo once context is on state
-// export const propertyInternal = createTerminus((state) => {
-//   return {
-//     context: {
-//       config: state.context.config,
-//     },
-//   }
-// })

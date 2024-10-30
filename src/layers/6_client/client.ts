@@ -1,42 +1,40 @@
-import type { ConfigManager } from '../../lib/config-manager/__.js'
-import type { Fluent } from '../../lib/fluent/__.js'
+import type { Chain } from '../../lib/chain/__.js'
 import { proxyGet } from '../../lib/prelude.js'
 import { Schema } from '../../types/Schema/__.js'
-import { type UseFn, useProperties } from './extension/use.js'
-import { type ClientContext, createState, type FnParametersProperty, type StateWithoutConfig } from './fluent.js'
-import { type FnGql, gqlProperties } from './gql/gql.js'
-import { anywareProperties, type FnAnyware } from './properties/anyware.js'
-import type { FnInternal } from './properties/internal.js'
-import { type FnRetry, retryProperties } from './properties/retry.js'
-import { type ScalarFn, scalarProperties } from './properties/scalar.js'
-import { type FnWith, withProperties } from './properties/with.js'
-import { type FnRequestMethods, requestMethodsProperties } from './requestMethods/requestMethods.js' // todo
+import { type Context, type ContextWithoutConfig, createContext } from './context.js'
+import { type Use_, useProperties } from './extension/use.js'
+import { type Gql_, gqlProperties } from './gql/gql.js'
+import { type Anyware_, AnywareExtension } from './properties/anyware.js'
+import type { Internal_ } from './properties/internal.js'
+import { type Scalar_, scalarProperties } from './properties/scalar.js'
+import { type With_, withProperties } from './properties/with.js'
+import { type RequestMethods_, requestMethodsProperties } from './requestMethods/requestMethods.js' // todo
 import { type InputStatic } from './Settings/Input.js'
 import { type NormalizeInput } from './Settings/InputToConfig.js'
 
-export type Client<$Context extends ClientContext> = Fluent.Materialize<
-  Fluent.AddMany<
-    Fluent.Create<$Context>,
+export type Client<$Context extends Context> = Chain.Definition.MaterializeWithNewContext<
+  Chain.Definition.ExtendMany<
+    Chain.Definition.Empty,
     [
-      FnInternal,
-      FnRequestMethods,
-      FnRetry,
-      FnWith,
-      UseFn,
-      FnAnyware,
-      FnGql,
-      ScalarFn,
+      Internal_,
+      RequestMethods_,
+      With_,
+      Use_,
+      Anyware_,
+      Gql_,
+      Scalar_,
     ]
-  >
+  >,
+  $Context
 >
 
-export type IncrementWthNewConfig<
-  $Parameters extends FnParametersProperty,
-  $ConfigNew extends ClientContext['config'],
-> = Fluent.IncrementWthNewContext<
-  $Parameters,
-  ConfigManager.SetProperty<$Parameters['state']['context'], 'config', $ConfigNew>
->
+// export type IncrementWthNewConfig<
+//   $Parameters extends FnParametersProperty,
+//   $ConfigNew extends Context['config'],
+// > = Chain.IncrementWthNewContext<
+//   $Parameters,
+//   ConfigManager.SetProperty<$Parameters['state']['context'], 'config', $ConfigNew>
+// >
 
 // dprint-ignore
 type Create = <$Input extends InputStatic>(input: $Input) =>
@@ -53,7 +51,7 @@ type Create = <$Input extends InputStatic>(input: $Input) =>
   }>
 
 export const create: Create = (input) => {
-  const initialState = createState({
+  const initialState = createContext({
     name: input.name ?? `default`, // todo import from shared constants
     extensions: [],
     scalars: Schema.Scalar.Registry.empty,
@@ -64,24 +62,23 @@ export const create: Create = (input) => {
 }
 
 export const createWithState = (
-  initialState: StateWithoutConfig,
+  initialState: ContextWithoutConfig,
 ) => {
-  const state = createState(initialState)
+  const state = createContext(initialState)
 
   // @ts-expect-error ignoreme
   const clientDirect: Client = {
     _: state,
-    ...gqlProperties(state),
+    ...gqlProperties(createWithState, state),
     ...withProperties(createWithState, state),
     ...useProperties(createWithState, state),
-    ...anywareProperties(createWithState, state),
-    ...retryProperties(createWithState, state),
+    ...AnywareExtension(createWithState, state),
     ...scalarProperties(createWithState, state),
   }
 
   // todo test that access to this works without generation in a unit like test. We discovered bug and covered this in an e2e test.
   Object.assign(clientDirect, {
-    ...requestMethodsProperties(state),
+    ...requestMethodsProperties(createWithState, state),
   })
 
   const clientProxy = proxyGet(clientDirect, ({ path, property }) => {

@@ -3,12 +3,12 @@ import type { InferResult } from '../../../documentBuilder/InferResult/__.js'
 import type { Select } from '../../../documentBuilder/Select/__.js'
 import type { Schema } from '../../../entrypoints/schema.js'
 import type { IsTupleMultiple } from '../../../lib/prelude.js'
-import type { ClientContext } from '../fluent.js'
+import type { Context } from '../context.js'
 import { type HandleOutput } from '../handleOutput.js'
 
 // dprint-ignore
 export type DocumentRunner<
-  $$ClientContext extends ClientContext,
+  $$ClientContext extends Context,
   $$Schema extends Schema,
   $$Document extends Select.Document.SomeDocument,
   $$Name extends Select.Document.GetOperationNames<$$Document> = Select.Document.GetOperationNames<$$Document>

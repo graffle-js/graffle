@@ -1,20 +1,20 @@
 import type { Select } from '../../../documentBuilder/Select/__.js'
 import type { Anyware } from '../../../lib/anyware/__.js'
-import type { FnProperty } from '../../../lib/fluent/Fluent.js'
+import type { Chain } from '../../../lib/chain/__.js'
 import type { AssertConstraint } from '../../../lib/prelude.js'
 import type { TypeFunction } from '../../../lib/type-function/__.js'
 import type { Fn } from '../../../lib/type-function/TypeFunction.js'
 import type { RequestPipeline } from '../../../requestPipeline/__.js'
 import type { GlobalRegistry } from '../../../types/GlobalRegistry/GlobalRegistry.js'
 import type { Client } from '../client.js'
-import type { ClientContext } from '../fluent.js'
+import type { Context } from '../context.js'
 import type { GraffleExecutionResultEnvelope } from '../handleOutput.js'
 
 export interface TypeHooks {
   /**
    * Extend chaining interface with new methods.
    */
-  property?: FnProperty
+  property?: Chain.Extension
   /**
    * Manipulate the execution result of a request.
    *
@@ -34,7 +34,7 @@ export interface TypeHooks {
 }
 
 export type RunTypeHookOnRequestResult<
-  $Context extends ClientContext,
+  $Context extends Context,
   $Params extends Extension.Hooks.OnRequestResult.Params,
 > = AssertConstraint<
   Extension.Hooks.OnRequestResult.Params,
@@ -97,7 +97,7 @@ interface Base {
     input: {
       path: string[]
       property: string
-      client: Client<ClientContext>
+      client: Client<Context>
     },
   ) => unknown
 }

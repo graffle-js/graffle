@@ -1,5 +1,5 @@
 import type { FormattedExecutionResult, GraphQLSchema } from 'graphql'
-import type { ClientContext } from '../layers/6_client/fluent.js'
+import type { Context } from '../layers/6_client/context.js'
 import type { Config } from '../layers/6_client/Settings/Config.js'
 import type { MethodModeGetReads, MethodModePost } from '../layers/6_client/transportHttp/request.js'
 import type { Grafaid } from '../lib/grafaid/__.js'
@@ -8,7 +8,7 @@ import type { httpMethodGet, httpMethodPost } from '../lib/http.js'
 import type { TransportHttp, TransportMemory } from './Transport.js'
 
 interface HookInputBase {
-  state: ClientContext
+  state: Context
 }
 
 // dprint-ignore

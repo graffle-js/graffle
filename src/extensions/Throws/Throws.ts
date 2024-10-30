@@ -1,9 +1,8 @@
 import { type BuilderConfig, createExtension, type Extension, type WithInput } from '../../entrypoints/main.js'
 import type { ConfigManager } from '../../lib/config-manager/__.js'
 // todo: no deep imports, rethink these utilities and/or how they are exported from the graffle package.
-import type { IncrementWthNewConfig } from '../../layers/6_client/client.js'
-import type { FnParametersProperty } from '../../layers/6_client/fluent.js'
-import type { Fluent } from '../../lib/fluent/__.js'
+import type { Context } from '../../layers/6_client/context.js'
+import type { Chain } from '../../lib/chain/__.js'
 
 export const Throws = () => {
   return createExtension<ThrowsExtension>({
@@ -30,20 +29,21 @@ export const Throws = () => {
 }
 
 type ThrowsExtension = Extension<{
-  property: ThrowsFn
+  property: Throws_
 }>
 
-interface ThrowsFn extends Fluent.FnProperty<`throws`> {
+interface Throws_ extends Chain.Extension {
+  context: Context
   // @ts-expect-error untyped params
   return: Throws<this['params']>
 }
 
-interface Throws<$Args extends FnParametersProperty> {
+interface Throws<$Args extends Chain.Extension.Parameters<Throws_>> {
   /**
    * TODO
    */
   // @ts-expect-error fixme
-  (): IncrementWthNewConfig<$Args, ThrowsifyConfig<$Args['state']['context']['config']>>
+  throws: () => IncrementWthNewConfig<$Args, ThrowsifyConfig<$Args['context']['config']>>
 }
 
 type ThrowsifyConfig<$BuilderConfig extends BuilderConfig> = ConfigManager.Set<

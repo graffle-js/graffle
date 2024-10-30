@@ -2,54 +2,55 @@ import { OperationTypeNode } from 'graphql'
 import { Select } from '../../../documentBuilder/Select/__.js'
 import { SelectionSetGraphqlMapper } from '../../../documentBuilder/SelectGraphQLMapper/__.js'
 import type { TypeFunction } from '../../../entrypoints/utilities-for-generated.js'
-import type { Fluent } from '../../../lib/fluent/__.js'
+import { Chain } from '../../../lib/chain/__.js'
 import type { Grafaid } from '../../../lib/grafaid/__.js'
 import { getOperationDefinition } from '../../../lib/grafaid/document.js'
 import { isSymbol } from '../../../lib/prelude.js'
 import { RequestPipeline } from '../../../requestPipeline/__.js'
 import type { GlobalRegistry } from '../../../types/GlobalRegistry/GlobalRegistry.js'
-import { type ClientContext, defineTerminus } from '../fluent.js'
+import { type Context } from '../context.js'
 import { handleOutput } from '../handleOutput.js'
 import type { Config } from '../Settings/Config.js'
 
-export interface FnRequestMethods extends Fluent.FnMerge {
+export interface RequestMethods_ extends Chain.Extension {
+  context: Context
   // @ts-expect-error untyped params
-  return: BuilderRequestMethods<this['params']>
+  return: RequestMethods<this['params']>
 }
 
 // dprint-ignore
-export type BuilderRequestMethods<$Context extends ClientContext> =
+export type RequestMethods<$Arguments extends Chain.Extension.Parameters<RequestMethods_>> =
   & (
     // todo
     // GlobalRegistry.Has<$Context['name']> extends false
     // eslint-disable-next-line
     // @ts-ignore passes after generation
-    GlobalRegistry.Has<$Context['config']['name']> extends false
+    GlobalRegistry.Has<$Arguments['context']['config']['name']> extends false
       ? {}
       :
         (
           // eslint-disable-next-line
           // @ts-ignore Passes after generation
-          & TypeFunction.Call<GlobalRegistry.GetOrDefault<$Context['config']['name']>['interfaces']['Root'], $Context>
+          & TypeFunction.Call<GlobalRegistry.GetOrDefault<$Arguments['context']['config']['name']>['interfaces']['Root'], $Arguments>
           & {
               // eslint-disable-next-line
               // @ts-ignore Passes after generation
-              document: TypeFunction.Call<GlobalRegistry.GetOrDefault<$Context['config']['name']>['interfaces']['Document'], $Context>
+              document: TypeFunction.Call<GlobalRegistry.GetOrDefault<$Arguments['context']['config']['name']>['interfaces']['Document'], $Arguments>
             }
         )
   )
 
-export const requestMethodsProperties = defineTerminus((state) => {
+export const requestMethodsProperties = Chain.Extension.create<RequestMethods_>((_, context) => {
   return {
-    document: createMethodDocument(state),
-    query: createMethodOperationType(state, OperationTypeNode.QUERY),
-    mutation: createMethodOperationType(state, OperationTypeNode.MUTATION),
+    document: createMethodDocument(context),
+    query: createMethodOperationType(context, OperationTypeNode.QUERY),
+    mutation: createMethodOperationType(context, OperationTypeNode.MUTATION),
     // todo
     // subscription: async () => {},
-  }
+  } as any
 })
 
-const createMethodDocument = (state: ClientContext) => (document: Select.Document.DocumentObject) => {
+const createMethodDocument = (state: Context) => (document: Select.Document.DocumentObject) => {
   const documentNormalized = Select.Document.normalizeOrThrow(document)
   return {
     run: async (maybeOperationName?: string) => {
@@ -58,7 +59,7 @@ const createMethodDocument = (state: ClientContext) => (document: Select.Documen
   }
 }
 
-const createMethodOperationType = (state: ClientContext, operationType: OperationTypeNode) => {
+const createMethodOperationType = (state: Context, operationType: OperationTypeNode) => {
   return new Proxy({}, {
     get: (_, key) => {
       if (isSymbol(key)) throw new Error(`Symbols not supported.`)
@@ -76,7 +77,7 @@ const createMethodOperationType = (state: ClientContext, operationType: Operatio
 }
 
 const executeRootField = async (
-  state: ClientContext,
+  state: Context,
   operationType: OperationTypeNode,
   rootFieldName: string,
   rootFieldSelectionSet?: Select.SelectionSet.AnySelectionSet,
@@ -94,7 +95,7 @@ const executeRootField = async (
 }
 
 const executeOperation = async (
-  state: ClientContext,
+  state: Context,
   operationType: OperationTypeNode,
   rootTypeSelectionSet: Select.SelectionSet.AnySelectionSet,
 ) => {
@@ -108,7 +109,7 @@ const executeOperation = async (
 }
 
 const executeDocument = async (
-  state: ClientContext,
+  state: Context,
   document: Select.Document.DocumentNormalized,
   operationName?: string,
 ) => {

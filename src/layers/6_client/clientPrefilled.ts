@@ -4,7 +4,7 @@ import type { GlobalRegistry } from '../../types/GlobalRegistry/GlobalRegistry.j
 import { type Schema } from '../../types/Schema/__.js'
 import type { SchemaDrivenDataMap } from '../../types/SchemaDrivenDataMap/__.js'
 import { type Client, createWithState } from './client.js'
-import { createState } from './fluent.js'
+import { createContext } from './context.js'
 import type { InputBase } from './Settings/Input.js'
 import type { NormalizeInput } from './Settings/InputToConfig.js'
 
@@ -13,7 +13,7 @@ import type { NormalizeInput } from './Settings/InputToConfig.js'
  */
 export const createPrefilled: CreatePrefilled = (name, schemaMap, scalars, schemaUrl) => {
   const constructor = (input: any) => { // todo generic input type
-    const initialState = createState({
+    const initialState = createContext({
       name,
       extensions: [],
       scalars,

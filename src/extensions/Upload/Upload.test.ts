@@ -7,12 +7,12 @@ import { Graffle } from '../../entrypoints/main.js'
 import { Upload } from './Upload.js'
 
 import { type SchemaService, serveSchema } from '../../../tests/_/lib/serveSchema.js'
-import type { ClientContext } from '../../entrypoints/utilities-for-generated.js'
+import type { Context } from '../../entrypoints/utilities-for-generated.js'
 import type { Client } from '../../layers/6_client/client.js'
 
 let schemaServer: SchemaService
 
-let graffle: Client<ClientContext>
+let graffle: Client<Context>
 
 beforeAll(async () => {
   schemaServer = await serveSchema({ schema })

@@ -1,4 +1,4 @@
-import type { Fluent } from '../../../lib/fluent/__.js'
+import { Chain } from '../../../lib/chain/__.js'
 import type { Grafaid } from '../../../lib/grafaid/__.js'
 import { getOperationType } from '../../../lib/grafaid/document.js'
 import {
@@ -7,15 +7,21 @@ import {
   type TemplateStringsArguments,
 } from '../../../lib/template-string.js'
 import { RequestPipeline } from '../../../requestPipeline/__.js' // todo
-import { type ClientContext, defineTerminus } from '../fluent.js'
+import { type Context } from '../context.js'
 import { handleOutput } from '../handleOutput.js'
 import type { Config } from '../Settings/Config.js'
 import { type DocumentController, resolveSendArguments, type sendArgumentsImplementation } from './send.js'
 
+export interface Gql_ extends Chain.Extension {
+  context: Context
+  // @ts-expect-error untyped params
+  return: Gql<this['params']>
+}
+
 // dprint-ignore
-export interface gql<$Context extends ClientContext = ClientContext> {
-  <$Document extends Grafaid.Document.Typed.TypedDocumentLike>(document: $Document                            ): DocumentController<$Context, $Document>
-  <$Document extends Grafaid.Document.Typed.TypedDocumentLike>(parts: TemplateStringsArray, ...args: unknown[]): DocumentController<$Context, $Document>
+interface Gql<$Arguments extends Chain.Extension.Parameters<Gql_>> {
+  gql<$Document extends Grafaid.Document.Typed.TypedDocumentLike>(document: $Document                            ): DocumentController<$Arguments['context'], $Document>
+  gql<$Document extends Grafaid.Document.Typed.TypedDocumentLike>(parts: TemplateStringsArray, ...args: unknown[]): DocumentController<$Arguments['context'], $Document>
 }
 
 type gqlArguments = [Grafaid.Document.Typed.TypedDocumentLike] | TemplateStringsArguments
@@ -27,18 +33,13 @@ const resolveGqlArguments = (args: gqlArguments) => {
   }
 }
 
-export interface FnGql extends Fluent.FnProperty<'gql'> {
-  // @ts-expect-error untyped params
-  return: gql<this['params']>
-}
-
-export const gqlProperties = defineTerminus((state) => {
+export const gqlProperties = Chain.Extension.create<Gql_>((_, context) => {
   return {
     gql: (...args: gqlArguments) => {
       const { document: query } = resolveGqlArguments(args)
-      const transportType = state.config.transport.type
-      const url = state.config.transport.type === `http` ? state.config.transport.url : undefined
-      const schema = state.config.transport.type === `http` ? undefined : state.config.transport.schema
+      const transportType = context.config.transport.type
+      const url = context.config.transport.type === `http` ? context.config.transport.url : undefined
+      const schema = context.config.transport.type === `http` ? undefined : context.config.transport.schema
 
       return {
         send: async (...args: sendArgumentsImplementation) => {
@@ -60,7 +61,7 @@ export const gqlProperties = defineTerminus((state) => {
 
           const initialInput = {
             transportType,
-            state,
+            state: context,
             url,
             schema,
             // request,
@@ -69,11 +70,11 @@ export const gqlProperties = defineTerminus((state) => {
 
           const result = await RequestPipeline.anyware.run({
             initialInput,
-            retryingExtension: state.retry as any,
-            extensions: state.extensions.filter(_ => _.onRequest !== undefined).map(_ => _.onRequest!) as any,
+            retryingExtension: context.retry as any,
+            extensions: context.extensions.filter(_ => _.onRequest !== undefined).map(_ => _.onRequest!) as any,
           })
 
-          return handleOutput(state, result)
+          return handleOutput(context, result)
         },
       } as any
     },
