@@ -25,7 +25,7 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
       code()
     })
     code(`
-      export interface BuilderMethodsRoot<$Context extends ${identifiers.$$Utilities}.ClientContext> {
+      export interface BuilderMethodsRoot<$Context extends ${identifiers.$$Utilities}.Context> {
         ${
       config.schema.kindMap.list.Root.map(node => {
         const operationName = Grafaid.Document
@@ -51,7 +51,7 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
 
   // dprint-ignore
   code(`
-    export interface ${node.name}Methods<$Context extends ${identifiers.$$Utilities}.ClientContext> {
+    export interface ${node.name}Methods<$Context extends ${identifiers.$$Utilities}.Context> {
       $batch: <$SelectionSet>(selectionSet: ${identifiers.$$Utilities}.Exact<$SelectionSet, ${identifiers.$$SelectionSets}.${node.name}<$Context['scalars']>>) =>
         Promise<
           ${identifiers.$$Utilities}.SimplifyExcept<

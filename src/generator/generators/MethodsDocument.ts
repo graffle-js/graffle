@@ -17,7 +17,7 @@ export const ModuleGeneratorMethodsDocument = createModuleGenerator(
     code()
     code(Code.tsInterface({
       name: `Document`,
-      parameters: [`$Context extends ${identifiers.$$Utilities}.ClientContext`],
+      parameters: [`$Context extends ${identifiers.$$Utilities}.Context`],
       // dprint-ignore
       block: `
         <$Document>(document: ${identifiers.$$Utilities}.ExactNonEmpty<$Document, ${identifiers.$$SelectionSets}.$Document<$Context['scalars']>>): ${identifiers.$$Utilities}.DocumentRunner<

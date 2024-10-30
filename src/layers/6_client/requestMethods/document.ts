@@ -8,7 +8,7 @@ import { type HandleOutput } from '../handleOutput.js'
 
 // dprint-ignore
 export type DocumentRunner<
-  $$ClientContext extends Context,
+  $$Context extends Context,
   $$Schema extends Schema,
   $$Document extends Select.Document.SomeDocument,
   $$Name extends Select.Document.GetOperationNames<$$Document> = Select.Document.GetOperationNames<$$Document>
@@ -19,7 +19,7 @@ export type DocumentRunner<
   >(...params: $Params) =>
     Promise<
       HandleOutput<
-        $$ClientContext,
+        $$Context,
         InferResult.Operation<
           Select.Document.GetOperation<$$Document, $Name>,
           $$Schema,
