@@ -20,8 +20,13 @@ export interface Gql_ extends Chain.Extension {
 
 // dprint-ignore
 interface Gql<$Arguments extends Chain.Extension.Parameters<Gql_>> {
-  gql<$Document extends Grafaid.Document.Typed.TypedDocumentLike>(document: $Document                            ): DocumentController<$Arguments['context'], $Document>
-  gql<$Document extends Grafaid.Document.Typed.TypedDocumentLike>(parts: TemplateStringsArray, ...args: unknown[]): DocumentController<$Arguments['context'], $Document>
+  gql: gqlOverload<$Arguments>
+}
+
+// dprint-ignore
+interface gqlOverload<$Arguments extends Chain.Extension.Parameters<Gql_>> {
+  <$Document extends Grafaid.Document.Typed.TypedDocumentLike>(document: $Document                            ): DocumentController<$Arguments['context'], $Document>
+  <$Document extends Grafaid.Document.Typed.TypedDocumentLike>(parts: TemplateStringsArray, ...args: unknown[]): DocumentController<$Arguments['context'], $Document>
 }
 
 type gqlArguments = [Grafaid.Document.Typed.TypedDocumentLike] | TemplateStringsArguments
