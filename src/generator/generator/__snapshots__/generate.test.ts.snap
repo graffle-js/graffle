@@ -7700,7 +7700,7 @@ import * as $$Schema from "./schema.js";
 import type * as $$Utilities from "graffle/utilities-for-generated";
 import type { InferResult } from "graffle/schema";
 
-export interface QueryRootMethods<$Context extends $$Utilities.ClientContext> {
+export interface QueryRootMethods<$Context extends $$Utilities.Context> {
   $batch: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<
       $SelectionSet,
@@ -7748,9 +7748,7 @@ export interface QueryRootMethods<$Context extends $$Utilities.ClientContext> {
   >;
 }
 
-export interface BuilderMethodsRoot<
-  $Context extends $$Utilities.ClientContext,
-> {
+export interface BuilderMethodsRoot<$Context extends $$Utilities.Context> {
   undefined: QueryRootMethods<$Context>;
 }
 
