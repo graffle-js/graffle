@@ -1,22 +1,22 @@
 import type { Extension } from '../../../extension/extension.js'
-import { Chain } from '../../../lib/chain/__.js'
+import { Builder } from '../../../lib/chain/__.js'
 import type { ConfigManager } from '../../../lib/config-manager/__.js'
 import { type Context } from '../context.js'
 
-export interface Use_ extends Chain.Extension {
+export interface Use_ extends Builder.Extension {
   context: Context
   // @ts-expect-error untyped params
   return: Use<this['params']>
 }
 
-export interface Use<$Args extends Chain.Extension.Parameters<Use_>> {
+export interface Use<$Args extends Builder.Extension.Parameters<Use_>> {
   /**
    * TODO Docs.
    */
-  use: <$Extension extends Extension>(extension: $Extension) => Chain.Definition.MaterializeWithNewContext<
+  use: <$Extension extends Extension>(extension: $Extension) => Builder.Definition.MaterializeWithNewContext<
     (
-      $Extension['typeHooks']['chainExtension'] extends Chain.Extension
-        ? Chain.Definition.Extend<$Args['chain'], $Extension['typeHooks']['chainExtension']>
+      ConfigManager.GetOptional<$Extension, ['builder', 'type']> extends Builder.Extension
+        ? Builder.Definition.Extend<$Args['chain'], ConfigManager.GetOptional<$Extension, ['builder', 'type']>>
         : $Args['chain']
     ),
     // If the extension adds type hooks, merge them into the config.
@@ -36,7 +36,7 @@ export interface Use<$Args extends Chain.Extension.Parameters<Use_>> {
   >
 }
 
-export const useProperties = Chain.Extension.create<Use_>((builder, context) => {
+export const useProperties = Builder.Extension.create<Use_>((builder, context) => {
   return {
     use: (extension: Extension) => {
       return builder({

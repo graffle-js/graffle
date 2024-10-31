@@ -1,4 +1,4 @@
-import { Chain } from '../../../lib/chain/__.js'
+import { Builder } from '../../../lib/chain/__.js'
 import type { Grafaid } from '../../../lib/grafaid/__.js'
 import { getOperationType } from '../../../lib/grafaid/document.js'
 import {
@@ -12,19 +12,19 @@ import { handleOutput } from '../handleOutput.js'
 import type { Config } from '../Settings/Config.js'
 import { type DocumentController, resolveSendArguments, type sendArgumentsImplementation } from './send.js'
 
-export interface Gql_ extends Chain.Extension {
+export interface Gql_ extends Builder.Extension {
   context: Context
   // @ts-expect-error untyped params
   return: Gql<this['params']>
 }
 
 // dprint-ignore
-interface Gql<$Arguments extends Chain.Extension.Parameters<Gql_>> {
+interface Gql<$Arguments extends Builder.Extension.Parameters<Gql_>> {
   gql: gqlOverload<$Arguments>
 }
 
 // dprint-ignore
-interface gqlOverload<$Arguments extends Chain.Extension.Parameters<Gql_>> {
+interface gqlOverload<$Arguments extends Builder.Extension.Parameters<Gql_>> {
   <$Document extends Grafaid.Document.Typed.TypedDocumentLike>(document: $Document                            ): DocumentController<$Arguments['context'], $Document>
   <$Document extends Grafaid.Document.Typed.TypedDocumentLike>(parts: TemplateStringsArray, ...args: unknown[]): DocumentController<$Arguments['context'], $Document>
 }
@@ -38,7 +38,7 @@ const resolveGqlArguments = (args: gqlArguments) => {
   }
 }
 
-export const gqlProperties = Chain.Extension.create<Gql_>((_, context) => {
+export const gqlProperties = Builder.Extension.create<Gql_>((_, context) => {
   return {
     gql: (...args: gqlArguments) => {
       const { document: query } = resolveGqlArguments(args)

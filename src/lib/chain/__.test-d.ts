@@ -1,40 +1,40 @@
 import { assertEqual, assertExtends } from '../assert-equal.js'
-import type { Chain } from './__.js'
+import type { Builder } from './__.js'
 
 // ---------------------------------------------------------------------------------------------------------------------
 {
-  interface ex1_ extends Chain.Extension {
+  interface ex1_ extends Builder.Extension {
     return: {
       a: 1
     }
   }
-  type c = Chain.Definition.Extend<Chain.Definition.Empty, ex1_>
+  type c = Builder.Definition.Extend<Builder.Definition.Empty, ex1_>
   assertEqual<c['extensions'], [ex1_]>()
-  type cm = Chain.Definition.MaterializeSpecific<c>
+  type cm = Builder.Definition.MaterializeSpecific<c>
   assertEqual<cm, { a: 1 }>()
 }
 // ---------------------------------------------------------------------------------------------------------------------
 {
-  interface ex1_ extends Chain.Extension {
+  interface ex1_ extends Builder.Extension {
     return: {
       a: 1
     }
   }
-  type c = Chain.Definition.ExtendMany<Chain.Definition.Empty, [ex1_]>
+  type c = Builder.Definition.ExtendMany<Builder.Definition.Empty, [ex1_]>
   assertEqual<c['extensions'], [ex1_]>()
-  type cm = Chain.Definition.MaterializeSpecific<c>
+  type cm = Builder.Definition.MaterializeSpecific<c>
   assertEqual<cm, { a: 1 }>()
 }
 // ---------------------------------------------------------------------------------------------------------------------
 {
-  interface Reflect_ extends Chain.Extension {
+  interface Reflect_ extends Builder.Extension {
     // @ts-expect-error untyped params
     return: Reflect<this['params']>
   }
-  type Reflect<$Arguments extends Chain.Extension.Parameters> = {
+  type Reflect<$Arguments extends Builder.Extension.Parameters> = {
     reflect: keyof $Arguments
   }
-  type c = Chain.Definition.MaterializeSpecific<Chain.Definition.Extend<Chain.Definition.Empty, Reflect_>>
+  type c = Builder.Definition.MaterializeSpecific<Builder.Definition.Extend<Builder.Definition.Empty, Reflect_>>
   assertEqual<c, { reflect: 'context' | 'chain' }>()
 }
 // ---------------------------------------------------------------------------------------------------------------------
@@ -45,21 +45,24 @@ import type { Chain } from './__.js'
   interface FooContextEmpty extends FooContext {
     calls: []
   }
-  interface Foo_ extends Chain.Extension {
+  interface Foo_ extends Builder.Extension {
     context: FooContext
     contextEmpty: FooContextEmpty
     // @ts-expect-error untyped params
     return: Foo<this['params']>
   }
-  interface Foo<$Args extends Chain.Extension.Parameters<Foo_>> {
+  interface Foo<$Args extends Builder.Extension.Parameters<Foo_>> {
     _: $Args['context']
     foo: <const $Number extends number>(
       number: $Number,
-    ) => Chain.Definition.MaterializeWithNewContext<$Args['chain'], { calls: [...$Args['context']['calls'], $Number] }>
+    ) => Builder.Definition.MaterializeWithNewContext<
+      $Args['chain'],
+      { calls: [...$Args['context']['calls'], $Number] }
+    >
   }
 
-  type C = Chain.Definition.MaterializeGeneric<Chain.Definition.Extend<Chain.Definition.Empty, Foo_>>
-  type c1 = Chain.Definition.MaterializeSpecific<Chain.Definition.Extend<Chain.Definition.Empty, Foo_>>
+  type C = Builder.Definition.MaterializeGeneric<Builder.Definition.Extend<Builder.Definition.Empty, Foo_>>
+  type c1 = Builder.Definition.MaterializeSpecific<Builder.Definition.Extend<Builder.Definition.Empty, Foo_>>
 
   assertExtends<c1, C>()
 

@@ -1,19 +1,14 @@
-import {
-  type AssertExtends,
-  type BuilderConfig,
-  createExtension,
-  type Extension,
-  type WithInput,
-} from '../../entrypoints/main.js'
+import { createBuilderExtension, createExtension } from '../../entrypoints/extensionkit.js'
+import { type AssertExtends, type BuilderConfig, type WithInput } from '../../entrypoints/main.js'
 import type { ConfigManager } from '../../lib/config-manager/__.js'
 // todo: no deep imports, rethink these utilities and/or how they are exported from the graffle package.
 import type { Context } from '../../layers/6_client/context.js'
-import type { Chain } from '../../lib/chain/__.js'
+import type { Builder } from '../../lib/chain/__.js'
 
 export const Throws = () => {
-  return createExtension<ThrowsExtension>({
+  return createExtension({
     name: `Throws`,
-    onBuilderGet: ({ client, property, path }) => {
+    builder: createBuilderExtension<BuilderExtension>(({ client, property, path }) => {
       if (property !== `throws` || path.length !== 0) return undefined
 
       // todo redesign input to allow to force throw always
@@ -30,20 +25,16 @@ export const Throws = () => {
         },
       }
       return () => client.with(throwsifiedInput)
-    },
+    }),
   })
 }
 
-type ThrowsExtension = Extension<{
-  chainExtension: Throws_
-}>
-
-interface Throws_ extends Chain.Extension {
+interface BuilderExtension extends Builder.Extension {
   context: Context
-  return: Throws<AssertExtends<this['params'], Chain.Extension.Parameters<Throws_>>>
+  return: BuilderExtension_<AssertExtends<this['params'], Builder.Extension.Parameters<BuilderExtension>>>
 }
 
-interface Throws<$Args extends Chain.Extension.Parameters<Throws_>> {
+interface BuilderExtension_<$Args extends Builder.Extension.Parameters<BuilderExtension>> {
   /**
    * TODO
    */

@@ -1,17 +1,17 @@
-import { Chain } from '../../../lib/chain/__.js'
+import { Builder } from '../../../lib/chain/__.js'
 import type { ConfigManager } from '../../../lib/config-manager/__.js'
 import { mergeHeadersInit, mergeRequestInit } from '../../../lib/http.js'
 import { type Context } from '../context.js'
 import type { WithInput } from '../Settings/inputIncrementable/inputIncrementable.js'
 import type { NormalizeInput } from '../Settings/InputToConfig.js'
 
-export interface With_ extends Chain.Extension {
+export interface With_ extends Builder.Extension {
   context: Context
   // @ts-expect-error untyped params
   return: With<this['params']>
 }
 
-export interface With<$Args extends Chain.Extension.Parameters<With_>> {
+export interface With<$Args extends Builder.Extension.Parameters<With_>> {
   /**
    * TODO With Docs.
    */
@@ -20,7 +20,7 @@ export interface With<$Args extends Chain.Extension.Parameters<With_>> {
     // todo fixme
     // eslint-disable-next-line
     // @ts-ignore Passes after generation
-  ) => Chain.Definition.MaterializeWithNewContext<
+  ) => Builder.Definition.MaterializeWithNewContext<
     $Args['chain'],
     ConfigManager.SetProperties<
       $Args['context'],
@@ -32,7 +32,7 @@ export interface With<$Args extends Chain.Extension.Parameters<With_>> {
   >
 }
 
-export const withProperties = Chain.Extension.create<With_>((builder, state) => {
+export const withProperties = Builder.Extension.create<With_>((builder, state) => {
   return {
     with: (input: WithInput) => {
       return builder({

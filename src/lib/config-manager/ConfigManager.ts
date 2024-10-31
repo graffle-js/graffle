@@ -106,8 +106,8 @@ const mergeDefaults_: MergeDefaultsInnerFn = (
 type Path = [...string[]]
 
 // dprint-ignore
-export type ReadOrDefault<$Obj, $Path extends Path, $Default> =
-  OrDefault<Read<$Obj, $Path>, $Default>
+export type GetAtPathOrDefault<$Obj, $Path extends Path, $Default> =
+  OrDefault<GetOptional<$Obj, $Path>, $Default>
 
 // dprint-ignore
 export type OrDefault<$Value, $Default> =
@@ -118,12 +118,14 @@ export type OrDefault<$Value, $Default> =
                                      $Value
 
 // dprint-ignore
-export type Read<$Value, $Path extends [...string[]]> =
-  $Value extends undefined ? undefined
-  : $Path extends [infer P1 extends string, ...infer PN extends string[]] ?
-   $Value extends object ?	P1 extends keyof $Value ? Read<$Value[P1], PN> : undefined
-              : undefined
-  : $Value
+export type GetOptional<$Value, $Path extends [...string[]]> =
+  $Value extends undefined                                              ? undefined :
+  $Path extends [infer P1 extends string, ...infer PN extends string[]] ? $Value extends object
+                                                                          ?	P1 extends keyof $Value
+                                                                            ? GetOptional<$Value[P1], PN>
+                                                                            : undefined
+                                                                          : undefined
+                                                                        : $Value
 
 /**
  * Merge new properties from the second object into the first object.

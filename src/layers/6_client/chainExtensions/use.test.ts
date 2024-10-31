@@ -11,7 +11,7 @@ const headers = { 'x-foo': 'bar' }
 
 test('using an extension returns a copy of the client', () => {
   const client2 = client.use(Throws())
-  // @ts-expect-error fixme
+  // @ts-ignore fixme
   expect(client2 !== client).toBe(true)
 })
 

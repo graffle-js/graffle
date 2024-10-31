@@ -1,9 +1,9 @@
 import { getIntrospectionQuery, type IntrospectionQuery } from 'graphql'
-import type { Extension, SimplifyNullable } from '../../entrypoints/main.js'
-import { createExtension } from '../../extension/extension.js'
+import { createBuilderExtension, createExtension } from '../../entrypoints/extensionkit.js'
+import type { SimplifyNullable } from '../../entrypoints/main.js'
 import type { Context } from '../../layers/6_client/context.js'
 import type { HandleOutput } from '../../layers/6_client/handleOutput.js'
-import type { Chain } from '../../lib/chain/__.js'
+import type { Builder } from '../../lib/chain/__.js'
 import { createConfig, type Input } from './config.js'
 
 const knownPotentiallyUnsupportedFeatures = [`inputValueDeprecation`, `oneOf`] as const
@@ -27,9 +27,9 @@ const knownPotentiallyUnsupportedFeatures = [`inputValueDeprecation`, `oneOf`] a
 export const Introspection = (input?: Input) => {
   const config = createConfig(input)
 
-  return createExtension<IntrospectionExtension>({
+  return createExtension({
     name: `Introspection`,
-    onBuilderGet: ({ path, property, client }) => {
+    builder: createBuilderExtension<BuilderExtension>(({ path, property, client }) => {
       if (!(path.length === 0 && property === `introspect`)) return
       const clientCatching = client.with({ output: { envelope: false, errors: { execution: `return` } } })
 
@@ -60,20 +60,16 @@ export const Introspection = (input?: Input) => {
         // finally at runtime.
         return await client.gql(introspectionQueryDocument).send()
       }
-    },
+    }),
   })
 }
 
-type IntrospectionExtension = Extension<{
-  chainExtension: Introspect_
-}>
-
-interface Introspect_ extends Chain.Extension {
+interface BuilderExtension extends Builder.Extension {
   context: Context
   // @ts-expect-error untyped params
-  return: Introspect<this['params']>
+  return: BuilderExtension_<this['params']>
 }
 
-interface Introspect<$Args extends Chain.Extension.Parameters<Introspect_>> {
+interface BuilderExtension_<$Args extends Builder.Extension.Parameters<BuilderExtension>> {
   introspect: () => Promise<SimplifyNullable<HandleOutput<$Args['context'], IntrospectionQuery>>>
 }

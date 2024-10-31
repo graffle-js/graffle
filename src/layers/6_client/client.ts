@@ -1,5 +1,5 @@
 import { defaultName } from '../../generator/config/defaults.js'
-import type { Chain } from '../../lib/chain/__.js'
+import type { Builder } from '../../lib/chain/__.js'
 import type { ConfigManager } from '../../lib/config-manager/__.js'
 import { proxyGet } from '../../lib/prelude.js'
 import type { GlobalRegistry } from '../../types/GlobalRegistry/GlobalRegistry.js'
@@ -15,9 +15,9 @@ import { type RequestMethods_, requestMethodsProperties } from './requestMethods
 import { type InputStatic } from './Settings/Input.js'
 import { type NormalizeInput } from './Settings/InputToConfig.js'
 
-export type Client<$Context extends Context> = Chain.Definition.MaterializeWithNewContext<
-  Chain.Definition.ExtendMany<
-    Chain.Definition.Empty,
+export type Client<$Context extends Context> = Builder.Definition.MaterializeWithNewContext<
+  Builder.Definition.ExtendMany<
+    Builder.Definition.Empty,
     [
       Internal_,
       RequestMethods_,
@@ -82,10 +82,10 @@ export const createWithContext = (
   const clientProxy = proxyGet(clientDirect, ({ path, property }) => {
     // eslint-disable-next-line
     // @ts-ignore fixme "Type instantiation is excessively deep and possibly infinite"
-    const onGetHandlers = context.extensions.map(_ => _.onBuilderGet).filter(_ => _ !== undefined)
+    const onGetHandlers = context.extensions.map(_ => _.builder).filter(_ => _ !== undefined)
 
     for (const onGetHandler of onGetHandlers) {
-      const result = onGetHandler({
+      const result = onGetHandler.implementation({
         client: clientDirect,
         path,
         property,

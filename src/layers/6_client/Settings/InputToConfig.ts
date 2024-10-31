@@ -11,24 +11,24 @@ export type NormalizeInput<$Input extends InputStatic> = {
   transport: HandleTransport<$Input>
   output: {
     defaults: {
-      errorChannel: ConfigManager.ReadOrDefault<$Input, ['output', 'defaults', 'errorChannel'], 'throw'>
+      errorChannel: ConfigManager.GetAtPathOrDefault<$Input, ['output', 'defaults', 'errorChannel'], 'throw'>
     }
     envelope: {
       enabled:
-						ConfigManager.Read<$Input, ['output','envelope']> 					  extends boolean 		? ConfigManager.Read<$Input, ['output','envelope']>
-					: ConfigManager.Read<$Input, ['output','envelope','enabled']>		extends boolean 		? ConfigManager.Read<$Input, ['output','envelope','enabled']>
-					: ConfigManager.Read<$Input, ['output','envelope']> 						extends object 			? true
+						ConfigManager.GetOptional<$Input, ['output','envelope']> 					  extends boolean 		? ConfigManager.GetOptional<$Input, ['output','envelope']>
+					: ConfigManager.GetOptional<$Input, ['output','envelope','enabled']>		extends boolean 		? ConfigManager.GetOptional<$Input, ['output','envelope','enabled']>
+					: ConfigManager.GetOptional<$Input, ['output','envelope']> 						extends object 			? true
 					: false
       errors: {
-        execution: ConfigManager.ReadOrDefault<$Input, ['output','envelope','errors','execution'], true>
-        other: ConfigManager.ReadOrDefault<$Input, ['output','envelope','errors','other'], false> 
-        schema: ConfigManager.ReadOrDefault<$Input, ['output','envelope','errors','schema'], false>
+        execution: ConfigManager.GetAtPathOrDefault<$Input, ['output','envelope','errors','execution'], true>
+        other: ConfigManager.GetAtPathOrDefault<$Input, ['output','envelope','errors','other'], false> 
+        schema: ConfigManager.GetAtPathOrDefault<$Input, ['output','envelope','errors','schema'], false>
       }
     }
     errors: {
-      execution: ConfigManager.ReadOrDefault<$Input,['output', 'errors', 'execution'], 'default'>
-      other: ConfigManager.ReadOrDefault<$Input,['output', 'errors', 'other'], 'default'>
-      schema: ConfigManager.ReadOrDefault<$Input,['output', 'errors', 'schema'], false>
+      execution: ConfigManager.GetAtPathOrDefault<$Input,['output', 'errors', 'execution'], 'default'>
+      other: ConfigManager.GetAtPathOrDefault<$Input,['output', 'errors', 'other'], 'default'>
+      schema: ConfigManager.GetAtPathOrDefault<$Input,['output', 'errors', 'schema'], false>
     }
   }
 }

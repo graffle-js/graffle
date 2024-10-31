@@ -3,7 +3,7 @@ import type { SimplifyDeep } from 'type-fest'
 import { Select } from '../../../documentBuilder/Select/__.js'
 import { SelectionSetGraphqlMapper } from '../../../documentBuilder/SelectGraphQLMapper/__.js'
 import type { TypeFunction } from '../../../entrypoints/utilities-for-generated.js'
-import { Chain } from '../../../lib/chain/__.js'
+import { Builder } from '../../../lib/chain/__.js'
 import type { Grafaid } from '../../../lib/grafaid/__.js'
 import { getOperationDefinition } from '../../../lib/grafaid/document.js'
 import { isSymbol } from '../../../lib/prelude.js'
@@ -13,14 +13,14 @@ import { type Context } from '../context.js'
 import { handleOutput } from '../handleOutput.js'
 import type { Config } from '../Settings/Config.js'
 
-export interface RequestMethods_ extends Chain.Extension {
+export interface RequestMethods_ extends Builder.Extension {
   context: Context
   // @ts-expect-error untyped params
   return: RequestMethods<this['params']>
 }
 
 // dprint-ignore
-export type RequestMethods<$Arguments extends Chain.Extension.Parameters<RequestMethods_>> =
+export type RequestMethods<$Arguments extends Builder.Extension.Parameters<RequestMethods_>> =
   SimplifyDeep<
     & (
       // todo
@@ -43,7 +43,7 @@ export type RequestMethods<$Arguments extends Chain.Extension.Parameters<Request
     )
   >
 
-export const requestMethodsProperties = Chain.Extension.create<RequestMethods_>((_, context) => {
+export const requestMethodsProperties = Builder.Extension.create<RequestMethods_>((_, context) => {
   return {
     document: createMethodDocument(context),
     query: createMethodOperationType(context, OperationTypeNode.QUERY),
