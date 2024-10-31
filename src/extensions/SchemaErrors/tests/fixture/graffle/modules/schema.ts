@@ -1732,7 +1732,22 @@ export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$
     Error: Schema.Error
     Interface: Schema.Interface
   }
-  scalars: $Scalars
+  scalarNamesUnion:
+    | 'Date'
+    | 'Boolean'
+    | 'Float'
+    | 'ID'
+    | 'Int'
+    | 'String'
+  scalars: {
+    Date: Schema.Date
+    Boolean: Schema.Boolean
+    Float: Schema.Float
+    ID: Schema.ID
+    Int: Schema.Int
+    String: Schema.String
+  }
+  scalarRegistry: $Scalars
   extensions: {
     SchemaErrors: {
       objectNames: 'ErrorOne' | 'ErrorTwo'

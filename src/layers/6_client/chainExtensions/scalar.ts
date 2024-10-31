@@ -1,6 +1,7 @@
 import type { Simplify } from 'type-fest'
 import { Chain } from '../../../lib/chain/__.js'
 import type { ConfigManager } from '../../../lib/config-manager/__.js'
+import type { GlobalRegistry } from '../../../types/GlobalRegistry/GlobalRegistry.js'
 import { Schema } from '../../../types/Schema/__.js'
 import { type Context } from '../context.js'
 
@@ -24,11 +25,16 @@ type ScalarMethod<$Args extends Chain.Extension.Parameters<Scalar_>> = {
   /**
    * TODO Docs.
    */
-  // TODO limit $Name to what is in the schema.
-  <$Name extends string, $Decoded>(name: $Name, $Codec: {
-    decode: (value: string) => $Decoded
-    encode: (value: $Decoded) => string
-  }): Chain.Definition.MaterializeWithNewContext<
+  <
+    $Name extends GlobalRegistry.GetOrGeneric<$Args['context']['name']>['schema']['scalarNamesUnion'],
+    $Decoded,
+  >(
+    name: $Name,
+    $Codec: {
+      decode: (value: string) => $Decoded
+      encode: (value: $Decoded) => string
+    },
+  ): Chain.Definition.MaterializeWithNewContext<
     $Args['chain'],
     ConfigManager.SetAtPath<
       $Args['context'],
@@ -42,7 +48,9 @@ type ScalarMethod<$Args extends Chain.Extension.Parameters<Scalar_>> = {
   /*
    * TODO Docs.
    */
-  <$Scalar extends Schema.Scalar>(scalar: $Scalar): Chain.Definition.MaterializeWithNewContext<
+  <$Scalar extends Schema.Scalar<GlobalRegistry.GetOrGeneric<$Args['context']['name']>['schema']['scalarNamesUnion']>>(
+    scalar: $Scalar,
+  ): Chain.Definition.MaterializeWithNewContext<
     $Args['chain'],
     ConfigManager.SetAtPath<
       $Args['context'],

@@ -262,11 +262,15 @@ export const SchemaGenerator = createCodeGenerator(
   ({ config, code }) => {
     const kindMap = config.schema.kindMap
     // dprint-ignore
-    const root = kindMap.list.Root.map(_ => [_.name, `${identifiers.Schema}.${_.name}`])
-    const objects = kindMap.list.OutputObject.map(_ => [_.name, `${identifiers.Schema}.${_.name}`])
-    const unions = kindMap.list.Union.map(_ => [_.name, `${identifiers.Schema}.${_.name}`])
-    const interfaces = kindMap.list.Interface.map(_ => [_.name, `${identifiers.Schema}.${_.name}`])
-    const enums = kindMap.list.Enum.map(_ => [_.name, `${identifiers.Schema}.${_.name}`])
+    const root = kindMap.list.Root.map(_ => [_.name, `${identifiers.Schema}.${_.name}`] as const)
+    const objects = kindMap.list.OutputObject.map(_ => [_.name, `${identifiers.Schema}.${_.name}`] as const)
+    const unions = kindMap.list.Union.map(_ => [_.name, `${identifiers.Schema}.${_.name}`] as const)
+    const interfaces = kindMap.list.Interface.map(_ => [_.name, `${identifiers.Schema}.${_.name}`] as const)
+    const enums = kindMap.list.Enum.map(_ => [_.name, `${identifiers.Schema}.${_.name}`] as const)
+    const scalars = [
+      ...kindMap.list.ScalarCustom.map(_ => [_.name, `${identifiers.Schema}.${_.name}`] as const),
+      ...kindMap.list.ScalarStandard.map(_ => [_.name, `${identifiers.Schema}.${_.name}`] as const),
+    ]
     const operationsAvailable = entries(kindMap.index.Root).filter(_ => _[1] !== null).map(_ => _[0])
     const schema: Code.TermObject = {
       name: `$$Data.Name`,
@@ -290,10 +294,12 @@ export const SchemaGenerator = createCodeGenerator(
         ...unions,
         ...interfaces,
       ]),
-      objects: Object.fromEntries(objects),
-      unions: Object.fromEntries(unions),
-      interfaces: Object.fromEntries(interfaces),
-      scalars: `$Scalars`,
+      objects,
+      unions,
+      interfaces,
+      scalarNamesUnion: Code.tsUnionItems(scalars.map(_ => _[0]).map(Code.string)),
+      scalars,
+      scalarRegistry: `$Scalars`,
       extensions: `${identifiers.$$Utilities}.GlobalRegistry.TypeExtensions`,
     }
 

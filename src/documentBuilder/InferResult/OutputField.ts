@@ -42,8 +42,8 @@ type GetCodecForCodecless<
   $Schema extends Schema,
   $Node extends Schema.Scalar.ScalarCodecless
 > =
-  $Node['name'] extends keyof $Schema['scalars']['map']
-    ? $Schema['scalars']['map'][$Node['name']]
+  $Node['name'] extends keyof $Schema['scalarRegistry']['map']
+    ? $Schema['scalarRegistry']['map'][$Node['name']]
     : Schema.Scalar.String
 
 // dprint-ignore

@@ -1088,6 +1088,21 @@ export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$
   interfaces: {
     Being: Schema.Being;
   };
-  scalars: $Scalars;
+  scalarNamesUnion:
+    | "Date"
+    | "Float"
+    | "ID"
+    | "String"
+    | "Int"
+    | "Boolean";
+  scalars: {
+    Date: Schema.Date;
+    Float: Schema.Float;
+    ID: Schema.ID;
+    String: Schema.String;
+    Int: Schema.Int;
+    Boolean: Schema.Boolean;
+  };
+  scalarRegistry: $Scalars;
   extensions: $$Utilities.GlobalRegistry.TypeExtensions;
 }

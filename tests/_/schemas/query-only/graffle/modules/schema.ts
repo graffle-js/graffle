@@ -266,6 +266,19 @@ export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$
   objects: {}
   unions: {}
   interfaces: {}
-  scalars: $Scalars
+  scalarNamesUnion:
+    | 'Boolean'
+    | 'Float'
+    | 'ID'
+    | 'Int'
+    | 'String'
+  scalars: {
+    Boolean: Schema.Boolean
+    Float: Schema.Float
+    ID: Schema.ID
+    Int: Schema.Int
+    String: Schema.String
+  }
+  scalarRegistry: $Scalars
   extensions: $$Utilities.GlobalRegistry.TypeExtensions
 }

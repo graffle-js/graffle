@@ -636,3 +636,5 @@ export type SimplifyExcept<$ExcludeType, $Type> =
     : $Type extends $ExcludeType
       ? $Type
       : {[TypeKey in keyof $Type]: $Type[TypeKey]}
+
+export const any = undefined as any

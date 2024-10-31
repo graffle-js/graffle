@@ -6,6 +6,7 @@ import type { Enum } from './nodes/Enum.js'
 import type { Interface } from './nodes/Interface.js'
 import type { OutputObject } from './nodes/OutputObject.js'
 import type { Scalar } from './nodes/Scalar/Scalar.js'
+import type { ScalarCodecless } from './nodes/ScalarCodecless.js'
 import type { Union } from './nodes/Union.js'
 // import type { Mutation, Query, RootType, Subscription } from './StandardTypes/object.js'
 
@@ -35,9 +36,11 @@ export interface Schema<
   objects: Record<string, OutputObject>
   unions: Record<string, Union>
   interfaces: Record<string, Interface>
+  scalars: Record<string, Scalar | ScalarCodecless>
+  scalarNamesUnion: string
   /**
-   * A map of scalar definitions. Useful for custom scalars.
+   * A registry of scalar definitions. Useful for custom scalars.
    */
-  scalars: $Scalars
+  scalarRegistry: $Scalars
   extensions: $Extensions
 }
