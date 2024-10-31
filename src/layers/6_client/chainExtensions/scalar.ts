@@ -7,15 +7,25 @@ import { type Context } from '../context.js'
 export interface Scalar_ extends Chain.Extension {
   context: Context
   // @ts-expect-error untyped params
-  return: Scalar<this['params']>
+  return: ScalarExtension<this['params']>
 }
 
-type Scalar<$Args extends Chain.Extension.Parameters<Scalar_>> = {
+interface ScalarExtension<$Args extends Chain.Extension.Parameters<Scalar_>> {
+  /**
+   * TODO Docs.
+   */
+  scalar: null extends $Args['context']['schemaMap'] ? TypeErrorMissingSchemaMap : ScalarMethod<$Args>
+}
+
+export type TypeErrorMissingSchemaMap =
+  `Error: Your client must have a schemaMap in order to apply registered scalars. Therefore we're providing this static error type message here instead of allowing you continue registering scalars that will never be applied.`
+
+interface ScalarMethod<$Args extends Chain.Extension.Parameters<Scalar_>> {
   /**
    * TODO Docs.
    */
   // TODO limit $Name to what is in the schema.
-  scalar<$Name extends string, $Decoded>(name: $Name, $Codec: {
+  <$Name extends string, $Decoded>(name: $Name, $Codec: {
     decode: (value: string) => $Decoded
     encode: (value: $Decoded) => string
   }): Chain.Definition.MaterializeWithNewContext<
@@ -29,10 +39,10 @@ type Scalar<$Args extends Chain.Extension.Parameters<Scalar_>> = {
     >
   >
 
-  /**
+  /*
    * TODO Docs.
    */
-  scalar<$Scalar extends Schema.Scalar>(scalar: $Scalar): Chain.Definition.MaterializeWithNewContext<
+  <$Scalar extends Schema.Scalar>(scalar: $Scalar): Chain.Definition.MaterializeWithNewContext<
     $Args['chain'],
     ConfigManager.SetAtPath<
       $Args['context'],

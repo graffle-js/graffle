@@ -255,7 +255,7 @@ export const capitalizeFirstLetter = (string: string) => string.charAt(0).toUppe
 
 export type SomeAsyncFunction = (...args: unknown[]) => Promise<unknown>
 
-export type SomeFunction = (...args: unknown[]) => MaybePromise<unknown>
+export type SomeFunction = (...args: unknown[]) => MaybePromise<any>
 
 export type Deferred<T> = {
   promise: Promise<T>
