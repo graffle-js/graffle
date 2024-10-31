@@ -41,10 +41,12 @@ touch tsconfig.json main.ts
 
 ## 📦 Install Graffle
 
+Graffle is [still in development](https://github.com/graffle-js/graffle/discussions/1163) so there is no stable release to install yet. Use the `next` distribution tag to find the latest pre-release.
+
 Graffle has a peer dependency on `graphql` so you will need to install that too.
 
 ```sh
-pnpm add graffle graphql
+pnpm add graffle@next graphql
 ```
 
 ## 💀 Verify Project Configuration
