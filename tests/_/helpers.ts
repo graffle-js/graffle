@@ -5,7 +5,7 @@ import * as Path from 'node:path'
 import type { Mock } from 'vitest'
 import { test as testBase, vi } from 'vitest'
 import { Graffle } from '../../src/entrypoints/main.js'
-import type { Context } from '../../src/entrypoints/utilities-for-generated.js'
+import type { Context, SchemaDrivenDataMap } from '../../src/entrypoints/utilities-for-generated.js'
 import type { Client } from '../../src/layers/6_client/client.js'
 import type { ConfigManager } from '../../src/lib/config-manager/__.js'
 import { Grafaid } from '../../src/lib/grafaid/__.js'
@@ -37,8 +37,8 @@ interface Fixtures {
   fetch: Mock<(request: Request) => Promise<Response>>
   pokemonService: SchemaService
   graffle: Client<Context>
-  kitchenSink: Client<ConfigManager.SetAtPath<Context, ['name'], 'default'>>
-  kitchenSinkHttp: Client<ConfigManager.SetAtPath<Context, ['name'], 'default'>>
+  kitchenSink: Client<ConfigManager.SetProperties<Context, { name: `default`; schemaMap: SchemaDrivenDataMap }>>
+  kitchenSinkHttp: Client<ConfigManager.SetProperties<Context, { name: `default`; schemaMap: SchemaDrivenDataMap }>>
   kitchenSinkData: typeof db
   project: Project
 }
