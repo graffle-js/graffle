@@ -7,7 +7,7 @@ import { type Context } from '../context.js'
 export interface Scalar_ extends Chain.Extension {
   context: Context
   // @ts-expect-error untyped params
-  return: ScalarExtension<this['params']>
+  return: Simplify<ScalarExtension<this['params']>>
 }
 
 interface ScalarExtension<$Args extends Chain.Extension.Parameters<Scalar_>> {
@@ -20,7 +20,7 @@ interface ScalarExtension<$Args extends Chain.Extension.Parameters<Scalar_>> {
 export type TypeErrorMissingSchemaMap =
   `Error: Your client must have a schemaMap in order to apply registered scalars. Therefore we're providing this static error type message here instead of allowing you continue registering scalars that will never be applied.`
 
-interface ScalarMethod<$Args extends Chain.Extension.Parameters<Scalar_>> {
+type ScalarMethod<$Args extends Chain.Extension.Parameters<Scalar_>> = {
   /**
    * TODO Docs.
    */
