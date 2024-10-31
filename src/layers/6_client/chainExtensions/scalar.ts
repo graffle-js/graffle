@@ -74,5 +74,5 @@ export const scalarProperties = Chain.Extension.create<Scalar_>((builder, state)
         },
       })
     },
-  }
+  } as any
 })
