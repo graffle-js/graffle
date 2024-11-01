@@ -53,9 +53,14 @@ pnpm add graffle@next graphql
 
 Graffle is an [ESM only package built around package `exports`](https://github.com/graffle-js/graffle/discussions/863). This imposes a few requirements on your project configuration.
 
-1. Your `package.json` must set `type` to `module`.
-2. If you are using TypeScript your `tsconfig.json` must set `module` and `moduleResolution` to `Node16` or `Bundler`. Otherwise TypeScript will not be able to find the types when you attempt to import entrypoints from `graffle`.
-3. If you are using React Native you need to [do this](https://reactnative.dev/blog/2023/06/21/package-exports-support#enabling-package-exports-beta).
+1. One of the following:
+   - Your project is using ESM (your `package.json` [`type` is set to `module`](https://nodejs.org/api/packages.html#type))
+   - Your CJS proejct uses `node@^20.17` with [`--experimental-require-module`](https://nodejs.org/api/cli.html#--experimental-require-module) or `node@^23` (where that flag is the default).
+2. _If you are using TypeScript_:
+   1. If you are using TypeScript your `tsconfig.json` must set `module` and [`moduleResolution`](https://www.typescriptlang.org/tsconfig/#moduleResolution) to `Node16` or `Bundler`. Otherwise TypeScript will not be able to find the types when you attempt to import entrypoints from `graffle`.
+   2. Your TypeScript version must be `typescript@^4.9`.
+3. _If you are using React Native_:
+   1. [Do this](https://reactnative.dev/blog/2023/06/21/package-exports-support#enabling-package-exports-beta) to enable support for package `exports`.
 
 ## 🚀 Send Your First Document
 

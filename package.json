@@ -9,64 +9,40 @@
   },
   "exports": {
     ".": {
-      "import": {
-        "default": "./build/entrypoints/main.js"
-      }
+      "default": "./build/entrypoints/main.js"
     },
     "./generator": {
-      "import": {
-        "default": "./build/entrypoints/generator.js"
-      }
+      "default": "./build/entrypoints/generator.js"
     },
     "./extensions/upload": {
-      "import": {
-        "default": "./build/entrypoints/extensions/upload/runtime.js"
-      }
+      "default": "./build/entrypoints/extensions/upload/runtime.js"
     },
     "./extensions/throws": {
-      "import": {
-        "default": "./build/entrypoints/extensions/throws/runtime.js"
-      }
+      "default": "./build/entrypoints/extensions/throws/runtime.js"
     },
     "./extensions/opentelemetry": {
-      "import": {
-        "default": "./build/entrypoints/extensions/opentelemetry/runtime.js"
-      }
+      "default": "./build/entrypoints/extensions/opentelemetry/runtime.js"
     },
     "./extensions/introspection": {
-      "import": {
-        "default": "./build/entrypoints/extensions/introspection/runtime.js"
-      }
+      "default": "./build/entrypoints/extensions/introspection/runtime.js"
     },
     "./extensions/schema-errors": {
-      "import": {
-        "default": "./build/entrypoints/extensions/schema-errors/runtime.js"
-      }
+      "default": "./build/entrypoints/extensions/schema-errors/runtime.js"
     },
     "./extensions/schema-errors/generator": {
-      "import": {
-        "default": "./build/entrypoints/extensions/schema-errors/gentime.js"
-      }
+      "default": "./build/entrypoints/extensions/schema-errors/gentime.js"
     },
     "./client": {
-      "import": {
-        "default": "./build/entrypoints/client.js"
-      }
+      "default": "./build/entrypoints/client.js"
     },
     "./schema": {
-      "import": {
-        "default": "./build/entrypoints/schema.js"
-      }
+      "default": "./build/entrypoints/schema.js"
     },
     "./generator-helpers/standard-scalar-types": {
-      "import": {
-        "default": "./build/entrypoints/generator-helpers/standardScalarTypes.js"
-      }
+      "default": "./build/entrypoints/generator-helpers/standardScalarTypes.js"
     },
     "./utilities-for-generated": {
-      "import": {
-        "default": "./build/entrypoints/utilities-for-generated.js"
-      }
+      "default": "./build/entrypoints/utilities-for-generated.js"
     }
   },
   "files": [
