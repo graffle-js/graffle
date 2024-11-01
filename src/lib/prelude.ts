@@ -1,4 +1,4 @@
-import type { IsAny, IsEmptyObject, IsNever, IsUnknown, Simplify } from 'type-fest'
+import type { HasRequiredKeys, IsAny, IsEmptyObject, IsNever, IsUnknown, Simplify } from 'type-fest'
 
 /* eslint-disable */
 export type RemoveIndex<T> = {
@@ -638,3 +638,11 @@ export type SimplifyExcept<$ExcludeType, $Type> =
       : {[TypeKey in keyof $Type]: $Type[TypeKey]}
 
 export const any = undefined as any
+
+// dprint-ignore
+export type ToParameters<$Params extends object | undefined> =
+  $Params extends object              
+    ? HasKeys<$Params> extends false          ? []              :
+      HasRequiredKeys<$Params> extends true   ? [$Params]       :
+                                                [$Params] | []
+    : []

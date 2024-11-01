@@ -4,7 +4,7 @@ import type { Context } from '../layers/6_client/context.js'
 import type { GraffleExecutionResultEnvelope } from '../layers/6_client/handleOutput.js'
 import type { Anyware } from '../lib/anyware/__.js'
 import type { Builder } from '../lib/chain/__.js'
-import type { AssertExtends } from '../lib/prelude.js'
+import type { AssertExtends, ToParameters } from '../lib/prelude.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
 import type { Fn } from '../lib/type-function/TypeFunction.js'
 import type { RequestPipeline } from '../requestPipeline/__.js'
@@ -44,6 +44,7 @@ export interface EmptyTypeHooks {
 
 export interface Extension<
   $Name extends string = string,
+  $Config extends object | undefined = object | undefined,
   $BuilderExtension extends BuilderExtension | undefined = BuilderExtension | undefined,
   $TypeHooks extends TypeHooks = TypeHooks,
 > extends Fn {
@@ -51,6 +52,7 @@ export interface Extension<
    * The name of the extension
    */
   name: $Name
+  config: $Config
   /**
    * Anyware executed on every request.
    */
@@ -135,13 +137,42 @@ export const createExtension = <
   $Name extends string,
   $BuilderExtension extends BuilderExtension | undefined = undefined,
   $TypeHooks extends TypeHooks = TypeHooks,
+  $ConfigInput extends object = object,
+  $Config extends object = object,
+  $Custom extends object = object,
 >(
-  extension: {
+  extensionInput: {
     name: $Name
-    builder?: $BuilderExtension
-    onRequest?: Anyware.Extension2<RequestPipeline.Core>
-    typeHooks?: () => $TypeHooks
+    normalizeConfig?: (input?: $ConfigInput) => $Config
+    custom?: $Custom
+    create: (params: { config: $Config }) => {
+      builder?: $BuilderExtension
+      onRequest?: Anyware.Extension2<RequestPipeline.Core>
+      typeHooks?: () => $TypeHooks
+    }
   },
-): Extension<$Name, $BuilderExtension, $TypeHooks> => {
-  return extension as any
+): ExtensionConstructor<
+  $ConfigInput,
+  $Config,
+  $Name,
+  $BuilderExtension,
+  $TypeHooks,
+  $Custom
+> => {
+  const extensionConstructor = (input: any) => {
+    const config = (extensionInput.normalizeConfig?.(input) ?? {}) as any
+    return extensionInput.create({ config }) as any
+  }
+  return extensionConstructor as any
 }
+
+export type ExtensionConstructor<
+  $ConfigInput extends undefined | object,
+  $Config extends object,
+  $Name extends string,
+  $BuilderExtension extends BuilderExtension | undefined = undefined,
+  $TypeHooks extends TypeHooks = TypeHooks,
+  $Custom extends object = object,
+> =
+  & ((...args: ToParameters<$ConfigInput>) => Extension<$Name, $Config, $BuilderExtension, $TypeHooks>)
+  & $Custom

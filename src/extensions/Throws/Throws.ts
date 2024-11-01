@@ -5,29 +5,31 @@ import type { ConfigManager } from '../../lib/config-manager/__.js'
 import type { Context } from '../../layers/6_client/context.js'
 import type { Builder } from '../../lib/chain/__.js'
 
-export const Throws = () => {
-  return createExtension({
-    name: `Throws`,
-    builder: createBuilderExtension<BuilderExtension>(({ client, property, path }) => {
-      if (property !== `throws` || path.length !== 0) return undefined
+export const Throws = createExtension({
+  name: `Throws`,
+  create: () => {
+    return {
+      builder: createBuilderExtension<BuilderExtension>(({ client, property, path }) => {
+        if (property !== `throws` || path.length !== 0) return undefined
 
-      // todo redesign input to allow to force throw always
-      // todo pull pre-configured config from core
-      const throwsifiedInput: WithInput = {
-        output: {
-          envelope: {
-            enabled: client._.config.output.envelope.enabled,
+        // todo redesign input to allow to force throw always
+        // todo pull pre-configured config from core
+        const throwsifiedInput: WithInput = {
+          output: {
+            envelope: {
+              enabled: client._.config.output.envelope.enabled,
+              // @ts-expect-error
+              errors: { execution: false, other: false, schema: false },
+            },
             // @ts-expect-error
-            errors: { execution: false, other: false, schema: false },
+            errors: { execution: `throw`, other: `throw`, schema: `throw` },
           },
-          // @ts-expect-error
-          errors: { execution: `throw`, other: `throw`, schema: `throw` },
-        },
-      }
-      return () => client.with(throwsifiedInput)
-    }),
-  })
-}
+        }
+        return () => client.with(throwsifiedInput)
+      }),
+    }
+  },
+})
 
 interface BuilderExtension extends Builder.Extension {
   context: Context

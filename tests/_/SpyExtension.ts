@@ -3,19 +3,6 @@ import { createExtension } from '../../src/entrypoints/main.js'
 import type { Config } from '../../src/entrypoints/utilities-for-generated.js'
 import type { HookDefEncode, HookDefExchange, HookDefPack } from '../../src/requestPipeline/hooks.js'
 
-export const Spy = () =>
-  createExtension({
-    name: `Spy`,
-    onRequest: async ({ encode }) => {
-      Spy.data.encode.input = encode.input
-      const { pack } = await encode()
-      Spy.data.pack.input = pack.input
-      const { exchange } = await pack()
-      Spy.data.exchange.input = exchange.input
-      return exchange()
-    },
-  })
-
 interface SpyData {
   encode: {
     input: HookDefEncode<Config>['input'] | null
@@ -40,7 +27,24 @@ const emptySpyData: SpyData = {
   },
 }
 
-Spy.data = emptySpyData
+export const Spy = createExtension({
+  name: `Spy`,
+  custom: {
+    data: emptySpyData,
+  },
+  create: () => {
+    return {
+      onRequest: async ({ encode }) => {
+        Spy.data.encode.input = encode.input
+        const { pack } = await encode()
+        Spy.data.pack.input = pack.input
+        const { exchange } = await pack()
+        Spy.data.exchange.input = exchange.input
+        return exchange()
+      },
+    }
+  },
+})
 
 beforeEach(() => {
   Spy.data = emptySpyData

@@ -24,7 +24,13 @@ export const AnywareExtension = Builder.Extension.create<Anyware_>((builder, con
     anyware: (anyware: Anyware.Extension2<RequestPipeline.Core>) => {
       return builder({
         ...context,
-        extensions: [...context.extensions, createExtension({ name: `InlineAnyware`, onRequest: anyware })],
+        extensions: [
+          ...context.extensions,
+          createExtension({
+            name: `InlineAnyware`,
+            create: () => ({ onRequest: anyware }),
+          })(),
+        ],
       })
     },
   }
