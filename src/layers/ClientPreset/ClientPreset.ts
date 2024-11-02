@@ -1,5 +1,12 @@
-import type { CamelCase } from 'type-fest'
-import type { Extension, ExtensionConstructor, InferExtensionFromConstructor } from '../../extension/extension.js'
+import type { CamelCase, Simplify } from 'type-fest'
+import type {
+  Extension,
+  ExtensionConstructor,
+  ExtensionInputParametersNone,
+  ExtensionInputParametersOptional,
+  ExtensionInputParametersRequired,
+  InferExtensionFromConstructor,
+} from '../../extension/extension.js'
 import type { Builder } from '../../lib/builder/__.js'
 import type { ConfigManager } from '../../lib/config-manager/__.js'
 import { type mergeArrayOfObjects, type ToParametersExact } from '../../lib/prelude.js'
@@ -52,10 +59,12 @@ export const create: CreatePrefilled = (args) => {
   return constructor as any
 }
 
+// dprint-ignore
 type CreatePrefilled = <
   const $Name extends string,
   $Scalars extends Schema.Scalar.Registry,
-  const $ExtensionConstructors extends [...ExtensionConstructor[]],
+  const $ExtensionConstructors extends [...ExtensionConstructor<any>[]],
+  // const $ExtensionConstructors extends [...any[]],
   $Params extends {
     name: $Name
     sddm?: SchemaDrivenDataMap
@@ -63,29 +72,30 @@ type CreatePrefilled = <
     schemaUrl?: URL
     extensions?: $ExtensionConstructors
   },
->(keywordArgs: $Params) => {
-  preset: $Params
-  <$ClientKeywordArgs extends ConstructorParameters<$Name, ConfigManager.OrDefault<$Params['extensions'], []>>>(
-    ...args: ToParametersExact<
-      $ClientKeywordArgs,
-      ConstructorParameters<$Name, ConfigManager.OrDefault<$Params['extensions'], []>>
+>(keywordArgs: $Params) =>
+  {
+    preset: $Params
+    <$ClientKeywordArgs extends ConstructorParameters<$Name, ConfigManager.OrDefault<$Params['extensions'], []>>>(
+      ...args: ToParametersExact<
+                  $ClientKeywordArgs,
+                  ConstructorParameters<$Name, ConfigManager.OrDefault<$Params['extensions'], []>>
+                >
+    ): ApplyPrefilledExtensions<
+      ConfigManager.OrDefault<$Params['extensions'], []>,
+      // @ts-expect-error fixme
+      Client<{
+        input: $ClientKeywordArgs
+        name: $Params['name']
+        schemaMap: ConfigManager.OrDefault<$Params['sddm'], null>
+        scalars: ConfigManager.OrDefault<$Params['scalars'], Schema.Scalar.Registry.Empty>
+        config: NormalizeInput<$ClientKeywordArgs & { name: $Name; schemaMap: SchemaDrivenDataMap }>
+        typeHooks: TypeHooksEmpty
+        // This will be populated by statically applying preset extensions.
+        extensions: []
+        // retry: null
+      }>
     >
-  ): ApplyPrefilledExtensions<
-    ConfigManager.OrDefault<$Params['extensions'], []>,
-    // @ts-expect-error fixme
-    Client<{
-      input: $ClientKeywordArgs
-      name: $Params['name']
-      schemaMap: ConfigManager.OrDefault<$Params['sddm'], null>
-      scalars: ConfigManager.OrDefault<$Params['scalars'], Schema.Scalar.Registry.Empty>
-      config: NormalizeInput<$ClientKeywordArgs & { name: $Name; schemaMap: SchemaDrivenDataMap }>
-      typeHooks: TypeHooksEmpty
-      // This will be populated by statically applying preset extensions.
-      extensions: []
-      // retry: null
-    }>
-  >
-}
+  }
 
 type ConstructorParameters<
   $Name extends string,
@@ -94,10 +104,13 @@ type ConstructorParameters<
   & InputBase<GlobalRegistry.GetOrGeneric<$Name>>
   & mergeArrayOfObjects<GetParametersContributedByExtensions<$Extensions>>
 
+// dprint-ignore
 type GetParametersContributedByExtensions<Extensions extends [...ExtensionConstructor[]]> = {
-  [$Index in keyof Extensions]: {
-    [_ in CamelCase<Extensions[$Index]['info']['name']>]: Extensions[$Index]['info']['configInput']
-  }
+  [$Index in keyof Extensions]:
+    Extensions[$Index]['info']['configInputParameters'] extends ExtensionInputParametersNone     ? {} :
+    Extensions[$Index]['info']['configInputParameters'] extends ExtensionInputParametersRequired ? { [_ in CamelCase<Extensions[$Index]['info']['name']>]: Extensions[$Index]['info']['configInputParameters'][0] } :
+    Extensions[$Index]['info']['configInputParameters'] extends ExtensionInputParametersOptional ? { [_ in CamelCase<Extensions[$Index]['info']['name']>]?: Extensions[$Index]['info']['configInputParameters'][0] } :
+                                                                                                   {}
 }
 
 // dprint-ignore

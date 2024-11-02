@@ -5,7 +5,7 @@ import { type Exact, proxyGet } from '../../lib/prelude.js'
 import type { GlobalRegistry } from '../../types/GlobalRegistry/GlobalRegistry.js'
 import { Schema } from '../../types/Schema/__.js'
 import { type BuilderExtensionAnyware, builderExtensionAnyware } from './builderExtensions/anyware.js'
-import type { BuilderExtensionInternal } from './builderExtensions/internal.js'
+import { type BuilderExtensionInternal, builderExtensionInternal } from './builderExtensions/internal.js'
 import { type BuilderExtensionScalar, builderExtensionScalar } from './builderExtensions/scalar.js'
 import { type BuilderExtensionUse, builderExtensionUse } from './builderExtensions/use.js'
 import { type BuilderExtensionWith, builderExtensionWith } from './builderExtensions/with.js'
@@ -78,7 +78,7 @@ export const createWithContext = (
 
   // @ts-expect-error ignoreme
   const clientDirect: Client = {
-    _: context,
+    ...builderExtensionInternal(createWithContext, context),
     ...builderExtensionGql(createWithContext, context),
     ...builderExtensionWith(createWithContext, context),
     ...builderExtensionUse(createWithContext, context),

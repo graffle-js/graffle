@@ -1,10 +1,11 @@
+import type { IsNever } from 'type-fest'
 import type { Select } from '../documentBuilder/Select/__.js'
 import type { Client } from '../layers/6_client/client.js'
 import type { Context } from '../layers/6_client/context.js'
 import type { GraffleExecutionResultEnvelope } from '../layers/6_client/handleOutput.js'
 import type { Anyware } from '../lib/anyware/__.js'
 import type { Builder } from '../lib/builder/__.js'
-import type { AssertExtends, ToParameters } from '../lib/prelude.js'
+import type { AssertExtends } from '../lib/prelude.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
 import type { Fn } from '../lib/type-function/TypeFunction.js'
 import type { RequestPipeline } from '../requestPipeline/__.js'
@@ -133,17 +134,38 @@ export type BuilderExtensionImplementation = (
   },
 ) => unknown
 
+export type ExtensionInputParameters =
+  | ExtensionInputParametersNone
+  | ExtensionInputParametersOptional
+  | ExtensionInputParametersRequired
+export type ExtensionInputParametersNone = []
+export type ExtensionInputParametersOptional = [input?: object]
+export type ExtensionInputParametersRequired = [input: object]
+
 export const createExtension = <
   $Name extends string,
-  $BuilderExtension extends BuilderExtension | undefined = undefined,
+  $BuilderExtension extends BuilderExtension = BuilderExtension,
   $TypeHooks extends TypeHooks = TypeHooks,
-  $ConfigInput extends object = object,
+  $ConfigInputParameters extends ExtensionInputParameters = ExtensionInputParameters,
   $Config extends object = object,
   $Custom extends object = object,
->(
-  extensionInput: {
+> // $x extends undefined | ((...args: $ConfigInputParameters) => $Config) = undefined,
+// $Input extends {
+//   name: $Name
+//   normalizeConfig?: (...args: $ConfigInputParameters) => $Config
+//   custom?: $Custom
+//   create: (params: { config: $Config }) => {
+//     builder?: $BuilderExtension
+//     onRequest?: Anyware.Extension2<RequestPipeline.Core>
+//     typeHooks?: () => $TypeHooks
+//   }
+// } = any
+(
+  // definitionInput: $Input,
+  definitionInput: {
     name: $Name
-    normalizeConfig?: (input?: $ConfigInput) => $Config
+    normalizeConfig?: (...args: $ConfigInputParameters) => $Config
+    // normalizeConfig?: $x
     custom?: $Custom
     create: (params: { config: $Config }) => {
       builder?: $BuilderExtension
@@ -152,25 +174,25 @@ export const createExtension = <
     }
   },
 ): ExtensionConstructor<
-  $ConfigInput,
+  $ConfigInputParameters,
   $Config,
   $Name,
   $BuilderExtension,
   $TypeHooks,
   $Custom
 > => {
-  const extensionConstructor = (input: any) => {
-    const config = (extensionInput.normalizeConfig?.(input) ?? {}) as any
-    return extensionInput.create({ config }) as any
+  const extensionConstructor = (input?: object) => {
+    const config: $Config = (input ? (definitionInput.normalizeConfig as any)?.(input) ?? {} : {}) as any // eslint-disable-line
+    return definitionInput.create({ config }) as any
   }
   extensionConstructor.info = {
-    name: extensionInput.name,
+    name: definitionInput.name,
   }
   return extensionConstructor as any
 }
 
 export type ExtensionConstructor<
-  $ConfigInput extends undefined | object = undefined | object,
+  $ConfigInputParameters extends ExtensionInputParameters = ExtensionInputParameters,
   $Config extends object = object,
   $Name extends string = string,
   $BuilderExtension extends BuilderExtension | undefined = BuilderExtension | undefined,
@@ -178,10 +200,14 @@ export type ExtensionConstructor<
   $Custom extends object = object,
 > =
   & {
-    (...args: ToParameters<$ConfigInput>): Extension<$Name, $Config, $BuilderExtension, $TypeHooks>
+    (
+      ...args:
+        // ExtensionInputParameters extends $ConfigInputParameters ? [] : $ConfigInputParameters
+        WasNotDefined<$ConfigInputParameters> extends true ? [] : $ConfigInputParameters
+    ): Extension<$Name, $Config, $BuilderExtension, $TypeHooks>
     info: {
       name: $Name
-      configInput: $ConfigInput
+      configInputParameters: $ConfigInputParameters
       config: $Config
       builder: $BuilderExtension
       typeHooks: $TypeHooks
@@ -189,9 +215,14 @@ export type ExtensionConstructor<
   }
   & $Custom
 
+// type x = Parameters<ExtensionConstructor>
+
 export type InferExtensionFromConstructor<$ExtensionConstructor extends ExtensionConstructor> = Extension<
   $ExtensionConstructor['info']['name'],
   $ExtensionConstructor['info']['config'],
   $ExtensionConstructor['info']['builder'],
   $ExtensionConstructor['info']['typeHooks']
 >
+
+// When no normalize config input prop provided AT ALL then it falls back to the constraint
+type WasNotDefined<T extends ExtensionInputParameters> = IsNever<keyof Exclude<T[0], undefined>>
