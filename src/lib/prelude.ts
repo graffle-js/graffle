@@ -646,3 +646,11 @@ export type ToParameters<$Params extends object | undefined> =
       HasRequiredKeys<$Params> extends true   ? [$Params]       :
                                                 [$Params] | []
     : []
+
+// dprint-ignore
+export type ToParametersExact<$Input extends object, $Params extends object | undefined> =
+  $Params extends object              
+    ? HasKeys<$Params> extends false          ? []                             :
+      HasRequiredKeys<$Params> extends true   ? [Exact<$Input, $Params>]       :
+                                                [Exact<$Input, $Params>] | []
+    : []

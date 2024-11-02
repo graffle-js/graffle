@@ -11,15 +11,16 @@ export const ModuleGeneratorClient = createModuleGenerator(
     code(importModuleGenerator(config, ModuleGeneratorData))
     code(importModuleGenerator(config, ModuleGeneratorScalar))
     code(
-      `import { createPrefilled } from '${config.paths.imports.grafflePackage.client}'`,
+      `import { ClientPreset } from '${config.paths.imports.grafflePackage.client}'`,
     )
     code()
     code(
-      `export const create = createPrefilled(
-        ${identifiers.$$Data}.Name,
-        ${identifiers.$$SchemaDrivenDataMap}.schemaDrivenDataMap,
-        ${identifiers.$$Scalar}.$registry,
-        ${identifiers.$$Data}.defaultSchemaUrl,
+      `export const create = ClientPreset.create({
+        name: ${identifiers.$$Data}.Name,
+        sddm: ${identifiers.$$SchemaDrivenDataMap}.schemaDrivenDataMap,
+        scalars: ${identifiers.$$Scalar}.$registry,
+        schemaUrl: ${identifiers.$$Data}.defaultSchemaUrl,
+      }
       )`,
     )
   },

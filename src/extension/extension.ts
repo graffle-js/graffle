@@ -3,7 +3,7 @@ import type { Client } from '../layers/6_client/client.js'
 import type { Context } from '../layers/6_client/context.js'
 import type { GraffleExecutionResultEnvelope } from '../layers/6_client/handleOutput.js'
 import type { Anyware } from '../lib/anyware/__.js'
-import type { Builder } from '../lib/chain/__.js'
+import type { Builder } from '../lib/builder/__.js'
 import type { AssertExtends, ToParameters } from '../lib/prelude.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
 import type { Fn } from '../lib/type-function/TypeFunction.js'
@@ -163,16 +163,35 @@ export const createExtension = <
     const config = (extensionInput.normalizeConfig?.(input) ?? {}) as any
     return extensionInput.create({ config }) as any
   }
+  extensionConstructor.info = {
+    name: extensionInput.name,
+  }
   return extensionConstructor as any
 }
 
 export type ExtensionConstructor<
-  $ConfigInput extends undefined | object,
-  $Config extends object,
-  $Name extends string,
-  $BuilderExtension extends BuilderExtension | undefined = undefined,
+  $ConfigInput extends undefined | object = undefined | object,
+  $Config extends object = object,
+  $Name extends string = string,
+  $BuilderExtension extends BuilderExtension | undefined = BuilderExtension | undefined,
   $TypeHooks extends TypeHooks = TypeHooks,
   $Custom extends object = object,
 > =
-  & ((...args: ToParameters<$ConfigInput>) => Extension<$Name, $Config, $BuilderExtension, $TypeHooks>)
+  & {
+    (...args: ToParameters<$ConfigInput>): Extension<$Name, $Config, $BuilderExtension, $TypeHooks>
+    info: {
+      name: $Name
+      configInput: $ConfigInput
+      config: $Config
+      builder: $BuilderExtension
+      typeHooks: $TypeHooks
+    }
+  }
   & $Custom
+
+export type InferExtensionFromConstructor<$ExtensionConstructor extends ExtensionConstructor> = Extension<
+  $ExtensionConstructor['info']['name'],
+  $ExtensionConstructor['info']['config'],
+  $ExtensionConstructor['info']['builder'],
+  $ExtensionConstructor['info']['typeHooks']
+>

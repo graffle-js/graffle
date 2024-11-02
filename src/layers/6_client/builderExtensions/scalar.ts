@@ -1,17 +1,17 @@
 import type { Simplify } from 'type-fest'
-import { Builder } from '../../../lib/chain/__.js'
+import { Builder } from '../../../lib/builder/__.js'
 import type { ConfigManager } from '../../../lib/config-manager/__.js'
 import type { GlobalRegistry } from '../../../types/GlobalRegistry/GlobalRegistry.js'
 import { Schema } from '../../../types/Schema/__.js'
 import { type Context } from '../context.js'
 
-export interface Scalar_ extends Builder.Extension {
+export interface BuilderExtensionScalar extends Builder.Extension {
   context: Context
   // @ts-expect-error untyped params
   return: Simplify<ScalarExtension<this['params']>>
 }
 
-interface ScalarExtension<$Args extends Builder.Extension.Parameters<Scalar_>> {
+interface ScalarExtension<$Args extends Builder.Extension.Parameters<BuilderExtensionScalar>> {
   /**
    * TODO Docs.
    */
@@ -21,7 +21,7 @@ interface ScalarExtension<$Args extends Builder.Extension.Parameters<Scalar_>> {
 export type TypeErrorMissingSchemaMap =
   `Error: Your client must have a schemaMap in order to apply registered scalars. Therefore we're providing this static error type message here instead of allowing you continue registering scalars that will never be applied.`
 
-type ScalarMethod<$Args extends Builder.Extension.Parameters<Scalar_>> = {
+type ScalarMethod<$Args extends Builder.Extension.Parameters<BuilderExtensionScalar>> = {
   /**
    * TODO Docs.
    */
@@ -64,7 +64,7 @@ type ScalarMethod<$Args extends Builder.Extension.Parameters<Scalar_>> = {
 
 type Arguments = [Schema.Scalar] | [string, { decode: (value: string) => any; encode: (value: any) => string }]
 
-export const scalarProperties = Builder.Extension.create<Scalar_>((builder, state) => {
+export const builderExtensionScalar = Builder.Extension.create<BuilderExtensionScalar>((builder, state) => {
   return {
     scalar: (...args: Arguments) => {
       const scalar = Schema.Scalar.isScalar(args[0])

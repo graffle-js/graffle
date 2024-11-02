@@ -3,7 +3,7 @@ import { type AssertExtends, type BuilderConfig, type WithInput } from '../../en
 import type { ConfigManager } from '../../lib/config-manager/__.js'
 // todo: no deep imports, rethink these utilities and/or how they are exported from the graffle package.
 import type { Context } from '../../layers/6_client/context.js'
-import type { Builder } from '../../lib/chain/__.js'
+import type { Builder } from '../../lib/builder/__.js'
 
 export const Throws = createExtension({
   name: `Throws`,
@@ -44,7 +44,7 @@ interface BuilderExtension_<$Args extends Builder.Extension.Parameters<BuilderEx
   throws: () => IncrementWthNewConfig<$Args, ThrowsifyConfig<$Args['context']['config']>>
 }
 
-type ThrowsifyConfig<$BuilderConfig extends BuilderConfig> = ConfigManager.Set<
+type ThrowsifyConfig<$BuilderConfig extends BuilderConfig> = ConfigManager.SetOne<
   $BuilderConfig,
   ['output', 'errors'],
   { other: 'throw'; execution: 'throw' }

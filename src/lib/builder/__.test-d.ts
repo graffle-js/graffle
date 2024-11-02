@@ -1,5 +1,6 @@
 import { assertEqual, assertExtends } from '../assert-equal.js'
 import type { Builder } from './__.js'
+import type { Private } from './private.js'
 
 // ---------------------------------------------------------------------------------------------------------------------
 {
@@ -8,10 +9,10 @@ import type { Builder } from './__.js'
       a: 1
     }
   }
-  type c = Builder.Definition.Extend<Builder.Definition.Empty, ex1_>
-  assertEqual<c['extensions'], [ex1_]>()
-  type cm = Builder.Definition.MaterializeSpecific<c>
-  assertEqual<cm, { a: 1 }>()
+  type B = Builder.Definition.AddExtension<Builder.Definition.Empty, ex1_>
+  assertEqual<B['extensions'], [ex1_]>()
+  type b = Builder.Definition.MaterializeSpecific<B>
+  assertEqual<b, Private.Add<{ a: 1 }, { chain: B; context: {} }>>()
 }
 // ---------------------------------------------------------------------------------------------------------------------
 {
@@ -20,10 +21,10 @@ import type { Builder } from './__.js'
       a: 1
     }
   }
-  type c = Builder.Definition.ExtendMany<Builder.Definition.Empty, [ex1_]>
-  assertEqual<c['extensions'], [ex1_]>()
-  type cm = Builder.Definition.MaterializeSpecific<c>
-  assertEqual<cm, { a: 1 }>()
+  type B = Builder.Definition.AddExtensions<Builder.Definition.Empty, [ex1_]>
+  assertEqual<B['extensions'], [ex1_]>()
+  type b = Builder.Definition.MaterializeSpecific<B>
+  assertEqual<b, Private.Add<{ a: 1 }, { chain: B; context: {} }>>()
 }
 // ---------------------------------------------------------------------------------------------------------------------
 {
@@ -34,8 +35,9 @@ import type { Builder } from './__.js'
   type Reflect<$Arguments extends Builder.Extension.Parameters> = {
     reflect: keyof $Arguments
   }
-  type c = Builder.Definition.MaterializeSpecific<Builder.Definition.Extend<Builder.Definition.Empty, Reflect_>>
-  assertEqual<c, { reflect: 'context' | 'chain' }>()
+  type B = Builder.Definition.AddExtension<Builder.Definition.Empty, Reflect_>
+  type b = Builder.Definition.MaterializeSpecific<B>
+  assertEqual<b, Private.Add<{ reflect: 'context' | 'chain' }, { chain: B; context: {} }>>()
 }
 // ---------------------------------------------------------------------------------------------------------------------
 {
@@ -61,17 +63,17 @@ import type { Builder } from './__.js'
     >
   }
 
-  type C = Builder.Definition.MaterializeGeneric<Builder.Definition.Extend<Builder.Definition.Empty, Foo_>>
-  type c1 = Builder.Definition.MaterializeSpecific<Builder.Definition.Extend<Builder.Definition.Empty, Foo_>>
+  type BGeneric = Builder.Definition.MaterializeGeneric<Builder.Definition.AddExtension<Builder.Definition.Empty, Foo_>>
+  type b1 = Builder.Definition.MaterializeSpecific<Builder.Definition.AddExtension<Builder.Definition.Empty, Foo_>>
 
-  assertExtends<c1, C>()
+  assertExtends<b1, BGeneric>()
 
-  const c1: c1 = null as any
-  type c1_ = typeof c1._
-  assertEqual<c1_, { calls: [] }>()
+  const b1: b1 = null as any
+  type b1_ = typeof b1._
+  assertEqual<b1_, { calls: [] }>()
 
-  const c2 = c1.foo(1)
-  type c2 = typeof c2
-  type c2_ = typeof c2._
-  assertEqual<c2_, { calls: [1] }>()
+  const b2 = b1.foo(1)
+  type b2 = typeof b2
+  type b2_ = typeof b2._
+  assertEqual<b2_, { calls: [1] }>()
 }

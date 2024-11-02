@@ -3,6 +3,10 @@ import type { SimplifyDeep } from 'type-fest'
 export type IsExtends<A, B> = [A] extends [B] ? true : false
 
 export type IsEqual<A, B> = [A] extends [B] ? [B] extends [A] ? true : false : false
+type _______IsEqual = [
+  IsFalse<IsEqual<string, 'a'>>,
+  IsFalse<IsEqual<'a', string>>,
+]
 
 export type assertEqual<A, B> = IsEqual<A, B> extends true ? true : never
 
@@ -35,3 +39,6 @@ export const AssertTypeOf = <A, B = A>(
     }]
     : []
 ) => undefined
+
+export type IsTrue<_ extends true> = true
+export type IsFalse<_ extends false> = true

@@ -3,7 +3,7 @@ import { createBuilderExtension, createExtension } from '../../entrypoints/exten
 import type { SimplifyNullable } from '../../entrypoints/main.js'
 import type { Context } from '../../layers/6_client/context.js'
 import type { HandleOutput } from '../../layers/6_client/handleOutput.js'
-import type { Builder } from '../../lib/chain/__.js'
+import type { Builder } from '../../lib/builder/__.js'
 import { type ConfigInput, createConfig } from './config.js'
 
 /**

@@ -105,6 +105,8 @@ const mergeDefaults_: MergeDefaultsInnerFn = (
 
 type Path = [...string[]]
 
+export type AppendOptional<$Array extends any[], $Value> = $Value extends undefined ? $Array : [...$Array, $Value]
+
 // dprint-ignore
 export type GetAtPathOrDefault<$Obj, $Path extends Path, $Default> =
   OrDefault<GetOptional<$Obj, $Path>, $Default>
@@ -135,12 +137,21 @@ export type GetOptional<$Value, $Path extends [...string[]]> =
 export type SetProperties<$Object1 extends object, $Object2 extends object> =
     Simplify<Omit<$Object1, keyof $Object2> & $Object2>
 
-export type SetProperty<$Obj extends object, $Prop extends keyof $Obj, $Type extends $Obj[$Prop]> =
+// dprint-ignore
+export type SetMany<$Obj extends object, $Sets extends [Path, any][]> =
+  $Sets extends []                                                                        ? $Obj : 
+  $Sets extends [infer $Set extends [Path, any], ...infer $SetRest extends [Path, any][]] ? SetMany<
+                                                                                              SetOne<$Obj, $Set[0], $Set[1]>,
+                                                                                              $SetRest
+                                                                                            > :
+                                                                                            never
+
+export type SetKey<$Obj extends object, $Prop extends keyof $Obj, $Type extends $Obj[$Prop]> =
   & Omit<$Obj, $Prop>
   & { [_ in $Prop]: $Type }
 
 // dprint-ignore
-export type Set<$Obj extends object, $Path extends Path, $Value> =
+export type SetOne<$Obj extends object, $Path extends Path, $Value> =
     Simplify<
       $Path extends []
         ? $Value extends object
