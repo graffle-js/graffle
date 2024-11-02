@@ -1,4 +1,4 @@
-import type { CamelCase, Simplify } from 'type-fest'
+import type { CamelCase } from 'type-fest'
 import type {
   Extension,
   ExtensionConstructor,
