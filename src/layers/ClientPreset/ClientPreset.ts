@@ -68,7 +68,7 @@ type CreatePrefilled = <
     name: $Name
     sddm?: SchemaDrivenDataMap
     scalars?: $Scalars
-    schemaUrl?: URL
+    schemaUrl?: URL | undefined
     extensions?: $ExtensionConstructors
   },
 >(keywordArgs: $Params) =>
