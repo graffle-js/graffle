@@ -64,7 +64,6 @@ type CreatePrefilled = <
   const $Name extends string,
   $Scalars extends Schema.Scalar.Registry,
   const $ExtensionConstructors extends [...ExtensionConstructor<any>[]],
-  // const $ExtensionConstructors extends [...any[]],
   $Params extends {
     name: $Name
     sddm?: SchemaDrivenDataMap

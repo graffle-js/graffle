@@ -210,7 +210,7 @@ export type ExtensionConstructor<
       configInputParameters: $ConfigInputParameters
       config: $Config
       builder: $BuilderExtension
-      typeHooks: $TypeHooks
+      typeHooks: TypeHooks extends $TypeHooks ? EmptyTypeHooks : $TypeHooks
     }
   }
   & $Custom

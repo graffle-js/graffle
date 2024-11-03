@@ -1,3 +1,4 @@
+import type { IntrospectionQuery } from 'graphql'
 import { Introspection } from '../../extensions/Introspection/Introspection.js'
 import { assertEqual, assertExtends } from '../../lib/assert-equal.js'
 import { create } from '../6_client/client.js'
@@ -24,6 +25,7 @@ import { ClientPreset } from './__.js'
   assertEqual<typeof create.preset, { name: 'test' }>()
   const graffle = create()
   assertEqual<typeof graffle._.name, 'test'>()
+  assertEqual<typeof graffle._.typeHooks.onRequestResult, []>()
 }
 
 // Preset With Extensions.
@@ -41,6 +43,8 @@ import { ClientPreset } from './__.js'
       },
     },
   })
+  assertEqual<typeof graffle._.typeHooks.onRequestResult, []>()
   assertExtends<typeof graffle._, { name: 'test'; extensions: [{ name: 'Introspection' }] }>()
-  await graffle.introspect()
+  const result = await graffle.introspect()
+  assertEqual<typeof result, IntrospectionQuery | null>()
 }
