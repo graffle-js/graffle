@@ -6,18 +6,18 @@ import type {
   ExtensionInputParametersOptional,
   ExtensionInputParametersRequired,
   InferExtensionFromConstructor,
-} from '../../extension/extension.js'
-import type { Builder } from '../../lib/builder/__.js'
-import type { ConfigManager } from '../../lib/config-manager/__.js'
-import { type mergeArrayOfObjects, type ToParametersExact } from '../../lib/prelude.js'
-import type { GlobalRegistry } from '../../types/GlobalRegistry/GlobalRegistry.js'
-import { Schema } from '../../types/Schema/__.js'
-import type { SchemaDrivenDataMap } from '../../types/SchemaDrivenDataMap/__.js'
-import type { UseExtensionDo } from '../6_client/builderExtensions/use.js'
-import { type Client, createWithContext } from '../6_client/client.js'
-import { type Context, createContext, type TypeHooksEmpty } from '../6_client/context.js'
-import type { InputBase } from '../6_client/Settings/Input.js'
-import type { NormalizeInput } from '../6_client/Settings/InputToConfig.js'
+} from '../extension/extension.js'
+import type { UseExtensionDo } from '../layers/6_client/builderExtensions/use.js'
+import { type Client, createWithContext } from '../layers/6_client/client.js'
+import { type Context, createContext, type TypeHooksEmpty } from '../layers/6_client/context.js'
+import type { InputBase } from '../layers/6_client/Settings/Input.js'
+import type { NormalizeInput } from '../layers/6_client/Settings/InputToConfig.js'
+import type { Builder } from '../lib/builder/__.js'
+import type { ConfigManager } from '../lib/config-manager/__.js'
+import { type mergeArrayOfObjects, type ToParametersExact } from '../lib/prelude.js'
+import type { GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
+import { Schema } from '../types/Schema/__.js'
+import type { SchemaDrivenDataMap } from '../types/SchemaDrivenDataMap/__.js'
 
 /**
  * Create a Client constructor with some initial context.

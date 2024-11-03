@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
-import { createExtension } from '../../entrypoints/extensionkit.js'
-import { Introspection } from '../../extensions/Introspection/Introspection.js'
+import { createExtension } from '../entrypoints/extensionkit.js'
+import { Introspection } from '../extensions/Introspection/Introspection.js'
 import { ClientPreset } from './__.js'
 
 test(`Preset extension is used on constructed client`, () => {
