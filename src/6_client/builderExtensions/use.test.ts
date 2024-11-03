@@ -1,10 +1,10 @@
 /* eslint-disable */
 import { describe, expect, expectTypeOf } from 'vitest'
-import { createResponse, test } from '../../../../tests/_/helpers.js'
-import { db } from '../../../../tests/_/schemas/db.js'
-import { Graffle } from '../../../../tests/_/schemas/kitchen-sink/graffle/__.js'
-import { createExtension } from '../../../entrypoints/extensionkit.js'
-import { Throws } from '../../../extensions/Throws/Throws.js'
+import { createResponse, test } from '../../../tests/_/helpers.js'
+import { db } from '../../../tests/_/schemas/db.js'
+import { Graffle } from '../../../tests/_/schemas/kitchen-sink/graffle/__.js'
+import { createExtension } from '../../extension/extension.js'
+import { Throws } from '../../extensions/Throws/Throws.js'
 // import { oops } from '../../../lib/anyware/specHelpers.js'
 
 const client = Graffle.create({ schema: 'https://foo', output: { defaults: { errorChannel: 'return' } } })

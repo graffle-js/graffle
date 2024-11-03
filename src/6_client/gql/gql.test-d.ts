@@ -1,6 +1,6 @@
-import { kitchenSink as g } from '../../../../tests/_/helpers.js'
-import { AssertTypeOf } from '../../../lib/assert-equal.js'
-import type { Grafaid } from '../../../lib/grafaid/__.js'
+import { kitchenSink as g } from '../../../tests/_/helpers.js'
+import { AssertTypeOf } from '../../lib/assert-equal.js'
+import type { Grafaid } from '../../lib/grafaid/__.js'
 
 type D = { id: 0 }
 

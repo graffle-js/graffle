@@ -1,8 +1,8 @@
 import type { Simplify } from 'type-fest'
-import { Builder } from '../../../lib/builder/__.js'
-import type { ConfigManager } from '../../../lib/config-manager/__.js'
-import type { GlobalRegistry } from '../../../types/GlobalRegistry/GlobalRegistry.js'
-import { Schema } from '../../../types/Schema/__.js'
+import { Builder } from '../../lib/builder/__.js'
+import type { ConfigManager } from '../../lib/config-manager/__.js'
+import type { GlobalRegistry } from '../../types/GlobalRegistry/GlobalRegistry.js'
+import { Schema } from '../../types/Schema/__.js'
 import { type Context } from '../context.js'
 
 export interface BuilderExtensionScalar extends Builder.Extension {

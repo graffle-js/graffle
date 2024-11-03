@@ -1,6 +1,6 @@
 import type { GraphQLSchema } from 'graphql'
-import type { GlobalRegistry } from '../../../types/GlobalRegistry/GlobalRegistry.js'
-import type { SchemaDrivenDataMap } from '../../../types/SchemaDrivenDataMap/__.js'
+import type { GlobalRegistry } from '../../types/GlobalRegistry/GlobalRegistry.js'
+import type { SchemaDrivenDataMap } from '../../types/SchemaDrivenDataMap/__.js'
 import type { WithInput } from './inputIncrementable/inputIncrementable.js'
 
 export type URLInput = URL | string

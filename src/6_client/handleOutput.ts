@@ -1,18 +1,18 @@
 import type { GraphQLError } from 'graphql'
-import type { RunTypeHookOnRequestResult } from '../../extension/extension.js'
-import { Errors } from '../../lib/errors/__.js'
-import type { Grafaid } from '../../lib/grafaid/__.js'
-import type { SomeObjectData } from '../../lib/grafaid/graphql.js'
-import type { GraphQLExecutionResultError } from '../../lib/grafaid/graphql.js'
+import type { RunTypeHookOnRequestResult } from '../extension/extension.js'
+import { Errors } from '../lib/errors/__.js'
+import type { Grafaid } from '../lib/grafaid/__.js'
+import type { SomeObjectData } from '../lib/grafaid/graphql.js'
+import type { GraphQLExecutionResultError } from '../lib/grafaid/graphql.js'
 import {
   type ExcludeNull,
   type ExcludeNullAndUndefined,
   type ExcludeUndefined,
   type GetOrNever,
   type Values,
-} from '../../lib/prelude.js'
-import type { TransportHttp } from '../../requestPipeline/Transport.js'
-import type { GlobalRegistry } from '../../types/GlobalRegistry/GlobalRegistry.js'
+} from '../lib/prelude.js'
+import type { TransportHttp } from '../requestPipeline/Transport.js'
+import type { GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
 import type { Context } from './context.js'
 import {
   type Config,

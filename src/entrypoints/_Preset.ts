@@ -1,1 +1,1 @@
-export { traditionalGraphqlOutput } from '../layers/6_client/Settings/Config.js'
+export { traditionalGraphqlOutput } from '../6_client/Settings/Config.js'

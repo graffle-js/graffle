@@ -1,8 +1,8 @@
 import { getIntrospectionQuery, type IntrospectionQuery } from 'graphql'
+import type { Context } from '../../6_client/context.js'
+import type { HandleOutput } from '../../6_client/handleOutput.js'
 import { createBuilderExtension, createExtension } from '../../entrypoints/extensionkit.js'
 import type { SimplifyNullable } from '../../entrypoints/main.js'
-import type { Context } from '../../layers/6_client/context.js'
-import type { HandleOutput } from '../../layers/6_client/handleOutput.js'
 import type { Builder } from '../../lib/builder/__.js'
 import { type ConfigInput, createConfig } from './config.js'
 

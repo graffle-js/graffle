@@ -1,9 +1,9 @@
 import type { UnionToTuple } from 'type-fest'
+import type { Context } from '../../6_client/context.js'
+import { type HandleOutput } from '../../6_client/handleOutput.js'
 import type { InferResult } from '../../documentBuilder/InferResult/__.js'
 import type { Select } from '../../documentBuilder/Select/__.js'
 import type { Schema } from '../../entrypoints/schema.js'
-import type { Context } from '../../layers/6_client/context.js'
-import { type HandleOutput } from '../../layers/6_client/handleOutput.js'
 import type { IsTupleMultiple } from '../../lib/prelude.js'
 
 // dprint-ignore

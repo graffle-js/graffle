@@ -1,6 +1,6 @@
-import type { Extension } from '../../../extension/extension.js'
-import { Builder } from '../../../lib/builder/__.js'
-import type { ConfigManager } from '../../../lib/config-manager/__.js'
+import type { Extension } from '../../extension/extension.js'
+import { Builder } from '../../lib/builder/__.js'
+import type { ConfigManager } from '../../lib/config-manager/__.js'
 import { type Context } from '../context.js'
 
 export interface BuilderExtensionUse extends Builder.Extension {

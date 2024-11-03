@@ -1,7 +1,7 @@
-import { createExtension } from '../../../extension/extension.js'
-import type { Anyware, Anyware as AnywareLib } from '../../../lib/anyware/__.js'
-import { Builder } from '../../../lib/builder/__.js'
-import type { RequestPipeline } from '../../../requestPipeline/__.js'
+import { createExtension } from '../../extension/extension.js'
+import type { Anyware, Anyware as AnywareLib } from '../../lib/anyware/__.js'
+import { Builder } from '../../lib/builder/__.js'
+import type { RequestPipeline } from '../../requestPipeline/__.js'
 import { type Context } from '../context.js'
 
 export interface BuilderExtensionAnyware extends Builder.Extension {

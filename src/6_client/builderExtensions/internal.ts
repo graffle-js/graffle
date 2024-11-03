@@ -1,4 +1,4 @@
-import { Builder } from '../../../lib/builder/__.js'
+import { Builder } from '../../lib/builder/__.js'
 import type { Context } from '../context.js'
 
 export interface BuilderExtensionInternal extends Builder.Extension {

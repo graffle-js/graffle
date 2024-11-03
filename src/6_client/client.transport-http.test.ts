@@ -1,10 +1,12 @@
 import { describe, expect, expectTypeOf } from 'vitest'
-import { createResponse, test } from '../../../tests/_/helpers.js'
-import { serveSchema } from '../../../tests/_/lib/serveSchema.js'
-import { Graffle as Pokemon } from '../../../tests/_/schemas/pokemon/graffle/__.js'
-import { Graffle } from '../../entrypoints/main.js'
-import { ACCEPT_REC, CONTENT_TYPE_REC } from '../../lib/grafaid/http/http.js'
-import { Transport } from '../../requestPipeline/Transport.js'
+import { createResponse, test } from '../../tests/_/helpers.js'
+import { serveSchema } from '../../tests/_/lib/serveSchema.js'
+import { Graffle as Pokemon } from '../../tests/_/schemas/pokemon/graffle/__.js'
+import { schema as schemaPokemon } from '../../tests/_/schemas/pokemon/schema.js'
+import { Graffle } from '../entrypoints/main.js'
+import { ACCEPT_REC, CONTENT_TYPE_REC } from '../lib/grafaid/http/http.js'
+import type { CoreExchangeGetRequest, CoreExchangePostRequest } from '../requestPipeline/hooks.js'
+import { Transport } from '../requestPipeline/Transport.js'
 
 const schema = new URL(`https://foo.io/api/graphql`)
 
@@ -30,9 +32,6 @@ test(`anyware hooks are typed to http transport`, () => {
     return result
   })
 })
-
-import { schema as schemaPokemon } from '../../../tests/_/schemas/pokemon/schema.js'
-import type { CoreExchangeGetRequest, CoreExchangePostRequest } from '../../requestPipeline/hooks.js'
 
 test(`when envelope is used then response property is present even if relying on schema url default`, async () => {
   const service = await serveSchema({ schema: schemaPokemon })

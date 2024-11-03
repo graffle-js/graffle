@@ -1,9 +1,9 @@
 import { describe, expect, expectTypeOf } from 'vitest'
-import { createResponse, test } from '../../../tests/_/helpers.js'
-import { Graffle as Graffle2 } from '../../../tests/_/schemas/kitchen-sink/graffle/__.js'
-import { schema } from '../../../tests/_/schemas/kitchen-sink/schema.js'
-import { Graffle } from '../../entrypoints/main.js'
-import { Throws } from '../../extensions/Throws/Throws.js'
+import { createResponse, test } from '../../tests/_/helpers.js'
+import { Graffle as Graffle2 } from '../../tests/_/schemas/kitchen-sink/graffle/__.js'
+import { schema } from '../../tests/_/schemas/kitchen-sink/schema.js'
+import { Graffle } from '../entrypoints/main.js'
+import { Throws } from '../extensions/Throws/Throws.js'
 
 const endpoint = new URL(`https://foo.io/api/graphql`)
 

@@ -1,8 +1,8 @@
-import { DateScalar, FooScalar } from '../../../../tests/_/fixtures/scalars.js'
-import { schemaMap } from '../../../../tests/_/schemas/kitchen-sink/graffle/__.js'
-import { Graffle } from '../../../entrypoints/__Graffle.js'
-import { assertEqual } from '../../../lib/assert-equal.js'
-import { any, type SomeFunction } from '../../../lib/prelude.js'
+import { DateScalar, FooScalar } from '../../../tests/_/fixtures/scalars.js'
+import { schemaMap } from '../../../tests/_/schemas/kitchen-sink/graffle/__.js'
+import { Graffle } from '../../entrypoints/__Graffle.js'
+import { assertEqual } from '../../lib/assert-equal.js'
+import { any, type SomeFunction } from '../../lib/prelude.js'
 import type { TypeErrorMissingSchemaMap } from './scalar.js'
 
 const g1 = Graffle.create({ schema: `foo` })

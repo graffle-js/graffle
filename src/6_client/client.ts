@@ -1,13 +1,13 @@
 import {
   type BuilderExtensionRequestMethods,
   requestMethodsProperties,
-} from '../../documentBuilder/requestMethods/requestMethods.js' // todo
-import { defaultName } from '../../generator/config/defaults.js'
-import type { Builder } from '../../lib/builder/__.js'
-import type { ConfigManager } from '../../lib/config-manager/__.js'
-import { type Exact, proxyGet } from '../../lib/prelude.js'
-import type { GlobalRegistry } from '../../types/GlobalRegistry/GlobalRegistry.js'
-import { Schema } from '../../types/Schema/__.js'
+} from '../documentBuilder/requestMethods/requestMethods.js' // todo
+import { defaultName } from '../generator/config/defaults.js'
+import type { Builder } from '../lib/builder/__.js'
+import type { ConfigManager } from '../lib/config-manager/__.js'
+import { type Exact, proxyGet } from '../lib/prelude.js'
+import type { GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
+import { Schema } from '../types/Schema/__.js'
 import { type BuilderExtensionAnyware, builderExtensionAnyware } from './builderExtensions/anyware.js'
 import { type BuilderExtensionInternal, builderExtensionInternal } from './builderExtensions/internal.js'
 import { type BuilderExtensionScalar, builderExtensionScalar } from './builderExtensions/scalar.js'

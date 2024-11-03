@@ -1,12 +1,12 @@
-import { Builder } from '../../../lib/builder/__.js'
-import type { Grafaid } from '../../../lib/grafaid/__.js'
-import { getOperationType } from '../../../lib/grafaid/document.js'
+import { Builder } from '../../lib/builder/__.js'
+import type { Grafaid } from '../../lib/grafaid/__.js'
+import { getOperationType } from '../../lib/grafaid/document.js'
 import {
   isTemplateStringArguments,
   joinTemplateStringArrayAndArgs,
   type TemplateStringsArguments,
-} from '../../../lib/template-string.js'
-import { RequestPipeline } from '../../../requestPipeline/__.js' // todo
+} from '../../lib/template-string.js'
+import { RequestPipeline } from '../../requestPipeline/__.js' // todo
 import { type Context } from '../context.js'
 import { handleOutput } from '../handleOutput.js'
 import type { Config } from '../Settings/Config.js'

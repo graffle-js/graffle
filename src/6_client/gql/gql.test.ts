@@ -1,6 +1,6 @@
 import { describe, expect } from 'vitest'
-import { test } from '../../../../tests/_/helpers.js'
-import { Spy } from '../../../../tests/_/SpyExtension.js'
+import { test } from '../../../tests/_/helpers.js'
+import { Spy } from '../../../tests/_/SpyExtension.js'
 
 // todo test with custom scalars
 
