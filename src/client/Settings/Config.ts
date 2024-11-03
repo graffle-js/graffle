@@ -1,6 +1,6 @@
 import type { GraphQLSchema } from 'graphql'
 import type { RequireProperties } from '../../lib/prelude.js'
-import type { TransportHttp, TransportMemory } from '../../requestPipeline/Transport.js'
+import type { TransportHttp, TransportMemory } from '../../types/Transport.js'
 import type { TransportHttpInput } from '../transportHttp/request.js'
 
 export type OutputChannel = 'throw' | 'return'

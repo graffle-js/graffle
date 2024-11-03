@@ -137,7 +137,7 @@ const executeDocument = async (
     request,
   } as RequestPipeline.Hooks.HookDefEncode<Config>['input']
 
-  const result = await RequestPipeline.anyware.run({
+  const result = await RequestPipeline.RequestPipeline.run({
     initialInput,
     // retryingExtension: state.retry as any,
     extensions: state.extensions.filter(_ => _.onRequest !== undefined).map(_ => _.onRequest!) as any,

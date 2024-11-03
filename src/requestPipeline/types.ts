@@ -5,7 +5,7 @@ import type { MethodModeGetReads, MethodModePost } from '../client/transportHttp
 import type { Grafaid } from '../lib/grafaid/__.js'
 import type { getRequestEncodeSearchParameters, postRequestEncodeBody } from '../lib/grafaid/http/http.js'
 import type { httpMethodGet, httpMethodPost } from '../lib/http.js'
-import type { TransportHttp, TransportMemory } from './Transport.js'
+import type { TransportHttp, TransportMemory } from '../types/Transport.js'
 
 interface HookInputBase {
   state: Context

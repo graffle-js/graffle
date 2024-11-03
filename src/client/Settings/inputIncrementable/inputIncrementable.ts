@@ -1,4 +1,4 @@
-import type { Transport, TransportMemory } from '../../../requestPipeline/Transport.js'
+import type { Transport, TransportMemory } from '../../../types/Transport.js'
 import type { TransportHttpInput } from '../../transportHttp/request.js'
 import type { OutputInput } from './output.js'
 

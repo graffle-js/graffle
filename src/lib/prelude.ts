@@ -654,3 +654,10 @@ export type ToParametersExact<$Input extends object, $Params extends object | un
       HasRequiredKeys<$Params> extends true   ? [Exact<$Input, $Params>]       :
                                                 [Exact<$Input, $Params>] | []
     : []
+
+export const isAbortError = (error: any): error is DOMException & { name: 'AbortError' } => {
+  return (error instanceof DOMException && error.name === `AbortError`)
+    // Under test with JSDOM, the error must be checked this way.
+    // todo look for an open issue with JSDOM to link here, is this just artifact of JSDOM or is it a real issue that happens in browsers?
+    || (error instanceof Error && error.message.startsWith(`AbortError:`))
+}

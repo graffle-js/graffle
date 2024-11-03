@@ -15,13 +15,13 @@ export interface Anyware<$Arguments extends Builder.Extension.Parameters<Builder
    * TODO Anyware Docs.
    */
   anyware: (
-    anyware: AnywareLib.Extension2<RequestPipeline.Core<$Arguments['context']['config']>>,
+    anyware: AnywareLib.Extension2<RequestPipeline.RequestPipeline<$Arguments['context']['config']>>,
   ) => Builder.Definition.MaterializeWithNewContext<$Arguments['chain'], $Arguments['context']>
 }
 
 export const builderExtensionAnyware = Builder.Extension.create<BuilderExtensionAnyware>((builder, context) => {
   const properties = {
-    anyware: (anyware: Anyware.Extension2<RequestPipeline.Core>) => {
+    anyware: (anyware: Anyware.Extension2<RequestPipeline.RequestPipeline>) => {
       return builder({
         ...context,
         extensions: [

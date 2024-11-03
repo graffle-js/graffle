@@ -11,8 +11,8 @@ import {
   type GetOrNever,
   type Values,
 } from '../lib/prelude.js'
-import type { TransportHttp } from '../requestPipeline/Transport.js'
 import type { GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
+import type { TransportHttp } from '../types/Transport.js'
 import type { Context } from './context.js'
 import {
   type Config,

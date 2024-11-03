@@ -14,7 +14,8 @@ import {
 } from '../lib/grafaid/http/http.js'
 import { normalizeRequestToNode } from '../lib/grafaid/request.js'
 import { mergeRequestInit, searchParamsAppendAll } from '../lib/http.js'
-import { casesExhausted, isString } from '../lib/prelude.js'
+import { casesExhausted, isAbortError, isString } from '../lib/prelude.js'
+import { Transport } from '../types/Transport.js'
 import { decodeResultData } from './CustomScalars/decode.js'
 import { encodeRequestVariables } from './CustomScalars/encode.js'
 import {
@@ -23,10 +24,15 @@ import {
   type HookMap,
   hookNamesOrderedBySequence,
   type HookSequence,
-} from './hooks.js'
-import { Transport } from './Transport.js'
+} from './types.js'
 
-export const anyware = Anyware.create<HookSequence, HookMap, Grafaid.FormattedExecutionResult>({
+export type RequestPipeline<$Config extends Config = Config> = Anyware.Core<
+  HookSequence,
+  HookMap<$Config>,
+  GraffleExecutionResultVar<$Config>
+>
+
+export const RequestPipeline = Anyware.create<HookSequence, HookMap, Grafaid.FormattedExecutionResult>({
   // If core errors caused by an abort error then raise it as a direct error.
   // This is an expected possible error. Possible when user cancels a request.
   passthroughErrorWith: (signal) => {
@@ -203,16 +209,5 @@ export const anyware = Anyware.create<HookSequence, HookMap, Grafaid.FormattedEx
   // would be nice but alone would not yield type safe return handling
   // still, while figuring the type story out, might be a useful escape hatch for some cases...
 })
-
-export type Core<$Config extends Config = Config> = Anyware.Core<
-  HookSequence,
-  HookMap<$Config>,
-  GraffleExecutionResultVar<$Config>
->
-
-const isAbortError = (error: any): error is DOMException & { name: 'AbortError' } => {
-  return (error instanceof DOMException && error.name === `AbortError`)
-    // Under test with JSDOM, the error must be checked this way.
-    // todo look for an open issue with JSDOM to link here, is this just artifact of JSDOM or is it a real issue that happens in browsers?
-    || (error instanceof Error && error.message.startsWith(`AbortError:`))
-}
+// todo
+// .use(transportHttp)
