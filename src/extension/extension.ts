@@ -178,11 +178,11 @@ export const createExtension = <
   $Config,
   $Name,
   $BuilderExtension,
-  $TypeHooks,
+  TypeHooks extends $TypeHooks ? EmptyTypeHooks : $TypeHooks,
   $Custom
 > => {
   const extensionConstructor = (input?: object) => {
-    const config: $Config = (input ? (definitionInput.normalizeConfig as any)?.(input) ?? {} : {}) as any // eslint-disable-line
+    const config: $Config = ((definitionInput.normalizeConfig as any)?.(input) ?? {}) as any // eslint-disable-line
     return definitionInput.create({ config }) as any
   }
   extensionConstructor.info = {
@@ -190,6 +190,8 @@ export const createExtension = <
   }
   return extensionConstructor as any
 }
+
+// type IsOptionalParameters<T extends ExtensionInputParameters> = [] extends T ? true : false
 
 export type ExtensionConstructor<
   $ConfigInputParameters extends ExtensionInputParameters = ExtensionInputParameters,

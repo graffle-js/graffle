@@ -1,13 +1,33 @@
 /* eslint-disable */
-import { describe, expect } from 'vitest'
+import { describe, expect, expectTypeOf } from 'vitest'
 import { createResponse, test } from '../../../../tests/_/helpers.js'
 import { db } from '../../../../tests/_/schemas/db.js'
 import { Graffle } from '../../../../tests/_/schemas/kitchen-sink/graffle/__.js'
+import { createExtension } from '../../../entrypoints/extensionkit.js'
 import { Throws } from '../../../extensions/Throws/Throws.js'
 // import { oops } from '../../../lib/anyware/specHelpers.js'
 
 const client = Graffle.create({ schema: 'https://foo', output: { defaults: { errorChannel: 'return' } } })
 const headers = { 'x-foo': 'bar' }
+
+test('using an extension without type hooks leaves them empty', () => {
+  const Ex = createExtension({
+    name: 'test',
+    create: () => {
+      return {}
+    },
+  })
+  const graffle1 = Graffle.create({ schema: '' })
+  expectTypeOf(graffle1._.typeHooks).toEqualTypeOf<{
+    onRequestResult: []
+    onRequestDocumentRootType: []
+  }>()
+  const graffle2 = graffle1.use(Ex())
+  expectTypeOf(graffle2._.typeHooks).toEqualTypeOf<{
+    onRequestResult: []
+    onRequestDocumentRootType: []
+  }>()
+})
 
 test('using an extension returns a copy of the client', () => {
   const client2 = client.use(Throws())
