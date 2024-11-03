@@ -1,9 +1,9 @@
 import type { CamelCase } from 'type-fest'
-import type { UseExtensionDo } from '../6_client/builderExtensions/use.js'
-import { type Client, createWithContext } from '../6_client/client.js'
-import { type Context, createContext, type TypeHooksEmpty } from '../6_client/context.js'
-import type { InputBase } from '../6_client/Settings/Input.js'
-import type { NormalizeInput } from '../6_client/Settings/InputToConfig.js'
+import type { UseExtensionDo } from '../client/builderExtensions/use.js'
+import { type Client, createWithContext } from '../client/client.js'
+import { type Context, createContext, type TypeHooksEmpty } from '../client/context.js'
+import type { InputBase } from '../client/Settings/Input.js'
+import type { NormalizeInput } from '../client/Settings/InputToConfig.js'
 import type {
   Extension,
   ExtensionConstructor,

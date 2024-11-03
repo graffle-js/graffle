@@ -7,7 +7,7 @@ import { Graffle } from '../../entrypoints/main.js'
 import { Upload } from './Upload.js'
 
 import { type SchemaService, serveSchema } from '../../../tests/_/lib/serveSchema.js'
-import type { Client } from '../../6_client/client.js'
+import type { Client } from '../../client/client.js'
 import type { Context } from '../../entrypoints/utilities-for-generated.js'
 
 let schemaServer: SchemaService

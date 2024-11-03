@@ -1,5 +1,5 @@
 import type { IntrospectionQuery } from 'graphql'
-import { create } from '../6_client/client.js'
+import { create } from '../client/client.js'
 import { Introspection } from '../extensions/Introspection/Introspection.js'
 import { assertEqual, assertExtends } from '../lib/assert-equal.js'
 import { ClientPreset } from './__.js'
