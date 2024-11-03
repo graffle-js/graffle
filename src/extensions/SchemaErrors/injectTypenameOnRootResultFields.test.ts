@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest'
+import { graffleMappedResultToRequest } from '../../documentBuilder/requestMethods/requestMethods.js'
 import { normalizeOrThrow } from '../../documentBuilder/Select/document.js'
 import { SelectionSetGraphqlMapper } from '../../documentBuilder/SelectGraphQLMapper/__.js'
-import { graffleMappedResultToRequest } from '../../layers/6_client/requestMethods/requestMethods.js'
 import { injectTypenameOnRootResultFields } from './injectTypenameOnRootResultFields.js'
 import { GraffleSchemaErrors } from './tests/fixture/graffle/__.js'
 

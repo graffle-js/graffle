@@ -1,3 +1,7 @@
+import {
+  type BuilderExtensionRequestMethods,
+  requestMethodsProperties,
+} from '../../documentBuilder/requestMethods/requestMethods.js' // todo
 import { defaultName } from '../../generator/config/defaults.js'
 import type { Builder } from '../../lib/builder/__.js'
 import type { ConfigManager } from '../../lib/config-manager/__.js'
@@ -11,7 +15,6 @@ import { type BuilderExtensionUse, builderExtensionUse } from './builderExtensio
 import { type BuilderExtensionWith, builderExtensionWith } from './builderExtensions/with.js'
 import { type Context, type ContextWithoutConfig, createContext, type TypeHooksEmpty } from './context.js'
 import { type BuilderExtensionGql, builderExtensionGql } from './gql/gql.js'
-import { type BuilderExtensionRequestMethods, requestMethodsProperties } from './requestMethods/requestMethods.js' // todo
 import { type InputStatic } from './Settings/Input.js'
 import { type NormalizeInput } from './Settings/InputToConfig.js'
 

@@ -1,6 +1,6 @@
 import { describe, expect, expectTypeOf } from 'vitest'
-import { DateScalar } from '../../../../tests/_/fixtures/scalars.js'
-import { kitchenSink, test } from '../../../../tests/_/helpers.js'
+import { DateScalar } from '../../../tests/_/fixtures/scalars.js'
+import { kitchenSink, test } from '../../../tests/_/helpers.js'
 
 describe(`query batch`, () => {
   test(`success`, async ({ kitchenSinkData: db }) => {
