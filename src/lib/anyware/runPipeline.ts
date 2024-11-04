@@ -3,11 +3,12 @@ import { ContextualError } from '../errors/ContextualError.js'
 import { casesExhausted, createDeferred, debug } from '../prelude.js'
 import type { HookResult, HookResultErrorAsync } from './hook/private.js'
 import type { InterceptorGeneric } from './Interceptor.js'
-import { defaultFunctionName } from './lib.js'
 import type { Pipeline } from './Pipeline.js'
 import { createResultEnvelope } from './resultEnvelope.js'
 import type { ResultEnvelop } from './resultEnvelope.js'
 import { runHook } from './runHook.js'
+
+export const defaultFunctionName = `anonymous`
 
 interface Input {
   pipeline: Pipeline

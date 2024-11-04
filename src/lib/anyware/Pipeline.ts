@@ -1,7 +1,8 @@
-import type { HookDefinitionMap, HookSequence, InferDefinition } from './hook/definition.js'
+import type { HookDefinitionMap, HookSequence } from './hook/definition.js'
 
 import type { FindValueAfter, IsLastValue } from '../prelude.js'
 import type { Private } from '../private.js'
+import type { PipelineInput } from './builder.js'
 import type { HookPrivateInput, PrivateHook } from './hook/private.js'
 
 export type Pipeline<
@@ -36,8 +37,8 @@ export type Pipeline<
     //   >
     // }
   }
-  passthroughErrorInstanceOf?: InferDefinition['passthroughErrorInstanceOf']
-  passthroughErrorWith?: InferDefinition['passthroughErrorWith']
+  passthroughErrorInstanceOf?: PipelineInput['passthroughErrorInstanceOf']
+  passthroughErrorWith?: PipelineInput['passthroughErrorWith']
 }, {
   hookSequence: $HookSequence
   hookMap: $HookMap
