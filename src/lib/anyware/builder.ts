@@ -2,7 +2,7 @@ import { type FindValueAfter, type IsLastValue, type MaybePromise } from '../pre
 import type { HookDefinitionMap, HookSequence } from './hook/definition.js'
 import type { HookResultError, InferPrivateHookInput } from './hook/private.js'
 import type { Pipeline } from './Pipeline.js'
-import { createRunner, type Runner } from './runner.js'
+import { createRunner, type Runner } from './run/runner.js'
 
 export { type HookDefinitionMap } from './hook/definition.js'
 
