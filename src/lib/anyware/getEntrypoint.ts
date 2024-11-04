@@ -1,8 +1,8 @@
 // import type { Extension, HookName } from '../../layers/5_client/extension/types.js'
 import { analyzeFunction } from '../analyze-function.js'
 import { ContextualError } from '../errors/ContextualError.js'
+import type { NonRetryingInterceptorInput } from './builder.js'
 import type { HookName } from './hook/definition.js'
-import type { NonRetryingInterceptorInput } from './Pipeline.js'
 
 export class ErrorAnywareExtensionEntrypoint extends ContextualError<
   'ErrorGraffleExtensionEntryHook',

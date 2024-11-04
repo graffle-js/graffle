@@ -1,7 +1,7 @@
 import type { Mock } from 'vitest'
 import { beforeEach, vi } from 'vitest'
 import { Anyware } from './__.js'
-import { type InterceptorInput, type Options } from './Pipeline.js'
+import { type InterceptorInput, type Options } from './builder.js'
 
 type PrivateHookRunnerInput = {
   input: { value: string }

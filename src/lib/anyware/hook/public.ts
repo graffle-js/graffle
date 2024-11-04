@@ -1,5 +1,5 @@
 import type { FindValueAfter, IsLastValue } from '../../prelude.js'
-import type { InterceptorOptions } from '../Pipeline.js'
+import type { InterceptorOptions } from '../builder.js'
 import type { HookDefinition, HookDefinitionMap, HookSequence } from './definition.js'
 
 export type InferPublicHooks<

@@ -5,7 +5,7 @@ import { Errors } from '../errors/__.js'
 import type { ContextualError } from '../errors/ContextualError.js'
 import { Anyware } from './__.js'
 import { core, createHook, initialInput, oops, run, runWithOptions } from './__.test-helpers.js'
-import { createRetryingInterceptor } from './Pipeline.js'
+import { createRetryingInterceptor } from './builder.js'
 
 describe(`no extensions`, () => {
   test(`passthrough to implementation`, async () => {
