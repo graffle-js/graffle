@@ -9,7 +9,7 @@ import type { ResultEnvelop } from './resultEnvelope.js'
 import { runHook } from './runHook.js'
 
 interface Input {
-  core: Pipeline
+  pipeline: Pipeline
   hookNamesOrderedBySequence: readonly string[]
   originalInputOrResult: unknown
   extensionsStack: readonly InterceptorGeneric[]
@@ -18,7 +18,7 @@ interface Input {
 }
 
 export const runPipeline = async (
-  { core, hookNamesOrderedBySequence, originalInputOrResult, extensionsStack, asyncErrorDeferred, previous }: Input,
+  { pipeline, hookNamesOrderedBySequence, originalInputOrResult, extensionsStack, asyncErrorDeferred, previous }: Input,
 ): Promise<ResultEnvelop | Errors.ContextualError> => {
   const [hookName, ...hookNamesRest] = hookNamesOrderedBySequence
 
@@ -34,7 +34,7 @@ export const runPipeline = async (
   const done = createDeferred<HookResult>({ strict: false })
 
   void runHook({
-    core,
+    pipeline,
     name: hookName,
     done: done.resolve,
     inputOriginalOrFromExtension: originalInputOrResult as object,
@@ -59,7 +59,7 @@ export const runPipeline = async (
         },
       }
       return await runPipeline({
-        core,
+        pipeline,
         hookNamesOrderedBySequence: hookNamesRest,
         originalInputOrResult: result,
         extensionsStack: nextExtensionsStack,
@@ -76,14 +76,14 @@ export const runPipeline = async (
       debug(`signal: error`)
       signal
 
-      if (core.passthroughErrorWith) {
-        if (core.passthroughErrorWith(signal)) {
+      if (pipeline.passthroughErrorWith) {
+        if (pipeline.passthroughErrorWith(signal)) {
           return signal.error as any // todo change return type to be unknown since this function could permit anything?
         }
       }
 
-      if (core.passthroughErrorInstanceOf) {
-        if (core.passthroughErrorInstanceOf.some(_ => signal.error instanceof _)) {
+      if (pipeline.passthroughErrorInstanceOf) {
+        if (pipeline.passthroughErrorInstanceOf.some(_ => signal.error instanceof _)) {
           return signal.error as any // todo change return type to include object... given this instanceof permits that?
         }
       }

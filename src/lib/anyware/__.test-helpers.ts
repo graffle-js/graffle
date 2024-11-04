@@ -82,7 +82,7 @@ export let core: $Core
 beforeEach(() => {
   // @ts-expect-error mock types not tracked by Anyware
   anyware = createAnyware()
-  core = anyware.core
+  core = anyware.pipeline
 })
 
 export const runWithOptions = (options: Options = {}) => async (...extensions: InterceptorInput[]) => {

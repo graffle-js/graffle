@@ -70,7 +70,7 @@ export type Options = {
 type Config = Required<Options>
 
 export type Builder<$Pipeline extends Pipeline = Pipeline> = {
-  core: $Pipeline
+  pipeline: $Pipeline
   run: (
     { initialInput, extensions, options }: {
       initialInput: GetInitialPipelineInput<$Pipeline>
@@ -94,7 +94,7 @@ export const create = <
 ): Builder<Pipeline<$HookSequence, $HookMap, $Result>> => {
   type $Core = Pipeline<$HookSequence, $HookMap, $Result>
 
-  const core = {
+  const pipeline = {
     ...definition,
     hooks: Object.fromEntries(
       Object.entries(definition.hooks).map(([k, v]) => {
@@ -104,19 +104,19 @@ export const create = <
   } as any as $Core
 
   const builder: Builder<$Core> = {
-    core,
+    pipeline,
     run: async ({ initialInput, extensions, options, retryingExtension }) => {
       const extensions_ = retryingExtension ? [...extensions, createRetryingInterceptor(retryingExtension)] : extensions
       const initialHookStackAndErrors = extensions_.map(extension =>
-        toInternalInterceptor(core, resolveOptions(options), extension)
+        toInternalInterceptor(pipeline, resolveOptions(options), extension)
       )
       const [initialHookStack, error] = partitionAndAggregateErrors(initialHookStackAndErrors)
       if (error) return error
 
       const asyncErrorDeferred = createDeferred<HookResultErrorExtension>({ strict: false })
       const result = await runPipeline({
-        core,
-        hookNamesOrderedBySequence: core.hookNamesOrderedBySequence,
+        pipeline,
+        hookNamesOrderedBySequence: pipeline.hookNamesOrderedBySequence,
         originalInputOrResult: initialInput,
         // todo fix any
         extensionsStack: initialHookStack as any,
@@ -132,7 +132,7 @@ export const create = <
   return builder
 }
 
-const toInternalInterceptor = (core: Pipeline, config: Config, interceptor: InterceptorInput) => {
+const toInternalInterceptor = (pipeline: Pipeline, config: Config, interceptor: InterceptorInput) => {
   const currentChunk = createDeferred<SomePublicHookEnvelope>()
   const body = createDeferred()
   const extensionRun = typeof interceptor === `function` ? interceptor : interceptor.run
@@ -153,14 +153,14 @@ const toInternalInterceptor = (core: Pipeline, config: Config, interceptor: Inte
       void currentChunk.promise.then(applyBody)
       return {
         name: extensionName,
-        entrypoint: core.hookNamesOrderedBySequence[0], // todo non-empty-array data structure
+        entrypoint: pipeline.hookNamesOrderedBySequence[0], // todo non-empty-array data structure
         body,
         currentChunk,
       }
     }
     case `optional`:
     case `required`: {
-      const entrypoint = getEntrypoint(core.hookNamesOrderedBySequence, extensionRun)
+      const entrypoint = getEntrypoint(pipeline.hookNamesOrderedBySequence, extensionRun)
       if (entrypoint instanceof Error) {
         if (config.entrypointSelectionMode === `required`) {
           return entrypoint
@@ -168,7 +168,7 @@ const toInternalInterceptor = (core: Pipeline, config: Config, interceptor: Inte
           void currentChunk.promise.then(applyBody)
           return {
             name: extensionName,
-            entrypoint: core.hookNamesOrderedBySequence[0], // todo non-empty-array data structure
+            entrypoint: pipeline.hookNamesOrderedBySequence[0], // todo non-empty-array data structure
             body,
             currentChunk,
           }
@@ -176,7 +176,7 @@ const toInternalInterceptor = (core: Pipeline, config: Config, interceptor: Inte
       }
 
       const hooksBeforeEntrypoint: HookName[] = []
-      for (const hookName of core.hookNamesOrderedBySequence) {
+      for (const hookName of pipeline.hookNamesOrderedBySequence) {
         if (hookName === entrypoint) break
         hooksBeforeEntrypoint.push(hookName)
       }

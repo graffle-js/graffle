@@ -2,12 +2,13 @@ import { Errors } from '../errors/__.js'
 import { casesExhausted, createDeferred, debugSub, errorFromMaybeError } from '../prelude.js'
 import type { HookResult, HookResultErrorAsync, Slots } from './hook/private.js'
 import { createPublicHook, type SomePublicHookEnvelope } from './hook/public.js'
-import type { InterceptorGeneric, Pipeline, ResultEnvelop } from './Pipeline.js'
+import type { InterceptorGeneric, Pipeline } from './Pipeline.js'
+import type { ResultEnvelop } from './resultEnvelope.js'
 
 type HookDoneResolver = (input: HookResult) => void
 
 interface Input {
-  core: Pipeline
+  pipeline: Pipeline
   name: string
   done: HookDoneResolver
   inputOriginalOrFromExtension: object
@@ -38,7 +39,7 @@ const createExecutableChunk = <$Extension extends InterceptorGeneric>(extension:
 
 export const runHook = async (
   {
-    core,
+    pipeline,
     name,
     done,
     inputOriginalOrFromExtension,
@@ -124,7 +125,7 @@ export const runHook = async (
           debugExtension(`execute branch: retry`)
           const extensionRetry = createExecutableChunk(extension)
           void runHook({
-            core,
+            pipeline,
             name,
             done,
             previous,
@@ -151,7 +152,7 @@ export const runHook = async (
         const nextNextHookStack = [...nextExtensionsStack, extensionWithNextChunk] // tempting to mutate here but simpler to think about as copy.
         hookInvokedDeferred.resolve(true)
         void runHook({
-          core,
+          pipeline,
           name,
           done,
           previous,
@@ -206,7 +207,7 @@ export const runHook = async (
         debugExtension(`extension returned`)
         if (result === envelope) {
           void runHook({
-            core,
+            pipeline,
             name,
             done,
             previous,
@@ -248,7 +249,7 @@ export const runHook = async (
   } /* reached core for this hook */ else {
     debugHook(`no more extensions to advance, run implementation`)
 
-    const implementation = core.hooks[name]
+    const implementation = pipeline.hooks[name]
     if (!implementation) {
       throw new Errors.ContextualError(`Implementation not found for hook name ${name}`, { hookName: name })
     }
