@@ -1,8 +1,8 @@
 import { Errors } from '../errors/__.js'
 import { casesExhausted, createDeferred, debugSub, errorFromMaybeError } from '../prelude.js'
-import type { InterceptorGeneric } from './builder.js'
 import type { HookResult, HookResultErrorAsync, Slots } from './hook/private.js'
 import { createPublicHook, type SomePublicHookEnvelope } from './hook/public.js'
+import type { InterceptorGeneric } from './Interceptor.js'
 import type { Pipeline } from './Pipeline.js'
 import type { ResultEnvelop } from './resultEnvelope.js'
 

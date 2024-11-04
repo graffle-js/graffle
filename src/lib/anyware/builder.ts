@@ -12,10 +12,6 @@ import { runPipeline } from './runPipeline.js'
 
 export { type HookDefinitionMap } from './hook/definition.js'
 
-export * from './Interceptor.js'
-
-export * from './Pipeline.js'
-
 const resolveOptions = (options?: Options): Config => {
   return {
     entrypointSelectionMode: options?.entrypointSelectionMode ?? `required`,
