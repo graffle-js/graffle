@@ -86,11 +86,11 @@ beforeEach(() => {
   core = anyware.pipeline
 })
 
-export const runWithOptions = (options: Options = {}) => async (...extensions: InterceptorInput[]) => {
+export const runWithOptions = (options: Options = {}) => async (...interceptors: InterceptorInput[]) => {
   const result = await anyware.run({
     initialInput,
     // @ts-expect-error fixme
-    extensions,
+    interceptors,
     options,
   })
   return result

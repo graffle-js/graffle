@@ -68,7 +68,7 @@ export interface HookResultErrorExtension {
   hookName: string
   source: 'extension'
   error: Error
-  extensionName: string
+  interceptorName: string
 }
 
 export interface HookResultErrorImplementation {

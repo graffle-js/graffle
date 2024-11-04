@@ -178,11 +178,11 @@ describe(`errors`, () => {
       {
         "cause": [Error: oops],
         "context": {
-          "extensionName": "anonymous",
           "hookName": "a",
+          "interceptorName": "anonymous",
           "source": "extension",
         },
-        "result": [ContextualError: There was an error in the extension "anonymous" (use named functions to improve this error message) while running hook "a".],
+        "result": [ContextualError: There was an error in the interceptor "anonymous" (use named functions to improve this error message) while running hook "a".],
       }
     `)
   })
@@ -198,11 +198,11 @@ describe(`errors`, () => {
       {
         "cause": [Error: oops],
         "context": {
-          "extensionName": "anonymous",
           "hookName": "a",
+          "interceptorName": "anonymous",
           "source": "extension",
         },
-        "result": [ContextualError: There was an error in the extension "anonymous" (use named functions to improve this error message) while running hook "a".],
+        "result": [ContextualError: There was an error in the interceptor "anonymous" (use named functions to improve this error message) while running hook "a".],
       }
     `)
   })
@@ -261,9 +261,9 @@ describe(`errors`, () => {
         passthroughErrorInstanceOf: [SpecialError1],
       })
       // dprint-ignore
-      expect(anyware.run({ initialInput: { throws: new Error('oops') }, extensions: [] })).resolves.toBeInstanceOf(Errors.ContextualError)
+      expect(anyware.run({ initialInput: { throws: new Error('oops') }, interceptors: [] })).resolves.toBeInstanceOf(Errors.ContextualError)
       // dprint-ignore
-      expect(anyware.run({ initialInput: { throws: new SpecialError1('oops') }, extensions: [] })).resolves.toBeInstanceOf(SpecialError1)
+      expect(anyware.run({ initialInput: { throws: new SpecialError1('oops') }, interceptors: [] })).resolves.toBeInstanceOf(SpecialError1)
     })
     test('via passthroughErrorInstanceOf (multiple)', async () => {
       const anyware = Anyware.create<['a'], Anyware.HookDefinitionMap<['a']>>({
@@ -272,9 +272,9 @@ describe(`errors`, () => {
         passthroughErrorInstanceOf: [SpecialError1, SpecialError2],
       })
       // dprint-ignore
-      expect(anyware.run({ initialInput: { throws: new Error('oops') }, extensions: [] })).resolves.toBeInstanceOf(Errors.ContextualError)
+      expect(anyware.run({ initialInput: { throws: new Error('oops') }, interceptors: [] })).resolves.toBeInstanceOf(Errors.ContextualError)
       // dprint-ignore
-      expect(anyware.run({ initialInput: { throws: new SpecialError2('oops') }, extensions: [] })).resolves.toBeInstanceOf(SpecialError2)
+      expect(anyware.run({ initialInput: { throws: new SpecialError2('oops') }, interceptors: [] })).resolves.toBeInstanceOf(SpecialError2)
     })
     test('via passthroughWith', async () => {
       const anyware = Anyware.create<['a'], Anyware.HookDefinitionMap<['a']>>({
@@ -287,9 +287,9 @@ describe(`errors`, () => {
         },
       })
       // dprint-ignore
-      expect(anyware.run({ initialInput: { throws: new Error('oops') }, extensions: [] })).resolves.toBeInstanceOf(Errors.ContextualError)
+      expect(anyware.run({ initialInput: { throws: new Error('oops') }, interceptors: [] })).resolves.toBeInstanceOf(Errors.ContextualError)
       // dprint-ignore
-      expect(anyware.run({ initialInput: { throws: new SpecialError1('oops') }, extensions: [] })).resolves.toBeInstanceOf(SpecialError1)
+      expect(anyware.run({ initialInput: { throws: new SpecialError1('oops') }, interceptors: [] })).resolves.toBeInstanceOf(SpecialError1)
     })
   })
 })
@@ -341,13 +341,13 @@ describe('retrying extension', () => {
       )
       expect(neverRan).toBe(true)
       expect(result).toMatchInlineSnapshot(
-        `[ContextualError: There was an error in the extension "foo".]`,
+        `[ContextualError: There was an error in the interceptor "foo".]`,
       )
       expect((result as Errors.ContextualError).context).toMatchInlineSnapshot(
         `
         {
-          "extensionName": "foo",
           "hookName": "a",
+          "interceptorName": "foo",
           "source": "extension",
         }
       `,

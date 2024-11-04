@@ -81,7 +81,7 @@ ContextualAggregateError: One or more errors in the execution result.
 <!-- dprint-ignore-end -->
 <!-- dprint-ignore-start -->
 ```txt
-ContextualError: There was an error in the extension "anonymous" (use named functions to improve this error message) while running hook "encode".
+ContextualError: There was an error in the interceptor "anonymous" (use named functions to improve this error message) while running hook "encode".
     at runPipeline (/some/path/to/runPipeline.ts:XX:XX:18)
     at process.processTicksAndRejections (node:internal/process/task_queues:XX:XX)
     at async Object.run (/some/path/to/main.ts:XX:XX:22)

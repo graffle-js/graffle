@@ -17,7 +17,7 @@ describe(`invalid destructuring cases`, () => {
           "issue": "noParameters",
         },
         "errors": [
-          [ContextualError: Extension must destructure the first parameter passed to it and select exactly one entrypoint.],
+          [ContextualError: Interceptor must destructure the first parameter passed to it and select exactly one entrypoint.],
         ],
         "result": [ContextualAggregateError: One or more extensions are invalid.],
       }
@@ -36,7 +36,7 @@ describe(`invalid destructuring cases`, () => {
           "issue": "destructuredWithoutEntryHook",
         },
         "errors": [
-          [ContextualError: Extension must destructure the first parameter passed to it and select exactly one entrypoint.],
+          [ContextualError: Interceptor must destructure the first parameter passed to it and select exactly one entrypoint.],
         ],
         "result": [ContextualAggregateError: One or more extensions are invalid.],
       }
@@ -57,7 +57,7 @@ describe(`invalid destructuring cases`, () => {
           "issue": "multipleParameters",
         },
         "errors": [
-          [ContextualError: Extension must destructure the first parameter passed to it and select exactly one entrypoint.],
+          [ContextualError: Interceptor must destructure the first parameter passed to it and select exactly one entrypoint.],
         ],
         "result": [ContextualAggregateError: One or more extensions are invalid.],
       }
@@ -76,7 +76,7 @@ describe(`invalid destructuring cases`, () => {
           "issue": "notDestructured",
         },
         "errors": [
-          [ContextualError: Extension must destructure the first parameter passed to it and select exactly one entrypoint.],
+          [ContextualError: Interceptor must destructure the first parameter passed to it and select exactly one entrypoint.],
         ],
         "result": [ContextualAggregateError: One or more extensions are invalid.],
       }
@@ -94,7 +94,7 @@ describe(`invalid destructuring cases`, () => {
           "issue": "multipleDestructuredHookNames",
         },
         "errors": [
-          [ContextualError: Extension must destructure the first parameter passed to it and select exactly one entrypoint.],
+          [ContextualError: Interceptor must destructure the first parameter passed to it and select exactly one entrypoint.],
         ],
         "result": [ContextualAggregateError: One or more extensions are invalid.],
       }

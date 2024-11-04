@@ -21,7 +21,7 @@ interface Input {
   /**
    * The extensions that are at this hook awaiting.
    */
-  extensionsStack: readonly InterceptorGeneric[]
+  interceptorsStack: readonly InterceptorGeneric[]
   /**
    * The extensions that have advanced past this hook, to their next hook,
    * and are now awaiting.
@@ -45,7 +45,7 @@ export const runHook = async (
     done,
     inputOriginalOrFromExtension,
     previous,
-    extensionsStack,
+    interceptorsStack,
     nextExtensionsStack,
     asyncErrorDeferred,
     customSlots,
@@ -55,7 +55,7 @@ export const runHook = async (
 
   debugHook(`advance to next extension`)
 
-  const [extension, ...extensionsStackRest] = extensionsStack
+  const [extension, ...extensionsStackRest] = interceptorsStack
   const isLastExtension = extensionsStackRest.length === 0
   if (!isLastExtension && extension?.retrying) {
     done({
@@ -99,7 +99,7 @@ export const runHook = async (
           asyncErrorDeferred.resolve({
             type: `error`,
             source: `extension`,
-            extensionName: extension.name,
+            interceptorName: extension.name,
             hookName: name,
             error: new Errors.ContextualError(`Only a retrying extension can retry hooks.`, {
               hookName: name,
@@ -111,7 +111,7 @@ export const runHook = async (
           asyncErrorDeferred.resolve({
             type: `error`,
             source: `extension`,
-            extensionName: extension.name,
+            interceptorName: extension.name,
             hookName: name,
             error: new Errors.ContextualError(
               `Only after failure can a hook be called again by a retrying extension.`,
@@ -132,7 +132,7 @@ export const runHook = async (
             previous,
             inputOriginalOrFromExtension,
             asyncErrorDeferred,
-            extensionsStack: [extensionRetry],
+            interceptorsStack: [extensionRetry],
             nextExtensionsStack,
             customSlots: customSlotsResolved,
           })
@@ -159,7 +159,7 @@ export const runHook = async (
           previous,
           asyncErrorDeferred,
           inputOriginalOrFromExtension: inputResolved,
-          extensionsStack: extensionsStackRest,
+          interceptorsStack: extensionsStackRest,
           nextExtensionsStack: nextNextHookStack,
           customSlots: customSlotsResolved,
         })
@@ -214,7 +214,7 @@ export const runHook = async (
             previous,
             inputOriginalOrFromExtension,
             asyncErrorDeferred,
-            extensionsStack: extensionsStackRest,
+            interceptorsStack: extensionsStackRest,
             nextExtensionsStack,
             customSlots,
           })
@@ -230,7 +230,7 @@ export const runHook = async (
           hookName: name,
           source: `extension`,
           error: errorFromMaybeError(result),
-          extensionName: extension.name,
+          interceptorName: extension.name,
         })
         return
       }

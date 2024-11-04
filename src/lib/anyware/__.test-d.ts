@@ -44,7 +44,7 @@ describe('without slots', () => {
           >
           b: PublicHook<(params?: { input?: InputB }) => MaybePromise<Error | Result>>
         }) => Promise<Result>
-        extensions: ((input: {
+        interceptors: ((input: {
           a: PublicHook<
             (params?: { input?: InputA }) => MaybePromise<{
               b: PublicHook<(params?: { input?: InputB }) => MaybePromise<Result>>
@@ -83,7 +83,7 @@ describe('withSlots', () => {
       (input: {
         initialInput: InputA
         options?: Anyware.Options
-        extensions: ((input: {
+        interceptors: ((input: {
           a: PublicHook<
             (
               input?: { input?: InputA; using?: { x?: (x: boolean) => number | undefined } },

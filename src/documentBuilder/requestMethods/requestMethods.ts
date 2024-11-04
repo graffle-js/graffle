@@ -140,7 +140,7 @@ const executeDocument = async (
   const result = await RequestPipeline.RequestPipeline.run({
     initialInput,
     // retryingExtension: state.retry as any,
-    extensions: state.extensions.filter(_ => _.onRequest !== undefined).map(_ => _.onRequest!) as any,
+    interceptors: state.extensions.filter(_ => _.onRequest !== undefined).map(_ => _.onRequest!) as any,
   })
 
   return handleOutput(state, result)

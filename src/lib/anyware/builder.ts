@@ -47,9 +47,11 @@ export const create = <
 
   const builder: Builder<$Pipeline> = {
     pipeline,
-    run: async ({ initialInput, extensions, options, retryingExtension }) => {
-      const extensions_ = retryingExtension ? [...extensions, createRetryingInterceptor(retryingExtension)] : extensions
-      const initialHookStackAndErrors = extensions_.map(extension =>
+    run: async ({ initialInput, interceptors, options, retryingInterceptor }) => {
+      const interceptors_ = retryingInterceptor
+        ? [...interceptors, createRetryingInterceptor(retryingInterceptor)]
+        : interceptors
+      const initialHookStackAndErrors = interceptors_.map(extension =>
         toInternalInterceptor(pipeline, resolveOptions(options), extension)
       )
       const [initialHookStack, error] = partitionAndAggregateErrors(initialHookStackAndErrors)
@@ -61,7 +63,7 @@ export const create = <
         hookNamesOrderedBySequence: pipeline.hookNamesOrderedBySequence,
         originalInputOrResult: initialInput,
         // todo fix any
-        extensionsStack: initialHookStack as any,
+        interceptorsStack: initialHookStack as any,
         asyncErrorDeferred,
         previous: {},
       })
@@ -154,10 +156,10 @@ const createPassthrough = (hookName: string) => async (hookEnvelope: SomePublicH
 export type Builder<$Pipeline extends Pipeline = Pipeline> = {
   pipeline: $Pipeline
   run: (
-    { initialInput, extensions, options }: {
+    { initialInput, interceptors, options }: {
       initialInput: GetInitialPipelineInput<$Pipeline>
-      extensions: Interceptor<$Pipeline>[]
-      retryingExtension?: Interceptor<$Pipeline, { retrying: true }>
+      interceptors: Interceptor<$Pipeline>[]
+      retryingInterceptor?: Interceptor<$Pipeline, { retrying: true }>
       options?: Options
     },
   ) => Promise<Private.Get<$Pipeline>['result'] | Errors.ContextualError>

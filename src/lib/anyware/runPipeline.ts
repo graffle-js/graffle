@@ -13,19 +13,20 @@ interface Input {
   pipeline: Pipeline
   hookNamesOrderedBySequence: readonly string[]
   originalInputOrResult: unknown
-  extensionsStack: readonly InterceptorGeneric[]
+  interceptorsStack: readonly InterceptorGeneric[]
   asyncErrorDeferred: HookResultErrorAsync
   previous: object
 }
 
 export const runPipeline = async (
-  { pipeline, hookNamesOrderedBySequence, originalInputOrResult, extensionsStack, asyncErrorDeferred, previous }: Input,
+  { pipeline, hookNamesOrderedBySequence, originalInputOrResult, interceptorsStack, asyncErrorDeferred, previous }:
+    Input,
 ): Promise<ResultEnvelop | Errors.ContextualError> => {
   const [hookName, ...hookNamesRest] = hookNamesOrderedBySequence
 
   if (!hookName) {
     debug(`pipeline: ending`)
-    const result = await runPipelineEnd({ extensionsStack, result: originalInputOrResult })
+    const result = await runPipelineEnd({ interceptorsStack, result: originalInputOrResult })
     debug(`pipeline: returning`)
     return createResultEnvelope(result)
   }
@@ -40,7 +41,7 @@ export const runPipeline = async (
     done: done.resolve,
     inputOriginalOrFromExtension: originalInputOrResult as object,
     previous,
-    extensionsStack,
+    interceptorsStack,
     asyncErrorDeferred,
     customSlots: {},
     nextExtensionsStack: [],
@@ -63,7 +64,7 @@ export const runPipeline = async (
         pipeline,
         hookNamesOrderedBySequence: hookNamesRest,
         originalInputOrResult: result,
-        extensionsStack: nextExtensionsStack,
+        interceptorsStack: nextExtensionsStack,
         previous: nextPrevious,
         asyncErrorDeferred,
       })
@@ -94,17 +95,17 @@ export const runPipeline = async (
       switch (signal.source) {
         case `extension`: {
           // todo test these 2 branches explicitly
-          const nameTip = signal.extensionName === defaultFunctionName
+          const nameTip = signal.interceptorName === defaultFunctionName
             ? ` (use named functions to improve this error message)`
             : ``
           const message = wasAsync
-            ? `There was an error in the extension "${signal.extensionName}"${nameTip}.`
-            : `There was an error in the extension "${signal.extensionName}"${nameTip} while running hook "${signal.hookName}".`
+            ? `There was an error in the interceptor "${signal.interceptorName}"${nameTip}.`
+            : `There was an error in the interceptor "${signal.interceptorName}"${nameTip} while running hook "${signal.hookName}".`
 
           return new ContextualError(message, {
             hookName: signal.hookName,
             source: signal.source,
-            extensionName: signal.extensionName,
+            interceptorName: signal.interceptorName,
           }, signal.error)
         }
         case `implementation`: {
@@ -124,17 +125,17 @@ export const runPipeline = async (
 }
 
 const runPipelineEnd = async ({
-  extensionsStack,
+  interceptorsStack,
   result,
-}: { result: unknown; extensionsStack: readonly InterceptorGeneric[] }): Promise<unknown> => {
-  const [extension, ...extensionsRest] = extensionsStack
-  if (!extension) return result
+}: { result: unknown; interceptorsStack: readonly InterceptorGeneric[] }): Promise<unknown> => {
+  const [interceptor, ...interceptorsRest] = interceptorsStack
+  if (!interceptor) return result
 
-  debug(`extension ${extension.name}: end`)
-  extension.currentChunk.resolve(result as any)
-  const nextResult = await extension.body.promise
+  debug(`interceptor ${interceptor.name}: end`)
+  interceptor.currentChunk.resolve(result as any)
+  const nextResult = await interceptor.body.promise
   return await runPipelineEnd({
-    extensionsStack: extensionsRest,
+    interceptorsStack: interceptorsRest,
     result: nextResult,
   })
 }

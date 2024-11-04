@@ -76,7 +76,7 @@ export const builderExtensionGql = Builder.Extension.create<BuilderExtensionGql>
           const result = await RequestPipeline.RequestPipeline.run({
             initialInput,
             // retryingExtension: context.retry as any,
-            extensions: context.extensions.filter(_ => _.onRequest !== undefined).map(_ => _.onRequest!) as any,
+            interceptors: context.extensions.filter(_ => _.onRequest !== undefined).map(_ => _.onRequest!) as any,
           })
 
           return handleOutput(context, result)
