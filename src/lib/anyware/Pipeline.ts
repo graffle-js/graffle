@@ -14,10 +14,6 @@ export { type HookDefinitionMap } from './hook/definition.js'
 
 export * from './Interceptor.js'
 
-type CoreInitialInput<$Pipeline extends Pipeline> = Private.Get<
-  $Pipeline
->['hookMap'][Private.Get<$Pipeline>['hookSequence'][0]]['input']
-
 export type Pipeline<
   $HookSequence extends HookSequence = HookSequence,
   $HookMap extends HookDefinitionMap<$HookSequence> = HookDefinitionMap<$HookSequence>,
@@ -58,22 +54,6 @@ export type Pipeline<
   result: $Result
 }>
 
-const ResultEnvelopeSymbol = Symbol(`resultEnvelope`)
-
-type ResultEnvelopeSymbol = typeof ResultEnvelopeSymbol
-
-export type ResultEnvelop<T = unknown> = {
-  [ResultEnvelopeSymbol]: ResultEnvelopeSymbol
-  result: T
-}
-
-export const createResultEnvelope = <T>(result: T): ResultEnvelop<T> => ({
-  [ResultEnvelopeSymbol]: ResultEnvelopeSymbol,
-  result,
-})
-
-type Config = Required<Options>
-
 const resolveOptions = (options?: Options): Config => {
   return {
     entrypointSelectionMode: options?.entrypointSelectionMode ?? `required`,
@@ -87,17 +67,23 @@ export type Options = {
   entrypointSelectionMode?: 'optional' | 'required' | 'off'
 }
 
+type Config = Required<Options>
+
 export type Builder<$Pipeline extends Pipeline = Pipeline> = {
   core: $Pipeline
   run: (
     { initialInput, extensions, options }: {
-      initialInput: CoreInitialInput<$Pipeline>
+      initialInput: GetInitialPipelineInput<$Pipeline>
       extensions: Interceptor<$Pipeline>[]
       retryingExtension?: Interceptor<$Pipeline, { retrying: true }>
       options?: Options
     },
   ) => Promise<Private.Get<$Pipeline>['result'] | Errors.ContextualError>
 }
+
+type GetInitialPipelineInput<$Pipeline extends Pipeline> = Private.Get<
+  $Pipeline
+>['hookMap'][Private.Get<$Pipeline>['hookSequence'][0]]['input']
 
 export const create = <
   $HookSequence extends HookSequence = HookSequence,

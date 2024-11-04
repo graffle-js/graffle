@@ -3,8 +3,9 @@ import { ContextualError } from '../errors/ContextualError.js'
 import { casesExhausted, createDeferred, debug } from '../prelude.js'
 import type { HookResult, HookResultErrorAsync } from './hook/private.js'
 import { defaultFunctionName } from './lib.js'
-import type { InterceptorGeneric, Pipeline, ResultEnvelop } from './Pipeline.js'
-import { createResultEnvelope } from './Pipeline.js'
+import type { InterceptorGeneric, Pipeline } from './Pipeline.js'
+import { createResultEnvelope } from './resultEnvelope.js'
+import type { ResultEnvelop } from './resultEnvelope.js'
 import { runHook } from './runHook.js'
 
 interface Input {
