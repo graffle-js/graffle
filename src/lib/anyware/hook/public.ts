@@ -1,12 +1,12 @@
 import type { FindValueAfter, IsLastValue } from '../../prelude.js'
-import type { ExtensionOptions } from '../main.js'
+import type { InterceptorOptions } from '../Pipeline.js'
 import type { HookDefinition, HookDefinitionMap, HookSequence } from './definition.js'
 
 export type InferPublicHooks<
   $HookSequence extends HookSequence,
   $HookMap extends Record<$HookSequence[number], HookDefinition> = Record<$HookSequence[number], HookDefinition>,
   $Result = unknown,
-  $Options extends ExtensionOptions = ExtensionOptions,
+  $Options extends InterceptorOptions = InterceptorOptions,
 > = {
   [$HookName in $HookSequence[number]]: InferPublicHook<$HookSequence, $HookMap, $Result, $HookName, $Options>
 }
@@ -16,7 +16,7 @@ type InferPublicHook<
   $HookMap extends HookDefinitionMap<$HookSequence> = HookDefinitionMap<$HookSequence>,
   $Result = unknown,
   $Name extends $HookSequence[number] = $HookSequence[number],
-  $Options extends ExtensionOptions = ExtensionOptions,
+  $Options extends InterceptorOptions = InterceptorOptions,
 > = PublicHook<
   // (<$$Input extends $HookMap[$Name]['input']>(
   ((
@@ -46,7 +46,7 @@ type InferPublicHookReturn<
   $HookMap extends HookDefinitionMap<$HookSequence> = HookDefinitionMap<$HookSequence>,
   $Result = unknown,
   $Name extends $HookSequence[number] = $HookSequence[number],
-  $Options extends ExtensionOptions = ExtensionOptions,
+  $Options extends InterceptorOptions = InterceptorOptions,
 > = Promise<
   | ($Options['retrying'] extends true ? Error : never)
   | (IsLastValue<$Name, $HookSequence> extends true

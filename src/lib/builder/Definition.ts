@@ -1,8 +1,8 @@
 import type { Simplify } from 'type-fest'
 import type { AssertExtends, mergeArrayOfObjects } from '../prelude.js'
+import type { Private } from '../private.js'
 import type { TypeFunction } from '../type-function/__.js'
 import type { Context, Extension } from './Extension.js'
-import type { Private } from './private.js'
 
 /**
  * A chain. Type level function with extensions.

@@ -1,7 +1,7 @@
 import type { Mock } from 'vitest'
 import { beforeEach, vi } from 'vitest'
 import { Anyware } from './__.js'
-import { type ExtensionInput, type Options } from './main.js'
+import { type InterceptorInput, type Options } from './Pipeline.js'
 
 type PrivateHookRunnerInput = {
   input: { value: string }
@@ -85,7 +85,7 @@ beforeEach(() => {
   core = anyware.core
 })
 
-export const runWithOptions = (options: Options = {}) => async (...extensions: ExtensionInput[]) => {
+export const runWithOptions = (options: Options = {}) => async (...extensions: InterceptorInput[]) => {
   const result = await anyware.run({
     initialInput,
     // @ts-expect-error fixme
@@ -95,6 +95,6 @@ export const runWithOptions = (options: Options = {}) => async (...extensions: E
   return result
 }
 
-export const run = async (...extensions: ExtensionInput[]) => runWithOptions({})(...extensions)
+export const run = async (...extensions: InterceptorInput[]) => runWithOptions({})(...extensions)
 
 export const oops = new Error(`oops`)

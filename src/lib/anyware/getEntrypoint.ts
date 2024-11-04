@@ -2,7 +2,7 @@
 import { analyzeFunction } from '../analyze-function.js'
 import { ContextualError } from '../errors/ContextualError.js'
 import type { HookName } from './hook/definition.js'
-import type { NonRetryingExtensionInput } from './main.js'
+import type { NonRetryingInterceptorInput } from './Pipeline.js'
 
 export class ErrorAnywareExtensionEntrypoint extends ContextualError<
   'ErrorGraffleExtensionEntryHook',
@@ -26,7 +26,7 @@ export type ExtensionEntryHookIssue = typeof ExtensionEntryHookIssue[keyof typeo
 
 export const getEntrypoint = (
   hookNames: readonly string[],
-  extension: NonRetryingExtensionInput,
+  extension: NonRetryingInterceptorInput,
 ): ErrorAnywareExtensionEntrypoint | HookName => {
   const x = analyzeFunction(extension)
   if (x.parameters.length > 1) {

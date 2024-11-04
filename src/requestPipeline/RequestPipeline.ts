@@ -26,7 +26,7 @@ import {
   type HookSequence,
 } from './types.js'
 
-export type RequestPipeline<$Config extends Config = Config> = Anyware.Core<
+export type RequestPipeline<$Config extends Config = Config> = Anyware.Pipeline<
   HookSequence,
   HookMap<$Config>,
   GraffleExecutionResultVar<$Config>

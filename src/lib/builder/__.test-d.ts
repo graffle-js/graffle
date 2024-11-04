@@ -1,6 +1,6 @@
 import { assertEqual, assertExtends } from '../assert-equal.js'
+import type { Private } from '../private.js'
 import type { Builder } from './__.js'
-import type { Private } from './private.js'
 
 // ---------------------------------------------------------------------------------------------------------------------
 {

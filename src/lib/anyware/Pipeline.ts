@@ -1,51 +1,28 @@
 import { Errors } from '../errors/__.js'
 import { partitionAndAggregateErrors } from '../errors/ContextualAggregateError.js'
-import type { Deferred, FindValueAfter, IsLastValue, MaybePromise } from '../prelude.js'
+import type { FindValueAfter, IsLastValue } from '../prelude.js'
 import { casesExhausted, createDeferred } from '../prelude.js'
+import type { Private } from '../private.js'
 import { getEntrypoint } from './getEntrypoint.js'
 import type { HookDefinitionMap, HookName, HookSequence, InferDefinition } from './hook/definition.js'
 import type { HookPrivateInput, HookResultErrorExtension, PrivateHook } from './hook/private.js'
-import type { InferPublicHooks, SomePublicHookEnvelope } from './hook/public.js'
+import type { SomePublicHookEnvelope } from './hook/public.js'
+import { createRetryingInterceptor, type Interceptor, type InterceptorInput } from './Interceptor.js'
 import { runPipeline } from './runPipeline.js'
 
 export { type HookDefinitionMap } from './hook/definition.js'
 
-export type ExtensionOptions = {
-  retrying: boolean
-}
+export * from './Interceptor.js'
 
-export type Extension2<
-  $Core extends Core = Core,
-  $Options extends ExtensionOptions = ExtensionOptions,
-> = (
-  hooks: InferPublicHooks<
-    $Core[PrivateTypesSymbol]['hookSequence'],
-    $Core[PrivateTypesSymbol]['hookMap'],
-    $Core[PrivateTypesSymbol]['result'],
-    $Options
-  >,
-) => Promise<
-  | $Core[PrivateTypesSymbol]['result']
-  | SomePublicHookEnvelope
->
+type CoreInitialInput<$Pipeline extends Pipeline> = Private.Get<
+  $Pipeline
+>['hookMap'][Private.Get<$Pipeline>['hookSequence'][0]]['input']
 
-type CoreInitialInput<$Core extends Core> =
-  $Core[PrivateTypesSymbol]['hookMap'][$Core[PrivateTypesSymbol]['hookSequence'][0]]['input']
-
-const PrivateTypesSymbol = Symbol(`private`)
-
-export type PrivateTypesSymbol = typeof PrivateTypesSymbol
-
-export type Core<
+export type Pipeline<
   $HookSequence extends HookSequence = HookSequence,
   $HookMap extends HookDefinitionMap<$HookSequence> = HookDefinitionMap<$HookSequence>,
   $Result = unknown,
-> = {
-  [PrivateTypesSymbol]: {
-    hookSequence: $HookSequence
-    hookMap: $HookMap
-    result: $Result
-  }
+> = Private.Add<{
   hookNamesOrderedBySequence: $HookSequence
   // dprint-ignore
   hooks: {
@@ -75,46 +52,11 @@ export type Core<
   }
   passthroughErrorInstanceOf?: InferDefinition['passthroughErrorInstanceOf']
   passthroughErrorWith?: InferDefinition['passthroughErrorWith']
-}
-
-export type Extension = NonRetryingExtension | RetryingExtension
-
-export type NonRetryingExtension = {
-  retrying: false
-  name: string
-  entrypoint: string
-  body: Deferred<unknown>
-  currentChunk: Deferred<SomePublicHookEnvelope /* | unknown (result) */>
-}
-
-export type RetryingExtension = {
-  retrying: true
-  name: string
-  entrypoint: string
-  body: Deferred<unknown>
-  currentChunk: Deferred<SomePublicHookEnvelope | Error /* | unknown (result) */>
-}
-
-export const createRetryingExtension = (extension: NonRetryingExtensionInput): RetryingExtensionInput => {
-  return {
-    retrying: true,
-    run: extension,
-  }
-}
-
-// export type ExtensionInput<$Input extends object = object> = (input: $Input) => MaybePromise<unknown>
-export type ExtensionInput<$Input extends object = any> =
-  | NonRetryingExtensionInput<$Input>
-  | RetryingExtensionInput<$Input>
-
-export type NonRetryingExtensionInput<$Input extends object = any> = (
-  input: $Input,
-) => MaybePromise<unknown>
-
-export type RetryingExtensionInput<$Input extends object = any> = {
-  retrying: boolean
-  run: (input: $Input) => MaybePromise<unknown>
-}
+}, {
+  hookSequence: $HookSequence
+  hookMap: $HookMap
+  result: $Result
+}>
 
 const ResultEnvelopeSymbol = Symbol(`resultEnvelope`)
 
@@ -129,14 +71,6 @@ export const createResultEnvelope = <T>(result: T): ResultEnvelop<T> => ({
   [ResultEnvelopeSymbol]: ResultEnvelopeSymbol,
   result,
 })
-
-const createPassthrough = (hookName: string) => async (hookEnvelope: SomePublicHookEnvelope) => {
-  const hook = hookEnvelope[hookName]
-  if (!hook) {
-    throw new Errors.ContextualError(`Hook not found in hook envelope`, { hookName })
-  }
-  return await hook({ input: hook.input })
-}
 
 type Config = Required<Options>
 
@@ -153,16 +87,16 @@ export type Options = {
   entrypointSelectionMode?: 'optional' | 'required' | 'off'
 }
 
-export type Builder<$Core extends Core = Core> = {
-  core: $Core
+export type Builder<$Pipeline extends Pipeline = Pipeline> = {
+  core: $Pipeline
   run: (
     { initialInput, extensions, options }: {
-      initialInput: CoreInitialInput<$Core>
-      extensions: Extension2<$Core>[]
-      retryingExtension?: Extension2<$Core, { retrying: true }>
+      initialInput: CoreInitialInput<$Pipeline>
+      extensions: Interceptor<$Pipeline>[]
+      retryingExtension?: Interceptor<$Pipeline, { retrying: true }>
       options?: Options
     },
-  ) => Promise<$Core[PrivateTypesSymbol]['result'] | Errors.ContextualError>
+  ) => Promise<Private.Get<$Pipeline>['result'] | Errors.ContextualError>
 }
 
 export const create = <
@@ -171,8 +105,8 @@ export const create = <
   $Result = unknown,
 >(
   definition: InferDefinition<$HookSequence, $HookMap, $Result>,
-): Builder<Core<$HookSequence, $HookMap, $Result>> => {
-  type $Core = Core<$HookSequence, $HookMap, $Result>
+): Builder<Pipeline<$HookSequence, $HookMap, $Result>> => {
+  type $Core = Pipeline<$HookSequence, $HookMap, $Result>
 
   const core = {
     ...definition,
@@ -186,9 +120,9 @@ export const create = <
   const builder: Builder<$Core> = {
     core,
     run: async ({ initialInput, extensions, options, retryingExtension }) => {
-      const extensions_ = retryingExtension ? [...extensions, createRetryingExtension(retryingExtension)] : extensions
+      const extensions_ = retryingExtension ? [...extensions, createRetryingInterceptor(retryingExtension)] : extensions
       const initialHookStackAndErrors = extensions_.map(extension =>
-        toInternalExtension(core, resolveOptions(options), extension)
+        toInternalInterceptor(core, resolveOptions(options), extension)
       )
       const [initialHookStack, error] = partitionAndAggregateErrors(initialHookStackAndErrors)
       if (error) return error
@@ -212,11 +146,11 @@ export const create = <
   return builder
 }
 
-const toInternalExtension = (core: Core, config: Config, extension: ExtensionInput) => {
+const toInternalInterceptor = (core: Pipeline, config: Config, interceptor: InterceptorInput) => {
   const currentChunk = createDeferred<SomePublicHookEnvelope>()
   const body = createDeferred()
-  const extensionRun = typeof extension === `function` ? extension : extension.run
-  const retrying = typeof extension === `function` ? false : extension.retrying
+  const extensionRun = typeof interceptor === `function` ? interceptor : interceptor.run
+  const retrying = typeof interceptor === `function` ? false : interceptor.retrying
   const applyBody = async (input: object) => {
     try {
       const result = await extensionRun(input)
@@ -279,4 +213,12 @@ const toInternalExtension = (core: Core, config: Config, extension: ExtensionInp
     default:
       throw casesExhausted(config.entrypointSelectionMode)
   }
+}
+
+const createPassthrough = (hookName: string) => async (hookEnvelope: SomePublicHookEnvelope) => {
+  const hook = hookEnvelope[hookName]
+  if (!hook) {
+    throw new Errors.ContextualError(`Hook not found in hook envelope`, { hookName })
+  }
+  return await hook({ input: hook.input })
 }

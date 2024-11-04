@@ -3,15 +3,15 @@ import { ContextualError } from '../errors/ContextualError.js'
 import { casesExhausted, createDeferred, debug } from '../prelude.js'
 import type { HookResult, HookResultErrorAsync } from './hook/private.js'
 import { defaultFunctionName } from './lib.js'
-import type { Core, Extension, ResultEnvelop } from './main.js'
-import { createResultEnvelope } from './main.js'
+import type { InterceptorGeneric, Pipeline, ResultEnvelop } from './Pipeline.js'
+import { createResultEnvelope } from './Pipeline.js'
 import { runHook } from './runHook.js'
 
 interface Input {
-  core: Core
+  core: Pipeline
   hookNamesOrderedBySequence: readonly string[]
   originalInputOrResult: unknown
-  extensionsStack: readonly Extension[]
+  extensionsStack: readonly InterceptorGeneric[]
   asyncErrorDeferred: HookResultErrorAsync
   previous: object
 }
@@ -124,7 +124,7 @@ export const runPipeline = async (
 const runPipelineEnd = async ({
   extensionsStack,
   result,
-}: { result: unknown; extensionsStack: readonly Extension[] }): Promise<unknown> => {
+}: { result: unknown; extensionsStack: readonly InterceptorGeneric[] }): Promise<unknown> => {
   const [extension, ...extensionsRest] = extensionsStack
   if (!extension) return result
 

@@ -2,12 +2,12 @@ import { Errors } from '../errors/__.js'
 import { casesExhausted, createDeferred, debugSub, errorFromMaybeError } from '../prelude.js'
 import type { HookResult, HookResultErrorAsync, Slots } from './hook/private.js'
 import { createPublicHook, type SomePublicHookEnvelope } from './hook/public.js'
-import type { Core, Extension, ResultEnvelop } from './main.js'
+import type { InterceptorGeneric, Pipeline, ResultEnvelop } from './Pipeline.js'
 
 type HookDoneResolver = (input: HookResult) => void
 
 interface Input {
-  core: Core
+  core: Pipeline
   name: string
   done: HookDoneResolver
   inputOriginalOrFromExtension: object
@@ -19,7 +19,7 @@ interface Input {
   /**
    * The extensions that are at this hook awaiting.
    */
-  extensionsStack: readonly Extension[]
+  extensionsStack: readonly InterceptorGeneric[]
   /**
    * The extensions that have advanced past this hook, to their next hook,
    * and are now awaiting.
@@ -27,11 +27,11 @@ interface Input {
    * @remarks every extension popped off the stack is added here (except those
    * that short-circuit the pipeline or enter passthrough mode).
    */
-  nextExtensionsStack: readonly Extension[]
+  nextExtensionsStack: readonly InterceptorGeneric[]
   asyncErrorDeferred: HookResultErrorAsync
 }
 
-const createExecutableChunk = <$Extension extends Extension>(extension: $Extension) => ({
+const createExecutableChunk = <$Extension extends InterceptorGeneric>(extension: $Extension) => ({
   ...extension,
   currentChunk: createDeferred<SomePublicHookEnvelope | ($Extension['retrying'] extends true ? Error : never)>(),
 })

@@ -1,1 +1,1 @@
-export * as Anyware from './main.js'
+export * as Anyware from './Pipeline.js'
