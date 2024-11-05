@@ -9,9 +9,6 @@ export const Upload = createExtension({
   name: `Upload`,
   create: () => {
     return {
-      // onRequest: async ({ pack }) => {
-      //   return pack()
-      // },
       onRequest: async ({ pack }) => {
         // TODO we can probably get file upload working for in-memory schemas too :)
         if (pack.input.transportType !== `http`) {
