@@ -1,7 +1,7 @@
 import { analyzeFunction } from '../../analyze-function.js'
 import { ContextualError } from '../../errors/ContextualError.js'
 import type { HookName } from '../hook/definition.js'
-import type { NonRetryingInterceptorInput } from '../Interceptor.js'
+import type { NonRetryingInterceptorInput } from '../Interceptor/Interceptor.js'
 
 export class ErrorAnywareInterceptorEntrypoint extends ContextualError<
   'ErrorGraffleInterceptorEntryHook',

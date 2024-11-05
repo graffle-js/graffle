@@ -1,6 +1,6 @@
-import type { IsUnknown, PartialDeep, Simplify } from 'type-fest'
+import type { PartialDeep, Simplify } from 'type-fest'
 import { isDate } from 'util/types'
-import { type ExcludeUndefined, type GuardedType, isAnyFunction, isNonNullObject } from '../prelude.js'
+import { type ExcludeUndefined, type GuardedType, isAnyFunction, isNonNullObject, type OrDefault } from '../prelude.js'
 
 // dprint-ignore
 export type MergeDefaults<$Defaults extends object, $Input extends undefined | object, $CustomScalars> =
@@ -112,14 +112,6 @@ export type GetAtPathOrDefault<$Obj, $Path extends Path, $Default> =
   OrDefault<GetOptional<$Obj, $Path>, $Default>
 
 // dprint-ignore
-export type OrDefault<$Value, $Default> =
-    // When no value has been passed in, because the property is optional,
-    // then the inferred type is unknown.
-    IsUnknown<$Value> extends true ? $Default :
-    $Value extends undefined       ? $Default :
-                                     $Value
-
-// dprint-ignore
 export type GetOptional<$Value, $Path extends [...string[]]> =
   $Value extends undefined                                              ? undefined :
   $Path extends [infer P1 extends string, ...infer PN extends string[]] ? $Value extends object
@@ -146,7 +138,7 @@ export type SetMany<$Obj extends object, $Sets extends [Path, any][]> =
                                                                                             > :
                                                                                             never
 
-export type SetKey<$Obj extends object, $Prop extends keyof $Obj, $Type extends $Obj[$Prop]> =
+export type SetOneKey<$Obj extends object, $Prop extends keyof $Obj, $Type extends $Obj[$Prop]> =
   & Omit<$Obj, $Prop>
   & { [_ in $Prop]: $Type }
 

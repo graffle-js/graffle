@@ -30,7 +30,7 @@ assertEqual<ConfigManager.SetOne<{ a: { b: 2 } }, [], 1>, never>()
 assertEqual<ConfigManager.SetOne<{ a: { b: 2 } }, ['x'], 1>, never>()
 assertEqual<ConfigManager.SetOne<{ a: { b: 2 } }, ['a', 'b', 'c'], 3>, { a: { b: never } }>()
 
-assertEqual<ConfigManager.SetKey<a1, 'a', { b: 2 }>, { a: { b: 2 }; b: string }>()
+assertEqual<ConfigManager.SetOneKey<a1, 'a', { b: 2 }>, { a: { b: 2 }; b: string }>()
 
 // dprint-ignore
 {

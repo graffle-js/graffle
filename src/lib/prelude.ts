@@ -298,7 +298,37 @@ export const debugSub = (...args: any[]) => (...subArgs: any[]) => {
   debug(...args, ...subArgs)
 }
 
-export type PlusOneUpToTen<n extends number> = n extends 0 ? 1
+// dprint-ignore
+export type OrDefault<$Value, $Default> =
+    // When no value has been passed in because the property is optional,
+    // then the inferred type is unknown.
+    IsUnknown<$Value> extends true ? $Default :
+    $Value extends undefined       ? $Default :
+                                     $Value
+
+export namespace Tuple {
+  // dprint-ignore
+  export type GetAtNextIndex<$Items extends readonly any[], $Index extends NumberLiteral> =
+    $Items[PlusOne<$Index>]
+
+  // dprint-ignore
+  export type GetNextIndexOr<$Items extends readonly any[], $Index extends number, $Or> =
+    OrDefault<GetAtNextIndex<$Items, $Index>, $Or>
+
+  // dprint-ignore
+  export type DropUntilIndex<$Items extends readonly any[], $Index extends NumberLiteral> =
+    $Index extends 0                                  ? $Items :
+    $Items extends readonly [infer _, ...infer $Rest] ? DropUntilIndex<$Rest, MinusOne<$Index>> :
+                                                        []
+
+  export type IndexPlusOne<$Index extends NumberLiteral> = PlusOne<$Index>
+}
+
+type NumberLiteral = number | `${number}`
+
+// dprint-ignore
+export type PlusOne<n extends NumberLiteral> =
+    n extends 0 ? 1
   : n extends 1 ? 2
   : n extends 2 ? 3
   : n extends 3 ? 4
@@ -310,7 +340,9 @@ export type PlusOneUpToTen<n extends number> = n extends 0 ? 1
   : n extends 9 ? 10
   : never
 
-export type MinusOneUpToTen<n extends number> = n extends 10 ? 9
+// dprint-ignore
+export type MinusOne<n extends NumberLiteral> =
+    n extends 10 ? 9
   : n extends 9 ? 8
   : n extends 8 ? 7
   : n extends 7 ? 6
@@ -330,10 +362,9 @@ export type findIndexForValue<value, list extends AnyReadOnlyListNonEmpty> =
 type findIndexForValue_<value, list extends AnyReadOnlyListNonEmpty, i extends number> =
   value extends list[i]
     ? i
-    : findIndexForValue_<value, list, PlusOneUpToTen<i>>
+    : findIndexForValue_<value, list, PlusOne<i>>
 
-export type FindValueAfter<value, list extends AnyReadOnlyListNonEmpty> =
-  list[PlusOneUpToTen<findIndexForValue<value, list>>]
+export type FindValueAfter<value, list extends AnyReadOnlyListNonEmpty> = list[PlusOne<findIndexForValue<value, list>>]
 
 // dprint-ignore
 export type TakeValuesBefore<$Value, $List extends AnyReadOnlyList> =
@@ -349,11 +380,11 @@ type AnyReadOnlyList = readonly [...any[]]
 export type ValueOr<value, orValue> = value extends undefined ? orValue : value
 
 export type FindValueAfterOr<value, list extends readonly [any, ...any[]], orValue> = ValueOr<
-  list[PlusOneUpToTen<findIndexForValue<value, list>>],
+  list[PlusOne<findIndexForValue<value, list>>],
   orValue
 >
 
-export type GetLastValue<T extends readonly [any, ...any[]]> = T[MinusOneUpToTen<T['length']>]
+export type GetLastValue<T extends readonly [any, ...any[]]> = T[MinusOne<T['length']>]
 
 export type IsLastValue<value, list extends readonly [any, ...any[]]> = value extends GetLastValue<list> ? true : false
 
@@ -458,8 +489,8 @@ export const shallowMergeDefaults = <$Defaults extends object, $Input extends ob
   return merged as any
 }
 
-export type mergeArrayOfObjects<T extends [...any[]]> = T extends [infer $First, ...infer $Rest extends any[]]
-  ? $First & mergeArrayOfObjects<$Rest>
+export type intersectArrayOfObjects<T extends [...any[]]> = T extends [infer $First, ...infer $Rest extends any[]]
+  ? $First & intersectArrayOfObjects<$Rest>
   : {}
 
 export const identityProxy = new Proxy({}, {
@@ -637,7 +668,7 @@ export type SimplifyExcept<$ExcludeType, $Type> =
       ? $Type
       : {[TypeKey in keyof $Type]: $Type[TypeKey]}
 
-export const any = undefined as any
+export const _ = undefined as any
 
 // dprint-ignore
 export type ToParameters<$Params extends object | undefined> =

@@ -1,9 +1,9 @@
 import { Errors } from '../../errors/__.js'
 import { casesExhausted, createDeferred, debugSub, errorFromMaybeError } from '../../prelude.js'
 import type { HookResult, HookResultErrorAsync, Slots } from '../hook/private.js'
-import { createPublicHook, type SomePublicHookEnvelope } from '../hook/public.js'
-import type { InterceptorGeneric } from '../Interceptor.js'
-import type { Pipeline } from '../Pipeline/Pipeline.js'
+import { createPublicHook, type SomePublicStepEnvelope } from '../hook/public.js'
+import type { InterceptorGeneric } from '../Interceptor/Interceptor.js'
+import type { Pipeline } from '../Pipeline/__.js'
 import type { ResultEnvelop } from './resultEnvelope.js'
 
 type HookDoneResolver = (input: HookResult) => void
@@ -35,7 +35,7 @@ interface Input {
 
 const createExecutableChunk = <$Extension extends InterceptorGeneric>(extension: $Extension) => ({
   ...extension,
-  currentChunk: createDeferred<SomePublicHookEnvelope | ($Extension['retrying'] extends true ? Error : never)>(),
+  currentChunk: createDeferred<SomePublicStepEnvelope | ($Extension['retrying'] extends true ? Error : never)>(),
 })
 
 export const runHook = async (
@@ -137,14 +137,14 @@ export const runHook = async (
             customSlots: customSlotsResolved,
           })
           return extensionRetry.currentChunk.promise.then(async (envelope) => {
-            const envelop_ = envelope as SomePublicHookEnvelope // todo ... better way?
+            const envelop_ = envelope as SomePublicStepEnvelope // todo ... better way?
             const hook = envelop_[name] // as (params:{input:object;previous:object;using:Slots}) =>
             if (!hook) throw new Error(`Hook not found in envelope: ${name}`)
             // todo use inputResolved ?
             const result = await hook({
               ...extensionInput,
               input: extensionInput?.input ?? inputOriginalOrFromExtension,
-            }) as Promise<SomePublicHookEnvelope | Error | ResultEnvelop>
+            }) as Promise<SomePublicStepEnvelope | Error | ResultEnvelop>
             return result
           })
         }

@@ -1,3 +1,4 @@
+import { Anyware } from '../../lib/anyware/__.js'
 import { Builder } from '../../lib/builder/__.js'
 import type { Grafaid } from '../../lib/grafaid/__.js'
 import { getOperationType } from '../../lib/grafaid/document.js'
@@ -73,7 +74,7 @@ export const builderExtensionGql = Builder.Extension.create<BuilderExtensionGql>
             request: analyzedRequest,
           } as RequestPipeline.Hooks.HookDefEncode<Config>['input']
 
-          const result = await RequestPipeline.RequestPipeline.run({
+          const result = await Anyware.Pipeline.run(RequestPipeline, {
             initialInput,
             // retryingExtension: context.retry as any,
             interceptors: context.extensions.filter(_ => _.onRequest !== undefined).map(_ => _.onRequest!) as any,

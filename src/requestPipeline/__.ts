@@ -1,1 +1,1 @@
-export * as RequestPipeline from './_.js'
+export * from './RequestPipeline.js'

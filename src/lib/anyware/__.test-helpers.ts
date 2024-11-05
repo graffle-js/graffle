@@ -1,101 +1,117 @@
 import type { Mock } from 'vitest'
 import { beforeEach, vi } from 'vitest'
 import { Anyware } from './__.js'
-import type { InterceptorInput } from './Interceptor.js'
+import type { InterceptorInput } from './Interceptor/Interceptor.js'
 import type { Options } from './run/runner.js'
 
-type PrivateHookRunnerInput = {
-  input: { value: string }
-  slots: { append: (hookName: string) => string; appendExtra: (hookName: string) => string }
-  previous: object
-}
+export const initialInput = { x: 1 } as const
+export type initialInput = typeof initialInput
 
-type PrivateHookRunner = (input: PrivateHookRunnerInput) => any
+export const results = {
+  a: { a: 1 },
+  b: { b: 2 },
+  c: { c: 3 },
+} as const
+export type results = typeof results
 
-export const initialInput: PrivateHookRunnerInput['input'] = { value: `initial` }
+export const slots = {
+  m: () => Promise.resolve(`m` as const),
+  n: () => `n` as const,
+} as const
+export type slots = typeof slots
 
-type $Core = ReturnType<typeof createAnyware> & {
-  hooks: {
-    a: {
-      run: Mock<PrivateHookRunner>
-      slots: {
-        append: Mock<(hookName: string) => string>
-        appendExtra: Mock<(hookName: string) => string>
-      }
-    }
-    b: {
-      run: Mock<PrivateHookRunner>
-      slots: {
-        append: Mock<(hookName: string) => string>
-        appendExtra: Mock<(hookName: string) => string>
-      }
-    }
-  }
-}
+// type PrivateHookRunnerInput = {
+//   input: { value: string }
+//   slots: { append: (hookName: string) => string; appendExtra: (hookName: string) => string }
+//   previous: object
+// }
 
-export const createHook = <$Slots extends object, $Input extends object, $Result = unknown>(
-  $Hook: {
-    slots: $Slots
-    run: (input: { input: $Input; slots: $Slots }) => $Result
-  },
-) => $Hook
+// type PrivateHookRunner = (input: PrivateHookRunnerInput) => any
 
-export const createAnyware = () => {
-  const a = createHook({
-    slots: {
-      append: vi.fn().mockImplementation((hookName: string) => {
-        return hookName
-      }),
-      appendExtra: vi.fn().mockImplementation(() => {
-        return ``
-      }),
-    },
-    run: vi.fn().mockImplementation(({ input, slots }: PrivateHookRunnerInput) => {
-      const extra = slots.appendExtra(`a`)
-      return { value: input.value + `+` + slots.append(`a`) + extra }
-    }),
-  })
-  const b = createHook({
-    slots: {
-      append: vi.fn().mockImplementation((hookName: string) => {
-        return hookName
-      }),
-      appendExtra: vi.fn().mockImplementation(() => {
-        return ``
-      }),
-    },
-    run: vi.fn().mockImplementation(({ input, slots }: PrivateHookRunnerInput) => {
-      const extra = slots.appendExtra(`b`)
-      return { value: input.value + `+` + slots.append(`b`) + extra }
-    }),
-  })
+// export const initialInput: PrivateHookRunnerInput['input'] = { value: `initial` }
 
-  return Anyware.create<['a', 'b'], Anyware.HookDefinitionMap<['a', 'b']>, PrivateHookRunnerInput>({
-    hookNamesOrderedBySequence: [`a`, `b`],
-    hooks: { a, b },
-  })
-}
+// type $Core = ReturnType<typeof createAnyware> & {
+//   hooks: {
+//     a: {
+//       run: Mock<PrivateHookRunner>
+//       slots: {
+//         append: Mock<(hookName: string) => string>
+//         appendExtra: Mock<(hookName: string) => string>
+//       }
+//     }
+//     b: {
+//       run: Mock<PrivateHookRunner>
+//       slots: {
+//         append: Mock<(hookName: string) => string>
+//         appendExtra: Mock<(hookName: string) => string>
+//       }
+//     }
+//   }
+// }
 
-// @ts-expect-error
-export let anyware: Anyware.Builder<$Core> = null
-export let core: $Core
+// export const createHook = <$Slots extends object, $Input extends object, $Result = unknown>(
+//   $Hook: {
+//     slots: $Slots
+//     run: (input: { input: $Input; slots: $Slots }) => $Result
+//   },
+// ) => $Hook
 
-beforeEach(() => {
-  // @ts-expect-error mock types not tracked by Anyware
-  anyware = createAnyware()
-  core = anyware.pipeline
-})
+// export const createAnyware = () => {
+//   const a = createHook({
+//     slots: {
+//       append: vi.fn().mockImplementation((hookName: string) => {
+//         return hookName
+//       }),
+//       appendExtra: vi.fn().mockImplementation(() => {
+//         return ``
+//       }),
+//     },
+//     run: vi.fn().mockImplementation(({ input, slots }: PrivateHookRunnerInput) => {
+//       const extra = slots.appendExtra(`a`)
+//       return { value: input.value + `+` + slots.append(`a`) + extra }
+//     }),
+//   })
+//   const b = createHook({
+//     slots: {
+//       append: vi.fn().mockImplementation((hookName: string) => {
+//         return hookName
+//       }),
+//       appendExtra: vi.fn().mockImplementation(() => {
+//         return ``
+//       }),
+//     },
+//     run: vi.fn().mockImplementation(({ input, slots }: PrivateHookRunnerInput) => {
+//       const extra = slots.appendExtra(`b`)
+//       return { value: input.value + `+` + slots.append(`b`) + extra }
+//     }),
+//   })
 
-export const runWithOptions = (options: Options = {}) => async (...interceptors: InterceptorInput[]) => {
-  const result = await anyware.run({
-    initialInput,
-    // @ts-expect-error fixme
-    interceptors,
-    options,
-  })
-  return result
-}
+//   return Anyware.create<['a', 'b'], Anyware.HookDefinitionMap<['a', 'b']>, PrivateHookRunnerInput>({
+//     hookNamesOrderedBySequence: [`a`, `b`],
+//     hooks: { a, b },
+//   })
+// }
 
-export const run = async (...extensions: InterceptorInput[]) => runWithOptions({})(...extensions)
+// // @ts-expect-error
+// export let anyware: Anyware.Builder<$Core> = null
+// export let core: $Core
 
-export const oops = new Error(`oops`)
+// beforeEach(() => {
+//   // @ts-expect-error mock types not tracked by Anyware
+//   anyware = createAnyware()
+//   core = anyware.pipeline
+// })
+
+// export const runWithOptions = (options: Options = {}) => async (...interceptors: InterceptorInput[]) => {
+//   const result = await anyware.run({
+//     initialInput,
+//     // @ts-expect-error fixme
+//     interceptors,
+//     options,
+//   })
+//   return result
+// }
+
+// export const run = async (...extensions: InterceptorInput[]) => runWithOptions({})(...extensions)
+
+// export const oops = new Error(`oops`)

@@ -1,5 +1,5 @@
 import type { Simplify } from 'type-fest'
-import type { AssertExtends, mergeArrayOfObjects } from '../prelude.js'
+import type { AssertExtends, intersectArrayOfObjects } from '../prelude.js'
 import type { Private } from '../private.js'
 import type { TypeFunction } from '../type-function/__.js'
 import type { Context, Extension } from './Extension.js'
@@ -55,11 +55,11 @@ export type MaterializeGeneric<$Chain_ extends Definition_> =
     Private.Add<
       {
         chain: $Chain_,
-        context: mergeArrayOfObjects<
+        context: intersectArrayOfObjects<
           MaterializeExtensionsGenericContext<$Chain_['extensions']>
         >
       },
-      mergeArrayOfObjects<
+      intersectArrayOfObjects<
         MaterializeExtensionsGeneric<$Chain_, $Chain_['extensions']>
       >
     >
@@ -83,11 +83,11 @@ export type MaterializeSpecific<$Chain_ extends Definition_> =
     Private.Add<
       {
         chain: $Chain_,
-        context: mergeArrayOfObjects<
+        context: intersectArrayOfObjects<
           MaterializeExtensionsInitialContext<$Chain_['extensions']>
         >
       },
-      mergeArrayOfObjects<
+      intersectArrayOfObjects<
         MaterializeExtensionsInitial<$Chain_, $Chain_['extensions']>
       >
     >
@@ -113,7 +113,7 @@ export type MaterializeWithNewContext<$Chain_ extends Definition_, $Context exte
         chain: $Chain_,
         context: $Context
       },
-      mergeArrayOfObjects<
+      intersectArrayOfObjects<
         MaterializeExtensionsWithNewState<
           $Chain_,
           $Context,

@@ -5,17 +5,21 @@ import { casesExhausted } from '../../prelude.js'
 import type { Private } from '../../private.js'
 import type { HookName } from '../hook/definition.js'
 import type { HookResultErrorExtension } from '../hook/private.js'
-import type { SomePublicHookEnvelope } from '../hook/public.js'
-import { createRetryingInterceptor, type Interceptor, type InterceptorInput } from '../Interceptor.js'
-import type { Pipeline } from '../Pipeline/Pipeline.js'
+import type { SomePublicStepEnvelope } from '../hook/public.js'
+import {
+  createRetryingInterceptor,
+  type InferInterceptorConstructor,
+  type InterceptorInput,
+} from '../Interceptor/Interceptor.js'
+import type { Pipeline } from '../Pipeline/__.js'
 import { getEntrypoint } from './getEntrypoint.js'
 import { runPipeline } from './runPipeline.js'
 
 export type Runner<$Pipeline extends Pipeline = Pipeline> = (
   { initialInput, interceptors, options }: {
     initialInput: GetInitialPipelineInput<$Pipeline>
-    interceptors: Interceptor<$Pipeline>[]
-    retryingInterceptor?: Interceptor<$Pipeline, { retrying: true }>
+    interceptors: InferInterceptorConstructor<$Pipeline>[]
+    retryingInterceptor?: InferInterceptorConstructor<$Pipeline, { retrying: true }>
     options?: Options
   },
 ) => Promise<Private.Get<$Pipeline>['result'] | Errors.ContextualError>
@@ -67,7 +71,7 @@ type GetInitialPipelineInput<$Pipeline extends Pipeline> = Private.Get<
 >['hookMap'][Private.Get<$Pipeline>['hookSequence'][0]]['input']
 
 const toInternalInterceptor = (pipeline: Pipeline, config: Config, interceptor: InterceptorInput) => {
-  const currentChunk = createDeferred<SomePublicHookEnvelope>()
+  const currentChunk = createDeferred<SomePublicStepEnvelope>()
   const body = createDeferred()
   const extensionRun = typeof interceptor === `function` ? interceptor : interceptor.run
   const retrying = typeof interceptor === `function` ? false : interceptor.retrying
@@ -135,7 +139,7 @@ const toInternalInterceptor = (pipeline: Pipeline, config: Config, interceptor: 
   }
 }
 
-const createPassthrough = (hookName: string) => async (hookEnvelope: SomePublicHookEnvelope) => {
+const createPassthrough = (hookName: string) => async (hookEnvelope: SomePublicStepEnvelope) => {
   const hook = hookEnvelope[hookName]
   if (!hook) {
     throw new Errors.ContextualError(`Hook not found in hook envelope`, { hookName })
