@@ -1,7 +1,6 @@
 import type { Simplify } from 'type-fest'
-import type { Deferred, intersectArrayOfObjects, MaybePromise, Tuple } from '../../prelude.js'
-import type { Private } from '../../private.js'
-import type { InferPublicHooks, SomePublicStepEnvelope } from '../hook/public.js'
+import type { Deferred, MaybePromise } from '../../prelude.js'
+import type { SomePublicStepEnvelope } from '../hook/public.js'
 import type { Pipeline } from '../Pipeline/__.js'
 import type { Step } from '../Pipeline/builder.js'
 
@@ -18,15 +17,17 @@ export interface Interceptor {
 }
 
 export namespace Interceptor {
-  export type InferConstructor<
+  export interface InferConstructor<
     $Pipeline extends Pipeline = Pipeline,
   > // $Options extends InterceptorOptions = InterceptorOptions,
-   = (
-    steps: Simplify<InferConstructorKeywordArguments<$Pipeline>>,
-  ) => Promise<
-    | Pipeline.GetAwaitedResult<$Pipeline>
-    | SomePublicStepEnvelope
-  >
+  {
+    (
+      steps: Simplify<InferConstructorKeywordArguments<$Pipeline>>,
+    ): Promise<
+      | Pipeline.GetAwaitedResult<$Pipeline>
+      | SomePublicStepEnvelope
+    >
+  }
 
   type InferConstructorKeywordArguments<
     $Pipeline extends Pipeline,
@@ -45,9 +46,9 @@ export namespace Interceptor {
       : {}
 
   // dprint-ignore
-  type InferStepTrigger<$Step extends Step, $NextSteps extends Step[], $PipelineOutput> =
+  interface InferStepTrigger<$Step extends Step, $NextSteps extends Step[], $PipelineOutput> {
     (
-      params: Simplify<
+      params?: Simplify<
         & {
             input?: $Step['input']
           }
@@ -57,13 +58,14 @@ export namespace Interceptor {
             : { slots?: Partial<$Step['slots']> }
         )
       >
-    ) => Promise<
+    ): Promise<
       $NextSteps extends [infer $NextStep extends Step, ...infer $NextNextSteps extends Step[]]
         ? {
             [_ in $NextStep['name']]: InferStepTrigger<$NextStep, $NextNextSteps, $PipelineOutput>
           }
         : $PipelineOutput
     >
+  }
 }
 
 export type InterceptorGeneric = NonRetryingInterceptor | RetryingInterceptor

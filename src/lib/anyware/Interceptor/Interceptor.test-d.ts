@@ -24,6 +24,13 @@ describe(`interceptor constructor`, () => {
     }]>()
   })
 
+  // --- trigger ---
+  test(`trigger arguments are optional`, () => {
+    const p = Pipeline.create<initialInput>().step({ name: `a`, run: () => results.a })
+    type i = Interceptor.InferConstructor<typeof p['context']>
+    expectTypeOf<[]>().toMatchTypeOf<Parameters<Parameters<i>[0]['a']>>()
+  })
+
   test(`trigger accepts slots if definition has them, otherwise does NOT so much as accept the slots key`, () => {
     const p = Pipeline.create<initialInput>().step({
       name: `a`,
@@ -33,9 +40,9 @@ describe(`interceptor constructor`, () => {
       .step({ name: `b`, run: () => results.b })
     type i = Interceptor.InferConstructor<typeof p['context']>
     type stepAParameters = Parameters<Parameters<i>[0]['a']>
-    expectTypeOf<stepAParameters>().toEqualTypeOf<[params: { input?: initialInput; slots?: { m?: slots['m'] } }]>
+    expectTypeOf<stepAParameters>().toEqualTypeOf<[params?: { input?: initialInput; slots?: { m?: slots['m'] } }]>
     type stepBParameters = Parameters<Parameters<i1>[0]['b']>
-    expectTypeOf<stepBParameters>().toEqualTypeOf<[params: { input?: results['a'] }]> // no "slots" key!
+    expectTypeOf<stepBParameters>().toEqualTypeOf<[params?: { input?: results['a'] }]> // no "slots" key!
   })
 
   // --- return ---
