@@ -6,11 +6,7 @@ import type { Private } from '../../private.js'
 import type { HookName } from '../hook/definition.js'
 import type { HookResultErrorExtension } from '../hook/private.js'
 import type { SomePublicStepEnvelope } from '../hook/public.js'
-import {
-  createRetryingInterceptor,
-  type InferInterceptorConstructor,
-  type InterceptorInput,
-} from '../Interceptor/Interceptor.js'
+import { createRetryingInterceptor, type Interceptor, type InterceptorInput } from '../Interceptor/Interceptor.js'
 import type { Pipeline } from '../Pipeline/__.js'
 import { getEntrypoint } from './getEntrypoint.js'
 import { runPipeline } from './runPipeline.js'
@@ -18,8 +14,8 @@ import { runPipeline } from './runPipeline.js'
 export type Runner<$Pipeline extends Pipeline = Pipeline> = (
   { initialInput, interceptors, options }: {
     initialInput: GetInitialPipelineInput<$Pipeline>
-    interceptors: InferInterceptorConstructor<$Pipeline>[]
-    retryingInterceptor?: InferInterceptorConstructor<$Pipeline, { retrying: true }>
+    interceptors: Interceptor.InferConstructor<$Pipeline>[]
+    retryingInterceptor?: Interceptor.InferConstructor<$Pipeline, { retrying: true }>
     options?: Options
   },
 ) => Promise<Private.Get<$Pipeline>['result'] | Errors.ContextualError>

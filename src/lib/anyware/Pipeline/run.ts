@@ -1,3 +1,4 @@
+import type { Errors } from '../../errors/__.js'
 import type { Interceptor } from '../Interceptor/Interceptor.js'
 import type { Pipeline } from './__.js'
 import type { Builder } from './builder.js'
@@ -13,7 +14,10 @@ type Run = <
 >(
   pipeline: $Builder,
   params?: $Params,
-) => Pipeline.GetResult<$Builder['context']>
+) => Promise<
+  | Errors.ContextualAggregateError
+  | Awaited<Pipeline.GetResult<$Builder['context']>>
+>
 
 /**
  * todo

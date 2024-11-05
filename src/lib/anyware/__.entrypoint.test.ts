@@ -2,11 +2,21 @@
 
 import { describe, expect, test } from 'vitest'
 import type { ContextualAggregateError } from '../errors/ContextualAggregateError.js'
-import { run } from './__.test-helpers.js'
+import { _ } from '../prelude.js'
+import { type Interceptor, Pipeline } from './_.js'
+import { initialInput } from './__.test-helpers.js'
+
+const run = async (interceptor: (...args: any[]) => any) => {
+  const pipeline = Pipeline.create()
+  return Pipeline.run(pipeline, {
+    initialInput,
+    interceptors: [interceptor],
+  })
+}
 
 describe(`invalid destructuring cases`, () => {
   test(`noParameters`, async () => {
-    const result = await run(() => 1) as ContextualAggregateError
+    const result = await run(() => _) as ContextualAggregateError
     expect({
       result,
       errors: result.errors,
@@ -24,7 +34,9 @@ describe(`invalid destructuring cases`, () => {
     `)
   })
   test(`destructuredWithoutEntryHook`, async () => {
-    const result = await run(async ({ x }) => {}) as ContextualAggregateError
+    const result = await run(async ({ x }) => {
+      return _
+    }) as ContextualAggregateError
     expect({
       result,
       errors: result.errors,
@@ -44,7 +56,6 @@ describe(`invalid destructuring cases`, () => {
     )
   })
   test(`multipleParameters`, async () => {
-    // @ts-expect-error two parameters is invalid
     const result = await run(async ({ x }, y) => {}) as ContextualAggregateError
     expect({
       result,

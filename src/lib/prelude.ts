@@ -1,4 +1,5 @@
 import type { HasRequiredKeys, IsAny, IsEmptyObject, IsNever, IsUnknown, Simplify } from 'type-fest'
+import type { ConfigManager } from './config-manager/__.js'
 
 /* eslint-disable */
 export type RemoveIndex<T> = {
@@ -298,14 +299,6 @@ export const debugSub = (...args: any[]) => (...subArgs: any[]) => {
   debug(...args, ...subArgs)
 }
 
-// dprint-ignore
-export type OrDefault<$Value, $Default> =
-    // When no value has been passed in because the property is optional,
-    // then the inferred type is unknown.
-    IsUnknown<$Value> extends true ? $Default :
-    $Value extends undefined       ? $Default :
-                                     $Value
-
 export namespace Tuple {
   // dprint-ignore
   export type GetAtNextIndex<$Items extends readonly any[], $Index extends NumberLiteral> =
@@ -313,7 +306,7 @@ export namespace Tuple {
 
   // dprint-ignore
   export type GetNextIndexOr<$Items extends readonly any[], $Index extends number, $Or> =
-    OrDefault<GetAtNextIndex<$Items, $Index>, $Or>
+    ConfigManager.OrDefault<GetAtNextIndex<$Items, $Index>, $Or>
 
   // dprint-ignore
   export type DropUntilIndex<$Items extends readonly any[], $Index extends NumberLiteral> =

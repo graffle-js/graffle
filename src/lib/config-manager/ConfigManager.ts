@@ -1,6 +1,14 @@
-import type { PartialDeep, Simplify } from 'type-fest'
+import type { IsUnknown, PartialDeep, Simplify } from 'type-fest'
 import { isDate } from 'util/types'
-import { type ExcludeUndefined, type GuardedType, isAnyFunction, isNonNullObject, type OrDefault } from '../prelude.js'
+import { type ExcludeUndefined, type GuardedType, isAnyFunction, isNonNullObject } from '../prelude.js'
+
+// dprint-ignore
+export type OrDefault<$Value, $Default> =
+    // When no value has been passed in because the property is optional,
+    // then the inferred type is unknown.
+    IsUnknown<$Value> extends true ? $Default :
+    $Value extends undefined       ? $Default :
+                                     $Value
 
 // dprint-ignore
 export type MergeDefaults<$Defaults extends object, $Input extends undefined | object, $CustomScalars> =
