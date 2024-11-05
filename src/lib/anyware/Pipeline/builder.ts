@@ -75,7 +75,7 @@ type GetNextStepPrevious_<$Steps extends Step[]> = intersectArrayOfObjects<
 // dprint-ignore
 type GetNextStepParameterInput<$Pipeline extends Pipeline> =
   $Pipeline['steps'] extends [any, ...any[]]
-    ? Step.GetResult<GetLastValue<$Pipeline['steps']>>
+    ? Awaited<Step.GetResult<GetLastValue<$Pipeline['steps']>>>
     : $Pipeline['input']
 
 export interface Builder<$Context extends Context = Context> {
@@ -120,8 +120,6 @@ export interface Builder<$Context extends Context = Context> {
     >
   >
 }
-
-// export type Pipeline = Context
 
 export type Infer<$Builder extends Builder> = $Builder['context']
 

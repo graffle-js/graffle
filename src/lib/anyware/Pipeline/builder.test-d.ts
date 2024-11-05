@@ -37,6 +37,11 @@ test(`second step definition`, () => {
     }
   >()
 })
+test(`step input receives awaited return value from previous step `, () => {
+  const p1 = p0.step({ name: `a`, run: () => Promise.resolve(results.a) })
+  type s2Parameters = Parameters<Parameters<typeof p1.step>[0]['run']>[0]['input']
+  expectTypeOf<s2Parameters>().toEqualTypeOf<results['a']>()
+})
 
 test(`step definition with slots`, () => {
   const p1 = p0
