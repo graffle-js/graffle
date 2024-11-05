@@ -55,7 +55,7 @@ export namespace Interceptor {
         & (
           $Step['slots'] extends undefined
             ? {}
-            : { slots?: Partial<$Step['slots']> }
+            : { using?: Partial<$Step['slots']> }
         )
       >
     ): Promise<

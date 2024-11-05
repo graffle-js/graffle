@@ -48,9 +48,9 @@ describe(`interceptor constructor`, () => {
       .step({ name: `b`, run: () => results.b })
     type i = Interceptor.InferConstructor<typeof p['context']>
     type triggerAParameters = Parameters<Parameters<i>[0]['a']>
-    expectTypeOf<triggerAParameters>().toEqualTypeOf<[params?: { input?: initialInput; slots?: { m?: slots['m'] } }]>
+    expectTypeOf<triggerAParameters>().toEqualTypeOf<[params?: { input?: initialInput; using?: { m?: slots['m'] } }]>
     type triggerBParameters = Parameters<Parameters<i1>[0]['b']>
-    expectTypeOf<triggerBParameters>().toEqualTypeOf<[params?: { input?: results['a'] }]> // no "slots" key!
+    expectTypeOf<triggerBParameters>().toEqualTypeOf<[params?: { input?: results['a'] }]> // no "using" key!
   })
 
   // --- return ---
