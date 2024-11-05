@@ -23,7 +23,6 @@ export const Upload = createExtension({
         // @see https://stackoverflow.com/questions/3508338/what-is-the-boundary-in-multipart-form-data
         // @see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition
         return await pack({
-          // todo rename "using" to "with"
           using: {
             body: (input) => {
               const hasUploadScalarVariable = input.variables && isUsingUploadScalar(input.variables)
