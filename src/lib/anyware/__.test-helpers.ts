@@ -17,7 +17,7 @@ export type results = typeof results
 export const slots = {
   m: () => Promise.resolve(`m` as const),
   n: () => `n` as const,
-} as const
+}
 export type slots = typeof slots
 
 // type PrivateHookRunnerInput = {

@@ -1,11 +1,13 @@
 import { describe, expectTypeOf, test } from 'vitest'
-import { _ } from '../../prelude.js'
+import { _, type ExcludeUndefined } from '../../prelude.js'
 import { type Interceptor, Pipeline } from '../_.js'
 import type { initialInput } from '../__.test-helpers.js'
 import { results, slots } from '../__.test-helpers.js'
 import type { SomePublicStepEnvelope } from '../hook/public.js'
 
-const p1 = Pipeline.create<initialInput>()
+const p0 = Pipeline.create<initialInput>()
+
+const p1 = p0
   .step({ name: `a`, run: () => results.a })
   .step({ name: `b`, run: () => results.b })
   .step({ name: `c`, run: () => results.c })
@@ -27,20 +29,20 @@ describe(`interceptor constructor`, () => {
   // --- trigger ---
 
   test(`original input on self`, () => {
-    const p = Pipeline.create<initialInput>().step({ name: `a`, run: () => results.a })
+    const p = p0.step({ name: `a`, run: () => results.a })
     type i = Interceptor.InferConstructor<typeof p['context']>
     type triggerA = Parameters<i>[0]['a']
     expectTypeOf<triggerA['input']>().toMatchTypeOf<initialInput>()
   })
 
   test(`trigger arguments are optional`, () => {
-    const p = Pipeline.create<initialInput>().step({ name: `a`, run: () => results.a })
+    const p = p0.step({ name: `a`, run: () => results.a })
     type i = Interceptor.InferConstructor<typeof p['context']>
     expectTypeOf<[]>().toMatchTypeOf<Parameters<Parameters<i>[0]['a']>>()
   })
 
   test(`trigger accepts slots if definition has them, otherwise does NOT so much as accept the slots key`, () => {
-    const p = Pipeline.create<initialInput>().step({
+    const p = p0.step({
       name: `a`,
       slots: { m: slots.m },
       run: () => Promise.resolve(results.a),
@@ -48,9 +50,33 @@ describe(`interceptor constructor`, () => {
       .step({ name: `b`, run: () => results.b })
     type i = Interceptor.InferConstructor<typeof p['context']>
     type triggerAParameters = Parameters<Parameters<i>[0]['a']>
-    expectTypeOf<triggerAParameters>().toEqualTypeOf<[params?: { input?: initialInput; using?: { m?: slots['m'] } }]>
+    expectTypeOf<triggerAParameters>().toEqualTypeOf<
+      [params?: { input?: initialInput; using?: { m?: () => Promise<'m' | undefined> } }]
+    >
     type triggerBParameters = Parameters<Parameters<i1>[0]['b']>
     expectTypeOf<triggerBParameters>().toEqualTypeOf<[params?: { input?: results['a'] }]> // no "using" key!
+  })
+
+  // --- slots ---
+
+  test(`slots are optional`, () => {
+    const p = p0.step({ name: `a`, slots, run: () => results.a })
+    type triggerA = Parameters<Interceptor.InferConstructor<typeof p['context']>>[0]['a']
+    type triggerASlotInputs = ExcludeUndefined<ExcludeUndefined<Parameters<triggerA>[0]>['using']>
+    expectTypeOf<{ m?: any; n?: any }>().toMatchTypeOf<triggerASlotInputs>()
+  })
+
+  test(`slot function can return undefined (falls back to default slot)`, () => {
+    const p = p0.step({ name: `a`, slots, run: () => results.a })
+    type triggerA = Parameters<Interceptor.InferConstructor<typeof p['context']>>[0]['a']
+    type triggerASlotMOutput = ReturnType<
+      ExcludeUndefined<ExcludeUndefined<ExcludeUndefined<Parameters<triggerA>[0]>['using']>['m']>
+    >
+    expectTypeOf<Promise<`m` | undefined>>().toEqualTypeOf<triggerASlotMOutput>()
+    type triggerASlotNOutput = ReturnType<
+      ExcludeUndefined<ExcludeUndefined<ExcludeUndefined<Parameters<triggerA>[0]>['using']>['n']>
+    >
+    expectTypeOf<`n` | undefined>().toEqualTypeOf<triggerASlotNOutput>()
   })
 
   // --- return ---
@@ -60,7 +86,7 @@ describe(`interceptor constructor`, () => {
   })
 
   test(`return type awaits pipeline output`, () => {
-    const p = Pipeline.create<initialInput>().step({ name: `a`, run: () => Promise.resolve(results.a) })
+    const p = p0.step({ name: `a`, run: () => Promise.resolve(results.a) })
     type i = Interceptor.InferConstructor<typeof p['context']>
     expectTypeOf<ReturnType<i>>().toEqualTypeOf<Promise<results['a'] | SomePublicStepEnvelope>>()
   })

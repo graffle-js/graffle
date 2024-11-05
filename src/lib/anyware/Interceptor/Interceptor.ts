@@ -1,5 +1,5 @@
 import type { Simplify } from 'type-fest'
-import type { Deferred, MaybePromise } from '../../prelude.js'
+import type { Deferred, Func, MaybePromise } from '../../prelude.js'
 import type { SomePublicStepEnvelope } from '../hook/public.js'
 import type { Pipeline } from '../Pipeline/__.js'
 import type { Step } from '../Pipeline/builder.js'
@@ -55,7 +55,10 @@ export namespace Interceptor {
         & (
           $Step['slots'] extends undefined
             ? {}
-            : { using?: Partial<$Step['slots']> }
+            : { using?: {
+                [$SlotName in keyof $Step['slots']]?: Func.AppendAwaitedReturnType<$Step['slots'][$SlotName], undefined>
+              }
+            }
         )
       >
     ): Promise<

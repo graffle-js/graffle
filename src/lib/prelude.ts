@@ -692,3 +692,13 @@ export const isAbortError = (error: any): error is DOMException & { name: 'Abort
     // todo look for an open issue with JSDOM to link here, is this just artifact of JSDOM or is it a real issue that happens in browsers?
     || (error instanceof Error && error.message.startsWith(`AbortError:`))
 }
+
+export namespace Func {
+  // dprint-ignore
+  export type AppendAwaitedReturnType<$F, $ReturnTypeToAdd> = 
+    $F extends (...args: infer $Args) => infer $Output
+      ? $Output extends Promise<any>
+        ? (...args: $Args) => Promise<Awaited<$Output> | $ReturnTypeToAdd>
+        : (...args: $Args) => $Output | $ReturnTypeToAdd
+      : never
+}
