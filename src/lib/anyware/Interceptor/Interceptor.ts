@@ -59,12 +59,13 @@ export namespace Interceptor {
         )
       >
     ): Promise<
-      $NextSteps extends [infer $NextStep extends Step, ...infer $NextNextSteps extends Step[]]
-        ? {
-            [_ in $NextStep['name']]: InferStepTrigger<$NextStep, $NextNextSteps, $PipelineOutput>
-          }
-        : $PipelineOutput
-    >
+        $NextSteps extends [infer $NextStep extends Step, ...infer $NextNextSteps extends Step[]]
+          ? {
+              [_ in $NextStep['name']]: InferStepTrigger<$NextStep, $NextNextSteps, $PipelineOutput>
+            }
+          : $PipelineOutput
+      >
+    input: $Step['input']
   }
 }
 
