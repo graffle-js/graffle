@@ -3,11 +3,11 @@ import { Errors } from '../../errors/__.js'
 import { createDeferred } from '../../prelude.js'
 import { casesExhausted } from '../../prelude.js'
 import type { Private } from '../../private.js'
-import type { HookName } from '../hook/definition.js'
 import type { HookResultErrorExtension } from '../hook/private.js'
 import type { SomePublicStepEnvelope } from '../hook/public.js'
 import { createRetryingInterceptor, type Interceptor, type InterceptorInput } from '../Interceptor/Interceptor.js'
 import type { Pipeline } from '../Pipeline/__.js'
+import type { Step } from '../Step/__.js'
 import { getEntrypoint } from './getEntrypoint.js'
 import { runPipeline } from './runPipeline.js'
 
@@ -109,7 +109,7 @@ const toInternalInterceptor = (pipeline: Pipeline, config: Config, interceptor: 
         }
       }
 
-      const hooksBeforeEntrypoint: HookName[] = []
+      const hooksBeforeEntrypoint: Step.Name[] = []
       for (const hookName of pipeline.hookNamesOrderedBySequence) {
         if (hookName === entrypoint) break
         hooksBeforeEntrypoint.push(hookName)

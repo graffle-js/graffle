@@ -1,21 +1,21 @@
 import type { Errors } from '../../errors/__.js'
 import type { Deferred, MaybePromise, SomeFunction, TakeValuesBefore } from '../../prelude.js'
 import type { InterceptorGeneric } from '../Interceptor/Interceptor.js'
-import type { HookDefinitionMap, HookSequence } from './definition.js'
+// import type { HookDefinitionMap, HookSequence } from './definition.js'
 
-export type InferPrivateHookInput<
-  $HookSequence extends HookSequence,
-  $HookMap extends HookDefinitionMap<$HookSequence>,
-  $HookName extends string,
-> = HookPrivateInput<
-  $HookMap[$HookName]['input'],
-  $HookMap[$HookName]['slots'],
-  {
-    [$PreviousHookName in TakeValuesBefore<$HookName, $HookSequence>[number]]: {
-      input: $HookMap[$PreviousHookName]['input']
-    }
-  }
->
+// export type InferPrivateHookInput<
+//   $HookSequence extends HookSequence,
+//   $HookMap extends HookDefinitionMap<$HookSequence>,
+//   $HookName extends string,
+// > = HookPrivateInput<
+//   $HookMap[$HookName]['input'],
+//   $HookMap[$HookName]['slots'],
+//   {
+//     [$PreviousHookName in TakeValuesBefore<$HookName, $HookSequence>[number]]: {
+//       input: $HookMap[$PreviousHookName]['input']
+//     }
+//   }
+// >
 
 export type PrivateHook<$Slots extends Slots, $Input extends HookPrivateInput, $Return> = {
   slots: $Slots

@@ -1,7 +1,7 @@
 import { analyzeFunction } from '../../analyze-function.js'
 import { ContextualError } from '../../errors/ContextualError.js'
-import type { HookName } from '../hook/definition.js'
 import type { NonRetryingInterceptorInput } from '../Interceptor/Interceptor.js'
+import type { Step } from '../Step/__.js'
 
 export class ErrorAnywareInterceptorEntrypoint extends ContextualError<
   'ErrorGraffleInterceptorEntryHook',
@@ -26,7 +26,7 @@ export type InterceptorEntryHookIssue = typeof InterceptorEntryHookIssue[keyof t
 export const getEntrypoint = (
   hookNames: readonly string[],
   interceptor: NonRetryingInterceptorInput,
-): ErrorAnywareInterceptorEntrypoint | HookName => {
+): ErrorAnywareInterceptorEntrypoint | Step.Name => {
   const x = analyzeFunction(interceptor)
   if (x.parameters.length > 1) {
     return new ErrorAnywareInterceptorEntrypoint({ issue: InterceptorEntryHookIssue.multipleParameters })

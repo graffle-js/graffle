@@ -1,8 +1,10 @@
 import type { ConfigManager } from '../../config-manager/__.js'
 import { type GetLastValue, type Tuple } from '../../prelude.js'
+import type { HookResultError } from '../hook/private.js'
 import type { Pipeline } from './__.js'
 
-export { type HookDefinitionMap } from '../hook/definition.js'
+// export { type HookDefinitionMap } from '../hook/definition.js'
+
 export interface Step<
   $Name extends string = string,
 > {
@@ -13,7 +15,7 @@ export interface Step<
   run: (params: any) => any
 }
 
-export interface Context {
+export interface Context extends Options {
   input: object
   steps: Step[]
   stepsIndex: Record<string, Step>
@@ -24,8 +26,8 @@ export interface ContextEmpty extends Context {
   output: object
   steps: []
   stepsIndex: {}
-  passthroughErrorWith: undefined
 }
+
 export namespace Step {
   export type GetAwaitedResult<$Step extends Step> = Awaited<GetResult<$Step>>
   export type GetResult<$Step extends Step> = ReturnType<$Step['run']>
@@ -128,14 +130,33 @@ export interface Builder<$Context extends Context = Context> {
 
 export type Infer<$Builder extends Builder> = $Builder['context']
 
+interface Options {
+  /**
+   * If a hook results in a thrown error but is an instance of one of these classes then return it as-is
+   * rather than wrapping it in a ContextualError.
+   *
+   * This can be useful when there are known kinds of errors such as Abort Errors from AbortController
+   * which are actually a signaling mechanism.
+   */
+  passthroughErrorInstanceOf?: Function[]
+  /**
+   * If a hook results in a thrown error but returns true from this function then return the error as-is
+   * rather than wrapping it in a ContextualError.
+   *
+   * This can be useful when there are known kinds of errors such as Abort Errors from AbortController
+   * which are actually a signaling mechanism.
+   */
+  passthroughErrorWith?: (signal: HookResultError) => boolean
+}
 /**
  * TODO
  */
-export const create = <$Input extends object>(): Builder<{
+export const create = <$Input extends object>(options?: Options): Builder<{
   input: $Input
   steps: []
   stepsIndex: {}
   output: object
 }> => {
+  options
   return undefined as any
 }

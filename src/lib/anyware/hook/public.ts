@@ -1,7 +1,6 @@
 import type { FindValueAfter, IsLastValue } from '../../prelude.js'
 import type { InterceptorOptions } from '../Interceptor/Interceptor.js'
 import type { Pipeline } from '../Pipeline/__.js'
-import type { HookDefinition, HookDefinitionMap, HookSequence } from './definition.js'
 
 export type InferPublicHooks<
   $Pipeline extends Pipeline,
