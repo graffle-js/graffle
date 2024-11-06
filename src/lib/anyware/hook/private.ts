@@ -1,5 +1,5 @@
 import type { Errors } from '../../errors/__.js'
-import type { Deferred, MaybePromise, SomeFunction, TakeValuesBefore } from '../../prelude.js'
+import type { Deferred, MaybePromise, SomeFunction } from '../../prelude.js'
 import type { InterceptorGeneric } from '../Interceptor/Interceptor.js'
 // import type { HookDefinitionMap, HookSequence } from './definition.js'
 

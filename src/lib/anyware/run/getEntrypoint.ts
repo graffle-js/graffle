@@ -2,6 +2,7 @@ import { analyzeFunction } from '../../analyze-function.js'
 import { ContextualError } from '../../errors/ContextualError.js'
 import type { NonRetryingInterceptorInput } from '../Interceptor/Interceptor.js'
 import type { Step } from '../Step/__.js'
+import type { StepsIndex } from './OptimizedPipeline.js'
 
 export class ErrorAnywareInterceptorEntrypoint extends ContextualError<
   'ErrorGraffleInterceptorEntryHook',
@@ -23,10 +24,10 @@ export const InterceptorEntryHookIssue = {
 
 export type InterceptorEntryHookIssue = typeof InterceptorEntryHookIssue[keyof typeof InterceptorEntryHookIssue]
 
-export const getEntrypoint = (
-  hookNames: readonly string[],
+export const getEntryStep = (
+  stepsIndex: StepsIndex,
   interceptor: NonRetryingInterceptorInput,
-): ErrorAnywareInterceptorEntrypoint | Step.Name => {
+): ErrorAnywareInterceptorEntrypoint | Step => {
   const x = analyzeFunction(interceptor)
   if (x.parameters.length > 1) {
     return new ErrorAnywareInterceptorEntrypoint({ issue: InterceptorEntryHookIssue.multipleParameters })
@@ -41,16 +42,23 @@ export const getEntrypoint = (
       if (p.names.length === 0) {
         return new ErrorAnywareInterceptorEntrypoint({ issue: InterceptorEntryHookIssue.destructuredWithoutEntryHook })
       }
-      const hooks = p.names.filter(_ => hookNames.includes(_ as any))
+      const steps = p.names.filter(_ => stepsIndex.has(_))
 
-      if (hooks.length > 1) {
+      if (steps.length > 1) {
         return new ErrorAnywareInterceptorEntrypoint({ issue: InterceptorEntryHookIssue.multipleDestructuredHookNames })
       }
-      const hook = hooks[0]
-      if (!hook) {
+      const stepName = steps[0]
+
+      if (!stepName) {
+        // todo: destructured with invalid names
+        return new ErrorAnywareInterceptorEntrypoint({ issue: InterceptorEntryHookIssue.multipleDestructuredHookNames })
+      }
+
+      const step = stepsIndex.get(stepName)
+      if (!step) {
         return new ErrorAnywareInterceptorEntrypoint({ issue: InterceptorEntryHookIssue.destructuredWithoutEntryHook })
       } else {
-        return hook
+        return step
       }
     }
   }

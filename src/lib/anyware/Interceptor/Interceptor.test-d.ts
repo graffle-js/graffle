@@ -3,7 +3,7 @@ import { _, type ExcludeUndefined } from '../../prelude.js'
 import { type Interceptor, Pipeline } from '../_.js'
 import type { initialInput } from '../__.test-helpers.js'
 import { results, slots } from '../__.test-helpers.js'
-import type { SomePublicStepEnvelope } from '../hook/public.js'
+import type { SomeStepTriggerEnvelope } from '../hook/public.js'
 import type { Builder } from '../Pipeline/builder.js'
 
 const p0 = Pipeline.create<initialInput>()
@@ -77,12 +77,12 @@ describe(`interceptor constructor`, () => {
   //
   test(`can return pipeline output or a step envelope`, () => {
     const p = p0.step({ name: `a`, run: () => results.a })
-    expectTypeOf<GetReturnTypeFromBuilder<typeof p>>().toEqualTypeOf<Promise<results['a'] | SomePublicStepEnvelope>>()
+    expectTypeOf<GetReturnTypeFromBuilder<typeof p>>().toEqualTypeOf<Promise<results['a'] | SomeStepTriggerEnvelope>>()
   })
 
   test(`return type awaits pipeline output`, () => {
     const p = p0.step({ name: `a`, run: () => Promise.resolve(results.a) })
-    expectTypeOf<GetReturnTypeFromBuilder<typeof p>>().toEqualTypeOf<Promise<results['a'] | SomePublicStepEnvelope>>()
+    expectTypeOf<GetReturnTypeFromBuilder<typeof p>>().toEqualTypeOf<Promise<results['a'] | SomeStepTriggerEnvelope>>()
   })
 })
 

@@ -3,49 +3,56 @@ import { ContextualError } from '../../errors/ContextualError.js'
 import { casesExhausted, createDeferred, debug } from '../../prelude.js'
 import type { HookResult, HookResultErrorAsync } from '../hook/private.js'
 import type { InterceptorGeneric } from '../Interceptor/Interceptor.js'
-import type { Pipeline } from '../Pipeline/__.js'
+import type { Step } from '../Step/__.js'
+import type { OptimizedPipeline } from './OptimizedPipeline.js'
 import { createResultEnvelope } from './resultEnvelope.js'
 import type { ResultEnvelop } from './resultEnvelope.js'
-import { runHook } from './runHook.js'
+import { runStep } from './runStep.js'
 
 export const defaultFunctionName = `anonymous`
 
-interface Input {
-  pipeline: Pipeline
-  hookNamesOrderedBySequence: readonly string[]
-  originalInputOrResult: unknown
-  interceptorsStack: readonly InterceptorGeneric[]
-  asyncErrorDeferred: HookResultErrorAsync
-  previous: object
-}
-
 export const runPipeline = async (
-  { pipeline, hookNamesOrderedBySequence, originalInputOrResult, interceptorsStack, asyncErrorDeferred, previous }:
-    Input,
+  {
+    pipeline,
+    stepsToProcess,
+    originalInputOrResult,
+    interceptorsStack,
+    asyncErrorDeferred,
+    previousStepsCompleted,
+  }: {
+    pipeline: OptimizedPipeline
+    stepsToProcess: readonly Step[]
+    originalInputOrResult: unknown
+    interceptorsStack: readonly InterceptorGeneric[]
+    asyncErrorDeferred: HookResultErrorAsync
+    previousStepsCompleted: object
+  },
 ): Promise<ResultEnvelop | Errors.ContextualError> => {
-  const [hookName, ...hookNamesRest] = hookNamesOrderedBySequence
+  const [stepToProcess, ...stepsRestToProcess] = stepsToProcess
 
-  if (!hookName) {
+  if (!stepToProcess) {
     debug(`pipeline: ending`)
     const result = await runPipelineEnd({ interceptorsStack, result: originalInputOrResult })
     debug(`pipeline: returning`)
     return createResultEnvelope(result)
   }
 
-  debug(`hook ${hookName}: start`)
+  debug(`hook ${stepToProcess.name}: start`)
 
   const done = createDeferred<HookResult>({ strict: false })
 
-  void runHook({
+  // We do not await the step runner here.
+  // Instead we work with a deferred passed to it.
+  void runStep({
     pipeline,
-    name: hookName,
+    name: stepToProcess.name,
     done: done.resolve,
     inputOriginalOrFromExtension: originalInputOrResult as object,
-    previous,
+    previousStepsCompleted,
     interceptorsStack,
     asyncErrorDeferred,
     customSlots: {},
-    nextExtensionsStack: [],
+    nextInterceptorsStack: [],
   })
 
   const signal = await Promise.race(
@@ -55,18 +62,18 @@ export const runPipeline = async (
   switch (signal.type) {
     case `completed`: {
       const { result, effectiveInput, nextExtensionsStack } = signal
-      const nextPrevious = {
-        ...previous,
-        [hookName]: {
+      const nextPreviousStepsCompleted = {
+        ...previousStepsCompleted,
+        [stepToProcess.name]: {
           input: effectiveInput,
         },
       }
       return await runPipeline({
         pipeline,
-        hookNamesOrderedBySequence: hookNamesRest,
+        stepsToProcess: stepsRestToProcess,
         originalInputOrResult: result,
         interceptorsStack: nextExtensionsStack,
-        previous: nextPrevious,
+        previousStepsCompleted: nextPreviousStepsCompleted,
         asyncErrorDeferred,
       })
     }
@@ -79,16 +86,12 @@ export const runPipeline = async (
       debug(`signal: error`)
       signal
 
-      if (pipeline.passthroughErrorWith) {
-        if (pipeline.passthroughErrorWith(signal)) {
-          return signal.error as any // todo change return type to be unknown since this function could permit anything?
-        }
+      if (pipeline.config.passthroughErrorWith?.(signal)) {
+        return signal.error as any // todo change return type to be unknown since this function could permit anything?
       }
 
-      if (pipeline.passthroughErrorInstanceOf) {
-        if (pipeline.passthroughErrorInstanceOf.some(_ => signal.error instanceof _)) {
-          return signal.error as any // todo change return type to include object... given this instanceof permits that?
-        }
+      if (pipeline.config.passthroughErrorInstanceOf.some(_ => signal.error instanceof _)) {
+        return signal.error as any // todo change return type to include object... given this instanceof permits that?
       }
 
       const wasAsync = asyncErrorDeferred.isResolved()

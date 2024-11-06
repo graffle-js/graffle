@@ -1,28 +1,28 @@
-import type { FindValueAfter, IsLastValue } from '../../prelude.js'
 import type { InterceptorOptions } from '../Interceptor/Interceptor.js'
 import type { Pipeline } from '../Pipeline/__.js'
+import type { Step } from '../Step/__.js'
 
-export type InferPublicHooks<
-  $Pipeline extends Pipeline,
-  // $HookSequence extends HookSequence,
-  // $HookMap extends Record<$HookSequence[number], HookDefinition> = Record<$HookSequence[number], HookDefinition>,
-  // $Result = unknown,
-  $Options extends InterceptorOptions = InterceptorOptions,
-> = {
-  [$Index in keyof $Pipeline['steps'][number]]: InferPublicHook<$Pipeline['steps'][$Index], $Options>
-}
+// export type InferPublicHooks<
+//   $Pipeline extends Pipeline,
+//   // $HookSequence extends HookSequence,
+//   // $HookMap extends Record<$HookSequence[number], HookDefinition> = Record<$HookSequence[number], HookDefinition>,
+//   // $Result = unknown,
+//   $Options extends InterceptorOptions = InterceptorOptions,
+// > = {
+//   [$Index in keyof $Pipeline['steps'][number]]: InferPublicHook<$Pipeline['steps'][$Index], $Options>
+// }
 
-type InferPublicHook<
-  $Step extends Pipeline.Step,
-  // $HookSequence extends HookSequence,
-  // $HookMap extends HookDefinitionMap<$HookSequence> = HookDefinitionMap<$HookSequence>,
-  // $Result = unknown,
-  // $Name extends $HookSequence[number] = $HookSequence[number],
-  $Options extends InterceptorOptions = InterceptorOptions,
-> = PublicStep<
-  ((...args: Parameters<$Step['run']>) => InferPublicHookReturn<$Step, $Options>),
-  $HookMap[$Name]['input']
->
+// type InferPublicHook<
+//   $Step extends Step,
+//   // $HookSequence extends HookSequence,
+//   // $HookMap extends HookDefinitionMap<$HookSequence> = HookDefinitionMap<$HookSequence>,
+//   // $Result = unknown,
+//   // $Name extends $HookSequence[number] = $HookSequence[number],
+//   $Options extends InterceptorOptions = InterceptorOptions,
+// > = PublicStep<
+//   ((...args: Parameters<$Step['run']>) => InferPublicHookReturn<$Step, $Options>),
+//   $HookMap[$Name]['input']
+// >
 
 // & (<$$Input extends $HookMap[$Name]['input']>(
 //   input?: // InferHookPrivateInput<$HookSequence,$HookMap,$Name>
@@ -35,44 +35,44 @@ type InferPublicHook<
 //   input: $HookMap[$Name]['input']
 // }
 
-// dprint-ignore
-type InferPublicHookReturn<
-  $Step extends Pipeline.Step,
-  // $HookSequence extends HookSequence,
-  // $HookMap extends HookDefinitionMap<$HookSequence> = HookDefinitionMap<$HookSequence>,
-  // $Result = unknown,
-  // $Name extends $HookSequence[number] = $HookSequence[number],
-  $Options extends InterceptorOptions = InterceptorOptions,
-> = Promise<
-  | ($Options['retrying'] extends true ? Error : never)
-  | (IsLastValue<$Name, $HookSequence> extends true
-      ? $Result
-      : {
-          [$NameNext in FindValueAfter<$Name, $HookSequence>]: InferPublicHook<
-            $HookSequence,
-            $HookMap,
-            $Result,
-            $NameNext
-          >
-        }
-    )
->
+// // dprint-ignore
+// type InferPublicHookReturn<
+//   $Step extends Step,
+//   // $HookSequence extends HookSequence,
+//   // $HookMap extends HookDefinitionMap<$HookSequence> = HookDefinitionMap<$HookSequence>,
+//   // $Result = unknown,
+//   // $Name extends $HookSequence[number] = $HookSequence[number],
+//   $Options extends InterceptorOptions = InterceptorOptions,
+// > = Promise<
+//   | ($Options['retrying'] extends true ? Error : never)
+//   | (IsLastValue<$Name, $HookSequence> extends true
+//       ? $Result
+//       : {
+//           [$NameNext in FindValueAfter<$Name, $HookSequence>]: InferPublicHook<
+//             $HookSequence,
+//             $HookMap,
+//             $Result,
+//             $NameNext
+//           >
+//         }
+//     )
+// >
 
-type SlotInputify<$Slots extends Record<string, (...args: any) => any>> = {
-  [K in keyof $Slots]?: SlotInput<$Slots[K]>
-}
+// type SlotInputify<$Slots extends Record<string, (...args: any) => any>> = {
+//   [K in keyof $Slots]?: SlotInput<$Slots[K]>
+// }
 
-type SlotInput<F extends (...args: any) => any> = (...args: Parameters<F>) => ReturnType<F> | undefined
+// type SlotInput<F extends (...args: any) => any> = (...args: Parameters<F>) => ReturnType<F> | undefined
 
-const hookSymbol = Symbol(`hook`)
+const stepTriggerSymbol = Symbol(`hook`)
 
-type HookSymbol = typeof hookSymbol
+type StepTriggerSymbol = typeof stepTriggerSymbol
 
-export type SomePublicStepEnvelope = {
+export type SomeStepTriggerEnvelope = {
   [name: string]: PublicStep
 }
 
-export const createPublicHook = <$OriginalInput, $Fn extends PublicHookFn>(
+export const createStepTrigger = <$OriginalInput, $Fn extends PublicHookFn>(
   originalInput: $OriginalInput,
   fn: $Fn,
 ): PublicStep<$Fn> => {
@@ -89,7 +89,7 @@ export type PublicStep<
 > =
   & $Fn
   & {
-    [hookSymbol]: HookSymbol
+    [stepTriggerSymbol]: StepTriggerSymbol
     // todo the result is unknown, but if we build a EndEnvelope, then we can work with this type more logically and put it here.
     // E.g. adding `| unknown` would destroy the knowledge of hook envelope case
     // todo this is not strictly true, it could also be the final result

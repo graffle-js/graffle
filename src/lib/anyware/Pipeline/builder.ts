@@ -1,36 +1,21 @@
 import type { ConfigManager } from '../../config-manager/__.js'
 import { type GetLastValue, type Tuple } from '../../prelude.js'
 import type { HookResultError } from '../hook/private.js'
+import type { Step } from '../Step/__.js'
 import type { Pipeline } from './__.js'
 
 // export { type HookDefinitionMap } from '../hook/definition.js'
 
-export interface Step<
-  $Name extends string = string,
-> {
-  name: $Name
-  slots: object | undefined
-  input: any
-  output: any
-  run: (params: any) => any
-}
-
-export interface Context extends Options {
+export interface Context {
   input: object
   steps: Step[]
-  stepsIndex: Record<string, Step>
+  config: Config
 }
 
 export interface ContextEmpty extends Context {
   input: object
-  output: object
   steps: []
-  stepsIndex: {}
-}
-
-export namespace Step {
-  export type GetAwaitedResult<$Step extends Step> = Awaited<GetResult<$Step>>
-  export type GetResult<$Step extends Step> = ReturnType<$Step['run']>
+  config: Config
 }
 
 /**
@@ -132,6 +117,10 @@ export type Infer<$Builder extends Builder> = $Builder['context']
 
 interface Options {
   /**
+   * @defaultValue `required`
+   */
+  entrypointSelectionMode?: 'optional' | 'required' | 'off'
+  /**
    * If a hook results in a thrown error but is an instance of one of these classes then return it as-is
    * rather than wrapping it in a ContextualError.
    *
@@ -146,8 +135,11 @@ interface Options {
    * This can be useful when there are known kinds of errors such as Abort Errors from AbortController
    * which are actually a signaling mechanism.
    */
-  passthroughErrorWith?: (signal: HookResultError) => boolean
+  passthroughErrorWith?: null | ((signal: HookResultError) => boolean)
 }
+
+type Config = Required<Options>
+
 /**
  * TODO
  */
@@ -156,7 +148,16 @@ export const create = <$Input extends object>(options?: Options): Builder<{
   steps: []
   stepsIndex: {}
   output: object
+  config: Config
 }> => {
-  options
+  const config = resolveOptions(options)
   return undefined as any
+}
+
+const resolveOptions = (options?: Options): Config => {
+  return {
+    passthroughErrorInstanceOf: options?.passthroughErrorInstanceOf ?? [],
+    passthroughErrorWith: options?.passthroughErrorWith ?? null,
+    entrypointSelectionMode: options?.entrypointSelectionMode ?? `required`,
+  }
 }

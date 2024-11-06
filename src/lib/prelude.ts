@@ -334,6 +334,41 @@ export namespace Tuple {
                                                         []
 
   export type IndexPlusOne<$Index extends NumberLiteral> = PlusOne<$Index>
+
+  export type GetLastValue<T extends readonly [any, ...any[]]> = T[MinusOne<T['length']>]
+
+  export type IsLastValue<value, list extends readonly [any, ...any[]]> = value extends GetLastValue<list> ? true
+    : false
+
+  // dprint-ignore
+  export type findIndexForValue<value, list extends AnyReadOnlyListNonEmpty> =
+    findIndexForValue_<value, list, 0>
+
+  // dprint-ignore
+  type findIndexForValue_<value, list extends AnyReadOnlyListNonEmpty, i extends number> =
+    value extends list[i]
+      ? i
+      : findIndexForValue_<value, list, PlusOne<i>>
+
+  export type FindValueAfter<value, list extends AnyReadOnlyListNonEmpty> =
+    list[PlusOne<findIndexForValue<value, list>>]
+
+  // dprint-ignore
+  export type TakeValuesBefore<$Value, $List extends AnyReadOnly> =
+    $List extends readonly [infer $ListFirst, ...infer $ListRest]
+      ? $Value extends $ListFirst
+        ? []
+        : [$ListFirst, ...TakeValuesBefore<$Value, $ListRest>]
+      : []
+
+  export type FindValueAfterOr<value, list extends readonly [any, ...any[]], orValue> = ConfigManager.OrDefault<
+    list[PlusOne<findIndexForValue<value, list>>],
+    orValue
+  >
+
+  type AnyReadOnly = readonly any[]
+
+  type AnyReadOnlyListNonEmpty = readonly [any, ...any[]]
 }
 
 type NumberLiteral = number | `${number}`
@@ -365,40 +400,6 @@ export type MinusOne<n extends NumberLiteral> =
   : n extends 2 ? 1
   : n extends 1 ? 0
   : never
-
-// dprint-ignore
-export type findIndexForValue<value, list extends AnyReadOnlyListNonEmpty> =
-  findIndexForValue_<value, list, 0>
-
-// dprint-ignore
-type findIndexForValue_<value, list extends AnyReadOnlyListNonEmpty, i extends number> =
-  value extends list[i]
-    ? i
-    : findIndexForValue_<value, list, PlusOne<i>>
-
-export type FindValueAfter<value, list extends AnyReadOnlyListNonEmpty> = list[PlusOne<findIndexForValue<value, list>>]
-
-// dprint-ignore
-export type TakeValuesBefore<$Value, $List extends AnyReadOnlyList> =
-  $List extends readonly [infer $ListFirst, ...infer $ListRest]
-    ? $Value extends $ListFirst
-      ? []
-      : [$ListFirst, ...TakeValuesBefore<$Value, $ListRest>]
-    : []
-
-type AnyReadOnlyListNonEmpty = readonly [any, ...any[]]
-type AnyReadOnlyList = readonly [...any[]]
-
-export type ValueOr<value, orValue> = value extends undefined ? orValue : value
-
-export type FindValueAfterOr<value, list extends readonly [any, ...any[]], orValue> = ValueOr<
-  list[PlusOne<findIndexForValue<value, list>>],
-  orValue
->
-
-export type GetLastValue<T extends readonly [any, ...any[]]> = T[MinusOne<T['length']>]
-
-export type IsLastValue<value, list extends readonly [any, ...any[]]> = value extends GetLastValue<list> ? true : false
 
 export type Include<T, U> = T extends U ? T : never
 
