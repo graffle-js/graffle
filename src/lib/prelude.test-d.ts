@@ -28,4 +28,7 @@ assertEqual<Tuple.GetAtNextIndex<[1, 2, 3], 2>, undefined>()
 
 assertEqual<Tuple.GetNextIndexOr<[1, 2, 3], 0, false>, 2>()
 assertEqual<Tuple.GetNextIndexOr<[1, 2, 3], 2, false>, false>()
+
+assertEqual<Tuple.ToIndexByObjectKey<[{ name: 'a' }, { name: 'b' }], 'name'>, { a: { name: 'a' }, b: { name: 'b' } }>()
+assertEqual<Tuple.ToIndexByObjectKey<[], 'name'>, {}>()
 }

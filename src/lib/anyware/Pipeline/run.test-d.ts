@@ -1,20 +1,22 @@
 import { expectTypeOf, test } from 'vitest'
+import type { ContextualAggregateError } from '../../errors/ContextualAggregateError.js'
+import type { initialInput } from '../__.test-helpers.js'
 import { Pipeline } from './__.js'
 
-test(`returns input if no steps`, () => {
-  const p = Pipeline.create<{ x: 1 }>()
-  const r = Pipeline.run(p)
-  expectTypeOf(r).toEqualTypeOf<{ x: 1 }>()
+test(`returns input if no steps`, async () => {
+  const p = Pipeline.create<initialInput>()
+  const r = await Pipeline.run(p)
+  expectTypeOf(r).toEqualTypeOf<initialInput | ContextualAggregateError>()
 })
 
-test(`returns last step output if steps`, () => {
-  const p = Pipeline.create<{ x: 1 }>().step({ name: `a`, run: () => 2 as const })
-  const r = Pipeline.run(p)
-  expectTypeOf(r).toEqualTypeOf<2>()
+test(`returns last step output if steps`, async () => {
+  const p = Pipeline.create<initialInput>().step({ name: `a`, run: () => 2 as const })
+  const r = await Pipeline.run(p)
+  expectTypeOf(r).toEqualTypeOf<2 | ContextualAggregateError>()
 })
 
 test(`can return a promise`, async () => {
-  const p = Pipeline.create<{ x: 1 }>().step({ name: `a`, run: () => Promise.resolve(2 as const) })
+  const p = Pipeline.create<initialInput>().step({ name: `a`, run: () => Promise.resolve(2 as const) })
   const r = await Pipeline.run(p)
-  expectTypeOf(r).toEqualTypeOf<2>()
+  expectTypeOf(r).toEqualTypeOf<2 | ContextualAggregateError>()
 })

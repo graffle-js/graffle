@@ -6,7 +6,7 @@ import { Pipeline } from './__.js'
 const p0 = Pipeline.create<initialInput>()
 
 test(`initial context`, () => {
-  expectTypeOf(p0.context).toEqualTypeOf<{ input: initialInput; output: object; steps: [] }>()
+  expectTypeOf(p0.context).toEqualTypeOf<{ input: initialInput; output: object; steps: []; stepsIndex: {} }>()
 })
 
 test(`first step definition`, () => {

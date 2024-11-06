@@ -301,6 +301,25 @@ export const debugSub = (...args: any[]) => (...subArgs: any[]) => {
 
 export namespace Tuple {
   // dprint-ignore
+  export type IntersectItems<$Items extends readonly any[]> =
+    $Items extends [infer $First, ...infer $Rest extends any[]]
+      ? $First & IntersectItems<$Rest>
+      : {}
+
+  // dprint-ignore
+  export type ToIndexByObjectKey<$Items extends readonly object[], $Key extends keyof $Items[number]> =
+    Simplify<
+      IntersectItems<{
+        [$Index in keyof $Items]:
+          $Key extends keyof $Items[$Index]
+          ? {
+              [_ in $Items[$Index][$Key] & string]: $Items[$Index]
+            }
+          : never
+      }>
+    >
+
+  // dprint-ignore
   export type GetAtNextIndex<$Items extends readonly any[], $Index extends NumberLiteral> =
     $Items[PlusOne<$Index>]
 
@@ -481,10 +500,6 @@ export const shallowMergeDefaults = <$Defaults extends object, $Input extends ob
 
   return merged as any
 }
-
-export type intersectArrayOfObjects<T extends [...any[]]> = T extends [infer $First, ...infer $Rest extends any[]]
-  ? $First & intersectArrayOfObjects<$Rest>
-  : {}
 
 export const identityProxy = new Proxy({}, {
   get: () => (value: unknown) => value,

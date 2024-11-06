@@ -1,5 +1,5 @@
 import type { ConfigManager } from '../../config-manager/__.js'
-import { type GetLastValue, type intersectArrayOfObjects } from '../../prelude.js'
+import { type GetLastValue, type Tuple } from '../../prelude.js'
 import type { Pipeline } from './__.js'
 
 export { type HookDefinitionMap } from '../hook/definition.js'
@@ -16,14 +16,16 @@ export interface Step<
 export interface Context {
   input: object
   steps: Step[]
+  stepsIndex: Record<string, Step>
 }
 
 export interface ContextEmpty extends Context {
   input: object
   output: object
   steps: []
+  stepsIndex: {}
+  passthroughErrorWith: undefined
 }
-
 export namespace Step {
   export type GetAwaitedResult<$Step extends Step> = Awaited<GetResult<$Step>>
   export type GetResult<$Step extends Step> = ReturnType<$Step['run']>
@@ -52,7 +54,7 @@ export type GetNextStepParameterPrevious<$Pipeline extends Pipeline> =
     ? GetNextStepPrevious_<$Pipeline['steps']>
     : undefined
 
-type GetNextStepPrevious_<$Steps extends Step[]> = intersectArrayOfObjects<
+type GetNextStepPrevious_<$Steps extends Step[]> = Tuple.IntersectItems<
   {
     [$Index in keyof $Steps]: {
       [$StepName in $Steps[$Index]['name']]: {
@@ -110,13 +112,16 @@ export interface Builder<$Context extends Context = Context> {
     ConfigManager.SetOneKey<
       $Context,
       'steps',
-      [...$Context['steps'], {
-        name: $Name
-        run: $Run
-        input: $Params['input']
-        output: ReturnType<$Run>
-        slots: $Slots
-      }]
+      [
+        ...$Context['steps'],
+        {
+          name: $Name
+          run: $Run
+          input: $Params['input']
+          output: ReturnType<$Run>
+          slots: $Slots
+        },
+      ]
     >
   >
 }
@@ -126,6 +131,11 @@ export type Infer<$Builder extends Builder> = $Builder['context']
 /**
  * TODO
  */
-export const create = <$Input extends object>(): Builder<{ input: $Input; steps: []; output: object }> => {
+export const create = <$Input extends object>(): Builder<{
+  input: $Input
+  steps: []
+  stepsIndex: {}
+  output: object
+}> => {
   return undefined as any
 }

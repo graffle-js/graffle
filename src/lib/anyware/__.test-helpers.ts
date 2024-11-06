@@ -1,6 +1,7 @@
+import { keyBy } from 'es-toolkit'
 import { beforeEach, vi } from 'vitest'
+import type { Tuple } from '../prelude.js'
 import { Pipeline } from './_.js'
-import type { Anyware } from './__.js'
 import type { InterceptorInput } from './Interceptor/Interceptor.js'
 import type { Options } from './run/runner.js'
 
@@ -60,10 +61,16 @@ export const createPipeline = () => {
     })
 }
 
+type TestBuilder = ReturnType<typeof createPipeline>
+
 // @ts-expect-error
-export let builder: Anyware.Builder<$Core> = null
+export let builder: TestBuilder = null
+
+// @ts-expect-error
+export let stepsIndex: Tuple.ToIndexByObjectKey<TestBuilder['context']['steps'], 'name'> = null
 
 beforeEach(() => {
+  stepsIndex = keyBy(builder.context.steps, _ => _.name) as any
   builder = createPipeline()
 })
 

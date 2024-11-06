@@ -14,7 +14,7 @@ import type {
 } from '../extension/extension.js'
 import type { Builder } from '../lib/builder/__.js'
 import type { ConfigManager } from '../lib/config-manager/__.js'
-import { type intersectArrayOfObjects, type ToParametersExact } from '../lib/prelude.js'
+import { type ToParametersExact, type Tuple } from '../lib/prelude.js'
 import type { GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
 import { Schema } from '../types/Schema/__.js'
 import type { SchemaDrivenDataMap } from '../types/SchemaDrivenDataMap/__.js'
@@ -101,7 +101,7 @@ type ConstructorParameters<
   $Extensions extends [...ExtensionConstructor[]],
 > =
   & InputBase<GlobalRegistry.GetOrGeneric<$Name>>
-  & intersectArrayOfObjects<GetParametersContributedByExtensions<$Extensions>>
+  & Tuple.IntersectItems<GetParametersContributedByExtensions<$Extensions>>
 
 // dprint-ignore
 type GetParametersContributedByExtensions<Extensions extends [...ExtensionConstructor[]]> = {
