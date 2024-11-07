@@ -5,13 +5,13 @@ import type { RequestPipeline } from '../../src/requestPipeline/__.js'
 
 interface SpyData {
   encode: {
-    input: RequestPipeline.Hooks.HookDefEncode['input'] | null
+    input: RequestPipeline.Steps.HookDefEncode['input'] | null
   }
   pack: {
-    input: RequestPipeline.Hooks.HookDefPack['input'] | null
+    input: RequestPipeline.Steps.HookDefPack['input'] | null
   }
   exchange: {
-    input: RequestPipeline.Hooks.HookDefExchange<Config>['input'] | null
+    input: RequestPipeline.Steps.HookDefExchange<Config>['input'] | null
   }
 }
 

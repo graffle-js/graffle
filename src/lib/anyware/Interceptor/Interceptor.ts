@@ -1,7 +1,8 @@
 import type { Simplify } from 'type-fest'
-import type { Deferred, Func, MaybePromise } from '../../prelude.js'
+import type { Deferred, MaybePromise } from '../../prelude.js'
 import type { Pipeline } from '../Pipeline/__.js'
 import type { Step } from '../Step.js'
+import type { StepTrigger } from '../StepTrigger.js'
 import type { StepTriggerEnvelope } from '../StepTriggerEnvelope.js'
 
 export type InterceptorOptions = {
@@ -40,36 +41,10 @@ export namespace Interceptor {
   > =
     $Steps extends [infer $NextStep extends Step, ...infer $NextNextSteps extends Step[]]
       ? & {
-            [_ in $NextStep['name']]: InferStepTrigger<$NextStep, $NextNextSteps, $PipelineOutput>
+            [_ in $NextStep['name']]: StepTrigger.Infer<$NextStep, $NextNextSteps, $PipelineOutput>
           }
         & InferConstructorKeywordArguments_<$NextNextSteps, $PipelineOutput>
       : {}
-
-  // dprint-ignore
-  interface InferStepTrigger<$Step extends Step, $NextSteps extends Step[], $PipelineOutput> {
-    (
-      params?: Simplify<
-        & {
-            input?: $Step['input']
-          }
-        & (
-          $Step['slots'] extends undefined
-            ? {}
-            : { using?: {
-                [$SlotName in keyof $Step['slots']]?: Func.AppendAwaitedReturnType<$Step['slots'][$SlotName], undefined>
-              }
-            }
-        )
-      >
-    ): Promise<
-        $NextSteps extends [infer $NextStep extends Step, ...infer $NextNextSteps extends Step[]]
-          ? {
-              [_ in $NextStep['name']]: InferStepTrigger<$NextStep, $NextNextSteps, $PipelineOutput>
-            }
-          : $PipelineOutput
-      >
-    input: $Step['input']
-  }
 }
 
 export type InterceptorGeneric = NonRetryingInterceptor | RetryingInterceptor

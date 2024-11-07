@@ -77,7 +77,7 @@ export interface Builder<$Context extends Context = Context> {
       slots: $Slots
       previous: GetNextStepParameterPrevious<$Context>
     }) => any,
-    $Slots extends undefined | Record<string, any> = undefined,
+    $Slots extends undefined | Step.Slots = undefined,
     $Params extends {
       input: GetNextStepParameterInput<$Context>
       slots: $Slots
@@ -88,7 +88,7 @@ export interface Builder<$Context extends Context = Context> {
       previous: GetNextStepParameterPrevious<$Context>
     },
   >(
-    stepInput: {
+    parameters: {
       name: $Name
       slots?: $Slots
       run: $Run

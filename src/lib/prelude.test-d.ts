@@ -1,5 +1,5 @@
 import { assertEqual } from './assert-equal.js'
-import { type GetLastValue, type OmitKeysWithPrefix, type ToParameters, type Tuple } from './prelude.js'
+import { type OmitKeysWithPrefix, type ToParameters, type Tuple } from './prelude.js'
 
 // dprint-ignore
 {
@@ -13,11 +13,11 @@ assertEqual<ToParameters<{}>                                , []>()
 assertEqual<ToParameters<{ a:1; b?:2 }>                     , [{ a:1; b?:2 }]>()
 assertEqual<ToParameters<{ a?:1; b?:2 }>                    , [{ a?:1; b?:2 }]|[]>()
 
-assertEqual<GetLastValue<[1, 2, 3]>, 3>()
+// Tuple.*
+
+assertEqual<Tuple.GetLastValue<[1, 2, 3]>, 3>()
 // @ts-expect-error
 GetLastValue<[]>
-
-// Tuple.*
 
 assertEqual<Tuple.DropUntilIndex<[1, 2, 3], 0>, [1, 2, 3]>()
 assertEqual<Tuple.DropUntilIndex<[1, 2, 3], 2>, [3]>()

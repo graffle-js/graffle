@@ -4,6 +4,7 @@ import { type Context } from '../../client/context.js'
 import { handleOutput } from '../../client/handleOutput.js'
 import type { Config } from '../../client/Settings/Config.js'
 import type { TypeFunction } from '../../entrypoints/utilities-for-generated.js'
+import { Anyware } from '../../lib/anyware/__.js'
 import { Builder } from '../../lib/builder/__.js'
 import type { Grafaid } from '../../lib/grafaid/__.js'
 import { getOperationDefinition } from '../../lib/grafaid/document.js'
@@ -135,9 +136,9 @@ const executeDocument = async (
     url,
     schema,
     request,
-  } as RequestPipeline.Hooks.HookDefEncode<Config>['input']
+  } as RequestPipeline.Steps.HookDefEncode['input']
 
-  const result = await RequestPipeline.RequestPipeline.run({
+  const result = await Anyware.Pipeline.run(RequestPipeline, {
     initialInput,
     // retryingExtension: state.retry as any,
     interceptors: state.extensions.filter(_ => _.onRequest !== undefined).map(_ => _.onRequest!) as any,

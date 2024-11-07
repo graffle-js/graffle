@@ -26,8 +26,8 @@ type PrivateHookRunnerInput = {
   previous: object
 }
 
-export const createPipeline = () => {
-  return Pipeline.create()
+export const createPipeline = (options?: Pipeline.Options) => {
+  return Pipeline.create(options)
     .step({
       name: `a`,
       slots: {
@@ -63,24 +63,28 @@ export const createPipeline = () => {
 type TestBuilder = ReturnType<typeof createPipeline>
 
 // @ts-expect-error
-export let builder: TestBuilder = null
-
-// @ts-expect-error
 export let stepsIndex: Tuple.ToIndexByObjectKey<TestBuilder['context']['steps'], 'name'> = null
 
 beforeEach(() => {
+  const builder = createPipeline()
   stepsIndex = keyBy(builder.context.steps, _ => _.name) as any
-  builder = createPipeline()
 })
 
-export const runWithOptions = () => async (...interceptors: InterceptorInput[]) => {
-  return await Pipeline.run(builder, {
-    initialInput,
-    // @ts-expect-error fixme
-    interceptors,
-  })
+export const runWithOptions = (options?: Pipeline.Options) => {
+  const builder = createPipeline(options)
+  const run = async (...interceptors: InterceptorInput[]) => {
+    return await Pipeline.run(builder, {
+      initialInput,
+      // @ts-expect-error fixme
+      interceptors,
+    })
+  }
+  return {
+    builder,
+    run,
+  }
 }
 
-export const run = async (...extensions: InterceptorInput[]) => runWithOptions()(...extensions)
+export const run = async (...extensions: InterceptorInput[]) => runWithOptions().run(...extensions)
 
 export const oops = new Error(`oops`)

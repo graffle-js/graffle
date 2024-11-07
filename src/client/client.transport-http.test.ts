@@ -5,20 +5,22 @@ import { Graffle as Pokemon } from '../../tests/_/schemas/pokemon/graffle/__.js'
 import { schema as schemaPokemon } from '../../tests/_/schemas/pokemon/schema.js'
 import { Graffle } from '../entrypoints/main.js'
 import { ACCEPT_REC, CONTENT_TYPE_REC } from '../lib/grafaid/http/http.js'
-import type { CoreExchangeGetRequest, CoreExchangePostRequest } from '../requestPipeline/types.js'
-import { Transport } from '../types/Transport.js'
+import type { RequestPipeline } from '../requestPipeline/__.js'
+import { Transport, type TransportHttp } from '../types/Transport.js'
 
 const schema = new URL(`https://foo.io/api/graphql`)
 
 test(`anyware hooks are typed to http transport`, () => {
   Graffle.create({ schema }).anyware(async ({ encode }) => {
-    expectTypeOf(encode.input.transportType).toEqualTypeOf(Transport.http)
+    expectTypeOf(encode.input.transportType).toEqualTypeOf<TransportHttp>()
     const { pack } = await encode()
     expectTypeOf(pack.input.transportType).toEqualTypeOf(Transport.http)
     const { exchange } = await pack()
     expectTypeOf(exchange.input.transportType).toEqualTypeOf(Transport.http)
     // todo we can statically track the method mode like we do the transport mode
-    expectTypeOf(exchange.input.request).toEqualTypeOf<CoreExchangePostRequest | CoreExchangeGetRequest>()
+    expectTypeOf(exchange.input.request).toEqualTypeOf<
+      RequestPipeline.Steps.CoreExchangePostRequest | RequestPipeline.Steps.CoreExchangeGetRequest
+    >()
     const { unpack } = await exchange()
     expectTypeOf(unpack.input.transportType).toEqualTypeOf(Transport.http)
     expectTypeOf(unpack.input.response).toEqualTypeOf<Response>()

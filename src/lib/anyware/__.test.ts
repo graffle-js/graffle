@@ -6,6 +6,7 @@ import type { ContextualError } from '../errors/ContextualError.js'
 import { Pipeline } from './_.js'
 import { initialInput, oops, run, runWithOptions, stepsIndex } from './__.test-helpers.js'
 import { createRetryingInterceptor } from './Interceptor/Interceptor.js'
+import { Step } from './Step.js'
 
 describe(`no extensions`, () => {
   test(`passthrough to implementation`, async () => {
@@ -95,7 +96,7 @@ describe(`one extension`, () => {
 })
 
 describe(`two extensions`, () => {
-  const run = runWithOptions({ entrypointSelectionMode: `optional` })
+  const { run } = runWithOptions({ entrypointSelectionMode: `optional` })
   test(`first can short-circuit`, async () => {
     const ex1 = () => 1
     const ex2 = vi.fn().mockImplementation(() => 2)
@@ -244,64 +245,49 @@ describe(`errors`, () => {
       }
     `)
   })
-  // describe.skip('certain errors can be configured to be re-thrown without wrapping error', () => {
-  //   class SpecialError1 extends Error {}
-  //   class SpecialError2 extends Error {}
-  //   // const a = createHook({
-  //   //   slots: {},
-  //   //   run: ({ input }: { slots: object; input: { throws: Error } }) => {
-  //   //     if (input.throws) throw input.throws
-  //   //   },
-  //   // })
+  describe.skip('certain errors can be configured to be re-thrown without wrapping error', () => {
+    class SpecialError1 extends Error {}
+    class SpecialError2 extends Error {}
+    const stepA = Step.createWithInput<{ throws: Error }>()({
+      name: 'a',
+      run: ({ input }) => {
+        if (input.throws) throw input.throws
+      },
+    })
 
-  //   test('via passthroughErrorInstanceOf (one)', async () => {
-  //     const builder = Pipeline.create<{ throws: Error }>({
-  //       passthroughErrorInstanceOf: [SpecialError1],
-  //     }).step({
-  //       name: 'a',
-  //       run: ({ input }) => {
-  //         if (input.throws) throw input.throws
-  //       },
-  //     })
+    test('via passthroughErrorInstanceOf (one)', async () => {
+      const builder = Pipeline.create<{ throws: Error }>({
+        passthroughErrorInstanceOf: [SpecialError1],
+      }).step(stepA)
 
-  //     // dprint-ignore
-  //     expect(Pipeline.run(builder, { initialInput: { throws: new Error('oops') }, interceptors: [] })).resolves.toBeInstanceOf(Errors.ContextualError)
-  //     // dprint-ignore
-  //     expect(Pipeline.run(builder, { initialInput: { throws: new SpecialError1('oops') }, interceptors: [] })).resolves.toBeInstanceOf(SpecialError1)
-  //   })
-  //   test('via passthroughErrorInstanceOf (multiple)', async () => {
-  //     const builder = Pipeline.create<{ throws: Error }>({
-  //       passthroughErrorInstanceOf: [SpecialError1, SpecialError2],
-  //     }).step({
-  //       name: 'a',
-  //       run: ({ input }) => {
-  //         if (input.throws) throw input.throws
-  //       },
-  //     })
-  //     // dprint-ignore
-  //     expect(Pipeline.run(builder, { initialInput: { throws: new Error('oops') }, interceptors: [] })).resolves.toBeInstanceOf(Errors.ContextualError)
-  //     // dprint-ignore
-  //     expect(Pipeline.run(builder, { initialInput: { throws: new SpecialError2('oops') }, interceptors: [] })).resolves.toBeInstanceOf(SpecialError2)
-  //   })
-  //   test('via passthroughWith', async () => {
-  //     const builder = Pipeline.create<{ throws: Error }>({
-  //       // todo type-safe hook name according to values passed to constructor
-  //       // todo type-tests on signal { hookName, source, error }
-  //       passthroughErrorWith: (signal) => {
-  //         return signal.error instanceof SpecialError1
-  //       },
-  //     }).step({
-  //       name: 'a',
-  //       run: ({ input }) => {
-  //         if (input.throws) throw input.throws
-  //       },
-  //     })
-  //     // dprint-ignore
-  //     expect(Pipeline.run(builder, { initialInput: { throws: new Error('oops') }, interceptors: [] })).resolves.toBeInstanceOf(Errors.ContextualError)
-  //     // dprint-ignore
-  //     expect(Pipeline.run(builder, { initialInput: { throws: new SpecialError1('oops') }, interceptors: [] })).resolves.toBeInstanceOf(SpecialError1)
-  //   })
-  // })
+      // dprint-ignore
+      expect(Pipeline.run(builder, { initialInput: { throws: new Error('oops') }, interceptors: [] })).resolves.toBeInstanceOf(Errors.ContextualError)
+      // dprint-ignore
+      expect(Pipeline.run(builder, { initialInput: { throws: new SpecialError1('oops') }, interceptors: [] })).resolves.toBeInstanceOf(SpecialError1)
+    })
+    test('via passthroughErrorInstanceOf (multiple)', async () => {
+      const builder = Pipeline.create<{ throws: Error }>({
+        passthroughErrorInstanceOf: [SpecialError1, SpecialError2],
+      }).step(stepA)
+      // dprint-ignore
+      expect(Pipeline.run(builder, { initialInput: { throws: new Error('oops') }, interceptors: [] })).resolves.toBeInstanceOf(Errors.ContextualError)
+      // dprint-ignore
+      expect(Pipeline.run(builder, { initialInput: { throws: new SpecialError2('oops') }, interceptors: [] })).resolves.toBeInstanceOf(SpecialError2)
+    })
+    test('via passthroughWith', async () => {
+      const builder = Pipeline.create<{ throws: Error }>({
+        // todo type-safe hook name according to values passed to constructor
+        // todo type-tests on signal { hookName, source, error }
+        passthroughErrorWith: (signal) => {
+          return signal.error instanceof SpecialError1
+        },
+      }).step(stepA)
+      // dprint-ignore
+      expect(Pipeline.run(builder, { initialInput: { throws: new Error('oops') }, interceptors: [] })).resolves.toBeInstanceOf(Errors.ContextualError)
+      // dprint-ignore
+      expect(Pipeline.run(builder, { initialInput: { throws: new SpecialError1('oops') }, interceptors: [] })).resolves.toBeInstanceOf(SpecialError1)
+    })
+  })
 })
 
 describe('retrying extension', () => {

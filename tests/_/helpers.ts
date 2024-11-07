@@ -116,12 +116,10 @@ export const test = testBase.extend<Fixtures>({
   },
   kitchenSink: async ({ fetch: _ }, use) => {
     const kitchenSink = KitchenSink.create({ schema: kitchenSinkSchema })
-    // @ts-expect-error fixme
     await use(kitchenSink)
   },
   kitchenSinkHttp: async ({ fetch: _ }, use) => {
     const kitchenSink = KitchenSink.create({ schema: `https://foo.io/api/graphql` })
-    // @ts-expect-error fixme
     await use(kitchenSink)
   },
   kitchenSinkData: async ({}, use) => { // eslint-disable-line
