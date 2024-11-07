@@ -3,7 +3,6 @@ import { beforeEach, vi } from 'vitest'
 import type { Tuple } from '../prelude.js'
 import { Pipeline } from './_.js'
 import type { InterceptorInput } from './Interceptor/Interceptor.js'
-import type { Options } from './run/runner.js'
 
 export const initialInput = { x: 1 } as const
 export type initialInput = typeof initialInput
@@ -74,15 +73,14 @@ beforeEach(() => {
   builder = createPipeline()
 })
 
-export const runWithOptions = (options: Options = {}) => async (...interceptors: InterceptorInput[]) => {
+export const runWithOptions = () => async (...interceptors: InterceptorInput[]) => {
   return await Pipeline.run(builder, {
     initialInput,
     // @ts-expect-error fixme
     interceptors,
-    options,
   })
 }
 
-export const run = async (...extensions: InterceptorInput[]) => runWithOptions({})(...extensions)
+export const run = async (...extensions: InterceptorInput[]) => runWithOptions()(...extensions)
 
 export const oops = new Error(`oops`)

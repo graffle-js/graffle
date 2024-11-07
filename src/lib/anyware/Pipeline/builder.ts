@@ -1,10 +1,8 @@
 import type { ConfigManager } from '../../config-manager/__.js'
-import { type GetLastValue, type Tuple } from '../../prelude.js'
+import { type Tuple } from '../../prelude.js'
 import type { HookResultError } from '../hook/private.js'
 import type { Step } from '../Step/__.js'
 import type { Pipeline } from './__.js'
-
-// export { type HookDefinitionMap } from '../hook/definition.js'
 
 export interface Context {
   input: object
@@ -32,7 +30,7 @@ export type GetAwaitedResult<$Pipeline extends Pipeline> = Awaited<GetResult<$Pi
 // dprint-ignore
 export type GetResult<$Pipeline extends Pipeline> =
   $Pipeline['steps'] extends [any, ...any[]]
-    ? Step.GetResult<GetLastValue<$Pipeline['steps']>>
+    ? Step.GetResult<Tuple.GetLastValue<$Pipeline['steps']>>
     : $Pipeline['input']
 
 // dprint-ignore
@@ -64,7 +62,7 @@ type GetNextStepPrevious_<$Steps extends Step[]> = Tuple.IntersectItems<
 // dprint-ignore
 type GetNextStepParameterInput<$Pipeline extends Pipeline> =
   $Pipeline['steps'] extends [any, ...any[]]
-    ? Awaited<Step.GetResult<GetLastValue<$Pipeline['steps']>>>
+    ? Awaited<Step.GetResult<Tuple.GetLastValue<$Pipeline['steps']>>>
     : $Pipeline['input']
 
 export interface Builder<$Context extends Context = Context> {
@@ -115,7 +113,7 @@ export interface Builder<$Context extends Context = Context> {
 
 export type Infer<$Builder extends Builder> = $Builder['context']
 
-interface Options {
+export interface Options {
   /**
    * @defaultValue `required`
    */
@@ -138,7 +136,7 @@ interface Options {
   passthroughErrorWith?: null | ((signal: HookResultError) => boolean)
 }
 
-type Config = Required<Options>
+export type Config = Required<Options>
 
 /**
  * TODO
@@ -146,11 +144,9 @@ type Config = Required<Options>
 export const create = <$Input extends object>(options?: Options): Builder<{
   input: $Input
   steps: []
-  stepsIndex: {}
-  output: object
   config: Config
 }> => {
-  const config = resolveOptions(options)
+  const _config = resolveOptions(options)
   return undefined as any
 }
 

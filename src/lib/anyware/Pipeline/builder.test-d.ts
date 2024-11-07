@@ -2,11 +2,12 @@ import { expectTypeOf, test } from 'vitest'
 import type { initialInput } from '../__.test-helpers.js'
 import { results, slots } from '../__.test-helpers.js'
 import { Pipeline } from './__.js'
+import type { Config } from './builder.js'
 
 const p0 = Pipeline.create<initialInput>()
 
 test(`initial context`, () => {
-  expectTypeOf(p0.context).toEqualTypeOf<{ input: initialInput; output: object; steps: []; stepsIndex: {} }>()
+  expectTypeOf(p0.context).toEqualTypeOf<{ input: initialInput; steps: []; config: Config }>()
 })
 
 test(`first step definition`, () => {
@@ -32,8 +33,8 @@ test(`second step definition`, () => {
   expectTypeOf(p1.context).toMatchTypeOf<
     {
       input: initialInput
-      output: object
       steps: [{ name: 'a'; slots: undefined; run: any }]
+      config: Config
     }
   >()
 })
@@ -60,7 +61,7 @@ test(`step definition with slots`, () => {
   expectTypeOf(p1.context).toMatchTypeOf<
     {
       input: initialInput
-      output: object
+      config: Config
       steps: [{
         name: 'a'
         slots: slots
