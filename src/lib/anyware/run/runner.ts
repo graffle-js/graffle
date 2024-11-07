@@ -2,11 +2,11 @@ import { partitionAndAggregateErrors } from '../../errors/_.js'
 import { Errors } from '../../errors/__.js'
 import { createDeferred } from '../../prelude.js'
 import { casesExhausted } from '../../prelude.js'
-import type { HookResultErrorExtension } from '../hook/private.js'
-import type { SomeStepTriggerEnvelope } from '../hook/public.js'
 import { createRetryingInterceptor, type Interceptor, type InterceptorInput } from '../Interceptor/Interceptor.js'
 import type { Pipeline } from '../Pipeline/__.js'
-import type { Step } from '../Step/__.js'
+import type { Step } from '../Step.js'
+import type { StepResultErrorExtension } from '../StepResult.js'
+import type { StepTriggerEnvelope } from '../StepTriggerEnvelope.js'
 import { getEntryStep } from './getEntrypoint.js'
 import type { OptimizedPipeline } from './OptimizedPipeline.js'
 import { optimizePipeline } from './OptimizedPipeline.js'
@@ -29,7 +29,7 @@ export const createRunner =
     const [initialHookStack, error] = partitionAndAggregateErrors(initialHookStackAndErrors)
     if (error) return error
 
-    const asyncErrorDeferred = createDeferred<HookResultErrorExtension>({ strict: false })
+    const asyncErrorDeferred = createDeferred<StepResultErrorExtension>({ strict: false })
     const result = await runPipeline({
       pipeline: optimizedPipeline,
       stepsToProcess: pipeline.steps,
@@ -45,7 +45,7 @@ export const createRunner =
   }
 
 const toInternalInterceptor = (pipeline: OptimizedPipeline, interceptor: InterceptorInput) => {
-  const currentChunk = createDeferred<SomeStepTriggerEnvelope>()
+  const currentChunk = createDeferred<StepTriggerEnvelope>()
   const body = createDeferred()
   const extensionRun = typeof interceptor === `function` ? interceptor : interceptor.run
   const retrying = typeof interceptor === `function` ? false : interceptor.retrying
@@ -113,7 +113,7 @@ const toInternalInterceptor = (pipeline: OptimizedPipeline, interceptor: Interce
   }
 }
 
-const createPassthrough = (hookName: string) => async (hookEnvelope: SomeStepTriggerEnvelope) => {
+const createPassthrough = (hookName: string) => async (hookEnvelope: StepTriggerEnvelope) => {
   const hook = hookEnvelope[hookName]
   if (!hook) {
     throw new Errors.ContextualError(`Hook not found in hook envelope`, { hookName })

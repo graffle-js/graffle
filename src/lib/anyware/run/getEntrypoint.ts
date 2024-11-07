@@ -1,7 +1,7 @@
 import { analyzeFunction } from '../../analyze-function.js'
 import { ContextualError } from '../../errors/ContextualError.js'
 import type { NonRetryingInterceptorInput } from '../Interceptor/Interceptor.js'
-import type { Step } from '../Step/__.js'
+import type { Step } from '../Step.js'
 import type { StepsIndex } from './OptimizedPipeline.js'
 
 export class ErrorAnywareInterceptorEntrypoint extends ContextualError<

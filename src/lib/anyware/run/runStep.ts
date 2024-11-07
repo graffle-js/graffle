@@ -1,16 +1,18 @@
 import { Errors } from '../../errors/__.js'
 import { casesExhausted, createDeferred, debugSub, errorFromMaybeError } from '../../prelude.js'
-import type { HookResult, HookResultErrorAsync, Slots } from '../hook/private.js'
-import { createStepTrigger, type SomeStepTriggerEnvelope } from '../hook/public.js'
 import type { InterceptorGeneric } from '../Interceptor/Interceptor.js'
+import type { Step } from '../Step.js'
+import type { StepResult, StepResultErrorAsync } from '../StepResult.js'
+import { StepTrigger } from '../StepTrigger.js'
+import type { StepTriggerEnvelope } from '../StepTriggerEnvelope.js'
 import type { OptimizedPipeline } from './OptimizedPipeline.js'
 import type { ResultEnvelop } from './resultEnvelope.js'
 
-type HookDoneResolver = (input: HookResult) => void
+type HookDoneResolver = (input: StepResult) => void
 
 const createExecutableChunk = <$Extension extends InterceptorGeneric>(extension: $Extension) => ({
   ...extension,
-  currentChunk: createDeferred<SomeStepTriggerEnvelope | ($Extension['retrying'] extends true ? Error : never)>(),
+  currentChunk: createDeferred<StepTriggerEnvelope | ($Extension['retrying'] extends true ? Error : never)>(),
 })
 
 export const runStep = async (
@@ -33,7 +35,7 @@ export const runStep = async (
      * Information about previous hook executions, like what their input was.
      */
     previousStepsCompleted: object
-    customSlots: Slots
+    customSlots: Step.Slots
     /**
      * The extensions that are at this hook awaiting.
      */
@@ -46,7 +48,7 @@ export const runStep = async (
      * that short-circuit the pipeline or enter passthrough mode).
      */
     nextInterceptorsStack: readonly InterceptorGeneric[]
-    asyncErrorDeferred: HookResultErrorAsync
+    asyncErrorDeferred: StepResultErrorAsync
   },
 ) => {
   const debugHook = debugSub(`step ${name}:`)
@@ -79,7 +81,7 @@ export const runStep = async (
 
     debugExtension(`start`)
     let hookFailed = false
-    const hook = createStepTrigger(inputOriginalOrFromExtension, (extensionInput) => {
+    const trigger = StepTrigger.create(inputOriginalOrFromExtension, (extensionInput) => {
       debugExtension(`extension calls this hook`, extensionInput)
 
       const inputResolved = extensionInput?.input ?? inputOriginalOrFromExtension
@@ -135,14 +137,14 @@ export const runStep = async (
             customSlots: customSlotsResolved,
           })
           return extensionRetry.currentChunk.promise.then(async (envelope) => {
-            const envelop_ = envelope as SomeStepTriggerEnvelope // todo ... better way?
+            const envelop_ = envelope as StepTriggerEnvelope // todo ... better way?
             const hook = envelop_[name] // as (params:{input:object;previous:object;using:Slots}) =>
             if (!hook) throw new Error(`Hook not found in envelope: ${name}`)
             // todo use inputResolved ?
             const result = await hook({
               ...extensionInput,
               input: extensionInput?.input ?? inputOriginalOrFromExtension,
-            }) as Promise<SomeStepTriggerEnvelope | Error | ResultEnvelop>
+            }) as Promise<StepTriggerEnvelope | Error | ResultEnvelop>
             return result
           })
         }
@@ -175,9 +177,8 @@ export const runStep = async (
     // The extension is resumed. It is responsible for calling the next hook.
 
     debugExtension(`advance with envelope`)
-    // @ts-expect-error fixme
-    const envelope: SomeHookEnvelope = {
-      [name]: hook,
+    const envelope: StepTriggerEnvelope = {
+      [name]: trigger,
     }
     extension.currentChunk.resolve(envelope)
 
@@ -256,7 +257,7 @@ export const runStep = async (
     let result
     try {
       const slotsResolved = {
-        ...implementation.slots as Slots, // todo is this cast needed, can we Slots type the property?
+        ...implementation.slots,
         ...customSlots,
       }
       result = await implementation.run({

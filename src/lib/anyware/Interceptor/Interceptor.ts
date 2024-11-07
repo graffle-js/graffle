@@ -1,8 +1,8 @@
 import type { Simplify } from 'type-fest'
 import type { Deferred, Func, MaybePromise } from '../../prelude.js'
-import type { SomeStepTriggerEnvelope } from '../hook/public.js'
 import type { Pipeline } from '../Pipeline/__.js'
-import type { Step } from '../Pipeline/builder.js'
+import type { Step } from '../Step.js'
+import type { StepTriggerEnvelope } from '../StepTriggerEnvelope.js'
 
 export type InterceptorOptions = {
   retrying: boolean
@@ -25,7 +25,7 @@ export namespace Interceptor {
       steps: Simplify<InferConstructorKeywordArguments<$Pipeline>>,
     ): Promise<
       | Pipeline.GetAwaitedResult<$Pipeline>
-      | SomeStepTriggerEnvelope
+      | StepTriggerEnvelope
     >
   }
 
@@ -79,7 +79,7 @@ export type NonRetryingInterceptor = {
   name: string
   entrypoint: string
   body: Deferred<unknown>
-  currentChunk: Deferred<SomeStepTriggerEnvelope /* | unknown (result) */>
+  currentChunk: Deferred<StepTriggerEnvelope /* | unknown (result) */>
 }
 
 export type RetryingInterceptor = {
@@ -87,7 +87,7 @@ export type RetryingInterceptor = {
   name: string
   entrypoint: string
   body: Deferred<unknown>
-  currentChunk: Deferred<SomeStepTriggerEnvelope | Error /* | unknown (result) */>
+  currentChunk: Deferred<StepTriggerEnvelope | Error /* | unknown (result) */>
 }
 
 export const createRetryingInterceptor = (extension: NonRetryingInterceptorInput): RetryingInterceptorInput => {

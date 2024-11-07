@@ -1,9 +1,9 @@
 import type { Errors } from '../../errors/__.js'
 import { ContextualError } from '../../errors/ContextualError.js'
 import { casesExhausted, createDeferred, debug } from '../../prelude.js'
-import type { HookResult, HookResultErrorAsync } from '../hook/private.js'
 import type { InterceptorGeneric } from '../Interceptor/Interceptor.js'
-import type { Step } from '../Step/__.js'
+import type { Step } from '../Step.js'
+import type { StepResult, StepResultErrorAsync } from '../StepResult.js'
 import type { OptimizedPipeline } from './OptimizedPipeline.js'
 import { createResultEnvelope } from './resultEnvelope.js'
 import type { ResultEnvelop } from './resultEnvelope.js'
@@ -24,7 +24,7 @@ export const runPipeline = async (
     stepsToProcess: readonly Step[]
     originalInputOrResult: unknown
     interceptorsStack: readonly InterceptorGeneric[]
-    asyncErrorDeferred: HookResultErrorAsync
+    asyncErrorDeferred: StepResultErrorAsync
     previousStepsCompleted: object
   },
 ): Promise<ResultEnvelop | Errors.ContextualError> => {
@@ -39,7 +39,7 @@ export const runPipeline = async (
 
   debug(`hook ${stepToProcess.name}: start`)
 
-  const done = createDeferred<HookResult>({ strict: false })
+  const done = createDeferred<StepResult>({ strict: false })
 
   // We do not await the step runner here.
   // Instead we work with a deferred passed to it.

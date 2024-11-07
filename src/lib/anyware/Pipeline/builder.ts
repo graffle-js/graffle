@@ -1,7 +1,7 @@
 import type { ConfigManager } from '../../config-manager/__.js'
 import { type Tuple } from '../../prelude.js'
-import type { HookResultError } from '../hook/private.js'
-import type { Step } from '../Step/__.js'
+import type { Step } from '../Step.js'
+import type { StepResultError } from '../StepResult.js'
 import type { Pipeline } from './__.js'
 
 export interface Context {
@@ -133,7 +133,7 @@ export interface Options {
    * This can be useful when there are known kinds of errors such as Abort Errors from AbortController
    * which are actually a signaling mechanism.
    */
-  passthroughErrorWith?: null | ((signal: HookResultError) => boolean)
+  passthroughErrorWith?: null | ((signal: StepResultError) => boolean)
 }
 
 export type Config = Required<Options>

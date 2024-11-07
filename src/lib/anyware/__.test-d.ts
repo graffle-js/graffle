@@ -5,7 +5,7 @@ import { assertEqual } from '../assert-equal.js'
 import { ContextualError } from '../errors/ContextualError.js'
 import { type MaybePromise } from '../prelude.js'
 import { Anyware } from './__.js'
-import type { PublicStep } from './hook/public.js'
+import type { StepTrigger } from './StepTrigger.js'
 
 // describe('without slots', () => {
 //   test('run', () => {

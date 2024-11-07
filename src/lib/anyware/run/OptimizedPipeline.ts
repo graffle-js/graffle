@@ -1,5 +1,5 @@
 import type { Pipeline } from '../Pipeline/__.js'
-import type { Step } from '../Step/__.js'
+import type { Step } from '../Step.js'
 
 export type StepsIndex = Map<Step.Name, Step>
 
