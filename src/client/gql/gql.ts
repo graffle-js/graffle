@@ -7,7 +7,7 @@ import {
   joinTemplateStringArrayAndArgs,
   type TemplateStringsArguments,
 } from '../../lib/template-string.js'
-import { RequestPipeline } from '../../requestPipeline/__.js' // todo
+import { RequestPipelineDefinition } from '../../requestPipeline/__.js' // todo
 import { type Context } from '../context.js'
 import { handleOutput } from '../handleOutput.js'
 import type { Config } from '../Settings/Config.js'

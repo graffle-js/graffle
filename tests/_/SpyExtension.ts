@@ -1,7 +1,7 @@
 import { beforeEach } from 'vitest'
 import { createExtension } from '../../src/entrypoints/main.js'
 import type { Config } from '../../src/entrypoints/utilities-for-generated.js'
-import type { RequestPipeline } from '../../src/requestPipeline/__.js'
+import type { RequestPipelineDefinition } from '../../src/requestPipeline/__.js'
 
 interface SpyData {
   encode: {

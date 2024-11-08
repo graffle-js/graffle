@@ -11,13 +11,6 @@ export interface Step<
 }
 
 export namespace Step {
-  export type Definition = {
-    name: string
-    slots?: Step.Slots
-    input?: Input
-    output?: any
-  }
-
   /**
    * todo
    */

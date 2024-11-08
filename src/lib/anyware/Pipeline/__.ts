@@ -1,5 +1,12 @@
-import type { Context } from './builder.js'
+import type { Step } from '../Step.js'
+import type { Config } from './Config.js'
 
 export * as Pipeline from './_.js'
 
-export type Pipeline = Context
+export interface Pipeline {
+  input: object
+  // todo
+  // output: object
+  steps: Step[]
+  config: Config
+}
