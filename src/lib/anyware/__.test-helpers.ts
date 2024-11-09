@@ -3,6 +3,7 @@ import { beforeEach, vi } from 'vitest'
 import type { Tuple } from '../prelude.js'
 import { Pipeline } from './_.js'
 import type { InterceptorInput } from './Interceptor/Interceptor.js'
+import type { Options } from './Pipeline/Config.js'
 
 export const initialInput = { x: 1 } as const
 export type initialInput = typeof initialInput
@@ -26,7 +27,7 @@ type PrivateHookRunnerInput = {
   previous: object
 }
 
-export const createPipeline = (options?: Pipeline.Options) => {
+export const createPipeline = (options?: Options) => {
   return Pipeline.create(options)
     .step({
       name: `a`,
@@ -58,6 +59,7 @@ export const createPipeline = (options?: Pipeline.Options) => {
         return { value: input.value + `+` + slots.append(`b`) + extra }
       }),
     })
+    .done()
 }
 
 type TestBuilder = ReturnType<typeof createPipeline>
@@ -66,11 +68,11 @@ type TestBuilder = ReturnType<typeof createPipeline>
 export let stepsIndex: Tuple.ToIndexByObjectKey<TestBuilder['context']['steps'], 'name'> = null
 
 beforeEach(() => {
-  const builder = createPipeline()
-  stepsIndex = keyBy(builder.context.steps, _ => _.name) as any
+  const pipeline = createPipeline()
+  stepsIndex = keyBy(pipeline.steps, _ => _.name) as any
 })
 
-export const runWithOptions = (options?: Pipeline.Options) => {
+export const runWithOptions = (options?: Options) => {
   const builder = createPipeline(options)
   const run = async (...interceptors: InterceptorInput[]) => {
     return await Pipeline.run(builder, {

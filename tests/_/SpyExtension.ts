@@ -1,17 +1,17 @@
 import { beforeEach } from 'vitest'
 import { createExtension } from '../../src/entrypoints/main.js'
 import type { Config } from '../../src/entrypoints/utilities-for-generated.js'
-import type { RequestPipelineDefinition } from '../../src/requestPipeline/__.js'
+import type { requestPipeline } from '../../src/requestPipeline/__.js'
 
 interface SpyData {
   encode: {
-    input: RequestPipeline.Steps.HookDefEncode['input'] | null
+    input: requestPipeline.Steps.HookDefEncode['input'] | null
   }
   pack: {
-    input: RequestPipeline.Steps.HookDefPack['input'] | null
+    input: requestPipeline.Steps.HookDefPack['input'] | null
   }
   exchange: {
-    input: RequestPipeline.Steps.HookDefExchange<Config>['input'] | null
+    input: requestPipeline.Steps.HookDefExchange<Config>['input'] | null
   }
 }
 

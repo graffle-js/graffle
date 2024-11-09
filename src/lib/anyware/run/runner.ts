@@ -16,9 +16,10 @@ export const createRunner =
   <$Pipeline extends Pipeline>(pipeline: $Pipeline) =>
   async ({ initialInput, interceptors, retryingInterceptor }: {
     initialInput: $Pipeline['input']
+    // todo Pipeline needs to become sub-type of PipelineSpec then it should be accepted just fine.
     interceptors: Interceptor.InferConstructor<$Pipeline>[]
     retryingInterceptor?: Interceptor.InferConstructor<$Pipeline>
-  }): Promise<Pipeline.GetAwaitedResult<$Pipeline> | Errors.ContextualError> => {
+  }): Promise<Awaited<$Pipeline['output']> | Errors.ContextualError> => {
     const optimizedPipeline = optimizePipeline(pipeline)
     const interceptors_ = retryingInterceptor
       ? [...interceptors, createRetryingInterceptor(retryingInterceptor)]

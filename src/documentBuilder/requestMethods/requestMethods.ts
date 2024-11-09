@@ -2,14 +2,13 @@ import { OperationTypeNode } from 'graphql'
 import type { SimplifyDeep } from 'type-fest'
 import { type Context } from '../../client/context.js'
 import { handleOutput } from '../../client/handleOutput.js'
-import type { Config } from '../../client/Settings/Config.js'
 import type { TypeFunction } from '../../entrypoints/utilities-for-generated.js'
 import { Anyware } from '../../lib/anyware/__.js'
 import { Builder } from '../../lib/builder/__.js'
 import type { Grafaid } from '../../lib/grafaid/__.js'
 import { getOperationDefinition } from '../../lib/grafaid/document.js'
 import { isSymbol } from '../../lib/prelude.js'
-import { RequestPipelineDefinition } from '../../requestPipeline/__.js'
+import { requestPipeline } from '../../requestPipeline/__.js'
 import type { GlobalRegistry } from '../../types/GlobalRegistry/GlobalRegistry.js'
 import { Select } from '../Select/__.js'
 import { SelectionSetGraphqlMapper } from '../SelectGraphQLMapper/__.js'
@@ -136,9 +135,9 @@ const executeDocument = async (
     url,
     schema,
     request,
-  } as RequestPipeline.Steps.HookDefEncode['input']
+  } as requestPipeline.Steps.HookDefEncode['input']
 
-  const result = await Anyware.Pipeline.run(RequestPipeline, {
+  const result = await Anyware.Pipeline.run(requestPipeline, {
     initialInput,
     // retryingExtension: state.retry as any,
     interceptors: state.extensions.filter(_ => _.onRequest !== undefined).map(_ => _.onRequest!) as any,

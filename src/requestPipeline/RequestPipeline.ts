@@ -19,11 +19,11 @@ import type { MethodModePost } from '../client/transportHttp/request.js'
 import type { httpMethodGet, httpMethodPost } from '../lib/http.js'
 import type { TransportHttp, TransportMemory } from '../types/Transport.js'
 
-export const RequestPipeline = Anyware.Pipeline
-  .createWithType<RequestPipeline.Definition>({
+export const requestPipeline = Anyware.Pipeline
+  .createWithSpec<requestPipeline.Spec>({
     steps: [{
       name: `encode`,
-      run: ({ input }): RequestPipeline.Steps.HookDefPack['input'] => {
+      run: ({ input }): requestPipeline.Steps.HookDefPack['input'] => {
         const sddm = input.state.schemaMap
         const scalars = input.state.scalars.map
         if (sddm) {
@@ -88,8 +88,8 @@ export const RequestPipeline = Anyware.Pipeline
               },
             )
             const request:
-              | RequestPipeline.Steps.CoreExchangePostRequest
-              | RequestPipeline.Steps.CoreExchangeGetRequest = requestMethod === `get`
+              | requestPipeline.Steps.CoreExchangePostRequest
+              | requestPipeline.Steps.CoreExchangeGetRequest = requestMethod === `get`
                 ? {
                   methodMode: methodMode as MethodModeGetReads,
                   ...baseProperties,
@@ -191,8 +191,8 @@ export const RequestPipeline = Anyware.Pipeline
     }],
   })
 
-export namespace RequestPipeline {
-  export type Definition<$Config extends Config = Config> = Anyware.PipelineDefinition<[
+export namespace requestPipeline {
+  export type Spec<$Config extends Config = Config> = Anyware.PipelineSpecFromSteps<[
     Steps.HookDefEncode<$Config>,
     Steps.HookDefPack<$Config>,
     Steps.HookDefExchange<$Config>,

@@ -1,7 +1,6 @@
 import type { Errors } from '../../errors/__.js'
 import type { Interceptor } from '../Interceptor/Interceptor.js'
 import type { Pipeline } from './__.js'
-import type { Builder } from './builder.js'
 
 interface Params {
   initialInput: object
@@ -9,14 +8,14 @@ interface Params {
 }
 
 type Run = <
-  $Builder extends Builder,
+  $Pipeline extends Pipeline,
   $Params extends Params,
 >(
-  pipeline: $Builder,
+  pipeline: $Pipeline,
   params?: $Params,
 ) => Promise<
   | Errors.ContextualAggregateError
-  | Awaited<Pipeline.GetResult<$Builder['context']>>
+  | Awaited<$Pipeline['output']>
 >
 
 /**

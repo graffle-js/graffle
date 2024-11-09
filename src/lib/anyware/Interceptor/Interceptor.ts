@@ -1,6 +1,6 @@
 import type { Simplify } from 'type-fest'
 import type { Deferred, MaybePromise } from '../../prelude.js'
-import type { Pipeline } from '../Pipeline/__.js'
+import type { PipelineSpec } from '../_.js'
 import type { Step } from '../Step.js'
 import type { StepTrigger } from '../StepTrigger.js'
 import type { StepTriggerEnvelope } from '../StepTriggerEnvelope.js'
@@ -19,20 +19,20 @@ export interface Interceptor {
 
 export namespace Interceptor {
   export interface InferConstructor<
-    $Pipeline extends Pipeline = Pipeline,
+    $PipelineSpec extends PipelineSpec = PipelineSpec,
   > // $Options extends InterceptorOptions = InterceptorOptions,
   {
     (
-      steps: Simplify<InferConstructorKeywordArguments<$Pipeline>>,
+      steps: Simplify<InferConstructorKeywordArguments<$PipelineSpec>>,
     ): Promise<
-      | Pipeline.GetAwaitedResult<$Pipeline>
+      | Awaited<$PipelineSpec['output']>
       | StepTriggerEnvelope
     >
   }
 
   type InferConstructorKeywordArguments<
-    $Pipeline extends Pipeline,
-  > = InferConstructorKeywordArguments_<$Pipeline['steps'], Pipeline.GetAwaitedResult<$Pipeline>>
+    $PipelineSpec extends PipelineSpec,
+  > = InferConstructorKeywordArguments_<$PipelineSpec['steps'], Awaited<$PipelineSpec['output']>>
 
   // dprint-ignore
   type InferConstructorKeywordArguments_<

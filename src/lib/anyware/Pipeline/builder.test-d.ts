@@ -2,7 +2,7 @@ import { expectTypeOf, test } from 'vitest'
 import type { initialInput } from '../__.test-helpers.js'
 import { results, slots } from '../__.test-helpers.js'
 import { Pipeline } from './__.js'
-import type { Config } from './builder.js'
+import type { Config } from './Config.js'
 
 const p0 = Pipeline.create<initialInput>()
 

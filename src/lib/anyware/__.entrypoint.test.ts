@@ -7,7 +7,7 @@ import { type Interceptor, Pipeline } from './_.js'
 import { initialInput } from './__.test-helpers.js'
 
 const run = async (interceptor: (...args: any[]) => any) => {
-  const pipeline = Pipeline.create()
+  const pipeline = Pipeline.create().done()
   return Pipeline.run(pipeline, {
     initialInput,
     interceptors: [interceptor],

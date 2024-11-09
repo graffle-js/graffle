@@ -300,6 +300,7 @@ export const debugSub = (...args: any[]) => (...subArgs: any[]) => {
 }
 
 export namespace Tuple {
+  export type NonEmpty = [any, ...any[]]
   // dprint-ignore
   export type IntersectItems<$Items extends readonly any[]> =
     $Items extends [infer $First, ...infer $Rest extends any[]]

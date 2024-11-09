@@ -7,10 +7,16 @@ export interface Step<
   slots?: Step.Slots
   input: any
   output: any
-  run: (params: any) => any
 }
 
 export namespace Step {
+  export interface SpecInput {
+    name: string
+    slots?: Step.Slots
+    input?: object
+    output?: unknown
+  }
+
   /**
    * todo
    */
@@ -46,8 +52,4 @@ export namespace Step {
   export type Slots = Record<string, SomeFunction>
 
   export type Name = string
-
-  export type GetAwaitedResult<$Step extends Step> = Awaited<GetResult<$Step>>
-
-  export type GetResult<$Step extends Step> = ReturnType<$Step['run']>
 }

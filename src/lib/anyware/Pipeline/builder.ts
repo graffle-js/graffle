@@ -1,13 +1,13 @@
 import type { ConfigManager } from '../../config-manager/__.js'
 import { type Tuple } from '../../prelude.js'
+import type { ExecutableStep } from '../ExecutableStep.js'
 import type { Step } from '../Step.js'
-import type { Pipeline } from './__.js'
 import { type Config, type Options, resolveOptions } from './Config.js'
 
 export interface Context {
-  input: object
-  steps: Step[]
   config: Config
+  input: object
+  steps: ExecutableStep[]
 }
 
 export interface ContextEmpty extends Context {
@@ -15,40 +15,6 @@ export interface ContextEmpty extends Context {
   steps: []
   config: Config
 }
-
-/**
- * See {@link GetResult}
- */
-export type GetAwaitedResult<$Pipeline extends Pipeline> = Awaited<GetResult<$Pipeline>>
-
-/**
- * Get the overall result of the pipeline.
- *
- * If the pipeline has no steps then the pipeline input itself.
- * Otherwise the last step's output.
- */
-// dprint-ignore
-export type GetResult<$Pipeline extends Pipeline> =
-  $Pipeline['steps'] extends [any, ...any[]]
-    ? Step.GetResult<Tuple.GetLastValue<$Pipeline['steps']>>
-    : $Pipeline['input']
-
-// dprint-ignore
-export type GetNextStepParameterPrevious<$Pipeline extends Pipeline> =
-  $Pipeline['steps'] extends [any, ...any[]]
-    ? GetNextStepPrevious_<$Pipeline['steps']>
-    : undefined
-
-type GetNextStepPrevious_<$Steps extends Step[]> = Tuple.IntersectItems<
-  {
-    [$Index in keyof $Steps]: {
-      [$StepName in $Steps[$Index]['name']]: {
-        input: Parameters<$Steps[$Index]['run']>[0]['input']
-        output: Awaited<ReturnType<$Steps[$Index]['run']>>
-      }
-    }
-  }
->
 
 /**
  * Get the `input` parameter for a step that would be appended to the given Pipeline.
@@ -60,10 +26,10 @@ type GetNextStepPrevious_<$Steps extends Step[]> = Tuple.IntersectItems<
  * - Otherwise the last step's output.
  */
 // dprint-ignore
-type GetNextStepParameterInput<$Pipeline extends Pipeline> =
-  $Pipeline['steps'] extends [any, ...any[]]
-    ? Awaited<Step.GetResult<Tuple.GetLastValue<$Pipeline['steps']>>>
-    : $Pipeline['input']
+type GetNextStepParameterInput<$Context extends Context> =
+  $Context['steps'] extends Tuple.NonEmpty
+    ? Awaited<Tuple.GetLastValue<$Context['steps']>['output']>
+    : $Context['input']
 
 export interface Builder<$Context extends Context = Context> {
   context: $Context
@@ -101,17 +67,50 @@ export interface Builder<$Context extends Context = Context> {
         ...$Context['steps'],
         {
           name: $Name
-          run: $Run
           input: $Params['input']
           output: ReturnType<$Run>
           slots: $Slots
+          run: $Run
         },
       ]
     >
   >
+  done: () => InferPipeline_<$Context>
 }
 
-export type Infer<$Builder extends Builder> = $Builder['context']
+// dprint-ignore
+export type GetNextStepParameterPrevious<$Context extends Context> =
+  $Context['steps'] extends Tuple.NonEmpty
+    ? GetNextStepPrevious_<$Context['steps']>
+    : undefined
+
+type GetNextStepPrevious_<$Steps extends Step[]> = Tuple.IntersectItems<
+  {
+    [$Index in keyof $Steps]: {
+      [$StepName in $Steps[$Index]['name']]: {
+        input: Awaited<$Steps[$Index]['input']>
+        output: Awaited<$Steps[$Index]['output']>
+      }
+    }
+  }
+>
+
+export type InferPipeline<$Builder extends Builder> = InferPipeline_<$Builder['context']>
+
+// dprint-ignore
+type InferPipeline_<$Context extends Context> =
+  & $Context
+  & {
+    /**
+     * The overall result of the pipeline.
+     *
+     * If the pipeline has no steps then is the pipeline input itself.
+     * Otherwise is the last step's output.
+     */
+    output: $Context['steps'] extends Tuple.NonEmpty
+      ? Tuple.GetLastValue<$Context['steps']>['output']
+      : $Context['input']
+  }
 
 /**
  * TODO
