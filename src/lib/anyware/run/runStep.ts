@@ -1,11 +1,11 @@
 import { Errors } from '../../errors/__.js'
 import { casesExhausted, createDeferred, debugSub, errorFromMaybeError } from '../../prelude.js'
 import type { InterceptorGeneric } from '../Interceptor/Interceptor.js'
+import type { PipelineExecutable } from '../Pipeline/Executable.js'
 import type { Step } from '../Step.js'
 import type { StepResult, StepResultErrorAsync } from '../StepResult.js'
 import { StepTrigger } from '../StepTrigger.js'
 import type { StepTriggerEnvelope } from '../StepTriggerEnvelope.js'
-import type { OptimizedPipeline } from './OptimizedPipeline.js'
 import type { ResultEnvelop } from './resultEnvelope.js'
 
 type HookDoneResolver = (input: StepResult) => void
@@ -27,7 +27,7 @@ export const runStep = async (
     asyncErrorDeferred,
     customSlots,
   }: {
-    pipeline: OptimizedPipeline
+    pipeline: PipelineExecutable
     name: string
     done: HookDoneResolver
     inputOriginalOrFromExtension: object

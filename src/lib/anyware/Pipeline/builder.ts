@@ -3,6 +3,7 @@ import { type Tuple } from '../../prelude.js'
 import type { ExecutableStep } from '../ExecutableStep.js'
 import type { Step } from '../Step.js'
 import { type Config, type Options, resolveOptions } from './Config.js'
+import type { StepsIndex } from './Executable.js'
 
 export interface Context {
   config: Config
@@ -101,6 +102,7 @@ export type InferPipeline<$Builder extends Builder> = InferPipelineFromContext<$
 type InferPipelineFromContext<$Context extends Context> =
   & $Context
   & {
+    stepsIndex: StepsIndex
     /**
      * The overall result of the pipeline.
      *
@@ -130,3 +132,9 @@ export const create = <$Input extends object>(options?: Options): Builder<{
   const _config = resolveOptions(options)
   return undefined as any
 }
+
+// todo: for the done method
+// export const optimizePipeline = (pipeline: PipelineExecutable): OptimizedPipeline => {
+//   const stepsIndex = new Map(pipeline.steps.map(step => [step.name, step]))
+//   return { ...pipeline, stepsIndex }
+// }

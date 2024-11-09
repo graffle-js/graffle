@@ -91,6 +91,6 @@ describe(`interceptor constructor`, () => {
 
 // dprint-ignore
 // @ts-expect-error
-type GetTriggerFromPipeline<$Pipeline extends Pipeline, $TriggerName extends string> = Parameters<Interceptor.InferConstructor<$Pipeline>>[0][$TriggerName]
+type GetTriggerFromPipeline<$Pipeline extends Pipeline.PipelineExecutable, $TriggerName extends string> = Parameters<Interceptor.InferConstructor<$Pipeline>>[0][$TriggerName]
 // dprint-ignore
-type GetReturnTypeFromPipeline<$Pipeline extends Pipeline> = ReturnType<Interceptor.InferConstructor<$Pipeline>>
+type GetReturnTypeFromPipeline<$Pipeline extends Pipeline.PipelineExecutable> = ReturnType<Interceptor.InferConstructor<$Pipeline>>

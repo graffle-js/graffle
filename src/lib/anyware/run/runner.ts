@@ -8,31 +8,27 @@ import type { Step } from '../Step.js'
 import type { StepResultErrorExtension } from '../StepResult.js'
 import type { StepTriggerEnvelope } from '../StepTriggerEnvelope.js'
 import { getEntryStep } from './getEntrypoint.js'
-import type { OptimizedPipeline } from './OptimizedPipeline.js'
-import { optimizePipeline } from './OptimizedPipeline.js'
 import { runPipeline } from './runPipeline.js'
 
 export const createRunner =
-  <$Pipeline extends Pipeline>(pipeline: $Pipeline) =>
+  <$Pipeline extends Pipeline.PipelineExecutable>(pipeline: $Pipeline) =>
   async ({ initialInput, interceptors, retryingInterceptor }: {
     initialInput: $Pipeline['input']
     // todo Pipeline needs to become sub-type of PipelineSpec then it should be accepted just fine.
     interceptors: Interceptor.InferConstructor<$Pipeline>[]
     retryingInterceptor?: Interceptor.InferConstructor<$Pipeline>
   }): Promise<Awaited<$Pipeline['output']> | Errors.ContextualError> => {
-    const optimizedPipeline = optimizePipeline(pipeline)
+    // const optimizedPipeline = optimizePipeline(pipeline)
     const interceptors_ = retryingInterceptor
       ? [...interceptors, createRetryingInterceptor(retryingInterceptor)]
       : interceptors
-    const initialHookStackAndErrors = interceptors_.map(extension =>
-      toInternalInterceptor(optimizedPipeline, extension)
-    )
+    const initialHookStackAndErrors = interceptors_.map(extension => toInternalInterceptor(pipeline, extension))
     const [initialHookStack, error] = partitionAndAggregateErrors(initialHookStackAndErrors)
     if (error) return error
 
     const asyncErrorDeferred = createDeferred<StepResultErrorExtension>({ strict: false })
     const result = await runPipeline({
-      pipeline: optimizedPipeline,
+      pipeline,
       stepsToProcess: pipeline.steps,
       originalInputOrResult: initialInput,
       // todo fix any
@@ -45,7 +41,7 @@ export const createRunner =
     return result.result as any
   }
 
-const toInternalInterceptor = (pipeline: OptimizedPipeline, interceptor: InterceptorInput) => {
+const toInternalInterceptor = (pipeline: Pipeline.PipelineExecutable, interceptor: InterceptorInput) => {
   const currentChunk = createDeferred<StepTriggerEnvelope>()
   const body = createDeferred()
   const extensionRun = typeof interceptor === `function` ? interceptor : interceptor.run
@@ -73,7 +69,7 @@ const toInternalInterceptor = (pipeline: OptimizedPipeline, interceptor: Interce
     }
     case `optional`:
     case `required`: {
-      const entryStep = getEntryStep(pipeline.stepsIndex, extensionRun)
+      const entryStep = getEntryStep(pipeline, extensionRun)
       if (entryStep instanceof Error) {
         if (pipeline.config.entrypointSelectionMode === `required`) {
           return entryStep

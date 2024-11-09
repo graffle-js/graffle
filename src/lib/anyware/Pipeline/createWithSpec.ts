@@ -2,6 +2,7 @@ import type { ConfigManager } from '../../config-manager/__.js'
 import type { Tuple } from '../../prelude.js'
 import type { Step } from '../Step.js'
 import { type Config, type Options, resolveOptions } from './Config.js'
+import type { StepsIndex } from './Executable.js'
 import type { PipelineSpec } from './Spec.js'
 
 export const createWithSpec = <$PipelineSpec extends PipelineSpec>(
@@ -9,16 +10,17 @@ export const createWithSpec = <$PipelineSpec extends PipelineSpec>(
     options?: Options
     steps: InferStepsInput<$PipelineSpec['steps']>
   },
-): InferPipeline<$PipelineSpec> => {
+): InferPipelineExecutable<$PipelineSpec> => {
   const _config = resolveOptions(input.options)
   input
   return undefined as any
 }
 
-type InferPipeline<$PipelineSpec extends PipelineSpec> = {
+type InferPipelineExecutable<$PipelineSpec extends PipelineSpec> = {
   input: $PipelineSpec['input']
   output: $PipelineSpec['output']
   steps: InferExecutableSteps<$PipelineSpec['steps']>
+  stepsIndex: StepsIndex
   config: Config
 }
 

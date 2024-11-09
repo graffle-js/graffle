@@ -2,9 +2,9 @@ import type { Errors } from '../../errors/__.js'
 import { ContextualError } from '../../errors/ContextualError.js'
 import { casesExhausted, createDeferred, debug } from '../../prelude.js'
 import type { InterceptorGeneric } from '../Interceptor/Interceptor.js'
+import type { PipelineExecutable } from '../Pipeline/Executable.js'
 import type { Step } from '../Step.js'
 import type { StepResult, StepResultErrorAsync } from '../StepResult.js'
-import type { OptimizedPipeline } from './OptimizedPipeline.js'
 import { createResultEnvelope } from './resultEnvelope.js'
 import type { ResultEnvelop } from './resultEnvelope.js'
 import { runStep } from './runStep.js'
@@ -20,7 +20,7 @@ export const runPipeline = async (
     asyncErrorDeferred,
     previousStepsCompleted,
   }: {
-    pipeline: OptimizedPipeline
+    pipeline: PipelineExecutable
     stepsToProcess: readonly Step[]
     originalInputOrResult: unknown
     interceptorsStack: readonly InterceptorGeneric[]

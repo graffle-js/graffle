@@ -8,7 +8,7 @@ interface Params {
 }
 
 type Run = <
-  $Pipeline extends Pipeline,
+  $Pipeline extends Pipeline.PipelineExecutable,
   $Params extends Params,
 >(
   pipeline: $Pipeline,
