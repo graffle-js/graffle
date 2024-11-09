@@ -72,6 +72,11 @@ if (!configModule.builder && args.project) {
   throw new Error(`Could not find a configuration file at "${configModule.paths.join(`, `)}".`)
 }
 
+if (configModule.builder) {
+  // todo: nice logging, levels etc.
+  console.log(`Using file config found at "${configModule.path}".`)
+}
+
 // --- Resolve Default Schema URL ---
 
 const defaultSchemaUrl = typeof args.defaultSchemaUrl === `string`
@@ -87,6 +92,10 @@ const schemaViaCLI = args.schema
     ? { type: `url` as const, url }
     : { type: `sdlFile` as const, dirOrFilePath: Path.join(process.cwd(), args.schema) }
   : undefined
+
+if (schemaViaCLI && configModule.builder?._.input.schema) {
+  console.log(`WARNING: Overriding config file schema configuration with command line input.`)
+}
 
 const schema = schemaViaCLI ?? configModule.builder?._.input.schema
 
