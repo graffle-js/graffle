@@ -20,7 +20,7 @@ type Run = <
 /**
  * todo
  */
-export const run: Run = (pipeline, params) => {
+export const run: Run = (_pipeline, _params) => {
   // todo
   return undefined as any
 }

@@ -3,7 +3,6 @@ import { type Tuple } from '../../prelude.js'
 import type { ExecutableStep } from '../ExecutableStep.js'
 import type { Step } from '../Step.js'
 import { type Config, type Options, resolveOptions } from './Config.js'
-import type { Result } from './Result.js'
 
 export interface Context {
   config: Config

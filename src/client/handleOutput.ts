@@ -24,7 +24,6 @@ import {
 } from './Settings/Config.js'
 
 export type GraffleExecutionResultEnvelope<$Config extends Config = Config> =
-  // & ExecutionResult
   & {
     errors?: ReadonlyArray<
       // formatted comes from http transport
@@ -48,10 +47,6 @@ export type GraffleExecutionResultEnvelope<$Config extends Config = Config> =
         response?: Response
       }
     : {})
-
-// export type GraffleExecutionResultVar<$Config extends Config = Config> =
-//   | GraffleExecutionResultEnvelope<$Config>
-//   | ErrorsOther
 
 export const handleOutput = (
   state: Context,
