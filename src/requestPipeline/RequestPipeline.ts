@@ -291,6 +291,7 @@ export namespace requestPipeline {
           { response: Response }
         >
         & { result: FormattedExecutionResult }
+      output: 'todo'
     }
 
     /**

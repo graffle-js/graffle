@@ -4,6 +4,7 @@ import type { Tuple } from '../prelude.js'
 import { Pipeline } from './_.js'
 import type { InterceptorInput } from './Interceptor/Interceptor.js'
 import type { Options } from './Pipeline/Config.js'
+import { Step } from './Step.js'
 
 export const initialInput = { x: 1 } as const
 export type initialInput = typeof initialInput
@@ -14,6 +15,10 @@ export const results = {
   c: { c: 3 },
 } as const
 export type results = typeof results
+
+export const stepA = Step.createWithInput<initialInput>()({ name: `a`, run: () => results[`a`] })
+export const stepB = Step.createWithInput<initialInput>()({ name: `b`, run: () => results[`b`] })
+export const stepC = Step.createWithInput<initialInput>()({ name: `c`, run: () => results[`c`] })
 
 export const slots = {
   m: () => Promise.resolve(`m` as const),

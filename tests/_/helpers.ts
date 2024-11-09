@@ -5,6 +5,7 @@ import * as Path from 'node:path'
 import type { Mock } from 'vitest'
 import { test as testBase, vi } from 'vitest'
 import type { Client } from '../../src/client/client.js'
+import type { TransportConfigHttp, TransportConfigMemory } from '../../src/client/Settings/Config.js'
 import { Graffle } from '../../src/entrypoints/main.js'
 import type { Context, SchemaDrivenDataMap } from '../../src/entrypoints/utilities-for-generated.js'
 import type { ConfigManager } from '../../src/lib/config-manager/__.js'
@@ -37,8 +38,32 @@ interface Fixtures {
   fetch: Mock<(request: Request) => Promise<Response>>
   pokemonService: SchemaService
   graffle: Client<Context>
-  kitchenSink: Client<ConfigManager.SetProperties<Context, { name: `default`; schemaMap: SchemaDrivenDataMap }>>
-  kitchenSinkHttp: Client<ConfigManager.SetProperties<Context, { name: `default`; schemaMap: SchemaDrivenDataMap }>>
+  kitchenSink: Client<
+    ConfigManager.SetProperties<
+      Context,
+      {
+        name: `default`
+        schemaMap: SchemaDrivenDataMap
+        config: {
+          output: Context['config']['output']
+          transport: TransportConfigMemory
+        }
+      }
+    >
+  >
+  kitchenSinkHttp: Client<
+    ConfigManager.SetProperties<
+      Context,
+      {
+        name: `default`
+        schemaMap: SchemaDrivenDataMap
+        config: {
+          output: Context['config']['output']
+          transport: TransportConfigHttp
+        }
+      }
+    >
+  >
   kitchenSinkData: typeof db
   project: Project
 }
@@ -116,6 +141,9 @@ export const test = testBase.extend<Fixtures>({
   },
   kitchenSink: async ({ fetch: _ }, use) => {
     const kitchenSink = KitchenSink.create({ schema: kitchenSinkSchema })
+    // kitchenSink.anyware(async ({ encode }) => {
+    //   encode({ input: {}})
+    // })
     await use(kitchenSink)
   },
   kitchenSinkHttp: async ({ fetch: _ }, use) => {

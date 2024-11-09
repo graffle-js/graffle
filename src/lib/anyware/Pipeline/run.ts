@@ -1,6 +1,6 @@
-import type { Errors } from '../../errors/__.js'
 import type { Interceptor } from '../Interceptor/Interceptor.js'
 import type { Pipeline } from './__.js'
+import type { Result } from './Result.js'
 
 interface Params {
   initialInput: object
@@ -14,8 +14,7 @@ type Run = <
   pipeline: $Pipeline,
   params?: $Params,
 ) => Promise<
-  | Errors.ContextualAggregateError
-  | Awaited<$Pipeline['output']>
+  Result<$Pipeline['output']>
 >
 
 /**

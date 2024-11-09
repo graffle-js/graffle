@@ -3,6 +3,7 @@ import { type Tuple } from '../../prelude.js'
 import type { ExecutableStep } from '../ExecutableStep.js'
 import type { Step } from '../Step.js'
 import { type Config, type Options, resolveOptions } from './Config.js'
+import type { Result } from './Result.js'
 
 export interface Context {
   config: Config
@@ -75,7 +76,7 @@ export interface Builder<$Context extends Context = Context> {
       ]
     >
   >
-  done: () => InferPipeline_<$Context>
+  done: () => InferPipelineFromContext<$Context>
 }
 
 // dprint-ignore
@@ -95,10 +96,10 @@ type GetNextStepPrevious_<$Steps extends Step[]> = Tuple.IntersectItems<
   }
 >
 
-export type InferPipeline<$Builder extends Builder> = InferPipeline_<$Builder['context']>
+export type InferPipeline<$Builder extends Builder> = InferPipelineFromContext<$Builder['context']>
 
 // dprint-ignore
-type InferPipeline_<$Context extends Context> =
+type InferPipelineFromContext<$Context extends Context> =
   & $Context
   & {
     /**
@@ -107,9 +108,16 @@ type InferPipeline_<$Context extends Context> =
      * If the pipeline has no steps then is the pipeline input itself.
      * Otherwise is the last step's output.
      */
-    output: $Context['steps'] extends Tuple.NonEmpty
-      ? Tuple.GetLastValue<$Context['steps']>['output']
-      : $Context['input']
+    output:
+    // Promise<
+    //   Result<
+        Awaited<
+          $Context['steps'] extends Tuple.NonEmpty
+            ? Tuple.GetLastValue<$Context['steps']>['output']
+            : $Context['input']
+        >
+    //   >
+    // >
   }
 
 /**

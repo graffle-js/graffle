@@ -25,7 +25,7 @@ export namespace Interceptor {
     (
       steps: Simplify<InferConstructorKeywordArguments<$PipelineSpec>>,
     ): Promise<
-      | Awaited<$PipelineSpec['output']>
+      | $PipelineSpec['output']
       | StepTriggerEnvelope
     >
   }

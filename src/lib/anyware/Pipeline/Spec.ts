@@ -11,9 +11,11 @@ export interface PipelineSpec<$StepSpecs extends Step[] = Step[]> {
   input: $StepSpecs extends Tuple.NonEmpty
     ? $StepSpecs[0]['input']
     : object
-  output: $StepSpecs extends Tuple.NonEmpty
-    ? Tuple.GetLastValue<$StepSpecs>['output']
-    : object
+  output: Awaited<
+    $StepSpecs extends Tuple.NonEmpty
+      ? Tuple.GetLastValue<$StepSpecs>['output']
+      : unknown
+  >
 }
 
 type InferStepSpecs<$StepSpecInputs extends Step.SpecInput[]> = InferStepSpecs_<undefined, $StepSpecInputs>
@@ -30,13 +32,15 @@ type InferStepSpecs_<$StepSpecPrevious extends Step| undefined, $StepSpecInputs 
             : object
           : $StepSpecInput['input']
         output: MaybePromise<
-          IsUnknown<$StepSpecInput['output']> extends true
-            ? $StepSpecInputsRest extends Tuple.NonEmpty
-              ? $StepSpecInputsRest[0]['input'] extends undefined
-              ? object
-              : $StepSpecInputsRest[0]['input']
-            : object
-          : $StepSpecInput['output']
+          Awaited<
+            IsUnknown<$StepSpecInput['output']> extends true
+              ? $StepSpecInputsRest extends Tuple.NonEmpty
+                ? $StepSpecInputsRest[0]['input'] extends undefined
+                ? unknown
+                : $StepSpecInputsRest[0]['input']
+              : unknown
+            : $StepSpecInput['output']
+          >
         >
       }, $StepSpecInputsRest>
       : []

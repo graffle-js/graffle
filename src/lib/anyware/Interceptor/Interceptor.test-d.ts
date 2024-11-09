@@ -27,13 +27,13 @@ describe(`interceptor constructor`, () => {
 
   test(`original input on self`, () => {
     const p = p0.step({ name: `a`, run: () => results.a }).done()
-    type triggerA = GetTriggerFromBuilder<typeof p, 'a'>
+    type triggerA = GetTriggerFromPipeline<typeof p, 'a'>
     expectTypeOf<triggerA['input']>().toMatchTypeOf<initialInput>()
   })
 
   test(`trigger arguments are optional`, () => {
     const p = p0.step({ name: `a`, run: () => results.a }).done()
-    type triggerA = GetTriggerFromBuilder<typeof p, 'a'>
+    type triggerA = GetTriggerFromPipeline<typeof p, 'a'>
     expectTypeOf<[]>().toMatchTypeOf<Parameters<triggerA>>()
   })
 
@@ -41,8 +41,8 @@ describe(`interceptor constructor`, () => {
 
   test(`trigger accepts slots if definition has them, otherwise does NOT so much as accept the slots key`, () => {
     const p = p0.step({ name: `a`, slots, run: () => results.a }).step({ name: `b`, run: () => results.b }).done()
-    type triggerA = GetTriggerFromBuilder<typeof p, 'a'>
-    type triggerB = GetTriggerFromBuilder<typeof p, 'b'>
+    type triggerA = GetTriggerFromPipeline<typeof p, 'a'>
+    type triggerB = GetTriggerFromPipeline<typeof p, 'b'>
     expectTypeOf<Parameters<triggerA>>().toEqualTypeOf<[params?: {
       input?: initialInput
       using?: {
@@ -55,14 +55,14 @@ describe(`interceptor constructor`, () => {
 
   test(`slots are optional`, () => {
     const p = p0.step({ name: `a`, slots, run: () => results.a }).done()
-    type triggerA = GetTriggerFromBuilder<typeof p, 'a'>
+    type triggerA = GetTriggerFromPipeline<typeof p, 'a'>
     type triggerASlotInputs = ExcludeUndefined<ExcludeUndefined<Parameters<triggerA>[0]>['using']>
     expectTypeOf<{ m?: any; n?: any }>().toMatchTypeOf<triggerASlotInputs>()
   })
 
   test(`slot function can return undefined (falls back to default slot)`, () => {
     const p = p0.step({ name: `a`, slots, run: () => results.a }).done()
-    type triggerA = GetTriggerFromBuilder<typeof p, 'a'>
+    type triggerA = GetTriggerFromPipeline<typeof p, 'a'>
     type triggerASlotMOutput = ReturnType<
       ExcludeUndefined<ExcludeUndefined<ExcludeUndefined<Parameters<triggerA>[0]>['using']>['m']>
     >
@@ -77,12 +77,13 @@ describe(`interceptor constructor`, () => {
   //
   test(`can return pipeline output or a step envelope`, () => {
     const p = p0.step({ name: `a`, run: () => results.a }).done()
-    expectTypeOf<GetReturnTypeFromBuilder<typeof p>>().toEqualTypeOf<Promise<results['a'] | StepTriggerEnvelope>>()
+    type i = GetReturnTypeFromPipeline<typeof p>
+    expectTypeOf<i>().toEqualTypeOf<Promise<results['a'] | StepTriggerEnvelope>>()
   })
 
   test(`return type awaits pipeline output`, () => {
     const p = p0.step({ name: `a`, run: () => Promise.resolve(results.a) }).done()
-    expectTypeOf<GetReturnTypeFromBuilder<typeof p>>().toEqualTypeOf<Promise<results['a'] | StepTriggerEnvelope>>()
+    expectTypeOf<GetReturnTypeFromPipeline<typeof p>>().toEqualTypeOf<Promise<results['a'] | StepTriggerEnvelope>>()
   })
 })
 
@@ -90,6 +91,6 @@ describe(`interceptor constructor`, () => {
 
 // dprint-ignore
 // @ts-expect-error
-type GetTriggerFromBuilder<$Pipeline extends Pipeline, $TriggerName extends string> = Parameters<Interceptor.InferConstructor<$Pipeline>>[0][$TriggerName]
+type GetTriggerFromPipeline<$Pipeline extends Pipeline, $TriggerName extends string> = Parameters<Interceptor.InferConstructor<$Pipeline>>[0][$TriggerName]
 // dprint-ignore
-type GetReturnTypeFromBuilder<$Pipeline extends Pipeline> = ReturnType<Interceptor.InferConstructor<$Pipeline>>
+type GetReturnTypeFromPipeline<$Pipeline extends Pipeline> = ReturnType<Interceptor.InferConstructor<$Pipeline>>

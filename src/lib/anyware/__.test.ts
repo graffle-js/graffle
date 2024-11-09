@@ -258,7 +258,7 @@ describe(`errors`, () => {
     test('via passthroughErrorInstanceOf (one)', async () => {
       const builder = Pipeline.create<{ throws: Error }>({
         passthroughErrorInstanceOf: [SpecialError1],
-      }).step(stepA)
+      }).step(stepA).done()
 
       // dprint-ignore
       expect(Pipeline.run(builder, { initialInput: { throws: new Error('oops') }, interceptors: [] })).resolves.toBeInstanceOf(Errors.ContextualError)
@@ -268,7 +268,7 @@ describe(`errors`, () => {
     test('via passthroughErrorInstanceOf (multiple)', async () => {
       const builder = Pipeline.create<{ throws: Error }>({
         passthroughErrorInstanceOf: [SpecialError1, SpecialError2],
-      }).step(stepA)
+      }).step(stepA).done()
       // dprint-ignore
       expect(Pipeline.run(builder, { initialInput: { throws: new Error('oops') }, interceptors: [] })).resolves.toBeInstanceOf(Errors.ContextualError)
       // dprint-ignore
@@ -281,7 +281,7 @@ describe(`errors`, () => {
         passthroughErrorWith: (signal) => {
           return signal.error instanceof SpecialError1
         },
-      }).step(stepA)
+      }).step(stepA).done()
       // dprint-ignore
       expect(Pipeline.run(builder, { initialInput: { throws: new Error('oops') }, interceptors: [] })).resolves.toBeInstanceOf(Errors.ContextualError)
       // dprint-ignore
