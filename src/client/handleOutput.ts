@@ -149,45 +149,6 @@ type HandleOutput_Envelope<$Context extends Context, $Envelope extends GraffleEx
     ? $Envelope
     : ExcludeUndefined<$Envelope['data']> // todo make data field not undefinable
 
-// type HandleOutputGql_Envelope
-
-//  | IfConfiguredGetOutputErrorReturns<$Config>
-//  | (
-//       $Config['output']['envelope']['enabled'] extends true
-//         // todo even when envelope is enabled, its possible errors can not be included in its output.
-//         // When not, undefined should be removed from the data property.
-//         ? Envelope<$Config, $Data>
-//         // Note 1
-//         // `undefined` is not a possible type because that would only happen if an error occurred.
-//         // If an error occurs when the envelope is disabled then either it throws or is returned.
-//         // No case swallows the error and returns undefined data.
-//         //
-//         // Note 2
-//         // null is possible because of GraphQL null propagation.
-//         // todo We need to integrate this reality into the the other typed non-envelope output types too.
-//         : $Data | null
-//    )
-
-// // dprint-ignore
-// export type HandleOutputGraffleRootType<$Config extends Config, $Data> =
-//    | IfConfiguredGetOutputErrorReturns<$Config>
-//    | (
-//         $Config['output']['envelope']['enabled'] extends true
-//           ? Envelope<$Config, $Data>
-//           : $Data
-//      )
-
-// // dprint-ignore
-// export type HandleOutputGraffleRootField<$Config extends Config, $RootFieldName extends string, $Data> =
-//     | IfConfiguredGetOutputErrorReturns<$Config>
-//     | (
-//         $Config['output']['envelope']['enabled'] extends true
-//           // todo: a typed execution result that allows for additional error types.
-//           // currently it is always graphql execution error however envelope configuration can put more errors into that.
-//           ? Envelope<$Config, { [_ in $RootFieldName]: $Data }>
-//           : $Data
-//       )
-
 // dprint-ignore
 type IfConfiguredGetOutputErrorReturns<$Context extends Context> =
   | (ConfigGetOutputError<$Context, 'execution'>  extends 'return'  ? GraphQLExecutionResultError   : never)
