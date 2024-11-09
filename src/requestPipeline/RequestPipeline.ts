@@ -1,4 +1,9 @@
+import type { FormattedExecutionResult, GraphQLSchema } from 'graphql'
+import type { Context } from '../client/context.js'
+import type { GraffleExecutionResultEnvelope } from '../client/handleOutput.js'
+import type { Config } from '../client/Settings/Config.js'
 import { MethodMode, type MethodModeGetReads } from '../client/transportHttp/request.js'
+import type { MethodModePost } from '../client/transportHttp/request.js'
 import { Anyware } from '../lib/anyware/__.js'
 import type { Grafaid } from '../lib/grafaid/__.js'
 import { OperationTypeToAccessKind, print } from '../lib/grafaid/document.js'
@@ -7,17 +12,12 @@ import { getRequestEncodeSearchParameters, postRequestEncodeBody } from '../lib/
 import { getRequestHeadersRec, parseExecutionResult, postRequestHeadersRec } from '../lib/grafaid/http/http.js'
 import { normalizeRequestToNode } from '../lib/grafaid/request.js'
 import { mergeRequestInit, searchParamsAppendAll } from '../lib/http.js'
+import type { httpMethodGet, httpMethodPost } from '../lib/http.js'
 import { casesExhausted, isString, type MaybePromise } from '../lib/prelude.js'
 import { Transport } from '../types/Transport.js'
+import type { TransportHttp, TransportMemory } from '../types/Transport.js'
 import { decodeResultData } from './CustomScalars/decode.js'
 import { encodeRequestVariables } from './CustomScalars/encode.js'
-
-import type { FormattedExecutionResult, GraphQLSchema } from 'graphql'
-import type { Context } from '../client/context.js'
-import type { Config } from '../client/Settings/Config.js'
-import type { MethodModePost } from '../client/transportHttp/request.js'
-import type { httpMethodGet, httpMethodPost } from '../lib/http.js'
-import type { TransportHttp, TransportMemory } from '../types/Transport.js'
 
 export const requestPipeline = Anyware.Pipeline
   .createWithSpec<requestPipeline.Spec>({
@@ -192,6 +192,13 @@ export const requestPipeline = Anyware.Pipeline
   })
 
 export namespace requestPipeline {
+  export type ResultFailure = Anyware.Pipeline.ResultFailure
+  // | Errors.ContextualError
+  // Possible from http transport fetch with abort controller.
+  // | DOMException
+
+  export type Result<$Config extends Config = Config> = Anyware.Pipeline.InferResultFromSpec<Spec<$Config>>
+
   export type Spec<$Config extends Config = Config> = Anyware.PipelineSpecFromSteps<[
     Steps.HookDefEncode<$Config>,
     Steps.HookDefPack<$Config>,
@@ -291,7 +298,7 @@ export namespace requestPipeline {
           { response: Response }
         >
         & { result: FormattedExecutionResult }
-      output: 'todo'
+      output: GraffleExecutionResultEnvelope<$Config>
     }
 
     /**

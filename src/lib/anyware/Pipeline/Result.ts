@@ -1,7 +1,12 @@
 import type { Errors } from '../../errors/__.js'
+import type { PipelineSpec } from './Spec.js'
 
-export type Result<T = unknown> = Errors.ContextualAggregateError | SuccessfulResult<T>
+export type InferResultFromSpec<$PipelineSpec extends PipelineSpec> = Result<$PipelineSpec['output']>
 
-export interface SuccessfulResult<T = unknown> {
+export type ResultFailure = Errors.ContextualAggregateError
+
+export type Result<T = unknown> = ResultFailure | ResultSuccess<T>
+
+export interface ResultSuccess<T = unknown> {
   value: T
 }
