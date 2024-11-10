@@ -2,7 +2,7 @@
 
 import { describe, expect, test } from 'vitest'
 import type { ContextualAggregateError } from '../errors/ContextualAggregateError.js'
-import { _, _ } from '../prelude.js'
+import { _ } from '../prelude.js'
 import { Pipeline } from './_.js'
 import { initialInput, stepA, stepB } from './__.test-helpers.js'
 
