@@ -40,9 +40,7 @@ export namespace Step {
     output: ReturnType<$Run>
     slots: undefined extends $Slots ? undefined : $Slots
   } => {
-    // todo
-    parameters
-    return undefined as any
+    return parameters as any
   }
 
   type ImplementationFn<$Input extends Input = Input> = (parameters: { input: $Input }) => any

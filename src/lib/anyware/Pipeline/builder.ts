@@ -129,12 +129,32 @@ export const create = <$Input extends object>(options?: Options): Builder<{
   steps: []
   config: Config
 }> => {
-  const _config = resolveOptions(options)
-  return undefined as any
+  const config = resolveOptions(options)
+  return recreate({
+    steps: [],
+    config,
+  } as any)
 }
 
-// todo: for the done method
-// export const optimizePipeline = (pipeline: PipelineExecutable): OptimizedPipeline => {
-//   const stepsIndex = new Map(pipeline.steps.map(step => [step.name, step]))
-//   return { ...pipeline, stepsIndex }
-// }
+const recreate = <$Context extends Context>(context: $Context): Builder<$Context> => {
+  return {
+    context,
+    step: (parameters) => {
+      return recreate({
+        ...context,
+        steps: [
+          ...context.steps,
+          parameters,
+        ],
+      } as any)
+    },
+    done: () => {
+      const pipeline = context
+      const stepsIndex = new Map(pipeline.steps.map(step => [step.name, step]))
+      return {
+        ...pipeline,
+        stepsIndex,
+      } as any
+    },
+  }
+}

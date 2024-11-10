@@ -1,3 +1,4 @@
+import { createRunner } from '../_.js'
 import type { Interceptor } from '../Interceptor/Interceptor.js'
 import type { Pipeline } from './__.js'
 import type { Result } from './Result.js'
@@ -20,7 +21,7 @@ type Run = <
 /**
  * todo
  */
-export const run: Run = (_pipeline, _params) => {
-  // todo
-  return undefined as any
+export const run: Run = async (pipeline, params) => {
+  const runner = createRunner(pipeline)
+  return await runner(params as any) as any
 }

@@ -10,7 +10,7 @@ export class ErrorAnywareInterceptorEntrypoint extends ContextualError<
 > {
   // todo add to context: parameters value parsed and raw
   constructor(context: { issue: InterceptorEntryHookIssue }) {
-    super(`Interceptor must destructure the first parameter passed to it and select exactly one entrypoint.`, context)
+    super(`Interceptor must destructure the first parameter passed to it and select exactly one step.`, context)
   }
 }
 
@@ -20,6 +20,7 @@ export const InterceptorEntryHookIssue = {
   notDestructured: `notDestructured`,
   destructuredWithoutEntryHook: `destructuredWithoutEntryHook`,
   multipleDestructuredHookNames: `multipleDestructuredHookNames`,
+  invalidDestructuredHookNames: `invalidDestructuredHookNames`,
 } as const
 
 export type InterceptorEntryHookIssue = typeof InterceptorEntryHookIssue[keyof typeof InterceptorEntryHookIssue]
@@ -51,8 +52,7 @@ export const getEntryStep = (
       const stepName = steps[0]
 
       if (!stepName) {
-        // todo: destructured with invalid names
-        return new ErrorAnywareInterceptorEntrypoint({ issue: InterceptorEntryHookIssue.multipleDestructuredHookNames })
+        return new ErrorAnywareInterceptorEntrypoint({ issue: InterceptorEntryHookIssue.invalidDestructuredHookNames })
       }
 
       const step = stepsIndex.get(stepName)
