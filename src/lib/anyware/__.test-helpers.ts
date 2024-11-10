@@ -4,10 +4,13 @@ import type { Tuple } from '../prelude.js'
 import { Pipeline } from './_.js'
 import type { InterceptorInput } from './Interceptor/Interceptor.js'
 import type { Options } from './Pipeline/Config.js'
+import type { PipelineExecutable } from './Pipeline/Executable.js'
 import { Step } from './Step.js'
 
 export const initialInput = { x: 1 } as const
 export type initialInput = typeof initialInput
+
+export const initialInput2 = { value: `initial` } as const
 
 export const results = {
   a: { a: 1 },
@@ -33,7 +36,8 @@ type PrivateHookRunnerInput = {
 }
 
 export const createPipeline = (options?: Options) => {
-  return Pipeline.create(options)
+  return Pipeline
+    .create<{ value: string }>(options)
     .step({
       name: `a`,
       slots: {
@@ -67,31 +71,39 @@ export const createPipeline = (options?: Options) => {
     .done()
 }
 
-type TestBuilder = ReturnType<typeof createPipeline>
+type TestPipeline = ReturnType<typeof createPipeline>
 
-// @ts-expect-error
-export let stepsIndex: Tuple.ToIndexByObjectKey<TestBuilder['context']['steps'], 'name'> = null
+export let stepsIndex: Tuple.ToIndexByObjectKey<TestPipeline['steps'], 'name'>
+let pipeline: PipelineExecutable
 
 beforeEach(() => {
-  const pipeline = createPipeline()
+  pipeline = createPipeline()
   stepsIndex = keyBy(pipeline.steps, _ => _.name) as any
 })
 
 export const runWithOptions = (options?: Options) => {
-  const builder = createPipeline(options)
+  const pipeline = createPipeline(options)
   const run = async (...interceptors: InterceptorInput[]) => {
-    return await Pipeline.run(builder, {
-      initialInput,
+    return await Pipeline.run(pipeline, {
+      initialInput: { value: `initial` },
       // @ts-expect-error fixme
       interceptors,
     })
   }
+  stepsIndex = keyBy(pipeline.steps, _ => _.name) as any
   return {
-    builder,
+    pipeline,
+    stepsIndex,
     run,
   }
 }
 
-export const run = async (...extensions: InterceptorInput[]) => runWithOptions().run(...extensions)
+export const run = async (...interceptors: InterceptorInput[]) => {
+  return await Pipeline.run(pipeline, {
+    initialInput: initialInput2,
+    // @ts-expect-error fixme
+    interceptors,
+  })
+}
 
 export const oops = new Error(`oops`)

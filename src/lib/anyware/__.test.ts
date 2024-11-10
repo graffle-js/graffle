@@ -1,10 +1,10 @@
 /* eslint-disable */
 
-import { describe, expect, test, vi } from 'vitest'
+import { beforeEach, describe, expect, test, vi } from 'vitest'
 import { Errors } from '../errors/__.js'
 import type { ContextualError } from '../errors/ContextualError.js'
 import { Pipeline } from './_.js'
-import { initialInput, oops, run, runWithOptions, stepsIndex } from './__.test-helpers.js'
+import { initialInput2, oops, run, runWithOptions, stepsIndex } from './__.test-helpers.js'
 import { createRetryingInterceptor } from './Interceptor/Interceptor.js'
 import { Step } from './Step.js'
 
@@ -95,13 +95,20 @@ describe(`one extension`, () => {
   })
 })
 
-describe(`two extensions`, () => {
-  const { run } = runWithOptions({ entrypointSelectionMode: `optional` })
+describe(`two interceptors`, () => {
+  let run: ReturnType<typeof runWithOptions>['run']
+  let stepIndex: ReturnType<typeof runWithOptions>['stepsIndex']
+
+  beforeEach(() => {
+    const info = runWithOptions({ entrypointSelectionMode: `optional` })
+    run = info.run
+    stepIndex = info.stepsIndex
+  })
   test(`first can short-circuit`, async () => {
-    const ex1 = () => 1
-    const ex2 = vi.fn().mockImplementation(() => 2)
-    expect(await run(ex1, ex2)).toEqual(1)
-    expect(ex2).not.toHaveBeenCalled()
+    const i1 = () => 1
+    const i2 = vi.fn().mockImplementation(() => 2)
+    expect(await run(i1, i2)).toEqual(1)
+    expect(i2).not.toHaveBeenCalled()
     expect(stepsIndex.a.run).not.toHaveBeenCalled()
     expect(stepsIndex.b.run).not.toHaveBeenCalled()
   })
@@ -134,32 +141,31 @@ describe(`two extensions`, () => {
     }
     expect(await run(ex1, ex2)).toEqual({ value: `initial+ex1+a+ex1+ex2+b` })
   })
-  test(`second can short-circuit before hook a`, async () => {
+  test(`second can short-circuit before step a`, async () => {
     let ex1AfterA = false
-    const ex1 = async ({ a }: any) => {
+    const i1 = async ({ a }: any) => {
       const { b } = await a({ value: a.input.value + `+ex1` })
       ex1AfterA = true
     }
-    const ex2 = async ({ a }: any) => {
-      return 2
-    }
-    expect(await run(ex1, ex2)).toEqual(2)
+    const i2 = async ({ a }: any) => 2
+
+    expect(await run(i1, i2)).toEqual(2)
     expect(ex1AfterA).toBe(false)
     expect(stepsIndex.a.run).not.toHaveBeenCalled()
     expect(stepsIndex.b.run).not.toHaveBeenCalled()
   })
-  test(`second can short-circuit after hook a`, async () => {
+  test(`second can short-circuit after step a`, async () => {
     let ex1AfterB = false
-    const ex1 = async ({ a }: any) => {
+    const i1 = async ({ a }: any) => {
       const { b } = await a({ input: { value: a.input.value + `+ex1` } })
       await b({ value: b.input.value + `+ex1` })
       ex1AfterB = true
     }
-    const ex2 = async ({ a }: any) => {
+    const i2 = async ({ a }: any) => {
       await a({ value: a.input.value + `+ex2` })
       return 2
     }
-    expect(await run(ex1, ex2)).toEqual(2)
+    expect(await run(i1, i2)).toEqual(2)
     expect(ex1AfterB).toBe(false)
     expect(stepsIndex.a.run).toHaveBeenCalledOnce()
     expect(stepsIndex.b.run).not.toHaveBeenCalled()
@@ -208,7 +214,7 @@ describe(`errors`, () => {
     `)
   })
 
-  test(`if implementation fails, without extensions, result is the error`, async () => {
+  test(`if implementation fails, without interceptors, result is the error`, async () => {
     stepsIndex.a.run.mockReset().mockRejectedValueOnce(oops)
     const result = await run() as ContextualError
     expect({
@@ -226,7 +232,7 @@ describe(`errors`, () => {
       }
     `)
   })
-  test('calling a hook twice leads to clear error', async () => {
+  test('calling a step trigger twice leads to clear error', async () => {
     let neverRan = true
     const result = await run(async ({ a }) => {
       await a()
@@ -393,7 +399,7 @@ describe('private hook parameter - previous', () => {
       return a()
     })
     expect(stepsIndex.a.run.mock.calls[0]?.[0].previous).toEqual({})
-    expect(stepsIndex.b.run.mock.calls[0]?.[0].previous).toEqual({ a: { input: initialInput } })
+    expect(stepsIndex.b.run.mock.calls[0]?.[0].previous).toEqual({ a: { input: initialInput2 } })
   })
 
   test('contains the final input actually passed to the hook', async () => {
