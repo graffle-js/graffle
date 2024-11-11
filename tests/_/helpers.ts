@@ -70,8 +70,22 @@ interface Fixtures {
 
 export const test = testBase.extend<Fixtures>({
   project: async ({}, use) => { // eslint-disable-line
+    /**
+     * Package managers (e.g. PnPM) augment the PATH when running scripts so that within
+     * the script line local binaries can be referenced.
+     *
+     * In the event a package script has been run to start a test using this fixture,
+     * we want to remove the PATH augmentations. This is because the augmentations have
+     * side effects upon the project we're trying to test in isolation. Any project
+     * logic based on the state of PATH would have its integrity compromised.
+     */
+    const path = process.env[`PATH`]!
+    const pathWithoutPackageManagerAugmentation = path
+      .split(`:`)
+      .filter(_ => !_.includes(`graffle`))
+      .join(`:`)
     const fs = await FsJetpack.tmpDirAsync()
-    const run = execa({ cwd: fs.cwd() })
+    const run = execa({ cwd: fs.cwd(), env: { PATH: pathWithoutPackageManagerAugmentation } })
     const project: Project = {
       fs,
       run,

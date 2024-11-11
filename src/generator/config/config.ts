@@ -282,7 +282,7 @@ const createConfigSchema = async (
       }
     }
     case `url`: {
-      const graffle = Graffle.create({ schema: input.schema.url }).use(Introspection())
+      const graffle = Graffle.create({ schema: input.schema.url }).use(Introspection({ options: input.schema.options }))
       const data = await graffle.introspect()
       if (!data) {
         throw new Error(`No data returned for introspection query.`)

@@ -25,3 +25,28 @@ test(`can introspect schema from url`, async ({ pokemonService }) => {
   expect(config.paths.project.inputs.schema).toEqual(null)
   expect(config.schema.sdl).toMatchSnapshot()
 })
+
+test(`configured schema introspection options are passed to introspection`, async ({ pokemonService, fetch }) => {
+  fetch.mockImplementation(_ => {
+    const response = new Response(JSON.stringify({ data: null }))
+    return Promise.resolve(response)
+  })
+  await createConfig({
+    schema: {
+      type: `url`,
+      url: pokemonService.url,
+      options: {
+        descriptions: false,
+        directiveIsRepeatable: false,
+        inputValueDeprecation: false,
+        schemaDescription: false,
+        oneOf: false,
+        specifiedByUrl: false,
+      },
+    },
+  }).catch((_: unknown) => {})
+  const readableStream: ReadableStream = fetch.mock.calls[0]?.[0]?.body as any
+  const { value }: { value: Uint8Array } = await readableStream.getReader().read() as any
+  const document = JSON.parse(new TextDecoder().decode(value))
+  expect(document).toMatchSnapshot()
+})

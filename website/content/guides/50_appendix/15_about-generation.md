@@ -53,11 +53,20 @@ pnpm graffle --help
 
 ## Configuration File
 
-The CLI will by default look for a `graffle.config.{js,ts,mts,mjs}` file in your project. If found, it will use the default export as configuration. Any arguments you provide on the command line will take precedence over the configuration file.
+The CLI will by default look for a `graffle.config.{js,ts,mts,mjs}` file in your project.
+
+When Graffle finds your configuration module, it will look at the default export for your configuration.
+
+Any arguments you provide on the command line will take precedence over the configuration file.
+
+If you run `$ graffle` with `node@^22.6.0` then the [`--experimental-strip-types` flag](https://nodejs.org/docs/latest/api/cli.html#--experimental-strip-types) will be used. This produces a warning which may annoy you. You can get rid of it by installing `tsx` either globally or locally which will be used if present.
+
+If you are using a TypeScript configuration module _and_ you run `$ graffle` with `node@<22.6.0` then you must have `tsx` installed globally or locally. Local installation of `tsx` will be preferred when both present.
+
+Example:
 
 ```ts
 // graffle.config.ts
-import { SchemaErrors } from 'graffle/extensions/schema-errors/generator'
 import { Generator } from 'graffle/generator'
 
 export default Generator.configure({
@@ -69,7 +78,7 @@ export default Generator.configure({
 
 ## API
 
-If you need to script graffle client generation then you can drop to the underlying Graffle generator API. It is largely one-to-one with the CLI. Use its JSDoc to learn about all its inputs.
+If you need to script graffle client generation then you can use the underlying Graffle generator API. It is largely one-to-one with the CLI. Use its JSDoc to learn about all its inputs.
 
 ```ts
 import { Generator } from 'graffle/generator'

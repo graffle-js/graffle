@@ -100,3 +100,77 @@ test(`client uses prettier formatter if installed`, async ({ project }) => {
 
   await project.run`pnpm prettier --check graffle/**/*`
 })
+
+test(`project uses graffle config file if present`, async ({ project, onTestFinished }) => {
+  // Clean up global side effects caused by this e2e test in development.
+  const isCI = process.env[`CI`]
+  if (!isCI) {
+    onTestFinished(async () => {
+      // If tests worked then this is already removed so catch expected error.
+      await project.run(`pnpm`, [`-g`, `remove`, `tsx`]).catch(() => {})
+      await project.run(`pnpm`, [`env`, `use`, `--global`, `lts`])
+    })
+  }
+  const path = await project.addPokemonSchemaSDL()
+  const configFilePaths = {
+    ts: `graffle.config.ts`,
+    js: `graffle.config.js`,
+  }
+  const usingConfigFilePatterns = {
+    ts: new RegExp(`using file config found at.*${configFilePaths.ts}`, `i`),
+    js: new RegExp(`using file config found at.*${configFilePaths.js}`, `i`),
+  }
+  const configContent = `
+    import { Generator } from 'graffle/generator'
+    export default Generator.configure({
+      schema: {
+        type: 'sdlFile',
+        dirOrFilePath: '${path.relative}',
+      },
+    })
+  `
+  project.fs.write(configFilePaths.ts, configContent)
+
+  {
+    // TypeScript with local tsx (installed with project by default)
+    const result = await project.run(`pnpm`, [`graffle`])
+    expect(result.stdout).toMatch(usingConfigFilePatterns.ts)
+  }
+  {
+    // JavaScript with local tsx
+    project.fs.rename(configFilePaths.ts, configFilePaths.js)
+    const result = await project.run(`pnpm`, [`graffle`])
+    expect(result.stdout).toMatch(usingConfigFilePatterns.js)
+  }
+  {
+    // TypeScript with global tsx
+    await project.run(`pnpm`, [`remove`, `tsx`])
+    project.fs.rename(configFilePaths.js, configFilePaths.ts)
+    await project.run(`pnpm`, [`-g`, `add`, `tsx`])
+    const result = await project.run(`pnpm`, [`graffle`])
+    expect(result.stdout).toMatch(usingConfigFilePatterns.ts)
+  }
+
+  // Cover --experimental-strip-types
+  await project.run(`pnpm`, [`-g`, `remove`, `tsx`])
+
+  {
+    // TypeScript with --experimental-strip-types
+    const result = await project.run(`pnpm`, [`graffle`])
+    expect(result.stdout).toMatch(usingConfigFilePatterns.ts)
+  }
+  {
+    // JavaScript with --experimental-strip-types
+    project.fs.rename(configFilePaths.ts, configFilePaths.js)
+    const result = await project.run(`pnpm`, [`graffle`])
+    expect(result.stdout).toMatch(usingConfigFilePatterns.js)
+    expect(result.stderr).toMatch(/type Stripping is an experimental feature/i)
+  }
+  {
+    // JavaScript with older Node.js version
+    await project.run(`pnpm`, [`env`, `use`, `--global`, `22.5`])
+    const result = await project.run(`pnpm`, [`graffle`])
+    expect(result.stdout).toMatch(usingConfigFilePatterns.js)
+    expect(result.stderr).not.toMatch(/type Stripping is an experimental feature/i)
+  }
+})

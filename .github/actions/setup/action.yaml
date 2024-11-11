@@ -16,11 +16,18 @@ runs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{inputs.node-version}}
-    - name: Enable Corepack
-      run: |
-        corepack enable
-        echo "PnPM version is $(pnpm --version)"
-      shell: bash
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: '9.12.2'
+        run_install: false
+    # Cannot use corepack because it doesn't permit global package installs.
+    # @see https://github.com/pnpm/action-setup/issues/105#issuecomment-2468689290
+    # - name: Enable Corepack
+    #   run: |
+    #     corepack enable
+    #     echo "PnPM version is $(pnpm --version)"
+    #   shell: bash
     # https://github.com/pnpm/action-setup#use-cache-to-reduce-installation-time
     - name: Get Current Month
       id: date-month
