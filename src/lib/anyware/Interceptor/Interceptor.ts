@@ -1,20 +1,13 @@
 import type { Simplify } from 'type-fest'
 import type { Deferred, MaybePromise } from '../../prelude.js'
 import type { PipelineSpec } from '../_.js'
+import type { ResultSuccess } from '../Pipeline/Result.js'
 import type { Step } from '../Step.js'
 import type { StepTrigger } from '../StepTrigger.js'
 import type { StepTriggerEnvelope } from '../StepTriggerEnvelope.js'
 
 export type InterceptorOptions = {
   retrying: boolean
-}
-
-// todo
-export interface Interceptor {
-  name: string
-  // entrypoint: string
-  // body: Deferred<unknown>
-  // currentChunk: Deferred<SomePublicHookEnvelope | Error /* | unknown (result) */>
 }
 
 export namespace Interceptor {
@@ -54,7 +47,7 @@ export type NonRetryingInterceptor = {
   name: string
   entrypoint: string
   body: Deferred<unknown>
-  currentChunk: Deferred<StepTriggerEnvelope /* | unknown (result) */>
+  currentChunk: Deferred<StepTriggerEnvelope | ResultSuccess>
 }
 
 export type RetryingInterceptor = {
@@ -62,15 +55,22 @@ export type RetryingInterceptor = {
   name: string
   entrypoint: string
   body: Deferred<unknown>
-  currentChunk: Deferred<StepTriggerEnvelope | Error /* | unknown (result) */>
+  currentChunk: Deferred<StepTriggerEnvelope | Error | ResultSuccess>
 }
 
-export const createRetryingInterceptor = (extension: NonRetryingInterceptorInput): RetryingInterceptorInput => {
+export const createRetryingInterceptor = (interceptor: NonRetryingInterceptorInput): RetryingInterceptorInput => {
   return {
     retrying: true,
-    run: extension,
+    run: interceptor,
   }
 }
+
+// export interface InterceptorInput {
+//   name: string
+//   // entrypoint: string
+//   // body: Deferred<unknown>
+//   // currentChunk: Deferred<SomePublicHookEnvelope | Error /* | unknown (result) */>
+// }
 
 // export type ExtensionInput<$Input extends object = object> = (input: $Input) => MaybePromise<unknown>
 export type InterceptorInput<$Input extends object = any> =

@@ -4,7 +4,7 @@ import { beforeEach, describe, expect, test, vi } from 'vitest'
 import { Errors } from '../errors/__.js'
 import type { ContextualError } from '../errors/ContextualError.js'
 import { Pipeline } from './_.js'
-import { initialInput2, oops, run, runWithOptions, stepsIndex } from './__.test-helpers.js'
+import { initialInput2, oops, run, runRetrying, runWithOptions, stepsIndex } from './__.test-helpers.js'
 import { createRetryingInterceptor } from './Interceptor/Interceptor.js'
 import { Step } from './Step.js'
 
@@ -299,47 +299,47 @@ describe(`errors`, () => {
 describe('retrying extension', () => {
   test('if hook fails, extension can retry, then short-circuit', async () => {
     stepsIndex.a.run.mockReset().mockRejectedValueOnce(oops).mockResolvedValueOnce(1)
-    const result = await run(createRetryingInterceptor(async function foo({ a }) {
+    const result = await runRetrying(async function foo({ a }) {
       const result1 = await a()
       expect(result1).toEqual(oops)
       const result2 = await a()
       expect(typeof result2.b).toEqual('function')
       expect(result2.b.input).toEqual(1)
       return result2.b.input
-    }))
+    })
     expect(result).toEqual(1)
   })
 
   describe('errors', () => {
-    test('not last extension', async () => {
-      const result = await run(
-        createRetryingInterceptor(async function foo({ a }) {
-          return a()
-        }),
-        async function bar({ a }) {
-          return a()
-        },
-      )
-      expect(result).toMatchInlineSnapshot(`[ContextualError: Only the last extension can retry hooks.]`)
-      expect((result as Errors.ContextualError).context).toMatchInlineSnapshot(`
-        {
-          "extensionsAfter": [
-            {
-              "name": "bar",
-            },
-          ],
-        }
-      `)
-    })
+    // test('not last extension', async () => {
+    //   const result = await run(
+    //     createRetryingInterceptor(async function foo({ a }) {
+    //       return a()
+    //     }),
+    //     async function bar({ a }) {
+    //       return a()
+    //     },
+    //   )
+    //   expect(result).toMatchInlineSnapshot(`[ContextualError: Only the last extension can retry hooks.]`)
+    //   expect((result as Errors.ContextualError).context).toMatchInlineSnapshot(`
+    //     {
+    //       "extensionsAfter": [
+    //         {
+    //           "name": "bar",
+    //         },
+    //       ],
+    //     }
+    //   `)
+    // })
     test('call hook twice even though it succeeded the first time', async () => {
       let neverRan = true
-      const result = await run(
-        createRetryingInterceptor(async function foo({ a }) {
+      const result = await runRetrying(
+        async function foo({ a }) {
           const result1 = await a()
           expect('b' in result1).toBe(true)
           await a() // <-- Extension bug here under test.
           neverRan = false
-        }),
+        },
       )
       expect(neverRan).toBe(true)
       expect(result).toMatchInlineSnapshot(

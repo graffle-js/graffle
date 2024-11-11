@@ -2,7 +2,11 @@ import { partitionAndAggregateErrors } from '../../errors/_.js'
 import { Errors } from '../../errors/__.js'
 import { createDeferred } from '../../prelude.js'
 import { casesExhausted } from '../../prelude.js'
-import { createRetryingInterceptor, type Interceptor, type InterceptorInput } from '../Interceptor/Interceptor.js'
+import {
+  createRetryingInterceptor,
+  type InterceptorInput,
+  type NonRetryingInterceptorInput,
+} from '../Interceptor/Interceptor.js'
 import type { Pipeline } from '../Pipeline/__.js'
 import type { Step } from '../Step.js'
 import type { StepResultErrorExtension } from '../StepResult.js'
@@ -10,37 +14,38 @@ import type { StepTriggerEnvelope } from '../StepTriggerEnvelope.js'
 import { getEntryStep } from './getEntrypoint.js'
 import { runPipeline } from './runPipeline.js'
 
-export const createRunner = <$Pipeline extends Pipeline.PipelineExecutable>(pipeline: $Pipeline) =>
-async (params?: {
-  initialInput: $Pipeline['input']
-  // todo Pipeline needs to become sub-type of PipelineSpec then it should be accepted just fine.
-  interceptors: Interceptor.InferConstructor<$Pipeline>[]
-  retryingInterceptor?: Interceptor.InferConstructor<$Pipeline>
-}): Promise<Awaited<$Pipeline['output']> | Errors.ContextualError> => {
-  const { initialInput, interceptors = [], retryingInterceptor } = params ?? {}
-
-  // const optimizedPipeline = optimizePipeline(pipeline)
-  const interceptors_ = retryingInterceptor
-    ? [...interceptors, createRetryingInterceptor(retryingInterceptor)]
-    : interceptors
-  const initialHookStackAndErrors = interceptors_.map(extension => toInternalInterceptor(pipeline, extension))
-  const [initialHookStack, error] = partitionAndAggregateErrors(initialHookStackAndErrors)
-  if (error) return error
-
-  const asyncErrorDeferred = createDeferred<StepResultErrorExtension>({ strict: false })
-  const result = await runPipeline({
-    pipeline,
-    stepsToProcess: pipeline.steps,
-    originalInputOrResult: initialInput,
-    // todo fix any
-    interceptorsStack: initialHookStack as any,
-    asyncErrorDeferred,
-    previousStepsCompleted: {},
-  })
-  if (result instanceof Error) return result
-
-  return result.result as any
+export interface Params {
+  initialInput: object
+  interceptors: NonRetryingInterceptorInput[]
+  retryingInterceptor?: NonRetryingInterceptorInput
 }
+
+export const createRunner =
+  <$Pipeline extends Pipeline.PipelineExecutable>(pipeline: $Pipeline) =>
+  async (params?: Params): Promise<Awaited<$Pipeline['output']> | Errors.ContextualError> => {
+    const { initialInput, interceptors = [], retryingInterceptor } = params ?? {}
+
+    const interceptors_ = retryingInterceptor
+      ? [...interceptors, createRetryingInterceptor(retryingInterceptor)]
+      : interceptors
+    const initialHookStackAndErrors = interceptors_.map(extension => toInternalInterceptor(pipeline, extension))
+    const [initialHookStack, error] = partitionAndAggregateErrors(initialHookStackAndErrors)
+    if (error) return error
+
+    const asyncErrorDeferred = createDeferred<StepResultErrorExtension>({ strict: false })
+    const result = await runPipeline({
+      pipeline,
+      stepsToProcess: pipeline.steps,
+      originalInputOrResult: initialInput,
+      // todo fix any
+      interceptorsStack: initialHookStack as any,
+      asyncErrorDeferred,
+      previousStepsCompleted: {},
+    })
+    if (result instanceof Error) return result
+
+    return result.result as any
+  }
 
 const toInternalInterceptor = (pipeline: Pipeline.PipelineExecutable, interceptor: InterceptorInput) => {
   const currentChunk = createDeferred<StepTriggerEnvelope>()

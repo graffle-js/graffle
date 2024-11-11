@@ -1,6 +1,7 @@
 import { describe, expectTypeOf, test } from 'vitest'
 import { _, type ExcludeUndefined } from '../../prelude.js'
-import { type Interceptor, Pipeline } from '../_.js'
+import type { Interceptor } from '../_.js'
+import { Pipeline } from '../_.js'
 import type { initialInput } from '../__.test-helpers.js'
 import { results, slots } from '../__.test-helpers.js'
 import type { StepTriggerEnvelope } from '../StepTriggerEnvelope.js'

@@ -1,12 +1,7 @@
 import { createRunner } from '../_.js'
-import type { Interceptor } from '../Interceptor/Interceptor.js'
-import type { Pipeline } from './__.js'
-import type { Result } from './Result.js'
-
-interface Params {
-  initialInput: object
-  interceptors: Interceptor[]
-}
+import type { Pipeline } from '../Pipeline/__.js'
+import type { Result } from '../Pipeline/Result.js'
+import type { Params } from './runner.js'
 
 type Run = <
   $Pipeline extends Pipeline.PipelineExecutable,

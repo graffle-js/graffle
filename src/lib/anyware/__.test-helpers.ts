@@ -2,7 +2,7 @@ import { keyBy } from 'es-toolkit'
 import { beforeEach, vi } from 'vitest'
 import type { Tuple } from '../prelude.js'
 import { Pipeline } from './_.js'
-import type { InterceptorInput } from './Interceptor/Interceptor.js'
+import type { NonRetryingInterceptorInput } from './Interceptor/Interceptor.js'
 import type { Options } from './Pipeline/Config.js'
 import type { PipelineExecutable } from './Pipeline/Executable.js'
 import { Step } from './Step.js'
@@ -83,10 +83,9 @@ beforeEach(() => {
 
 export const runWithOptions = (options?: Options) => {
   const pipeline = createPipeline(options)
-  const run = async (...interceptors: InterceptorInput[]) => {
+  const run = async (...interceptors: NonRetryingInterceptorInput[]) => {
     return await Pipeline.run(pipeline, {
       initialInput: { value: `initial` },
-      // @ts-expect-error fixme
       interceptors,
     })
   }
@@ -98,11 +97,18 @@ export const runWithOptions = (options?: Options) => {
   }
 }
 
-export const run = async (...interceptors: InterceptorInput[]) => {
+export const run = async (...interceptors: NonRetryingInterceptorInput[]) => {
   return await Pipeline.run(pipeline, {
     initialInput: initialInput2,
-    // @ts-expect-error fixme
     interceptors,
+  })
+}
+
+export const runRetrying = async (interceptor: NonRetryingInterceptorInput) => {
+  return await Pipeline.run(pipeline, {
+    initialInput: initialInput2,
+    interceptors: [],
+    retryingInterceptor: interceptor,
   })
 }
 
