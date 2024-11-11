@@ -44,7 +44,7 @@ test(`configured schema introspection options are passed to introspection`, asyn
         specifiedByUrl: false,
       },
     },
-  }).catch(_ => {})
+  }).catch((_: unknown) => {})
   const readableStream: ReadableStream = fetch.mock.calls[0]?.[0]?.body as any
   const { value }: { value: Uint8Array } = await readableStream.getReader().read() as any
   const document = JSON.parse(new TextDecoder().decode(value))
