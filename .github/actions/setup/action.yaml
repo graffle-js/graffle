@@ -12,33 +12,39 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 9
+        run_install: false
     - name: Use Node.js ${{inputs.node-version}}
       uses: actions/setup-node@v4
       with:
         node-version: ${{inputs.node-version}}
-    - name: Enable Corepack
-      run: |
-        corepack enable
-        echo "PnPM version is $(pnpm --version)"
-      shell: bash
+        cache: pnpm
+    # - name: Enable Corepack
+    #   run: |
+    #     corepack enable
+    #     echo "PnPM version is $(pnpm --version)"
+    #   shell: bash
     # https://github.com/pnpm/action-setup#use-cache-to-reduce-installation-time
-    - name: Get Current Month
-      id: date-month
-      shell: bash
-      run: |
-        DATE=$(date +'%Y-%m')
-        echo "$DATE"
-        echo "date_month=$DATE" >> $GITHUB_OUTPUT
-    - name: Get pnpm store directory
-      id: pnpm-cache
-      shell: bash
-      run: echo "pnpm_cache_dir=$(pnpm store path)" >> $GITHUB_OUTPUT
-    - uses: actions/cache@v4
-      name: Setup pnpm cache
-      with:
-        path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
-        key: ${{ runner.os }}-pnpm-store-${{steps.date-month.outputs.date_month}}-${{ hashFiles('**/pnpm-lock.yaml') }}
-        restore-keys: ${{ runner.os }}-pnpm-store-${{steps.date-month.outputs.date_month}}
+    # - name: Get Current Month
+    #   id: date-month
+    #   shell: bash
+    #   run: |
+    #     DATE=$(date +'%Y-%m')
+    #     echo "$DATE"
+    #     echo "date_month=$DATE" >> $GITHUB_OUTPUT
+    # - name: Get pnpm store directory
+    #   id: pnpm-cache
+    #   shell: bash
+    #   run: echo "pnpm_cache_dir=$(pnpm store path)" >> $GITHUB_OUTPUT
+    # - uses: actions/cache@v4
+    #   name: Setup pnpm cache
+    #   with:
+    #     path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+    #     key: ${{ runner.os }}-pnpm-store-${{steps.date-month.outputs.date_month}}-${{ hashFiles('**/pnpm-lock.yaml') }}
+    #     restore-keys: ${{ runner.os }}-pnpm-store-${{steps.date-month.outputs.date_month}}
     - name: Install Dependencies
       run: pnpm install
       shell: bash
