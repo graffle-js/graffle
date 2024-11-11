@@ -86,7 +86,7 @@ export const RequestPipeline = Anyware.Pipeline.create<HookSequence, HookMap, Gr
             const methodMode = input.state.config.transport.config.methodMode
             const requestMethod = methodMode === MethodMode.post
               ? `post`
-              : methodMode === MethodMode.getReads
+              : methodMode === MethodMode.getReads // eslint-disable-line
               ? OperationTypeToAccessKind[operationType] === `read` ? `get` : `post`
               : casesExhausted(methodMode)
 
