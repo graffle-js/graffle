@@ -111,6 +111,10 @@ test(`project uses graffle config file if present`, async ({ project, onTestFini
       await project.run(`pnpm`, [`env`, `use`, `--global`, `lts`])
     })
   }
+  if (isCI) {
+    // In CI we must do this to allow installing tsx globally.
+    await project.run(`pnpm`, [`setup`])
+  }
   const path = await project.addPokemonSchemaSDL()
   const configFilePaths = {
     ts: `graffle.config.ts`,
