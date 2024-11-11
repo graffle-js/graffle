@@ -12,16 +12,16 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Install pnpm
-      uses: pnpm/action-setup@v4
-      with:
-        version: '9.12.2'
-        run_install: false
     - name: Use Node.js ${{inputs.node-version}}
       uses: actions/setup-node@v4
       with:
         node-version: ${{inputs.node-version}}
         cache: pnpm
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: '9.12.2'
+        run_install: false
     # - name: Enable Corepack
     #   run: |
     #     corepack enable
