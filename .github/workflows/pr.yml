@@ -83,5 +83,3 @@ jobs:
           node-version: ${{ matrix.node }}
       - run: pnpm build
       - run: pnpm test:e2e
-        env:
-          SHELL: /bin/bash
