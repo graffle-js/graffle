@@ -21,11 +21,6 @@ runs:
         corepack enable
         echo "PnPM version is $(pnpm --version)"
       shell: bash
-    - name: Enable global pnpm installs
-      shell: bash
-      env:
-        SHELL: /bin/bash
-      run: pnpm setup
     # https://github.com/pnpm/action-setup#use-cache-to-reduce-installation-time
     - name: Get Current Month
       id: date-month

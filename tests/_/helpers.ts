@@ -57,7 +57,7 @@ export const test = testBase.extend<Fixtures>({
     const path = process.env[`PATH`]!
     const pathWithoutPackageManagerAugmentation = path
       .split(`:`)
-      .filter(_ => !_.includes(`graffle`) && !_.includes(`pnpm/global`))
+      .filter(_ => !_.includes(`graffle`))
       .join(`:`)
     const fs = await FsJetpack.tmpDirAsync()
     const run = execa({ cwd: fs.cwd(), env: { PATH: pathWithoutPackageManagerAugmentation } })
