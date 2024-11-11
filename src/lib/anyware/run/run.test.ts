@@ -5,10 +5,8 @@ import { Errors } from '../../errors/__.js'
 import type { ContextualError } from '../../errors/ContextualError.js'
 import { Pipeline } from '../_.js'
 import { initialInput2, oops, run, runRetrying, runWithOptions, stepsIndex } from '../__.test-helpers.js'
-import type { ResultSuccess } from '../Pipeline/Result.js'
+import { type ResultSuccess, successfulResult } from '../Pipeline/Result.js'
 import { Step } from '../Step.js'
-
-const successfulResult = <$Value>(value: $Value): ResultSuccess<$Value> => ({ value })
 
 describe(`no interceptors`, () => {
   test(`passthrough to implementation`, async () => {

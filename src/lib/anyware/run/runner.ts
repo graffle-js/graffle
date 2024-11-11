@@ -9,7 +9,7 @@ import {
   type NonRetryingInterceptorInput,
 } from '../Interceptor/Interceptor.js'
 import type { Pipeline } from '../Pipeline/__.js'
-import type { InferResultFromSpec } from '../Pipeline/Result.js'
+import { type InferResultFromSpec, successfulResult } from '../Pipeline/Result.js'
 import type { Step } from '../Step.js'
 import type { StepResultErrorExtension } from '../StepResult.js'
 import type { StepTriggerEnvelope } from '../StepTriggerEnvelope.js'
@@ -46,7 +46,7 @@ export const createRunner =
     })
     if (result instanceof Error) return result as any
 
-    return { value: result.result } as any
+    return successfulResult(result.result)
   }
 
 const toInternalInterceptor = (pipeline: Pipeline.PipelineExecutable, interceptor: InterceptorInput) => {
