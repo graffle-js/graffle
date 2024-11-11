@@ -1,9 +1,14 @@
 import type { ConfigManager } from '../../config-manager/__.js'
 import type { Tuple } from '../../prelude.js'
+import type { ExecutableStepRuntime } from '../ExecutableStep.js'
 import type { Step } from '../Step.js'
 import { type Config, type Options, resolveOptions } from './Config.js'
 import type { StepsIndex } from './Executable.js'
 import type { PipelineSpec } from './Spec.js'
+
+export const createExecutableStepsIndex = <$Steps extends ExecutableStepRuntime[]>(steps: $Steps): StepsIndex => {
+  return new Map(steps.map(step => [step.name, step]))
+}
 
 export const createWithSpec = <$PipelineSpec extends PipelineSpec>(
   input: {
@@ -11,9 +16,13 @@ export const createWithSpec = <$PipelineSpec extends PipelineSpec>(
     steps: InferStepsInput<$PipelineSpec['steps']>
   },
 ): InferPipelineExecutable<$PipelineSpec> => {
-  const _config = resolveOptions(input.options)
-  input
-  return undefined as any
+  const config = resolveOptions(input.options)
+  const stepsIndex = createExecutableStepsIndex(input.steps)
+  return {
+    config,
+    stepsIndex,
+    steps: input.steps,
+  } as any
 }
 
 type InferPipelineExecutable<$PipelineSpec extends PipelineSpec> = {

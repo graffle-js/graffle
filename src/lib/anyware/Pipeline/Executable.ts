@@ -1,4 +1,4 @@
-import type { ExecutableStep } from '../ExecutableStep.js'
+import type { ExecutableStep, ExecutableStepRuntime } from '../ExecutableStep.js'
 import type { Step } from '../Step.js'
 import type { Config } from './Config.js'
 import type { PipelineSpec } from './Spec.js'
@@ -11,4 +11,4 @@ export interface PipelineExecutable extends PipelineSpec {
   stepsIndex: StepsIndex
 }
 
-export type StepsIndex = Map<Step.Name, ExecutableStep>
+export type StepsIndex = Map<Step.Name, ExecutableStepRuntime>

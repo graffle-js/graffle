@@ -3,6 +3,7 @@ import { type Tuple } from '../../prelude.js'
 import type { ExecutableStep } from '../ExecutableStep.js'
 import type { Step } from '../Step.js'
 import { type Config, type Options, resolveOptions } from './Config.js'
+import { createExecutableStepsIndex } from './createWithSpec.js'
 import type { StepsIndex } from './Executable.js'
 
 export interface Context {
@@ -150,7 +151,7 @@ const recreate = <$Context extends Context>(context: $Context): Builder<$Context
     },
     done: () => {
       const pipeline = context
-      const stepsIndex = new Map(pipeline.steps.map(step => [step.name, step]))
+      const stepsIndex = createExecutableStepsIndex(pipeline.steps)
       return {
         ...pipeline,
         stepsIndex,
