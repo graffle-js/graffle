@@ -82,8 +82,4 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - run: pnpm build
-      - run: |
-          # pnpm setup
-          pnpm install -g tsx
-          # echo $PATH
       - run: pnpm test:e2e
