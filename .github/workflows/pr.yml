@@ -83,6 +83,7 @@ jobs:
           node-version: ${{ matrix.node }}
       - run: node -v
       - run: pnpm env use --global 21
+      - run: ls /home/runner/setup-pnpm/node_modules/.bin
       - run: echo $PATH
       - run: node -v
       # - run: pnpm build
