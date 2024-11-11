@@ -82,4 +82,5 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - run: pnpm build
+      - run: pnpm install -g tsx # test this works at all, to know its an issue isolated to the e2e test
       - run: pnpm test:e2e
