@@ -101,7 +101,7 @@ test(`client uses prettier formatter if installed`, async ({ project }) => {
   await project.run`pnpm prettier --check graffle/**/*`
 })
 
-test.only(`project uses graffle config file if present`, async ({ project, onTestFinished }) => {
+test(`project uses graffle config file if present`, async ({ project, onTestFinished }) => {
   // Clean up global side effects caused by this e2e test in development.
   const isCI = process.env[`CI`]
   if (!isCI) {
