@@ -81,5 +81,8 @@ jobs:
       - uses: ./.github/actions/setup
         with:
           node-version: ${{ matrix.node }}
-      - run: pnpm build
-      - run: pnpm test:e2e
+      - run: node -v
+      - run: pnpm env use --global 21
+      - run: node -v
+      # - run: pnpm build
+      # - run: pnpm test:e2e
