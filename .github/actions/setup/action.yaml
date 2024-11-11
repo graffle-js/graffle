@@ -12,21 +12,15 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: Use Node.js ${{inputs.node-version}}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{inputs.node-version}}
     - name: Install pnpm
       uses: pnpm/action-setup@v4
       with:
         version: '9.12.2'
         run_install: false
-    - name: Use Node.js ${{inputs.node-version}}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{inputs.node-version}}
-        cache: pnpm
-      # Make sure pnpm bin takes precedence over the node setup one. This ensures `pnpm env ...` works.
-    - run: pnpm setup
-      env:
-        SHELL: /bin/bash
-      shell: bash
     # - name: Enable Corepack
     #   run: |
     #     corepack enable
