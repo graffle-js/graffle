@@ -22,7 +22,10 @@ runs:
       with:
         node-version: ${{inputs.node-version}}
         cache: pnpm
+      # Make sure pnpm bin takes precedence over the node setup one. This ensures `pnpm env ...` works.
     - run: pnpm setup
+      env:
+        SHELL: /bin/bash
       shell: bash
     # - name: Enable Corepack
     #   run: |
