@@ -1,9 +1,8 @@
 import { analyzeFunction } from '../../analyze-function.js'
 import { ContextualError } from '../../errors/ContextualError.js'
-import type { ExecutableStep, ExecutableStepRuntime } from '../ExecutableStep.js'
+import type { ExecutableStepRuntime } from '../ExecutableStep.js'
 import type { NonRetryingInterceptorInput } from '../Interceptor/Interceptor.js'
 import type { PipelineExecutable } from '../Pipeline/Executable.js'
-import type { Step } from '../Step.js'
 
 export class ErrorAnywareInterceptorEntrypoint extends ContextualError<
   'ErrorGraffleInterceptorEntryHook',
