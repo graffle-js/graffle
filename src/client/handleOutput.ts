@@ -54,7 +54,7 @@ export const handleOutput = (
 ) => {
   if (isContextConfigTraditionalGraphQLOutput(state.config)) {
     if (result instanceof Error) throw result
-    return result
+    return result.value
   }
 
   const config = state.config
