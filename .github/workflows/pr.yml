@@ -81,6 +81,7 @@ jobs:
       - uses: ./.github/actions/setup
         with:
           node-version: ${{ matrix.node }}
+      - run: which node
       - run: node -v
       - run: pnpm env use --global 21
       - run: ls /home/runner/setup-pnpm/node_modules/.bin
