@@ -4,5 +4,4 @@ export interface ExecutableStep extends Step {
   run: (params: any) => any
 }
 
-export interface ExecutableStepRuntime extends Omit<ExecutableStep, 'input' | 'output'> {
-}
+export interface ExecutableStepRuntime extends Omit<ExecutableStep, 'input' | 'output'> {}

@@ -2,27 +2,29 @@ import { partitionAndAggregateErrors } from '../../errors/_.js'
 import { Errors } from '../../errors/__.js'
 import { createDeferred } from '../../prelude.js'
 import { casesExhausted } from '../../prelude.js'
+import type { PipelineSpec } from '../_.js'
 import {
   createRetryingInterceptor,
   type InterceptorInput,
   type NonRetryingInterceptorInput,
 } from '../Interceptor/Interceptor.js'
 import type { Pipeline } from '../Pipeline/__.js'
+import type { InferResultFromSpec } from '../Pipeline/Result.js'
 import type { Step } from '../Step.js'
 import type { StepResultErrorExtension } from '../StepResult.js'
 import type { StepTriggerEnvelope } from '../StepTriggerEnvelope.js'
 import { getEntryStep } from './getEntrypoint.js'
 import { runPipeline } from './runPipeline.js'
 
-export interface Params {
-  initialInput: object
+export interface Params<$Pipeline extends PipelineSpec = PipelineSpec> {
+  initialInput: $Pipeline['input']
   interceptors: NonRetryingInterceptorInput[]
   retryingInterceptor?: NonRetryingInterceptorInput
 }
 
 export const createRunner =
   <$Pipeline extends Pipeline.PipelineExecutable>(pipeline: $Pipeline) =>
-  async (params?: Params): Promise<Awaited<$Pipeline['output']> | Errors.ContextualError> => {
+  async (params?: Params<$Pipeline>): Promise<InferResultFromSpec<$Pipeline>> => {
     const { initialInput, interceptors = [], retryingInterceptor } = params ?? {}
 
     const interceptors_ = retryingInterceptor
@@ -42,9 +44,9 @@ export const createRunner =
       asyncErrorDeferred,
       previousStepsCompleted: {},
     })
-    if (result instanceof Error) return result
+    if (result instanceof Error) return result as any
 
-    return result.result as any
+    return { value: result.result } as any
   }
 
 const toInternalInterceptor = (pipeline: Pipeline.PipelineExecutable, interceptor: InterceptorInput) => {

@@ -5,7 +5,7 @@ import type { Params } from './runner.js'
 
 type Run = <
   $Pipeline extends Pipeline.PipelineExecutable,
-  $Params extends Params,
+  $Params extends Params<$Pipeline>,
 >(
   pipeline: $Pipeline,
   params?: $Params,

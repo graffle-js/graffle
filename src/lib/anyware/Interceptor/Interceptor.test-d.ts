@@ -6,11 +6,11 @@ import type { initialInput } from '../__.test-helpers.js'
 import { results, slots } from '../__.test-helpers.js'
 import type { StepTriggerEnvelope } from '../StepTriggerEnvelope.js'
 
-const p0 = Pipeline.create<initialInput>()
+const b0 = Pipeline.create<initialInput>()
 
 describe(`interceptor constructor`, () => {
   test(`receives keyword arguments, a step trigger for each step`, () => {
-    const p1 = p0
+    const p1 = b0
       .step({ name: `a`, run: () => results.a })
       .step({ name: `b`, run: () => results.b })
       .step({ name: `c`, run: () => results.c })
@@ -27,13 +27,13 @@ describe(`interceptor constructor`, () => {
   // --- trigger ---
 
   test(`original input on self`, () => {
-    const p = p0.step({ name: `a`, run: () => results.a }).done()
+    const p = b0.step({ name: `a`, run: () => results.a }).done()
     type triggerA = GetTriggerFromPipeline<typeof p, 'a'>
     expectTypeOf<triggerA['input']>().toMatchTypeOf<initialInput>()
   })
 
   test(`trigger arguments are optional`, () => {
-    const p = p0.step({ name: `a`, run: () => results.a }).done()
+    const p = b0.step({ name: `a`, run: () => results.a }).done()
     type triggerA = GetTriggerFromPipeline<typeof p, 'a'>
     expectTypeOf<[]>().toMatchTypeOf<Parameters<triggerA>>()
   })
@@ -41,7 +41,7 @@ describe(`interceptor constructor`, () => {
   // --- slots ---
 
   test(`trigger accepts slots if definition has them, otherwise does NOT so much as accept the slots key`, () => {
-    const p = p0.step({ name: `a`, slots, run: () => results.a }).step({ name: `b`, run: () => results.b }).done()
+    const p = b0.step({ name: `a`, slots, run: () => results.a }).step({ name: `b`, run: () => results.b }).done()
     type triggerA = GetTriggerFromPipeline<typeof p, 'a'>
     type triggerB = GetTriggerFromPipeline<typeof p, 'b'>
     expectTypeOf<Parameters<triggerA>>().toEqualTypeOf<[params?: {
@@ -55,14 +55,14 @@ describe(`interceptor constructor`, () => {
   })
 
   test(`slots are optional`, () => {
-    const p = p0.step({ name: `a`, slots, run: () => results.a }).done()
+    const p = b0.step({ name: `a`, slots, run: () => results.a }).done()
     type triggerA = GetTriggerFromPipeline<typeof p, 'a'>
     type triggerASlotInputs = ExcludeUndefined<ExcludeUndefined<Parameters<triggerA>[0]>['using']>
     expectTypeOf<{ m?: any; n?: any }>().toMatchTypeOf<triggerASlotInputs>()
   })
 
   test(`slot function can return undefined (falls back to default slot)`, () => {
-    const p = p0.step({ name: `a`, slots, run: () => results.a }).done()
+    const p = b0.step({ name: `a`, slots, run: () => results.a }).done()
     type triggerA = GetTriggerFromPipeline<typeof p, 'a'>
     type triggerASlotMOutput = ReturnType<
       ExcludeUndefined<ExcludeUndefined<ExcludeUndefined<Parameters<triggerA>[0]>['using']>['m']>
@@ -77,13 +77,13 @@ describe(`interceptor constructor`, () => {
   // --- output ---
   //
   test(`can return pipeline output or a step envelope`, () => {
-    const p = p0.step({ name: `a`, run: () => results.a }).done()
+    const p = b0.step({ name: `a`, run: () => results.a }).done()
     type i = GetReturnTypeFromPipeline<typeof p>
     expectTypeOf<i>().toEqualTypeOf<Promise<results['a'] | StepTriggerEnvelope>>()
   })
 
   test(`return type awaits pipeline output`, () => {
-    const p = p0.step({ name: `a`, run: () => Promise.resolve(results.a) }).done()
+    const p = b0.step({ name: `a`, run: () => Promise.resolve(results.a) }).done()
     expectTypeOf<GetReturnTypeFromPipeline<typeof p>>().toEqualTypeOf<Promise<results['a'] | StepTriggerEnvelope>>()
   })
 })
