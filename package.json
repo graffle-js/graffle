@@ -5,7 +5,7 @@
   "packageManager": "pnpm@9.12.2",
   "type": "module",
   "bin": {
-    "graffle": "./build/generator/cli/generate.js"
+    "graffle": "./execute.sh"
   },
   "exports": {
     ".": {
@@ -47,7 +47,8 @@
   },
   "files": [
     "build",
-    "src"
+    "src",
+    "execute.sh"
   ],
   "repository": {
     "type": "git",
