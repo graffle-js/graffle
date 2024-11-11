@@ -1,5 +1,6 @@
 import { analyzeFunction } from '../../analyze-function.js'
 import { ContextualError } from '../../errors/ContextualError.js'
+import type { ExecutableStep, ExecutableStepRuntime } from '../ExecutableStep.js'
 import type { NonRetryingInterceptorInput } from '../Interceptor/Interceptor.js'
 import type { PipelineExecutable } from '../Pipeline/Executable.js'
 import type { Step } from '../Step.js'
@@ -28,7 +29,7 @@ export type InterceptorEntryHookIssue = typeof InterceptorEntryHookIssue[keyof t
 export const getEntryStep = (
   pipeline: PipelineExecutable,
   interceptor: NonRetryingInterceptorInput,
-): ErrorAnywareInterceptorEntrypoint | Step => {
+): ErrorAnywareInterceptorEntrypoint | ExecutableStepRuntime => {
   const stepsIndex = pipeline.stepsIndex
   const x = analyzeFunction(interceptor)
   if (x.parameters.length > 1) {
