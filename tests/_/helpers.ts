@@ -55,8 +55,6 @@ export const test = testBase.extend<Fixtures>({
      * logic based on the state of PATH would have its integrity compromised.
      */
     const path = process.env[`PATH`]!
-    const path2 = (await execa({ shell: true, extendEnv: false, env: {} })(`bash`, [`-c`, `echo`, `$PATH`])).stdout
-    console.log({ path2 })
     const pathWithoutPackageManagerAugmentation = path
       .split(`:`)
       .filter(_ => !_.includes(`graffle`))
