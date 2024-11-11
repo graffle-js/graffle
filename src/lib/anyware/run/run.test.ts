@@ -251,7 +251,7 @@ describe(`errors`, () => {
       }
     `)
   })
-  describe.skip('certain errors can be configured to be re-thrown without wrapping error', () => {
+  describe('certain errors can be configured to be re-thrown without wrapping error', () => {
     class SpecialError1 extends Error {}
     class SpecialError2 extends Error {}
     const stepA = Step.createWithInput<{ throws: Error }>()({

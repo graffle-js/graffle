@@ -13,7 +13,7 @@ import { getRequestHeadersRec, parseExecutionResult, postRequestHeadersRec } fro
 import { normalizeRequestToNode } from '../lib/grafaid/request.js'
 import { mergeRequestInit, searchParamsAppendAll } from '../lib/http.js'
 import type { httpMethodGet, httpMethodPost } from '../lib/http.js'
-import { casesExhausted, isString, type MaybePromise } from '../lib/prelude.js'
+import { casesExhausted, isAbortError, isString, type MaybePromise } from '../lib/prelude.js'
 import { Transport } from '../types/Transport.js'
 import type { TransportHttp, TransportMemory } from '../types/Transport.js'
 import { decodeResultData } from './CustomScalars/decode.js'
@@ -21,6 +21,16 @@ import { encodeRequestVariables } from './CustomScalars/encode.js'
 
 export const requestPipeline = Anyware.Pipeline
   .createWithSpec<requestPipeline.Spec>({
+    options: {
+      // If core errors caused by an abort error then raise it as a direct error.
+      // This is an expected possible error. Possible when user cancels a request.
+      passthroughErrorWith: (signal) => {
+        // todo have anyware propagate the input that was passed to the hook that failed.
+        // it will give us a bit more confidence that we're only allowing this abort error for fetch requests stuff
+        // context.config.transport.type === Transport.http
+        return signal.hookName === `exchange` && isAbortError(signal.error)
+      },
+    },
     steps: [{
       name: `encode`,
       run: ({ input }): requestPipeline.Steps.HookDefPack['input'] => {
