@@ -1,5 +1,6 @@
 import type { SomeFunction } from '../prelude.js'
 
+// todo: rename to Spec
 export interface Step<
   $Name extends string = string,
 > {

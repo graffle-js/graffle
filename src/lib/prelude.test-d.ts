@@ -31,4 +31,12 @@ assertEqual<Tuple.GetNextIndexOr<[1, 2, 3], 2, false>, false>()
 
 assertEqual<Tuple.ToIndexByObjectKey<[{ name: 'a' }, { name: 'b' }], 'name'>, { a: { name: 'a' }, b: { name: 'b' } }>()
 assertEqual<Tuple.ToIndexByObjectKey<[], 'name'>, {}>()
+
+assertEqual<Tuple.PreviousItem<[], 1>, undefined>()
+assertEqual<Tuple.PreviousItem<[1, 2, 3], 2>, 1>()
+assertEqual<Tuple.PreviousItem<[1, 2, 3], 1>, undefined>()
+assertEqual<Tuple.PreviousItem<[{x:1},{y:2}], {x:1}>, undefined>()
+assertEqual<Tuple.PreviousItem<[{x:1},{y:2}], {y:2}>, {x:1}>()
+assertEqual<Tuple.PreviousItem<[{x:1},{y:2;w:3}], {y:2}>, {x:1}>()
+
 }

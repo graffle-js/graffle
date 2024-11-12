@@ -71,7 +71,7 @@ export const builderExtensionGql = Builder.Extension.create<BuilderExtensionGql>
             schema,
             // request,
             request: analyzedRequest,
-          } as requestPipeline.Steps.HookDefEncode['input']
+          } as requestPipeline.Steps.Encode['input']
 
           const result = await Anyware.Pipeline.run(requestPipeline, {
             initialInput,

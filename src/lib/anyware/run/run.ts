@@ -1,17 +1,14 @@
 import { createRunner } from '../_.js'
 import type { Pipeline } from '../Pipeline/__.js'
-import type { Result } from '../Pipeline/Result.js'
 import type { Params } from './runner.js'
 
 type Run = <
-  $Pipeline extends Pipeline.PipelineExecutable,
-  $Params extends Params<$Pipeline>,
+  $Pipeline extends Pipeline.ExecutablePipeline,
+  $Params extends Params<$Pipeline['spec']>,
 >(
   pipeline: $Pipeline,
   params?: $Params,
-) => Promise<
-  Result<$Pipeline['output']>
->
+) => Promise<$Pipeline['output']>
 
 /**
  * todo

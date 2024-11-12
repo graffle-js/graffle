@@ -30,7 +30,9 @@ assertEqual<ConfigManager.SetOne<{ a: { b: 2 } }, [], 1>, never>()
 assertEqual<ConfigManager.SetOne<{ a: { b: 2 } }, ['x'], 1>, never>()
 assertEqual<ConfigManager.SetOne<{ a: { b: 2 } }, ['a', 'b', 'c'], 3>, { a: { b: never } }>()
 
-assertEqual<ConfigManager.SetOneKey<a1, 'a', { b: 2 }>, { a: { b: 2 }; b: string }>()
+assertEqual<ConfigManager.UpdateOneKey<a1, 'a', { b: 2 }>, { a: { b: 2 }; b: string }>()
+assertEqual<ConfigManager.UpdateOneKey<{ a?: number }, 'a', 1>, { a: 1 }>()
+assertEqual<ConfigManager.UpdateOneKey<{ a?: number; b?: number }, 'a', 1>, { a: 1; b?: number }>()
 
 // dprint-ignore
 {
@@ -41,6 +43,9 @@ assertEqual<ConfigManager.SetAtPath<a1, ['a', 'b'], 9>       , { a: { b: 9 }; b:
 assertEqual<ConfigManager.SetAtPath<a1, ['a', 'b', 'c'], 9>  , { a: { b: { c: 9 } }; b: string }>()
 assertEqual<ConfigManager.SetAtPath<a1, ['a', 'b2', 'c'], 9> , { a: { b: number; b2: { c: 9 } }; b: string }>()
 assertEqual<ConfigManager.SetAtPath<a1, ['c'], 9>            , { a: { b: number }; b: string; c: 9 }>()
+
+assertEqual<ConfigManager.AppendAtKey<{x: []}, 'x', 1>  , { x: [1] }>()
+assertEqual<ConfigManager.AppendAtKey<{x: [1]}, 'x', 2> , { x: [1, 2] }>()
 }
 
 assertEqual<

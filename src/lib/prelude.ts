@@ -300,6 +300,22 @@ export const debugSub = (...args: any[]) => (...subArgs: any[]) => {
 }
 
 export namespace Tuple {
+  // dprint-ignore
+  export type PreviousItem<$Items extends readonly any[], $OfItem> =
+    $Items extends [infer $Next, ...infer $Rest]
+      ? $Next extends $OfItem
+        ? undefined // No previous of first
+        : PreviousItem_<$OfItem, $Next, $Rest>
+      : undefined // empty tuple
+
+  // dprint-ignore
+  type PreviousItem_<$OfItem, $PreviousItem extends $Items[number], $Items extends readonly any[]> =
+    $Items extends [infer $NextItem, ...infer $Rest]
+      ? $NextItem extends $OfItem
+        ? $PreviousItem
+        : PreviousItem_<$OfItem, $NextItem, $Rest>
+      : never
+
   export type NonEmpty = [any, ...any[]]
   // dprint-ignore
   export type IntersectItems<$Items extends readonly any[]> =
@@ -309,7 +325,7 @@ export namespace Tuple {
 
   // dprint-ignore
   export type ToIndexByObjectKey<$Items extends readonly object[], $Key extends keyof $Items[number]> =
-    Simplify<
+    // Simplify<
       IntersectItems<{
         [$Index in keyof $Items]:
           $Key extends keyof $Items[$Index]
@@ -318,7 +334,7 @@ export namespace Tuple {
             }
           : never
       }>
-    >
+  // >
 
   // dprint-ignore
   export type GetAtNextIndex<$Items extends readonly any[], $Index extends NumberLiteral> =
@@ -679,6 +695,7 @@ export type SimplifyExcept<$ExcludeType, $Type> =
       : {[TypeKey in keyof $Type]: $Type[TypeKey]}
 
 export const _ = undefined as any
+export type _ = typeof _
 
 // dprint-ignore
 export type ToParameters<$Params extends object | undefined> =

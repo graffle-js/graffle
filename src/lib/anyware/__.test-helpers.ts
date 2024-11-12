@@ -4,7 +4,7 @@ import type { Tuple } from '../prelude.js'
 import { Pipeline } from './_.js'
 import type { NonRetryingInterceptorInput } from './Interceptor/Interceptor.js'
 import type { Options } from './Pipeline/Config.js'
-import type { PipelineExecutable } from './Pipeline/Executable.js'
+import type { ExecutablePipeline } from './Pipeline/ExecutablePipeline.js'
 import { Step } from './Step.js'
 
 export const initialInput = { x: 1 } as const
@@ -20,8 +20,8 @@ export const results = {
 export type results = typeof results
 
 export const stepA = Step.createWithInput<initialInput>()({ name: `a`, run: () => results[`a`] })
-export const stepB = Step.createWithInput<initialInput>()({ name: `b`, run: () => results[`b`] })
-export const stepC = Step.createWithInput<initialInput>()({ name: `c`, run: () => results[`c`] })
+export const stepB = Step.createWithInput<results[`a`]>()({ name: `b`, run: () => results[`b`] })
+export const stepC = Step.createWithInput<results[`b`]>()({ name: `c`, run: () => results[`c`] })
 
 export const slots = {
   m: () => Promise.resolve(`m` as const),
@@ -74,7 +74,7 @@ export const createPipeline = (options?: Options) => {
 type TestPipeline = ReturnType<typeof createPipeline>
 
 export let stepsIndex: Tuple.ToIndexByObjectKey<TestPipeline['steps'], 'name'>
-let pipeline: PipelineExecutable
+let pipeline: ExecutablePipeline
 
 beforeEach(() => {
   pipeline = createPipeline()

@@ -15,9 +15,7 @@ export namespace Interceptor {
     $PipelineSpec extends PipelineSpec = PipelineSpec,
   > // $Options extends InterceptorOptions = InterceptorOptions,
   {
-    (
-      steps: Simplify<InferConstructorKeywordArguments<$PipelineSpec>>,
-    ): Promise<
+    (steps: Simplify<InferConstructorKeywordArguments<$PipelineSpec>>): Promise<
       | $PipelineSpec['output']
       | StepTriggerEnvelope
     >

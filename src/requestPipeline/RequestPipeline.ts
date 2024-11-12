@@ -1,4 +1,4 @@
-import type { FormattedExecutionResult, GraphQLSchema } from 'graphql'
+import type { FormattedExecutionResult } from 'graphql'
 import type { Context } from '../client/context.js'
 import type { GraffleExecutionResultEnvelope } from '../client/handleOutput.js'
 import { MethodMode, type MethodModeGetReads } from '../client/transportHttp/request.js'
@@ -12,193 +12,246 @@ import { getRequestHeadersRec, parseExecutionResult, postRequestHeadersRec } fro
 import { normalizeRequestToNode } from '../lib/grafaid/request.js'
 import { mergeRequestInit, searchParamsAppendAll } from '../lib/http.js'
 import type { httpMethodGet, httpMethodPost } from '../lib/http.js'
-import { casesExhausted, isAbortError, isString, type MaybePromise } from '../lib/prelude.js'
+import { _, casesExhausted, isAbortError, isString, type MaybePromise } from '../lib/prelude.js'
 import { Transport } from '../types/Transport.js'
-import type { TransportHttp, TransportMemory } from '../types/Transport.js'
 import { decodeResultData } from './CustomScalars/decode.js'
 import { encodeRequestVariables } from './CustomScalars/encode.js'
 
 export const requestPipeline = Anyware.Pipeline
-  .createWithSpec<requestPipeline.Spec>({
-    options: {
-      // If core errors caused by an abort error then raise it as a direct error.
-      // This is an expected possible error. Possible when user cancels a request.
-      passthroughErrorWith: (signal) => {
-        // todo have anyware propagate the input that was passed to the hook that failed.
-        // it will give us a bit more confidence that we're only allowing this abort error for fetch requests stuff
-        // context.config.transport.type === Transport.http
-        return signal.hookName === `exchange` && isAbortError(signal.error)
-      },
+  .create<requestPipeline.InitialInput>({
+    // If core errors caused by an abort error then raise it as a direct error.
+    // This is an expected possible error. Possible when user cancels a request.
+    passthroughErrorWith: (signal) => {
+      // todo have anyware propagate the input that was passed to the hook that failed.
+      // it will give us a bit more confidence that we're only allowing this abort error for fetch requests stuff
+      // context.config.transport.type === Transport.http
+      return signal.hookName === `exchange` && isAbortError(signal.error)
     },
-    steps: [{
-      name: `encode`,
-      run: ({ input }): requestPipeline.Steps.HookDefPack['input'] => {
-        const sddm = input.state.schemaMap
-        const scalars = input.state.scalars.map
-        if (sddm) {
-          const request = normalizeRequestToNode(input.request)
-
-          // We will mutate query. Assign it back to input for it to be carried forward.
-          input.request.query = request.query
-
-          encodeRequestVariables({ sddm, scalars, request })
-        }
-
-        return input
-      },
-    }, {
-      name: `pack`,
-      slots: {
-        searchParams: getRequestEncodeSearchParameters,
-        body: postRequestEncodeBody,
-      },
-      run: ({ input, slots }) => {
-        const graphqlRequest: Grafaid.HTTP.RequestConfig = {
-          operationName: input.request.operationName,
-          variables: input.request.variables,
-          query: print(input.request.query),
-        }
-
-        // TODO thrown error here is swallowed in examples.
-        switch (input.transportType) {
-          case `memory`: {
-            return {
-              ...input,
-              request: graphqlRequest,
-            }
-          }
-          case `http`: {
-            if (input.state.config.transport.type !== Transport.http) throw new Error(`transport type is not http`)
-
-            const operationType = isString(input.request.operation)
-              ? input.request.operation
-              : input.request.operation.operation
-            const methodMode = input.state.config.transport.config.methodMode
-            const requestMethod = methodMode === MethodMode.post
-              ? `post`
-              : methodMode === MethodMode.getReads // eslint-disable-line @typescript-eslint/no-unnecessary-condition
-              ? OperationTypeToAccessKind[operationType] === `read` ? `get` : `post`
-              : casesExhausted(methodMode)
-
-            const baseProperties = mergeRequestInit(
-              mergeRequestInit(
-                mergeRequestInit(
-                  {
-                    headers: requestMethod === `get` ? getRequestHeadersRec : postRequestHeadersRec,
-                  },
-                  {
-                    headers: input.state.config.transport.config.headers,
-                  },
-                ),
-                input.state.config.transport.config.raw,
-              ),
-              {
-                headers: input.headers,
-              },
-            )
-            const request:
-              | requestPipeline.Steps.CoreExchangePostRequest
-              | requestPipeline.Steps.CoreExchangeGetRequest = requestMethod === `get`
-                ? {
-                  methodMode: methodMode as MethodModeGetReads,
-                  ...baseProperties,
-                  method: `get`,
-                  url: searchParamsAppendAll(input.url, slots.searchParams(graphqlRequest)),
-                }
-                : {
-                  methodMode: methodMode,
-                  ...baseProperties,
-                  method: `post`,
-                  url: input.url,
-                  body: slots.body(graphqlRequest),
-                }
-            return {
-              ...input,
-              request,
-            }
-          }
-          default:
-            throw casesExhausted(input)
-        }
-      },
-    }, {
-      name: `exchange`,
-      slots: {
-        fetch: (requestInfo: RequestInfo): MaybePromise<Response> => fetch(requestInfo),
-      },
-      run: async ({ input, slots }) => {
-        switch (input.transportType) {
-          case `http`: {
-            const request = new Request(input.request.url, input.request)
-            const response = await slots.fetch(request)
-            return {
-              ...input,
-              response,
-            }
-          }
-          case `memory`: {
-            const result = await execute(input)
-            return {
-              ...input,
-              result,
-            }
-          }
-          default:
-            throw casesExhausted(input)
-        }
-      },
-    }, {
-      name: `unpack`,
-      run: async ({ input }) => {
-        switch (input.transportType) {
-          case `http`: {
-            // todo 1 if response is missing header of content length then .json() hangs forever.
-            //        firstly consider a timeout, secondly, if response is malformed, then don't even run .json()
-            // todo 2 if response is e.g. 404 with no json body, then an error is thrown because json parse cannot work, not gracefully handled here
-            const json = await input.response.json() as object
-            const result = parseExecutionResult(json)
-            return {
-              ...input,
-              result,
-            }
-          }
-          case `memory`: {
-            return {
-              ...input,
-              result: input.result,
-            }
-          }
-          default:
-            throw casesExhausted(input)
-        }
-      },
-    }, {
-      name: `decode`,
-      run: ({ input, previous }) => {
-        // If there has been an error and we definitely don't have any data, such as when
-        // giving an operation name that doesn't match any in the document,
-        // then don't attempt to decode.
-        const isError = !input.result.data && (input.result.errors?.length ?? 0) > 0
-        if (input.state.schemaMap && !isError) {
-          decodeResultData({
-            sddm: input.state.schemaMap,
-            request: normalizeRequestToNode(previous.pack.input.request),
-            data: input.result.data,
-            scalars: input.state.scalars.map,
-          })
-        }
-
-        const result = input.transportType === `http`
-          ? {
-            ...input.result,
-            response: input.response,
-          }
-          : input.result
-
-        return result
-      },
-    }],
   })
+  .step({
+    name: `encode`,
+    run: ({ input }): requestPipeline.Steps.Pack['input'] => {
+      const sddm = input.state.schemaMap
+      const scalars = input.state.scalars.map
+      if (sddm) {
+        const request = normalizeRequestToNode(input.request)
+
+        // We will mutate query. Assign it back to input for it to be carried forward.
+        input.request.query = request.query
+
+        encodeRequestVariables({ sddm, scalars, request })
+      }
+
+      return input
+    },
+  })
+  .step({
+    name: `pack`,
+  })
+  .step({
+    name: `exchange`,
+  })
+  .step({
+    name: `unpack`,
+  })
+  .stepWithInput<requestPipeline.Steps.Decode['input']>()({
+    name: `decode`,
+    run: ({ input, previous }) => {
+      // If there has been an error and we definitely don't have any data, such as when
+      // giving an operation name that doesn't match any in the document,
+      // then don't attempt to decode.
+      const isError = !input.result.data && (input.result.errors?.length ?? 0) > 0
+      if (input.state.schemaMap && !isError) {
+        decodeResultData({
+          sddm: input.state.schemaMap,
+          request: normalizeRequestToNode(previous.pack.input.request),
+          data: input.result.data,
+          scalars: input.state.scalars.map,
+        })
+      }
+
+      // const result = input.transportType === `http`
+      //   ? {
+      //     ...input.result,
+      //     response: input.response,
+      //   }
+      //   : input.result
+
+      return input.result
+    },
+  })
+  // <{
+  //     discriminant: [`transportType`, TransportHttp],
+  //     steps: {
+  //       pack: {
+  //         slots: {
+  //           searchParams: getRequestEncodeSearchParameters,
+  //           body: postRequestEncodeBody,
+  //         },
+  //       },
+  //       exchange: {
+  //         slots: {
+  //           fetch: (requestInfo: RequestInfo): MaybePromise<Response> => fetch(requestInfo),
+  //         },
+  //       },
+  //       unpack: {
+  //         input: {
+  //           result: FormattedExecutionResult,
+  //         },
+  //       },
+  //     },
+  //   }>
+  .overload((overload) =>
+    overload
+      .discriminant(`transportType`, `http`)
+      .input<{ url: URL }>()
+      .step(`pack`, {
+        slots: {
+          searchParams: getRequestEncodeSearchParameters,
+          body: postRequestEncodeBody,
+        },
+        run: ({ input, slots }) => {
+          const graphqlRequest: Grafaid.HTTP.RequestConfig = {
+            operationName: input.request.operationName,
+            variables: input.request.variables,
+            query: print(input.request.query),
+          }
+
+          if (input.state.config.transport.type !== Transport.http) throw new Error(`transport type is not http`)
+
+          const operationType = isString(input.request.operation)
+            ? input.request.operation
+            : input.request.operation.operation
+          const methodMode = input.state.config.transport.config.methodMode
+          const requestMethod = methodMode === MethodMode.post
+            ? `post`
+            : methodMode === MethodMode.getReads
+            ? OperationTypeToAccessKind[operationType] === `read` ? `get` : `post`
+            : casesExhausted(methodMode)
+
+          const baseProperties =
+            // mergeRequestInit(
+            mergeRequestInit(
+              mergeRequestInit(
+                {
+                  headers: requestMethod === `get` ? getRequestHeadersRec : postRequestHeadersRec,
+                },
+                {
+                  headers: input.state.config.transport.config.headers,
+                },
+              ),
+              input.state.config.transport.config.raw,
+            )
+          // {
+          //   headers: input.headers,
+          // },
+          // )
+          const request:
+            | requestPipeline.Steps.CoreExchangePostRequest
+            | requestPipeline.Steps.CoreExchangeGetRequest = requestMethod === `get`
+              ? {
+                methodMode: methodMode as MethodModeGetReads,
+                ...baseProperties,
+                method: `get`,
+                url: searchParamsAppendAll(input.url, slots.searchParams(graphqlRequest)),
+              }
+              : {
+                methodMode: methodMode,
+                ...baseProperties,
+                method: `post`,
+                url: input.url,
+                body: slots.body(graphqlRequest),
+              }
+          return {
+            ...input,
+            request,
+          }
+        },
+      })
+      .step(`exchange`, {
+        slots: {
+          fetch: (requestInfo: RequestInfo): MaybePromise<Response> => fetch(requestInfo),
+        },
+        run: async ({ input, slots }) => {
+          const request = new Request(input.request.url, input.request)
+          const response = await slots.fetch(request)
+          return {
+            ...input,
+            response,
+          }
+        },
+      })
+      .step(`unpack`, {
+        run: async ({ input }) => {
+          // todo 1 if response is missing header of content length then .json() hangs forever.
+          //        firstly consider a timeout, secondly, if response is malformed, then don't even run .json()
+          // todo 2 if response is e.g. 404 with no json body, then an error is thrown because json parse cannot work, not gracefully handled here
+          const json = await input.response.json() as object
+          const result = parseExecutionResult(json)
+          return {
+            ...input,
+            result,
+          }
+        },
+      })
+  )
+  //   <{
+  //   discriminant: ['transportType', TransportMemory]
+  //   steps: {
+  //     pack: {
+  //       input: {
+  //         request: Grafaid.RequestAnalyzedInput
+  //       }
+  //     }
+  //     exchange: {
+  //       input: {
+  //         request: Grafaid.HTTP.RequestConfig
+  //       }
+  //     }
+  //     unpack: {
+  //       input: {
+  //         result: FormattedExecutionResult
+  //       }
+  //     }
+  //   }
+  // }>
+  // .overload((overload) =>
+  //   overload
+  //     .discriminant(`transportType`, `memory`)
+  //     .input<{ schema: Grafaid.Schema.Schema }>()
+  //     .step(`pack`, {
+  //       run: ({ input }) => {
+  //         const graphqlRequest: Grafaid.HTTP.RequestConfig = {
+  //           operationName: input.request.operationName,
+  //           variables: input.request.variables,
+  //           query: print(input.request.query),
+  //         }
+  //         return {
+  //           ...input,
+  //           request: graphqlRequest,
+  //         }
+  //       },
+  //     })
+  //     .step(`exchange`, {
+  //       run: async ({ input }) => {
+  //         const result = await execute(input)
+  //         return {
+  //           ...input,
+  //           result,
+  //         }
+  //       },
+  //     })
+  //     .step(`unpack`, {
+  //       run: ({ input }) => {
+  //         return input
+  //         // return {
+  //         //   ...input,
+  //         //   result: input.result,
+  //         // }
+  //       },
+  //     })
+  // )
+  .context.steps
 
 export namespace requestPipeline {
   export type ResultFailure = Anyware.Pipeline.ResultFailure
@@ -209,52 +262,50 @@ export namespace requestPipeline {
   export type Result = Anyware.Pipeline.InferResultFromSpec<Spec>
 
   export type Spec = Anyware.PipelineSpecFromSteps<[
-    Steps.HookDefEncode,
-    Steps.HookDefPack,
-    Steps.HookDefExchange,
-    Steps.HookDefUnpack,
-    Steps.HookDefDecode,
+    Steps.Encode,
+    Steps.Pack,
+    Steps.Exchange,
+    Steps.Unpack,
+    Steps.Decode,
   ]>
 
+  export type InitialInput =
+    & { request: Grafaid.RequestAnalyzedInput }
+    & StepInputBase
+  // & TransportInput
+
+  export interface StepInputBase {
+    state: Context
+  }
+
+  // type TransportInput<$HttpProperties = {}, $MemoryProperties = {}> =
+  //   | (
+  //     ({
+  //       transportType: TransportHttp
+  //       url: string | URL
+  //     } & $HttpProperties)
+  //   )
+  //   | (
+  //     ({
+  //       transportType: TransportMemory
+  //       schema: GraphQLSchema
+  //     } & $MemoryProperties)
+  //   )
+
   export namespace Steps {
-    export interface HookInputBase {
-      state: Context
-    }
-
-    // dprint-ignore
-
-    type TransportInput<$HttpProperties = {}, $MemoryProperties = {}> =
-  | (
-         ({
-            transportType: TransportHttp
-            url: string | URL
-          } & $HttpProperties)
-    )
-  | (
-         ({
-          transportType: TransportMemory
-          schema: GraphQLSchema
-        } & $MemoryProperties)
-    )
-
-    // ---------------------------
-
-    export type HookDefEncode = {
+    export type Encode = {
       name: `encode`
-      input:
-        & { request: Grafaid.RequestAnalyzedInput }
-        & HookInputBase
-        & TransportInput
+      input: InitialInput
     }
 
-    export type HookDefPack = {
+    export type Pack = {
       name: `pack`
       input:
-        & HookInputBase
-        & TransportInput<
-          // todo why is headers here but not other http request properties?
-          { headers?: HeadersInit }
-        >
+        & StepInputBase
+        // & TransportInput<
+        //   // todo why is headers here but not other http request properties?
+        //   { headers?: HeadersInit }
+        // >
         & { request: Grafaid.RequestAnalyzedInput }
       slots: {
         /**
@@ -268,36 +319,34 @@ export namespace requestPipeline {
       }
     }
 
-    export type HookDefExchange = {
+    export type Exchange = {
       name: `exchange`
       slots: {
         fetch: (request: Request) => Response | Promise<Response>
       }
-      input:
-        & HookInputBase
-        & TransportInput<
-          { request: CoreExchangePostRequest | CoreExchangeGetRequest; headers?: HeadersInit },
-          { request: Grafaid.HTTP.RequestConfig }
-        >
+      input: StepInputBase
+      // & TransportInput<
+      //   { request: CoreExchangePostRequest | CoreExchangeGetRequest; headers?: HeadersInit },
+      //   { request: Grafaid.HTTP.RequestConfig }
+      // >
     }
 
-    export type HookDefUnpack = {
+    export type Unpack = {
       name: `unpack`
-      input:
-        & HookInputBase
-        & TransportInput<
-          { response: Response },
-          { result: FormattedExecutionResult }
-        >
+      input: StepInputBase
+      // & TransportInput<
+      //   { response: Response },
+      //   { result: FormattedExecutionResult }
+      // >
     }
 
-    export type HookDefDecode = {
+    export type Decode = {
       name: `decode`
       input:
-        & HookInputBase
-        & TransportInput<
-          { response: Response }
-        >
+        & StepInputBase
+        // & TransportInput<
+        //   { response: Response }
+        // >
         & { result: FormattedExecutionResult }
       output: GraffleExecutionResultEnvelope
     }

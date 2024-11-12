@@ -135,7 +135,7 @@ const executeDocument = async (
     url,
     schema,
     request,
-  } as requestPipeline.Steps.HookDefEncode['input']
+  } as requestPipeline.Steps.Encode['input']
 
   const result = await Anyware.Pipeline.run(requestPipeline, {
     initialInput,

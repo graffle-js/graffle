@@ -3,6 +3,15 @@ import { isDate } from 'util/types'
 import { type ExcludeUndefined, type GuardedType, isAnyFunction, isNonNullObject } from '../prelude.js'
 
 // dprint-ignore
+export type OrDefault2<$Value, $Default> =
+    // When no value has been passed in because the property is optional,
+    // then the inferred type is unknown.
+    IsUnknown<$Value> extends true ? $Default :
+    undefined extends $Value       ? $Default :
+                                     ExcludeUndefined<$Value>
+
+// todo remove this in favour of OrDefault2
+// dprint-ignore
 export type OrDefault<$Value, $Default> =
     // When no value has been passed in because the property is optional,
     // then the inferred type is unknown.
@@ -146,9 +155,17 @@ export type SetMany<$Obj extends object, $Sets extends [Path, any][]> =
                                                                                             > :
                                                                                             never
 
-export type SetOneKey<$Obj extends object, $Prop extends keyof $Obj, $Type extends $Obj[$Prop]> =
-  & Omit<$Obj, $Prop>
-  & { [_ in $Prop]: $Type }
+export type AppendAtKey<$Obj extends object, $Prop extends keyof $Obj, $Type> =
+  // @ts-expect-error
+  UpdateOneKey<$Obj, $Prop, [...$Obj[$Prop], $Type]>
+
+export type UpdateOneKey<$Obj extends object, $Prop extends keyof $Obj, $Type extends $Obj[$Prop]> =
+  & {
+    [_ in keyof $Obj as _ extends $Prop ? never : _]: $Obj[_]
+  }
+  & {
+    [_ in $Prop]: $Type
+  }
 
 // dprint-ignore
 export type SetOne<$Obj extends object, $Path extends Path, $Value> =
