@@ -1,6 +1,5 @@
 import { beforeEach } from 'vitest'
 import { createExtension } from '../../src/entrypoints/main.js'
-import type { Config } from '../../src/entrypoints/utilities-for-generated.js'
 import type { requestPipeline } from '../../src/requestPipeline/__.js'
 
 interface SpyData {
@@ -11,7 +10,7 @@ interface SpyData {
     input: requestPipeline.Steps.HookDefPack['input'] | null
   }
   exchange: {
-    input: requestPipeline.Steps.HookDefExchange<Config>['input'] | null
+    input: requestPipeline.Steps.HookDefExchange['input'] | null
   }
 }
 

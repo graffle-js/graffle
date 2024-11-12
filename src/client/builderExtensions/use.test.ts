@@ -42,7 +42,8 @@ describe(`entrypoint pack`, () => {
       return createResponse({ data: { id: db.id } })
     })
     const client2 = client.anyware(async ({ pack }) => {
-      return await pack({ input: { ...pack.input, headers } })
+      if (pack.input.transportType !== `http`) return pack()
+      return pack({ input: { ...pack.input, headers } })
     })
     expect(await client2.query.id()).toEqual(db.id)
   })
@@ -51,8 +52,9 @@ describe(`entrypoint pack`, () => {
       return createResponse({ data: { id: db.id } })
     })
     const client2 = client.anyware(async ({ pack }) => {
+      if (pack.input.transportType !== `http`) return pack()
       const { exchange } = await pack({ input: { ...pack.input, headers } })
-      return await exchange({ input: exchange.input })
+      return exchange({ input: exchange.input })
     })
     expect(await client2.query.id()).toEqual(db.id)
   })

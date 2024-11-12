@@ -5,35 +5,35 @@ import { Graffle as Pokemon } from '../../tests/_/schemas/pokemon/graffle/__.js'
 import { schema as schemaPokemon } from '../../tests/_/schemas/pokemon/schema.js'
 import { Graffle } from '../entrypoints/main.js'
 import { ACCEPT_REC, CONTENT_TYPE_REC } from '../lib/grafaid/http/http.js'
-import type { requestPipeline } from '../requestPipeline/__.js'
-import { Transport, type TransportHttp } from '../types/Transport.js'
+// import type { requestPipeline } from '../requestPipeline/__.js'
+// import { Transport, type TransportHttp } from '../types/Transport.js'
 
 const schema = new URL(`https://foo.io/api/graphql`)
 
-test(`anyware hooks are typed to http transport`, () => {
-  Graffle.create({ schema }).anyware(async ({ encode }) => {
-    expectTypeOf(encode.input.transportType).toEqualTypeOf<TransportHttp>()
-    const { pack } = await encode()
-    expectTypeOf(pack.input.transportType).toEqualTypeOf(Transport.http)
-    const { exchange } = await pack()
-    expectTypeOf(exchange.input.transportType).toEqualTypeOf(Transport.http)
-    // todo we can statically track the method mode like we do the transport mode
-    expectTypeOf(exchange.input.request).toEqualTypeOf<
-      requestPipeline.Steps.CoreExchangePostRequest | requestPipeline.Steps.CoreExchangeGetRequest
-    >()
-    const { unpack } = await exchange()
-    expectTypeOf(unpack.input.transportType).toEqualTypeOf(Transport.http)
-    expectTypeOf(unpack.input.response).toEqualTypeOf<Response>()
-    const { decode } = await unpack()
-    expectTypeOf(decode.input.transportType).toEqualTypeOf(Transport.http)
-    expectTypeOf(decode.input.response).toEqualTypeOf<Response>()
-    const result = await decode()
-    if (!(result instanceof Error)) {
-      expectTypeOf(result.response).toEqualTypeOf<Response>()
-    }
-    return result
-  })
-})
+// test(`anyware hooks are typed to http transport`, () => {
+//   Graffle.create({ schema }).anyware(async ({ encode }) => {
+//     expectTypeOf(encode.input.transportType).toEqualTypeOf<TransportHttp>()
+//     const { pack } = await encode()
+//     expectTypeOf(pack.input.transportType).toEqualTypeOf(Transport.http)
+//     const { exchange } = await pack()
+//     expectTypeOf(exchange.input.transportType).toEqualTypeOf(Transport.http)
+//     // todo we can statically track the method mode like we do the transport mode
+//     expectTypeOf(exchange.input.request).toEqualTypeOf<
+//       requestPipeline.Steps.CoreExchangePostRequest | requestPipeline.Steps.CoreExchangeGetRequest
+//     >()
+//     const { unpack } = await exchange()
+//     expectTypeOf(unpack.input.transportType).toEqualTypeOf(Transport.http)
+//     expectTypeOf(unpack.input.response).toEqualTypeOf<Response>()
+//     const { decode } = await unpack()
+//     expectTypeOf(decode.input.transportType).toEqualTypeOf(Transport.http)
+//     expectTypeOf(decode.input.response).toEqualTypeOf<Response>()
+//     const result = await decode()
+//     if (!(result instanceof Error)) {
+//       expectTypeOf(result.response).toEqualTypeOf<Response>()
+//     }
+//     return result
+//   })
+// })
 
 test(`when envelope is used then response property is present even if relying on schema url default`, async () => {
   const service = await serveSchema({ schema: schemaPokemon })

@@ -9,8 +9,9 @@ const graffle = Graffle
   .create({
     schema: publicGraphQLSchemaEndpoints.Pokemon,
   })
-  .anyware(async ({ pack }) => {
-    return await pack({
+  .anyware(({ pack }) => {
+    if (pack.input.transportType !== `http`) return pack()
+    return pack({
       input: {
         ...pack.input,
         headers: {
@@ -19,7 +20,7 @@ const graffle = Graffle
       },
     })
   })
-  .anyware(async ({ exchange }) => {
+  .anyware(({ exchange }) => {
     // todo wrong type / runtime value
     show(exchange.input.request)
     return exchange()

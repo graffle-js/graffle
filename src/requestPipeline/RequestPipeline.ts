@@ -1,7 +1,6 @@
 import type { FormattedExecutionResult, GraphQLSchema } from 'graphql'
 import type { Context } from '../client/context.js'
 import type { GraffleExecutionResultEnvelope } from '../client/handleOutput.js'
-import type { Config } from '../client/Settings/Config.js'
 import { MethodMode, type MethodModeGetReads } from '../client/transportHttp/request.js'
 import type { MethodModePost } from '../client/transportHttp/request.js'
 import { Anyware } from '../lib/anyware/__.js'
@@ -207,14 +206,14 @@ export namespace requestPipeline {
   // Possible from http transport fetch with abort controller.
   // | DOMException
 
-  export type Result<$Config extends Config = Config> = Anyware.Pipeline.InferResultFromSpec<Spec<$Config>>
+  export type Result = Anyware.Pipeline.InferResultFromSpec<Spec>
 
-  export type Spec<$Config extends Config = Config> = Anyware.PipelineSpecFromSteps<[
-    Steps.HookDefEncode<$Config>,
-    Steps.HookDefPack<$Config>,
-    Steps.HookDefExchange<$Config>,
-    Steps.HookDefUnpack<$Config>,
-    Steps.HookDefDecode<$Config>,
+  export type Spec = Anyware.PipelineSpecFromSteps<[
+    Steps.HookDefEncode,
+    Steps.HookDefPack,
+    Steps.HookDefExchange,
+    Steps.HookDefUnpack,
+    Steps.HookDefDecode,
   ]>
 
   export namespace Steps {
@@ -224,40 +223,35 @@ export namespace requestPipeline {
 
     // dprint-ignore
 
-    type TransportInput<$Config extends Config, $HttpProperties = {}, $MemoryProperties = {}> =
+    type TransportInput<$HttpProperties = {}, $MemoryProperties = {}> =
   | (
-      TransportHttp extends $Config['transport']['type']
-        ? ({
+         ({
             transportType: TransportHttp
             url: string | URL
           } & $HttpProperties)
-        : never
     )
   | (
-      TransportMemory extends $Config['transport']['type']
-        ? ({
+         ({
           transportType: TransportMemory
           schema: GraphQLSchema
         } & $MemoryProperties)
-        : never
     )
 
     // ---------------------------
 
-    export type HookDefEncode<$Config extends Config = Config> = {
+    export type HookDefEncode = {
       name: `encode`
       input:
         & { request: Grafaid.RequestAnalyzedInput }
         & HookInputBase
-        & TransportInput<$Config>
+        & TransportInput
     }
 
-    export type HookDefPack<$Config extends Config = Config> = {
+    export type HookDefPack = {
       name: `pack`
       input:
         & HookInputBase
         & TransportInput<
-          $Config,
           // todo why is headers here but not other http request properties?
           { headers?: HeadersInit }
         >
@@ -274,7 +268,7 @@ export namespace requestPipeline {
       }
     }
 
-    export type HookDefExchange<$Config extends Config> = {
+    export type HookDefExchange = {
       name: `exchange`
       slots: {
         fetch: (request: Request) => Response | Promise<Response>
@@ -282,33 +276,30 @@ export namespace requestPipeline {
       input:
         & HookInputBase
         & TransportInput<
-          $Config,
           { request: CoreExchangePostRequest | CoreExchangeGetRequest; headers?: HeadersInit },
           { request: Grafaid.HTTP.RequestConfig }
         >
     }
 
-    export type HookDefUnpack<$Config extends Config> = {
+    export type HookDefUnpack = {
       name: `unpack`
       input:
         & HookInputBase
         & TransportInput<
-          $Config,
           { response: Response },
           { result: FormattedExecutionResult }
         >
     }
 
-    export type HookDefDecode<$Config extends Config> = {
+    export type HookDefDecode = {
       name: `decode`
       input:
         & HookInputBase
         & TransportInput<
-          $Config,
           { response: Response }
         >
         & { result: FormattedExecutionResult }
-      output: GraffleExecutionResultEnvelope<$Config>
+      output: GraffleExecutionResultEnvelope
     }
 
     /**
