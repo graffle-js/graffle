@@ -274,11 +274,11 @@ type InferPipelineFromContext<$Context extends Context> =
       config: $Context['config']
       input: InferInput<$Context>
       output: InferOutput<$Context>
-      steps: MergeOverloads<$Context>
+      steps: InferSteps<$Context>
     }
     config: $Context['config']
     input: InferInput<$Context>
-    steps: ExecutableStep[]
+    steps: InferExecutableSteps<$Context>
     stepsIndex: StepsIndex
     output: Result<InferOutput<$Context>>
   }
@@ -290,10 +290,20 @@ type InferOutput<$Context extends Context> = Awaited<
     : $Context['input']
 >
 
-type MergeOverloads<$Context extends Context> = MergeOverloads_<$Context['steps'], $Context>
+type InferExecutableSteps<$Context extends Context> = InferExecutableSteps_<$Context['steps'], $Context>
+
+type InferExecutableSteps_<$Steps extends Step[], _$Context extends Context> = {
+  [$Index in keyof $Steps]: {
+    name: $Steps[$Index]['name']
+    slots: $Steps[$Index]['slots']
+    run: (input: object) => unknown
+  }
+}
+
+type InferSteps<$Context extends Context> = InferSteps_<$Context['steps'], $Context>
 
 // dprint-ignore
-type MergeOverloads_<$Steps extends Step[], $Context extends Context> = {
+type InferSteps_<$Steps extends Step[], $Context extends Context> = {
   [$Index in keyof $Steps]:
     $Context['overloads'] extends []
       ? $Steps[$Index]

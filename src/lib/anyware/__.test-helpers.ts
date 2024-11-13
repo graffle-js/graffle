@@ -29,41 +29,49 @@ export const slots = {
 }
 export type slots = typeof slots
 
-type PrivateHookRunnerInput = {
-  input: { value: string }
-  slots: { append: (hookName: string) => string; appendExtra: (hookName: string) => string }
-  previous: object
-}
+type StepARun = (
+  input: { value: string },
+  slots: { append: (hookName: string) => string; appendExtra: (hookName: string) => string },
+  previous: undefined,
+) => { value: string }
+
+type StepBRun = (
+  input: { value: string },
+  slots: { append: (hookName: string) => string; appendExtra: (hookName: string) => string },
+  previous: object,
+) => { value: string }
+
+type Append = (hookName: string) => string
+
+type AppendExtra = () => string
 
 export const createPipeline = (options?: Options) => {
   return Pipeline
     .create<{ value: string }>(options)
-    .step({
-      name: `a`,
+    .step(`a`, {
       slots: {
-        append: vi.fn().mockImplementation((hookName: string) => {
+        append: vi.fn<Append>().mockImplementation((hookName) => {
           return hookName
         }),
-        appendExtra: vi.fn().mockImplementation(() => {
+        appendExtra: vi.fn<AppendExtra>().mockImplementation(() => {
           return ``
         }),
       },
-      run: vi.fn().mockImplementation(({ input, slots }: PrivateHookRunnerInput) => {
+      run: vi.fn<StepARun>().mockImplementation((input, slots) => {
         const extra = slots.appendExtra(`a`)
         return { value: input.value + `+` + slots.append(`a`) + extra }
       }),
     })
-    .step({
-      name: `b`,
+    .step(`b`, {
       slots: {
-        append: vi.fn().mockImplementation((hookName: string) => {
+        append: vi.fn<Append>().mockImplementation((hookName) => {
           return hookName
         }),
-        appendExtra: vi.fn().mockImplementation(() => {
+        appendExtra: vi.fn<AppendExtra>().mockImplementation(() => {
           return ``
         }),
       },
-      run: vi.fn().mockImplementation(({ input, slots }: PrivateHookRunnerInput) => {
+      run: vi.fn<StepBRun>().mockImplementation((input, slots) => {
         const extra = slots.appendExtra(`b`)
         return { value: input.value + `+` + slots.append(`b`) + extra }
       }),
