@@ -129,22 +129,20 @@ export const requestPipeline = Anyware.Pipeline
               headers: input.headers,
             },
           )
-          const request:
-            | requestPipeline.Steps.CoreExchangePostRequest
-            | requestPipeline.Steps.CoreExchangeGetRequest = requestMethod === `get`
-              ? {
-                methodMode: methodMode as MethodModeGetReads,
-                ...baseProperties,
-                method: `get`,
-                url: searchParamsAppendAll(input.url, slots.searchParams(graphqlRequest)),
-              }
-              : {
-                methodMode: methodMode,
-                ...baseProperties,
-                method: `post`,
-                url: input.url,
-                body: slots.body(graphqlRequest),
-              }
+          const request: ExchangeRequest = requestMethod === `get`
+            ? {
+              methodMode: methodMode as MethodModeGetReads,
+              ...baseProperties,
+              method: `get`,
+              url: searchParamsAppendAll(input.url, slots.searchParams(graphqlRequest)),
+            }
+            : {
+              methodMode: methodMode,
+              ...baseProperties,
+              method: `post`,
+              url: input.url,
+              body: slots.body(graphqlRequest),
+            }
           return {
             ...input,
             request,
@@ -219,29 +217,27 @@ export const requestPipeline = Anyware.Pipeline
 
 export type RequestPipeline = typeof requestPipeline
 
+type ExchangeRequest = ExchangePostRequest | ExchangeGetRequest
+
+/**
+ * An extension of {@link RequestInit} that adds a required `url` property and makes `body` required.
+ */
+type ExchangePostRequest = Omit<RequestInit, 'body' | 'method'> & {
+  methodMode: MethodModePost | MethodModeGetReads
+  method: httpMethodPost
+  url: string | URL // todo URL for config and string only for input. Requires anyware to allow different types for input and existing config.
+  body: BodyInit
+}
+
+type ExchangeGetRequest = Omit<RequestInit, 'body' | 'method'> & {
+  methodMode: MethodModeGetReads
+  method: httpMethodGet
+  url: string | URL
+}
+
 export namespace requestPipeline {
   export type ResultFailure = Anyware.Pipeline.ResultFailure
   // | Errors.ContextualError
   // Possible from http transport fetch with abort controller.
   // | DOMException
-
-  export type Result = Anyware.Pipeline.InferResultFromSpec<RequestPipeline['spec']>
-
-  export namespace Steps {
-    /**
-     * An extension of {@link RequestInit} that adds a required `url` property and makes `body` required.
-     */
-    export type CoreExchangePostRequest = Omit<RequestInit, 'body' | 'method'> & {
-      methodMode: MethodModePost | MethodModeGetReads
-      method: httpMethodPost
-      url: string | URL // todo URL for config and string only for input. Requires anyware to allow different types for input and existing config.
-      body: BodyInit
-    }
-
-    export type CoreExchangeGetRequest = Omit<RequestInit, 'body' | 'method'> & {
-      methodMode: MethodModeGetReads
-      method: httpMethodGet
-      url: string | URL
-    }
-  }
 }

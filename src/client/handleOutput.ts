@@ -11,7 +11,7 @@ import {
   type GetOrNever,
   type Values,
 } from '../lib/prelude.js'
-import type { requestPipeline } from '../requestPipeline/RequestPipeline.js'
+import type { RequestPipeline, requestPipeline } from '../requestPipeline/RequestPipeline.js'
 import type { GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
 import type { TransportHttp } from '../types/Transport.js'
 import type { Context } from './context.js'
@@ -50,7 +50,7 @@ export type GraffleExecutionResultEnvelope<$Config extends Config = Config> =
 
 export const handleOutput = (
   state: Context,
-  result: requestPipeline.Result,
+  result: RequestPipeline['output'],
 ) => {
   if (isContextConfigTraditionalGraphQLOutput(state.config)) {
     if (result instanceof Error) throw result
