@@ -13,4 +13,5 @@ export interface ExecutablePipeline {
   stepsIndex: StepsIndex
 }
 
-export type StepsIndex = Map<Step.Name, ExecutableStep>
+export type StepsIndex<$Name extends Step.Name = Step.Name, $ExecutableStep extends ExecutableStep = ExecutableStep> =
+  Map<$Name, $ExecutableStep>

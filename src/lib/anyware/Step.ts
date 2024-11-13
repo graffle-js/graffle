@@ -26,7 +26,7 @@ export namespace Step {
   >() =>
   <
     const $Name extends string,
-    $Run extends ImplementationFn<$Input>,
+    $Run extends Runner<$Input>,
     $Slots extends undefined | Step.Slots,
   >(
     parameters: {
@@ -37,14 +37,23 @@ export namespace Step {
   ): {
     name: $Name
     run: $Run
-    input: Parameters<$Run>[0]['input']
+    input: $Input
     output: ReturnType<$Run>
     slots: undefined extends $Slots ? undefined : $Slots
   } => {
     return parameters as any
   }
 
-  type ImplementationFn<$Input extends Input = Input> = (parameters: { input: $Input }) => any
+  export type Runner<
+    $Input extends Input = Input,
+    $Slots extends undefined | Step.Slots = undefined,
+    $Previous extends object = object,
+    $Output = any,
+  > = (
+    input: $Input,
+    slots?: $Slots,
+    previous?: $Previous,
+  ) => $Output
 
   export type Input = object
 

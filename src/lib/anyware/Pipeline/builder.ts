@@ -1,6 +1,6 @@
 import type { IsUnknown, Simplify } from 'type-fest'
 import type { ConfigManager } from '../../config-manager/__.js'
-import type { _ } from '../../prelude.js'
+import type { _, ExcludeUndefined } from '../../prelude.js'
 import { type Tuple } from '../../prelude.js'
 import type { ExecutableStep } from '../ExecutableStep.js'
 import type { Step } from '../Step.js'
@@ -9,10 +9,26 @@ import { createExecutableStepsIndex } from './createWithSpec.js'
 import type { StepsIndex } from './ExecutablePipeline.js'
 import type { Result } from './Result.js'
 
+interface ContextStep extends Step {
+  /**
+   * Tracking the run signature type is useful for deriving the executable step.
+   * For example if Vitest mocks were used for the step run functions, their type
+   * would be carried through to the executable step. This is useful for testing.
+   *
+   * If we only relied on the spec types, which don't track the given run type itself,
+   * they Vitest mock type would not be carried through.
+   *
+   * The executable step is not design for public use. Testing is an exception.
+   *
+   * This run signature is NOT used for deriving the specification step.
+   */
+  run?: Step.Runner<any, any, any>
+}
+
 export interface Context {
   config: Config
   input: object
-  steps: Step[]
+  steps: ContextStep[]
   overloads: OverloadBuilderContext[]
 }
 
@@ -40,6 +56,36 @@ type GetNextStepParameterInput<$Context extends Context> =
 
 export interface Builder<$Context extends Context = Context> {
   context: $Context
+  /**
+   * TODO
+   */
+  stepWithRunnerType: <$Runner extends Step.Runner<any, any, any>>() => <
+    const $Name extends string,
+    $Slots extends
+      | undefined
+      | Step.Slots = undefined,
+  >(
+    name: $Name,
+    parameters?: {
+      slots?: $Slots
+      run?: $Runner
+    },
+  ) => Builder<
+    ConfigManager.UpdateOneKey<
+      $Context,
+      'steps',
+      [
+        ...$Context['steps'],
+        {
+          name: $Name
+          input: Parameters<$Runner>[0]
+          output: ConfigManager.OrDefault2<Parameters<$Runner>[1], {}>
+          slots: ConfigManager.OrDefault2<$Slots, {}>
+          run: $Runner
+        },
+      ]
+    >
+  >
   /**
    * TODO
    */
@@ -92,7 +138,7 @@ interface BuilderStep<$Context extends Context> {
     $Slots extends
       | undefined
       | Step.Slots = undefined,
-    $Input = GetNextStepParameterInput<$Context>,
+    $Input extends object = GetNextStepParameterInput<$Context>,
     $Output = unknown,
   >(
     parameters: {
@@ -237,7 +283,7 @@ type InferPipelineFromContext<$Context extends Context> =
     config: $Context['config']
     input: InferInput<$Context>
     steps: InferExecutableSteps<$Context>
-    stepsIndex: StepsIndex
+    stepsIndex: StepsIndex<$Context['steps'][number]['name'], InferExecutableSteps<$Context>[number]>
     output: Result<InferOutput<$Context>>
   }
 
@@ -250,11 +296,14 @@ type InferOutput<$Context extends Context> = Awaited<
 
 type InferExecutableSteps<$Context extends Context> = InferExecutableSteps_<$Context['steps'], $Context>
 
-type InferExecutableSteps_<$Steps extends Step[], _$Context extends Context> = {
+type InferExecutableSteps_<$Steps extends ContextStep[], _$Context extends Context> = {
   [$Index in keyof $Steps]: {
     name: $Steps[$Index]['name']
     slots: $Steps[$Index]['slots']
-    run: (input: object) => unknown
+    // We exclude undefined here because at the type level it could be coming from the overloads which isn't considered here.
+    // We know that at runtime an executable function will be defined.
+    run: IsUnknown<$Steps[$Index]['run']> extends true ? Step.Runner
+      : ExcludeUndefined<$Steps[$Index]['run']>
   }
 }
 
@@ -338,7 +387,8 @@ export const create = <$Input extends object>(options?: Options): Builder<{
 const recreate = <$Context extends Context>(context: $Context): Builder<$Context> => {
   const builder: Builder<$Context> = {
     context,
-    step: (...args) => {
+    stepWithRunnerType: () => builder.step as any,
+    step: (...args: any[]) => {
       const step = typeof args[0] === `string`
         ? {
           name: args[0],

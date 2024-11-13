@@ -268,7 +268,3 @@ describe(`overload`, () => {
     ]>()
   })
 })
-
-type x = Record<string, number>
-type y<$x extends x> = $x['a']
-type z = y<{}>
