@@ -15,7 +15,7 @@ describe(`interceptor constructor`, () => {
       .step({ name: `b`, run: () => results.b })
       .step({ name: `c`, run: () => results.c })
       .done()
-    type i1 = Interceptor.InferConstructor<typeof p1>
+    type i1 = Interceptor.InferConstructor<typeof p1['spec']>
     expectTypeOf<Parameters<i1>>().toMatchTypeOf<[steps: { a: any; b: any; c: any }]>()
     expectTypeOf<Parameters<i1>>().toMatchTypeOf<[steps: {
       a: (params: { input?: initialInput }) => Promise<{ b: (params: { input?: results['a'] }) => any }>
@@ -91,7 +91,10 @@ describe(`interceptor constructor`, () => {
 // --- Helpers ---
 
 // dprint-ignore
-// @ts-expect-error
-type GetTriggerFromPipeline<$Pipeline extends Pipeline.ExecutablePipeline, $TriggerName extends string> = Parameters<Interceptor.InferConstructor<$Pipeline>>[0][$TriggerName]
+type GetTriggerFromPipeline<$Pipeline extends Pipeline.ExecutablePipeline, $TriggerName extends string> =
+  // @ts-expect-error
+  Parameters<Interceptor.InferConstructor<$Pipeline['spec']>>[0][$TriggerName]
+
 // dprint-ignore
-type GetReturnTypeFromPipeline<$Pipeline extends Pipeline.ExecutablePipeline> = ReturnType<Interceptor.InferConstructor<$Pipeline>>
+type GetReturnTypeFromPipeline<$Pipeline extends Pipeline.ExecutablePipeline> =
+  ReturnType<Interceptor.InferConstructor<$Pipeline['spec']>>
