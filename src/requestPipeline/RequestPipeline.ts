@@ -1,6 +1,5 @@
 import type { FormattedExecutionResult } from 'graphql'
 import type { Context } from '../client/context.js'
-import type { GraffleExecutionResultEnvelope } from '../client/handleOutput.js'
 import { MethodMode, type MethodModeGetReads } from '../client/transportHttp/request.js'
 import type { MethodModePost } from '../client/transportHttp/request.js'
 import { Anyware } from '../lib/anyware/__.js'
@@ -18,7 +17,10 @@ import { decodeResultData } from './CustomScalars/decode.js'
 import { encodeRequestVariables } from './CustomScalars/encode.js'
 
 export const requestPipeline = Anyware.Pipeline
-  .create<requestPipeline.InitialInput>({
+  .create<{
+    request: Grafaid.RequestAnalyzedInput
+    state: Context
+  }>({
     // If core errors caused by an abort error then raise it as a direct error.
     // This is an expected possible error. Possible when user cancels a request.
     passthroughErrorWith: (signal) => {
@@ -29,7 +31,7 @@ export const requestPipeline = Anyware.Pipeline
     },
   })
   .step(`encode`, {
-    run: (input): requestPipeline.Steps.Pack['input'] => {
+    run: (input) => {
       const sddm = input.state.schemaMap
       const scalars = input.state.scalars.map
       if (sddm) {
@@ -48,7 +50,14 @@ export const requestPipeline = Anyware.Pipeline
   .step(`exchange`)
   .step(`unpack`)
   .step(`decode`, {
-    run: (input: requestPipeline.Steps.Decode['input'], _, previous) => {
+    run: (
+      input: {
+        state: Context
+        result: FormattedExecutionResult
+      },
+      _,
+      previous,
+    ) => {
       // If there has been an error and we definitely don't have any data, such as when
       // giving an operation name that doesn't match any in the document,
       // then don't attempt to decode.
@@ -216,96 +225,7 @@ export namespace requestPipeline {
 
   export type Result = Anyware.Pipeline.InferResultFromSpec<RequestPipeline['spec']>
 
-  // export type Spec = Anyware.PipelineSpecFromSteps<[
-  //   Steps.Encode,
-  //   Steps.Pack,
-  //   Steps.Exchange,
-  //   Steps.Unpack,
-  //   Steps.Decode,
-  // ]>
-
-  export type InitialInput =
-    & { request: Grafaid.RequestAnalyzedInput }
-    & StepInputBase
-  // & TransportInput
-
-  export interface StepInputBase {
-    state: Context
-  }
-
-  // type TransportInput<$HttpProperties = {}, $MemoryProperties = {}> =
-  //   | (
-  //     ({
-  //       transportType: TransportHttp
-  //       url: string | URL
-  //     } & $HttpProperties)
-  //   )
-  //   | (
-  //     ({
-  //       transportType: TransportMemory
-  //       schema: GraphQLSchema
-  //     } & $MemoryProperties)
-  //   )
-
   export namespace Steps {
-    // export type Encode = {
-    //   name: `encode`
-    //   input: InitialInput
-    // }
-
-    export type Pack = {
-      name: `pack`
-      input:
-        & StepInputBase
-        // & TransportInput<
-        //   // todo why is headers here but not other http request properties?
-        //   { headers?: HeadersInit }
-        // >
-        & { request: Grafaid.RequestAnalyzedInput }
-      slots: {
-        /**
-         * When request will be sent using GET this slot is called to create the value that will be used for the HTTP Search Parameters.
-         */
-        searchParams: getRequestEncodeSearchParameters
-        /**
-         * When request will be sent using POST this slot is called to create the value that will be used for the HTTP body.
-         */
-        body: postRequestEncodeBody
-      }
-    }
-
-    // export type Exchange = {
-    //   name: `exchange`
-    //   slots: {
-    //     fetch: (request: Request) => Response | Promise<Response>
-    //   }
-    //   input: StepInputBase
-    //   // & TransportInput<
-    //   //   { request: CoreExchangePostRequest | CoreExchangeGetRequest; headers?: HeadersInit },
-    //   //   { request: Grafaid.HTTP.RequestConfig }
-    //   // >
-    // }
-
-    // export type Unpack = {
-    //   name: `unpack`
-    //   input: StepInputBase
-    //   // & TransportInput<
-    //   //   { response: Response },
-    //   //   { result: FormattedExecutionResult }
-    //   // >
-    // }
-
-    export type Decode = {
-      name: `decode`
-      input:
-        & StepInputBase
-        // & TransportInput<
-        //   { response: Response }
-        // >
-        & { result: FormattedExecutionResult }
-      output: GraffleExecutionResultEnvelope
-    }
-
     /**
      * An extension of {@link RequestInit} that adds a required `url` property and makes `body` required.
      */
