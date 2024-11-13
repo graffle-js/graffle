@@ -416,7 +416,7 @@ describe('step runner parameter - previous', () => {
 })
 
 describe('overloads', () => {
-  test.only('overloaded step runners are run', async () => {
+  test('overloaded step runners are run', async () => {
     const p = Pipeline
       .create<{ value: string }>()
       .step('a')
@@ -425,19 +425,37 @@ describe('overloads', () => {
         o
           .create({ discriminant: ['x', 1] })
           .step('a', {
-            run: (input) => {
-              // todo make it a type error to not propagate the discriminant
-              return ({ ...input, value: input.value + '+a' })
-            },
+            // todo make it a type error to not propagate the discriminant
+            run: (input) => ({ ...input, value: input.value + '+a' }),
           })
           .step('b', {
-            run: (input) => {
-              return ({ value: input.value + '+b' })
-            },
+            run: (input) => ({ value: input.value + '+b' }),
           })
       )
       .done()
     const result = await Pipeline.run(p, { initialInput: { value: 'initial', x: 1 } })
     expect(result).toEqual(successfulResult({ value: 'initial+a+b' }))
+  })
+  test('two overloads can be used; runtime discriminant decides which one is used', async () => {
+    const p = Pipeline
+      .create<{ value: string }>()
+      .step('a')
+      .step('b')
+      .overload(o =>
+        o.create({ discriminant: ['x', 1] })
+          .step('a', { run: (input) => ({ ...input, value: input.value + '+a' }) })
+          .step('b', { run: (input) => ({ value: input.value + '+b' }) })
+      )
+      .overload(o =>
+        o
+          .create({ discriminant: ['x', 2] })
+          .step('a', { run: (input) => ({ ...input, value: input.value + '+a2' }) })
+          .step('b', { run: (input) => ({ value: input.value + '+b2' }) })
+      )
+      .done()
+    const result1 = await Pipeline.run(p, { initialInput: { value: 'initial', x: 1 } })
+    expect(result1).toEqual(successfulResult({ value: 'initial+a+b' }))
+    const result2 = await Pipeline.run(p, { initialInput: { value: 'initial', x: 2 } })
+    expect(result2).toEqual(successfulResult({ value: 'initial+a2+b2' }))
   })
 })
