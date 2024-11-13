@@ -1,3 +1,4 @@
+import type { Simplify } from 'type-fest'
 import { describe, expectTypeOf, test } from 'vitest'
 import type { initialInput } from '../__.test-helpers.js'
 import { results, slots, stepA, stepB } from '../__.test-helpers.js'
@@ -14,35 +15,31 @@ test(`initial context`, () => {
 
 test(`first step definition`, () => {
   expectTypeOf(b0.step).toMatchTypeOf<
-    (input: { name: string; run: (params: { input: initialInput; previous: undefined }) => any }) => any
+    (name: string, definition: { run: (params: { input: initialInput; previous: undefined }) => any }) => any
   >()
 })
 
 test(`can force an input type while inferring rest`, () => {
-  const b1 = b0.stepWithInput<{ x: 9 }>()({
-    name: `a` as const,
-    run: ({ input }) => {
-      expectTypeOf(input).toEqualTypeOf<{ x: 9 }>()
-    },
-  })
+  const b1 = b0.step(`a`, { run: (_: { x: 9 }) => {} })
   expectTypeOf(b1.context.steps[0].name).toEqualTypeOf<'a'>()
+  expectTypeOf(b1.context.steps[0].input).toEqualTypeOf<{ x: 9 }>()
 })
 
 test(`step can omit run, output defaults to object`, () => {
-  const b1 = b0.step({ name: `a` })
+  const b1 = b0.step(`a`)
   expectTypeOf(b1.context.steps[0].input).toEqualTypeOf<{ readonly x: 1 }>()
-  expectTypeOf(b1.context.steps[0].output).toEqualTypeOf<object>()
-  const b2 = b0.step({ name: `a` }).step({ name: `b` })
-  expectTypeOf(b2.context.steps[1].input).toEqualTypeOf<object>()
-  expectTypeOf(b2.context.steps[1].output).toEqualTypeOf<object>()
+  expectTypeOf(b1.context.steps[0].output).toEqualTypeOf<{}>()
+  const b2 = b0.step(`a`).step(`b`)
+  expectTypeOf(b2.context.steps[1].input).toEqualTypeOf<{}>()
+  expectTypeOf(b2.context.steps[1].output).toEqualTypeOf<{}>()
 })
 
 test(`second step definition`, () => {
-  const p1 = b0.step({ name: `a`, run: () => results.a })
+  const p1 = b0.step(`a`, { run: () => results.a })
   expectTypeOf(p1.step).toMatchTypeOf<
     (
-      input: {
-        name: string
+      name: string,
+      parameters: {
         run: (params: {
           input: results['a']
           slots: undefined
@@ -60,10 +57,9 @@ test(`second step definition`, () => {
   >()
 })
 test(`step input receives awaited return value from previous step `, () => {
-  const b1 = b0.step({ name: `a`, run: () => Promise.resolve(results.a) })
-  b1.step({
-    name: `b`,
-    run: ({ input }) => {
+  const b1 = b0.step(`a`, { run: () => Promise.resolve(results.a) })
+  b1.step(`b`, {
+    run: (input) => {
       expectTypeOf(input).toEqualTypeOf<results['a']>()
     },
   })
@@ -71,13 +67,12 @@ test(`step input receives awaited return value from previous step `, () => {
 
 test(`step definition with slots`, () => {
   const p1 = b0
-    .step({
-      name: `a`,
+    .step(`a`, {
       slots: {
         m: slots.m,
         n: slots.n,
       },
-      run: ({ slots }) => {
+      run: (_, slots) => {
         expectTypeOf(slots.m()).toEqualTypeOf<Promise<'m'>>()
         expectTypeOf(slots.n()).toEqualTypeOf<'n'>()
         return results.a
@@ -109,6 +104,9 @@ describe(`overload`, () => {
   const dValue = 1
   type dValue = typeof dValue
   type dObject = { [_ in dName]: dValue }
+  const dValue2 = 2
+  type dValue2 = typeof dValue2
+  type dObject2 = { [_ in dName]: dValue2 }
 
   test(`overload without steps appended to empty context`, () => {
     expectTypeOf(b0.overload(o => o.discriminant(dName, dValue)).context.overloads).toMatchTypeOf<
@@ -117,10 +115,10 @@ describe(`overload`, () => {
   })
   test(`overload with step is appended to empty context`, () => {
     expectTypeOf(
-      b0.step({ name: `a` }).step(stepB).overload(o =>
+      b0.step(`a`).step(stepB).overload(o =>
         o
           .discriminant(dName, dValue)
-          .step(`a`, { run: ({ input }) => ({ ...input, ola: 1 as const }) })
+          .step(`a`, { run: (input) => ({ ...input, ola: 1 as const }) })
       ).context.overloads,
     )
       .toMatchTypeOf<[
@@ -142,14 +140,42 @@ describe(`overload`, () => {
   // Parameters
 
   test(`parameter steps, first key, run key, parameter input, equals previous step output`, () => {
-    b0.step(stepA).step({ name: `b` }).overload(o =>
+    b0.step(stepA).step(`b`).overload(o =>
       o
         .discriminant(dName, dValue)
         .step(`b`, {
-          run: ({ input }) => {
+          run: (input) => {
             expectTypeOf(input).toEqualTypeOf<results['a'] & dObject>()
           },
         })
     )
+  })
+
+  // output
+  test(`overload inputs become a pipeline union input`, () => {
+    const p = b0
+      .step(`a`)
+      .overload(o => o.discriminant(dName, dValue).input<{ ol1: 1 }>())
+      .overload(o => o.discriminant(dName, dValue2).input<{ ol2: 2 }>())
+      .done()
+    expectTypeOf(p.input).toMatchTypeOf<
+      | (initialInput & dObject & { ol1: 1 })
+      | (initialInput & dObject2 & { ol2: 2 })
+    >()
+    expectTypeOf(p.spec.input).toMatchTypeOf<
+      | (initialInput & dObject & { ol1: 1 })
+      | (initialInput & dObject2 & { ol2: 2 })
+    >()
+  })
+
+  test(`overload step input/output becomes union to step input/output`, () => {
+    const p = b0.step(`a`).overload(o => o.discriminant(dName, dValue).step(`a`, { run: () => ({ olb: 1 as const }) }))
+      .done()
+    expectTypeOf(p.spec.steps).toEqualTypeOf<[{
+      name: 'a'
+      input: Simplify<dObject & initialInput>
+      output: Simplify<dObject & { olb: 1 }>
+      slots: undefined
+    }]>()
   })
 })

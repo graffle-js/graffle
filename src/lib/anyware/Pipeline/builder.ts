@@ -1,3 +1,4 @@
+import type { Simplify } from 'type-fest'
 import type { ConfigManager } from '../../config-manager/__.js'
 import type { _ } from '../../prelude.js'
 import { type Tuple } from '../../prelude.js'
@@ -40,73 +41,38 @@ type GetNextStepParameterInput<$Context extends Context> =
 export interface Builder<$Context extends Context = Context> {
   context: $Context
   /**
-   * todo
-   *
-   * @remarks This is needed because of a TypeScript limitation. See:
-   *
-   *   - https://github.com/microsoft/TypeScript/issues/26242
-   *   - https://stackoverflow.com/questions/60377365/typescript-infer-type-of-generic-after-optional-first-generic
+   * TODO
    */
-  // todo an alternative solution might be to stop using keyword parameters and instead have sig:
-  // (input, slots, previous) => ...
-  // So that users can type the input part while still having other parameters inferred.
-  stepWithInput: <
-    $Input = GetNextStepParameterInput<$Context>,
-  >() => <
-    const $Name extends string = any,
-    $Slots extends
-      | undefined
-      | Step.Slots = undefined,
-    $Output = unknown,
-    $Parameters = {
-      input: $Input
-      slots: $Slots
-      previous: GetNextStepParameterPrevious<$Context>
-    },
-  >(
-    parameters: {
-      name: $Name
-      slots?: $Slots
-      run?: (parameters: $Parameters) => $Output
-    },
+  step: BuilderStep<$Context>
+  /**
+   * TODO
+   */
+  overload: <$OverloadBuilder extends OverloadBuilder<$Context>>(
+    overloadBuilder: (overloadBuilder: OverloadBuilder<$Context>) => $OverloadBuilder,
   ) => Builder<
-    ConfigManager.UpdateOneKey<
-      $Context,
-      'steps',
-      [
-        ...$Context['steps'],
-        {
-          name: $Name
-          input: $Input
-          output: ConfigManager.OrDefault2<$Output, object>
-          slots: $Slots
-          // run: (params: $Parameters) => ConfigManager.OrDefault2<$Output, object>
-        },
-      ]
-    >
+    ConfigManager.AppendAtKey<$Context, 'overloads', $OverloadBuilder['context']>
   >
   /**
-   * todo
+   * TODO
    */
-  step: <
+  done: () => InferPipelineFromContext<$Context>
+}
+
+interface BuilderStep<$Context extends Context> {
+  <
     const $Name extends string,
     $Slots extends
       | undefined
       | Step.Slots = undefined,
     $Input = GetNextStepParameterInput<$Context>,
     $Output = unknown,
-    $Parameters = {
-      input: $Input
-      slots: $Slots
-      previous: GetNextStepParameterPrevious<$Context>
-    },
   >(
-    parameters: {
-      name: $Name
+    name: $Name,
+    parameters?: {
       slots?: $Slots
-      run?: (parameters: $Parameters) => $Output
+      run?: (input: $Input, slots: $Slots, previous: GetNextStepParameterPrevious<$Context>) => $Output
     },
-  ) => Builder<
+  ): Builder<
     ConfigManager.UpdateOneKey<
       $Context,
       'steps',
@@ -115,47 +81,44 @@ export interface Builder<$Context extends Context = Context> {
         {
           name: $Name
           input: $Input
-          output: ConfigManager.OrDefault2<$Output, object>
+          output: ConfigManager.OrDefault2<$Output, {}>
           slots: $Slots
-          // run: (
-          //   params: $Parameters,
-          // ) => ConfigManager.OrDefault2<$Output, object>
         },
       ]
     >
   >
-  overload: <$OverloadBuilder extends OverloadBuilder<$Context>>(
-    overloadBuilder: (overloadBuilder: OverloadBuilder<$Context>) => $OverloadBuilder,
-  ) => Builder<
-    ConfigManager.AppendAtKey<
+  <
+    const $Name extends string,
+    $Slots extends
+      | undefined
+      | Step.Slots = undefined,
+    $Input = GetNextStepParameterInput<$Context>,
+    $Output = unknown,
+  >(
+    parameters: {
+      name: $Name
+      slots?: $Slots
+      run?: (input: $Input, slots: $Slots, previous: GetNextStepParameterPrevious<$Context>) => $Output
+    },
+  ): Builder<
+    ConfigManager.UpdateOneKey<
       $Context,
-      'overloads',
-      $OverloadBuilder['context']
+      'steps',
+      [
+        ...$Context['steps'],
+        {
+          name: $Name
+          input: $Input
+          output: ConfigManager.OrDefault2<$Output, {}>
+          slots: $Slots
+        },
+      ]
     >
   >
-  // OverloadReturn<$Context, $OverloadBuilder['context']>
-  // Builder<
-  //   ConfigManager.UpdateOneKey<
-  //     ConfigManager.UpdateOneKey<
-  //       $Context,
-  //       'input',
-  //       & $Context['input']
-  //       & $OverloadBuilder['context']['input']
-  //       & { [_ in $OverloadBuilder['context']['discriminant'][0]]: $OverloadBuilder['context']['discriminant'][1] }
-  //     >,
-  //     'steps',
-  //     OverloadReturnSteps<
-  //       $Context['steps'],
-  //       $OverloadBuilder['context']['discriminant'][0],
-  //       $OverloadBuilder['context']['discriminant'][1]
-  //     >
-  //   >
-  // >
-  done: () => InferPipelineFromContext<$Context>
 }
 
 interface OverloadBuilderContext {
-  discriminant?: [string, unknown]
+  discriminant: [string, unknown]
   input: object
   steps: Record<string, Step>
 }
@@ -203,7 +166,7 @@ type OverloadBuilder<
     name: $Name,
     spec: {
       slots?: $Slots
-      run: (parameters: { slots: $Slots; input: $Input }) => $Output
+      run: (input: $Input, slots: $Slots) => $Output
     },
   ) => OverloadBuilder<
     $RootContext,
@@ -289,34 +252,71 @@ type InferPipelineFromContext<$Context extends Context> =
   & {
     spec: {
       config: $Context['config']
-      input: $Context['input']
-      output: Awaited<
-        $Context['steps'] extends Tuple.NonEmpty
-          ? Tuple.GetLastValue<$Context['steps']>['output']
-          : $Context['input']
-      >
-      steps: $Context['steps']
+      input: InferInput<$Context>
+      output: InferOutput<$Context>
+      steps: MergeOverloads<$Context>
     }
     config: $Context['config']
-    input: $Context['input'] // todo integrate overloads
-    // todo integrate overloads
+    input: InferInput<$Context>
     steps: ExecutableStep[]
     stepsIndex: StepsIndex
-    /**
-     * The overall result of the pipeline.
-     *
-     * If the pipeline has no steps then is the pipeline input itself.
-     * Otherwise is the last step's output.
-     */
-    output:
-      Result<
-        Awaited<
-          $Context['steps'] extends Tuple.NonEmpty
-            ? Tuple.GetLastValue<$Context['steps']>['output']
-            : $Context['input']
-        >
-      >
+    output: Result<InferOutput<$Context>>
   }
+
+// dprint-ignore
+type InferOutput<$Context extends Context> = Awaited<
+  $Context['steps'] extends Tuple.NonEmpty
+    ? Tuple.GetLastValue<$Context['steps']>['output']
+    : $Context['input']
+>
+
+type MergeOverloads<$Context extends Context> = MergeOverloads_<$Context['steps'], $Context>
+
+// dprint-ignore
+type MergeOverloads_<$Steps extends Step[], $Context extends Context> = {
+  [$Index in keyof $Steps]:
+    $Context['overloads'] extends []
+      ? $Steps[$Index]
+      : {
+          name: $Steps[$Index]['name']
+          input: Simplify<InferStepInput<$Steps[$Index], $Context['overloads']>>
+          output: Simplify<InferStepOutput<$Steps[$Index], $Context['overloads']>>
+          slots: $Steps[$Index]['slots']
+        }
+}
+
+type InferStepOutput<$Step extends Step, $Overloads extends OverloadBuilderContext[]> = {
+  [$Index in keyof $Overloads]:
+    & $Step['output']
+    & {
+      [_ in $Overloads[$Index]['discriminant'][0]]: $Overloads[$Index]['discriminant'][1]
+    }
+    & $Overloads[$Index]['steps'][$Step['name']]['output']
+}[number]
+
+type InferStepInput<$Step extends Step, $Overloads extends OverloadBuilderContext[]> = {
+  [$Index in keyof $Overloads]:
+    & $Step['input']
+    & {
+      [_ in $Overloads[$Index]['discriminant'][0]]: $Overloads[$Index]['discriminant'][1]
+    }
+    & $Overloads[$Index]['steps'][$Step['name']]['input']
+}[number]
+
+// dprint-ignore
+type InferInput<$Context extends Context> = Simplify<
+  $Context['overloads'] extends []
+    ? $Context['input']
+    : InferInput_<$Context['input'], $Context['overloads']>
+>
+type InferInput_<$BaseInput extends object, $Overloads extends OverloadBuilderContext[]> = {
+  [$Index in keyof $Overloads]:
+    & $BaseInput
+    & $Overloads[$Index]['input']
+    & {
+      [_ in $Overloads[$Index]['discriminant'][0]]: $Overloads[$Index]['discriminant'][1]
+    }
+}[number]
 
 /**
  * TODO
@@ -339,6 +339,8 @@ const recreate = <$Context extends Context>(context: $Context): Builder<$Context
     context,
     stepWithInput: () => builder.step,
     step: (parameters) => {
+      // todo handle overload of step name being its own first parameter
+      // step: (...args) => {
       const step = {
         run: passthroughStep,
         ...parameters,

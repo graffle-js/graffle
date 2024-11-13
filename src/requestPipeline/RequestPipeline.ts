@@ -28,9 +28,8 @@ export const requestPipeline = Anyware.Pipeline
       return signal.hookName === `exchange` && isAbortError(signal.error)
     },
   })
-  .step({
-    name: `encode`,
-    run: ({ input }): requestPipeline.Steps.Pack['input'] => {
+  .step(`encode`, {
+    run: (input): requestPipeline.Steps.Pack['input'] => {
       const sddm = input.state.schemaMap
       const scalars = input.state.scalars.map
       if (sddm) {
@@ -45,18 +44,11 @@ export const requestPipeline = Anyware.Pipeline
       return input
     },
   })
-  .step({
-    name: `pack`,
-  })
-  .step({
-    name: `exchange`,
-  })
-  .step({
-    name: `unpack`,
-  })
-  .stepWithInput<requestPipeline.Steps.Decode['input']>()({
-    name: `decode`,
-    run: ({ input, previous }) => {
+  .step(`pack`)
+  .step(`exchange`)
+  .step(`unpack`)
+  .step(`decode`, {
+    run: (input: requestPipeline.Steps.Decode['input'], _, previous) => {
       // If there has been an error and we definitely don't have any data, such as when
       // giving an operation name that doesn't match any in the document,
       // then don't attempt to decode.
@@ -70,6 +62,7 @@ export const requestPipeline = Anyware.Pipeline
         })
       }
 
+      // todo needs to be moved into the http overload
       // const result = input.transportType === `http`
       //   ? {
       //     ...input.result,
@@ -80,27 +73,6 @@ export const requestPipeline = Anyware.Pipeline
       return input.result
     },
   })
-  // <{
-  //     discriminant: [`transportType`, TransportHttp],
-  //     steps: {
-  //       pack: {
-  //         slots: {
-  //           searchParams: getRequestEncodeSearchParameters,
-  //           body: postRequestEncodeBody,
-  //         },
-  //       },
-  //       exchange: {
-  //         slots: {
-  //           fetch: (requestInfo: RequestInfo): MaybePromise<Response> => fetch(requestInfo),
-  //         },
-  //       },
-  //       unpack: {
-  //         input: {
-  //           result: FormattedExecutionResult,
-  //         },
-  //       },
-  //     },
-  //   }>
   .overload((overload) =>
     overload
       .discriminant(`transportType`, `http`)
@@ -110,7 +82,7 @@ export const requestPipeline = Anyware.Pipeline
           searchParams: getRequestEncodeSearchParameters,
           body: postRequestEncodeBody,
         },
-        run: ({ input, slots }) => {
+        run: (input, slots) => {
           const graphqlRequest: Grafaid.HTTP.RequestConfig = {
             operationName: input.request.operationName,
             variables: input.request.variables,
@@ -172,7 +144,7 @@ export const requestPipeline = Anyware.Pipeline
         slots: {
           fetch: (requestInfo: RequestInfo): MaybePromise<Response> => fetch(requestInfo),
         },
-        run: async ({ input, slots }) => {
+        run: async (input, slots) => {
           const request = new Request(input.request.url, input.request)
           const response = await slots.fetch(request)
           return {
@@ -182,7 +154,7 @@ export const requestPipeline = Anyware.Pipeline
         },
       })
       .step(`unpack`, {
-        run: async ({ input }) => {
+        run: async (input) => {
           // todo 1 if response is missing header of content length then .json() hangs forever.
           //        firstly consider a timeout, secondly, if response is malformed, then don't even run .json()
           // todo 2 if response is e.g. 404 with no json body, then an error is thrown because json parse cannot work, not gracefully handled here
@@ -195,63 +167,43 @@ export const requestPipeline = Anyware.Pipeline
         },
       })
   )
-  //   <{
-  //   discriminant: ['transportType', TransportMemory]
-  //   steps: {
-  //     pack: {
-  //       input: {
-  //         request: Grafaid.RequestAnalyzedInput
-  //       }
-  //     }
-  //     exchange: {
-  //       input: {
-  //         request: Grafaid.HTTP.RequestConfig
-  //       }
-  //     }
-  //     unpack: {
-  //       input: {
-  //         result: FormattedExecutionResult
-  //       }
-  //     }
-  //   }
-  // }>
-  // .overload((overload) =>
-  //   overload
-  //     .discriminant(`transportType`, `memory`)
-  //     .input<{ schema: Grafaid.Schema.Schema }>()
-  //     .step(`pack`, {
-  //       run: ({ input }) => {
-  //         const graphqlRequest: Grafaid.HTTP.RequestConfig = {
-  //           operationName: input.request.operationName,
-  //           variables: input.request.variables,
-  //           query: print(input.request.query),
-  //         }
-  //         return {
-  //           ...input,
-  //           request: graphqlRequest,
-  //         }
-  //       },
-  //     })
-  //     .step(`exchange`, {
-  //       run: async ({ input }) => {
-  //         const result = await execute(input)
-  //         return {
-  //           ...input,
-  //           result,
-  //         }
-  //       },
-  //     })
-  //     .step(`unpack`, {
-  //       run: ({ input }) => {
-  //         return input
-  //         // return {
-  //         //   ...input,
-  //         //   result: input.result,
-  //         // }
-  //       },
-  //     })
-  // )
-  .context.steps
+  .overload((overload) =>
+    overload
+      .discriminant(`transportType`, `memory`)
+      .input<{ schema: Grafaid.Schema.Schema }>()
+      .step(`pack`, {
+        run: (input) => {
+          const graphqlRequest: Grafaid.HTTP.RequestConfig = {
+            operationName: input.request.operationName,
+            variables: input.request.variables,
+            query: print(input.request.query),
+          }
+          return {
+            ...input,
+            request: graphqlRequest,
+          }
+        },
+      })
+      .step(`exchange`, {
+        run: async (input) => {
+          const result = await execute(input)
+          return {
+            ...input,
+            result,
+          }
+        },
+      })
+      .step(`unpack`, {
+        run: (input) => {
+          return input
+          // return {
+          //   ...input,
+          //   result: input.result,
+          // }
+        },
+      })
+  )
+  .done()
 
 export namespace requestPipeline {
   export type ResultFailure = Anyware.Pipeline.ResultFailure
