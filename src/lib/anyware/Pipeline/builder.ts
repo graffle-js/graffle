@@ -408,7 +408,8 @@ export const create = <$Input extends object>(options?: Options): Builder<{
   return recreate({
     steps: [],
     config,
-  } as any)
+    overloads: [],
+  } as any as Context) as any
 }
 
 const recreate = <$Context extends Context>(context: $Context): Builder<$Context> => {
