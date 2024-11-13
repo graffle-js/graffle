@@ -1,5 +1,6 @@
 import type { Simplify } from 'type-fest'
 import { describe, expectTypeOf, test } from 'vitest'
+import { _ } from '../../prelude.js'
 import type { initialInput } from '../__.test-helpers.js'
 import { results, slots, stepA, stepB } from '../__.test-helpers.js'
 import type { ExecutableStep } from '../ExecutableStep.js'
@@ -8,6 +9,7 @@ import type { Config } from './Config.js'
 import type { Result } from './Result.js'
 
 const b0 = Pipeline.create<initialInput>()
+const b1 = Pipeline.create<initialInput>().step(stepA)
 
 test(`initial context`, () => {
   expectTypeOf(b0.context).toEqualTypeOf<{ input: initialInput; steps: []; config: Config; overloads: [] }>()
@@ -103,27 +105,58 @@ describe(`overload`, () => {
   type dName = typeof dName
   const dValue = 1
   type dValue = typeof dValue
+  const d = [dName, dValue] as const
+  type d = typeof d
   type dObject = { [_ in dName]: dValue }
   const dValue2 = 2
   type dValue2 = typeof dValue2
+  const d2 = [dName, dValue2] as const
+  type d2 = typeof d2
   type dObject2 = { [_ in dName]: dValue2 }
 
+  describe(`constructor`, () => {
+    test(`overload constructor without discriminant not allowed`, () => {
+      // @ts-expect-error
+      b0.overload(o => o.create())
+    })
+    test(`overload constructor with discriminant`, () => {
+      expectTypeOf(b0.overload(o => o.create({ discriminant: d })).context.overloads).toMatchTypeOf<
+        [{ discriminant: d; input: {}; steps: {} }]
+      >()
+    })
+    test(`overload constructor with input and discriminant`, () => {
+      expectTypeOf(b0.overload(o => o.createWithInput<{ x: 1 }>()({ discriminant: d })).context.overloads)
+        .toMatchTypeOf<[{ discriminant: d; input: { x: 1 }; steps: {} }]>()
+    })
+  })
+  // TODO: Better DX: Pipeline builder should not allow overloads until steps are defined.
+  test(`overload without pipeline steps cannot overload any step`, () => {
+    // @ts-expect-error
+    b0.overload(o => o.create({ discriminant: d }).step(`a`, { run: () => {} }))
+    b0.overload(o => {
+      expectTypeOf(o.create({ discriminant: d }).step).toMatchTypeOf<((name: never, spec: _) => _)>()
+      return _
+    })
+  })
+
   test(`overload without steps appended to empty context`, () => {
-    expectTypeOf(b0.overload(o => o.discriminant(dName, dValue)).context.overloads).toMatchTypeOf<
-      [{ discriminant: [dName, dValue]; input: {}; steps: {} }]
+    expectTypeOf(
+      b1.overload(o => o.create({ discriminant: d }).step(`a`, { run: () => ({ olb: 1 as const }) })).context.overloads,
+    ).toMatchTypeOf<
+      [{ discriminant: d; input: {}; steps: {} }]
     >()
   })
   test(`overload with step is appended to empty context`, () => {
     expectTypeOf(
       b0.step(`a`).step(stepB).overload(o =>
         o
-          .discriminant(dName, dValue)
+          .create({ discriminant: d })
           .step(`a`, { run: (input) => ({ ...input, ola: 1 as const }) })
       ).context.overloads,
     )
       .toMatchTypeOf<[
         {
-          discriminant: [dName, dValue]
+          discriminant: d
           input: {}
           steps: {
             a: {
@@ -142,7 +175,7 @@ describe(`overload`, () => {
   test(`parameter steps, first key, run key, parameter input, equals previous step output`, () => {
     b0.step(stepA).step(`b`).overload(o =>
       o
-        .discriminant(dName, dValue)
+        .create({ discriminant: d })
         .step(`b`, {
           run: (input) => {
             expectTypeOf(input).toEqualTypeOf<results['a'] & dObject>()
@@ -155,8 +188,8 @@ describe(`overload`, () => {
   test(`overload inputs become a pipeline union input`, () => {
     const p = b0
       .step(`a`)
-      .overload(o => o.discriminant(dName, dValue).input<{ ol1: 1 }>())
-      .overload(o => o.discriminant(dName, dValue2).input<{ ol2: 2 }>())
+      .overload(o => o.createWithInput<{ ol1: 1 }>()({ discriminant: d }))
+      .overload(o => o.createWithInput<{ ol2: 2 }>()({ discriminant: d2 }))
       .done()
     expectTypeOf(p.input).toMatchTypeOf<
       | (initialInput & dObject & { ol1: 1 })
@@ -169,7 +202,9 @@ describe(`overload`, () => {
   })
 
   test(`overload step input/output becomes union to step input/output`, () => {
-    const p = b0.step(`a`).overload(o => o.discriminant(dName, dValue).step(`a`, { run: () => ({ olb: 1 as const }) }))
+    const p = b0.step(`a`).overload(o =>
+      o.create({ discriminant: [dName, dValue] }).step(`a`, { run: () => ({ olb: 1 as const }) })
+    )
       .done()
     expectTypeOf(p.spec.steps).toEqualTypeOf<[{
       name: 'a'

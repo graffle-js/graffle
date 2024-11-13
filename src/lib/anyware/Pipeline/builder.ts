@@ -48,7 +48,7 @@ export interface Builder<$Context extends Context = Context> {
    * TODO
    */
   overload: <$OverloadBuilder extends OverloadBuilder<$Context>>(
-    overloadBuilder: (overloadBuilder: OverloadBuilder<$Context>) => $OverloadBuilder,
+    overloadBuilder: (overloadBuilder: OverloadBuilderNamespace<$Context>) => $OverloadBuilder,
   ) => Builder<
     ConfigManager.AppendAtKey<$Context, 'overloads', $OverloadBuilder['context']>
   >
@@ -117,8 +117,10 @@ interface BuilderStep<$Context extends Context> {
   >
 }
 
+type DiscriminantSpec = readonly [string, DiscriminantPropertyValue]
+
 interface OverloadBuilderContext {
-  discriminant: [string, unknown]
+  discriminant: DiscriminantSpec
   input: object
   steps: Record<string, Step>
 }
@@ -128,25 +130,43 @@ interface OverloadBuilderContextEmpty extends OverloadBuilderContext {
   steps: {}
 }
 
-type OverloadBuilder<
-  $RootContext extends Context = Context,
-  $Context extends OverloadBuilderContext = OverloadBuilderContextEmpty,
-> = {
-  context: $Context
-  discriminant: <
-    $DiscriminantName extends string,
-    $DiscriminantValue extends DiscriminantPropertyValue,
-  >(
-    discriminantName: $DiscriminantName,
-    discriminantValue: $DiscriminantValue,
+interface OverloadBuilderNamespace<$RootContext extends Context = Context> {
+  /**
+   * TODO
+   */
+  create: <const $DiscriminantSpec extends DiscriminantSpec>(
+    parameters: { discriminant: $DiscriminantSpec },
   ) => OverloadBuilder<
     $RootContext,
-    ConfigManager.UpdateOneKey<$Context, 'discriminant', [$DiscriminantName, $DiscriminantValue]>
+    {
+      discriminant: $DiscriminantSpec
+      input: {}
+      steps: {}
+    }
   >
-  input: <$Input extends object>() => OverloadBuilder<
+  /**
+   * TODO
+   */
+  createWithInput: <$Input extends object>() => <const $DiscriminantSpec extends DiscriminantSpec>(
+    parameters: { discriminant: $DiscriminantSpec },
+  ) => OverloadBuilder<
     $RootContext,
-    ConfigManager.UpdateOneKey<$Context, 'input', $Input>
+    {
+      discriminant: $DiscriminantSpec
+      input: $Input
+      steps: {}
+    }
   >
+}
+
+interface OverloadBuilder<
+  $RootContext extends Context = Context,
+  $Context extends OverloadBuilderContext = OverloadBuilderContextEmpty,
+> {
+  context: $Context
+  /**
+   * TODO
+   */
   step: <
     $Name extends $RootContext['steps'][number]['name'],
     $Slots extends undefined | Step.Slots = undefined,

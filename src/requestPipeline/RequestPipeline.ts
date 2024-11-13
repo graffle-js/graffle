@@ -75,8 +75,9 @@ export const requestPipeline = Anyware.Pipeline
   })
   .overload((overload) =>
     overload
-      .discriminant(`transportType`, `http`)
-      .input<{ url: URL }>()
+      .createWithInput<{ url: URL }>()({
+        discriminant: [`transportType`, `http`],
+      })
       .step(`pack`, {
         slots: {
           searchParams: getRequestEncodeSearchParameters,
@@ -169,8 +170,9 @@ export const requestPipeline = Anyware.Pipeline
   )
   .overload((overload) =>
     overload
-      .discriminant(`transportType`, `memory`)
-      .input<{ schema: Grafaid.Schema.Schema }>()
+      .createWithInput<{ schema: Grafaid.Schema.Schema }>()({
+        discriminant: [`transportType`, `memory`],
+      })
       .step(`pack`, {
         run: (input) => {
           const graphqlRequest: Grafaid.HTTP.RequestConfig = {
