@@ -9,13 +9,13 @@ assertEqual<
 
 assertEqual<
   PipelineSpecFromSteps<[{ name: 'a' }]>,
-  { steps: [{ name: 'a'; slots: undefined; input: object; output: unknown }]; input: object; output: unknown }
+  { steps: [{ name: 'a'; slots: {}; input: object; output: unknown }]; input: object; output: unknown }
 >()
 
 assertEqual<
   PipelineSpecFromSteps<[{ name: 'a'; output: 1 }]>,
   {
-    steps: [{ name: 'a'; slots: undefined; input: object; output: MaybePromise<1> }]
+    steps: [{ name: 'a'; slots: {}; input: object; output: MaybePromise<1> }]
     input: object
     output: 1
     // ^^^^^^ pipeline output inferred from last step output
@@ -26,9 +26,9 @@ assertEqual<
   PipelineSpecFromSteps<[{ name: 'a' }, { name: 'b'; input: { x: 1 } }]>,
   {
     steps: [
-      { name: 'a'; slots: undefined; input: object; output: MaybePromise<{ x: 1 }> },
+      { name: 'a'; slots: {}; input: object; output: MaybePromise<{ x: 1 }> },
       // step output inferred from next step input  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-      { name: 'b'; slots: undefined; input: { x: 1 }; output: unknown },
+      { name: 'b'; slots: {}; input: { x: 1 }; output: unknown },
     ]
     input: object
     output: unknown
@@ -39,7 +39,7 @@ assertEqual<
   PipelineSpecFromSteps<[{ name: 'a'; output: Promise<1> }]>,
   //                                  ^^^^^^^^^^^^^^^^^^ Step promised output flattened within MaybePromise
   {
-    steps: [{ name: 'a'; slots: undefined; input: object; output: MaybePromise<1> }]
+    steps: [{ name: 'a'; slots: {}; input: object; output: MaybePromise<1> }]
     //                                                            ^^^^^^^^^^^^^^^
     input: object
     output: 1

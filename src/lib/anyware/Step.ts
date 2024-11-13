@@ -5,7 +5,7 @@ export interface Step<
   $Name extends string = string,
 > {
   name: $Name
-  slots?: Step.Slots
+  slots: Step.Slots
   input: any
   output: any
 }

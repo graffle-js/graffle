@@ -1,4 +1,4 @@
-import type { Simplify } from 'type-fest'
+import type { IsUnknown, Simplify } from 'type-fest'
 import type { ConfigManager } from '../../config-manager/__.js'
 import type { _ } from '../../prelude.js'
 import { type Tuple } from '../../prelude.js'
@@ -82,7 +82,7 @@ interface BuilderStep<$Context extends Context> {
           name: $Name
           input: $Input
           output: ConfigManager.OrDefault2<$Output, {}>
-          slots: $Slots
+          slots: ConfigManager.OrDefault2<$Slots, {}>
         },
       ]
     >
@@ -110,7 +110,7 @@ interface BuilderStep<$Context extends Context> {
           name: $Name
           input: $Input
           output: ConfigManager.OrDefault2<$Output, {}>
-          slots: $Slots
+          slots: ConfigManager.OrDefault2<$Slots, {}>
         },
       ]
     >
@@ -199,54 +199,12 @@ interface OverloadBuilder<
           name: $Name
           input: $Input
           output: Awaited<$Output>
-          slots: $Slots
+          slots: ConfigManager.OrDefault2<$Slots, {}>
         }
       }
     >
   >
 }
-
-// type OverloadParameterSteps<$Steps extends ExecutableStep[]> = OverloadParameterSteps_<
-//   Tuple.ToIndexByObjectKey<$Steps, 'name'>
-// >
-
-// type OverloadParameterSteps_<$Steps extends Record<string, ExecutableStep>> = {
-//   [$Name in keyof $Steps]?: {
-//     slots?: _
-//     run: (parameters: {
-//       input: $Steps[$Name]['input']
-//       slots: _
-//       previous: _
-//     }) => _
-//   }
-// }
-
-// type OverloadReturn<
-//   $RootContext extends Context,
-//   $Context extends OverloadBuilderContext,
-// > = Builder<
-//   ConfigManager.UpdateOneKey<
-//     ConfigManager.UpdateOneKey<
-//       $RootContext,
-//       'input',
-//       & $RootContext['input']
-//       & $Context['input']
-//       & { [_ in $Context['discriminant'][0]]: $Context['discriminant'][1] }
-//     >,
-//     'steps',
-//     x<$RootContext['steps'], $Context>
-//   >
-// >
-
-// type x<$Steps extends Step[], $Context extends OverloadBuilderContext> = {
-//   [$Index in keyof $Steps]: $Steps[$Index]['name'] extends keyof $Context['steps'] ? {
-//       name: $Steps[$Index]['name']
-//       input: $Context['steps'][$Steps[$Index]['name']]['input']
-//       output: $Context['steps'][$Steps[$Index]['name']]['output']
-//       // run: any
-//     }
-//     : $Steps[$Index]
-// }
 
 // dprint-ignore
 export type GetNextStepParameterPrevious<$Context extends Context> =
@@ -311,9 +269,22 @@ type InferSteps_<$Steps extends Step[], $Context extends Context> = {
           name: $Steps[$Index]['name']
           input: Simplify<InferStepInput<$Steps[$Index], $Context['overloads']>>
           output: Simplify<InferStepOutput<$Steps[$Index], $Context['overloads']>>
-          slots: $Steps[$Index]['slots']
+          slots: Simplify<InferStepSlots<$Steps[$Index], $Context['overloads']>>
         }
 }
+
+type InferStepSlots<$Step extends Step, $Overloads extends OverloadBuilderContext[]> =
+  & $Step['slots']
+  & InferStepSlots_<$Step, $Overloads>
+
+// dprint-ignore
+type InferStepSlots_<$Step extends Step, $Overloads extends OverloadBuilderContext[]> =
+  Tuple.IntersectItems<{
+    [$Index in keyof $Overloads]:
+      IsUnknown<$Overloads[$Index]['steps'][$Step['name']]> extends true
+        ? unknown
+        : $Overloads[$Index]['steps'][$Step['name']]['slots']
+  }>
 
 type InferStepOutput<$Step extends Step, $Overloads extends OverloadBuilderContext[]> = {
   [$Index in keyof $Overloads]:
@@ -367,14 +338,18 @@ export const create = <$Input extends object>(options?: Options): Builder<{
 const recreate = <$Context extends Context>(context: $Context): Builder<$Context> => {
   const builder: Builder<$Context> = {
     context,
-    stepWithInput: () => builder.step,
-    step: (parameters) => {
-      // todo handle overload of step name being its own first parameter
-      // step: (...args) => {
-      const step = {
-        run: passthroughStep,
-        ...parameters,
-      }
+    step: (...args) => {
+      const step = typeof args[0] === `string`
+        ? {
+          name: args[0],
+          run: passthroughStep,
+          ...(args[1] as undefined | object),
+        }
+        : {
+          run: passthroughStep,
+          ...args[0],
+        }
+
       return recreate({
         ...context,
         steps: [
@@ -383,15 +358,75 @@ const recreate = <$Context extends Context>(context: $Context): Builder<$Context
         ],
       } as any)
     },
-    overload: () => {
-      throw new Error(`overload not implemented`)
-      // return recreate(context)
+    overload: (builderCallback) => {
+      const create: OverloadBuilderNamespace['create'] = (parameters) => {
+        const context: Omit<OverloadBuilderContext, 'input'> = {
+          discriminant: parameters.discriminant,
+          steps: {},
+        }
+
+        const builder: OverloadBuilder = {
+          context: context as OverloadBuilderContext,
+          step: (name, spec) => {
+            context.steps[name] = {
+              name,
+              ...spec,
+            } as unknown as Step
+            return builder as any
+          },
+        }
+
+        return builder as any
+      }
+      const nameSpace: OverloadBuilderNamespace = {
+        create,
+        createWithInput: () => create as any,
+      }
+      const overload = builderCallback(nameSpace)
+      context.overloads.push(overload.context)
+
+      return recreate(context) as any
     },
     done: () => {
-      const pipeline = context
-      const stepsIndex = createExecutableStepsIndex(pipeline.steps)
+      let steps = context.steps as unknown as ExecutableStep[]
+      if (context.overloads.length > 0) {
+        steps = steps.map((step): ExecutableStep => {
+          const stepOverloads = context.overloads
+            .map(overload => {
+              const stepOverload = overload.steps[step.name]
+              if (!stepOverload) return null
+              return {
+                ...(stepOverload as unknown as ExecutableStep),
+                discriminant: overload.discriminant,
+              }
+            })
+            .filter(_ => _ !== null)
+          return {
+            name: step.name,
+            run: (parameters) => {
+              const stepOverload = stepOverloads.find(stepOverload => {
+                return parameters.input[stepOverload.discriminant[0]] === stepOverload.discriminant[1]
+              })
+              if (stepOverload) return stepOverload.run(parameters)
+              return step.run(parameters)
+            },
+            slots: {
+              ...step.slots,
+              ...stepOverloads.reduce((acc, stepOverload) => {
+                return {
+                  ...acc,
+                  ...stepOverload.slots,
+                }
+              }, {}),
+            },
+          }
+        })
+      }
+
+      const stepsIndex = createExecutableStepsIndex(steps)
+
       return {
-        ...pipeline,
+        ...context,
         stepsIndex,
       } as any
     },

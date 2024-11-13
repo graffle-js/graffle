@@ -53,7 +53,7 @@ test(`second step definition`, () => {
   expectTypeOf(p1.context).toMatchTypeOf<
     {
       input: initialInput
-      steps: [{ name: 'a'; slots: undefined }]
+      steps: [{ name: 'a'; slots: {} }]
       config: Config
     }
   >()
@@ -114,6 +114,8 @@ describe(`overload`, () => {
   type d2 = typeof d2
   type dObject2 = { [_ in dName]: dValue2 }
 
+  // constructor
+
   describe(`constructor`, () => {
     test(`overload constructor without discriminant not allowed`, () => {
       // @ts-expect-error
@@ -129,6 +131,9 @@ describe(`overload`, () => {
         .toMatchTypeOf<[{ discriminant: d; input: { x: 1 }; steps: {} }]>()
     })
   })
+
+  // step
+
   // TODO: Better DX: Pipeline builder should not allow overloads until steps are defined.
   test(`overload without pipeline steps cannot overload any step`, () => {
     // @ts-expect-error
@@ -139,14 +144,7 @@ describe(`overload`, () => {
     })
   })
 
-  test(`overload without steps appended to empty context`, () => {
-    expectTypeOf(
-      b1.overload(o => o.create({ discriminant: d }).step(`a`, { run: () => ({ olb: 1 as const }) })).context.overloads,
-    ).toMatchTypeOf<
-      [{ discriminant: d; input: {}; steps: {} }]
-    >()
-  })
-  test(`overload with step is appended to empty context`, () => {
+  test(`step added to overload context`, () => {
     expectTypeOf(
       b0.step(`a`).step(stepB).overload(o =>
         o
@@ -161,7 +159,7 @@ describe(`overload`, () => {
           steps: {
             a: {
               name: 'a'
-              slots: undefined
+              slots: {}
               input: initialInput & dObject
               output: initialInput & dObject & { ola: 1 }
             }
@@ -170,10 +168,42 @@ describe(`overload`, () => {
       ]>()
   })
 
-  // Parameters
+  // Overload Step Slots
+
+  test(`if step has no slots, parameter undefined & context undefined`, () => {
+    const b1o = b1.overload(o =>
+      o.create({ discriminant: d }).step(`a`, {
+        run: (_, slots) => {
+          expectTypeOf(slots).toEqualTypeOf(undefined)
+        },
+      })
+    )
+    expectTypeOf(b1o.context.overloads[0].steps.a.slots).toEqualTypeOf<{}>()
+  })
+
+  test(`slots available to run and added to overload context`, () => {
+    const b1o = b1.overload(o =>
+      o.create({ discriminant: d }).step(`a`, {
+        slots: { m: slots.m },
+        run: (_, slots) => {
+          expectTypeOf(slots).toEqualTypeOf<{ m: slots['m'] }>()
+        },
+      })
+    )
+    expectTypeOf(b1o.context.overloads).toMatchTypeOf<[{
+      steps: {
+        a: {
+          name: 'a'
+          slots: { m: slots['m'] }
+        }
+      }
+    }]>()
+  })
+
+  // Overload Step Run Parameters
 
   test(`parameter steps, first key, run key, parameter input, equals previous step output`, () => {
-    b0.step(stepA).step(`b`).overload(o =>
+    b1.step(`b`).overload(o =>
       o
         .create({ discriminant: d })
         .step(`b`, {
@@ -184,7 +214,8 @@ describe(`overload`, () => {
     )
   })
 
-  // output
+  // Overloads Merging Into Pipeline
+
   test(`overload inputs become a pipeline union input`, () => {
     const p = b0
       .step(`a`)
@@ -210,7 +241,34 @@ describe(`overload`, () => {
       name: 'a'
       input: Simplify<dObject & initialInput>
       output: Simplify<dObject & { olb: 1 }>
-      slots: undefined
+      slots: {}
     }]>()
   })
+  test(`overloads steps slots all merge onto respective pipeline step (no unions)`, () => {
+    const p = b0
+      .step(`a`)
+      .overload(o =>
+        o.create({ discriminant: d }).step(`a`, {
+          slots: { m: slots.m },
+          run: () => {},
+        })
+      )
+      .overload(o =>
+        o.create({ discriminant: d2 }).step(`a`, {
+          slots: { n: slots.n },
+          run: () => {},
+        })
+      )
+      .done()
+    expectTypeOf(p.spec.steps).toMatchTypeOf<[
+      {
+        name: 'a'
+        slots: { m: slots['m']; n: slots['n'] }
+      },
+    ]>()
+  })
 })
+
+type x = Record<string, number>
+type y<$x extends x> = $x['a']
+type z = y<{}>

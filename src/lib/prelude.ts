@@ -299,6 +299,10 @@ export const debugSub = (...args: any[]) => (...subArgs: any[]) => {
   debug(...args, ...subArgs)
 }
 
+export namespace Objekt {
+  export type IsEmpty<T> = {} extends T ? true : false
+}
+
 export namespace Tuple {
   // dprint-ignore
   export type PreviousItem<$Items extends readonly any[], $OfItem> =

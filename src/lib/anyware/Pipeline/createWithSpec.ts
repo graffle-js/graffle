@@ -1,5 +1,5 @@
 import type { ConfigManager } from '../../config-manager/__.js'
-import type { Tuple } from '../../prelude.js'
+import type { Objekt, Tuple } from '../../prelude.js'
 import type { ExecutableStep } from '../ExecutableStep.js'
 import type { Step } from '../Step.js'
 import { type Config, type Options, resolveOptions } from './Config.js'
@@ -78,11 +78,11 @@ type InferExecutableSteps_<
             ) => $StepSpec['output']
           }
         & (
-          $StepSpec['slots'] extends Step.Slots
-            ? {
+          Objekt.IsEmpty<$StepSpec['slots']> extends true
+            ? {}
+            : {
                 slots: $StepSpec['slots']
               }
-            : {}
         )
       , ...InferExecutableSteps_<[...$PreviousStepSpecs, $StepSpec], $RestStepSpecs, $Options>]
     : []

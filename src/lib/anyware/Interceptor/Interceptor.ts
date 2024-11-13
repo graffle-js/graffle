@@ -40,7 +40,7 @@ export namespace Interceptor {
 
 export type InterceptorGeneric = NonRetryingInterceptor | RetryingInterceptor
 
-export type NonRetryingInterceptor = {
+export interface NonRetryingInterceptor {
   retrying: false
   name: string
   entrypoint: string
@@ -48,7 +48,7 @@ export type NonRetryingInterceptor = {
   currentChunk: Deferred<StepTriggerEnvelope | ResultSuccess>
 }
 
-export type RetryingInterceptor = {
+export interface RetryingInterceptor {
   retrying: true
   name: string
   entrypoint: string

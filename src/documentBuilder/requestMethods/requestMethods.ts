@@ -8,7 +8,7 @@ import { Builder } from '../../lib/builder/__.js'
 import type { Grafaid } from '../../lib/grafaid/__.js'
 import { getOperationDefinition } from '../../lib/grafaid/document.js'
 import { isSymbol } from '../../lib/prelude.js'
-import { requestPipeline } from '../../requestPipeline/__.js'
+import { type RequestPipeline, requestPipeline } from '../../requestPipeline/__.js'
 import type { GlobalRegistry } from '../../types/GlobalRegistry/GlobalRegistry.js'
 import { Select } from '../Select/__.js'
 import { SelectionSetGraphqlMapper } from '../SelectGraphQLMapper/__.js'
@@ -135,7 +135,7 @@ const executeDocument = async (
     url,
     schema,
     request,
-  } as requestPipeline.Steps.Encode['input']
+  } as RequestPipeline['input']
 
   const result = await Anyware.Pipeline.run(requestPipeline, {
     initialInput,

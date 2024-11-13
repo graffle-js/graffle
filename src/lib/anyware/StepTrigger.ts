@@ -1,5 +1,5 @@
 import type { Simplify } from 'type-fest'
-import type { Func } from '../prelude.js'
+import type { Func, Objekt } from '../prelude.js'
 import type { Step } from './Step.js'
 
 export namespace StepTrigger {
@@ -18,9 +18,6 @@ export namespace StepTrigger {
     $OriginalInput extends Step.Input = Step.Input,
   > {
     [stepTriggerSymbol]: StepTriggerSymbol
-    // todo the result is unknown, but if we build a EndEnvelope, then we can work with this type more logically and put it here.
-    // E.g. adding `| unknown` would destroy the knowledge of hook envelope case
-    // todo this is not strictly true, it could also be the final result
     input: $OriginalInput
   }
 
@@ -28,15 +25,17 @@ export namespace StepTrigger {
   export interface Infer<
     $Step extends Step,
     $NextSteps extends Step[],
-    $PipelineOutput> extends StepTrigger.Properties<$Step['input']
-  > {
+    $PipelineOutput
+  >
+    extends StepTrigger.Properties<$Step['input']>
+  {
      (
-      params?: Simplify<
+      parameters?: Simplify<
         & {
             input?: $Step['input']
           }
         & (
-          $Step['slots'] extends undefined
+          Objekt.IsEmpty<$Step['slots']> extends true
             ? {}
             : { using?: {
                 [$SlotName in keyof $Step['slots']]?: Func.AppendAwaitedReturnType<$Step['slots'][$SlotName], undefined>

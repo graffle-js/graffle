@@ -1,4 +1,5 @@
 import type { IsUnknown } from 'type-fest'
+import type { ConfigManager } from '../../config-manager/__.js'
 import type { MaybePromise, Tuple } from '../../prelude.js'
 import type { Step } from '../Step.js'
 
@@ -25,7 +26,7 @@ type InferStepSpecs_<$StepSpecPrevious extends Step| undefined, $StepSpecInputs 
   $StepSpecInputs extends [infer $StepSpecInput extends Step.SpecInput, ...infer $StepSpecInputsRest extends Step.SpecInput[]]
     ? InferStepSpecs__<{
         name: $StepSpecInput['name']
-        slots: IsUnknown<$StepSpecInput['slots']> extends true ? undefined : $StepSpecInput['slots']
+        slots: ConfigManager.OrDefault2<$StepSpecInput['slots'],{}>
         input: IsUnknown<$StepSpecInput['input']> extends true
           ? $StepSpecPrevious extends Step
             ? $StepSpecPrevious['output']

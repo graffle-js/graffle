@@ -8,7 +8,7 @@ import type { Builder } from '../lib/builder/__.js'
 import type { AssertExtends } from '../lib/prelude.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
 import type { Fn } from '../lib/type-function/TypeFunction.js'
-import type { requestPipeline } from '../requestPipeline/__.js'
+import type { RequestPipeline } from '../requestPipeline/__.js'
 import type { GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
 
 export interface TypeHooks {
@@ -57,7 +57,7 @@ export interface Extension<
   /**
    * Anyware executed on every request.
    */
-  onRequest?: Anyware.Interceptor.InferConstructor<requestPipeline.Spec>
+  onRequest?: Anyware.Interceptor.InferConstructor<RequestPipeline['spec']>
   /**
    * Manipulate the builder.
    * You can extend the builder with new properties at both runtime AND buildtime (types, TypeScript).
@@ -169,7 +169,7 @@ export const createExtension = <
     custom?: $Custom
     create: (params: { config: $Config }) => {
       builder?: $BuilderExtension
-      onRequest?: Anyware.Interceptor.InferConstructor<requestPipeline.Spec>
+      onRequest?: Anyware.Interceptor.InferConstructor<RequestPipeline['spec']>
       typeHooks?: () => $TypeHooks
     }
   },

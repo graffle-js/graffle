@@ -75,7 +75,7 @@ export const requestPipeline = Anyware.Pipeline
   })
   .overload((overload) =>
     overload
-      .createWithInput<{ url: URL }>()({
+      .createWithInput<{ url: URL | string }>()({
         discriminant: [`transportType`, `http`],
       })
       .step(`pack`, {
@@ -207,21 +207,23 @@ export const requestPipeline = Anyware.Pipeline
   )
   .done()
 
+export type RequestPipeline = typeof requestPipeline
+
 export namespace requestPipeline {
   export type ResultFailure = Anyware.Pipeline.ResultFailure
   // | Errors.ContextualError
   // Possible from http transport fetch with abort controller.
   // | DOMException
 
-  export type Result = Anyware.Pipeline.InferResultFromSpec<Spec>
+  export type Result = Anyware.Pipeline.InferResultFromSpec<RequestPipeline['spec']>
 
-  export type Spec = Anyware.PipelineSpecFromSteps<[
-    Steps.Encode,
-    Steps.Pack,
-    Steps.Exchange,
-    Steps.Unpack,
-    Steps.Decode,
-  ]>
+  // export type Spec = Anyware.PipelineSpecFromSteps<[
+  //   Steps.Encode,
+  //   Steps.Pack,
+  //   Steps.Exchange,
+  //   Steps.Unpack,
+  //   Steps.Decode,
+  // ]>
 
   export type InitialInput =
     & { request: Grafaid.RequestAnalyzedInput }
@@ -247,10 +249,10 @@ export namespace requestPipeline {
   //   )
 
   export namespace Steps {
-    export type Encode = {
-      name: `encode`
-      input: InitialInput
-    }
+    // export type Encode = {
+    //   name: `encode`
+    //   input: InitialInput
+    // }
 
     export type Pack = {
       name: `pack`
@@ -273,26 +275,26 @@ export namespace requestPipeline {
       }
     }
 
-    export type Exchange = {
-      name: `exchange`
-      slots: {
-        fetch: (request: Request) => Response | Promise<Response>
-      }
-      input: StepInputBase
-      // & TransportInput<
-      //   { request: CoreExchangePostRequest | CoreExchangeGetRequest; headers?: HeadersInit },
-      //   { request: Grafaid.HTTP.RequestConfig }
-      // >
-    }
+    // export type Exchange = {
+    //   name: `exchange`
+    //   slots: {
+    //     fetch: (request: Request) => Response | Promise<Response>
+    //   }
+    //   input: StepInputBase
+    //   // & TransportInput<
+    //   //   { request: CoreExchangePostRequest | CoreExchangeGetRequest; headers?: HeadersInit },
+    //   //   { request: Grafaid.HTTP.RequestConfig }
+    //   // >
+    // }
 
-    export type Unpack = {
-      name: `unpack`
-      input: StepInputBase
-      // & TransportInput<
-      //   { response: Response },
-      //   { result: FormattedExecutionResult }
-      // >
-    }
+    // export type Unpack = {
+    //   name: `unpack`
+    //   input: StepInputBase
+    //   // & TransportInput<
+    //   //   { response: Response },
+    //   //   { result: FormattedExecutionResult }
+    //   // >
+    // }
 
     export type Decode = {
       name: `decode`
