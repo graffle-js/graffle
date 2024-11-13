@@ -507,6 +507,7 @@ const recreate = <$Context extends Context>(context: $Context): Builder<$Context
 
       return {
         ...context,
+        steps, // todo: it is a bug to not have this here, but removing it and no anyware test breaks!
         stepsIndex,
       } as any
     },

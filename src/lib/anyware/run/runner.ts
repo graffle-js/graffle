@@ -52,18 +52,18 @@ export const createRunner =
 const toInternalInterceptor = (pipeline: Pipeline.ExecutablePipeline, interceptor: InterceptorInput) => {
   const currentChunk = createDeferred<StepTriggerEnvelope>()
   const body = createDeferred()
-  const extensionRun = typeof interceptor === `function` ? interceptor : interceptor.run
+  const interceptorTrigger = typeof interceptor === `function` ? interceptor : interceptor.run
   const retrying = typeof interceptor === `function` ? false : interceptor.retrying
   const applyBody = async (input: object) => {
     try {
-      const result = await extensionRun(input)
+      const result = await interceptorTrigger(input)
       body.resolve(result)
     } catch (error) {
       body.reject(error)
     }
   }
 
-  const interceptorName = extensionRun.name || `anonymous`
+  const interceptorName = interceptorTrigger.name || `anonymous`
 
   switch (pipeline.config.entrypointSelectionMode) {
     case `off`: {
@@ -77,7 +77,7 @@ const toInternalInterceptor = (pipeline: Pipeline.ExecutablePipeline, intercepto
     }
     case `optional`:
     case `required`: {
-      const entryStep = getEntryStep(pipeline, extensionRun)
+      const entryStep = getEntryStep(pipeline, interceptorTrigger)
       if (entryStep instanceof Error) {
         if (pipeline.config.entrypointSelectionMode === `required`) {
           return entryStep
@@ -92,13 +92,13 @@ const toInternalInterceptor = (pipeline: Pipeline.ExecutablePipeline, intercepto
         }
       }
 
-      const hooksBeforeEntrypoint: Step.Name[] = []
+      const stepsBeforeEntrypoint: Step.Name[] = []
       for (const step of pipeline.steps) {
         if (step === entryStep) break
-        hooksBeforeEntrypoint.push(step.name)
+        stepsBeforeEntrypoint.push(step.name)
       }
 
-      const passthroughs = hooksBeforeEntrypoint.map((hookName) => createPassthrough(hookName))
+      const passthroughs = stepsBeforeEntrypoint.map((hookName) => createPassthrough(hookName))
       let currentChunkPromiseChain = currentChunk.promise
       for (const passthrough of passthroughs) {
         currentChunkPromiseChain = currentChunkPromiseChain.then(passthrough)
