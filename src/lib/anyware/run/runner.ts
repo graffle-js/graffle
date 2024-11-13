@@ -18,7 +18,7 @@ import { runPipeline } from './runPipeline.js'
 
 export interface Params<$Pipeline extends PipelineSpec = PipelineSpec> {
   initialInput: $Pipeline['input']
-  interceptors: NonRetryingInterceptorInput[]
+  interceptors?: NonRetryingInterceptorInput[]
   retryingInterceptor?: NonRetryingInterceptorInput
 }
 

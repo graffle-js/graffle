@@ -414,3 +414,30 @@ describe('step runner parameter - previous', () => {
     expect(pipeline.stepsIndex.get('b')?.run.mock.calls[0]?.[2]).toEqual({ a: { input: customInput } })
   })
 })
+
+describe('overloads', () => {
+  test.only('overloaded step runners are run', async () => {
+    const p = Pipeline
+      .create<{ value: string }>()
+      .step('a')
+      .step('b')
+      .overload(o =>
+        o
+          .create({ discriminant: ['x', 1] })
+          .step('a', {
+            run: (input) => {
+              // todo make it a type error to not propagate the discriminant
+              return ({ ...input, value: input.value + '+a' })
+            },
+          })
+          .step('b', {
+            run: (input) => {
+              return ({ value: input.value + '+b' })
+            },
+          })
+      )
+      .done()
+    const result = await Pipeline.run(p, { initialInput: { value: 'initial', x: 1 } })
+    expect(result).toEqual(successfulResult({ value: 'initial+a+b' }))
+  })
+})
