@@ -47,12 +47,12 @@ export namespace Step {
   export type Runner<
     $Input extends Input = Input,
     $Slots extends undefined | Step.Slots = undefined,
-    $Previous extends object = object,
+    $Previous extends undefined | object = undefined,
     $Output = any,
   > = (
     input: $Input,
-    slots?: $Slots,
-    previous?: $Previous,
+    slots: $Slots,
+    previous: $Previous,
   ) => $Output
 
   export type Input = object

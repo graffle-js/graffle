@@ -1,6 +1,6 @@
 import { beforeEach, vi } from 'vitest'
 import { Pipeline } from './_.js'
-import type { NonRetryingInterceptorInput } from './Interceptor/Interceptor.js'
+import type { Interceptor, NonRetryingInterceptorInput } from './Interceptor/Interceptor.js'
 import type { Options } from './Pipeline/Config.js'
 import { Step } from './Step.js'
 
@@ -26,37 +26,41 @@ export const slots = {
 }
 export type slots = typeof slots
 
-const stepARunner = vi.fn<
-  (
-    input: { value: string },
-    slots: { append: (hookName: string) => string; appendExtra: (hookName: string) => string },
-    previous: undefined,
-  ) => { value: string }
->().mockImplementation((input, slots) => {
-  const extra = slots.appendExtra(`a`)
-  return { value: input.value + `+` + slots.append(`a`) + extra }
-})
-
-type StepARunner = typeof stepARunner
-
-const stepBRunner = vi.fn<
-  (
-    input: { value: string },
-    slots: { append: (hookName: string) => string; appendExtra: (hookName: string) => string },
-    previous: object,
-  ) => { value: string }
->().mockImplementation((input, slots) => {
-  const extra = slots.appendExtra(`b`)
-  return { value: input.value + `+` + slots.append(`b`) + extra }
-})
-
-type StepBRunner = typeof stepBRunner
-
-type Append = (hookName: string) => string
-
-type AppendExtra = () => string
-
 export const createPipeline = (options?: Options) => {
+  type Append = (hookName: string) => string
+
+  type AppendExtra = () => string
+
+  const stepARunner = vi.fn<
+    (
+      input: { value: string },
+      slots: { append: (hookName: string) => string; appendExtra: (hookName: string) => string },
+      previous: undefined,
+    ) => { value: string }
+  >().mockImplementation((input, slots) => {
+    const extra = slots.appendExtra(`a`)
+    return {
+      value: input.value + `+` + slots.append(`a`) + extra,
+    }
+  })
+
+  type StepARunner = typeof stepARunner
+
+  const stepBRunner = vi.fn<
+    (
+      input: { value: string },
+      slots: { append: (hookName: string) => string; appendExtra: (hookName: string) => string },
+      previous: object,
+    ) => { value: string }
+  >().mockImplementation((input, slots) => {
+    const extra = slots.appendExtra(`b`)
+    return {
+      value: input.value + `+` + slots.append(`b`) + extra,
+    }
+  })
+
+  type StepBRunner = typeof stepBRunner
+
   return Pipeline
     .create<{ value: string }>(options)
     .stepWithRunnerType<StepARunner>()(`a`, {
@@ -85,6 +89,7 @@ export const createPipeline = (options?: Options) => {
 }
 
 type TestPipeline = ReturnType<typeof createPipeline>
+export type TestInterceptor = Interceptor.InferConstructor<TestPipeline['spec']>
 
 export let pipeline: TestPipeline
 
@@ -92,9 +97,9 @@ beforeEach(() => {
   pipeline = createPipeline()
 })
 
-export const runWithOptions = (options?: Options) => {
+export const pipelineWithOptions = (options?: Options) => {
   const pipeline = createPipeline(options)
-  const run = async (...interceptors: NonRetryingInterceptorInput[]) => {
+  const run = async (...interceptors: TestInterceptor[]) => {
     return await Pipeline.run(pipeline, {
       initialInput: { value: `initial` },
       interceptors,

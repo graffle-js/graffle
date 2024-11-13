@@ -260,11 +260,11 @@ export const runStep = async (
         ...implementation.slots,
         ...customSlots,
       }
-      result = await implementation.run({
-        input: inputOriginalOrFromExtension,
-        slots: slotsResolved,
-        previous: previousStepsCompleted,
-      })
+      result = await implementation.run(
+        inputOriginalOrFromExtension,
+        slotsResolved,
+        previousStepsCompleted,
+      )
     } catch (error) {
       debugHook(`implementation error`)
       const lastExtension = nextInterceptorsStack[nextInterceptorsStack.length - 1]

@@ -79,7 +79,7 @@ export interface Builder<$Context extends Context = Context> {
         {
           name: $Name
           input: Parameters<$Runner>[0]
-          output: ConfigManager.OrDefault2<Parameters<$Runner>[1], {}>
+          output: ConfigManager.OrDefault2<ReturnType<$Runner>, {}>
           slots: ConfigManager.OrDefault2<$Slots, {}>
           run: $Runner
         },
@@ -482,12 +482,13 @@ const recreate = <$Context extends Context>(context: $Context): Builder<$Context
             .filter(_ => _ !== null)
           return {
             name: step.name,
-            run: (parameters) => {
+            run: (...args: Parameters<Step.Runner>) => {
+              const input = args[0] as Record<string, unknown>
               const stepOverload = stepOverloads.find(stepOverload => {
-                return parameters.input[stepOverload.discriminant[0]] === stepOverload.discriminant[1]
+                return input[stepOverload.discriminant[0]] === stepOverload.discriminant[1]
               })
-              if (stepOverload) return stepOverload.run(parameters)
-              return step.run(parameters)
+              if (stepOverload) return stepOverload.run(...args)
+              return step.run(...args)
             },
             slots: {
               ...step.slots,
