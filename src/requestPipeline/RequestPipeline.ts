@@ -72,14 +72,16 @@ export const requestPipeline = Anyware.Pipeline
       }
 
       // todo needs to be moved into the http overload
-      // const result = input.transportType === `http`
-      //   ? {
-      //     ...input.result,
-      //     response: input.response,
-      //   }
-      //   : input.result
+      // @ts-expect-error
+      return input.transportType === `http`
+        ? {
+          ...input.result,
+          // @ts-expect-error
+          response: input.response,
+        }
+        : input.result
 
-      return input.result
+      // return input.result
     },
   })
   .overload((overload) =>
