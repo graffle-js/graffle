@@ -213,20 +213,29 @@ interface OverloadBuilder<
   /**
    * TODO
    */
-  step: <
+  step: OverloadBuilderStep<$RootContext, $Context>
+  stepWithInputExtension: <$InputExtension extends object>() => OverloadBuilderStep<
+    $RootContext,
+    $Context,
+    $InputExtension
+  >
+}
+
+interface OverloadBuilderStep<
+  $RootContext extends Context,
+  $Context extends OverloadBuilderContext,
+  $InputExtension extends object = {},
+> {
+  <
     $Name extends $RootContext['steps'][number]['name'],
     $Slots extends undefined | Step.Slots = undefined,
-    $Input = Tuple.PreviousItem<$RootContext['steps'], { name: $Name }> extends Step
-      ? Tuple.PreviousItem<$RootContext['steps'], { name: $Name }>['name'] extends keyof $Context['steps']
-        ? $Context['steps'][Tuple.PreviousItem<$RootContext['steps'], { name: $Name }>['name']]['output']
-      :
-        & Tuple.ToIndexByObjectKey<$RootContext['steps'], 'name'>[$Name]['input']
-        & $Context['input']
-        & { [_ in $Context['discriminant'][0]]: $Context['discriminant'][1] }
-      :
-        & Tuple.ToIndexByObjectKey<$RootContext['steps'], 'name'>[$Name]['input']
-        & $Context['input']
-        & { [_ in $Context['discriminant'][0]]: $Context['discriminant'][1] },
+    $Input =
+      & InferOverloadStepInput<
+        $Context,
+        Extract<$RootContext['steps'][number], { name: $Name }>,
+        Tuple.PreviousItem<$RootContext['steps'], { name: $Name }>
+      >
+      & $InputExtension,
     $Output = unknown,
   >(
     name: $Name,
@@ -234,7 +243,7 @@ interface OverloadBuilder<
       slots?: $Slots
       run: (input: $Input, slots: $Slots) => $Output
     },
-  ) => OverloadBuilder<
+  ): OverloadBuilder<
     $RootContext,
     ConfigManager.UpdateOneKey<
       $Context,
@@ -251,6 +260,24 @@ interface OverloadBuilder<
     >
   >
 }
+
+// dprint-ignore
+type InferOverloadStepInput<
+  $OverloadContext extends OverloadBuilderContext,
+  $CurrentStep extends Step,
+  $PreviousStep extends Step | undefined,
+> =
+  $PreviousStep extends Step
+    ? $PreviousStep['name'] extends keyof $OverloadContext['steps']
+      ? $OverloadContext['steps'][$PreviousStep['name']]['output']
+      :
+        & $CurrentStep['input']
+        & $OverloadContext['input']
+        & { [_ in $OverloadContext['discriminant'][0]]: $OverloadContext['discriminant'][1] }
+      :
+        & $CurrentStep['input']
+        & $OverloadContext['input']
+        & { [_ in $OverloadContext['discriminant'][0]]: $OverloadContext['discriminant'][1] }
 
 // dprint-ignore
 export type GetNextStepParameterPrevious<$Context extends Context> =
@@ -417,6 +444,7 @@ const recreate = <$Context extends Context>(context: $Context): Builder<$Context
 
         const builder: OverloadBuilder = {
           context: context as OverloadBuilderContext,
+          stepWithInputExtension: () => builder.step as any,
           step: (name, spec) => {
             context.steps[name] = {
               name,

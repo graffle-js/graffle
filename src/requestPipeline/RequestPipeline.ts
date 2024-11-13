@@ -12,7 +12,7 @@ import { getRequestHeadersRec, parseExecutionResult, postRequestHeadersRec } fro
 import { normalizeRequestToNode } from '../lib/grafaid/request.js'
 import { mergeRequestInit, searchParamsAppendAll } from '../lib/http.js'
 import type { httpMethodGet, httpMethodPost } from '../lib/http.js'
-import { _, casesExhausted, isAbortError, isString, type MaybePromise } from '../lib/prelude.js'
+import { _, isAbortError, isString, type MaybePromise } from '../lib/prelude.js'
 import { Transport } from '../types/Transport.js'
 import { decodeResultData } from './CustomScalars/decode.js'
 import { encodeRequestVariables } from './CustomScalars/encode.js'
@@ -78,7 +78,7 @@ export const requestPipeline = Anyware.Pipeline
       .createWithInput<{ url: URL | string }>()({
         discriminant: [`transportType`, `http`],
       })
-      .step(`pack`, {
+      .stepWithInputExtension<{ headers?: HeadersInit }>()(`pack`, {
         slots: {
           searchParams: getRequestEncodeSearchParameters,
           body: postRequestEncodeBody,
@@ -98,12 +98,11 @@ export const requestPipeline = Anyware.Pipeline
           const methodMode = input.state.config.transport.config.methodMode
           const requestMethod = methodMode === MethodMode.post
             ? `post`
-            : methodMode === MethodMode.getReads
-            ? OperationTypeToAccessKind[operationType] === `read` ? `get` : `post`
-            : casesExhausted(methodMode)
+            : OperationTypeToAccessKind[operationType] === `read`
+            ? `get`
+            : `post`
 
-          const baseProperties =
-            // mergeRequestInit(
+          const baseProperties = mergeRequestInit(
             mergeRequestInit(
               mergeRequestInit(
                 {
@@ -114,11 +113,11 @@ export const requestPipeline = Anyware.Pipeline
                 },
               ),
               input.state.config.transport.config.raw,
-            )
-          // {
-          //   headers: input.headers,
-          // },
-          // )
+            ),
+            {
+              headers: input.headers,
+            },
+          )
           const request:
             | requestPipeline.Steps.CoreExchangePostRequest
             | requestPipeline.Steps.CoreExchangeGetRequest = requestMethod === `get`

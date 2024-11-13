@@ -168,6 +168,32 @@ describe(`overload`, () => {
       ]>()
   })
 
+  test(`can extend input type`, () => {
+    expectTypeOf(
+      b0.step(`a`).overload(o =>
+        o.create({ discriminant: d }).stepWithInputExtension<{ ex: 1 }>()(`a`, {
+          run: (input) => {
+            expectTypeOf(input).toEqualTypeOf<initialInput & dObject & { ex: 1 }>()
+          },
+        })
+      ).context.overloads,
+    )
+      .toMatchTypeOf<[
+        {
+          discriminant: d
+          input: {}
+          steps: {
+            a: {
+              name: 'a'
+              slots: {}
+              input: initialInput & dObject & { ex: 1 }
+              output: void // eslint-disable-line
+            }
+          }
+        },
+      ]>()
+  })
+
   // Overload Step Slots
 
   test(`if step has no slots, parameter undefined & context undefined`, () => {
