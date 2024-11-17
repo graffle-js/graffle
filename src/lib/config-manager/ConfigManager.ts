@@ -159,6 +159,10 @@ export type AppendAtKey<$Obj extends object, $Prop extends keyof $Obj, $Type> =
   // @ts-expect-error
   UpdateOneKey<$Obj, $Prop, [...$Obj[$Prop], $Type]>
 
+export type AppendManyAtKey<$Obj extends object, $Prop extends keyof $Obj, $Type extends any[]> =
+  // @ts-expect-error
+  UpdateOneKey<$Obj, $Prop, [...$Obj[$Prop], ...$Type]>
+
 export type UpdateOneKey<$Obj extends object, $Prop extends keyof $Obj, $Type extends $Obj[$Prop]> =
   & {
     [_ in keyof $Obj as _ extends $Prop ? never : _]: $Obj[_]

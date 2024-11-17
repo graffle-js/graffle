@@ -1,8 +1,10 @@
 import type { IsUnknown, Simplify } from 'type-fest'
 import type { ConfigManager } from '../../config-manager/__.js'
-import type { _, ExcludeUndefined } from '../../prelude.js'
+import type { ExcludeUndefined } from '../../prelude.js'
 import { type Tuple } from '../../prelude.js'
 import type { ExecutableStep } from '../ExecutableStep.js'
+import type { Extension } from '../Extension/__.js'
+import { Overload } from '../Overload/__.js'
 import type { Step } from '../Step.js'
 import { type Config, type Options, resolveOptions } from './Config.js'
 import { createExecutableStepsIndex } from './createWithSpec.js'
@@ -29,7 +31,7 @@ export interface Context {
   config: Config
   input: object
   steps: ContextStep[]
-  overloads: OverloadBuilderContext[]
+  overloads: Overload.BuilderContext[]
 }
 
 export interface ContextEmpty extends Context {
@@ -93,10 +95,23 @@ export interface Builder<$Context extends Context = Context> {
   /**
    * TODO
    */
-  overload: <$OverloadBuilder extends OverloadBuilder<$Context>>(
-    overloadBuilder: (overloadBuilder: OverloadBuilderNamespace<$Context>) => $OverloadBuilder,
+  overload: <$OverloadBuilder extends Overload.Builder<$Context>>(
+    overloadBuilder: Overload.BuilderCallback<$Context, $OverloadBuilder>,
   ) => Builder<
     ConfigManager.AppendAtKey<$Context, 'overloads', $OverloadBuilder['context']>
+  >
+  /**
+   * TODO
+   */
+  // todo test this
+  use: <$Extension extends Extension.Builder>(
+    extension: $Extension,
+  ) => Builder<
+    ConfigManager.AppendManyAtKey<
+      $Context,
+      'overloads',
+      $Extension['context']['overloads']
+    >
   >
   /**
    * TODO
@@ -162,122 +177,6 @@ interface BuilderStep<$Context extends Context> {
     >
   >
 }
-
-type DiscriminantSpec = readonly [string, DiscriminantPropertyValue]
-
-interface OverloadBuilderContext {
-  discriminant: DiscriminantSpec
-  input: object
-  steps: Record<string, Step>
-}
-
-interface OverloadBuilderContextEmpty extends OverloadBuilderContext {
-  input: {}
-  steps: {}
-}
-
-interface OverloadBuilderNamespace<$RootContext extends Context = Context> {
-  /**
-   * TODO
-   */
-  create: <const $DiscriminantSpec extends DiscriminantSpec>(
-    parameters: { discriminant: $DiscriminantSpec },
-  ) => OverloadBuilder<
-    $RootContext,
-    {
-      discriminant: $DiscriminantSpec
-      input: {}
-      steps: {}
-    }
-  >
-  /**
-   * TODO
-   */
-  createWithInput: <$Input extends object>() => <const $DiscriminantSpec extends DiscriminantSpec>(
-    parameters: { discriminant: $DiscriminantSpec },
-  ) => OverloadBuilder<
-    $RootContext,
-    {
-      discriminant: $DiscriminantSpec
-      input: $Input
-      steps: {}
-    }
-  >
-}
-
-interface OverloadBuilder<
-  $RootContext extends Context = Context,
-  $Context extends OverloadBuilderContext = OverloadBuilderContextEmpty,
-> {
-  context: $Context
-  /**
-   * TODO
-   */
-  step: OverloadBuilderStep<$RootContext, $Context>
-  stepWithInputExtension: <$InputExtension extends object>() => OverloadBuilderStep<
-    $RootContext,
-    $Context,
-    $InputExtension
-  >
-}
-
-interface OverloadBuilderStep<
-  $RootContext extends Context,
-  $Context extends OverloadBuilderContext,
-  $InputExtension extends object = {},
-> {
-  <
-    $Name extends $RootContext['steps'][number]['name'],
-    $Slots extends undefined | Step.Slots = undefined,
-    $Input =
-      & InferOverloadStepInput<
-        $Context,
-        Extract<$RootContext['steps'][number], { name: $Name }>,
-        Tuple.PreviousItem<$RootContext['steps'], { name: $Name }>
-      >
-      & $InputExtension,
-    $Output = unknown,
-  >(
-    name: $Name,
-    spec: {
-      slots?: $Slots
-      run: (input: $Input, slots: $Slots) => $Output
-    },
-  ): OverloadBuilder<
-    $RootContext,
-    ConfigManager.UpdateOneKey<
-      $Context,
-      'steps',
-      & $Context['steps']
-      & {
-        [_ in $Name]: {
-          name: $Name
-          input: $Input
-          output: Awaited<$Output>
-          slots: ConfigManager.OrDefault2<$Slots, {}>
-        }
-      }
-    >
-  >
-}
-
-// dprint-ignore
-type InferOverloadStepInput<
-  $OverloadContext extends OverloadBuilderContext,
-  $CurrentStep extends Step,
-  $PreviousStep extends Step | undefined,
-> =
-  $PreviousStep extends Step
-    ? $PreviousStep['name'] extends keyof $OverloadContext['steps']
-      ? $OverloadContext['steps'][$PreviousStep['name']]['output']
-      :
-        & $CurrentStep['input']
-        & $OverloadContext['input']
-        & { [_ in $OverloadContext['discriminant'][0]]: $OverloadContext['discriminant'][1] }
-      :
-        & $CurrentStep['input']
-        & $OverloadContext['input']
-        & { [_ in $OverloadContext['discriminant'][0]]: $OverloadContext['discriminant'][1] }
 
 // dprint-ignore
 export type GetNextStepParameterPrevious<$Context extends Context> =
@@ -349,12 +248,12 @@ type InferSteps_<$Steps extends Step[], $Context extends Context> = {
         }
 }
 
-type InferStepSlots<$Step extends Step, $Overloads extends OverloadBuilderContext[]> =
+type InferStepSlots<$Step extends Step, $Overloads extends Overload.BuilderContext[]> =
   & $Step['slots']
   & InferStepSlots_<$Step, $Overloads>
 
 // dprint-ignore
-type InferStepSlots_<$Step extends Step, $Overloads extends OverloadBuilderContext[]> =
+type InferStepSlots_<$Step extends Step, $Overloads extends Overload.BuilderContext[]> =
   Tuple.IntersectItems<{
     [$Index in keyof $Overloads]:
       IsUnknown<$Overloads[$Index]['steps'][$Step['name']]> extends true
@@ -362,7 +261,7 @@ type InferStepSlots_<$Step extends Step, $Overloads extends OverloadBuilderConte
         : $Overloads[$Index]['steps'][$Step['name']]['slots']
   }>
 
-type InferStepOutput<$Step extends Step, $Overloads extends OverloadBuilderContext[]> = {
+type InferStepOutput<$Step extends Step, $Overloads extends Overload.BuilderContext[]> = {
   [$Index in keyof $Overloads]:
     & $Step['output']
     & {
@@ -371,7 +270,7 @@ type InferStepOutput<$Step extends Step, $Overloads extends OverloadBuilderConte
     & $Overloads[$Index]['steps'][$Step['name']]['output']
 }[number]
 
-type InferStepInput<$Step extends Step, $Overloads extends OverloadBuilderContext[]> = {
+type InferStepInput<$Step extends Step, $Overloads extends Overload.BuilderContext[]> = {
   [$Index in keyof $Overloads]:
     & $Step['input']
     & {
@@ -384,9 +283,13 @@ type InferStepInput<$Step extends Step, $Overloads extends OverloadBuilderContex
 type InferInput<$Context extends Context> = Simplify<
   $Context['overloads'] extends []
     ? $Context['input']
-    : InferInput_<$Context['input'], $Context['overloads']>
+    // // todo: is this needed?
+    // : $Context['overloads'] extends $Context['overloads']
+    //   ? $Context['input']
+    //   // todo maybe just this.
+      : InferInput_<$Context['input'], $Context['overloads']>
 >
-type InferInput_<$BaseInput extends object, $Overloads extends OverloadBuilderContext[]> = {
+type InferInput_<$BaseInput extends object, $Overloads extends Overload.BuilderContext[]> = {
   [$Index in keyof $Overloads]:
     & $BaseInput
     & $Overloads[$Index]['input']
@@ -436,32 +339,18 @@ const recreate = <$Context extends Context>(context: $Context): Builder<$Context
         ],
       } as any)
     },
+    use: (extension) => {
+      return recreate({
+        ...context,
+        overloads: [
+          ...context.overloads,
+          ...extension.context.overloads,
+        ],
+      } as any)
+    },
     overload: (builderCallback) => {
-      const create: OverloadBuilderNamespace['create'] = (parameters) => {
-        const context: Omit<OverloadBuilderContext, 'input'> = {
-          discriminant: parameters.discriminant,
-          steps: {},
-        }
-
-        const builder: OverloadBuilder = {
-          context: context as OverloadBuilderContext,
-          stepWithInputExtension: () => builder.step as any,
-          step: (name, spec) => {
-            context.steps[name] = {
-              name,
-              ...spec,
-            } as unknown as Step
-            return builder as any
-          },
-        }
-
-        return builder as any
-      }
-      const nameSpace: OverloadBuilderNamespace = {
-        create,
-        createWithInput: () => create as any,
-      }
-      const overload = builderCallback(nameSpace)
+      const overload = builderCallback({ create: Overload.create })
+      // todo why mutating here? stop it. make like use extension.
       context.overloads.push(overload.context)
 
       return recreate(context) as any
@@ -517,5 +406,3 @@ const recreate = <$Context extends Context>(context: $Context): Builder<$Context
 }
 
 const passthroughStep = (params: { input: object }) => params.input
-
-type DiscriminantPropertyValue = string | number | symbol

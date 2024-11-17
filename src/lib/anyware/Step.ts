@@ -46,7 +46,8 @@ export namespace Step {
 
   export type Runner<
     $Input extends Input = Input,
-    $Slots extends undefined | Step.Slots = undefined,
+    // $Slots extends undefined | Step.Slots = undefined,
+    $Slots extends undefined | object = undefined,
     $Previous extends undefined | object = undefined,
     $Output = any,
   > = (

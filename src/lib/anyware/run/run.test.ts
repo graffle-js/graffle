@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import { beforeEach, describe, expect, test, vi } from 'vitest'
+import { describe, expect, test, vi } from 'vitest'
 import { Errors } from '../../errors/__.js'
 import type { ContextualError } from '../../errors/ContextualError.js'
 import { Pipeline } from '../_.js'
@@ -13,7 +13,7 @@ import {
   runRetrying,
   type TestInterceptor,
 } from '../__.test-helpers.js'
-import { type ResultSuccess, successfulResult } from '../Pipeline/Result.js'
+import { successfulResult } from '../Pipeline/Result.js'
 import { Step } from '../Step.js'
 
 describe(`no interceptors`, () => {
@@ -36,15 +36,14 @@ describe(`one extension`, () => {
     expect(pipeline.stepsIndex.get('a')?.run).toHaveBeenCalled()
     expect(pipeline.stepsIndex.get('b')?.run).toHaveBeenCalled()
   })
-  test('can call hook with no input, making the original input be used', () => {
-    expect(
+  test('can call hook with no input, making the original input be used', async () => {
+    await expect(
       run(async ({ a }) => {
         return await a()
       }),
     ).resolves.toEqual({ value: { value: 'initial+a+b' } })
-    // todo why doesn't this work?
-    // expect(core.hooks.a).toHaveBeenCalled()
-    // expect(core.hooks.b).toHaveBeenCalled()
+    expect(pipeline.stepsIndex.get('a')?.run).toHaveBeenCalled()
+    expect(pipeline.stepsIndex.get('b')?.run).toHaveBeenCalled()
   })
   describe(`can short-circuit`, () => {
     test(`at start, return input`, async () => {
@@ -270,18 +269,18 @@ describe(`errors`, () => {
       }).step(stepA).done()
 
       // dprint-ignore
-      expect(Pipeline.run(builder, { initialInput: { throws: new Error('oops') }, interceptors: [] })).resolves.toBeInstanceOf(Errors.ContextualError)
+      await expect(Pipeline.run(builder, { initialInput: { throws: new Error('oops') }, interceptors: [] })).resolves.toBeInstanceOf(Errors.ContextualError)
       // dprint-ignore
-      expect(Pipeline.run(builder, { initialInput: { throws: new SpecialError1('oops') }, interceptors: [] })).resolves.toBeInstanceOf(SpecialError1)
+      await expect(Pipeline.run(builder, { initialInput: { throws: new SpecialError1('oops') }, interceptors: [] })).resolves.toBeInstanceOf(SpecialError1)
     })
     test('via passthroughErrorInstanceOf (multiple)', async () => {
       const builder = Pipeline.create<{ throws: Error }>({
         passthroughErrorInstanceOf: [SpecialError1, SpecialError2],
       }).step(stepA).done()
       // dprint-ignore
-      expect(Pipeline.run(builder, { initialInput: { throws: new Error('oops') }, interceptors: [] })).resolves.toBeInstanceOf(Errors.ContextualError)
+      await expect(Pipeline.run(builder, { initialInput: { throws: new Error('oops') }, interceptors: [] })).resolves.toBeInstanceOf(Errors.ContextualError)
       // dprint-ignore
-      expect(Pipeline.run(builder, { initialInput: { throws: new SpecialError2('oops') }, interceptors: [] })).resolves.toBeInstanceOf(SpecialError2)
+      await expect(Pipeline.run(builder, { initialInput: { throws: new SpecialError2('oops') }, interceptors: [] })).resolves.toBeInstanceOf(SpecialError2)
     })
     test('via passthroughWith', async () => {
       const builder = Pipeline.create<{ throws: Error }>({
@@ -292,9 +291,9 @@ describe(`errors`, () => {
         },
       }).step(stepA).done()
       // dprint-ignore
-      expect(Pipeline.run(builder, { initialInput: { throws: new Error('oops') }, interceptors: [] })).resolves.toBeInstanceOf(Errors.ContextualError)
+      await expect(Pipeline.run(builder, { initialInput: { throws: new Error('oops') }, interceptors: [] })).resolves.toBeInstanceOf(Errors.ContextualError)
       // dprint-ignore
-      expect(Pipeline.run(builder, { initialInput: { throws: new SpecialError1('oops') }, interceptors: [] })).resolves.toBeInstanceOf(SpecialError1)
+      await expect(Pipeline.run(builder, { initialInput: { throws: new SpecialError1('oops') }, interceptors: [] })).resolves.toBeInstanceOf(SpecialError1)
     })
   })
 })

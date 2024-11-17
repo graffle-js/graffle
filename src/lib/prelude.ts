@@ -698,7 +698,12 @@ export type SimplifyExcept<$ExcludeType, $Type> =
       ? $Type
       : {[TypeKey in keyof $Type]: $Type[TypeKey]}
 
+export const __: () => never = () => {
+  throw new Error(`not implemented`)
+}
+
 export const _ = undefined as any
+
 export type _ = typeof _
 
 // dprint-ignore
