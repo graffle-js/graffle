@@ -39,6 +39,8 @@ AssertTypeOf<D | null>(await g.gql(d3).send({}))
 
 // dprint-ignore
 {
+  // Return Type
+
   AssertTypeOf<D | null>(await g.gql<Grafaid.Document.Typed.Query<D, { x: 1 }>               >``.send({ x: 1 }))
   AssertTypeOf<D | null>(await g.gql<Grafaid.Document.Typed.Query<D, { x?: 1 }>              >``.send())
   AssertTypeOf<D | null>(await g.gql<Grafaid.Document.Typed.Query<D, { x?: 1 }>              >``.send({ x: 1 }))

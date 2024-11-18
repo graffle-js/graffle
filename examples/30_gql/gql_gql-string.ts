@@ -11,7 +11,7 @@ const graffle = Graffle.create({
 
 const data = await graffle.gql`
   {
-    pokemon {
+    pokemons {
       name
     }
   }

@@ -20,12 +20,12 @@ const graffle = Graffle
   })
 
 const result = await graffle.gql`
-    query pokemon {
-      trainers { name }
+    query pokemons {
+      pokemons { name }
     }
     query trainers {
-      pokemon { name }
+      trainers { name }
     }
-  `.send(`pokemon`)
+  `.send(`pokemons`)
 
 show(result)

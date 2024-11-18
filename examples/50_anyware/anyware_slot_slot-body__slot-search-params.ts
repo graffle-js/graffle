@@ -12,7 +12,7 @@ const graffle = Graffle
         searchParams: (graphqlRequest) => {
           return {
             query: graphqlRequest.query,
-            operationName: `getPokemon`,
+            operationName: `getPokemons`,
           }
         },
       },
@@ -23,8 +23,8 @@ const result = await graffle.gql`
     query getTrainers {
       trainers { name }
     }
-    query getPokemon {
-      pokemon { name }
+    query getPokemons {
+      pokemons { name }
     }
   `
   .send(`getTrainers`)

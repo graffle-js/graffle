@@ -752,22 +752,6 @@ console.log(data)
             deprecationReason: null
           },
           {
-            name: 'pokemon',
-            description: null,
-            args: [],
-            type: {
-              kind: 'LIST',
-              name: null,
-              ofType: {
-                kind: 'NON_NULL',
-                name: null,
-                ofType: { kind: 'OBJECT', name: 'Pokemon', ofType: null }
-              }
-            },
-            isDeprecated: false,
-            deprecationReason: null
-          },
-          {
             name: 'pokemonByName',
             description: null,
             args: [

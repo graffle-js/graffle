@@ -229,6 +229,7 @@ const DateFilter = builder.inputType(`DateFilter`, {
 const PokemonFilter = builder.inputType(`PokemonFilter`, {
   fields: (t) => ({
     name: t.field({ type: StringFilter }),
+    type: t.field({ type: PokemonType }),
     birthday: t.field({ type: DateFilter }),
   }),
 })
@@ -247,6 +248,9 @@ builder.queryField(`pokemons`, (t) =>
     type: [Pokemon],
     resolve: (_, args, ctx) => {
       return DatabaseServer.tenant(ctx.tenant).pokemon.filter((p) => {
+        if (args.filter?.type) {
+          return p.type === args.filter.type
+        }
         if (args.filter?.name) {
           if (args.filter.name.contains) {
             return p.name.includes(args.filter.name.contains)
@@ -273,12 +277,6 @@ builder.queryField(`battles`, (t) =>
     nullable: false,
     type: [Battle],
     resolve: (_, __, ctx) => DatabaseServer.tenant(ctx.tenant).battles,
-  }))
-
-builder.queryField(`pokemon`, (t) =>
-  t.field({
-    type: [Pokemon],
-    resolve: (_, __, ctx) => DatabaseServer.tenant(ctx.tenant).pokemon,
   }))
 
 builder.queryField(`pokemonByName`, (t) =>

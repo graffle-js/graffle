@@ -58,10 +58,6 @@ export interface Query<
    */
   beings?: Query.beings$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Query.beings<_$Scalars>>
   /**
-   * Select the `pokemon` field on the `Query` object. Its type is `Pokemon` (a `OutputObject` kind of type).
-   */
-  pokemon?: Query.pokemon$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Query.pokemon<_$Scalars>>
-  /**
    * Select the `pokemonByName` field on the `Query` object. Its type is `Pokemon` (a `OutputObject` kind of type).
    */
   pokemonByName?: Query.pokemonByName<_$Scalars> | $Select.SelectAlias.SelectAlias<Query.pokemonByName<_$Scalars>>
@@ -148,28 +144,6 @@ export namespace Query {
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     beings$SelectionSet<_$Scalars>
-  >
-
-  // --------------------------------------------------------------------------------------------------
-
-  export type pokemon<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    pokemon$SelectionSet<_$Scalars>
-
-  export interface pokemon$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base, $NamedTypes.$Pokemon<_$Scalars> {}
-
-  // --- expanded ---
-
-  /**
-   * This is the "expanded" version of the `pokemon` type. It is identical except for the fact
-   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
-   * In some cases, this is a preferable DX, making the types easier to read for users.
-   */
-  export type pokemon$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = $$Utilities.Simplify<
-    pokemon$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
@@ -460,6 +434,7 @@ export interface PokemonFilter<
 > {
   birthday?: $NamedTypes.$DateFilter<_$Scalars> | undefined | null
   name?: $NamedTypes.$StringFilter<_$Scalars> | undefined | null
+  $type?: $NamedTypes.$PokemonType | undefined | null
 }
 
 export interface StringFilter<

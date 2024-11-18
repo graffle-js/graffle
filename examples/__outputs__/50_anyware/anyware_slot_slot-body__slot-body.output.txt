@@ -1,11 +1,9 @@
 ---------------------------------------- SHOW ----------------------------------------
 {
-  pokemon: [
-    { name: 'Pikachu' },
-    { name: 'Charizard' },
-    { name: 'Squirtle' },
-    { name: 'Bulbasaur' },
-    { name: 'Caterpie' },
-    { name: 'Weedle' }
+  trainers: [
+    { name: 'Ash' },
+    { name: 'Misty' },
+    { name: 'Brock' },
+    { name: 'Gary' }
   ]
 }

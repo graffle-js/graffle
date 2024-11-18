@@ -22,20 +22,20 @@ assertEqual<
   { z: number; a: [1, 2]; b: boolean; c: { y: 2 } }
 >()
 
-assertEqual<ConfigManager.SetOne<{ a: { b: 2 } }, [], { a2: 2 }>, { a: { b: 2 }; a2: 2 }>()
-assertEqual<ConfigManager.SetOne<{ a: { b: 2 } }, ['a'], { b: 3 }>, { a: { b: 3 } }>()
-assertEqual<ConfigManager.SetOne<{ a: { b: 2 } }, ['a', 'b'], 3>, { a: { b: 3 } }>()
-// never
-assertEqual<ConfigManager.SetOne<{ a: { b: 2 } }, [], 1>, never>()
-assertEqual<ConfigManager.SetOne<{ a: { b: 2 } }, ['x'], 1>, never>()
-assertEqual<ConfigManager.SetOne<{ a: { b: 2 } }, ['a', 'b', 'c'], 3>, { a: { b: never } }>()
-
-assertEqual<ConfigManager.UpdateOneKey<a1, 'a', { b: 2 }>, { a: { b: 2 }; b: string }>()
-assertEqual<ConfigManager.UpdateOneKey<{ a?: number }, 'a', 1>, { a: 1 }>()
-assertEqual<ConfigManager.UpdateOneKey<{ a?: number; b?: number }, 'a', 1>, { a: 1; b?: number }>()
-
 // dprint-ignore
 {
+assertEqual<ConfigManager.SetOne<{ a: { b: 2 } }, [], { a2: 2 }>     , { a: { b: 2 }; a2: 2 }>()
+assertEqual<ConfigManager.SetOne<{ a: { b: 2 } }, ['a'], { b: 3 }>   , { a: { b: 3 } }>()
+assertEqual<ConfigManager.SetOne<{ a: { b: 2 } }, ['a', 'b'], 3>     , { a: { b: 3 } }>()
+// never
+assertEqual<ConfigManager.SetOne<{ a: { b: 2 } }, [], 1>              , never>()
+assertEqual<ConfigManager.SetOne<{ a: { b: 2 } }, ['x'], 1>           , never>()
+assertEqual<ConfigManager.SetOne<{ a: { b: 2 } }, ['a', 'b', 'c'], 3> , { a: { b: never } }>()
+
+assertEqual<ConfigManager.UpdateOneKey<a1, 'a', { b: 2 }>                  , { a: { b: 2 }; b: string }>()
+assertEqual<ConfigManager.UpdateOneKey<{ a?: number }, 'a', 1>             , { a: 1 }>()
+assertEqual<ConfigManager.UpdateOneKey<{ a?: number; b?: number }, 'a', 1> , { a: 1; b?: number }>()
+
 assertEqual<ConfigManager.SetAtPath<a1, [], 9>               , a1>()
 assertEqual<ConfigManager.SetAtPath<a1, ['a'], { b: 2 }>     , { a: { b: 2 }; b: string }>()
 assertEqual<ConfigManager.SetAtPath<a1, ['a'], { x: 2 }>     , { a: { x: 2 }; b: string }>()

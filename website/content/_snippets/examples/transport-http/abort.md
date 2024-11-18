@@ -12,9 +12,11 @@ const graffle = Graffle.create({
   schema: `http://localhost:3000/graphql`,
 })
 
+graffle
+
 const resultPromise = graffle
-  .with({ transport: { signal: abortController.signal } })
-  //                           ^^^^^^^^^^^^^^^
+  .with({ transport: { raw: { signal: abortController.signal } } })
+  //                                  ^^^^^^^^^^^^^^^
   .gql`
     {
       pokemon {

@@ -1,6 +1,6 @@
 ---------------------------------------- SHOW ----------------------------------------
 {
-  pokemon: [
+  pokemons: [
     { name: 'Pikachu' },
     { name: 'Charizard' },
     { name: 'Squirtle' },

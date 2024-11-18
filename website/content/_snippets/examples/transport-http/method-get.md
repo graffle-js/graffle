@@ -36,7 +36,6 @@ await graffle.gql`query { pokemonByName(name: "Nano") { hp } }`.send()
     'content-type': 'application/json',
     tenant: 'nano'
   },
-  signal: undefined,
   method: 'post',
   url: URL {
     href: 'http://localhost:3000/graphql',
@@ -64,7 +63,6 @@ await graffle.gql`query { pokemonByName(name: "Nano") { hp } }`.send()
     accept: 'application/graphql-response+json; charset=utf-8, application/json; charset=utf-8',
     tenant: 'nano'
   },
-  signal: undefined,
   method: 'get',
   url: URL {
     href: 'http://localhost:3000/graphql?query=%7B%0A++pokemonByName%28name%3A+%22Nano%22%29+%7B%0A++++hp%0A++%7D%0A%7D',

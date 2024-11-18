@@ -26,13 +26,13 @@ const graffle = Graffle
   })
 
 const result = await graffle.gql`
-    query pokemon {
-      trainers { name }
+    query pokemons {
+      pokemons { name }
     }
     query trainers {
-      pokemon { name }
+      trainers { name }
     }
-  `.send(`pokemon`)
+  `.send(`pokemons`)
 
 console.log(result)
 ```
@@ -43,13 +43,11 @@ console.log(result)
 <!-- dprint-ignore-start -->
 ```txt
 {
-  pokemon: [
-    { name: 'Pikachu' },
-    { name: 'Charizard' },
-    { name: 'Squirtle' },
-    { name: 'Bulbasaur' },
-    { name: 'Caterpie' },
-    { name: 'Weedle' }
+  trainers: [
+    { name: 'Ash' },
+    { name: 'Misty' },
+    { name: 'Brock' },
+    { name: 'Gary' }
   ]
 }
 ```

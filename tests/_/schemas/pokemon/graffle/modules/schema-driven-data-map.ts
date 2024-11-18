@@ -112,6 +112,7 @@ const PokemonFilter: $$Utilities.SchemaDrivenDataMap.InputObject = {
       // nt: DateFilter, <-- Assigned later to avoid potential circular dependency.
     },
     name: {},
+    type: {},
   },
 }
 
@@ -317,9 +318,6 @@ const Query: $$Utilities.SchemaDrivenDataMap.OutputObject = {
     beings: {
       // nt: Being, <-- Assigned later to avoid potential circular dependency.
     },
-    pokemon: {
-      // nt: Pokemon, <-- Assigned later to avoid potential circular dependency.
-    },
     pokemonByName: {
       a: {
         name: {
@@ -418,7 +416,6 @@ Trainer.f[`fans`]!.nt = Patron
 Trainer.f[`pokemon`]!.nt = Pokemon
 Query.f[`battles`]!.nt = Battle
 Query.f[`beings`]!.nt = Being
-Query.f[`pokemon`]!.nt = Pokemon
 Query.f[`pokemonByName`]!.nt = Pokemon
 Query.f[`pokemons`]!.nt = Pokemon
 Query.f[`trainerByName`]!.nt = Trainer

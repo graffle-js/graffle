@@ -51,19 +51,6 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >;
 
-  pokemon: <$SelectionSet>(
-    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.pokemon<$Context["scalars"]>>,
-  ) => Promise<
-    $$Utilities.SimplifyExcept<
-      $Context["scalars"]["typesDecoded"],
-      $$Utilities.HandleOutputGraffleRootField<
-        $Context,
-        InferResult.OperationQuery<{ pokemon: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
-        "pokemon"
-      >
-    >
-  >;
-
   pokemonByName: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.pokemonByName<$Context["scalars"]>>,
   ) => Promise<

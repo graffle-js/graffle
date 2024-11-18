@@ -31,7 +31,6 @@ await graffle.gql`{ pokemons { name } }`.send()
     accept: 'application/graphql-response+json; charset=utf-8, application/json; charset=utf-8',
     'content-type': 'application/json'
   },
-  signal: undefined,
   mode: 'cors',
   method: 'post',
   url: 'http://localhost:3000/graphql',

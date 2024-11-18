@@ -30,7 +30,6 @@ export namespace Schema {
       __typename: Query.__typename;
       battles: Query.battles;
       beings: Query.beings;
-      pokemon: Query.pokemon;
       pokemonByName: Query.pokemonByName;
       pokemons: Query.pokemons;
       trainerByName: Query.trainerByName;
@@ -61,13 +60,6 @@ export namespace Schema {
       arguments: {};
       inlineType: [1, [1]];
       namedType: $$NamedTypes.$$Being;
-    }
-
-    export interface pokemon extends $.OutputField {
-      name: "pokemon";
-      arguments: {};
-      inlineType: [0, [1]];
-      namedType: $$NamedTypes.$$Pokemon;
     }
 
     export interface pokemonByName extends $.OutputField {
@@ -715,6 +707,7 @@ export namespace Schema {
     fields: {
       birthday: PokemonFilter.birthday;
       name: PokemonFilter.name;
+      type: PokemonFilter.type;
     };
   }
 
@@ -729,6 +722,12 @@ export namespace Schema {
       name: "name";
       inlineType: [0];
       namedType: $$NamedTypes.$$StringFilter;
+    }
+
+    export interface type extends $.InputField {
+      name: "type";
+      inlineType: [0];
+      namedType: $$NamedTypes.$$PokemonType;
     }
   }
 

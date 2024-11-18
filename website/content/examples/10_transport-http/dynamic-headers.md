@@ -14,8 +14,9 @@ const graffle = Graffle
   .create({
     schema: `http://localhost:3000/graphql`,
   })
-  .anyware(async ({ pack }) => {
-    return await pack({
+  .anyware(({ pack }) => {
+    if (pack.input.transportType !== `http`) return pack()
+    return pack({
       input: {
         ...pack.input,
         headers: {
@@ -24,7 +25,7 @@ const graffle = Graffle
       },
     })
   })
-  .anyware(async ({ exchange }) => {
+  .anyware(({ exchange }) => {
     // todo wrong type / runtime value
     console.log(exchange.input.request)
     return exchange()
@@ -43,9 +44,8 @@ await graffle.gql`{ pokemons { name } }`.send()
   headers: Headers {
     accept: 'application/graphql-response+json; charset=utf-8, application/json; charset=utf-8',
     'content-type': 'application/json',
-    'x-sent-at-time': '1730125688291'
+    'x-sent-at-time': '1731940679171'
   },
-  signal: undefined,
   method: 'post',
   url: 'http://localhost:3000/graphql',
   body: '{"query":"{ pokemons { name } }"}'

@@ -79,6 +79,7 @@ type Pokemon implements Being {
 input PokemonFilter {
   birthday: DateFilter
   name: StringFilter
+  type: PokemonType
 }
 
 enum PokemonType {
@@ -92,7 +93,6 @@ enum PokemonType {
 type Query {
   battles: [Battle!]!
   beings: [Being!]!
-  pokemon: [Pokemon!]
   pokemonByName(name: String!): [Pokemon!]
   pokemons(filter: PokemonFilter): [Pokemon!]
   trainerByName(name: String!): Trainer

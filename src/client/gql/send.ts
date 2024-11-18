@@ -22,6 +22,44 @@ type SendArguments__<$Variables extends Grafaid.Document.Typed.Variables, $Varia
 
 // dprint-ignore
 export interface DocumentController<$Context extends Context, $TypedDocument extends Grafaid.Document.Typed.TypedDocumentLike> {
+  /**
+   * Send the document. You can pass an operation name and variables.
+   *
+   * If the document has multiple operations you must specify the operation name to be executed.
+   *
+   * If the operation being selected for execution has required variables you must pass them.
+   *
+   * @example
+   *
+   * ```ts
+   * const data = await graffle.gql`{ pokemons { name } }`.send()
+   * ```
+   *
+   * @example
+   * ```ts
+   * const data = await graffle.gql`
+   *   query($type: PokemonType!) {
+   *     pokemons(filter: { type: $type }) { name }
+   *   }
+   * `.send({ type: `electric` })
+   * ```
+   *
+   * @example
+   * ```ts
+   * const document = graffle.gql`
+   *   mutation createPokemon($name: String!, $type: PokemonType!) {
+   *     addPokemon(name: $name, type: $type) {
+   *      name
+   *     }
+   *   }
+   *   query pokemonsType($type: PokemonType!) {
+   *     pokemons(filter: { type: $type }) { name }
+   *   }
+   * `
+   * const data1 = await document.send(`createPokemon`, { name: `Pikabar`, type: `electric` })
+   * const data2 = await document.send(`pokemonsType`, { type: `electric` })
+   * ```
+   */
   send(...args: SendArguments<$TypedDocument>):
     Promise<SimplifyNullable<HandleOutput<$Context, Grafaid.Document.Typed.ResultOf<$TypedDocument>>>>
 }

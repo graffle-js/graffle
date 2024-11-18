@@ -31,18 +31,19 @@ console.log(pokemons)
 ```txt
 ContextualError: There was an error in the interceptor "anonymous" (use named functions to improve this error message) while running hook "encode".
     at runPipeline (/some/path/to/runPipeline.ts:XX:XX:18)
-    at async Object.run (/some/path/to/main.ts:XX:XX:22)
+    at async <anonymous> (/some/path/to/runner.ts:XX:XX:20)
+    at async Module.run (/some/path/to/run.ts:XX:XX:10)
     at async executeDocument (/some/path/to/requestMethods.ts:XX:XX:18)
     at async executeRootField (/some/path/to/requestMethods.ts:XX:XX:18)
     at async <anonymous> (/some/path/to/output_return-error.ts:XX:XX:18) {
   context: {
     hookName: 'encode',
     source: 'extension',
-    extensionName: 'anonymous'
+    interceptorName: 'anonymous'
   },
   cause: Error: Something went wrong.
       at <anonymous> (/some/path/to/output_return-error.ts:XX:XX:11)
-      at applyBody (/some/path/to/main.ts:XX:XX:28)
+      at applyBody (/some/path/to/runner.ts:XX:XX:28)
 }
 ```
 <!-- dprint-ignore-end -->
