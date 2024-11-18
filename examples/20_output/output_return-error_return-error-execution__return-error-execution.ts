@@ -34,7 +34,7 @@ try {
       throw new Error(`Something went wrong.`)
     })
     .query
-    .pokemon({ name: true })
+    .pokemons({ name: true })
 } catch (error) {
   show(error)
 }
