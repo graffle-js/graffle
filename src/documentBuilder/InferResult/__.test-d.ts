@@ -6,7 +6,6 @@ import type * as SelectionSets from '../../../tests/_/schemas/kitchen-sink/graff
 import { assertEqual } from '../../lib/assert-equal.js'
 import type { Registry } from '../../types/Schema/nodes/Scalar/helpers.js'
 import type { InferResult } from './__.js'
-import type { PickSelectsPositiveIndicatorAndNotSelectAlias } from './OutputObject.js'
 
 type $<$SelectionSet extends SelectionSets.Query> = Simplify<InferResult.OperationQuery<$SelectionSet, Schema>>
 
@@ -16,14 +15,6 @@ type $WithDate<$SelectionSet extends SelectionSets.Query<$Registry>> = InferResu
   $SelectionSet,
   Schema<$Registry>
 >
-
-// dprint-ignore
-{
-	
-assertEqual<PickSelectsPositiveIndicatorAndNotSelectAlias<{ a: true }>, 'a'>()
-assertEqual<PickSelectsPositiveIndicatorAndNotSelectAlias<{ a: ['b', true]; b: true }>, 'b'>()
-
-}
 
 // dprint-ignore
 {

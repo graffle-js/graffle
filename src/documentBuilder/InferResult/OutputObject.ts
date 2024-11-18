@@ -1,4 +1,5 @@
 import type { IsNever } from 'type-fest'
+import { assertEqual } from '../../lib/assert-equal.js'
 import type { AssertExtendsObject, GetOrNever, SimplifyExcept, StringKeyof } from '../../lib/prelude.js'
 import type { TSErrorDescriptive } from '../../lib/ts-error.js'
 import type { Schema } from '../../types/Schema/__.js'
@@ -21,7 +22,7 @@ export type OutputObject<
   >
 
 // dprint-ignore
-export type OutputObject_<
+type OutputObject_<
   $SelectionSet extends object,
   $Schema extends Schema,
   $Node extends Schema.OutputObject,
@@ -36,7 +37,7 @@ export type OutputObject_<
 
 // dprint-ignore
 type NonAliasKeys<$SelectionSet, $Schema extends Schema, $Node extends Schema.OutputObject> = {
-  [$Key in PickSelectsPositiveIndicatorAndNotSelectAlias<$SelectionSet>]:
+  [$Key in PickPositiveIndicatorAndNotAlias<$SelectionSet>]:
     $Key extends keyof $Node['fields']                     
       ? OutputField<$SelectionSet[$Key], $Node['fields'][$Key], $Schema> 
       : Errors.UnknownFieldName<$Key, $Node>
@@ -69,7 +70,7 @@ type MakeObjectSelectionResultNullable<$Result extends object> = {
 }
 
 // dprint-ignore
-export type PickSelectsPositiveIndicatorAndNotSelectAlias<$SelectionSet> = StringKeyof<
+type PickPositiveIndicatorAndNotAlias<$SelectionSet> = StringKeyof<
   {
     [
       $Key in keyof $SelectionSet as $SelectionSet[$Key] extends Select.Indicator.Negative
@@ -88,4 +89,19 @@ export namespace Errors {
     $FieldName extends string,
     $Object extends Schema.OutputObject,
   > = TSErrorDescriptive<'Object', `field "${$FieldName}" does not exist on object "${$Object['name']}"`>
+}
+
+//
+//
+//
+// Internal Tests
+//
+//
+//
+// dprint-ignore
+{
+	
+assertEqual<PickPositiveIndicatorAndNotAlias<{ a: true }>                 , 'a'>()
+assertEqual<PickPositiveIndicatorAndNotAlias<{ a: ['b', true]; b: true }> , 'b'>()
+
 }
