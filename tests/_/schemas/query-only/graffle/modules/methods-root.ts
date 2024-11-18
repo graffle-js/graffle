@@ -4,7 +4,7 @@ import * as $$Schema from './schema.js'
 import * as $$SelectionSets from './selection-sets.js'
 
 export interface QueryMethods<$Context extends $$Utilities.Context> {
-  $batch: <$SelectionSet>(
+  $batch: <$SelectionSet extends object>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.SimplifyExcept<
@@ -25,7 +25,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  id: <$SelectionSet>(
+  id: <$SelectionSet extends object>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.id<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.SimplifyExcept<
@@ -38,7 +38,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  idNonNull: <$SelectionSet>(
+  idNonNull: <$SelectionSet extends object>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.idNonNull<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.SimplifyExcept<

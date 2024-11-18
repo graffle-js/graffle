@@ -38,7 +38,9 @@ export interface $MethodsSelect {
 //
 
 export interface Mutation {
-  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation>): $SelectionSet
+  <$SelectionSet extends object>(
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation>,
+  ): $SelectionSet
 }
 
 //

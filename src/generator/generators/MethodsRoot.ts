@@ -52,7 +52,7 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
   // dprint-ignore
   code(`
     export interface ${node.name}Methods<$Context extends ${identifiers.$$Utilities}.Context> {
-      $batch: <$SelectionSet>(selectionSet: ${identifiers.$$Utilities}.Exact<$SelectionSet, ${identifiers.$$SelectionSets}.${node.name}<$Context['scalars']>>) =>
+      $batch: <$SelectionSet extends object>(selectionSet: ${identifiers.$$Utilities}.Exact<$SelectionSet, ${identifiers.$$SelectionSets}.${node.name}<$Context['scalars']>>) =>
         Promise<
           ${identifiers.$$Utilities}.SimplifyExcept<
             $Context['scalars']['typesDecoded'],
@@ -89,7 +89,7 @@ const renderFieldMethods = createCodeGenerator<{ node: Grafaid.Schema.ObjectType
     const operationType = getOperationTypeOrThrow(config, node)
     // dprint-ignore
     code(`
-      ${field.name}: <$SelectionSet>(selectionSet${isOptional ? `?` : ``}: ${identifiers.$$Utilities}.Exact<$SelectionSet, ${identifiers.$$SelectionSets}.${renderName(node)}.${renderName(field)}<$Context['scalars']>>) =>
+      ${field.name}: <$SelectionSet extends object>(selectionSet${isOptional ? `?` : ``}: ${identifiers.$$Utilities}.Exact<$SelectionSet, ${identifiers.$$SelectionSets}.${renderName(node)}.${renderName(field)}<$Context['scalars']>>) =>
         Promise<
           ${identifiers.$$Utilities}.SimplifyExcept<
             $Context['scalars']['typesDecoded'],

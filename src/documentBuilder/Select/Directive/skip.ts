@@ -34,4 +34,7 @@ export namespace FieldStates {
   export interface Negative {
     $skip: false | { if: false }
   }
+  export interface Variable {
+    $skip: boolean | { if: boolean }
+  }
 }

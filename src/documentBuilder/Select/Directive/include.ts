@@ -48,4 +48,7 @@ export namespace FieldStates {
   export interface Negative {
     $include: false | { if: false }
   }
+  export interface Variable {
+    $include: boolean | { if: boolean }
+  }
 }

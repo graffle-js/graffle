@@ -2,6 +2,7 @@ import type { OmitKeysWithPrefix } from '../../lib/prelude.js'
 import type { AnySelectionSet } from './selectionSet.js'
 
 export const prefix = `___`
+export type Key = typeof prefix
 
 export const typeConditionPRefix = `${prefix}on_`
 

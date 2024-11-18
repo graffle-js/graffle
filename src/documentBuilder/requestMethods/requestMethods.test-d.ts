@@ -13,7 +13,7 @@ test(`query`, async () => {
   // scalar
   expectTypeOf(await graffle.query.id()).toEqualTypeOf<string | null>()
   // scalar none-nullable
-  expectTypeOf(await graffle.query.idNonNull()).toEqualTypeOf<string>()
+  expectTypeOf(await graffle.query.idNonNull()).toEqualTypeOf<null | string>()
   // scalar with optional arguments
   expectTypeOf<Parameters<typeof graffle.query.stringWithArgs>>().toEqualTypeOf<[input?: Graffle.SelectionSets.Query.stringWithArgs]>()
   // scalar with required arguments
@@ -23,7 +23,7 @@ test(`query`, async () => {
 
   // scalar with explicit indicators
   // positive indicator
-  expectTypeOf(await graffle.query.idNonNull(true)).toEqualTypeOf<string>()
+  expectTypeOf(await graffle.query.idNonNull(true)).toEqualTypeOf<null |string>()
   // negative indicator
   // todo
   // expectTypeOf(await graffle.query.idNonNull(false)).toEqualTypeOf<null>()

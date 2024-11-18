@@ -38,7 +38,7 @@ export interface $MethodsSelect {
 //
 
 export interface Query {
-  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query>): $SelectionSet
+  <$SelectionSet extends object>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query>): $SelectionSet
 }
 
 //

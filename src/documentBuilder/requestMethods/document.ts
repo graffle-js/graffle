@@ -27,7 +27,6 @@ export type DocumentRunner<
             Select.Document.GetOperationType<$$Document, $Name>
           >
         >
-        // & {}
       >
     >
 }

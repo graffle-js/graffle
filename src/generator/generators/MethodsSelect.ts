@@ -36,7 +36,7 @@ export const ModuleGeneratorMethodsSelect = createModuleGenerator(
         code(Code.tsInterface({
           name: type.name,
           block: `
-            <$SelectionSet>(selectionSet: ${identifiers.$$Utilities}.Exact<$SelectionSet, $$SelectionSets.${
+            <$SelectionSet extends object>(selectionSet: ${identifiers.$$Utilities}.Exact<$SelectionSet, $$SelectionSets.${
             renderName(type)
           }>):
               $SelectionSet

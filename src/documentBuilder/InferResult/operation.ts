@@ -5,19 +5,19 @@ import type { Schema } from '../../types/Schema/__.js'
 import type { OutputObject } from './OutputObject.js'
 
 // dprint-ignore
-export type OperationQuery<$SelectionSet, $Schema extends Schema> =
+export type OperationQuery<$SelectionSet extends object, $Schema extends Schema> =
   Operation<$SelectionSet, $Schema, OperationTypeNode.QUERY>
 
 // dprint-ignore
-export type OperationMutation<$SelectionSet, $Schema extends Schema> =
+export type OperationMutation<$SelectionSet extends object, $Schema extends Schema> =
   Operation<$SelectionSet, $Schema, OperationTypeNode.MUTATION>
 
 // dprint-ignore
-export type OperationSubscription<$SelectionSet, $Schema extends Schema> =
+export type OperationSubscription<$SelectionSet extends object, $Schema extends Schema> =
   Operation<$SelectionSet, $Schema, OperationTypeNode.SUBSCRIPTION>
 
 export type Operation<
-  $SelectionSet,
+  $SelectionSet extends object,
   $Schema extends Schema,
   $OperationType extends Grafaid.Document.OperationTypeNode,
 > = OutputObject<$SelectionSet, $Schema, ExcludeNull<$Schema['Root'][$OperationType]>>

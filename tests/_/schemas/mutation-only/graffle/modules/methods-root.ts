@@ -4,7 +4,7 @@ import * as $$Schema from './schema.js'
 import * as $$SelectionSets from './selection-sets.js'
 
 export interface MutationMethods<$Context extends $$Utilities.Context> {
-  $batch: <$SelectionSet>(
+  $batch: <$SelectionSet extends object>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.SimplifyExcept<
@@ -25,7 +25,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  id: <$SelectionSet>(
+  id: <$SelectionSet extends object>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.id<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.SimplifyExcept<
@@ -38,7 +38,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  idNonNull: <$SelectionSet>(
+  idNonNull: <$SelectionSet extends object>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.idNonNull<$Context['scalars']>>,
   ) => Promise<
     $$Utilities.SimplifyExcept<

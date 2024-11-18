@@ -1,6 +1,6 @@
 import type { OperationTypeNode } from 'graphql'
 import { Grafaid } from '../../lib/grafaid/__.js'
-import type { FirstNonUnknownNever, Values } from '../../lib/prelude.js'
+import type { AssertExtendsObject, FirstNonUnknownNever, Values } from '../../lib/prelude.js'
 import type { Select } from './__.js'
 
 export type OperationName = string
@@ -40,12 +40,14 @@ export type GetOperationType<$Document extends SomeDocument, $Name extends strin
 
 // dprint-ignore
 export type GetOperation<$Document extends SomeDocument, $Name extends string> =
-  FirstNonUnknownNever<[
-    // @ts-expect-error could be unknown
-    $Document[OperationTypeNode.MUTATION][$Name],
-    // @ts-expect-error could be unknown
-    $Document[OperationTypeNode.QUERY][$Name]
-  ]>
+  AssertExtendsObject<
+    FirstNonUnknownNever<[
+      // @ts-expect-error could be unknown
+      $Document[OperationTypeNode.MUTATION][$Name],
+      // @ts-expect-error could be unknown
+      $Document[OperationTypeNode.QUERY][$Name]
+    ]>
+  >
 
 export interface OperationNormalized {
   name: string | null
