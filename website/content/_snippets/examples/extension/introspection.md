@@ -562,7 +562,11 @@ console.log(data)
             name: 'attack',
             description: null,
             args: [],
-            type: { kind: 'SCALAR', name: 'Int', ofType: null },
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: { kind: 'SCALAR', name: 'Int', ofType: null }
+            },
             isDeprecated: false,
             deprecationReason: null
           },
@@ -570,7 +574,11 @@ console.log(data)
             name: 'birthday',
             description: null,
             args: [],
-            type: { kind: 'SCALAR', name: 'Date', ofType: null },
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: { kind: 'SCALAR', name: 'Date', ofType: null }
+            },
             isDeprecated: false,
             deprecationReason: null
           },
@@ -578,7 +586,11 @@ console.log(data)
             name: 'defense',
             description: null,
             args: [],
-            type: { kind: 'SCALAR', name: 'Int', ofType: null },
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: { kind: 'SCALAR', name: 'Int', ofType: null }
+            },
             isDeprecated: false,
             deprecationReason: null
           },
@@ -586,7 +598,11 @@ console.log(data)
             name: 'hp',
             description: null,
             args: [],
-            type: { kind: 'SCALAR', name: 'Int', ofType: null },
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: { kind: 'SCALAR', name: 'Int', ofType: null }
+            },
             isDeprecated: false,
             deprecationReason: null
           },
@@ -594,7 +610,11 @@ console.log(data)
             name: 'id',
             description: null,
             args: [],
-            type: { kind: 'SCALAR', name: 'ID', ofType: null },
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: { kind: 'SCALAR', name: 'ID', ofType: null }
+            },
             isDeprecated: false,
             deprecationReason: null
           },
@@ -602,7 +622,11 @@ console.log(data)
             name: 'name',
             description: null,
             args: [],
-            type: { kind: 'SCALAR', name: 'String', ofType: null },
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: { kind: 'SCALAR', name: 'String', ofType: null }
+            },
             isDeprecated: false,
             deprecationReason: null
           },
@@ -618,7 +642,11 @@ console.log(data)
             name: 'type',
             description: null,
             args: [],
-            type: { kind: 'ENUM', name: 'PokemonType', ofType: null },
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: { kind: 'ENUM', name: 'PokemonType', ofType: null }
+            },
             isDeprecated: false,
             deprecationReason: null
           }
