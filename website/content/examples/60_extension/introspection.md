@@ -662,6 +662,14 @@ console.log(data)
             defaultValue: null,
             isDeprecated: false,
             deprecationReason: null
+          },
+          {
+            name: 'type',
+            description: null,
+            type: { kind: 'ENUM', name: 'PokemonType', ofType: null },
+            defaultValue: null,
+            isDeprecated: false,
+            deprecationReason: null
           }
         ],
         interfaces: null,

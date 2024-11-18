@@ -1,3 +1,4 @@
+import type { Simplify } from 'type-fest'
 import type { DateScalar } from '../../../tests/_/fixtures/scalars.js'
 import type { db } from '../../../tests/_/schemas/db.js'
 import type { Schema } from '../../../tests/_/schemas/kitchen-sink/graffle/modules/schema.js'
@@ -7,7 +8,7 @@ import type { Registry } from '../../types/Schema/nodes/Scalar/helpers.js'
 import type { InferResult } from './__.js'
 import type { PickSelectsPositiveIndicatorAndNotSelectAlias } from './OutputObject.js'
 
-type $<$SelectionSet extends SelectionSets.Query> = InferResult.OperationQuery<$SelectionSet, Schema>
+type $<$SelectionSet extends SelectionSets.Query> = Simplify<InferResult.OperationQuery<$SelectionSet, Schema>>
 
 type $Registry = Registry.AddScalar<Registry.Empty, typeof DateScalar>
 
@@ -100,8 +101,14 @@ assertEqual<$<{ idNonNull: ['x', true] }>, { x: string }>()
 assertEqual<$<{ object: ['x', { id: true }] }>, { x: { id: null|string } | null }>()
 // argument
 assertEqual<$<{objectWithArgs: ['x', { $: {id:''}; id:true }]}>, { x: { id: null|string } | null }>()
-// multi
+// one field multiple times
 assertEqual<$<{ id: [['id1', true],['id2', true]] }>, { id1: null | string; id2: null | string }>()
+// multiple fields
+type x = $<{ id: [['id1', true],['id2', true]], abcEnum: ['abcEnum1', true] }>
+assertEqual<
+  $<{ id: [['id1', true],['id2', true]], abcEnum: ['abcEnum1', true] }>,
+  { id1: null | string; id2: null | string; abcEnum1: null | db.ABCEnum }
+>()
 // AssertEqual<RS<{ id_as: true }>, { id_as: InferResult.Errors.UnknownFieldName<'id_as', Schema.Root.Query> }>()
 // AssertEqual<RS<{ id_as_$: true }>, { id_as_$: InferResult.Errors.UnknownFieldName<'id_as_$', Schema.Root.Query> }>()
 // union fragment
