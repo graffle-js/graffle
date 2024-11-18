@@ -738,3 +738,13 @@ export namespace Func {
         : (...args: $Args) => $Output | $ReturnTypeToAdd
       : never
 }
+
+export type UnionMerge<U> = {
+  [K in UnionKeys<U>]: UnionValue<U, K>
+}
+
+type UnionKeys<U> = U extends any ? keyof U : never
+
+type UnionValue<U, K extends PropertyKey> = U extends any ? K extends keyof U ? U[K]
+  : never
+  : never

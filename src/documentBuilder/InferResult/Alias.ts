@@ -1,5 +1,4 @@
-import type { UnionToIntersection } from 'type-fest'
-import type { Tuple, ValuesOrEmptyObject } from '../../lib/prelude.js'
+import type { Tuple, UnionMerge, ValuesOrEmptyObject } from '../../lib/prelude.js'
 import type { Schema } from '../../types/Schema/__.js'
 import type { Select } from '../Select/__.js'
 import type { OutputField } from './OutputField.js'
@@ -10,7 +9,7 @@ export type Alias<
 	$Node extends Schema.OutputObject,
 	$SelectionSet,
 > =
-  UnionToIntersection<
+ UnionMerge<
     ValuesOrEmptyObject<
       {
         [

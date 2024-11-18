@@ -1,4 +1,4 @@
-import type { UnionToTuple } from 'type-fest'
+import type { Simplify, UnionToTuple } from 'type-fest'
 import type { Context } from '../../client/context.js'
 import { type HandleOutput } from '../../client/handleOutput.js'
 import type { InferResult } from '../../documentBuilder/InferResult/__.js'
@@ -18,15 +18,17 @@ export type DocumentRunner<
     const $Name extends string = $Params extends [] ? $$Name : $Params[0],
   >(...params: $Params) =>
     Promise<
-      HandleOutput<
-        $$Context,
-        InferResult.Operation<
-          Select.Document.GetOperation<$$Document, $Name>,
-          $$Schema,
-          Select.Document.GetOperationType<$$Document, $Name>
+      Simplify<
+        HandleOutput<
+          $$Context,
+          InferResult.Operation<
+            Select.Document.GetOperation<$$Document, $Name>,
+            $$Schema,
+            Select.Document.GetOperationType<$$Document, $Name>
+          >
         >
+        // & {}
       >
-      & {}
     >
 }
 

@@ -21,7 +21,7 @@ test(`document with one query`, async () => {
   type $Parameters = Parameters<typeof run>
   expectTypeOf<$Parameters>().toEqualTypeOf<[]>()
   const result = await run()
-  expectTypeOf(result).toEqualTypeOf<{ id: string | null }>()
+  expectTypeOf(result).toEqualTypeOf<null | { id: string | null }>()
 })
 
 test(`document with two queries`, async () => {
@@ -34,7 +34,7 @@ test(`document with two queries`, async () => {
   type $Parameters = Parameters<typeof run>
   expectTypeOf<$Parameters>().toEqualTypeOf<['foo' | 'bar']>()
   const result = await run(`foo`)
-  expectTypeOf(result).toEqualTypeOf<{ id: string | null }>()
+  expectTypeOf(result).toEqualTypeOf<null | { id: string | null }>()
 })
 
 test(`document with two queries of different root types`, async () => {
@@ -49,7 +49,7 @@ test(`document with two queries of different root types`, async () => {
   type $Parameters = Parameters<typeof run>
   expectTypeOf<$Parameters>().toEqualTypeOf<['foo' | 'bar']>()
   const result = await run(`foo`)
-  expectTypeOf(result).toEqualTypeOf<{ id: string | null }>()
+  expectTypeOf(result).toEqualTypeOf<null | { id: string | null }>()
 })
 
 test(`root operation not available if it is not in schema`, () => {
