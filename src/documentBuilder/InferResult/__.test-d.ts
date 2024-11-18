@@ -104,10 +104,10 @@ assertEqual<$<{objectWithArgs: ['x', { $: {id:''}; id:true }]}>, { x: { id: null
 // one field multiple times
 assertEqual<$<{ id: [['id1', true],['id2', true]] }>, { id1: null | string; id2: null | string }>()
 // multiple fields
-// assertEqual<
-//   $<{ id: [['id1', true],['id2', true]], abcEnum: ['abcEnum1', true] }>,
-//   { id1: null | string; id2: null | string; abcEnum1: null | db.ABCEnum }
-// >()
+assertEqual<
+  $<{ id: [['id1', true],['id2', true]], abcEnum: ['abcEnum1', true] }>,
+  { id1: null | string; id2: null | string; abcEnum1: null | db.ABCEnum }
+>()
 // AssertEqual<RS<{ id_as: true }>, { id_as: InferResult.Errors.UnknownFieldName<'id_as', Schema.Root.Query> }>()
 // AssertEqual<RS<{ id_as_$: true }>, { id_as_$: InferResult.Errors.UnknownFieldName<'id_as_$', Schema.Root.Query> }>()
 // union fragment
