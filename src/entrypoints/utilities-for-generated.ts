@@ -4,15 +4,8 @@ export type { ConfigGetOutputError, HandleOutput, HandleOutputGraffleRootField }
 export type { Config } from '../client/Settings/Config.js'
 export { type DocumentRunner } from '../documentBuilder/requestMethods/document.js'
 export * from '../documentBuilder/Select/__.js'
-export {
-  type AssertExtendsObject,
-  type Exact,
-  type ExactNonEmpty,
-  type SimplifyDeep,
-  type SimplifyDeepExcept,
-  type SimplifyExcept,
-  type UnionExpanded,
-} from '../lib/prelude.js'
+export { type SimplifyDeep, type SimplifyDeepExcept } from '../documentBuilder/Simplify.js'
+export { type AssertExtendsObject, type Exact, type ExactNonEmpty, type UnionExpanded } from '../lib/prelude.js'
 export { TypeFunction } from '../lib/type-function/__.js'
 export { type GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
 export { Schema } from '../types/Schema/__.js'
