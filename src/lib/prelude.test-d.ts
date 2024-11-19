@@ -1,8 +1,17 @@
 import { assertEqual } from './assert-equal.js'
-import { type OmitKeysWithPrefix, type ToParameters, type Tuple } from './prelude.js'
+import { type OmitKeysWithPrefix, type SimplifyDeepExcept, type ToParameters, type Tuple } from './prelude.js'
 
 // dprint-ignore
 {
+
+
+assertEqual<SimplifyDeepExcept<Date, null | Date>									, null | Date>()
+assertEqual<SimplifyDeepExcept<Date, {}>									        , {}>()
+assertEqual<SimplifyDeepExcept<Date, { a: Date }>					        , { a: Date }>()
+assertEqual<SimplifyDeepExcept<Date, { a: 1 }>						        , { a: 1 }>()
+assertEqual<SimplifyDeepExcept<Date, { a: { b: Date } }> 	        , { a: { b: Date } }>()
+assertEqual<SimplifyDeepExcept<Date, { a: { b: Date } }> 					, { a: { b: Date } }>()
+assertEqual<SimplifyDeepExcept<Date, { a: null | { b: Date } }> 	, { a: null | { b: Date } }>()
 
 // assertEqual<IsAnyUnionMemberExtends<1|2, 1>, true>()
 // assertEqual<IsAnyUnionMemberExtends<1|2, 2>, true>()

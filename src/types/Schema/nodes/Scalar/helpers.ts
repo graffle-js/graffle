@@ -1,3 +1,4 @@
+import type { AnyAndUnknownToNever } from '../../../../lib/prelude.js'
 import { String } from '../../StandardTypes/scalar.js'
 import type { Mapper } from './codec.js'
 import type { Scalar } from './Scalar.js'
@@ -28,9 +29,9 @@ export namespace Registry {
   } as Registry.Empty
 
   export type AddScalar<$Registry extends Registry, $Scalar extends Scalar> = {
-    map: $Registry['map'] & { [$Key in $Scalar['name']]: $Scalar }
-    typesEncoded: $Registry['typesEncoded'] | GetEncoded<$Scalar>
-    typesDecoded: $Registry['typesDecoded'] | GetDecoded<$Scalar>
+    map: $Registry['map'] & { [_ in $Scalar['name']]: $Scalar }
+    typesEncoded: AnyAndUnknownToNever<$Registry['typesEncoded']> | GetEncoded<$Scalar>
+    typesDecoded: AnyAndUnknownToNever<$Registry['typesDecoded']> | GetDecoded<$Scalar>
   }
 }
 

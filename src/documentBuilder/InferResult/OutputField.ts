@@ -1,4 +1,3 @@
-import type { SimplifyNullable } from '../../lib/prelude.js'
 import type { TSErrorDescriptive } from '../../lib/ts-error.js'
 import type { Schema } from '../../types/Schema/__.js'
 import type { InlineType } from '../../types/SchemaDrivenDataMap/InlineType.js'
@@ -15,12 +14,12 @@ export type OutputField<$SelectionSet, $Field extends Schema.OutputField, $Schem
      : (
         | FieldDirectiveInclude<$SelectionSet>
         | FieldDirectiveSkip<$SelectionSet>
-        | SimplifyNullable<
+        | //SimplifyNullable<
             InlineType.Infer<
               $Field['inlineType'],
               FieldType<$Schema, Omit<$SelectionSet, '$'>, $Field['namedType']>
             >
-          >
+          //>
       )
 
 // dprint-ignore

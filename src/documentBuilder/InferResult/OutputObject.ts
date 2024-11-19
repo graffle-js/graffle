@@ -1,6 +1,6 @@
-import type { IsNever, Simplify } from 'type-fest'
+import type { IsNever } from 'type-fest'
 import { assertEqual } from '../../lib/assert-equal.js'
-import type { AssertExtendsObject, GetOrNever, SimplifyExcept, StringKeyof } from '../../lib/prelude.js'
+import type { AssertExtendsObject, GetOrNever, StringKeyof } from '../../lib/prelude.js'
 import type { TSErrorDescriptive } from '../../lib/ts-error.js'
 import type { Schema } from '../../types/Schema/__.js'
 import type { Select } from '../Select/__.js'
@@ -15,11 +15,11 @@ export type OutputObject<
   $Schema extends Schema,
   $Node extends Schema.OutputObject
 > =
-  SimplifyExcept<
-    $Schema['scalars']['typesDecoded'],
+  // SimplifyExcept<
+    // $Schema['scalars']['typesDecoded'],
     & OutputObject_<$SelectionSet, $Schema, $Node>
     & InlineFragmentKeys<$SelectionSet, $Schema, $Node>
-  >
+// >
 
 // dprint-ignore
 type OutputObject_<
@@ -27,7 +27,7 @@ type OutputObject_<
   $Schema extends Schema,
   $Node extends Schema.OutputObject,
 > =
-  Simplify<
+  // Simplify<
     Select.SelectScalarsWildcard.IsSelectScalarsWildcard<$SelectionSet> extends true
       // todo this needs to be an extension and/or only available when sddm is present
       // todo what about when scalars wildcard is combined with other fields like relations?
@@ -35,7 +35,7 @@ type OutputObject_<
       : 
           & NonAliasKeys<$SelectionSet, $Schema, $Node>
           & Alias<$Schema, $Node, $SelectionSet>
-  >
+// >
 
 // dprint-ignore
 type NonAliasKeys<$SelectionSet, $Schema extends Schema, $Node extends Schema.OutputObject> = {

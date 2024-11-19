@@ -40,7 +40,10 @@ type ScalarMethod<$Args extends Builder.Extension.Parameters<BuilderExtensionSca
       $Args['context'],
       ['scalars'],
       Simplify<
-        Schema.Scalar.Registry.AddScalar<$Args['context']['scalars'], Schema.Scalar<$Name, $Decoded, string>>
+        Schema.Scalar.Registry.AddScalar<
+          $Args['context']['scalars'],
+          Schema.Scalar<$Name, $Decoded, string>
+        >
       >
     >
   >

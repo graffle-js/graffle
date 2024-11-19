@@ -7,7 +7,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   $batch: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutput<
         $Context,
@@ -16,7 +16,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
   __typename: () => Promise<
-    $$Utilities.Simplify<
+    $$Utilities.SimplifyDeep<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
         { __typename: 'Query' },
@@ -28,7 +28,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   InputObjectNested: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.InputObjectNested<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -41,7 +41,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   InputObjectNestedNonNull: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.InputObjectNestedNonNull<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -56,7 +56,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   abcEnum: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.abcEnum<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -69,7 +69,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   argInputObjectCircular: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.argInputObjectCircular<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -82,7 +82,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   date: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.date<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -95,7 +95,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   dateArg: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateArg<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -108,7 +108,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   dateArgInputObject: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateArgInputObject<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -121,7 +121,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   dateArgList: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateArgList<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -134,7 +134,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   dateArgNonNull: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateArgNonNull<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -147,7 +147,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   dateArgNonNullList: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateArgNonNullList<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -163,7 +163,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       $$SelectionSets.Query.dateArgNonNullListNonNull<$Context['scalars']>
     >,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -176,7 +176,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   dateInterface1: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateInterface1<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -189,7 +189,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   dateList: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateList<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -202,7 +202,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   dateListList: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateListList<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -215,7 +215,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   dateListNonNull: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateListNonNull<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -228,7 +228,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   dateNonNull: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateNonNull<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -241,7 +241,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   dateObject1: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateObject1<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -254,7 +254,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   dateUnion: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateUnion<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -267,7 +267,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   error: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.error<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -280,7 +280,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   id: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.id<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -293,7 +293,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   idNonNull: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.idNonNull<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -306,7 +306,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   interface: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.$interface<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -319,7 +319,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   interfaceNonNull: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.interfaceNonNull<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -332,7 +332,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   interfaceWithArgs: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.interfaceWithArgs<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -345,7 +345,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   listInt: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.listInt<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -358,7 +358,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   listIntNonNull: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.listIntNonNull<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -371,7 +371,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   listListInt: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.listListInt<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -384,7 +384,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   listListIntNonNull: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.listListIntNonNull<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -397,7 +397,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   lowerCaseUnion: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.lowerCaseUnion<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -410,7 +410,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   object: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.$object<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -423,7 +423,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   objectList: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.objectList<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -436,7 +436,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   objectListNonNull: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.objectListNonNull<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -449,7 +449,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   objectNested: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.objectNested<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -462,7 +462,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   objectNonNull: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.objectNonNull<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -475,7 +475,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   objectWithArgs: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.objectWithArgs<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -488,7 +488,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   result: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.result<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -501,7 +501,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   resultNonNull: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.resultNonNull<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -514,7 +514,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   string: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.$string<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -527,7 +527,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   stringWithArgEnum: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.stringWithArgEnum<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -543,7 +543,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       $$SelectionSets.Query.stringWithArgInputObject<$Context['scalars']>
     >,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -559,7 +559,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       $$SelectionSets.Query.stringWithArgInputObjectRequired<$Context['scalars']>
     >,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -577,7 +577,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   stringWithArgs: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.stringWithArgs<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -590,7 +590,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   stringWithListArg: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.stringWithListArg<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -606,7 +606,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       $$SelectionSets.Query.stringWithListArgRequired<$Context['scalars']>
     >,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -619,7 +619,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   stringWithRequiredArg: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.stringWithRequiredArg<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -632,7 +632,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   unionFooBar: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.unionFooBar<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -645,7 +645,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   unionFooBarNonNull: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.unionFooBarNonNull<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -658,7 +658,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   unionFooBarWithArgs: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.unionFooBarWithArgs<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -671,7 +671,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   unionObject: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.unionObject<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -684,7 +684,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   unionObjectNonNull: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.unionObjectNonNull<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -699,7 +699,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   $batch: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutput<
         $Context,
@@ -711,7 +711,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     >
   >
   __typename: () => Promise<
-    $$Utilities.Simplify<
+    $$Utilities.SimplifyDeep<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
         { __typename: 'Mutation' },
@@ -723,7 +723,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   id: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.id<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -736,7 +736,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   idNonNull: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.idNonNull<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context['scalars']['typesDecoded'],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,

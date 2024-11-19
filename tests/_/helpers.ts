@@ -158,10 +158,13 @@ export const test = testBase.extend<Fixtures>({
     // kitchenSink.anyware(async ({ encode }) => {
     //   encode({ input: {}})
     // })
+    // @ts-expect-error fixme
     await use(kitchenSink)
   },
   kitchenSinkHttp: async ({ fetch: _ }, use) => {
     const kitchenSink = KitchenSink.create({ schema: `https://foo.io/api/graphql` })
+    kitchenSink._.extensions
+    // @ts-expect-error fixme
     await use(kitchenSink)
   },
   kitchenSinkData: async ({}, use) => { // eslint-disable-line

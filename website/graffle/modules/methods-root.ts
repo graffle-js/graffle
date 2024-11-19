@@ -7,7 +7,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   $batch: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query<$Context["scalars"]>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context["scalars"]["typesDecoded"],
       $$Utilities.HandleOutput<
         $Context,
@@ -16,7 +16,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >;
   __typename: () => Promise<
-    $$Utilities.Simplify<
+    $$Utilities.SimplifyDeep<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
         { __typename: "Query" },
@@ -28,7 +28,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   battles: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.battles<$Context["scalars"]>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context["scalars"]["typesDecoded"],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -41,7 +41,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   beings: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.beings<$Context["scalars"]>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context["scalars"]["typesDecoded"],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -54,7 +54,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   pokemonByName: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.pokemonByName<$Context["scalars"]>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context["scalars"]["typesDecoded"],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -67,7 +67,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   pokemons: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.pokemons<$Context["scalars"]>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context["scalars"]["typesDecoded"],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -80,7 +80,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   trainerByName: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.trainerByName<$Context["scalars"]>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context["scalars"]["typesDecoded"],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -93,7 +93,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   trainers: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.trainers<$Context["scalars"]>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context["scalars"]["typesDecoded"],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
@@ -108,7 +108,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   $batch: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation<$Context["scalars"]>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context["scalars"]["typesDecoded"],
       $$Utilities.HandleOutput<
         $Context,
@@ -120,7 +120,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     >
   >;
   __typename: () => Promise<
-    $$Utilities.Simplify<
+    $$Utilities.SimplifyDeep<
       $$Utilities.HandleOutputGraffleRootField<
         $Context,
         { __typename: "Mutation" },
@@ -132,7 +132,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   addPokemon: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.addPokemon<$Context["scalars"]>>,
   ) => Promise<
-    $$Utilities.SimplifyExcept<
+    $$Utilities.SimplifyDeepExcept<
       $Context["scalars"]["typesDecoded"],
       $$Utilities.HandleOutputGraffleRootField<
         $Context,

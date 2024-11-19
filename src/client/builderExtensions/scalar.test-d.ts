@@ -16,5 +16,11 @@ Graffle.create({ schema: `foo`, schemaMap }).scalar(`Foo`, _)
 // @ts-expect-error "Foo" is not a scalar name in the schema.
 Graffle.create({ schema: `foo`, schemaMap }).scalar(FooScalar)
 Graffle.create({ schema: `foo`, schemaMap }).scalar(`Date`, _)
-Graffle.create({ schema: `foo`, schemaMap }).scalar(DateScalar)
 Graffle.create({ schema: `foo`, schemaMap }).scalar(`Int`, _)
+{
+  const graffle = Graffle.create({ schema: `foo`, schemaMap }).scalar(DateScalar)
+  assertEqual<
+    typeof graffle._.scalars,
+    { typesDecoded: Date; typesEncoded: string; map: { Date: typeof DateScalar } }
+  >()
+}

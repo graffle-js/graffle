@@ -54,7 +54,7 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
     export interface ${node.name}Methods<$Context extends ${identifiers.$$Utilities}.Context> {
       $batch: <$SelectionSet>(selectionSet: ${identifiers.$$Utilities}.Exact<$SelectionSet, ${identifiers.$$SelectionSets}.${node.name}<$Context['scalars']>>) =>
         Promise<
-          ${identifiers.$$Utilities}.SimplifyExcept<
+          ${identifiers.$$Utilities}.SimplifyDeepExcept<
             $Context['scalars']['typesDecoded'],
             ${identifiers.$$Utilities}.HandleOutput<
               $Context,
@@ -64,7 +64,7 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
         >
       __typename: () =>
         Promise<
-          ${identifiers.$$Utilities}.Simplify<
+          ${identifiers.$$Utilities}.SimplifyDeep<
             ${identifiers.$$Utilities}.HandleOutputGraffleRootField<
               $Context,
               { __typename: '${node.name}' },
@@ -91,7 +91,7 @@ const renderFieldMethods = createCodeGenerator<{ node: Grafaid.Schema.ObjectType
     code(`
       ${field.name}: <$SelectionSet>(selectionSet${isOptional ? `?` : ``}: ${identifiers.$$Utilities}.Exact<$SelectionSet, ${identifiers.$$SelectionSets}.${renderName(node)}.${renderName(field)}<$Context['scalars']>>) =>
         Promise<
-          ${identifiers.$$Utilities}.SimplifyExcept<
+          ${identifiers.$$Utilities}.SimplifyDeepExcept<
             $Context['scalars']['typesDecoded'],
             ${identifiers.$$Utilities}.HandleOutputGraffleRootField<
               $Context,

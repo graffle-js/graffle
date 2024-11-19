@@ -7,6 +7,7 @@ import * as Schema from '../../../tests/_/schemas/kitchen-sink/schema.js'
 // import { Graffle as Pokemon } from '../../../tests/_/schemas/pokemon/graffle/__.js'
 
 const graffle = Graffle.create({ schema: Schema.schema }).scalar(DateScalar)
+graffle._.scalars.typesDecoded
 
 // dprint-ignore
 test(`query`, async () => {
@@ -21,7 +22,6 @@ test(`query`, async () => {
   expectTypeOf<Parameters<typeof graffle.query.stringWithRequiredArg>>().toEqualTypeOf<[input: Graffle.SelectionSets.Query.stringWithRequiredArg]>()
   // scalar custom
   expectTypeOf(await graffle.query.date()).toMatchTypeOf<Date | null>()
-
   // scalar with explicit indicators
   // positive indicator
   expectTypeOf(await graffle.query.idNonNull(true)).toEqualTypeOf<string>()

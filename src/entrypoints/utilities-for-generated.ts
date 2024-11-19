@@ -8,6 +8,8 @@ export {
   type AssertExtendsObject,
   type Exact,
   type ExactNonEmpty,
+  type SimplifyDeep,
+  type SimplifyDeepExcept,
   type SimplifyExcept,
   type UnionExpanded,
 } from '../lib/prelude.js'

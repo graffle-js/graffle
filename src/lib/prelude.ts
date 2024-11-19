@@ -694,14 +694,6 @@ export const isObjectEmpty = (object: Record<string, unknown>) => {
 
 export const toArray = <T>(value: T | T[]) => Array.isArray(value) ? value : [value]
 
-// dprint-ignore
-export type SimplifyExcept<$ExcludeType, $Type> =
-  IsAny<$ExcludeType> extends true
-    ? Simplify<$Type>
-    : $Type extends $ExcludeType
-      ? $Type
-      : {[TypeKey in keyof $Type]: $Type[TypeKey]}
-
 export const __: () => never = () => {
   throw new Error(`not implemented`)
 }
@@ -753,16 +745,66 @@ type UnionValue<U, K extends PropertyKey> = U extends any ? K extends keyof U ? 
   : never
   : never
 
-// // dprint-ignore
-// export type IsAnyUnionMemberExtends<T, U> =
-//   true extends IsAnyUnionMemberExtends_<T, U>
-//     ? true
-//     : false
+// dprint-ignore
+export type IsAnyUnionMemberExtends<T, U> =
+  true extends IsAnyUnionMemberExtends_<T, U>
+    ? true
+    : false
 
-// // dprint-ignore
-// type IsAnyUnionMemberExtends_<T, U> =
-//   T extends any
-//     ? T extends U
-//       ? true
-//       : never
-//     : never
+// dprint-ignore
+type IsAnyUnionMemberExtends_<T, U> =
+  T extends any
+    ? T extends U
+      ? true
+      : never
+    : never
+
+// todo move these into DB lib
+// dprint-ignore
+
+export type SimplifyExcept<$ExcludeType, $Type> =
+  IsAny<$ExcludeType> extends true
+    ? Simplify<$Type>
+    : $Type extends $ExcludeType
+      ? $Type
+      : {[TypeKey in keyof $Type]: $Type[TypeKey]}
+
+export type SimplifyDeep<T> = SimplifyDeepExcept<Response | Error, T>
+
+// dprint-ignore
+export type SimplifyDeepExcept<$ExcludeType, $Type> =
+  IsExtendsExclude<AnyAndUnknownToNever<$ExcludeType> | Response | Error, $Type> extends true
+    ? $Type
+    : | (
+          SimplifyDeepExcept_<AnyAndUnknownToNever<$ExcludeType> | Response | Error, $Type>
+          & {}
+        )
+      | (
+          null extends $Type
+            ? null
+            : never
+      )
+      | (
+          undefined extends $Type
+            ? undefined
+            : never
+      )
+
+// dprint-ignore
+type SimplifyDeepExcept_<$ExcludeType, $Type> =
+  $Type extends object
+    ? & {
+          [$Key in keyof $Type]: SimplifyDeepExcept<$ExcludeType, $Type[$Key]>
+        }
+      & {}
+    : $Type
+
+// dprint-ignore
+type IsExtendsExclude<$ExcludeType, $Type> = 
+  IsAny<$ExcludeType> extends false
+    ? IsAnyUnionMemberExtends<$Type, $ExcludeType> extends true
+      ? true
+      : false
+    : false
+
+export type AnyAndUnknownToNever<T> = IsAny<T> extends true ? never : IsUnknown<T> extends true ? never : T
