@@ -1,10 +1,10 @@
-import type { Simplify, UnionToTuple } from 'type-fest'
+import type { UnionToTuple } from 'type-fest'
 import type { Context } from '../../client/context.js'
 import { type HandleOutput } from '../../client/handleOutput.js'
 import type { InferResult } from '../../documentBuilder/InferResult/__.js'
 import type { Select } from '../../documentBuilder/Select/__.js'
 import type { Schema } from '../../entrypoints/schema.js'
-import type { IsTupleMultiple, SimplifyDeep, SimplifyDeepExcept } from '../../lib/prelude.js'
+import type { IsTupleMultiple, SimplifyDeepExcept } from '../../lib/prelude.js'
 
 // dprint-ignore
 export type DocumentRunner<
@@ -19,7 +19,7 @@ export type DocumentRunner<
   >(...params: $Params) =>
     Promise<
       SimplifyDeepExcept<
-        any, // todo custom scalar types
+        $$Context['scalars']['typesDecoded'],
         HandleOutput<
           $$Context,
           InferResult.Operation<
