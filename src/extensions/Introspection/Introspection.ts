@@ -2,7 +2,6 @@ import { getIntrospectionQuery, type IntrospectionQuery } from 'graphql'
 import type { Context } from '../../client/context.js'
 import type { HandleOutput } from '../../client/handleOutput.js'
 import { createBuilderExtension, createExtension } from '../../entrypoints/extensionkit.js'
-import type { SimplifyNullable } from '../../entrypoints/main.js'
 import type { Builder } from '../../lib/builder/__.js'
 import { type ConfigInput, createConfig } from './config.js'
 
@@ -73,7 +72,7 @@ interface BuilderExtension extends Builder.Extension {
 }
 
 interface BuilderExtension_<$Args extends Builder.Extension.Parameters<BuilderExtension>> {
-  introspect: () => Promise<SimplifyNullable<HandleOutput<$Args['context'], IntrospectionQuery>>>
+  introspect: () => Promise<(null | {}) & HandleOutput<$Args['context'], IntrospectionQuery>>
 }
 
 const knownPotentiallyUnsupportedFeatures = [`inputValueDeprecation`, `oneOf`] as const

@@ -21,6 +21,7 @@ test(`query`, async () => {
   // scalar with required arguments
   expectTypeOf<Parameters<typeof graffle.query.stringWithRequiredArg>>().toEqualTypeOf<[input: Graffle.SelectionSets.Query.stringWithRequiredArg]>()
   // scalar custom
+  const result = await graffle.query.date()
   expectTypeOf(await graffle.query.date()).toMatchTypeOf<Date | null>()
   // scalar with explicit indicators
   // positive indicator

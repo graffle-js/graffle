@@ -54,23 +54,20 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
     export interface ${node.name}Methods<$Context extends ${identifiers.$$Utilities}.Context> {
       $batch: <$SelectionSet>(selectionSet: ${identifiers.$$Utilities}.Exact<$SelectionSet, ${identifiers.$$SelectionSets}.${node.name}<$Context['scalars']>>) =>
         Promise<
-          ${identifiers.$$Utilities}.SimplifyDeepExcept<
-            $Context['scalars']['typesDecoded'],
-            ${identifiers.$$Utilities}.HandleOutput<
+          & (null | {})
+          & ${identifiers.$$Utilities}.HandleOutput<
               $Context,
               InferResult.Operation${capitalizeFirstLetter(operationType)}<${identifiers.$$Utilities}.AssertExtendsObject<$SelectionSet>, ${identifiers.$$Schema}.${identifiers.Schema}<$Context['scalars']>>
             >
-          >
         >
       __typename: () =>
         Promise<
-          ${identifiers.$$Utilities}.SimplifyDeep<
-            ${identifiers.$$Utilities}.HandleOutputGraffleRootField<
+          & (null | {})
+          & ${identifiers.$$Utilities}.HandleOutputGraffleRootField<
               $Context,
               { __typename: '${node.name}' },
               '__typename'
             >
-          >
         >
       ${fieldMethods}
     }`)
@@ -91,14 +88,12 @@ const renderFieldMethods = createCodeGenerator<{ node: Grafaid.Schema.ObjectType
     code(`
       ${field.name}: <$SelectionSet>(selectionSet${isOptional ? `?` : ``}: ${identifiers.$$Utilities}.Exact<$SelectionSet, ${identifiers.$$SelectionSets}.${renderName(node)}.${renderName(field)}<$Context['scalars']>>) =>
         Promise<
-          ${identifiers.$$Utilities}.SimplifyDeepExcept<
-            $Context['scalars']['typesDecoded'],
-            ${identifiers.$$Utilities}.HandleOutputGraffleRootField<
+          & (null | {})
+          & ${identifiers.$$Utilities}.HandleOutputGraffleRootField<
               $Context,
               InferResult.Operation${capitalizeFirstLetter(operationType)}<{ ${field.name}: $SelectionSet}, ${identifiers.$$Schema}.${identifiers.Schema}<$Context['scalars']>>,
               '${field.name}'
             >
-          >
         >
     `)
   }

@@ -1,4 +1,6 @@
 import type { GraphQLError } from 'graphql'
+import type { Simplify } from 'type-fest'
+import type { SimplifyDeepExcept } from '../documentBuilder/Simplify.js'
 import type { RunTypeHookOnRequestResult } from '../extension/extension.js'
 import { Errors } from '../lib/errors/__.js'
 import type { Grafaid } from '../lib/grafaid/__.js'
@@ -109,7 +111,15 @@ export const handleOutput = (
 
 // dprint-ignore
 export type HandleOutputGraffleRootField<$Context extends Context, $Data extends SomeObjectData, $RootFieldName extends string> =
-  HandleOutputGraffleRootField_Data<ExcludeNull<HandleOutput<$Context, $Data>>, $RootFieldName>
+  HandleOutputGraffleRootField_Data<
+    ExcludeNull<
+      HandleOutput<
+        $Context,
+        SimplifyDeepExcept<$Context['scalars']['typesDecoded'], $Data>
+      >
+    >,
+    $RootFieldName
+  >
 
 // dprint-ignore
 type HandleOutputGraffleRootField_Data<$Output extends Error | SomeObjectData | GraffleExecutionResultEnvelope, $RootFieldName extends string> =
@@ -119,7 +129,13 @@ type HandleOutputGraffleRootField_Data<$Output extends Error | SomeObjectData | 
 
 // dprint-ignore
 export type HandleOutput<$Context extends Context, $Data extends SomeObjectData> =
-  HandleOutput_Extensions<$Context, Envelope<$Context, $Data>>
+  HandleOutput_Extensions<
+    $Context,
+    Envelope<
+      $Context,
+      SimplifyDeepExcept<$Context['scalars']['typesDecoded'], $Data>
+    >
+  >
 
 type HandleOutput_Extensions<$Context extends Context, $Envelope extends GraffleExecutionResultEnvelope> =
   HandleOutput_ErrorsReturn<
@@ -168,26 +184,32 @@ type ConfigResolveOutputErrorChannel<$Context extends Context, $Channel extends 
 
 // dprint-ignore
 // todo use ObjMap for $Data
-export type Envelope<$Context extends Context, $Data = unknown, $Errors extends ReadonlyArray<Error> = ReadonlyArray<GraphQLError>> = 
-	& {
-			data?: $Data | null
-			extensions?: ObjMap
-		}
-	& (
-			$Context['config']['transport']['type'] extends 'http'
-			? { response: Response }
-			: {}  
-		)
-		// todo remove use of errors type variable. Rely only on $Config.
-	& (
-			$Errors extends []
-			? {}  
-			: IsEnvelopeWithoutErrors<$Context> extends true
-			? {}  
-			: {
-					errors?: ReadonlyArray<GraphQLError>
-				}
-		)
+export type Envelope<
+  $Context extends Context,
+  $Data = unknown,
+  $Errors extends ReadonlyArray<Error> = ReadonlyArray<GraphQLError>,
+> =
+  Simplify<
+    & {
+      data?: $Data | null
+        extensions?: ObjMap
+      }
+    & (
+        $Context['config']['transport']['type'] extends 'http'
+        ? { response: Response }
+        : {}
+      )
+      // todo remove use of errors type variable. Rely only on $Config.
+    & (
+        $Errors extends []
+        ? {}
+        : IsEnvelopeWithoutErrors<$Context> extends true
+        ? {}
+        : {
+            errors?: ReadonlyArray<GraphQLError>
+          }
+      )
+  >
 
 type ObjMap<T = unknown> = {
   [key: string]: T

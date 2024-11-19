@@ -760,3 +760,5 @@ type IsAnyUnionMemberExtends_<T, U> =
     : never
 
 export type AnyAndUnknownToNever<T> = IsAny<T> extends true ? never : IsUnknown<T> extends true ? never : T
+
+export type t<T> = T extends null ? {} | null : {}

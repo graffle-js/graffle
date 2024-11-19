@@ -7,50 +7,43 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   $batch: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyDeepExcept<
-      $Context['scalars']['typesDecoded'],
-      $$Utilities.HandleOutput<
-        $Context,
-        InferResult.OperationMutation<
-          $$Utilities.AssertExtendsObject<$SelectionSet>,
-          $$Schema.Schema<$Context['scalars']>
-        >
+    & (null | {})
+    & $$Utilities.HandleOutput<
+      $Context,
+      InferResult.OperationMutation<
+        $$Utilities.AssertExtendsObject<$SelectionSet>,
+        $$Schema.Schema<$Context['scalars']>
       >
     >
   >
   __typename: () => Promise<
-    $$Utilities.SimplifyDeep<
-      $$Utilities.HandleOutputGraffleRootField<
-        $Context,
-        { __typename: 'Mutation' },
-        '__typename'
-      >
+    & (null | {})
+    & $$Utilities.HandleOutputGraffleRootField<
+      $Context,
+      { __typename: 'Mutation' },
+      '__typename'
     >
   >
 
   id: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.id<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyDeepExcept<
-      $Context['scalars']['typesDecoded'],
-      $$Utilities.HandleOutputGraffleRootField<
-        $Context,
-        InferResult.OperationMutation<{ id: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
-        'id'
-      >
+    & (null | {})
+    & $$Utilities.HandleOutputGraffleRootField<
+      $Context,
+      InferResult.OperationMutation<{ id: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
+      'id'
     >
   >
 
   idNonNull: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.idNonNull<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyDeepExcept<
-      $Context['scalars']['typesDecoded'],
-      $$Utilities.HandleOutputGraffleRootField<
-        $Context,
-        InferResult.OperationMutation<{ idNonNull: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
-        'idNonNull'
-      >
+    & (null | {})
+    & $$Utilities.HandleOutputGraffleRootField<
+      $Context,
+      InferResult.OperationMutation<{ idNonNull: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
+      'idNonNull'
     >
   >
 }

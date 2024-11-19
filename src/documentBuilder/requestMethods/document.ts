@@ -5,7 +5,6 @@ import type { InferResult } from '../../documentBuilder/InferResult/__.js'
 import type { Select } from '../../documentBuilder/Select/__.js'
 import type { Schema } from '../../entrypoints/schema.js'
 import type { IsTupleMultiple } from '../../lib/prelude.js'
-import type { SimplifyDeepExcept } from '../Simplify.js'
 
 // dprint-ignore
 export type DocumentRunner<
@@ -19,9 +18,8 @@ export type DocumentRunner<
     const $Name extends string = $Params extends [] ? $$Name : $Params[0],
   >(...params: $Params) =>
     Promise<
-      SimplifyDeepExcept<
-        $$Context['scalars']['typesDecoded'],
-        HandleOutput<
+      & ({} | null)
+      & HandleOutput<
           $$Context,
           InferResult.Operation<
             Select.Document.GetOperation<$$Document, $Name>,
@@ -29,7 +27,6 @@ export type DocumentRunner<
             Select.Document.GetOperationType<$$Document, $Name>
           >
         >
-      >
     >
 }
 

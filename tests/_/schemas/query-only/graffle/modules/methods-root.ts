@@ -7,47 +7,40 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   $batch: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyDeepExcept<
-      $Context['scalars']['typesDecoded'],
-      $$Utilities.HandleOutput<
-        $Context,
-        InferResult.OperationQuery<$$Utilities.AssertExtendsObject<$SelectionSet>, $$Schema.Schema<$Context['scalars']>>
-      >
+    & (null | {})
+    & $$Utilities.HandleOutput<
+      $Context,
+      InferResult.OperationQuery<$$Utilities.AssertExtendsObject<$SelectionSet>, $$Schema.Schema<$Context['scalars']>>
     >
   >
   __typename: () => Promise<
-    $$Utilities.SimplifyDeep<
-      $$Utilities.HandleOutputGraffleRootField<
-        $Context,
-        { __typename: 'Query' },
-        '__typename'
-      >
+    & (null | {})
+    & $$Utilities.HandleOutputGraffleRootField<
+      $Context,
+      { __typename: 'Query' },
+      '__typename'
     >
   >
 
   id: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.id<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyDeepExcept<
-      $Context['scalars']['typesDecoded'],
-      $$Utilities.HandleOutputGraffleRootField<
-        $Context,
-        InferResult.OperationQuery<{ id: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
-        'id'
-      >
+    & (null | {})
+    & $$Utilities.HandleOutputGraffleRootField<
+      $Context,
+      InferResult.OperationQuery<{ id: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
+      'id'
     >
   >
 
   idNonNull: <$SelectionSet>(
     selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.idNonNull<$Context['scalars']>>,
   ) => Promise<
-    $$Utilities.SimplifyDeepExcept<
-      $Context['scalars']['typesDecoded'],
-      $$Utilities.HandleOutputGraffleRootField<
-        $Context,
-        InferResult.OperationQuery<{ idNonNull: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
-        'idNonNull'
-      >
+    & (null | {})
+    & $$Utilities.HandleOutputGraffleRootField<
+      $Context,
+      InferResult.OperationQuery<{ idNonNull: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
+      'idNonNull'
     >
   >
 }

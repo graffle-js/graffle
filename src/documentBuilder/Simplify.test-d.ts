@@ -4,6 +4,7 @@ import type { SimplifyDeep, SimplifyDeepExcept } from './Simplify.js'
 // dprint-ignore
 {
 
+assertEqual<SimplifyDeep<{x:1|null}>									            , {x:1|null}>()
 assertEqual<SimplifyDeep<null | {x:1}>									          , null | {x:1}>()
 assertEqual<SimplifyDeep<null | {x?:1}>									          , null | {x?:1}>()
 assertEqual<SimplifyDeep<null | {x?:1|null}>									    , null | {x?:1|null}>()
