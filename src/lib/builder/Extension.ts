@@ -3,7 +3,7 @@ import type { Definition } from './_.js'
 import type { Definition_ } from './Definition.js'
 
 /**
- * Statically known data that extensions can read from and write to.
+ * Statically known data that extensions can read from/write to.
  */
 export type Context = object
 
@@ -23,7 +23,9 @@ export interface Extension extends TypeFunction.Fn {
    *
    * The definition of "most empty" is owned by the extension.
    *
-   * For example if context is `{ count: number[] }` then an extension may decide that contextEmpty is `{}` or `{ count: [] }` or just the same (`{ count: number[] }`).
+   * For example if context is `{ count: number[] }` then an extension
+   * may decide that contextEmpty is `{}` or `{ count: [] }` or just
+   * the same (`{ count: number[] }`).
    */
   contextEmpty: Context
 }
@@ -32,14 +34,58 @@ export namespace Extension {
   export type Invoke<_ extends Extension, $Arguments extends Parameters> = TypeFunction.Call<_, $Arguments>
 
   /**
-   * The parameters for chain extension. Chain extensions are "type functions", callable at the type level.
+   * The parameters for an extension invocation (recall: builder extensions are "type functions".
    *
-   * If you pass your Extension definition then the context you have defined for it will be used to type
+   * If you pass your Extension definition then its context will be used to type
    * the `context` parameter.
    */
   export type Parameters<$Extension_ extends Extension = Extension> = {
+    /**
+     * The context type as specified by this extension.
+     *
+     * Note that the type here could be more specific (subtype) upon later
+     * use in the materialized builder context. For example this or other extensions
+     * may contribute methods that return the builder with a new context.
+     */
     context: $Extension_['context']
-    chain: Definition_
+    // todo rename to definition
+    /**
+     * The definition of the builder.
+     *
+     * If you need to reference the builder with a changed (or same)
+     * context then you'll need this definition.
+     *
+     * @example
+     *
+     * ```ts
+     * interface BuilderExtension extends Builder.Extension {
+     *   context: { value: string }
+     *   return: BuilderExtension_<this['params']>
+     * }
+     * interface BuilderExtension_<$Arguments extends Builder.Extension.Parameters<BuilderExtension>> {
+     *   passthrough: () => Builder.Definition.MaterializeWith<$Arguments['definition'], $Arguments['context']>
+     *   append: <$Value>(value: $Value) =>
+     *     Builder.Definition.MaterializeWith<
+     *       $Arguments['definition'],
+     *       { value: `${$Arguments['context']['value']}${$Value}` }
+     *     >
+     * }
+     * ```
+     */
+    definition: Definition_
+    /**
+     * The current builder.
+     *
+     * After materialization this type becomes the specifically produced builder type.
+     *
+     * If your extension needs to reference the builder without affecting its context then
+     * use this type. For example your extension has a method that returns the builder.
+     *
+     * If your extension needs to reference the builder **with a changed context** then you must
+     * materialize it from the definition. See the {@link Parameters.definition} parameter.
+     */
+    // todo so far we couldn't achieve this without hitting infinite instantiation TS limitation.
+    // builder: object
   }
 
   /**

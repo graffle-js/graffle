@@ -34,8 +34,8 @@ type ScalarMethod<$Args extends Builder.Extension.Parameters<BuilderExtensionSca
       decode: (value: string) => $Decoded
       encode: (value: $Decoded) => string
     },
-  ): Builder.Definition.MaterializeWithNewContext<
-    $Args['chain'],
+  ): Builder.Definition.MaterializeWith<
+    $Args['definition'],
     ConfigManager.SetAtPath<
       $Args['context'],
       ['scalars'],
@@ -53,8 +53,8 @@ type ScalarMethod<$Args extends Builder.Extension.Parameters<BuilderExtensionSca
    */
   <$Scalar extends Schema.Scalar<GlobalRegistry.GetOrGeneric<$Args['context']['name']>['schema']['scalarNamesUnion']>>(
     scalar: $Scalar,
-  ): Builder.Definition.MaterializeWithNewContext<
-    $Args['chain'],
+  ): Builder.Definition.MaterializeWith<
+    $Args['definition'],
     ConfigManager.SetAtPath<
       $Args['context'],
       ['scalars'],

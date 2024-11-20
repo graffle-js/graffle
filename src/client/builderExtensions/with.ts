@@ -20,8 +20,8 @@ export interface With<$Args extends Builder.Extension.Parameters<BuilderExtensio
     // todo fixme
     // eslint-disable-next-line
     // @ts-ignore Passes after generation
-  ) => Builder.Definition.MaterializeWithNewContext<
-    $Args['chain'],
+  ) => Builder.Definition.MaterializeWith<
+    $Args['definition'],
     ConfigManager.SetProperties<
       $Args['context'],
       {

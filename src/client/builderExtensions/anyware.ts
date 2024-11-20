@@ -18,7 +18,7 @@ export interface Anyware<$Arguments extends Builder.Extension.Parameters<Builder
     interceptor: AnywareLib.Interceptor.InferConstructor<
       RequestPipeline['spec']
     >,
-  ) => Builder.Definition.MaterializeWithNewContext<$Arguments['chain'], $Arguments['context']>
+  ) => Builder.Definition.MaterializeWith<$Arguments['definition'], $Arguments['context']>
 }
 
 export const builderExtensionAnyware = Builder.Extension.create<BuilderExtensionAnyware>((builder, context) => {

@@ -38,8 +38,8 @@ interface BuilderExtension_<$Args extends Builder.Extension.Parameters<BuilderEx
   /**
    * TODO
    */
-  throws: () => Builder.Definition.MaterializeWithNewContext<
-    $Args['chain'],
+  throws: () => Builder.Definition.MaterializeWith<
+    $Args['definition'],
     ConfigManager.UpdateAtKey<
       $Args['context'],
       'config',

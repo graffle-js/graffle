@@ -19,12 +19,12 @@ export interface Use<$Args extends Builder.Extension.Parameters<BuilderExtension
 export type UseExtensionDo<
   $Args extends Builder.Extension.Parameters<BuilderExtensionUse>,
   $Extension extends Extension,
-> = Builder.Definition.MaterializeWithNewContext<
+> = Builder.Definition.MaterializeWith<
   // Apply any builder extensions.
   (
     ConfigManager.GetOptional<$Extension, ['builder', 'type']> extends Builder.Extension
-      ? Builder.Definition.AddExtension<$Args['chain'], ConfigManager.GetOptional<$Extension, ['builder', 'type']>>
-      : $Args['chain']
+      ? Builder.Definition.AddExtension<$Args['definition'], ConfigManager.GetOptional<$Extension, ['builder', 'type']>>
+      : $Args['definition']
   ),
   // Extend context.
   ConfigManager.SetMany<

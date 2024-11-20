@@ -33,18 +33,20 @@ import { type NormalizeInput } from './Settings/InputToConfig.js'
 //   >
 // >
 
-export type Client<$Context extends Context> = Builder.Definition.MaterializeWithNewContext<
-  Builder.Definition.Create<[
-    BuilderExtensionInternal,
-    BuilderExtensionRequestMethods,
-    BuilderExtensionWith,
-    BuilderExtensionUse,
-    BuilderExtensionAnyware,
-    BuilderExtensionGql,
-    BuilderExtensionScalar,
-  ]>,
+export type Client<$Context extends Context> = Builder.Definition.MaterializeWith<
+  ClientDefinition,
   $Context
 >
+
+type ClientDefinition = Builder.Definition.Create<[
+  BuilderExtensionInternal,
+  BuilderExtensionRequestMethods,
+  BuilderExtensionWith,
+  BuilderExtensionUse,
+  BuilderExtensionAnyware,
+  BuilderExtensionGql,
+  BuilderExtensionScalar,
+]>
 
 // dprint-ignore
 type Create = <$Input extends InputStatic>(input: Exact<$Input, InputStatic>) =>
