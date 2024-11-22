@@ -168,6 +168,7 @@ export const createExtension = <
     custom?: $Custom
     create: (params: { config: $Config }) => {
       builder?: $BuilderExtension
+      transport?: any // todo
       onRequest?: Anyware.Interceptor.InferConstructor<RequestPipeline['spec']>
       typeHooks?: () => $TypeHooks
     }

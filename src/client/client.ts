@@ -11,9 +11,10 @@ import { Schema } from '../types/Schema/__.js'
 import { type BuilderExtensionAnyware, builderExtensionAnyware } from './builderExtensions/anyware.js'
 import { type BuilderExtensionInternal, builderExtensionInternal } from './builderExtensions/internal.js'
 import { type BuilderExtensionScalar, builderExtensionScalar } from './builderExtensions/scalar.js'
+import type { BuilderExtensionTransport } from './builderExtensions/transport.js'
 import { type BuilderExtensionUse, builderExtensionUse } from './builderExtensions/use.js'
 import { type BuilderExtensionWith, builderExtensionWith } from './builderExtensions/with.js'
-import { type Context, type ContextWithoutConfig, createContext, type TypeHooksEmpty } from './context.js'
+import { Context, type ContextWithoutConfig, createContext, type TypeHooksEmpty } from './context.js'
 import { type BuilderExtensionGql, builderExtensionGql } from './gql/gql.js'
 import { type InputStatic } from './Settings/Input.js'
 import { type NormalizeInput } from './Settings/InputToConfig.js'
@@ -39,6 +40,7 @@ export type Client<$Context extends Context> = Builder.Definition.MaterializeWit
 >
 
 type ClientDefinition = Builder.Definition.Create<[
+  BuilderExtensionTransport,
   BuilderExtensionInternal,
   BuilderExtensionRequestMethods,
   BuilderExtensionWith,
@@ -57,6 +59,7 @@ type Create = <$Input extends InputStatic>(input: Exact<$Input, InputStatic>) =>
     name: HandleName<$Input>
     input: $Input
     config: NormalizeInput<$Input>
+    transport: Context.Transport.State.Empty
     schemaMap: ConfigManager.OrDefault<$Input['schemaMap'], null>
     retry: null
     extensions: []
@@ -68,6 +71,7 @@ export const create: Create = (input) => {
   const initialContext = createContext({
     name: input.name ?? defaultName,
     schemaMap: input.schemaMap ?? null,
+    transport: Context.Transport.State.empty,
     extensions: [],
     scalars: Schema.Scalar.Registry.empty,
     // retry: null,

@@ -171,6 +171,24 @@ export type UpdateAtKey<$Obj extends object, $Prop extends keyof $Obj, $Type ext
     [_ in $Prop]: $Type
   }
 
+// // dprint-ignore
+// export type IntersectAtKeyPath<$Obj extends object, $Path extends Path, $Value> =
+//   $Path extends []
+//     ? $Value extends object
+//       ? $Obj & $Value
+//       : never
+//     : IntersectAtKeyPath_<$Obj, $Path, $Value>
+
+// // dprint-ignore
+// export type IntersectAtKeyPath_<$ObjOrValue, $Path extends Path, $Value> =
+//       $Path extends [infer $P1 extends string, ...infer $PN extends string[]] ?
+//         $P1 extends keyof $ObjOrValue
+//             ? $ObjOrValue & { [_ in $P1]: IntersectAtKeyPath_<$ObjOrValue[$P1], $PN, $Value> }
+//             // If we use a nice error display here (like the following comment) it will mess with the result type in variable cases.
+//              // `Error: Cannot set value at path in object. Path property "${$P1}" does not exist in object.`
+//             : never
+//         : $Value
+
 // dprint-ignore
 export type SetAtKeyPath<$Obj extends object, $Path extends Path, $Value> =
     Simplify<

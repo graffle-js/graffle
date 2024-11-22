@@ -1,7 +1,7 @@
 import type { CamelCase } from 'type-fest'
 import type { UseExtensionDo } from '../client/builderExtensions/use.js'
 import { type Client, createWithContext } from '../client/client.js'
-import { type Context, createContext, type TypeHooksEmpty } from '../client/context.js'
+import { Context, createContext, type TypeHooksEmpty } from '../client/context.js'
 import type { InputBase } from '../client/Settings/Input.js'
 import type { NormalizeInput } from '../client/Settings/InputToConfig.js'
 import type {
@@ -41,6 +41,7 @@ export const create: CreatePrefilled = (args) => {
       extensions,
       scalars,
       schemaMap,
+      transport: Context.Transport.State.empty,
       input: {
         schema: args.schemaUrl,
         // eslint-disable-next-line
@@ -86,6 +87,7 @@ type CreatePrefilled = <
         input: $ClientKeywordArgs
         name: $Params['name']
         schemaMap: ConfigManager.OrDefault<$Params['sddm'], null>
+        transport: Context.Transport.State.Empty
         scalars: ConfigManager.OrDefault<$Params['scalars'], Schema.Scalar.Registry.Empty>
         config: NormalizeInput<$ClientKeywordArgs & { name: $Name; schemaMap: SchemaDrivenDataMap }>
         typeHooks: TypeHooksEmpty
