@@ -146,16 +146,23 @@ export type GetOptional<$Value, $Path extends [...string[]]> =
 export type SetProperties<$Object1 extends object, $Object2 extends object> =
     Simplify<Omit<$Object1, keyof $Object2> & $Object2>
 
-// dprint-ignore
-export type SetMany<$Obj extends object, $Sets extends [Path, any][]> =
-  $Sets extends []                                                                        ? $Obj : 
-  $Sets extends [infer $Set extends [Path, any], ...infer $SetRest extends [Path, any][]] ? SetMany<
-                                                                                              SetAtKeyPath<$Obj, $Set[0], $Set[1]>,
-                                                                                              $SetRest
-                                                                                            > :
-                                                                                            never
+type UpdateEntry = [Path, any] | null
+type UpdateEntryDo = [Path, any]
 
-export type AppendAtKey<$Obj extends object, $Prop extends keyof $Obj, $Type> =
+// dprint-ignore
+export type UpdateMany<$Obj extends object, $Sets extends UpdateEntry[]> =
+  $Sets extends []                                                                        
+    ? $Obj
+    : $Sets extends [infer $Set extends UpdateEntry, ...infer $SetRest extends UpdateEntry[]]
+      ? $Set extends UpdateEntryDo
+        ? UpdateMany<
+            SetAtKeyPath<$Obj, $Set[0], $Set[1]>,
+            $SetRest
+          >
+        : UpdateMany<$Obj, $SetRest>
+      : never
+
+export type UpdateKeyWithAppend<$Obj extends object, $Prop extends keyof $Obj, $Type> =
   // @ts-expect-error
   UpdateAtKey<$Obj, $Prop, [...$Obj[$Prop], $Type]>
 

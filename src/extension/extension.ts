@@ -9,6 +9,7 @@ import type { AssertExtends } from '../lib/prelude.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
 import type { Fn } from '../lib/type-function/TypeFunction.js'
 import type { RequestPipeline } from '../requestPipeline/__.js'
+import type { TransportExtension } from '../transportExtension/transportExtension.js'
 import type { GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
 
 export interface TypeHooks {
@@ -48,6 +49,7 @@ export interface Extension<
   $Config extends object | undefined = object | undefined,
   $BuilderExtension extends BuilderExtension | undefined = BuilderExtension | undefined,
   $TypeHooks extends TypeHooks = TypeHooks,
+  $Transport extends Anyware.Overload.BuilderContext | undefined = Anyware.Overload.BuilderContext | undefined,
 > extends Fn {
   /**
    * The name of the extension
@@ -84,6 +86,7 @@ export interface Extension<
    * There is a type parameter you can pass in which will statically extend the builder.
    */
   builder: $BuilderExtension
+  transport: $Transport
   /**
    * TODO
    */
@@ -149,6 +152,7 @@ export const createExtension = <
   $ConfigInputParameters extends ExtensionInputParameters = ExtensionInputParameters,
   $Config extends object = object,
   $Custom extends object = object,
+  $Transport extends undefined | Anyware.Overload.Builder = undefined,
 > // $x extends undefined | ((...args: $ConfigInputParameters) => $Config) = undefined,
 // $Input extends {
 //   name: $Name
@@ -168,9 +172,9 @@ export const createExtension = <
     custom?: $Custom
     create: (params: { config: $Config }) => {
       builder?: $BuilderExtension
-      transport?: any // todo
-      onRequest?: Anyware.Interceptor.InferConstructor<RequestPipeline['spec']>
       typeHooks?: () => $TypeHooks
+      transport?: (Builder: TransportExtension.Namespace) => $Transport
+      onRequest?: Anyware.Interceptor.InferConstructor<RequestPipeline['spec']>
     }
   },
 ): ExtensionConstructor<
@@ -179,7 +183,8 @@ export const createExtension = <
   $Name,
   $BuilderExtension,
   TypeHooks extends $TypeHooks ? EmptyTypeHooks : $TypeHooks,
-  $Custom
+  $Custom,
+  $Transport extends Anyware.Overload.Builder ? $Transport['context'] : undefined
 > => {
   const extensionConstructor = (input?: object) => {
     const config: $Config = ((definitionInput.normalizeConfig as any)?.(input) ?? {}) as any // eslint-disable-line
@@ -200,19 +205,21 @@ export type ExtensionConstructor<
   $BuilderExtension extends BuilderExtension | undefined = BuilderExtension | undefined,
   $TypeHooks extends TypeHooks = TypeHooks,
   $Custom extends object = object,
+  $Transport extends undefined | Anyware.Overload.BuilderContext = undefined,
 > =
   & {
     (
       ...args:
         // ExtensionInputParameters extends $ConfigInputParameters ? [] : $ConfigInputParameters
         WasNotDefined<$ConfigInputParameters> extends true ? [] : $ConfigInputParameters
-    ): Extension<$Name, $Config, $BuilderExtension, $TypeHooks>
+    ): Extension<$Name, $Config, $BuilderExtension, $TypeHooks, $Transport>
     info: {
       name: $Name
       configInputParameters: $ConfigInputParameters
       config: $Config
       builder: $BuilderExtension
       typeHooks: TypeHooks extends $TypeHooks ? EmptyTypeHooks : $TypeHooks
+      transport: $Transport
     }
   }
   & $Custom

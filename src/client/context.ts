@@ -1,7 +1,6 @@
-// import type { Anyware } from '../../lib/anyware/__.js'
-// import type { RequestPipeline } from '../../requestPipeline/__.js'
 import type { Extension } from '../extension/extension.js'
 import type { Objekt, StringKeyof } from '../lib/prelude.js'
+import type { RequestPipelineBase } from '../requestPipeline/RequestPipeline.js'
 import type { Schema } from '../types/Schema/__.js'
 import type { SchemaDrivenDataMap } from '../types/SchemaDrivenDataMap/SchemaDrivenDataMap.js'
 import type { Config } from './Settings/Config.js'
@@ -63,6 +62,7 @@ export namespace Context {
 
 export interface Context {
   name: string
+  requestPipeline: RequestPipelineBase
   transport: Context.Transport
   /**
    * The initial input that was given to derive the config.

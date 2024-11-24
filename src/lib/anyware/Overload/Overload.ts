@@ -14,7 +14,7 @@ export const create: Create = (parameters) => {
 
   const builder: Builder = {
     context,
-    extendInput: () => builder as any,
+    config: () => builder as any,
     stepWithExtendedInput: () => builder.step as any,
     step: (name, spec) => {
       context.steps[name] = {

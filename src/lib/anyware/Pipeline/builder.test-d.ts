@@ -131,7 +131,7 @@ describe(`overload`, () => {
   // overload extends input
 
   test(`overload constructor with input and discriminant`, () => {
-    expectTypeOf(b0.overload(o => o.create({ discriminant: d }).extendInput<{ x: 1 }>()).context.overloads)
+    expectTypeOf(b0.overload(o => o.create({ discriminant: d }).config<{ x: 1 }>()).context.overloads)
       .toMatchTypeOf<[{ discriminant: d; input: { x: 1 }; steps: {} }]>()
   })
 
@@ -248,8 +248,8 @@ describe(`overload`, () => {
   test(`overload input extensions become a pipeline union input`, () => {
     const p = b0
       .step(`a`)
-      .overload(o => o.create({ discriminant: d }).extendInput<{ ol1: 1 }>())
-      .overload(o => o.create({ discriminant: d2 }).extendInput<{ ol2: 2 }>())
+      .overload(o => o.create({ discriminant: d }).config<{ ol1: 1 }>())
+      .overload(o => o.create({ discriminant: d2 }).config<{ ol2: 2 }>())
       .done()
     expectTypeOf(p.input).toMatchTypeOf<
       | (initialInput & dObject & { ol1: 1 })

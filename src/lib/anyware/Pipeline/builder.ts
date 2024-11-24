@@ -2,6 +2,7 @@ import type { IsUnknown, Simplify } from 'type-fest'
 import type { ConfigManager } from '../../config-manager/__.js'
 import type { ExcludeUndefined } from '../../prelude.js'
 import { type Tuple } from '../../prelude.js'
+import type { TypeFunction } from '../../type-function/__.js'
 import type { ExecutableStep } from '../ExecutableStep.js'
 import type { Extension } from '../Extension/__.js'
 import { Overload } from '../Overload/__.js'
@@ -98,7 +99,7 @@ export interface Builder<$Context extends Context = Context> {
   overload: <$OverloadBuilder extends Overload.Builder<$Context>>(
     overloadBuilder: Overload.BuilderCallback<$Context, $OverloadBuilder>,
   ) => Builder<
-    ConfigManager.AppendAtKey<$Context, 'overloads', $OverloadBuilder['context']>
+    ConfigManager.UpdateKeyWithAppend<$Context, 'overloads', $OverloadBuilder['context']>
   >
   /**
    * TODO
@@ -117,7 +118,23 @@ export interface Builder<$Context extends Context = Context> {
    * TODO
    */
   done: () => InferPipelineFromContext<$Context>
+  params: unknown
+  // @ts-expect-error
+  return: Builder<this['params']>
 }
+
+// export type ApplyOverload<
+//   $Builder extends Builder,
+//   $Overload extends Overload.Builder,
+// > = TypeFunction.Call<
+//   $Builder,
+//   ConfigManager.AppendAtKey<$Builder['context'], 'overloads', $Overload['context']>
+// >
+
+export type UpdateContextWithOverload<
+  $Context extends Context,
+  $Overload extends Overload.BuilderContext,
+> = ConfigManager.UpdateKeyWithAppend<$Context, 'overloads', $Overload>
 
 interface BuilderStep<$Context extends Context> {
   <
@@ -316,7 +333,7 @@ export const create = <$Input extends object>(options?: Options): Builder<{
 }
 
 const recreate = <$Context extends Context>(context: $Context): Builder<$Context> => {
-  const builder: Builder<$Context> = {
+  const builder: TypeFunction.UnFn<Builder<$Context>> = {
     context,
     stepWithRunnerType: () => builder.step as any,
     step: (...args: any[]) => {
@@ -402,7 +419,7 @@ const recreate = <$Context extends Context>(context: $Context): Builder<$Context
     },
   }
 
-  return builder
+  return builder as Builder<$Context>
 }
 
 const passthroughStep = (params: { input: object }) => params.input

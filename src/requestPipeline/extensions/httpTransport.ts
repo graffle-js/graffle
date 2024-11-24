@@ -18,7 +18,7 @@ export const httpTransport = Anyware.Extension
       .create({
         discriminant: [`transportType`, `http`],
       })
-      .extendInput<{ url: URL | string }>()
+      .config<{ url: URL | string }>()
       .stepWithExtendedInput<{ headers?: HeadersInit }>()(`pack`, {
         slots: {
           searchParams: getRequestEncodeSearchParameters,

@@ -11,7 +11,7 @@ export const memoryTransport = Anyware.Extension
       .create({
         discriminant: [`transportType`, `memory`],
       })
-      .extendInput<{ schema: Grafaid.Schema.Schema }>()
+      .config<{ schema: Grafaid.Schema.Schema }>()
       .step(`pack`, {
         run: (input) => {
           const graphqlRequest: Grafaid.HTTP.RequestConfig = {

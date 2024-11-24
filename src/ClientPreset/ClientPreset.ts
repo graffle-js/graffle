@@ -15,6 +15,7 @@ import type {
 import type { Builder } from '../lib/builder/__.js'
 import type { ConfigManager } from '../lib/config-manager/__.js'
 import { type ToParametersExact, type Tuple } from '../lib/prelude.js'
+import { requestPipeline, type RequestPipelineBase } from '../requestPipeline/RequestPipeline.js'
 import type { GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
 import { Schema } from '../types/Schema/__.js'
 import type { SchemaDrivenDataMap } from '../types/SchemaDrivenDataMap/__.js'
@@ -41,6 +42,7 @@ export const create: CreatePrefilled = (args) => {
       extensions,
       scalars,
       schemaMap,
+      requestPipeline: requestPipeline,
       transport: Context.Transport.State.empty,
       input: {
         schema: args.schemaUrl,
@@ -87,6 +89,7 @@ type CreatePrefilled = <
         input: $ClientKeywordArgs
         name: $Params['name']
         schemaMap: ConfigManager.OrDefault<$Params['sddm'], null>
+        requestPipeline: RequestPipelineBase
         transport: Context.Transport.State.Empty
         scalars: ConfigManager.OrDefault<$Params['scalars'], Schema.Scalar.Registry.Empty>
         config: NormalizeInput<$ClientKeywordArgs & { name: $Name; schemaMap: SchemaDrivenDataMap }>

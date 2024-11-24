@@ -7,7 +7,6 @@ import { isAbortError } from '../lib/prelude.js'
 import { decodeResultData } from './CustomScalars/decode.js'
 import { encodeRequestVariables } from './CustomScalars/encode.js'
 import { httpTransport } from './extensions/httpTransport.js'
-import { memoryTransport } from './extensions/memoryTransport.js'
 
 const requestPipelineBase = Anyware.Pipeline
   .create<{
@@ -76,12 +75,12 @@ const requestPipelineBase = Anyware.Pipeline
     },
   })
 
-export type RequestPipelineBaseContext = typeof requestPipelineBase['context']
+export type RequestPipelineBase = typeof requestPipelineBase
+export type RequestPipelineBaseContext = RequestPipelineBase['context']
 
 export const requestPipeline = requestPipelineBase
-  .use(httpTransport)
-  .use(memoryTransport)
-  .done()
+// .use(httpTransport)
+// .done()
 
 export type RequestPipeline = typeof requestPipeline
 

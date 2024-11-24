@@ -16,7 +16,7 @@ export interface Anyware<$Arguments extends Builder.Extension.Parameters<Builder
    */
   anyware: (
     interceptor: AnywareLib.Interceptor.InferConstructor<
-      RequestPipeline['spec']
+      AnywareLib.Pipeline.InferPipeline<$Arguments['context']['requestPipeline']>['spec']
     >,
   ) => Builder.Definition.MaterializeWith<$Arguments['definition'], $Arguments['context']>
 }

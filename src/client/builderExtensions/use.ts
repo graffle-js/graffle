@@ -1,4 +1,5 @@
 import type { Extension } from '../../extension/extension.js'
+import type { Anyware } from '../../lib/anyware/__.js'
 import { Builder } from '../../lib/builder/__.js'
 import type { ConfigManager } from '../../lib/config-manager/__.js'
 import { type Context } from '../context.js'
@@ -27,9 +28,19 @@ export type UseExtensionDo<
       : $Args['definition']
   ),
   // Extend context.
-  ConfigManager.SetMany<
+  ConfigManager.UpdateMany<
     $Args['context'],
     [
+      $Extension['transport'] extends undefined ? null
+        : [
+          ['requestPipeline'],
+          Anyware.Pipeline.UpdateContextWithOverload<
+            $Args['context']['requestPipeline']['context'],
+            $Extension['transport']
+          >,
+        ],
+      // : [['requestPipeline'], 3]),
+      //
       [
         ['typeHooks', 'onRequestResult'],
         ConfigManager.AppendOptional<

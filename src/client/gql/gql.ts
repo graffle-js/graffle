@@ -7,7 +7,6 @@ import {
   joinTemplateStringArrayAndArgs,
   type TemplateStringsArguments,
 } from '../../lib/template-string.js'
-import { type RequestPipeline, requestPipeline } from '../../requestPipeline/__.js' // todo
 import { type Context } from '../context.js'
 import { handleOutput } from '../handleOutput.js'
 import { type DocumentController, resolveSendArguments, type sendArgumentsImplementation } from './send.js'
@@ -70,9 +69,9 @@ export const builderExtensionGql = Builder.Extension.create<BuilderExtensionGql>
             url,
             schema,
             request: analyzedRequest,
-          } as RequestPipeline['spec']['input']
+          } // as RequestPipeline['spec']['input']
 
-          const result = await Anyware.Pipeline.run(requestPipeline, {
+          const result = await Anyware.Pipeline.run(context.requestPipeline.done(), {
             initialInput,
             // retryingExtension: context.retry as any,
             interceptors: context.extensions.filter(_ => _.onRequest !== undefined).map(_ => _.onRequest!) as any,

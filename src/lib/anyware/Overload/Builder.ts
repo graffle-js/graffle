@@ -15,7 +15,7 @@ export interface Builder<
   /**
    * TODO
    */
-  extendInput: <$InputExtension extends object>() => Builder<
+  config: <$InputExtension extends object>() => Builder<
     $RootContext,
     ConfigManager.UpdateAtKey<$Context, 'input', $InputExtension>
   >

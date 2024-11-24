@@ -11,31 +11,28 @@ export const TransportMemory = createExtension({
       transport: TransportExtension
         .create(`memory`)
         .config<{ schema: Grafaid.Schema.Schema }>()
-        .pipeline((pipeline) =>
-          pipeline
-            .step(`pack`, {
-              run: (input) => {
-                const graphqlRequest: Grafaid.HTTP.RequestConfig = {
-                  operationName: input.request.operationName,
-                  variables: input.request.variables,
-                  query: print(input.request.query),
-                }
-                return {
-                  ...input,
-                  request: graphqlRequest,
-                }
-              },
-            })
-            .step(`exchange`, {
-              run: async (input) => {
-                const result = await execute(input)
-                return {
-                  ...input,
-                  result,
-                }
-              },
-            })
-        ),
+        .step(`pack`, {
+          run: (input) => {
+            const graphqlRequest: Grafaid.HTTP.RequestConfig = {
+              operationName: input.request.operationName,
+              variables: input.request.variables,
+              query: print(input.request.query),
+            }
+            return {
+              ...input,
+              request: graphqlRequest,
+            }
+          },
+        })
+        .step(`exchange`, {
+          run: async (input) => {
+            const result = await execute(input)
+            return {
+              ...input,
+              result,
+            }
+          },
+        }),
     }
   },
 })

@@ -6,6 +6,7 @@ import { defaultName } from '../generator/config/defaults.js'
 import type { Builder } from '../lib/builder/__.js'
 import type { ConfigManager } from '../lib/config-manager/__.js'
 import { type Exact, proxyGet } from '../lib/prelude.js'
+import { requestPipeline, type RequestPipelineBase } from '../requestPipeline/RequestPipeline.js'
 import type { GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
 import { Schema } from '../types/Schema/__.js'
 import { type BuilderExtensionAnyware, builderExtensionAnyware } from './builderExtensions/anyware.js'
@@ -59,6 +60,7 @@ type Create = <$Input extends InputStatic>(input: Exact<$Input, InputStatic>) =>
     name: HandleName<$Input>
     input: $Input
     config: NormalizeInput<$Input>
+    requestPipeline: RequestPipelineBase
     transport: Context.Transport.State.Empty
     schemaMap: ConfigManager.OrDefault<$Input['schemaMap'], null>
     retry: null
@@ -72,6 +74,7 @@ export const create: Create = (input) => {
     name: input.name ?? defaultName,
     schemaMap: input.schemaMap ?? null,
     transport: Context.Transport.State.empty,
+    requestPipeline: requestPipeline,
     extensions: [],
     scalars: Schema.Scalar.Registry.empty,
     // retry: null,

@@ -14,7 +14,7 @@ export interface Builder<
     overloadBuilder: Overload.BuilderCallback<$PipelineContext, $OverloadBuilder>,
   ) => Builder<
     $PipelineContext,
-    ConfigManager.AppendAtKey<
+    ConfigManager.UpdateKeyWithAppend<
       $Context,
       'overloads',
       $OverloadBuilder['context']
