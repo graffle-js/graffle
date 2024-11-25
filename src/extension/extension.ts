@@ -9,6 +9,7 @@ import type { AssertExtends } from '../lib/prelude.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
 import type { Fn } from '../lib/type-function/TypeFunction.js'
 import type { RequestPipelineBase } from '../requestPipeline/RequestPipeline.js'
+import type { TransportExtension } from '../transportExtension/transportExtension.js'
 import type { GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
 
 export interface TypeHooks {
@@ -173,6 +174,7 @@ export const createExtension = <
       builder?: $BuilderExtension
       onRequest?: Anyware.Interceptor.InferFromPipeline<RequestPipelineBase>
       typeHooks?: () => $TypeHooks
+      transport?: (OverloadBuilder: TransportExtension.Namespace) => $Transport
     }
   },
 ): ExtensionConstructor<

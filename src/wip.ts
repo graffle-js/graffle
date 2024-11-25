@@ -19,13 +19,18 @@ const HttpTransport = (): HttpTransport => ({
 
 // -----------------------------------------------------------------------------
 
+const transportHttp = TransportHttp()
+transportHttp.transport
+
 const graffle = Graffle.create({
   schema: ``,
 })
   // .use(TransportMemory())
-  .use(TransportHttp())
+  .use(transportHttp)
+  // ._.requestPipelineDefinition.overloads[0]
   .anyware(async ({ encode }) => {
     encode.input.transportType
+    return encode()
   })
 
 // .addTransport(HttpTransport())

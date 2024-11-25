@@ -10,14 +10,6 @@ export interface TransportExtension extends Anyware.Overload {
 // export interface TransportExtensionInitial
 
 export namespace TransportExtension {
-  interface Create {
-    <$Name extends string>(name: $Name): Anyware.Overload.Builder<RequestPipelineBaseDefinition, {
-      discriminant: ['transportType', $Name]
-      input: {}
-      steps: {}
-    }>
-  }
-
   export interface Namespace {
     create: Create
   }
@@ -25,6 +17,14 @@ export namespace TransportExtension {
   export const create: Create = (name) => {
     name
     __()
+  }
+
+  interface Create {
+    <$Name extends string>(name: $Name): Anyware.Overload.Builder<RequestPipelineBaseDefinition, {
+      discriminant: ['transportType', $Name]
+      input: {}
+      steps: {}
+    }>
   }
 }
 

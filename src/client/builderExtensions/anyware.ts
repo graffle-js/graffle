@@ -23,7 +23,7 @@ export interface Anyware<$Arguments extends Builder.Extension.Parameters<Builder
 
 export const builderExtensionAnyware = Builder.Extension.create<BuilderExtensionAnyware>((builder, context) => {
   const properties = {
-    anyware: (interceptor: AnywareLib.Interceptor.InferFromPipeline<RequestPipeline>) => {
+    anyware: (interceptor: AnywareLib.Interceptor.InferFromPipeline<RequestPipelineBase>) => {
       return builder({
         ...context,
         extensions: [
