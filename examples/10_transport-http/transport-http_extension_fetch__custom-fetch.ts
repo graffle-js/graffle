@@ -40,7 +40,7 @@ namespace Graffle2 {
     .create()
     .use(TransportHttp())
 
-  export const create = Graffle.createPreset(defaultBase)
+  export const create = Graffle.createPresetFromContext(defaultBase._)
 }
 
 const graffle = Graffle2

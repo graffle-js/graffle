@@ -698,7 +698,7 @@ export const isObjectEmpty = (object: Record<string, unknown>) => {
 
 export const toArray = <T>(value: T | T[]) => Array.isArray(value) ? value : [value]
 
-export const __: () => never = () => {
+export const __: (...args: any[]) => never = () => {
   throw new Error(`not implemented`)
 }
 

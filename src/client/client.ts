@@ -5,7 +5,7 @@ import {
 import { defaultName } from '../generator/config/defaults.js'
 import type { Builder } from '../lib/builder/__.js'
 import type { ConfigManager } from '../lib/config-manager/__.js'
-import { type Exact, proxyGet } from '../lib/prelude.js'
+import { proxyGet } from '../lib/prelude.js'
 import { requestPipelineBaseDefinition } from '../requestPipeline/RequestPipeline.js'
 import type { GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
 import { Schema } from '../types/Schema/__.js'
@@ -37,7 +37,7 @@ type ClientDefinition = Builder.Definition.Create<[
 ]>
 
 // dprint-ignore
-type Create = <$Input extends InputStatic>(input?: Exact<$Input, InputStatic>) =>
+type Create = <$Input extends InputStatic | undefined = undefined>(input?: $Input) =>
   // todo fixme
   // eslint-disable-next-line
   // @ts-ignore
@@ -45,10 +45,10 @@ type Create = <$Input extends InputStatic>(input?: Exact<$Input, InputStatic>) =
     ConfigManager.SetKeys<
       ContextEmpty,
       {
-        name: HandleName<$Input>
-        input: $Input
-        config: NormalizeInput<$Input>
-        schemaMap: ConfigManager.OrDefault<$Input['schemaMap'], null>
+        name: HandleName<ConfigManager.OrDefault<$Input, {}>>
+        input: ConfigManager.OrDefault<$Input, {}>
+        config: NormalizeInput<ConfigManager.OrDefault<$Input, {}>>
+        schemaMap: $Input extends InputStatic ? ConfigManager.OrDefault<$Input['schemaMap'], null> : null
       }
     >
   >
