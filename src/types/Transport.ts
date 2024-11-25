@@ -6,6 +6,7 @@ export interface Transport {
   name: string
   requestPipelineOverload: Anyware.Overload
   config: object
+  configInit: object
 }
 
 export namespace Transport {

@@ -17,8 +17,8 @@
 
     // DX
     "sourceMap": true,
-    "declaration": true,
-    "declarationMap": true,
+    "declaration": false,
+    "declarationMap": false,
     "incremental": true,
     "tsBuildInfoFile": "node_modules/.cache/.tsbuildinfo",
     "noErrorTruncation": true,

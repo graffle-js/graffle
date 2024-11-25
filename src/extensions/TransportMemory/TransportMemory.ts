@@ -5,8 +5,8 @@ import { execute } from '../../lib/grafaid/execute.js'
 
 export const TransportMemory = createExtension({
   name: `TransportMemory`,
-  normalizeConfig: (input: { schema?: Grafaid.Schema.Schema }) => ({
-    schema: input.schema ?? undefined,
+  normalizeConfig: (input?: { schema?: Grafaid.Schema.Schema }) => ({
+    schema: input?.schema ?? undefined,
   }),
   create: () => {
     return {

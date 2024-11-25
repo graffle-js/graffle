@@ -1,6 +1,6 @@
 import type { IsUnknown, PartialDeep, Simplify } from 'type-fest'
 import { isDate } from 'util/types'
-import { type ExcludeUndefined, type GuardedType, isAnyFunction, isNonNullObject } from '../prelude.js'
+import { type ExcludeUndefined, type GuardedType, isAnyFunction, isNonNullObject, type Objekt } from '../prelude.js'
 
 // dprint-ignore
 export type OrDefault2<$Value, $Default> =
@@ -20,17 +20,39 @@ export type OrDefault<$Value, $Default> =
                                      $Value
 
 // dprint-ignore
-export type MergeDefaults<$Defaults extends object, $Input extends undefined | object, $CustomScalars> =
+export type MergeDefaultsShallow<
+  $Defaults extends object,
+  $Input extends undefined | object,
+> =
   $Input extends undefined
     ? $Defaults
-    : {
-        [$Key in keyof $Defaults]:
-          $Key extends keyof $Input
-            ? $Input[$Key] extends undefined
-              ? $Defaults[$Key]
-              : MergeDefaultsValues<$Defaults[$Key], ExcludeUndefined<$Input[$Key]>, $CustomScalars>
-            : $Defaults[$Key]
-      }
+    : Objekt.IsEmpty<$Input> extends true
+      ? $Defaults
+      : & Omit<$Input, keyof $Defaults>
+        & {
+          [$DefaultsKey in keyof $Defaults]:
+            $DefaultsKey extends keyof $Input
+              ? $Input[$DefaultsKey] extends undefined
+                ? $Defaults[$DefaultsKey]
+                : never
+              : $Defaults[$DefaultsKey]
+        }
+
+// dprint-ignore
+export type MergeDefaults<$Defaults extends object, $Input extends undefined | object, $CustomScalars = never> =
+  Simplify<
+    $Input extends undefined
+      ? $Defaults
+      : & Omit<$Input, keyof $Defaults>
+        & {
+            [$Key in keyof $Defaults]:
+              $Key extends keyof $Input
+                ? $Input[$Key] extends undefined
+                  ? $Defaults[$Key]
+                  : MergeDefaultsValues<$Defaults[$Key], ExcludeUndefined<$Input[$Key]>, $CustomScalars>
+                : $Defaults[$Key]
+          }
+  >
 
 // dprint-ignore
 type MergeDefaultsValues<$DefaultValue, $InputValue, $CustomScalars> =

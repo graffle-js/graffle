@@ -12,7 +12,7 @@ import { Schema } from '../types/Schema/__.js'
 import { type BuilderExtensionAnyware, builderExtensionAnyware } from './builderExtensions/anyware.js'
 import { type BuilderExtensionInternal, builderExtensionInternal } from './builderExtensions/internal.js'
 import { type BuilderExtensionScalar, builderExtensionScalar } from './builderExtensions/scalar.js'
-import type { BuilderExtensionTransport } from './builderExtensions/transport.js'
+import { type BuilderExtensionTransport, builderExtensionTransport } from './builderExtensions/transport.js'
 import { type BuilderExtensionUse, builderExtensionUse } from './builderExtensions/use.js'
 import { type BuilderExtensionWith, builderExtensionWith } from './builderExtensions/with.js'
 import {
@@ -32,14 +32,14 @@ export type Client<$Context extends Context = Context> = Builder.Definition.Mate
 >
 
 type ClientDefinition = Builder.Definition.Create<[
-  // BuilderExtensionTransport,
   BuilderExtensionInternal,
-  BuilderExtensionRequestMethods,
-  BuilderExtensionWith,
+  BuilderExtensionTransport,
+  // BuilderExtensionRequestMethods,
+  // BuilderExtensionWith,
   BuilderExtensionUse,
   BuilderExtensionAnyware,
   BuilderExtensionGql,
-  BuilderExtensionScalar,
+  // BuilderExtensionScalar,
 ]>
 
 // dprint-ignore
@@ -80,6 +80,7 @@ export const createWithContext = (
 
   // @ts-expect-error ignoreme
   const clientDirect: Client = {
+    ...builderExtensionInternal2(createWithContext, context),
     ...builderExtensionInternal(createWithContext, context),
     ...builderExtensionGql(createWithContext, context),
     ...builderExtensionWith(createWithContext, context),

@@ -14,6 +14,7 @@ export const create: Create = (parameters) => {
   const builder: Builder = {
     type: overload,
     config: () => builder as any,
+    configInit: () => builder as any,
     stepWithExtendedInput: () => builder.step as any,
     step: (name, spec) => {
       overload.steps[name] = {
@@ -55,6 +56,10 @@ export interface Builder<
   config: <$InputExtension extends object>() => Builder<
     $Pipeline,
     Overload.Updaters.SetInput<$Overload, $InputExtension>
+  >
+  configInit: <$InputExtension extends object>() => Builder<
+    $Pipeline,
+    Overload.Updaters.SetInputInit<$Overload, $InputExtension>
   >
   /**
    * TODO

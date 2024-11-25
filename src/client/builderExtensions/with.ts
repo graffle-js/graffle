@@ -22,7 +22,7 @@ export interface With<$Args extends Builder.Extension.Parameters<BuilderExtensio
     // @ts-ignore Passes after generation
   ) => Builder.Definition.MaterializeWith<
     $Args['definition'],
-    ConfigManager.SetProperties<
+    ConfigManager.SetKeys<
       $Args['context'],
       {
         input: $Args['context']['input'] & $Input

@@ -145,6 +145,48 @@ export type ExtensionInputParametersNone = []
 export type ExtensionInputParametersOptional = [input?: object]
 export type ExtensionInputParametersRequired = [input: object]
 
+export interface ExtensionDefinition {
+  name: string
+  builder?: BuilderExtension
+  onRequest?: Anyware.Interceptor.InferFromPipeline<RequestPipelineBase>
+  // typeHooks?: () => TypeHooks
+  transport?: (
+    OverloadBuilder: { create: Transport.Builder.Create },
+  ) => Anyware.Overload.Builder
+}
+
+export const createExtensionDefinition = <
+  // $Definition extends ExtensionDefinition,
+  $Name extends string,
+  $TransportCallbackResult extends undefined | Anyware.Overload.Builder = undefined,
+>(definition: {
+  name: $Name
+  // builder?: $BuilderExtension
+  // onRequest?: Anyware.Interceptor.InferFromPipeline<RequestPipelineBase>
+  // typeHooks?: () => $TypeHooks
+  transport?(
+    OverloadBuilder: { create: Transport.Builder.Create },
+  ): $TransportCallbackResult
+}): Extension<
+  $Name,
+  object,
+  undefined,
+  EmptyTypeHooks,
+  $TransportCallbackResult extends Anyware.Overload.Builder ? {
+      // todo fixme
+      // Names of transports can only be strings but its wider for anyware overloads
+      name: AssertExtendsString<$TransportCallbackResult['type']['discriminant'][1]>
+      config: $TransportCallbackResult['type']['input']
+      configInit: $TransportCallbackResult['type']['inputInit'] extends object
+        ? $TransportCallbackResult['type']['inputInit']
+        : {}
+      requestPipelineOverload: $TransportCallbackResult['type']
+    }
+    : undefined
+> => {
+  return definition
+}
+
 export const createExtension = <
   $Name extends string,
   $BuilderExtension extends BuilderExtension = BuilderExtension,
@@ -153,19 +195,7 @@ export const createExtension = <
   $Config extends object = object,
   $Custom extends object = object,
   $TransportCallbackResult extends undefined | Anyware.Overload.Builder = undefined,
-> // $x extends undefined | ((...args: $ConfigInputParameters) => $Config) = undefined,
-// $Input extends {
-//   name: $Name
-//   normalizeConfig?: (...args: $ConfigInputParameters) => $Config
-//   custom?: $Custom
-//   create: (params: { config: $Config }) => {
-//     builder?: $BuilderExtension
-//     onRequest?: Anyware.Extension2<RequestPipeline.Core>
-//     typeHooks?: () => $TypeHooks
-//   }
-// } = any
-(
-  // definitionInput: $Input,
+>(
   definitionInput: {
     name: $Name
     normalizeConfig?: (...args: $ConfigInputParameters) => $Config
@@ -174,7 +204,9 @@ export const createExtension = <
       builder?: $BuilderExtension
       onRequest?: Anyware.Interceptor.InferFromPipeline<RequestPipelineBase>
       typeHooks?: () => $TypeHooks
-      transport?: (OverloadBuilder: { create: Transport.Builder.Create }) => $TransportCallbackResult
+      transport?(
+        OverloadBuilder: { create: Transport.Builder.Create },
+      ): $TransportCallbackResult
     }
   },
 ): ExtensionConstructor<
@@ -188,7 +220,7 @@ export const createExtension = <
       // todo fixme
       // Names of transports can only be strings but its wider for anyware overloads
       name: AssertExtendsString<$TransportCallbackResult['type']['discriminant'][1]>
-      config: {}
+      config: $TransportCallbackResult['type']['input']
       requestPipelineOverload: $TransportCallbackResult['type']
     }
     : undefined

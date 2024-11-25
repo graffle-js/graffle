@@ -46,7 +46,7 @@ export namespace Context {
         {
           configurations: $Context['transports'] extends ClientTransports.States.Empty
             ? {
-                [_ in $Transport['name']]: $Transport['config'] // todo
+                [_ in $Transport['name']]: $Transport['configInit']
               }
             : $Context['transports']['configurations']
           current: $Context['transports'] extends ClientTransports.States.Empty
@@ -134,14 +134,29 @@ interface ClientTransportsConfigurations {
 export namespace ClientTransports {
   export namespace Errors {
     export type NoTransportsRegistered = 'Error: Transport registry is empty. Please add a transport.'
+
     export type PreflightCheckNoTransportsRegistered =
       'Error: You cannot send requests yet. You must setup a transport.'
+
+    export type PreflightCheckNoTransportSelected =
+      'Error: You cannot send requests yet. You must select a transport to use.'
+
+    export type PreflightCheckTransportNotReady<$TransportName extends string> =
+      `Error: You cannot send requests yet. The selected transport "${$TransportName}" is not sufficiently configured.`
   }
   // dprint-ignore
   export type PreflightCheck<$ClientTransports extends ClientTransports, $SuccessValue = true> =
     $ClientTransports extends ClientTransports.States.Empty
       ? ClientTransports.Errors.PreflightCheckNoTransportsRegistered
-      : $SuccessValue
+      : $ClientTransports['current'] extends string
+        ? $ClientTransports['current'] extends keyof $ClientTransports['configurations']
+          ? $ClientTransports['current'] extends keyof $ClientTransports['registry']
+            ? $ClientTransports['configurations'][$ClientTransports['current']] extends $ClientTransports['registry'][$ClientTransports['current']]['config']
+              ? $SuccessValue
+              : ClientTransports.Errors.PreflightCheckTransportNotReady<$ClientTransports['current']>
+            : never // Should never happen
+          : never // Should never happen
+        : ClientTransports.Errors.PreflightCheckNoTransportSelected
 
   // dprint-ignore
   export type GetNames<$ClientTransports extends ClientTransports> =
