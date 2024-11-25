@@ -1,8 +1,8 @@
 import { createExtension } from '../../extension/extension.js'
+import { TransportExtension } from '../../extension/transportExtension.js'
 import type { Grafaid } from '../../lib/grafaid/__.js'
 import { print } from '../../lib/grafaid/document.js'
 import { execute } from '../../lib/grafaid/execute.js'
-import { TransportExtension } from '../../transportExtension/transportExtension.js'
 
 export const TransportMemory = createExtension({
   name: `TransportMemory`,

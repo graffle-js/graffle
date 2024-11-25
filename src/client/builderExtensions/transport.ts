@@ -23,7 +23,7 @@ interface BuilderExtensionSetTransportReturn<$Args extends Builder.Extension.Par
           (transport: $Transport) =>
             Builder.Definition.MaterializeWith<
               $Args['definition'],
-              ConfigManager.UpdateAtKey<
+              ConfigManager.SetKey<
                 $Args['context'],
                 'transport',
                 {
@@ -55,7 +55,7 @@ type TransportMethod<$Args extends Builder.Extension.Parameters<BuilderExtension
           (config: $Config):
             Builder.Definition.MaterializeWith<
               $Args['definition'],
-              ConfigManager.SetAtKeyPath<
+              ConfigManager.SetKeyAtPath<
                 $Args['context'],
                 ['transport', 'configurations', $Args['context']['transport']['current']],
                 $Config
@@ -73,7 +73,7 @@ type TransportMethod<$Args extends Builder.Extension.Parameters<BuilderExtension
           (name: $Name, config?: $Config):
             Builder.Definition.MaterializeWith<
               $Args['definition'],
-              ConfigManager.UpdateAtKey<
+              ConfigManager.SetKey<
                 $Args['context'],
                 'transport',
                 {
