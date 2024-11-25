@@ -1,6 +1,10 @@
-import { kitchenSink as g } from '../../../tests/_/helpers.js'
+import { kitchenSink } from '../../../tests/_/helpers.js'
+import { Graffle } from '../../entrypoints/__Graffle.js'
 import { AssertTypeOf } from '../../lib/assert-equal.js'
 import type { Grafaid } from '../../lib/grafaid/__.js'
+import type { ClientTransports } from '../context.js'
+
+const g = kitchenSink
 
 type D = { id: 0 }
 
@@ -9,6 +13,13 @@ const d1 = 0 as any as Grafaid.Document.Typed.Node<{ id: 0 }, {}>
 AssertTypeOf<D | null>(await g.gql(d1).send())
 // @ts-expect-error - variables not allowed.
 await g.gql(d1).send({})
+
+//
+//
+//
+
+// Not available if no transports registered
+AssertTypeOf<ClientTransports.Errors.PreflightCheckNoTransportsRegistered>(Graffle.create().gql)
 
 //
 //

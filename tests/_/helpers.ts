@@ -5,9 +5,12 @@ import * as Path from 'node:path'
 import type { Mock } from 'vitest'
 import { test as testBase, vi } from 'vitest'
 import type { Client } from '../../src/client/client.js'
-import type { TransportConfigHttp, TransportConfigMemory } from '../../src/client/Settings/Config.js'
+// import type { TransportConfigHttp, TransportConfigMemory } from '../../src/client/Settings/Config.js'
+import type { ContextEmpty } from '../../src/client/context.js'
 import { Graffle } from '../../src/entrypoints/main.js'
 import type { Context, SchemaDrivenDataMap } from '../../src/entrypoints/utilities-for-generated.js'
+import { TransportHttp } from '../../src/extensions/TransportHttp/TransportHttp.js'
+import { TransportMemory } from '../../src/extensions/TransportMemory/TransportMemory.js'
 import type { ConfigManager } from '../../src/lib/config-manager/__.js'
 import { Grafaid } from '../../src/lib/grafaid/__.js'
 import { CONTENT_TYPE_REC } from '../../src/lib/grafaid/http/http.js'
@@ -27,9 +30,10 @@ interface Project {
   }>
 }
 
-export const kitchenSink = KitchenSink.create({
-  schema: kitchenSinkSchema,
-})
+export const kitchenSink = KitchenSink
+  .create().use(TransportMemory({
+    schema: kitchenSinkSchema,
+  }))
 
 export const createResponse = (body: object) =>
   new Response(JSON.stringify(body), { status: 200, headers: { 'content-type': CONTENT_TYPE_REC } })
@@ -37,29 +41,29 @@ export const createResponse = (body: object) =>
 interface Fixtures {
   fetch: Mock<(request: Request) => Promise<Response>>
   pokemonService: SchemaService
-  graffle: Client<Context>
+  graffle: Client
   kitchenSink: Client<
-    ConfigManager.SetProperties<
-      Context,
+    ConfigManager.SetKeys<
+      ContextEmpty,
       {
         name: `default`
         schemaMap: SchemaDrivenDataMap
         config: {
           output: Context['config']['output']
-          transport: TransportConfigMemory
+          // transport: TransportConfigMemory
         }
       }
     >
   >
   kitchenSinkHttp: Client<
-    ConfigManager.SetProperties<
-      Context,
+    ConfigManager.SetKeys<
+      ContextEmpty,
       {
         name: `default`
         schemaMap: SchemaDrivenDataMap
         config: {
           output: Context['config']['output']
-          transport: TransportConfigHttp
+          // transport: TransportConfigHttp
         }
       }
     >
@@ -154,7 +158,8 @@ export const test = testBase.extend<Fixtures>({
     globalThis.fetch = fetch
   },
   kitchenSink: async ({ fetch: _ }, use) => {
-    const kitchenSink = KitchenSink.create({ schema: kitchenSinkSchema })
+    const kitchenSink = KitchenSink.create()
+      .use(TransportMemory({ schema: kitchenSinkSchema }))
     // kitchenSink.anyware(async ({ encode }) => {
     //   encode({ input: {}})
     // })
@@ -162,7 +167,9 @@ export const test = testBase.extend<Fixtures>({
     await use(kitchenSink)
   },
   kitchenSinkHttp: async ({ fetch: _ }, use) => {
-    const kitchenSink = KitchenSink.create({ schema: `https://foo.io/api/graphql` })
+    const kitchenSink = KitchenSink
+      .create()
+      .use(TransportHttp({ url: `https://foo.io/api/graphql` }))
     kitchenSink._.extensions
     // @ts-expect-error fixme
     await use(kitchenSink)
@@ -171,7 +178,9 @@ export const test = testBase.extend<Fixtures>({
     await use(db)
   },
   graffle: async ({ fetch: _ }, use) => {
-    const graffle = Graffle.create({ schema: new URL(`https://foo.io/api/graphql`) })
+    const graffle = Graffle
+      .create()
+      .use(TransportHttp({ schema: new URL(`https://foo.io/api/graphql`) }))
     // @ts-expect-error fixme
     await use(graffle)
   },

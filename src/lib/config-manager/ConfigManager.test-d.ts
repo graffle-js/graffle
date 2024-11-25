@@ -14,12 +14,12 @@ interface x1 {
 }
 
 assertEqual<
-  ConfigManager.SetProperties<x1, {
+  ConfigManager.SetKeys<x1, {
     a: [1, 2]
-    b: boolean
     c: { y: 2 }
+    keyThatDoesNotExistOnX1: boolean
   }>,
-  { z: number; a: [1, 2]; b: boolean; c: { y: 2 } }
+  { z: number; a: [1, 2]; c: { y: 2 } }
 >()
 
 // dprint-ignore

@@ -35,10 +35,14 @@ graffle.transport({
 
 */
 
+const transportHttp = TransportHttp()
+
+transportHttp.transport.requestPipelineOverload
+
 namespace Graffle2 {
   const defaultBase = Graffle
     .create()
-    .use(TransportHttp())
+    .use(transportHttp)
 
   export const create = Graffle.createPresetFromContext(defaultBase._)
 }
@@ -55,6 +59,7 @@ const graffle = Graffle2
   // .use(TransportHttp({
   //   url: publicGraphQLSchemaEndpoints.Pokemon,
   // }))
+  .create()
   .anyware(({ exchange }) =>
     exchange({
       using: {
@@ -64,6 +69,8 @@ const graffle = Graffle2
       },
     })
   )
+
+graffle._.transports
 
 const data = await graffle.gql`{ pokemon { name } }`.send()
 

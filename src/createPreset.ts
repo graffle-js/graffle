@@ -10,10 +10,6 @@ export const createPreset = <$Client extends Client>(client: $Client) => {
 
 export const createPresetFromContext = <$Context extends Context>(
   context: $Context,
-): {
-  create: () => Client<$Context>
-} => {
-  return {
-    create: () => __(context),
-  }
+): () => Client<$Context> => {
+  return () => __(context)
 }

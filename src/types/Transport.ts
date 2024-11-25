@@ -1,10 +1,30 @@
-export type Transport = TransportMemory | TransportHttp
+import type { Anyware } from '../lib/anyware/__.js'
+import { __ } from '../lib/prelude.js'
+import type { RequestPipelineBaseDefinition } from '../requestPipeline/__.js'
 
-export type TransportMemory = typeof Transport.memory
+export interface Transport {
+  name: string
+  requestPipelineOverload: Anyware.Overload
+  config: object
+}
 
-export type TransportHttp = typeof Transport.http
+export namespace Transport {
+  export namespace Builder {
+    export interface Namespace {
+      create: Create
+    }
 
-export const Transport = {
-  memory: `memory`,
-  http: `http`,
-} as const
+    export const create: Create = (name) => {
+      name
+      __()
+    }
+
+    export interface Create {
+      <$Name extends string>(name: $Name): Anyware.Overload.Builder<RequestPipelineBaseDefinition, {
+        discriminant: ['transportType', $Name]
+        input: {}
+        steps: {}
+      }>
+    }
+  }
+}

@@ -142,13 +142,13 @@ export type GetOptional<$Value, $Path extends [...string[]]> =
                                                                           : undefined
                                                                         : $Value
 
-/**
- * Merge new properties from the second object into the first object.
- * If those properties already exist in the first object they will be overwritten.
- */
-// dprint-ignore
-export type SetProperties<$Object1 extends object, $Object2 extends object> =
-    Simplify<Omit<$Object1, keyof $Object2> & $Object2>
+// /**
+//  * Merge new properties from the second object into the first object.
+//  * If those properties already exist in the first object they will be overwritten.
+//  */
+// // dprint-ignore
+// export type SetProperties<$Object1 extends object, $Object2 extends object> =
+//     Simplify<Omit<$Object1, keyof $Object2> & $Object2>
 
 // dprint-ignore
 export type SetMany<$Obj extends object, $Sets extends [Path, any][]> =
@@ -206,6 +206,9 @@ export type UpdateKeyWithIntersection<
 /**
  * Set a batch of keys on an object.
  * Each key in the batch REPLACES the key on the target object.
+ *
+ * If the batch contains a key that does not exist on the target object,
+ * then the key is IGNORED.
  */
 // dprint-ignore
 export type SetKeys<

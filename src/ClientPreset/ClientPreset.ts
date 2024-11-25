@@ -42,7 +42,7 @@ export const create: CreatePrefilled = (args) => {
       scalars,
       schemaMap,
       requestPipelineDefinition: requestPipelineBaseDefinition,
-      transport: Context.Transport.State.empty,
+      transports: Context.Transport.States.empty,
       input: {
         schema: args.schemaUrl,
         // eslint-disable-next-line

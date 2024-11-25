@@ -15,7 +15,13 @@ import { type BuilderExtensionScalar, builderExtensionScalar } from './builderEx
 import type { BuilderExtensionTransport } from './builderExtensions/transport.js'
 import { type BuilderExtensionUse, builderExtensionUse } from './builderExtensions/use.js'
 import { type BuilderExtensionWith, builderExtensionWith } from './builderExtensions/with.js'
-import { Context, type ContextEmpty, type ContextWithoutConfig, createContext } from './context.js'
+import {
+  ClientTransports,
+  type Context,
+  type ContextEmpty,
+  type ContextWithoutConfig,
+  createContext,
+} from './context.js'
 import { type BuilderExtensionGql, builderExtensionGql } from './gql/gql.js'
 import { type InputStatic } from './Settings/Input.js'
 import { type NormalizeInput } from './Settings/InputToConfig.js'
@@ -26,7 +32,7 @@ export type Client<$Context extends Context = Context> = Builder.Definition.Mate
 >
 
 type ClientDefinition = Builder.Definition.Create<[
-  BuilderExtensionTransport,
+  // BuilderExtensionTransport,
   BuilderExtensionInternal,
   BuilderExtensionRequestMethods,
   BuilderExtensionWith,
@@ -57,7 +63,7 @@ export const create: Create = (input) => {
   const initialContext = createContext({
     name: input?.name ?? defaultName,
     schemaMap: input?.schemaMap ?? null,
-    transport: Context.Transport.State.empty,
+    transports: ClientTransports.States.empty,
     requestPipelineDefinition: requestPipelineBaseDefinition,
     extensions: [],
     scalars: Schema.Scalar.Registry.empty,

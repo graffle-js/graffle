@@ -16,7 +16,6 @@ import {
 } from '../lib/prelude.js'
 import type { RequestPipelineBase } from '../requestPipeline/RequestPipeline.js'
 import type { GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
-import type { TransportHttp } from '../types/Transport.js'
 import type { Context } from './context.js'
 import {
   type Config,

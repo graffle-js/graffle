@@ -668,6 +668,8 @@ export type GetOrNever<$O extends object, $P extends string> =
 // dprint-ignore
 export type AssertExtendsObject<$Type> =AssertExtends<$Type, object>
 
+export type AssertExtendsString<$Type> = AssertExtends<$Type, string>
+
 // dprint-ignore
 export type AssertExtends<$Type, $Constraint> =
   $Type extends $Constraint

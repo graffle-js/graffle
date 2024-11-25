@@ -1,5 +1,4 @@
 import type { Extension } from '../../extension/extension.js'
-import type { Anyware } from '../../lib/anyware/__.js'
 import { Builder } from '../../lib/builder/__.js'
 import type { ConfigManager } from '../../lib/config-manager/__.js'
 import { type Context } from '../context.js'
@@ -30,20 +29,14 @@ export type UseExtensionDo<
   // Extend context.
   // dprint-ignore
   ConfigManager.SetKeyAtPath<
-    ConfigManager.SetKey<
+    Context.Updaters.AddTransportOptional<
       ConfigManager.UpdateKeyWithAppend<
         $Args['context'],
         'extensions',
         $Extension
       >,
-      'requestPipelineDefinition',
-      $Extension['transport'] extends Anyware.Overload
-        ? Anyware.PipelineDef.Updaters.AddOverload<
-            $Args['context']['requestPipelineDefinition'],
-            $Extension['transport']
-          >
-        : $Args['context']['requestPipelineDefinition']
-      >,
+      $Extension['transport']
+    >,
     ['typeHooks', 'onRequestResult'],
     ConfigManager.AppendOptional<
       $Args['context']['typeHooks']['onRequestResult'],

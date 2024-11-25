@@ -1,70 +1,69 @@
 import type { Extension } from '../extension/extension.js'
 import type { Anyware } from '../lib/anyware/__.js'
+import type { ConfigManager } from '../lib/config-manager/__.js'
 import type { Objekt, StringKeyof } from '../lib/prelude.js'
 import type { RequestPipelineBaseDefinition } from '../requestPipeline/RequestPipeline.js'
 import type { Schema } from '../types/Schema/__.js'
 import type { SchemaDrivenDataMap } from '../types/SchemaDrivenDataMap/SchemaDrivenDataMap.js'
+import type { Transport } from '../types/Transport.js'
 import type { Config } from './Settings/Config.js'
 import type { InputStatic } from './Settings/Input.js'
 import { inputToConfig } from './Settings/InputToConfig.js'
 
-export interface Transport {
-  name: string
-  config: object
-}
-
-type TransportDefinition = Transport
-
 export namespace Context {
-  export interface Transport {
-    registry: TransportRegistry
-    /**
-     * `null` if registry is empty.
-     */
-    current: null | string
-    configurations: TransportConfigurations
-  }
-
-  interface TransportRegistry {
-    [name: string]: TransportDefinition
-  }
-
-  interface TransportConfigurations {
-    [name: string]: object
-  }
-
-  export namespace Transport {
+  export namespace Updaters {
     // dprint-ignore
-    export type GetNames<$TransportContext extends Context.Transport> =
-      Objekt.IsEmpty<$TransportContext['registry']> extends true
-        ? 'Error: Transport registry is empty. Please add a transport.'
-        : StringKeyof<$TransportContext['registry']>
+    export type AddTransportOptional<
+      $Context extends Context,
+      $Transport extends Transport | undefined,
+    > =
+      $Transport extends Transport
+        ? AddTransport<$Context, $Transport>
+        : $Context
 
-    export namespace State {
-      export interface Empty {
-        registry: {}
-        configurations: {}
-        current: null
-      }
-      export const empty: Empty = {
-        registry: {},
-        configurations: {},
-        current: null,
-      }
+    // dprint-ignore
+    export type AddTransport<
+      $Context extends Context,
+      $Transport extends Transport,
+    > =
+      AddTransportToRegistry<
+        ConfigManager.SetKey<
+          $Context,
+          'requestPipelineDefinition',
+          Anyware.PipelineDef.Updaters.AddOverload<
+            $Context['requestPipelineDefinition'],
+            $Transport['requestPipelineOverload']
+          >
+        >,
+        $Transport
+      >
 
-      export interface NonEmpty {
-        registry: TransportRegistry
-        configurations: TransportConfigurations
-        current: string
-      }
-    }
+    // dprint-ignore
+    type AddTransportToRegistry<$Context extends Context, $Transport extends Transport> =
+      ConfigManager.SetKey<
+        $Context,
+        'transports',
+        {
+          configurations: $Context['transports'] extends ClientTransports.States.Empty
+            ? {
+                [_ in $Transport['name']]: $Transport['config'] // todo
+              }
+            : $Context['transports']['configurations']
+          current: $Context['transports'] extends ClientTransports.States.Empty
+            ? $Transport['name']
+            : $Context['transports']['current']
+          registry: $Context['transports']['registry'] & {
+            [_ in $Transport['name']]: $Transport
+          }
+        }
+      >
   }
 }
 
 export interface Context {
   name: string
   requestPipelineDefinition: Anyware.PipelineDef
-  transport: Context.Transport
+  transports: ClientTransports
   /**
    * The initial input that was given to derive the config.
    */
@@ -90,7 +89,7 @@ export interface ContextEmpty extends Context {
   scalars: Schema.Scalar.Registry.Empty
   typeHooks: TypeHooksEmpty
   extensions: []
-  transport: Context.Transport.State.Empty
+  transports: ClientTransports.States.Empty
   schemaMap: null
   input: {}
   requestPipelineDefinition: RequestPipelineBaseDefinition
@@ -114,3 +113,58 @@ export const createContext = (contextWithoutConfig: ContextWithoutConfig): Conte
 }
 
 export type ContextWithoutConfig = Omit<Context, 'config' | 'typeHooks'>
+
+export interface ClientTransports {
+  registry: ClientTransportsRegistry
+  /**
+   * `null` if registry is empty.
+   */
+  current: null | string
+  configurations: ClientTransportsConfigurations
+}
+
+interface ClientTransportsRegistry {
+  [name: string]: Transport
+}
+
+interface ClientTransportsConfigurations {
+  [name: string]: object
+}
+
+export namespace ClientTransports {
+  export namespace Errors {
+    export type NoTransportsRegistered = 'Error: Transport registry is empty. Please add a transport.'
+    export type PreflightCheckNoTransportsRegistered =
+      'Error: You cannot send requests yet. You must setup a transport.'
+  }
+  // dprint-ignore
+  export type PreflightCheck<$ClientTransports extends ClientTransports, $SuccessValue = true> =
+    $ClientTransports extends ClientTransports.States.Empty
+      ? ClientTransports.Errors.PreflightCheckNoTransportsRegistered
+      : $SuccessValue
+
+  // dprint-ignore
+  export type GetNames<$ClientTransports extends ClientTransports> =
+      Objekt.IsEmpty<$ClientTransports['registry']> extends true
+        ? 'Error: Transport registry is empty. Please add a transport.'
+        : StringKeyof<$ClientTransports['registry']>
+
+  export namespace States {
+    export interface Empty {
+      registry: {}
+      configurations: {}
+      current: null
+    }
+    export const empty: Empty = {
+      registry: {},
+      configurations: {},
+      current: null,
+    }
+
+    export interface NonEmpty {
+      registry: ClientTransportsRegistry
+      configurations: ClientTransportsConfigurations
+      current: string
+    }
+  }
+}

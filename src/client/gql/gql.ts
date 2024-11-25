@@ -8,6 +8,7 @@ import {
   type TemplateStringsArguments,
 } from '../../lib/template-string.js'
 import type { RequestPipelineBase } from '../../requestPipeline/RequestPipeline.js'
+import type { ClientTransports } from '../context.js'
 import { type Context } from '../context.js'
 import { handleOutput } from '../handleOutput.js'
 import { type DocumentController, resolveSendArguments, type sendArgumentsImplementation } from './send.js'
@@ -20,7 +21,10 @@ export interface BuilderExtensionGql extends Builder.Extension {
 
 // dprint-ignore
 interface Gql<$Arguments extends Builder.Extension.Parameters<BuilderExtensionGql>> {
-  gql: gqlOverload<$Arguments>
+  gql: ClientTransports.PreflightCheck<
+    $Arguments['context']['transports'],
+    gqlOverload<$Arguments>
+  >
 }
 
 // dprint-ignore

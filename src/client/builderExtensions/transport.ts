@@ -1,6 +1,8 @@
 import { Builder } from '../../lib/builder/__.js'
 import type { ConfigManager } from '../../lib/config-manager/__.js'
-import { type Context, type Transport } from '../context.js'
+import type { Transport } from '../../types/Transport.js'
+import type { ClientTransports } from '../context.js'
+import { type Context } from '../context.js'
 
 export interface BuilderExtensionTransport extends Builder.Extension {
   context: Context
@@ -23,41 +25,28 @@ interface BuilderExtensionSetTransportReturn<$Args extends Builder.Extension.Par
           (transport: $Transport) =>
             Builder.Definition.MaterializeWith<
               $Args['definition'],
-              ConfigManager.SetKey<
+              Context.Updaters.AddTransport<
                 $Args['context'],
-                'transport',
-                {
-                  configurations: $Args['context']['transport'] extends Context.Transport.State.Empty
-                    ? {
-                        [_ in $Transport['name']]: $Transport['config'] // todo: initial config...
-                      }
-                    : $Args['context']['transport']['configurations']
-                  current: $Args['context']['transport'] extends Context.Transport.State.Empty
-                    ? $Transport['name']
-                    : $Args['context']['transport']['current']
-                  registry: $Args['context']['transport']['registry'] & {
-                    [_ in $Transport['name']]: $Transport
-                  }
-                }
+                $Transport
               >
             >
 }
 
 // dprint-ignore
 type TransportMethod<$Args extends Builder.Extension.Parameters<BuilderExtensionTransport>> =
-  $Args['context']['transport'] extends Context.Transport.State.NonEmpty
+  $Args['context']['transports'] extends ClientTransports.States.NonEmpty
     ? {
         /**
          * Configure the current transport.
          * TODO
          */
-        <$Config extends $Args['context']['transport']['registry'][$Args['context']['transport']['current']]['config']>
+        <$Config extends $Args['context']['transports']['registry'][$Args['context']['transports']['current']]['config']>
           (config: $Config):
             Builder.Definition.MaterializeWith<
               $Args['definition'],
               ConfigManager.SetKeyAtPath<
                 $Args['context'],
-                ['transport', 'configurations', $Args['context']['transport']['current']],
+                ['transport', 'configurations', $Args['context']['transports']['current']],
                 $Config
                 // $Args['context']['transport']['registry'][$Transport['name']]['config'] & { [_ in $Transport['name']]: $Transport }
               >
@@ -67,8 +56,8 @@ type TransportMethod<$Args extends Builder.Extension.Parameters<BuilderExtension
          * TODO
          */
         <
-          $Name extends Context.Transport.GetNames<$Args['context']['transport']>,
-          $Config extends $Args['context']['transport']['registry'][$Name]['config']
+          $Name extends ClientTransports.GetNames<$Args['context']['transports']>,
+          $Config extends $Args['context']['transports']['registry'][$Name]['config']
         >
           (name: $Name, config?: $Config):
             Builder.Definition.MaterializeWith<
@@ -77,8 +66,8 @@ type TransportMethod<$Args extends Builder.Extension.Parameters<BuilderExtension
                 $Args['context'],
                 'transport',
                 {
-                  configurations: $Args['context']['transport']['configurations']
-                  registry: $Args['context']['transport']['registry']
+                  configurations: $Args['context']['transports']['configurations']
+                  registry: $Args['context']['transports']['registry']
                   // update:
                   current: $Name,
                 }
@@ -93,14 +82,14 @@ export const builderExtensionSetTransport = Builder.Extension.create<BuilderExte
       const newState = {
         ...state,
         transport: {
-          ...state.transport,
+          ...state.transports,
           registry: {
-            ...state.transport.registry,
+            ...state.transports.registry,
             [transport.name]: transport,
           },
         },
       }
-      if (!state.transport.current) {
+      if (!state.transports.current) {
         newState.transport.current = transport.name
         newState.transport.configurations[transport.name] = {} // todo initial configuration...
       }
@@ -109,11 +98,11 @@ export const builderExtensionSetTransport = Builder.Extension.create<BuilderExte
     setTransport: (name: string, config?: any) => {
       return builder({
         ...state,
-        transport: {
-          ...state.transport,
+        transports: {
+          ...state.transports,
           configurations: {
-            ...state.transport.configurations,
-            [name]: config ?? state.transport.configurations[name],
+            ...state.transports.configurations,
+            [name]: config ?? state.transports.configurations[name],
           },
           current: name,
         },
