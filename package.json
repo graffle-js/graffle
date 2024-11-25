@@ -35,6 +35,12 @@
     "./extensions/schema-errors/generator": {
       "default": "./build/entrypoints/extensions/schema-errors/gentime.js"
     },
+    "./extensions/transport-memory": {
+      "default": "./build/entrypoints/extensions/transport-memory/runtime.js"
+    },
+    "./extensions/transport-http": {
+      "default": "./build/entrypoints/extensions/transport-http/runtime.js"
+    },
     "./client": {
       "default": "./build/entrypoints/client.js"
     },
