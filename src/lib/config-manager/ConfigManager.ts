@@ -195,6 +195,29 @@ export type UpdateKeyWithIntersection<
     [_ in $PropertyName]: $Type
   }
 
+// // dprint-ignore
+// export type SetKeysExtends<
+//   $ObjConstraint extends object,
+//   $Obj extends $ObjConstraint,
+//   $NewObjValues extends Partial<$ObjConstraint>,
+// > =
+//   SetKeys<$Obj, $NewObjValues>
+
+/**
+ * Set a batch of keys on an object.
+ * Each key in the batch REPLACES the key on the target object.
+ */
+// dprint-ignore
+export type SetKeys<
+  $Obj extends object,
+  $NewObjValues extends object,
+> = {
+  [_ in keyof $Obj]:
+    _ extends keyof $NewObjValues
+      ? $NewObjValues[_]
+      : $Obj[_]
+}
+
 export type SetKey<
   $Obj extends object,
   $PropertyName extends keyof $Obj,

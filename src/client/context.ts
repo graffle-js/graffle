@@ -1,6 +1,7 @@
 import type { Extension } from '../extension/extension.js'
 import type { Anyware } from '../lib/anyware/__.js'
 import type { Objekt, StringKeyof } from '../lib/prelude.js'
+import type { RequestPipelineBaseDefinition } from '../requestPipeline/RequestPipeline.js'
 import type { Schema } from '../types/Schema/__.js'
 import type { SchemaDrivenDataMap } from '../types/SchemaDrivenDataMap/SchemaDrivenDataMap.js'
 import type { Config } from './Settings/Config.js'
@@ -83,6 +84,16 @@ export interface Context {
     onRequestResult: Extension.Hooks.OnRequestResult[]
     onRequestDocumentRootType: Extension.Hooks.OnRequestDocumentRootType[]
   }
+}
+
+export interface ContextEmpty extends Context {
+  scalars: Schema.Scalar.Registry.Empty
+  typeHooks: TypeHooksEmpty
+  extensions: []
+  transport: Context.Transport.State.Empty
+  schemaMap: null
+  input: {}
+  requestPipelineDefinition: RequestPipelineBaseDefinition
 }
 
 export type TypeHooksEmpty = {

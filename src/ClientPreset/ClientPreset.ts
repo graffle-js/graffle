@@ -1,8 +1,8 @@
 import type { CamelCase } from 'type-fest'
 import type { UseExtensionDo } from '../client/builderExtensions/use.js'
 import { type Client, createWithContext } from '../client/client.js'
-import { Context, createContext, type TypeHooksEmpty } from '../client/context.js'
-import type { InputBase } from '../client/Settings/Input.js'
+import { Context, type ContextEmpty, createContext } from '../client/context.js'
+import type { OutputInput } from '../client/Settings/inputIncrementable/output.js'
 import type { NormalizeInput } from '../client/Settings/InputToConfig.js'
 import type {
   Extension,
@@ -15,11 +15,7 @@ import type {
 import type { Builder } from '../lib/builder/__.js'
 import type { ConfigManager } from '../lib/config-manager/__.js'
 import { type ToParametersExact, type Tuple } from '../lib/prelude.js'
-import {
-  type RequestPipelineBaseDefinition,
-  requestPipelineBaseDefinition,
-} from '../requestPipeline/RequestPipeline.js'
-import type { GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
+import { requestPipelineBaseDefinition } from '../requestPipeline/RequestPipeline.js'
 import { Schema } from '../types/Schema/__.js'
 import type { SchemaDrivenDataMap } from '../types/SchemaDrivenDataMap/__.js'
 
@@ -88,19 +84,18 @@ type CreatePrefilled = <
     ): ApplyPrefilledExtensions<
       ConfigManager.OrDefault<$Params['extensions'], []>,
       // @ts-expect-error fixme
-      Client<{
-        input: $ClientKeywordArgs
-        name: $Params['name']
-        schemaMap: ConfigManager.OrDefault<$Params['sddm'], null>
-        requestPipelineDefinition: RequestPipelineBaseDefinition
-        transport: Context.Transport.State.Empty
-        scalars: ConfigManager.OrDefault<$Params['scalars'], Schema.Scalar.Registry.Empty>
-        config: NormalizeInput<$ClientKeywordArgs & { name: $Name; schemaMap: SchemaDrivenDataMap }>
-        typeHooks: TypeHooksEmpty
-        // This will be populated by statically applying preset extensions.
-        extensions: []
-        // retry: null
-      }>
+      Client<
+        ConfigManager.SetKeys<
+          ContextEmpty,
+          {
+            input: $ClientKeywordArgs
+            name: $Params['name']
+            schemaMap: ConfigManager.OrDefault<$Params['sddm'], null>
+            scalars: ConfigManager.OrDefault<$Params['scalars'], Schema.Scalar.Registry.Empty>
+            config: NormalizeInput<$ClientKeywordArgs & { name: $Name; schemaMap: SchemaDrivenDataMap }>
+          }
+        >
+      >
     >
   }
 
@@ -108,8 +103,10 @@ type ConstructorParameters<
   $Name extends string,
   $Extensions extends [...ExtensionConstructor[]],
 > =
-  & InputBase<GlobalRegistry.GetOrGeneric<$Name>>
   & Tuple.IntersectItems<GetParametersContributedByExtensions<$Extensions>>
+  & {
+    output?: OutputInput
+  }
 
 // dprint-ignore
 type GetParametersContributedByExtensions<Extensions extends [...ExtensionConstructor[]]> = {
@@ -123,7 +120,7 @@ type GetParametersContributedByExtensions<Extensions extends [...ExtensionConstr
 // dprint-ignore
 type ApplyPrefilledExtensions<
   $ExtensionConstructors extends [...ExtensionConstructor[]],
-  $Client extends Client<Context>,
+  $Client extends Client,
 > =
   $ExtensionConstructors extends []
   ? $Client

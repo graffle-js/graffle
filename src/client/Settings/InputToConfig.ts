@@ -1,14 +1,11 @@
-import type { IsUnknown } from 'type-fest'
 import type { ConfigManager } from '../../lib/config-manager/__.js'
 import type { GlobalRegistry } from '../../types/GlobalRegistry/GlobalRegistry.js'
-import { Transport } from '../../types/Transport.js'
-import { defaultMethodMode } from '../transportHttp/request.js'
-import { outputConfigDefault, type TransportConfigHttp, type TransportConfigMemory } from './Config.js'
-import type { InputOutputEnvelopeLonghand, InputStatic, URLInput } from './Input.js'
+import { outputConfigDefault } from './Config.js'
+import type { InputOutputEnvelopeLonghand, InputStatic } from './Input.js'
 
 // dprint-ignore
 export type NormalizeInput<$Input extends InputStatic> = {
-  transport: HandleTransport<$Input>
+  // transport: HandleTransport<$Input>
   output: {
     defaults: {
       errorChannel: ConfigManager.GetAtPathOrDefault<$Input, ['output', 'defaults', 'errorChannel'], 'throw'>
@@ -44,10 +41,10 @@ export const inputToConfig = <$Input extends InputStatic>(
     ? { enabled: input.output.envelope }
     : undefined
 
-  const transport = handleTransport(input)
+  // const transport = handleTransport(input)
 
   return {
-    transport,
+    // transport,
     schemaMap: input.schemaMap ?? null as any,
     output: {
       defaults: {
@@ -80,27 +77,27 @@ export const inputToConfig = <$Input extends InputStatic>(
   }
 }
 
-// dprint-ignore
-type HandleTransport<$Input extends InputStatic> =
-  $Input['schema'] extends URLInput         ? TransportConfigHttp :
-  // When the client is generated via introspection of a URL then the schema defaults to that URL.
-  // This is the only case when schema can be unknown from so we can assume that transport is HTTP.
-  IsUnknown<$Input['schema']> extends true  ? TransportConfigHttp
-                                            : TransportConfigMemory
+// // dprint-ignore
+// type HandleTransport<$Input extends InputStatic> =
+//   $Input['schema'] extends URLInput         ? TransportConfigHttp :
+//   // When the client is generated via introspection of a URL then the schema defaults to that URL.
+//   // This is the only case when schema can be unknown from so we can assume that transport is HTTP.
+//   IsUnknown<$Input['schema']> extends true  ? TransportConfigHttp
+//                                             : TransportConfigMemory
 
-const handleTransport = <T extends InputStatic>(input: T): HandleTransport<T> => {
-  if (input.schema instanceof URL || typeof input.schema === `string`) {
-    return {
-      type: Transport.http,
-      url: input.schema,
-      config: {
-        methodMode: input.transport?.methodMode ?? defaultMethodMode,
-        ...input.transport,
-      },
-    } as any
-  }
-  return {
-    type: Transport.memory,
-    schema: input.schema,
-  } as any
-}
+// const handleTransport = <T extends InputStatic>(input: T): HandleTransport<T> => {
+//   if (input.schema instanceof URL || typeof input.schema === `string`) {
+//     return {
+//       type: Transport.http,
+//       url: input.schema,
+//       config: {
+//         methodMode: input.transport?.methodMode ?? defaultMethodMode,
+//         ...input.transport,
+//       },
+//     } as any
+//   }
+//   return {
+//     type: Transport.memory,
+//     schema: input.schema,
+//   } as any
+// }

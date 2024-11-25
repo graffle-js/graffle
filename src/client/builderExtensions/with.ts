@@ -15,7 +15,7 @@ export interface With<$Args extends Builder.Extension.Parameters<BuilderExtensio
   /**
    * TODO With Docs.
    */
-  with: <$Input extends WithInput<$Args['context']['config']>>(
+  with: <$Input extends WithInput>(
     input: $Input,
     // todo fixme
     // eslint-disable-next-line

@@ -1,7 +1,4 @@
 import type { GraphQLSchema } from 'graphql'
-import type { RequireProperties } from '../../lib/prelude.js'
-import type { TransportHttp, TransportMemory } from '../../types/Transport.js'
-import type { TransportHttpInput } from '../transportHttp/request.js'
 
 export type OutputChannel = 'throw' | 'return'
 
@@ -92,18 +89,10 @@ export type OutputConfigDefault = {
   }
 }
 
-export interface TransportConfigHttp {
-  type: TransportHttp
-  url: string | URL
-  config: RequireProperties<TransportHttpInput, 'methodMode'>
-}
-
 export interface TransportConfigMemory {
-  type: TransportMemory
   schema: GraphQLSchema
 }
 
 export type Config = {
   output: OutputConfig
-  transport: TransportConfigHttp | TransportConfigMemory
 }
