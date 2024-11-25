@@ -1,16 +1,16 @@
 import { beforeEach } from 'vitest'
 import { createExtension } from '../../src/entrypoints/main.js'
-import type { RequestPipelineDefinition } from '../../src/requestPipeline/__.js'
+import type { RequestPipelineBaseDefinition } from '../../src/requestPipeline/__.js'
 
 interface SpyData {
   encode: {
-    input: RequestPipelineDefinition['steps']['0']['input'] | null
+    input: RequestPipelineBaseDefinition['steps']['0']['input'] | null
   }
   pack: {
-    input: RequestPipelineDefinition['steps']['1']['input'] | null
+    input: RequestPipelineBaseDefinition['steps']['1']['input'] | null
   }
   exchange: {
-    input: RequestPipelineDefinition['steps']['2']['input'] | null
+    input: RequestPipelineBaseDefinition['steps']['2']['input'] | null
   }
 }
 

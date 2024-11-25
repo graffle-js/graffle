@@ -2,10 +2,10 @@ import { Anyware } from '../../lib/anyware/__.js'
 import type { Grafaid } from '../../lib/grafaid/__.js'
 import { print } from '../../lib/grafaid/document.js'
 import { execute } from '../../lib/grafaid/execute.js' // todo
-import type { RequestPipelineSpecBase } from '../RequestPipeline.js'
+import type { RequestPipelineBaseDefinition } from '../RequestPipeline.js'
 
 export const memoryTransport = Anyware.Extension.Builder
-  .create<RequestPipelineSpecBase>()
+  .create<RequestPipelineBaseDefinition>()
   .overload(overload =>
     overload
       .create({

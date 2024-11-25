@@ -7,7 +7,7 @@ import {
   joinTemplateStringArrayAndArgs,
   type TemplateStringsArguments,
 } from '../../lib/template-string.js'
-import type { RequestPipeline } from '../../requestPipeline/RequestPipeline.js'
+import type { RequestPipelineBase } from '../../requestPipeline/RequestPipeline.js'
 import { type Context } from '../context.js'
 import { handleOutput } from '../handleOutput.js'
 import { type DocumentController, resolveSendArguments, type sendArgumentsImplementation } from './send.js'
@@ -70,7 +70,7 @@ export const builderExtensionGql = Builder.Extension.create<BuilderExtensionGql>
             url,
             schema,
             request: analyzedRequest,
-          } as RequestPipeline['input']
+          } as RequestPipelineBase['input']
 
           const requestPipeline = Anyware.Pipeline.create(context.requestPipelineDefinition)
           const result = await Anyware.PipelineDef.run(requestPipeline, {

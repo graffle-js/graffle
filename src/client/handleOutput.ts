@@ -14,7 +14,7 @@ import {
   type GetOrNever,
   type Values,
 } from '../lib/prelude.js'
-import type { RequestPipeline, requestPipeline, RequestPipelineDefinition } from '../requestPipeline/RequestPipeline.js'
+import type { RequestPipelineBase } from '../requestPipeline/RequestPipeline.js'
 import type { GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
 import type { TransportHttp } from '../types/Transport.js'
 import type { Context } from './context.js'
@@ -53,7 +53,7 @@ export type GraffleExecutionResultEnvelope<$Config extends Config = Config> =
 
 export const handleOutput = (
   state: Context,
-  result: Anyware.Result<RequestPipeline['output']>,
+  result: Anyware.Result<RequestPipelineBase['output']>,
 ) => {
   if (isContextConfigTraditionalGraphQLOutput(state.config)) {
     if (result instanceof Error) throw result
@@ -164,7 +164,7 @@ type HandleOutput_Envelope<$Context extends Context, $Envelope extends GraffleEx
 // dprint-ignore
 type IfConfiguredGetOutputErrorReturns<$Context extends Context> =
   | (ConfigGetOutputError<$Context, 'execution'>  extends 'return'  ? GraphQLExecutionResultError   : never)
-  | (ConfigGetOutputError<$Context, 'other'>      extends 'return'  ? requestPipeline.ResultFailure : never)
+  | (ConfigGetOutputError<$Context, 'other'>      extends 'return'  ? RequestPipelineBase.ResultFailure : never)
 
 // dprint-ignore
 export type ConfigGetOutputError<$Context extends Context, $ErrorCategory extends ErrorCategory> =

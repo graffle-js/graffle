@@ -1,6 +1,6 @@
 import type { Anyware } from '../lib/anyware/__.js'
 import { __ } from '../lib/prelude.js'
-import type { RequestPipelineDefinition } from '../requestPipeline/RequestPipeline.js'
+import type { RequestPipelineBaseDefinition } from '../requestPipeline/RequestPipeline.js'
 
 export interface TransportExtension extends Anyware.Overload {
   // name: $Name
@@ -11,7 +11,7 @@ export interface TransportExtension extends Anyware.Overload {
 
 export namespace TransportExtension {
   interface Create {
-    <$Name extends string>(name: $Name): Anyware.Overload.Builder<RequestPipelineDefinition, {
+    <$Name extends string>(name: $Name): Anyware.Overload.Builder<RequestPipelineBaseDefinition, {
       discriminant: ['transportType', $Name]
       input: {}
       steps: {}

@@ -28,31 +28,27 @@ export type UseExtensionDo<
       : $Args['definition']
   ),
   // Extend context.
-  ConfigManager.UpdateMany<
-    $Args['context'],
-    [
-      $Extension['transport'] extends undefined ? null
-        : [
-          ['requestPipeline'],
-          Anyware.Pipeline.UpdateContextWithOverload<
-            $Args['context']['requestPipeline']['context'],
+  // dprint-ignore
+  ConfigManager.SetKeyAtPath<
+    ConfigManager.SetKey<
+      ConfigManager.UpdateKeyWithAppend<
+        $Args['context'],
+        'extensions',
+        $Extension
+      >,
+      'requestPipelineDefinition',
+      $Extension['transport'] extends Anyware.Overload
+        ? Anyware.PipelineDef.Updaters.AddOverload<
+            $Args['context']['requestPipelineDefinition'],
             $Extension['transport']
-          >,
-        ],
-      // : [['requestPipeline'], 3]),
-      //
-      [
-        ['typeHooks', 'onRequestResult'],
-        ConfigManager.AppendOptional<
-          $Args['context']['typeHooks']['onRequestResult'],
-          $Extension['typeHooks']['onRequestResult']
-        >,
-      ],
-      [
-        ['extensions'],
-        [...$Args['context']['extensions'], $Extension],
-      ],
-    ]
+          >
+        : $Args['context']['requestPipelineDefinition']
+      >,
+    ['typeHooks', 'onRequestResult'],
+    ConfigManager.AppendOptional<
+      $Args['context']['typeHooks']['onRequestResult'],
+      $Extension['typeHooks']['onRequestResult']
+    >
   >
 >
 

@@ -7,7 +7,7 @@ import { isAbortError } from '../lib/prelude.js'
 import { decodeResultData } from './CustomScalars/decode.js'
 import { encodeRequestVariables } from './CustomScalars/encode.js'
 
-const requestPipelineDefBuilderBase = Anyware.PipelineDef
+const requestPipelineBaseDefinitionBuilder = Anyware.PipelineDef
   .create({
     // If core errors caused by an abort error then raise it as a direct error.
     // This is an expected possible error. Possible when user cancels a request.
@@ -75,12 +75,12 @@ const requestPipelineDefBuilderBase = Anyware.PipelineDef
     },
   })
 
-export type RequestPipelineDefinition = typeof requestPipelineDefBuilderBase.type
+export const requestPipelineBaseDefinition = requestPipelineBaseDefinitionBuilder.type
+export type RequestPipelineBaseDefinition = typeof requestPipelineBaseDefinition
 
-export const requestPipeline = Anyware.Pipeline.create(requestPipelineDefBuilderBase.type)
-export type RequestPipeline = typeof requestPipeline
+export type RequestPipelineBase = Anyware.Pipeline.InferFromDefinition<RequestPipelineBaseDefinition>
 
-export namespace requestPipeline {
+export namespace RequestPipelineBase {
   export type ResultFailure = Anyware.PipelineDef.ResultFailure
   // | Errors.ContextualError
   // Possible from http transport fetch with abort controller.

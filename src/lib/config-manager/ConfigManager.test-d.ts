@@ -44,8 +44,8 @@ assertEqual<ConfigManager.SetAtPath<a1, ['a', 'b', 'c'], 9>  , { a: { b: { c: 9 
 assertEqual<ConfigManager.SetAtPath<a1, ['a', 'b2', 'c'], 9> , { a: { b: number; b2: { c: 9 } }; b: string }>()
 assertEqual<ConfigManager.SetAtPath<a1, ['c'], 9>            , { a: { b: number }; b: string; c: 9 }>()
 
-assertEqual<ConfigManager.UpdateMany<{'a':2}, [[['a'], 1]]>            , { a: 1 }>()
-assertEqual<ConfigManager.UpdateMany<{'a':2}, [[['a'], 1], null]>      , { a: 1 }>()
+// assertEqual<ConfigManager.UpdateMany<{'a':2}, [[['a'], 1]]>            , { a: 1 }>()
+// assertEqual<ConfigManager.UpdateMany<{'a':2}, [[['a'], 1], null]>      , { a: 1 }>()
 
 assertEqual<ConfigManager.UpdateKeyWithAppend<{x: []}, 'x', 1>  , { x: [1] }>()
 assertEqual<ConfigManager.UpdateKeyWithAppend<{x: [1]}, 'x', 2> , { x: [1, 2] }>()

@@ -5,22 +5,22 @@ import type { PipelineDef } from './__.js'
 
 export namespace Updaters {
   export type SetInput<
-    $Pipeline extends PipelineDef,
+    $PipelineDef extends PipelineDef,
     $Input extends object,
-  > = ConfigManager.SetKey<$Pipeline, 'input', $Input>
+  > = ConfigManager.SetKey<$PipelineDef, 'input', $Input>
 
   export type AddStep<
-    $Pipeline extends PipelineDef,
+    $PipelineDef extends PipelineDef,
     $Step extends StepDef,
-  > = ConfigManager.UpdateKeyWithAppend<$Pipeline, 'steps', $Step>
+  > = ConfigManager.UpdateKeyWithAppend<$PipelineDef, 'steps', $Step>
 
   export type AddOverload<
-    $Pipeline extends PipelineDef,
+    $PipelineDef extends PipelineDef,
     $Overload extends Overload,
-  > = ConfigManager.UpdateKeyWithAppend<$Pipeline, 'overloads', $Overload>
+  > = ConfigManager.UpdateKeyWithAppend<$PipelineDef, 'overloads', $Overload>
 
   export type AddOverloads<
-    $Pipeline extends PipelineDef,
+    $PipelineDef extends PipelineDef,
     $Overloads extends Overload[],
-  > = ConfigManager.UpdateKeyWithAppendMany<$Pipeline, 'overloads', $Overloads>
+  > = ConfigManager.UpdateKeyWithAppendMany<$PipelineDef, 'overloads', $Overloads>
 }
