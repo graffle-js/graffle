@@ -8,14 +8,16 @@ import { getRequestHeadersRec, parseExecutionResult, postRequestHeadersRec } fro
 import { mergeRequestInit, searchParamsAppendAll } from '../../lib/http.js'
 import type { httpMethodGet, httpMethodPost } from '../../lib/http.js'
 import { _, isString, type MaybePromise } from '../../lib/prelude.js'
-// import { TransportExtension } from '../../transportExtension/transportExtension.js'
-import { Transport } from '../../types/Transport.js'
 
 export const TransportHttp = createExtension({
   name: `TransportHttp`,
-  normalizeConfig: (input?: { url?: URL | string }) => {
+  normalizeConfig: (input?: {
+    url?: URL | string
+    methodMode?: MethodMode
+  }) => {
     return {
       url: input?.url ? new URL(input.url) : null,
+      methodMode: input?.methodMode ?? `post`,
     }
   },
   create: ({ config }) => {
@@ -24,7 +26,12 @@ export const TransportHttp = createExtension({
       transport: ($) =>
         $
           .create(`http`)
-          .config<{ url: URL | string }>()
+          .config<{
+            url: URL | string
+            methodMode: MethodMode
+            headers?: HeadersInit
+            raw?: RequestInit
+          }>()
           .stepWithExtendedInput<{ headers?: HeadersInit }>()(`pack`, {
             slots: {
               searchParams: getRequestEncodeSearchParameters,
@@ -37,12 +44,10 @@ export const TransportHttp = createExtension({
                 query: print(input.request.query),
               }
 
-              if (input.state.config.transport.type !== Transport.http) throw new Error(`transport type is not http`)
-
               const operationType = isString(input.request.operation)
                 ? input.request.operation
                 : input.request.operation.operation
-              const methodMode = input.state.config.transport.config.methodMode
+              const methodMode = input.methodMode
               const requestMethod = methodMode === MethodMode.post
                 ? `post`
                 : OperationTypeToAccessKind[operationType] === `read`
@@ -56,10 +61,10 @@ export const TransportHttp = createExtension({
                       headers: requestMethod === `get` ? getRequestHeadersRec : postRequestHeadersRec,
                     },
                     {
-                      headers: input.state.config.transport.config.headers,
+                      headers: input.headers,
                     },
                   ),
-                  input.state.config.transport.config.raw,
+                  input.raw,
                 ),
                 {
                   headers: input.headers,

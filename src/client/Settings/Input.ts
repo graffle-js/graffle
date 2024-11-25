@@ -2,8 +2,6 @@ import type { GlobalRegistry } from '../../types/GlobalRegistry/GlobalRegistry.j
 import type { SchemaDrivenDataMap } from '../../types/SchemaDrivenDataMap/__.js'
 import type { OutputInput } from './inputIncrementable/output.js'
 
-// export type URLInput = URL | string
-
 /**
  * @remarks This input extends base with properties that can be filled with exports from the generated client.
  */
