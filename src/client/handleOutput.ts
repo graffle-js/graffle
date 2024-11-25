@@ -164,7 +164,7 @@ type HandleOutput_Envelope<$Context extends Context, $Envelope extends GraffleEx
 // dprint-ignore
 type IfConfiguredGetOutputErrorReturns<$Context extends Context> =
   | (ConfigGetOutputError<$Context, 'execution'>  extends 'return'  ? GraphQLExecutionResultError   : never)
-  | (ConfigGetOutputError<$Context, 'other'>      extends 'return'  ? RequestPipelineBase.ResultFailure : never)
+  | (ConfigGetOutputError<$Context, 'other'>      extends 'return'  ? Anyware.ResultFailure : never)
 
 // dprint-ignore
 export type ConfigGetOutputError<$Context extends Context, $ErrorCategory extends ErrorCategory> =

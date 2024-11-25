@@ -13,7 +13,13 @@ import { Transport } from '../../types/Transport.js'
 
 export const TransportHttp = createExtension({
   name: `TransportHttp`,
-  create: () => {
+  normalizeConfig: (input?: { url?: URL | string }) => {
+    return {
+      url: input?.url ? new URL(input.url) : null,
+    }
+  },
+  create: ({ config }) => {
+    // todo: merge extension config with client config.
     return {
       transport: ($) =>
         $

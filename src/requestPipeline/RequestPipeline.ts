@@ -79,10 +79,3 @@ export const requestPipelineBaseDefinition = requestPipelineBaseDefinitionBuilde
 export type RequestPipelineBaseDefinition = typeof requestPipelineBaseDefinition
 
 export type RequestPipelineBase = Anyware.Pipeline.InferFromDefinition<RequestPipelineBaseDefinition>
-
-export namespace RequestPipelineBase {
-  export type ResultFailure = Anyware.PipelineDef.ResultFailure
-  // | Errors.ContextualError
-  // Possible from http transport fetch with abort controller.
-  // | DOMException
-}
