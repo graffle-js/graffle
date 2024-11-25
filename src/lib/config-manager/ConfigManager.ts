@@ -51,7 +51,11 @@ export const createMerger = <$CustomScalars extends CustomScalarGuard[]>(
 }
 
 // dprint-ignore
-export type SetAtPath<$Object extends object, $Path extends string[], $Value> =
+export type SetAtPath<
+  $Object extends object,
+  $Path extends string[],
+  $Value,
+> =
   $Path extends []
     ? $Object
     : $Path extends [infer $Key extends string, ...infer $PathRest extends string[]]
@@ -150,43 +154,74 @@ export type SetProperties<$Object1 extends object, $Object2 extends object> =
 export type SetMany<$Obj extends object, $Sets extends [Path, any][]> =
   $Sets extends []                                                                        ? $Obj : 
   $Sets extends [infer $Set extends [Path, any], ...infer $SetRest extends [Path, any][]] ? SetMany<
-                                                                                              SetAtKeyPath<$Obj, $Set[0], $Set[1]>,
+                                                                                              SetKeyAtPath<$Obj, $Set[0], $Set[1]>,
                                                                                               $SetRest
                                                                                             > :
                                                                                             never
 
-export type AppendAtKey<$Obj extends object, $Prop extends keyof $Obj, $Type> =
+// dprint-ignore
+export type UpdateKeyWithAppend<
+  $Obj extends object,
+  $Prop extends keyof $Obj,
+  $Type,
+> =
+  SetKey<
+    $Obj,
+    $Prop,
   // @ts-expect-error
-  UpdateAtKey<$Obj, $Prop, [...$Obj[$Prop], $Type]>
+    [...$Obj[$Prop], $Type]
+  >
 
-export type AppendManyAtKey<$Obj extends object, $Prop extends keyof $Obj, $Type extends any[]> =
-  // @ts-expect-error
-  UpdateAtKey<$Obj, $Prop, [...$Obj[$Prop], ...$Type]>
+// dprint-ignore
+export type UpdateKeyWithAppendMany<
+  $Obj extends object,
+  $Prop extends keyof $Obj,
+  $Type extends any[],
+> =
+  SetKey<
+    $Obj,
+    $Prop,
+    // @ts-expect-error
+    [...$Obj[$Prop], ...$Type]
+  >
 
-export type UpdateAtKey<$Obj extends object, $Prop extends keyof $Obj, $Type extends $Obj[$Prop]> =
+export type UpdateKeyWithIntersection<
+  $Obj extends object,
+  $PropertyName extends keyof $Obj,
+  $Type extends object,
+> =
+  & $Obj
   & {
-    [_ in keyof $Obj as _ extends $Prop ? never : _]: $Obj[_]
+    [_ in $PropertyName]: $Type
+  }
+
+export type SetKey<
+  $Obj extends object,
+  $PropertyName extends keyof $Obj,
+  $Type extends $Obj[$PropertyName],
+> =
+  & {
+    [_ in keyof $Obj as _ extends $PropertyName ? never : _]: $Obj[_]
   }
   & {
-    [_ in $Prop]: $Type
+    [_ in $PropertyName]: $Type
   }
 
 // dprint-ignore
-export type SetAtKeyPath<$Obj extends object, $Path extends Path, $Value> =
+export type SetKeyAtPath<$Obj extends object, $Path extends Path, $Value> =
     Simplify<
       $Path extends []
         ? $Value extends object
           ? $Obj & $Value
           : never
-        : Set_<$Obj, $Path, $Value>
+        : SetKeyAtPath_<$Obj, $Path, $Value>
     >
-
 // dprint-ignore
-export type Set_<$ObjOrValue, $Path extends Path, $Value> =
+type SetKeyAtPath_<$ObjOrValue, $Path extends Path, $Value> =
     Simplify<
       $Path extends [infer $P1 extends string, ...infer $PN extends string[]] ?
         $P1 extends keyof $ObjOrValue
-            ? Omit<$ObjOrValue, $P1> & { [_ in $P1]: Set_<$ObjOrValue[$P1], $PN, $Value> }
+            ? Omit<$ObjOrValue, $P1> & { [_ in $P1]: SetKeyAtPath_<$ObjOrValue[$P1], $PN, $Value> }
             // If we use a nice error display here (like the following comment) it will mess with the result type in variable cases.
              // `Error: Cannot set value at path in object. Path property "${$P1}" does not exist in object.`
             : never

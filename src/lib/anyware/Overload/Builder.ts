@@ -1,47 +1,84 @@
 import type { ConfigManager } from '../../config-manager/__.js'
 import type { Tuple } from '../../prelude.js'
-import type { Pipeline } from '../Pipeline/__.js'
-import type { Step } from '../Step.js'
+import type { PipelineDef } from '../PipelineDef/__.js'
+import type { StepDef } from '../StepDef.js'
+import type { Overload } from './__.js'
+
+export const create: Create = (parameters) => {
+  const context_: Omit<Overload, 'input'> = {
+    discriminant: parameters.discriminant,
+    steps: {},
+  }
+  const overload = context_ as Overload
+
+  const builder: Builder = {
+    type: overload,
+    extendInput: () => builder as any,
+    stepWithExtendedInput: () => builder.step as any,
+    step: (name, spec) => {
+      overload.steps[name] = {
+        name,
+        ...spec,
+      } as unknown as StepDef
+      return builder as any
+    },
+  }
+
+  return builder as any
+}
+
+export type Create<$Pipeline extends PipelineDef = PipelineDef> = <
+  const $DiscriminantSpec extends Overload['discriminant'],
+>(
+  parameters: { discriminant: $DiscriminantSpec },
+) => Builder<
+  $Pipeline,
+  {
+    discriminant: $DiscriminantSpec
+    input: {}
+    steps: {}
+  }
+>
 
 export interface Builder<
-  $RootContext extends Pipeline.Context = Pipeline.Context,
-  $Context extends BuilderContext = BuilderContextEmpty,
+  $Pipeline extends PipelineDef = PipelineDef,
+  $Overload extends Overload = Overload.States.Empty,
 > {
-  context: $Context
+  type: $Overload
   /**
    * TODO
    */
-  step: BuilderStep<$RootContext, $Context>
+  step: StepMethod<$Pipeline, $Overload>
   /**
    * TODO
    */
   extendInput: <$InputExtension extends object>() => Builder<
-    $RootContext,
-    ConfigManager.UpdateAtKey<$Context, 'input', $InputExtension>
+    $Pipeline,
+    Overload.Updaters.SetInput<$Overload, $InputExtension>
   >
   /**
    * TODO
    */
-  stepWithExtendedInput: <$InputExtension extends object>() => BuilderStep<
-    $RootContext,
-    $Context,
+  stepWithExtendedInput: <$InputExtension extends object>() => StepMethod<
+    $Pipeline,
+    $Overload,
     $InputExtension
   >
 }
 
-interface BuilderStep<
-  $RootContext extends Pipeline.Context,
-  $Context extends BuilderContext,
+interface StepMethod<
+  $Pipeline extends PipelineDef,
+  $Overload extends Overload,
   $InputExtension extends object = {},
 > {
   <
-    $Name extends $RootContext['steps'][number]['name'],
-    $Slots extends undefined | Step.Slots = undefined,
+    $Name extends $Pipeline['steps'][number]['name'],
+    $Slots extends undefined | StepDef.Slots = undefined,
     $Input =
       & InferStepInput<
-        $Context,
-        Extract<$RootContext['steps'][number], { name: $Name }>,
-        Tuple.PreviousItem<$RootContext['steps'], { name: $Name }>
+        $Overload,
+        Extract<$Pipeline['steps'][number], { name: $Name }>,
+        Tuple.PreviousItem<$Pipeline['steps'], { name: $Name }>
       >
       & $InputExtension,
     $Output = unknown,
@@ -52,52 +89,30 @@ interface BuilderStep<
       run: (input: $Input, slots: $Slots) => $Output
     },
   ): Builder<
-    $RootContext,
-    ConfigManager.UpdateAtKey<
-      $Context,
-      'steps',
-      & $Context['steps']
-      & {
-        [_ in $Name]: {
-          name: $Name
-          input: $Input
-          output: Awaited<$Output>
-          slots: ConfigManager.OrDefault2<$Slots, {}>
-        }
-      }
-    >
+    $Pipeline,
+    Overload.Updaters.AddStep<$Overload, $Name, {
+      name: $Name
+      input: $Input
+      output: Awaited<$Output>
+      slots: ConfigManager.OrDefault2<$Slots, {}>
+    }>
   >
 }
 
 // dprint-ignore
 type InferStepInput<
-  $OverloadContext extends BuilderContext,
-  $CurrentStep extends Step,
-  $PreviousStep extends Step | undefined,
+  $Overload extends Overload,
+  $CurrentStep extends StepDef,
+  $PreviousStep extends StepDef | undefined,
 > =
-  $PreviousStep extends Step
-    ? $PreviousStep['name'] extends keyof $OverloadContext['steps']
-      ? $OverloadContext['steps'][$PreviousStep['name']]['output']
+  $PreviousStep extends StepDef
+    ? $PreviousStep['name'] extends keyof $Overload['steps']
+      ? $Overload['steps'][$PreviousStep['name']]['output']
       :
         & $CurrentStep['input']
-        & $OverloadContext['input']
-        & { [_ in $OverloadContext['discriminant'][0]]: $OverloadContext['discriminant'][1] }
+        & $Overload['input']
+        & { [_ in $Overload['discriminant'][0]]: $Overload['discriminant'][1] }
       :
         & $CurrentStep['input']
-        & $OverloadContext['input']
-        & { [_ in $OverloadContext['discriminant'][0]]: $OverloadContext['discriminant'][1] }
-
-export interface BuilderContext {
-  discriminant: DiscriminantSpec
-  input: object
-  steps: Record<string, Step>
-}
-
-export type DiscriminantSpec = readonly [string, DiscriminantPropertyValue]
-
-export type DiscriminantPropertyValue = string | number | symbol
-
-interface BuilderContextEmpty extends BuilderContext {
-  input: {}
-  steps: {}
-}
+        & $Overload['input']
+        & { [_ in $Overload['discriminant'][0]]: $Overload['discriminant'][1] }

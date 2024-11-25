@@ -1,8 +1,9 @@
 import { beforeEach, vi } from 'vitest'
-import { Pipeline } from './_.js'
+import { PipelineDef } from './_.js'
 import type { Interceptor, NonRetryingInterceptorInput } from './Interceptor/Interceptor.js'
-import type { Options } from './Pipeline/Config.js'
-import { Step } from './Step.js'
+import { Pipeline } from './Pipeline/Pipeline.js'
+import type { Options } from './PipelineDef/Config.js'
+import { StepDef } from './StepDef.js'
 
 export const initialInput = { x: 1 } as const
 export type initialInput = typeof initialInput
@@ -16,9 +17,9 @@ export const results = {
 } as const
 export type results = typeof results
 
-export const stepA = Step.createWithInput<initialInput>()({ name: `a`, run: () => results[`a`] })
-export const stepB = Step.createWithInput<results[`a`]>()({ name: `b`, run: () => results[`b`] })
-export const stepC = Step.createWithInput<results[`b`]>()({ name: `c`, run: () => results[`c`] })
+export const stepA = StepDef.createWithInput<initialInput>()({ name: `a`, run: () => results[`a`] })
+export const stepB = StepDef.createWithInput<results[`a`]>()({ name: `b`, run: () => results[`b`] })
+export const stepC = StepDef.createWithInput<results[`b`]>()({ name: `c`, run: () => results[`c`] })
 
 export const slots = {
   m: () => Promise.resolve(`m` as const),
@@ -26,7 +27,7 @@ export const slots = {
 }
 export type slots = typeof slots
 
-export const createPipeline = (options?: Options) => {
+export const createPipelineDef = (options?: Options) => {
   type Append = (hookName: string) => string
 
   type AppendExtra = () => string
@@ -61,8 +62,9 @@ export const createPipeline = (options?: Options) => {
 
   type StepBRunner = typeof stepBRunner
 
-  return Pipeline
-    .create<{ value: string }>(options)
+  return PipelineDef
+    .create(options)
+    .input<{ value: string }>()
     .stepWithRunnerType<StepARunner>()(`a`, {
       slots: {
         append: vi.fn<Append>().mockImplementation((hookName) => {
@@ -85,41 +87,46 @@ export const createPipeline = (options?: Options) => {
       },
       run: stepBRunner,
     })
-    .done()
 }
 
-type TestPipeline = ReturnType<typeof createPipeline>
-export type TestInterceptor = Interceptor.InferConstructor<TestPipeline['spec']>
+type TestPipelineDef = ReturnType<typeof createPipelineDef>['type']
+type TestPipeline = Pipeline.InferFromDefinition<TestPipelineDef>
 
+export let pipelineDef: TestPipelineDef
 export let pipeline: TestPipeline
 
+export type TestInterceptor = Interceptor.InferFromPipeline<TestPipeline>
+
 beforeEach(() => {
-  pipeline = createPipeline()
+  pipelineDef = createPipelineDef().type
+  pipeline = Pipeline.create(pipelineDef)
 })
 
 export const pipelineWithOptions = (options?: Options) => {
-  const pipeline = createPipeline(options)
+  const pipeline = createPipelineDef(options).type
+  const pipelineE = Pipeline.create(pipeline)
   const run = async (...interceptors: TestInterceptor[]) => {
-    return await Pipeline.run(pipeline, {
+    return await PipelineDef.run(pipelineE, {
       initialInput: { value: `initial` },
       interceptors,
     })
   }
   return {
     pipeline,
+    pipelineE,
     run,
   }
 }
 
 export const run = async (...interceptors: NonRetryingInterceptorInput[]) => {
-  return await Pipeline.run(pipeline, {
+  return await PipelineDef.run(pipeline, {
     initialInput: initialInput2,
     interceptors,
   })
 }
 
 export const runRetrying = async (interceptor: NonRetryingInterceptorInput) => {
-  return await Pipeline.run(pipeline, {
+  return await PipelineDef.run(pipeline, {
     initialInput: initialInput2,
     interceptors: [],
     retryingInterceptor: interceptor,

@@ -57,7 +57,7 @@ export interface Extension<
   /**
    * Anyware executed on every request.
    */
-  onRequest?: Anyware.Interceptor.InferConstructor<RequestPipeline['spec']>
+  onRequest?: Anyware.Interceptor.InferFromPipeline<RequestPipeline>
   /**
    * Manipulate the builder.
    * You can extend the builder with new properties at both runtime AND buildtime (types, TypeScript).
@@ -168,7 +168,7 @@ export const createExtension = <
     custom?: $Custom
     create: (params: { config: $Config }) => {
       builder?: $BuilderExtension
-      onRequest?: Anyware.Interceptor.InferConstructor<RequestPipeline['spec']>
+      onRequest?: Anyware.Interceptor.InferFromPipeline<RequestPipeline>
       typeHooks?: () => $TypeHooks
     }
   },

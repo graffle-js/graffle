@@ -1,31 +1,40 @@
-import type { ConfigManager } from '../../config-manager/__.js'
-import type { Overload } from '../Overload/__.js'
-import type { Pipeline } from '../Pipeline/__.js'
+import { Overload } from '../Overload/__.js'
+import type { PipelineDef } from '../PipelineDef/__.js'
+import type { Extension } from './__.js'
+
+type Create = <$Pipeline extends PipelineDef>() => Builder<$Pipeline, Extension.States.Empty>
 
 export interface Builder<
-  $PipelineContext extends Pipeline.Context = Pipeline.Context,
-  $Context extends Context = Context,
+  $Pipeline extends PipelineDef = PipelineDef,
+  $Extension extends Extension = Extension,
 > {
-  context: $Context
+  type: $Extension
   /**
    * TODO
    */
-  overload: <$OverloadBuilder extends Overload.Builder<$PipelineContext>>(
-    overloadBuilder: Overload.BuilderCallback<$PipelineContext, $OverloadBuilder>,
+  overload: <$OverloadBuilder extends Overload.Builder<$Pipeline>>(
+    overloadBuilderCallback: Overload.BuilderCallback<$Pipeline, $OverloadBuilder>,
   ) => Builder<
-    $PipelineContext,
-    ConfigManager.AppendAtKey<
-      $Context,
-      'overloads',
-      $OverloadBuilder['context']
-    >
+    $Pipeline,
+    Extension.Updaters.AddOverload<$Extension, $OverloadBuilder['type']>
   >
 }
 
-export interface Context {
-  overloads: Overload.BuilderContext[]
-}
+export namespace Builder {
+  export const create: Create = () => {
+    const extension: Extension = {
+      overloads: [],
+    }
 
-export interface ContextEmpty extends Context {
-  overloads: []
+    const builder: Builder = {
+      type: extension,
+      overload: (builderCallback) => {
+        const overload = builderCallback({ create: Overload.create })
+        extension.overloads.push(overload.type)
+        return builder as any
+      },
+    }
+
+    return builder as any
+  }
 }

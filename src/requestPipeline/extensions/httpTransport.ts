@@ -9,10 +9,10 @@ import { mergeRequestInit, searchParamsAppendAll } from '../../lib/http.js'
 import type { httpMethodGet, httpMethodPost } from '../../lib/http.js'
 import { _, isString, type MaybePromise } from '../../lib/prelude.js'
 import { Transport } from '../../types/Transport.js'
-import type { RequestPipelineBaseContext } from '../RequestPipeline.js'
+import type { RequestPipelineSpecBase } from '../RequestPipeline.js'
 
-export const httpTransport = Anyware.Extension
-  .create<RequestPipelineBaseContext>()
+export const httpTransport = Anyware.Extension.Builder
+  .create<RequestPipelineSpecBase>()
   .overload(overload =>
     overload
       .create({

@@ -2,6 +2,7 @@ import type { GraphQLError } from 'graphql'
 import type { Simplify } from 'type-fest'
 import type { SimplifyDeepExcept } from '../documentBuilder/Simplify.js'
 import type { RunTypeHookOnRequestResult } from '../extension/extension.js'
+import type { Anyware } from '../lib/anyware/__.js'
 import { Errors } from '../lib/errors/__.js'
 import type { Grafaid } from '../lib/grafaid/__.js'
 import type { SomeObjectData } from '../lib/grafaid/graphql.js'
@@ -13,7 +14,7 @@ import {
   type GetOrNever,
   type Values,
 } from '../lib/prelude.js'
-import type { RequestPipeline, requestPipeline } from '../requestPipeline/RequestPipeline.js'
+import type { requestPipeline, RequestPipelineSpec } from '../requestPipeline/RequestPipeline.js'
 import type { GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
 import type { TransportHttp } from '../types/Transport.js'
 import type { Context } from './context.js'
@@ -52,7 +53,7 @@ export type GraffleExecutionResultEnvelope<$Config extends Config = Config> =
 
 export const handleOutput = (
   state: Context,
-  result: RequestPipeline['output'],
+  result: Anyware.PipelineDef.Utilities.InferResult<RequestPipelineSpec>,
 ) => {
   if (isContextConfigTraditionalGraphQLOutput(state.config)) {
     if (result instanceof Error) throw result

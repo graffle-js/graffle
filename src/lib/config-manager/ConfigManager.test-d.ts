@@ -24,17 +24,17 @@ assertEqual<
 
 // dprint-ignore
 {
-assertEqual<ConfigManager.SetAtKeyPath<{ a: { b: 2 } }, [], { a2: 2 }>     , { a: { b: 2 }; a2: 2 }>()
-assertEqual<ConfigManager.SetAtKeyPath<{ a: { b: 2 } }, ['a'], { b: 3 }>   , { a: { b: 3 } }>()
-assertEqual<ConfigManager.SetAtKeyPath<{ a: { b: 2 } }, ['a', 'b'], 3>     , { a: { b: 3 } }>()
+assertEqual<ConfigManager.SetKeyAtPath<{ a: { b: 2 } }, [], { a2: 2 }>     , { a: { b: 2 }; a2: 2 }>()
+assertEqual<ConfigManager.SetKeyAtPath<{ a: { b: 2 } }, ['a'], { b: 3 }>   , { a: { b: 3 } }>()
+assertEqual<ConfigManager.SetKeyAtPath<{ a: { b: 2 } }, ['a', 'b'], 3>     , { a: { b: 3 } }>()
 // never
-assertEqual<ConfigManager.SetAtKeyPath<{ a: { b: 2 } }, [], 1>              , never>()
-assertEqual<ConfigManager.SetAtKeyPath<{ a: { b: 2 } }, ['x'], 1>           , never>()
-assertEqual<ConfigManager.SetAtKeyPath<{ a: { b: 2 } }, ['a', 'b', 'c'], 3> , { a: { b: never } }>()
+assertEqual<ConfigManager.SetKeyAtPath<{ a: { b: 2 } }, [], 1>              , never>()
+assertEqual<ConfigManager.SetKeyAtPath<{ a: { b: 2 } }, ['x'], 1>           , never>()
+assertEqual<ConfigManager.SetKeyAtPath<{ a: { b: 2 } }, ['a', 'b', 'c'], 3> , { a: { b: never } }>()
 
-assertEqual<ConfigManager.UpdateAtKey<a1, 'a', { b: 2 }>                  , { a: { b: 2 }; b: string }>()
-assertEqual<ConfigManager.UpdateAtKey<{ a?: number }, 'a', 1>             , { a: 1 }>()
-assertEqual<ConfigManager.UpdateAtKey<{ a?: number; b?: number }, 'a', 1> , { a: 1; b?: number }>()
+assertEqual<ConfigManager.SetKey<a1, 'a', { b: 2 }>                  , { a: { b: 2 }; b: string }>()
+assertEqual<ConfigManager.SetKey<{ a?: number }, 'a', 1>             , { a: 1 }>()
+assertEqual<ConfigManager.SetKey<{ a?: number; b?: number }, 'a', 1> , { a: 1; b?: number }>()
 
 assertEqual<ConfigManager.SetAtPath<a1, [], 9>               , a1>()
 assertEqual<ConfigManager.SetAtPath<a1, ['a'], { b: 2 }>     , { a: { b: 2 }; b: string }>()
@@ -44,8 +44,12 @@ assertEqual<ConfigManager.SetAtPath<a1, ['a', 'b', 'c'], 9>  , { a: { b: { c: 9 
 assertEqual<ConfigManager.SetAtPath<a1, ['a', 'b2', 'c'], 9> , { a: { b: number; b2: { c: 9 } }; b: string }>()
 assertEqual<ConfigManager.SetAtPath<a1, ['c'], 9>            , { a: { b: number }; b: string; c: 9 }>()
 
-assertEqual<ConfigManager.AppendAtKey<{x: []}, 'x', 1>  , { x: [1] }>()
-assertEqual<ConfigManager.AppendAtKey<{x: [1]}, 'x', 2> , { x: [1, 2] }>()
+assertEqual<ConfigManager.UpdateKeyWithAppend<{x: []}, 'x', 1>  , { x: [1] }>()
+assertEqual<ConfigManager.UpdateKeyWithAppend<{x: [1]}, 'x', 2> , { x: [1, 2] }>()
+
+assertEqual<ConfigManager.UpdateKeyWithIntersection<{x: {}}, 'x', {}>          , { x: {} }>()
+assertEqual<ConfigManager.UpdateKeyWithIntersection<{x: {}}, 'x', {a:1}>       , { x: {a:1} }>()
+assertEqual<ConfigManager.UpdateKeyWithIntersection<{x: {b:2}}, 'x', {a:1}>    , { x: {a:1; b:2} }>()
 }
 
 assertEqual<

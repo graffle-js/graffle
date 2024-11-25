@@ -1,7 +1,4 @@
-import type { Errors } from '../../errors/__.js'
-import type { PipelineSpec } from './Spec.js'
-
-export type InferResultFromSpec<$PipelineSpec extends PipelineSpec> = Result<$PipelineSpec['output']>
+import type { Errors } from '../errors/__.js'
 
 export type ResultFailure = Errors.ContextualAggregateError
 

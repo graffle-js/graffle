@@ -70,9 +70,9 @@ export const builderExtensionGql = Builder.Extension.create<BuilderExtensionGql>
             url,
             schema,
             request: analyzedRequest,
-          } as RequestPipeline['spec']['input']
+          } as RequestPipeline['input']
 
-          const result = await Anyware.Pipeline.run(requestPipeline, {
+          const result = await Anyware.PipelineDef.run(requestPipeline, {
             initialInput,
             // retryingExtension: context.retry as any,
             interceptors: context.extensions.filter(_ => _.onRequest !== undefined).map(_ => _.onRequest!) as any,
