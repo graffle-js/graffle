@@ -2,29 +2,31 @@ import { partitionAndAggregateErrors } from '../../errors/_.js'
 import { Errors } from '../../errors/__.js'
 import { createDeferred } from '../../prelude.js'
 import { casesExhausted } from '../../prelude.js'
-import type { PipelineSpec } from '../_.js'
 import {
   createRetryingInterceptor,
   type InterceptorInput,
   type NonRetryingInterceptorInput,
 } from '../Interceptor/Interceptor.js'
-import type { Pipeline } from '../Pipeline/__.js'
-import { successfulResult } from '../Pipeline/Result.js'
-import type { Step } from '../Step.js'
+import type { Pipeline } from '../Pipeline/Pipeline.js'
+import type { PipelineDef } from '../PipelineDef/__.js'
+import { successfulResult } from '../Result.js'
+import type { StepDef } from '../StepDef.js'
 import type { StepResultErrorExtension } from '../StepResult.js'
 import type { StepTriggerEnvelope } from '../StepTriggerEnvelope.js'
 import { getEntryStep } from './getEntrypoint.js'
 import { runPipeline } from './runPipeline.js'
 
-export interface Params<$Pipeline extends PipelineSpec = PipelineSpec> {
+export interface Params<$Pipeline extends Pipeline = Pipeline> {
   initialInput: $Pipeline['input']
   interceptors?: NonRetryingInterceptorInput[]
   retryingInterceptor?: NonRetryingInterceptorInput
 }
 
 export const createRunner =
-  <$Pipeline extends Pipeline.ExecutablePipeline>(pipeline: $Pipeline) =>
-  async (params?: Params<$Pipeline['spec']>): Promise<$Pipeline['output']> => {
+  <$Pipeline extends Pipeline>(pipeline: $Pipeline) =>
+  async (params?: Params<$Pipeline>): Promise<$Pipeline['output']> => {
+    // const pipelineExecutable = pipeline as any as ExecutablePipeline.InferFromPipeline<$ExPipeline>
+
     const { initialInput, interceptors = [], retryingInterceptor } = params ?? {}
 
     const interceptors_ = retryingInterceptor
@@ -46,10 +48,10 @@ export const createRunner =
     })
     if (result instanceof Error) return result as any
 
-    return successfulResult(result.result)
+    return successfulResult(result.result) as any
   }
 
-const toInternalInterceptor = (pipeline: Pipeline.ExecutablePipeline, interceptor: InterceptorInput) => {
+const toInternalInterceptor = (pipeline: PipelineDef.Pipeline, interceptor: InterceptorInput) => {
   const currentChunk = createDeferred<StepTriggerEnvelope>()
   const body = createDeferred()
   const interceptorTrigger = typeof interceptor === `function` ? interceptor : interceptor.run
@@ -92,7 +94,7 @@ const toInternalInterceptor = (pipeline: Pipeline.ExecutablePipeline, intercepto
         }
       }
 
-      const stepsBeforeEntrypoint: Step.Name[] = []
+      const stepsBeforeEntrypoint: StepDef.Name[] = []
       for (const step of pipeline.steps) {
         if (step === entryStep) break
         stepsBeforeEntrypoint.push(step.name)

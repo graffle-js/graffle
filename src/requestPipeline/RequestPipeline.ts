@@ -6,13 +6,9 @@ import { normalizeRequestToNode } from '../lib/grafaid/request.js'
 import { isAbortError } from '../lib/prelude.js'
 import { decodeResultData } from './CustomScalars/decode.js'
 import { encodeRequestVariables } from './CustomScalars/encode.js'
-import { httpTransport } from './extensions/httpTransport.js'
 
-const requestPipelineBase = Anyware.Pipeline
-  .create<{
-    request: Grafaid.RequestAnalyzedInput
-    state: Context
-  }>({
+const requestPipelineDefBuilderBase = Anyware.PipelineDef
+  .create({
     // If core errors caused by an abort error then raise it as a direct error.
     // This is an expected possible error. Possible when user cancels a request.
     passthroughErrorWith: (signal) => {
@@ -22,6 +18,10 @@ const requestPipelineBase = Anyware.Pipeline
       return signal.hookName === `exchange` && isAbortError(signal.error)
     },
   })
+  .input<{
+    request: Grafaid.RequestAnalyzedInput
+    state: Context
+  }>()
   .step(`encode`, {
     run: (input) => {
       const sddm = input.state.schemaMap
@@ -75,17 +75,13 @@ const requestPipelineBase = Anyware.Pipeline
     },
   })
 
-export type RequestPipelineBase = typeof requestPipelineBase
-export type RequestPipelineBaseContext = RequestPipelineBase['context']
+export type RequestPipelineDefinition = typeof requestPipelineDefBuilderBase.type
 
-export const requestPipeline = requestPipelineBase
-// .use(httpTransport)
-// .done()
-
+export const requestPipeline = Anyware.Pipeline.create(requestPipelineDefBuilderBase.type)
 export type RequestPipeline = typeof requestPipeline
 
 export namespace requestPipeline {
-  export type ResultFailure = Anyware.Pipeline.ResultFailure
+  export type ResultFailure = Anyware.PipelineDef.ResultFailure
   // | Errors.ContextualError
   // Possible from http transport fetch with abort controller.
   // | DOMException

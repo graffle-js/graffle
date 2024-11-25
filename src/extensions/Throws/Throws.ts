@@ -40,7 +40,7 @@ interface BuilderExtension_<$Args extends Builder.Extension.Parameters<BuilderEx
    */
   throws: () => Builder.Definition.MaterializeWith<
     $Args['definition'],
-    ConfigManager.UpdateAtKey<
+    ConfigManager.SetKey<
       $Args['context'],
       'config',
       // @ts-expect-error fixme
@@ -49,7 +49,7 @@ interface BuilderExtension_<$Args extends Builder.Extension.Parameters<BuilderEx
   >
 }
 
-type ThrowsifyConfig<$BuilderConfig extends BuilderConfig> = ConfigManager.SetAtKeyPath<
+type ThrowsifyConfig<$BuilderConfig extends BuilderConfig> = ConfigManager.SetKeyAtPath<
   $BuilderConfig,
   ['output', 'errors'],
   { other: 'throw'; execution: 'throw' }

@@ -42,7 +42,7 @@ export const create: CreatePrefilled = (args) => {
       extensions,
       scalars,
       schemaMap,
-      requestPipeline: requestPipeline,
+      requestPipelineDefinition: requestPipeline,
       transport: Context.Transport.State.empty,
       input: {
         schema: args.schemaUrl,

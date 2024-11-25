@@ -3,12 +3,12 @@
 import { describe, expect, test } from 'vitest'
 import type { ContextualAggregateError } from '../errors/ContextualAggregateError.js'
 import { _ } from '../prelude.js'
-import { Pipeline } from './_.js'
+import { PipelineDef } from './_.js'
 import { initialInput, stepA, stepB } from './__.test-helpers.js'
 
 const run = async (interceptor: (...args: any[]) => any) => {
-  const pipeline = Pipeline.create().step(stepA).step(stepB).done()
-  return Pipeline.run(pipeline, {
+  const pipeline = PipelineDef.create().step(stepA).step(stepB).done()
+  return PipelineDef.run(pipeline, {
     initialInput,
     interceptors: [interceptor],
   })

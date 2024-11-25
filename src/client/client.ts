@@ -74,7 +74,7 @@ export const create: Create = (input) => {
     name: input.name ?? defaultName,
     schemaMap: input.schemaMap ?? null,
     transport: Context.Transport.State.empty,
-    requestPipeline: requestPipeline,
+    requestPipelineDefinition: requestPipeline,
     extensions: [],
     scalars: Schema.Scalar.Registry.empty,
     // retry: null,

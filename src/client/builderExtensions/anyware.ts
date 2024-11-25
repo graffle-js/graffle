@@ -15,15 +15,15 @@ export interface Anyware<$Arguments extends Builder.Extension.Parameters<Builder
    * TODO Anyware Docs.
    */
   anyware: (
-    interceptor: AnywareLib.Interceptor.InferConstructor<
-      AnywareLib.Pipeline.InferPipeline<$Arguments['context']['requestPipeline']>['spec']
+    interceptor: AnywareLib.Interceptor.InferFromPipeline<
+      AnywareLib.Pipeline.InferFromDefinition<$Arguments['context']['requestPipelineDefinition']>
     >,
   ) => Builder.Definition.MaterializeWith<$Arguments['definition'], $Arguments['context']>
 }
 
 export const builderExtensionAnyware = Builder.Extension.create<BuilderExtensionAnyware>((builder, context) => {
   const properties = {
-    anyware: (interceptor: AnywareLib.Interceptor.InferConstructor<RequestPipeline['spec']>) => {
+    anyware: (interceptor: AnywareLib.Interceptor.InferFromPipeline<RequestPipeline>) => {
       return builder({
         ...context,
         extensions: [

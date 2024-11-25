@@ -305,6 +305,10 @@ export namespace Objekt {
 }
 
 export namespace Tuple {
+  export type IndexKey = number | `${number}`
+
+  export type IsEmpty<T> = T extends [] ? true : false
+
   // dprint-ignore
   export type PreviousItem<$Items extends readonly any[], $OfItem> =
     $Items extends [infer $Next, ...infer $Rest]
@@ -767,3 +771,5 @@ export type PropertyKeyToString<$Key extends PropertyKey> = $Key extends string 
   : $Key extends number ? $Key
   : $Key extends symbol ? '<symbol>'
   : never
+
+export type DiscriminantPropertyValue = string | number | symbol

@@ -1,7 +1,7 @@
 import type { Simplify } from 'type-fest'
 import type { Deferred, MaybePromise } from '../../prelude.js'
-import type { PipelineSpec } from '../_.js'
-import type { ResultSuccess } from '../Pipeline/Result.js'
+import type { Pipeline } from '../_.js'
+import type { ResultSuccess } from '../Result.js'
 import type { Step } from '../Step.js'
 import type { StepTrigger } from '../StepTrigger.js'
 import type { StepTriggerEnvelope } from '../StepTriggerEnvelope.js'
@@ -11,30 +11,38 @@ export type InterceptorOptions = {
 }
 
 export namespace Interceptor {
-  export interface InferConstructor<
-    $PipelineSpec extends PipelineSpec = PipelineSpec,
+  export interface InferFromPipeline<
+    $Pipeline extends Pipeline = Pipeline,
   > // $Options extends InterceptorOptions = InterceptorOptions,
   {
-    (steps: Simplify<InferConstructorKeywordArguments<$PipelineSpec>>): Promise<
-      | $PipelineSpec['output']
+    (steps: Simplify<InferKeywordArguments<$Pipeline>>): Promise<
+      | $Pipeline['output']
       | StepTriggerEnvelope
     >
   }
 
-  type InferConstructorKeywordArguments<
-    $PipelineSpec extends PipelineSpec,
-  > = InferConstructorKeywordArguments_<$PipelineSpec['steps'], Awaited<$PipelineSpec['output']>>
+  type InferKeywordArguments<
+    $Pipeline extends Pipeline,
+  > = InferKeywordArguments_<
+    $Pipeline['steps'],
+    $Pipeline['output']
+  >
 
   // dprint-ignore
-  type InferConstructorKeywordArguments_<
+  type InferKeywordArguments_<
     $Steps extends Step[],
     $PipelineOutput,
   > =
     $Steps extends [infer $NextStep extends Step, ...infer $NextNextSteps extends Step[]]
       ? & {
-            [_ in $NextStep['name']]: StepTrigger.Infer<$NextStep, $NextNextSteps, $PipelineOutput>
+            [_ in $NextStep['name']]:
+              StepTrigger.Infer<
+                $NextStep,
+                $NextNextSteps,
+                $PipelineOutput
+              >
           }
-        & InferConstructorKeywordArguments_<$NextNextSteps, $PipelineOutput>
+        & InferKeywordArguments_<$NextNextSteps, $PipelineOutput>
       : {}
 }
 

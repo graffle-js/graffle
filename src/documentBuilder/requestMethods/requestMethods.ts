@@ -137,7 +137,7 @@ const executeDocument = async (
     request,
   } as RequestPipeline['input']
 
-  const result = await Anyware.Pipeline.run(requestPipeline, {
+  const result = await Anyware.PipelineDef.run(requestPipeline, {
     initialInput,
     // retryingExtension: state.retry as any,
     interceptors: state.extensions.filter(_ => _.onRequest !== undefined).map(_ => _.onRequest!) as any,
