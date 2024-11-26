@@ -5,7 +5,7 @@ export interface StepDefinition<
   $Name extends string = string,
 > {
   name: $Name
-  slots: StepDef.Slots
+  slots: StepDefinition.Slots
   input: any
   output: any
   /**
@@ -24,10 +24,10 @@ export interface StepDefinition<
   run?: StepRunner<any, any, any>
 }
 
-export namespace StepDef {
+export namespace StepDefinition {
   export interface SpecInput {
     name: string
-    slots?: StepDef.Slots
+    slots?: StepDefinition.Slots
     input?: object
     output?: unknown
   }
@@ -41,7 +41,7 @@ export namespace StepDef {
   <
     const $Name extends string,
     $Run extends StepRunner<$Input>,
-    $Slots extends undefined | StepDef.Slots,
+    $Slots extends undefined | StepDefinition.Slots,
   >(
     parameters: {
       name: $Name

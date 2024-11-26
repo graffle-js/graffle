@@ -1,7 +1,7 @@
 import type { Anyware } from '../lib/anyware/__.js'
 import type { RequestPipelineBase } from '../requestPipeline/RequestPipeline.js'
 import type { Transport } from '../types/Transport.js'
-import type { BuilderExtension } from './extension.js'
+import type { BuilderExtension } from './builder.js'
 import type { TypeHooks } from './TypeHooks.js'
 
 export * as Extension from './extension.js'

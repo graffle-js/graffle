@@ -4,26 +4,10 @@
 
 /* eslint-disable */
 import { Graffle } from '../../src/entrypoints/main.js'
-import { TransportHttp } from '../../src/extensions/TransportHttp/TransportHttp.js'
 import { showJson } from '../$/helpers.js'
 import { publicGraphQLSchemaEndpoints } from '../$/helpers.js'
 
-const transportHttp = TransportHttp({
-  // url: publicGraphQLSchemaEndpoints.Pokemon,
-  methodMode: 'getReads',
-})
-
-transportHttp.transport.configInit.methodMode
-
-namespace Graffle2 {
-  const base = Graffle
-    .create()
-    .use(transportHttp)
-
-  export const create = Graffle.createPresetFromContext(base._)
-}
-
-const graffle = Graffle2
+const graffle = Graffle
   .create()
   .anyware(({ exchange }) =>
     exchange({

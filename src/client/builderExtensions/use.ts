@@ -13,10 +13,10 @@ export interface Use<$Args extends Builder.Extension.Parameters<BuilderExtension
   /**
    * TODO Docs.
    */
-  use: <$Extension extends Extension>(extension: $Extension) => UseExtensionDo<$Args, $Extension>
+  use: <$Extension extends Extension>(extension: $Extension) => UseExtensionReturn<$Args, $Extension>
 }
 
-export type UseExtensionDo<
+export type UseExtensionReturn<
   $Args extends Builder.Extension.Parameters<BuilderExtensionUse>,
   $Extension extends Extension,
 > = Builder.Definition.MaterializeWith<
@@ -29,17 +29,52 @@ export type UseExtensionDo<
       >
       : $Args['definition']
   ),
+  ApplyExtensionToContext<
+    $Args['context'],
+    $Extension
+  >
+>
+
+// dprint-ignore
+export type ApplyExtensionToContext<
+  $Context extends Context,
+  $Extension extends Extension,
+> =
   AddTypeHooks<
     AddTransport<
       AddExtension<
-        $Args['context'],
+        $Context,
         $Extension
       >,
       $Extension
     >,
     $Extension
   >
->
+
+// export type UseExtension<
+//   $Args extends Builder.Extension.Parameters<BuilderExtensionUse>,
+//   $Extension extends Extension,
+// > = Builder.Definition.MaterializeWith<
+//   // Apply any builder extensions.
+//   (
+//     ConfigManager.GetOptional<$Extension, ['builder', 'type']> extends Builder.Extension
+//       ? Builder.Definition.AddExtension<
+//         $Args['definition'],
+//         ConfigManager.GetOptional<$Extension, ['builder', 'type']>
+//       >
+//       : $Args['definition']
+//   ),
+//   AddTypeHooks<
+//     AddTransport<
+//       AddExtension<
+//         $Args['context'],
+//         $Extension
+//       >,
+//       $Extension
+//     >,
+//     $Extension
+//   >
+// >
 
 export const builderExtensionUse = Builder.Extension.create<BuilderExtensionUse>((builder, context) => {
   return {

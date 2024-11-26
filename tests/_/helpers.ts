@@ -4,11 +4,9 @@ import type { FSJetpack } from 'fs-jetpack/types.js'
 import * as Path from 'node:path'
 import type { Mock } from 'vitest'
 import { test as testBase, vi } from 'vitest'
-import type { Client } from '../../src/client/client.js'
-// import type { TransportConfigHttp, TransportConfigMemory } from '../../src/client/Settings/Config.js'
-import type { ContextEmpty } from '../../src/client/context.js'
 import { Graffle } from '../../src/entrypoints/main.js'
-import type { Context, SchemaDrivenDataMap } from '../../src/entrypoints/utilities-for-generated.js'
+import type { BasicClient, BasicClientContext, BasicClientWith } from '../../src/entrypoints/presets/basic.js'
+import type { SchemaDrivenDataMap } from '../../src/entrypoints/utilities-for-generated.js'
 import { TransportHttp } from '../../src/extensions/TransportHttp/TransportHttp.js'
 import { TransportMemory } from '../../src/extensions/TransportMemory/TransportMemory.js'
 import type { ConfigManager } from '../../src/lib/config-manager/__.js'
@@ -42,35 +40,20 @@ export const createResponse = (body: object) =>
 interface Fixtures {
   fetch: Mock<(request: Request) => Promise<Response>>
   pokemonService: SchemaService
-  graffle: Client
-  kitchenSink: Client<
-    ConfigManager.SetKeysOptional<
-      ContextEmpty,
-      {
-        name: `default`
-        schemaMap: SchemaDrivenDataMap
-        checkPreflight: false
-        config: {
-          output: Context['config']['output']
-          // transport: TransportConfigMemory
-        }
-      }
+  graffle: BasicClient
+  kitchenSink: BasicClientWith<{
+    schemaMap: SchemaDrivenDataMap
+    checkPreflight: false
+  }>
+  kitchenSinkHttp: BasicClientWith<{
+    schemaMap: SchemaDrivenDataMap
+    checkPreflight: false
+    transports: ConfigManager.SetKeyUnsafe<
+      BasicClientContext['transports'],
+      `current`,
+      `memory`
     >
-  >
-  kitchenSinkHttp: Client<
-    ConfigManager.SetKeysOptional<
-      ContextEmpty,
-      {
-        name: `default`
-        schemaMap: SchemaDrivenDataMap
-        checkPreflight: false
-        config: {
-          output: Context['config']['output']
-          // transport: TransportConfigHttp
-        }
-      }
-    >
-  >
+  }>
   kitchenSinkData: typeof db
   project: Project
 }

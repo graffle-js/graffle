@@ -1,12 +1,12 @@
 import type { CamelCase } from 'type-fest'
-import type { UseExtensionDo } from '../client/builderExtensions/use.js'
+import type { UseExtensionReturn } from '../client/builderExtensions/use.js'
 import { type Client, createWithContext } from '../client/client.js'
 import { ClientTransports, type ContextEmpty, createContext } from '../client/context.js'
 import type { OutputInput } from '../client/Settings/inputIncrementable/output.js'
 import type { NormalizeInput } from '../client/Settings/InputToConfig.js'
 import type { InputStatic } from '../entrypoints/main.js'
+import type { Extension } from '../extension/__.js'
 import type {
-  Extension,
   ExtensionConstructor,
   ExtensionInputParametersNone,
   ExtensionInputParametersOptional,
@@ -130,7 +130,7 @@ type ApplyPrefilledExtensions<
     ? ApplyPrefilledExtensions<
         $Rest,
         // @ts-expect-error fixme
-        UseExtensionDo<
+        UseExtensionReturn<
           Builder.Private.Get<$Client>,
           InferExtensionFromConstructor<$ExtensionConstructor>
         >

@@ -1,17 +1,88 @@
+import type { Extension } from '../../extension/__.js'
 import { createExtension } from '../../extension/extension.js'
+import type { TypeHooksEmpty } from '../../extension/TypeHooks.js'
+import type { Anyware } from '../../lib/anyware/__.js'
 import type { Grafaid } from '../../lib/grafaid/__.js'
 import { print } from '../../lib/grafaid/document.js'
 import { execute } from '../../lib/grafaid/execute.js'
+import type { RequestPipeline } from '../../requestPipeline/RequestPipeline.js'
 
-export const TransportMemory = createExtension({
+export interface TransportMemoryConstructor {
+  <$ConfigInit extends ConfigInit = ConfigInitEmpty>(
+    configInit?: $ConfigInit,
+  ): TransportMemory<$ConfigInit>
+}
+
+export interface Configuration {
+  schema: Grafaid.Schema.Schema
+}
+
+export type ConfigInit = Partial<Configuration>
+
+export interface ConfigInitEmpty {}
+
+export interface TransportMemory<$ConfigInit extends ConfigInit = ConfigInitEmpty> extends Extension {
+  name: `TransportMemory`
+  config: Configuration
+  configInit: $ConfigInit
+  transport: {
+    name: 'memory'
+    config: Configuration
+    configInit: $ConfigInit
+    requestPipelineOverload: RequestPipelineOverload
+  }
+  typeHooks: TypeHooksEmpty
+  onRequest: undefined
+  builder: undefined
+}
+
+export interface RequestPipelineOverload extends Anyware.Overload {
+  discriminant: ['transportType', 'memory']
+  input: Configuration
+  inputInit: {}
+  steps: {
+    pack: {
+      name: 'pack'
+      slots: {}
+      input: PackInput
+      output: PackOutput
+    }
+    exchange: {
+      name: 'exchange'
+      slots: {}
+      input: PackOutput
+      output: ExchangeOutput
+    }
+    unpack: {
+      name: 'unpack'
+      slots: {}
+      input: ExchangeOutput
+      output: RequestPipeline.DecodeInput
+    }
+  }
+}
+
+export interface PackInput extends RequestPipeline.PackInput {
+  headers?: HeadersInit
+}
+
+export interface PackOutput extends Omit<RequestPipeline.PackInput, 'request'> {
+  request: Grafaid.HTTP.RequestConfig
+}
+
+export interface ExchangeOutput extends PackOutput {}
+
+export const TransportMemory: TransportMemoryConstructor = createExtension({
   name: `TransportMemory`,
   normalizeConfig: (input?: { schema?: Grafaid.Schema.Schema }) => ({
     schema: input?.schema ?? undefined,
   }),
-  create: () => {
+  // eslint-disable-next-line
+  create() {
     return {
-      transport: ($) =>
-        $
+      // eslint-disable-next-line
+      transport($) {
+        return $
           .create(`memory`)
           .config<{ schema: Grafaid.Schema.Schema }>()
           .configInit<{}>()
@@ -36,7 +107,8 @@ export const TransportMemory = createExtension({
                 result,
               }
             },
-          }),
+          })
+      },
     }
   },
 })

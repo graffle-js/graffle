@@ -257,6 +257,18 @@ export type SetKey<
     [_ in $PropertyName]: $Type
   }
 
+export type SetKeyUnsafe<
+  $Obj extends object,
+  $PropertyName extends keyof $Obj,
+  $Type,
+> =
+  & {
+    [_ in keyof $Obj as _ extends $PropertyName ? never : _]: $Obj[_]
+  }
+  & {
+    [_ in $PropertyName]: $Type
+  }
+
 // // dprint-ignore
 // export type IntersectAtKeyPath<$Obj extends object, $Path extends Path, $Value> =
 //   $Path extends []

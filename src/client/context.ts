@@ -44,11 +44,11 @@ export namespace Context {
         $Context,
         'transports',
         {
-          configurations: $Context['transports'] extends ClientTransports.States.Empty
-            ? {
+          configurations:
+            & Omit<$Context['transports']['configurations'], $Transport['name']>
+            & {
                 [_ in $Transport['name']]: $Transport['configInit']
               }
-            : $Context['transports']['configurations']
           current: $Context['transports'] extends ClientTransports.States.Empty
             ? $Transport['name']
             : $Context['transports']['current']

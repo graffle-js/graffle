@@ -1,34 +1,15 @@
 import type { IsNever } from 'type-fest'
-import type { Client } from '../client/client.js'
 import type { Anyware } from '../lib/anyware/__.js'
 import type { Builder } from '../lib/builder/__.js'
 import { _, type AssertExtendsString } from '../lib/prelude.js'
 import type { RequestPipelineBase } from '../requestPipeline/RequestPipeline.js'
 import type { Transport } from '../types/Transport.js'
 import type { Extension } from './__.js'
+import type { BuilderExtension } from './builder.js'
 import type { TypeHooks, TypeHooksEmpty } from './TypeHooks.js'
 import type { TypeHooksBuilderCallback } from './TypeHooks.js'
 
 export * as TypeHooks from './TypeHooks.js'
-
-export interface EmptyTypeHooks {
-  onRequestResult: undefined
-  onRequestDocumentRootType: undefined
-}
-
-export type BuilderExtension<$BuilderExtension extends Builder.Extension | undefined = Builder.Extension | undefined> =
-  {
-    type: $BuilderExtension
-    implementation: BuilderExtensionImplementation
-  }
-
-export type BuilderExtensionImplementation = (
-  input: {
-    path: string[]
-    property: string
-    client: Client
-  },
-) => unknown
 
 export type ExtensionInputParameters =
   | ExtensionInputParametersNone
@@ -40,7 +21,7 @@ export type ExtensionInputParametersRequired = [input: object]
 
 export interface ExtensionDefinition {
   name: string
-  builder?: BuilderExtension
+  builder?: BuilderExtension // | BuilderExtension.CreatorCallback
   onRequest?: Anyware.Interceptor.InferFromPipeline<RequestPipelineBase>
   // typeHooks?: () => TypeHooks
   transport?: (
@@ -94,7 +75,7 @@ export const createExtension = <
     normalizeConfig?: (...args: $ConfigInputParameters) => $Config
     custom?: $Custom
     create: (params: { config: $Config }) => {
-      builder?: $BuilderExtension
+      builder?: $BuilderExtension | BuilderExtension.CreatorCallback<$BuilderExtension>
       onRequest?: Anyware.Interceptor.InferFromPipeline<RequestPipelineBase>
       typeHooks?: TypeHooksBuilderCallback<$TypeHooks> | $TypeHooks
       transport?: (

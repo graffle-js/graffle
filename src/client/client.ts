@@ -26,6 +26,8 @@ import { type BuilderExtensionGql, builderExtensionGql } from './gql/gql.js'
 import { type InputStatic } from './Settings/Input.js'
 import { type NormalizeInput } from './Settings/InputToConfig.js'
 
+export type ClientEmpty = Client<ContextEmpty>
+
 export type Client<$Context extends Context = Context> = Builder.Definition.MaterializeWith<
   ClientDefinition,
   $Context

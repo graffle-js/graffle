@@ -17,9 +17,9 @@ export const results = {
 } as const
 export type results = typeof results
 
-export const stepA = StepDef.createWithInput<initialInput>()({ name: `a`, run: () => results[`a`] })
-export const stepB = StepDef.createWithInput<results[`a`]>()({ name: `b`, run: () => results[`b`] })
-export const stepC = StepDef.createWithInput<results[`b`]>()({ name: `c`, run: () => results[`c`] })
+export const stepA = StepDefinition.createWithInput<initialInput>()({ name: `a`, run: () => results[`a`] })
+export const stepB = StepDefinition.createWithInput<results[`a`]>()({ name: `b`, run: () => results[`b`] })
+export const stepC = StepDefinition.createWithInput<results[`b`]>()({ name: `c`, run: () => results[`c`] })
 
 export const slots = {
   m: () => Promise.resolve(`m` as const),
