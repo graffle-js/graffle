@@ -61,7 +61,7 @@ export const createExtensionDefinition = <
   return definition as any
 }
 
-export const createExtension = <
+export const create = <
   $Name extends string,
   $BuilderExtension extends BuilderExtension = BuilderExtension,
   $TypeHooks extends TypeHooks = TypeHooksEmpty,

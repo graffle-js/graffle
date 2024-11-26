@@ -1,14 +1,14 @@
-import type { StepDefinition } from './StepDef.js'
+import type { StepDefinition } from './StepDefinition.js'
 import type { StepRunner } from './StepRunner.js'
 
 export interface Step {
   name: string
-  slots?: StepDef.Slots
+  slots?: StepDefinition.Slots
   input: Step.Input
   output: any
   run: StepRunner<any, any, any>
 }
 
 export namespace Step {
-  export type Input = StepDef.Input
+  export type Input = StepDefinition.Input
 }

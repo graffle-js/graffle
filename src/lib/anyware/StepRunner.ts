@@ -1,7 +1,7 @@
-import type { StepDefinition } from './StepDef.js'
+import type { StepDefinition } from './StepDefinition.js'
 
 export type StepRunner<
-  $Input extends StepDef.Input = StepDef.Input,
+  $Input extends StepDefinition.Input = StepDefinition.Input,
   // $Slots extends undefined | Step.Slots = undefined,
   $Slots extends undefined | object = undefined,
   $Previous extends undefined | object = undefined,

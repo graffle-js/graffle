@@ -1,5 +1,5 @@
 import { beforeEach } from 'vitest'
-import { createExtension } from '../../src/entrypoints/main.js'
+import { Extension } from '../../src/entrypoints/extensionkit.js'
 import type { RequestPipelineBaseDefinition } from '../../src/requestPipeline/__.js'
 
 interface SpyData {
@@ -26,7 +26,7 @@ const emptySpyData: SpyData = {
   },
 }
 
-export const Spy = createExtension({
+export const Spy = Extension.create({
   name: `Spy`,
   custom: {
     data: emptySpyData,

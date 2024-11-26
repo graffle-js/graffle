@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import { createExtension } from '../entrypoints/extensionkit.js'
+import { create } from '../entrypoints/extensionkit.js'
 import { Introspection } from '../extensions/Introspection/Introspection.js'
 import { ClientPreset } from './__.js'
 
@@ -10,7 +10,7 @@ test(`Preset extension is used on constructed client`, () => {
 })
 
 test(`If extension required input then client constructor input property is NOT optional`, () => {
-  const Ex = createExtension({
+  const Ex = create({
     name: `test`,
     normalizeConfig: (_: { a: 1; b?: 2 }) => {
       return { a: 11, b: 22 }
@@ -28,7 +28,7 @@ test(`If extension required input then client constructor input property is NOT 
 })
 
 test(`If extension has no required input then client constructor input property IS optional`, () => {
-  const Ex = createExtension({
+  const Ex = create({
     name: `test`,
     normalizeConfig: (_?: { a?: 1; b?: 2 }) => {
       return { a: 11, b: 22 }

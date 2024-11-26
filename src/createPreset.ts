@@ -1,9 +1,9 @@
-import type { Client } from './client/client.js'
+import type { ClientConstructor } from './client/client.js'
 import type { Context } from './client/context.js'
 import { __ } from './lib/prelude.js'
 
 export const createPresetFromContext = <$Context extends Context>(
   context: $Context,
-): () => Client<$Context> => {
-  return () => __(context)
+): ClientConstructor<$Context> => {
+  return (configInit) => __(context, configInit)
 }

@@ -15,7 +15,7 @@ import {
 } from '../__.test-helpers.js'
 import { Pipeline } from '../Pipeline/Pipeline.js'
 import { successfulResult } from '../Result.js'
-import { StepDefinition } from '../StepDef.js'
+import { StepDefinition } from '../StepDefinition.js'
 
 describe(`no interceptors`, () => {
   test(`passthrough to implementation`, async () => {
@@ -257,7 +257,7 @@ describe(`errors`, () => {
   describe('certain errors can be configured to be re-thrown without wrapping error', () => {
     class SpecialError1 extends Error {}
     class SpecialError2 extends Error {}
-    const stepA = StepDef.createWithInput<{ throws: Error }>()({
+    const stepA = StepDefinition.createWithInput<{ throws: Error }>()({
       name: 'a',
       run: (input) => {
         if (input.throws) throw input.throws

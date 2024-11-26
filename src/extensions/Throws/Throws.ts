@@ -1,9 +1,9 @@
 import type { Builder, Context } from '../../entrypoints/extensionkit.js'
-import { createExtension } from '../../entrypoints/extensionkit.js'
+import { create } from '../../entrypoints/extensionkit.js'
 import { type AssertExtends, type BuilderConfig, type WithInput } from '../../entrypoints/main.js'
 import type { ConfigManager } from '../../lib/config-manager/__.js'
 
-export const Throws = createExtension({
+export const Throws = create({
   name: `Throws`,
   create: () => {
     return {

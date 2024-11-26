@@ -3,7 +3,7 @@ import { describe, expect, expectTypeOf } from 'vitest'
 import { createResponse, test } from '../../../tests/_/helpers.js'
 import { db } from '../../../tests/_/schemas/db.js'
 import { Graffle } from '../../../tests/_/schemas/kitchen-sink/graffle/__.js'
-import { createExtension } from '../../extension/extension.js'
+import { create } from '../../extension/extension.js'
 import { Throws } from '../../extensions/Throws/Throws.js'
 // import { oops } from '../../../lib/anyware/specHelpers.js'
 
@@ -11,7 +11,7 @@ const client = Graffle.create({ output: { defaults: { errorChannel: 'return' } }
 const headers = { 'x-foo': 'bar' }
 
 test('using an extension without type hooks leaves them empty', () => {
-  const Ex = createExtension({
+  const Ex = create({
     name: 'test',
     create: () => {
       return {}

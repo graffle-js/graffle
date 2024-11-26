@@ -239,9 +239,9 @@ export type SetKeysOptional<
 > = {
   [_ in keyof $Obj]:
     _ extends keyof $NewObjValues
-      ? $NewObjValues[_] extends undefined
+      ? ExcludeUndefined<$NewObjValues[_]> extends never
         ? $Obj[_]
-        : $NewObjValues[_]
+        : ExcludeUndefined<$NewObjValues[_]>
       : $Obj[_]
 }
 

@@ -3,7 +3,7 @@ import { PipelineDefinition } from './_.js'
 import type { Interceptor, NonRetryingInterceptorInput } from './Interceptor/Interceptor.js'
 import { Pipeline } from './Pipeline/Pipeline.js'
 import type { Options } from './PipelineDef/Config.js'
-import { StepDefinition } from './StepDef.js'
+import { StepDefinition } from './StepDefinition.js'
 
 export const initialInput = { x: 1 } as const
 export type initialInput = typeof initialInput

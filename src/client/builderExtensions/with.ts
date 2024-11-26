@@ -1,8 +1,9 @@
+import type { WithInput } from '../../entrypoints/main.js'
 import { Builder } from '../../lib/builder/__.js'
 import type { ConfigManager } from '../../lib/config-manager/__.js'
+import type { ConfigInit } from '../Configuration/ConfigInit.js'
+import type { NormalizeConfigInit } from '../Configuration/normalizeConfigInit.js'
 import { type Context } from '../context.js'
-import type { WithInput } from '../Settings/inputIncrementable/inputIncrementable.js'
-import type { NormalizeInput } from '../Settings/InputToConfig.js'
 
 export interface BuilderExtensionWith extends Builder.Extension {
   context: Context
@@ -14,8 +15,8 @@ export interface With<$Args extends Builder.Extension.Parameters<BuilderExtensio
   /**
    * TODO With Docs.
    */
-  with: <$Input extends WithInput>(
-    input: $Input,
+  with: <$ConfigInit extends ConfigInit>(
+    configInit: $ConfigInit,
     // todo fixme
     // eslint-disable-next-line
     // @ts-ignore Passes after generation
@@ -24,8 +25,8 @@ export interface With<$Args extends Builder.Extension.Parameters<BuilderExtensio
     ConfigManager.SetKeysOptional<
       $Args['context'],
       {
-        input: $Args['context']['input'] & $Input
-        config: NormalizeInput<$Args['context']['input'] & $Input>
+        input: $Args['context']['input'] & $ConfigInit
+        config: NormalizeConfigInit<$Args['context']['input'] & $ConfigInit>
       }
     >
   >

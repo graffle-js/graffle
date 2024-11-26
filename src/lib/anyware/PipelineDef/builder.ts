@@ -2,7 +2,7 @@ import type { ConfigManager } from '../../config-manager/__.js'
 import { type Tuple } from '../../prelude.js'
 import type { Extension } from '../Extension/__.js'
 import { Overload } from '../Overload/__.js'
-import type { StepDefinition } from '../StepDef.js'
+import type { StepDefinition } from '../StepDefinition.js'
 import type { StepRunner } from '../StepRunner.js'
 import { Pipeline } from './_.js'
 import type { PipelineDefinition } from './__.js'
@@ -35,7 +35,7 @@ export interface Builder<$PipelineDef extends PipelineDefinition = PipelineDefin
     const $Name extends string,
     $Slots extends
       | undefined
-      | StepDef.Slots = undefined,
+      | StepDefinition.Slots = undefined,
   >(
     name: $Name,
     parameters?: {
@@ -80,7 +80,7 @@ interface StepMethod<$Context extends PipelineDefinition> {
     const $Name extends string,
     $Slots extends
       | undefined
-      | StepDef.Slots = undefined,
+      | StepDefinition.Slots = undefined,
     $Input = GetNextStepParameterInput<$Context>,
     $Output = unknown,
   >(
@@ -101,7 +101,7 @@ interface StepMethod<$Context extends PipelineDefinition> {
     const $Name extends string,
     $Slots extends
       | undefined
-      | StepDef.Slots = undefined,
+      | StepDefinition.Slots = undefined,
     $Input extends object = GetNextStepParameterInput<$Context>,
     $Output = unknown,
   >(

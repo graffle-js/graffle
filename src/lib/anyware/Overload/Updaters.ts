@@ -1,5 +1,5 @@
 import type { ConfigManager } from '../../config-manager/__.js'
-import type { StepDefinition } from '../StepDef.js'
+import type { StepDefinition } from '../StepDefinition.js'
 import type { Overload } from './__.js'
 
 export namespace Updaters {

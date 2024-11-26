@@ -1,4 +1,4 @@
-import { createExtension, Errors, type Extension } from '../../entrypoints/extensionkit.js'
+import { create, Errors, type Extension } from '../../entrypoints/extensionkit.js'
 import { normalizeRequestToNode } from '../../lib/grafaid/request.js'
 import { type ExcludeNullAndUndefined, isString } from '../../lib/prelude.js'
 import { isRecordLikeObject } from '../../lib/prelude.js'
@@ -6,7 +6,7 @@ import { SchemaDrivenDataMap } from '../../types/SchemaDrivenDataMap/__.js'
 import type { GeneratedExtensions } from './global.js'
 import { injectTypenameOnRootResultFields } from './injectTypenameOnRootResultFields.js'
 
-export const SchemaErrors = createExtension({
+export const SchemaErrors = create({
   name: `SchemaErrors`,
   create: () => {
     return {

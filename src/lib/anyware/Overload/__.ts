@@ -1,5 +1,5 @@
 import type { DiscriminantPropertyValue } from '../../prelude.js'
-import type { StepDefinition } from '../StepDef.js'
+import type { StepDefinition } from '../StepDefinition.js'
 
 export * as Overload from './_.js'
 

@@ -3,7 +3,7 @@
 // import { createStepsIndex, type StepsIndex } from '../Pipeline/Pipeline.js'
 // import { type Config, type Options, resolveOptions } from '../PipelineDef/Config.js'
 // import type { Step } from '../Step.js'
-// import type { StepDef } from '../StepDef.js'
+// import type { StepDefinition } from '../StepDefinition.js'
 // import type { PipelineSpecification } from './Spec.js'
 
 // export const createWithSpec = <$PipelineSpec extends PipelineSpecification>(

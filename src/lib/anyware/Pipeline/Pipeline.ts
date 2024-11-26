@@ -4,7 +4,7 @@ import type { PipelineDefinition } from '../_.js'
 import type { Overload } from '../Overload/__.js'
 import type { Config } from '../PipelineDef/Config.js'
 import type { Step } from '../Step.js'
-import type { StepDefinition } from '../StepDef.js'
+import type { StepDefinition } from '../StepDefinition.js'
 import type { StepRunner } from '../StepRunner.js'
 
 export interface Pipeline {
@@ -160,14 +160,14 @@ type InferStepOutput<$Step extends StepDefinition, $Overload extends Overload> =
 // dprint-ignore
 type InferStepInput<
   $StepIndex extends Tuple.IndexKey,
-  $StepDef extends StepDefinition,
+  $StepDefinition extends StepDefinition,
   $Overload extends Overload,
 > = $Overload extends never ? never :
-  & $StepDef['input']
+  & $StepDefinition['input']
   // Overload Contributions:
   // 1. The discriminant:
   & { [_ in $Overload['discriminant'][0]]: $Overload['discriminant'][1] }
   // 2. This specific step:
-  & $Overload['steps'][$StepDef['name']]['input']
+  & $Overload['steps'][$StepDefinition['name']]['input']
   // 3. If this is the first step, then the pipeline input contributions, if any:
   & ($StepIndex extends '0' ? $Overload['input'] : {})

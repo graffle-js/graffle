@@ -1,8 +1,8 @@
 import { trace, type Tracer } from '@opentelemetry/api'
-import { createExtension } from '../../extension/extension.js'
+import { create } from '../../extension/extension.js'
 import { createConfig } from './config.js'
 
-export const Opentelemetry = createExtension({
+export const Opentelemetry = create({
   name: `Opentelemetry`,
   normalizeConfig: createConfig,
   create: ({ config }) => {

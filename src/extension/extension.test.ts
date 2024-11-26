@@ -1,9 +1,9 @@
 import { describe, expectTypeOf, test } from 'vitest'
-import { createExtension } from './extension.js'
+import { create } from './extension.js'
 
 describe(`constructor arguments`, () => {
   test(`normalizeConfig undefined -> constructor input forbidden`, () => {
-    const Ex = createExtension({
+    const Ex = create({
       name: `test`,
       create: () => {
         return {}
@@ -14,7 +14,7 @@ describe(`constructor arguments`, () => {
     Ex({})
   })
   test(`normalizeConfig with optional keys -> constructor input optional`, () => {
-    const Ex = createExtension({
+    const Ex = create({
       name: `test`,
       normalizeConfig: (_?: { a?: 1; b?: 2 }) => {
         return { a: 11, b: 22 }
@@ -28,7 +28,7 @@ describe(`constructor arguments`, () => {
     Ex({ a: 1 })
   })
   test(`normalizeConfig with required input (but optional keys) -> constructor input required`, () => {
-    const Ex = createExtension({
+    const Ex = create({
       name: `test`,
       normalizeConfig: (_: { a?: 1; b?: 2 }) => {
         return { a: 11, b: 22 }
@@ -43,7 +43,7 @@ describe(`constructor arguments`, () => {
     Ex({ a: 1 })
   })
   test(`normalizeConfig with required keys -> constructor input required`, () => {
-    const Ex = createExtension({
+    const Ex = create({
       name: `test`,
       normalizeConfig: (_: { a: 1; b?: 2 }) => {
         return { a: 11, b: 22 }
@@ -61,7 +61,7 @@ describe(`constructor arguments`, () => {
 })
 
 test(`type hooks is empty by default`, () => {
-  const Ex = createExtension({
+  const Ex = create({
     name: `test`,
     create: () => {
       return {}

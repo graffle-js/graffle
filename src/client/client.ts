@@ -4,10 +4,8 @@ import {
 } from '../documentBuilder/requestMethods/requestMethods.js' // todo
 import { defaultName } from '../generator/config/defaults.js'
 import type { Builder } from '../lib/builder/__.js'
-import type { ConfigManager } from '../lib/config-manager/__.js'
 import { proxyGet } from '../lib/prelude.js'
 import { requestPipelineBaseDefinition } from '../requestPipeline/RequestPipeline.js'
-import type { GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
 import { Schema } from '../types/Schema/__.js'
 import { type BuilderExtensionAnyware, builderExtensionAnyware } from './builderExtensions/anyware.js'
 import { type BuilderExtensionInternal, builderExtensionInternal } from './builderExtensions/internal.js'
@@ -15,6 +13,8 @@ import { type BuilderExtensionScalar, builderExtensionScalar } from './builderEx
 import { type BuilderExtensionTransport } from './builderExtensions/transport.js'
 import { type BuilderExtensionUse, builderExtensionUse } from './builderExtensions/use.js'
 import { type BuilderExtensionWith, builderExtensionWith } from './builderExtensions/with.js'
+import { type ConfigInit } from './Configuration/ConfigInit.js'
+import { outputConfigDefault } from './Configuration/Output.js'
 import {
   ClientTransports,
   type Context,
@@ -23,8 +23,15 @@ import {
   createContext,
 } from './context.js'
 import { type BuilderExtensionGql, builderExtensionGql } from './gql/gql.js'
-import { type InputStatic } from './Settings/Input.js'
-import { type NormalizeInput } from './Settings/InputToConfig.js'
+
+export type ClientConstructor<$Context extends Context = ContextEmpty> = <const $ConfigInit extends ConfigInit = {}>(
+  configInit?: $ConfigInit,
+) => Client<
+  Context.Updaters.AddConfigInit<
+    $Context,
+    $ConfigInit
+  >
+>
 
 export type ClientEmpty = Client<ContextEmpty>
 
@@ -44,33 +51,16 @@ type ClientDefinition = Builder.Definition.Create<[
   BuilderExtensionScalar,
 ]>
 
-// dprint-ignore
-type Create = <$Input extends InputStatic | undefined = undefined>(input?: $Input) =>
-  // todo fixme
-  // eslint-disable-next-line
-  // @ts-ignore
-  Client<
-    ConfigManager.SetKeysOptional<
-      ContextEmpty,
-      {
-        name: HandleName<ConfigManager.OrDefault<$Input, {}>>
-        input: ConfigManager.OrDefault<$Input, {}>
-        config: NormalizeInput<ConfigManager.OrDefault<$Input, {}>>
-        checkPreflight: $Input extends InputStatic ? ConfigManager.OrDefault<$Input['checkPreflight'], undefined> : undefined
-        schemaMap: $Input extends InputStatic ? ConfigManager.OrDefault<$Input['schemaMap'], null> : null
-      }
-    >
-  >
-
-export const create: Create = (input) => {
+export const create: ClientConstructor = (configInit) => {
   const initialContext = createContext({
-    name: input?.name ?? defaultName,
-    schemaMap: input?.schemaMap ?? null,
+    name: configInit?.name ?? defaultName,
+    schemaMap: configInit?.schemaMap ?? null,
     transports: ClientTransports.States.empty,
+    output: outputConfigDefault,
     requestPipelineDefinition: requestPipelineBaseDefinition,
     extensions: [],
     scalars: Schema.Scalar.Registry.empty,
-    input: input ?? {},
+    input: configInit ?? {},
   })
   return createWithContext(initialContext)
 }
@@ -114,6 +104,3 @@ export const createWithContext = (
 
   return clientProxy
 }
-
-type HandleName<$Input extends InputStatic> = $Input['name'] extends string ? $Input['name']
-  : GlobalRegistry.DefaultClientName

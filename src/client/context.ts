@@ -6,12 +6,20 @@ import type { RequestPipelineBaseDefinition } from '../requestPipeline/RequestPi
 import type { Schema } from '../types/Schema/__.js'
 import type { SchemaDrivenDataMap } from '../types/SchemaDrivenDataMap/SchemaDrivenDataMap.js'
 import type { Transport } from '../types/Transport.js'
-import type { Config } from './Settings/Config.js'
-import type { InputStatic } from './Settings/Input.js'
-import { inputToConfig } from './Settings/InputToConfig.js'
+import type { ConfigInit, DefaultCheckPreflight, DefaultName } from './Configuration/ConfigInit.js'
+import { type NormalizeConfigInit, normalizeConfigInit } from './Configuration/normalizeConfigInit.js'
+import type { OutputConfig } from './Configuration/Output.js'
 
 export namespace Context {
   export namespace Updaters {
+    export type AddConfigInit<
+      $Context extends Context,
+      $ConfigInit extends ConfigInit,
+    > = ConfigManager.SetKeysOptional<
+      $Context,
+      NormalizeConfigInit<$ConfigInit>
+    > // todo output init needs to be processed before setting into context.
+
     // dprint-ignore
     export type AddTransportOptional<
       $Context extends Context,
@@ -74,8 +82,8 @@ export interface Context {
   /**
    * The initial input that was given to derive the config.
    */
-  input: InputStatic
-  config: Config
+  input: ConfigInit
+  output: OutputConfig
   schemaMap: SchemaDrivenDataMap | null
 
   // retry: Anyware.Extension2<RequestPipeline.Core, { retrying: true }> | null
@@ -91,10 +99,11 @@ export interface Context {
 }
 
 export interface ContextEmpty extends Context {
+  name: DefaultName
   scalars: Schema.Scalar.Registry.Empty
   extensions: []
   transports: ClientTransports.States.Empty
-  checkPreflight: true
+  checkPreflight: DefaultCheckPreflight
   schemaMap: null
   input: {}
   requestPipelineDefinition: RequestPipelineBaseDefinition
@@ -103,12 +112,12 @@ export interface ContextEmpty extends Context {
 }
 
 export const createContext = (contextWithoutConfig: ContextWithoutConfig): Context => {
-  let config: Config | null
+  let config: Context | null
 
   return {
     ...contextWithoutConfig,
-    get config(): Config {
-      const configFound = config ?? inputToConfig(contextWithoutConfig.input)
+    get config() {
+      const configFound = config ?? normalizeConfigInit(contextWithoutConfig.input)
       return configFound as any
     },
   } as Context

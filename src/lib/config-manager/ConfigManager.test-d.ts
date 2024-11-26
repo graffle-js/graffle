@@ -70,4 +70,7 @@ assertEqual<ConfigManager.UpdateKeyWithIntersection<{x: {b:2}}, 'x', {a:1}>    ,
 assertEqual<ConfigManager.SetKeysOptional<{a:1}, {}>                 , {a:1}>()
 assertEqual<ConfigManager.SetKeysOptional<{a:1}, {a:2}>              , {a:2}>()
 assertEqual<ConfigManager.SetKeysOptional<{a:1}, {a:undefined}>      , {a:1}>()
+assertEqual<ConfigManager.SetKeysOptional<{a:1}, {a?:1}>             , {a:1}>()
+assertEqual<ConfigManager.SetKeysOptional<{a:1}, {a?:2}>             , {a:2}>()
+assertEqual<ConfigManager.SetKeysOptional<{a:1}, {a:2|undefined}>    , {a:2}>()
 }

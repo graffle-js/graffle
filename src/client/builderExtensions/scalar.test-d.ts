@@ -8,17 +8,17 @@ import type { TypeErrorMissingSchemaMap } from './scalar.js'
 const g1 = Graffle.create()
 assertEqual<typeof g1.scalar, TypeErrorMissingSchemaMap>()
 
-const g2 = Graffle.create({ schema: `foo`, schemaMap })
+const g2 = Graffle.create({ schemaMap })
 assertEqual<typeof g2.scalar, SomeFunction>()
 
 // @ts-expect-error "Foo" is not a scalar name in the schema.
-Graffle.create({ schema: `foo`, schemaMap }).scalar(`Foo`, _)
+Graffle.create({ schemaMap }).scalar(`Foo`, _)
 // @ts-expect-error "Foo" is not a scalar name in the schema.
-Graffle.create({ schema: `foo`, schemaMap }).scalar(FooScalar)
-Graffle.create({ schema: `foo`, schemaMap }).scalar(`Date`, _)
-Graffle.create({ schema: `foo`, schemaMap }).scalar(`Int`, _)
+Graffle.create({ schemaMap }).scalar(FooScalar)
+Graffle.create({ schemaMap }).scalar(`Date`, _)
+Graffle.create({ schemaMap }).scalar(`Int`, _)
 {
-  const graffle = Graffle.create({ schema: `foo`, schemaMap }).scalar(DateScalar)
+  const graffle = Graffle.create({ schemaMap }).scalar(DateScalar)
   assertEqual<
     typeof graffle._.scalars,
     { typesDecoded: Date; typesEncoded: string; map: { Date: typeof DateScalar } }

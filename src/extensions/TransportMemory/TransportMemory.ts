@@ -1,5 +1,5 @@
 import type { Extension } from '../../extension/__.js'
-import { createExtension } from '../../extension/extension.js'
+import { create } from '../../extension/extension.js'
 import type { TypeHooksEmpty } from '../../extension/TypeHooks.js'
 import type { Anyware } from '../../lib/anyware/__.js'
 import type { Grafaid } from '../../lib/grafaid/__.js'
@@ -72,7 +72,7 @@ export interface PackOutput extends Omit<RequestPipeline.PackInput, 'request'> {
 
 export interface ExchangeOutput extends PackOutput {}
 
-export const TransportMemory: TransportMemoryConstructor = createExtension({
+export const TransportMemory: TransportMemoryConstructor = create({
   name: `TransportMemory`,
   normalizeConfig: (input?: { schema?: Grafaid.Schema.Schema }) => ({
     schema: input?.schema ?? undefined,

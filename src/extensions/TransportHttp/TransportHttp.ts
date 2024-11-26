@@ -1,6 +1,6 @@
 import { MethodMode, type MethodModeGetReads } from '../../client/transportHttp/request.js'
 import type { MethodModePost } from '../../client/transportHttp/request.js'
-import { createExtension, type Extension } from '../../entrypoints/extensionkit.js'
+import { create, type Extension } from '../../entrypoints/extensionkit.js'
 import type { TypeHooksEmpty } from '../../extension/TypeHooks.js'
 import type { Anyware } from '../../lib/anyware/__.js'
 import type { ConfigManager } from '../../lib/config-manager/__.js'
@@ -113,7 +113,7 @@ type ExchangeGetRequest = Omit<RequestInit, 'body' | 'method'> & {
   url: string | URL
 }
 
-export const TransportHttp: TransportHttpConstructor = createExtension({
+export const TransportHttp: TransportHttpConstructor = create({
   name: `TransportHttp`,
   normalizeConfig: (configInit?: ConfigInit) => {
     return {

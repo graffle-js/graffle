@@ -10,7 +10,7 @@ import {
 import type { Pipeline } from '../Pipeline/Pipeline.js'
 import type { PipelineDefinition } from '../PipelineDef/__.js'
 import { successfulResult } from '../Result.js'
-import type { StepDefinition } from '../StepDef.js'
+import type { StepDefinition } from '../StepDefinition.js'
 import type { StepResultErrorExtension } from '../StepResult.js'
 import type { StepTriggerEnvelope } from '../StepTriggerEnvelope.js'
 import { getEntryStep } from './getEntrypoint.js'
@@ -94,7 +94,7 @@ const toInternalInterceptor = (pipeline: PipelineDefinition.Pipeline, intercepto
         }
       }
 
-      const stepsBeforeEntrypoint: StepDef.Name[] = []
+      const stepsBeforeEntrypoint: StepDefinition.Name[] = []
       for (const step of pipeline.steps) {
         if (step === entryStep) break
         stepsBeforeEntrypoint.push(step.name)

@@ -1,19 +1,17 @@
-import type { GraphQLSchema } from 'graphql'
-
 export type OutputChannel = 'throw' | 'return'
 
 export type OutputChannelConfig = 'throw' | 'return' | 'default'
 
 export type ErrorCategory = 'execution' | 'other'
 
-export const readConfigErrorCategoryOutputChannel = (
-  config: Config,
+export const readErrorCategoryOutputChannel = (
+  output: OutputConfig,
   errorCategory: ErrorCategory,
 ): OutputChannel | false => {
-  if (config.output.errors[errorCategory] === `default`) {
-    return config.output.defaults.errorChannel
+  if (output.errors[errorCategory] === `default`) {
+    return output.defaults.errorChannel
   }
-  return config.output.errors[errorCategory]
+  return output.errors[errorCategory]
 }
 
 export const traditionalGraphqlOutput = {
@@ -33,9 +31,9 @@ export const traditionalGraphqlOutputThrowing: OutputConfig = {
   },
 }
 
-export const isContextConfigTraditionalGraphQLOutput = (config: Config) => {
-  return config.output.envelope.enabled && config.output.envelope.errors.execution
-    && !config.output.envelope.errors.other
+export const isOutputTraditionalGraphQLOutput = (output: OutputConfig) => {
+  return output.envelope.enabled && output.envelope.errors.execution
+    && !output.envelope.errors.other
 }
 
 export type OutputConfig = {
@@ -87,12 +85,4 @@ export type OutputConfigDefault = {
     execution: 'default'
     other: 'default'
   }
-}
-
-export interface TransportConfigMemory {
-  schema: GraphQLSchema
-}
-
-export type Config = {
-  output: OutputConfig
 }

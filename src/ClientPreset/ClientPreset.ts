@@ -1,10 +1,9 @@
 import type { CamelCase } from 'type-fest'
 import type { UseExtensionReturn } from '../client/builderExtensions/use.js'
 import { type Client, createWithContext } from '../client/client.js'
+import type { NormalizeConfigInit } from '../client/Configuration/normalizeConfigInit.js'
 import { ClientTransports, type ContextEmpty, createContext } from '../client/context.js'
-import type { OutputInput } from '../client/Settings/inputIncrementable/output.js'
-import type { NormalizeInput } from '../client/Settings/InputToConfig.js'
-import type { InputStatic } from '../entrypoints/main.js'
+import type { ConfigInit, OutputInit } from '../entrypoints/main.js'
 import type { Extension } from '../extension/__.js'
 import type {
   ExtensionConstructor,
@@ -93,8 +92,8 @@ type CreatePrefilled = <
             name: $Params['name']
             schemaMap: ConfigManager.OrDefault<$Params['sddm'], null>
             scalars: ConfigManager.OrDefault<$Params['scalars'], Schema.Scalar.Registry.Empty>
-            checkPreflight: $Input extends InputStatic ? ConfigManager.OrDefault<$Input['checkPreflight'], undefined> : undefined
-            config: NormalizeInput<$Input>
+            checkPreflight: $Input extends ConfigInit ? ConfigManager.OrDefault<$Input['checkPreflight'], undefined> : undefined
+            config: NormalizeConfigInit<$Input>
           }
         >
       >
@@ -106,7 +105,7 @@ type ConstructorParameters<
 > =
   & Tuple.IntersectItems<GetParametersContributedByExtensions<$Extensions>>
   & {
-    output?: OutputInput
+    output?: OutputInit
     checkPreflight?: boolean
   }
 

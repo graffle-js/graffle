@@ -1,7 +1,7 @@
 import type { GraphQLError } from 'graphql'
 import type { Simplify } from 'type-fest'
 import type { SimplifyDeepExcept } from '../documentBuilder/Simplify.js'
-import type { RunTypeHookOnRequestResult } from '../extension/extension.js'
+import type { Extension } from '../entrypoints/extensionkit.js'
 import type { Anyware } from '../lib/anyware/__.js'
 import { Errors } from '../lib/errors/__.js'
 import type { Grafaid } from '../lib/grafaid/__.js'
@@ -16,13 +16,13 @@ import {
 } from '../lib/prelude.js'
 import type { RequestPipelineBase } from '../requestPipeline/RequestPipeline.js'
 import type { GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
-import type { Context } from './context.js'
 import {
   type ErrorCategory,
-  isContextConfigTraditionalGraphQLOutput,
+  isOutputTraditionalGraphQLOutput,
   type OutputChannelConfig,
-  readConfigErrorCategoryOutputChannel,
-} from './Settings/Config.js'
+  readErrorCategoryOutputChannel,
+} from './Configuration/Output.js'
+import type { Context } from './context.js'
 
 export type GraffleExecutionResultEnvelope = {
   errors?: ReadonlyArray<
@@ -39,7 +39,7 @@ export const handleOutput = (
   state: Context,
   result: Anyware.Result<RequestPipelineBase['output']>,
 ) => {
-  if (isContextConfigTraditionalGraphQLOutput(state.config)) {
+  if (isOutputTraditionalGraphQLOutput(state.config)) {
     if (result instanceof Error) throw result
     return result.value
   }
@@ -49,16 +49,16 @@ export const handleOutput = (
 
   const isEnvelope = c.envelope.enabled
 
-  const isThrowOther = readConfigErrorCategoryOutputChannel(config, `other`) === `throw`
+  const isThrowOther = readErrorCategoryOutputChannel(config, `other`) === `throw`
     && (!c.envelope.enabled || !c.envelope.errors.other)
 
-  const isReturnOther = readConfigErrorCategoryOutputChannel(config, `other`) === `return`
+  const isReturnOther = readErrorCategoryOutputChannel(config, `other`) === `return`
     && (!c.envelope.enabled || !c.envelope.errors.other)
 
-  const isThrowExecution = readConfigErrorCategoryOutputChannel(config, `execution`) === `throw`
+  const isThrowExecution = readErrorCategoryOutputChannel(config, `execution`) === `throw`
     && (!c.envelope.enabled || !c.envelope.errors.execution)
 
-  const isReturnExecution = readConfigErrorCategoryOutputChannel(config, `execution`) === `return`
+  const isReturnExecution = readErrorCategoryOutputChannel(config, `execution`) === `return`
     && (!c.envelope.enabled || !c.envelope.errors.execution)
 
   if (result instanceof Error) {
@@ -127,7 +127,7 @@ type HandleOutput_Extensions<$Context extends Context, $Envelope extends Graffle
     $Context,
     // eslint-disable-next-line
     // @ts-ignore fixme
-    RunTypeHookOnRequestResult<$Context, {
+    Extension.TypeHooks.RunTypeHookOnRequestResult<$Context, {
       result: $Envelope
       // eslint-disable-next-line
       // @ts-ignore fixme

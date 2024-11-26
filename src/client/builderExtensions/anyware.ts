@@ -1,4 +1,4 @@
-import { createExtension } from '../../extension/extension.js'
+import { create } from '../../extension/extension.js'
 import type { Anyware as AnywareLib } from '../../lib/anyware/__.js'
 import { Builder } from '../../lib/builder/__.js'
 import type { RequestPipelineBase } from '../../requestPipeline/__.js'
@@ -28,7 +28,7 @@ export const builderExtensionAnyware = Builder.Extension.create<BuilderExtension
         ...context,
         extensions: [
           ...context.extensions,
-          createExtension({
+          create({
             name: `InlineAnyware`,
             create: () => ({ onRequest: interceptor }),
           })(),

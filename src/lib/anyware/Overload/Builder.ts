@@ -1,7 +1,7 @@
 import type { ConfigManager } from '../../config-manager/__.js'
 import type { Tuple } from '../../prelude.js'
 import type { PipelineDefinition } from '../PipelineDef/__.js'
-import type { StepDefinition } from '../StepDef.js'
+import type { StepDefinition } from '../StepDefinition.js'
 import type { Overload } from './__.js'
 
 export const create: Create = (parameters) => {
@@ -78,7 +78,7 @@ interface StepMethod<
 > {
   <
     $Name extends $Pipeline['steps'][number]['name'],
-    $Slots extends undefined | StepDef.Slots = undefined,
+    $Slots extends undefined | StepDefinition.Slots = undefined,
     $Input =
       & InferStepInput<
         $Overload,
