@@ -1,4 +1,4 @@
-import { createExtension, createTypeHooks, Errors, type Extension } from '../../entrypoints/extensionkit.js'
+import { createExtension, Errors, type Extension } from '../../entrypoints/extensionkit.js'
 import { normalizeRequestToNode } from '../../lib/grafaid/request.js'
 import { type ExcludeNullAndUndefined, isString } from '../../lib/prelude.js'
 import { isRecordLikeObject } from '../../lib/prelude.js'
@@ -67,19 +67,19 @@ export const SchemaErrors = createExtension({
 
         return result
       },
-      typeHooks: createTypeHooks<{
-        onRequestDocumentRootType: OnRequestDocumentRootType_
-        onRequestResult: OnRequestResult_
-      }>,
+      typeHooks: ($) =>
+        $
+          .onRequestDocumentRootType<OnRequestDocumentRootType_>()
+          .onRequestResult<OnRequestResult_>(),
     }
   },
 })
 
-type OnRequestDocumentRootType<$Params extends Extension.Hooks.OnRequestDocumentRootType.Params> =
+type OnRequestDocumentRootType<$Params extends Extension.TypeHooks.OnRequestDocumentRootType.Params> =
   $Params['selectionRootType']
 
 // dprint-ignore
-interface OnRequestResult<$Arguments extends Extension.Hooks.OnRequestResult.Params<GeneratedExtensions>>
+interface OnRequestResult<$Arguments extends Extension.TypeHooks.OnRequestResult.Params<GeneratedExtensions>>
   {
     result: {
       data?:
@@ -97,12 +97,12 @@ interface OnRequestResult<$Arguments extends Extension.Hooks.OnRequestResult.Par
 
 // --------- Boilerplate Types ---------
 
-interface OnRequestDocumentRootType_ extends Extension.Hooks.OnRequestDocumentRootType {
+interface OnRequestDocumentRootType_ extends Extension.TypeHooks.OnRequestDocumentRootType {
   // @ts-expect-error untyped params
   return: OnRequestDocumentRootType<this['params']>
 }
 
-interface OnRequestResult_ extends Extension.Hooks.OnRequestResult {
+interface OnRequestResult_ extends Extension.TypeHooks.OnRequestResult {
   // @ts-expect-error untyped params
   return: OnRequestResult<this['params']>
 }

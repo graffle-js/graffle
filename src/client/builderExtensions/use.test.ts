@@ -7,7 +7,7 @@ import { createExtension } from '../../extension/extension.js'
 import { Throws } from '../../extensions/Throws/Throws.js'
 // import { oops } from '../../../lib/anyware/specHelpers.js'
 
-const client = Graffle.create({ schema: 'https://foo', output: { defaults: { errorChannel: 'return' } } })
+const client = Graffle.create({ output: { defaults: { errorChannel: 'return' } } })
 const headers = { 'x-foo': 'bar' }
 
 test('using an extension without type hooks leaves them empty', () => {
@@ -17,7 +17,7 @@ test('using an extension without type hooks leaves them empty', () => {
       return {}
     },
   })
-  const graffle1 = Graffle.create({ schema: '' })
+  const graffle1 = Graffle.create()
   expectTypeOf(graffle1._.typeHooks).toEqualTypeOf<{
     onRequestResult: []
     onRequestDocumentRootType: []

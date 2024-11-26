@@ -14,7 +14,7 @@ interface x1 {
 }
 
 assertEqual<
-  ConfigManager.SetKeys<x1, {
+  ConfigManager.SetKeysOptional<x1, {
     a: [1, 2]
     c: { y: 2 }
     keyThatDoesNotExistOnX1: boolean
@@ -66,6 +66,11 @@ assertEqual<ConfigManager.UpdateKeyWithAppend<{x: [1]}, 'x', 2> , { x: [1, 2] }>
 assertEqual<ConfigManager.UpdateKeyWithIntersection<{x: {}}, 'x', {}>          , { x: {} }>()
 assertEqual<ConfigManager.UpdateKeyWithIntersection<{x: {}}, 'x', {a:1}>       , { x: {a:1} }>()
 assertEqual<ConfigManager.UpdateKeyWithIntersection<{x: {b:2}}, 'x', {a:1}>    , { x: {a:1; b:2} }>()
+
+
+assertEqual<ConfigManager.SetKeysOptional<{a:1}, {}>                 , {a:1}>()
+assertEqual<ConfigManager.SetKeysOptional<{a:1}, {a:2}>              , {a:2}>()
+assertEqual<ConfigManager.SetKeysOptional<{a:1}, {a:undefined}>      , {a:1}>()
 }
 
 assertEqual<

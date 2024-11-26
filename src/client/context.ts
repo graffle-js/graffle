@@ -65,6 +65,13 @@ export interface Context {
   requestPipelineDefinition: Anyware.PipelineDefinition
   transports: ClientTransports
   /**
+   * If enabled, this will cause request methods to be statically unavailable if
+   * a transport is not correctly configured.
+   *
+   * @defaultValue `true`
+   */
+  checkPreflight?: boolean
+  /**
    * The initial input that was given to derive the config.
    */
   input: InputStatic
@@ -90,6 +97,7 @@ export interface ContextEmpty extends Context {
   typeHooks: TypeHooksEmpty
   extensions: []
   transports: ClientTransports.States.Empty
+  checkPreflight: true
   schemaMap: null
   input: {}
   requestPipelineDefinition: RequestPipelineBaseDefinition
@@ -144,8 +152,21 @@ export namespace ClientTransports {
     export type PreflightCheckTransportNotReady<$TransportName extends string> =
       `Error: You cannot send requests yet. The selected transport "${$TransportName}" is not sufficiently configured.`
   }
+
   // dprint-ignore
-  export type PreflightCheck<$ClientTransports extends ClientTransports, $SuccessValue = true> =
+  export type PreflightCheck<
+    $Context extends Context,
+    $SuccessValue = true,
+  > =
+    $Context['checkPreflight'] extends false
+      ? $SuccessValue
+      : PreflightCheck_<$Context['transports'], $SuccessValue>
+
+  // dprint-ignore
+  export type PreflightCheck_<
+    $ClientTransports extends ClientTransports,
+    $SuccessValue = true,
+  > =
     $ClientTransports extends ClientTransports.States.Empty
       ? ClientTransports.Errors.PreflightCheckNoTransportsRegistered
       : $ClientTransports['current'] extends string

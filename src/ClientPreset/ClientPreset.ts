@@ -1,9 +1,10 @@
 import type { CamelCase } from 'type-fest'
 import type { UseExtensionDo } from '../client/builderExtensions/use.js'
 import { type Client, createWithContext } from '../client/client.js'
-import { Context, type ContextEmpty, createContext } from '../client/context.js'
+import { ClientTransports, type ContextEmpty, createContext } from '../client/context.js'
 import type { OutputInput } from '../client/Settings/inputIncrementable/output.js'
 import type { NormalizeInput } from '../client/Settings/InputToConfig.js'
+import type { InputStatic } from '../entrypoints/main.js'
 import type {
   Extension,
   ExtensionConstructor,
@@ -42,7 +43,7 @@ export const create: CreatePrefilled = (args) => {
       scalars,
       schemaMap,
       requestPipelineDefinition: requestPipelineBaseDefinition,
-      transports: Context.Transport.States.empty,
+      transports: ClientTransports.States.empty,
       input: {
         schema: args.schemaUrl,
         // eslint-disable-next-line
@@ -76,23 +77,24 @@ type CreatePrefilled = <
 >(keywordArgs: $Params) =>
   {
     preset: $Params
-    <$ClientKeywordArgs extends ConstructorParameters<$Name, ConfigManager.OrDefault<$Params['extensions'], []>>>(
+    <$Input extends ConstructorParameters<ConfigManager.OrDefault<$Params['extensions'], []>>>(
       ...args: ToParametersExact<
-                  $ClientKeywordArgs,
-                  ConstructorParameters<$Name, ConfigManager.OrDefault<$Params['extensions'], []>>
+                  $Input,
+                  ConstructorParameters<ConfigManager.OrDefault<$Params['extensions'], []>>
                 >
     ): ApplyPrefilledExtensions<
       ConfigManager.OrDefault<$Params['extensions'], []>,
       // @ts-expect-error fixme
       Client<
-        ConfigManager.SetKeys<
+        ConfigManager.SetKeysOptional<
           ContextEmpty,
           {
-            input: $ClientKeywordArgs
+            input: $Input
             name: $Params['name']
             schemaMap: ConfigManager.OrDefault<$Params['sddm'], null>
             scalars: ConfigManager.OrDefault<$Params['scalars'], Schema.Scalar.Registry.Empty>
-            config: NormalizeInput<$ClientKeywordArgs & { name: $Name; schemaMap: SchemaDrivenDataMap }>
+            checkPreflight: $Input extends InputStatic ? ConfigManager.OrDefault<$Input['checkPreflight'], undefined> : undefined
+            config: NormalizeInput<$Input>
           }
         >
       >
@@ -100,12 +102,12 @@ type CreatePrefilled = <
   }
 
 type ConstructorParameters<
-  $Name extends string,
   $Extensions extends [...ExtensionConstructor[]],
 > =
   & Tuple.IntersectItems<GetParametersContributedByExtensions<$Extensions>>
   & {
     output?: OutputInput
+    checkPreflight?: boolean
   }
 
 // dprint-ignore

@@ -35,6 +35,7 @@ export const Introspection = createExtension({
 
         return async () => {
           let introspectionQueryDocument = getIntrospectionQuery(config.options)
+          // @ts-expect-error fixme
           const result = await clientCatching.gql(introspectionQueryDocument).send()
           const featuresDropped: string[] = []
           const enabledKnownPotentiallyUnsupportedFeatures = knownPotentiallyUnsupportedFeatures.filter(_ =>
@@ -49,6 +50,7 @@ export const Introspection = createExtension({
                 ...config.options,
                 [feature]: false,
               })
+              // @ts-expect-error fixme
               const result = await clientCatching.gql(introspectionQueryDocument).send()
               if (!(result instanceof Error)) break
             }
@@ -58,6 +60,7 @@ export const Introspection = createExtension({
           // TODO rather than having to make this query again expose a way to send a value through the output handler here.
           // TODO expose the featuresDropped info on the envelope so that upstream can communicate to users what happened
           // finally at runtime.
+          // @ts-expect-error fixme
           return await client.gql(introspectionQueryDocument).send()
         }
       }),

@@ -18,37 +18,22 @@ import type { RequestPipelineBase } from '../requestPipeline/RequestPipeline.js'
 import type { GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
 import type { Context } from './context.js'
 import {
-  type Config,
   type ErrorCategory,
   isContextConfigTraditionalGraphQLOutput,
   type OutputChannelConfig,
   readConfigErrorCategoryOutputChannel,
 } from './Settings/Config.js'
 
-export type GraffleExecutionResultEnvelope<$Config extends Config = Config> =
-  & {
-    errors?: ReadonlyArray<
-      // formatted comes from http transport
-      | Grafaid.FormattedExecutionResultError
-      // unformatted comes from memory transport
-      | Grafaid.GraphQLError
-    >
-    data?: SomeObjectData | null
-    extensions?: ObjMap
-  }
-  & ($Config['transport']['type'] extends TransportHttp ? {
-      /**
-       * If transport was HTTP, then the raw response is available here.
-       */
-      response: Response
-    }
-    : TransportHttp extends $Config['transport']['type'] ? {
-        /**
-         * If transport was HTTP, then the raw response is available here.
-         */
-        response?: Response
-      }
-    : {})
+export type GraffleExecutionResultEnvelope = {
+  errors?: ReadonlyArray<
+    // formatted comes from http transport
+    | Grafaid.FormattedExecutionResultError
+    // unformatted comes from memory transport
+    | Grafaid.GraphQLError
+  >
+  data?: SomeObjectData | null
+  extensions?: ObjMap
+}
 
 export const handleOutput = (
   state: Context,
@@ -194,11 +179,6 @@ export type Envelope<
       data?: $Data | null
         extensions?: ObjMap
       }
-    & (
-        $Context['config']['transport']['type'] extends 'http'
-        ? { response: Response }
-        : {}
-      )
       // todo remove use of errors type variable. Rely only on $Config.
     & (
         $Errors extends []

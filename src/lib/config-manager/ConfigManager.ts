@@ -233,13 +233,15 @@ export type UpdateKeyWithIntersection<
  * then the key is IGNORED.
  */
 // dprint-ignore
-export type SetKeys<
+export type SetKeysOptional<
   $Obj extends object,
   $NewObjValues extends object,
 > = {
   [_ in keyof $Obj]:
     _ extends keyof $NewObjValues
-      ? $NewObjValues[_]
+      ? $NewObjValues[_] extends undefined
+        ? $Obj[_]
+        : $NewObjValues[_]
       : $Obj[_]
 }
 

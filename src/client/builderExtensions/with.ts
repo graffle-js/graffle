@@ -1,6 +1,5 @@
 import { Builder } from '../../lib/builder/__.js'
 import type { ConfigManager } from '../../lib/config-manager/__.js'
-import { mergeHeadersInit, mergeRequestInit } from '../../lib/http.js'
 import { type Context } from '../context.js'
 import type { WithInput } from '../Settings/inputIncrementable/inputIncrementable.js'
 import type { NormalizeInput } from '../Settings/InputToConfig.js'
@@ -22,7 +21,7 @@ export interface With<$Args extends Builder.Extension.Parameters<BuilderExtensio
     // @ts-ignore Passes after generation
   ) => Builder.Definition.MaterializeWith<
     $Args['definition'],
-    ConfigManager.SetKeys<
+    ConfigManager.SetKeysOptional<
       $Args['context'],
       {
         input: $Args['context']['input'] & $Input
@@ -37,16 +36,9 @@ export const builderExtensionWith = Builder.Extension.create<BuilderExtensionWit
     with: (input: WithInput) => {
       return builder({
         ...state,
-        // @ts-expect-error fixme
         input: {
           ...state.input,
           output: input.output,
-          transport: {
-            ...state.input.transport,
-            ...input.transport,
-            headers: mergeHeadersInit(state.input.transport?.headers, input.transport?.headers),
-            raw: mergeRequestInit(state.input.transport?.raw, input.transport?.raw),
-          },
         },
       })
     },

@@ -14,6 +14,7 @@ export const TransportMemory = createExtension({
         $
           .create(`memory`)
           .config<{ schema: Grafaid.Schema.Schema }>()
+          .configInit<{}>()
           .step(`pack`, {
             run: (input) => {
               const graphqlRequest: Grafaid.HTTP.RequestConfig = {

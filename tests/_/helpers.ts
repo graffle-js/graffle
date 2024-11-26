@@ -31,7 +31,8 @@ interface Project {
 }
 
 export const kitchenSink = KitchenSink
-  .create().use(TransportMemory({
+  .create({ checkPreflight: false })
+  .use(TransportMemory({
     schema: kitchenSinkSchema,
   }))
 
@@ -43,11 +44,12 @@ interface Fixtures {
   pokemonService: SchemaService
   graffle: Client
   kitchenSink: Client<
-    ConfigManager.SetKeys<
+    ConfigManager.SetKeysOptional<
       ContextEmpty,
       {
         name: `default`
         schemaMap: SchemaDrivenDataMap
+        checkPreflight: false
         config: {
           output: Context['config']['output']
           // transport: TransportConfigMemory
@@ -56,11 +58,12 @@ interface Fixtures {
     >
   >
   kitchenSinkHttp: Client<
-    ConfigManager.SetKeys<
+    ConfigManager.SetKeysOptional<
       ContextEmpty,
       {
         name: `default`
         schemaMap: SchemaDrivenDataMap
+        checkPreflight: false
         config: {
           output: Context['config']['output']
           // transport: TransportConfigHttp
@@ -180,7 +183,7 @@ export const test = testBase.extend<Fixtures>({
   graffle: async ({ fetch: _ }, use) => {
     const graffle = Graffle
       .create()
-      .use(TransportHttp({ schema: new URL(`https://foo.io/api/graphql`) }))
+      .use(TransportHttp({ url: new URL(`https://foo.io/api/graphql`) }))
     // @ts-expect-error fixme
     await use(graffle)
   },

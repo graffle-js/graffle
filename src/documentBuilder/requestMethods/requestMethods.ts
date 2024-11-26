@@ -116,10 +116,7 @@ const executeDocument = async (
   document: Select.Document.DocumentNormalized,
   operationName?: string,
 ) => {
-  const transportType = state.config.transport.type
-  const url = state.config.transport.type === `http` ? state.config.transport.url : undefined
-  const schema = state.config.transport.type === `http` ? undefined : state.config.transport.schema
-
+  if (!state.transports.current) throw new Error(`No transport configured.`)
   const request = graffleMappedResultToRequest(
     SelectionSetGraphqlMapper.toGraphQL(document, {
       sddm: state.schemaMap,
@@ -130,10 +127,9 @@ const executeDocument = async (
   )
 
   const initialInput = {
+    transportType: state.transports.current,
+    ...state.transports.configurations[state.transports.current],
     state,
-    transportType,
-    url,
-    schema,
     request,
   } as RequestPipelineBase['input']
 

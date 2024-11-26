@@ -22,7 +22,7 @@ export interface BuilderExtensionGql extends Builder.Extension {
 // dprint-ignore
 interface Gql<$Arguments extends Builder.Extension.Parameters<BuilderExtensionGql>> {
   gql: ClientTransports.PreflightCheck<
-    $Arguments['context']['transports'],
+    $Arguments['context'],
     gqlOverload<$Arguments>
   >
 }
@@ -46,12 +46,11 @@ export const builderExtensionGql = Builder.Extension.create<BuilderExtensionGql>
   return {
     gql: (...args: gqlArguments) => {
       const { document: query } = resolveGqlArguments(args)
-      const transportType = context.config.transport.type
-      const url = context.config.transport.type === `http` ? context.config.transport.url : undefined
-      const schema = context.config.transport.type === `http` ? undefined : context.config.transport.schema
 
       return {
         send: async (...args: sendArgumentsImplementation) => {
+          if (!context.transports.current) throw new Error(`No transport selected`)
+
           const { operationName, variables } = resolveSendArguments(args)
           const request = {
             query,
@@ -69,10 +68,9 @@ export const builderExtensionGql = Builder.Extension.create<BuilderExtensionGql>
           }
 
           const initialInput = {
-            transportType,
+            transportType: context.transports.current,
+            ...context.transports.configurations[context.transports.current],
             state: context,
-            url,
-            schema,
             request: analyzedRequest,
           } as RequestPipelineBase['input']
 

@@ -43,7 +43,6 @@ interface BuilderExtension_<$Args extends Builder.Extension.Parameters<BuilderEx
     ConfigManager.SetKey<
       $Args['context'],
       'config',
-      // @ts-expect-error fixme
       ThrowsifyConfig<$Args['context']['config']>
     >
   >

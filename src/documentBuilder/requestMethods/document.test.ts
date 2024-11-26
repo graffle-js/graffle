@@ -2,11 +2,12 @@ import { describe, expect, test } from 'vitest'
 import { db } from '../../../tests/_/schemas/db.js'
 import { Graffle } from '../../../tests/_/schemas/kitchen-sink/graffle/__.js'
 import { schema } from '../../../tests/_/schemas/kitchen-sink/schema.js'
+import { TransportMemory } from '../../extensions/TransportMemory/TransportMemory.js'
 import type { Errors } from '../../lib/errors/__.js'
 
 // todo test with custom scalars
 
-const graffle = Graffle.create({ schema })
+const graffle = Graffle.create().use(TransportMemory({ schema }))
 
 describe(`document with two queries`, () => {
   const withTwo = graffle.document({

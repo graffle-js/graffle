@@ -1,43 +1,15 @@
 import type { IsNever } from 'type-fest'
 import type { Client } from '../client/client.js'
-import type { Context } from '../client/context.js'
-import type { GraffleExecutionResultEnvelope } from '../client/handleOutput.js'
-import type { Select } from '../documentBuilder/Select/__.js'
 import type { Anyware } from '../lib/anyware/__.js'
 import type { Builder } from '../lib/builder/__.js'
-import type { AssertExtends, AssertExtendsString } from '../lib/prelude.js'
-import type { TypeFunction } from '../lib/type-function/__.js'
+import { _, type AssertExtendsString } from '../lib/prelude.js'
 import type { Fn } from '../lib/type-function/TypeFunction.js'
 import type { RequestPipelineBase } from '../requestPipeline/RequestPipeline.js'
-import type { GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
 import type { Transport } from '../types/Transport.js'
+import type { TypeHooks } from './TypeHooks.js'
+import type { TypeHooksBuilderCallback } from './TypeHooks.js'
 
-export interface TypeHooks {
-  /**
-   * Manipulate the execution result of a request.
-   *
-   * Applies to all requests.
-   */
-  onRequestResult?: Extension.Hooks.OnRequestResult
-  /**
-   * Manipulate the root type in a document in a request.
-   *
-   * Applies to all requests with typed documents which is all of them except `gql` method when passed a `string`.
-   *
-   * The root type received is the one that the request's operation name pointed to.
-   *
-   * Note: There is no way to manipulate the whole document.
-   */
-  onRequestDocumentRootType?: Extension.Hooks.OnRequestDocumentRootType
-}
-
-export type RunTypeHookOnRequestResult<
-  $Context extends Context,
-  $Params extends Extension.Hooks.OnRequestResult.Params,
-> = AssertExtends<
-  TypeFunction.CallPipeline<$Context['typeHooks']['onRequestResult'], $Params>,
-  Extension.Hooks.OnRequestResult.Params
->
+export * as TypeHooks from './TypeHooks.js'
 
 export interface EmptyTypeHooks {
   onRequestResult: undefined
@@ -93,35 +65,13 @@ export interface Extension<
   typeHooks: $TypeHooks
 }
 
-export namespace Extension {
-  export namespace Hooks {
-    export interface OnRequestDocumentRootType extends Fn {}
-    export namespace OnRequestDocumentRootType {
-      export interface Params {
-        selectionRootType: Select.SelectionSet.RootType
-      }
-    }
-    export interface OnRequestResult extends Fn {}
-    export namespace OnRequestResult {
-      export interface Params<$Extensions extends GlobalRegistry.Extensions = GlobalRegistry.Extensions> {
-        result: GraffleExecutionResultEnvelope
-        registeredSchema: GlobalRegistry.Client<$Extensions>
-      }
-    }
-  }
-}
-
-export const createTypeHooks = <$TypeHooks extends TypeHooks = TypeHooks>(): $TypeHooks => {
-  return undefined as any as $TypeHooks
-}
-
-export const createBuilderExtension = <$BuilderExtension extends Builder.Extension | undefined = undefined>(
-  implementation: BuilderExtensionImplementation,
-): BuilderExtension<$BuilderExtension> => {
-  return {
-    implementation,
-  } as BuilderExtension<$BuilderExtension>
-}
+// export const createBuilderExtension = <$BuilderExtension extends Builder.Extension | undefined = undefined>(
+//   implementation: BuilderExtensionImplementation,
+// ): BuilderExtension<$BuilderExtension> => {
+//   return {
+//     implementation,
+//   } as BuilderExtension<$BuilderExtension>
+// }
 
 export type BuilderExtension<$BuilderExtension extends Builder.Extension | undefined = Builder.Extension | undefined> =
   {
@@ -184,7 +134,7 @@ export const createExtensionDefinition = <
     }
     : undefined
 > => {
-  return definition
+  return definition as any
 }
 
 export const createExtension = <
@@ -203,10 +153,10 @@ export const createExtension = <
     create: (params: { config: $Config }) => {
       builder?: $BuilderExtension
       onRequest?: Anyware.Interceptor.InferFromPipeline<RequestPipelineBase>
-      typeHooks?: () => $TypeHooks
-      transport?(
+      typeHooks?: TypeHooksBuilderCallback<$TypeHooks> | $TypeHooks
+      transport?: (
         OverloadBuilder: { create: Transport.Builder.Create },
-      ): $TransportCallbackResult
+      ) => $TransportCallbackResult
     }
   },
 ): ExtensionConstructor<
@@ -221,6 +171,9 @@ export const createExtension = <
       // Names of transports can only be strings but its wider for anyware overloads
       name: AssertExtendsString<$TransportCallbackResult['type']['discriminant'][1]>
       config: $TransportCallbackResult['type']['input']
+      configInit: $TransportCallbackResult['type']['inputInit'] extends object
+        ? $TransportCallbackResult['type']['inputInit']
+        : {}
       requestPipelineOverload: $TransportCallbackResult['type']
     }
     : undefined

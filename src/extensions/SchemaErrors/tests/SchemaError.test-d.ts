@@ -1,10 +1,9 @@
 import { describe, expectTypeOf, test } from 'vitest'
-import { schema } from '../../../../tests/_/schemas/kitchen-sink/schema.js'
 import { type Extension } from '../../../extension/extension.js'
 import { SchemaErrors } from '../runtime.js'
 import { GraffleSchemaErrors } from './fixture/graffle/__.js'
 
-const g = GraffleSchemaErrors.create({ schema }).use(SchemaErrors())
+const g = GraffleSchemaErrors.create().use(SchemaErrors())
 
 // todo move test to test suite for .use method
 test(`config type is augmented with type hook`, () => {

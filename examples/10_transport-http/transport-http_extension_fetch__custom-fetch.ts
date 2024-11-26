@@ -25,19 +25,20 @@ const graffle = Graffle2
   .create()
   .anyware(({ exchange }) =>
     exchange({
-      using: {
-        fetch: async () => {
-          return new Response(JSON.stringify({ data: { pokemon: [{ name: `Pokemon Mocked!` }] } }))
-        },
-      },
+      // using: {
+      //   fetch: async () => {
+      //     return new Response(JSON.stringify({ data: { pokemon: [{ name: `Pokemon Mocked!` }] } }))
+      //   },
+      // },
     })
   )
-  .transport({
-    url: new URL(publicGraphQLSchemaEndpoints.Pokemon),
-  })
+// .transport({
+//   url: new URL(publicGraphQLSchemaEndpoints.Pokemon),
+// })
 
-graffle._.transports.configurations.http.url
+// graffle._.transports.configurations.http.url
 
+// @ts-expect-error
 const data = await graffle.gql`{ pokemon { name } }`.send()
 
 showJson(data)

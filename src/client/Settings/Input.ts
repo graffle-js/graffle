@@ -6,6 +6,7 @@ import type { OutputInput } from './inputIncrementable/output.js'
  * @remarks This input extends base with properties that can be filled with exports from the generated client.
  */
 export type InputStatic<$Client extends GlobalRegistry.Client = GlobalRegistry.Client> = {
+  checkPreflight?: boolean
   output?: OutputInput
   /**
    * The schema to use.

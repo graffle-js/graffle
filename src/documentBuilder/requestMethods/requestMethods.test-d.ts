@@ -6,7 +6,7 @@ import { Graffle } from '../../../tests/_/schemas/kitchen-sink/graffle/__.js'
 import * as Schema from '../../../tests/_/schemas/kitchen-sink/schema.js'
 // import { Graffle as Pokemon } from '../../../tests/_/schemas/pokemon/graffle/__.js'
 
-const graffle = Graffle.create({ schema: Schema.schema }).scalar(DateScalar)
+const graffle = Graffle.create().scalar(DateScalar)
 graffle._.scalars.typesDecoded
 
 // dprint-ignore
