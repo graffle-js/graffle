@@ -6,7 +6,7 @@ export namespace Updaters {
   export type AddOverload<
     $Extension extends Extension,
     $Overload extends Overload,
-  > = ConfigManager.UpdateKeyWithAppend<
+  > = ConfigManager.UpdateKeyWithAppendOne<
     $Extension,
     'overloads',
     $Overload

@@ -182,7 +182,7 @@ export type SetMany<$Obj extends object, $Sets extends [Path, any][]> =
                                                                                             never
 
 // dprint-ignore
-export type UpdateKeyWithAppend<
+export type UpdateKeyWithAppendOne<
   $Obj extends object,
   $Prop extends keyof $Obj,
   $Type,

@@ -1,4 +1,4 @@
-import type { Extension } from '../../extension/extension.js'
+import type { Extension } from '../../extension/__.js'
 import { Builder } from '../../lib/builder/__.js'
 import type { ConfigManager } from '../../lib/config-manager/__.js'
 import { type Context } from '../context.js'
@@ -23,25 +23,21 @@ export type UseExtensionDo<
   // Apply any builder extensions.
   (
     ConfigManager.GetOptional<$Extension, ['builder', 'type']> extends Builder.Extension
-      ? Builder.Definition.AddExtension<$Args['definition'], ConfigManager.GetOptional<$Extension, ['builder', 'type']>>
+      ? Builder.Definition.AddExtension<
+        $Args['definition'],
+        ConfigManager.GetOptional<$Extension, ['builder', 'type']>
+      >
       : $Args['definition']
   ),
-  // Extend context.
-  // dprint-ignore
-  ConfigManager.SetKeyAtPath<
-    Context.Updaters.AddTransportOptional<
-      ConfigManager.UpdateKeyWithAppend<
+  AddTypeHooks<
+    AddTransport<
+      AddExtension<
         $Args['context'],
-        'extensions',
         $Extension
       >,
-      $Extension['transport']
+      $Extension
     >,
-    ['typeHooks', 'onRequestResult'],
-    ConfigManager.AppendOptional<
-      $Args['context']['typeHooks']['onRequestResult'],
-      $Extension['typeHooks']['onRequestResult']
-    >
+    $Extension
   >
 >
 
@@ -55,3 +51,29 @@ export const builderExtensionUse = Builder.Extension.create<BuilderExtensionUse>
     },
   } as any
 })
+
+type AddTransport<
+  $Context extends Context,
+  $Extension extends Extension,
+> = Context.Updaters.AddTransportOptional<
+  $Context,
+  $Extension['transport']
+>
+
+type AddTypeHooks<
+  $Context extends Context,
+  $Extension extends Extension,
+> = ConfigManager.UpdateKeyWithAppendMany<
+  $Context,
+  'typeHookOnRequestResult',
+  $Extension['typeHooks']['onRequestResult']
+>
+
+type AddExtension<
+  $Context extends Context,
+  $Extension extends Extension,
+> = ConfigManager.UpdateKeyWithAppendOne<
+  $Context,
+  'extensions',
+  $Extension
+>

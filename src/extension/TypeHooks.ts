@@ -1,7 +1,6 @@
 import type { Context } from '../client/context.js'
 import type { GraffleExecutionResultEnvelope } from '../client/handleOutput.js'
 import type { Select } from '../entrypoints/utilities-for-generated.js'
-// import type { GlobalRegistry, Select } from '../entrypoints/utilities-for-generated.js'
 import type { AssertExtends } from '../lib/prelude.js'
 import type { CallPipeline, Fn } from '../lib/type-function/TypeFunction.js'
 import type { GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
@@ -12,7 +11,7 @@ export interface TypeHooks {
    *
    * Applies to all requests.
    */
-  onRequestResult?: OnRequestResult
+  onRequestResult: OnRequestResult[]
   /**
    * Manipulate the root type in a document in a request.
    *
@@ -22,20 +21,31 @@ export interface TypeHooks {
    *
    * Note: There is no way to manipulate the whole document.
    */
-  onRequestDocumentRootType?: OnRequestDocumentRootType
+  onRequestDocumentRootType: OnRequestDocumentRootType[]
+}
+
+export interface TypeHooksEmpty extends TypeHooks {
+  onRequestResult: []
+  onRequestDocumentRootType: []
 }
 
 export interface TypeHooksBuilderCallback<$TypeHooks extends TypeHooks> {
   (builder: TypeHooksBuilder): TypeHooksBuilder<$TypeHooks>
 }
 
-export interface TypeHooksBuilder<$TypeHooks extends TypeHooks = {}> {
+export interface TypeHooksBuilder<$TypeHooks extends TypeHooks = TypeHooksEmpty> {
   type: $TypeHooks
   onRequestResult: <$OnRequestResult extends OnRequestResult>() => TypeHooksBuilder<
-    $TypeHooks & { onRequestResult: $OnRequestResult }
+    {
+      onRequestResult: [...$TypeHooks['onRequestResult'], $OnRequestResult]
+      onRequestDocumentRootType: $TypeHooks['onRequestDocumentRootType']
+    }
   >
   onRequestDocumentRootType: <$OnRequestDocumentRootType extends OnRequestDocumentRootType>() => TypeHooksBuilder<
-    $TypeHooks & { onRequestDocumentRootType: $OnRequestDocumentRootType }
+    {
+      onRequestResult: $TypeHooks['onRequestResult']
+      onRequestDocumentRootType: [...$TypeHooks['onRequestDocumentRootType'], $OnRequestDocumentRootType]
+    }
   >
 }
 
@@ -58,6 +68,6 @@ export type RunTypeHookOnRequestResult<
   $Context extends Context,
   $Params extends OnRequestResult.Params,
 > = AssertExtends<
-  CallPipeline<$Context['typeHooks']['onRequestResult'], $Params>,
+  CallPipeline<$Context['typeHookOnRequestResult'], $Params>,
   OnRequestResult.Params
 >

@@ -1,4 +1,3 @@
-import type { Context } from '../../entrypoints/utilities-for-generated.js'
 import { assertEqual } from '../assert-equal.js'
 import type { ConfigManager } from './__.js'
 
@@ -58,10 +57,10 @@ assertEqual<ConfigManager.SetAtPath<a1, ['c'], 9>            , { a: { b: number 
 // assertEqual<ConfigManager.UpdateMany<{'a':2}, [[['a'], 1]]>            , { a: 1 }>()
 // assertEqual<ConfigManager.UpdateMany<{'a':2}, [[['a'], 1], null]>      , { a: 1 }>()
 
-assertEqual<ConfigManager.UpdateKeyWithAppend<{x: []}, 'x', 1>  , { x: [1] }>()
-assertEqual<ConfigManager.UpdateKeyWithAppend<{x: [1]}, 'x', 2> , { x: [1, 2] }>()
-assertEqual<ConfigManager.UpdateKeyWithAppend<{x: []}, 'x', 1>  , { x: [1] }>()
-assertEqual<ConfigManager.UpdateKeyWithAppend<{x: [1]}, 'x', 2> , { x: [1, 2] }>()
+assertEqual<ConfigManager.UpdateKeyWithAppendOne<{x: []}, 'x', 1>  , { x: [1] }>()
+assertEqual<ConfigManager.UpdateKeyWithAppendOne<{x: [1]}, 'x', 2> , { x: [1, 2] }>()
+assertEqual<ConfigManager.UpdateKeyWithAppendOne<{x: []}, 'x', 1>  , { x: [1] }>()
+assertEqual<ConfigManager.UpdateKeyWithAppendOne<{x: [1]}, 'x', 2> , { x: [1, 2] }>()
 
 assertEqual<ConfigManager.UpdateKeyWithIntersection<{x: {}}, 'x', {}>          , { x: {} }>()
 assertEqual<ConfigManager.UpdateKeyWithIntersection<{x: {}}, 'x', {a:1}>       , { x: {a:1} }>()
@@ -72,12 +71,3 @@ assertEqual<ConfigManager.SetKeysOptional<{a:1}, {}>                 , {a:1}>()
 assertEqual<ConfigManager.SetKeysOptional<{a:1}, {a:2}>              , {a:2}>()
 assertEqual<ConfigManager.SetKeysOptional<{a:1}, {a:undefined}>      , {a:1}>()
 }
-
-assertEqual<
-  ConfigManager.SetAtPath<
-    Context,
-    ['typeHooks', 'onRequestResult'],
-    Context['typeHooks']['onRequestResult']
-  >,
-  Context
->()

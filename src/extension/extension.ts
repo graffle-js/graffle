@@ -6,7 +6,7 @@ import { _, type AssertExtendsString } from '../lib/prelude.js'
 import type { RequestPipelineBase } from '../requestPipeline/RequestPipeline.js'
 import type { Transport } from '../types/Transport.js'
 import type { Extension } from './__.js'
-import type { TypeHooks } from './TypeHooks.js'
+import type { TypeHooks, TypeHooksEmpty } from './TypeHooks.js'
 import type { TypeHooksBuilderCallback } from './TypeHooks.js'
 
 export * as TypeHooks from './TypeHooks.js'
@@ -64,7 +64,7 @@ export const createExtensionDefinition = <
   $Name,
   object,
   undefined,
-  EmptyTypeHooks,
+  TypeHooksEmpty,
   $TransportCallbackResult extends Anyware.Overload.Builder ? {
       // todo fixme
       // Names of transports can only be strings but its wider for anyware overloads
@@ -158,8 +158,6 @@ export type ExtensionConstructor<
     }
   }
   & $Custom
-
-// type x = Parameters<ExtensionConstructor>
 
 export type InferExtensionFromConstructor<$ExtensionConstructor extends ExtensionConstructor> = Extension<
   $ExtensionConstructor['info']['name'],

@@ -1,4 +1,4 @@
-import type { Extension } from '../extension/extension.js'
+import type { Extension } from '../extension/__.js'
 import type { Anyware } from '../lib/anyware/__.js'
 import type { ConfigManager } from '../lib/config-manager/__.js'
 import type { Objekt, StringKeyof } from '../lib/prelude.js'
@@ -86,26 +86,20 @@ export interface Context {
    *
    * @remarks Typically added by extensions. Added here upon use for optimized type-level reads later on.
    */
-  typeHooks: {
-    onRequestResult: Extension.Hooks.OnRequestResult[]
-    onRequestDocumentRootType: Extension.Hooks.OnRequestDocumentRootType[]
-  }
+  typeHookOnRequestResult: Extension.TypeHooks.OnRequestResult[]
+  typeHookOnRequestDocumentRootType: Extension.TypeHooks.OnRequestDocumentRootType[]
 }
 
 export interface ContextEmpty extends Context {
   scalars: Schema.Scalar.Registry.Empty
-  typeHooks: TypeHooksEmpty
   extensions: []
   transports: ClientTransports.States.Empty
   checkPreflight: true
   schemaMap: null
   input: {}
   requestPipelineDefinition: RequestPipelineBaseDefinition
-}
-
-export type TypeHooksEmpty = {
-  onRequestDocumentRootType: []
-  onRequestResult: []
+  typeHookOnRequestDocumentRootType: []
+  typeHookOnRequestResult: []
 }
 
 export const createContext = (contextWithoutConfig: ContextWithoutConfig): Context => {
@@ -120,7 +114,12 @@ export const createContext = (contextWithoutConfig: ContextWithoutConfig): Conte
   } as Context
 }
 
-export type ContextWithoutConfig = Omit<Context, 'config' | 'typeHooks'>
+export type ContextWithoutConfig = Omit<
+  Context,
+  | 'config'
+  | 'typeHookOnRequestDocumentRootType'
+  | 'typeHookOnRequestResult'
+>
 
 export interface ClientTransports {
   registry: ClientTransportsRegistry
@@ -161,7 +160,6 @@ export namespace ClientTransports {
     $Context['checkPreflight'] extends false
       ? $SuccessValue
       : PreflightCheck_<$Context['transports'], $SuccessValue>
-
   // dprint-ignore
   export type PreflightCheck_<
     $ClientTransports extends ClientTransports,

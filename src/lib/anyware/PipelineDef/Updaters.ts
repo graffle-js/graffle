@@ -12,12 +12,12 @@ export namespace Updaters {
   export type AddStep<
     $PipelineDef extends PipelineDefinition,
     $Step extends StepDefinition,
-  > = ConfigManager.UpdateKeyWithAppend<$PipelineDef, 'steps', $Step>
+  > = ConfigManager.UpdateKeyWithAppendOne<$PipelineDef, 'steps', $Step>
 
   export type AddOverload<
     $PipelineDef extends PipelineDefinition,
     $Overload extends Overload,
-  > = ConfigManager.UpdateKeyWithAppend<$PipelineDef, 'overloads', $Overload>
+  > = ConfigManager.UpdateKeyWithAppendOne<$PipelineDef, 'overloads', $Overload>
 
   export type AddOverloads<
     $PipelineDef extends PipelineDefinition,

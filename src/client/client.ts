@@ -33,7 +33,7 @@ export type Client<$Context extends Context = Context> = Builder.Definition.Mate
 
 type ClientDefinition = Builder.Definition.Create<[
   BuilderExtensionInternal,
-  // BuilderExtensionTransport,
+  BuilderExtensionTransport,
   BuilderExtensionRequestMethods,
   BuilderExtensionWith,
   BuilderExtensionUse,
@@ -69,7 +69,6 @@ export const create: Create = (input) => {
     extensions: [],
     scalars: Schema.Scalar.Registry.empty,
     input: input ?? {},
-    // retry: null,
   })
   return createWithContext(initialContext)
 }

@@ -1,5 +1,4 @@
 import type { Anyware } from '../lib/anyware/__.js'
-import type { Fn } from '../lib/type-function/TypeFunction.js'
 import type { RequestPipelineBase } from '../requestPipeline/RequestPipeline.js'
 import type { Transport } from '../types/Transport.js'
 import type { BuilderExtension } from './extension.js'
@@ -13,7 +12,7 @@ export interface Extension<
   $BuilderExtension extends BuilderExtension | undefined = BuilderExtension | undefined,
   $TypeHooks extends TypeHooks = TypeHooks,
   $Transport extends Transport | undefined = Transport | undefined,
-> extends Fn {
+> {
   /**
    * The name of the extension
    */

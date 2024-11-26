@@ -2,7 +2,9 @@ import { MethodMode, type MethodModeGetReads } from '../../client/transportHttp/
 import type { MethodModePost } from '../../client/transportHttp/request.js'
 import type { Extension } from '../../entrypoints/extensionkit.js'
 import { createExtensionDefinition } from '../../extension/extension.js'
+import type { TypeHooksEmpty } from '../../extension/TypeHooks.js'
 import type { Anyware } from '../../lib/anyware/__.js'
+import type { ConfigManager } from '../../lib/config-manager/__.js'
 import type { Grafaid } from '../../lib/grafaid/__.js'
 import { OperationTypeToAccessKind, print } from '../../lib/grafaid/document.js'
 import { getRequestEncodeSearchParameters, postRequestEncodeBody } from '../../lib/grafaid/http/http.js'
@@ -19,20 +21,28 @@ interface Configuration {
   raw?: RequestInit
 }
 
+type ConfigInit = Partial<Configuration>
+
+interface ConfigInitDefaults {
+  methodMode: 'post'
+}
+
 // dprint-ignore
-type MergeDefaults<$Input extends Partial<Configuration>> =
-  $Input
-// ConfigManager.MergeDefaultsShallow<{ methodMode: 'post' }, $Input>
+type MergeConfigInitDefaults<$ConfigInit extends ConfigInit> =
+  ConfigManager.MergeDefaultsShallow<ConfigInitDefaults, $ConfigInit>
 
 interface TransportHttp<$Input extends Partial<Configuration>> extends Extension {
   name: `TransportHttp`
   config: Configuration
-  Transport: {
+  transport: {
     name: 'http'
     config: Configuration
     configInit: $Input
     requestPipelineOverload: RequestPipelineOverload
   }
+  typeHooks: TypeHooksEmpty
+  onRequest: undefined
+  builder: undefined
 }
 
 interface RequestPipelineOverload extends Anyware.Overload {
@@ -98,9 +108,9 @@ type ExchangeGetRequest = Omit<RequestInit, 'body' | 'method'> & {
   url: string | URL
 }
 
-export const TransportHttp = <$ConfigInit extends Partial<Configuration> = {}>(
+export const TransportHttp = <$ConfigInit extends ConfigInit = {}>(
   configInit?: $ConfigInit,
-): TransportHttp<$ConfigInit> => {
+): TransportHttp<ConfigManager.MergeDefaultsShallow<ConfigInitDefaults, $ConfigInit>> => {
   return createExtensionDefinition({
     name: `TransportHttp`,
     // normalizeConfig: (input?: Partial<Configuration>) => {
@@ -110,15 +120,12 @@ export const TransportHttp = <$ConfigInit extends Partial<Configuration> = {}>(
     //     methodMode: input?.methodMode ?? `post`,
     //   }
     // },
-    // create: ({ config }) => {
-    // todo: merge extension config with client config.
-    // return {
     // eslint-disable-next-line
     transport($) {
       return $
         .create(`http`)
         .config<Configuration>()
-        .configInit<MergeDefaults<$ConfigInit>>()
+        .configInit<MergeConfigInitDefaults<$ConfigInit>>()
         .stepWithExtendedInput<{ headers?: HeadersInit }>()(`pack`, {
           slots: {
             searchParams: getRequestEncodeSearchParameters,
