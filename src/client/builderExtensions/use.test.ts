@@ -19,13 +19,13 @@ test('using an extension without type hooks leaves them empty', () => {
   })
   const graffle1 = Graffle.create()
   expectTypeOf(graffle1._).toMatchTypeOf<{
-    onRequestResult: []
-    onRequestDocumentRootType: []
+    typeHookOnRequestResult: []
+    typeHookOnRequestDocumentRootType: []
   }>()
   const graffle2 = graffle1.use(Ex())
   expectTypeOf(graffle2._).toMatchTypeOf<{
-    onRequestResult: []
-    onRequestDocumentRootType: []
+    typeHookOnRequestResult: []
+    typeHookOnRequestDocumentRootType: []
   }>()
 })
 

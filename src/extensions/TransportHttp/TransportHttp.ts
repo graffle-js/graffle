@@ -27,10 +27,6 @@ interface ConfigInitDefaults {
   methodMode: 'post'
 }
 
-// dprint-ignore
-type MergeConfigInitDefaults<$ConfigInit extends ConfigInit> =
-  ConfigManager.MergeDefaultsShallow<ConfigInitDefaults, $ConfigInit>
-
 interface TransportHttp<$Input extends Partial<Configuration>> extends Extension {
   name: `TransportHttp`
   config: Configuration
@@ -124,8 +120,8 @@ export const TransportHttp = <$ConfigInit extends ConfigInit = {}>(
     transport($) {
       return $
         .create(`http`)
-        .config<Configuration>()
-        .configInit<MergeConfigInitDefaults<$ConfigInit>>()
+        // .config<Configuration>()
+        // .configInit<MergeConfigInitDefaults<$ConfigInit>>()
         .stepWithExtendedInput<{ headers?: HeadersInit }>()(`pack`, {
           slots: {
             searchParams: getRequestEncodeSearchParameters,

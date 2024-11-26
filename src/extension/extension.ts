@@ -83,7 +83,7 @@ export const createExtensionDefinition = <
 export const createExtension = <
   $Name extends string,
   $BuilderExtension extends BuilderExtension = BuilderExtension,
-  $TypeHooks extends TypeHooks = TypeHooks,
+  $TypeHooks extends TypeHooks = TypeHooksEmpty,
   $ConfigInputParameters extends ExtensionInputParameters = ExtensionInputParameters,
   $Config extends object = object,
   $Custom extends object = object,
@@ -107,7 +107,7 @@ export const createExtension = <
   $Config,
   $Name,
   $BuilderExtension,
-  TypeHooks extends $TypeHooks ? EmptyTypeHooks : $TypeHooks,
+  $TypeHooks,
   $Custom,
   $TransportCallbackResult extends Anyware.Overload.Builder ? {
       // todo fixme
@@ -138,7 +138,7 @@ export type ExtensionConstructor<
   $Config extends object = object,
   $Name extends string = string,
   $BuilderExtension extends BuilderExtension | undefined = BuilderExtension | undefined,
-  $TypeHooks extends TypeHooks = TypeHooks,
+  $TypeHooks extends TypeHooks = TypeHooksEmpty,
   $Custom extends object = object,
   $Transport extends undefined | Transport = undefined,
 > =
@@ -153,7 +153,7 @@ export type ExtensionConstructor<
       configInputParameters: $ConfigInputParameters
       config: $Config
       builder: $BuilderExtension
-      typeHooks: TypeHooks extends $TypeHooks ? EmptyTypeHooks : $TypeHooks
+      typeHooks: $TypeHooks
       transport: $Transport
     }
   }

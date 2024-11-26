@@ -17,11 +17,14 @@ export interface Extension<
    * The name of the extension
    */
   name: $Name
+  /**
+   * TODO
+   */
   config: $Config
   /**
    * Anyware executed on every request.
    */
-  onRequest?: Anyware.Interceptor.InferFromPipeline<RequestPipelineBase>
+  onRequest: undefined | Anyware.Interceptor.InferFromPipeline<RequestPipelineBase>
   /**
    * Manipulate the builder.
    * You can extend the builder with new properties at both runtime AND buildtime (types, TypeScript).
@@ -48,6 +51,9 @@ export interface Extension<
    * There is a type parameter you can pass in which will statically extend the builder.
    */
   builder: $BuilderExtension
+  /**
+   * TODO
+   */
   transport: $Transport
   /**
    * TODO

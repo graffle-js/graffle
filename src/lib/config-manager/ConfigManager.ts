@@ -34,7 +34,7 @@ export type MergeDefaultsShallow<
             $DefaultsKey extends keyof $Input
               ? $Input[$DefaultsKey] extends undefined
                 ? $Defaults[$DefaultsKey]
-                : never
+                : $Input[$DefaultsKey]
               : $Defaults[$DefaultsKey]
         }
 

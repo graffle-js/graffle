@@ -10,15 +10,15 @@ import { publicGraphQLSchemaEndpoints } from '../$/helpers.js'
 
 const transportHttp = TransportHttp({
   // url: publicGraphQLSchemaEndpoints.Pokemon,
-  methodMode: 'post',
+  methodMode: 'getReads',
 })
+
+transportHttp.transport.configInit.methodMode
 
 namespace Graffle2 {
   const base = Graffle
     .create()
     .use(transportHttp)
-
-  base._.transports.configurations.http.methodMode
 
   export const create = Graffle.createPresetFromContext(base._)
 }

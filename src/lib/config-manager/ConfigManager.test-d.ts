@@ -27,12 +27,12 @@ assertEqual<
 assertEqual<ConfigManager.MergeDefaultsShallow<{x:1}, undefined>      , {x:1}>()
 assertEqual<ConfigManager.MergeDefaultsShallow<{x:1}, {}>             , {x:1}>()
 assertEqual<ConfigManager.MergeDefaultsShallow<{}, {x:1}>             , {x:1}>()
+assertEqual<ConfigManager.MergeDefaultsShallow<{x:2}, {x:1}>          , {x:1}>()
 
 assertEqual<ConfigManager.MergeDefaults<{x:1}, undefined>      , {x:1}>()
 assertEqual<ConfigManager.MergeDefaults<{x:1}, {}>             , {x:1}>()
 assertEqual<ConfigManager.MergeDefaults<{x:1}, {x:2}>          , {x:2}>()
 assertEqual<ConfigManager.MergeDefaults<{x:1}, {x:2; y:3}>     , {x:2; y:3}>()
-
   
 assertEqual<ConfigManager.SetKeyAtPath<{ a: { b: 2 } }, [], { a2: 2 }>     , { a: { b: 2 }; a2: 2 }>()
 assertEqual<ConfigManager.SetKeyAtPath<{ a: { b: 2 } }, ['a'], { b: 3 }>   , { a: { b: 3 } }>()
