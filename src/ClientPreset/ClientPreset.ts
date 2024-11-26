@@ -3,7 +3,7 @@ import type { UseExtensionReturn } from '../client/builderExtensions/use.js'
 import { type Client, createWithContext } from '../client/client.js'
 import type { NormalizeConfigInit } from '../client/Configuration/normalizeConfigInit.js'
 import { ClientTransports, type ContextEmpty, createContext } from '../client/context.js'
-import type { ConfigInit, OutputInit } from '../entrypoints/main.js'
+import type { ConfigInit, ConfigOutputInit } from '../entrypoints/main.js'
 import type { Extension } from '../extension/__.js'
 import type {
   ExtensionConstructor,
@@ -105,7 +105,7 @@ type ConstructorParameters<
 > =
   & Tuple.IntersectItems<GetParametersContributedByExtensions<$Extensions>>
   & {
-    output?: OutputInit
+    output?: ConfigOutputInit
     checkPreflight?: boolean
   }
 

@@ -39,27 +39,26 @@ export const handleOutput = (
   state: Context,
   result: Anyware.Result<RequestPipelineBase['output']>,
 ) => {
-  if (isOutputTraditionalGraphQLOutput(state.config)) {
+  if (isOutputTraditionalGraphQLOutput(state.output)) {
     if (result instanceof Error) throw result
     return result.value
   }
 
-  const config = state.config
-  const c = config.output
+  const outputConfig = state.output
 
-  const isEnvelope = c.envelope.enabled
+  const isEnvelope = outputConfig.envelope.enabled
 
-  const isThrowOther = readErrorCategoryOutputChannel(config, `other`) === `throw`
-    && (!c.envelope.enabled || !c.envelope.errors.other)
+  const isThrowOther = readErrorCategoryOutputChannel(outputConfig, `other`) === `throw`
+    && (!outputConfig.envelope.enabled || !outputConfig.envelope.errors.other)
 
-  const isReturnOther = readErrorCategoryOutputChannel(config, `other`) === `return`
-    && (!c.envelope.enabled || !c.envelope.errors.other)
+  const isReturnOther = readErrorCategoryOutputChannel(outputConfig, `other`) === `return`
+    && (!outputConfig.envelope.enabled || !outputConfig.envelope.errors.other)
 
-  const isThrowExecution = readErrorCategoryOutputChannel(config, `execution`) === `throw`
-    && (!c.envelope.enabled || !c.envelope.errors.execution)
+  const isThrowExecution = readErrorCategoryOutputChannel(outputConfig, `execution`) === `throw`
+    && (!outputConfig.envelope.enabled || !outputConfig.envelope.errors.execution)
 
-  const isReturnExecution = readErrorCategoryOutputChannel(config, `execution`) === `return`
-    && (!c.envelope.enabled || !c.envelope.errors.execution)
+  const isReturnExecution = readErrorCategoryOutputChannel(outputConfig, `execution`) === `return`
+    && (!outputConfig.envelope.enabled || !outputConfig.envelope.errors.execution)
 
   if (result instanceof Error) {
     if (isThrowOther) throw result
@@ -141,7 +140,7 @@ type HandleOutput_ErrorsReturn<$Context extends Context, $Envelope extends Graff
 
 // dprint-ignore
 type HandleOutput_Envelope<$Context extends Context, $Envelope extends GraffleExecutionResultEnvelope> =
-  $Context['config']['output']['envelope']['enabled'] extends true
+  $Context['output']['envelope']['enabled'] extends true
     ? $Envelope
     : ExcludeUndefined<$Envelope['data']> // todo make data field not undefinable
 
@@ -152,18 +151,18 @@ type IfConfiguredGetOutputErrorReturns<$Context extends Context> =
 
 // dprint-ignore
 export type ConfigGetOutputError<$Context extends Context, $ErrorCategory extends ErrorCategory> =
-  $Context['config']['output']['envelope']['enabled'] extends true
+  $Context['output']['envelope']['enabled'] extends true
     ? ConfigGetOutputEnvelopeErrorChannel<$Context, $ErrorCategory>
-    : ConfigResolveOutputErrorChannel<$Context, $Context['config']['output']['errors'][$ErrorCategory]>
+    : ConfigResolveOutputErrorChannel<$Context, $Context['output']['errors'][$ErrorCategory]>
 
 // dprint-ignore
 type ConfigGetOutputEnvelopeErrorChannel<$Context extends Context, $ErrorCategory extends ErrorCategory> =
-  $Context['config']['output']['envelope']['errors'][$ErrorCategory] extends true
+  $Context['output']['envelope']['errors'][$ErrorCategory] extends true
     ? false
-    : ConfigResolveOutputErrorChannel<$Context, $Context['config']['output']['errors'][$ErrorCategory]>
+    : ConfigResolveOutputErrorChannel<$Context, $Context['output']['errors'][$ErrorCategory]>
 
 type ConfigResolveOutputErrorChannel<$Context extends Context, $Channel extends OutputChannelConfig | false> =
-  $Channel extends 'default' ? $Context['config']['output']['defaults']['errorChannel']
+  $Channel extends 'default' ? $Context['output']['defaults']['errorChannel']
     : $Channel extends false ? false
     : $Channel
 
@@ -197,8 +196,8 @@ type ObjMap<T = unknown> = {
 
 // dprint-ignore
 type IsEnvelopeWithoutErrors<$Context extends Context> =
-  $Context['config']['output']['envelope']['enabled'] extends true
-    ? Values<$Context['config']['output']['envelope']['errors']> extends false
+  $Context['output']['envelope']['enabled'] extends true
+    ? Values<$Context['output']['envelope']['errors']> extends false
       ? true
     : false
   : false

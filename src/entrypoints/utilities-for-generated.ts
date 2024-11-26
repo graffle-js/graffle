@@ -1,5 +1,4 @@
 export { type Simplify } from 'type-fest'
-export type { Config } from '../client/Configuration/Output.js'
 export { type Context } from '../client/context.js'
 export type { ConfigGetOutputError, HandleOutput, HandleOutputGraffleRootField } from '../client/handleOutput.js'
 export { type DocumentRunner } from '../documentBuilder/requestMethods/document.js'

@@ -11,6 +11,8 @@ assertEqual<typeof g1.scalar, TypeErrorMissingSchemaMap>()
 const g2 = Graffle.create({ schemaMap })
 assertEqual<typeof g2.scalar, SomeFunction>()
 
+g2._.checkPreflight
+
 // @ts-expect-error "Foo" is not a scalar name in the schema.
 Graffle.create({ schemaMap }).scalar(`Foo`, _)
 // @ts-expect-error "Foo" is not a scalar name in the schema.

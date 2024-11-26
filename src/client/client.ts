@@ -33,6 +33,9 @@ export type ClientConstructor<$Context extends Context = ContextEmpty> = <const 
   >
 >
 
+declare const x: ClientConstructor
+x()._.checkPreflight
+
 export type ClientEmpty = Client<ContextEmpty>
 
 export type Client<$Context extends Context = Context> = Builder.Definition.MaterializeWith<

@@ -6,8 +6,13 @@ import type { RequestPipelineBaseDefinition } from '../requestPipeline/RequestPi
 import type { Schema } from '../types/Schema/__.js'
 import type { SchemaDrivenDataMap } from '../types/SchemaDrivenDataMap/SchemaDrivenDataMap.js'
 import type { Transport } from '../types/Transport.js'
-import type { ConfigInit, DefaultCheckPreflight, DefaultName } from './Configuration/ConfigInit.js'
-import { type NormalizeConfigInit, normalizeConfigInit } from './Configuration/normalizeConfigInit.js'
+import {
+  type ConfigInit,
+  type DefaultCheckPreflight,
+  type DefaultName,
+  type NormalizeConfigInit,
+  normalizeConfigInit,
+} from './Configuration/ConfigInit.js'
 import type { OutputConfig } from './Configuration/Output.js'
 
 export namespace Context {
