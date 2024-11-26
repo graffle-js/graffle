@@ -9,7 +9,7 @@ import { showJson } from '../$/helpers.js'
 import { publicGraphQLSchemaEndpoints } from '../$/helpers.js'
 
 const transportHttp = TransportHttp({
-  url: publicGraphQLSchemaEndpoints.Pokemon,
+  // url: publicGraphQLSchemaEndpoints.Pokemon,
   methodMode: 'post',
 })
 
@@ -33,7 +33,7 @@ const graffle = Graffle2
     })
   )
   .transport({
-    // url: new URL(publicGraphQLSchemaEndpoints.Pokemon),
+    url: new URL(publicGraphQLSchemaEndpoints.Pokemon),
   })
 
 graffle._.transports.configurations.http.url

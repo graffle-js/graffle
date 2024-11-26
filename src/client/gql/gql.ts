@@ -77,7 +77,7 @@ export const builderExtensionGql = Builder.Extension.create<BuilderExtensionGql>
           } as RequestPipelineBase['input']
 
           const requestPipeline = Anyware.Pipeline.create(context.requestPipelineDefinition)
-          const result = await Anyware.PipelineDef.run(requestPipeline, {
+          const result = await Anyware.PipelineDefinition.run(requestPipeline, {
             initialInput,
             // retryingExtension: context.retry as any,
             interceptors: context.extensions.filter(_ => _.onRequest !== undefined).map(_ => _.onRequest!) as any,

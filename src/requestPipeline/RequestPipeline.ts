@@ -7,7 +7,7 @@ import { isAbortError } from '../lib/prelude.js'
 import { decodeResultData } from './CustomScalars/decode.js'
 import { encodeRequestVariables } from './CustomScalars/encode.js'
 
-const requestPipelineBaseDefinitionBuilder = Anyware.PipelineDef
+const requestPipelineBaseDefinitionBuilder = Anyware.PipelineDefinition
   .create({
     // If core errors caused by an abort error then raise it as a direct error.
     // This is an expected possible error. Possible when user cancels a request.

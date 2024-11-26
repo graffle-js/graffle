@@ -5,7 +5,7 @@ import { Overload } from '../Overload/__.js'
 import type { StepDef } from '../StepDef.js'
 import type { StepRunner } from '../StepRunner.js'
 import { Pipeline } from './_.js'
-import type { PipelineDef } from './__.js'
+import type { PipelineDefinition } from './__.js'
 import { type Options, resolveOptions } from './Config.js'
 
 /**
@@ -18,15 +18,15 @@ import { type Options, resolveOptions } from './Config.js'
  * - Otherwise the last step's output.
  */
 // dprint-ignore
-type GetNextStepParameterInput<$Context extends PipelineDef> =
+type GetNextStepParameterInput<$Context extends PipelineDefinition> =
   $Context['steps'] extends Tuple.NonEmpty
     ? Awaited<Tuple.GetLastValue<$Context['steps']>['output']>
     : $Context['input']
 
-export interface Builder<$PipelineDef extends PipelineDef = PipelineDef> {
+export interface Builder<$PipelineDef extends PipelineDefinition = PipelineDefinition> {
   type: $PipelineDef
   input: <$Input extends object>() => Builder<
-    PipelineDef.Updaters.SetInput<$PipelineDef, $Input>
+    PipelineDefinition.Updaters.SetInput<$PipelineDef, $Input>
   >
   /**
    * TODO
@@ -43,7 +43,7 @@ export interface Builder<$PipelineDef extends PipelineDef = PipelineDef> {
       run?: $Runner
     },
   ) => Builder<
-    PipelineDef.Updaters.AddStep<$PipelineDef, {
+    PipelineDefinition.Updaters.AddStep<$PipelineDef, {
       name: $Name
       input: Parameters<$Runner>[0]
       output: ConfigManager.OrDefault2<ReturnType<$Runner>, {}>
@@ -61,7 +61,7 @@ export interface Builder<$PipelineDef extends PipelineDef = PipelineDef> {
   overload: <$OverloadBuilder extends Overload.Builder<$PipelineDef>>(
     overloadBuilder: Overload.BuilderCallback<$PipelineDef, $OverloadBuilder>,
   ) => Builder<
-    PipelineDef.Updaters.AddOverload<$PipelineDef, $OverloadBuilder['type']>
+    PipelineDefinition.Updaters.AddOverload<$PipelineDef, $OverloadBuilder['type']>
   >
   /**
    * TODO
@@ -70,12 +70,12 @@ export interface Builder<$PipelineDef extends PipelineDef = PipelineDef> {
   use: <$Extension extends Extension.Builder>(
     extension: $Extension,
   ) => Builder<
-    PipelineDef.Updaters.AddOverloads<$PipelineDef, $Extension['type']['overloads']>
+    PipelineDefinition.Updaters.AddOverloads<$PipelineDef, $Extension['type']['overloads']>
   >
   done: () => Pipeline.InferFromDefinition<$PipelineDef>
 }
 
-interface StepMethod<$Context extends PipelineDef> {
+interface StepMethod<$Context extends PipelineDefinition> {
   <
     const $Name extends string,
     $Slots extends
@@ -90,7 +90,7 @@ interface StepMethod<$Context extends PipelineDef> {
       run?: (input: $Input, slots: $Slots, previous: GetNextStepParameterPrevious<$Context>) => $Output
     },
   ): Builder<
-    PipelineDef.Updaters.AddStep<$Context, {
+    PipelineDefinition.Updaters.AddStep<$Context, {
       name: $Name
       input: $Input
       output: ConfigManager.OrDefault2<$Output, {}>
@@ -111,7 +111,7 @@ interface StepMethod<$Context extends PipelineDef> {
       run?: (input: $Input, slots: $Slots, previous: GetNextStepParameterPrevious<$Context>) => $Output
     },
   ): Builder<
-    PipelineDef.Updaters.AddStep<$Context, {
+    PipelineDefinition.Updaters.AddStep<$Context, {
       name: $Name
       input: $Input
       output: ConfigManager.OrDefault2<$Output, {}>
@@ -121,7 +121,7 @@ interface StepMethod<$Context extends PipelineDef> {
 }
 
 // dprint-ignore
-export type GetNextStepParameterPrevious<$Context extends PipelineDef> =
+export type GetNextStepParameterPrevious<$Context extends PipelineDefinition> =
   $Context['steps'] extends Tuple.NonEmpty
     ? GetNextStepPrevious_<$Context['steps']>
     : undefined
@@ -140,22 +140,22 @@ type GetNextStepPrevious_<$Steps extends StepDef[]> = Tuple.IntersectItems<
 export type InferPipeline<$Builder extends Builder> = InferPipelineFromContext<$Builder['type']>
 
 // dprint-ignore
-type InferPipelineFromContext<$Pipeline extends PipelineDef> =
+type InferPipelineFromContext<$Pipeline extends PipelineDefinition> =
   $Pipeline
 
 /**
  * TODO
  */
-export const create = (options?: Options): Builder<PipelineDef.States.Empty> => {
+export const create = (options?: Options): Builder<PipelineDefinition.States.Empty> => {
   const config = resolveOptions(options)
   return recreate({
     steps: [],
     config,
     overloads: [],
-  } as any as PipelineDef) as any
+  } as any as PipelineDefinition) as any
 }
 
-const recreate = <$Pipeline extends PipelineDef>(pipeline: $Pipeline): Builder<$Pipeline> => {
+const recreate = <$Pipeline extends PipelineDefinition>(pipeline: $Pipeline): Builder<$Pipeline> => {
   const builder: Builder<$Pipeline> = {
     type: pipeline,
     input: () => builder as any,

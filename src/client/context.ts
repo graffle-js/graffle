@@ -30,7 +30,7 @@ export namespace Context {
         ConfigManager.SetKey<
           $Context,
           'requestPipelineDefinition',
-          Anyware.PipelineDef.Updaters.AddOverload<
+          Anyware.PipelineDefinition.Updaters.AddOverload<
             $Context['requestPipelineDefinition'],
             $Transport['requestPipelineOverload']
           >
@@ -62,7 +62,7 @@ export namespace Context {
 
 export interface Context {
   name: string
-  requestPipelineDefinition: Anyware.PipelineDef
+  requestPipelineDefinition: Anyware.PipelineDefinition
   transports: ClientTransports
   /**
    * The initial input that was given to derive the config.

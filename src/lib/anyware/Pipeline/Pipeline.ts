@@ -1,6 +1,6 @@
 import type { IsUnknown, Simplify } from 'type-fest'
 import type { ExcludeUndefined, Tuple } from '../../prelude.js'
-import type { PipelineDef } from '../_.js'
+import type { PipelineDefinition } from '../_.js'
 import type { Overload } from '../Overload/__.js'
 import type { Config } from '../PipelineDef/Config.js'
 import type { Step } from '../Step.js'
@@ -25,7 +25,7 @@ export const createStepsIndex = <$Steps extends Step[]>(steps: $Steps): StepsInd
 }
 
 export namespace Pipeline {
-  export const create = <$PipelineDef extends PipelineDef>(
+  export const create = <$PipelineDef extends PipelineDefinition>(
     definition: $PipelineDef,
   ): Simplify<InferFromDefinition<$PipelineDef>> => {
     let steps = definition.steps as unknown as Step[]
@@ -77,11 +77,11 @@ export namespace Pipeline {
   }
 
   // dprint-ignore
-  export type InferFromDefinition<$PipelineDef extends PipelineDef> =
+  export type InferFromDefinition<$PipelineDef extends PipelineDefinition> =
     InferFromDefinition_<$PipelineDef, InferSteps<$PipelineDef>>
   // dprint-ignore
   type InferFromDefinition_<
-    $PipelineDef extends PipelineDef,
+    $PipelineDef extends PipelineDefinition,
     $Steps extends Step[],
   > = {
     config: $PipelineDef['config']
@@ -101,12 +101,12 @@ export namespace Pipeline {
 }
 
 // dprint-ignore
-type InferSteps<$PipelineDef extends PipelineDef> =
+type InferSteps<$PipelineDef extends PipelineDefinition> =
   InferSteps_<$PipelineDef['steps'], $PipelineDef>
 // dprint-ignore
 type InferSteps_<
   $StepDefs extends StepDef[],
-  $PipelineDef extends PipelineDef,
+  $PipelineDef extends PipelineDefinition,
 > = {
   [$Index in keyof $StepDefs]: {
     name: $StepDefs[$Index]['name']

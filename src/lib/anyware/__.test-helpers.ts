@@ -1,5 +1,5 @@
 import { beforeEach, vi } from 'vitest'
-import { PipelineDef } from './_.js'
+import { PipelineDefinition } from './_.js'
 import type { Interceptor, NonRetryingInterceptorInput } from './Interceptor/Interceptor.js'
 import { Pipeline } from './Pipeline/Pipeline.js'
 import type { Options } from './PipelineDef/Config.js'
@@ -62,7 +62,7 @@ export const createPipelineDef = (options?: Options) => {
 
   type StepBRunner = typeof stepBRunner
 
-  return PipelineDef
+  return PipelineDefinition
     .create(options)
     .input<{ value: string }>()
     .stepWithRunnerType<StepARunner>()(`a`, {
@@ -106,7 +106,7 @@ export const pipelineWithOptions = (options?: Options) => {
   const pipeline = createPipelineDef(options).type
   const pipelineE = Pipeline.create(pipeline)
   const run = async (...interceptors: TestInterceptor[]) => {
-    return await PipelineDef.run(pipelineE, {
+    return await PipelineDefinition.run(pipelineE, {
       initialInput: { value: `initial` },
       interceptors,
     })
@@ -119,14 +119,14 @@ export const pipelineWithOptions = (options?: Options) => {
 }
 
 export const run = async (...interceptors: NonRetryingInterceptorInput[]) => {
-  return await PipelineDef.run(pipeline, {
+  return await PipelineDefinition.run(pipeline, {
     initialInput: initialInput2,
     interceptors,
   })
 }
 
 export const runRetrying = async (interceptor: NonRetryingInterceptorInput) => {
-  return await PipelineDef.run(pipeline, {
+  return await PipelineDefinition.run(pipeline, {
     initialInput: initialInput2,
     interceptors: [],
     retryingInterceptor: interceptor,

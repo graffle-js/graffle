@@ -8,7 +8,7 @@ import {
   type NonRetryingInterceptorInput,
 } from '../Interceptor/Interceptor.js'
 import type { Pipeline } from '../Pipeline/Pipeline.js'
-import type { PipelineDef } from '../PipelineDef/__.js'
+import type { PipelineDefinition } from '../PipelineDef/__.js'
 import { successfulResult } from '../Result.js'
 import type { StepDef } from '../StepDef.js'
 import type { StepResultErrorExtension } from '../StepResult.js'
@@ -51,7 +51,7 @@ export const createRunner =
     return successfulResult(result.result) as any
   }
 
-const toInternalInterceptor = (pipeline: PipelineDef.Pipeline, interceptor: InterceptorInput) => {
+const toInternalInterceptor = (pipeline: PipelineDefinition.Pipeline, interceptor: InterceptorInput) => {
   const currentChunk = createDeferred<StepTriggerEnvelope>()
   const body = createDeferred()
   const interceptorTrigger = typeof interceptor === `function` ? interceptor : interceptor.run

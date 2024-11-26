@@ -1,11 +1,11 @@
 import { Overload } from '../Overload/__.js'
-import type { PipelineDef } from '../PipelineDef/__.js'
+import type { PipelineDefinition } from '../PipelineDef/__.js'
 import type { Extension } from './__.js'
 
-type Create = <$Pipeline extends PipelineDef>() => Builder<$Pipeline, Extension.States.Empty>
+type Create = <$Pipeline extends PipelineDefinition>() => Builder<$Pipeline, Extension.States.Empty>
 
 export interface Builder<
-  $Pipeline extends PipelineDef = PipelineDef,
+  $Pipeline extends PipelineDefinition = PipelineDefinition,
   $Extension extends Extension = Extension,
 > {
   type: $Extension

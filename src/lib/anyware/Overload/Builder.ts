@@ -1,6 +1,6 @@
 import type { ConfigManager } from '../../config-manager/__.js'
 import type { Tuple } from '../../prelude.js'
-import type { PipelineDef } from '../PipelineDef/__.js'
+import type { PipelineDefinition } from '../PipelineDef/__.js'
 import type { StepDef } from '../StepDef.js'
 import type { Overload } from './__.js'
 
@@ -28,7 +28,7 @@ export const create: Create = (parameters) => {
   return builder as any
 }
 
-export type Create<$Pipeline extends PipelineDef = PipelineDef> = <
+export type Create<$Pipeline extends PipelineDefinition = PipelineDefinition> = <
   const $DiscriminantSpec extends Overload['discriminant'],
 >(
   parameters: { discriminant: $DiscriminantSpec },
@@ -42,7 +42,7 @@ export type Create<$Pipeline extends PipelineDef = PipelineDef> = <
 >
 
 export interface Builder<
-  $Pipeline extends PipelineDef = PipelineDef,
+  $Pipeline extends PipelineDefinition = PipelineDefinition,
   $Overload extends Overload = Overload.States.Empty,
 > {
   type: $Overload
@@ -72,7 +72,7 @@ export interface Builder<
 }
 
 interface StepMethod<
-  $Pipeline extends PipelineDef,
+  $Pipeline extends PipelineDefinition,
   $Overload extends Overload,
   $InputExtension extends object = {},
 > {

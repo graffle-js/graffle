@@ -138,7 +138,7 @@ const executeDocument = async (
   } as RequestPipelineBase['input']
 
   const pipeline = Anyware.Pipeline.create(state.requestPipelineDefinition) // todo memoize
-  const result = await Anyware.PipelineDef.run(pipeline, {
+  const result = await Anyware.PipelineDefinition.run(pipeline, {
     initialInput,
     // retryingExtension: state.retry as any,
     interceptors: state.extensions.filter(_ => _.onRequest !== undefined).map(_ => _.onRequest!) as any,

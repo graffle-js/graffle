@@ -1,5 +1,5 @@
 import { expectTypeOf, test } from 'vitest'
-import { PipelineDef } from '../_.js'
+import { PipelineDefinition } from '../_.js'
 import type { results } from '../__.test-helpers.js'
 import { type initialInput, slots, stepA } from '../__.test-helpers.js'
 import type { Config } from '../PipelineDef/Config.js'
@@ -7,7 +7,7 @@ import type { Step } from '../Step.js'
 import type { StepRunner } from '../StepRunner.js'
 import { Pipeline } from './Pipeline.js'
 
-const b0 = PipelineDef.create().input<initialInput>()
+const b0 = PipelineDefinition.create().input<initialInput>()
 
 test(`returns a pipeline`, () => {
   const p0 = b0.type

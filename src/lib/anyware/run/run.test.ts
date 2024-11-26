@@ -3,7 +3,7 @@
 import { describe, expect, test, vi } from 'vitest'
 import { Errors } from '../../errors/__.js'
 import type { ContextualError } from '../../errors/ContextualError.js'
-import { PipelineDef } from '../_.js'
+import { PipelineDefinition } from '../_.js'
 import {
   initialInput2,
   oops,
@@ -265,28 +265,28 @@ describe(`errors`, () => {
     })
 
     test('via passthroughErrorInstanceOf (one)', async () => {
-      const pipelineE = PipelineDef.create({
+      const pipelineE = PipelineDefinition.create({
         passthroughErrorInstanceOf: [SpecialError1],
       }).input<{ throws: Error }>().step(stepA).type
       const exPipeline = Pipeline.create(pipelineE)
 
       // dprint-ignore
-      await expect(PipelineDef.run(exPipeline, { initialInput: { throws: new Error('oops') }, interceptors: [] })).resolves.toBeInstanceOf(Errors.ContextualError)
+      await expect(PipelineDefinition.run(exPipeline, { initialInput: { throws: new Error('oops') }, interceptors: [] })).resolves.toBeInstanceOf(Errors.ContextualError)
       // dprint-ignore
-      await expect(PipelineDef.run(exPipeline, { initialInput: { throws: new SpecialError1('oops') }, interceptors: [] })).resolves.toBeInstanceOf(SpecialError1)
+      await expect(PipelineDefinition.run(exPipeline, { initialInput: { throws: new SpecialError1('oops') }, interceptors: [] })).resolves.toBeInstanceOf(SpecialError1)
     })
     test('via passthroughErrorInstanceOf (multiple)', async () => {
-      const pipelineE = PipelineDef.create({
+      const pipelineE = PipelineDefinition.create({
         passthroughErrorInstanceOf: [SpecialError1, SpecialError2],
       }).input<{ throws: Error }>().step(stepA).type
       const exPipeline = Pipeline.create(pipelineE)
       // dprint-ignore
-      await expect(PipelineDef.run(exPipeline, { initialInput: { throws: new Error('oops') }, interceptors: [] })).resolves.toBeInstanceOf(Errors.ContextualError)
+      await expect(PipelineDefinition.run(exPipeline, { initialInput: { throws: new Error('oops') }, interceptors: [] })).resolves.toBeInstanceOf(Errors.ContextualError)
       // dprint-ignore
-      await expect(PipelineDef.run(exPipeline, { initialInput: { throws: new SpecialError2('oops') }, interceptors: [] })).resolves.toBeInstanceOf(SpecialError2)
+      await expect(PipelineDefinition.run(exPipeline, { initialInput: { throws: new SpecialError2('oops') }, interceptors: [] })).resolves.toBeInstanceOf(SpecialError2)
     })
     test('via passthroughWith', async () => {
-      const pipelineE = PipelineDef.create({
+      const pipelineE = PipelineDefinition.create({
         // todo type-safe hook name according to values passed to constructor
         // todo type-tests on signal { hookName, source, error }
         passthroughErrorWith: (signal) => {
@@ -295,9 +295,9 @@ describe(`errors`, () => {
       }).input<{ throws: Error }>().step(stepA).type
       const exPipeline = Pipeline.create(pipelineE)
       // dprint-ignore
-      await expect(PipelineDef.run(exPipeline, { initialInput: { throws: new Error('oops') }, interceptors: [] })).resolves.toBeInstanceOf(Errors.ContextualError)
+      await expect(PipelineDefinition.run(exPipeline, { initialInput: { throws: new Error('oops') }, interceptors: [] })).resolves.toBeInstanceOf(Errors.ContextualError)
       // dprint-ignore
-      await expect(PipelineDef.run(exPipeline, { initialInput: { throws: new SpecialError1('oops') }, interceptors: [] })).resolves.toBeInstanceOf(SpecialError1)
+      await expect(PipelineDefinition.run(exPipeline, { initialInput: { throws: new SpecialError1('oops') }, interceptors: [] })).resolves.toBeInstanceOf(SpecialError1)
     })
   })
 })
@@ -420,7 +420,7 @@ describe('step runner parameter - previous', () => {
 
 describe('overloads', () => {
   test('overloaded step runners are run', async () => {
-    const p = PipelineDef
+    const p = PipelineDefinition
       .create()
       .input<{ value: string }>()
       .step('a')
@@ -438,11 +438,11 @@ describe('overloads', () => {
       )
       .type
     const exP = Pipeline.create(p)
-    const result = await PipelineDef.run(exP, { initialInput: { value: 'initial', x: 1 } })
+    const result = await PipelineDefinition.run(exP, { initialInput: { value: 'initial', x: 1 } })
     expect(result).toEqual(successfulResult({ value: 'initial+a+b' }))
   })
   test('two overloads can be used; runtime discriminant decides which one is used', async () => {
-    const p = PipelineDef
+    const p = PipelineDefinition
       .create()
       .input<{ value: string }>()
       .step('a')
@@ -460,9 +460,9 @@ describe('overloads', () => {
       )
       .type
     const exP = Pipeline.create(p)
-    const result1 = await PipelineDef.run(exP, { initialInput: { value: 'initial', x: 1 } })
+    const result1 = await PipelineDefinition.run(exP, { initialInput: { value: 'initial', x: 1 } })
     expect(result1).toEqual(successfulResult({ value: 'initial+a+b' }))
-    const result2 = await PipelineDef.run(exP, { initialInput: { value: 'initial', x: 2 } })
+    const result2 = await PipelineDefinition.run(exP, { initialInput: { value: 'initial', x: 2 } })
     expect(result2).toEqual(successfulResult({ value: 'initial+a2+b2' }))
   })
 })

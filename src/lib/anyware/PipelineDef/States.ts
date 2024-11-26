@@ -1,7 +1,7 @@
-import type { PipelineDef } from './__.js'
+import type { PipelineDefinition } from './__.js'
 
 export namespace States {
-  export interface Empty extends PipelineDef {
+  export interface Empty extends PipelineDefinition {
     steps: []
     overloads: []
   }
