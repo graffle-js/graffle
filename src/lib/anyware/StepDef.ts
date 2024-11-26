@@ -1,7 +1,7 @@
 import type { SomeFunction } from '../prelude.js'
 import type { StepRunner } from './StepRunner.js'
 
-export interface StepDef<
+export interface StepDefinition<
   $Name extends string = string,
 > {
   name: $Name

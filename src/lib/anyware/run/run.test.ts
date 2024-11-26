@@ -15,7 +15,7 @@ import {
 } from '../__.test-helpers.js'
 import { Pipeline } from '../Pipeline/Pipeline.js'
 import { successfulResult } from '../Result.js'
-import { StepDef } from '../StepDef.js'
+import { StepDefinition } from '../StepDef.js'
 
 describe(`no interceptors`, () => {
   test(`passthrough to implementation`, async () => {

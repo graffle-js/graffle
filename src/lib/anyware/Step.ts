@@ -1,4 +1,4 @@
-import type { StepDef } from './StepDef.js'
+import type { StepDefinition } from './StepDef.js'
 import type { StepRunner } from './StepRunner.js'
 
 export interface Step {

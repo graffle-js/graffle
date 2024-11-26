@@ -1,6 +1,6 @@
 import type { ConfigManager } from '../../config-manager/__.js'
 import type { Overload } from '../Overload/__.js'
-import type { StepDef } from '../StepDef.js'
+import type { StepDefinition } from '../StepDef.js'
 import type { PipelineDefinition } from './__.js'
 
 export namespace Updaters {
@@ -11,7 +11,7 @@ export namespace Updaters {
 
   export type AddStep<
     $PipelineDef extends PipelineDefinition,
-    $Step extends StepDef,
+    $Step extends StepDefinition,
   > = ConfigManager.UpdateKeyWithAppend<$PipelineDef, 'steps', $Step>
 
   export type AddOverload<

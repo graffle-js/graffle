@@ -1,7 +1,7 @@
 import type { ConfigManager } from '../../config-manager/__.js'
 import type { Tuple } from '../../prelude.js'
 import type { PipelineDefinition } from '../PipelineDef/__.js'
-import type { StepDef } from '../StepDef.js'
+import type { StepDefinition } from '../StepDef.js'
 import type { Overload } from './__.js'
 
 export const create: Create = (parameters) => {
@@ -20,7 +20,7 @@ export const create: Create = (parameters) => {
       overload.steps[name] = {
         name,
         ...spec,
-      } as unknown as StepDef
+      } as unknown as StepDefinition
       return builder as any
     },
   }
@@ -107,10 +107,10 @@ interface StepMethod<
 // dprint-ignore
 type InferStepInput<
   $Overload extends Overload,
-  $CurrentStep extends StepDef,
-  $PreviousStep extends StepDef | undefined,
+  $CurrentStep extends StepDefinition,
+  $PreviousStep extends StepDefinition | undefined,
 > =
-  $PreviousStep extends StepDef
+  $PreviousStep extends StepDefinition
     ? $PreviousStep['name'] extends keyof $Overload['steps']
       ? $Overload['steps'][$PreviousStep['name']]['output']
       :

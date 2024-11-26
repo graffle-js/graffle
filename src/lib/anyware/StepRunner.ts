@@ -1,4 +1,4 @@
-import type { StepDef } from './StepDef.js'
+import type { StepDefinition } from './StepDef.js'
 
 export type StepRunner<
   $Input extends StepDef.Input = StepDef.Input,

@@ -1,7 +1,8 @@
 import { MethodMode, type MethodModeGetReads } from '../../client/transportHttp/request.js'
 import type { MethodModePost } from '../../client/transportHttp/request.js'
+import type { Extension } from '../../entrypoints/extensionkit.js'
 import { createExtensionDefinition } from '../../extension/extension.js'
-import type { ConfigManager } from '../../lib/config-manager/__.js'
+import type { Anyware } from '../../lib/anyware/__.js'
 import type { Grafaid } from '../../lib/grafaid/__.js'
 import { OperationTypeToAccessKind, print } from '../../lib/grafaid/document.js'
 import { getRequestEncodeSearchParameters, postRequestEncodeBody } from '../../lib/grafaid/http/http.js'
@@ -9,6 +10,7 @@ import { getRequestHeadersRec, parseExecutionResult, postRequestHeadersRec } fro
 import { mergeRequestInit, searchParamsAppendAll } from '../../lib/http.js'
 import type { httpMethodGet, httpMethodPost } from '../../lib/http.js'
 import { _, isString, type MaybePromise } from '../../lib/prelude.js'
+import type { RequestPipeline } from '../../requestPipeline/RequestPipeline.js'
 
 interface Configuration {
   url: URL | string
@@ -22,7 +24,83 @@ type MergeDefaults<$Input extends Partial<Configuration>> =
   $Input
 // ConfigManager.MergeDefaultsShallow<{ methodMode: 'post' }, $Input>
 
-export const TransportHttp = <$Input extends Partial<Configuration> = {}>(input?: $Input) => {
+interface TransportHttp<$Input extends Partial<Configuration>> extends Extension {
+  name: `TransportHttp`
+  config: Configuration
+  Transport: {
+    name: 'http'
+    config: Configuration
+    configInit: $Input
+    requestPipelineOverload: RequestPipelineOverload
+  }
+}
+
+interface RequestPipelineOverload extends Anyware.Overload {
+  discriminant: ['transportType', 'http']
+  input: Configuration
+  inputInit: {}
+  steps: {
+    pack: {
+      name: 'pack'
+      slots: {
+        searchParams: getRequestEncodeSearchParameters
+        body: postRequestEncodeBody
+      }
+      input: PackInput
+      output: PackOutput
+    }
+    exchange: {
+      name: 'exchange'
+      slots: {
+        fetch: SlotFetch
+      }
+      input: PackOutput
+      output: ExchangeOutput
+    }
+    unpack: {
+      name: 'unpack'
+      slots: {}
+      input: ExchangeOutput
+      output: RequestPipeline.DecodeInput
+    }
+  }
+}
+
+interface PackInput extends RequestPipeline.PackInput {
+  headers?: HeadersInit
+}
+
+interface PackOutput extends Omit<RequestPipeline.PackInput, 'request'> {
+  request: ExchangeRequest
+}
+
+interface ExchangeOutput extends PackOutput {
+  response: Response
+}
+
+type SlotFetch = (request: Request) => MaybePromise<Response>
+
+type ExchangeRequest = ExchangePostRequest | ExchangeGetRequest
+
+/**
+ * An extension of {@link RequestInit} that adds a required `url` property and makes `body` required.
+ */
+type ExchangePostRequest = Omit<RequestInit, 'body' | 'method'> & {
+  methodMode: MethodModePost | MethodModeGetReads
+  method: httpMethodPost
+  url: string | URL // todo URL for config and string only for input. Requires anyware to allow different types for input and existing config.
+  body: BodyInit
+}
+
+type ExchangeGetRequest = Omit<RequestInit, 'body' | 'method'> & {
+  methodMode: MethodModeGetReads
+  method: httpMethodGet
+  url: string | URL
+}
+
+export const TransportHttp = <$ConfigInit extends Partial<Configuration> = {}>(
+  configInit?: $ConfigInit,
+): TransportHttp<$ConfigInit> => {
   return createExtensionDefinition({
     name: `TransportHttp`,
     // normalizeConfig: (input?: Partial<Configuration>) => {
@@ -40,7 +118,7 @@ export const TransportHttp = <$Input extends Partial<Configuration> = {}>(input?
       return $
         .create(`http`)
         .config<Configuration>()
-        .configInit<MergeDefaults<$Input>>()
+        .configInit<MergeDefaults<$ConfigInit>>()
         .stepWithExtendedInput<{ headers?: HeadersInit }>()(`pack`, {
           slots: {
             searchParams: getRequestEncodeSearchParameters,
@@ -126,23 +204,5 @@ export const TransportHttp = <$Input extends Partial<Configuration> = {}>(input?
           },
         })
     },
-  })
-}
-
-type ExchangeRequest = ExchangePostRequest | ExchangeGetRequest
-
-/**
- * An extension of {@link RequestInit} that adds a required `url` property and makes `body` required.
- */
-type ExchangePostRequest = Omit<RequestInit, 'body' | 'method'> & {
-  methodMode: MethodModePost | MethodModeGetReads
-  method: httpMethodPost
-  url: string | URL // todo URL for config and string only for input. Requires anyware to allow different types for input and existing config.
-  body: BodyInit
-}
-
-type ExchangeGetRequest = Omit<RequestInit, 'body' | 'method'> & {
-  methodMode: MethodModeGetReads
-  method: httpMethodGet
-  url: string | URL
+  }) as any
 }

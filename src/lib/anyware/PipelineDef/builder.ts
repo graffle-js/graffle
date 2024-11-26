@@ -2,7 +2,7 @@ import type { ConfigManager } from '../../config-manager/__.js'
 import { type Tuple } from '../../prelude.js'
 import type { Extension } from '../Extension/__.js'
 import { Overload } from '../Overload/__.js'
-import type { StepDef } from '../StepDef.js'
+import type { StepDefinition } from '../StepDef.js'
 import type { StepRunner } from '../StepRunner.js'
 import { Pipeline } from './_.js'
 import type { PipelineDefinition } from './__.js'
@@ -126,7 +126,7 @@ export type GetNextStepParameterPrevious<$Context extends PipelineDefinition> =
     ? GetNextStepPrevious_<$Context['steps']>
     : undefined
 
-type GetNextStepPrevious_<$Steps extends StepDef[]> = Tuple.IntersectItems<
+type GetNextStepPrevious_<$Steps extends StepDefinition[]> = Tuple.IntersectItems<
   {
     [$Index in keyof $Steps]: {
       [$StepName in $Steps[$Index]['name']]: {

@@ -4,7 +4,7 @@ import type { PipelineDefinition } from '../_.js'
 import type { Overload } from '../Overload/__.js'
 import type { Config } from '../PipelineDef/Config.js'
 import type { Step } from '../Step.js'
-import type { StepDef } from '../StepDef.js'
+import type { StepDefinition } from '../StepDef.js'
 import type { StepRunner } from '../StepRunner.js'
 
 export interface Pipeline {
@@ -105,7 +105,7 @@ type InferSteps<$PipelineDef extends PipelineDefinition> =
   InferSteps_<$PipelineDef['steps'], $PipelineDef>
 // dprint-ignore
 type InferSteps_<
-  $StepDefs extends StepDef[],
+  $StepDefs extends StepDefinition[],
   $PipelineDef extends PipelineDefinition,
 > = {
   [$Index in keyof $StepDefs]: {
@@ -139,11 +139,11 @@ type InferSteps_<
   }
 }
 
-type InferStepSlots<$Step extends StepDef, $Overloads extends Overload[]> =
+type InferStepSlots<$Step extends StepDefinition, $Overloads extends Overload[]> =
   & $Step['slots']
   & InferStepSlots_<$Step, $Overloads>
 // dprint-ignore
-type InferStepSlots_<$Step extends StepDef, $Overloads extends Overload[]> =
+type InferStepSlots_<$Step extends StepDefinition, $Overloads extends Overload[]> =
   Tuple.IntersectItems<{
     [$Index in keyof $Overloads]:
       IsUnknown<$Overloads[$Index]['steps'][$Step['name']]> extends true
@@ -152,7 +152,7 @@ type InferStepSlots_<$Step extends StepDef, $Overloads extends Overload[]> =
   }>
 
 // dprint-ignore
-type InferStepOutput<$Step extends StepDef, $Overload extends Overload> = $Overload extends never ? never :
+type InferStepOutput<$Step extends StepDefinition, $Overload extends Overload> = $Overload extends never ? never :
   & $Step['output']
   & { [_ in $Overload['discriminant'][0]]: $Overload['discriminant'][1] }
   & $Overload['steps'][$Step['name']]['output']
@@ -160,7 +160,7 @@ type InferStepOutput<$Step extends StepDef, $Overload extends Overload> = $Overl
 // dprint-ignore
 type InferStepInput<
   $StepIndex extends Tuple.IndexKey,
-  $StepDef extends StepDef,
+  $StepDef extends StepDefinition,
   $Overload extends Overload,
 > = $Overload extends never ? never :
   & $StepDef['input']

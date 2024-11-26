@@ -10,7 +10,7 @@ import {
 import type { Pipeline } from '../Pipeline/Pipeline.js'
 import type { PipelineDefinition } from '../PipelineDef/__.js'
 import { successfulResult } from '../Result.js'
-import type { StepDef } from '../StepDef.js'
+import type { StepDefinition } from '../StepDef.js'
 import type { StepResultErrorExtension } from '../StepResult.js'
 import type { StepTriggerEnvelope } from '../StepTriggerEnvelope.js'
 import { getEntryStep } from './getEntrypoint.js'
