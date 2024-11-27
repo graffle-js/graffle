@@ -1,11 +1,21 @@
-import { ClientPreset } from "graffle/client";
+import { TransportHttp } from "graffle/extensions/transport-http";
+import * as $$Utilities from "graffle/utilities-for-generated";
 import * as $$Data from "./data.js";
 import * as $$Scalar from "./scalar.js";
 import * as $$SchemaDrivenDataMap from "./schema-driven-data-map.js";
 
-export const create = ClientPreset.create({
-  name: $$Data.Name,
-  sddm: $$SchemaDrivenDataMap.schemaDrivenDataMap,
-  scalars: $$Scalar.$registry,
-  schemaUrl: $$Data.defaultSchemaUrl,
-});
+const context = $$Utilities.useReducer(
+  {
+    ...structuredClone($$Utilities.Context.States.contextEmpty),
+    name: $$Data.Name,
+    schemaMap: $$SchemaDrivenDataMap.schemaDrivenDataMap,
+    scalars: $$Scalar.$registry,
+  },
+  TransportHttp({
+    url: $$Data.defaultSchemaUrl,
+  }),
+);
+
+export const create = $$Utilities.createConstructorWithContext(
+  context,
+);

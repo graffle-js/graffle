@@ -1,18 +1,21 @@
-import { createConstructorWithContext } from '../../../../../../src/client/client.js'
-import { ClientPreset, create as createBase } from '../../../../../../src/entrypoints/client.js'
-import { TransportHttp } from '../../../../../../src/extensions/TransportHttp/TransportHttp.js'
+import { TransportHttp } from '../../../../../../src/entrypoints/extensions/transport-http/runtime.js'
+import * as $$Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
 import * as $$Data from './data.js'
 import * as $$Scalar from './scalar.js'
 import * as $$SchemaDrivenDataMap from './schema-driven-data-map.js'
 
-export const create = createConstructorWithContext(
-  createBase({
+const context = $$Utilities.useReducer(
+  {
+    ...structuredClone($$Utilities.Context.States.contextEmpty),
     name: $$Data.Name,
     schemaMap: $$SchemaDrivenDataMap.schemaDrivenDataMap,
     scalars: $$Scalar.$registry,
-  })
-    .use(TransportHttp({
-      url: $$Data.defaultSchemaUrl,
-    }))
-    ._,
+  },
+  TransportHttp({
+    url: $$Data.defaultSchemaUrl,
+  }),
+)
+
+export const create = $$Utilities.createConstructorWithContext(
+  context,
 )

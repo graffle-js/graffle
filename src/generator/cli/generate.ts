@@ -6,7 +6,7 @@ import { z } from 'zod'
 import { toAbsolutePath } from '../../lib/fsp.js'
 import { isError, urlParseSafe } from '../../lib/prelude.js'
 import { Generator } from '../__.js'
-import { type Input, OutputCase } from '../config/input.js'
+import { type ConfigInit, OutputCase } from '../config/configInit.js'
 
 const args = Command.create().description(`Generate a type safe GraphQL client.`)
   .parameter(
@@ -107,7 +107,7 @@ const currentWorkingDirectory = configModule.path ? Path.dirname(configModule.pa
 
 // --- Merge Inputs ---
 
-const input: Input = {
+const input: ConfigInit = {
   ...configModule.builder?._.input,
   currentWorkingDirectory,
   schema,

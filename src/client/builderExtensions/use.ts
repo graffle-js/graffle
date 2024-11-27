@@ -77,7 +77,7 @@ export type UseReducer<
 // >
 
 export const useReducer = <
-  $Context extends Context,
+  const $Context extends Context,
   $Extension extends Extension,
 >(context: $Context, extension: $Extension): UseReducer<$Context, $Extension> => {
   return {

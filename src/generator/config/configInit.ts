@@ -20,7 +20,7 @@ export const OutputCase = {
 } as const
 export type InputOutputCase = keyof typeof OutputCase
 
-export interface Input {
+export interface ConfigInit {
   /**
    * File system API to use.
    *
@@ -141,7 +141,7 @@ export interface Input {
    * Used by Graffle test suite to have generated clients point to source
    * code. Probably not useful to you.
    */
-  libraryPaths?: InputLibraryPaths
+  libraryPaths?: ConfigInitLibraryPaths
   /**
    * Should custom scalars definitions be imported into the generated output?
    */
@@ -207,9 +207,20 @@ export interface InputIntrospectionOptions extends IntrospectionOptions {
   oneOf?: boolean
 }
 
-export interface InputLibraryPaths {
+export interface ConfigInitLibraryPaths {
   client?: string
   schema?: string
   scalars?: string
-  utilitiesForGenerated?: string
+  utilitiesForGenerated: string
+  extensionTransportHttp: string
 }
+
+export type LibraryPathsKeys = keyof ConfigInitLibraryPaths
+
+export const libraryPathKeys = {
+  client: `client`,
+  scalars: `scalars`,
+  schema: `schema`,
+  utilitiesForGenerated: `utilitiesForGenerated`,
+  extensionTransportHttp: `extensionTransportHttp`,
+} satisfies Record<LibraryPathsKeys, LibraryPathsKeys>

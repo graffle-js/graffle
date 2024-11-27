@@ -11,17 +11,26 @@ export const ModuleGeneratorClient = createModuleGenerator(
     code(importModuleGenerator(config, ModuleGeneratorData))
     code(importModuleGenerator(config, ModuleGeneratorScalar))
     code(
-      `import { ClientPreset } from '${config.paths.imports.grafflePackage.client}'`,
+      `import * as ${identifiers.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'`,
+      `import { TransportHttp } from '${config.paths.imports.grafflePackage.extensionTransportHttp}'`,
     )
     code()
-    code(
-      `export const create = ClientPreset.create({
-        name: ${identifiers.$$Data}.Name,
-        sddm: ${identifiers.$$SchemaDrivenDataMap}.schemaDrivenDataMap,
-        scalars: ${identifiers.$$Scalar}.$registry,
-        schemaUrl: ${identifiers.$$Data}.defaultSchemaUrl,
-      }
-      )`,
-    )
+    code(`
+      const context = ${identifiers.$$Utilities}.useReducer(
+        {
+          ...structuredClone(${identifiers.$$Utilities}.Context.States.contextEmpty),
+          name: $$Data.Name,
+          schemaMap: $$SchemaDrivenDataMap.schemaDrivenDataMap,
+          scalars: $$Scalar.$registry,
+        },
+        TransportHttp({
+          url: $$Data.defaultSchemaUrl,
+        }),
+      )
+
+      export const create = ${identifiers.$$Utilities}.createConstructorWithContext(
+        context
+      )
+    `)
   },
 )

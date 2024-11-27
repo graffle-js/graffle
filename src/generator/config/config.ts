@@ -5,12 +5,18 @@ import { Introspection } from '../../extensions/Introspection/Introspection.js'
 import { ConfigManager } from '../../lib/config-manager/__.js'
 import { fileExists, type Fs, isPathToADirectory, toAbsolutePath, toFilePath } from '../../lib/fsp.js'
 import { Grafaid } from '../../lib/grafaid/__.js'
-import { isString } from '../../lib/prelude.js'
+import { isString, keysStrict } from '../../lib/prelude.js'
 import { type Formatter, getTypeScriptFormatter, passthroughFormatter } from '../../lib/typescript-formatter.js'
 import type { Extension } from '../extension/types.js'
+import {
+  type ConfigInit,
+  type ConfigInitLibraryPaths,
+  type InputLint,
+  type InputOutputCase,
+  libraryPathKeys,
+} from './configInit.js'
 import { defaultLibraryPaths, defaultNamespace, defaultOutputCase } from './defaults.js'
 import { defaultName } from './defaults.js'
-import type { Input, InputLibraryPaths, InputLint, InputOutputCase } from './input.js'
 
 export interface Config {
   fs: Fs
@@ -52,49 +58,49 @@ export interface Config {
     }
     imports: {
       scalars: string
-      grafflePackage: Required<InputLibraryPaths>
+      grafflePackage: Required<ConfigInitLibraryPaths>
     }
   }
 }
 
 interface ConfigSchema {
-  via: Input['schema']['type']
+  via: ConfigInit['schema']['type']
   sdl: string
   sdlFilePath: null | string
   instance: Grafaid.Schema.Schema
   kindMap: Grafaid.Schema.KindMap
 }
 
-export const createConfig = async (input: Input): Promise<Config> => {
+export const createConfig = async (configInit: ConfigInit): Promise<Config> => {
   // --- Fs ---
 
-  const fs = input.fs ?? await import(`node:fs/promises`)
+  const fs = configInit.fs ?? await import(`node:fs/promises`)
 
   // --- Output Case ---
 
-  const outputCase = input.outputCase ?? defaultOutputCase
+  const outputCase = configInit.outputCase ?? defaultOutputCase
 
   // --- Paths ---
 
-  const cwd = input.currentWorkingDirectory ?? process.cwd()
+  const cwd = configInit.currentWorkingDirectory ?? process.cwd()
 
-  const sourceDirPath = input.sourceDirPath ? toAbsolutePath(cwd, input.sourceDirPath) : cwd
+  const sourceDirPath = configInit.sourceDirPath ? toAbsolutePath(cwd, configInit.sourceDirPath) : cwd
 
-  const outputDirPathRoot = input.outputDirPath
-    ? toAbsolutePath(cwd, input.outputDirPath)
+  const outputDirPathRoot = configInit.outputDirPath
+    ? toAbsolutePath(cwd, configInit.outputDirPath)
     : Path.join(cwd, `./graffle`)
 
   const outputDirPathModules = Path.join(outputDirPathRoot, `/modules`)
 
-  const inputPathScalars = input.scalars
-    ? toAbsolutePath(cwd, input.scalars)
+  const inputPathScalars = configInit.scalars
+    ? toAbsolutePath(cwd, configInit.scalars)
     : Path.join(sourceDirPath, `scalars` + `.ts`)
 
   const isCustomScalarsModuleExists = await fileExists(fs, inputPathScalars)
-  if (!isCustomScalarsModuleExists && input.scalars) {
+  if (!isCustomScalarsModuleExists && configInit.scalars) {
     // dprint-ignore
     throw new Error(
-      `Custom scalar codecs file not found. Given path: ${String(input.scalars)}. Resolved to and looked at: ${inputPathScalars}`,
+      `Custom scalar codecs file not found. Given path: ${String(configInit.scalars)}. Resolved to and looked at: ${inputPathScalars}`,
     )
   }
 
@@ -105,23 +111,23 @@ export const createConfig = async (input: Input): Promise<Config> => {
 
   // --- Schema ---
 
-  const schema = await createConfigSchema(fs, cwd, sourceDirPath, input)
+  const schema = await createConfigSchema(fs, cwd, sourceDirPath, configInit)
 
   // --- Default Schema URL ---
 
   // dprint-ignore
   const defaultSchemaUrl =
-    typeof input.defaultSchemaUrl === `boolean`
-      ? input.schema instanceof Grafaid.Schema.Schema
+    typeof configInit.defaultSchemaUrl === `boolean`
+      ? configInit.schema instanceof Grafaid.Schema.Schema
         ? null
-        : input.schema.type === `url`
-          ? input.schema.url
+        : configInit.schema.type === `url`
+          ? configInit.schema.url
           : null
-      : input.defaultSchemaUrl ?? null
+      : configInit.defaultSchemaUrl ?? null
 
   // --- Formatting ---
 
-  const formattingEnabled = input.format ?? true
+  const formattingEnabled = configInit.format ?? true
   let formatter = passthroughFormatter
   if (formattingEnabled) {
     const formatterReal = await getTypeScriptFormatter(fs)
@@ -151,41 +157,43 @@ To suppress this warning disable formatting in one of the following ways:
     return Path.relative(outputDirPathModules, pathAbsolute)
   }
 
-  const libraryPaths = {
-    client: input.libraryPaths?.client ? processLibraryPath(input.libraryPaths.client) : undefined,
-    scalars: input.libraryPaths?.scalars ? processLibraryPath(input.libraryPaths.scalars) : undefined,
-    schema: input.libraryPaths?.schema ? processLibraryPath(input.libraryPaths.schema) : undefined,
-    utilitiesForGenerated: input.libraryPaths?.utilitiesForGenerated
-      ? processLibraryPath(input.libraryPaths.utilitiesForGenerated)
-      : undefined,
-  }
+  const libraryPaths = Object.fromEntries(
+    keysStrict(libraryPathKeys).map(_ => {
+      return [
+        _,
+        configInit.libraryPaths?.[_]
+          ? processLibraryPath(configInit.libraryPaths[_])
+          : undefined,
+      ]
+    }),
+  )
 
   // --- Lint ---
 
   const lint: Config['lint'] = {
-    missingCustomScalarCodec: input.lint?.missingCustomScalarCodec ?? true,
+    missingCustomScalarCodec: configInit.lint?.missingCustomScalarCodec ?? true,
   }
 
   // --- Output SDL ---
 
   // dprint-ignore
   const outputSDLPath =
-    input.outputSDL
-      ? isString(input.outputSDL)
-        ? toFilePath(`schema.graphql`, toAbsolutePath(cwd, input.outputSDL))
+    configInit.outputSDL
+      ? isString(configInit.outputSDL)
+        ? toFilePath(`schema.graphql`, toAbsolutePath(cwd, configInit.outputSDL))
         : Path.join(outputDirPathRoot, `schema.graphql`)
       : null
 
   // --- name ---
 
-  const name = input.name ?? defaultName
+  const name = configInit.name ?? defaultName
 
-  const nameNamespace = input.nameNamespace === true
-    ? input.name
-      ? pascalCase(input.name)
+  const nameNamespace = configInit.nameNamespace === true
+    ? configInit.name
+      ? pascalCase(configInit.name)
       : defaultNamespace
-    : isString(input.nameNamespace)
-    ? input.nameNamespace
+    : isString(configInit.nameNamespace)
+    ? configInit.nameNamespace
     : defaultNamespace
 
   // --- Config ---
@@ -194,7 +202,7 @@ To suppress this warning disable formatting in one of the following ways:
     fs,
     name,
     nameNamespace,
-    extensions: input.extensions ?? [],
+    extensions: configInit.extensions ?? [],
     outputCase,
     lint,
     formatter,
@@ -209,7 +217,7 @@ To suppress this warning disable formatting in one of the following ways:
       format: formattingEnabled,
       customScalars: isCustomScalarsModuleExists,
       TSDoc: {
-        noDocPolicy: input.TSDoc?.noDocPolicy ?? `ignore`,
+        noDocPolicy: configInit.TSDoc?.noDocPolicy ?? `ignore`,
       },
     },
     paths: {
@@ -242,7 +250,7 @@ const createConfigSchema = async (
   fs: Fs,
   cwd: string,
   sourceDirPath: string,
-  input: Input,
+  input: ConfigInit,
 ): Promise<ConfigSchema> => {
   switch (input.schema.type) {
     case `instance`: {

@@ -1,4 +1,4 @@
-import type { InputOutputCase } from './input.js'
+import type { ConfigInitLibraryPaths, InputOutputCase } from './configInit.js'
 
 export const defaultNamespace = `Graffle`
 
@@ -9,6 +9,7 @@ export const defaultLibraryPaths = {
   scalars: `graffle/generator-helpers/standard-scalar-types`,
   schema: `graffle/schema`,
   utilitiesForGenerated: `graffle/utilities-for-generated`,
-}
+  extensionTransportHttp: `graffle/extensions/transport-http`,
+} satisfies ConfigInitLibraryPaths
 
 export const defaultOutputCase: InputOutputCase = `kebab`

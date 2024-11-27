@@ -1,5 +1,5 @@
 import { createConfig } from '../config/config.js'
-import type { Input } from '../config/input.js'
+import type { ConfigInit } from '../config/configInit.js'
 import { ModuleGenerator_ } from '../generators/_.js'
 import { ModuleGenerator__ } from '../generators/__.js'
 import { ModuleGeneratorClient } from '../generators/Client.js'
@@ -34,7 +34,7 @@ const moduleGenerators = [
   ModuleGeneratorMethodsDocument,
 ]
 
-export const generate = async (input: Input) => {
+export const generate = async (input: ConfigInit) => {
   const config = await createConfig(input)
 
   const generatedModules = await Promise.all(
