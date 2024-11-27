@@ -8,15 +8,13 @@ import { publicGraphQLSchemaEndpoints, show } from '../$/helpers.js'
 const abortController = new AbortController()
 //    ^^^^^^^^^^^^^^^
 
-const graffle = Graffle.create({
-  schema: publicGraphQLSchemaEndpoints.Pokemon,
+const graffle = Graffle.create().transport({
+  url: publicGraphQLSchemaEndpoints.Pokemon,
 })
 
-graffle
-
 const resultPromise = graffle
-  .with({ transport: { raw: { signal: abortController.signal } } })
-  //                                  ^^^^^^^^^^^^^^^
+  .transport({ raw: { signal: abortController.signal } })
+  //                          ^^^^^^^^^^^^^^^
   .gql`
     {
       pokemon {

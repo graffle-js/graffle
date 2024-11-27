@@ -5,7 +5,8 @@ import { Graffle } from '../../src/entrypoints/main.js'
 import { publicGraphQLSchemaEndpoints, show } from '../$/helpers.js'
 
 const graffle = Graffle
-  .create({ schema: publicGraphQLSchemaEndpoints.Pokemon, transport: { methodMode: `getReads` } })
+  .create()
+  .transport({ url: publicGraphQLSchemaEndpoints.Pokemon, methodMode: `getReads` })
   .anyware(async ({ pack }) => {
     return await pack({
       using: {

@@ -67,7 +67,7 @@ export interface RequestPipelineOverload extends Anyware.Overload {
       slots: {
         fetch: SlotFetch
       }
-      input: PackOutput
+      input: ExchangeInput
       output: ExchangeOutput
     }
     unpack: {
@@ -85,6 +85,10 @@ export interface PackInput extends RequestPipeline.PackInput {
 
 export interface PackOutput extends Omit<RequestPipeline.PackInput, 'request'> {
   request: ExchangeRequest
+}
+
+export interface ExchangeInput extends PackOutput {
+  headers?: HeadersInit
 }
 
 export interface ExchangeOutput extends PackOutput {

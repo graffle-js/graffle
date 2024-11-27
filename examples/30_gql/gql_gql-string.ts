@@ -5,9 +5,7 @@
 import { Graffle } from '../../src/entrypoints/main.js'
 import { publicGraphQLSchemaEndpoints, show } from '../$/helpers.js'
 
-const graffle = Graffle.create({
-  schema: publicGraphQLSchemaEndpoints.Pokemon,
-})
+const graffle = Graffle.create().transport({ url: publicGraphQLSchemaEndpoints.Pokemon })
 
 const data = await graffle.gql`
   {

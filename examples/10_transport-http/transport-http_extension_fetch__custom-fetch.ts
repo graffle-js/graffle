@@ -8,7 +8,8 @@ import { showJson } from '../$/helpers.js'
 import { publicGraphQLSchemaEndpoints } from '../$/helpers.js'
 
 const graffle = Graffle
-  .create({ schema: publicGraphQLSchemaEndpoints.Pokemon })
+  .create()
+  .transport({ url: publicGraphQLSchemaEndpoints.Pokemon })
   .anyware(({ exchange }) =>
     exchange({
       using: {

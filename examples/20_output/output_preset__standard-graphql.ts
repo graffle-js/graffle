@@ -5,10 +5,9 @@
 import { Graffle, Preset } from '../../src/entrypoints/main.js'
 import { show } from '../$/show.js'
 
-const graffle = Graffle.create({
-  schema: `...`,
-  output: Preset.traditionalGraphqlOutput,
-})
+const graffle = Graffle
+  .create({ output: Preset.traditionalGraphqlOutput })
+  .transport({ url: `...` })
 
 const result = await graffle.gql(`{ query { thisWillError } }`).send()
 

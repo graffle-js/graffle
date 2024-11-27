@@ -7,11 +7,10 @@ import { Graffle } from '../../tests/_/schemas/pokemon/graffle/__.js'
 import { show } from '../$/helpers.js'
 
 const graffle = Graffle
-  .create({
-    transport: {
-      methodMode: `getReads`, // [!code highlight]
-      headers: { tenant: `nano` },
-    },
+  .create()
+  .transport({
+    methodMode: `getReads`, // [!code highlight]
+    headers: { tenant: `nano` },
   })
   .anyware(async ({ exchange }) => {
     show(exchange.input.request)

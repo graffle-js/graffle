@@ -7,22 +7,21 @@ import { show } from '../$/helpers.js'
 import { publicGraphQLSchemaEndpoints } from '../$/helpers.js'
 
 const graffle = Graffle
-  .create({
-    schema: publicGraphQLSchemaEndpoints.Pokemon,
-    transport: {
+  .create()
+  .transport({
+    url: publicGraphQLSchemaEndpoints.Pokemon,
+    headers: {
+      authorization: `Bearer MY_TOKEN`,
+      'x-something-to-unset': `true`,
+    },
+    raw: {
       headers: {
-        authorization: `Bearer MY_TOKEN`,
-        'x-something-to-unset': `true`,
-      },
-      raw: {
-        headers: {
-          'x-from-raw': `true`,
-        },
+        'x-from-raw': `true`,
       },
     },
   })
-  .with({
-    transport: { headers: { 'x-something-to-unset': `` } },
+  .transport({
+    headers: { 'x-something-to-unset': `` },
   })
   .anyware(({ exchange }) => {
     if (exchange.input.transportType !== `http`) return exchange()

@@ -4,6 +4,7 @@
 
 import { GraphQLObjectType, GraphQLSchema, GraphQLString } from 'graphql'
 import { Graffle } from '../../src/entrypoints/main.js'
+import { TransportMemory } from '../../src/extensions/TransportMemory/TransportMemory.js'
 import { showJson } from '../$/helpers.js'
 
 const schema = new GraphQLSchema({
@@ -18,7 +19,10 @@ const schema = new GraphQLSchema({
   }),
 })
 
-const graffle = Graffle.create({ schema })
+const graffle = Graffle
+  .create()
+  .use(TransportMemory({ schema }))
+  .transport(`memory`)
 
 const data = await graffle.gql`
   {

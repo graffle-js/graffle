@@ -7,12 +7,11 @@ import { show } from '../$/helpers.js'
 import { publicGraphQLSchemaEndpoints } from '../$/helpers.js'
 
 const graffle = Graffle
-  .create({
-    schema: publicGraphQLSchemaEndpoints.Pokemon,
-    transport: {
-      raw: {
-        mode: `cors`,
-      },
+  .create()
+  .transport({
+    url: publicGraphQLSchemaEndpoints.Pokemon,
+    raw: {
+      mode: `cors`,
     },
   })
   .anyware(async ({ exchange }) => {
