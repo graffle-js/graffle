@@ -1,12 +1,7 @@
-import { describe, expect, expectTypeOf } from 'vitest'
-import { createResponse, test } from '../../tests/_/helpers.js'
-import { Graffle as Graffle2 } from '../../tests/_/schemas/kitchen-sink/graffle/__.js'
-import { schema } from '../../tests/_/schemas/kitchen-sink/schema.js'
+import { describe, expect } from 'vitest'
+import { test } from '../../tests/_/helpers.js'
 import { Graffle } from '../entrypoints/main.js'
 import { Throws } from '../extensions/Throws/Throws.js'
-import { TransportHttp } from '../extensions/TransportHttp/TransportHttp.js'
-
-const url = new URL(`https://foo.io/api/graphql`)
 
 describe(`without a registered client, document builder is not statically available but still works at runtime`, () => {
   const graffle = Graffle.create({ name: `unknown` }).use(Throws())
@@ -24,6 +19,8 @@ describe(`without a registered client, document builder is not statically availa
     expect(graffle.gql).toBeTypeOf(`function`)
   })
 })
+
+// const url = new URL(`https://foo.io/api/graphql`)
 
 describe(`output`, () => {
   // todo bring this back

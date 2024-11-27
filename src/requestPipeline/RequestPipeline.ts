@@ -135,3 +135,5 @@ export const requestPipelineBaseDefinition: RequestPipelineBaseDefinition = Anyw
   .type
 
 export type RequestPipelineBase = Anyware.Pipeline.InferFromDefinition<RequestPipelineBaseDefinition>
+
+export type RequestPipelineBaseInterceptor = Anyware.Interceptor.InferFromPipeline<RequestPipelineBase>

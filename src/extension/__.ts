@@ -1,5 +1,4 @@
-import type { Anyware } from '../lib/anyware/__.js'
-import type { RequestPipelineBase } from '../requestPipeline/RequestPipeline.js'
+import type { RequestPipelineBaseInterceptor } from '../requestPipeline/RequestPipeline.js'
 import type { Transport } from '../types/Transport.js'
 import type { BuilderExtension } from './builder.js'
 import type { TypeHooks } from './TypeHooks.js'
@@ -24,7 +23,7 @@ export interface Extension<
   /**
    * Anyware executed on every request.
    */
-  onRequest: undefined | Anyware.Interceptor.InferFromPipeline<RequestPipelineBase>
+  onRequest: undefined | RequestPipelineBaseInterceptor
   /**
    * Manipulate the builder.
    * You can extend the builder with new properties at both runtime AND buildtime (types, TypeScript).

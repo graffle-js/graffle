@@ -2,7 +2,7 @@ import type { IsNever } from 'type-fest'
 import type { Anyware } from '../lib/anyware/__.js'
 import type { Builder } from '../lib/builder/__.js'
 import { _, type AssertExtendsString } from '../lib/prelude.js'
-import type { RequestPipelineBase } from '../requestPipeline/RequestPipeline.js'
+import type { RequestPipelineBaseInterceptor } from '../requestPipeline/RequestPipeline.js'
 import type { Transport } from '../types/Transport.js'
 import type { Extension } from './__.js'
 import type { BuilderExtension } from './builder.js'
@@ -22,43 +22,11 @@ export type ExtensionInputParametersRequired = [input: object]
 export interface ExtensionDefinition {
   name: string
   builder?: BuilderExtension // | BuilderExtension.CreatorCallback
-  onRequest?: Anyware.Interceptor.InferFromPipeline<RequestPipelineBase>
+  onRequest?: RequestPipelineBaseInterceptor
   // typeHooks?: () => TypeHooks
   transport?: (
     OverloadBuilder: { create: Transport.Builder.Create },
   ) => Anyware.Overload.Builder
-}
-
-export const createExtensionDefinition = <
-  // $Definition extends ExtensionDefinition,
-  $Name extends string,
-  $TransportCallbackResult extends undefined | Anyware.Overload.Builder = undefined,
->(definition: {
-  name: $Name
-  // builder?: $BuilderExtension
-  // onRequest?: Anyware.Interceptor.InferFromPipeline<RequestPipelineBase>
-  // typeHooks?: () => $TypeHooks
-  transport?(
-    OverloadBuilder: { create: Transport.Builder.Create },
-  ): $TransportCallbackResult
-}): Extension<
-  $Name,
-  object,
-  undefined,
-  TypeHooksEmpty,
-  $TransportCallbackResult extends Anyware.Overload.Builder ? {
-      // todo fixme
-      // Names of transports can only be strings but its wider for anyware overloads
-      name: AssertExtendsString<$TransportCallbackResult['type']['discriminant'][1]>
-      config: $TransportCallbackResult['type']['input']
-      configInit: $TransportCallbackResult['type']['inputInit'] extends object
-        ? $TransportCallbackResult['type']['inputInit']
-        : {}
-      requestPipelineOverload: $TransportCallbackResult['type']
-    }
-    : undefined
-> => {
-  return definition as any
 }
 
 export const create = <
@@ -76,7 +44,7 @@ export const create = <
     custom?: $Custom
     create: (params: { config: $Config }) => {
       builder?: $BuilderExtension | BuilderExtension.CreatorCallback<$BuilderExtension>
-      onRequest?: Anyware.Interceptor.InferFromPipeline<RequestPipelineBase>
+      onRequest?: RequestPipelineBaseInterceptor
       typeHooks?: TypeHooksBuilderCallback<$TypeHooks> | $TypeHooks
       transport?: (
         OverloadBuilder: { create: Transport.Builder.Create },

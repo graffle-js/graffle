@@ -19,17 +19,6 @@ export namespace BuilderExtension {
     (creator: Creator): $BuilderExtension
   }
 
-  // export interface BuilderExtensionBuilder<$Type = {}> {
-  //   type: <$BuilderExtension extends Builder.Extension>() => BuilderExtensionBuilder<$Type & {
-  //     type: $BuilderExtension
-  //     }>
-  //   intercept: <$Intercept extends Builder.Interceptor.InferFromPipeline<RequestPipelineBase>>(
-  //     interceptor: $Intercept,
-  //   ) => BuilderExtensionBuilder<$Type & {
-  //     intercept: $Intercept
-  //   }>
-  // }
-
   export type Interceptor = (
     input: {
       path: string[]

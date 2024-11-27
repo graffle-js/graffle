@@ -6,6 +6,7 @@ import type { Mock } from 'vitest'
 import { test as testBase, vi } from 'vitest'
 import { Graffle } from '../../src/entrypoints/main.js'
 import type { GraffleBasic } from '../../src/entrypoints/presets/__GraffleBasic.js'
+import type { GraffleMinimal } from '../../src/entrypoints/presets/__GraffleMinimal.js'
 import type { Client } from '../../src/entrypoints/presets/basic.js'
 import type { SchemaDrivenDataMap } from '../../src/entrypoints/utilities-for-generated.js'
 import { TransportHttp } from '../../src/extensions/TransportHttp/TransportHttp.js'
@@ -41,7 +42,9 @@ export const createResponse = (body: object) =>
 interface Fixtures {
   fetch: Mock<(request: Request) => Promise<Response>>
   pokemonService: SchemaService
-  graffle: Client
+  graffle: GraffleMinimal.Client.With<{
+    checkPreflight: false
+  }>
   kitchenSink: GraffleBasic.Client.With<{
     schemaMap: SchemaDrivenDataMap
     checkPreflight: false

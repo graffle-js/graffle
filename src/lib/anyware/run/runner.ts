@@ -25,8 +25,6 @@ export interface Params<$Pipeline extends Pipeline = Pipeline> {
 export const createRunner =
   <$Pipeline extends Pipeline>(pipeline: $Pipeline) =>
   async (params?: Params<$Pipeline>): Promise<$Pipeline['output']> => {
-    // const pipelineExecutable = pipeline as any as ExecutablePipeline.InferFromPipeline<$ExPipeline>
-
     const { initialInput, interceptors = [], retryingInterceptor } = params ?? {}
 
     const interceptors_ = retryingInterceptor

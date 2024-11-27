@@ -4,7 +4,7 @@
 
 // const graffle = Graffle.create({ schema }).use(Throws())
 
-// todo tests that don't rely on schema errors
+// // todo tests that don't rely on schema errors
 // describe(`document`, () => {
 //   describe(`query result field`, () => {
 //     test(`with __typename`, async () => {

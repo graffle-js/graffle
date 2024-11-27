@@ -1,7 +1,7 @@
 import { create } from '../../extension/extension.js'
 import type { Anyware as AnywareLib } from '../../lib/anyware/__.js'
 import { Builder } from '../../lib/builder/__.js'
-import type { RequestPipelineBase } from '../../requestPipeline/__.js'
+import type { RequestPipelineBaseInterceptor } from '../../requestPipeline/__.js'
 import { type Context } from '../context.js'
 
 export interface BuilderExtensionAnyware extends Builder.Extension {
@@ -23,7 +23,7 @@ export interface Anyware<$Arguments extends Builder.Extension.Parameters<Builder
 
 export const builderExtensionAnyware = Builder.Extension.create<BuilderExtensionAnyware>((builder, context) => {
   const properties = {
-    anyware: (interceptor: AnywareLib.Interceptor.InferFromPipeline<RequestPipelineBase>) => {
+    anyware: (interceptor: RequestPipelineBaseInterceptor) => {
       return builder({
         ...context,
         extensions: [

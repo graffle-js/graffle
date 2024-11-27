@@ -1,16 +1,29 @@
-import { create, Errors, type Extension } from '../../entrypoints/extensionkit.js'
+import { Errors, Extension } from '../../entrypoints/extensionkit.js'
 import { normalizeRequestToNode } from '../../lib/grafaid/request.js'
 import { type ExcludeNullAndUndefined, isString } from '../../lib/prelude.js'
 import { isRecordLikeObject } from '../../lib/prelude.js'
+import type { RequestPipelineBaseInterceptor } from '../../requestPipeline/__.js'
 import { SchemaDrivenDataMap } from '../../types/SchemaDrivenDataMap/__.js'
 import type { GeneratedExtensions } from './global.js'
 import { injectTypenameOnRootResultFields } from './injectTypenameOnRootResultFields.js'
 
-export const SchemaErrors = create({
+// todo we can probably remove this explicit type, its not needed, thought it might be, for excess depth error
+export interface SchemaErrors extends Extension {
+  name: `SchemaErrors`
+  config: undefined
+  onRequest: RequestPipelineBaseInterceptor
+  builder: undefined
+  typeHooks: {
+    onRequestDocumentRootType: [OnRequestDocumentRootType_]
+    onRequestResult: [OnRequestResult_]
+  }
+}
+
+export const SchemaErrors: () => SchemaErrors = Extension.create({
   name: `SchemaErrors`,
-  create: () => {
+  create() {
     return {
-      onRequest: async ({ pack }) => {
+      async onRequest({ pack }) {
         const state = pack.input.state
         const sddm = state.schemaMap
 
