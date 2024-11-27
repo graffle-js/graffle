@@ -1,24 +1,26 @@
-import { type Client, create as baseCreate } from '../../client/client.js'
-import type { Context } from '../../client/context.js'
-import { createPresetFromContext } from '../../createPreset.js'
+import { useReducer } from '../../client/builderExtensions/use.js'
+import { type Client as BaseClient, createConstructorWithContext } from '../../client/client.js'
+import { Context, type Context as BaseContext } from '../../client/context.js'
 import type { ConfigManager } from '../../lib/config-manager/__.js'
 import { TransportHttp } from '../extensions/transport-http/runtime.js'
 import { TransportMemory } from '../extensions/transport-memory/runtime.js'
 
-const context = baseCreate()
-  .use(TransportHttp())
-  .use(TransportMemory())
-  ._
+const context = useReducer(useReducer(Context.States.contextEmpty, TransportHttp()), TransportMemory())
 
-export type BasicClientContext = typeof context
+type BasicClientContext = typeof context
 
-export const create = createPresetFromContext(context)
+export const create = createConstructorWithContext(context)
 
-export type BasicClient = Client<BasicClientContext>
+export type Client = BaseClient<BasicClientContext>
 
-export type BasicClientWith<$ContextNewPartial extends Partial<Context>> = Client<
-  ConfigManager.SetKeysOptional<
-    BasicClientContext,
-    $ContextNewPartial
+export namespace Client {
+  export type Context = BasicClientContext
+
+  export type With<$ContextNewPartial extends Partial<BaseContext>> = BaseClient<
+    // @ts-expect-error fixme
+    ConfigManager.SetKeysOptional<
+      BasicClientContext,
+      $ContextNewPartial
+    >
   >
->
+}

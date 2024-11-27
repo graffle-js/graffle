@@ -41,6 +41,8 @@ export interface Client<$Extensions extends Extensions = Extensions> {
 
 export type DefaultClientName = 'default'
 
+export const defaultClientName: DefaultClientName = `default`
+
 export type Clients = GraffleGlobal.Clients
 
 export type IsEmpty = IsNever<keyof Clients> extends true ? true : false

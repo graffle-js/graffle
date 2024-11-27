@@ -2,20 +2,56 @@ import type { Extension } from '../extension/__.js'
 import type { Anyware } from '../lib/anyware/__.js'
 import type { ConfigManager } from '../lib/config-manager/__.js'
 import type { Objekt, StringKeyof } from '../lib/prelude.js'
-import type { RequestPipelineBaseDefinition } from '../requestPipeline/RequestPipeline.js'
-import type { Schema } from '../types/Schema/__.js'
+import {
+  type RequestPipelineBaseDefinition,
+  requestPipelineBaseDefinition,
+} from '../requestPipeline/RequestPipeline.js'
+import { Schema } from '../types/Schema/__.js'
 import type { SchemaDrivenDataMap } from '../types/SchemaDrivenDataMap/SchemaDrivenDataMap.js'
 import type { Transport } from '../types/Transport.js'
 import {
   type ConfigInit,
   type DefaultCheckPreflight,
+  defaultCheckPreflight,
   type DefaultName,
+  defaultName,
   type NormalizeConfigInit,
   normalizeConfigInit,
 } from './Configuration/ConfigInit.js'
-import type { OutputConfig } from './Configuration/Output.js'
+import { type OutputConfig, type OutputConfigDefault, outputConfigDefault } from './Configuration/Output.js'
 
 export namespace Context {
+  export namespace States {
+    export interface Empty extends Context {
+      name: DefaultName
+      scalars: Schema.Scalar.Registry.Empty
+      extensions: []
+      transports: ClientTransports.States.Empty
+      checkPreflight: DefaultCheckPreflight
+      schemaMap: null
+      input: {}
+      requestPipelineDefinition: RequestPipelineBaseDefinition
+      output: OutputConfigDefault
+      // type-only properties
+      typeHookOnRequestDocumentRootType: []
+      typeHookOnRequestResult: []
+    }
+
+    export const contextEmpty: Empty = {
+      name: defaultName,
+      requestPipelineDefinition: requestPipelineBaseDefinition,
+      transports: ClientTransports.States.empty,
+      checkPreflight: defaultCheckPreflight,
+      input: {},
+      output: outputConfigDefault,
+      schemaMap: null,
+      extensions: [],
+      scalars: Schema.Scalar.Registry.empty,
+      // type-only properties
+      // typeHookOnRequestDocumentRootType: [],
+      // typeHookOnRequestResult: [],
+    } as Empty
+  }
   export namespace Updaters {
     export type AddConfigInit<
       $Context extends Context,
@@ -23,7 +59,18 @@ export namespace Context {
     > = ConfigManager.SetKeysOptional<
       $Context,
       NormalizeConfigInit<$ConfigInit>
-    > // todo output init needs to be processed before setting into context.
+    >
+
+    export const addConfigInit = <
+      $Context extends Context,
+      $ConfigInit extends ConfigInit,
+    >(context: $Context, configInit: $ConfigInit): AddConfigInit<$Context, $ConfigInit> => {
+      const newConfig = normalizeConfigInit(configInit)
+      return {
+        ...context,
+        ...newConfig,
+      } as any
+    }
 
     // dprint-ignore
     export type AddTransportOptional<
@@ -73,7 +120,7 @@ export namespace Context {
   }
 }
 
-export interface Context {
+export interface ContextValueLevel {
   name: string
   requestPipelineDefinition: Anyware.PipelineDefinition
   transports: ClientTransports
@@ -94,6 +141,9 @@ export interface Context {
   // retry: Anyware.Extension2<RequestPipeline.Core, { retrying: true }> | null
   extensions: Extension[]
   scalars: Schema.Scalar.Registry
+}
+
+export interface Context extends ContextValueLevel {
   /**
    * Type level augmentations.
    *
@@ -102,38 +152,6 @@ export interface Context {
   typeHookOnRequestResult: Extension.TypeHooks.OnRequestResult[]
   typeHookOnRequestDocumentRootType: Extension.TypeHooks.OnRequestDocumentRootType[]
 }
-
-export interface ContextEmpty extends Context {
-  name: DefaultName
-  scalars: Schema.Scalar.Registry.Empty
-  extensions: []
-  transports: ClientTransports.States.Empty
-  checkPreflight: DefaultCheckPreflight
-  schemaMap: null
-  input: {}
-  requestPipelineDefinition: RequestPipelineBaseDefinition
-  typeHookOnRequestDocumentRootType: []
-  typeHookOnRequestResult: []
-}
-
-export const createContext = (contextWithoutConfig: ContextWithoutConfig): Context => {
-  let config: Context | null
-
-  return {
-    ...contextWithoutConfig,
-    get config() {
-      const configFound = config ?? normalizeConfigInit(contextWithoutConfig.input)
-      return configFound as any
-    },
-  } as Context
-}
-
-export type ContextWithoutConfig = Omit<
-  Context,
-  | 'config'
-  | 'typeHookOnRequestDocumentRootType'
-  | 'typeHookOnRequestResult'
->
 
 export interface ClientTransports {
   registry: ClientTransportsRegistry
@@ -154,8 +172,6 @@ interface ClientTransportsConfigurations {
 
 export namespace ClientTransports {
   export namespace Errors {
-    export type NoTransportsRegistered = 'Error: Transport registry is empty. Please add a transport.'
-
     export type PreflightCheckNoTransportsRegistered =
       'Error: You cannot send requests yet. You must setup a transport.'
 

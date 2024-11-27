@@ -5,7 +5,8 @@ import * as Path from 'node:path'
 import type { Mock } from 'vitest'
 import { test as testBase, vi } from 'vitest'
 import { Graffle } from '../../src/entrypoints/main.js'
-import type { BasicClient, BasicClientContext, BasicClientWith } from '../../src/entrypoints/presets/basic.js'
+import type { GraffleBasic } from '../../src/entrypoints/presets/__GraffleBasic.js'
+import type { Client } from '../../src/entrypoints/presets/basic.js'
 import type { SchemaDrivenDataMap } from '../../src/entrypoints/utilities-for-generated.js'
 import { TransportHttp } from '../../src/extensions/TransportHttp/TransportHttp.js'
 import { TransportMemory } from '../../src/extensions/TransportMemory/TransportMemory.js'
@@ -40,16 +41,16 @@ export const createResponse = (body: object) =>
 interface Fixtures {
   fetch: Mock<(request: Request) => Promise<Response>>
   pokemonService: SchemaService
-  graffle: BasicClient
-  kitchenSink: BasicClientWith<{
+  graffle: Client
+  kitchenSink: GraffleBasic.Client.With<{
     schemaMap: SchemaDrivenDataMap
     checkPreflight: false
   }>
-  kitchenSinkHttp: BasicClientWith<{
+  kitchenSinkHttp: GraffleBasic.Client.With<{
     schemaMap: SchemaDrivenDataMap
     checkPreflight: false
     transports: ConfigManager.SetKeyUnsafe<
-      BasicClientContext['transports'],
+      GraffleBasic.Client.Context['transports'],
       `current`,
       `memory`
     >

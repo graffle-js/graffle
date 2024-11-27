@@ -22,6 +22,8 @@ const graffle = Graffle
     url: new URL(publicGraphQLSchemaEndpoints.Pokemon),
   })
 
+graffle._.output.envelope.enabled
+
 const data = await graffle.gql`{ pokemon { name } }`.send()
 
 showJson(data)

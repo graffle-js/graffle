@@ -41,6 +41,15 @@
     "./extensions/transport-http": {
       "default": "./build/entrypoints/extensions/transport-http/runtime.js"
     },
+    "./presets/bare": {
+      "default": "./build/entrypoints/presets/__GraffleBare.js"
+    },
+    "./presets/basic": {
+      "default": "./build/entrypoints/presets/__GraffleBasic.js"
+    },
+    "./presets/minimal": {
+      "default": "./build/entrypoints/presets/__GraffleMinimal.js"
+    },
     "./client": {
       "default": "./build/entrypoints/client.js"
     },

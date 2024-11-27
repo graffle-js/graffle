@@ -122,14 +122,12 @@ export const TransportHttp: TransportHttpConstructor = create({
       methodMode: configInit?.methodMode ?? `post`,
     }
   },
-  // eslint-disable-next-line
   create() {
     return {
-      // eslint-disable-next-line
       transport($) {
         return $
           .create(`http`)
-          // .config<Configuration>()
+          .config<Configuration>()
           // .configInit<MergeConfigInitDefaults<$ConfigInit>>()
           .stepWithExtendedInput<{ headers?: HeadersInit }>()(`pack`, {
             slots: {

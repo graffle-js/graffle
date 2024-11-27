@@ -27,6 +27,7 @@ export default tsEslint.config({
     },
   },
   rules: {
+    ['prefer-arrow/prefer-arrow-functions']: 'off',
     ['@typescript-eslint/only-throw-error']: 'off',
     ['@typescript-eslint/no-unsafe-assignment']: 'off',
     ['@typescript-eslint/no-unsafe-call']: 'off',

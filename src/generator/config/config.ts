@@ -2,7 +2,6 @@ import { pascalCase } from 'es-toolkit'
 import * as Path from 'node:path'
 import { Graffle } from '../../entrypoints/__Graffle.js'
 import { Introspection } from '../../extensions/Introspection/Introspection.js'
-import { TransportHttp } from '../../extensions/TransportHttp/TransportHttp.js'
 import { ConfigManager } from '../../lib/config-manager/__.js'
 import { fileExists, type Fs, isPathToADirectory, toAbsolutePath, toFilePath } from '../../lib/fsp.js'
 import { Grafaid } from '../../lib/grafaid/__.js'
@@ -283,10 +282,11 @@ const createConfigSchema = async (
       }
     }
     case `url`: {
-      // @ts-expect-error fixme
-      const graffle = Graffle.create()
-        .use(TransportHttp({ url: input.schema.url }))
+      const graffle = Graffle
+        .create()
         .use(Introspection({ options: input.schema.options }))
+        .transport({ url: input.schema.url })
+      // todo introspection method should not be available without a transport
       const data = await graffle.introspect()
       if (!data) {
         throw new Error(`No data returned for introspection query.`)

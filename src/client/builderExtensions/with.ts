@@ -1,8 +1,6 @@
-import type { WithInput } from '../../entrypoints/main.js'
 import { Builder } from '../../lib/builder/__.js'
 import type { ConfigManager } from '../../lib/config-manager/__.js'
-import type { ConfigInit } from '../Configuration/ConfigInit.js'
-import type { NormalizeConfigInit } from '../Configuration/normalizeConfigInit.js'
+import type { ConfigInit, NormalizeConfigInit } from '../Configuration/ConfigInit.js'
 import { type Context } from '../context.js'
 
 export interface BuilderExtensionWith extends Builder.Extension {
@@ -24,9 +22,9 @@ export interface With<$Args extends Builder.Extension.Parameters<BuilderExtensio
     $Args['definition'],
     ConfigManager.SetKeysOptional<
       $Args['context'],
-      {
+      & NormalizeConfigInit<$Args['context']['input'] & $ConfigInit>
+      & {
         input: $Args['context']['input'] & $ConfigInit
-        config: NormalizeConfigInit<$Args['context']['input'] & $ConfigInit>
       }
     >
   >
@@ -34,7 +32,7 @@ export interface With<$Args extends Builder.Extension.Parameters<BuilderExtensio
 
 export const builderExtensionWith = Builder.Extension.create<BuilderExtensionWith>((builder, state) => {
   return {
-    with: (input: WithInput) => {
+    with: (input: ConfigInit) => {
       return builder({
         ...state,
         input: {

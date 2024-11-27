@@ -1,9 +1,8 @@
 import type { CamelCase } from 'type-fest'
 import type { UseExtensionReturn } from '../client/builderExtensions/use.js'
 import { type Client, createWithContext } from '../client/client.js'
-import type { NormalizeConfigInit } from '../client/Configuration/normalizeConfigInit.js'
-import { ClientTransports, type ContextEmpty, createContext } from '../client/context.js'
-import type { ConfigInit, ConfigOutputInit } from '../entrypoints/main.js'
+import { Context } from '../client/context.js'
+import type { ConfigInit, ConfigInitOutput, NormalizeConfigInit } from '../entrypoints/main.js'
 import type { Extension } from '../extension/__.js'
 import type {
   ExtensionConstructor,
@@ -15,7 +14,6 @@ import type {
 import type { Builder } from '../lib/builder/__.js'
 import type { ConfigManager } from '../lib/config-manager/__.js'
 import { type ToParametersExact, type Tuple } from '../lib/prelude.js'
-import { requestPipelineBaseDefinition } from '../requestPipeline/RequestPipeline.js'
 import { Schema } from '../types/Schema/__.js'
 import type { SchemaDrivenDataMap } from '../types/SchemaDrivenDataMap/__.js'
 
@@ -25,7 +23,7 @@ import type { SchemaDrivenDataMap } from '../types/SchemaDrivenDataMap/__.js'
  * Extensions constructors can be given. Their constructor parameters will
  * be merged into the client constructor under a key matching the name of the extension.
  */
-export const create: CreatePrefilled = (args) => {
+export const create: ClientPresetConstructor = (args) => {
   const constructor = (input: any) => { // todo generic input type
     const extensions = args.extensions?.map(extCtor => {
       const extCtor_: (args: object | undefined) => Extension = extCtor
@@ -36,13 +34,12 @@ export const create: CreatePrefilled = (args) => {
     const scalars = args.scalars ?? Schema.Scalar.Registry.empty
     const schemaMap = args.sddm ?? null
 
-    const initialState = createContext({
+    const initialState = {
+      ...structuredClone(Context.States.contextEmpty),
       name: args.name,
       extensions,
       scalars,
       schemaMap,
-      requestPipelineDefinition: requestPipelineBaseDefinition,
-      transports: ClientTransports.States.empty,
       input: {
         schema: args.schemaUrl,
         // eslint-disable-next-line
@@ -50,8 +47,7 @@ export const create: CreatePrefilled = (args) => {
         ...input,
         name: args.name,
       },
-      // retry: null,
-    })
+    }
 
     const instance = createWithContext(initialState)
 
@@ -62,7 +58,7 @@ export const create: CreatePrefilled = (args) => {
 }
 
 // dprint-ignore
-type CreatePrefilled = <
+type ClientPresetConstructor = <
   const $Name extends string,
   $Scalars extends Schema.Scalar.Registry,
   const $ExtensionConstructors extends [...ExtensionConstructor<any>[]],
@@ -86,7 +82,7 @@ type CreatePrefilled = <
       // @ts-expect-error fixme
       Client<
         ConfigManager.SetKeysOptional<
-          ContextEmpty,
+          Context.States.Empty,
           {
             input: $Input
             name: $Params['name']
@@ -105,7 +101,7 @@ type ConstructorParameters<
 > =
   & Tuple.IntersectItems<GetParametersContributedByExtensions<$Extensions>>
   & {
-    output?: ConfigOutputInit
+    output?: ConfigInitOutput
     checkPreflight?: boolean
   }
 

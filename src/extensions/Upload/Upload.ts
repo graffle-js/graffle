@@ -1,4 +1,4 @@
-import { createExtension } from '../../entrypoints/main.js'
+import { Extension } from '../../entrypoints/extensionkit.js'
 import type { Variables } from '../../lib/grafaid/graphql.js'
 import { createBody } from './createBody.js'
 
@@ -8,11 +8,11 @@ import { createBody } from './createBody.js'
 /**
  * @see https://github.com/jaydenseric/graphql-multipart-request-spec
  */
-export const Upload = createExtension({
+export const Upload = Extension.create({
   name: `Upload`,
-  create: () => {
+  create() {
     return {
-      onRequest: async ({ pack }) => {
+      async onRequest({ pack }) {
         // TODO we can probably get file upload working for in-memory schemas too :)
         // @ts-expect-error fixme
         if (pack.input.transportType !== `http`) {

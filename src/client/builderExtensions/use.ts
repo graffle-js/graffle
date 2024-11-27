@@ -29,14 +29,14 @@ export type UseExtensionReturn<
       >
       : $Args['definition']
   ),
-  ApplyExtensionToContext<
+  UseReducer<
     $Args['context'],
     $Extension
   >
 >
 
 // dprint-ignore
-export type ApplyExtensionToContext<
+export type UseReducer<
   $Context extends Context,
   $Extension extends Extension,
 > =
@@ -76,13 +76,20 @@ export type ApplyExtensionToContext<
 //   >
 // >
 
+export const useReducer = <
+  $Context extends Context,
+  $Extension extends Extension,
+>(context: $Context, extension: $Extension): UseReducer<$Context, $Extension> => {
+  return {
+    ...context,
+    extensions: [...context.extensions, extension],
+  } as any
+}
+
 export const builderExtensionUse = Builder.Extension.create<BuilderExtensionUse>((builder, context) => {
   return {
     use: (extension: Extension) => {
-      return builder({
-        ...context,
-        extensions: [...context.extensions, extension],
-      })
+      return builder(useReducer(context, extension))
     },
   } as any
 })

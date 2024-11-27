@@ -1,7 +1,6 @@
 import { Builder } from '../../lib/builder/__.js'
 import type { ConfigManager } from '../../lib/config-manager/__.js'
 import { _ } from '../../lib/prelude.js'
-import type { Transport } from '../../types/Transport.js'
 import type { ClientTransports } from '../context.js'
 import { type Context } from '../context.js'
 
@@ -71,28 +70,28 @@ type TransportMethod<$Args extends Builder.Extension.Parameters<BuilderExtension
               //   // $Args['context']['transport']['registry'][$Transport['name']]['config'] & { [_ in $Transport['name']]: $Transport }
               // >
             >
-        // /**
-        //  * Set the current Transport, selected from amongst the registered ones, and optionally change its configuration.
-        //  * TODO
-        //  */
-        // <
-        //   $Name extends ClientTransports.GetNames<$Args['context']['transports']>,
-        //   $Config extends $Args['context']['transports']['registry'][$Name]['config']
-        // >
-        //   (name: $Name, config?: $Config):
-        //     Builder.Definition.MaterializeWith<
-        //       $Args['definition'],
-        //       ConfigManager.SetKey<
-        //         $Args['context'],
-        //         'transport',
-        //         {
-        //           configurations: $Args['context']['transports']['configurations']
-        //           registry: $Args['context']['transports']['registry']
-        //           // update:
-        //           current: $Name,
-        //         }
-        //       >
-        //     >
+        /**
+         * Set the current Transport, selected from amongst the registered ones, and optionally change its configuration.
+         * TODO
+         */
+        <
+          $Name extends ClientTransports.GetNames<$Args['context']['transports']>,
+          $Config extends $Args['context']['transports']['registry'][$Name]['config']
+        >
+          (name: $Name, config?: $Config):
+            Builder.Definition.MaterializeWith<
+              $Args['definition'],
+              ConfigManager.SetKey<
+                $Args['context'],
+                'transports',
+                {
+                  configurations: $Args['context']['transports']['configurations']
+                  registry: $Args['context']['transports']['registry']
+                  // update:
+                  current: $Name,
+                }
+              >
+            >
       }
     : never
 

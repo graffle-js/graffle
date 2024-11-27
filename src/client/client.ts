@@ -2,11 +2,8 @@ import {
   type BuilderExtensionRequestMethods,
   requestMethodsProperties,
 } from '../documentBuilder/requestMethods/requestMethods.js' // todo
-import { defaultName } from '../generator/config/defaults.js'
 import type { Builder } from '../lib/builder/__.js'
-import { proxyGet } from '../lib/prelude.js'
-import { requestPipelineBaseDefinition } from '../requestPipeline/RequestPipeline.js'
-import { Schema } from '../types/Schema/__.js'
+import { __, proxyGet } from '../lib/prelude.js'
 import { type BuilderExtensionAnyware, builderExtensionAnyware } from './builderExtensions/anyware.js'
 import { type BuilderExtensionInternal, builderExtensionInternal } from './builderExtensions/internal.js'
 import { type BuilderExtensionScalar, builderExtensionScalar } from './builderExtensions/scalar.js'
@@ -14,65 +11,39 @@ import { type BuilderExtensionTransport } from './builderExtensions/transport.js
 import { type BuilderExtensionUse, builderExtensionUse } from './builderExtensions/use.js'
 import { type BuilderExtensionWith, builderExtensionWith } from './builderExtensions/with.js'
 import { type ConfigInit } from './Configuration/ConfigInit.js'
-import { outputConfigDefault } from './Configuration/Output.js'
-import {
-  ClientTransports,
-  type Context,
-  type ContextEmpty,
-  type ContextWithoutConfig,
-  createContext,
-} from './context.js'
+import { Context } from './context.js'
 import { type BuilderExtensionGql, builderExtensionGql } from './gql/gql.js'
 
-export type ClientConstructor<$Context extends Context = ContextEmpty> = <const $ConfigInit extends ConfigInit = {}>(
+export const createConstructorWithContext = <$Context extends Context>(
+  context: $Context,
+): ClientConstructor<$Context> => {
+  return (configInit) => __(context, configInit)
+}
+
+export type ClientConstructor<$Context extends Context = Context.States.Empty> = <
+  const $ConfigInit extends ConfigInit = {},
+>(
   configInit?: $ConfigInit,
 ) => Client<
+  // @ts-expect-error fixme
   Context.Updaters.AddConfigInit<
     $Context,
     $ConfigInit
   >
 >
 
-declare const x: ClientConstructor
-x()._.checkPreflight
-
-export type ClientEmpty = Client<ContextEmpty>
-
-export type Client<$Context extends Context = Context> = Builder.Definition.MaterializeWith<
-  ClientDefinition,
-  $Context
->
-
-type ClientDefinition = Builder.Definition.Create<[
-  BuilderExtensionInternal,
-  BuilderExtensionTransport,
-  BuilderExtensionRequestMethods,
-  BuilderExtensionWith,
-  BuilderExtensionUse,
-  BuilderExtensionAnyware,
-  BuilderExtensionGql,
-  BuilderExtensionScalar,
-]>
-
 export const create: ClientConstructor = (configInit) => {
-  const initialContext = createContext({
-    name: configInit?.name ?? defaultName,
-    schemaMap: configInit?.schemaMap ?? null,
-    transports: ClientTransports.States.empty,
-    output: outputConfigDefault,
-    requestPipelineDefinition: requestPipelineBaseDefinition,
-    extensions: [],
-    scalars: Schema.Scalar.Registry.empty,
-    input: configInit ?? {},
-  })
+  const initialContext = Context.Updaters.addConfigInit(
+    // todo remove this, client builder should never mutate context, just putting this here for now while working on other stuff.
+    structuredClone(Context.States.contextEmpty),
+    configInit ?? {},
+  )
   return createWithContext(initialContext)
 }
 
 export const createWithContext = (
-  initialContext: ContextWithoutConfig,
+  context: Context,
 ) => {
-  const context = createContext(initialContext)
-
   // @ts-expect-error ignoreme
   const clientDirect: Client = {
     ...builderExtensionInternal(createWithContext, context),
@@ -107,3 +78,26 @@ export const createWithContext = (
 
   return clientProxy
 }
+
+// export type ClientWith<$ContextNewPartial extends Partial<Context>> = Client<
+//   ConfigManager.SetKeysOptional<
+//     ContextEmpty,
+//     $ContextNewPartial
+//   >
+// >
+
+export type Client<$Context extends Context = Context> = Builder.Definition.MaterializeWith<
+  ClientDefinition,
+  $Context
+>
+
+type ClientDefinition = Builder.Definition.Create<[
+  BuilderExtensionInternal,
+  BuilderExtensionTransport,
+  BuilderExtensionRequestMethods,
+  BuilderExtensionWith,
+  BuilderExtensionUse,
+  BuilderExtensionAnyware,
+  BuilderExtensionGql,
+  BuilderExtensionScalar,
+]>

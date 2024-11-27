@@ -68,12 +68,12 @@ test(`type hooks is empty by default`, () => {
     },
   })
   expectTypeOf(Ex.info.typeHooks).toEqualTypeOf<{
-    onRequestResult: undefined
-    onRequestDocumentRootType: undefined
+    onRequestResult: []
+    onRequestDocumentRootType: []
   }>()
   const ex = Ex()
   expectTypeOf(ex.typeHooks).toEqualTypeOf<{
-    onRequestResult: undefined
-    onRequestDocumentRootType: undefined
+    onRequestResult: []
+    onRequestDocumentRootType: []
   }>()
 })

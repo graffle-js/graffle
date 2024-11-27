@@ -1,6 +1,6 @@
 import type { Builder, Context } from '../../entrypoints/extensionkit.js'
 import { create } from '../../entrypoints/extensionkit.js'
-import { type AssertExtends, type BuilderConfig, type WithInput } from '../../entrypoints/main.js'
+import { type AssertExtends, type ConfigInit, type OutputConfig } from '../../entrypoints/main.js'
 import type { ConfigManager } from '../../lib/config-manager/__.js'
 
 export const Throws = create({
@@ -13,10 +13,10 @@ export const Throws = create({
 
           // todo redesign input to allow to force throw always
           // todo pull pre-configured config from core
-          const throwsifiedInput: WithInput = {
+          const throwsifiedInput: ConfigInit = {
             output: {
               envelope: {
-                enabled: client._.config.output.envelope.enabled,
+                enabled: client._.output.envelope.enabled,
                 // @ts-expect-error
                 errors: { execution: false, other: false, schema: false },
               },
@@ -43,14 +43,14 @@ interface BuilderExtension_<$Args extends Builder.Extension.Parameters<BuilderEx
     $Args['definition'],
     ConfigManager.SetKey<
       $Args['context'],
-      'config',
-      ThrowsifyConfig<$Args['context']['config']>
+      'output',
+      ThrowsifyConfig<$Args['context']['output']>
     >
   >
 }
 
-type ThrowsifyConfig<$BuilderConfig extends BuilderConfig> = ConfigManager.SetKeyAtPath<
-  $BuilderConfig,
-  ['output', 'errors'],
+type ThrowsifyConfig<$OutputConfig extends OutputConfig> = ConfigManager.SetKey<
+  $OutputConfig,
+  'errors',
   { other: 'throw'; execution: 'throw' }
 >

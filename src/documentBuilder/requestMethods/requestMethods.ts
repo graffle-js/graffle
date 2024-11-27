@@ -91,7 +91,7 @@ const executeRootField = async (
 
   if (result instanceof Error) return result
 
-  return state.config.output.envelope.enabled
+  return state.output.envelope.enabled
     ? result
     // @ts-expect-error
     : result[rootFieldName]
