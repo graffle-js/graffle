@@ -8,7 +8,7 @@ import { showJson } from '../$/helpers.js'
 import { publicGraphQLSchemaEndpoints } from '../$/helpers.js'
 
 const graffle = Graffle
-  .create()
+  .create({ schema: publicGraphQLSchemaEndpoints.Pokemon })
   .anyware(({ exchange }) =>
     exchange({
       using: {
@@ -18,11 +18,6 @@ const graffle = Graffle
       },
     })
   )
-  .transport({
-    url: new URL(publicGraphQLSchemaEndpoints.Pokemon),
-  })
-
-graffle._.output.envelope.enabled
 
 const data = await graffle.gql`{ pokemon { name } }`.send()
 
