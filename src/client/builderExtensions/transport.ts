@@ -1,101 +1,91 @@
-import { Builder } from '../../lib/builder/__.js'
-import type { ConfigManager } from '../../lib/config-manager/__.js'
 import { _ } from '../../lib/prelude.js'
+import { type Client, createProperties, type ExtensionChainableRegistry } from '../client.js'
 import type { ClientTransports } from '../context.js'
 import { type Context } from '../context.js'
 
-export interface BuilderExtensionTransport extends Builder.Extension {
-  context: Context
-  // @ts-expect-error untyped params
-  return: BuilderExtensionTransport_<this['params']>
-}
-
 // dprint-ignore
-interface BuilderExtensionTransport_<$Args extends Builder.Extension.Parameters<BuilderExtensionTransport>> {
-  /**
-   * TODO
-   */
-  transport: TransportMethod<$Args>
-  // /**
-  //  * Register a new Transport.
-  //  * TODO
-  //  */
-  // addTransport:
-  //   <$Transport extends Transport>
-  //     (transport: $Transport) =>
-  //       Builder.Definition.MaterializeWith<
-  //         $Args['definition'],
-  //         Context.Updaters.AddTransport<
-  //           $Args['context'],
-  //           $Transport
-  //         >
-  //       >
-}
-
-// dprint-ignore
-type TransportMethod<$Args extends Builder.Extension.Parameters<BuilderExtensionTransport>> =
-  $Args['context']['transports'] extends ClientTransports.States.NonEmpty
+export type TransportMethod<
+  $Context extends Context,
+  $Extension extends object,
+  $ExtensionChainable extends ExtensionChainableRegistry
+> =
+  $Context['transports'] extends ClientTransports.States.NonEmpty
     ? {
         /**
          * Configure the current transport.
          * TODO
          */
-        <$Config extends Partial<$Args['context']['transports']['registry'][$Args['context']['transports']['current']]['config']>>
-        // <$Config extends object>
-          (config: $Config):
-            Builder.Definition.MaterializeWith<
-              $Args['definition'],
-              // $Args['context']
-              $Args['context']
-              & {
-                transports: {
-                  configurations: {
-                    [_ in $Args['context']['transports']['current']]: $Config
-                  }
-                }
-              }
-
-              // ConfigManager.SetKey<
-              //   $Args['context'],
-              //   'transports',
-              //   $Args['context']['transports'] & {x:$Config}
-
-              //   // {
-              //   //   configurations: $Args['context']['transports']['configurations']
-              //   //   registry: $Args['context']['transports']['registry']
-              //   //   current: $Args['context']['transports']['current']
-              //   // }
-              //   // ['transports', 'configurations', $Args['context']['transports']['current']],
-              //   // $Config
-              //   // $Args['context']['transport']['registry'][$Transport['name']]['config'] & { [_ in $Transport['name']]: $Transport }
-              // >
+        <config extends Partial<$Context['transports']['registry'][$Context['transports']['current']]['config']>>
+          (config: config):
+            Client<
+              {
+                [_ in keyof $Context]:
+                  _ extends 'transports'
+                    ? {
+                        registry: $Context['transports']['registry']
+                        current: $Context['transports']['current']
+                        configurations:
+                          keyof config extends never
+                            ? $Context['transports']['configurations']
+                            : {
+                                [configKey in keyof $Context['transports']['configurations']]:
+                                  configKey extends $Context['transports']['current']
+                                // configuration contains a PARTIAL of configuration.
+                                // therefore we have to & the given config, since it may add NEW keys
+                                    ? {
+                                        [configValueKey in keyof $Context['transports']['configurations'][configKey]]:
+                                          configValueKey extends keyof config
+                                            ? unknown
+                                            : $Context['transports']['configurations'][configKey][configValueKey]
+                                      } & config
+                                    : $Context['transports']['configurations'][configKey]
+                              }
+                      }
+                    : $Context[_]
+              },
+              $Extension,
+              $ExtensionChainable
             >
         /**
          * Set the current Transport, selected from amongst the registered ones, and optionally change its configuration.
          * TODO
          */
         <
-          $Name extends ClientTransports.GetNames<$Args['context']['transports']>,
-          $Config extends $Args['context']['transports']['registry'][$Name]['config']
+          name extends ClientTransports.GetNames<$Context['transports']>,
+          config extends $Context['transports']['registry'][name]['config'] = {}
         >
-          (name: $Name, config?: $Config):
-            Builder.Definition.MaterializeWith<
-              $Args['definition'],
-              ConfigManager.SetKey<
-                $Args['context'],
-                'transports',
-                {
-                  configurations: $Args['context']['transports']['configurations']
-                  registry: $Args['context']['transports']['registry']
-                  // update:
-                  current: $Name,
-                }
-              >
+          (name: name, config?: config):
+            Client<
+              {
+                [_ in keyof $Context]:
+                  _ extends 'transports'
+                    ? {
+                        registry: $Context['transports']['registry']
+                        current: name
+                        configurations: keyof config extends never
+                          ? $Context['transports']['configurations']
+                          : {
+                            [configKey in keyof $Context['transports']['configurations']]:
+                              configKey extends $Context['transports']['current']
+                                ?
+                                  {
+                                    [configValueKey in keyof $Context['transports']['configurations'][configKey]]:
+                                      configValueKey extends keyof config
+                                        ? config[configValueKey]
+                                        : $Context['transports']['configurations'][configKey][configValueKey]
+                                  }
+                                : $Context['transports']['configurations'][configKey]
+                          }
+                      }
+                    : $Context[_]
+              },
+              $Extension,
+              $ExtensionChainable
             >
       }
     : never
 
-export const BuilderExtensionTransport = Builder.Extension.create<BuilderExtensionTransport>((builder, state) => {
+export const builderExtensionTransport = createProperties((builder, state) => {
   return {
     addTransport: (transport: any) => {
       const newState = {

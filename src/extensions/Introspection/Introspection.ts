@@ -1,8 +1,7 @@
 import { getIntrospectionQuery, type IntrospectionQuery } from 'graphql'
-import type { Context } from '../../client/context.js'
+import type { ExtensionChainable } from '../../client/client.js'
 import type { HandleOutput } from '../../client/handleOutput.js'
 import { create } from '../../entrypoints/extensionkit.js'
-import type { Builder } from '../../lib/builder/__.js'
 import { type ConfigInput, createConfig } from './config.js'
 
 /**
@@ -69,14 +68,11 @@ export const Introspection = create({
   },
 })
 
-interface BuilderExtension extends Builder.Extension {
-  context: Context
+interface BuilderExtension extends ExtensionChainable {
+  name: `introspect`
   // @ts-expect-error untyped params
-  return: BuilderExtension_<this['params']>
-}
-
-interface BuilderExtension_<$Args extends Builder.Extension.Parameters<BuilderExtension>> {
-  introspect: () => Promise<(null | {}) & HandleOutput<$Args['context'], IntrospectionQuery>>
+  // return: BuilderExtension_<this['params']>
+  return: () => Promise<(null | {}) & HandleOutput<this['params'][0], IntrospectionQuery>>
 }
 
 const knownPotentiallyUnsupportedFeatures = [`inputValueDeprecation`, `oneOf`] as const

@@ -1,8 +1,7 @@
-import type { Client } from '../client/client.js'
-import type { Builder } from '../entrypoints/extensionkit.js'
+import type { ClientEmpty, ExtensionChainable } from '../client/client.js'
 
 export interface BuilderExtension<
-  $BuilderExtension extends Builder.Extension | undefined = Builder.Extension | undefined,
+  $BuilderExtension extends ExtensionChainable | undefined = ExtensionChainable | undefined,
 > {
   type: $BuilderExtension
   implementation: BuilderExtension.Interceptor
@@ -10,12 +9,12 @@ export interface BuilderExtension<
 
 export namespace BuilderExtension {
   export interface Creator {
-    <$BuilderExtension extends Builder.Extension>(
+    <$BuilderExtension extends ExtensionChainable>(
       interceptor: Interceptor,
     ): BuilderExtension<$BuilderExtension>
   }
 
-  export interface CreatorCallback<$BuilderExtension extends BuilderExtension> {
+  export interface CreatorCallback<$BuilderExtension extends BuilderExtension | undefined> {
     (creator: Creator): $BuilderExtension
   }
 
@@ -23,7 +22,7 @@ export namespace BuilderExtension {
     input: {
       path: string[]
       property: string
-      client: Client
+      client: ClientEmpty
     },
   ) => unknown
 }

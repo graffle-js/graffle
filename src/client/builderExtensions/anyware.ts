@@ -1,29 +1,9 @@
 import { create } from '../../extension/extension.js'
-import type { Anyware as AnywareLib } from '../../lib/anyware/__.js'
-import { Builder } from '../../lib/builder/__.js'
-import type { RequestPipelineBaseInterceptor } from '../../requestPipeline/__.js'
-import { type Context } from '../context.js'
+import { createProperties } from '../client.js'
 
-export interface BuilderExtensionAnyware extends Builder.Extension {
-  context: Context
-  // @ts-expect-error untyped params
-  return: Anyware<this['params']>
-}
-
-export interface Anyware<$Arguments extends Builder.Extension.Parameters<BuilderExtensionAnyware>> {
-  /**
-   * TODO Anyware Docs.
-   */
-  anyware: (
-    interceptor: AnywareLib.Interceptor.InferFromPipeline<
-      AnywareLib.Pipeline.InferFromDefinition<$Arguments['context']['requestPipelineDefinition']>
-    >,
-  ) => Builder.Definition.MaterializeWith<$Arguments['definition'], $Arguments['context']>
-}
-
-export const builderExtensionAnyware = Builder.Extension.create<BuilderExtensionAnyware>((builder, context) => {
-  const properties = {
-    anyware: (interceptor: RequestPipelineBaseInterceptor) => {
+export const anywareProperties = createProperties((builder, context) => {
+  return {
+    anyware: (interceptor) => {
       return builder({
         ...context,
         extensions: [
@@ -36,5 +16,4 @@ export const builderExtensionAnyware = Builder.Extension.create<BuilderExtension
       })
     },
   }
-  return properties
 })

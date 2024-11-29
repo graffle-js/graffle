@@ -290,9 +290,11 @@ const createConfigSchema = async (
       }
     }
     case `url`: {
+      const introspection = Introspection({ options: input.schema.options })
+      introspection
       const graffle = Graffle
         .create()
-        .use(Introspection({ options: input.schema.options }))
+        .use(introspection)
         .transport({ url: input.schema.url })
       // todo introspection method should not be available without a transport
       const data = await graffle.introspect()

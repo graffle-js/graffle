@@ -1,6 +1,5 @@
 import type { IsNever } from 'type-fest'
 import type { Anyware } from '../lib/anyware/__.js'
-import type { Builder } from '../lib/builder/__.js'
 import { _, type AssertExtendsString } from '../lib/prelude.js'
 import type { RequestPipelineBaseInterceptor } from '../requestPipeline/RequestPipeline.js'
 import type { Transport } from '../types/Transport.js'
@@ -31,7 +30,7 @@ export interface ExtensionDefinition {
 
 export const create = <
   $Name extends string,
-  $BuilderExtension extends BuilderExtension = BuilderExtension,
+  $BuilderExtension extends BuilderExtension | undefined = BuilderExtension | undefined,
   $TypeHooks extends TypeHooks = TypeHooksEmpty,
   $ConfigInputParameters extends ExtensionInputParameters = ExtensionInputParameters,
   $Config extends object = object,

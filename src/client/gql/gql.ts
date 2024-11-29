@@ -1,5 +1,4 @@
 import { Anyware } from '../../lib/anyware/__.js'
-import { Builder } from '../../lib/builder/__.js'
 import type { Grafaid } from '../../lib/grafaid/__.js'
 import { getOperationType } from '../../lib/grafaid/document.js'
 import {
@@ -8,29 +7,15 @@ import {
   type TemplateStringsArguments,
 } from '../../lib/template-string.js'
 import type { RequestPipelineBase } from '../../requestPipeline/RequestPipeline.js'
-import type { ClientTransports } from '../context.js'
+import { createProperties } from '../client.js'
 import { type Context } from '../context.js'
 import { handleOutput } from '../handleOutput.js'
 import { type DocumentController, resolveSendArguments, type sendArgumentsImplementation } from './send.js'
 
-export interface BuilderExtensionGql extends Builder.Extension {
-  context: Context
-  // @ts-expect-error untyped params
-  return: Gql<this['params']>
-}
-
 // dprint-ignore
-interface Gql<$Arguments extends Builder.Extension.Parameters<BuilderExtensionGql>> {
-  gql: ClientTransports.PreflightCheck<
-    $Arguments['context'],
-    gqlOverload<$Arguments>
-  >
-}
-
-// dprint-ignore
-interface gqlOverload<$Arguments extends Builder.Extension.Parameters<BuilderExtensionGql>> {
-  <$Document extends Grafaid.Document.Typed.TypedDocumentLike>(document: $Document                            ): DocumentController<$Arguments['context'], $Document>
-  <$Document extends Grafaid.Document.Typed.TypedDocumentLike>(parts: TemplateStringsArray, ...args: unknown[]): DocumentController<$Arguments['context'], $Document>
+export interface gqlOverload<out $Context extends Context> {
+  <$Document extends Grafaid.Document.Typed.TypedDocumentLike>(document: $Document                            ): DocumentController<$Context, $Document>
+  <$Document extends Grafaid.Document.Typed.TypedDocumentLike>(parts: TemplateStringsArray, ...args: unknown[]): DocumentController<$Context, $Document>
 }
 
 type gqlArguments = [Grafaid.Document.Typed.TypedDocumentLike] | TemplateStringsArguments
@@ -42,7 +27,7 @@ const resolveGqlArguments = (args: gqlArguments) => {
   }
 }
 
-export const builderExtensionGql = Builder.Extension.create<BuilderExtensionGql>((_, context) => {
+export const builderExtensionGql = createProperties((_, context) => {
   return {
     gql: (...args: gqlArguments) => {
       const { document: query } = resolveGqlArguments(args)
@@ -85,5 +70,5 @@ export const builderExtensionGql = Builder.Extension.create<BuilderExtensionGql>
         },
       } as any
     },
-  }
+  } as any
 })

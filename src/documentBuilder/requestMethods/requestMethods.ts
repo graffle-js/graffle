@@ -1,49 +1,46 @@
 import { OperationTypeNode } from 'graphql'
-import type { SimplifyDeep } from 'type-fest'
+import { createProperties } from '../../client/client.js'
 import { type Context } from '../../client/context.js'
 import { handleOutput } from '../../client/handleOutput.js'
-import type { TypeFunction } from '../../entrypoints/utilities-for-generated.js'
 import { Anyware } from '../../lib/anyware/__.js'
-import { Builder } from '../../lib/builder/__.js'
 import type { Grafaid } from '../../lib/grafaid/__.js'
 import { getOperationDefinition } from '../../lib/grafaid/document.js'
 import { isSymbol } from '../../lib/prelude.js'
 import type { RequestPipelineBase } from '../../requestPipeline/RequestPipeline.js'
-import type { GlobalRegistry } from '../../types/GlobalRegistry/GlobalRegistry.js'
 import { Select } from '../Select/__.js'
 import { SelectionSetGraphqlMapper } from '../SelectGraphQLMapper/__.js'
 
-export interface BuilderExtensionRequestMethods extends Builder.Extension {
-  context: Context
-  // @ts-expect-error untyped params
-  return: RequestMethods<this['params']>
-}
+// export interface BuilderExtensionRequestMethods extends Builder.Extension {
+//   context: Context
+//   // @ts-expect-error untyped params
+//   return: RequestMethods<this['params']>
+// }
 
-// dprint-ignore
-export type RequestMethods<$Arguments extends Builder.Extension.Parameters<BuilderExtensionRequestMethods>> =
-  SimplifyDeep<
-    & (
-      // todo
-      // GlobalRegistry.Has<$Context['name']> extends false
-      // eslint-disable-next-line
-      // @ts-ignore passes after generation
-      GlobalRegistry.Has<$Arguments['context']['name']> extends false
-        ? {}
-        :
-          (
-            // eslint-disable-next-line
-            // @ts-ignore Passes after generation
-            & TypeFunction.Call<GlobalRegistry.GetOrDefault<$Arguments['context']['name']>['interfaces']['Root'], $Arguments['context']>
-            & {
-                // eslint-disable-next-line
-                // @ts-ignore Passes after generation
-                document: TypeFunction.Call<GlobalRegistry.GetOrDefault<$Arguments['context']['name']>['interfaces']['Document'], $Arguments['context']>
-              }
-          )
-    )
-  >
+// // dprint-ignore
+// export type RequestMethods<$Arguments extends Builder.Extension.Parameters<BuilderExtensionRequestMethods>> =
+//   SimplifyDeep<
+//     & (
+//       // todo
+//       // GlobalRegistry.Has<$Context['name']> extends false
+//       // eslint-disable-next-line
+//       // @ts-ignore passes after generation
+//       GlobalRegistry.Has<$Arguments['context']['name']> extends false
+//         ? {}
+//         :
+//           (
+//             // eslint-disable-next-line
+//             // @ts-ignore Passes after generation
+//             & TypeFunction.Call<GlobalRegistry.GetOrDefault<$Arguments['context']['name']>['interfaces']['Root'], $Arguments['context']>
+//             & {
+//                 // eslint-disable-next-line
+//                 // @ts-ignore Passes after generation
+//                 document: TypeFunction.Call<GlobalRegistry.GetOrDefault<$Arguments['context']['name']>['interfaces']['Document'], $Arguments['context']>
+//               }
+//           )
+//     )
+//   >
 
-export const requestMethodsProperties = Builder.Extension.create<BuilderExtensionRequestMethods>((_, context) => {
+export const requestMethodsProperties = createProperties((_, context) => {
   return {
     document: createMethodDocument(context),
     query: createMethodOperationType(context, OperationTypeNode.QUERY),

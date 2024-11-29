@@ -1,39 +1,40 @@
 import type { Extension } from '../../extension/__.js'
-import { Builder } from '../../lib/builder/__.js'
 import type { ConfigManager } from '../../lib/config-manager/__.js'
+import { type Client, createProperties, type ExtensionChainable, type ExtensionChainableRegistry } from '../client.js'
 import { type Context } from '../context.js'
 
-export interface BuilderExtensionUse extends Builder.Extension {
-  context: Context
-  // @ts-expect-error untyped params
-  return: Use<this['params']>
-}
-
-export interface Use<$Args extends Builder.Extension.Parameters<BuilderExtensionUse>> {
-  /**
-   * TODO Docs.
-   */
-  use: <$Extension extends Extension>(extension: $Extension) => UseExtensionReturn<$Args, $Extension>
-}
-
-export type UseExtensionReturn<
-  $Args extends Builder.Extension.Parameters<BuilderExtensionUse>,
-  $Extension extends Extension,
-> = Builder.Definition.MaterializeWith<
-  // Apply any builder extensions.
-  (
-    ConfigManager.GetOptional<$Extension, ['builder', 'type']> extends Builder.Extension
-      ? Builder.Definition.AddExtension<
-        $Args['definition'],
-        ConfigManager.GetOptional<$Extension, ['builder', 'type']>
-      >
-      : $Args['definition']
-  ),
-  UseReducer<
-    $Args['context'],
-    $Extension
-  >
+export type UseMethod<
+  $Context extends Context,
+  out $Extension_ extends object,
+  out $ExtensionChainable_ extends ExtensionChainableRegistry,
+> = <extension extends Extension>(extension: extension) => Client<
+  UseReducer<$Context, extension>,
+  $Extension_,
+  // @ts-expect-error
+  extension['builder']['type'] extends ExtensionChainable
+    // @ts-expect-error
+    ? { [_ in extension['builder']['type']['name']]: extension['builder']['type'] }
+    : $ExtensionChainable_
 >
+
+// export type UseExtensionReturn<
+//   $Args extends Builder.Extension.Parameters<BuilderExtensionUse>,
+//   $Extension extends Extension,
+// > = Builder.Definition.MaterializeWith<
+//   // // Apply any builder extensions.
+//   // (
+//   //   ConfigManager.GetOptional<$Extension, ['builder', 'type']> extends Builder.Extension
+//   //     ? Builder.Definition.AddExtension<
+//   //       $Args['definition'],
+//   //       ConfigManager.GetOptional<$Extension, ['builder', 'type']>
+//   //     >
+//   //     : $Args['definition']
+//   // ),
+//   UseReducer<
+//     $Args['context'],
+//     $Extension
+//   >
+// >
 
 // dprint-ignore
 export type UseReducer<
@@ -86,12 +87,12 @@ export const useReducer = <
   } as any
 }
 
-export const builderExtensionUse = Builder.Extension.create<BuilderExtensionUse>((builder, context) => {
+export const builderExtensionUse = createProperties((builder, context) => {
   return {
-    use: (extension: Extension) => {
-      return builder(useReducer(context, extension))
+    use: (extension) => {
+      return builder(useReducer(context, extension)) as any
     },
-  } as any
+  }
 })
 
 type AddTransport<

@@ -2,7 +2,7 @@ import type { Context } from '../client/context.js'
 import type { GraffleExecutionResultEnvelope } from '../client/handleOutput.js'
 import type { Select } from '../entrypoints/utilities-for-generated.js'
 import type { AssertExtends } from '../lib/prelude.js'
-import type { CallPipeline, Fn } from '../lib/type-function/TypeFunction.js'
+import type { TypeFunction } from '../lib/type-function/__.js'
 import type { GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
 
 export interface TypeHooks {
@@ -49,14 +49,14 @@ export interface TypeHooksBuilder<$TypeHooks extends TypeHooks = TypeHooksEmpty>
   >
 }
 
-export interface OnRequestDocumentRootType extends Fn {}
+export interface OnRequestDocumentRootType extends TypeFunction {}
 export namespace OnRequestDocumentRootType {
   export interface Params {
     selectionRootType: Select.SelectionSet.RootType
   }
 }
 
-export interface OnRequestResult extends Fn {}
+export interface OnRequestResult extends TypeFunction {}
 export namespace OnRequestResult {
   export interface Params<$Extensions extends GlobalRegistry.Extensions = GlobalRegistry.Extensions> {
     result: GraffleExecutionResultEnvelope
@@ -68,6 +68,6 @@ export type RunTypeHookOnRequestResult<
   $Context extends Context,
   $Params extends OnRequestResult.Params,
 > = AssertExtends<
-  CallPipeline<$Context['typeHookOnRequestResult'], $Params>,
+  TypeFunction.CallPipeline<$Context['typeHookOnRequestResult'], $Params>,
   OnRequestResult.Params
 >

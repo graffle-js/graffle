@@ -8,8 +8,8 @@ interface ZeroClient extends Client {
   name: DefaultClientName
   schema: Schema
   interfaces: {
-    Root: TypeFunction.Fn
-    Document: TypeFunction.Fn
+    Root: TypeFunction
+    Document: TypeFunction
     MethodsSelect: {}
   }
   defaultSchemaUrl: null
@@ -29,8 +29,8 @@ export interface Client<$Extensions extends Extensions = Extensions> {
   name: string
   schema: Schema<$Extensions['Schema']>
   interfaces: {
-    Root: TypeFunction.Fn
-    Document: TypeFunction.Fn
+    Root: TypeFunction
+    Document: TypeFunction
     MethodsSelect: {}
   }
   /**

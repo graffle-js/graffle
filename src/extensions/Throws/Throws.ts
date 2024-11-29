@@ -1,6 +1,6 @@
-import type { Builder, Context } from '../../entrypoints/extensionkit.js'
+import type { Client, ExtensionChainable } from '../../client/client.js'
 import { create } from '../../entrypoints/extensionkit.js'
-import { type AssertExtends, type ConfigInit, type OutputConfig } from '../../entrypoints/main.js'
+import { type ConfigInit, type OutputConfig } from '../../entrypoints/main.js'
 import type { ConfigManager } from '../../lib/config-manager/__.js'
 
 export const Throws = create({
@@ -30,22 +30,21 @@ export const Throws = create({
   },
 })
 
-interface BuilderExtension extends Builder.Extension {
-  context: Context
-  return: BuilderExtension_<AssertExtends<this['params'], Builder.Extension.Parameters<BuilderExtension>>>
-}
-
-interface BuilderExtension_<$Args extends Builder.Extension.Parameters<BuilderExtension>> {
-  /**
-   * TODO
-   */
-  throws: () => Builder.Definition.MaterializeWith<
-    $Args['definition'],
-    ConfigManager.SetKey<
-      $Args['context'],
-      'output',
-      ThrowsifyConfig<$Args['context']['output']>
-    >
+interface BuilderExtension extends ExtensionChainable {
+  name: 'throws'
+  // return: BuilderExtension_<AssertExtends<this['params'], Builder.Extension.Parameters<BuilderExtension>>>
+  return: () => Client<
+    // @ts-expect-error
+    {
+      // @ts-expect-error
+      [_ in keyof this['params'][0]]: _ extends 'output' ? ThrowsifyConfig<this['params'][0]['output']>
+        // @ts-expect-error
+        : this['params'][0][_]
+    },
+    // @ts-expect-error
+    this['params'][1],
+    // @ts-expect-error
+    this['params'][2]
   >
 }
 

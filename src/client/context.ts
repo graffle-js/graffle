@@ -20,6 +20,10 @@ import {
 } from './Configuration/ConfigInit.js'
 import { type OutputConfig, type OutputConfigDefault, outputConfigDefault } from './Configuration/Output.js'
 
+// export interface ContextEmpty extends Context {
+//   checkPreflight: false
+// }
+
 export interface ClientTransports {
   registry: ClientTransportsRegistry
   /**
@@ -217,8 +221,6 @@ export interface ContextValueLevel {
   input: ConfigInit
   output: OutputConfig
   schemaMap: SchemaDrivenDataMap | null
-
-  // retry: Anyware.Extension2<RequestPipeline.Core, { retrying: true }> | null
   extensions: Extension[]
   scalars: Schema.Scalar.Registry
 }

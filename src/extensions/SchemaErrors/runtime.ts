@@ -13,6 +13,7 @@ export interface SchemaErrors extends Extension {
   config: undefined
   onRequest: RequestPipelineBaseInterceptor
   builder: undefined
+  transport: undefined
   typeHooks: {
     onRequestDocumentRootType: [OnRequestDocumentRootType_]
     onRequestResult: [OnRequestResult_]
