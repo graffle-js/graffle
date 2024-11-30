@@ -1,7 +1,7 @@
-import type { Grafaid } from '../../lib/grafaid/__.js'
-import { isString, type SimplifyNullable } from '../../lib/prelude.js'
-import type { Context } from '../../types/context.js'
-import type { HandleOutput } from '../handleOutput.js'
+import type { Grafaid } from '../../../lib/grafaid/__.js'
+import { isString, type SimplifyNullable } from '../../../lib/prelude.js'
+import type { Context } from '../../../types/context.js'
+import type { HandleOutput } from '../../handleOutput.js'
 
 // dprint-ignore
 export type SendArguments<$TypedDocument extends string | Grafaid.Document.Typed.TypedDocumentLike> =

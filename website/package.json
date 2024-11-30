@@ -1,5 +1,6 @@
 {
   "type": "module",
+  "packageManager": "pnpm@9.12.2",
   "scripts": {
     "dev": "disable_twoslash=true NODE_ENV=development vitepress dev",
     "dev:twoslash": "NODE_ENV=development vitepress dev",

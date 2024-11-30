@@ -1,6 +1,6 @@
 import { OperationTypeNode } from 'graphql'
-import { createProperties } from '../../client/client.js'
 import { handleOutput } from '../../client/handleOutput.js'
+import { createProperties } from '../../client/helpers.js'
 import { Anyware } from '../../lib/anyware/__.js'
 import type { Grafaid } from '../../lib/grafaid/__.js'
 import { getOperationDefinition } from '../../lib/grafaid/document.js'
