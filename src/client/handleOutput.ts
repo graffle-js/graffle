@@ -15,6 +15,7 @@ import {
   type Values,
 } from '../lib/prelude.js'
 import type { RequestPipelineBase } from '../requestPipeline/RequestPipeline.js'
+import type { Context } from '../types/context.js'
 import type { GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
 import {
   type ErrorCategory,
@@ -22,7 +23,6 @@ import {
   type OutputChannelConfig,
   readErrorCategoryOutputChannel,
 } from './Configuration/Output.js'
-import type { Context } from './context.js'
 
 export type GraffleExecutionResultEnvelope = {
   errors?: ReadonlyArray<

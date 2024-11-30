@@ -1,4 +1,4 @@
-import { createProperties } from '../client.js'
+import { createProperties } from '../helpers.js'
 
 export const builderExtensionWith = createProperties((builder, state) => {
   return {

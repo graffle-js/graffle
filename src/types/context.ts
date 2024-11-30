@@ -1,14 +1,3 @@
-import type { Extension } from '../extension/__.js'
-import type { Anyware } from '../lib/anyware/__.js'
-import type { ConfigManager } from '../lib/config-manager/__.js'
-import type { Objekt, StringKeyof } from '../lib/prelude.js'
-import {
-  type RequestPipelineBaseDefinition,
-  requestPipelineBaseDefinition,
-} from '../requestPipeline/RequestPipeline.js'
-import { Schema } from '../types/Schema/__.js'
-import type { SchemaDrivenDataMap } from '../types/SchemaDrivenDataMap/SchemaDrivenDataMap.js'
-import type { Transport } from '../types/Transport.js'
 import {
   type ConfigInit,
   type DefaultCheckPreflight,
@@ -17,8 +6,19 @@ import {
   defaultName,
   type NormalizeConfigInit,
   normalizeConfigInit,
-} from './Configuration/ConfigInit.js'
-import { type OutputConfig, type OutputConfigDefault, outputConfigDefault } from './Configuration/Output.js'
+} from '../client/Configuration/ConfigInit.js'
+import { type OutputConfig, type OutputConfigDefault, outputConfigDefault } from '../client/Configuration/Output.js'
+import type { Extension } from '../extension/__.js'
+import type { Anyware } from '../lib/anyware/__.js'
+import type { ConfigManager } from '../lib/config-manager/__.js'
+import type { Objekt, StringKeyof } from '../lib/prelude.js'
+import {
+  type RequestPipelineBaseDefinition,
+  requestPipelineBaseDefinition,
+} from '../requestPipeline/RequestPipeline.js'
+import { Schema } from './Schema/__.js'
+import type { SchemaDrivenDataMap } from './SchemaDrivenDataMap/SchemaDrivenDataMap.js'
+import type { Transport } from './Transport.js'
 
 export interface ClientTransports {
   registry: ClientTransportsRegistry

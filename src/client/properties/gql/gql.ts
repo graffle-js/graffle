@@ -1,15 +1,15 @@
-import { Anyware } from '../../lib/anyware/__.js'
-import type { Grafaid } from '../../lib/grafaid/__.js'
-import { getOperationType } from '../../lib/grafaid/document.js'
+import { Anyware } from '../../../lib/anyware/__.js'
+import type { Grafaid } from '../../../lib/grafaid/__.js'
+import { getOperationType } from '../../../lib/grafaid/document.js'
 import {
   isTemplateStringArguments,
   joinTemplateStringArrayAndArgs,
   type TemplateStringsArguments,
-} from '../../lib/template-string.js'
-import type { RequestPipelineBase } from '../../requestPipeline/RequestPipeline.js'
-import { createProperties } from '../client.js'
-import { type Context } from '../context.js'
-import { handleOutput } from '../handleOutput.js'
+} from '../../../lib/template-string.js'
+import type { RequestPipelineBase } from '../../../requestPipeline/RequestPipeline.js'
+import { type Context } from '../../../types/context.js'
+import { handleOutput } from '../../handleOutput.js'
+import { createProperties } from '../../helpers.js'
 import { type DocumentController, resolveSendArguments, type sendArgumentsImplementation } from './send.js'
 
 // dprint-ignore

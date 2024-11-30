@@ -1,7 +1,8 @@
 import { _ } from '../../lib/prelude.js'
-import { type Client, createProperties, type ExtensionChainableRegistry } from '../client.js'
-import type { ClientTransports } from '../context.js'
-import { type Context } from '../context.js'
+import type { ClientTransports } from '../../types/context.js'
+import { type Context } from '../../types/context.js'
+import { type Client, type ExtensionChainableRegistry } from '../client.js'
+import { createProperties } from '../helpers.js'
 
 // dprint-ignore
 export type TransportMethod<

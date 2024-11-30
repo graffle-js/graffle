@@ -1,5 +1,5 @@
 import { create } from '../../extension/extension.js'
-import { createProperties } from '../client.js'
+import { createProperties } from '../helpers.js'
 
 export const anywareProperties = createProperties((builder, context) => {
   return {

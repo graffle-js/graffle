@@ -2,13 +2,13 @@ import { requestMethodsProperties } from '../documentBuilder/requestMethods/requ
 import type { Anyware } from '../lib/anyware/__.js'
 import { __, proxyGet } from '../lib/prelude.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
+import { type ClientTransports, Context } from '../types/context.js'
 import type { GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
-import type { ScalarMethod, TypeErrorMissingSchemaMap } from './builderExtensions/scalar.js'
-import type { TransportMethod } from './builderExtensions/transport.js'
-import type { UseMethod } from './builderExtensions/use.js'
 import { type ConfigInit, type NormalizeConfigInit } from './Configuration/ConfigInit.js'
-import { type ClientTransports, Context } from './context.js'
-import type { gqlOverload } from './gql/gql.js'
+import type { gqlOverload } from './properties/gql/gql.js'
+import type { ScalarMethod, TypeErrorMissingSchemaMap } from './properties/scalar.js'
+import type { TransportMethod } from './properties/transport.js'
+import type { UseMethod } from './properties/use.js'
 
 export type ClientEmpty = Client<Context.States.Empty, {}, {}>
 export type ClientGeneric = Client<Context, object, ExtensionChainableRegistry>
@@ -106,15 +106,6 @@ export interface ExtensionChainable extends TypeFunction {
 }
 
 export type ExtensionChainableArguments = [Context, object, ExtensionChainableRegistry]
-
-export const createProperties = (
-  callback: (
-    clientConstructor: (context: Context) => ClientGeneric,
-    context: Context,
-  ) => Partial<ClientGeneric>,
-) => {
-  return callback
-}
 
 export const createConstructorWithContext = <$Context extends Context>(
   context: $Context,

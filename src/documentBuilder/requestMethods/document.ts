@@ -1,10 +1,10 @@
 import type { UnionToTuple } from 'type-fest'
-import type { Context } from '../../client/context.js'
 import { type HandleOutput } from '../../client/handleOutput.js'
 import type { InferResult } from '../../documentBuilder/InferResult/__.js'
 import type { Select } from '../../documentBuilder/Select/__.js'
 import type { Schema } from '../../entrypoints/schema.js'
 import type { IsTupleMultiple } from '../../lib/prelude.js'
+import type { Context } from '../../types/context.js'
 
 // dprint-ignore
 export type DocumentRunner<

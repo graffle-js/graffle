@@ -1,7 +1,7 @@
-import { useReducer } from '../../client/builderExtensions/use.js'
 import { type Client as BaseClient, createConstructorWithContext } from '../../client/client.js'
-import { Context, type Context as BaseContext } from '../../client/context.js'
+import { useReducer } from '../../client/properties/use.js'
 import type { ConfigManager } from '../../lib/config-manager/__.js'
+import { Context, type Context as BaseContext } from '../../types/context.js'
 import { TransportHttp } from '../extensions/transport-http/runtime.js'
 import { TransportMemory } from '../extensions/transport-memory/runtime.js'
 

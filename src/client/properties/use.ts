@@ -1,7 +1,8 @@
 import type { Extension } from '../../extension/__.js'
 import type { ConfigManager } from '../../lib/config-manager/__.js'
-import { type Client, createProperties, type ExtensionChainable, type ExtensionChainableRegistry } from '../client.js'
-import { type Context } from '../context.js'
+import { type Context } from '../../types/context.js'
+import { type Client, type ExtensionChainable, type ExtensionChainableRegistry } from '../client.js'
+import { createProperties } from '../helpers.js'
 
 export type UseMethod<
   $Context extends Context,

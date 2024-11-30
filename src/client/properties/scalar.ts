@@ -1,9 +1,10 @@
+import { type Context } from '../../types/context.js'
 import type { GlobalRegistry } from '../../types/GlobalRegistry/GlobalRegistry.js'
 import { Schema } from '../../types/Schema/__.js'
 import type { GetDecoded, GetEncoded } from '../../types/Schema/nodes/Scalar/helpers.js'
-import { type Client, createProperties } from '../client.js'
+import { type Client } from '../client.js'
 import type { ExtensionChainableRegistry } from '../client.js'
-import { type Context } from '../context.js'
+import { createProperties } from '../helpers.js'
 
 export type TypeErrorMissingSchemaMap =
   `Error: Your client must have a schemaMap in order to apply registered scalars. Therefore we're providing this static error type message here instead of allowing you continue registering scalars that will never be applied.`

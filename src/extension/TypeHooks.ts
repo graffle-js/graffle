@@ -1,8 +1,8 @@
-import type { Context } from '../client/context.js'
 import type { GraffleExecutionResultEnvelope } from '../client/handleOutput.js'
 import type { Select } from '../entrypoints/utilities-for-generated.js'
 import type { AssertExtends } from '../lib/prelude.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
+import type { Context } from '../types/context.js'
 import type { GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
 
 export interface TypeHooks {

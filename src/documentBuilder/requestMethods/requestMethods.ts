@@ -1,12 +1,12 @@
 import { OperationTypeNode } from 'graphql'
 import { createProperties } from '../../client/client.js'
-import { type Context } from '../../client/context.js'
 import { handleOutput } from '../../client/handleOutput.js'
 import { Anyware } from '../../lib/anyware/__.js'
 import type { Grafaid } from '../../lib/grafaid/__.js'
 import { getOperationDefinition } from '../../lib/grafaid/document.js'
 import { isSymbol } from '../../lib/prelude.js'
 import type { RequestPipelineBase } from '../../requestPipeline/RequestPipeline.js'
+import { type Context } from '../../types/context.js'
 import { Select } from '../Select/__.js'
 import { SelectionSetGraphqlMapper } from '../SelectGraphQLMapper/__.js'
 
