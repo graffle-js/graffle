@@ -1,10 +1,10 @@
-import { kitchenSink } from '../../../tests/_/helpers.js'
-import { GraffleBare } from '../../entrypoints/presets/__GraffleBare.js'
-import { GraffleBasic } from '../../entrypoints/presets/__GraffleBasic.js'
-import { GraffleMinimal } from '../../entrypoints/presets/__GraffleMinimal.js'
-import { AssertTypeOf } from '../../lib/assert-equal.js'
-import type { Grafaid } from '../../lib/grafaid/__.js'
-import type { ClientTransports } from '../../types/context.js'
+import { kitchenSink } from '../../../../tests/_/helpers.js'
+import { GraffleBare } from '../../../entrypoints/presets/__GraffleBare.js'
+import { GraffleBasic } from '../../../entrypoints/presets/__GraffleBasic.js'
+import { GraffleMinimal } from '../../../entrypoints/presets/__GraffleMinimal.js'
+import { AssertTypeOf } from '../../../lib/assert-equal.js'
+import type { Grafaid } from '../../../lib/grafaid/__.js'
+import type { ClientTransports } from '../../../types/context.js'
 
 const g = kitchenSink
 
