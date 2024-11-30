@@ -775,3 +775,5 @@ export type PropertyKeyToString<$Key extends PropertyKey> = $Key extends string 
   : never
 
 export type DiscriminantPropertyValue = string | number | symbol
+
+export const identity = <value>(value: value): value => value

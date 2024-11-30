@@ -1,11 +1,11 @@
 import type { ClientEmpty, ExtensionChainable } from '../client/client.js'
+import { identity } from '../lib/prelude.js'
 
-export interface BuilderExtension<
+export type BuilderExtension<
   $BuilderExtension extends ExtensionChainable | undefined = ExtensionChainable | undefined,
-> {
-  type: $BuilderExtension
-  implementation: BuilderExtension.Interceptor
-}
+> =
+  & BuilderExtension.Interceptor
+  & { type: $BuilderExtension }
 
 export namespace BuilderExtension {
   export interface Creator {
@@ -13,6 +13,7 @@ export namespace BuilderExtension {
       interceptor: Interceptor,
     ): BuilderExtension<$BuilderExtension>
   }
+  export const create: Creator = identity as any
 
   export interface CreatorCallback<$BuilderExtension extends BuilderExtension | undefined> {
     (creator: Creator): $BuilderExtension

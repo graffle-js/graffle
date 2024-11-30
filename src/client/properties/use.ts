@@ -88,7 +88,7 @@ export const useReducer = <
   } as any
 }
 
-export const builderExtensionUse = createProperties((builder, context) => {
+export const useProperties = createProperties((builder, context) => {
   return {
     use: (extension) => {
       return builder(useReducer(context, extension)) as any

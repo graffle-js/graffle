@@ -1,4 +1,4 @@
-export { type Simplify } from 'type-fest'
+export type { Simplify } from 'type-fest'
 export { createConstructorWithContext } from '../client/client.js'
 export type { ConfigGetOutputError, HandleOutput, HandleOutputGraffleRootField } from '../client/handleOutput.js'
 export { useReducer } from '../client/properties/use.js'

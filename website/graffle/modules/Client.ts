@@ -6,7 +6,7 @@ import * as $$SchemaDrivenDataMap from "./schema-driven-data-map.js";
 
 const context = $$Utilities.useReducer(
   {
-    ...structuredClone($$Utilities.Context.States.contextEmpty),
+    ...$$Utilities.Context.States.contextEmpty,
     name: $$Data.Name,
     schemaMap: $$SchemaDrivenDataMap.schemaDrivenDataMap,
     scalars: $$Scalar.$registry,

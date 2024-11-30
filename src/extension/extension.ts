@@ -4,7 +4,7 @@ import { _, type AssertExtendsString } from '../lib/prelude.js'
 import type { RequestPipelineBaseInterceptor } from '../requestPipeline/RequestPipeline.js'
 import type { Transport } from '../types/Transport.js'
 import type { Extension } from './__.js'
-import type { BuilderExtension } from './builder.js'
+import { BuilderExtension } from './builder.js'
 import type { TypeHooks, TypeHooksEmpty } from './TypeHooks.js'
 import type { TypeHooksBuilderCallback } from './TypeHooks.js'
 
@@ -42,7 +42,7 @@ export const create = <
     normalizeConfig?: (...args: $ConfigInputParameters) => $Config
     custom?: $Custom
     create: (params: { config: $Config }) => {
-      builder?: $BuilderExtension | BuilderExtension.CreatorCallback<$BuilderExtension>
+      builder?: BuilderExtension.CreatorCallback<$BuilderExtension> // | $BuilderExtension  // todo
       onRequest?: RequestPipelineBaseInterceptor
       typeHooks?: TypeHooksBuilderCallback<$TypeHooks> | $TypeHooks
       transport?: (
@@ -71,7 +71,12 @@ export const create = <
 > => {
   const extensionConstructor = (input?: object) => {
     const config: $Config = ((definitionInput.normalizeConfig as any)?.(input) ?? {}) as any // eslint-disable-line
-    return definitionInput.create({ config }) as any
+    const extensionBuilder = definitionInput.create({ config })
+    const extension = {
+      ...extensionBuilder,
+      builder: extensionBuilder.builder?.(BuilderExtension.create),
+    }
+    return extension
   }
   extensionConstructor.info = {
     name: definitionInput.name,

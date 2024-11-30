@@ -57,7 +57,7 @@ export type ScalarMethod<
 
 type Arguments = [Schema.Scalar] | [string, { decode: (value: string) => any; encode: (value: any) => string }]
 
-export const builderExtensionScalar = createProperties((builder, state) => {
+export const scalarProperties = createProperties((builder, state) => {
   return {
     scalar: (...args: Arguments) => {
       const scalar = Schema.Scalar.isScalar(args[0])

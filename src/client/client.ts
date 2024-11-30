@@ -1,14 +1,16 @@
 import { requestMethodsProperties } from '../documentBuilder/requestMethods/requestMethods.js' // todo
 import type { Anyware } from '../lib/anyware/__.js'
-import { __, proxyGet } from '../lib/prelude.js'
+import { proxyGet } from '../lib/prelude.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
 import { type ClientTransports, Context } from '../types/context.js'
 import type { GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
-import { type ConfigInit, type NormalizeConfigInit } from './Configuration/ConfigInit.js'
-import type { gqlOverload } from './properties/gql/gql.js'
-import type { ScalarMethod, TypeErrorMissingSchemaMap } from './properties/scalar.js'
+import { type ConfigInit, type NormalizeConfigInit, normalizeConfigInit } from './Configuration/ConfigInit.js'
+import { anywareProperties } from './properties/anyware.js'
+import { type gqlOverload, gqlProperties } from './properties/gql/gql.js'
+import { type ScalarMethod, scalarProperties, type TypeErrorMissingSchemaMap } from './properties/scalar.js'
 import type { TransportMethod } from './properties/transport.js'
-import type { UseMethod } from './properties/use.js'
+import { type UseMethod, useProperties } from './properties/use.js'
+import { withProperties } from './properties/with.js'
 
 export type ClientEmpty = Client<Context.States.Empty, {}, {}>
 export type ClientGeneric = Client<Context, object, ExtensionChainableRegistry>
@@ -110,7 +112,15 @@ export type ExtensionChainableArguments = [Context, object, ExtensionChainableRe
 export const createConstructorWithContext = <$Context extends Context>(
   context: $Context,
 ): ClientConstructor<$Context> => {
-  return (configInit) => __(context, configInit)
+  return (configInit) => {
+    const config = normalizeConfigInit(configInit ?? {})
+    const context_ = {
+      ...context,
+      ...config,
+    }
+    const client = createWithContext(context_)
+    return client
+  }
 }
 
 export type ClientConstructor<$Context extends Context = Context.States.Empty> = <
@@ -141,12 +151,12 @@ export const createWithContext = (
 ) => {
   // @ts-expect-error ignoreme
   const clientDirect: Client = {
-    // ...builderExtensionInternal(createWithContext, context),
-    // ...builderExtensionGql(createWithContext, context),
-    // ...builderExtensionWith(createWithContext, context),
-    // ...builderExtensionUse(createWithContext, context),
-    // ...builderExtensionAnyware(createWithContext, context),
-    // ...builderExtensionScalar(createWithContext, context),
+    _: context,
+    ...gqlProperties(createWithContext, context),
+    ...withProperties(createWithContext, context),
+    ...useProperties(createWithContext, context),
+    ...anywareProperties(createWithContext, context),
+    ...scalarProperties(createWithContext, context),
   }
 
   // todo test that access to this works without generation in a unit like test. We discovered bug and covered this in an e2e test.
@@ -160,7 +170,7 @@ export const createWithContext = (
     const onGetHandlers = context.extensions.map(_ => _.builder).filter(_ => _ !== undefined)
 
     for (const onGetHandler of onGetHandlers) {
-      const result = onGetHandler.implementation({
+      const result = onGetHandler({
         client: clientDirect,
         path,
         property,

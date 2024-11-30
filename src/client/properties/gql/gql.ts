@@ -27,7 +27,7 @@ const resolveGqlArguments = (args: gqlArguments) => {
   }
 }
 
-export const builderExtensionGql = createProperties((_, context) => {
+export const gqlProperties = createProperties((_, context) => {
   return {
     gql: (...args: gqlArguments) => {
       const { document: query } = resolveGqlArguments(args)

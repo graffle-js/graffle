@@ -1,6 +1,6 @@
 import { createProperties } from '../helpers.js'
 
-export const builderExtensionWith = createProperties((builder, state) => {
+export const withProperties = createProperties((builder, state) => {
   return {
     with: (input: any) => {
       return builder({

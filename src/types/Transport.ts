@@ -1,5 +1,4 @@
 import type { Anyware } from '../lib/anyware/__.js'
-import { __ } from '../lib/prelude.js'
 import type { RequestPipelineBaseDefinition } from '../requestPipeline/__.js'
 
 export interface Transport {
@@ -15,10 +14,9 @@ export namespace Transport {
       create: Create
     }
 
-    export const create: Create = (name) => {
-      name
-      __()
-    }
+    // export const create: Create = (name) => {
+    //   __(name)
+    // }
 
     export interface Create {
       <$Name extends string>(name: $Name): Anyware.Overload.Builder<RequestPipelineBaseDefinition, {
