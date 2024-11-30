@@ -1,5 +1,3 @@
-import { MethodMode, type MethodModeGetReads } from '../../client/transportHttp/request.js'
-import type { MethodModePost } from '../../client/transportHttp/request.js'
 import { create, type Extension } from '../../entrypoints/extensionkit.js'
 import type { TypeHooksEmpty } from '../../extension/TypeHooks.js'
 import type { Anyware } from '../../lib/anyware/__.js'
@@ -12,6 +10,36 @@ import { mergeRequestInit, searchParamsAppendAll } from '../../lib/http.js'
 import type { httpMethodGet, httpMethodPost } from '../../lib/http.js'
 import { _, isString, type MaybePromise } from '../../lib/prelude.js'
 import type { RequestPipeline } from '../../requestPipeline/RequestPipeline.js'
+
+export const MethodMode = {
+  post: `post`,
+  getReads: `getReads`,
+} as const
+
+export type MethodModeGetReads = typeof MethodMode['getReads']
+
+export type MethodModePost = typeof MethodMode['post']
+
+export type MethodMode = MethodModePost | MethodModeGetReads
+
+export type TransportHttpInput = {
+  /**
+   * The HTTP method to use to make the request.
+   *
+   * Note that this is not just about the HTTP method but also about how the payload is sent.
+   * Namely, `get` will send the payload as part of the URL search parameters while `post` will send it as a JSON body.
+   *
+   * Options:
+   *
+   * 1. `post` - Apply https://graphql.github.io/graphql-over-http/draft/#sec-POST
+   * 2. `getReads` - Apply https://graphql.github.io/graphql-over-http/draft/#sec-GET
+   *
+   * @defaultValue `post`
+   */
+  methodMode?: MethodMode
+  headers?: HeadersInit
+  raw?: RequestInit
+}
 
 export interface TransportHttpConstructor {
   <$ConfigInit extends ConfigInit = ConfigInitEmpty>(

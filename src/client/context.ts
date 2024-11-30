@@ -20,10 +20,6 @@ import {
 } from './Configuration/ConfigInit.js'
 import { type OutputConfig, type OutputConfigDefault, outputConfigDefault } from './Configuration/Output.js'
 
-// export interface ContextEmpty extends Context {
-//   checkPreflight: false
-// }
-
 export interface ClientTransports {
   registry: ClientTransportsRegistry
   /**

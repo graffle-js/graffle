@@ -1,11 +1,11 @@
 import { describe, expect, expectTypeOf } from 'vitest'
-import { createResponse, test } from '../../tests/_/helpers.js'
-import { serveSchema } from '../../tests/_/lib/serveSchema.js'
-import { Graffle as Pokemon } from '../../tests/_/schemas/pokemon/graffle/__.js'
-import { schema as schemaPokemon } from '../../tests/_/schemas/pokemon/schema.js'
-import { Graffle } from '../entrypoints/main.js'
-import { TransportHttp } from '../extensions/TransportHttp/TransportHttp.js'
-import { ACCEPT_REC, CONTENT_TYPE_REC } from '../lib/grafaid/http/http.js'
+import { createResponse, test } from '../../../tests/_/helpers.js'
+import { serveSchema } from '../../../tests/_/lib/serveSchema.js'
+import { Graffle as Pokemon } from '../../../tests/_/schemas/pokemon/graffle/__.js'
+import { schema as schemaPokemon } from '../../../tests/_/schemas/pokemon/schema.js'
+import { Graffle } from '../../entrypoints/main.js'
+import { ACCEPT_REC, CONTENT_TYPE_REC } from '../../lib/grafaid/http/http.js'
+import { TransportHttp } from './TransportHttp.js'
 // import type { requestPipeline } from '../requestPipeline/__.js'
 // import { Transport, type TransportHttp } from '../types/Transport.js'
 
@@ -129,4 +129,30 @@ describe(`configuration`, () => {
     //   expect(caughtError.message).toMatch(abortErrorMessagePattern)
     // })
   })
+})
+
+// const url = new URL(`https://foo.io/api/graphql`)
+
+describe(`output`, () => {
+  // todo bring this back
+  // test(`when using envelope and transport is http, response property is available`, async ({ fetch }) => {
+  //   fetch.mockImplementationOnce(() => Promise.resolve(createResponse({ data: { id: `abc` } })))
+  //   const graffle = Graffle2.create({ output: { envelope: true } }).use(TransportHttp({ url }))
+  //   const result = await graffle.query.id()
+  //   expectTypeOf(result.response).toEqualTypeOf<Response>()
+  //   expect(result.response.status).toEqual(200)
+  //   // sanity check
+  //   expect(result.data).toEqual({ 'id': `abc` })
+  // })
+  // todo bring this back
+  // test(`when using envelope and transport is memory, response property is NOT available`, async () => {
+  //   const graffle = Graffle2.create({ output: { envelope: true } }).use(TransportHttp({ url }))
+  //   const result = await graffle.query.id()
+  //   // @ts-expect-error not present
+  //   expectTypeOf(result.response).toEqualTypeOf<Response>()
+  //   // @ts-expect-error not present
+  //   expect(result.response).toEqual(undefined)
+  //   // sanity check
+  //   expect(result.data).toEqual({ 'id': `abc` })
+  // })
 })

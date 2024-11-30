@@ -10,36 +10,6 @@ import type { RequestPipelineBase } from '../../requestPipeline/RequestPipeline.
 import { Select } from '../Select/__.js'
 import { SelectionSetGraphqlMapper } from '../SelectGraphQLMapper/__.js'
 
-// export interface BuilderExtensionRequestMethods extends Builder.Extension {
-//   context: Context
-//   // @ts-expect-error untyped params
-//   return: RequestMethods<this['params']>
-// }
-
-// // dprint-ignore
-// export type RequestMethods<$Arguments extends Builder.Extension.Parameters<BuilderExtensionRequestMethods>> =
-//   SimplifyDeep<
-//     & (
-//       // todo
-//       // GlobalRegistry.Has<$Context['name']> extends false
-//       // eslint-disable-next-line
-//       // @ts-ignore passes after generation
-//       GlobalRegistry.Has<$Arguments['context']['name']> extends false
-//         ? {}
-//         :
-//           (
-//             // eslint-disable-next-line
-//             // @ts-ignore Passes after generation
-//             & TypeFunction.Call<GlobalRegistry.GetOrDefault<$Arguments['context']['name']>['interfaces']['Root'], $Arguments['context']>
-//             & {
-//                 // eslint-disable-next-line
-//                 // @ts-ignore Passes after generation
-//                 document: TypeFunction.Call<GlobalRegistry.GetOrDefault<$Arguments['context']['name']>['interfaces']['Document'], $Arguments['context']>
-//               }
-//           )
-//     )
-//   >
-
 export const requestMethodsProperties = createProperties((_, context) => {
   return {
     document: createMethodDocument(context),
