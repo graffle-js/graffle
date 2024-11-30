@@ -88,35 +88,31 @@ export type TransportMethod<
 
 export const builderExtensionTransport = createProperties((builder, state) => {
   return {
-    addTransport: (transport: any) => {
-      const newState = {
-        ...state,
-        transport: {
-          ...state.transports,
-          registry: {
-            ...state.transports.registry,
-            [transport.name]: transport,
+    transport: (transport: string | object) => {
+      if (typeof transport === `string`) {
+        return builder({
+          ...state,
+          transports: {
+            ...state.transports,
+            current: transport,
           },
-        },
+        })
       }
+
       if (!state.transports.current) {
-        newState.transport.current = transport.name
-        newState.transport.configurations[transport.name] = {} // todo initial configuration...
+        throw new Error(`No transport is currently set.`)
       }
-      return builder(newState)
-    },
-    setTransport: (name: string, config?: any) => {
+
       return builder({
         ...state,
         transports: {
           ...state.transports,
           configurations: {
             ...state.transports.configurations,
-            [name]: config ?? state.transports.configurations[name],
+            [state.transports.current]: transport,
           },
-          current: name,
         },
       })
     },
-  }
+  } as any
 })

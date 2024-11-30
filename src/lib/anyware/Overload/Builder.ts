@@ -5,11 +5,11 @@ import type { StepDefinition } from '../StepDefinition.js'
 import type { Overload } from './__.js'
 
 export const create: Create = (parameters) => {
-  const context_: Omit<Overload, 'input'> = {
+  const overload_: Omit<Overload, 'input'> = {
     discriminant: parameters.discriminant,
     steps: {},
   }
-  const overload = context_ as Overload
+  const overload = overload_ as Overload
 
   const builder: Builder = {
     type: overload,

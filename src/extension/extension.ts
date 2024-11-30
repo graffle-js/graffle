@@ -1,5 +1,5 @@
 import type { IsNever } from 'type-fest'
-import type { Anyware } from '../lib/anyware/__.js'
+import { Anyware } from '../lib/anyware/__.js'
 import { _, type AssertExtendsString } from '../lib/prelude.js'
 import type { RequestPipelineBaseInterceptor } from '../requestPipeline/RequestPipeline.js'
 import type { Transport } from '../types/Transport.js'
@@ -46,7 +46,7 @@ export const create = <
       onRequest?: RequestPipelineBaseInterceptor
       typeHooks?: TypeHooksBuilderCallback<$TypeHooks> | $TypeHooks
       transport?: (
-        OverloadBuilder: { create: Transport.Builder.Create },
+        OverloadBuilder: Transport.Builder.Create,
       ) => $TransportCallbackResult
     }
   },
@@ -72,9 +72,29 @@ export const create = <
   const extensionConstructor = (input?: object) => {
     const config: $Config = ((definitionInput.normalizeConfig as any)?.(input) ?? {}) as any // eslint-disable-line
     const extensionBuilder = definitionInput.create({ config })
-    const extension = {
-      ...extensionBuilder,
-      builder: extensionBuilder.builder?.(BuilderExtension.create),
+    const builder = extensionBuilder.builder?.(BuilderExtension.create)
+    const overload = extensionBuilder.transport?.((name) =>
+      Anyware.Overload.create({ discriminant: [`transportType`, name] })
+    )
+    const transport: Transport | undefined = overload
+      ? {
+        name: overload.type.discriminant[1] as string,
+        config: overload.type.input,
+        configInit: overload.type.inputInit ?? {},
+        requestPipelineOverload: overload.type,
+      }
+      : undefined
+    const extension: Extension = {
+      name: definitionInput.name,
+      config,
+      onRequest: extensionBuilder.onRequest,
+      builder,
+      transport,
+      // todo: remove this from runtime, its JUST for types.
+      typeHooks: {
+        onRequestDocumentRootType: [],
+        onRequestResult: [],
+      },
     }
     return extension
   }

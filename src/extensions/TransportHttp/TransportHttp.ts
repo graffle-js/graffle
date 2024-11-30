@@ -156,9 +156,8 @@ export const TransportHttp: TransportHttpConstructor = create({
   },
   create() {
     return {
-      transport($) {
-        return $
-          .create(`http`)
+      transport(create) {
+        return create(`http`)
           .config<Configuration>()
           // .configInit<MergeConfigInitDefaults<$ConfigInit>>()
           .stepWithExtendedInput<{ headers?: HeadersInit }>()(`pack`, {

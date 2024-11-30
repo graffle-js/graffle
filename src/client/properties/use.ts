@@ -1,5 +1,7 @@
+import console from 'node:console'
 import type { Extension } from '../../extension/__.js'
 import type { ConfigManager } from '../../lib/config-manager/__.js'
+import type { ClientTransports } from '../../types/context.js'
 import { type Context } from '../../types/context.js'
 import { type Client, type ExtensionChainable, type ExtensionChainableRegistry } from '../client.js'
 import { createProperties } from '../helpers.js'
@@ -82,10 +84,42 @@ export const useReducer = <
   const $Context extends Context,
   $Extension extends Extension,
 >(context: $Context, extension: $Extension): UseReducer<$Context, $Extension> => {
-  return {
+  const newContext: Context = {
     ...context,
     extensions: [...context.extensions, extension],
-  } as any
+  }
+
+  if (extension.transport) {
+    newContext.requestPipelineDefinition = {
+      ...context.requestPipelineDefinition,
+      overloads: [
+        ...context.requestPipelineDefinition.overloads,
+        extension.transport.requestPipelineOverload,
+      ],
+    }
+    newContext.transports = {
+      current: context.transports.current,
+      registry: {
+        ...context.transports.registry,
+      },
+      configurations: {
+        ...context.transports.configurations,
+      },
+    }
+
+    const isTransportAlreadyRegistered = newContext.transports.registry[extension.transport.name] !== undefined
+    if (isTransportAlreadyRegistered) {
+      throw new Error(`Transport "${extension.transport.name}" is already registered.`)
+    }
+    const isFirstTransport = newContext.transports.current === null
+    if (isFirstTransport) {
+      newContext.transports.current = extension.transport.name
+    }
+    newContext.transports.registry[extension.transport.name] = extension.transport
+    newContext.transports.configurations[extension.transport.name] = extension.transport.configInit
+  }
+
+  return newContext as any
 }
 
 export const useProperties = createProperties((builder, context) => {

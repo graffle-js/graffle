@@ -8,7 +8,6 @@ import { Graffle } from '../../src/entrypoints/main.js'
 import type { GraffleBasic } from '../../src/entrypoints/presets/__GraffleBasic.js'
 import type { GraffleMinimal } from '../../src/entrypoints/presets/__GraffleMinimal.js'
 import type { SchemaDrivenDataMap } from '../../src/entrypoints/utilities-for-generated.js'
-import { TransportHttp } from '../../src/extensions/TransportHttp/TransportHttp.js'
 import { TransportMemory } from '../../src/extensions/TransportMemory/TransportMemory.js'
 import type { ConfigManager } from '../../src/lib/config-manager/__.js'
 import { Grafaid } from '../../src/lib/grafaid/__.js'
@@ -158,7 +157,7 @@ export const test = testBase.extend<Fixtures>({
   kitchenSinkHttp: async ({ fetch: _ }, use) => {
     const kitchenSink = KitchenSink
       .create()
-      .use(TransportHttp({ url: `https://foo.io/api/graphql` }))
+      .transport({ url: `https://foo.io/api/graphql` })
     kitchenSink._.extensions
     // @ts-expect-error fixme
     await use(kitchenSink)
@@ -169,7 +168,7 @@ export const test = testBase.extend<Fixtures>({
   graffle: async ({ fetch: _ }, use) => {
     const graffle = Graffle
       .create()
-      .use(TransportHttp({ url: new URL(`https://foo.io/api/graphql`) }))
+      .transport({ url: new URL(`https://foo.io/api/graphql`) })
     // @ts-expect-error fixme
     await use(graffle)
   },

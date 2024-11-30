@@ -77,13 +77,11 @@ export const TransportMemory: TransportMemoryConstructor = create({
   normalizeConfig: (input?: { schema?: Grafaid.Schema.Schema }) => ({
     schema: input?.schema ?? undefined,
   }),
-  // eslint-disable-next-line
+
   create() {
     return {
-      // eslint-disable-next-line
-      transport($) {
-        return $
-          .create(`memory`)
+      transport(create) {
+        return create(`memory`)
           .config<{ schema: Grafaid.Schema.Schema }>()
           .configInit<{}>()
           .step(`pack`, {
