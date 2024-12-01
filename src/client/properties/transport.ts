@@ -86,7 +86,7 @@ export type TransportMethod<
       }
     : never
 
-export const builderExtensionTransport = createProperties((builder, state) => {
+export const transportProperties = createProperties((builder, state) => {
   return {
     transport: (transport: string | object) => {
       if (typeof transport === `string`) {
@@ -109,7 +109,10 @@ export const builderExtensionTransport = createProperties((builder, state) => {
           ...state.transports,
           configurations: {
             ...state.transports.configurations,
-            [state.transports.current]: transport,
+            [state.transports.current]: {
+              ...state.transports.configurations[state.transports.current],
+              ...transport,
+            },
           },
         },
       })

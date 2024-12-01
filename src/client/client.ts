@@ -8,7 +8,7 @@ import { type ConfigInit, type NormalizeConfigInit, normalizeConfigInit } from '
 import { anywareProperties } from './properties/anyware.js'
 import { type gqlOverload, gqlProperties } from './properties/gql/gql.js'
 import { type ScalarMethod, scalarProperties, type TypeErrorMissingSchemaMap } from './properties/scalar.js'
-import type { TransportMethod } from './properties/transport.js'
+import { type TransportMethod, transportProperties } from './properties/transport.js'
 import { type UseMethod, useProperties } from './properties/use.js'
 import { withProperties } from './properties/with.js'
 
@@ -152,6 +152,7 @@ export const createWithContext = (
   // @ts-expect-error ignoreme
   const clientDirect: Client = {
     _: context,
+    ...transportProperties(createWithContext, context),
     ...gqlProperties(createWithContext, context),
     ...withProperties(createWithContext, context),
     ...useProperties(createWithContext, context),

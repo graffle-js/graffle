@@ -7,6 +7,7 @@ export interface Overload {
   discriminant: DiscriminantSpec
   input: object
   inputInit?: object | undefined
+  inputDefaults?: object | undefined
   steps: Record<string, StepDefinition>
 }
 

@@ -7,6 +7,7 @@ import type { Overload } from './__.js'
 export const create: Create = (parameters) => {
   const overload_: Omit<Overload, 'input'> = {
     discriminant: parameters.discriminant,
+    inputDefaults: parameters.inputDefaults,
     steps: {},
   }
   const overload = overload_ as Overload
@@ -14,6 +15,10 @@ export const create: Create = (parameters) => {
   const builder: Builder = {
     type: overload,
     config: () => builder as any,
+    defaults: (inputDefaults: object) => {
+      overload.inputDefaults = inputDefaults
+      return builder as any
+    },
     configInit: () => builder as any,
     stepWithExtendedInput: () => builder.step as any,
     step: (name, spec) => {
@@ -30,12 +35,17 @@ export const create: Create = (parameters) => {
 
 export type Create<$Pipeline extends PipelineDefinition = PipelineDefinition> = <
   const $DiscriminantSpec extends Overload['discriminant'],
+  const $InputDefaults extends object | undefined,
 >(
-  parameters: { discriminant: $DiscriminantSpec },
+  parameters: {
+    discriminant: $DiscriminantSpec
+    inputDefaults?: $InputDefaults
+  },
 ) => Builder<
   $Pipeline,
   {
     discriminant: $DiscriminantSpec
+    inputDefaults: $InputDefaults
     input: {}
     steps: {}
   }
@@ -53,13 +63,17 @@ export interface Builder<
   /**
    * TODO
    */
-  config: <$InputExtension extends object>() => Builder<
+  config: <inputExtension extends object>() => Builder<
     $Pipeline,
-    Overload.Updaters.SetInput<$Overload, $InputExtension>
+    Overload.Updaters.SetInput<$Overload, inputExtension>
   >
-  configInit: <$InputExtension extends object>() => Builder<
+  defaults: <inputDefaults extends object>(inputDefaults: inputDefaults) => Builder<
     $Pipeline,
-    Overload.Updaters.SetInputInit<$Overload, $InputExtension>
+    Overload.Updaters.SetInputDefaults<$Overload, inputDefaults>
+  >
+  configInit: <inputExtension extends object>() => Builder<
+    $Pipeline,
+    Overload.Updaters.SetInputInit<$Overload, inputExtension>
   >
   /**
    * TODO

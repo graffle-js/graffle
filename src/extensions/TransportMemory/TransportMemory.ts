@@ -29,6 +29,7 @@ export interface TransportMemory<$ConfigInit extends ConfigInit = ConfigInitEmpt
     name: 'memory'
     config: Configuration
     configInit: $ConfigInit
+    configDefaults: Partial<Configuration>
     requestPipelineOverload: RequestPipelineOverload
   }
   typeHooks: TypeHooksEmpty
@@ -78,12 +79,13 @@ export const TransportMemory: TransportMemoryConstructor = create({
     schema: input?.schema ?? undefined,
   }),
 
-  create() {
+  create({ config }) {
     return {
       transport(create) {
         return create(`memory`)
           .config<{ schema: Grafaid.Schema.Schema }>()
           .configInit<{}>()
+          .defaults(config)
           .step(`pack`, {
             run: (input) => {
               const graphqlRequest: Grafaid.HTTP.RequestConfig = {

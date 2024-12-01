@@ -44,7 +44,7 @@ export type TransportHttpInput = {
 export interface TransportHttpConstructor {
   <$ConfigInit extends ConfigInit = ConfigInitEmpty>(
     configInit?: $ConfigInit,
-  ): TransportHttp<ConfigManager.MergeDefaultsShallow<ConfigInitDefaults, $ConfigInit>>
+  ): TransportHttp<ConfigManager.MergeDefaultsShallow<ConfigDefaults, $ConfigInit>>
 }
 
 export interface Configuration {
@@ -54,11 +54,15 @@ export interface Configuration {
   raw?: RequestInit
 }
 
-export type ConfigInit = Partial<Configuration>
-
-export interface ConfigInitDefaults {
+export interface ConfigDefaults {
   methodMode: 'post'
 }
+
+export const configDefaults: ConfigDefaults = {
+  methodMode: `post`,
+}
+
+export type ConfigInit = Partial<Configuration>
 
 export interface ConfigInitEmpty {}
 
@@ -69,6 +73,7 @@ export interface TransportHttp<$Input extends Partial<Configuration>> extends Ex
     name: 'http'
     config: Configuration
     configInit: $Input
+    configDefaults: Partial<Configuration>
     requestPipelineOverload: RequestPipelineOverload
   }
   typeHooks: TypeHooksEmpty
@@ -149,16 +154,17 @@ export const TransportHttp: TransportHttpConstructor = create({
   name: `TransportHttp`,
   normalizeConfig: (configInit?: ConfigInit) => {
     return {
+      ...configDefaults,
       ...configInit,
       url: configInit?.url ? new URL(configInit.url) : undefined,
-      methodMode: configInit?.methodMode ?? `post`,
     }
   },
-  create() {
+  create({ config }) {
     return {
       transport(create) {
         return create(`http`)
           .config<Configuration>()
+          .defaults(config)
           // .configInit<MergeConfigInitDefaults<$ConfigInit>>()
           .stepWithExtendedInput<{ headers?: HeadersInit }>()(`pack`, {
             slots: {

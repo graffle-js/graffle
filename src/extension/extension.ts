@@ -65,6 +65,7 @@ export const create = <
       configInit: $TransportCallbackResult['type']['inputInit'] extends object
         ? $TransportCallbackResult['type']['inputInit']
         : {}
+      configDefaults: $TransportCallbackResult['type']['inputDefaults']
       requestPipelineOverload: $TransportCallbackResult['type']
     }
     : undefined
@@ -75,13 +76,15 @@ export const create = <
     const builder = extensionBuilder.builder?.(BuilderExtension.create)
     const overload = extensionBuilder.transport?.((name) =>
       Anyware.Overload.create({ discriminant: [`transportType`, name] })
-    )
+      // eslint-disable-next-line
+    )?.type
     const transport: Transport | undefined = overload
       ? {
-        name: overload.type.discriminant[1] as string,
-        config: overload.type.input,
-        configInit: overload.type.inputInit ?? {},
-        requestPipelineOverload: overload.type,
+        name: overload.discriminant[1] as string,
+        config: overload.input,
+        configInit: undefined as any,
+        configDefaults: overload.inputDefaults,
+        requestPipelineOverload: overload,
       }
       : undefined
     const extension: Extension = {

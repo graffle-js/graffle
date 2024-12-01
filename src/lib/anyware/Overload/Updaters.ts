@@ -8,6 +8,11 @@ export namespace Updaters {
     $InputExtension extends object,
   > = ConfigManager.SetKey<$Overload, 'input', $InputExtension>
 
+  export type SetInputDefaults<
+    $Overload extends Overload,
+    $InputDefaults extends object,
+  > = ConfigManager.SetKey<$Overload, 'inputDefaults', $InputDefaults>
+
   export type SetInputInit<
     $Overload extends Overload,
     $InputExtension extends object,

@@ -1,7 +1,5 @@
-import console from 'node:console'
 import type { Extension } from '../../extension/__.js'
 import type { ConfigManager } from '../../lib/config-manager/__.js'
-import type { ClientTransports } from '../../types/context.js'
 import { type Context } from '../../types/context.js'
 import { type Client, type ExtensionChainable, type ExtensionChainableRegistry } from '../client.js'
 import { createProperties } from '../helpers.js'
@@ -20,25 +18,6 @@ export type UseMethod<
     : $ExtensionChainable_
 >
 
-// export type UseExtensionReturn<
-//   $Args extends Builder.Extension.Parameters<BuilderExtensionUse>,
-//   $Extension extends Extension,
-// > = Builder.Definition.MaterializeWith<
-//   // // Apply any builder extensions.
-//   // (
-//   //   ConfigManager.GetOptional<$Extension, ['builder', 'type']> extends Builder.Extension
-//   //     ? Builder.Definition.AddExtension<
-//   //       $Args['definition'],
-//   //       ConfigManager.GetOptional<$Extension, ['builder', 'type']>
-//   //     >
-//   //     : $Args['definition']
-//   // ),
-//   UseReducer<
-//     $Args['context'],
-//     $Extension
-//   >
-// >
-
 // dprint-ignore
 export type UseReducer<
   $Context extends Context,
@@ -54,31 +33,6 @@ export type UseReducer<
     >,
     $Extension
   >
-
-// export type UseExtension<
-//   $Args extends Builder.Extension.Parameters<BuilderExtensionUse>,
-//   $Extension extends Extension,
-// > = Builder.Definition.MaterializeWith<
-//   // Apply any builder extensions.
-//   (
-//     ConfigManager.GetOptional<$Extension, ['builder', 'type']> extends Builder.Extension
-//       ? Builder.Definition.AddExtension<
-//         $Args['definition'],
-//         ConfigManager.GetOptional<$Extension, ['builder', 'type']>
-//       >
-//       : $Args['definition']
-//   ),
-//   AddTypeHooks<
-//     AddTransport<
-//       AddExtension<
-//         $Args['context'],
-//         $Extension
-//       >,
-//       $Extension
-//     >,
-//     $Extension
-//   >
-// >
 
 export const useReducer = <
   const $Context extends Context,
@@ -116,7 +70,10 @@ export const useReducer = <
       newContext.transports.current = extension.transport.name
     }
     newContext.transports.registry[extension.transport.name] = extension.transport
-    newContext.transports.configurations[extension.transport.name] = extension.transport.configInit
+    newContext.transports.configurations[extension.transport.name] = {
+      ...extension.transport.configDefaults,
+      ...extension.transport.config,
+    }
   }
 
   return newContext as any

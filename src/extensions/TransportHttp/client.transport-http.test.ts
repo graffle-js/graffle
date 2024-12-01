@@ -5,9 +5,6 @@ import { Graffle as Pokemon } from '../../../tests/_/schemas/pokemon/graffle/__.
 import { schema as schemaPokemon } from '../../../tests/_/schemas/pokemon/schema.js'
 import { Graffle } from '../../entrypoints/main.js'
 import { ACCEPT_REC, CONTENT_TYPE_REC } from '../../lib/grafaid/http/http.js'
-import { TransportHttp } from './TransportHttp.js'
-// import type { requestPipeline } from '../requestPipeline/__.js'
-// import { Transport, type TransportHttp } from '../types/Transport.js'
 
 const url = new URL(`https://foo.io/api/graphql`)
 
@@ -59,7 +56,7 @@ describe(`methodMode`, () => {
   describe(`get`, () => {
     test(`can set method mode to get`, async ({ fetch }) => {
       fetch.mockImplementationOnce(() => Promise.resolve(createResponse({ data: { user: { name: `foo` } } })))
-      const graffle = Graffle.create().use(TransportHttp({ url, methodMode: `getReads` }))
+      const graffle = Graffle.create().transport({ url, methodMode: `getReads` })
       await graffle.gql`query foo($id: ID!){user(id:$id){name}}`.send(`foo`, { 'id': `QVBJcy5ndXJ1` })
       const request = fetch.mock.calls[0]?.[0]
       expect(request?.method).toEqual(`GET`)
@@ -71,14 +68,14 @@ describe(`methodMode`, () => {
     })
     test(`if no variables or operationName then search parameters are omitted`, async ({ fetch }) => {
       fetch.mockImplementationOnce(() => Promise.resolve(createResponse({ data: { user: { name: `foo` } } })))
-      const graffle = Graffle.create().use(TransportHttp({ url, methodMode: `getReads` }))
+      const graffle = Graffle.create().transport({ url, methodMode: `getReads` })
       await graffle.gql`query {user{name}}`.send()
       const request = fetch.mock.calls[0]?.[0]
       expect(request?.url).toMatchInlineSnapshot(`"https://foo.io/api/graphql?query=query+%7Buser%7Bname%7D%7D"`)
     })
     test(`mutation still uses POST`, async ({ fetch }) => {
       fetch.mockImplementationOnce(() => Promise.resolve(createResponse({ data: { user: { name: `foo` } } })))
-      const graffle = Graffle.create().use(TransportHttp({ url, methodMode: `getReads` }))
+      const graffle = Graffle.create().transport({ url, methodMode: `getReads` })
       await graffle.gql`mutation { user { name } }`.send()
       const request = fetch.mock.calls[0]?.[0]
       expect(request?.method).toEqual(`POST`)
@@ -91,7 +88,7 @@ describe(`methodMode`, () => {
 describe(`configuration`, () => {
   test(`can set headers`, async ({ fetch }) => {
     fetch.mockImplementationOnce(() => Promise.resolve(createResponse({ data: { id: `abc` } })))
-    const graffle = Graffle.create().use(TransportHttp({ url, headers: { 'x-foo': `bar` } }))
+    const graffle = Graffle.create().transport({ url, headers: { 'x-foo': `bar` } })
     await graffle.gql`query { id }`.send()
     const request = fetch.mock.calls[0]?.[0]
     expect(request?.headers.get(`x-foo`)).toEqual(`bar`)
@@ -99,7 +96,7 @@ describe(`configuration`, () => {
 
   test(`can set raw (requestInit)`, async ({ fetch }) => {
     fetch.mockImplementationOnce(() => Promise.resolve(createResponse({ data: { id: `abc` } })))
-    const graffle = Graffle.create().use(TransportHttp({ url, raw: { headers: { 'x-foo': `bar` } } }))
+    const graffle = Graffle.create().transport({ url, raw: { headers: { 'x-foo': `bar` } } })
     await graffle.gql`query { id }`.send()
     const request = fetch.mock.calls[0]?.[0]
     expect(request?.headers.get(`x-foo`)).toEqual(`bar`)
@@ -109,7 +106,7 @@ describe(`configuration`, () => {
     const abortErrorMessagePattern = /This operation was aborted|AbortError: The operation was aborted/
     test(`to constructor`, async () => {
       const abortController = new AbortController()
-      const graffle = Graffle.create().use(TransportHttp({ url, raw: { signal: abortController.signal } }))
+      const graffle = Graffle.create().transport({ url, raw: { signal: abortController.signal } })
       const resultPromise = graffle.gql`query { id }`.send()
       abortController.abort()
       const { caughtError } = await resultPromise.catch((caughtError: unknown) => ({ caughtError })) as any as {
