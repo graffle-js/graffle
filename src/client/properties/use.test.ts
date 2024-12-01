@@ -7,7 +7,9 @@ import { create } from '../../extension/extension.js'
 import { Throws } from '../../extensions/Throws/Throws.js'
 // import { oops } from '../../../lib/anyware/specHelpers.js'
 
-const client = Graffle.create({ output: { defaults: { errorChannel: 'return' } } })
+const graffle = Graffle
+  .create({ output: { defaults: { errorChannel: 'return' } } })
+  .transport({ url: 'http://foo' })
 const headers = { 'x-foo': 'bar' }
 
 test('using an extension without type hooks leaves them empty', () => {
@@ -30,9 +32,9 @@ test('using an extension without type hooks leaves them empty', () => {
 })
 
 test('using an extension returns a copy of the client', () => {
-  const client2 = client.use(Throws())
+  const graffle2 = graffle.use(Throws())
   // @ts-ignore fixme
-  expect(client2 !== client).toBe(true)
+  expect(graffle2 !== graffle).toBe(true)
 })
 
 describe(`entrypoint pack`, () => {
@@ -41,17 +43,18 @@ describe(`entrypoint pack`, () => {
       expect(input.headers.get('x-foo')).toEqual(headers['x-foo'])
       return createResponse({ data: { id: db.id } })
     })
-    const client2 = client.anyware(async ({ pack }) => {
+    const graffle2 = graffle.anyware(async ({ pack }) => {
       if (pack.input.transportType !== `http`) return pack()
       return pack({ input: { ...pack.input, headers } })
     })
-    expect(await client2.query.id()).toEqual(db.id)
+    const result = await graffle2.query.id()
+    expect(result).toEqual(db.id)
   })
   test('can chain into exchange', async ({ fetch }) => {
     fetch.mockImplementationOnce(async () => {
       return createResponse({ data: { id: db.id } })
     })
-    const client2 = client.anyware(async ({ pack }) => {
+    const client2 = graffle.anyware(async ({ pack }) => {
       if (pack.input.transportType !== `http`) return pack()
       const { exchange } = await pack({ input: { ...pack.input, headers } })
       return exchange({ input: exchange.input })
