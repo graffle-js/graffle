@@ -7,7 +7,7 @@ import { TransportMemory } from '../TransportMemory/TransportMemory.js'
 import { Introspection } from './Introspection.js'
 
 test(`adds an introspection method that introspects the schema`, async () => {
-  const graffle = Graffle.create().use(TransportMemory({ schema })).use(Introspection())
+  const graffle = Graffle.create().use(TransportMemory({ schema })).transport(`memory`).use(Introspection())
   const result = await graffle.introspect()
   expect(result).toMatchSnapshot()
   assertEqual<typeof result, IntrospectionQuery | null>()

@@ -7,7 +7,7 @@ import type { Errors } from '../../lib/errors/__.js'
 
 // todo test with custom scalars
 
-const graffle = Graffle.create().use(TransportMemory({ schema }))
+const graffle = Graffle.create().use(TransportMemory({ schema })).transport(`memory`)
 
 describe(`document with two queries`, () => {
   const withTwo = graffle.document({

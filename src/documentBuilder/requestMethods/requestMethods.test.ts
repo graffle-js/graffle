@@ -3,10 +3,10 @@ import { DateScalar } from '../../../tests/_/fixtures/scalars.js'
 import { kitchenSink, test } from '../../../tests/_/helpers.js'
 
 describe(`query batch`, () => {
-  test(`success`, async ({ kitchenSinkData: db }) => {
+  test(`success`, async ({ kitchenSink, kitchenSinkData: db }) => {
     expect(await kitchenSink.query.$batch({ id: true })).toMatchObject({ id: db.id })
   })
-  test(`error`, async ({ kitchenSinkData: db }) => {
+  test(`error`, async ({ kitchenSink, kitchenSinkData: db }) => {
     await expect(kitchenSink.query.$batch({ error: true })).rejects.toMatchObject(db.errorAggregate)
   })
 })

@@ -33,6 +33,7 @@ export const kitchenSink = KitchenSink
   .use(TransportMemory({
     schema: kitchenSinkSchema,
   }))
+  .transport(`memory`)
 
 export const createResponse = (body: object) =>
   new Response(JSON.stringify(body), { status: 200, headers: { 'content-type': CONTENT_TYPE_REC } })
