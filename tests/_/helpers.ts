@@ -43,11 +43,11 @@ interface Fixtures {
   graffle: GraffleMinimal.Client.With<{
     checkPreflight: false
   }>
-  kitchenSink: GraffleBasic.Client.With<{
+  kitchenSinkHttp: GraffleBasic.Client.With<{
     schemaMap: SchemaDrivenDataMap
     checkPreflight: false
   }>
-  kitchenSinkHttp: GraffleBasic.Client.With<{
+  kitchenSink: GraffleBasic.Client.With<{
     schemaMap: SchemaDrivenDataMap
     checkPreflight: false
     transports: ConfigManager.SetKeyUnsafe<
@@ -148,6 +148,7 @@ export const test = testBase.extend<Fixtures>({
   kitchenSink: async ({ fetch: _ }, use) => {
     const kitchenSink = KitchenSink.create()
       .use(TransportMemory({ schema: kitchenSinkSchema }))
+      .transport(`memory`)
     // kitchenSink.anyware(async ({ encode }) => {
     //   encode({ input: {}})
     // })

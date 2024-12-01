@@ -108,6 +108,12 @@ export const TransportMemory: TransportMemoryConstructor = create({
               }
             },
           })
+          // todo remove (need runtime passthrough logic)
+          .step(`unpack`, {
+            run: (input) => {
+              return input
+            },
+          })
       },
     }
   },

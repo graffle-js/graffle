@@ -81,17 +81,27 @@ export { schemaDrivenDataMap as schemaMap } from './modules/schema-driven-data-m
 `;
 
 exports[`kitchen-sink generated modules > modules/client.ts 1`] = `
-"import { ClientPreset } from '../../../../../../src/entrypoints/client.js'
+"import { TransportHttp } from '../../../../../../src/entrypoints/extensions/transport-http/runtime.js'
+import * as $$Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
 import * as $$Data from './data.js'
 import * as $$Scalar from './scalar.js'
 import * as $$SchemaDrivenDataMap from './schema-driven-data-map.js'
 
-export const create = ClientPreset.create({
-  name: $$Data.Name,
-  sddm: $$SchemaDrivenDataMap.schemaDrivenDataMap,
-  scalars: $$Scalar.$registry,
-  schemaUrl: $$Data.defaultSchemaUrl,
-})
+const context = $$Utilities.useReducer(
+  {
+    ...$$Utilities.Context.States.contextEmpty,
+    name: $$Data.Name,
+    schemaMap: $$SchemaDrivenDataMap.schemaDrivenDataMap,
+    scalars: $$Scalar.$registry,
+  },
+  TransportHttp({
+    url: $$Data.defaultSchemaUrl,
+  }),
+)
+
+export const create = $$Utilities.createConstructorWithContext(
+  context,
+)
 "
 `;
 
@@ -146,7 +156,7 @@ export interface Document<$Context extends $$Utilities.Context> {
   >
 }
 
-export interface BuilderMethodsDocumentFn extends $$Utilities.TypeFunction.Fn {
+export interface BuilderMethodsDocumentFn extends $$Utilities.TypeFunction {
   // @ts-expect-error parameter is Untyped.
   return: Document<this['params']>
 }
@@ -798,7 +808,7 @@ export interface BuilderMethodsRoot<$Context extends $$Utilities.Context> {
   mutation: MutationMethods<$Context>
 }
 
-export interface BuilderMethodsRootFn extends $$Utilities.TypeFunction.Fn {
+export interface BuilderMethodsRootFn extends $$Utilities.TypeFunction {
   // @ts-expect-error parameter is Untyped.
   return: BuilderMethodsRoot<this['params']>
 }
@@ -7661,7 +7671,7 @@ export interface BuilderMethodsRoot<$Context extends $$Utilities.Context> {
   undefined: QueryRootMethods<$Context>;
 }
 
-export interface BuilderMethodsRootFn extends $$Utilities.TypeFunction.Fn {
+export interface BuilderMethodsRootFn extends $$Utilities.TypeFunction {
   // @ts-expect-error parameter is Untyped.
   return: BuilderMethodsRoot<this["params"]>;
 }
