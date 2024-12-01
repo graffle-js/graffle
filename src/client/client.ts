@@ -114,6 +114,10 @@ export const createConstructorWithContext = <$Context extends Context>(
 ): ClientConstructor<$Context> => {
   return (configInit) => {
     const config = normalizeConfigInit(configInit ?? {})
+
+    // @ts-expect-error
+    config.schemaMap ??= context.schemaMap
+
     const context_ = {
       ...context,
       ...config,

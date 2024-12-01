@@ -33,7 +33,7 @@ export type ConfigInit<$Client extends GlobalRegistry.Client = GlobalRegistry.Cl
   /**
    * todo
    */
-  readonly schemaMap?: SchemaDrivenDataMap | null
+  readonly schemaMap?: SchemaDrivenDataMap
 }
 
 export type ConfigInitOutputEnvelopeLonghand = {
@@ -122,9 +122,7 @@ export const normalizeConfigInit = <$Input extends ConfigInit>(
       ? { enabled: input.output.envelope }
       : undefined
 
-  // @ts-expect-error conditional type
-  return {
-    schemaMap: input.schemaMap ?? null as any,
+  const config = {
     output: {
       defaults: {
         errorChannel: input.output?.defaults?.errorChannel ?? outputConfigDefault.defaults.errorChannel,
@@ -146,4 +144,12 @@ export const normalizeConfigInit = <$Input extends ConfigInit>(
       },
     },
   }
+
+  if (input.schemaMap) {
+    // @ts-expect-error
+    config.schemaMap = input.schemaMap
+  }
+
+  // @ts-expect-error conditional type
+  return config
 }

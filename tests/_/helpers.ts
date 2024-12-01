@@ -159,7 +159,6 @@ export const test = testBase.extend<Fixtures>({
     const kitchenSink = KitchenSink
       .create()
       .transport({ url: `https://foo.io/api/graphql` })
-    kitchenSink._.extensions
     // @ts-expect-error fixme
     await use(kitchenSink)
   },
