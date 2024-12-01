@@ -15,10 +15,6 @@ export namespace Transport {
       create: Create
     }
 
-    // export const create: Create = (name) => {
-    //   __(name)
-    // }
-
     export interface Create {
       <$Name extends string>(name: $Name): Anyware.Overload.Builder<RequestPipelineBaseDefinition, {
         discriminant: ['transportType', $Name]

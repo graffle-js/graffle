@@ -1,4 +1,3 @@
-import { _ } from '../../lib/prelude.js'
 import type { ClientTransports } from '../../types/context.js'
 import { type Context } from '../../types/context.js'
 import { type Client, type ExtensionChainableRegistry } from '../client.js'
@@ -103,16 +102,31 @@ export const transportProperties = createProperties((builder, state) => {
         throw new Error(`No transport is currently set.`)
       }
 
+      const newConfiguration = {
+        ...state.transports.configurations[state.transports.current] ?? {},
+        ...transport,
+      }
+      // hack: transport need to provide this function
+      if (state.transports.current === `http`) {
+        // @ts-expect-error
+        if (transport.headers) {
+          // @ts-expect-error
+          newConfiguration.headers = {
+            // @ts-expect-error
+            ...state.transports.configurations[state.transports.current]?.headers,
+            // @ts-expect-error
+            ...transport.headers,
+          }
+        }
+      }
+
       return builder({
         ...state,
         transports: {
           ...state.transports,
           configurations: {
             ...state.transports.configurations,
-            [state.transports.current]: {
-              ...state.transports.configurations[state.transports.current],
-              ...transport,
-            },
+            [state.transports.current]: newConfiguration,
           },
         },
       })
