@@ -5,6 +5,7 @@ import type { Anyware } from '../../lib/anyware/__.js'
 import type { Grafaid } from '../../lib/grafaid/__.js'
 import { print } from '../../lib/grafaid/document.js'
 import { execute } from '../../lib/grafaid/execute.js'
+import type { PartialOrUndefined } from '../../lib/prelude.js'
 import type { RequestPipeline } from '../../requestPipeline/RequestPipeline.js'
 
 export interface TransportMemoryConstructor {
@@ -17,7 +18,7 @@ export interface Configuration {
   schema: Grafaid.Schema.Schema
 }
 
-export type ConfigInit = Partial<Configuration>
+export type ConfigInit = PartialOrUndefined<Configuration>
 
 export interface ConfigInitEmpty {}
 
@@ -29,7 +30,7 @@ export interface TransportMemory<$ConfigInit extends ConfigInit = ConfigInitEmpt
     name: 'memory'
     config: Configuration
     configInit: $ConfigInit
-    configDefaults: Partial<Configuration>
+    configDefaults: PartialOrUndefined<Configuration>
     requestPipelineOverload: RequestPipelineOverload
   }
   typeHooks: TypeHooksEmpty

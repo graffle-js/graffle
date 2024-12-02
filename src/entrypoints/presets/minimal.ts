@@ -3,6 +3,7 @@ import { useReducer } from '../../client/properties/use.js'
 import type { ConfigManager } from '../../lib/config-manager/__.js'
 import { Context, type Context as BaseContext } from '../../types/context.js'
 import { TransportHttp } from '../extensions/transport-http/runtime.js'
+import type { PartialOrUndefined } from '../main.js'
 
 const context = useReducer(Context.States.contextEmpty, TransportHttp())
 
@@ -15,7 +16,7 @@ export type Client = BaseClient<MinimalClientContext, {}, {}>
 export namespace Client {
   export type Context = MinimalClientContext
 
-  export type With<$ContextNewPartial extends Partial<BaseContext>> = BaseClient<
+  export type With<$ContextNewPartial extends PartialOrUndefined<BaseContext>> = BaseClient<
     // @ts-expect-error fixme
     ConfigManager.SetKeysOptional<
       MinimalClientContext,

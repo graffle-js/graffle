@@ -777,3 +777,7 @@ export type PropertyKeyToString<$Key extends PropertyKey> = $Key extends string 
 export type DiscriminantPropertyValue = string | number | symbol
 
 export const identity = <value>(value: value): value => value
+
+export type PartialOrUndefined<T> = {
+  [K in keyof T]?: T[K] | undefined
+}

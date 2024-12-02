@@ -8,7 +8,7 @@ import { getRequestEncodeSearchParameters, postRequestEncodeBody } from '../../l
 import { getRequestHeadersRec, parseExecutionResult, postRequestHeadersRec } from '../../lib/grafaid/http/http.js'
 import { mergeRequestInit, searchParamsAppendAll } from '../../lib/http.js'
 import type { httpMethodGet, httpMethodPost } from '../../lib/http.js'
-import { _, isString, type MaybePromise } from '../../lib/prelude.js'
+import { _, isString, type MaybePromise, type PartialOrUndefined } from '../../lib/prelude.js'
 import type { RequestPipeline } from '../../requestPipeline/RequestPipeline.js'
 
 export const MethodMode = {
@@ -62,18 +62,18 @@ export const configDefaults: ConfigDefaults = {
   methodMode: `post`,
 }
 
-export type ConfigInit = Partial<Configuration>
+export type ConfigInit = PartialOrUndefined<Configuration>
 
 export interface ConfigInitEmpty {}
 
-export interface TransportHttp<$Input extends Partial<Configuration>> extends Extension {
+export interface TransportHttp<$Input extends PartialOrUndefined<Configuration>> extends Extension {
   name: `TransportHttp`
   config: Configuration
   transport: {
     name: 'http'
     config: Configuration
     configInit: $Input
-    configDefaults: Partial<Configuration>
+    configDefaults: PartialOrUndefined<Configuration>
     requestPipelineOverload: RequestPipelineOverload
   }
   typeHooks: TypeHooksEmpty

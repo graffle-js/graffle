@@ -1,3 +1,4 @@
+import type { PartialOrUndefined } from '../../lib/prelude.js'
 import type { ClientTransports } from '../../types/context.js'
 import { type Context } from '../../types/context.js'
 import { type Client, type ExtensionChainableRegistry } from '../client.js'
@@ -15,7 +16,7 @@ export type TransportMethod<
          * Configure the current transport.
          * TODO
          */
-        <config extends Partial<$Context['transports']['registry'][$Context['transports']['current']]['config']>>
+        <config extends PartialOrUndefined<$Context['transports']['registry'][$Context['transports']['current']]['config']>>
           (config: config):
             Client<
               {
