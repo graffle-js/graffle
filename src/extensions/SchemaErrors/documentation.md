@@ -22,7 +22,7 @@ export default Generator
 import { Graffle } from 'graffle'
 import { SchemaErrors } from 'graffle/extensions/schema-errors'
 
-const graffle = Graffle.create({ schema: '...' }).use(SchemaErrors())
+const graffle = Graffle.create().use(SchemaErrors())
 ```
 
 ## Configuration

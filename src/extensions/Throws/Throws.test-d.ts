@@ -2,7 +2,7 @@
 // import { schema } from '../../../../tests/_/schemas/kitchen-sink/schema.js'
 // import { Throws } from './Throws.js'
 
-// const graffle = Graffle.create({ schema }).use(Throws())
+// const graffle = Graffle.create().transport('memory', { schema }).use(Throws())
 
 // // todo tests that don't rely on schema errors
 // describe(`document`, () => {

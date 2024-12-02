@@ -12,5 +12,5 @@ Adds support for [GraphQL Multipart Request](https://github.com/jaydenseric/grap
 import { Graffle } from 'graffle'
 import { Upload } from 'graffle/extensions/upload'
 
-const graffle = Graffle.create({ schema: '...' }).use(Upload())
+const graffle = Graffle.create().use(Upload())
 ```

@@ -22,7 +22,7 @@ test(`client works without generation`, async ({ project, pokemonService }) => {
     `main.ts`,
     `
 		import { Graffle } from 'graffle'
-		const graffle = Graffle.create({ schema: '${pokemonService.url.href}' })
+		const graffle = Graffle.create().transport({ url: '${pokemonService.url.href}' })
 		const data = await graffle.gql\`
       query ($name: String!) {
         pokemonByName (name: $name) {
@@ -36,7 +36,7 @@ test(`client works without generation`, async ({ project, pokemonService }) => {
         }
       }
     \`.send({ name: 'Pikachu' })
-		console.log(data?.pokemonByName)
+		console.log(data?.['pokemonByName'])
 		`,
   )
   const result = await project.run`pnpm tsx main`
@@ -48,7 +48,7 @@ test(`client works with generation`, async ({ project, pokemonService }) => {
     `main.ts`,
     `
 		import { Graffle } from 'graffle'
-		const graffle = Graffle.create({ schema: '${pokemonService.url.href}' })
+		const graffle = Graffle.create().transport({ url: '${pokemonService.url.href}' })
 		const data = await graffle.query.pokemonByName({
 			$: { name: 'Pikachu' },
 			name: true,

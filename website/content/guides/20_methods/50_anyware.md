@@ -22,7 +22,7 @@ Here is a snippet with a few highlights to give you a feel for how it works (not
 import { Graffle } from 'graffle'
 // ---cut---
 Graffle
-  .create({ schema: '...' })
+  .create()
   .anyware(async ({ encode }) => {
     const { pack } = await encode() // [1]
 
@@ -76,7 +76,7 @@ Discriminated unions are used to model this. All hook inputs share a base interf
 import { Graffle } from 'graffle'
 // ---cut---
 Graffle
-  .create({ schema: 'https://...' })
+  .create()
   .anyware(async ({ encode }) => {
     if (encode.input.interface === 'typed') {
       // Do something here.
@@ -171,7 +171,7 @@ If you want to jump straight to a specific hook other than `encode` you can do s
 import { Graffle } from 'graffle'
 // ---cut---
 Graffle
-  .create({ schema: '...' })
+  .create()
   .anyware(async ({ exchange }) => {
     // ... do something ...
     const { unpack } = await exchange()
@@ -196,7 +196,7 @@ If you want to end your work before `decode` you can do so by returning any hook
 import { Graffle } from 'graffle'
 // ---cut---
 Graffle
-  .create({ schema: '...' })
+  .create()
   .anyware(async ({ encode }) => {
     // ... do something ...
     const { pack } = await encode()
@@ -213,7 +213,7 @@ You can override the input to any hook by passing your own input:
 
 ```ts
 Graffle
-  .create({ schema: '...' })
+  .create()
   .anyware(async ({ encode }) => {
     return encode({
       input: {/* ... */},
@@ -227,7 +227,7 @@ You can access the original input of any hook from its `input` property. This is
 import { Graffle } from 'graffle'
 // ---cut---
 Graffle
-  .create({ schema: '...' })
+  .create()
   .anyware(async ({ encode }) => {
     return encode({
       input: { ...encode.input /* ... */ },
@@ -251,7 +251,7 @@ They execute in the order they were added, regardless of if it was added via an 
 
 ```ts
 Graffle
-  .create({ schema: '...' })
+  .create()
   .use(Extension1WithAnyware())
   .anyware(async ({ encode }) => {/* ... */})
   .use(Extension2WithAnyware())

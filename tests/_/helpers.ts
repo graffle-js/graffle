@@ -103,6 +103,7 @@ export const test = testBase.extend<Fixtures>({
     await fs.writeAsync(`package.json`, {
       name: `test`,
       type: `module`,
+      packageManager: `pnpm@9.12.2`,
       scripts: {
         'check:types': `tsc --noEmit`,
         // rollup: `rollup --configPlugin typescript --config rollup.config.ts`,

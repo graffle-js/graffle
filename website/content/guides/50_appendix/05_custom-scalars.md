@@ -68,20 +68,17 @@ You can give the Graffle generator access to your scalar definitions. This is sl
      ```ts
      import { Graffle } from './graffle/__.js'
 
-     const graffle = Graffle.create({ schema: '...' })
+     const graffle = Graffle.create()
      ```
 
    - Technically you can also keep it as it was before. Just import your scalar definitions now instead of having them inline:
 
      ```ts
-     import { schemaDrivenDataMap as schemaMap } from './graffle/__.js'
+     import { schemaMap } from './graffle/__.js'
      import { Date } from './scalars.js'
 
      const graffle = Graffle
-       .create({
-         schema: '...',
-         schemaMap,
-       })
+       .create({ schemaMap })
        .scalar(Date)
      ```
    - Technically you could do nothing to your initial configuration. While not DRY it will work.
