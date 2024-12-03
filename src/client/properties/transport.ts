@@ -114,13 +114,13 @@ const reducerTransportConfig = (
   // hack: transport need to provide this function
   if (transportName === `http`) {
     // @ts-expect-error
-    if (transportName.headers) {
+    if (config.headers) {
       // @ts-expect-error
       newConfiguration.headers = {
         // @ts-expect-error
-        ...state.transports.configurations[state.transports.current]?.headers,
+        ...state.transports.configurations[transportName]?.headers,
         // @ts-expect-error
-        ...transportName.headers,
+        ...config.headers,
       }
     }
   }
