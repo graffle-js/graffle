@@ -24,7 +24,6 @@ const graffle = Graffle
     headers: { 'x-something-to-unset': `` },
   })
   .anyware(({ exchange }) => {
-    // eslint-disable-next-line
     if (exchange.input.transportType !== `http`) return exchange()
     show(exchange.input.request.headers)
     return exchange()

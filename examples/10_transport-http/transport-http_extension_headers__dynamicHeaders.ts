@@ -11,7 +11,6 @@ const graffle = Graffle
     url: publicGraphQLSchemaEndpoints.Pokemon,
   })
   .anyware(({ pack }) => {
-    // eslint-disable-next-line
     if (pack.input.transportType !== `http`) return pack()
     return pack({
       input: {

@@ -12,7 +12,6 @@ Graffle
   // Notice how we **start** with the `exchange` hook, skipping the `encode` and `pack` hooks.
   .anyware(async ({ exchange }) => {
     //              ^^^^^^^^
-    // eslint-disable-next-line
     if (exchange.input.transportType !== `http`) return exchange()
 
     const mergedHeaders = new Headers(exchange.input.request.headers)

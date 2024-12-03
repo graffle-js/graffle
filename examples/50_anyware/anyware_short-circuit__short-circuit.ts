@@ -13,7 +13,6 @@ Graffle
     const { pack } = await encode()
     const { exchange } = await pack()
 
-    // eslint-disable-next-line
     if (exchange.input.transportType !== `http`) return exchange()
 
     const mergedHeaders = new Headers(exchange.input.request.headers)

@@ -76,7 +76,6 @@ export const create = <
     const builder = extensionBuilder.builder?.(BuilderExtension.create)
     const overload = extensionBuilder.transport?.((name) =>
       Anyware.Overload.create({ discriminant: [`transportType`, name] })
-      // eslint-disable-next-line
     )?.type
     const transport: Transport | undefined = overload
       ? {
