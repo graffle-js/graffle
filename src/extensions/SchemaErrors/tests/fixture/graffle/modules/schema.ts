@@ -50,6 +50,10 @@ export namespace Schema {
       id: Query.id
       idNonNull: Query.idNonNull
       interface: Query.$interface
+      interfaceHierarchyChildA: Query.interfaceHierarchyChildA
+      interfaceHierarchyChildB: Query.interfaceHierarchyChildB
+      interfaceHierarchyGrandparents: Query.interfaceHierarchyGrandparents
+      interfaceHierarchyParents: Query.interfaceHierarchyParents
       interfaceNonNull: Query.interfaceNonNull
       interfaceWithArgs: Query.interfaceWithArgs
       listInt: Query.listInt
@@ -317,6 +321,62 @@ export namespace Schema {
       arguments: {}
       inlineType: [0]
       namedType: $$NamedTypes.$$Interface
+    }
+
+    export interface interfaceHierarchyChildA extends $.OutputField {
+      name: 'interfaceHierarchyChildA'
+      arguments: {
+        type: {
+          kind: 'InputField'
+          name: 'type'
+          inlineType: [0]
+          namedType: $$NamedTypes.$$ChildAInterfaceHierarchyMember
+        }
+      }
+      inlineType: [1, [1]]
+      namedType: $$NamedTypes.$$InterfaceChildA
+    }
+
+    export interface interfaceHierarchyChildB extends $.OutputField {
+      name: 'interfaceHierarchyChildB'
+      arguments: {
+        type: {
+          kind: 'InputField'
+          name: 'type'
+          inlineType: [0]
+          namedType: $$NamedTypes.$$ChildBInterfaceHierarchyMember
+        }
+      }
+      inlineType: [1, [1]]
+      namedType: $$NamedTypes.$$InterfaceChildB
+    }
+
+    export interface interfaceHierarchyGrandparents extends $.OutputField {
+      name: 'interfaceHierarchyGrandparents'
+      arguments: {
+        type: {
+          kind: 'InputField'
+          name: 'type'
+          inlineType: [0]
+          namedType: $$NamedTypes.$$GrandparentInterfaceHierarchyMember
+        }
+      }
+      inlineType: [1, [1]]
+      namedType: $$NamedTypes.$$InterfaceGrandparent
+    }
+
+    export interface interfaceHierarchyParents extends $.OutputField {
+      name: 'interfaceHierarchyParents'
+      arguments: {
+        type: {
+          kind: 'InputField'
+          name: 'type'
+          inlineType: [0]
+          namedType: $$NamedTypes.$$ParentInterfaceHierarchyMember
+        }
+      }
+      inlineType: [1, [1]]
+      namedType: $$NamedTypes.$$InterfaceParent
     }
 
     export interface interfaceNonNull extends $.OutputField {
@@ -1071,6 +1131,155 @@ export namespace Schema {
     }
   }
 
+  //                                            ObjectChildA
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export interface ObjectChildA extends $.OutputObject {
+    name: 'ObjectChildA'
+    fields: {
+      __typename: ObjectChildA.__typename
+      a: ObjectChildA.a
+      b: ObjectChildA.b
+      c1: ObjectChildA.c1
+      me: ObjectChildA.me
+    }
+  }
+
+  export namespace ObjectChildA {
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'ObjectChildA'
+      }
+    }
+
+    export interface a extends $.OutputField {
+      name: 'a'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
+    }
+
+    export interface b extends $.OutputField {
+      name: 'b'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
+    }
+
+    export interface c1 extends $.OutputField {
+      name: 'c1'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
+    }
+
+    export interface me extends $.OutputField {
+      name: 'me'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$Boolean
+    }
+  }
+
+  //                                            ObjectChildB
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export interface ObjectChildB extends $.OutputObject {
+    name: 'ObjectChildB'
+    fields: {
+      __typename: ObjectChildB.__typename
+      a: ObjectChildB.a
+      b: ObjectChildB.b
+      c2: ObjectChildB.c2
+      me: ObjectChildB.me
+    }
+  }
+
+  export namespace ObjectChildB {
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'ObjectChildB'
+      }
+    }
+
+    export interface a extends $.OutputField {
+      name: 'a'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
+    }
+
+    export interface b extends $.OutputField {
+      name: 'b'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
+    }
+
+    export interface c2 extends $.OutputField {
+      name: 'c2'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
+    }
+
+    export interface me extends $.OutputField {
+      name: 'me'
+      arguments: {}
+      inlineType: [1, [1]]
+      namedType: $$NamedTypes.$$Int
+    }
+  }
+
+  //                                         ObjectGrandparent
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export interface ObjectGrandparent extends $.OutputObject {
+    name: 'ObjectGrandparent'
+    fields: {
+      __typename: ObjectGrandparent.__typename
+      a: ObjectGrandparent.a
+      me: ObjectGrandparent.me
+    }
+  }
+
+  export namespace ObjectGrandparent {
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'ObjectGrandparent'
+      }
+    }
+
+    export interface a extends $.OutputField {
+      name: 'a'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
+    }
+
+    export interface me extends $.OutputField {
+      name: 'me'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$Int
+    }
+  }
+
   //                                            ObjectNested
   // --------------------------------------------------------------------------------------------------
   //
@@ -1107,6 +1316,53 @@ export namespace Schema {
       arguments: {}
       inlineType: [0]
       namedType: $$NamedTypes.$$Object1
+    }
+  }
+
+  //                                            ObjectParent
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export interface ObjectParent extends $.OutputObject {
+    name: 'ObjectParent'
+    fields: {
+      __typename: ObjectParent.__typename
+      a: ObjectParent.a
+      b: ObjectParent.b
+      me: ObjectParent.me
+    }
+  }
+
+  export namespace ObjectParent {
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'ObjectParent'
+      }
+    }
+
+    export interface a extends $.OutputField {
+      name: 'a'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
+    }
+
+    export interface b extends $.OutputField {
+      name: 'b'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
+    }
+
+    export interface me extends $.OutputField {
+      name: 'me'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
     }
   }
 
@@ -1348,6 +1604,9 @@ export namespace Schema {
   //
 
   export interface DateInterface1 extends $.Interface {
+    fields: {
+      date1: DateInterface1.date1
+    }
     name: 'DateInterface1'
     implementors: [DateObject1]
     implementorsUnion: DateObject1
@@ -1356,11 +1615,33 @@ export namespace Schema {
     }
   }
 
+  export namespace DateInterface1 {
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'DateInterface1'
+      }
+    }
+
+    export interface date1 extends $.OutputField {
+      name: 'date1'
+      arguments: {}
+      inlineType: [0]
+      namedType: $$NamedTypes.$$Date
+    }
+  }
+
   //                                               Error
   // --------------------------------------------------------------------------------------------------
   //
 
   export interface Error extends $.Interface {
+    fields: {
+      message: Error.message
+    }
     name: 'Error'
     implementors: [ErrorOne, ErrorTwo]
     implementorsUnion:
@@ -1372,11 +1653,33 @@ export namespace Schema {
     }
   }
 
+  export namespace Error {
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'Error'
+      }
+    }
+
+    export interface message extends $.OutputField {
+      name: 'message'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
+    }
+  }
+
   //                                             Interface
   // --------------------------------------------------------------------------------------------------
   //
 
   export interface Interface extends $.Interface {
+    fields: {
+      id: Interface.id
+    }
     name: 'Interface'
     implementors: [Object1ImplementingInterface, Object2ImplementingInterface]
     implementorsUnion:
@@ -1385,6 +1688,235 @@ export namespace Schema {
     implementorsIndex: {
       Object1ImplementingInterface: Object1ImplementingInterface
       Object2ImplementingInterface: Object2ImplementingInterface
+    }
+  }
+
+  export namespace Interface {
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'Interface'
+      }
+    }
+
+    export interface id extends $.OutputField {
+      name: 'id'
+      arguments: {}
+      inlineType: [0]
+      namedType: $$NamedTypes.$$ID
+    }
+  }
+
+  //                                          InterfaceChildA
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export interface InterfaceChildA extends $.Interface {
+    fields: {
+      a: InterfaceChildA.a
+      b: InterfaceChildA.b
+      c1: InterfaceChildA.c1
+    }
+    name: 'InterfaceChildA'
+    implementors: [ObjectChildA]
+    implementorsUnion: ObjectChildA
+    implementorsIndex: {
+      ObjectChildA: ObjectChildA
+    }
+  }
+
+  export namespace InterfaceChildA {
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'InterfaceChildA'
+      }
+    }
+
+    export interface a extends $.OutputField {
+      name: 'a'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
+    }
+
+    export interface b extends $.OutputField {
+      name: 'b'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
+    }
+
+    export interface c1 extends $.OutputField {
+      name: 'c1'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
+    }
+  }
+
+  //                                          InterfaceChildB
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export interface InterfaceChildB extends $.Interface {
+    fields: {
+      a: InterfaceChildB.a
+      b: InterfaceChildB.b
+      c2: InterfaceChildB.c2
+    }
+    name: 'InterfaceChildB'
+    implementors: [ObjectChildB]
+    implementorsUnion: ObjectChildB
+    implementorsIndex: {
+      ObjectChildB: ObjectChildB
+    }
+  }
+
+  export namespace InterfaceChildB {
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'InterfaceChildB'
+      }
+    }
+
+    export interface a extends $.OutputField {
+      name: 'a'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
+    }
+
+    export interface b extends $.OutputField {
+      name: 'b'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
+    }
+
+    export interface c2 extends $.OutputField {
+      name: 'c2'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
+    }
+  }
+
+  //                                        InterfaceGrandparent
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export interface InterfaceGrandparent extends $.Interface {
+    fields: {
+      a: InterfaceGrandparent.a
+    }
+    name: 'InterfaceGrandparent'
+    implementors: [
+      ObjectChildA,
+      ObjectChildB,
+      ObjectGrandparent,
+      ObjectParent,
+      InterfaceChildA,
+      InterfaceChildB,
+      InterfaceParent,
+    ]
+    implementorsUnion:
+      | ObjectChildA
+      | ObjectChildB
+      | ObjectGrandparent
+      | ObjectParent
+      | InterfaceChildA
+      | InterfaceChildB
+      | InterfaceParent
+    implementorsIndex: {
+      ObjectChildA: ObjectChildA
+      ObjectChildB: ObjectChildB
+      ObjectGrandparent: ObjectGrandparent
+      ObjectParent: ObjectParent
+      InterfaceChildA: InterfaceChildA
+      InterfaceChildB: InterfaceChildB
+      InterfaceParent: InterfaceParent
+    }
+  }
+
+  export namespace InterfaceGrandparent {
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'InterfaceGrandparent'
+      }
+    }
+
+    export interface a extends $.OutputField {
+      name: 'a'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
+    }
+  }
+
+  //                                          InterfaceParent
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export interface InterfaceParent extends $.Interface {
+    fields: {
+      a: InterfaceParent.a
+      b: InterfaceParent.b
+    }
+    name: 'InterfaceParent'
+    implementors: [ObjectChildA, ObjectChildB, ObjectParent, InterfaceChildA, InterfaceChildB]
+    implementorsUnion:
+      | ObjectChildA
+      | ObjectChildB
+      | ObjectParent
+      | InterfaceChildA
+      | InterfaceChildB
+    implementorsIndex: {
+      ObjectChildA: ObjectChildA
+      ObjectChildB: ObjectChildB
+      ObjectParent: ObjectParent
+      InterfaceChildA: InterfaceChildA
+      InterfaceChildB: InterfaceChildB
+    }
+  }
+
+  export namespace InterfaceParent {
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'InterfaceParent'
+      }
+    }
+
+    export interface a extends $.OutputField {
+      name: 'a'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
+    }
+
+    export interface b extends $.OutputField {
+      name: 'b'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
     }
   }
 
@@ -1523,6 +2055,53 @@ export namespace Schema {
       | 'Object1'
   }
 
+  //                                   ChildAInterfaceHierarchyMember
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export interface ChildAInterfaceHierarchyMember extends $.Enum {
+    name: 'ChildAInterfaceHierarchyMember'
+    members: ['InterfaceChildA']
+    membersUnion: 'InterfaceChildA'
+  }
+
+  //                                   ChildBInterfaceHierarchyMember
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export interface ChildBInterfaceHierarchyMember extends $.Enum {
+    name: 'ChildBInterfaceHierarchyMember'
+    members: ['InterfaceChildB']
+    membersUnion: 'InterfaceChildB'
+  }
+
+  //                                GrandparentInterfaceHierarchyMember
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export interface GrandparentInterfaceHierarchyMember extends $.Enum {
+    name: 'GrandparentInterfaceHierarchyMember'
+    members: ['InterfaceChildA', 'InterfaceChildB', 'InterfaceGrandparent', 'InterfaceParent']
+    membersUnion:
+      | 'InterfaceChildA'
+      | 'InterfaceChildB'
+      | 'InterfaceGrandparent'
+      | 'InterfaceParent'
+  }
+
+  //                                   ParentInterfaceHierarchyMember
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export interface ParentInterfaceHierarchyMember extends $.Enum {
+    name: 'ParentInterfaceHierarchyMember'
+    members: ['InterfaceChildA', 'InterfaceChildB', 'InterfaceParent']
+    membersUnion:
+      | 'InterfaceChildA'
+      | 'InterfaceChildB'
+      | 'InterfaceParent'
+  }
+
   //
   //
   //
@@ -1627,7 +2206,11 @@ export namespace Schema {
     export type $$Object1 = Object1
     export type $$Object1ImplementingInterface = Object1ImplementingInterface
     export type $$Object2ImplementingInterface = Object2ImplementingInterface
+    export type $$ObjectChildA = ObjectChildA
+    export type $$ObjectChildB = ObjectChildB
+    export type $$ObjectGrandparent = ObjectGrandparent
     export type $$ObjectNested = ObjectNested
+    export type $$ObjectParent = ObjectParent
     export type $$ObjectUnion = ObjectUnion
     export type $$lowerCaseObject = lowerCaseObject
     export type $$lowerCaseObject2 = lowerCaseObject2
@@ -1638,12 +2221,20 @@ export namespace Schema {
     export type $$DateInterface1 = DateInterface1
     export type $$Error = Error
     export type $$Interface = Interface
+    export type $$InterfaceChildA = InterfaceChildA
+    export type $$InterfaceChildB = InterfaceChildB
+    export type $$InterfaceGrandparent = InterfaceGrandparent
+    export type $$InterfaceParent = InterfaceParent
     export type $$DateUnion = DateUnion
     export type $$FooBarUnion = FooBarUnion
     export type $$Result = Result
     export type $$lowerCaseUnion = lowerCaseUnion
     export type $$ABCEnum = ABCEnum
     export type $$Case = Case
+    export type $$ChildAInterfaceHierarchyMember = ChildAInterfaceHierarchyMember
+    export type $$ChildBInterfaceHierarchyMember = ChildBInterfaceHierarchyMember
+    export type $$GrandparentInterfaceHierarchyMember = GrandparentInterfaceHierarchyMember
+    export type $$ParentInterfaceHierarchyMember = ParentInterfaceHierarchyMember
     export type $$Date = Date
     export type $$Boolean = Boolean
     export type $$Float = Float
@@ -1685,6 +2276,10 @@ export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$
     Mutation: Schema.Mutation
     ABCEnum: Schema.ABCEnum
     Case: Schema.Case
+    ChildAInterfaceHierarchyMember: Schema.ChildAInterfaceHierarchyMember
+    ChildBInterfaceHierarchyMember: Schema.ChildBInterfaceHierarchyMember
+    GrandparentInterfaceHierarchyMember: Schema.GrandparentInterfaceHierarchyMember
+    ParentInterfaceHierarchyMember: Schema.ParentInterfaceHierarchyMember
     Bar: Schema.Bar
     DateObject1: Schema.DateObject1
     DateObject2: Schema.DateObject2
@@ -1694,7 +2289,11 @@ export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$
     Object1: Schema.Object1
     Object1ImplementingInterface: Schema.Object1ImplementingInterface
     Object2ImplementingInterface: Schema.Object2ImplementingInterface
+    ObjectChildA: Schema.ObjectChildA
+    ObjectChildB: Schema.ObjectChildB
+    ObjectGrandparent: Schema.ObjectGrandparent
     ObjectNested: Schema.ObjectNested
+    ObjectParent: Schema.ObjectParent
     ObjectUnion: Schema.ObjectUnion
     lowerCaseObject: Schema.lowerCaseObject
     lowerCaseObject2: Schema.lowerCaseObject2
@@ -1705,6 +2304,10 @@ export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$
     DateInterface1: Schema.DateInterface1
     Error: Schema.Error
     Interface: Schema.Interface
+    InterfaceChildA: Schema.InterfaceChildA
+    InterfaceChildB: Schema.InterfaceChildB
+    InterfaceGrandparent: Schema.InterfaceGrandparent
+    InterfaceParent: Schema.InterfaceParent
   }
   objects: {
     Bar: Schema.Bar
@@ -1716,7 +2319,11 @@ export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$
     Object1: Schema.Object1
     Object1ImplementingInterface: Schema.Object1ImplementingInterface
     Object2ImplementingInterface: Schema.Object2ImplementingInterface
+    ObjectChildA: Schema.ObjectChildA
+    ObjectChildB: Schema.ObjectChildB
+    ObjectGrandparent: Schema.ObjectGrandparent
     ObjectNested: Schema.ObjectNested
+    ObjectParent: Schema.ObjectParent
     ObjectUnion: Schema.ObjectUnion
     lowerCaseObject: Schema.lowerCaseObject
     lowerCaseObject2: Schema.lowerCaseObject2
@@ -1731,6 +2338,10 @@ export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$
     DateInterface1: Schema.DateInterface1
     Error: Schema.Error
     Interface: Schema.Interface
+    InterfaceChildA: Schema.InterfaceChildA
+    InterfaceChildB: Schema.InterfaceChildB
+    InterfaceGrandparent: Schema.InterfaceGrandparent
+    InterfaceParent: Schema.InterfaceParent
   }
   scalarNamesUnion:
     | 'Date'

@@ -779,6 +779,10 @@ export namespace Schema {
   //
 
   export interface Being extends $.Interface {
+    fields: {
+      id: Being.id;
+      name: Being.name;
+    };
     name: "Being";
     implementors: [Patron, Pokemon, Trainer];
     implementorsUnion:
@@ -790,6 +794,32 @@ export namespace Schema {
       Pokemon: Pokemon;
       Trainer: Trainer;
     };
+  }
+
+  export namespace Being {
+    export interface __typename extends $.OutputField {
+      name: "__typename";
+      arguments: {};
+      inlineType: [1];
+      namedType: {
+        kind: "__typename";
+        value: "Being";
+      };
+    }
+
+    export interface id extends $.OutputField {
+      name: "id";
+      arguments: {};
+      inlineType: [0];
+      namedType: $$NamedTypes.$$ID;
+    }
+
+    export interface name extends $.OutputField {
+      name: "name";
+      arguments: {};
+      inlineType: [0];
+      namedType: $$NamedTypes.$$String;
+    }
   }
 
   //

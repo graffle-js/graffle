@@ -29,7 +29,11 @@ export interface $MethodsSelect {
   Object1: Object1
   Object1ImplementingInterface: Object1ImplementingInterface
   Object2ImplementingInterface: Object2ImplementingInterface
+  ObjectChildA: ObjectChildA
+  ObjectChildB: ObjectChildB
+  ObjectGrandparent: ObjectGrandparent
   ObjectNested: ObjectNested
+  ObjectParent: ObjectParent
   ObjectUnion: ObjectUnion
   lowerCaseObject: lowerCaseObject
   lowerCaseObject2: lowerCaseObject2
@@ -40,6 +44,10 @@ export interface $MethodsSelect {
   DateInterface1: DateInterface1
   Error: Error
   Interface: Interface
+  InterfaceChildA: InterfaceChildA
+  InterfaceChildB: InterfaceChildB
+  InterfaceGrandparent: InterfaceGrandparent
+  InterfaceParent: InterfaceParent
 }
 
 //
@@ -122,8 +130,24 @@ export interface Object2ImplementingInterface {
   ): $SelectionSet
 }
 
+export interface ObjectChildA {
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.ObjectChildA>): $SelectionSet
+}
+
+export interface ObjectChildB {
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.ObjectChildB>): $SelectionSet
+}
+
+export interface ObjectGrandparent {
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.ObjectGrandparent>): $SelectionSet
+}
+
 export interface ObjectNested {
   <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.ObjectNested>): $SelectionSet
+}
+
+export interface ObjectParent {
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.ObjectParent>): $SelectionSet
 }
 
 export interface ObjectUnion {
@@ -196,4 +220,20 @@ export interface Error {
 
 export interface Interface {
   <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Interface>): $SelectionSet
+}
+
+export interface InterfaceChildA {
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.InterfaceChildA>): $SelectionSet
+}
+
+export interface InterfaceChildB {
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.InterfaceChildB>): $SelectionSet
+}
+
+export interface InterfaceGrandparent {
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.InterfaceGrandparent>): $SelectionSet
+}
+
+export interface InterfaceParent {
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.InterfaceParent>): $SelectionSet
 }

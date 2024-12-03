@@ -15,19 +15,19 @@ import type { OutputField } from './OutputField.js'
 import type { ScalarsWildcard } from './ScalarsWildcard.js'
 
 // dprint-ignore
-export type OutputObject<
+export type OutputObjectLike<
   $SelectionSet extends object,
   $Schema extends Schema,
-  $Node extends Schema.OutputObject
+  $Node extends Schema.OutputObjectLike
 > =
-    & OutputObject_<$SelectionSet, $Schema, $Node>
+    & OutputObjectLike_<$SelectionSet, $Schema, $Node>
     & InlineFragmentKeys<$SelectionSet, $Schema, $Node>
 
 // dprint-ignore
-type OutputObject_<
+type OutputObjectLike_<
   $SelectionSet extends object,
   $Schema extends Schema,
-  $Node extends Schema.OutputObject,
+  $Node extends Schema.OutputObjectLike
 > =
     Select.SelectScalarsWildcard.IsSelectScalarsWildcard<$SelectionSet> extends true
       // todo this needs to be an extension and/or only available when sddm is present
@@ -38,7 +38,7 @@ type OutputObject_<
         & Alias<$Schema, $Node, $SelectionSet>
 
 // dprint-ignore
-type OtherKeys<$SelectionSet, $Schema extends Schema, $Node extends Schema.OutputObject> =
+type OtherKeys<$SelectionSet, $Schema extends Schema, $Node extends Schema.OutputObjectLike> =
   {
     [
       $Field in keyof $SelectionSet as
@@ -93,7 +93,7 @@ type PickApplicableFieldKeys<$SelectionSet> = StringKeyof<
   }
 >
 // dprint-ignore
-type InlineFragmentKeys<$SelectionSet extends object, $Schema extends Schema, $Node extends Schema.OutputObject> =
+type InlineFragmentKeys<$SelectionSet extends object, $Schema extends Schema, $Node extends Schema.OutputObjectLike> =
   InlineFragmentKey_<
     AssertExtendsObject<
       GetOrNever<$SelectionSet, Select.InlineFragment.Key>
@@ -103,21 +103,21 @@ type InlineFragmentKeys<$SelectionSet extends object, $Schema extends Schema, $N
   >
 
 // dprint-ignore
-type InlineFragmentKey_<$SelectionSet extends object, $Schema extends Schema, $Node extends Schema.OutputObject> =
+type InlineFragmentKey_<$SelectionSet extends object, $Schema extends Schema, $Node extends Schema.OutputObjectLike> =
   IsNever<$SelectionSet> extends true
     ? {}
     : IsNeverViaDirective<$SelectionSet> extends true
       ? {}
       : IsOptionalViaDirective<$SelectionSet> extends true
         ? Partial<
-            OutputObject_<OmitDirectiveAndArgumentKeys<$SelectionSet>, $Schema, $Node>
+            OutputObjectLike_<OmitDirectiveAndArgumentKeys<$SelectionSet>, $Schema, $Node>
           >
-        : OutputObject_<OmitDirectiveAndArgumentKeys<$SelectionSet>, $Schema, $Node>
+        : OutputObjectLike_<OmitDirectiveAndArgumentKeys<$SelectionSet>, $Schema, $Node>
 
 export namespace Errors {
   export type UnknownKey<
     $Key extends PropertyKey,
-    $Object extends Schema.OutputObject,
+    $Object extends Schema.OutputObjectLike,
   > = TSErrorDescriptive<'Object', `field "${PropertyKeyToString<$Key>}" does not exist on object "${$Object['name']}"`>
 }
 

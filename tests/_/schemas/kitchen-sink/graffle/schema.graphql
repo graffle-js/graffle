@@ -17,6 +17,14 @@ enum Case {
   Object1
 }
 
+enum ChildAInterfaceHierarchyMember {
+  InterfaceChildA
+}
+
+enum ChildBInterfaceHierarchyMember {
+  InterfaceChildB
+}
+
 """
 A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.This scalar is serialized to a string in ISO 8601 format and parsed from a string in ISO 8601 format.
 """
@@ -59,6 +67,13 @@ type Foo {
 """Union documentation."""
 union FooBarUnion = Bar | Foo
 
+enum GrandparentInterfaceHierarchyMember {
+  InterfaceChildA
+  InterfaceChildB
+  InterfaceGrandparent
+  InterfaceParent
+}
+
 input InputObject {
   date: Date
   dateRequired: Date!
@@ -81,6 +96,27 @@ input InputObjectNestedNonNull {
 
 interface Interface {
   id: ID
+}
+
+interface InterfaceChildA implements InterfaceGrandparent & InterfaceParent {
+  a: String!
+  b: String!
+  c1: String!
+}
+
+interface InterfaceChildB implements InterfaceGrandparent & InterfaceParent {
+  a: String!
+  b: String!
+  c2: String!
+}
+
+interface InterfaceGrandparent {
+  a: String!
+}
+
+interface InterfaceParent implements InterfaceGrandparent {
+  a: String!
+  b: String!
 }
 
 type Mutation {
@@ -107,13 +143,44 @@ type Object2ImplementingInterface implements Interface {
   id: ID
 }
 
+type ObjectChildA implements InterfaceChildA & InterfaceGrandparent & InterfaceParent {
+  a: String!
+  b: String!
+  c1: String!
+  me: Boolean!
+}
+
+type ObjectChildB implements InterfaceChildB & InterfaceGrandparent & InterfaceParent {
+  a: String!
+  b: String!
+  c2: String!
+  me: [Int!]!
+}
+
+type ObjectGrandparent implements InterfaceGrandparent {
+  a: String!
+  me: Int!
+}
+
 type ObjectNested {
   id: ID
   object: Object1
 }
 
+type ObjectParent implements InterfaceGrandparent & InterfaceParent {
+  a: String!
+  b: String!
+  me: String!
+}
+
 type ObjectUnion {
   fooBarUnion: FooBarUnion
+}
+
+enum ParentInterfaceHierarchyMember {
+  InterfaceChildA
+  InterfaceChildB
+  InterfaceParent
 }
 
 type Query {
@@ -141,6 +208,10 @@ type Query {
   id: ID
   idNonNull: ID!
   interface: Interface
+  interfaceHierarchyChildA(type: ChildAInterfaceHierarchyMember): [InterfaceChildA!]!
+  interfaceHierarchyChildB(type: ChildBInterfaceHierarchyMember): [InterfaceChildB!]!
+  interfaceHierarchyGrandparents(type: GrandparentInterfaceHierarchyMember): [InterfaceGrandparent!]!
+  interfaceHierarchyParents(type: ParentInterfaceHierarchyMember): [InterfaceParent!]!
   interfaceNonNull: Interface!
   interfaceWithArgs(id: ID!): Interface
   listInt: [Int]

@@ -2,7 +2,7 @@ import type { TSErrorDescriptive } from '../../lib/ts-error.js'
 import type { Schema } from '../../types/Schema/__.js'
 import type { InlineType } from '../../types/SchemaDrivenDataMap/InlineType.js'
 import type { Interface } from './Interface.js'
-import type { OutputObject } from './OutputObject.js'
+import type { OutputObjectLike } from './OutputObjectLike.js'
 import type { Union } from './Union.js'
 
 // dprint-ignore
@@ -19,7 +19,7 @@ type FieldType<
   $Node extends Schema.NamedOutputTypes,
 > = 
   $Node extends Schema.OutputObject                      ? $SelectionSet extends object
-                                                            ? OutputObject<$SelectionSet, $Schema, $Node>
+                                                            ? OutputObjectLike<$SelectionSet, $Schema, $Node>
                                                             : TSErrorDescriptive<'FieldType', 'When $Node extends Schema.OutputObject then $SelectionSet must extend object', { $Type: $Node; $SelectionSet: $SelectionSet; $Schema:$Schema } > :
   $Node extends Schema.Scalar                            ? Schema.Scalar.GetDecoded<$Node> : // TODO use TS compiler API to extract this type at build time.
   $Node extends Schema.Scalar.ScalarCodecless            ? Schema.Scalar.GetDecoded<GetCodecForCodecless<$Schema, $Node>> :

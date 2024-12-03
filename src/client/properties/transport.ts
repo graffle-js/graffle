@@ -1,5 +1,5 @@
 import type { PartialOrUndefined } from '../../lib/prelude.js'
-import type { ClientTransports } from '../../types/context.js'
+import type { ClientTransports, ClientTransportsConfiguration } from '../../types/context.js'
 import { type Context } from '../../types/context.js'
 import { type Client, type ExtensionChainableRegistry } from '../client.js'
 import { createProperties } from '../helpers.js'
@@ -53,7 +53,7 @@ export type TransportMethod<
          */
         <
           name extends ClientTransports.GetNames<$Context['transports']>,
-          config extends $Context['transports']['registry'][name]['config'] = {}
+          config extends undefined | $Context['transports']['registry'][name]['config'] = undefined
         >
           (name: name, config?: config):
             Client<
@@ -67,14 +67,15 @@ export type TransportMethod<
                           ? $Context['transports']['configurations']
                           : {
                             [configKey in keyof $Context['transports']['configurations']]:
-                              configKey extends $Context['transports']['current']
+                              configKey extends name
                                 ?
                                   {
                                     [configValueKey in keyof $Context['transports']['configurations'][configKey]]:
                                       configValueKey extends keyof config
-                                        ? config[configValueKey]
+                                        ? unknown
                                         : $Context['transports']['configurations'][configKey][configValueKey]
-                                  }
+                                  } & config
+                                  & {debug:config}
                                 : $Context['transports']['configurations'][configKey]
                           }
                       }
@@ -88,49 +89,51 @@ export type TransportMethod<
 
 export const transportProperties = createProperties((builder, state) => {
   return {
-    transport: (transport: string | object) => {
-      if (typeof transport === `string`) {
-        return builder({
-          ...state,
-          transports: {
-            ...state.transports,
-            current: transport,
-          },
-        })
-      }
-
-      if (!state.transports.current) {
+    transport: (...args: [config: object] | [transportName: string, config?: object]) => {
+      const transportName = typeof args[0] === `string` ? args[0] : state.transports.current
+      const transportConfig = (typeof args[0] === `string` ? args[1] : args[0]) ?? {}
+      if (!transportName) {
         throw new Error(`No transport is currently set.`)
       }
-
-      const newConfiguration = {
-        ...state.transports.configurations[state.transports.current] ?? {},
-        ...transport,
-      }
-      // hack: transport need to provide this function
-      if (state.transports.current === `http`) {
-        // @ts-expect-error
-        if (transport.headers) {
-          // @ts-expect-error
-          newConfiguration.headers = {
-            // @ts-expect-error
-            ...state.transports.configurations[state.transports.current]?.headers,
-            // @ts-expect-error
-            ...transport.headers,
-          }
-        }
-      }
-
-      return builder({
-        ...state,
-        transports: {
-          ...state.transports,
-          configurations: {
-            ...state.transports.configurations,
-            [state.transports.current]: newConfiguration,
-          },
-        },
-      })
+      const newContext = reducerTransportConfig(state, transportName, transportConfig)
+      return builder(newContext)
     },
   } as any
 })
+
+const reducerTransportConfig = (
+  state: Context,
+  transportName: string,
+  config: ClientTransportsConfiguration,
+): Context => {
+  const newConfiguration = {
+    ...state.transports.configurations[transportName] ?? {},
+    ...config,
+  }
+
+  // hack: transport need to provide this function
+  if (transportName === `http`) {
+    // @ts-expect-error
+    if (transportName.headers) {
+      // @ts-expect-error
+      newConfiguration.headers = {
+        // @ts-expect-error
+        ...state.transports.configurations[state.transports.current]?.headers,
+        // @ts-expect-error
+        ...transportName.headers,
+      }
+    }
+  }
+
+  return {
+    ...state,
+    transports: {
+      ...state.transports,
+      current: transportName,
+      configurations: {
+        ...state.transports.configurations,
+        [transportName]: newConfiguration,
+      },
+    },
+  }
+}

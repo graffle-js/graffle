@@ -102,10 +102,30 @@ export namespace Select {
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['Object2ImplementingInterface']
     >
+  export type ObjectChildA<$SelectionSet extends $$SelectionSets.ObjectChildA> = InferResult.OutputObject<
+    $SelectionSet,
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['ObjectChildA']
+  >
+  export type ObjectChildB<$SelectionSet extends $$SelectionSets.ObjectChildB> = InferResult.OutputObject<
+    $SelectionSet,
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['ObjectChildB']
+  >
+  export type ObjectGrandparent<$SelectionSet extends $$SelectionSets.ObjectGrandparent> = InferResult.OutputObject<
+    $SelectionSet,
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['ObjectGrandparent']
+  >
   export type ObjectNested<$SelectionSet extends $$SelectionSets.ObjectNested> = InferResult.OutputObject<
     $SelectionSet,
     $$Schema.Schema,
     $$Schema.Schema['allTypes']['ObjectNested']
+  >
+  export type ObjectParent<$SelectionSet extends $$SelectionSets.ObjectParent> = InferResult.OutputObject<
+    $SelectionSet,
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['ObjectParent']
   >
   export type ObjectUnion<$SelectionSet extends $$SelectionSets.ObjectUnion> = InferResult.OutputObject<
     $SelectionSet,
@@ -162,5 +182,25 @@ export namespace Select {
     $SelectionSet,
     $$Schema.Schema,
     $$Schema.Schema['allTypes']['Interface']
+  >
+  export type InterfaceChildA<$SelectionSet extends $$SelectionSets.InterfaceChildA> = InferResult.Interface<
+    $SelectionSet,
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['InterfaceChildA']
+  >
+  export type InterfaceChildB<$SelectionSet extends $$SelectionSets.InterfaceChildB> = InferResult.Interface<
+    $SelectionSet,
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['InterfaceChildB']
+  >
+  export type InterfaceGrandparent<$SelectionSet extends $$SelectionSets.InterfaceGrandparent> = InferResult.Interface<
+    $SelectionSet,
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['InterfaceGrandparent']
+  >
+  export type InterfaceParent<$SelectionSet extends $$SelectionSets.InterfaceParent> = InferResult.Interface<
+    $SelectionSet,
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['InterfaceParent']
   >
 }

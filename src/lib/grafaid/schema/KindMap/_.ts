@@ -109,7 +109,11 @@ export const hasCustomScalars = (typeMapByKind: KindMap) => {
 }
 
 export const getInterfaceImplementors = (typeMap: KindMap, interfaceTypeSearch: GraphQLInterfaceType) => {
-  return typeMap.list.OutputObject.filter(objectType =>
+  const outputObjectTypes = typeMap.list.OutputObject.filter(objectType =>
     objectType.getInterfaces().filter(interfaceType => interfaceType.name === interfaceTypeSearch.name).length > 0
   )
+  const interfaceTypes = typeMap.list.Interface.filter(interfaceType =>
+    interfaceType.getInterfaces().filter(interfaceType => interfaceType.name === interfaceTypeSearch.name).length > 0
+  )
+  return [...outputObjectTypes, ...interfaceTypes]
 }

@@ -154,6 +154,30 @@ export interface Query<
    */
   interface?: Query.$interface$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Query.$interface<_$Scalars>>
   /**
+   * Select the `interfaceHierarchyChildA` field on the `Query` object. Its type is `InterfaceChildA` (a `Interface` kind of type).
+   */
+  interfaceHierarchyChildA?:
+    | Query.interfaceHierarchyChildA$Expanded<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.interfaceHierarchyChildA<_$Scalars>>
+  /**
+   * Select the `interfaceHierarchyChildB` field on the `Query` object. Its type is `InterfaceChildB` (a `Interface` kind of type).
+   */
+  interfaceHierarchyChildB?:
+    | Query.interfaceHierarchyChildB$Expanded<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.interfaceHierarchyChildB<_$Scalars>>
+  /**
+   * Select the `interfaceHierarchyGrandparents` field on the `Query` object. Its type is `InterfaceGrandparent` (a `Interface` kind of type).
+   */
+  interfaceHierarchyGrandparents?:
+    | Query.interfaceHierarchyGrandparents$Expanded<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.interfaceHierarchyGrandparents<_$Scalars>>
+  /**
+   * Select the `interfaceHierarchyParents` field on the `Query` object. Its type is `InterfaceParent` (a `Interface` kind of type).
+   */
+  interfaceHierarchyParents?:
+    | Query.interfaceHierarchyParents$Expanded<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.interfaceHierarchyParents<_$Scalars>>
+  /**
    * Select the `interfaceNonNull` field on the `Query` object. Its type is `Interface` (a `Interface` kind of type).
    */
   interfaceNonNull?:
@@ -1006,6 +1030,142 @@ export namespace Query {
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     $interface$SelectionSet<_$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type interfaceHierarchyChildA<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = interfaceHierarchyChildA$SelectionSet<_$Scalars>
+
+  export interface interfaceHierarchyChildA$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$InterfaceChildA<_$Scalars> {
+    /**
+     * Arguments for `interfaceHierarchyChildA` field. No arguments are required so you may omit this.
+     */
+    $?: interfaceHierarchyChildA$Arguments<_$Scalars>
+  }
+
+  export interface interfaceHierarchyChildA$Arguments<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
+    $type?: $NamedTypes.$ChildAInterfaceHierarchyMember | undefined | null
+  }
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `interfaceHierarchyChildA` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type interfaceHierarchyChildA$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    interfaceHierarchyChildA$SelectionSet<_$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type interfaceHierarchyChildB<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = interfaceHierarchyChildB$SelectionSet<_$Scalars>
+
+  export interface interfaceHierarchyChildB$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$InterfaceChildB<_$Scalars> {
+    /**
+     * Arguments for `interfaceHierarchyChildB` field. No arguments are required so you may omit this.
+     */
+    $?: interfaceHierarchyChildB$Arguments<_$Scalars>
+  }
+
+  export interface interfaceHierarchyChildB$Arguments<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
+    $type?: $NamedTypes.$ChildBInterfaceHierarchyMember | undefined | null
+  }
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `interfaceHierarchyChildB` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type interfaceHierarchyChildB$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    interfaceHierarchyChildB$SelectionSet<_$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type interfaceHierarchyGrandparents<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = interfaceHierarchyGrandparents$SelectionSet<_$Scalars>
+
+  export interface interfaceHierarchyGrandparents$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$InterfaceGrandparent<_$Scalars> {
+    /**
+     * Arguments for `interfaceHierarchyGrandparents` field. No arguments are required so you may omit this.
+     */
+    $?: interfaceHierarchyGrandparents$Arguments<_$Scalars>
+  }
+
+  export interface interfaceHierarchyGrandparents$Arguments<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
+    $type?: $NamedTypes.$GrandparentInterfaceHierarchyMember | undefined | null
+  }
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `interfaceHierarchyGrandparents` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type interfaceHierarchyGrandparents$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    interfaceHierarchyGrandparents$SelectionSet<_$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type interfaceHierarchyParents<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = interfaceHierarchyParents$SelectionSet<_$Scalars>
+
+  export interface interfaceHierarchyParents$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$InterfaceParent<_$Scalars> {
+    /**
+     * Arguments for `interfaceHierarchyParents` field. No arguments are required so you may omit this.
+     */
+    $?: interfaceHierarchyParents$Arguments<_$Scalars>
+  }
+
+  export interface interfaceHierarchyParents$Arguments<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
+    $type?: $NamedTypes.$ParentInterfaceHierarchyMember | undefined | null
+  }
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `interfaceHierarchyParents` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type interfaceHierarchyParents$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    interfaceHierarchyParents$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
@@ -1951,6 +2111,21 @@ export type Case =
   | 'ErrorTwo'
   | 'Object1'
 
+export type ChildAInterfaceHierarchyMember = 'InterfaceChildA'
+
+export type ChildBInterfaceHierarchyMember = 'InterfaceChildB'
+
+export type GrandparentInterfaceHierarchyMember =
+  | 'InterfaceChildA'
+  | 'InterfaceChildB'
+  | 'InterfaceGrandparent'
+  | 'InterfaceParent'
+
+export type ParentInterfaceHierarchyMember =
+  | 'InterfaceChildA'
+  | 'InterfaceChildB'
+  | 'InterfaceParent'
+
 //
 //
 //
@@ -2893,6 +3068,403 @@ export namespace Object2ImplementingInterface {
   >
 }
 
+//                                            ObjectChildA
+// --------------------------------------------------------------------------------------------------
+//
+
+// ----------------------------------------| Entrypoint Interface |
+
+export interface ObjectChildA<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends $Select.Bases.ObjectLike {
+  /**
+   * Select the `a` field on the `ObjectChildA` object. Its type is `String` (a `ScalarStandard` kind of type).
+   */
+  a?: ObjectChildA.a$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<ObjectChildA.a<_$Scalars>>
+  /**
+   * Select the `b` field on the `ObjectChildA` object. Its type is `String` (a `ScalarStandard` kind of type).
+   */
+  b?: ObjectChildA.b$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<ObjectChildA.b<_$Scalars>>
+  /**
+   * Select the `c1` field on the `ObjectChildA` object. Its type is `String` (a `ScalarStandard` kind of type).
+   */
+  c1?: ObjectChildA.c1$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<ObjectChildA.c1<_$Scalars>>
+  /**
+   * Select the `me` field on the `ObjectChildA` object. Its type is `Boolean` (a `ScalarStandard` kind of type).
+   */
+  me?: ObjectChildA.me$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<ObjectChildA.me<_$Scalars>>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | ObjectChildA$FragmentInline<_$Scalars>
+    | ObjectChildA$FragmentInline<_$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+
+export interface ObjectChildA$FragmentInline<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends ObjectChildA<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
+
+// ----------------------------------------| Fields |
+
+export namespace ObjectChildA {
+  export type a<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | a$SelectionSet<_$Scalars>
+
+  export interface a$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `a` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type a$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | a$SelectionSet<_$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type b<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | b$SelectionSet<_$Scalars>
+
+  export interface b$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `b` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type b$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | b$SelectionSet<_$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type c1<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | c1$SelectionSet<_$Scalars>
+
+  export interface c1$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `c1` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type c1$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | c1$SelectionSet<_$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type me<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | me$SelectionSet<_$Scalars>
+
+  export interface me$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `me` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type me$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | me$SelectionSet<_$Scalars>
+  >
+}
+
+//                                            ObjectChildB
+// --------------------------------------------------------------------------------------------------
+//
+
+// ----------------------------------------| Entrypoint Interface |
+
+export interface ObjectChildB<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends $Select.Bases.ObjectLike {
+  /**
+   * Select the `a` field on the `ObjectChildB` object. Its type is `String` (a `ScalarStandard` kind of type).
+   */
+  a?: ObjectChildB.a$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<ObjectChildB.a<_$Scalars>>
+  /**
+   * Select the `b` field on the `ObjectChildB` object. Its type is `String` (a `ScalarStandard` kind of type).
+   */
+  b?: ObjectChildB.b$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<ObjectChildB.b<_$Scalars>>
+  /**
+   * Select the `c2` field on the `ObjectChildB` object. Its type is `String` (a `ScalarStandard` kind of type).
+   */
+  c2?: ObjectChildB.c2$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<ObjectChildB.c2<_$Scalars>>
+  /**
+   * Select the `me` field on the `ObjectChildB` object. Its type is `Int` (a `ScalarStandard` kind of type).
+   */
+  me?: ObjectChildB.me$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<ObjectChildB.me<_$Scalars>>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | ObjectChildB$FragmentInline<_$Scalars>
+    | ObjectChildB$FragmentInline<_$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+
+export interface ObjectChildB$FragmentInline<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends ObjectChildB<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
+
+// ----------------------------------------| Fields |
+
+export namespace ObjectChildB {
+  export type a<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | a$SelectionSet<_$Scalars>
+
+  export interface a$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `a` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type a$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | a$SelectionSet<_$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type b<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | b$SelectionSet<_$Scalars>
+
+  export interface b$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `b` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type b$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | b$SelectionSet<_$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type c2<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | c2$SelectionSet<_$Scalars>
+
+  export interface c2$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `c2` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type c2$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | c2$SelectionSet<_$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type me<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | me$SelectionSet<_$Scalars>
+
+  export interface me$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `me` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type me$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | me$SelectionSet<_$Scalars>
+  >
+}
+
+//                                         ObjectGrandparent
+// --------------------------------------------------------------------------------------------------
+//
+
+// ----------------------------------------| Entrypoint Interface |
+
+export interface ObjectGrandparent<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends $Select.Bases.ObjectLike {
+  /**
+   * Select the `a` field on the `ObjectGrandparent` object. Its type is `String` (a `ScalarStandard` kind of type).
+   */
+  a?: ObjectGrandparent.a$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<ObjectGrandparent.a<_$Scalars>>
+  /**
+   * Select the `me` field on the `ObjectGrandparent` object. Its type is `Int` (a `ScalarStandard` kind of type).
+   */
+  me?: ObjectGrandparent.me$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<ObjectGrandparent.me<_$Scalars>>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | ObjectGrandparent$FragmentInline<_$Scalars>
+    | ObjectGrandparent$FragmentInline<_$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+
+export interface ObjectGrandparent$FragmentInline<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends ObjectGrandparent<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
+
+// ----------------------------------------| Fields |
+
+export namespace ObjectGrandparent {
+  export type a<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | a$SelectionSet<_$Scalars>
+
+  export interface a$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `a` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type a$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | a$SelectionSet<_$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type me<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | me$SelectionSet<_$Scalars>
+
+  export interface me$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `me` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type me$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | me$SelectionSet<_$Scalars>
+  >
+}
+
 //                                            ObjectNested
 // --------------------------------------------------------------------------------------------------
 //
@@ -2983,6 +3555,129 @@ export namespace ObjectNested {
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     $object$SelectionSet<_$Scalars>
+  >
+}
+
+//                                            ObjectParent
+// --------------------------------------------------------------------------------------------------
+//
+
+// ----------------------------------------| Entrypoint Interface |
+
+export interface ObjectParent<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends $Select.Bases.ObjectLike {
+  /**
+   * Select the `a` field on the `ObjectParent` object. Its type is `String` (a `ScalarStandard` kind of type).
+   */
+  a?: ObjectParent.a$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<ObjectParent.a<_$Scalars>>
+  /**
+   * Select the `b` field on the `ObjectParent` object. Its type is `String` (a `ScalarStandard` kind of type).
+   */
+  b?: ObjectParent.b$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<ObjectParent.b<_$Scalars>>
+  /**
+   * Select the `me` field on the `ObjectParent` object. Its type is `String` (a `ScalarStandard` kind of type).
+   */
+  me?: ObjectParent.me$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<ObjectParent.me<_$Scalars>>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | ObjectParent$FragmentInline<_$Scalars>
+    | ObjectParent$FragmentInline<_$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+
+export interface ObjectParent$FragmentInline<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends ObjectParent<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
+
+// ----------------------------------------| Fields |
+
+export namespace ObjectParent {
+  export type a<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | a$SelectionSet<_$Scalars>
+
+  export interface a$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `a` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type a$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | a$SelectionSet<_$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type b<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | b$SelectionSet<_$Scalars>
+
+  export interface b$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `b` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type b$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | b$SelectionSet<_$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type me<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | me$SelectionSet<_$Scalars>
+
+  export interface me$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `me` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type me$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | me$SelectionSet<_$Scalars>
   >
 }
 
@@ -3544,6 +4239,379 @@ export namespace Interface {
   >
 }
 
+//                                          InterfaceChildA
+// --------------------------------------------------------------------------------------------------
+//
+
+export interface InterfaceChildA<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends $Select.Bases.ObjectLike {
+  a?: InterfaceChildA.a<_$Scalars>
+  b?: InterfaceChildA.b<_$Scalars>
+  c1?: InterfaceChildA.c1<_$Scalars>
+  ___on_ObjectChildA?: ObjectChildA<_$Scalars>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | InterfaceChildA$FragmentInline<_$Scalars>
+    | InterfaceChildA$FragmentInline<_$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected. Since this is a interface type and thus polymorphic,
+   * the name is one of the implementor type names, whichever is ultimately returned at runtime.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+
+export interface InterfaceChildA$FragmentInline<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends InterfaceChildA<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
+
+export namespace InterfaceChildA {
+  export type a<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | a$SelectionSet<_$Scalars>
+
+  export interface a$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `a` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type a$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | a$SelectionSet<_$Scalars>
+  >
+
+  export type b<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | b$SelectionSet<_$Scalars>
+
+  export interface b$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `b` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type b$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | b$SelectionSet<_$Scalars>
+  >
+
+  export type c1<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | c1$SelectionSet<_$Scalars>
+
+  export interface c1$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `c1` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type c1$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | c1$SelectionSet<_$Scalars>
+  >
+}
+
+//                                          InterfaceChildB
+// --------------------------------------------------------------------------------------------------
+//
+
+export interface InterfaceChildB<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends $Select.Bases.ObjectLike {
+  a?: InterfaceChildB.a<_$Scalars>
+  b?: InterfaceChildB.b<_$Scalars>
+  c2?: InterfaceChildB.c2<_$Scalars>
+  ___on_ObjectChildB?: ObjectChildB<_$Scalars>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | InterfaceChildB$FragmentInline<_$Scalars>
+    | InterfaceChildB$FragmentInline<_$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected. Since this is a interface type and thus polymorphic,
+   * the name is one of the implementor type names, whichever is ultimately returned at runtime.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+
+export interface InterfaceChildB$FragmentInline<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends InterfaceChildB<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
+
+export namespace InterfaceChildB {
+  export type a<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | a$SelectionSet<_$Scalars>
+
+  export interface a$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `a` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type a$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | a$SelectionSet<_$Scalars>
+  >
+
+  export type b<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | b$SelectionSet<_$Scalars>
+
+  export interface b$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `b` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type b$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | b$SelectionSet<_$Scalars>
+  >
+
+  export type c2<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | c2$SelectionSet<_$Scalars>
+
+  export interface c2$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `c2` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type c2$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | c2$SelectionSet<_$Scalars>
+  >
+}
+
+//                                        InterfaceGrandparent
+// --------------------------------------------------------------------------------------------------
+//
+
+export interface InterfaceGrandparent<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends $Select.Bases.ObjectLike {
+  a?: InterfaceGrandparent.a<_$Scalars>
+  ___on_ObjectChildA?: ObjectChildA<_$Scalars>
+  ___on_ObjectChildB?: ObjectChildB<_$Scalars>
+  ___on_ObjectGrandparent?: ObjectGrandparent<_$Scalars>
+  ___on_ObjectParent?: ObjectParent<_$Scalars>
+  ___on_InterfaceChildA?: InterfaceChildA<_$Scalars>
+  ___on_InterfaceChildB?: InterfaceChildB<_$Scalars>
+  ___on_InterfaceParent?: InterfaceParent<_$Scalars>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | InterfaceGrandparent$FragmentInline<_$Scalars>
+    | InterfaceGrandparent$FragmentInline<_$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected. Since this is a interface type and thus polymorphic,
+   * the name is one of the implementor type names, whichever is ultimately returned at runtime.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+
+export interface InterfaceGrandparent$FragmentInline<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends InterfaceGrandparent<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
+
+export namespace InterfaceGrandparent {
+  export type a<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | a$SelectionSet<_$Scalars>
+
+  export interface a$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `a` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type a$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | a$SelectionSet<_$Scalars>
+  >
+}
+
+//                                          InterfaceParent
+// --------------------------------------------------------------------------------------------------
+//
+
+export interface InterfaceParent<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends $Select.Bases.ObjectLike {
+  a?: InterfaceParent.a<_$Scalars>
+  b?: InterfaceParent.b<_$Scalars>
+  ___on_ObjectChildA?: ObjectChildA<_$Scalars>
+  ___on_ObjectChildB?: ObjectChildB<_$Scalars>
+  ___on_ObjectParent?: ObjectParent<_$Scalars>
+  ___on_InterfaceChildA?: InterfaceChildA<_$Scalars>
+  ___on_InterfaceChildB?: InterfaceChildB<_$Scalars>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | InterfaceParent$FragmentInline<_$Scalars>
+    | InterfaceParent$FragmentInline<_$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected. Since this is a interface type and thus polymorphic,
+   * the name is one of the implementor type names, whichever is ultimately returned at runtime.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+
+export interface InterfaceParent$FragmentInline<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends InterfaceParent<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
+
+export namespace InterfaceParent {
+  export type a<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | a$SelectionSet<_$Scalars>
+
+  export interface a$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `a` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type a$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | a$SelectionSet<_$Scalars>
+  >
+
+  export type b<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | b$SelectionSet<_$Scalars>
+
+  export interface b$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `b` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type b$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | b$SelectionSet<_$Scalars>
+  >
+}
+
 /**
  * [1] These definitions serve to allow field selection interfaces to extend their respective object type without
  *     name clashing between the field name and the object name.
@@ -3559,6 +4627,10 @@ export namespace $NamedTypes {
   > = Mutation<_$Scalars>
   export type $ABCEnum = ABCEnum
   export type $Case = Case
+  export type $ChildAInterfaceHierarchyMember = ChildAInterfaceHierarchyMember
+  export type $ChildBInterfaceHierarchyMember = ChildBInterfaceHierarchyMember
+  export type $GrandparentInterfaceHierarchyMember = GrandparentInterfaceHierarchyMember
+  export type $ParentInterfaceHierarchyMember = ParentInterfaceHierarchyMember
   export type $InputObject<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = InputObject<_$Scalars>
@@ -3596,9 +4668,21 @@ export namespace $NamedTypes {
   export type $Object2ImplementingInterface<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = Object2ImplementingInterface<_$Scalars>
+  export type $ObjectChildA<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = ObjectChildA<_$Scalars>
+  export type $ObjectChildB<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = ObjectChildB<_$Scalars>
+  export type $ObjectGrandparent<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = ObjectGrandparent<_$Scalars>
   export type $ObjectNested<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = ObjectNested<_$Scalars>
+  export type $ObjectParent<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = ObjectParent<_$Scalars>
   export type $ObjectUnion<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = ObjectUnion<_$Scalars>
@@ -3627,4 +4711,16 @@ export namespace $NamedTypes {
   export type $Interface<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = Interface<_$Scalars>
+  export type $InterfaceChildA<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = InterfaceChildA<_$Scalars>
+  export type $InterfaceChildB<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = InterfaceChildB<_$Scalars>
+  export type $InterfaceGrandparent<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = InterfaceGrandparent<_$Scalars>
+  export type $InterfaceParent<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = InterfaceParent<_$Scalars>
 }

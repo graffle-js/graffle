@@ -3,7 +3,14 @@
 import SchemaBuilder from '@pothos/core'
 import SimpleObjectsPlugin from '@pothos/plugin-simple-objects'
 import { DateTimeISOResolver } from 'graphql-scalars'
-import { db } from '../db.js'
+import { values } from '../../../../src/lib/prelude.js'
+import {
+  db,
+  GrandparentInterfaceHierarchyMemberEnum,
+  InterfaceChildAEnum,
+  InterfaceChildBEnum,
+  InterfaceParentEnum,
+} from '../db.js'
 
 const builder = new SchemaBuilder<{
   Scalars: {
@@ -17,6 +24,81 @@ const builder = new SchemaBuilder<{
 })
 
 builder.addScalarType(`Date`, DateTimeISOResolver, {})
+
+const InterfaceGrandparent = builder.interfaceRef<db.InterfaceGrandparent>(`InterfaceGrandparent`).implement({
+  resolveType(parent) {
+    // @ts-expect-error
+    return parent.type
+  },
+  fields: t => ({
+    a: t.string({ nullable: false }),
+  }),
+})
+
+const _ObjectGrandparent = builder.objectRef<db.ObjectGrandparent>(`ObjectGrandparent`).implement({
+  interfaces: [InterfaceGrandparent],
+  fields: t => ({
+    me: t.int({ nullable: false, resolve: parent => parent.me }),
+  }),
+})
+
+const InterfaceParent = builder.interfaceRef<db.InterfaceParent>(`InterfaceParent`).implement({
+  interfaces: [InterfaceGrandparent],
+  resolveType(parent) {
+    // @ts-expect-error
+    return parent.type
+  },
+  fields: t => ({
+    b: t.string({ nullable: false }),
+  }),
+})
+
+const _ObjectParent = builder.objectRef<db.ObjectParent>(`ObjectParent`).implement({
+  interfaces: [InterfaceParent, InterfaceGrandparent],
+  fields: t => ({
+    me: t.string({ nullable: false, resolve: parent => parent.me }),
+  }),
+})
+
+const InterfaceChildA = builder.interfaceRef<db.InterfaceChildA>(`InterfaceChildA`).implement({
+  interfaces: [InterfaceParent, InterfaceGrandparent],
+  resolveType(parent) {
+    // @ts-expect-error
+    return parent.type
+  },
+  fields: t => ({
+    c1: t.string({ nullable: false }),
+  }),
+})
+
+const _ObjectChildA = builder.objectRef<db.ObjectChildA>(`ObjectChildA`).implement({
+  interfaces: [InterfaceChildA, InterfaceParent, InterfaceGrandparent],
+  fields: t => ({
+    me: t.boolean({ nullable: false, resolve: parent => parent.me }),
+  }),
+})
+
+const InterfaceChildB = builder.interfaceRef<db.InterfaceChildB>(`InterfaceChildB`).implement({
+  interfaces: [InterfaceParent, InterfaceGrandparent],
+  resolveType(parent) {
+    // @ts-expect-error
+    return parent.type
+  },
+  fields: t => ({
+    c2: t.string({ nullable: false }),
+  }),
+})
+
+const _ObjectChildB = builder.objectRef<db.ObjectChildB>(`ObjectChildB`).implement({
+  interfaces: [InterfaceChildB, InterfaceParent, InterfaceGrandparent],
+  fields: t => ({
+    me: t.field({
+      nullable: false,
+      type: t.listRef(`Int`),
+      resolve: parent => parent.me,
+    }),
+  }),
+})
 
 const DateInterface1 = builder.simpleInterface(`DateInterface1`, {
   fields: t => ({
@@ -210,8 +292,72 @@ const ObjectUnion = builder.simpleObject(`ObjectUnion`, {
   }),
 })
 
+const InterfaceHierarchyMemberGrandparent = builder.enumType(`GrandparentInterfaceHierarchyMember`, {
+  values: values(GrandparentInterfaceHierarchyMemberEnum),
+})
+
+const InterfaceHierarchyMemberParent = builder.enumType(`ParentInterfaceHierarchyMember`, {
+  values: values(InterfaceParentEnum),
+})
+
+const InterfaceHierarchyMemberChildA = builder.enumType(`ChildAInterfaceHierarchyMember`, {
+  values: values(InterfaceChildAEnum),
+})
+
+const InterfaceHierarchyMemberChildB = builder.enumType(`ChildBInterfaceHierarchyMember`, {
+  values: values(InterfaceChildBEnum),
+})
+
 builder.queryType({
   fields: t => ({
+    interfaceHierarchyGrandparents: t.field({
+      type: t.listRef(InterfaceGrandparent),
+      nullable: false,
+      args: {
+        type: t.arg({ type: InterfaceHierarchyMemberGrandparent, required: false }),
+      },
+      resolve: (_, args) => {
+        const type = args.type ?? `InterfaceGrandparent`
+        const data = db.interfaceHierarchLists[type].mixed
+        return data
+      },
+    }),
+    interfaceHierarchyParents: t.field({
+      type: t.listRef(InterfaceParent),
+      nullable: false,
+      args: {
+        type: t.arg({ type: InterfaceHierarchyMemberParent, required: false }),
+      },
+      resolve: (_, args) => {
+        const type = args.type ?? `InterfaceParent`
+        const data = db.interfaceHierarchLists[type].mixed
+        return data
+      },
+    }),
+    interfaceHierarchyChildA: t.field({
+      type: t.listRef(InterfaceChildA),
+      nullable: false,
+      args: {
+        type: t.arg({ type: InterfaceHierarchyMemberChildA, required: false }),
+      },
+      resolve: (_, args) => {
+        const type = args.type ?? `InterfaceChildA`
+        const data = db.interfaceHierarchLists[type].mixed
+        return data
+      },
+    }),
+    interfaceHierarchyChildB: t.field({
+      type: t.listRef(InterfaceChildB),
+      nullable: false,
+      args: {
+        type: t.arg({ type: InterfaceHierarchyMemberChildB, required: false }),
+      },
+      resolve: (_, args) => {
+        const type = args.type ?? `InterfaceChildB`
+        const data = db.interfaceHierarchLists[type].mixed
+        return data
+      },
+    }),
     // error
     error: t.string({
       args: { case: t.arg.string({ required: false }) },

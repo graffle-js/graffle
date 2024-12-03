@@ -269,6 +269,59 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
+  interfaceHierarchyChildA: <$SelectionSet>(
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.interfaceHierarchyChildA<$Context['scalars']>>,
+  ) => Promise<
+    & (null | {})
+    & $$Utilities.HandleOutputGraffleRootField<
+      $Context,
+      InferResult.OperationQuery<{ interfaceHierarchyChildA: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
+      'interfaceHierarchyChildA'
+    >
+  >
+
+  interfaceHierarchyChildB: <$SelectionSet>(
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.interfaceHierarchyChildB<$Context['scalars']>>,
+  ) => Promise<
+    & (null | {})
+    & $$Utilities.HandleOutputGraffleRootField<
+      $Context,
+      InferResult.OperationQuery<{ interfaceHierarchyChildB: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
+      'interfaceHierarchyChildB'
+    >
+  >
+
+  interfaceHierarchyGrandparents: <$SelectionSet>(
+    selectionSet: $$Utilities.Exact<
+      $SelectionSet,
+      $$SelectionSets.Query.interfaceHierarchyGrandparents<$Context['scalars']>
+    >,
+  ) => Promise<
+    & (null | {})
+    & $$Utilities.HandleOutputGraffleRootField<
+      $Context,
+      InferResult.OperationQuery<
+        { interfaceHierarchyGrandparents: $SelectionSet },
+        $$Schema.Schema<$Context['scalars']>
+      >,
+      'interfaceHierarchyGrandparents'
+    >
+  >
+
+  interfaceHierarchyParents: <$SelectionSet>(
+    selectionSet: $$Utilities.Exact<
+      $SelectionSet,
+      $$SelectionSets.Query.interfaceHierarchyParents<$Context['scalars']>
+    >,
+  ) => Promise<
+    & (null | {})
+    & $$Utilities.HandleOutputGraffleRootField<
+      $Context,
+      InferResult.OperationQuery<{ interfaceHierarchyParents: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
+      'interfaceHierarchyParents'
+    >
+  >
+
   interfaceNonNull: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.interfaceNonNull<$Context['scalars']>>,
   ) => Promise<

@@ -29,13 +29,15 @@ export interface ClientTransports {
   configurations: ClientTransportsConfigurations
 }
 
-interface ClientTransportsRegistry {
+export interface ClientTransportsRegistry {
   [name: string]: Transport
 }
 
-interface ClientTransportsConfigurations {
-  [name: string]: object
+export interface ClientTransportsConfigurations {
+  [name: string]: ClientTransportsConfiguration
 }
+
+export type ClientTransportsConfiguration = object
 
 export namespace ClientTransports {
   export namespace Errors {

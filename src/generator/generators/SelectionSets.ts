@@ -139,8 +139,8 @@ const InputObject = createCodeGenerator<{ type: Grafaid.Schema.InputObjectType }
 
 const Interface = createCodeGenerator<{ type: Grafaid.Schema.InterfaceType }>(
   ({ config, type, code }) => {
-    const fields = values(type.getFields())
-    const fieldsRendered = fields.map(field => {
+    const directFields = values(type.getFields())
+    const fieldsRendered = directFields.map(field => {
       return H.outputFieldReference(field.name, `${renderName(type)}.${renderName(field)}`)
     }).join(`\n`)
     const implementorTypes = Grafaid.Schema.KindMap.getInterfaceImplementors(config.schema.kindMap, type)
@@ -167,7 +167,7 @@ const Interface = createCodeGenerator<{ type: Grafaid.Schema.InterfaceType }>(
     code()
     code(`
       export namespace ${renderName(type)} {
-        ${fields.map((field) => renderOutputField({ config, field })).join(`\n`)}
+        ${directFields.map((field) => renderOutputField({ config, field })).join(`\n`)}
       }
     `)
     code()

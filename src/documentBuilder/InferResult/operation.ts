@@ -2,7 +2,7 @@ import type { OperationTypeNode } from 'graphql'
 import type { Grafaid } from '../../lib/grafaid/__.js'
 import { type ExcludeNull } from '../../lib/prelude.js'
 import type { Schema } from '../../types/Schema/__.js'
-import type { OutputObject } from './OutputObject.js'
+import type { OutputObjectLike } from './OutputObjectLike.js'
 
 // dprint-ignore
 export type OperationQuery<$SelectionSet extends object, $Schema extends Schema> =
@@ -20,4 +20,4 @@ export type Operation<
   $SelectionSet extends object,
   $Schema extends Schema,
   $OperationType extends Grafaid.Document.OperationTypeNode,
-> = OutputObject<$SelectionSet, $Schema, ExcludeNull<$Schema['Root'][$OperationType]>>
+> = OutputObjectLike<$SelectionSet, $Schema, ExcludeNull<$Schema['Root'][$OperationType]>>

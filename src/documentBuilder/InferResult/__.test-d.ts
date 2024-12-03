@@ -84,7 +84,6 @@ assertEqual<$<{ unionFooBarWithArgs: { $: { id: `abc` }, ___on_Foo: { id: true }
 // Union fragments Case
 assertEqual<$<{ lowerCaseUnion: { __typename:true, ___on_lowerCaseObject: { id: true }, ___on_lowerCaseObject2: { int: true } } }>, { lowerCaseUnion: null | { __typename: 'lowerCaseObject'; id: null|string } | { __typename: 'lowerCaseObject2'; int: null|number } }>()
 
-
 // Interface
 assertEqual<$<{ interface: { ___on_Object1ImplementingInterface: { id: true }}}>, { interface: null | { id: null | string} | {} }>()
 assertEqual<$<{ interface: { ___on_Object1ImplementingInterface: { int: true }}}>, { interface: null | { int: null | number} | {} }>()
@@ -176,5 +175,19 @@ assertEqual<$<{ ___: { $skip: false; id: true }}>                               
 type Result =  $<{ id2: true }>
 // unknown field
 assertEqual<Result, { id2: InferResult.Errors.UnknownKey<'id2', Schema.Query> }>()
+
+// Interface Hierarchy
+
+
+// Can select own fields directly
+assertEqual<$<{ interfaceHierarchyGrandparents: { a: true } }>, { interfaceHierarchyGrandparents: { a: string }[] }>()
+
+// Can use inline fragment of an implementor interface
+assertEqual<$<{ interfaceHierarchyGrandparents: { ___on_InterfaceParent: { a: true } } }>, { interfaceHierarchyGrandparents: ({}|{ a: string })[] }>()
+assertEqual<$<{ interfaceHierarchyGrandparents: { ___on_InterfaceChildA: { a: true } } }>, { interfaceHierarchyGrandparents: ({}|{ a: string })[] }>()
+assertEqual<$<{ interfaceHierarchyGrandparents: { ___on_InterfaceChildB: { a: true } } }>, { interfaceHierarchyGrandparents: ({}|{ a: string })[] }>()
+
+// @ts-expect-error cannot select child interface field
+assertEqual<$<{ interfaceHierarchyGrandparents: { ___on_InterfaceParent: { c1: true } } }>, { interfaceHierarchyGrandparents: { a: string }[] }>()
 
 }

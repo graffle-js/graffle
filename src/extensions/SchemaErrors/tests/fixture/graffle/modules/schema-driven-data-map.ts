@@ -70,6 +70,26 @@ const Case: $$Utilities.SchemaDrivenDataMap.Enum = {
   n: 'Case',
 }
 
+const ChildAInterfaceHierarchyMember: $$Utilities.SchemaDrivenDataMap.Enum = {
+  k: 'enum',
+  n: 'ChildAInterfaceHierarchyMember',
+}
+
+const ChildBInterfaceHierarchyMember: $$Utilities.SchemaDrivenDataMap.Enum = {
+  k: 'enum',
+  n: 'ChildBInterfaceHierarchyMember',
+}
+
+const GrandparentInterfaceHierarchyMember: $$Utilities.SchemaDrivenDataMap.Enum = {
+  k: 'enum',
+  n: 'GrandparentInterfaceHierarchyMember',
+}
+
+const ParentInterfaceHierarchyMember: $$Utilities.SchemaDrivenDataMap.Enum = {
+  k: 'enum',
+  n: 'ParentInterfaceHierarchyMember',
+}
+
 //
 //
 //
@@ -219,12 +239,45 @@ const Object2ImplementingInterface: $$Utilities.SchemaDrivenDataMap.OutputObject
   },
 }
 
+const ObjectChildA: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+  f: {
+    a: {},
+    b: {},
+    c1: {},
+    me: {},
+  },
+}
+
+const ObjectChildB: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+  f: {
+    a: {},
+    b: {},
+    c2: {},
+    me: {},
+  },
+}
+
+const ObjectGrandparent: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+  f: {
+    a: {},
+    me: {},
+  },
+}
+
 const ObjectNested: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     id: {},
     object: {
       // nt: Object1, <-- Assigned later to avoid potential circular dependency.
     },
+  },
+}
+
+const ObjectParent: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+  f: {
+    a: {},
+    b: {},
+    me: {},
   },
 }
 
@@ -275,6 +328,22 @@ const Error: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 }
 
 const Interface: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+  f: {},
+}
+
+const InterfaceChildA: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+  f: {},
+}
+
+const InterfaceChildB: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+  f: {},
+}
+
+const InterfaceGrandparent: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+  f: {},
+}
+
+const InterfaceParent: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {},
 }
 
@@ -446,6 +515,42 @@ const Query: $$Utilities.SchemaDrivenDataMap.OutputObject = {
     idNonNull: {},
     interface: {
       // nt: Interface, <-- Assigned later to avoid potential circular dependency.
+    },
+    interfaceHierarchyChildA: {
+      a: {
+        type: {
+          nt: ChildAInterfaceHierarchyMember,
+          it: [0],
+        },
+      },
+      // nt: InterfaceChildA, <-- Assigned later to avoid potential circular dependency.
+    },
+    interfaceHierarchyChildB: {
+      a: {
+        type: {
+          nt: ChildBInterfaceHierarchyMember,
+          it: [0],
+        },
+      },
+      // nt: InterfaceChildB, <-- Assigned later to avoid potential circular dependency.
+    },
+    interfaceHierarchyGrandparents: {
+      a: {
+        type: {
+          nt: GrandparentInterfaceHierarchyMember,
+          it: [0],
+        },
+      },
+      // nt: InterfaceGrandparent, <-- Assigned later to avoid potential circular dependency.
+    },
+    interfaceHierarchyParents: {
+      a: {
+        type: {
+          nt: ParentInterfaceHierarchyMember,
+          it: [0],
+        },
+      },
+      // nt: InterfaceParent, <-- Assigned later to avoid potential circular dependency.
     },
     interfaceNonNull: {
       // nt: Interface, <-- Assigned later to avoid potential circular dependency.
@@ -656,6 +761,10 @@ Query.f[`dateInterface1`]!.nt = DateInterface1
 Query.f[`dateObject1`]!.nt = DateObject1
 Query.f[`dateUnion`]!.nt = DateUnion
 Query.f[`interface`]!.nt = Interface
+Query.f[`interfaceHierarchyChildA`]!.nt = InterfaceChildA
+Query.f[`interfaceHierarchyChildB`]!.nt = InterfaceChildB
+Query.f[`interfaceHierarchyGrandparents`]!.nt = InterfaceGrandparent
+Query.f[`interfaceHierarchyParents`]!.nt = InterfaceParent
 Query.f[`interfaceNonNull`]!.nt = Interface
 Query.f[`interfaceWithArgs`]!.nt = Interface
 Query.f[`lowerCaseUnion`]!.nt = lowerCaseUnion
@@ -704,6 +813,10 @@ const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
     Date,
     ABCEnum,
     Case,
+    ChildAInterfaceHierarchyMember,
+    ChildBInterfaceHierarchyMember,
+    GrandparentInterfaceHierarchyMember,
+    ParentInterfaceHierarchyMember,
     InputObject,
     InputObjectCircular,
     InputObjectNested,
@@ -717,13 +830,21 @@ const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
     Object1,
     Object1ImplementingInterface,
     Object2ImplementingInterface,
+    ObjectChildA,
+    ObjectChildB,
+    ObjectGrandparent,
     ObjectNested,
+    ObjectParent,
     ObjectUnion,
     lowerCaseObject,
     lowerCaseObject2,
     DateInterface1,
     Error,
     Interface,
+    InterfaceChildA,
+    InterfaceChildB,
+    InterfaceGrandparent,
+    InterfaceParent,
     DateUnion,
     FooBarUnion,
     Result,

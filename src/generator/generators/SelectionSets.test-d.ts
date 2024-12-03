@@ -267,4 +267,24 @@ test(`Query`, () => {
   // // @ts-expect-error empty selection set not allowed
   // assertType<S>({ scalars: {} })
   // todo selection set of _only_ negative indicators should not be allowed
+
+  // Interface Hierarchy
+ 
+  assertType<Q>({ interfaceHierarchyGrandparents: { a: true } })
+  // Can verbosely nest inline fragments matching the interface hierarchy
+  assertType<Q>({ interfaceHierarchyGrandparents: { ___on_InterfaceParent: { ___on_InterfaceChildA: { a: true }  } } })
+  // Can skip intermediary implementor interfaces
+  assertType<Q>({ interfaceHierarchyGrandparents: { ___on_ObjectChildA: { a: true} } })
+  // Cannot directly select fields from implementor interface
+  assertType<Q>({ interfaceHierarchyGrandparents: {
+    // @ts-expect-error
+    b: true
+  }})
+  // Nested: ^
+  assertType<Q>({ interfaceHierarchyGrandparents: {
+    ___on_InterfaceParent: {
+      // @ts-expect-error
+      c1: true
+    }
+  }})
 })

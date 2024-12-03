@@ -10,6 +10,15 @@ import type { Union } from './nodes/Union.js'
 
 export type NamedTypes = NamedInputTypes | NamedOutputTypes
 
+export type OutputObjectLike = OutputObject | Interface
+
+/**
+ * Types that can show up in the condition of an inline fragment.
+ *
+ * Interfaces can extend other interfaces so they are possible here.
+ */
+export type InlineFragmentTypeConditionTypes = OutputObject | Interface
+
 export type OutputTypes =
   | InlineTypes
   | NamedOutputTypes
