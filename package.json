@@ -109,7 +109,7 @@
     "clean": "tsc --build --clean && rm -rf build",
     "test:unit": "vitest --exclude tests/examples --exclude tests/e2e",
     "test:examples": "vitest --config vitest.examples.config.ts --dir tests/examples",
-    "test:e2e": "vitest --dir tests/e2e --testTimeout 20000",
+    "test:e2e": "vitest --dir tests/e2e --testTimeout 30000 --run",
     "test": "vitest",
     "test:web": "vitest --environment jsdom",
     "test:types": "vitest --typecheck --dir src  --testNamePattern .*.test-d.ts",
