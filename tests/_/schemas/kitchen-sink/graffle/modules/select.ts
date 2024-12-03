@@ -55,89 +55,89 @@ export namespace Select {
   //                                            OutputObject
   // --------------------------------------------------------------------------------------------------
   //
-  export type Bar<$SelectionSet extends $$SelectionSets.Bar> = InferResult.OutputObject<
+  export type Bar<$SelectionSet extends $$SelectionSets.Bar> = InferResult.OutputObjectLike<
     $SelectionSet,
     $$Schema.Schema,
     $$Schema.Schema['allTypes']['Bar']
   >
-  export type DateObject1<$SelectionSet extends $$SelectionSets.DateObject1> = InferResult.OutputObject<
+  export type DateObject1<$SelectionSet extends $$SelectionSets.DateObject1> = InferResult.OutputObjectLike<
     $SelectionSet,
     $$Schema.Schema,
     $$Schema.Schema['allTypes']['DateObject1']
   >
-  export type DateObject2<$SelectionSet extends $$SelectionSets.DateObject2> = InferResult.OutputObject<
+  export type DateObject2<$SelectionSet extends $$SelectionSets.DateObject2> = InferResult.OutputObjectLike<
     $SelectionSet,
     $$Schema.Schema,
     $$Schema.Schema['allTypes']['DateObject2']
   >
-  export type ErrorOne<$SelectionSet extends $$SelectionSets.ErrorOne> = InferResult.OutputObject<
+  export type ErrorOne<$SelectionSet extends $$SelectionSets.ErrorOne> = InferResult.OutputObjectLike<
     $SelectionSet,
     $$Schema.Schema,
     $$Schema.Schema['allTypes']['ErrorOne']
   >
-  export type ErrorTwo<$SelectionSet extends $$SelectionSets.ErrorTwo> = InferResult.OutputObject<
+  export type ErrorTwo<$SelectionSet extends $$SelectionSets.ErrorTwo> = InferResult.OutputObjectLike<
     $SelectionSet,
     $$Schema.Schema,
     $$Schema.Schema['allTypes']['ErrorTwo']
   >
-  export type Foo<$SelectionSet extends $$SelectionSets.Foo> = InferResult.OutputObject<
+  export type Foo<$SelectionSet extends $$SelectionSets.Foo> = InferResult.OutputObjectLike<
     $SelectionSet,
     $$Schema.Schema,
     $$Schema.Schema['allTypes']['Foo']
   >
-  export type Object1<$SelectionSet extends $$SelectionSets.Object1> = InferResult.OutputObject<
+  export type Object1<$SelectionSet extends $$SelectionSets.Object1> = InferResult.OutputObjectLike<
     $SelectionSet,
     $$Schema.Schema,
     $$Schema.Schema['allTypes']['Object1']
   >
   export type Object1ImplementingInterface<$SelectionSet extends $$SelectionSets.Object1ImplementingInterface> =
-    InferResult.OutputObject<
+    InferResult.OutputObjectLike<
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['Object1ImplementingInterface']
     >
   export type Object2ImplementingInterface<$SelectionSet extends $$SelectionSets.Object2ImplementingInterface> =
-    InferResult.OutputObject<
+    InferResult.OutputObjectLike<
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['Object2ImplementingInterface']
     >
-  export type ObjectChildA<$SelectionSet extends $$SelectionSets.ObjectChildA> = InferResult.OutputObject<
+  export type ObjectChildA<$SelectionSet extends $$SelectionSets.ObjectChildA> = InferResult.OutputObjectLike<
     $SelectionSet,
     $$Schema.Schema,
     $$Schema.Schema['allTypes']['ObjectChildA']
   >
-  export type ObjectChildB<$SelectionSet extends $$SelectionSets.ObjectChildB> = InferResult.OutputObject<
+  export type ObjectChildB<$SelectionSet extends $$SelectionSets.ObjectChildB> = InferResult.OutputObjectLike<
     $SelectionSet,
     $$Schema.Schema,
     $$Schema.Schema['allTypes']['ObjectChildB']
   >
-  export type ObjectGrandparent<$SelectionSet extends $$SelectionSets.ObjectGrandparent> = InferResult.OutputObject<
+  export type ObjectGrandparent<$SelectionSet extends $$SelectionSets.ObjectGrandparent> = InferResult.OutputObjectLike<
     $SelectionSet,
     $$Schema.Schema,
     $$Schema.Schema['allTypes']['ObjectGrandparent']
   >
-  export type ObjectNested<$SelectionSet extends $$SelectionSets.ObjectNested> = InferResult.OutputObject<
+  export type ObjectNested<$SelectionSet extends $$SelectionSets.ObjectNested> = InferResult.OutputObjectLike<
     $SelectionSet,
     $$Schema.Schema,
     $$Schema.Schema['allTypes']['ObjectNested']
   >
-  export type ObjectParent<$SelectionSet extends $$SelectionSets.ObjectParent> = InferResult.OutputObject<
+  export type ObjectParent<$SelectionSet extends $$SelectionSets.ObjectParent> = InferResult.OutputObjectLike<
     $SelectionSet,
     $$Schema.Schema,
     $$Schema.Schema['allTypes']['ObjectParent']
   >
-  export type ObjectUnion<$SelectionSet extends $$SelectionSets.ObjectUnion> = InferResult.OutputObject<
+  export type ObjectUnion<$SelectionSet extends $$SelectionSets.ObjectUnion> = InferResult.OutputObjectLike<
     $SelectionSet,
     $$Schema.Schema,
     $$Schema.Schema['allTypes']['ObjectUnion']
   >
-  export type lowerCaseObject<$SelectionSet extends $$SelectionSets.lowerCaseObject> = InferResult.OutputObject<
+  export type lowerCaseObject<$SelectionSet extends $$SelectionSets.lowerCaseObject> = InferResult.OutputObjectLike<
     $SelectionSet,
     $$Schema.Schema,
     $$Schema.Schema['allTypes']['lowerCaseObject']
   >
-  export type lowerCaseObject2<$SelectionSet extends $$SelectionSets.lowerCaseObject2> = InferResult.OutputObject<
+  export type lowerCaseObject2<$SelectionSet extends $$SelectionSets.lowerCaseObject2> = InferResult.OutputObjectLike<
     $SelectionSet,
     $$Schema.Schema,
     $$Schema.Schema['allTypes']['lowerCaseObject2']
