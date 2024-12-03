@@ -435,6 +435,59 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
+  interfaceHierarchyChildA: <$SelectionSet>(
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.interfaceHierarchyChildA<$Context['scalars']>>,
+  ) => Promise<
+    & (null | {})
+    & $$Utilities.HandleOutputGraffleRootField<
+      $Context,
+      InferResult.OperationQuery<{ interfaceHierarchyChildA: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
+      'interfaceHierarchyChildA'
+    >
+  >
+
+  interfaceHierarchyChildB: <$SelectionSet>(
+    selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.interfaceHierarchyChildB<$Context['scalars']>>,
+  ) => Promise<
+    & (null | {})
+    & $$Utilities.HandleOutputGraffleRootField<
+      $Context,
+      InferResult.OperationQuery<{ interfaceHierarchyChildB: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
+      'interfaceHierarchyChildB'
+    >
+  >
+
+  interfaceHierarchyGrandparents: <$SelectionSet>(
+    selectionSet: $$Utilities.Exact<
+      $SelectionSet,
+      $$SelectionSets.Query.interfaceHierarchyGrandparents<$Context['scalars']>
+    >,
+  ) => Promise<
+    & (null | {})
+    & $$Utilities.HandleOutputGraffleRootField<
+      $Context,
+      InferResult.OperationQuery<
+        { interfaceHierarchyGrandparents: $SelectionSet },
+        $$Schema.Schema<$Context['scalars']>
+      >,
+      'interfaceHierarchyGrandparents'
+    >
+  >
+
+  interfaceHierarchyParents: <$SelectionSet>(
+    selectionSet: $$Utilities.Exact<
+      $SelectionSet,
+      $$SelectionSets.Query.interfaceHierarchyParents<$Context['scalars']>
+    >,
+  ) => Promise<
+    & (null | {})
+    & $$Utilities.HandleOutputGraffleRootField<
+      $Context,
+      InferResult.OperationQuery<{ interfaceHierarchyParents: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
+      'interfaceHierarchyParents'
+    >
+  >
+
   interfaceNonNull: <$SelectionSet>(
     selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.interfaceNonNull<$Context['scalars']>>,
   ) => Promise<
@@ -847,7 +900,11 @@ export interface $MethodsSelect {
   Object1: Object1
   Object1ImplementingInterface: Object1ImplementingInterface
   Object2ImplementingInterface: Object2ImplementingInterface
+  ObjectChildA: ObjectChildA
+  ObjectChildB: ObjectChildB
+  ObjectGrandparent: ObjectGrandparent
   ObjectNested: ObjectNested
+  ObjectParent: ObjectParent
   ObjectUnion: ObjectUnion
   lowerCaseObject: lowerCaseObject
   lowerCaseObject2: lowerCaseObject2
@@ -858,6 +915,10 @@ export interface $MethodsSelect {
   DateInterface1: DateInterface1
   Error: Error
   Interface: Interface
+  InterfaceChildA: InterfaceChildA
+  InterfaceChildB: InterfaceChildB
+  InterfaceGrandparent: InterfaceGrandparent
+  InterfaceParent: InterfaceParent
 }
 
 //
@@ -940,8 +1001,24 @@ export interface Object2ImplementingInterface {
   ): $SelectionSet
 }
 
+export interface ObjectChildA {
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.ObjectChildA>): $SelectionSet
+}
+
+export interface ObjectChildB {
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.ObjectChildB>): $SelectionSet
+}
+
+export interface ObjectGrandparent {
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.ObjectGrandparent>): $SelectionSet
+}
+
 export interface ObjectNested {
   <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.ObjectNested>): $SelectionSet
+}
+
+export interface ObjectParent {
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.ObjectParent>): $SelectionSet
 }
 
 export interface ObjectUnion {
@@ -1014,6 +1091,22 @@ export interface Error {
 
 export interface Interface {
   <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Interface>): $SelectionSet
+}
+
+export interface InterfaceChildA {
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.InterfaceChildA>): $SelectionSet
+}
+
+export interface InterfaceChildB {
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.InterfaceChildB>): $SelectionSet
+}
+
+export interface InterfaceGrandparent {
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.InterfaceGrandparent>): $SelectionSet
+}
+
+export interface InterfaceParent {
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.InterfaceParent>): $SelectionSet
 }
 "
 `;
@@ -1114,6 +1207,10 @@ export namespace Schema {
       id: Query.id
       idNonNull: Query.idNonNull
       interface: Query.$interface
+      interfaceHierarchyChildA: Query.interfaceHierarchyChildA
+      interfaceHierarchyChildB: Query.interfaceHierarchyChildB
+      interfaceHierarchyGrandparents: Query.interfaceHierarchyGrandparents
+      interfaceHierarchyParents: Query.interfaceHierarchyParents
       interfaceNonNull: Query.interfaceNonNull
       interfaceWithArgs: Query.interfaceWithArgs
       listInt: Query.listInt
@@ -1381,6 +1478,62 @@ export namespace Schema {
       arguments: {}
       inlineType: [0]
       namedType: $$NamedTypes.$$Interface
+    }
+
+    export interface interfaceHierarchyChildA extends $.OutputField {
+      name: 'interfaceHierarchyChildA'
+      arguments: {
+        type: {
+          kind: 'InputField'
+          name: 'type'
+          inlineType: [0]
+          namedType: $$NamedTypes.$$ChildAInterfaceHierarchyMember
+        }
+      }
+      inlineType: [1, [1]]
+      namedType: $$NamedTypes.$$InterfaceChildA
+    }
+
+    export interface interfaceHierarchyChildB extends $.OutputField {
+      name: 'interfaceHierarchyChildB'
+      arguments: {
+        type: {
+          kind: 'InputField'
+          name: 'type'
+          inlineType: [0]
+          namedType: $$NamedTypes.$$ChildBInterfaceHierarchyMember
+        }
+      }
+      inlineType: [1, [1]]
+      namedType: $$NamedTypes.$$InterfaceChildB
+    }
+
+    export interface interfaceHierarchyGrandparents extends $.OutputField {
+      name: 'interfaceHierarchyGrandparents'
+      arguments: {
+        type: {
+          kind: 'InputField'
+          name: 'type'
+          inlineType: [0]
+          namedType: $$NamedTypes.$$GrandparentInterfaceHierarchyMember
+        }
+      }
+      inlineType: [1, [1]]
+      namedType: $$NamedTypes.$$InterfaceGrandparent
+    }
+
+    export interface interfaceHierarchyParents extends $.OutputField {
+      name: 'interfaceHierarchyParents'
+      arguments: {
+        type: {
+          kind: 'InputField'
+          name: 'type'
+          inlineType: [0]
+          namedType: $$NamedTypes.$$ParentInterfaceHierarchyMember
+        }
+      }
+      inlineType: [1, [1]]
+      namedType: $$NamedTypes.$$InterfaceParent
     }
 
     export interface interfaceNonNull extends $.OutputField {
@@ -2135,6 +2288,155 @@ export namespace Schema {
     }
   }
 
+  //                                            ObjectChildA
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export interface ObjectChildA extends $.OutputObject {
+    name: 'ObjectChildA'
+    fields: {
+      __typename: ObjectChildA.__typename
+      a: ObjectChildA.a
+      b: ObjectChildA.b
+      c1: ObjectChildA.c1
+      me: ObjectChildA.me
+    }
+  }
+
+  export namespace ObjectChildA {
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'ObjectChildA'
+      }
+    }
+
+    export interface a extends $.OutputField {
+      name: 'a'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
+    }
+
+    export interface b extends $.OutputField {
+      name: 'b'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
+    }
+
+    export interface c1 extends $.OutputField {
+      name: 'c1'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
+    }
+
+    export interface me extends $.OutputField {
+      name: 'me'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$Boolean
+    }
+  }
+
+  //                                            ObjectChildB
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export interface ObjectChildB extends $.OutputObject {
+    name: 'ObjectChildB'
+    fields: {
+      __typename: ObjectChildB.__typename
+      a: ObjectChildB.a
+      b: ObjectChildB.b
+      c2: ObjectChildB.c2
+      me: ObjectChildB.me
+    }
+  }
+
+  export namespace ObjectChildB {
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'ObjectChildB'
+      }
+    }
+
+    export interface a extends $.OutputField {
+      name: 'a'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
+    }
+
+    export interface b extends $.OutputField {
+      name: 'b'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
+    }
+
+    export interface c2 extends $.OutputField {
+      name: 'c2'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
+    }
+
+    export interface me extends $.OutputField {
+      name: 'me'
+      arguments: {}
+      inlineType: [1, [1]]
+      namedType: $$NamedTypes.$$Int
+    }
+  }
+
+  //                                         ObjectGrandparent
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export interface ObjectGrandparent extends $.OutputObject {
+    name: 'ObjectGrandparent'
+    fields: {
+      __typename: ObjectGrandparent.__typename
+      a: ObjectGrandparent.a
+      me: ObjectGrandparent.me
+    }
+  }
+
+  export namespace ObjectGrandparent {
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'ObjectGrandparent'
+      }
+    }
+
+    export interface a extends $.OutputField {
+      name: 'a'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
+    }
+
+    export interface me extends $.OutputField {
+      name: 'me'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$Int
+    }
+  }
+
   //                                            ObjectNested
   // --------------------------------------------------------------------------------------------------
   //
@@ -2171,6 +2473,53 @@ export namespace Schema {
       arguments: {}
       inlineType: [0]
       namedType: $$NamedTypes.$$Object1
+    }
+  }
+
+  //                                            ObjectParent
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export interface ObjectParent extends $.OutputObject {
+    name: 'ObjectParent'
+    fields: {
+      __typename: ObjectParent.__typename
+      a: ObjectParent.a
+      b: ObjectParent.b
+      me: ObjectParent.me
+    }
+  }
+
+  export namespace ObjectParent {
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'ObjectParent'
+      }
+    }
+
+    export interface a extends $.OutputField {
+      name: 'a'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
+    }
+
+    export interface b extends $.OutputField {
+      name: 'b'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
+    }
+
+    export interface me extends $.OutputField {
+      name: 'me'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
     }
   }
 
@@ -2412,6 +2761,9 @@ export namespace Schema {
   //
 
   export interface DateInterface1 extends $.Interface {
+    fields: {
+      date1: DateInterface1.date1
+    }
     name: 'DateInterface1'
     implementors: [DateObject1]
     implementorsUnion: DateObject1
@@ -2420,11 +2772,33 @@ export namespace Schema {
     }
   }
 
+  export namespace DateInterface1 {
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'DateInterface1'
+      }
+    }
+
+    export interface date1 extends $.OutputField {
+      name: 'date1'
+      arguments: {}
+      inlineType: [0]
+      namedType: $$NamedTypes.$$Date
+    }
+  }
+
   //                                               Error
   // --------------------------------------------------------------------------------------------------
   //
 
   export interface Error extends $.Interface {
+    fields: {
+      message: Error.message
+    }
     name: 'Error'
     implementors: [ErrorOne, ErrorTwo]
     implementorsUnion:
@@ -2436,11 +2810,33 @@ export namespace Schema {
     }
   }
 
+  export namespace Error {
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'Error'
+      }
+    }
+
+    export interface message extends $.OutputField {
+      name: 'message'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
+    }
+  }
+
   //                                             Interface
   // --------------------------------------------------------------------------------------------------
   //
 
   export interface Interface extends $.Interface {
+    fields: {
+      id: Interface.id
+    }
     name: 'Interface'
     implementors: [Object1ImplementingInterface, Object2ImplementingInterface]
     implementorsUnion:
@@ -2449,6 +2845,235 @@ export namespace Schema {
     implementorsIndex: {
       Object1ImplementingInterface: Object1ImplementingInterface
       Object2ImplementingInterface: Object2ImplementingInterface
+    }
+  }
+
+  export namespace Interface {
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'Interface'
+      }
+    }
+
+    export interface id extends $.OutputField {
+      name: 'id'
+      arguments: {}
+      inlineType: [0]
+      namedType: $$NamedTypes.$$ID
+    }
+  }
+
+  //                                          InterfaceChildA
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export interface InterfaceChildA extends $.Interface {
+    fields: {
+      a: InterfaceChildA.a
+      b: InterfaceChildA.b
+      c1: InterfaceChildA.c1
+    }
+    name: 'InterfaceChildA'
+    implementors: [ObjectChildA]
+    implementorsUnion: ObjectChildA
+    implementorsIndex: {
+      ObjectChildA: ObjectChildA
+    }
+  }
+
+  export namespace InterfaceChildA {
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'InterfaceChildA'
+      }
+    }
+
+    export interface a extends $.OutputField {
+      name: 'a'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
+    }
+
+    export interface b extends $.OutputField {
+      name: 'b'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
+    }
+
+    export interface c1 extends $.OutputField {
+      name: 'c1'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
+    }
+  }
+
+  //                                          InterfaceChildB
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export interface InterfaceChildB extends $.Interface {
+    fields: {
+      a: InterfaceChildB.a
+      b: InterfaceChildB.b
+      c2: InterfaceChildB.c2
+    }
+    name: 'InterfaceChildB'
+    implementors: [ObjectChildB]
+    implementorsUnion: ObjectChildB
+    implementorsIndex: {
+      ObjectChildB: ObjectChildB
+    }
+  }
+
+  export namespace InterfaceChildB {
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'InterfaceChildB'
+      }
+    }
+
+    export interface a extends $.OutputField {
+      name: 'a'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
+    }
+
+    export interface b extends $.OutputField {
+      name: 'b'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
+    }
+
+    export interface c2 extends $.OutputField {
+      name: 'c2'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
+    }
+  }
+
+  //                                        InterfaceGrandparent
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export interface InterfaceGrandparent extends $.Interface {
+    fields: {
+      a: InterfaceGrandparent.a
+    }
+    name: 'InterfaceGrandparent'
+    implementors: [
+      ObjectChildA,
+      ObjectChildB,
+      ObjectGrandparent,
+      ObjectParent,
+      InterfaceChildA,
+      InterfaceChildB,
+      InterfaceParent,
+    ]
+    implementorsUnion:
+      | ObjectChildA
+      | ObjectChildB
+      | ObjectGrandparent
+      | ObjectParent
+      | InterfaceChildA
+      | InterfaceChildB
+      | InterfaceParent
+    implementorsIndex: {
+      ObjectChildA: ObjectChildA
+      ObjectChildB: ObjectChildB
+      ObjectGrandparent: ObjectGrandparent
+      ObjectParent: ObjectParent
+      InterfaceChildA: InterfaceChildA
+      InterfaceChildB: InterfaceChildB
+      InterfaceParent: InterfaceParent
+    }
+  }
+
+  export namespace InterfaceGrandparent {
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'InterfaceGrandparent'
+      }
+    }
+
+    export interface a extends $.OutputField {
+      name: 'a'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
+    }
+  }
+
+  //                                          InterfaceParent
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export interface InterfaceParent extends $.Interface {
+    fields: {
+      a: InterfaceParent.a
+      b: InterfaceParent.b
+    }
+    name: 'InterfaceParent'
+    implementors: [ObjectChildA, ObjectChildB, ObjectParent, InterfaceChildA, InterfaceChildB]
+    implementorsUnion:
+      | ObjectChildA
+      | ObjectChildB
+      | ObjectParent
+      | InterfaceChildA
+      | InterfaceChildB
+    implementorsIndex: {
+      ObjectChildA: ObjectChildA
+      ObjectChildB: ObjectChildB
+      ObjectParent: ObjectParent
+      InterfaceChildA: InterfaceChildA
+      InterfaceChildB: InterfaceChildB
+    }
+  }
+
+  export namespace InterfaceParent {
+    export interface __typename extends $.OutputField {
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'InterfaceParent'
+      }
+    }
+
+    export interface a extends $.OutputField {
+      name: 'a'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
+    }
+
+    export interface b extends $.OutputField {
+      name: 'b'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$String
     }
   }
 
@@ -2587,6 +3212,53 @@ export namespace Schema {
       | 'Object1'
   }
 
+  //                                   ChildAInterfaceHierarchyMember
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export interface ChildAInterfaceHierarchyMember extends $.Enum {
+    name: 'ChildAInterfaceHierarchyMember'
+    members: ['InterfaceChildA']
+    membersUnion: 'InterfaceChildA'
+  }
+
+  //                                   ChildBInterfaceHierarchyMember
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export interface ChildBInterfaceHierarchyMember extends $.Enum {
+    name: 'ChildBInterfaceHierarchyMember'
+    members: ['InterfaceChildB']
+    membersUnion: 'InterfaceChildB'
+  }
+
+  //                                GrandparentInterfaceHierarchyMember
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export interface GrandparentInterfaceHierarchyMember extends $.Enum {
+    name: 'GrandparentInterfaceHierarchyMember'
+    members: ['InterfaceChildA', 'InterfaceChildB', 'InterfaceGrandparent', 'InterfaceParent']
+    membersUnion:
+      | 'InterfaceChildA'
+      | 'InterfaceChildB'
+      | 'InterfaceGrandparent'
+      | 'InterfaceParent'
+  }
+
+  //                                   ParentInterfaceHierarchyMember
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export interface ParentInterfaceHierarchyMember extends $.Enum {
+    name: 'ParentInterfaceHierarchyMember'
+    members: ['InterfaceChildA', 'InterfaceChildB', 'InterfaceParent']
+    membersUnion:
+      | 'InterfaceChildA'
+      | 'InterfaceChildB'
+      | 'InterfaceParent'
+  }
+
   //
   //
   //
@@ -2691,7 +3363,11 @@ export namespace Schema {
     export type $$Object1 = Object1
     export type $$Object1ImplementingInterface = Object1ImplementingInterface
     export type $$Object2ImplementingInterface = Object2ImplementingInterface
+    export type $$ObjectChildA = ObjectChildA
+    export type $$ObjectChildB = ObjectChildB
+    export type $$ObjectGrandparent = ObjectGrandparent
     export type $$ObjectNested = ObjectNested
+    export type $$ObjectParent = ObjectParent
     export type $$ObjectUnion = ObjectUnion
     export type $$lowerCaseObject = lowerCaseObject
     export type $$lowerCaseObject2 = lowerCaseObject2
@@ -2702,12 +3378,20 @@ export namespace Schema {
     export type $$DateInterface1 = DateInterface1
     export type $$Error = Error
     export type $$Interface = Interface
+    export type $$InterfaceChildA = InterfaceChildA
+    export type $$InterfaceChildB = InterfaceChildB
+    export type $$InterfaceGrandparent = InterfaceGrandparent
+    export type $$InterfaceParent = InterfaceParent
     export type $$DateUnion = DateUnion
     export type $$FooBarUnion = FooBarUnion
     export type $$Result = Result
     export type $$lowerCaseUnion = lowerCaseUnion
     export type $$ABCEnum = ABCEnum
     export type $$Case = Case
+    export type $$ChildAInterfaceHierarchyMember = ChildAInterfaceHierarchyMember
+    export type $$ChildBInterfaceHierarchyMember = ChildBInterfaceHierarchyMember
+    export type $$GrandparentInterfaceHierarchyMember = GrandparentInterfaceHierarchyMember
+    export type $$ParentInterfaceHierarchyMember = ParentInterfaceHierarchyMember
     export type $$Date = Date
     export type $$Boolean = Boolean
     export type $$Float = Float
@@ -2749,6 +3433,10 @@ export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$
     Mutation: Schema.Mutation
     ABCEnum: Schema.ABCEnum
     Case: Schema.Case
+    ChildAInterfaceHierarchyMember: Schema.ChildAInterfaceHierarchyMember
+    ChildBInterfaceHierarchyMember: Schema.ChildBInterfaceHierarchyMember
+    GrandparentInterfaceHierarchyMember: Schema.GrandparentInterfaceHierarchyMember
+    ParentInterfaceHierarchyMember: Schema.ParentInterfaceHierarchyMember
     Bar: Schema.Bar
     DateObject1: Schema.DateObject1
     DateObject2: Schema.DateObject2
@@ -2758,7 +3446,11 @@ export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$
     Object1: Schema.Object1
     Object1ImplementingInterface: Schema.Object1ImplementingInterface
     Object2ImplementingInterface: Schema.Object2ImplementingInterface
+    ObjectChildA: Schema.ObjectChildA
+    ObjectChildB: Schema.ObjectChildB
+    ObjectGrandparent: Schema.ObjectGrandparent
     ObjectNested: Schema.ObjectNested
+    ObjectParent: Schema.ObjectParent
     ObjectUnion: Schema.ObjectUnion
     lowerCaseObject: Schema.lowerCaseObject
     lowerCaseObject2: Schema.lowerCaseObject2
@@ -2769,6 +3461,10 @@ export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$
     DateInterface1: Schema.DateInterface1
     Error: Schema.Error
     Interface: Schema.Interface
+    InterfaceChildA: Schema.InterfaceChildA
+    InterfaceChildB: Schema.InterfaceChildB
+    InterfaceGrandparent: Schema.InterfaceGrandparent
+    InterfaceParent: Schema.InterfaceParent
   }
   objects: {
     Bar: Schema.Bar
@@ -2780,7 +3476,11 @@ export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$
     Object1: Schema.Object1
     Object1ImplementingInterface: Schema.Object1ImplementingInterface
     Object2ImplementingInterface: Schema.Object2ImplementingInterface
+    ObjectChildA: Schema.ObjectChildA
+    ObjectChildB: Schema.ObjectChildB
+    ObjectGrandparent: Schema.ObjectGrandparent
     ObjectNested: Schema.ObjectNested
+    ObjectParent: Schema.ObjectParent
     ObjectUnion: Schema.ObjectUnion
     lowerCaseObject: Schema.lowerCaseObject
     lowerCaseObject2: Schema.lowerCaseObject2
@@ -2795,6 +3495,10 @@ export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$
     DateInterface1: Schema.DateInterface1
     Error: Schema.Error
     Interface: Schema.Interface
+    InterfaceChildA: Schema.InterfaceChildA
+    InterfaceChildB: Schema.InterfaceChildB
+    InterfaceGrandparent: Schema.InterfaceGrandparent
+    InterfaceParent: Schema.InterfaceParent
   }
   scalarNamesUnion:
     | 'Date'
@@ -2888,6 +3592,26 @@ const ABCEnum: $$Utilities.SchemaDrivenDataMap.Enum = {
 const Case: $$Utilities.SchemaDrivenDataMap.Enum = {
   k: 'enum',
   n: 'Case',
+}
+
+const ChildAInterfaceHierarchyMember: $$Utilities.SchemaDrivenDataMap.Enum = {
+  k: 'enum',
+  n: 'ChildAInterfaceHierarchyMember',
+}
+
+const ChildBInterfaceHierarchyMember: $$Utilities.SchemaDrivenDataMap.Enum = {
+  k: 'enum',
+  n: 'ChildBInterfaceHierarchyMember',
+}
+
+const GrandparentInterfaceHierarchyMember: $$Utilities.SchemaDrivenDataMap.Enum = {
+  k: 'enum',
+  n: 'GrandparentInterfaceHierarchyMember',
+}
+
+const ParentInterfaceHierarchyMember: $$Utilities.SchemaDrivenDataMap.Enum = {
+  k: 'enum',
+  n: 'ParentInterfaceHierarchyMember',
 }
 
 //
@@ -3037,12 +3761,45 @@ const Object2ImplementingInterface: $$Utilities.SchemaDrivenDataMap.OutputObject
   },
 }
 
+const ObjectChildA: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+  f: {
+    a: {},
+    b: {},
+    c1: {},
+    me: {},
+  },
+}
+
+const ObjectChildB: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+  f: {
+    a: {},
+    b: {},
+    c2: {},
+    me: {},
+  },
+}
+
+const ObjectGrandparent: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+  f: {
+    a: {},
+    me: {},
+  },
+}
+
 const ObjectNested: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     id: {},
     object: {
       // nt: Object1, <-- Assigned later to avoid potential circular dependency.
     },
+  },
+}
+
+const ObjectParent: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+  f: {
+    a: {},
+    b: {},
+    me: {},
   },
 }
 
@@ -3093,6 +3850,22 @@ const Error: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 }
 
 const Interface: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+  f: {},
+}
+
+const InterfaceChildA: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+  f: {},
+}
+
+const InterfaceChildB: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+  f: {},
+}
+
+const InterfaceGrandparent: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+  f: {},
+}
+
+const InterfaceParent: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {},
 }
 
@@ -3264,6 +4037,42 @@ const Query: $$Utilities.SchemaDrivenDataMap.OutputObject = {
     idNonNull: {},
     interface: {
       // nt: Interface, <-- Assigned later to avoid potential circular dependency.
+    },
+    interfaceHierarchyChildA: {
+      a: {
+        type: {
+          nt: ChildAInterfaceHierarchyMember,
+          it: [0],
+        },
+      },
+      // nt: InterfaceChildA, <-- Assigned later to avoid potential circular dependency.
+    },
+    interfaceHierarchyChildB: {
+      a: {
+        type: {
+          nt: ChildBInterfaceHierarchyMember,
+          it: [0],
+        },
+      },
+      // nt: InterfaceChildB, <-- Assigned later to avoid potential circular dependency.
+    },
+    interfaceHierarchyGrandparents: {
+      a: {
+        type: {
+          nt: GrandparentInterfaceHierarchyMember,
+          it: [0],
+        },
+      },
+      // nt: InterfaceGrandparent, <-- Assigned later to avoid potential circular dependency.
+    },
+    interfaceHierarchyParents: {
+      a: {
+        type: {
+          nt: ParentInterfaceHierarchyMember,
+          it: [0],
+        },
+      },
+      // nt: InterfaceParent, <-- Assigned later to avoid potential circular dependency.
     },
     interfaceNonNull: {
       // nt: Interface, <-- Assigned later to avoid potential circular dependency.
@@ -3472,6 +4281,10 @@ Query.f[\`dateInterface1\`]!.nt = DateInterface1
 Query.f[\`dateObject1\`]!.nt = DateObject1
 Query.f[\`dateUnion\`]!.nt = DateUnion
 Query.f[\`interface\`]!.nt = Interface
+Query.f[\`interfaceHierarchyChildA\`]!.nt = InterfaceChildA
+Query.f[\`interfaceHierarchyChildB\`]!.nt = InterfaceChildB
+Query.f[\`interfaceHierarchyGrandparents\`]!.nt = InterfaceGrandparent
+Query.f[\`interfaceHierarchyParents\`]!.nt = InterfaceParent
 Query.f[\`interfaceNonNull\`]!.nt = Interface
 Query.f[\`interfaceWithArgs\`]!.nt = Interface
 Query.f[\`lowerCaseUnion\`]!.nt = lowerCaseUnion
@@ -3520,6 +4333,10 @@ const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
     Date,
     ABCEnum,
     Case,
+    ChildAInterfaceHierarchyMember,
+    ChildBInterfaceHierarchyMember,
+    GrandparentInterfaceHierarchyMember,
+    ParentInterfaceHierarchyMember,
     InputObject,
     InputObjectCircular,
     InputObjectNested,
@@ -3533,13 +4350,21 @@ const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
     Object1,
     Object1ImplementingInterface,
     Object2ImplementingInterface,
+    ObjectChildA,
+    ObjectChildB,
+    ObjectGrandparent,
     ObjectNested,
+    ObjectParent,
     ObjectUnion,
     lowerCaseObject,
     lowerCaseObject2,
     DateInterface1,
     Error,
     Interface,
+    InterfaceChildA,
+    InterfaceChildB,
+    InterfaceGrandparent,
+    InterfaceParent,
     DateUnion,
     FooBarUnion,
     Result,
@@ -3611,69 +4436,89 @@ export namespace Select {
   //                                            OutputObject
   // --------------------------------------------------------------------------------------------------
   //
-  export type Bar<$SelectionSet extends $$SelectionSets.Bar> = InferResult.OutputObject<
+  export type Bar<$SelectionSet extends $$SelectionSets.Bar> = InferResult.OutputObjectLike<
     $SelectionSet,
     $$Schema.Schema,
     $$Schema.Schema['allTypes']['Bar']
   >
-  export type DateObject1<$SelectionSet extends $$SelectionSets.DateObject1> = InferResult.OutputObject<
+  export type DateObject1<$SelectionSet extends $$SelectionSets.DateObject1> = InferResult.OutputObjectLike<
     $SelectionSet,
     $$Schema.Schema,
     $$Schema.Schema['allTypes']['DateObject1']
   >
-  export type DateObject2<$SelectionSet extends $$SelectionSets.DateObject2> = InferResult.OutputObject<
+  export type DateObject2<$SelectionSet extends $$SelectionSets.DateObject2> = InferResult.OutputObjectLike<
     $SelectionSet,
     $$Schema.Schema,
     $$Schema.Schema['allTypes']['DateObject2']
   >
-  export type ErrorOne<$SelectionSet extends $$SelectionSets.ErrorOne> = InferResult.OutputObject<
+  export type ErrorOne<$SelectionSet extends $$SelectionSets.ErrorOne> = InferResult.OutputObjectLike<
     $SelectionSet,
     $$Schema.Schema,
     $$Schema.Schema['allTypes']['ErrorOne']
   >
-  export type ErrorTwo<$SelectionSet extends $$SelectionSets.ErrorTwo> = InferResult.OutputObject<
+  export type ErrorTwo<$SelectionSet extends $$SelectionSets.ErrorTwo> = InferResult.OutputObjectLike<
     $SelectionSet,
     $$Schema.Schema,
     $$Schema.Schema['allTypes']['ErrorTwo']
   >
-  export type Foo<$SelectionSet extends $$SelectionSets.Foo> = InferResult.OutputObject<
+  export type Foo<$SelectionSet extends $$SelectionSets.Foo> = InferResult.OutputObjectLike<
     $SelectionSet,
     $$Schema.Schema,
     $$Schema.Schema['allTypes']['Foo']
   >
-  export type Object1<$SelectionSet extends $$SelectionSets.Object1> = InferResult.OutputObject<
+  export type Object1<$SelectionSet extends $$SelectionSets.Object1> = InferResult.OutputObjectLike<
     $SelectionSet,
     $$Schema.Schema,
     $$Schema.Schema['allTypes']['Object1']
   >
   export type Object1ImplementingInterface<$SelectionSet extends $$SelectionSets.Object1ImplementingInterface> =
-    InferResult.OutputObject<
+    InferResult.OutputObjectLike<
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['Object1ImplementingInterface']
     >
   export type Object2ImplementingInterface<$SelectionSet extends $$SelectionSets.Object2ImplementingInterface> =
-    InferResult.OutputObject<
+    InferResult.OutputObjectLike<
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['Object2ImplementingInterface']
     >
-  export type ObjectNested<$SelectionSet extends $$SelectionSets.ObjectNested> = InferResult.OutputObject<
+  export type ObjectChildA<$SelectionSet extends $$SelectionSets.ObjectChildA> = InferResult.OutputObjectLike<
+    $SelectionSet,
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['ObjectChildA']
+  >
+  export type ObjectChildB<$SelectionSet extends $$SelectionSets.ObjectChildB> = InferResult.OutputObjectLike<
+    $SelectionSet,
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['ObjectChildB']
+  >
+  export type ObjectGrandparent<$SelectionSet extends $$SelectionSets.ObjectGrandparent> = InferResult.OutputObjectLike<
+    $SelectionSet,
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['ObjectGrandparent']
+  >
+  export type ObjectNested<$SelectionSet extends $$SelectionSets.ObjectNested> = InferResult.OutputObjectLike<
     $SelectionSet,
     $$Schema.Schema,
     $$Schema.Schema['allTypes']['ObjectNested']
   >
-  export type ObjectUnion<$SelectionSet extends $$SelectionSets.ObjectUnion> = InferResult.OutputObject<
+  export type ObjectParent<$SelectionSet extends $$SelectionSets.ObjectParent> = InferResult.OutputObjectLike<
+    $SelectionSet,
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['ObjectParent']
+  >
+  export type ObjectUnion<$SelectionSet extends $$SelectionSets.ObjectUnion> = InferResult.OutputObjectLike<
     $SelectionSet,
     $$Schema.Schema,
     $$Schema.Schema['allTypes']['ObjectUnion']
   >
-  export type lowerCaseObject<$SelectionSet extends $$SelectionSets.lowerCaseObject> = InferResult.OutputObject<
+  export type lowerCaseObject<$SelectionSet extends $$SelectionSets.lowerCaseObject> = InferResult.OutputObjectLike<
     $SelectionSet,
     $$Schema.Schema,
     $$Schema.Schema['allTypes']['lowerCaseObject']
   >
-  export type lowerCaseObject2<$SelectionSet extends $$SelectionSets.lowerCaseObject2> = InferResult.OutputObject<
+  export type lowerCaseObject2<$SelectionSet extends $$SelectionSets.lowerCaseObject2> = InferResult.OutputObjectLike<
     $SelectionSet,
     $$Schema.Schema,
     $$Schema.Schema['allTypes']['lowerCaseObject2']
@@ -3718,6 +4563,26 @@ export namespace Select {
     $SelectionSet,
     $$Schema.Schema,
     $$Schema.Schema['allTypes']['Interface']
+  >
+  export type InterfaceChildA<$SelectionSet extends $$SelectionSets.InterfaceChildA> = InferResult.Interface<
+    $SelectionSet,
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['InterfaceChildA']
+  >
+  export type InterfaceChildB<$SelectionSet extends $$SelectionSets.InterfaceChildB> = InferResult.Interface<
+    $SelectionSet,
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['InterfaceChildB']
+  >
+  export type InterfaceGrandparent<$SelectionSet extends $$SelectionSets.InterfaceGrandparent> = InferResult.Interface<
+    $SelectionSet,
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['InterfaceGrandparent']
+  >
+  export type InterfaceParent<$SelectionSet extends $$SelectionSets.InterfaceParent> = InferResult.Interface<
+    $SelectionSet,
+    $$Schema.Schema,
+    $$Schema.Schema['allTypes']['InterfaceParent']
   >
 }
 "
@@ -3879,6 +4744,30 @@ export interface Query<
    * Select the \`interface\` field on the \`Query\` object. Its type is \`Interface\` (a \`Interface\` kind of type).
    */
   interface?: Query.$interface$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Query.$interface<_$Scalars>>
+  /**
+   * Select the \`interfaceHierarchyChildA\` field on the \`Query\` object. Its type is \`InterfaceChildA\` (a \`Interface\` kind of type).
+   */
+  interfaceHierarchyChildA?:
+    | Query.interfaceHierarchyChildA$Expanded<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.interfaceHierarchyChildA<_$Scalars>>
+  /**
+   * Select the \`interfaceHierarchyChildB\` field on the \`Query\` object. Its type is \`InterfaceChildB\` (a \`Interface\` kind of type).
+   */
+  interfaceHierarchyChildB?:
+    | Query.interfaceHierarchyChildB$Expanded<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.interfaceHierarchyChildB<_$Scalars>>
+  /**
+   * Select the \`interfaceHierarchyGrandparents\` field on the \`Query\` object. Its type is \`InterfaceGrandparent\` (a \`Interface\` kind of type).
+   */
+  interfaceHierarchyGrandparents?:
+    | Query.interfaceHierarchyGrandparents$Expanded<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.interfaceHierarchyGrandparents<_$Scalars>>
+  /**
+   * Select the \`interfaceHierarchyParents\` field on the \`Query\` object. Its type is \`InterfaceParent\` (a \`Interface\` kind of type).
+   */
+  interfaceHierarchyParents?:
+    | Query.interfaceHierarchyParents$Expanded<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.interfaceHierarchyParents<_$Scalars>>
   /**
    * Select the \`interfaceNonNull\` field on the \`Query\` object. Its type is \`Interface\` (a \`Interface\` kind of type).
    */
@@ -4732,6 +5621,142 @@ export namespace Query {
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     $interface$SelectionSet<_$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type interfaceHierarchyChildA<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = interfaceHierarchyChildA$SelectionSet<_$Scalars>
+
+  export interface interfaceHierarchyChildA$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$InterfaceChildA<_$Scalars> {
+    /**
+     * Arguments for \`interfaceHierarchyChildA\` field. No arguments are required so you may omit this.
+     */
+    $?: interfaceHierarchyChildA$Arguments<_$Scalars>
+  }
+
+  export interface interfaceHierarchyChildA$Arguments<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
+    $type?: $NamedTypes.$ChildAInterfaceHierarchyMember | undefined | null
+  }
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the \`interfaceHierarchyChildA\` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type interfaceHierarchyChildA$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    interfaceHierarchyChildA$SelectionSet<_$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type interfaceHierarchyChildB<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = interfaceHierarchyChildB$SelectionSet<_$Scalars>
+
+  export interface interfaceHierarchyChildB$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$InterfaceChildB<_$Scalars> {
+    /**
+     * Arguments for \`interfaceHierarchyChildB\` field. No arguments are required so you may omit this.
+     */
+    $?: interfaceHierarchyChildB$Arguments<_$Scalars>
+  }
+
+  export interface interfaceHierarchyChildB$Arguments<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
+    $type?: $NamedTypes.$ChildBInterfaceHierarchyMember | undefined | null
+  }
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the \`interfaceHierarchyChildB\` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type interfaceHierarchyChildB$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    interfaceHierarchyChildB$SelectionSet<_$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type interfaceHierarchyGrandparents<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = interfaceHierarchyGrandparents$SelectionSet<_$Scalars>
+
+  export interface interfaceHierarchyGrandparents$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$InterfaceGrandparent<_$Scalars> {
+    /**
+     * Arguments for \`interfaceHierarchyGrandparents\` field. No arguments are required so you may omit this.
+     */
+    $?: interfaceHierarchyGrandparents$Arguments<_$Scalars>
+  }
+
+  export interface interfaceHierarchyGrandparents$Arguments<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
+    $type?: $NamedTypes.$GrandparentInterfaceHierarchyMember | undefined | null
+  }
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the \`interfaceHierarchyGrandparents\` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type interfaceHierarchyGrandparents$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    interfaceHierarchyGrandparents$SelectionSet<_$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type interfaceHierarchyParents<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = interfaceHierarchyParents$SelectionSet<_$Scalars>
+
+  export interface interfaceHierarchyParents$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base, $NamedTypes.$InterfaceParent<_$Scalars> {
+    /**
+     * Arguments for \`interfaceHierarchyParents\` field. No arguments are required so you may omit this.
+     */
+    $?: interfaceHierarchyParents$Arguments<_$Scalars>
+  }
+
+  export interface interfaceHierarchyParents$Arguments<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
+    $type?: $NamedTypes.$ParentInterfaceHierarchyMember | undefined | null
+  }
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the \`interfaceHierarchyParents\` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type interfaceHierarchyParents$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    interfaceHierarchyParents$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------
@@ -5677,6 +6702,21 @@ export type Case =
   | 'ErrorTwo'
   | 'Object1'
 
+export type ChildAInterfaceHierarchyMember = 'InterfaceChildA'
+
+export type ChildBInterfaceHierarchyMember = 'InterfaceChildB'
+
+export type GrandparentInterfaceHierarchyMember =
+  | 'InterfaceChildA'
+  | 'InterfaceChildB'
+  | 'InterfaceGrandparent'
+  | 'InterfaceParent'
+
+export type ParentInterfaceHierarchyMember =
+  | 'InterfaceChildA'
+  | 'InterfaceChildB'
+  | 'InterfaceParent'
+
 //
 //
 //
@@ -6619,6 +7659,403 @@ export namespace Object2ImplementingInterface {
   >
 }
 
+//                                            ObjectChildA
+// --------------------------------------------------------------------------------------------------
+//
+
+// ----------------------------------------| Entrypoint Interface |
+
+export interface ObjectChildA<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends $Select.Bases.ObjectLike {
+  /**
+   * Select the \`a\` field on the \`ObjectChildA\` object. Its type is \`String\` (a \`ScalarStandard\` kind of type).
+   */
+  a?: ObjectChildA.a$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<ObjectChildA.a<_$Scalars>>
+  /**
+   * Select the \`b\` field on the \`ObjectChildA\` object. Its type is \`String\` (a \`ScalarStandard\` kind of type).
+   */
+  b?: ObjectChildA.b$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<ObjectChildA.b<_$Scalars>>
+  /**
+   * Select the \`c1\` field on the \`ObjectChildA\` object. Its type is \`String\` (a \`ScalarStandard\` kind of type).
+   */
+  c1?: ObjectChildA.c1$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<ObjectChildA.c1<_$Scalars>>
+  /**
+   * Select the \`me\` field on the \`ObjectChildA\` object. Its type is \`Boolean\` (a \`ScalarStandard\` kind of type).
+   */
+  me?: ObjectChildA.me$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<ObjectChildA.me<_$Scalars>>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an \`@include\` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | ObjectChildA$FragmentInline<_$Scalars>
+    | ObjectChildA$FragmentInline<_$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+
+export interface ObjectChildA$FragmentInline<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends ObjectChildA<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
+
+// ----------------------------------------| Fields |
+
+export namespace ObjectChildA {
+  export type a<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | a$SelectionSet<_$Scalars>
+
+  export interface a$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the \`a\` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type a$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | a$SelectionSet<_$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type b<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | b$SelectionSet<_$Scalars>
+
+  export interface b$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the \`b\` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type b$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | b$SelectionSet<_$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type c1<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | c1$SelectionSet<_$Scalars>
+
+  export interface c1$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the \`c1\` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type c1$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | c1$SelectionSet<_$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type me<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | me$SelectionSet<_$Scalars>
+
+  export interface me$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the \`me\` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type me$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | me$SelectionSet<_$Scalars>
+  >
+}
+
+//                                            ObjectChildB
+// --------------------------------------------------------------------------------------------------
+//
+
+// ----------------------------------------| Entrypoint Interface |
+
+export interface ObjectChildB<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends $Select.Bases.ObjectLike {
+  /**
+   * Select the \`a\` field on the \`ObjectChildB\` object. Its type is \`String\` (a \`ScalarStandard\` kind of type).
+   */
+  a?: ObjectChildB.a$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<ObjectChildB.a<_$Scalars>>
+  /**
+   * Select the \`b\` field on the \`ObjectChildB\` object. Its type is \`String\` (a \`ScalarStandard\` kind of type).
+   */
+  b?: ObjectChildB.b$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<ObjectChildB.b<_$Scalars>>
+  /**
+   * Select the \`c2\` field on the \`ObjectChildB\` object. Its type is \`String\` (a \`ScalarStandard\` kind of type).
+   */
+  c2?: ObjectChildB.c2$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<ObjectChildB.c2<_$Scalars>>
+  /**
+   * Select the \`me\` field on the \`ObjectChildB\` object. Its type is \`Int\` (a \`ScalarStandard\` kind of type).
+   */
+  me?: ObjectChildB.me$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<ObjectChildB.me<_$Scalars>>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an \`@include\` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | ObjectChildB$FragmentInline<_$Scalars>
+    | ObjectChildB$FragmentInline<_$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+
+export interface ObjectChildB$FragmentInline<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends ObjectChildB<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
+
+// ----------------------------------------| Fields |
+
+export namespace ObjectChildB {
+  export type a<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | a$SelectionSet<_$Scalars>
+
+  export interface a$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the \`a\` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type a$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | a$SelectionSet<_$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type b<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | b$SelectionSet<_$Scalars>
+
+  export interface b$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the \`b\` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type b$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | b$SelectionSet<_$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type c2<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | c2$SelectionSet<_$Scalars>
+
+  export interface c2$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the \`c2\` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type c2$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | c2$SelectionSet<_$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type me<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | me$SelectionSet<_$Scalars>
+
+  export interface me$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the \`me\` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type me$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | me$SelectionSet<_$Scalars>
+  >
+}
+
+//                                         ObjectGrandparent
+// --------------------------------------------------------------------------------------------------
+//
+
+// ----------------------------------------| Entrypoint Interface |
+
+export interface ObjectGrandparent<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends $Select.Bases.ObjectLike {
+  /**
+   * Select the \`a\` field on the \`ObjectGrandparent\` object. Its type is \`String\` (a \`ScalarStandard\` kind of type).
+   */
+  a?: ObjectGrandparent.a$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<ObjectGrandparent.a<_$Scalars>>
+  /**
+   * Select the \`me\` field on the \`ObjectGrandparent\` object. Its type is \`Int\` (a \`ScalarStandard\` kind of type).
+   */
+  me?: ObjectGrandparent.me$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<ObjectGrandparent.me<_$Scalars>>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an \`@include\` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | ObjectGrandparent$FragmentInline<_$Scalars>
+    | ObjectGrandparent$FragmentInline<_$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+
+export interface ObjectGrandparent$FragmentInline<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends ObjectGrandparent<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
+
+// ----------------------------------------| Fields |
+
+export namespace ObjectGrandparent {
+  export type a<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | a$SelectionSet<_$Scalars>
+
+  export interface a$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the \`a\` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type a$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | a$SelectionSet<_$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type me<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | me$SelectionSet<_$Scalars>
+
+  export interface me$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the \`me\` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type me$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | me$SelectionSet<_$Scalars>
+  >
+}
+
 //                                            ObjectNested
 // --------------------------------------------------------------------------------------------------
 //
@@ -6709,6 +8146,129 @@ export namespace ObjectNested {
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
     $object$SelectionSet<_$Scalars>
+  >
+}
+
+//                                            ObjectParent
+// --------------------------------------------------------------------------------------------------
+//
+
+// ----------------------------------------| Entrypoint Interface |
+
+export interface ObjectParent<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends $Select.Bases.ObjectLike {
+  /**
+   * Select the \`a\` field on the \`ObjectParent\` object. Its type is \`String\` (a \`ScalarStandard\` kind of type).
+   */
+  a?: ObjectParent.a$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<ObjectParent.a<_$Scalars>>
+  /**
+   * Select the \`b\` field on the \`ObjectParent\` object. Its type is \`String\` (a \`ScalarStandard\` kind of type).
+   */
+  b?: ObjectParent.b$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<ObjectParent.b<_$Scalars>>
+  /**
+   * Select the \`me\` field on the \`ObjectParent\` object. Its type is \`String\` (a \`ScalarStandard\` kind of type).
+   */
+  me?: ObjectParent.me$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<ObjectParent.me<_$Scalars>>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an \`@include\` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | ObjectParent$FragmentInline<_$Scalars>
+    | ObjectParent$FragmentInline<_$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+
+export interface ObjectParent$FragmentInline<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends ObjectParent<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
+
+// ----------------------------------------| Fields |
+
+export namespace ObjectParent {
+  export type a<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | a$SelectionSet<_$Scalars>
+
+  export interface a$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the \`a\` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type a$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | a$SelectionSet<_$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type b<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | b$SelectionSet<_$Scalars>
+
+  export interface b$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the \`b\` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type b$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | b$SelectionSet<_$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type me<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | me$SelectionSet<_$Scalars>
+
+  export interface me$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the \`me\` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type me$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | me$SelectionSet<_$Scalars>
   >
 }
 
@@ -7270,6 +8830,379 @@ export namespace Interface {
   >
 }
 
+//                                          InterfaceChildA
+// --------------------------------------------------------------------------------------------------
+//
+
+export interface InterfaceChildA<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends $Select.Bases.ObjectLike {
+  a?: InterfaceChildA.a<_$Scalars>
+  b?: InterfaceChildA.b<_$Scalars>
+  c1?: InterfaceChildA.c1<_$Scalars>
+  ___on_ObjectChildA?: ObjectChildA<_$Scalars>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an \`@include\` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | InterfaceChildA$FragmentInline<_$Scalars>
+    | InterfaceChildA$FragmentInline<_$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected. Since this is a interface type and thus polymorphic,
+   * the name is one of the implementor type names, whichever is ultimately returned at runtime.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+
+export interface InterfaceChildA$FragmentInline<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends InterfaceChildA<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
+
+export namespace InterfaceChildA {
+  export type a<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | a$SelectionSet<_$Scalars>
+
+  export interface a$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the \`a\` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type a$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | a$SelectionSet<_$Scalars>
+  >
+
+  export type b<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | b$SelectionSet<_$Scalars>
+
+  export interface b$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the \`b\` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type b$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | b$SelectionSet<_$Scalars>
+  >
+
+  export type c1<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | c1$SelectionSet<_$Scalars>
+
+  export interface c1$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the \`c1\` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type c1$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | c1$SelectionSet<_$Scalars>
+  >
+}
+
+//                                          InterfaceChildB
+// --------------------------------------------------------------------------------------------------
+//
+
+export interface InterfaceChildB<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends $Select.Bases.ObjectLike {
+  a?: InterfaceChildB.a<_$Scalars>
+  b?: InterfaceChildB.b<_$Scalars>
+  c2?: InterfaceChildB.c2<_$Scalars>
+  ___on_ObjectChildB?: ObjectChildB<_$Scalars>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an \`@include\` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | InterfaceChildB$FragmentInline<_$Scalars>
+    | InterfaceChildB$FragmentInline<_$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected. Since this is a interface type and thus polymorphic,
+   * the name is one of the implementor type names, whichever is ultimately returned at runtime.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+
+export interface InterfaceChildB$FragmentInline<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends InterfaceChildB<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
+
+export namespace InterfaceChildB {
+  export type a<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | a$SelectionSet<_$Scalars>
+
+  export interface a$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the \`a\` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type a$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | a$SelectionSet<_$Scalars>
+  >
+
+  export type b<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | b$SelectionSet<_$Scalars>
+
+  export interface b$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the \`b\` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type b$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | b$SelectionSet<_$Scalars>
+  >
+
+  export type c2<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | c2$SelectionSet<_$Scalars>
+
+  export interface c2$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the \`c2\` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type c2$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | c2$SelectionSet<_$Scalars>
+  >
+}
+
+//                                        InterfaceGrandparent
+// --------------------------------------------------------------------------------------------------
+//
+
+export interface InterfaceGrandparent<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends $Select.Bases.ObjectLike {
+  a?: InterfaceGrandparent.a<_$Scalars>
+  ___on_ObjectChildA?: ObjectChildA<_$Scalars>
+  ___on_ObjectChildB?: ObjectChildB<_$Scalars>
+  ___on_ObjectGrandparent?: ObjectGrandparent<_$Scalars>
+  ___on_ObjectParent?: ObjectParent<_$Scalars>
+  ___on_InterfaceChildA?: InterfaceChildA<_$Scalars>
+  ___on_InterfaceChildB?: InterfaceChildB<_$Scalars>
+  ___on_InterfaceParent?: InterfaceParent<_$Scalars>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an \`@include\` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | InterfaceGrandparent$FragmentInline<_$Scalars>
+    | InterfaceGrandparent$FragmentInline<_$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected. Since this is a interface type and thus polymorphic,
+   * the name is one of the implementor type names, whichever is ultimately returned at runtime.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+
+export interface InterfaceGrandparent$FragmentInline<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends InterfaceGrandparent<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
+
+export namespace InterfaceGrandparent {
+  export type a<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | a$SelectionSet<_$Scalars>
+
+  export interface a$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the \`a\` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type a$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | a$SelectionSet<_$Scalars>
+  >
+}
+
+//                                          InterfaceParent
+// --------------------------------------------------------------------------------------------------
+//
+
+export interface InterfaceParent<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends $Select.Bases.ObjectLike {
+  a?: InterfaceParent.a<_$Scalars>
+  b?: InterfaceParent.b<_$Scalars>
+  ___on_ObjectChildA?: ObjectChildA<_$Scalars>
+  ___on_ObjectChildB?: ObjectChildB<_$Scalars>
+  ___on_ObjectParent?: ObjectParent<_$Scalars>
+  ___on_InterfaceChildA?: InterfaceChildA<_$Scalars>
+  ___on_InterfaceChildB?: InterfaceChildB<_$Scalars>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an \`@include\` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | InterfaceParent$FragmentInline<_$Scalars>
+    | InterfaceParent$FragmentInline<_$Scalars>[]
+
+  /**
+   * A meta field. Is the name of the type being selected. Since this is a interface type and thus polymorphic,
+   * the name is one of the implementor type names, whichever is ultimately returned at runtime.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $Select.Indicator.NoArgsIndicator$Expanded
+    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+}
+
+export interface InterfaceParent$FragmentInline<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> extends InterfaceParent<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+}
+
+export namespace InterfaceParent {
+  export type a<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | a$SelectionSet<_$Scalars>
+
+  export interface a$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the \`a\` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type a$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | a$SelectionSet<_$Scalars>
+  >
+
+  export type b<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+    | $Select.Indicator.NoArgsIndicator
+    | b$SelectionSet<_$Scalars>
+
+  export interface b$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the \`b\` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type b$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $Select.Indicator.NoArgsIndicator
+    | b$SelectionSet<_$Scalars>
+  >
+}
+
 /**
  * [1] These definitions serve to allow field selection interfaces to extend their respective object type without
  *     name clashing between the field name and the object name.
@@ -7285,6 +9218,10 @@ export namespace $NamedTypes {
   > = Mutation<_$Scalars>
   export type $ABCEnum = ABCEnum
   export type $Case = Case
+  export type $ChildAInterfaceHierarchyMember = ChildAInterfaceHierarchyMember
+  export type $ChildBInterfaceHierarchyMember = ChildBInterfaceHierarchyMember
+  export type $GrandparentInterfaceHierarchyMember = GrandparentInterfaceHierarchyMember
+  export type $ParentInterfaceHierarchyMember = ParentInterfaceHierarchyMember
   export type $InputObject<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = InputObject<_$Scalars>
@@ -7322,9 +9259,21 @@ export namespace $NamedTypes {
   export type $Object2ImplementingInterface<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = Object2ImplementingInterface<_$Scalars>
+  export type $ObjectChildA<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = ObjectChildA<_$Scalars>
+  export type $ObjectChildB<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = ObjectChildB<_$Scalars>
+  export type $ObjectGrandparent<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = ObjectGrandparent<_$Scalars>
   export type $ObjectNested<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = ObjectNested<_$Scalars>
+  export type $ObjectParent<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = ObjectParent<_$Scalars>
   export type $ObjectUnion<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = ObjectUnion<_$Scalars>
@@ -7353,6 +9302,18 @@ export namespace $NamedTypes {
   export type $Interface<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = Interface<_$Scalars>
+  export type $InterfaceChildA<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = InterfaceChildA<_$Scalars>
+  export type $InterfaceChildB<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = InterfaceChildB<_$Scalars>
+  export type $InterfaceGrandparent<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = InterfaceGrandparent<_$Scalars>
+  export type $InterfaceParent<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = InterfaceParent<_$Scalars>
 }
 "
 `;
