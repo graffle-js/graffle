@@ -1,4 +1,4 @@
-import { parse } from 'graphql'
+import { parse } from '@0no-co/graphql.web'
 import { describe, expect, test } from 'vitest'
 import { db } from '../../../../tests/_/schemas/db.js'
 import { schema } from '../../../../tests/_/schemas/kitchen-sink/schema.js'
@@ -27,7 +27,7 @@ describe(`document`, () => {
     })
     test(`__typename is dynamically added at runtime if missing`, async () => {
       const result = (await graffle
-        .document({ query: { x: { resultNonNull: { $: { $case: `ErrorOne` } } } } })
+        .document({ query: { x: { resultNonNull: { $: { $case: `ErrorOne` }, ___on_Object1: { id: true } } } } })
         .run()) as Errors.ContextualAggregateError
       expect(result.errors[0]).toMatchInlineSnapshot(`[Error: Failure on field resultNonNull: ErrorOne]`)
     })

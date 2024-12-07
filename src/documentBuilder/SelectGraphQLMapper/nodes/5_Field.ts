@@ -67,6 +67,14 @@ export const toGraphQLField: GraphQLPostOperationMapper<
     }
   }
 
+  // Empty array does not work with graphql.web
+  // @see https://github.com/0no-co/graphql.web/issues/45
+  const selectionSet = selections.length === 0
+    ? undefined
+    : Nodes.SelectionSet({
+      selections,
+    })
+
   return Nodes.Field({
     name: Nodes.Name({
       value: field.name,
@@ -74,9 +82,7 @@ export const toGraphQLField: GraphQLPostOperationMapper<
     alias,
     arguments: arguments_,
     directives,
-    selectionSet: Nodes.SelectionSet({
-      selections,
-    }),
+    selectionSet,
   })
 }
 

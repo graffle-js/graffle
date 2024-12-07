@@ -1,3 +1,4 @@
+import { parse, print as graphqlWebPrint } from '@0no-co/graphql.web'
 import {
   type ArgumentNode,
   type BooleanValueNode,
@@ -16,8 +17,6 @@ import {
   type ObjectFieldNode,
   type ObjectValueNode,
   type OperationDefinitionNode,
-  parse,
-  print as graphqlPrint,
   type SelectionSetNode,
   type StringValueNode,
   type TypeNode,
@@ -270,7 +269,7 @@ export const OperationTypeToAccessKind = {
 
 export const print = (document: TypedDocument.TypedDocumentLike): string => {
   const documentUntyped = TypedDocument.unType(document)
-  return isString(documentUntyped) ? documentUntyped : graphqlPrint(documentUntyped)
+  return isString(documentUntyped) ? documentUntyped : graphqlWebPrint(documentUntyped)
 }
 
 export const getNamedType = (type: TypeNode): NamedTypeNode => {

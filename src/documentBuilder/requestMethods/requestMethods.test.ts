@@ -13,7 +13,7 @@ describe(`query batch`, () => {
 
 describe(`query root field`, () => {
   test(`scalar`, async ({ kitchenSink, kitchenSinkData: db }) => {
-    await expect(kitchenSink.query.id()).resolves.toEqual(db.id1)
+    expect(await kitchenSink.query.id()).toEqual(db.id1)
   })
   test(`argument`, async ({ kitchenSink }) => {
     await expect(kitchenSink.query.stringWithArgs({ $: { id: `x` } })).resolves.toEqual(`{"id":"x"}`)

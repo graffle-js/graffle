@@ -119,6 +119,7 @@
     "release:pr": "dripip pr"
   },
   "dependencies": {
+    "@0no-co/graphql.web": "^1.0.11",
     "@graphql-typed-document-node/core": "^3.2.0",
     "@molt/command": "^0.9.0",
     "es-toolkit": "^1.29.0",

@@ -2,7 +2,6 @@
  * This example shows how to use special fields to write GraphQL document directives.
  */
 
-// import { parse, print } from 'graphql'
 import { Graffle } from '../../tests/_/schemas/pokemon/graffle/__.js'
 import { showJson } from '../$/helpers.js'
 
