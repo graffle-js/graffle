@@ -38,9 +38,22 @@ jobs:
       - name: Install Website Dependencies
         working-directory: website
         run: pnpm install
+      - name: Load Types Cache
+        id: load-types-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: website/.vitepress/cache/types
+          key: v1-vitepress-types-cache-${{ github.run_id }}
+          restore-keys: |
+            v1-vitepress-types-cache-
       - name: Build Website
         working-directory: website
         run:  pnpm build
+      - name: Save Types Cache
+        uses: actions/cache/save@v4
+        with:
+          path: website/.vitepress/cache/types
+          key: ${{ steps.load-types-cache.outputs.cache-primary-key }}
   test-unit:
     runs-on: ubuntu-latest
     strategy:

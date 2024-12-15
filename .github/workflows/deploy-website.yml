@@ -103,7 +103,6 @@ jobs:
         with:
           path: website/.vitepress/cache/types
           key: ${{ steps.load-types-cache.outputs.cache-primary-key }}
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
