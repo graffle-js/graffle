@@ -2,7 +2,7 @@
  * This example shows how to configure output to approximate the traditional GraphQL ExecutionResult type.
  */
 
-import { Graffle, Preset } from '../../src/entrypoints/main.js'
+import { Graffle, Preset } from 'graffle'
 import { show } from '../$/show.js'
 
 const graffle = Graffle

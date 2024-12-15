@@ -3,11 +3,9 @@
 
 <!-- dprint-ignore-start -->
 ```ts twoslash
-import { Graffle } from './graffle/__.js'
+const graffle = Graffle.create()
 
-const atlas = Graffle.create()
-
-const pokemons = await atlas.query.pokemons({
+const pokemons = await graffle.query.pokemons({
   $: { filter: { name: { in: [`Pikachu`, `Charizard`] } } },  // [!code highlight]
   name: true,
   trainer: { name: true },

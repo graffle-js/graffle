@@ -1,7 +1,7 @@
 /**
  * This example shows how to use the `searchParams` slot on the `pack` hook.
  */
-import { Graffle } from '../../src/entrypoints/main.js'
+import { Graffle } from 'graffle'
 import { publicGraphQLSchemaEndpoints, show } from '../$/helpers.js'
 
 const graffle = Graffle

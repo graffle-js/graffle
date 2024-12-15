@@ -8,8 +8,6 @@ This example shows how to configure output to embed errors into the envelope.
 
 <!-- dprint-ignore-start -->
 ```ts twoslash
-import { Graffle } from './graffle/__.js'
-
 const pokemon = Graffle
   .create({
     output: {

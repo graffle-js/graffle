@@ -1,7 +1,7 @@
 import { ConsoleSpanExporter, SimpleSpanProcessor } from '@opentelemetry/sdk-trace-base'
 import { NodeTracerProvider } from '@opentelemetry/sdk-trace-node'
-import { Opentelemetry } from '../../src/entrypoints/extensions/opentelemetry/runtime.js'
-import { Graffle } from '../../tests/_/schemas/pokemon/graffle/__.js'
+import { Opentelemetry } from 'graffle/extensions/opentelemetry'
+import { Graffle } from '../$/graffle/__.js'
 import { interceptAndShowOutput, show } from '../$/helpers.js'
 
 interceptAndShowOutput()

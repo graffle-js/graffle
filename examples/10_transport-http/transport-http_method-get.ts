@@ -3,7 +3,7 @@
  * to be sent over HTTP GET method. Note write-kind operations (mutation) are still sent over HTTP POST method.
  */
 
-import { Graffle } from '../../tests/_/schemas/pokemon/graffle/__.js'
+import { Graffle } from '../$/graffle/__.js'
 import { show } from '../$/helpers.js'
 
 const graffle = Graffle

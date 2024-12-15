@@ -2,10 +2,10 @@
  * This example shows how to send a request using a Document instance for the GraphQL document.
  */
 
+import { Graffle } from 'graffle'
+import { Opentelemetry } from 'graffle/extensions/opentelemetry'
+import { Throws } from 'graffle/extensions/throws'
 import { parse } from 'graphql'
-import { Opentelemetry } from '../../src/entrypoints/extensions/opentelemetry/runtime.js'
-import { Throws } from '../../src/entrypoints/extensions/throws/runtime.js'
-import { Graffle } from '../../src/entrypoints/main.js'
 import { publicGraphQLSchemaEndpoints, show } from '../$/helpers.js'
 
 const graffle = Graffle

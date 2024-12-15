@@ -2,8 +2,8 @@
 {
   __schema: {
     description: null,
-    queryType: { name: 'Query' },
-    mutationType: { name: 'Mutation' },
+    queryType: { name: 'Query', kind: 'OBJECT' },
+    mutationType: { name: 'Mutation', kind: 'OBJECT' },
     subscriptionType: null,
     types: [
       {

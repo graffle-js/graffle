@@ -4,7 +4,7 @@
  * suggests below, ideally some sort of automation would generate the types for you.
  */
 
-import { Graffle, type TypedDocument } from '../../src/entrypoints/main.js'
+import { Graffle, type TypedDocument } from 'graffle'
 import { publicGraphQLSchemaEndpoints, show } from '../$/helpers.js'
 
 const graffle = Graffle.create().transport({ url: publicGraphQLSchemaEndpoints.Pokemon })

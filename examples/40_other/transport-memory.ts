@@ -2,9 +2,9 @@
  * This example shows how you can send requests against an in-memory GraphQL schema instead of one hosted over HTTP.
  */
 
+import { Graffle } from 'graffle'
+import { TransportMemory } from 'graffle/extensions/transport-memory'
 import { GraphQLObjectType, GraphQLSchema, GraphQLString } from 'graphql'
-import { Graffle } from '../../src/entrypoints/main.js'
-import { TransportMemory } from '../../src/extensions/TransportMemory/TransportMemory.js'
 import { showJson } from '../$/helpers.js'
 
 const schema = new GraphQLSchema({

@@ -2,8 +2,8 @@
  * This example shows how to use the Throws extension to throw errors for one-off cases.
  */
 
-import { Throws } from '../../src/entrypoints/extensions/throws/runtime.js'
-import { Graffle } from '../../tests/_/schemas/pokemon/graffle/__.js'
+import { Throws } from 'graffle/extensions/throws'
+import { Graffle } from '../$/graffle/__.js'
 import { interceptAndShowUncaughtErrors, show } from '../$/show.js'
 
 interceptAndShowUncaughtErrors()

@@ -42,13 +42,13 @@
       "default": "./build/entrypoints/extensions/transport-http/runtime.js"
     },
     "./presets/bare": {
-      "default": "./build/entrypoints/presets/__GraffleBare.js"
+      "default": "./build/entrypoints/presets/bare.js"
     },
     "./presets/basic": {
-      "default": "./build/entrypoints/presets/__GraffleBasic.js"
+      "default": "./build/entrypoints/presets/basic.js"
     },
     "./presets/minimal": {
-      "default": "./build/entrypoints/presets/__GraffleMinimal.js"
+      "default": "./build/entrypoints/presets/minimal.js"
     },
     "./client": {
       "default": "./build/entrypoints/client.js"
@@ -92,6 +92,7 @@
     "serve:pokemon": "tsx tests/_/services/pokemonManual.ts",
     "gen:graffle": "pnpm gen:graffle:tests && pnpm build && cd website && pnpm gen:graffle",
     "gen:graffle:tests": "tsx tests/_/schemas/generate.ts && pnpm graffle --project src/extensions/SchemaErrors/tests/fixture",
+    "gen:graffle:examples": "tsx tests/_/schemas/generate.ts && pnpm graffle --defaultSchemaUrl http://localhost:3000/graphql --schema ./tests/_/schemas/pokemon/schema.graphql --output ./examples/$/graffle",
     "graffle": "tsx ./src/generator/cli/generate.ts",
     "gen:examples": "tsx scripts/generate-examples-derivatives/generate.ts && pnpm format",
     "dev": "rm -rf dist && tsc --watch",

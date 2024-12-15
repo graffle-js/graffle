@@ -8,8 +8,6 @@ This example shows how to work with interface types.
 
 <!-- dprint-ignore-start -->
 ```ts twoslash
-import { Graffle } from './graffle/__.js'
-
 const pokemon = Graffle.create()
 
 const beings = await pokemon.query.beings({

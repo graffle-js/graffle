@@ -3,7 +3,7 @@
  */
 
 /* eslint-disable */
-import { Graffle } from '../../src/entrypoints/main.js'
+import { Graffle } from 'graffle'
 import { showJson } from '../$/helpers.js'
 import { publicGraphQLSchemaEndpoints } from '../$/helpers.js'
 

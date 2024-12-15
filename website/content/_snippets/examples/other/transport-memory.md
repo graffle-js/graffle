@@ -3,9 +3,9 @@
 
 <!-- dprint-ignore-start -->
 ```ts twoslash
-import { GraphQLObjectType, GraphQLSchema, GraphQLString } from 'graphql'
 import { Graffle } from 'graffle'
-import { TransportMemory } from '../../src/extensions/TransportMemory/TransportMemory.js'
+import { TransportMemory } from 'graffle/extensions/transport-memory'
+import { GraphQLObjectType, GraphQLSchema, GraphQLString } from 'graphql'
 
 const schema = new GraphQLSchema({
   query: new GraphQLObjectType({

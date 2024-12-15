@@ -2,7 +2,7 @@
  * This example shows how to write GraphQL aliases in the TypeScript interface.
  */
 
-import { Graffle } from '../../tests/_/schemas/pokemon/graffle/__.js'
+import { Graffle } from '../$/graffle/__.js'
 import { showJson } from '../$/helpers.js'
 
 const pokemon = Graffle.create()

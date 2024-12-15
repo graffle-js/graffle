@@ -4,11 +4,11 @@
  * Transport HTTP extension.
  */
 
-import { Graffle } from '../../src/entrypoints/main.js'
-import { create } from '../../src/entrypoints/presets/minimal.js'
+import { Graffle } from 'graffle'
+import { GraffleMinimal } from 'graffle/presets/minimal'
 
-console.log(`Is the default preset`, Graffle.create === create)
+console.log(`Is the default preset`, Graffle.create === GraffleMinimal.create)
 
-const graffle = create()
+const graffle = GraffleMinimal.create()
 
 console.log(`The current transport is`, graffle._.transports.current)

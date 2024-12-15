@@ -8,8 +8,6 @@ This example shows how to use special fields to write GraphQL document directive
 
 <!-- dprint-ignore-start -->
 ```ts twoslash
-import { Graffle } from './graffle/__.js'
-
 const pokemon = Graffle.create()
 
 const pokemons = await pokemon.query.$batch({

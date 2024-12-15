@@ -2,7 +2,7 @@
  * This example shows how to leverage the extension system to dynamically manipulate headers per request.
  */
 
-import { Graffle } from '../../src/entrypoints/main.js'
+import { Graffle } from 'graffle'
 import { publicGraphQLSchemaEndpoints, show } from '../$/helpers.js'
 
 const graffle = Graffle

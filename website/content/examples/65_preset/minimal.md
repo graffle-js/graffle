@@ -11,11 +11,11 @@ Transport HTTP extension.
 <!-- dprint-ignore-start -->
 ```ts twoslash
 import { Graffle } from 'graffle'
-import { create } from 'graffle/presets/minimal'
+import { GraffleMinimal } from 'graffle/presets/minimal'
 
-console.log(`Is the default preset`, Graffle.create === create)
+console.log(`Is the default preset`, Graffle.create === GraffleMinimal.create)
 
-const graffle = create()
+const graffle = GraffleMinimal.create()
 
 console.log(`The current transport is`, graffle._.transports.current)
 ```

@@ -2,7 +2,7 @@
  * This example shows how to configure output to have only certain kinds of errors returned while others thrown.
  */
 
-import { Graffle } from '../../tests/_/schemas/pokemon/graffle/__.js'
+import { Graffle } from '../$/graffle/__.js'
 import { show } from '../$/show.js'
 
 const pokemon = Graffle

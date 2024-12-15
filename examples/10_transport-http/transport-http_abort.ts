@@ -2,7 +2,7 @@
  * This example shows how to cancel requests using an `AbortController` signal.
  */
 
-import { Graffle } from '../../src/entrypoints/main.js'
+import { Graffle } from 'graffle'
 import { publicGraphQLSchemaEndpoints, show } from '../$/helpers.js'
 
 const abortController = new AbortController()

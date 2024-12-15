@@ -5,10 +5,10 @@
 
 <!-- dprint-ignore-start -->
 ```ts twoslash
-import { parse } from 'graphql'
+import { Graffle } from 'graffle'
 import { Opentelemetry } from 'graffle/extensions/opentelemetry'
 import { Throws } from 'graffle/extensions/throws'
-import { Graffle } from 'graffle'
+import { parse } from 'graphql'
 
 const graffle = Graffle
   .create()

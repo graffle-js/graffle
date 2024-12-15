@@ -3,8 +3,6 @@
 
 <!-- dprint-ignore-start -->
 ```ts twoslash
-import { Graffle } from './graffle/__.js'
-
 const pokemon = Graffle.create()
 
 const battles = await pokemon.query.battles({

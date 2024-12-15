@@ -3,8 +3,8 @@
 
 <!-- dprint-ignore-start -->
 ```ts twoslash
-import { parse, type TypedQueryDocumentNode } from 'graphql'
 import { Graffle } from 'graffle'
+import { parse, type TypedQueryDocumentNode } from 'graphql'
 
 const graffle = Graffle.create()
   .transport({

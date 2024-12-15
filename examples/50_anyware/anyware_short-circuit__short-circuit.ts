@@ -3,7 +3,7 @@
  * This is more succinct than having to manually write each hook execution
  * even past your desired one until the final result.
  */
-import { Graffle } from '../../src/entrypoints/main.js'
+import { Graffle } from 'graffle'
 import { publicGraphQLSchemaEndpoints } from '../$/helpers.js'
 
 Graffle

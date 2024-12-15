@@ -30,5 +30,5 @@
     "verbatimModuleSyntax": true
   },
   "include": ["src", "tests", "examples", "scripts"],
-  "exclude": ["build"]
+  "exclude": ["build", "examples"]
 }

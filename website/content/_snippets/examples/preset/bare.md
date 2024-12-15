@@ -4,9 +4,9 @@
 <!-- dprint-ignore-start -->
 ```ts twoslash
 import { Introspection } from 'graffle/extensions/introspection'
-import { create } from 'graffle/presets/bare'
+import { GraffleBare } from 'graffle/presets/bare'
 
-const graffle = create()
+const graffle = GraffleBare.create()
 
 /**
  * Because we have no transports registered, the `transport` method
@@ -19,9 +19,9 @@ const _t: never = graffle.transport
 const _e1: 'Error: You cannot send requests yet. You must setup a transport.' = graffle.gql
 const _e2: 'Error: You cannot send requests yet. You must setup a transport.' = graffle.document
 const _e3: 'Error: You cannot send requests yet. You must setup a transport.' = graffle.query.$batch
-const _e4: 'Error: You cannot send requests yet. You must setup a transport.' = graffle.query.id
+const _e4: 'Error: You cannot send requests yet. You must setup a transport.' = graffle.query.pokemons
 const _e5: 'Error: You cannot send requests yet. You must setup a transport.' = graffle.mutation.$batch
-const _e6: 'Error: You cannot send requests yet. You must setup a transport.' = graffle.mutation.id
+const _e6: 'Error: You cannot send requests yet. You must setup a transport.' = graffle.mutation.addPokemon
 const _e7: 'Error: You cannot send requests yet. You must setup a transport.' = graffle.use(Introspection()).introspect
 ```
 <!-- dprint-ignore-end -->

@@ -3,8 +3,8 @@
  * package `graphql` to make a type safe request with gql method.
  */
 
+import { Graffle } from 'graffle'
 import { parse, type TypedQueryDocumentNode } from 'graphql'
-import { Graffle } from '../../src/entrypoints/main.js'
 import { publicGraphQLSchemaEndpoints, show } from '../$/helpers.js'
 
 const graffle = Graffle.create()
