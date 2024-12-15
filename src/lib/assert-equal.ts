@@ -17,6 +17,9 @@ type _______IsEqual = [
   IsFalse<IsEqual<string, 'a'>>,
   IsFalse<IsEqual<'a', string>>,
   IsFalse<IsEqual<{}, { a?: string }>>,
+  IsFalse<IsEqual<never, 2>>,
+  IsFalse<IsEqual<2, never>>,
+  IsTrue<IsEqual<never, never>>,
 ]
 
 export type assertEqual<A, B> = IsEqual<A, B> extends true ? true : never
@@ -42,7 +45,7 @@ export const assertExtends = <A, B>(
     : []
 ) => undefined
 
-export const AssertTypeOf = <A, B = A>(
+export const assertType = <A, B = A>(
   _: B,
   ...__: IsEqual<A, B> extends false ? [reason: {
       A: SimplifyDeep<A>

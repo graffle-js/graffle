@@ -8,12 +8,11 @@
 import { Graffle } from 'graffle'
 
 const graffle = Graffle
-  .create({
-    schema: `http://localhost:3000/graphql`,
-    transport: {
-      raw: {
-        mode: `cors`,
-      },
+  .create()
+  .transport({
+    url: `http://localhost:3000/graphql`,
+    raw: {
+      mode: `cors`,
     },
   })
   .anyware(async ({ exchange }) => {

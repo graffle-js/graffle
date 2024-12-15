@@ -5,7 +5,6 @@
 
 <!-- dprint-ignore-start -->
 ```ts twoslash
-// import { parse, print } from 'graphql'
 import { Graffle } from './graffle/__.js'
 
 const pokemon = Graffle.create()

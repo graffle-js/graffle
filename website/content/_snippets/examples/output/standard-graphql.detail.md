@@ -7,10 +7,9 @@
 ```ts twoslash
 import { Graffle, Preset } from 'graffle'
 
-const graffle = Graffle.create({
-  schema: `...`,
-  output: Preset.traditionalGraphqlOutput,
-})
+const graffle = Graffle
+  .create({ output: Preset.traditionalGraphqlOutput })
+  .transport({ url: `...` })
 
 const result = await graffle.gql(`{ query { thisWillError } }`).send()
 
@@ -35,15 +34,15 @@ ContextualError: There was an error in the core implementation of hook "exchange
   context: { hookName: 'exchange', source: 'implementation' },
   [cause]: TypeError: Failed to parse URL from ...
       at new Request (node:internal/deps/undici/undici:XX:XX)
-      at Object.run (/some/path/to/httpTransport.ts:XX:XX:27)
+      at Object.run (/some/path/to/TransportHttp.ts:XX:XX:31)
       ... 6 lines matching cause stack trace ...
       at async Module.run (/some/path/to/run.ts:XX:XX:10)
       at async Object.send (/some/path/to/gql.ts:XX:XX:26) {
     [cause]: TypeError: Invalid URL
         at new URL (node:internal/url:XX:XX)
         at new Request (node:internal/deps/undici/undici:XX:XX)
-        at Object.run (/some/path/to/httpTransport.ts:XX:XX:27)
-        at Object.run (/some/path/to/builder.ts:XX:XX:53)
+        at Object.run (/some/path/to/TransportHttp.ts:XX:XX:31)
+        at Object.run (/some/path/to/Pipeline.ts:XX:XX:51)
         at runStep (/some/path/to/runStep.ts:XX:XX:37)
         at runPipeline (/some/path/to/runPipeline.ts:XX:XX:8)
         at runPipeline (/some/path/to/runPipeline.ts:XX:XX:20)

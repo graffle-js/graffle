@@ -11,7 +11,8 @@ This example shows how to use the `fetch` slot on `exchange` hook.
 import { Graffle } from 'graffle'
 
 const graffle = Graffle
-  .create({ schema: `http://localhost:3000/graphql` })
+  .create()
+  .transport({ url: `http://localhost:3000/graphql` })
   .anyware(async ({ exchange }) => {
     return await exchange({
       using: {

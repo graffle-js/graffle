@@ -8,9 +8,10 @@
 import { parse, type TypedQueryDocumentNode } from 'graphql'
 import { Graffle } from 'graffle'
 
-const graffle = Graffle.create({
-  schema: `http://localhost:3000/graphql`,
-})
+const graffle = Graffle.create()
+  .transport({
+    url: `http://localhost:3000/graphql`,
+  })
 
 type Document = TypedQueryDocumentNode<
   {

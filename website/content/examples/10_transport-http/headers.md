@@ -11,22 +11,21 @@ This example shows how to use the `transport` configuration to control request h
 import { Graffle } from 'graffle'
 
 const graffle = Graffle
-  .create({
-    schema: `http://localhost:3000/graphql`,
-    transport: {
+  .create()
+  .transport({
+    url: `http://localhost:3000/graphql`,
+    headers: {
+      authorization: `Bearer MY_TOKEN`,
+      'x-something-to-unset': `true`,
+    },
+    raw: {
       headers: {
-        authorization: `Bearer MY_TOKEN`,
-        'x-something-to-unset': `true`,
-      },
-      raw: {
-        headers: {
-          'x-from-raw': `true`,
-        },
+        'x-from-raw': `true`,
       },
     },
   })
-  .with({
-    transport: { headers: { 'x-something-to-unset': `` } },
+  .transport({
+    headers: { 'x-something-to-unset': `` },
   })
   .anyware(({ exchange }) => {
     if (exchange.input.transportType !== `http`) return exchange()

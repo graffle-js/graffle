@@ -7,6 +7,7 @@
 ```ts twoslash
 import { GraphQLObjectType, GraphQLSchema, GraphQLString } from 'graphql'
 import { Graffle } from 'graffle'
+import { TransportMemory } from '../../src/extensions/TransportMemory/TransportMemory.js'
 
 const schema = new GraphQLSchema({
   query: new GraphQLObjectType({
@@ -20,7 +21,10 @@ const schema = new GraphQLSchema({
   }),
 })
 
-const graffle = Graffle.create({ schema })
+const graffle = Graffle
+  .create()
+  .use(TransportMemory({ schema }))
+  .transport(`memory`)
 
 const data = await graffle.gql`
   {

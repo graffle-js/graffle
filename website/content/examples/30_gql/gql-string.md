@@ -10,9 +10,7 @@ This example shows how to send a request using a string for the GraphQL document
 ```ts twoslash
 import { Graffle } from 'graffle'
 
-const graffle = Graffle.create({
-  schema: `http://localhost:3000/graphql`,
-})
+const graffle = Graffle.create().transport({ url: `http://localhost:3000/graphql` })
 
 const data = await graffle.gql`
   {

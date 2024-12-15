@@ -36,6 +36,8 @@ export interface RequestPipelineBaseDefinition extends Anyware.PipelineDefinitio
   input: {
     request: Grafaid.RequestAnalyzedInput
     state: Context
+    transportType: 'none'
+    transport: {}
   }
   steps: [{
     name: 'encode'
@@ -76,10 +78,7 @@ export const requestPipelineBaseDefinition: RequestPipelineBaseDefinition = Anyw
       return signal.hookName === `exchange` && isAbortError(signal.error)
     },
   })
-  .input<{
-    request: Grafaid.RequestAnalyzedInput
-    state: Context
-  }>()
+  .input<RequestPipelineBaseDefinition['input']>()
   .step(`encode`, {
     run: (input) => {
       const sddm = input.state.schemaMap

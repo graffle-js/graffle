@@ -11,8 +11,9 @@ This example shows how to leverage the extension system to dynamically manipulat
 import { Graffle } from 'graffle'
 
 const graffle = Graffle
-  .create({
-    schema: `http://localhost:3000/graphql`,
+  .create()
+  .transport({
+    url: `http://localhost:3000/graphql`,
   })
   .anyware(({ pack }) => {
     if (pack.input.transportType !== `http`) return pack()
@@ -44,7 +45,7 @@ await graffle.gql`{ pokemons { name } }`.send()
   headers: Headers {
     accept: 'application/graphql-response+json; charset=utf-8, application/json; charset=utf-8',
     'content-type': 'application/json',
-    'x-sent-at-time': '1731961845707'
+    'x-sent-at-time': '1734268415173'
   },
   method: 'post',
   url: 'http://localhost:3000/graphql',

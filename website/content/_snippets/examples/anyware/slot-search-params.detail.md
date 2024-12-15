@@ -8,7 +8,8 @@
 import { Graffle } from 'graffle'
 
 const graffle = Graffle
-  .create({ schema: `http://localhost:3000/graphql`, transport: { methodMode: `getReads` } })
+  .create()
+  .transport({ url: `http://localhost:3000/graphql`, methodMode: `getReads` })
   .anyware(async ({ pack }) => {
     return await pack({
       using: {

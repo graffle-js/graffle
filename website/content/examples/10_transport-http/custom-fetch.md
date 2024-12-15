@@ -11,7 +11,8 @@ This examples shows how to leverage the extension system to override the "exchan
 import { Graffle } from 'graffle'
 
 const graffle = Graffle
-  .create({ schema: `http://localhost:3000/graphql` })
+  .create()
+  .transport({ url: `http://localhost:3000/graphql` })
   .anyware(({ exchange }) =>
     exchange({
       using: {

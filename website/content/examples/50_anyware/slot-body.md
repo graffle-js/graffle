@@ -11,7 +11,8 @@ This example shows how to use the `body` slot on the `pack` hook.
 import { Graffle } from 'graffle'
 
 const graffle = Graffle
-  .create({ schema: `http://localhost:3000/graphql` })
+  .create()
+  .transport({ url: `http://localhost:3000/graphql` })
   .anyware(async ({ pack }) => {
     return await pack({
       using: {

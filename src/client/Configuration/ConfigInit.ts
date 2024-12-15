@@ -81,12 +81,15 @@ export type ConfigInitOutput =
   }
 
 // dprint-ignore
-export type NormalizeConfigInit<$ConfigInit extends ConfigInit> = {
-  [_ in keyof $ConfigInit]:
-    _ extends 'output'
-      ? NormalizeConfigInitOutput<$ConfigInit['output']>
-      : $ConfigInit[_]
-}
+export type NormalizeConfigInit<$ConfigInit extends ConfigInit> =
+  ConfigInit extends $ConfigInit
+    ? {}
+    : {
+        [_ in keyof $ConfigInit]:
+          _ extends 'output'
+            ? NormalizeConfigInitOutput<$ConfigInit['output']>
+            : $ConfigInit[_]
+      }
 
 // dprint-ignore
 type NormalizeConfigInitOutput<$Output extends ConfigInitOutput | undefined> = {

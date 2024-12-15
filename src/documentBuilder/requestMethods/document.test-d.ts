@@ -3,18 +3,18 @@ import { Graffle } from '../../../tests/_/schemas/kitchen-sink/graffle/__.js'
 import { MutationOnly } from '../../../tests/_/schemas/mutation-only/graffle/__.js'
 import { QueryOnly } from '../../../tests/_/schemas/query-only/graffle/__.js'
 
-const graffle = Graffle.create()
+const g = Graffle.create({ checkPreflight: false })
 
 test(`requires input`, () => {
   // @ts-expect-error missing input
-  graffle.document()
+  g.document()
   // todo
   // // @ts-expect-error empty object
   // graffle.document({})
 })
 
 test(`document with one query`, async () => {
-  const run = graffle.document({ query: { foo: { id: true } } }).run
+  const run = g.document({ query: { foo: { id: true } } }).run
   type $Parameters = Parameters<typeof run>
   expectTypeOf<$Parameters>().toEqualTypeOf<[]>()
   const result = await run()
@@ -22,7 +22,7 @@ test(`document with one query`, async () => {
 })
 
 test(`document with two queries`, async () => {
-  const run = graffle.document({
+  const run = g.document({
     query: {
       foo: { id: true },
       bar: { date: true },
@@ -35,7 +35,7 @@ test(`document with two queries`, async () => {
 })
 
 test(`document with two queries of different root types`, async () => {
-  const run = graffle.document({
+  const run = g.document({
     query: {
       foo: { id: true },
     },
@@ -50,13 +50,13 @@ test(`document with two queries of different root types`, async () => {
 })
 
 test(`root operation not available if it is not in schema`, () => {
-  const queryOnly = QueryOnly.create()
+  const queryOnly = QueryOnly.create({ checkPreflight: false })
   queryOnly.document({
     query: { foo: { id: true } },
     // @ts-expect-error mutation not in schema
     mutation: { foo: { id: true } },
   })
-  const mutationOnly = MutationOnly.create()
+  const mutationOnly = MutationOnly.create({ checkPreflight: false })
   mutationOnly.document({
     mutation: { bar: { id: true } },
     // @ts-expect-error query not in schema

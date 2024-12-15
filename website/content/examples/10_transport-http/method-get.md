@@ -12,11 +12,10 @@ to be sent over HTTP GET method. Note write-kind operations (mutation) are still
 import { Graffle } from './graffle/__.js'
 
 const graffle = Graffle
-  .create({
-    transport: {
-      methodMode: `getReads`, // [!code highlight]
-      headers: { tenant: `nano` },
-    },
+  .create()
+  .transport({
+    methodMode: `getReads`, // [!code highlight]
+    headers: { tenant: `nano` },
   })
   .anyware(async ({ exchange }) => {
     console.log(exchange.input.request)

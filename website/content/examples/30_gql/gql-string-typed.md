@@ -12,9 +12,7 @@ suggests below, ideally some sort of automation would generate the types for you
 ```ts twoslash
 import { Graffle, type TypedDocument } from 'graffle'
 
-const graffle = Graffle.create({
-  schema: `http://localhost:3000/graphql`,
-})
+const graffle = Graffle.create().transport({ url: `http://localhost:3000/graphql` })
 
 /**
  * @remarks Typically this type would come from your code generation tool.

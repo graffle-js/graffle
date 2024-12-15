@@ -52,21 +52,29 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
   // dprint-ignore
   code(`
     export interface ${node.name}Methods<$Context extends ${identifiers.$$Utilities}.Context> {
-      $batch: <$SelectionSet>(selectionSet: ${identifiers.$$Utilities}.Exact<$SelectionSet, ${identifiers.$$SelectionSets}.${node.name}<$Context['scalars']>>) =>
-        Promise<
-          & (null | {})
-          & ${identifiers.$$Utilities}.HandleOutput<
-              $Context,
-              InferResult.Operation${capitalizeFirstLetter(operationType)}<${identifiers.$$Utilities}.AssertExtendsObject<$SelectionSet>, ${identifiers.$$Schema}.${identifiers.Schema}<$Context['scalars']>>
+      $batch:
+        ${identifiers.$$Utilities}.ClientTransports.PreflightCheck<
+          $Context,
+          <$SelectionSet>(selectionSet: ${identifiers.$$Utilities}.Exact<$SelectionSet, ${identifiers.$$SelectionSets}.${node.name}<$Context['scalars']>>) =>
+            Promise<
+              & (null | {})
+              & ${identifiers.$$Utilities}.HandleOutput<
+                  $Context,
+                  InferResult.Operation${capitalizeFirstLetter(operationType)}<${identifiers.$$Utilities}.AssertExtendsObject<$SelectionSet>, ${identifiers.$$Schema}.${identifiers.Schema}<$Context['scalars']>>
+                >
             >
         >
-      __typename: () =>
-        Promise<
-          & (null | {})
-          & ${identifiers.$$Utilities}.HandleOutputGraffleRootField<
-              $Context,
-              { __typename: '${node.name}' },
-              '__typename'
+      __typename:
+        ${identifiers.$$Utilities}.ClientTransports.PreflightCheck<
+          $Context,
+          () =>
+            Promise<
+              & (null | {})
+              & ${identifiers.$$Utilities}.HandleOutputGraffleRootField<
+                  $Context,
+                  { __typename: '${node.name}' },
+                  '__typename'
+                >
             >
         >
       ${fieldMethods}
@@ -86,13 +94,17 @@ const renderFieldMethods = createCodeGenerator<{ node: Grafaid.Schema.ObjectType
     const operationType = getOperationTypeOrThrow(config, node)
     // dprint-ignore
     code(`
-      ${field.name}: <$SelectionSet>(selectionSet${isOptional ? `?` : ``}: ${identifiers.$$Utilities}.Exact<$SelectionSet, ${identifiers.$$SelectionSets}.${renderName(node)}.${renderName(field)}<$Context['scalars']>>) =>
-        Promise<
-          & (null | {})
-          & ${identifiers.$$Utilities}.HandleOutputGraffleRootField<
-              $Context,
-              InferResult.Operation${capitalizeFirstLetter(operationType)}<{ ${field.name}: $SelectionSet}, ${identifiers.$$Schema}.${identifiers.Schema}<$Context['scalars']>>,
-              '${field.name}'
+      ${field.name}:
+        ${identifiers.$$Utilities}.ClientTransports.PreflightCheck<
+          $Context,
+          <$SelectionSet>(selectionSet${isOptional ? `?` : ``}: ${identifiers.$$Utilities}.Exact<$SelectionSet, ${identifiers.$$SelectionSets}.${renderName(node)}.${renderName(field)}<$Context['scalars']>>) =>
+            Promise<
+              & (null | {})
+              & ${identifiers.$$Utilities}.HandleOutputGraffleRootField<
+                  $Context,
+                  InferResult.Operation${capitalizeFirstLetter(operationType)}<{ ${field.name}: $SelectionSet}, ${identifiers.$$Schema}.${identifiers.Schema}<$Context['scalars']>>,
+                  '${field.name}'
+                >
             >
         >
     `)
