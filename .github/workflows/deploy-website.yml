@@ -47,61 +47,77 @@ jobs:
 # Currently, the Twoslash results in CI are not consistent with local results.
 # E.g. We'll get some variable as `any` in CI versus an actual data type in local.
 
-# name: Deploy Website
-# on:
-#   push:
-#     branches: [main]
-#   # Allows us to run this workflow manually from the Actions tab
-#   workflow_dispatch:
-# permissions:
-#   contents: read
-#   pages: write
-#   id-token: write
-# concurrency:
-#   group: deploy-website
-#   cancel-in-progress: false
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout
-#         uses: actions/checkout@v4
-#         with:
-#           fetch-depth: 0 # Not needed if lastUpdated is not enabled
-#       - uses: pnpm/action-setup@v3 # Uncomment this if you're using pnpm
-#       - name: Setup Node
-#         uses: actions/setup-node@v4
-#         with:
-#           node-version: 22
-#           cache: pnpm
-#       - name: Setup Pages
-#         uses: actions/configure-pages@v5
-#       # In order to build the website we need to have the library built first.
-#       # This is because the Twoslash will depend on the types from Graffle,
-#       # which in this setup is coming from a pnpm install targetting the local
-#       # library file path.
-#       - name: Install Library Dependencies
-#         run: pnpm install
-#       - name: Build Library
-#         run:  pnpm build
-#       - name: Install Website Dependencies
-#         working-directory: website
-#         run: pnpm install
-#       - name: Build Website
-#         working-directory: website
-#         run:  pnpm build
-#       - name: Upload artifact
-#         uses: actions/upload-pages-artifact@v3
-#         with:
-#           path: website/.vitepress/dist
-#   deploy:
-#     environment:
-#       name: github-pages
-#       url: ${{ steps.deployment.outputs.page_url }}
-#     needs: build
-#     runs-on: ubuntu-latest
-#     name: Deploy
-#     steps:
-#       - name: Deploy to GitHub Pages
-#         id: deployment
-#         uses: actions/deploy-pages@v4
+name: Deploy Website
+on:
+  push:
+    branches: [main]
+  # Allows us to run this workflow manually from the Actions tab
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: deploy-website
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Not needed if lastUpdated is not enabled
+      - uses: pnpm/action-setup@v3 # Uncomment this if you're using pnpm
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      # In order to build the website we need to have the library built first.
+      # This is because the Twoslash will depend on the types from Graffle,
+      # which in this setup is coming from a pnpm install targetting the local
+      # library file path.
+      - name: Install Library Dependencies
+        run: pnpm install
+      - name: Build Library
+        run:  pnpm build
+      - name: Install Website Dependencies
+        working-directory: website
+        run: pnpm install
+      - run: Load Types Cache
+        id: load-types-cache
+        working-directory: website
+        uses: actions/cache/restore@v4
+        with:
+          path: .vitepress/cache/types
+          key: v1-vitepress-types-cache-${{ github.run_id }}
+          restore-keys: |
+            v1-vitepress-types-cache-
+      - name: Build Website
+        working-directory: website
+        run:  pnpm build
+      - run: Save Types Cache
+        working-directory: website
+        uses: actions/cache/save@v4
+        with:
+          path: .vitepress/cache/types
+          key: ${{ steps.load-types-cache.outputs.cache-primary-key }}
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: website/.vitepress/dist
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    name: Deploy
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

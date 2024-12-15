@@ -9,3 +9,4 @@ website/.vitepress/.temp
 website/.vitepress/cache
 legacy
 project/
+website/.vitepress/dist

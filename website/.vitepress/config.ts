@@ -1,8 +1,10 @@
 import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
+import { createFileSystemTypesCache } from '@shikijs/vitepress-twoslash/cache-fs'
 import { ModuleKind, ModuleResolutionKind } from 'typescript'
 import { defineConfig } from 'vitepress'
 import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
-import { generateSidebar, SidebarItem, SidebarMulti } from 'vitepress-sidebar'
+import { generateSidebar } from 'vitepress-sidebar'
+import { SidebarItem, SidebarMulti } from 'vitepress-sidebar/types'
 
 const prefixPattern = /\d+_/g
 
@@ -98,6 +100,9 @@ export default defineConfig({
     codeTransformers: [
       ...(process.env.disable_twoslash ? [] : [
         transformerTwoslash({
+          typesCache: createFileSystemTypesCache({
+            dir: './.vitepress/cache/types',
+          }),
           twoslashOptions: {
             handbookOptions: {
               noErrors: true,
