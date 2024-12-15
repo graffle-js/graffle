@@ -12,19 +12,19 @@
     "vitepress": "^1.5.0"
   },
   "dependencies": {
-    "@shikijs/twoslash": "^1.24.0",
-    "@shikijs/vitepress-twoslash": "^1.24.0",
+    "@shikijs/twoslash": "^1.24.2",
+    "@shikijs/vitepress-twoslash": "^1.24.2",
     "@tsconfig/node20": "^20.1.4",
     "@tsconfig/node22": "^22.0.0",
     "@tsconfig/strictest": "^2.0.5",
-    "es-toolkit": "^1.29.0",
+    "es-toolkit": "^1.30.1",
     "floating-vue": "^5.2.2",
     "globby": "^14.0.2",
     "graffle": "link:..",
-    "graphql": "^16.9.0",
+    "graphql": "^16.10.0",
     "tsx": "^4.19.2",
     "typescript": "^5.7.2",
     "vitepress-plugin-tabs": "^0.5.0",
-    "vitepress-sidebar": "^1.29.0"
+    "vitepress-sidebar": "^1.30.2"
   }
 }
