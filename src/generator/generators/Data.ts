@@ -1,7 +1,7 @@
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 
 export const ModuleGeneratorData = createModuleGenerator(
-  `Data`,
+  `data`,
   ({ config, code }) => {
     code(
       `export const Name = \`${config.name}\``,

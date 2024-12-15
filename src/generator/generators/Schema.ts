@@ -11,7 +11,7 @@ import { ModuleGeneratorData } from './Data.js'
 import { ModuleGeneratorScalar } from './Scalar.js'
 
 export const ModuleGeneratorSchema = createModuleGenerator(
-  `Schema`,
+  `schema`,
   ({ config, code }) => {
     const kindMap = config.schema.kindMap.list
     const kinds = entries(kindMap)

@@ -1,11 +1,5 @@
----
-aside: false
----
-
-# None
-
-This example shows use of the `bare` preset which is Graffle at
-its most minimal. It uses no extensions, not even a transport.
+<div class="ExampleSnippet">
+<a href="../../examples/preset/bare">Bare</a>
 
 <!-- dprint-ignore-start -->
 ```ts twoslash
@@ -31,3 +25,5 @@ const _e6: 'Error: You cannot send requests yet. You must setup a transport.' = 
 const _e7: 'Error: You cannot send requests yet. You must setup a transport.' = graffle.use(Introspection()).introspect
 ```
 <!-- dprint-ignore-end -->
+
+</div>

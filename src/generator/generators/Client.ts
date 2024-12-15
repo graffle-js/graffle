@@ -5,7 +5,7 @@ import { ModuleGeneratorScalar } from './Scalar.js'
 import { ModuleGeneratorSchemaDrivenDataMap } from './SchemaDrivenDataMap.js'
 
 export const ModuleGeneratorClient = createModuleGenerator(
-  `Client`,
+  `client`,
   ({ config, code }) => {
     code(importModuleGenerator(config, ModuleGeneratorSchemaDrivenDataMap))
     code(importModuleGenerator(config, ModuleGeneratorData))

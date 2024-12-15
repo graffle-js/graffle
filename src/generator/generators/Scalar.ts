@@ -6,7 +6,7 @@ import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 import { typeTitle2 } from '../helpers/render.js'
 
 export const ModuleGeneratorScalar = createModuleGenerator(
-  `Scalar`,
+  `scalar`,
   ({ config, code }) => {
     // todo test case for when this is true
     const isNeedCustomScalarDefaults = Grafaid.Schema.KindMap.hasCustomScalars(config.schema.kindMap)

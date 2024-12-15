@@ -9,7 +9,7 @@ import { ModuleGeneratorSchema } from './Schema.js'
 import { ModuleGeneratorSelectionSets } from './SelectionSets.js'
 
 export const ModuleGeneratorSelect = createModuleGenerator(
-  `Select`,
+  `select`,
   ({ config, code }) => {
     const iSchema = `${identifiers.$$Schema}.Schema`
     const enumMemberName = {

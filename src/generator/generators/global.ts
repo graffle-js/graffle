@@ -8,7 +8,7 @@ import { ModuleGeneratorMethodsSelect } from './MethodsSelect.js'
 import { ModuleGeneratorSchema } from './Schema.js'
 
 export const ModuleGeneratorGlobal = createModuleGenerator(
-  `Global`,
+  `global`,
   ({ config, code }) => {
     code(importModuleGenerator(config, ModuleGeneratorData))
     code(importModuleGenerator(config, ModuleGeneratorMethodsSelect))
