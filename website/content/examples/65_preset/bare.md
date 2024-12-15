@@ -9,10 +9,10 @@ its most minimal. It uses no extensions, not even a transport.
 
 <!-- dprint-ignore-start -->
 ```ts twoslash
-import { GraffleBare } from 'graffle/presets/bare'
 import { Introspection } from 'graffle/extensions/introspection'
+import { create } from 'graffle/presets/bare'
 
-const graffle = GraffleBare.create()
+const graffle = create()
 
 /**
  * Because we have no transports registered, the `transport` method

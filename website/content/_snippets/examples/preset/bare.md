@@ -3,8 +3,8 @@
 
 <!-- dprint-ignore-start -->
 ```ts twoslash
+import { Introspection } from 'graffle/extensions/introspection'
 import { create } from 'graffle/presets/bare'
-import { Introspection } from '../../src/extensions/Introspection/Introspection.js'
 
 const graffle = create()
 
