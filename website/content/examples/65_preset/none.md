@@ -31,22 +31,3 @@ const _e6: 'Error: You cannot send requests yet. You must setup a transport.' = 
 const _e7: 'Error: You cannot send requests yet. You must setup a transport.' = graffle.use(Introspection()).introspect
 ```
 <!-- dprint-ignore-end -->
-
-#### Outputs
-
-<!-- dprint-ignore-start -->
-```txt
-node:internal/per_context/domexception:53
-    ErrorCaptureStackTrace(this);
-    ^
-DOMException [DataCloneError]: input=>{const sddm=input.state.schemaMap;const scalars=input.state.scalars.map;if(sddm){const request=normalize...<omitted>...t} could not be cloned.
-    at new DOMException (node:internal/per_context/domexception:XX:XX)
-    at create (/some/path/to/client.ts:XX:XX:5)
-    at <anonymous> (/some/path/to/preset_none.ts:XX:XX:17)
-    at ModuleJob.run (node:internal/modules/esm/module_job:XX:XX)
-    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:XX:XX)
-    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:XX:XX)
-
-Node.js vXX.XX.XX
-```
-<!-- dprint-ignore-end -->

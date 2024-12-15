@@ -152,8 +152,7 @@ export type ClientConstructor<$Context extends Context = Context.States.Empty> =
 
 export const create: ClientConstructor = (configInit) => {
   const initialContext = Context.Updaters.addConfigInit(
-    // todo remove this, client builder should never mutate context, just putting this here for now while working on other stuff.
-    structuredClone(Context.States.contextEmpty),
+    Context.States.contextEmpty,
     configInit ?? {},
   )
   return createWithContext(initialContext)
