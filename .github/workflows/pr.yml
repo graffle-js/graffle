@@ -13,6 +13,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
+      - run: pnpm build
+      - name: Install Examples Dependencies
+        working-directory: examples
+        run: pnpm install
       - run: pnpm check:lint
   publint:
     runs-on: ubuntu-latest
@@ -81,6 +85,9 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - run: pnpm build
+      - name: Install Examples Dependencies
+        working-directory: examples
+        run: pnpm install
       - run: pnpm test:examples -- --environment ${{ matrix.environment }}
   test-e2e:
     runs-on: ubuntu-latest

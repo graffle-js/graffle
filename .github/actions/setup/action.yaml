@@ -50,8 +50,3 @@ runs:
       run: pnpm install
       shell: bash
       if: ${{inputs.install-deps}} == 'true'
-    - name: Install Examples Dependencies
-      working-directory: examples
-      run: pnpm install
-      shell: bash
-      if: ${{inputs.install-deps}} == 'true'
