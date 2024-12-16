@@ -9,6 +9,8 @@ have arguments and data automatically encoded and decoded respectively.
 
 <!-- dprint-ignore-start -->
 ```ts twoslash
+import { Graffle } from './graffle/__.js'
+
 const graffle = Graffle
   .create()
   .scalar(`Date`, {

@@ -132,7 +132,7 @@ const transformRewriteGraffleImports = (example: Example) => {
   const defaultSchema = `pokemon`
 
   const newContent = example.file.content
-    // .replaceAll(/from '.+\/tests\/_\/schemas\/(.*)\/graffle\/(.+)\.js'/g, `from './$1/$2.js'`)
+    .replaceAll(/from '..\/\$\/graffle\/__.js'/g, `from './graffle/__.js'`)
     // .replaceAll(
     //   /from '.*entrypoints\/extensions\/(.*?)\/runtime.js'/g,
     //   `from 'graffle/extensions/$1'`,

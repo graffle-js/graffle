@@ -4,6 +4,7 @@
 <!-- dprint-ignore-start -->
 ```ts twoslash
 import { Introspection } from 'graffle/extensions/introspection'
+import { Graffle } from './graffle/__.js'
 
 const pokemon = Graffle.create().use(Introspection())
 

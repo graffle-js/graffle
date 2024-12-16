@@ -8,6 +8,8 @@ This example shows how to configure output to throw errors even when using the e
 
 <!-- dprint-ignore-start -->
 ```ts twoslash
+import { Graffle } from './graffle/__.js'
+
 const pokemon = Graffle
   .create({
     output: {

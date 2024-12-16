@@ -5,6 +5,8 @@
 
 <!-- dprint-ignore-start -->
 ```ts twoslash
+import { Graffle } from './graffle/__.js'
+
 const graffle = Graffle
   .create()
   .transport({

@@ -5,6 +5,8 @@
 
 <!-- dprint-ignore-start -->
 ```ts twoslash
+import { Graffle } from './graffle/__.js'
+
 const pokemon = Graffle.create({
   output: {
     envelope: true,
@@ -36,7 +38,7 @@ console.log(result)
     headers: Headers {
       'content-type': 'application/graphql-response+json; charset=utf-8',
       'content-length': '142',
-      date: 'Mon, 16 Dec 2024 01:27:30 GMT',
+      date: 'Mon, 16 Dec 2024 01:38:02 GMT',
       connection: 'keep-alive',
       'keep-alive': 'timeout=5'
     },
