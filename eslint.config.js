@@ -17,7 +17,7 @@ export default tsEslint.config({
     '**/$/**/*',
     'legacy/**/*',
     '**/build/**/*',
-    'website/**/*',
+    'website/**/*'
   ],
   extends: configPrisma,
   languageOptions: {
