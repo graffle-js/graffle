@@ -131,30 +131,23 @@ const generateExampleLinksSnippets = async (examplesTransformed: ExampleTransfor
 const transformRewriteGraffleImports = (example: Example) => {
   const defaultSchema = `pokemon`
 
-  const newContent = example.file.content
+  let newContent = example.file.content
     .replaceAll(/from '..\/\$\/graffle\/__.js'/g, `from './graffle/__.js'`)
-    // .replaceAll(
-    //   /from '.*entrypoints\/extensions\/(.*?)\/runtime.js'/g,
-    //   `from 'graffle/extensions/$1'`,
-    // )
-    // .replaceAll(
-    //   /from '.*entrypoints\/extensions\/(.*?)\/gentime.js'/g,
-    //   `from 'graffle/extensions/$1/generator'`,
-    // )
-    // .replaceAll(
-    //   /from '.*entrypoints\/main.js'/g,
-    //   `from 'graffle'`,
-    // )
-    // .replaceAll(
-    //   /from '.*entrypoints\/(.*?).js'/g,
-    //   `from 'graffle/$1'`,
-    // )
     // The examples that use Pokemon schema are mapped to the default schema in the documentation.
     // This works with Twoslash because we generate a pokemon schema in the website root directory.
     .replaceAll(new RegExp(`(import.*./)${defaultSchema}`, `g`), `$1graffle`)
     .replaceAll(new RegExp(`(import.*{.*)${pascalCase(defaultSchema)}(.*})`, `g`), `$1Graffle$2`)
     // Any $ imports are entirely removed.
     .replaceAll(/import.*'.*\$.*'\n/g, ``)
+
+  newContent = `
+// Our website uses Vitepress+Twoslash. Twoslash does not discover the generated Graffle modules.
+// Perhaps we can configure Twoslash to include them. Until we figure that out, we have to
+// explicitly import them like this.
+import './graffle/modules/global.js'
+// ---cut---
+
+${newContent.trim()}`
 
   return {
     ...example,

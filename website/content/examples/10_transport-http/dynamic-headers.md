@@ -8,6 +8,12 @@ This example shows how to leverage the extension system to dynamically manipulat
 
 <!-- dprint-ignore-start -->
 ```ts twoslash
+// Our website uses Vitepress+Twoslash. Twoslash does not discover the generated Graffle modules.
+// Perhaps we can configure Twoslash to include them. Until we figure that out, we have to
+// explicitly import them like this.
+import './graffle/modules/global.js'
+// ---cut---
+
 import { Graffle } from 'graffle'
 
 const graffle = Graffle
@@ -45,7 +51,7 @@ await graffle.gql`{ pokemons { name } }`.send()
   headers: Headers {
     accept: 'application/graphql-response+json; charset=utf-8, application/json; charset=utf-8',
     'content-type': 'application/json',
-    'x-sent-at-time': '1734313081626'
+    'x-sent-at-time': '1734313683348'
   },
   method: 'post',
   url: 'http://localhost:3000/graphql',
