@@ -7,7 +7,7 @@ import { Graffle } from '../../entrypoints/main.js'
 import { Upload } from './Upload.js'
 
 import { type SchemaService, serveSchema } from '../../../tests/_/lib/serveSchema.js'
-import type { GraffleMinimal } from '../../entrypoints/presets/_minimal.js'
+import type { GraffleMinimal } from '../../entrypoints/presets/minimal.js'
 
 let schemaServer: SchemaService
 
