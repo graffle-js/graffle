@@ -16,7 +16,7 @@ export default tsEslint.config({
     'src/layers/1_Schema/Hybrid/types/Scalar/Scalar.ts', // There is an ESLint error that goes away when ignored leading to a circular issue of either lint error or unused lint disable.
     '**/$/**/*',
     'legacy/**/*',
-    'build/**/*',
+    '**/build/**/*',
     'website/**/*',
   ],
   extends: configPrisma,
