@@ -1,6 +1,28 @@
 import { expect } from 'vitest'
+import { describe } from 'vitest'
 import { test } from '../../../tests/_/helpers.js'
 import { createConfig } from './config.js'
+import type { ConfigInitSchemaSdl } from './configInit.js'
+
+const schema: ConfigInitSchemaSdl = {
+  type: `sdl`,
+  sdl: `type Query { ok: Boolean }`,
+}
+
+describe(`import format`, () => {
+  test(`defaults to jsExtension`, async () => {
+    const config = await createConfig({ schema })
+    expect(config.importFormat).toEqual(`jsExtension`)
+  })
+  test(`noExtension`, async () => {
+    const customPathFile = `./tests/_/fixtures/custom.graphql`
+    const config = await createConfig({
+      schema: { type: `sdlFile`, dirOrFilePath: customPathFile },
+      importFormat: `noExtension`,
+    })
+    expect(config.importFormat).toEqual(`noExtension`)
+  })
+})
 
 test(`can load schema from custom path`, async () => {
   const customPathFile = `./tests/_/fixtures/custom.graphql`

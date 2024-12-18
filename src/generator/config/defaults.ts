@@ -1,4 +1,4 @@
-import type { ConfigInitLibraryPaths, InputOutputCase } from './configInit.js'
+import type { ConfigInitLibraryPaths, InputImportFormat, InputOutputCase } from './configInit.js'
 
 export const defaultNamespace = `Graffle`
 
@@ -13,3 +13,5 @@ export const defaultLibraryPaths = {
 } satisfies ConfigInitLibraryPaths
 
 export const defaultOutputCase: InputOutputCase = `kebab`
+
+export const defaultImportFormat: InputImportFormat = `jsExtension`

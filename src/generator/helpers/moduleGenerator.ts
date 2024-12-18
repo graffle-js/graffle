@@ -1,4 +1,5 @@
 import { camelCase, kebabCase, pascalCase, snakeCase } from 'es-toolkit'
+import { casesExhausted } from '../../lib/prelude.js'
 import type { Config } from '../config/config.js'
 import {
   createCodeGenerator,
@@ -61,7 +62,16 @@ export const getFileName = (config: Config, generator: ModuleGenerator | Generat
 
 export const getImportName = (config: Config, generator: ModuleGenerator | GeneratedModule) => {
   const name = getBaseName(config, generator)
-  return `${name}.js`
+  switch (config.importFormat) {
+    case `jsExtension`:
+      return `${name}.js`
+    case `tsExtension`:
+      return `${name}.ts`
+    case `noExtension`:
+      return name
+    default:
+      throw casesExhausted(config.importFormat)
+  }
 }
 
 export const caseFormatters = {

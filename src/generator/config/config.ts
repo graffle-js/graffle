@@ -11,11 +11,12 @@ import type { Extension } from '../extension/types.js'
 import {
   type ConfigInit,
   type ConfigInitLibraryPaths,
+  type InputImportFormat,
   type InputLint,
   type InputOutputCase,
   libraryPathKeys,
 } from './configInit.js'
-import { defaultLibraryPaths, defaultNamespace, defaultOutputCase } from './defaults.js'
+import { defaultImportFormat, defaultLibraryPaths, defaultNamespace, defaultOutputCase } from './defaults.js'
 import { defaultName } from './defaults.js'
 
 export interface Config {
@@ -43,6 +44,7 @@ export interface Config {
   }
   formatter: Formatter
   extensions: Extension[]
+  importFormat: InputImportFormat
   paths: {
     project: {
       inputs: {
@@ -201,6 +203,7 @@ To suppress this warning disable formatting in one of the following ways:
   return {
     fs,
     name,
+    importFormat: configInit.importFormat ?? defaultImportFormat,
     nameNamespace,
     extensions: configInit.extensions ?? [],
     outputCase,

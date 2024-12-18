@@ -2,8 +2,34 @@ import { globby } from 'globby'
 import * as Memfs from 'memfs'
 import { readFile } from 'node:fs/promises'
 import * as Path from 'node:path'
-import { expect, test } from 'vitest'
+import { describe, expect, test } from 'vitest'
+import type { ConfigInitSchemaSdl } from '../_.js'
 import { generate } from './generate.js'
+
+const schema: ConfigInitSchemaSdl = {
+  type: `sdl`,
+  sdl: `type Query { ok: Boolean }`,
+}
+
+describe(`importFormat`, () => {
+  test(`default is jsExtension`, async () => {
+    await generate({
+      fs: Memfs.fs.promises as any,
+      schema,
+    })
+    const SchemaTs = Memfs.fs.readFileSync(`./graffle/modules/schema.ts`, `utf8`)
+    expect(SchemaTs).toMatch(/import.*".\/data.js"/)
+  })
+  test(`noExtension`, async () => {
+    await generate({
+      fs: Memfs.fs.promises as any,
+      schema,
+      importFormat: `noExtension`,
+    })
+    const SchemaTs = Memfs.fs.readFileSync(`./graffle/modules/schema.ts`, `utf8`)
+    expect(SchemaTs).toMatch(/import.*".\/data"/)
+  })
+})
 
 test(`kitchen-sink generated modules`, async () => {
   const basePath = `./tests/_/schemas/kitchen-sink/graffle`

@@ -20,6 +20,39 @@ export const OutputCase = {
 } as const
 export type InputOutputCase = keyof typeof OutputCase
 
+export const ImportFormat = {
+  jsExtension: `jsExtension`,
+  tsExtension: `tsExtension`,
+  noExtension: `noExtension`,
+} as const
+export type InputImportFormat = keyof typeof ImportFormat
+
+export interface ConfigInitSchemaSdl {
+  type: `sdl`
+  sdl: string
+}
+export interface ConfigInitSchemaInstance {
+  type: `instance`
+  instance: Grafaid.Schema.Schema
+}
+export interface ConfigInitSchemaSdlFile {
+  type: `sdlFile`
+  /**
+   * Defaults to the source directory if set, otherwise the current working directory.
+   */
+  dirOrFilePath?: string
+}
+export interface ConfigInitSchemaUrl {
+  type: `url`
+  url: URL
+  options?: InputIntrospectionOptions
+}
+
+export type ConfigInitSchema =
+  | ConfigInitSchemaSdl
+  | ConfigInitSchemaInstance
+  | ConfigInitSchemaSdlFile
+  | ConfigInitSchemaUrl
 export interface ConfigInit {
   /**
    * File system API to use.
@@ -66,25 +99,13 @@ export interface ConfigInit {
    */
   currentWorkingDirectory?: string
   /**
-   * The schema to use for generation. Can be an existing SDL file on disk, a schema instance already in memory, or an endpoint that will be introspected.
+   * The schema to use for generation. Can be one of:
+   *
+   * 1. An existing SDL file on disk,
+   * 2. A schema instance already in memory,
+   * 3. An endpoint that will be introspected.
    */
-  schema: {
-    type: 'sdl'
-    sdl: string
-  } | {
-    type: 'instance'
-    instance: Grafaid.Schema.Schema
-  } | {
-    type: 'sdlFile'
-    /**
-     * Defaults to the source directory if set, otherwise the current working directory.
-     */
-    dirOrFilePath?: string
-  } | {
-    type: 'url'
-    url: URL
-    options?: InputIntrospectionOptions
-  }
+  schema: ConfigInitSchema
   /**
    * If the schema comes from a non-sdl-file source like a GraphQL endpoint URL, should a derived SDL file be written to disk?
    *
@@ -136,6 +157,23 @@ export interface ConfigInit {
    * If not set, Graffle will look for a file called `scalars.ts` in the project directory.
    */
   scalars?: string
+  /**
+   * How should import identifiers be generated? Can be one of:
+   *
+   * 1. `jsExtension` e.g. `import ... from './bar.js'`
+   * 2. `tsExtension` e.g. `import ... from './bar.ts'`
+   * 3. `noExtension` e.g. `import ... from './bar'`
+   *
+   * @defaultValue `jsExtension`
+   *
+   * @remarks
+   *
+   * A user request for this option can be found at https://github.com/graffle-js/graffle/issues/1282.
+   *
+   * There is a planned feature to have a default be dynamic according to the state of your project's tsconfig.json.
+   * See https://github.com/graffle-js/graffle/issues/1283.
+   */
+  importFormat?: InputImportFormat
   /**
    * Override import paths to graffle package within the generated code.
    * Used by Graffle test suite to have generated clients point to source
