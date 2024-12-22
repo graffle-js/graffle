@@ -1,12 +1,4 @@
-import {
-  type ConfigInit,
-  type DefaultCheckPreflight,
-  defaultCheckPreflight,
-  type DefaultName,
-  defaultName,
-  type NormalizeConfigInit,
-  normalizeConfigInit,
-} from '../client/Configuration/ConfigInit.js'
+import { type ConfigInit } from '../client/Configuration/ConfigInit.js'
 import { type OutputConfig, type OutputConfigDefault, outputConfigDefault } from '../client/Configuration/Output.js'
 import type { Extension } from '../extension/__.js'
 import type { Anyware } from '../lib/anyware/__.js'
@@ -16,9 +8,41 @@ import {
   type RequestPipelineBaseDefinition,
   requestPipelineBaseDefinition,
 } from '../requestPipeline/RequestPipeline.js'
+import { GlobalRegistry } from './GlobalRegistry/GlobalRegistry.js'
 import { Schema } from './Schema/__.js'
 import type { SchemaDrivenDataMap } from './SchemaDrivenDataMap/SchemaDrivenDataMap.js'
 import type { Transport } from './Transport.js'
+
+export interface Context extends ContextValueLevel {
+  /**
+   * Type level augmentations.
+   *
+   * @remarks Typically added by extensions. Added here upon use for optimized type-level reads later on.
+   */
+  typeHookOnRequestResult: Extension.TypeHooks.OnRequestResult[]
+  typeHookOnRequestDocumentRootType: Extension.TypeHooks.OnRequestDocumentRootType[]
+}
+
+export interface ContextValueLevel {
+  name: string
+  requestPipelineDefinition: Anyware.PipelineDefinition
+  transports: ClientTransports
+  /**
+   * If enabled, this will cause request methods to be statically unavailable if
+   * a transport is not correctly configured.
+   *
+   * @defaultValue `true`
+   */
+  checkPreflight?: boolean
+  /**
+   * The initial input that was given to derive the config.
+   */
+  input: ConfigInit
+  output: OutputConfig
+  schemaMap: SchemaDrivenDataMap | null
+  extensions: Extension[]
+  scalars: Schema.Scalar.Registry
+}
 
 export interface ClientTransports {
   registry: ClientTransportsRegistry
@@ -102,7 +126,17 @@ export namespace ClientTransports {
   }
 }
 
+export type DefaultCheckPreflight = true
+
+export const defaultCheckPreflight: DefaultCheckPreflight = true
+
+export type DefaultName = GlobalRegistry.DefaultClientName
+
+export const defaultName = GlobalRegistry.defaultClientName
+
 export namespace Context {
+  export const withTypeLevel = (contextValueLevel: ContextValueLevel): Context => contextValueLevel as any
+
   export namespace States {
     export interface Empty extends Context {
       name: DefaultName
@@ -119,7 +153,7 @@ export namespace Context {
       typeHookOnRequestResult: []
     }
 
-    export const contextEmpty: Empty = {
+    export const empty: Empty = {
       name: defaultName,
       requestPipelineDefinition: requestPipelineBaseDefinition,
       transports: ClientTransports.States.empty,
@@ -135,25 +169,6 @@ export namespace Context {
     } as Empty
   }
   export namespace Updaters {
-    export type AddConfigInit<
-      $Context extends Context,
-      $ConfigInit extends ConfigInit,
-    > = ConfigManager.SetKeysOptional<
-      $Context,
-      NormalizeConfigInit<$ConfigInit>
-    >
-
-    export const addConfigInit = <
-      $Context extends Context,
-      $ConfigInit extends ConfigInit,
-    >(context: $Context, configInit: $ConfigInit): AddConfigInit<$Context, $ConfigInit> => {
-      const newConfig = normalizeConfigInit(configInit)
-      return {
-        ...context,
-        ...newConfig,
-      } as any
-    }
-
     // dprint-ignore
     export type AddTransportOptional<
       $Context extends Context,
@@ -200,35 +215,4 @@ export namespace Context {
         }
       >
   }
-}
-
-export interface ContextValueLevel {
-  name: string
-  requestPipelineDefinition: Anyware.PipelineDefinition
-  transports: ClientTransports
-  /**
-   * If enabled, this will cause request methods to be statically unavailable if
-   * a transport is not correctly configured.
-   *
-   * @defaultValue `true`
-   */
-  checkPreflight?: boolean
-  /**
-   * The initial input that was given to derive the config.
-   */
-  input: ConfigInit
-  output: OutputConfig
-  schemaMap: SchemaDrivenDataMap | null
-  extensions: Extension[]
-  scalars: Schema.Scalar.Registry
-}
-
-export interface Context extends ContextValueLevel {
-  /**
-   * Type level augmentations.
-   *
-   * @remarks Typically added by extensions. Added here upon use for optimized type-level reads later on.
-   */
-  typeHookOnRequestResult: Extension.TypeHooks.OnRequestResult[]
-  typeHookOnRequestDocumentRootType: Extension.TypeHooks.OnRequestDocumentRootType[]
 }

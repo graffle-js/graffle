@@ -18,6 +18,6 @@ const pokemon = Graffle
 const result1 = await pokemon.query.pokemons({ name: true })
 show(result1)
 
-const result2 = await pokemon.throws().query.pokemons({ name: true })
-//                                          ^^^^^^^
-result2 // This line will never be reached because of thrown error.
+await pokemon.throws().query.pokemons({ name: true })
+//            ^^^^^^
+show(`This line will never be reached because of thrown error.`)

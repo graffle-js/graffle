@@ -1,16 +1,8 @@
 import type { ConfigManager } from '../../lib/config-manager/__.js'
-import { GlobalRegistry } from '../../types/GlobalRegistry/GlobalRegistry.js'
+import { Context, defaultName } from '../../types/context.js'
+import type { GlobalRegistry } from '../../types/GlobalRegistry/GlobalRegistry.js'
 import type { SchemaDrivenDataMap } from '../../types/SchemaDrivenDataMap/__.js'
 import type { OutputChannel, OutputChannelConfig } from './Output.js'
-import { outputConfigDefault } from './Output.js'
-
-export type DefaultCheckPreflight = true
-
-export const defaultCheckPreflight: DefaultCheckPreflight = true
-
-export type DefaultName = GlobalRegistry.DefaultClientName
-
-export const defaultName = GlobalRegistry.defaultClientName
 
 /**
  * @remarks This input extends base with properties that can be filled with exports from the generated client.
@@ -115,44 +107,44 @@ type NormalizeConfigInitOutput<$Output extends ConfigInitOutput | undefined> = {
   }
 }
 
-export const normalizeConfigInit = <$Input extends ConfigInit>(
-  input: $Input,
-): NormalizeConfigInit<$Input> => {
+export const updateContext = (
+  context: Context,
+  configInit: ConfigInit,
+): Context => {
   const outputEnvelopeLonghand: ConfigInitOutputEnvelopeLonghand | undefined =
-    typeof input.output?.envelope === `object`
-      ? { enabled: true, ...input.output.envelope }
-      : typeof input.output?.envelope === `boolean`
-      ? { enabled: input.output.envelope }
+    typeof configInit.output?.envelope === `object`
+      ? { enabled: true, ...configInit.output.envelope }
+      : typeof configInit.output?.envelope === `boolean`
+      ? { enabled: configInit.output.envelope }
       : undefined
 
-  const config = {
+  const newConfig = {
+    name: configInit.name ?? context?.name ?? defaultName,
+    schemaMap: configInit.schemaMap ?? context.schemaMap,
     output: {
       defaults: {
-        errorChannel: input.output?.defaults?.errorChannel ?? outputConfigDefault.defaults.errorChannel,
+        errorChannel: configInit.output?.defaults?.errorChannel ?? context.output.defaults.errorChannel,
       },
       envelope: {
-        enabled: outputEnvelopeLonghand?.enabled ?? outputConfigDefault.envelope.enabled,
+        enabled: outputEnvelopeLonghand?.enabled ?? context.output.envelope.enabled,
         errors: {
-          execution: outputEnvelopeLonghand?.errors?.execution ?? outputConfigDefault.envelope.errors.execution,
-          other: outputEnvelopeLonghand?.errors?.other ?? outputConfigDefault.envelope.errors.other,
-          // @ts-expect-error conditional type
-          schema: outputEnvelopeLonghand?.errors?.schema ?? outputConfigDefault.envelope.errors.schema,
+          execution: outputEnvelopeLonghand?.errors?.execution ?? context.output.envelope.errors.execution,
+          other: outputEnvelopeLonghand?.errors?.other ?? context.output.envelope.errors.other,
+          // @ts-expect-error
+          schema: outputEnvelopeLonghand?.errors?.schema ?? context.output.envelope.errors.schema,
         },
       },
       errors: {
-        execution: input.output?.errors?.execution ?? outputConfigDefault.errors.execution,
-        other: input.output?.errors?.other ?? outputConfigDefault.errors.other,
+        execution: configInit.output?.errors?.execution ?? context.output.errors.execution,
+        other: configInit.output?.errors?.other ?? context.output.errors.other,
         // @ts-expect-error conditional type
-        schema: input.output?.errors?.schema ?? outputConfigDefault.errors.schema,
+        schema: configInit.output?.errors?.schema ?? context.output.errors.schema,
       },
     },
   }
 
-  if (input.schemaMap) {
-    // @ts-expect-error
-    config.schemaMap = input.schemaMap
-  }
-
-  // @ts-expect-error conditional type
-  return config
+  return Context.withTypeLevel({
+    ...context,
+    ...newConfig,
+  })
 }

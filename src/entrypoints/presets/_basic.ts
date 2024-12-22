@@ -6,7 +6,7 @@ import { TransportHttp } from '../extensions/transport-http/runtime.js'
 import { TransportMemory } from '../extensions/transport-memory/runtime.js'
 import type { PartialOrUndefined } from '../main.js'
 
-const context = useReducer(useReducer(Context.States.contextEmpty, TransportHttp()), TransportMemory())
+const context = useReducer(useReducer(Context.States.empty, TransportHttp()), TransportMemory())
 
 type BasicClientContext = typeof context
 

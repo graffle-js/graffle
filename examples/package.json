@@ -3,7 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "check:types": "tsc --noEmit"
+    "check:types": "tsc --noEmit",
+    "gen:graffle": "pnpm graffle --defaultSchemaUrl http://localhost:3000/graphql --schema ../tests/_/schemas/pokemon/schema.graphql --output ./$/graffle"
   },
   "dependencies": {
     "@opentelemetry/sdk-trace-base": "^1.29.0",

@@ -18,7 +18,7 @@ export const ModuleGeneratorClient = createModuleGenerator(
     code(`
       const context = ${identifiers.$$Utilities}.useReducer(
         {
-          ...${identifiers.$$Utilities}.Context.States.contextEmpty,
+          ...${identifiers.$$Utilities}.Context.States.empty,
           name: $$Data.Name,
           schemaMap: $$SchemaDrivenDataMap.schemaDrivenDataMap,
           scalars: $$Scalar.$registry,

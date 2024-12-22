@@ -482,6 +482,11 @@ export const proxyGet = <$Target>(
     get: (target: any, property: string, receiver: any) => {
       const value = Reflect.get(target, property, receiver)
 
+      // TODO: special casing for private _ property should go away.
+      if (property === '_' && path.length === 0) {
+        return value
+      }
+
       if (isRecordLikeObject(value)) {
         return proxyGet(value, handler, [...path, property])
       }

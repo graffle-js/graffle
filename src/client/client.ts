@@ -4,7 +4,7 @@ import { proxyGet } from '../lib/prelude.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
 import { type ClientTransports, Context } from '../types/context.js'
 import type { GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
-import { type ConfigInit, type NormalizeConfigInit, normalizeConfigInit } from './Configuration/ConfigInit.js'
+import { type ConfigInit, type NormalizeConfigInit, updateContext } from './Configuration/ConfigInit.js'
 import { anywareProperties } from './properties/anyware.js'
 import { type gqlOverload, gqlProperties } from './properties/gql/gql.js'
 import { type ScalarMethod, scalarProperties, type TypeErrorMissingSchemaMap } from './properties/scalar.js'
@@ -122,16 +122,8 @@ export const createConstructorWithContext = <$Context extends Context>(
   context: $Context,
 ): ClientConstructor<$Context> => {
   return (configInit) => {
-    const config = normalizeConfigInit(configInit ?? {})
-
-    // @ts-expect-error
-    config.schemaMap ??= context.schemaMap
-
-    const context_ = {
-      ...context,
-      ...config,
-    }
-    const client = createWithContext(context_)
+    const newContext = updateContext(context, configInit ?? {})
+    const client = createWithContext(newContext)
     return client
   }
 }
@@ -151,8 +143,8 @@ export type ClientConstructor<$Context extends Context = Context.States.Empty> =
 >
 
 export const create: ClientConstructor = (configInit) => {
-  const initialContext = Context.Updaters.addConfigInit(
-    Context.States.contextEmpty,
+  const initialContext = updateContext(
+    Context.States.empty,
     configInit ?? {},
   )
   return createWithContext(initialContext)
@@ -164,9 +156,9 @@ export const createWithContext = (
   // @ts-expect-error ignoreme
   const clientDirect: Client = {
     _: context,
+    ...withProperties(createWithContext, context),
     ...transportProperties(createWithContext, context),
     ...gqlProperties(createWithContext, context),
-    ...withProperties(createWithContext, context),
     ...useProperties(createWithContext, context),
     ...anywareProperties(createWithContext, context),
     ...scalarProperties(createWithContext, context),
