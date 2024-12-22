@@ -12,8 +12,8 @@
     "vitepress": "^1.5.0"
   },
   "dependencies": {
-    "@shikijs/twoslash": "^1.24.2",
-    "@shikijs/vitepress-twoslash": "^1.24.2",
+    "@shikijs/twoslash": "^1.24.4",
+    "@shikijs/vitepress-twoslash": "^1.24.4",
     "@tsconfig/node20": "^20.1.4",
     "@tsconfig/node22": "^22.0.0",
     "@tsconfig/strictest": "^2.0.5",
