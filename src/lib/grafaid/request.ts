@@ -1,3 +1,4 @@
+import { isPlainObject } from 'es-toolkit'
 import type { GraphQLError, OperationDefinitionNode, OperationTypeNode } from 'graphql'
 import type { Errors } from '../errors/__.js'
 import type { Grafaid } from './__.js'
@@ -49,6 +50,7 @@ export const normalizeRequestToNode = <$R extends RequestInput | RequestAnalyzed
 						 never => {
 
 	const query = normalizeDocumentToNode(request.query)
+  // we have to strip the $ from the variables keys (enum types)
 
 	if (`operation` in request) {
 		const operation = getOperationDefinition({
@@ -67,4 +69,27 @@ export const normalizeRequestToNode = <$R extends RequestInput | RequestAnalyzed
     ...request,
     query,
 	} as any
+}
+
+// todo: refactor into concise visitor pattern.
+export const normalizeVariables = (variables?: Variables): Variables => {
+  return normalizeVariables_(variables)
+}
+
+const normalizeVariables_ = (value: unknown): any => {
+  if (value === undefined) return undefined
+  if (value === null) return null
+  if (typeof value !== `object`) return value
+  if (Array.isArray(value)) return value.map(normalizeVariables_)
+  if (!isPlainObject(value)) return value // todo: optimize
+
+  const normalized: Variables = {}
+
+  for (const key in value) {
+    const normalizedKey = key.replace(/^\$/, ``)
+    const normalizedValue = normalizeVariables_(value[key])
+    normalized[normalizedKey] = normalizedValue
+  }
+
+  return normalized
 }

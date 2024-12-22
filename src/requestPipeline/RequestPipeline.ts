@@ -3,7 +3,7 @@ import type { GraffleExecutionResultEnvelope } from '../client/handleOutput.js'
 import { Anyware } from '../lib/anyware/__.js'
 import type { Config } from '../lib/anyware/PipelineDef/Config.js'
 import type { Grafaid } from '../lib/grafaid/__.js'
-import { normalizeRequestToNode } from '../lib/grafaid/request.js'
+import { normalizeRequestToNode, normalizeVariables } from '../lib/grafaid/request.js'
 import { isAbortError } from '../lib/prelude.js'
 import type { Context } from '../types/context.js'
 import { decodeResultData } from './CustomScalars/decode.js'
@@ -90,8 +90,10 @@ export const requestPipelineBaseDefinition: RequestPipelineBaseDefinition = Anyw
         input.request.query = request.query
 
         encodeRequestVariables({ sddm, scalars, request })
+        // input.request.variables = request.variables // enum $ stripping
       }
 
+      input.request.variables = normalizeVariables(input.request.variables)
       return input
     },
   })

@@ -92,6 +92,8 @@
     "serve:pokemon": "tsx tests/_/services/pokemonManual.ts",
     "gen:graffle": "pnpm gen:graffle:tests && pnpm build && cd website && pnpm gen:graffle",
     "gen:graffle:tests": "tsx tests/_/schemas/generate.ts && pnpm graffle --project src/extensions/SchemaErrors/tests/fixture",
+    "gen:graffle:examples": "pnpm build && cd examples && pnpm i && pnpm gen:graffle",
+    "examples:link-mode": "cd examples && pnpm add ..",
     "graffle": "tsx ./src/generator/cli/generate.ts",
     "gen:examples": "tsx scripts/generate-examples-derivatives/generate.ts && pnpm format",
     "gen:examples:outputs": "tsx scripts/generate-examples-derivatives/generate.ts --outputs",

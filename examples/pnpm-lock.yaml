@@ -115,8 +115,8 @@ packages:
     resolution: {integrity: sha512-7HSX4QQb4CspciLpVFwyRe79O3xsIZDDLER21kERQ71oaPodF8jL725AgJMFAYbooIqolJoRLuM81SpeUkpkvA==}
     engines: {node: '>=12'}
 
-  chalk@5.3.0:
-    resolution: {integrity: sha512-dLitG79d+GV1Nb/VYcCDFivJeK1hiukt9QjRNVOsUtTy1rR1YJsmpGGTZ3qJos+uw7WmWF4wUwBd9jxjocFC2w==}
+  chalk@5.4.1:
+    resolution: {integrity: sha512-zgVZuo2WcZgfUEmsn6eO3kINexW8RAE4maiQ8QNs8CtpPCSyMiYsULR3HQYkm3w8FIA3SberyMJMSldGsW+U3w==}
     engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
 
   es-toolkit@1.30.1:
@@ -181,8 +181,8 @@ packages:
   ts-toolbelt@9.6.0:
     resolution: {integrity: sha512-nsZd8ZeNUzukXPlJmTBwUAuABDe/9qtVDelJeT/qW0ow3ZS3BsQJtNkan1802aM9Uf68/Y8ljw86Hu0h5IUW3w==}
 
-  type-fest@4.30.1:
-    resolution: {integrity: sha512-ojFL7eDMX2NF0xMbDwPZJ8sb7ckqtlAi1GsmgsFXvErT9kFTk1r0DuQKvrCh73M6D4nngeHJmvogF9OluXs7Hw==}
+  type-fest@4.30.2:
+    resolution: {integrity: sha512-UJShLPYi1aWqCdq9HycOL/gwsuqda1OISdBO3t8RlXQC4QvtuIz4b5FCfe2dQIWEpmlRExKmcTBfP1r9bhY7ig==}
     engines: {node: '>=16'}
 
   typescript@5.7.2:
@@ -207,14 +207,14 @@ snapshots:
     dependencies:
       '@molt/types': 0.2.0
       alge: 0.8.1
-      chalk: 5.3.0
+      chalk: 5.4.1
       lodash.camelcase: 4.3.0
       lodash.snakecase: 4.1.1
       readline-sync: 1.4.10
       string-length: 6.0.0
       strip-ansi: 7.1.0
       ts-toolbelt: 9.6.0
-      type-fest: 4.30.1
+      type-fest: 4.30.2
       zod: 3.24.1
 
   '@molt/types@0.2.0':
@@ -280,7 +280,7 @@ snapshots:
 
   ansi-regex@6.1.0: {}
 
-  chalk@5.3.0: {}
+  chalk@5.4.1: {}
 
   es-toolkit@1.30.1: {}
 
@@ -321,7 +321,7 @@ snapshots:
 
   ts-toolbelt@9.6.0: {}
 
-  type-fest@4.30.1: {}
+  type-fest@4.30.2: {}
 
   typescript@5.7.2: {}
 
