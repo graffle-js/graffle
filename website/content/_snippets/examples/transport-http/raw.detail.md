@@ -21,7 +21,7 @@ const graffle = Graffle
       mode: `cors`,
     },
   })
-  .anyware(async ({ exchange }) => {
+  .anyware(({ exchange }) => {
     console.log(exchange.input.request)
     return exchange()
   })

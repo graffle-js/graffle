@@ -94,6 +94,7 @@
     "gen:graffle:tests": "tsx tests/_/schemas/generate.ts && pnpm graffle --project src/extensions/SchemaErrors/tests/fixture",
     "graffle": "tsx ./src/generator/cli/generate.ts",
     "gen:examples": "tsx scripts/generate-examples-derivatives/generate.ts && pnpm format",
+    "gen:examples:outputs": "tsx scripts/generate-examples-derivatives/generate.ts --outputs",
     "dev": "rm -rf dist && tsc --watch",
     "format": "pnpm build:docs && dprint fmt",
     "lint": "eslint . --fix --ignore-pattern 'website' --ignore-pattern 'build'",

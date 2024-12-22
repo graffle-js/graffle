@@ -1,13 +1,24 @@
+import { Command } from '@molt/command'
+import { z } from 'zod'
 import { generateDocs } from './generate-docs.js'
 import { generateOutputs } from './generate-outputs.js'
 import { generateTests } from './generate-tests.js'
 import { readExamples } from './helpers.js'
 
-await generateOutputs()
+const args = Command.create()
+  .parameter(`outputs`, z.boolean().optional())
+  .parameter(`name`, z.string().optional())
+  .parse()
 
-const examples = await readExamples()
+if (args.outputs) {
+  await generateOutputs(args.name)
+} else {
+  await generateOutputs(args.name)
 
-await Promise.all([
-  generateTests(examples),
-  generateDocs(examples),
-])
+  const examples = await readExamples()
+
+  await Promise.all([
+    generateTests(examples),
+    generateDocs(examples),
+  ])
+}

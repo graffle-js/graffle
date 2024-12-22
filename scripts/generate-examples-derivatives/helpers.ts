@@ -19,14 +19,19 @@ export const directories = {
 
 export const examplesIgnorePatterns = [`./examples/$`, directories.outputs]
 
-export const readExampleFiles = () =>
+export const readExampleFiles = (name?: string) =>
   readFiles({
     pattern: `./examples/*/*.ts`,
     options: { ignore: examplesIgnorePatterns },
+  }).then(files => {
+    if (name) {
+      return files.filter(file => file.path.full.match(name))
+    }
+    return files
   })
 
-export const readExamples = async (): Promise<Example[]> => {
-  const exampleFiles = await readExampleFiles()
+export const readExamples = async (name?: string): Promise<Example[]> => {
+  const exampleFiles = await readExampleFiles(name)
 
   const outputFiles = await readFiles({
     pattern: `./examples/__outputs__/*/*.output.txt`,
@@ -182,7 +187,7 @@ export const runExample = async (filePath: string) => {
   let exampleOutput = ``
 
   // todo: better understand the Execa API
-  if (filePath.includes(`_or-throw`)) {
+  if (filePath.includes(`_throws`)) {
     if (result instanceof ExecaError) {
       // @ts-expect-error fixme
       exampleOutput = result.stdout

@@ -21,9 +21,13 @@ export const getOutputEncoderFilePathFromExampleFilePath = (filePath: string) =>
   return outputFilePath.replace(outputExtension, outputEncoderExtension)
 }
 
-export const generateOutputs = async () => {
+export const generateOutputs = async (name?: string) => {
+  if (name) {
+    console.log(`Generating outputs for example file paths matching "${name}"`)
+  }
+
   const service = await serveSchema({ schema: schema, log: true })
-  const exampleFiles = await readExampleFiles()
+  const exampleFiles = await readExampleFiles(name)
 
   // Handle case of renaming or deleting examples.
   await Promise.all([
