@@ -124,6 +124,7 @@ exports[`adds an introspection method that introspects the schema 1`] = `
     ],
     "mutationType": null,
     "queryType": {
+      "kind": "OBJECT",
       "name": "Query",
     },
     "subscriptionType": null,
