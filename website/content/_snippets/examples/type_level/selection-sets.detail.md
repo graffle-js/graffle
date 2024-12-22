@@ -1,5 +1,7 @@
+::: details Example
+
 <div class="ExampleSnippet">
-<a href="../../examples/type_level/10-selection-sets">10 Selection Sets</a>
+<a href="../../examples/type_level/selection-sets">Selection Sets</a>
 
 <!-- dprint-ignore-start -->
 ```ts twoslash
@@ -140,3 +142,4 @@ console.log(pokemons)
 <!-- dprint-ignore-end -->
 
 </div>
+:::
