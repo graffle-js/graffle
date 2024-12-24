@@ -18,6 +18,7 @@ export default tsEslint.config({
     'legacy/**/*',
     '**/build/**/*',
     'website/**/*',
+    'bundle-sizes/**/*.{js,json}',
   ],
   extends: configPrisma,
   languageOptions: {
