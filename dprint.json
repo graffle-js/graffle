@@ -12,7 +12,8 @@
     "**/*-lock.json",
     "website/pokemon",
     "website/graffle",
-    "website/.vitepress/dist"
+    "website/.vitepress/dist",
+    "bundle-sizes/**/*.{js,json}"
   ],
   "plugins": [
     "https://plugins.dprint.dev/typescript-0.93.0.wasm",
