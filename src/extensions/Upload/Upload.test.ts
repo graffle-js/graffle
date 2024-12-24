@@ -2,7 +2,7 @@
 // @vitest-environment node
 
 import { afterAll, beforeAll, beforeEach, expect, test } from 'vitest'
-import { schema } from '../../../tests/_/schemas/upload/schema.js'
+import * as UploadSchema from '../../../tests/_/schemas/upload/schema.js'
 import { Graffle } from '../../entrypoints/main.js'
 import { Upload } from './Upload.js'
 
@@ -11,14 +11,14 @@ import type { GraffleMinimal } from '../../entrypoints/presets/minimal.js'
 
 let schemaServer: SchemaService
 
-let graffle: GraffleMinimal.Client
+let graffle: GraffleMinimal.Client.With<{ checkPreflight: false }>
 
 beforeAll(async () => {
-  schemaServer = await serveSchema({ schema })
+  schemaServer = await serveSchema({ schema: UploadSchema.schema })
 })
 
 beforeEach(() => {
-  const graffle_ = Graffle.create().transport({ url: schemaServer.url }).use(Upload())
+  const graffle_ = Graffle.create({ checkPreflight: false }).transport({ url: schemaServer.url }).use(Upload())
   graffle = graffle_ as any
 })
 
@@ -27,7 +27,6 @@ afterAll(async () => {
 })
 
 test(`upload`, async () => {
-  // @ts-expect-error fixme
   const data = await graffle.gql`
     mutation ($blob: Upload!) {
       readTextFile(blob: $blob)
@@ -42,7 +41,16 @@ test(`upload`, async () => {
   `)
 })
 
-// todo test that non-upload requests work
+test(`client with upload extension making non-upload request`, async () => {
+  const data = await graffle.gql`
+    query {
+      greetings
+    }
+  `.send()
+  expect(data).toEqual({
+    greetings: UploadSchema.data.greetings,
+  })
+})
 
 // todo test with non-raw
 //      ^ for this to work we need to generate documents that use variables

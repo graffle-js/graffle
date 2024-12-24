@@ -1,5 +1,9 @@
 import SchemaBuilder from '@pothos/core'
 
+export const data = {
+  greetings: `Hello World`,
+}
+
 const builder = new SchemaBuilder<{
   Scalars: { Upload: { Input: Blob; Output: never } }
 }>({})
@@ -12,7 +16,7 @@ builder.scalarType(`Upload`, {
 
 builder.queryType({
   fields: t => ({
-    greetings: t.string({ resolve: () => `Hello World` }),
+    greetings: t.string({ resolve: () => data.greetings }),
   }),
 })
 

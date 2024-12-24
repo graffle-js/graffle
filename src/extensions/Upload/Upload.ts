@@ -1,5 +1,5 @@
 import { Extension } from '../../entrypoints/extensionkit.js'
-import type { Variables } from '../../lib/grafaid/graphql.js'
+import type { RequestAnalyzedInput } from '../../lib/grafaid/graphql.js'
 import { createBody } from './createBody.js'
 
 // todo
@@ -13,6 +13,8 @@ export const Upload = Extension.create({
   create() {
     return {
       async onRequest({ pack }) {
+        if (!isUploadRequest(pack.input.request)) return pack()
+
         // TODO we can probably get file upload working for in-memory schemas too :)
         // @ts-expect-error fixme
         if (pack.input.transportType !== `http`) {
@@ -27,9 +29,6 @@ export const Upload = Extension.create({
           using: {
             // @ts-expect-error fixme
             body: (input) => {
-              const hasUploadScalarVariable = input.variables && isUsingUploadScalar(input.variables)
-              if (!hasUploadScalarVariable) return
-
               // TODO we can probably get file upload working for in-memory schemas too :)
               // @ts-expect-error fixme
               if (pack.input.transportType !== `http`) {
@@ -55,6 +54,7 @@ export const Upload = Extension.create({
   },
 })
 
-const isUsingUploadScalar = (_variables: Variables) => {
-  return Object.values(_variables).some(_ => _ instanceof Blob)
+const isUploadRequest = (request: RequestAnalyzedInput) => {
+  if (!request.variables) return false
+  return Object.values(request.variables).some(_ => _ instanceof Blob)
 }
