@@ -675,6 +675,52 @@ exports[`( variables: false; scalars: (none) ) - Query - args - custom scalar - 
 "
 `;
 
+exports[`( variables: false; scalars: (none) ) - Query - args - enum > args - enum 1`] = `
+"
+
+--------------GRAFFLE QUERY-------------
+{
+  "stringWithArgEnum": {
+    "$": {
+      "$ABCEnum": "A"
+    }
+  }
+}
+--------GRAPHQL DOCUMENT & VARIABLES--------
+{
+  stringWithArgEnum(ABCEnum: A)
+}
+----------------
+{
+  "$default": {}
+}
+"
+`;
+
+exports[`( variables: false; scalars: (none) ) - Query - args - input object enum > args - input object enum 1`] = `
+"
+
+--------------GRAFFLE QUERY-------------
+{
+  "stringWithArgInputObjectEnum": {
+    "$": {
+      "input": {
+        "$abcEnum": "A"
+      }
+    }
+  }
+}
+--------GRAPHQL DOCUMENT & VARIABLES--------
+{
+  stringWithArgInputObjectEnum(input: {abcEnum: "A"})
+}
+----------------
+{
+  "$default": {}
+}
+"
+`;
+
 exports[`( variables: false; scalars: (none) ) - Query - args - object with args (empty object) > args - object with args (empty object) 1`] = `
 "
 
@@ -2140,6 +2186,58 @@ query ($input: InputObjectNested) {
         "dateRequired": "0",
         "date": "1"
       }
+    }
+  }
+}
+"
+`;
+
+exports[`( variables: true; scalars: (none) ) - Query - args - enum > args - enum 1`] = `
+"
+
+--------------GRAFFLE QUERY-------------
+{
+  "stringWithArgEnum": {
+    "$": {
+      "$ABCEnum": "A"
+    }
+  }
+}
+--------GRAPHQL DOCUMENT & VARIABLES--------
+query ($ABCEnum: ABCEnum) {
+  stringWithArgEnum(ABCEnum: $ABCEnum)
+}
+----------------
+{
+  "$default": {
+    "ABCEnum": "A"
+  }
+}
+"
+`;
+
+exports[`( variables: true; scalars: (none) ) - Query - args - input object enum > args - input object enum 1`] = `
+"
+
+--------------GRAFFLE QUERY-------------
+{
+  "stringWithArgInputObjectEnum": {
+    "$": {
+      "input": {
+        "$abcEnum": "A"
+      }
+    }
+  }
+}
+--------GRAPHQL DOCUMENT & VARIABLES--------
+query ($input: InputObjectEnum!) {
+  stringWithArgInputObjectEnum(input: $input)
+}
+----------------
+{
+  "$default": {
+    "input": {
+      "abcEnum": "A"
     }
   }
 }

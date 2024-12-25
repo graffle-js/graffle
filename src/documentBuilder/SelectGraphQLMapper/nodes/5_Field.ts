@@ -38,7 +38,7 @@ export const toGraphQLField: GraphQLPostOperationMapper<
       case `Arguments`: {
         const sddmArguments = sddm?.a
         for (const argName in keyParsed.arguments) {
-          const argNameSchema = argName.replace(/^\$/, ``)
+          const argNameSchema = argName
           const sddmArgument = sddmArguments?.[argNameSchema]
           const argValue = keyParsed.arguments[argName]
 

@@ -673,6 +673,26 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
+  stringWithArgInputObjectEnum: $$Utilities.ClientTransports.PreflightCheck<
+    $Context,
+    <$SelectionSet>(
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Query.stringWithArgInputObjectEnum<$Context['scalars']>
+      >,
+    ) => Promise<
+      & (null | {})
+      & $$Utilities.HandleOutputGraffleRootField<
+        $Context,
+        InferResult.OperationQuery<
+          { stringWithArgInputObjectEnum: $SelectionSet },
+          $$Schema.Schema<$Context['scalars']>
+        >,
+        'stringWithArgInputObjectEnum'
+      >
+    >
+  >
+
   stringWithArgInputObjectRequired: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(

@@ -72,6 +72,7 @@ export namespace Schema {
       string: Query.$string
       stringWithArgEnum: Query.stringWithArgEnum
       stringWithArgInputObject: Query.stringWithArgInputObject
+      stringWithArgInputObjectEnum: Query.stringWithArgInputObjectEnum
       stringWithArgInputObjectRequired: Query.stringWithArgInputObjectRequired
       stringWithArgs: Query.stringWithArgs
       stringWithListArg: Query.stringWithListArg
@@ -565,6 +566,20 @@ export namespace Schema {
           name: 'input'
           inlineType: [0]
           namedType: $$NamedTypes.$$InputObject
+        }
+      }
+      inlineType: [0]
+      namedType: $$NamedTypes.$$String
+    }
+
+    export interface stringWithArgInputObjectEnum extends $.OutputField {
+      name: 'stringWithArgInputObjectEnum'
+      arguments: {
+        input: {
+          kind: 'InputField'
+          name: 'input'
+          inlineType: [1]
+          namedType: $$NamedTypes.$$InputObjectEnum
         }
       }
       inlineType: [0]
@@ -1483,6 +1498,7 @@ export namespace Schema {
     name: 'InputObject'
     isAllFieldsNullable: true
     fields: {
+      abcEnum: InputObject.abcEnum
       date: InputObject.date
       dateRequired: InputObject.dateRequired
       id: InputObject.id
@@ -1491,6 +1507,12 @@ export namespace Schema {
   }
 
   export namespace InputObject {
+    export interface abcEnum extends $.InputField {
+      name: 'abcEnum'
+      inlineType: [0]
+      namedType: $$NamedTypes.$$ABCEnum
+    }
+
     export interface date extends $.InputField {
       name: 'date'
       inlineType: [0]
@@ -1540,6 +1562,26 @@ export namespace Schema {
       name: 'date'
       inlineType: [0]
       namedType: $$NamedTypes.$$Date
+    }
+  }
+
+  //                                          InputObjectEnum
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export interface InputObjectEnum extends $.InputObject {
+    name: 'InputObjectEnum'
+    isAllFieldsNullable: true
+    fields: {
+      abcEnum: InputObjectEnum.abcEnum
+    }
+  }
+
+  export namespace InputObjectEnum {
+    export interface abcEnum extends $.InputField {
+      name: 'abcEnum'
+      inlineType: [0]
+      namedType: $$NamedTypes.$$ABCEnum
     }
   }
 
@@ -2216,6 +2258,7 @@ export namespace Schema {
     export type $$lowerCaseObject2 = lowerCaseObject2
     export type $$InputObject = InputObject
     export type $$InputObjectCircular = InputObjectCircular
+    export type $$InputObjectEnum = InputObjectEnum
     export type $$InputObjectNested = InputObjectNested
     export type $$InputObjectNestedNonNull = InputObjectNestedNonNull
     export type $$DateInterface1 = DateInterface1

@@ -26,8 +26,10 @@ export interface RequestAnalyzedDocumentNodeInput extends RequestDocumentNodeInp
 }
 
 export type Variables = {
-  [key: string]: string | boolean | null | number | Variables
+  [key: string]: VariableValue
 }
+
+export type VariableValue = string | boolean | null | number | Variables | VariableValue[]
 
 export type SomeObjectData = {
   [fieldName: string]: any // SomeFieldData <-- If we put this here tsc has crashes with OOM.
@@ -71,25 +73,33 @@ export const normalizeRequestToNode = <$R extends RequestInput | RequestAnalyzed
 	} as any
 }
 
-// todo: refactor into concise visitor pattern.
-export const normalizeVariables = (variables?: Variables): Variables => {
-  return normalizeVariables_(variables)
+export const mapVariables = (
+  variables: Grafaid.Variables | undefined,
+  visitor: (key: string, value: Grafaid.VariableValue) => undefined | { key: string; value: Grafaid.VariableValue },
+): Grafaid.Variables | undefined => {
+  if (variables === undefined) return
+  return mapVariableValue(variables, visitor)
 }
 
-const normalizeVariables_ = (value: unknown): any => {
-  if (value === undefined) return undefined
-  if (value === null) return null
-  if (typeof value !== `object`) return value
-  if (Array.isArray(value)) return value.map(normalizeVariables_)
-  if (!isPlainObject(value)) return value // todo: optimize
-
-  const normalized: Variables = {}
-
-  for (const key in value) {
-    const normalizedKey = key.replace(/^\$/, ``)
-    const normalizedValue = normalizeVariables_(value[key])
-    normalized[normalizedKey] = normalizedValue
+export const mapVariableValue = <$Value extends Grafaid.VariableValue>(
+  value: $Value,
+  visitor: (key: string, value: Grafaid.VariableValue) => undefined | { key: string; value: Grafaid.VariableValue },
+): $Value => {
+  if (Array.isArray(value)) {
+    return value.map(item => mapVariableValue(item, visitor)) as any
+  } else if (isPlainObject(value)) {
+    const newObject: Grafaid.Variables = {}
+    for (const currentKey in value) {
+      const currentValue = mapVariableValue(value[currentKey]!, visitor)
+      const visitorResult = visitor(currentKey, currentValue)
+      if (visitorResult) {
+        newObject[visitorResult.key] = visitorResult.value
+      } else {
+        newObject[currentKey] = currentValue
+      }
+    }
+    return newObject as any
   }
 
-  return normalized
+  return value
 }

@@ -8,4 +8,6 @@ export const enumKeyPrefix = `$`
 
 export const enumKeyPrefixPattern = /^\$/g
 
+export const enumKeyPrefixStrip = (key: string) => key.replace(enumKeyPrefixPattern, ``)
+
 export const isEnumKey = (key: string) => key.startsWith(enumKeyPrefix)

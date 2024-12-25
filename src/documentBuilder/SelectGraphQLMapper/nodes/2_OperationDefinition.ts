@@ -52,3 +52,5 @@ export const toGraphQLOperationDefinition: GraphQLPreOperationMapper<
     variables,
   }
 }
+
+// TODO: optimization: skip when using SDDM b/c we don't need $-directed enums

@@ -110,6 +110,7 @@ const InputObject: $$Utilities.SchemaDrivenDataMap.InputObject = {
   n: 'InputObject',
   fcs: ['date', 'dateRequired'],
   f: {
+    abcEnum: {},
     date: {
       nt: Date,
     },
@@ -131,6 +132,13 @@ const InputObjectCircular: $$Utilities.SchemaDrivenDataMap.InputObject = {
     date: {
       nt: Date,
     },
+  },
+}
+
+const InputObjectEnum: $$Utilities.SchemaDrivenDataMap.InputObject = {
+  n: 'InputObjectEnum',
+  f: {
+    abcEnum: {},
   },
 }
 
@@ -648,6 +656,14 @@ const Query: $$Utilities.SchemaDrivenDataMap.OutputObject = {
         },
       },
     },
+    stringWithArgInputObjectEnum: {
+      a: {
+        input: {
+          nt: InputObjectEnum,
+          it: [1],
+        },
+      },
+    },
     stringWithArgInputObjectRequired: {
       a: {
         input: {
@@ -819,6 +835,7 @@ const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
     ParentInterfaceHierarchyMember,
     InputObject,
     InputObjectCircular,
+    InputObjectEnum,
     InputObjectNested,
     InputObjectNestedNonNull,
     Bar,

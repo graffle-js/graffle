@@ -75,6 +75,7 @@ enum GrandparentInterfaceHierarchyMember {
 }
 
 input InputObject {
+  abcEnum: ABCEnum
   date: Date
   dateRequired: Date!
   id: ID
@@ -84,6 +85,10 @@ input InputObject {
 input InputObjectCircular {
   circular: InputObjectCircular
   date: Date
+}
+
+input InputObjectEnum {
+  abcEnum: ABCEnum
 }
 
 input InputObjectNested {
@@ -230,6 +235,7 @@ type Query {
   string: String
   stringWithArgEnum(ABCEnum: ABCEnum): String
   stringWithArgInputObject(input: InputObject): String
+  stringWithArgInputObjectEnum(input: InputObjectEnum!): String
   stringWithArgInputObjectRequired(input: InputObject!): String
 
   """The given arguments are reflected back as a JSON string."""

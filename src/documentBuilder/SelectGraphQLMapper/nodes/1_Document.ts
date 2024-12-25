@@ -21,7 +21,7 @@ export const toGraphQLDocument = (
     definitions: operationsAndVariables.map(_ => _.operation),
   })
 
-  const operationsVariables = Object.fromEntries(operationsAndVariables.map((_): [string, Grafaid.Variables] => {
+  const operationsVariables = Object.fromEntries(operationsAndVariables.map((_) => {
     const name = _.operation.name?.value ?? defaultOperationName
     return [name, _.variables]
   }))

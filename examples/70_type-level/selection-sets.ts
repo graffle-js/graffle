@@ -114,7 +114,6 @@ const getPokemonsLike = async (filter: Graffle.SelectionSets.Query.pokemons$Argu
     name: true,
   })
 
-// todo add test coverage for $ stripping on arguments.
 const pokemons = await getPokemonsLike({ $type: `water` })
 
 // We don't lose any type safety. :)

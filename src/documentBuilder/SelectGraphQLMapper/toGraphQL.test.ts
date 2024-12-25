@@ -65,6 +65,7 @@ const tester = <$Scalars extends Schema.Scalar.ScalarMap>(
 // todo test a case where we provide an operation name
 // dprint-ignore
 const cases = testEachQueryWithDescription([
+  // inline fragment
   [`fg - one`             , { ___: { __typename: true } }],
   [`fg - multiple`        , { ___: [{ __typename: true }, { abcEnum: true }] }],
   [`fg - interface`       , { interface: { ___: { __typename: true } } }],
@@ -81,6 +82,8 @@ const cases = testEachQueryWithDescription([
   [`alias - scalar directive`          , { id: [`x`, { $skip: true }] }],
   [`alias - scalar directive+select`   , { object: [`x`, { $skip: true, id: true }] }],
     // arguments
+  [`args - enum`                                 , { stringWithArgEnum: { $: { $ABCEnum: `A` }}}],
+  [`args - input object enum`                    , { stringWithArgInputObjectEnum: { $: { input: { $abcEnum: `A` }}}}],
   [`args - on union`                             , { result: { $: { $case: `Object1` }, __typename: true } }],
   [`args - string with args`                     , { stringWithArgs: { $: { boolean: true, float: 1 } } }],
   [`args - alias`                                , { stringWithArgs: [[`a`, { $: { id: `` }}]] }],

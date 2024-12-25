@@ -1,3 +1,5 @@
+import { Grafaid } from '../../lib/grafaid/__.js'
+import { Select } from './../Select/__.js'
 import type { SelectionSet } from './_.js'
 import { Arguments, Directive, Indicator, InlineFragment, SelectAlias, SelectScalarsWildcard } from './_.js'
 
@@ -88,9 +90,15 @@ export const parseSelectionInlineFragment = (key: string, value: any): ParsedInl
 
 export const parseSelection = (key: string, value: any): ParsedSelection => {
   if (key === Arguments.key) {
+    const argumentsNormalized = Grafaid.mapVariables(value, (key, value) => {
+      return {
+        key: Select.Arguments.enumKeyPrefixStrip(key),
+        value,
+      }
+    })
     return {
       type: `Arguments`,
-      arguments: value,
+      arguments: argumentsNormalized ?? {},
     }
   }
 

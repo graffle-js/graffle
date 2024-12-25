@@ -272,6 +272,12 @@ export interface Query<
     | Query.stringWithArgInputObject$Expanded<_$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.stringWithArgInputObject<_$Scalars>>
   /**
+   * Select the `stringWithArgInputObjectEnum` field on the `Query` object. Its type is `String` (a `ScalarStandard` kind of type).
+   */
+  stringWithArgInputObjectEnum?:
+    | Query.stringWithArgInputObjectEnum<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.stringWithArgInputObjectEnum<_$Scalars>>
+  /**
    * Select the `stringWithArgInputObjectRequired` field on the `Query` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   stringWithArgInputObjectRequired?:
@@ -1669,6 +1675,40 @@ export namespace Query {
 
   // --------------------------------------------------------------------------------------------------
 
+  export type stringWithArgInputObjectEnum<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = stringWithArgInputObjectEnum$SelectionSet<_$Scalars>
+
+  export interface stringWithArgInputObjectEnum$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {
+    /**
+     * Arguments for `stringWithArgInputObjectEnum` field. All arguments are required so you must include this.
+     */
+    $: stringWithArgInputObjectEnum$Arguments<_$Scalars>
+  }
+
+  export interface stringWithArgInputObjectEnum$Arguments<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
+    input: $NamedTypes.$InputObjectEnum<_$Scalars>
+  }
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `stringWithArgInputObjectEnum` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type stringWithArgInputObjectEnum$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    stringWithArgInputObjectEnum$SelectionSet<_$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
   export type stringWithArgInputObjectRequired<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = stringWithArgInputObjectRequired$SelectionSet<_$Scalars>
@@ -2145,6 +2185,7 @@ export type ParentInterfaceHierarchyMember =
 export interface InputObject<
   _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
 > {
+  $abcEnum?: $NamedTypes.$ABCEnum | undefined | null
   date?:
     | $$Utilities.Schema.Scalar.GetDecoded<
       $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', _$Scalars>
@@ -2168,6 +2209,12 @@ export interface InputObjectCircular<
     >
     | undefined
     | null
+}
+
+export interface InputObjectEnum<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> {
+  $abcEnum?: $NamedTypes.$ABCEnum | undefined | null
 }
 
 export interface InputObjectNested<
@@ -4637,6 +4684,9 @@ export namespace $NamedTypes {
   export type $InputObjectCircular<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = InputObjectCircular<_$Scalars>
+  export type $InputObjectEnum<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = InputObjectEnum<_$Scalars>
   export type $InputObjectNested<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = InputObjectNested<_$Scalars>

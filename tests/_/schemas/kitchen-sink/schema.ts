@@ -226,6 +226,13 @@ const InputObject = builder.inputType(`InputObject`, {
     idRequired: t.id({ required: true }),
     date: t.field({ type: `Date` }),
     dateRequired: t.field({ type: `Date`, required: true }),
+    abcEnum: t.field({ type: ABCEnum }),
+  }),
+})
+
+const InputObjectEnum = builder.inputType(`InputObjectEnum`, {
+  fields: t => ({
+    abcEnum: t.field({ type: ABCEnum }),
   }),
 })
 
@@ -462,6 +469,11 @@ builder.queryType({
       type: `String`,
       args: { ABCEnum: t.arg({ type: ABCEnum }) },
       resolve: (_, args) => args.ABCEnum,
+    }),
+    stringWithArgInputObjectEnum: t.field({
+      type: `String`,
+      args: { input: t.arg({ type: InputObjectEnum, required: true }) },
+      resolve: (_, args) => args.input.abcEnum,
     }),
     stringWithListArg: t.field({
       type: `String`,
