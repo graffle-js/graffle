@@ -839,6 +839,26 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
+  stringWithArgInputObjectEnum: $$Utilities.ClientTransports.PreflightCheck<
+    $Context,
+    <$SelectionSet>(
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Query.stringWithArgInputObjectEnum<$Context['scalars']>
+      >,
+    ) => Promise<
+      & (null | {})
+      & $$Utilities.HandleOutputGraffleRootField<
+        $Context,
+        InferResult.OperationQuery<
+          { stringWithArgInputObjectEnum: $SelectionSet },
+          $$Schema.Schema<$Context['scalars']>
+        >,
+        'stringWithArgInputObjectEnum'
+      >
+    >
+  >
+
   stringWithArgInputObjectRequired: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
@@ -1421,6 +1441,7 @@ export namespace Schema {
       string: Query.$string
       stringWithArgEnum: Query.stringWithArgEnum
       stringWithArgInputObject: Query.stringWithArgInputObject
+      stringWithArgInputObjectEnum: Query.stringWithArgInputObjectEnum
       stringWithArgInputObjectRequired: Query.stringWithArgInputObjectRequired
       stringWithArgs: Query.stringWithArgs
       stringWithListArg: Query.stringWithListArg
@@ -1914,6 +1935,20 @@ export namespace Schema {
           name: 'input'
           inlineType: [0]
           namedType: $$NamedTypes.$$InputObject
+        }
+      }
+      inlineType: [0]
+      namedType: $$NamedTypes.$$String
+    }
+
+    export interface stringWithArgInputObjectEnum extends $.OutputField {
+      name: 'stringWithArgInputObjectEnum'
+      arguments: {
+        input: {
+          kind: 'InputField'
+          name: 'input'
+          inlineType: [1]
+          namedType: $$NamedTypes.$$InputObjectEnum
         }
       }
       inlineType: [0]
@@ -2832,6 +2867,7 @@ export namespace Schema {
     name: 'InputObject'
     isAllFieldsNullable: true
     fields: {
+      abcEnum: InputObject.abcEnum
       date: InputObject.date
       dateRequired: InputObject.dateRequired
       id: InputObject.id
@@ -2840,6 +2876,12 @@ export namespace Schema {
   }
 
   export namespace InputObject {
+    export interface abcEnum extends $.InputField {
+      name: 'abcEnum'
+      inlineType: [0]
+      namedType: $$NamedTypes.$$ABCEnum
+    }
+
     export interface date extends $.InputField {
       name: 'date'
       inlineType: [0]
@@ -2889,6 +2931,26 @@ export namespace Schema {
       name: 'date'
       inlineType: [0]
       namedType: $$NamedTypes.$$Date
+    }
+  }
+
+  //                                          InputObjectEnum
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export interface InputObjectEnum extends $.InputObject {
+    name: 'InputObjectEnum'
+    isAllFieldsNullable: true
+    fields: {
+      abcEnum: InputObjectEnum.abcEnum
+    }
+  }
+
+  export namespace InputObjectEnum {
+    export interface abcEnum extends $.InputField {
+      name: 'abcEnum'
+      inlineType: [0]
+      namedType: $$NamedTypes.$$ABCEnum
     }
   }
 
@@ -3565,6 +3627,7 @@ export namespace Schema {
     export type $$lowerCaseObject2 = lowerCaseObject2
     export type $$InputObject = InputObject
     export type $$InputObjectCircular = InputObjectCircular
+    export type $$InputObjectEnum = InputObjectEnum
     export type $$InputObjectNested = InputObjectNested
     export type $$InputObjectNestedNonNull = InputObjectNestedNonNull
     export type $$DateInterface1 = DateInterface1
@@ -3826,6 +3889,7 @@ const InputObject: $$Utilities.SchemaDrivenDataMap.InputObject = {
   n: 'InputObject',
   fcs: ['date', 'dateRequired'],
   f: {
+    abcEnum: {},
     date: {
       nt: Date,
     },
@@ -3847,6 +3911,13 @@ const InputObjectCircular: $$Utilities.SchemaDrivenDataMap.InputObject = {
     date: {
       nt: Date,
     },
+  },
+}
+
+const InputObjectEnum: $$Utilities.SchemaDrivenDataMap.InputObject = {
+  n: 'InputObjectEnum',
+  f: {
+    abcEnum: {},
   },
 }
 
@@ -4360,6 +4431,14 @@ const Query: $$Utilities.SchemaDrivenDataMap.OutputObject = {
         },
       },
     },
+    stringWithArgInputObjectEnum: {
+      a: {
+        input: {
+          nt: InputObjectEnum,
+          it: [1],
+        },
+      },
+    },
     stringWithArgInputObjectRequired: {
       a: {
         input: {
@@ -4531,6 +4610,7 @@ const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
     ParentInterfaceHierarchyMember,
     InputObject,
     InputObjectCircular,
+    InputObjectEnum,
     InputObjectNested,
     InputObjectNestedNonNull,
     Bar,
@@ -5054,6 +5134,12 @@ export interface Query<
   stringWithArgInputObject?:
     | Query.stringWithArgInputObject$Expanded<_$Scalars>
     | $Select.SelectAlias.SelectAlias<Query.stringWithArgInputObject<_$Scalars>>
+  /**
+   * Select the \`stringWithArgInputObjectEnum\` field on the \`Query\` object. Its type is \`String\` (a \`ScalarStandard\` kind of type).
+   */
+  stringWithArgInputObjectEnum?:
+    | Query.stringWithArgInputObjectEnum<_$Scalars>
+    | $Select.SelectAlias.SelectAlias<Query.stringWithArgInputObjectEnum<_$Scalars>>
   /**
    * Select the \`stringWithArgInputObjectRequired\` field on the \`Query\` object. Its type is \`String\` (a \`ScalarStandard\` kind of type).
    */
@@ -6452,6 +6538,40 @@ export namespace Query {
 
   // --------------------------------------------------------------------------------------------------
 
+  export type stringWithArgInputObjectEnum<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = stringWithArgInputObjectEnum$SelectionSet<_$Scalars>
+
+  export interface stringWithArgInputObjectEnum$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $Select.Bases.Base {
+    /**
+     * Arguments for \`stringWithArgInputObjectEnum\` field. All arguments are required so you must include this.
+     */
+    $: stringWithArgInputObjectEnum$Arguments<_$Scalars>
+  }
+
+  export interface stringWithArgInputObjectEnum$Arguments<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > {
+    input: $NamedTypes.$InputObjectEnum<_$Scalars>
+  }
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the \`stringWithArgInputObjectEnum\` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type stringWithArgInputObjectEnum$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    stringWithArgInputObjectEnum$SelectionSet<_$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
   export type stringWithArgInputObjectRequired<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = stringWithArgInputObjectRequired$SelectionSet<_$Scalars>
@@ -6928,6 +7048,7 @@ export type ParentInterfaceHierarchyMember =
 export interface InputObject<
   _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
 > {
+  $abcEnum?: $NamedTypes.$ABCEnum | undefined | null
   date?:
     | $$Utilities.Schema.Scalar.GetDecoded<
       $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', _$Scalars>
@@ -6951,6 +7072,12 @@ export interface InputObjectCircular<
     >
     | undefined
     | null
+}
+
+export interface InputObjectEnum<
+  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+> {
+  $abcEnum?: $NamedTypes.$ABCEnum | undefined | null
 }
 
 export interface InputObjectNested<
@@ -9420,6 +9547,9 @@ export namespace $NamedTypes {
   export type $InputObjectCircular<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = InputObjectCircular<_$Scalars>
+  export type $InputObjectEnum<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = InputObjectEnum<_$Scalars>
   export type $InputObjectNested<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = InputObjectNested<_$Scalars>
