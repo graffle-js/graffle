@@ -1,6 +1,5 @@
 import type { GraphQLError } from 'graphql'
 import type { Simplify } from 'type-fest'
-import type { SimplifyDeepExcept } from '../documentBuilder/Simplify.js'
 import type { Extension } from '../entrypoints/extensionkit.js'
 import type { Anyware } from '../lib/anyware/__.js'
 import { Errors } from '../lib/errors/__.js'
@@ -17,6 +16,7 @@ import {
 import type { RequestPipelineBase } from '../requestPipeline/RequestPipeline.js'
 import type { Context } from '../types/context.js'
 import type { GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
+import type { RequestResult } from '../types/RequestResult.ts/__.js'
 import {
   type ErrorCategory,
   isOutputTraditionalGraphQLOutput,
@@ -99,7 +99,7 @@ export type HandleOutputGraffleRootField<$Context extends Context, $Data extends
     ExcludeNull<
       HandleOutput<
         $Context,
-        SimplifyDeepExcept<$Context['scalars']['typesDecoded'], $Data>
+        RequestResult.Simplify<$Context, $Data>
       >
     >,
     $RootFieldName
@@ -117,7 +117,7 @@ export type HandleOutput<$Context extends Context, $Data extends SomeObjectData>
     $Context,
     Envelope<
       $Context,
-      SimplifyDeepExcept<$Context['scalars']['typesDecoded'], $Data>
+      RequestResult.Simplify<$Context, $Data>
     >
   >
 

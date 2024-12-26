@@ -456,16 +456,6 @@ export type PickRequiredProperties<T extends object> = {
 
 export type Negate<T extends boolean> = T extends true ? false : true
 
-// export type SimplifyExceptError<T extends unknown> = ConditionalSimplify<T, Error>
-
-// export type SimplifyExceptErrorUnion<T> = T extends any ? SimplifyExceptError<T> : never
-
-// export type SimplifyUnion<T> = T extends any ? Simplify<T> : never
-
-// export type SimplifyDeep<T> = ConditionalSimplifyDeep<T, Function | Iterable<unknown> | Date, object>
-
-// export type SimplifyDeepUnion<T> = T extends any ? SimplifyDeep<T> : never
-
 export type RequireProperties<O extends object, K extends keyof O> = Simplify<O & { [P in K]-?: O[P] }>
 
 export const throwNull = <V>(value: V): Exclude<V, null> => {
@@ -786,3 +776,5 @@ export const identity = <value>(value: value): value => value
 export type PartialOrUndefined<T> = {
   [K in keyof T]?: T[K] | undefined
 }
+
+export type UnknownOrAnyToNever<T> = unknown extends T ? never : T

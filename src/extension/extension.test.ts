@@ -1,4 +1,5 @@
 import { describe, expectTypeOf, test } from 'vitest'
+import type { Extension } from './__.js'
 import { create } from './extension.js'
 
 describe(`constructor arguments`, () => {
@@ -67,13 +68,7 @@ test(`type hooks is empty by default`, () => {
       return {}
     },
   })
-  expectTypeOf(Ex.info.typeHooks).toEqualTypeOf<{
-    onRequestResult: []
-    onRequestDocumentRootType: []
-  }>()
+  expectTypeOf(Ex.info.typeHooks).toEqualTypeOf<Extension.TypeHooks.States.Empty>()
   const ex = Ex()
-  expectTypeOf(ex.typeHooks).toEqualTypeOf<{
-    onRequestResult: []
-    onRequestDocumentRootType: []
-  }>()
+  expectTypeOf(ex.typeHooks).toEqualTypeOf<Extension.TypeHooks.States.Empty>()
 })

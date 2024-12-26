@@ -13,7 +13,9 @@ import { Schema } from './Schema/__.js'
 import type { SchemaDrivenDataMap } from './SchemaDrivenDataMap/SchemaDrivenDataMap.js'
 import type { Transport } from './Transport.js'
 
-export interface Context extends ContextValueLevel {
+export interface Context extends ContextTypeLevel, ContextValueLevel {}
+
+export interface ContextTypeLevel {
   /**
    * Type level augmentations.
    *
@@ -21,6 +23,7 @@ export interface Context extends ContextValueLevel {
    */
   typeHookOnRequestResult: Extension.TypeHooks.OnRequestResult[]
   typeHookOnRequestDocumentRootType: Extension.TypeHooks.OnRequestDocumentRootType[]
+  typeHookRequestResultDataTypes: unknown
 }
 
 export interface ContextValueLevel {
@@ -148,9 +151,11 @@ export namespace Context {
       input: {}
       requestPipelineDefinition: RequestPipelineBaseDefinition
       output: OutputConfigDefault
-      // type-only properties
+      // type-level properties
+      // todo merge typehooks empty from extension type here to DRY
       typeHookOnRequestDocumentRootType: []
       typeHookOnRequestResult: []
+      typeHookRequestResultDataTypes: never
     }
 
     export const empty: Empty = {

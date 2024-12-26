@@ -1,4 +1,4 @@
-import { requestMethodsProperties } from '../documentBuilder/requestMethods/requestMethods.js' // todo
+import { requestMethodsProperties } from '../documentBuilder/requestMethods/requestMethods.js'
 import type { Anyware } from '../lib/anyware/__.js'
 import { proxyGet } from '../lib/prelude.js'
 import type { TypeFunction } from '../lib/type-function/__.js'

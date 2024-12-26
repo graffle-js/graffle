@@ -1,7 +1,6 @@
 import { type Context } from '../../types/context.js'
 import type { GlobalRegistry } from '../../types/GlobalRegistry/GlobalRegistry.js'
 import { Schema } from '../../types/Schema/__.js'
-import type { GetDecoded, GetEncoded } from '../../types/Schema/nodes/Scalar/helpers.js'
 import { type Client } from '../client.js'
 import type { ExtensionChainableRegistry } from '../client.js'
 import { createProperties } from '../helpers.js'
@@ -45,14 +44,25 @@ export type ScalarMethod<
     {
       [_ in keyof $Context]: _ extends 'scalars' ? {
           map: $Context[_]['map'] & { [_ in $Scalar['name']]: $Scalar }
-          typesEncoded: $Context[_]['typesEncoded'] | GetEncoded<$Scalar>
-          typesDecoded: $Context[_]['typesDecoded'] | GetDecoded<$Scalar>
+          typesEncoded: $Context[_]['typesEncoded'] | Schema.Scalar.GetEncoded<$Scalar>
+          typesDecoded: $Context[_]['typesDecoded'] | Schema.Scalar.GetDecoded<$Scalar>
         }
         : $Context[_]
     },
     $Extension,
     $ExtensionChainable
   >
+}
+
+// todo review if really needed for keeping type instance count low v
+// We do not use this above to reduce type instance count
+export type AddScalar<$Context extends Context, $Scalar extends Schema.Scalar> = {
+  [_ in keyof $Context]: _ extends 'scalars' ? {
+      map: $Context[_]['map'] & { [_ in $Scalar['name']]: $Scalar }
+      typesEncoded: $Context[_]['typesEncoded'] | Schema.Scalar.GetEncoded<$Scalar>
+      typesDecoded: $Context[_]['typesDecoded'] | Schema.Scalar.GetDecoded<$Scalar>
+    }
+    : $Context[_]
 }
 
 type Arguments = [Schema.Scalar] | [string, { decode: (value: string) => any; encode: (value: any) => string }]

@@ -4,7 +4,6 @@ export type { ConfigGetOutputError, HandleOutput, HandleOutputGraffleRootField }
 export { useReducer } from '../client/properties/use.js'
 export { type DocumentRunner } from '../documentBuilder/requestMethods/document.js'
 export * from '../documentBuilder/Select/__.js'
-export { type SimplifyDeep, type SimplifyDeepExcept } from '../documentBuilder/Simplify.js'
 export { type AssertExtendsObject, type Exact, type ExactNonEmpty, type UnionExpanded } from '../lib/prelude.js'
 export { TypeFunction } from '../lib/type-function/__.js'
 export type { ClientTransports } from '../types/context.js'

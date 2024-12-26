@@ -9,6 +9,7 @@ export type UseMethod<
   out $Extension_ extends object,
   out $ExtensionChainable_ extends ExtensionChainableRegistry,
 > = <extension extends Extension>(extension: extension) => Client<
+  // @ts-expect-error fixme
   UseReducer<$Context, extension>,
   $Extension_,
   // @ts-expect-error
@@ -23,7 +24,7 @@ export type UseReducer<
   $Context extends Context,
   $Extension extends Extension,
 > =
-  AddTypeHooks<
+  Extension.AddTypeHooksFromExtension<
     AddTransport<
       AddExtension<
         $Context,
@@ -93,15 +94,6 @@ type AddTransport<
 > = Context.Updaters.AddTransportOptional<
   $Context,
   $Extension['transport']
->
-
-type AddTypeHooks<
-  $Context extends Context,
-  $Extension extends Extension,
-> = ConfigManager.UpdateKeyWithAppendMany<
-  $Context,
-  'typeHookOnRequestResult',
-  $Extension['typeHooks']['onRequestResult']
 >
 
 type AddExtension<

@@ -17,6 +17,7 @@ export interface SchemaErrors extends Extension {
   typeHooks: {
     onRequestDocumentRootType: [OnRequestDocumentRootType_]
     onRequestResult: [OnRequestResult_]
+    requestResultDataTypes: never
   }
 }
 

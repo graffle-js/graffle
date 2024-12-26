@@ -3,11 +3,11 @@ import type { db } from '../../../tests/_/schemas/db.js'
 import type { Schema } from '../../../tests/_/schemas/kitchen-sink/graffle/modules/schema.js'
 import type * as SelectionSets from '../../../tests/_/schemas/kitchen-sink/graffle/modules/selection-sets.js'
 import { assertEqual } from '../../lib/assert-equal.js'
+import type { RequestResult } from '../../types/RequestResult.ts/__.js'
 import type { Registry } from '../../types/Schema/nodes/Scalar/helpers.js'
-import type { DocumentBuilder } from '../__.js'
 import type { InferResult } from './__.js'
 
-type $<$SelectionSet extends SelectionSets.Query> = DocumentBuilder.SimplifyDeep<
+type $<$SelectionSet extends SelectionSets.Query> = RequestResult.SimplifyWithEmptyContext<
   InferResult.OperationQuery<$SelectionSet, Schema>
 >
 

@@ -27,8 +27,13 @@ export const Introspection = create({
     const config = createConfig(input)
     return config
   },
+  // todo consider this API:
+  // create: ({ config, typeHooks }) => {
+  //   return {
+  //     typeHooks: typeHooks<{ ... }>,
   create: ({ config }) => {
     return {
+      typeHooks: $ => $.requestResultDataTypes<IntrospectionQuery>(),
       builder: (builder) =>
         builder<BuilderExtension>(({ path, property, client }) => {
           if (!(path.length === 0 && property === `introspect`)) return

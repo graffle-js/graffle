@@ -8,6 +8,7 @@ import { BuilderExtension } from './builder.js'
 import type { TypeHooks, TypeHooksEmpty } from './TypeHooks.js'
 import type { TypeHooksBuilderCallback } from './TypeHooks.js'
 
+export * from './context.js'
 export * as TypeHooks from './TypeHooks.js'
 
 export type ExtensionInputParameters =
@@ -28,6 +29,7 @@ export interface ExtensionDefinition {
   ) => Anyware.Overload.Builder
 }
 
+// todo: rename to "define"
 export const create = <
   $Name extends string,
   $BuilderExtension extends BuilderExtension | undefined = BuilderExtension | undefined,
@@ -94,6 +96,7 @@ export const create = <
       transport,
       // todo: remove this from runtime, its JUST for types.
       typeHooks: {
+        requestResultDataTypes: null,
         onRequestDocumentRootType: [],
         onRequestResult: [],
       },
