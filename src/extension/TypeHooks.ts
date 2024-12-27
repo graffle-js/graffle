@@ -1,5 +1,5 @@
 import type { GraffleExecutionResultEnvelope } from '../client/handleOutput.js'
-import type { Select } from '../entrypoints/utilities-for-generated.js'
+import type { DocumentBuilder } from '../documentBuilder/__.js'
 import type { AssertExtends } from '../lib/prelude.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
 import type { Context } from '../types/context.js'
@@ -79,7 +79,7 @@ export interface TypeHooksBuilder<$TypeHooks extends TypeHooks = TypeHooksEmpty>
 export interface OnRequestDocumentRootType extends TypeFunction {}
 export namespace OnRequestDocumentRootType {
   export interface Params {
-    selectionRootType: Select.SelectionSet.RootType
+    selectionRootType: DocumentBuilder.Select.SelectionSet.RootType
   }
 }
 

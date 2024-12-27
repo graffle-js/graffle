@@ -1,7 +1,7 @@
 // todo: generate in JSDoc how the feature maps to GQL syntax.
 // todo: on union fields, JSDoc that mentions the syntax `on*`
 
-import { Select } from '../../documentBuilder/Select/__.js'
+import { DocumentBuilder } from '../../documentBuilder/__.js'
 import { Code } from '../../lib/Code.js'
 import { Grafaid } from '../../lib/grafaid/__.js'
 import { analyzeArgsNullability } from '../../lib/grafaid/schema/args.js'
@@ -98,7 +98,9 @@ export const ModuleGeneratorSelectionSets = createModuleGenerator(
 const Union = createCodeGenerator<{ type: Grafaid.Schema.UnionType }>(
   ({ config, type, code }) => {
     const fragmentsInlineType = type.getTypes().map((type) =>
-      `${Select.InlineFragment.typeConditionPRefix}${type.name}?: ${H.forwardTypeParameter$Scalars(type)}`
+      `${DocumentBuilder.Select.InlineFragment.typeConditionPRefix}${type.name}?: ${
+        H.forwardTypeParameter$Scalars(type)
+      }`
     ).join(`\n`)
     code(Code.tsInterface({
       tsDoc: getTsDocContents(config, type),
@@ -145,7 +147,10 @@ const Interface = createCodeGenerator<{ type: Grafaid.Schema.InterfaceType }>(
     }).join(`\n`)
     const implementorTypes = Grafaid.Schema.KindMap.getInterfaceImplementors(config.schema.kindMap, type)
     const onTypesRendered = implementorTypes.map(type =>
-      H.outputFieldReference(`${Select.InlineFragment.typeConditionPRefix}${type.name}`, renderName(type))
+      H.outputFieldReference(
+        `${DocumentBuilder.Select.InlineFragment.typeConditionPRefix}${type.name}`,
+        renderName(type),
+      )
     ).join(`\n`)
     code()
     code(Tex.title2(type.name))
@@ -313,7 +318,7 @@ const renderFieldPropertyArguments = createCodeGenerator<
         ? `${lead} are required so you may omit this.`
         : `${lead} are required so you must include this.`
       const tsDoc = `Arguments for \`${field.name}\` field. ${tsDocMessageAboutRequired}`
-      code(Code.field(Select.Arguments.key, argFieldsRendered, {
+      code(Code.field(DocumentBuilder.Select.Arguments.key, argFieldsRendered, {
         optional: argsAnalysis.isAllNullable,
         tsDoc,
       }))
@@ -334,7 +339,7 @@ const getInputFieldLike = (config: Config, inputFieldLike: Grafaid.Schema.Argume
 
 const getInputFieldKey = (inputFieldLike: Grafaid.Schema.Argument | Grafaid.Schema.InputField) => {
   return Grafaid.Schema.isEnumType(Grafaid.Schema.getNamedType(inputFieldLike.type))
-    ? Select.Arguments.enumKeyPrefix + inputFieldLike.name
+    ? DocumentBuilder.Select.Arguments.enumKeyPrefix + inputFieldLike.name
     : inputFieldLike.name
 }
 

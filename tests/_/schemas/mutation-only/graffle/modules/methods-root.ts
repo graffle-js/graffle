@@ -1,4 +1,3 @@
-import type { InferResult } from '../../../../../../src/entrypoints/schema.js'
 import type * as $$Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
 import * as $$Schema from './schema.js'
 import * as $$SelectionSets from './selection-sets.js'
@@ -12,7 +11,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutput<
         $Context,
-        InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           $$Utilities.AssertExtendsObject<$SelectionSet>,
           $$Schema.Schema<$Context['scalars']>
         >
@@ -39,7 +38,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationMutation<{ id: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
+          { id: $SelectionSet },
+          $$Schema.Schema<$Context['scalars']>
+        >,
         'id'
       >
     >
@@ -53,7 +55,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationMutation<{ idNonNull: $SelectionSet }, $$Schema.Schema<$Context['scalars']>>,
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
+          { idNonNull: $SelectionSet },
+          $$Schema.Schema<$Context['scalars']>
+        >,
         'idNonNull'
       >
     >

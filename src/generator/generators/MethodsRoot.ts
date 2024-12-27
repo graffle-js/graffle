@@ -16,7 +16,6 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
     code(importModuleGenerator(config, ModuleGeneratorSchema))
     code(
       `import type * as ${identifiers.$$Utilities}  from '${config.paths.imports.grafflePackage.utilitiesForGenerated}';`,
-      `import type { InferResult } from '${config.paths.imports.grafflePackage.schema}'`,
     )
     code()
     code()
@@ -60,7 +59,7 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
               & (null | {})
               & ${identifiers.$$Utilities}.HandleOutput<
                   $Context,
-                  InferResult.Operation${capitalizeFirstLetter(operationType)}<${identifiers.$$Utilities}.AssertExtendsObject<$SelectionSet>, ${identifiers.$$Schema}.${identifiers.Schema}<$Context['scalars']>>
+                  ${identifiers.$$Utilities}.DocumentBuilder.InferResult.Operation${capitalizeFirstLetter(operationType)}<${identifiers.$$Utilities}.AssertExtendsObject<$SelectionSet>, ${identifiers.$$Schema}.${identifiers.Schema}<$Context['scalars']>>
                 >
             >
         >
@@ -102,7 +101,7 @@ const renderFieldMethods = createCodeGenerator<{ node: Grafaid.Schema.ObjectType
               & (null | {})
               & ${identifiers.$$Utilities}.HandleOutputGraffleRootField<
                   $Context,
-                  InferResult.Operation${capitalizeFirstLetter(operationType)}<{ ${field.name}: $SelectionSet}, ${identifiers.$$Schema}.${identifiers.Schema}<$Context['scalars']>>,
+                  ${identifiers.$$Utilities}.DocumentBuilder.InferResult.Operation${capitalizeFirstLetter(operationType)}<{ ${field.name}: $SelectionSet}, ${identifiers.$$Schema}.${identifiers.Schema}<$Context['scalars']>>,
                   '${field.name}'
                 >
             >

@@ -5,8 +5,7 @@ import { db } from '../../../tests/_/schemas/db.js'
 import type { Graffle } from '../../../tests/_/schemas/kitchen-sink/graffle/__.js'
 import { schemaDrivenDataMap } from '../../../tests/_/schemas/kitchen-sink/graffle/modules/schema-driven-data-map.js'
 import { Spy } from '../../../tests/_/SpyExtension.js'
-import { Select } from '../../documentBuilder/Select/__.js'
-import { SelectionSetGraphqlMapper } from '../../documentBuilder/SelectGraphQLMapper/__.js'
+import { DocumentBuilder } from '../../documentBuilder/__.js'
 import { Grafaid } from '../../lib/grafaid/__.js'
 import type { Schema } from '../../types/Schema/__.js'
 
@@ -37,8 +36,8 @@ const testCases = test.for<TestCase>([
 
 testCases(`%s`, async ([_, query, expectedVariables], { kitchenSink }) => {
   const g = kitchenSink.use(Spy()).scalar(DateScalar)
-  const { document, operationsVariables } = SelectionSetGraphqlMapper.toGraphQL(
-    Select.Document.createDocumentNormalizedFromQuerySelection(query as any),
+  const { document, operationsVariables } = DocumentBuilder.SelectionSetGraphqlMapper.toGraphQL(
+    DocumentBuilder.Select.Document.createDocumentNormalizedFromQuerySelection(query as any),
     {
       sddm: schemaDrivenDataMap,
       operationVariables: true,

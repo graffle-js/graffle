@@ -22,7 +22,7 @@ export const ModuleGeneratorSelect = createModuleGenerator(
       ${importModuleGenerator(config, ModuleGeneratorSchema)}
       ${importModuleGenerator(config, ModuleGeneratorSelectionSets)}
       import type { OperationTypeNode } from 'graphql'
-      import type { InferResult } from '${config.paths.imports.grafflePackage.schema}'
+      import type * as ${identifiers.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
     `)
     code()
     code(Tex.title1(`Runtime`))
@@ -38,26 +38,28 @@ export const ModuleGeneratorSelect = createModuleGenerator(
         if (!type) return null
         return `export type ${type.name}<$SelectionSet extends $$SelectionSets.${
           renderName(type)
-        }> = InferResult.Operation<$SelectionSet, ${iSchema}, OperationTypeNode.${enumMemberName[operationType]}>`
+        }> = ${identifiers.$$Utilities}.DocumentBuilder.InferResult.Operation<$SelectionSet, ${iSchema}, OperationTypeNode.${
+          enumMemberName[operationType]
+        }>`
       }),
     )
     code(Tex.title2(`OutputObject`))
     code(...config.schema.kindMap.list.OutputObject.map((type) => {
       return `export type ${type.name}<$SelectionSet extends $$SelectionSets.${
         renderName(type)
-      }> = InferResult.OutputObjectLike<$SelectionSet, ${iSchema}, ${iSchema}['allTypes']['${type.name}']>`
+      }> = ${identifiers.$$Utilities}.DocumentBuilder.InferResult.OutputObjectLike<$SelectionSet, ${iSchema}, ${iSchema}['allTypes']['${type.name}']>`
     }))
     code(Tex.title2(`Union`))
     code(...config.schema.kindMap.list.Union.map((type) => {
       return `export type ${type.name}<$SelectionSet extends $$SelectionSets.${
         renderName(type)
-      }> = InferResult.Union<$SelectionSet, ${iSchema}, ${iSchema}['allTypes']['${type.name}']>`
+      }> = ${identifiers.$$Utilities}.DocumentBuilder.InferResult.Union<$SelectionSet, ${iSchema}, ${iSchema}['allTypes']['${type.name}']>`
     }))
     code(Tex.title2(`Interface`))
     code(...config.schema.kindMap.list.Interface.map((type) => {
       return `export type ${type.name}<$SelectionSet extends $$SelectionSets.${
         renderName(type)
-      }> = InferResult.Interface<$SelectionSet, ${iSchema}, ${iSchema}['allTypes']['${type.name}']>`
+      }> = ${identifiers.$$Utilities}.DocumentBuilder.InferResult.Interface<$SelectionSet, ${iSchema}, ${iSchema}['allTypes']['${type.name}']>`
     }))
 
     code(`}`)

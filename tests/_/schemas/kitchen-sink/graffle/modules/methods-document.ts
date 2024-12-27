@@ -5,7 +5,7 @@ import * as $$SelectionSets from './selection-sets.js'
 export interface Document<$Context extends $$Utilities.Context> {
   <$Document>(
     document: $$Utilities.ExactNonEmpty<$Document, $$SelectionSets.$Document<$Context['scalars']>>,
-  ): $$Utilities.DocumentRunner<
+  ): $$Utilities.DocumentBuilder.DocumentRunner<
     $Context,
     $$Schema.Schema,
     // @ts-expect-error We use Exact instead of constraint on this function. TypeScript does not see that as

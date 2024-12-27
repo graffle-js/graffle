@@ -3,8 +3,7 @@ import { DateScalar } from '../../../tests/_/fixtures/scalars.js'
 import { createResponse, test } from '../../../tests/_/helpers.js'
 import { db } from '../../../tests/_/schemas/db.js'
 import type { Graffle } from '../../../tests/_/schemas/kitchen-sink/graffle/__.js'
-import { Select } from '../../documentBuilder/Select/__.js'
-import { SelectionSetGraphqlMapper } from '../../documentBuilder/SelectGraphQLMapper/__.js'
+import { DocumentBuilder } from '../../documentBuilder/__.js'
 import { Grafaid } from '../../lib/grafaid/__.js'
 import type { Schema } from '../../types/Schema/__.js'
 
@@ -36,8 +35,8 @@ const withGqlDocument: TestCaseWith = [
   {},
   async ([_, query, responseData, expectedData], { fetch, kitchenSinkHttp: kitchenSink }) => {
     fetch.mockResolvedValueOnce(createResponse({ data: responseData }))
-    const { document } = SelectionSetGraphqlMapper.toGraphQL(
-      Select.Document.createDocumentNormalizedFromQuerySelection(query as any),
+    const { document } = DocumentBuilder.SelectionSetGraphqlMapper.toGraphQL(
+      DocumentBuilder.Select.Document.createDocumentNormalizedFromQuerySelection(query as any),
     )
     expect(await kitchenSink.scalar(DateScalar).gql(document).send()).toEqual(expectedData)
   },
@@ -48,8 +47,8 @@ const withGqlString: TestCaseWith = [
   {},
   async ([_, query, responseData, expectedData], { fetch, kitchenSinkHttp: kitchenSink }) => {
     fetch.mockResolvedValueOnce(createResponse({ data: responseData }))
-    const { document } = SelectionSetGraphqlMapper.toGraphQL(
-      Select.Document.normalizeOrThrow({ query: { foo: query as any } }),
+    const { document } = DocumentBuilder.SelectionSetGraphqlMapper.toGraphQL(
+      DocumentBuilder.Select.Document.normalizeOrThrow({ query: { foo: query as any } }),
     )
     expect(await kitchenSink.scalar(DateScalar).gql(Grafaid.Document.print(document)).send()).toEqual(expectedData)
   },

@@ -1,5 +1,5 @@
 import type { OperationTypeNode } from 'graphql'
-import type { InferResult } from '../../../../../../src/entrypoints/schema.js'
+import type * as $$Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
 import * as $$Data from './data.js'
 import * as $$Schema from './schema.js'
 import * as $$SelectionSets from './selection-sets.js'
@@ -42,7 +42,7 @@ export namespace Select {
   //                                                Root
   // --------------------------------------------------------------------------------------------------
   //
-  export type Query<$SelectionSet extends $$SelectionSets.Query> = InferResult.Operation<
+  export type Query<$SelectionSet extends $$SelectionSets.Query> = $$Utilities.DocumentBuilder.InferResult.Operation<
     $SelectionSet,
     $$Schema.Schema,
     OperationTypeNode.QUERY

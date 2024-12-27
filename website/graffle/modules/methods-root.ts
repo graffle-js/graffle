@@ -1,4 +1,3 @@
-import type { InferResult } from "graffle/schema";
 import type * as $$Utilities from "graffle/utilities-for-generated";
 import * as $$Schema from "./schema.js";
 import * as $$SelectionSets from "./selection-sets.js";
@@ -12,7 +11,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutput<
         $Context,
-        InferResult.OperationQuery<$$Utilities.AssertExtendsObject<$SelectionSet>, $$Schema.Schema<$Context["scalars"]>>
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+          $$Utilities.AssertExtendsObject<$SelectionSet>,
+          $$Schema.Schema<$Context["scalars"]>
+        >
       >
     >
   >;
@@ -36,7 +38,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ battles: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+          { battles: $SelectionSet },
+          $$Schema.Schema<$Context["scalars"]>
+        >,
         "battles"
       >
     >
@@ -50,7 +55,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ beings: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+          { beings: $SelectionSet },
+          $$Schema.Schema<$Context["scalars"]>
+        >,
         "beings"
       >
     >
@@ -64,7 +72,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ pokemonByName: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+          { pokemonByName: $SelectionSet },
+          $$Schema.Schema<$Context["scalars"]>
+        >,
         "pokemonByName"
       >
     >
@@ -78,7 +89,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ pokemons: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+          { pokemons: $SelectionSet },
+          $$Schema.Schema<$Context["scalars"]>
+        >,
         "pokemons"
       >
     >
@@ -92,7 +106,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ trainerByName: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+          { trainerByName: $SelectionSet },
+          $$Schema.Schema<$Context["scalars"]>
+        >,
         "trainerByName"
       >
     >
@@ -106,7 +123,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationQuery<{ trainers: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+          { trainers: $SelectionSet },
+          $$Schema.Schema<$Context["scalars"]>
+        >,
         "trainers"
       >
     >
@@ -122,7 +142,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutput<
         $Context,
-        InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           $$Utilities.AssertExtendsObject<$SelectionSet>,
           $$Schema.Schema<$Context["scalars"]>
         >
@@ -149,7 +169,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputGraffleRootField<
         $Context,
-        InferResult.OperationMutation<{ addPokemon: $SelectionSet }, $$Schema.Schema<$Context["scalars"]>>,
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
+          { addPokemon: $SelectionSet },
+          $$Schema.Schema<$Context["scalars"]>
+        >,
         "addPokemon"
       >
     >

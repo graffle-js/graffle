@@ -20,7 +20,7 @@ export const ModuleGeneratorMethodsDocument = createModuleGenerator(
       parameters: [`$Context extends ${identifiers.$$Utilities}.Context`],
       // dprint-ignore
       block: `
-        <$Document>(document: ${identifiers.$$Utilities}.ExactNonEmpty<$Document, ${identifiers.$$SelectionSets}.$Document<$Context['scalars']>>): ${identifiers.$$Utilities}.DocumentRunner<
+        <$Document>(document: ${identifiers.$$Utilities}.ExactNonEmpty<$Document, ${identifiers.$$SelectionSets}.$Document<$Context['scalars']>>): ${identifiers.$$Utilities}.DocumentBuilder.DocumentRunner<
           $Context,
           ${identifiers.$$Schema}.${identifiers.Schema},
           // @ts-expect-error We use Exact instead of constraint on this function. TypeScript does not see that as
