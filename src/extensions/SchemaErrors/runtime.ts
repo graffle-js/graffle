@@ -23,8 +23,11 @@ export interface SchemaErrors extends Extension {
 
 export const SchemaErrors: () => SchemaErrors = Extension.create({
   name: `SchemaErrors`,
-  create() {
+  create({ typeHooks }) {
     return {
+      typeHooks: typeHooks
+        .onRequestDocumentRootType<OnRequestDocumentRootType_>()
+        .onRequestResult<OnRequestResult_>(),
       async onRequest({ pack }) {
         const state = pack.input.state
         const sddm = state.schemaMap
@@ -82,10 +85,6 @@ export const SchemaErrors: () => SchemaErrors = Extension.create({
 
         return result
       },
-      typeHooks: ($) =>
-        $
-          .onRequestDocumentRootType<OnRequestDocumentRootType_>()
-          .onRequestResult<OnRequestResult_>(),
     }
   },
 })

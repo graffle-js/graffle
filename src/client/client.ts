@@ -1,4 +1,5 @@
 import { requestMethodsProperties } from '../documentBuilder/requestMethods/requestMethods.js'
+import type { Extension } from '../extension/__.js'
 import type { Anyware } from '../lib/anyware/__.js'
 import { proxyGet } from '../lib/prelude.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
@@ -12,22 +13,19 @@ import { type TransportMethod, transportProperties } from './properties/transpor
 import { type UseMethod, useProperties } from './properties/use.js'
 import { withProperties } from './properties/with.js'
 
-export type ClientEmpty = Client<Context.States.Empty, {}, {}>
-export type ClientGeneric = Client<Context, object, ExtensionChainableRegistry>
+export type ClientEmpty = Client<Context.States.Empty, {}>
+
+export type ClientGeneric = Client<Context, {}>
 
 export type Client<
   $Context extends Context, // = Context,
   $Extension extends object, // = object,
-  $ExtensionChainable extends ExtensionChainableRegistry, // = ExtensionChainableRegistry,
 > =
-  & ClientBase<$Context, $Extension, $ExtensionChainable>
+  & ClientBase<$Context, $Extension>
   & $Extension
-  & {
-    [k in keyof $ExtensionChainable]: TypeFunction.Call<
-      $ExtensionChainable[k],
-      [$Context, $Extension, $ExtensionChainable]
-    >
-  }
+  & (
+    Extension.ApplyAndMergeBuilderExtensions<$Context['extensions'], $Context>
+  )
   & (
     // todo
     // GlobalRegistry.Has<$Context['name']> extends false
@@ -58,17 +56,17 @@ export type Client<
 export interface ClientBase<
   $Context extends Context,
   out $Extension extends object,
-  out $ExtensionChainable extends ExtensionChainableRegistry,
-> {
+> // out $ExtensionChainable extends ExtensionChainableRegistry,
+{
   _: $Context
   // _extension: $Extension
   // _extensionChainable: $ExtensionChainable
-  extendWithPropertiesChainable: <
-    extensionChainable extends ExtensionChainable,
-  >() => Client<$Context, $Extension, $ExtensionChainable & { [_ in extensionChainable['name']]: extensionChainable }>
-  extendWithProperties: <
-    extension extends {},
-  >(extension: extension) => Client<$Context, $Extension & extension, $ExtensionChainable>
+  // extendWithPropertiesChainable: <
+  //   extensionChainable extends ExtensionChainable,
+  // >() => Client<$Context, $Extension, $ExtensionChainable & { [_ in extensionChainable['name']]: extensionChainable }>
+  // extendWithProperties: <
+  //   extension extends {},
+  // >(extension: extension) => Client<$Context, $Extension & extension, $ExtensionChainable>
   gql: ClientTransports.PreflightCheck<
     $Context,
     gqlOverload<$Context>
@@ -76,24 +74,21 @@ export interface ClientBase<
   scalar: null extends $Context['schemaMap'] ? TypeErrorMissingSchemaMap
     : ScalarMethod<
       $Context,
-      $Extension,
-      $ExtensionChainable
+      $Extension
     >
   transport: TransportMethod<
     $Context,
-    $Extension,
-    $ExtensionChainable
+    $Extension
   >
   use: UseMethod<
     $Context,
-    $Extension,
-    $ExtensionChainable
-  >
+    $Extension
+  > // $ExtensionChainable
   anyware: (
     interceptor: Anyware.Interceptor.InferFromPipeline<
       Anyware.Pipeline.InferFromDefinition<$Context['requestPipelineDefinition']>
     >,
-  ) => Client<$Context, $Extension, $ExtensionChainable>
+  ) => Client<$Context, $Extension>
   with: <$ConfigInit extends ConfigInit>(
     configInit: $ConfigInit,
   ) => Client<
@@ -103,18 +98,15 @@ export interface ClientBase<
         ? NormalizeConfigInit<$Context['input'] & $ConfigInit>[_]
         : $Context[_]
     },
-    $Extension,
-    $ExtensionChainable
-  >
+    $Extension
+  > // $ExtensionChainable
 }
 
 export type ExtensionChainableRegistry = {
   [name: string]: ExtensionChainable
 }
 
-export interface ExtensionChainable extends TypeFunction {
-  name: string
-}
+export interface ExtensionChainable extends TypeFunction {}
 
 export type ExtensionChainableArguments = [Context, object, ExtensionChainableRegistry]
 
@@ -138,9 +130,8 @@ export type ClientConstructor<$Context extends Context = Context.States.Empty> =
     [k in keyof $Context]: k extends keyof NormalizeConfigInit<$ConfigInit> ? NormalizeConfigInit<$ConfigInit>[k]
       : $Context[k]
   },
-  {},
   {}
->
+> // {}
 
 export const create: ClientConstructor = (configInit) => {
   const initialContext = updateContext(

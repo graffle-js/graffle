@@ -1,15 +1,21 @@
 import type { IsNever } from 'type-fest'
+import type { ExtensionChainable } from '../client/client.js'
+import type { Context } from '../entrypoints/utilities-for-generated.js'
 import { Anyware } from '../lib/anyware/__.js'
-import { _, type AssertExtendsString } from '../lib/prelude.js'
+import { type AssertExtendsString, identity } from '../lib/prelude.js'
+import type { TypeFunction } from '../lib/type-function/__.js'
 import type { RequestPipelineBaseInterceptor } from '../requestPipeline/RequestPipeline.js'
 import type { Transport } from '../types/Transport.js'
 import type { Extension } from './__.js'
 import { BuilderExtension } from './builder.js'
-import type { TypeHooks, TypeHooksEmpty } from './TypeHooks.js'
-import type { TypeHooksBuilderCallback } from './TypeHooks.js'
+import type { TypeHooks, TypeHooksBuilder, TypeHooksEmpty } from './TypeHooks.js'
 
 export * from './context.js'
 export * as TypeHooks from './TypeHooks.js'
+
+export namespace States {
+  export type WithBuilder = Extension<string, object, BuilderExtension, any, any>
+}
 
 export type ExtensionInputParameters =
   | ExtensionInputParametersNone
@@ -43,10 +49,10 @@ export const create = <
     name: $Name
     normalizeConfig?: (...args: $ConfigInputParameters) => $Config
     custom?: $Custom
-    create: (params: { config: $Config }) => {
-      builder?: BuilderExtension.CreatorCallback<$BuilderExtension> // | $BuilderExtension  // todo
+    create: (parameters: { config: $Config; builder: BuilderExtension.Creator; typeHooks: TypeHooksBuilder }) => {
+      builder?: $BuilderExtension
+      typeHooks?: TypeHooksBuilder<$TypeHooks>
       onRequest?: RequestPipelineBaseInterceptor
-      typeHooks?: TypeHooksBuilderCallback<$TypeHooks> | $TypeHooks
       transport?: (
         OverloadBuilder: Transport.Builder.Create,
       ) => $TransportCallbackResult
@@ -74,8 +80,12 @@ export const create = <
 > => {
   const extensionConstructor = (input?: object) => {
     const config: $Config = ((definitionInput.normalizeConfig as any)?.(input) ?? {}) as any // eslint-disable-line
-    const extensionBuilder = definitionInput.create({ config })
-    const builder = extensionBuilder.builder?.(BuilderExtension.create)
+    const extensionBuilder = definitionInput.create({
+      config,
+      builder: BuilderExtension.create,
+      typeHooks: identity as any,
+    })
+    const builder = extensionBuilder.builder
     const overload = extensionBuilder.transport?.((name) =>
       Anyware.Overload.create({ discriminant: [`transportType`, name] })
     )?.type
@@ -146,3 +156,19 @@ export type InferExtensionFromConstructor<$ExtensionConstructor extends Extensio
 
 // When no normalize config input prop provided AT ALL then it falls back to the constraint
 type WasNotDefined<T extends ExtensionInputParameters> = IsNever<keyof Exclude<T[0], undefined>>
+
+// dprint-ignore
+export type ApplyAndMergeBuilderExtensions<$Extensions extends Extension[], $Context extends Context> =
+  $Extensions extends [infer $ExtensionFirst extends Extension, ...infer $ExtensionRest extends Extension[]]
+    ?
+      & (
+          $ExtensionFirst['builder'] extends BuilderExtension<ExtensionChainable>
+            ?
+              TypeFunction.Call<
+                $ExtensionFirst['builder']['type'],
+                [$Context]
+              >
+            : {}
+        )
+      & ApplyAndMergeBuilderExtensions<$ExtensionRest, $Context>
+    : {}

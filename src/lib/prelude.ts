@@ -778,3 +778,7 @@ export type PartialOrUndefined<T> = {
 }
 
 export type UnknownOrAnyToNever<T> = unknown extends T ? never : T
+
+export type MergeAll<$Objects extends object[]> = $Objects extends
+  [infer $First extends object, ...infer $Rest extends object[]] ? $First & MergeAll<$Rest>
+  : {}
