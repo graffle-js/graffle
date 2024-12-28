@@ -47,10 +47,6 @@ export namespace States {
   export type Empty = TypeHooksEmpty
 }
 
-export interface TypeHooksBuilderCallback<$TypeHooks extends TypeHooks> {
-  (builder: TypeHooksBuilder): TypeHooksBuilder<$TypeHooks>
-}
-
 export interface TypeHooksBuilder<$TypeHooks extends TypeHooks = TypeHooksEmpty> {
   type: $TypeHooks
   requestResultDataTypes: <$RequestResultDataTypes>() => TypeHooksBuilder<

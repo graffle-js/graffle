@@ -49,7 +49,7 @@ export const create = <
     name: $Name
     normalizeConfig?: (...args: $ConfigInputParameters) => $Config
     custom?: $Custom
-    create: (parameters: { config: $Config; builder: BuilderExtension.Creator; typeHooks: TypeHooksBuilder }) => {
+    create: (parameters: { config: $Config; builder: BuilderExtension.Create; typeHooks: TypeHooksBuilder }) => {
       builder?: $BuilderExtension
       typeHooks?: TypeHooksBuilder<$TypeHooks>
       onRequest?: RequestPipelineBaseInterceptor

@@ -8,16 +8,12 @@ export type BuilderExtension<
   & { type: $BuilderExtension }
 
 export namespace BuilderExtension {
-  export interface Creator {
+  export interface Create {
     <$BuilderExtension extends ExtensionChainable>(
       interceptor: Interceptor,
     ): BuilderExtension<$BuilderExtension>
   }
-  export const create: Creator = identity as any
-
-  export interface CreatorCallback<$BuilderExtension extends BuilderExtension | undefined> {
-    (creator: Creator): $BuilderExtension
-  }
+  export const create: Create = identity as any
 
   export type Interceptor = (
     input: {
