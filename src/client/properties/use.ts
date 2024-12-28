@@ -12,9 +12,6 @@ export type UseMethod<
   UseReducer<$Context, extension>,
   $Extension_
 >
-//   // @ts-expect-error
-//   ? { [_ in extension['builder']['type']['name']]: extension['builder']['type'] }
-//   : $ExtensionChainable_
 
 // dprint-ignore
 export type UseReducer<

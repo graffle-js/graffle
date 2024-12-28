@@ -11,6 +11,10 @@ import type { TypeHooksBuilderCallback } from './TypeHooks.js'
 export * from './context.js'
 export * as TypeHooks from './TypeHooks.js'
 
+export namespace States {
+  export type WithBuilder = Extension<string, object, BuilderExtension, any, any>
+}
+
 export type ExtensionInputParameters =
   | ExtensionInputParametersNone
   | ExtensionInputParametersOptional
