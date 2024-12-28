@@ -2,13 +2,13 @@ import type { IsNever } from 'type-fest'
 import type { ExtensionChainable } from '../client/client.js'
 import type { Context } from '../entrypoints/utilities-for-generated.js'
 import { Anyware } from '../lib/anyware/__.js'
-import { type AssertExtendsString, identity } from '../lib/prelude.js'
+import { type AssertExtendsString } from '../lib/prelude.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
 import type { RequestPipelineBaseInterceptor } from '../requestPipeline/RequestPipeline.js'
 import type { Transport } from '../types/Transport.js'
 import type { Extension } from './__.js'
 import { BuilderExtension } from './builder.js'
-import type { TypeHooks, TypeHooksBuilder, TypeHooksEmpty } from './TypeHooks.js'
+import { type TypeHooks, type TypeHooksBuilder, typeHooksBuilder, type TypeHooksEmpty } from './TypeHooks.js'
 
 export * from './context.js'
 export * as TypeHooks from './TypeHooks.js'
@@ -83,7 +83,7 @@ export const create = <
     const extensionBuilder = definitionInput.create({
       config,
       builder: BuilderExtension.create,
-      typeHooks: identity as any,
+      typeHooks: typeHooksBuilder,
     })
     const builder = extensionBuilder.builder
     const overload = extensionBuilder.transport?.((name) =>
