@@ -2,7 +2,6 @@ import { type Context } from '../../types/context.js'
 import type { GlobalRegistry } from '../../types/GlobalRegistry/GlobalRegistry.js'
 import { Schema } from '../../types/Schema/__.js'
 import { type Client } from '../client.js'
-import type { ExtensionChainableRegistry } from '../client.js'
 import { createProperties } from '../helpers.js'
 
 export type TypeErrorMissingSchemaMap =
@@ -11,8 +10,8 @@ export type TypeErrorMissingSchemaMap =
 export type ScalarMethod<
   $Context extends Context,
   out $Extension extends object,
-  out $ExtensionChainable extends ExtensionChainableRegistry,
-> = {
+> // out $ExtensionChainable extends ExtensionChainableRegistry,
+ = {
   /**
    * TODO Docs.
    */
@@ -34,9 +33,8 @@ export type ScalarMethod<
         }
         : $Context[_]
     },
-    $Extension,
-    $ExtensionChainable
-  >
+    $Extension
+  > // $ExtensionChainable
 
   <$Scalar extends Schema.Scalar<GlobalRegistry.GetOrGeneric<$Context['name']>['schema']['scalarNamesUnion']>>(
     scalar: $Scalar,
@@ -49,9 +47,8 @@ export type ScalarMethod<
         }
         : $Context[_]
     },
-    $Extension,
-    $ExtensionChainable
-  >
+    $Extension
+  > // $ExtensionChainable
 }
 
 // todo review if really needed for keeping type instance count low v

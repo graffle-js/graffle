@@ -2,7 +2,7 @@ import { getIntrospectionQuery, type IntrospectionQuery } from 'graphql'
 import type { ExtensionChainable } from '../../client/client.js'
 import type { HandleOutput } from '../../client/handleOutput.js'
 import { create } from '../../entrypoints/extensionkit.js'
-import type { ClientTransports } from '../../entrypoints/utilities-for-generated.js'
+import type { ClientTransports, Context } from '../../entrypoints/utilities-for-generated.js'
 import { type ConfigInput, createConfig } from './config.js'
 
 /**
@@ -75,12 +75,14 @@ export const Introspection = create({
 })
 
 interface BuilderExtension extends ExtensionChainable {
-  name: `introspect`
-  return: ClientTransports.PreflightCheck<
-    // @ts-expect-error untyped params
-    this['params'][0],
-    // @ts-expect-error untyped params
-    () => Promise<(null | {}) & HandleOutput<this['params'][0], IntrospectionQuery>>
+  // @ts-expect-error untyped params
+  return: BuilderExtension_<this['params'][0]>
+}
+
+interface BuilderExtension_<$Context extends Context> {
+  introspect: ClientTransports.PreflightCheck<
+    $Context,
+    () => Promise<(null | {}) & HandleOutput<$Context, IntrospectionQuery>>
   >
 }
 

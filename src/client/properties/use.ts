@@ -1,23 +1,20 @@
 import type { Extension } from '../../extension/__.js'
 import type { ConfigManager } from '../../lib/config-manager/__.js'
 import { type Context } from '../../types/context.js'
-import { type Client, type ExtensionChainable, type ExtensionChainableRegistry } from '../client.js'
+import { type Client } from '../client.js'
 import { createProperties } from '../helpers.js'
 
 export type UseMethod<
   $Context extends Context,
   out $Extension_ extends object,
-  out $ExtensionChainable_ extends ExtensionChainableRegistry,
 > = <extension extends Extension>(extension: extension) => Client<
   // @ts-expect-error fixme
   UseReducer<$Context, extension>,
-  $Extension_,
-  // @ts-expect-error
-  extension['builder']['type'] extends ExtensionChainable
-    // @ts-expect-error
-    ? { [_ in extension['builder']['type']['name']]: extension['builder']['type'] }
-    : $ExtensionChainable_
+  $Extension_
 >
+//   // @ts-expect-error
+//   ? { [_ in extension['builder']['type']['name']]: extension['builder']['type'] }
+//   : $ExtensionChainable_
 
 // dprint-ignore
 export type UseReducer<

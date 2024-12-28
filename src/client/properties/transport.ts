@@ -1,14 +1,13 @@
 import type { PartialOrUndefined } from '../../lib/prelude.js'
 import type { ClientTransports, ClientTransportsConfiguration } from '../../types/context.js'
 import { type Context } from '../../types/context.js'
-import { type Client, type ExtensionChainableRegistry } from '../client.js'
+import { type Client } from '../client.js'
 import { createProperties } from '../helpers.js'
 
 // dprint-ignore
 export type TransportMethod<
   $Context extends Context,
-  $Extension extends object,
-  $ExtensionChainable extends ExtensionChainableRegistry
+  $Extension extends object
 > =
   $Context['transports'] extends ClientTransports.States.NonEmpty
     ? {
@@ -44,8 +43,7 @@ export type TransportMethod<
                       }
                     : $Context[_]
               },
-              $Extension,
-              $ExtensionChainable
+              $Extension
             >
         /**
          * Set the current Transport, selected from amongst the registered ones, and optionally change its configuration.
@@ -81,8 +79,7 @@ export type TransportMethod<
                       }
                     : $Context[_]
               },
-              $Extension,
-              $ExtensionChainable
+              $Extension
             >
       }
     : never

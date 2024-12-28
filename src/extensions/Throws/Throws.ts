@@ -1,5 +1,5 @@
 import type { Client, ExtensionChainable } from '../../client/client.js'
-import { create } from '../../entrypoints/extensionkit.js'
+import { type Context, create } from '../../entrypoints/extensionkit.js'
 import { type ConfigInit, type OutputConfig } from '../../entrypoints/main.js'
 import type { ConfigManager } from '../../lib/config-manager/__.js'
 
@@ -31,20 +31,19 @@ export const Throws = create({
 })
 
 interface BuilderExtension extends ExtensionChainable {
-  name: 'throws'
+  // @ts-expect-error
+  return: BuilderExtension_<this['params'][0]>
+}
+
+interface BuilderExtension_<$Context extends Context> {
   // return: BuilderExtension_<AssertExtends<this['params'], Builder.Extension.Parameters<BuilderExtension>>>
-  return: () => Client<
-    // @ts-expect-error
+  throws: () => Client<
     {
-      // @ts-expect-error
-      [_ in keyof this['params'][0]]: _ extends 'output' ? ThrowsifyConfig<this['params'][0]['output']>
-        // @ts-expect-error
-        : this['params'][0][_]
+      [_ in keyof $Context]: _ extends 'output' ? ThrowsifyConfig<$Context['output']>
+        : $Context[_]
     },
-    // @ts-expect-error
-    this['params'][1],
-    // @ts-expect-error
-    this['params'][2]
+    // todo
+    {} // this['params'][1]
   >
 }
 
