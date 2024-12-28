@@ -1,6 +1,5 @@
 import { requestMethodsProperties } from '../documentBuilder/requestMethods/requestMethods.js'
 import type { Extension } from '../extension/__.js'
-import type { BuilderExtension } from '../extension/builder.js'
 import type { Anyware } from '../lib/anyware/__.js'
 import { proxyGet } from '../lib/prelude.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
@@ -18,19 +17,6 @@ export type ClientEmpty = Client<Context.States.Empty, {}>
 
 export type ClientGeneric = Client<Context, {}>
 
-// dprint-ignore
-type ApplyBuilderExtensions<$Extension extends Extension[], $Context extends Context> =
-  $Extension extends [infer $ExtensionFirst extends Extension, ...infer $ExtensionRest extends Extension[]]
-    ? $ExtensionFirst['builder'] extends BuilderExtension<ExtensionChainable>
-      ?
-        & TypeFunction.Call<
-            $ExtensionFirst['builder']['type'],
-            [$Context]
-          >
-        & ApplyBuilderExtensions<$ExtensionRest, $Context>
-      : {}
-    : {}
-
 export type Client<
   $Context extends Context, // = Context,
   $Extension extends object, // = object,
@@ -38,7 +24,7 @@ export type Client<
   & ClientBase<$Context, $Extension>
   & $Extension
   & (
-    ApplyBuilderExtensions<$Context['extensions'], $Context>
+    Extension.ApplyAndMergeBuilderExtensions<$Context['extensions'], $Context>
   )
   & (
     // todo

@@ -1,6 +1,9 @@
 import type { IsNever } from 'type-fest'
+import type { ExtensionChainable } from '../client/client.js'
+import type { Context } from '../entrypoints/utilities-for-generated.js'
 import { Anyware } from '../lib/anyware/__.js'
-import { _, type AssertExtendsString } from '../lib/prelude.js'
+import { type AssertExtendsString } from '../lib/prelude.js'
+import type { TypeFunction } from '../lib/type-function/__.js'
 import type { RequestPipelineBaseInterceptor } from '../requestPipeline/RequestPipeline.js'
 import type { Transport } from '../types/Transport.js'
 import type { Extension } from './__.js'
@@ -150,3 +153,19 @@ export type InferExtensionFromConstructor<$ExtensionConstructor extends Extensio
 
 // When no normalize config input prop provided AT ALL then it falls back to the constraint
 type WasNotDefined<T extends ExtensionInputParameters> = IsNever<keyof Exclude<T[0], undefined>>
+
+// dprint-ignore
+export type ApplyAndMergeBuilderExtensions<$Extensions extends Extension[], $Context extends Context> =
+  $Extensions extends [infer $ExtensionFirst extends Extension, ...infer $ExtensionRest extends Extension[]]
+    ?
+      & (
+          $ExtensionFirst['builder'] extends BuilderExtension<ExtensionChainable>
+            ?
+              TypeFunction.Call<
+                $ExtensionFirst['builder']['type'],
+                [$Context]
+              >
+            : {}
+        )
+      & ApplyAndMergeBuilderExtensions<$ExtensionRest, $Context>
+    : {}
