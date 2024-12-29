@@ -3,7 +3,7 @@ import { DateScalar } from '../../../tests/_/fixtures/scalars.js'
 import { createResponse, test } from '../../../tests/_/helpers.js'
 import { db } from '../../../tests/_/schemas/db.js'
 import type { Graffle } from '../../../tests/_/schemas/kitchen-sink/graffle/__.js'
-import { DocumentBuilder } from '../../documentBuilder/__.js'
+import { DocumentBuilder } from '../../extensions/DocumentBuilder/__.js'
 import { Grafaid } from '../../lib/grafaid/__.js'
 import type { Schema } from '../../types/Schema/__.js'
 

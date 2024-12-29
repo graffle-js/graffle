@@ -1,9 +1,7 @@
-import { requestMethodsProperties } from '../documentBuilder/requestMethods/requestMethods.js'
 import type { Extension } from '../extension/__.js'
 import type { Anyware } from '../lib/anyware/__.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
 import { type ClientTransports, Context } from '../types/context.js'
-import type { GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
 import { type ConfigInit, type NormalizeConfigInit, updateContext } from './Configuration/ConfigInit.js'
 import { anywareProperties } from './properties/anyware.js'
 import { type gqlOverload, gqlProperties } from './properties/gql/gql.js'
@@ -24,32 +22,6 @@ export type Client<
   & $Extension
   & (
     Extension.ApplyAndMergeBuilderExtensions<$Context['extensions'], $Context>
-  )
-  & (
-    // todo
-    // GlobalRegistry.Has<$Context['name']> extends false
-    // eslint-disable-next-line
-    // @ts-ignore passes after generation
-    GlobalRegistry.Has<$Context['name']> extends false ? {}
-      : (
-        // eslint-disable-next-line
-        // @ts-ignore Passes after generation
-        & TypeFunction.Call<GlobalRegistry.GetOrDefault<$Context['name']>['interfaces']['Root'], $Context>
-        & {
-          // eslint-disable-next-line
-          // @ts-ignore Passes after generation
-          document: ClientTransports.PreflightCheck<
-            $Context,
-            TypeFunction.Call<
-              GlobalRegistry.GetOrDefault<
-                // @ts-expect-error
-                $Context['name']
-              >['interfaces']['Document'],
-              $Context
-            >
-          >
-        }
-      )
   )
 
 export interface ClientBase<
@@ -152,8 +124,6 @@ export const createWithContext = (
     ...useProperties(createWithContext, context),
     ...anywareProperties(createWithContext, context),
     ...scalarProperties(createWithContext, context),
-    // todo test that access to this works without generation in a unit like test. We discovered bug and covered this in an e2e test.
-    ...requestMethodsProperties(createWithContext, context),
   }
 
   context.extensions.forEach(_ => {

@@ -251,6 +251,7 @@ export interface ConfigInitLibraryPaths {
   scalars?: string
   utilitiesForGenerated: string
   extensionTransportHttp: string
+  extensionDocumentBuilder: string
 }
 
 export type LibraryPathsKeys = keyof ConfigInitLibraryPaths
@@ -261,4 +262,5 @@ export const libraryPathKeys = {
   schema: `schema`,
   utilitiesForGenerated: `utilitiesForGenerated`,
   extensionTransportHttp: `extensionTransportHttp`,
+  extensionDocumentBuilder: `extensionDocumentBuilder`,
 } satisfies Record<LibraryPathsKeys, LibraryPathsKeys>

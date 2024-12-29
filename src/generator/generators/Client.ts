@@ -13,10 +13,11 @@ export const ModuleGeneratorClient = createModuleGenerator(
     code(
       `import * as ${identifiers.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'`,
       `import { TransportHttp } from '${config.paths.imports.grafflePackage.extensionTransportHttp}'`,
+      `import { DocumentBuilder } from '${config.paths.imports.grafflePackage.extensionDocumentBuilder}'`,
     )
     code()
     code(`
-      const context = ${identifiers.$$Utilities}.useReducer(
+      const context = ${identifiers.$$Utilities}.useReducer(${identifiers.$$Utilities}.useReducer(
         {
           ...${identifiers.$$Utilities}.Context.States.empty,
           name: $$Data.Name,
@@ -26,7 +27,9 @@ export const ModuleGeneratorClient = createModuleGenerator(
         TransportHttp({
           url: $$Data.defaultSchemaUrl,
         }),
-      )
+      ),
+      DocumentBuilder(),
+    )
 
       export const create = ${identifiers.$$Utilities}.createConstructorWithContext(
         context

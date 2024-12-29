@@ -19,6 +19,7 @@ export default Generator
       scalars: `../../../../types/Schema/StandardTypes/scalar.ts`,
       utilitiesForGenerated: `../../../../entrypoints/utilities-for-generated.ts`,
       extensionTransportHttp: `../../../../entrypoints/extensions/transport-http/runtime.ts`,
+      extensionDocumentBuilder: `../../../../entrypoints/extensions/document-builder/runtime.ts`,
     },
   })
   .use(SchemaErrors())

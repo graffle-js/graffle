@@ -1,7 +1,8 @@
 // todo: generate in JSDoc how the feature maps to GQL syntax.
 // todo: on union fields, JSDoc that mentions the syntax `on*`
 
-import { DocumentBuilder } from '../../documentBuilder/__.js'
+// todo import from '../../extensions/DocumentBuilder/kit/__.js'
+import { DocumentBuilder } from '../../extensions/DocumentBuilder/__.js'
 import { Code } from '../../lib/Code.js'
 import { Grafaid } from '../../lib/grafaid/__.js'
 import { analyzeArgsNullability } from '../../lib/grafaid/schema/args.js'
@@ -37,7 +38,6 @@ export const ModuleGeneratorSelectionSets = createModuleGenerator(
     const kinds = kindEntries.map(_ => _[1])
 
     code(
-      `import type { Select as $Select } from '${config.paths.imports.grafflePackage.schema}'`,
       `import type * as ${identifiers.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'`,
     )
     code()
@@ -159,7 +159,7 @@ const Interface = createCodeGenerator<{ type: Grafaid.Schema.InterfaceType }>(
       tsDoc: getTsDocContents(config, type),
       name: type.name,
       parameters: $ScalarsTypeParameter,
-      extends: [`$Select.Bases.ObjectLike`],
+      extends: [`${identifiers.$$Utilities}.DocumentBuilder.Select.Bases.ObjectLike`],
       block: `
         ${fieldsRendered}
         ${onTypesRendered}
@@ -205,7 +205,7 @@ const OutputObject = createCodeGenerator<{ type: Grafaid.Schema.ObjectType }>(
     }).join(`\n`)
 
     const isRootType = config.schema.kindMap.list.Root.some(_ => _.name === type.name)
-    const extendsClause = isRootType ? null : `$Select.Bases.ObjectLike`
+    const extendsClause = isRootType ? null : `${identifiers.$$Utilities}.DocumentBuilder.Select.Bases.ObjectLike`
 
     code(Code.tsInterface({
       tsDoc: getTsDocContents(config, type),
@@ -255,7 +255,9 @@ const renderOutputField = createCodeGenerator<{ field: Grafaid.Schema.Field<any,
     const selectionSetRef = H.reference(selectionSetName)
     const isCanBeIndicator = (Grafaid.Schema.isScalarType(fieldNamedType) || Grafaid.Schema.isEnumType(fieldNamedType))
       && argsAnalysis.isAllNullable
-    const indicator = isCanBeIndicator ? `$Select.Indicator.NoArgsIndicator` : ``
+    const indicator = isCanBeIndicator
+      ? `${identifiers.$$Utilities}.DocumentBuilder.Select.Indicator.NoArgsIndicator`
+      : ``
 
     code(Code.tsAlias$({
       name: field.name,
@@ -280,7 +282,7 @@ const renderOutputField = createCodeGenerator<{ field: Grafaid.Schema.Field<any,
     code(Code.tsInterface({
       name: selectionSetName,
       parameters: $ScalarsTypeParameter,
-      extends: [`$Select.Bases.Base`, objectLikeTypeReference],
+      extends: [`${identifiers.$$Utilities}.DocumentBuilder.Select.Bases.Base`, objectLikeTypeReference],
       block: propertyArguments,
     }))
     code()
@@ -416,10 +418,14 @@ namespace H {
     aliasable: boolean = true,
     isHasExpanded: boolean = true,
   ) => {
-    const isReference = type !== `$Select.Indicator.NoArgsIndicator`
+    const isReference = type !== `${identifiers.$$Utilities}.DocumentBuilder.Select.Indicator.NoArgsIndicator`
     const typeBareExpanded = `${type}${isHasExpanded ? `$Expanded` : ``}`
     const typeReferenced = isReference ? reference(typeBareExpanded) : typeBareExpanded
-    const aliasType = aliasable ? `| $Select.SelectAlias.SelectAlias<${isReference ? reference(type) : type}>` : ``
+    const aliasType = aliasable
+      ? `| ${identifiers.$$Utilities}.DocumentBuilder.Select.SelectAlias.SelectAlias<${
+        isReference ? reference(type) : type
+      }>`
+      : ``
     return `${name}?: ${typeReferenced}${aliasType}`
   }
 
@@ -429,7 +435,7 @@ namespace H {
   export const __typenameField = (kind: 'union' | 'interface' | 'object') => {
     return `
       ${__typenameDoc(kind)}
-      ${outputFieldKey(`__typename`, `$Select.Indicator.NoArgsIndicator`)}
+      ${outputFieldKey(`__typename`, `${identifiers.$$Utilities}.DocumentBuilder.Select.Indicator.NoArgsIndicator`)}
     `
   }
 
@@ -460,7 +466,10 @@ namespace H {
     return Code.tsInterface({
       name: `${renderName(node)}${fragmentInlineNameSuffix}`,
       parameters: $ScalarsTypeParameter,
-      extends: [forwardTypeParameter$Scalars(node), `$Select.Directive.$Groups.InlineFragment.Fields`],
+      extends: [
+        forwardTypeParameter$Scalars(node),
+        `${identifiers.$$Utilities}.DocumentBuilder.Select.Directive.$Groups.InlineFragment.Fields`,
+      ],
       block: {},
     })
   }

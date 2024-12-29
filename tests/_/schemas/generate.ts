@@ -34,6 +34,7 @@ const generate = async (
       scalars: `../../../src/types/Schema/StandardTypes/scalar.ts`,
       utilitiesForGenerated: `../../../src/entrypoints/utilities-for-generated.ts`,
       extensionTransportHttp: `../../../src/entrypoints/extensions/transport-http/runtime.ts`,
+      extensionDocumentBuilder: `../../../src/entrypoints/extensions/document-builder/runtime.ts`,
     },
     ...input.input,
   })

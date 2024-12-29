@@ -1,4 +1,3 @@
-import type { Select as $Select } from '../../../../../../src/entrypoints/schema.js'
 import type * as $$Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
 
 //
@@ -51,11 +50,15 @@ export interface Mutation<
   /**
    * Select the `id` field on the `Mutation` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
-  id?: Mutation.id$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Mutation.id<_$Scalars>>
+  id?:
+    | Mutation.id$Expanded<_$Scalars>
+    | $$Utilities.DocumentBuilder.Select.SelectAlias.SelectAlias<Mutation.id<_$Scalars>>
   /**
    * Select the `idNonNull` field on the `Mutation` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
-  idNonNull?: Mutation.idNonNull$Expanded<_$Scalars> | $Select.SelectAlias.SelectAlias<Mutation.idNonNull<_$Scalars>>
+  idNonNull?:
+    | Mutation.idNonNull$Expanded<_$Scalars>
+    | $$Utilities.DocumentBuilder.Select.SelectAlias.SelectAlias<Mutation.idNonNull<_$Scalars>>
 
   /**
    * Inline fragments for field groups.
@@ -75,25 +78,27 @@ export interface Mutation<
    * @see https://graphql.org/learn/queries/#meta-fields
    */
   __typename?:
-    | $Select.Indicator.NoArgsIndicator$Expanded
-    | $Select.SelectAlias.SelectAlias<$Select.Indicator.NoArgsIndicator>
+    | $$Utilities.DocumentBuilder.Select.Indicator.NoArgsIndicator$Expanded
+    | $$Utilities.DocumentBuilder.Select.SelectAlias.SelectAlias<
+      $$Utilities.DocumentBuilder.Select.Indicator.NoArgsIndicator
+    >
 }
 
 export interface Mutation$FragmentInline<
   _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends Mutation<_$Scalars>, $Select.Directive.$Groups.InlineFragment.Fields {
+> extends Mutation<_$Scalars>, $$Utilities.DocumentBuilder.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace Mutation {
   export type id<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    | $Select.Indicator.NoArgsIndicator
+    | $$Utilities.DocumentBuilder.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Scalars>
 
   export interface id$SelectionSet<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base {}
+  > extends $$Utilities.DocumentBuilder.Select.Bases.Base {}
 
   // --- expanded ---
 
@@ -105,7 +110,7 @@ export namespace Mutation {
   export type id$Expanded<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
-    | $Select.Indicator.NoArgsIndicator
+    | $$Utilities.DocumentBuilder.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Scalars>
   >
 
@@ -114,12 +119,12 @@ export namespace Mutation {
   export type idNonNull<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > =
-    | $Select.Indicator.NoArgsIndicator
+    | $$Utilities.DocumentBuilder.Select.Indicator.NoArgsIndicator
     | idNonNull$SelectionSet<_$Scalars>
 
   export interface idNonNull$SelectionSet<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $Select.Bases.Base {}
+  > extends $$Utilities.DocumentBuilder.Select.Bases.Base {}
 
   // --- expanded ---
 
@@ -131,7 +136,7 @@ export namespace Mutation {
   export type idNonNull$Expanded<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
-    | $Select.Indicator.NoArgsIndicator
+    | $$Utilities.DocumentBuilder.Select.Indicator.NoArgsIndicator
     | idNonNull$SelectionSet<_$Scalars>
   >
 }

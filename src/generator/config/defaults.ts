@@ -10,6 +10,7 @@ export const defaultLibraryPaths = {
   schema: `graffle/schema`,
   utilitiesForGenerated: `graffle/utilities-for-generated`,
   extensionTransportHttp: `graffle/extensions/transport-http`,
+  extensionDocumentBuilder: `graffle/extensions/document-builder`,
 } satisfies ConfigInitLibraryPaths
 
 export const defaultOutputCase: InputOutputCase = `kebab`

@@ -1,5 +1,5 @@
 import type { GraffleExecutionResultEnvelope } from '../client/handleOutput.js'
-import type { DocumentBuilder } from '../documentBuilder/__.js'
+import type { DocumentBuilder } from '../extensions/DocumentBuilder/__.js'
 import type { AssertExtends } from '../lib/prelude.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
 import type { Context } from '../types/context.js'
