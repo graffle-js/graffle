@@ -7,15 +7,13 @@ export const Throws = create({
   name: `Throws`,
   create: ({ builder }) => {
     return {
-      builder: builder<BuilderExtension>(({ client, property, path }) => {
-        if (property !== `throws` || path.length !== 0) return undefined
-
+      builder: builder<BuilderExtension>(({ client, context }) => {
         // todo redesign input to allow to force throw always
         // todo pull pre-configured config from core
         const throwsifiedInput: ConfigInit = {
           output: {
             envelope: {
-              enabled: client._.output.envelope.enabled,
+              enabled: context.output.envelope.enabled,
               // @ts-expect-error
               errors: { execution: false, other: false, schema: false },
             },
@@ -23,7 +21,9 @@ export const Throws = create({
             errors: { execution: `throw`, other: `throw`, schema: `throw` },
           },
         }
-        return () => client.with(throwsifiedInput)
+        return {
+          throws: () => client.with(throwsifiedInput),
+        }
       }),
     }
   },

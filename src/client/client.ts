@@ -1,7 +1,6 @@
 import { requestMethodsProperties } from '../documentBuilder/requestMethods/requestMethods.js'
 import type { Extension } from '../extension/__.js'
 import type { Anyware } from '../lib/anyware/__.js'
-import { proxyGet } from '../lib/prelude.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
 import { type ClientTransports, Context } from '../types/context.js'
 import type { GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
@@ -153,29 +152,19 @@ export const createWithContext = (
     ...useProperties(createWithContext, context),
     ...anywareProperties(createWithContext, context),
     ...scalarProperties(createWithContext, context),
+    // todo test that access to this works without generation in a unit like test. We discovered bug and covered this in an e2e test.
+    ...requestMethodsProperties(createWithContext, context),
   }
 
-  // todo test that access to this works without generation in a unit like test. We discovered bug and covered this in an e2e test.
-  Object.assign(clientDirect, {
-    ...requestMethodsProperties(createWithContext, context),
+  context.extensions.forEach(_ => {
+    Object.assign(
+      clientDirect,
+      _.builder?.({
+        client: clientDirect,
+        context,
+      }) ?? {},
+    )
   })
 
-  const clientProxy = proxyGet(clientDirect, ({ path, property }) => {
-    // eslint-disable-next-line
-    // @ts-ignore fixme "Type instantiation is excessively deep and possibly infinite"
-    const onGetHandlers = context.extensions.map(_ => _.builder).filter(_ => _ !== undefined)
-
-    for (const onGetHandler of onGetHandlers) {
-      const result = onGetHandler({
-        client: clientDirect,
-        path,
-        property,
-      })
-      if (result !== undefined) return result
-    }
-
-    return undefined
-  }) as any
-
-  return clientProxy
+  return clientDirect
 }

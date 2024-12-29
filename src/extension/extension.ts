@@ -49,7 +49,9 @@ export const create = <
     name: $Name
     normalizeConfig?: (...args: $ConfigInputParameters) => $Config
     custom?: $Custom
-    create: (parameters: { config: $Config; builder: BuilderExtension.Create; typeHooks: TypeHooksBuilder }) => {
+    create: (
+      parameters: { config: $Config; builder: BuilderExtension.CreateCallback; typeHooks: TypeHooksBuilder },
+    ) => {
       builder?: $BuilderExtension
       typeHooks?: TypeHooksBuilder<$TypeHooks>
       onRequest?: RequestPipelineBaseInterceptor
@@ -82,7 +84,7 @@ export const create = <
     const config: $Config = ((definitionInput.normalizeConfig as any)?.(input) ?? {}) as any // eslint-disable-line
     const extensionBuilder = definitionInput.create({
       config,
-      builder: BuilderExtension.create,
+      builder: BuilderExtension.createCallback,
       typeHooks: typeHooksBuilder,
     })
     const builder = extensionBuilder.builder

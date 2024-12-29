@@ -1,25 +1,25 @@
 import type { ClientEmpty, ExtensionChainable } from '../client/client.js'
 import { identity } from '../lib/prelude.js'
+import type { Context } from '../types/context.js'
 
 export type BuilderExtension<
   $BuilderExtension extends ExtensionChainable | undefined = ExtensionChainable | undefined,
 > =
-  & BuilderExtension.Interceptor
+  & BuilderExtension.Create
   & { type: $BuilderExtension }
 
 export namespace BuilderExtension {
-  export interface Create {
+  export interface CreateCallback {
     <$BuilderExtension extends ExtensionChainable>(
-      interceptor: Interceptor,
+      propertiesConstructor: Create,
     ): BuilderExtension<$BuilderExtension>
   }
-  export const create: Create = identity as any
+  export const createCallback: CreateCallback = identity as any
 
-  export type Interceptor = (
-    input: {
-      path: string[]
-      property: string
+  export type Create = (
+    parameters: {
       client: ClientEmpty
+      context: Context
     },
-  ) => unknown
+  ) => object
 }
