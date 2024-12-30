@@ -22,7 +22,6 @@ export namespace Client {
   export type Context = BasicClientContext
 
   export type With<$ContextNewPartial extends PartialOrUndefined<BaseContext>> = BaseClient<
-    // @ts-expect-error fixme
     ConfigManager.SetKeysOptional<
       BasicClientContext,
       $ContextNewPartial

@@ -1,7 +1,7 @@
 import { OperationTypeNode } from 'graphql'
 import type { ExtensionChainable } from '../../client/client.js'
 import { type Context, create } from '../../entrypoints/extensionkit.js'
-import type { GlobalRegistry } from '../../entrypoints/utilities-for-generated.js'
+import type { ClientTransports, GlobalRegistry } from '../../entrypoints/utilities-for-generated.js'
 import type { TypeFunction } from '../../lib/type-function/__.js'
 import { createMethodDocument, createMethodOperationType } from './_.js'
 

@@ -1,6 +1,8 @@
 import type { Extension } from '../../extension/__.js'
-import type { ConfigManager } from '../../lib/config-manager/__.js'
+import type { Anyware } from '../../lib/anyware/__.js'
+import type { UnknownOrAnyToNever } from '../../lib/prelude.js'
 import { type Context } from '../../types/context.js'
+import type { Transport } from '../../types/Transport.js'
 import { type Client } from '../client.js'
 import { createProperties } from '../helpers.js'
 
@@ -8,31 +10,44 @@ export type UseMethod<
   $Context extends Context,
   out $Extension_ extends object,
 > = <extension extends Extension>(extension: extension) => Client<
-  // @ts-expect-error fixme
-  UseReducer<$Context, extension>,
+  UseOneReducer<$Context, extension>,
   $Extension_
 >
 
 // dprint-ignore
-export type UseReducer<
+export type UseOneReducer<
   $Context extends Context,
   $Extension extends Extension,
-> =
-  Extension.AddTypeHooksFromExtension<
-    AddTransport<
-      AddExtension<
-        $Context,
-        $Extension
-      >,
-      $Extension
-    >,
-    $Extension
-  >
+> = {
+      [_ in keyof $Context]:
+        _ extends 'requestPipelineDefinition'
+        ?  $Extension['transport'] extends Transport
+          ? Anyware.PipelineDefinition.Updaters.AddOverload<
+              $Context['requestPipelineDefinition'],
+              $Extension['transport']['requestPipelineOverload']
+            >
+          : $Context['requestPipelineDefinition']
+        : _ extends 'extensions'
+        ? [...$Context['extensions'], $Extension]
+        : _ extends 'transports'
+        ? Context.Updaters.AddTransportOptional<
+            $Context['transports'],
+            $Extension['transport']
+          >
+        : _ extends 'typeHookOnRequestResult'
+        ? [...$Context['typeHookOnRequestResult'], ...$Extension['typeHooks']['onRequestResult']]
+        : _ extends 'typeHookOnRequestDocumentRootType'
+        ? [...$Context['typeHookOnRequestDocumentRootType'], ...$Extension['typeHooks']['onRequestDocumentRootType']]
+        : _ extends 'typeHookRequestResultDataTypes'
+        ? $Context['typeHookRequestResultDataTypes'] | UnknownOrAnyToNever<$Extension['typeHooks']['requestResultDataTypes']>
+        : $Context[_]
+    }
 
+// todo rename to useOneReducer
 export const useReducer = <
   const $Context extends Context,
   $Extension extends Extension,
->(context: $Context, extension: $Extension): UseReducer<$Context, $Extension> => {
+>(context: $Context, extension: $Extension): UseOneReducer<$Context, $Extension> => {
   const newContext: Context = {
     ...context,
     extensions: [...context.extensions, extension],
@@ -81,20 +96,3 @@ export const useProperties = createProperties((builder, context) => {
     },
   }
 })
-
-type AddTransport<
-  $Context extends Context,
-  $Extension extends Extension,
-> = Context.Updaters.AddTransportOptional<
-  $Context,
-  $Extension['transport']
->
-
-type AddExtension<
-  $Context extends Context,
-  $Extension extends Extension,
-> = ConfigManager.UpdateKeyWithAppendOne<
-  $Context,
-  'extensions',
-  $Extension
->

@@ -2,7 +2,6 @@ import { type ConfigInit } from '../client/Configuration/ConfigInit.js'
 import { type OutputConfig, type OutputConfigDefault, outputConfigDefault } from '../client/Configuration/Output.js'
 import type { Extension } from '../extension/__.js'
 import type { Anyware } from '../lib/anyware/__.js'
-import type { ConfigManager } from '../lib/config-manager/__.js'
 import type { Objekt, StringKeyof } from '../lib/prelude.js'
 import {
   type RequestPipelineBaseDefinition,
@@ -176,48 +175,23 @@ export namespace Context {
   export namespace Updaters {
     // dprint-ignore
     export type AddTransportOptional<
-      $Context extends Context,
+      $ClientTransports extends ClientTransports,
       $Transport extends Transport | undefined,
     > =
       $Transport extends Transport
-        ? AddTransport<$Context, $Transport>
-        : $Context
-
-    // dprint-ignore
-    export type AddTransport<
-      $Context extends Context,
-      $Transport extends Transport,
-    > =
-      AddTransportToRegistry<
-        ConfigManager.SetKey<
-          $Context,
-          'requestPipelineDefinition',
-          Anyware.PipelineDefinition.Updaters.AddOverload<
-            $Context['requestPipelineDefinition'],
-            $Transport['requestPipelineOverload']
-          >
-        >,
-        $Transport
-      >
-
-    // dprint-ignore
-    type AddTransportToRegistry<$Context extends Context, $Transport extends Transport> =
-      ConfigManager.SetKey<
-        $Context,
-        'transports',
-        {
-          configurations:
-            & Omit<$Context['transports']['configurations'], $Transport['name']>
-            & {
-                [_ in $Transport['name']]: $Transport['configInit']
-              }
-          current: $Context['transports'] extends ClientTransports.States.Empty
-            ? $Transport['name']
-            : $Context['transports']['current']
-          registry: $Context['transports']['registry'] & {
-            [_ in $Transport['name']]: $Transport
+        ? {
+            configurations:
+              & Omit<$ClientTransports['configurations'], $Transport['name']>
+              & {
+                  [_ in $Transport['name']]: $Transport['configInit']
+                }
+            current: $ClientTransports extends ClientTransports.States.Empty
+              ? $Transport['name']
+              : $ClientTransports['current']
+            registry: $ClientTransports['registry'] & {
+              [_ in $Transport['name']]: $Transport
+            }
           }
-        }
-      >
+        : $ClientTransports
   }
 }
