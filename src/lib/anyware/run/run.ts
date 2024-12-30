@@ -1,7 +1,6 @@
-import { createRunner } from '../_.js'
 import type { Pipeline } from '../Pipeline/Pipeline.js'
 import type { Result } from '../Result.js'
-import type { Params } from './runner.js'
+import { createRunner, type Params } from './runner.js'
 
 type Run = <
   $Pipeline extends Pipeline,

@@ -2,7 +2,7 @@ import type { Extension } from '../extension/__.js'
 import type { Anyware } from '../lib/anyware/__.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
 import { type ClientTransports, Context } from '../types/context.js'
-import { type ConfigInit, type NormalizeConfigInit, updateContext } from './Configuration/ConfigInit.js'
+import { type ConfigInit, type NormalizeConfigInit } from './Configuration/ConfigInit.js'
 import { anywareProperties } from './properties/anyware.js'
 import { type gqlOverload, gqlProperties } from './properties/gql/gql.js'
 import { type ScalarMethod, scalarProperties, type TypeErrorMissingSchemaMap } from './properties/scalar.js'
@@ -83,7 +83,7 @@ export const createConstructorWithContext = <$Context extends Context>(
   context: $Context,
 ): ClientConstructor<$Context> => {
   return (configInit) => {
-    const newContext = updateContext(context, configInit ?? {})
+    const newContext = Context.updateContextConfigInit(context, configInit ?? {})
     const client = createWithContext(newContext)
     return client
   }
@@ -103,7 +103,7 @@ export type ClientConstructor<$Context extends Context = Context.States.Empty> =
 > // {}
 
 export const create: ClientConstructor = (configInit) => {
-  const initialContext = updateContext(
+  const initialContext = Context.updateContextConfigInit(
     Context.States.empty,
     configInit ?? {},
   )

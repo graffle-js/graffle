@@ -3,7 +3,7 @@ import type { Anyware } from '../../lib/anyware/__.js'
 import type { UnknownOrAnyToNever } from '../../lib/prelude.js'
 import { type Context } from '../../types/context.js'
 import type { Transport } from '../../types/Transport.js'
-import { type Client } from '../client.js'
+import type { Client } from '../client.js'
 import { createProperties } from '../helpers.js'
 
 export type UseMethod<

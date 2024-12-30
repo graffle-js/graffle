@@ -12,7 +12,7 @@ import {
 } from 'graphql'
 import type { GraphQLInputObjectType, GraphQLNamedOutputType } from 'graphql'
 import { casesExhausted } from '../../prelude.js'
-import { isInputFieldLike, isOutputField, isScalarTypeAndCustom } from './schema.js'
+import { isInputFieldLike, isOutputField, isScalarTypeAndCustom } from './typeGuards.js'
 
 export const isHasCustomScalars = (
   node: GraphQLNamedOutputType | GraphQLField<any, any> | GraphQLInputObjectType | GraphQLInputField | GraphQLArgument,

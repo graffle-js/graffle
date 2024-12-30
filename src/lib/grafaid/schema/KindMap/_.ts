@@ -8,10 +8,10 @@ import {
   isScalarType,
   isUnionType,
 } from 'graphql'
-import { isScalarTypeCustom } from '../schema.js'
 
 import { includesUnknown } from '../../../prelude.js'
 import type { Grafaid } from '../../__.js'
+import { isScalarTypeCustom } from '../typeGuards.js'
 import type { KindMap } from './__.js'
 
 export const Name = {

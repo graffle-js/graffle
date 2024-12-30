@@ -1,7 +1,7 @@
 import type { PartialOrUndefined } from '../../lib/prelude.js'
 import type { ClientTransports, ClientTransportsConfiguration } from '../../types/context.js'
 import { type Context } from '../../types/context.js'
-import { type Client } from '../client.js'
+import type { Client } from '../client.js'
 import { createProperties } from '../helpers.js'
 
 // dprint-ignore

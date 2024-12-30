@@ -4,21 +4,20 @@
       "key": "webpack.totalSizeByTypeALL",
       "label": "Bundle Size",
       "biggerIsBetter": false,
-      "changed": true,
+      "changed": false,
       "runs": [
         {
-          "value": 27442,
-          "displayValue": "26.8KiB",
-          "delta": -16071,
-          "deltaPercentage": -36.9337899,
-          "displayDelta": "-15.69KiB",
-          "displayDeltaPercentage": "-36.93%",
-          "deltaType": "POSITIVE",
-          "regression": false
+          "value": 27512,
+          "displayValue": "26.87KiB",
+          "delta": 0,
+          "deltaPercentage": 0,
+          "displayDelta": "0B",
+          "displayDeltaPercentage": "0%",
+          "deltaType": "NO_CHANGE"
         },
         {
-          "value": 43513,
-          "displayValue": "42.49KiB"
+          "value": 27512,
+          "displayValue": "26.87KiB"
         }
       ]
     },
@@ -26,21 +25,20 @@
       "key": "webpack.totalInitialSizeJS",
       "label": "Initial JS",
       "biggerIsBetter": false,
-      "changed": true,
+      "changed": false,
       "runs": [
         {
-          "value": 27442,
-          "displayValue": "26.8KiB",
-          "delta": -16071,
-          "deltaPercentage": -36.9337899,
-          "displayDelta": "-15.69KiB",
-          "displayDeltaPercentage": "-36.93%",
-          "deltaType": "POSITIVE",
-          "regression": false
+          "value": 27512,
+          "displayValue": "26.87KiB",
+          "delta": 0,
+          "deltaPercentage": 0,
+          "displayDelta": "0B",
+          "displayDeltaPercentage": "0%",
+          "deltaType": "NO_CHANGE"
         },
         {
-          "value": 43513,
-          "displayValue": "42.49KiB"
+          "value": 27512,
+          "displayValue": "26.87KiB"
         }
       ]
     },
@@ -69,16 +67,16 @@
       "key": "webpack.cacheInvalidation",
       "label": "Cache Invalidation",
       "biggerIsBetter": null,
-      "changed": true,
+      "changed": false,
       "runs": [
         {
-          "value": 100,
-          "displayValue": "100%",
-          "delta": 100,
-          "deltaPercentage": 100,
-          "displayDelta": "+100%",
-          "displayDeltaPercentage": "+100%",
-          "deltaType": "CHANGE",
+          "value": 0,
+          "displayValue": "0%",
+          "delta": 0,
+          "deltaPercentage": 0,
+          "displayDelta": "0%",
+          "displayDeltaPercentage": "0%",
+          "deltaType": "NO_CHANGE",
           "regression": null
         },
         {
@@ -91,21 +89,21 @@
       "key": "webpack.moduleCount",
       "label": "Modules",
       "biggerIsBetter": null,
-      "changed": true,
+      "changed": false,
       "runs": [
         {
-          "value": 51,
-          "displayValue": "51",
-          "delta": -33,
-          "deltaPercentage": -39.28571429,
-          "displayDelta": "-33",
-          "displayDeltaPercentage": "-39.29%",
-          "deltaType": "CHANGE",
+          "value": 50,
+          "displayValue": "50",
+          "delta": 0,
+          "deltaPercentage": 0,
+          "displayDelta": "0",
+          "displayDeltaPercentage": "0%",
+          "deltaType": "NO_CHANGE",
           "regression": null
         },
         {
-          "value": 84,
-          "displayValue": "84"
+          "value": 50,
+          "displayValue": "50"
         }
       ]
     },
@@ -200,21 +198,20 @@
       "key": "webpack.packageCount",
       "label": "Packages",
       "biggerIsBetter": false,
-      "changed": true,
+      "changed": false,
       "runs": [
         {
           "value": 3,
           "displayValue": "3",
-          "delta": -1,
-          "deltaPercentage": -25,
-          "displayDelta": "-1",
-          "displayDeltaPercentage": "-25%",
-          "deltaType": "POSITIVE",
-          "regression": false
+          "delta": 0,
+          "deltaPercentage": 0,
+          "displayDelta": "0",
+          "displayDeltaPercentage": "0%",
+          "deltaType": "NO_CHANGE"
         },
         {
-          "value": 4,
-          "displayValue": "4"
+          "value": 3,
+          "displayValue": "3"
         }
       ]
     },
@@ -245,21 +242,20 @@
       "key": "webpack.sizes.totalSizeByTypeJS",
       "label": "JS",
       "biggerIsBetter": false,
-      "changed": true,
+      "changed": false,
       "runs": [
         {
-          "value": 27442,
-          "displayValue": "26.8KiB",
-          "delta": -16071,
-          "deltaPercentage": -36.9337899,
-          "displayDelta": "-15.69KiB",
-          "displayDeltaPercentage": "-36.93%",
-          "deltaType": "POSITIVE",
-          "regression": false
+          "value": 27512,
+          "displayValue": "26.87KiB",
+          "delta": 0,
+          "deltaPercentage": 0,
+          "displayDelta": "0B",
+          "displayDeltaPercentage": "0%",
+          "deltaType": "NO_CHANGE"
         },
         {
-          "value": 43513,
-          "displayValue": "42.49KiB"
+          "value": 27512,
+          "displayValue": "26.87KiB"
         }
       ]
     },
@@ -395,50 +391,16 @@
       "key": "bundle.js",
       "label": "bundle.js",
       "biggerIsBetter": false,
-      "changed": true,
+      "changed": false,
       "runs": [
         {
           "name": "bundle.js",
-          "value": 27442,
+          "value": 27512,
           "isEntry": true,
           "isInitial": true,
           "isChunk": true,
           "chunkId": "74d2eb0",
-          "displayValue": "26.8KiB",
-          "delta": -16071,
-          "deltaPercentage": -36.9337899,
-          "displayDelta": "-15.69KiB",
-          "displayDeltaPercentage": "-36.93%",
-          "deltaType": "POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "bundle.js",
-          "value": 43513,
-          "isEntry": true,
-          "isInitial": true,
-          "isChunk": true,
-          "chunkId": "ae35f81",
-          "displayValue": "42.49KiB"
-        }
-      ]
-    }
-  ],
-  "modules": [
-    {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/client/Configuration/ConfigInit.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/client/Configuration/ConfigInit.js",
-      "biggerIsBetter": false,
-      "changed": false,
-      "runs": [
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/client/Configuration/ConfigInit.js",
-          "value": 1672,
-          "chunkIds": [
-            "74d2eb0"
-          ],
-          "originalValue": 1672,
-          "displayValue": "1.63KiB",
+          "displayValue": "26.87KiB",
           "delta": 0,
           "deltaPercentage": 0,
           "displayDelta": "0B",
@@ -446,16 +408,18 @@
           "deltaType": "NO_CHANGE"
         },
         {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/client/Configuration/ConfigInit.js",
-          "value": 1672,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 1672,
-          "displayValue": "1.63KiB"
+          "name": "bundle.js",
+          "value": 27512,
+          "isEntry": true,
+          "isInitial": true,
+          "isChunk": true,
+          "chunkId": "74d2eb0",
+          "displayValue": "26.87KiB"
         }
       ]
-    },
+    }
+  ],
+  "modules": [
     {
       "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/client/Configuration/Output.js",
       "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/client/Configuration/Output.js",
@@ -480,7 +444,7 @@
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/client/Configuration/Output.js",
           "value": 682,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
           "originalValue": 682,
           "displayValue": "682B"
@@ -511,7 +475,7 @@
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/anyware/Overload/Builder.js",
           "value": 705,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
           "originalValue": 705,
           "displayValue": "705B"
@@ -542,7 +506,7 @@
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/anyware/Interceptor/Interceptor.js",
           "value": 125,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
           "originalValue": 125,
           "displayValue": "125B"
@@ -573,7 +537,7 @@
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/anyware/Pipeline/Pipeline.js",
           "value": 2047,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
           "originalValue": 2047,
           "displayValue": "2KiB"
@@ -604,7 +568,7 @@
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/anyware/Result.js",
           "value": 48,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
           "originalValue": 48,
           "displayValue": "48B"
@@ -612,41 +576,10 @@
       ]
     },
     {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/anyware/run/run.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/anyware/run/run.js",
-      "biggerIsBetter": false,
-      "changed": false,
-      "runs": [
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/anyware/run/run.js",
-          "value": 136,
-          "chunkIds": [
-            "74d2eb0"
-          ],
-          "originalValue": 136,
-          "displayValue": "136B",
-          "delta": 0,
-          "deltaPercentage": 0,
-          "displayDelta": "0B",
-          "displayDeltaPercentage": "0%",
-          "deltaType": "NO_CHANGE"
-        },
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/anyware/run/run.js",
-          "value": 136,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 136,
-          "displayValue": "136B"
-        }
-      ]
-    },
-    {
       "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/prelude.js",
       "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/prelude.js",
       "biggerIsBetter": false,
-      "changed": true,
+      "changed": false,
       "runs": [
         {
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/prelude.js",
@@ -656,83 +589,20 @@
           ],
           "originalValue": 2074,
           "displayValue": "2.03KiB",
-          "delta": -1091,
-          "deltaPercentage": -34.47077409,
-          "displayDelta": "-1.07KiB",
-          "displayDeltaPercentage": "-34.47%",
-          "deltaType": "POSITIVE",
-          "regression": false
+          "delta": 0,
+          "deltaPercentage": 0,
+          "displayDelta": "0B",
+          "displayDeltaPercentage": "0%",
+          "deltaType": "NO_CHANGE"
         },
         {
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/prelude.js",
-          "value": 3165,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 3165,
-          "displayValue": "3.09KiB"
-        }
-      ]
-    },
-    {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/anyware/PipelineDef/Config.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/anyware/PipelineDef/Config.js",
-      "biggerIsBetter": false,
-      "changed": false,
-      "runs": [
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/anyware/PipelineDef/Config.js",
-          "value": 281,
+          "value": 2074,
           "chunkIds": [
             "74d2eb0"
           ],
-          "originalValue": 281,
-          "displayValue": "281B",
-          "delta": 0,
-          "deltaPercentage": 0,
-          "displayDelta": "0B",
-          "displayDeltaPercentage": "0%",
-          "deltaType": "NO_CHANGE"
-        },
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/anyware/PipelineDef/Config.js",
-          "value": 281,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 281,
-          "displayValue": "281B"
-        }
-      ]
-    },
-    {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/anyware/PipelineDef/builder.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/anyware/PipelineDef/builder.js",
-      "biggerIsBetter": false,
-      "changed": false,
-      "runs": [
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/anyware/PipelineDef/builder.js",
-          "value": 1543,
-          "chunkIds": [
-            "74d2eb0"
-          ],
-          "originalValue": 1543,
-          "displayValue": "1.51KiB",
-          "delta": 0,
-          "deltaPercentage": 0,
-          "displayDelta": "0B",
-          "displayDeltaPercentage": "0%",
-          "deltaType": "NO_CHANGE"
-        },
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/anyware/PipelineDef/builder.js",
-          "value": 1543,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 1543,
-          "displayValue": "1.51KiB"
+          "originalValue": 2074,
+          "displayValue": "2.03KiB"
         }
       ]
     },
@@ -760,7 +630,7 @@
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/errors/ContextualError.js",
           "value": 356,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
           "originalValue": 356,
           "displayValue": "356B"
@@ -791,7 +661,7 @@
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/errors/ContextualAggregateError.js",
           "value": 648,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
           "originalValue": 648,
           "displayValue": "648B"
@@ -822,7 +692,7 @@
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/analyze-function.js",
           "value": 2397,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
           "originalValue": 2397,
           "displayValue": "2.34KiB"
@@ -853,7 +723,7 @@
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/anyware/run/getEntrypoint.js",
           "value": 2204,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
           "originalValue": 2204,
           "displayValue": "2.15KiB"
@@ -884,7 +754,7 @@
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/anyware/run/resultEnvelope.js",
           "value": 164,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
           "originalValue": 164,
           "displayValue": "164B"
@@ -915,7 +785,7 @@
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/anyware/StepTrigger.js",
           "value": 300,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
           "originalValue": 300,
           "displayValue": "300B"
@@ -946,7 +816,7 @@
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/anyware/run/runStep.js",
           "value": 10278,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
           "originalValue": 10278,
           "displayValue": "10.04KiB"
@@ -977,7 +847,7 @@
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/anyware/run/runPipeline.js",
           "value": 4490,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
           "originalValue": 4490,
           "displayValue": "4.38KiB"
@@ -1008,7 +878,7 @@
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/anyware/run/runner.js",
           "value": 3743,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
           "originalValue": 3743,
           "displayValue": "3.66KiB"
@@ -1016,10 +886,103 @@
       ]
     },
     {
+      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/anyware/run/run.js",
+      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/anyware/run/run.js",
+      "biggerIsBetter": false,
+      "changed": false,
+      "runs": [
+        {
+          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/anyware/run/run.js",
+          "value": 136,
+          "chunkIds": [
+            "74d2eb0"
+          ],
+          "originalValue": 136,
+          "displayValue": "136B",
+          "delta": 0,
+          "deltaPercentage": 0,
+          "displayDelta": "0B",
+          "displayDeltaPercentage": "0%",
+          "deltaType": "NO_CHANGE"
+        },
+        {
+          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/anyware/run/run.js",
+          "value": 136,
+          "chunkIds": [
+            "74d2eb0"
+          ],
+          "originalValue": 136,
+          "displayValue": "136B"
+        }
+      ]
+    },
+    {
+      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/anyware/PipelineDef/Config.js",
+      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/anyware/PipelineDef/Config.js",
+      "biggerIsBetter": false,
+      "changed": false,
+      "runs": [
+        {
+          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/anyware/PipelineDef/Config.js",
+          "value": 281,
+          "chunkIds": [
+            "74d2eb0"
+          ],
+          "originalValue": 281,
+          "displayValue": "281B",
+          "delta": 0,
+          "deltaPercentage": 0,
+          "displayDelta": "0B",
+          "displayDeltaPercentage": "0%",
+          "deltaType": "NO_CHANGE"
+        },
+        {
+          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/anyware/PipelineDef/Config.js",
+          "value": 281,
+          "chunkIds": [
+            "74d2eb0"
+          ],
+          "originalValue": 281,
+          "displayValue": "281B"
+        }
+      ]
+    },
+    {
+      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/anyware/PipelineDef/builder.js",
+      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/anyware/PipelineDef/builder.js",
+      "biggerIsBetter": false,
+      "changed": false,
+      "runs": [
+        {
+          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/anyware/PipelineDef/builder.js",
+          "value": 1543,
+          "chunkIds": [
+            "74d2eb0"
+          ],
+          "originalValue": 1543,
+          "displayValue": "1.51KiB",
+          "delta": 0,
+          "deltaPercentage": 0,
+          "displayDelta": "0B",
+          "displayDeltaPercentage": "0%",
+          "deltaType": "NO_CHANGE"
+        },
+        {
+          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/anyware/PipelineDef/builder.js",
+          "value": 1543,
+          "chunkIds": [
+            "74d2eb0"
+          ],
+          "originalValue": 1543,
+          "displayValue": "1.51KiB"
+        }
+      ]
+    },
+    {
       "key": "./node_modules/.pnpm/@0no-co+graphql.web@1.0.12_graphql@16.10.0/node_modules/@0no-co/graphql.web/dist/graphql.web.mjs",
       "label": "./node_modules/.pnpm/@0no-co+graphql.web@1.0.12_graphql@16.10.0/node_modules/@0no-co/graphql.web/dist/graphql.web.mjs",
       "biggerIsBetter": false,
-      "changed": true,
+      "changed": false,
       "runs": [
         {
           "name": "./node_modules/.pnpm/@0no-co+graphql.web@1.0.12_graphql@16.10.0/node_modules/@0no-co/graphql.web/dist/graphql.web.mjs",
@@ -1029,21 +992,20 @@
           ],
           "originalValue": 11569,
           "displayValue": "11.3KiB",
-          "delta": -3801,
-          "deltaPercentage": -24.72999349,
-          "displayDelta": "-3.71KiB",
-          "displayDeltaPercentage": "-24.73%",
-          "deltaType": "POSITIVE",
-          "regression": false
+          "delta": 0,
+          "deltaPercentage": 0,
+          "displayDelta": "0B",
+          "displayDeltaPercentage": "0%",
+          "deltaType": "NO_CHANGE"
         },
         {
           "name": "./node_modules/.pnpm/@0no-co+graphql.web@1.0.12_graphql@16.10.0/node_modules/@0no-co/graphql.web/dist/graphql.web.mjs",
-          "value": 15370,
+          "value": 11569,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
-          "originalValue": 15370,
-          "displayValue": "15.01KiB"
+          "originalValue": 11569,
+          "displayValue": "11.3KiB"
         }
       ]
     },
@@ -1071,7 +1033,7 @@
           "name": "./node_modules/.pnpm/graphql@16.10.0/node_modules/graphql/language/kinds.mjs",
           "value": 2238,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
           "originalValue": 2238,
           "displayValue": "2.19KiB"
@@ -1082,7 +1044,7 @@
       "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/grafaid/document/kinds.js",
       "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/grafaid/document/kinds.js",
       "biggerIsBetter": false,
-      "changed": true,
+      "changed": false,
       "runs": [
         {
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/grafaid/document/kinds.js",
@@ -1092,21 +1054,20 @@
           ],
           "originalValue": 96,
           "displayValue": "96B",
-          "delta": -558,
-          "deltaPercentage": -85.32110092,
-          "displayDelta": "-558B",
-          "displayDeltaPercentage": "-85.32%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
+          "delta": 0,
+          "deltaPercentage": 0,
+          "displayDelta": "0B",
+          "displayDeltaPercentage": "0%",
+          "deltaType": "NO_CHANGE"
         },
         {
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/grafaid/document/kinds.js",
-          "value": 654,
+          "value": 96,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
-          "originalValue": 654,
-          "displayValue": "654B"
+          "originalValue": 96,
+          "displayValue": "96B"
         }
       ]
     },
@@ -1134,7 +1095,7 @@
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/grafaid/document/OperationTypeNodes.js",
           "value": 214,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
           "originalValue": 214,
           "displayValue": "214B"
@@ -1165,7 +1126,7 @@
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/grafaid/typed-document/TypedDocument.js",
           "value": 38,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
           "originalValue": 38,
           "displayValue": "38B"
@@ -1176,7 +1137,7 @@
       "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/grafaid/document.js",
       "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/grafaid/document.js",
       "biggerIsBetter": false,
-      "changed": true,
+      "changed": false,
       "runs": [
         {
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/grafaid/document.js",
@@ -1186,21 +1147,20 @@
           ],
           "originalValue": 3085,
           "displayValue": "3.01KiB",
-          "delta": -2304,
-          "deltaPercentage": -42.75375765,
-          "displayDelta": "-2.25KiB",
-          "displayDeltaPercentage": "-42.75%",
-          "deltaType": "POSITIVE",
-          "regression": false
+          "delta": 0,
+          "deltaPercentage": 0,
+          "displayDelta": "0B",
+          "displayDeltaPercentage": "0%",
+          "deltaType": "NO_CHANGE"
         },
         {
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/grafaid/document.js",
-          "value": 5389,
+          "value": 3085,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
-          "originalValue": 5389,
-          "displayValue": "5.26KiB"
+          "originalValue": 3085,
+          "displayValue": "3.01KiB"
         }
       ]
     },
@@ -1208,7 +1168,7 @@
       "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/grafaid/request.js",
       "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/grafaid/request.js",
       "biggerIsBetter": false,
-      "changed": true,
+      "changed": false,
       "runs": [
         {
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/grafaid/request.js",
@@ -1218,21 +1178,20 @@
           ],
           "originalValue": 525,
           "displayValue": "525B",
-          "delta": -746,
-          "deltaPercentage": -58.69394178,
-          "displayDelta": "-746B",
-          "displayDeltaPercentage": "-58.69%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
+          "delta": 0,
+          "deltaPercentage": 0,
+          "displayDelta": "0B",
+          "displayDeltaPercentage": "0%",
+          "deltaType": "NO_CHANGE"
         },
         {
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/grafaid/request.js",
-          "value": 1271,
+          "value": 525,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
-          "originalValue": 1271,
-          "displayValue": "1.24KiB"
+          "originalValue": 525,
+          "displayValue": "525B"
         }
       ]
     },
@@ -1260,7 +1219,7 @@
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/types/Schema/nodes/Scalar/codec.js",
           "value": 37,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
           "originalValue": 37,
           "displayValue": "37B"
@@ -1291,7 +1250,7 @@
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/types/Schema/nodes/Scalar/create.js",
           "value": 94,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
           "originalValue": 94,
           "displayValue": "94B"
@@ -1302,7 +1261,7 @@
       "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/types/Schema/StandardTypes/scalar.js",
       "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/types/Schema/StandardTypes/scalar.js",
       "biggerIsBetter": false,
-      "changed": true,
+      "changed": false,
       "runs": [
         {
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/types/Schema/StandardTypes/scalar.js",
@@ -1312,21 +1271,20 @@
           ],
           "originalValue": 410,
           "displayValue": "410B",
-          "delta": -69,
-          "deltaPercentage": -14.40501044,
-          "displayDelta": "-69B",
-          "displayDeltaPercentage": "-14.41%",
-          "deltaType": "POSITIVE",
-          "regression": false
+          "delta": 0,
+          "deltaPercentage": 0,
+          "displayDelta": "0B",
+          "displayDeltaPercentage": "0%",
+          "deltaType": "NO_CHANGE"
         },
         {
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/types/Schema/StandardTypes/scalar.js",
-          "value": 479,
+          "value": 410,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
-          "originalValue": 479,
-          "displayValue": "479B"
+          "originalValue": 410,
+          "displayValue": "410B"
         }
       ]
     },
@@ -1354,7 +1312,7 @@
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/types/Schema/nodes/Scalar/helpers.js",
           "value": 820,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
           "originalValue": 820,
           "displayValue": "820B"
@@ -1365,7 +1323,7 @@
       "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/types/SchemaDrivenDataMap/SchemaDrivenDataMap.js",
       "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/types/SchemaDrivenDataMap/SchemaDrivenDataMap.js",
       "biggerIsBetter": false,
-      "changed": true,
+      "changed": false,
       "runs": [
         {
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/types/SchemaDrivenDataMap/SchemaDrivenDataMap.js",
@@ -1375,21 +1333,20 @@
           ],
           "originalValue": 764,
           "displayValue": "764B",
-          "delta": -296,
-          "deltaPercentage": -27.9245283,
-          "displayDelta": "-296B",
-          "displayDeltaPercentage": "-27.92%",
-          "deltaType": "POSITIVE",
-          "regression": false
+          "delta": 0,
+          "deltaPercentage": 0,
+          "displayDelta": "0B",
+          "displayDeltaPercentage": "0%",
+          "deltaType": "NO_CHANGE"
         },
         {
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/types/SchemaDrivenDataMap/SchemaDrivenDataMap.js",
-          "value": 1060,
+          "value": 764,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
-          "originalValue": 1060,
-          "displayValue": "1.04KiB"
+          "originalValue": 764,
+          "displayValue": "764B"
         }
       ]
     },
@@ -1417,7 +1374,7 @@
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/requestPipeline/CustomScalars/decode.js",
           "value": 3790,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
           "originalValue": 3790,
           "displayValue": "3.7KiB"
@@ -1448,7 +1405,7 @@
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/requestPipeline/CustomScalars/encode.js",
           "value": 3324,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
           "originalValue": 3324,
           "displayValue": "3.25KiB"
@@ -1459,7 +1416,7 @@
       "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/requestPipeline/RequestPipeline.js",
       "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/requestPipeline/RequestPipeline.js",
       "biggerIsBetter": false,
-      "changed": true,
+      "changed": false,
       "runs": [
         {
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/requestPipeline/RequestPipeline.js",
@@ -1469,21 +1426,20 @@
           ],
           "originalValue": 2136,
           "displayValue": "2.09KiB",
-          "delta": -158,
-          "deltaPercentage": -6.88753269,
-          "displayDelta": "-158B",
-          "displayDeltaPercentage": "-6.89%",
-          "deltaType": "POSITIVE",
-          "regression": false
+          "delta": 0,
+          "deltaPercentage": 0,
+          "displayDelta": "0B",
+          "displayDeltaPercentage": "0%",
+          "deltaType": "NO_CHANGE"
         },
         {
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/requestPipeline/RequestPipeline.js",
-          "value": 2294,
+          "value": 2136,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
-          "originalValue": 2294,
-          "displayValue": "2.24KiB"
+          "originalValue": 2136,
+          "displayValue": "2.09KiB"
         }
       ]
     },
@@ -1511,7 +1467,7 @@
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/types/GlobalRegistry/types.js",
           "value": 36,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
           "originalValue": 36,
           "displayValue": "36B"
@@ -1526,12 +1482,12 @@
       "runs": [
         {
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/types/context.js",
-          "value": 1134,
+          "value": 2959,
           "chunkIds": [
             "74d2eb0"
           ],
-          "originalValue": 1134,
-          "displayValue": "1.11KiB",
+          "originalValue": 2959,
+          "displayValue": "2.89KiB",
           "delta": 0,
           "deltaPercentage": 0,
           "displayDelta": "0B",
@@ -1540,12 +1496,12 @@
         },
         {
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/types/context.js",
-          "value": 1134,
+          "value": 2959,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
-          "originalValue": 1134,
-          "displayValue": "1.11KiB"
+          "originalValue": 2959,
+          "displayValue": "2.89KiB"
         }
       ]
     },
@@ -1553,7 +1509,7 @@
       "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/extension/builder.js",
       "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/extension/builder.js",
       "biggerIsBetter": false,
-      "changed": true,
+      "changed": false,
       "runs": [
         {
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/extension/builder.js",
@@ -1563,21 +1519,20 @@
           ],
           "originalValue": 149,
           "displayValue": "149B",
-          "delta": 8,
-          "deltaPercentage": 5.67375887,
-          "displayDelta": "+8B",
-          "displayDeltaPercentage": "+5.67%",
-          "deltaType": "NEGATIVE",
-          "regression": true
+          "delta": 0,
+          "deltaPercentage": 0,
+          "displayDelta": "0B",
+          "displayDeltaPercentage": "0%",
+          "deltaType": "NO_CHANGE"
         },
         {
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/extension/builder.js",
-          "value": 141,
+          "value": 149,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
-          "originalValue": 141,
-          "displayValue": "141B"
+          "originalValue": 149,
+          "displayValue": "149B"
         }
       ]
     },
@@ -1585,7 +1540,7 @@
       "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/extension/TypeHooks.js",
       "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/extension/TypeHooks.js",
       "biggerIsBetter": false,
-      "changed": true,
+      "changed": false,
       "runs": [
         {
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/extension/TypeHooks.js",
@@ -1595,16 +1550,20 @@
           ],
           "originalValue": 263,
           "displayValue": "263B",
-          "delta": 263,
-          "deltaPercentage": 100,
-          "displayDelta": "+263B",
-          "displayDeltaPercentage": "+100%",
-          "deltaType": "HIGH_NEGATIVE",
-          "regression": true
+          "delta": 0,
+          "deltaPercentage": 0,
+          "displayDelta": "0B",
+          "displayDeltaPercentage": "0%",
+          "deltaType": "NO_CHANGE"
         },
         {
-          "value": 0,
-          "displayValue": "0B"
+          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/extension/TypeHooks.js",
+          "value": 263,
+          "chunkIds": [
+            "74d2eb0"
+          ],
+          "originalValue": 263,
+          "displayValue": "263B"
         }
       ]
     },
@@ -1612,7 +1571,7 @@
       "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/extension/extension.js",
       "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/extension/extension.js",
       "biggerIsBetter": false,
-      "changed": true,
+      "changed": false,
       "runs": [
         {
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/extension/extension.js",
@@ -1622,21 +1581,20 @@
           ],
           "originalValue": 1469,
           "displayValue": "1.43KiB",
-          "delta": 163,
-          "deltaPercentage": 12.48085758,
-          "displayDelta": "+163B",
-          "displayDeltaPercentage": "+12.48%",
-          "deltaType": "NEGATIVE",
-          "regression": true
+          "delta": 0,
+          "deltaPercentage": 0,
+          "displayDelta": "0B",
+          "displayDeltaPercentage": "0%",
+          "deltaType": "NO_CHANGE"
         },
         {
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/extension/extension.js",
-          "value": 1306,
+          "value": 1469,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
-          "originalValue": 1306,
-          "displayValue": "1.28KiB"
+          "originalValue": 1469,
+          "displayValue": "1.43KiB"
         }
       ]
     },
@@ -1664,7 +1622,7 @@
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/client/helpers.js",
           "value": 64,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
           "originalValue": 64,
           "displayValue": "64B"
@@ -1695,7 +1653,7 @@
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/client/properties/anyware.js",
           "value": 474,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
           "originalValue": 474,
           "displayValue": "474B"
@@ -1726,7 +1684,7 @@
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/template-string.js",
           "value": 453,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
           "originalValue": 453,
           "displayValue": "453B"
@@ -1757,7 +1715,7 @@
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/client/handleOutput.js",
           "value": 1975,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
           "originalValue": 1975,
           "displayValue": "1.93KiB"
@@ -1788,7 +1746,7 @@
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/client/properties/gql/send.js",
           "value": 233,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
           "originalValue": 233,
           "displayValue": "233B"
@@ -1819,7 +1777,7 @@
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/client/properties/gql/gql.js",
           "value": 2024,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
           "originalValue": 2024,
           "displayValue": "1.98KiB"
@@ -1850,7 +1808,7 @@
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/client/properties/scalar.js",
           "value": 546,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
           "originalValue": 546,
           "displayValue": "546B"
@@ -1881,7 +1839,7 @@
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/client/properties/transport.js",
           "value": 1491,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
           "originalValue": 1491,
           "displayValue": "1.46KiB"
@@ -1892,7 +1850,7 @@
       "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/client/properties/use.js",
       "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/client/properties/use.js",
       "biggerIsBetter": false,
-      "changed": true,
+      "changed": false,
       "runs": [
         {
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/client/properties/use.js",
@@ -1902,21 +1860,20 @@
           ],
           "originalValue": 1709,
           "displayValue": "1.67KiB",
-          "delta": 32,
-          "deltaPercentage": 1.90816935,
-          "displayDelta": "+32B",
-          "displayDeltaPercentage": "+1.91%",
-          "deltaType": "LOW_NEGATIVE",
-          "regression": true
+          "delta": 0,
+          "deltaPercentage": 0,
+          "displayDelta": "0B",
+          "displayDeltaPercentage": "0%",
+          "deltaType": "NO_CHANGE"
         },
         {
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/client/properties/use.js",
-          "value": 1677,
+          "value": 1709,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
-          "originalValue": 1677,
-          "displayValue": "1.64KiB"
+          "originalValue": 1709,
+          "displayValue": "1.67KiB"
         }
       ]
     },
@@ -1928,12 +1885,12 @@
       "runs": [
         {
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/client/properties/with.js",
-          "value": 190,
+          "value": 208,
           "chunkIds": [
             "74d2eb0"
           ],
-          "originalValue": 190,
-          "displayValue": "190B",
+          "originalValue": 208,
+          "displayValue": "208B",
           "delta": 0,
           "deltaPercentage": 0,
           "displayDelta": "0B",
@@ -1942,12 +1899,12 @@
         },
         {
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/client/properties/with.js",
-          "value": 190,
+          "value": 208,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
-          "originalValue": 190,
-          "displayValue": "190B"
+          "originalValue": 208,
+          "displayValue": "208B"
         }
       ]
     },
@@ -1955,31 +1912,30 @@
       "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/client/client.js",
       "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/client/client.js",
       "biggerIsBetter": false,
-      "changed": true,
+      "changed": false,
       "runs": [
         {
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/client/client.js",
-          "value": 813,
+          "value": 831,
           "chunkIds": [
             "74d2eb0"
           ],
-          "originalValue": 813,
-          "displayValue": "813B",
-          "delta": -765,
-          "deltaPercentage": -48.47908745,
-          "displayDelta": "-765B",
-          "displayDeltaPercentage": "-48.48%",
-          "deltaType": "POSITIVE",
-          "regression": false
+          "originalValue": 831,
+          "displayValue": "831B",
+          "delta": 0,
+          "deltaPercentage": 0,
+          "displayDelta": "0B",
+          "displayDeltaPercentage": "0%",
+          "deltaType": "NO_CHANGE"
         },
         {
           "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/client/client.js",
-          "value": 1578,
+          "value": 831,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
-          "originalValue": 1578,
-          "displayValue": "1.54KiB"
+          "originalValue": 831,
+          "displayValue": "831B"
         }
       ]
     },
@@ -1987,7 +1943,7 @@
       "key": "./bare/main.ts",
       "label": "./bare/main.ts",
       "biggerIsBetter": false,
-      "changed": true,
+      "changed": false,
       "runs": [
         {
           "name": "./bare/main.ts",
@@ -1997,958 +1953,17 @@
           ],
           "originalValue": 47,
           "displayValue": "47B",
-          "delta": 47,
-          "deltaPercentage": 100,
-          "displayDelta": "+47B",
-          "displayDeltaPercentage": "+100%",
-          "deltaType": "HIGH_NEGATIVE",
-          "regression": true
+          "delta": 0,
+          "deltaPercentage": 0,
+          "displayDelta": "0B",
+          "displayDeltaPercentage": "0%",
+          "deltaType": "NO_CHANGE"
         },
         {
-          "value": 0,
-          "displayValue": "0B"
-        }
-      ]
-    },
-    {
-      "key": "./node_modules/.pnpm/graphql@16.10.0/node_modules/graphql/language/ast.mjs",
-      "label": "./node_modules/.pnpm/graphql@16.10.0/node_modules/graphql/language/ast.mjs",
-      "biggerIsBetter": false,
-      "changed": true,
-      "runs": [
-        {
-          "value": 0,
-          "displayValue": "0B",
-          "delta": -2912,
-          "deltaPercentage": -100,
-          "displayDelta": "-2.84KiB",
-          "displayDeltaPercentage": "-100%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "./node_modules/.pnpm/graphql@16.10.0/node_modules/graphql/language/ast.mjs",
-          "value": 2912,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 2912,
-          "displayValue": "2.84KiB"
-        }
-      ]
-    },
-    {
-      "key": "./node_modules/.pnpm/es-toolkit@1.30.1/node_modules/es-toolkit/dist/predicate/isPlainObject.mjs",
-      "label": "./node_modules/.pnpm/es-toolkit@1.30.1/node_modules/es-toolkit/dist/predicate/isPlainObject.mjs",
-      "biggerIsBetter": false,
-      "changed": true,
-      "runs": [
-        {
-          "value": 0,
-          "displayValue": "0B",
-          "delta": -421,
-          "deltaPercentage": -100,
-          "displayDelta": "-421B",
-          "displayDeltaPercentage": "-100%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "./node_modules/.pnpm/es-toolkit@1.30.1/node_modules/es-toolkit/dist/predicate/isPlainObject.mjs",
-          "value": 421,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 421,
-          "displayValue": "421B"
-        }
-      ]
-    },
-    {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/Select/$parseSelection.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/Select/$parseSelection.js",
-      "biggerIsBetter": false,
-      "changed": true,
-      "runs": [
-        {
-          "value": 0,
-          "displayValue": "0B",
-          "delta": -2029,
-          "deltaPercentage": -100,
-          "displayDelta": "-1.98KiB",
-          "displayDeltaPercentage": "-100%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/Select/$parseSelection.js",
-          "value": 2029,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 2029,
-          "displayValue": "1.98KiB"
-        }
-      ]
-    },
-    {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/Select/arguments.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/Select/arguments.js",
-      "biggerIsBetter": false,
-      "changed": true,
-      "runs": [
-        {
-          "value": 0,
-          "displayValue": "0B",
-          "delta": -140,
-          "deltaPercentage": -100,
-          "displayDelta": "-140B",
-          "displayDeltaPercentage": "-100%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/Select/arguments.js",
-          "value": 140,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 140,
-          "displayValue": "140B"
-        }
-      ]
-    },
-    {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/types/Schema/directives/Include.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/types/Schema/directives/Include.js",
-      "biggerIsBetter": false,
-      "changed": true,
-      "runs": [
-        {
-          "value": 0,
-          "displayValue": "0B",
-          "delta": -150,
-          "deltaPercentage": -100,
-          "displayDelta": "-150B",
-          "displayDeltaPercentage": "-100%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/types/Schema/directives/Include.js",
-          "value": 150,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 150,
-          "displayValue": "150B"
-        }
-      ]
-    },
-    {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/types/Schema/directives/Skip.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/types/Schema/directives/Skip.js",
-      "biggerIsBetter": false,
-      "changed": true,
-      "runs": [
-        {
-          "value": 0,
-          "displayValue": "0B",
-          "delta": -144,
-          "deltaPercentage": -100,
-          "displayDelta": "-144B",
-          "displayDeltaPercentage": "-100%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/types/Schema/directives/Skip.js",
-          "value": 144,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 144,
-          "displayValue": "144B"
-        }
-      ]
-    },
-    {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/types/Schema/Directive.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/types/Schema/Directive.js",
-      "biggerIsBetter": false,
-      "changed": true,
-      "runs": [
-        {
-          "value": 0,
-          "displayValue": "0B",
-          "delta": -93,
-          "deltaPercentage": -100,
-          "displayDelta": "-93B",
-          "displayDeltaPercentage": "-100%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/types/Schema/Directive.js",
-          "value": 93,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 93,
-          "displayValue": "93B"
-        }
-      ]
-    },
-    {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/Select/Directive/include.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/Select/Directive/include.js",
-      "biggerIsBetter": false,
-      "changed": true,
-      "runs": [
-        {
-          "value": 0,
-          "displayValue": "0B",
-          "delta": -392,
-          "deltaPercentage": -100,
-          "displayDelta": "-392B",
-          "displayDeltaPercentage": "-100%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/Select/Directive/include.js",
-          "value": 392,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 392,
-          "displayValue": "392B"
-        }
-      ]
-    },
-    {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/Select/Directive/skip.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/Select/Directive/skip.js",
-      "biggerIsBetter": false,
-      "changed": true,
-      "runs": [
-        {
-          "value": 0,
-          "displayValue": "0B",
-          "delta": -238,
-          "deltaPercentage": -100,
-          "displayDelta": "-238B",
-          "displayDeltaPercentage": "-100%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/Select/Directive/skip.js",
-          "value": 238,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 238,
-          "displayValue": "238B"
-        }
-      ]
-    },
-    {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/Select/Directive/helpers.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/Select/Directive/helpers.js",
-      "biggerIsBetter": false,
-      "changed": true,
-      "runs": [
-        {
-          "value": 0,
-          "displayValue": "0B",
-          "delta": -228,
-          "deltaPercentage": -100,
-          "displayDelta": "-228B",
-          "displayDeltaPercentage": "-100%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/Select/Directive/helpers.js",
-          "value": 228,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 228,
-          "displayValue": "228B"
-        }
-      ]
-    },
-    {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/http.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/http.js",
-      "biggerIsBetter": false,
-      "changed": true,
-      "runs": [
-        {
-          "value": 0,
-          "displayValue": "0B",
-          "delta": -1077,
-          "deltaPercentage": -100,
-          "displayDelta": "-1.05KiB",
-          "displayDeltaPercentage": "-100%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/http.js",
-          "value": 1077,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 1077,
-          "displayValue": "1.05KiB"
-        }
-      ]
-    },
-    {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/grafaid/http/http.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/grafaid/http/http.js",
-      "biggerIsBetter": false,
-      "changed": true,
-      "runs": [
-        {
-          "value": 0,
-          "displayValue": "0B",
-          "delta": -2460,
-          "deltaPercentage": -100,
-          "displayDelta": "-2.4KiB",
-          "displayDeltaPercentage": "-100%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/lib/grafaid/http/http.js",
-          "value": 2460,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 2460,
-          "displayValue": "2.4KiB"
-        }
-      ]
-    },
-    {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/Select/document.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/Select/document.js",
-      "biggerIsBetter": false,
-      "changed": true,
-      "runs": [
-        {
-          "value": 0,
-          "displayValue": "0B",
-          "delta": -1788,
-          "deltaPercentage": -100,
-          "displayDelta": "-1.75KiB",
-          "displayDeltaPercentage": "-100%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/Select/document.js",
-          "value": 1788,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 1788,
-          "displayValue": "1.75KiB"
-        }
-      ]
-    },
-    {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/Select/Indicator/negative.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/Select/Indicator/negative.js",
-      "biggerIsBetter": false,
-      "changed": true,
-      "runs": [
-        {
-          "value": 0,
-          "displayValue": "0B",
-          "delta": -205,
-          "deltaPercentage": -100,
-          "displayDelta": "-205B",
-          "displayDeltaPercentage": "-100%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/Select/Indicator/negative.js",
-          "value": 205,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 205,
-          "displayValue": "205B"
-        }
-      ]
-    },
-    {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/Select/Indicator/positive.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/Select/Indicator/positive.js",
-      "biggerIsBetter": false,
-      "changed": true,
-      "runs": [
-        {
-          "value": 0,
-          "displayValue": "0B",
-          "delta": -135,
-          "deltaPercentage": -100,
-          "displayDelta": "-135B",
-          "displayDeltaPercentage": "-100%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/Select/Indicator/positive.js",
-          "value": 135,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 135,
-          "displayValue": "135B"
-        }
-      ]
-    },
-    {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/Select/Indicator/indicator.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/Select/Indicator/indicator.js",
-      "biggerIsBetter": false,
-      "changed": true,
-      "runs": [
-        {
-          "value": 0,
-          "displayValue": "0B",
-          "delta": -92,
-          "deltaPercentage": -100,
-          "displayDelta": "-92B",
-          "displayDeltaPercentage": "-100%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/Select/Indicator/indicator.js",
-          "value": 92,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 92,
-          "displayValue": "92B"
-        }
-      ]
-    },
-    {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/Select/InlineFragment.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/Select/InlineFragment.js",
-      "biggerIsBetter": false,
-      "changed": true,
-      "runs": [
-        {
-          "value": 0,
-          "displayValue": "0B",
-          "delta": -472,
-          "deltaPercentage": -100,
-          "displayDelta": "-472B",
-          "displayDeltaPercentage": "-100%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/Select/InlineFragment.js",
-          "value": 472,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 472,
-          "displayValue": "472B"
-        }
-      ]
-    },
-    {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/Select/SelectAlias.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/Select/SelectAlias.js",
-      "biggerIsBetter": false,
-      "changed": true,
-      "runs": [
-        {
-          "value": 0,
-          "displayValue": "0B",
-          "delta": -393,
-          "deltaPercentage": -100,
-          "displayDelta": "-393B",
-          "displayDeltaPercentage": "-100%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/Select/SelectAlias.js",
-          "value": 393,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 393,
-          "displayValue": "393B"
-        }
-      ]
-    },
-    {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/Select/SelectScalarsWildcard.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/Select/SelectScalarsWildcard.js",
-      "biggerIsBetter": false,
-      "changed": true,
-      "runs": [
-        {
-          "value": 0,
-          "displayValue": "0B",
-          "delta": -23,
-          "deltaPercentage": -100,
-          "displayDelta": "-23B",
-          "displayDeltaPercentage": "-100%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/Select/SelectScalarsWildcard.js",
-          "value": 23,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 23,
-          "displayValue": "23B"
-        }
-      ]
-    },
-    {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/SelectGraphQLMapper/inferVariableType.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/SelectGraphQLMapper/inferVariableType.js",
-      "biggerIsBetter": false,
-      "changed": true,
-      "runs": [
-        {
-          "value": 0,
-          "displayValue": "0B",
-          "delta": -1227,
-          "deltaPercentage": -100,
-          "displayDelta": "-1.2KiB",
-          "displayDeltaPercentage": "-100%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/SelectGraphQLMapper/inferVariableType.js",
-          "value": 1227,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 1227,
-          "displayValue": "1.2KiB"
-        }
-      ]
-    },
-    {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/SelectGraphQLMapper/context.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/SelectGraphQLMapper/context.js",
-      "biggerIsBetter": false,
-      "changed": true,
-      "runs": [
-        {
-          "value": 0,
-          "displayValue": "0B",
-          "delta": -1123,
-          "deltaPercentage": -100,
-          "displayDelta": "-1.1KiB",
-          "displayDeltaPercentage": "-100%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/SelectGraphQLMapper/context.js",
-          "value": 1123,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 1123,
-          "displayValue": "1.1KiB"
-        }
-      ]
-    },
-    {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/SelectGraphQLMapper/nodes/Value.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/SelectGraphQLMapper/nodes/Value.js",
-      "biggerIsBetter": false,
-      "changed": true,
-      "runs": [
-        {
-          "value": 0,
-          "displayValue": "0B",
-          "delta": -1964,
-          "deltaPercentage": -100,
-          "displayDelta": "-1.92KiB",
-          "displayDeltaPercentage": "-100%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/SelectGraphQLMapper/nodes/Value.js",
-          "value": 1964,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 1964,
-          "displayValue": "1.92KiB"
-        }
-      ]
-    },
-    {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/SelectGraphQLMapper/nodes/Directive.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/SelectGraphQLMapper/nodes/Directive.js",
-      "biggerIsBetter": false,
-      "changed": true,
-      "runs": [
-        {
-          "value": 0,
-          "displayValue": "0B",
-          "delta": -1003,
-          "deltaPercentage": -100,
-          "displayDelta": "-1003B",
-          "displayDeltaPercentage": "-100%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/SelectGraphQLMapper/nodes/Directive.js",
-          "value": 1003,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 1003,
-          "displayValue": "1003B"
-        }
-      ]
-    },
-    {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/SelectGraphQLMapper/nodes/_collect.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/SelectGraphQLMapper/nodes/_collect.js",
-      "biggerIsBetter": false,
-      "changed": true,
-      "runs": [
-        {
-          "value": 0,
-          "displayValue": "0B",
-          "delta": -489,
-          "deltaPercentage": -100,
-          "displayDelta": "-489B",
-          "displayDeltaPercentage": "-100%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/SelectGraphQLMapper/nodes/_collect.js",
-          "value": 489,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 489,
-          "displayValue": "489B"
-        }
-      ]
-    },
-    {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/SelectGraphQLMapper/nodes/Argument.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/SelectGraphQLMapper/nodes/Argument.js",
-      "biggerIsBetter": false,
-      "changed": true,
-      "runs": [
-        {
-          "value": 0,
-          "displayValue": "0B",
-          "delta": -406,
-          "deltaPercentage": -100,
-          "displayDelta": "-406B",
-          "displayDeltaPercentage": "-100%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/SelectGraphQLMapper/nodes/Argument.js",
-          "value": 406,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 406,
-          "displayValue": "406B"
-        }
-      ]
-    },
-    {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/SelectGraphQLMapper/nodes/5_Field.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/SelectGraphQLMapper/nodes/5_Field.js",
-      "biggerIsBetter": false,
-      "changed": true,
-      "runs": [
-        {
-          "value": 0,
-          "displayValue": "0B",
-          "delta": -2530,
-          "deltaPercentage": -100,
-          "displayDelta": "-2.47KiB",
-          "displayDeltaPercentage": "-100%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/SelectGraphQLMapper/nodes/5_Field.js",
-          "value": 2530,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 2530,
-          "displayValue": "2.47KiB"
-        }
-      ]
-    },
-    {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/SelectGraphQLMapper/nodes/5_InlineFragments.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/SelectGraphQLMapper/nodes/5_InlineFragments.js",
-      "biggerIsBetter": false,
-      "changed": true,
-      "runs": [
-        {
-          "value": 0,
-          "displayValue": "0B",
-          "delta": -1056,
-          "deltaPercentage": -100,
-          "displayDelta": "-1.03KiB",
-          "displayDeltaPercentage": "-100%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/SelectGraphQLMapper/nodes/5_InlineFragments.js",
-          "value": 1056,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 1056,
-          "displayValue": "1.03KiB"
-        }
-      ]
-    },
-    {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/SelectGraphQLMapper/nodes/4_GraffleSelectionObjectLevel.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/SelectGraphQLMapper/nodes/4_GraffleSelectionObjectLevel.js",
-      "biggerIsBetter": false,
-      "changed": true,
-      "runs": [
-        {
-          "value": 0,
-          "displayValue": "0B",
-          "delta": -1497,
-          "deltaPercentage": -100,
-          "displayDelta": "-1.46KiB",
-          "displayDeltaPercentage": "-100%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/SelectGraphQLMapper/nodes/4_GraffleSelectionObjectLevel.js",
-          "value": 1497,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 1497,
-          "displayValue": "1.46KiB"
-        }
-      ]
-    },
-    {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/SelectGraphQLMapper/nodes/3_GraffleSelectionSetRoot.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/SelectGraphQLMapper/nodes/3_GraffleSelectionSetRoot.js",
-      "biggerIsBetter": false,
-      "changed": true,
-      "runs": [
-        {
-          "value": 0,
-          "displayValue": "0B",
-          "delta": -328,
-          "deltaPercentage": -100,
-          "displayDelta": "-328B",
-          "displayDeltaPercentage": "-100%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/SelectGraphQLMapper/nodes/3_GraffleSelectionSetRoot.js",
-          "value": 328,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 328,
-          "displayValue": "328B"
-        }
-      ]
-    },
-    {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/SelectGraphQLMapper/nodes/2_OperationDefinition.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/SelectGraphQLMapper/nodes/2_OperationDefinition.js",
-      "biggerIsBetter": false,
-      "changed": true,
-      "runs": [
-        {
-          "value": 0,
-          "displayValue": "0B",
-          "delta": -1070,
-          "deltaPercentage": -100,
-          "displayDelta": "-1.04KiB",
-          "displayDeltaPercentage": "-100%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/SelectGraphQLMapper/nodes/2_OperationDefinition.js",
-          "value": 1070,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 1070,
-          "displayValue": "1.04KiB"
-        }
-      ]
-    },
-    {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/SelectGraphQLMapper/nodes/1_Document.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/SelectGraphQLMapper/nodes/1_Document.js",
-      "biggerIsBetter": false,
-      "changed": true,
-      "runs": [
-        {
-          "value": 0,
-          "displayValue": "0B",
-          "delta": -779,
-          "deltaPercentage": -100,
-          "displayDelta": "-779B",
-          "displayDeltaPercentage": "-100%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/SelectGraphQLMapper/nodes/1_Document.js",
-          "value": 779,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 779,
-          "displayValue": "779B"
-        }
-      ]
-    },
-    {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/requestMethods/requestMethods.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/requestMethods/requestMethods.js",
-      "biggerIsBetter": false,
-      "changed": true,
-      "runs": [
-        {
-          "value": 0,
-          "displayValue": "0B",
-          "delta": -4027,
-          "deltaPercentage": -100,
-          "displayDelta": "-3.93KiB",
-          "displayDeltaPercentage": "-100%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/documentBuilder/requestMethods/requestMethods.js",
-          "value": 4027,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 4027,
-          "displayValue": "3.93KiB"
-        }
-      ]
-    },
-    {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/extensions/TransportHttp/TransportHttp.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/extensions/TransportHttp/TransportHttp.js",
-      "biggerIsBetter": false,
-      "changed": true,
-      "runs": [
-        {
-          "value": 0,
-          "displayValue": "0B",
-          "delta": -4399,
-          "deltaPercentage": -100,
-          "displayDelta": "-4.3KiB",
-          "displayDeltaPercentage": "-100%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/extensions/TransportHttp/TransportHttp.js",
-          "value": 4399,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 4399,
-          "displayValue": "4.3KiB"
-        }
-      ]
-    },
-    {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/entrypoints/presets/_minimal.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/entrypoints/presets/_minimal.js",
-      "biggerIsBetter": false,
-      "changed": true,
-      "runs": [
-        {
-          "value": 0,
-          "displayValue": "0B",
-          "delta": -120,
-          "deltaPercentage": -100,
-          "displayDelta": "-120B",
-          "displayDeltaPercentage": "-100%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/entrypoints/presets/_minimal.js",
-          "value": 120,
-          "chunkIds": [
-            "ae35f81"
-          ],
-          "originalValue": 120,
-          "displayValue": "120B"
-        }
-      ]
-    },
-    {
-      "key": "./minimal/main.ts",
-      "label": "./minimal/main.ts",
-      "biggerIsBetter": false,
-      "changed": true,
-      "runs": [
-        {
-          "value": 0,
-          "displayValue": "0B",
-          "delta": -47,
-          "deltaPercentage": -100,
-          "displayDelta": "-47B",
-          "displayDeltaPercentage": "-100%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "./minimal/main.ts",
+          "name": "./bare/main.ts",
           "value": 47,
           "chunkIds": [
-            "ae35f81"
+            "74d2eb0"
           ],
           "originalValue": 47,
           "displayValue": "47B"
@@ -2961,25 +1976,24 @@
       "key": "graffle",
       "label": "graffle",
       "biggerIsBetter": false,
-      "changed": true,
+      "changed": false,
       "runs": [
         {
           "name": "graffle",
           "path": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle",
-          "value": 62249,
-          "displayValue": "60.79KiB",
-          "delta": -37598,
-          "deltaPercentage": -37.65561309,
-          "displayDelta": "-36.72KiB",
-          "displayDeltaPercentage": "-37.66%",
-          "deltaType": "POSITIVE",
-          "regression": false
+          "value": 62438,
+          "displayValue": "60.97KiB",
+          "delta": 0,
+          "deltaPercentage": 0,
+          "displayDelta": "0B",
+          "displayDeltaPercentage": "0%",
+          "deltaType": "NO_CHANGE"
         },
         {
           "name": "graffle",
           "path": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle",
-          "value": 99847,
-          "displayValue": "97.51KiB"
+          "value": 62438,
+          "displayValue": "60.97KiB"
         }
       ]
     },
@@ -2987,25 +2001,24 @@
       "key": "graphql:@0no-co/graphql.web",
       "label": "graphql:@0no-co/graphql.web",
       "biggerIsBetter": false,
-      "changed": true,
+      "changed": false,
       "runs": [
         {
           "name": "@0no-co/graphql.web",
           "path": "./node_modules/.pnpm/@0no-co+graphql.web@1.0.12_graphql@16.10.0/node_modules/@0no-co/graphql.web",
           "value": 11569,
           "displayValue": "11.3KiB",
-          "delta": -3801,
-          "deltaPercentage": -24.72999349,
-          "displayDelta": "-3.71KiB",
-          "displayDeltaPercentage": "-24.73%",
-          "deltaType": "POSITIVE",
-          "regression": false
+          "delta": 0,
+          "deltaPercentage": 0,
+          "displayDelta": "0B",
+          "displayDeltaPercentage": "0%",
+          "deltaType": "NO_CHANGE"
         },
         {
           "name": "@0no-co/graphql.web",
           "path": "./node_modules/.pnpm/@0no-co+graphql.web@1.0.12_graphql@16.10.0/node_modules/@0no-co/graphql.web",
-          "value": 15370,
-          "displayValue": "15.01KiB"
+          "value": 11569,
+          "displayValue": "11.3KiB"
         }
       ]
     },
@@ -3013,54 +2026,29 @@
       "key": "graphql",
       "label": "graphql",
       "biggerIsBetter": false,
-      "changed": true,
+      "changed": false,
       "runs": [
         {
           "name": "graphql",
           "path": "./node_modules/.pnpm/graphql@16.10.0/node_modules/graphql",
           "value": 2238,
           "displayValue": "2.19KiB",
-          "delta": -2912,
-          "deltaPercentage": -56.54368932,
-          "displayDelta": "-2.84KiB",
-          "displayDeltaPercentage": "-56.54%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
+          "delta": 0,
+          "deltaPercentage": 0,
+          "displayDelta": "0B",
+          "displayDeltaPercentage": "0%",
+          "deltaType": "NO_CHANGE"
         },
         {
           "name": "graphql",
           "path": "./node_modules/.pnpm/graphql@16.10.0/node_modules/graphql",
-          "value": 5150,
-          "displayValue": "5.03KiB"
-        }
-      ]
-    },
-    {
-      "key": "es-toolkit",
-      "label": "es-toolkit",
-      "biggerIsBetter": false,
-      "changed": true,
-      "runs": [
-        {
-          "value": 0,
-          "displayValue": "0B",
-          "delta": -421,
-          "deltaPercentage": -100,
-          "displayDelta": "-421B",
-          "displayDeltaPercentage": "-100%",
-          "deltaType": "HIGH_POSITIVE",
-          "regression": false
-        },
-        {
-          "name": "es-toolkit",
-          "path": "./node_modules/.pnpm/es-toolkit@1.30.1/node_modules/es-toolkit",
-          "value": 421,
-          "displayValue": "421B"
+          "value": 2238,
+          "displayValue": "2.19KiB"
         }
       ]
     }
   ],
-  "createdAt": "2024-12-30T04:22:44.556Z",
+  "createdAt": "2024-12-31T03:36:27.814Z",
   "version": "4.17.0",
   "runs": [
     {
@@ -3071,7 +2059,7 @@
             "name": "main"
           }
         ],
-        "builtAt": "2024-12-30T04:22:44.540Z",
+        "builtAt": "2024-12-31T03:36:27.800Z",
         "hash": ""
       },
       "internalBuildNumber": 2
@@ -3080,11 +2068,11 @@
       "webpack": {
         "chunks": [
           {
-            "id": "ae35f81",
+            "id": "74d2eb0",
             "name": "main"
           }
         ],
-        "builtAt": "2024-12-30T04:18:12.528Z",
+        "builtAt": "2024-12-31T03:33:28.365Z",
         "hash": ""
       },
       "internalBuildNumber": 1
@@ -3093,25 +2081,23 @@
   "summary": {
     "webpack": [
       {
-        "value": 27442,
-        "displayValue": "26.8KiB",
-        "delta": -16071,
-        "deltaPercentage": -36.9337899,
-        "displayDelta": "-15.69KiB",
-        "displayDeltaPercentage": "-36.93%",
-        "deltaType": "POSITIVE",
-        "regression": false,
+        "value": 27512,
+        "displayValue": "26.87KiB",
+        "delta": 0,
+        "deltaPercentage": 0,
+        "displayDelta": "0B",
+        "displayDeltaPercentage": "0%",
+        "deltaType": "NO_CHANGE",
         "label": "Bundle Size"
       },
       {
-        "value": 27442,
-        "displayValue": "26.8KiB",
-        "delta": -16071,
-        "deltaPercentage": -36.9337899,
-        "displayDelta": "-15.69KiB",
-        "displayDeltaPercentage": "-36.93%",
-        "deltaType": "POSITIVE",
-        "regression": false,
+        "value": 27512,
+        "displayValue": "26.87KiB",
+        "delta": 0,
+        "deltaPercentage": 0,
+        "displayDelta": "0B",
+        "displayDeltaPercentage": "0%",
+        "deltaType": "NO_CHANGE",
         "label": "Initial JS"
       },
       {
@@ -3125,24 +2111,24 @@
         "label": "Initial CSS"
       },
       {
-        "value": 100,
-        "displayValue": "100%",
-        "delta": 100,
-        "deltaPercentage": 100,
-        "displayDelta": "+100%",
-        "displayDeltaPercentage": "+100%",
-        "deltaType": "CHANGE",
+        "value": 0,
+        "displayValue": "0%",
+        "delta": 0,
+        "deltaPercentage": 0,
+        "displayDelta": "0%",
+        "displayDeltaPercentage": "0%",
+        "deltaType": "NO_CHANGE",
         "regression": null,
         "label": "Cache Invalidation"
       },
       {
-        "value": 51,
-        "displayValue": "51",
-        "delta": -33,
-        "deltaPercentage": -39.28571429,
-        "displayDelta": "-33",
-        "displayDeltaPercentage": "-39.29%",
-        "deltaType": "CHANGE",
+        "value": 50,
+        "displayValue": "50",
+        "delta": 0,
+        "deltaPercentage": 0,
+        "displayDelta": "0",
+        "displayDeltaPercentage": "0%",
+        "deltaType": "NO_CHANGE",
         "regression": null,
         "label": "Modules"
       },
@@ -3192,12 +2178,11 @@
       {
         "value": 3,
         "displayValue": "3",
-        "delta": -1,
-        "deltaPercentage": -25,
-        "displayDelta": "-1",
-        "displayDeltaPercentage": "-25%",
-        "deltaType": "POSITIVE",
-        "regression": false,
+        "delta": 0,
+        "deltaPercentage": 0,
+        "displayDelta": "0",
+        "displayDeltaPercentage": "0%",
+        "deltaType": "NO_CHANGE",
         "label": "Packages"
       },
       {
@@ -3217,17 +2202,16 @@
       "assetsSizeTotal": {
         "type": "info",
         "data": {
-          "text": "Bundle Size — 26.8KiB (-36.93%).",
-          "md": "*Bundle Size* — *26.8KiB* (*-36.93%*).",
+          "text": "Bundle Size — 26.87KiB (0%).",
+          "md": "*Bundle Size* — *26.87KiB* (*0%*).",
           "info": {
-            "value": 27442,
-            "displayValue": "26.8KiB",
-            "delta": -16071,
-            "deltaPercentage": -36.9337899,
-            "displayDelta": "-15.69KiB",
-            "displayDeltaPercentage": "-36.93%",
-            "deltaType": "POSITIVE",
-            "regression": false
+            "value": 27512,
+            "displayValue": "26.87KiB",
+            "delta": 0,
+            "deltaPercentage": 0,
+            "displayDelta": "0B",
+            "displayDeltaPercentage": "0%",
+            "deltaType": "NO_CHANGE"
           }
         }
       }

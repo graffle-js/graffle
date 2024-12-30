@@ -1,4 +1,4 @@
-import { type ConfigInit } from '../client/Configuration/ConfigInit.js'
+import { type ConfigInit, type ConfigInitOutputEnvelopeLonghand } from '../client/Configuration/ConfigInit.js'
 import { type OutputConfig, type OutputConfigDefault, outputConfigDefault } from '../client/Configuration/Output.js'
 import type { Extension } from '../extension/__.js'
 import type { Anyware } from '../lib/anyware/__.js'
@@ -137,6 +137,47 @@ export type DefaultName = GlobalRegistry.DefaultClientName
 export const defaultName = GlobalRegistry.defaultClientName
 
 export namespace Context {
+  export const updateContextConfigInit = (
+    context: Context,
+    configInit: ConfigInit,
+  ): Context => {
+    const outputEnvelopeLonghand: ConfigInitOutputEnvelopeLonghand | undefined =
+      typeof configInit.output?.envelope === `object`
+        ? { enabled: true, ...configInit.output.envelope }
+        : typeof configInit.output?.envelope === `boolean`
+        ? { enabled: configInit.output.envelope }
+        : undefined
+
+    const newConfig = {
+      name: configInit.name ?? context?.name ?? defaultName,
+      schemaMap: configInit.schemaMap ?? context.schemaMap,
+      output: {
+        defaults: {
+          errorChannel: configInit.output?.defaults?.errorChannel ?? context.output.defaults.errorChannel,
+        },
+        envelope: {
+          enabled: outputEnvelopeLonghand?.enabled ?? context.output.envelope.enabled,
+          errors: {
+            execution: outputEnvelopeLonghand?.errors?.execution ?? context.output.envelope.errors.execution,
+            other: outputEnvelopeLonghand?.errors?.other ?? context.output.envelope.errors.other,
+            // @ts-expect-error
+            schema: outputEnvelopeLonghand?.errors?.schema ?? context.output.envelope.errors.schema,
+          },
+        },
+        errors: {
+          execution: configInit.output?.errors?.execution ?? context.output.errors.execution,
+          other: configInit.output?.errors?.other ?? context.output.errors.other,
+          // @ts-expect-error conditional type
+          schema: configInit.output?.errors?.schema ?? context.output.errors.schema,
+        },
+      },
+    }
+
+    return Context.withTypeLevel({
+      ...context,
+      ...newConfig,
+    })
+  }
   export const withTypeLevel = (contextValueLevel: ContextValueLevel): Context => contextValueLevel as any
 
   export namespace States {
