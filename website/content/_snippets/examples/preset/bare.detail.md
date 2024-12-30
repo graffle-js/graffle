@@ -22,7 +22,7 @@ const graffle1 = GraffleBare.create()
  * is not available to us. Nor are the request methods.
  */
 
-const _t: never = graffle1.transport
+const _e0: never = graffle1.transport
 const _e1: 'Error: You cannot send requests yet. You must setup a transport.' = graffle1.gql
 
 /**
