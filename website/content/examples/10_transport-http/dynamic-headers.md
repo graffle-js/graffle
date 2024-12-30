@@ -51,7 +51,7 @@ await graffle.gql`{ pokemons { name } }`.send()
   headers: Headers {
     accept: 'application/graphql-response+json; charset=utf-8, application/json; charset=utf-8',
     'content-type': 'application/json',
-    'x-sent-at-time': '1735104630184'
+    'x-sent-at-time': '1735567502949'
   },
   method: 'post',
   url: 'http://localhost:3000/graphql',

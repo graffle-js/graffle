@@ -14,6 +14,9 @@ export type UseMethod<
   $Extension_
 >
 
+// todo: type to use multiple to reduce type instantiation
+// useful for presets
+
 // dprint-ignore
 export type UseOneReducer<
   $Context extends Context,
