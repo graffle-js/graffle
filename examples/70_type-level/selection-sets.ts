@@ -107,7 +107,7 @@ type _ = [
 
 const graffle = Graffle.create()
 
-const getPokemonsLike = async (filter: Graffle.SelectionSets.Query.pokemons$Arguments['filter']) =>
+const getPokemonsLike = (filter: Graffle.SelectionSets.Query.pokemons$Arguments['filter']) =>
   graffle.query.pokemons({
     $: { filter },
     hp: true,
