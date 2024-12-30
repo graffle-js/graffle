@@ -20,9 +20,7 @@ export type Client<
 > =
   & ClientBase<$Context, $Extension>
   & $Extension
-  & (
-    Extension.ApplyAndMergeBuilderExtensions<$Context['extensions'], $Context>
-  )
+  & Extension.ApplyAndMergeBuilderExtensions<$Context['extensions'], $Context>
 
 export interface ClientBase<
   $Context extends Context,
