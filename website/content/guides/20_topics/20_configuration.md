@@ -1,4 +1,4 @@
-# With
+# Configuration
 
 <!--@include: @/_snippets/example-links/with.md-->
 

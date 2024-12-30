@@ -1,32 +1,21 @@
----
-title: HTTP
----
-
-# HTTP Transport
-
-Graffle has the concept of "transports". A transport is how the request reaches the GraphQL schema for execution. This section is about the "http" transport.
+# Transport HTTP
 
 <!--@include: @/_snippets/example-links/transport-http.md-->
 
-## Overview
+## Getting Started
 
-The `http` transport implements the ["GraphQL Over HTTP" specification](https://github.com/graphql/graphql-over-http). This transport is used when you instantiate Graffle with a `URL` (or `string`) type for `schema`:
+This extension adds an `http` transport to your client. It implements the ["GraphQL Over HTTP" specification](https://github.com/graphql/graphql-over-http).
 
-::: code-group
+This extension is included in [presets](../../../website/content/guides/20_topics/presets.md) `minimal` and `basic`. Therefore we show usage here with the `bare` preset which does not include this extension.
 
-```ts [URL]
-Graffle.create().transport({
-  url: new URL('https://api.service.io/graphql'),
-})
-```
+```ts
+import { TransportHttp } from 'graffle/extensions/transport-http'
+import { GraffleBare } from 'graffle/presets/bare'
 
-```ts [string]
-Graffle.create().transport({
+GraffleBare.create().use(TransportHttp()).transport({
   url: 'https://api.service.io/graphql',
 })
 ```
-
-:::
 
 ## Configuration
 

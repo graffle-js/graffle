@@ -1,4 +1,4 @@
-# GQL
+# Requests
 
 <!--@include: @/_snippets/example-links/gql.md-->
 

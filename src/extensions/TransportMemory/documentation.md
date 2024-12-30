@@ -1,15 +1,8 @@
----
-aside: false
-title: Memory
----
-
-# Memory Transport
-
-Graffle has the concept of "transports". A transport is how the request reaches the GraphQL schema for execution. This section is about the "memory" transport.
+# Transport Memory
 
 <!--@include: @/_snippets/example-links/transport-memory.md-->
 
-## Overview
+## Getting Started
 
 The `memory` transport works with in-memory schemas. It ultimately invokes [`execute`](https://graphql.org/graphql-js/execution/) from the `graphql` package. This transport is used when you instantiate Graffle with a [`GraphQLSchema`](https://graphql.org/graphql-js/type/#schema).
 

@@ -4,7 +4,9 @@ title: Getting Started
 
 # Getting Started
 
-This short guide will take you from basic usage to use of the optional document builder. Node is used but Deno and Bun users should be able to follow along as well.
+This short guide will take you from basic usage to use of the optional document builder.
+
+Node with pnpm is used here but any package manager as well as Deno and Bun users should be able to follow along.
 
 ## 🏡 Setup Your Project
 
@@ -18,8 +20,8 @@ pnpm init
 
 We're going to use TypeScript for this project but you don't have to.
 
-- [`tsx`](https://github.com/privatenumber/tsx) makes it to easy run TypeScript files.
-- [`@tsconfig/strictest`](https://github.com/tsconfig/bases/blob/main/bases/strictest.json) is optional but makes sure we have a good default settings.
+- [`tsx`](https://github.com/privatenumber/tsx) makes running TypeScript files easy.
+- [`@tsconfig/strictest`](https://github.com/tsconfig/bases/blob/main/bases/strictest.json) makes having strict TypeScript settings easy.
 
 ```sh
 pnpm add --save-dev typescript tsx @tsconfig/strictest
@@ -107,9 +109,9 @@ console.log(data)
 
 You could stop here if you want, but if you're curious about Graffle's document builder (aka. "query builder") continue on!
 
-The document builder is an alternative to the GraphQL document syntax. With it, you express GraphQL documents in JavaScript. And thanks to Graffle's powerful types all inputs (GraphQL arguments) and outputs (execution results) are type safe ✨.
+The document builder is an alternative to the GraphQL document syntax. With it, you express GraphQL documents in JavaScript. And thanks to Graffle's powerful types all inputs (GraphQL arguments) and outputs (execution results) are type safe ✨. The document builder is a Graffle extension. By not hardcoding this feature into core, we keep Graffle lean and bundle sizes smaller for users that are not leveraging it.
 
-To access the document builder you must first perform a code generation step. When you installed `graffle` you also gained access to a command line interface (CLI) in your project. Use it to generate code that will augment your client.
+To access the document builder you have to use the extension _and_ perform a code generation step. Let's begin with code generation. When you installed `graffle` you also gained access to a command line interface (CLI) in your project. Use it now to generate code that will augment your client.
 
 ```sh
 pnpm graffle --schema https://countries.trevorblades.com/graphql
@@ -124,19 +126,21 @@ You will see a directory named `graffle` has been created in the current working
 |
 ```
 
-Let's rewrite our code to use the document builder. You should notice some new methods in your IDE like `.document` and `.query.countries`.
+Note let's use the extension and rewrite our GraphQL document using the document builder. You should notice some new client methods in your IDE like `.document` and `.query.countries`.
 
 ```ts
 // todo twoslash
 // @filename: main.ts
 
 import { Graffle } from 'graffle'
+import { DocumentBuilder } from 'graffle/extensions/document-builder'
 
 const graffle = Graffle
   .create()
   .transport({
     url: 'https://countries.trevorblades.com/graphql',
   })
+  .use(DocumentBuilder())
 
 const data = await graffle.document({
   query: {
@@ -222,10 +226,12 @@ import { type Select } from './graffle/_.js'
 type Continent = Select.Continent<{ name: true }>
 ```
 
+Refer to the [Selection Sets Example](/examples/70_type-level/selection-sets.md) for more detail about type level features the generator provides you.
+
 :::
 
 ## 🏔️ Conclusion
 
-Hopefully you found this introduction has been useful. Graffle has a lot more to offer than shown so far such as extensions, anyware, custom scalar support, how every GraphQL query language feature is realized in the document builder, and more. Peruse these docs to learn about it all.
+We hope this introductory tutorial has been useful for you. Graffle has many more features to discover, such as extensions, anyware, custom scalar support, how every GraphQL query language feature is realized in the document builder, and more. Peruse these docs to learn about it all.
 
-Thanks for taking time to learn Graffle. Let us know how your experience goes as your begin to build with it!
+Thanks for taking time to learn Graffle. Let us know how your experience goes as your begin to build your projects with it!

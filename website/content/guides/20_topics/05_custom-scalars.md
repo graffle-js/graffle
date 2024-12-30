@@ -2,7 +2,7 @@
 
 <!--@include: @/_snippets/example-links/custom-scalar.md-->
 
-Graffle makes sending and receiving GraphQL custom scalars easy at both type and term (runtime) levels.
+Graffle makes sending and receiving GraphQL custom scalars easy at both type and value levels.
 
 ## Getting Started
 
