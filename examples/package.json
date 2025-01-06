@@ -7,8 +7,8 @@
     "gen:graffle": "pnpm graffle --defaultSchemaUrl http://localhost:3000/graphql --schema ../tests/_/schemas/pokemon/schema.graphql --output ./$/graffle"
   },
   "dependencies": {
-    "@opentelemetry/sdk-trace-base": "^1.29.0",
-    "@opentelemetry/sdk-trace-node": "^1.29.0",
+    "@opentelemetry/sdk-trace-base": "^1.30.0",
+    "@opentelemetry/sdk-trace-node": "^1.30.0",
     "graffle": "file:..",
     "graphql": "^16.10.0",
     "typescript": "^5.7.2"
