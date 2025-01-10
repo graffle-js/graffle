@@ -298,7 +298,10 @@ const createConfigSchema = async (
       const graffle = Graffle
         .create()
         .use(introspection)
-        .transport({ url: input.schema.url })
+        .transport({
+          url: input.schema.url,
+          headers: input.schema.headers,
+        })
       // todo introspection method should not be available without a transport
       const data = await graffle.introspect()
       if (!data) {

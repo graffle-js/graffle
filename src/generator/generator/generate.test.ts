@@ -2,7 +2,8 @@ import { globby } from 'globby'
 import * as Memfs from 'memfs'
 import { readFile } from 'node:fs/promises'
 import * as Path from 'node:path'
-import { describe, expect, test } from 'vitest'
+import { describe, expect } from 'vitest'
+import { test } from '../../../tests/_/helpers.js'
 import type { ConfigInitSchemaSdl } from '../_.js'
 import { generate } from './generate.js'
 
@@ -95,4 +96,17 @@ test(`custom scalars module results in client prefilling those custom scalars`, 
   })
   const ScalarTs = Memfs.fs.readFileSync(`./graffle/modules/scalar.ts`, `utf8`)
   expect(ScalarTs).toMatchSnapshot()
+})
+
+test(`custom headers can be set on introspection request`, async ({ fetch }) => {
+  await generate({
+    schema: {
+      type: `url`,
+      url: new URL(`https://example.com`),
+      headers: {
+        'x-custom': `test`,
+      },
+    },
+  }).catch(() => {/* ignore */})
+  expect(fetch.mock.calls[0]?.[0].headers.get(`x-custom`)).toBe(`test`)
 })

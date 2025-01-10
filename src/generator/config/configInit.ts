@@ -46,6 +46,10 @@ export interface ConfigInitSchemaUrl {
   type: `url`
   url: URL
   options?: InputIntrospectionOptions
+  /**
+   * HTTP headers that will be sent with the introspection request.
+   */
+  headers?: HeadersInit
 }
 
 export type ConfigInitSchema =
@@ -53,6 +57,7 @@ export type ConfigInitSchema =
   | ConfigInitSchemaInstance
   | ConfigInitSchemaSdlFile
   | ConfigInitSchemaUrl
+
 export interface ConfigInit {
   /**
    * File system API to use.
