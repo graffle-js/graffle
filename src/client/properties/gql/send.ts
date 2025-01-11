@@ -1,6 +1,5 @@
 import type { Grafaid } from '../../../lib/grafaid/__.js'
 import { isString, type SimplifyNullable } from '../../../lib/prelude.js'
-import type { Context } from '../../../types/context.js'
 import type { HandleOutput } from '../../handleOutput.js'
 
 // dprint-ignore
@@ -21,7 +20,7 @@ type SendArguments__<$Variables extends Grafaid.Document.Typed.Variables, $Varia
 		                                      never
 
 // dprint-ignore
-export interface DocumentController<$Context extends Context, $TypedDocument extends Grafaid.Document.Typed.TypedDocumentLike> {
+export interface DocumentController<$Context, $TypedDocument extends Grafaid.Document.Typed.TypedDocumentLike> {
   /**
    * Send the document. You can pass an operation name and variables.
    *

@@ -17,7 +17,7 @@ import type { ScalarsWildcard } from './ScalarsWildcard.js'
 // dprint-ignore
 export type OutputObjectLike<
   $SelectionSet extends object,
-  $Schema extends Schema,
+  $Schema,
   $Node extends Schema.OutputObjectLike
 > =
     & OutputObjectLike_<$SelectionSet, $Schema, $Node>
@@ -26,7 +26,7 @@ export type OutputObjectLike<
 // dprint-ignore
 type OutputObjectLike_<
   $SelectionSet extends object,
-  $Schema extends Schema,
+  $Schema,
   $Node extends Schema.OutputObjectLike
 > =
     Select.SelectScalarsWildcard.IsSelectScalarsWildcard<$SelectionSet> extends true
@@ -38,7 +38,11 @@ type OutputObjectLike_<
         & Alias<$Schema, $Node, $SelectionSet>
 
 // dprint-ignore
-type OtherKeys<$SelectionSet, $Schema extends Schema, $Node extends Schema.OutputObjectLike> =
+type OtherKeys<
+  $SelectionSet,
+  $Schema,
+  $Node extends Schema.OutputObjectLike,
+> =
   {
     [
       $Field in keyof $SelectionSet as
@@ -93,7 +97,11 @@ type PickApplicableFieldKeys<$SelectionSet> = StringKeyof<
   }
 >
 // dprint-ignore
-type InlineFragmentKeys<$SelectionSet extends object, $Schema extends Schema, $Node extends Schema.OutputObjectLike> =
+type InlineFragmentKeys<
+  $SelectionSet extends object,
+  $Schema,
+  $Node extends Schema.OutputObjectLike,
+> =
   InlineFragmentKey_<
     AssertExtendsObject<
       GetOrNever<$SelectionSet, Select.InlineFragment.Key>
@@ -103,7 +111,11 @@ type InlineFragmentKeys<$SelectionSet extends object, $Schema extends Schema, $N
   >
 
 // dprint-ignore
-type InlineFragmentKey_<$SelectionSet extends object, $Schema extends Schema, $Node extends Schema.OutputObjectLike> =
+type InlineFragmentKey_<
+  $SelectionSet extends object,
+  $Schema,
+  $Node extends Schema.OutputObjectLike,
+> =
   IsNever<$SelectionSet> extends true
     ? {}
     : IsNeverViaDirective<$SelectionSet> extends true

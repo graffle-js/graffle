@@ -4,7 +4,11 @@ import type { Select } from '../Select/__.js'
 import type { OutputObjectLike } from './OutputObjectLike.js'
 
 // dprint-ignore
-export type InlineFragmentTypeConditional<$SelectionSet, $Node extends Schema.InlineFragmentTypeConditionTypes, $Schema extends Schema> =
+export type InlineFragmentTypeConditional<
+  $SelectionSet,
+  $Node extends Schema.InlineFragmentTypeConditionTypes,
+  $Schema,
+> =
   $Node extends any // force distribution
     // ? $Node extends Schema.Interface
     //   ? {

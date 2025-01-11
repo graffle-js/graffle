@@ -3,8 +3,10 @@ import type { Context } from '../context.js'
 
 export type SimplifyWithEmptyContext<T> = Simplify<Context.States.Empty, T>
 
-export type Simplify<$Context extends Context, T> = _SimplifyExcept<
+export type Simplify<$Context, T> = _SimplifyExcept<
+  // @ts-expect-error: No $Context constraint to avoid "compare depth limit"
   | $Context['typeHookRequestResultDataTypes']
+  // @ts-expect-error: No $Context constraint to avoid "compare depth limit"
   | $Context['scalars']['typesDecoded'],
   T
 >

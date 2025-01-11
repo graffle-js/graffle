@@ -3,7 +3,7 @@ import type { OutputField } from './OutputField.js'
 
 export type ScalarsWildcard<
   $SelectionSet,
-  $Schema extends Schema,
+  $Schema,
   $Node extends Schema.OutputObjectLike,
 > = {
   [$Key in keyof PickScalarFields<$Node>]: OutputField<$SelectionSet, $Node['fields'][$Key], $Schema>

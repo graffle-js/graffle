@@ -22,7 +22,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     () => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         { __typename: 'Query' },
         '__typename'
@@ -36,7 +36,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.InputObjectNested<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { InputObjectNested: $SelectionSet },
@@ -56,7 +56,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { InputObjectNestedNonNull: $SelectionSet },
@@ -75,7 +75,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.abcEnum<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { abcEnum: $SelectionSet },
@@ -95,7 +95,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { argInputObjectCircular: $SelectionSet },
@@ -112,7 +112,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.date<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { date: $SelectionSet },
@@ -129,7 +129,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateArg<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { dateArg: $SelectionSet },
@@ -146,7 +146,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateArgInputObject<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { dateArgInputObject: $SelectionSet },
@@ -163,7 +163,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateArgList<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { dateArgList: $SelectionSet },
@@ -180,7 +180,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateArgNonNull<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { dateArgNonNull: $SelectionSet },
@@ -197,7 +197,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateArgNonNullList<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { dateArgNonNullList: $SelectionSet },
@@ -217,7 +217,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { dateArgNonNullListNonNull: $SelectionSet },
@@ -234,7 +234,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateInterface1<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { dateInterface1: $SelectionSet },
@@ -251,7 +251,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateList<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { dateList: $SelectionSet },
@@ -268,7 +268,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateListList<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { dateListList: $SelectionSet },
@@ -285,7 +285,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateListNonNull<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { dateListNonNull: $SelectionSet },
@@ -302,7 +302,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateNonNull<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { dateNonNull: $SelectionSet },
@@ -319,7 +319,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateObject1<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { dateObject1: $SelectionSet },
@@ -336,7 +336,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateUnion<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { dateUnion: $SelectionSet },
@@ -353,7 +353,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.error<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { error: $SelectionSet },
@@ -370,7 +370,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.id<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { id: $SelectionSet },
@@ -387,7 +387,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.idNonNull<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { idNonNull: $SelectionSet },
@@ -404,7 +404,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.$interface<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { interface: $SelectionSet },
@@ -424,7 +424,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { interfaceHierarchyChildA: $SelectionSet },
@@ -444,7 +444,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { interfaceHierarchyChildB: $SelectionSet },
@@ -464,7 +464,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { interfaceHierarchyGrandparents: $SelectionSet },
@@ -484,7 +484,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { interfaceHierarchyParents: $SelectionSet },
@@ -501,7 +501,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.interfaceNonNull<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { interfaceNonNull: $SelectionSet },
@@ -518,7 +518,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.interfaceWithArgs<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { interfaceWithArgs: $SelectionSet },
@@ -535,7 +535,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.listInt<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { listInt: $SelectionSet },
@@ -552,7 +552,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.listIntNonNull<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { listIntNonNull: $SelectionSet },
@@ -569,7 +569,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.listListInt<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { listListInt: $SelectionSet },
@@ -586,7 +586,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.listListIntNonNull<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { listListIntNonNull: $SelectionSet },
@@ -603,7 +603,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.lowerCaseUnion<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { lowerCaseUnion: $SelectionSet },
@@ -620,7 +620,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.$object<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { object: $SelectionSet },
@@ -637,7 +637,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.objectList<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { objectList: $SelectionSet },
@@ -654,7 +654,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.objectListNonNull<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { objectListNonNull: $SelectionSet },
@@ -671,7 +671,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.objectNested<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { objectNested: $SelectionSet },
@@ -688,7 +688,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.objectNonNull<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { objectNonNull: $SelectionSet },
@@ -705,7 +705,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.objectWithArgs<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { objectWithArgs: $SelectionSet },
@@ -722,7 +722,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.result<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { result: $SelectionSet },
@@ -739,7 +739,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.resultNonNull<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { resultNonNull: $SelectionSet },
@@ -756,7 +756,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.$string<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { string: $SelectionSet },
@@ -773,7 +773,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.stringWithArgEnum<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { stringWithArgEnum: $SelectionSet },
@@ -793,7 +793,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { stringWithArgInputObject: $SelectionSet },
@@ -813,7 +813,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { stringWithArgInputObjectEnum: $SelectionSet },
@@ -833,7 +833,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { stringWithArgInputObjectRequired: $SelectionSet },
@@ -852,7 +852,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.stringWithArgs<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { stringWithArgs: $SelectionSet },
@@ -869,7 +869,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.stringWithListArg<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { stringWithListArg: $SelectionSet },
@@ -889,7 +889,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { stringWithListArgRequired: $SelectionSet },
@@ -906,7 +906,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.stringWithRequiredArg<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { stringWithRequiredArg: $SelectionSet },
@@ -923,7 +923,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.unionFooBar<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { unionFooBar: $SelectionSet },
@@ -940,7 +940,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.unionFooBarNonNull<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { unionFooBarNonNull: $SelectionSet },
@@ -957,7 +957,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.unionFooBarWithArgs<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { unionFooBarWithArgs: $SelectionSet },
@@ -974,7 +974,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.unionObject<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { unionObject: $SelectionSet },
@@ -991,7 +991,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.unionObjectNonNull<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { unionObjectNonNull: $SelectionSet },
@@ -1023,7 +1023,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     $Context,
     () => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         { __typename: 'Mutation' },
         '__typename'
@@ -1037,7 +1037,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.id<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { id: $SelectionSet },
@@ -1054,7 +1054,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.idNonNull<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { idNonNull: $SelectionSet },

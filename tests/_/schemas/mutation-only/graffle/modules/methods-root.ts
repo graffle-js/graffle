@@ -22,7 +22,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     $Context,
     () => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         { __typename: 'Mutation' },
         '__typename'
@@ -36,7 +36,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.id<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { id: $SelectionSet },
@@ -53,7 +53,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.idNonNull<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { idNonNull: $SelectionSet },

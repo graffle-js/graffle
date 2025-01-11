@@ -69,7 +69,7 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
           () =>
             Promise<
               & (null | {})
-              & ${identifiers.$$Utilities}.HandleOutputGraffleRootField<
+              & ${identifiers.$$Utilities}.HandleOutputDocumentBuilderRootField<
                   $Context,
                   { __typename: '${node.name}' },
                   '__typename'
@@ -99,7 +99,7 @@ const renderFieldMethods = createCodeGenerator<{ node: Grafaid.Schema.ObjectType
           <$SelectionSet>(selectionSet${isOptional ? `?` : ``}: ${identifiers.$$Utilities}.Exact<$SelectionSet, ${identifiers.$$SelectionSets}.${renderName(node)}.${renderName(field)}<$Context['scalars']>>) =>
             Promise<
               & (null | {})
-              & ${identifiers.$$Utilities}.HandleOutputGraffleRootField<
+              & ${identifiers.$$Utilities}.HandleOutputDocumentBuilderRootField<
                   $Context,
                   ${identifiers.$$Utilities}.DocumentBuilder.InferResult.Operation${capitalizeFirstLetter(operationType)}<{ ${field.name}: $SelectionSet}, ${identifiers.$$Schema}.${identifiers.Schema}<$Context['scalars']>>,
                   '${field.name}'

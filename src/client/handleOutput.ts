@@ -21,6 +21,7 @@ import {
   type ErrorCategory,
   isOutputTraditionalGraphQLOutput,
   type OutputChannelConfig,
+  type OutputConfig,
   readErrorCategoryOutputChannel,
 } from './Configuration/Output.js'
 
@@ -94,82 +95,85 @@ export const handleOutput = (
  */
 
 // dprint-ignore
-export type HandleOutputGraffleRootField<$Context extends Context, $Data extends SomeObjectData, $RootFieldName extends string> =
-  HandleOutputGraffleRootField_Data<
-    ExcludeNull<
-      HandleOutput<
-        $Context,
-        RequestResult.Simplify<$Context, $Data>
-      >
-    >,
-    $RootFieldName
-  >
-
-// dprint-ignore
-type HandleOutputGraffleRootField_Data<$Output extends Error | SomeObjectData | GraffleExecutionResultEnvelope, $RootFieldName extends string> =
-  $Output extends Error | GraffleExecutionResultEnvelope
-    ? $Output
-    : GetOrNever<ExcludeNullAndUndefined<$Output>, $RootFieldName>
-
-// dprint-ignore
-export type HandleOutput<$Context extends Context, $Data extends SomeObjectData> =
+export type HandleOutput<
+  $Context,
+  $Data extends SomeObjectData,
+> =
   HandleOutput_Extensions<
     $Context,
     Envelope<
-      $Context,
+      // @ts-expect-error: No $Context constraint to avoid "compare depth limit"
+      $Context['output'],
       RequestResult.Simplify<$Context, $Data>
     >
   >
 
-type HandleOutput_Extensions<$Context extends Context, $Envelope extends GraffleExecutionResultEnvelope> =
-  HandleOutput_ErrorsReturn<
-    $Context,
+type HandleOutput_Extensions<
+  $Context,
+  $Envelope extends GraffleExecutionResultEnvelope,
+> = HandleOutput_ErrorsReturn<
+  // @ts-expect-error: No $Context constraint to avoid "compare depth limit"
+  $Context['output'],
+  // eslint-disable-next-line
+  // @ts-ignore fixme
+  Extension.TypeHooks.RunTypeHookOnRequestResult<$Context, {
+    result: $Envelope
     // eslint-disable-next-line
     // @ts-ignore fixme
-    Extension.TypeHooks.RunTypeHookOnRequestResult<$Context, {
-      result: $Envelope
-      // eslint-disable-next-line
-      // @ts-ignore fixme
-      registeredSchema: GlobalRegistry.GetOrDefault<$Context['name']>
-    }>['result']
-  >
+    registeredSchema: GlobalRegistry.GetOrDefault<$Context['name']>
+  }>['result']
+>
 
-type HandleOutput_ErrorsReturn<$Context extends Context, $Envelope extends GraffleExecutionResultEnvelope> =
-  | IfConfiguredGetOutputErrorReturns<$Context>
-  | HandleOutput_Envelope<$Context, $Envelope>
+type HandleOutput_ErrorsReturn<
+  $OutputConfig extends OutputConfig,
+  $Envelope extends GraffleExecutionResultEnvelope,
+> =
+  | IfConfiguredGetOutputErrorReturns<$OutputConfig>
+  | HandleOutput_Envelope<$OutputConfig, $Envelope>
 
 // dprint-ignore
-type HandleOutput_Envelope<$Context extends Context, $Envelope extends GraffleExecutionResultEnvelope> =
-  $Context['output']['envelope']['enabled'] extends true
+type HandleOutput_Envelope<
+  $OutputConfig extends OutputConfig,
+  $Envelope extends GraffleExecutionResultEnvelope,
+> =
+  $OutputConfig['envelope']['enabled'] extends true
     ? $Envelope
     : ExcludeUndefined<$Envelope['data']> // todo make data field not undefinable
 
 // dprint-ignore
-type IfConfiguredGetOutputErrorReturns<$Context extends Context> =
-  | (ConfigGetOutputError<$Context, 'execution'>  extends 'return'  ? GraphQLExecutionResultError   : never)
-  | (ConfigGetOutputError<$Context, 'other'>      extends 'return'  ? Anyware.ResultFailure : never)
+type IfConfiguredGetOutputErrorReturns<$OutputConfig extends OutputConfig> =
+  | (ConfigGetOutputError<$OutputConfig, 'execution'>  extends 'return'  ? GraphQLExecutionResultError   : never)
+  | (ConfigGetOutputError<$OutputConfig, 'other'>      extends 'return'  ? Anyware.ResultFailure : never)
 
 // dprint-ignore
-export type ConfigGetOutputError<$Context extends Context, $ErrorCategory extends ErrorCategory> =
-  $Context['output']['envelope']['enabled'] extends true
-    ? ConfigGetOutputEnvelopeErrorChannel<$Context, $ErrorCategory>
-    : ConfigResolveOutputErrorChannel<$Context, $Context['output']['errors'][$ErrorCategory]>
+export type ConfigGetOutputError<
+  $OutputConfig extends OutputConfig,
+  $ErrorCategory extends ErrorCategory,
+> =
+  $OutputConfig['envelope']['enabled'] extends true
+    ? ConfigGetOutputEnvelopeErrorChannel<$OutputConfig, $ErrorCategory>
+    : ConfigResolveOutputErrorChannel<$OutputConfig, $OutputConfig['errors'][$ErrorCategory]>
 
 // dprint-ignore
-type ConfigGetOutputEnvelopeErrorChannel<$Context extends Context, $ErrorCategory extends ErrorCategory> =
-  $Context['output']['envelope']['errors'][$ErrorCategory] extends true
+type ConfigGetOutputEnvelopeErrorChannel<
+  $OutputConfig extends OutputConfig,
+  $ErrorCategory extends ErrorCategory,
+> =
+  $OutputConfig['envelope']['errors'][$ErrorCategory] extends true
     ? false
-    : ConfigResolveOutputErrorChannel<$Context, $Context['output']['errors'][$ErrorCategory]>
+    : ConfigResolveOutputErrorChannel<$OutputConfig, $OutputConfig['errors'][$ErrorCategory]>
 
-type ConfigResolveOutputErrorChannel<$Context extends Context, $Channel extends OutputChannelConfig | false> =
-  $Channel extends 'default' ? $Context['output']['defaults']['errorChannel']
-    : $Channel extends false ? false
-    : $Channel
+type ConfigResolveOutputErrorChannel<
+  $OutputConfig extends OutputConfig,
+  $Channel extends OutputChannelConfig | false,
+> = $Channel extends 'default' ? $OutputConfig['defaults']['errorChannel']
+  : $Channel extends false ? false
+  : $Channel
 
 // dprint-ignore
 // todo use ObjMap for $Data
 export type Envelope<
-  $Context extends Context,
+  $OutputConfig extends OutputConfig,
   $Data = unknown,
   $Errors extends ReadonlyArray<Error> = ReadonlyArray<GraphQLError>,
 > =
@@ -182,7 +186,7 @@ export type Envelope<
     & (
         $Errors extends []
         ? {}
-        : IsEnvelopeWithoutErrors<$Context> extends true
+        : IsEnvelopeWithoutErrors<$OutputConfig> extends true
         ? {}
         : {
             errors?: ReadonlyArray<GraphQLError>
@@ -195,9 +199,43 @@ type ObjMap<T = unknown> = {
 }
 
 // dprint-ignore
-type IsEnvelopeWithoutErrors<$Context extends Context> =
-  $Context['output']['envelope']['enabled'] extends true
-    ? Values<$Context['output']['envelope']['errors']> extends false
+type IsEnvelopeWithoutErrors<$OutputConfig extends OutputConfig> =
+  $OutputConfig['envelope']['enabled'] extends true
+    ? Values<$OutputConfig['envelope']['errors']> extends false
       ? true
     : false
   : false
+
+// todo: this should be moved to the document builder extension:
+
+// dprint-ignore
+// export type HandleOutputDocumentBuilderRootField<
+//   $Context extends Context,
+//   $Data extends SomeObjectData,
+// > = 'ignore me for now'
+
+// dprint-ignore
+export type HandleOutputDocumentBuilderRootField<
+  $Context,
+  $Data extends SomeObjectData,
+  $RootFieldName extends string,
+> =
+  HandleOutputDocumentBuilderRootField_Data<
+    // @ts-expect-error: No $Context constraint to avoid "compare depth limit"
+    ExcludeNull<
+      HandleOutput<
+        $Context,
+        RequestResult.Simplify<$Context, $Data>
+      >
+    >,
+    $RootFieldName
+  >
+
+// dprint-ignore
+type HandleOutputDocumentBuilderRootField_Data<
+  $Output extends Error | SomeObjectData | GraffleExecutionResultEnvelope,
+  $RootFieldName extends string,
+> =
+  $Output extends Error | GraffleExecutionResultEnvelope
+    ? $Output
+    : GetOrNever<ExcludeNullAndUndefined<$Output>, $RootFieldName>

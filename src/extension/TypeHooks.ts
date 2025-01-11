@@ -98,7 +98,9 @@ export namespace OnRequestResult {
 export type RunTypeHookOnRequestResult<
   $Context extends Context,
   $Params extends OnRequestResult.Params,
-> = AssertExtends<
-  TypeFunction.CallPipeline<$Context['typeHookOnRequestResult'], $Params>,
-  OnRequestResult.Params
->
+> = TypeFunction.CallPipeline<$Context['typeHookOnRequestResult'], $Params>
+// todo remove this, it leads to "Excessive stack depth comparing types"
+// AssertExtends<
+//   TypeFunction.CallPipeline<$Context['typeHookOnRequestResult'], $Params>,
+//   OnRequestResult.Params
+// >

@@ -22,7 +22,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     () => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         { __typename: 'Query' },
         '__typename'
@@ -36,7 +36,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.id<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { id: $SelectionSet },
@@ -53,7 +53,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.idNonNull<$Context['scalars']>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { idNonNull: $SelectionSet },

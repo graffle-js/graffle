@@ -1,6 +1,10 @@
 export type { Simplify } from 'type-fest'
 export { createConstructorWithContext } from '../client/client.js'
-export type { ConfigGetOutputError, HandleOutput, HandleOutputGraffleRootField } from '../client/handleOutput.js'
+export type {
+  ConfigGetOutputError,
+  HandleOutput,
+  HandleOutputDocumentBuilderRootField,
+} from '../client/handleOutput.js'
 export { useReducer } from '../client/properties/use.js'
 export * from '../extensions/DocumentBuilder/__.js'
 export { type AssertExtendsObject, type Exact, type ExactNonEmpty, type UnionExpanded } from '../lib/prelude.js'

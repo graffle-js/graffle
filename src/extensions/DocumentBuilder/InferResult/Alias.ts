@@ -5,7 +5,7 @@ import type { OutputField } from './OutputField.js'
 
 // dprint-ignore
 export type Alias<
-	$Schema extends Schema,
+	$Schema,
 	$Node extends Schema.OutputObjectLike,
 	$SelectionSet,
 > =

@@ -6,15 +6,19 @@ import type { OutputObjectLike } from './OutputObjectLike.js'
 import type { Union } from './Union.js'
 
 // dprint-ignore
-export type OutputField<$SelectionSet, $Field extends Schema.OutputField, $Schema extends Schema> =
+export type OutputField<
+  $SelectionSet,
+  $Field extends Schema.OutputField,
+  $Schema,
+> =
   InlineType.Infer<
-     $Field['inlineType'],
-     FieldType<$Schema, Omit<$SelectionSet, '$'>, $Field['namedType']>
+    $Field['inlineType'],
+    FieldType<$Schema, Omit<$SelectionSet, '$'>, $Field['namedType']>
   >
 
 // dprint-ignore
 type FieldType<
-  $Schema extends Schema,
+  $Schema,
   $SelectionSet,
   $Node extends Schema.NamedOutputTypes,
 > = 
@@ -22,6 +26,7 @@ type FieldType<
                                                             ? OutputObjectLike<$SelectionSet, $Schema, $Node>
                                                             : TSErrorDescriptive<'FieldType', 'When $Node extends Schema.OutputObject then $SelectionSet must extend object', { $Type: $Node; $SelectionSet: $SelectionSet; $Schema:$Schema } > :
   $Node extends Schema.Scalar                            ? Schema.Scalar.GetDecoded<$Node> : // TODO use TS compiler API to extract this type at build time.
+  // @ts-expect-error: No $Schema constraint to avoid "compare depth limit"
   $Node extends Schema.Scalar.ScalarCodecless            ? Schema.Scalar.GetDecoded<GetCodecForCodecless<$Schema, $Node>> :
   $Node extends Schema.__typename                        ? $Node['value'] :
   $Node extends Schema.Enum                              ? $Node['membersUnion'] :
@@ -31,9 +36,11 @@ type FieldType<
 
 // dprint-ignore
 type GetCodecForCodecless<
-  $Schema extends Schema,
+  $Schema,
   $Node extends Schema.Scalar.ScalarCodecless
 > =
+  // @ts-expect-error: No $Schema constraint to avoid "compare depth limit"
   $Node['name'] extends keyof $Schema['scalarRegistry']['map']
+    // @ts-expect-error: No $Schema constraint to avoid "compare depth limit"
     ? $Schema['scalarRegistry']['map'][$Node['name']]
     : Schema.Scalar.String

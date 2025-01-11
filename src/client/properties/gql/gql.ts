@@ -7,13 +7,12 @@ import {
   type TemplateStringsArguments,
 } from '../../../lib/template-string.js'
 import type { RequestPipelineBase } from '../../../requestPipeline/RequestPipeline.js'
-import { type Context } from '../../../types/context.js'
 import { handleOutput } from '../../handleOutput.js'
 import { createProperties } from '../../helpers.js'
 import { type DocumentController, resolveSendArguments, type sendArgumentsImplementation } from './send.js'
 
 // dprint-ignore
-export interface gqlOverload<out $Context extends Context> {
+export interface gqlOverload<$Context> {
   <$Document extends Grafaid.Document.Typed.TypedDocumentLike>(document: $Document                            ): DocumentController<$Context, $Document>
   <$Document extends Grafaid.Document.Typed.TypedDocumentLike>(parts: TemplateStringsArray, ...args: unknown[]): DocumentController<$Context, $Document>
 }
