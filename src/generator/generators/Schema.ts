@@ -348,7 +348,7 @@ export const SchemaGenerator = createCodeGenerator(
         name: identifiers.Schema,
         parameters:
           `$Scalars extends ${identifiers.$$Utilities}.Schema.Scalar.Registry = ${identifiers.$$Scalar}.$Registry`,
-        extends: `$`,
+        extends: config.code.schemaInterfaceExtendsEnabled ? `$` : null,
         block: schema,
       }),
     )
