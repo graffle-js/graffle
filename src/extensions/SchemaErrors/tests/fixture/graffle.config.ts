@@ -21,5 +21,8 @@ export default Generator
       extensionTransportHttp: `../../../../entrypoints/extensions/transport-http/runtime.ts`,
       extensionDocumentBuilder: `../../../../entrypoints/extensions/document-builder/runtime.ts`,
     },
+    advanced: {
+      schemaInterfaceExtendsEnabled: true,
+    },
   })
   .use(SchemaErrors())

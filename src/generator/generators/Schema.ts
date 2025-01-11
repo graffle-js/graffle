@@ -87,8 +87,9 @@ const OutputObject = createCodeGenerator<{ type: Grafaid.Schema.ObjectType }>(({
   code(Code.tsInterface({
     tsDoc: getTsDocContents(config, type),
     name: type.name,
-    extends: `$.OutputObject`,
+    extends: config.code.schemaInterfaceExtendsEnabled ? `$.OutputObject` : null,
     block: {
+      kind: Code.string(Grafaid.Schema.TypeKind.Object),
       name: Code.string(type.name),
       fields: interfaceFields,
     },
@@ -107,8 +108,9 @@ const Enum = createCodeGenerator<{ type: Grafaid.Schema.EnumType }>(({ config, c
       tsDoc: getTsDocContents(config, type),
       export: true,
       name: type.name,
-      extends: `$.Enum`,
+      extends: config.code.schemaInterfaceExtendsEnabled ? `$.Enum` : null,
       block: {
+        kind: Code.string(Grafaid.Schema.TypeKind.Enum),
         name: Code.string(type.name),
         members: Code.tsTuple(type.getValues().map((_) => Code.string(_.name))),
         membersUnion: Code.tsUnionItems(type.getValues().map((_) => Code.string(_.name))),
@@ -122,8 +124,9 @@ const InputObject = createCodeGenerator<{ type: Grafaid.Schema.InputObjectType }
     Code.tsInterface({
       tsDoc: getTsDocContents(config, type),
       name: type.name,
-      extends: `$.InputObject`,
+      extends: config.code.schemaInterfaceExtendsEnabled ? `$.InputObject` : null,
       block: {
+        kind: Code.string(Grafaid.Schema.TypeKind.InputObject),
         name: Code.string(type.name),
         isAllFieldsNullable: Code.boolean(Grafaid.Schema.isAllInputObjectFieldsNullable(type)),
         fields: Object.fromEntries(
@@ -143,8 +146,9 @@ const InputObject = createCodeGenerator<{ type: Grafaid.Schema.InputObjectType }
         return Code.tsInterface({
           tsDoc: getTsDocContents(config, field),
           name: field.name,
-          extends: `$.InputField`,
+          extends: config.code.schemaInterfaceExtendsEnabled ? `$.InputField` : null,
           block: {
+            kind: Code.string(`InputField`), // todo pull this from schema data type
             name: Code.string(field.name),
             inlineType: renderInlineType(field.type),
             namedType: namedTypesTypeReference(namedType),
@@ -172,8 +176,9 @@ const Union = createCodeGenerator<{ type: Grafaid.Schema.UnionType }>(({ config,
     tsDoc: getTsDocContents(config, type),
     export: true,
     name: type.name,
-    extends: `$.Union`,
+    extends: config.code.schemaInterfaceExtendsEnabled ? `$.Union` : null,
     block: {
+      kind: Code.string(Grafaid.Schema.TypeKind.Union),
       name: Code.string(type.name),
       members: Code.tsTuple(memberNames),
       membersUnion: Code.tsUnionItems(memberNames),
@@ -190,8 +195,9 @@ const Interface = createCodeGenerator<{ type: Grafaid.Schema.InterfaceType }>(({
   code(Code.tsInterface({
     tsDoc: getTsDocContents(config, type),
     name: type.name,
-    extends: `$.Interface`,
+    extends: config.code.schemaInterfaceExtendsEnabled ? `$.Interface` : null,
     block: {
+      kind: Code.string(Grafaid.Schema.TypeKind.Interface),
       fields: Object.fromEntries(values(type.getFields()).map((_) => [_.name, `${renderName(type)}.${renderName(_)}`])),
       name: Code.string(type.name),
       implementors: Code.tsTuple(implementorNames),
@@ -212,8 +218,9 @@ const OutputFields = createCodeGenerator<{ type: Grafaid.Schema.ObjectType | Gra
       [Code.tsInterface({
         export: true,
         name: `__typename`,
-        extends: `$.OutputField`,
+        extends: config.code.schemaInterfaceExtendsEnabled ? `$.OutputField` : null,
         block: {
+          kind: Code.string(`OutputField`), // todo pull this from schema data type
           name: Code.string(`__typename`),
           arguments: {},
           inlineType: `[1]`,
@@ -230,8 +237,9 @@ const OutputFields = createCodeGenerator<{ type: Grafaid.Schema.ObjectType | Gra
               tsDoc: getTsDocContents(config, field),
               export: true,
               name: field.name,
-              extends: `$.OutputField`,
+              extends: config.code.schemaInterfaceExtendsEnabled ? `$.OutputField` : null,
               block: {
+                kind: Code.string(`OutputField`), // todo pull this from schema data type
                 name: Code.string(field.name),
                 arguments: Object.fromEntries(field.args.map(arg => {
                   return [

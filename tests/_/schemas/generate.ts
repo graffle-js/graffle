@@ -28,6 +28,9 @@ const generate = async (
     sourceDirPath: inputPathRootDir,
     outputSDL: true,
     outputDirPath: join(input.dirName, `graffle`),
+    advanced: {
+      schemaInterfaceExtendsEnabled: true,
+    },
     libraryPaths: {
       client: `../../../src/entrypoints/client.ts`,
       schema: `../../../src/entrypoints/schema.ts`,

@@ -147,6 +147,23 @@ export const getTypeKind = <$Node extends GraphQLNamedType>(node: $Node): ClassT
   }
 }
 
-export type TypeNamedKind = `Enum` | `InputObject` | `Interface` | `Object` | `Scalar` | `Union`
+export const TypeKind = {
+  Scalar: `Scalar`,
+  Enum: `Enum`,
+  Object: `Object`,
+  InputObject: `InputObject`,
+  Union: `Union`,
+  Interface: `Interface`,
+}
+
+export namespace TypeKind {
+  export type Enum = `Enum`
+  export type InputObject = `InputObject`
+  export type Object = `Object`
+  export type Union = `Union`
+  export type Interface = `Interface`
+}
+
+export type TypeNamedKind = keyof typeof TypeKind
 
 export type NamedTypeKind = TypeNamedKind | `Root`

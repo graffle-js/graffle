@@ -1,3 +1,4 @@
+import type { Grafaid } from '../../../lib/grafaid/__.js'
 import type { InputFields } from './InputField.js'
 
 export interface InputObject<
@@ -5,7 +6,7 @@ export interface InputObject<
   $Fields extends InputFields = InputFields,
   $IsFieldsAllNullable extends boolean = boolean,
 > {
-  kind: 'InputObject'
+  kind: Grafaid.Schema.TypeKind.InputObject
   name: $Name
   fields: $Fields
   isAllFieldsNullable: $IsFieldsAllNullable

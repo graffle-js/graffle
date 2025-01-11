@@ -25,6 +25,7 @@ export namespace Schema {
   //
 
   export interface Query extends $.OutputObject {
+    kind: 'Object'
     name: 'Query'
     fields: {
       __typename: Query.__typename
@@ -35,6 +36,7 @@ export namespace Schema {
 
   export namespace Query {
     export interface __typename extends $.OutputField {
+      kind: 'OutputField'
       name: '__typename'
       arguments: {}
       inlineType: [1]
@@ -45,6 +47,7 @@ export namespace Schema {
     }
 
     export interface id extends $.OutputField {
+      kind: 'OutputField'
       name: 'id'
       arguments: {}
       inlineType: [0]
@@ -52,6 +55,7 @@ export namespace Schema {
     }
 
     export interface idNonNull extends $.OutputField {
+      kind: 'OutputField'
       name: 'idNonNull'
       arguments: {}
       inlineType: [1]

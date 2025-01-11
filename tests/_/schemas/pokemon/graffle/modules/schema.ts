@@ -25,6 +25,7 @@ export namespace Schema {
   //
 
   export interface Query extends $.OutputObject {
+    kind: 'Object'
     name: 'Query'
     fields: {
       __typename: Query.__typename
@@ -39,6 +40,7 @@ export namespace Schema {
 
   export namespace Query {
     export interface __typename extends $.OutputField {
+      kind: 'OutputField'
       name: '__typename'
       arguments: {}
       inlineType: [1]
@@ -49,6 +51,7 @@ export namespace Schema {
     }
 
     export interface battles extends $.OutputField {
+      kind: 'OutputField'
       name: 'battles'
       arguments: {}
       inlineType: [1, [1]]
@@ -56,6 +59,7 @@ export namespace Schema {
     }
 
     export interface beings extends $.OutputField {
+      kind: 'OutputField'
       name: 'beings'
       arguments: {}
       inlineType: [1, [1]]
@@ -63,6 +67,7 @@ export namespace Schema {
     }
 
     export interface pokemonByName extends $.OutputField {
+      kind: 'OutputField'
       name: 'pokemonByName'
       arguments: {
         name: {
@@ -77,6 +82,7 @@ export namespace Schema {
     }
 
     export interface pokemons extends $.OutputField {
+      kind: 'OutputField'
       name: 'pokemons'
       arguments: {
         filter: {
@@ -91,6 +97,7 @@ export namespace Schema {
     }
 
     export interface trainerByName extends $.OutputField {
+      kind: 'OutputField'
       name: 'trainerByName'
       arguments: {
         name: {
@@ -105,6 +112,7 @@ export namespace Schema {
     }
 
     export interface trainers extends $.OutputField {
+      kind: 'OutputField'
       name: 'trainers'
       arguments: {}
       inlineType: [0, [1]]
@@ -117,6 +125,7 @@ export namespace Schema {
   //
 
   export interface Mutation extends $.OutputObject {
+    kind: 'Object'
     name: 'Mutation'
     fields: {
       __typename: Mutation.__typename
@@ -126,6 +135,7 @@ export namespace Schema {
 
   export namespace Mutation {
     export interface __typename extends $.OutputField {
+      kind: 'OutputField'
       name: '__typename'
       arguments: {}
       inlineType: [1]
@@ -136,6 +146,7 @@ export namespace Schema {
     }
 
     export interface addPokemon extends $.OutputField {
+      kind: 'OutputField'
       name: 'addPokemon'
       arguments: {
         attack: {
@@ -195,6 +206,7 @@ export namespace Schema {
   //
 
   export interface BattleRoyale extends $.OutputObject {
+    kind: 'Object'
     name: 'BattleRoyale'
     fields: {
       __typename: BattleRoyale.__typename
@@ -207,6 +219,7 @@ export namespace Schema {
 
   export namespace BattleRoyale {
     export interface __typename extends $.OutputField {
+      kind: 'OutputField'
       name: '__typename'
       arguments: {}
       inlineType: [1]
@@ -217,6 +230,7 @@ export namespace Schema {
     }
 
     export interface combatants extends $.OutputField {
+      kind: 'OutputField'
       name: 'combatants'
       arguments: {}
       inlineType: [0, [1]]
@@ -224,6 +238,7 @@ export namespace Schema {
     }
 
     export interface date extends $.OutputField {
+      kind: 'OutputField'
       name: 'date'
       arguments: {}
       inlineType: [0]
@@ -231,6 +246,7 @@ export namespace Schema {
     }
 
     export interface id extends $.OutputField {
+      kind: 'OutputField'
       name: 'id'
       arguments: {}
       inlineType: [0]
@@ -238,6 +254,7 @@ export namespace Schema {
     }
 
     export interface winner extends $.OutputField {
+      kind: 'OutputField'
       name: 'winner'
       arguments: {}
       inlineType: [0]
@@ -250,6 +267,7 @@ export namespace Schema {
   //
 
   export interface BattleTrainer extends $.OutputObject {
+    kind: 'Object'
     name: 'BattleTrainer'
     fields: {
       __typename: BattleTrainer.__typename
@@ -263,6 +281,7 @@ export namespace Schema {
 
   export namespace BattleTrainer {
     export interface __typename extends $.OutputField {
+      kind: 'OutputField'
       name: '__typename'
       arguments: {}
       inlineType: [1]
@@ -273,6 +292,7 @@ export namespace Schema {
     }
 
     export interface combatant1 extends $.OutputField {
+      kind: 'OutputField'
       name: 'combatant1'
       arguments: {}
       inlineType: [0]
@@ -280,6 +300,7 @@ export namespace Schema {
     }
 
     export interface combatant2 extends $.OutputField {
+      kind: 'OutputField'
       name: 'combatant2'
       arguments: {}
       inlineType: [0]
@@ -287,6 +308,7 @@ export namespace Schema {
     }
 
     export interface date extends $.OutputField {
+      kind: 'OutputField'
       name: 'date'
       arguments: {}
       inlineType: [0]
@@ -294,6 +316,7 @@ export namespace Schema {
     }
 
     export interface id extends $.OutputField {
+      kind: 'OutputField'
       name: 'id'
       arguments: {}
       inlineType: [0]
@@ -301,6 +324,7 @@ export namespace Schema {
     }
 
     export interface winner extends $.OutputField {
+      kind: 'OutputField'
       name: 'winner'
       arguments: {}
       inlineType: [0]
@@ -313,6 +337,7 @@ export namespace Schema {
   //
 
   export interface BattleWild extends $.OutputObject {
+    kind: 'Object'
     name: 'BattleWild'
     fields: {
       __typename: BattleWild.__typename
@@ -327,6 +352,7 @@ export namespace Schema {
 
   export namespace BattleWild {
     export interface __typename extends $.OutputField {
+      kind: 'OutputField'
       name: '__typename'
       arguments: {}
       inlineType: [1]
@@ -337,6 +363,7 @@ export namespace Schema {
     }
 
     export interface date extends $.OutputField {
+      kind: 'OutputField'
       name: 'date'
       arguments: {}
       inlineType: [0]
@@ -344,6 +371,7 @@ export namespace Schema {
     }
 
     export interface id extends $.OutputField {
+      kind: 'OutputField'
       name: 'id'
       arguments: {}
       inlineType: [0]
@@ -351,6 +379,7 @@ export namespace Schema {
     }
 
     export interface pokemon extends $.OutputField {
+      kind: 'OutputField'
       name: 'pokemon'
       arguments: {}
       inlineType: [0]
@@ -358,6 +387,7 @@ export namespace Schema {
     }
 
     export interface result extends $.OutputField {
+      kind: 'OutputField'
       name: 'result'
       arguments: {}
       inlineType: [0]
@@ -365,6 +395,7 @@ export namespace Schema {
     }
 
     export interface trainer extends $.OutputField {
+      kind: 'OutputField'
       name: 'trainer'
       arguments: {}
       inlineType: [0]
@@ -372,6 +403,7 @@ export namespace Schema {
     }
 
     export interface wildPokemons extends $.OutputField {
+      kind: 'OutputField'
       name: 'wildPokemons'
       arguments: {}
       inlineType: [0, [1]]
@@ -384,6 +416,7 @@ export namespace Schema {
   //
 
   export interface CombatantMultiPokemon extends $.OutputObject {
+    kind: 'Object'
     name: 'CombatantMultiPokemon'
     fields: {
       __typename: CombatantMultiPokemon.__typename
@@ -394,6 +427,7 @@ export namespace Schema {
 
   export namespace CombatantMultiPokemon {
     export interface __typename extends $.OutputField {
+      kind: 'OutputField'
       name: '__typename'
       arguments: {}
       inlineType: [1]
@@ -404,6 +438,7 @@ export namespace Schema {
     }
 
     export interface pokemons extends $.OutputField {
+      kind: 'OutputField'
       name: 'pokemons'
       arguments: {}
       inlineType: [0, [1]]
@@ -411,6 +446,7 @@ export namespace Schema {
     }
 
     export interface trainer extends $.OutputField {
+      kind: 'OutputField'
       name: 'trainer'
       arguments: {}
       inlineType: [0]
@@ -423,6 +459,7 @@ export namespace Schema {
   //
 
   export interface CombatantSinglePokemon extends $.OutputObject {
+    kind: 'Object'
     name: 'CombatantSinglePokemon'
     fields: {
       __typename: CombatantSinglePokemon.__typename
@@ -433,6 +470,7 @@ export namespace Schema {
 
   export namespace CombatantSinglePokemon {
     export interface __typename extends $.OutputField {
+      kind: 'OutputField'
       name: '__typename'
       arguments: {}
       inlineType: [1]
@@ -443,6 +481,7 @@ export namespace Schema {
     }
 
     export interface pokemon extends $.OutputField {
+      kind: 'OutputField'
       name: 'pokemon'
       arguments: {}
       inlineType: [0]
@@ -450,6 +489,7 @@ export namespace Schema {
     }
 
     export interface trainer extends $.OutputField {
+      kind: 'OutputField'
       name: 'trainer'
       arguments: {}
       inlineType: [0]
@@ -462,6 +502,7 @@ export namespace Schema {
   //
 
   export interface Patron extends $.OutputObject {
+    kind: 'Object'
     name: 'Patron'
     fields: {
       __typename: Patron.__typename
@@ -473,6 +514,7 @@ export namespace Schema {
 
   export namespace Patron {
     export interface __typename extends $.OutputField {
+      kind: 'OutputField'
       name: '__typename'
       arguments: {}
       inlineType: [1]
@@ -483,6 +525,7 @@ export namespace Schema {
     }
 
     export interface id extends $.OutputField {
+      kind: 'OutputField'
       name: 'id'
       arguments: {}
       inlineType: [0]
@@ -490,6 +533,7 @@ export namespace Schema {
     }
 
     export interface money extends $.OutputField {
+      kind: 'OutputField'
       name: 'money'
       arguments: {}
       inlineType: [0]
@@ -497,6 +541,7 @@ export namespace Schema {
     }
 
     export interface name extends $.OutputField {
+      kind: 'OutputField'
       name: 'name'
       arguments: {}
       inlineType: [0]
@@ -509,6 +554,7 @@ export namespace Schema {
   //
 
   export interface Pokemon extends $.OutputObject {
+    kind: 'Object'
     name: 'Pokemon'
     fields: {
       __typename: Pokemon.__typename
@@ -525,6 +571,7 @@ export namespace Schema {
 
   export namespace Pokemon {
     export interface __typename extends $.OutputField {
+      kind: 'OutputField'
       name: '__typename'
       arguments: {}
       inlineType: [1]
@@ -535,6 +582,7 @@ export namespace Schema {
     }
 
     export interface attack extends $.OutputField {
+      kind: 'OutputField'
       name: 'attack'
       arguments: {}
       inlineType: [1]
@@ -542,6 +590,7 @@ export namespace Schema {
     }
 
     export interface birthday extends $.OutputField {
+      kind: 'OutputField'
       name: 'birthday'
       arguments: {}
       inlineType: [1]
@@ -549,6 +598,7 @@ export namespace Schema {
     }
 
     export interface defense extends $.OutputField {
+      kind: 'OutputField'
       name: 'defense'
       arguments: {}
       inlineType: [1]
@@ -556,6 +606,7 @@ export namespace Schema {
     }
 
     export interface hp extends $.OutputField {
+      kind: 'OutputField'
       name: 'hp'
       arguments: {}
       inlineType: [1]
@@ -563,6 +614,7 @@ export namespace Schema {
     }
 
     export interface id extends $.OutputField {
+      kind: 'OutputField'
       name: 'id'
       arguments: {}
       inlineType: [1]
@@ -570,6 +622,7 @@ export namespace Schema {
     }
 
     export interface name extends $.OutputField {
+      kind: 'OutputField'
       name: 'name'
       arguments: {}
       inlineType: [1]
@@ -577,6 +630,7 @@ export namespace Schema {
     }
 
     export interface trainer extends $.OutputField {
+      kind: 'OutputField'
       name: 'trainer'
       arguments: {}
       inlineType: [0]
@@ -584,6 +638,7 @@ export namespace Schema {
     }
 
     export interface type extends $.OutputField {
+      kind: 'OutputField'
       name: 'type'
       arguments: {}
       inlineType: [1]
@@ -596,6 +651,7 @@ export namespace Schema {
   //
 
   export interface Trainer extends $.OutputObject {
+    kind: 'Object'
     name: 'Trainer'
     fields: {
       __typename: Trainer.__typename
@@ -609,6 +665,7 @@ export namespace Schema {
 
   export namespace Trainer {
     export interface __typename extends $.OutputField {
+      kind: 'OutputField'
       name: '__typename'
       arguments: {}
       inlineType: [1]
@@ -619,6 +676,7 @@ export namespace Schema {
     }
 
     export interface $class extends $.OutputField {
+      kind: 'OutputField'
       name: 'class'
       arguments: {}
       inlineType: [0]
@@ -626,6 +684,7 @@ export namespace Schema {
     }
 
     export interface fans extends $.OutputField {
+      kind: 'OutputField'
       name: 'fans'
       arguments: {}
       inlineType: [0, [1]]
@@ -633,6 +692,7 @@ export namespace Schema {
     }
 
     export interface id extends $.OutputField {
+      kind: 'OutputField'
       name: 'id'
       arguments: {}
       inlineType: [0]
@@ -640,6 +700,7 @@ export namespace Schema {
     }
 
     export interface name extends $.OutputField {
+      kind: 'OutputField'
       name: 'name'
       arguments: {}
       inlineType: [0]
@@ -647,6 +708,7 @@ export namespace Schema {
     }
 
     export interface pokemon extends $.OutputField {
+      kind: 'OutputField'
       name: 'pokemon'
       arguments: {}
       inlineType: [0, [1]]
@@ -675,6 +737,7 @@ export namespace Schema {
   //
 
   export interface DateFilter extends $.InputObject {
+    kind: 'InputObject'
     name: 'DateFilter'
     isAllFieldsNullable: true
     fields: {
@@ -685,12 +748,14 @@ export namespace Schema {
 
   export namespace DateFilter {
     export interface gte extends $.InputField {
+      kind: 'InputField'
       name: 'gte'
       inlineType: [0]
       namedType: $$NamedTypes.$$Date
     }
 
     export interface lte extends $.InputField {
+      kind: 'InputField'
       name: 'lte'
       inlineType: [0]
       namedType: $$NamedTypes.$$Date
@@ -702,6 +767,7 @@ export namespace Schema {
   //
 
   export interface PokemonFilter extends $.InputObject {
+    kind: 'InputObject'
     name: 'PokemonFilter'
     isAllFieldsNullable: true
     fields: {
@@ -713,18 +779,21 @@ export namespace Schema {
 
   export namespace PokemonFilter {
     export interface birthday extends $.InputField {
+      kind: 'InputField'
       name: 'birthday'
       inlineType: [0]
       namedType: $$NamedTypes.$$DateFilter
     }
 
     export interface name extends $.InputField {
+      kind: 'InputField'
       name: 'name'
       inlineType: [0]
       namedType: $$NamedTypes.$$StringFilter
     }
 
     export interface type extends $.InputField {
+      kind: 'InputField'
       name: 'type'
       inlineType: [0]
       namedType: $$NamedTypes.$$PokemonType
@@ -736,6 +805,7 @@ export namespace Schema {
   //
 
   export interface StringFilter extends $.InputObject {
+    kind: 'InputObject'
     name: 'StringFilter'
     isAllFieldsNullable: true
     fields: {
@@ -746,12 +816,14 @@ export namespace Schema {
 
   export namespace StringFilter {
     export interface contains extends $.InputField {
+      kind: 'InputField'
       name: 'contains'
       inlineType: [0]
       namedType: $$NamedTypes.$$String
     }
 
     export interface $in extends $.InputField {
+      kind: 'InputField'
       name: 'in'
       inlineType: [0, [1]]
       namedType: $$NamedTypes.$$String
@@ -779,6 +851,7 @@ export namespace Schema {
   //
 
   export interface Being extends $.Interface {
+    kind: 'Interface'
     fields: {
       id: Being.id
       name: Being.name
@@ -798,6 +871,7 @@ export namespace Schema {
 
   export namespace Being {
     export interface __typename extends $.OutputField {
+      kind: 'OutputField'
       name: '__typename'
       arguments: {}
       inlineType: [1]
@@ -808,6 +882,7 @@ export namespace Schema {
     }
 
     export interface id extends $.OutputField {
+      kind: 'OutputField'
       name: 'id'
       arguments: {}
       inlineType: [0]
@@ -815,6 +890,7 @@ export namespace Schema {
     }
 
     export interface name extends $.OutputField {
+      kind: 'OutputField'
       name: 'name'
       arguments: {}
       inlineType: [0]
@@ -843,6 +919,7 @@ export namespace Schema {
   //
 
   export interface Battle extends $.Union {
+    kind: 'Union'
     name: 'Battle'
     members: [BattleRoyale, BattleTrainer, BattleWild]
     membersUnion:
@@ -877,6 +954,7 @@ export namespace Schema {
   //
 
   export interface BattleWildResult extends $.Enum {
+    kind: 'Enum'
     name: 'BattleWildResult'
     members: ['pokemonsCaptured', 'pokemonsDefeated', 'trainerDefeated']
     membersUnion:
@@ -890,6 +968,7 @@ export namespace Schema {
   //
 
   export interface PokemonType extends $.Enum {
+    kind: 'Enum'
     name: 'PokemonType'
     members: ['bug', 'electric', 'fire', 'grass', 'water']
     membersUnion:
@@ -905,6 +984,7 @@ export namespace Schema {
   //
 
   export interface TrainerClass extends $.Enum {
+    kind: 'Enum'
     name: 'TrainerClass'
     members: [
       'bugCatcher',

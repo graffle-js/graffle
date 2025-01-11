@@ -211,6 +211,24 @@ export interface ConfigInit {
    * are or have gentime components.
    */
   extensions?: Extension[]
+  /**
+   * Esoteric options that are not designed for use by regular users and use-cases.
+   */
+  advanced?: {
+    /**
+     * For large schemas an extends clause on interface definitions can lead to hitting TypeScript's depth limit e.g.:
+     *
+     * ```
+     * Excessive stack depth comparing types 'topic' and 'OutputField<string, InputFields | null, InlineType, NamedOutputTypes>'
+     * ```
+     *
+     * Enabling this can help debug generated code because it makes TypeScript check that the generated types adhere to the expected
+     * schema types.
+     *
+     * @defaultValue `false`
+     */
+    schemaInterfaceExtendsEnabled?: boolean
+  }
 }
 
 export interface InputIntrospectionOptions extends IntrospectionOptions {

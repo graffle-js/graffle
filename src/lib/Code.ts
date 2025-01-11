@@ -264,6 +264,8 @@ export namespace Code {
   }
 
   export const reservedTypeScriptInterfaceNames = [
+    `public`,
+    `package`,
     `break`,
     `case`,
     `catch`,

@@ -63,6 +63,9 @@ export interface Config {
       grafflePackage: Required<ConfigInitLibraryPaths>
     }
   }
+  code: {
+    schemaInterfaceExtendsEnabled?: boolean
+  }
 }
 
 interface ConfigSchema {
@@ -198,6 +201,10 @@ To suppress this warning disable formatting in one of the following ways:
     ? configInit.nameNamespace
     : defaultNamespace
 
+  // --- advanced ---
+
+  const schemaInterfaceExtendsEnabled = configInit.advanced?.schemaInterfaceExtendsEnabled ?? false
+
   // --- Config ---
 
   return {
@@ -243,6 +250,9 @@ To suppress this warning disable formatting in one of the following ways:
           libraryPaths,
         ),
       },
+    },
+    code: {
+      schemaInterfaceExtendsEnabled,
     },
   }
 }

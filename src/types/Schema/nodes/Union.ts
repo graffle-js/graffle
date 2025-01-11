@@ -1,10 +1,11 @@
+import type { Grafaid } from '../../../lib/grafaid/__.js'
 import type { OutputObject } from './OutputObject.js'
 
 export type Union<
   $Name extends string = string,
   $Members extends [OutputObject, ...OutputObject[]] = [OutputObject, ...OutputObject[]],
 > = {
-  kind: `Union`
+  kind: Grafaid.Schema.TypeKind.Union
   name: $Name
   members: $Members
   membersUnion: $Members[number]
