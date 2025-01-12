@@ -18,10 +18,20 @@ import type { ScalarsWildcard } from './ScalarsWildcard.js'
 export type OutputObjectLike<
   $SelectionSet extends object,
   $Schema,
-  $Node extends Schema.OutputObjectLike
+  $Node
 > =
-    & OutputObjectLike_<$SelectionSet, $Schema, $Node>
-    & InlineFragmentKeys<$SelectionSet, $Schema, $Node>
+    & OutputObjectLike_<
+      $SelectionSet,
+      $Schema,
+      // @ts-expect-error context constraint missing to avoid TS compare depth limit
+      $Node
+    >
+    & InlineFragmentKeys<
+      $SelectionSet,
+      $Schema,
+      // @ts-expect-error context constraint missing to avoid TS compare depth limit
+      $Node
+    >
 
 // dprint-ignore
 type OutputObjectLike_<

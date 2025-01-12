@@ -1,10 +1,14 @@
-import type { Schema } from '../../../types/Schema/__.js'
 import type { InlineFragmentTypeConditional } from './InlineFragmentTypeConditional.js'
 
 // dprint-ignore
 export type Union<
   $SelectionSet,
   $Schema,
-  $Node extends Schema.Union,
+  $Node,
 > =
-  InlineFragmentTypeConditional<$SelectionSet, $Node['membersUnion'], $Schema>
+  InlineFragmentTypeConditional<
+    $SelectionSet,
+    // @ts-expect-error context constraint missing to avoid TS compare depth limit
+    $Node['membersUnion'],
+    $Schema
+  >

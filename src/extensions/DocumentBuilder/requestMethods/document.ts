@@ -1,15 +1,13 @@
 import type { UnionToTuple } from 'type-fest'
 import type { HandleOutput } from '../../../client/handleOutput.js'
 import type { IsTupleMultiple } from '../../../lib/prelude.js'
-import type { Context } from '../../../types/context.js'
-import type { Schema } from '../../../types/Schema/__.js'
 import type { InferResult } from '../InferResult/__.js'
 import type { Select } from '../Select/__.js'
 
 // dprint-ignore
 export type DocumentRunner<
-  $$Context extends Context,
-  $$Schema extends Schema,
+  $$Context,
+  $$Schema,
   $$Document extends Select.Document.SomeDocument,
   $$Name extends Select.Document.GetOperationNames<$$Document> = Select.Document.GetOperationNames<$$Document>
 > = {

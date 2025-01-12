@@ -20,7 +20,7 @@ export type OutputField<
 type FieldType<
   $Schema,
   $SelectionSet,
-  $Node extends Schema.NamedOutputTypes,
+  $Node,
 > = 
   $Node extends Schema.OutputObject                      ? $SelectionSet extends object
                                                             ? OutputObjectLike<$SelectionSet, $Schema, $Node>

@@ -10,5 +10,6 @@ export type GetNamedType<$Type> =
       $Type extends List<infer $innerType>      ? GetNamedType<$innerType> :
       $Type extends Nullable<infer $innerType>  ? GetNamedType<$innerType> :
       $Type extends __typename                  ? $Type :
-      $Type extends NamedTypes                  ? $Type : 
-                                                  TSErrorDescriptive<'Unwrap', 'Unknown $Type', { $Type: $Type }>
+      $Type
+// $Type extends NamedTypes                  ? $Type :
+//   TSErrorDescriptive<'Unwrap', 'Unknown $Type', { $Type: $Type }>
