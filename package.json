@@ -121,7 +121,7 @@
     "test:unit": "vitest --exclude tests/examples --exclude tests/e2e",
     "test:examples": "vitest --config vitest.examples.config.ts --dir tests/examples",
     "test:e2e": "vitest --dir tests/e2e --testTimeout 30000 --run",
-    "test:e2e:github:gen:graffle": "pnpm graffle --schema tests/e2e/github/schema.graphql --output tests/e2e/github/graffle --name github",
+    "test:e2e:github:gen:graffle": "pnpm graffle --project tests/e2e/github/graffle.config.ts",
     "test": "vitest",
     "test:web": "vitest --environment jsdom",
     "test:types": "vitest --typecheck --dir src  --testNamePattern .*.test-d.ts",

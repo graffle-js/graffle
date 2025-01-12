@@ -7,6 +7,8 @@ export * from './InlineType.js'
 
 declare global {
   namespace GraffleGlobal {
+    // Types are defined in this namespace so that they can be globally augmented.
+
     export interface SchemaDrivenDataMap {
       operations: {
         [Grafaid.Document.OperationTypeNode.MUTATION]?: SchemaDrivenDataMap.OutputObject
@@ -51,21 +53,6 @@ declare global {
         nt?: OutputNodes
       }
 
-      export interface ArgumentsOrInputObjectFields {
-        [key: string]: ArgumentOrInputField
-      }
-
-      export interface ArgumentOrInputField {
-        /**
-         * Inline types (nullable/non-nullable, list) of this argument or input field. Only present when operationVariables is enabled.
-         */
-        it?: InlineType
-        /**
-         * Named type of this argument or input field. Only present when customScalars is enabled.
-         */
-        nt?: InputNodes
-      }
-
       export interface InputObject {
         /**
          * Field names within this input object that are or transitively contain custom scalars.
@@ -81,9 +68,22 @@ declare global {
         /**
          * Fields of the input object.
          */
-        f?: {
-          [key: string]: ArgumentOrInputField
-        }
+        f?: ArgumentsOrInputObjectFields
+      }
+
+      export interface ArgumentsOrInputObjectFields {
+        [key: string]: ArgumentOrInputField
+      }
+
+      export interface ArgumentOrInputField {
+        /**
+         * Inline types (nullable/non-nullable, list) of this argument or input field. Only present when operationVariables is enabled.
+         */
+        it?: InlineType
+        /**
+         * Named type of this argument or input field. Only present when customScalars is enabled.
+         */
+        nt?: InputNodes
       }
     }
   }

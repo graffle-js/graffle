@@ -45,8 +45,10 @@ export const createModuleGenerator: FactoryModuleGenerator = (name, runnerImplem
   }
 }
 
-export const importModuleGenerator = (config: Config, generator: ModuleGenerator) => {
-  return `import * as $$${pascalCase(generator.name)} from './${getImportName(config, generator)}'`
+export const importModuleGenerator = (config: Config, generator: ModuleGenerator, typeOnly?: boolean) => {
+  return `import${typeOnly ? ` type` : ``} * as $$${pascalCase(generator.name)} from './${
+    getImportName(config, generator)
+  }'`
 }
 
 export const getBaseName = (config: Config, generator: ModuleGenerator | GeneratedModule) => {

@@ -1,6 +1,6 @@
-import type * as $$Utilities from 'graffle/utilities-for-generated'
+import type * as $$Utilities from '../../../../../src/entrypoints/utilities-for-generated.js'
 
-export * from 'graffle/generator-helpers/standard-scalar-types'
+export * from '../../../../../src/types/Schema/StandardTypes/scalar.js'
 
 //
 //

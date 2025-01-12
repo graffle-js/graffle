@@ -6,13 +6,13 @@
  * If such errors are present, they will be caught by our type check step. Then we can come here to debug further.
  */
 
-import { Graffle } from './graffle/__.js'
+import { Github } from './graffle/__.js'
 
-const graffle = Graffle.create({ checkPreflight: false })
+const github = Github.create({ checkPreflight: false })
 
-const a = await graffle.query.__typename()
+const a = await github.query.__typename()
 
-const b = await graffle.query.codeOfConduct({
+const b = await github.query.codeOfConduct({
   $: {
     key: `foo`,
   },

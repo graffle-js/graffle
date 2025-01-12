@@ -79,7 +79,7 @@ export namespace ClientTransports {
 
   // dprint-ignore
   export type PreflightCheck<
-    $Context extends Context,
+    $Context,
     $SuccessValue = true,
   > =
     $Context['checkPreflight'] extends false
