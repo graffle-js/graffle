@@ -1,10 +1,16 @@
 import type * as $$Utilities from 'graffle/utilities-for-generated'
-import * as $$Schema from './schema.js'
-import * as $$SelectionSets from './selection-sets.js'
+import type * as $$Schema from './schema.js'
+import type * as $$SelectionSets from './selection-sets.js'
 
-export interface Document<$Context extends $$Utilities.Context> {
+export interface Document<$Context> {
   <$Document>(
-    document: $$Utilities.ExactNonEmpty<$Document, $$SelectionSets.$Document<$Context['scalars']>>,
+    document: $$Utilities.ExactNonEmpty<
+      $Document,
+      $$SelectionSets.$Document<
+        // @ts-expect-error Context constraint missing to avoid TS compare depth limit.
+        $Context['scalars']
+      >
+    >,
   ): $$Utilities.DocumentBuilder.DocumentRunner<
     $Context,
     $$Schema.Schema,
@@ -15,6 +21,5 @@ export interface Document<$Context extends $$Utilities.Context> {
 }
 
 export interface BuilderMethodsDocumentFn extends $$Utilities.TypeFunction {
-  // @ts-expect-error parameter is Untyped.
   return: Document<this['params']>
 }

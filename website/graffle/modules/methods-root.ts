@@ -22,7 +22,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     $Context,
     () => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         { __typename: "Query" },
         "__typename"
@@ -36,7 +36,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.battles<$Context["scalars"]>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { battles: $SelectionSet },
@@ -53,7 +53,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.beings<$Context["scalars"]>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { beings: $SelectionSet },
@@ -70,7 +70,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.pokemonByName<$Context["scalars"]>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { pokemonByName: $SelectionSet },
@@ -87,7 +87,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.pokemons<$Context["scalars"]>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { pokemons: $SelectionSet },
@@ -104,7 +104,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.trainerByName<$Context["scalars"]>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { trainerByName: $SelectionSet },
@@ -121,7 +121,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.trainers<$Context["scalars"]>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { trainers: $SelectionSet },
@@ -153,7 +153,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     $Context,
     () => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         { __typename: "Mutation" },
         "__typename"
@@ -167,7 +167,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.addPokemon<$Context["scalars"]>>,
     ) => Promise<
       & (null | {})
-      & $$Utilities.HandleOutputGraffleRootField<
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
         $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { addPokemon: $SelectionSet },

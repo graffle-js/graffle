@@ -1,10 +1,15 @@
 import type * as $$Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'
-import * as $$Schema from './schema.js'
-import * as $$SelectionSets from './selection-sets.js'
+import type * as $$Schema from './schema.js'
+import type * as $$SelectionSets from './selection-sets.js'
 
 export interface Document<$Context extends $$Utilities.Context> {
   <$Document>(
-    document: $$Utilities.ExactNonEmpty<$Document, $$SelectionSets.$Document<$Context['scalars']>>,
+    document: $$Utilities.ExactNonEmpty<
+      $Document,
+      $$SelectionSets.$Document<
+        $Context['scalars']
+      >
+    >,
   ): $$Utilities.DocumentBuilder.DocumentRunner<
     $Context,
     $$Schema.Schema,
