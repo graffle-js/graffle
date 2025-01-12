@@ -1,6 +1,5 @@
 import type { GraffleExecutionResultEnvelope } from '../client/handleOutput.js'
 import type { DocumentBuilder } from '../extensions/DocumentBuilder/__.js'
-import type { AssertExtends } from '../lib/prelude.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
 import type { Context } from '../types/context.js'
 import type { GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
@@ -99,8 +98,3 @@ export type RunTypeHookOnRequestResult<
   $Context extends Context,
   $Params extends OnRequestResult.Params,
 > = TypeFunction.CallPipeline<$Context['typeHookOnRequestResult'], $Params>
-// todo remove this, it leads to "Excessive stack depth comparing types"
-// AssertExtends<
-//   TypeFunction.CallPipeline<$Context['typeHookOnRequestResult'], $Params>,
-//   OnRequestResult.Params
-// >
