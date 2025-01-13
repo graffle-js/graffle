@@ -19,7 +19,7 @@ runs:
     - name: Install pnpm
       uses: pnpm/action-setup@v4
       with:
-        version: '9.15.1'
+        version: '9.15.3'
         run_install: false
     # Cannot use corepack because it doesn't permit global package installs.
     # @see https://github.com/pnpm/action-setup/issues/105#issuecomment-2468689290
