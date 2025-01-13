@@ -3,28 +3,44 @@ import { execute as graphqlExecute, graphql } from 'graphql'
 import type { RequestInput } from './graphql.js'
 import { TypedDocument } from './typed-document/__.js'
 
-export type ExecuteInput = {
+export type ExecuteParameters = {
   request: RequestInput
   schema: GraphQLSchema
+  resolverValues?: {
+    context?: object | (() => object)
+    root?: unknown
+  }
 }
 
-export const execute = async (input: ExecuteInput): Promise<ExecutionResult> => {
-  const { schema, request: { query, operationName, variables: variableValues } } = input
-  if (TypedDocument.isString(query)) {
+export const execute = async (parameters: ExecuteParameters): Promise<ExecutionResult> => {
+  const schema = parameters.schema
+  const document = TypedDocument.unType(parameters.request.query)
+  const operationName = parameters.request.operationName
+  const variableValues = parameters.request.variables
+  const contextValue = typeof parameters.resolverValues?.context === `function`
+    ? parameters.resolverValues.context()
+    : parameters.resolverValues?.context
+  const rootValue = typeof parameters.resolverValues?.root === `function`
+    ? parameters.resolverValues.root()
+    : parameters.resolverValues?.root
+
+  if (typeof document === `string`) {
     return await graphql({
       schema,
-      source: query as string,
+      source: document,
       variableValues,
       operationName,
-      // contextValue: createContextValue(), // todo
-    })
-  } else {
-    return await graphqlExecute({
-      schema,
-      document: query,
-      variableValues,
-      operationName,
-      // contextValue: createContextValue(), // todo
+      contextValue,
+      rootValue,
     })
   }
+
+  return await graphqlExecute({
+    schema,
+    document,
+    variableValues,
+    operationName,
+    contextValue,
+    rootValue,
+  })
 }

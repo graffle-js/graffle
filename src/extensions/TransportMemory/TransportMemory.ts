@@ -9,20 +9,37 @@ import type { PartialOrUndefined } from '../../lib/prelude.js'
 import type { RequestPipeline } from '../../requestPipeline/RequestPipeline.js'
 
 export interface TransportMemoryConstructor {
-  <$ConfigInit extends ConfigInit = ConfigInitEmpty>(
-    configInit?: $ConfigInit,
-  ): TransportMemory<$ConfigInit>
+  <$ConfigurationInit extends ConfigurationInit = ConfigurationInitEmpty>(
+    configurationInit?: $ConfigurationInit,
+  ): TransportMemory<$ConfigurationInit>
 }
 
 export interface Configuration {
+  /**
+   * The schema to execute documents against.
+   */
   schema: Grafaid.Schema.Schema
+  resolverValues?: {
+    /**
+     * The value to use for parent (aka. source) on _root_ resolvers.
+     *
+     * If a function is provided, it will be called before each request to get the root value.
+     */
+    root?: unknown
+    /**
+     * The value to use for resolver context during execution.
+     *
+     * If a function is provided, it will be called before each request to get the context value.
+     */
+    context?: object | (() => object)
+  }
 }
 
-export type ConfigInit = PartialOrUndefined<Configuration>
+export type ConfigurationInit = PartialOrUndefined<Configuration>
 
-export interface ConfigInitEmpty {}
+export interface ConfigurationInitEmpty {}
 
-export interface TransportMemory<$ConfigInit extends ConfigInit = ConfigInitEmpty> extends Extension {
+export interface TransportMemory<$ConfigInit extends ConfigurationInit = ConfigurationInitEmpty> extends Extension {
   name: `TransportMemory`
   config: Configuration
   configInit: $ConfigInit
@@ -84,7 +101,7 @@ export const TransportMemory: TransportMemoryConstructor = create({
     return {
       transport(create) {
         return create(`memory`)
-          .config<{ schema: Grafaid.Schema.Schema }>()
+          .config<Configuration>()
           .configInit<{}>()
           .defaults(config)
           .step(`pack`, {

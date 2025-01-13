@@ -2,7 +2,7 @@
   "name": "graffle",
   "description": "Simple GraphQL Client for JavaScript. Minimal. Extensible. Type Safe. Runs everywhere.",
   "version": "0.0.0-dripip",
-  "packageManager": "pnpm@9.15.1",
+  "packageManager": "pnpm@9.15.3",
   "type": "module",
   "bin": {
     "graffle": "./execute.sh"
@@ -105,7 +105,7 @@
     "website:gen:graffle": "cd website && pnpm i && pnpm gen:graffle",
     "gen:examples": "tsx scripts/generate-examples-derivatives/generate.ts && pnpm format",
     "gen:examples:outputs": "tsx scripts/generate-examples-derivatives/generate.ts --outputs",
-    "dev": "tsc --project tsconfig.build.json --watch",
+    "build:watch": "tsc --project tsconfig.build.json --watch",
     "format": "pnpm build:docs && dprint fmt",
     "lint": "eslint . --fix --ignore-pattern 'website' --ignore-pattern 'build'",
     "check": "pnpm check:types && pnpm check:format && pnpm check:lint && pnpm check:publint && pnpm examples:check:types",

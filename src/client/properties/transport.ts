@@ -122,6 +122,19 @@ const reducerTransportConfig = (
     }
   }
 
+  if (transportName === `memory`) {
+    // @ts-expect-error
+    if (config.resolverValues?.context) {
+      // @ts-expect-error
+      newConfiguration.resolverValues.context = config.resolverValues.context
+    }
+    // @ts-expect-error
+    if (config.resolverValues?.root) {
+      // @ts-expect-error
+      newConfiguration.resolverValues.root = config.resolverValues.root
+    }
+  }
+
   return {
     ...state,
     transports: {
