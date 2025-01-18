@@ -5,9 +5,8 @@ import type { Anyware } from '../../lib/anyware/__.js'
 import type { Grafaid } from '../../lib/grafaid/__.js'
 import { print } from '../../lib/grafaid/document.js'
 import { execute } from '../../lib/grafaid/execute.js'
-import type { PartialOrUndefined } from '../../lib/prelude.js'
 import type { RequestPipeline } from '../../requestPipeline/RequestPipeline.js'
-import type { Transport } from '../../types/Transport.js'
+import type { ConfigurationResolver } from '../../types/ConfigurationResolver.js'
 
 export interface TransportMemoryConstructor {
   <$ConfigurationInit extends ConfigurationInit = ConfigurationInitEmpty>(
@@ -40,25 +39,20 @@ export type ConfigurationInit = Partial<Configuration>
 
 export interface ConfigurationInitEmpty {}
 
-// todo fixme
-// @ts-expect-error - TransportMemory config normalizer has more narrow inputs than base Extension type.
-//                    Need to flip the sup/sub relationship on those inputs.
-export interface TransportMemory<$ConfigurationInit extends ConfigurationInit = ConfigurationInitEmpty>
-  extends Extension
-{
+export interface TransportMemory<$ConfigurationPartial extends Partial<Configuration>> extends Extension {
   name: `TransportMemory`
   config: Configuration
-  configInit: $ConfigurationInit
+  configInit: $ConfigurationPartial
   transport: {
     name: 'memory'
-    config: Configuration
-    configInit: $ConfigurationInit
-    configDefaults: PartialOrUndefined<Configuration>
-    requestPipelineOverload: RequestPipelineOverload
-    configurationResolver: Transport.ConfigurationResolver<
-      $ConfigurationInit,
-      Configuration extends $ConfigurationInit ? Configuration : never
+    configuration: Configuration
+    configurationInit: ConfigurationInit
+    configurationDefaults: $ConfigurationPartial
+    configurationResolver: ConfigurationResolver<
+      $ConfigurationPartial,
+      Configuration extends $ConfigurationPartial ? Configuration : never
     >
+    requestPipelineOverload: RequestPipelineOverload
   }
   typeHooks: TypeHooksEmpty
   onRequest: undefined
@@ -103,21 +97,21 @@ export interface ExchangeOutput extends PackOutput {}
 
 export const TransportMemory: TransportMemoryConstructor = create({
   name: `TransportMemory`,
-  normalizeConfig(current: Partial<Configuration>, init?: ConfigurationInit) {
-    const newConfigurationPartial: Partial<Configuration> = {
-      ...current,
+  configurationResolver(currentPartial: Partial<Configuration>, init?: ConfigurationInit) {
+    const newPartial: Partial<Configuration> = {
+      ...currentPartial,
     }
 
-    if (init?.schema) newConfigurationPartial.schema = init.schema
+    if (init?.schema) newPartial.schema = init.schema
 
     if (init?.resolverValues) {
-      newConfigurationPartial.resolverValues = {
-        ...current?.resolverValues,
+      newPartial.resolverValues = {
+        ...currentPartial?.resolverValues,
         ...init.resolverValues,
       }
     }
 
-    return newConfigurationPartial
+    return newPartial
   },
   create({ config }) {
     return {

@@ -1,5 +1,5 @@
 import { beforeEach } from 'vitest'
-import { Extension } from '../../src/entrypoints/extensionkit.js'
+import { Extension } from '../../src/entrypoints/extension.js'
 import type { RequestPipelineBaseDefinition } from '../../src/requestPipeline/__.js'
 
 interface SpyData {

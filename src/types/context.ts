@@ -97,7 +97,7 @@ export namespace ClientTransports {
       : $ClientTransports['current'] extends string
         ? $ClientTransports['current'] extends keyof $ClientTransports['configurations']
           ? $ClientTransports['current'] extends keyof $ClientTransports['registry']
-            ? $ClientTransports['configurations'][$ClientTransports['current']] extends $ClientTransports['registry'][$ClientTransports['current']]['config']
+            ? $ClientTransports['configurations'][$ClientTransports['current']] extends $ClientTransports['registry'][$ClientTransports['current']]['configuration']
               ? $SuccessValue
               : ClientTransports.Errors.PreflightCheckTransportNotReady<$ClientTransports['current']>
             : never // Should never happen
@@ -226,12 +226,7 @@ export namespace Context {
             configurations:
               & Omit<$ClientTransports['configurations'], $Transport['name']>
               & {
-                  [_ in $Transport['name']]:
-                    $Transport['configAfterCreate']
-                    // $Transport['configurationResolverTF'] extends Transport.ConfigurationResolverTF
-                    // // Custom Configuration Resolver
-                    // ? ($Transport['configurationResolverTF'] & { init: $Transport['configInit']; current: $Transport['configDefaults'] })['return']
-                    // : $Transport['configDefaults']
+                  [_ in $Transport['name']]: $Transport['configurationDefaults']
                 }
             current: $ClientTransports extends ClientTransports.States.Empty
               ? $Transport['name']

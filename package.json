@@ -14,8 +14,8 @@
     "./generator": {
       "default": "./build/entrypoints/generator.js"
     },
-    "./extensionkit": {
-      "default": "./build/entrypoints/extensionkit.js"
+    "./extension": {
+      "default": "./build/entrypoints/extension.js"
     },
     "./extensions/upload": {
       "default": "./build/entrypoints/extensions/upload/runtime.js"

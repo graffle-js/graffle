@@ -5,12 +5,14 @@ import { Anyware } from '../lib/anyware/__.js'
 import { type AssertExtendsString } from '../lib/prelude.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
 import type { RequestPipelineBaseInterceptor } from '../requestPipeline/RequestPipeline.js'
+import type { ConfigurationResolver } from '../types/ConfigurationResolver.js'
 import { Transport } from '../types/Transport.js'
 import type { Extension } from './__.js'
 import { BuilderExtension } from './builder.js'
 import { type TypeHooks, type TypeHooksBuilder, typeHooksBuilder, type TypeHooksEmpty } from './TypeHooks.js'
 
 export * from './context.js'
+
 export * as TypeHooks from './TypeHooks.js'
 
 export namespace States {
@@ -49,7 +51,7 @@ export const create = <
   definition: {
     name: $Name
     configurationDefaults?: $ConfigurationDefaults
-    normalizeConfig?: (current: object, ...args: $ConfigInputParameters) => $Config
+    configurationResolver?: (current: object, ...args: $ConfigInputParameters) => $Config
     custom?: $Custom
     create: (
       parameters: {
@@ -74,15 +76,15 @@ export const create = <
   $TypeHooks,
   $Custom,
   $TransportCallbackResult extends Anyware.Overload.Builder ? {
-      configurationResolver: Transport.ConfigurationResolver
+      configurationResolver: ConfigurationResolver
       // todo fixme
       // Names of transports can only be strings but its wider for anyware overloads
       name: AssertExtendsString<$TransportCallbackResult['type']['discriminant'][1]>
-      configAfterCreate: {} // todo
-      configDefaults: $TransportCallbackResult['type']['inputDefaults']
+      // configAfterCreate: {} // todo
+      configurationDefaults: {} // todo: $TransportCallbackResult['type']['inputDefaults']
       requestPipelineOverload: $TransportCallbackResult['type']
       // types
-      config: $TransportCallbackResult['type']['input']
+      configuration: $TransportCallbackResult['type']['input']
       configurationInit: $TransportCallbackResult['type']['inputInit'] extends object
         ? $TransportCallbackResult['type']['inputInit']
         : {}
@@ -93,7 +95,7 @@ export const create = <
     // todo: "ConfigurationResolver" is an extension-scope concept, but it is being used in this constructor
     // as if transport-scope. See the the transport variable below for example.
     // It is a hack that will lead to confusion, bugs, etc.
-    const configurationResolver = definition.normalizeConfig as undefined | Transport.ConfigurationResolver
+    const configurationResolver = definition.configurationResolver as undefined | ConfigurationResolver
       ?? Transport.defaultConfigurationResolver
 
     const currentConfigurationPartial = definition.configurationDefaults ?? {}
@@ -112,11 +114,11 @@ export const create = <
     const transport: Transport | undefined = overload
       ? {
         name: overload.discriminant[1] as string,
-        config: overload.input,
-        configDefaults: overload.inputDefaults,
+        configuration: overload.input,
+        configurationDefaults: overload.inputDefaults ?? {},
         requestPipelineOverload: overload,
         configurationResolver,
-        configAfterCreate: undefined as any,
+        // configAfterCreate: undefined as any,
         configurationInit: undefined as any,
       }
       : undefined

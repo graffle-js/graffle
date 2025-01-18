@@ -1,16 +1,71 @@
-import { create, type Extension } from '../../entrypoints/extensionkit.js'
+import { Extension } from '../../entrypoints/extension.js'
 import type { TypeHooksEmpty } from '../../extension/TypeHooks.js'
+import { Configurator } from '../../extension2/configurator.js'
 import type { Anyware } from '../../lib/anyware/__.js'
-import type { ConfigManager } from '../../lib/config-manager/__.js'
 import type { Grafaid } from '../../lib/grafaid/__.js'
 import { OperationTypeToAccessKind, print } from '../../lib/grafaid/document.js'
-import { getRequestEncodeSearchParameters, postRequestEncodeBody } from '../../lib/grafaid/http/http.js'
+import type { getRequestEncodeSearchParameters, postRequestEncodeBody } from '../../lib/grafaid/http/http.js'
 import { getRequestHeadersRec, parseExecutionResult, postRequestHeadersRec } from '../../lib/grafaid/http/http.js'
 import { mergeRequestInit, searchParamsAppendAll } from '../../lib/http.js'
 import type { httpMethodGet, httpMethodPost } from '../../lib/http.js'
 import { _, isString, type MaybePromise, type PartialOrUndefined } from '../../lib/prelude.js'
 import type { RequestPipeline } from '../../requestPipeline/RequestPipeline.js'
-import type { Transport } from '../../types/Transport.js'
+import type { ConfigurationResolverTF } from '../../types/ConfigurationResolver.js'
+
+// ----------------------------
+// Configuration
+// ----------------------------
+
+type TransportHttpConfigurator = Configurator<
+  ConfigurationInput,
+  ConfigurationNormalized,
+  ConfigurationDefault,
+  ConfigurationInputResolver
+>
+
+export type ConfigurationInput = {
+  url?: URL | string
+  methodMode?: MethodMode
+  headers?: HeadersInit
+  raw?: RequestInit
+}
+
+export interface ConfigurationNormalized {
+  url: URL
+  methodMode: MethodMode
+  headers?: Headers
+  raw?: RequestInit
+}
+
+export const configurationDefault = {
+  methodMode: `post`,
+} satisfies Partial<ConfigurationNormalized>
+export type ConfigurationDefault = typeof configurationDefault
+
+export interface ConfigurationInputEmpty {}
+
+export interface ConfigurationInputResolver$Func extends Configurator.InputResolver$Func {
+  // @ts-expect-error
+  _return: ConfigurationInputResolver$Func_<this['$input'], this['$partialNormalized']>
+}
+// dprint-ignore
+export interface ConfigurationInputResolver$Func_<
+  $Input extends ConfigurationInput,
+  $PartialNormalized extends Partial<ConfigurationNormalized>,
+> extends Partial<ConfigurationNormalized> {
+  url: 'url' extends keyof $PartialNormalized ? URL : 'url' extends keyof $Input ? URL : undefined
+  methodMode: 'methodMode' extends keyof $PartialNormalized ? MethodMode : 'methodMode' extends keyof $Input ? MethodMode : undefined
+}
+
+export type ConfigurationInputResolver = Configurator.InputResolver<
+  ConfigurationInput,
+  ConfigurationNormalized,
+  ConfigurationInputResolver$Func
+>
+
+// ----------------------------
+// Transport
+// ----------------------------
 
 export const MethodMode = {
   post: `post`,
@@ -42,68 +97,9 @@ export type TransportHttpInput = {
   raw?: RequestInit
 }
 
-export interface TransportHttpConstructor {
-  <$ConfigurationInit extends ConfigurationInit = ConfigurationInitEmpty>(
-    configurationInit?: $ConfigurationInit,
-  ): TransportHttp<ConfigurationResolver<ConfigurationPartialDefaults, $ConfigurationInit>>
-}
-
-export interface Configuration {
-  url: URL
-  methodMode: MethodMode
-  headers?: Headers
-  raw?: RequestInit
-}
-
-export const configurationPartialDefaults = {
-  methodMode: `post`,
-} satisfies Partial<Configuration>
-export type ConfigurationPartialDefaults = typeof configurationPartialDefaults
-
-export type ConfigurationInit = {
-  url?: URL | string
-  methodMode?: MethodMode
-  headers?: HeadersInit
-  raw?: RequestInit
-}
-
-export interface ConfigurationInitEmpty {}
-
-export interface ConfigurationResolverF extends Transport.ConfigurationResolverTF {
-  // @ts-expect-error
-  return: ConfigurationResolver<this['current'], this['init']>
-}
-// dprint-ignore
-export interface ConfigurationResolver<
-  $Current extends Partial<Configuration>,
-  $Init extends ConfigurationInit,
-> extends Partial<Configuration> {
-  url: 'url' extends keyof $Current ? URL : 'url' extends keyof $Init ? URL : undefined
-  methodMode: 'methodMode' extends keyof $Current ? MethodMode : 'methodMode' extends keyof $Init ? MethodMode : undefined
-}
-
-export interface TransportHttp<$ConfigurationPartial extends PartialOrUndefined<Configuration>> extends Extension {
-  name: `TransportHttp`
-  config: Configuration
-  transport: {
-    name: 'http'
-    configAfterCreate: $ConfigurationPartial
-    configDefaults: PartialOrUndefined<Configuration>
-    requestPipelineOverload: RequestPipelineOverload
-    configurationResolver: Transport.ConfigurationResolver
-    // Types
-    config: Configuration
-    configurationInit: ConfigurationInit
-    configurationResolverTF: ConfigurationResolverF
-  }
-  typeHooks: TypeHooksEmpty
-  onRequest: undefined
-  builder: undefined
-}
-
 export interface RequestPipelineOverload extends Anyware.Overload {
   discriminant: ['transportType', 'http']
-  input: Configuration
+  input: ConfigurationNormalized
   inputInit: {}
   steps: {
     pack: {
@@ -170,123 +166,139 @@ type ExchangeGetRequest = Omit<RequestInit, 'body' | 'method'> & {
   url: string | URL
 }
 
-export const TransportHttp: TransportHttpConstructor = create({
-  name: `TransportHttp`,
-  configurationDefaults: configurationPartialDefaults,
-  // todo rename to "configurationResolver"
-  normalizeConfig(current: Partial<Configuration>, init?: ConfigurationInit) {
-    const newConfigurationPartial: Partial<Configuration> = {
-      ...current,
-    }
+// ----------------------------
+// Extension
+// ----------------------------
 
-    if (init?.headers) {
-      const newHeaders = new Headers(init.headers)
+export interface TransportHttpConstructor {
+  <$ConfigurationInput extends ConfigurationInput = ConfigurationInputEmpty>(
+    configurationInput?: $ConfigurationInput,
+  ): TransportHttp<ConfigurationInputResolver$Func_<$ConfigurationInput, ConfigurationDefault>>
+}
 
-      current?.headers?.forEach((value, name) => {
-        newHeaders.append(name, value)
+export interface TransportHttp<$ConfigurationNormalizedPartial extends Partial<ConfigurationNormalized>>
+  extends Extension
+{
+  name: `TransportHttp`
+  configurator: TransportHttpConfigurator
+  // transport: {
+  //   name: 'http'
+  //   // configAfterCreate: $ConfigurationPartial
+  //   configurationDefaults: $ConfigurationPartial // PartialOrUndefined<Configuration>
+  //   requestPipelineOverload: RequestPipelineOverload
+  //   configurationResolver: ConfigurationInputResolver
+  //   // Types
+  //   configuration: ConfigurationNormalized
+  //   configurationInit: ConfigurationInput
+  //   configurationResolverTF: ConfigurationInputResolver$Func
+  // }
+  // typeHooks: TypeHooksEmpty
+  // onRequest: undefined
+  // builder: undefined
+}
+
+export const TransportHttp = Extension
+  .create(`TransportHttp`)
+  .configurator((__) =>
+    __
+      .input<ConfigurationInput>()
+      .normalized<ConfigurationNormalized>()
+      .default({
+        methodMode: `post`,
       })
+      .inputResolver<ConfigurationInputResolver$Func>((current, input) => {
+        const x: MethodMode = current.methodMode
+        x
+        // todo
+        input
+        return current
+      })
+  )
+  .extension
+// .transport((define) =>
+//   define(`http`)
+//     .stepWithExtendedInput<{ headers?: HeadersInit }>()(`pack`, {
+//       slots: {
+//         searchParams: getRequestEncodeSearchParameters,
+//         body: postRequestEncodeBody,
+//       },
+//       run: (input, slots) => {
+//         const graphqlRequest: Grafaid.HTTP.RequestConfig = {
+//           operationName: input.request.operationName,
+//           variables: input.request.variables,
+//           query: print(input.request.query),
+//         }
 
-      newConfigurationPartial.headers = newHeaders
-    }
+//         const operationType = isString(input.request.operation)
+//           ? input.request.operation
+//           : input.request.operation.operation
+//         const methodMode = input.methodMode
+//         const requestMethod = methodMode === MethodMode.post
+//           ? `post`
+//           : OperationTypeToAccessKind[operationType] === `read`
+//           ? `get`
+//           : `post`
 
-    if (init?.url) {
-      newConfigurationPartial.url = new URL(init.url)
-    }
-
-    return newConfigurationPartial
-  },
-  create({ config }) {
-    return {
-      transport(create) {
-        return create(`http`)
-          .config<Configuration>()
-          .defaults(config)
-          .configInit<ConfigurationInit>()
-          .stepWithExtendedInput<{ headers?: HeadersInit }>()(`pack`, {
-            slots: {
-              searchParams: getRequestEncodeSearchParameters,
-              body: postRequestEncodeBody,
-            },
-            run: (input, slots) => {
-              const graphqlRequest: Grafaid.HTTP.RequestConfig = {
-                operationName: input.request.operationName,
-                variables: input.request.variables,
-                query: print(input.request.query),
-              }
-
-              const operationType = isString(input.request.operation)
-                ? input.request.operation
-                : input.request.operation.operation
-              const methodMode = input.methodMode
-              const requestMethod = methodMode === MethodMode.post
-                ? `post`
-                : OperationTypeToAccessKind[operationType] === `read`
-                ? `get`
-                : `post`
-
-              const baseProperties = mergeRequestInit(
-                mergeRequestInit(
-                  mergeRequestInit(
-                    {
-                      headers: requestMethod === `get` ? getRequestHeadersRec : postRequestHeadersRec,
-                    },
-                    {
-                      headers: input.headers,
-                    },
-                  ),
-                  input.raw,
-                ),
-                {
-                  headers: input.headers,
-                },
-              )
-              const request: ExchangeRequest = requestMethod === `get`
-                ? {
-                  methodMode: methodMode as MethodModeGetReads,
-                  ...baseProperties,
-                  method: `get`,
-                  url: searchParamsAppendAll(input.url, slots.searchParams(graphqlRequest)),
-                }
-                : {
-                  methodMode: methodMode,
-                  ...baseProperties,
-                  method: `post`,
-                  url: input.url,
-                  body: slots.body(graphqlRequest),
-                }
-              return {
-                ...input,
-                request,
-              }
-            },
-          })
-          .step(`exchange`, {
-            slots: {
-              fetch: (request: Request): MaybePromise<Response> => fetch(request),
-            },
-            run: async (input, slots) => {
-              const request = new Request(input.request.url, input.request)
-              const response = await slots.fetch(request)
-              return {
-                ...input,
-                response,
-              }
-            },
-          })
-          .step(`unpack`, {
-            run: async (input) => {
-              // todo 1 if response is missing header of content length then .json() hangs forever.
-              //        firstly consider a timeout, secondly, if response is malformed, then don't even run .json()
-              // todo 2 if response is e.g. 404 with no json body, then an error is thrown because json parse cannot work, not gracefully handled here
-              const json = await input.response.json() as object
-              const result = parseExecutionResult(json)
-              return {
-                ...input,
-                result,
-              }
-            },
-          })
-      },
-    }
-  },
-})
+//         const baseProperties = mergeRequestInit(
+//           mergeRequestInit(
+//             mergeRequestInit(
+//               {
+//                 headers: requestMethod === `get` ? getRequestHeadersRec : postRequestHeadersRec,
+//               },
+//               {
+//                 headers: input.headers,
+//               },
+//             ),
+//             input.raw,
+//           ),
+//           {
+//             headers: input.headers,
+//           },
+//         )
+//         const request: ExchangeRequest = requestMethod === `get`
+//           ? {
+//             methodMode: methodMode as MethodModeGetReads,
+//             ...baseProperties,
+//             method: `get`,
+//             url: searchParamsAppendAll(input.url, slots.searchParams(graphqlRequest)),
+//           }
+//           : {
+//             methodMode: methodMode,
+//             ...baseProperties,
+//             method: `post`,
+//             url: input.url,
+//             body: slots.body(graphqlRequest),
+//           }
+//         return {
+//           ...input,
+//           request,
+//         }
+//       },
+//     })
+//     .step(`exchange`, {
+//       slots: {
+//         fetch: (request: Request): MaybePromise<Response> => fetch(request),
+//       },
+//       run: async (input, slots) => {
+//         const request = new Request(input.request.url, input.request)
+//         const response = await slots.fetch(request)
+//         return {
+//           ...input,
+//           response,
+//         }
+//       },
+//     })
+//     .step(`unpack`, {
+//       run: async (input) => {
+//         // todo 1 if response is missing header of content length then .json() hangs forever.
+//         //        firstly consider a timeout, secondly, if response is malformed, then don't even run .json()
+//         // todo 2 if response is e.g. 404 with no json body, then an error is thrown because json parse cannot work, not gracefully handled here
+//         const json = await input.response.json() as object
+//         const result = parseExecutionResult(json)
+//         return {
+//           ...input,
+//           result,
+//         }
+//       },
+//     })
+// )

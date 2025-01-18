@@ -17,7 +17,7 @@ describe(`constructor arguments`, () => {
   test(`normalizeConfig with optional keys -> constructor input optional`, () => {
     const Ex = create({
       name: `test`,
-      normalizeConfig: (_?: { a?: 1; b?: 2 }) => {
+      configurationResolver: (_?: { a?: 1; b?: 2 }) => {
         return { a: 11, b: 22 }
       },
       create: () => {
@@ -31,7 +31,7 @@ describe(`constructor arguments`, () => {
   test(`normalizeConfig with required input (but optional keys) -> constructor input required`, () => {
     const Ex = create({
       name: `test`,
-      normalizeConfig: (_: { a?: 1; b?: 2 }) => {
+      configurationResolver: (_: { a?: 1; b?: 2 }) => {
         return { a: 11, b: 22 }
       },
       create: () => {
@@ -46,7 +46,7 @@ describe(`constructor arguments`, () => {
   test(`normalizeConfig with required keys -> constructor input required`, () => {
     const Ex = create({
       name: `test`,
-      normalizeConfig: (_: { a: 1; b?: 2 }) => {
+      configurationResolver: (_: { a: 1; b?: 2 }) => {
         return { a: 11, b: 22 }
       },
       create: () => {

@@ -1,36 +1,27 @@
 import type { Anyware } from '../lib/anyware/__.js'
 import type { RequestPipelineBaseDefinition } from '../requestPipeline/__.js'
+import type { ConfigurationResolver, ConfigurationResolverTF } from './ConfigurationResolver.js'
 
 export interface Transport {
   name: string
   /**
    * The configuration that the transport was created with.
    */
-  configAfterCreate: object
-  configDefaults: object | undefined
+  // configAfterCreate: object
+  configurationDefaults: object
   requestPipelineOverload: Anyware.Overload
-  configurationResolver: Transport.ConfigurationResolver
+  configurationResolver: ConfigurationResolver<any, any>
   // Types
-  config: object
+  configuration: object
   configurationInit: object
-  configurationResolverTF?: Transport.ConfigurationResolverTF
+  configurationResolverTF?: ConfigurationResolverTF
 }
 
 export namespace Transport {
-  export type ConfigurationResolver<
-    $ConfigurationInit extends object = object,
-    $Configuration extends $ConfigurationInit = $ConfigurationInit,
-  > = (currentPartial: Partial<$Configuration>, init?: $ConfigurationInit) => Partial<$Configuration>
-
   export const defaultConfigurationResolver: ConfigurationResolver = (currentPartial, init) => ({
     ...currentPartial,
     ...init,
   })
-  export interface ConfigurationResolverTF {
-    current: unknown
-    init: unknown
-    return: unknown
-  }
 
   export namespace Builder {
     export interface Namespace {

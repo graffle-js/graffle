@@ -84,8 +84,8 @@ export const useReducer = <
     }
     newContext.transports.registry[extension.transport.name] = extension.transport
     newContext.transports.configurations[extension.transport.name] = {
-      ...extension.transport.configDefaults,
-      ...extension.transport.config,
+      ...extension.transport.configurationDefaults,
+      ...extension.transport.configuration,
     }
   }
 

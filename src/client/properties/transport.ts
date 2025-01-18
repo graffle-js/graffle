@@ -1,7 +1,7 @@
 import type { PartialOrUndefined } from '../../lib/prelude.js'
+import type { ConfigurationResolverTF } from '../../types/ConfigurationResolver.js'
 import type { ClientTransports, ClientTransportsConfiguration } from '../../types/context.js'
 import { type Context } from '../../types/context.js'
-import type { Transport } from '../../types/Transport.js'
 import type { Client } from '../client.js'
 import { createProperties } from '../helpers.js'
 
@@ -36,9 +36,9 @@ export type TransportMethod<
                             : {
                                 [transportName in keyof $Context['transports']['configurations']]:
                                   transportName extends $Context['transports']['current']
-                                    ? $Context['transports']['registry'][transportName]['configurationResolverTF'] extends Transport.ConfigurationResolverTF
+                                    ? $Context['transports']['registry'][transportName]['configurationResolverTF'] extends ConfigurationResolverTF
                                       // Custom Configuration Init Resolver
-                                      ? ($Context['transports']['registry'][transportName]['configurationResolverTF'] & { init: configInit; current: $Context['transports']['configurations'][transportName] })['return']
+                                      ? ($Context['transports']['registry'][transportName]['configurationResolverTF'] & { init: configInit; partial: $Context['transports']['configurations'][transportName] })['return']
                                       // Default Configuration Init Resolver
                                       : {
                                           [configValueKey in keyof $Context['transports']['configurations'][transportName]]:
@@ -59,7 +59,7 @@ export type TransportMethod<
          */
         <
           name extends ClientTransports.GetNames<$Context['transports']>,
-          configInit extends undefined | $Context['transports']['registry'][name]['configAfterCreate'] = undefined
+          configInit extends undefined | $Context['transports']['registry'][name]['configurationInit'] = undefined
         >
           (name: name, configurationInit?: configInit):
             Client<
@@ -75,10 +75,10 @@ export type TransportMethod<
                           : {
                             [configKeyTransportName in keyof $Context['transports']['configurations']]:
                               configKeyTransportName extends name
-                               ? $Context['transports']['registry'][configKeyTransportName]['configurationResolverTF'] extends Transport.ConfigurationResolverTF
+                               ? $Context['transports']['registry'][configKeyTransportName]['configurationResolverTF'] extends ConfigurationResolverTF
                                   // Custom Configuration Init Resolver
                                   ? (& $Context['transports']['registry'][configKeyTransportName]['configurationResolverTF']
-                                     & { init: configInit; current: $Context['transports']['configurations'][configKeyTransportName] })['return']
+                                     & { init: configInit; partial: $Context['transports']['configurations'][configKeyTransportName] })['return']
                                   // Default Configuration Init Resolver
                                   : {
                                       [configValueKey in keyof $Context['transports']['configurations'][configKeyTransportName]]:

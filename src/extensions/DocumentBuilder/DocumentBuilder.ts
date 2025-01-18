@@ -1,33 +1,28 @@
 import { OperationTypeNode } from 'graphql'
 import type { ExtensionChainable } from '../../client/client.js'
-import { type Context, create } from '../../entrypoints/extensionkit.js'
+import { type Context } from '../../entrypoints/extension.js'
 import type { ClientTransports, GlobalRegistry } from '../../entrypoints/utilities-for-generated.js'
 import type { TypeFunction } from '../../lib/type-function/__.js'
 import { createMethodDocument, createMethodOperationType } from './_.js'
 
-export const DocumentBuilder = create({
-  name: `DocumentBuilder`,
-  create: ({ builder }) => {
+export const DocumentBuilder = Extension
+  .create(`DocumentBuilder`)
+  .properties<Properties>(({ context }) => {
     return {
-      builder: builder<BuilderExtension>(({ context }) => {
-        return {
-          document: createMethodDocument(context),
-          query: createMethodOperationType(context, OperationTypeNode.QUERY),
-          mutation: createMethodOperationType(context, OperationTypeNode.MUTATION),
-          // todo
-          // subscription: async () => {},
-        } as any
-      }),
-    }
-  },
-})
+      document: createMethodDocument(context),
+      query: createMethodOperationType(context, OperationTypeNode.QUERY),
+      mutation: createMethodOperationType(context, OperationTypeNode.MUTATION),
+      // todo
+      // subscription: async () => {},
+    } as any
+  })
 
-export interface BuilderExtension extends ExtensionChainable {
+export interface Properties extends ExtensionChainable {
   // @ts-expect-error
-  return: BuilderExtension_<this['params'][0]>
+  return: Properties_<this['params'][0]>
 }
 
-type BuilderExtension_<$Context extends Context> =
+type Properties_<$Context extends Context> =
   // todo
   // GlobalRegistry.Has<$Context['name']> extends false
   // eslint-disable-next-line
