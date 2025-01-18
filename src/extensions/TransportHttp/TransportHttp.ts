@@ -1,6 +1,6 @@
 import { Extension } from '../../entrypoints/extension.js'
 import type { TypeHooksEmpty } from '../../extension/TypeHooks.js'
-import { Configurator } from '../../extension2/configurator.js'
+import type { Configurator } from '../../extension2/configurator.js'
 import type { Anyware } from '../../lib/anyware/__.js'
 import type { Grafaid } from '../../lib/grafaid/__.js'
 import { OperationTypeToAccessKind, print } from '../../lib/grafaid/document.js'
@@ -20,7 +20,7 @@ type TransportHttpConfigurator = Configurator<
   ConfigurationInput,
   ConfigurationNormalized,
   ConfigurationDefault,
-  ConfigurationInputResolver
+  Configurator.InputResolver<ConfigurationInputResolver$Func>
 >
 
 export type ConfigurationInput = {
@@ -42,8 +42,6 @@ export const configurationDefault = {
 } satisfies Partial<ConfigurationNormalized>
 export type ConfigurationDefault = typeof configurationDefault
 
-export interface ConfigurationInputEmpty {}
-
 export interface ConfigurationInputResolver$Func extends Configurator.InputResolver$Func {
   // @ts-expect-error
   _return: ConfigurationInputResolver$Func_<this['$input'], this['$partialNormalized']>
@@ -56,12 +54,6 @@ export interface ConfigurationInputResolver$Func_<
   url: 'url' extends keyof $PartialNormalized ? URL : 'url' extends keyof $Input ? URL : undefined
   methodMode: 'methodMode' extends keyof $PartialNormalized ? MethodMode : 'methodMode' extends keyof $Input ? MethodMode : undefined
 }
-
-export type ConfigurationInputResolver = Configurator.InputResolver<
-  ConfigurationInput,
-  ConfigurationNormalized,
-  ConfigurationInputResolver$Func
->
 
 // ----------------------------
 // Transport
@@ -171,7 +163,7 @@ type ExchangeGetRequest = Omit<RequestInit, 'body' | 'method'> & {
 // ----------------------------
 
 export interface TransportHttpConstructor {
-  <$ConfigurationInput extends ConfigurationInput = ConfigurationInputEmpty>(
+  <$ConfigurationInput extends ConfigurationInput = {}>(
     configurationInput?: $ConfigurationInput,
   ): TransportHttp<ConfigurationInputResolver$Func_<$ConfigurationInput, ConfigurationDefault>>
 }
@@ -207,8 +199,6 @@ export const TransportHttp = Extension
         methodMode: `post`,
       })
       .inputResolver<ConfigurationInputResolver$Func>((current, input) => {
-        const x: MethodMode = current.methodMode
-        x
         // todo
         input
         return current

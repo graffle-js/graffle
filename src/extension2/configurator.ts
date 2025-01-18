@@ -2,10 +2,10 @@ import type { IsEmptyObject } from 'type-fest'
 
 // dprint-ignore
 export interface Configurator<
-  $InputConfiguration 			extends Configurator.Configuration 	                                                   = Configurator.Configuration,
-  $NormalizedConfiguration 	extends $InputConfiguration                                                            = Required<$InputConfiguration>,
-  $DefaultConfiguration 		extends Partial<$NormalizedConfiguration>                                              = Partial<$NormalizedConfiguration>,
-	$InputResolver            extends Configurator.InputResolver<$InputConfiguration, $NormalizedConfiguration, any> = Configurator.InputResolver<any, any, any>
+  $InputConfiguration 			extends Configurator.Configuration 	                    = Configurator.Configuration,
+  $NormalizedConfiguration 	extends $InputConfiguration                             = Required<$InputConfiguration>,
+  $DefaultConfiguration 		extends Partial<$NormalizedConfiguration>               = Partial<$NormalizedConfiguration>,
+	$InputResolver            extends Configurator.InputResolver<any> 								= Configurator.InputResolver<any>
 > {
   input: $InputConfiguration
   normalized: $NormalizedConfiguration
@@ -29,7 +29,7 @@ export namespace Configurator {
     input: {}
     normalized: {}
     default: {}
-    inputResolver: InputResolver<{}, {}, {}>
+    inputResolver: InputResolver
   }>
 
   // dprint-ignore
@@ -38,13 +38,10 @@ export namespace Configurator {
 			<$InputConfiguration extends Configuration>(
 			) => Builder<{
 				input: $InputConfiguration,
+				// reset
 				normalized: Required<$InputConfiguration>,
 				default: {},
-				inputResolver: InputResolver<
-					$InputConfiguration,
-					Required<$InputConfiguration>,
-					{}
-				>
+				inputResolver: InputResolver
 			}>
 
     normalized:
@@ -52,12 +49,9 @@ export namespace Configurator {
 			) => Builder<{
 				input: $ProgressiveConfigurator['input'],
 				normalized: $Normalized
-				default: {} // Default depends on normalized, so is reset by its changing. 
-				inputResolver: InputResolver<
-					$ProgressiveConfigurator['input'],
-					$Normalized,
-					{}
-				>
+				// reset
+				default: {}
+				inputResolver: InputResolver
 			}>
 
     default:
@@ -67,11 +61,8 @@ export namespace Configurator {
 				input: $ProgressiveConfigurator['input'],
 				normalized: $ProgressiveConfigurator['normalized'],
 				default: $DefaultConfiguration,
-				inputResolver: InputResolver<
-					$ProgressiveConfigurator['input'],
-					$ProgressiveConfigurator['normalized'],
-					$DefaultConfiguration
-				>
+				// reset
+				inputResolver: InputResolver
 			}>
 
     inputResolver:
@@ -85,13 +76,7 @@ export namespace Configurator {
 				input: $ProgressiveConfigurator['input']
 				normalized: $ProgressiveConfigurator['normalized']
 				default: $ProgressiveConfigurator['default']
-				inputResolver:
-					// todo optimize: I think the only type that needs to be tracked here is $InputResolver$Func.
-					InputResolver<
-						$ProgressiveConfigurator['input'],
-						$ProgressiveConfigurator['normalized'],
-						$InputResolver$Func
-					>
+				inputResolver: InputResolver<$InputResolver$Func>
 			}>
   }
 
@@ -107,11 +92,7 @@ export namespace Configurator {
       $Normalized extends Configuration,
       $Default extends Configuration,
       $InputResolver$Func extends InputResolver$Func = never,
-    >(inputResolver: InputResolverInit<$Input, $Default, $Normalized>): InputResolver<
-      $Input,
-      $Normalized,
-      $InputResolver$Func
-    >
+    >(inputResolver: InputResolverInit<$Input, $Default, $Normalized>): InputResolver<$InputResolver$Func>
   }
 
   export interface InputResolverInit<
@@ -120,22 +101,13 @@ export namespace Configurator {
     $Normalized extends Configuration,
   > {
     (
-      current: Simplify<CurrentifyConfiguration<$Normalized, $Default>>,
+      current: Simplify<ProgressifyConfiguration<$Normalized, $Default>>,
       input: $Input,
     ): Partial<$Normalized>
   }
 
-  // dprint-ignore
-  export interface InputResolver<
-    $Input extends Configuration,
-    $Normalized extends Configuration,
-    $Default extends Configuration,
-    $InputResolver$Func = never,
-  > {
-    (
-      current: CurrentifyConfiguration<$Normalized, $Default>,
-      input: $Input,
-    ): Partial<$Normalized>
+  export interface InputResolver<$InputResolver$Func = never> {
+    (current: Configuration, input: Configuration): Configuration
     [SymbolInputResolver$Func]: $InputResolver$Func
   }
 
@@ -151,7 +123,7 @@ export namespace Configurator {
   // Helpers
   // -------------
 
-  export type CurrentifyConfiguration<
+  export type ProgressifyConfiguration<
     $Normalized extends Configuration,
     $Default extends Configuration,
     _Optional = {
