@@ -34,7 +34,7 @@ export namespace Configurator {
 
   // dprint-ignore
   export interface Builder<$ProgressiveConfigurator extends Configurator> {
-    input:
+    typeOfInput:
 			<$InputConfiguration extends Configuration>(
 			) => Builder<{
 				input: $InputConfiguration,
@@ -44,7 +44,7 @@ export namespace Configurator {
 				inputResolver: InputResolver
 			}>
 
-    normalized:
+    typeOfNormalized:
 			<$Normalized extends $ProgressiveConfigurator['input']>(
 			) => Builder<{
 				input: $ProgressiveConfigurator['input'],

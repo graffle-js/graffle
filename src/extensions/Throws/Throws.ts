@@ -1,11 +1,11 @@
-import type { Client, ExtensionChainable } from '../../client/client.js'
-import { type Context } from '../../entrypoints/extension.js'
+import type { Client } from '../../client/client.js'
+import { Extension } from '../../entrypoints/extension.js'
 import { type ConfigInit, type OutputConfig } from '../../entrypoints/main.js'
 import type { ConfigManager } from '../../lib/config-manager/__.js'
 
 export const Throws = Extension
   .create(`Throws`)
-  .properties<Properties>(({ client, context }) => {
+  .constructor(({ client, context }) => {
     // todo redesign input to allow to force throw always
     // todo pull pre-configured config from core
     const throwsifiedConfigInit: ConfigInit = {
@@ -19,22 +19,26 @@ export const Throws = Extension
         errors: { execution: `throw`, other: `throw`, schema: `throw` },
       },
     }
-    return {
+
+    const properties: Properties = {
       throws: () => client.with(throwsifiedConfigInit),
+    } as any
+
+    return {
+      properties,
     }
   })
 
-interface Properties extends ExtensionChainable {
+interface Properties extends Extension.PropertiesTypeFunction {
   // @ts-expect-error
-  return: Properties_<this['params'][0]>
+  return: Properties_<this['parameters']>
 }
 
-interface Properties_<$Context extends Context> {
-  // return: BuilderExtension_<AssertExtends<this['params'], Builder.Extension.Parameters<BuilderExtension>>>
+interface Properties_<$Parameters extends Extension.PropertiesTypeFunctionParameters> {
   throws: () => Client<
     {
-      [_ in keyof $Context]: _ extends 'output' ? ThrowsifyConfig<$Context['output']>
-        : $Context[_]
+      [_ in keyof $Parameters['context']]: _ extends 'output' ? ThrowsifyConfig<$Parameters['context']['output']>
+        : $Parameters['context'][_]
     },
     // todo
     {} // this['params'][1]

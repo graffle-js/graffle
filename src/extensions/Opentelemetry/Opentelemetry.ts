@@ -3,9 +3,9 @@ import { Extension } from '../../entrypoints/extension.js'
 
 export const OpenTelemetry = Extension
   .create(`OpenTelemetry`)
-  .configurator((__) =>
+  .configuration((__) =>
     __
-      .input<{
+      .typeOfInput<{
         /**
          * @defaultValue `"opentelemetry"`
          */
@@ -15,19 +15,21 @@ export const OpenTelemetry = Extension
         tracerName: `graffle`,
       })
   )
-  .requestInterceptor(({ configuration }) => {
+  .constructor(({ configuration }) => {
     const tracer = trace.getTracer(configuration.tracerName)
     const startActiveGraffleSpan = startActiveSpan(tracer)
 
-    return async ({ encode }) => {
-      return await startActiveGraffleSpan(`request`, async () => {
-        const { pack } = await startActiveGraffleSpan(`encode`, encode)
-        const { exchange } = await startActiveGraffleSpan(`pack`, pack)
-        const { unpack } = await startActiveGraffleSpan(`exchange`, exchange)
-        const { decode } = await startActiveGraffleSpan(`unpack`, unpack)
-        const result = await startActiveGraffleSpan(`decode`, decode)
-        return result
-      })
+    return {
+      async requestInterceptor({ encode }) {
+        return await startActiveGraffleSpan(`request`, async () => {
+          const { pack } = await startActiveGraffleSpan(`encode`, encode)
+          const { exchange } = await startActiveGraffleSpan(`pack`, pack)
+          const { unpack } = await startActiveGraffleSpan(`exchange`, exchange)
+          const { decode } = await startActiveGraffleSpan(`unpack`, unpack)
+          const result = await startActiveGraffleSpan(`decode`, decode)
+          return result
+        })
+      },
     }
   })
   .extension

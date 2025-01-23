@@ -191,10 +191,10 @@ export interface TransportHttp<$ConfigurationNormalizedPartial extends Partial<C
 
 export const TransportHttp = Extension
   .create(`TransportHttp`)
-  .configurator((__) =>
+  .configuration((__) =>
     __
-      .input<ConfigurationInput>()
-      .normalized<ConfigurationNormalized>()
+      .typeOfInput<ConfigurationInput>()
+      .typeOfNormalized<ConfigurationNormalized>()
       .default({
         methodMode: `post`,
       })

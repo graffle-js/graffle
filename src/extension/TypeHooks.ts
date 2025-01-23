@@ -21,18 +21,6 @@ export interface TypeHooks {
    * Note: There is no way to manipulate the whole document.
    */
   onRequestDocumentRootType: OnRequestDocumentRootType[]
-  /**
-   * Type(s) that show up in request result data.
-   *
-   * The purpose of this type is to stop Graffle from
-   * "simplifying" (aka. "expanding") whatever type(s)
-   * is/are here.
-   *
-   * So for example, if this type were `Date` and type `Date`
-   * appeared in the request result data, then it would be left-as is.
-   *
-   * Multiple types can be specified with a union, for example: `IntrospectionQuery | Date`.
-   */
   requestResultDataTypes: unknown
 }
 
