@@ -109,7 +109,7 @@ interface Properties extends Extension.PropertiesTypeFunction {
 }
 
 interface Properties_<
-  $Parameters extends Extension.ConstructorParameters,
+  $Parameters extends Extension.PropertiesTypeFunctionParameters,
 > {
   introspect: ClientTransports.PreflightCheck<
     $Parameters['context'],
