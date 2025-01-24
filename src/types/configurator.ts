@@ -1,6 +1,10 @@
 import type { IsEmptyObject } from 'type-fest'
 import { __ } from '../lib/prelude.js'
 
+// ----------------------------
+// Data Type
+// ----------------------------
+
 // dprint-ignore
 export interface Configurator<
   $InputConfiguration 			extends Configurator.Configuration 	                    = Configurator.Configuration,
@@ -14,9 +18,30 @@ export interface Configurator<
   inputResolver: $InputResolver
 }
 
-export const Configurator = (): Configurator.State.BuilderEmpty => {
+export const Configurator = (): Configurator.States.BuilderEmpty => {
   return __()
 }
+
+namespace $ {
+  export const createInputResolver: Configurator.CreateInputResolver = (_) => _ as any
+
+  export const defaultInputResolver = createInputResolver((current, input) => ({
+    ...current,
+    ...input,
+  }))
+
+  export const SymbolInputResolver$Func = Symbol(`InputResolver$Func`)
+
+  export const SymbolBuilderData = Symbol(`BuilderData`)
+
+  export const getBuilderData = <$Builder extends Configurator.Builder<Configurator>>(
+    builder: $Builder,
+  ): Configurator.GetBuilderData<$Builder> => builder[$.SymbolBuilderData]
+
+  export const empty = getBuilderData(Configurator())
+}
+
+Configurator.$ = $
 
 // export class ConfiguratorClass<
 //   $InputConfiguration 			   extends Configurator.Configuration 	                  = Configurator.Configuration,
@@ -49,32 +74,26 @@ export const Configurator = (): Configurator.State.BuilderEmpty => {
 //   }
 // }
 
-export const createInputResolver: Configurator.CreateInputResolver = (_) => _ as any
-
-export const defaultInputResolver = createInputResolver((current, input) => ({
-  ...current,
-  ...input,
-}))
-
-//
-// Namespace
-//
-
 export namespace Configurator {
   // ----------------------------
   // Builder
   // ----------------------------
 
   export interface BuilderProviderCallback<$ProgressiveConfigurator extends Configurator> {
-    (builder: State.BuilderEmpty): Builder<$ProgressiveConfigurator>
+    (builder: States.BuilderEmpty): Builder<$ProgressiveConfigurator>
   }
 
-  export namespace State {
-    export type BuilderEmpty = Builder<Configurator<{}, {}, {}, InputResolver>>
+  export namespace States {
+    export type Empty = Configurator<{}>
+    export type BuilderEmpty = Builder<Empty>
   }
+
+  export type GetBuilderData<$Builder extends Builder<Configurator>> = $Builder[typeof $.SymbolBuilderData]
 
   // dprint-ignore
   export interface Builder<$ProgressiveConfigurator extends Configurator> {
+    [$.SymbolBuilderData]: $ProgressiveConfigurator
+
     typeOfInput:
 			<$InputConfiguration extends Configuration>(
 			) => Builder<Configurator<$InputConfiguration, Required<$InputConfiguration>, {}, InputResolver>>
@@ -124,7 +143,7 @@ export namespace Configurator {
 
   export interface InputResolver<$InputResolver$Func = never> {
     (current: Configuration, input: Configuration): Configuration
-    [SymbolInputResolver$Func]: $InputResolver$Func
+    [$.SymbolInputResolver$Func]: $InputResolver$Func
   }
 
   export interface InputResolver$Func {
@@ -176,5 +195,3 @@ export namespace Configurator {
     }
     & {}
 }
-
-export const SymbolInputResolver$Func = Symbol(`InputResolver$Func`)

@@ -1,7 +1,7 @@
 import { describe, expectTypeOf, test } from 'vitest'
 import { _ } from '../../prelude.js'
-import type { initialInput } from '../__.test-helpers.js'
-import { results, slots, stepA, stepB } from '../__.test-helpers.js'
+import type { initialInput } from '../_.test-helpers.js'
+import { results, slots, stepA, stepB } from '../_.test-helpers.js'
 import { PipelineDefinition } from './__.js'
 import type { Config } from './Config.js'
 

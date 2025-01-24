@@ -1,4 +1,4 @@
-import { Overload } from '../Overload/__.js'
+import { Overload } from '../Overload/_namespace.js'
 import type { PipelineDefinition } from '../PipelineDef/__.js'
 import type { Extension } from './__.js'
 

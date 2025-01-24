@@ -1,6 +1,6 @@
 import type { FormattedExecutionResult } from 'graphql'
 import type { GraffleExecutionResultEnvelope } from '../client/handleOutput.js'
-import { Anyware } from '../lib/anyware/__.js'
+import { Anyware } from '../lib/anyware/_namespace.js'
 import type { Config } from '../lib/anyware/PipelineDef/Config.js'
 import type { Grafaid } from '../lib/grafaid/__.js'
 import { normalizeRequestToNode } from '../lib/grafaid/request.js'
@@ -48,32 +48,13 @@ export interface RequestPipelineBaseDefinition extends Anyware.PipelineDefinitio
     transportType: 'none'
     transport: {}
   }
-  steps: [{
-    name: 'encode'
-    input: RequestPipeline.Input
-    output: RequestPipeline.EncodeOutput
-    slots: {}
-  }, {
-    name: 'pack'
-    input: RequestPipeline.PackInput
-    output: {}
-    slots: {}
-  }, {
-    name: 'exchange'
-    input: {}
-    output: {}
-    slots: {}
-  }, {
-    name: 'unpack'
-    input: {}
-    output: {}
-    slots: {}
-  }, {
-    name: 'decode'
-    input: RequestPipeline.DecodeInput
-    output: RequestPipeline.Output
-    slots: {}
-  }]
+  steps: [
+    Anyware.StepDefinition<'encode', {}, RequestPipeline.Input, RequestPipeline.EncodeOutput>,
+    Anyware.StepDefinition<'pack', {}, RequestPipeline.PackInput, {}>,
+    Anyware.StepDefinition<'exchange', {}, {}, {}>,
+    Anyware.StepDefinition<'unpack', {}, {}, {}>,
+    Anyware.StepDefinition<'decode', {}, RequestPipeline.DecodeInput, RequestPipeline.Output>,
+  ]
 }
 
 const { stepName } = RequestPipeline

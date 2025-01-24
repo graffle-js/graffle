@@ -1,67 +1,104 @@
-import type { Anyware } from '../lib/anyware/__.js'
+import type { Anyware } from '../lib/anyware/_namespace.js'
 import { __ } from '../lib/prelude.js'
-import type { RequestPipeline, RequestPipelineBaseDefinition } from '../requestPipeline/__.js'
+import type { RequestPipeline } from '../requestPipeline/__.js'
 import type { Configurator } from './configurator.js'
 
 export interface Transport<
   $Name extends string = string,
-  $Configurator extends Configurator | undefined = Configurator | undefined,
-> {
-  name: $Name
-  configurator?: $Configurator
-  requestPipelineOverload: Anyware.Overload
+  $Configurator extends Configurator = Configurator,
+  $Pack extends Anyware.StepDefinition<'pack'> = Anyware.StepDefinition<'pack'>,
+  $Exchange extends Anyware.StepDefinition<'exchange'> = Anyware.StepDefinition<'exchange'>,
+  $Unpack extends Anyware.StepDefinition<'unpack'> = Anyware.StepDefinition<'unpack'>,
+> extends Anyware.Overload {
+  discriminant: ['transportType', $Name]
+  configurator: $Configurator
+  steps: {
+    pack: $Pack
+    exchange: $Exchange
+    unpack: $Unpack
+  }
 }
 
-export const build = <$Name extends string>(name: $Name): Transport.Builder<Transport<$Name, undefined>> => {
+export const Transport = <$Name extends string>(
+  name: $Name,
+): Transport.Builder.States.Empty<$Name> => {
   return __(name)
 }
-
-export const Transport = build
 
 export namespace Transport {
   // dprint-ignore
   export interface Builder<$TransportProgressive extends Transport> {
+    /**
+     * TODO
+     */
     configurator: <$Configurator extends Configurator>(
       input: Configurator.BuilderProviderCallback<$Configurator> | Configurator.Builder<$Configurator> | $Configurator,
     ) => Builder<Transport<
-          $TransportProgressive['name'],
+          $TransportProgressive['discriminant'][1],
           $Configurator
         >>
-    pack: <$Step extends Step<'pack'>>(step: { run: any, slots?: any }) => Builder<$TransportProgressive>
-    exchange: <$Step extends Step<'exchange'>>(step: { run: any; slots?:any }) => Builder<$TransportProgressive>
-    unpack: <$Step extends Step<'unpack'>>(step: { run: any; slots?:any }) => Builder<$TransportProgressive>
-    // step: <$Step extends Step>(step: Step.Builder<$Step>) => Builder<$TransportProgressive>
+    /**
+     * TODO
+     */
+    pack: <
+      $Input = $TransportProgressive['configurator']['normalized'] & RequestPipeline.PackInput,
+      $Output = {},
+      $Slots extends Anyware.StepDefinition.Slots = {}
+    >(step: {
+      run: (
+        input: $Input,
+        slots: $Slots
+      ) => $Output
+      slots?: $Slots
+    }) => Builder<Transport<
+      $TransportProgressive['discriminant'][1],
+      $TransportProgressive['configurator'],
+      Anyware.StepDefinition<'pack', $Slots, $Input, $Output>
+    >>
+    /**
+     * TODO
+     */
+    exchange: <
+      $Input = $TransportProgressive['configurator']['normalized'] & Awaited<$TransportProgressive['steps']['pack']['output']>,
+      $Output = {},
+      $Slots extends Anyware.StepDefinition.Slots = {}
+    >(step: {
+      run: (
+        input: $Input,
+        slots: $Slots
+      ) => $Output
+      slots?: $Slots
+    }) => Builder<Transport<
+      $TransportProgressive['discriminant'][1],
+      $TransportProgressive['configurator'],
+      $TransportProgressive['steps']['pack'],
+      Anyware.StepDefinition<'exchange', $Slots, $Input, $Output>
+    >>
+    /**
+     * TODO
+     */
+    unpack: <
+      $Input = $TransportProgressive['configurator']['normalized'] & Awaited<$TransportProgressive['steps']['exchange']['output']>,
+      $Output = {},
+      $Slots extends Anyware.StepDefinition.Slots = {}
+    >(step: {
+      run: (
+        input: $Input,
+        slots: $Slots
+      ) => $Output
+      slots?: $Slots
+    }) => Builder<Transport<
+      $TransportProgressive['discriminant'][1],
+      $TransportProgressive['configurator'],
+      $TransportProgressive['steps']['pack'],
+      $TransportProgressive['steps']['exchange'],
+      Anyware.StepDefinition<'unpack', $Slots, $Input, $Output>
+    >>
   }
 
   export namespace Builder {
     export namespace States {
-      export type Empty = Builder<Transport<string, undefined>>
-    }
-    export interface Namespace {
-      create: Create
-    }
-
-    export interface Create {
-      <$Name extends string>(name: $Name): Anyware.Overload.Builder<RequestPipelineBaseDefinition, {
-        discriminant: ['transportType', $Name]
-        input: {}
-        steps: {}
-      }>
-    }
-  }
-
-  export interface Step<$Name extends RequestPipeline.StepName = RequestPipeline.StepName> {
-    name: $Name
-    run: (input: any) => any
-  }
-  export namespace Step {
-    // export const build = <
-    //   $Name extends RequestPipeline.StepName = RequestPipeline.StepName,
-    // >(name: $Name): Builder<Step<$Name>> => {
-    //   return __(name)
-    // }
-    export interface Builder<$StepProgressive extends Step> {
-      run: (runner: (input: any) => any) => Builder<$StepProgressive>
+      export type Empty<$Name extends string> = Builder<Transport<$Name, Configurator.States.Empty>>
     }
   }
 }

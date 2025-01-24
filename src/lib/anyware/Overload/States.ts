@@ -1,8 +1,9 @@
-import type { Overload } from './__.js'
+import type { Configurator } from '../../../types/configurator.js'
+import type { Overload } from './_namespace.js'
 
 export namespace States {
   export interface Empty extends Overload {
-    input: {}
+    configurator: Configurator.States.Empty
     steps: {}
   }
 }

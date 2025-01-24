@@ -1,7 +1,7 @@
 import type { ConfigManager } from '../../config-manager/__.js'
 import { type Tuple } from '../../prelude.js'
 import type { Extension } from '../Extension/__.js'
-import { Overload } from '../Overload/__.js'
+import { Overload } from '../Overload/_namespace.js'
 import { Pipeline } from '../Pipeline/Pipeline.js'
 import type { StepDefinition } from '../StepDefinition.js'
 import type { StepRunner } from '../StepRunner.js'

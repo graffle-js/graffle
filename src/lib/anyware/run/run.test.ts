@@ -3,7 +3,6 @@
 import { describe, expect, test, vi } from 'vitest'
 import { Errors } from '../../errors/__.js'
 import type { ContextualError } from '../../errors/ContextualError.js'
-import { PipelineDefinition } from '../_.js'
 import {
   initialInput2,
   oops,
@@ -12,7 +11,8 @@ import {
   run,
   runRetrying,
   type TestInterceptor,
-} from '../__.test-helpers.js'
+} from '../_.test-helpers.js'
+import { PipelineDefinition } from '../_exports.js'
 import { Pipeline } from '../Pipeline/Pipeline.js'
 import { successfulResult } from '../Result.js'
 import { StepDefinition } from '../StepDefinition.js'

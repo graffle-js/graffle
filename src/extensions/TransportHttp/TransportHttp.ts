@@ -1,5 +1,5 @@
 import { Configurator, Extension, Transport } from '../../entrypoints/extension.js'
-import type { Anyware } from '../../lib/anyware/__.js'
+import type { Anyware } from '../../lib/anyware/_namespace.js'
 import type { Grafaid } from '../../lib/grafaid/__.js'
 import { OperationTypeToAccessKind, print } from '../../lib/grafaid/document.js'
 import { getRequestEncodeSearchParameters, postRequestEncodeBody } from '../../lib/grafaid/http/http.js'
@@ -183,6 +183,8 @@ export const TransportHttp: TransportHttp = Extension(`TransportHttp`)
   .transport(
     Transport(`http`)
       .configurator(httpTransportConfigurator)
+      // todo currently the configurator data is spread into the input however it should be concentrated into a transport data prop and then
+      // each step should have the possibility of getting its own configurator too.
       // .packInput<{ headers?: HeadersInit }>()
       .pack({
         slots: {

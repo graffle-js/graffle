@@ -1,6 +1,6 @@
 import { expectTypeOf, test } from 'vitest'
-import { Pipeline } from '../_.js'
-import type { initialInput } from '../__.test-helpers.js'
+import type { initialInput } from '../_.test-helpers.js'
+import { Pipeline } from '../_exports.js'
 import { PipelineDefinition } from '../PipelineDef/__.js'
 import type { Result } from '../Result.js'
 

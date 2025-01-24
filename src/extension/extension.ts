@@ -1,7 +1,7 @@
 import type { IsNever } from 'type-fest'
 import type { ExtensionChainable } from '../client/client.js'
 import type { Context } from '../entrypoints/utilities-for-generated.js'
-import { Anyware } from '../lib/anyware/__.js'
+import { Anyware } from '../lib/anyware/_namespace.js'
 import { type AssertExtendsString } from '../lib/prelude.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
 import type { RequestPipelineBaseInterceptor } from '../requestPipeline/RequestPipeline.js'

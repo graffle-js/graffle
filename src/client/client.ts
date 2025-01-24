@@ -1,5 +1,5 @@
 import type { Extension } from '../extension/__.js'
-import type { Anyware } from '../lib/anyware/__.js'
+import type { Anyware } from '../lib/anyware/_namespace.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
 import { type ClientTransports, Context } from '../types/context.js'
 import { type ConfigInit, type NormalizeConfigInit } from './Configuration/ConfigInit.js'

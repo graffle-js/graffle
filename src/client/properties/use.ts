@@ -1,5 +1,5 @@
 import type { Extension } from '../../extension/__.js'
-import type { Anyware } from '../../lib/anyware/__.js'
+import type { Anyware } from '../../lib/anyware/_namespace.js'
 import type { UnknownOrAnyToNever } from '../../lib/prelude.js'
 import { type Context } from '../../types/context.js'
 import type { Transport } from '../../types/Transport.js'

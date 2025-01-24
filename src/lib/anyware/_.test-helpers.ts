@@ -1,5 +1,5 @@
 import { beforeEach, vi } from 'vitest'
-import { PipelineDefinition } from './_.js'
+import { PipelineDefinition } from './_exports.js'
 import type { Interceptor, NonRetryingInterceptorInput } from './Interceptor/Interceptor.js'
 import { Pipeline } from './Pipeline/Pipeline.js'
 import type { Options } from './PipelineDef/Config.js'

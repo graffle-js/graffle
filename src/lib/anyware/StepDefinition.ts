@@ -3,11 +3,14 @@ import type { StepRunner } from './StepRunner.js'
 
 export interface StepDefinition<
   $Name extends string = string,
+  $Slots extends StepDefinition.Slots = StepDefinition.Slots,
+  $Input = any,
+  $Output = any,
 > {
   name: $Name
-  slots: StepDefinition.Slots
-  input: any
-  output: any
+  slots: $Slots
+  input: $Input
+  output: $Output
   /**
    * Tracking the run signature type is useful for deriving the executable step.
    *

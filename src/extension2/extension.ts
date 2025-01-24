@@ -74,7 +74,7 @@ export namespace Extension {
     <$Name extends string, $Transport extends Transport>(
       name: $Name,
       constructor: (
-        parameters: ConstructorParameters<$ConfigurationNormalized> & { $: Transport.Builder.States.Empty },
+        parameters: ConstructorParameters<$ConfigurationNormalized> & { $: Transport.Builder.States.Empty<$Name> },
       ) => Transport.Builder<$Transport>,
     ): Builder<{
       constructor: $Extension['constructor']

@@ -1,4 +1,4 @@
-import type { Overload } from '../Overload/__.js'
+import type { Overload } from '../Overload/_namespace.js'
 import type { StepDefinition } from '../StepDefinition.js'
 import type { Config } from './Config.js'
 

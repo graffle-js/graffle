@@ -1,5 +1,5 @@
 import { Configurator, Extension, Transport } from '../../entrypoints/extension.js'
-import type { Anyware } from '../../lib/anyware/__.js'
+import type { Anyware } from '../../lib/anyware/_namespace.js'
 import type { Grafaid } from '../../lib/grafaid/__.js'
 import { print } from '../../lib/grafaid/document.js'
 import { execute } from '../../lib/grafaid/execute.js'
@@ -137,6 +137,7 @@ export const TransportMemory: TransportMemoryConstructor = Extension(`TransportM
       })
       .exchange({
         run: async (input) => {
+          input.request
           const result = await execute(input)
           return {
             ...input,

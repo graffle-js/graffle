@@ -1,4 +1,4 @@
-import { Anyware } from '../../../lib/anyware/__.js'
+import { Anyware } from '../../../lib/anyware/_namespace.js'
 import type { Grafaid } from '../../../lib/grafaid/__.js'
 import { getOperationType } from '../../../lib/grafaid/document.js'
 import {

@@ -1,14 +1,13 @@
+import type { Configurator } from '../../../types/configurator.js'
 import type { DiscriminantPropertyValue } from '../../prelude.js'
 import type { StepDefinition } from '../StepDefinition.js'
 
-export * as Overload from './_.js'
+export * as Overload from './_exports.js'
 
 export interface Overload {
   discriminant: DiscriminantSpec
-  input: object
-  inputInit?: object | undefined
-  inputDefaults?: object | undefined
+  configurator: Configurator
   steps: Record<string, StepDefinition>
 }
 
-type DiscriminantSpec = readonly [string, DiscriminantPropertyValue]
+type DiscriminantSpec = readonly [propertyName: string, DiscriminantPropertyValue]

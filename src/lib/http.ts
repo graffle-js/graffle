@@ -8,14 +8,14 @@ export const statusCodes = {
   success: 200,
 }
 
-export const mergeHeadersInit = (headers?: HeadersInit, additionalHeaders?: HeadersInit) => {
-  const base = new Headers(headers)
+export const mergeHeadersInitWithStrategySet = (baseHeaders?: HeadersInit, additionalHeaders?: HeadersInit) => {
+  const base = new Headers(baseHeaders)
   const additional = new Headers(additionalHeaders)
-  for (const [key, value] of additional.entries()) {
+  for (const [key, value] of additional) {
     if (value === UnsetValue) {
       base.delete(key)
     } else {
-      base.set(key, value)
+      base.set(key, value) // todo append instead of set?
     }
   }
   return base
@@ -46,7 +46,7 @@ export type HttpMethodInput =
   | 'TRACE'
 
 export const mergeRequestInit = (a?: RequestInit, b?: RequestInit): RequestInit => {
-  const headers = mergeHeadersInit(a?.headers ?? {}, b?.headers ?? {})
+  const headers = mergeHeadersInitWithStrategySet(a?.headers ?? {}, b?.headers ?? {})
   return {
     ...a,
     ...b,

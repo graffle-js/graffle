@@ -1,25 +1,23 @@
+import { Configurator } from '../../../types/configurator.js'
 import type { ConfigManager } from '../../config-manager/__.js'
 import type { Tuple } from '../../prelude.js'
 import type { PipelineDefinition } from '../PipelineDef/__.js'
 import type { StepDefinition } from '../StepDefinition.js'
-import type { Overload } from './__.js'
+import type { Overload } from './_namespace.js'
 
 export const create: Create = (parameters) => {
-  const overload_: Omit<Overload, 'input'> = {
+  const overload: Overload = {
     discriminant: parameters.discriminant,
-    inputDefaults: parameters.inputDefaults,
+    configurator: Configurator.$.empty,
     steps: {},
   }
-  const overload = overload_ as Overload
 
   const builder: Builder = {
     type: overload,
-    config: () => builder as any,
-    defaults: (inputDefaults: object) => {
-      overload.inputDefaults = inputDefaults
+    configurator: (configurator) => {
+      overload.configurator = Configurator.$.getBuilderData(configurator)
       return builder as any
     },
-    configInit: () => builder as any,
     stepWithExtendedInput: () => builder.step as any,
     step: (name, spec) => {
       overload.steps[name] = {
@@ -35,18 +33,15 @@ export const create: Create = (parameters) => {
 
 export type Create<$Pipeline extends PipelineDefinition = PipelineDefinition> = <
   const $DiscriminantSpec extends Overload['discriminant'],
-  const $InputDefaults extends object | undefined,
 >(
   parameters: {
     discriminant: $DiscriminantSpec
-    inputDefaults?: $InputDefaults
   },
 ) => Builder<
   $Pipeline,
   {
     discriminant: $DiscriminantSpec
-    inputDefaults: $InputDefaults
-    input: {}
+    configurator: Configurator.States.Empty
     steps: {}
   }
 >
@@ -59,22 +54,17 @@ export interface Builder<
   /**
    * TODO
    */
-  step: StepMethod<$Pipeline, $Overload>
+  configurator: <$Configurator extends Configurator>(
+    configurator: Configurator.Builder<$Configurator>,
+  ) => Builder<$Pipeline, {
+    steps: $Overload['steps']
+    discriminant: $Overload['discriminant']
+    configurator: $Configurator
+  }>
   /**
    * TODO
    */
-  config: <inputExtension extends object>() => Builder<
-    $Pipeline,
-    Overload.Updaters.SetInput<$Overload, inputExtension>
-  >
-  defaults: <inputDefaults extends object>(inputDefaults: inputDefaults) => Builder<
-    $Pipeline,
-    Overload.Updaters.SetInputDefaults<$Overload, inputDefaults>
-  >
-  configInit: <inputExtension extends object>() => Builder<
-    $Pipeline,
-    Overload.Updaters.SetInputInit<$Overload, inputExtension>
-  >
+  step: StepMethod<$Pipeline, $Overload>
   /**
    * TODO
    */
@@ -129,9 +119,9 @@ type InferStepInput<
       ? $Overload['steps'][$PreviousStep['name']]['output']
       :
         & $CurrentStep['input']
-        & $Overload['input']
+        & $Overload['configurator']['input']
         & { [_ in $Overload['discriminant'][0]]: $Overload['discriminant'][1] }
       :
         & $CurrentStep['input']
-        & $Overload['input']
+        & $Overload['configurator']['input']
         & { [_ in $Overload['discriminant'][0]]: $Overload['discriminant'][1] }

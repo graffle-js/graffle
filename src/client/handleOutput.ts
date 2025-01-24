@@ -1,7 +1,7 @@
 import type { GraphQLError } from 'graphql'
 import type { Simplify } from 'type-fest'
 import type { Extension } from '../entrypoints/extension.js'
-import type { Anyware } from '../lib/anyware/__.js'
+import type { Anyware } from '../lib/anyware/_namespace.js'
 import { Errors } from '../lib/errors/__.js'
 import type { Grafaid } from '../lib/grafaid/__.js'
 import type { SomeObjectData } from '../lib/grafaid/graphql.js'

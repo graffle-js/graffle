@@ -1,7 +1,7 @@
 import { type ConfigInit, type ConfigInitOutputEnvelopeLonghand } from '../client/Configuration/ConfigInit.js'
 import { type OutputConfig, type OutputConfigDefault, outputConfigDefault } from '../client/Configuration/Output.js'
 import type { Extension } from '../extension/__.js'
-import type { Anyware } from '../lib/anyware/__.js'
+import type { Anyware } from '../lib/anyware/_namespace.js'
 import type { Objekt, StringKeyof } from '../lib/prelude.js'
 import {
   type RequestPipelineBaseDefinition,
