@@ -26,7 +26,7 @@ const emptySpyData: SpyData = {
   },
 }
 
-export const Spy = Extension.create({
+export const Spy = Extension.build({
   name: `Spy`,
   custom: {
     data: emptySpyData,

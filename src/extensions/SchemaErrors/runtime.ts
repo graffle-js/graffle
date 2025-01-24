@@ -9,7 +9,7 @@ import type { GeneratedExtensions } from './global.js'
 import { injectTypenameOnRootResultFields } from './injectTypenameOnRootResultFields.js'
 
 export const SchemaErrors = Extension
-  .create(`SchemaErrors`)
+  .build(`SchemaErrors`)
   .constructor(() => {
     return {
       async requestInterceptor({ pack }) {

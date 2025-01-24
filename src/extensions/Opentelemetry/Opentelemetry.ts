@@ -1,10 +1,9 @@
 import { trace, type Tracer } from '@opentelemetry/api'
-import { Extension } from '../../entrypoints/extension.js'
+import { Configurator, Extension } from '../../entrypoints/extension.js'
 
-export const OpenTelemetry = Extension
-  .create(`OpenTelemetry`)
-  .configuration((__) =>
-    __
+export const OpenTelemetry = Extension(`OpenTelemetry`)
+  .configurator(
+    Configurator()
       .typeOfInput<{
         /**
          * @defaultValue `"opentelemetry"`
@@ -13,7 +12,7 @@ export const OpenTelemetry = Extension
       }>()
       .default({
         tracerName: `graffle`,
-      })
+      }),
   )
   .constructor(({ configuration }) => {
     const tracer = trace.getTracer(configuration.tracerName)
@@ -32,7 +31,6 @@ export const OpenTelemetry = Extension
       },
     }
   })
-  .extension
 
 const startActiveSpan = (tracer: Tracer) => <Result>(name: string, fn: () => Promise<Result>): Promise<Result> => {
   return tracer.startActiveSpan(name, async (span) => {

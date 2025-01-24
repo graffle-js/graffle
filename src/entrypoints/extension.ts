@@ -1,1 +1,3 @@
-export * from '../extension2/_namespace.js'
+export { Extension } from '../extension2/extension.js'
+export { Configurator } from '../types/configurator.js'
+export { Transport } from '../types/Transport.js'

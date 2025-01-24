@@ -4,8 +4,7 @@ import type { ClientTransports, GlobalRegistry } from '../../entrypoints/utiliti
 import type { TypeFunction } from '../../lib/type-function/__.js'
 import { createMethodDocument, createMethodOperationType } from './_.js'
 
-export const DocumentBuilder = Extension
-  .create(`DocumentBuilder`)
+export const DocumentBuilder = Extension(`DocumentBuilder`)
   .constructor(({ context }) => {
     return {
       properties: {

@@ -4,7 +4,7 @@ import { type ConfigInit, type OutputConfig } from '../../entrypoints/main.js'
 import type { ConfigManager } from '../../lib/config-manager/__.js'
 
 export const Throws = Extension
-  .create(`Throws`)
+  .build(`Throws`)
   .constructor(({ client, context }) => {
     // todo redesign input to allow to force throw always
     // todo pull pre-configured config from core
@@ -33,12 +33,14 @@ interface Properties extends Extension.PropertiesTypeFunction {
   // @ts-expect-error
   return: Properties_<this['parameters']>
 }
-
+// dprint-ignore
 interface Properties_<$Parameters extends Extension.PropertiesTypeFunctionParameters> {
   throws: () => Client<
     {
-      [_ in keyof $Parameters['context']]: _ extends 'output' ? ThrowsifyConfig<$Parameters['context']['output']>
-        : $Parameters['context'][_]
+      [_ in keyof $Parameters['context']]:
+        _ extends 'output'
+          ? ThrowsifyConfig<$Parameters['context']['output']>
+          : $Parameters['context'][_]
     },
     // todo
     {} // this['params'][1]

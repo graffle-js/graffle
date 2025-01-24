@@ -10,6 +10,15 @@ import { decodeResultData } from './CustomScalars/decode.js'
 import { encodeRequestVariables } from './CustomScalars/encode.js'
 
 export namespace RequestPipeline {
+  export const stepName = {
+    encode: `encode`,
+    pack: `pack`,
+    exchange: `exchange`,
+    unpack: `unpack`,
+    decode: `decode`,
+  } as const
+  export type StepName = keyof typeof stepName
+
   export interface Input {
     request: Grafaid.RequestAnalyzedInput
     state: Context
@@ -67,6 +76,7 @@ export interface RequestPipelineBaseDefinition extends Anyware.PipelineDefinitio
   }]
 }
 
+const { stepName } = RequestPipeline
 export const requestPipelineBaseDefinition: RequestPipelineBaseDefinition = Anyware.PipelineDefinition
   .create({
     // If core errors caused by an abort error then raise it as a direct error.
@@ -79,7 +89,7 @@ export const requestPipelineBaseDefinition: RequestPipelineBaseDefinition = Anyw
     },
   })
   .input<RequestPipelineBaseDefinition['input']>()
-  .step(`encode`, {
+  .step(stepName.encode, {
     run: (input) => {
       const sddm = input.state.schemaMap
       const scalars = input.state.scalars.map
@@ -94,10 +104,10 @@ export const requestPipelineBaseDefinition: RequestPipelineBaseDefinition = Anyw
       return input
     },
   })
-  .step(`pack`)
-  .step(`exchange`)
-  .step(`unpack`)
-  .step(`decode`, {
+  .step(stepName.pack)
+  .step(stepName.exchange)
+  .step(stepName.unpack)
+  .step(stepName.decode, {
     run: (
       input: {
         state: Context

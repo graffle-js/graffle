@@ -1,7 +1,7 @@
 import { getIntrospectionQuery, type IntrospectionQuery } from 'graphql'
 import type { GraphQLSchema, IntrospectionOptions } from 'graphql'
 import type { HandleOutput } from '../../client/handleOutput.js'
-import { Extension } from '../../entrypoints/extension.js'
+import { Configurator, Extension } from '../../entrypoints/extension.js'
 import type { ClientTransports } from '../../entrypoints/utilities-for-generated.js'
 import type { InputIntrospectionOptions } from '../../generator/_.js'
 
@@ -44,10 +44,9 @@ type SchemaTarget = string | URL | GraphQLSchema
  * const data = await graffle.introspect()
  * ```
  */
-export const Introspection = Extension
-  .create(`Introspection`)
-  .configuration((__) =>
-    __
+export const Introspection = Extension(`Introspection`)
+  .configurator(
+    Configurator()
       .typeOfInput<ConfigurationInput>()
       .typeOfNormalized<ConfigurationNormalized>()
       .default({
@@ -60,7 +59,7 @@ export const Introspection = Extension
           inputValueDeprecation: true,
           oneOf: true,
         },
-      })
+      }),
   )
   .constructor(({ configuration, client }) => {
     return {

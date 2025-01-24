@@ -8,8 +8,7 @@ import { createBody } from './createBody.js'
 /**
  * @see https://github.com/jaydenseric/graphql-multipart-request-spec
  */
-export const Upload = Extension
-  .create(`Upload`)
+export const Upload = Extension(`Upload`)
   .constructor(() => {
     return {
       async requestInterceptor({ pack }) {
