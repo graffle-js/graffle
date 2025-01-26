@@ -6,19 +6,18 @@ import {
   requestPipelineBaseDefinition,
 } from '../requestPipeline/RequestPipeline.js'
 import type { Configurator } from './configurator.js'
+import type { ConfiguratorIndex, ConfiguratorIndexCurrent } from './ConfiguratorIndex.js'
 import { Configurators } from './configurators/_namespace.js'
 import { Schema } from './Schema/__.js'
 import type { Transport } from './Transport.js'
 
-type x = Context['configurators'][keyof Context['configurators']]['input']
-
 export interface Context {
-  configurators: {
-    [configuratorName: string]: Configurator
-    // output: Configurators.Output.OutputConfigurator
-    // check: Configurators.Check.CheckConfigurator
-    // schema: Configurators.Schema.SchemaConfigurator
-  }
+  configuratorIndex: ConfiguratorIndex
+  // configurators: {
+  // output: Configurators.Output.OutputConfigurator
+  // check: Configurators.Check.CheckConfigurator
+  // schema: Configurators.Schema.SchemaConfigurator
+  // }
   requestPipelineDefinition: Anyware.PipelineDefinition
   transports: ClientTransports
   scalars: Schema.Scalar.Registry
@@ -26,12 +25,12 @@ export interface Context {
   extensionsIndex: {
     [extensionName: string]: Extension
   }
-  configuration: {
-    [configuratorName: string]: Configurator.Configuration
-    // output: Configurators.Output.OutputConfigurator['normalizedIncremental']
-    // check: Configurators.Check.CheckConfigurator['normalizedIncremental']
-    // schema: Configurators.Schema.SchemaConfigurator['normalizedIncremental']
-  }
+  configurationIndex: ConfiguratorIndexCurrent
+  // configurationIndex: {
+  // output: Configurators.Output.OutputConfigurator['normalizedIncremental']
+  // check: Configurators.Check.CheckConfigurator['normalizedIncremental']
+  // schema: Configurators.Schema.SchemaConfigurator['normalizedIncremental']
+  // }
   // Type Level Properties
   /**
    * Type level augmentations.
@@ -128,12 +127,12 @@ export namespace ClientTransports {
 export namespace Context {
   export namespace States {
     export interface Empty extends Context {
-      configurators: {
+      configuratorIndex: {
         output: Configurators.Output.OutputConfigurator
         check: Configurators.Check.CheckConfigurator
         schema: Configurators.Schema.SchemaConfigurator
       }
-      configuration: {
+      configurationIndex: {
         output: Configurators.Output.OutputConfigurator['default']
         check: Configurators.Check.CheckConfigurator['default']
         schema: Configurators.Schema.SchemaConfigurator['default']
@@ -151,12 +150,12 @@ export namespace Context {
     }
 
     export const empty: Empty = {
-      configuration: {
+      configurationIndex: {
         output: Configurators.Output.configurator.default,
         check: Configurators.Check.configurator.default,
         schema: Configurators.Schema.configurator.default,
       },
-      configurators: {
+      configuratorIndex: {
         output: Configurators.Output.configurator,
         check: Configurators.Check.configurator,
         schema: Configurators.Schema.configurator,
