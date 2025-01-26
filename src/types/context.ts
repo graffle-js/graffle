@@ -10,25 +10,7 @@ import { Configurators } from './configurators/_namespace.js'
 import { Schema } from './Schema/__.js'
 import type { Transport } from './Transport.js'
 
-export interface Context extends ContextTypeLevel, ContextValueLevel {}
-
-export interface ContextTypeLevel {
-  /**
-   * Type level augmentations.
-   *
-   * @remarks Typically added by extensions. Added here upon use for optimized type-level reads later on.
-   */
-  // typeHookOnRequestResult: Extension.TypeHooks.OnRequestResult[]
-  // typeHookOnRequestDocumentRootType: Extension.TypeHooks.OnRequestDocumentRootType[]
-  typeHookRequestResultDataTypes: unknown
-}
-
-export interface ContextValueLevel {
-  configuration: {
-    output: Configurators.Output.OutputConfigurator['current']
-    check: Configurators.Check.CheckConfigurator['current']
-    schema: Configurators.Schema.SchemaConfigurator['current']
-  }
+export interface Context {
   configurators: {
     output: Configurators.Output.OutputConfigurator
     check: Configurators.Check.CheckConfigurator
@@ -41,6 +23,20 @@ export interface ContextValueLevel {
   extensionsIndex: {
     [extensionName: string]: Extension
   }
+  configuration: {
+    output: Configurators.Output.OutputConfigurator['current']
+    check: Configurators.Check.CheckConfigurator['current']
+    schema: Configurators.Schema.SchemaConfigurator['current']
+  }
+  // Type Level Properties
+  /**
+   * Type level augmentations.
+   *
+   * @remarks Typically added by extensions. Added here upon use for optimized type-level reads later on.
+   */
+  // typeHookOnRequestResult: Extension.TypeHooks.OnRequestResult[]
+  // typeHookOnRequestDocumentRootType: Extension.TypeHooks.OnRequestDocumentRootType[]
+  typeHookRequestResultDataTypes: unknown
 }
 
 export interface ClientTransports {
