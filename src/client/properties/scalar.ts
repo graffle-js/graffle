@@ -16,7 +16,9 @@ export type ScalarMethod<
    * TODO Docs.
    */
   <
-    $Name extends GlobalRegistry.GetOrGeneric<$Context['name']>['schema']['scalarNamesUnion'],
+    $Name extends GlobalRegistry.GetOrGeneric<
+      $Context['configurationIndex']['schema']['name']
+    >['schema']['scalarNamesUnion'],
     $Decoded,
   >(
     name: $Name,
@@ -36,7 +38,11 @@ export type ScalarMethod<
     $Extension
   > // $ExtensionChainable
 
-  <$Scalar extends Schema.Scalar<GlobalRegistry.GetOrGeneric<$Context['name']>['schema']['scalarNamesUnion']>>(
+  <
+    $Scalar extends Schema.Scalar<
+      GlobalRegistry.GetOrGeneric<$Context['configurationIndex']['schema']['name']>['schema']['scalarNamesUnion']
+    >,
+  >(
     scalar: $Scalar,
   ): Client<
     {
@@ -64,19 +70,19 @@ export type AddScalar<$Context extends Context, $Scalar extends Schema.Scalar> =
 
 type Arguments = [Schema.Scalar] | [string, { decode: (value: string) => any; encode: (value: any) => string }]
 
-export const scalarProperties = createProperties((builder, state) => {
+export const scalarProperties = createProperties(({ createClient, context }) => {
   return {
     scalar: (...args: Arguments) => {
       const scalar = Schema.Scalar.isScalar(args[0])
         ? args[0]
         : Schema.Scalar.create(args[0], args[1]!)
 
-      return builder({
-        ...state,
+      return createClient({
+        ...context,
         scalars: {
-          ...state.scalars,
+          ...context.scalars,
           map: {
-            ...state.scalars.map,
+            ...context.scalars.map,
             [scalar.name]: scalar,
           },
         },

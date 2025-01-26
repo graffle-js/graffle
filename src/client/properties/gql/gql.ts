@@ -26,7 +26,7 @@ const resolveGqlArguments = (args: gqlArguments) => {
   }
 }
 
-export const gqlProperties = createProperties((_, context) => {
+export const gqlProperties = createProperties(({ context }) => {
   return {
     gql: (...args: gqlArguments) => {
       const { document: query } = resolveGqlArguments(args)

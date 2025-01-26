@@ -80,16 +80,16 @@ export type TransportMethod<
       }
     : never
 
-export const transportProperties = createProperties((builder, state) => {
+export const transportProperties = createProperties(({ createClient, context }) => {
   return {
     transport: (...args: [config: object] | [transportName: string, config?: object]) => {
-      const transportName = typeof args[0] === `string` ? args[0] : state.transports.current
+      const transportName = typeof args[0] === `string` ? args[0] : context.transports.current
       const transportConfig = (typeof args[0] === `string` ? args[1] : args[0]) ?? {}
       if (!transportName) {
         throw new Error(`No transport is currently set.`)
       }
-      const newContext = reducerTransportConfig(state, transportName, transportConfig)
-      return builder(newContext)
+      const newContext = reducerTransportConfig(context, transportName, transportConfig)
+      return createClient(newContext)
     },
   } as any
 })

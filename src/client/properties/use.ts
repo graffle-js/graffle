@@ -79,7 +79,7 @@ export const useReducer = <
       },
     }
 
-    const transportName = extension.transport.discriminant['1']
+    const transportName = extension.transport.discriminant[`1`]
     const isTransportAlreadyRegistered = newContext.transports.registry[transportName] !== undefined
     if (isTransportAlreadyRegistered) {
       throw new Error(`Transport "${transportName}" is already registered.`)
@@ -99,10 +99,10 @@ export const useReducer = <
   return newContext as any
 }
 
-export const useProperties = createProperties((builder, context) => {
+export const useProperties = createProperties(({ createClient, context }) => {
   return {
     use: (extension) => {
-      return builder(useReducer(context, extension)) as any
+      return createClient(useReducer(context, extension)) as any
     },
   }
 })

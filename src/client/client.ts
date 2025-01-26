@@ -102,30 +102,29 @@ export type Create<$Context extends Context = Context.States.Empty> = <
 export const createConstructorWithContext = <$Context extends Context>(
   context: $Context,
 ): Create<$Context> =>
-(
-  configurationIndexInput?: ConfiguratorIndexInput,
-) => {
+(configurationIndexInput?: ConfiguratorIndexInput) => {
   const newContext = configurationIndexInput
     ? calcConfigurationIndexUpdateForContext(context, configurationIndexInput)
     : context
-  return createWithContext(newContext)
+  return createWithContext(newContext) as any
 }
 
 export const create: Create = createConstructorWithContext(Context.States.empty)
 
-export const createWithContext = (
-  context: Context,
-) => {
-  // @ts-expect-error ignoreme
-  const client: Client = {
+export const createWithContext = <$Context extends Context>(
+  context: $Context,
+): Client<$Context, {}> => {
+  const client: Client<$Context, {}> = {} as any as Client<$Context, {}>
+
+  Object.assign(client, {
     _: context,
-    ...withProperties(createWithContext, context),
-    ...transportProperties(createWithContext, context),
-    ...gqlProperties(createWithContext, context),
-    ...useProperties(createWithContext, context),
-    ...anywareProperties(createWithContext, context),
-    ...scalarProperties(createWithContext, context),
-  }
+    ...withProperties({ client, context, createClient: createWithContext }),
+    ...transportProperties({ client, context, createClient: createWithContext }),
+    ...gqlProperties({ client, context, createClient: createWithContext }),
+    ...useProperties({ client, context, createClient: createWithContext }),
+    ...anywareProperties({ client, context, createClient: createWithContext }),
+    ...scalarProperties({ client, context, createClient: createWithContext }),
+  })
 
   context.extensions.forEach(_ => {
     const propertiesDynamic = _.propertiesDynamic?.({

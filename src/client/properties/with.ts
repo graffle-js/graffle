@@ -1,13 +1,16 @@
+import { hasNonUndefinedKeys } from '../../lib/prelude.js'
 import type { Configurator } from '../../types/configurator.js'
 import type { ConfiguratorIndexInput } from '../../types/ConfiguratorIndex.js'
 import type { Context } from '../../types/context.js'
 import { createProperties } from '../helpers.js'
 
-export const withProperties = createProperties((builder, context) => {
+export const withProperties = createProperties(({ context, client, createClient }) => {
   return {
     with: (configurationIndexInput: ConfiguratorIndexInput) => {
       const newContext = calcConfigurationIndexUpdateForContext(context, configurationIndexInput)
-      return builder(newContext)
+      // If no change, then no need to copy client.
+      if (newContext === context) return client
+      return createClient(newContext)
     },
   } as any
 })
@@ -16,6 +19,8 @@ export const calcConfigurationIndexUpdateForContext = <
   context extends Context,
   configurationIndexInput extends ConfiguratorIndexInput,
 >(context: context, configurationIndexInput: configurationIndexInput): Context => {
+  if (!hasNonUndefinedKeys(configurationIndexInput)) return context
+
   const newConfigurationIndex = {
     ...context.configurationIndex,
   }

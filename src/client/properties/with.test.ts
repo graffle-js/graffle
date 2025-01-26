@@ -9,7 +9,7 @@ test(`given empty input, just returns current client`, () => {
   expectTypeOf(g2._.configurationIndex).toMatchTypeOf(g1._.configurationIndex)
 })
 
-test(`given undefined value for configuration, as if was not given.`, () => {
+test(`given undefined for a configuration, same as not given.`, () => {
   const g2 = g1.with({ check: undefined })
   expect(g2).toBe(g1)
   expectTypeOf(g2._.configurationIndex).toMatchTypeOf(g1._.configurationIndex)

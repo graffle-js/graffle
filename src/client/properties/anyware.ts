@@ -2,7 +2,7 @@ import { Extension } from '../../extension/$.js'
 import type { RequestPipelineBaseInterceptor } from '../../requestPipeline/RequestPipeline.js'
 import { createProperties } from '../helpers.js'
 
-export const anywareProperties = createProperties((builder, context) => {
+export const anywareProperties = createProperties(({ createClient, context }) => {
   return {
     anyware: (interceptor: RequestPipelineBaseInterceptor) => {
       // todo: optimize by having context store interceptors extracted from extension.
@@ -14,7 +14,7 @@ export const anywareProperties = createProperties((builder, context) => {
           }
         })
         .done()
-      return builder({
+      return createClient({
         ...context,
         extensions: [
           ...context.extensions,

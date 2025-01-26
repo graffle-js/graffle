@@ -1,5 +1,3 @@
-import { __ } from '../lib/prelude.js'
-
 // ----------------------------
 // Data Type
 // ----------------------------
@@ -15,16 +13,38 @@ export interface Configurator<
 	$InputResolver            extends Configurator.InputResolver<Configurator.InputResolver.$Func<$Input, $Normalized, $Default>> =
                                     Configurator.InputResolver<Configurator.InputResolver.Standard_ShallowMerge$Func<$Input, $Normalized, $Default>>
 > {
-  input: $Input
-  normalized: $Normalized
-  default: $Default
-  inputResolver: $InputResolver
+  readonly input: $Input
+  readonly normalized: $Normalized
+  readonly default: $Default
+  readonly inputResolver: $InputResolver
   // Computed Properties
-  normalizedIncremental: Configurator.Incrementify<$Normalized, $Default>
+  readonly normalizedIncremental: Configurator.Incrementify<$Normalized, $Default>
 }
 
+type ConfiguratorTypeLevel = Pick<Configurator.States.Empty, 'input' | 'normalized' | 'normalizedIncremental'>
+
 export const Configurator = (): Configurator.States.BuilderEmpty => {
-  return __()
+  const state = { ...$.empty }
+  const builder: Configurator.States.BuilderEmpty = {
+    default(default_) {
+      state.default = default_
+      return builder as any
+    },
+    input() {
+      return builder as any
+    },
+    normalized() {
+      return builder as any
+    },
+    inputResolver(inputResolverInit) {
+      state.inputResolver = $.createInputResolver(inputResolverInit)
+      return builder as any
+    },
+    return() {
+      return state
+    },
+  }
+  return builder
 }
 
 namespace $ {
@@ -35,49 +55,17 @@ namespace $ {
     ...input,
   }))
 
+  export const empty: Configurator.States.Empty = {
+    default: {},
+    inputResolver: standardInputResolver_shallowMerge,
+    // Type Level
+    ...({} as ConfiguratorTypeLevel),
+  }
+
   export const InputResolver$FuncSymbol = Symbol(`InputResolver$Func`)
-
-  // export const SymbolBuilderData = Symbol(`BuilderData`)
-
-  // export const getBuilderData = <$Builder extends Configurator.Builder<Configurator>>(
-  //   builder: $Builder,
-  // ): Configurator.GetBuilderData<$Builder> => builder[$.SymbolBuilderData]
-
-  export const empty = Configurator().return()
 }
 
 Configurator.$ = $
-
-// export class ConfiguratorClass<
-//   $InputConfiguration 			   extends Configurator.Configuration 	                  = Configurator.Configuration,
-//   $NormalizedConfiguration 	   extends $InputConfiguration                            = Required<$InputConfiguration>,
-//   const $DefaultConfiguration  extends Partial<$NormalizedConfiguration>              = Partial<$NormalizedConfiguration>,
-// 	$InputResolver               extends Configurator.InputResolver<any> 								= Configurator.InputResolver<any>
-// > {
-//   // @ts-expect-error
-//   public readonly input: $InputConfiguration
-//   // @ts-expect-error
-//   public readonly normalized: $NormalizedConfiguration
-//   public readonly default: $DefaultConfiguration
-//   public readonly inputResolver: $InputResolver
-//   constructor(parameters?: {
-//     input?: $InputConfiguration
-//     normalized?: $NormalizedConfiguration
-//     default?: $DefaultConfiguration
-//     inputResolver?: Configurator.InputResolverInit<
-//       $InputConfiguration,
-//       NoInfer<$DefaultConfiguration>,
-//       $NormalizedConfiguration
-//     >
-//   }) {
-//     this.default = parameters?.default as $DefaultConfiguration
-//     this.inputResolver = parameters?.inputResolver as $InputResolver
-//   }
-
-//   public static build(): Configurator.State.BuilderEmpty {
-//     return __()
-//   }
-// }
 
 export namespace Configurator {
   // ----------------------------
@@ -92,8 +80,6 @@ export namespace Configurator {
     export type Empty = Configurator<{}>
     export type BuilderEmpty = Builder<Empty>
   }
-
-  // export type GetBuilderData<$Builder extends Builder<Configurator>> = $Builder[typeof $.SymbolBuilderData]
 
   // dprint-ignore
   export interface Builder<$Configurator extends Configurator> {

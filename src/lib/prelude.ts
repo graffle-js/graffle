@@ -689,8 +689,17 @@ export const isDate = (value: unknown): value is Date => {
   return value instanceof Date
 }
 
-export const isObjectEmpty = (object: Record<string, unknown>) => {
-  return Object.keys(object).length === 0
+export const isObjectEmpty = (object: object): boolean => {
+  for (const _ in object) return false
+  return true
+}
+
+export const hasNonUndefinedKeys = (object: object): boolean => {
+  const record = object as Record<string, unknown>
+  for (const _ in record) {
+    if (record[_] !== undefined) return true
+  }
+  return false
 }
 
 export const toArray = <T>(value: T | T[]) => Array.isArray(value) ? value : [value]

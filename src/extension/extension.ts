@@ -1,6 +1,7 @@
 import { __, type ExcludeUndefined } from '../lib/prelude.js'
 import type { RequestPipelineBaseInterceptor } from '../requestPipeline/__.js'
 import type { Configurator } from '../types/configurator.js'
+import type { Context } from '../types/context.js'
 import type { Transport } from '../types/Transport.js'
 import type { ConstructorParameters } from './constructor.js'
 import type * as _re_export from './properties.js'
@@ -37,7 +38,7 @@ export interface Extension<
   noExpandResultDataType?: $NoExpandResultDataType
   $Properties?: $Properties
   propertiesStatic?: object
-  propertiesDynamic?: (parameters: ConstructorParameters) => object
+  propertiesDynamic?: <$Context extends Context>(parameters: ConstructorParameters<$Context>) => object
   // todo support for multiple transports in one extension
   transport?: $Transport
   // typeHooks: $TypeHooks
