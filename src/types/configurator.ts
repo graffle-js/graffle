@@ -18,8 +18,9 @@ export interface Configurator<
   input: $Input
   normalized: $Normalized
   default: $Default
-  current: Configurator.Currentify<$Normalized, $Default>
   inputResolver: $InputResolver
+  // Computed Properties
+  normalizedIncremental: Configurator.Incrementify<$Normalized, $Default>
 }
 
 export const Configurator = (): Configurator.States.BuilderEmpty => {
@@ -29,7 +30,7 @@ export const Configurator = (): Configurator.States.BuilderEmpty => {
 namespace $ {
   export const createInputResolver: Configurator.InputResolver.Create = (_) => _ as any
 
-  export const defaultInputResolver = createInputResolver(({ current, input }) => ({
+  export const standardInputResolver_shallowMerge = createInputResolver(({ current, input }) => ({
     ...current,
     ...input,
   }))
@@ -100,16 +101,16 @@ export namespace Configurator {
 
     input:
 			<$Input extends Configuration>(
-			) => Builder<Configurator<$Input, Required<$Input>, {}, InputResolver>>
+			) => Builder<Configurator<$Input, Required<$Input>, {}>>
 
     normalized:
 			<$Normalized extends $Configurator['input']>(
-			) => Builder<Configurator<$Configurator['input'], $Normalized, {}, InputResolver>>
+			) => Builder<Configurator<$Configurator['input'], $Normalized, {}>>
 
     default:
 			<const $Default extends Partial<$Configurator['normalized']>>(
 				default_: $Default,
-			) => Builder<Configurator<$Configurator['input'], $Configurator['normalized'], $Default, InputResolver>>
+			) => Builder<Configurator<$Configurator['input'], $Configurator['normalized'], $Default>>
 
     inputResolver:
 			<$Func extends  InputResolver.$Func<$Configurator['input'], $Configurator['normalized'], $Configurator['default']> =
@@ -127,9 +128,15 @@ export namespace Configurator {
   // ----------------------------
   // Input Resolver
   // ----------------------------
-  export interface InputResolver<$InputResolver$Func = never> {
-    (current: Configuration, input: Configuration): Configuration
-    [$.InputResolver$FuncSymbol]: $InputResolver$Func
+  export interface InputResolver<
+    $$Func extends InputResolver.$Func = InputResolver.Standard_ShallowMerge$Func<
+      Configuration,
+      Configuration,
+      Configuration
+    >,
+  > {
+    (parameters: { current: Configuration; input: Configuration }): Configuration
+    [$.InputResolver$FuncSymbol]: $$Func
   }
 
   export namespace InputResolver {
@@ -143,14 +150,14 @@ export namespace Configurator {
 
     // dprint-ignore
     export type Standard_ShallowMerge<$Parameters extends Parameters> =
-    & $Parameters['input']
-    // Only keep current keys that are NOT in input.
-    & {
-        [_ in keyof $Parameters['current']
-          as _ extends keyof $Parameters['input'] ? never : _
-        ]:
-          $Parameters['current'][_]
-      }
+      & $Parameters['input']
+      // Only keep current keys that are NOT in input.
+      & {
+          [_ in keyof $Parameters['current']
+           as _ extends keyof $Parameters['input'] ? never : _
+          ]:
+            $Parameters['current'][_]
+        }
 
     export interface Create {
       <
@@ -186,7 +193,7 @@ export namespace Configurator {
       $Default extends Partial<$Normalized> = Partial<$Normalized>,
     > {
       input: $Input
-      current: Simplify<Currentify<$Normalized, $Default>>
+      current: Simplify<Incrementify<$Normalized, $Default>>
     }
   }
 
@@ -196,7 +203,7 @@ export namespace Configurator {
 
   export type ApplyInputResolver$Func<
     $Configurator extends Configurator,
-    $Current extends $Configurator['current'],
+    $Current extends $Configurator['normalizedIncremental'],
     $Input extends $Configurator['input'],
     __ = (
       & $Configurator['inputResolver'][InputResolver.$FuncSymbol]
@@ -209,7 +216,7 @@ export namespace Configurator {
     )['return'],
   > = __
 
-  export type Currentify<
+  export type Incrementify<
     $Normalized extends Configuration,
     $Default extends Configuration,
     __Optional = {

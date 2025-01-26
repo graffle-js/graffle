@@ -24,7 +24,7 @@ export type Client<
 
 export interface ClientBase<
   $Context extends Context,
-  out $Extension extends object,
+  $Extension extends object,
 > // out $ExtensionChainable extends ExtensionChainableRegistry,
 {
   _: $Context
@@ -36,58 +36,54 @@ export interface ClientBase<
   // extendWithProperties: <
   //   extension extends {},
   // >(extension: extension) => Client<$Context, $Extension & extension, $ExtensionChainable>
-  gql: ClientTransports.PreflightCheck<
-    $Context,
-    gqlOverload<$Context>
-  >
-  /**
-   * TODO
-   */
-  scalar: null extends $Context['schema']['map'] ? TypeErrorMissingSchemaMap
-    : ScalarMethod<
-      $Context,
-      $Extension
-    >
-  /**
-   * TODO
-   */
-  transport: TransportMethod<
-    $Context,
-    $Extension
-  >
-  /**
-   * TODO
-   */
-  use: UseMethod<
-    $Context,
-    $Extension
-  > // $ExtensionChainable
-  anyware: (
-    interceptor: Anyware.Interceptor.InferFromPipeline<
-      Anyware.Pipeline.InferFromDefinition<$Context['requestPipelineDefinition']>
-    >,
-  ) => Client<$Context, $Extension>
+  // gql: ClientTransports.PreflightCheck<
+  //   $Context,
+  //   gqlOverload<$Context>
+  // >
+  // /**
+  //  * TODO
+  //  */
+  // scalar: null extends $Context['schema']['map'] ? TypeErrorMissingSchemaMap
+  //   : ScalarMethod<
+  //     $Context,
+  //     $Extension
+  //   >
+  // /**
+  //  * TODO
+  //  */
+  // transport: TransportMethod<
+  //   $Context,
+  //   $Extension
+  // >
+  // /**
+  //  * TODO
+  //  */
+  // use: UseMethod<
+  //   $Context,
+  //   $Extension
+  // > // $ExtensionChainable
+  // anyware: (
+  //   interceptor: Anyware.Interceptor.InferFromPipeline<
+  //     Anyware.Pipeline.InferFromDefinition<$Context['requestPipelineDefinition']>
+  //   >,
+  // ) => Client<$Context, $Extension>
   with: <
-    $ConfigurationInput extends {
-      [_ in keyof $Context['configurators']]: $Context['configurators'][_]['input']
+    configurationInput extends {
+      [_ in keyof $Context['configurators']]?: $Context['configurators'][_]['input']
     },
-  >(
-    configurationInput: $ConfigurationInput,
-  ) => Client<
+  >(configurationInput: configurationInput) => Client<
     & Omit<$Context, 'configuration'>
     & {
-      configuration:
-        & $Context['configuration']
-        & {
-          [_ in keyof $ConfigurationInput]: $Context['configurators'][_]['inputResolver'] extends
-            Configurator.InputResolver$Func ? (
-              & $Context['configurators'][_]['inputResolver']
-              & { input: $ConfigurationInput[_]; current: $Context['configurators'][_]['normalized'] }
-            )['_return']
-            : (
-              $ConfigurationInput[_]
-            )
-        }
+      configuration: {
+        [_ in keyof $Context['configuration']]: _ extends keyof configurationInput
+          ? configurationInput[_] extends object ? Configurator.ApplyInputResolver$Func<
+              $Context['configurators'][_],
+              $Context['configuration'][_],
+              configurationInput[_]
+            >
+          : $Context['configuration'][_]
+          : $Context['configuration'][_]
+      }
     },
     $Extension
   >
@@ -100,6 +96,14 @@ export interface ClientBase<
   // $Extension
   // > // $ExtensionChainable
 }
+
+// -------------
+// declare const c1: ClientEmpty
+// c1._.configurators
+// c1._.configuration.check.preflight
+// const c2 = c1.with({ check: { preflight: false } })
+// c2._.configuration.check.preflight
+// -------------
 
 export type ExtensionChainableRegistry = {
   [name: string]: ExtensionChainable

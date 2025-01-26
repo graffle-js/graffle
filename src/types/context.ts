@@ -10,11 +10,14 @@ import { Configurators } from './configurators/_namespace.js'
 import { Schema } from './Schema/__.js'
 import type { Transport } from './Transport.js'
 
+type x = Context['configurators'][keyof Context['configurators']]['input']
+
 export interface Context {
   configurators: {
-    output: Configurators.Output.OutputConfigurator
-    check: Configurators.Check.CheckConfigurator
-    schema: Configurators.Schema.SchemaConfigurator
+    [configuratorName: string]: Configurator
+    // output: Configurators.Output.OutputConfigurator
+    // check: Configurators.Check.CheckConfigurator
+    // schema: Configurators.Schema.SchemaConfigurator
   }
   requestPipelineDefinition: Anyware.PipelineDefinition
   transports: ClientTransports
@@ -24,9 +27,10 @@ export interface Context {
     [extensionName: string]: Extension
   }
   configuration: {
-    output: Configurators.Output.OutputConfigurator['current']
-    check: Configurators.Check.CheckConfigurator['current']
-    schema: Configurators.Schema.SchemaConfigurator['current']
+    [configuratorName: string]: Configurator.Configuration
+    // output: Configurators.Output.OutputConfigurator['normalizedIncremental']
+    // check: Configurators.Check.CheckConfigurator['normalizedIncremental']
+    // schema: Configurators.Schema.SchemaConfigurator['normalizedIncremental']
   }
   // Type Level Properties
   /**
@@ -124,6 +128,11 @@ export namespace ClientTransports {
 export namespace Context {
   export namespace States {
     export interface Empty extends Context {
+      configurators: {
+        output: Configurators.Output.OutputConfigurator
+        check: Configurators.Check.CheckConfigurator
+        schema: Configurators.Schema.SchemaConfigurator
+      }
       configuration: {
         output: Configurators.Output.OutputConfigurator['default']
         check: Configurators.Check.CheckConfigurator['default']
