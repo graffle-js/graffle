@@ -1,198 +1,199 @@
-import type { IsNever } from 'type-fest'
-import type { ExtensionChainable } from '../client/client.js'
-import type { Context } from '../entrypoints/utilities-for-generated.js'
-import { Anyware } from '../lib/anyware/_namespace.js'
-import { type AssertExtendsString } from '../lib/prelude.js'
-import type { TypeFunction } from '../lib/type-function/__.js'
-import type { RequestPipelineBaseInterceptor } from '../requestPipeline/RequestPipeline.js'
-import type { ConfigurationResolver } from '../types/ConfigurationResolver.js'
-import { Transport } from '../types/Transport.js'
-import type { Extension } from './__.js'
-import { BuilderExtension } from './builder.js'
-import { type TypeHooks, type TypeHooksBuilder, typeHooksBuilder, type TypeHooksEmpty } from './TypeHooks.js'
+import { __, type ExcludeUndefined } from '../lib/prelude.js'
+import type { RequestPipelineBaseInterceptor } from '../requestPipeline/__.js'
+import type { Configurator } from '../types/configurator.js'
+import type { Transport } from '../types/Transport.js'
+import type { ConstructorParameters } from './constructor.js'
+import type * as _re_export from './properties.js'
 
-export * from './context.js'
+// ------------------------------------------------------------
+// Constructor
+// ------------------------------------------------------------
 
-export * as TypeHooks from './TypeHooks.js'
-
-export namespace States {
-  export type WithBuilder = Extension<string, object, BuilderExtension, any, any>
+export const Extension = <$Name extends string>(
+  name: $Name,
+): Extension.Builder<Extension<$Name, undefined, undefined, undefined, undefined>> => {
+  return __(name)
 }
 
-export type ExtensionInputParameters =
-  | ExtensionInputParametersNone
-  | ExtensionInputParametersOptional
-  | ExtensionInputParametersRequired
-export type ExtensionInputParametersNone = []
-export type ExtensionInputParametersOptional = [input?: object]
-export type ExtensionInputParametersRequired = [input: object]
+// ------------------------------------------------------------
+// Data Type
+// ------------------------------------------------------------
 
-export interface ExtensionDefinition {
-  name: string
-  builder?: BuilderExtension // | BuilderExtension.CreatorCallback
-  onRequest?: RequestPipelineBaseInterceptor
-  // typeHooks?: () => TypeHooks
-  transport?: (
-    OverloadBuilder: { create: Transport.Builder.Create },
-  ) => Anyware.Overload.Builder
-}
-
-// todo: rename to "define"
-export const create = <
-  $Name extends string,
-  $BuilderExtension extends BuilderExtension | undefined = BuilderExtension | undefined,
-  $TypeHooks extends TypeHooks = TypeHooksEmpty,
-  $ConfigInputParameters extends ExtensionInputParameters = ExtensionInputParameters,
-  $Config extends object = object,
-  $Custom extends object = object,
-  $TransportCallbackResult extends undefined | Anyware.Overload.Builder = undefined,
-  $ConfigurationDefaults extends object = {},
->(
-  definition: {
-    name: $Name
-    configurationDefaults?: $ConfigurationDefaults
-    configurationResolver?: (current: object, ...args: $ConfigInputParameters) => $Config
-    custom?: $Custom
-    create: (
-      parameters: {
-        config: $Config & $ConfigurationDefaults
-        builder: BuilderExtension.CreateCallback
-        typeHooks: TypeHooksBuilder
-      },
-    ) => {
-      builder?: $BuilderExtension
-      typeHooks?: TypeHooksBuilder<$TypeHooks>
-      onRequest?: RequestPipelineBaseInterceptor
-      transport?: (
-        OverloadBuilder: Transport.Builder.Create,
-      ) => $TransportCallbackResult
-    }
-  },
-): ExtensionConstructor<
-  $ConfigInputParameters,
-  $Config,
-  $Name,
-  $BuilderExtension,
-  $TypeHooks,
-  $Custom,
-  $TransportCallbackResult extends Anyware.Overload.Builder ? {
-      configurationResolver: ConfigurationResolver
-      // todo fixme
-      // Names of transports can only be strings but its wider for anyware overloads
-      name: AssertExtendsString<$TransportCallbackResult['type']['discriminant'][1]>
-      // configAfterCreate: {} // todo
-      configurationDefaults: {} // todo: $TransportCallbackResult['type']['inputDefaults']
-      requestPipelineOverload: $TransportCallbackResult['type']
-      // types
-      configuration: $TransportCallbackResult['type']['input']
-      configurationInit: $TransportCallbackResult['type']['inputInit'] extends object
-        ? $TransportCallbackResult['type']['inputInit']
-        : {}
-    }
-    : undefined
-> => {
-  const extensionConstructor = (newConfigurationInit?: object) => {
-    // todo: "ConfigurationResolver" is an extension-scope concept, but it is being used in this constructor
-    // as if transport-scope. See the the transport variable below for example.
-    // It is a hack that will lead to confusion, bugs, etc.
-    const configurationResolver = definition.configurationResolver as undefined | ConfigurationResolver
-      ?? Transport.defaultConfigurationResolver
-
-    const currentConfigurationPartial = definition.configurationDefaults ?? {}
-    const config = configurationResolver(currentConfigurationPartial, newConfigurationInit) as
-      & $Config
-      & $ConfigurationDefaults
-    const extensionBuilder = definition.create({
-      config,
-      builder: BuilderExtension.createCallback,
-      typeHooks: typeHooksBuilder,
-    })
-    const builder = extensionBuilder.builder
-    const overload = extensionBuilder.transport?.((name) =>
-      Anyware.Overload.create({ discriminant: [`transportType`, name] })
-    )?.type
-    const transport: Transport | undefined = overload
-      ? {
-        name: overload.discriminant[1] as string,
-        configuration: overload.input,
-        configurationDefaults: overload.inputDefaults ?? {},
-        requestPipelineOverload: overload,
-        configurationResolver,
-        // configAfterCreate: undefined as any,
-        configurationInit: undefined as any,
-      }
-      : undefined
-    const extension: Extension = {
-      name: definition.name,
-      config,
-      onRequest: extensionBuilder.onRequest,
-      builder,
-      transport,
-      // todo: remove this from runtime, its JUST for types.
-      typeHooks: {
-        requestResultDataTypes: null,
-        onRequestDocumentRootType: [],
-        onRequestResult: [],
-      },
-    }
-    return extension
-  }
-  extensionConstructor.info = {
-    name: definition.name,
-  }
-  return extensionConstructor as any
-}
-
-// type IsOptionalParameters<T extends ExtensionInputParameters> = [] extends T ? true : false
-
-export type ExtensionConstructor<
-  $ConfigInputParameters extends ExtensionInputParameters = ExtensionInputParameters,
-  $Config extends object = object,
+export interface Extension<
   $Name extends string = string,
-  $BuilderExtension extends BuilderExtension | undefined = BuilderExtension | undefined,
-  $TypeHooks extends TypeHooks = TypeHooksEmpty,
-  $Custom extends object = object,
-  $Transport extends undefined | Transport = undefined,
-> =
-  & {
-    (
-      ...args:
-        // ExtensionInputParameters extends $ConfigInputParameters ? [] : $ConfigInputParameters
-        WasNotDefined<$ConfigInputParameters> extends true ? [] : $ConfigInputParameters
-    ): Extension<$Name, $Config, $BuilderExtension, $TypeHooks, $Transport>
-    info: {
-      name: $Name
-      configInputParameters: $ConfigInputParameters
-      config: $Config
-      builder: $BuilderExtension
-      typeHooks: $TypeHooks
-      transport: $Transport
-    }
+  $Configurator extends undefined | Configurator = undefined | Configurator,
+  $NoExpandResultDataType = unknown,
+  $Properties extends object | undefined = object | undefined,
+  $Transport extends Transport | undefined = Transport | undefined,
+> // $TypeHooks extends TypeHooks = TypeHooks,
+{
+  name: $Name
+  configurator?: $Configurator
+  constructor?: (parameters: ConstructorParameters) => {
+    requestInterceptor?: RequestPipelineBaseInterceptor
+    properties?: object
   }
-  & $Custom
+  requestInterceptor?: RequestPipelineBaseInterceptor
+  noExpandResultDataType?: $NoExpandResultDataType
+  $Properties?: $Properties
+  propertiesStatic?: object
+  propertiesDynamic?: (parameters: ConstructorParameters) => object
+  // todo support for multiple transports in one extension
+  transport?: $Transport
+  // typeHooks: $TypeHooks
+}
 
-export type InferExtensionFromConstructor<$ExtensionConstructor extends ExtensionConstructor> = Extension<
-  $ExtensionConstructor['info']['name'],
-  $ExtensionConstructor['info']['config'],
-  $ExtensionConstructor['info']['builder'],
-  $ExtensionConstructor['info']['typeHooks']
->
+export namespace Extension {
+  // ------------------------------------------------------------
+  // Helper Types
+  // ------------------------------------------------------------
 
-// When no normalize config input prop provided AT ALL then it falls back to the constraint
-type WasNotDefined<T extends ExtensionInputParameters> = IsNever<keyof Exclude<T[0], undefined>>
+  export type PropertiesTypeFunction = _re_export.PropertiesTypeFunction
 
-// dprint-ignore
-export type ApplyAndMergeBuilderExtensions<$Extensions extends Extension[], $Context extends Context> =
-  $Extensions extends [infer $ExtensionFirst extends Extension, ...infer $ExtensionRest extends Extension[]]
-    ?
-      & (
-          $ExtensionFirst['builder'] extends BuilderExtension<ExtensionChainable>
-            ?
-              TypeFunction.Call<
-                $ExtensionFirst['builder']['type'],
-                [$Context]
-              >
-            : {}
-        )
-      & ApplyAndMergeBuilderExtensions<$ExtensionRest, $Context>
-    : {}
+  export type PropertiesTypeFunctionParameters = _re_export.PropertiesTypeFunctionParameters
+
+  // ------------------------------------------------------------
+  // Builder
+  // ------------------------------------------------------------
+
+  interface Builder_TransportMethod<
+    $Extension extends Extension,
+    $ConfigurationNormalized extends Configurator.Configuration,
+  > {
+    /**
+     * TODO 1
+     */
+    <$Transport extends Transport>(transport: Transport.Builder<$Transport>): Builder<{
+      constructor: $Extension['constructor']
+      requestInterceptor: $Extension['requestInterceptor']
+      name: $Extension['name']
+      configurator: $Extension['configurator']
+      // update:
+      transport: $Transport
+    }>
+    /**
+     * TODO 2
+     */
+    <$Name extends string, $Transport extends Transport>(
+      name: $Name,
+      constructor: (
+        parameters: ConstructorParameters<$ConfigurationNormalized> & { $: Transport.Builder.States.Empty<$Name> },
+      ) => Transport.Builder<$Transport>,
+    ): Builder<{
+      constructor: $Extension['constructor']
+      requestInterceptor: $Extension['requestInterceptor']
+      name: $Extension['name']
+      configurator: $Extension['configurator']
+      // update:
+      transport: $Transport
+    }>
+  }
+
+  // dprint-ignore
+  export interface Builder<
+    $Extension extends Extension,
+    _$ConfigurationNormalized extends object = undefined extends $Extension['configurator'] ? never : ExcludeUndefined<$Extension['configurator']>['normalized']
+  > {
+
+    /**
+     * todo
+     */
+    configurator: <$Configurator extends Configurator>(
+      input: Configurator.BuilderProviderCallback<$Configurator> | Configurator.Builder<$Configurator> | $Configurator,
+    ) => Builder<{
+      constructor: $Extension['constructor']
+      requestInterceptor: $Extension['requestInterceptor']
+      name: $Extension['name']
+      transport: $Extension['transport']
+      // update:
+      configurator: $Configurator
+    }>
+    
+    /**
+     * TODO 0
+     */
+    transport: Builder_TransportMethod<$Extension, _$ConfigurationNormalized>
+    
+    /**
+     * todo
+     */
+    constructor: <$Properties extends object, $Transport extends Transport>(
+      constructor: (parameters: ConstructorParameters<_$ConfigurationNormalized>) => {
+        /**
+         * todo
+         */
+        requestInterceptor?: RequestPipelineBaseInterceptor,
+        /**
+         * todo
+         */
+        properties?: $Properties
+        /**
+         * todo
+         */
+        transport?: $Transport
+      }
+    ) => Builder<{
+      constructor: $Extension['constructor']
+      requestInterceptor: $Extension['requestInterceptor']
+      name: $Extension['name']
+      configurator: $Extension['configurator']
+      noExpandResultDataType: $Extension['noExpandResultDataType']
+      transport: $Transport
+      // update:
+      properties: $Properties
+    }>
+    
+    // todo: support static properties too.
+    properties: <$Properties extends object>(
+      constructor: (parameters: ConstructorParameters<_$ConfigurationNormalized>) => $Properties
+    ) => Builder<{
+      constructor: $Extension['constructor']
+      requestInterceptor: $Extension['requestInterceptor']
+      name: $Extension['name']
+      configurator: $Extension['configurator']
+      noExpandResultDataType: $Extension['noExpandResultDataType']
+      transport: $Extension['transport']
+      // update:
+      properties: $Properties
+    }>
+    
+    
+    typeOfProperties: <$Type extends object>() => Builder<{
+      constructor: $Extension['constructor']
+      requestInterceptor: $Extension['requestInterceptor']
+      name: $Extension['name']
+      configurator: $Extension['configurator']
+      noExpandResultDataType: $Extension['noExpandResultDataType']
+      transport: $Extension['transport']
+      // update:
+      $Properties: $Type
+    }>
+    
+    /**
+     * Type(s) that show up in request result data which Graffle should NOT
+     * "simplify" (aka. "expand", "compute").
+     *
+     * So for example, if this type were `Date` and the request result data
+     * contained a `Date` type, then it would be left-as is rather than have its
+     * type turned into the appearance of an object literal, all its properties listed, etc.
+     *
+     * You can specify multiple types here by using a union. For example: `IntrospectionQuery | Date`.
+     */
+    typeOfNoExpandResultDataType: <$DataType>() => Builder<{
+      constructor: $Extension['constructor']
+      requestInterceptor: $Extension['requestInterceptor']
+      name: $Extension['name']
+      configurator: $Extension['configurator']
+      $Properties: $Extension['$Properties']
+      transport: $Extension['transport']
+      // update:
+      noExpandResultDataType: $DataType
+    }>
+    
+    /**
+     * TODO
+     */
+    // todo: extension stores the initialization configuration statically...
+    done: () => (...parameters: undefined extends $Extension['configurator'] ? [] : [parameters: _$ConfigurationNormalized]) => $Extension
+  }
+}

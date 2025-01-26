@@ -154,7 +154,7 @@ type InferStepSlots_<$Step extends StepDefinition, $Overloads extends Overload[]
 // dprint-ignore
 type InferStepOutput<$Step extends StepDefinition, $Overload extends Overload> = $Overload extends never ? never :
   & $Step['output']
-  & { [_ in $Overload['discriminant'][0]]: $Overload['discriminant'][1] }
+  & { [_ in $Overload['discriminant'][0]]: $Overload['name'] }
   & $Overload['steps'][$Step['name']]['output']
 
 // dprint-ignore
@@ -166,7 +166,7 @@ type InferStepInput<
   & $StepDefinition['input']
   // Overload Contributions:
   // 1. The discriminant:
-  & { [_ in $Overload['discriminant'][0]]: $Overload['discriminant'][1] }
+  & { [_ in $Overload['discriminant'][0]]: $Overload['name'] }
   // 2. This specific step:
   & $Overload['steps'][$StepDefinition['name']]['input']
   // 3. If this is the first step, then the pipeline input contributions, if any:

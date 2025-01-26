@@ -7,14 +7,15 @@ import { __ } from '../lib/prelude.js'
 
 // dprint-ignore
 export interface Configurator<
-  $InputConfiguration 			extends Configurator.Configuration 	                    = Configurator.Configuration,
-  $NormalizedConfiguration 	extends $InputConfiguration                             = Required<$InputConfiguration>,
-  $DefaultConfiguration 		extends Partial<$NormalizedConfiguration>               = Partial<$NormalizedConfiguration>,
-	$InputResolver            extends Configurator.InputResolver<any> 								= Configurator.InputResolver<any>
+  $Input 			              extends Configurator.Configuration 	       = Configurator.Configuration,
+  $Normalized 	            extends $Input                             = Required<$Input>,
+  $Default 		              extends Partial<$Normalized>               = Partial<$Normalized>,
+	$InputResolver            extends Configurator.InputResolver<any> 	 = Configurator.InputResolver<any>
 > {
-  input: $InputConfiguration
-  normalized: $NormalizedConfiguration
-  default: $DefaultConfiguration
+  input: $Input
+  normalized: $Normalized
+  default: $Default
+  current: Configurator.Currentify<$Normalized, $Default>
   inputResolver: $InputResolver
 }
 
@@ -25,20 +26,20 @@ export const Configurator = (): Configurator.States.BuilderEmpty => {
 namespace $ {
   export const createInputResolver: Configurator.CreateInputResolver = (_) => _ as any
 
-  export const defaultInputResolver = createInputResolver((current, input) => ({
+  export const defaultInputResolver = createInputResolver(({ current, input }) => ({
     ...current,
     ...input,
   }))
 
   export const SymbolInputResolver$Func = Symbol(`InputResolver$Func`)
 
-  export const SymbolBuilderData = Symbol(`BuilderData`)
+  // export const SymbolBuilderData = Symbol(`BuilderData`)
 
-  export const getBuilderData = <$Builder extends Configurator.Builder<Configurator>>(
-    builder: $Builder,
-  ): Configurator.GetBuilderData<$Builder> => builder[$.SymbolBuilderData]
+  // export const getBuilderData = <$Builder extends Configurator.Builder<Configurator>>(
+  //   builder: $Builder,
+  // ): Configurator.GetBuilderData<$Builder> => builder[$.SymbolBuilderData]
 
-  export const empty = getBuilderData(Configurator())
+  export const empty = Configurator().return()
 }
 
 Configurator.$ = $
@@ -88,33 +89,35 @@ export namespace Configurator {
     export type BuilderEmpty = Builder<Empty>
   }
 
-  export type GetBuilderData<$Builder extends Builder<Configurator>> = $Builder[typeof $.SymbolBuilderData]
+  // export type GetBuilderData<$Builder extends Builder<Configurator>> = $Builder[typeof $.SymbolBuilderData]
 
   // dprint-ignore
-  export interface Builder<$ProgressiveConfigurator extends Configurator> {
-    [$.SymbolBuilderData]: $ProgressiveConfigurator
+  export interface Builder<$Configurator extends Configurator> {
+    // [$.SymbolBuilderData]: $Configurator
 
-    typeOfInput:
-			<$InputConfiguration extends Configuration>(
-			) => Builder<Configurator<$InputConfiguration, Required<$InputConfiguration>, {}, InputResolver>>
+    input:
+			<$Input extends Configuration>(
+			) => Builder<Configurator<$Input, Required<$Input>, {}, InputResolver>>
 
-    typeOfNormalized:
-			<$Normalized extends TypeOfInput<$ProgressiveConfigurator>>(
-			) => Builder<Configurator<TypeOfInput<$ProgressiveConfigurator>, $Normalized, {}, InputResolver>>
+    normalized:
+			<$Normalized extends $Configurator['input']>(
+			) => Builder<Configurator<$Configurator['input'], $Normalized, {}, InputResolver>>
 
     default:
-			<const $DefaultConfiguration extends Partial<TypeOfNormalized<$ProgressiveConfigurator>>>(
-				defaultConfiguration: IsEmptyObject<TypeOfNormalized<$ProgressiveConfigurator>> extends true ? never :  $DefaultConfiguration,
-			) => Builder<Configurator<TypeOfInput<$ProgressiveConfigurator>, TypeOfNormalized<$ProgressiveConfigurator>, $DefaultConfiguration, InputResolver>>
+			<const $Default extends Partial<$Configurator['normalized']>>(
+				default_: IsEmptyObject<$Configurator['normalized']> extends true ? never :  $Default,
+			) => Builder<Configurator<$Configurator['input'], $Configurator['normalized'], $Default, InputResolver>>
 
     inputResolver:
-			<$InputResolver$Func extends InputResolver$Func = never>(
+			<$InputResolver$Func extends InputResolver$Func<$Configurator['input'], $Configurator['normalized'], $Configurator['default']> = never>(
 				inputResolver: InputResolverInit<
-					TypeOfInput<$ProgressiveConfigurator>,
-					$ProgressiveConfigurator['default'],
-					TypeOfNormalized<$ProgressiveConfigurator>
+					$Configurator['input'],
+					$Configurator['normalized'],
+					$Configurator['default']
 				>,
-      ) => Builder<Configurator<TypeOfInput<$ProgressiveConfigurator>, TypeOfNormalized<$ProgressiveConfigurator>, $ProgressiveConfigurator['default'], InputResolver<$InputResolver$Func>>>
+      ) => Builder<Configurator<$Configurator['input'], $Configurator['normalized'], $Configurator['default'], InputResolver<$InputResolver$Func>>>
+      
+      return: () => $Configurator
   }
 
   // ----------------------------
@@ -124,21 +127,18 @@ export namespace Configurator {
   export interface CreateInputResolver {
     <
       $Input extends Configuration,
-      $Normalized extends Configuration,
-      $Default extends Configuration,
-      $InputResolver$Func extends InputResolver$Func = never,
-    >(inputResolver: InputResolverInit<$Input, $Default, $Normalized>): InputResolver<$InputResolver$Func>
+      $Normalized extends $Input,
+      $Default extends Partial<$Normalized>,
+      $InputResolver$Func extends InputResolver$Func<$Input, $Normalized, $Default> = never,
+    >(inputResolver: InputResolverInit<$Input, $Normalized, $Default>): InputResolver<$InputResolver$Func>
   }
 
   export interface InputResolverInit<
     $Input extends Configuration,
-    $Default extends Configuration,
-    $Normalized extends Configuration,
+    $Normalized extends $Input,
+    $Default extends Partial<$Normalized>,
   > {
-    (
-      current: Simplify<ProgressifyNormalized<$Normalized, $Default>>,
-      input: $Input,
-    ): Partial<$Normalized>
+    (parameters: InputResolverParameters<$Input, $Normalized, $Default>): Partial<$Normalized>
   }
 
   export interface InputResolver<$InputResolver$Func = never> {
@@ -146,33 +146,29 @@ export namespace Configurator {
     [$.SymbolInputResolver$Func]: $InputResolver$Func
   }
 
-  export interface InputResolver$Func {
-    $input: unknown
-    $partialNormalized: unknown
-    _return: unknown
+  export interface InputResolver$Func<
+    $Input extends Configuration,
+    $Normalized extends $Input,
+    $Default extends Partial<$Normalized>,
+  > {
+    parameters: InputResolverParameters<$Input, $Normalized, $Default>
+    return: unknown
   }
 
-  // ----------------------------
-  // Data Type Helpers
-  // ----------------------------
-
-  // dprint-ignore
-  export type TypeOfInput<
-    $Configurator extends Configurator,
-    _ = $Configurator['input']
-  > = _
-
-  // dprint-ignore
-  export type TypeOfNormalized<
-    $Configurator extends Configurator,
-     _ = $Configurator['normalized']
-  > = _
+  export interface InputResolverParameters<
+    $Input extends Configuration,
+    $Normalized extends $Input,
+    $Default extends Partial<$Normalized>,
+  > {
+    input: $Input
+    current: Simplify<Currentify<$Normalized, $Default>>
+  }
 
   // -------------
   // Helpers
   // -------------
 
-  export type ProgressifyNormalized<
+  export type Currentify<
     $Normalized extends Configuration,
     $Default extends Configuration,
     __Optional = {

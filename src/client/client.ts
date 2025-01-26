@@ -1,8 +1,8 @@
-import type { Extension } from '../extension/__.js'
+import type { ConfigInit } from '../entrypoints/client.js'
 import type { Anyware } from '../lib/anyware/_namespace.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
+import type { Configurator } from '../types/configurator.js'
 import { type ClientTransports, Context } from '../types/context.js'
-import { type ConfigInit, type NormalizeConfigInit } from './Configuration/ConfigInit.js'
 import { anywareProperties } from './properties/anyware.js'
 import { type gqlOverload, gqlProperties } from './properties/gql/gql.js'
 import { type ScalarMethod, scalarProperties, type TypeErrorMissingSchemaMap } from './properties/scalar.js'
@@ -20,7 +20,7 @@ export type Client<
 > =
   & ClientBase<$Context, $Extension>
   & $Extension
-  & Extension.ApplyAndMergeBuilderExtensions<$Context['extensions'], $Context>
+// & Extension.ApplyAndMergeBuilderExtensions<$Context['extensions'], $Context>
 
 export interface ClientBase<
   $Context extends Context,
@@ -43,7 +43,7 @@ export interface ClientBase<
   /**
    * TODO
    */
-  scalar: null extends $Context['schemaMap'] ? TypeErrorMissingSchemaMap
+  scalar: null extends $Context['schema']['map'] ? TypeErrorMissingSchemaMap
     : ScalarMethod<
       $Context,
       $Extension
@@ -67,17 +67,38 @@ export interface ClientBase<
       Anyware.Pipeline.InferFromDefinition<$Context['requestPipelineDefinition']>
     >,
   ) => Client<$Context, $Extension>
-  with: <$ConfigInit extends ConfigInit>(
-    configInit: $ConfigInit,
+  with: <
+    $ConfigurationInput extends {
+      [_ in keyof $Context['configurators']]: $Context['configurators'][_]['input']
+    },
+  >(
+    configurationInput: $ConfigurationInput,
   ) => Client<
-    // @ts-expect-error
-    {
-      [_ in keyof $Context]: _ extends keyof NormalizeConfigInit<$Context['input'] & $ConfigInit>
-        ? NormalizeConfigInit<$Context['input'] & $ConfigInit>[_]
-        : $Context[_]
+    & Omit<$Context, 'configuration'>
+    & {
+      configuration:
+        & $Context['configuration']
+        & {
+          [_ in keyof $ConfigurationInput]: $Context['configurators'][_]['inputResolver'] extends
+            Configurator.InputResolver$Func ? (
+              & $Context['configurators'][_]['inputResolver']
+              & { input: $ConfigurationInput[_]; current: $Context['configurators'][_]['normalized'] }
+            )['_return']
+            : (
+              $ConfigurationInput[_]
+            )
+        }
     },
     $Extension
-  > // $ExtensionChainable
+  >
+  // // @ts-expect-error
+  // {
+  //   [_ in keyof $Context]: _ extends keyof NormalizeConfigInit<$Context['input'] & $ConfigurationInput>
+  //     ? NormalizeConfigInit<$Context['input'] & $ConfigurationInput>[_]
+  //     : $Context[_]
+  // },
+  // $Extension
+  // > // $ExtensionChainable
 }
 
 export type ExtensionChainableRegistry = {
@@ -111,11 +132,12 @@ export type ClientConstructor<$Context extends Context = Context.States.Empty> =
   {}
 > // {}
 
-export const create: ClientConstructor = (configInit) => {
-  const initialContext = Context.updateContextConfigInit(
-    Context.States.empty,
-    configInit ?? {},
-  )
+export const create: ClientConstructor = (configurationInput) => {
+  const initialContext = {
+    ...Context.States.empty,
+    configuration: coreConfigurator.inputResolver({}, configurationInput ?? {}),
+  }
+
   return createWithContext(initialContext)
 }
 
@@ -123,7 +145,7 @@ export const createWithContext = (
   context: Context,
 ) => {
   // @ts-expect-error ignoreme
-  const clientDirect: Client = {
+  const client: Client = {
     _: context,
     ...withProperties(createWithContext, context),
     ...transportProperties(createWithContext, context),
@@ -134,14 +156,20 @@ export const createWithContext = (
   }
 
   context.extensions.forEach(_ => {
-    Object.assign(
-      clientDirect,
-      _.builder?.({
-        client: clientDirect,
-        context,
-      }) ?? {},
-    )
+    const propertiesDynamic = _.propertiesDynamic?.({
+      configuration: context.configuration[_.name],
+      client,
+      context,
+    })
+    const properties = _.propertiesStatic && propertiesDynamic
+      ? {
+        ..._.propertiesStatic,
+        ...propertiesDynamic,
+      }
+      : (_.propertiesStatic ?? propertiesDynamic ?? {})
+
+    Object.assign(client, properties)
   })
 
-  return clientDirect
+  return client
 }

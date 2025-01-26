@@ -16,6 +16,7 @@ export const DocumentBuilder = Extension(`DocumentBuilder`)
       } as any as Properties,
     }
   })
+  .done()
 
 export interface Properties extends Extension.PropertiesTypeFunction {
   // @ts-expect-error

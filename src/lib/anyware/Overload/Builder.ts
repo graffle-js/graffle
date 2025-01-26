@@ -15,7 +15,7 @@ export const create: Create = (parameters) => {
   const builder: Builder = {
     type: overload,
     configurator: (configurator) => {
-      overload.configurator = Configurator.$.getBuilderData(configurator)
+      overload.configurator = configurator.return()
       return builder as any
     },
     stepWithExtendedInput: () => builder.step as any,
@@ -120,8 +120,8 @@ type InferStepInput<
       :
         & $CurrentStep['input']
         & $Overload['configurator']['input']
-        & { [_ in $Overload['discriminant'][0]]: $Overload['discriminant'][1] }
+        & { [_ in $Overload['discriminant'][0]]: $Overload['name'] }
       :
         & $CurrentStep['input']
         & $Overload['configurator']['input']
-        & { [_ in $Overload['discriminant'][0]]: $Overload['discriminant'][1] }
+        & { [_ in $Overload['discriminant'][0]]: $Overload['name'] }

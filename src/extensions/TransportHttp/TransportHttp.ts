@@ -54,7 +54,7 @@ export type ConfigurationDefault = typeof configurationDefault
 
 export interface ConfigurationInputResolver$Func extends Configurator.InputResolver$Func {
   // @ts-expect-error
-  _return: ConfigurationInputResolver$Func_<this['$input'], this['$partialNormalized']>
+  _return: ConfigurationInputResolver$Func_<this['$input'], this['$current']>
 }
 // dprint-ignore
 export interface ConfigurationInputResolver$Func_<
@@ -77,8 +77,8 @@ export type MethodModePost = typeof MethodMode['post']
 export type MethodMode = MethodModePost | MethodModeGetReads
 
 const httpTransportConfigurator = Configurator()
-  .typeOfInput<ConfigurationInput>()
-  .typeOfNormalized<ConfigurationNormalized>()
+  .input<ConfigurationInput>()
+  .normalized<ConfigurationNormalized>()
   .default(configurationDefault)
   .inputResolver<ConfigurationInputResolver$Func>((current, input) => {
     // todo
@@ -178,8 +178,7 @@ export type TransportHttp = Extension<
   >
 >
 
-// @ts-expect-error
-export const TransportHttp: TransportHttp = Extension(`TransportHttp`)
+export const TransportHttp: TransportHttpConstructor = Extension(`TransportHttp`)
   .transport(
     Transport(`http`)
       .configurator(httpTransportConfigurator)
@@ -271,3 +270,4 @@ export const TransportHttp: TransportHttp = Extension(`TransportHttp`)
         },
       }),
   )
+  .done()

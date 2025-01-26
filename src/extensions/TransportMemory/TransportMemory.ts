@@ -97,14 +97,13 @@ export type TransportMemory = Extension<
   >
 >
 
-// @ts-expect-error
 export const TransportMemory: TransportMemoryConstructor = Extension(`TransportMemory`)
   .transport(
     Transport(`memory`)
       .configurator(
         Configurator()
-          .typeOfInput<ConfigurationInput>()
-          .typeOfNormalized<ConfigurationNormalized>()
+          .input<ConfigurationInput>()
+          .normalized<ConfigurationNormalized>()
           .inputResolver((current, input) => {
             const next = {
               ...current,
@@ -146,3 +145,4 @@ export const TransportMemory: TransportMemoryConstructor = Extension(`TransportM
         },
       }),
   )
+  .done()

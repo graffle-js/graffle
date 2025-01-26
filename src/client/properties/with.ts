@@ -1,5 +1,5 @@
+import { type ConfigInit } from '../../types/configurators/input.js'
 import { Context } from '../../types/context.js'
-import { type ConfigInit } from '../Configuration/ConfigInit.js'
 import { createProperties } from '../helpers.js'
 
 export const withProperties = createProperties((builder, state) => {

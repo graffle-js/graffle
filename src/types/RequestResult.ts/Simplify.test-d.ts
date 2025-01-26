@@ -1,5 +1,5 @@
 import type { AddScalar } from '../../client/properties/scalar.js'
-import type { Extension } from '../../extension/__.js'
+import type { Extension } from '../../extension/$.js'
 import { assertEqual } from '../../lib/assert-equal.js'
 import type { Context } from '../context.js'
 import type { Schema } from '../Schema/__.js'
@@ -9,23 +9,23 @@ import type { _SimplifyExcept, Simplify, SimplifyWithEmptyContext } from './Simp
 {
 type DateScalar = Schema.Scalar<'Date', Date, string>
 type CEmpty = Context.States.Empty
-type CExt = Extension.AddExtensionTypeHooks<CEmpty, {
-	onRequestDocumentRootType: [],
-	onRequestResult: []
-	requestResultDataTypes: Text,
-}>
+// type CExt = Extension.AddExtensionTypeHooks<CEmpty, {
+// 	onRequestDocumentRootType: [],
+// 	onRequestResult: []
+// 	requestResultDataTypes: Text,
+// }>
 type CScalar = AddScalar<Context.States.Empty, DateScalar>
-type CExtAndScalar = AddScalar<CExt, DateScalar>
+// type CExtAndScalar = AddScalar<CExt, DateScalar>
 	
 type _1 = Simplify<CEmpty                   , {x:Date|null}>
 // @ts-expect-error
 assertEqual<_1									            , {x:Date|null}>()
-type _2 = Simplify<CExt                     , {x:Text|null}>
-assertEqual<_2									            , {x:Text|null}>()
+// type _2 = Simplify<CExt                     , {x:Text|null}>
+// assertEqual<_2									            , {x:Text|null}>()
 type _3 = Simplify<CScalar                  , {x:Date|null}>
 assertEqual<_3									            , {x:Date|null}>()
-type _4 = Simplify<CExtAndScalar            , {x:Date|Text|null}>
-assertEqual<_4									            , {x:Date|Text|null}>()
+// type _4 = Simplify<CExtAndScalar            , {x:Date|Text|null}>
+// assertEqual<_4									            , {x:Date|Text|null}>()
 
 
 

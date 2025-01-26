@@ -1,15 +1,13 @@
-import { type ConfigInit, type ConfigInitOutputEnvelopeLonghand } from '../client/Configuration/ConfigInit.js'
-import { type OutputConfig, type OutputConfigDefault, outputConfigDefault } from '../client/Configuration/Output.js'
-import type { Extension } from '../extension/__.js'
+import type { Extension } from '../extension/$.js'
 import type { Anyware } from '../lib/anyware/_namespace.js'
 import type { Objekt, StringKeyof } from '../lib/prelude.js'
 import {
   type RequestPipelineBaseDefinition,
   requestPipelineBaseDefinition,
 } from '../requestPipeline/RequestPipeline.js'
-import { GlobalRegistry } from './GlobalRegistry/GlobalRegistry.js'
+import type { Configurator } from './configurator.js'
+import { Configurators } from './configurators/_namespace.js'
 import { Schema } from './Schema/__.js'
-import type { SchemaDrivenDataMap } from './SchemaDrivenDataMap/SchemaDrivenDataMap.js'
 import type { Transport } from './Transport.js'
 
 export interface Context extends ContextTypeLevel, ContextValueLevel {}
@@ -20,30 +18,29 @@ export interface ContextTypeLevel {
    *
    * @remarks Typically added by extensions. Added here upon use for optimized type-level reads later on.
    */
-  typeHookOnRequestResult: Extension.TypeHooks.OnRequestResult[]
-  typeHookOnRequestDocumentRootType: Extension.TypeHooks.OnRequestDocumentRootType[]
+  // typeHookOnRequestResult: Extension.TypeHooks.OnRequestResult[]
+  // typeHookOnRequestDocumentRootType: Extension.TypeHooks.OnRequestDocumentRootType[]
   typeHookRequestResultDataTypes: unknown
 }
 
 export interface ContextValueLevel {
-  name: string
+  configuration: {
+    output: Configurators.Output.OutputConfigurator['current']
+    check: Configurators.Check.CheckConfigurator['current']
+    schema: Configurators.Schema.SchemaConfigurator['current']
+  }
+  configurators: {
+    output: Configurators.Output.OutputConfigurator
+    check: Configurators.Check.CheckConfigurator
+    schema: Configurators.Schema.SchemaConfigurator
+  }
   requestPipelineDefinition: Anyware.PipelineDefinition
   transports: ClientTransports
-  /**
-   * If enabled, this will cause request methods to be statically unavailable if
-   * a transport is not correctly configured.
-   *
-   * @defaultValue `true`
-   */
-  checkPreflight?: boolean
-  /**
-   * The initial input that was given to derive the config.
-   */
-  input: ConfigInit
-  output: OutputConfig
-  schemaMap: SchemaDrivenDataMap | null
-  extensions: Extension[]
   scalars: Schema.Scalar.Registry
+  extensions: Extension[]
+  extensionsIndex: {
+    [extensionName: string]: Extension
+  }
 }
 
 export interface ClientTransports {
@@ -60,10 +57,8 @@ export interface ClientTransportsRegistry {
 }
 
 export interface ClientTransportsConfigurations {
-  [name: string]: ClientTransportsConfiguration
+  [name: string]: Configurator.Configuration
 }
-
-export type ClientTransportsConfiguration = object
 
 export namespace ClientTransports {
   export namespace Errors {
@@ -97,7 +92,7 @@ export namespace ClientTransports {
       : $ClientTransports['current'] extends string
         ? $ClientTransports['current'] extends keyof $ClientTransports['configurations']
           ? $ClientTransports['current'] extends keyof $ClientTransports['registry']
-            ? $ClientTransports['configurations'][$ClientTransports['current']] extends $ClientTransports['registry'][$ClientTransports['current']]['configuration']
+            ? $ClientTransports['configurations'][$ClientTransports['current']] extends $ClientTransports['registry'][$ClientTransports['current']]['configurator']['normalized']
               ? $SuccessValue
               : ClientTransports.Errors.PreflightCheckTransportNotReady<$ClientTransports['current']>
             : never // Should never happen
@@ -130,69 +125,19 @@ export namespace ClientTransports {
   }
 }
 
-export type DefaultCheckPreflight = true
-
-export const defaultCheckPreflight: DefaultCheckPreflight = true
-
-export type DefaultName = GlobalRegistry.DefaultClientName
-
-export const defaultName = GlobalRegistry.defaultClientName
-
 export namespace Context {
-  export const updateContextConfigInit = (
-    context: Context,
-    configInit: ConfigInit,
-  ): Context => {
-    const outputEnvelopeLonghand: ConfigInitOutputEnvelopeLonghand | undefined =
-      typeof configInit.output?.envelope === `object`
-        ? { enabled: true, ...configInit.output.envelope }
-        : typeof configInit.output?.envelope === `boolean`
-        ? { enabled: configInit.output.envelope }
-        : undefined
-
-    const newConfig = {
-      name: configInit.name ?? context?.name ?? defaultName,
-      schemaMap: configInit.schemaMap ?? context.schemaMap,
-      output: {
-        defaults: {
-          errorChannel: configInit.output?.defaults?.errorChannel ?? context.output.defaults.errorChannel,
-        },
-        envelope: {
-          enabled: outputEnvelopeLonghand?.enabled ?? context.output.envelope.enabled,
-          errors: {
-            execution: outputEnvelopeLonghand?.errors?.execution ?? context.output.envelope.errors.execution,
-            other: outputEnvelopeLonghand?.errors?.other ?? context.output.envelope.errors.other,
-            // @ts-expect-error
-            schema: outputEnvelopeLonghand?.errors?.schema ?? context.output.envelope.errors.schema,
-          },
-        },
-        errors: {
-          execution: configInit.output?.errors?.execution ?? context.output.errors.execution,
-          other: configInit.output?.errors?.other ?? context.output.errors.other,
-          // @ts-expect-error conditional type
-          schema: configInit.output?.errors?.schema ?? context.output.errors.schema,
-        },
-      },
-    }
-
-    return Context.withTypeLevel({
-      ...context,
-      ...newConfig,
-    })
-  }
-  export const withTypeLevel = (contextValueLevel: ContextValueLevel): Context => contextValueLevel as any
-
   export namespace States {
     export interface Empty extends Context {
-      name: DefaultName
+      configuration: {
+        output: Configurators.Output.OutputConfigurator['default']
+        check: Configurators.Check.CheckConfigurator['default']
+        schema: Configurators.Schema.SchemaConfigurator['default']
+      }
       scalars: Schema.Scalar.Registry.Empty
       extensions: []
+      extensionsIndex: {}
       transports: ClientTransports.States.Empty
-      checkPreflight: DefaultCheckPreflight
-      schemaMap: null
-      input: {}
       requestPipelineDefinition: RequestPipelineBaseDefinition
-      output: OutputConfigDefault
       // type-level properties
       // todo merge typehooks empty from extension type here to DRY
       typeHookOnRequestDocumentRootType: []
@@ -201,19 +146,25 @@ export namespace Context {
     }
 
     export const empty: Empty = {
-      name: defaultName,
+      configuration: {
+        output: Configurators.Output.configurator.default,
+        check: Configurators.Check.configurator.default,
+        schema: Configurators.Schema.configurator.default,
+      },
+      configurators: {
+        output: Configurators.Output.configurator,
+        check: Configurators.Check.configurator,
+        schema: Configurators.Schema.configurator,
+      },
       requestPipelineDefinition: requestPipelineBaseDefinition,
       transports: ClientTransports.States.empty,
-      checkPreflight: defaultCheckPreflight,
-      input: {},
-      output: outputConfigDefault,
-      schemaMap: null,
       extensions: [],
+      extensionsIndex: {},
       scalars: Schema.Scalar.Registry.empty,
-      // type-only properties
-      // typeHookOnRequestDocumentRootType: [],
-      // typeHookOnRequestResult: [],
-    } as Empty
+      typeHookOnRequestDocumentRootType: null as any,
+      typeHookOnRequestResult: null as any,
+      typeHookRequestResultDataTypes: null as never,
+    }
   }
   export namespace Updaters {
     // dprint-ignore
@@ -226,7 +177,7 @@ export namespace Context {
             configurations:
               & Omit<$ClientTransports['configurations'], $Transport['name']>
               & {
-                  [_ in $Transport['name']]: $Transport['configurationDefaults']
+                  [_ in $Transport['name']]: $Transport['configurator']['default']
                 }
             current: $ClientTransports extends ClientTransports.States.Empty
               ? $Transport['name']

@@ -2,11 +2,11 @@
 import { type ExecutionResult } from 'graphql'
 import { describe } from 'node:test'
 import { expectTypeOf, test } from 'vitest'
-import { Graffle } from '../../../tests/_/schemas/kitchen-sink/graffle/__.js'
-import { schema } from '../../../tests/_/schemas/kitchen-sink/schema.js'
-import type { Anyware } from '../../lib/anyware/_namespace.js'
-import { assertEqual } from '../../lib/assert-equal.js'
-import { type GraphQLExecutionResultError } from '../../lib/grafaid/graphql.js'
+import { Graffle } from '../../../../tests/_/schemas/kitchen-sink/graffle/__.js'
+import { schema } from '../../../../tests/_/schemas/kitchen-sink/schema.js'
+import type { Anyware } from '../../../lib/anyware/_namespace.js'
+import { assertEqual } from '../../../lib/assert-equal.js'
+import { type GraphQLExecutionResultError } from '../../../lib/grafaid/graphql.js'
 
 const G = Graffle.create
 

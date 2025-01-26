@@ -47,8 +47,8 @@ type SchemaTarget = string | URL | GraphQLSchema
 export const Introspection = Extension(`Introspection`)
   .configurator(
     Configurator()
-      .typeOfInput<ConfigurationInput>()
-      .typeOfNormalized<ConfigurationNormalized>()
+      .input<ConfigurationInput>()
+      .normalized<ConfigurationNormalized>()
       .default({
         schema: undefined,
         options: {
@@ -61,45 +61,42 @@ export const Introspection = Extension(`Introspection`)
         },
       }),
   )
-  .constructor(({ configuration, client }) => {
+  .properties<Properties>(({ configuration, client }) => {
     return {
-      properties: {
-        introspect: async () => {
-          // todo: fixme: use config.schema!! Currently only looked at in the generator!
-          const c = client.with({ output: { envelope: false, errors: { execution: `return` } } })
-          let introspectionQueryDocument = getIntrospectionQuery(configuration.options)
-          // @ts-expect-error fixme
-          const result = await c.gql(introspectionQueryDocument).send()
-          const featuresDropped: string[] = []
-          const enabledKnownPotentiallyUnsupportedFeatures = knownPotentiallyUnsupportedFeatures.filter(_ =>
-            configuration.options[_] !== false
-          )
+      introspect: async () => {
+        // todo: fixme: use config.schema!! Currently only looked at in the generator!
+        const c = client.with({ output: { envelope: false, errors: { execution: `return` } } })
+        let introspectionQueryDocument = getIntrospectionQuery(configuration.options)
+        // @ts-expect-error fixme
+        const result = await c.gql(introspectionQueryDocument).send()
+        const featuresDropped: string[] = []
+        const enabledKnownPotentiallyUnsupportedFeatures = knownPotentiallyUnsupportedFeatures.filter(_ =>
+          configuration.options[_] !== false
+        )
 
-          // Try to find a working introspection query.
-          if (result instanceof Error) {
-            for (const feature of enabledKnownPotentiallyUnsupportedFeatures) {
-              featuresDropped.push(feature)
-              introspectionQueryDocument = getIntrospectionQuery({
-                ...configuration.options,
-                [feature]: false,
-              })
-              // @ts-expect-error fixme
-              const result = await c.gql(introspectionQueryDocument).send()
-              if (!(result instanceof Error)) break
-            }
+        // Try to find a working introspection query.
+        if (result instanceof Error) {
+          for (const feature of enabledKnownPotentiallyUnsupportedFeatures) {
+            featuresDropped.push(feature)
+            introspectionQueryDocument = getIntrospectionQuery({
+              ...configuration.options,
+              [feature]: false,
+            })
+            // @ts-expect-error fixme
+            const result = await c.gql(introspectionQueryDocument).send()
+            if (!(result instanceof Error)) break
           }
+        }
 
-          // Send the query again with the host configuration for output.
-          // TODO rather than having to make this query again expose a way to send a value through the output handler here.
-          // TODO expose the featuresDropped info on the envelope so that upstream can communicate to users what happened
-          // finally at runtime.
-          // @ts-expect-error fixme
-          return await client.gql(introspectionQueryDocument).send()
-        },
+        // Send the query again with the host configuration for output.
+        // TODO rather than having to make this query again expose a way to send a value through the output handler here.
+        // TODO expose the featuresDropped info on the envelope so that upstream can communicate to users what happened
+        // finally at runtime.
+        // @ts-expect-error fixme
+        return await client.gql(introspectionQueryDocument).send()
       },
-    }
+    } as any
   })
-  .typeOfProperties<Properties>()
   .typeOfNoExpandResultDataType<IntrospectionQuery>()
 
 interface Properties extends Extension.PropertiesTypeFunction {

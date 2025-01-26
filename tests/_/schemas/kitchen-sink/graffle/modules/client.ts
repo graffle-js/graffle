@@ -13,9 +13,10 @@ const context = $$Utilities.useReducer(
       schemaMap: $$SchemaDrivenDataMap.schemaDrivenDataMap,
       scalars: $$Scalar.$registry,
     },
-    TransportHttp({
-      url: $$Data.defaultSchemaUrl,
-    }),
+    TransportHttp,
+    // TransportHttp({
+    //   url: $$Data.defaultSchemaUrl,
+    // }),
   ),
   DocumentBuilder(),
 )

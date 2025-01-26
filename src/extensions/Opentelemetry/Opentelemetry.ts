@@ -4,7 +4,7 @@ import { Configurator, Extension } from '../../entrypoints/extension.js'
 export const OpenTelemetry = Extension(`OpenTelemetry`)
   .configurator(
     Configurator()
-      .typeOfInput<{
+      .input<{
         /**
          * @defaultValue `"opentelemetry"`
          */

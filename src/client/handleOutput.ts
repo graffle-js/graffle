@@ -14,16 +14,16 @@ import {
   type Values,
 } from '../lib/prelude.js'
 import type { RequestPipelineBase } from '../requestPipeline/RequestPipeline.js'
-import type { Context } from '../types/context.js'
-import type { GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
-import type { RequestResult } from '../types/RequestResult.ts/__.js'
 import {
   type ErrorCategory,
   isOutputTraditionalGraphQLOutput,
+  type Normalized,
   type OutputChannelConfig,
-  type OutputConfig,
   readErrorCategoryOutputChannel,
-} from './Configuration/Output.js'
+} from '../types/configurators/output.js'
+import type { Context } from '../types/context.js'
+import type { GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
+import type { RequestResult } from '../types/RequestResult.ts/__.js'
 
 export type GraffleExecutionResultEnvelope = {
   errors?: ReadonlyArray<
@@ -125,7 +125,7 @@ type HandleOutput_Extensions<
 >
 
 type HandleOutput_ErrorsReturn<
-  $OutputConfig extends OutputConfig,
+  $OutputConfig extends Normalized,
   $Envelope extends GraffleExecutionResultEnvelope,
 > =
   | IfConfiguredGetOutputErrorReturns<$OutputConfig>
@@ -133,7 +133,7 @@ type HandleOutput_ErrorsReturn<
 
 // dprint-ignore
 type HandleOutput_Envelope<
-  $OutputConfig extends OutputConfig,
+  $OutputConfig extends Normalized,
   $Envelope extends GraffleExecutionResultEnvelope,
 > =
   $OutputConfig['envelope']['enabled'] extends true
@@ -141,13 +141,13 @@ type HandleOutput_Envelope<
     : ExcludeUndefined<$Envelope['data']> // todo make data field not undefinable
 
 // dprint-ignore
-type IfConfiguredGetOutputErrorReturns<$OutputConfig extends OutputConfig> =
+type IfConfiguredGetOutputErrorReturns<$OutputConfig extends Normalized> =
   | (ConfigGetOutputError<$OutputConfig, 'execution'>  extends 'return'  ? GraphQLExecutionResultError   : never)
   | (ConfigGetOutputError<$OutputConfig, 'other'>      extends 'return'  ? Anyware.ResultFailure : never)
 
 // dprint-ignore
 export type ConfigGetOutputError<
-  $OutputConfig extends OutputConfig,
+  $OutputConfig extends Normalized,
   $ErrorCategory extends ErrorCategory,
 > =
   $OutputConfig['envelope']['enabled'] extends true
@@ -156,7 +156,7 @@ export type ConfigGetOutputError<
 
 // dprint-ignore
 type ConfigGetOutputEnvelopeErrorChannel<
-  $OutputConfig extends OutputConfig,
+  $OutputConfig extends Normalized,
   $ErrorCategory extends ErrorCategory,
 > =
   $OutputConfig['envelope']['errors'][$ErrorCategory] extends true
@@ -164,7 +164,7 @@ type ConfigGetOutputEnvelopeErrorChannel<
     : ConfigResolveOutputErrorChannel<$OutputConfig, $OutputConfig['errors'][$ErrorCategory]>
 
 type ConfigResolveOutputErrorChannel<
-  $OutputConfig extends OutputConfig,
+  $OutputConfig extends Normalized,
   $Channel extends OutputChannelConfig | false,
 > = $Channel extends 'default' ? $OutputConfig['defaults']['errorChannel']
   : $Channel extends false ? false
@@ -173,7 +173,7 @@ type ConfigResolveOutputErrorChannel<
 // dprint-ignore
 // todo use ObjMap for $Data
 export type Envelope<
-  $OutputConfig extends OutputConfig,
+  $OutputConfig extends Normalized,
   $Data = unknown,
   $Errors extends ReadonlyArray<Error> = ReadonlyArray<GraphQLError>,
 > =
@@ -199,7 +199,7 @@ type ObjMap<T = unknown> = {
 }
 
 // dprint-ignore
-type IsEnvelopeWithoutErrors<$OutputConfig extends OutputConfig> =
+type IsEnvelopeWithoutErrors<$OutputConfig extends Normalized> =
   $OutputConfig['envelope']['enabled'] extends true
     ? Values<$OutputConfig['envelope']['errors']> extends false
       ? true

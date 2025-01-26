@@ -10,7 +10,7 @@ export interface Transport<
   $Exchange extends Anyware.StepDefinition<'exchange'> = Anyware.StepDefinition<'exchange'>,
   $Unpack extends Anyware.StepDefinition<'unpack'> = Anyware.StepDefinition<'unpack'>,
 > extends Anyware.Overload {
-  discriminant: ['transportType', $Name]
+  name: $Name
   configurator: $Configurator
   steps: {
     pack: $Pack
@@ -34,7 +34,7 @@ export namespace Transport {
     configurator: <$Configurator extends Configurator>(
       input: Configurator.BuilderProviderCallback<$Configurator> | Configurator.Builder<$Configurator> | $Configurator,
     ) => Builder<Transport<
-          $TransportProgressive['discriminant'][1],
+          $TransportProgressive['name'],
           $Configurator
         >>
     /**
@@ -51,7 +51,7 @@ export namespace Transport {
       ) => $Output
       slots?: $Slots
     }) => Builder<Transport<
-      $TransportProgressive['discriminant'][1],
+      $TransportProgressive['name'],
       $TransportProgressive['configurator'],
       Anyware.StepDefinition<'pack', $Slots, $Input, $Output>
     >>
@@ -69,7 +69,7 @@ export namespace Transport {
       ) => $Output
       slots?: $Slots
     }) => Builder<Transport<
-      $TransportProgressive['discriminant'][1],
+      $TransportProgressive['name'],
       $TransportProgressive['configurator'],
       $TransportProgressive['steps']['pack'],
       Anyware.StepDefinition<'exchange', $Slots, $Input, $Output>
@@ -88,7 +88,7 @@ export namespace Transport {
       ) => $Output
       slots?: $Slots
     }) => Builder<Transport<
-      $TransportProgressive['discriminant'][1],
+      $TransportProgressive['name'],
       $TransportProgressive['configurator'],
       $TransportProgressive['steps']['pack'],
       $TransportProgressive['steps']['exchange'],

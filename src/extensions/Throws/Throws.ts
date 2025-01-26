@@ -1,6 +1,6 @@
 import type { Client } from '../../client/client.js'
 import { Extension } from '../../entrypoints/extension.js'
-import { type ConfigInit, type OutputConfig } from '../../entrypoints/main.js'
+import { type ConfigInit, type Normalized } from '../../entrypoints/main.js'
 import type { ConfigManager } from '../../lib/config-manager/__.js'
 
 export const Throws = Extension
@@ -47,7 +47,7 @@ interface Properties_<$Parameters extends Extension.PropertiesTypeFunctionParame
   >
 }
 
-type ThrowsifyConfig<$OutputConfig extends OutputConfig> = ConfigManager.SetKey<
+type ThrowsifyConfig<$OutputConfig extends Normalized> = ConfigManager.SetKey<
   $OutputConfig,
   'errors',
   { other: 'throw'; execution: 'throw' }

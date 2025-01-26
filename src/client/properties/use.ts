@@ -1,4 +1,4 @@
-import type { Extension } from '../../extension/__.js'
+import type { Extension } from '../../extension/$.js'
 import type { Anyware } from '../../lib/anyware/_namespace.js'
 import type { UnknownOrAnyToNever } from '../../lib/prelude.js'
 import { type Context } from '../../types/context.js'
@@ -27,7 +27,7 @@ export type UseOneReducer<
         ?  $Extension['transport'] extends Transport
           ? Anyware.PipelineDefinition.Updaters.AddOverload<
               $Context['requestPipelineDefinition'],
-              $Extension['transport']['requestPipelineOverload']
+              $Extension['transport']
             >
           : $Context['requestPipelineDefinition']
         : _ extends 'extensions'
@@ -37,12 +37,13 @@ export type UseOneReducer<
             $Context['transports'],
             $Extension['transport']
           >
-        : _ extends 'typeHookOnRequestResult'
-        ? [...$Context['typeHookOnRequestResult'], ...$Extension['typeHooks']['onRequestResult']]
-        : _ extends 'typeHookOnRequestDocumentRootType'
-        ? [...$Context['typeHookOnRequestDocumentRootType'], ...$Extension['typeHooks']['onRequestDocumentRootType']]
+        // : _ extends 'typeHookOnRequestResult'
+        // ? [...$Context['typeHookOnRequestResult'], ...$Extension['typeHooks']['onRequestResult']]
+        // : _ extends 'typeHookOnRequestDocumentRootType'
+        // ? [...$Context['typeHookOnRequestDocumentRootType'], ...$Extension['typeHooks']['onRequestDocumentRootType']]
         : _ extends 'typeHookRequestResultDataTypes'
-        ? $Context['typeHookRequestResultDataTypes'] | UnknownOrAnyToNever<$Extension['typeHooks']['requestResultDataTypes']>
+        ? $Context['typeHookRequestResultDataTypes'] | UnknownOrAnyToNever<$Extension['noExpandResultDataType']>
+        // Skip
         : $Context[_]
     }
 
@@ -54,6 +55,10 @@ export const useReducer = <
   const newContext: Context = {
     ...context,
     extensions: [...context.extensions, extension],
+    extensionsIndex: {
+      ...context.extensionsIndex,
+      [extension.name]: extension,
+    },
   }
 
   if (extension.transport) {
@@ -61,7 +66,7 @@ export const useReducer = <
       ...context.requestPipelineDefinition,
       overloads: [
         ...context.requestPipelineDefinition.overloads,
-        extension.transport.requestPipelineOverload,
+        extension.transport,
       ],
     }
     newContext.transports = {
@@ -74,18 +79,20 @@ export const useReducer = <
       },
     }
 
-    const isTransportAlreadyRegistered = newContext.transports.registry[extension.transport.name] !== undefined
+    const transportName = extension.transport.discriminant['1']
+    const isTransportAlreadyRegistered = newContext.transports.registry[transportName] !== undefined
     if (isTransportAlreadyRegistered) {
-      throw new Error(`Transport "${extension.transport.name}" is already registered.`)
+      throw new Error(`Transport "${transportName}" is already registered.`)
     }
     const isFirstTransport = newContext.transports.current === null
     if (isFirstTransport) {
-      newContext.transports.current = extension.transport.name
+      newContext.transports.current = transportName
     }
-    newContext.transports.registry[extension.transport.name] = extension.transport
-    newContext.transports.configurations[extension.transport.name] = {
-      ...extension.transport.configurationDefaults,
-      ...extension.transport.configuration,
+    newContext.transports.registry[transportName] = extension.transport
+    newContext.transports.configurations[transportName] = {
+      ...extension.transport.configurator.default,
+      // todo:
+      // ...extension.transport.configuration,
     }
   }
 
