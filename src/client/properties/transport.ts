@@ -28,27 +28,16 @@ export type TransportMethod<
                         registry: $Context['transports']['registry']
                         current: $Context['transports']['current']
                         configurations:
-                          keyof configurationInput extends never
-                            ? $Context['transports']['configurations']
-                            : {
-                                [transportName in keyof $Context['transports']['configurations']]:
-                                  transportName extends $Context['transports']['current']
-                                    ? $Context['transports']['registry'][transportName]['configurator']['inputResolver'] extends Configurator.InputResolver$Func
-                                        // Custom Configuration Input Resolver
-                                      ? (
-                                          & $Context['transports']['registry'][transportName]['configurator']['inputResolver']
-                                          & { $input: configurationInput; $current: $Context['transports']['configurations'][transportName] }
-                                        )['_return']
-                                        // Default Configuration Input Resolver
-                                      : & {
-                                            [configValueKey in keyof $Context['transports']['configurations'][transportName]]:
-                                              configValueKey extends keyof configurationInput
-                                                ? unknown
-                                                : $Context['transports']['configurations'][transportName][configValueKey]
-                                          }
-                                        & configurationInput
-                                    : $Context['transports']['configurations'][transportName]
-                              }
+                         {
+                            [transportName in keyof $Context['transports']['configurations']]:
+                              transportName extends $Context['transports']['current']
+                                ? Configurator.ApplyInputResolver$Func<
+                                    $Context['transports']['registry'][transportName]['configurator'],
+                                    $Context['transports']['configurations'][transportName],
+                                    configurationInput
+                                  >
+                                : $Context['transports']['configurations'][transportName]
+                          }
                       }
                     : $Context[_]
               },
@@ -70,27 +59,19 @@ export type TransportMethod<
                     ? {
                         registry: $Context['transports']['registry']
                         current: name
-                        configurations: keyof configurationInput extends never
-                          ? $Context['transports']['configurations']
-                          : {
-                            [configKeyTransportName in keyof $Context['transports']['configurations']]:
-                              configKeyTransportName extends name
-                               ? $Context['transports']['registry'][configKeyTransportName]['configurator']['inputResolver'] extends Configurator.InputResolver$Func
-                                    // Custom Configuration Input Resolver
-                                  ? (
-                                      & $Context['transports']['registry'][configKeyTransportName]['configurator']['inputResolver']
-                                      & { $input: configurationInput; $current: $Context['transports']['configurations'][configKeyTransportName] }
-                                    )['_return']
-                                    // Default Configuration Input Resolver
-                                  : & {
-                                        [configValueKey in keyof $Context['transports']['configurations'][configKeyTransportName]]:
-                                          configValueKey extends keyof configurationInput
-                                            ? unknown
-                                            : $Context['transports']['configurations'][configKeyTransportName][configValueKey]
-                                      }
-                                    & configurationInput
-                                : $Context['transports']['configurations'][configKeyTransportName]
-                          }
+                        configurations:
+                          configurationInput extends Configurator.Configuration
+                          ? {
+                              [configKeyTransportName in keyof $Context['transports']['configurations']]:
+                                configKeyTransportName extends name
+                                  ? Configurator.ApplyInputResolver$Func<
+                                      $Context['transports']['registry'][configKeyTransportName]['configurator'],
+                                      $Context['transports']['configurations'][configKeyTransportName],
+                                      configurationInput
+                                    >
+                                  : $Context['transports']['configurations'][configKeyTransportName]
+                            }
+                          : $Context['transports']['configurations']
                       }
                     : $Context[_]
               },

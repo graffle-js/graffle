@@ -1,4 +1,3 @@
-import type { IsEmptyObject } from 'type-fest'
 import { __ } from '../lib/prelude.js'
 
 // ----------------------------
@@ -7,10 +6,14 @@ import { __ } from '../lib/prelude.js'
 
 // dprint-ignore
 export interface Configurator<
-  $Input 			              extends Configurator.Configuration 	       = Configurator.Configuration,
-  $Normalized 	            extends $Input                             = Required<$Input>,
-  $Default 		              extends Partial<$Normalized>               = Partial<$Normalized>,
-	$InputResolver            extends Configurator.InputResolver<any> 	 = Configurator.InputResolver<any>
+  $Input 			              extends Configurator.Configuration =
+                                    Configurator.Configuration,
+  $Normalized 	            extends $Input =
+                                    Required<$Input>,
+  $Default 		              extends Partial<$Normalized> =
+                                    Partial<$Normalized>,
+	$InputResolver            extends Configurator.InputResolver<Configurator.InputResolver.$Func<$Input, $Normalized, $Default>> =
+                                    Configurator.InputResolver<Configurator.InputResolver.Standard_ShallowMerge$Func<$Input, $Normalized, $Default>>
 > {
   input: $Input
   normalized: $Normalized
@@ -24,14 +27,14 @@ export const Configurator = (): Configurator.States.BuilderEmpty => {
 }
 
 namespace $ {
-  export const createInputResolver: Configurator.CreateInputResolver = (_) => _ as any
+  export const createInputResolver: Configurator.InputResolver.Create = (_) => _ as any
 
   export const defaultInputResolver = createInputResolver(({ current, input }) => ({
     ...current,
     ...input,
   }))
 
-  export const SymbolInputResolver$Func = Symbol(`InputResolver$Func`)
+  export const InputResolver$FuncSymbol = Symbol(`InputResolver$Func`)
 
   // export const SymbolBuilderData = Symbol(`BuilderData`)
 
@@ -105,17 +108,18 @@ export namespace Configurator {
 
     default:
 			<const $Default extends Partial<$Configurator['normalized']>>(
-				default_: IsEmptyObject<$Configurator['normalized']> extends true ? never :  $Default,
+				default_: $Default,
 			) => Builder<Configurator<$Configurator['input'], $Configurator['normalized'], $Default, InputResolver>>
 
     inputResolver:
-			<$InputResolver$Func extends InputResolver$Func<$Configurator['input'], $Configurator['normalized'], $Configurator['default']> = never>(
-				inputResolver: InputResolverInit<
+			<$Func extends  InputResolver.$Func<$Configurator['input'], $Configurator['normalized'], $Configurator['default']> =
+                      InputResolver.Standard_ShallowMerge$Func<$Configurator['input'], $Configurator['normalized'], $Configurator['default']>>(
+				inputResolver: InputResolver.Init<
 					$Configurator['input'],
 					$Configurator['normalized'],
 					$Configurator['default']
 				>,
-      ) => Builder<Configurator<$Configurator['input'], $Configurator['normalized'], $Configurator['default'], InputResolver<$InputResolver$Func>>>
+      ) => Builder<Configurator<$Configurator['input'], $Configurator['normalized'], $Configurator['default'], InputResolver<$Func>>>
       
       return: () => $Configurator
   }
@@ -123,50 +127,87 @@ export namespace Configurator {
   // ----------------------------
   // Input Resolver
   // ----------------------------
+  export interface InputResolver<$InputResolver$Func = never> {
+    (current: Configuration, input: Configuration): Configuration
+    [$.InputResolver$FuncSymbol]: $InputResolver$Func
+  }
 
-  export interface CreateInputResolver {
-    <
+  export namespace InputResolver {
+    export interface Standard_ShallowMerge$Func<
       $Input extends Configuration,
       $Normalized extends $Input,
       $Default extends Partial<$Normalized>,
-      $InputResolver$Func extends InputResolver$Func<$Input, $Normalized, $Default> = never,
-    >(inputResolver: InputResolverInit<$Input, $Normalized, $Default>): InputResolver<$InputResolver$Func>
-  }
+    > extends $Func<$Input, $Normalized, $Default> {
+      return: Standard_ShallowMerge<this['parameters']>
+    }
 
-  export interface InputResolverInit<
-    $Input extends Configuration,
-    $Normalized extends $Input,
-    $Default extends Partial<$Normalized>,
-  > {
-    (parameters: InputResolverParameters<$Input, $Normalized, $Default>): Partial<$Normalized>
-  }
+    // dprint-ignore
+    export type Standard_ShallowMerge<$Parameters extends Parameters> =
+    & $Parameters['input']
+    // Only keep current keys that are NOT in input.
+    & {
+        [_ in keyof $Parameters['current']
+          as _ extends keyof $Parameters['input'] ? never : _
+        ]:
+          $Parameters['current'][_]
+      }
 
-  export interface InputResolver<$InputResolver$Func = never> {
-    (current: Configuration, input: Configuration): Configuration
-    [$.SymbolInputResolver$Func]: $InputResolver$Func
-  }
+    export interface Create {
+      <
+        $Input extends Configuration,
+        $Normalized extends $Input,
+        $Default extends Partial<$Normalized>,
+        $InputResolver$Func extends $Func<$Input, $Normalized, $Default> = never,
+      >(inputResolver: Init<$Input, $Normalized, $Default>): InputResolver<$InputResolver$Func>
+    }
 
-  export interface InputResolver$Func<
-    $Input extends Configuration,
-    $Normalized extends $Input,
-    $Default extends Partial<$Normalized>,
-  > {
-    parameters: InputResolverParameters<$Input, $Normalized, $Default>
-    return: unknown
-  }
+    export interface Init<
+      $Input extends Configuration,
+      $Normalized extends $Input,
+      $Default extends Partial<$Normalized>,
+    > {
+      (parameters: Parameters<$Input, $Normalized, $Default>): Partial<$Normalized>
+    }
 
-  export interface InputResolverParameters<
-    $Input extends Configuration,
-    $Normalized extends $Input,
-    $Default extends Partial<$Normalized>,
-  > {
-    input: $Input
-    current: Simplify<Currentify<$Normalized, $Default>>
+    export type $FuncSymbol = typeof $.InputResolver$FuncSymbol
+
+    export interface $Func<
+      $Input extends Configuration = Configuration,
+      $Normalized extends $Input = $Input,
+      $Default extends Partial<$Normalized> = Partial<$Normalized>,
+    > {
+      parameters: Parameters<$Input, $Normalized, $Default>
+      return: object
+    }
+
+    export interface Parameters<
+      $Input extends Configuration = Configuration,
+      $Normalized extends $Input = $Input,
+      $Default extends Partial<$Normalized> = Partial<$Normalized>,
+    > {
+      input: $Input
+      current: Simplify<Currentify<$Normalized, $Default>>
+    }
   }
 
   // -------------
   // Helpers
   // -------------
+
+  export type ApplyInputResolver$Func<
+    $Configurator extends Configurator,
+    $Current extends $Configurator['current'],
+    $Input extends $Configurator['input'],
+    __ = (
+      & $Configurator['inputResolver'][InputResolver.$FuncSymbol]
+      & {
+        parameters: {
+          current: $Current
+          input: $Input
+        }
+      }
+    )['return'],
+  > = __
 
   export type Currentify<
     $Normalized extends Configuration,

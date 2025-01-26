@@ -122,13 +122,13 @@ export const configurator = Configurator()
 
 export type OutputConfigurator = typeof configurator
 
-interface InputResolver$Func extends Configurator.InputResolver$Func<Input, Normalized, Default_> {
+export interface InputResolver$Func extends Configurator.InputResolver.$Func<Input, Normalized, Default_> {
   return: InputResolver<this['parameters']>
 }
 
 // dprint-ignore
-interface InputResolver<
-  $Parameters extends Configurator.InputResolverParameters<Input, Normalized, Default_>,
+export interface InputResolver<
+  $Parameters extends Configurator.InputResolver.Parameters<Input, Normalized, Default_>,
   // Variables
   $Input = $Parameters['input'],
   _$Current = $Parameters['current'],

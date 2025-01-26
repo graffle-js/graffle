@@ -27,12 +27,6 @@ export const configurator = Configurator()
   .default({
     name: GlobalRegistry.defaultClientName,
   })
-  .inputResolver(({ current, input }) => {
-    return {
-      name: input.name ?? current.name,
-      map: input.map ?? current.map,
-    }
-  })
   .return()
 
 export type SchemaConfigurator = typeof configurator

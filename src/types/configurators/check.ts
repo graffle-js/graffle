@@ -15,16 +15,8 @@ export type Input = {
 
 export const configurator = Configurator()
   .input<Input>()
-  .normalized<{
-    preflight: boolean
-  }>()
   .default({
     preflight: true,
-  })
-  .inputResolver(({ current, input }) => {
-    return {
-      preflight: input.preflight ?? current.preflight,
-    }
   })
   .return()
 
