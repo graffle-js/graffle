@@ -3,16 +3,15 @@ import type { TypeFunction } from '../lib/type-function/__.js'
 import type { Configurator } from '../types/configurator.js'
 import type { ConfiguratorIndexInput } from '../types/ConfiguratorIndex.js'
 import { type ClientTransports, Context } from '../types/context.js'
+import {
+  type CalcConfigurationIndexUpdateForContext,
+  calcConfigurationIndexUpdateForContext,
+} from './calcConfigurationIndexUpdateForContext.js'
 import { anywareProperties } from './properties/anyware.js'
 import { type gqlOverload, gqlProperties } from './properties/gql/gql.js'
 import { type ScalarMethod, scalarProperties, type TypeErrorMissingSchemaMap } from './properties/scalar.js'
 import { type TransportMethod, transportProperties } from './properties/transport.js'
 import { type UseMethod, useProperties } from './properties/use.js'
-import {
-  type CalcConfigurationIndexUpdateForContext,
-  calcConfigurationIndexUpdateForContext,
-  withProperties,
-} from './properties/with.js'
 
 export type ClientEmpty = Client<Context.States.Empty, {}>
 
@@ -114,17 +113,26 @@ export const create: Create = createConstructorWithContext(Context.States.empty)
 export const createWithContext = <$Context extends Context>(
   context: $Context,
 ): Client<$Context, {}> => {
-  const client: Client<$Context, {}> = {} as any as Client<$Context, {}>
-
-  Object.assign(client, {
+  const client: Client<$Context, {}> = {
+    ...({} as Client<$Context, {}>),
     _: context,
-    ...withProperties({ client, context, createClient: createWithContext }),
-    ...transportProperties({ client, context, createClient: createWithContext }),
-    ...gqlProperties({ client, context, createClient: createWithContext }),
-    ...useProperties({ client, context, createClient: createWithContext }),
-    ...anywareProperties({ client, context, createClient: createWithContext }),
-    ...scalarProperties({ client, context, createClient: createWithContext }),
-  })
+    with(configurationIndexInput) {
+      const newContext = calcConfigurationIndexUpdateForContext(context, configurationIndexInput)
+      if (newContext === context) return client
+      return createWithContext(newContext) as any
+    },
+    // todo: move other properties into static definitions here.
+  }
+
+  // const properties = {
+  // ...transportProperties({ client, context, createClient: createWithContext }),
+  // ...gqlProperties({ client, context, createClient: createWithContext }),
+  // ...useProperties({ client, context, createClient: createWithContext }),
+  // ...anywareProperties({ client, context, createClient: createWithContext }),
+  // ...scalarProperties({ client, context, createClient: createWithContext }),
+  // }
+
+  // Object.assign(client, properties)
 
   context.extensions.forEach(_ => {
     const propertiesDynamic = _.propertiesDynamic?.({

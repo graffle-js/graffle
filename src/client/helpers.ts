@@ -11,3 +11,7 @@ export const createProperties = (
 ) => {
   return callback
 }
+
+export const contextUpdater = <$Updater extends (...args: any[]) => Context>(
+  contextUpdater: (context: Context) => $Updater,
+) => contextUpdater

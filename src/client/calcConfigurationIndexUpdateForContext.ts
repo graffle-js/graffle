@@ -1,25 +1,16 @@
-import { hasNonUndefinedKeys } from '../../lib/prelude.js'
-import type { Configurator } from '../../types/configurator.js'
-import type { ConfiguratorIndexInput } from '../../types/ConfiguratorIndex.js'
-import type { Context } from '../../types/context.js'
-import { createProperties } from '../helpers.js'
-
-export const withProperties = createProperties(({ context, client, createClient }) => {
-  return {
-    with: (configurationIndexInput: ConfiguratorIndexInput) => {
-      const newContext = calcConfigurationIndexUpdateForContext(context, configurationIndexInput)
-      // If no change, then no need to copy client.
-      if (newContext === context) return client
-      return createClient(newContext)
-    },
-  } as any
-})
+import { hasNonUndefinedKeys } from '../lib/prelude.js'
+import type { Configurator } from '../types/configurator.js'
+import type { ConfiguratorIndexInput } from '../types/ConfiguratorIndex.js'
+import type { Context } from '../types/context.js'
 
 export const calcConfigurationIndexUpdateForContext = <
   context extends Context,
   configurationIndexInput extends ConfiguratorIndexInput,
 >(context: context, configurationIndexInput: configurationIndexInput): Context => {
   if (!hasNonUndefinedKeys(configurationIndexInput)) return context
+  // todo: performant checking if input changes configuration. If no change, then no copy context.
+  // For default input resolvers we can do this automatically (shallow merge)
+  // Any custom input resolvers would need to implement their own "is changed" logic.
 
   const newConfigurationIndex = {
     ...context.configurationIndex,
