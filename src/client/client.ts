@@ -1,17 +1,14 @@
 import type { Anyware } from '../lib/anyware/_namespace.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
+import type { ConfigurationIndex } from '../types/ConfigurationIndex.js'
 import type { Configurator } from '../types/configurator.js'
-import type { ConfiguratorIndexInput } from '../types/ConfiguratorIndex.js'
 import { type ClientTransports, Context } from '../types/context.js'
-import {
-  type CalcConfigurationIndexUpdateForContext,
-  calcConfigurationIndexUpdateForContext,
-} from './calcConfigurationIndexUpdateForContext.js'
-import { anywareProperties } from './properties/anyware.js'
+import { Schema } from '../types/Schema/__.js'
 import { type gqlOverload, gqlProperties } from './properties/gql/gql.js'
-import { type ScalarMethod, scalarProperties, type TypeErrorMissingSchemaMap } from './properties/scalar.js'
+import { contextAddScalar, ScalarMethod } from './properties/scalar.js'
 import { type TransportMethod, transportProperties } from './properties/transport.js'
 import { type UseMethod, useProperties } from './properties/use.js'
+import { type ContextAddConfiguration, contextAddConfigurationInput } from './properties/with.js'
 
 export type ClientEmpty = Client<Context.States.Empty, {}>
 
@@ -43,14 +40,12 @@ export interface ClientBase<
   //   $Context,
   //   gqlOverload<$Context>
   // >
-  // /**
-  //  * TODO
-  //  */
-  // scalar: null extends $Context['schema']['map'] ? TypeErrorMissingSchemaMap
-  //   : ScalarMethod<
-  //     $Context,
-  //     $Extension
-  //   >
+  /**
+   * TODO
+   */
+  scalar: undefined extends $Context['configuration']['schema']['current']['map']
+    ? ScalarMethod.TypeErrorMissingSchemaMap
+    : ScalarMethod<$Context, $Extension>
   // /**
   //  * TODO
   //  */
@@ -65,21 +60,18 @@ export interface ClientBase<
   //   $Context,
   //   $Extension
   // > // $ExtensionChainable
-  // anyware: (
-  //   interceptor: Anyware.Interceptor.InferFromPipeline<
-  //     Anyware.Pipeline.InferFromDefinition<$Context['requestPipelineDefinition']>
-  //   >,
-  // ) => Client<$Context, $Extension>
+  anyware: (
+    interceptor: Anyware.Interceptor.InferFromPipeline<
+      Anyware.Pipeline.InferFromDefinition<$Context['requestPipelineDefinition']>
+    >,
+  ) => Client<$Context, $Extension>
   with: <
-    const configurationIndexInput extends CalcConfigurationIndexInputForContext<$Context>,
-  >(configurationIndexInput: configurationIndexInput) => Client<
-    CalcConfigurationIndexUpdateForContext<$Context, configurationIndexInput>,
+    const configurationInput extends CalcConfigurationInputForContext<$Context>,
+  >(configurationInput: configurationInput) => Client<
+    // @ts-expect-error Non-index type being used
+    ContextAddConfiguration<$Context, configurationInput>,
     $Extension
   >
-}
-
-export type CalcConfigurationIndexInputForContext<$Context extends Context> = {
-  readonly [_ in keyof $Context['configuratorIndex']]?: $Context['configuratorIndex'][_]['input']
 }
 
 export type ExtensionChainableRegistry = {
@@ -92,18 +84,19 @@ export type ExtensionChainableArguments = [Context, object, ExtensionChainableRe
 
 // Almost identical to `with` except that input is optional.
 export type Create<$Context extends Context = Context.States.Empty> = <
-  const configurationIndexInput extends CalcConfigurationIndexInputForContext<$Context>,
->(configurationIndexInput?: configurationIndexInput) => Client<
-  CalcConfigurationIndexUpdateForContext<$Context, configurationIndexInput>,
+  const configurationInput extends CalcConfigurationInputForContext<$Context>,
+>(configurationInput?: configurationInput) => Client<
+  // @ts-expect-error: Is missing standard configurators
+  ContextAddConfiguration<$Context, configurationInput>,
   {}
 >
 
 export const createConstructorWithContext = <$Context extends Context>(
   context: $Context,
 ): Create<$Context> =>
-(configurationIndexInput?: ConfiguratorIndexInput) => {
-  const newContext = configurationIndexInput
-    ? calcConfigurationIndexUpdateForContext(context, configurationIndexInput)
+(configurationInput) => {
+  const newContext = configurationInput
+    ? contextAddConfigurationInput(context, configurationInput as ConfigurationIndex.Input)
     : context
   return createWithContext(newContext) as any
 }
@@ -116,8 +109,23 @@ export const createWithContext = <$Context extends Context>(
   const client: Client<$Context, {}> = {
     ...({} as Client<$Context, {}>),
     _: context,
-    with(configurationIndexInput) {
-      const newContext = calcConfigurationIndexUpdateForContext(context, configurationIndexInput)
+    anyware(interceptor) {
+      const newContext = {
+        ...context,
+        requestPipelineInterceptors: [
+          ...context.requestPipelineInterceptors,
+          interceptor,
+        ],
+      }
+      return createWithContext(newContext) as any
+    },
+    scalar: ((...args: ScalarMethod.Arguments) => {
+      const scalar = ScalarMethod.normalizeArguments(args)
+      const newContext = contextAddScalar(context, scalar)
+      return createWithContext(newContext) as any
+    }) as any,
+    with(configurationInput) {
+      const newContext = contextAddConfigurationInput(context, configurationInput as ConfigurationIndex.Input)
       if (newContext === context) return client
       return createWithContext(newContext) as any
     },
@@ -135,8 +143,12 @@ export const createWithContext = <$Context extends Context>(
   // Object.assign(client, properties)
 
   context.extensions.forEach(_ => {
+    const configurationIndex = context.configuration as ConfigurationIndex
+    const configurationIndexEntry = configurationIndex[_.name]
+    if (!configurationIndexEntry) throw new Error(`Configuration entry for ${_.name} not found`)
+
     const propertiesDynamic = _.propertiesDynamic?.({
-      configuration: context.configurationIndex[_.name],
+      configuration: configurationIndexEntry.current,
       client,
       context,
     })
@@ -151,4 +163,10 @@ export const createWithContext = <$Context extends Context>(
   })
 
   return client
+}
+
+export type CalcConfigurationInputForContext<$Context extends Context> = {
+  readonly [_ in keyof $Context['configuration']]?:
+    // @ts-expect-error Non-index type being used
+    $Context['configuration'][_]['configurator']['input']
 }

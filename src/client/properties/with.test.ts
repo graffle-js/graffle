@@ -6,26 +6,26 @@ const g1 = create()
 test(`given empty input, just returns current client`, () => {
   const g2 = g1.with({})
   expect(g2).toBe(g1)
-  expectTypeOf(g2._.configurationIndex).toMatchTypeOf(g1._.configurationIndex)
+  expectTypeOf(g2._.configuration).toMatchTypeOf(g1._.configuration)
 })
 
 test(`given undefined for a configuration, same as not given.`, () => {
   const g2 = g1.with({ check: undefined })
   expect(g2).toBe(g1)
-  expectTypeOf(g2._.configurationIndex).toMatchTypeOf(g1._.configurationIndex)
+  expectTypeOf(g2._.configuration).toMatchTypeOf(g1._.configuration)
 })
 
 test(`given one configuration input, updates just that configuration`, () => {
   const g2 = g1.with({ check: { preflight: false } })
   expect(g2).not.toBe(g1)
-  expect(g2._.configurationIndex.check.preflight).toBe(false)
-  expectTypeOf(g2._.configurationIndex[`check`][`preflight`]).toEqualTypeOf<false>()
+  expect(g2._.configuration.check.current.preflight).toBe(false)
+  expectTypeOf(g2._.configuration[`check`][`current`][`preflight`]).toEqualTypeOf<false>()
   // Untouched configurations are passed through
-  expect(g2._.configurationIndex.output).toBe(g1._.configurationIndex.output)
-  expect(g2._.configurationIndex.schema).toBe(g1._.configurationIndex.schema)
+  expect(g2._.configuration.output).toBe(g1._.configuration.output)
+  expect(g2._.configuration.schema).toBe(g1._.configuration.schema)
   // Previous client is not mutated
   expect(g1._).not.toBe(g2._)
-  expect(g1._.configurationIndex.check.preflight).toBe(true)
+  expect(g1._.configuration.check.current.preflight).toBe(true)
 })
 
 // test(`can update preflight check`, () => {

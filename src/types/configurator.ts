@@ -178,8 +178,8 @@ export namespace Configurator {
       $Normalized extends $Input = $Input,
       $Default extends Partial<$Normalized> = Partial<$Normalized>,
     > {
-      input: $Input
-      current: Simplify<Incrementify<$Normalized, $Default>>
+      readonly input: $Input
+      readonly current: Simplify<Incrementify<$Normalized, $Default>>
     }
   }
 

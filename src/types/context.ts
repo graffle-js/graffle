@@ -4,33 +4,36 @@ import type { Objekt, StringKeyof } from '../lib/prelude.js'
 import {
   type RequestPipelineBaseDefinition,
   requestPipelineBaseDefinition,
+  type RequestPipelineBaseInterceptor,
 } from '../requestPipeline/RequestPipeline.js'
 import type { Configurator } from './configurator.js'
-import type { ConfiguratorIndex, ConfiguratorIndexCurrent } from './ConfiguratorIndex.js'
 import { Configurators } from './configurators/_namespace.js'
 import { Schema } from './Schema/__.js'
 import type { Transport } from './Transport.js'
 
 export interface Context {
-  configuratorIndex: ConfiguratorIndex
-  // configurators: {
-  // output: Configurators.Output.OutputConfigurator
-  // check: Configurators.Check.CheckConfigurator
-  // schema: Configurators.Schema.SchemaConfigurator
-  // }
+  configuration: {
+    output: {
+      configurator: Configurators.Output.OutputConfigurator
+      current: Configurators.Output.OutputConfigurator['default']
+    }
+    check: {
+      configurator: Configurators.Check.CheckConfigurator
+      current: Configurators.Check.CheckConfigurator['default']
+    }
+    schema: {
+      configurator: Configurators.Schema.SchemaConfigurator
+      current: Configurators.Schema.SchemaConfigurator['default']
+    }
+  }
   requestPipelineDefinition: Anyware.PipelineDefinition
+  requestPipelineInterceptors: RequestPipelineBaseInterceptor[]
   transports: ClientTransports
   scalars: Schema.Scalar.Registry
   extensions: Extension[]
   extensionsIndex: {
     [extensionName: string]: Extension
   }
-  configurationIndex: ConfiguratorIndexCurrent
-  // configurationIndex: {
-  // output: Configurators.Output.OutputConfigurator['normalizedIncremental']
-  // check: Configurators.Check.CheckConfigurator['normalizedIncremental']
-  // schema: Configurators.Schema.SchemaConfigurator['normalizedIncremental']
-  // }
   // Type Level Properties
   /**
    * Type level augmentations.
@@ -127,16 +130,6 @@ export namespace ClientTransports {
 export namespace Context {
   export namespace States {
     export interface Empty extends Context {
-      configuratorIndex: {
-        output: Configurators.Output.OutputConfigurator
-        check: Configurators.Check.CheckConfigurator
-        schema: Configurators.Schema.SchemaConfigurator
-      }
-      configurationIndex: {
-        output: Configurators.Output.OutputConfigurator['default']
-        check: Configurators.Check.CheckConfigurator['default']
-        schema: Configurators.Schema.SchemaConfigurator['default']
-      }
       scalars: Schema.Scalar.Registry.Empty
       extensions: []
       extensionsIndex: {}
@@ -150,17 +143,22 @@ export namespace Context {
     }
 
     export const empty: Empty = {
-      configurationIndex: {
-        output: Configurators.Output.configurator.default,
-        check: Configurators.Check.configurator.default,
-        schema: Configurators.Schema.configurator.default,
-      },
-      configuratorIndex: {
-        output: Configurators.Output.configurator,
-        check: Configurators.Check.configurator,
-        schema: Configurators.Schema.configurator,
+      configuration: {
+        output: {
+          configurator: Configurators.Output.configurator,
+          current: Configurators.Output.configurator.default,
+        },
+        check: {
+          configurator: Configurators.Check.configurator,
+          current: Configurators.Check.configurator.default,
+        },
+        schema: {
+          configurator: Configurators.Schema.configurator,
+          current: Configurators.Schema.configurator.default,
+        },
       },
       requestPipelineDefinition: requestPipelineBaseDefinition,
+      requestPipelineInterceptors: [],
       transports: ClientTransports.States.empty,
       extensions: [],
       extensionsIndex: {},

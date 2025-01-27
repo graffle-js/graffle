@@ -59,10 +59,9 @@ export const gqlProperties = createProperties(({ context }) => {
           } as RequestPipelineBase['input']
 
           const requestPipeline = Anyware.Pipeline.create(context.requestPipelineDefinition)
-          const interceptors = context.extensions.map(_ => _.requestInterceptor).filter(_ => _ !== undefined)
           const result = await Anyware.PipelineDefinition.run(requestPipeline, {
             initialInput,
-            interceptors,
+            interceptors: context.requestPipelineInterceptors,
           })
 
           return handleOutput(context, result)

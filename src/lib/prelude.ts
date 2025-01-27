@@ -1,3 +1,6 @@
+export type Writeable<$Object> = {
+  -readonly [_ in keyof $Object]: $Object[_]
+}
 import type { HasRequiredKeys, IsAny, IsEmptyObject, IsNever, IsUnknown, Simplify } from 'type-fest'
 
 import type { ConfigManager } from './config-manager/__.js'

@@ -22,10 +22,11 @@ export const configurator = Configurator()
   .input<Input>()
   .normalized<{
     name: GlobalRegistry.Client['name']
-    map?: SchemaDrivenDataMap
+    map: SchemaDrivenDataMap | undefined
   }>()
   .default({
     name: GlobalRegistry.defaultClientName,
+    map: undefined,
   })
   .return()
 
