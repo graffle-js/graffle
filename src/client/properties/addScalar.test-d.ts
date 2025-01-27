@@ -3,7 +3,7 @@ import { schemaMap } from '../../../tests/_/schemas/kitchen-sink/graffle/__.js'
 import { Graffle } from '../../entrypoints/__Graffle.js'
 import { assertEqual } from '../../lib/assert-equal.js'
 import { _, type SomeFunction } from '../../lib/prelude.js'
-import type { TypeErrorMissingSchemaMap } from './scalar.js'
+import type { TypeErrorMissingSchemaMap } from './addScalar.js'
 
 const g1 = Graffle.create()
 assertEqual<typeof g1.scalar, TypeErrorMissingSchemaMap>()

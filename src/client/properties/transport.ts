@@ -2,7 +2,6 @@ import type { Configurator } from '../../types/configurator.js'
 import type { ClientTransports } from '../../types/context.js'
 import { type Context } from '../../types/context.js'
 import type { Client } from '../client.js'
-import { createProperties } from '../helpers.js'
 
 // todo remove the JSDoc comments below. They will not be shown.
 // Look for a TS issue about conditional types + JSDoc comments. If none, create one.
@@ -80,35 +79,30 @@ export type TransportMethod<
       }
     : never
 
-export const transportProperties = createProperties(({ createClient, context }) => {
-  return {
-    transport: (...args: [config: object] | [transportName: string, config?: object]) => {
-      const transportName = typeof args[0] === `string` ? args[0] : context.transports.current
-      const transportConfig = (typeof args[0] === `string` ? args[1] : args[0]) ?? {}
-      if (!transportName) {
-        throw new Error(`No transport is currently set.`)
-      }
-      const newContext = reducerTransportConfig(context, transportName, transportConfig)
-      return createClient(newContext)
-    },
-  } as any
-})
+export namespace TransportMethod {
+  export type Arguments = [config: object] | [transportName: string, config?: object]
+  export const normalizeArguments = (args: Arguments) => {
+    const transportName = typeof args[0] === `string` ? args[0] : undefined
+    const transportConfig = (typeof args[0] === `string` ? args[1] : args[0]) ?? {}
+    return { transportName, transportConfig }
+  }
+}
 
-const reducerTransportConfig = (
+export const contextUpdateTransport = (
   state: Context,
   transportName: string,
-  newConfigurationInput: Configurator.Configuration,
+  configurationInput: Configurator.Configuration,
 ): Context => {
   const transport = state.transports.registry[transportName]
   if (!transport) throw new Error(`Unknown transport: ${transportName}`)
 
-  const currentConfigurationPartial = state.transports.configurations[transport.name] ?? {}
+  const currentConfiguration = state.transports.configurations[transport.name] ?? {}
 
   // todo: Graceful error handling. Clearly track error being from which extension.
-  const newConfigurationPartial = transport.configurator.inputResolver(
-    currentConfigurationPartial,
-    newConfigurationInput,
-  )
+  const newConfigurationPartial = transport.configurator.inputResolver({
+    current: currentConfiguration,
+    input: configurationInput,
+  })
 
   return {
     ...state,

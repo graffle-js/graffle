@@ -1,14 +1,19 @@
-import type { Anyware } from '../lib/anyware/_namespace.js'
+import type { Extension } from '../extension/$.js'
+import { Anyware } from '../lib/anyware/_namespace.js'
+import { getOperationType } from '../lib/grafaid/document.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
+import type { RequestPipelineBase } from '../requestPipeline/RequestPipeline.js'
 import type { ConfigurationIndex } from '../types/ConfigurationIndex.js'
 import type { Configurator } from '../types/configurator.js'
 import { type ClientTransports, Context } from '../types/context.js'
 import { Schema } from '../types/Schema/__.js'
-import { type gqlOverload, gqlProperties } from './properties/gql/gql.js'
-import { contextAddScalar, ScalarMethod } from './properties/scalar.js'
-import { type TransportMethod, transportProperties } from './properties/transport.js'
-import { type UseMethod, useProperties } from './properties/use.js'
-import { type ContextAddConfiguration, contextAddConfigurationInput } from './properties/with.js'
+import { handleOutput } from './handleOutput.js'
+import { type ContextAddConfiguration, contextAddConfigurationInput } from './properties/addConfiguration.js'
+import { type ContextAddOneExtension, contextAddOneExtension } from './properties/addExtension.js'
+import { contextAddScalar, ScalarMethod } from './properties/addScalar.js'
+import { GqlMethod } from './properties/request/request.js'
+import { SendMethod } from './properties/request/send.js'
+import { contextUpdateTransport, TransportMethod } from './properties/transport.js'
 
 export type ClientEmpty = Client<Context.States.Empty, {}>
 
@@ -36,30 +41,27 @@ export interface ClientBase<
   // extendWithProperties: <
   //   extension extends {},
   // >(extension: extension) => Client<$Context, $Extension & extension, $ExtensionChainable>
-  // gql: ClientTransports.PreflightCheck<
-  //   $Context,
-  //   gqlOverload<$Context>
-  // >
+  gql: ClientTransports.PreflightCheck<
+    $Context,
+    GqlMethod<$Context>
+  >
   /**
    * TODO
    */
   scalar: undefined extends $Context['configuration']['schema']['current']['map']
     ? ScalarMethod.TypeErrorMissingSchemaMap
     : ScalarMethod<$Context, $Extension>
-  // /**
-  //  * TODO
-  //  */
-  // transport: TransportMethod<
-  //   $Context,
-  //   $Extension
-  // >
-  // /**
-  //  * TODO
-  //  */
-  // use: UseMethod<
-  //   $Context,
-  //   $Extension
-  // > // $ExtensionChainable
+  /**
+   * TODO
+   */
+  transport: TransportMethod<$Context, $Extension>
+  /**
+   * TODO
+   */
+  use: <extension extends Extension>(extension: extension) => Client<
+    ContextAddOneExtension<$Context, extension>,
+    $Extension
+  >
   anyware: (
     interceptor: Anyware.Interceptor.InferFromPipeline<
       Anyware.Pipeline.InferFromDefinition<$Context['requestPipelineDefinition']>
@@ -119,6 +121,10 @@ export const createWithContext = <$Context extends Context>(
       }
       return createWithContext(newContext) as any
     },
+    use(extension) {
+      const newContext = contextAddOneExtension(context, extension)
+      return createWithContext(newContext) as any
+    },
     scalar: ((...args: ScalarMethod.Arguments) => {
       const scalar = ScalarMethod.normalizeArguments(args)
       const newContext = contextAddScalar(context, scalar)
@@ -129,15 +135,61 @@ export const createWithContext = <$Context extends Context>(
       if (newContext === context) return client
       return createWithContext(newContext) as any
     },
-    // todo: move other properties into static definitions here.
+    transport: (...args: TransportMethod.Arguments) => {
+      const input = TransportMethod.normalizeArguments(args)
+
+      const transportName = input.transportName ?? context.transports.current
+      if (!transportName) {
+        throw new Error(`No transport is currently set.`)
+      }
+
+      const newContext = contextUpdateTransport(context, transportName, input.transportConfig)
+      return createWithContext(newContext) as any
+    },
+    gql: ((...args: GqlMethod.Arguments) => {
+      const { document: query } = GqlMethod.normalizeArguments(args)
+
+      return {
+        send: async (...args: SendMethod.Arguments) => {
+          if (!context.transports.current) throw new Error(`No transport selected`)
+
+          const { operationName, variables } = SendMethod.normalizeArguments(args)
+          const request = {
+            query,
+            variables,
+            operationName,
+          }
+          const operationType = getOperationType(request)
+          if (!operationType) throw new Error(`Could not get operation type`)
+
+          const analyzedRequest = {
+            operation: operationType,
+            query,
+            variables,
+            operationName,
+          }
+
+          const initialInput = {
+            transportType: context.transports.current,
+            ...context.transports.configurations[context.transports.current],
+            state: context,
+            request: analyzedRequest,
+          } as RequestPipelineBase['input']
+
+          const requestPipeline = Anyware.Pipeline.create(context.requestPipelineDefinition)
+          const result = await Anyware.PipelineDefinition.run(requestPipeline, {
+            initialInput,
+            interceptors: context.requestPipelineInterceptors,
+          })
+
+          return handleOutput(context, result)
+        },
+      }
+    }) as any,
   }
 
   // const properties = {
   // ...transportProperties({ client, context, createClient: createWithContext }),
-  // ...gqlProperties({ client, context, createClient: createWithContext }),
-  // ...useProperties({ client, context, createClient: createWithContext }),
-  // ...anywareProperties({ client, context, createClient: createWithContext }),
-  // ...scalarProperties({ client, context, createClient: createWithContext }),
   // }
 
   // Object.assign(client, properties)

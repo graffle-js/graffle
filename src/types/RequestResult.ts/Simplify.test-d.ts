@@ -1,4 +1,4 @@
-import type { ContextAddScalar } from '../../client/properties/scalar.js'
+import type { ContextAddScalar } from '../../client/properties/addScalar.js'
 import type { Extension } from '../../extension/$.js'
 import { assertEqual } from '../../lib/assert-equal.js'
 import type { Context } from '../context.js'

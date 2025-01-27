@@ -63,20 +63,22 @@ export interface DocumentController<$Context, $TypedDocument extends Grafaid.Doc
     Promise<SimplifyNullable<HandleOutput<$Context, Grafaid.Document.Typed.ResultOf<$TypedDocument>>>>
 }
 
-export type sendArgumentsImplementation =
-  | []
-  | [string]
-  | [Grafaid.Document.Typed.Variables]
-  | [
-    string,
-    Grafaid.Document.Typed.Variables,
-  ]
+export namespace SendMethod {
+  export type Arguments =
+    | []
+    | [string]
+    | [Grafaid.Document.Typed.Variables]
+    | [
+      string,
+      Grafaid.Document.Typed.Variables,
+    ]
 
-export const resolveSendArguments = (args: sendArgumentsImplementation) => {
-  const operationName = isString(args[0]) ? args[0] : undefined
-  const variables = isString(args[0]) ? args[1] : args[0]
-  return {
-    operationName,
-    variables,
+  export const normalizeArguments = (args: Arguments) => {
+    const operationName = isString(args[0]) ? args[0] : undefined
+    const variables = isString(args[0]) ? args[1] : args[0]
+    return {
+      operationName,
+      variables,
+    }
   }
 }
