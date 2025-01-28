@@ -27,19 +27,6 @@ export type Extensions<
 
 export namespace Client {
   export type Define<$Type extends Partial<Client>> = $Type & Client
-
-  export namespace States {
-    export interface Empty extends Client {
-      name: 'Empty'
-      schema: Schema.States.Empty
-      interfaces: {
-        Root: TypeFunction
-        Document: TypeFunction
-        MethodsSelect: {}
-      }
-      defaultSchemaUrl: null
-    }
-  }
 }
 
 export interface Client<$Extensions extends Extensions = Extensions> {

@@ -1,6 +1,7 @@
 import { expect, expectTypeOf, test } from 'vitest'
+import { AScalar, BScalar } from '../../../tests/_/fixtures/scalars.js'
 import { Context, type GlobalRegistry } from '../../entrypoints/utilities-for-generated.js'
-import { Schema } from '../../types/Schema/__.js'
+import type { Schema } from '../../types/Schema/__.js'
 import type { SchemaDrivenDataMap } from '../../types/SchemaDrivenDataMap/__.js'
 import { create } from '../client.js'
 import type { ScalarMethod } from './addScalar.js'
@@ -21,20 +22,9 @@ declare global {
 }
 
 const map = {} as SchemaDrivenDataMap
+
 const g1 = create()
 const g2 = g1.with({ schema: { map, name: `TestAddScalar` } })
-
-const AScalar = Schema.Scalar.create(`A`, {
-  decode: (value: string) => BigInt(value),
-  encode: (value: bigint) => value.toString(),
-})
-type AScalar = typeof AScalar
-
-const BScalar = Schema.Scalar.create(`B`, {
-  decode: (value: string) => new Date(value),
-  encode: (value: Date) => value.toISOString(),
-})
-type BScalar = typeof BScalar
 
 test(`scalars begin empty`, () => {
   expect(g1._.scalars).toEqual(Context.States.empty.scalars)

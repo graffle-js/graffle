@@ -81,6 +81,7 @@ export type TransportMethod<
 
 export namespace TransportMethod {
   export type Arguments = [config: object] | [transportName: string, config?: object]
+
   export const normalizeArguments = (args: Arguments) => {
     const transportName = typeof args[0] === `string` ? args[0] : undefined
     const transportConfig = (typeof args[0] === `string` ? args[1] : args[0]) ?? {}
