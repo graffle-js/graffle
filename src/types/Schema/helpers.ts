@@ -1,8 +1,11 @@
 // import type { TSErrorDescriptive } from '../../lib/ts-error.js'
+import type { Schema } from './__.js'
 import type { __typename } from './nodes/__typename.js'
 import type { List } from './nodes/List.js'
 import type { Nullable } from './nodes/Nullable.js'
 // import type { NamedTypes } from './typeGroups.js'
+
+export * as States from './states.js'
 
 // todo extends any because of infinite depth issue in generated schema types
 // dprint-ignore
@@ -13,3 +16,5 @@ export type GetNamedType<$Type> =
       $Type
 // $Type extends NamedTypes                  ? $Type :
 //   TSErrorDescriptive<'Unwrap', 'Unknown $Type', { $Type: $Type }>
+
+export type Define<$Type extends Partial<Schema>> = $Type & Schema
