@@ -1,32 +1,30 @@
 import { expect, expectTypeOf, test } from 'vitest'
-import { AScalar, BScalar } from '../../../tests/_/fixtures/scalars.js'
-import { Context, type GlobalRegistry } from '../../entrypoints/utilities-for-generated.js'
-import type { Schema } from '../../types/Schema/__.js'
-import type { SchemaDrivenDataMap } from '../../types/SchemaDrivenDataMap/__.js'
+import { ATransport, ATransportBuilder } from '../../../tests/_/fixtures/transports.js'
 import { create } from '../client.js'
-import type { ScalarMethod } from './addScalar.js'
-
-declare global {
-  namespace GraffleGlobal {
-    interface Clients {
-      TestAddScalar: GlobalRegistry.Client.Define<{
-        schema: Schema.Define<{
-          scalarNamesUnion: 'A'
-          scalars: {
-            A: Schema.Scalar<'A', bigint, string>
-          }
-        }>
-      }>
-    }
-  }
-}
-
-const map = {} as SchemaDrivenDataMap
 
 const g1 = create()
-// const g2 = g1.with({ schema: { map, name: `TestAddScalar` } })
 
-test(`transport not available if no registered transports`, () => {
-  g1.transport('x', () => {})
-  // expect(g1._.scalars).toEqual(Context.States.empty.scalars)
+test(`can add a transport via itself or its builder`, () => {
+  const g2a = g1.transport(ATransportBuilder)
+  expectTypeOf(g2a._.transports).toMatchTypeOf<{
+    configurations: {
+      ATransport: ATransport['configurator']['default']
+    }
+    registry: {
+      ATransport: ATransport
+    }
+    current: ATransport['name']
+  }>()
+  expect(g2a._.transports).toEqual({
+    configurations: {
+      ATransport: ATransport[`configurator`][`default`],
+    },
+    registry: {
+      ATransport: ATransport,
+    },
+    current: ATransport[`name`],
+  })
+  const g2b = g1.transport(ATransport)
+  expectTypeOf(g2a._.transports).toEqualTypeOf(g2b._.transports)
+  expect(g2a._.transports).toEqual(g2b._.transports)
 })

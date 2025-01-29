@@ -13,7 +13,21 @@ import type * as _re_export from './properties.js'
 export const Extension = <$Name extends string>(
   name: $Name,
 ): Extension.Builder<Extension<$Name, undefined, undefined, undefined, undefined>> => {
-  return __(name)
+  const extension = {
+    name,
+  }
+  const builder = {
+    transport() {
+      return builder
+    },
+    configurator() {
+      return builder
+    },
+    done() {
+      return () => extension
+    },
+  }
+  return builder
 }
 
 // ------------------------------------------------------------

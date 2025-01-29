@@ -2,6 +2,19 @@
 // Data Type
 // ----------------------------
 
+export type ConfiguratorAny = Configurator<
+  Configurator.Configuration,
+  Configurator.Configuration,
+  Configurator.Configuration,
+  Configurator.InputResolver<
+    Configurator.InputResolver.$Func<
+      Configurator.Configuration,
+      Configurator.Configuration,
+      Configurator.Configuration
+    >
+  >
+>
+
 // dprint-ignore
 export interface Configurator<
   $Input 			              extends Configurator.Configuration =
@@ -26,6 +39,7 @@ type ConfiguratorTypeLevel = Pick<Configurator.States.Empty, 'input' | 'normaliz
 export const Configurator = (): Configurator.States.BuilderEmpty => {
   const state = { ...$.empty }
   const builder: Configurator.States.BuilderEmpty = {
+    [BuilderTypeSymbol]: true,
     default(default_) {
       state.default = default_
       return builder as any
@@ -50,6 +64,18 @@ export const Configurator = (): Configurator.States.BuilderEmpty => {
 namespace $ {
   export const createInputResolver: Configurator.InputResolver.Create = (_) => _ as any
 
+  export const normalizeTypeInput = <configuratorTypeInput extends Configurator.TypeInput>(
+    configuratorTypeInput: configuratorTypeInput,
+  ): Configurator => {
+    if (isBuilder(configuratorTypeInput)) {
+      return configuratorTypeInput.return()
+    }
+    if (typeof configuratorTypeInput === `function`) {
+      return configuratorTypeInput(Configurator()).return()
+    }
+    return configuratorTypeInput
+  }
+
   export const standardInputResolver_shallowMerge = createInputResolver(({ current, input }) => ({
     ...current,
     ...input,
@@ -67,7 +93,16 @@ namespace $ {
 
 Configurator.$ = $
 
+const BuilderTypeSymbol = Symbol(`Builder`)
+
+const isBuilder = (value: any): value is Configurator.Builder<Configurator> =>
+  typeof value === `object` && value !== null && BuilderTypeSymbol in value
+
 export namespace Configurator {
+  export type TypeInput =
+    | Configurator
+    | Configurator.Builder<Configurator>
+    | Configurator.BuilderProviderCallback<Configurator>
   // ----------------------------
   // Builder
   // ----------------------------
@@ -83,6 +118,7 @@ export namespace Configurator {
 
   // dprint-ignore
   export interface Builder<$Configurator extends Configurator> {
+    [BuilderTypeSymbol]: true
     // [$.SymbolBuilderData]: $Configurator
 
     input:

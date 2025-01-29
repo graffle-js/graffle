@@ -14,8 +14,8 @@ export const create: Create = (parameters) => {
 
   const builder: Builder = {
     type: overload,
-    configurator: (configurator) => {
-      overload.configurator = configurator.return()
+    configurator: (configuratorTypeInput) => {
+      overload.configurator = Configurator.$.normalizeTypeInput(configuratorTypeInput)
       return builder as any
     },
     stepWithExtendedInput: () => builder.step as any,
@@ -55,7 +55,10 @@ export interface Builder<
    * TODO
    */
   configurator: <$Configurator extends Configurator>(
-    configurator: Configurator.Builder<$Configurator>,
+    configurator:
+      | $Configurator
+      | Configurator.Builder<$Configurator>
+      | Configurator.BuilderProviderCallback<$Configurator>,
   ) => Builder<$Pipeline, {
     steps: $Overload['steps']
     discriminant: $Overload['discriminant']

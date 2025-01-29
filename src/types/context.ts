@@ -168,26 +168,4 @@ export namespace Context {
       typeHookRequestResultDataTypes: null as never,
     }
   }
-  export namespace Updaters {
-    // dprint-ignore
-    export type AddTransportOptional<
-      $ClientTransports extends ClientTransports,
-      $Transport extends Transport | undefined,
-    > =
-      $Transport extends Transport
-        ? {
-            configurations:
-              & Omit<$ClientTransports['configurations'], $Transport['name']>
-              & {
-                  [_ in $Transport['name']]: $Transport['configurator']['default']
-                }
-            current: $ClientTransports extends ClientTransports.States.Empty
-              ? $Transport['name']
-              : $ClientTransports['current']
-            registry: $ClientTransports['registry'] & {
-              [_ in $Transport['name']]: $Transport
-            }
-          }
-        : $ClientTransports
-  }
 }

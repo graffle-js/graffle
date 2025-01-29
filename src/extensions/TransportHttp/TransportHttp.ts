@@ -52,17 +52,19 @@ export const configurationDefault = {
 } satisfies Partial<ConfigurationNormalized>
 export type ConfigurationDefault = typeof configurationDefault
 
-export interface ConfigurationInputResolver$Func extends Configurator.InputResolver$Func {
-  // @ts-expect-error
-  _return: ConfigurationInputResolver$Func_<this['$input'], this['$current']>
+export interface ConfigurationInputResolver$Func
+  extends Configurator.InputResolver.$Func<ConfigurationInput, ConfigurationNormalized, ConfigurationDefault>
+{
+  return: ConfigurationInputResolver$Func_<this['parameters']>
 }
 // dprint-ignore
 export interface ConfigurationInputResolver$Func_<
-  $Input extends ConfigurationInput,
-  $PartialNormalized extends Partial<ConfigurationNormalized>,
+  $Parameters extends Configurator.InputResolver.Parameters<ConfigurationInput, ConfigurationNormalized, ConfigurationDefault>,
+  _Input = $Parameters['input'],
+  _Current = $Parameters['current'],
 > extends Partial<ConfigurationNormalized> {
-  url: 'url' extends keyof $PartialNormalized ? URL : 'url' extends keyof $Input ? URL : undefined
-  methodMode: 'methodMode' extends keyof $PartialNormalized ? MethodMode : 'methodMode' extends keyof $Input ? MethodMode : undefined
+  url: 'url' extends keyof _Current ? URL : 'url' extends keyof _Input ? URL : undefined
+  methodMode: 'methodMode' extends keyof _Current ? MethodMode : 'methodMode' extends keyof _Input ? MethodMode : undefined
 }
 
 export const MethodMode = {
@@ -80,7 +82,7 @@ const httpTransportConfigurator = Configurator()
   .input<ConfigurationInput>()
   .normalized<ConfigurationNormalized>()
   .default(configurationDefault)
-  .inputResolver<ConfigurationInputResolver$Func>((current, input) => {
+  .inputResolver<ConfigurationInputResolver$Func>(({ current, input }) => {
     // todo
     input
     return current

@@ -28,6 +28,7 @@ export interface StepDefinition<
 }
 
 export namespace StepDefinition {
+  export type SubsetTypeProperties = Pick<StepDefinition, 'input' | 'output'>
   export interface SpecInput {
     name: string
     slots?: StepDefinition.Slots

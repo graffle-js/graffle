@@ -4,16 +4,14 @@ import { getOperationType } from '../lib/grafaid/document.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
 import type { RequestPipelineBase } from '../requestPipeline/RequestPipeline.js'
 import type { ConfigurationIndex } from '../types/ConfigurationIndex.js'
-import type { Configurator } from '../types/configurator.js'
 import { type ClientTransports, Context } from '../types/context.js'
-import { Schema } from '../types/Schema/__.js'
 import { handleOutput } from './handleOutput.js'
 import { type ContextAddConfiguration, contextAddConfigurationInput } from './properties/addConfiguration.js'
 import { type ContextAddOneExtension, contextAddOneExtension } from './properties/addExtension.js'
 import { contextAddScalar, ScalarMethod } from './properties/addScalar.js'
 import { GqlMethod } from './properties/request/request.js'
 import { SendMethod } from './properties/request/send.js'
-import { contextUpdateTransport, TransportMethod } from './properties/transport.js'
+import { contextAddTransport, contextUpdateTransport, TransportMethod } from './properties/transport.js'
 
 export type ClientEmpty = Client<Context.States.Empty, {}>
 
@@ -137,13 +135,23 @@ export const createWithContext = <$Context extends Context>(
     },
     transport: (...args: TransportMethod.Arguments) => {
       const input = TransportMethod.normalizeArguments(args)
-
-      const transportName = input.transportName ?? context.transports.current
-      if (!transportName) {
-        throw new Error(`No transport is currently set.`)
+      let newContext
+      switch (input[0]) {
+        case TransportMethod.overloadCase.setType:
+          newContext = contextUpdateTransport(context, input[1], input[2] ?? {})
+          break
+        case TransportMethod.overloadCase.configureCurrent:
+          if (!context.transports.current) {
+            throw new Error(`No transport is currently set.`)
+          }
+          newContext = contextUpdateTransport(context, context.transports.current, input[1])
+          break
+        case TransportMethod.overloadCase.addType:
+          newContext = contextAddTransport(context, input[1])
+          break
       }
 
-      const newContext = contextUpdateTransport(context, transportName, input.transportConfig)
+      // const newContext = contextUpdateTransport(context, transportName, input.configuration)
       return createWithContext(newContext) as any
     },
     gql: ((...args: GqlMethod.Arguments) => {
