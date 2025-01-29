@@ -141,6 +141,8 @@ export namespace Transport {
   }
 
   export namespace Builder {
+    export type GetTypeSymbol<$Builder extends Builder<Transport>> = $Builder[typeof BuilderTypeSymbol]
+
     export interface StepMethodParameters<
       $Input = any,
       $Output = any,

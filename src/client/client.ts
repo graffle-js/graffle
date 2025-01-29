@@ -4,7 +4,7 @@ import { getOperationType } from '../lib/grafaid/document.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
 import type { RequestPipelineBase } from '../requestPipeline/RequestPipeline.js'
 import type { ConfigurationIndex } from '../types/ConfigurationIndex.js'
-import { type ClientTransports, Context } from '../types/context.js'
+import { Context, type ContextTransports } from '../types/context.js'
 import { handleOutput } from './handleOutput.js'
 import { type ContextAddConfiguration, contextAddConfigurationInput } from './properties/addConfiguration.js'
 import { type ContextAddOneExtension, contextAddOneExtension } from './properties/addExtension.js'
@@ -39,7 +39,7 @@ export interface ClientBase<
   // extendWithProperties: <
   //   extension extends {},
   // >(extension: extension) => Client<$Context, $Extension & extension, $ExtensionChainable>
-  gql: ClientTransports.PreflightCheck<
+  gql: ContextTransports.PreflightCheck<
     $Context,
     GqlMethod<$Context>
   >

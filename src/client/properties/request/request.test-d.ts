@@ -4,7 +4,7 @@ import { GraffleBasic } from '../../../entrypoints/presets/basic.js'
 import { GraffleMinimal } from '../../../entrypoints/presets/minimal.js'
 import { assertType } from '../../../lib/assert-equal.js'
 import type { Grafaid } from '../../../lib/grafaid/__.js'
-import type { ClientTransports } from '../../../types/context.js'
+import type { ContextTransports } from '../../../types/context.js'
 
 const g = kitchenSink
 
@@ -21,11 +21,11 @@ await g.gql(d1).send({})
 //
 
 // Not available if no transports registered
-assertType<ClientTransports.Errors.PreflightCheckNoTransportsRegistered>(GraffleBare.create().gql)
+assertType<ContextTransports.Errors.PreflightCheckNoTransportsRegistered>(GraffleBare.create().gql)
 // Not available if current transport not ready
-assertType<ClientTransports.Errors.PreflightCheckTransportNotReady<'http'>>(GraffleMinimal.create().gql)
+assertType<ContextTransports.Errors.PreflightCheckTransportNotReady<'http'>>(GraffleMinimal.create().gql)
 // ... Reflects name of currently selected transport
-assertType<ClientTransports.Errors.PreflightCheckTransportNotReady<'memory'>>(
+assertType<ContextTransports.Errors.PreflightCheckTransportNotReady<'memory'>>(
   GraffleBasic.create().transport(`memory`).gql,
 )
 

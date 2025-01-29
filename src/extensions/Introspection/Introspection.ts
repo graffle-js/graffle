@@ -2,7 +2,7 @@ import { getIntrospectionQuery, type IntrospectionQuery } from 'graphql'
 import type { GraphQLSchema, IntrospectionOptions } from 'graphql'
 import type { HandleOutput } from '../../client/handleOutput.js'
 import { Configurator, Extension } from '../../entrypoints/extension.js'
-import type { ClientTransports } from '../../entrypoints/utilities-for-generated.js'
+import type { ContextTransports } from '../../entrypoints/utilities-for-generated.js'
 import type { InputIntrospectionOptions } from '../../generator/_.js'
 
 export type ConfigurationInput = {
@@ -107,7 +107,7 @@ interface Properties extends Extension.PropertiesTypeFunction {
 interface Properties_<
   $Parameters extends Extension.PropertiesTypeFunctionParameters,
 > {
-  introspect: ClientTransports.PreflightCheck<
+  introspect: ContextTransports.PreflightCheck<
     $Parameters['context'],
     () => Promise<(null | {}) & HandleOutput<$Parameters['context'], IntrospectionQuery>>
   >

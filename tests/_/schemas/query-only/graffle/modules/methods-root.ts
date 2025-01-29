@@ -3,7 +3,7 @@ import * as $$Schema from './schema.js'
 import * as $$SelectionSets from './selection-sets.js'
 
 export interface QueryMethods<$Context extends $$Utilities.Context> {
-  $batch: $$Utilities.ClientTransports.PreflightCheck<
+  $batch: $$Utilities.ContextTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query<$Context['scalars']>>,
@@ -18,7 +18,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-  __typename: $$Utilities.ClientTransports.PreflightCheck<
+  __typename: $$Utilities.ContextTransports.PreflightCheck<
     $Context,
     () => Promise<
       & (null | {})
@@ -30,7 +30,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  id: $$Utilities.ClientTransports.PreflightCheck<
+  id: $$Utilities.ContextTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.id<$Context['scalars']>>,
@@ -47,7 +47,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  idNonNull: $$Utilities.ClientTransports.PreflightCheck<
+  idNonNull: $$Utilities.ContextTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.idNonNull<$Context['scalars']>>,

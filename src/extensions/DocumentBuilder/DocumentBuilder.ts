@@ -1,6 +1,6 @@
 import { OperationTypeNode } from 'graphql'
 import { Extension } from '../../entrypoints/extension.js'
-import type { ClientTransports, GlobalRegistry } from '../../entrypoints/utilities-for-generated.js'
+import type { ContextTransports, GlobalRegistry } from '../../entrypoints/utilities-for-generated.js'
 import type { TypeFunction } from '../../lib/type-function/__.js'
 import { createMethodDocument, createMethodOperationType } from './_.js'
 
@@ -36,7 +36,7 @@ type Properties_<$Parameters extends Extension.PropertiesTypeFunctionParameters>
       & {
         // eslint-disable-next-line
         // @ts-ignore Passes after generation
-        document: ClientTransports.PreflightCheck<
+        document: ContextTransports.PreflightCheck<
           $Parameters['context'],
           TypeFunction.Call<
             GlobalRegistry.GetOrDefault<
