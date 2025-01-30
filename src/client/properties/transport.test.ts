@@ -5,6 +5,7 @@ import { ContextTransports } from './transport.js'
 
 const g0 = create()
 const g1 = create().transport(ATransport)
+const g2 = create().transport(ATransport).transport(BTransport)
 
 describe(`starting state`, () => {
   test(`no transports registered`, () => {
@@ -12,13 +13,14 @@ describe(`starting state`, () => {
     expect(g0._.transports).toBe(ContextTransports.States.empty)
   })
 
+  // dprint-ignore
   test(`no transport method overloads b/c no transports registered`, () => {
     // @ts-expect-error
-    g1.transport(`ATransport`)
+    expect(() => g0.transport(`wrong`)).toThrowErrorMatchingInlineSnapshot(`[Error: Unknown transport: wrong]`)
     // @ts-expect-error
-    g1.transport(`ATransport`, {})
+    expect(() => g0.transport(`wrong`, {})).toThrowErrorMatchingInlineSnapshot(`[Error: Unknown transport: wrong]`)
     // @ts-expect-error
-    g1.transport({})
+    expect(() => g0.transport({})).toThrowErrorMatchingInlineSnapshot(`[Error: No transport is currently set.]`)
   })
 })
 
@@ -98,21 +100,77 @@ describe(`registering second transport`, () => {
 })
 
 describe(`selecting transport`, () => {
-  describe(`no-op when is current and no configuration`, () => {
-    test(`no configuration`, () => {
-      const g2 = g1.transport(`ATransport`)
-      expect(g2).toBe(g1)
-      expectTypeOf(g2._).toEqualTypeOf(g1._)
+  describe(`given current`, () => {
+    describe(`without configuration -> no-op`, () => {
+      test(`no configuration`, () => {
+        const g2 = g1.transport(ATransport.name)
+        expect(g2).toBe(g1)
+        expectTypeOf(g2._).toEqualTypeOf(g1._)
+      })
+      test(`empty configuration`, () => {
+        const g2 = g1.transport(ATransport.name, {})
+        expect(g2).toBe(g1)
+        expectTypeOf(g2._).toEqualTypeOf(g1._)
+      })
+      test(`undefined configuration`, () => {
+        const g2 = g1.transport(ATransport.name, undefined)
+        expect(g2).toBe(g1)
+        expectTypeOf(g2._).toEqualTypeOf(g1._)
+      })
     })
-    test(`empty configuration`, () => {
-      const g2 = g1.transport(`ATransport`, {})
-      expect(g2).toBe(g1)
-      expectTypeOf(g2._).toEqualTypeOf(g1._)
+    test(`with configuration configures current`, () => {
+      const g2 = g1.transport(ATransport.name, { a: 1 })
+      expect(g2._.transports.configurations.ATransport).toEqual({ a: 1 })
+      expectTypeOf(g2._.transports.configurations.ATransport).toMatchTypeOf<{ a: 1 }>()
     })
-    test(`undefined configuration`, () => {
-      const g2 = g1.transport(`ATransport`, undefined)
-      expect(g2).toBe(g1)
-      expectTypeOf(g2._).toEqualTypeOf(g1._)
+  })
+  describe(`given different`, () => {
+    test(`without configuration -> changes current without altering its configuration`, () => {
+      // Sanity check that current is not BTransport to begin with
+      expect(g2._.transports.current).toBe(ATransport.name)
+      expectTypeOf(g2._.transports.current).toEqualTypeOf<ATransport['name']>()
+      // Current is changed to BTransport
+      const g3 = g2.transport(BTransport.name)
+      expect(g3._.transports.current).toBe(BTransport.name)
+      expectTypeOf(g3._.transports.current).toEqualTypeOf<BTransport['name']>()
+      // Configuration is unchanged
+      expect(g3._.transports.configurations.ATransport).toEqual(g2._.transports.configurations.ATransport)
     })
+    test(`with configuration -> changes current + alters configuration`, () => {
+      // Sanity check that BTransport configuration is not set to begin with
+      expect(g2._.transports.configurations.BTransport).toEqual({})
+      expectTypeOf(g2._.transports.configurations.BTransport).toMatchTypeOf<{}>()
+      // Current is changed to BTransport
+      const g3 = g2.transport(BTransport.name, { b: `1` })
+      expect(g3._.transports.current).toBe(BTransport.name)
+      expectTypeOf(g3._.transports.current).toEqualTypeOf<BTransport['name']>()
+      // Configuration is altered
+      expect(g3._.transports.configurations.BTransport).toEqual({ b: `1` })
+      expectTypeOf(g3._.transports.configurations.BTransport).toMatchTypeOf<{ b: '1' }>()
+    })
+  })
+
+  test(`name must match a registered transport; configuration must match its configurator input`, () => {
+    expect(() =>
+      // @ts-expect-error
+      g1.transport(`wrong`)
+    ).toThrowErrorMatchingInlineSnapshot(`[Error: Unknown transport: wrong]`)
+    g1.transport(`ATransport`, {
+      // @ts-expect-error
+      wrong: true,
+    })
+  })
+})
+
+describe(`configuring current transport`, () => {
+  test(`given empty -> no-op`, () => {
+    const g2 = g1.transport({})
+    expect(g2).toBe(g1)
+    expectTypeOf(g2._).toEqualTypeOf(g1._)
+  })
+  test(`given non-empty -> changes configuration`, () => {
+    const g2 = g1.transport({ a: 99 })
+    expect(g2._.transports.configurations.ATransport).toEqual({ a: 99 })
+    expectTypeOf(g2._.transports.configurations.ATransport).toMatchTypeOf<{ a: 99 }>()
   })
 })

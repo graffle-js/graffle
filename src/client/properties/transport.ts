@@ -34,45 +34,57 @@ export type TransportMethod<
     )
 & ($Context['transports'] extends ContextTransports.States.NonEmpty
   ? {
-//       /**
-//        * Configure the current transport.
-//        * TODO
-//        */
-//       <configurationInput extends $Context['transports']['registry'][$Context['transports']['current']]['configurator']['input']>
-//         (configurationInput: configurationInput):
-//           Client<
-//             {
-//               [_ in keyof $Context]:
-//                 _ extends 'transports'
-//                   ? {
-//                       registry: $Context['transports']['registry']
-//                       current: $Context['transports']['current']
-//                       configurations:
-//                        {
-//                           [transportName in keyof $Context['transports']['configurations']]:
-//                             transportName extends $Context['transports']['current']
-//                               ? Configurator.ApplyInputResolver$Func<
-//                                   $Context['transports']['registry'][transportName]['configurator'],
-//                                   $Context['transports']['configurations'][transportName],
-//                                   configurationInput
-//                                 >
-//                               : $Context['transports']['configurations'][transportName]
-//                         }
-//                     }
-//                   : $Context[_]
-//             },
-//             $Extension
-//           >
+      /**
+       * Configure the current transport.
+       * TODO
+       */
+      <
+        const configurationInput extends $Context['transports']['registry'][$Context['transports']['current']]['configurator']['input'],
+        _IsChanged extends boolean =
+          {} extends configurationInput ? false : true
+      >
+        (configurationInput: configurationInput):
+          _IsChanged extends false
+            ? Client<$Context, $Extension> // todo: access to current client type?
+            : Client<
+                {
+                  [_ in keyof $Context]:
+                    _ extends 'transports'
+                      ? {
+                          registry: $Context['transports']['registry']
+                          current: $Context['transports']['current']
+                          configurations:
+                           {
+                              [transportName in keyof $Context['transports']['configurations']]:
+                                transportName extends $Context['transports']['current']
+                                  ? Configurator.ApplyInputResolver$Func<
+                                      $Context['transports']['registry'][transportName]['configurator'],
+                                      $Context['transports']['configurations'][transportName],
+                                      configurationInput
+                                    >
+                                  : $Context['transports']['configurations'][transportName]
+                            }
+                        }
+                      : $Context[_]
+                },
+                $Extension
+              >
       /**
        * Set the current Transport, selected from amongst the registered ones, and optionally change its configuration.
        * TODO
        */
       <
-        name extends ContextTransports.GetNames<$Context['transports']>,
-        configurationInput extends undefined | $Context['transports']['registry'][name]['configurator']['input'] = undefined
+        const name extends ContextTransports.GetNames<$Context['transports']>,
+        const configurationInput extends undefined | $Context['transports']['registry'][name]['configurator']['input'] = undefined,
+        _IsChanged extends boolean =
+          name extends $Context['transports']['current'] ?
+            undefined extends configurationInput ? false :
+            {} extends configurationInput        ? false :
+                                                   true :
+            true
       >
         (name: name, configurationInput?: configurationInput):
-          name extends $Context['transports']['current']
+          _IsChanged extends false
             ? Client<$Context, $Extension> // todo: access to current client type?
             : Client<
                 {

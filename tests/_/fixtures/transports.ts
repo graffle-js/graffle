@@ -5,6 +5,7 @@ import { Transport } from '../../../src/entrypoints/main.js'
 // ----------------------------
 
 export const ATransportBuilder = Transport(`ATransport`)
+  .configurator($ => $.input<{ a?: number }>())
   .pack({ run: () => ({}) })
   .exchange({ run: () => ({}) })
   .unpack({ run: () => ({}) })
@@ -20,6 +21,7 @@ export type ATransport = typeof ATransport
 // ----------------------------
 
 export const BTransportBuilder = Transport(`BTransport`)
+  .configurator($ => $.input<{ b?: string }>())
   .pack({ run: () => ({}) })
   .exchange({ run: () => ({}) })
   .unpack({ run: () => ({}) })

@@ -5,13 +5,14 @@ import { isObjectEmpty } from '../lib/prelude.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
 import type { RequestPipelineBase } from '../requestPipeline/RequestPipeline.js'
 import type { ConfigurationIndex } from '../types/ConfigurationIndex.js'
-import { Context, type ContextTransports } from '../types/context.js'
+import { Context } from '../types/context.js'
 import { handleOutput } from './handleOutput.js'
 import { type ContextAddConfiguration, contextAddConfigurationInput } from './properties/addConfiguration.js'
 import { type ContextAddOneExtension, contextAddOneExtension } from './properties/addExtension.js'
 import { contextAddScalar, ScalarMethod } from './properties/addScalar.js'
 import { GqlMethod } from './properties/request/request.js'
 import { SendMethod } from './properties/request/send.js'
+import type { ContextTransports } from './properties/transport.js'
 import { contextAddTransport, contextUpdateTransport, TransportMethod } from './properties/transport.js'
 
 export type ClientEmpty = Client<Context.States.Empty, {}>
@@ -138,20 +139,25 @@ export const createWithContext = <$Context extends Context>(
       const input = TransportMethod.normalizeArguments(args)
       let newContext
       switch (input[0]) {
-        case TransportMethod.overloadCase.setType:
+        case TransportMethod.overloadCase.setType: {
           const noChange = (!input[2] || isObjectEmpty(input[2])) && input[1] === context.transports.current
           if (noChange) return client
           newContext = contextUpdateTransport(context, input[1], input[2] ?? {})
           break
-        case TransportMethod.overloadCase.configureCurrent:
+        }
+        case TransportMethod.overloadCase.configureCurrent: {
           if (!context.transports.current) {
             throw new Error(`No transport is currently set.`)
           }
+          const noChange = isObjectEmpty(input[1])
+          if (noChange) return client
           newContext = contextUpdateTransport(context, context.transports.current, input[1])
           break
-        case TransportMethod.overloadCase.addType:
+        }
+        case TransportMethod.overloadCase.addType: {
           newContext = contextAddTransport(context, input[1])
           break
+        }
       }
 
       // const newContext = contextUpdateTransport(context, transportName, input.configuration)
