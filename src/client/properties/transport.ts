@@ -24,14 +24,16 @@ export type TransportMethod<
   $Extension extends object
 > =
   & (
-      <transport extends Transport>(transport: transport | Transport.Builder<transport>, ...errors: ParameterGuardTransportAlreadyRegistered<$Context, transport>)
-        => Client<
+      <transport extends Transport>(
+        transport: transport | Transport.Builder<transport>,
+        ...errors: ParameterGuardTransportAlreadyRegistered<$Context, transport>
+      ) => Client<
           ContextAddTransport<$Context, transport>,
           $Extension
         >
     )
-// & $Context['transports'] extends ClientTransports.States.NonEmpty
-//   ? {
+& ($Context['transports'] extends ContextTransports.States.NonEmpty
+  ? {
 //       /**
 //        * Configure the current transport.
 //        * TODO
@@ -61,42 +63,44 @@ export type TransportMethod<
 //             },
 //             $Extension
 //           >
-//       /**
-//        * Set the current Transport, selected from amongst the registered ones, and optionally change its configuration.
-//        * TODO
-//        */
-//       <
-//         name extends ClientTransports.GetNames<$Context['transports']>,
-//         configurationInput extends undefined | $Context['transports']['registry'][name]['configurator']['input'] = undefined
-//       >
-//         (name: name, configurationInput?: configurationInput):
-//           Client<
-//             {
-//               [_ in keyof $Context]:
-//                 _ extends 'transports'
-//                   ? {
-//                       registry: $Context['transports']['registry']
-//                       current: name
-//                       configurations:
-//                         configurationInput extends Configurator.Configuration
-//                         ? {
-//                             [configKeyTransportName in keyof $Context['transports']['configurations']]:
-//                               configKeyTransportName extends name
-//                                 ? Configurator.ApplyInputResolver$Func<
-//                                     $Context['transports']['registry'][configKeyTransportName]['configurator'],
-//                                     $Context['transports']['configurations'][configKeyTransportName],
-//                                     configurationInput
-//                                   >
-//                                 : $Context['transports']['configurations'][configKeyTransportName]
-//                           }
-//                         : $Context['transports']['configurations']
-//                     }
-//                   : $Context[_]
-//             },
-//             $Extension
-//           >
-//     }
-//   : {}
+      /**
+       * Set the current Transport, selected from amongst the registered ones, and optionally change its configuration.
+       * TODO
+       */
+      <
+        name extends ContextTransports.GetNames<$Context['transports']>,
+        configurationInput extends undefined | $Context['transports']['registry'][name]['configurator']['input'] = undefined
+      >
+        (name: name, configurationInput?: configurationInput):
+          name extends $Context['transports']['current']
+            ? Client<$Context, $Extension> // todo: access to current client type?
+            : Client<
+                {
+                  [_ in keyof $Context]:
+                    _ extends 'transports'
+                      ? {
+                          registry: $Context['transports']['registry']
+                          current: name
+                          configurations:
+                            configurationInput extends Configurator.Configuration
+                            ? {
+                                [configKeyTransportName in keyof $Context['transports']['configurations']]:
+                                  configKeyTransportName extends name
+                                    ? Configurator.ApplyInputResolver$Func<
+                                        $Context['transports']['registry'][configKeyTransportName]['configurator'],
+                                        $Context['transports']['configurations'][configKeyTransportName],
+                                        configurationInput
+                                      >
+                                    : $Context['transports']['configurations'][configKeyTransportName]
+                              }
+                            : $Context['transports']['configurations']
+                        }
+                      : $Context[_]
+                },
+                $Extension
+              >
+    }
+  : unknown)
 
 export namespace TransportMethod {
   export type Arguments =
@@ -118,7 +122,7 @@ export namespace TransportMethod {
 
   export const normalizeArguments = (args: Arguments): ArgumentsNormalized => {
     if (typeof args[0] === `string`) {
-      return [overloadCase.setType, args[0], args[1] ?? {}]
+      return [overloadCase.setType, args[0], args[1]]
     }
     if (Transport.$.isBuilder(args[0])) {
       return [overloadCase.addType, args[0].return()]

@@ -4,7 +4,7 @@ import { create } from '../client.js'
 import { ContextTransports } from './transport.js'
 
 const g0 = create()
-const g1 = create().transport(ATransportBuilder)
+const g1 = create().transport(ATransport)
 
 describe(`starting state`, () => {
   test(`no transports registered`, () => {
@@ -94,5 +94,25 @@ describe(`registering second transport`, () => {
     }).toThrowErrorMatchingInlineSnapshot(
       `[Error: There is already a transport registered with the name "ATransport".]`,
     )
+  })
+})
+
+describe(`selecting transport`, () => {
+  describe(`no-op when is current and no configuration`, () => {
+    test(`no configuration`, () => {
+      const g2 = g1.transport(`ATransport`)
+      expect(g2).toBe(g1)
+      expectTypeOf(g2._).toEqualTypeOf(g1._)
+    })
+    test(`empty configuration`, () => {
+      const g2 = g1.transport(`ATransport`, {})
+      expect(g2).toBe(g1)
+      expectTypeOf(g2._).toEqualTypeOf(g1._)
+    })
+    test(`undefined configuration`, () => {
+      const g2 = g1.transport(`ATransport`, undefined)
+      expect(g2).toBe(g1)
+      expectTypeOf(g2._).toEqualTypeOf(g1._)
+    })
   })
 })

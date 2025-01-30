@@ -1,6 +1,7 @@
 import type { Extension } from '../extension/$.js'
 import { Anyware } from '../lib/anyware/_namespace.js'
 import { getOperationType } from '../lib/grafaid/document.js'
+import { isObjectEmpty } from '../lib/prelude.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
 import type { RequestPipelineBase } from '../requestPipeline/RequestPipeline.js'
 import type { ConfigurationIndex } from '../types/ConfigurationIndex.js'
@@ -138,6 +139,8 @@ export const createWithContext = <$Context extends Context>(
       let newContext
       switch (input[0]) {
         case TransportMethod.overloadCase.setType:
+          const noChange = (!input[2] || isObjectEmpty(input[2])) && input[1] === context.transports.current
+          if (noChange) return client
           newContext = contextUpdateTransport(context, input[1], input[2] ?? {})
           break
         case TransportMethod.overloadCase.configureCurrent:
