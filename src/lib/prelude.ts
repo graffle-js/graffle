@@ -310,7 +310,7 @@ export namespace Objekt {
 export namespace Tuple {
   export type IndexKey = number | `${number}`
 
-  export type IsEmpty<T> = T extends [] ? true : false
+  export type IsEmpty<T> = T extends readonly [] ? true : false
 
   // dprint-ignore
   export type PreviousItem<$Items extends readonly any[], $OfItem> =

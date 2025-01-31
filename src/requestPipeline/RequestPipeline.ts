@@ -1,7 +1,7 @@
 import type { FormattedExecutionResult } from 'graphql'
 import type { GraffleExecutionResultEnvelope } from '../client/handleOutput.js'
 import { Anyware } from '../lib/anyware/_namespace.js'
-import type { Config } from '../lib/anyware/PipelineDef/Config.js'
+import type { Config } from '../lib/anyware/PipelineDefinition/Config.js'
 import type { Grafaid } from '../lib/grafaid/__.js'
 import { normalizeRequestToNode } from '../lib/grafaid/request.js'
 import { isAbortError } from '../lib/prelude.js'
@@ -40,15 +40,15 @@ export namespace RequestPipeline {
 }
 
 export interface RequestPipelineBaseDefinition extends Anyware.PipelineDefinition {
-  overloads: []
-  config: Config
-  input: {
+  readonly overloads: readonly []
+  readonly config: Config
+  readonly input: {
     request: Grafaid.RequestAnalyzedInput
     state: Context
     transportType: 'none'
     transport: {}
   }
-  steps: [
+  readonly steps: [
     Anyware.StepDefinition<'encode', {}, RequestPipeline.Input, RequestPipeline.EncodeOutput>,
     Anyware.StepDefinition<'pack', {}, RequestPipeline.PackInput, {}>,
     Anyware.StepDefinition<'exchange', {}, {}, {}>,
@@ -72,7 +72,7 @@ export const requestPipelineBaseDefinition: RequestPipelineBaseDefinition = Anyw
   .input<RequestPipelineBaseDefinition['input']>()
   .step(stepName.encode, {
     run: (input) => {
-      const sddm = input.state.schemaMap
+      const sddm = input.state.configuration.schema.current.map
       const scalars = input.state.scalars.map
       if (sddm) {
         const request = normalizeRequestToNode(input.request)
@@ -97,13 +97,14 @@ export const requestPipelineBaseDefinition: RequestPipelineBaseDefinition = Anyw
       _,
       previous,
     ) => {
+      const sddm = input.state.configuration.schema.current.map
       // If there has been an error and we definitely don't have any data, such as when
       // giving an operation name that doesn't match any in the document,
       // then don't attempt to decode.
       const isError = !input.result.data && (input.result.errors?.length ?? 0) > 0
-      if (input.state.schemaMap && !isError) {
+      if (sddm && !isError) {
         decodeResultData({
-          sddm: input.state.schemaMap,
+          sddm,
           request: normalizeRequestToNode(previous.pack.input.request),
           data: input.result.data,
           scalars: input.state.scalars.map,

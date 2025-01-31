@@ -7,10 +7,10 @@ export interface StepDefinition<
   $Input = any,
   $Output = any,
 > {
-  name: $Name
-  slots: $Slots
-  input: $Input
-  output: $Output
+  readonly name: $Name
+  readonly slots: $Slots
+  readonly input: $Input
+  readonly output: $Output
   /**
    * Tracking the run signature type is useful for deriving the executable step.
    *
@@ -24,7 +24,7 @@ export interface StepDefinition<
    *
    * This run signature is NOT used for deriving the specification step.
    */
-  run?: StepRunner<any, any, any>
+  readonly run?: StepRunner<any, any, any>
 }
 
 export namespace StepDefinition {

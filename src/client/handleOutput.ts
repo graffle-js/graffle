@@ -40,26 +40,26 @@ export const handleOutput = (
   state: Context,
   result: Anyware.Result<RequestPipelineBase['output']>,
 ) => {
-  if (isOutputTraditionalGraphQLOutput(state.output)) {
+  const c = state.configuration.output.current
+
+  if (isOutputTraditionalGraphQLOutput(c)) {
     if (result instanceof Error) throw result
     return result.value
   }
 
-  const outputConfig = state.output
+  const isEnvelope = c.envelope.enabled
 
-  const isEnvelope = outputConfig.envelope.enabled
+  const isThrowOther = readErrorCategoryOutputChannel(c, `other`) === `throw`
+    && (!c.envelope.enabled || !c.envelope.errors.other)
 
-  const isThrowOther = readErrorCategoryOutputChannel(outputConfig, `other`) === `throw`
-    && (!outputConfig.envelope.enabled || !outputConfig.envelope.errors.other)
+  const isReturnOther = readErrorCategoryOutputChannel(c, `other`) === `return`
+    && (!c.envelope.enabled || !c.envelope.errors.other)
 
-  const isReturnOther = readErrorCategoryOutputChannel(outputConfig, `other`) === `return`
-    && (!outputConfig.envelope.enabled || !outputConfig.envelope.errors.other)
+  const isThrowExecution = readErrorCategoryOutputChannel(c, `execution`) === `throw`
+    && (!c.envelope.enabled || !c.envelope.errors.execution)
 
-  const isThrowExecution = readErrorCategoryOutputChannel(outputConfig, `execution`) === `throw`
-    && (!outputConfig.envelope.enabled || !outputConfig.envelope.errors.execution)
-
-  const isReturnExecution = readErrorCategoryOutputChannel(outputConfig, `execution`) === `return`
-    && (!outputConfig.envelope.enabled || !outputConfig.envelope.errors.execution)
+  const isReturnExecution = readErrorCategoryOutputChannel(c, `execution`) === `return`
+    && (!c.envelope.enabled || !c.envelope.errors.execution)
 
   if (result instanceof Error) {
     if (isThrowOther) throw result
@@ -221,7 +221,6 @@ export type HandleOutputDocumentBuilderRootField<
   $RootFieldName extends string,
 > =
   HandleOutputDocumentBuilderRootField_Data<
-    // @ts-expect-error: No $Context constraint to avoid "compare depth limit"
     ExcludeNull<
       HandleOutput<
         $Context,

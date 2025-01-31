@@ -135,9 +135,9 @@ export const createWithContext = <$Context extends Context>(
       if (newContext === context) return client
       return createWithContext(newContext) as any
     },
-    transport: (...args: TransportMethod.Arguments) => {
+    transport: ((...args: TransportMethod.Arguments) => {
       const input = TransportMethod.normalizeArguments(args)
-      let newContext
+      let newContext: Context
       switch (input[0]) {
         case TransportMethod.overloadCase.setType: {
           const noChange = (!input[2] || isObjectEmpty(input[2])) && input[1] === context.transports.current
@@ -160,9 +160,8 @@ export const createWithContext = <$Context extends Context>(
         }
       }
 
-      // const newContext = contextUpdateTransport(context, transportName, input.configuration)
       return createWithContext(newContext) as any
-    },
+    }) as any,
     gql: ((...args: GqlMethod.Arguments) => {
       const { document: query } = GqlMethod.normalizeArguments(args)
 

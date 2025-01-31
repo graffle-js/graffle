@@ -2,17 +2,17 @@ import type { IsUnknown, Simplify } from 'type-fest'
 import type { ExcludeUndefined, Tuple } from '../../prelude.js'
 import type { PipelineDefinition } from '../_exports.js'
 import type { Overload } from '../Overload/_namespace.js'
-import type { Config } from '../PipelineDef/Config.js'
+import type { Config } from '../PipelineDefinition/Config.js'
 import type { Step } from '../Step.js'
 import type { StepDefinition } from '../StepDefinition.js'
 import type { StepRunner } from '../StepRunner.js'
 
 export interface Pipeline {
-  config: Config
-  input: object
-  steps: Step[]
-  stepsIndex: StepsIndex
-  output: any
+  readonly config: Config
+  readonly input: object
+  readonly steps: readonly Step[]
+  readonly stepsIndex: StepsIndex
+  readonly output: any
 }
 
 export type StepsIndex<
@@ -77,97 +77,98 @@ export namespace Pipeline {
   }
 
   // dprint-ignore
-  export type InferFromDefinition<$PipelineDef extends PipelineDefinition> =
-    InferFromDefinition_<$PipelineDef, InferSteps<$PipelineDef>>
-  // dprint-ignore
-  type InferFromDefinition_<
+  export type InferFromDefinition<
     $PipelineDef extends PipelineDefinition,
-    $Steps extends Step[],
+    __Steps extends readonly Step[] = InferSteps<$PipelineDef>
   > = {
     config: $PipelineDef['config']
-    steps: $Steps
+    steps: __Steps
     stepsIndex: StepsIndex<
       $PipelineDef['steps'][number]['name'],
-      $Steps[number]
+      __Steps[number]
     >
-    input: $Steps extends Tuple.NonEmpty
-      ? $Steps[0]['input']
+    input: __Steps extends Tuple.NonEmpty
+      ? __Steps[0]['input']
       : $PipelineDef['input']
     output: 
-      $Steps extends Tuple.NonEmpty
-        ? Awaited<Tuple.GetLastValue<$Steps>['output']>
+      __Steps extends Tuple.NonEmpty
+        ? Awaited<Tuple.GetLastValue<__Steps>['output']>
         : $PipelineDef['input']
   }
-}
 
-// dprint-ignore
-type InferSteps<$PipelineDef extends PipelineDefinition> =
+  // dprint-ignore
+  type InferSteps<$PipelineDef extends PipelineDefinition> =
   InferSteps_<$PipelineDef['steps'], $PipelineDef>
-// dprint-ignore
-type InferSteps_<
-  $StepDefs extends StepDefinition[],
-  $PipelineDef extends PipelineDefinition,
-> = {
-  [$Index in keyof $StepDefs]: {
-    name: $StepDefs[$Index]['name']
-    input: Simplify<
-      Tuple.IsEmpty<$PipelineDef['overloads']> extends true
-        ? $StepDefs[$Index]['input']
-        : InferStepInput<
-            $Index,
-            $StepDefs[$Index],
-            $PipelineDef['overloads'][number]
-          >
-    >
-    output: Simplify<
-      Tuple.IsEmpty<$PipelineDef['overloads']> extends true
-        ? $StepDefs[$Index]['output']
-        : InferStepOutput<
-            $StepDefs[$Index],
-            $PipelineDef['overloads'][number]
-          >
-    >
-    slots: Tuple.IsEmpty<$PipelineDef['overloads']> extends true
-          ? $StepDefs[$Index]['slots']
-          : InferStepSlots<
+  // dprint-ignore
+  type InferSteps_<
+    $StepDefs extends readonly StepDefinition[],
+    $PipelineDef extends PipelineDefinition,
+  > = {
+    [$Index in keyof $StepDefs]: {
+      name: $StepDefs[$Index]['name']
+      input: Simplify<
+        Tuple.IsEmpty<$PipelineDef['overloads']> extends true
+          ? $StepDefs[$Index]['input']
+          : InferStepInput<
+              $Index,
               $StepDefs[$Index],
-              $PipelineDef['overloads']
+              $PipelineDef['overloads'][number]
             >
-    run: IsUnknown<$StepDefs[$Index]['run']> extends true
-      ? StepRunner
-      : ExcludeUndefined<$StepDefs[$Index]['run']>
+      >
+      output: Simplify<
+        Tuple.IsEmpty<$PipelineDef['overloads']> extends true
+          ? $StepDefs[$Index]['output']
+          : InferStepOutput<
+              $StepDefs[$Index],
+              $PipelineDef['overloads'][number]
+            >
+      >
+      slots: Tuple.IsEmpty<$PipelineDef['overloads']> extends true
+            ? $StepDefs[$Index]['slots']
+            : InferStepSlots<
+                $StepDefs[$Index],
+                $PipelineDef['overloads']
+              >
+      run: IsUnknown<$StepDefs[$Index]['run']> extends true
+        ? StepRunner
+        : ExcludeUndefined<$StepDefs[$Index]['run']>
+    }
   }
+
+  type InferStepSlots<
+    $Step extends StepDefinition,
+    $Overloads extends readonly Overload[],
+  > =
+    & $Step['slots']
+    & InferStepSlots_<$Step, $Overloads>
+  // todo try putting the helper type below into a type variable above
+  // dprint-ignore
+  type InferStepSlots_<$Step extends StepDefinition, $Overloads extends readonly Overload[]> =
+    Tuple.IntersectItems<{
+      [$Index in keyof $Overloads]:
+        IsUnknown<$Overloads[$Index]['steps'][$Step['name']]> extends true
+          ? unknown
+          : $Overloads[$Index]['steps'][$Step['name']]['slots']
+    }>
+
+  // dprint-ignore
+  type InferStepOutput<$Step extends StepDefinition, $Overload extends Overload> = $Overload extends never ? never :
+    & $Step['output']
+    & { [_ in $Overload['discriminant'][0]]: $Overload['discriminant'][1] }
+    & $Overload['steps'][$Step['name']]['output']
+
+  // dprint-ignore
+  type InferStepInput<
+    $StepIndex extends Tuple.IndexKey,
+    $StepDefinition extends StepDefinition,
+    $Overload extends Overload,
+  > = $Overload extends never ? never :
+    & $StepDefinition['input']
+    // Overload Contributions:
+    // 1. The discriminant:
+    & { [_ in $Overload['discriminant'][0]]: $Overload['discriminant'][1] }
+    // 2. This specific step:
+    & $Overload['steps'][$StepDefinition['name']]['input']
+    // 3. If this is the first step, then the pipeline input contributions, if any:
+    & ($StepIndex extends '0' ? $Overload['configurator']['input'] : {})
 }
-
-type InferStepSlots<$Step extends StepDefinition, $Overloads extends Overload[]> =
-  & $Step['slots']
-  & InferStepSlots_<$Step, $Overloads>
-// dprint-ignore
-type InferStepSlots_<$Step extends StepDefinition, $Overloads extends Overload[]> =
-  Tuple.IntersectItems<{
-    [$Index in keyof $Overloads]:
-      IsUnknown<$Overloads[$Index]['steps'][$Step['name']]> extends true
-        ? unknown
-        : $Overloads[$Index]['steps'][$Step['name']]['slots']
-  }>
-
-// dprint-ignore
-type InferStepOutput<$Step extends StepDefinition, $Overload extends Overload> = $Overload extends never ? never :
-  & $Step['output']
-  & { [_ in $Overload['discriminant'][0]]: $Overload['name'] }
-  & $Overload['steps'][$Step['name']]['output']
-
-// dprint-ignore
-type InferStepInput<
-  $StepIndex extends Tuple.IndexKey,
-  $StepDefinition extends StepDefinition,
-  $Overload extends Overload,
-> = $Overload extends never ? never :
-  & $StepDefinition['input']
-  // Overload Contributions:
-  // 1. The discriminant:
-  & { [_ in $Overload['discriminant'][0]]: $Overload['name'] }
-  // 2. This specific step:
-  & $Overload['steps'][$StepDefinition['name']]['input']
-  // 3. If this is the first step, then the pipeline input contributions, if any:
-  & ($StepIndex extends '0' ? $Overload['input'] : {})

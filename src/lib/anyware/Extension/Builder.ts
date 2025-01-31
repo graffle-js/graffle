@@ -1,5 +1,5 @@
 import { Overload } from '../Overload/_namespace.js'
-import type { PipelineDefinition } from '../PipelineDef/__.js'
+import type { PipelineDefinition } from '../PipelineDefinition/__.js'
 import type { Extension } from './__.js'
 
 type Create = <$Pipeline extends PipelineDefinition>() => Builder<$Pipeline, Extension.States.Empty>

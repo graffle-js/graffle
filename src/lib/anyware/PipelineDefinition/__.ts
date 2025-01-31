@@ -5,8 +5,8 @@ import type { Config } from './Config.js'
 export * as PipelineDefinition from './_.js'
 
 export interface PipelineDefinition {
-  config: Config
-  input: object
-  steps: StepDefinition[]
-  overloads: Overload[]
+  readonly config: Config
+  readonly input: object
+  readonly steps: readonly StepDefinition[]
+  readonly overloads: readonly Overload[]
 }

@@ -8,7 +8,7 @@ import {
   type NonRetryingInterceptorInput,
 } from '../Interceptor/Interceptor.js'
 import type { Pipeline } from '../Pipeline/Pipeline.js'
-import type { PipelineDefinition } from '../PipelineDef/__.js'
+import type { PipelineDefinition } from '../PipelineDefinition/__.js'
 import { successfulResult } from '../Result.js'
 import type { StepDefinition } from '../StepDefinition.js'
 import type { StepResultErrorExtension } from '../StepResult.js'
@@ -18,7 +18,7 @@ import { runPipeline } from './runPipeline.js'
 
 export interface Params<$Pipeline extends Pipeline = Pipeline> {
   initialInput: $Pipeline['input']
-  interceptors?: NonRetryingInterceptorInput[]
+  interceptors?: readonly NonRetryingInterceptorInput[]
   retryingInterceptor?: NonRetryingInterceptorInput
 }
 

@@ -211,7 +211,7 @@ export type ContextAddTransportOptional<
       }
     : $ClientTransports
 
-export const contextAddTransport = (context: Context, transport: Transport) => {
+export const contextAddTransport = (context: Context, transport: Transport): Context => {
   const isFirstTransport = context.transports.current === undefined
   const transportName = transport.discriminant[`1`] as string
 
