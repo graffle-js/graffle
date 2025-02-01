@@ -5,18 +5,16 @@ import type { TypeFunction } from '../../lib/type-function/__.js'
 import { createMethodDocument, createMethodOperationType } from './_.js'
 
 export const DocumentBuilder = Extension(`DocumentBuilder`)
-  .constructor(({ context }) => {
+  .properties(({ context }) => {
     return {
-      properties: {
-        document: createMethodDocument(context),
-        query: createMethodOperationType(context, OperationTypeNode.QUERY),
-        mutation: createMethodOperationType(context, OperationTypeNode.MUTATION),
-        // todo
-        // subscription: async () => {},
-      } as any as Properties,
-    }
+      document: createMethodDocument(context),
+      query: createMethodOperationType(context, OperationTypeNode.QUERY),
+      mutation: createMethodOperationType(context, OperationTypeNode.MUTATION),
+      // todo
+      // subscription: async () => {},
+    } as any as Properties
   })
-  .done()
+  .return()
 
 export interface Properties extends Extension.PropertiesTypeFunction {
   // @ts-expect-error

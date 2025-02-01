@@ -29,7 +29,7 @@ interface Project {
 }
 
 export const kitchenSink = KitchenSink
-  .create({ checkPreflight: false })
+  .create({ check: { preflight: false } })
   .use(TransportMemory({
     schema: kitchenSinkSchema,
   }))
@@ -42,15 +42,15 @@ interface Fixtures {
   fetch: Mock<(request: Request) => Promise<Response>>
   pokemonService: SchemaService
   graffle: GraffleMinimal.Client.With<{
-    checkPreflight: false
+    check: { preflight: false }
   }>
   kitchenSinkHttp: GraffleBasic.Client.With<{
-    schemaMap: SchemaDrivenDataMap
-    checkPreflight: false
+    schema: { map: SchemaDrivenDataMap }
+    check: { preflight: false }
   }>
   kitchenSink: GraffleBasic.Client.With<{
-    schemaMap: SchemaDrivenDataMap
-    checkPreflight: false
+    schema: { map: SchemaDrivenDataMap }
+    check: { preflight: false }
     transports: ConfigManager.SetKeyUnsafe<
       GraffleBasic.Client.Context['transports'],
       `current`,

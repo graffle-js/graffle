@@ -4,7 +4,7 @@ import { DateScalar } from '../../../../tests/_/fixtures/scalars.js'
 import { Graffle } from '../../../../tests/_/schemas/kitchen-sink/graffle/__.js'
 import * as Schema from '../../../../tests/_/schemas/kitchen-sink/schema.js'
 
-const g = Graffle.create({ checkPreflight: false }).scalar(DateScalar)
+const g = Graffle.create({ check: { preflight: false } }).scalar(DateScalar)
 
 // dprint-ignore
 test(`query`, async () => {

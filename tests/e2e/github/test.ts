@@ -8,7 +8,7 @@
 
 import { Github } from './graffle/__.js'
 
-const github = Github.create({ checkPreflight: false })
+const github = Github.create({ check: { preflight: false } })
 
 const a = await github.query.__typename()
 

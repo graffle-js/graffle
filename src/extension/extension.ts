@@ -2,7 +2,7 @@ import { __, type ExcludeUndefined } from '../lib/prelude.js'
 import type { RequestPipelineBaseInterceptor } from '../requestPipeline/__.js'
 import type { Configurator } from '../types/configurator.js'
 import type { Context } from '../types/context.js'
-import type { Transport } from '../types/Transport.js'
+import { Transport } from '../types/Transport.js'
 import type { ConstructorParameters } from './constructor.js'
 import type * as _re_export from './properties.js'
 
@@ -16,18 +16,24 @@ export const Extension = <$Name extends string>(
   const extension = {
     name,
   }
-  const builder = {
-    transport() {
+  const builder: Extension.Builder<Extension<$Name, undefined, undefined, undefined, undefined>> = {
+    transport(transportTypeInput: Transport | Transport.Builder<Transport>) {
+      const transport = Transport.$.isBuilder(transportTypeInput) ? transportTypeInput.return() : transportTypeInput
+      extension.transport = transport
       return builder
     },
     configurator() {
       return builder
     },
-    done() {
+    properties() {
+      return builder
+    },
+    return() {
       return () => extension
     },
   }
-  return builder
+
+  return builder as any
 }
 
 // ------------------------------------------------------------
@@ -78,7 +84,7 @@ export namespace Extension {
     /**
      * TODO 1
      */
-    <$Transport extends Transport>(transport: Transport.Builder<$Transport>): Builder<{
+    <$Transport extends Transport>(transport: $Transport | Transport.Builder<$Transport>): Builder<{
       constructor: $Extension['constructor']
       requestInterceptor: $Extension['requestInterceptor']
       name: $Extension['name']
@@ -209,6 +215,6 @@ export namespace Extension {
      * TODO
      */
     // todo: extension stores the initialization configuration statically...
-    done: () => (...parameters: undefined extends $Extension['configurator'] ? [] : [parameters: _$ConfigurationNormalized]) => $Extension
+    return: () => (...parameters: undefined extends $Extension['configurator'] ? [] : [parameters: _$ConfigurationNormalized]) => $Extension
   }
 }

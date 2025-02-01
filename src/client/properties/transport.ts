@@ -286,7 +286,7 @@ export namespace ContextTransports {
     $SuccessValue = true,
   > =
     // @ts-expect-error context constraint missing to avoid TS compare depth limit
-    $Context['checkPreflight'] extends false
+    $Context['configuration']['check']['current']['preflight'] extends false
       ? $SuccessValue
       // @ts-expect-error context constraint missing to avoid TS compare depth limit
       : PreflightCheck_<$Context['transports'], $SuccessValue>

@@ -213,7 +213,7 @@ export const createWithContext = <$Context extends Context>(
   context.extensions.forEach(_ => {
     const configurationIndex = context.configuration as ConfigurationIndex
     const configurationIndexEntry = configurationIndex[_.name]
-    if (!configurationIndexEntry) throw new Error(`Configuration entry for ${_.name} not found`)
+    if (!configurationIndexEntry && _.configurator) throw new Error(`Configuration entry for ${_.name} not found`)
 
     const propertiesDynamic = _.propertiesDynamic?.({
       configuration: configurationIndexEntry.current,

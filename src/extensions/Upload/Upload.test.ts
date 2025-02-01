@@ -10,7 +10,7 @@ import { type SchemaService, serveSchema } from '../../../tests/_/lib/serveSchem
 import type { GraffleMinimal } from '../../entrypoints/presets/minimal.js'
 
 interface Context {
-  graffle: GraffleMinimal.Client.With<{ checkPreflight: false }>
+  graffle: GraffleMinimal.Client.With<{ check: { preflight: false } }>
   schemaServer: SchemaService
 }
 
@@ -21,7 +21,7 @@ const test = testBase.extend<Context>({
     await schemaServer.stop()
   },
   graffle: async ({ schemaServer }, use) => {
-    const graffle = Graffle.create({ checkPreflight: false }).transport({ url: schemaServer.url }).use(Upload())
+    const graffle = Graffle.create({ check: { preflight: false } }).transport({ url: schemaServer.url }).use(Upload())
     await use(graffle as any)
   },
 })

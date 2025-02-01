@@ -44,15 +44,15 @@ export const contextAddOneExtension = <
   const $Context extends Context,
   $Extension extends Extension,
 >(context: $Context, extension: $Extension): ContextAddOneExtension<$Context, $Extension> => {
-  const newContext: Context = {
+  const newContext: Context = Object.freeze({
     ...context,
     ...(extension.transport ? contextAddTransport(context, extension.transport) : {}),
-    extensions: [...context.extensions, extension],
-    extensionsIndex: {
+    extensions: Object.freeze([...context.extensions, extension]),
+    extensionsIndex: Object.freeze({
       ...context.extensionsIndex,
       [extension.name]: extension,
-    },
-  }
+    }),
+  })
 
   return newContext as any
 }

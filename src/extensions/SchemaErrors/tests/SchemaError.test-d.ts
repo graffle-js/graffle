@@ -3,7 +3,7 @@ import { type Extension } from '../../../extension/$.js'
 import { SchemaErrors } from '../runtime.js'
 import { GraffleSchemaErrors } from './fixture/graffle/__.js'
 
-const g = GraffleSchemaErrors.create({ checkPreflight: false }).use(SchemaErrors())
+const g = GraffleSchemaErrors.create({ check: { preflight: false } }).use(SchemaErrors())
 
 // todo move test to test suite for .use method
 // test(`config type is augmented with type hook`, () => {
