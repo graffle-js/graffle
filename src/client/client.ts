@@ -1,20 +1,26 @@
 import type { Extension } from '../extension/$.js'
 import { Anyware } from '../lib/anyware/_namespace.js'
 import { getOperationType } from '../lib/grafaid/document.js'
-import { isObjectEmpty } from '../lib/prelude.js'
+import type { ObjectMergeShallow } from '../lib/prelude.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
 import type { RequestPipeline } from '../requestPipeline/RequestPipeline.js'
 import type { ConfigurationIndex } from '../types/ConfigurationIndex.js'
-import { Context } from '../types/context.js'
+import { Context, contextMergeFragment } from '../types/context.js'
 import { handleOutput } from './handleOutput.js'
 import { type ContextAddConfiguration, contextAddConfigurationInput } from './properties/addConfiguration.js'
-import { type ContextAddOneExtension, contextAddOneExtension } from './properties/addExtension.js'
-import { contextAddRequestInterceptor } from './properties/addRequestInterceptor.js'
+import { type ContextAddOneExtension, contextFragmentExtensionsAddOne } from './properties/addExtension.js'
+import { type AddPropertiesMethod, contextFragmentAddProperties } from './properties/addProperties.js'
+import { contextFragmentAddRequestInterceptor } from './properties/addRequestInterceptor.js'
 import { contextAddScalar, ScalarMethod } from './properties/addScalar.js'
 import { GqlMethod } from './properties/request/request.js'
 import { SendMethod } from './properties/request/send.js'
-import type { ContextTransports } from './properties/transport.js'
-import { contextAddTransport, contextUpdateTransport, TransportMethod } from './properties/transport.js'
+import type { ContextFragmentTransports, ContextTransports } from './properties/transport.js'
+import {
+  contextFragmentTransportsAddType,
+  contextFragmentTransportsConfigureCurrent,
+  contextFragmentTransportsSetCurrent,
+  TransportMethod,
+} from './properties/transport.js'
 
 export type ClientEmpty = Client<Context.States.Empty, {}>
 
@@ -29,6 +35,7 @@ export type Client<
   $Extension extends object = object,
 > =
   & ClientBase<$Context, $Extension>
+  & $Context['properties']['static']
   & $Extension
 // & Extension.ApplyAndMergeBuilderExtensions<$Context['extensions'], $Context>
 
@@ -59,7 +66,11 @@ export interface ClientBase<
   /**
    * TODO
    */
-  transport: TransportMethod<$Context, $Extension>
+  transport: TransportMethod<$Context>
+  /**
+   * TODO
+   */
+  properties: AddPropertiesMethod<$Context>
   /**
    * TODO
    */
@@ -117,11 +128,16 @@ export const createWithContext = <$Context extends Context>(
     ...({} as Client<$Context, {}>),
     _: context,
     anyware(interceptor) {
-      const newContext = contextAddRequestInterceptor(context, interceptor as any)
+      const interceptor_ = interceptor as any as RequestPipeline.BaseInterceptor
+      const newContext = contextMergeFragment(context, contextFragmentAddRequestInterceptor(context, interceptor_))
+      return createWithContext(newContext) as any
+    },
+    properties(properties) {
+      const newContext = contextMergeFragment(context, contextFragmentAddProperties(context, properties))
       return createWithContext(newContext) as any
     },
     use(extension) {
-      const newContext = contextAddOneExtension(context, extension)
+      const newContext = contextMergeFragment(context, contextFragmentExtensionsAddOne(context, extension))
       return createWithContext(newContext) as any
     },
     scalar: ((...args: ScalarMethod.Arguments) => {
@@ -136,30 +152,30 @@ export const createWithContext = <$Context extends Context>(
     },
     transport: ((...args: TransportMethod.Arguments) => {
       const input = TransportMethod.normalizeArguments(args)
-      let newContext: Context
+      let fragment2: ContextFragmentTransports
       switch (input[0]) {
-        case TransportMethod.overloadCase.setType: {
-          const noChange = (!input[2] || isObjectEmpty(input[2])) && input[1] === context.transports.current
-          if (noChange) return client
-          newContext = contextUpdateTransport(context, input[1], input[2] ?? {})
+        case TransportMethod.overloadCase.configureCurrent: {
+          const fragmentMaybe = contextFragmentTransportsConfigureCurrent(context, input[1])
+          if (!fragmentMaybe) return client
+          fragment2 = fragmentMaybe
           break
         }
-        case TransportMethod.overloadCase.configureCurrent: {
-          if (!context.transports.current) {
-            throw new Error(`No transport is currently set.`)
-          }
-          const noChange = isObjectEmpty(input[1])
-          if (noChange) return client
-          newContext = contextUpdateTransport(context, context.transports.current, input[1])
+        case TransportMethod.overloadCase.setCurrent: {
+          const fragmentMaybe = contextFragmentTransportsSetCurrent(context, input[1], input[2])
+          if (!fragmentMaybe) return client
+          fragment2 = fragmentMaybe
           break
         }
         case TransportMethod.overloadCase.addType: {
-          newContext = contextAddTransport(context, input[1])
+          fragment2 = contextFragmentTransportsAddType(context, input[1])
           break
         }
       }
 
-      return createWithContext(newContext) as any
+      return createWithContext(Object.freeze({
+        ...context,
+        ...fragment2,
+      })) as any
     }) as any,
     gql: ((...args: GqlMethod.Arguments) => {
       const { document: query } = GqlMethod.normalizeArguments(args)
@@ -203,30 +219,26 @@ export const createWithContext = <$Context extends Context>(
     }) as any,
   }
 
-  // const properties = {
-  // ...transportProperties({ client, context, createClient: createWithContext }),
-  // }
+  Object.assign(client, context.properties.static)
 
-  // Object.assign(client, properties)
-
+  // todo: access computed properties from context
   context.extensions.forEach(_ => {
     const configurationIndex = context.configuration as ConfigurationIndex
     const configurationIndexEntry = configurationIndex[_.name]
     if (!configurationIndexEntry && _.configurator) throw new Error(`Configuration entry for ${_.name} not found`)
 
-    const propertiesDynamic = _.propertiesDynamic?.({
-      configuration: configurationIndexEntry?.current,
-      client,
-      context,
-    })
-    const properties = _.propertiesStatic && propertiesDynamic
-      ? {
-        ..._.propertiesStatic,
-        ...propertiesDynamic,
+    const propertiesComputed = _.propertiesComputed.reduce((acc, propertiesComputer) => {
+      return {
+        ...acc,
+        ...propertiesComputer({
+          configuration: configurationIndexEntry?.current,
+          client,
+          context,
+        }),
       }
-      : (_.propertiesStatic ?? propertiesDynamic ?? {})
+    }, {})
 
-    Object.assign(client, properties)
+    Object.assign(client, propertiesComputed)
   })
 
   return client

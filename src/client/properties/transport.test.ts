@@ -3,18 +3,18 @@ import { ATransport, ATransportBuilder, BTransport } from '../../../tests/_/fixt
 import { test } from '../../../tests/_/helpers.js'
 import { Context } from '../../types/context.js'
 import { create } from '../client.js'
-import { ContextTransports } from './transport.js'
+import { type ContextFragmentTransportsEmpty, contextFragmentTransportsEmpty } from './transport.js'
 
 const g1 = create().transport(ATransport)
 const g2 = create().transport(ATransport).transport(BTransport)
 
 describe(`starting state`, () => {
   test(`no transports registered`, ({ g0 }) => {
-    expectTypeOf(g0._.transports).toMatchTypeOf<ContextTransports.States.Empty>()
+    expectTypeOf(g0._.transports).toMatchTypeOf<ContextFragmentTransportsEmpty['transports']>()
     expectTypeOf(g0._.requestPipelineDefinition.overloads).toMatchTypeOf<
       Context.States.Empty['requestPipelineDefinition']['overloads']
     >()
-    expect(g0._.transports).toBe(ContextTransports.States.empty)
+    expect(g0._.transports).toBe(contextFragmentTransportsEmpty.transports)
     expect(g0._.requestPipelineDefinition.overloads).toBe(Context.States.empty.requestPipelineDefinition.overloads)
   })
 

@@ -51,6 +51,7 @@ export const Configurator = (): Configurator.States.BuilderEmpty => {
       return builder as any
     },
     inputResolver(inputResolverInit) {
+      // todo: wrap resolver with object freezer.
       state.inputResolver = $.createInputResolver(inputResolverInit)
       return builder as any
     },

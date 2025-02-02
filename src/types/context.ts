@@ -1,12 +1,40 @@
-import { ContextTransports } from '../client/properties/transport.js'
+import {
+  type ContextFragmentProperties,
+  type ContextFragmentPropertiesEmpty,
+  contextFragmentPropertiesEmpty,
+} from '../client/properties/addProperties.js'
+import {
+  type ContextFragmentRequestInterceptors,
+  contextFragmentRequestInterceptorsEmpty,
+} from '../client/properties/addRequestInterceptor.js'
+import {
+  type ContextFragmentTransports,
+  type ContextFragmentTransportsEmpty,
+  contextFragmentTransportsEmpty,
+} from '../client/properties/transport.js'
 import type { Extension } from '../extension/$.js'
-import type { Anyware } from '../lib/anyware/_namespace.js'
-import type { RequestPipeline } from '../requestPipeline/RequestPipeline.js'
-import { requestPipelineBaseDefinition } from '../requestPipeline/RequestPipeline.js'
+import { type EmptyArray, type EmptyObject, emptyObject, type ObjectMergeShallow } from '../lib/prelude.js'
+import { emptyArray } from '../lib/prelude.js'
 import { Configurators } from './configurators/_namespace.js'
 import { Schema } from './Schema/__.js'
 
-export interface Context {
+export type ContextFragment = Partial<Context>
+
+export const contextMergeFragment = <$Context extends Context, $Fragment extends null | ContextFragment>(
+  context: $Context,
+  fragment: $Fragment,
+): $Fragment extends null ? $Context : $Fragment extends Context ? ObjectMergeShallow<$Context, $Fragment> : never => {
+  if (!fragment) return context as any
+  const newContext = Object.freeze({
+    ...context,
+    ...fragment,
+  }) as any
+  return newContext
+}
+
+export interface Context
+  extends ContextFragmentTransports, ContextFragmentProperties, ContextFragmentRequestInterceptors
+{
   readonly configuration: {
     readonly output: {
       readonly configurator: Configurators.Output.OutputConfigurator
@@ -21,9 +49,6 @@ export interface Context {
       readonly current: Configurators.Schema.SchemaConfigurator['default']
     }
   }
-  readonly requestPipelineDefinition: Anyware.PipelineDefinition
-  readonly requestPipelineInterceptors: readonly RequestPipeline.BaseInterceptor[]
-  readonly transports: ContextTransports
   readonly scalars: Schema.Scalar.Registry
   readonly extensions: readonly Extension[]
   readonly extensionsIndex: {
@@ -43,19 +68,23 @@ export interface Context {
 export namespace Context {
   export namespace States {
     export interface Empty extends Context {
+      readonly properties: ContextFragmentPropertiesEmpty['properties']
+      readonly transports: ContextFragmentTransportsEmpty['transports']
+      readonly requestPipelineDefinition: ContextFragmentTransportsEmpty['requestPipelineDefinition']
       readonly scalars: Schema.Scalar.Registry.Empty
-      readonly extensions: readonly []
-      readonly extensionsIndex: {}
-      readonly transports: ContextTransports.States.Empty
-      readonly requestPipelineDefinition: RequestPipeline.BaseDefinition
+      readonly extensions: EmptyArray
+      readonly extensionsIndex: EmptyObject
       // type-level properties
       // todo merge typehooks empty from extension type here to DRY
-      readonly typeHookOnRequestDocumentRootType: readonly []
-      readonly typeHookOnRequestResult: readonly []
+      readonly typeHookOnRequestDocumentRootType: EmptyArray
+      readonly typeHookOnRequestResult: EmptyArray
       readonly typeHookRequestResultDataTypes: never
     }
 
     export const empty: Empty = Object.freeze({
+      ...contextFragmentPropertiesEmpty,
+      ...contextFragmentTransportsEmpty,
+      ...contextFragmentRequestInterceptorsEmpty,
       configuration: Object.freeze({
         output: Object.freeze({
           configurator: Configurators.Output.configurator,
@@ -70,11 +99,8 @@ export namespace Context {
           current: Configurators.Schema.configurator.default,
         }),
       }),
-      requestPipelineDefinition: requestPipelineBaseDefinition,
-      requestPipelineInterceptors: Object.freeze([]),
-      transports: ContextTransports.States.empty,
-      extensions: Object.freeze([] as const),
-      extensionsIndex: Object.freeze({}),
+      extensions: emptyArray,
+      extensionsIndex: emptyObject,
       scalars: Schema.Scalar.Registry.empty,
       typeHookOnRequestDocumentRootType: null as any,
       typeHookOnRequestResult: null as any,

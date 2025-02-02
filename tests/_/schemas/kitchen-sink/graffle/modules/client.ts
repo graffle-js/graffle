@@ -5,8 +5,8 @@ import * as $$Data from './data.js'
 import * as $$Scalar from './scalar.js'
 import * as $$SchemaDrivenDataMap from './schema-driven-data-map.js'
 
-const context = $$Utilities.contextAddOneExtension(
-  $$Utilities.contextAddOneExtension(
+const context = $$Utilities.contextFragmentExtensionsAddOne(
+  $$Utilities.contextFragmentExtensionsAddOne(
     {
       ...$$Utilities.Context.States.empty,
       name: $$Data.Name,
