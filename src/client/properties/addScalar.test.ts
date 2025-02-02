@@ -1,5 +1,6 @@
-import { expect, expectTypeOf, test } from 'vitest'
+import { expect, expectTypeOf } from 'vitest'
 import { AScalar, BScalar } from '../../../tests/_/fixtures/scalars.js'
+import { test } from '../../../tests/_/helpers.js'
 import { Context, type GlobalRegistry } from '../../entrypoints/utilities-for-generated.js'
 import type { Schema } from '../../types/Schema/__.js'
 import type { SchemaDrivenDataMap } from '../../types/SchemaDrivenDataMap/__.js'
@@ -23,15 +24,14 @@ declare global {
 
 const map = {} as SchemaDrivenDataMap
 
-const g1 = create()
-const g2 = g1.with({ schema: { map, name: `TestAddScalar` } })
+const g2 = create().with({ schema: { map, name: `TestAddScalar` } })
 
-test(`scalars begin empty`, () => {
-  expect(g1._.scalars).toEqual(Context.States.empty.scalars)
+test(`scalars begin empty`, ({ g0 }) => {
+  expect(g0._.scalars).toEqual(Context.States.empty.scalars)
 })
 
-test(`method not available when no schema map `, () => {
-  expectTypeOf(g1.scalar).toEqualTypeOf<ScalarMethod.TypeErrorMissingSchemaMap>()
+test(`method not available when no schema map `, ({ g0 }) => {
+  expectTypeOf(g0.scalar).toEqualTypeOf<ScalarMethod.TypeErrorMissingSchemaMap>()
 })
 
 test(`method is available when there is a schema map `, () => {

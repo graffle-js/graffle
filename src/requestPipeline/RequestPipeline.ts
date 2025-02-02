@@ -37,28 +37,32 @@ export namespace RequestPipeline {
   export type PackInput = EncodeOutput
 
   export type Output = GraffleExecutionResultEnvelope
-}
 
-export interface RequestPipelineBaseDefinition extends Anyware.PipelineDefinition {
-  readonly overloads: readonly []
-  readonly config: Config
-  readonly input: {
-    request: Grafaid.RequestAnalyzedInput
-    state: Context
-    transportType: 'none'
-    transport: {}
+  export interface BaseDefinition extends Anyware.PipelineDefinition {
+    readonly overloads: readonly []
+    readonly config: Config
+    readonly input: {
+      request: Grafaid.RequestAnalyzedInput
+      state: Context
+      transportType: 'none'
+      transport: {}
+    }
+    readonly steps: [
+      Anyware.StepDefinition<'encode', {}, RequestPipeline.Input, RequestPipeline.EncodeOutput>,
+      Anyware.StepDefinition<'pack', {}, RequestPipeline.PackInput, {}>,
+      Anyware.StepDefinition<'exchange', {}, {}, {}>,
+      Anyware.StepDefinition<'unpack', {}, {}, {}>,
+      Anyware.StepDefinition<'decode', {}, RequestPipeline.DecodeInput, RequestPipeline.Output>,
+    ]
   }
-  readonly steps: [
-    Anyware.StepDefinition<'encode', {}, RequestPipeline.Input, RequestPipeline.EncodeOutput>,
-    Anyware.StepDefinition<'pack', {}, RequestPipeline.PackInput, {}>,
-    Anyware.StepDefinition<'exchange', {}, {}, {}>,
-    Anyware.StepDefinition<'unpack', {}, {}, {}>,
-    Anyware.StepDefinition<'decode', {}, RequestPipeline.DecodeInput, RequestPipeline.Output>,
-  ]
+
+  export type Base = Anyware.Pipeline.InferFromDefinition<RequestPipeline.BaseDefinition>
+
+  export type BaseInterceptor = Anyware.Interceptor.InferFromPipeline<Base>
 }
 
 const { stepName } = RequestPipeline
-export const requestPipelineBaseDefinition: RequestPipelineBaseDefinition = Anyware.PipelineDefinition
+export const requestPipelineBaseDefinition: RequestPipeline.BaseDefinition = Anyware.PipelineDefinition
   .create({
     // If core errors caused by an abort error then raise it as a direct error.
     // This is an expected possible error. Possible when user cancels a request.
@@ -69,7 +73,7 @@ export const requestPipelineBaseDefinition: RequestPipelineBaseDefinition = Anyw
       return signal.hookName === `exchange` && isAbortError(signal.error)
     },
   })
-  .input<RequestPipelineBaseDefinition['input']>()
+  .input<RequestPipeline.BaseDefinition['input']>()
   .step(stepName.encode, {
     run: (input) => {
       const sddm = input.state.configuration.schema.current.map
@@ -123,7 +127,3 @@ export const requestPipelineBaseDefinition: RequestPipelineBaseDefinition = Anyw
     },
   })
   .type
-
-export type RequestPipelineBase = Anyware.Pipeline.InferFromDefinition<RequestPipelineBaseDefinition>
-
-export type RequestPipelineBaseInterceptor = Anyware.Interceptor.InferFromPipeline<RequestPipelineBase>

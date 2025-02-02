@@ -1,11 +1,8 @@
 import { ContextTransports } from '../client/properties/transport.js'
 import type { Extension } from '../extension/$.js'
 import type { Anyware } from '../lib/anyware/_namespace.js'
-import {
-  type RequestPipelineBaseDefinition,
-  requestPipelineBaseDefinition,
-  type RequestPipelineBaseInterceptor,
-} from '../requestPipeline/RequestPipeline.js'
+import type { RequestPipeline } from '../requestPipeline/RequestPipeline.js'
+import { requestPipelineBaseDefinition } from '../requestPipeline/RequestPipeline.js'
 import { Configurators } from './configurators/_namespace.js'
 import { Schema } from './Schema/__.js'
 
@@ -25,7 +22,7 @@ export interface Context {
     }
   }
   readonly requestPipelineDefinition: Anyware.PipelineDefinition
-  readonly requestPipelineInterceptors: readonly RequestPipelineBaseInterceptor[]
+  readonly requestPipelineInterceptors: readonly RequestPipeline.BaseInterceptor[]
   readonly transports: ContextTransports
   readonly scalars: Schema.Scalar.Registry
   readonly extensions: readonly Extension[]
@@ -50,7 +47,7 @@ export namespace Context {
       readonly extensions: readonly []
       readonly extensionsIndex: {}
       readonly transports: ContextTransports.States.Empty
-      readonly requestPipelineDefinition: RequestPipelineBaseDefinition
+      readonly requestPipelineDefinition: RequestPipeline.BaseDefinition
       // type-level properties
       // todo merge typehooks empty from extension type here to DRY
       readonly typeHookOnRequestDocumentRootType: readonly []

@@ -1,20 +1,25 @@
-import { describe, expect, expectTypeOf, test } from 'vitest'
+import { describe, expect, expectTypeOf } from 'vitest'
 import { ATransport, ATransportBuilder, BTransport } from '../../../tests/_/fixtures/transports.js'
+import { test } from '../../../tests/_/helpers.js'
+import { Context } from '../../types/context.js'
 import { create } from '../client.js'
 import { ContextTransports } from './transport.js'
 
-const g0 = create()
 const g1 = create().transport(ATransport)
 const g2 = create().transport(ATransport).transport(BTransport)
 
 describe(`starting state`, () => {
-  test(`no transports registered`, () => {
+  test(`no transports registered`, ({ g0 }) => {
     expectTypeOf(g0._.transports).toMatchTypeOf<ContextTransports.States.Empty>()
+    expectTypeOf(g0._.requestPipelineDefinition.overloads).toMatchTypeOf<
+      Context.States.Empty['requestPipelineDefinition']['overloads']
+    >()
     expect(g0._.transports).toBe(ContextTransports.States.empty)
+    expect(g0._.requestPipelineDefinition.overloads).toBe(Context.States.empty.requestPipelineDefinition.overloads)
   })
 
   // dprint-ignore
-  test(`no transport method overloads b/c no transports registered`, () => {
+  test(`no transport method overloads b/c no transports registered`, ({ g0 }) => {
     // @ts-expect-error
     expect(() => g0.transport(`wrong`)).toThrowErrorMatchingInlineSnapshot(`[Error: Unknown transport: wrong]`)
     // @ts-expect-error
@@ -25,7 +30,7 @@ describe(`starting state`, () => {
 })
 
 describe(`registering first transport`, () => {
-  test(`by giving a transport`, () => {
+  test(`by giving a transport`, ({ g0 }) => {
     const g1 = g0.transport(ATransportBuilder)
     expectTypeOf(g1._.transports).toMatchTypeOf<{
       current: ATransport['name']
@@ -45,15 +50,21 @@ describe(`registering first transport`, () => {
         ATransport: ATransport,
       },
     })
+    expectTypeOf(g1._.requestPipelineDefinition.overloads).toMatchTypeOf<
+      readonly [ATransport]
+    >()
+    expect(g1._.requestPipelineDefinition.overloads).toEqual([ATransport])
   })
 
-  test(`by giving a transport builder`, () => {
+  test(`by giving a transport builder`, ({ g0 }) => {
     // We infer correctness by checking that giving builder matches results of giving transport,
     // which was tested above.
     const g1a = g0.transport(ATransportBuilder)
     const g1b = g0.transport(ATransport)
     expectTypeOf(g1a._.transports).toEqualTypeOf(g1b._.transports)
+    expectTypeOf(g1a._.requestPipelineDefinition.overloads).toEqualTypeOf(g1b._.requestPipelineDefinition.overloads)
     expect(g1a._.transports).toEqual(g1b._.transports)
+    expect(g1a._.requestPipelineDefinition.overloads).toEqual(g1b._.requestPipelineDefinition.overloads)
   })
 })
 
@@ -83,7 +94,7 @@ describe(`registering second transport`, () => {
       },
     })
   })
-  test(`error if name is same as an already registered transport`, () => {
+  test(`error if name is same as an already registered transport`, ({ g0 }) => {
     expect(() => {
       // @ts-expect-error
       g0.transport(ATransport).transport(ATransport)

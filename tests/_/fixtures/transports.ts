@@ -5,14 +5,15 @@ import { Transport } from '../../../src/entrypoints/main.js'
 // ----------------------------
 
 export const ATransportBuilder = Transport(`ATransport`)
-  .configurator($ => $.input<{ a?: number }>())
-  .pack({ run: () => ({}) })
-  .exchange({ run: () => ({}) })
-  .unpack({ run: () => ({}) })
+  .configurator($ => $.input<{ a?: number }>().normalized<{ a?: number }>())
+  .pack({ run: (input) => input })
+  .exchange({ run: (input) => input })
+  .unpack({ run: (input) => ({ ...input, result: { data: {} } }) })
 
 export type ATransportBuilder = typeof ATransportBuilder
 
 export const ATransport = ATransportBuilder.return()
+ATransport.discriminant
 
 export type ATransport = typeof ATransport
 
@@ -21,10 +22,10 @@ export type ATransport = typeof ATransport
 // ----------------------------
 
 export const BTransportBuilder = Transport(`BTransport`)
-  .configurator($ => $.input<{ b?: string }>())
-  .pack({ run: () => ({}) })
-  .exchange({ run: () => ({}) })
-  .unpack({ run: () => ({}) })
+  .configurator($ => $.input<{ b?: string }>().normalized<{ b?: string }>())
+  .pack({ run: (input) => input })
+  .exchange({ run: (input) => input })
+  .unpack({ run: (input) => ({ ...input, result: { data: {} } }) })
 
 export type BTransportBuilder = typeof BTransportBuilder
 

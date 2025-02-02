@@ -3,12 +3,13 @@ import { Anyware } from '../lib/anyware/_namespace.js'
 import { getOperationType } from '../lib/grafaid/document.js'
 import { isObjectEmpty } from '../lib/prelude.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
-import type { RequestPipelineBase } from '../requestPipeline/RequestPipeline.js'
+import type { RequestPipeline } from '../requestPipeline/RequestPipeline.js'
 import type { ConfigurationIndex } from '../types/ConfigurationIndex.js'
 import { Context } from '../types/context.js'
 import { handleOutput } from './handleOutput.js'
 import { type ContextAddConfiguration, contextAddConfigurationInput } from './properties/addConfiguration.js'
 import { type ContextAddOneExtension, contextAddOneExtension } from './properties/addExtension.js'
+import { contextAddRequestInterceptor } from './properties/addRequestInterceptor.js'
 import { contextAddScalar, ScalarMethod } from './properties/addScalar.js'
 import { GqlMethod } from './properties/request/request.js'
 import { SendMethod } from './properties/request/send.js'
@@ -19,9 +20,13 @@ export type ClientEmpty = Client<Context.States.Empty, {}>
 
 export type ClientGeneric = Client<Context, {}>
 
+export interface Client_justContext {
+  _: Context
+}
+
 export type Client<
-  $Context extends Context, // = Context,
-  $Extension extends object, // = object,
+  $Context extends Context = Context,
+  $Extension extends object = object,
 > =
   & ClientBase<$Context, $Extension>
   & $Extension
@@ -112,13 +117,7 @@ export const createWithContext = <$Context extends Context>(
     ...({} as Client<$Context, {}>),
     _: context,
     anyware(interceptor) {
-      const newContext = {
-        ...context,
-        requestPipelineInterceptors: [
-          ...context.requestPipelineInterceptors,
-          interceptor,
-        ],
-      }
+      const newContext = contextAddRequestInterceptor(context, interceptor as any)
       return createWithContext(newContext) as any
     },
     use(extension) {
@@ -190,7 +189,7 @@ export const createWithContext = <$Context extends Context>(
             ...context.transports.configurations[context.transports.current],
             state: context,
             request: analyzedRequest,
-          } as RequestPipelineBase['input']
+          } as RequestPipeline.Base['input']
 
           const requestPipeline = Anyware.Pipeline.create(context.requestPipelineDefinition)
           const result = await Anyware.PipelineDefinition.run(requestPipeline, {
@@ -216,7 +215,7 @@ export const createWithContext = <$Context extends Context>(
     if (!configurationIndexEntry && _.configurator) throw new Error(`Configuration entry for ${_.name} not found`)
 
     const propertiesDynamic = _.propertiesDynamic?.({
-      configuration: configurationIndexEntry.current,
+      configuration: configurationIndexEntry?.current,
       client,
       context,
     })

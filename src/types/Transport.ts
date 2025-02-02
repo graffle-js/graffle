@@ -9,6 +9,7 @@ export interface Transport<
   $Exchange extends Anyware.StepDefinition<'exchange'> = Anyware.StepDefinition<'exchange'>,
   $Unpack extends Anyware.StepDefinition<'unpack'> = Anyware.StepDefinition<'unpack'>,
 > extends Anyware.Overload {
+  discriminant: ['transportType', $Name]
   [TypeSymbol]: true
   name: $Name
   configurator: $Configurator
