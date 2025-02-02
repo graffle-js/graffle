@@ -69,15 +69,15 @@ export interface ContextFragmentConfiguration {
   readonly configuration: {
     readonly output: {
       readonly configurator: Configurators.Output.OutputConfigurator
-      readonly current: Configurators.Output.OutputConfigurator['default']
+      readonly current: Configurators.Output.OutputConfigurator['normalizedIncremental']
     }
     readonly check: {
       readonly configurator: Configurators.Check.CheckConfigurator
-      readonly current: Configurators.Check.CheckConfigurator['default']
+      readonly current: Configurators.Check.CheckConfigurator['normalizedIncremental']
     }
     readonly schema: {
       readonly configurator: Configurators.Schema.SchemaConfigurator
-      readonly current: Configurators.Schema.SchemaConfigurator['default']
+      readonly current: Configurators.Schema.SchemaConfigurator['normalizedIncremental']
     }
   }
 }

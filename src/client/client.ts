@@ -218,6 +218,16 @@ export const createWithContext = <$Context extends Context>(
 
   Object.assign(client, context.properties.static)
 
+  context.properties.computed.forEach(propertiesComputer => {
+    Object.assign(
+      client,
+      propertiesComputer({
+        context,
+        client,
+      }),
+    )
+  })
+
   // todo: access computed properties from context
   context.extensions.forEach(_ => {
     const configurationIndex = context.configuration as ConfigurationIndex

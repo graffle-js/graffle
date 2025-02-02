@@ -35,6 +35,18 @@ describe(`transport`, () => {
   })
 })
 
+describe(`properties`, () => {
+  const properties1 = { foo: `bar` }
+
+  test(`can be added (static)`, ({ g0 }) => {
+    const BExtension = Extension(`BExtension`).properties(properties1).return()
+    const g1a = g0.use(BExtension())
+    const g1b = g0.properties(properties1)
+    expect(g1a._.properties).toEqual(g1b._.properties)
+    expectTypeOf(g1a._.properties).toEqualTypeOf(g1b._.properties)
+  })
+})
+
 describe(`request interceptor`, () => {
   test(`can be added`, ({ g0 }) => {
     const i1 = createInterceptor(async ({ pack }) => {
@@ -48,17 +60,6 @@ describe(`request interceptor`, () => {
     const g1b = g0.anyware(i1)
     expect(g1a._.requestPipelineInterceptors).toEqual(g1b._.requestPipelineInterceptors)
     expectTypeOf(g1a._.requestPipelineInterceptors).toEqualTypeOf(g1b._.requestPipelineInterceptors)
-  })
-})
-describe(`properties`, () => {
-  const properties1 = { foo: `bar` }
-
-  test(`can be added (statically given)`, ({ g0 }) => {
-    const BExtension = Extension(`BExtension`).properties(properties1).return()
-    const g1a = g0.use(BExtension())
-    const g1b = g0.properties(properties1)
-    expect(g1a._.properties).toEqual(g1b._.properties)
-    expectTypeOf(g1a._.properties).toEqualTypeOf(g1b._.properties)
   })
 })
 

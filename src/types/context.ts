@@ -30,12 +30,12 @@ import { type EmptyArray, type ObjectMergeShallow } from '../lib/prelude.js'
 
 export interface Context
   extends
+    ContextFragmentConfiguration,
     ContextFragmentTransports,
     ContextFragmentProperties,
     ContextFragmentRequestInterceptors,
     ContextFragmentExtensions,
-    ContextFragmentScalars,
-    ContextFragmentConfiguration
+    ContextFragmentScalars
 {
   // Type Level Properties
   /**

@@ -14,10 +14,11 @@ import type { Client } from '../client.js'
 // Method
 // ------------------------------------------------------------
 
+// todo have the client type be passed through too? Using `this` from parent?
 export interface AddPropertiesMethod<$Context extends Context> {
-  <$PropertiesStatic extends PropertiesStatic>(propertiesStatic: $PropertiesStatic): Client<
+  <$Properties extends Properties>(properties: $Properties | PropertiesComputer<$Context, $Properties>): Client<
     {
-      [_ in keyof $Context]: _ extends 'properties' ? ContextFragmentAddProperties<$Context, $PropertiesStatic>
+      [_ in keyof $Context]: _ extends 'properties' ? ContextFragmentAddProperties<$Context, $Properties>
         : $Context[_]
     },
     {}
@@ -25,14 +26,39 @@ export interface AddPropertiesMethod<$Context extends Context> {
 }
 
 // ------------------------------------------------------------
+// Helpers
+// ------------------------------------------------------------
+
+export type PropertiesComputer<$Context extends Context, $Properties extends Properties> = (
+  parameters: {
+    context: $Context
+    client: Client<$Context, {}>
+  },
+) => $Properties
+
+export const createPropertiesComputer = <
+  $Client extends { _: Context },
+>() =>
+<
+  $PropertiesComputer extends (
+    parameters: {
+      context: $Client['_']
+      client: $Client
+    },
+  ) => Properties,
+>(
+  propertiesComputer: $PropertiesComputer,
+) => propertiesComputer
+
+// ------------------------------------------------------------
 // Context Fragment
 // ------------------------------------------------------------
 
-export type PropertiesStatic = object
+export type Properties = object
 
 export interface ContextFragmentProperties {
   readonly properties: {
-    readonly static: PropertiesStatic
+    readonly static: Properties
     readonly computed: ReadonlyArray<
       <$Context extends Context>(parameters: Extension.ConstructorParameters<$Context>) => object
     >
@@ -55,7 +81,7 @@ export const contextFragmentPropertiesEmpty: ContextFragmentPropertiesEmpty = Ob
 
 export type ContextFragmentAddProperties<
   $Context extends Context,
-  $PropertiesStatic extends PropertiesStatic,
+  $PropertiesStatic extends Properties,
   __NewStaticProperties = ObjectMergeShallow<$Context['properties']['static'], $PropertiesStatic>,
   __NewContextProperties = {
     static: __NewStaticProperties
@@ -67,17 +93,30 @@ export type ContextFragmentAddProperties<
 // ContextReducer
 // ------------------------------------------------------------
 
+type MethodArguments = Properties | PropertiesComputer<Context, Properties>
+
 export const contextFragmentPropertiesAdd = <$Context extends Context>(
   context: $Context,
-  propertiesStatic: PropertiesStatic,
+  propertiesInput: MethodArguments,
 ): null | ContextFragmentProperties => {
-  if (isObjectEmpty(propertiesStatic)) return null
+  if (typeof propertiesInput === `function`) {
+    const properties = {
+      ...context.properties,
+      computed: [
+        ...context.properties.computed,
+        propertiesInput,
+      ],
+    }
+    return { properties }
+  }
+
+  if (isObjectEmpty(propertiesInput)) return null
 
   const properties = {
     ...context.properties,
     static: Object.freeze({
       ...context.properties.static,
-      ...propertiesStatic,
+      ...propertiesInput,
     }),
   }
 
