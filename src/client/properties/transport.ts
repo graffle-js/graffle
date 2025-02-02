@@ -255,7 +255,7 @@ export const contextFragmentTransportsEmpty: ContextFragmentTransportsEmpty = Ob
   transports: contextTransportsEmpty,
 })
 
-export const contextFragmentTransportsAddType = (context: Context, transport: Transport): ContextFragmentTransports => {
+export const contextFragmentTransportsAdd = (context: Context, transport: Transport): ContextFragmentTransports => {
   const isFirstTransport = context.transports.current === undefined
   const transportName = transport.discriminant[`1`]
 

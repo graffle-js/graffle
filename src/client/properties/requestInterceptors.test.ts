@@ -1,7 +1,7 @@
 import { expect, expectTypeOf } from 'vitest'
 import { ATransport, BTransport } from '../../../tests/_/fixtures/transports.js'
 import { g0, test } from '../../../tests/_/helpers.js'
-import { createInterceptor } from './addRequestInterceptor.js'
+import { createInterceptor } from './requestInterceptors.js'
 
 const g1 = g0.transport(ATransport)
 

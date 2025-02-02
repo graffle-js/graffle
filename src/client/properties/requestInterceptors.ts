@@ -20,7 +20,7 @@ export const contextFragmentRequestInterceptorsEmpty: ContextFragmentRequestInte
   requestPipelineInterceptors: emptyArray,
 }
 
-export const contextFragmentAddRequestInterceptor = (
+export const contextFragmentRequestInterceptorsAdd = (
   context: Context,
   interceptor: RequestPipeline.BaseInterceptor,
 ): ContextFragmentRequestInterceptors => {

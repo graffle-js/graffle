@@ -1,5 +1,5 @@
 import { type Client as BaseClient, createConstructorWithContext } from '../../client/client.js'
-import { contextFragmentExtensionsAddOne } from '../../client/properties/addExtension.js'
+import { contextFragmentExtensionsAdd } from '../../client/properties/extensions.js'
 import type { ConfigManager } from '../../lib/config-manager/__.js'
 import { Context, type Context as BaseContext } from '../../types/context.js'
 import { DocumentBuilder } from '../extensions/document-builder/runtime.js'
@@ -7,9 +7,9 @@ import { TransportHttp } from '../extensions/transport-http/runtime.js'
 import { TransportMemory } from '../extensions/transport-memory/runtime.js'
 import type { PartialOrUndefined } from '../main.js'
 
-const context = contextFragmentExtensionsAddOne(
-  contextFragmentExtensionsAddOne(
-    contextFragmentExtensionsAddOne(Context.States.empty, TransportHttp()),
+const context = contextFragmentExtensionsAdd(
+  contextFragmentExtensionsAdd(
+    contextFragmentExtensionsAdd(Context.States.empty, TransportHttp()),
     TransportMemory(),
   ),
   DocumentBuilder(),

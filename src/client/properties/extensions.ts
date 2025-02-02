@@ -1,12 +1,12 @@
-import type { Writable } from 'type-fest'
+import type { EmptyObject, Writable } from 'type-fest'
 import type { Extension } from '../../extension/$.js'
 import type { Anyware } from '../../lib/anyware/_namespace.js'
-import type { UnknownOrAnyToNever } from '../../lib/prelude.js'
+import { type EmptyArray, emptyArray, emptyObject, type UnknownOrAnyToNever } from '../../lib/prelude.js'
 import { type Context } from '../../types/context.js'
 import type { Transport } from '../../types/Transport.js'
-import { type ContextFragmentAddProperties, contextFragmentAddProperties } from './addProperties.js'
-import { contextFragmentAddRequestInterceptor } from './addRequestInterceptor.js'
-import { type ContextAddTransportOptional, contextFragmentTransportsAddType } from './transport.js'
+import { type ContextFragmentAddProperties, contextFragmentPropertiesAdd } from './properties.js'
+import { contextFragmentRequestInterceptorsAdd } from './requestInterceptors.js'
+import { type ContextAddTransportOptional, contextFragmentTransportsAdd } from './transport.js'
 
 // todo: type to use multiple to reduce type instantiation
 // useful for presets
@@ -47,7 +47,7 @@ export type ContextAddOneExtension<
     }
 
 // todo: make return a fragment
-export const contextFragmentExtensionsAddOne = <
+export const contextFragmentExtensionsAdd = <
   const $Context extends Context,
   $Extension extends Extension,
 >(context: $Context, extension: $Extension): ContextAddOneExtension<$Context, $Extension> => {
@@ -60,16 +60,37 @@ export const contextFragmentExtensionsAddOne = <
     }),
   }
 
-  const newContextPropertiesFragment = contextFragmentAddProperties(context, extension.propertiesStatic)
-  if (newContextPropertiesFragment) {
-    Object.assign(fragment, newContextPropertiesFragment)
+  const propertiesFragment = contextFragmentPropertiesAdd(context, extension.propertiesStatic)
+  if (propertiesFragment) {
+    Object.assign(fragment, propertiesFragment)
   }
   if (extension.transport) {
-    Object.assign(fragment, contextFragmentTransportsAddType(context, extension.transport))
+    Object.assign(fragment, contextFragmentTransportsAdd(context, extension.transport))
   }
   if (extension.requestInterceptor) {
-    Object.assign(fragment, contextFragmentAddRequestInterceptor(context, extension.requestInterceptor))
+    Object.assign(fragment, contextFragmentRequestInterceptorsAdd(context, extension.requestInterceptor))
   }
 
   return fragment as any
+}
+
+// ------------------------------------------------------------
+// Context Fragment
+// ------------------------------------------------------------
+
+export interface ContextFragmentExtensions {
+  readonly extensions: readonly Extension[]
+  readonly extensionsIndex: {
+    [extensionName: string]: Extension
+  }
+}
+
+export interface ContextFragmentExtensionsEmpty extends ContextFragmentExtensions {
+  extensions: EmptyArray
+  extensionsIndex: EmptyObject
+}
+
+export const contextFragmentExtensionsEmpty: ContextFragmentExtensionsEmpty = {
+  extensions: emptyArray,
+  extensionsIndex: emptyObject,
 }

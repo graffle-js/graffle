@@ -5,18 +5,21 @@ import type { ObjectMergeShallow } from '../lib/prelude.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
 import type { RequestPipeline } from '../requestPipeline/RequestPipeline.js'
 import type { ConfigurationIndex } from '../types/ConfigurationIndex.js'
-import { Context, contextMergeFragment } from '../types/context.js'
+import { Context, type ContextFragment, contextMergeFragment } from '../types/context.js'
 import { handleOutput } from './handleOutput.js'
-import { type ContextAddConfiguration, contextAddConfigurationInput } from './properties/addConfiguration.js'
-import { type ContextAddOneExtension, contextFragmentExtensionsAddOne } from './properties/addExtension.js'
-import { type AddPropertiesMethod, contextFragmentAddProperties } from './properties/addProperties.js'
-import { contextFragmentAddRequestInterceptor } from './properties/addRequestInterceptor.js'
-import { contextAddScalar, ScalarMethod } from './properties/addScalar.js'
+import {
+  type ContextFragmentConfigurationConfigure,
+  contextFragmentConfigurationConfigure,
+} from './properties/configuration.js'
+import { type ContextAddOneExtension, contextFragmentExtensionsAdd } from './properties/extensions.js'
+import { type AddPropertiesMethod, contextFragmentPropertiesAdd } from './properties/properties.js'
 import { GqlMethod } from './properties/request/request.js'
 import { SendMethod } from './properties/request/send.js'
+import { contextFragmentRequestInterceptorsAdd } from './properties/requestInterceptors.js'
+import { contextAddScalar, ScalarMethod } from './properties/scalars.js'
 import type { ContextFragmentTransports, ContextTransports } from './properties/transport.js'
 import {
-  contextFragmentTransportsAddType,
+  contextFragmentTransportsAdd,
   contextFragmentTransportsConfigureCurrent,
   contextFragmentTransportsSetCurrent,
   TransportMethod,
@@ -87,7 +90,7 @@ export interface ClientBase<
     const configurationInput extends CalcConfigurationInputForContext<$Context>,
   >(configurationInput: configurationInput) => Client<
     // @ts-expect-error Non-index type being used
-    ContextAddConfiguration<$Context, configurationInput>,
+    ContextFragmentConfigurationConfigure<$Context, configurationInput>,
     $Extension
   >
 }
@@ -105,7 +108,7 @@ export type Create<$Context extends Context = Context.States.Empty> = <
   const configurationInput extends CalcConfigurationInputForContext<$Context>,
 >(configurationInput?: configurationInput) => Client<
   // @ts-expect-error: Is missing standard configurators
-  ContextAddConfiguration<$Context, configurationInput>,
+  ContextFragmentConfigurationConfigure<$Context, configurationInput>,
   {}
 >
 
@@ -113,8 +116,12 @@ export const createConstructorWithContext = <$Context extends Context>(
   context: $Context,
 ): Create<$Context> =>
 (configurationInput) => {
-  const newContext = configurationInput
-    ? contextAddConfigurationInput(context, configurationInput as ConfigurationIndex.Input)
+  const configurationInput_ = configurationInput as undefined | ConfigurationIndex.Input
+  const newContext = configurationInput_
+    ? contextMergeFragment(
+      context,
+      contextFragmentConfigurationConfigure(context, configurationInput_),
+    )
     : context
   return createWithContext(newContext) as any
 }
@@ -124,58 +131,48 @@ export const create: Create = createConstructorWithContext(Context.States.empty)
 export const createWithContext = <$Context extends Context>(
   context: $Context,
 ): Client<$Context, {}> => {
+  const copy = (fragment: null | ContextFragment) => {
+    if (!fragment) return client
+    const newContext = contextMergeFragment(context, fragment)
+    // if (newContext === context) return client // todo is needed?
+    return createWithContext(newContext) as any
+  }
+
   const client: Client<$Context, {}> = {
     ...({} as Client<$Context, {}>),
     _: context,
     anyware(interceptor) {
       const interceptor_ = interceptor as any as RequestPipeline.BaseInterceptor
-      const newContext = contextMergeFragment(context, contextFragmentAddRequestInterceptor(context, interceptor_))
-      return createWithContext(newContext) as any
+      return copy(contextFragmentRequestInterceptorsAdd(context, interceptor_))
     },
     properties(properties) {
-      const newContext = contextMergeFragment(context, contextFragmentAddProperties(context, properties))
-      return createWithContext(newContext) as any
+      return copy(contextFragmentPropertiesAdd(context, properties))
     },
     use(extension) {
-      const newContext = contextMergeFragment(context, contextFragmentExtensionsAddOne(context, extension))
-      return createWithContext(newContext) as any
+      return copy(contextFragmentExtensionsAdd(context, extension))
     },
     scalar: ((...args: ScalarMethod.Arguments) => {
       const scalar = ScalarMethod.normalizeArguments(args)
-      const newContext = contextAddScalar(context, scalar)
-      return createWithContext(newContext) as any
+      return copy(contextAddScalar(context, scalar))
     }) as any,
     with(configurationInput) {
-      const newContext = contextAddConfigurationInput(context, configurationInput as ConfigurationIndex.Input)
-      if (newContext === context) return client
-      return createWithContext(newContext) as any
+      const configurationInput_ = configurationInput as ConfigurationIndex.Input
+      return copy(contextFragmentConfigurationConfigure(context, configurationInput_))
     },
     transport: ((...args: TransportMethod.Arguments) => {
       const input = TransportMethod.normalizeArguments(args)
-      let fragment2: ContextFragmentTransports
+      // let fragment2: ContextFragmentTransports
       switch (input[0]) {
         case TransportMethod.overloadCase.configureCurrent: {
-          const fragmentMaybe = contextFragmentTransportsConfigureCurrent(context, input[1])
-          if (!fragmentMaybe) return client
-          fragment2 = fragmentMaybe
-          break
+          return copy(contextFragmentTransportsConfigureCurrent(context, input[1]))
         }
         case TransportMethod.overloadCase.setCurrent: {
-          const fragmentMaybe = contextFragmentTransportsSetCurrent(context, input[1], input[2])
-          if (!fragmentMaybe) return client
-          fragment2 = fragmentMaybe
-          break
+          return copy(contextFragmentTransportsSetCurrent(context, input[1], input[2]))
         }
         case TransportMethod.overloadCase.addType: {
-          fragment2 = contextFragmentTransportsAddType(context, input[1])
-          break
+          return copy(contextFragmentTransportsAdd(context, input[1]))
         }
       }
-
-      return createWithContext(Object.freeze({
-        ...context,
-        ...fragment2,
-      })) as any
     }) as any,
     gql: ((...args: GqlMethod.Arguments) => {
       const { document: query } = GqlMethod.normalizeArguments(args)

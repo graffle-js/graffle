@@ -65,3 +65,19 @@ export const contextAddScalar = (context: Context, scalar: Schema.Scalar): Conte
     },
   }
 }
+
+// ------------------------------------------------------------
+// Context Fragment
+// ------------------------------------------------------------
+
+export interface ContextFragmentScalars {
+  readonly scalars: Schema.Scalar.Registry
+}
+
+export interface ContextFragmentScalarsEmpty extends ContextFragmentScalars {
+  readonly scalars: Schema.Scalar.Registry.Empty
+}
+
+export const contextFragmentScalarsEmpty: ContextFragmentScalarsEmpty = {
+  scalars: Schema.Scalar.Registry.empty,
+}

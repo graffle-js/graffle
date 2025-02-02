@@ -2,7 +2,7 @@ import { describe, expect, expectTypeOf } from 'vitest'
 import { ATransport, ATransportBuilder } from '../../../tests/_/fixtures/transports.js'
 import { test } from '../../../tests/_/helpers.js'
 import { Extension } from '../../extension/$.js'
-import { createInterceptor } from './addRequestInterceptor.js'
+import { createInterceptor } from './requestInterceptors.js'
 
 const AExtension = Extension(`AExtension`).return()
 type AExtension = ReturnType<typeof AExtension>

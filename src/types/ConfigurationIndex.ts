@@ -2,8 +2,8 @@ import type { Configurator } from './configurator.js'
 
 export interface ConfigurationIndex {
   readonly [configuratorName: string]: {
-    configurator: Configurator
-    current: Configurator.Configuration
+    readonly configurator: Configurator
+    readonly current: Configurator.Configuration
   }
 }
 

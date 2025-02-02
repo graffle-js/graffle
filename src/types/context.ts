@@ -1,59 +1,42 @@
 import {
+  type ContextFragmentConfiguration,
+  contextFragmentConfigurationEmpty,
+} from '../client/properties/configuration.js'
+import {
+  type ContextFragmentExtensions,
+  type ContextFragmentExtensionsEmpty,
+  contextFragmentExtensionsEmpty,
+} from '../client/properties/extensions.js'
+import {
   type ContextFragmentProperties,
   type ContextFragmentPropertiesEmpty,
   contextFragmentPropertiesEmpty,
-} from '../client/properties/addProperties.js'
+} from '../client/properties/properties.js'
 import {
   type ContextFragmentRequestInterceptors,
   contextFragmentRequestInterceptorsEmpty,
-} from '../client/properties/addRequestInterceptor.js'
+} from '../client/properties/requestInterceptors.js'
+import {
+  type ContextFragmentScalars,
+  type ContextFragmentScalarsEmpty,
+  contextFragmentScalarsEmpty,
+} from '../client/properties/scalars.js'
 import {
   type ContextFragmentTransports,
   type ContextFragmentTransportsEmpty,
   contextFragmentTransportsEmpty,
 } from '../client/properties/transport.js'
-import type { Extension } from '../extension/$.js'
-import { type EmptyArray, type EmptyObject, emptyObject, type ObjectMergeShallow } from '../lib/prelude.js'
-import { emptyArray } from '../lib/prelude.js'
-import { Configurators } from './configurators/_namespace.js'
-import { Schema } from './Schema/__.js'
-
-export type ContextFragment = Partial<Context>
-
-export const contextMergeFragment = <$Context extends Context, $Fragment extends null | ContextFragment>(
-  context: $Context,
-  fragment: $Fragment,
-): $Fragment extends null ? $Context : $Fragment extends Context ? ObjectMergeShallow<$Context, $Fragment> : never => {
-  if (!fragment) return context as any
-  const newContext = Object.freeze({
-    ...context,
-    ...fragment,
-  }) as any
-  return newContext
-}
+import { type EmptyArray, type ObjectMergeShallow } from '../lib/prelude.js'
 
 export interface Context
-  extends ContextFragmentTransports, ContextFragmentProperties, ContextFragmentRequestInterceptors
+  extends
+    ContextFragmentTransports,
+    ContextFragmentProperties,
+    ContextFragmentRequestInterceptors,
+    ContextFragmentExtensions,
+    ContextFragmentScalars,
+    ContextFragmentConfiguration
 {
-  readonly configuration: {
-    readonly output: {
-      readonly configurator: Configurators.Output.OutputConfigurator
-      readonly current: Configurators.Output.OutputConfigurator['default']
-    }
-    readonly check: {
-      readonly configurator: Configurators.Check.CheckConfigurator
-      readonly current: Configurators.Check.CheckConfigurator['default']
-    }
-    readonly schema: {
-      readonly configurator: Configurators.Schema.SchemaConfigurator
-      readonly current: Configurators.Schema.SchemaConfigurator['default']
-    }
-  }
-  readonly scalars: Schema.Scalar.Registry
-  readonly extensions: readonly Extension[]
-  readonly extensionsIndex: {
-    [extensionName: string]: Extension
-  }
   // Type Level Properties
   /**
    * Type level augmentations.
@@ -71,9 +54,9 @@ export namespace Context {
       readonly properties: ContextFragmentPropertiesEmpty['properties']
       readonly transports: ContextFragmentTransportsEmpty['transports']
       readonly requestPipelineDefinition: ContextFragmentTransportsEmpty['requestPipelineDefinition']
-      readonly scalars: Schema.Scalar.Registry.Empty
-      readonly extensions: EmptyArray
-      readonly extensionsIndex: EmptyObject
+      readonly extensions: ContextFragmentExtensionsEmpty['extensions']
+      readonly extensionsIndex: ContextFragmentExtensionsEmpty['extensionsIndex']
+      readonly scalars: ContextFragmentScalarsEmpty['scalars']
       // type-level properties
       // todo merge typehooks empty from extension type here to DRY
       readonly typeHookOnRequestDocumentRootType: EmptyArray
@@ -85,26 +68,30 @@ export namespace Context {
       ...contextFragmentPropertiesEmpty,
       ...contextFragmentTransportsEmpty,
       ...contextFragmentRequestInterceptorsEmpty,
-      configuration: Object.freeze({
-        output: Object.freeze({
-          configurator: Configurators.Output.configurator,
-          current: Configurators.Output.configurator.default,
-        }),
-        check: Object.freeze({
-          configurator: Configurators.Check.configurator,
-          current: Configurators.Check.configurator.default,
-        }),
-        schema: Object.freeze({
-          configurator: Configurators.Schema.configurator,
-          current: Configurators.Schema.configurator.default,
-        }),
-      }),
-      extensions: emptyArray,
-      extensionsIndex: emptyObject,
-      scalars: Schema.Scalar.Registry.empty,
+      ...contextFragmentExtensionsEmpty,
+      ...contextFragmentScalarsEmpty,
+      ...contextFragmentConfigurationEmpty,
       typeHookOnRequestDocumentRootType: null as any,
       typeHookOnRequestResult: null as any,
       typeHookRequestResultDataTypes: null as never,
     })
   }
+}
+
+// ------------------------------------------------------------
+// Fragment
+// ------------------------------------------------------------
+
+export type ContextFragment = Partial<Context>
+
+export const contextMergeFragment = <$Context extends Context, $Fragment extends null | ContextFragment>(
+  context: $Context,
+  fragment: $Fragment,
+): $Fragment extends null ? $Context : $Fragment extends Context ? ObjectMergeShallow<$Context, $Fragment> : never => {
+  if (!fragment) return context as any
+  const newContext = Object.freeze({
+    ...context,
+    ...fragment,
+  }) as any
+  return newContext
 }

@@ -1,11 +1,11 @@
 import { type Client as BaseClient, createConstructorWithContext } from '../../client/client.js'
-import { contextFragmentExtensionsAddOne } from '../../client/properties/addExtension.js'
+import { contextFragmentExtensionsAdd } from '../../client/properties/extensions.js'
 import type { ConfigManager } from '../../lib/config-manager/__.js'
 import { Context, type Context as BaseContext } from '../../types/context.js'
 import { TransportHttp } from '../extensions/transport-http/runtime.js'
 import type { PartialOrUndefined } from '../main.js'
 
-const context = contextFragmentExtensionsAddOne(Context.States.empty, TransportHttp())
+const context = contextFragmentExtensionsAdd(Context.States.empty, TransportHttp())
 
 export type MinimalClientContext = typeof context
 

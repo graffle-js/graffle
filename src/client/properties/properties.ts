@@ -67,7 +67,7 @@ export type ContextFragmentAddProperties<
 // ContextReducer
 // ------------------------------------------------------------
 
-export const contextFragmentAddProperties = <$Context extends Context>(
+export const contextFragmentPropertiesAdd = <$Context extends Context>(
   context: $Context,
   propertiesStatic: PropertiesStatic,
 ): null | ContextFragmentProperties => {
