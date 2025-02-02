@@ -3,6 +3,7 @@ import type { Anyware } from '../../lib/anyware/_namespace.js'
 import type { UnknownOrAnyToNever } from '../../lib/prelude.js'
 import { type Context } from '../../types/context.js'
 import type { Transport } from '../../types/Transport.js'
+import { contextAddRequestInterceptor } from './addRequestInterceptor.js'
 import { contextAddTransport, type ContextAddTransportOptional } from './transport.js'
 
 // todo: type to use multiple to reduce type instantiation
@@ -47,6 +48,7 @@ export const contextAddOneExtension = <
   const newContext: Context = Object.freeze({
     ...context,
     ...(extension.transport ? contextAddTransport(context, extension.transport) : {}),
+    ...(extension.requestInterceptor ? contextAddRequestInterceptor(context, extension.requestInterceptor) : {}),
     extensions: Object.freeze([...context.extensions, extension]),
     extensionsIndex: Object.freeze({
       ...context.extensionsIndex,

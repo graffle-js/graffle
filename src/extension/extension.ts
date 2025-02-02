@@ -1,5 +1,5 @@
 import { __, type ExcludeUndefined } from '../lib/prelude.js'
-import type { RequestPipelineBaseInterceptor } from '../requestPipeline/__.js'
+import type { RequestPipeline } from '../requestPipeline/__.js'
 import type { Configurator } from '../types/configurator.js'
 import type { Context } from '../types/context.js'
 import { Transport } from '../types/Transport.js'
@@ -13,13 +13,17 @@ import type * as _re_export from './properties.js'
 export const Extension = <$Name extends string>(
   name: $Name,
 ): Extension.Builder<Extension<$Name, undefined, undefined, undefined, undefined>> => {
-  const extension = {
+  const extension: Extension = {
     name,
-  }
+  } as any
   const builder: Extension.Builder<Extension<$Name, undefined, undefined, undefined, undefined>> = {
     transport(transportTypeInput: Transport | Transport.Builder<Transport>) {
       const transport = Transport.$.isBuilder(transportTypeInput) ? transportTypeInput.return() : transportTypeInput
       extension.transport = transport
+      return builder
+    },
+    requestInterceptor(requestInterceptor: RequestPipeline.BaseInterceptor) {
+      extension.requestInterceptor = requestInterceptor
       return builder
     },
     configurator() {
@@ -51,10 +55,10 @@ export interface Extension<
   name: $Name
   configurator?: $Configurator
   constructor?: (parameters: ConstructorParameters) => {
-    requestInterceptor?: RequestPipelineBaseInterceptor
+    requestInterceptor?: RequestPipeline.BaseInterceptor
     properties?: object
   }
-  requestInterceptor?: RequestPipelineBaseInterceptor
+  requestInterceptor?: RequestPipeline.BaseInterceptor
   noExpandResultDataType?: $NoExpandResultDataType
   $Properties?: $Properties
   propertiesStatic?: object
@@ -143,7 +147,7 @@ export namespace Extension {
         /**
          * todo
          */
-        requestInterceptor?: RequestPipelineBaseInterceptor,
+        requestInterceptor?: RequestPipeline.BaseInterceptor,
         /**
          * todo
          */
@@ -164,6 +168,22 @@ export namespace Extension {
       properties: $Properties
     }>
     
+    requestInterceptor: <$RequestInterceptor extends RequestPipeline.BaseInterceptor>(
+      requestInterceptor: $RequestInterceptor,
+    ) => Builder<{
+      constructor: $Extension['constructor']
+      name: $Extension['name']
+      configurator: $Extension['configurator']
+      noExpandResultDataType: $Extension['noExpandResultDataType']
+      properties: $Extension['$Properties']
+      transport: $Extension['transport']
+      // update:
+      requestInterceptor: $RequestInterceptor
+    }>
+    
+    /**
+     * todo
+     */
     // todo: support static properties too.
     properties: <$Properties extends object>(
       constructor: (parameters: ConstructorParameters<_$ConfigurationNormalized>) => $Properties
