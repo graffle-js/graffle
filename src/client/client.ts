@@ -146,7 +146,14 @@ export const createWithContext = <$Context extends Context>(
       return copy(contextFragmentRequestInterceptorsAdd(context, interceptor_))
     },
     properties(properties) {
-      return copy(contextFragmentPropertiesAdd(context, properties))
+      const isComputed = typeof properties === `function`
+      const static_ = !isComputed
+        ? properties
+        : undefined
+      const computed = isComputed
+        ? [properties]
+        : undefined
+      return copy(contextFragmentPropertiesAdd(context, { static: static_, computed }))
     },
     use(extension) {
       return copy(contextFragmentExtensionsAdd(context, extension))

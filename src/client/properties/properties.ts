@@ -93,32 +93,36 @@ export type ContextFragmentAddProperties<
 // ContextReducer
 // ------------------------------------------------------------
 
-type MethodArguments = Properties | PropertiesComputer<Context, Properties>
+// type MethodArguments = Properties | PropertiesComputer<Context, Properties>
 
 export const contextFragmentPropertiesAdd = <$Context extends Context>(
   context: $Context,
-  propertiesInput: MethodArguments,
+  propertiesInput: {
+    static?: Properties
+    computed?: ReadonlyArray<PropertiesComputer<Context, Properties>>
+  },
 ): null | ContextFragmentProperties => {
-  if (typeof propertiesInput === `function`) {
-    const properties = {
-      ...context.properties,
-      computed: [
-        ...context.properties.computed,
-        propertiesInput,
-      ],
-    }
-    return { properties }
-  }
+  const isHasStatic = propertiesInput.static && !isObjectEmpty(propertiesInput.static)
+  const isHasComputed = propertiesInput.computed && propertiesInput.computed.length > 0
+  if (!isHasStatic && !isHasComputed) return null
 
-  if (isObjectEmpty(propertiesInput)) return null
+  const static_ = isHasStatic
+    ? Object.freeze({
+      ...context.properties.static,
+      ...propertiesInput.static,
+    })
+    : context.properties.static
+
+  const computed = isHasComputed
+    ? [
+      ...context.properties.computed,
+      ...propertiesInput.computed!,
+    ]
+    : context.properties.computed
 
   const properties = {
-    ...context.properties,
-    static: Object.freeze({
-      ...context.properties.static,
-      ...propertiesInput,
-    }),
+    static: static_,
+    computed,
   }
-
   return { properties }
 }

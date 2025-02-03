@@ -33,8 +33,7 @@ export const Extension = <$Name extends string>(
     },
     properties(properties) {
       if (typeof properties === `function`) {
-        // todo
-        // extension.propertiesComputed.push(properties)
+        extension.propertiesComputed.push(properties)
       } else {
         Object.assign(extension.propertiesStatic, properties)
       }
@@ -71,7 +70,7 @@ export interface Extension<
   requestInterceptor?: RequestPipeline.BaseInterceptor
   noExpandResultDataType?: $NoExpandResultDataType
   propertiesStatic: $PropertiesStatic
-  propertiesComputed: Array<<$Context extends Context>(parameters: ConstructorParameters<$Context>) => object>
+  propertiesComputed: ReadonlyArray<<$Context extends Context>(parameters: ConstructorParameters<$Context>) => object>
   // todo support for multiple transports in one extension
   transport?: $Transport
   // typeHooks: $TypeHooks

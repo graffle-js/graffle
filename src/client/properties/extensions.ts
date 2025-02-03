@@ -60,15 +60,20 @@ export const contextFragmentExtensionsAdd = <
     }),
   }
 
-  const propertiesFragment = contextFragmentPropertiesAdd(context, extension.propertiesStatic)
-  if (propertiesFragment) {
-    Object.assign(fragment, propertiesFragment)
-  }
   if (extension.transport) {
     Object.assign(fragment, contextFragmentTransportsAdd(context, extension.transport))
   }
   if (extension.requestInterceptor) {
     Object.assign(fragment, contextFragmentRequestInterceptorsAdd(context, extension.requestInterceptor))
+  }
+  if (extension.propertiesStatic || extension.propertiesComputed) {
+    const propertiesFragment = contextFragmentPropertiesAdd(context, {
+      static: extension.propertiesStatic,
+      computed: extension.propertiesComputed,
+    })
+    if (propertiesFragment) {
+      Object.assign(fragment, propertiesFragment)
+    }
   }
 
   return fragment as any
