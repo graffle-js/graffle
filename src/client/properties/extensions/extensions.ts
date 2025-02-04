@@ -1,12 +1,12 @@
 import type { EmptyObject, Writable } from 'type-fest'
-import type { Extension } from '../../extension/$.js'
-import type { Anyware } from '../../lib/anyware/_namespace.js'
-import { type EmptyArray, emptyArray, emptyObject, type UnknownOrAnyToNever } from '../../lib/prelude.js'
-import { type Context } from '../../types/context.js'
-import type { Transport } from '../../types/Transport.js'
-import { type ContextFragmentAddProperties, contextFragmentPropertiesAdd } from './properties.js'
-import { contextFragmentRequestInterceptorsAdd } from './requestInterceptors.js'
-import { type ContextAddTransportOptional, contextFragmentTransportsAdd } from './transport.js'
+import type { Extension } from '../../../extension/$.js'
+import type { Anyware } from '../../../lib/anyware/_namespace.js'
+import { type EmptyArray, emptyArray, emptyObject, type UnknownOrAnyToNever } from '../../../lib/prelude.js'
+import { type Context } from '../../../types/context.js'
+import type { Transport } from '../../../types/Transport.js'
+import { type ContextFragmentAddProperties, contextFragmentPropertiesAdd } from '../properties/properties.js'
+import { contextFragmentRequestInterceptorsAdd } from '../requestInterceptors.js'
+import { type ContextAddTransportOptional, contextFragmentTransportsAdd } from '../transport.js'
 
 // todo: type to use multiple to reduce type instantiation
 // useful for presets
@@ -18,7 +18,7 @@ export type ContextAddOneExtension<
 > = {
       [_ in keyof $Context]:
         _ extends 'properties' ?
-          ContextFragmentAddProperties<$Context, $Extension['propertiesStatic']> :
+          ContextFragmentAddProperties<$Context, $Extension['propertiesStatic'], $Extension['propertiesComputedTypeFunctions$']> :
           // $Extension['propertiesStatic']:
         _ extends 'requestPipelineDefinition' ?
           $Extension['transport'] extends Transport ?

@@ -1,4 +1,7 @@
-import { __, type ExcludeUndefined, type ObjectMergeShallow } from '../lib/prelude.js'
+import type { WritableDeep } from 'type-fest'
+import type { Configuration } from '../client/configuration/__.js'
+import type { Properties } from '../client/properties/properties/__.js'
+import { __, __undefinedAs, type ObjectMergeShallow } from '../lib/prelude.js'
 import type { RequestPipeline } from '../requestPipeline/__.js'
 import type { Configurator } from '../types/configurator.js'
 import type { Context } from '../types/context.js'
@@ -7,18 +10,54 @@ import type { ConstructorParameters } from './constructor.js'
 import type * as _re_export from './properties.js'
 
 // ------------------------------------------------------------
+// Type
+// ------------------------------------------------------------
+
+export interface Extension<
+  $Name extends string = string,
+  $Configurator extends undefined | Configurator = undefined | Configurator,
+  $NoExpandResultDataType = unknown,
+  $PropertiesStatic extends object = object,
+  $PropertiesComputersTypeFunctions extends ReadonlyArray<Properties.PropertiesComputerTypeFunction> = ReadonlyArray<
+    Properties.PropertiesComputerTypeFunction
+  >,
+  $Transport extends Transport | undefined = Transport | undefined,
+> // $TypeHooks extends TypeHooks = TypeHooks,
+{
+  name: $Name
+  configurator?: $Configurator
+  constructor?: (parameters: ConstructorParameters) => {
+    requestInterceptor?: RequestPipeline.BaseInterceptor
+    properties?: object
+  }
+  requestInterceptor?: RequestPipeline.BaseInterceptor
+  noExpandResultDataType?: $NoExpandResultDataType
+  propertiesStatic: $PropertiesStatic
+  propertiesComputed: ReadonlyArray<Properties.PropertiesComputer>
+  propertiesComputedTypeFunctions$: $PropertiesComputersTypeFunctions
+  // todo support for multiple transports in one extension
+  transport?: $Transport
+  // typeHooks: $TypeHooks
+}
+
+const extensionTypeOnlyProperties = __undefinedAs<{
+  propertiesComputedTypeFunctions$: []
+}>()
+
+// ------------------------------------------------------------
 // Constructor
 // ------------------------------------------------------------
 
 export const Extension = <$Name extends string>(
   name: $Name,
-): Extension.Builder<Extension<$Name, undefined, undefined, {}, undefined>> => {
-  const extension: Extension = {
+): Extension.Builder<Extension<$Name, undefined, undefined, {}, [], undefined>> => {
+  const extension: WritableDeep<Extension> = {
     name,
     propertiesStatic: {},
     propertiesComputed: [],
+    ...extensionTypeOnlyProperties,
   } as any
-  const builder: Extension.Builder<Extension<$Name, undefined, undefined, {}, undefined>> = {
+  const builder: Extension.Builder<Extension<$Name, undefined, undefined, {}, [], undefined>> = {
     transport(transportTypeInput: Transport | Transport.Builder<Transport>) {
       const transport = Transport.$.isBuilder(transportTypeInput) ? transportTypeInput.return() : transportTypeInput
       extension.transport = transport
@@ -37,43 +76,14 @@ export const Extension = <$Name extends string>(
       } else {
         Object.assign(extension.propertiesStatic, properties)
       }
-      // console.log(2, extension, properties)
       return builder
     },
     return() {
-      // console.log(1, extension)
       return () => extension
     },
   }
 
   return builder as any
-}
-
-// ------------------------------------------------------------
-// Data Type
-// ------------------------------------------------------------
-
-export interface Extension<
-  $Name extends string = string,
-  $Configurator extends undefined | Configurator = undefined | Configurator,
-  $NoExpandResultDataType = unknown,
-  $PropertiesStatic extends object = object,
-  $Transport extends Transport | undefined = Transport | undefined,
-> // $TypeHooks extends TypeHooks = TypeHooks,
-{
-  name: $Name
-  configurator?: $Configurator
-  constructor?: (parameters: ConstructorParameters) => {
-    requestInterceptor?: RequestPipeline.BaseInterceptor
-    properties?: object
-  }
-  requestInterceptor?: RequestPipeline.BaseInterceptor
-  noExpandResultDataType?: $NoExpandResultDataType
-  propertiesStatic: $PropertiesStatic
-  propertiesComputed: ReadonlyArray<<$Context extends Context>(parameters: ConstructorParameters<$Context>) => object>
-  // todo support for multiple transports in one extension
-  transport?: $Transport
-  // typeHooks: $TypeHooks
 }
 
 export namespace Extension {
@@ -101,6 +111,7 @@ export namespace Extension {
     <$Transport extends Transport>(transport: $Transport | Transport.Builder<$Transport>): Builder<{
       propertiesStatic: $Extension['propertiesStatic']
       propertiesComputed: $Extension['propertiesComputed']
+      propertiesComputedTypeFunctions$: $Extension['propertiesComputedTypeFunctions$']
       constructor: $Extension['constructor']
       requestInterceptor: $Extension['requestInterceptor']
       name: $Extension['name']
@@ -119,6 +130,7 @@ export namespace Extension {
     ): Builder<{
       propertiesStatic: $Extension['propertiesStatic']
       propertiesComputed: $Extension['propertiesComputed']
+      propertiesComputedTypeFunctions$: $Extension['propertiesComputedTypeFunctions$']
       constructor: $Extension['constructor']
       requestInterceptor: $Extension['requestInterceptor']
       name: $Extension['name']
@@ -131,7 +143,12 @@ export namespace Extension {
   // dprint-ignore
   export interface Builder<
     $Extension extends Extension,
-    _$ConfigurationNormalized extends object = undefined extends $Extension['configurator'] ? never : ExcludeUndefined<$Extension['configurator']>['normalized']
+    _$ConfigurationNormalized extends object =
+      undefined extends $Extension['configurator']
+        ? Context['configuration']
+        : Context['configuration'] & {
+          [_ in $Extension['name']]: Configuration.ConfigurationNamespace<Exclude<$Extension['configurator'], undefined>>
+        }
   > {
 
     /**
@@ -142,6 +159,7 @@ export namespace Extension {
     ) => Builder<{
       propertiesStatic: $Extension['propertiesStatic']
       propertiesComputed: $Extension['propertiesComputed']
+      propertiesComputedTypeFunctions$: $Extension['propertiesComputedTypeFunctions$']
       constructor: $Extension['constructor']
       requestInterceptor: $Extension['requestInterceptor']
       name: $Extension['name']
@@ -176,6 +194,7 @@ export namespace Extension {
     ) => Builder<{
       propertiesStatic: $Extension['propertiesStatic']
       propertiesComputed: $Extension['propertiesComputed']
+      propertiesComputedTypeFunctions$: $Extension['propertiesComputedTypeFunctions$']
       constructor: $Extension['constructor']
       requestInterceptor: $Extension['requestInterceptor']
       name: $Extension['name']
@@ -191,6 +210,7 @@ export namespace Extension {
     ) => Builder<{
       propertiesStatic: $Extension['propertiesStatic']
       propertiesComputed: $Extension['propertiesComputed']
+      propertiesComputedTypeFunctions$: $Extension['propertiesComputedTypeFunctions$']
       constructor: $Extension['constructor']
       name: $Extension['name']
       configurator: $Extension['configurator']
@@ -203,9 +223,8 @@ export namespace Extension {
     /**
      * todo
      */
-    // todo: support static properties too.
     properties: <$Properties extends object>(
-      constructor: $Properties | ((parameters: ConstructorParameters<_$ConfigurationNormalized>) => $Properties)
+      constructor: $Properties | Properties.PropertiesComputer<Context, $Properties, _$ConfigurationNormalized>
     ) => Builder<{
       propertiesComputed: $Extension['propertiesComputed']
       constructor: $Extension['constructor']
@@ -215,7 +234,14 @@ export namespace Extension {
       noExpandResultDataType: $Extension['noExpandResultDataType']
       transport: $Extension['transport']
       // update:
-      propertiesStatic: ObjectMergeShallow<$Extension['propertiesStatic'], $Properties>
+      propertiesStatic:
+        $Properties extends Properties.PropertiesComputerTypeFunction
+          ? $Extension['propertiesStatic']
+          : ObjectMergeShallow<$Extension['propertiesStatic'], $Properties>
+      propertiesComputedTypeFunctions$:
+        $Properties extends Properties.PropertiesComputerTypeFunction
+          ? [$Properties]
+          : $Extension['propertiesComputedTypeFunctions$']
     }>
     
     
@@ -245,6 +271,7 @@ export namespace Extension {
     typeOfNoExpandResultDataType: <$DataType>() => Builder<{
       propertiesStatic: $Extension['propertiesStatic']
       propertiesComputed: $Extension['propertiesComputed']
+      propertiesComputedTypeFunctions$: $Extension['propertiesComputedTypeFunctions$']
       constructor: $Extension['constructor']
       requestInterceptor: $Extension['requestInterceptor']
       name: $Extension['name']

@@ -2,17 +2,17 @@ import {
   type ContextFragmentConfiguration,
   type ContextFragmentConfigurationEmpty,
   contextFragmentConfigurationEmpty,
-} from '../client/properties/configuration.js'
+} from '../client/configuration/configuration.js'
 import {
   type ContextFragmentExtensions,
   type ContextFragmentExtensionsEmpty,
   contextFragmentExtensionsEmpty,
-} from '../client/properties/extensions.js'
+} from '../client/properties/extensions/extensions.js'
 import {
   type ContextFragmentProperties,
   type ContextFragmentPropertiesEmpty,
   contextFragmentPropertiesEmpty,
-} from '../client/properties/properties.js'
+} from '../client/properties/properties/properties.js'
 import {
   type ContextFragmentRequestInterceptors,
   contextFragmentRequestInterceptorsEmpty,

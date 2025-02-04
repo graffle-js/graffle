@@ -1,7 +1,7 @@
 import { describe, expect, expectTypeOf } from 'vitest'
-import type { g0 } from '../../../tests/_/helpers.js'
-import { test } from '../../../tests/_/helpers.js'
-import { Context } from '../../types/context.js'
+import type { g0 } from '../../../../tests/_/helpers.js'
+import { test } from '../../../../tests/_/helpers.js'
+import { Context } from '../../../types/context.js'
 import { createPropertiesComputer, type PropertiesComputerTypeFunction } from './properties.js'
 
 const propertiesStatic1 = { foo: `bar` }

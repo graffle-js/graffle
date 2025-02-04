@@ -44,7 +44,7 @@ type SchemaTarget = string | URL | GraphQLSchema
  * const data = await graffle.introspect()
  * ```
  */
-export const Introspection = Extension(`Introspection`)
+export const Introspection = Extension(`introspection`)
   .configurator(
     Configurator()
       .input<ConfigurationInput>()
@@ -66,12 +66,12 @@ export const Introspection = Extension(`Introspection`)
       introspect: async () => {
         // todo: fixme: use config.schema!! Currently only looked at in the generator!
         const c = client.with({ output: { envelope: false, errors: { execution: `return` } } })
-        let introspectionQueryDocument = getIntrospectionQuery(configuration.options)
+        let introspectionQueryDocument = getIntrospectionQuery(configuration.introspection.current.options)
         // @ts-expect-error fixme
         const result = await c.gql(introspectionQueryDocument).send()
         const featuresDropped: string[] = []
         const enabledKnownPotentiallyUnsupportedFeatures = knownPotentiallyUnsupportedFeatures.filter(_ =>
-          configuration.options[_] !== false
+          configuration.introspection.current.options[_] !== false
         )
 
         // Try to find a working introspection query.
@@ -79,7 +79,7 @@ export const Introspection = Extension(`Introspection`)
           for (const feature of enabledKnownPotentiallyUnsupportedFeatures) {
             featuresDropped.push(feature)
             introspectionQueryDocument = getIntrospectionQuery({
-              ...configuration.options,
+              ...configuration.introspection.current.options,
               [feature]: false,
             })
             // @ts-expect-error fixme

@@ -65,37 +65,29 @@ export type ContextFragmentConfigurationConfigure<
 // Context Fragment
 // ------------------------------------------------------------
 
+export interface ConfigurationNamespace<$Configurator extends Configurator> {
+  readonly configurator: $Configurator
+  readonly current: $Configurator['normalizedIncremental']
+}
+
+export interface ConfigurationNamespaceEmpty<$Configurator extends Configurator> {
+  readonly configurator: $Configurator
+  readonly current: $Configurator['default']
+}
+
 export interface ContextFragmentConfiguration {
   readonly configuration: {
-    readonly output: {
-      readonly configurator: Configurators.Output.OutputConfigurator
-      readonly current: Configurators.Output.OutputConfigurator['normalizedIncremental']
-    }
-    readonly check: {
-      readonly configurator: Configurators.Check.CheckConfigurator
-      readonly current: Configurators.Check.CheckConfigurator['normalizedIncremental']
-    }
-    readonly schema: {
-      readonly configurator: Configurators.Schema.SchemaConfigurator
-      readonly current: Configurators.Schema.SchemaConfigurator['normalizedIncremental']
-    }
+    readonly output: ConfigurationNamespace<Configurators.Output.OutputConfigurator>
+    readonly check: ConfigurationNamespace<Configurators.Check.CheckConfigurator>
+    readonly schema: ConfigurationNamespace<Configurators.Schema.SchemaConfigurator>
   }
 }
 
 export interface ContextFragmentConfigurationEmpty extends ContextFragmentConfiguration {
   readonly configuration: {
-    readonly output: {
-      readonly configurator: Configurators.Output.OutputConfigurator
-      readonly current: Configurators.Output.OutputConfigurator['default']
-    }
-    readonly check: {
-      readonly configurator: Configurators.Check.CheckConfigurator
-      readonly current: Configurators.Check.CheckConfigurator['default']
-    }
-    readonly schema: {
-      readonly configurator: Configurators.Schema.SchemaConfigurator
-      readonly current: Configurators.Schema.SchemaConfigurator['default']
-    }
+    readonly output: ConfigurationNamespaceEmpty<Configurators.Output.OutputConfigurator>
+    readonly check: ConfigurationNamespaceEmpty<Configurators.Check.CheckConfigurator>
+    readonly schema: ConfigurationNamespaceEmpty<Configurators.Schema.SchemaConfigurator>
   }
 }
 

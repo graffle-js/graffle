@@ -6,9 +6,10 @@ import {
   emptyObject,
   isObjectEmpty,
   type ObjectMergeShallow,
-} from '../../lib/prelude.js'
-import type { Context } from '../../types/context.js'
-import type { Client, Client_justContext } from '../client.js'
+} from '../../../lib/prelude.js'
+import type { Configurator } from '../../../types/configurator.js'
+import type { Context } from '../../../types/context.js'
+import type { Client, Client_justContext } from '../../client.js'
 
 // ------------------------------------------------------------
 // Method
@@ -54,8 +55,13 @@ export type RunPropertiesComputers<
 ] ? RunPropertiesComputers<$Context, $Tail, $Acc & ($Head & { context: $Context })['return']>
   : $Acc
 
-export type PropertiesComputer<$Context extends Context = Context, $Properties extends Properties = Properties> = (
+export type PropertiesComputer<
+  $Context extends Context = Context,
+  $Properties extends Properties = Properties,
+  $Configuration extends Configurator.Configuration = $Context['configuration'],
+> = (
   parameters: {
+    configuration: $Configuration
     context: $Context
     client: Client<$Context>
   },
@@ -67,6 +73,7 @@ export const createPropertiesComputer = <
 <
   $PropertiesComputer extends (
     parameters: {
+      configuration: $Client['_']['configuration']
       context: $Client['_']
       client: $Client
     },

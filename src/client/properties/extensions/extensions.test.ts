@@ -1,9 +1,9 @@
 import { describe, expect, expectTypeOf } from 'vitest'
-import { ATransport, ATransportBuilder } from '../../../tests/_/fixtures/transports.js'
-import { test } from '../../../tests/_/helpers.js'
-import { Extension } from '../../extension/$.js'
-import { createPropertiesComputer } from './properties.js'
-import { createInterceptor } from './requestInterceptors.js'
+import { ATransport, ATransportBuilder } from '../../../../tests/_/fixtures/transports.js'
+import { test } from '../../../../tests/_/helpers.js'
+import { Extension } from '../../../extension/$.js'
+import { createPropertiesComputer } from '../properties/properties.js'
+import { createInterceptor } from '../requestInterceptors.js'
 
 const AExtension = Extension(`AExtension`).return()
 type AExtension = ReturnType<typeof AExtension>
@@ -48,7 +48,7 @@ describe(`properties`, () => {
     expectTypeOf(g1a._.properties).toEqualTypeOf(g1b._.properties)
   })
   test(`can be added (computed)`, ({ g0 }) => {
-    const computer = createPropertiesComputer<typeof g0>()((parameters) => ({ foo: parameters.context.configuration }))
+    const computer = createPropertiesComputer()((parameters) => ({ foo: parameters.context.configuration }))
     const BExtension = Extension(`BExtension`).properties(computer).return()
     const g1a = g0.use(BExtension())
     const g1b = g0.properties(computer)

@@ -6,17 +6,17 @@ import type { TypeFunction } from '../lib/type-function/__.js'
 import type { RequestPipeline } from '../requestPipeline/RequestPipeline.js'
 import type { ConfigurationIndex } from '../types/ConfigurationIndex.js'
 import { Context, type ContextFragment, contextMergeFragment } from '../types/context.js'
-import { handleOutput } from './handleOutput.js'
 import {
   type ContextFragmentConfigurationConfigure,
   contextFragmentConfigurationConfigure,
-} from './properties/configuration.js'
-import { type ContextAddOneExtension, contextFragmentExtensionsAdd } from './properties/extensions.js'
+} from './configuration/configuration.js'
+import { handleOutput } from './handleOutput.js'
+import { type ContextAddOneExtension, contextFragmentExtensionsAdd } from './properties/extensions/extensions.js'
 import {
   type AddPropertiesMethod,
   contextFragmentPropertiesAdd,
   type RunPropertiesComputers,
-} from './properties/properties.js'
+} from './properties/properties/properties.js'
 import { GqlMethod } from './properties/request/request.js'
 import { SendMethod } from './properties/request/send.js'
 import { contextFragmentRequestInterceptorsAdd } from './properties/requestInterceptors.js'
