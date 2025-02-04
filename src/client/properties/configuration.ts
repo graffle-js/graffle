@@ -82,7 +82,24 @@ export interface ContextFragmentConfiguration {
   }
 }
 
-export const contextFragmentConfigurationEmpty: ContextFragmentConfiguration = {
+export interface ContextFragmentConfigurationEmpty extends ContextFragmentConfiguration {
+  readonly configuration: {
+    readonly output: {
+      readonly configurator: Configurators.Output.OutputConfigurator
+      readonly current: Configurators.Output.OutputConfigurator['default']
+    }
+    readonly check: {
+      readonly configurator: Configurators.Check.CheckConfigurator
+      readonly current: Configurators.Check.CheckConfigurator['default']
+    }
+    readonly schema: {
+      readonly configurator: Configurators.Schema.SchemaConfigurator
+      readonly current: Configurators.Schema.SchemaConfigurator['default']
+    }
+  }
+}
+
+export const contextFragmentConfigurationEmpty: ContextFragmentConfigurationEmpty = {
   configuration: Object.freeze({
     output: Object.freeze({
       configurator: Configurators.Output.configurator,

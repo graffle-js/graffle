@@ -810,3 +810,5 @@ export type ObjectMergeShallow<
     }
     & $Object2,
 > = __NewObject
+
+export const __undefinedAs = <$Type>(): $Type => undefined as any

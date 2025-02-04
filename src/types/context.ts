@@ -1,5 +1,6 @@
 import {
   type ContextFragmentConfiguration,
+  type ContextFragmentConfigurationEmpty,
   contextFragmentConfigurationEmpty,
 } from '../client/properties/configuration.js'
 import {
@@ -57,6 +58,7 @@ export namespace Context {
       readonly extensions: ContextFragmentExtensionsEmpty['extensions']
       readonly extensionsIndex: ContextFragmentExtensionsEmpty['extensionsIndex']
       readonly scalars: ContextFragmentScalarsEmpty['scalars']
+      readonly configuration: ContextFragmentConfigurationEmpty['configuration']
       // type-level properties
       // todo merge typehooks empty from extension type here to DRY
       readonly typeHookOnRequestDocumentRootType: EmptyArray

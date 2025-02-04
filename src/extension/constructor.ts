@@ -8,5 +8,5 @@ export interface ConstructorParameters<
 > {
   configuration: $Configuration
   context: $Context
-  client: Client<$Context, {}>
+  client: Client<$Context>
 }

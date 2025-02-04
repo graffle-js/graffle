@@ -12,11 +12,15 @@ import {
   contextFragmentConfigurationConfigure,
 } from './properties/configuration.js'
 import { type ContextAddOneExtension, contextFragmentExtensionsAdd } from './properties/extensions.js'
-import { type AddPropertiesMethod, contextFragmentPropertiesAdd } from './properties/properties.js'
+import {
+  type AddPropertiesMethod,
+  contextFragmentPropertiesAdd,
+  type RunPropertiesComputers,
+} from './properties/properties.js'
 import { GqlMethod } from './properties/request/request.js'
 import { SendMethod } from './properties/request/send.js'
 import { contextFragmentRequestInterceptorsAdd } from './properties/requestInterceptors.js'
-import { contextAddScalar, ScalarMethod } from './properties/scalars.js'
+import { contextScalarsAdd, ScalarMethod } from './properties/scalars.js'
 import type { ContextFragmentTransports, ContextTransports } from './properties/transport.js'
 import {
   contextFragmentTransportsAdd,
@@ -25,9 +29,7 @@ import {
   TransportMethod,
 } from './properties/transport.js'
 
-export type ClientEmpty = Client<Context.States.Empty, {}>
-
-export type ClientGeneric = Client<Context, {}>
+export type ClientEmpty = Client<Context.States.Empty>
 
 export interface Client_justContext {
   _: Context
@@ -35,27 +37,17 @@ export interface Client_justContext {
 
 export type Client<
   $Context extends Context = Context,
-  $Extension extends object = object,
-> =
-  & ClientBase<$Context, $Extension>
-  & $Context['properties']['static']
-  & $Extension
-// & Extension.ApplyAndMergeBuilderExtensions<$Context['extensions'], $Context>
+  __ =
+    & ClientBase<$Context>
+    & $Context['properties']['static']
+    & RunPropertiesComputers<$Context>,
+> = __
 
-export interface ClientBase<
-  $Context extends Context,
-  $Extension extends object,
-> // out $ExtensionChainable extends ExtensionChainableRegistry,
-{
+export interface ClientBase<$Context extends Context> {
   _: $Context
-  // _extension: $Extension
-  // _extensionChainable: $ExtensionChainable
-  // extendWithPropertiesChainable: <
-  //   extensionChainable extends ExtensionChainable,
-  // >() => Client<$Context, $Extension, $ExtensionChainable & { [_ in extensionChainable['name']]: extensionChainable }>
-  // extendWithProperties: <
-  //   extension extends {},
-  // >(extension: extension) => Client<$Context, $Extension & extension, $ExtensionChainable>
+  /**
+   * TODO
+   */
   gql: ContextTransports.PreflightCheck<
     $Context,
     GqlMethod<$Context>
@@ -65,7 +57,7 @@ export interface ClientBase<
    */
   scalar: undefined extends $Context['configuration']['schema']['current']['map']
     ? ScalarMethod.TypeErrorMissingSchemaMap
-    : ScalarMethod<$Context, $Extension>
+    : ScalarMethod<$Context>
   /**
    * TODO
    */
@@ -78,20 +70,18 @@ export interface ClientBase<
    * TODO
    */
   use: <extension extends Extension>(extension: extension) => Client<
-    ContextAddOneExtension<$Context, extension>,
-    $Extension
+    ContextAddOneExtension<$Context, extension>
   >
   anyware: (
     interceptor: Anyware.Interceptor.InferFromPipeline<
       Anyware.Pipeline.InferFromDefinition<$Context['requestPipelineDefinition']>
     >,
-  ) => Client<$Context, $Extension>
+  ) => Client<$Context>
   with: <
     const configurationInput extends CalcConfigurationInputForContext<$Context>,
   >(configurationInput: configurationInput) => Client<
     // @ts-expect-error Non-index type being used
-    ContextFragmentConfigurationConfigure<$Context, configurationInput>,
-    $Extension
+    ContextFragmentConfigurationConfigure<$Context, configurationInput>
   >
 }
 
@@ -108,8 +98,7 @@ export type Create<$Context extends Context = Context.States.Empty> = <
   const configurationInput extends CalcConfigurationInputForContext<$Context>,
 >(configurationInput?: configurationInput) => Client<
   // @ts-expect-error: Is missing standard configurators
-  ContextFragmentConfigurationConfigure<$Context, configurationInput>,
-  {}
+  ContextFragmentConfigurationConfigure<$Context, configurationInput>
 >
 
 export const createConstructorWithContext = <$Context extends Context>(
@@ -130,7 +119,7 @@ export const create: Create = createConstructorWithContext(Context.States.empty)
 
 export const createWithContext = <$Context extends Context>(
   context: $Context,
-): Client<$Context, {}> => {
+): Client<$Context> => {
   const copy = (fragment: null | ContextFragment) => {
     if (!fragment) return client
     const newContext = contextMergeFragment(context, fragment)
@@ -138,8 +127,8 @@ export const createWithContext = <$Context extends Context>(
     return createWithContext(newContext) as any
   }
 
-  const client: Client<$Context, {}> = {
-    ...({} as Client<$Context, {}>),
+  const client: Client<$Context> = {
+    ...({} as Client<$Context>),
     _: context,
     anyware(interceptor) {
       const interceptor_ = interceptor as any as RequestPipeline.BaseInterceptor
@@ -160,7 +149,7 @@ export const createWithContext = <$Context extends Context>(
     },
     scalar: ((...args: ScalarMethod.Arguments) => {
       const scalar = ScalarMethod.normalizeArguments(args)
-      return copy(contextAddScalar(context, scalar))
+      return copy(contextScalarsAdd(context, scalar))
     }) as any,
     with(configurationInput) {
       const configurationInput_ = configurationInput as ConfigurationIndex.Input

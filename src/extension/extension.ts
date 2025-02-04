@@ -219,18 +219,18 @@ export namespace Extension {
     }>
     
     
-    typeOfProperties: <$Type extends object>() => Builder<{
-      propertiesStatic: $Extension['propertiesStatic']
-      propertiesComputed: $Extension['propertiesComputed']
-      constructor: $Extension['constructor']
-      requestInterceptor: $Extension['requestInterceptor']
-      name: $Extension['name']
-      configurator: $Extension['configurator']
-      noExpandResultDataType: $Extension['noExpandResultDataType']
-      transport: $Extension['transport']
-      // update:
-      $Properties: $Type
-    }>
+    // typeOfProperties: <$Type extends object>() => Builder<{
+    //   propertiesStatic: $Extension['propertiesStatic']
+    //   propertiesComputed: $Extension['propertiesComputed']
+    //   constructor: $Extension['constructor']
+    //   requestInterceptor: $Extension['requestInterceptor']
+    //   name: $Extension['name']
+    //   configurator: $Extension['configurator']
+    //   noExpandResultDataType: $Extension['noExpandResultDataType']
+    //   transport: $Extension['transport']
+    //   // update:
+    //   $Properties: $Type
+    // }>
     
     /**
      * Type(s) that show up in request result data which Graffle should NOT

@@ -4,6 +4,7 @@ import type { FSJetpack } from 'fs-jetpack/types.js'
 import * as Path from 'node:path'
 import type { Mock } from 'vitest'
 import { test as testBase, vi } from 'vitest'
+import type { ClientEmpty } from '../../src/client/client.js'
 import { Graffle } from '../../src/entrypoints/main.js'
 import { GraffleBare } from '../../src/entrypoints/presets/bare.js'
 import type { GraffleBasic } from '../../src/entrypoints/presets/basic.js'
@@ -41,7 +42,7 @@ export const createResponse = (body: object) =>
 
 interface Fixtures {
   fetch: Mock<(request: Request) => Promise<Response>>
-  g0: GraffleBare.Client
+  g0: ClientEmpty
   pokemonService: SchemaService
   // graffle: GraffleMinimal.Client.With<{
   //   check: { preflight: false }

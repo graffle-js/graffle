@@ -41,9 +41,7 @@ interface Properties_<$Parameters extends Extension.PropertiesTypeFunctionParame
         _ extends 'output'
           ? ThrowsifyConfig<$Parameters['context']['output']>
           : $Parameters['context'][_]
-    },
-    // todo
-    {} // this['params'][1]
+    }
   >
 }
 

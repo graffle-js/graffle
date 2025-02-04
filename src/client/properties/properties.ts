@@ -1,5 +1,5 @@
-import type { Extension } from '../../extension/$.js'
 import {
+  __undefinedAs,
   type EmptyArray,
   emptyArray,
   type EmptyObject,
@@ -8,7 +8,7 @@ import {
   type ObjectMergeShallow,
 } from '../../lib/prelude.js'
 import type { Context } from '../../types/context.js'
-import type { Client } from '../client.js'
+import type { Client, Client_justContext } from '../client.js'
 
 // ------------------------------------------------------------
 // Method
@@ -18,10 +18,13 @@ import type { Client } from '../client.js'
 export interface AddPropertiesMethod<$Context extends Context> {
   <$Properties extends Properties>(properties: $Properties | PropertiesComputer<$Context, $Properties>): Client<
     {
-      [_ in keyof $Context]: _ extends 'properties' ? ContextFragmentAddProperties<$Context, $Properties>
+      [_ in keyof $Context]: _ extends 'properties' ? ContextFragmentAddProperties<
+          $Context,
+          $Properties extends PropertiesComputerTypeFunction ? {} : $Properties,
+          $Properties extends PropertiesComputerTypeFunction ? [$Properties] : []
+        >
         : $Context[_]
-    },
-    {}
+    }
   >
 }
 
@@ -29,15 +32,37 @@ export interface AddPropertiesMethod<$Context extends Context> {
 // Helpers
 // ------------------------------------------------------------
 
-export type PropertiesComputer<$Context extends Context, $Properties extends Properties> = (
+// todo put symbol here to make unique from any possible properties object
+export interface PropertiesComputerTypeFunction {
+  context: Context
+  return: unknown
+}
+
+// export interface PropertiesComputerTypeFunctionParameters {
+//   context: Context
+//   // client: Client
+// }
+
+// todo: $Acc shallow merge
+export type RunPropertiesComputers<
+  $Context extends Context,
+  $Items extends readonly [...PropertiesComputerTypeFunction[]] = $Context['properties']['$computedTypeFunctions'],
+  $Acc extends Properties = {},
+> = $Items extends readonly [
+  infer $Head extends PropertiesComputerTypeFunction,
+  ...infer $Tail extends readonly PropertiesComputerTypeFunction[],
+] ? RunPropertiesComputers<$Context, $Tail, $Acc & ($Head & { context: $Context })['return']>
+  : $Acc
+
+export type PropertiesComputer<$Context extends Context = Context, $Properties extends Properties = Properties> = (
   parameters: {
     context: $Context
-    client: Client<$Context, {}>
+    client: Client<$Context>
   },
 ) => $Properties
 
 export const createPropertiesComputer = <
-  $Client extends { _: Context },
+  $Client extends Client_justContext,
 >() =>
 <
   $PropertiesComputer extends (
@@ -58,17 +83,17 @@ export type Properties = object
 
 export interface ContextFragmentProperties {
   readonly properties: {
+    readonly computed: ReadonlyArray<PropertiesComputer>
     readonly static: Properties
-    readonly computed: ReadonlyArray<
-      <$Context extends Context>(parameters: Extension.ConstructorParameters<$Context>) => object
-    >
+    readonly $computedTypeFunctions: ReadonlyArray<PropertiesComputerTypeFunction>
   }
 }
 
 export interface ContextFragmentPropertiesEmpty extends ContextFragmentProperties {
   readonly properties: {
+    readonly computed: ReadonlyArray<PropertiesComputer>
     readonly static: EmptyObject
-    readonly computed: EmptyArray
+    readonly $computedTypeFunctions: EmptyArray
   }
 }
 
@@ -76,18 +101,25 @@ export const contextFragmentPropertiesEmpty: ContextFragmentPropertiesEmpty = Ob
   properties: Object.freeze({
     static: emptyObject,
     computed: emptyArray,
+    // Does not exist at value level
+    ...__undefinedAs<Pick<ContextFragmentPropertiesEmpty['properties'], '$computedTypeFunctions'>>(),
   }),
 })
 
 export type ContextFragmentAddProperties<
   $Context extends Context,
   $PropertiesStatic extends Properties,
-  __NewStaticProperties = ObjectMergeShallow<$Context['properties']['static'], $PropertiesStatic>,
-  __NewContextProperties = {
-    static: __NewStaticProperties
+  $PropertiesComputerTypeFunctions extends readonly PropertiesComputerTypeFunction[],
+  __ = {
+    static: ObjectMergeShallow<$Context['properties']['static'], $PropertiesStatic>
+    $computedTypeFunctions: readonly [
+      ...$Context['properties']['$computedTypeFunctions'],
+      ...$PropertiesComputerTypeFunctions,
+    ]
+    // passthrough
     computed: $Context['properties']['computed']
   },
-> = __NewContextProperties
+> = __
 
 // ------------------------------------------------------------
 // ContextReducer
@@ -99,7 +131,7 @@ export const contextFragmentPropertiesAdd = <$Context extends Context>(
   context: $Context,
   propertiesInput: {
     static?: Properties
-    computed?: ReadonlyArray<PropertiesComputer<Context, Properties>>
+    computed?: ReadonlyArray<PropertiesComputer>
   },
 ): null | ContextFragmentProperties => {
   const isHasStatic = propertiesInput.static && !isObjectEmpty(propertiesInput.static)

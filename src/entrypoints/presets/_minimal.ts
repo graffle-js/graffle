@@ -11,7 +11,7 @@ export type MinimalClientContext = typeof context
 
 export const create = createConstructorWithContext(context)
 
-export type Client = BaseClient<MinimalClientContext, {}>
+export type Client = BaseClient<MinimalClientContext>
 
 export namespace Client {
   export type Context = MinimalClientContext
@@ -20,7 +20,6 @@ export namespace Client {
     ConfigManager.SetKeysOptional<
       MinimalClientContext,
       $ContextNewPartial
-    >,
-    {}
+    >
   >
 }

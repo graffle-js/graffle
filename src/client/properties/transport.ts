@@ -33,8 +33,7 @@ export type TransportMethod<
         transport: transport | Transport.Builder<transport>,
         ...errors: ParameterGuardTransportAlreadyRegistered<$Context, transport>
       ) => Client<
-          ContextFragmentTransportsAddType<$Context, transport>,
-          {}
+          ContextFragmentTransportsAddType<$Context, transport>
         >
     )
 & ($Context['transports'] extends ContextTransportsNonEmpty
@@ -50,7 +49,7 @@ export type TransportMethod<
       >
         (configurationInput: configurationInput):
           _IsChanged extends false
-            ? Client<$Context, {}> // todo: access to current client type?
+            ? Client<$Context> // todo: access to current client type?
             : Client<
                 {
                   [_ in keyof $Context]:
@@ -71,8 +70,7 @@ export type TransportMethod<
                             }
                         }
                       : $Context[_]
-                },
-                {}
+                }
               >
       /**
        * Set the current Transport, selected from amongst the registered ones, and optionally change its configuration.
@@ -90,7 +88,7 @@ export type TransportMethod<
       >
         (name: name, configurationInput?: configurationInput):
           _IsChanged extends false
-            ? Client<$Context, {}> // todo: access to current client type?
+            ? Client<$Context> // todo: access to current client type?
             : Client<
                 {
                   [_ in keyof $Context]:
@@ -113,8 +111,7 @@ export type TransportMethod<
                             : $Context['transports']['configurations']
                         }
                       : $Context[_]
-                },
-                {}
+                }
               >
     }
   : unknown)
