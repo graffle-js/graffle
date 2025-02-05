@@ -1,27 +1,19 @@
 import type { Extension } from '../extension/$.js'
 import { Anyware } from '../lib/anyware/_namespace.js'
 import { getOperationType } from '../lib/grafaid/document.js'
-import type { ObjectMergeShallow } from '../lib/prelude.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
 import type { RequestPipeline } from '../requestPipeline/RequestPipeline.js'
 import type { ConfigurationIndex } from '../types/ConfigurationIndex.js'
 import { Context, type ContextFragment, contextMergeFragment } from '../types/context.js'
-import {
-  type ContextFragmentConfigurationConfigure,
-  contextFragmentConfigurationConfigure,
-} from './configuration/configuration.js'
 import { handleOutput } from './handleOutput.js'
+import { Configuration } from './properties/configuration/__.js'
 import { type ContextAddOneExtension, contextFragmentExtensionsAdd } from './properties/extensions/extensions.js'
-import {
-  type AddPropertiesMethod,
-  contextFragmentPropertiesAdd,
-  type RunPropertiesComputers,
-} from './properties/properties/properties.js'
+import { Properties } from './properties/properties/__.js'
 import { GqlMethod } from './properties/request/request.js'
 import { SendMethod } from './properties/request/send.js'
 import { contextFragmentRequestInterceptorsAdd } from './properties/requestInterceptors.js'
 import { contextScalarsAdd, ScalarMethod } from './properties/scalars.js'
-import type { ContextFragmentTransports, ContextTransports } from './properties/transport.js'
+import type { ContextTransports } from './properties/transport.js'
 import {
   contextFragmentTransportsAdd,
   contextFragmentTransportsConfigureCurrent,
@@ -40,7 +32,7 @@ export type Client<
   __ =
     & ClientBase<$Context>
     & $Context['properties']['static']
-    & RunPropertiesComputers<$Context>,
+    & Properties.RunPropertiesComputers<$Context>,
 > = __
 
 export interface ClientBase<$Context extends Context> {
@@ -65,7 +57,7 @@ export interface ClientBase<$Context extends Context> {
   /**
    * TODO
    */
-  properties: AddPropertiesMethod<$Context>
+  properties: Properties.AddPropertiesMethod<$Context>
   /**
    * TODO
    */
@@ -109,7 +101,7 @@ export const createConstructorWithContext = <$Context extends Context>(
   const newContext = configurationInput_
     ? contextMergeFragment(
       context,
-      contextFragmentConfigurationConfigure(context, configurationInput_),
+      Configuration.contextFragmentConfigurationConfigure(context, configurationInput_),
     )
     : context
   return createWithContext(newContext) as any
@@ -142,7 +134,7 @@ export const createWithContext = <$Context extends Context>(
       const computed = isComputed
         ? [properties]
         : undefined
-      return copy(contextFragmentPropertiesAdd(context, { static: static_, computed }))
+      return copy(Properties.contextFragmentPropertiesAdd(context, { static: static_, computed }))
     },
     use(extension) {
       return copy(contextFragmentExtensionsAdd(context, extension))
@@ -153,7 +145,7 @@ export const createWithContext = <$Context extends Context>(
     }) as any,
     with(configurationInput) {
       const configurationInput_ = configurationInput as ConfigurationIndex.Input
-      return copy(contextFragmentConfigurationConfigure(context, configurationInput_))
+      return copy(Configuration.contextFragmentConfigurationConfigure(context, configurationInput_))
     },
     transport: ((...args: TransportMethod.Arguments) => {
       const input = TransportMethod.normalizeArguments(args)
@@ -218,6 +210,7 @@ export const createWithContext = <$Context extends Context>(
     Object.assign(
       client,
       propertiesComputer({
+        configuration: context.configuration,
         context,
         client,
       }),
@@ -226,15 +219,16 @@ export const createWithContext = <$Context extends Context>(
 
   // todo: access computed properties from context
   context.extensions.forEach(_ => {
-    const configurationIndex = context.configuration as ConfigurationIndex
-    const configurationIndexEntry = configurationIndex[_.name]
-    if (!configurationIndexEntry && _.configurator) throw new Error(`Configuration entry for ${_.name} not found`)
+    // const configurationIndex = context.configuration as ConfigurationIndex
+    // const configurationIndexEntry = configurationIndex[_.name]
+    // if (!configurationIndexEntry && _.configurator) throw new Error(`Configuration entry for ${_.name} not found`)
 
     const propertiesComputed = _.propertiesComputed.reduce((acc, propertiesComputer) => {
       return {
         ...acc,
         ...propertiesComputer({
-          configuration: configurationIndexEntry?.current,
+          // configuration: configurationIndexEntry?.current,
+          configuration: context.configuration,
           client,
           context,
         }),

@@ -1,18 +1,10 @@
-import {
-  type ContextFragmentConfiguration,
-  type ContextFragmentConfigurationEmpty,
-  contextFragmentConfigurationEmpty,
-} from '../client/configuration/configuration.js'
+import { Configuration } from '../client/properties/configuration/__.js'
 import {
   type ContextFragmentExtensions,
   type ContextFragmentExtensionsEmpty,
   contextFragmentExtensionsEmpty,
 } from '../client/properties/extensions/extensions.js'
-import {
-  type ContextFragmentProperties,
-  type ContextFragmentPropertiesEmpty,
-  contextFragmentPropertiesEmpty,
-} from '../client/properties/properties/properties.js'
+import { Properties } from '../client/properties/properties/__.js'
 import {
   type ContextFragmentRequestInterceptors,
   contextFragmentRequestInterceptorsEmpty,
@@ -31,9 +23,9 @@ import { type EmptyArray, type ObjectMergeShallow } from '../lib/prelude.js'
 
 export interface Context
   extends
-    ContextFragmentConfiguration,
+    Configuration.ContextFragmentConfiguration,
     ContextFragmentTransports,
-    ContextFragmentProperties,
+    Properties.ContextFragmentProperties,
     ContextFragmentRequestInterceptors,
     ContextFragmentExtensions,
     ContextFragmentScalars
@@ -52,13 +44,13 @@ export interface Context
 export namespace Context {
   export namespace States {
     export interface Empty extends Context {
-      readonly properties: ContextFragmentPropertiesEmpty['properties']
+      readonly properties: Properties.ContextFragmentPropertiesEmpty['properties']
       readonly transports: ContextFragmentTransportsEmpty['transports']
       readonly requestPipelineDefinition: ContextFragmentTransportsEmpty['requestPipelineDefinition']
       readonly extensions: ContextFragmentExtensionsEmpty['extensions']
       readonly extensionsIndex: ContextFragmentExtensionsEmpty['extensionsIndex']
       readonly scalars: ContextFragmentScalarsEmpty['scalars']
-      readonly configuration: ContextFragmentConfigurationEmpty['configuration']
+      readonly configuration: Configuration.ContextFragmentConfigurationEmpty['configuration']
       // type-level properties
       // todo merge typehooks empty from extension type here to DRY
       readonly typeHookOnRequestDocumentRootType: EmptyArray
@@ -67,12 +59,12 @@ export namespace Context {
     }
 
     export const empty: Empty = Object.freeze({
-      ...contextFragmentPropertiesEmpty,
+      ...Properties.contextFragmentPropertiesEmpty,
       ...contextFragmentTransportsEmpty,
       ...contextFragmentRequestInterceptorsEmpty,
       ...contextFragmentExtensionsEmpty,
       ...contextFragmentScalarsEmpty,
-      ...contextFragmentConfigurationEmpty,
+      ...Configuration.contextFragmentConfigurationEmpty,
       typeHookOnRequestDocumentRootType: null as any,
       typeHookOnRequestResult: null as any,
       typeHookRequestResultDataTypes: null as never,
