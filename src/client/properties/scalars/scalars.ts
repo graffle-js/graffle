@@ -1,7 +1,7 @@
-import { type Context } from '../../types/context.js'
-import type { GlobalRegistry } from '../../types/GlobalRegistry/GlobalRegistry.js'
-import { Schema } from '../../types/Schema/__.js'
-import type { Client } from '../client.js'
+import { type Context } from '../../../types/context.js'
+import type { GlobalRegistry } from '../../../types/GlobalRegistry/GlobalRegistry.js'
+import { Schema } from '../../../types/Schema/__.js'
+import type { Client } from '../../client.js'
 
 // ------------------------------------------------------------
 // Method

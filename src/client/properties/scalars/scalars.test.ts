@@ -1,9 +1,9 @@
 import { expect, expectTypeOf } from 'vitest'
-import { AScalar, BScalar } from '../../../tests/_/fixtures/scalars.js'
-import { g0, test } from '../../../tests/_/helpers.js'
-import { Context, type GlobalRegistry } from '../../entrypoints/utilities-for-generated.js'
-import type { Schema } from '../../types/Schema/__.js'
-import type { SchemaDrivenDataMap } from '../../types/SchemaDrivenDataMap/__.js'
+import { AScalar, BScalar } from '../../../../tests/_/fixtures/scalars.js'
+import { g0, test } from '../../../../tests/_/helpers.js'
+import { Context, type GlobalRegistry } from '../../../entrypoints/utilities-for-generated.js'
+import type { Schema } from '../../../types/Schema/__.js'
+import type { SchemaDrivenDataMap } from '../../../types/SchemaDrivenDataMap/__.js'
 import type { ScalarMethod } from './scalars.js'
 
 declare global {
@@ -34,7 +34,7 @@ test(`method not available when no schema map `, ({ g0 }) => {
 })
 
 test(`method is available when there is a schema map `, () => {
-  expectTypeOf(g1.scalar).toMatchTypeOf<ScalarMethod<Context, {}>>()
+  expectTypeOf(g1.scalar).toMatchTypeOf<ScalarMethod<Context>>()
 })
 
 test(`can pass an inline scalar definition`, () => {
@@ -59,6 +59,7 @@ test(`can pass a scalar definition`, () => {
 })
 
 test(`scalar name must match a scalar from the schema`, () => {
+  g1.scalar(``, {} as any)
   // @ts-expect-error
   g1.scalar(`B`, {} as any)
   // @ts-expect-error

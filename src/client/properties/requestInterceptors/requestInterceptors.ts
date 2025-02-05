@@ -1,8 +1,8 @@
-import type { Anyware } from '../../lib/anyware/_namespace.js'
-import { emptyArray } from '../../lib/prelude.js'
-import type { RequestPipeline } from '../../requestPipeline/RequestPipeline.js'
-import type { Context } from '../../types/context.js'
-import type { Client_justContext } from '../client.js'
+import type { Anyware } from '../../../lib/anyware/_namespace.js'
+import { emptyArray } from '../../../lib/prelude.js'
+import type { RequestPipeline } from '../../../requestPipeline/RequestPipeline.js'
+import type { Context } from '../../../types/context.js'
+import type { Client_justContext } from '../../client.js'
 
 // ------------------------------------------------------------
 // Context Fragment

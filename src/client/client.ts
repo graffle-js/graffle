@@ -11,15 +11,9 @@ import { type ContextAddOneExtension, contextFragmentExtensionsAdd } from './pro
 import { Properties } from './properties/properties/__.js'
 import { GqlMethod } from './properties/request/request.js'
 import { SendMethod } from './properties/request/send.js'
-import { contextFragmentRequestInterceptorsAdd } from './properties/requestInterceptors.js'
-import { contextScalarsAdd, ScalarMethod } from './properties/scalars.js'
-import type { ContextTransports } from './properties/transport.js'
-import {
-  contextFragmentTransportsAdd,
-  contextFragmentTransportsConfigureCurrent,
-  contextFragmentTransportsSetCurrent,
-  TransportMethod,
-} from './properties/transport.js'
+import { RequestInterceptors } from './properties/requestInterceptors/__.js'
+import { Scalars } from './properties/scalars/__.js'
+import { Transports } from './properties/transports/__.js'
 
 export type ClientEmpty = Client<Context.States.Empty>
 
@@ -40,7 +34,7 @@ export interface ClientBase<$Context extends Context> {
   /**
    * TODO
    */
-  gql: ContextTransports.PreflightCheck<
+  gql: Transports.ContextTransports.PreflightCheck<
     $Context,
     GqlMethod<$Context>
   >
@@ -48,12 +42,12 @@ export interface ClientBase<$Context extends Context> {
    * TODO
    */
   scalar: undefined extends $Context['configuration']['schema']['current']['map']
-    ? ScalarMethod.TypeErrorMissingSchemaMap
-    : ScalarMethod<$Context>
+    ? Scalars.ScalarMethod.TypeErrorMissingSchemaMap
+    : Scalars.ScalarMethod<$Context>
   /**
    * TODO
    */
-  transport: TransportMethod<$Context>
+  transport: Transports.TransportMethod<$Context>
   /**
    * TODO
    */
@@ -124,7 +118,7 @@ export const createWithContext = <$Context extends Context>(
     _: context,
     anyware(interceptor) {
       const interceptor_ = interceptor as any as RequestPipeline.BaseInterceptor
-      return copy(contextFragmentRequestInterceptorsAdd(context, interceptor_))
+      return copy(RequestInterceptors.contextFragmentRequestInterceptorsAdd(context, interceptor_))
     },
     properties(properties) {
       const isComputed = typeof properties === `function`
@@ -139,26 +133,26 @@ export const createWithContext = <$Context extends Context>(
     use(extension) {
       return copy(contextFragmentExtensionsAdd(context, extension))
     },
-    scalar: ((...args: ScalarMethod.Arguments) => {
-      const scalar = ScalarMethod.normalizeArguments(args)
-      return copy(contextScalarsAdd(context, scalar))
+    scalar: ((...args: Scalars.ScalarMethod.Arguments) => {
+      const scalar = Scalars.ScalarMethod.normalizeArguments(args)
+      return copy(Scalars.contextScalarsAdd(context, scalar))
     }) as any,
     with(configurationInput) {
       const configurationInput_ = configurationInput as ConfigurationIndex.Input
       return copy(Configuration.contextFragmentConfigurationConfigure(context, configurationInput_))
     },
-    transport: ((...args: TransportMethod.Arguments) => {
-      const input = TransportMethod.normalizeArguments(args)
+    transport: ((...args: Transports.TransportMethod.Arguments) => {
+      const input = Transports.TransportMethod.normalizeArguments(args)
       // let fragment2: ContextFragmentTransports
       switch (input[0]) {
-        case TransportMethod.overloadCase.configureCurrent: {
-          return copy(contextFragmentTransportsConfigureCurrent(context, input[1]))
+        case Transports.TransportMethod.overloadCase.configureCurrent: {
+          return copy(Transports.contextFragmentTransportsConfigureCurrent(context, input[1]))
         }
-        case TransportMethod.overloadCase.setCurrent: {
-          return copy(contextFragmentTransportsSetCurrent(context, input[1], input[2]))
+        case Transports.TransportMethod.overloadCase.setCurrent: {
+          return copy(Transports.contextFragmentTransportsSetCurrent(context, input[1], input[2]))
         }
-        case TransportMethod.overloadCase.addType: {
-          return copy(contextFragmentTransportsAdd(context, input[1]))
+        case Transports.TransportMethod.overloadCase.addType: {
+          return copy(Transports.contextFragmentTransportsAdd(context, input[1]))
         }
       }
     }) as any,

@@ -1,11 +1,11 @@
-import type { Anyware } from '../../lib/anyware/_namespace.js'
-import { type EmptyObject, emptyObject, isObjectEmpty, type Objekt, type StringKeyof } from '../../lib/prelude.js'
-import type { RequestPipeline } from '../../requestPipeline/RequestPipeline.js'
-import { requestPipelineBaseDefinition } from '../../requestPipeline/RequestPipeline.js'
-import type { Configurator } from '../../types/configurator.js'
-import { type Context } from '../../types/context.js'
-import { Transport } from '../../types/Transport.js'
-import type { Client } from '../client.js'
+import type { Anyware } from '../../../lib/anyware/_namespace.js'
+import { type EmptyObject, emptyObject, isObjectEmpty, type Objekt, type StringKeyof } from '../../../lib/prelude.js'
+import type { RequestPipeline } from '../../../requestPipeline/RequestPipeline.js'
+import { requestPipelineBaseDefinition } from '../../../requestPipeline/RequestPipeline.js'
+import type { Configurator } from '../../../types/configurator.js'
+import { type Context } from '../../../types/context.js'
+import { Transport } from '../../../types/Transport.js'
+import type { Client } from '../../client.js'
 
 // todo remove the JSDoc comments below. They will not be shown.
 // Look for a TS issue about conditional types + JSDoc comments. If none, create one.

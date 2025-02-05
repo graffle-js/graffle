@@ -1,9 +1,9 @@
 import { describe, expect, expectTypeOf } from 'vitest'
-import { ATransport, ATransportBuilder, BTransport } from '../../../tests/_/fixtures/transports.js'
-import { test } from '../../../tests/_/helpers.js'
-import { Context } from '../../types/context.js'
-import { create } from '../client.js'
-import { type ContextFragmentTransportsEmpty, contextFragmentTransportsEmpty } from './transport.js'
+import { ATransport, ATransportBuilder, BTransport } from '../../../../tests/_/fixtures/transports.js'
+import { test } from '../../../../tests/_/helpers.js'
+import { Context } from '../../../types/context.js'
+import { create } from '../../client.js'
+import { type ContextFragmentTransportsEmpty, contextFragmentTransportsEmpty } from './transports.js'
 
 const g1 = create().transport(ATransport)
 const g2 = create().transport(ATransport).transport(BTransport)

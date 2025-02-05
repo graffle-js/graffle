@@ -5,28 +5,20 @@ import {
   contextFragmentExtensionsEmpty,
 } from '../client/properties/extensions/extensions.js'
 import { Properties } from '../client/properties/properties/__.js'
-import {
-  type ContextFragmentRequestInterceptors,
-  contextFragmentRequestInterceptorsEmpty,
-} from '../client/properties/requestInterceptors.js'
+import { RequestInterceptors } from '../client/properties/requestInterceptors/__.js'
 import {
   type ContextFragmentScalars,
   type ContextFragmentScalarsEmpty,
   contextFragmentScalarsEmpty,
-} from '../client/properties/scalars.js'
-import {
-  type ContextFragmentTransports,
-  type ContextFragmentTransportsEmpty,
-  contextFragmentTransportsEmpty,
-} from '../client/properties/transport.js'
+} from '../client/properties/scalars/scalars.js'
+import { Transports } from '../client/properties/transports/__.js'
 import { type EmptyArray, type ObjectMergeShallow } from '../lib/prelude.js'
-
 export interface Context
   extends
     Configuration.ContextFragmentConfiguration,
-    ContextFragmentTransports,
+    Transports.ContextFragmentTransports,
     Properties.ContextFragmentProperties,
-    ContextFragmentRequestInterceptors,
+    RequestInterceptors.ContextFragmentRequestInterceptors,
     ContextFragmentExtensions,
     ContextFragmentScalars
 {
@@ -45,8 +37,8 @@ export namespace Context {
   export namespace States {
     export interface Empty extends Context {
       readonly properties: Properties.ContextFragmentPropertiesEmpty['properties']
-      readonly transports: ContextFragmentTransportsEmpty['transports']
-      readonly requestPipelineDefinition: ContextFragmentTransportsEmpty['requestPipelineDefinition']
+      readonly transports: Transports.ContextFragmentTransportsEmpty['transports']
+      readonly requestPipelineDefinition: Transports.ContextFragmentTransportsEmpty['requestPipelineDefinition']
       readonly extensions: ContextFragmentExtensionsEmpty['extensions']
       readonly extensionsIndex: ContextFragmentExtensionsEmpty['extensionsIndex']
       readonly scalars: ContextFragmentScalarsEmpty['scalars']
@@ -60,8 +52,8 @@ export namespace Context {
 
     export const empty: Empty = Object.freeze({
       ...Properties.contextFragmentPropertiesEmpty,
-      ...contextFragmentTransportsEmpty,
-      ...contextFragmentRequestInterceptorsEmpty,
+      ...Transports.contextFragmentTransportsEmpty,
+      ...RequestInterceptors.contextFragmentRequestInterceptorsEmpty,
       ...contextFragmentExtensionsEmpty,
       ...contextFragmentScalarsEmpty,
       ...Configuration.contextFragmentConfigurationEmpty,
