@@ -11,14 +11,16 @@ export type InterceptorOptions = {
 }
 
 export namespace Interceptor {
+  // dprint-ignore
   export interface InferFromPipeline<
     $Pipeline extends Pipeline = Pipeline,
   > // $Options extends InterceptorOptions = InterceptorOptions,
   {
-    (steps: Simplify<InferKeywordArguments<$Pipeline>>): Promise<
-      | $Pipeline['output']
-      | StepTriggerEnvelope
-    >
+    (steps: Simplify<InferKeywordArguments<$Pipeline>>):
+      Promise<
+        | $Pipeline['output']
+        | StepTriggerEnvelope
+      >
   }
 
   type InferKeywordArguments<
@@ -27,13 +29,12 @@ export namespace Interceptor {
     $Pipeline['steps'],
     $Pipeline['output']
   >
-
   // dprint-ignore
   type InferKeywordArguments_<
-    $Steps extends Step[],
+    $Steps extends readonly Step[],
     $PipelineOutput,
   > =
-    $Steps extends [infer $NextStep extends Step, ...infer $NextNextSteps extends Step[]]
+    $Steps extends readonly [infer $NextStep extends Step, ...infer $NextNextSteps extends readonly Step[]]
       ? & {
             [_ in $NextStep['name']]:
               StepTrigger.Infer<

@@ -5,8 +5,8 @@ import { type EmptyArray, emptyArray, emptyObject, type UnknownOrAnyToNever } fr
 import { type Context } from '../../../types/context.js'
 import type { Transport } from '../../../types/Transport.js'
 import { type ContextFragmentAddProperties, contextFragmentPropertiesAdd } from '../properties/properties.js'
-import { contextFragmentRequestInterceptorsAdd } from '../requestInterceptors.js'
-import { type ContextAddTransportOptional, contextFragmentTransportsAdd } from '../transport.js'
+import { RequestInterceptors } from '../requestInterceptors/__.js'
+import { Transports } from '../transports/__.js'
 
 // todo: type to use multiple to reduce type instantiation
 // useful for presets
@@ -16,7 +16,7 @@ export type ContextAddOneExtension<
   $Context extends Context,
   $Extension extends Extension,
 > = {
-      [_ in keyof $Context]:
+      readonly [_ in keyof $Context]:
         _ extends 'properties' ?
           ContextFragmentAddProperties<$Context, $Extension['propertiesStatic'], $Extension['propertiesComputedTypeFunctions$']> :
           // $Extension['propertiesStatic']:
@@ -31,7 +31,7 @@ export type ContextAddOneExtension<
         _ extends 'extensions' ?
           [...$Context['extensions'], $Extension] :
         _ extends 'transports' ?
-          ContextAddTransportOptional<
+          Transports.ContextAddTransportOptional<
             $Context['transports'],
             $Extension['transport']
           > :
@@ -61,10 +61,13 @@ export const contextFragmentExtensionsAdd = <
   }
 
   if (extension.transport) {
-    Object.assign(fragment, contextFragmentTransportsAdd(context, extension.transport))
+    Object.assign(fragment, Transports.contextFragmentTransportsAdd(context, extension.transport))
   }
   if (extension.requestInterceptor) {
-    Object.assign(fragment, contextFragmentRequestInterceptorsAdd(context, extension.requestInterceptor))
+    Object.assign(
+      fragment,
+      RequestInterceptors.contextFragmentRequestInterceptorsAdd(context, extension.requestInterceptor),
+    )
   }
   if (extension.propertiesStatic || extension.propertiesComputed) {
     const propertiesFragment = contextFragmentPropertiesAdd(context, {

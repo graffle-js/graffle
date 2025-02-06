@@ -7,7 +7,7 @@ import type { ConfigurationIndex } from '../types/ConfigurationIndex.js'
 import { Context, type ContextFragment, contextMergeFragment } from '../types/context.js'
 import { handleOutput } from './handleOutput.js'
 import { Configuration } from './properties/configuration/__.js'
-import { type ContextAddOneExtension, contextFragmentExtensionsAdd } from './properties/extensions/extensions.js'
+import { Extensions } from './properties/extensions/__.js'
 import { Properties } from './properties/properties/__.js'
 import { GqlMethod } from './properties/request/request.js'
 import { SendMethod } from './properties/request/send.js'
@@ -56,7 +56,7 @@ export interface ClientBase<$Context extends Context> {
    * TODO
    */
   use: <extension extends Extension>(extension: extension) => Client<
-    ContextAddOneExtension<$Context, extension>
+    Extensions.ContextAddOneExtension<$Context, extension>
   >
   anyware: (
     interceptor: Anyware.Interceptor.InferFromPipeline<
@@ -67,7 +67,7 @@ export interface ClientBase<$Context extends Context> {
     const configurationInput extends CalcConfigurationInputForContext<$Context>,
   >(configurationInput: configurationInput) => Client<
     // @ts-expect-error Non-index type being used
-    ContextFragmentConfigurationConfigure<$Context, configurationInput>
+    Configuration.ContextFragmentConfigurationConfigure<$Context, configurationInput>
   >
 }
 
@@ -84,7 +84,7 @@ export type Create<$Context extends Context = Context.States.Empty> = <
   const configurationInput extends CalcConfigurationInputForContext<$Context>,
 >(configurationInput?: configurationInput) => Client<
   // @ts-expect-error: Is missing standard configurators
-  ContextFragmentConfigurationConfigure<$Context, configurationInput>
+  Configuration.ContextFragmentConfigurationConfigure<$Context, configurationInput>
 >
 
 export const createConstructorWithContext = <$Context extends Context>(
@@ -131,7 +131,7 @@ export const createWithContext = <$Context extends Context>(
       return copy(Properties.contextFragmentPropertiesAdd(context, { static: static_, computed }))
     },
     use(extension) {
-      return copy(contextFragmentExtensionsAdd(context, extension))
+      return copy(Extensions.contextFragmentExtensionsAdd(context, extension))
     },
     scalar: ((...args: Scalars.ScalarMethod.Arguments) => {
       const scalar = Scalars.ScalarMethod.normalizeArguments(args)

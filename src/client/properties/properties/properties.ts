@@ -103,13 +103,15 @@ export interface ContextFragmentPropertiesEmpty extends ContextFragmentPropertie
     readonly $computedTypeFunctions: EmptyArray
   }
 }
+const contextFragmentPropertiesTypeLevel = __undefinedAs<
+  Pick<ContextFragmentPropertiesEmpty['properties'], '$computedTypeFunctions'>
+>()
 
 export const contextFragmentPropertiesEmpty: ContextFragmentPropertiesEmpty = Object.freeze({
   properties: Object.freeze({
     static: emptyObject,
     computed: emptyArray,
-    // Does not exist at value level
-    ...__undefinedAs<Pick<ContextFragmentPropertiesEmpty['properties'], '$computedTypeFunctions'>>(),
+    ...contextFragmentPropertiesTypeLevel,
   }),
 })
 
@@ -162,6 +164,7 @@ export const contextFragmentPropertiesAdd = <$Context extends Context>(
   const properties = {
     static: static_,
     computed,
+    ...contextFragmentPropertiesTypeLevel,
   }
   return { properties }
 }

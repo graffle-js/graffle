@@ -16,14 +16,14 @@ test(`can add a request interceptor`, () => {
 })
 
 test(`hook inputs have transportType in interceptor`, async () => {
-  let value
+  let transportType
   const g2 = g1.anyware(({ pack }) => {
     expectTypeOf(pack.input.transportType).toEqualTypeOf<ATransport['name']>()
-    value = pack.input.transportType
+    transportType = pack.input.transportType
     return pack()
   })
   await g2.gql(`query { foo }`).send()
-  expect(value).toEqual(ATransport.name)
+  expect(transportType).toEqual(ATransport.name)
 })
 
 test(`if two transports, then transportType could be either`, async () => {

@@ -238,12 +238,12 @@ export interface ContextTransports_Configurations {
 }
 
 export interface ContextFragmentTransports {
-  readonly requestPipelineDefinition: Anyware.PipelineDefinition
+  readonly requestPipelineDefinition: RequestPipeline.BaseDefinition
   readonly transports: ContextTransports
 }
 
 export interface ContextFragmentTransportsEmpty extends ContextFragmentTransports {
-  readonly requestPipelineDefinition: RequestPipeline.BaseDefinition
+  readonly requestPipelineDefinition: RequestPipeline.BaseDefinitionEmpty
   readonly transports: ContextTransportsEmpty
 }
 

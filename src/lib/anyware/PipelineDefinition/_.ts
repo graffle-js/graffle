@@ -1,6 +1,6 @@
 export * from '../Pipeline/Pipeline.js'
 export * from '../PipelineSpecification/createWithSpec.js'
-export * from '../PipelineSpecification/Spec.js'
+// export * from '../PipelineSpecification/Spec.js'
 export * from '../Result.js'
 export * from '../run/run.js'
 export * from './builder.js'

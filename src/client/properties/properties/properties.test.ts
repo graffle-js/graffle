@@ -58,7 +58,8 @@ describe(`computed properties`, () => {
     expectTypeOf(g1._.properties.$computedTypeFunctions).toEqualTypeOf<readonly []>()
     // Client extended
     expect(g1.parameters.client).toBe(g1)
-    expect(g1.parameters.context).toEqual(g1._)
+    expect(g1.parameters.context).toBe(g1._)
+    expect(g1.parameters.configuration).toBe(g1._.configuration)
   })
   test(`Are computed every time the client is copied`, ({ g0 }) => {
     const g1 = g0.properties(preflightComputer)

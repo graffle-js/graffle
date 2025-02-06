@@ -81,16 +81,16 @@ export namespace Pipeline {
     $PipelineDef extends PipelineDefinition,
     __Steps extends readonly Step[] = InferSteps<$PipelineDef>
   > = {
-    config: $PipelineDef['config']
-    steps: __Steps
-    stepsIndex: StepsIndex<
+    readonly config: $PipelineDef['config']
+    readonly steps: __Steps
+    readonly stepsIndex: StepsIndex<
       $PipelineDef['steps'][number]['name'],
       __Steps[number]
     >
-    input: __Steps extends Tuple.NonEmpty
+    readonly input: __Steps extends Tuple.NonEmpty
       ? __Steps[0]['input']
       : $PipelineDef['input']
-    output: 
+    readonly output: 
       __Steps extends Tuple.NonEmpty
         ? Awaited<Tuple.GetLastValue<__Steps>['output']>
         : $PipelineDef['input']
@@ -98,15 +98,15 @@ export namespace Pipeline {
 
   // dprint-ignore
   type InferSteps<$PipelineDef extends PipelineDefinition> =
-  InferSteps_<$PipelineDef['steps'], $PipelineDef>
+    InferSteps_<$PipelineDef['steps'], $PipelineDef>
   // dprint-ignore
   type InferSteps_<
     $StepDefs extends readonly StepDefinition[],
     $PipelineDef extends PipelineDefinition,
-  > = {
-    [$Index in keyof $StepDefs]: {
-      name: $StepDefs[$Index]['name']
-      input: Simplify<
+  > =  {
+    readonly [$Index in keyof $StepDefs]: {
+      readonly name: $StepDefs[$Index]['name']
+      readonly input: Simplify<
         Tuple.IsEmpty<$PipelineDef['overloads']> extends true
           ? $StepDefs[$Index]['input']
           : InferStepInput<
@@ -115,7 +115,7 @@ export namespace Pipeline {
               $PipelineDef['overloads'][number]
             >
       >
-      output: Simplify<
+      readonly output: Simplify<
         Tuple.IsEmpty<$PipelineDef['overloads']> extends true
           ? $StepDefs[$Index]['output']
           : InferStepOutput<
@@ -123,13 +123,13 @@ export namespace Pipeline {
               $PipelineDef['overloads'][number]
             >
       >
-      slots: Tuple.IsEmpty<$PipelineDef['overloads']> extends true
+      readonly slots: Tuple.IsEmpty<$PipelineDef['overloads']> extends true
             ? $StepDefs[$Index]['slots']
             : InferStepSlots<
                 $StepDefs[$Index],
                 $PipelineDef['overloads']
               >
-      run: IsUnknown<$StepDefs[$Index]['run']> extends true
+      readonly run: IsUnknown<$StepDefs[$Index]['run']> extends true
         ? StepRunner
         : ExcludeUndefined<$StepDefs[$Index]['run']>
     }

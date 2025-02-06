@@ -3,7 +3,7 @@ import { ATransport, ATransportBuilder } from '../../../../tests/_/fixtures/tran
 import { test } from '../../../../tests/_/helpers.js'
 import { Extension } from '../../../extension/$.js'
 import { parametersComputer, preflightComputer$Func, propertiesStatic1 } from '../properties/properties.test.js'
-import { createInterceptor } from '../requestInterceptors.js'
+import { RequestInterceptors } from '../requestInterceptors/__.js'
 
 const AExtension = Extension(`AExtension`).return()
 type AExtension = ReturnType<typeof AExtension>
@@ -49,8 +49,10 @@ describe(`properties`, () => {
     const BExtension = Extension(`BExtension`).properties(parametersComputer).return()
     const g1a = g0.use(BExtension())
     const g1b = g0.properties(parametersComputer)
-    expect(g1a.parameters).toEqual(g1b.parameters)
-    expect(g1a._.properties).toEqual(g1b._.properties)
+    expect(Object.keys(g1a.parameters.configuration)).toEqual(Object.keys(g1b.parameters.configuration))
+    expect(g1a.parameters.configuration).toBe(g1b.parameters.configuration)
+    expect(g1a.parameters.client).toBe(g1a)
+    expect(g1a.parameters.context.properties).toEqual(g1b.parameters.context.properties)
     expectTypeOf(g1a._.properties).toEqualTypeOf(g1b._.properties)
   })
   test(`can be added (computed, type level)`, ({ g0 }) => {
@@ -65,7 +67,7 @@ describe(`properties`, () => {
 
 describe(`request interceptor`, () => {
   test(`can be added`, ({ g0 }) => {
-    const i1 = createInterceptor(async ({ pack }) => {
+    const i1 = RequestInterceptors.createInterceptor(async ({ pack }) => {
       return await pack()
     })
     const BExtension = Extension(`BExtension`)

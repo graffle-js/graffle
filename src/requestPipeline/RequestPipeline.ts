@@ -39,7 +39,6 @@ export namespace RequestPipeline {
   export type Output = GraffleExecutionResultEnvelope
 
   export interface BaseDefinition extends Anyware.PipelineDefinition {
-    readonly overloads: readonly []
     readonly config: Config
     readonly input: {
       request: Grafaid.RequestAnalyzedInput
@@ -55,6 +54,9 @@ export namespace RequestPipeline {
       Anyware.StepDefinition<'decode', {}, RequestPipeline.DecodeInput, RequestPipeline.Output>,
     ]
   }
+  export interface BaseDefinitionEmpty extends BaseDefinition {
+    readonly overloads: readonly []
+  }
 
   export type Base = Anyware.Pipeline.InferFromDefinition<RequestPipeline.BaseDefinition>
 
@@ -62,7 +64,7 @@ export namespace RequestPipeline {
 }
 
 const { stepName } = RequestPipeline
-export const requestPipelineBaseDefinition: RequestPipeline.BaseDefinition = Anyware.PipelineDefinition
+export const requestPipelineBaseDefinition: RequestPipeline.BaseDefinitionEmpty = Anyware.PipelineDefinition
   .create({
     // If core errors caused by an abort error then raise it as a direct error.
     // This is an expected possible error. Possible when user cancels a request.

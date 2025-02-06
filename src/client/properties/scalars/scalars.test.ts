@@ -4,7 +4,7 @@ import { g0, test } from '../../../../tests/_/helpers.js'
 import { Context, type GlobalRegistry } from '../../../entrypoints/utilities-for-generated.js'
 import type { Schema } from '../../../types/Schema/__.js'
 import type { SchemaDrivenDataMap } from '../../../types/SchemaDrivenDataMap/__.js'
-import type { ScalarMethod } from './scalars.js'
+import type { Scalars } from './__.js'
 
 declare global {
   namespace GraffleGlobal {
@@ -25,16 +25,16 @@ const map = {} as SchemaDrivenDataMap
 
 const g1 = g0.with({ schema: { map, name: `TestAddScalar` } })
 
-test(`scalars begin empty`, ({ g0 }) => {
+test(`context scalars begin empty`, ({ g0 }) => {
   expect(g0._.scalars).toEqual(Context.States.empty.scalars)
 })
 
 test(`method not available when no schema map `, ({ g0 }) => {
-  expectTypeOf(g0.scalar).toEqualTypeOf<ScalarMethod.TypeErrorMissingSchemaMap>()
+  expectTypeOf(g0.scalar).toEqualTypeOf<Scalars.ScalarMethod.TypeErrorMissingSchemaMap>()
 })
 
 test(`method is available when there is a schema map `, () => {
-  expectTypeOf(g1.scalar).toMatchTypeOf<ScalarMethod<Context>>()
+  expectTypeOf(g1.scalar).toMatchTypeOf<Scalars.ScalarMethod<typeof g1._>>()
 })
 
 test(`can pass an inline scalar definition`, () => {
@@ -59,7 +59,6 @@ test(`can pass a scalar definition`, () => {
 })
 
 test(`scalar name must match a scalar from the schema`, () => {
-  g1.scalar(``, {} as any)
   // @ts-expect-error
   g1.scalar(`B`, {} as any)
   // @ts-expect-error
