@@ -7,7 +7,7 @@ import {
   isObjectEmpty,
   type ObjectMergeShallow,
 } from '../../../lib/prelude.js'
-import type { Configurator } from '../../../types/configurator.js'
+import type { Configurator } from '../../../types/configurator/configurator.js'
 import type { Context } from '../../../types/context.js'
 import type { Client, Client_justContext } from '../../client.js'
 

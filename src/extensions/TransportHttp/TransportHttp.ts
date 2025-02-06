@@ -173,7 +173,8 @@ export type TransportHttp = Extension<
   `TransportHttp`,
   undefined,
   unknown,
-  undefined,
+  {},
+  [],
   Transport<
     'http',
     TransportHttpConfigurator

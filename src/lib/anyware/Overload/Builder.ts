@@ -1,4 +1,4 @@
-import { Configurator } from '../../../types/configurator.js'
+import { Configurator } from '../../../types/configurator/configurator.js'
 import type { ConfigManager } from '../../config-manager/__.js'
 import type { Tuple } from '../../prelude.js'
 import type { PipelineDefinition } from '../PipelineDefinition/__.js'

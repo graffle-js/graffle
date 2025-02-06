@@ -1,5 +1,5 @@
 import type { Client } from '../client/client.js'
-import type { Configurator } from '../types/configurator.js'
+import type { Configurator } from '../types/configurator/configurator.js'
 import type { Context } from '../types/context.js'
 
 export interface ConstructorParameters<

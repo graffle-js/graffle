@@ -1,8 +1,10 @@
 import { getIntrospectionQuery, type IntrospectionQuery } from 'graphql'
 import type { GraphQLSchema, IntrospectionOptions } from 'graphql'
 import type { HandleOutput } from '../../client/handleOutput.js'
+import type { Properties } from '../../client/properties/properties/__.js'
+import type { PropertiesComputer } from '../../client/properties/properties/properties.js'
 import { Configurator, Extension } from '../../entrypoints/extension.js'
-import type { ContextTransports } from '../../entrypoints/utilities-for-generated.js'
+import type { Context, ContextTransports } from '../../entrypoints/utilities-for-generated.js'
 import type { InputIntrospectionOptions } from '../../generator/_.js'
 
 export type ConfigurationInput = {
@@ -61,7 +63,7 @@ export const Introspection = Extension(`introspection`)
         },
       }),
   )
-  .properties<Properties>(({ configuration, client }) => {
+  .properties(({ configuration, client }) => {
     return {
       introspect: async () => {
         // todo: fixme: use config.schema!! Currently only looked at in the generator!
@@ -95,21 +97,17 @@ export const Introspection = Extension(`introspection`)
         // @ts-expect-error fixme
         return await client.gql(introspectionQueryDocument).send()
       },
-    } as any
+    } as any as Properties
   })
   .typeOfNoExpandResultDataType<IntrospectionQuery>()
 
-interface Properties extends Extension.PropertiesTypeFunction {
-  // @ts-expect-error untyped params
-  return: Properties_<this['parameters']>
+interface Properties extends Properties.PropertiesComputerTypeFunction {
+  return: Properties_<this['context']>
 }
-
-interface Properties_<
-  $Parameters extends Extension.PropertiesTypeFunctionParameters,
-> {
+interface Properties_<$Context extends Context> {
   introspect: ContextTransports.PreflightCheck<
-    $Parameters['context'],
-    () => Promise<(null | {}) & HandleOutput<$Parameters['context'], IntrospectionQuery>>
+    $Context,
+    () => Promise<(null | {}) & HandleOutput<$Context, IntrospectionQuery>>
   >
 }
 

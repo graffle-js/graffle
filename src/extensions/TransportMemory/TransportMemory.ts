@@ -90,7 +90,8 @@ export type TransportMemory = Extension<
   `TransportMemory`,
   undefined,
   unknown,
-  undefined,
+  {},
+  [],
   Transport<
     'memory',
     TransportMemoryConfigurator
@@ -104,7 +105,7 @@ export const TransportMemory: TransportMemoryConstructor = Extension(`TransportM
         Configurator()
           .input<ConfigurationInput>()
           .normalized<ConfigurationNormalized>()
-          .inputResolver((current, input) => {
+          .inputResolver(({ current, input }) => {
             const next = {
               ...current,
             }

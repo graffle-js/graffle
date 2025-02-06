@@ -1,4 +1,4 @@
-import { Configurator } from '../configurator.js'
+import { Configurator } from '../configurator/configurator.js'
 
 /**
  * @remarks This input extends base with properties that can be filled with exports from the generated client.

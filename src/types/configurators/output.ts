@@ -1,5 +1,5 @@
 import type { ConfigManager } from '../../lib/config-manager/__.js'
-import { Configurator } from '../configurator.js'
+import { Configurator } from '../configurator/configurator.js'
 
 export type OutputChannel = 'throw' | 'return'
 

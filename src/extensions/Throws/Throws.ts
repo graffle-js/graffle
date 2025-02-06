@@ -1,52 +1,39 @@
 import type { Client } from '../../client/client.js'
+import type { ContextFragmentConfigurationConfigure } from '../../client/properties/configuration/configuration.js'
+import type { Properties } from '../../client/properties/properties/__.js'
 import { Extension } from '../../entrypoints/extension.js'
-import { type ConfigInit, type Normalized } from '../../entrypoints/main.js'
-import type { ConfigManager } from '../../lib/config-manager/__.js'
+// import { type Normalized } from '../../entrypoints/main.js'
+// import type { ConfigManager } from '../../lib/config-manager/__.js'
+import type { Configurators } from '../../types/configurators/_namespace.js'
+import type { Context } from '../../types/context.js'
 
-export const Throws = Extension
-  .build(`Throws`)
-  .constructor(({ client, context }) => {
+export const Throws = Extension(`throws`)
+  .properties(({ configuration, client }) => {
     // todo redesign input to allow to force throw always
     // todo pull pre-configured config from core
-    const throwsifiedConfigInit: ConfigInit = {
-      output: {
-        envelope: {
-          enabled: context.output.envelope.enabled,
-          // @ts-expect-error
-          errors: { execution: false, other: false, schema: false },
-        },
+    const throwsConfiguration: Configurators.Output.Input = {
+      envelope: {
+        enabled: configuration.output.current.envelope.enabled,
         // @ts-expect-error
-        errors: { execution: `throw`, other: `throw`, schema: `throw` },
+        errors: { execution: false, other: false, schema: false },
       },
+      // @ts-expect-error
+      errors: { execution: `throw`, other: `throw`, schema: `throw` },
     }
 
     const properties: Properties = {
-      throws: () => client.with(throwsifiedConfigInit),
+      throws: () => client.with({ output: throwsConfiguration }),
     } as any
 
-    return {
-      properties,
-    }
+    return properties
   })
 
-interface Properties extends Extension.PropertiesTypeFunction {
-  // @ts-expect-error
-  return: Properties_<this['parameters']>
+interface Properties extends Properties.PropertiesComputerTypeFunction {
+  return: Properties_<this['context']>
 }
 // dprint-ignore
-interface Properties_<$Parameters extends Extension.PropertiesTypeFunctionParameters> {
+interface Properties_<$Context extends Context> {
   throws: () => Client<
-    {
-      [_ in keyof $Parameters['context']]:
-        _ extends 'output'
-          ? ThrowsifyConfig<$Parameters['context']['output']>
-          : $Parameters['context'][_]
-    }
+    ContextFragmentConfigurationConfigure<$Context, { output: { errors: { execution: 'throw'; other: 'throw' }}}>
   >
 }
-
-type ThrowsifyConfig<$OutputConfig extends Normalized> = ConfigManager.SetKey<
-  $OutputConfig,
-  'errors',
-  { other: 'throw'; execution: 'throw' }
->

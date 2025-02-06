@@ -63,7 +63,14 @@ export const Configurator = (): Configurator.States.BuilderEmpty => {
 }
 
 namespace $ {
-  export const createInputResolver: Configurator.InputResolver.Create = (_) => _ as any
+  export const createInputResolver: Configurator.InputResolver.Create = (_) => {
+    const inputResolver = (parameters: any) => {
+      const result = _(parameters)
+      if (result === null) return parameters.current
+      return result
+    }
+    return inputResolver as any
+  }
 
   export const normalizeTypeInput = <configuratorTypeInput extends Configurator.TypeInput>(
     configuratorTypeInput: configuratorTypeInput,
@@ -196,7 +203,7 @@ export namespace Configurator {
       $Normalized extends $Input,
       $Default extends Partial<$Normalized>,
     > {
-      (parameters: Parameters<$Input, $Normalized, $Default>): Partial<$Normalized>
+      (parameters: Parameters<$Input, $Normalized, $Default>): null | Partial<$Normalized>
     }
 
     export type $FuncSymbol = typeof $.InputResolver$FuncSymbol

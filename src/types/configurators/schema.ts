@@ -1,4 +1,4 @@
-import { Configurator } from '../configurator.js'
+import { Configurator } from '../configurator/configurator.js'
 import { GlobalRegistry } from '../GlobalRegistry/GlobalRegistry.js'
 import type { SchemaDrivenDataMap } from '../SchemaDrivenDataMap/__.js'
 
