@@ -128,7 +128,7 @@ export const createWithContext = <$Context extends Context>(
       const computed = isComputed
         ? [properties]
         : undefined
-      return copy(Properties.contextFragmentPropertiesAdd(context, { static: static_, computed }))
+      return copy(Properties.contextFragmentPropertiesAdd(context, { static: static_, computed: computed as any }))
     },
     use(extension) {
       return copy(Extensions.contextFragmentExtensionsAdd(context, extension))
@@ -181,7 +181,7 @@ export const createWithContext = <$Context extends Context>(
 
           const initialInput = {
             transportType: context.transports.current,
-            ...context.transports.configurations[context.transports.current],
+            transport: context.transports.configurations[context.transports.current],
             state: context,
             request: analyzedRequest,
           } as RequestPipeline.Base['input']
@@ -206,7 +206,7 @@ export const createWithContext = <$Context extends Context>(
       propertiesComputer({
         configuration: context.configuration,
         context,
-        client,
+        client: client as any,
       }),
     )
   })
@@ -223,7 +223,7 @@ export const createWithContext = <$Context extends Context>(
         ...propertiesComputer({
           // configuration: configurationIndexEntry?.current,
           configuration: context.configuration,
-          client,
+          client: client as any,
           context,
         }),
       }
