@@ -1,11 +1,11 @@
 import {
-  __undefinedAs,
   type EmptyArray,
   emptyArray,
   type EmptyObject,
   emptyObject,
   isObjectEmpty,
   type ObjectMergeShallow,
+  undefinedAs,
 } from '../../../lib/prelude.js'
 import type { Configurator } from '../../../types/configurator/configurator.js'
 import type { Context } from '../../../types/context.js'
@@ -103,7 +103,7 @@ export interface ContextFragmentPropertiesEmpty extends ContextFragmentPropertie
     readonly $computedTypeFunctions: EmptyArray
   }
 }
-const contextFragmentPropertiesTypeLevel = __undefinedAs<
+const contextFragmentPropertiesTypeLevel = undefinedAs<
   Pick<ContextFragmentPropertiesEmpty['properties'], '$computedTypeFunctions'>
 >()
 

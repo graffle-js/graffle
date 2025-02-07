@@ -153,44 +153,6 @@ export namespace TransportMethod {
 // ------------------------------------------------------------
 
 export namespace ContextTransports {
-  export namespace Errors {
-    export type PreflightCheckNoTransportsRegistered =
-      'Error: You cannot send requests yet. You must setup a transport.'
-
-    export type PreflightCheckNoTransportSelected =
-      'Error: You cannot send requests yet. You must select a transport to use.'
-
-    export type PreflightCheckTransportNotReady<$TransportName extends string> =
-      `Error: You cannot send requests yet. The selected transport "${$TransportName}" is not sufficiently configured.`
-  }
-
-  // dprint-ignore
-  export type PreflightCheck<
-    $Context,
-    $SuccessValue = true,
-  > =
-    // @ts-expect-error context constraint missing to avoid TS compare depth limit
-    $Context['configuration']['check']['current']['preflight'] extends false
-      ? $SuccessValue
-      // @ts-expect-error context constraint missing to avoid TS compare depth limit
-      : PreflightCheck_<$Context['transports'], $SuccessValue>
-  // dprint-ignore
-  export type PreflightCheck_<
-    $ClientTransports extends ContextTransports,
-    $SuccessValue = true,
-  > =
-    $ClientTransports extends ContextTransportsEmpty
-      ? ContextTransports.Errors.PreflightCheckNoTransportsRegistered
-      : $ClientTransports['current'] extends string
-        ? $ClientTransports['current'] extends keyof $ClientTransports['configurations']
-          ? $ClientTransports['current'] extends keyof $ClientTransports['registry']
-            ? $ClientTransports['configurations'][$ClientTransports['current']] extends $ClientTransports['registry'][$ClientTransports['current']]['configurator']['normalized']
-              ? $SuccessValue
-              : ContextTransports.Errors.PreflightCheckTransportNotReady<$ClientTransports['current']>
-            : never // Should never happen
-          : never // Should never happen
-        : ContextTransports.Errors.PreflightCheckNoTransportSelected
-
   // dprint-ignore
   export type GetNames<$ClientTransports extends ContextTransports> =
       Objekt.IsEmpty<$ClientTransports['registry']> extends true

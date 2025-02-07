@@ -90,6 +90,7 @@ export const configurator = Configurator()
   .normalized<Normalized>()
   .default(default_)
   .inputResolver<InputResolver$Func>(({ current, input }) => {
+    console.log(current)
     const outputEnvelopeLonghand: ConfigurationInputOutputEnvelopeLonghand | undefined =
       typeof input.envelope === `object`
         ? { enabled: true, ...input.envelope }
@@ -107,7 +108,7 @@ export const configurator = Configurator()
           execution: outputEnvelopeLonghand?.errors?.execution ?? current.envelope.errors.execution,
           other: outputEnvelopeLonghand?.errors?.other ?? current.envelope.errors.other,
           // @ts-expect-error
-          schema: outputEnvelopeLonghand?.errors?.schema ?? current.output.envelope.errors.schema,
+          schema: outputEnvelopeLonghand?.errors?.schema ?? current.envelope.errors.schema,
         },
       },
       errors: {

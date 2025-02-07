@@ -4,6 +4,8 @@ import type { Configurator } from '../../../types/configurator/configurator.js'
 import { Configurators } from '../../../types/configurators/_namespace.js'
 import type { Context } from '../../../types/context.js'
 
+export * as Check from './check.js'
+
 export const contextFragmentConfigurationConfigure = <
   context extends Context,
   configurationInput extends ConfigurationIndex.Input,

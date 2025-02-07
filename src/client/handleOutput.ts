@@ -13,7 +13,7 @@ import {
   type GetOrNever,
   type Values,
 } from '../lib/prelude.js'
-import type { RequestPipelineBase } from '../requestPipeline/RequestPipeline.js'
+import type { RequestPipeline } from '../requestPipeline/__.js'
 import {
   type ErrorCategory,
   isOutputTraditionalGraphQLOutput,
@@ -38,7 +38,7 @@ export type GraffleExecutionResultEnvelope = {
 
 export const handleOutput = (
   state: Context,
-  result: Anyware.Result<RequestPipelineBase['output']>,
+  result: Anyware.Result<RequestPipeline.Base['output']>,
 ) => {
   const c = state.configuration.output.current
 
@@ -103,26 +103,27 @@ export type HandleOutput<
     $Context,
     Envelope<
       // @ts-expect-error: No $Context constraint to avoid "compare depth limit"
-      $Context['output'],
+      $Context['configuration']['output']['current'],
       RequestResult.Simplify<$Context, $Data>
     >
-  >
+>
 
 type HandleOutput_Extensions<
   $Context,
   $Envelope extends GraffleExecutionResultEnvelope,
 > = HandleOutput_ErrorsReturn<
   // @ts-expect-error: No $Context constraint to avoid "compare depth limit"
-  $Context['output'],
-  // eslint-disable-next-line
-  // @ts-ignore fixme
-  Extension.TypeHooks.RunTypeHookOnRequestResult<$Context, {
-    result: $Envelope
-    // eslint-disable-next-line
-    // @ts-ignore fixme
-    registeredSchema: GlobalRegistry.GetOrDefault<$Context['name']>
-  }>['result']
->
+  $Context['configuration']['output']['current'],
+  $Envelope
+> // todo
+// eslint-disable-next-line
+// @ts-ignore fixme
+// Extension.TypeHooks.RunTypeHookOnRequestResult<$Context, {
+//   result: $Envelope
+//   // eslint-disable-next-line
+//   // @ts-ignore fixme
+//   registeredSchema: GlobalRegistry.GetOrDefault<$Context['name']>
+// }>['result']
 
 type HandleOutput_ErrorsReturn<
   $OutputConfig extends Normalized,

@@ -34,7 +34,7 @@ export interface ClientBase<$Context extends Context> {
   /**
    * TODO
    */
-  gql: Transports.ContextTransports.PreflightCheck<
+  gql: Configuration.Check.Preflight<
     $Context,
     GqlMethod<$Context>
   >

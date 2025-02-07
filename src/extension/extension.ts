@@ -1,7 +1,7 @@
 import type { WritableDeep } from 'type-fest'
 import type { Configuration } from '../client/properties/configuration/__.js'
 import type { Properties } from '../client/properties/properties/__.js'
-import { __, __undefinedAs, type ObjectMergeShallow } from '../lib/prelude.js'
+import { __, type ObjectMergeShallow, undefinedAs } from '../lib/prelude.js'
 import type { RequestPipeline } from '../requestPipeline/__.js'
 import type { Configurator } from '../types/configurator/configurator.js'
 import type { Context } from '../types/context.js'
@@ -40,7 +40,7 @@ export interface Extension<
   // typeHooks: $TypeHooks
 }
 
-const extensionTypeOnlyProperties = __undefinedAs<{
+const extensionTypeOnlyProperties = undefinedAs<{
   propertiesComputedTypeFunctions$: []
 }>()
 
