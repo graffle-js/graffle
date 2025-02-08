@@ -3,7 +3,6 @@ import { Anyware } from '../lib/anyware/_namespace.js'
 import { getOperationType } from '../lib/grafaid/document.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
 import type { RequestPipeline } from '../requestPipeline/RequestPipeline.js'
-import type { ConfigurationIndex } from '../types/ConfigurationIndex.js'
 import { Context, type ContextFragment, contextMergeFragment } from '../types/context.js'
 import { handleOutput } from './handleOutput.js'
 import { Configuration } from './properties/configuration/__.js'
@@ -42,8 +41,8 @@ export interface ClientBase<$Context extends Context> {
    * TODO
    */
   scalar: undefined extends $Context['configuration']['schema']['current']['map']
-    ? Scalars.ScalarMethod.TypeErrorMissingSchemaMap
-    : Scalars.ScalarMethod<$Context>
+    ? Scalars.Method.TypeErrorMissingSchemaMap
+    : Scalars.Method<$Context>
   /**
    * TODO
    */
@@ -91,11 +90,11 @@ export const createConstructorWithContext = <$Context extends Context>(
   context: $Context,
 ): Create<$Context> =>
 (configurationInput) => {
-  const configurationInput_ = configurationInput as undefined | ConfigurationIndex.Input
+  const configurationInput_ = configurationInput as undefined | Configuration.ConfigurationIndex.Input
   const newContext = configurationInput_
     ? contextMergeFragment(
       context,
-      Configuration.contextFragmentConfigurationConfigure(context, configurationInput_),
+      Configuration.configure(context, configurationInput_),
     )
     : context
   return createWithContext(newContext) as any
@@ -133,26 +132,26 @@ export const createWithContext = <$Context extends Context>(
     use(extension) {
       return copy(Extensions.contextFragmentExtensionsAdd(context, extension))
     },
-    scalar: ((...args: Scalars.ScalarMethod.Arguments) => {
-      const scalar = Scalars.ScalarMethod.normalizeArguments(args)
+    scalar: ((...args: Scalars.Method.Arguments) => {
+      const scalar = Scalars.Method.normalizeArguments(args)
       return copy(Scalars.contextScalarsAdd(context, scalar))
     }) as any,
     with(configurationInput) {
-      const configurationInput_ = configurationInput as ConfigurationIndex.Input
-      return copy(Configuration.contextFragmentConfigurationConfigure(context, configurationInput_))
+      const configurationInput_ = configurationInput as Configuration.ConfigurationIndex.Input
+      return copy(Configuration.configure(context, configurationInput_))
     },
     transport: ((...args: Transports.TransportMethod.Arguments) => {
       const input = Transports.TransportMethod.normalizeArguments(args)
       // let fragment2: ContextFragmentTransports
       switch (input[0]) {
         case Transports.TransportMethod.overloadCase.configureCurrent: {
-          return copy(Transports.contextFragmentTransportsConfigureCurrent(context, input[1]))
+          return copy(Transports.contextFragmentConfigureCurrent(context, input[1]))
         }
         case Transports.TransportMethod.overloadCase.setCurrent: {
-          return copy(Transports.contextFragmentTransportsSetCurrent(context, input[1], input[2]))
+          return copy(Transports.contextFragmentSetCurrent(context, input[1], input[2]))
         }
         case Transports.TransportMethod.overloadCase.addType: {
-          return copy(Transports.contextFragmentTransportsAdd(context, input[1]))
+          return copy(Transports.contextFragmentAdd(context, input[1]))
         }
       }
     }) as any,

@@ -30,11 +30,11 @@ test(`context scalars begin empty`, ({ g0 }) => {
 })
 
 test(`method not available when no schema map `, ({ g0 }) => {
-  expectTypeOf(g0.scalar).toEqualTypeOf<Scalars.ScalarMethod.TypeErrorMissingSchemaMap>()
+  expectTypeOf(g0.scalar).toEqualTypeOf<Scalars.Method.TypeErrorMissingSchemaMap>()
 })
 
 test(`method is available when there is a schema map `, () => {
-  expectTypeOf(g1.scalar).toMatchTypeOf<Scalars.ScalarMethod<typeof g1._>>()
+  expectTypeOf(g1.scalar).toMatchTypeOf<Scalars.Method<typeof g1._>>()
 })
 
 test(`can pass an inline scalar definition`, () => {

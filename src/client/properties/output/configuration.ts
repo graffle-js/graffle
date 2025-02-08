@@ -1,5 +1,5 @@
-import type { ConfigManager } from '../../lib/config-manager/__.js'
-import { Configurator } from '../../lib/configurator/configurator.js'
+import type { ConfigManager } from '../../../lib/config-manager/__.js'
+import { Configurator } from '../../../lib/configurator/configurator.js'
 
 export type OutputChannel = 'throw' | 'return'
 
@@ -120,7 +120,7 @@ export const configurator = Configurator()
   })
   .return()
 
-export type OutputConfigurator = typeof configurator
+export type Configurator = typeof configurator
 
 export interface InputResolver$Func extends Configurator.InputResolver.$Func<Input, Normalized, Default_> {
   return: InputResolver<this['parameters']>

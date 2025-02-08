@@ -1,4 +1,4 @@
-import { Configurator } from '../../../lib/configurator/configurator.js'
+import { Configurator as C } from '../../../lib/configurator/configurator.js'
 import type { Transports } from '../transports/__.js'
 
 /**
@@ -14,14 +14,14 @@ export type Input = {
   preflight?: boolean
 }
 
-export const configurator = Configurator()
+export const configurator = C()
   .input<Input>()
   .default({
     preflight: true,
   })
   .return()
 
-export type CheckConfigurator = typeof configurator
+export type Configurator = typeof configurator
 
 // dprint-ignore
 export type Preflight<
@@ -36,7 +36,7 @@ export type Preflight<
 
 // dprint-ignore
 export type Preflight_<
-  $Transports extends Transports.ContextFragmentTransports['transports'],
+  $Transports extends Transports.ContextFragment['transports'],
   $SuccessValue = true,
 > =
   $Transports extends Transports.ContextFragmentTransportsEmpty['transports']

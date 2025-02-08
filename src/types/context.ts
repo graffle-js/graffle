@@ -1,26 +1,19 @@
 import { Configuration } from '../client/properties/configuration/__.js'
-import {
-  type ContextFragmentExtensions,
-  type ContextFragmentExtensionsEmpty,
-  contextFragmentExtensionsEmpty,
-} from '../client/properties/extensions/extensions.js'
+import { Extensions } from '../client/properties/extensions/__.js'
 import { Properties } from '../client/properties/properties/__.js'
 import { RequestInterceptors } from '../client/properties/requestInterceptors/__.js'
-import {
-  type ContextFragmentScalars,
-  type ContextFragmentScalarsEmpty,
-  contextFragmentScalarsEmpty,
-} from '../client/properties/scalars/scalars.js'
+import { Scalars } from '../client/properties/scalars/__.js'
 import { Transports } from '../client/properties/transports/__.js'
 import { type EmptyArray, type ObjectMergeShallow } from '../lib/prelude.js'
+
 export interface Context
   extends
     Configuration.ContextFragmentConfiguration,
-    Transports.ContextFragmentTransports,
+    Transports.ContextFragment,
     Properties.ContextFragmentProperties,
     RequestInterceptors.ContextFragmentRequestInterceptors,
-    ContextFragmentExtensions,
-    ContextFragmentScalars
+    Extensions.ContextFragmentExtensions,
+    Scalars.ContextFragment
 {
   // Type Level Properties
   /**
@@ -39,9 +32,9 @@ export namespace Context {
       readonly properties: Properties.ContextFragmentPropertiesEmpty['properties']
       readonly transports: Transports.ContextFragmentTransportsEmpty['transports']
       readonly requestPipelineDefinition: Transports.ContextFragmentTransportsEmpty['requestPipelineDefinition']
-      readonly extensions: ContextFragmentExtensionsEmpty['extensions']
-      readonly extensionsIndex: ContextFragmentExtensionsEmpty['extensionsIndex']
-      readonly scalars: ContextFragmentScalarsEmpty['scalars']
+      readonly extensions: Extensions.ContextFragmentExtensionsEmpty['extensions']
+      readonly extensionsIndex: Extensions.ContextFragmentExtensionsEmpty['extensionsIndex']
+      readonly scalars: Scalars.ContextFragmentEmpty['scalars']
       readonly configuration: Configuration.ContextFragmentConfigurationEmpty['configuration']
       // type-level properties
       // todo merge typehooks empty from extension type here to DRY
@@ -54,8 +47,8 @@ export namespace Context {
       ...Properties.contextFragmentPropertiesEmpty,
       ...Transports.contextFragmentTransportsEmpty,
       ...RequestInterceptors.contextFragmentRequestInterceptorsEmpty,
-      ...contextFragmentExtensionsEmpty,
-      ...contextFragmentScalarsEmpty,
+      ...Extensions.contextFragmentExtensionsEmpty,
+      ...Scalars.contextFragmentScalarsEmpty,
       ...Configuration.contextFragmentConfigurationEmpty,
       typeHookOnRequestDocumentRootType: null as any,
       typeHookOnRequestResult: null as any,

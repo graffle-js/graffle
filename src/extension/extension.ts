@@ -1,11 +1,11 @@
 import type { WritableDeep } from 'type-fest'
 import type { Configuration } from '../client/properties/configuration/__.js'
 import type { Properties } from '../client/properties/properties/__.js'
+import { Transport } from '../client/properties/transports/dataType.js'
 import type { Configurator } from '../lib/configurator/configurator.js'
 import { __, type ObjectMergeShallow, undefinedAs } from '../lib/prelude.js'
 import type { RequestPipeline } from '../requestPipeline/__.js'
 import type { Context } from '../types/context.js'
-import { Transport } from '../types/Transport.js'
 import type { ConstructorParameters } from './constructor.js'
 import type * as _re_export from './properties.js'
 

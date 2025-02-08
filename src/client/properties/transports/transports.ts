@@ -4,8 +4,8 @@ import { type EmptyObject, emptyObject, isObjectEmpty, type Objekt, type StringK
 import type { RequestPipeline } from '../../../requestPipeline/RequestPipeline.js'
 import { requestPipelineBaseDefinition } from '../../../requestPipeline/RequestPipeline.js'
 import { type Context } from '../../../types/context.js'
-import { Transport } from '../../../types/Transport.js'
 import type { Client } from '../../client.js'
+import { Transport } from './dataType.js'
 
 // todo remove the JSDoc comments below. They will not be shown.
 // Look for a TS issue about conditional types + JSDoc comments. If none, create one.
@@ -199,12 +199,12 @@ export interface ContextTransports_Configurations {
   [name: string]: Configurator.Configuration
 }
 
-export interface ContextFragmentTransports {
+export interface ContextFragment {
   readonly requestPipelineDefinition: RequestPipeline.BaseDefinition
   readonly transports: ContextTransports
 }
 
-export interface ContextFragmentTransportsEmpty extends ContextFragmentTransports {
+export interface ContextFragmentTransportsEmpty extends ContextFragment {
   readonly requestPipelineDefinition: RequestPipeline.BaseDefinitionEmpty
   readonly transports: ContextTransportsEmpty
 }
@@ -214,7 +214,7 @@ export const contextFragmentTransportsEmpty: ContextFragmentTransportsEmpty = Ob
   transports: contextTransportsEmpty,
 })
 
-export const contextFragmentTransportsAdd = (context: Context, transport: Transport): ContextFragmentTransports => {
+export const contextFragmentAdd = (context: Context, transport: Transport): ContextFragment => {
   const isFirstTransport = context.transports.current === undefined
   const transportName = transport.discriminant[`1`]
 
@@ -253,11 +253,11 @@ export const contextFragmentTransportsAdd = (context: Context, transport: Transp
   return fragment
 }
 
-export const contextFragmentTransportsSetCurrent = (
+export const contextFragmentSetCurrent = (
   context: Context,
   transportName: string,
   configurationInput?: Configurator.Configuration,
-): null | ContextFragmentTransports => {
+): null | ContextFragment => {
   const transport = context.transports.registry[transportName]
   if (!transport) throw new Error(`Unknown transport: ${transportName}`)
 
@@ -265,7 +265,7 @@ export const contextFragmentTransportsSetCurrent = (
     && transportName === context.transports.current
   if (noChange) return null
 
-  const transports: ContextFragmentTransports['transports'] = {
+  const transports: ContextFragment['transports'] = {
     ...context.transports,
     current: transportName,
   }
@@ -278,27 +278,27 @@ export const contextFragmentTransportsSetCurrent = (
   }
 
   if (configurationInput) {
-    return contextFragmentTransportsConfigure({ ...context, ...fragment }, transportName, configurationInput)
+    return contextFragmentConfigure({ ...context, ...fragment }, transportName, configurationInput)
   }
 
   return fragment
 }
 
-export const contextFragmentTransportsConfigureCurrent = (
+export const contextFragmentConfigureCurrent = (
   context: Context,
   configurationInput: Configurator.Configuration,
-): null | ContextFragmentTransports => {
+): null | ContextFragment => {
   if (!context.transports.current) {
     throw new Error(`No transport is currently set.`)
   }
-  return contextFragmentTransportsConfigure(context, context.transports.current, configurationInput)
+  return contextFragmentConfigure(context, context.transports.current, configurationInput)
 }
 
-export const contextFragmentTransportsConfigure = (
+export const contextFragmentConfigure = (
   context: Context,
   transportName: string,
   configurationInput: Configurator.Configuration,
-): null | ContextFragmentTransports => {
+): null | ContextFragment => {
   const transport = context.transports.registry[transportName]
   if (!transport) throw new Error(`Unknown transport: ${transportName}`)
 

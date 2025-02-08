@@ -3,10 +3,10 @@ import type { Extension } from '../../../extension/$.js'
 import type { Anyware } from '../../../lib/anyware/_namespace.js'
 import { type EmptyArray, emptyArray, emptyObject, type UnknownOrAnyToNever } from '../../../lib/prelude.js'
 import { type Context } from '../../../types/context.js'
-import type { Transport } from '../../../types/Transport.js'
 import { type ContextFragmentAddProperties, contextFragmentPropertiesAdd } from '../properties/properties.js'
 import { RequestInterceptors } from '../requestInterceptors/__.js'
 import { Transports } from '../transports/__.js'
+import type { Transport } from '../transports/dataType.js'
 
 // todo: type to use multiple to reduce type instantiation
 // useful for presets
@@ -61,7 +61,7 @@ export const contextFragmentExtensionsAdd = <
   }
 
   if (extension.transport) {
-    Object.assign(fragment, Transports.contextFragmentTransportsAdd(context, extension.transport))
+    Object.assign(fragment, Transports.contextFragmentAdd(context, extension.transport))
   }
   if (extension.requestInterceptor) {
     Object.assign(

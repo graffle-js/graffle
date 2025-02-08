@@ -1,4 +1,4 @@
-import type { ContextScalarsAdd } from '../../client/properties/scalars/scalars.js'
+import type { ContextAdd } from '../../client/properties/scalars/scalars.js'
 import type { Extension } from '../../extension/$.js'
 import { assertEqual } from '../../lib/assert-equal.js'
 import type { Context } from '../context.js'
@@ -14,7 +14,7 @@ type CEmpty = Context.States.Empty
 // 	onRequestResult: []
 // 	requestResultDataTypes: Text,
 // }>
-type CScalar = ContextScalarsAdd<Context.States.Empty, DateScalar>
+type CScalar = ContextAdd<Context.States.Empty, DateScalar>
 // type CExtAndScalar = AddScalar<CExt, DateScalar>
 	
 type _1 = Simplify<CEmpty                   , {x:Date|null}>

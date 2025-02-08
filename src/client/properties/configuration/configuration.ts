@@ -1,12 +1,13 @@
 import type { Configurator } from '../../../lib/configurator/configurator.js'
 import { hasNonUndefinedKeys, type Writeable } from '../../../lib/prelude.js'
-import type { ConfigurationIndex } from '../../../types/ConfigurationIndex.js'
-import { Configurators } from '../../../types/configurators/_namespace.js'
 import type { Context } from '../../../types/context.js'
+import { Output } from '../output/__.js'
+import { Schema } from '../schema/__.js'
+import { Check } from './configuration.js'
 
-export * as Check from './check.js'
+export * as Check from '../check/configuration.js'
 
-export const contextFragmentConfigurationConfigure = <
+export const configure = <
   context extends Context,
   configurationInput extends ConfigurationIndex.Input,
 >(context: context, configurationInput: configurationInput): null | Writeable<ContextFragmentConfiguration> => {
@@ -79,33 +80,47 @@ export interface ConfigurationNamespaceEmpty<$Configurator extends Configurator>
 
 export interface ContextFragmentConfiguration {
   readonly configuration: {
-    readonly output: ConfigurationNamespace<Configurators.Output.OutputConfigurator>
-    readonly check: ConfigurationNamespace<Configurators.Check.CheckConfigurator>
-    readonly schema: ConfigurationNamespace<Configurators.Schema.SchemaConfigurator>
+    readonly output: ConfigurationNamespace<Output.Configurator>
+    readonly check: ConfigurationNamespace<Check.Configurator>
+    readonly schema: ConfigurationNamespace<Schema.Configurator>
   }
 }
 
 export interface ContextFragmentConfigurationEmpty extends ContextFragmentConfiguration {
   readonly configuration: {
-    readonly output: ConfigurationNamespaceEmpty<Configurators.Output.OutputConfigurator>
-    readonly check: ConfigurationNamespaceEmpty<Configurators.Check.CheckConfigurator>
-    readonly schema: ConfigurationNamespaceEmpty<Configurators.Schema.SchemaConfigurator>
+    readonly output: ConfigurationNamespaceEmpty<Output.Configurator>
+    readonly check: ConfigurationNamespaceEmpty<Check.Configurator>
+    readonly schema: ConfigurationNamespaceEmpty<Schema.Configurator>
   }
 }
 
 export const contextFragmentConfigurationEmpty: ContextFragmentConfigurationEmpty = {
   configuration: Object.freeze({
     output: Object.freeze({
-      configurator: Configurators.Output.configurator,
-      current: Configurators.Output.configurator.default,
+      configurator: Output.configurator,
+      current: Output.configurator.default,
     }),
     check: Object.freeze({
-      configurator: Configurators.Check.configurator,
-      current: Configurators.Check.configurator.default,
+      configurator: Check.configurator,
+      current: Check.configurator.default,
     }),
     schema: Object.freeze({
-      configurator: Configurators.Schema.configurator,
-      current: Configurators.Schema.configurator.default,
+      configurator: Schema.configurator,
+      current: Schema.configurator.default,
     }),
   }),
+}
+
+// ------------------------------------------------------------
+// Generic Context Fragment
+// ------------------------------------------------------------
+
+export interface ConfigurationIndex {
+  readonly [configuratorName: string]: ConfigurationNamespace<Configurator>
+}
+
+export namespace ConfigurationIndex {
+  export interface Input {
+    readonly [configuratorName: string]: Configurator.Configuration | undefined
+  }
 }
