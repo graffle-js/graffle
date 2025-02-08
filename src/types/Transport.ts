@@ -1,6 +1,6 @@
 import type { Anyware } from '../lib/anyware/_namespace.js'
+import { Configurator } from '../lib/configurator/configurator.js'
 import type { RequestPipeline } from '../requestPipeline/__.js'
-import { Configurator } from './configurator/configurator.js'
 
 export interface Transport<
   $Name extends string = string,

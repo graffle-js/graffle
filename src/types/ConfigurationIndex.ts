@@ -1,4 +1,4 @@
-import type { Configurator } from './configurator/configurator.js'
+import type { Configurator } from '../lib/configurator/configurator.js'
 
 export interface ConfigurationIndex {
   readonly [configuratorName: string]: {

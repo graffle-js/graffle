@@ -1,6 +1,6 @@
+import type { Configurator } from '../../../lib/configurator/configurator.js'
 import { hasNonUndefinedKeys, type Writeable } from '../../../lib/prelude.js'
 import type { ConfigurationIndex } from '../../../types/ConfigurationIndex.js'
-import type { Configurator } from '../../../types/configurator/configurator.js'
 import { Configurators } from '../../../types/configurators/_namespace.js'
 import type { Context } from '../../../types/context.js'
 

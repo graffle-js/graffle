@@ -1,9 +1,9 @@
 import type { WritableDeep } from 'type-fest'
 import type { Configuration } from '../client/properties/configuration/__.js'
 import type { Properties } from '../client/properties/properties/__.js'
+import type { Configurator } from '../lib/configurator/configurator.js'
 import { __, type ObjectMergeShallow, undefinedAs } from '../lib/prelude.js'
 import type { RequestPipeline } from '../requestPipeline/__.js'
-import type { Configurator } from '../types/configurator/configurator.js'
 import type { Context } from '../types/context.js'
 import { Transport } from '../types/Transport.js'
 import type { ConstructorParameters } from './constructor.js'
@@ -22,6 +22,7 @@ export interface Extension<
     Properties.PropertiesComputerTypeFunction
   >,
   $Transport extends Transport | undefined = Transport | undefined,
+  $Custom extends object = object,
 > // $TypeHooks extends TypeHooks = TypeHooks,
 {
   name: $Name
@@ -37,6 +38,7 @@ export interface Extension<
   propertiesComputedTypeFunctions$: $PropertiesComputersTypeFunctions
   // todo support for multiple transports in one extension
   transport?: $Transport
+  static: $Custom
   // typeHooks: $TypeHooks
 }
 
@@ -58,6 +60,10 @@ export const Extension = <$Name extends string>(
     ...extensionTypeOnlyProperties,
   } as any
   const builder: Extension.Builder<Extension<$Name, undefined, undefined, {}, [], undefined>> = {
+    static(properties) {
+      Object.assign(extension.static, properties)
+      return builder
+    },
     transport(transportTypeInput: Transport | Transport.Builder<Transport>) {
       const transport = Transport.$.isBuilder(transportTypeInput) ? transportTypeInput.return() : transportTypeInput
       extension.transport = transport
@@ -109,6 +115,7 @@ export namespace Extension {
      * TODO 1
      */
     <$Transport extends Transport>(transport: $Transport | Transport.Builder<$Transport>): Builder<{
+      static: $Extension['static']
       propertiesStatic: $Extension['propertiesStatic']
       propertiesComputed: $Extension['propertiesComputed']
       propertiesComputedTypeFunctions$: $Extension['propertiesComputedTypeFunctions$']
@@ -128,6 +135,7 @@ export namespace Extension {
         parameters: ConstructorParameters<$ConfigurationNormalized> & { $: Transport.Builder.States.Empty<$Name> },
       ) => Transport.Builder<$Transport>,
     ): Builder<{
+      static: $Extension['static']
       propertiesStatic: $Extension['propertiesStatic']
       propertiesComputed: $Extension['propertiesComputed']
       propertiesComputedTypeFunctions$: $Extension['propertiesComputedTypeFunctions$']
@@ -157,6 +165,7 @@ export namespace Extension {
     configurator: <$Configurator extends Configurator>(
       input: Configurator.BuilderProviderCallback<$Configurator> | Configurator.Builder<$Configurator> | $Configurator,
     ) => Builder<{
+      static: $Extension['static']
       propertiesStatic: $Extension['propertiesStatic']
       propertiesComputed: $Extension['propertiesComputed']
       propertiesComputedTypeFunctions$: $Extension['propertiesComputedTypeFunctions$']
@@ -192,6 +201,7 @@ export namespace Extension {
         transport?: $Transport
       }
     ) => Builder<{
+      static: $Extension['static']
       propertiesStatic: $Extension['propertiesStatic']
       propertiesComputed: $Extension['propertiesComputed']
       propertiesComputedTypeFunctions$: $Extension['propertiesComputedTypeFunctions$']
@@ -208,6 +218,7 @@ export namespace Extension {
     requestInterceptor: <$RequestInterceptor extends RequestPipeline.BaseInterceptor>(
       requestInterceptor: $RequestInterceptor,
     ) => Builder<{
+      static: $Extension['static']
       propertiesStatic: $Extension['propertiesStatic']
       propertiesComputed: $Extension['propertiesComputed']
       propertiesComputedTypeFunctions$: $Extension['propertiesComputedTypeFunctions$']
@@ -226,6 +237,7 @@ export namespace Extension {
     properties: <$Properties extends object>(
       constructor: $Properties | Properties.PropertiesComputer<Context, $Properties, _$ConfigurationNormalized>
     ) => Builder<{
+      static: $Extension['static']
       propertiesComputed: $Extension['propertiesComputed']
       constructor: $Extension['constructor']
       requestInterceptor: $Extension['requestInterceptor']
@@ -242,6 +254,24 @@ export namespace Extension {
         $Properties extends Properties.PropertiesComputerTypeFunction
           ? [$Properties]
           : $Extension['propertiesComputedTypeFunctions$']
+    }>
+    
+    /**
+     * todo
+     */
+    static: <$PropertiesThis extends object>(
+      propertiesThis: $PropertiesThis,
+    ) => Builder<{
+      propertiesStatic: $Extension['propertiesStatic']
+      propertiesComputed: $Extension['propertiesComputed']
+      propertiesComputedTypeFunctions$: $Extension['propertiesComputedTypeFunctions$']
+      constructor: $Extension['constructor']
+      requestInterceptor: $Extension['requestInterceptor']
+      name: $Extension['name']
+      configurator: $Extension['configurator']
+      noExpandResultDataType: $Extension['noExpandResultDataType']
+      transport: $Extension['transport']
+      static: $PropertiesThis
     }>
     
     
@@ -269,6 +299,7 @@ export namespace Extension {
      * You can specify multiple types here by using a union. For example: `IntrospectionQuery | Date`.
      */
     typeOfNoExpandResultDataType: <$DataType>() => Builder<{
+      static: $Extension['static']
       propertiesStatic: $Extension['propertiesStatic']
       propertiesComputed: $Extension['propertiesComputed']
       propertiesComputedTypeFunctions$: $Extension['propertiesComputedTypeFunctions$']
@@ -285,7 +316,10 @@ export namespace Extension {
      * TODO
      */
     // todo: extension stores the initialization configuration statically...
-    return: () => (...parameters: undefined extends $Extension['configurator'] ? [] : [parameters: _$ConfigurationNormalized]) => $Extension
+    return: () => {
+      (...parameters: undefined extends $Extension['configurator'] ? [] : [parameters: _$ConfigurationNormalized]): $Extension
+      static: $Extension['static']
+    }
   }
 }
 

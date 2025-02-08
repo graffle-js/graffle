@@ -1,5 +1,5 @@
 import type { ConfigManager } from '../../lib/config-manager/__.js'
-import { Configurator } from '../configurator/configurator.js'
+import { Configurator } from '../../lib/configurator/configurator.js'
 
 export type OutputChannel = 'throw' | 'return'
 
@@ -90,7 +90,6 @@ export const configurator = Configurator()
   .normalized<Normalized>()
   .default(default_)
   .inputResolver<InputResolver$Func>(({ current, input }) => {
-    console.log(current)
     const outputEnvelopeLonghand: ConfigurationInputOutputEnvelopeLonghand | undefined =
       typeof input.envelope === `object`
         ? { enabled: true, ...input.envelope }
