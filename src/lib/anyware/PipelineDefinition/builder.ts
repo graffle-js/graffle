@@ -61,7 +61,7 @@ export interface Builder<$PipelineDef extends PipelineDefinition = PipelineDefin
   overload: <$OverloadBuilder extends Overload.Builder<$PipelineDef>>(
     overloadBuilder: Overload.BuilderCallback<$PipelineDef, $OverloadBuilder>,
   ) => Builder<
-    PipelineDefinition.Updaters.AddOverload<$PipelineDef, $OverloadBuilder['type']>
+    PipelineDefinition.Updaters.AddOverload<$PipelineDef, $OverloadBuilder['data']>
   >
   /**
    * TODO
@@ -193,7 +193,7 @@ const recreate = <$Pipeline extends PipelineDefinition>(pipeline: $Pipeline): Bu
     overload: (builderCallback) => {
       const overload = builderCallback({ create: Overload.create })
       // todo why mutating here? stop it. make like use extension.
-      pipeline.overloads.push(overload.type)
+      pipeline.overloads.push(overload.data)
 
       return recreate(pipeline) as any
     },

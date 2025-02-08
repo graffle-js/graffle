@@ -47,7 +47,7 @@ export namespace Pipeline {
           run: (...args: Parameters<StepRunner>) => {
             const input = args[0] as Record<string, unknown>
             const stepOverload = stepOverloads.find(stepOverload => {
-              return input[stepOverload.discriminant[0]] === stepOverload.discriminant[1]
+              return input[stepOverload.discriminant.name] === stepOverload.discriminant.value
             })
             if (stepOverload) return stepOverload.run(...args)
             return step.run(...args)
@@ -154,7 +154,7 @@ export namespace Pipeline {
   // dprint-ignore
   type InferStepOutput<$Step extends StepDefinition, $Overload extends Overload> = $Overload extends never ? never :
     & $Step['output']
-    & { [_ in $Overload['discriminant'][0]]: $Overload['discriminant'][1] }
+    & { [_ in $Overload['discriminant']['name']]: $Overload['discriminant']['value'] }
     & $Overload['steps'][$Step['name']]['output']
 
   // dprint-ignore
@@ -166,7 +166,7 @@ export namespace Pipeline {
     & $StepDefinition['input']
     // Overload Contributions:
     // 1. The discriminant:
-    & { [_ in $Overload['discriminant'][0]]: $Overload['discriminant'][1] }
+    & { [_ in $Overload['discriminant']['name']]: $Overload['discriminant']['value'] }
     // 2. This specific step:
     & $Overload['steps'][$StepDefinition['name']]['input']
     // 3. If this is the first step, then the pipeline input contributions, if any:

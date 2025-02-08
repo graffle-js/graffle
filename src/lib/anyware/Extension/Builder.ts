@@ -16,7 +16,7 @@ export interface Builder<
     overloadBuilderCallback: Overload.BuilderCallback<$Pipeline, $OverloadBuilder>,
   ) => Builder<
     $Pipeline,
-    Extension.Updaters.AddOverload<$Extension, $OverloadBuilder['type']>
+    Extension.Updaters.AddOverload<$Extension, $OverloadBuilder['data']>
   >
 }
 
@@ -30,7 +30,7 @@ export namespace Builder {
       type: extension,
       overload: (builderCallback) => {
         const overload = builderCallback({ create: Overload.create })
-        extension.overloads.push(overload.type)
+        extension.overloads.push(overload.data)
         return builder as any
       },
     }
