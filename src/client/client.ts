@@ -4,9 +4,10 @@ import { getOperationType } from '../lib/grafaid/document.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
 import type { RequestPipeline } from '../requestPipeline/RequestPipeline.js'
 import { Context, type ContextFragment, contextMergeFragment } from '../types/context.js'
-import { handleOutput } from './handleOutput.js'
 import { Configuration } from './properties/configuration/__.js'
 import { Extensions } from './properties/extensions/__.js'
+import { Output } from './properties/output/__.js'
+import { handle } from './properties/output/handle.js'
 import { Properties } from './properties/properties/__.js'
 import { GqlMethod } from './properties/request/request.js'
 import { SendMethod } from './properties/request/send.js'
@@ -191,7 +192,7 @@ export const createWithContext = <$Context extends Context>(
             interceptors: context.requestPipelineInterceptors,
           })
 
-          return handleOutput(context, result)
+          return Output.handle(context, result)
         },
       }
     }) as any,

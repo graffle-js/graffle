@@ -1,29 +1,29 @@
 import type { GraphQLError } from 'graphql'
 import type { Simplify } from 'type-fest'
-import type { Extension } from '../entrypoints/extension.js'
-import type { Anyware } from '../lib/anyware/_namespace.js'
-import { Errors } from '../lib/errors/__.js'
-import type { Grafaid } from '../lib/grafaid/__.js'
-import type { SomeObjectData } from '../lib/grafaid/graphql.js'
-import type { GraphQLExecutionResultError } from '../lib/grafaid/graphql.js'
+import type { Extension } from '../../../entrypoints/extension.js'
+import type { Anyware } from '../../../lib/anyware/_namespace.js'
+import { Errors } from '../../../lib/errors/__.js'
+import type { Grafaid } from '../../../lib/grafaid/__.js'
+import type { SomeObjectData } from '../../../lib/grafaid/graphql.js'
+import type { GraphQLExecutionResultError } from '../../../lib/grafaid/graphql.js'
 import {
   type ExcludeNull,
   type ExcludeNullAndUndefined,
   type ExcludeUndefined,
   type GetOrNever,
   type Values,
-} from '../lib/prelude.js'
-import type { RequestPipeline } from '../requestPipeline/__.js'
+} from '../../../lib/prelude.js'
+import type { RequestPipeline } from '../../../requestPipeline/__.js'
+import type { Context } from '../../../types/context.js'
+import type { GlobalRegistry } from '../../../types/GlobalRegistry/GlobalRegistry.js'
+import type { RequestResult } from '../../../types/RequestResult.ts/__.js'
 import {
   type ErrorCategory,
   isOutputTraditionalGraphQLOutput,
   type Normalized,
   type OutputChannelConfig,
   readErrorCategoryOutputChannel,
-} from '../types/configurators/output.js'
-import type { Context } from '../types/context.js'
-import type { GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
-import type { RequestResult } from '../types/RequestResult.ts/__.js'
+} from './configuration.js'
 
 export type GraffleExecutionResultEnvelope = {
   errors?: ReadonlyArray<
@@ -36,7 +36,7 @@ export type GraffleExecutionResultEnvelope = {
   extensions?: ObjMap
 }
 
-export const handleOutput = (
+export const handle = (
   state: Context,
   result: Anyware.Result<RequestPipeline.Base['output']>,
 ) => {

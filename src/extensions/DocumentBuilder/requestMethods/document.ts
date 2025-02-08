@@ -1,5 +1,5 @@
 import type { UnionToTuple } from 'type-fest'
-import type { HandleOutput } from '../../../client/handleOutput.js'
+import type { HandleOutput } from '../../../client/properties/output/handle.js'
 import type { IsTupleMultiple } from '../../../lib/prelude.js'
 import type { InferResult } from '../InferResult/__.js'
 import type { Select } from '../Select/__.js'

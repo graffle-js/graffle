@@ -1,6 +1,6 @@
 import { getIntrospectionQuery, type IntrospectionQuery } from 'graphql'
 import type { GraphQLSchema, IntrospectionOptions } from 'graphql'
-import type { HandleOutput } from '../../client/handleOutput.js'
+import type { HandleOutput } from '../../client/properties/output/handle.js'
 import type { Properties } from '../../client/properties/properties/__.js'
 import type { PropertiesComputer } from '../../client/properties/properties/properties.js'
 import { Configurator, Extension } from '../../entrypoints/extension.js'
@@ -100,6 +100,7 @@ export const Introspection = Extension(`introspection`)
     } as any as Properties
   })
   .typeOfNoExpandResultDataType<IntrospectionQuery>()
+  .return()
 
 interface Properties extends Properties.PropertiesComputerTypeFunction {
   return: Properties_<this['context']>

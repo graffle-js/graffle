@@ -317,7 +317,7 @@ export namespace Extension {
      */
     // todo: extension stores the initialization configuration statically...
     return: () => {
-      (...parameters: undefined extends $Extension['configurator'] ? [] : [parameters: _$ConfigurationNormalized]): $Extension
+      (...parameters: $Extension['configurator'] extends Configurator ? [parameters: $Extension['configurator']['input']] : []): $Extension
       static: $Extension['static']
     }
   }

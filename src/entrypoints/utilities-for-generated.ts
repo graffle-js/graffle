@@ -1,11 +1,11 @@
 export type { Simplify } from 'type-fest'
 export { createConstructorWithContext } from '../client/client.js'
+export { contextFragmentExtensionsAdd } from '../client/properties/extensions/extensions.js'
 export type {
   ConfigGetOutputError,
   HandleOutput,
   HandleOutputDocumentBuilderRootField,
-} from '../client/handleOutput.js'
-export { contextFragmentExtensionsAdd } from '../client/properties/extensions/extensions.js'
+} from '../client/properties/output/handle.js'
 export * from '../extensions/DocumentBuilder/__.js'
 export { type AssertExtendsObject, type Exact, type ExactNonEmpty, type UnionExpanded } from '../lib/prelude.js'
 export { TypeFunction } from '../lib/type-function/__.js'
