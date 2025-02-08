@@ -1,4 +1,3 @@
-import type { Extension } from '../extension/$.js'
 import { Anyware } from '../lib/anyware/_namespace.js'
 import { getOperationType } from '../lib/grafaid/document.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
@@ -7,7 +6,6 @@ import { Context, type ContextFragment, contextMergeFragment } from '../types/co
 import { Configuration } from './properties/configuration/__.js'
 import { Extensions } from './properties/extensions/__.js'
 import { Output } from './properties/output/__.js'
-import { handle } from './properties/output/handle.js'
 import { Properties } from './properties/properties/__.js'
 import { GqlMethod } from './properties/request/request.js'
 import { SendMethod } from './properties/request/send.js'
@@ -55,14 +53,18 @@ export interface ClientBase<$Context extends Context> {
   /**
    * TODO
    */
-  use: <extension extends Extension>(extension: extension) => Client<
-    Extensions.ContextAddOneExtension<$Context, extension>
-  >
+  use: Extensions.MethodAdd<$Context>
+  /**
+   * TODO
+   */
   anyware: (
     interceptor: Anyware.Interceptor.InferFromPipeline<
       Anyware.Pipeline.InferFromDefinition<$Context['requestPipelineDefinition']>
     >,
   ) => Client<$Context>
+  /**
+   * TODO
+   */
   with: <
     const configurationInput extends CalcConfigurationInputForContext<$Context>,
   >(configurationInput: configurationInput) => Client<

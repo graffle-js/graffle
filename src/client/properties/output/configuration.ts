@@ -1,5 +1,5 @@
 import type { ConfigManager } from '../../../lib/config-manager/__.js'
-import { Configurator } from '../../../lib/configurator/configurator.js'
+import { Configurator as C } from '../../../lib/configurator/configurator.js'
 
 export type OutputChannel = 'throw' | 'return'
 
@@ -85,7 +85,7 @@ const default_ = {
 
 type Default_ = typeof default_
 
-export const configurator = Configurator()
+export const configurator = C()
   .input<Input>()
   .normalized<Normalized>()
   .default(default_)
@@ -122,13 +122,13 @@ export const configurator = Configurator()
 
 export type Configurator = typeof configurator
 
-export interface InputResolver$Func extends Configurator.InputResolver.$Func<Input, Normalized, Default_> {
+export interface InputResolver$Func extends C.InputResolver.$Func<Input, Normalized, Default_> {
   return: InputResolver<this['parameters']>
 }
 
 // dprint-ignore
 export interface InputResolver<
-  $Parameters extends Configurator.InputResolver.Parameters<Input, Normalized, Default_>,
+  $Parameters extends C.InputResolver.Parameters<Input, Normalized, Default_>,
   // Variables
   $Input = $Parameters['input'],
   _$Current = $Parameters['current'],
