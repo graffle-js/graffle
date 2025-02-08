@@ -71,7 +71,7 @@ const Transport_ = (
     configurator: (configuratorTypeInput) => {
       const newTransport = {
         ...transport,
-        configurator: Configurator.$.normalizeTypeInput(configuratorTypeInput),
+        configurator: Configurator.$.normalizeDataInput(configuratorTypeInput),
       }
       return Transport_(newTransport) as any
     },

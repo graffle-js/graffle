@@ -1,5 +1,5 @@
 import { describe, expectTypeOf, test } from 'vitest'
-import type { Configurator } from '../../configurator/configurator.js'
+import { Configurator } from '../../configurator/configurator.js'
 import { _ } from '../../prelude.js'
 import type { initialInput } from '../_.test-helpers.js'
 import { results, slots, stepA, stepB } from '../_.test-helpers.js'
@@ -113,8 +113,13 @@ describe(`overload`, () => {
   // overload extends input
 
   test(`overload constructor with input and discriminant`, () => {
-    expectTypeOf(b0.overload(o => o.create({ discriminant: discriminant }).config<{ x: 1 }>()).type.overloads)
-      .toMatchTypeOf<[{ discriminant: discriminant; input: { x: 1 }; steps: {} }]>()
+    const configurator = Configurator().input<{ x: 1 }>()
+    type configurator = ReturnType<typeof configurator['return']>
+    expectTypeOf(
+      b0.overload(o => o.create({ discriminant: discriminant }).configurator(configurator)).type
+        .overloads,
+    )
+      .toMatchTypeOf<[{ discriminant: discriminant; configurator: configurator; steps: {} }]>()
   })
 
   // step

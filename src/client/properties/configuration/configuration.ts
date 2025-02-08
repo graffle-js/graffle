@@ -1,7 +1,7 @@
 import type { Configurator } from '../../../lib/configurator/configurator.js'
 import { hasNonUndefinedKeys, type Writeable } from '../../../lib/prelude.js'
 import type { Context } from '../../../types/context.js'
-import { Output } from '../output/__.js'
+import { Output } from '../output/_namespace.js'
 import { Schema } from '../schema/__.js'
 import { Check } from './configuration.js'
 

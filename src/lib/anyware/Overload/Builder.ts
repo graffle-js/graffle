@@ -2,7 +2,7 @@ import type { Writable } from 'type-fest'
 import type { ConfigManager } from '../../config-manager/__.js'
 import { Configurator } from '../../configurator/configurator.js'
 import { createMutableBuilder } from '../../mutableBuilder.js'
-import type { Tuple } from '../../prelude.js'
+import type { _, Tuple } from '../../prelude.js'
 import type { PipelineDefinition } from '../PipelineDefinition/__.js'
 import type { StepDefinition } from '../StepDefinition.js'
 import type { Data, DataEmpty } from './Data.js'
@@ -23,7 +23,7 @@ export const create: Create = (parameters) => {
     data,
     builder: {
       configurator(configuratorTypeInput) {
-        data.configurator = Configurator.$.normalizeTypeInput(configuratorTypeInput)
+        data.configurator = Configurator.$.normalizeDataInput(configuratorTypeInput)
       },
       step,
       stepWithExtendedInput() {
@@ -41,11 +41,11 @@ export type Create<$Pipeline extends PipelineDefinition = PipelineDefinition> = 
   },
 ) => Builder<
   $Pipeline,
-  {
-    discriminant: $DiscriminantSpec
-    configurator: Configurator.States.Empty
-    steps: {}
-  }
+  Data<
+    $DiscriminantSpec,
+    DataEmpty['configurator'],
+    DataEmpty['steps']
+  >
 >
 
 export interface Builder<
@@ -61,26 +61,28 @@ export interface Builder<
       | $Configurator
       | Configurator.Builder<$Configurator>
       | Configurator.BuilderProviderCallback<$Configurator>,
-  ) => Builder<$Pipeline, {
-    steps: $Data['steps']
-    discriminant: $Data['discriminant']
-    configurator: $Configurator
-  }>
+  ) => Builder<
+    $Pipeline,
+    {
+      [_ in keyof $Data]: _ extends 'configurator' ? $Configurator
+        : $Data[_]
+    }
+  >
   /**
    * TODO
    */
-  step: StepMethod<$Pipeline, $Data>
+  step: MethodStep<$Pipeline, $Data>
   /**
    * TODO
    */
-  stepWithExtendedInput: <$InputExtension extends object>() => StepMethod<
+  stepWithExtendedInput: <$InputExtension extends object>() => MethodStep<
     $Pipeline,
     $Data,
     $InputExtension
   >
 }
 
-interface StepMethod<
+interface MethodStep<
   $Pipeline extends PipelineDefinition,
   $Data extends Data,
   $InputExtension extends object = {},
@@ -104,15 +106,18 @@ interface StepMethod<
     },
   ): Builder<
     $Pipeline,
-    $Data & {
-      steps: {
-        [_ in $Name]: {
-          name: $Name
-          input: $Input
-          output: Awaited<$Output>
-          slots: ConfigManager.OrDefault2<$Slots, {}>
-        }
-      }
+    {
+      [_ in keyof $Data]: _ extends 'steps' ?
+          & $Data['steps']
+          & {
+            [_ in $Name]: {
+              name: $Name
+              input: $Input
+              output: Awaited<$Output>
+              slots: ConfigManager.OrDefault2<$Slots, {}>
+            }
+          }
+        : $Data[_]
     }
   >
 }

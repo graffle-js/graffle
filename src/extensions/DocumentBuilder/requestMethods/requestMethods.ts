@@ -1,5 +1,5 @@
 import type { OperationTypeNode } from 'graphql'
-import { Output } from '../../../client/properties/output/__.js'
+import { Output } from '../../../client/properties/output/_namespace.js'
 import { handle } from '../../../client/properties/output/handle.js'
 import { Anyware } from '../../../lib/anyware/_namespace.js'
 import type { Grafaid } from '../../../lib/grafaid/__.js'

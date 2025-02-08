@@ -7,7 +7,7 @@ import { type ContextFragmentAddProperties, contextFragmentPropertiesAdd } from 
 import { RequestInterceptors } from '../requestInterceptors/__.js'
 import { Transports } from '../transports/__.js'
 import type { Transport } from '../transports/dataType.js'
-import type { Extension } from './dataType/$.js'
+import type { Data } from './dataType/_exports.js'
 
 // ------------------------------------------------------------
 // Method

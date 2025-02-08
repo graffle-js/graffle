@@ -813,4 +813,4 @@ export type ObjectMergeShallow<
 
 export const as = <$Type>(value?: unknown): $Type => value as $Type
 
-export const undefinedAs = <$Type>(): $Type => undefined as any
+export const undefinedAs = <$Type>() => as<$Type>(undefined)

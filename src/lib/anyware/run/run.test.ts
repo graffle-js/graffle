@@ -419,6 +419,8 @@ describe('step runner parameter - previous', () => {
 })
 
 describe('overloads', () => {
+  const discriminant1 = { name: 'x', value: 1 } as const
+  const discriminant2 = { name: 'x', value: 2 } as const
   test('overloaded step runners are run', async () => {
     const p = PipelineDefinition
       .create()
@@ -427,7 +429,7 @@ describe('overloads', () => {
       .step('b')
       .overload(o =>
         o
-          .create({ discriminant: ['x', 1] })
+          .create({ discriminant: discriminant1 })
           .step('a', {
             // todo make it a type error to not propagate the discriminant
             run: (input) => ({ ...input, value: input.value + '+a' }),
@@ -448,13 +450,13 @@ describe('overloads', () => {
       .step('a')
       .step('b')
       .overload(o =>
-        o.create({ discriminant: ['x', 1] })
+        o.create({ discriminant: discriminant1 })
           .step('a', { run: (input) => ({ ...input, value: input.value + '+a' }) })
           .step('b', { run: (input) => ({ value: input.value + '+b' }) })
       )
       .overload(o =>
         o
-          .create({ discriminant: ['x', 2] })
+          .create({ discriminant: discriminant2 })
           .step('a', { run: (input) => ({ ...input, value: input.value + '+a2' }) })
           .step('b', { run: (input) => ({ value: input.value + '+b2' }) })
       )

@@ -170,19 +170,19 @@ export const readErrorCategoryOutputChannel = (
   return output.errors[errorCategory]
 }
 
-// export const traditionalGraphqlOutput = {
-//   defaults: { errorChannel: `throw` },
-//   envelope: { enabled: true, errors: { execution: true, other: false } },
-//   errors: { execution: `default`, other: `default` },
-// } satisfies OutputNormalized
+export const traditionalGraphqlOutput = {
+  defaults: { errorChannel: `throw` },
+  envelope: { enabled: true, errors: { execution: true, other: false } },
+  errors: { execution: `default`, other: `default` },
+} satisfies Normalized
 
-// export const traditionalGraphqlOutputThrowing: OutputNormalized = {
-//   ...traditionalGraphqlOutput,
-//   envelope: {
-//     ...traditionalGraphqlOutput.envelope,
-//     errors: {
-//       ...traditionalGraphqlOutput.envelope.errors,
-//       execution: false,
-//     },
-//   },
-// }
+export const traditionalGraphqlOutputThrowing: Normalized = {
+  ...traditionalGraphqlOutput,
+  envelope: {
+    ...traditionalGraphqlOutput.envelope,
+    errors: {
+      ...traditionalGraphqlOutput.envelope.errors,
+      execution: false,
+    },
+  },
+}

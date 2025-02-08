@@ -1,8 +1,8 @@
-import type { ConstructorParameters } from './constructor.js'
+import type { DependentExtensionParameters } from './DependentExtensionParameters.js'
 
 export interface PropertiesTypeFunction {
   parameters: unknown
   return: unknown
 }
 
-export type PropertiesTypeFunctionParameters = ConstructorParameters
+export type PropertiesTypeFunctionParameters = DependentExtensionParameters

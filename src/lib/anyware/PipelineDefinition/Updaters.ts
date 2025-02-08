@@ -16,11 +16,11 @@ export namespace Updaters {
 
   export type AddOverload<
     $PipelineDef extends PipelineDefinition,
-    $Overload extends Overload,
+    $Overload extends Overload.Data,
   > = ConfigManager.UpdateKeyWithAppendOne<$PipelineDef, 'overloads', $Overload>
 
   export type AddOverloads<
     $PipelineDef extends PipelineDefinition,
-    $Overloads extends Overload[],
+    $Overloads extends Overload.Data[],
   > = ConfigManager.UpdateKeyWithAppendMany<$PipelineDef, 'overloads', $Overloads>
 }

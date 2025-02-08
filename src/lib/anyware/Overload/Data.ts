@@ -2,10 +2,14 @@ import type { Configurator } from '../../configurator/configurator.js'
 import type { DiscriminantPropertyValue } from '../../prelude.js'
 import type { StepDefinition } from '../StepDefinition.js'
 
-export interface Data {
-  readonly discriminant: Discriminant
-  readonly configurator: Configurator
-  readonly steps: Record<string, StepDefinition>
+export interface Data<
+  $Discriminant extends Discriminant = Discriminant,
+  $Configurator extends Configurator = Configurator,
+  $Steps extends Record<string, StepDefinition> = Record<string, StepDefinition>,
+> {
+  readonly discriminant: $Discriminant
+  readonly configurator: $Configurator
+  readonly steps: $Steps
 }
 
 export interface Discriminant {

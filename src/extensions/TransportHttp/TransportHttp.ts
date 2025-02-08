@@ -92,8 +92,11 @@ const httpTransportConfigurator = Configurator()
 // Transport
 // ----------------------------
 
-export interface RequestPipelineOverload extends Anyware.Overload {
-  discriminant: ['transportType', 'http']
+export interface RequestPipelineOverload extends Anyware.Overload.Data {
+  discriminant: {
+    name: 'transportType'
+    value: 'http'
+  }
   input: ConfigurationNormalized
   inputInit: {}
   steps: {
@@ -169,7 +172,7 @@ export interface TransportHttpConstructor {
   (): TransportHttp
 }
 
-export type TransportHttp = Extension<
+export type TransportHttp = Extension.Data<
   `TransportHttp`,
   undefined,
   unknown,
@@ -181,7 +184,7 @@ export type TransportHttp = Extension<
   >
 >
 
-export const TransportHttp: TransportHttpConstructor = Extension(`TransportHttp`)
+export const TransportHttp: TransportHttpConstructor = Extension.create(`TransportHttp`)
   .transport(
     Transport(`http`)
       .configurator(httpTransportConfigurator)

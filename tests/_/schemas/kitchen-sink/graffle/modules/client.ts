@@ -18,7 +18,7 @@ const context = $$Utilities.contextFragmentExtensionsAdd(
     //   url: $$Data.defaultSchemaUrl,
     // }),
   ),
-  DocumentBuilder(),
+  DocumentBuilder,
 )
 
 export const create = $$Utilities.createConstructorWithContext(

@@ -5,7 +5,7 @@ import { Context, type Context as BaseContext } from '../../types/context.js'
 import { TransportHttp } from '../extensions/transport-http/runtime.js'
 import type { PartialOrUndefined } from '../main.js'
 
-const context = contextFragmentExtensionsAdd(Context.States.empty, TransportHttp())
+const context = contextFragmentExtensionsAdd(Context.States.empty, TransportHttp)
 
 export type MinimalClientContext = typeof context
 

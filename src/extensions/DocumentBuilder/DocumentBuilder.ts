@@ -4,7 +4,8 @@ import type { ContextTransports, GlobalRegistry } from '../../entrypoints/utilit
 import type { TypeFunction } from '../../lib/type-function/__.js'
 import { createMethodDocument, createMethodOperationType } from './_.js'
 
-export const DocumentBuilder = Extension(`DocumentBuilder`)
+export const DocumentBuilder = Extension
+  .create(`DocumentBuilder`)
   .properties(({ context }) => {
     return {
       document: createMethodDocument(context),

@@ -42,8 +42,11 @@ type TransportMemoryConfigurator = Configurator<
 // Transport
 // ----------------------------
 
-export interface RequestPipelineOverload extends Anyware.Overload {
-  discriminant: ['transportType', 'memory']
+export interface RequestPipelineOverload extends Anyware.Overload.Data {
+  discriminant: {
+    name: 'transportType'
+    value: 'memory'
+  }
   input: ConfigurationNormalized
   inputInit: {}
   steps: {
@@ -82,11 +85,7 @@ export interface ExchangeOutput extends PackOutput {}
 // Extension
 // ----------------------------
 
-export interface TransportMemoryConstructor {
-  (): TransportMemory
-}
-
-export type TransportMemory = Extension<
+export type TransportMemory = Extension.Data<
   `TransportMemory`,
   undefined,
   unknown,
@@ -95,10 +94,12 @@ export type TransportMemory = Extension<
   Transport<
     'memory',
     TransportMemoryConfigurator
-  >
+  >,
+  undefined
 >
 
-export const TransportMemory: TransportMemoryConstructor = Extension(`TransportMemory`)
+export const TransportMemory: TransportMemory = Extension
+  .create(`TransportMemory`)
   .transport(
     Transport(`memory`)
       .configurator(

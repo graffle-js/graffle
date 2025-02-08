@@ -1,3 +1,5 @@
+import type { HasRequiredKeys } from 'type-fest'
+
 // ----------------------------
 // Data Type
 // ----------------------------
@@ -72,7 +74,7 @@ namespace $ {
     return inputResolver as any
   }
 
-  export const normalizeTypeInput = <configuratorTypeInput extends Configurator.TypeInput>(
+  export const normalizeDataInput = <configuratorTypeInput extends Configurator.DataInput>(
     configuratorTypeInput: configuratorTypeInput,
   ): Configurator => {
     if (isBuilder(configuratorTypeInput)) {
@@ -107,10 +109,19 @@ const isBuilder = (value: any): value is Configurator.Builder<Configurator> =>
   typeof value === `object` && value !== null && BuilderTypeSymbol in value
 
 export namespace Configurator {
-  export type TypeInput =
-    | Configurator
-    | Configurator.Builder<Configurator>
-    | Configurator.BuilderProviderCallback<Configurator>
+  export type InferParameters<$Configurator extends Configurator> = HasRequiredKeys<$Configurator['input']> extends true
+    ? [configuration: $Configurator['input']]
+    : [configuration?: $Configurator['input']]
+
+  export type DataInput<$Configurator extends Configurator = Configurator> =
+    | $Configurator
+    | Configurator.Builder<$Configurator>
+    | Configurator.BuilderProviderCallback<$Configurator>
+
+  // export type TypeInput =
+  //   | Configurator
+  //   | Configurator.Builder<Configurator>
+  //   | Configurator.BuilderProviderCallback<Configurator>
   // ----------------------------
   // Builder
   // ----------------------------
