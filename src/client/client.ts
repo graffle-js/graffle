@@ -182,8 +182,10 @@ export const createWithContext = <$Context extends Context>(
           }
 
           const initialInput = {
-            transportType: context.transports.current,
-            transport: context.transports.configurations[context.transports.current],
+            [context.transports.registry[context.transports.current]!.discriminant[`name`]]:
+              context.transports.registry[context.transports.current]!.discriminant[`value`],
+            [context.transports.registry[context.transports.current]!.configurationMount]:
+              context.transports.configurations[context.transports.current],
             state: context,
             request: analyzedRequest,
           } as RequestPipeline.Base['input']
@@ -219,6 +221,7 @@ export const createWithContext = <$Context extends Context>(
     // const configurationIndexEntry = configurationIndex[_.name]
     // if (!configurationIndexEntry && _.configurator) throw new Error(`Configuration entry for ${_.name} not found`)
 
+    _
     const propertiesComputed = _.propertiesComputed.reduce((acc, propertiesComputer) => {
       return {
         ...acc,

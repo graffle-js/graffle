@@ -7,7 +7,7 @@ import { type ContextFragmentAddProperties, contextFragmentPropertiesAdd } from 
 import { RequestInterceptors } from '../requestInterceptors/__.js'
 import { Transports } from '../transports/__.js'
 import type { Transport } from '../transports/dataType.js'
-import type { Data } from './dataType/_exports.js'
+import type { Extension } from './dataType/_namespace.js'
 
 // ------------------------------------------------------------
 // Method
@@ -15,7 +15,7 @@ import type { Data } from './dataType/_exports.js'
 
 // dprint-ignore
 export interface MethodAdd<$Context extends Context> {
-  <extension extends Extension>(extension: extension):
+  <extension extends Extension.Data>(extension: extension):
     Client<ContextAddOne<$Context, extension>>
 }
 
@@ -24,9 +24,9 @@ export interface MethodAdd<$Context extends Context> {
 // ------------------------------------------------------------
 
 export interface ContextFragmentExtensions {
-  readonly extensions: readonly Extension[]
+  readonly extensions: readonly Extension.Data[]
   readonly extensionsIndex: {
-    [extensionName: string]: Extension
+    [extensionName: string]: Extension.Data
   }
 }
 
@@ -46,7 +46,7 @@ export const contextFragmentExtensionsEmpty: ContextFragmentExtensionsEmpty = {
 // dprint-ignore
 export type ContextAddOne<
   $Context extends Context,
-  $Extension extends Extension,
+  $Extension extends Extension.Data,
 > = {
       readonly [_ in keyof $Context]:
         _ extends 'properties' ?
@@ -81,7 +81,7 @@ export type ContextAddOne<
 // todo: make return a fragment
 export const contextFragmentExtensionsAdd = <
   const $Context extends Context,
-  $Extension extends Extension,
+  $Extension extends Extension.Data,
 >(context: $Context, extension: $Extension): ContextAddOne<$Context, $Extension> => {
   const fragment: Writable<Context> = {
     ...context,

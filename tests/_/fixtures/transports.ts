@@ -13,7 +13,6 @@ export const ATransportBuilder = Transport(`ATransport`)
 export type ATransportBuilder = typeof ATransportBuilder
 
 export const ATransport = ATransportBuilder.return()
-ATransport.discriminant
 
 export type ATransport = typeof ATransport
 

@@ -216,7 +216,7 @@ export const contextFragmentTransportsEmpty: ContextFragmentTransportsEmpty = Ob
 
 export const contextFragmentAdd = (context: Context, transport: Transport): ContextFragment => {
   const isFirstTransport = context.transports.current === undefined
-  const transportName = transport.discriminant[`1`]
+  const transportName = transport.name
 
   const isTransportAlreadyRegistered = context.transports.registry[transportName] !== undefined
   if (isTransportAlreadyRegistered) {

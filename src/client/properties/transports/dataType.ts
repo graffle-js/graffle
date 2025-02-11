@@ -8,11 +8,15 @@ export interface Transport<
   $Pack extends Anyware.StepDefinition<'pack'> = Anyware.StepDefinition<'pack'>,
   $Exchange extends Anyware.StepDefinition<'exchange'> = Anyware.StepDefinition<'exchange'>,
   $Unpack extends Anyware.StepDefinition<'unpack'> = Anyware.StepDefinition<'unpack'>,
-> extends Anyware.Overload {
-  discriminant: ['transportType', $Name]
+> extends Anyware.Overload.Data {
+  discriminant: {
+    name: 'transportType'
+    value: $Name
+  }
   [TypeSymbol]: true
   name: $Name
   configurator: $Configurator
+  configurationMount: 'transport'
   steps: {
     pack: $Pack
     exchange: $Exchange
@@ -29,9 +33,13 @@ export const Transport = <$Name extends string>(
   const transport: Transport = {
     [TypeSymbol]: true,
     name,
-    discriminant: [`transportType`, name],
+    discriminant: {
+      name: `transportType`,
+      value: name,
+    },
     steps: {},
     configurator: Configurator.$.empty,
+    configurationMount: `transport`,
   } as any
   return Transport_(transport) as any
 }
@@ -71,7 +79,7 @@ const Transport_ = (
     configurator: (configuratorTypeInput) => {
       const newTransport = {
         ...transport,
-        configurator: Configurator.$.normalizeDataInput(configuratorTypeInput),
+        configurator: Configurator.$.normalizeDataInput(configuratorTypeInput as any),
       }
       return Transport_(newTransport) as any
     },

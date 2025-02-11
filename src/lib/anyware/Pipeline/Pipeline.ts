@@ -137,13 +137,13 @@ export namespace Pipeline {
 
   type InferStepSlots<
     $Step extends StepDefinition,
-    $Overloads extends readonly Overload[],
+    $Overloads extends readonly Overload.Data[],
   > =
     & $Step['slots']
     & InferStepSlots_<$Step, $Overloads>
   // todo try putting the helper type below into a type variable above
   // dprint-ignore
-  type InferStepSlots_<$Step extends StepDefinition, $Overloads extends readonly Overload[]> =
+  type InferStepSlots_<$Step extends StepDefinition, $Overloads extends readonly Overload.Data[]> =
     Tuple.IntersectItems<{
       [$Index in keyof $Overloads]:
         IsUnknown<$Overloads[$Index]['steps'][$Step['name']]> extends true
@@ -152,7 +152,7 @@ export namespace Pipeline {
     }>
 
   // dprint-ignore
-  type InferStepOutput<$Step extends StepDefinition, $Overload extends Overload> = $Overload extends never ? never :
+  type InferStepOutput<$Step extends StepDefinition, $Overload extends Overload.Data> = $Overload extends never ? never :
     & $Step['output']
     & { [_ in $Overload['discriminant']['name']]: $Overload['discriminant']['value'] }
     & $Overload['steps'][$Step['name']]['output']
@@ -161,7 +161,7 @@ export namespace Pipeline {
   type InferStepInput<
     $StepIndex extends Tuple.IndexKey,
     $StepDefinition extends StepDefinition,
-    $Overload extends Overload,
+    $Overload extends Overload.Data,
   > = $Overload extends never ? never :
     & $StepDefinition['input']
     // Overload Contributions:
@@ -170,5 +170,10 @@ export namespace Pipeline {
     // 2. This specific step:
     & $Overload['steps'][$StepDefinition['name']]['input']
     // 3. If this is the first step, then the pipeline input contributions, if any:
-    & ($StepIndex extends '0' ? $Overload['configurator']['input'] : {})
+    & ($StepIndex extends '0'
+        ? $Overload['configurationMount'] extends string
+          ? { [_ in $Overload['configurationMount']]: $Overload['configurator']['input'] }
+          : $Overload['configurator']['input']
+        : {}
+      )
 }

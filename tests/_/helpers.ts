@@ -51,15 +51,15 @@ interface Fixtures {
   //   schema: { map: SchemaDrivenDataMap }
   //   check: { preflight: false }
   // }>
-  // kitchenSink: GraffleBasic.Client.With<{
-  //   schema: { map: SchemaDrivenDataMap }
-  //   check: { preflight: false }
-  //   transports: ConfigManager.SetKeyUnsafe<
-  //     GraffleBasic.Client.Context['transports'],
-  //     `current`,
-  //     `memory`
-  //   >
-  // }>
+  kitchenSink: GraffleBasic.Client.With<{
+    schema: { map: SchemaDrivenDataMap }
+    check: { preflight: false }
+    transports: ConfigManager.SetKeyUnsafe<
+      GraffleBasic.Client.Context['transports'],
+      `current`,
+      `memory`
+    >
+  }>
   kitchenSinkData: typeof db
   project: Project
 }
@@ -155,16 +155,16 @@ export const test = testBase.extend<Fixtures>({
   g0: async ({}, use) => {
     await use(g0)
   },
-  // kitchenSink: async ({ fetch: _ }, use) => {
-  //   const kitchenSink = KitchenSink.create()
-  //     .use(TransportMemory({ schema: kitchenSinkSchema }))
-  //     .transport(`memory`)
-  //   // kitchenSink.anyware(async ({ encode }) => {
-  //   //   encode({ input: {}})
-  //   // })
-  //   // @ts-expect-error fixme
-  //   await use(kitchenSink)
-  // },
+  kitchenSink: async ({ fetch: _ }, use) => {
+    const kitchenSink = KitchenSink.create()
+      .use(TransportMemory)
+      .transport()
+    // kitchenSink.anyware(async ({ encode }) => {
+    //   encode({ input: {}})
+    // })
+    // @ts-expect-error fixme
+    await use(kitchenSink)
+  },
   // kitchenSinkHttp: async ({ fetch: _ }, use) => {
   //   const kitchenSink = KitchenSink
   //     .create()

@@ -31,7 +31,7 @@ export interface Data<
   readonly propertiesComputed: ReadonlyArray<Properties.PropertiesComputer>
   readonly propertiesComputedTypeFunctions$: $PropertiesComputersTypeFunctions
   // todo support for multiple transports in one extension
-  readonly transport?: $Transport
+  readonly transport: $Transport
   readonly static: $Static
   // typeHooks: $TypeHooks
 }

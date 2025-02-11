@@ -90,7 +90,7 @@ export type TransportMemory = Extension.Data<
   undefined,
   unknown,
   {},
-  [],
+  readonly [],
   Transport<
     'memory',
     TransportMemoryConfigurator
@@ -138,12 +138,20 @@ export const TransportMemory: TransportMemory = Extension
       })
       .exchange({
         run: async (input) => {
-          input.request
-          const result = await execute(input)
+          const result = await execute({
+            // todo: should be type safe
+            schema: input.transport.schema,
+            request: input.request,
+          })
           return {
             ...input,
             result,
           }
+        },
+      })
+      .unpack({
+        run(input) {
+          return input
         },
       }),
   )
