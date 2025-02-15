@@ -18,6 +18,7 @@ import type * as _re_export from './properties.js'
 export const create: Create = (name) => {
   const data: WritableDeep<Data> = {
     name,
+    transport: undefined,
     static: {},
     propertiesStatic: {},
     propertiesComputed: [],
@@ -108,16 +109,16 @@ export interface Chain<
   /**
    * todo
    */
-  properties: <$Properties extends object>(
-    constructor: $Properties | Properties.PropertiesComputer<Context, $Properties, __$ConfigurationNormalized>
+  properties: <properties extends object>(
+    propertiesInit: properties | Properties.PropertiesComputer<Context, properties, __$ConfigurationNormalized>
   ) => Chain<$Context, {
     readonly [_ in keyof $Data]: _ extends 'propertiesStatic' ?
-      $Properties extends Properties.PropertiesComputerTypeFunction
+      properties extends Properties.PropertiesComputerTypeFunction
         ? $Data['propertiesStatic']
-        : ObjectMergeShallow<$Data['propertiesStatic'], $Properties>
+        : ObjectMergeShallow<$Data['propertiesStatic'], properties>
       : _ extends 'propertiesComputedTypeFunctions$' ?
-        $Properties extends Properties.PropertiesComputerTypeFunction
-          ? [$Properties]
+        properties extends Properties.PropertiesComputerTypeFunction
+          ? readonly [properties]
           : $Data['propertiesComputedTypeFunctions$']
       : $Data[_]
   }>

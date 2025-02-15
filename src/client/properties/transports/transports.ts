@@ -3,7 +3,7 @@ import type { Configurator } from '../../../lib/configurator/configurator.js'
 import { type EmptyObject, emptyObject, isObjectEmpty, type Objekt, type StringKeyof } from '../../../lib/prelude.js'
 import type { RequestPipeline } from '../../../requestPipeline/RequestPipeline.js'
 import { requestPipelineBaseDefinition } from '../../../requestPipeline/RequestPipeline.js'
-import { type Context } from '../../../types/context.js'
+import { Context, ContextFragments } from '../../../types/context.js'
 import type { Client } from '../../client.js'
 import { Transport } from './dataType.js'
 
@@ -284,15 +284,20 @@ export const contextFragmentSetCurrent = (
   return fragment
 }
 
-export const contextFragmentConfigureCurrent = (
-  context: Context,
-  configurationInput: Configurator.Configuration,
-): null | ContextFragment => {
+export const contextFragmentConfigureCurrent = ContextFragments.defineReducer<
+  ContextFragment,
+  Configurator.Configuration
+>((
+  context,
+  configurationInput,
+) => {
   if (!context.transports.current) {
     throw new Error(`No transport is currently set.`)
   }
   return contextFragmentConfigure(context, context.transports.current, configurationInput)
-}
+})
+
+export const contextConfigureCurrent = Context.createReducer(contextFragmentConfigureCurrent)
 
 export const contextFragmentConfigure = (
   context: Context,

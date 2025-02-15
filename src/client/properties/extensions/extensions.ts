@@ -1,7 +1,7 @@
 import type { EmptyObject, Writable } from 'type-fest'
 import type { Anyware } from '../../../lib/anyware/_namespace.js'
 import { type EmptyArray, emptyArray, emptyObject, type UnknownOrAnyToNever } from '../../../lib/prelude.js'
-import { type Context } from '../../../types/context.js'
+import { Context, ContextFragments } from '../../../types/context.js'
 import type { Client } from '../../client.js'
 import { type ContextFragmentAddProperties, contextFragmentPropertiesAdd } from '../properties/properties.js'
 import { RequestInterceptors } from '../requestInterceptors/__.js'
@@ -23,19 +23,19 @@ export interface MethodAdd<$Context extends Context> {
 // Context Fragment
 // ------------------------------------------------------------
 
-export interface ContextFragmentExtensions {
+export interface ContextFragment {
   readonly extensions: readonly Extension.Data[]
   readonly extensionsIndex: {
     [extensionName: string]: Extension.Data
   }
 }
 
-export interface ContextFragmentExtensionsEmpty extends ContextFragmentExtensions {
+export interface ContextFragmentEmpty extends ContextFragment {
   extensions: EmptyArray
   extensionsIndex: EmptyObject
 }
 
-export const contextFragmentExtensionsEmpty: ContextFragmentExtensionsEmpty = {
+export const contextFragmentEmpty: ContextFragmentEmpty = {
   extensions: emptyArray,
   extensionsIndex: emptyObject,
 }
@@ -43,6 +43,7 @@ export const contextFragmentExtensionsEmpty: ContextFragmentExtensionsEmpty = {
 // todo: type to use multiple to reduce type instantiation
 // useful for presets
 
+// todo ContextAddMany
 // dprint-ignore
 export type ContextAddOne<
   $Context extends Context,
@@ -78,38 +79,44 @@ export type ContextAddOne<
           $Context[_]
     }
 
-// todo: make return a fragment
-export const contextFragmentExtensionsAdd = <
-  const $Context extends Context,
-  $Extension extends Extension.Data,
->(context: $Context, extension: $Extension): ContextAddOne<$Context, $Extension> => {
-  const fragment: Writable<Context> = {
-    ...context,
-    extensions: Object.freeze([...context.extensions, extension]),
-    extensionsIndex: Object.freeze({
-      ...context.extensionsIndex,
-      [extension.name]: extension,
-    }),
-  }
-
-  if (extension.transport) {
-    Object.assign(fragment, Transports.contextFragmentAdd(context, extension.transport))
-  }
-  if (extension.requestInterceptor) {
-    Object.assign(
-      fragment,
-      RequestInterceptors.contextFragmentRequestInterceptorsAdd(context, extension.requestInterceptor),
-    )
-  }
-  if (extension.propertiesStatic || extension.propertiesComputed) {
-    const propertiesFragment = contextFragmentPropertiesAdd(context, {
-      static: extension.propertiesStatic,
-      computed: extension.propertiesComputed,
-    })
-    if (propertiesFragment) {
-      Object.assign(fragment, propertiesFragment)
+export const contextFragmentAddMany = ContextFragments.defineReducer<ContextFragment, Extension.Data[]>(
+  (context, extensions) => {
+    const fragment: Writable<ContextFragment> = {
+      extensions: Object.freeze([...context.extensions, ...extensions]),
+      extensionsIndex: Object.freeze({
+        ...context.extensionsIndex,
+        ...extensions.reduce<Record<string, Extension.Data>>((acc, extension) => {
+          acc[extension.name] = extension
+          return acc
+        }, {}),
+      }),
     }
-  }
 
-  return fragment as any
-}
+    for (const extension of extensions) {
+      if (extension.transport) {
+        Object.assign(fragment, Transports.contextFragmentAdd(context, extension.transport))
+      }
+
+      if (extension.requestInterceptor) {
+        Object.assign(
+          fragment,
+          RequestInterceptors.contextFragmentRequestInterceptorsAdd(context, extension.requestInterceptor),
+        )
+      }
+
+      if (extension.propertiesStatic || extension.propertiesComputed) {
+        const propertiesFragment = contextFragmentPropertiesAdd(context, {
+          static: extension.propertiesStatic,
+          computed: extension.propertiesComputed,
+        })
+        if (propertiesFragment) {
+          Object.assign(fragment, propertiesFragment)
+        }
+      }
+    }
+
+    return fragment as any
+  },
+)
+
+export const contextAddMany = Context.createReducer(contextFragmentAddMany)

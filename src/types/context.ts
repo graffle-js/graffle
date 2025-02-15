@@ -12,7 +12,7 @@ export interface Context
     Transports.ContextFragment,
     Properties.ContextFragmentProperties,
     RequestInterceptors.ContextFragmentRequestInterceptors,
-    Extensions.ContextFragmentExtensions,
+    Extensions.ContextFragment,
     Scalars.ContextFragment
 {
   // Type Level Properties
@@ -27,13 +27,19 @@ export interface Context
 }
 
 export namespace Context {
+  export const createReducer = <$Input>(
+    fragmentReducer: ContextFragments.Reducer<ContextFragment, $Input>,
+  ): (context: Context, input: $Input) => Context => {
+    return (context, input) => ContextFragments.merge(context, fragmentReducer(context, input))
+  }
+
   export namespace States {
     export interface Empty extends Context {
       readonly properties: Properties.ContextFragmentPropertiesEmpty['properties']
       readonly transports: Transports.ContextFragmentTransportsEmpty['transports']
       readonly requestPipelineDefinition: Transports.ContextFragmentTransportsEmpty['requestPipelineDefinition']
-      readonly extensions: Extensions.ContextFragmentExtensionsEmpty['extensions']
-      readonly extensionsIndex: Extensions.ContextFragmentExtensionsEmpty['extensionsIndex']
+      readonly extensions: Extensions.ContextFragmentEmpty['extensions']
+      readonly extensionsIndex: Extensions.ContextFragmentEmpty['extensionsIndex']
       readonly scalars: Scalars.ContextFragmentEmpty['scalars']
       readonly configuration: Configuration.ContextFragmentConfigurationEmpty['configuration']
       // type-level properties
@@ -47,7 +53,7 @@ export namespace Context {
       ...Properties.contextFragmentPropertiesEmpty,
       ...Transports.contextFragmentTransportsEmpty,
       ...RequestInterceptors.contextFragmentRequestInterceptorsEmpty,
-      ...Extensions.contextFragmentExtensionsEmpty,
+      ...Extensions.contextFragmentEmpty,
       ...Scalars.contextFragmentScalarsEmpty,
       ...Configuration.contextFragmentConfigurationEmpty,
       typeHookOnRequestDocumentRootType: null as any,
@@ -63,14 +69,29 @@ export namespace Context {
 
 export type ContextFragment = Partial<Context>
 
-export const contextMergeFragment = <$Context extends Context, $Fragment extends null | ContextFragment>(
-  context: $Context,
-  fragment: $Fragment,
-): $Fragment extends null ? $Context : $Fragment extends Context ? ObjectMergeShallow<$Context, $Fragment> : never => {
-  if (!fragment) return context as any
-  const newContext = Object.freeze({
-    ...context,
-    ...fragment,
-  }) as any
-  return newContext
+export namespace ContextFragments {
+  export type Reducer<$ContextFragment extends ContextFragment = ContextFragment, $Input = any> = (
+    context: Context,
+    input: $Input,
+  ) => null | $ContextFragment
+  export const defineReducer = <$ContextFragment extends ContextFragment, $Input>(
+    reducer: Reducer<$ContextFragment, $Input>,
+  ): Reducer<$ContextFragment, $Input> => {
+    return reducer
+  }
+
+  export const merge = <$Context extends Context, $Fragment extends null | ContextFragment>(
+    context: $Context,
+    fragment: $Fragment,
+  ): $Fragment extends null ? $Context
+    : $Fragment extends Context ? ObjectMergeShallow<$Context, $Fragment>
+    : never =>
+  {
+    if (!fragment) return context as any
+    const newContext = Object.freeze({
+      ...context,
+      ...fragment,
+    }) as any
+    return newContext
+  }
 }

@@ -2,7 +2,7 @@ import { Anyware } from '../lib/anyware/_namespace.js'
 import { getOperationType } from '../lib/grafaid/document.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
 import type { RequestPipeline } from '../requestPipeline/RequestPipeline.js'
-import { Context, type ContextFragment, contextMergeFragment } from '../types/context.js'
+import { Context, type ContextFragment, ContextFragments } from '../types/context.js'
 import { Configuration } from './properties/configuration/__.js'
 import { Extensions } from './properties/extensions/__.js'
 import { Output } from './properties/output/_namespace.js'
@@ -95,7 +95,7 @@ export const createConstructorWithContext = <$Context extends Context>(
 (configurationInput) => {
   const configurationInput_ = configurationInput as undefined | Configuration.ConfigurationIndex.Input
   const newContext = configurationInput_
-    ? contextMergeFragment(
+    ? ContextFragments.merge(
       context,
       Configuration.configure(context, configurationInput_),
     )
@@ -110,8 +110,7 @@ export const createWithContext = <$Context extends Context>(
 ): Client<$Context> => {
   const copy = (fragment: null | ContextFragment) => {
     if (!fragment) return client
-    const newContext = contextMergeFragment(context, fragment)
-    // if (newContext === context) return client // todo is needed?
+    const newContext = ContextFragments.merge(context, fragment)
     return createWithContext(newContext) as any
   }
 
@@ -133,7 +132,7 @@ export const createWithContext = <$Context extends Context>(
       return copy(Properties.contextFragmentPropertiesAdd(context, { static: static_, computed: computed as any }))
     },
     use(extension) {
-      return copy(Extensions.contextFragmentExtensionsAdd(context, extension))
+      return copy(Extensions.contextFragmentAddMany(context, extension))
     },
     scalar: ((...args: Scalars.Method.Arguments) => {
       const scalar = Scalars.Method.normalizeArguments(args)

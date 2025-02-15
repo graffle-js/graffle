@@ -177,14 +177,14 @@ export type TransportHttp = Extension.Data<
   undefined,
   unknown,
   {},
-  [],
+  readonly [],
   Transport<
     'http',
     TransportHttpConfigurator
   >
 >
 
-export const TransportHttp: TransportHttpConstructor = Extension.create(`TransportHttp`)
+export const TransportHttp: TransportHttp = Extension.create(`TransportHttp`)
   .transport(
     Transport(`http`)
       .configurator(httpTransportConfigurator)
