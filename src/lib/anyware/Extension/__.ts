@@ -1,4 +1,4 @@
-import type { Overload } from '../Overload/__.js'
+import type { Overload } from '../Overload/_namespace.js'
 
 export * as Extension from './_.js'
 

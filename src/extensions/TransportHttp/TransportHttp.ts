@@ -1,28 +1,27 @@
-import { create, type Extension } from '../../entrypoints/extensionkit.js'
-import type { TypeHooksEmpty } from '../../extension/TypeHooks.js'
-import type { Anyware } from '../../lib/anyware/__.js'
-import type { ConfigManager } from '../../lib/config-manager/__.js'
+import { Configurator, Data, Extension } from '../../entrypoints/extension.js'
+import type { Anyware } from '../../lib/anyware/_namespace.js'
 import type { Grafaid } from '../../lib/grafaid/__.js'
 import { OperationTypeToAccessKind, print } from '../../lib/grafaid/document.js'
 import { getRequestEncodeSearchParameters, postRequestEncodeBody } from '../../lib/grafaid/http/http.js'
 import { getRequestHeadersRec, parseExecutionResult, postRequestHeadersRec } from '../../lib/grafaid/http/http.js'
 import { mergeRequestInit, searchParamsAppendAll } from '../../lib/http.js'
 import type { httpMethodGet, httpMethodPost } from '../../lib/http.js'
-import { _, isString, type MaybePromise, type PartialOrUndefined } from '../../lib/prelude.js'
+import { _, isString, type MaybePromise } from '../../lib/prelude.js'
 import type { RequestPipeline } from '../../requestPipeline/RequestPipeline.js'
 
-export const MethodMode = {
-  post: `post`,
-  getReads: `getReads`,
-} as const
+// ----------------------------
+// Configuration
+// ----------------------------
 
-export type MethodModeGetReads = typeof MethodMode['getReads']
+type TransportHttpConfigurator = Configurator<
+  ConfigurationInput,
+  ConfigurationNormalized,
+  ConfigurationDefault,
+  Configurator.InputResolver<ConfigurationInputResolver$Func>
+>
 
-export type MethodModePost = typeof MethodMode['post']
-
-export type MethodMode = MethodModePost | MethodModeGetReads
-
-export type TransportHttpInput = {
+export type ConfigurationInput = {
+  url?: URL | string
   /**
    * The HTTP method to use to make the request.
    *
@@ -41,49 +40,64 @@ export type TransportHttpInput = {
   raw?: RequestInit
 }
 
-export interface TransportHttpConstructor {
-  <$ConfigInit extends ConfigInit = ConfigInitEmpty>(
-    configInit?: $ConfigInit,
-  ): TransportHttp<ConfigManager.MergeDefaultsShallow<ConfigDefaults, $ConfigInit>>
-}
-
-export interface Configuration {
-  url: URL | string
+export interface ConfigurationNormalized {
+  url: URL
   methodMode: MethodMode
-  headers?: HeadersInit
+  headers?: Headers
   raw?: RequestInit
 }
 
-export interface ConfigDefaults {
-  methodMode: 'post'
-}
-
-export const configDefaults: ConfigDefaults = {
+export const configurationDefault = {
   methodMode: `post`,
+} satisfies Partial<ConfigurationNormalized>
+export type ConfigurationDefault = typeof configurationDefault
+
+export interface ConfigurationInputResolver$Func
+  extends Configurator.InputResolver.$Func<ConfigurationInput, ConfigurationNormalized, ConfigurationDefault>
+{
+  return: ConfigurationInputResolver$Func_<this['parameters']>
+}
+// dprint-ignore
+export interface ConfigurationInputResolver$Func_<
+  $Parameters extends Configurator.InputResolver.Parameters<ConfigurationInput, ConfigurationNormalized, ConfigurationDefault>,
+  _Input = $Parameters['input'],
+  _Current = $Parameters['current'],
+> extends Partial<ConfigurationNormalized> {
+  url: 'url' extends keyof _Current ? URL : 'url' extends keyof _Input ? URL : undefined
+  methodMode: 'methodMode' extends keyof _Current ? MethodMode : 'methodMode' extends keyof _Input ? MethodMode : undefined
 }
 
-export type ConfigInit = PartialOrUndefined<Configuration>
+export const MethodMode = {
+  post: `post`,
+  getReads: `getReads`,
+} as const
 
-export interface ConfigInitEmpty {}
+export type MethodModeGetReads = typeof MethodMode['getReads']
 
-export interface TransportHttp<$Input extends PartialOrUndefined<Configuration>> extends Extension {
-  name: `TransportHttp`
-  config: Configuration
-  transport: {
-    name: 'http'
-    config: Configuration
-    configInit: $Input
-    configDefaults: PartialOrUndefined<Configuration>
-    requestPipelineOverload: RequestPipelineOverload
+export type MethodModePost = typeof MethodMode['post']
+
+export type MethodMode = MethodModePost | MethodModeGetReads
+
+const httpTransportConfigurator = Configurator()
+  .input<ConfigurationInput>()
+  .normalized<ConfigurationNormalized>()
+  .default(configurationDefault)
+  .inputResolver<ConfigurationInputResolver$Func>(({ current, input }) => {
+    // todo
+    input
+    return current
+  })
+
+// ----------------------------
+// Transport
+// ----------------------------
+
+export interface RequestPipelineOverload extends Anyware.Overload.Data {
+  discriminant: {
+    name: 'transportType'
+    value: 'http'
   }
-  typeHooks: TypeHooksEmpty
-  onRequest: undefined
-  builder: undefined
-}
-
-export interface RequestPipelineOverload extends Anyware.Overload {
-  discriminant: ['transportType', 'http']
-  input: Configuration
+  input: ConfigurationNormalized
   inputInit: {}
   steps: {
     pack: {
@@ -150,107 +164,113 @@ type ExchangeGetRequest = Omit<RequestInit, 'body' | 'method'> & {
   url: string | URL
 }
 
-export const TransportHttp: TransportHttpConstructor = create({
-  name: `TransportHttp`,
-  normalizeConfig: (configInit?: ConfigInit) => {
-    return {
-      ...configDefaults,
-      ...configInit,
-      url: configInit?.url ? new URL(configInit.url) : undefined,
-    }
-  },
-  create({ config }) {
-    return {
-      transport(create) {
-        return create(`http`)
-          .config<Configuration>()
-          .defaults(config)
-          // .configInit<MergeConfigInitDefaults<$ConfigInit>>()
-          .stepWithExtendedInput<{ headers?: HeadersInit }>()(`pack`, {
-            slots: {
-              searchParams: getRequestEncodeSearchParameters,
-              body: postRequestEncodeBody,
-            },
-            run: (input, slots) => {
-              const graphqlRequest: Grafaid.HTTP.RequestConfig = {
-                operationName: input.request.operationName,
-                variables: input.request.variables,
-                query: print(input.request.query),
-              }
+// ----------------------------
+// Extension
+// ----------------------------
 
-              const operationType = isString(input.request.operation)
-                ? input.request.operation
-                : input.request.operation.operation
-              const methodMode = input.methodMode
-              const requestMethod = methodMode === MethodMode.post
-                ? `post`
-                : OperationTypeToAccessKind[operationType] === `read`
-                ? `get`
-                : `post`
+export interface TransportHttpConstructor {
+  (): TransportHttp
+}
 
-              const baseProperties = mergeRequestInit(
-                mergeRequestInit(
-                  mergeRequestInit(
-                    {
-                      headers: requestMethod === `get` ? getRequestHeadersRec : postRequestHeadersRec,
-                    },
-                    {
-                      headers: input.headers,
-                    },
-                  ),
-                  input.raw,
-                ),
+export type TransportHttp = Extension.Data<
+  `TransportHttp`,
+  undefined,
+  unknown,
+  {},
+  readonly [],
+  readonly [Data<'http', TransportHttpConfigurator>]
+>
+
+export const TransportHttp: TransportHttp = Extension.create(`TransportHttp`)
+  .transport(
+    Transport(`http`)
+      .configurator(httpTransportConfigurator)
+      // todo currently the configurator data is spread into the input however it should be concentrated into a transport data prop and then
+      // each step should have the possibility of getting its own configurator too.
+      // .packInput<{ headers?: HeadersInit }>()
+      .pack({
+        slots: {
+          searchParams: getRequestEncodeSearchParameters,
+          body: postRequestEncodeBody,
+        },
+        run: (input, slots) => {
+          const graphqlRequest: Grafaid.HTTP.RequestConfig = {
+            operationName: input.request.operationName,
+            variables: input.request.variables,
+            query: print(input.request.query),
+          }
+
+          const operationType = isString(input.request.operation)
+            ? input.request.operation
+            : input.request.operation.operation
+          const methodMode = input.methodMode
+          const requestMethod = methodMode === MethodMode.post
+            ? `post`
+            : OperationTypeToAccessKind[operationType] === `read`
+            ? `get`
+            : `post`
+
+          const baseProperties = mergeRequestInit(
+            mergeRequestInit(
+              mergeRequestInit(
+                {
+                  headers: requestMethod === `get` ? getRequestHeadersRec : postRequestHeadersRec,
+                },
                 {
                   headers: input.headers,
                 },
-              )
-              const request: ExchangeRequest = requestMethod === `get`
-                ? {
-                  methodMode: methodMode as MethodModeGetReads,
-                  ...baseProperties,
-                  method: `get`,
-                  url: searchParamsAppendAll(input.url, slots.searchParams(graphqlRequest)),
-                }
-                : {
-                  methodMode: methodMode,
-                  ...baseProperties,
-                  method: `post`,
-                  url: input.url,
-                  body: slots.body(graphqlRequest),
-                }
-              return {
-                ...input,
-                request,
-              }
+              ),
+              input.raw,
+            ),
+            {
+              headers: input.headers,
             },
-          })
-          .step(`exchange`, {
-            slots: {
-              fetch: (request: Request): MaybePromise<Response> => fetch(request),
-            },
-            run: async (input, slots) => {
-              const request = new Request(input.request.url, input.request)
-              const response = await slots.fetch(request)
-              return {
-                ...input,
-                response,
-              }
-            },
-          })
-          .step(`unpack`, {
-            run: async (input) => {
-              // todo 1 if response is missing header of content length then .json() hangs forever.
-              //        firstly consider a timeout, secondly, if response is malformed, then don't even run .json()
-              // todo 2 if response is e.g. 404 with no json body, then an error is thrown because json parse cannot work, not gracefully handled here
-              const json = await input.response.json() as object
-              const result = parseExecutionResult(json)
-              return {
-                ...input,
-                result,
-              }
-            },
-          })
-      },
-    }
-  },
-})
+          )
+          const request: ExchangeRequest = requestMethod === `get`
+            ? {
+              methodMode: methodMode as MethodModeGetReads,
+              ...baseProperties,
+              method: `get`,
+              url: searchParamsAppendAll(input.url, slots.searchParams(graphqlRequest)),
+            }
+            : {
+              methodMode: methodMode,
+              ...baseProperties,
+              method: `post`,
+              url: input.url,
+              body: slots.body(graphqlRequest),
+            }
+          return {
+            ...input,
+            request,
+          }
+        },
+      })
+      .exchange({
+        slots: {
+          fetch: (request: Request): MaybePromise<Response> => fetch(request),
+        },
+        run: async (input, slots) => {
+          const request = new Request(input.request.url, input.request)
+          const response = await slots.fetch(request)
+          return {
+            ...input,
+            response,
+          }
+        },
+      })
+      .unpack({
+        run: async (input) => {
+          // todo 1 if response is missing header of content length then .json() hangs forever.
+          //        firstly consider a timeout, secondly, if response is malformed, then don't even run .json()
+          // todo 2 if response is e.g. 404 with no json body, then an error is thrown because json parse cannot work, not gracefully handled here
+          const json = await input.response.json() as object
+          const result = parseExecutionResult(json)
+          return {
+            ...input,
+            result,
+          }
+        },
+      }),
+  )
+  .return()

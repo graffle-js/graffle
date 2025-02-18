@@ -1,4 +1,5 @@
-import { Errors, Extension } from '../../entrypoints/extensionkit.js'
+import { Extension } from '../../entrypoints/extension.js'
+import { Errors } from '../../lib/errors/__.js'
 import { normalizeRequestToNode } from '../../lib/grafaid/request.js'
 import { type ExcludeNullAndUndefined, isString } from '../../lib/prelude.js'
 import { isRecordLikeObject } from '../../lib/prelude.js'
@@ -7,28 +8,11 @@ import { SchemaDrivenDataMap } from '../../types/SchemaDrivenDataMap/__.js'
 import type { GeneratedExtensions } from './global.js'
 import { injectTypenameOnRootResultFields } from './injectTypenameOnRootResultFields.js'
 
-// todo we can probably remove this explicit type, its not needed, thought it might be, for excess depth error
-export interface SchemaErrors extends Extension {
-  name: `SchemaErrors`
-  config: undefined
-  onRequest: RequestPipelineBaseInterceptor
-  builder: undefined
-  transport: undefined
-  typeHooks: {
-    onRequestDocumentRootType: [OnRequestDocumentRootType_]
-    onRequestResult: [OnRequestResult_]
-    requestResultDataTypes: never
-  }
-}
-
-export const SchemaErrors: () => SchemaErrors = Extension.create({
-  name: `SchemaErrors`,
-  create({ typeHooks }) {
+export const SchemaErrors = Extension
+  .build(`SchemaErrors`)
+  .constructor(() => {
     return {
-      typeHooks: typeHooks
-        .onRequestDocumentRootType<OnRequestDocumentRootType_>()
-        .onRequestResult<OnRequestResult_>(),
-      async onRequest({ pack }) {
+      async requestInterceptor({ pack }) {
         const state = pack.input.state
         const sddm = state.schemaMap
 
@@ -86,37 +70,39 @@ export const SchemaErrors: () => SchemaErrors = Extension.create({
         return result
       },
     }
-  },
-})
+  })
+// todo
+// .onRequestDocumentRootType<OnRequestDocumentRootType_>()
+// .onRequestResult<OnRequestResult_>()
 
-type OnRequestDocumentRootType<$Params extends Extension.TypeHooks.OnRequestDocumentRootType.Params> =
-  $Params['selectionRootType']
+// type OnRequestDocumentRootType<$Params extends Extension.TypeHooks.OnRequestDocumentRootType.Params> =
+//   $Params['selectionRootType']
 
-// dprint-ignore
-interface OnRequestResult<$Arguments extends Extension.TypeHooks.OnRequestResult.Params<GeneratedExtensions>>
-  {
-    result: {
-      data?:
-        | null
-        | {
-            [$Key in keyof ExcludeNullAndUndefined<$Arguments['result']['data']>]:
-              Exclude<
-                ExcludeNullAndUndefined<$Arguments['result']['data']>[$Key],
-                { __typename: $Arguments['registeredSchema']['schema']['extensions']['SchemaErrors']['objectNames'] }
-              >
-          }
-    } & Omit<$Arguments['result'], 'data'>
-    registeredSchema: $Arguments['registeredSchema']
-  }
+// // dprint-ignore
+// interface OnRequestResult<$Arguments extends Extension.TypeHooks.OnRequestResult.Params<GeneratedExtensions>>
+//   {
+//     result: {
+//       data?:
+//         | null
+//         | {
+//             [$Key in keyof ExcludeNullAndUndefined<$Arguments['result']['data']>]:
+//               Exclude<
+//                 ExcludeNullAndUndefined<$Arguments['result']['data']>[$Key],
+//                 { __typename: $Arguments['registeredSchema']['schema']['extensions']['SchemaErrors']['objectNames'] }
+//               >
+//           }
+//     } & Omit<$Arguments['result'], 'data'>
+//     registeredSchema: $Arguments['registeredSchema']
+//   }
 
-// --------- Boilerplate Types ---------
+// // --------- Boilerplate Types ---------
 
-interface OnRequestDocumentRootType_ extends Extension.TypeHooks.OnRequestDocumentRootType {
-  // @ts-expect-error untyped params
-  return: OnRequestDocumentRootType<this['params']>
-}
+// interface OnRequestDocumentRootType_ extends Extension.TypeHooks.OnRequestDocumentRootType {
+//   // @ts-expect-error untyped params
+//   return: OnRequestDocumentRootType<this['params']>
+// }
 
-interface OnRequestResult_ extends Extension.TypeHooks.OnRequestResult {
-  // @ts-expect-error untyped params
-  return: OnRequestResult<this['params']>
-}
+// interface OnRequestResult_ extends Extension.TypeHooks.OnRequestResult {
+//   // @ts-expect-error untyped params
+//   return: OnRequestResult<this['params']>
+// }

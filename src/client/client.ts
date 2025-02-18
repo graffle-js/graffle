@@ -1,74 +1,76 @@
-import type { Extension } from '../extension/__.js'
-import type { Anyware } from '../lib/anyware/__.js'
+import { Anyware } from '../lib/anyware/_namespace.js'
+import { getOperationType } from '../lib/grafaid/document.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
-import { type ClientTransports, Context } from '../types/context.js'
-import { type ConfigInit, type NormalizeConfigInit } from './Configuration/ConfigInit.js'
-import { anywareProperties } from './properties/anyware.js'
-import { type gqlOverload, gqlProperties } from './properties/gql/gql.js'
-import { type ScalarMethod, scalarProperties, type TypeErrorMissingSchemaMap } from './properties/scalar.js'
-import { type TransportMethod, transportProperties } from './properties/transport.js'
-import { type UseMethod, useProperties } from './properties/use.js'
-import { withProperties } from './properties/with.js'
+import type { RequestPipeline } from '../requestPipeline/RequestPipeline.js'
+import { Context, type ContextFragment, ContextFragments } from '../types/context.js'
+import { Configuration } from './properties/configuration/__.js'
+import { Extensions } from './properties/extensions/__.js'
+import { Output } from './properties/output/_namespace.js'
+import { Properties } from './properties/properties/__.js'
+import { GqlMethod } from './properties/request/request.js'
+import { SendMethod } from './properties/request/send.js'
+import { RequestInterceptors } from './properties/requestInterceptors/__.js'
+import { Scalars } from './properties/scalars/__.js'
+import { Transports } from './properties/transports/_namespace.js'
 
-export type ClientEmpty = Client<Context.States.Empty, {}>
+export type ClientEmpty = Client<Context.States.Empty>
 
-export type ClientGeneric = Client<Context, {}>
+export interface Client_justContext {
+  _: Context
+}
 
 export type Client<
-  $Context extends Context, // = Context,
-  $Extension extends object, // = object,
-> =
-  & ClientBase<$Context, $Extension>
-  & $Extension
-  & Extension.ApplyAndMergeBuilderExtensions<$Context['extensions'], $Context>
+  $Context extends Context = Context,
+  __ =
+    & ClientBase<$Context>
+    & $Context['properties']['static']
+    & Properties.RunPropertiesComputers<$Context>,
+> = __
 
-export interface ClientBase<
-  $Context extends Context,
-  out $Extension extends object,
-> // out $ExtensionChainable extends ExtensionChainableRegistry,
-{
+export interface ClientBase<$Context extends Context> {
   _: $Context
-  // _extension: $Extension
-  // _extensionChainable: $ExtensionChainable
-  // extendWithPropertiesChainable: <
-  //   extensionChainable extends ExtensionChainable,
-  // >() => Client<$Context, $Extension, $ExtensionChainable & { [_ in extensionChainable['name']]: extensionChainable }>
-  // extendWithProperties: <
-  //   extension extends {},
-  // >(extension: extension) => Client<$Context, $Extension & extension, $ExtensionChainable>
-  gql: ClientTransports.PreflightCheck<
+  /**
+   * TODO
+   */
+  gql: Configuration.Check.Preflight<
     $Context,
-    gqlOverload<$Context>
+    GqlMethod<$Context>
   >
-  scalar: null extends $Context['schemaMap'] ? TypeErrorMissingSchemaMap
-    : ScalarMethod<
-      $Context,
-      $Extension
-    >
-  transport: TransportMethod<
-    $Context,
-    $Extension
-  >
-  use: UseMethod<
-    $Context,
-    $Extension
-  > // $ExtensionChainable
+  /**
+   * TODO
+   */
+  scalar: undefined extends $Context['configuration']['schema']['current']['map']
+    ? Scalars.Method.TypeErrorMissingSchemaMap
+    : Scalars.Method<$Context>
+  /**
+   * TODO
+   */
+  transport: Transports.TransportMethod<$Context>
+  /**
+   * TODO
+   */
+  properties: Properties.AddPropertiesMethod<$Context>
+  /**
+   * TODO
+   */
+  use: Extensions.MethodAdd<$Context>
+  /**
+   * TODO
+   */
   anyware: (
     interceptor: Anyware.Interceptor.InferFromPipeline<
       Anyware.Pipeline.InferFromDefinition<$Context['requestPipelineDefinition']>
     >,
-  ) => Client<$Context, $Extension>
-  with: <$ConfigInit extends ConfigInit>(
-    configInit: $ConfigInit,
-  ) => Client<
-    // @ts-expect-error
-    {
-      [_ in keyof $Context]: _ extends keyof NormalizeConfigInit<$Context['input'] & $ConfigInit>
-        ? NormalizeConfigInit<$Context['input'] & $ConfigInit>[_]
-        : $Context[_]
-    },
-    $Extension
-  > // $ExtensionChainable
+  ) => Client<$Context>
+  /**
+   * TODO
+   */
+  with: <
+    const configurationInput extends CalcConfigurationInputForContext<$Context>,
+  >(configurationInput: configurationInput) => Client<
+    // @ts-expect-error Non-index type being used
+    Configuration.ContextFragmentConfigurationConfigure<$Context, configurationInput>
+  >
 }
 
 export type ExtensionChainableRegistry = {
@@ -79,60 +81,166 @@ export interface ExtensionChainable extends TypeFunction {}
 
 export type ExtensionChainableArguments = [Context, object, ExtensionChainableRegistry]
 
+// Almost identical to `with` except that input is optional.
+export type Create<$Context extends Context = Context.States.Empty> = <
+  const configurationInput extends CalcConfigurationInputForContext<$Context>,
+>(configurationInput?: configurationInput) => Client<
+  // @ts-expect-error: Is missing standard configurators
+  Configuration.ContextFragmentConfigurationConfigure<$Context, configurationInput>
+>
+
 export const createConstructorWithContext = <$Context extends Context>(
   context: $Context,
-): ClientConstructor<$Context> => {
-  return (configInit) => {
-    const newContext = Context.updateContextConfigInit(context, configInit ?? {})
-    const client = createWithContext(newContext)
-    return client
+): Create<$Context> =>
+(configurationInput) => {
+  const configurationInput_ = configurationInput as undefined | Configuration.ConfigurationIndex.Input
+  const newContext = configurationInput_
+    ? ContextFragments.merge(
+      context,
+      Configuration.configure(context, configurationInput_),
+    )
+    : context
+  return createWithContext(newContext) as any
+}
+
+export const create: Create = createConstructorWithContext(Context.States.empty)
+
+export const createWithContext = <$Context extends Context>(
+  context: $Context,
+): Client<$Context> => {
+  const copy = (fragment: null | ContextFragment) => {
+    if (!fragment) return client
+    const newContext = ContextFragments.merge(context, fragment)
+    return createWithContext(newContext) as any
   }
-}
 
-export type ClientConstructor<$Context extends Context = Context.States.Empty> = <
-  const $ConfigInit extends ConfigInit,
->(
-  configInit?: $ConfigInit,
-) => Client<
-  // @ts-expect-error
-  {
-    [k in keyof $Context]: k extends keyof NormalizeConfigInit<$ConfigInit> ? NormalizeConfigInit<$ConfigInit>[k]
-      : $Context[k]
-  },
-  {}
-> // {}
-
-export const create: ClientConstructor = (configInit) => {
-  const initialContext = Context.updateContextConfigInit(
-    Context.States.empty,
-    configInit ?? {},
-  )
-  return createWithContext(initialContext)
-}
-
-export const createWithContext = (
-  context: Context,
-) => {
-  // @ts-expect-error ignoreme
-  const clientDirect: Client = {
+  const client: Client<$Context> = {
+    ...({} as Client<$Context>),
     _: context,
-    ...withProperties(createWithContext, context),
-    ...transportProperties(createWithContext, context),
-    ...gqlProperties(createWithContext, context),
-    ...useProperties(createWithContext, context),
-    ...anywareProperties(createWithContext, context),
-    ...scalarProperties(createWithContext, context),
+    anyware(interceptor) {
+      const interceptor_ = interceptor as any as RequestPipeline.BaseInterceptor
+      return copy(RequestInterceptors.contextFragmentRequestInterceptorsAdd(context, interceptor_))
+    },
+    properties(properties) {
+      const isComputed = typeof properties === `function`
+      const static_ = !isComputed
+        ? properties
+        : undefined
+      const computed = isComputed
+        ? [properties]
+        : undefined
+      return copy(Properties.contextFragmentPropertiesAdd(context, { static: static_, computed: computed as any }))
+    },
+    use(extension) {
+      return copy(Extensions.contextFragmentAddAndApplyMany(context, [extension]))
+    },
+    scalar: ((...args: Scalars.Method.Arguments) => {
+      const scalar = Scalars.Method.normalizeArguments(args)
+      return copy(Scalars.contextScalarsAdd(context, scalar))
+    }) as any,
+    with(configurationInput) {
+      const configurationInput_ = configurationInput as Configuration.ConfigurationIndex.Input
+      return copy(Configuration.configure(context, configurationInput_))
+    },
+    transport: ((...args: Transports.TransportMethod.Arguments) => {
+      const input = Transports.TransportMethod.normalizeArguments(args)
+      // let fragment2: ContextFragmentTransports
+      switch (input[0]) {
+        case Transports.TransportMethod.overloadCase.configureCurrent: {
+          return copy(Transports.contextFragmentConfigureCurrent(context, input[1]))
+        }
+        case Transports.TransportMethod.overloadCase.setCurrent: {
+          return copy(Transports.contextFragmentSetCurrent(context, input[1], input[2]))
+        }
+        case Transports.TransportMethod.overloadCase.addType: {
+          return copy(Transports.contextFragmentAddMany(context, input[1]))
+        }
+      }
+    }) as any,
+    gql: ((...args: GqlMethod.Arguments) => {
+      const { document: query } = GqlMethod.normalizeArguments(args)
+
+      return {
+        send: async (...args: SendMethod.Arguments) => {
+          if (!context.transports.current) throw new Error(`No transport selected`)
+
+          const { operationName, variables } = SendMethod.normalizeArguments(args)
+          const request = {
+            query,
+            variables,
+            operationName,
+          }
+          const operationType = getOperationType(request)
+          if (!operationType) throw new Error(`Could not get operation type`)
+
+          const analyzedRequest = {
+            operation: operationType,
+            query,
+            variables,
+            operationName,
+          }
+
+          const initialInput = {
+            [context.transports.registry[context.transports.current]!.discriminant[`name`]]:
+              context.transports.registry[context.transports.current]!.discriminant[`value`],
+            [context.transports.registry[context.transports.current]!.configurationMount]:
+              context.transports.configurations[context.transports.current],
+            state: context,
+            request: analyzedRequest,
+          } as RequestPipeline.Base['input']
+
+          const requestPipeline = Anyware.Pipeline.create(context.requestPipelineDefinition)
+          const result = await Anyware.PipelineDefinition.run(requestPipeline, {
+            initialInput,
+            interceptors: context.requestPipelineInterceptors,
+          })
+
+          return Output.handle(context, result)
+        },
+      }
+    }) as any,
   }
 
-  context.extensions.forEach(_ => {
+  Object.assign(client, context.properties.static)
+
+  context.properties.computed.forEach(propertiesComputer => {
     Object.assign(
-      clientDirect,
-      _.builder?.({
-        client: clientDirect,
+      client,
+      propertiesComputer({
+        configuration: context.configuration,
         context,
-      }) ?? {},
+        client: client as any,
+      }),
     )
   })
 
-  return clientDirect
+  // todo: access computed properties from context
+  context.extensions.forEach(_ => {
+    // const configurationIndex = context.configuration as ConfigurationIndex
+    // const configurationIndexEntry = configurationIndex[_.name]
+    // if (!configurationIndexEntry && _.configurator) throw new Error(`Configuration entry for ${_.name} not found`)
+
+    _
+    const propertiesComputed = _.propertiesComputed.reduce((acc, propertiesComputer) => {
+      return {
+        ...acc,
+        ...propertiesComputer({
+          // configuration: configurationIndexEntry?.current,
+          configuration: context.configuration,
+          client: client as any,
+          context,
+        }),
+      }
+    }, {})
+
+    Object.assign(client, propertiesComputed)
+  })
+
+  return client
+}
+
+export type CalcConfigurationInputForContext<$Context extends Context> = {
+  readonly [_ in keyof $Context['configuration']]?:
+    // @ts-expect-error Non-index type being used
+    $Context['configuration'][_]['configurator']['input']
 }

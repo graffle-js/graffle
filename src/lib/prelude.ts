@@ -1,3 +1,6 @@
+export type Writeable<$Object> = {
+  -readonly [_ in keyof $Object]: $Object[_]
+}
 import type { HasRequiredKeys, IsAny, IsEmptyObject, IsNever, IsUnknown, Simplify } from 'type-fest'
 
 import type { ConfigManager } from './config-manager/__.js'
@@ -305,9 +308,39 @@ export namespace Objekt {
 }
 
 export namespace Tuple {
+  export type Flatten<T extends readonly (readonly any[])[]> = T extends
+    readonly [infer __head__ extends readonly any[], ...infer __tail__ extends readonly (readonly any[])[]]
+    ? readonly [...__head__, ...Flatten<__tail__>]
+    : []
+
+  export type IndexByDepth2<
+    $Arr extends any[],
+    $Key1 extends keyof $Arr[number],
+    $Key2 extends keyof $Arr[number][$Key1],
+  > = $Arr extends [infer First extends $Arr[number], ...infer Rest extends $Arr[number][]]
+    ? { [_ in First[$Key1][$Key2]]: First[$Key1] } & IndexByDepth2<Rest, $Key1, $Key2>
+    : {}
+
+  export type IndexBy<
+    $Arr extends readonly any[],
+    $Key extends keyof $Arr[number],
+  > = $Arr extends [infer __first__ extends $Arr[number], ...infer __rest__ extends $Arr[number][]]
+    ? { [_ in __first__[$Key]]: __first__ } & IndexBy<__rest__, $Key>
+    : {}
+
+  export type IndexByToValue2<
+    $Arr extends readonly any[],
+    $Key extends keyof $Arr[number],
+    $ValueKey1 extends keyof $Arr[number],
+    $ValueKey2 extends keyof $Arr[number][$ValueKey1],
+  > = $Arr extends [infer __first__ extends $Arr[number], ...infer __rest__ extends $Arr[number][]] ?
+      & { [_ in __first__[$Key]]: __first__[$Key][$ValueKey1][$ValueKey2] }
+      & IndexByToValue2<__rest__, $Key, $ValueKey1, $ValueKey2>
+    : {}
+
   export type IndexKey = number | `${number}`
 
-  export type IsEmpty<T> = T extends [] ? true : false
+  export type IsEmpty<T> = T extends readonly [] ? true : false
 
   // dprint-ignore
   export type PreviousItem<$Items extends readonly any[], $OfItem> =
@@ -395,6 +428,13 @@ export namespace Tuple {
   type AnyReadOnly = readonly any[]
 
   type AnyReadOnlyListNonEmpty = readonly [any, ...any[]]
+
+  export type ReduceObjectsMergeShallow<$Objects extends readonly object[]> = $Objects extends
+    [infer __first__ extends object, ...infer __rest__ extends readonly object[]]
+    ?
+      & { [__k__ in keyof __first__ as __k__ extends keyof __rest__[number] ? never : __k__]: __first__[__k__] }
+      & ReduceObjectsMergeShallow<__rest__>
+    : {}
 }
 
 type NumberLiteral = number | `${number}`
@@ -689,8 +729,17 @@ export const isDate = (value: unknown): value is Date => {
   return value instanceof Date
 }
 
-export const isObjectEmpty = (object: Record<string, unknown>) => {
-  return Object.keys(object).length === 0
+export const isObjectEmpty = (object: object): boolean => {
+  for (const _ in object) return false
+  return true
+}
+
+export const hasNonUndefinedKeys = (object: object): boolean => {
+  const record = object as Record<string, unknown>
+  for (const _ in record) {
+    if (record[_] !== undefined) return true
+  }
+  return false
 }
 
 export const toArray = <T>(value: T | T[]) => Array.isArray(value) ? value : [value]
@@ -782,3 +831,23 @@ export type UnknownOrAnyToNever<T> = unknown extends T ? never : T
 export type MergeAll<$Objects extends object[]> = $Objects extends
   [infer $First extends object, ...infer $Rest extends object[]] ? $First & MergeAll<$Rest>
   : {}
+
+export const emptyArray = Object.freeze([] as const)
+export type EmptyArray = typeof emptyArray
+
+export const emptyObject = Object.freeze({})
+export type EmptyObject = typeof emptyObject
+
+export type ObjectMergeShallow<
+  $Object1 extends object,
+  $Object2 extends object,
+  __NewObject =
+    & {
+      [_ in keyof $Object1 as _ extends keyof $Object2 ? never : _]: $Object1[_]
+    }
+    & $Object2,
+> = __NewObject
+
+export const as = <$Type>(value?: unknown): $Type => value as $Type
+
+export const undefinedAs = <$Type>() => as<$Type>(undefined)

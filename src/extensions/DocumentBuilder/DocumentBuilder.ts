@@ -1,53 +1,48 @@
 import { OperationTypeNode } from 'graphql'
-import type { ExtensionChainable } from '../../client/client.js'
-import { type Context, create } from '../../entrypoints/extensionkit.js'
-import type { ClientTransports, GlobalRegistry } from '../../entrypoints/utilities-for-generated.js'
+import { Extension } from '../../entrypoints/extension.js'
+import type { ContextTransports, GlobalRegistry } from '../../entrypoints/utilities-for-generated.js'
 import type { TypeFunction } from '../../lib/type-function/__.js'
 import { createMethodDocument, createMethodOperationType } from './_.js'
 
-export const DocumentBuilder = create({
-  name: `DocumentBuilder`,
-  create: ({ builder }) => {
+export const DocumentBuilder = Extension
+  .create(`DocumentBuilder`)
+  .properties(({ context }) => {
     return {
-      builder: builder<BuilderExtension>(({ context }) => {
-        return {
-          document: createMethodDocument(context),
-          query: createMethodOperationType(context, OperationTypeNode.QUERY),
-          mutation: createMethodOperationType(context, OperationTypeNode.MUTATION),
-          // todo
-          // subscription: async () => {},
-        } as any
-      }),
-    }
-  },
-})
+      document: createMethodDocument(context),
+      query: createMethodOperationType(context, OperationTypeNode.QUERY),
+      mutation: createMethodOperationType(context, OperationTypeNode.MUTATION),
+      // todo
+      // subscription: async () => {},
+    } as any as Properties
+  })
+  .return()
 
-export interface BuilderExtension extends ExtensionChainable {
+export interface Properties extends Extension.PropertiesTypeFunction {
   // @ts-expect-error
-  return: BuilderExtension_<this['params'][0]>
+  return: Properties_<this['parameters']>
 }
 
-type BuilderExtension_<$Context extends Context> =
+type Properties_<$Parameters extends Extension.PropertiesTypeFunctionParameters> =
   // todo
   // GlobalRegistry.Has<$Context['name']> extends false
   // eslint-disable-next-line
   // @ts-ignore passes after generation
-  GlobalRegistry.Has<$Context['name']> extends false ? {}
+  GlobalRegistry.Has<$Parameters['context']['name']> extends false ? {}
     : (
       // eslint-disable-next-line
       // @ts-ignore Passes after generation
-      & TypeFunction.Call<GlobalRegistry.GetOrDefault<$Context['name']>['interfaces']['Root'], $Context>
+      & TypeFunction.Call<GlobalRegistry.GetOrDefault<$Parameters['context']['name']>['interfaces']['Root'], $Context>
       & {
         // eslint-disable-next-line
         // @ts-ignore Passes after generation
-        document: ClientTransports.PreflightCheck<
-          $Context,
+        document: ContextTransports.PreflightCheck<
+          $Parameters['context'],
           TypeFunction.Call<
             GlobalRegistry.GetOrDefault<
               // @ts-expect-error
-              $Context['name']
+              $Parameters['context']['name']
             >['interfaces']['Document'],
-            $Context
+            $Parameters['context']
           >
         >
       }

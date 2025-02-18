@@ -24,7 +24,7 @@ export namespace StepTrigger {
   // dprint-ignore
   export interface Infer<
     $Step extends Step,
-    $NextSteps extends Step[],
+    $NextSteps extends readonly Step[],
     $PipelineOutput
   >
     extends StepTrigger.Properties<$Step['input']>
@@ -44,7 +44,7 @@ export namespace StepTrigger {
         )
       >
     ): Promise<
-        $NextSteps extends [infer $NextStep extends Step, ...infer $NextNextSteps extends Step[]]
+        $NextSteps extends [infer $NextStep extends Step, ...infer $NextNextSteps extends readonly Step[]]
           ? {
               [_ in $NextStep['name']]: Infer<$NextStep, $NextNextSteps, $PipelineOutput>
             }

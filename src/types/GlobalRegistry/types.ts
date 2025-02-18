@@ -25,6 +25,10 @@ export type Extensions<
   Schema: ConfigManager.OrDefault<$Extensions['Schema'], TypeExtensions>
 }
 
+export namespace Client {
+  export type Define<$Type extends Partial<Client>> = $Type & Client
+}
+
 export interface Client<$Extensions extends Extensions = Extensions> {
   name: string
   schema: Schema<$Extensions['Schema']>

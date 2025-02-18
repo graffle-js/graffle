@@ -1,6 +1,7 @@
 import type { OperationTypeNode } from 'graphql'
-import { handleOutput } from '../../../client/handleOutput.js'
-import { Anyware } from '../../../lib/anyware/__.js'
+import { Output } from '../../../client/properties/output/_namespace.js'
+import { handle } from '../../../client/properties/output/handle.js'
+import { Anyware } from '../../../lib/anyware/_namespace.js'
 import type { Grafaid } from '../../../lib/grafaid/__.js'
 import { getOperationDefinition } from '../../../lib/grafaid/document.js'
 import { isSymbol } from '../../../lib/prelude.js'
@@ -96,7 +97,7 @@ const executeDocument = async (
     interceptors: state.extensions.filter(_ => _.onRequest !== undefined).map(_ => _.onRequest!) as any,
   })
 
-  return handleOutput(state, result)
+  return Output.handle(state, result)
 }
 
 export const graffleMappedResultToRequest = (

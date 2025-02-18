@@ -3,7 +3,7 @@ import * as $$Schema from './schema.js'
 import * as $$SelectionSets from './selection-sets.js'
 
 export interface QueryMethods<$Context extends $$Utilities.Context> {
-  $batch: $$Utilities.ClientTransports.PreflightCheck<
+  $batch: $$Utilities.ContextTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query<$Context['scalars']>>,
@@ -18,7 +18,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-  __typename: $$Utilities.ClientTransports.PreflightCheck<
+  __typename: $$Utilities.ContextTransports.PreflightCheck<
     $Context,
     () => Promise<
       & (null | {})
@@ -30,7 +30,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  battles: $$Utilities.ClientTransports.PreflightCheck<
+  battles: $$Utilities.ContextTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.battles<$Context['scalars']>>,
@@ -47,7 +47,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  beings: $$Utilities.ClientTransports.PreflightCheck<
+  beings: $$Utilities.ContextTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.beings<$Context['scalars']>>,
@@ -64,7 +64,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  pokemonByName: $$Utilities.ClientTransports.PreflightCheck<
+  pokemonByName: $$Utilities.ContextTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.pokemonByName<$Context['scalars']>>,
@@ -81,7 +81,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  pokemons: $$Utilities.ClientTransports.PreflightCheck<
+  pokemons: $$Utilities.ContextTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.pokemons<$Context['scalars']>>,
@@ -98,7 +98,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  trainerByName: $$Utilities.ClientTransports.PreflightCheck<
+  trainerByName: $$Utilities.ContextTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.trainerByName<$Context['scalars']>>,
@@ -115,7 +115,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  trainers: $$Utilities.ClientTransports.PreflightCheck<
+  trainers: $$Utilities.ContextTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.trainers<$Context['scalars']>>,
@@ -134,7 +134,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
 }
 
 export interface MutationMethods<$Context extends $$Utilities.Context> {
-  $batch: $$Utilities.ClientTransports.PreflightCheck<
+  $batch: $$Utilities.ContextTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation<$Context['scalars']>>,
@@ -149,7 +149,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-  __typename: $$Utilities.ClientTransports.PreflightCheck<
+  __typename: $$Utilities.ContextTransports.PreflightCheck<
     $Context,
     () => Promise<
       & (null | {})
@@ -161,7 +161,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  addPokemon: $$Utilities.ClientTransports.PreflightCheck<
+  addPokemon: $$Utilities.ContextTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.addPokemon<$Context['scalars']>>,
