@@ -1,4 +1,4 @@
-import { Transport } from '../../../src/entrypoints/main.js'
+import { Data } from '../../../src/entrypoints/main.js'
 
 // ----------------------------
 // ATransportBuilder

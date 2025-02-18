@@ -2,7 +2,7 @@ import type { Configurator } from '../../../../lib/configurator/configurator.js'
 import { undefinedAs } from '../../../../lib/prelude.js'
 import type { RequestPipeline } from '../../../../requestPipeline/__.js'
 import type { Properties } from '../../properties/__.js'
-import type { Transport } from '../../transports/dataType.js'
+import type { Transport } from '../../transports/dataType/_namespace.js'
 import type * as _re_export from './properties.js'
 
 export interface Data<
@@ -13,7 +13,7 @@ export interface Data<
   $PropertiesComputersTypeFunctions extends ReadonlyArray<Properties.PropertiesComputerTypeFunction> = ReadonlyArray<
     Properties.PropertiesComputerTypeFunction
   >,
-  $Transport extends Transport | undefined = Transport | undefined,
+  $Transports extends readonly Transport.Data[] = readonly Transport.Data[],
   $Static extends object | undefined = object | undefined,
   $ConfiguratorInitialInput = unknown,
 > // $TypeHooks extends TypeHooks = TypeHooks,
@@ -31,7 +31,7 @@ export interface Data<
   readonly propertiesComputed: ReadonlyArray<Properties.PropertiesComputer>
   readonly propertiesComputedTypeFunctions$: $PropertiesComputersTypeFunctions
   // todo support for multiple transports in one extension
-  readonly transport: $Transport
+  readonly transports: $Transports
   readonly static: $Static
   // typeHooks: $TypeHooks
 }
@@ -41,7 +41,7 @@ export interface DataEmpty<$Name extends string = string> extends Data<$Name> {
   readonly configuratorInitialInput: unknown
   readonly requestInterceptor: undefined
   readonly noExpandResultDataType: undefined
-  readonly transport: undefined
+  readonly transports: []
   readonly static: undefined
   readonly propertiesStatic: {}
   readonly propertiesComputed: readonly []

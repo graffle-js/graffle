@@ -308,6 +308,36 @@ export namespace Objekt {
 }
 
 export namespace Tuple {
+  export type Flatten<T extends readonly (readonly any[])[]> = T extends
+    readonly [infer __head__ extends readonly any[], ...infer __tail__ extends readonly (readonly any[])[]]
+    ? readonly [...__head__, ...Flatten<__tail__>]
+    : []
+
+  export type IndexByDepth2<
+    $Arr extends any[],
+    $Key1 extends keyof $Arr[number],
+    $Key2 extends keyof $Arr[number][$Key1],
+  > = $Arr extends [infer First extends $Arr[number], ...infer Rest extends $Arr[number][]]
+    ? { [_ in First[$Key1][$Key2]]: First[$Key1] } & IndexByDepth2<Rest, $Key1, $Key2>
+    : {}
+
+  export type IndexBy<
+    $Arr extends readonly any[],
+    $Key extends keyof $Arr[number],
+  > = $Arr extends [infer __first__ extends $Arr[number], ...infer __rest__ extends $Arr[number][]]
+    ? { [_ in __first__[$Key]]: __first__ } & IndexBy<__rest__, $Key>
+    : {}
+
+  export type IndexByToValue2<
+    $Arr extends readonly any[],
+    $Key extends keyof $Arr[number],
+    $ValueKey1 extends keyof $Arr[number],
+    $ValueKey2 extends keyof $Arr[number][$ValueKey1],
+  > = $Arr extends [infer __first__ extends $Arr[number], ...infer __rest__ extends $Arr[number][]] ?
+      & { [_ in __first__[$Key]]: __first__[$Key][$ValueKey1][$ValueKey2] }
+      & IndexByToValue2<__rest__, $Key, $ValueKey1, $ValueKey2>
+    : {}
+
   export type IndexKey = number | `${number}`
 
   export type IsEmpty<T> = T extends readonly [] ? true : false
@@ -398,6 +428,13 @@ export namespace Tuple {
   type AnyReadOnly = readonly any[]
 
   type AnyReadOnlyListNonEmpty = readonly [any, ...any[]]
+
+  export type ReduceObjectsMergeShallow<$Objects extends readonly object[]> = $Objects extends
+    [infer __first__ extends object, ...infer __rest__ extends readonly object[]]
+    ?
+      & { [__k__ in keyof __first__ as __k__ extends keyof __rest__[number] ? never : __k__]: __first__[__k__] }
+      & ReduceObjectsMergeShallow<__rest__>
+    : {}
 }
 
 type NumberLiteral = number | `${number}`

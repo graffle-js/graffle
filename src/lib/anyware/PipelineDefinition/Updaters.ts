@@ -19,8 +19,8 @@ export namespace Updaters {
     $Overload extends Overload.Data,
   > = ConfigManager.UpdateKeyWithAppendOne<$PipelineDef, 'overloads', $Overload>
 
-  export type AddOverloads<
+  export type AddOverloadMany<
     $PipelineDef extends PipelineDefinition,
-    $Overloads extends Overload.Data[],
+    $Overloads extends readonly Overload.Data[],
   > = ConfigManager.UpdateKeyWithAppendMany<$PipelineDef, 'overloads', $Overloads>
 }

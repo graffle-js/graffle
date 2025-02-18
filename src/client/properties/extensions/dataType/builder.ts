@@ -6,7 +6,7 @@ import type { RequestPipeline } from '../../../../requestPipeline/__.js'
 import type { Context } from '../../../../types/context.js'
 import type { Configuration } from '../../configuration/__.js'
 import type { Properties } from '../../properties/__.js'
-import { Transport } from '../../transports/dataType.js'
+import { Transport } from '../../transports/dataType/_namespace.js'
 import { type Data, type DataEmpty, dataPropertiesTypeOnly } from './data.js'
 import type { DependentExtensionParameters } from './DependentExtensionParameters.js'
 import type * as _re_export from './properties.js'
@@ -18,7 +18,7 @@ import type * as _re_export from './properties.js'
 export const create: Create = (name) => {
   const data: WritableDeep<Data> = {
     name,
-    transport: undefined,
+    transports: [],
     static: {},
     propertiesStatic: {},
     propertiesComputed: [],
@@ -31,9 +31,9 @@ export const create: Create = (name) => {
       static(properties) {
         data.static = properties
       },
-      transport(transportTypeInput: Transport | Transport.Builder<Transport>) {
-        const transport = Transport.$.isBuilder(transportTypeInput) ? transportTypeInput.return() : transportTypeInput
-        data.transport = transport
+      transport(input: Transport.Provider.Input) {
+        const transport = Transport.Provider.receive(input)
+        data.transports.push(transport)
       },
       requestInterceptor(requestInterceptor: RequestPipeline.BaseInterceptor) {
         data.requestInterceptor = requestInterceptor
@@ -174,26 +174,26 @@ interface MethodTransport<
   /**
    * TODO 1
    */
-  <$Transport extends Transport>(transport: $Transport | Transport.Builder<$Transport>): Chain<
+  <$TransportData extends Transport.Data>(transport: Transport.Provider.Input<$TransportData>): Chain<
     $Context,
     {
-      readonly [_ in keyof $Data]: _ extends 'transport' ? $Transport : $Data[_]
+      readonly [_ in keyof $Data]: _ extends 'transports' ? [...$Data['transports'], $TransportData] : $Data[_]
     }
   >
   /**
    * TODO 2
    */
-  <$Name extends string, $Transport extends Transport>(
+  <$Name extends string, $TransportData extends Transport.Data>(
     name: $Name,
     constructor: (
       parameters: DependentExtensionParameters<$Context, $ConfigurationNormalized> & {
         $: Transport.Builder.States.Empty<$Name>
       },
-    ) => Transport.Builder<$Transport>,
+    ) => Transport.Builder<$TransportData>,
   ): Chain<
     $Context,
     {
-      readonly [_ in keyof $Data]: _ extends 'transport' ? $Transport : $Data[_]
+      readonly [_ in keyof $Data]: _ extends 'transports' ? [...$Data['transports'], $TransportData] : $Data[_]
     }
   >
 }

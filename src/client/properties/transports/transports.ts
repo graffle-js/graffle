@@ -1,11 +1,19 @@
 import type { Anyware } from '../../../lib/anyware/_namespace.js'
 import type { Configurator } from '../../../lib/configurator/configurator.js'
-import { type EmptyObject, emptyObject, isObjectEmpty, type Objekt, type StringKeyof } from '../../../lib/prelude.js'
+import {
+  type EmptyObject,
+  emptyObject,
+  isObjectEmpty,
+  type Objekt,
+  type StringKeyof,
+  type Tuple,
+  type Writeable,
+} from '../../../lib/prelude.js'
 import type { RequestPipeline } from '../../../requestPipeline/RequestPipeline.js'
 import { requestPipelineBaseDefinition } from '../../../requestPipeline/RequestPipeline.js'
 import { Context, ContextFragments } from '../../../types/context.js'
 import type { Client } from '../../client.js'
-import { Transport } from './dataType.js'
+import { Transport } from './dataType/_namespace.js'
 
 // todo remove the JSDoc comments below. They will not be shown.
 // Look for a TS issue about conditional types + JSDoc comments. If none, create one.
@@ -19,7 +27,7 @@ type AlreadyRegisteredError<
 > = `There is already a transport registered with the name "${$TransportName}".`
 
 // dprint-ignore
-export type ParameterGuardTransportAlreadyRegistered<$Context extends Context, $Transport extends Transport> =
+export type ParameterGuardTransportAlreadyRegistered<$Context extends Context, $Transport extends Transport.Data> =
   $Transport['name'] extends keyof $Context['transports']['registry'] ?
     [`Error: ${AlreadyRegisteredError<$Transport['name']>}`] :
     []
@@ -29,11 +37,11 @@ export type TransportMethod<
   $Context extends Context,
 > =
   & (
-      <transport extends Transport>(
-        transport: transport | Transport.Builder<transport>,
-        ...errors: ParameterGuardTransportAlreadyRegistered<$Context, transport>
+      <transportData extends Transport.Data>(
+        transport: Transport.Provider.Input<transportData>,
+        ...errors: ParameterGuardTransportAlreadyRegistered<$Context, transportData>
       ) => Client<
-          ContextFragmentTransportsAddType<$Context, transport>
+          ContextFragmentAddType<$Context, transportData>
         >
     )
 & ($Context['transports'] extends ContextTransportsNonEmpty
@@ -120,13 +128,13 @@ export namespace TransportMethod {
   export type Arguments =
     | [config: object]
     | [name: string, config?: object]
-    | [Transport]
-    | [Transport.Builder<Transport>]
+    | [Transport.Data]
+    | [Transport.Builder<Transport.Data>]
 
   export type ArgumentsNormalized =
     | [typeof overloadCase.configureCurrent, config: object]
     | [typeof overloadCase.setCurrent, name: string, config?: object]
-    | [typeof overloadCase.addType, Transport]
+    | [typeof overloadCase.addType, Transport.Data]
 
   export const overloadCase = {
     setCurrent: 0,
@@ -138,10 +146,10 @@ export namespace TransportMethod {
     if (typeof args[0] === `string`) {
       return [overloadCase.setCurrent, args[0], args[1]]
     }
-    if (Transport.$.isBuilder(args[0])) {
+    if (Transport.Builder.is(args[0])) {
       return [overloadCase.addType, args[0].return()]
     }
-    if (Transport.$.is(args[0])) {
+    if (Transport.is(args[0])) {
       return [overloadCase.addType, args[0]]
     }
     return [overloadCase.configureCurrent, args[0]]
@@ -183,16 +191,18 @@ export interface ContextTransportsNonEmpty {
 }
 
 export interface ContextTransports {
-  registry: ContextTransports_Registry
+  readonly registry: ContextTransports_Registry
   /**
    * `undefined` if registry is empty.
    */
-  current: undefined | string
-  configurations: ContextTransports_Configurations
+  readonly current: undefined | string
+  readonly configurations: ContextTransports_Configurations
 }
 
+// todo: should be readonly? otherwise comment about why.
+
 export interface ContextTransports_Registry {
-  [name: string]: Transport
+  [name: string]: Transport.Data
 }
 
 export interface ContextTransports_Configurations {
@@ -214,40 +224,50 @@ export const contextFragmentTransportsEmpty: ContextFragmentTransportsEmpty = Ob
   transports: contextTransportsEmpty,
 })
 
-export const contextFragmentAdd = (context: Context, transport: Transport): ContextFragment => {
-  const isFirstTransport = context.transports.current === undefined
-  const transportName = transport.name
+// todo: *AddMany
+export const contextFragmentAddMany = (
+  context: Context,
+  transports: readonly Transport.Data[],
+): null | ContextFragment => {
+  const firstTransport = transports[0]
+  if (!firstTransport) return null
 
-  const isTransportAlreadyRegistered = context.transports.registry[transportName] !== undefined
-  if (isTransportAlreadyRegistered) {
-    const errorMessage: AlreadyRegisteredError<string> =
-      `There is already a transport registered with the name "${transportName}".`
-    throw new Error(errorMessage)
+  const isFirstTransportEverRegistered = context.transports.current === undefined
+  const contextNewCurrent = isFirstTransportEverRegistered ? firstTransport.name : context.transports.current
+
+  const contextNewRegistry: ContextTransports_Registry = { ...context.transports.registry }
+
+  const contextNewConfigurations: ContextTransports_Configurations = { ...context.transports.configurations }
+
+  const contextNewOverloads: Writeable<RequestPipeline.BaseDefinition['overloads']> = [
+    ...context.requestPipelineDefinition.overloads,
+  ]
+
+  for (const transport of transports) {
+    const { name } = transport
+
+    const isTransportAlreadyRegistered = contextNewRegistry[name] !== undefined
+    if (isTransportAlreadyRegistered) {
+      // dprint-ignore
+      const errorMessage: AlreadyRegisteredError<string> = `There is already a transport registered with the name "${name}".`
+      throw new Error(errorMessage)
+    }
+
+    contextNewRegistry[name] = transport
+    contextNewConfigurations[name] = transport.configurator.default
+    contextNewOverloads.push(transport)
   }
 
-  const transports = Object.freeze({
-    current: isFirstTransport ? transportName : context.transports.current,
-    registry: Object.freeze({
-      ...context.transports.registry,
-      [transportName]: transport,
-    }),
-    configurations: Object.freeze({
-      ...context.transports.configurations,
-      [transportName]: transport.configurator.default,
-    }),
-  })
-
-  const requestPipelineDefinition = Object.freeze({
-    ...context.requestPipelineDefinition,
-    overloads: Object.freeze([
-      ...context.requestPipelineDefinition.overloads,
-      transport,
-    ]),
-  })
-
   const fragment = {
-    requestPipelineDefinition,
-    transports,
+    requestPipelineDefinition: Object.freeze({
+      ...context.requestPipelineDefinition,
+      overloads: Object.freeze(contextNewOverloads),
+    }),
+    transports: {
+      current: contextNewCurrent,
+      registry: Object.freeze(contextNewRegistry),
+      configurations: Object.freeze(contextNewConfigurations),
+    },
   }
 
   return fragment
@@ -331,38 +351,62 @@ export const contextFragmentConfigure = (
   }
 }
 
-export type ContextFragmentTransportsAddType<
+export type ContextFragmentAddType<
   $Context extends Context,
-  $Transport extends Transport,
+  $Transport extends Transport.Data,
   // dprint-ignore
   _NewContext = {
     [_ in keyof $Context]:
       _ extends 'requestPipelineDefinition' ?
          Anyware.PipelineDefinition.Updaters.AddOverload<$Context['requestPipelineDefinition'], $Transport> :
       _ extends 'transports' ?
-        ContextAddTransportOptional<$Context['transports'], $Transport> :
+        ContextAdd<$Context['transports'], $Transport> :
       // default
         $Context[_]
   },
 > = _NewContext
 
 // dprint-ignore
-export type ContextAddTransportOptional<
+export type ContextAdd<
   $ClientTransports extends ContextTransports,
-  $Transport extends Transport | undefined,
+  $Transport extends Transport.Data,
 > =
-  $Transport extends Transport
-    ? {
-        configurations:
+    {
+        readonly configurations:
           & Omit<$ClientTransports['configurations'], $Transport['name']>
           & {
               [_ in $Transport['name']]: $Transport['configurator']['default']
             }
-        current: $ClientTransports extends ContextTransportsEmpty
+        readonly current: $ClientTransports['current'] extends undefined
           ? $Transport['name']
           : $ClientTransports['current']
-        registry: $ClientTransports['registry'] & {
+        readonly registry: $ClientTransports['registry'] & {
           [_ in $Transport['name']]: $Transport
         }
       }
-    : $ClientTransports
+
+// dprint-ignore
+export type ContextAddMany<
+  $ClientTransports extends ContextTransports,
+  $Transports extends readonly Transport.Data[]
+> =
+  {
+    readonly configurations:
+      // & Omit<$ClientTransports['configurations'], $Transports['name']>
+      & Tuple.IndexByToValue2<$Transports, 'name', 'configurator', 'default'>
+      & {
+          [
+            _ in keyof $ClientTransports['configurations']
+              as _ extends keyof Tuple.IndexByToValue2<$Transports, 'name', 'configurator', 'default'>
+                ? never
+                : _
+          ]:
+            $ClientTransports['configurations'][_]
+        }
+    readonly current: $ClientTransports['current'] extends undefined
+      ? $Transports[0]['name']
+      : $ClientTransports['current']
+    readonly registry: 
+      & $ClientTransports['registry']
+      & Tuple.IndexBy<$Transports, 'name'>
+  }

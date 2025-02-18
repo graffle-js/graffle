@@ -11,7 +11,7 @@ import { GqlMethod } from './properties/request/request.js'
 import { SendMethod } from './properties/request/send.js'
 import { RequestInterceptors } from './properties/requestInterceptors/__.js'
 import { Scalars } from './properties/scalars/__.js'
-import { Transports } from './properties/transports/__.js'
+import { Transports } from './properties/transports/_namespace.js'
 
 export type ClientEmpty = Client<Context.States.Empty>
 
@@ -132,7 +132,7 @@ export const createWithContext = <$Context extends Context>(
       return copy(Properties.contextFragmentPropertiesAdd(context, { static: static_, computed: computed as any }))
     },
     use(extension) {
-      return copy(Extensions.contextFragmentAddMany(context, extension))
+      return copy(Extensions.contextFragmentAddAndApplyMany(context, [extension]))
     },
     scalar: ((...args: Scalars.Method.Arguments) => {
       const scalar = Scalars.Method.normalizeArguments(args)
@@ -153,7 +153,7 @@ export const createWithContext = <$Context extends Context>(
           return copy(Transports.contextFragmentSetCurrent(context, input[1], input[2]))
         }
         case Transports.TransportMethod.overloadCase.addType: {
-          return copy(Transports.contextFragmentAdd(context, input[1]))
+          return copy(Transports.contextFragmentAddMany(context, input[1]))
         }
       }
     }) as any,

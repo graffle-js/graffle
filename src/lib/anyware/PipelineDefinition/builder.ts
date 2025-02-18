@@ -70,7 +70,7 @@ export interface Builder<$PipelineDef extends PipelineDefinition = PipelineDefin
   use: <$Extension extends Extension.Builder>(
     extension: $Extension,
   ) => Builder<
-    PipelineDefinition.Updaters.AddOverloads<$PipelineDef, $Extension['type']['overloads']>
+    PipelineDefinition.Updaters.AddOverloadMany<$PipelineDef, $Extension['type']['overloads']>
   >
   done: () => Pipeline.InferFromDefinition<$PipelineDef>
 }

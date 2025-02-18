@@ -1,4 +1,4 @@
-import { Transports } from '../../../../../../src/client/properties/transports/__.js'
+import { Transports } from '../../../../../../src/client/properties/transports/_namespace.js'
 import { DocumentBuilder } from '../../../../../../src/entrypoints/extensions/document-builder/runtime.js'
 import { TransportHttp } from '../../../../../../src/entrypoints/extensions/transport-http/runtime.js'
 import * as $$Utilities from '../../../../../../src/entrypoints/utilities-for-generated.js'

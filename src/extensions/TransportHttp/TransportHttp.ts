@@ -1,4 +1,4 @@
-import { Configurator, Extension, Transport } from '../../entrypoints/extension.js'
+import { Configurator, Data, Extension } from '../../entrypoints/extension.js'
 import type { Anyware } from '../../lib/anyware/_namespace.js'
 import type { Grafaid } from '../../lib/grafaid/__.js'
 import { OperationTypeToAccessKind, print } from '../../lib/grafaid/document.js'
@@ -178,10 +178,7 @@ export type TransportHttp = Extension.Data<
   unknown,
   {},
   readonly [],
-  Transport<
-    'http',
-    TransportHttpConfigurator
-  >
+  readonly [Data<'http', TransportHttpConfigurator>]
 >
 
 export const TransportHttp: TransportHttp = Extension.create(`TransportHttp`)

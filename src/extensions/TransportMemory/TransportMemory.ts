@@ -1,4 +1,5 @@
-import { Configurator, Extension, Transport } from '../../entrypoints/extension.js'
+import type { Transport } from '../../client/properties/transports/dataType/_namespace.js'
+import { Configurator, Data, Extension } from '../../entrypoints/extension.js'
 import type { Anyware } from '../../lib/anyware/_namespace.js'
 import type { Grafaid } from '../../lib/grafaid/__.js'
 import { print } from '../../lib/grafaid/document.js'
@@ -91,10 +92,12 @@ export type TransportMemory = Extension.Data<
   unknown,
   {},
   readonly [],
-  Transport<
-    'memory',
-    TransportMemoryConfigurator
-  >,
+  readonly [
+    Transport.Data<
+      'memory',
+      TransportMemoryConfigurator
+    >,
+  ],
   undefined
 >
 

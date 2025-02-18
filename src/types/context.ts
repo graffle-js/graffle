@@ -3,7 +3,7 @@ import { Extensions } from '../client/properties/extensions/__.js'
 import { Properties } from '../client/properties/properties/__.js'
 import { RequestInterceptors } from '../client/properties/requestInterceptors/__.js'
 import { Scalars } from '../client/properties/scalars/__.js'
-import { Transports } from '../client/properties/transports/__.js'
+import { Transports } from '../client/properties/transports/_namespace.js'
 import { type EmptyArray, type ObjectMergeShallow } from '../lib/prelude.js'
 
 export interface Context
@@ -74,6 +74,7 @@ export namespace ContextFragments {
     context: Context,
     input: $Input,
   ) => null | $ContextFragment
+
   export const defineReducer = <$ContextFragment extends ContextFragment, $Input>(
     reducer: Reducer<$ContextFragment, $Input>,
   ): Reducer<$ContextFragment, $Input> => {

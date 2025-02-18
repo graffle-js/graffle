@@ -1,7 +1,7 @@
 export { type TypedDocument } from '../lib/grafaid/typed-document/__.js'
 // todo figure this export out. Was just put there to resolve a type error about "...cannot be named..."
 export { type Normalized } from '../client/properties/output/_exports.js'
-export { Transport } from '../client/properties/transports/dataType.js'
+export { Data } from '../client/properties/transports/dataType/data.js'
 export * from '../lib/prelude.js'
 export * from './__Graffle.js'
 export * as Preset from './_Preset.js'
