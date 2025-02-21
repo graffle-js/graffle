@@ -1,10 +1,10 @@
 import { getIntrospectionQuery, type IntrospectionQuery } from 'graphql'
 import type { GraphQLSchema, IntrospectionOptions } from 'graphql'
+import type { Configuration } from '../../client/properties/configuration/_namespace.js'
 import type { HandleOutput } from '../../client/properties/output/handle.js'
 import type { Properties } from '../../client/properties/properties/__.js'
-import type { PropertiesComputer } from '../../client/properties/properties/properties.js'
 import { Configurator, Extension } from '../../entrypoints/extension.js'
-import type { Context, ContextTransports } from '../../entrypoints/utilities-for-generated.js'
+import type { Context } from '../../entrypoints/utilities-for-generated.js'
 import type { InputIntrospectionOptions } from '../../generator/_.js'
 
 export type ConfigurationInput = {
@@ -46,7 +46,7 @@ type SchemaTarget = string | URL | GraphQLSchema
  * const data = await graffle.introspect()
  * ```
  */
-export const Introspection = Extension(`introspection`)
+export const Introspection = Extension.create(`introspection`)
   .configurator(
     Configurator()
       .input<ConfigurationInput>()
@@ -106,7 +106,7 @@ interface Properties extends Properties.PropertiesComputerTypeFunction {
   return: Properties_<this['context']>
 }
 interface Properties_<$Context extends Context> {
-  introspect: ContextTransports.PreflightCheck<
+  introspect: Configuration.Check.Preflight<
     $Context,
     () => Promise<(null | {}) & HandleOutput<$Context, IntrospectionQuery>>
   >

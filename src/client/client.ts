@@ -2,18 +2,20 @@ import { Anyware } from '../lib/anyware/_namespace.js'
 import { getOperationType } from '../lib/grafaid/document.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
 import type { RequestPipeline } from '../requestPipeline/RequestPipeline.js'
-import { Context, type ContextFragment, ContextFragments } from '../types/context.js'
-import { Configuration } from './properties/configuration/__.js'
+import type { Context } from '../types/context.js'
+import { type ContextEmpty, contextEmpty } from '../types/ContextEmpty.js'
+import { type ContextFragment, ContextFragments } from '../types/ContextFragment.js'
+import { Configuration } from './properties/configuration/_namespace.js'
 import { Extensions } from './properties/extensions/__.js'
 import { Output } from './properties/output/_namespace.js'
 import { Properties } from './properties/properties/__.js'
 import { GqlMethod } from './properties/request/request.js'
 import { SendMethod } from './properties/request/send.js'
 import { RequestInterceptors } from './properties/requestInterceptors/__.js'
-import { Scalars } from './properties/scalars/__.js'
+import { Scalars } from './properties/scalars/_namespace.js'
 import { Transports } from './properties/transports/_namespace.js'
 
-export type ClientEmpty = Client<Context.States.Empty>
+export type ClientEmpty = Client<ContextEmpty>
 
 export interface Client_justContext {
   _: Context
@@ -69,7 +71,7 @@ export interface ClientBase<$Context extends Context> {
     const configurationInput extends CalcConfigurationInputForContext<$Context>,
   >(configurationInput: configurationInput) => Client<
     // @ts-expect-error Non-index type being used
-    Configuration.ContextFragmentConfigurationConfigure<$Context, configurationInput>
+    Configuration.ContextFragmentAdd<$Context, configurationInput>
   >
 }
 
@@ -82,11 +84,11 @@ export interface ExtensionChainable extends TypeFunction {}
 export type ExtensionChainableArguments = [Context, object, ExtensionChainableRegistry]
 
 // Almost identical to `with` except that input is optional.
-export type Create<$Context extends Context = Context.States.Empty> = <
+export type Create<$Context extends Context = ContextEmpty> = <
   const configurationInput extends CalcConfigurationInputForContext<$Context>,
 >(configurationInput?: configurationInput) => Client<
   // @ts-expect-error: Is missing standard configurators
-  Configuration.ContextFragmentConfigurationConfigure<$Context, configurationInput>
+  Configuration.ContextFragmentAdd<$Context, configurationInput>
 >
 
 export const createConstructorWithContext = <$Context extends Context>(
@@ -97,20 +99,20 @@ export const createConstructorWithContext = <$Context extends Context>(
   const newContext = configurationInput_
     ? ContextFragments.merge(
       context,
-      Configuration.configure(context, configurationInput_),
+      Configuration.contextFragmentAdd(context, configurationInput_),
     )
     : context
   return createWithContext(newContext) as any
 }
 
-export const create: Create = createConstructorWithContext(Context.States.empty)
+export const create: Create = createConstructorWithContext(contextEmpty)
 
 export const createWithContext = <$Context extends Context>(
   context: $Context,
 ): Client<$Context> => {
   const copy = (fragment: null | ContextFragment) => {
-    if (!fragment) return client
     const newContext = ContextFragments.merge(context, fragment)
+    if (newContext === context) return client
     return createWithContext(newContext) as any
   }
 
@@ -136,11 +138,11 @@ export const createWithContext = <$Context extends Context>(
     },
     scalar: ((...args: Scalars.Method.Arguments) => {
       const scalar = Scalars.Method.normalizeArguments(args)
-      return copy(Scalars.contextScalarsAdd(context, scalar))
+      return copy(Scalars.contextAdd(context, scalar))
     }) as any,
     with(configurationInput) {
       const configurationInput_ = configurationInput as Configuration.ConfigurationIndex.Input
-      return copy(Configuration.configure(context, configurationInput_))
+      return copy(Configuration.contextFragmentAdd(context, configurationInput_))
     },
     transport: ((...args: Transports.TransportMethod.Arguments) => {
       const input = Transports.TransportMethod.normalizeArguments(args)

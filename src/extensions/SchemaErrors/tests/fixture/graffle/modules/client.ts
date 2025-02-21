@@ -5,21 +5,18 @@ import * as $$Data from './data.js'
 import * as $$Scalar from './scalar.js'
 import * as $$SchemaDrivenDataMap from './schema-driven-data-map.js'
 
-const context = $$Utilities.contextFragmentAddAndApplyMany(
-  $$Utilities.contextFragmentAddAndApplyMany(
-    {
-      ...$$Utilities.Context.States.empty,
-      name: $$Data.Name,
-      schemaMap: $$SchemaDrivenDataMap.schemaDrivenDataMap,
-      scalars: $$Scalar.$registry,
-    },
-    TransportHttp({
-      url: $$Data.defaultSchemaUrl,
+const context = $$Utilities.pipe(
+  $$Utilities.contextEmpty,
+  ctx => $$Utilities.Extensions.contextFragmentAddAndApplyMany(ctx, [TransportHttp, DocumentBuilder]),
+  ctx => $$Utilities.Transports.contextFragmentConfigureCurrent(ctx, { url: $$Data.defaultSchemaUrl }),
+  ctx =>
+    $$Utilities.Configuration.contextFragmentAdd(ctx, {
+      schema: {
+        name: $$Data.Name,
+        map: $$SchemaDrivenDataMap.schemaDrivenDataMap,
+      },
     }),
-  ),
-  DocumentBuilder(),
+  ctx => $$Utilities.Scalars.contextSet(ctx, { scalars: $$Scalar.$registry }),
 )
 
-export const create = $$Utilities.createConstructorWithContext(
-  context,
-)
+export const create = $$Utilities.createConstructorWithContext(context)

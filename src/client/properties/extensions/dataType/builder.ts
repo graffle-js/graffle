@@ -4,7 +4,7 @@ import { createMutableBuilder } from '../../../../lib/mutableBuilder.js'
 import { __, type ObjectMergeShallow } from '../../../../lib/prelude.js'
 import type { RequestPipeline } from '../../../../requestPipeline/__.js'
 import type { Context } from '../../../../types/context.js'
-import type { Configuration } from '../../configuration/__.js'
+import type { Configuration } from '../../configuration/_namespace.js'
 import type { Properties } from '../../properties/__.js'
 import { Transport } from '../../transports/dataType/_namespace.js'
 import { type Data, type DataEmpty, dataPropertiesTypeOnly } from './data.js'
@@ -47,6 +47,8 @@ export const create: Create = (name) => {
         } else {
           Object.assign(data.propertiesStatic, properties)
         }
+      },
+      typeOfNoExpandResultDataType() {
       },
       return() {
         return data.configurator

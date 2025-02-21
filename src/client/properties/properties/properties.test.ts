@@ -1,8 +1,9 @@
 import { describe, expect, expectTypeOf } from 'vitest'
 import { test } from '../../../../tests/_/helpers.js'
-import { Context } from '../../../types/context.js'
+import type { Context } from '../../../types/context.js'
+import { type ContextEmpty, contextEmpty } from '../../../types/ContextEmpty.js'
 import { type Client_justContext } from '../../client.js'
-import { type Configuration } from '../configuration/__.js'
+import { type Configuration } from '../configuration/_namespace.js'
 import { createPropertiesComputer, type PropertiesComputerTypeFunction } from './properties.js'
 
 export const propertiesStatic1 = { foo: `bar` }
@@ -26,8 +27,8 @@ export interface PreflightComputer<$Context extends Context> {
 }
 
 test(`initial context is empty`, ({ g0 }) => {
-  expect(g0._.properties).toEqual(Context.States.empty.properties)
-  expectTypeOf(g0._.properties).toEqualTypeOf<Context.States.Empty['properties']>()
+  expect(g0._.properties).toEqual(contextEmpty.properties)
+  expectTypeOf(g0._.properties).toEqualTypeOf<ContextEmpty['properties']>()
 })
 
 test(`can add static properties`, ({ g0 }) => {
@@ -49,7 +50,7 @@ describe(`computed properties`, () => {
     expectTypeOf(g1._.properties.static).toMatchTypeOf<
       {
         parameters: {
-          configuration: Configuration.ContextFragmentConfiguration['configuration']
+          configuration: Configuration.ContextFragment['configuration']
           context: Context
           client: Client_justContext
         }

@@ -11,7 +11,8 @@ import {
 } from '../../../lib/prelude.js'
 import type { RequestPipeline } from '../../../requestPipeline/RequestPipeline.js'
 import { requestPipelineBaseDefinition } from '../../../requestPipeline/RequestPipeline.js'
-import { Context, ContextFragments } from '../../../types/context.js'
+import type { Context } from '../../../types/context.js'
+import { ContextFragments } from '../../../types/ContextFragment.js'
 import type { Client } from '../../client.js'
 import { Transport } from './dataType/_namespace.js'
 
@@ -304,31 +305,28 @@ export const contextFragmentSetCurrent = (
   return fragment
 }
 
-export const contextFragmentConfigureCurrent = ContextFragments.defineReducer<
-  ContextFragment,
-  Configurator.Configuration
->((
-  context,
-  configurationInput,
-) => {
+export const contextFragmentConfigureCurrent = <context extends ContextFragment>(
+  context: context,
+  configurationInput: Configurator.Configuration,
+): context => {
   if (!context.transports.current) {
     throw new Error(`No transport is currently set.`)
   }
   return contextFragmentConfigure(context, context.transports.current, configurationInput)
-})
+}
 
-export const contextConfigureCurrent = Context.createReducer(contextFragmentConfigureCurrent)
+// export const contextConfigureCurrent = Context.createReducer(contextFragmentConfigureCurrent)
 
-export const contextFragmentConfigure = (
-  context: Context,
+export const contextFragmentConfigure = <context extends ContextFragment>(
+  context: context,
   transportName: string,
   configurationInput: Configurator.Configuration,
-): null | ContextFragment => {
+): context => {
   const transport = context.transports.registry[transportName]
   if (!transport) throw new Error(`Unknown transport: ${transportName}`)
 
   const noChange = isObjectEmpty(configurationInput)
-  if (noChange) return null
+  if (noChange) return context
 
   // todo: Graceful error handling. Clearly track error being from which extension.
   const transportConfiguration = transport.configurator.inputResolver({
@@ -346,6 +344,7 @@ export const contextFragmentConfigure = (
   }
 
   return {
+    ...context,
     transports,
     requestPipelineDefinition: context.requestPipelineDefinition,
   }

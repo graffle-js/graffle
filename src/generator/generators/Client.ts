@@ -17,23 +17,20 @@ export const ModuleGeneratorClient = createModuleGenerator(
     )
     code()
     code(`
-      const context = ${identifiers.$$Utilities}.useReducer(${identifiers.$$Utilities}.useReducer(
-        {
-          ...${identifiers.$$Utilities}.Context.States.empty,
-          name: $$Data.Name,
-          schemaMap: $$SchemaDrivenDataMap.schemaDrivenDataMap,
-          scalars: $$Scalar.$registry,
-        },
-        TransportHttp({
-          url: $$Data.defaultSchemaUrl,
-        }),
-      ),
-      DocumentBuilder(),
-    )
-
-      export const create = ${identifiers.$$Utilities}.createConstructorWithContext(
-        context
+      const context = ${identifiers.$$Utilities}.pipe(
+        ${identifiers.$$Utilities}.contextEmpty,
+        ctx => ${identifiers.$$Utilities}.Extensions.contextFragmentAddAndApplyMany(ctx, [TransportHttp, DocumentBuilder]),
+        ctx => ${identifiers.$$Utilities}.Transports.contextFragmentConfigureCurrent(ctx, { url: $$Data.defaultSchemaUrl }),
+        ctx => ${identifiers.$$Utilities}.Configuration.contextFragmentAdd(ctx, {
+                 schema: {
+                   name: $$Data.Name,
+                   map: $$SchemaDrivenDataMap.schemaDrivenDataMap,
+                 },
+               }),
+        ctx => $$Utilities.Scalars.contextSet(ctx, { scalars: $$Scalar.$registry }),
       )
+
+      export const create = ${identifiers.$$Utilities}.createConstructorWithContext(context)
     `)
   },
 )

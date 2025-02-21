@@ -1,20 +1,19 @@
 import type { ContextAdd } from '../../client/properties/scalars/scalars.js'
-import type { Extension } from '../../extension/$.js'
 import { assertEqual } from '../../lib/assert-equal.js'
-import type { Context } from '../context.js'
+import type { ContextEmpty } from '../ContextEmpty.js'
 import type { Schema } from '../Schema/__.js'
 import type { _SimplifyExcept, Simplify, SimplifyWithEmptyContext } from './Simplify.js'
 
 // dprint-ignore
 {
 type DateScalar = Schema.Scalar<'Date', Date, string>
-type CEmpty = Context.States.Empty
+type CEmpty = ContextEmpty
 // type CExt = Extension.AddExtensionTypeHooks<CEmpty, {
 // 	onRequestDocumentRootType: [],
 // 	onRequestResult: []
 // 	requestResultDataTypes: Text,
 // }>
-type CScalar = ContextAdd<Context.States.Empty, DateScalar>
+type CScalar = ContextAdd<ContextEmpty, DateScalar>
 // type CExtAndScalar = AddScalar<CExt, DateScalar>
 	
 type _1 = Simplify<CEmpty                   , {x:Date|null}>

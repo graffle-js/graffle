@@ -1,7 +1,7 @@
 import { describe, expect, expectTypeOf } from 'vitest'
 import { ATransport, ATransportBuilder, BTransport } from '../../../../tests/_/fixtures/transports.js'
 import { test } from '../../../../tests/_/helpers.js'
-import { Context } from '../../../types/context.js'
+import { type ContextEmpty, contextEmpty } from '../../../types/ContextEmpty.js'
 import { create } from '../../client.js'
 import { type ContextFragmentTransportsEmpty, contextFragmentTransportsEmpty } from './transports.js'
 
@@ -12,10 +12,10 @@ describe(`starting state`, () => {
   test(`no transports registered`, ({ g0 }) => {
     expectTypeOf(g0._.transports).toMatchTypeOf<ContextFragmentTransportsEmpty['transports']>()
     expectTypeOf(g0._.requestPipelineDefinition.overloads).toMatchTypeOf<
-      Context.States.Empty['requestPipelineDefinition']['overloads']
+      ContextEmpty['requestPipelineDefinition']['overloads']
     >()
     expect(g0._.transports).toBe(contextFragmentTransportsEmpty.transports)
-    expect(g0._.requestPipelineDefinition.overloads).toBe(Context.States.empty.requestPipelineDefinition.overloads)
+    expect(g0._.requestPipelineDefinition.overloads).toBe(contextEmpty.requestPipelineDefinition.overloads)
   })
 
   // dprint-ignore

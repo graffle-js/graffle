@@ -3,7 +3,7 @@ import * as $$Schema from './schema.js'
 import * as $$SelectionSets from './selection-sets.js'
 
 export interface QueryMethods<$Context extends $$Utilities.Context> {
-  $batch: $$Utilities.ContextTransports.PreflightCheck<
+  $batch: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query<$Context['scalars']>>,
@@ -18,7 +18,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-  __typename: $$Utilities.ContextTransports.PreflightCheck<
+  __typename: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     () => Promise<
       & (null | {})
@@ -32,7 +32,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Look up a code of conduct by its key
    */
-  codeOfConduct: $$Utilities.ContextTransports.PreflightCheck<
+  codeOfConduct: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.codeOfConduct<$Context['scalars']>>,
@@ -51,7 +51,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Look up a code of conduct by its key
    */
-  codesOfConduct: $$Utilities.ContextTransports.PreflightCheck<
+  codesOfConduct: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.codesOfConduct<$Context['scalars']>>,
@@ -70,7 +70,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Look up an enterprise by URL slug.
    */
-  enterprise: $$Utilities.ContextTransports.PreflightCheck<
+  enterprise: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.enterprise<$Context['scalars']>>,
@@ -89,7 +89,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Look up a pending enterprise administrator invitation by invitee, enterprise and role.
    */
-  enterpriseAdministratorInvitation: $$Utilities.ContextTransports.PreflightCheck<
+  enterpriseAdministratorInvitation: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -111,7 +111,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Look up a pending enterprise administrator invitation by invitation token.
    */
-  enterpriseAdministratorInvitationByToken: $$Utilities.ContextTransports.PreflightCheck<
+  enterpriseAdministratorInvitationByToken: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -133,7 +133,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Look up a pending enterprise unaffiliated member invitation by invitee and enterprise.
    */
-  enterpriseMemberInvitation: $$Utilities.ContextTransports.PreflightCheck<
+  enterpriseMemberInvitation: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -155,7 +155,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Look up a pending enterprise unaffiliated member invitation by invitation token.
    */
-  enterpriseMemberInvitationByToken: $$Utilities.ContextTransports.PreflightCheck<
+  enterpriseMemberInvitationByToken: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -177,7 +177,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * ID of the object.
    */
-  id: $$Utilities.ContextTransports.PreflightCheck<
+  id: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.id<$Context['scalars']>>,
@@ -196,7 +196,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Look up an open source license by its key
    */
-  license: $$Utilities.ContextTransports.PreflightCheck<
+  license: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.license<$Context['scalars']>>,
@@ -215,7 +215,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Return a list of known open source licenses
    */
-  licenses: $$Utilities.ContextTransports.PreflightCheck<
+  licenses: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.licenses<$Context['scalars']>>,
@@ -234,7 +234,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Get alphabetically sorted list of Marketplace categories
    */
-  marketplaceCategories: $$Utilities.ContextTransports.PreflightCheck<
+  marketplaceCategories: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.marketplaceCategories<$Context['scalars']>>,
@@ -253,7 +253,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Look up a Marketplace category by its slug.
    */
-  marketplaceCategory: $$Utilities.ContextTransports.PreflightCheck<
+  marketplaceCategory: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.marketplaceCategory<$Context['scalars']>>,
@@ -272,7 +272,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Look up a single Marketplace listing
    */
-  marketplaceListing: $$Utilities.ContextTransports.PreflightCheck<
+  marketplaceListing: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.marketplaceListing<$Context['scalars']>>,
@@ -291,7 +291,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Look up Marketplace listings
    */
-  marketplaceListings: $$Utilities.ContextTransports.PreflightCheck<
+  marketplaceListings: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.marketplaceListings<$Context['scalars']>>,
@@ -310,7 +310,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Return information about the GitHub instance
    */
-  meta: $$Utilities.ContextTransports.PreflightCheck<
+  meta: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.meta<$Context['scalars']>>,
@@ -329,7 +329,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Fetches an object given its ID.
    */
-  node: $$Utilities.ContextTransports.PreflightCheck<
+  node: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.node<$Context['scalars']>>,
@@ -348,7 +348,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Lookup nodes by a list of IDs.
    */
-  nodes: $$Utilities.ContextTransports.PreflightCheck<
+  nodes: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.nodes<$Context['scalars']>>,
@@ -367,7 +367,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Lookup a organization by login.
    */
-  organization: $$Utilities.ContextTransports.PreflightCheck<
+  organization: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.organization<$Context['scalars']>>,
@@ -386,7 +386,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * The client's rate limit information.
    */
-  rateLimit: $$Utilities.ContextTransports.PreflightCheck<
+  rateLimit: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.rateLimit<$Context['scalars']>>,
@@ -406,7 +406,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
    * Workaround for re-exposing the root query object. (Refer to
    * https://github.com/facebook/relay/issues/112 for more information.)
    */
-  relay: $$Utilities.ContextTransports.PreflightCheck<
+  relay: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.relay<$Context['scalars']>>,
@@ -425,7 +425,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Lookup a given repository by the owner and repository name.
    */
-  repository: $$Utilities.ContextTransports.PreflightCheck<
+  repository: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.repository<$Context['scalars']>>,
@@ -444,7 +444,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Lookup a repository owner (ie. either a User or an Organization) by login.
    */
-  repositoryOwner: $$Utilities.ContextTransports.PreflightCheck<
+  repositoryOwner: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.repositoryOwner<$Context['scalars']>>,
@@ -463,7 +463,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Lookup resource by a URL.
    */
-  resource: $$Utilities.ContextTransports.PreflightCheck<
+  resource: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.resource<$Context['scalars']>>,
@@ -482,7 +482,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Perform a search across resources, returning a maximum of 1,000 results.
    */
-  search: $$Utilities.ContextTransports.PreflightCheck<
+  search: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.search<$Context['scalars']>>,
@@ -501,7 +501,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * GitHub Security Advisories
    */
-  securityAdvisories: $$Utilities.ContextTransports.PreflightCheck<
+  securityAdvisories: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.securityAdvisories<$Context['scalars']>>,
@@ -520,7 +520,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Fetch a Security Advisory by its GHSA ID
    */
-  securityAdvisory: $$Utilities.ContextTransports.PreflightCheck<
+  securityAdvisory: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.securityAdvisory<$Context['scalars']>>,
@@ -539,7 +539,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Software Vulnerabilities documented by GitHub Security Advisories
    */
-  securityVulnerabilities: $$Utilities.ContextTransports.PreflightCheck<
+  securityVulnerabilities: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -561,7 +561,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Users and organizations who can be sponsored via GitHub Sponsors.
    */
-  sponsorables: $$Utilities.ContextTransports.PreflightCheck<
+  sponsorables: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.sponsorables<$Context['scalars']>>,
@@ -580,7 +580,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Look up a topic by name.
    */
-  topic: $$Utilities.ContextTransports.PreflightCheck<
+  topic: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.topic<$Context['scalars']>>,
@@ -599,7 +599,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Lookup a user by login.
    */
-  user: $$Utilities.ContextTransports.PreflightCheck<
+  user: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.user<$Context['scalars']>>,
@@ -618,7 +618,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * The currently authenticated user.
    */
-  viewer: $$Utilities.ContextTransports.PreflightCheck<
+  viewer: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.viewer<$Context['scalars']>>,
@@ -637,7 +637,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
 }
 
 export interface MutationMethods<$Context extends $$Utilities.Context> {
-  $batch: $$Utilities.ContextTransports.PreflightCheck<
+  $batch: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation<$Context['scalars']>>,
@@ -652,7 +652,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-  __typename: $$Utilities.ContextTransports.PreflightCheck<
+  __typename: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     () => Promise<
       & (null | {})
@@ -666,7 +666,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Clear all of a customer's queued migrations
    */
-  abortQueuedMigrations: $$Utilities.ContextTransports.PreflightCheck<
+  abortQueuedMigrations: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -688,7 +688,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Abort a repository migration queued or in progress.
    */
-  abortRepositoryMigration: $$Utilities.ContextTransports.PreflightCheck<
+  abortRepositoryMigration: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -710,7 +710,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Accepts a pending invitation for a user to become an administrator of an enterprise.
    */
-  acceptEnterpriseAdministratorInvitation: $$Utilities.ContextTransports.PreflightCheck<
+  acceptEnterpriseAdministratorInvitation: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -732,7 +732,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Accepts a pending invitation for a user to become an unaffiliated member of an enterprise.
    */
-  acceptEnterpriseMemberInvitation: $$Utilities.ContextTransports.PreflightCheck<
+  acceptEnterpriseMemberInvitation: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -754,7 +754,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Applies a suggested topic to the repository.
    */
-  acceptTopicSuggestion: $$Utilities.ContextTransports.PreflightCheck<
+  acceptTopicSuggestion: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -776,7 +776,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Access user namespace repository for a temporary duration.
    */
-  accessUserNamespaceRepository: $$Utilities.ContextTransports.PreflightCheck<
+  accessUserNamespaceRepository: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -798,7 +798,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Adds assignees to an assignable object.
    */
-  addAssigneesToAssignable: $$Utilities.ContextTransports.PreflightCheck<
+  addAssigneesToAssignable: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -820,7 +820,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Adds a comment to an Issue or Pull Request.
    */
-  addComment: $$Utilities.ContextTransports.PreflightCheck<
+  addComment: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.addComment<$Context['scalars']>>,
@@ -839,7 +839,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Adds a comment to a Discussion, possibly as a reply to another comment.
    */
-  addDiscussionComment: $$Utilities.ContextTransports.PreflightCheck<
+  addDiscussionComment: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -861,7 +861,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Vote for an option in a discussion poll.
    */
-  addDiscussionPollVote: $$Utilities.ContextTransports.PreflightCheck<
+  addDiscussionPollVote: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -883,7 +883,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Adds enterprise members to an organization within the enterprise.
    */
-  addEnterpriseOrganizationMember: $$Utilities.ContextTransports.PreflightCheck<
+  addEnterpriseOrganizationMember: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -905,7 +905,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Adds a support entitlement to an enterprise member.
    */
-  addEnterpriseSupportEntitlement: $$Utilities.ContextTransports.PreflightCheck<
+  addEnterpriseSupportEntitlement: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -927,7 +927,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Adds labels to a labelable object.
    */
-  addLabelsToLabelable: $$Utilities.ContextTransports.PreflightCheck<
+  addLabelsToLabelable: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -949,7 +949,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Adds a card to a ProjectColumn. Either `contentId` or `note` must be provided but **not** both.
    */
-  addProjectCard: $$Utilities.ContextTransports.PreflightCheck<
+  addProjectCard: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.addProjectCard<$Context['scalars']>>,
@@ -968,7 +968,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Adds a column to a Project.
    */
-  addProjectColumn: $$Utilities.ContextTransports.PreflightCheck<
+  addProjectColumn: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.addProjectColumn<$Context['scalars']>>,
@@ -987,7 +987,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Creates a new draft issue and add it to a Project.
    */
-  addProjectV2DraftIssue: $$Utilities.ContextTransports.PreflightCheck<
+  addProjectV2DraftIssue: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -1009,7 +1009,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Links an existing content instance to a Project.
    */
-  addProjectV2ItemById: $$Utilities.ContextTransports.PreflightCheck<
+  addProjectV2ItemById: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -1031,7 +1031,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Adds a review to a Pull Request.
    */
-  addPullRequestReview: $$Utilities.ContextTransports.PreflightCheck<
+  addPullRequestReview: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -1053,7 +1053,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Adds a comment to a review.
    */
-  addPullRequestReviewComment: $$Utilities.ContextTransports.PreflightCheck<
+  addPullRequestReviewComment: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -1075,7 +1075,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Adds a new thread to a pending Pull Request Review.
    */
-  addPullRequestReviewThread: $$Utilities.ContextTransports.PreflightCheck<
+  addPullRequestReviewThread: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -1097,7 +1097,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Adds a reply to an existing Pull Request Review Thread.
    */
-  addPullRequestReviewThreadReply: $$Utilities.ContextTransports.PreflightCheck<
+  addPullRequestReviewThreadReply: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -1119,7 +1119,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Adds a reaction to a subject.
    */
-  addReaction: $$Utilities.ContextTransports.PreflightCheck<
+  addReaction: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.addReaction<$Context['scalars']>>,
@@ -1138,7 +1138,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Adds a star to a Starrable.
    */
-  addStar: $$Utilities.ContextTransports.PreflightCheck<
+  addStar: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.addStar<$Context['scalars']>>,
@@ -1157,7 +1157,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Adds a sub-issue to a given issue
    */
-  addSubIssue: $$Utilities.ContextTransports.PreflightCheck<
+  addSubIssue: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.addSubIssue<$Context['scalars']>>,
@@ -1176,7 +1176,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Add an upvote to a discussion or discussion comment.
    */
-  addUpvote: $$Utilities.ContextTransports.PreflightCheck<
+  addUpvote: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.addUpvote<$Context['scalars']>>,
@@ -1195,7 +1195,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Adds a verifiable domain to an owning account.
    */
-  addVerifiableDomain: $$Utilities.ContextTransports.PreflightCheck<
+  addVerifiableDomain: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.addVerifiableDomain<$Context['scalars']>>,
@@ -1214,7 +1214,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Approve all pending deployments under one or more environments
    */
-  approveDeployments: $$Utilities.ContextTransports.PreflightCheck<
+  approveDeployments: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.approveDeployments<$Context['scalars']>>,
@@ -1233,7 +1233,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Approve a verifiable domain for notification delivery.
    */
-  approveVerifiableDomain: $$Utilities.ContextTransports.PreflightCheck<
+  approveVerifiableDomain: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -1255,7 +1255,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Archives a ProjectV2Item
    */
-  archiveProjectV2Item: $$Utilities.ContextTransports.PreflightCheck<
+  archiveProjectV2Item: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -1277,7 +1277,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Marks a repository as archived.
    */
-  archiveRepository: $$Utilities.ContextTransports.PreflightCheck<
+  archiveRepository: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.archiveRepository<$Context['scalars']>>,
@@ -1296,7 +1296,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Cancels a pending invitation for an administrator to join an enterprise.
    */
-  cancelEnterpriseAdminInvitation: $$Utilities.ContextTransports.PreflightCheck<
+  cancelEnterpriseAdminInvitation: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -1318,7 +1318,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Cancels a pending invitation for an unaffiliated member to join an enterprise.
    */
-  cancelEnterpriseMemberInvitation: $$Utilities.ContextTransports.PreflightCheck<
+  cancelEnterpriseMemberInvitation: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -1340,7 +1340,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Cancel an active sponsorship.
    */
-  cancelSponsorship: $$Utilities.ContextTransports.PreflightCheck<
+  cancelSponsorship: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.cancelSponsorship<$Context['scalars']>>,
@@ -1359,7 +1359,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Update your status on GitHub.
    */
-  changeUserStatus: $$Utilities.ContextTransports.PreflightCheck<
+  changeUserStatus: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.changeUserStatus<$Context['scalars']>>,
@@ -1378,7 +1378,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Clears all labels from a labelable object.
    */
-  clearLabelsFromLabelable: $$Utilities.ContextTransports.PreflightCheck<
+  clearLabelsFromLabelable: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -1402,7 +1402,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
    * only text, number, date, assignees, labels, single-select, iteration and
    * milestone fields are supported.
    */
-  clearProjectV2ItemFieldValue: $$Utilities.ContextTransports.PreflightCheck<
+  clearProjectV2ItemFieldValue: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -1424,7 +1424,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Creates a new project by cloning configuration from an existing project.
    */
-  cloneProject: $$Utilities.ContextTransports.PreflightCheck<
+  cloneProject: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.cloneProject<$Context['scalars']>>,
@@ -1443,7 +1443,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Create a new repository with the same files and directory structure as a template repository.
    */
-  cloneTemplateRepository: $$Utilities.ContextTransports.PreflightCheck<
+  cloneTemplateRepository: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -1465,7 +1465,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Close a discussion.
    */
-  closeDiscussion: $$Utilities.ContextTransports.PreflightCheck<
+  closeDiscussion: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.closeDiscussion<$Context['scalars']>>,
@@ -1484,7 +1484,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Close an issue.
    */
-  closeIssue: $$Utilities.ContextTransports.PreflightCheck<
+  closeIssue: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.closeIssue<$Context['scalars']>>,
@@ -1503,7 +1503,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Close a pull request.
    */
-  closePullRequest: $$Utilities.ContextTransports.PreflightCheck<
+  closePullRequest: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.closePullRequest<$Context['scalars']>>,
@@ -1522,7 +1522,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Convert a project note card to one associated with a newly created issue.
    */
-  convertProjectCardNoteToIssue: $$Utilities.ContextTransports.PreflightCheck<
+  convertProjectCardNoteToIssue: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -1544,7 +1544,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Converts a projectV2 draft issue item to an issue.
    */
-  convertProjectV2DraftIssueItemToIssue: $$Utilities.ContextTransports.PreflightCheck<
+  convertProjectV2DraftIssueItemToIssue: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -1566,7 +1566,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Converts a pull request to draft
    */
-  convertPullRequestToDraft: $$Utilities.ContextTransports.PreflightCheck<
+  convertPullRequestToDraft: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -1588,7 +1588,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Copy a project.
    */
-  copyProjectV2: $$Utilities.ContextTransports.PreflightCheck<
+  copyProjectV2: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.copyProjectV2<$Context['scalars']>>,
@@ -1607,7 +1607,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Invites a user to claim reattributable data
    */
-  createAttributionInvitation: $$Utilities.ContextTransports.PreflightCheck<
+  createAttributionInvitation: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -1629,7 +1629,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Create a new branch protection rule
    */
-  createBranchProtectionRule: $$Utilities.ContextTransports.PreflightCheck<
+  createBranchProtectionRule: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -1651,7 +1651,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Create a check run.
    */
-  createCheckRun: $$Utilities.ContextTransports.PreflightCheck<
+  createCheckRun: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.createCheckRun<$Context['scalars']>>,
@@ -1670,7 +1670,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Create a check suite
    */
-  createCheckSuite: $$Utilities.ContextTransports.PreflightCheck<
+  createCheckSuite: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.createCheckSuite<$Context['scalars']>>,
@@ -1730,7 +1730,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
    * Commits made using this mutation are automatically signed by GitHub if
    * supported and will be marked as verified in the user interface.
    */
-  createCommitOnBranch: $$Utilities.ContextTransports.PreflightCheck<
+  createCommitOnBranch: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -1752,7 +1752,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Creates a new deployment event.
    */
-  createDeployment: $$Utilities.ContextTransports.PreflightCheck<
+  createDeployment: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.createDeployment<$Context['scalars']>>,
@@ -1771,7 +1771,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Create a deployment status.
    */
-  createDeploymentStatus: $$Utilities.ContextTransports.PreflightCheck<
+  createDeploymentStatus: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -1793,7 +1793,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Create a discussion.
    */
-  createDiscussion: $$Utilities.ContextTransports.PreflightCheck<
+  createDiscussion: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.createDiscussion<$Context['scalars']>>,
@@ -1817,7 +1817,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
    * of such an enterprise, and instead has SAML enabled for it individually, the
    * token will then require SAML authorization to continue working against that organization.
    */
-  createEnterpriseOrganization: $$Utilities.ContextTransports.PreflightCheck<
+  createEnterpriseOrganization: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -1839,7 +1839,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Creates an environment or simply returns it if already exists.
    */
-  createEnvironment: $$Utilities.ContextTransports.PreflightCheck<
+  createEnvironment: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.createEnvironment<$Context['scalars']>>,
@@ -1858,7 +1858,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Creates a new IP allow list entry.
    */
-  createIpAllowListEntry: $$Utilities.ContextTransports.PreflightCheck<
+  createIpAllowListEntry: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -1880,7 +1880,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Creates a new issue.
    */
-  createIssue: $$Utilities.ContextTransports.PreflightCheck<
+  createIssue: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.createIssue<$Context['scalars']>>,
@@ -1899,7 +1899,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Creates a new label.
    */
-  createLabel: $$Utilities.ContextTransports.PreflightCheck<
+  createLabel: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.createLabel<$Context['scalars']>>,
@@ -1918,7 +1918,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Create a branch linked to an issue.
    */
-  createLinkedBranch: $$Utilities.ContextTransports.PreflightCheck<
+  createLinkedBranch: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.createLinkedBranch<$Context['scalars']>>,
@@ -1937,7 +1937,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Creates a GitHub Enterprise Importer (GEI) migration source.
    */
-  createMigrationSource: $$Utilities.ContextTransports.PreflightCheck<
+  createMigrationSource: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -1959,7 +1959,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Creates a new project.
    */
-  createProject: $$Utilities.ContextTransports.PreflightCheck<
+  createProject: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.createProject<$Context['scalars']>>,
@@ -1978,7 +1978,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Creates a new project.
    */
-  createProjectV2: $$Utilities.ContextTransports.PreflightCheck<
+  createProjectV2: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.createProjectV2<$Context['scalars']>>,
@@ -1997,7 +1997,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Create a new project field.
    */
-  createProjectV2Field: $$Utilities.ContextTransports.PreflightCheck<
+  createProjectV2Field: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -2019,7 +2019,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Creates a status update within a Project.
    */
-  createProjectV2StatusUpdate: $$Utilities.ContextTransports.PreflightCheck<
+  createProjectV2StatusUpdate: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -2041,7 +2041,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Create a new pull request
    */
-  createPullRequest: $$Utilities.ContextTransports.PreflightCheck<
+  createPullRequest: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.createPullRequest<$Context['scalars']>>,
@@ -2060,7 +2060,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Create a new Git Ref.
    */
-  createRef: $$Utilities.ContextTransports.PreflightCheck<
+  createRef: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.createRef<$Context['scalars']>>,
@@ -2079,7 +2079,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Create a new repository.
    */
-  createRepository: $$Utilities.ContextTransports.PreflightCheck<
+  createRepository: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.createRepository<$Context['scalars']>>,
@@ -2098,7 +2098,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Create a repository ruleset
    */
-  createRepositoryRuleset: $$Utilities.ContextTransports.PreflightCheck<
+  createRepositoryRuleset: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -2120,7 +2120,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Create a GitHub Sponsors profile to allow others to sponsor you or your organization.
    */
-  createSponsorsListing: $$Utilities.ContextTransports.PreflightCheck<
+  createSponsorsListing: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -2142,7 +2142,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Create a new payment tier for your GitHub Sponsors profile.
    */
-  createSponsorsTier: $$Utilities.ContextTransports.PreflightCheck<
+  createSponsorsTier: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.createSponsorsTier<$Context['scalars']>>,
@@ -2161,7 +2161,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Start a new sponsorship of a maintainer in GitHub Sponsors, or reactivate a past sponsorship.
    */
-  createSponsorship: $$Utilities.ContextTransports.PreflightCheck<
+  createSponsorship: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.createSponsorship<$Context['scalars']>>,
@@ -2181,7 +2181,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
    * Make many sponsorships for different sponsorable users or organizations at
    * once. Can only sponsor those who have a public GitHub Sponsors profile.
    */
-  createSponsorships: $$Utilities.ContextTransports.PreflightCheck<
+  createSponsorships: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.createSponsorships<$Context['scalars']>>,
@@ -2200,7 +2200,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Creates a new team discussion.
    */
-  createTeamDiscussion: $$Utilities.ContextTransports.PreflightCheck<
+  createTeamDiscussion: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -2222,7 +2222,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Creates a new team discussion comment.
    */
-  createTeamDiscussionComment: $$Utilities.ContextTransports.PreflightCheck<
+  createTeamDiscussionComment: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -2244,7 +2244,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Creates a new user list.
    */
-  createUserList: $$Utilities.ContextTransports.PreflightCheck<
+  createUserList: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.createUserList<$Context['scalars']>>,
@@ -2263,7 +2263,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Rejects a suggested topic for the repository.
    */
-  declineTopicSuggestion: $$Utilities.ContextTransports.PreflightCheck<
+  declineTopicSuggestion: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -2285,7 +2285,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Delete a branch protection rule
    */
-  deleteBranchProtectionRule: $$Utilities.ContextTransports.PreflightCheck<
+  deleteBranchProtectionRule: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -2307,7 +2307,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Deletes a deployment.
    */
-  deleteDeployment: $$Utilities.ContextTransports.PreflightCheck<
+  deleteDeployment: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.deleteDeployment<$Context['scalars']>>,
@@ -2326,7 +2326,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Delete a discussion and all of its replies.
    */
-  deleteDiscussion: $$Utilities.ContextTransports.PreflightCheck<
+  deleteDiscussion: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.deleteDiscussion<$Context['scalars']>>,
@@ -2345,7 +2345,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Delete a discussion comment. If it has replies, wipe it instead.
    */
-  deleteDiscussionComment: $$Utilities.ContextTransports.PreflightCheck<
+  deleteDiscussionComment: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -2367,7 +2367,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Deletes an environment
    */
-  deleteEnvironment: $$Utilities.ContextTransports.PreflightCheck<
+  deleteEnvironment: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.deleteEnvironment<$Context['scalars']>>,
@@ -2386,7 +2386,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Deletes an IP allow list entry.
    */
-  deleteIpAllowListEntry: $$Utilities.ContextTransports.PreflightCheck<
+  deleteIpAllowListEntry: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -2408,7 +2408,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Deletes an Issue object.
    */
-  deleteIssue: $$Utilities.ContextTransports.PreflightCheck<
+  deleteIssue: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.deleteIssue<$Context['scalars']>>,
@@ -2427,7 +2427,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Deletes an IssueComment object.
    */
-  deleteIssueComment: $$Utilities.ContextTransports.PreflightCheck<
+  deleteIssueComment: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.deleteIssueComment<$Context['scalars']>>,
@@ -2446,7 +2446,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Deletes a label.
    */
-  deleteLabel: $$Utilities.ContextTransports.PreflightCheck<
+  deleteLabel: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.deleteLabel<$Context['scalars']>>,
@@ -2465,7 +2465,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Unlink a branch from an issue.
    */
-  deleteLinkedBranch: $$Utilities.ContextTransports.PreflightCheck<
+  deleteLinkedBranch: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.deleteLinkedBranch<$Context['scalars']>>,
@@ -2484,7 +2484,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Delete a package version.
    */
-  deletePackageVersion: $$Utilities.ContextTransports.PreflightCheck<
+  deletePackageVersion: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -2506,7 +2506,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Deletes a project.
    */
-  deleteProject: $$Utilities.ContextTransports.PreflightCheck<
+  deleteProject: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.deleteProject<$Context['scalars']>>,
@@ -2525,7 +2525,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Deletes a project card.
    */
-  deleteProjectCard: $$Utilities.ContextTransports.PreflightCheck<
+  deleteProjectCard: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.deleteProjectCard<$Context['scalars']>>,
@@ -2544,7 +2544,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Deletes a project column.
    */
-  deleteProjectColumn: $$Utilities.ContextTransports.PreflightCheck<
+  deleteProjectColumn: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.deleteProjectColumn<$Context['scalars']>>,
@@ -2563,7 +2563,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Delete a project.
    */
-  deleteProjectV2: $$Utilities.ContextTransports.PreflightCheck<
+  deleteProjectV2: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.deleteProjectV2<$Context['scalars']>>,
@@ -2582,7 +2582,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Delete a project field.
    */
-  deleteProjectV2Field: $$Utilities.ContextTransports.PreflightCheck<
+  deleteProjectV2Field: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -2604,7 +2604,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Deletes an item from a Project.
    */
-  deleteProjectV2Item: $$Utilities.ContextTransports.PreflightCheck<
+  deleteProjectV2Item: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.deleteProjectV2Item<$Context['scalars']>>,
@@ -2623,7 +2623,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Deletes a project status update.
    */
-  deleteProjectV2StatusUpdate: $$Utilities.ContextTransports.PreflightCheck<
+  deleteProjectV2StatusUpdate: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -2645,7 +2645,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Deletes a project workflow.
    */
-  deleteProjectV2Workflow: $$Utilities.ContextTransports.PreflightCheck<
+  deleteProjectV2Workflow: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -2667,7 +2667,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Deletes a pull request review.
    */
-  deletePullRequestReview: $$Utilities.ContextTransports.PreflightCheck<
+  deletePullRequestReview: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -2689,7 +2689,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Deletes a pull request review comment.
    */
-  deletePullRequestReviewComment: $$Utilities.ContextTransports.PreflightCheck<
+  deletePullRequestReviewComment: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -2711,7 +2711,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Delete a Git Ref.
    */
-  deleteRef: $$Utilities.ContextTransports.PreflightCheck<
+  deleteRef: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.deleteRef<$Context['scalars']>>,
@@ -2730,7 +2730,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Delete a repository ruleset
    */
-  deleteRepositoryRuleset: $$Utilities.ContextTransports.PreflightCheck<
+  deleteRepositoryRuleset: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -2752,7 +2752,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Deletes a team discussion.
    */
-  deleteTeamDiscussion: $$Utilities.ContextTransports.PreflightCheck<
+  deleteTeamDiscussion: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -2774,7 +2774,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Deletes a team discussion comment.
    */
-  deleteTeamDiscussionComment: $$Utilities.ContextTransports.PreflightCheck<
+  deleteTeamDiscussionComment: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -2796,7 +2796,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Deletes a user list.
    */
-  deleteUserList: $$Utilities.ContextTransports.PreflightCheck<
+  deleteUserList: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.deleteUserList<$Context['scalars']>>,
@@ -2815,7 +2815,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Deletes a verifiable domain.
    */
-  deleteVerifiableDomain: $$Utilities.ContextTransports.PreflightCheck<
+  deleteVerifiableDomain: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -2837,7 +2837,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Remove a pull request from the merge queue.
    */
-  dequeuePullRequest: $$Utilities.ContextTransports.PreflightCheck<
+  dequeuePullRequest: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.dequeuePullRequest<$Context['scalars']>>,
@@ -2856,7 +2856,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Disable auto merge on the given pull request
    */
-  disablePullRequestAutoMerge: $$Utilities.ContextTransports.PreflightCheck<
+  disablePullRequestAutoMerge: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -2878,7 +2878,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Dismisses an approved or rejected pull request review.
    */
-  dismissPullRequestReview: $$Utilities.ContextTransports.PreflightCheck<
+  dismissPullRequestReview: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -2900,7 +2900,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Dismisses the Dependabot alert.
    */
-  dismissRepositoryVulnerabilityAlert: $$Utilities.ContextTransports.PreflightCheck<
+  dismissRepositoryVulnerabilityAlert: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -2922,7 +2922,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Enable the default auto-merge on a pull request.
    */
-  enablePullRequestAutoMerge: $$Utilities.ContextTransports.PreflightCheck<
+  enablePullRequestAutoMerge: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -2944,7 +2944,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Add a pull request to the merge queue.
    */
-  enqueuePullRequest: $$Utilities.ContextTransports.PreflightCheck<
+  enqueuePullRequest: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.enqueuePullRequest<$Context['scalars']>>,
@@ -2963,7 +2963,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Follow an organization.
    */
-  followOrganization: $$Utilities.ContextTransports.PreflightCheck<
+  followOrganization: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.followOrganization<$Context['scalars']>>,
@@ -2982,7 +2982,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Follow a user.
    */
-  followUser: $$Utilities.ContextTransports.PreflightCheck<
+  followUser: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.followUser<$Context['scalars']>>,
@@ -3001,7 +3001,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Grant the migrator role to a user for all organizations under an enterprise account.
    */
-  grantEnterpriseOrganizationsMigratorRole: $$Utilities.ContextTransports.PreflightCheck<
+  grantEnterpriseOrganizationsMigratorRole: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -3023,7 +3023,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Grant the migrator role to a user or a team.
    */
-  grantMigratorRole: $$Utilities.ContextTransports.PreflightCheck<
+  grantMigratorRole: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.grantMigratorRole<$Context['scalars']>>,
@@ -3042,7 +3042,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Creates a new project by importing columns and a list of issues/PRs.
    */
-  importProject: $$Utilities.ContextTransports.PreflightCheck<
+  importProject: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.importProject<$Context['scalars']>>,
@@ -3061,7 +3061,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Invite someone to become an administrator of the enterprise.
    */
-  inviteEnterpriseAdmin: $$Utilities.ContextTransports.PreflightCheck<
+  inviteEnterpriseAdmin: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -3083,7 +3083,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Invite someone to become an unaffiliated member of the enterprise.
    */
-  inviteEnterpriseMember: $$Utilities.ContextTransports.PreflightCheck<
+  inviteEnterpriseMember: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -3105,7 +3105,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Links a project to a repository.
    */
-  linkProjectV2ToRepository: $$Utilities.ContextTransports.PreflightCheck<
+  linkProjectV2ToRepository: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -3127,7 +3127,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Links a project to a team.
    */
-  linkProjectV2ToTeam: $$Utilities.ContextTransports.PreflightCheck<
+  linkProjectV2ToTeam: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.linkProjectV2ToTeam<$Context['scalars']>>,
@@ -3146,7 +3146,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Creates a repository link for a project.
    */
-  linkRepositoryToProject: $$Utilities.ContextTransports.PreflightCheck<
+  linkRepositoryToProject: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -3168,7 +3168,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Lock a lockable object
    */
-  lockLockable: $$Utilities.ContextTransports.PreflightCheck<
+  lockLockable: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.lockLockable<$Context['scalars']>>,
@@ -3187,7 +3187,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Mark a discussion comment as the chosen answer for discussions in an answerable category.
    */
-  markDiscussionCommentAsAnswer: $$Utilities.ContextTransports.PreflightCheck<
+  markDiscussionCommentAsAnswer: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -3209,7 +3209,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Mark a pull request file as viewed
    */
-  markFileAsViewed: $$Utilities.ContextTransports.PreflightCheck<
+  markFileAsViewed: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.markFileAsViewed<$Context['scalars']>>,
@@ -3228,7 +3228,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Mark a project as a template. Note that only projects which are owned by an Organization can be marked as a template.
    */
-  markProjectV2AsTemplate: $$Utilities.ContextTransports.PreflightCheck<
+  markProjectV2AsTemplate: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -3250,7 +3250,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Marks a pull request ready for review.
    */
-  markPullRequestReadyForReview: $$Utilities.ContextTransports.PreflightCheck<
+  markPullRequestReadyForReview: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -3272,7 +3272,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Merge a head into a branch.
    */
-  mergeBranch: $$Utilities.ContextTransports.PreflightCheck<
+  mergeBranch: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.mergeBranch<$Context['scalars']>>,
@@ -3291,7 +3291,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Merge a pull request.
    */
-  mergePullRequest: $$Utilities.ContextTransports.PreflightCheck<
+  mergePullRequest: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.mergePullRequest<$Context['scalars']>>,
@@ -3310,7 +3310,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Minimizes a comment on an Issue, Commit, Pull Request, or Gist
    */
-  minimizeComment: $$Utilities.ContextTransports.PreflightCheck<
+  minimizeComment: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.minimizeComment<$Context['scalars']>>,
@@ -3329,7 +3329,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Moves a project card to another place.
    */
-  moveProjectCard: $$Utilities.ContextTransports.PreflightCheck<
+  moveProjectCard: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.moveProjectCard<$Context['scalars']>>,
@@ -3348,7 +3348,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Moves a project column to another place.
    */
-  moveProjectColumn: $$Utilities.ContextTransports.PreflightCheck<
+  moveProjectColumn: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.moveProjectColumn<$Context['scalars']>>,
@@ -3367,7 +3367,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Pin an environment to a repository
    */
-  pinEnvironment: $$Utilities.ContextTransports.PreflightCheck<
+  pinEnvironment: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.pinEnvironment<$Context['scalars']>>,
@@ -3386,7 +3386,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Pin an issue to a repository
    */
-  pinIssue: $$Utilities.ContextTransports.PreflightCheck<
+  pinIssue: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.pinIssue<$Context['scalars']>>,
@@ -3405,7 +3405,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Publish an existing sponsorship tier that is currently still a draft to a GitHub Sponsors profile.
    */
-  publishSponsorsTier: $$Utilities.ContextTransports.PreflightCheck<
+  publishSponsorsTier: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.publishSponsorsTier<$Context['scalars']>>,
@@ -3424,7 +3424,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Regenerates the identity provider recovery codes for an enterprise
    */
-  regenerateEnterpriseIdentityProviderRecoveryCodes: $$Utilities.ContextTransports.PreflightCheck<
+  regenerateEnterpriseIdentityProviderRecoveryCodes: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -3446,7 +3446,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Regenerates a verifiable domain's verification token.
    */
-  regenerateVerifiableDomainToken: $$Utilities.ContextTransports.PreflightCheck<
+  regenerateVerifiableDomainToken: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -3468,7 +3468,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Reject all pending deployments under one or more environments
    */
-  rejectDeployments: $$Utilities.ContextTransports.PreflightCheck<
+  rejectDeployments: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.rejectDeployments<$Context['scalars']>>,
@@ -3487,7 +3487,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Removes assignees from an assignable object.
    */
-  removeAssigneesFromAssignable: $$Utilities.ContextTransports.PreflightCheck<
+  removeAssigneesFromAssignable: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -3509,7 +3509,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Removes an administrator from the enterprise.
    */
-  removeEnterpriseAdmin: $$Utilities.ContextTransports.PreflightCheck<
+  removeEnterpriseAdmin: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -3532,7 +3532,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
    * Removes the identity provider from an enterprise. Owners of enterprises both
    * with and without Enterprise Managed Users may use this mutation.
    */
-  removeEnterpriseIdentityProvider: $$Utilities.ContextTransports.PreflightCheck<
+  removeEnterpriseIdentityProvider: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -3554,7 +3554,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Removes a user from all organizations within the enterprise
    */
-  removeEnterpriseMember: $$Utilities.ContextTransports.PreflightCheck<
+  removeEnterpriseMember: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -3576,7 +3576,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Removes an organization from the enterprise
    */
-  removeEnterpriseOrganization: $$Utilities.ContextTransports.PreflightCheck<
+  removeEnterpriseOrganization: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -3598,7 +3598,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Removes a support entitlement from an enterprise member.
    */
-  removeEnterpriseSupportEntitlement: $$Utilities.ContextTransports.PreflightCheck<
+  removeEnterpriseSupportEntitlement: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -3620,7 +3620,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Removes labels from a Labelable object.
    */
-  removeLabelsFromLabelable: $$Utilities.ContextTransports.PreflightCheck<
+  removeLabelsFromLabelable: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -3642,7 +3642,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Removes outside collaborator from all repositories in an organization.
    */
-  removeOutsideCollaborator: $$Utilities.ContextTransports.PreflightCheck<
+  removeOutsideCollaborator: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -3664,7 +3664,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Removes a reaction from a subject.
    */
-  removeReaction: $$Utilities.ContextTransports.PreflightCheck<
+  removeReaction: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.removeReaction<$Context['scalars']>>,
@@ -3683,7 +3683,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Removes a star from a Starrable.
    */
-  removeStar: $$Utilities.ContextTransports.PreflightCheck<
+  removeStar: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.removeStar<$Context['scalars']>>,
@@ -3702,7 +3702,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Removes a sub-issue from a given issue
    */
-  removeSubIssue: $$Utilities.ContextTransports.PreflightCheck<
+  removeSubIssue: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.removeSubIssue<$Context['scalars']>>,
@@ -3721,7 +3721,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Remove an upvote to a discussion or discussion comment.
    */
-  removeUpvote: $$Utilities.ContextTransports.PreflightCheck<
+  removeUpvote: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.removeUpvote<$Context['scalars']>>,
@@ -3740,7 +3740,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Reopen a discussion.
    */
-  reopenDiscussion: $$Utilities.ContextTransports.PreflightCheck<
+  reopenDiscussion: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.reopenDiscussion<$Context['scalars']>>,
@@ -3759,7 +3759,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Reopen a issue.
    */
-  reopenIssue: $$Utilities.ContextTransports.PreflightCheck<
+  reopenIssue: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.reopenIssue<$Context['scalars']>>,
@@ -3778,7 +3778,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Reopen a pull request.
    */
-  reopenPullRequest: $$Utilities.ContextTransports.PreflightCheck<
+  reopenPullRequest: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.reopenPullRequest<$Context['scalars']>>,
@@ -3797,7 +3797,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Reorder a pinned repository environment
    */
-  reorderEnvironment: $$Utilities.ContextTransports.PreflightCheck<
+  reorderEnvironment: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.reorderEnvironment<$Context['scalars']>>,
@@ -3816,7 +3816,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Reprioritizes a sub-issue to a different position in the parent list.
    */
-  reprioritizeSubIssue: $$Utilities.ContextTransports.PreflightCheck<
+  reprioritizeSubIssue: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -3838,7 +3838,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Set review requests on a pull request.
    */
-  requestReviews: $$Utilities.ContextTransports.PreflightCheck<
+  requestReviews: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.requestReviews<$Context['scalars']>>,
@@ -3857,7 +3857,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Rerequests an existing check suite.
    */
-  rerequestCheckSuite: $$Utilities.ContextTransports.PreflightCheck<
+  rerequestCheckSuite: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.rerequestCheckSuite<$Context['scalars']>>,
@@ -3876,7 +3876,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Marks a review thread as resolved.
    */
-  resolveReviewThread: $$Utilities.ContextTransports.PreflightCheck<
+  resolveReviewThread: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.resolveReviewThread<$Context['scalars']>>,
@@ -3895,7 +3895,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Retire a published payment tier from your GitHub Sponsors profile so it cannot be used to start new sponsorships.
    */
-  retireSponsorsTier: $$Utilities.ContextTransports.PreflightCheck<
+  retireSponsorsTier: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.retireSponsorsTier<$Context['scalars']>>,
@@ -3914,7 +3914,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Create a pull request that reverts the changes from a merged pull request.
    */
-  revertPullRequest: $$Utilities.ContextTransports.PreflightCheck<
+  revertPullRequest: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.revertPullRequest<$Context['scalars']>>,
@@ -3933,7 +3933,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Revoke the migrator role to a user for all organizations under an enterprise account.
    */
-  revokeEnterpriseOrganizationsMigratorRole: $$Utilities.ContextTransports.PreflightCheck<
+  revokeEnterpriseOrganizationsMigratorRole: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -3955,7 +3955,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Revoke the migrator role from a user or a team.
    */
-  revokeMigratorRole: $$Utilities.ContextTransports.PreflightCheck<
+  revokeMigratorRole: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.revokeMigratorRole<$Context['scalars']>>,
@@ -3974,7 +3974,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Creates or updates the identity provider for an enterprise.
    */
-  setEnterpriseIdentityProvider: $$Utilities.ContextTransports.PreflightCheck<
+  setEnterpriseIdentityProvider: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -3996,7 +3996,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Set an organization level interaction limit for an organization's public repositories.
    */
-  setOrganizationInteractionLimit: $$Utilities.ContextTransports.PreflightCheck<
+  setOrganizationInteractionLimit: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4018,7 +4018,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Sets an interaction limit setting for a repository.
    */
-  setRepositoryInteractionLimit: $$Utilities.ContextTransports.PreflightCheck<
+  setRepositoryInteractionLimit: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4040,7 +4040,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Set a user level interaction limit for an user's public repositories.
    */
-  setUserInteractionLimit: $$Utilities.ContextTransports.PreflightCheck<
+  setUserInteractionLimit: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4062,7 +4062,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Starts a GitHub Enterprise Importer organization migration.
    */
-  startOrganizationMigration: $$Utilities.ContextTransports.PreflightCheck<
+  startOrganizationMigration: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4084,7 +4084,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Starts a GitHub Enterprise Importer (GEI) repository migration.
    */
-  startRepositoryMigration: $$Utilities.ContextTransports.PreflightCheck<
+  startRepositoryMigration: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4106,7 +4106,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Submits a pending pull request review.
    */
-  submitPullRequestReview: $$Utilities.ContextTransports.PreflightCheck<
+  submitPullRequestReview: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4128,7 +4128,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Transfer an organization from one enterprise to another enterprise.
    */
-  transferEnterpriseOrganization: $$Utilities.ContextTransports.PreflightCheck<
+  transferEnterpriseOrganization: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4150,7 +4150,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Transfer an issue to a different repository
    */
-  transferIssue: $$Utilities.ContextTransports.PreflightCheck<
+  transferIssue: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.transferIssue<$Context['scalars']>>,
@@ -4169,7 +4169,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Unarchives a ProjectV2Item
    */
-  unarchiveProjectV2Item: $$Utilities.ContextTransports.PreflightCheck<
+  unarchiveProjectV2Item: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4191,7 +4191,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Unarchives a repository.
    */
-  unarchiveRepository: $$Utilities.ContextTransports.PreflightCheck<
+  unarchiveRepository: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.unarchiveRepository<$Context['scalars']>>,
@@ -4210,7 +4210,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Unfollow an organization.
    */
-  unfollowOrganization: $$Utilities.ContextTransports.PreflightCheck<
+  unfollowOrganization: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4232,7 +4232,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Unfollow a user.
    */
-  unfollowUser: $$Utilities.ContextTransports.PreflightCheck<
+  unfollowUser: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.unfollowUser<$Context['scalars']>>,
@@ -4251,7 +4251,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Unlinks a project from a repository.
    */
-  unlinkProjectV2FromRepository: $$Utilities.ContextTransports.PreflightCheck<
+  unlinkProjectV2FromRepository: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4273,7 +4273,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Unlinks a project to a team.
    */
-  unlinkProjectV2FromTeam: $$Utilities.ContextTransports.PreflightCheck<
+  unlinkProjectV2FromTeam: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4295,7 +4295,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Deletes a repository link from a project.
    */
-  unlinkRepositoryFromProject: $$Utilities.ContextTransports.PreflightCheck<
+  unlinkRepositoryFromProject: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4317,7 +4317,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Unlock a lockable object
    */
-  unlockLockable: $$Utilities.ContextTransports.PreflightCheck<
+  unlockLockable: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.unlockLockable<$Context['scalars']>>,
@@ -4336,7 +4336,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Unmark a discussion comment as the chosen answer for discussions in an answerable category.
    */
-  unmarkDiscussionCommentAsAnswer: $$Utilities.ContextTransports.PreflightCheck<
+  unmarkDiscussionCommentAsAnswer: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4358,7 +4358,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Unmark a pull request file as viewed
    */
-  unmarkFileAsViewed: $$Utilities.ContextTransports.PreflightCheck<
+  unmarkFileAsViewed: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.unmarkFileAsViewed<$Context['scalars']>>,
@@ -4377,7 +4377,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Unmark an issue as a duplicate of another issue.
    */
-  unmarkIssueAsDuplicate: $$Utilities.ContextTransports.PreflightCheck<
+  unmarkIssueAsDuplicate: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4399,7 +4399,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Unmark a project as a template.
    */
-  unmarkProjectV2AsTemplate: $$Utilities.ContextTransports.PreflightCheck<
+  unmarkProjectV2AsTemplate: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4421,7 +4421,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Unminimizes a comment on an Issue, Commit, Pull Request, or Gist
    */
-  unminimizeComment: $$Utilities.ContextTransports.PreflightCheck<
+  unminimizeComment: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.unminimizeComment<$Context['scalars']>>,
@@ -4440,7 +4440,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Unpin a pinned issue from a repository
    */
-  unpinIssue: $$Utilities.ContextTransports.PreflightCheck<
+  unpinIssue: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.unpinIssue<$Context['scalars']>>,
@@ -4459,7 +4459,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Marks a review thread as unresolved.
    */
-  unresolveReviewThread: $$Utilities.ContextTransports.PreflightCheck<
+  unresolveReviewThread: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4481,7 +4481,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Update a branch protection rule
    */
-  updateBranchProtectionRule: $$Utilities.ContextTransports.PreflightCheck<
+  updateBranchProtectionRule: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4503,7 +4503,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Update a check run
    */
-  updateCheckRun: $$Utilities.ContextTransports.PreflightCheck<
+  updateCheckRun: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.updateCheckRun<$Context['scalars']>>,
@@ -4522,7 +4522,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Modifies the settings of an existing check suite
    */
-  updateCheckSuitePreferences: $$Utilities.ContextTransports.PreflightCheck<
+  updateCheckSuitePreferences: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4544,7 +4544,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Update a discussion
    */
-  updateDiscussion: $$Utilities.ContextTransports.PreflightCheck<
+  updateDiscussion: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.updateDiscussion<$Context['scalars']>>,
@@ -4563,7 +4563,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Update the contents of a comment on a Discussion
    */
-  updateDiscussionComment: $$Utilities.ContextTransports.PreflightCheck<
+  updateDiscussionComment: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4585,7 +4585,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Updates the role of an enterprise administrator.
    */
-  updateEnterpriseAdministratorRole: $$Utilities.ContextTransports.PreflightCheck<
+  updateEnterpriseAdministratorRole: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4607,7 +4607,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Sets whether private repository forks are enabled for an enterprise.
    */
-  updateEnterpriseAllowPrivateRepositoryForkingSetting: $$Utilities.ContextTransports.PreflightCheck<
+  updateEnterpriseAllowPrivateRepositoryForkingSetting: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4629,7 +4629,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Sets the base repository permission for organizations in an enterprise.
    */
-  updateEnterpriseDefaultRepositoryPermissionSetting: $$Utilities.ContextTransports.PreflightCheck<
+  updateEnterpriseDefaultRepositoryPermissionSetting: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4651,7 +4651,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Sets whether deploy keys are allowed to be created and used for an enterprise.
    */
-  updateEnterpriseDeployKeySetting: $$Utilities.ContextTransports.PreflightCheck<
+  updateEnterpriseDeployKeySetting: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4673,7 +4673,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Sets whether organization members with admin permissions on a repository can change repository visibility.
    */
-  updateEnterpriseMembersCanChangeRepositoryVisibilitySetting: $$Utilities.ContextTransports.PreflightCheck<
+  updateEnterpriseMembersCanChangeRepositoryVisibilitySetting: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4695,7 +4695,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Sets the members can create repositories setting for an enterprise.
    */
-  updateEnterpriseMembersCanCreateRepositoriesSetting: $$Utilities.ContextTransports.PreflightCheck<
+  updateEnterpriseMembersCanCreateRepositoriesSetting: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4717,7 +4717,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Sets the members can delete issues setting for an enterprise.
    */
-  updateEnterpriseMembersCanDeleteIssuesSetting: $$Utilities.ContextTransports.PreflightCheck<
+  updateEnterpriseMembersCanDeleteIssuesSetting: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4739,7 +4739,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Sets the members can delete repositories setting for an enterprise.
    */
-  updateEnterpriseMembersCanDeleteRepositoriesSetting: $$Utilities.ContextTransports.PreflightCheck<
+  updateEnterpriseMembersCanDeleteRepositoriesSetting: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4761,7 +4761,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Sets whether members can invite collaborators are enabled for an enterprise.
    */
-  updateEnterpriseMembersCanInviteCollaboratorsSetting: $$Utilities.ContextTransports.PreflightCheck<
+  updateEnterpriseMembersCanInviteCollaboratorsSetting: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4783,7 +4783,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Sets whether or not an organization owner can make purchases.
    */
-  updateEnterpriseMembersCanMakePurchasesSetting: $$Utilities.ContextTransports.PreflightCheck<
+  updateEnterpriseMembersCanMakePurchasesSetting: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4805,7 +4805,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Sets the members can update protected branches setting for an enterprise.
    */
-  updateEnterpriseMembersCanUpdateProtectedBranchesSetting: $$Utilities.ContextTransports.PreflightCheck<
+  updateEnterpriseMembersCanUpdateProtectedBranchesSetting: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4827,7 +4827,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Sets the members can view dependency insights for an enterprise.
    */
-  updateEnterpriseMembersCanViewDependencyInsightsSetting: $$Utilities.ContextTransports.PreflightCheck<
+  updateEnterpriseMembersCanViewDependencyInsightsSetting: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4849,7 +4849,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Sets whether organization projects are enabled for an enterprise.
    */
-  updateEnterpriseOrganizationProjectsSetting: $$Utilities.ContextTransports.PreflightCheck<
+  updateEnterpriseOrganizationProjectsSetting: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4871,7 +4871,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Updates the role of an enterprise owner with an organization.
    */
-  updateEnterpriseOwnerOrganizationRole: $$Utilities.ContextTransports.PreflightCheck<
+  updateEnterpriseOwnerOrganizationRole: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4893,7 +4893,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Updates an enterprise's profile.
    */
-  updateEnterpriseProfile: $$Utilities.ContextTransports.PreflightCheck<
+  updateEnterpriseProfile: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4915,7 +4915,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Sets whether repository projects are enabled for a enterprise.
    */
-  updateEnterpriseRepositoryProjectsSetting: $$Utilities.ContextTransports.PreflightCheck<
+  updateEnterpriseRepositoryProjectsSetting: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4937,7 +4937,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Sets whether team discussions are enabled for an enterprise.
    */
-  updateEnterpriseTeamDiscussionsSetting: $$Utilities.ContextTransports.PreflightCheck<
+  updateEnterpriseTeamDiscussionsSetting: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4959,7 +4959,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Sets the two-factor authentication methods that users of an enterprise may not use.
    */
-  updateEnterpriseTwoFactorAuthenticationDisallowedMethodsSetting: $$Utilities.ContextTransports.PreflightCheck<
+  updateEnterpriseTwoFactorAuthenticationDisallowedMethodsSetting: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -4981,7 +4981,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Sets whether two factor authentication is required for all users in an enterprise.
    */
-  updateEnterpriseTwoFactorAuthenticationRequiredSetting: $$Utilities.ContextTransports.PreflightCheck<
+  updateEnterpriseTwoFactorAuthenticationRequiredSetting: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -5003,7 +5003,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Updates an environment.
    */
-  updateEnvironment: $$Utilities.ContextTransports.PreflightCheck<
+  updateEnvironment: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.updateEnvironment<$Context['scalars']>>,
@@ -5022,7 +5022,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Sets whether an IP allow list is enabled on an owner.
    */
-  updateIpAllowListEnabledSetting: $$Utilities.ContextTransports.PreflightCheck<
+  updateIpAllowListEnabledSetting: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -5044,7 +5044,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Updates an IP allow list entry.
    */
-  updateIpAllowListEntry: $$Utilities.ContextTransports.PreflightCheck<
+  updateIpAllowListEntry: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -5066,7 +5066,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Sets whether IP allow list configuration for installed GitHub Apps is enabled on an owner.
    */
-  updateIpAllowListForInstalledAppsEnabledSetting: $$Utilities.ContextTransports.PreflightCheck<
+  updateIpAllowListForInstalledAppsEnabledSetting: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -5088,7 +5088,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Updates an Issue.
    */
-  updateIssue: $$Utilities.ContextTransports.PreflightCheck<
+  updateIssue: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.updateIssue<$Context['scalars']>>,
@@ -5107,7 +5107,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Updates an IssueComment object.
    */
-  updateIssueComment: $$Utilities.ContextTransports.PreflightCheck<
+  updateIssueComment: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.updateIssueComment<$Context['scalars']>>,
@@ -5126,7 +5126,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Updates an existing label.
    */
-  updateLabel: $$Utilities.ContextTransports.PreflightCheck<
+  updateLabel: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.updateLabel<$Context['scalars']>>,
@@ -5145,7 +5145,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Update the setting to restrict notifications to only verified or approved domains available to an owner.
    */
-  updateNotificationRestrictionSetting: $$Utilities.ContextTransports.PreflightCheck<
+  updateNotificationRestrictionSetting: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -5167,7 +5167,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Sets whether private repository forks are enabled for an organization.
    */
-  updateOrganizationAllowPrivateRepositoryForkingSetting: $$Utilities.ContextTransports.PreflightCheck<
+  updateOrganizationAllowPrivateRepositoryForkingSetting: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -5189,7 +5189,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Sets whether contributors are required to sign off on web-based commits for repositories in an organization.
    */
-  updateOrganizationWebCommitSignoffSetting: $$Utilities.ContextTransports.PreflightCheck<
+  updateOrganizationWebCommitSignoffSetting: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -5214,7 +5214,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
    * Only applicable when you have a GitHub Sponsors profile and have connected
    * your GitHub account with Patreon.
    */
-  updatePatreonSponsorability: $$Utilities.ContextTransports.PreflightCheck<
+  updatePatreonSponsorability: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -5236,7 +5236,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Updates an existing project.
    */
-  updateProject: $$Utilities.ContextTransports.PreflightCheck<
+  updateProject: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.updateProject<$Context['scalars']>>,
@@ -5255,7 +5255,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Updates an existing project card.
    */
-  updateProjectCard: $$Utilities.ContextTransports.PreflightCheck<
+  updateProjectCard: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.updateProjectCard<$Context['scalars']>>,
@@ -5274,7 +5274,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Updates an existing project column.
    */
-  updateProjectColumn: $$Utilities.ContextTransports.PreflightCheck<
+  updateProjectColumn: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.updateProjectColumn<$Context['scalars']>>,
@@ -5293,7 +5293,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Updates an existing project.
    */
-  updateProjectV2: $$Utilities.ContextTransports.PreflightCheck<
+  updateProjectV2: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.updateProjectV2<$Context['scalars']>>,
@@ -5312,7 +5312,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Update the collaborators on a team or a project
    */
-  updateProjectV2Collaborators: $$Utilities.ContextTransports.PreflightCheck<
+  updateProjectV2Collaborators: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -5334,7 +5334,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Updates a draft issue within a Project.
    */
-  updateProjectV2DraftIssue: $$Utilities.ContextTransports.PreflightCheck<
+  updateProjectV2DraftIssue: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -5356,7 +5356,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Update a project field.
    */
-  updateProjectV2Field: $$Utilities.ContextTransports.PreflightCheck<
+  updateProjectV2Field: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -5379,7 +5379,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
    * This mutation updates the value of a field for an item in a Project. Currently
    * only single-select, text, number, date, and iteration fields are supported.
    */
-  updateProjectV2ItemFieldValue: $$Utilities.ContextTransports.PreflightCheck<
+  updateProjectV2ItemFieldValue: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -5401,7 +5401,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * This mutation updates the position of the item in the project, where the position represents the priority of an item.
    */
-  updateProjectV2ItemPosition: $$Utilities.ContextTransports.PreflightCheck<
+  updateProjectV2ItemPosition: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -5423,7 +5423,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Updates a status update within a Project.
    */
-  updateProjectV2StatusUpdate: $$Utilities.ContextTransports.PreflightCheck<
+  updateProjectV2StatusUpdate: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -5445,7 +5445,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Update a pull request
    */
-  updatePullRequest: $$Utilities.ContextTransports.PreflightCheck<
+  updatePullRequest: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.updatePullRequest<$Context['scalars']>>,
@@ -5464,7 +5464,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Merge or Rebase HEAD from upstream branch into pull request branch
    */
-  updatePullRequestBranch: $$Utilities.ContextTransports.PreflightCheck<
+  updatePullRequestBranch: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -5486,7 +5486,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Updates the body of a pull request review.
    */
-  updatePullRequestReview: $$Utilities.ContextTransports.PreflightCheck<
+  updatePullRequestReview: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -5508,7 +5508,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Updates a pull request review comment.
    */
-  updatePullRequestReviewComment: $$Utilities.ContextTransports.PreflightCheck<
+  updatePullRequestReviewComment: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -5530,7 +5530,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Update a Git Ref.
    */
-  updateRef: $$Utilities.ContextTransports.PreflightCheck<
+  updateRef: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.updateRef<$Context['scalars']>>,
@@ -5566,7 +5566,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
    * If `RefUpdate.force` is set to `true`, a non-fast-forward updates
    * for the given reference will be allowed.
    */
-  updateRefs: $$Utilities.ContextTransports.PreflightCheck<
+  updateRefs: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.updateRefs<$Context['scalars']>>,
@@ -5585,7 +5585,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Update information about a repository.
    */
-  updateRepository: $$Utilities.ContextTransports.PreflightCheck<
+  updateRepository: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.updateRepository<$Context['scalars']>>,
@@ -5604,7 +5604,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Update a repository ruleset
    */
-  updateRepositoryRuleset: $$Utilities.ContextTransports.PreflightCheck<
+  updateRepositoryRuleset: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -5626,7 +5626,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Sets whether contributors are required to sign off on web-based commits for a repository.
    */
-  updateRepositoryWebCommitSignoffSetting: $$Utilities.ContextTransports.PreflightCheck<
+  updateRepositoryWebCommitSignoffSetting: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -5648,7 +5648,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Change visibility of your sponsorship and opt in or out of email updates from the maintainer.
    */
-  updateSponsorshipPreferences: $$Utilities.ContextTransports.PreflightCheck<
+  updateSponsorshipPreferences: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -5670,7 +5670,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Updates the state for subscribable subjects.
    */
-  updateSubscription: $$Utilities.ContextTransports.PreflightCheck<
+  updateSubscription: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.updateSubscription<$Context['scalars']>>,
@@ -5689,7 +5689,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Updates a team discussion.
    */
-  updateTeamDiscussion: $$Utilities.ContextTransports.PreflightCheck<
+  updateTeamDiscussion: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -5711,7 +5711,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Updates a discussion comment.
    */
-  updateTeamDiscussionComment: $$Utilities.ContextTransports.PreflightCheck<
+  updateTeamDiscussionComment: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -5733,7 +5733,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Updates team review assignment.
    */
-  updateTeamReviewAssignment: $$Utilities.ContextTransports.PreflightCheck<
+  updateTeamReviewAssignment: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -5755,7 +5755,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Update team repository.
    */
-  updateTeamsRepository: $$Utilities.ContextTransports.PreflightCheck<
+  updateTeamsRepository: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -5777,7 +5777,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Replaces the repository's topics with the given topics.
    */
-  updateTopics: $$Utilities.ContextTransports.PreflightCheck<
+  updateTopics: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.updateTopics<$Context['scalars']>>,
@@ -5796,7 +5796,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Updates an existing user list.
    */
-  updateUserList: $$Utilities.ContextTransports.PreflightCheck<
+  updateUserList: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.updateUserList<$Context['scalars']>>,
@@ -5815,7 +5815,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Updates which of the viewer's lists an item belongs to
    */
-  updateUserListsForItem: $$Utilities.ContextTransports.PreflightCheck<
+  updateUserListsForItem: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -5837,7 +5837,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Verify that a verifiable domain has the expected DNS record.
    */
-  verifyVerifiableDomain: $$Utilities.ContextTransports.PreflightCheck<
+  verifyVerifiableDomain: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<

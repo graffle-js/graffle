@@ -3,7 +3,7 @@ import * as $$Schema from './schema.js'
 import * as $$SelectionSets from './selection-sets.js'
 
 export interface QueryMethods<$Context extends $$Utilities.Context> {
-  $batch: $$Utilities.ContextTransports.PreflightCheck<
+  $batch: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query<$Context['scalars']>>,
@@ -18,7 +18,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-  __typename: $$Utilities.ContextTransports.PreflightCheck<
+  __typename: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     () => Promise<
       & (null | {})
@@ -30,7 +30,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  InputObjectNested: $$Utilities.ContextTransports.PreflightCheck<
+  InputObjectNested: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.InputObjectNested<$Context['scalars']>>,
@@ -47,7 +47,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  InputObjectNestedNonNull: $$Utilities.ContextTransports.PreflightCheck<
+  InputObjectNestedNonNull: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -69,7 +69,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Query enum field documentation.
    */
-  abcEnum: $$Utilities.ContextTransports.PreflightCheck<
+  abcEnum: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.abcEnum<$Context['scalars']>>,
@@ -86,7 +86,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  argInputObjectCircular: $$Utilities.ContextTransports.PreflightCheck<
+  argInputObjectCircular: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<
@@ -106,7 +106,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  date: $$Utilities.ContextTransports.PreflightCheck<
+  date: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.date<$Context['scalars']>>,
@@ -123,7 +123,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  dateArg: $$Utilities.ContextTransports.PreflightCheck<
+  dateArg: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateArg<$Context['scalars']>>,
@@ -140,7 +140,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  dateArgInputObject: $$Utilities.ContextTransports.PreflightCheck<
+  dateArgInputObject: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateArgInputObject<$Context['scalars']>>,
@@ -157,7 +157,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  dateArgList: $$Utilities.ContextTransports.PreflightCheck<
+  dateArgList: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateArgList<$Context['scalars']>>,
@@ -174,7 +174,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  dateArgNonNull: $$Utilities.ContextTransports.PreflightCheck<
+  dateArgNonNull: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateArgNonNull<$Context['scalars']>>,
@@ -191,7 +191,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  dateArgNonNullList: $$Utilities.ContextTransports.PreflightCheck<
+  dateArgNonNullList: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateArgNonNullList<$Context['scalars']>>,
@@ -208,7 +208,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  dateArgNonNullListNonNull: $$Utilities.ContextTransports.PreflightCheck<
+  dateArgNonNullListNonNull: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -228,7 +228,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  dateInterface1: $$Utilities.ContextTransports.PreflightCheck<
+  dateInterface1: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateInterface1<$Context['scalars']>>,
@@ -245,7 +245,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  dateList: $$Utilities.ContextTransports.PreflightCheck<
+  dateList: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateList<$Context['scalars']>>,
@@ -262,7 +262,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  dateListList: $$Utilities.ContextTransports.PreflightCheck<
+  dateListList: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateListList<$Context['scalars']>>,
@@ -279,7 +279,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  dateListNonNull: $$Utilities.ContextTransports.PreflightCheck<
+  dateListNonNull: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateListNonNull<$Context['scalars']>>,
@@ -296,7 +296,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  dateNonNull: $$Utilities.ContextTransports.PreflightCheck<
+  dateNonNull: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateNonNull<$Context['scalars']>>,
@@ -313,7 +313,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  dateObject1: $$Utilities.ContextTransports.PreflightCheck<
+  dateObject1: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateObject1<$Context['scalars']>>,
@@ -330,7 +330,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  dateUnion: $$Utilities.ContextTransports.PreflightCheck<
+  dateUnion: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateUnion<$Context['scalars']>>,
@@ -347,7 +347,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  error: $$Utilities.ContextTransports.PreflightCheck<
+  error: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.error<$Context['scalars']>>,
@@ -364,7 +364,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  id: $$Utilities.ContextTransports.PreflightCheck<
+  id: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.id<$Context['scalars']>>,
@@ -381,7 +381,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  idNonNull: $$Utilities.ContextTransports.PreflightCheck<
+  idNonNull: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.idNonNull<$Context['scalars']>>,
@@ -398,7 +398,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  interface: $$Utilities.ContextTransports.PreflightCheck<
+  interface: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.$interface<$Context['scalars']>>,
@@ -415,7 +415,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  interfaceHierarchyChildA: $$Utilities.ContextTransports.PreflightCheck<
+  interfaceHierarchyChildA: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -435,7 +435,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  interfaceHierarchyChildB: $$Utilities.ContextTransports.PreflightCheck<
+  interfaceHierarchyChildB: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -455,7 +455,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  interfaceHierarchyGrandparents: $$Utilities.ContextTransports.PreflightCheck<
+  interfaceHierarchyGrandparents: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -475,7 +475,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  interfaceHierarchyParents: $$Utilities.ContextTransports.PreflightCheck<
+  interfaceHierarchyParents: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -495,7 +495,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  interfaceNonNull: $$Utilities.ContextTransports.PreflightCheck<
+  interfaceNonNull: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.interfaceNonNull<$Context['scalars']>>,
@@ -512,7 +512,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  interfaceWithArgs: $$Utilities.ContextTransports.PreflightCheck<
+  interfaceWithArgs: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.interfaceWithArgs<$Context['scalars']>>,
@@ -529,7 +529,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  listInt: $$Utilities.ContextTransports.PreflightCheck<
+  listInt: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.listInt<$Context['scalars']>>,
@@ -546,7 +546,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  listIntNonNull: $$Utilities.ContextTransports.PreflightCheck<
+  listIntNonNull: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.listIntNonNull<$Context['scalars']>>,
@@ -563,7 +563,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  listListInt: $$Utilities.ContextTransports.PreflightCheck<
+  listListInt: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.listListInt<$Context['scalars']>>,
@@ -580,7 +580,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  listListIntNonNull: $$Utilities.ContextTransports.PreflightCheck<
+  listListIntNonNull: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.listListIntNonNull<$Context['scalars']>>,
@@ -597,7 +597,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  lowerCaseUnion: $$Utilities.ContextTransports.PreflightCheck<
+  lowerCaseUnion: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.lowerCaseUnion<$Context['scalars']>>,
@@ -614,7 +614,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  object: $$Utilities.ContextTransports.PreflightCheck<
+  object: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.$object<$Context['scalars']>>,
@@ -631,7 +631,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  objectList: $$Utilities.ContextTransports.PreflightCheck<
+  objectList: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.objectList<$Context['scalars']>>,
@@ -648,7 +648,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  objectListNonNull: $$Utilities.ContextTransports.PreflightCheck<
+  objectListNonNull: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.objectListNonNull<$Context['scalars']>>,
@@ -665,7 +665,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  objectNested: $$Utilities.ContextTransports.PreflightCheck<
+  objectNested: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.objectNested<$Context['scalars']>>,
@@ -682,7 +682,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  objectNonNull: $$Utilities.ContextTransports.PreflightCheck<
+  objectNonNull: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.objectNonNull<$Context['scalars']>>,
@@ -699,7 +699,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  objectWithArgs: $$Utilities.ContextTransports.PreflightCheck<
+  objectWithArgs: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.objectWithArgs<$Context['scalars']>>,
@@ -716,7 +716,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  result: $$Utilities.ContextTransports.PreflightCheck<
+  result: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.result<$Context['scalars']>>,
@@ -733,7 +733,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  resultNonNull: $$Utilities.ContextTransports.PreflightCheck<
+  resultNonNull: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.resultNonNull<$Context['scalars']>>,
@@ -750,7 +750,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  string: $$Utilities.ContextTransports.PreflightCheck<
+  string: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.$string<$Context['scalars']>>,
@@ -767,7 +767,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  stringWithArgEnum: $$Utilities.ContextTransports.PreflightCheck<
+  stringWithArgEnum: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.stringWithArgEnum<$Context['scalars']>>,
@@ -784,7 +784,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  stringWithArgInputObject: $$Utilities.ContextTransports.PreflightCheck<
+  stringWithArgInputObject: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<
@@ -804,7 +804,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  stringWithArgInputObjectEnum: $$Utilities.ContextTransports.PreflightCheck<
+  stringWithArgInputObjectEnum: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -824,7 +824,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  stringWithArgInputObjectRequired: $$Utilities.ContextTransports.PreflightCheck<
+  stringWithArgInputObjectRequired: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -846,7 +846,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * The given arguments are reflected back as a JSON string.
    */
-  stringWithArgs: $$Utilities.ContextTransports.PreflightCheck<
+  stringWithArgs: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.stringWithArgs<$Context['scalars']>>,
@@ -863,7 +863,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  stringWithListArg: $$Utilities.ContextTransports.PreflightCheck<
+  stringWithListArg: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.stringWithListArg<$Context['scalars']>>,
@@ -880,7 +880,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  stringWithListArgRequired: $$Utilities.ContextTransports.PreflightCheck<
+  stringWithListArgRequired: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -900,7 +900,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  stringWithRequiredArg: $$Utilities.ContextTransports.PreflightCheck<
+  stringWithRequiredArg: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.stringWithRequiredArg<$Context['scalars']>>,
@@ -917,7 +917,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  unionFooBar: $$Utilities.ContextTransports.PreflightCheck<
+  unionFooBar: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.unionFooBar<$Context['scalars']>>,
@@ -934,7 +934,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  unionFooBarNonNull: $$Utilities.ContextTransports.PreflightCheck<
+  unionFooBarNonNull: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.unionFooBarNonNull<$Context['scalars']>>,
@@ -951,7 +951,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  unionFooBarWithArgs: $$Utilities.ContextTransports.PreflightCheck<
+  unionFooBarWithArgs: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.unionFooBarWithArgs<$Context['scalars']>>,
@@ -968,7 +968,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  unionObject: $$Utilities.ContextTransports.PreflightCheck<
+  unionObject: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.unionObject<$Context['scalars']>>,
@@ -985,7 +985,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  unionObjectNonNull: $$Utilities.ContextTransports.PreflightCheck<
+  unionObjectNonNull: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.unionObjectNonNull<$Context['scalars']>>,
@@ -1004,7 +1004,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
 }
 
 export interface MutationMethods<$Context extends $$Utilities.Context> {
-  $batch: $$Utilities.ContextTransports.PreflightCheck<
+  $batch: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation<$Context['scalars']>>,
@@ -1019,7 +1019,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-  __typename: $$Utilities.ContextTransports.PreflightCheck<
+  __typename: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     () => Promise<
       & (null | {})
@@ -1031,7 +1031,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  id: $$Utilities.ContextTransports.PreflightCheck<
+  id: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.id<$Context['scalars']>>,
@@ -1048,7 +1048,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  idNonNull: $$Utilities.ContextTransports.PreflightCheck<
+  idNonNull: $$Utilities.ClientTransports.PreflightCheck<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.idNonNull<$Context['scalars']>>,

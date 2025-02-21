@@ -1,10 +1,11 @@
 import { expect, expectTypeOf } from 'vitest'
 import { AScalar, BScalar } from '../../../../tests/_/fixtures/scalars.js'
 import { g0, test } from '../../../../tests/_/helpers.js'
-import { Context, type GlobalRegistry } from '../../../entrypoints/utilities-for-generated.js'
+import { type GlobalRegistry } from '../../../entrypoints/utilities-for-generated.js'
+import { contextEmpty } from '../../../types/ContextEmpty.js'
 import type { Schema } from '../../../types/Schema/__.js'
 import type { SchemaDrivenDataMap } from '../../../types/SchemaDrivenDataMap/__.js'
-import type { Scalars } from './__.js'
+import type { Scalars } from './_namespace.js'
 
 declare global {
   namespace GraffleGlobal {
@@ -26,7 +27,7 @@ const map = {} as SchemaDrivenDataMap
 const g1 = g0.with({ schema: { map, name: `TestAddScalar` } })
 
 test(`context scalars begin empty`, ({ g0 }) => {
-  expect(g0._.scalars).toEqual(Context.States.empty.scalars)
+  expect(g0._.scalars).toEqual(contextEmpty.scalars)
 })
 
 test(`method not available when no schema map `, ({ g0 }) => {

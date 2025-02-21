@@ -1,13 +1,14 @@
 import { type Client as BaseClient, createConstructorWithContext } from '../../client/client.js'
 import { contextFragmentAddAndApplyMany } from '../../client/properties/extensions/extensions.js'
 import type { ConfigManager } from '../../lib/config-manager/__.js'
-import { Context, type Context as BaseContext } from '../../types/context.js'
+import { type Context as BaseContext } from '../../types/context.js'
+import { contextEmpty } from '../../types/ContextEmpty.js'
 import { DocumentBuilder } from '../extensions/document-builder/runtime.js'
 import { TransportHttp } from '../extensions/transport-http/runtime.js'
 import { TransportMemory } from '../extensions/transport-memory/runtime.js'
 import type { PartialOrUndefined } from '../main.js'
 
-const context = contextFragmentAddAndApplyMany(Context.States.empty, [TransportHttp, TransportMemory, DocumentBuilder])
+const context = contextFragmentAddAndApplyMany(contextEmpty, [TransportHttp, TransportMemory, DocumentBuilder])
 
 type BasicClientContext = typeof context
 

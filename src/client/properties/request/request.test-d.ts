@@ -7,7 +7,7 @@ import { g0 } from '../../../../tests/_/helpers.js'
 import { assertType } from '../../../lib/assert-equal.js'
 import type { Grafaid } from '../../../lib/grafaid/__.js'
 import { undefinedAs } from '../../../lib/prelude.js'
-import type { Configuration } from '../configuration/__.js'
+import type { Configuration } from '../configuration/_namespace.js'
 
 const g1 = g0.transport(ATransport)
 const g2 = g0.transport(RequiredConfigurationTransportA).transport(RequiredConfigurationTransportB)

@@ -1,22 +1,21 @@
 import type { Configurator } from '../../../lib/configurator/configurator.js'
 import { hasNonUndefinedKeys, type Writeable } from '../../../lib/prelude.js'
-import type { Context } from '../../../types/context.js'
 import { Output } from '../output/_namespace.js'
 import { Schema } from '../schema/__.js'
 import { Check } from './configuration.js'
 
 export * as Check from '../check/configuration.js'
 
-export const configure = <
-  context extends Context,
+export const contextFragmentAdd = <
+  context extends ContextFragment,
   configurationInput extends ConfigurationIndex.Input,
->(context: context, configurationInput: configurationInput): null | Writeable<ContextFragmentConfiguration> => {
-  if (!hasNonUndefinedKeys(configurationInput)) return null
+>(context: context, configurationInput: configurationInput): context => {
+  if (!hasNonUndefinedKeys(configurationInput)) return context
   // todo: performant checking if input changes configuration. If no change, then no copy context.
   // For default input resolvers we can do this automatically (shallow merge)
   // Any custom input resolvers would need to implement their own "is changed" logic.
 
-  const configuration: Writeable<ContextFragmentConfiguration['configuration'] & ConfigurationIndex> = {
+  const configuration: Writeable<ContextFragment['configuration'] & ConfigurationIndex> = {
     ...context.configuration,
   }
 
@@ -33,34 +32,35 @@ export const configure = <
     configuration[configuratorName] = newEntry
   }
 
-  const fragment = {
+  const fragment: context = Object.freeze({
+    ...context,
     configuration,
-  }
+  })
 
   return fragment
 }
 
-export type ContextFragmentConfigurationConfigure<
-  $Context extends Context,
+export type ContextFragmentAdd<
+  $Fragment extends ContextFragment,
   $ConfigurationInput extends ConfigurationIndex.Input,
   __ = {
-    [_ in keyof $Context]: _ extends 'configuration' ? {
-        readonly [_ in keyof $Context['configuration']]: _ extends keyof $ConfigurationInput
+    [_ in keyof $Fragment]: _ extends 'configuration' ? {
+        readonly [_ in keyof $Fragment['configuration']]: _ extends keyof $ConfigurationInput
           ? $ConfigurationInput[_] extends object ? {
               // @ts-expect-error Non-index type being used
-              configurator: $Context['configuration'][_]['configurator']
+              configurator: $Fragment['configuration'][_]['configurator']
               current: Configurator.ApplyInputResolver$Func<
                 // @ts-expect-error Non-index type being used
-                $Context['configuration'][_]['configurator'],
+                $Fragment['configuration'][_]['configurator'],
                 // @ts-expect-error Non-index type being used
-                $Context['configuration'][_]['current'],
+                $Fragment['configuration'][_]['current'],
                 $ConfigurationInput[_]
               >
             }
-          : $Context['configuration'][_]
-          : $Context['configuration'][_]
+          : $Fragment['configuration'][_]
+          : $Fragment['configuration'][_]
       }
-      : $Context[_]
+      : $Fragment[_]
   },
 > = __
 
@@ -78,7 +78,7 @@ export interface ConfigurationNamespaceEmpty<$Configurator extends Configurator>
   readonly current: $Configurator['default']
 }
 
-export interface ContextFragmentConfiguration {
+export interface ContextFragment {
   readonly configuration: {
     readonly output: ConfigurationNamespace<Output.Configurator>
     readonly check: ConfigurationNamespace<Check.Configurator>
@@ -86,7 +86,7 @@ export interface ContextFragmentConfiguration {
   }
 }
 
-export interface ContextFragmentConfigurationEmpty extends ContextFragmentConfiguration {
+export interface ContextFragmentConfigurationEmpty extends ContextFragment {
   readonly configuration: {
     readonly output: ConfigurationNamespaceEmpty<Output.Configurator>
     readonly check: ConfigurationNamespaceEmpty<Check.Configurator>

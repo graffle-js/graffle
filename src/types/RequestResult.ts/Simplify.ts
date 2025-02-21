@@ -1,7 +1,7 @@
 import type { AnyAndUnknownToNever } from '../../lib/prelude.js'
-import type { Context } from '../context.js'
+import type { ContextEmpty } from '../ContextEmpty.js'
 
-export type SimplifyWithEmptyContext<T> = Simplify<Context.States.Empty, T>
+export type SimplifyWithEmptyContext<T> = Simplify<ContextEmpty, T>
 
 export type Simplify<$Context, T> = _SimplifyExcept<
   // @ts-expect-error: No $Context constraint to avoid "compare depth limit"

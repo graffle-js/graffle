@@ -1,7 +1,7 @@
 import type { EmptyObject, Writable } from 'type-fest'
 import type { Anyware } from '../../../lib/anyware/_namespace.js'
 import { type EmptyArray, emptyArray, emptyObject, type Tuple, type UnknownOrAnyToNever } from '../../../lib/prelude.js'
-import { Context } from '../../../types/context.js'
+import type { Context } from '../../../types/context.js'
 import type { Client } from '../../client.js'
 import type { Properties } from '../properties/__.js'
 import { type ContextFragmentAddProperties, contextFragmentPropertiesAdd } from '../properties/properties.js'
@@ -110,11 +110,11 @@ export type ContextAddAndApplyOne<
 // Maybe when reducers are defined, they need to accept context and then handle the copy optimization themselves?
 // This way, the potential of null-return is hidden within the helper.
 
-export const contextFragmentAddAndApplyMany = <$Context extends Context, $Extensions extends Extension.Data[]>(
-  context: $Context,
-  extensions: $Extensions,
-): ContextAddAndApplyMany<$Context, $Extensions> => {
-  if (extensions.length === 0) return null as any // ignored at type level, runtime optimization...
+export const contextFragmentAddAndApplyMany = <context extends Context, extensions extends Extension.Data[]>(
+  context: context,
+  extensions: extensions,
+): ContextAddAndApplyMany<context, extensions> => {
+  if (extensions.length === 0) return context as any
 
   const fragment: Writable<ContextFragment> = {
     extensions: Object.freeze([...context.extensions, ...extensions]),
@@ -153,4 +153,4 @@ export const contextFragmentAddAndApplyMany = <$Context extends Context, $Extens
   return fragment as any
 }
 
-export const contextAddMany = Context.createReducer(contextFragmentAddAndApplyMany)
+// export const contextAddMany = Context.createReducer(contextFragmentAddAndApplyMany)

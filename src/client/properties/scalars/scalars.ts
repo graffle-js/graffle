@@ -1,3 +1,4 @@
+import type { ObjectMergeShallow, Objekt } from '../../../lib/prelude.js'
 import { type Context } from '../../../types/context.js'
 import type { GlobalRegistry } from '../../../types/GlobalRegistry/GlobalRegistry.js'
 import { Schema } from '../../../types/Schema/__.js'
@@ -58,8 +59,12 @@ export const contextFragmentScalarsEmpty: ContextFragmentEmpty = {
   scalars: Schema.Scalar.Registry.empty,
 }
 
+// ------------------------------------------------------------
+// Reducers
+// ------------------------------------------------------------
+
 export type ContextAdd<
-  $Context extends Context,
+  $Context extends ContextFragment,
   $Scalar extends Schema.Scalar,
   __scalars = {
     map: $Context['scalars']['map'] & { [_ in $Scalar['name']]: $Scalar }
@@ -69,7 +74,10 @@ export type ContextAdd<
   __ = { [_ in keyof $Context]: _ extends 'scalars' ? __scalars : $Context[_] },
 > = __
 
-export const contextScalarsAdd = (context: Context, scalar: Schema.Scalar): ContextFragment => {
+export const contextAdd = <context extends ContextFragment, scalar extends Schema.Scalar>(
+  context: context,
+  scalar: scalar,
+): ContextAdd<context, scalar> => {
   const scalars = Object.freeze({
     ...context.scalars,
     map: Object.freeze({
@@ -78,7 +86,23 @@ export const contextScalarsAdd = (context: Context, scalar: Schema.Scalar): Cont
     }),
   })
   const fragment = {
+    ...context,
     scalars,
   }
-  return fragment
+  return fragment as any
+}
+
+export type ContextSet<
+  $Context extends ContextFragment,
+  $Fragment extends ContextFragment,
+> = ObjectMergeShallow<$Context, $Fragment>
+
+export const contextSet = <context extends ContextFragment, fragment extends ContextFragment>(
+  context: context,
+  fragment: ContextFragment,
+): ContextSet<context, fragment> => {
+  return {
+    ...context,
+    ...fragment,
+  } as any
 }
