@@ -7,16 +7,16 @@ import * as $$SchemaDrivenDataMap from './schema-driven-data-map.js'
 
 const context = $$Utilities.pipe(
   $$Utilities.contextEmpty,
-  ctx => $$Utilities.Extensions.contextFragmentAddAndApplyMany(ctx, [TransportHttp, DocumentBuilder]),
-  ctx => $$Utilities.Transports.contextFragmentConfigureCurrent(ctx, { url: $$Data.defaultSchemaUrl }),
+  ctx => $$Utilities.Extensions.addAndApplyMany(ctx, [TransportHttp, DocumentBuilder]),
+  ctx => $$Utilities.Transports.configureCurrentOrThrow(ctx, { url: $$Data.defaultSchemaUrl }),
   ctx =>
-    $$Utilities.Configuration.contextFragmentAdd(ctx, {
+    $$Utilities.Configuration.add(ctx, {
       schema: {
         name: $$Data.Name,
         map: $$SchemaDrivenDataMap.schemaDrivenDataMap,
       },
     }),
-  ctx => $$Utilities.Scalars.contextSet(ctx, { scalars: $$Scalar.$registry }),
+  ctx => $$Utilities.Scalars.set(ctx, { scalars: $$Scalar.$registry }),
 )
 
 export const create = $$Utilities.createConstructorWithContext(context)

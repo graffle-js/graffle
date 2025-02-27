@@ -1,1 +1,1 @@
-export * as Configuration from './configuration.js'
+export * as Configuration from './fragment.js'

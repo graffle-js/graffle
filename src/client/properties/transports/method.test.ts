@@ -3,7 +3,7 @@ import { ATransport, ATransportBuilder, BTransport } from '../../../../tests/_/f
 import { test } from '../../../../tests/_/helpers.js'
 import { type ContextEmpty, contextEmpty } from '../../../types/ContextEmpty.js'
 import { create } from '../../client.js'
-import { type ContextFragmentTransportsEmpty, contextFragmentTransportsEmpty } from './transports.js'
+import { type ContextFragmentTransportsEmpty, contextFragmentTransportsEmpty } from './fragment.js'
 
 const g1 = create().transport(ATransport)
 const g2 = create().transport(ATransport).transport(BTransport)

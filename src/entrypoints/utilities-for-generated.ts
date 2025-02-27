@@ -2,7 +2,7 @@ export type { Simplify } from 'type-fest'
 export { createConstructorWithContext } from '../client/client.js'
 export { Configuration } from '../client/properties/configuration/_namespace.js'
 export { Extensions } from '../client/properties/extensions/__.js'
-export { contextFragmentAddAndApplyMany } from '../client/properties/extensions/extensions.js'
+export { addAndApplyMany } from '../client/properties/extensions/fragment.js'
 export type {
   ConfigGetOutputError,
   HandleOutput,

@@ -1,5 +1,5 @@
 import type { Client } from '../../client/client.js'
-import type { ContextFragmentAdd } from '../../client/properties/configuration/configuration.js'
+import type { Add } from '../../client/properties/configuration/fragment.js'
 import type { Properties } from '../../client/properties/properties/__.js'
 import { Extension } from '../../entrypoints/extension.js'
 // import { type Normalized } from '../../entrypoints/main.js'
@@ -34,6 +34,6 @@ interface Properties extends Properties.PropertiesComputerTypeFunction {
 // dprint-ignore
 interface Properties_<$Context extends Context> {
   throws: () => Client<
-    ContextFragmentAdd<$Context, { output: { errors: { execution: 'throw'; other: 'throw' }}}>
+    Add<$Context, { output: { errors: { execution: 'throw'; other: 'throw' }}}>
   >
 }

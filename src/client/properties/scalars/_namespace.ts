@@ -1,1 +1,1 @@
-export * as Scalars from './scalars.js'
+export * as Scalars from './fragment.js'

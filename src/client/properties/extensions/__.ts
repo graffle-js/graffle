@@ -1,1 +1,1 @@
-export * as Extensions from './extensions.js'
+export * as Extensions from './fragment.js'

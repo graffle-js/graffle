@@ -19,15 +19,15 @@ export const ModuleGeneratorClient = createModuleGenerator(
     code(`
       const context = ${identifiers.$$Utilities}.pipe(
         ${identifiers.$$Utilities}.contextEmpty,
-        ctx => ${identifiers.$$Utilities}.Extensions.contextFragmentAddAndApplyMany(ctx, [TransportHttp, DocumentBuilder]),
-        ctx => ${identifiers.$$Utilities}.Transports.contextFragmentConfigureCurrent(ctx, { url: $$Data.defaultSchemaUrl }),
-        ctx => ${identifiers.$$Utilities}.Configuration.contextFragmentAdd(ctx, {
-                 schema: {
-                   name: $$Data.Name,
-                   map: $$SchemaDrivenDataMap.schemaDrivenDataMap,
-                 },
-               }),
-        ctx => $$Utilities.Scalars.contextSet(ctx, { scalars: $$Scalar.$registry }),
+        ctx => ${identifiers.$$Utilities}.Extensions.addAndApplyMany(ctx, [TransportHttp, DocumentBuilder]),
+        ctx => ${identifiers.$$Utilities}.Transports.configureCurrentOrThrow(ctx, { url: $$Data.defaultSchemaUrl }),
+        ctx => ${identifiers.$$Utilities}.Configuration.add(ctx, {
+           schema: {
+             name: $$Data.Name,
+             map: $$SchemaDrivenDataMap.schemaDrivenDataMap,
+           },
+         }),
+        ctx => ${identifiers.$$Utilities}.Scalars.set(ctx, { scalars: $$Scalar.$registry }),
       )
 
       export const create = ${identifiers.$$Utilities}.createConstructorWithContext(context)

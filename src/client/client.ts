@@ -71,7 +71,7 @@ export interface ClientBase<$Context extends Context> {
     const configurationInput extends CalcConfigurationInputForContext<$Context>,
   >(configurationInput: configurationInput) => Client<
     // @ts-expect-error Non-index type being used
-    Configuration.ContextFragmentAdd<$Context, configurationInput>
+    Configuration.Add<$Context, configurationInput>
   >
 }
 
@@ -88,7 +88,7 @@ export type Create<$Context extends Context = ContextEmpty> = <
   const configurationInput extends CalcConfigurationInputForContext<$Context>,
 >(configurationInput?: configurationInput) => Client<
   // @ts-expect-error: Is missing standard configurators
-  Configuration.ContextFragmentAdd<$Context, configurationInput>
+  Configuration.Add<$Context, configurationInput>
 >
 
 export const createConstructorWithContext = <$Context extends Context>(
@@ -99,7 +99,7 @@ export const createConstructorWithContext = <$Context extends Context>(
   const newContext = configurationInput_
     ? ContextFragments.merge(
       context,
-      Configuration.contextFragmentAdd(context, configurationInput_),
+      Configuration.add(context, configurationInput_),
     )
     : context
   return createWithContext(newContext) as any
@@ -134,7 +134,7 @@ export const createWithContext = <$Context extends Context>(
       return copy(Properties.contextFragmentPropertiesAdd(context, { static: static_, computed: computed as any }))
     },
     use(extension) {
-      return copy(Extensions.contextFragmentAddAndApplyMany(context, [extension]))
+      return copy(Extensions.addAndApplyMany(context, [extension]))
     },
     scalar: ((...args: Scalars.Method.Arguments) => {
       const scalar = Scalars.Method.normalizeArguments(args)
@@ -142,20 +142,20 @@ export const createWithContext = <$Context extends Context>(
     }) as any,
     with(configurationInput) {
       const configurationInput_ = configurationInput as Configuration.ConfigurationIndex.Input
-      return copy(Configuration.contextFragmentAdd(context, configurationInput_))
+      return copy(Configuration.add(context, configurationInput_))
     },
     transport: ((...args: Transports.TransportMethod.Arguments) => {
       const input = Transports.TransportMethod.normalizeArguments(args)
       // let fragment2: ContextFragmentTransports
       switch (input[0]) {
         case Transports.TransportMethod.overloadCase.configureCurrent: {
-          return copy(Transports.contextFragmentConfigureCurrent(context, input[1]))
+          return copy(Transports.configureCurrentOrThrow(context, input[1]))
         }
         case Transports.TransportMethod.overloadCase.setCurrent: {
-          return copy(Transports.contextFragmentSetCurrent(context, input[1], input[2]))
+          return copy(Transports.setCurrent(context, input[1], input[2]))
         }
         case Transports.TransportMethod.overloadCase.addType: {
-          return copy(Transports.contextFragmentAddMany(context, input[1]))
+          return copy(Transports.addMany(context, [input[1]]))
         }
       }
     }) as any,
