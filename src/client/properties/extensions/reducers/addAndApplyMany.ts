@@ -59,7 +59,8 @@ export const addAndApplyMany = <
 ): ContextAddAndApplyMany<context, extensions> => {
   if (extensions.length === 0) return context as any
 
-  const fragment: Writable<ContextFragment> = {
+  const newContext: Context = {
+    ...context,
     extensions: Object.freeze([...context.extensions, ...extensions]),
     extensionsIndex: Object.freeze({
       ...context.extensionsIndex,
@@ -72,26 +73,26 @@ export const addAndApplyMany = <
 
   for (const extension of extensions) {
     if (extension.transports) {
-      Object.assign(fragment, Transports.addMany(context, extension.transports))
+      Object.assign(newContext, Transports.addMany(newContext, extension.transports))
     }
 
     if (extension.requestInterceptor) {
       Object.assign(
-        fragment,
-        RequestInterceptors.contextFragmentRequestInterceptorsAdd(context, extension.requestInterceptor),
+        newContext,
+        RequestInterceptors.add(newContext, extension.requestInterceptor),
       )
     }
 
     if (extension.propertiesStatic || extension.propertiesComputed) {
-      const propertiesFragment = contextFragmentPropertiesAdd(context, {
+      const propertiesFragment = contextFragmentPropertiesAdd(newContext, {
         static: extension.propertiesStatic,
         computed: extension.propertiesComputed,
       })
       if (propertiesFragment) {
-        Object.assign(fragment, propertiesFragment)
+        Object.assign(newContext, propertiesFragment)
       }
     }
   }
 
-  return fragment as any
+  return newContext as any
 }

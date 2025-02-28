@@ -121,7 +121,7 @@ export const createWithContext = <$Context extends Context>(
     _: context,
     anyware(interceptor) {
       const interceptor_ = interceptor as any as RequestPipeline.BaseInterceptor
-      return copy(RequestInterceptors.contextFragmentRequestInterceptorsAdd(context, interceptor_))
+      return copy(RequestInterceptors.add(context, interceptor_))
     },
     properties(properties) {
       const isComputed = typeof properties === `function`
