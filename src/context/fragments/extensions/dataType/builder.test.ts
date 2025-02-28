@@ -1,7 +1,7 @@
 import { describe, expect, expectTypeOf, test } from 'vitest'
 import { assertExtends } from '../../../../lib/assert-equal.js'
 import { Configurator } from '../../../../lib/configurator/configurator.js'
-import type { Context } from '../../../../types/context.js'
+import type { Context } from '../../../context.js'
 import { type Chain, create } from './builder.js'
 import type { Data, DataEmpty } from './data.js'
 

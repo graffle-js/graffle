@@ -1,4 +1,4 @@
-import { Transport } from '../../client/properties/transports/dataType/_namespace.js'
+import { Transport } from '../../context/fragments/transports/dataType/_namespace.js'
 import { Configurator, Extension } from '../../entrypoints/extension.js'
 import type { Anyware } from '../../lib/anyware/_namespace.js'
 import type { Grafaid } from '../../lib/grafaid/__.js'

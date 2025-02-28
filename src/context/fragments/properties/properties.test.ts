@@ -1,8 +1,8 @@
 import { describe, expect, expectTypeOf } from 'vitest'
 import { test } from '../../../../tests/_/helpers.js'
-import type { Context } from '../../../types/context.js'
+import { type Client_justContext } from '../../../client/client.js'
 import { type ContextEmpty, contextEmpty } from '../../../types/ContextEmpty.js'
-import { type Client_justContext } from '../../client.js'
+import type { Context } from '../../context.js'
 import { type Configuration } from '../configuration/_namespace.js'
 import { createPropertiesComputer, type PropertiesComputerTypeFunction } from './properties.js'
 

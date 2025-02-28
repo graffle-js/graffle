@@ -1,11 +1,11 @@
-import { Configuration } from '../client/properties/configuration/_namespace.js'
-import { Extensions } from '../client/properties/extensions/__.js'
-import { Properties } from '../client/properties/properties/__.js'
-import { RequestInterceptors } from '../client/properties/requestInterceptors/__.js'
-import { Scalars } from '../client/properties/scalars/_namespace.js'
-import { Transports } from '../client/properties/transports/_namespace.js'
+import type { Context } from '../context/context.js'
+import { Configuration } from '../context/fragments/configuration/_namespace.js'
+import { Extensions } from '../context/fragments/extensions/__.js'
+import { Properties } from '../context/fragments/properties/__.js'
+import { RequestInterceptors } from '../context/fragments/requestInterceptors/__.js'
+import { Scalars } from '../context/fragments/scalars/_namespace.js'
+import { Transports } from '../context/fragments/transports/_namespace.js'
 import { type EmptyArray } from '../lib/prelude.js'
-import type { Context } from './context.js'
 
 export interface ContextEmpty extends Context {
   readonly properties: Properties.ContextFragmentPropertiesEmpty['properties']

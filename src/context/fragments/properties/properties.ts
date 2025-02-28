@@ -1,3 +1,4 @@
+import type { Client, Client_justContext } from '../../../client/client.js'
 import type { Configurator } from '../../../lib/configurator/configurator.js'
 import {
   type EmptyArray,
@@ -8,8 +9,7 @@ import {
   type ObjectMergeShallow,
   undefinedAs,
 } from '../../../lib/prelude.js'
-import type { Context } from '../../../types/context.js'
-import type { Client, Client_justContext } from '../../client.js'
+import type { Context } from '../../context.js'
 
 // ------------------------------------------------------------
 // Method

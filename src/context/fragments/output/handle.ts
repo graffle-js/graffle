@@ -13,9 +13,9 @@ import {
   type Values,
 } from '../../../lib/prelude.js'
 import type { RequestPipeline } from '../../../requestPipeline/__.js'
-import type { Context } from '../../../types/context.js'
 import type { GlobalRegistry } from '../../../types/GlobalRegistry/GlobalRegistry.js'
 import type { RequestResult } from '../../../types/RequestResult.ts/__.js'
+import type { Context } from '../../context.js'
 import {
   type ErrorCategory,
   isOutputTraditionalGraphQLOutput,

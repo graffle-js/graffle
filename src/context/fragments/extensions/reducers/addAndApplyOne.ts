@@ -1,6 +1,6 @@
 import type { Anyware } from '../../../../lib/anyware/_namespace.js'
 import { type UnknownOrAnyToNever } from '../../../../lib/prelude.js'
-import type { Context } from '../../../../types/context.js'
+import type { Context } from '../../../context.js'
 import { type ContextFragmentAddProperties } from '../../properties/properties.js'
 import type { Transports } from '../../transports/_namespace.js'
 import type { Extension } from '../dataType/_namespace.js'

@@ -1,11 +1,11 @@
 import type { FormattedExecutionResult } from 'graphql'
-import type { GraffleExecutionResultEnvelope } from '../client/properties/output/handle.js'
+import type { Context } from '../context/context.js'
+import type { GraffleExecutionResultEnvelope } from '../context/fragments/output/handle.js'
 import { Anyware } from '../lib/anyware/_namespace.js'
 import type { Config } from '../lib/anyware/PipelineDefinition/Config.js'
 import type { Grafaid } from '../lib/grafaid/__.js'
 import { normalizeRequestToNode } from '../lib/grafaid/request.js'
 import { isAbortError } from '../lib/prelude.js'
-import type { Context } from '../types/context.js'
 import { decodeResultData } from './CustomScalars/decode.js'
 import { encodeRequestVariables } from './CustomScalars/encode.js'
 

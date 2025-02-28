@@ -4,16 +4,6 @@ import type { RequestPipeline } from '../../../requestPipeline/RequestPipeline.j
 import { requestPipelineBaseDefinition } from '../../../requestPipeline/RequestPipeline.js'
 import type { Transport } from './dataType/_namespace.js'
 
-export * from './method.js'
-export * from './reducers/addMany.js'
-export * from './reducers/configure.js'
-export * from './reducers/configureCurrent.js'
-export * from './reducers/setCurrent.js'
-
-// ------------------------------------------------------------
-// Context Fragment
-// ------------------------------------------------------------
-
 export interface ContextTransportsEmpty extends ContextTransports {
   readonly registry: EmptyObject
   readonly configurations: EmptyObject

@@ -1,19 +1,22 @@
+import type { Context } from '../context/context.js'
+import { Configuration } from '../context/fragments/configuration/_namespace.js'
+import { Extensions } from '../context/fragments/extensions/__.js'
+import type { Extension } from '../context/fragments/extensions/dataType/_namespace.js'
+import type { ContextAddAndApplyOne } from '../context/fragments/extensions/reducers/addAndApplyOne.js'
+import { Output } from '../context/fragments/output/_namespace.js'
+import { Properties } from '../context/fragments/properties/__.js'
+import { GqlMethod } from '../context/fragments/request/request.js'
+import { SendMethod } from '../context/fragments/request/send.js'
+import { RequestInterceptors } from '../context/fragments/requestInterceptors/__.js'
+import { Scalars } from '../context/fragments/scalars/_namespace.js'
+import { Transports } from '../context/fragments/transports/_namespace.js'
 import { Anyware } from '../lib/anyware/_namespace.js'
 import { getOperationType } from '../lib/grafaid/document.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
 import type { RequestPipeline } from '../requestPipeline/RequestPipeline.js'
-import type { Context } from '../types/context.js'
 import { type ContextEmpty, contextEmpty } from '../types/ContextEmpty.js'
 import { type ContextFragment, ContextFragments } from '../types/ContextFragment.js'
-import { Configuration } from './properties/configuration/_namespace.js'
-import { Extensions } from './properties/extensions/__.js'
-import { Output } from './properties/output/_namespace.js'
-import { Properties } from './properties/properties/__.js'
-import { GqlMethod } from './properties/request/request.js'
-import { SendMethod } from './properties/request/send.js'
-import { RequestInterceptors } from './properties/requestInterceptors/__.js'
-import { Scalars } from './properties/scalars/_namespace.js'
-import { Transports } from './properties/transports/_namespace.js'
+import { TransportMethod } from './methods/transport.js'
 
 export type ClientEmpty = Client<ContextEmpty>
 
@@ -47,7 +50,7 @@ export interface ClientBase<$Context extends Context> {
   /**
    * TODO
    */
-  transport: Transports.TransportMethod<$Context>
+  transport: TransportMethod<$Context>
   /**
    * TODO
    */
@@ -55,7 +58,7 @@ export interface ClientBase<$Context extends Context> {
   /**
    * TODO
    */
-  use: Extensions.MethodAdd<$Context>
+  use: <extension extends Extension.Data>(extension: extension) => Client<ContextAddAndApplyOne<$Context, extension>>
   /**
    * TODO
    */
@@ -144,17 +147,17 @@ export const createWithContext = <$Context extends Context>(
       const configurationInput_ = configurationInput as Configuration.ConfigurationIndex.Input
       return copy(Configuration.add(context, configurationInput_))
     },
-    transport: ((...args: Transports.TransportMethod.Arguments) => {
-      const input = Transports.TransportMethod.normalizeArguments(args)
+    transport: ((...args: TransportMethod.Arguments) => {
+      const input = TransportMethod.normalizeArguments(args)
       // let fragment2: ContextFragmentTransports
       switch (input[0]) {
-        case Transports.TransportMethod.overloadCase.configureCurrent: {
+        case TransportMethod.overloadCase.configureCurrent: {
           return copy(Transports.configureCurrentOrThrow(context, input[1]))
         }
-        case Transports.TransportMethod.overloadCase.setCurrent: {
+        case TransportMethod.overloadCase.setCurrent: {
           return copy(Transports.setCurrent(context, input[1], input[2]))
         }
-        case Transports.TransportMethod.overloadCase.addType: {
+        case TransportMethod.overloadCase.addType: {
           return copy(Transports.addMany(context, [input[1]]))
         }
       }

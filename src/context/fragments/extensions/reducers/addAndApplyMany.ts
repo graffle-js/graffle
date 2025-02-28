@@ -3,7 +3,7 @@ import type { Extension } from '../dataType/_namespace.js'
 
 import type { Writable } from 'type-fest'
 import { type Tuple, type UnknownOrAnyToNever } from '../../../../lib/prelude.js'
-import type { Context } from '../../../../types/context.js'
+import type { Context } from '../../../context.js'
 import type { Properties } from '../../properties/__.js'
 import { type ContextFragmentAddProperties, contextFragmentPropertiesAdd } from '../../properties/properties.js'
 import { RequestInterceptors } from '../../requestInterceptors/__.js'

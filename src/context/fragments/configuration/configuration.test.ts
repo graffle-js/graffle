@@ -1,5 +1,5 @@
 import { expect, expectTypeOf, test } from 'vitest'
-import { create } from '../../client.js'
+import { create } from '../../../client/client.js'
 
 const g1 = create()
 

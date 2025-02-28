@@ -1,4 +1,4 @@
-import type { ContextAdd } from '../../client/properties/scalars/fragment.js'
+import type { ContextAdd } from '../../context/fragments/scalars/fragment.js'
 import { assertEqual } from '../../lib/assert-equal.js'
 import type { ContextEmpty } from '../ContextEmpty.js'
 import type { Schema } from '../Schema/__.js'

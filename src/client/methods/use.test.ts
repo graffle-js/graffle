@@ -1,9 +1,13 @@
 import { describe, expect, expectTypeOf } from 'vitest'
-import { ATransport, ATransportBuilder } from '../../../../tests/_/fixtures/transports.js'
-import { test } from '../../../../tests/_/helpers.js'
-import { parametersComputer, preflightComputer$Func, propertiesStatic1 } from '../properties/properties.test.js'
-import { RequestInterceptors } from '../requestInterceptors/__.js'
-import { Extension } from './dataType/_namespace.js'
+import { ATransport, ATransportBuilder } from '../../../tests/_/fixtures/transports.js'
+import { test } from '../../../tests/_/helpers.js'
+import { Extension } from '../../context/fragments/extensions/dataType/_namespace.js'
+import {
+  parametersComputer,
+  preflightComputer$Func,
+  propertiesStatic1,
+} from '../../context/fragments/properties/properties.test.js'
+import { RequestInterceptors } from '../../context/fragments/requestInterceptors/__.js'
 
 const aExtension = Extension.create(`aExtension`).return()
 type aExtension = typeof aExtension

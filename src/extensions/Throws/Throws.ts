@@ -1,11 +1,11 @@
 import type { Client } from '../../client/client.js'
-import type { Add } from '../../client/properties/configuration/fragment.js'
-import type { Properties } from '../../client/properties/properties/__.js'
+import type { Add } from '../../context/fragments/configuration/fragment.js'
+import type { Properties } from '../../context/fragments/properties/__.js'
 import { Extension } from '../../entrypoints/extension.js'
 // import { type Normalized } from '../../entrypoints/main.js'
 // import type { ConfigManager } from '../../lib/config-manager/__.js'
+import type { Context } from '../../context/context.js'
 import type { Configurators } from '../../types/configurators/_namespace.js'
-import type { Context } from '../../types/context.js'
 
 export const Throws = Extension(`throws`)
   .properties(({ configuration, client }) => {
