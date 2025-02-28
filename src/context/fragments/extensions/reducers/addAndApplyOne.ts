@@ -1,7 +1,7 @@
 import type { Anyware } from '../../../../lib/anyware/_namespace.js'
 import { type UnknownOrAnyToNever } from '../../../../lib/prelude.js'
 import type { Context } from '../../../context.js'
-import { type ContextFragmentAddProperties } from '../../properties/properties.js'
+import { type Add } from '../../properties/fragment.js'
 import type { Transports } from '../../transports/_namespace.js'
 import type { Extension } from '../dataType/_namespace.js'
 
@@ -14,7 +14,7 @@ export type ContextAddAndApplyOne<
         _ extends 'extensions' ?
           [...$Context['extensions'], $Extension] :
         _ extends 'properties' ?
-          ContextFragmentAddProperties<$Context, $Extension['propertiesStatic'], $Extension['propertiesComputedTypeFunctions$']> :
+          Add<$Context, $Extension['propertiesStatic'], $Extension['propertiesComputedTypeFunctions$']> :
         _ extends 'requestPipelineDefinition' ?
           $Extension['transports'] extends readonly []
             ? $Context['requestPipelineDefinition']

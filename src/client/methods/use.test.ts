@@ -1,22 +1,42 @@
 import { describe, expect, expectTypeOf } from 'vitest'
 import { ATransport, ATransportBuilder } from '../../../tests/_/fixtures/transports.js'
 import { test } from '../../../tests/_/helpers.js'
-import { Extension } from '../../context/fragments/extensions/dataType/_namespace.js'
-import {
-  parametersComputer,
-  preflightComputer$Func,
-  propertiesStatic1,
-} from '../../context/fragments/properties/properties.test.js'
-import { RequestInterceptors } from '../../context/fragments/requestInterceptors/__.js'
+import { RequestInterceptors } from '../../context/fragments/requestInterceptors/_namespace.js'
+import { Extension } from '../../entrypoints/extension.js'
+import { parametersComputer, preflightComputer$Func, propertiesStatic1 } from './properties.test.js'
 
 const aExtension = Extension.create(`aExtension`).return()
 type aExtension = typeof aExtension
+
+const aConfigurator = Extension.Configurator().input<{ a?: number }>().default({ a: 1 }).return()
 
 test(`using an extension returns a client copy; is registered in context`, ({ g0 }) => {
   const g1 = g0.use(aExtension)
   expect(g1).not.toBe(g0)
   expect(g1._.extensions).toEqual([aExtension])
   expectTypeOf(g1._.extensions).toEqualTypeOf<[aExtension]>()
+})
+
+describe(`if extension has configurator`, () => {
+  test(`is constructor with static configurator property`, () => {
+    const B = Extension.create(`bExtension`).configurator(aConfigurator).return()
+    expect(B.configurator).toBe(aConfigurator)
+    const b = B()
+    expect(b.configurator).toBe(aConfigurator)
+  })
+  test(`when used without arguments, configurator is registered in context with default`, ({ g0 }) => {
+    const b = Extension.create(`bExtension`).configurator(aConfigurator).return()()
+    const g1 = g0.use(b)
+    expect(g1._.configuration.bExtension).toEqual({ current: aConfigurator.default, configurator: aConfigurator })
+    // todo type assertions
+  })
+  test(`when used with arguments, configurator is registered in context with initial input`, ({ g0 }) => {
+    const B = Extension.create(`bExtension`).configurator(aConfigurator).return()
+    const b = B({ a: 2 })
+    const g1 = g0.use(b)
+    expect(g1._.configuration.bExtension).toEqual({ current: b.configuratorInitialInput, configurator: aConfigurator })
+    // todo type assertions
+  })
 })
 
 describe(`transport`, () => {
@@ -66,11 +86,24 @@ describe(`properties`, () => {
     expect(g1a._.properties).toEqual(g1b._.properties)
     expectTypeOf(g1a._.properties).toEqualTypeOf(g1b._.properties)
   })
+  test(`computed: receive extension configuration`, ({ g0 }) => {
+    const BExtension = Extension
+      .create(`bExtension`)
+      .configurator(aConfigurator)
+      .properties(({ configuration }) => {
+        return {
+          read: () => configuration.bExtension.current.a,
+        }
+      })
+      .return()
+    const g1 = g0.use(BExtension())
+    expect(g1.read()).toEqual(BExtension.configurator.default.a)
+  })
 })
 
 describe(`request interceptor`, () => {
   test(`can be added`, ({ g0 }) => {
-    const i1 = RequestInterceptors.createInterceptor(async ({ pack }) => {
+    const i1 = RequestInterceptors.create(async ({ pack }) => {
       return await pack()
     })
     const bExtension = Extension.create(`bExtension`)

@@ -1,24 +1,7 @@
 import type { Configurator } from '../../../lib/configurator/configurator.js'
-import { Output } from '../output/_namespace.js'
-import { Schema } from '../schema/__.js'
-import { Check } from './fragment.js'
-
-export * as Check from '../check/configuration.js'
-export * from './reducers/add.js'
-
-// ------------------------------------------------------------
-// Context Fragment
-// ------------------------------------------------------------
-
-export interface ConfigurationNamespace<$Configurator extends Configurator> {
-  readonly configurator: $Configurator
-  readonly current: $Configurator['normalizedIncremental']
-}
-
-export interface ConfigurationNamespaceEmpty<$Configurator extends Configurator> {
-  readonly configurator: $Configurator
-  readonly current: $Configurator['default']
-}
+import { Check } from './check/_namespace.js'
+import { Output } from './output/_namespace.js'
+import { Schema } from './schema/_namespace.js'
 
 export interface ContextFragment {
   readonly configuration: {
@@ -28,7 +11,7 @@ export interface ContextFragment {
   }
 }
 
-export interface ContextFragmentConfigurationEmpty extends ContextFragment {
+export interface ContextFragmentEmpty extends ContextFragment {
   readonly configuration: {
     readonly output: ConfigurationNamespaceEmpty<Output.Configurator>
     readonly check: ConfigurationNamespaceEmpty<Check.Configurator>
@@ -36,7 +19,7 @@ export interface ContextFragmentConfigurationEmpty extends ContextFragment {
   }
 }
 
-export const contextFragmentConfigurationEmpty: ContextFragmentConfigurationEmpty = {
+export const contextFragmentEmpty: ContextFragmentEmpty = {
   configuration: Object.freeze({
     output: Object.freeze({
       configurator: Output.configurator,
@@ -57,12 +40,24 @@ export const contextFragmentConfigurationEmpty: ContextFragmentConfigurationEmpt
 // Generic Context Fragment
 // ------------------------------------------------------------
 
-export interface ConfigurationIndex {
+export interface Index {
   readonly [configuratorName: string]: ConfigurationNamespace<Configurator>
 }
 
-export namespace ConfigurationIndex {
+export namespace Index {
   export interface Input {
     readonly [configuratorName: string]: Configurator.Configuration | undefined
   }
+}
+
+// ------------------------------------------------------------
+
+export interface ConfigurationNamespace<$Configurator extends Configurator> {
+  readonly configurator: $Configurator
+  readonly current: $Configurator['normalizedIncremental']
+}
+
+export interface ConfigurationNamespaceEmpty<$Configurator extends Configurator> {
+  readonly configurator: $Configurator
+  readonly current: $Configurator['default']
 }

@@ -1,7 +1,7 @@
 import type { Configurator } from '../../../../lib/configurator/configurator.js'
 import { undefinedAs } from '../../../../lib/prelude.js'
 import type { RequestPipeline } from '../../../../requestPipeline/__.js'
-import type { Properties } from '../../properties/__.js'
+import type { Properties } from '../../properties/_namespace.js'
 import type { Transport } from '../../transports/dataType/_namespace.js'
 import type * as _re_export from './properties.js'
 

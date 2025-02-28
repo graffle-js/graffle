@@ -3,16 +3,16 @@ export { createConstructorWithContext } from '../client/client.js'
 export { type Context } from '../context/context.js'
 export * from '../context/context.js'
 export { Configuration } from '../context/fragments/configuration/_namespace.js'
-export { Extensions } from '../context/fragments/extensions/__.js'
-export { addAndApplyMany } from '../context/fragments/extensions/fragment.js'
 export type {
   ConfigGetOutputError,
   HandleOutput,
   HandleOutputDocumentBuilderRootField,
-} from '../context/fragments/output/handle.js'
+} from '../context/fragments/configuration/output/handle.js'
+export { Extensions } from '../context/fragments/extensions/_namespace.js'
+export { addAndApplyMany } from '../context/fragments/extensions/fragment.js'
 export { Scalars } from '../context/fragments/scalars/_namespace.js'
 export { Transports } from '../context/fragments/transports/_namespace.js'
-export * from '../extensions/DocumentBuilder/__.js'
+export * from '../extensions/DocumentBuilder/_namespace.js'
 export { pipe } from '../lib/prelude.js'
 export { type AssertExtendsObject, type Exact, type ExactNonEmpty, type UnionExpanded } from '../lib/prelude.js'
 export { TypeFunction } from '../lib/type-function/__.js'

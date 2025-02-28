@@ -1,10 +1,10 @@
-import { Transport } from '../../../src/entrypoints/extension.js'
+import { Extension } from '../../../src/entrypoints/extension.js'
 
 // ----------------------------
 // ATransportBuilder
 // ----------------------------
 
-export const ATransportBuilder = Transport.create(`ATransport`)
+export const ATransportBuilder = Extension.Transport.create(`ATransport`)
   .configurator($ => $.input<{ a?: number }>().normalized<{ a?: number }>())
   .pack({ run: (input) => input })
   .exchange({ run: (input) => input })
@@ -20,7 +20,7 @@ export type ATransport = typeof ATransport
 // BTransportBuilder
 // ----------------------------
 
-export const BTransportBuilder = Transport.create(`BTransport`)
+export const BTransportBuilder = Extension.Transport.create(`BTransport`)
   .configurator($ => $.input<{ b?: string }>().normalized<{ b?: string }>())
   .pack({ run: (input) => input })
   .exchange({ run: (input) => input })
@@ -36,7 +36,7 @@ export type BTransport = typeof BTransport
 // RequiredConfigurationTransport
 // -------------------------------
 
-export const RequiredConfigurationTransportBuilderA = Transport.create(`RequiredConfigurationTransportA`)
+export const RequiredConfigurationTransportBuilderA = Extension.Transport.create(`RequiredConfigurationTransportA`)
   .configurator($ => $.input<{ a?: string }>())
   .pack({ run: (input) => input })
   .exchange({ run: (input) => input })
@@ -52,7 +52,7 @@ export type RequiredConfigurationTransportA = typeof RequiredConfigurationTransp
 // RequiredConfigurationTransportB
 // -------------------------------
 
-export const RequiredConfigurationTransportBuilderB = Transport.create(`RequiredConfigurationTransportB`)
+export const RequiredConfigurationTransportBuilderB = Extension.Transport.create(`RequiredConfigurationTransportB`)
   .configurator($ => $.input<{ b?: string }>())
   .pack({ run: (input) => input })
   .exchange({ run: (input) => input })

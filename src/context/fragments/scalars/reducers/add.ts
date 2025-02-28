@@ -1,7 +1,7 @@
 import type { Schema } from '../../../../types/Schema/__.js'
 import type { ContextFragment } from '../fragment.js'
 
-export type ContextAdd<
+export type Add<
   $Context extends ContextFragment,
   $Scalar extends Schema.Scalar,
   __scalars = {
@@ -15,7 +15,7 @@ export type ContextAdd<
 export const contextAdd = <context extends ContextFragment, scalar extends Schema.Scalar>(
   context: context,
   scalar: scalar,
-): ContextAdd<context, scalar> => {
+): Add<context, scalar> => {
   const scalars = Object.freeze({
     ...context.scalars,
     map: Object.freeze({

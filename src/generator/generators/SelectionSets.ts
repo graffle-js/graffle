@@ -2,7 +2,7 @@
 // todo: on union fields, JSDoc that mentions the syntax `on*`
 
 // todo import from '../../extensions/DocumentBuilder/kit/__.js'
-import { DocumentBuilder } from '../../extensions/DocumentBuilder/__.js'
+import { DocumentBuilder } from '../../extensions/DocumentBuilder/_namespace.js'
 import { Code } from '../../lib/Code.js'
 import { Grafaid } from '../../lib/grafaid/__.js'
 import { analyzeArgsNullability } from '../../lib/grafaid/schema/args.js'

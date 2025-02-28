@@ -1,14 +1,11 @@
-import type { ContextFragment } from '../../../../types/ContextFragment.js'
-import type { Extension } from '../dataType/_namespace.js'
-
-import type { Writable } from 'type-fest'
-import { type Tuple, type UnknownOrAnyToNever } from '../../../../lib/prelude.js'
+import { type Tuple, type UnknownOrAnyToNever, type Writeable } from '../../../../lib/prelude.js'
 import type { Context } from '../../../context.js'
-import type { Properties } from '../../properties/__.js'
-import { type ContextFragmentAddProperties, contextFragmentPropertiesAdd } from '../../properties/properties.js'
-import { RequestInterceptors } from '../../requestInterceptors/__.js'
+import type { Configuration } from '../../configuration/_namespace.js'
+import { Properties } from '../../properties/_namespace.js'
+import { RequestInterceptors } from '../../requestInterceptors/_namespace.js'
 import { Transports } from '../../transports/_namespace.js'
 import type { Data } from '../../transports/dataType/data.js'
+import type { Extension } from '../dataType/_namespace.js'
 
 // dprint-ignore
 export type ContextAddAndApplyMany<
@@ -22,7 +19,7 @@ export type ContextAddAndApplyMany<
         _ extends 'extensions' ?
           [...$Context['extensions'], ...$Extensions] :
         _ extends 'properties' ?
-          ContextFragmentAddProperties<$Context, __propertiesStatic, __propertiesComputedTypeFunctions$> :
+          Properties.Add<$Context, __propertiesStatic, __propertiesComputedTypeFunctions$> :
         _ extends 'transports' ?
           __transports extends readonly [] 
             ? $Context['transports'] 
@@ -59,7 +56,7 @@ export const addAndApplyMany = <
 ): ContextAddAndApplyMany<context, extensions> => {
   if (extensions.length === 0) return context as any
 
-  const newContext: Context = {
+  const newContext: Writeable<Context> = {
     ...context,
     extensions: Object.freeze([...context.extensions, ...extensions]),
     extensionsIndex: Object.freeze({
@@ -84,12 +81,22 @@ export const addAndApplyMany = <
     }
 
     if (extension.propertiesStatic || extension.propertiesComputed) {
-      const propertiesFragment = contextFragmentPropertiesAdd(newContext, {
+      const propertiesFragment = Properties.add(newContext, {
         static: extension.propertiesStatic,
         computed: extension.propertiesComputed,
       })
       if (propertiesFragment) {
         Object.assign(newContext, propertiesFragment)
+      }
+    }
+
+    if (extension.configurator) {
+      newContext.configuration = {
+        ...newContext.configuration,
+        [extension.name]: {
+          current: extension.configuratorInitialInput ?? extension.configurator.default,
+          configurator: extension.configurator,
+        },
       }
     }
   }

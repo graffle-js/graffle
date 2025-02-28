@@ -1,12 +1,12 @@
 import { expect, expectTypeOf } from 'vitest'
-import { ATransport, BTransport } from '../../../../tests/_/fixtures/transports.js'
-import { g0, test } from '../../../../tests/_/helpers.js'
-import { createInterceptor } from './requestInterceptors.js'
+import { ATransport, BTransport } from '../../../tests/_/fixtures/transports.js'
+import { g0, test } from '../../../tests/_/helpers.js'
+import { RequestInterceptors } from '../../context/fragments/requestInterceptors/_namespace.js'
 
 const g1 = g0.transport(ATransport)
 
 test(`can add a request interceptor`, () => {
-  const i1 = createInterceptor<typeof g1>(async ({ pack }) => {
+  const i1 = RequestInterceptors.create<typeof g1>(async ({ pack }) => {
     return pack()
   })
   const g2 = g1.anyware(i1)

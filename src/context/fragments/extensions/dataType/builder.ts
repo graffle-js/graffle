@@ -5,7 +5,7 @@ import { __, type ObjectMergeShallow } from '../../../../lib/prelude.js'
 import type { RequestPipeline } from '../../../../requestPipeline/__.js'
 import type { Context } from '../../../context.js'
 import type { Configuration } from '../../configuration/_namespace.js'
-import type { Properties } from '../../properties/__.js'
+import type { Properties } from '../../properties/_namespace.js'
 import { Transport } from '../../transports/dataType/_namespace.js'
 import { type Data, type DataEmpty, dataPropertiesTypeOnly } from './data.js'
 import type { DependentExtensionParameters } from './DependentExtensionParameters.js'
@@ -51,15 +51,19 @@ export const create: Create = (name) => {
       typeOfNoExpandResultDataType() {
       },
       return() {
-        return data.configurator
-          ? (initialInput: Configurator.Configuration) => {
+        if (data.configurator) {
+          const constructor = (initialInput: Configurator.Configuration) => {
             if (initialInput === undefined) return data
             return {
               ...data,
               configuratorInitialInput: initialInput,
             }
           }
-          : data
+          constructor.configurator = data.configurator
+          return constructor
+        }
+
+        return data
       },
     },
   }) as any
@@ -153,12 +157,18 @@ export interface Chain<
    * TODO
    */
   // todo: extension stores the initialization configuration statically...
+  // dprint-ignore
   return: () =>
       & ($Data['configurator'] extends Configurator
           // ? (...args: Configurator.InferParameters<$Data['configurator']>) => $Data 
-          ? <$Args extends Configurator.InferParameters<$Data['configurator']>>(...args: $Args) => $Data & {
-            readonly configuratorInitialInput: $Args extends [infer $InitialInput] ? $InitialInput : undefined
-          }
+          ? & (
+                <$Args extends Configurator.InferParameters<$Data['configurator']>>(...args: $Args) => $Data & {
+                  readonly configuratorInitialInput: $Args extends [infer $InitialInput] ? $InitialInput : undefined
+                }
+              )
+            & {
+              configurator: $Data['configurator']
+            }
           : $Data
         )
       & ($Data['static'] extends object ? $Data['static'] : unknown)

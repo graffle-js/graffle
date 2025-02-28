@@ -1,13 +1,10 @@
 import type { Context } from '../context/context.js'
 import { Configuration } from '../context/fragments/configuration/_namespace.js'
-import { Extensions } from '../context/fragments/extensions/__.js'
+import { Extensions } from '../context/fragments/extensions/_namespace.js'
 import type { Extension } from '../context/fragments/extensions/dataType/_namespace.js'
 import type { ContextAddAndApplyOne } from '../context/fragments/extensions/reducers/addAndApplyOne.js'
-import { Output } from '../context/fragments/output/_namespace.js'
-import { Properties } from '../context/fragments/properties/__.js'
-import { GqlMethod } from '../context/fragments/request/request.js'
-import { SendMethod } from '../context/fragments/request/send.js'
-import { RequestInterceptors } from '../context/fragments/requestInterceptors/__.js'
+import { Properties } from '../context/fragments/properties/_namespace.js'
+import { RequestInterceptors } from '../context/fragments/requestInterceptors/_namespace.js'
 import { Scalars } from '../context/fragments/scalars/_namespace.js'
 import { Transports } from '../context/fragments/transports/_namespace.js'
 import { Anyware } from '../lib/anyware/_namespace.js'
@@ -16,6 +13,10 @@ import type { TypeFunction } from '../lib/type-function/__.js'
 import type { RequestPipeline } from '../requestPipeline/RequestPipeline.js'
 import { type ContextEmpty, contextEmpty } from '../types/ContextEmpty.js'
 import { type ContextFragment, ContextFragments } from '../types/ContextFragment.js'
+import { handle } from './handle.js'
+import { GqlMethod } from './methods/request/request.js'
+import { GqlMethodSendMethod } from './methods/request/send.js'
+import { ScalarMethod } from './methods/scalars.js'
 import { TransportMethod } from './methods/transport.js'
 
 export type ClientEmpty = Client<ContextEmpty>
@@ -45,8 +46,8 @@ export interface ClientBase<$Context extends Context> {
    * TODO
    */
   scalar: undefined extends $Context['configuration']['schema']['current']['map']
-    ? Scalars.Method.TypeErrorMissingSchemaMap
-    : Scalars.Method<$Context>
+    ? ScalarMethod.TypeErrorMissingSchemaMap
+    : ScalarMethod<$Context>
   /**
    * TODO
    */
@@ -54,7 +55,20 @@ export interface ClientBase<$Context extends Context> {
   /**
    * TODO
    */
-  properties: Properties.AddPropertiesMethod<$Context>
+  // todo have the client type be passed through too? Using `this` from parent?
+  properties: <$Properties extends Properties.Properties>(
+    properties: $Properties | Properties.PropertiesComputer<$Context, $Properties>,
+  ) => Client<
+    {
+      [_ in keyof $Context]: _ extends 'properties' ? Properties.Add<
+          $Context,
+          $Properties extends Properties.PropertiesComputerTypeFunction ? {} : $Properties,
+          $Properties extends Properties.PropertiesComputerTypeFunction ? [$Properties] : []
+        >
+        : $Context[_]
+    }
+  >
+
   /**
    * TODO
    */
@@ -98,7 +112,7 @@ export const createConstructorWithContext = <$Context extends Context>(
   context: $Context,
 ): Create<$Context> =>
 (configurationInput) => {
-  const configurationInput_ = configurationInput as undefined | Configuration.ConfigurationIndex.Input
+  const configurationInput_ = configurationInput as undefined | Configuration.Index.Input
   const newContext = configurationInput_
     ? ContextFragments.merge(
       context,
@@ -134,17 +148,17 @@ export const createWithContext = <$Context extends Context>(
       const computed = isComputed
         ? [properties]
         : undefined
-      return copy(Properties.contextFragmentPropertiesAdd(context, { static: static_, computed: computed as any }))
+      return copy(Properties.add(context, { static: static_, computed: computed as any }))
     },
     use(extension) {
       return copy(Extensions.addAndApplyMany(context, [extension]))
     },
-    scalar: ((...args: Scalars.Method.Arguments) => {
-      const scalar = Scalars.Method.normalizeArguments(args)
+    scalar: ((...args: ScalarMethod.Arguments) => {
+      const scalar = ScalarMethod.normalizeArguments(args)
       return copy(Scalars.contextAdd(context, scalar))
     }) as any,
     with(configurationInput) {
-      const configurationInput_ = configurationInput as Configuration.ConfigurationIndex.Input
+      const configurationInput_ = configurationInput as Configuration.Index.Input
       return copy(Configuration.add(context, configurationInput_))
     },
     transport: ((...args: TransportMethod.Arguments) => {
@@ -166,10 +180,10 @@ export const createWithContext = <$Context extends Context>(
       const { document: query } = GqlMethod.normalizeArguments(args)
 
       return {
-        send: async (...args: SendMethod.Arguments) => {
+        send: async (...args: GqlMethodSendMethod.Arguments) => {
           if (!context.transports.current) throw new Error(`No transport selected`)
 
-          const { operationName, variables } = SendMethod.normalizeArguments(args)
+          const { operationName, variables } = GqlMethodSendMethod.normalizeArguments(args)
           const request = {
             query,
             variables,
@@ -200,7 +214,7 @@ export const createWithContext = <$Context extends Context>(
             interceptors: context.requestPipelineInterceptors,
           })
 
-          return Output.handle(context, result)
+          return handle(context, result)
         },
       }
     }) as any,
@@ -220,13 +234,12 @@ export const createWithContext = <$Context extends Context>(
   })
 
   // todo: access computed properties from context
-  context.extensions.forEach(_ => {
+  context.extensions.forEach(extension => {
     // const configurationIndex = context.configuration as ConfigurationIndex
     // const configurationIndexEntry = configurationIndex[_.name]
     // if (!configurationIndexEntry && _.configurator) throw new Error(`Configuration entry for ${_.name} not found`)
 
-    _
-    const propertiesComputed = _.propertiesComputed.reduce((acc, propertiesComputer) => {
+    const propertiesComputed = extension.propertiesComputed.reduce((acc, propertiesComputer) => {
       return {
         ...acc,
         ...propertiesComputer({

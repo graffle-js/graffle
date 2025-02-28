@@ -1,4 +1,4 @@
-import type { ContextAdd } from '../../context/fragments/scalars/fragment.js'
+import type { Add } from '../../context/fragments/scalars/fragment.js'
 import { assertEqual } from '../../lib/assert-equal.js'
 import type { ContextEmpty } from '../ContextEmpty.js'
 import type { Schema } from '../Schema/__.js'
@@ -13,7 +13,7 @@ type CEmpty = ContextEmpty
 // 	onRequestResult: []
 // 	requestResultDataTypes: Text,
 // }>
-type CScalar = ContextAdd<ContextEmpty, DateScalar>
+type CScalar = Add<ContextEmpty, DateScalar>
 // type CExtAndScalar = AddScalar<CExt, DateScalar>
 	
 type _1 = Simplify<CEmpty                   , {x:Date|null}>

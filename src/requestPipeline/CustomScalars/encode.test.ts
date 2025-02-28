@@ -5,7 +5,7 @@ import { db } from '../../../tests/_/schemas/db.js'
 import type { Graffle } from '../../../tests/_/schemas/kitchen-sink/graffle/__.js'
 import { schemaDrivenDataMap } from '../../../tests/_/schemas/kitchen-sink/graffle/modules/schema-driven-data-map.js'
 import { Spy } from '../../../tests/_/SpyExtension.js'
-import { DocumentBuilder } from '../../extensions/DocumentBuilder/__.js'
+import { DocumentBuilder } from '../../extensions/DocumentBuilder/_namespace.js'
 import { Grafaid } from '../../lib/grafaid/__.js'
 import type { Schema } from '../../types/Schema/__.js'
 

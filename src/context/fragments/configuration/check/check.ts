@@ -1,5 +1,5 @@
-import { Configurator as C } from '../../../lib/configurator/configurator.js'
-import type { Transports } from '../transports/_namespace.js'
+import { Configurator as C } from '../../../../lib/configurator/configurator.js'
+import type { Transports } from '../../transports/_namespace.js'
 
 /**
  * @remarks This input extends base with properties that can be filled with exports from the generated client.

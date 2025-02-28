@@ -1,6 +1,6 @@
 import type { Client } from '../../client/client.js'
 import type { Add } from '../../context/fragments/configuration/fragment.js'
-import type { Properties } from '../../context/fragments/properties/__.js'
+import type { Properties } from '../../context/fragments/properties/_namespace.js'
 import { Extension } from '../../entrypoints/extension.js'
 // import { type Normalized } from '../../entrypoints/main.js'
 // import type { ConfigManager } from '../../lib/config-manager/__.js'

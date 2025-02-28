@@ -1,5 +1,4 @@
-import { Transport } from '../../context/fragments/transports/dataType/_namespace.js'
-import { Configurator, Extension } from '../../entrypoints/extension.js'
+import { Extension } from '../../entrypoints/extension.js'
 import type { Anyware } from '../../lib/anyware/_namespace.js'
 import type { Grafaid } from '../../lib/grafaid/__.js'
 import { print } from '../../lib/grafaid/document.js'
@@ -33,7 +32,7 @@ export interface ConfigurationNormalized {
 
 export type ConfigurationInput = Partial<ConfigurationNormalized>
 
-type TransportMemoryConfigurator = Configurator<
+type TransportMemoryConfigurator = Extension.Configurator<
   ConfigurationInput,
   ConfigurationNormalized,
   {}
@@ -93,7 +92,7 @@ export type TransportMemory = Extension.Data<
   {},
   readonly [],
   readonly [
-    Transport.Data<
+    Extension.Transport.Data<
       'memory',
       TransportMemoryConfigurator
     >,
@@ -104,9 +103,9 @@ export type TransportMemory = Extension.Data<
 export const TransportMemory: TransportMemory = Extension
   .create(`TransportMemory`)
   .transport(
-    Transport.create(`memory`)
+    Extension.Transport.create(`memory`)
       .configurator(
-        Configurator()
+        Extension.Configurator()
           .input<ConfigurationInput>()
           .normalized<ConfigurationNormalized>()
           .inputResolver(({ current, input }) => {

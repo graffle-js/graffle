@@ -1,11 +1,11 @@
 import { expect, expectTypeOf } from 'vitest'
-import { AScalar, BScalar } from '../../../../tests/_/fixtures/scalars.js'
-import { g0, test } from '../../../../tests/_/helpers.js'
-import { type GlobalRegistry } from '../../../entrypoints/utilities-for-generated.js'
-import { contextEmpty } from '../../../types/ContextEmpty.js'
-import type { Schema } from '../../../types/Schema/__.js'
-import type { SchemaDrivenDataMap } from '../../../types/SchemaDrivenDataMap/__.js'
-import type { Scalars } from './_namespace.js'
+import { AScalar, BScalar } from '../../../tests/_/fixtures/scalars.js'
+import { g0, test } from '../../../tests/_/helpers.js'
+import { type GlobalRegistry } from '../../entrypoints/utilities-for-generated.js'
+import { contextEmpty } from '../../types/ContextEmpty.js'
+import type { Schema } from '../../types/Schema/__.js'
+import type { SchemaDrivenDataMap } from '../../types/SchemaDrivenDataMap/__.js'
+import type { ScalarMethod } from './scalars.js'
 
 declare global {
   namespace GraffleGlobal {
@@ -31,11 +31,11 @@ test(`context scalars begin empty`, ({ g0 }) => {
 })
 
 test(`method not available when no schema map `, ({ g0 }) => {
-  expectTypeOf(g0.scalar).toEqualTypeOf<Scalars.Method.TypeErrorMissingSchemaMap>()
+  expectTypeOf(g0.scalar).toEqualTypeOf<ScalarMethod.TypeErrorMissingSchemaMap>()
 })
 
 test(`method is available when there is a schema map `, () => {
-  expectTypeOf(g1.scalar).toMatchTypeOf<Scalars.Method<typeof g1._>>()
+  expectTypeOf(g1.scalar).toMatchTypeOf<ScalarMethod<typeof g1._>>()
 })
 
 test(`can pass an inline scalar definition`, () => {

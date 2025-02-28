@@ -1,6 +1,6 @@
 import type { FormattedExecutionResult } from 'graphql'
 import type { Context } from '../context/context.js'
-import type { GraffleExecutionResultEnvelope } from '../context/fragments/output/handle.js'
+import type { GraffleExecutionResultEnvelope } from '../context/fragments/configuration/output/handle.js'
 import { Anyware } from '../lib/anyware/_namespace.js'
 import type { Config } from '../lib/anyware/PipelineDefinition/Config.js'
 import type { Grafaid } from '../lib/grafaid/__.js'

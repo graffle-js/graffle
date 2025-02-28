@@ -63,7 +63,7 @@ export interface DocumentController<$Context, $TypedDocument extends Grafaid.Doc
     Promise<SimplifyNullable<HandleOutput<$Context, Grafaid.Document.Typed.ResultOf<$TypedDocument>>>>
 }
 
-export namespace SendMethod {
+export namespace GqlMethodSendMethod {
   export type Arguments =
     | []
     | [string]

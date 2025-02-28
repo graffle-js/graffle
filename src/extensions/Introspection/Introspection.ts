@@ -1,9 +1,9 @@
 import { getIntrospectionQuery, type IntrospectionQuery } from 'graphql'
 import type { GraphQLSchema, IntrospectionOptions } from 'graphql'
+import type { HandleOutput } from '../../client/handle.js'
 import type { Configuration } from '../../context/fragments/configuration/_namespace.js'
-import type { HandleOutput } from '../../context/fragments/output/handle.js'
-import type { Properties } from '../../context/fragments/properties/__.js'
-import { Configurator, Extension } from '../../entrypoints/extension.js'
+import type { Properties } from '../../context/fragments/properties/_namespace.js'
+import { Extension } from '../../entrypoints/extension.js'
 import type { Context } from '../../entrypoints/utilities-for-generated.js'
 import type { InputIntrospectionOptions } from '../../generator/_.js'
 
@@ -48,7 +48,7 @@ type SchemaTarget = string | URL | GraphQLSchema
  */
 export const Introspection = Extension.create(`introspection`)
   .configurator(
-    Configurator()
+    Extension.Configurator()
       .input<ConfigurationInput>()
       .normalized<ConfigurationNormalized>()
       .default({
@@ -67,10 +67,10 @@ export const Introspection = Extension.create(`introspection`)
     return {
       introspect: async () => {
         // todo: fixme: use config.schema!! Currently only looked at in the generator!
-        const c = client.with({ output: { envelope: false, errors: { execution: `return` } } })
+        const client2 = client.with({ output: { envelope: false, errors: { execution: `return` } } })
         let introspectionQueryDocument = getIntrospectionQuery(configuration.introspection.current.options)
         // @ts-expect-error fixme
-        const result = await c.gql(introspectionQueryDocument).send()
+        const result = await client2.gql(introspectionQueryDocument).send()
         const featuresDropped: string[] = []
         const enabledKnownPotentiallyUnsupportedFeatures = knownPotentiallyUnsupportedFeatures.filter(_ =>
           configuration.introspection.current.options[_] !== false
@@ -85,7 +85,7 @@ export const Introspection = Extension.create(`introspection`)
               [feature]: false,
             })
             // @ts-expect-error fixme
-            const result = await c.gql(introspectionQueryDocument).send()
+            const result = await client2.gql(introspectionQueryDocument).send()
             if (!(result instanceof Error)) break
           }
         }

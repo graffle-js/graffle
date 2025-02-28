@@ -1,12 +1,12 @@
 import type { GraphQLError } from 'graphql'
 import type { Simplify } from 'type-fest'
 import type { Context } from '../context/context.js'
-import type { ErrorCategory } from '../context/fragments/output/configuration.js'
+import type { ErrorCategory } from '../context/fragments/configuration/output/configuration.js'
 import {
   isOutputTraditionalGraphQLOutput,
   type OutputChannelConfig,
   readErrorCategoryOutputChannel,
-} from '../context/fragments/output/configuration.js'
+} from '../context/fragments/configuration/output/configuration.js'
 import type { Normalized } from '../entrypoints/main.js'
 import type { Anyware } from '../lib/anyware/_namespace.js'
 import { Errors } from '../lib/errors/__.js'

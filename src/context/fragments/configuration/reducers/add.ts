@@ -1,6 +1,6 @@
 import type { Configurator } from '../../../../lib/configurator/configurator.js'
 import { hasNonUndefinedKeys, type Writeable } from '../../../../lib/prelude.js'
-import type { ConfigurationIndex, ContextFragment } from '../fragment.js'
+import type { ContextFragment, Index } from '../fragment.js'
 
 export const add = <
   context extends ContextFragment,
@@ -11,7 +11,7 @@ export const add = <
   // For default input resolvers we can do this automatically (shallow merge)
   // Any custom input resolvers would need to implement their own "is changed" logic.
 
-  const configuration: Writeable<ContextFragment['configuration'] & ConfigurationIndex> = {
+  const configuration: Writeable<ContextFragment['configuration'] & Index> = {
     ...context.configuration,
   }
 

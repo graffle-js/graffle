@@ -1,10 +1,10 @@
-import type { Client } from '../../../client/client.js'
-import type { GlobalRegistry } from '../../../types/GlobalRegistry/GlobalRegistry.js'
-import { Schema } from '../../../types/Schema/__.js'
-import { type Context } from '../../context.js'
-import type { ContextAdd } from './reducers/add.js'
+import type { Context } from '../../context/context.js'
+import type { Scalars } from '../../context/fragments/scalars/_namespace.js'
+import type { GlobalRegistry } from '../../types/GlobalRegistry/GlobalRegistry.js'
+import { Schema } from '../../types/Schema/__.js'
+import type { Client } from '../client.js'
 
-export interface Method<
+export interface ScalarMethod<
   $Context extends Context,
   // Variables
   _Schema extends GlobalRegistry.GetOrGeneric<
@@ -22,13 +22,13 @@ export interface Method<
       decode: (value: string) => $Decoded
       encode: (value: $Decoded) => string
     },
-  ): Client<ContextAdd<$Context, Schema.Scalar<$Name, $Decoded, string>>>
+  ): Client<Scalars.Add<$Context, Schema.Scalar<$Name, $Decoded, string>>>
   <$Scalar extends Schema.Scalar<_Schema['scalarNamesUnion']>>(
     scalar: $Scalar,
-  ): Client<ContextAdd<$Context, $Scalar>>
+  ): Client<Scalars.Add<$Context, $Scalar>>
 }
 
-export namespace Method {
+export namespace ScalarMethod {
   export type Arguments = [Schema.Scalar] | [string, { decode: (value: string) => any; encode: (value: any) => string }]
   export const normalizeArguments = (args: Arguments): Schema.Scalar => {
     if (typeof args[0] === `string`) return Schema.Scalar.create(args[0], args[1]!)

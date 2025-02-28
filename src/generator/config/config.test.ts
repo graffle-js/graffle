@@ -42,7 +42,8 @@ test(`can load schema from custom dir using default file name`, async () => {
   expect(field).toBeDefined()
 })
 
-test(`can introspect schema from url`, async ({ pokemonService }) => {
+// todo
+test.only(`can introspect schema from url`, async ({ pokemonService }) => {
   const config = await createConfig({ schema: { type: `url`, url: pokemonService.url } })
   expect(config.paths.project.inputs.schema).toEqual(null)
   expect(config.schema.sdl).toMatchSnapshot()

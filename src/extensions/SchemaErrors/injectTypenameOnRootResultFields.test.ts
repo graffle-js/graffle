@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import { DocumentBuilder } from '../DocumentBuilder/__.js'
+import { DocumentBuilder } from '../DocumentBuilder/_namespace.js'
 import { injectTypenameOnRootResultFields } from './injectTypenameOnRootResultFields.js'
 import { GraffleSchemaErrors } from './tests/fixture/graffle/__.js'
 

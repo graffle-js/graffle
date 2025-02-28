@@ -1,6 +1,5 @@
 import { Schema } from '../../../types/Schema/__.js'
 
-export * from './method.js'
 export * from './reducers/add.js'
 export * from './reducers/set.js'
 

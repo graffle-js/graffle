@@ -1,7 +1,7 @@
 import type { Configuration } from './fragments/configuration/_namespace.js'
-import type { Extensions } from './fragments/extensions/__.js'
-import type { Properties } from './fragments/properties/__.js'
-import type { RequestInterceptors } from './fragments/requestInterceptors/__.js'
+import type { Extensions } from './fragments/extensions/_namespace.js'
+import type { Properties } from './fragments/properties/_namespace.js'
+import type { RequestInterceptors } from './fragments/requestInterceptors/_namespace.js'
 import type { Scalars } from './fragments/scalars/_namespace.js'
 import type { Transports } from './fragments/transports/_namespace.js'
 // import type { ContextFragment } from './ContextFragment.js'
@@ -11,8 +11,8 @@ export interface Context
   extends
     Configuration.ContextFragment,
     Transports.ContextFragment,
-    Properties.ContextFragmentProperties,
-    RequestInterceptors.ContextFragmentRequestInterceptors,
+    Properties.ContextFragment,
+    RequestInterceptors.ContextFragment,
     Extensions.ContextFragment,
     Scalars.ContextFragment
 {

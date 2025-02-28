@@ -1,8 +1,8 @@
 import { OperationTypeNode } from 'graphql'
 import { Extension } from '../../entrypoints/extension.js'
-import type { ContextTransports, GlobalRegistry } from '../../entrypoints/utilities-for-generated.js'
+import type { GlobalRegistry } from '../../entrypoints/utilities-for-generated.js'
 import type { TypeFunction } from '../../lib/type-function/__.js'
-import { createMethodDocument, createMethodOperationType } from './_.js'
+import { createMethodDocument, createMethodOperationType } from './_exports.js'
 
 export const DocumentBuilder = Extension
   .create(`DocumentBuilder`)
@@ -11,8 +11,6 @@ export const DocumentBuilder = Extension
       document: createMethodDocument(context),
       query: createMethodOperationType(context, OperationTypeNode.QUERY),
       mutation: createMethodOperationType(context, OperationTypeNode.MUTATION),
-      // todo
-      // subscription: async () => {},
     } as any as Properties
   })
   .return()

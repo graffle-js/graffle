@@ -1,5 +1,4 @@
-import { Transport } from '../../entrypoints/extension.js'
-import { Configurator, Extension } from '../../entrypoints/extension.js'
+import { Extension } from '../../entrypoints/extension.js'
 import type { Anyware } from '../../lib/anyware/_namespace.js'
 import type { Grafaid } from '../../lib/grafaid/__.js'
 import { OperationTypeToAccessKind, print } from '../../lib/grafaid/document.js'
@@ -14,11 +13,11 @@ import type { RequestPipeline } from '../../requestPipeline/RequestPipeline.js'
 // Configuration
 // ----------------------------
 
-type TransportHttpConfigurator = Configurator<
+type TransportHttpConfigurator = Extension.Configurator<
   ConfigurationInput,
   ConfigurationNormalized,
   ConfigurationDefault,
-  Configurator.InputResolver<ConfigurationInputResolver$Func>
+  Extension.Configurator.InputResolver<ConfigurationInputResolver$Func>
 >
 
 export type ConfigurationInput = {
@@ -54,13 +53,13 @@ export const configurationDefault = {
 export type ConfigurationDefault = typeof configurationDefault
 
 export interface ConfigurationInputResolver$Func
-  extends Configurator.InputResolver.$Func<ConfigurationInput, ConfigurationNormalized, ConfigurationDefault>
+  extends Extension.Configurator.InputResolver.$Func<ConfigurationInput, ConfigurationNormalized, ConfigurationDefault>
 {
   return: ConfigurationInputResolver$Func_<this['parameters']>
 }
 // dprint-ignore
 export interface ConfigurationInputResolver$Func_<
-  $Parameters extends Configurator.InputResolver.Parameters<ConfigurationInput, ConfigurationNormalized, ConfigurationDefault>,
+  $Parameters extends Extension.Configurator.InputResolver.Parameters<ConfigurationInput, ConfigurationNormalized, ConfigurationDefault>,
   _Input = $Parameters['input'],
   _Current = $Parameters['current'],
 > extends Partial<ConfigurationNormalized> {
@@ -79,7 +78,7 @@ export type MethodModePost = typeof MethodMode['post']
 
 export type MethodMode = MethodModePost | MethodModeGetReads
 
-const httpTransportConfigurator = Configurator()
+const httpTransportConfigurator = Extension.Configurator()
   .input<ConfigurationInput>()
   .normalized<ConfigurationNormalized>()
   .default(configurationDefault)
@@ -179,12 +178,12 @@ export type TransportHttp = Extension.Data<
   unknown,
   {},
   readonly [],
-  readonly [Transport.Data<'http', TransportHttpConfigurator>]
+  readonly [Extension.Transport.Data<'http', TransportHttpConfigurator>]
 >
 
 export const TransportHttp: TransportHttp = Extension.create(`TransportHttp`)
   .transport(
-    Transport
+    Extension.Transport
       .create(`http`)
       .configurator(httpTransportConfigurator)
       // todo currently the configurator data is spread into the input however it should be concentrated into a transport data prop and then

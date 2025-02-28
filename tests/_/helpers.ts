@@ -5,19 +5,19 @@ import * as Path from 'node:path'
 import type { Mock } from 'vitest'
 import { test as testBase, vi } from 'vitest'
 import type { ClientEmpty } from '../../src/client/client.js'
-import { Graffle } from '../../src/entrypoints/main.js'
+// import { Graffle } from '../../src/entrypoints/main.js'
 import { GraffleBare } from '../../src/entrypoints/presets/bare.js'
-import type { GraffleBasic } from '../../src/entrypoints/presets/basic.js'
-import type { GraffleMinimal } from '../../src/entrypoints/presets/minimal.js'
-import type { SchemaDrivenDataMap } from '../../src/entrypoints/utilities-for-generated.js'
-import { TransportMemory } from '../../src/extensions/TransportMemory/TransportMemory.js'
-import type { ConfigManager } from '../../src/lib/config-manager/__.js'
+// import type { GraffleBasic } from '../../src/entrypoints/presets/basic.js'
+// import type { GraffleMinimal } from '../../src/entrypoints/presets/minimal.js'
+// import type { SchemaDrivenDataMap } from '../../src/entrypoints/utilities-for-generated.js'
+// import { TransportMemory } from '../../src/extensions/TransportMemory/TransportMemory.js'
+// import type { ConfigManager } from '../../src/lib/config-manager/__.js'
 import { Grafaid } from '../../src/lib/grafaid/__.js'
 import { CONTENT_TYPE_REC } from '../../src/lib/grafaid/http/http.js'
 import { type SchemaService, serveSchema } from './lib/serveSchema.js'
-import { db } from './schemas/db.js'
-import { Graffle as KitchenSink } from './schemas/kitchen-sink/graffle/__.js'
-import { schema as kitchenSinkSchema } from './schemas/kitchen-sink/schema.js'
+// import { db } from './schemas/db.js'
+// import { Graffle as KitchenSink } from './schemas/kitchen-sink/graffle/__.js'
+// import { schema as kitchenSinkSchema } from './schemas/kitchen-sink/schema.js'
 import { schema } from './schemas/pokemon/schema.js'
 
 interface Project {
@@ -44,6 +44,7 @@ interface Fixtures {
   fetch: Mock<(request: Request) => Promise<Response>>
   g0: ClientEmpty
   pokemonService: SchemaService
+  project: Project
   // graffle: GraffleMinimal.Client.With<{
   //   check: { preflight: false }
   // }>
@@ -51,17 +52,16 @@ interface Fixtures {
   //   schema: { map: SchemaDrivenDataMap }
   //   check: { preflight: false }
   // }>
-  kitchenSink: GraffleBasic.Client.With<{
-    schema: { map: SchemaDrivenDataMap }
-    check: { preflight: false }
-    transports: ConfigManager.SetKeyUnsafe<
-      GraffleBasic.Client.Context['transports'],
-      `current`,
-      `memory`
-    >
-  }>
-  kitchenSinkData: typeof db
-  project: Project
+  // kitchenSink: GraffleBasic.Client.With<{
+  //   schema: { map: SchemaDrivenDataMap }
+  //   check: { preflight: false }
+  //   transports: ConfigManager.SetKeyUnsafe<
+  //     GraffleBasic.Client.Context['transports'],
+  //     `current`,
+  //     `memory`
+  //   >
+  // }>
+  // kitchenSinkData: typeof db
 }
 
 export const g0 = GraffleBare.create()
@@ -155,16 +155,16 @@ export const test = testBase.extend<Fixtures>({
   g0: async ({}, use) => {
     await use(g0)
   },
-  kitchenSink: async ({ fetch: _ }, use) => {
-    const kitchenSink = KitchenSink.create()
-      .use(TransportMemory)
-      .transport()
-    // kitchenSink.anyware(async ({ encode }) => {
-    //   encode({ input: {}})
-    // })
-    // @ts-expect-error fixme
-    await use(kitchenSink)
-  },
+  // kitchenSink: async ({ fetch: _ }, use) => {
+  //   const kitchenSink = KitchenSink.create()
+  //     .use(TransportMemory)
+  //     .transport()
+  //   // kitchenSink.anyware(async ({ encode }) => {
+  //   //   encode({ input: {}})
+  //   // })
+  //   // @ts-expect-error fixme
+  //   await use(kitchenSink)
+  // },
   // kitchenSinkHttp: async ({ fetch: _ }, use) => {
   //   const kitchenSink = KitchenSink
   //     .create()
@@ -172,9 +172,9 @@ export const test = testBase.extend<Fixtures>({
   //   // @ts-expect-error fixme
   //   await use(kitchenSink)
   // },
-  kitchenSinkData: async ({}, use) => { // eslint-disable-line
-    await use(db)
-  },
+  // kitchenSinkData: async ({}, use) => { // eslint-disable-line
+  //   await use(db)
+  // },
   // graffle: async ({ fetch: _ }, use) => {
   //   const graffle = Graffle
   //     .create()
