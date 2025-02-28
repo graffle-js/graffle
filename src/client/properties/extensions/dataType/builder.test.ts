@@ -33,6 +33,7 @@ describe(`chain`, () => {
         "propertiesComputed": [],
         "propertiesStatic": {},
         "static": {},
+        "transports": [],
       }
     `)
     expectTypeOf(data).toEqualTypeOf<dataExpected>()
@@ -64,6 +65,7 @@ describe(`creator`, () => {
         "propertiesComputed": [],
         "propertiesStatic": {},
         "static": {},
+        "transports": [],
       }
     `)
     assertExtends<typeof A, expectedCreator>()
