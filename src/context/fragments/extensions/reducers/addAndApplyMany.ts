@@ -1,6 +1,5 @@
 import { type Tuple, type UnknownOrAnyToNever, type Writeable } from '../../../../lib/prelude.js'
 import type { Context } from '../../../context.js'
-import type { Configuration } from '../../configuration/_namespace.js'
 import { Properties } from '../../properties/_namespace.js'
 import { RequestInterceptors } from '../../requestInterceptors/_namespace.js'
 import { Transports } from '../../transports/_namespace.js'
@@ -94,7 +93,13 @@ export const addAndApplyMany = <
       newContext.configuration = {
         ...newContext.configuration,
         [extension.name]: {
-          current: extension.configuratorInitialInput ?? extension.configurator.default,
+          // todo: add test that default is applied even when initial input is given
+          current: extension.configuratorInitialInput
+            ? extension.configurator.inputResolver({
+              current: extension.configurator.default,
+              input: extension.configuratorInitialInput,
+            })
+            : extension.configurator.default,
           configurator: extension.configurator,
         },
       }

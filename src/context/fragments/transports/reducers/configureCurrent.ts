@@ -9,7 +9,6 @@ export const configureCurrentOrThrow = <
   context: context,
   configurationInput: configurationInput,
 ): ConfigureCurrent<context, configurationInput> => {
-  // console.log(context)
   if (!context.transports.current) {
     throw new Error(`No transport is currently set.`)
   }

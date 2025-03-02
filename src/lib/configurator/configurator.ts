@@ -1,4 +1,5 @@
 import type { HasRequiredKeys } from 'type-fest'
+import { shallowMergeWithoutUndefined } from '../../lib/prelude.js'
 
 // ----------------------------
 // Data Type
@@ -86,10 +87,9 @@ namespace $ {
     return configuratorTypeInput
   }
 
-  export const standardInputResolver_shallowMerge = createInputResolver(({ current, input }) => ({
-    ...current,
-    ...input,
-  }))
+  export const standardInputResolver_shallowMerge = createInputResolver(({ current, input }) =>
+    shallowMergeWithoutUndefined(current, input)
+  )
 
   export const empty: Configurator.States.Empty = {
     default: {},

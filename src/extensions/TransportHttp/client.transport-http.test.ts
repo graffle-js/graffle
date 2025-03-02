@@ -1,5 +1,5 @@
 import { describe, expect, expectTypeOf } from 'vitest'
-import { createResponse, test } from '../../../tests/_/helpers.js'
+import { createGraphQLResponse, test } from '../../../tests/_/helpers.js'
 import { serveSchema } from '../../../tests/_/lib/serveSchema.js'
 import { Graffle as Pokemon } from '../../../tests/_/schemas/pokemon/graffle/__.js'
 import { schema as schemaPokemon } from '../../../tests/_/schemas/pokemon/schema.js'
@@ -46,7 +46,7 @@ test(`when envelope is used then response property is present even if relying on
 describe(`methodMode`, () => {
   describe(`default (post)`, () => {
     test(`sends spec compliant post request by default`, async ({ fetch, graffle }) => {
-      fetch.mockImplementationOnce(() => Promise.resolve(createResponse({ data: { id: `abc` } })))
+      fetch.mockImplementationOnce(() => Promise.resolve(createGraphQLResponse({ data: { id: `abc` } })))
       await graffle.gql`query { id }`.send()
       const request = fetch.mock.calls[0]?.[0]
       expect(request?.method).toEqual(`POST`)
@@ -56,7 +56,7 @@ describe(`methodMode`, () => {
   })
   describe(`get`, () => {
     test(`can set method mode to get`, async ({ fetch }) => {
-      fetch.mockImplementationOnce(() => Promise.resolve(createResponse({ data: { user: { name: `foo` } } })))
+      fetch.mockImplementationOnce(() => Promise.resolve(createGraphQLResponse({ data: { user: { name: `foo` } } })))
       const graffle = Graffle.create().transport({ url, methodMode: `getReads` })
       await graffle.gql`query foo($id: ID!){user(id:$id){name}}`.send(`foo`, { 'id': `QVBJcy5ndXJ1` })
       const request = fetch.mock.calls[0]?.[0]
@@ -68,14 +68,14 @@ describe(`methodMode`, () => {
       )
     })
     test(`if no variables or operationName then search parameters are omitted`, async ({ fetch }) => {
-      fetch.mockImplementationOnce(() => Promise.resolve(createResponse({ data: { user: { name: `foo` } } })))
+      fetch.mockImplementationOnce(() => Promise.resolve(createGraphQLResponse({ data: { user: { name: `foo` } } })))
       const graffle = Graffle.create().transport({ url, methodMode: `getReads` })
       await graffle.gql`query {user{name}}`.send()
       const request = fetch.mock.calls[0]?.[0]
       expect(request?.url).toMatchInlineSnapshot(`"https://foo.io/api/graphql?query=query+%7Buser%7Bname%7D%7D"`)
     })
     test(`mutation still uses POST`, async ({ fetch }) => {
-      fetch.mockImplementationOnce(() => Promise.resolve(createResponse({ data: { user: { name: `foo` } } })))
+      fetch.mockImplementationOnce(() => Promise.resolve(createGraphQLResponse({ data: { user: { name: `foo` } } })))
       const graffle = Graffle.create().transport({ url, methodMode: `getReads` })
       await graffle.gql`mutation { user { name } }`.send()
       const request = fetch.mock.calls[0]?.[0]
@@ -88,7 +88,7 @@ describe(`methodMode`, () => {
 
 describe(`configuration`, () => {
   test(`can set headers`, async ({ fetch }) => {
-    fetch.mockImplementationOnce(() => Promise.resolve(createResponse({ data: { id: `abc` } })))
+    fetch.mockImplementationOnce(() => Promise.resolve(createGraphQLResponse({ data: { id: `abc` } })))
     const graffle = Graffle.create().transport({ url, headers: { 'x-foo': `bar` } })
     graffle._.transports.configurations.http.headers
     await graffle.gql`query { id }`.send()
@@ -97,7 +97,7 @@ describe(`configuration`, () => {
   })
 
   test(`can set raw (requestInit)`, async ({ fetch }) => {
-    fetch.mockImplementationOnce(() => Promise.resolve(createResponse({ data: { id: `abc` } })))
+    fetch.mockImplementationOnce(() => Promise.resolve(createGraphQLResponse({ data: { id: `abc` } })))
     const graffle = Graffle.create().transport({ url, raw: { headers: { 'x-foo': `bar` } } })
     await graffle.gql`query { id }`.send()
     const request = fetch.mock.calls[0]?.[0]

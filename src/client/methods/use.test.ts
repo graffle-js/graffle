@@ -37,6 +37,21 @@ describe(`if extension has configurator`, () => {
     expect(g1._.configuration.bExtension).toEqual({ current: b.configuratorInitialInput, configurator: aConfigurator })
     // todo type assertions
   })
+  test(`configurator default is used as initial current state even when initial input is given`, ({ g0 }) => {
+    const B = Extension.create(`bExtension`)
+      .configurator(
+        Extension.Configurator().input<{ a?: number; b?: number }>().default({ a: 1, b: 2 }),
+      )
+      .return()
+
+    const b = B({ a: undefined, b: 3 })
+    const g1 = g0.use(b)
+
+    expect(g1._.configuration.bExtension.current).toEqual({
+      a: 1, // Default preserved when input is undefined
+      b: 3, // Input value overrides default
+    })
+  })
 })
 
 describe(`transport`, () => {

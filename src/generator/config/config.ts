@@ -304,7 +304,6 @@ const createConfigSchema = async (
     }
     case `url`: {
       const introspection = Introspection({ options: input.schema.options })
-      introspection
       const graffle = Graffle
         .create()
         .use(introspection)

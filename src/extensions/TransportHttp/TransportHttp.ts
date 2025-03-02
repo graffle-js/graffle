@@ -4,7 +4,7 @@ import type { Grafaid } from '../../lib/grafaid/__.js'
 import { OperationTypeToAccessKind, print } from '../../lib/grafaid/document.js'
 import { getRequestEncodeSearchParameters, postRequestEncodeBody } from '../../lib/grafaid/http/http.js'
 import { getRequestHeadersRec, parseExecutionResult, postRequestHeadersRec } from '../../lib/grafaid/http/http.js'
-import { mergeRequestInit, searchParamsAppendAll } from '../../lib/http.js'
+import { mergeHeadersInitWithStrategyMerge, mergeRequestInit, searchParamsAppendAll } from '../../lib/http.js'
 import type { httpMethodGet, httpMethodPost } from '../../lib/http.js'
 import { _, isString, type MaybePromise } from '../../lib/prelude.js'
 import type { RequestPipeline } from '../../requestPipeline/RequestPipeline.js'
@@ -83,9 +83,12 @@ const httpTransportConfigurator = Extension.Configurator()
   .normalized<ConfigurationNormalized>()
   .default(configurationDefault)
   .inputResolver<ConfigurationInputResolver$Func>(({ current, input }) => {
-    // todo
-    input
-    return current
+    return {
+      methodMode: input.methodMode ?? current.methodMode,
+      raw: input.raw ?? current.raw,
+      url: input.url ? new URL(input.url) : current.url,
+      headers: mergeHeadersInitWithStrategyMerge(current.headers, input.headers),
+    }
   })
 
 // ----------------------------
@@ -211,34 +214,29 @@ export const TransportHttp: TransportHttp = Extension.create(`TransportHttp`)
             ? `get`
             : `post`
 
-          const baseProperties = mergeRequestInit(
+          const baseRequestInit = mergeRequestInit(
             mergeRequestInit(
-              mergeRequestInit(
-                {
-                  headers: requestMethod === `get` ? getRequestHeadersRec : postRequestHeadersRec,
-                },
-                {
-                  headers: input.headers,
-                },
-              ),
-              input.raw,
+              {
+                headers: requestMethod === `get` ? getRequestHeadersRec : postRequestHeadersRec,
+              },
+              input.transport.raw,
             ),
             {
-              headers: input.headers,
+              headers: input.transport.headers,
             },
           )
           const request: ExchangeRequest = requestMethod === `get`
             ? {
               methodMode: methodMode as MethodModeGetReads,
-              ...baseProperties,
+              ...baseRequestInit,
               method: `get`,
-              url: searchParamsAppendAll(input.url, slots.searchParams(graphqlRequest)),
+              url: searchParamsAppendAll(input.transport.url, slots.searchParams(graphqlRequest)),
             }
             : {
               methodMode: methodMode,
-              ...baseProperties,
+              ...baseRequestInit,
               method: `post`,
-              url: input.url,
+              url: input.transport.url,
               body: slots.body(graphqlRequest),
             }
           return {

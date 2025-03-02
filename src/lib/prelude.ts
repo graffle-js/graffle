@@ -868,3 +868,21 @@ export function pipe(value: any, ...fns: ((...args: any[]) => any)[]) {
     return nextValue
   }, value)
 }
+
+/**
+ * Merges two objects, filtering out undefined values from the second object
+ */
+export const shallowMergeWithoutUndefined = <T extends object, U extends object>(base: T, input: U): T & U => {
+  const result = { ...base } as Record<keyof (T & U), unknown>
+
+  for (const key in input) {
+    if (Object.prototype.hasOwnProperty.call(input, key)) {
+      const value = input[key]
+      if (value !== undefined) {
+        result[key] = value
+      }
+    }
+  }
+
+  return result as T & U
+}

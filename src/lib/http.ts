@@ -68,3 +68,15 @@ export const searchParamsAppendAll = (url: URL | string, additionalSearchParams:
   searchParamsAppendAllMutate(url2, additionalSearchParams)
   return url2
 }
+
+/**
+ * Merges two sets of headers, with the second set taking precedence for duplicate keys
+ */
+export function mergeHeadersInitWithStrategyMerge(base?: HeadersInit, additional?: HeadersInit): Headers | undefined {
+  if (!additional) return base instanceof Headers ? base : base ? new Headers(base) : undefined
+  if (!base) return new Headers(additional)
+  return new Headers([
+    ...(new Headers(base)).entries(),
+    ...(new Headers(additional)).entries(),
+  ])
+}

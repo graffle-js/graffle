@@ -37,7 +37,10 @@ interface Project {
 //   }))
 //   .transport(`memory`)
 
-export const createResponse = (body: object) =>
+export const createGraphQLResponseData = (data: object = {}) =>
+  new Response(JSON.stringify({ data }), { status: 200, headers: { 'content-type': CONTENT_TYPE_REC } })
+
+export const createGraphQLResponse = (body: object) =>
   new Response(JSON.stringify(body), { status: 200, headers: { 'content-type': CONTENT_TYPE_REC } })
 
 interface Fixtures {
