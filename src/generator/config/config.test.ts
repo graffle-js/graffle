@@ -42,34 +42,32 @@ test(`can load schema from custom dir using default file name`, async () => {
   expect(field).toBeDefined()
 })
 
-// todo
-test.only(`can introspect schema from url`, async ({ pokemonService }) => {
+test(`can introspect schema from url`, async ({ pokemonService }) => {
   const config = await createConfig({ schema: { type: `url`, url: pokemonService.url } })
   expect(config.paths.project.inputs.schema).toEqual(null)
   expect(config.schema.sdl).toMatchSnapshot()
 })
 
-test(`configured schema introspection options are passed to introspection`, async ({ pokemonService, fetch }) => {
-  fetch.mockImplementation(_ => {
-    const response = new Response(JSON.stringify({ data: null }))
-    return Promise.resolve(response)
+test(`configured schema introspection options are passed to introspection`, async ({ pokemonService }) => {
+  const c1 = await createConfig({
+    schema: {
+      type: `url`,
+      url: pokemonService.url,
+      options: {
+        descriptions: true,
+      },
+    },
   })
-  await createConfig({
+  const c2 = await createConfig({
     schema: {
       type: `url`,
       url: pokemonService.url,
       options: {
         descriptions: false,
-        directiveIsRepeatable: false,
-        inputValueDeprecation: false,
-        schemaDescription: false,
-        oneOf: false,
-        specifiedByUrl: false,
       },
     },
-  }).catch((_: unknown) => {})
-  const readableStream: ReadableStream = fetch.mock.calls[0]?.[0]?.body as any
-  const { value }: { value: Uint8Array } = await readableStream.getReader().read() as any
-  const document = JSON.parse(new TextDecoder().decode(value))
-  expect(document).toMatchSnapshot()
+  })
+  expect(c1.schema.sdl).not.toEqual(c2.schema.sdl)
+  expect(c1.schema.sdl).toMatch(/A date-time string at UTC/)
+  expect(c2.schema.sdl).not.toMatch(/A date-time string at UTC/)
 })

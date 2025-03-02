@@ -18,6 +18,7 @@ import { type SchemaService, serveSchema } from './lib/serveSchema.js'
 // import { db } from './schemas/db.js'
 // import { Graffle as KitchenSink } from './schemas/kitchen-sink/graffle/__.js'
 // import { schema as kitchenSinkSchema } from './schemas/kitchen-sink/schema.js'
+import type { IntrospectionQuery } from 'graphql'
 import { schema } from './schemas/pokemon/schema.js'
 
 interface Project {
@@ -37,11 +38,28 @@ interface Project {
 //   }))
 //   .transport(`memory`)
 
-export const createGraphQLResponseData = (data: object = {}) =>
+export const createGraphQLResponseData = (data: null | object = {}) =>
   new Response(JSON.stringify({ data }), { status: 200, headers: { 'content-type': CONTENT_TYPE_REC } })
 
 export const createGraphQLResponse = (body: object) =>
   new Response(JSON.stringify(body), { status: 200, headers: { 'content-type': CONTENT_TYPE_REC } })
+
+export const mockIntrospectionData = {
+  __schema: {
+    types: [
+      {
+        kind: `OBJECT`,
+        name: `Query`,
+        fields: [],
+        interfaces: [],
+      },
+    ],
+    queryType: { kind: `OBJECT`, name: `Query` },
+    mutationType: null,
+    subscriptionType: null,
+    directives: [],
+  },
+} satisfies IntrospectionQuery
 
 interface Fixtures {
   fetch: Mock<(request: Request) => Promise<Response>>
@@ -150,6 +168,7 @@ export const test = testBase.extend<Fixtures>({
   fetch: async ({}, use) => {
     const fetch = globalThis.fetch
     const fetchMock = vi.fn()
+    // fetchMock.original = fetch
     globalThis.fetch = fetchMock
 
     await use(fetchMock)

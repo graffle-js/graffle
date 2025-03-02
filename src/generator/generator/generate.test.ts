@@ -1,7 +1,6 @@
-import { type IntrospectionQuery } from 'graphql'
 import * as Memfs from 'memfs'
 import { describe, expect } from 'vitest'
-import { createGraphQLResponseData, test } from '../../../tests/_/helpers.js'
+import { createGraphQLResponseData, mockIntrospectionData, test } from '../../../tests/_/helpers.js'
 import type { ConfigInitSchemaSdl } from '../_.js'
 import { generate } from './generate.js'
 
@@ -11,23 +10,6 @@ const schema: ConfigInitSchemaSdl = {
   type: `sdl`,
   sdl: `type Query { ok: Boolean }`,
 }
-
-const mockIntrospectionData = {
-  __schema: {
-    types: [
-      {
-        kind: `OBJECT`,
-        name: `Query`,
-        fields: [],
-        interfaces: [],
-      },
-    ],
-    queryType: { kind: `OBJECT`, name: `Query` },
-    mutationType: null,
-    subscriptionType: null,
-    directives: [],
-  },
-} satisfies IntrospectionQuery
 
 describe(`importFormat`, () => {
   test(`default is jsExtension`, async () => {
