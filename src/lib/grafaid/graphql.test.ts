@@ -1,6 +1,6 @@
 import { OperationTypeNode } from 'graphql'
 import { describe, expect, test } from 'vitest'
-import { Grafaid } from './__.js'
+import { Grafaid } from './_namespace.js'
 
 const operationNameOne = `one`
 const operationNameTwo = `two`

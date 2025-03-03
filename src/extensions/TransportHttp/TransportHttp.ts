@@ -1,6 +1,6 @@
 import { Extension } from '../../entrypoints/extension.js'
 import type { Anyware } from '../../lib/anyware/_namespace.js'
-import type { Grafaid } from '../../lib/grafaid/__.js'
+import type { Grafaid } from '../../lib/grafaid/_namespace.js'
 import { OperationTypeToAccessKind, print } from '../../lib/grafaid/document.js'
 import { getRequestEncodeSearchParameters, postRequestEncodeBody } from '../../lib/grafaid/http/http.js'
 import { getRequestHeadersRec, parseExecutionResult, postRequestHeadersRec } from '../../lib/grafaid/http/http.js'
@@ -17,7 +17,7 @@ type TransportHttpConfigurator = Extension.Configurator<
   ConfigurationInput,
   ConfigurationNormalized,
   ConfigurationDefault,
-  Extension.Configurator.InputResolver<ConfigurationInputResolver$Func>
+  Extension.Configurator.InputResolverGeneric<ConfigurationInputResolver$Func>
 >
 
 export type ConfigurationInput = {

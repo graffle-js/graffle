@@ -1,7 +1,7 @@
 import { isPlainObject } from 'es-toolkit'
 import type { GraphQLError, OperationDefinitionNode, OperationTypeNode } from 'graphql'
-import type { Errors } from '../errors/__.js'
-import type { Grafaid } from './__.js'
+import type { Errors } from '../errors/_namespace.js'
+import type { Grafaid } from './_namespace.js'
 import { getOperationDefinition, normalizeDocumentToNode } from './document.js'
 import type { TypedDocument } from './typed-document/__.js'
 

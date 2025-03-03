@@ -41,19 +41,21 @@ export type TransportMethod<
        */
       <
         const name extends GetNames<$Context['transports']>,
-        const configurationInput extends $Context['transports']['registry'][name]['configurator']['input'] = {},
+        const configurationInput extends $Context['transports']['registry'][name]['configurator']['input'],
+        _IsNameChanged extends boolean = name extends $Context['transports']['current'] ? false : true,
+        _IsConfigured extends boolean = $Context['transports']['registry'][name]['configurator']['input'] extends configurationInput ? false : true,
         _IsChanged extends boolean =
-          name extends $Context['transports']['current'] ?
-            // undefined extends configurationInput ? false :
-            // TODO this would fail on input of optional properties
-            {} extends configurationInput        ? false :
-                                                   true :
-            true
+          _IsNameChanged extends false
+            ? _IsConfigured extends false
+              ? false
+              : true
+            : true
       >
         (name: name, configurationInput?: configurationInput):
           _IsChanged extends false
             ? Client<$Context> // todo optimize: access to current client type?
-            : Client<Transports.Configure<$Context, name, configurationInput>>
+            // todo: test passing no configuration input and it not messing up the types.
+            : Client<Transports.Configure<$Context, name, _IsConfigured extends true ? configurationInput : {}, true>>
     }
   : unknown)
 
@@ -99,12 +101,8 @@ export type GetNames<$ClientTransports extends ContextTransports> =
         ? 'Error: Transport registry is empty. Please add a transport.'
         : StringKeyof<$ClientTransports['registry']>
 
-export type AlreadyRegisteredError<
-  $TransportName extends string,
-> = `There is already a transport registered with the name "${$TransportName}".`
-
 // dprint-ignore
 export type ParameterGuardTransportAlreadyRegistered<$Context extends Context, $Transport extends Transports.Transport.Data> =
   $Transport['name'] extends keyof $Context['transports']['registry'] ?
-    [`Error: ${AlreadyRegisteredError<$Transport['name']>}`] :
+    [`Error: ${Transports.AlreadyRegisteredError<$Transport['name']>}`] :
     []

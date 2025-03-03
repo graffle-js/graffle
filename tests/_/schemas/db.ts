@@ -1,5 +1,5 @@
 import { GraphQLError } from 'graphql'
-import { Errors } from '../../../src/lib/errors/__.js'
+import { Errors } from '../../../src/lib/errors/_namespace.js'
 
 const date0 = new Date(0)
 

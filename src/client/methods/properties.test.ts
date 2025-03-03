@@ -1,12 +1,12 @@
 import { describe, expect, expectTypeOf } from 'vitest'
 import { test } from '../../../tests/_/helpers.js'
 import type { Context } from '../../context/context.js'
+import { type ContextEmpty, contextEmpty } from '../../context/ContextEmpty.js'
 import { type Configuration } from '../../context/fragments/configuration/_namespace.js'
 import {
   createPropertiesComputer,
   type PropertiesComputerTypeFunction,
 } from '../../context/fragments/properties/fragment.js'
-import { type ContextEmpty, contextEmpty } from '../../types/ContextEmpty.js'
 import { type Client_justContext } from '../client.js'
 
 export const propertiesStatic1 = { foo: `bar` }

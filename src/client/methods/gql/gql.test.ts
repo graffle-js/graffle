@@ -2,7 +2,7 @@ import { describe, expectTypeOf } from 'vitest'
 import { ATransport } from '../../../../tests/_/fixtures/transports.js'
 import { g0, test } from '../../../../tests/_/helpers.js'
 // import { Spy } from '../../../../tests/_/SpyExtension.js'
-import type { Grafaid } from '../../../lib/grafaid/__.js'
+import type { Grafaid } from '../../../lib/grafaid/_namespace.js'
 import { as } from '../../../lib/prelude.js'
 
 // todo test with custom scalars

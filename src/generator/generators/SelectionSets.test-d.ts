@@ -1,8 +1,8 @@
 import { assertType, test } from 'vitest'
 import type { DateScalar } from '../../../tests/_/fixtures/scalars.js'
 import { db } from '../../../tests/_/schemas/db.js'
-import type * as SelectionSets from '../../../tests/_/schemas/kitchen-sink/graffle/modules/selection-sets.js'
-import type { Schema } from '../../types/Schema/__.js'
+import type * as SelectionSets from '../../../tests/_/schemas/possible/graffle/modules/selection-sets.js'
+import type { Schema } from '../../types/Schema/_namespace.js'
 
 type Q = SelectionSets.Query
 type QWithDate = SelectionSets.Query<Schema.Scalar.Registry.AddScalar<Schema.Scalar.Registry.Empty, typeof DateScalar>>

@@ -27,10 +27,10 @@ export interface Context
   typeHookRequestResultDataTypes: unknown
 }
 
-export namespace Context {
-  // export const createReducer = <$Input>(
-  //   fragmentReducer: ContextFragments.Reducer<ContextFragment, $Input>,
-  // ): (context: Context, input: $Input) => Context => {
-  //   return (context, input) => ContextFragments.merge(context, fragmentReducer(context, input))
-  // }
-}
+// export namespace Context {
+//   // export const createReducer = <$Input>(
+//   //   fragmentReducer: ContextFragments.Reducer<ContextFragment, $Input>,
+//   // ): (context: Context, input: $Input) => Context => {
+//   //   return (context, input) => ContextFragments.merge(context, fragmentReducer(context, input))
+//   // }
+// }

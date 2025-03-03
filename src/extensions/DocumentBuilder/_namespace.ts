@@ -1,1 +1,1 @@
-export * as DocumentBuilder from './_exports.js'
+export * as DocumentBuilderKit from './_exports.js'

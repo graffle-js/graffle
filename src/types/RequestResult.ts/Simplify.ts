@@ -1,5 +1,5 @@
+import type { ContextEmpty } from '../../context/ContextEmpty.js'
 import type { AnyAndUnknownToNever } from '../../lib/prelude.js'
-import type { ContextEmpty } from '../ContextEmpty.js'
 
 export type SimplifyWithEmptyContext<T> = Simplify<ContextEmpty, T>
 

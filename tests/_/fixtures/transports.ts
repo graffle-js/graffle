@@ -1,4 +1,5 @@
 import { Extension } from '../../../src/entrypoints/extension.js'
+import type { Configurator } from '../../../src/lib/configurator/configurator.js'
 
 // ----------------------------
 // ATransportBuilder
@@ -31,6 +32,11 @@ export type BTransportBuilder = typeof BTransportBuilder
 export const BTransport = BTransportBuilder.return()
 
 export type BTransport = typeof BTransport
+// const x = BTransport.configurator.inputResolver({ current: {}, input: {} })
+// declare const y: Configurator.ApplyConfiguratorInputResolver$Func<BTransport['configurator'], {}, {}>
+// declare const z: { x?: 1 } & {}
+// z.
+// y.b
 
 // -------------------------------
 // RequiredConfigurationTransport

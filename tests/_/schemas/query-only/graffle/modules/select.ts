@@ -42,7 +42,7 @@ export namespace Select {
   //                                                Root
   // --------------------------------------------------------------------------------------------------
   //
-  export type Query<$SelectionSet extends $$SelectionSets.Query> = $$Utilities.DocumentBuilder.InferResult.Operation<
+  export type Query<$SelectionSet extends $$SelectionSets.Query> = $$Utilities.DocumentBuilderKit.InferResult.Operation<
     $SelectionSet,
     $$Schema.Schema,
     OperationTypeNode.QUERY

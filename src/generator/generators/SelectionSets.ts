@@ -2,12 +2,12 @@
 // todo: on union fields, JSDoc that mentions the syntax `on*`
 
 // todo import from '../../extensions/DocumentBuilder/kit/__.js'
-import { DocumentBuilder } from '../../extensions/DocumentBuilder/_namespace.js'
+import { DocumentBuilderKit } from '../../extensions/DocumentBuilder/_namespace.js'
 import { Code } from '../../lib/Code.js'
-import { Grafaid } from '../../lib/grafaid/__.js'
+import { Grafaid } from '../../lib/grafaid/_namespace.js'
 import { analyzeArgsNullability } from '../../lib/grafaid/schema/args.js'
 import { entries, pick, values } from '../../lib/prelude.js'
-import { Tex } from '../../lib/tex/__.js'
+import { Tex } from '../../lib/tex/_namespace.js'
 import { borderThin } from '../../lib/tex/tex.js'
 import type { Config } from '../config/config.js'
 import { identifiers } from '../helpers/identifiers.js'
@@ -98,7 +98,7 @@ export const ModuleGeneratorSelectionSets = createModuleGenerator(
 const Union = createCodeGenerator<{ type: Grafaid.Schema.UnionType }>(
   ({ config, type, code }) => {
     const fragmentsInlineType = type.getTypes().map((type) =>
-      `${DocumentBuilder.Select.InlineFragment.typeConditionPRefix}${type.name}?: ${
+      `${DocumentBuilderKit.Select.InlineFragment.typeConditionPRefix}${type.name}?: ${
         H.forwardTypeParameter$Scalars(type)
       }`
     ).join(`\n`)
@@ -148,7 +148,7 @@ const Interface = createCodeGenerator<{ type: Grafaid.Schema.InterfaceType }>(
     const implementorTypes = Grafaid.Schema.KindMap.getInterfaceImplementors(config.schema.kindMap, type)
     const onTypesRendered = implementorTypes.map(type =>
       H.outputFieldReference(
-        `${DocumentBuilder.Select.InlineFragment.typeConditionPRefix}${type.name}`,
+        `${DocumentBuilderKit.Select.InlineFragment.typeConditionPRefix}${type.name}`,
         renderName(type),
       )
     ).join(`\n`)
@@ -320,7 +320,7 @@ const renderFieldPropertyArguments = createCodeGenerator<
         ? `${lead} are required so you may omit this.`
         : `${lead} are required so you must include this.`
       const tsDoc = `Arguments for \`${field.name}\` field. ${tsDocMessageAboutRequired}`
-      code(Code.field(DocumentBuilder.Select.Arguments.key, argFieldsRendered, {
+      code(Code.field(DocumentBuilderKit.Select.Arguments.key, argFieldsRendered, {
         optional: argsAnalysis.isAllNullable,
         tsDoc,
       }))
@@ -341,7 +341,7 @@ const getInputFieldLike = (config: Config, inputFieldLike: Grafaid.Schema.Argume
 
 const getInputFieldKey = (inputFieldLike: Grafaid.Schema.Argument | Grafaid.Schema.InputField) => {
   return Grafaid.Schema.isEnumType(Grafaid.Schema.getNamedType(inputFieldLike.type))
-    ? DocumentBuilder.Select.Arguments.enumKeyPrefix + inputFieldLike.name
+    ? DocumentBuilderKit.Select.Arguments.enumKeyPrefix + inputFieldLike.name
     : inputFieldLike.name
 }
 

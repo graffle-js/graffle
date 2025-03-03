@@ -1,4 +1,4 @@
-import type { ConfigManager } from '../../config-manager/__.js'
+import type { ConfigManager } from '../../config-manager/_namespace.js'
 import { type Tuple } from '../../prelude.js'
 import type { Extension } from '../Extension/__.js'
 import { Overload } from '../Overload/_namespace.js'

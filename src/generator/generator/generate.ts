@@ -1,7 +1,7 @@
 import { createConfig } from '../config/config.js'
 import type { ConfigInit } from '../config/configInit.js'
-import { ModuleGenerator_ } from '../generators/_.js'
-import { ModuleGenerator__ } from '../generators/__.js'
+import { ModuleGenerator_exports } from '../generators/_exports.js'
+import { ModuleGenerator_namespace } from '../generators/_namespace.js'
 import { ModuleGeneratorClient } from '../generators/Client.js'
 import { ModuleGeneratorData } from '../generators/Data.js'
 import { ModuleGeneratorGlobal } from '../generators/global.js'
@@ -21,8 +21,8 @@ const moduleGenerators = [
   ModuleGeneratorData,
   ModuleGeneratorScalar,
   // Packaging Stuff
-  ModuleGenerator__,
-  ModuleGenerator_,
+  ModuleGenerator_namespace,
+  ModuleGenerator_exports,
   // Schema Stuff
   ModuleGeneratorSchema,
   ModuleGeneratorSchemaDrivenDataMap,
@@ -34,8 +34,8 @@ const moduleGenerators = [
   ModuleGeneratorMethodsDocument,
 ]
 
-export const generate = async (input: ConfigInit) => {
-  const config = await createConfig(input)
+export const generate = async (init: ConfigInit) => {
+  const config = await createConfig(init)
 
   const generatedModules = await Promise.all(
     moduleGenerators

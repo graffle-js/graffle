@@ -1,5 +1,5 @@
 import type { Writable } from 'type-fest'
-import type { ConfigManager } from '../../config-manager/__.js'
+import type { ConfigManager } from '../../config-manager/_namespace.js'
 import { Configurator } from '../../configurator/configurator.js'
 import { createMutableBuilder } from '../../mutableBuilder.js'
 import type { _, Tuple } from '../../prelude.js'

@@ -1,5 +1,5 @@
-import { partitionAndAggregateErrors } from '../../errors/_.js'
-import { Errors } from '../../errors/__.js'
+import { partitionAndAggregateErrors } from '../../errors/_exports.js'
+import { Errors } from '../../errors/_namespace.js'
 import { createDeferred } from '../../prelude.js'
 import { casesExhausted } from '../../prelude.js'
 import {

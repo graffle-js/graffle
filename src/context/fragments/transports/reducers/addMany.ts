@@ -2,12 +2,7 @@ import type { Anyware } from '../../../../lib/anyware/_namespace.js'
 import type { Tuple, Writeable } from '../../../../lib/prelude.js'
 import type { RequestPipeline } from '../../../../requestPipeline/RequestPipeline.js'
 import type { Transport } from '../dataType/_namespace.js'
-import type {
-  AlreadyRegisteredError,
-  ContextFragment,
-  ContextTransports_Configurations,
-  ContextTransports_Registry,
-} from '../fragment.js'
+import type { ContextFragment, ContextTransports_Configurations, ContextTransports_Registry } from '../fragment.js'
 
 export const addMany = <
   context extends ContextFragment,
@@ -71,11 +66,12 @@ export type AddMany<
       {
 
         readonly configurations:
-          & Tuple.IndexByToValue2<$Transports, 'name', 'configurator', 'default'>
+          & Tuple.IndexByToValueDepth2<$Transports, 'name', 'configurator', 'default'>
+          // shallow merge + avoids more type instantiations
           & {
               [
                 _ in keyof $Context['transports']['configurations']
-                  as _ extends keyof Tuple.IndexByToValue2<$Transports, 'name', 'configurator', 'default'>
+                  as _ extends keyof Tuple.IndexByToValueDepth2<$Transports, 'name', 'configurator', 'default'>
                     ? never
                     : _
               ]:
@@ -90,3 +86,7 @@ export type AddMany<
       } :
     $Context[_]
 }
+
+export type AlreadyRegisteredError<
+  $TransportName extends string,
+> = `There is already a transport registered with the name "${$TransportName}".`

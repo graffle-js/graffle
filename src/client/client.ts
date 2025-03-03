@@ -1,5 +1,5 @@
-import { context } from '@opentelemetry/api'
 import type { Context } from '../context/context.js'
+import { type ContextEmpty, contextEmpty } from '../context/ContextEmpty.js'
 import { Configuration } from '../context/fragments/configuration/_namespace.js'
 import { Extensions } from '../context/fragments/extensions/_namespace.js'
 import type { Extension } from '../context/fragments/extensions/dataType/_namespace.js'
@@ -12,9 +12,8 @@ import { Anyware } from '../lib/anyware/_namespace.js'
 import { getOperationType } from '../lib/grafaid/document.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
 import type { RequestPipeline } from '../requestPipeline/RequestPipeline.js'
-import { type ContextEmpty, contextEmpty } from '../types/ContextEmpty.js'
 import { type ContextFragment, ContextFragments } from '../types/ContextFragment.js'
-import { handle } from './handle.js'
+import { handleOutput } from './handle.js'
 import { GqlMethod } from './methods/gql/gql.js'
 import { GqlMethodSendMethod } from './methods/gql/send.js'
 import { ScalarMethod } from './methods/scalars.js'
@@ -170,7 +169,7 @@ export const createWithContext = <$Context extends Context>(
           return copy(Transports.configureCurrentOrThrow(context, input[1]))
         }
         case TransportMethod.overloadCase.setCurrent: {
-          return copy(Transports.setCurrent(context, input[1], input[2]))
+          return copy(Transports.setCurrentAndOptionallyConfigure(context, input[1], input[2]))
         }
         case TransportMethod.overloadCase.addType: {
           return copy(Transports.addMany(context, [input[1]]))
@@ -215,7 +214,7 @@ export const createWithContext = <$Context extends Context>(
             interceptors: context.requestPipelineInterceptors,
           })
 
-          return handle(context, result)
+          return handleOutput(context, result)
         },
       }
     }) as any,

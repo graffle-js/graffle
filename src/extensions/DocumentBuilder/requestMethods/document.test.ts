@@ -1,8 +1,8 @@
 import { describe, expect, test } from 'vitest'
 import { db } from '../../../../tests/_/schemas/db.js'
-import { Graffle } from '../../../../tests/_/schemas/kitchen-sink/graffle/__.js'
-import { schema } from '../../../../tests/_/schemas/kitchen-sink/schema.js'
-import type { Errors } from '../../../lib/errors/__.js'
+import { Graffle } from '../../../../tests/_/schemas/possible/graffle/__.js'
+import { schema } from '../../../../tests/_/schemas/possible/schema.js'
+import type { Errors } from '../../../lib/errors/_namespace.js'
 import { TransportMemory } from '../../TransportMemory/TransportMemory.js'
 
 // todo test with custom scalars

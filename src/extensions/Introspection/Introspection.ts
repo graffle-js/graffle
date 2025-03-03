@@ -5,7 +5,7 @@ import type { Configuration } from '../../context/fragments/configuration/_names
 import type { Properties } from '../../context/fragments/properties/_namespace.js'
 import { Extension } from '../../entrypoints/extension.js'
 import type { Context } from '../../entrypoints/utilities-for-generated.js'
-import type { InputIntrospectionOptions } from '../../generator/_.js'
+import type { InputIntrospectionOptions } from '../../generator/_exports.js'
 
 export type ConfigurationInput = {
   /**

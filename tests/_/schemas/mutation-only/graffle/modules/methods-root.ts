@@ -11,7 +11,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutput<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
           $$Utilities.AssertExtendsObject<$SelectionSet>,
           $$Schema.Schema<$Context['scalars']>
         >
@@ -38,7 +38,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
           { id: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -55,7 +55,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
           { idNonNull: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,

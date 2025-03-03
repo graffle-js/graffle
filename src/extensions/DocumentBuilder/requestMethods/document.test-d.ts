@@ -1,6 +1,6 @@
 import { expectTypeOf, test } from 'vitest'
-import { Graffle } from '../../../../tests/_/schemas/kitchen-sink/graffle/__.js'
 import { MutationOnly } from '../../../../tests/_/schemas/mutation-only/graffle/__.js'
+import { Graffle } from '../../../../tests/_/schemas/possible/graffle/__.js'
 import { QueryOnly } from '../../../../tests/_/schemas/query-only/graffle/__.js'
 
 const g = Graffle.create({ check: { preflight: false } })

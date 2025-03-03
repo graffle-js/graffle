@@ -1,5 +1,5 @@
 // todo remove use of Utils.Aug when schema errors not in use
-import { Grafaid } from '../../lib/grafaid/__.js'
+import { Grafaid } from '../../lib/grafaid/_namespace.js'
 import { capitalizeFirstLetter, entries } from '../../lib/prelude.js'
 import type { Config } from '../config/config.js'
 import { identifiers } from '../helpers/identifiers.js'

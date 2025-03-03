@@ -5,7 +5,7 @@ import {
 } from '../../../../tests/_/fixtures/transports.js'
 import { g0 } from '../../../../tests/_/helpers.js'
 import { assertType } from '../../../lib/assert-equal.js'
-import type { Grafaid } from '../../../lib/grafaid/__.js'
+import type { Grafaid } from '../../../lib/grafaid/_namespace.js'
 import { undefinedAs } from '../../../lib/prelude.js'
 import type { Configuration } from '../configuration/_namespace.js'
 

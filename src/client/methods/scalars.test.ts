@@ -1,10 +1,10 @@
 import { expect, expectTypeOf } from 'vitest'
 import { AScalar, BScalar } from '../../../tests/_/fixtures/scalars.js'
 import { g0, test } from '../../../tests/_/helpers.js'
+import { contextEmpty } from '../../context/ContextEmpty.js'
 import { type GlobalRegistry } from '../../entrypoints/utilities-for-generated.js'
-import { contextEmpty } from '../../types/ContextEmpty.js'
-import type { Schema } from '../../types/Schema/__.js'
-import type { SchemaDrivenDataMap } from '../../types/SchemaDrivenDataMap/__.js'
+import type { Schema } from '../../types/Schema/_namespace.js'
+import type { SchemaDrivenDataMap } from '../../types/SchemaDrivenDataMap/_namespace.js'
 import type { ScalarMethod } from './scalars.js'
 
 declare global {

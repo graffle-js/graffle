@@ -3,7 +3,7 @@ export type Writeable<$Object> = {
 }
 import type { HasRequiredKeys, IsAny, IsEmptyObject, IsNever, IsUnknown, Simplify } from 'type-fest'
 
-import type { ConfigManager } from './config-manager/__.js'
+import type { ConfigManager } from './config-manager/_namespace.js'
 
 /* eslint-disable */
 export type RemoveIndex<T> = {
@@ -324,18 +324,18 @@ export namespace Tuple {
   export type IndexBy<
     $Arr extends readonly any[],
     $Key extends keyof $Arr[number],
-  > = $Arr extends [infer __first__ extends $Arr[number], ...infer __rest__ extends $Arr[number][]]
-    ? { [_ in __first__[$Key]]: __first__ } & IndexBy<__rest__, $Key>
+  > = $Arr extends readonly [infer __first__ extends $Arr[number], ...infer __rest__ extends $Arr[number][]]
+    ? { readonly [_ in __first__[$Key]]: __first__ } & IndexBy<__rest__, $Key>
     : {}
 
-  export type IndexByToValue2<
+  export type IndexByToValueDepth2<
     $Arr extends readonly any[],
     $Key extends keyof $Arr[number],
     $ValueKey1 extends keyof $Arr[number],
     $ValueKey2 extends keyof $Arr[number][$ValueKey1],
-  > = $Arr extends [infer __first__ extends $Arr[number], ...infer __rest__ extends $Arr[number][]] ?
-      & { [_ in __first__[$Key]]: __first__[$Key][$ValueKey1][$ValueKey2] }
-      & IndexByToValue2<__rest__, $Key, $ValueKey1, $ValueKey2>
+  > = $Arr extends readonly [infer __first__ extends $Arr[number], ...infer __rest__ extends readonly $Arr[number][]] ?
+      & { readonly [_ in __first__[$Key]]: __first__[$ValueKey1][$ValueKey2] }
+      & IndexByToValueDepth2<__rest__, $Key, $ValueKey1, $ValueKey2>
     : {}
 
   export type IndexKey = number | `${number}`

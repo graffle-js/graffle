@@ -1,4 +1,4 @@
-import type { Schema } from '../../../../types/Schema/__.js'
+import type { Schema } from '../../../../types/Schema/_namespace.js'
 import type { Include, Skip } from './_.js'
 
 export interface Definition {

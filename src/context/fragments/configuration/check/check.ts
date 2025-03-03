@@ -37,7 +37,7 @@ export type Preflight<
 // dprint-ignore
 export type Preflight_<
   $Transports extends Transports.ContextFragment['transports'],
-  $SuccessValue = true,
+  $SuccessValue,
 > =
   $Transports extends Transports.ContextFragmentTransportsEmpty['transports']
     ? Errors.PreflightCheckNoTransportsRegistered
@@ -48,7 +48,7 @@ export type Preflight_<
             ? $SuccessValue
             : Errors.PreflightCheckTransportNotReady<$Transports['current']>
           : never // Should never happen
-        : never // Should never happen
+        : [never, $Transports['current'], $Transports['configurations']] // Should never happen
       : Errors.PreflightCheckNoTransportSelected
 
 export namespace Errors {

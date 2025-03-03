@@ -1,6 +1,6 @@
 // todo jsdoc
 import { entries } from '../../lib/prelude.js'
-import { Tex } from '../../lib/tex/__.js'
+import { Tex } from '../../lib/tex/_namespace.js'
 import { identifiers } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { renderName } from '../helpers/render.js'

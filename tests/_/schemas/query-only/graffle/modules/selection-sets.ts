@@ -50,13 +50,13 @@ export interface Query<
   /**
    * Select the `id` field on the `Query` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
-  id?: Query.id$Expanded<_$Scalars> | $$Utilities.DocumentBuilder.Select.SelectAlias.SelectAlias<Query.id<_$Scalars>>
+  id?: Query.id$Expanded<_$Scalars> | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.id<_$Scalars>>
   /**
    * Select the `idNonNull` field on the `Query` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
   idNonNull?:
     | Query.idNonNull$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilder.Select.SelectAlias.SelectAlias<Query.idNonNull<_$Scalars>>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.idNonNull<_$Scalars>>
 
   /**
    * Inline fragments for field groups.
@@ -76,27 +76,27 @@ export interface Query<
    * @see https://graphql.org/learn/queries/#meta-fields
    */
   __typename?:
-    | $$Utilities.DocumentBuilder.Select.Indicator.NoArgsIndicator$Expanded
-    | $$Utilities.DocumentBuilder.Select.SelectAlias.SelectAlias<
-      $$Utilities.DocumentBuilder.Select.Indicator.NoArgsIndicator
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator$Expanded
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
+      $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     >
 }
 
 export interface Query$FragmentInline<
   _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends Query<_$Scalars>, $$Utilities.DocumentBuilder.Select.Directive.$Groups.InlineFragment.Fields {
+> extends Query<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace Query {
   export type id<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    | $$Utilities.DocumentBuilder.Select.Indicator.NoArgsIndicator
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Scalars>
 
   export interface id$SelectionSet<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilder.Select.Bases.Base {}
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
 
@@ -108,7 +108,7 @@ export namespace Query {
   export type id$Expanded<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
-    | $$Utilities.DocumentBuilder.Select.Indicator.NoArgsIndicator
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Scalars>
   >
 
@@ -117,12 +117,12 @@ export namespace Query {
   export type idNonNull<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > =
-    | $$Utilities.DocumentBuilder.Select.Indicator.NoArgsIndicator
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | idNonNull$SelectionSet<_$Scalars>
 
   export interface idNonNull$SelectionSet<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilder.Select.Bases.Base {}
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
 
@@ -134,7 +134,7 @@ export namespace Query {
   export type idNonNull$Expanded<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > = $$Utilities.Simplify<
-    | $$Utilities.DocumentBuilder.Select.Indicator.NoArgsIndicator
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | idNonNull$SelectionSet<_$Scalars>
   >
 }

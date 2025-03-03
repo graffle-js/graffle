@@ -45,7 +45,7 @@ export type Add<
           ? $ConfigurationInput[_] extends object ? {
               // @ts-expect-error Non-index type being used
               configurator: $Context['configuration'][_]['configurator']
-              current: Configurator.ApplyInputResolver$Func<
+              current: Configurator.ApplyConfiguratorInputResolver$Func<
                 // @ts-expect-error Non-index type being used
                 $Context['configuration'][_]['configurator'],
                 // @ts-expect-error Non-index type being used

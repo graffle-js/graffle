@@ -9,7 +9,7 @@ export type ConfiguratorAny = Configurator<
   Configurator.Configuration,
   Configurator.Configuration,
   Configurator.Configuration,
-  Configurator.InputResolver<
+  Configurator.InputResolverGeneric<
     Configurator.InputResolver.$Func<
       Configurator.Configuration,
       Configurator.Configuration,
@@ -26,8 +26,11 @@ export interface Configurator<
                                     Required<$Input>,
   $Default 		              extends Partial<$Normalized> =
                                     Partial<$Normalized>,
-	$InputResolver            extends Configurator.InputResolver<Configurator.InputResolver.$Func<$Input, $Normalized, $Default>> =
-                                    Configurator.InputResolver<Configurator.InputResolver.Standard_ShallowMerge$Func<$Input, $Normalized, $Default>>
+	$InputResolver            extends Configurator.InputResolverGeneric<Configurator.InputResolver.$Func<$Input, $Normalized, $Default>> =
+                                    Configurator.InputResolverGeneric<Configurator.InputResolver.Standard_ShallowMerge$Func<$Input, $Normalized, $Default>>
+  // $InputResolver            extends Configurator.InputResolverTyped<Configurator.InputResolver.$Func<$Input, $Normalized, $Default>> =
+                                    // Configurator.InputResolverTyped<Configurator.InputResolver.Standard_ShallowMerge$Func<$Input, $Normalized, $Default>>
+
 > {
   readonly input: $Input
   readonly normalized: $Normalized
@@ -161,7 +164,7 @@ export namespace Configurator {
 					$Configurator['normalized'],
 					$Configurator['default']
 				>,
-      ) => Builder<Configurator<$Configurator['input'], $Configurator['normalized'], $Configurator['default'], InputResolver<$Func>>>
+      ) => Builder<Configurator<$Configurator['input'], $Configurator['normalized'], $Configurator['default'], InputResolverGeneric<$Func>>>
       
       return: () => $Configurator
   }
@@ -169,7 +172,7 @@ export namespace Configurator {
   // ----------------------------
   // Input Resolver
   // ----------------------------
-  export interface InputResolver<
+  export interface InputResolverGeneric<
     $$Func extends InputResolver.$Func = InputResolver.Standard_ShallowMerge$Func<
       Configuration,
       Configuration,
@@ -180,15 +183,33 @@ export namespace Configurator {
     [$.InputResolver$FuncSymbol]: $$Func
   }
 
+  export interface InputResolverTyped<
+    $$Func extends InputResolver.$Func = InputResolver.Standard_ShallowMerge$Func<
+      Configuration,
+      Configuration,
+      Configuration
+    >,
+  > {
+    <
+      current extends Configuration,
+      input extends Configuration,
+    >(parameters: { current: current; input: input }): ApplyInputResolver$Func<$$Func, current, input>
+    [$.InputResolver$FuncSymbol]: $$Func
+  }
+
   export namespace InputResolver {
     export interface Standard_ShallowMerge$Func<
       $Input extends Configuration,
       $Normalized extends $Input,
       $Default extends Partial<$Normalized>,
     > extends $Func<$Input, $Normalized, $Default> {
-      return: Standard_ShallowMerge<this['parameters']>
+      return: Standard_ShallowMerge<
+        // @ts-expect-error
+        this['parameters']
+      >
     }
 
+    // todo use a prelude shallowMergeWithoutUndefined
     // dprint-ignore
     export type Standard_ShallowMerge<$Parameters extends Parameters> =
       & $Parameters['input']
@@ -206,7 +227,7 @@ export namespace Configurator {
         $Normalized extends $Input,
         $Default extends Partial<$Normalized>,
         $InputResolver$Func extends $Func<$Input, $Normalized, $Default> = never,
-      >(inputResolver: Init<$Input, $Normalized, $Default>): InputResolver<$InputResolver$Func>
+      >(inputResolver: Init<$Input, $Normalized, $Default>): InputResolverGeneric<$InputResolver$Func>
     }
 
     export interface Init<
@@ -219,12 +240,13 @@ export namespace Configurator {
 
     export type $FuncSymbol = typeof $.InputResolver$FuncSymbol
 
+    // todo we cannot strongly type parameters becaues of case of input: {a?:1} + normalized: {a?:1} + input: {} <-- leads to {a?:1} instead of {}! because intersection doesn't constrain to more specific type.
     export interface $Func<
       $Input extends Configuration = Configuration,
       $Normalized extends $Input = $Input,
       $Default extends Partial<$Normalized> = Partial<$Normalized>,
     > {
-      parameters: Parameters<$Input, $Normalized, $Default>
+      parameters: unknown // Parameters<$Input, $Normalized, $Default>
       return: object
     }
 
@@ -242,12 +264,23 @@ export namespace Configurator {
   // Helpers
   // -------------
 
-  export type ApplyInputResolver$Func<
+  export type ApplyConfiguratorInputResolver$Func<
     $Configurator extends Configurator,
     $Current extends $Configurator['normalizedIncremental'],
     $Input extends $Configurator['input'],
+    __ = ApplyInputResolver$Func<
+      $Configurator['inputResolver'][InputResolver.$FuncSymbol],
+      $Current,
+      $Input
+    >,
+  > = __
+
+  export type ApplyInputResolver$Func<
+    $$Func extends InputResolver.$Func,
+    $Current extends Configuration,
+    $Input extends Configuration,
     __ = (
-      & $Configurator['inputResolver'][InputResolver.$FuncSymbol]
+      & $$Func
       & {
         parameters: {
           current: $Current

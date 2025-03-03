@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 import { describe, expect, test, vi } from 'vitest'
-import { Errors } from '../../errors/__.js'
+import { Errors } from '../../errors/_namespace.js'
 import type { ContextualError } from '../../errors/ContextualError.js'
 import {
   initialInput2,

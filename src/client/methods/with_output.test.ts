@@ -2,7 +2,7 @@
 import { type ExecutionResult } from 'graphql'
 import { describe } from 'node:test'
 import { expect, expectTypeOf } from 'vitest'
-import { Graffle } from '../../../tests/_/schemas/kitchen-sink/graffle/__.js'
+import { Graffle } from '../../../tests/_/schemas/possible/graffle/__.js'
 // import { schema } from '../../../../tests/_/schemas/kitchen-sink/schema.js'
 import { ATransport } from '../../../tests/_/fixtures/transports.js'
 import { g0, test } from '../../../tests/_/helpers.js'

@@ -1,7 +1,7 @@
 import { Code } from '../../lib/Code.js'
-import { Grafaid } from '../../lib/grafaid/__.js'
-import { Tex } from '../../lib/tex/__.js'
-import { SchemaDrivenDataMap } from '../../types/SchemaDrivenDataMap/__.js'
+import { Grafaid } from '../../lib/grafaid/_namespace.js'
+import { Tex } from '../../lib/tex/_namespace.js'
+import { SchemaDrivenDataMap } from '../../types/SchemaDrivenDataMap/_namespace.js'
 import type { Config } from '../config/config.js'
 
 export const renderInlineType = (type: Grafaid.Schema.Types): string => {

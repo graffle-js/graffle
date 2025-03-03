@@ -12,13 +12,14 @@ import { GraffleBare } from '../../src/entrypoints/presets/bare.js'
 // import type { SchemaDrivenDataMap } from '../../src/entrypoints/utilities-for-generated.js'
 // import { TransportMemory } from '../../src/extensions/TransportMemory/TransportMemory.js'
 // import type { ConfigManager } from '../../src/lib/config-manager/__.js'
-import { Grafaid } from '../../src/lib/grafaid/__.js'
+import { Grafaid } from '../../src/lib/grafaid/_namespace.js'
 import { CONTENT_TYPE_REC } from '../../src/lib/grafaid/http/http.js'
 import { type SchemaService, serveSchema } from './lib/serveSchema.js'
 // import { db } from './schemas/db.js'
 // import { Graffle as KitchenSink } from './schemas/kitchen-sink/graffle/__.js'
 // import { schema as kitchenSinkSchema } from './schemas/kitchen-sink/schema.js'
 import type { IntrospectionQuery } from 'graphql'
+import { GraffleKit } from '../../src/entrypoints/kit.js'
 import { schema } from './schemas/pokemon/schema.js'
 
 interface Project {
@@ -64,6 +65,7 @@ export const mockIntrospectionData = {
 interface Fixtures {
   fetch: Mock<(request: Request) => Promise<Response>>
   g0: ClientEmpty
+  c0: GraffleKit.Context.ContextEmpty
   pokemonService: SchemaService
   project: Project
   // graffle: GraffleMinimal.Client.With<{
@@ -88,6 +90,7 @@ interface Fixtures {
 export const g0 = GraffleBare.create()
 
 export const test = testBase.extend<Fixtures>({
+  c0: GraffleKit.Context.contextEmpty,
   project: async ({}, use) => { // eslint-disable-line
     /**
      * Package managers (e.g. PnPM) augment the PATH when running scripts so that within

@@ -1,1 +1,1 @@
-export { DocumentBuilder } from '../../../extensions/DocumentBuilder/_namespace.js'
+export { DocumentBuilderKit } from '../../../extensions/DocumentBuilder/_namespace.js'

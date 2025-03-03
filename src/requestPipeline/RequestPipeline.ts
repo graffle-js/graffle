@@ -3,11 +3,11 @@ import type { Context } from '../context/context.js'
 import type { GraffleExecutionResultEnvelope } from '../context/fragments/configuration/output/handle.js'
 import { Anyware } from '../lib/anyware/_namespace.js'
 import type { Config } from '../lib/anyware/PipelineDefinition/Config.js'
-import type { Grafaid } from '../lib/grafaid/__.js'
+import type { Grafaid } from '../lib/grafaid/_namespace.js'
 import { normalizeRequestToNode } from '../lib/grafaid/request.js'
 import { isAbortError } from '../lib/prelude.js'
-import { decodeResultData } from './CustomScalars/decode.js'
-import { encodeRequestVariables } from './CustomScalars/encode.js'
+import { decodeResultData } from './decode.js'
+import { encodeRequestVariables } from './encode.js'
 
 export namespace RequestPipeline {
   export const stepName = {

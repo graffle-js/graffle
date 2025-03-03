@@ -1,6 +1,6 @@
 import type { IsNever } from 'type-fest'
 import type { Schema, TypeFunction } from '../../entrypoints/utilities-for-generated.js'
-import type { ConfigManager } from '../../lib/config-manager/__.js'
+import type { ConfigManager } from '../../lib/config-manager/_namespace.js'
 import type { Values } from '../../lib/prelude.js'
 import type { TSErrorDescriptive } from '../../lib/ts-error.js'
 

@@ -1,6 +1,6 @@
-import type { Grafaid } from '../../../../lib/grafaid/__.js'
+import type { Grafaid } from '../../../../lib/grafaid/_namespace.js'
 import { Nodes } from '../../../../lib/grafaid/_Nodes.js'
-import type { SchemaDrivenDataMap } from '../../../../types/SchemaDrivenDataMap/__.js'
+import type { SchemaDrivenDataMap } from '../../../../types/SchemaDrivenDataMap/_namespace.js'
 import type { Select } from '../../Select/__.js'
 import { createOperationContext } from '../context.js'
 import { type GraphQLPreOperationMapper } from '../mapper.js'

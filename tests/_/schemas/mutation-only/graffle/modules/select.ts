@@ -43,7 +43,7 @@ export namespace Select {
   // --------------------------------------------------------------------------------------------------
   //
   export type Mutation<$SelectionSet extends $$SelectionSets.Mutation> =
-    $$Utilities.DocumentBuilder.InferResult.Operation<$SelectionSet, $$Schema.Schema, OperationTypeNode.MUTATION>
+    $$Utilities.DocumentBuilderKit.InferResult.Operation<$SelectionSet, $$Schema.Schema, OperationTypeNode.MUTATION>
   //                                            OutputObject
   // --------------------------------------------------------------------------------------------------
   //

@@ -1,5 +1,5 @@
 import { assertEqual } from '../assert-equal.js'
-import type { ConfigManager } from './__.js'
+import type { ConfigManager } from './_namespace.js'
 
 interface a1 {
   a: { b: number }

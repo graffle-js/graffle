@@ -11,7 +11,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutput<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           $$Utilities.AssertExtendsObject<$SelectionSet>,
           $$Schema.Schema<$Context['scalars']>
         >
@@ -38,7 +38,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { battles: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -55,7 +55,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { beings: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -72,7 +72,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { pokemonByName: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -89,7 +89,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { pokemons: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -106,7 +106,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { trainerByName: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -123,7 +123,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { trainers: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -142,7 +142,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutput<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
           $$Utilities.AssertExtendsObject<$SelectionSet>,
           $$Schema.Schema<$Context['scalars']>
         >
@@ -169,7 +169,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
           { addPokemon: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,

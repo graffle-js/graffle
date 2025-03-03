@@ -1,7 +1,7 @@
 import { camelCase } from 'es-toolkit'
 import { join } from 'node:path'
-import { Generator } from '../../../src/generator/__.js'
-import { Grafaid } from '../../../src/lib/grafaid/__.js'
+import { Generator } from '../../../src/generator/_namespace.js'
+import { Grafaid } from '../../../src/lib/grafaid/_namespace.js'
 
 const generate = async (
   input: {
@@ -68,8 +68,10 @@ await generate({
 })
 
 await generate({
-  dirName: `kitchen-sink`,
-  dirNameName: false,
+  dirName: `possible`,
+  input: {
+    nameNamespace: true,
+  },
   // input: {
   //   scalars: `./kitchen-sink/scalars.ts`,
   // },

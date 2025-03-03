@@ -1,4 +1,4 @@
-import type { Grafaid } from '../../../lib/grafaid/__.js'
+import type { Grafaid } from '../../../lib/grafaid/_namespace.js'
 import { isString, type SimplifyNullable } from '../../../lib/prelude.js'
 import type { HandleOutput } from '../../handle.js'
 

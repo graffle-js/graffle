@@ -44,22 +44,27 @@ export type Configure<
   $Context extends ContextFragment,
   $TransportName extends string,
   $ConfigurationInput extends Configurator.Configuration,
+  $SetCurrent extends boolean = false,
 > = {
-  [__k__ in keyof $Context]:
-    __k__ extends 'transports' ?
+  [__CK__ in keyof $Context]:
+    __CK__ extends 'transports' ?
       {
-        [__k2__ in keyof $Context['transports']]:
-          __k2__ extends 'configurations' ? {
-            [__k3__ in keyof $Context['transports']['configurations']]:
-              __k3__ extends $TransportName ?
-                Configurator.ApplyInputResolver$Func<
+        [__TK__ in keyof $Context['transports']]:
+          __TK__ extends 'current'
+            ? $SetCurrent extends true
+              ? $TransportName
+              : $Context['transports']['current'] :
+          __TK__ extends 'configurations' ? {
+            [__TCK__ in keyof $Context['transports']['configurations']]:
+              __TCK__ extends $TransportName ?
+                Configurator.ApplyConfiguratorInputResolver$Func<
                   $Context['transports']['registry'][$TransportName]['configurator'],
                   $Context['transports']['configurations'][$TransportName],
                   $ConfigurationInput
                 >
-              : $Context['transports']['configurations'][__k3__]
+              : $Context['transports']['configurations'][__TCK__]
           } :
-          $Context['transports'][__k2__]
+          $Context['transports'][__TK__]
       } :
-    $Context[__k__]
+    $Context[__CK__]
 }

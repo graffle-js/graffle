@@ -1,5 +1,5 @@
 // import type { TSErrorDescriptive } from '../../lib/ts-error.js'
-import type { Schema } from './__.js'
+import type { Schema } from './_namespace.js'
 import type { __typename } from './nodes/__typename.js'
 import type { List } from './nodes/List.js'
 import type { Nullable } from './nodes/Nullable.js'
