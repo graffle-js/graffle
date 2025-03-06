@@ -24,10 +24,11 @@ export const readExampleFiles = (name?: string) =>
     pattern: `./examples/*/*.ts`,
     options: { ignore: examplesIgnorePatterns },
   }).then(files => {
-    if (name) {
-      return files.filter(file => file.path.full.match(name))
+    const filesFiltered = name ? files.filter(file => file.path.full.match(name)) : files
+    return {
+      all: files,
+      filtered: filesFiltered,
     }
-    return files
   })
 
 export const readExamples = async (name?: string): Promise<Example[]> => {
