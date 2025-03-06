@@ -1,6 +1,6 @@
 import { pascalCase } from 'es-toolkit'
 import * as Path from 'node:path'
-import { Graffle } from '../../entrypoints/__Graffle.js'
+import { Graffle } from '../../entrypoints/main_Graffle_.js'
 import { Introspection } from '../../extensions/Introspection/Introspection.js'
 import { ConfigManager } from '../../lib/config-manager/_namespace.js'
 import { fileExists, type Fs, isPathToADirectory, toAbsolutePath, toFilePath } from '../../lib/fsp.js'

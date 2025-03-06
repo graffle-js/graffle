@@ -8,12 +8,12 @@ import { createBody } from './createBody.js'
 /**
  * @see https://github.com/jaydenseric/graphql-multipart-request-spec
  */
-export const Upload = Extension(`Upload`)
-  .requestInterceptor(async ({ pack }) => {
+export const Upload = Extension
+  .create(`Upload`)
+  .requestInterceptor(async function Upload1({ pack }) {
     if (!isUploadRequest(pack.input.request)) return pack()
 
     // TODO we can probably get file upload working for in-memory schemas too :)
-    // @ts-expect-error fixme
     if (pack.input.transportType !== `http`) {
       throw new Error(`Must be using http transport to use "Upload" scalar.`)
     }
@@ -25,13 +25,20 @@ export const Upload = Extension(`Upload`)
     return await pack({
       using: {
         // @ts-expect-error fixme
-        body: (input) => {
+        body(input) {
+          // console.log(1000)
           // TODO we can probably get file upload working for in-memory schemas too :)
-          // @ts-expect-error fixme
           if (pack.input.transportType !== `http`) {
             throw new Error(`Must be using http transport to use "Upload" scalar.`)
           }
 
+          // console.log(
+          //   0,
+          //   createBody({
+          //     query: input.query,
+          //     variables: input.variables!,
+          //   }),
+          // )
           return createBody({
             query: input.query,
             variables: input.variables!,
@@ -40,13 +47,17 @@ export const Upload = Extension(`Upload`)
       },
       input: {
         ...pack.input,
-        // @ts-expect-error fixme
-        headers: {
-          'content-type': ``,
+        transport: {
+          ...pack.input.transport,
+          headers: {
+            ...pack.input.transport.headers,
+            'content-type': ``,
+          },
         },
       },
     })
   })
+  .return()
 
 const isUploadRequest = (request: RequestAnalyzedInput) => {
   if (!request.variables) return false

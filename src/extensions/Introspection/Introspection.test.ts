@@ -1,13 +1,12 @@
 import type { IntrospectionQuery } from 'graphql'
-import { expect, test } from 'vitest'
-import { schema } from '../../../tests/_/schemas/minimal/schema.js'
-import { Graffle } from '../../entrypoints/__Graffle.js'
+import { expect } from 'vitest'
+import { test } from '../../../tests/_/helpers.js'
+import { GraffleBasic } from '../../entrypoints/presets/basic.js'
 import { assertEqual } from '../../lib/assert-equal.js'
-import { TransportMemory } from '../TransportMemory/TransportMemory.js'
 import { Introspection } from './Introspection.js'
 
-test(`adds an introspection method that introspects the schema`, async () => {
-  const graffle = Graffle.create().use(TransportMemory).transport(`memory`, { schema }).use(Introspection())
+test(`adds an introspection method that introspects the schema`, async ({ schemas: { minimal: schema } }) => {
+  const graffle = GraffleBasic.create().transport(`memory`, { schema }).use(Introspection())
   const result = await graffle.introspect()
   expect(result).toMatchSnapshot()
   assertEqual<typeof result, IntrospectionQuery | null>()

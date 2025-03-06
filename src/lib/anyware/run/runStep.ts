@@ -81,13 +81,13 @@ export const runStep = async (
 
     debugExtension(`start`)
     let hookFailed = false
-    const trigger = StepTrigger.create(inputOriginalOrFromExtension, (extensionInput) => {
-      debugExtension(`extension calls this hook`, extensionInput)
+    const trigger = StepTrigger.create(inputOriginalOrFromExtension, (extensionParameters) => {
+      debugExtension(`extension calls this hook`, extensionParameters)
 
-      const inputResolved = extensionInput?.input ?? inputOriginalOrFromExtension
+      const inputResolved = extensionParameters?.input ?? inputOriginalOrFromExtension
       const customSlotsResolved = {
         ...customSlots,
-        ...extensionInput?.using,
+        ...extensionParameters?.using,
       }
 
       // [1]
@@ -142,8 +142,8 @@ export const runStep = async (
             if (!hook) throw new Error(`Hook not found in envelope: ${name}`)
             // todo use inputResolved ?
             const result = await hook({
-              ...extensionInput,
-              input: extensionInput?.input ?? inputOriginalOrFromExtension,
+              ...extensionParameters,
+              input: extensionParameters?.input ?? inputOriginalOrFromExtension,
             }) as Promise<StepTriggerEnvelope | Error | ResultEnvelop>
             return result
           })

@@ -8,18 +8,18 @@ import { TransportHttp } from '../extensions/transport-http/runtime.js'
 import { TransportMemory } from '../extensions/transport-memory/runtime.js'
 import type { PartialOrUndefined } from '../main.js'
 
-const context = addAndApplyMany(contextEmpty, [TransportHttp, TransportMemory, DocumentBuilder])
+const contextEmptyBasic = addAndApplyMany(contextEmpty, [TransportHttp, TransportMemory, DocumentBuilder])
 
-export const create = createConstructorWithContext(context)
+export type ContextEmpty = typeof contextEmptyBasic
 
-export type Client = BaseClient<typeof context>
+export const create = createConstructorWithContext(contextEmptyBasic)
+
+export type Client = BaseClient<ContextEmpty>
 
 export namespace Client {
-  export type Context = typeof context
-
   export type With<$ContextNewPartial extends PartialOrUndefined<BaseContext>> = BaseClient<
     ConfigManager.SetKeysOptional<
-      Context,
+      ContextEmpty,
       $ContextNewPartial
     >
   >

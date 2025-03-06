@@ -2,15 +2,19 @@
 // @vitest-environment node
 
 import { expect, test as testBase } from 'vitest'
-import * as UploadSchema from '../../../tests/_/schemas/upload/schema.js'
 import { Graffle } from '../../entrypoints/main.js'
+import * as UploadSchema from './__fixtures__/schema.js'
 import { Upload } from './Upload.js'
 
 import { type SchemaService, serveSchema } from '../../../tests/_/lib/serveSchema.js'
-import type { GraffleMinimal } from '../../entrypoints/presets/minimal.js'
+import type { GraffleKit } from '../../entrypoints/kit.js'
 
 interface Context {
-  graffle: GraffleMinimal.Client.With<{ check: { preflight: false } }>
+  graffle: Graffle.Client<
+    // todo this does not work but should
+    // GraffleKit.Context.Configuration.Add<Graffle.ContextEmpty, { check: { current: { preflight: false } } }>
+    GraffleKit.Context.Transports.ConfigureCurrent<Graffle.ContextEmpty, { url: URL }>
+  >
   schemaServer: SchemaService
 }
 
@@ -21,7 +25,10 @@ const test = testBase.extend<Context>({
     await schemaServer.stop()
   },
   graffle: async ({ schemaServer }, use) => {
-    const graffle = Graffle.create({ check: { preflight: false } }).transport({ url: schemaServer.url }).use(Upload())
+    const graffle = Graffle
+      .create()
+      .transport({ url: schemaServer.url })
+      .use(Upload)
     await use(graffle as any)
   },
 })

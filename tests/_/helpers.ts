@@ -20,6 +20,7 @@ import { type SchemaService, serveSchema } from './lib/serveSchema.js'
 // import { schema as kitchenSinkSchema } from './schemas/kitchen-sink/schema.js'
 import type { IntrospectionQuery } from 'graphql'
 import { GraffleKit } from '../../src/entrypoints/kit.js'
+import { TestSchemas } from './schemas/_namespaces.js'
 import { schema } from './schemas/pokemon/schema.js'
 
 interface Project {
@@ -68,6 +69,7 @@ interface Fixtures {
   c0: GraffleKit.Context.ContextEmpty
   pokemonService: SchemaService
   project: Project
+  schemas: typeof TestSchemas
   // graffle: GraffleMinimal.Client.With<{
   //   check: { preflight: false }
   // }>
@@ -90,6 +92,7 @@ interface Fixtures {
 export const g0 = GraffleBare.create()
 
 export const test = testBase.extend<Fixtures>({
+  schemas: TestSchemas,
   c0: GraffleKit.Context.contextEmpty,
   project: async ({}, use) => { // eslint-disable-line
     /**
