@@ -5,8 +5,8 @@
 // Do not modify this file directly.
 
 import { expect, test } from 'vitest'
-import { encode } from '../../../examples/__outputs__/60_extension/extension_opentelemetry__opentelemetry.output.encoder.js'
 import { runExample } from '../../../scripts/generate-examples-derivatives/helpers.js'
+import { encode } from '../../__outputs__/60_extension/extension_opentelemetry__opentelemetry.output.encoder.js'
 
 test(`extension_opentelemetry__opentelemetry`, async () => {
   const exampleResult = await runExample(`./examples/60_extension/extension_opentelemetry__opentelemetry.ts`)

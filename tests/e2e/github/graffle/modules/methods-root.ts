@@ -11,7 +11,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutput<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           $$Utilities.AssertExtendsObject<$SelectionSet>,
           $$Schema.Schema<$Context['scalars']>
         >
@@ -40,7 +40,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { codeOfConduct: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -59,7 +59,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { codesOfConduct: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -78,7 +78,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { enterprise: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -100,7 +100,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { enterpriseAdministratorInvitation: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -122,7 +122,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { enterpriseAdministratorInvitationByToken: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -144,7 +144,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { enterpriseMemberInvitation: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -166,7 +166,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { enterpriseMemberInvitationByToken: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -185,7 +185,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { id: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -204,7 +204,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { license: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -223,7 +223,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { licenses: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -242,7 +242,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { marketplaceCategories: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -261,7 +261,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { marketplaceCategory: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -280,7 +280,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { marketplaceListing: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -299,7 +299,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { marketplaceListings: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -318,7 +318,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { meta: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -337,7 +337,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { node: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -356,7 +356,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { nodes: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -375,7 +375,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { organization: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -394,7 +394,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { rateLimit: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -414,7 +414,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { relay: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -433,7 +433,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { repository: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -452,7 +452,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { repositoryOwner: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -471,7 +471,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { resource: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -490,7 +490,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { search: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -509,7 +509,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { securityAdvisories: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -528,7 +528,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { securityAdvisory: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -550,7 +550,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { securityVulnerabilities: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -569,7 +569,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { sponsorables: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -588,7 +588,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { topic: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -607,7 +607,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { user: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -626,7 +626,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
           { viewer: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -645,7 +645,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutput<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           $$Utilities.AssertExtendsObject<$SelectionSet>,
           $$Schema.Schema<$Context['scalars']>
         >
@@ -677,7 +677,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { abortQueuedMigrations: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -699,7 +699,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { abortRepositoryMigration: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -721,7 +721,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { acceptEnterpriseAdministratorInvitation: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -743,7 +743,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { acceptEnterpriseMemberInvitation: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -765,7 +765,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { acceptTopicSuggestion: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -787,7 +787,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { accessUserNamespaceRepository: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -809,7 +809,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { addAssigneesToAssignable: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -828,7 +828,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { addComment: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -850,7 +850,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { addDiscussionComment: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -872,7 +872,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { addDiscussionPollVote: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -894,7 +894,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { addEnterpriseOrganizationMember: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -916,7 +916,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { addEnterpriseSupportEntitlement: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -938,7 +938,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { addLabelsToLabelable: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -957,7 +957,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { addProjectCard: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -976,7 +976,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { addProjectColumn: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -998,7 +998,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { addProjectV2DraftIssue: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1020,7 +1020,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { addProjectV2ItemById: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1042,7 +1042,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { addPullRequestReview: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1064,7 +1064,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { addPullRequestReviewComment: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1086,7 +1086,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { addPullRequestReviewThread: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1108,7 +1108,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { addPullRequestReviewThreadReply: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1127,7 +1127,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { addReaction: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1146,7 +1146,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { addStar: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1165,7 +1165,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { addSubIssue: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1184,7 +1184,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { addUpvote: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1203,7 +1203,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { addVerifiableDomain: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1222,7 +1222,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { approveDeployments: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1244,7 +1244,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { approveVerifiableDomain: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1266,7 +1266,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { archiveProjectV2Item: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1285,7 +1285,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { archiveRepository: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1307,7 +1307,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { cancelEnterpriseAdminInvitation: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1329,7 +1329,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { cancelEnterpriseMemberInvitation: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1348,7 +1348,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { cancelSponsorship: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1367,7 +1367,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { changeUserStatus: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1389,7 +1389,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { clearLabelsFromLabelable: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1413,7 +1413,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { clearProjectV2ItemFieldValue: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1432,7 +1432,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { cloneProject: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1454,7 +1454,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { cloneTemplateRepository: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1473,7 +1473,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { closeDiscussion: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1492,7 +1492,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { closeIssue: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1511,7 +1511,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { closePullRequest: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1533,7 +1533,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { convertProjectCardNoteToIssue: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1555,7 +1555,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { convertProjectV2DraftIssueItemToIssue: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1577,7 +1577,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { convertPullRequestToDraft: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1596,7 +1596,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { copyProjectV2: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1618,7 +1618,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { createAttributionInvitation: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1640,7 +1640,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { createBranchProtectionRule: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1659,7 +1659,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { createCheckRun: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1678,7 +1678,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { createCheckSuite: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1741,7 +1741,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { createCommitOnBranch: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1760,7 +1760,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { createDeployment: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1782,7 +1782,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { createDeploymentStatus: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1801,7 +1801,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { createDiscussion: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1828,7 +1828,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { createEnterpriseOrganization: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1847,7 +1847,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { createEnvironment: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1869,7 +1869,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { createIpAllowListEntry: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1888,7 +1888,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { createIssue: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1907,7 +1907,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { createLabel: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1926,7 +1926,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { createLinkedBranch: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1948,7 +1948,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { createMigrationSource: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1967,7 +1967,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { createProject: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1986,7 +1986,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { createProjectV2: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2008,7 +2008,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { createProjectV2Field: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2030,7 +2030,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { createProjectV2StatusUpdate: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2049,7 +2049,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { createPullRequest: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2068,7 +2068,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { createRef: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2087,7 +2087,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { createRepository: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2109,7 +2109,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { createRepositoryRuleset: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2131,7 +2131,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { createSponsorsListing: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2150,7 +2150,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { createSponsorsTier: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2169,7 +2169,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { createSponsorship: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2189,7 +2189,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { createSponsorships: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2211,7 +2211,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { createTeamDiscussion: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2233,7 +2233,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { createTeamDiscussionComment: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2252,7 +2252,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { createUserList: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2274,7 +2274,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { declineTopicSuggestion: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2296,7 +2296,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { deleteBranchProtectionRule: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2315,7 +2315,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { deleteDeployment: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2334,7 +2334,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { deleteDiscussion: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2356,7 +2356,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { deleteDiscussionComment: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2375,7 +2375,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { deleteEnvironment: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2397,7 +2397,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { deleteIpAllowListEntry: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2416,7 +2416,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { deleteIssue: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2435,7 +2435,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { deleteIssueComment: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2454,7 +2454,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { deleteLabel: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2473,7 +2473,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { deleteLinkedBranch: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2495,7 +2495,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { deletePackageVersion: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2514,7 +2514,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { deleteProject: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2533,7 +2533,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { deleteProjectCard: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2552,7 +2552,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { deleteProjectColumn: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2571,7 +2571,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { deleteProjectV2: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2593,7 +2593,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { deleteProjectV2Field: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2612,7 +2612,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { deleteProjectV2Item: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2634,7 +2634,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { deleteProjectV2StatusUpdate: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2656,7 +2656,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { deleteProjectV2Workflow: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2678,7 +2678,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { deletePullRequestReview: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2700,7 +2700,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { deletePullRequestReviewComment: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2719,7 +2719,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { deleteRef: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2741,7 +2741,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { deleteRepositoryRuleset: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2763,7 +2763,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { deleteTeamDiscussion: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2785,7 +2785,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { deleteTeamDiscussionComment: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2804,7 +2804,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { deleteUserList: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2826,7 +2826,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { deleteVerifiableDomain: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2845,7 +2845,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { dequeuePullRequest: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2867,7 +2867,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { disablePullRequestAutoMerge: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2889,7 +2889,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { dismissPullRequestReview: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2911,7 +2911,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { dismissRepositoryVulnerabilityAlert: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2933,7 +2933,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { enablePullRequestAutoMerge: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2952,7 +2952,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { enqueuePullRequest: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2971,7 +2971,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { followOrganization: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -2990,7 +2990,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { followUser: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3012,7 +3012,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { grantEnterpriseOrganizationsMigratorRole: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3031,7 +3031,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { grantMigratorRole: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3050,7 +3050,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { importProject: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3072,7 +3072,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { inviteEnterpriseAdmin: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3094,7 +3094,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { inviteEnterpriseMember: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3116,7 +3116,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { linkProjectV2ToRepository: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3135,7 +3135,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { linkProjectV2ToTeam: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3157,7 +3157,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { linkRepositoryToProject: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3176,7 +3176,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { lockLockable: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3198,7 +3198,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { markDiscussionCommentAsAnswer: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3217,7 +3217,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { markFileAsViewed: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3239,7 +3239,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { markProjectV2AsTemplate: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3261,7 +3261,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { markPullRequestReadyForReview: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3280,7 +3280,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { mergeBranch: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3299,7 +3299,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { mergePullRequest: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3318,7 +3318,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { minimizeComment: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3337,7 +3337,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { moveProjectCard: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3356,7 +3356,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { moveProjectColumn: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3375,7 +3375,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { pinEnvironment: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3394,7 +3394,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { pinIssue: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3413,7 +3413,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { publishSponsorsTier: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3435,7 +3435,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { regenerateEnterpriseIdentityProviderRecoveryCodes: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3457,7 +3457,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { regenerateVerifiableDomainToken: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3476,7 +3476,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { rejectDeployments: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3498,7 +3498,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { removeAssigneesFromAssignable: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3520,7 +3520,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { removeEnterpriseAdmin: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3543,7 +3543,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { removeEnterpriseIdentityProvider: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3565,7 +3565,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { removeEnterpriseMember: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3587,7 +3587,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { removeEnterpriseOrganization: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3609,7 +3609,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { removeEnterpriseSupportEntitlement: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3631,7 +3631,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { removeLabelsFromLabelable: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3653,7 +3653,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { removeOutsideCollaborator: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3672,7 +3672,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { removeReaction: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3691,7 +3691,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { removeStar: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3710,7 +3710,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { removeSubIssue: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3729,7 +3729,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { removeUpvote: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3748,7 +3748,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { reopenDiscussion: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3767,7 +3767,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { reopenIssue: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3786,7 +3786,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { reopenPullRequest: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3805,7 +3805,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { reorderEnvironment: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3827,7 +3827,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { reprioritizeSubIssue: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3846,7 +3846,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { requestReviews: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3865,7 +3865,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { rerequestCheckSuite: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3884,7 +3884,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { resolveReviewThread: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3903,7 +3903,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { retireSponsorsTier: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3922,7 +3922,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { revertPullRequest: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3944,7 +3944,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { revokeEnterpriseOrganizationsMigratorRole: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3963,7 +3963,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { revokeMigratorRole: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -3985,7 +3985,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { setEnterpriseIdentityProvider: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4007,7 +4007,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { setOrganizationInteractionLimit: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4029,7 +4029,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { setRepositoryInteractionLimit: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4051,7 +4051,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { setUserInteractionLimit: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4073,7 +4073,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { startOrganizationMigration: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4095,7 +4095,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { startRepositoryMigration: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4117,7 +4117,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { submitPullRequestReview: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4139,7 +4139,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { transferEnterpriseOrganization: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4158,7 +4158,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { transferIssue: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4180,7 +4180,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { unarchiveProjectV2Item: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4199,7 +4199,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { unarchiveRepository: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4221,7 +4221,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { unfollowOrganization: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4240,7 +4240,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { unfollowUser: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4262,7 +4262,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { unlinkProjectV2FromRepository: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4284,7 +4284,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { unlinkProjectV2FromTeam: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4306,7 +4306,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { unlinkRepositoryFromProject: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4325,7 +4325,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { unlockLockable: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4347,7 +4347,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { unmarkDiscussionCommentAsAnswer: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4366,7 +4366,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { unmarkFileAsViewed: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4388,7 +4388,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { unmarkIssueAsDuplicate: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4410,7 +4410,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { unmarkProjectV2AsTemplate: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4429,7 +4429,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { unminimizeComment: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4448,7 +4448,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { unpinIssue: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4470,7 +4470,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { unresolveReviewThread: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4492,7 +4492,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateBranchProtectionRule: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4511,7 +4511,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateCheckRun: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4533,7 +4533,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateCheckSuitePreferences: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4552,7 +4552,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateDiscussion: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4574,7 +4574,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateDiscussionComment: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4596,7 +4596,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateEnterpriseAdministratorRole: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4618,7 +4618,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateEnterpriseAllowPrivateRepositoryForkingSetting: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4640,7 +4640,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateEnterpriseDefaultRepositoryPermissionSetting: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4662,7 +4662,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateEnterpriseDeployKeySetting: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4684,7 +4684,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateEnterpriseMembersCanChangeRepositoryVisibilitySetting: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4706,7 +4706,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateEnterpriseMembersCanCreateRepositoriesSetting: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4728,7 +4728,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateEnterpriseMembersCanDeleteIssuesSetting: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4750,7 +4750,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateEnterpriseMembersCanDeleteRepositoriesSetting: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4772,7 +4772,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateEnterpriseMembersCanInviteCollaboratorsSetting: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4794,7 +4794,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateEnterpriseMembersCanMakePurchasesSetting: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4816,7 +4816,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateEnterpriseMembersCanUpdateProtectedBranchesSetting: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4838,7 +4838,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateEnterpriseMembersCanViewDependencyInsightsSetting: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4860,7 +4860,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateEnterpriseOrganizationProjectsSetting: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4882,7 +4882,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateEnterpriseOwnerOrganizationRole: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4904,7 +4904,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateEnterpriseProfile: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4926,7 +4926,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateEnterpriseRepositoryProjectsSetting: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4948,7 +4948,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateEnterpriseTeamDiscussionsSetting: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4970,7 +4970,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateEnterpriseTwoFactorAuthenticationDisallowedMethodsSetting: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -4992,7 +4992,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateEnterpriseTwoFactorAuthenticationRequiredSetting: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5011,7 +5011,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateEnvironment: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5033,7 +5033,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateIpAllowListEnabledSetting: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5055,7 +5055,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateIpAllowListEntry: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5077,7 +5077,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateIpAllowListForInstalledAppsEnabledSetting: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5096,7 +5096,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateIssue: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5115,7 +5115,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateIssueComment: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5134,7 +5134,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateLabel: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5156,7 +5156,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateNotificationRestrictionSetting: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5178,7 +5178,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateOrganizationAllowPrivateRepositoryForkingSetting: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5200,7 +5200,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateOrganizationWebCommitSignoffSetting: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5225,7 +5225,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updatePatreonSponsorability: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5244,7 +5244,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateProject: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5263,7 +5263,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateProjectCard: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5282,7 +5282,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateProjectColumn: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5301,7 +5301,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateProjectV2: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5323,7 +5323,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateProjectV2Collaborators: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5345,7 +5345,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateProjectV2DraftIssue: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5367,7 +5367,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateProjectV2Field: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5390,7 +5390,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateProjectV2ItemFieldValue: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5412,7 +5412,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateProjectV2ItemPosition: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5434,7 +5434,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateProjectV2StatusUpdate: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5453,7 +5453,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updatePullRequest: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5475,7 +5475,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updatePullRequestBranch: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5497,7 +5497,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updatePullRequestReview: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5519,7 +5519,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updatePullRequestReviewComment: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5538,7 +5538,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateRef: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5574,7 +5574,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateRefs: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5593,7 +5593,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateRepository: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5615,7 +5615,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateRepositoryRuleset: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5637,7 +5637,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateRepositoryWebCommitSignoffSetting: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5659,7 +5659,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateSponsorshipPreferences: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5678,7 +5678,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateSubscription: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5700,7 +5700,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateTeamDiscussion: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5722,7 +5722,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateTeamDiscussionComment: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5744,7 +5744,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateTeamReviewAssignment: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5766,7 +5766,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateTeamsRepository: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5785,7 +5785,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateTopics: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5804,7 +5804,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateUserList: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5826,7 +5826,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { updateUserListsForItem: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -5848,7 +5848,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
           { verifyVerifiableDomain: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,

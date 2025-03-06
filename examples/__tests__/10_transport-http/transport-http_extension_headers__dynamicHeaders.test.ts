@@ -5,16 +5,18 @@
 // Do not modify this file directly.
 
 import { expect, test } from 'vitest'
-import { encode } from '../../../examples/__outputs__/20_output/output_envelope.output.encoder.js'
 import { runExample } from '../../../scripts/generate-examples-derivatives/helpers.js'
+import { encode } from '../../__outputs__/10_transport-http/transport-http_extension_headers__dynamicHeaders.output.encoder.js'
 
-test(`output_envelope`, async () => {
-  const exampleResult = await runExample(`./examples/20_output/output_envelope.ts`)
+test(`transport-http_extension_headers__dynamicHeaders`, async () => {
+  const exampleResult = await runExample(
+    `./examples/10_transport-http/transport-http_extension_headers__dynamicHeaders.ts`,
+  )
   // Examples should output their data results.
   const exampleResultMaybeEncoded = encode(exampleResult)
   // If ever outputs vary by Node version, you can use this to snapshot by Node version.
   // const nodeMajor = process.version.match(/v(\d+)/)?.[1] ?? `unknown`
   await expect(exampleResultMaybeEncoded).toMatchFileSnapshot(
-    `../../../examples/__outputs__/20_output/output_envelope.output.test.txt`,
+    `../../../examples/__outputs__/10_transport-http/transport-http_extension_headers__dynamicHeaders.output.test.txt`,
   )
 })
