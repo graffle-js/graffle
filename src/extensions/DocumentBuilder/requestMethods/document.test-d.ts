@@ -1,9 +1,9 @@
 import { expectTypeOf, test } from 'vitest'
-import { MutationOnly } from '../../../../tests/_/schemas/mutation-only/graffle/__.js'
-import { Graffle } from '../../../../tests/_/schemas/possible/graffle/__.js'
-import { QueryOnly } from '../../../../tests/_/schemas/query-only/graffle/__.js'
+import { MutationOnly } from '../__fixtures__/mutationOnly/_namespace.js'
+import { Possible } from '../__fixtures__/possible/_namespace.js'
+import { QueryOnly } from '../__fixtures__/queryOnly/_namespace.js'
 
-const g = Graffle.create({ check: { preflight: false } })
+const g = Possible.create({ check: { preflight: false } })
 
 test(`requires input`, () => {
   // @ts-expect-error missing input

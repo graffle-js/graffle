@@ -95,6 +95,7 @@
   },
   "homepage": "https://github.com/graffle-js/graffle",
   "scripts": {
+    "extension:document-builder:tests:generate-fixtures": "tsx src/extensions/DocumentBuilder/__fixtures__/generate.ts",
     "graffle": "tsx ./src/generator/cli/generate.ts",
     "serve:pokemon": "tsx tests/_/services/pokemonManual.ts",
     "gen:graffle": "pnpm gen:graffle:tests && pnpm build && pnpm website:gen:graffle",

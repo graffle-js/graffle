@@ -20,8 +20,8 @@ import { type SchemaService, serveSchema } from './lib/serveSchema.js'
 // import { schema as kitchenSinkSchema } from './schemas/kitchen-sink/schema.js'
 import type { IntrospectionQuery } from 'graphql'
 import { GraffleKit } from '../../src/entrypoints/kit.js'
-import { TestSchemas } from './schemas/_namespaces.js'
-import { schema } from './schemas/pokemon/schema.js'
+import { TestSchemas } from './fixtures/schemas/_namespaces.js'
+import { schema } from './fixtures/schemas/pokemon/schema.js'
 
 interface Project {
   fs: FSJetpack

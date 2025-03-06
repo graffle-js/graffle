@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
-import { Possible } from '../../../tests/_/schemas/possible/graffle/_namespace.js'
-import { schema } from '../../../tests/_/schemas/possible/schema.js'
+import { Possible } from '../../../tests/_/fixtures/schemas/possible/graffle/_namespace.js'
+import { schema } from '../../../tests/_/fixtures/schemas/possible/schema.js'
 import { TransportMemory } from '../TransportMemory/TransportMemory.js'
 import { Throws } from './Throws.js'
 

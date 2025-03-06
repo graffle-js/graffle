@@ -1,4 +1,4 @@
-import { createConfig } from '../config/config.js'
+import { type Config, createConfig } from '../config/config.js'
 import type { ConfigInit } from '../config/configInit.js'
 import { ModuleGenerator_exports } from '../generators/_exports.js'
 import { ModuleGenerator_namespace } from '../generators/_namespace.js'
@@ -34,7 +34,7 @@ const moduleGenerators = [
   ModuleGeneratorMethodsDocument,
 ]
 
-export const generate = async (init: ConfigInit) => {
+export const generate = async (init: ConfigInit): Promise<Config> => {
   const config = await createConfig(init)
 
   const generatedModules = await Promise.all(
@@ -46,13 +46,14 @@ export const generate = async (init: ConfigInit) => {
       })),
   )
 
-  if (config.paths.project.outputs.sdl && config.schema.via !== `sdl`) {
-    await config.fs.writeFile(config.paths.project.outputs.sdl, config.schema.sdl)
-  }
-
   // todo clear directory before generating so that removed or renamed files are cleaned up.
   await config.fs.mkdir(config.paths.project.outputs.root, { recursive: true })
   await config.fs.mkdir(config.paths.project.outputs.modules, { recursive: true })
+
+  // todo: add a test that if dir doesn't exist yet, it is created beforehand.
+  if (config.paths.project.outputs.sdl && config.schema.via !== `sdl`) {
+    await config.fs.writeFile(config.paths.project.outputs.sdl, config.schema.sdl)
+  }
 
   await Promise.all(
     generatedModules.map((generatedModule) => {
@@ -61,4 +62,6 @@ export const generate = async (init: ConfigInit) => {
       return config.fs.writeFile(filePath, generatedModule.content)
     }),
   )
+
+  return config
 }

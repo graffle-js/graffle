@@ -1,8 +1,8 @@
 import { describe, expect, expectTypeOf } from 'vitest'
 import { DateScalar } from '../../../../tests/_/fixtures/scalars.js'
+import { db } from '../../../../tests/_/fixtures/schemas/possible/db.js'
+import { Possible } from '../../../../tests/_/fixtures/schemas/possible/graffle/_namespace.js'
 import { test as testBase } from '../../../../tests/_/helpers.js'
-import { db } from '../../../../tests/_/schemas/db.js'
-import { Possible } from '../../../../tests/_/schemas/possible/graffle/_namespace.js'
 import type { Grafaid } from '../../../lib/grafaid/_namespace.js'
 import { TransportMemory } from '../../TransportMemory/TransportMemory.js'
 

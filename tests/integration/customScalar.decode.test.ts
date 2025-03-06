@@ -3,9 +3,9 @@ import { DocumentBuilderKit } from '../../src/extensions/DocumentBuilder/_namesp
 import { Grafaid } from '../../src/lib/grafaid/_namespace.js'
 import type { Schema } from '../../src/types/Schema/_namespace.js'
 import { DateScalar } from '../_/fixtures/scalars.js'
+import { db } from '../_/fixtures/schemas/possible/db.js'
+import type { Graffle } from '../_/fixtures/schemas/possible/graffle/__.js'
 import { createGraphQLResponse, createGraphQLResponseData, test } from '../_/helpers.js'
-import { db } from '../_/schemas/db.js'
-import type { Graffle } from '../_/schemas/possible/graffle/__.js'
 
 type QueryWithDate = Graffle.SelectionSets.Query<
   Schema.Scalar.Registry.AddScalar<Schema.Scalar.Registry.Empty, typeof DateScalar>

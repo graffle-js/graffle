@@ -1,4 +1,4 @@
-import { schema } from '../../../../../tests/_/schemas/possible/schema.js'
+import { schema } from '../../../../../tests/_/fixtures/schemas/possible/schema.js'
 import { Generator } from '../../../../entrypoints/generator.js'
 import { SchemaErrors } from '../../gentime.js'
 

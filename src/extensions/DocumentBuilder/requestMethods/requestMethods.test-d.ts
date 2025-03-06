@@ -1,8 +1,8 @@
 /* eslint-disable */
 import { expectTypeOf, test } from 'vitest'
 import { DateScalar } from '../../../../tests/_/fixtures/scalars.js'
-import { Graffle } from '../../../../tests/_/schemas/possible/graffle/__.js'
-import * as Schema from '../../../../tests/_/schemas/possible/schema.js'
+import { Graffle } from '../../../../tests/_/fixtures/schemas/possible/graffle/__.js'
+import * as Schema from '../../../../tests/_/fixtures/schemas/possible/schema.js'
 
 const g = Graffle.create({ check: { preflight: false } }).scalar(DateScalar)
 
