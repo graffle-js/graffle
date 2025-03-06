@@ -1,14 +1,14 @@
 export type { Simplify } from 'type-fest'
 export { createConstructorWithContext } from '../client/client.js'
+export {
+  type ConfigGetOutputError,
+  type HandleOutput,
+  type HandleOutputDocumentBuilderRootField,
+} from '../client/handle.js'
 export { type Context } from '../context/context.js'
 export * from '../context/context.js'
 export { contextEmpty } from '../context/ContextEmpty.js'
 export { Configuration } from '../context/fragments/configuration/_namespace.js'
-export type {
-  ConfigGetOutputError,
-  HandleOutput,
-  HandleOutputDocumentBuilderRootField,
-} from '../context/fragments/configuration/output/handle.js'
 export { Extensions } from '../context/fragments/extensions/_namespace.js'
 export { addAndApplyMany } from '../context/fragments/extensions/fragment.js'
 export { Scalars } from '../context/fragments/scalars/_namespace.js'
@@ -22,3 +22,4 @@ export { type GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
 export { Schema } from '../types/Schema/_namespace.js'
 export * from '../types/Schema/StandardTypes/scalar.js'
 export { type SchemaDrivenDataMap } from '../types/SchemaDrivenDataMap/_namespace.js'
+export * from './kit.js'

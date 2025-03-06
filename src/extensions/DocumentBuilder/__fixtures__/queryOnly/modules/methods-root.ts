@@ -1,9 +1,9 @@
 import type * as $$Utilities from '../../../../../entrypoints/utilities-for-generated.js'
-import * as $$Schema from './schema.js'
-import * as $$SelectionSets from './selection-sets.js'
+import type * as $$Schema from './schema.js'
+import type * as $$SelectionSets from './selection-sets.js'
 
 export interface QueryMethods<$Context extends $$Utilities.Context> {
-  $batch: $$Utilities.ClientTransports.PreflightCheck<
+  $batch: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query<$Context['scalars']>>,
@@ -11,14 +11,14 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutput<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           $$Utilities.AssertExtendsObject<$SelectionSet>,
           $$Schema.Schema<$Context['scalars']>
         >
       >
     >
   >
-  __typename: $$Utilities.ClientTransports.PreflightCheck<
+  __typename: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     () => Promise<
       & (null | {})
@@ -30,7 +30,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  id: $$Utilities.ClientTransports.PreflightCheck<
+  id: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.id<$Context['scalars']>>,
@@ -38,7 +38,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { id: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -47,7 +47,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  idNonNull: $$Utilities.ClientTransports.PreflightCheck<
+  idNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.idNonNull<$Context['scalars']>>,
@@ -55,7 +55,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { idNonNull: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,

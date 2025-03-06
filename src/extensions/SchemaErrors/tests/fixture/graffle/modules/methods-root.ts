@@ -1,9 +1,9 @@
 import type * as $$Utilities from '../../../../../../entrypoints/utilities-for-generated.js'
-import * as $$Schema from './schema.js'
-import * as $$SelectionSets from './selection-sets.js'
+import type * as $$Schema from './schema.js'
+import type * as $$SelectionSets from './selection-sets.js'
 
 export interface QueryMethods<$Context extends $$Utilities.Context> {
-  $batch: $$Utilities.ClientTransports.PreflightCheck<
+  $batch: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query<$Context['scalars']>>,
@@ -11,14 +11,14 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutput<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           $$Utilities.AssertExtendsObject<$SelectionSet>,
           $$Schema.Schema<$Context['scalars']>
         >
       >
     >
   >
-  __typename: $$Utilities.ClientTransports.PreflightCheck<
+  __typename: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     () => Promise<
       & (null | {})
@@ -30,7 +30,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  InputObjectNested: $$Utilities.ClientTransports.PreflightCheck<
+  InputObjectNested: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.InputObjectNested<$Context['scalars']>>,
@@ -38,7 +38,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { InputObjectNested: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -47,7 +47,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  InputObjectNestedNonNull: $$Utilities.ClientTransports.PreflightCheck<
+  InputObjectNestedNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -58,7 +58,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { InputObjectNestedNonNull: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -69,7 +69,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Query enum field documentation.
    */
-  abcEnum: $$Utilities.ClientTransports.PreflightCheck<
+  abcEnum: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.abcEnum<$Context['scalars']>>,
@@ -77,7 +77,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { abcEnum: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -86,7 +86,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  argInputObjectCircular: $$Utilities.ClientTransports.PreflightCheck<
+  argInputObjectCircular: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<
@@ -97,7 +97,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { argInputObjectCircular: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -106,7 +106,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  date: $$Utilities.ClientTransports.PreflightCheck<
+  date: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.date<$Context['scalars']>>,
@@ -114,7 +114,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { date: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -123,7 +123,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  dateArg: $$Utilities.ClientTransports.PreflightCheck<
+  dateArg: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateArg<$Context['scalars']>>,
@@ -131,7 +131,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { dateArg: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -140,7 +140,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  dateArgInputObject: $$Utilities.ClientTransports.PreflightCheck<
+  dateArgInputObject: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateArgInputObject<$Context['scalars']>>,
@@ -148,7 +148,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { dateArgInputObject: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -157,7 +157,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  dateArgList: $$Utilities.ClientTransports.PreflightCheck<
+  dateArgList: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateArgList<$Context['scalars']>>,
@@ -165,7 +165,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { dateArgList: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -174,7 +174,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  dateArgNonNull: $$Utilities.ClientTransports.PreflightCheck<
+  dateArgNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateArgNonNull<$Context['scalars']>>,
@@ -182,7 +182,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { dateArgNonNull: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -191,7 +191,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  dateArgNonNullList: $$Utilities.ClientTransports.PreflightCheck<
+  dateArgNonNullList: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateArgNonNullList<$Context['scalars']>>,
@@ -199,7 +199,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { dateArgNonNullList: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -208,7 +208,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  dateArgNonNullListNonNull: $$Utilities.ClientTransports.PreflightCheck<
+  dateArgNonNullListNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -219,7 +219,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { dateArgNonNullListNonNull: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -228,7 +228,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  dateInterface1: $$Utilities.ClientTransports.PreflightCheck<
+  dateInterface1: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateInterface1<$Context['scalars']>>,
@@ -236,7 +236,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { dateInterface1: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -245,7 +245,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  dateList: $$Utilities.ClientTransports.PreflightCheck<
+  dateList: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateList<$Context['scalars']>>,
@@ -253,7 +253,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { dateList: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -262,7 +262,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  dateListList: $$Utilities.ClientTransports.PreflightCheck<
+  dateListList: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateListList<$Context['scalars']>>,
@@ -270,7 +270,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { dateListList: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -279,7 +279,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  dateListNonNull: $$Utilities.ClientTransports.PreflightCheck<
+  dateListNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateListNonNull<$Context['scalars']>>,
@@ -287,7 +287,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { dateListNonNull: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -296,7 +296,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  dateNonNull: $$Utilities.ClientTransports.PreflightCheck<
+  dateNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateNonNull<$Context['scalars']>>,
@@ -304,7 +304,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { dateNonNull: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -313,7 +313,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  dateObject1: $$Utilities.ClientTransports.PreflightCheck<
+  dateObject1: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateObject1<$Context['scalars']>>,
@@ -321,7 +321,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { dateObject1: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -330,7 +330,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  dateUnion: $$Utilities.ClientTransports.PreflightCheck<
+  dateUnion: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateUnion<$Context['scalars']>>,
@@ -338,7 +338,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { dateUnion: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -347,7 +347,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  error: $$Utilities.ClientTransports.PreflightCheck<
+  error: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.error<$Context['scalars']>>,
@@ -355,7 +355,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { error: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -364,7 +364,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  id: $$Utilities.ClientTransports.PreflightCheck<
+  id: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.id<$Context['scalars']>>,
@@ -372,7 +372,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { id: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -381,7 +381,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  idNonNull: $$Utilities.ClientTransports.PreflightCheck<
+  idNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.idNonNull<$Context['scalars']>>,
@@ -389,7 +389,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { idNonNull: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -398,7 +398,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  interface: $$Utilities.ClientTransports.PreflightCheck<
+  interface: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.$interface<$Context['scalars']>>,
@@ -406,7 +406,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { interface: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -415,7 +415,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  interfaceHierarchyChildA: $$Utilities.ClientTransports.PreflightCheck<
+  interfaceHierarchyChildA: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -426,7 +426,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { interfaceHierarchyChildA: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -435,7 +435,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  interfaceHierarchyChildB: $$Utilities.ClientTransports.PreflightCheck<
+  interfaceHierarchyChildB: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -446,7 +446,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { interfaceHierarchyChildB: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -455,7 +455,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  interfaceHierarchyGrandparents: $$Utilities.ClientTransports.PreflightCheck<
+  interfaceHierarchyGrandparents: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -466,7 +466,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { interfaceHierarchyGrandparents: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -475,7 +475,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  interfaceHierarchyParents: $$Utilities.ClientTransports.PreflightCheck<
+  interfaceHierarchyParents: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -486,7 +486,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { interfaceHierarchyParents: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -495,7 +495,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  interfaceNonNull: $$Utilities.ClientTransports.PreflightCheck<
+  interfaceNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.interfaceNonNull<$Context['scalars']>>,
@@ -503,7 +503,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { interfaceNonNull: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -512,7 +512,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  interfaceWithArgs: $$Utilities.ClientTransports.PreflightCheck<
+  interfaceWithArgs: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.interfaceWithArgs<$Context['scalars']>>,
@@ -520,7 +520,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { interfaceWithArgs: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -529,7 +529,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  listInt: $$Utilities.ClientTransports.PreflightCheck<
+  listInt: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.listInt<$Context['scalars']>>,
@@ -537,7 +537,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { listInt: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -546,7 +546,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  listIntNonNull: $$Utilities.ClientTransports.PreflightCheck<
+  listIntNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.listIntNonNull<$Context['scalars']>>,
@@ -554,7 +554,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { listIntNonNull: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -563,7 +563,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  listListInt: $$Utilities.ClientTransports.PreflightCheck<
+  listListInt: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.listListInt<$Context['scalars']>>,
@@ -571,7 +571,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { listListInt: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -580,7 +580,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  listListIntNonNull: $$Utilities.ClientTransports.PreflightCheck<
+  listListIntNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.listListIntNonNull<$Context['scalars']>>,
@@ -588,7 +588,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { listListIntNonNull: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -597,7 +597,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  lowerCaseUnion: $$Utilities.ClientTransports.PreflightCheck<
+  lowerCaseUnion: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.lowerCaseUnion<$Context['scalars']>>,
@@ -605,7 +605,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { lowerCaseUnion: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -614,7 +614,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  object: $$Utilities.ClientTransports.PreflightCheck<
+  object: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.$object<$Context['scalars']>>,
@@ -622,7 +622,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { object: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -631,7 +631,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  objectList: $$Utilities.ClientTransports.PreflightCheck<
+  objectList: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.objectList<$Context['scalars']>>,
@@ -639,7 +639,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { objectList: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -648,7 +648,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  objectListNonNull: $$Utilities.ClientTransports.PreflightCheck<
+  objectListNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.objectListNonNull<$Context['scalars']>>,
@@ -656,7 +656,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { objectListNonNull: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -665,7 +665,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  objectNested: $$Utilities.ClientTransports.PreflightCheck<
+  objectNested: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.objectNested<$Context['scalars']>>,
@@ -673,7 +673,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { objectNested: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -682,7 +682,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  objectNonNull: $$Utilities.ClientTransports.PreflightCheck<
+  objectNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.objectNonNull<$Context['scalars']>>,
@@ -690,7 +690,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { objectNonNull: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -699,7 +699,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  objectWithArgs: $$Utilities.ClientTransports.PreflightCheck<
+  objectWithArgs: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.objectWithArgs<$Context['scalars']>>,
@@ -707,7 +707,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { objectWithArgs: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -716,7 +716,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  result: $$Utilities.ClientTransports.PreflightCheck<
+  result: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.result<$Context['scalars']>>,
@@ -724,7 +724,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { result: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -733,7 +733,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  resultNonNull: $$Utilities.ClientTransports.PreflightCheck<
+  resultNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.resultNonNull<$Context['scalars']>>,
@@ -741,7 +741,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { resultNonNull: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -750,7 +750,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  string: $$Utilities.ClientTransports.PreflightCheck<
+  string: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.$string<$Context['scalars']>>,
@@ -758,7 +758,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { string: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -767,7 +767,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  stringWithArgEnum: $$Utilities.ClientTransports.PreflightCheck<
+  stringWithArgEnum: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.stringWithArgEnum<$Context['scalars']>>,
@@ -775,7 +775,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { stringWithArgEnum: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -784,7 +784,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  stringWithArgInputObject: $$Utilities.ClientTransports.PreflightCheck<
+  stringWithArgInputObject: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<
@@ -795,7 +795,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { stringWithArgInputObject: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -804,7 +804,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  stringWithArgInputObjectEnum: $$Utilities.ClientTransports.PreflightCheck<
+  stringWithArgInputObjectEnum: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -815,7 +815,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { stringWithArgInputObjectEnum: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -824,7 +824,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  stringWithArgInputObjectRequired: $$Utilities.ClientTransports.PreflightCheck<
+  stringWithArgInputObjectRequired: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -835,7 +835,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { stringWithArgInputObjectRequired: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -846,7 +846,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * The given arguments are reflected back as a JSON string.
    */
-  stringWithArgs: $$Utilities.ClientTransports.PreflightCheck<
+  stringWithArgs: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.stringWithArgs<$Context['scalars']>>,
@@ -854,7 +854,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { stringWithArgs: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -863,7 +863,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  stringWithListArg: $$Utilities.ClientTransports.PreflightCheck<
+  stringWithListArg: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.stringWithListArg<$Context['scalars']>>,
@@ -871,7 +871,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { stringWithListArg: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -880,7 +880,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  stringWithListArgRequired: $$Utilities.ClientTransports.PreflightCheck<
+  stringWithListArgRequired: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
@@ -891,7 +891,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { stringWithListArgRequired: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -900,7 +900,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  stringWithRequiredArg: $$Utilities.ClientTransports.PreflightCheck<
+  stringWithRequiredArg: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.stringWithRequiredArg<$Context['scalars']>>,
@@ -908,7 +908,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { stringWithRequiredArg: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -917,7 +917,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  unionFooBar: $$Utilities.ClientTransports.PreflightCheck<
+  unionFooBar: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.unionFooBar<$Context['scalars']>>,
@@ -925,7 +925,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { unionFooBar: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -934,7 +934,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  unionFooBarNonNull: $$Utilities.ClientTransports.PreflightCheck<
+  unionFooBarNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.unionFooBarNonNull<$Context['scalars']>>,
@@ -942,7 +942,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { unionFooBarNonNull: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -951,7 +951,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  unionFooBarWithArgs: $$Utilities.ClientTransports.PreflightCheck<
+  unionFooBarWithArgs: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.unionFooBarWithArgs<$Context['scalars']>>,
@@ -959,7 +959,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { unionFooBarWithArgs: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -968,7 +968,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  unionObject: $$Utilities.ClientTransports.PreflightCheck<
+  unionObject: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.unionObject<$Context['scalars']>>,
@@ -976,7 +976,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { unionObject: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -985,7 +985,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  unionObjectNonNull: $$Utilities.ClientTransports.PreflightCheck<
+  unionObjectNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.unionObjectNonNull<$Context['scalars']>>,
@@ -993,7 +993,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { unionObjectNonNull: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1004,7 +1004,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
 }
 
 export interface MutationMethods<$Context extends $$Utilities.Context> {
-  $batch: $$Utilities.ClientTransports.PreflightCheck<
+  $batch: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation<$Context['scalars']>>,
@@ -1012,14 +1012,14 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutput<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
           $$Utilities.AssertExtendsObject<$SelectionSet>,
           $$Schema.Schema<$Context['scalars']>
         >
       >
     >
   >
-  __typename: $$Utilities.ClientTransports.PreflightCheck<
+  __typename: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     () => Promise<
       & (null | {})
@@ -1031,7 +1031,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  id: $$Utilities.ClientTransports.PreflightCheck<
+  id: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.id<$Context['scalars']>>,
@@ -1039,7 +1039,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
           { id: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
@@ -1048,7 +1048,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     >
   >
 
-  idNonNull: $$Utilities.ClientTransports.PreflightCheck<
+  idNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.idNonNull<$Context['scalars']>>,
@@ -1056,7 +1056,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
           { idNonNull: $SelectionSet },
           $$Schema.Schema<$Context['scalars']>
         >,
