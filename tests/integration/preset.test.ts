@@ -11,10 +11,6 @@ test(`can create a preset`, () => {
     TransportMemory,
     DocumentBuilder,
   ])
-  // todo move to unit tests on extension reducer
-  // Testing transports
-  // expectTypeOf(context.transports.registry).toMatchTypeOf<{ http: typeof TransportHttp.transports[0] }>()
-  // expectTypeOf(context.transports.current).toEqualTypeOf<'http'>()
   const G = GraffleKit.Client.createConstructorWithContext(context)
   const g = G()
   g.transport(`http`)
