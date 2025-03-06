@@ -9,7 +9,8 @@ import type { Context } from '../../context.js'
 
 // todo put symbol here to make unique from any possible properties object
 export interface PropertiesComputerTypeFunction {
-  context: Context
+  parameters: unknown
+  // context: Context
   return: unknown
 }
 
@@ -19,15 +20,18 @@ export interface PropertiesComputerTypeFunction {
 // }
 
 // todo: $Acc shallow merge
+// dprint-ignore
 export type RunPropertiesComputers<
   $Context extends Context,
   $Items extends readonly [...PropertiesComputerTypeFunction[]] = $Context['properties']['$computedTypeFunctions'],
   $Acc extends Properties = {},
-> = $Items extends readonly [
-  infer $Head extends PropertiesComputerTypeFunction,
-  ...infer $Tail extends readonly PropertiesComputerTypeFunction[],
-] ? RunPropertiesComputers<$Context, $Tail, $Acc & ($Head & { context: $Context })['return']>
-  : $Acc
+> = $Items extends
+      readonly [
+        infer $Head extends PropertiesComputerTypeFunction,
+        ...infer $Tail extends readonly PropertiesComputerTypeFunction[],
+      ]
+        ? RunPropertiesComputers<$Context, $Tail, $Acc & ($Head & { parameters: { context: $Context; client: 'todo'; configuration: 'todo' } })['return']>
+        : $Acc
 
 export type PropertiesComputer<
   $Context extends Context = Context,

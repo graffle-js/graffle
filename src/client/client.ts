@@ -30,6 +30,8 @@ export type Client<
   __ =
     & ClientBase<$Context>
     & $Context['properties']['static']
+    // This will prevent buggy extensions from blowing up the whole client.
+    // todo: if 'any' is returned by this then fallback to a type level warning etc.
     & Properties.RunPropertiesComputers<$Context>,
 > = __
 
@@ -101,12 +103,15 @@ export interface ExtensionChainable extends TypeFunction {}
 export type ExtensionChainableArguments = [Context, object, ExtensionChainableRegistry]
 
 // Almost identical to `with` except that input is optional.
-export type Create<$Context extends Context = ContextEmpty> = <
-  const configurationInput extends CalcConfigurationInputForContext<$Context>,
->(configurationInput?: configurationInput) => Client<
-  // @ts-expect-error: Is missing standard configurators
-  Configuration.Add<$Context, configurationInput>
->
+// dprint-ignore
+export type Create<$Context extends Context = ContextEmpty> =
+  <
+    const configurationInput extends CalcConfigurationInputForContext<$Context>,
+  >(configurationInput?: configurationInput) =>
+    Client<
+      // @ts-expect-error: Is missing standard configurators
+      Configuration.Add<$Context, configurationInput>
+    >
 
 export const createConstructorWithContext = <$Context extends Context>(
   context: $Context,

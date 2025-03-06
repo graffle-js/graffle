@@ -4,7 +4,7 @@ import type { ContextFragment, Index } from '../fragment.js'
 
 export const add = <
   context extends ContextFragment,
-  configurationInput extends ConfigurationIndex.Input,
+  const configurationInput extends Index.Input,
 >(context: context, configurationInput: configurationInput): Add<context, configurationInput> => {
   if (!hasNonUndefinedKeys(configurationInput)) return context as any
   // todo: performant checking if input changes configuration. If no change, then no copy context.
@@ -38,7 +38,7 @@ export const add = <
 
 export type Add<
   $Context extends ContextFragment,
-  $ConfigurationInput extends ConfigurationIndex.Input,
+  $ConfigurationInput extends Index.Input,
   __ = {
     [__k__ in keyof $Context]: __k__ extends 'configuration' ? {
         readonly [_ in keyof $Context['configuration']]: _ extends keyof $ConfigurationInput

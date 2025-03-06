@@ -4,10 +4,10 @@ import {
   RequiredConfigurationTransportB,
 } from '../../../../tests/_/fixtures/transports.js'
 import { g0 } from '../../../../tests/_/helpers.js'
+import type { Context } from '../../../context/_namespace.js'
 import { assertType } from '../../../lib/assert-equal.js'
 import type { Grafaid } from '../../../lib/grafaid/_namespace.js'
 import { undefinedAs } from '../../../lib/prelude.js'
-import type { Configuration } from '../configuration/_namespace.js'
 
 const g1 = g0.transport(ATransport)
 const g2 = g0.transport(RequiredConfigurationTransportA).transport(RequiredConfigurationTransportB)
@@ -19,12 +19,13 @@ type DData = { id: 0 }
 //
 
 // Not available if no transports registered
-assertType<Configuration.Check.Errors.PreflightCheckNoTransportsRegistered>(g0.gql)
+assertType<Context.Configuration.Check.Errors.PreflightCheckNoTransportsRegistered>(g0.gql)
+// dprint-ignore
 // Not available if current transport not ready
-assertType<Configuration.Check.Errors.PreflightCheckTransportNotReady<RequiredConfigurationTransportA['name']>>(g2.gql)
+assertType<Context.Configuration.Check.Errors.PreflightCheckTransportNotReady<RequiredConfigurationTransportA['name']>>(g2.gql)
 // dprint-ignore
 // ... Reflects name of currently selected transport
-assertType<Configuration.Check.Errors.PreflightCheckTransportNotReady<RequiredConfigurationTransportB['name']>>(g2.transport(RequiredConfigurationTransportB.name).gql)
+assertType<Context.Configuration.Check.Errors.PreflightCheckTransportNotReady<RequiredConfigurationTransportB['name']>>(g2.transport(RequiredConfigurationTransportB.name).gql)
 
 //
 //

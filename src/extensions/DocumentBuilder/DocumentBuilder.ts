@@ -1,11 +1,12 @@
 import { OperationTypeNode } from 'graphql'
 import { Extension } from '../../entrypoints/extension.js'
-import type { GlobalRegistry } from '../../entrypoints/utilities-for-generated.js'
+import type { GlobalRegistry, GraffleKit } from '../../entrypoints/utilities-for-generated.js'
 import type { TypeFunction } from '../../lib/type-function/__.js'
 import { createMethodDocument, createMethodOperationType } from './_exports.js'
 
 export const DocumentBuilder = Extension
   .create(`DocumentBuilder`)
+  // todo add an extensions unit test that this adds properties to the context
   .properties(({ context }) => {
     return {
       document: createMethodDocument(context),
@@ -20,25 +21,28 @@ export interface Properties extends Extension.PropertiesTypeFunction {
   return: Properties_<this['parameters']>
 }
 
-type Properties_<$Parameters extends Extension.PropertiesTypeFunctionParameters> =
+type Properties_<
+  $Parameters extends Extension.PropertiesTypeFunctionParameters,
+  __Name extends string = $Parameters['context']['configuration']['schema']['current']['name'],
+> =
   // todo
   // GlobalRegistry.Has<$Context['name']> extends false
   // eslint-disable-next-line
   // @ts-ignore passes after generation
-  GlobalRegistry.Has<$Parameters['context']['name']> extends false ? {}
+  GlobalRegistry.Has<__Name> extends false ? {}
     : (
       // eslint-disable-next-line
       // @ts-ignore Passes after generation
-      & TypeFunction.Call<GlobalRegistry.GetOrDefault<$Parameters['context']['name']>['interfaces']['Root'], $Context>
+      & TypeFunction.Call<GlobalRegistry.GetOrDefault<__Name>['interfaces']['Root'], $Parameters['context']>
       & {
-        // eslint-disable-next-line
-        // @ts-ignore Passes after generation
-        document: ContextTransports.PreflightCheck<
+        // // eslint-disable-next-line
+        // // @ts-ignore Passes after generation
+        document: GraffleKit.Context.Configuration.Check.Preflight<
           $Parameters['context'],
           TypeFunction.Call<
             GlobalRegistry.GetOrDefault<
               // @ts-expect-error
-              $Parameters['context']['name']
+              __Name
             >['interfaces']['Document'],
             $Parameters['context']
           >

@@ -118,10 +118,12 @@ export interface Chain<
   properties: <properties extends object>(
     propertiesInit: properties | Properties.PropertiesComputer<Context, properties, __$ConfigurationNormalized>
   ) => Chain<$Context, {
-    readonly [_ in keyof $Data]: _ extends 'propertiesStatic' ?
-      properties extends Properties.PropertiesComputerTypeFunction
-        ? $Data['propertiesStatic']
-        : ObjectMergeShallow<$Data['propertiesStatic'], properties>
+    // dprint-ignore
+    readonly [_ in keyof $Data]:
+      _ extends 'propertiesStatic' ?
+        properties extends Properties.PropertiesComputerTypeFunction
+          ? $Data['propertiesStatic']
+          : ObjectMergeShallow<$Data['propertiesStatic'], properties>
       : _ extends 'propertiesComputedTypeFunctions$' ?
         properties extends Properties.PropertiesComputerTypeFunction
           ? readonly [properties]
@@ -156,7 +158,6 @@ export interface Chain<
   /**
    * TODO
    */
-  // todo: extension stores the initialization configuration statically...
   // dprint-ignore
   return: () =>
       & ($Data['configurator'] extends Configurator
@@ -167,8 +168,8 @@ export interface Chain<
                 }
               )
             & {
-              configurator: $Data['configurator']
-            }
+                configurator: $Data['configurator']
+              }
           : $Data
         )
       & ($Data['static'] extends object ? $Data['static'] : unknown)

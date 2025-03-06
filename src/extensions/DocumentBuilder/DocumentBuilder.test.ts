@@ -2,6 +2,7 @@ import { describe, expect } from 'vitest'
 import { test } from '../../../tests/_/helpers.js'
 import { Graffle } from '../../entrypoints/main.js'
 import { Throws } from '../Throws/Throws.js'
+import { Possible } from './__fixtures__/possible/_namespace.js'
 import { DocumentBuilder } from './DocumentBuilder.js'
 
 describe(`without a registered client, document builder is not statically available but still works at runtime`, () => {
@@ -20,6 +21,9 @@ describe(`without a registered client, document builder is not statically availa
   })
 
   test(`available methods`, () => {
-    expect(graffle.gql).toBeTypeOf(`function`)
+    const possible = Possible.create()
+    expect(possible.document).toBeTypeOf(`function`)
+    expect(possible.query.$batch).toBeTypeOf(`function`)
+    expect(possible.mutation.$batch).toBeTypeOf(`function`)
   })
 })
