@@ -132,16 +132,6 @@ enum TrainerClass {
 }"
 `;
 
-exports[`can load schema from custom dir using default file name 1`] = `
-"type Query {
-	defaultNamedSchemaFile: Boolean
-}
-"
-`;
+exports[`can load schema from custom dir using default file name 1`] = `"type Query { defaultNamedSchemaFile: Boolean }"`;
 
-exports[`can load schema from custom path 1`] = `
-"type Query {
-	customNamedSchemaFile: Boolean
-}
-"
-`;
+exports[`can load schema from custom path 1`] = `"type Query { customNamedSchemaFile: Boolean }"`;
