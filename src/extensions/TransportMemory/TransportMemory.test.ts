@@ -1,5 +1,4 @@
 // import { expectTypeOf } from 'vitest'
-import { schema } from '../../../tests/_/fixtures/schemas/possible/schema.js'
 import { test } from '../../../tests/_/helpers.js'
 import { Graffle } from '../../entrypoints/main.js'
 // import { Transport } from '../types/Transport.js'
@@ -28,7 +27,8 @@ import { Graffle } from '../../entrypoints/main.js'
 //   })
 // })
 
-test(`cannot set headers in constructor`, () => {
+// todo this is a client test.
+test(`cannot set unknown properties`, ({ schemas: { possible: schema } }) => {
   // todo: This error is poor for the user. It refers to schema not being a URL. The better message would be that headers is not allowed with memory transport.
   // @ts-expect-error headers not allowed with GraphQL schema
   Graffle.create().transport({ schema, headers: { 'x-foo': `bar` } })

@@ -96,10 +96,11 @@
   "homepage": "https://github.com/graffle-js/graffle",
   "scripts": {
     "extension:document-builder:tests:generate-fixtures": "tsx src/extensions/DocumentBuilder/__fixtures__/generate.ts",
+    "extension:schema-errors:tests:generate-fixtures": "pnpm graffle --project src/extensions/SchemaErrors/tests/fixture",
     "graffle": "tsx ./src/generator/cli/generate.ts",
     "serve:pokemon": "tsx tests/_/services/pokemonManual.ts",
     "gen:graffle": "pnpm gen:graffle:tests && pnpm build && pnpm website:gen:graffle",
-    "gen:graffle:tests": "pnpm test:e2e:github:gen:graffle && pnpm graffle --project src/extensions/SchemaErrors/tests/fixture",
+    "gen:graffle:tests": "pnpm test:e2e:github:gen:graffle",
     "examples:gen:graffle": "pnpm build && cd examples && pnpm i && pnpm gen:graffle",
     "examples:link-mode": "cd examples && pnpm add ..",
     "examples:check:types": "cd examples && tsc --noEmit",

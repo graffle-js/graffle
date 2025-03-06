@@ -1,19 +1,37 @@
 import { expect, test } from 'vitest'
-import { Possible } from '../../../tests/_/fixtures/schemas/possible/graffle/_namespace.js'
-import { schema } from '../../../tests/_/fixtures/schemas/possible/schema.js'
-import { TransportMemory } from '../TransportMemory/TransportMemory.js'
+import { Extension } from '../../entrypoints/extension.js'
+import { GraffleBare } from '../../entrypoints/presets/bare.js'
 import { Throws } from './Throws.js'
 
-const graffle = Possible
+const graffle = GraffleBare
   .create({
     output: { errors: { execution: `return` } },
   })
-  .use(TransportMemory)
-  .transport(`memory`, { schema })
+  .transport(
+    Extension.Transport
+      .create(`test`)
+      .pack({
+        // todo: this should be the default.
+        run: (input) => input,
+      })
+      .exchange({
+        run: (input) => input,
+      })
+      .unpack({
+        run: (input) => {
+          return {
+            ...input,
+            result: {
+              errors: [{ message: `test` }],
+            },
+          }
+        },
+      }),
+  )
   .use(Throws)
   .throws()
 
-test(`.gql() throws if errors array non-empty`, async () => {
+test.only(`.gql() throws if errors array non-empty`, async () => {
   await expect(graffle.gql`query { foo }`.send()).rejects.toMatchInlineSnapshot(
     `[ContextualAggregateError: One or more errors in the execution result.]`,
   )

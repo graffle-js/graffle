@@ -1,7 +1,6 @@
 import { describe, expectTypeOf, test } from 'vitest'
-import { type Extension } from '../../../extension/$.js'
 import { SchemaErrors } from '../runtime.js'
-import { GraffleSchemaErrors } from './fixture/graffle/__.js'
+import { GraffleSchemaErrors } from './fixture/graffle/_namespace.js'
 
 const g = GraffleSchemaErrors.create({ check: { preflight: false } }).use(SchemaErrors())
 

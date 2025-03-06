@@ -11,8 +11,7 @@ import { injectTypenameOnRootResultFields } from './injectTypenameOnRootResultFi
 export const SchemaErrors = Extension
   .create(`SchemaErrors`)
   .requestInterceptor(async ({ pack }) => {
-    const state = pack.input.state
-    const sddm = state.schemaMap
+    const sddm = pack.input.state.configuration.schema.current.map
 
     if (!sddm) return pack()
 

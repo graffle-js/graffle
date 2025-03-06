@@ -1,9 +1,9 @@
 import { trace, type Tracer } from '@opentelemetry/api'
-import { Configurator, Extension } from '../../entrypoints/extension.js'
+import { Extension } from '../../entrypoints/extension.js'
 
-export const OpenTelemetry = Extension(`openTelemetry`)
+export const OpenTelemetry = Extension.create(`openTelemetry`)
   .configurator(
-    Configurator()
+    Extension.Configurator()
       .input<{
         /**
          * @defaultValue `"opentelemetry"`

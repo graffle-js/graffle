@@ -7,7 +7,7 @@ import { getOperationDefinition } from '../../../lib/grafaid/document.js'
 import { isSymbol } from '../../../lib/prelude.js'
 import type { RequestPipeline } from '../../../requestPipeline/RequestPipeline.js'
 import { Select } from '../Select/__.js'
-import { SelectionSetGraphqlMapper } from '../SelectGraphQLMapper/__.js'
+import { SelectionSetGraphqlMapper } from '../SelectGraphQLMapper/_namespace.js'
 
 export const createMethodDocument = (state: Context) => (document: Select.Document.DocumentObject) => {
   const documentNormalized = Select.Document.normalizeOrThrow(document)

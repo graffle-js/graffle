@@ -1,10 +1,9 @@
 import { describe, expect, expectTypeOf } from 'vitest'
-import { Graffle as Pokemon } from '../../../tests/_/fixtures/schemas/pokemon/graffle/__.js'
-import { schema as schemaPokemon } from '../../../tests/_/fixtures/schemas/pokemon/schema.js'
-import { createGraphQLResponse, createGraphQLResponseData, test } from '../../../tests/_/helpers.js'
+import { createGraphQLResponse, createGraphQLResponseData, test as testBase } from '../../../tests/_/helpers.js'
 import { serveSchema } from '../../../tests/_/lib/serveSchema.js'
-import { Graffle } from '../../entrypoints/main.js'
+import { GraffleBare } from '../../entrypoints/presets/bare.js'
 import { ACCEPT_REC, CONTENT_TYPE_REC } from '../../lib/grafaid/http/http.js'
+import { TransportHttp } from './TransportHttp.js'
 
 const url = new URL(`https://foo.io/api/graphql`)
 
@@ -33,11 +32,22 @@ const url = new URL(`https://foo.io/api/graphql`)
 //   })
 // })
 
-test(`when envelope is used then response property is present even if relying on schema url default`, async () => {
-  const service = await serveSchema({ schema: schemaPokemon })
-  const pokemon = Pokemon.create({ output: { envelope: true } })
-  pokemon._.transports.configurations.http
-  const result = await pokemon.query.pokemons({ name: true })
+const createG1 = () => GraffleBare.create().use(TransportHttp)
+
+const test = testBase.extend<{
+  g1: ReturnType<typeof createG1>
+}>({
+  // eslint-disable-next-line
+  g1: async ({}, use) => {
+    const g0 = createG1()
+    await use(g0)
+  },
+})
+
+test(`when envelope is used then response property is present even if relying on schema url default`, async ({ g1, schemas: { pokemon: schema } }) => {
+  const service = await serveSchema({ schema })
+  const g2 = g1.with({ output: { envelope: true } }).transport({ url: service.url })
+  const result = await g2.gql`pokemons { name }`.send()
   await service.stop()
   // @ts-expect-error fixme
   expectTypeOf(result.response).toEqualTypeOf<Response>()
@@ -45,9 +55,9 @@ test(`when envelope is used then response property is present even if relying on
 
 describe(`methodMode`, () => {
   describe(`default (post)`, () => {
-    test(`sends spec compliant post request by default`, async ({ fetch }) => {
+    test(`sends spec compliant post request by default`, async ({ fetch, g1 }) => {
       fetch.mockImplementationOnce(() => Promise.resolve(createGraphQLResponseData({ id: `abc` })))
-      await Graffle.create().transport({ url: `https://abc` }).gql`query { id }`.send()
+      await g1.transport({ url: `https://abc` }).gql`query { id }`.send()
       const request = fetch.mock.calls[0]?.[0]
       expect(request?.method).toEqual(`POST`)
       expect(request?.headers.get(`content-type`)).toEqual(CONTENT_TYPE_REC)
@@ -55,10 +65,10 @@ describe(`methodMode`, () => {
     })
   })
   describe(`get`, () => {
-    test(`can set method mode to get`, async ({ fetch }) => {
+    test(`can set method mode to get`, async ({ g1, fetch }) => {
       fetch.mockImplementationOnce(() => Promise.resolve(createGraphQLResponse({ data: { user: { name: `foo` } } })))
-      const graffle = Graffle.create().transport({ url, methodMode: `getReads` })
-      await graffle.gql`query foo($id: ID!){user(id:$id){name}}`.send(`foo`, { 'id': `QVBJcy5ndXJ1` })
+      const g2 = g1.transport({ url, methodMode: `getReads` })
+      await g2.gql`query foo($id: ID!){user(id:$id){name}}`.send(`foo`, { 'id': `QVBJcy5ndXJ1` })
       const request = fetch.mock.calls[0]?.[0]
       expect(request?.method).toEqual(`GET`)
       expect(request?.headers.get(`content-type`)).toEqual(null)
@@ -67,17 +77,17 @@ describe(`methodMode`, () => {
         `"https://foo.io/api/graphql?query=query+foo%28%24id%3A+ID%21%29%7Buser%28id%3A%24id%29%7Bname%7D%7D&variables=%7B%22id%22%3A%22QVBJcy5ndXJ1%22%7D&operationName=foo"`,
       )
     })
-    test(`if no variables or operationName then search parameters are omitted`, async ({ fetch }) => {
+    test(`if no variables or operationName then search parameters are omitted`, async ({ g1, fetch }) => {
       fetch.mockImplementationOnce(() => Promise.resolve(createGraphQLResponse({ data: { user: { name: `foo` } } })))
-      const graffle = Graffle.create().transport({ url, methodMode: `getReads` })
-      await graffle.gql`query {user{name}}`.send()
+      const g2 = g1.transport({ url, methodMode: `getReads` })
+      await g2.gql`query {user{name}}`.send()
       const request = fetch.mock.calls[0]?.[0]
       expect(request?.url).toMatchInlineSnapshot(`"https://foo.io/api/graphql?query=query+%7Buser%7Bname%7D%7D"`)
     })
-    test(`mutation still uses POST`, async ({ fetch }) => {
+    test(`mutation still uses POST`, async ({ g1, fetch }) => {
       fetch.mockImplementationOnce(() => Promise.resolve(createGraphQLResponse({ data: { user: { name: `foo` } } })))
-      const graffle = Graffle.create().transport({ url, methodMode: `getReads` })
-      await graffle.gql`mutation { user { name } }`.send()
+      const g2 = g1.transport({ url, methodMode: `getReads` })
+      await g2.gql`mutation { user { name } }`.send()
       const request = fetch.mock.calls[0]?.[0]
       expect(request?.method).toEqual(`POST`)
       expect(request?.headers.get(`content-type`)).toEqual(CONTENT_TYPE_REC)
@@ -87,29 +97,29 @@ describe(`methodMode`, () => {
 })
 
 describe(`configuration`, () => {
-  test(`can set headers`, async ({ fetch }) => {
+  test(`can set headers`, async ({ g1, fetch }) => {
     fetch.mockImplementationOnce(() => Promise.resolve(createGraphQLResponse({ data: { id: `abc` } })))
-    const graffle = Graffle.create().transport({ url, headers: { 'x-foo': `bar` } })
-    graffle._.transports.configurations.http.headers
-    await graffle.gql`query { id }`.send()
+    const g2 = g1.transport({ url, headers: { 'x-foo': `bar` } })
+    g2._.transports.configurations.http.headers
+    await g2.gql`query { id }`.send()
     const request = fetch.mock.calls[0]?.[0]
     expect(request?.headers.get(`x-foo`)).toEqual(`bar`)
   })
 
-  test(`can set raw (requestInit)`, async ({ fetch }) => {
+  test(`can set raw (requestInit)`, async ({ g1, fetch }) => {
     fetch.mockImplementationOnce(() => Promise.resolve(createGraphQLResponse({ data: { id: `abc` } })))
-    const graffle = Graffle.create().transport({ url, raw: { headers: { 'x-foo': `bar` } } })
-    await graffle.gql`query { id }`.send()
+    const g2 = g1.transport({ url, raw: { headers: { 'x-foo': `bar` } } })
+    await g2.gql`query { id }`.send()
     const request = fetch.mock.calls[0]?.[0]
     expect(request?.headers.get(`x-foo`)).toEqual(`bar`)
   })
   describe(`can set signal`, () => {
     // JSDom and Node result in different errors. JSDom is a plain Error type. Presumably an artifact of JSDom and now in actual browsers.
     const abortErrorMessagePattern = /This operation was aborted|AbortError: The operation was aborted/
-    test(`to constructor`, async () => {
+    test(`to constructor`, async ({ g1 }) => {
       const abortController = new AbortController()
-      const graffle = Graffle.create().transport({ url, raw: { signal: abortController.signal } })
-      const resultPromise = graffle.gql`query { id }`.send()
+      const g2 = g1.transport({ url, raw: { signal: abortController.signal } })
+      const resultPromise = g2.gql`query { id }`.send()
       abortController.abort()
       const { caughtError } = await resultPromise.catch((caughtError: unknown) => ({ caughtError })) as any as {
         caughtError: Error

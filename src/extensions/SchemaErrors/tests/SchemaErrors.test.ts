@@ -6,7 +6,7 @@ import type { Errors } from '../../../lib/errors/_namespace.js'
 import { DocumentBuilder } from '../../DocumentBuilder/DocumentBuilder.js'
 import { TransportMemory } from '../../TransportMemory/TransportMemory.js'
 import { SchemaErrors } from '../runtime.js'
-import { GraffleSchemaErrors } from './fixture/graffle/__.js'
+import { GraffleSchemaErrors } from './fixture/graffle/_namespace.js'
 
 const graffle = GraffleSchemaErrors
   .create({
@@ -21,7 +21,7 @@ const graffle = GraffleSchemaErrors
 
 describe(`document`, () => {
   describe(`query result field`, () => {
-    test.only(`with __typename`, async () => {
+    test(`with __typename`, async () => {
       const result = (await graffle
         .document({ query: { x: { resultNonNull: { $: { $case: `ErrorOne` }, __typename: true } } } })
         .run()) as Errors.ContextualAggregateError
