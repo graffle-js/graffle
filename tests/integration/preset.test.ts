@@ -1,3 +1,4 @@
+import { expect } from 'vitest'
 import { GraffleKit } from '../../src/entrypoints/kit.js'
 import { DocumentBuilder } from '../../src/extensions/DocumentBuilder/DocumentBuilder.js'
 import { TransportHttp } from '../../src/extensions/TransportHttp/TransportHttp.js'

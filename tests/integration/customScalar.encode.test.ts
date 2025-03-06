@@ -1,12 +1,11 @@
 import { expect } from 'vitest'
 import { DocumentBuilderKit } from '../../src/entrypoints/extensions/document-builder/kit.js'
 import { GraffleBasic } from '../../src/entrypoints/presets/basic.js'
+import { Possible } from '../../src/extensions/DocumentBuilder/__fixtures__/possible/_namespace.js'
 import { Grafaid } from '../../src/lib/grafaid/_namespace.js'
 import type { Schema } from '../../src/types/Schema/_namespace.js'
 import { DateScalar } from '../_/fixtures/scalars.js'
 import { db } from '../_/fixtures/schemas/possible/db.js'
-import { Possible } from '../_/fixtures/schemas/possible/graffle/_namespace.js'
-import { schemaDrivenDataMap } from '../_/fixtures/schemas/possible/graffle/modules/schema-driven-data-map.js'
 import { possibleSchema } from '../_/fixtures/schemas/possible/schema.js'
 import { test } from '../_/helpers.js'
 import { RequestSpy } from '../_/SpyExtension.js'
@@ -39,7 +38,7 @@ const testCases = test.for<TestCase>([
 testCases(`%s`, async ([_, query, expectedVariables], {}) => {
   const g = GraffleBasic
     // todo: "name" is of type any
-    .create({ schema: { map: Possible.schemaMap, name: Possible.name } })
+    .create({ schema: { map: Possible.schemaMap, name: Possible.Name } })
     .transport(`memory`, { schema: possibleSchema })
     .use(RequestSpy)
     .scalar(DateScalar)
@@ -47,7 +46,7 @@ testCases(`%s`, async ([_, query, expectedVariables], {}) => {
   const { document, operationsVariables } = DocumentBuilderKit.SelectionSetGraphqlMapper.toGraphQL(
     DocumentBuilderKit.Select.Document.createDocumentNormalizedFromQuerySelection(query as any),
     {
-      sddm: schemaDrivenDataMap,
+      sddm: Possible.schemaMap,
       operationVariables: true,
     },
   )

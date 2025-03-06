@@ -1,13 +1,13 @@
 import { describe, expect } from 'vitest'
+import { Possible } from '../../src/extensions/DocumentBuilder/__fixtures__/possible/_namespace.js'
 import { DocumentBuilderKit } from '../../src/extensions/DocumentBuilder/_namespace.js'
 import { Grafaid } from '../../src/lib/grafaid/_namespace.js'
 import type { Schema } from '../../src/types/Schema/_namespace.js'
 import { DateScalar } from '../_/fixtures/scalars.js'
 import { db } from '../_/fixtures/schemas/possible/db.js'
-import type { Graffle } from '../_/fixtures/schemas/possible/graffle/__.js'
 import { createGraphQLResponse, createGraphQLResponseData, test } from '../_/helpers.js'
 
-type QueryWithDate = Graffle.SelectionSets.Query<
+type QueryWithDate = Possible.SelectionSets.Query<
   Schema.Scalar.Registry.AddScalar<Schema.Scalar.Registry.Empty, typeof DateScalar>
 >
 
@@ -20,36 +20,38 @@ type TestCase = [
 
 type TestCaseWith = Parameters<ReturnType<typeof test.for<TestCase>>>
 
+const possible = Possible.create().transport({ url: `https://foo` })
+
 const withBatch: TestCaseWith = [
   `$batch query %s`,
   {},
-  async ([_, query, responseData, expectedData], { fetch, kitchenSinkHttp: kitchenSink }) => {
+  async ([_, query, responseData, expectedData], { fetch }) => {
     fetch.mockResolvedValueOnce(createGraphQLResponseData(responseData))
-    expect(await kitchenSink.scalar(DateScalar).query.$batch(query)).toEqual(expectedData)
+    expect(await possible.scalar(DateScalar).query.$batch(query)).toEqual(expectedData)
   },
 ]
 
 const withGqlDocument: TestCaseWith = [
   `gql document - %s`,
   {},
-  async ([_, query, responseData, expectedData], { fetch, kitchenSinkHttp: kitchenSink }) => {
+  async ([_, query, responseData, expectedData], { fetch }) => {
     fetch.mockResolvedValueOnce(createGraphQLResponse({ data: responseData }))
     const { document } = DocumentBuilderKit.SelectionSetGraphqlMapper.toGraphQL(
       DocumentBuilderKit.Select.Document.createDocumentNormalizedFromQuerySelection(query as any),
     )
-    expect(await kitchenSink.scalar(DateScalar).gql(document).send()).toEqual(expectedData)
+    expect(await possible.scalar(DateScalar).gql(document).send()).toEqual(expectedData)
   },
 ]
 
 const withGqlString: TestCaseWith = [
   `gql string - %s`,
   {},
-  async ([_, query, responseData, expectedData], { fetch, kitchenSinkHttp: kitchenSink }) => {
+  async ([_, query, responseData, expectedData], { fetch }) => {
     fetch.mockResolvedValueOnce(createGraphQLResponse({ data: responseData }))
     const { document } = DocumentBuilderKit.SelectionSetGraphqlMapper.toGraphQL(
       DocumentBuilderKit.Select.Document.normalizeOrThrow({ query: { foo: query as any } }),
     )
-    expect(await kitchenSink.scalar(DateScalar).gql(Grafaid.Document.print(document)).send()).toEqual(expectedData)
+    expect(await possible.scalar(DateScalar).gql(Grafaid.Document.print(document)).send()).toEqual(expectedData)
   },
 ]
 
@@ -99,14 +101,14 @@ const testUnionCases = test.for<TestCase>([
   ],
 ])
 
-describe(`$batch`, () => {
+describe(`DocumentBuilder $batch`, () => {
   testGeneralCases(...withBatch)
   testAliasCases(...withBatch)
   // dprint-ignore
   describe(`object field in union`, () => {
-    testUnionCases(`%s`, async ([_, query, responseData, expectedData], { fetch, kitchenSinkHttp: kitchenSink }) => {
+    testUnionCases(`%s`, async ([_, query, responseData, expectedData], { fetch }) => {
       fetch.mockResolvedValueOnce(createGraphQLResponse({ data: responseData }))
-      expect(await kitchenSink.scalar(DateScalar).query.$batch(query)).toEqual(expectedData)
+      expect(await possible.scalar(DateScalar).query.$batch(query)).toEqual(expectedData)
     })
   })
 })
