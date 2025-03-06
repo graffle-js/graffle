@@ -33,13 +33,6 @@ interface Project {
   }>
 }
 
-// export const kitchenSink = KitchenSink
-//   .create({ check: { preflight: false } })
-//   .use(TransportMemory({
-//     schema: kitchenSinkSchema,
-//   }))
-//   .transport(`memory`)
-
 export const createGraphQLResponseData = (data: null | object = {}) =>
   new Response(JSON.stringify({ data }), { status: 200, headers: { 'content-type': CONTENT_TYPE_REC } })
 
@@ -77,16 +70,6 @@ interface Fixtures {
   //   schema: { map: SchemaDrivenDataMap }
   //   check: { preflight: false }
   // }>
-  // kitchenSink: GraffleBasic.Client.With<{
-  //   schema: { map: SchemaDrivenDataMap }
-  //   check: { preflight: false }
-  //   transports: ConfigManager.SetKeyUnsafe<
-  //     GraffleBasic.Client.Context['transports'],
-  //     `current`,
-  //     `memory`
-  //   >
-  // }>
-  // kitchenSinkData: typeof db
 }
 
 export const g0 = GraffleBare.create()

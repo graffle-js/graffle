@@ -7,7 +7,7 @@ import type { Data } from '../../transports/dataType/data.js'
 import type { Extension } from '../dataType/_namespace.js'
 
 // dprint-ignore
-export type ContextAddAndApplyMany<
+export type AddAndApplyMany<
   $Context extends Context,
   $Extensions extends readonly Extension.Data[],
   __transports extends readonly Data[] = Tuple.Flatten<{ [_ in keyof $Extensions]: $Extensions[_]['transports'] }>,
@@ -52,7 +52,7 @@ export const addAndApplyMany = <
 >(
   context: context,
   extensions: extensions,
-): ContextAddAndApplyMany<context, extensions> => {
+): AddAndApplyMany<context, extensions> => {
   if (extensions.length === 0) return context as any
 
   const newContext: Writeable<Context> = {

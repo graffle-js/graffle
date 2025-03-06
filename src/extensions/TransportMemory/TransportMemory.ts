@@ -140,6 +140,7 @@ export const TransportMemory: TransportMemory = Extension
       })
       .exchange({
         run: async (input) => {
+          // console.log(input.schema)
           const result = await execute({
             // todo: should be type safe
             schema: input.transport.schema,

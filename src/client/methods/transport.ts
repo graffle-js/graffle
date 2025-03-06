@@ -2,7 +2,7 @@ import type { Context } from '../../context/context.js'
 import { Transports } from '../../context/fragments/transports/_namespace.js'
 import type { ContextTransports, ContextTransportsNonEmpty } from '../../context/fragments/transports/fragment.js'
 import type { AddMany } from '../../context/fragments/transports/reducers/addMany.js'
-import type { Objekt, StringKeyof } from '../../lib/prelude.js'
+import type { Exact, Objekt, StringKeyof } from '../../lib/prelude.js'
 import type { Client } from '../client.js'
 
 // todo remove the JSDoc comments below. They will not be shown.
@@ -31,7 +31,7 @@ export type TransportMethod<
         _IsChanged extends boolean =
           {} extends configurationInput ? false : true
       >
-        (configurationInput: configurationInput):
+        (configurationInput: Exact<configurationInput, $Context['transports']['registry'][$Context['transports']['current']]['configurator']['input']>):
           _IsChanged extends false
             ? Client<$Context> // todo: access to current client type?
             : Client<Transports.ConfigureCurrent<$Context, configurationInput>>

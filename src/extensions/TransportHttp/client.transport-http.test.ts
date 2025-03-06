@@ -1,5 +1,5 @@
-import { describe, expect, expectTypeOf } from 'vitest'
-import { createGraphQLResponse, test } from '../../../tests/_/helpers.js'
+import { describe, expect, expectTypeOf, test } from 'vitest'
+import { createGraphQLResponse, createGraphQLResponseData, test } from '../../../tests/_/helpers.js'
 import { serveSchema } from '../../../tests/_/lib/serveSchema.js'
 import { Graffle as Pokemon } from '../../../tests/_/schemas/pokemon/graffle/__.js'
 import { schema as schemaPokemon } from '../../../tests/_/schemas/pokemon/schema.js'
@@ -45,9 +45,9 @@ test(`when envelope is used then response property is present even if relying on
 
 describe(`methodMode`, () => {
   describe(`default (post)`, () => {
-    test(`sends spec compliant post request by default`, async ({ fetch, graffle }) => {
-      fetch.mockImplementationOnce(() => Promise.resolve(createGraphQLResponse({ data: { id: `abc` } })))
-      await graffle.gql`query { id }`.send()
+    test(`sends spec compliant post request by default`, async ({ fetch }) => {
+      fetch.mockImplementationOnce(() => Promise.resolve(createGraphQLResponseData({ id: `abc` })))
+      await Graffle.create().transport({ url: `https://abc` }).gql`query { id }`.send()
       const request = fetch.mock.calls[0]?.[0]
       expect(request?.method).toEqual(`POST`)
       expect(request?.headers.get(`content-type`)).toEqual(CONTENT_TYPE_REC)

@@ -1,4 +1,5 @@
 import console from 'console'
+import { request } from 'http'
 import { Extension } from '../../entrypoints/extension.js'
 import type { Anyware } from '../../lib/anyware/_namespace.js'
 import type { Grafaid } from '../../lib/grafaid/_namespace.js'
@@ -208,7 +209,7 @@ export const TransportHttp: TransportHttp = Extension.create(`TransportHttp`)
           const operationType = isString(input.request.operation)
             ? input.request.operation
             : input.request.operation.operation
-          const methodMode = input.methodMode
+          const methodMode = input.transport.methodMode
           const requestMethod = methodMode === MethodMode.post
             ? `post`
             : OperationTypeToAccessKind[operationType] === `read`

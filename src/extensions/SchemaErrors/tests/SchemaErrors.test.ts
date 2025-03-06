@@ -1,8 +1,9 @@
 import { parse } from '@0no-co/graphql.web'
 import { describe, expect, test } from 'vitest'
+import { TestSchemas } from '../../../../tests/_/schemas/_namespaces.js'
 import { db } from '../../../../tests/_/schemas/db.js'
-import { schema } from '../../../../tests/_/schemas/possible/schema.js'
 import type { Errors } from '../../../lib/errors/_namespace.js'
+import { DocumentBuilder } from '../../DocumentBuilder/DocumentBuilder.js'
 import { TransportMemory } from '../../TransportMemory/TransportMemory.js'
 import { SchemaErrors } from '../runtime.js'
 import { GraffleSchemaErrors } from './fixture/graffle/__.js'
@@ -13,13 +14,14 @@ const graffle = GraffleSchemaErrors
       defaults: { errorChannel: `return` },
     },
   })
-  .use(TransportMemory({ schema }))
-  .transport(`memory`)
-  .use(SchemaErrors())
+  .use(DocumentBuilder)
+  .use(SchemaErrors)
+  .use(TransportMemory)
+  .transport(`memory`, { schema: TestSchemas.possible })
 
 describe(`document`, () => {
   describe(`query result field`, () => {
-    test(`with __typename`, async () => {
+    test.only(`with __typename`, async () => {
       const result = (await graffle
         .document({ query: { x: { resultNonNull: { $: { $case: `ErrorOne` }, __typename: true } } } })
         .run()) as Errors.ContextualAggregateError

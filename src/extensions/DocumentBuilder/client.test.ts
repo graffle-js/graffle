@@ -5,7 +5,10 @@ import { Throws } from '../../extensions/Throws/Throws.js'
 import { DocumentBuilder } from './DocumentBuilder.js'
 
 describe(`without a registered client, document builder is not statically available but still works at runtime`, () => {
-  const graffle = Graffle.create({ name: `unknown` }).use(Throws()).use(DocumentBuilder())
+  const graffle = Graffle
+    .create({ schema: { name: `unknown` } })
+    .use(Throws)
+    .use(DocumentBuilder)
 
   test(`unavailable methods`, () => {
     // @ts-expect-error

@@ -6,7 +6,7 @@ import type { Transports } from '../../transports/_namespace.js'
 import type { Extension } from '../dataType/_namespace.js'
 
 // dprint-ignore
-export type ContextAddAndApplyOne<
+export type AddAndApplyOne<
   $Context extends Context,
   $Extension extends Extension.Data,
 > = {

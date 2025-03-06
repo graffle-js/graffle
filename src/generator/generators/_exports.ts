@@ -18,7 +18,7 @@ export const ModuleGenerator_exports = createModuleGenerator(
     `)
     code()
     code(
-      `export { name } from './modules/${getImportName(config, ModuleGeneratorData)}'`,
+      `export { Name } from './modules/${getImportName(config, ModuleGeneratorData)}'`,
       `export { Select } from './modules/${getImportName(config, ModuleGeneratorSelect)}'`,
       `export { create } from './modules/${getImportName(config, ModuleGeneratorClient)}'`,
       `export * as SelectionSets from './modules/${getImportName(config, ModuleGeneratorSelectionSets)}'`,

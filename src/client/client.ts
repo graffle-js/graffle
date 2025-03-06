@@ -3,7 +3,7 @@ import { type ContextEmpty, contextEmpty } from '../context/ContextEmpty.js'
 import { Configuration } from '../context/fragments/configuration/_namespace.js'
 import { Extensions } from '../context/fragments/extensions/_namespace.js'
 import type { Extension } from '../context/fragments/extensions/dataType/_namespace.js'
-import type { ContextAddAndApplyOne } from '../context/fragments/extensions/reducers/addAndApplyOne.js'
+import type { AddAndApplyOne } from '../context/fragments/extensions/reducers/addAndApplyOne.js'
 import { Properties } from '../context/fragments/properties/_namespace.js'
 import { RequestInterceptors } from '../context/fragments/requestInterceptors/_namespace.js'
 import { Scalars } from '../context/fragments/scalars/_namespace.js'
@@ -72,7 +72,7 @@ export interface ClientBase<$Context extends Context> {
   /**
    * TODO
    */
-  use: <extension extends Extension.Data>(extension: extension) => Client<ContextAddAndApplyOne<$Context, extension>>
+  use: <extension extends Extension.Data>(extension: extension) => Client<AddAndApplyOne<$Context, extension>>
   /**
    * TODO
    */
