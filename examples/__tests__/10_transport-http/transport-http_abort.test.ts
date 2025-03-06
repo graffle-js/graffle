@@ -14,6 +14,6 @@ test(`transport-http_abort`, async () => {
   // If ever outputs vary by Node version, you can use this to snapshot by Node version.
   // const nodeMajor = process.version.match(/v(\d+)/)?.[1] ?? `unknown`
   await expect(exampleResultMaybeEncoded).toMatchFileSnapshot(
-    `../../../examples/__outputs__/10_transport-http/transport-http_abort.output.txt`,
+    `../../__outputs__/10_transport-http/transport-http_abort.output.txt`,
   )
 })

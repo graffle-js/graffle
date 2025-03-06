@@ -106,6 +106,7 @@
     "examples:test": "vitest --config vitest.examples.config.ts --dir tests/examples",
     "examples:gen": "tsx scripts/generate-examples-derivatives/generate.ts && pnpm format",
     "examples:gen:outputs": "tsx scripts/generate-examples-derivatives/generate.ts --outputs",
+    "examples:gen:tests": "tsx scripts/generate-examples-derivatives/generate.ts --tests && dprint fmt examples/__tests__/**/*",
     "website:gen:graffle": "pnpm build && cd website && pnpm i && pnpm gen:graffle",
     "build:watch": "tsc --project tsconfig.build.json --watch",
     "format": "pnpm build:docs && dprint fmt",

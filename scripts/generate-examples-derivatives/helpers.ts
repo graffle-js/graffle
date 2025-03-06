@@ -14,10 +14,10 @@ import {
 export const directories = {
   outputs: `./examples/__outputs__`,
   examples: `./examples`,
-  tests: `./tests/examples`,
+  tests: `./examples/__tests__`,
 }
 
-export const examplesIgnorePatterns = [`./examples/$`, directories.outputs]
+export const examplesIgnorePatterns = [`./examples/$`, directories.outputs, directories.tests]
 
 export const readExampleFiles = (name?: string) =>
   readFiles({

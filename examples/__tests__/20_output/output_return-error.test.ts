@@ -14,6 +14,6 @@ test(`output_return-error`, async () => {
   // If ever outputs vary by Node version, you can use this to snapshot by Node version.
   // const nodeMajor = process.version.match(/v(\d+)/)?.[1] ?? `unknown`
   await expect(exampleResultMaybeEncoded).toMatchFileSnapshot(
-    `../../../examples/__outputs__/20_output/output_return-error.output.txt`,
+    `../../__outputs__/20_output/output_return-error.output.txt`,
   )
 })

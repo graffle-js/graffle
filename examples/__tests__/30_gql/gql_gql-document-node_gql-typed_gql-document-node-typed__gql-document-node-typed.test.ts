@@ -16,6 +16,6 @@ test(`gql_gql-document-node_gql-typed_gql-document-node-typed__gql-document-node
   // If ever outputs vary by Node version, you can use this to snapshot by Node version.
   // const nodeMajor = process.version.match(/v(\d+)/)?.[1] ?? `unknown`
   await expect(exampleResultMaybeEncoded).toMatchFileSnapshot(
-    `../../../examples/__outputs__/30_gql/gql_gql-document-node_gql-typed_gql-document-node-typed__gql-document-node-typed.output.txt`,
+    `../../__outputs__/30_gql/gql_gql-document-node_gql-typed_gql-document-node-typed__gql-document-node-typed.output.txt`,
   )
 })

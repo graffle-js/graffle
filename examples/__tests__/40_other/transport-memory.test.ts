@@ -13,7 +13,5 @@ test(`transport-memory`, async () => {
   const exampleResultMaybeEncoded = exampleResult
   // If ever outputs vary by Node version, you can use this to snapshot by Node version.
   // const nodeMajor = process.version.match(/v(\d+)/)?.[1] ?? `unknown`
-  await expect(exampleResultMaybeEncoded).toMatchFileSnapshot(
-    `../../../examples/__outputs__/40_other/transport-memory.output.txt`,
-  )
+  await expect(exampleResultMaybeEncoded).toMatchFileSnapshot(`../../__outputs__/40_other/transport-memory.output.txt`)
 })

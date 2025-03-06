@@ -14,6 +14,6 @@ test(`anyware_short-circuit__short-circuit`, async () => {
   // If ever outputs vary by Node version, you can use this to snapshot by Node version.
   // const nodeMajor = process.version.match(/v(\d+)/)?.[1] ?? `unknown`
   await expect(exampleResultMaybeEncoded).toMatchFileSnapshot(
-    `../../../examples/__outputs__/50_anyware/anyware_short-circuit__short-circuit.output.txt`,
+    `../../__outputs__/50_anyware/anyware_short-circuit__short-circuit.output.txt`,
   )
 })
