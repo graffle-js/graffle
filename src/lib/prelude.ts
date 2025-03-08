@@ -844,15 +844,18 @@ export type EmptyArray = typeof emptyArray
 export const emptyObject = Object.freeze({})
 export type EmptyObject = typeof emptyObject
 
+// dprint-ignore
 export type ObjectMergeShallow<
   $Object1 extends object,
   $Object2 extends object,
-  __NewObject =
-    & {
-      [_ in keyof $Object1 as _ extends keyof $Object2 ? never : _]: $Object1[_]
-    }
-    & $Object2,
-> = __NewObject
+  __ =
+    {} extends $Object1
+      ? $Object2
+      : & $Object2
+        & {
+            [_ in keyof $Object1 as _ extends keyof $Object2 ? never : _]: $Object1[_]
+          }
+> = __
 
 export const as = <$Type>(value?: unknown): $Type => value as $Type
 

@@ -60,6 +60,7 @@ export const create: Create = (name) => {
             }
           }
           constructor.configurator = data.configurator
+          constructor.definition = data
           return constructor
         }
 
@@ -121,14 +122,14 @@ export interface Chain<
     // dprint-ignore
     readonly [_ in keyof $Data]:
       _ extends 'propertiesStatic' ?
-        properties extends Properties.PropertiesComputerTypeFunction
+        properties extends Properties.PropertiesComputer$Func
           ? $Data['propertiesStatic']
-          : ObjectMergeShallow<$Data['propertiesStatic'], properties>
-      : _ extends 'propertiesComputedTypeFunctions$' ?
-        properties extends Properties.PropertiesComputerTypeFunction
+          : ObjectMergeShallow<$Data['propertiesStatic'], properties> :
+      _ extends 'propertiesComputedTypeFunctions$' ?
+        properties extends Properties.PropertiesComputer$Func
           ? readonly [properties]
-          : $Data['propertiesComputedTypeFunctions$']
-      : $Data[_]
+          : $Data['propertiesComputedTypeFunctions$'] :
+      $Data[_]
   }>
   
   /**
@@ -163,12 +164,15 @@ export interface Chain<
       & ($Data['configurator'] extends Configurator
           // ? (...args: Configurator.InferParameters<$Data['configurator']>) => $Data 
           ? & (
-                <$Args extends Configurator.InferParameters<$Data['configurator']>>(...args: $Args) => $Data & {
-                  readonly configuratorInitialInput: $Args extends [infer $InitialInput] ? $InitialInput : undefined
-                }
+                <$Args extends Configurator.InferParameters<$Data['configurator']>>(...args: $Args) =>
+                  & $Data
+                  & {
+                    readonly configuratorInitialInput: $Args extends [infer $InitialInput] ? $InitialInput : undefined
+                  }
               )
             & {
-                configurator: $Data['configurator']
+                readonly definition: $Data
+                readonly configurator: $Data['configurator']
               }
           : $Data
         )

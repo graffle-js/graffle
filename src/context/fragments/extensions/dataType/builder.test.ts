@@ -11,9 +11,9 @@ type configuratorEmpty = typeof configuratorEmpty
 const configuratorAsymmetric = Configurator().input<{ a?: number }>().default({ a: 1 }).return()
 type configuratorAsymmetric = typeof configuratorAsymmetric
 
-const aName = `a`
-type aName = typeof aName
-const a$ = create(aName)
+const nameA = `a`
+type aName = typeof nameA
+const aBuilder = create(nameA)
 
 describe(`creator`, () => {
   test(`creates a chain`, () => {
@@ -23,9 +23,21 @@ describe(`creator`, () => {
   })
 })
 
+describe(`properties`, () => {
+  test(`can add static properties`, () => {
+    const a = create(nameA).properties({ a: 1 }).return()
+    // todo: readonly a: ...
+    expectTypeOf(a.propertiesStatic).toEqualTypeOf<{ a: number }>()
+  })
+  test(`can add multiple static properties`, () => {
+    const a = create(nameA).properties({ a: 1 }).properties({ b: 2 }).return()
+    expectTypeOf(a.propertiesStatic).toEqualTypeOf<{ a: number } & { b: number }>()
+  })
+})
+
 describe(`chain`, () => {
   test(`returns data if no configurator given`, () => {
-    const data = a$.return()
+    const data = aBuilder.return()
     type dataExpected = DataEmpty<aName>
     expect(data).toMatchInlineSnapshot(`
       {
@@ -45,13 +57,19 @@ describe(`creator`, () => {
     type dataExpected = Data<aName, configuratorEmpty>
     type creatorExpected = (parameters: {}) => dataExpected
 
-    const creator = a$.configurator(configuratorEmpty).return()
+    const creator = aBuilder.configurator(configuratorEmpty).return()
     expect(creator).toBeTypeOf(`function`)
     expectTypeOf(creator).toMatchTypeOf<creatorExpected>()
   })
+  test(`has definition property`, () => {
+    const A = create(nameA).configurator(configuratorEmpty).return()
+    const a = A()
+    expect(A.definition).toBe(a)
+    expectTypeOf(a).toMatchTypeOf(A.definition)
+  })
 
   test(`input optional if configurator has no required properties`, () => {
-    const A = a$.configurator(configuratorEmpty).return()
+    const A = aBuilder.configurator(configuratorEmpty).return()
 
     type expectedCreator = (configuration?: {} | undefined) => Data<aName, configuratorEmpty>
     const a = A()
@@ -74,13 +92,13 @@ describe(`creator`, () => {
   })
 
   test(`no input -> returns same data reference`, () => {
-    const A = a$.configurator(configuratorEmpty).return()
+    const A = aBuilder.configurator(configuratorEmpty).return()
     expect(A()).toBe(A())
     expect(A({})).not.toBe(A())
   })
 
   test(`input -> returns with initial input`, () => {
-    const A = a$.configurator(configuratorAsymmetric).return()
+    const A = aBuilder.configurator(configuratorAsymmetric).return()
 
     const a = A()
     expect(a.configuratorInitialInput).toBe(undefined)

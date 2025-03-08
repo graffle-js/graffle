@@ -1,5 +1,4 @@
 import { Extension } from '../../../src/entrypoints/extension.js'
-import type { Configurator } from '../../../src/lib/configurator/configurator.js'
 
 // ----------------------------
 // ATransportBuilder

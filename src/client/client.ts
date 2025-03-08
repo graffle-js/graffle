@@ -64,8 +64,8 @@ export interface ClientBase<$Context extends Context> {
     {
       [_ in keyof $Context]: _ extends 'properties' ? Properties.Add<
           $Context,
-          $Properties extends Properties.PropertiesComputerTypeFunction ? {} : $Properties,
-          $Properties extends Properties.PropertiesComputerTypeFunction ? [$Properties] : []
+          $Properties extends Properties.PropertiesComputer$Func ? {} : $Properties,
+          $Properties extends Properties.PropertiesComputer$Func ? [$Properties] : []
         >
         : $Context[_]
     }

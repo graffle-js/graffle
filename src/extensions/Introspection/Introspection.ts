@@ -102,7 +102,7 @@ export const Introspection = Extension.create(`introspection`)
   .typeOfNoExpandResultDataType<IntrospectionQuery>()
   .return()
 
-interface Properties extends Properties.PropertiesComputerTypeFunction {
+interface Properties extends Properties.PropertiesComputer$Func {
   return: Properties_<this['context']>
 }
 interface Properties_<$Context extends Context> {

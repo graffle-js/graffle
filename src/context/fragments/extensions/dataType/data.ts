@@ -10,8 +10,8 @@ export interface Data<
   $Configurator extends undefined | Configurator = undefined | Configurator,
   $NoExpandResultDataType = unknown,
   $PropertiesStatic extends object = object,
-  $PropertiesComputersTypeFunctions extends ReadonlyArray<Properties.PropertiesComputerTypeFunction> = ReadonlyArray<
-    Properties.PropertiesComputerTypeFunction
+  $PropertiesComputersTypeFunctions extends ReadonlyArray<Properties.PropertiesComputer$Func> = ReadonlyArray<
+    Properties.PropertiesComputer$Func
   >,
   $Transports extends readonly Transport.Data[] = readonly Transport.Data[],
   $Static extends object | undefined = object | undefined,

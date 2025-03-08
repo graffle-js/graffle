@@ -1,5 +1,7 @@
+import type { Configurator } from '../../../../lib/configurator/configurator.js'
 import { type Tuple, type UnknownOrAnyToNever, type Writeable } from '../../../../lib/prelude.js'
 import type { Context } from '../../../context.js'
+import { Configuration } from '../../configuration/_namespace.js'
 import { Properties } from '../../properties/_namespace.js'
 import { RequestInterceptors } from '../../requestInterceptors/_namespace.js'
 import { Transports } from '../../transports/_namespace.js'
@@ -10,15 +12,32 @@ import type { Extension } from '../dataType/_namespace.js'
 export type AddAndApplyMany<
   $Context extends Context,
   $Extensions extends readonly Extension.Data[],
+  __extensionsIndex extends Record<string, Extension.Data> =
+    Tuple.IndexBy<$Extensions, 'name'>,
+  __configurations extends Configurator.Configuration =
+    {
+      [
+        __name__ in keyof __extensionsIndex as
+          __extensionsIndex[__name__]['configurator'] extends Configurator
+            ? __name__
+            : never
+      ]:
+        __extensionsIndex[__name__]['configurator'] extends Configurator
+          ? Configuration.ConfigurationNamespace<__extensionsIndex[__name__]['configurator']>
+          : never
+    },
   __transports extends readonly Data[] =
     Tuple.Flatten<{ [_ in keyof $Extensions]: $Extensions[_]['transports'] }>,
-  __propertiesComputedTypeFunctions$ extends readonly Properties.PropertiesComputerTypeFunction[] =
+  __propertiesComputedTypeFunctions$ extends readonly Properties.PropertiesComputer$Func[] =
     Tuple.Flatten<{ [_ in keyof $Extensions]: $Extensions[_]['propertiesComputedTypeFunctions$'] }>,
   __propertiesStatic extends Properties.Properties =
-    // { [_ in keyof $Extensions]: $Extensions[_]['propertiesStatic'] }
     Tuple.ReduceObjectsMergeShallow<{ [_ in keyof $Extensions]: $Extensions[_]['propertiesStatic'] }> 
 > = {
       readonly [_ in keyof $Context]:
+        _ extends 'configuration' ?
+          {} extends __configurations
+            ? $Context[_]
+            : $Context[_] & __configurations :
         _ extends 'extensions' ?
           [...$Context['extensions'], ...$Extensions] :
         _ extends 'properties' ?
@@ -94,19 +113,15 @@ export const addAndApplyMany = <
     }
 
     if (extension.configurator) {
-      newContext.configuration = {
-        ...newContext.configuration,
-        [extension.name]: {
-          // todo: add test that default is applied even when initial input is given
-          current: extension.configuratorInitialInput
-            ? extension.configurator.inputResolver({
-              current: extension.configurator.default,
-              input: extension.configuratorInitialInput,
-            })
-            : extension.configurator.default,
-          configurator: extension.configurator,
-        },
-      }
+      const fragment = Configuration.addType(
+        newContext,
+        extension.name,
+        extension.configurator,
+        // Its possible for extension constructors to
+        // omit input when all input properties are optional.
+        extension.configuratorInitialInput ?? {},
+      )
+      Object.assign(newContext, fragment)
     }
   }
 

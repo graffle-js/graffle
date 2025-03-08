@@ -1,9 +1,13 @@
 import { describe, expect, expectTypeOf } from 'vitest'
 import { ATransport, ATransportBuilder } from '../../../tests/_/fixtures/transports.js'
 import { test } from '../../../tests/_/helpers.js'
+import {
+  propertiesComputerParameters,
+  propertiesComputerPreflight$Func,
+  propertiesStatic1,
+} from '../../context/fragments/properties/_tests/_fixtures.js'
 import { RequestInterceptors } from '../../context/fragments/requestInterceptors/_namespace.js'
 import { Extension } from '../../entrypoints/extension.js'
-import { parametersComputer, preflightComputer$Func, propertiesStatic1 } from './properties.test.js'
 
 const aExtension = Extension.create(`aExtension`).return()
 type aExtension = typeof aExtension
@@ -84,9 +88,9 @@ describe(`properties`, () => {
     expectTypeOf(g1a._.properties).toEqualTypeOf(g1b._.properties)
   })
   test(`can be added (computed, value level)`, ({ g0 }) => {
-    const bExtension = Extension.create(`bExtension`).properties(parametersComputer).return()
+    const bExtension = Extension.create(`bExtension`).properties(propertiesComputerParameters).return()
     const g1a = g0.use(bExtension)
-    const g1b = g0.properties(parametersComputer)
+    const g1b = g0.properties(propertiesComputerParameters)
     expect(Object.keys(g1a.parameters.configuration)).toEqual(Object.keys(g1b.parameters.configuration))
     expect(g1a.parameters.configuration).toBe(g1b.parameters.configuration)
     expect(g1a.parameters.client).toBe(g1a)
@@ -94,9 +98,9 @@ describe(`properties`, () => {
     expectTypeOf(g1a._.properties).toEqualTypeOf(g1b._.properties)
   })
   test(`can be added (computed, type level)`, ({ g0 }) => {
-    const bExtension = Extension.create(`bExtension`).properties(preflightComputer$Func).return()
+    const bExtension = Extension.create(`bExtension`).properties(propertiesComputerPreflight$Func).return()
     const g1a = g0.use(bExtension)
-    const g1b = g0.properties(preflightComputer$Func)
+    const g1b = g0.properties(propertiesComputerPreflight$Func)
     expect(g1a.foo).toEqual(g1b.foo)
     expect(g1a._.properties).toEqual(g1b._.properties)
     expectTypeOf(g1a._.properties).toEqualTypeOf(g1b._.properties)

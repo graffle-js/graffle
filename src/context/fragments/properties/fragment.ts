@@ -8,7 +8,7 @@ import type { Context } from '../../context.js'
 // ------------------------------------------------------------
 
 // todo put symbol here to make unique from any possible properties object
-export interface PropertiesComputerTypeFunction {
+export interface PropertiesComputer$Func {
   parameters: unknown
   // context: Context
   return: unknown
@@ -23,12 +23,12 @@ export interface PropertiesComputerTypeFunction {
 // dprint-ignore
 export type RunPropertiesComputers<
   $Context extends Context,
-  $Items extends readonly [...PropertiesComputerTypeFunction[]] = $Context['properties']['$computedTypeFunctions'],
+  $Items extends readonly [...PropertiesComputer$Func[]] = $Context['properties']['$computedTypeFunctions'],
   $Acc extends Properties = {},
 > = $Items extends
       readonly [
-        infer $Head extends PropertiesComputerTypeFunction,
-        ...infer $Tail extends readonly PropertiesComputerTypeFunction[],
+        infer $Head extends PropertiesComputer$Func,
+        ...infer $Tail extends readonly PropertiesComputer$Func[],
       ]
         ? RunPropertiesComputers<$Context, $Tail, $Acc & ($Head & { parameters: { context: $Context; client: 'todo'; configuration: 'todo' } })['return']>
         : $Acc
@@ -46,7 +46,7 @@ export type PropertiesComputer<
 ) => $Properties
 
 export const createPropertiesComputer = <
-  $Client extends Client_justContext,
+  $Client extends Client_justContext, // = Client,
 >() =>
 <
   $PropertiesComputer extends (
@@ -70,7 +70,7 @@ export interface ContextFragment {
   readonly properties: {
     readonly computed: ReadonlyArray<PropertiesComputer>
     readonly static: Properties
-    readonly $computedTypeFunctions: ReadonlyArray<PropertiesComputerTypeFunction>
+    readonly $computedTypeFunctions: ReadonlyArray<PropertiesComputer$Func>
   }
 }
 

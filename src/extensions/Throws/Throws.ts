@@ -26,7 +26,7 @@ export const Throws = Extension
   })
   .return()
 
-interface Properties extends Properties.PropertiesComputerTypeFunction {
+interface Properties extends Properties.PropertiesComputer$Func {
   return: Properties_<this['context']>
 }
 

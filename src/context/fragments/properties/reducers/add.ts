@@ -6,7 +6,7 @@ import {
   contextFragmentPropertiesTypeLevel,
   type Properties,
   type PropertiesComputer,
-  type PropertiesComputerTypeFunction,
+  type PropertiesComputer$Func,
 } from '../fragment.js'
 
 export const add = <$Context extends ContextFragment>(
@@ -48,7 +48,7 @@ export const add = <$Context extends ContextFragment>(
 export type Add<
   $Context extends ContextFragment,
   $PropertiesStatic extends Properties,
-  $PropertiesComputerTypeFunctions extends readonly PropertiesComputerTypeFunction[],
+  $PropertiesComputerTypeFunctions extends readonly PropertiesComputer$Func[],
   __ = {
     static: ObjectMergeShallow<$Context['properties']['static'], $PropertiesStatic>
     $computedTypeFunctions: readonly [
