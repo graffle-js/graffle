@@ -22,6 +22,7 @@ export const preflightComputer = createPropertiesComputer()((parameters) => ({
 export const preflightComputer$Func = preflightComputer as any as PreflightComputer$Func
 
 export interface PreflightComputer$Func extends PropertiesComputerTypeFunction {
+  // @ts-expect-error
   return: PreflightComputer<this['context']>
 }
 

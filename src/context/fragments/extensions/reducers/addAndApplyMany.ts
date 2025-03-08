@@ -10,9 +10,13 @@ import type { Extension } from '../dataType/_namespace.js'
 export type AddAndApplyMany<
   $Context extends Context,
   $Extensions extends readonly Extension.Data[],
-  __transports extends readonly Data[] = Tuple.Flatten<{ [_ in keyof $Extensions]: $Extensions[_]['transports'] }>,
-  __propertiesComputedTypeFunctions$ extends readonly Properties.PropertiesComputerTypeFunction[] = Tuple.Flatten<{ [_ in keyof $Extensions]: $Extensions[_]['propertiesComputedTypeFunctions$'] }>,
-  __propertiesStatic extends Properties.Properties = Tuple.ReduceObjectsMergeShallow<{ [_ in keyof $Extensions]: $Extensions[_]['propertiesStatic'] }> 
+  __transports extends readonly Data[] =
+    Tuple.Flatten<{ [_ in keyof $Extensions]: $Extensions[_]['transports'] }>,
+  __propertiesComputedTypeFunctions$ extends readonly Properties.PropertiesComputerTypeFunction[] =
+    Tuple.Flatten<{ [_ in keyof $Extensions]: $Extensions[_]['propertiesComputedTypeFunctions$'] }>,
+  __propertiesStatic extends Properties.Properties =
+    // { [_ in keyof $Extensions]: $Extensions[_]['propertiesStatic'] }
+    Tuple.ReduceObjectsMergeShallow<{ [_ in keyof $Extensions]: $Extensions[_]['propertiesStatic'] }> 
 > = {
       readonly [_ in keyof $Context]:
         _ extends 'extensions' ?

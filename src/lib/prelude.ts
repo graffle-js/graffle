@@ -429,11 +429,18 @@ export namespace Tuple {
 
   type AnyReadOnlyListNonEmpty = readonly [any, ...any[]]
 
-  export type ReduceObjectsMergeShallow<$Objects extends readonly object[]> = $Objects extends
-    [infer __first__ extends object, ...infer __rest__ extends readonly object[]] ?
-      & { [__k__ in keyof __first__ as __k__ extends keyof __rest__[number] ? never : __k__]: __first__[__k__] }
-      & ReduceObjectsMergeShallow<__rest__>
-    : {}
+  // dprint-ignore
+  export type ReduceObjectsMergeShallow<$Objects extends readonly object[]> =
+    $Objects extends readonly [infer __first__ extends object, ...infer __rest__ extends readonly object[]]
+      ? __rest__ extends readonly []
+        ? __first__
+        // Shallow merge
+        : & {
+              readonly [__k__ in keyof __first__ as __k__ extends keyof __rest__[number] ? never : __k__]:
+                __first__[__k__]
+            }
+          & ReduceObjectsMergeShallow<__rest__>
+      : {}
 }
 
 type NumberLiteral = number | `${number}`
