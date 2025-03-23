@@ -17,6 +17,7 @@ export const add = <
 
   for (const configuratorName in configurationInput) {
     const entry = configuration[configuratorName]
+    // initializeConfigurator(entry.configurator,)
     const current = entry.configurator.inputResolver({
       current: entry.current,
       input: configurationInput[configuratorName]!,

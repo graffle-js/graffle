@@ -1,7 +1,7 @@
 import type { Configurator } from '../../../../lib/configurator/configurator.js'
 import type { Context } from '../../../context.js'
-import { initializeConfigurator } from '../initializeConfigurator.js'
-import type { InitializeConfigurator } from '../initializeConfigurator.js'
+import { createEntry } from '../createEntry.js'
+import type { CreateEntry } from '../createEntry.js'
 
 // todo: Make use of this on the fragment for adding the base configurations
 export const addType = <
@@ -19,7 +19,7 @@ export const addType = <
     ...context,
     configuration: {
       ...context.configuration,
-      [name]: initializeConfigurator(configurator, initialInput),
+      [name]: createEntry(configurator, initialInput),
     },
   }
 
@@ -36,7 +36,7 @@ export type AddType<
   {
 		[_ in keyof $Context]:
 			_ extends 'configuration' ?
-				& { [__name__ in $Name]: InitializeConfigurator<$Configurator, $ConfiguratorInputInitial>}
+				& { [__name__ in $Name]: CreateEntry<$Configurator, $ConfiguratorInputInitial>}
 				& $Context[_] :
 			$Context[_]
 	}

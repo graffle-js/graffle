@@ -1,12 +1,12 @@
 import type { Configurator } from '../../../lib/configurator/configurator.js'
 
-export const initializeConfigurator = <
+export const createEntry = <
   $Configurator extends Configurator,
   $InitialInput extends $Configurator['input'],
 >(
   configurator: $Configurator,
   initialInput: $InitialInput,
-): InitializeConfigurator<$Configurator, $InitialInput> => {
+): CreateEntry<$Configurator, $InitialInput> => {
   return Object.freeze({
     configurator,
     current: initialInput
@@ -18,7 +18,7 @@ export const initializeConfigurator = <
   })
 }
 
-export type InitializeConfigurator<
+export type CreateEntry<
   $Configurator extends Configurator,
   $InitialInput extends $Configurator['input'],
 > = {

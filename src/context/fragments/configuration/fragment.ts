@@ -1,6 +1,6 @@
 import type { Configurator } from '../../../lib/configurator/configurator.js'
 import { Check } from './check/_namespace.js'
-import { initializeConfigurator } from './initializeConfigurator.js'
+import { createEntry } from './createEntry.js'
 import { Output } from './output/_namespace.js'
 import { Schema } from './schema/_namespace.js'
 
@@ -22,9 +22,9 @@ export interface ContextFragmentEmpty extends ContextFragment {
 
 export const contextFragmentEmpty: ContextFragmentEmpty = {
   configuration: Object.freeze({
-    output: initializeConfigurator(Output.configurator, {}),
-    check: initializeConfigurator(Check.configurator, {}),
-    schema: initializeConfigurator(Schema.configurator, {}),
+    output: createEntry(Output.configurator, {}),
+    check: createEntry(Check.configurator, {}),
+    schema: createEntry(Schema.configurator, {}),
   }),
 }
 
