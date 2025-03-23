@@ -3,7 +3,7 @@ import type { ConfigManager } from '../../config-manager/_namespace.js'
 import { Configurator } from '../../configurator/configurator.js'
 import { createMutableBuilder } from '../../mutableBuilder.js'
 import type { _, Tuple } from '../../prelude.js'
-import type { PipelineDefinition } from '../PipelineDefinition/__.js'
+import type { PipelineDefinition } from '../PipelineDefinition/_namespace.js'
 import type { StepDefinition } from '../StepDefinition.js'
 import type { Data, DataEmpty } from './Data.js'
 
@@ -12,6 +12,7 @@ export const create: Create = (parameters) => {
     discriminant: parameters.discriminant,
     configurator: Configurator.$.empty,
     steps: {},
+    configurationMount: undefined,
   }
   const step = (name: string, spec: StepDefinition) => {
     data.steps[name] = {

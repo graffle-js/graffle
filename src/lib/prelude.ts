@@ -358,7 +358,7 @@ export namespace Tuple {
         : PreviousItem_<$OfItem, $NextItem, $Rest>
       : never
 
-  export type NonEmpty = [any, ...any[]]
+  export type NonEmpty = readonly [any, ...readonly any[]]
   // dprint-ignore
   export type IntersectItems<$Items extends readonly any[]> =
     $Items extends [infer $First, ...infer $Rest extends any[]]

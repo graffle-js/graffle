@@ -57,6 +57,7 @@ export type ConfigurationDefault = typeof configurationDefault
 export interface ConfigurationInputResolver$Func
   extends Extension.Configurator.InputResolver.$Func<ConfigurationInput, ConfigurationNormalized, ConfigurationDefault>
 {
+  // @ts-expect-error: untyped parameters
   return: ConfigurationInputResolver$Func_<this['parameters']>
 }
 // dprint-ignore

@@ -1,6 +1,6 @@
 import type { FormattedExecutionResult } from 'graphql'
+import type { GraffleExecutionResultEnvelope } from '../client/handle.js'
 import type { Context } from '../context/context.js'
-import type { GraffleExecutionResultEnvelope } from '../context/fragments/configuration/output/handle.js'
 import { Anyware } from '../lib/anyware/_namespace.js'
 import type { Config } from '../lib/anyware/PipelineDefinition/Config.js'
 import type { Grafaid } from '../lib/grafaid/_namespace.js'
@@ -58,7 +58,7 @@ export namespace RequestPipeline {
     readonly overloads: readonly []
   }
 
-  export type Base = Anyware.Pipeline.InferFromDefinition<RequestPipeline.BaseDefinition>
+  export type Base = Anyware.Pipeline.InferFromDefinition<RequestPipeline.BaseDefinitionEmpty>
 
   export type BaseInterceptor = Anyware.Interceptor.InferFromPipeline<Base>
 }

@@ -6,7 +6,9 @@ import type { RequestPipeline } from '../../../../requestPipeline/_namespace.js'
 import type { Context } from '../../../context.js'
 import type { Configuration } from '../../configuration/_namespace.js'
 import type { Properties } from '../../properties/_namespace.js'
+import type { RequestInterceptors } from '../../requestInterceptors/_namespace.js'
 import { Transport } from '../../transports/dataType/_namespace.js'
+import type { ContextComputerParameters } from '../../types.js'
 import { type Data, type DataEmpty, dataPropertiesTypeOnly } from './data.js'
 import type { DependentExtensionParameters } from './DependentExtensionParameters.js'
 import type * as _re_export from './properties.js'
@@ -22,6 +24,7 @@ export const create: Create = (name) => {
     static: {},
     propertiesStatic: {},
     propertiesComputed: [],
+    requestInterceptorsComputed: [],
     ...dataPropertiesTypeOnly,
   }
 
@@ -37,6 +40,11 @@ export const create: Create = (name) => {
       },
       requestInterceptor(requestInterceptor: RequestPipeline.BaseInterceptor) {
         data.requestInterceptor = requestInterceptor
+      },
+      requestInterceptorDependingOn(requestInterceptorComputer: RequestInterceptors.RequestInterceptorComputer) {
+        // @ts-expect-error: todo have an internal type with this property
+        requestInterceptorComputer.sourceExtension = name // todo use symbol, can it be dynamic?
+        data.requestInterceptorsComputed.push(requestInterceptorComputer)
       },
       configurator(configurator: Configurator.DataInput) {
         data.configurator = Configurator.$.normalizeDataInput(configurator)
@@ -107,8 +115,13 @@ export interface Chain<
   /**
    * todo
    */
+  requestInterceptorDependingOn: <$RequestInterceptor extends RequestPipeline.BaseInterceptor>(
+    requestInterceptorFactory: ((parameters: ContextComputerParameters<$Context, __$ConfigurationNormalized>) => $RequestInterceptor),
+  ) => Chain<$Context, {
+    readonly [_ in keyof $Data]: _ extends 'requestInterceptor' ? $RequestInterceptor : $Data[_]
+  }>
   requestInterceptor: <$RequestInterceptor extends RequestPipeline.BaseInterceptor>(
-    requestInterceptor: $RequestInterceptor,
+    requestInterceptor: $RequestInterceptor
   ) => Chain<$Context, {
     readonly [_ in keyof $Data]: _ extends 'requestInterceptor' ? $RequestInterceptor : $Data[_]
   }>

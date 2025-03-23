@@ -1,7 +1,7 @@
 import type { ConfigManager } from '../../config-manager/_namespace.js'
 import type { Overload } from '../Overload/_namespace.js'
 import type { StepDefinition } from '../StepDefinition.js'
-import type { PipelineDefinition } from './__.js'
+import type { PipelineDefinition } from './_namespace.js'
 
 export namespace Updaters {
   export type SetInput<

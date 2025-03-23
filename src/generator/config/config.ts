@@ -311,7 +311,6 @@ const createConfigSchema = async (
           url: input.schema.url,
           headers: input.schema.headers,
         })
-      // todo introspection method should not be available without a transport
       const data = await graffle.introspect()
       if (!data) {
         throw new Error(`No data returned for introspection query.`)

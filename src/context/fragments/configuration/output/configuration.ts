@@ -123,6 +123,7 @@ export const configurator = C()
 export type Configurator = typeof configurator
 
 export interface InputResolver$Func extends C.InputResolver.$Func<Input, Normalized, Default_> {
+  // @ts-expect-error: untyped parameters
   return: InputResolver<this['parameters']>
 }
 

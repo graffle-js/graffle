@@ -8,7 +8,7 @@ import {
   type NonRetryingInterceptorInput,
 } from '../Interceptor/Interceptor.js'
 import type { Pipeline } from '../Pipeline/Pipeline.js'
-import type { PipelineDefinition } from '../PipelineDefinition/__.js'
+import type { PipelineDefinition } from '../PipelineDefinition/_namespace.js'
 import { successfulResult } from '../Result.js'
 import type { StepDefinition } from '../StepDefinition.js'
 import type { StepResultErrorExtension } from '../StepResult.js'

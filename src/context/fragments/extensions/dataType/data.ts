@@ -1,6 +1,7 @@
 import type { Configurator } from '../../../../lib/configurator/configurator.js'
 import { undefinedAs } from '../../../../lib/prelude.js'
 import type { RequestPipeline } from '../../../../requestPipeline/_namespace.js'
+import type { RequestInterceptors } from '../../../_exports.js'
 import type { Properties } from '../../properties/_namespace.js'
 import type { Transport } from '../../transports/dataType/_namespace.js'
 import type * as _re_export from './properties.js'
@@ -25,7 +26,9 @@ export interface Data<
   //   requestInterceptor?: RequestPipeline.BaseInterceptor
   //   properties?: object
   // }
+  // todo make array
   readonly requestInterceptor?: RequestPipeline.BaseInterceptor
+  readonly requestInterceptorsComputed: readonly RequestInterceptors.RequestInterceptorComputer[]
   readonly noExpandResultDataType?: $NoExpandResultDataType
   readonly propertiesStatic: $PropertiesStatic
   readonly propertiesComputed: ReadonlyArray<Properties.PropertiesComputer>
@@ -40,8 +43,9 @@ export interface DataEmpty<$Name extends string = string> extends Data<$Name> {
   readonly configurator: undefined
   readonly configuratorInitialInput: unknown
   readonly requestInterceptor: undefined
+  readonly requestInterceptorsComputed: readonly []
   readonly noExpandResultDataType: undefined
-  readonly transports: []
+  readonly transports: [] // todo readonly
   readonly static: undefined
   readonly propertiesStatic: {}
   readonly propertiesComputed: readonly []

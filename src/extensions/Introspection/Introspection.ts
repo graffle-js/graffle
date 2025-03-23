@@ -103,7 +103,8 @@ export const Introspection = Extension.create(`introspection`)
   .return()
 
 interface Properties extends Properties.PropertiesComputer$Func {
-  return: Properties_<this['context']>
+  // @ts-expect-error: untyped this
+  return: Properties_<this['parameters']['context']>
 }
 interface Properties_<$Context extends Context> {
   introspect: Configuration.Check.Preflight<

@@ -1,7 +1,8 @@
 import { trace, type Tracer } from '@opentelemetry/api'
 import { Extension } from '../../entrypoints/extension.js'
 
-export const OpenTelemetry = Extension.create(`openTelemetry`)
+export const OpenTelemetry = Extension
+  .create(`openTelemetry`)
   .configurator(
     Extension.Configurator()
       .input<{
@@ -14,7 +15,7 @@ export const OpenTelemetry = Extension.create(`openTelemetry`)
         tracerName: `graffle`,
       }),
   )
-  .requestInterceptor(({ configuration }) => {
+  .requestInterceptorDependingOn(({ configuration }) => {
     const tracer = trace.getTracer(configuration.openTelemetry.current.tracerName)
     const startActiveGraffleSpan = startActiveSpan(tracer)
 

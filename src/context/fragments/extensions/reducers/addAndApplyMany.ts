@@ -98,7 +98,10 @@ export const addAndApplyMany = <
     if (extension.requestInterceptor) {
       Object.assign(
         newContext,
-        RequestInterceptors.add(newContext, extension.requestInterceptor),
+        RequestInterceptors.add(newContext, {
+          static: [extension.requestInterceptor],
+          computed: extension.requestInterceptorsComputed,
+        }),
       )
     }
 

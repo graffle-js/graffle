@@ -44,6 +44,7 @@ describe(`chain`, () => {
         "name": "a",
         "propertiesComputed": [],
         "propertiesStatic": {},
+        "requestInterceptorsComputed": [],
         "static": {},
         "transports": [],
       }
@@ -82,6 +83,7 @@ describe(`creator`, () => {
         "name": "a",
         "propertiesComputed": [],
         "propertiesStatic": {},
+        "requestInterceptorsComputed": [],
         "static": {},
         "transports": [],
       }

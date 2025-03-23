@@ -1,14 +1,22 @@
 import type { RequestPipeline } from '../../../../requestPipeline/RequestPipeline.js'
 import type { ContextFragment } from '../fragment.js'
+import type { RequestInterceptorComputer } from '../helpers.js'
 
 export const add = (
   context: ContextFragment,
-  interceptor: RequestPipeline.BaseInterceptor,
+  interceptorsInput: {
+    static: readonly RequestPipeline.BaseInterceptor[]
+    computed: readonly RequestInterceptorComputer[]
+  },
 ): ContextFragment => {
-  const newContextFragment = {
+  const newContextFragment: ContextFragment = {
     requestPipelineInterceptors: Object.freeze([
       ...context.requestPipelineInterceptors,
-      interceptor,
+      ...interceptorsInput.static,
+    ]),
+    requestPipelineInterceptorsComputed: Object.freeze([
+      ...context.requestPipelineInterceptorsComputed,
+      ...interceptorsInput.computed,
     ]),
   }
   return newContextFragment

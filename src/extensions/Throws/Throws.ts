@@ -27,7 +27,8 @@ export const Throws = Extension
   .return()
 
 interface Properties extends Properties.PropertiesComputer$Func {
-  return: Properties_<this['context']>
+  // @ts-expect-error: untyped parameters
+  return: Properties_<this['parameters']['context']>
 }
 
 // dprint-ignore

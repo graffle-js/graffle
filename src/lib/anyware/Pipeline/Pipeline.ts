@@ -97,8 +97,7 @@ export namespace Pipeline {
   }
 
   // dprint-ignore
-  type InferSteps<$PipelineDef extends PipelineDefinition> =
-    InferSteps_<$PipelineDef['steps'], $PipelineDef>
+  type InferSteps<$PipelineDef extends PipelineDefinition> = InferSteps_<$PipelineDef['steps'], $PipelineDef>
   // dprint-ignore
   type InferSteps_<
     $StepDefs extends readonly StepDefinition[],
@@ -152,7 +151,10 @@ export namespace Pipeline {
     }>
 
   // dprint-ignore
-  type InferStepOutput<$Step extends StepDefinition, $Overload extends Overload.Data> = $Overload extends never ? never :
+  type InferStepOutput<
+    $Step extends StepDefinition,
+    $Overload extends Overload.Data
+  > = Overload.Data extends $Overload ? never :
     & $Step['output']
     & { [_ in $Overload['discriminant']['name']]: $Overload['discriminant']['value'] }
     & $Overload['steps'][$Step['name']]['output']

@@ -5,7 +5,7 @@ import { Overload } from '../Overload/_namespace.js'
 import { Pipeline } from '../Pipeline/Pipeline.js'
 import type { StepDefinition } from '../StepDefinition.js'
 import type { StepRunner } from '../StepRunner.js'
-import type { PipelineDefinition } from './__.js'
+import type { PipelineDefinition } from './_namespace.js'
 import { type Options, resolveOptions } from './Config.js'
 
 /**
@@ -126,7 +126,7 @@ export type GetNextStepParameterPrevious<$Context extends PipelineDefinition> =
     ? GetNextStepPrevious_<$Context['steps']>
     : undefined
 
-type GetNextStepPrevious_<$Steps extends StepDefinition[]> = Tuple.IntersectItems<
+type GetNextStepPrevious_<$Steps extends readonly StepDefinition[]> = Tuple.IntersectItems<
   {
     [$Index in keyof $Steps]: {
       [$StepName in $Steps[$Index]['name']]: {
@@ -192,10 +192,13 @@ const recreate = <$Pipeline extends PipelineDefinition>(pipeline: $Pipeline): Bu
     },
     overload: (builderCallback) => {
       const overload = builderCallback({ create: Overload.create })
-      // todo why mutating here? stop it. make like use extension.
-      pipeline.overloads.push(overload.data)
-
-      return recreate(pipeline) as any
+      return recreate({
+        ...pipeline,
+        overloads: [
+          ...pipeline.overloads,
+          overload.data,
+        ],
+      } as any)
     },
   }
 

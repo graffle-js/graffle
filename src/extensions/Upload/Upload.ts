@@ -2,7 +2,7 @@ import { Extension } from '../../entrypoints/extension.js'
 import type { RequestAnalyzedInput } from '../../lib/grafaid/graphql.js'
 import { createBody } from './createBody.js'
 
-// todo
+// todo [1]
 // need way to have this extension rely on http extension being used
 
 /**
@@ -13,6 +13,7 @@ export const Upload = Extension
   .requestInterceptor(async function Upload1({ pack }) {
     if (!isUploadRequest(pack.input.request)) return pack()
 
+    // @ts-expect-error 1
     // TODO we can probably get file upload working for in-memory schemas too :)
     if (pack.input.transportType !== `http`) {
       throw new Error(`Must be using http transport to use "Upload" scalar.`)
@@ -26,7 +27,7 @@ export const Upload = Extension
       using: {
         // @ts-expect-error fixme
         body(input) {
-          // console.log(1000)
+          // @ts-expect-error 1
           // TODO we can probably get file upload working for in-memory schemas too :)
           if (pack.input.transportType !== `http`) {
             throw new Error(`Must be using http transport to use "Upload" scalar.`)
@@ -47,9 +48,12 @@ export const Upload = Extension
       },
       input: {
         ...pack.input,
+        // @ts-expect-error 1
         transport: {
+          // @ts-expect-error 1
           ...pack.input.transport,
           headers: {
+            // @ts-expect-error 1
             ...pack.input.transport.headers,
             'content-type': ``,
           },

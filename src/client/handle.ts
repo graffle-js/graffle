@@ -21,7 +21,6 @@ import {
   type Values,
 } from '../lib/prelude.js'
 import type { RequestPipeline } from '../requestPipeline/_namespace.js'
-import type { GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
 import type { RequestResult } from '../types/RequestResult.ts/__.js'
 
 export type GraffleExecutionResultEnvelope = {

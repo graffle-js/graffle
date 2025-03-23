@@ -1,11 +1,9 @@
 import type { OperationTypeNode } from 'graphql'
-import { handleOutput } from '../../../client/handle.js'
+import { sendRequest } from '../../../client/send.js'
 import { type Context } from '../../../context/context.js'
-import { Anyware } from '../../../lib/anyware/_namespace.js'
 import type { Grafaid } from '../../../lib/grafaid/_namespace.js'
 import { getOperationDefinition } from '../../../lib/grafaid/document.js'
 import { isSymbol } from '../../../lib/prelude.js'
-import type { RequestPipeline } from '../../../requestPipeline/RequestPipeline.js'
 import { Select } from '../Select/__.js'
 import { SelectionSetGraphqlMapper } from '../SelectGraphQLMapper/_namespace.js'
 
@@ -72,7 +70,6 @@ const executeDocument = async (
   document: Select.Document.DocumentNormalized,
   operationName?: string,
 ) => {
-  if (!context.transports.current) throw new Error(`No transport configured.`)
   const request = graffleMappedResultToRequest(
     SelectionSetGraphqlMapper.toGraphQL(document, {
       sddm: context.configuration.schema.current.map,
@@ -82,23 +79,7 @@ const executeDocument = async (
     operationName,
   )
 
-  const initialInput = {
-    [context.transports.registry[context.transports.current]!.discriminant[`name`]]:
-      context.transports.registry[context.transports.current]!.discriminant[`value`],
-    [context.transports.registry[context.transports.current]!.configurationMount]:
-      context.transports.configurations[context.transports.current],
-    ...context.transports.configurations[context.transports.current],
-    state: context,
-    request,
-  } as RequestPipeline.Base['input']
-
-  const pipeline = Anyware.Pipeline.create(context.requestPipelineDefinition) // todo memoize
-  const result = await Anyware.PipelineDefinition.run(pipeline, {
-    initialInput,
-    interceptors: context.requestPipelineInterceptors,
-  })
-
-  return handleOutput(context, result)
+  return sendRequest(context, request)
 }
 
 export const graffleMappedResultToRequest = (

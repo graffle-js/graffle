@@ -8,16 +8,16 @@ import { Properties } from '../context/fragments/properties/_namespace.js'
 import { RequestInterceptors } from '../context/fragments/requestInterceptors/_namespace.js'
 import { Scalars } from '../context/fragments/scalars/_namespace.js'
 import { Transports } from '../context/fragments/transports/_namespace.js'
-import { Anyware } from '../lib/anyware/_namespace.js'
+import type { Anyware } from '../lib/anyware/_namespace.js'
 import { getOperationType } from '../lib/grafaid/document.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
 import type { RequestPipeline } from '../requestPipeline/RequestPipeline.js'
 import { type ContextFragment, ContextFragments } from '../types/ContextFragment.js'
-import { handleOutput } from './handle.js'
 import { GqlMethod } from './methods/gql/gql.js'
 import { GqlMethodSendMethod } from './methods/gql/send.js'
 import { ScalarMethod } from './methods/scalars.js'
 import { TransportMethod } from './methods/transport.js'
+import { sendRequest } from './send.js'
 
 export type ClientEmpty = Client<ContextEmpty>
 
@@ -132,8 +132,9 @@ export const create: Create = createConstructorWithContext(contextEmpty)
 export const createWithContext = <$Context extends Context>(
   context: $Context,
 ): Client<$Context> => {
+  // todo remove null input?
   const copy = (fragment: null | ContextFragment) => {
-    const newContext = ContextFragments.merge(context, fragment)
+    const newContext = fragment === null ? context : ContextFragments.merge(context, fragment) as Context // todo no cast
     if (newContext === context) return client
     return createWithContext(newContext) as any
   }
@@ -143,7 +144,7 @@ export const createWithContext = <$Context extends Context>(
     _: context,
     anyware(interceptor) {
       const interceptor_ = interceptor as any as RequestPipeline.BaseInterceptor
-      return copy(RequestInterceptors.add(context, interceptor_))
+      return copy(RequestInterceptors.add(context, { static: [interceptor_], computed: [] }))
     },
     properties(properties) {
       const isComputed = typeof properties === `function`
@@ -204,22 +205,7 @@ export const createWithContext = <$Context extends Context>(
             operationName,
           }
 
-          const initialInput = {
-            [context.transports.registry[context.transports.current]!.discriminant[`name`]]:
-              context.transports.registry[context.transports.current]!.discriminant[`value`],
-            [context.transports.registry[context.transports.current]!.configurationMount]:
-              context.transports.configurations[context.transports.current],
-            state: context,
-            request: analyzedRequest,
-          } as RequestPipeline.Base['input']
-
-          const requestPipeline = Anyware.Pipeline.create(context.requestPipelineDefinition)
-          const result = await Anyware.PipelineDefinition.run(requestPipeline, {
-            initialInput,
-            interceptors: context.requestPipelineInterceptors,
-          })
-
-          return handleOutput(context, result)
+          return sendRequest(context, analyzedRequest)
         },
       }
     }) as any,

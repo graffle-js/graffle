@@ -1,7 +1,8 @@
-import type { Client, Client_justContext } from '../../../client/client.js'
+import type { Client_justContext } from '../../../client/client.js'
 import type { Configurator } from '../../../lib/configurator/configurator.js'
 import { type EmptyArray, emptyArray, type EmptyObject, emptyObject, undefinedAs } from '../../../lib/prelude.js'
 import type { Context } from '../../context.js'
+import type { ContextComputerParameters } from '../types.js'
 
 // ------------------------------------------------------------
 // Helpers
@@ -10,7 +11,6 @@ import type { Context } from '../../context.js'
 // todo put symbol here to make unique from any possible properties object
 export interface PropertiesComputer$Func {
   parameters: unknown
-  // context: Context
   return: unknown
 }
 
@@ -38,11 +38,7 @@ export type PropertiesComputer<
   $Properties extends Properties = Properties,
   $Configuration extends Configurator.Configuration = $Context['configuration'],
 > = (
-  parameters: {
-    configuration: $Configuration
-    context: $Context
-    client: Client<$Context>
-  },
+  parameters: ContextComputerParameters<$Context, $Configuration>,
 ) => $Properties
 
 export const createPropertiesComputer = <

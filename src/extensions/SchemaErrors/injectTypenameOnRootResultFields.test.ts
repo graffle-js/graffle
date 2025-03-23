@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest'
 import { DocumentBuilderKit } from '../DocumentBuilder/_namespace.js'
+import { GraffleSchemaErrors } from './__tests__/fixture/graffle/_namespace.js'
 import { injectTypenameOnRootResultFields } from './injectTypenameOnRootResultFields.js'
-import { GraffleSchemaErrors } from './tests/fixture/graffle/_namespace.js'
 
 type CasesQuery = [
   description: string,
