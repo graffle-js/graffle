@@ -1,7 +1,7 @@
 import { expect } from 'vitest'
 import { DocumentBuilderKit } from '../../src/entrypoints/extensions/document-builder/kit.js'
 import { GraffleBasic } from '../../src/entrypoints/presets/basic.js'
-import { Possible } from '../../src/extensions/DocumentBuilder/__fixtures__/possible/_namespace.js'
+import { Possible } from '../../src/extensions/DocumentBuilder/__tests__/fixtures/possible/_namespace.js'
 import { Grafaid } from '../../src/lib/grafaid/_namespace.js'
 import type { Schema } from '../../src/types/Schema/_namespace.js'
 import { DateScalar } from '../_/fixtures/scalars.js'

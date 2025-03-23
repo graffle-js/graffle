@@ -4,7 +4,7 @@ import { db } from '../../../../tests/_/fixtures/schemas/possible/db.js'
 import { test as testBase } from '../../../../tests/_/helpers.js'
 import type { Grafaid } from '../../../lib/grafaid/_namespace.js'
 import { TransportMemory } from '../../TransportMemory/TransportMemory.js'
-import { Possible } from '../__fixtures__/possible/_namespace.js'
+import { Possible } from '../__tests__/fixtures/possible/_namespace.js'
 
 const createPossible = (schema: Grafaid.Schema.Schema) =>
   Possible

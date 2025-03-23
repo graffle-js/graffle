@@ -3,7 +3,7 @@ import { DateScalar } from '../../../../tests/_/fixtures/scalars.js'
 import { db } from '../../../../tests/_/fixtures/schemas/possible/db.js'
 import { Grafaid } from '../../../lib/grafaid/_namespace.js'
 import type { Schema } from '../../../types/Schema/_namespace.js'
-import { Possible } from '../__fixtures__/possible/_namespace.js'
+import { Possible } from '../__tests__/fixtures/possible/_namespace.js'
 import { Select } from '../Select/__.js'
 import { toGraphQLDocument } from './nodes/1_Document.js'
 

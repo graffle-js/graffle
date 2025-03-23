@@ -1,5 +1,5 @@
 import { describe, expect } from 'vitest'
-import { Possible } from '../../src/extensions/DocumentBuilder/__fixtures__/possible/_namespace.js'
+import { Possible } from '../../src/extensions/DocumentBuilder/__tests__/fixtures/possible/_namespace.js'
 import { DocumentBuilderKit } from '../../src/extensions/DocumentBuilder/_namespace.js'
 import { Grafaid } from '../../src/lib/grafaid/_namespace.js'
 import type { Schema } from '../../src/types/Schema/_namespace.js'

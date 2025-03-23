@@ -1,7 +1,7 @@
 import { expectTypeOf, test } from 'vitest'
-import { MutationOnly } from '../__fixtures__/mutationOnly/_namespace.js'
-import { Possible } from '../__fixtures__/possible/_namespace.js'
-import { QueryOnly } from '../__fixtures__/queryOnly/_namespace.js'
+import { MutationOnly } from '../__tests__/fixtures/mutationOnly/_namespace.js'
+import { Possible } from '../__tests__/fixtures/possible/_namespace.js'
+import { QueryOnly } from '../__tests__/fixtures/queryOnly/_namespace.js'
 
 const g = Possible.create({ check: { preflight: false } })
 
