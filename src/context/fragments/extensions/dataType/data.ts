@@ -20,14 +20,14 @@ export interface Data<
 > // $TypeHooks extends TypeHooks = TypeHooks,
 {
   readonly name: $Name
-  readonly configurator?: $Configurator
-  readonly configuratorInitialInput?: $ConfiguratorInitialInput
+  readonly configurator?: $Configurator | undefined
+  readonly configuratorInitialInput?: $ConfiguratorInitialInput | undefined
   // constructor?: (parameters: ConstructorParameters) => {
   //   requestInterceptor?: RequestPipeline.BaseInterceptor
   //   properties?: object
   // }
   // todo make array
-  readonly requestInterceptor?: RequestPipeline.BaseInterceptor
+  readonly requestInterceptor?: RequestPipeline.BaseInterceptor | undefined
   readonly requestInterceptorsComputed: readonly RequestInterceptors.RequestInterceptorComputer[]
   readonly noExpandResultDataType?: $NoExpandResultDataType
   readonly propertiesStatic: $PropertiesStatic
