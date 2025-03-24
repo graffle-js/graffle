@@ -1,5 +1,3 @@
-import console from 'console'
-import { request } from 'http'
 import { Extension } from '../../entrypoints/extension.js'
 import type { Anyware } from '../../lib/anyware/_namespace.js'
 import type { Grafaid } from '../../lib/grafaid/_namespace.js'
