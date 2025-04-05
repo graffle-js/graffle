@@ -1,5 +1,5 @@
-// import { Graffle } from '../../../../tests/_/schemas/kitchen-sink/graffle/__.js'
-// import { schema } from '../../../../tests/_/schemas/kitchen-sink/schema.js'
+// import { Graffle } from '../../../../tests/_/fixtures/schemas/kitchen-sink/graffle/__.js'
+// import { schema } from '../../../../tests/_/fixtures/schemas/kitchen-sink/schema.js'
 // import { Throws } from './Throws.js'
 
 // const graffle = Graffle.create().transport('memory', { schema }).use(Throws())

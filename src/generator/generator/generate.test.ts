@@ -32,7 +32,7 @@ describe(`importFormat`, () => {
 })
 
 // test.only(`kitchen-sink generated modules`, async () => {
-//   const basePath = `./tests/_/schemas/kitchen-sink/graffle`
+//   const basePath = `./tests/_/fixtures/schemas/kitchen-sink/graffle`
 //   const filePaths = await globby(`${basePath}/**/*.ts`)
 //   for (const filePath of filePaths) {
 //     const relativeFilePath = Path.relative(basePath, filePath)

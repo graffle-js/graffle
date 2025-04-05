@@ -8,7 +8,7 @@ import * as $$SchemaDrivenDataMap from './schema-driven-data-map.js'
 const context = $$Utilities.useReducer(
   $$Utilities.useReducer(
     {
-      ...$$Utilities.contextEmpty,
+      ...$$Utilities.Context.States.empty,
       name: $$Data.Name,
       schemaMap: $$SchemaDrivenDataMap.schemaDrivenDataMap,
       scalars: $$Scalar.$registry,
