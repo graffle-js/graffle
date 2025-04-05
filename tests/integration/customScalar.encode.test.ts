@@ -35,7 +35,7 @@ const testCases = test.for<TestCase>([
 	[`nested input object field`               , { InputObjectNested: { $: { input: { InputObject: { idRequired: ``, dateRequired: db.date0, date: db.date1 }}}}}              , { input: { InputObject: { idRequired: ``, dateRequired: db.date0Encoded, date: db.date1Encoded } } }],
 ])
 
-testCases(`%s`, async ([_, query, expectedVariables], {}) => {
+testCases(`%s`, async ([_, query, expectedVariables]) => {
   const g = GraffleBasic
     // todo: "name" is of type any
     .create({ schema: { map: Possible.schemaMap, name: Possible.Name } })

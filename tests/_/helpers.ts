@@ -163,6 +163,7 @@ export const test = testBase.extend<Fixtures>({
     await use(fetchMock)
     globalThis.fetch = fetch
   },
+  // eslint-disable-next-line
   g0: async ({}, use) => {
     await use(g0)
   },

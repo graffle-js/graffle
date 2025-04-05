@@ -4,21 +4,17 @@ import tsEslint from 'typescript-eslint'
 export default tsEslint.config(
   {
     ignores: [
-      'playground/**/*',
+      'src/extensions/DocumentBuilder/__tests__/fixtures/**/*',
+      'src/extensions/SchemaErrors/__tests__/fixture/**/*',
       'graffle/**/*',
-      'project/**/*',
       'examples/35_custom-scalar/custom-scalar.ts',
       'eslint.config.js',
       'vite.config.ts',
       'vitest*.config.ts',
       '**/generated/**/*',
-      'tests/_/fixtures/schemas/*/graffle/**/*',
       'tests/e2e/github/graffle/**/*',
-      '**/tests/fixture/graffle/**/*',
-      'src/layers/1_Schema/Hybrid/types/Scalar/Scalar.ts', // There is an ESLint error that goes away when ignored leading to a circular issue of either lint error or unused lint disable.
-      '**/$/**/*',
-      'legacy/**/*',
-      '**/build/**/*',
+      'examples/$/**/*',
+      'build/**/*',
       'website/**/*',
       'bundle-sizes/**/*.{js,json}',
     ],

@@ -240,10 +240,14 @@ export namespace Configurator {
 
     export type $FuncSymbol = typeof $.InputResolver$FuncSymbol
 
-    // todo we cannot strongly type parameters becaues of case of input: {a?:1} + normalized: {a?:1} + input: {} <-- leads to {a?:1} instead of {}! because intersection doesn't constrain to more specific type.
+    // todo we cannot strongly type parameters becaues of case of input:
+    // {a?:1} + normalized: {a?:1} + input: {} <-- leads to {a?:1} instead of {}!
+    // because intersection doesn't constrain to more specific type.
     export interface $Func<
       $Input extends Configuration = Configuration,
       $Normalized extends $Input = $Input,
+      // todo
+      // eslint-disable-next-line
       $Default extends Partial<$Normalized> = Partial<$Normalized>,
     > {
       parameters: unknown // Parameters<$Input, $Normalized, $Default>
