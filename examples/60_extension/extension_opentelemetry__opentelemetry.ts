@@ -1,7 +1,7 @@
 import { ConsoleSpanExporter, SimpleSpanProcessor } from '@opentelemetry/sdk-trace-base'
 import { NodeTracerProvider } from '@opentelemetry/sdk-trace-node'
-import { Opentelemetry } from 'graffle/extensions/opentelemetry'
-import { Graffle } from '../$/graffle/__.js'
+import { OpenTelemetry } from 'graffle/extensions/opentelemetry'
+import { Graffle } from '../$/graffle/_namespace.js'
 import { interceptAndShowOutput, show } from '../$/helpers.js'
 
 interceptAndShowOutput()
@@ -15,6 +15,6 @@ const provider = new NodeTracerProvider()
 provider.addSpanProcessor(processor)
 provider.register()
 
-const graffle = Graffle.create().use(Opentelemetry())
+const graffle = Graffle.create().use(OpenTelemetry())
 const data = await graffle.gql`query { pokemons { name } }`.send()
 show(data)

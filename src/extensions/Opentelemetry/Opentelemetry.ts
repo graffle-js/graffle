@@ -30,6 +30,7 @@ export const OpenTelemetry = Extension
       })
     }
   })
+  .return()
 
 const startActiveSpan = (tracer: Tracer) => <Result>(name: string, fn: () => Promise<Result>): Promise<Result> => {
   return tracer.startActiveSpan(name, async (span) => {
