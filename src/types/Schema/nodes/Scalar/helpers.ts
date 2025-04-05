@@ -27,8 +27,11 @@ export interface Registry<
 
 export interface RegistryEmpty {
   map: EmptyObject
-  typesEncoded: never
-  typesDecoded: never
+  // Superficially "never" sounds right
+  // But then it cannot be a sub-type of the generic Registry
+  // TODO: could we use `unknown` instead?
+  typesEncoded: any
+  typesDecoded: any
 }
 
 export namespace Registry {
