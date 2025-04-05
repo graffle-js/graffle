@@ -4,4 +4,4 @@ export { type Normalized } from '../context/fragments/configuration/output/_expo
 // export { Data } from '../context/fragments/transports/dataType/data.js'
 // export * from '../lib/prelude.js'
 export * as Preset from './_Preset.js'
-export * from './main_Graffle_.js'
+export * as Graffle from './graffle.js'

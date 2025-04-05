@@ -1,6 +1,6 @@
 import { describe, expect } from 'vitest'
 import { test } from '../../../tests/_/helpers.js'
-import { Graffle } from '../../entrypoints/main.js'
+import { Graffle } from '../../entrypoints/index.js'
 import { Throws } from '../Throws/Throws.js'
 import { Possible } from './__tests__/fixtures/possible/_namespace.js'
 import { DocumentBuilder } from './DocumentBuilder.js'

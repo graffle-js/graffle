@@ -2,7 +2,7 @@
 // @vitest-environment node
 
 import { expect, test as testBase } from 'vitest'
-import { Graffle } from '../../entrypoints/main.js'
+import { Graffle } from '../../entrypoints/index.js'
 import * as UploadSchema from './__fixtures__/schema.js'
 import { Upload } from './Upload.js'
 

@@ -9,7 +9,10 @@
   },
   "exports": {
     ".": {
-      "default": "./build/entrypoints/main.js"
+      "default": "./build/entrypoints/index.js"
+    },
+    "./graffle": {
+      "default": "./build/entrypoints/graffle.js"
     },
     "./generator": {
       "default": "./build/entrypoints/generator.js"

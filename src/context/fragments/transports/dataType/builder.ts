@@ -7,20 +7,48 @@ import { type Data, TypeSymbol as DataTypeSymbol } from './data.js'
 // Creator
 // ------------------------------------------------------------
 
+/**
+ * Create a new `Transport` _builder_.
+ *
+ * Then use the `Transport` _builder_ to build a `Transport` data type.
+ *
+ * ### `Builder`
+ *
+ * - The transport name (`.create("<name>")`) will become available on step input as `input.transportType`.
+ *
+ * ### `Transport`
+ *
+ * A `Transport` encapsulates a kind of destination that a request can be sent to.
+ *
+ * A raw Graffle `Client` is unable to send requests to destinations.
+ *
+ * Once it is extended with one or more transports, then it can.
+ *
+ * A `Transport` is a sequence of functions (steps) that together form
+ * a pipeline to implement the sending of a request to a destination.
+ *
+ * The steps are:
+ *
+ * 1. `encode` - encode the request
+ * 2. `pack` - pack the request
+ * 3. `exchange` - exchange the request
+ * 4. `unpack` - unpack the response
+ * 5. `decode` - decode the response
+ */
 export const create = <$Name extends string>(
   name: $Name,
 ): Builder.States.Empty<$Name> => {
-  const transport: Data = {
+  const transport: Data<$Name> = {
     [DataTypeSymbol]: true,
     name,
     discriminant: {
       name: `transportType`,
       value: name,
     },
-    steps: {},
+    steps: {} as any,
     configurator: Configurator.$.empty,
     configurationMount: `transport`,
-  } as any
+  }
   return chain(transport) as any
 }
 
@@ -67,10 +95,18 @@ const chain = (
 }
 
 // dprint-ignore
-export interface Builder<$TransportProgressive extends Data> {
+export interface Builder<
+  $TransportProgressive extends Data,
+  __StepInputBase extends object = {
+    transportType: $TransportProgressive['name'];
+    transport: $TransportProgressive['configurator']['normalized']
+  },
+> {
     [TypeSymbol]: true
     /**
-     * TODO
+     * Define the configuration for this transport.
+     * 
+     * Its normalized form will become available on step input as `input.transport`.
      */
     configurator: <$Configurator extends Configurator>(
       input: Configurator.BuilderProviderCallback<$Configurator> | Configurator.Builder<$Configurator> | $Configurator,
@@ -82,10 +118,12 @@ export interface Builder<$TransportProgressive extends Data> {
      * TODO
      */
     pack: <
-      $Input = $TransportProgressive['configurator']['normalized'] & RequestPipeline.PackInput,
+      $Input =
+        & __StepInputBase
+        & RequestPipeline.PackInput,
       $Output = {},
       $Slots extends Anyware.StepDefinition.Slots = {}
-    >(step: Builder.StepMethodParameters<$Input, $Output, $Slots>) => Builder<Data<
+    >(stepImplementation: Builder.StepMethodParameters<$Input, $Output, $Slots>) => Builder<Data<
       $TransportProgressive['name'],
       $TransportProgressive['configurator'],
       Anyware.StepDefinition<'pack', $Slots, $Input, $Output>
@@ -94,7 +132,9 @@ export interface Builder<$TransportProgressive extends Data> {
      * TODO
      */
     exchange: <
-      $Input = $TransportProgressive['configurator']['normalized'] & Awaited<$TransportProgressive['steps']['pack']['output']>,
+      $Input =
+        & __StepInputBase
+        & Awaited<$TransportProgressive['steps']['pack']['output']>,
       $Output = {},
       $Slots extends Anyware.StepDefinition.Slots = {}
     >(step: Builder.StepMethodParameters<$Input, $Output, $Slots>) => Builder<Data<
@@ -107,7 +147,9 @@ export interface Builder<$TransportProgressive extends Data> {
      * TODO
      */
     unpack: <
-      $Input = $TransportProgressive['configurator']['normalized'] & Awaited<$TransportProgressive['steps']['exchange']['output']>,
+      $Input =
+        & __StepInputBase
+        & Awaited<$TransportProgressive['steps']['exchange']['output']>,
       $Output = {},
       $Slots extends Anyware.StepDefinition.Slots = {}
     >(step: Builder.StepMethodParameters<$Input, $Output, $Slots>) => Builder<Data<

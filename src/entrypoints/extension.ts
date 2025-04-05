@@ -1,1 +1,1 @@
-export * as Extension from './extension_.js'
+export * as Extension from './extension_exports.js'

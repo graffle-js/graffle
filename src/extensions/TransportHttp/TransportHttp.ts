@@ -1,3 +1,4 @@
+import { Transport } from '../../context/fragments/transports/dataType/_namespace.js' // TODO import from entrypoint
 import { Extension } from '../../entrypoints/extension.js'
 import type { Anyware } from '../../lib/anyware/_namespace.js'
 import type { Grafaid } from '../../lib/grafaid/_namespace.js'
@@ -187,8 +188,7 @@ export type TransportHttp = Extension.Data<
 
 export const TransportHttp: TransportHttp = Extension.create(`TransportHttp`)
   .transport(
-    Extension.Transport
-      .create(`http`)
+    Transport.create(`http`)
       .configurator(httpTransportConfigurator)
       // todo currently the configurator data is spread into the input however it should be concentrated into a transport data prop and then
       // each step should have the possibility of getting its own configurator too.
