@@ -52,5 +52,5 @@ testCases(`%s`, async ([_, query, expectedVariables], {}) => {
   )
   const documentString = Grafaid.Document.print(document)
   await g.gql(documentString).send(operationsVariables[`$default`])
-  expect(RequestSpy.static.pack.input?.request.variables).toEqual(expectedVariables)
+  expect(RequestSpy.spy.data.pack.input?.request.variables).toEqual(expectedVariables)
 })

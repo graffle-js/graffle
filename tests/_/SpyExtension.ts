@@ -28,16 +28,20 @@ const emptySpyData: SpyData = {
 
 export const RequestSpy = Extension.create(`Spy`)
   .requestInterceptor(async ({ encode }) => {
-    RequestSpy.static.encode.input = encode.input
+    RequestSpy.spy.data.encode.input = encode.input
     const { pack } = await encode()
-    RequestSpy.static.pack.input = pack.input
+    RequestSpy.spy.data.pack.input = pack.input
     const { exchange } = await pack()
-    RequestSpy.static.exchange.input = exchange.input
+    RequestSpy.spy.data.exchange.input = exchange.input
     return exchange()
   })
-  .static(emptySpyData)
+  .static({
+    spy: {
+      data: emptySpyData,
+    },
+  })
   .return()
 
 beforeEach(() => {
-  RequestSpy.static = emptySpyData
+  RequestSpy.spy.data = emptySpyData
 })

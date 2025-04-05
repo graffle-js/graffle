@@ -31,8 +31,8 @@ export const readExampleFiles = (name?: string) =>
     }
   })
 
-export const readExamples = async (name?: string): Promise<Example[]> => {
-  const exampleFiles = await readExampleFiles(name)
+export const readExamples = async (filterName?: string): Promise<Example[]> => {
+  const exampleFiles = await readExampleFiles(filterName)
 
   const outputFiles = await readFiles({
     pattern: `./examples/__outputs__/*/*.output.txt`,
@@ -40,7 +40,7 @@ export const readExamples = async (name?: string): Promise<Example[]> => {
 
   const encoderFilePaths = await globby(`${directories.outputs}/**/*${outputEncoderExtension}`)
 
-  const examples = exampleFiles.map((example) => {
+  const examples = exampleFiles.filtered.map((example) => {
     const group = parseGroup(example.path.full)
     const fileName = parseFileName(example.name, group.humanName)
 
