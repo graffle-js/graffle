@@ -2,7 +2,7 @@ import { describe, expect, expectTypeOf, it, test } from 'vitest'
 import { create } from './select.js'
 
 describe(`select`, () => {
-  const select = create(`default`)
+  const select = create(`possible`)
 
   it(`returns the input for any method name`, () => {
     const s = select as any
