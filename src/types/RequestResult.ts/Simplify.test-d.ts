@@ -13,7 +13,6 @@ type CEmpty = ContextEmpty
 // 	onRequestResult: []
 // 	requestResultDataTypes: Text,
 // }>
-type CScalar = Add<ContextEmpty, DateScalar>
 // type CExtAndScalar = AddScalar<CExt, DateScalar>
 	
 type _1 = Simplify<CEmpty                   , {x:Date|null}>
@@ -21,6 +20,8 @@ type _1 = Simplify<CEmpty                   , {x:Date|null}>
 assertEqual<_1									            , {x:Date|null}>()
 // type _2 = Simplify<CExt                     , {x:Text|null}>
 // assertEqual<_2									            , {x:Text|null}>()
+
+type CScalar = Add<ContextEmpty, DateScalar>
 type _3 = Simplify<CScalar                  , {x:Date|null}>
 assertEqual<_3									            , {x:Date|null}>()
 // type _4 = Simplify<CExtAndScalar            , {x:Date|Text|null}>
