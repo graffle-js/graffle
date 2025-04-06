@@ -146,7 +146,7 @@ describe(`overload`, () => {
         {
           discriminant: discriminant
           configurator: Configurator.States.Empty
-          input: {}
+          configurationMount: undefined
           steps: {
             a: {
               name: 'a'
@@ -172,7 +172,7 @@ describe(`overload`, () => {
       .toMatchTypeOf<[
         {
           discriminant: discriminant
-          input: {}
+          configurationMount: undefined
           steps: {
             a: {
               name: 'a'

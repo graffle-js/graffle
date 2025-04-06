@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest'
 import { db } from '../../../../tests/_/fixtures/schemas/possible/db.js'
-import { schema } from '../../../../tests/_/fixtures/schemas/possible/schema.js'
+import { possibleSchema } from '../../../../tests/_/fixtures/schemas/possible/schema.js'
 import { Graffle } from '../../../entrypoints/index.js'
 import type { Errors } from '../../../lib/errors/_namespace.js'
 import { TransportMemory } from '../../TransportMemory/TransportMemory.js'
@@ -9,10 +9,10 @@ import { DocumentBuilder } from '../DocumentBuilder.js'
 // todo test with custom scalars
 
 const graffle = Graffle
-  .create()
+  .create({ schema: { name: `possible` } })
   .use(TransportMemory)
   .use(DocumentBuilder)
-  .transport(`memory`, { schema })
+  .transport(`memory`, { schema: possibleSchema })
 
 describe(`document with two queries`, () => {
   const withTwo = graffle.document({

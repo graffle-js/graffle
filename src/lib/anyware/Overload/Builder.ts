@@ -45,13 +45,14 @@ export type Create<$Pipeline extends PipelineDefinition = PipelineDefinition> = 
   Data<
     $DiscriminantSpec,
     DataEmpty['configurator'],
-    DataEmpty['steps']
+    DataEmpty['steps'],
+    DataEmpty['configurationMount']
   >
 >
 
 export interface Builder<
   $Pipeline extends PipelineDefinition = PipelineDefinition,
-  $Data extends Data = DataEmpty,
+  $Data extends Data = Data,
 > {
   data: $Data
   /**

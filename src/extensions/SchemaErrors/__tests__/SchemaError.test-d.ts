@@ -2,7 +2,7 @@ import { describe, expectTypeOf, test } from 'vitest'
 import { SchemaErrors } from '../runtime.js'
 import { GraffleSchemaErrors } from './fixture/graffle/_namespace.js'
 
-const g = GraffleSchemaErrors.create({ check: { preflight: false } }).use(SchemaErrors())
+const g = GraffleSchemaErrors.create({ check: { preflight: false } }).use(SchemaErrors)
 
 // todo move test to test suite for .use method
 // test(`config type is augmented with type hook`, () => {

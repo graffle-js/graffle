@@ -1,10 +1,9 @@
 /* eslint-disable */
 import { expectTypeOf, test } from 'vitest'
 import { DateScalar } from '../../../../tests/_/fixtures/scalars.js'
-import { Graffle } from '../../../../tests/_/fixtures/schemas/possible/graffle/__.js'
-import * as Schema from '../../../../tests/_/fixtures/schemas/possible/schema.js'
+import { Possible } from '../__tests__/fixtures/possible/_namespace.js'
 
-const g = Graffle.create({ check: { preflight: false } }).scalar(DateScalar)
+const g = Possible.create({ check: { preflight: false } }).scalar(DateScalar)
 
 // dprint-ignore
 test(`query`, async () => {
@@ -14,9 +13,9 @@ test(`query`, async () => {
   // scalar none-nullable
   expectTypeOf(await g.query.idNonNull()).toEqualTypeOf<string>()
   // scalar with optional arguments
-  expectTypeOf<Parameters<typeof g.query.stringWithArgs>>().toEqualTypeOf<[input?: Graffle.SelectionSets.Query.stringWithArgs]>()
+  expectTypeOf<Parameters<typeof g.query.stringWithArgs>>().toEqualTypeOf<[input?: Possible.SelectionSets.Query.stringWithArgs]>()
   // scalar with required arguments
-  expectTypeOf<Parameters<typeof g.query.stringWithRequiredArg>>().toEqualTypeOf<[input: Graffle.SelectionSets.Query.stringWithRequiredArg]>()
+  expectTypeOf<Parameters<typeof g.query.stringWithRequiredArg>>().toEqualTypeOf<[input: Possible.SelectionSets.Query.stringWithRequiredArg]>()
   // scalar custom
   const result = await g.query.date()
   expectTypeOf(await g.query.date()).toMatchTypeOf<Date | null>()
