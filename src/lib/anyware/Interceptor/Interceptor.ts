@@ -23,27 +23,22 @@ export namespace Interceptor {
       >
   }
 
+  // dprint-ignore
   type InferKeywordArguments<
     $Pipeline extends Pipeline,
-  > = InferKeywordArguments_<
-    $Pipeline['steps'],
-    $Pipeline['output']
-  >
-  // dprint-ignore
-  type InferKeywordArguments_<
-    $Steps extends readonly Step[],
-    $PipelineOutput,
+    __Steps extends readonly Step[] = $Pipeline['steps'],
+    __PipelineOutput = $Pipeline['output'],
   > =
-    $Steps extends readonly [infer $NextStep extends Step, ...infer $NextNextSteps extends readonly Step[]]
+    __Steps extends readonly [infer $NextStep extends Step, ...infer $NextNextSteps extends readonly Step[]]
       ? & {
             [_ in $NextStep['name']]:
               StepTrigger.Infer<
                 $NextStep,
                 $NextNextSteps,
-                $PipelineOutput
+                __PipelineOutput
               >
           }
-        & InferKeywordArguments_<$NextNextSteps, $PipelineOutput>
+        & InferKeywordArguments<$Pipeline, $NextNextSteps, __PipelineOutput>
       : {}
 }
 
