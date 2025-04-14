@@ -2,7 +2,7 @@ import type { ContextFragment } from '../fragment.js'
 
 export const set = <context extends ContextFragment, fragment extends ContextFragment>(
   context: context,
-  fragment: ContextFragment,
+  fragment: fragment,
 ): Set<context, fragment> => {
   return {
     ...context,
@@ -15,8 +15,8 @@ export type Set<
   $Context extends ContextFragment,
   $Fragment extends ContextFragment,
 > = {
-  [_ in keyof $Context]:
-    _ extends keyof $Fragment ?
-      $Fragment[_] :
-      $Context[_]
+  [k in keyof $Context]:
+    k extends keyof $Fragment ?
+      $Fragment[k] :
+      $Context[k]
 }
