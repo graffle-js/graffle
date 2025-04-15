@@ -70,6 +70,28 @@ test(`root-types-mapped`, async () => {
   expect(MethodsRootTs).toMatchSnapshot()
 })
 
+test(`schema with long type name`, async () => {
+  await Memfs.fs.promises.mkdir(process.cwd(), { recursive: true })
+  const typeName = "a".repeat(200);
+  await generate( {
+    fs: Memfs.fs.promises as any,
+    schema: {
+      type: `sdl`,
+      sdl: `
+        type ${typeName} {
+          id: ID
+        }
+        type Query {
+          longTypeName: ${typeName}
+        }
+      `
+    }
+  })
+
+  const SchemaTs = Memfs.fs.readFileSync(`./graffle/modules/schema.ts`, `utf8`)
+  expect(SchemaTs).toMatchSnapshot()
+})
+
 test(`custom scalars module results in client prefilling those custom scalars`, async () => {
   await Memfs.fs.promises.mkdir(process.cwd(), { recursive: true })
   await Memfs.fs.promises.writeFile(
