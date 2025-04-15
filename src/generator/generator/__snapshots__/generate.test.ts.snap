@@ -10505,7 +10505,7 @@ export interface QueryRootMethods<$Context extends $$Utilities.Context> {
 }
 
 export interface BuilderMethodsRoot<$Context extends $$Utilities.Context> {
-  undefined: QueryRootMethods<$Context>;
+  query: QueryRootMethods<$Context>;
 }
 
 export interface BuilderMethodsRootFn extends $$Utilities.TypeFunction {

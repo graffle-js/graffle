@@ -27,10 +27,18 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
       export interface BuilderMethodsRoot<$Context extends ${identifiers.$$Utilities}.Context> {
         ${
       config.schema.kindMap.list.Root.map(node => {
-        const operationName = Grafaid.Document
-          .RootTypeToOperationType[node.name as keyof typeof Grafaid.Document.RootTypeToOperationType]
-        return `${operationName}: ${node.name}Methods<$Context>`
-      }).join(`\n`)
+        if (node.name === config.schema.instance.getQueryType()?.name) {
+          return `query: ${node.name}Methods<$Context>`;
+        } else
+        if (node.name === config.schema.instance.getMutationType()?.name) {
+          return `mutation: ${node.name}Methods<$Context>`;
+        } else
+        if (node.name === config.schema.instance.getSubscriptionType()?.name) {
+          return `subscription: ${node.name}Methods<$Context>`;
+        } else {
+          return undefined;
+        }
+      }).filter(s => s !== undefined).join(`\n`)
     }
       }
     `)
