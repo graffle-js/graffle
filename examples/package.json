@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "check:types": "tsc --noEmit",
+    "gen": "pnpm gen:graffle",
     "gen:graffle": "pnpm graffle --defaultSchemaUrl http://localhost:3000/graphql --schema ../tests/_/fixtures/schemas/pokemon/schema.graphql --output ./$/graffle"
   },
   "dependencies": {
