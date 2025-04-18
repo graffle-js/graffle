@@ -8,7 +8,7 @@ import { expect, test } from 'vitest'
 import { runExample } from '../../../scripts/generate-examples-derivatives/helpers.js'
 
 test(`transport-memory`, async () => {
-  const exampleResult = await runExample(`./examples/40_other/transport-memory.ts`)
+  const exampleResult = await runExample(`./40_other/transport-memory.ts`)
   // Examples should output their data results.
   const exampleResultMaybeEncoded = exampleResult
   // If ever outputs vary by Node version, you can use this to snapshot by Node version.

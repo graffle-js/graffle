@@ -9,7 +9,7 @@ import { runExample } from '../../../scripts/generate-examples-derivatives/helpe
 
 test(`output_return-error_return-error-execution__return-error-execution`, async () => {
   const exampleResult = await runExample(
-    `./examples/20_output/output_return-error_return-error-execution__return-error-execution.ts`,
+    `./20_output/output_return-error_return-error-execution__return-error-execution.ts`,
   )
   // Examples should output their data results.
   const exampleResultMaybeEncoded = exampleResult

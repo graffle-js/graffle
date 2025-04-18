@@ -106,7 +106,7 @@
     "examples:gen:graffle": "pnpm build && cd examples && pnpm i && pnpm gen:graffle",
     "examples:link-mode": "cd examples && pnpm add ..",
     "examples:check:types": "cd examples && tsc --noEmit",
-    "examples:test": "vitest --config vitest.examples.config.ts",
+    "examples:test": "cd examples && pnpm test",
     "examples:gen": "tsx scripts/generate-examples-derivatives/generate.ts && pnpm format",
     "examples:gen:outputs": "tsx scripts/generate-examples-derivatives/generate.ts --outputs",
     "examples:gen:tests": "tsx scripts/generate-examples-derivatives/generate.ts --tests && dprint fmt examples/__tests__/**/*",

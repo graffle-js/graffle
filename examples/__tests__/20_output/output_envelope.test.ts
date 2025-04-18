@@ -9,7 +9,7 @@ import { runExample } from '../../../scripts/generate-examples-derivatives/helpe
 import { encode } from '../../__outputs__/20_output/output_envelope.output.encoder.js'
 
 test(`output_envelope`, async () => {
-  const exampleResult = await runExample(`./examples/20_output/output_envelope.ts`)
+  const exampleResult = await runExample(`./20_output/output_envelope.ts`)
   // Examples should output their data results.
   const exampleResultMaybeEncoded = encode(exampleResult)
   // If ever outputs vary by Node version, you can use this to snapshot by Node version.

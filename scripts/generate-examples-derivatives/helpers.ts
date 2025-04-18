@@ -187,6 +187,7 @@ export const runExample = async (filePath: string) => {
 
   let exampleOutput = ``
 
+  // todo: switch z
   // todo: better understand the Execa API
   if (filePath.includes(`_throws`)) {
     if (result instanceof ExecaError) {
