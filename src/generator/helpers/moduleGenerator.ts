@@ -83,4 +83,4 @@ export const caseFormatters = {
   snake: snakeCase,
 }
 
-export const isExportsModule = (name: string) => name.match(/^_+$/) !== null
+export const isExportsModule = (name: string) => name.match(/^_.+/) !== null

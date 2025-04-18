@@ -1,13 +1,11 @@
 import type { OperationTypeNode } from 'graphql'
-import { handleOutput } from '../../../client/handleOutput.js'
-import { Anyware } from '../../../lib/anyware/__.js'
-import type { Grafaid } from '../../../lib/grafaid/__.js'
+import { sendRequest } from '../../../client/send.js'
+import { type Context } from '../../../context/context.js'
+import type { Grafaid } from '../../../lib/grafaid/_namespace.js'
 import { getOperationDefinition } from '../../../lib/grafaid/document.js'
 import { isSymbol } from '../../../lib/prelude.js'
-import type { RequestPipelineBase } from '../../../requestPipeline/RequestPipeline.js'
-import { type Context } from '../../../types/context.js'
 import { Select } from '../Select/__.js'
-import { SelectionSetGraphqlMapper } from '../SelectGraphQLMapper/__.js'
+import { SelectionSetGraphqlMapper } from '../SelectGraphQLMapper/_namespace.js'
 
 export const createMethodDocument = (state: Context) => (document: Select.Document.DocumentObject) => {
   const documentNormalized = Select.Document.normalizeOrThrow(document)
@@ -36,30 +34,30 @@ export const createMethodOperationType = (state: Context, operationType: Operati
 }
 
 const executeRootField = async (
-  state: Context,
+  context: Context,
   operationType: OperationTypeNode,
   rootFieldName: string,
   rootFieldSelectionSet?: Select.SelectionSet.AnySelectionSet,
 ) => {
-  const result = await executeOperation(state, operationType, {
+  const result = await executeOperation(context, operationType, {
     [rootFieldName]: rootFieldSelectionSet ?? {},
   })
 
   if (result instanceof Error) return result
 
-  return state.output.envelope.enabled
+  return context.configuration.output.current.envelope.enabled
     ? result
     // @ts-expect-error
     : result[rootFieldName]
 }
 
 const executeOperation = async (
-  state: Context,
+  context: Context,
   operationType: OperationTypeNode,
   rootTypeSelectionSet: Select.SelectionSet.AnySelectionSet,
 ) => {
   return executeDocument(
-    state,
+    context,
     Select.Document.createDocumentNormalizedFromRootTypeSelection(
       operationType,
       rootTypeSelectionSet,
@@ -68,35 +66,20 @@ const executeOperation = async (
 }
 
 const executeDocument = async (
-  state: Context,
+  context: Context,
   document: Select.Document.DocumentNormalized,
   operationName?: string,
 ) => {
-  if (!state.transports.current) throw new Error(`No transport configured.`)
   const request = graffleMappedResultToRequest(
     SelectionSetGraphqlMapper.toGraphQL(document, {
-      sddm: state.schemaMap,
+      sddm: context.configuration.schema.current.map,
       // todo test that when custom scalars are used they are mapped correctly
-      scalars: state.scalars.map,
+      scalars: context.scalars.map,
     }),
     operationName,
   )
 
-  const initialInput = {
-    transportType: state.transports.current,
-    ...state.transports.configurations[state.transports.current],
-    state,
-    request,
-  } as RequestPipelineBase['input']
-
-  const pipeline = Anyware.Pipeline.create(state.requestPipelineDefinition) // todo memoize
-  const result = await Anyware.PipelineDefinition.run(pipeline, {
-    initialInput,
-    // retryingExtension: state.retry as any,
-    interceptors: state.extensions.filter(_ => _.onRequest !== undefined).map(_ => _.onRequest!) as any,
-  })
-
-  return handleOutput(state, result)
+  return sendRequest(context, request)
 }
 
 export const graffleMappedResultToRequest = (

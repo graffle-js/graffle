@@ -1,21 +1,20 @@
 import { expect, test } from 'vitest'
 import { DateScalar } from '../../../../tests/_/fixtures/scalars.js'
-import { db } from '../../../../tests/_/schemas/db.js'
-import { schemaDrivenDataMap } from '../../../../tests/_/schemas/kitchen-sink/graffle/modules/schema-driven-data-map.js'
-import type * as SelectionSets from '../../../../tests/_/schemas/kitchen-sink/graffle/modules/selection-sets.js'
-import { Grafaid } from '../../../lib/grafaid/__.js'
-import type { Schema } from '../../../types/Schema/__.js'
+import { db } from '../../../../tests/_/fixtures/schemas/possible/db.js'
+import { Grafaid } from '../../../lib/grafaid/_namespace.js'
+import type { Schema } from '../../../types/Schema/_namespace.js'
+import { Possible } from '../__tests__/fixtures/possible/_namespace.js'
 import { Select } from '../Select/__.js'
 import { toGraphQLDocument } from './nodes/1_Document.js'
 
 type CasesDescriptiveQuery = [
   description: string,
-  selectionSet: SelectionSets.Query,
+  selectionSet: Possible.SelectionSets.Query,
   options?: { operationName?: string },
 ]
 const testEachQueryWithDescription = test.for.bind(test)<CasesDescriptiveQuery>
 
-type QueryWithDate = SelectionSets.Query<
+type QueryWithDate = Possible.SelectionSets.Query<
   Schema.Scalar.Registry.AddScalar<Schema.Scalar.Registry.Empty, typeof DateScalar>
 >
 
@@ -42,7 +41,7 @@ const tester = <$Scalars extends Schema.Scalar.ScalarMap>(
           options?.operationName,
         ),
         {
-          sddm: schemaDrivenDataMap,
+          sddm: Possible.schemaMap,
           scalars: input.scalars,
           operationVariables: input.variables,
         },

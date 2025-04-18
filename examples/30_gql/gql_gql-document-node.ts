@@ -3,7 +3,7 @@
  */
 
 import { Graffle } from 'graffle'
-import { Opentelemetry } from 'graffle/extensions/opentelemetry'
+import { OpenTelemetry } from 'graffle/extensions/opentelemetry'
 import { Throws } from 'graffle/extensions/throws'
 import { parse } from 'graphql'
 import { publicGraphQLSchemaEndpoints, show } from '../$/helpers.js'
@@ -13,8 +13,8 @@ const graffle = Graffle
   .transport({
     url: publicGraphQLSchemaEndpoints.Pokemon,
   })
-  .use(Throws())
-  .use(Opentelemetry())
+  .use(Throws)
+  .use(OpenTelemetry())
 
 const data = await graffle.gql(parse(`
   query pokemonByName ($name: String!) {

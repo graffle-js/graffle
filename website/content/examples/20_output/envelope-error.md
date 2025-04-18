@@ -14,7 +14,7 @@ This example shows how to configure output to embed errors into the envelope.
 import './graffle/modules/global.js'
 // ---cut---
 
-import { Graffle } from './graffle/__.js'
+import { Graffle } from './graffle/_namespace.js'
 
 const pokemon = Graffle
   .create({
@@ -49,7 +49,7 @@ console.log(result)
         at runPipeline (/some/path/to/runPipeline.ts:XX:XX:18)
         at async <anonymous> (/some/path/to/runner.ts:XX:XX:20)
         at async Module.run (/some/path/to/run.ts:XX:XX:10)
-        at async executeDocument (/some/path/to/requestMethods.ts:XX:XX:18)
+        at async sendRequest (/some/path/to/send.ts:XX:XX:18)
         at async executeRootField (/some/path/to/requestMethods.ts:XX:XX:18)
         at async <anonymous> (/some/path/to/output_envelope_envelope-error__envelope-error.ts:XX:XX:16) {
       context: {

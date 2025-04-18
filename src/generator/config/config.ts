@@ -1,10 +1,10 @@
 import { pascalCase } from 'es-toolkit'
 import * as Path from 'node:path'
-import { Graffle } from '../../entrypoints/__Graffle.js'
+import { Graffle } from '../../entrypoints/index.js'
 import { Introspection } from '../../extensions/Introspection/Introspection.js'
-import { ConfigManager } from '../../lib/config-manager/__.js'
+import { ConfigManager } from '../../lib/config-manager/_namespace.js'
 import { fileExists, type Fs, isPathToADirectory, toAbsolutePath, toFilePath } from '../../lib/fsp.js'
-import { Grafaid } from '../../lib/grafaid/__.js'
+import { Grafaid } from '../../lib/grafaid/_namespace.js'
 import { isString, keysStrict } from '../../lib/prelude.js'
 import { type Formatter, getTypeScriptFormatter, passthroughFormatter } from '../../lib/typescript-formatter.js'
 import type { Extension } from '../extension/types.js'
@@ -304,7 +304,6 @@ const createConfigSchema = async (
     }
     case `url`: {
       const introspection = Introspection({ options: input.schema.options })
-      introspection
       const graffle = Graffle
         .create()
         .use(introspection)
@@ -312,7 +311,6 @@ const createConfigSchema = async (
           url: input.schema.url,
           headers: input.schema.headers,
         })
-      // todo introspection method should not be available without a transport
       const data = await graffle.introspect()
       if (!data) {
         throw new Error(`No data returned for introspection query.`)

@@ -1,6 +1,6 @@
 // todo jsdoc
 import { entries } from '../../lib/prelude.js'
-import { Tex } from '../../lib/tex/__.js'
+import { Tex } from '../../lib/tex/_namespace.js'
 import { identifiers } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { renderName } from '../helpers/render.js'
@@ -38,7 +38,7 @@ export const ModuleGeneratorSelect = createModuleGenerator(
         if (!type) return null
         return `export type ${type.name}<$SelectionSet extends $$SelectionSets.${
           renderName(type)
-        }> = ${identifiers.$$Utilities}.DocumentBuilder.InferResult.Operation<$SelectionSet, ${iSchema}, OperationTypeNode.${
+        }> = ${identifiers.$$Utilities}.DocumentBuilderKit.InferResult.Operation<$SelectionSet, ${iSchema}, OperationTypeNode.${
           enumMemberName[operationType]
         }>`
       }),
@@ -47,19 +47,19 @@ export const ModuleGeneratorSelect = createModuleGenerator(
     code(...config.schema.kindMap.list.OutputObject.map((type) => {
       return `export type ${type.name}<$SelectionSet extends $$SelectionSets.${
         renderName(type)
-      }> = ${identifiers.$$Utilities}.DocumentBuilder.InferResult.OutputObjectLike<$SelectionSet, ${iSchema}, ${iSchema}['allTypes']['${type.name}']>`
+      }> = ${identifiers.$$Utilities}.DocumentBuilderKit.InferResult.OutputObjectLike<$SelectionSet, ${iSchema}, ${iSchema}['allTypes']['${type.name}']>`
     }))
     code(Tex.title2(`Union`))
     code(...config.schema.kindMap.list.Union.map((type) => {
       return `export type ${type.name}<$SelectionSet extends $$SelectionSets.${
         renderName(type)
-      }> = ${identifiers.$$Utilities}.DocumentBuilder.InferResult.Union<$SelectionSet, ${iSchema}, ${iSchema}['allTypes']['${type.name}']>`
+      }> = ${identifiers.$$Utilities}.DocumentBuilderKit.InferResult.Union<$SelectionSet, ${iSchema}, ${iSchema}['allTypes']['${type.name}']>`
     }))
     code(Tex.title2(`Interface`))
     code(...config.schema.kindMap.list.Interface.map((type) => {
       return `export type ${type.name}<$SelectionSet extends $$SelectionSets.${
         renderName(type)
-      }> = ${identifiers.$$Utilities}.DocumentBuilder.InferResult.Interface<$SelectionSet, ${iSchema}, ${iSchema}['allTypes']['${type.name}']>`
+      }> = ${identifiers.$$Utilities}.DocumentBuilderKit.InferResult.Interface<$SelectionSet, ${iSchema}, ${iSchema}['allTypes']['${type.name}']>`
     }))
 
     code(`}`)

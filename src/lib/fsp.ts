@@ -1,5 +1,5 @@
 import type * as Fs from 'node:fs/promises'
-import { extname, isAbsolute, join } from 'node:path'
+import { dirname, extname, isAbsolute, join } from 'node:path'
 import type { JsonValue } from 'type-fest'
 import { errorFromMaybeError } from './prelude.js'
 
@@ -57,3 +57,13 @@ export const readJsonFile = async <$Json extends JsonValue>(fs: Fs, path: string
 //     return join(path, fileName)
 //   }
 // }
+
+/**
+ * Creates a directory (and any parent directories) if they don't exist,
+ * then writes the file with the given content
+ */
+export const writeFileAndCreateDir = async (fs: Fs, filePath: string, content: string): Promise<void> => {
+  const dirPath = dirname(filePath)
+  await fs.mkdir(dirPath, { recursive: true })
+  await fs.writeFile(filePath, content)
+}

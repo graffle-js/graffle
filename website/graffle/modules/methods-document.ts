@@ -11,7 +11,7 @@ export interface Document<$Context> {
         $Context["scalars"]
       >
     >,
-  ): $$Utilities.DocumentBuilder.DocumentRunner<
+  ): $$Utilities.DocumentBuilderKit.DocumentRunner<
     $Context,
     $$Schema.Schema,
     // @ts-expect-error We use Exact instead of constraint on this function. TypeScript does not see that as

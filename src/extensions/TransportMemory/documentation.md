@@ -8,7 +8,7 @@ The `memory` transport works with in-memory schemas. It ultimately invokes [`exe
 
 ```ts twoslash
 import { Graffle } from 'graffle'
-import { TransportMemory } from 'graffle/extensions/transports-memory'
+import { TransportMemory } from 'graffle/extensions/transport-memory'
 import { GraphQLObjectType, GraphQLSchema, GraphQLString } from 'graphql'
 
 const schema = new GraphQLSchema({
@@ -23,7 +23,7 @@ const schema = new GraphQLSchema({
   }),
 })
 
-const graffle = Graffle.create().use(TransportMemory({ schema })).transport(
-  'memory',
-)
+const graffle = Graffle.create()
+  .use(TransportMemory)
+  .transport('memory', { schema })
 ```

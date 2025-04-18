@@ -10,7 +10,7 @@ import {
 } from 'graphql'
 
 import { includesUnknown } from '../../../prelude.js'
-import type { Grafaid } from '../../__.js'
+import type { Grafaid } from '../../_namespace.js'
 import { isScalarTypeCustom } from '../typeGuards.js'
 import type { KindMap } from './__.js'
 

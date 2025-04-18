@@ -10,19 +10,22 @@ const graffle = Graffle
   .transport({
     url: publicGraphQLSchemaEndpoints.Pokemon,
   })
-  .anyware(({ pack }) => {
-    if (pack.input.transportType !== `http`) return pack()
-    return pack({
+  .anyware(({ exchange }) => {
+    if (exchange.input.transportType !== `http`) return exchange()
+    return exchange({
       input: {
-        ...pack.input,
-        headers: {
-          'X-Sent-At-Time': Date.now().toString(),
+        ...exchange.input,
+        request: {
+          ...exchange.input.request,
+          headers: [
+            ...new Headers(exchange.input.request.headers),
+            [`X-Sent-At-Time`, Date.now().toString()],
+          ],
         },
       },
     })
   })
   .anyware(({ exchange }) => {
-    // todo wrong type / runtime value
     show(exchange.input.request)
     return exchange()
   })

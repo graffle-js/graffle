@@ -45,8 +45,8 @@ await graffle.gql`{ pokemons { name } }`.send()
 Headers {
   accept: 'application/graphql-response+json; charset=utf-8, application/json; charset=utf-8',
   'content-type': 'application/json',
-  authorization: 'Bearer MY_TOKEN',
-  'x-from-raw': 'true'
+  'x-from-raw': 'true',
+  authorization: 'Bearer MY_TOKEN'
 }
 ```
 <!-- dprint-ignore-end -->

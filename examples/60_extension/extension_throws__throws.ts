@@ -3,14 +3,14 @@
  */
 
 import { Throws } from 'graffle/extensions/throws'
-import { Graffle } from '../$/graffle/__.js'
+import { Graffle } from '../$/graffle/_namespace.js'
 import { interceptAndShowUncaughtErrors, show } from '../$/show.js'
 
 interceptAndShowUncaughtErrors()
 
 const pokemon = Graffle
   .create({ output: { defaults: { errorChannel: `return` } } })
-  .use(Throws())
+  .use(Throws)
   .anyware(({ encode: _ }) => {
     throw new Error(`Something went wrong.`)
   })

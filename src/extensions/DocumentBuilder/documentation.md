@@ -10,7 +10,7 @@ By not hardcoding this feature into core, we keep Graffle lean and bundle sizes 
 import { Graffle } from 'graffle'
 import { DocumentBuilder } from 'graffle/extensions/document-builder'
 
-const graffle = Graffle.create().use(DocumentBuilder())
+const graffle = Graffle.create().use(DocumentBuilder)
 ```
 
 In addition to using this extension programmatically you must also run the [generator](../../../website/content/guides/20_topics/30_generation.md). Refer to its docs for details about it. Here's a basic example of usage:

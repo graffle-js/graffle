@@ -7,7 +7,10 @@ import { show } from '../$/show.js'
 
 const graffle = Graffle
   .create({ output: Preset.traditionalGraphqlOutput })
-  .transport({ url: `...` })
+  .transport({ url: `http://localhost:3000/graphql` })
+  .anyware(async ({ exchange }) => {
+    return exchange({ input: { ...exchange.input, request: { ...exchange.input.request, url: `bad` } } })
+  })
 
 const result = await graffle.gql(`{ query { thisWillError } }`).send()
 

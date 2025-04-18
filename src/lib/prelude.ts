@@ -1,6 +1,9 @@
+export type Writeable<$Object> = {
+  -readonly [_ in keyof $Object]: $Object[_]
+}
 import type { HasRequiredKeys, IsAny, IsEmptyObject, IsNever, IsUnknown, Simplify } from 'type-fest'
 
-import type { ConfigManager } from './config-manager/__.js'
+import type { ConfigManager } from './config-manager/_namespace.js'
 
 /* eslint-disable */
 export type RemoveIndex<T> = {
@@ -304,10 +307,53 @@ export namespace Objekt {
   export type IsEmpty<T> = {} extends T ? true : false
 }
 
+/**
+ * Use this to make forced union distribution more explicit and self-documenting.
+ *
+ * @example
+ *
+ * ```ts
+ * type Foo<T> = T extends __FORCE_UNION_DISTRIBUTION__ ? ... : ...
+ * ```
+ */
+export type __FORCE_UNION_DISTRIBUTION__ = any
+
 export namespace Tuple {
+  export type Flatten<T extends readonly (readonly any[])[]> = T extends
+    readonly [infer __head__ extends readonly any[], ...infer __tail__ extends readonly (readonly any[])[]]
+    ? readonly [...__head__, ...Flatten<__tail__>]
+    : []
+
+  export type IndexByDepth2<
+    $Arr extends any[],
+    $Key1 extends keyof $Arr[number],
+    $Key2 extends keyof $Arr[number][$Key1],
+  > = $Arr extends [infer First extends $Arr[number], ...infer Rest extends $Arr[number][]]
+    ? { [_ in First[$Key1][$Key2]]: First[$Key1] } & IndexByDepth2<Rest, $Key1, $Key2>
+    : {}
+
+  export type IndexBy<
+    $Arr extends readonly any[],
+    $Key extends keyof $Arr[number],
+  > = $Arr extends readonly [infer __first__ extends $Arr[number], ...infer __rest__ extends $Arr[number][]]
+    ? { readonly [_ in __first__[$Key]]: __first__ } & IndexBy<__rest__, $Key>
+    : {}
+
+  export type IndexByToValueDepth2<
+    $Arr extends readonly any[],
+    $Key extends keyof $Arr[number],
+    $ValueKey1 extends keyof $Arr[number],
+    $ValueKey2 extends keyof $Arr[number][$ValueKey1],
+  > = $Arr extends readonly [infer __first__ extends $Arr[number], ...infer __rest__ extends readonly $Arr[number][]] ?
+      & { readonly [_ in __first__[$Key]]: __first__[$ValueKey1][$ValueKey2] }
+      & IndexByToValueDepth2<__rest__, $Key, $ValueKey1, $ValueKey2>
+    : {}
+
   export type IndexKey = number | `${number}`
 
-  export type IsEmpty<T> = T extends [] ? true : false
+  export type Empty = readonly []
+
+  export type IsEmpty<T> = T extends Empty ? true : false
 
   // dprint-ignore
   export type PreviousItem<$Items extends readonly any[], $OfItem> =
@@ -325,7 +371,7 @@ export namespace Tuple {
         : PreviousItem_<$OfItem, $NextItem, $Rest>
       : never
 
-  export type NonEmpty = [any, ...any[]]
+  export type NonEmpty = readonly [any, ...readonly any[]]
   // dprint-ignore
   export type IntersectItems<$Items extends readonly any[]> =
     $Items extends [infer $First, ...infer $Rest extends any[]]
@@ -395,6 +441,19 @@ export namespace Tuple {
   type AnyReadOnly = readonly any[]
 
   type AnyReadOnlyListNonEmpty = readonly [any, ...any[]]
+
+  // dprint-ignore
+  export type ReduceObjectsMergeShallow<$Objects extends readonly object[]> =
+    $Objects extends readonly [infer __first__ extends object, ...infer __rest__ extends readonly object[]]
+      ? __rest__ extends readonly []
+        ? __first__
+        // Shallow merge
+        : & {
+              readonly [__k__ in keyof __first__ as __k__ extends keyof __rest__[number] ? never : __k__]:
+                __first__[__k__]
+            }
+          & ReduceObjectsMergeShallow<__rest__>
+      : {}
 }
 
 type NumberLiteral = number | `${number}`
@@ -689,8 +748,17 @@ export const isDate = (value: unknown): value is Date => {
   return value instanceof Date
 }
 
-export const isObjectEmpty = (object: Record<string, unknown>) => {
-  return Object.keys(object).length === 0
+export const isObjectEmpty = (object: object): boolean => {
+  for (const _ in object) return false
+  return true
+}
+
+export const hasNonUndefinedKeys = (object: object): boolean => {
+  const record = object as Record<string, unknown>
+  for (const _ in record) {
+    if (record[_] !== undefined) return true
+  }
+  return false
 }
 
 export const toArray = <T>(value: T | T[]) => Array.isArray(value) ? value : [value]
@@ -777,8 +845,71 @@ export type PartialOrUndefined<T> = {
   [K in keyof T]?: T[K] | undefined
 }
 
-export type UnknownOrAnyToNever<T> = unknown extends T ? never : T
+export type UnionIgnoreAnyOrUnknown<T> = unknown extends T ? never : T
+
+export type IntersectionIgnoreNeverOrAny<T> = IsAny<T> extends true ? unknown : T extends never ? unknown : T
+
+export type NeverOrAnyToUnknown<T> = IsAny<T> extends true ? unknown : T extends never ? unknown : T
 
 export type MergeAll<$Objects extends object[]> = $Objects extends
   [infer $First extends object, ...infer $Rest extends object[]] ? $First & MergeAll<$Rest>
   : {}
+
+export const emptyArray = Object.freeze([] as const)
+export type EmptyArray = typeof emptyArray
+
+export const emptyObject = Object.freeze({})
+export type EmptyObject = typeof emptyObject
+
+// dprint-ignore
+export type ObjectMergeShallow<
+  $Object1 extends object,
+  $Object2 extends object,
+  __ =
+    {} extends $Object1
+      ? $Object2
+      : & $Object2
+        & {
+            [_ in keyof $Object1 as _ extends keyof $Object2 ? never : _]: $Object1[_]
+          }
+> = __
+
+export const as = <$Type>(value?: unknown): $Type => value as $Type
+
+export const undefinedAs = <$Type>() => as<$Type>(undefined)
+
+// dprint-ignore
+export function pipe<value>(value: value, ...reducers: []): value
+// dprint-ignore
+export function pipe<value, f1 extends (value: value) => any>(value: value, ...fns: [f1]): ReturnType<f1>
+// dprint-ignore
+export function pipe<value, f1 extends (value: value) => any, f2 extends (value: ReturnType<f1>) => any>(value: value, ...fns: [f1, f2]): ReturnType<f2>
+// dprint-ignore
+export function pipe<value, f1 extends (value: value) => any, f2 extends (value: ReturnType<f1>) => any, f3 extends (value: ReturnType<f2>) => any>(value: value, ...fns: [f1, f2, f3]): ReturnType<f3>
+// dprint-ignore
+export function pipe<value, f1 extends (value: value) => any, f2 extends (value: ReturnType<f1>) => any, f3 extends (value: ReturnType<f2>) => any, f4 extends (value: ReturnType<f3>) => any>(value: value, ...fns: [f1, f2, f3, f4]): ReturnType<f4>
+
+export function pipe(value: any, ...fns: ((...args: any[]) => any)[]) {
+  return fns.reduce((value, fn) => {
+    const nextValue = fn(value)
+    return nextValue
+  }, value)
+}
+
+/**
+ * Merges two objects, filtering out undefined values from the second object
+ */
+export const shallowMergeWithoutUndefined = <T extends object, U extends object>(base: T, input: U): T & U => {
+  const result = { ...base } as Record<keyof (T & U), unknown>
+
+  for (const key in input) {
+    if (Object.prototype.hasOwnProperty.call(input, key)) {
+      const value = input[key]
+      if (value !== undefined) {
+        result[key] = value
+      }
+    }
+  }
+
+  return result as T & U
+}

@@ -1,9 +1,9 @@
 import type * as $$Utilities from "graffle/utilities-for-generated";
-import * as $$Schema from "./schema.js";
-import * as $$SelectionSets from "./selection-sets.js";
+import type * as $$Schema from "./schema.js";
+import type * as $$SelectionSets from "./selection-sets.js";
 
 export interface QueryMethods<$Context extends $$Utilities.Context> {
-  $batch: $$Utilities.ClientTransports.PreflightCheck<
+  $batch: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query<$Context["scalars"]>>,
@@ -11,14 +11,14 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutput<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           $$Utilities.AssertExtendsObject<$SelectionSet>,
           $$Schema.Schema<$Context["scalars"]>
         >
       >
     >
   >;
-  __typename: $$Utilities.ClientTransports.PreflightCheck<
+  __typename: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     () => Promise<
       & (null | {})
@@ -30,7 +30,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >;
 
-  battles: $$Utilities.ClientTransports.PreflightCheck<
+  battles: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.battles<$Context["scalars"]>>,
@@ -38,7 +38,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { battles: $SelectionSet },
           $$Schema.Schema<$Context["scalars"]>
         >,
@@ -47,7 +47,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >;
 
-  beings: $$Utilities.ClientTransports.PreflightCheck<
+  beings: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.beings<$Context["scalars"]>>,
@@ -55,7 +55,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { beings: $SelectionSet },
           $$Schema.Schema<$Context["scalars"]>
         >,
@@ -64,7 +64,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >;
 
-  pokemonByName: $$Utilities.ClientTransports.PreflightCheck<
+  pokemonByName: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.pokemonByName<$Context["scalars"]>>,
@@ -72,7 +72,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { pokemonByName: $SelectionSet },
           $$Schema.Schema<$Context["scalars"]>
         >,
@@ -81,7 +81,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >;
 
-  pokemons: $$Utilities.ClientTransports.PreflightCheck<
+  pokemons: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.pokemons<$Context["scalars"]>>,
@@ -89,7 +89,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { pokemons: $SelectionSet },
           $$Schema.Schema<$Context["scalars"]>
         >,
@@ -98,7 +98,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >;
 
-  trainerByName: $$Utilities.ClientTransports.PreflightCheck<
+  trainerByName: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.trainerByName<$Context["scalars"]>>,
@@ -106,7 +106,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { trainerByName: $SelectionSet },
           $$Schema.Schema<$Context["scalars"]>
         >,
@@ -115,7 +115,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >;
 
-  trainers: $$Utilities.ClientTransports.PreflightCheck<
+  trainers: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.trainers<$Context["scalars"]>>,
@@ -123,7 +123,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationQuery<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
           { trainers: $SelectionSet },
           $$Schema.Schema<$Context["scalars"]>
         >,
@@ -134,7 +134,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
 }
 
 export interface MutationMethods<$Context extends $$Utilities.Context> {
-  $batch: $$Utilities.ClientTransports.PreflightCheck<
+  $batch: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation<$Context["scalars"]>>,
@@ -142,14 +142,14 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutput<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
           $$Utilities.AssertExtendsObject<$SelectionSet>,
           $$Schema.Schema<$Context["scalars"]>
         >
       >
     >
   >;
-  __typename: $$Utilities.ClientTransports.PreflightCheck<
+  __typename: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     () => Promise<
       & (null | {})
@@ -161,7 +161,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     >
   >;
 
-  addPokemon: $$Utilities.ClientTransports.PreflightCheck<
+  addPokemon: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.addPokemon<$Context["scalars"]>>,
@@ -169,7 +169,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
         $Context,
-        $$Utilities.DocumentBuilder.InferResult.OperationMutation<
+        $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
           { addPokemon: $SelectionSet },
           $$Schema.Schema<$Context["scalars"]>
         >,

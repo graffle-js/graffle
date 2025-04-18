@@ -1,4 +1,4 @@
-import type { AnyAndUnknownToNever } from '../../../../lib/prelude.js'
+import { type AnyAndUnknownToNever, type EmptyObject, emptyObject } from '../../../../lib/prelude.js'
 import { String } from '../../StandardTypes/scalar.js'
 import type { Mapper } from './codec.js'
 import type { Scalar } from './Scalar.js'
@@ -26,16 +26,19 @@ export interface Registry<
 }
 
 export interface RegistryEmpty {
-  map: {}
-  typesEncoded: never
-  typesDecoded: never
+  map: EmptyObject
+  // Superficially "never" sounds right
+  // But then it cannot be a sub-type of the generic Registry
+  // TODO: could we use `unknown` instead?
+  typesEncoded: any
+  typesDecoded: any
 }
 
 export namespace Registry {
   export type Empty = RegistryEmpty
 
   export const empty = {
-    map: {},
+    map: emptyObject,
   } as RegistryEmpty
 
   export type AddScalar<$Registry extends Registry, $Scalar extends Scalar> = {

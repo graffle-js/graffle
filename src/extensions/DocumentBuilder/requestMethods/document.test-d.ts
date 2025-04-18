@@ -1,9 +1,9 @@
 import { expectTypeOf, test } from 'vitest'
-import { Graffle } from '../../../../tests/_/schemas/kitchen-sink/graffle/__.js'
-import { MutationOnly } from '../../../../tests/_/schemas/mutation-only/graffle/__.js'
-import { QueryOnly } from '../../../../tests/_/schemas/query-only/graffle/__.js'
+import { MutationOnly } from '../__tests__/fixtures/mutationOnly/_namespace.js'
+import { Possible } from '../__tests__/fixtures/possible/_namespace.js'
+import { QueryOnly } from '../__tests__/fixtures/queryOnly/_namespace.js'
 
-const g = Graffle.create({ checkPreflight: false })
+const g = Possible.create({ check: { preflight: false } })
 
 test(`requires input`, () => {
   // @ts-expect-error missing input
@@ -50,13 +50,13 @@ test(`document with two queries of different root types`, async () => {
 })
 
 test(`root operation not available if it is not in schema`, () => {
-  const queryOnly = QueryOnly.create({ checkPreflight: false })
+  const queryOnly = QueryOnly.create({ check: { preflight: false } })
   queryOnly.document({
     query: { foo: { id: true } },
     // @ts-expect-error mutation not in schema
     mutation: { foo: { id: true } },
   })
-  const mutationOnly = MutationOnly.create({ checkPreflight: false })
+  const mutationOnly = MutationOnly.create({ check: { preflight: false } })
   mutationOnly.document({
     mutation: { bar: { id: true } },
     // @ts-expect-error query not in schema

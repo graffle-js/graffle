@@ -1,93 +1,92 @@
-import type { ConfigManager } from '../../config-manager/__.js'
-import type { Tuple } from '../../prelude.js'
-import type { PipelineDefinition } from '../PipelineDef/__.js'
+import type { Writable } from 'type-fest'
+import type { ConfigManager } from '../../config-manager/_namespace.js'
+import { Configurator } from '../../configurator/configurator.js'
+import { createMutableBuilder } from '../../mutableBuilder.js'
+import type { _, Tuple } from '../../prelude.js'
+import type { PipelineDefinition } from '../PipelineDefinition/_namespace.js'
 import type { StepDefinition } from '../StepDefinition.js'
-import type { Overload } from './__.js'
+import type { Data, DataEmpty } from './Data.js'
 
 export const create: Create = (parameters) => {
-  const overload_: Omit<Overload, 'input'> = {
+  const data: Writable<Data> = {
     discriminant: parameters.discriminant,
-    inputDefaults: parameters.inputDefaults,
+    configurator: Configurator.$.empty,
     steps: {},
+    configurationMount: undefined,
   }
-  const overload = overload_ as Overload
-
-  const builder: Builder = {
-    type: overload,
-    config: () => builder as any,
-    defaults: (inputDefaults: object) => {
-      overload.inputDefaults = inputDefaults
-      return builder as any
-    },
-    configInit: () => builder as any,
-    stepWithExtendedInput: () => builder.step as any,
-    step: (name, spec) => {
-      overload.steps[name] = {
-        name,
-        ...spec,
-      } as unknown as StepDefinition
-      return builder as any
-    },
+  const step = (name: string, spec: StepDefinition) => {
+    data.steps[name] = {
+      ...spec,
+      name,
+    } as unknown as StepDefinition
   }
-
-  return builder as any
+  return createMutableBuilder({
+    data,
+    builder: {
+      configurator(configuratorTypeInput) {
+        data.configurator = Configurator.$.normalizeDataInput(configuratorTypeInput)
+      },
+      step,
+      stepWithExtendedInput() {
+        return step
+      },
+    },
+  }) as any
 }
 
 export type Create<$Pipeline extends PipelineDefinition = PipelineDefinition> = <
-  const $DiscriminantSpec extends Overload['discriminant'],
-  const $InputDefaults extends object | undefined,
+  const $DiscriminantSpec extends Data['discriminant'],
 >(
   parameters: {
     discriminant: $DiscriminantSpec
-    inputDefaults?: $InputDefaults
   },
 ) => Builder<
   $Pipeline,
-  {
-    discriminant: $DiscriminantSpec
-    inputDefaults: $InputDefaults
-    input: {}
-    steps: {}
-  }
+  Data<
+    $DiscriminantSpec,
+    DataEmpty['configurator'],
+    DataEmpty['steps'],
+    DataEmpty['configurationMount']
+  >
 >
 
 export interface Builder<
   $Pipeline extends PipelineDefinition = PipelineDefinition,
-  $Overload extends Overload = Overload.States.Empty,
+  $Data extends Data = Data,
 > {
-  type: $Overload
+  data: $Data
   /**
    * TODO
    */
-  step: StepMethod<$Pipeline, $Overload>
-  /**
-   * TODO
-   */
-  config: <inputExtension extends object>() => Builder<
+  configurator: <$Configurator extends Configurator>(
+    configurator:
+      | $Configurator
+      | Configurator.Builder<$Configurator>
+      | Configurator.BuilderProviderCallback<$Configurator>,
+  ) => Builder<
     $Pipeline,
-    Overload.Updaters.SetInput<$Overload, inputExtension>
-  >
-  defaults: <inputDefaults extends object>(inputDefaults: inputDefaults) => Builder<
-    $Pipeline,
-    Overload.Updaters.SetInputDefaults<$Overload, inputDefaults>
-  >
-  configInit: <inputExtension extends object>() => Builder<
-    $Pipeline,
-    Overload.Updaters.SetInputInit<$Overload, inputExtension>
+    {
+      [_ in keyof $Data]: _ extends 'configurator' ? $Configurator
+        : $Data[_]
+    }
   >
   /**
    * TODO
    */
-  stepWithExtendedInput: <$InputExtension extends object>() => StepMethod<
+  step: MethodStep<$Pipeline, $Data>
+  /**
+   * TODO
+   */
+  stepWithExtendedInput: <$InputExtension extends object>() => MethodStep<
     $Pipeline,
-    $Overload,
+    $Data,
     $InputExtension
   >
 }
 
-interface StepMethod<
+interface MethodStep<
   $Pipeline extends PipelineDefinition,
-  $Overload extends Overload,
+  $Data extends Data,
   $InputExtension extends object = {},
 > {
   <
@@ -95,7 +94,7 @@ interface StepMethod<
     $Slots extends undefined | StepDefinition.Slots = undefined,
     $Input =
       & InferStepInput<
-        $Overload,
+        $Data,
         Extract<$Pipeline['steps'][number], { name: $Name }>,
         Tuple.PreviousItem<$Pipeline['steps'], { name: $Name }>
       >
@@ -109,29 +108,36 @@ interface StepMethod<
     },
   ): Builder<
     $Pipeline,
-    Overload.Updaters.AddStep<$Overload, $Name, {
-      name: $Name
-      input: $Input
-      output: Awaited<$Output>
-      slots: ConfigManager.OrDefault2<$Slots, {}>
-    }>
+    {
+      [_ in keyof $Data]: _ extends 'steps' ?
+          & $Data['steps']
+          & {
+            [_ in $Name]: {
+              name: $Name
+              input: $Input
+              output: Awaited<$Output>
+              slots: ConfigManager.OrDefault2<$Slots, {}>
+            }
+          }
+        : $Data[_]
+    }
   >
 }
 
 // dprint-ignore
 type InferStepInput<
-  $Overload extends Overload,
+  $Data extends Data,
   $CurrentStep extends StepDefinition,
   $PreviousStep extends StepDefinition | undefined,
 > =
   $PreviousStep extends StepDefinition
-    ? $PreviousStep['name'] extends keyof $Overload['steps']
-      ? $Overload['steps'][$PreviousStep['name']]['output']
+    ? $PreviousStep['name'] extends keyof $Data['steps']
+      ? $Data['steps'][$PreviousStep['name']]['output']
       :
         & $CurrentStep['input']
-        & $Overload['input']
-        & { [_ in $Overload['discriminant'][0]]: $Overload['discriminant'][1] }
+        & $Data['configurator']['input']
+        & { [_ in $Data['discriminant']['name']]: $Data['discriminant']['value'] }
       :
         & $CurrentStep['input']
-        & $Overload['input']
-        & { [_ in $Overload['discriminant'][0]]: $Overload['discriminant'][1] }
+        & $Data['configurator']['input']
+        & { [_ in $Data['discriminant']['name']]: $Data['discriminant']['value'] }

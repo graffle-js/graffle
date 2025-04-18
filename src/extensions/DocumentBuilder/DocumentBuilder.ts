@@ -1,53 +1,50 @@
 import { OperationTypeNode } from 'graphql'
-import type { ExtensionChainable } from '../../client/client.js'
-import { type Context, create } from '../../entrypoints/extensionkit.js'
-import type { ClientTransports, GlobalRegistry } from '../../entrypoints/utilities-for-generated.js'
+import { Extension } from '../../entrypoints/extension.js'
+import type { GlobalRegistry, GraffleKit } from '../../entrypoints/utilities-for-generated.js'
 import type { TypeFunction } from '../../lib/type-function/__.js'
-import { createMethodDocument, createMethodOperationType } from './_.js'
+import { createMethodDocument, createMethodOperationType } from './_exports.js'
 
-export const DocumentBuilder = create({
-  name: `DocumentBuilder`,
-  create: ({ builder }) => {
+export const DocumentBuilder = Extension
+  .create(`DocumentBuilder`)
+  // todo add an extensions unit test that this adds properties to the context
+  .properties(({ context }) => {
     return {
-      builder: builder<BuilderExtension>(({ context }) => {
-        return {
-          document: createMethodDocument(context),
-          query: createMethodOperationType(context, OperationTypeNode.QUERY),
-          mutation: createMethodOperationType(context, OperationTypeNode.MUTATION),
-          // todo
-          // subscription: async () => {},
-        } as any
-      }),
-    }
-  },
-})
+      document: createMethodDocument(context),
+      query: createMethodOperationType(context, OperationTypeNode.QUERY),
+      mutation: createMethodOperationType(context, OperationTypeNode.MUTATION),
+    } as any as Properties
+  })
+  .return()
 
-export interface BuilderExtension extends ExtensionChainable {
+export interface Properties extends Extension.PropertiesTypeFunction {
   // @ts-expect-error
-  return: BuilderExtension_<this['params'][0]>
+  return: Properties_<this['parameters']>
 }
 
-type BuilderExtension_<$Context extends Context> =
+type Properties_<
+  $Parameters extends Extension.PropertiesTypeFunctionParameters,
+  __Name extends string = $Parameters['context']['configuration']['schema']['current']['name'],
+> =
   // todo
   // GlobalRegistry.Has<$Context['name']> extends false
   // eslint-disable-next-line
   // @ts-ignore passes after generation
-  GlobalRegistry.Has<$Context['name']> extends false ? {}
+  GlobalRegistry.Has<__Name> extends false ? {}
     : (
       // eslint-disable-next-line
       // @ts-ignore Passes after generation
-      & TypeFunction.Call<GlobalRegistry.GetOrDefault<$Context['name']>['interfaces']['Root'], $Context>
+      & TypeFunction.Call<GlobalRegistry.GetOrDefault<__Name>['interfaces']['Root'], $Parameters['context']>
       & {
-        // eslint-disable-next-line
-        // @ts-ignore Passes after generation
-        document: ClientTransports.PreflightCheck<
-          $Context,
+        // // eslint-disable-next-line
+        // // @ts-ignore Passes after generation
+        document: GraffleKit.Context.Configuration.Check.Preflight<
+          $Parameters['context'],
           TypeFunction.Call<
             GlobalRegistry.GetOrDefault<
               // @ts-expect-error
-              $Context['name']
+              __Name
             >['interfaces']['Document'],
-            $Context
+            $Parameters['context']
           >
         >
       }

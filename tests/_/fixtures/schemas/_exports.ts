@@ -1,0 +1,5 @@
+export { schema as minimal } from './minimal/schema.js'
+export { schema as mutationOnly } from './mutation-only/schema.js'
+export { schema as pokemon } from './pokemon/schema.js'
+export { schema as possible } from './possible/schema.js'
+export { schema as queryOnly } from './query-only/schema.js'

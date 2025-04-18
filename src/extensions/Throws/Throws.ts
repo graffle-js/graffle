@@ -1,53 +1,39 @@
-import type { Client, ExtensionChainable } from '../../client/client.js'
-import { type Context, create } from '../../entrypoints/extensionkit.js'
-import { type ConfigInit, type OutputConfig } from '../../entrypoints/main.js'
-import type { ConfigManager } from '../../lib/config-manager/__.js'
+// import type { Context } from '../../context/context.js'
+import type { Properties } from '../../context/fragments/properties/_namespace.js'
+import { Extension } from '../../entrypoints/extension.js'
+import type { GraffleKit } from '../../entrypoints/kit.js'
 
-export const Throws = create({
-  name: `Throws`,
-  create: ({ builder }) => {
-    return {
-      builder: builder<BuilderExtension>(({ client, context }) => {
-        // todo redesign input to allow to force throw always
-        // todo pull pre-configured config from core
-        const throwsifiedInput: ConfigInit = {
-          output: {
-            envelope: {
-              enabled: context.output.envelope.enabled,
-              // @ts-expect-error
-              errors: { execution: false, other: false, schema: false },
-            },
-            // @ts-expect-error
-            errors: { execution: `throw`, other: `throw`, schema: `throw` },
-          },
-        }
-        return {
-          throws: () => client.with(throwsifiedInput),
-        }
-      }),
+export const Throws = Extension
+  .create(`throws`)
+  .properties(({ configuration, client }) => {
+    // todo redesign input to allow to force throw always
+    // todo pull pre-configured config from core
+    const throwsConfiguration: GraffleKit.Context.Configuration.Output.Configurator['input'] = {
+      envelope: {
+        enabled: configuration.output.current.envelope.enabled,
+        // @ts-expect-error
+        errors: { execution: false, other: false, schema: false },
+      },
+      // @ts-expect-error
+      errors: { execution: `throw`, other: `throw`, schema: `throw` },
     }
-  },
-})
 
-interface BuilderExtension extends ExtensionChainable {
-  // @ts-expect-error
-  return: BuilderExtension_<this['params'][0]>
+    const properties: Properties = {
+      throws: () => client.with({ output: throwsConfiguration }),
+    } as any
+
+    return properties
+  })
+  .return()
+
+interface Properties extends Properties.PropertiesComputer$Func {
+  // @ts-expect-error: untyped parameters
+  return: Properties_<this['parameters']['context']>
 }
 
-interface BuilderExtension_<$Context extends Context> {
-  // return: BuilderExtension_<AssertExtends<this['params'], Builder.Extension.Parameters<BuilderExtension>>>
-  throws: () => Client<
-    {
-      [_ in keyof $Context]: _ extends 'output' ? ThrowsifyConfig<$Context['output']>
-        : $Context[_]
-    },
-    // todo
-    {} // this['params'][1]
+// dprint-ignore
+interface Properties_<$Context extends GraffleKit.Context> {
+  throws: () => GraffleKit.Client<
+    GraffleKit.Context.Configuration.Add<$Context, { output: { errors: { execution: 'throw'; other: 'throw' }}}>
   >
 }
-
-type ThrowsifyConfig<$OutputConfig extends OutputConfig> = ConfigManager.SetKey<
-  $OutputConfig,
-  'errors',
-  { other: 'throw'; execution: 'throw' }
->

@@ -1,6 +1,6 @@
 import type { Simplify } from 'type-fest'
 import type { Deferred, MaybePromise } from '../../prelude.js'
-import type { Pipeline } from '../_.js'
+import type { Pipeline } from '../_exports.js'
 import type { ResultSuccess } from '../Result.js'
 import type { Step } from '../Step.js'
 import type { StepTrigger } from '../StepTrigger.js'
@@ -11,38 +11,34 @@ export type InterceptorOptions = {
 }
 
 export namespace Interceptor {
+  // dprint-ignore
   export interface InferFromPipeline<
     $Pipeline extends Pipeline = Pipeline,
   > // $Options extends InterceptorOptions = InterceptorOptions,
   {
-    (steps: Simplify<InferKeywordArguments<$Pipeline>>): Promise<
-      | $Pipeline['output']
-      | StepTriggerEnvelope
-    >
+    (stepTriggers: Simplify<InferStepTriggerParameters<$Pipeline>>):
+      Promise<
+        | $Pipeline['output']
+        | StepTriggerEnvelope
+      >
   }
 
-  type InferKeywordArguments<
-    $Pipeline extends Pipeline,
-  > = InferKeywordArguments_<
-    $Pipeline['steps'],
-    $Pipeline['output']
-  >
-
   // dprint-ignore
-  type InferKeywordArguments_<
-    $Steps extends Step[],
-    $PipelineOutput,
+  type InferStepTriggerParameters<
+    $Pipeline extends Pipeline,
+    __Steps extends readonly Step[] = $Pipeline['steps'],
+    __PipelineOutput = $Pipeline['output'],
   > =
-    $Steps extends [infer $NextStep extends Step, ...infer $NextNextSteps extends Step[]]
+    __Steps extends readonly [infer $NextStep extends Step, ...infer $NextNextSteps extends readonly Step[]]
       ? & {
             [_ in $NextStep['name']]:
               StepTrigger.Infer<
                 $NextStep,
                 $NextNextSteps,
-                $PipelineOutput
+                __PipelineOutput
               >
           }
-        & InferKeywordArguments_<$NextNextSteps, $PipelineOutput>
+        & InferStepTriggerParameters<$Pipeline, $NextNextSteps, __PipelineOutput>
       : {}
 }
 

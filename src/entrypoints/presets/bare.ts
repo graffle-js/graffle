@@ -1,1 +1,1 @@
-export * as GraffleBare from './_bare.js'
+export * as GraffleBare from './bare_.js'

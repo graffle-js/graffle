@@ -1,9 +1,8 @@
 /* eslint-disable */
 
 import { describe, expect, test, vi } from 'vitest'
-import { Errors } from '../../errors/__.js'
+import { Errors } from '../../errors/_namespace.js'
 import type { ContextualError } from '../../errors/ContextualError.js'
-import { PipelineDefinition } from '../_.js'
 import {
   initialInput2,
   oops,
@@ -12,7 +11,8 @@ import {
   run,
   runRetrying,
   type TestInterceptor,
-} from '../__.test-helpers.js'
+} from '../_.test-helpers.js'
+import { PipelineDefinition } from '../_exports.js'
 import { Pipeline } from '../Pipeline/Pipeline.js'
 import { successfulResult } from '../Result.js'
 import { StepDefinition } from '../StepDefinition.js'
@@ -419,6 +419,8 @@ describe('step runner parameter - previous', () => {
 })
 
 describe('overloads', () => {
+  const discriminant1 = { name: 'x', value: 1 } as const
+  const discriminant2 = { name: 'x', value: 2 } as const
   test('overloaded step runners are run', async () => {
     const p = PipelineDefinition
       .create()
@@ -427,7 +429,7 @@ describe('overloads', () => {
       .step('b')
       .overload(o =>
         o
-          .create({ discriminant: ['x', 1] })
+          .create({ discriminant: discriminant1 })
           .step('a', {
             // todo make it a type error to not propagate the discriminant
             run: (input) => ({ ...input, value: input.value + '+a' }),
@@ -448,13 +450,13 @@ describe('overloads', () => {
       .step('a')
       .step('b')
       .overload(o =>
-        o.create({ discriminant: ['x', 1] })
+        o.create({ discriminant: discriminant1 })
           .step('a', { run: (input) => ({ ...input, value: input.value + '+a' }) })
           .step('b', { run: (input) => ({ value: input.value + '+b' }) })
       )
       .overload(o =>
         o
-          .create({ discriminant: ['x', 2] })
+          .create({ discriminant: discriminant2 })
           .step('a', { run: (input) => ({ ...input, value: input.value + '+a2' }) })
           .step('b', { run: (input) => ({ value: input.value + '+b2' }) })
       )

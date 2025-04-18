@@ -1,4 +1,4 @@
-import type { Errors } from '../../errors/__.js'
+import type { Errors } from '../../errors/_namespace.js'
 import { ContextualError } from '../../errors/ContextualError.js'
 import { casesExhausted, createDeferred, debug } from '../../prelude.js'
 import type { InterceptorGeneric } from '../Interceptor/Interceptor.js'

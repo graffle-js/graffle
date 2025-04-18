@@ -3,12 +3,13 @@
  * to be sent over HTTP GET method. Note write-kind operations (mutation) are still sent over HTTP POST method.
  */
 
-import { Graffle } from '../$/graffle/__.js'
-import { show } from '../$/helpers.js'
+import { Graffle } from 'graffle'
+import { publicGraphQLSchemaEndpoints, show } from '../$/helpers.js'
 
 const graffle = Graffle
   .create()
   .transport({
+    url: publicGraphQLSchemaEndpoints.Pokemon,
     methodMode: `getReads`, // [!code highlight]
     headers: { tenant: `nano` },
   })

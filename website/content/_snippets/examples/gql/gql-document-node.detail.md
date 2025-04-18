@@ -12,7 +12,7 @@ import './graffle/modules/global.js'
 // ---cut---
 
 import { Graffle } from 'graffle'
-import { Opentelemetry } from 'graffle/extensions/opentelemetry'
+import { OpenTelemetry } from 'graffle/extensions/opentelemetry'
 import { Throws } from 'graffle/extensions/throws'
 import { parse } from 'graphql'
 
@@ -21,8 +21,8 @@ const graffle = Graffle
   .transport({
     url: `http://localhost:3000/graphql`,
   })
-  .use(Throws())
-  .use(Opentelemetry())
+  .use(Throws)
+  .use(OpenTelemetry())
 
 const data = await graffle.gql(parse(`
   query pokemonByName ($name: String!) {
