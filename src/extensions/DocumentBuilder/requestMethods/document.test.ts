@@ -38,7 +38,7 @@ describe(`document with two queries`, () => {
   //   bar: { query: { idNonNull: true } },
   // })
 
-  test.only(`works`, async () => {
+  test(`works`, async () => {
     const { run } = withTwo
     await expect(run(`foo`)).resolves.toEqual({ id: db.id1 })
     // await expect(run(`bar`)).resolves.toEqual({ idNonNull: db.id1 })
