@@ -20,7 +20,7 @@
   },
   "pnpm": {
     "overrides": {
-      "graffle": "link:.."
+      "graffle": "file:.."
     }
   }
 }
