@@ -199,13 +199,13 @@ Graffle gives you utilities beyond the direct client itself. For example you can
 ```ts twoslash [Graffle Namespace]
 import { Graffle } from './graffle/_namespace.js'
 
-const ContinentSelection = Graffle.Select.Continent({ name: true })
+const PokemonSelection = Graffle.Select.Pokemon({ name: true })
 ```
 
 ```ts twoslash [Barrel Import]
 import { Select } from './graffle/_exports.js'
 
-const ContinentSelection = Select.Continent({ name: true })
+const PokemonSelection = Select.Pokemon({ name: true })
 ```
 
 :::
@@ -217,13 +217,13 @@ You can also do the same thing at the type level which can sometimes be handy wh
 ```ts twoslash [Graffle Namespace]
 import { type Graffle } from './graffle/_namespace.js'
 
-type Continent = Graffle.Select.Continent<{ name: true }>
+type Pokemon = Graffle.Select.Pokemon<{ name: true }>
 ```
 
 ```ts twoslash [Barrel Import]
 import { type Select } from './graffle/_exports.js'
 
-type Continent = Select.Continent<{ name: true }>
+type Pokemon = Select.Pokemon<{ name: true }>
 ```
 
 Refer to the [Selection Sets Example](/examples/70_type-level/selection-sets.md) for more detail about type level features the generator provides you.
