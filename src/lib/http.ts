@@ -75,8 +75,17 @@ export const searchParamsAppendAll = (url: URL | string, additionalSearchParams:
 export function mergeHeadersInitWithStrategyMerge(base?: HeadersInit, additional?: HeadersInit): Headers | undefined {
   if (!additional) return base instanceof Headers ? base : base ? new Headers(base) : undefined
   if (!base) return new Headers(additional)
-  return new Headers([
-    ...(new Headers(base)).entries(),
-    ...(new Headers(additional)).entries(),
-  ])
+
+  const base_ = new Headers(base)
+  const additional_ = new Headers(additional)
+
+  for (const [key, value] of additional_) {
+    if (value === UnsetValue) {
+      base_.delete(key)
+    } else {
+      base_.append(key, value)
+    }
+  }
+
+  return base_
 }

@@ -17,15 +17,15 @@ const graffle = Graffle
         ...exchange.input,
         request: {
           ...exchange.input.request,
-          headers: {
-            'X-Sent-At-Time': Date.now().toString(),
-          },
+          headers: [
+            ...new Headers(exchange.input.request.headers),
+            [`X-Sent-At-Time`, Date.now().toString()],
+          ],
         },
       },
     })
   })
   .anyware(({ exchange }) => {
-    // todo wrong type / runtime value
     show(exchange.input.request)
     return exchange()
   })
