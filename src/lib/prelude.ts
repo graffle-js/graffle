@@ -307,6 +307,17 @@ export namespace Objekt {
   export type IsEmpty<T> = {} extends T ? true : false
 }
 
+/**
+ * Use this to make forced union distribution more explicit and self-documenting.
+ *
+ * @example
+ *
+ * ```ts
+ * type Foo<T> = T extends __FORCE_UNION_DISTRIBUTION__ ? ... : ...
+ * ```
+ */
+export type __FORCE_UNION_DISTRIBUTION__ = any
+
 export namespace Tuple {
   export type Flatten<T extends readonly (readonly any[])[]> = T extends
     readonly [infer __head__ extends readonly any[], ...infer __tail__ extends readonly (readonly any[])[]]
@@ -340,7 +351,9 @@ export namespace Tuple {
 
   export type IndexKey = number | `${number}`
 
-  export type IsEmpty<T> = T extends readonly [] ? true : false
+  export type Empty = readonly []
+
+  export type IsEmpty<T> = T extends Empty ? true : false
 
   // dprint-ignore
   export type PreviousItem<$Items extends readonly any[], $OfItem> =
@@ -832,7 +845,11 @@ export type PartialOrUndefined<T> = {
   [K in keyof T]?: T[K] | undefined
 }
 
-export type UnknownOrAnyToNever<T> = unknown extends T ? never : T
+export type UnionIgnoreAnyOrUnknown<T> = unknown extends T ? never : T
+
+export type IntersectionIgnoreNeverOrAny<T> = IsAny<T> extends true ? unknown : T extends never ? unknown : T
+
+export type NeverOrAnyToUnknown<T> = IsAny<T> extends true ? unknown : T extends never ? unknown : T
 
 export type MergeAll<$Objects extends object[]> = $Objects extends
   [infer $First extends object, ...infer $Rest extends object[]] ? $First & MergeAll<$Rest>

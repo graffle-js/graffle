@@ -105,6 +105,7 @@ beforeEach(() => {
 export const pipelineWithOptions = (options?: Options) => {
   const pipeline = createPipelineDef(options).type
   const pipelineE = Pipeline.create(pipeline)
+  pipelineE.input
   const run = async (...interceptors: TestInterceptor[]) => {
     return await PipelineDefinition.run(pipelineE, {
       initialInput: { value: `initial` },

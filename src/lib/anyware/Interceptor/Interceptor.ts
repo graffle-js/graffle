@@ -16,7 +16,7 @@ export namespace Interceptor {
     $Pipeline extends Pipeline = Pipeline,
   > // $Options extends InterceptorOptions = InterceptorOptions,
   {
-    (steps: Simplify<InferKeywordArguments<$Pipeline>>):
+    (stepTriggers: Simplify<InferStepTriggerParameters<$Pipeline>>):
       Promise<
         | $Pipeline['output']
         | StepTriggerEnvelope
@@ -24,7 +24,7 @@ export namespace Interceptor {
   }
 
   // dprint-ignore
-  type InferKeywordArguments<
+  type InferStepTriggerParameters<
     $Pipeline extends Pipeline,
     __Steps extends readonly Step[] = $Pipeline['steps'],
     __PipelineOutput = $Pipeline['output'],
@@ -38,7 +38,7 @@ export namespace Interceptor {
                 __PipelineOutput
               >
           }
-        & InferKeywordArguments<$Pipeline, $NextNextSteps, __PipelineOutput>
+        & InferStepTriggerParameters<$Pipeline, $NextNextSteps, __PipelineOutput>
       : {}
 }
 

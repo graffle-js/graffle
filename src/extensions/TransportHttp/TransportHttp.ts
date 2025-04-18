@@ -1,6 +1,5 @@
 import { Transport } from '../../context/fragments/transports/dataType/_namespace.js' // TODO import from entrypoint
 import { Extension } from '../../entrypoints/extension.js'
-import type { Anyware } from '../../lib/anyware/_namespace.js'
 import type { Grafaid } from '../../lib/grafaid/_namespace.js'
 import { OperationTypeToAccessKind, print } from '../../lib/grafaid/document.js'
 import { getRequestEncodeSearchParameters, postRequestEncodeBody } from '../../lib/grafaid/http/http.js'
@@ -8,18 +7,10 @@ import { getRequestHeadersRec, parseExecutionResult, postRequestHeadersRec } fro
 import { mergeHeadersInitWithStrategyMerge, mergeRequestInit, searchParamsAppendAll } from '../../lib/http.js'
 import type { httpMethodGet, httpMethodPost } from '../../lib/http.js'
 import { _, isString, type MaybePromise } from '../../lib/prelude.js'
-import type { RequestPipeline } from '../../requestPipeline/RequestPipeline.js'
 
 // ----------------------------
 // Configuration
 // ----------------------------
-
-type TransportHttpConfigurator = Extension.Configurator<
-  ConfigurationInput,
-  ConfigurationNormalized,
-  ConfigurationDefault,
-  Extension.Configurator.InputResolverGeneric<ConfigurationInputResolver$Func>
->
 
 export type ConfigurationInput = {
   url?: URL | string
@@ -97,73 +88,19 @@ const httpTransportConfigurator = Extension.Configurator()
 // Transport
 // ----------------------------
 
-export interface RequestPipelineOverload extends Anyware.Overload.Data {
-  discriminant: {
-    name: 'transportType'
-    value: 'http'
-  }
-  input: ConfigurationNormalized
-  inputInit: {}
-  steps: {
-    pack: {
-      name: 'pack'
-      slots: {
-        searchParams: getRequestEncodeSearchParameters
-        body: postRequestEncodeBody
-      }
-      input: PackInput
-      output: PackOutput
-    }
-    exchange: {
-      name: 'exchange'
-      slots: {
-        fetch: SlotFetch
-      }
-      input: ExchangeInput
-      output: ExchangeOutput
-    }
-    unpack: {
-      name: 'unpack'
-      slots: {}
-      input: ExchangeOutput
-      output: RequestPipeline.DecodeInput
-    }
-  }
-}
-
-export interface PackInput extends RequestPipeline.PackInput {
-  headers?: HeadersInit
-}
-
-export interface PackOutput extends Omit<RequestPipeline.PackInput, 'request'> {
-  request: ExchangeRequest
-}
-
-export interface ExchangeInput extends PackOutput {
-  headers?: HeadersInit
-}
-
-export interface ExchangeOutput extends PackOutput {
-  response: Response
-}
-
-export interface SlotFetch {
-  (request: Request): MaybePromise<Response>
-}
-
 export type ExchangeRequest = ExchangePostRequest | ExchangeGetRequest
 
 /**
  * An extension of {@link RequestInit} that adds a required `url` property and makes `body` required.
  */
-type ExchangePostRequest = Omit<RequestInit, 'body' | 'method'> & {
+export type ExchangePostRequest = Omit<RequestInit, 'body' | 'method'> & {
   methodMode: MethodModePost | MethodModeGetReads
   method: httpMethodPost
   url: string | URL // todo URL for config and string only for input. Requires anyware to allow different types for input and existing config.
   body: BodyInit
 }
 
-type ExchangeGetRequest = Omit<RequestInit, 'body' | 'method'> & {
+export type ExchangeGetRequest = Omit<RequestInit, 'body' | 'method'> & {
   methodMode: MethodModeGetReads
   method: httpMethodGet
   url: string | URL
@@ -173,20 +110,7 @@ type ExchangeGetRequest = Omit<RequestInit, 'body' | 'method'> & {
 // Extension
 // ----------------------------
 
-export interface TransportHttpConstructor {
-  (): TransportHttp
-}
-
-export type TransportHttp = Extension.Data<
-  `TransportHttp`,
-  undefined,
-  unknown,
-  {},
-  readonly [],
-  readonly [Extension.Transport.Data<'http', TransportHttpConfigurator>]
->
-
-export const TransportHttp: TransportHttp = Extension.create(`TransportHttp`)
+export const TransportHttp = Extension.create(`TransportHttp`)
   .transport(
     Transport.create(`http`)
       .configurator(httpTransportConfigurator)
@@ -198,7 +122,7 @@ export const TransportHttp: TransportHttp = Extension.create(`TransportHttp`)
           searchParams: getRequestEncodeSearchParameters,
           body: postRequestEncodeBody,
         },
-        run: (input, slots) => {
+        run(input, slots) {
           const graphqlRequest: Grafaid.HTTP.RequestConfig = {
             operationName: input.request.operationName,
             variables: input.request.variables,
@@ -250,7 +174,7 @@ export const TransportHttp: TransportHttp = Extension.create(`TransportHttp`)
         slots: {
           fetch: (request: Request): MaybePromise<Response> => fetch(request),
         },
-        run: async (input, slots) => {
+        async run(input, slots) {
           const request = new Request(input.request.url, input.request)
           const response = await slots.fetch(request)
           return {
@@ -260,7 +184,7 @@ export const TransportHttp: TransportHttp = Extension.create(`TransportHttp`)
         },
       })
       .unpack({
-        run: async (input) => {
+        async run(input) {
           // todo 1 if response is missing header of content length then .json() hangs forever.
           //        firstly consider a timeout, secondly, if response is malformed, then don't even run .json()
           // todo 2 if response is e.g. 404 with no json body, then an error is thrown because json parse cannot work, not gracefully handled here

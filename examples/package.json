@@ -17,5 +17,10 @@
   "devDependencies": {
     "@tsconfig/node20": "^20.1.4",
     "@tsconfig/strictest": "^2.0.5"
+  },
+  "pnpm": {
+    "overrides": {
+      "graffle": "link:.."
+    }
   }
 }

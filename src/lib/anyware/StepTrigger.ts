@@ -17,6 +17,7 @@ export namespace StepTrigger {
   export interface Properties<
     $OriginalInput extends Step.Input = Step.Input,
   > {
+    // todo: readonly properties
     [stepTriggerSymbol]: StepTriggerSymbol
     input: $OriginalInput
   }

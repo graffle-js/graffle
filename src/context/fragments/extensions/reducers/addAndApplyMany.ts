@@ -1,5 +1,5 @@
 import type { Configurator } from '../../../../lib/configurator/configurator.js'
-import { type Tuple, type UnknownOrAnyToNever, type Writeable } from '../../../../lib/prelude.js'
+import { type Tuple, type UnionIgnoreAnyOrUnknown, type Writeable } from '../../../../lib/prelude.js'
 import type { Context } from '../../../context.js'
 import { Configuration } from '../../configuration/_namespace.js'
 import { Properties } from '../../properties/_namespace.js'
@@ -57,7 +57,7 @@ export type AddAndApplyMany<
         _ extends 'typeHookRequestResultDataTypes' ?
           | $Context['typeHookRequestResultDataTypes']
             // todo if any extension has any/never then others get blown away. Need empty value that doesn't affect the union.
-          | UnknownOrAnyToNever<$Extensions[number]['noExpandResultDataType']> :
+          | UnionIgnoreAnyOrUnknown<$Extensions[number]['noExpandResultDataType']> :
         // Skip
           $Context[_]
     }

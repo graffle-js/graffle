@@ -27,8 +27,8 @@ const dName = `_`
 type dName = typeof dName
 const dValue = 1
 type dValue = typeof dValue
-const d = { name: dName, value: dValue } as const
-type d = typeof d
+const d1 = { name: dName, value: dValue } as const
+type d1 = typeof d1
 type dObject = { [_ in dName]: dValue }
 const dValue2 = 2
 type dValue2 = typeof dValue2
@@ -39,7 +39,7 @@ type dObject2 = { [_ in dName]: dValue2 }
 test(`overload input extensions become a pipeline union input`, () => {
   const pDef = b0
     .step(`a`)
-    .overload(o => o.create({ discriminant: d }).configurator($ => $.input<{ ol1: 1 }>()))
+    .overload(o => o.create({ discriminant: d1 }).configurator($ => $.input<{ ol1: 1 }>()))
     .overload(o => o.create({ discriminant: d2 }).configurator($ => $.input<{ ol2: 2 }>()))
     .type
   const p = Pipeline.create(pDef)
@@ -50,8 +50,9 @@ test(`overload input extensions become a pipeline union input`, () => {
 })
 
 test(`overload step input/output becomes union to step input/output`, () => {
-  const pDef = b0.step(`a`).overload(o => o.create({ discriminant: d }).step(`a`, { run: () => ({ olb: 1 as const }) }))
-    .type
+  const pDef =
+    b0.step(`a`).overload(o => o.create({ discriminant: d1 }).step(`a`, { run: () => ({ olb: 1 as const }) }))
+      .type
   const p = Pipeline.create(pDef)
   expectTypeOf(p.steps).toMatchTypeOf<
     readonly [{
@@ -67,7 +68,7 @@ test(`overloads steps slots all merge onto respective pipeline step (no unions)`
   const pDef = b0
     .step(`a`)
     .overload(o =>
-      o.create({ discriminant: d }).step(`a`, {
+      o.create({ discriminant: d1 }).step(`a`, {
         slots: { m: slots.m },
         run: () => {},
       })
