@@ -1,12 +1,28 @@
 ---------------------------------------- SHOW ----------------------------------------
 {
   methodMode: 'post',
-  headers: Headers {
-    accept: 'application/graphql-response+json; charset=utf-8, application/json; charset=utf-8',
-    'content-type': 'application/json',
-    'x-sent-at-time': 'DYNAMIC_VALUE'
-  },
+  headers: [
+    [
+      'accept',
+      'application/graphql-response+json; charset=utf-8, application/json; charset=utf-8'
+    ],
+    [ 'content-type', 'application/json' ],
+    [ 'X-Sent-At-Time', '1745009943330' ]
+  ],
   method: 'post',
-  url: 'http://localhost:3000/graphql',
+  url: URL {
+    href: 'http://localhost:3000/graphql',
+    origin: 'http://localhost:3000',
+    protocol: 'http:',
+    username: '',
+    password: '',
+    host: 'localhost:3000',
+    hostname: 'localhost',
+    port: '3000',
+    pathname: '/graphql',
+    search: '',
+    searchParams: URLSearchParams {},
+    hash: ''
+  },
   body: '{"query":"{ pokemons { name } }"}'
 }
