@@ -11,8 +11,9 @@ interceptAndShowOutput()
 // 2. Register the provider to make the OpenTelemetry API use it
 const exporter = new ConsoleSpanExporter()
 const processor = new SimpleSpanProcessor(exporter)
-const provider = new NodeTracerProvider()
-provider.addSpanProcessor(processor)
+const provider = new NodeTracerProvider({
+  spanProcessors: [processor],
+})
 provider.register()
 
 const graffle = Graffle.create().use(OpenTelemetry())

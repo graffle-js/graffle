@@ -95,11 +95,12 @@ export const addAndApplyMany = <
       Object.assign(newContext, Transports.addMany(newContext, extension.transports))
     }
 
-    if (extension.requestInterceptor) {
+    // todo: test that if computed present, then they are added to the context.
+    if (extension.requestInterceptor || extension.requestInterceptorsComputed.length > 0) {
       Object.assign(
         newContext,
         RequestInterceptors.add(newContext, {
-          static: [extension.requestInterceptor],
+          static: extension.requestInterceptor ? [extension.requestInterceptor] : [],
           computed: extension.requestInterceptorsComputed,
         }),
       )

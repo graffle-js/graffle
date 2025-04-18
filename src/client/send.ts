@@ -20,8 +20,8 @@ export const sendRequest = async (context: Context, analyzedRequest: RequestAnal
   // todo [1] calculate interceptors when context changes, not on each request.
   const computedInterceptors = context.requestPipelineInterceptorsComputed.map(computer =>
     computer({
-      // @ts-expect-error: todo improve typing of computers
-      configuration: context.configuration[computer.sourceExtension]?.current,
+      // todo: test that configuration is passed correctly
+      configuration: context.configuration,
       context,
       // @ts-expect-error 1
       client: null, // annoying to get client reference here, instead, do above todo where then this doesn't even have to be here anymore.
