@@ -14,7 +14,7 @@ This example shows how to configure output to use the envelope.
 import './graffle/modules/global.js'
 // ---cut---
 
-import { Graffle } from './graffle/__.js'
+import { Graffle } from './graffle/_namespace.js'
 
 const pokemon = Graffle.create({
   output: {
@@ -49,7 +49,7 @@ console.log(result)
     headers: Headers {
       'content-type': 'application/graphql-response+json; charset=utf-8',
       'content-length': '142',
-      date: 'Fri, 18 Apr 2025 21:31:00 GMT',
+      date: 'Fri, 18 Apr 2025 21:36:34 GMT',
       connection: 'keep-alive',
       'keep-alive': 'timeout=5'
     },
