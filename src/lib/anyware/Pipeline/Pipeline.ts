@@ -1,4 +1,4 @@
-import type { IsNever, IsUnknown, Simplify } from 'type-fest'
+import type { IsUnknown, Simplify } from 'type-fest'
 import type {
   __FORCE_UNION_DISTRIBUTION__,
   ExcludeUndefined,
