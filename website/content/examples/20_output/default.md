@@ -14,8 +14,6 @@ This example shows the default output behavior.
 import './graffle/modules/global.js'
 // ---cut---
 
-import { Graffle } from './graffle/__.js'
-
 const pokemon = Graffle.create()
 
 const pokemons = await pokemon.query.pokemons({ name: true })

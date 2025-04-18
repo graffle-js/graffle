@@ -12,11 +12,10 @@ import './graffle/modules/global.js'
 // ---cut---
 
 import { Throws } from 'graffle/extensions/throws'
-import { Graffle } from './graffle/__.js'
 
 const pokemon = Graffle
   .create({ output: { defaults: { errorChannel: `return` } } })
-  .use(Throws())
+  .use(Throws)
   .anyware(({ encode: _ }) => {
     throw new Error(`Something went wrong.`)
   })
@@ -36,7 +35,7 @@ ContextualError: There was an error in the interceptor "anonymous" (use named fu
     at runPipeline (/some/path/to/runPipeline.ts:XX:XX:18)
     at async <anonymous> (/some/path/to/runner.ts:XX:XX:20)
     at async Module.run (/some/path/to/run.ts:XX:XX:10)
-    at async executeDocument (/some/path/to/requestMethods.ts:XX:XX:18)
+    at async sendRequest (/some/path/to/send.ts:XX:XX:18)
     at async executeRootField (/some/path/to/requestMethods.ts:XX:XX:18)
     at async <anonymous> (/some/path/to/extension_throws__throws.ts:XX:XX:17) {
   context: {
@@ -58,7 +57,7 @@ ContextualError: There was an error in the interceptor "anonymous" (use named fu
     at runPipeline (/some/path/to/runPipeline.ts:XX:XX:18)
     at async <anonymous> (/some/path/to/runner.ts:XX:XX:20)
     at async Module.run (/some/path/to/run.ts:XX:XX:10)
-    at async executeDocument (/some/path/to/requestMethods.ts:XX:XX:18)
+    at async sendRequest (/some/path/to/send.ts:XX:XX:18)
     at async executeRootField (/some/path/to/requestMethods.ts:XX:XX:18)
     at async <anonymous> (/some/path/to/extension_throws__throws.ts:XX:XX:1) {
   context: {

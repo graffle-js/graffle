@@ -32,7 +32,10 @@ Graffle
     const { unpack } = await exchange({
       input: {
         ...exchange.input,
-        headers: mergedHeaders,
+        request: {
+          ...exchange.input.request,
+          headers: mergedHeaders,
+        },
       },
     })
     const { decode } = await unpack()

@@ -14,8 +14,6 @@ This example shows how to use dedicated root field methods to easily operate on 
 import './graffle/modules/global.js'
 // ---cut---
 
-import { Graffle } from './graffle/__.js'
-
 const pokemon = Graffle.create()
 
 const pokemons = await pokemon.query.pokemons({ name: true })
