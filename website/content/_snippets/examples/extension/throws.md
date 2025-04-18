@@ -10,6 +10,7 @@ import './graffle/modules/global.js'
 // ---cut---
 
 import { Throws } from 'graffle/extensions/throws'
+import { Graffle } from './graffle/__.js'
 
 const pokemon = Graffle
   .create({ output: { defaults: { errorChannel: `return` } } })

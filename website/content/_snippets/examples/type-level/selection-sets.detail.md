@@ -11,6 +11,8 @@
 import './graffle/modules/global.js'
 // ---cut---
 
+import { Graffle } from './graffle/__.js'
+
 type _ = [
   //
   // ========================
