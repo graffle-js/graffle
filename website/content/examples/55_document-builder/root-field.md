@@ -14,7 +14,7 @@ This example shows how to use dedicated root field methods to easily operate on 
 import './graffle/modules/global.js'
 // ---cut---
 
-import { Graffle } from './graffle/__.js'
+import { Graffle } from './graffle/_namespace.js'
 
 const pokemon = Graffle.create()
 

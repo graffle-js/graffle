@@ -1,4 +1,4 @@
-import { SchemaDrivenDataMap } from '../../../types/SchemaDrivenDataMap/__.js'
+import { SchemaDrivenDataMap } from '../../../types/SchemaDrivenDataMap/_namespace.js'
 
 /**
  * Infer the type of a variable for the given argument.

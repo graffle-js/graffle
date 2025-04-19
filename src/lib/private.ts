@@ -1,7 +1,7 @@
 export namespace Private {
   const privateSymbol = Symbol(`private`)
 
-  type privateSymbol = typeof privateSymbol
+  export type privateSymbol = typeof privateSymbol
 
   /**
    * Some generic private data.
@@ -11,7 +11,7 @@ export namespace Private {
   /**
    * Some type that has private data.
    */
-  type Type = {
+  export interface Type {
     [privateSymbol]: Data
   }
 

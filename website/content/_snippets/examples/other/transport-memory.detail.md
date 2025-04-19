@@ -102,8 +102,8 @@ const database = DatabaseClient.create()
 
 const baseGraffle = Graffle
   .create()
-  .use(TransportMemory({ schema }))
-  .transport(`memory`)
+  .use(TransportMemory)
+  .transport(`memory`, { schema })
 
 const handleRequest = async (request: Request) => {
   const user = {

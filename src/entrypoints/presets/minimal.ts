@@ -1,1 +1,1 @@
-export * as GraffleMinimal from './_minimal.js'
+export * as GraffleMinimal from './minimal_.js'

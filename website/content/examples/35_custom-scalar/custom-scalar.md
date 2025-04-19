@@ -15,7 +15,7 @@ have arguments and data automatically encoded and decoded respectively.
 import './graffle/modules/global.js'
 // ---cut---
 
-import { Graffle } from './graffle/__.js'
+import { Graffle } from './graffle/_namespace.js'
 
 const graffle = Graffle
   .create()

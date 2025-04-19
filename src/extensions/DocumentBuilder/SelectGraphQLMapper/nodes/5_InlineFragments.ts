@@ -1,5 +1,5 @@
 import type { SchemaDrivenDataMap } from '../../../../entrypoints/utilities-for-generated.js'
-import type { Grafaid } from '../../../../lib/grafaid/__.js'
+import type { Grafaid } from '../../../../lib/grafaid/_namespace.js'
 import { Nodes } from '../../../../lib/grafaid/_Nodes.js'
 import { Select } from '../../Select/__.js'
 import type { GraphQLPostOperationMapper } from '../mapper.js'

@@ -3,11 +3,14 @@ import type { StepRunner } from './StepRunner.js'
 
 export interface StepDefinition<
   $Name extends string = string,
+  $Slots extends StepDefinition.Slots = StepDefinition.Slots,
+  $Input = any,
+  $Output = any,
 > {
-  name: $Name
-  slots: StepDefinition.Slots
-  input: any
-  output: any
+  readonly name: $Name
+  readonly slots: $Slots
+  readonly input: $Input
+  readonly output: $Output
   /**
    * Tracking the run signature type is useful for deriving the executable step.
    *
@@ -21,10 +24,11 @@ export interface StepDefinition<
    *
    * This run signature is NOT used for deriving the specification step.
    */
-  run?: StepRunner<any, any, any>
+  readonly run?: StepRunner<any, any, any>
 }
 
 export namespace StepDefinition {
+  export type SubsetTypeProperties = Pick<StepDefinition, 'input' | 'output'>
   export interface SpecInput {
     name: string
     slots?: StepDefinition.Slots

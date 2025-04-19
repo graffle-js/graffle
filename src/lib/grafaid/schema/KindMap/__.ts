@@ -6,11 +6,16 @@ import type {
   GraphQLScalarType,
   GraphQLUnionType,
 } from 'graphql'
+import type { RootTypeMap } from '../RootTypeMap.js'
 
 export * as KindMap from './_.js'
 
 export interface KindMap {
+  root: RootTypeMap
   index: {
+    /**
+     * @deprecated use .root
+     */
     Root: {
       query: GraphQLObjectType | null
       mutation: GraphQLObjectType | null
@@ -25,7 +30,10 @@ export interface KindMap {
     ScalarStandard: Record<string, GraphQLScalarType>
   }
   list: {
-    Root: GraphQLObjectType[]
+    /**
+     * @deprecated use .root
+     */
+    Root: (GraphQLObjectType)[]
     OutputObject: GraphQLObjectType[]
     InputObject: GraphQLInputObjectType[]
     Interface: GraphQLInterfaceType[]

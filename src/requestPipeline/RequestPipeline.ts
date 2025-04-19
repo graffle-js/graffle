@@ -1,15 +1,24 @@
 import type { FormattedExecutionResult } from 'graphql'
-import type { GraffleExecutionResultEnvelope } from '../client/handleOutput.js'
-import { Anyware } from '../lib/anyware/__.js'
-import type { Config } from '../lib/anyware/PipelineDef/Config.js'
-import type { Grafaid } from '../lib/grafaid/__.js'
+import type { GraffleExecutionResultEnvelope } from '../client/handle.js'
+import type { Context } from '../context/context.js'
+import { Anyware } from '../lib/anyware/_namespace.js'
+import type { Config } from '../lib/anyware/PipelineDefinition/Config.js'
+import type { Grafaid } from '../lib/grafaid/_namespace.js'
 import { normalizeRequestToNode } from '../lib/grafaid/request.js'
 import { isAbortError } from '../lib/prelude.js'
-import type { Context } from '../types/context.js'
-import { decodeResultData } from './CustomScalars/decode.js'
-import { encodeRequestVariables } from './CustomScalars/encode.js'
+import { decodeResultData } from './decode.js'
+import { encodeRequestVariables } from './encode.js'
 
 export namespace RequestPipeline {
+  export const stepName = {
+    encode: `encode`,
+    pack: `pack`,
+    exchange: `exchange`,
+    unpack: `unpack`,
+    decode: `decode`,
+  } as const
+  export type StepName = keyof typeof stepName
+
   export interface Input {
     request: Grafaid.RequestAnalyzedInput
     state: Context
@@ -28,46 +37,34 @@ export namespace RequestPipeline {
   export type PackInput = EncodeOutput
 
   export type Output = GraffleExecutionResultEnvelope
-}
 
-export interface RequestPipelineBaseDefinition extends Anyware.PipelineDefinition {
-  overloads: []
-  config: Config
-  input: {
-    request: Grafaid.RequestAnalyzedInput
-    state: Context
-    transportType: 'none'
-    transport: {}
+  export interface BaseDefinition extends Anyware.PipelineDefinition {
+    readonly config: Config
+    readonly input: {
+      request: Grafaid.RequestAnalyzedInput
+      state: Context
+      transportType: 'none'
+      transport: {}
+    }
+    readonly steps: [
+      Anyware.StepDefinition<'encode', {}, RequestPipeline.Input, RequestPipeline.EncodeOutput>,
+      Anyware.StepDefinition<'pack', {}, RequestPipeline.PackInput, {}>,
+      Anyware.StepDefinition<'exchange', {}, {}, {}>,
+      Anyware.StepDefinition<'unpack', {}, {}, {}>,
+      Anyware.StepDefinition<'decode', {}, RequestPipeline.DecodeInput, RequestPipeline.Output>,
+    ]
   }
-  steps: [{
-    name: 'encode'
-    input: RequestPipeline.Input
-    output: RequestPipeline.EncodeOutput
-    slots: {}
-  }, {
-    name: 'pack'
-    input: RequestPipeline.PackInput
-    output: {}
-    slots: {}
-  }, {
-    name: 'exchange'
-    input: {}
-    output: {}
-    slots: {}
-  }, {
-    name: 'unpack'
-    input: {}
-    output: {}
-    slots: {}
-  }, {
-    name: 'decode'
-    input: RequestPipeline.DecodeInput
-    output: RequestPipeline.Output
-    slots: {}
-  }]
+  export interface BaseDefinitionEmpty extends BaseDefinition {
+    readonly overloads: readonly []
+  }
+
+  export type Base = Anyware.Pipeline.InferFromDefinition<RequestPipeline.BaseDefinitionEmpty>
+
+  export type BaseInterceptor = Anyware.Interceptor.InferFromPipeline<Base>
 }
 
-export const requestPipelineBaseDefinition: RequestPipelineBaseDefinition = Anyware.PipelineDefinition
+const { stepName } = RequestPipeline
+export const requestPipelineBaseDefinition: RequestPipeline.BaseDefinitionEmpty = Anyware.PipelineDefinition
   .create({
     // If core errors caused by an abort error then raise it as a direct error.
     // This is an expected possible error. Possible when user cancels a request.
@@ -78,10 +75,10 @@ export const requestPipelineBaseDefinition: RequestPipelineBaseDefinition = Anyw
       return signal.hookName === `exchange` && isAbortError(signal.error)
     },
   })
-  .input<RequestPipelineBaseDefinition['input']>()
-  .step(`encode`, {
+  .input<RequestPipeline.BaseDefinition['input']>()
+  .step(stepName.encode, {
     run: (input) => {
-      const sddm = input.state.schemaMap
+      const sddm = input.state.configuration.schema.current.map
       const scalars = input.state.scalars.map
       if (sddm) {
         const request = normalizeRequestToNode(input.request)
@@ -94,10 +91,10 @@ export const requestPipelineBaseDefinition: RequestPipelineBaseDefinition = Anyw
       return input
     },
   })
-  .step(`pack`)
-  .step(`exchange`)
-  .step(`unpack`)
-  .step(`decode`, {
+  .step(stepName.pack)
+  .step(stepName.exchange)
+  .step(stepName.unpack)
+  .step(stepName.decode, {
     run: (
       input: {
         state: Context
@@ -106,13 +103,14 @@ export const requestPipelineBaseDefinition: RequestPipelineBaseDefinition = Anyw
       _,
       previous,
     ) => {
+      const sddm = input.state.configuration.schema.current.map
       // If there has been an error and we definitely don't have any data, such as when
       // giving an operation name that doesn't match any in the document,
       // then don't attempt to decode.
       const isError = !input.result.data && (input.result.errors?.length ?? 0) > 0
-      if (input.state.schemaMap && !isError) {
+      if (sddm && !isError) {
         decodeResultData({
-          sddm: input.state.schemaMap,
+          sddm,
           request: normalizeRequestToNode(previous.pack.input.request),
           data: input.result.data,
           scalars: input.state.scalars.map,
@@ -131,7 +129,3 @@ export const requestPipelineBaseDefinition: RequestPipelineBaseDefinition = Anyw
     },
   })
   .type
-
-export type RequestPipelineBase = Anyware.Pipeline.InferFromDefinition<RequestPipelineBaseDefinition>
-
-export type RequestPipelineBaseInterceptor = Anyware.Interceptor.InferFromPipeline<RequestPipelineBase>

@@ -1,19 +1,19 @@
 import type { DateScalar } from '../../../../tests/_/fixtures/scalars.js'
-import type { db } from '../../../../tests/_/schemas/db.js'
-import type { Schema } from '../../../../tests/_/schemas/kitchen-sink/graffle/modules/schema.js'
-import type * as SelectionSets from '../../../../tests/_/schemas/kitchen-sink/graffle/modules/selection-sets.js'
+import type { db } from '../../../../tests/_/fixtures/schemas/possible/db.js'
 import { assertEqual } from '../../../lib/assert-equal.js'
 import type { RequestResult } from '../../../types/RequestResult.ts/__.js'
 import type { Registry } from '../../../types/Schema/nodes/Scalar/helpers.js'
+import type { Possible } from '../__tests__/fixtures/possible/_namespace.js'
+import type { Schema } from '../__tests__/fixtures/possible/modules/schema.js'
 import type { InferResult } from './__.js'
 
-type $<$SelectionSet extends SelectionSets.Query> = RequestResult.SimplifyWithEmptyContext<
+type $<$SelectionSet extends Possible.SelectionSets.Query> = RequestResult.SimplifyWithEmptyContext<
   InferResult.OperationQuery<$SelectionSet, Schema>
 >
 
 type $Registry = Registry.AddScalar<Registry.Empty, typeof DateScalar>
 
-type $WithDate<$SelectionSet extends SelectionSets.Query<$Registry>> = InferResult.OperationQuery<
+type $WithDate<$SelectionSet extends Possible.SelectionSets.Query<$Registry>> = InferResult.OperationQuery<
   $SelectionSet,
   Schema<$Registry>
 >

@@ -1,5 +1,5 @@
-import { Overload } from '../Overload/__.js'
-import type { PipelineDefinition } from '../PipelineDef/__.js'
+import { Overload } from '../Overload/_namespace.js'
+import type { PipelineDefinition } from '../PipelineDefinition/_namespace.js'
 import type { Extension } from './__.js'
 
 type Create = <$Pipeline extends PipelineDefinition>() => Builder<$Pipeline, Extension.States.Empty>
@@ -16,7 +16,7 @@ export interface Builder<
     overloadBuilderCallback: Overload.BuilderCallback<$Pipeline, $OverloadBuilder>,
   ) => Builder<
     $Pipeline,
-    Extension.Updaters.AddOverload<$Extension, $OverloadBuilder['type']>
+    Extension.Updaters.AddOverload<$Extension, $OverloadBuilder['data']>
   >
 }
 
@@ -30,7 +30,7 @@ export namespace Builder {
       type: extension,
       overload: (builderCallback) => {
         const overload = builderCallback({ create: Overload.create })
-        extension.overloads.push(overload.type)
+        extension.overloads.push(overload.data)
         return builder as any
       },
     }

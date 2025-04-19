@@ -6,9 +6,9 @@
  * If such errors are present, they will be caught by our type check step. Then we can come here to debug further.
  */
 
-import { Github } from './graffle/__.js'
+import { Github } from './graffle/_namespace.js'
 
-const github = Github.create({ checkPreflight: false })
+const github = Github.create({ check: { preflight: false } })
 
 const a = await github.query.__typename()
 

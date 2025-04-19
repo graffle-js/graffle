@@ -16,19 +16,22 @@ const graffle = Graffle
   .transport({
     url: `http://localhost:3000/graphql`,
   })
-  .anyware(({ pack }) => {
-    if (pack.input.transportType !== `http`) return pack()
-    return pack({
+  .anyware(({ exchange }) => {
+    if (exchange.input.transportType !== `http`) return exchange()
+    return exchange({
       input: {
-        ...pack.input,
-        headers: {
-          'X-Sent-At-Time': Date.now().toString(),
+        ...exchange.input,
+        request: {
+          ...exchange.input.request,
+          headers: [
+            ...new Headers(exchange.input.request.headers),
+            [`X-Sent-At-Time`, Date.now().toString()],
+          ],
         },
       },
     })
   })
   .anyware(({ exchange }) => {
-    // todo wrong type / runtime value
     console.log(exchange.input.request)
     return exchange()
   })
@@ -41,13 +44,29 @@ await graffle.gql`{ pokemons { name } }`.send()
 ```txt
 {
   methodMode: 'post',
-  headers: Headers {
-    accept: 'application/graphql-response+json; charset=utf-8, application/json; charset=utf-8',
-    'content-type': 'application/json',
-    'x-sent-at-time': '1736741812397'
-  },
+  headers: [
+    [
+      'accept',
+      'application/graphql-response+json; charset=utf-8, application/json; charset=utf-8'
+    ],
+    [ 'content-type', 'application/json' ],
+    [ 'X-Sent-At-Time', '1745012194302' ]
+  ],
   method: 'post',
-  url: 'http://localhost:3000/graphql',
+  url: URL {
+    href: 'http://localhost:3000/graphql',
+    origin: 'http://localhost:3000',
+    protocol: 'http:',
+    username: '',
+    password: '',
+    host: 'localhost:3000',
+    hostname: 'localhost',
+    port: '3000',
+    pathname: '/graphql',
+    search: '',
+    searchParams: URLSearchParams {},
+    hash: ''
+  },
   body: '{"query":"{ pokemons { name } }"}'
 }
 ```

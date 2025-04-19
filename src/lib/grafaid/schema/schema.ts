@@ -19,6 +19,12 @@ import {
 } from 'graphql'
 import { GraphQLInputObjectType, isScalarType } from 'graphql'
 
+export * from './RootDetails.js'
+
+export * from './RootTypeMap.js'
+
+export * from './StandardRootTypeName.js'
+
 export {
   buildClientSchema,
   buildSchema,

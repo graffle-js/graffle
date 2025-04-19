@@ -198,7 +198,7 @@ export type UpdateKeyWithAppendOne<
 export type UpdateKeyWithAppendMany<
   $Obj extends object,
   $Prop extends keyof $Obj,
-  $Type extends any[],
+  $Type extends readonly any[],
 > =
   SetKey<
     $Obj,

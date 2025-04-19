@@ -2,7 +2,7 @@
  * This example shows how to write field arguments in TypeScript interface.
  */
 
-import { Graffle } from '../$/graffle/__.js'
+import { Graffle } from '../$/graffle/_namespace.js'
 import { showJson } from '../$/helpers.js'
 
 const graffle = Graffle.create()

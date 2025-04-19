@@ -12,7 +12,7 @@ This extension is included in [presets](../../../website/content/guides/20_topic
 import { TransportHttp } from 'graffle/extensions/transport-http'
 import { GraffleBare } from 'graffle/presets/bare'
 
-GraffleBare.create().use(TransportHttp()).transport({
+GraffleBare.create().use(TransportHttp).transport({
   url: 'https://api.service.io/graphql',
 })
 ```

@@ -14,24 +14,25 @@ import {
 export const directories = {
   outputs: `./examples/__outputs__`,
   examples: `./examples`,
-  tests: `./tests/examples`,
+  tests: `./examples/__tests__`,
 }
 
-export const examplesIgnorePatterns = [`./examples/$`, directories.outputs]
+export const examplesIgnorePatterns = [`./examples/$`, directories.outputs, directories.tests]
 
 export const readExampleFiles = (name?: string) =>
   readFiles({
     pattern: `./examples/*/*.ts`,
     options: { ignore: examplesIgnorePatterns },
   }).then(files => {
-    if (name) {
-      return files.filter(file => file.path.full.match(name))
+    const filesFiltered = name ? files.filter(file => file.path.full.match(name)) : files
+    return {
+      all: files,
+      filtered: filesFiltered,
     }
-    return files
   })
 
-export const readExamples = async (name?: string): Promise<Example[]> => {
-  const exampleFiles = await readExampleFiles(name)
+export const readExamples = async (filterName?: string): Promise<Example[]> => {
+  const exampleFiles = await readExampleFiles(filterName)
 
   const outputFiles = await readFiles({
     pattern: `./examples/__outputs__/*/*.output.txt`,
@@ -39,7 +40,7 @@ export const readExamples = async (name?: string): Promise<Example[]> => {
 
   const encoderFilePaths = await globby(`${directories.outputs}/**/*${outputEncoderExtension}`)
 
-  const examples = exampleFiles.map((example) => {
+  const examples = exampleFiles.filtered.map((example) => {
     const group = parseGroup(example.path.full)
     const fileName = parseFileName(example.name, group.humanName)
 
@@ -186,6 +187,7 @@ export const runExample = async (filePath: string) => {
 
   let exampleOutput = ``
 
+  // todo: switch z
   // todo: better understand the Execa API
   if (filePath.includes(`_throws`)) {
     if (result instanceof ExecaError) {

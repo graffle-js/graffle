@@ -9,8 +9,7 @@ import {
   isUnionType,
 } from 'graphql'
 
-import { includesUnknown } from '../../../prelude.js'
-import type { Grafaid } from '../../__.js'
+import { getRootTypeMap, isObjectRootType } from '../RootTypeMap.js'
 import { isScalarTypeCustom } from '../typeGuards.js'
 import type { KindMap } from './__.js'
 
@@ -28,20 +27,17 @@ export const Name = {
 export type KindName = keyof KindMap['list']
 
 export const getKindMap = (schema: GraphQLSchema): KindMap => {
-  const queryType = schema.getQueryType() ?? null
-  const mutationType = schema.getMutationType() ?? null
-  const subscriptionType = schema.getSubscriptionType() ?? null
-  const rootTypeNames = [queryType?.name, mutationType?.name, subscriptionType?.name].filter(_ =>
-    _ !== undefined
-  ) as (Grafaid.Document.OperationTypeNode)[]
+  const rootTypeMap = getRootTypeMap(schema)
   const typeMap = schema.getTypeMap()
   const typeMapValues = Object.values(typeMap)
+
   const kindMap: KindMap = {
+    root: rootTypeMap,
     index: {
       Root: {
-        query: queryType,
-        mutation: mutationType,
-        subscription: subscriptionType,
+        query: rootTypeMap.types.Query,
+        mutation: rootTypeMap.types.Mutation,
+        subscription: rootTypeMap.types.Subscription,
       },
       OutputObject: {},
       InputObject: {},
@@ -52,7 +48,9 @@ export const getKindMap = (schema: GraphQLSchema): KindMap => {
       ScalarStandard: {},
     },
     list: {
-      Root: [queryType, mutationType, subscriptionType].filter(_ => _ !== null),
+      Root: [rootTypeMap.types.Query, rootTypeMap.types.Mutation, rootTypeMap.types.Subscription].filter(_ =>
+        _ !== null
+      ),
       OutputObject: [],
       InputObject: [],
       Interface: [],
@@ -62,8 +60,9 @@ export const getKindMap = (schema: GraphQLSchema): KindMap => {
       ScalarStandard: [],
     },
   }
+
   for (const type of typeMapValues) {
-    if (type.name.startsWith(`__`)) continue
+    if (type.name.startsWith(hiddenTypePrefix)) continue
     switch (true) {
       case isScalarType(type):
         if (isScalarTypeCustom(type)) {
@@ -87,7 +86,7 @@ export const getKindMap = (schema: GraphQLSchema): KindMap => {
         kindMap.index.Interface[type.name] = type
         break
       case isObjectType(type):
-        if (!includesUnknown(rootTypeNames, type.name)) {
+        if (!isObjectRootType(rootTypeMap, type)) {
           kindMap.list.OutputObject.push(type)
           kindMap.index.OutputObject[type.name] = type
         }
@@ -117,3 +116,6 @@ export const getInterfaceImplementors = (typeMap: KindMap, interfaceTypeSearch: 
   )
   return [...outputObjectTypes, ...interfaceTypes]
 }
+
+// todo put in some central place
+const hiddenTypePrefix = `__`

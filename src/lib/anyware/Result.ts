@@ -1,4 +1,4 @@
-import type { Errors } from '../errors/__.js'
+import type { Errors } from '../errors/_namespace.js'
 
 export type ResultFailure = Errors.ContextualAggregateError
 

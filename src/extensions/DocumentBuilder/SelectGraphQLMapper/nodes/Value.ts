@@ -1,7 +1,7 @@
-import type { Grafaid } from '../../../../lib/grafaid/__.js'
+import type { Grafaid } from '../../../../lib/grafaid/_namespace.js'
 import { Nodes } from '../../../../lib/grafaid/_Nodes.js'
-import { Schema } from '../../../../types/Schema/__.js'
-import { SchemaDrivenDataMap } from '../../../../types/SchemaDrivenDataMap/__.js'
+import { Schema } from '../../../../types/Schema/_namespace.js'
+import { SchemaDrivenDataMap } from '../../../../types/SchemaDrivenDataMap/_namespace.js'
 import type { OperationContext } from '../context.js'
 import { type GraphQLPostOperationMapper } from '../mapper.js'
 

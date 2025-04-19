@@ -16,9 +16,9 @@ pnpm add @opentelemetry/api
 
 ```ts twoslash
 import { Graffle } from 'graffle'
-import { Opentelemetry } from 'graffle/extensions/opentelemetry'
+import { OpenTelemetry } from 'graffle/extensions/opentelemetry'
 
-const graffle = Graffle.create().use(Opentelemetry())
+const graffle = Graffle.create().use(OpenTelemetry())
 ```
 
 ## Span Structure

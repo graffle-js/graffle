@@ -259,6 +259,7 @@ export const RootTypeToOperationType = {
   Mutation: OperationTypeNode.MUTATION,
   Subscription: OperationTypeNode.SUBSCRIPTION,
 } as const
+
 export type RootTypeNameToOperationName = typeof RootTypeToOperationType
 
 export const OperationTypeToAccessKind = {

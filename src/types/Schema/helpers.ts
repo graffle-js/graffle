@@ -1,4 +1,5 @@
 // import type { TSErrorDescriptive } from '../../lib/ts-error.js'
+import type { Schema } from './_namespace.js'
 import type { __typename } from './nodes/__typename.js'
 import type { List } from './nodes/List.js'
 import type { Nullable } from './nodes/Nullable.js'
@@ -13,3 +14,5 @@ export type GetNamedType<$Type> =
       $Type
 // $Type extends NamedTypes                  ? $Type :
 //   TSErrorDescriptive<'Unwrap', 'Unknown $Type', { $Type: $Type }>
+
+export type Define<$Type extends Partial<Schema>> = $Type & Schema

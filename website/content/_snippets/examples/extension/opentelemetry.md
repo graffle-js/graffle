@@ -11,19 +11,20 @@ import './graffle/modules/global.js'
 
 import { ConsoleSpanExporter, SimpleSpanProcessor } from '@opentelemetry/sdk-trace-base'
 import { NodeTracerProvider } from '@opentelemetry/sdk-trace-node'
-import { Opentelemetry } from 'graffle/extensions/opentelemetry'
-import { Graffle } from './graffle/__.js'
+import { OpenTelemetry } from 'graffle/extensions/opentelemetry'
+import { Graffle } from './graffle/_namespace.js'
 
 // Setup Opentelemetry
 // 1. Initialize the OpenTelemetry provider
 // 2. Register the provider to make the OpenTelemetry API use it
 const exporter = new ConsoleSpanExporter()
 const processor = new SimpleSpanProcessor(exporter)
-const provider = new NodeTracerProvider()
-provider.addSpanProcessor(processor)
+const provider = new NodeTracerProvider({
+  spanProcessors: [processor],
+})
 provider.register()
 
-const graffle = Graffle.create().use(Opentelemetry())
+const graffle = Graffle.create().use(OpenTelemetry())
 const data = await graffle.gql`query { pokemons { name } }`.send()
 console.log(data)
 ```
@@ -34,21 +35,21 @@ console.log(data)
 {
   resource: {
     attributes: {
-      'service.name': 'unknown_service:/Users/jasonkuhrt/Library/pnpm/nodejs/22.11.0/bin/node',
+      'service.name': 'unknown_service:/Users/jasonkuhrt/Library/pnpm/nodejs/22.14.0/bin/node',
       'telemetry.sdk.language': 'nodejs',
       'telemetry.sdk.name': 'opentelemetry',
       'telemetry.sdk.version': '1.30.0'
     }
   },
   instrumentationScope: { name: 'graffle', version: undefined, schemaUrl: undefined },
-  traceId: '305fecdf1d521d48b39e0f3dde5e32e1',
-  parentId: 'd6c3800b8979fcd8',
+  traceId: '67ad1efb64b608bbda72afb201dfc77e',
+  parentId: '44d095605ecf4f3d',
   traceState: undefined,
   name: 'encode',
-  id: '4efad046792865d3',
+  id: 'c1c2bc343d68d7fa',
   kind: 0,
-  timestamp: 1736741813348000,
-  duration: 875.167,
+  timestamp: 1745012194894000,
+  duration: 718.875,
   attributes: {},
   status: { code: 0 },
   events: [],
@@ -61,21 +62,21 @@ console.log(data)
 {
   resource: {
     attributes: {
-      'service.name': 'unknown_service:/Users/jasonkuhrt/Library/pnpm/nodejs/22.11.0/bin/node',
+      'service.name': 'unknown_service:/Users/jasonkuhrt/Library/pnpm/nodejs/22.14.0/bin/node',
       'telemetry.sdk.language': 'nodejs',
       'telemetry.sdk.name': 'opentelemetry',
       'telemetry.sdk.version': '1.30.0'
     }
   },
   instrumentationScope: { name: 'graffle', version: undefined, schemaUrl: undefined },
-  traceId: '305fecdf1d521d48b39e0f3dde5e32e1',
-  parentId: 'd6c3800b8979fcd8',
+  traceId: '67ad1efb64b608bbda72afb201dfc77e',
+  parentId: '44d095605ecf4f3d',
   traceState: undefined,
   name: 'pack',
-  id: '29d86e3c651e066b',
+  id: '15ac5fd26e09428d',
   kind: 0,
-  timestamp: 1736741813349000,
-  duration: 7728.833,
+  timestamp: 1745012194895000,
+  duration: 767,
   attributes: {},
   status: { code: 0 },
   events: [],
@@ -88,21 +89,21 @@ console.log(data)
 {
   resource: {
     attributes: {
-      'service.name': 'unknown_service:/Users/jasonkuhrt/Library/pnpm/nodejs/22.11.0/bin/node',
+      'service.name': 'unknown_service:/Users/jasonkuhrt/Library/pnpm/nodejs/22.14.0/bin/node',
       'telemetry.sdk.language': 'nodejs',
       'telemetry.sdk.name': 'opentelemetry',
       'telemetry.sdk.version': '1.30.0'
     }
   },
   instrumentationScope: { name: 'graffle', version: undefined, schemaUrl: undefined },
-  traceId: '305fecdf1d521d48b39e0f3dde5e32e1',
-  parentId: 'd6c3800b8979fcd8',
+  traceId: '67ad1efb64b608bbda72afb201dfc77e',
+  parentId: '44d095605ecf4f3d',
   traceState: undefined,
   name: 'exchange',
-  id: '5ded2022385d9c01',
+  id: '8a80f9e217ba13e6',
   kind: 0,
-  timestamp: 1736741813358000,
-  duration: 20876.084,
+  timestamp: 1745012194896000,
+  duration: 24233.5,
   attributes: {},
   status: { code: 0 },
   events: [],
@@ -115,21 +116,21 @@ console.log(data)
 {
   resource: {
     attributes: {
-      'service.name': 'unknown_service:/Users/jasonkuhrt/Library/pnpm/nodejs/22.11.0/bin/node',
+      'service.name': 'unknown_service:/Users/jasonkuhrt/Library/pnpm/nodejs/22.14.0/bin/node',
       'telemetry.sdk.language': 'nodejs',
       'telemetry.sdk.name': 'opentelemetry',
       'telemetry.sdk.version': '1.30.0'
     }
   },
   instrumentationScope: { name: 'graffle', version: undefined, schemaUrl: undefined },
-  traceId: '305fecdf1d521d48b39e0f3dde5e32e1',
-  parentId: 'd6c3800b8979fcd8',
+  traceId: '67ad1efb64b608bbda72afb201dfc77e',
+  parentId: '44d095605ecf4f3d',
   traceState: undefined,
   name: 'unpack',
-  id: '609e080ad2ff4514',
+  id: 'b293c25f3c6d0732',
   kind: 0,
-  timestamp: 1736741813379000,
-  duration: 744.917,
+  timestamp: 1745012194921000,
+  duration: 759.583,
   attributes: {},
   status: { code: 0 },
   events: [],
@@ -142,21 +143,21 @@ console.log(data)
 {
   resource: {
     attributes: {
-      'service.name': 'unknown_service:/Users/jasonkuhrt/Library/pnpm/nodejs/22.11.0/bin/node',
+      'service.name': 'unknown_service:/Users/jasonkuhrt/Library/pnpm/nodejs/22.14.0/bin/node',
       'telemetry.sdk.language': 'nodejs',
       'telemetry.sdk.name': 'opentelemetry',
       'telemetry.sdk.version': '1.30.0'
     }
   },
   instrumentationScope: { name: 'graffle', version: undefined, schemaUrl: undefined },
-  traceId: '305fecdf1d521d48b39e0f3dde5e32e1',
-  parentId: 'd6c3800b8979fcd8',
+  traceId: '67ad1efb64b608bbda72afb201dfc77e',
+  parentId: '44d095605ecf4f3d',
   traceState: undefined,
   name: 'decode',
-  id: '60c901a55f2139da',
+  id: '3b2a076ba45fff46',
   kind: 0,
-  timestamp: 1736741813379000,
-  duration: 376.5,
+  timestamp: 1745012194922000,
+  duration: 477.459,
   attributes: {},
   status: { code: 0 },
   events: [],
@@ -169,21 +170,21 @@ console.log(data)
 {
   resource: {
     attributes: {
-      'service.name': 'unknown_service:/Users/jasonkuhrt/Library/pnpm/nodejs/22.11.0/bin/node',
+      'service.name': 'unknown_service:/Users/jasonkuhrt/Library/pnpm/nodejs/22.14.0/bin/node',
       'telemetry.sdk.language': 'nodejs',
       'telemetry.sdk.name': 'opentelemetry',
       'telemetry.sdk.version': '1.30.0'
     }
   },
   instrumentationScope: { name: 'graffle', version: undefined, schemaUrl: undefined },
-  traceId: '305fecdf1d521d48b39e0f3dde5e32e1',
+  traceId: '67ad1efb64b608bbda72afb201dfc77e',
   parentId: undefined,
   traceState: undefined,
   name: 'request',
-  id: 'd6c3800b8979fcd8',
+  id: '44d095605ecf4f3d',
   kind: 0,
-  timestamp: 1736741813347000,
-  duration: 32641.166,
+  timestamp: 1745012194893000,
+  duration: 28937.334,
   attributes: {},
   status: { code: 0 },
   events: [],

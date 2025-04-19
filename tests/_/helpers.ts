@@ -4,19 +4,22 @@ import type { FSJetpack } from 'fs-jetpack/types.js'
 import * as Path from 'node:path'
 import type { Mock } from 'vitest'
 import { test as testBase, vi } from 'vitest'
-import { Graffle } from '../../src/entrypoints/main.js'
-import type { GraffleBasic } from '../../src/entrypoints/presets/basic.js'
-import type { GraffleMinimal } from '../../src/entrypoints/presets/minimal.js'
-import type { SchemaDrivenDataMap } from '../../src/entrypoints/utilities-for-generated.js'
-import { TransportMemory } from '../../src/extensions/TransportMemory/TransportMemory.js'
-import type { ConfigManager } from '../../src/lib/config-manager/__.js'
-import { Grafaid } from '../../src/lib/grafaid/__.js'
+import type { ClientEmpty } from '../../src/client/client.js'
+// import { Graffle } from '../../src/entrypoints/index.js'
+import { GraffleBare } from '../../src/entrypoints/presets/bare.js'
+// import type { GraffleBasic } from '../../src/entrypoints/presets/basic.js'
+// import type { GraffleMinimal } from '../../src/entrypoints/presets/minimal.js'
+// import type { SchemaDrivenDataMap } from '../../src/entrypoints/utilities-for-generated.js'
+// import { TransportMemory } from '../../src/extensions/TransportMemory/TransportMemory.js'
+// import type { ConfigManager } from '../../src/lib/config-manager/__.js'
+import { Grafaid } from '../../src/lib/grafaid/_namespace.js'
 import { CONTENT_TYPE_REC } from '../../src/lib/grafaid/http/http.js'
 import { type SchemaService, serveSchema } from './lib/serveSchema.js'
-import { db } from './schemas/db.js'
-import { Graffle as KitchenSink } from './schemas/kitchen-sink/graffle/__.js'
-import { schema as kitchenSinkSchema } from './schemas/kitchen-sink/schema.js'
-import { schema } from './schemas/pokemon/schema.js'
+// import { db } from './schemas/db.js'
+import type { IntrospectionQuery } from 'graphql'
+import { GraffleKit } from '../../src/entrypoints/kit.js'
+import { TestSchemas } from './fixtures/schemas/_namespaces.js'
+import { schema } from './fixtures/schemas/pokemon/schema.js'
 
 interface Project {
   fs: FSJetpack
@@ -28,40 +31,50 @@ interface Project {
   }>
 }
 
-export const kitchenSink = KitchenSink
-  .create({ checkPreflight: false })
-  .use(TransportMemory({
-    schema: kitchenSinkSchema,
-  }))
-  .transport(`memory`)
+export const createGraphQLResponseData = (data: null | object = {}) =>
+  new Response(JSON.stringify({ data }), { status: 200, headers: { 'content-type': CONTENT_TYPE_REC } })
 
-export const createResponse = (body: object) =>
+export const createGraphQLResponse = (body: object) =>
   new Response(JSON.stringify(body), { status: 200, headers: { 'content-type': CONTENT_TYPE_REC } })
+
+export const mockIntrospectionData = {
+  __schema: {
+    types: [
+      {
+        kind: `OBJECT`,
+        name: `Query`,
+        fields: [],
+        interfaces: [],
+      },
+    ],
+    queryType: { kind: `OBJECT`, name: `Query` },
+    mutationType: null,
+    subscriptionType: null,
+    directives: [],
+  },
+} satisfies IntrospectionQuery
 
 interface Fixtures {
   fetch: Mock<(request: Request) => Promise<Response>>
+  g0: ClientEmpty
+  c0: GraffleKit.Context.ContextEmpty
   pokemonService: SchemaService
-  graffle: GraffleMinimal.Client.With<{
-    checkPreflight: false
-  }>
-  kitchenSinkHttp: GraffleBasic.Client.With<{
-    schemaMap: SchemaDrivenDataMap
-    checkPreflight: false
-  }>
-  kitchenSink: GraffleBasic.Client.With<{
-    schemaMap: SchemaDrivenDataMap
-    checkPreflight: false
-    transports: ConfigManager.SetKeyUnsafe<
-      GraffleBasic.Client.Context['transports'],
-      `current`,
-      `memory`
-    >
-  }>
-  kitchenSinkData: typeof db
   project: Project
+  schemas: typeof TestSchemas
+  // graffle: GraffleMinimal.Client.With<{
+  //   check: { preflight: false }
+  // }>
+  // kitchenSinkHttp: GraffleBasic.Client.With<{
+  //   schema: { map: SchemaDrivenDataMap }
+  //   check: { preflight: false }
+  // }>
 }
 
+export const g0 = GraffleBare.create()
+
 export const test = testBase.extend<Fixtures>({
+  schemas: TestSchemas,
+  c0: GraffleKit.Context.contextEmpty,
   project: async ({}, use) => { // eslint-disable-line
     /**
      * Package managers (e.g. PnPM) augment the PATH when running scripts so that within
@@ -142,38 +155,43 @@ export const test = testBase.extend<Fixtures>({
   fetch: async ({}, use) => {
     const fetch = globalThis.fetch
     const fetchMock = vi.fn()
+    // fetchMock.original = fetch
     globalThis.fetch = fetchMock
 
     await use(fetchMock)
     globalThis.fetch = fetch
   },
-  kitchenSink: async ({ fetch: _ }, use) => {
-    const kitchenSink = KitchenSink.create()
-      .use(TransportMemory({ schema: kitchenSinkSchema }))
-      .transport(`memory`)
-    // kitchenSink.anyware(async ({ encode }) => {
-    //   encode({ input: {}})
-    // })
-    // @ts-expect-error fixme
-    await use(kitchenSink)
+  // eslint-disable-next-line
+  g0: async ({}, use) => {
+    await use(g0)
   },
-  kitchenSinkHttp: async ({ fetch: _ }, use) => {
-    const kitchenSink = KitchenSink
-      .create()
-      .transport({ url: `https://foo.io/api/graphql` })
-    // @ts-expect-error fixme
-    await use(kitchenSink)
-  },
-  kitchenSinkData: async ({}, use) => { // eslint-disable-line
-    await use(db)
-  },
-  graffle: async ({ fetch: _ }, use) => {
-    const graffle = Graffle
-      .create()
-      .transport({ url: new URL(`https://foo.io/api/graphql`) })
-    // @ts-expect-error fixme
-    await use(graffle)
-  },
+  // kitchenSink: async ({ fetch: _ }, use) => {
+  //   const kitchenSink = KitchenSink.create()
+  //     .use(TransportMemory)
+  //     .transport()
+  //   // kitchenSink.anyware(async ({ encode }) => {
+  //   //   encode({ input: {}})
+  //   // })
+  //   // @ts-expect-error fixme
+  //   await use(kitchenSink)
+  // },
+  // kitchenSinkHttp: async ({ fetch: _ }, use) => {
+  //   const kitchenSink = KitchenSink
+  //     .create()
+  //     .transport({ url: `https://foo.io/api/graphql` })
+  //   // @ts-expect-error fixme
+  //   await use(kitchenSink)
+  // },
+  // kitchenSinkData: async ({}, use) => { // eslint-disable-line
+  //   await use(db)
+  // },
+  // graffle: async ({ fetch: _ }, use) => {
+  //   const graffle = Graffle
+  //     .create()
+  //     .transport({ url: new URL(`https://foo.io/api/graphql`) })
+  //   // @ts-expect-error fixme
+  //   await use(graffle)
+  // },
   pokemonService: async ({}, use) => { // eslint-disable-line
     const pokemonService = await serveSchema({ schema })
     await use(pokemonService)
