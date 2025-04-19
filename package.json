@@ -145,7 +145,8 @@
     "@graphql-typed-document-node/core": "^3.2.0",
     "@molt/command": "^0.9.0",
     "es-toolkit": "^1.35.0",
-    "is-plain-obj": "^4.1.0"
+    "is-plain-obj": "^4.1.0",
+    "type-fest": "^4.40.0"
   },
   "peerDependencies": {
     "@dprint/formatter": "^0.4.0",
@@ -212,7 +213,6 @@
     "publint": "^0.3.12",
     "strip-ansi": "^7.1.0",
     "tsx": "^4.19.3",
-    "type-fest": "^4.40.0",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.30.1",
     "vitepress": "^1.6.3",

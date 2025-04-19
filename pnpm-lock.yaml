@@ -23,6 +23,9 @@ importers:
       is-plain-obj:
         specifier: ^4.1.0
         version: 4.1.0
+      type-fest:
+        specifier: ^4.40.0
+        version: 4.40.0
     devDependencies:
       '@arethetypeswrong/cli':
         specifier: ^0.17.4
@@ -153,9 +156,6 @@ importers:
       tsx:
         specifier: ^4.19.3
         version: 4.19.3
-      type-fest:
-        specifier: ^4.40.0
-        version: 4.40.0
       typescript:
         specifier: ^5.8.3
         version: 5.8.3
