@@ -43,15 +43,16 @@ describe(`importFormat`, () => {
 
 test(`root-types-mapped`, async () => {
   await Memfs.fs.promises.mkdir(process.cwd(), { recursive: true })
+  const RootTypeCustomNameForQuery = `RootTypeCustomNameForQuery`
   await generate({
     fs,
     schema: {
       type: `sdl`,
       sdl: `
         schema {
-          query: QueryRoot
+          query: ${RootTypeCustomNameForQuery}
         }
-        type QueryRoot {
+        type ${RootTypeCustomNameForQuery} {
           id: ID
         }
       `,
@@ -60,11 +61,11 @@ test(`root-types-mapped`, async () => {
 
   const SchemaTs = Memfs.fs.readFileSync(`./graffle/modules/schema.ts`, `utf8`)
   expect(SchemaTs).includes(`operationsAvailable: ["query"]`)
-  expect(SchemaTs).includes(`RootUnion: Schema.QueryRoot`)
+  expect(SchemaTs).includes(`RootUnion: Schema.${RootTypeCustomNameForQuery}`)
   expect(SchemaTs).toMatchSnapshot()
 
   const MethodsRootTs = Memfs.fs.readFileSync(`./graffle/modules/methods-root.ts`, `utf8`)
-  expect(MethodsRootTs).includes(`__typename: "QueryRoot"`)
+  expect(MethodsRootTs).includes(`__typename: "${RootTypeCustomNameForQuery}"`)
   expect(MethodsRootTs).includes(`InferResult.OperationQuery<`)
   expect(MethodsRootTs).toMatchSnapshot()
 })
