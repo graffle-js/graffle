@@ -83,20 +83,20 @@ export namespace Schema {
   //
   //
 
-  //                                             QueryRoot
+  //                                     RootTypeCustomNameForQuery
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface QueryRoot {
+  export interface RootTypeCustomNameForQuery {
     kind: "Object";
-    name: "QueryRoot";
+    name: "RootTypeCustomNameForQuery";
     fields: {
-      __typename: QueryRoot.__typename;
-      id: QueryRoot.id;
+      __typename: RootTypeCustomNameForQuery.__typename;
+      id: RootTypeCustomNameForQuery.id;
     };
   }
 
-  export namespace QueryRoot {
+  export namespace RootTypeCustomNameForQuery {
     export interface __typename {
       kind: "OutputField";
       name: "__typename";
@@ -104,7 +104,7 @@ export namespace Schema {
       inlineType: [1];
       namedType: {
         kind: "__typename";
-        value: "QueryRoot";
+        value: "RootTypeCustomNameForQuery";
       };
     }
 
@@ -272,7 +272,7 @@ export namespace Schema {
    */
 
   namespace $$NamedTypes {
-    export type $$QueryRoot = QueryRoot;
+    export type $$RootTypeCustomNameForQuery = RootTypeCustomNameForQuery;
     export type $$ID = ID;
     export type $$Boolean = Boolean;
     export type $$String = String;
@@ -300,14 +300,14 @@ export interface Schema<
 > {
   name: $$Data.Name;
   operationsAvailable: ["query"];
-  RootUnion: Schema.QueryRoot;
+  RootUnion: Schema.RootTypeCustomNameForQuery;
   Root: {
-    query: Schema.QueryRoot;
+    query: Schema.RootTypeCustomNameForQuery;
     mutation: null;
     subscription: null;
   };
   allTypes: {
-    QueryRoot: Schema.QueryRoot;
+    RootTypeCustomNameForQuery: Schema.RootTypeCustomNameForQuery;
   };
   objects: {};
   unions: {};
@@ -329,13 +329,15 @@ exports[`root-types-mapped 2`] = `
 import type * as $$Schema from "./schema.js";
 import type * as $$Utilities from "graffle/utilities-for-generated";
 
-export interface QueryRootMethods<$Context extends $$Utilities.Context> {
+export interface RootTypeCustomNameForQueryMethods<
+  $Context extends $$Utilities.Context,
+> {
   $batch: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.QueryRoot<$Context["scalars"]>
+        $$SelectionSets.RootTypeCustomNameForQuery<$Context["scalars"]>
       >,
     ) => Promise<
       (null | {}) &
@@ -354,7 +356,7 @@ export interface QueryRootMethods<$Context extends $$Utilities.Context> {
       (null | {}) &
         $$Utilities.HandleOutputDocumentBuilderRootField<
           $Context,
-          { __typename: "QueryRoot" },
+          { __typename: "RootTypeCustomNameForQuery" },
           "__typename"
         >
     >
@@ -365,7 +367,7 @@ export interface QueryRootMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.QueryRoot.id<$Context["scalars"]>
+        $$SelectionSets.RootTypeCustomNameForQuery.id<$Context["scalars"]>
       >,
     ) => Promise<
       (null | {}) &
@@ -382,7 +384,7 @@ export interface QueryRootMethods<$Context extends $$Utilities.Context> {
 }
 
 export interface BuilderMethodsRoot<$Context extends $$Utilities.Context> {
-  undefined: QueryRootMethods<$Context>;
+  query: RootTypeCustomNameForQueryMethods<$Context>;
 }
 
 export interface BuilderMethodsRootFn extends $$Utilities.TypeFunction {
