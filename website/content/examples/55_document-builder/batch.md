@@ -14,7 +14,7 @@ This example shows how to write batches of GraphQL root fields (aka. entrypoints
 import './graffle/modules/global.js'
 // ---cut---
 
-import { Graffle } from './graffle/__.js'
+import { Graffle } from './graffle/_namespace.js'
 
 const pokemon = Graffle.create()
 

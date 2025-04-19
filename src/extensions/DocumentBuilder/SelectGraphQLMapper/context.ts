@@ -1,7 +1,7 @@
-import type { Grafaid } from '../../../lib/grafaid/__.js'
+import type { Grafaid } from '../../../lib/grafaid/_namespace.js'
 import { Nodes } from '../../../lib/grafaid/_Nodes.js'
-import type { Schema } from '../../../types/Schema/__.js'
-import type { SchemaDrivenDataMap } from '../../../types/SchemaDrivenDataMap/__.js'
+import type { Schema } from '../../../types/Schema/_namespace.js'
+import type { SchemaDrivenDataMap } from '../../../types/SchemaDrivenDataMap/_namespace.js'
 import { inferVariableType } from './inferVariableType.js'
 import type { Options } from './nodes/1_Document.js'
 

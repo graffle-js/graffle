@@ -26,7 +26,10 @@ Graffle
     return await exchange({
       input: {
         ...exchange.input,
-        headers: mergedHeaders,
+        request: {
+          ...exchange.input.request,
+          headers: mergedHeaders,
+        },
       },
     })
   })

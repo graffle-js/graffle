@@ -1,4 +1,4 @@
-import type { Errors } from '../errors/__.js'
+import type { Errors } from '../errors/_namespace.js'
 import type { Deferred } from '../prelude.js'
 import type { InterceptorGeneric } from './Interceptor/Interceptor.js'
 

@@ -14,7 +14,7 @@ This example shows how to work with GraphQL union types in the TypeScript interf
 import './graffle/modules/global.js'
 // ---cut---
 
-import { Graffle } from './graffle/__.js'
+import { Graffle } from './graffle/_namespace.js'
 
 const pokemon = Graffle.create()
 

@@ -5,7 +5,7 @@ import * as Path from 'node:path'
 import { z } from 'zod'
 import { toAbsolutePath } from '../../lib/fsp.js'
 import { isError, urlParseSafe } from '../../lib/prelude.js'
-import { Generator } from '../__.js'
+import { Generator } from '../_namespace.js'
 import { type ConfigInit, ImportFormat, OutputCase } from '../config/configInit.js'
 
 const args = Command.create().description(`Generate a type safe GraphQL client.`)

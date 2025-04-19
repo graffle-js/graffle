@@ -1,15 +1,18 @@
+import type { ContextEmpty } from '../../context/ContextEmpty.js'
 import type { AnyAndUnknownToNever } from '../../lib/prelude.js'
-import type { Context } from '../context.js'
 
-export type SimplifyWithEmptyContext<T> = Simplify<Context.States.Empty, T>
+export type SimplifyWithEmptyContext<$Type> = Simplify<ContextEmpty, $Type>
 
-export type Simplify<$Context, T> = _SimplifyExcept<
-  // @ts-expect-error: No $Context constraint to avoid "compare depth limit"
-  | $Context['typeHookRequestResultDataTypes']
-  // @ts-expect-error: No $Context constraint to avoid "compare depth limit"
-  | $Context['scalars']['typesDecoded'],
-  T
+export type Simplify<$Context, $Type> = _SimplifyExcept<
+  (
+    // @ts-expect-error: No $Context constraint to avoid "compare depth limit"
+    | $Context['typeHookRequestResultDataTypes']
+    // @ts-expect-error: No $Context constraint to avoid "compare depth limit"
+    | AnyAndUnknownToNever<$Context['scalars']['typesDecoded']>
+  ),
+  $Type
 >
+// & { test: $Context['typeHookRequestResultDataTypes'] | $Context['scalars']['typesDecoded'] }
 
 // dprint-ignore
 export type _SimplifyExcept<$ExcludeType, $Type> =

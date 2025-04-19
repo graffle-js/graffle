@@ -1,4 +1,4 @@
-import type { Grafaid } from '../../../../lib/grafaid/__.js'
+import type { Grafaid } from '../../../../lib/grafaid/_namespace.js'
 import type { Codec } from './codec.js'
 
 export * as Scalar from './_.js'

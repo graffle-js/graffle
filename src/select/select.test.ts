@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest'
 import { create } from './select.js'
 
-const select = create(`default`)
+const select = create(`possible`)
 
 test(`returns the input for any method name`, () => {
   const s = select as any

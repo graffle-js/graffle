@@ -2,7 +2,7 @@
  * This example shows how to configure output to have errors returned instead of e.g. thrown.
  */
 
-import { Graffle } from '../$/graffle/__.js'
+import { Graffle } from '../$/graffle/_namespace.js'
 import { show } from '../$/helpers.js'
 
 // dprint-ignore

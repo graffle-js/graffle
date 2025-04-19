@@ -18,18 +18,15 @@ import { GraffleBare } from 'graffle/presets/bare'
 const graffle1 = GraffleBare.create()
 
 /**
- * Because we have no transports registered, the `transport` method
- * is not available to us. Nor are the request methods.
+ * Because we have no transports registered,
+ * the request methods are not available to us.
+ * This include core methods like `gql` and any
+ * from extensions.
  */
 
-const _e0: never = graffle1.transport
 const _e1: 'Error: You cannot send requests yet. You must setup a transport.' = graffle1.gql
 
-/**
- * As well, request methods from extensions also check the status of the transport.
- */
-
-const graffle2 = graffle1.use(DocumentBuilder()).use(Introspection())
+const graffle2 = graffle1.use(DocumentBuilder).use(Introspection())
 
 const _e2: 'Error: You cannot send requests yet. You must setup a transport.' = graffle2.document
 const _e3: 'Error: You cannot send requests yet. You must setup a transport.' = graffle2.query.$batch

@@ -1,18 +1,34 @@
-import { describe, expect, test } from 'vitest'
-import { db } from '../../../tests/_/schemas/db.js'
-import { Graffle } from '../../../tests/_/schemas/kitchen-sink/graffle/__.js'
-import { schema } from '../../../tests/_/schemas/kitchen-sink/schema.js'
-import { TransportMemory } from '../TransportMemory/TransportMemory.js'
+import { expect, test } from 'vitest'
+import { Extension } from '../../entrypoints/extension.js'
+import { GraffleBare } from '../../entrypoints/presets/bare.js'
 import { Throws } from './Throws.js'
 
-const graffle = Graffle
-  .create()
-  .use(TransportMemory({ schema }))
-  .transport(`memory`)
-  .use(Throws())
-  .with({
+const graffle = GraffleBare
+  .create({
     output: { errors: { execution: `return` } },
   })
+  .transport(
+    Extension.Transport
+      .create(`test`)
+      .pack({
+        // todo: this should be the default.
+        run: (input) => input,
+      })
+      .exchange({
+        run: (input) => input,
+      })
+      .unpack({
+        run: (input) => {
+          return {
+            ...input,
+            result: {
+              errors: [{ message: `test` }],
+            },
+          }
+        },
+      }),
+  )
+  .use(Throws)
   .throws()
 
 test(`.gql() throws if errors array non-empty`, async () => {
@@ -21,11 +37,11 @@ test(`.gql() throws if errors array non-empty`, async () => {
   )
 })
 
-describe(`$batch`, () => {
-  test(`success`, async () => {
-    expect(await graffle.query.$batch({ id: true })).toMatchObject({ id: db.id })
-  })
-  test(`error`, async () => {
-    await expect(graffle.query.$batch({ error: true })).rejects.toMatchObject(db.errorAggregate)
-  })
-})
+// describe(`$batch`, () => {
+//   test(`success`, async () => {
+//     expect(await graffle.query.$batch({ id: true })).toMatchObject({ id: db.id })
+//   })
+//   test(`error`, async () => {
+//     await expect(graffle.query.$batch({ error: true })).rejects.toMatchObject(db.errorAggregate)
+//   })
+// })

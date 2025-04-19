@@ -2,20 +2,23 @@
   "name": "graffle",
   "description": "Simple GraphQL Client for JavaScript. Minimal. Extensible. Type Safe. Runs everywhere.",
   "version": "0.0.0-dripip",
-  "packageManager": "pnpm@9.15.3",
+  "packageManager": "pnpm@10.2.1",
   "type": "module",
   "bin": {
     "graffle": "./execute.sh"
   },
   "exports": {
     ".": {
-      "default": "./build/entrypoints/main.js"
+      "default": "./build/entrypoints/index.js"
+    },
+    "./graffle": {
+      "default": "./build/entrypoints/graffle.js"
     },
     "./generator": {
       "default": "./build/entrypoints/generator.js"
     },
-    "./extensionkit": {
-      "default": "./build/entrypoints/extensionkit.js"
+    "./extension": {
+      "default": "./build/entrypoints/extension.js"
     },
     "./extensions/upload": {
       "default": "./build/entrypoints/extensions/upload/runtime.js"
@@ -95,17 +98,19 @@
   },
   "homepage": "https://github.com/graffle-js/graffle",
   "scripts": {
+    "extension:document-builder:test:generate-fixtures": "tsx src/extensions/DocumentBuilder/__tests__/fixtures/generate.ts",
+    "extension:schema-errors:test:generate-fixtures": "pnpm graffle --project src/extensions/SchemaErrors/__tests__/fixture",
     "graffle": "tsx ./src/generator/cli/generate.ts",
     "serve:pokemon": "tsx tests/_/services/pokemonManual.ts",
-    "gen:graffle": "pnpm gen:graffle:tests && pnpm build && pnpm website:gen:graffle",
-    "gen:graffle:tests": "pnpm test:e2e:github:gen:graffle && tsx tests/_/schemas/generate.ts && pnpm graffle --project src/extensions/SchemaErrors/tests/fixture",
+    "gen:graffle": "pnpm test:e2e:github:gen:graffle && pnpm extension:schema-errors:test:generate-fixtures && pnpm extension:document-builder:test:generate-fixtures && pnpm website:gen:graffle",
     "examples:gen:graffle": "pnpm build && cd examples && pnpm i && pnpm gen:graffle",
     "examples:link-mode": "cd examples && pnpm add ..",
     "examples:check:types": "cd examples && tsc --noEmit",
-    "website:gen:graffle": "cd website && pnpm i && pnpm gen:graffle",
-    "gen:examples": "tsx scripts/generate-examples-derivatives/generate.ts && pnpm format",
-    "gen:examples:outputs": "tsx scripts/generate-examples-derivatives/generate.ts --outputs",
-    "build:watch": "tsc --project tsconfig.build.json --watch",
+    "examples:test": "cd examples && pnpm test",
+    "examples:gen:website": "tsx scripts/generate-examples-derivatives/generate.ts && pnpm format",
+    "examples:gen:outputs": "tsx scripts/generate-examples-derivatives/generate.ts --outputs",
+    "examples:gen:tests": "tsx scripts/generate-examples-derivatives/generate.ts --tests && dprint fmt examples/__tests__/**/*",
+    "website:gen:graffle": "pnpm build && cd website && pnpm i && pnpm gen:graffle",
     "format": "pnpm build:docs && dprint fmt",
     "lint": "eslint . --fix --ignore-pattern 'website' --ignore-pattern 'build'",
     "check": "pnpm check:types && pnpm check:format && pnpm check:lint && pnpm check:publint && pnpm examples:check:types",
@@ -115,11 +120,16 @@
     "check:publint": "publint run --strict",
     "prepublishOnly": "pnpm build",
     "build:docs": "doctoc README.md --notitle && dprint fmt README.md",
-    "build:emit": "pnpm clean && pnpm tsc --noCheck --project tsconfig.build.json && chmod +x ./build/generator/cli/generate.js",
-    "build": "pnpm tsc --project tsconfig.build.json && chmod +x ./build/generator/cli/generate.js",
+    "dev": "pnpm build:watch:emit",
+    "build:emit": "pnpm build --noCheck",
+    "build:watch": "pnpm build --watch",
+    "build:watch:emit": "pnpm build --watch --noCheck",
+    "build": "pnpm tsc --project tsconfig.build.json",
+    "prebuild": "pnpm clean",
+    "postbuild": "chmod +x ./build/generator/cli/generate.js",
     "clean": "tsc --build --clean",
-    "test:unit": "vitest --exclude tests/examples --exclude tests/e2e",
-    "test:examples": "vitest --config vitest.examples.config.ts --dir tests/examples",
+    "test:unit": "vitest --dir src",
+    "test:integration": "vitest --dir tests/integration",
     "test:e2e": "vitest --dir tests/e2e --testTimeout 30000 --run",
     "test:e2e:github:gen:graffle": "pnpm graffle --project tests/e2e/github/graffle.config.ts",
     "test": "vitest",
@@ -128,8 +138,7 @@
     "test:coverage": "pnpm test -- --coverage",
     "release:stable": "dripip stable",
     "release:preview": "dripip preview",
-    "release:pr": "dripip pr",
-    "prebuild": "pnpm clean"
+    "release:pr": "dripip pr"
   },
   "dependencies": {
     "@0no-co/graphql.web": "^1.0.12",

@@ -3,8 +3,10 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "test": "vitest --config vitest.config.ts",
     "check:types": "tsc --noEmit",
-    "gen:graffle": "pnpm graffle --defaultSchemaUrl http://localhost:3000/graphql --schema ../tests/_/schemas/pokemon/schema.graphql --output ./$/graffle"
+    "gen": "pnpm gen:graffle",
+    "gen:graffle": "pnpm graffle --defaultSchemaUrl http://localhost:3000/graphql --schema ../tests/_/fixtures/schemas/pokemon/schema.graphql --output ./$/graffle"
   },
   "dependencies": {
     "@opentelemetry/sdk-trace-base": "^1.30.0",
@@ -15,6 +17,13 @@
   },
   "devDependencies": {
     "@tsconfig/node20": "^20.1.4",
-    "@tsconfig/strictest": "^2.0.5"
+    "@tsconfig/strictest": "^2.0.5",
+    "tsx": "^4.19.3",
+    "vitest": "^3.1.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "graffle": "file:.."
+    }
   }
 }

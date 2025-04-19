@@ -38,7 +38,7 @@ graffle.throws().query.foo()
 import { Graffle } from 'graffle'
 import { Throws } from 'graffle/extensions/throws'
 
-const graffle = Graffle.create().use(Throws())
+const graffle = Graffle.create().use(Throws)
 ```
 
 Then chain `.throws()` whenever needed:

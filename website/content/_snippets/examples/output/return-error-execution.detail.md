@@ -11,7 +11,7 @@
 import './graffle/modules/global.js'
 // ---cut---
 
-import { Graffle } from './graffle/__.js'
+import { Graffle } from './graffle/_namespace.js'
 
 const pokemon = Graffle
   .create({
@@ -52,8 +52,8 @@ try {
 <!-- dprint-ignore-start -->
 ```txt
 ContextualAggregateError: One or more errors in the execution result.
-    at handleOutput (/some/path/to/handleOutput.ts:XX:XX:19)
-    at executeDocument (/some/path/to/requestMethods.ts:XX:XX:10)
+    at handleOutput (/some/path/to/handle.ts:XX:XX:19)
+    at sendRequest (/some/path/to/send.ts:XX:XX:10)
     at process.processTicksAndRejections (node:internal/process/task_queues:XX:XX)
     at async executeRootField (/some/path/to/requestMethods.ts:XX:XX:18)
     at async <anonymous> (/some/path/to/output_return-error_return-error-execution__return-error-execution.ts:XX:XX:16) {
@@ -73,10 +73,10 @@ ContextualAggregateError: One or more errors in the execution result.
         ]
       }
     ]
-        at <anonymous> (/some/path/to/handleOutput.ts:XX:XX:16)
+        at <anonymous> (/some/path/to/handle.ts:XX:XX:16)
         at Array.map (<anonymous>)
-        at handleOutput (/some/path/to/handleOutput.ts:XX:XX:27)
-        at executeDocument (/some/path/to/requestMethods.ts:XX:XX:10)
+        at handleOutput (/some/path/to/handle.ts:XX:XX:27)
+        at sendRequest (/some/path/to/send.ts:XX:XX:10)
         at process.processTicksAndRejections (node:internal/process/task_queues:XX:XX)
         at async executeRootField (/some/path/to/requestMethods.ts:XX:XX:18)
         at async <anonymous> (/some/path/to/output_return-error_return-error-execution__return-error-execution.ts:XX:XX:16) {
@@ -94,7 +94,7 @@ ContextualError: There was an error in the interceptor "anonymous" (use named fu
     at process.processTicksAndRejections (node:internal/process/task_queues:XX:XX)
     at async <anonymous> (/some/path/to/runner.ts:XX:XX:20)
     at async Module.run (/some/path/to/run.ts:XX:XX:10)
-    at async executeDocument (/some/path/to/requestMethods.ts:XX:XX:18)
+    at async sendRequest (/some/path/to/send.ts:XX:XX:18)
     at async executeRootField (/some/path/to/requestMethods.ts:XX:XX:18)
     at async <anonymous> (/some/path/to/output_return-error_return-error-execution__return-error-execution.ts:XX:XX:3) {
   context: {

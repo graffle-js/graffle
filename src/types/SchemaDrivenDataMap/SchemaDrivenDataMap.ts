@@ -1,6 +1,6 @@
-import type { Grafaid } from '../../lib/grafaid/__.js'
+import type { Grafaid } from '../../lib/grafaid/_namespace.js'
 import { isString } from '../../lib/prelude.js'
-import { Schema } from '../Schema/__.js'
+import { Schema } from '../Schema/_namespace.js'
 import type { InlineType } from './InlineType.js'
 
 export * from './InlineType.js'

@@ -38,7 +38,20 @@ await graffle.gql`{ pokemons { name } }`.send()
   },
   mode: 'cors',
   method: 'post',
-  url: 'http://localhost:3000/graphql',
+  url: URL {
+    href: 'http://localhost:3000/graphql',
+    origin: 'http://localhost:3000',
+    protocol: 'http:',
+    username: '',
+    password: '',
+    host: 'localhost:3000',
+    hostname: 'localhost',
+    port: '3000',
+    pathname: '/graphql',
+    search: '',
+    searchParams: URLSearchParams {},
+    hash: ''
+  },
   body: '{"query":"{ pokemons { name } }"}'
 }
 ```

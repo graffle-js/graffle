@@ -1,5 +1,5 @@
 import type { OperationTypeNode } from 'graphql'
-import { Grafaid } from '../../../lib/grafaid/__.js'
+import { Grafaid } from '../../../lib/grafaid/_namespace.js'
 import type { AssertExtendsObject, FirstNonUnknownNever, Values } from '../../../lib/prelude.js'
 import type { Select } from './__.js'
 

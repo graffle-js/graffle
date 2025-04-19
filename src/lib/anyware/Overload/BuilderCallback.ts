@@ -1,4 +1,4 @@
-import type { PipelineDefinition } from '../PipelineDef/__.js'
+import type { PipelineDefinition } from '../PipelineDefinition/_namespace.js'
 import type { Create } from './Builder.js'
 import type { Builder } from './Builder.js'
 

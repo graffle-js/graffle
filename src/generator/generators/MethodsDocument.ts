@@ -33,7 +33,7 @@ export const ModuleGeneratorMethodsDocument = createModuleGenerator(
             ${contextTsExpectError}
             $Context['scalars']>
           >
-        ): ${identifiers.$$Utilities}.DocumentBuilder.DocumentRunner<
+        ): ${identifiers.$$Utilities}.DocumentBuilderKit.DocumentRunner<
           $Context,
           ${identifiers.$$Schema}.${identifiers.Schema},
           // @ts-expect-error We use Exact instead of constraint on this function. TypeScript does not see that as

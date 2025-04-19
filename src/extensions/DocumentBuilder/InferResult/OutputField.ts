@@ -1,5 +1,5 @@
 import type { TSErrorDescriptive } from '../../../lib/ts-error.js'
-import type { Schema } from '../../../types/Schema/__.js'
+import type { Schema } from '../../../types/Schema/_namespace.js'
 import type { InlineType } from '../../../types/SchemaDrivenDataMap/InlineType.js'
 import type { Interface } from './Interface.js'
 import type { OutputObjectLike } from './OutputObjectLike.js'
