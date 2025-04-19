@@ -169,9 +169,9 @@
     }
   },
   "devDependencies": {
-    "@arethetypeswrong/cli": "^0.17.2",
+    "@arethetypeswrong/cli": "^0.17.4",
     "@dprint/formatter": "^0.4.1",
-    "@dprint/typescript": "^0.93.3",
+    "@dprint/typescript": "^0.94.0",
     "@opentelemetry/api": "^1.9.0",
     "@opentelemetry/sdk-trace-base": "^1.30.0",
     "@opentelemetry/sdk-trace-node": "^1.30.0",
@@ -187,7 +187,7 @@
     "@typescript-eslint/parser": "^8.30.1",
     "async-cleanup": "^1.0.0",
     "doctoc": "^2.2.1",
-    "dprint": "^0.48.0",
+    "dprint": "^0.49.1",
     "dripip": "^0.10.0",
     "eslint": "^9.25.0",
     "eslint-config-prisma": "^0.6.0",
@@ -206,17 +206,17 @@
     "graphql-tag": "^2.12.6",
     "graphql-upload-minimal": "^1.6.1",
     "graphql-yoga": "^5.13.4",
-    "jsdom": "^25.0.1",
+    "jsdom": "^26.1.0",
     "memfs": "^4.17.0",
     "prettier": "^3.5.3",
-    "publint": "^0.3.0",
+    "publint": "^0.3.12",
     "strip-ansi": "^7.1.0",
     "tsx": "^4.19.3",
     "type-fest": "^4.40.0",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.30.1",
-    "vitepress": "^1.5.0",
-    "vitest": "^2.1.8",
+    "vitepress": "^1.6.3",
+    "vitest": "^3.1.1",
     "zod": "^3.24.3"
   }
 }
