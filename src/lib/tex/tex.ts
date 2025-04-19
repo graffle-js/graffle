@@ -6,7 +6,7 @@ export const linesTrim = (str: string) => str.split(`\n`).map((line) => line.tri
 export const characterSpace = ` `
 
 export const centerTo = (target: string, value: string) => {
-  const indentSize = Math.round(target.length / 2) - Math.round(value.length / 2)
+  const indentSize = Math.max(0, Math.round(target.length / 2) - Math.round(value.length / 2))
   return indent(indentSize, value)
 }
 
