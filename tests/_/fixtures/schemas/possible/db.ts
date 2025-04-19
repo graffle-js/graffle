@@ -6,6 +6,7 @@ const date0 = new Date(0)
 // const error = { errors: [{ message: `Something went wrong.` }] }
 const errorAggregate = new Errors.ContextualAggregateError(`One or more errors in the execution result.`, {}, [
   new GraphQLError(`Something went wrong.`),
+  // new Error(`Something went wrong.`),
 ])
 
 const ErrorOneError = new Error(`Failure on field result: ErrorOne`)
@@ -183,6 +184,11 @@ export const db = {
     date1: date0,
   },
   errorAggregate,
+  errorAggregateSubset: {
+    name: errorAggregate.name,
+    message: errorAggregate.message,
+    errors: [{ message: errorAggregate.errors[0]?.message }],
+  },
 } as const
 
 export namespace db {

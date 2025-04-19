@@ -28,7 +28,7 @@ describe(`query batch`, () => {
     expect(await possible.query.$batch({ id: true })).toMatchObject({ id: db.id })
   })
   test(`error`, async ({ possible, possibleData: db }) => {
-    await expect(possible.query.$batch({ error: true })).rejects.toMatchObject(db.errorAggregate)
+    await expect(possible.query.$batch({ error: true })).rejects.toMatchObject(db.errorAggregateSubset)
   })
 })
 
