@@ -72,20 +72,16 @@ test(`root-types-mapped`, async () => {
 
 test(`schema with long type name`, async () => {
   await Memfs.fs.promises.mkdir(process.cwd(), { recursive: true })
-  const typeName = "a".repeat(200);
-  await generate( {
+  const typeName = `a`.repeat(200)
+  await generate({
     fs: Memfs.fs.promises as any,
     schema: {
       type: `sdl`,
       sdl: `
-        type ${typeName} {
-          id: ID
-        }
-        type Query {
-          longTypeName: ${typeName}
-        }
-      `
-    }
+        type Query { longTypeName: ${typeName} }
+        type ${typeName} { id: ID }
+      `,
+    },
   })
 
   const SchemaTs = Memfs.fs.readFileSync(`./graffle/modules/schema.ts`, `utf8`)
