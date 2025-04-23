@@ -25,3 +25,11 @@ test(`created WITH configuration changes the configuration`, () => {
   expect(g._).not.toBe(contextEmpty)
   expect(contextEmpty.configuration.check.current.preflight).toBe(true)
 })
+
+test(`excess prooperties are caight`, () => {
+  create({
+    // @ts-expect-error
+    bad: true,
+    output: {},
+  })
+})
