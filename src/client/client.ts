@@ -10,6 +10,7 @@ import { Scalars } from '../context/fragments/scalars/_namespace.js'
 import { Transports } from '../context/fragments/transports/_namespace.js'
 import type { Anyware } from '../lib/anyware/_namespace.js'
 import { getOperationType } from '../lib/grafaid/document.js'
+import type { Exact } from '../lib/prelude.js'
 import type { TypeFunction } from '../lib/type-function/__.js'
 import type { RequestPipeline } from '../requestPipeline/RequestPipeline.js'
 import { type ContextFragment, ContextFragments } from '../types/ContextFragment.js'
@@ -107,7 +108,7 @@ export type ExtensionChainableArguments = [Context, object, ExtensionChainableRe
 export type Create<$Context extends Context = ContextEmpty> =
   <
     const configurationInput extends CalcConfigurationInputForContext<$Context>,
-  >(configurationInput?: configurationInput) =>
+  >(configurationInput?: Exact<configurationInput, CalcConfigurationInputForContext<$Context>>) =>
     Client<
       // @ts-expect-error: Is missing standard configurators
       Configuration.Add<$Context, configurationInput>

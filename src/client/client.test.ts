@@ -25,3 +25,13 @@ test(`created WITH configuration changes the configuration`, () => {
   expect(g._).not.toBe(contextEmpty)
   expect(contextEmpty.configuration.check.current.preflight).toBe(true)
 })
+
+test(`excess prooperties are statically caight, throw error`, () => {
+  expect(() =>
+    create({
+      // @ts-expect-error
+      bad: true,
+      output: {},
+    })
+  ).toThrowErrorMatchingInlineSnapshot(`[TypeError: Cannot read properties of undefined (reading 'configurator')]`)
+})
