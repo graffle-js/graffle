@@ -112,7 +112,7 @@
     "examples:gen:tests": "tsx scripts/generate-examples-derivatives/generate.ts --tests && dprint fmt examples/__tests__/**/*",
     "website:gen:graffle": "pnpm build && cd website && pnpm i && pnpm gen:graffle",
     "fix:format": "pnpm build:docs && dprint fmt",
-    "lint": "eslint . --fix --ignore-pattern 'website' --ignore-pattern 'build'",
+    "fix:lint": "eslint . --fix --ignore-pattern 'website' --ignore-pattern 'build'",
     "check": "pnpm check:types && pnpm check:format && pnpm check:lint && pnpm check:publint && pnpm examples:check:types",
     "check:types": "tsc --noEmit",
     "check:format": "dprint check && pnpm build:docs && git diff --exit-code README.md",
