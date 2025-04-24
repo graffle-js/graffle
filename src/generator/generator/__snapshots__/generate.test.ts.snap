@@ -6,7 +6,6 @@ exports[`custom scalars module results in client prefilling those custom scalars
 import * as CustomScalars from "../../scalars.js";
 
 export * from "../../scalars.js";
-import { Date } from "../../scalars.js";
 //
 //
 //

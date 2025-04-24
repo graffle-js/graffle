@@ -21,10 +21,6 @@ export const ModuleGeneratorScalar = createModuleGenerator(
       code(`import * as ${$.CustomScalars} from '${config.paths.imports.scalars}'`)
       code()
       code(`export * from '${config.paths.imports.scalars}'`)
-
-      const names = config.schema.kindMap.list.ScalarCustom.map((scalar) => scalar.name).join(`, `)
-      code(`import { ${names} } from '${config.paths.imports.scalars}'`)
-
       for (const scalar of config.schema.kindMap.list.ScalarCustom) {
         code(typeTitle2(`custom scalar type`)(scalar))
         code()
