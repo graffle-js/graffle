@@ -12,30 +12,26 @@ export const ModuleGeneratorScalar = createModuleGenerator(
     const isNeedCustomScalarDefaults = Grafaid.Schema.KindMap.hasCustomScalars(config.schema.kindMap)
       && !config.options.customScalars
 
-    code(
-      `import type * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'`,
-    )
-    code()
+    // dprint-ignore
+    code(`import type * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'`)
 
     if (Grafaid.Schema.KindMap.hasCustomScalars(config.schema.kindMap) && config.options.customScalars) {
-      code(`import * as ${$.CustomScalars} from '${config.paths.imports.scalars}'`)
-      code()
-      code(`export * from '${config.paths.imports.scalars}'`)
+      code(`
+        import * as ${$.CustomScalars} from '${config.paths.imports.scalars}'
+
+        export * from '${config.paths.imports.scalars}'
+      `)
       for (const scalar of config.schema.kindMap.list.ScalarCustom) {
         code(typeTitle2(`custom scalar type`)(scalar))
         code()
-        code(`export type ${scalar.name} = typeof ${$.CustomScalars}.${scalar.name}`)
         code(`
+          export type ${scalar.name} = typeof ${$.CustomScalars}.${scalar.name}
           // Without this we get error:
           // "Exported type alias 'DateDecoded' has or is using private name 'Date'."
+          type ${scalar.name}_ = typeof ${$.CustomScalars}.${scalar.name}
+          export type ${scalar.name}Decoded = ${$.$$Utilities}.Schema.Scalar.GetDecoded<${scalar.name}_>
+          export type ${scalar.name}Encoded = ${$.$$Utilities}.Schema.Scalar.GetEncoded<${scalar.name}_>
         `)
-        code(`type ${scalar.name}_ = typeof ${$.CustomScalars}.${scalar.name}`)
-        code(
-          `export type ${scalar.name}Decoded = ${$.$$Utilities}.Schema.Scalar.GetDecoded<${scalar.name}_>`,
-        )
-        code(
-          `export type ${scalar.name}Encoded = ${$.$$Utilities}.Schema.Scalar.GetEncoded<${scalar.name}_>`,
-        )
         code()
       }
     }
