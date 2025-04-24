@@ -916,6 +916,9 @@ packages:
   es-toolkit@1.31.0:
     resolution: {integrity: sha512-vwS0lv/tzjM2/t4aZZRAgN9I9TP0MSkWuvt6By+hEXfG/uLs8yg2S1/ayRXH/x3pinbLgVJYT+eppueg3cM6tg==}
 
+  es-toolkit@1.36.0:
+    resolution: {integrity: sha512-5lpkRpDELuTSeAL//Rcg5urg+K/yOD1BobJSiNeCc89snMqgrhckmj8jdljqraDbpREiXTNW311RN518eVHBng==}
+
   esbuild@0.21.5:
     resolution: {integrity: sha512-mg3OPMV4hXywwpoDxu3Qda5xCKQi+vCTZq8S9J/EpkhB2HzKXq4SNFZE3+NK93JYxc8VMSep+lOUSC/RVKaBqw==}
     engines: {node: '>=12'}
@@ -1414,8 +1417,8 @@ packages:
     peerDependencies:
       typescript: '*'
 
-  type-fest@4.31.0:
-    resolution: {integrity: sha512-yCxltHW07Nkhv/1F6wWBr8kz+5BGMfP+RbRSYFnegVb0qV/UMT0G0ElBloPVerqn4M2ZV80Ir1FtCcYv1cT6vQ==}
+  type-fest@4.40.0:
+    resolution: {integrity: sha512-ABHZ2/tS2JkvH1PEjxFDTUWC8dB5OsIGZP4IFLhR293GqT5Y5qB1WwL2kMPYhQW9DVgVD8Hd7I8gjwPIf5GFkw==}
     engines: {node: '>=16'}
 
   typescript@5.7.2:
@@ -1875,7 +1878,7 @@ snapshots:
       string-length: 6.0.0
       strip-ansi: 7.1.0
       ts-toolbelt: 9.6.0
-      type-fest: 4.31.0
+      type-fest: 4.40.0
       zod: 3.24.1
 
   '@molt/types@0.2.0':
@@ -2304,6 +2307,8 @@ snapshots:
 
   es-toolkit@1.31.0: {}
 
+  es-toolkit@1.36.0: {}
+
   esbuild@0.21.5:
     optionalDependencies:
       '@esbuild/aix-ppc64': 0.21.5
@@ -2432,9 +2437,10 @@ snapshots:
       '@0no-co/graphql.web': 1.0.12(graphql@16.10.0)
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.10.0)
       '@molt/command': 0.9.0
-      es-toolkit: 1.31.0
+      es-toolkit: 1.36.0
       graphql: 16.10.0
       is-plain-obj: 4.1.0
+      type-fest: 4.40.0
 
   graphql@16.10.0: {}
 
@@ -2984,7 +2990,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  type-fest@4.31.0: {}
+  type-fest@4.40.0: {}
 
   typescript@5.7.2: {}
 
