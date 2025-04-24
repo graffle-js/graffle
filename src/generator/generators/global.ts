@@ -1,5 +1,5 @@
 import { Code } from '../../lib/Code.js'
-import { identifiers } from '../helpers/identifiers.js'
+import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { ModuleGeneratorData } from './Data.js'
 import { ModuleGeneratorMethodsDocument } from './MethodsDocument.js'
@@ -23,12 +23,12 @@ export const ModuleGeneratorGlobal = createModuleGenerator(
 
     const Clients = Code.termObjectFields({
       [config.name]: {
-        name: `${identifiers.$$Data}.Name`,
-        schema: `${identifiers.$$Schema}.${identifiers.Schema}`,
+        name: `${$.$$Data}.Name`,
+        schema: `${$.$$Schema}.${$.Schema}`,
         interfaces: {
-          MethodsSelect: `${identifiers.$$MethodsSelect}.$MethodsSelect`,
-          Document: `${identifiers.$$MethodsDocument}.BuilderMethodsDocumentFn`,
-          Root: `${identifiers.$$MethodsRoot}.BuilderMethodsRootFn`,
+          MethodsSelect: `${$.$$MethodsSelect}.$MethodsSelect`,
+          Document: `${$.$$MethodsDocument}.BuilderMethodsDocumentFn`,
+          Root: `${$.$$MethodsRoot}.BuilderMethodsRootFn`,
         },
         defaultSchemaUrl: {
           $TS_DOC: defaultSchemaUrlTsDoc,

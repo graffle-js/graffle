@@ -4,7 +4,7 @@ import { entries } from '../../lib/prelude.js'
 import { Tex } from '../../lib/tex/_namespace.js'
 import { propertyNames } from '../../types/SchemaDrivenDataMap/SchemaDrivenDataMap.js'
 import type { Config } from '../config/config.js'
-import { identifiers } from '../helpers/identifiers.js'
+import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
 import { renderInlineType } from '../helpers/render.js'
@@ -26,7 +26,7 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
 
     code(`
       ${importModuleGenerator(config, ModuleGeneratorScalar)}
-      import type * as ${identifiers.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
+      import type * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
     `)
 
     const referenceAssignments: ReferenceAssignments = []
@@ -57,7 +57,7 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
 
     code(Tex.title1(`Index`))
     code()
-    code(`const $schemaDrivenDataMap: ${identifiers.$$Utilities}.SchemaDrivenDataMap =`)
+    code(`const $schemaDrivenDataMap: ${$.$$Utilities}.SchemaDrivenDataMap =`)
     code(Code.termObject({
       operations: kindMap.Root.map(type => {
         const operationType = rootsWithOpType.find(({ objectType }) => objectType.name === type.name)?.operationType
@@ -156,7 +156,7 @@ const ScalarType = createCodeGenerator<
   { type: Grafaid.Schema.ScalarType }
 >(
   ({ code, type }) => {
-    code(Code.termConst(type.name, `${identifiers.$$Scalar}.${type.name}`))
+    code(Code.termConst(type.name, `${$.$$Scalar}.${type.name}`))
   },
 )
 
@@ -165,7 +165,7 @@ const ScalarTypeCustom = createCodeGenerator<
 >(
   ({ config, code, type }) => {
     if (config.options.isImportsCustomScalars) {
-      code(Code.termConst(type.name, `${identifiers.$$Scalar}.${type.name}`))
+      code(Code.termConst(type.name, `${$.$$Scalar}.${type.name}`))
     } else {
       code(Code.termConst(type.name, Code.string(type.name)))
     }
@@ -186,7 +186,7 @@ const UnionType = createCodeGenerator<
     // that they could never conflict.
     code(Code.termConstTyped(
       type.name,
-      `${identifiers.$$Utilities}.SchemaDrivenDataMap.OutputObject`,
+      `${$.$$Utilities}.SchemaDrivenDataMap.OutputObject`,
       Code.termObject({
         [propertyNames.f]: Code.directiveTermObject({
           $spread: type.getTypes().filter(Grafaid.Schema.CustomScalars.isHasCustomScalars).map(memberType =>
@@ -205,7 +205,7 @@ const InterfaceType = createCodeGenerator<
     const implementorTypes = Grafaid.Schema.KindMap.getInterfaceImplementors(config.schema.kindMap, type)
     code(Code.termConstTyped(
       type.name,
-      `${identifiers.$$Utilities}.SchemaDrivenDataMap.OutputObject`,
+      `${$.$$Utilities}.SchemaDrivenDataMap.OutputObject`,
       Code.termObject({
         [propertyNames.f]: Code.directiveTermObject({
           $spread: implementorTypes.filter(Grafaid.Schema.CustomScalars.isHasCustomScalars).map(memberType =>
@@ -304,7 +304,7 @@ const ObjectType = createCodeGenerator<
     }
 
     code(
-      Code.termConstTyped(type.name, `${identifiers.$$Utilities}.SchemaDrivenDataMap.OutputObject`, Code.termObject(o)),
+      Code.termConstTyped(type.name, `${$.$$Utilities}.SchemaDrivenDataMap.OutputObject`, Code.termObject(o)),
     )
   },
 )
@@ -315,7 +315,7 @@ const EnumType = createCodeGenerator<
   ({ code, type }) => {
     code(Code.termConstTyped(
       type.name,
-      `${identifiers.$$Utilities}.SchemaDrivenDataMap.Enum`,
+      `${$.$$Utilities}.SchemaDrivenDataMap.Enum`,
       Code.termObject({
         [propertyNames.k]: Code.string(`enum`),
         [propertyNames.n]: Code.string(type.name),
@@ -377,7 +377,7 @@ const InputObjectType = createCodeGenerator<
     }
 
     code(
-      Code.termConstTyped(type.name, `${identifiers.$$Utilities}.SchemaDrivenDataMap.InputObject`, Code.termObject(o)),
+      Code.termConstTyped(type.name, `${$.$$Utilities}.SchemaDrivenDataMap.InputObject`, Code.termObject(o)),
     )
   },
 )

@@ -1,7 +1,7 @@
 import { Code } from '../../lib/Code.js'
 import { Grafaid } from '../../lib/grafaid/_namespace.js'
 import { Tex } from '../../lib/tex/_namespace.js'
-import { identifiers } from '../helpers/identifiers.js'
+import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 import { typeTitle2 } from '../helpers/render.js'
 
@@ -13,12 +13,12 @@ export const ModuleGeneratorScalar = createModuleGenerator(
       && !config.options.customScalars
 
     code(
-      `import type * as ${identifiers.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'`,
+      `import type * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'`,
     )
     code()
 
     if (Grafaid.Schema.KindMap.hasCustomScalars(config.schema.kindMap) && config.options.customScalars) {
-      code(`import * as ${identifiers.CustomScalars} from '${config.paths.imports.scalars}'`)
+      code(`import * as ${$.CustomScalars} from '${config.paths.imports.scalars}'`)
       code()
       code(`export * from '${config.paths.imports.scalars}'`)
 
@@ -28,17 +28,17 @@ export const ModuleGeneratorScalar = createModuleGenerator(
       for (const scalar of config.schema.kindMap.list.ScalarCustom) {
         code(typeTitle2(`custom scalar type`)(scalar))
         code()
-        code(`export type ${scalar.name} = typeof ${identifiers.CustomScalars}.${scalar.name}`)
+        code(`export type ${scalar.name} = typeof ${$.CustomScalars}.${scalar.name}`)
         code(`
           // Without this we get error:
           // "Exported type alias 'DateDecoded' has or is using private name 'Date'."
         `)
-        code(`type ${scalar.name}_ = typeof ${identifiers.CustomScalars}.${scalar.name}`)
+        code(`type ${scalar.name}_ = typeof ${$.CustomScalars}.${scalar.name}`)
         code(
-          `export type ${scalar.name}Decoded = ${identifiers.$$Utilities}.Schema.Scalar.GetDecoded<${scalar.name}_>`,
+          `export type ${scalar.name}Decoded = ${$.$$Utilities}.Schema.Scalar.GetDecoded<${scalar.name}_>`,
         )
         code(
-          `export type ${scalar.name}Encoded = ${identifiers.$$Utilities}.Schema.Scalar.GetEncoded<${scalar.name}_>`,
+          `export type ${scalar.name}Encoded = ${$.$$Utilities}.Schema.Scalar.GetEncoded<${scalar.name}_>`,
         )
         code()
       }
@@ -57,7 +57,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
       for (const scalar of config.schema.kindMap.list.ScalarCustom) {
         code(typeTitle2(`custom scalar type`)(scalar))
         code()
-        code(`export type ${scalar.name} = ${identifiers.$$Utilities}.Schema.Scalar.ScalarCodecless<'${scalar.name}'>`)
+        code(`export type ${scalar.name} = ${$.$$Utilities}.Schema.Scalar.ScalarCodecless<'${scalar.name}'>`)
         // code(`import type { String as ${scalar.name} } from '${config.paths.imports.grafflePackage.scalars}'`)
         // code()
         // code(`export { String as ${scalar.name} } from '${config.paths.imports.grafflePackage.scalars}'`)
@@ -73,7 +73,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
 
     const runtimeMap = config.options.customScalars
       ? config.schema.kindMap.list.ScalarCustom.map(_ => {
-        return [_.name, _.name]
+        return [_.name, `${$.CustomScalars}.${_.name}`]
       })
       : {}
 
@@ -94,8 +94,8 @@ export const ModuleGeneratorScalar = createModuleGenerator(
       // dprint-ignore
       ? `$$Utilities.Schema.Scalar.Registry<
           ${Code.termObject(buildtimeMap)},
-          ${Code.tsUnionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${identifiers.$$Utilities}.Schema.Scalar.GetEncoded<${_.name}_>`))},
-          ${Code.tsUnionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${identifiers.$$Utilities}.Schema.Scalar.GetDecoded<${_.name}_>`))},
+          ${Code.tsUnionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Schema.Scalar.GetEncoded<${_.name}_>`))},
+          ${Code.tsUnionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Schema.Scalar.GetDecoded<${_.name}_>`))},
         >`
       : `$$Utilities.Schema.Scalar.Registry.Empty`
 

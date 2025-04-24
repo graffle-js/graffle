@@ -1,4 +1,4 @@
-export const identifiers = {
+export const $ = {
   $$Schema: `$$Schema`,
   $$Scalar: `$$Scalar`,
   $$SelectionSets: `$$SelectionSets`,

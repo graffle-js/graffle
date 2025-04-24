@@ -2,7 +2,7 @@
 import { Code } from '../../lib/Code.js'
 import { entries, pick, values } from '../../lib/prelude.js'
 import { Tex } from '../../lib/tex/_namespace.js'
-import { identifiers } from '../helpers/identifiers.js'
+import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { renderName } from '../helpers/render.js'
 import { ModuleGeneratorSelectionSets } from './SelectionSets.js'
@@ -15,7 +15,7 @@ export const ModuleGeneratorMethodsSelect = createModuleGenerator(
 
     code(importModuleGenerator(config, ModuleGeneratorSelectionSets))
     code(
-      `import type * as ${identifiers.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'`,
+      `import type * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'`,
     )
     code()
     code(Tex.title1(`Select Methods Interface`))
@@ -36,9 +36,7 @@ export const ModuleGeneratorMethodsSelect = createModuleGenerator(
         code(Code.tsInterface({
           name: type.name,
           block: `
-            <$SelectionSet>(selectionSet: ${identifiers.$$Utilities}.Exact<$SelectionSet, $$SelectionSets.${
-            renderName(type)
-          }>):
+            <$SelectionSet>(selectionSet: ${$.$$Utilities}.Exact<$SelectionSet, $$SelectionSets.${renderName(type)}>):
               $SelectionSet
           `,
         }))
