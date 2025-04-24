@@ -12,6 +12,13 @@ export const ModuleGeneratorScalar = createModuleGenerator(
     const isNeedCustomScalarDefaults = Grafaid.Schema.KindMap.hasCustomScalars(config.schema.kindMap)
       && !config.options.customScalars
 
+    // TODO: to get this information we would need to parse the exports of the module with tsc.
+
+    // const syncCheckResult = {
+    //   inSchemaButMissingImplementation:
+    //   inImplementationButMissingInSchema:
+    // }
+
     // dprint-ignore
     code`import type * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'`
 

@@ -19,6 +19,7 @@ import * as $$SelectionSets from './selection-sets.js'
 //
 //
 //
+
 import { createSelect } from '../../../../../../entrypoints/client.js'
 export const Select = createSelect($$Data.Name)
 

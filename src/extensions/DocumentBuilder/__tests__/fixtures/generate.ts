@@ -5,6 +5,7 @@ const generate = async (
   input: {
     name: keyof typeof TestSchemas
     input?: Generator.Config.BuilderInput
+    scalarsFile?: boolean
   },
 ) => {
   const schema = TestSchemas[input.name]
@@ -21,6 +22,7 @@ const generate = async (
     advanced: {
       schemaInterfaceExtendsEnabled: true,
     },
+    scalars: input.scalarsFile ? `./${input.name}.scalars.ts` : undefined,
     libraryPaths: {
       client: `../../../../entrypoints/client.ts`,
       schema: `../../../../entrypoints/schema.ts`,
@@ -38,4 +40,4 @@ const generate = async (
 
 await generate({ name: `queryOnly` })
 await generate({ name: `mutationOnly` })
-await generate({ name: `possible` })
+await generate({ name: `possible`, scalarsFile: true })
