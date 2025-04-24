@@ -11,10 +11,10 @@ export const ModuleGeneratorMethodsDocument = createModuleGenerator(
   ({ config, code }) => {
     code(importModuleGenerator(config, ModuleGeneratorSelectionSets, true))
     code(importModuleGenerator(config, ModuleGeneratorSchema, true))
-    code(`
+    code`
       import type * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
-    `)
-    code()
+    `
+    code``
 
     const contextTsExpectError = config.code.schemaInterfaceExtendsEnabled
       ? ``
@@ -47,11 +47,11 @@ export const ModuleGeneratorMethodsDocument = createModuleGenerator(
     const hktTsExpectError = config.code.schemaInterfaceExtendsEnabled
       ? `// @ts-expect-error parameter is Untyped.`
       : ``
-    code(`
+    code`
       export interface BuilderMethodsDocumentFn extends ${$.$$Utilities}.TypeFunction {
         ${hktTsExpectError}
         return: Document<this['params']>
       }
-    `)
+    `
   },
 )

@@ -17,22 +17,24 @@ export const ModuleGeneratorSelect = createModuleGenerator(
       mutation: `MUTATION`,
       subscription: `SUBSCRIPTION`,
     } as const
-    code(`
-      ${importModuleGenerator(config, ModuleGeneratorData)}
-      ${importModuleGenerator(config, ModuleGeneratorSchema)}
-      ${importModuleGenerator(config, ModuleGeneratorSelectionSets)}
+    code(importModuleGenerator(config, ModuleGeneratorData))
+    code(importModuleGenerator(config, ModuleGeneratorSchema))
+    code(importModuleGenerator(config, ModuleGeneratorSelectionSets))
+    code`
       import type { OperationTypeNode } from 'graphql'
       import type * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
-    `)
-    code()
-    code(Tex.title1(`Runtime`))
-    code(`import { createSelect } from '${config.paths.imports.grafflePackage.client}'`)
-    code(`export const Select = createSelect(${$.$$Data}.Name)`)
-    code()
-    code(Tex.title1(`Buildtime`))
-    code()
-    code(`export namespace Select {`)
-    code(Tex.title2(`Root`))
+      
+      ${Tex.title1(`Runtime`)}
+
+      import { createSelect } from '${config.paths.imports.grafflePackage.client}'
+      export const Select = createSelect(${$.$$Data}.Name)
+      
+      ${Tex.title1(`Buildtime`)}
+
+      export namespace Select {
+
+      ${Tex.title2(`Root`)}
+    `
     code(
       ...entries(config.schema.kindMap.index.Root).map(([operationType, type]) => {
         if (!type) return null
@@ -62,6 +64,6 @@ export const ModuleGeneratorSelect = createModuleGenerator(
       }> = ${$.$$Utilities}.DocumentBuilderKit.InferResult.Interface<$SelectionSet, ${iSchema}, ${iSchema}['allTypes']['${type.name}']>`
     }))
 
-    code(`}`)
+    code`}`
   },
 )

@@ -24,40 +24,40 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
     const kindMap: Grafaid.Schema.KindMap['list'] = getKindMap(config)
     const kinds = entries(kindMap)
 
-    code(`
-      ${importModuleGenerator(config, ModuleGeneratorScalar)}
+    code(importModuleGenerator(config, ModuleGeneratorScalar))
+    code`
       import type * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
-    `)
+    `
 
     const referenceAssignments: ReferenceAssignments = []
 
     for (const [kindName, nodes] of kinds) {
       code(Tex.title1(kindName))
-      code()
+      code``
       if (nodes.length === 0) {
-        code(`// None of your ${kindName}s have custom scalars.`)
+        code`// None of your ${kindName}s have custom scalars.`
       }
       for (const type of nodes) {
         const codeGenerator = kindRenders[kindName] as any
         code(codeGenerator({ config, type: type as any, referenceAssignments }))
-        code()
+        code``
       }
-      code()
+      code``
     }
 
     code(Tex.title1(`Reference Assignments`, `(avoids circular assignment issues)`))
-    code()
+    code``
     if (referenceAssignments.length === 0) {
-      code(`// None of your types have references to other non-scalar/enum types.`)
+      code`// None of your types have references to other non-scalar/enum types.`
     }
     for (const referenceAssignment of referenceAssignments) {
       code(referenceAssignment)
     }
-    code()
+    code``
 
     code(Tex.title1(`Index`))
-    code()
-    code(`const $schemaDrivenDataMap: ${$.$$Utilities}.SchemaDrivenDataMap =`)
+    code``
+    code`const $schemaDrivenDataMap: ${$.$$Utilities}.SchemaDrivenDataMap =`
     code(Code.termObject({
       operations: kindMap.Root.map(type => {
         const operationType = rootsWithOpType.find(({ objectType }) => objectType.name === type.name)?.operationType
@@ -76,8 +76,8 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
         ].join(`,\n`),
       }),
     }))
-    code()
-    code(`export { $schemaDrivenDataMap as schemaDrivenDataMap }`)
+    code``
+    code`export { $schemaDrivenDataMap as schemaDrivenDataMap }`
   },
 )
 

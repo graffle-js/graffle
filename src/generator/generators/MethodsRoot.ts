@@ -1,4 +1,5 @@
 // todo remove use of Utils.Aug when schema errors not in use
+import { config } from 'process'
 import { Grafaid } from '../../lib/grafaid/_namespace.js'
 import { createFromObjectTypeAndMapOrThrow } from '../../lib/grafaid/schema/RootDetails.js'
 import { capitalizeFirstLetter } from '../../lib/prelude.js'
@@ -14,16 +15,14 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
   ({ config, code }) => {
     code(importModuleGenerator(config, ModuleGeneratorSelectionSets, true))
     code(importModuleGenerator(config, ModuleGeneratorSchema, true))
-    code(
-      `import type * as ${$.$$Utilities}  from '${config.paths.imports.grafflePackage.utilitiesForGenerated}';`,
-    )
-    code()
-    code()
+    code`import type * as ${$.$$Utilities}  from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'`
+    code``
+    code``
     config.schema.kindMap.list.Root.forEach(node => {
       code(renderRootType({ config, node }))
-      code()
+      code``
     })
-    code(`
+    code`
       export interface BuilderMethodsRoot<$Context extends ${$.$$Utilities}.Context> {
         ${
       config.schema.kindMap.root.list.map(node => {
@@ -31,14 +30,13 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
       }).join(`\n`)
     }
       }
-    `)
-    code()
-    code(`
+    `
+    code`
       export interface BuilderMethodsRootFn extends ${$.$$Utilities}.TypeFunction {
         // @ts-expect-error parameter is Untyped.
         return: BuilderMethodsRoot<this['params']>
       }
-    `)
+    `
   },
 )
 
@@ -47,7 +45,7 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
   const { operationType } = createFromObjectTypeAndMapOrThrow(node, config.schema.kindMap.root)
 
   // dprint-ignore
-  code(`
+  code`
     export interface ${node.name}Methods<$Context extends ${$.$$Utilities}.Context> {
       $batch:
         ${$.$$Utilities}.GraffleKit.Context.Configuration.Check.Preflight<
@@ -75,7 +73,8 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
             >
         >
       ${fieldMethods}
-    }`)
+    }
+  `
 })
 
 const renderFieldMethods = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(({ node, config, code }) => {
@@ -90,7 +89,7 @@ const renderFieldMethods = createCodeGenerator<{ node: Grafaid.Schema.ObjectType
 
     const { operationType } = createFromObjectTypeAndMapOrThrow(node, config.schema.kindMap.root)
     // dprint-ignore
-    code(`
+    code`
       ${field.name}:
         ${$.$$Utilities}.GraffleKit.Context.Configuration.Check.Preflight<
           $Context,
@@ -104,6 +103,6 @@ const renderFieldMethods = createCodeGenerator<{ node: Grafaid.Schema.ObjectType
                 >
             >
         >
-    `)
+    `
   }
 })

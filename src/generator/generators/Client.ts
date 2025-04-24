@@ -10,13 +10,11 @@ export const ModuleGeneratorClient = createModuleGenerator(
     code(importModuleGenerator(config, ModuleGeneratorSchemaDrivenDataMap))
     code(importModuleGenerator(config, ModuleGeneratorData))
     code(importModuleGenerator(config, ModuleGeneratorScalar))
-    code(
-      `import * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'`,
-      `import { TransportHttp } from '${config.paths.imports.grafflePackage.extensionTransportHttp}'`,
-      `import { DocumentBuilder } from '${config.paths.imports.grafflePackage.extensionDocumentBuilder}'`,
-    )
-    code()
-    code(`
+    code`
+      import * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
+      import { TransportHttp } from '${config.paths.imports.grafflePackage.extensionTransportHttp}'
+      import { DocumentBuilder } from '${config.paths.imports.grafflePackage.extensionDocumentBuilder}'
+
       const context = ${$.$$Utilities}.pipe(
         ${$.$$Utilities}.contextEmpty,
         ctx => ${$.$$Utilities}.Extensions.addAndApplyMany(ctx, [TransportHttp, DocumentBuilder]),
@@ -31,6 +29,6 @@ export const ModuleGeneratorClient = createModuleGenerator(
       )
 
       export const create = ${$.$$Utilities}.createConstructorWithContext(context)
-    `)
+    `
   },
 )

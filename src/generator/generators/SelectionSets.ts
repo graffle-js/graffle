@@ -37,12 +37,10 @@ export const ModuleGeneratorSelectionSets = createModuleGenerator(
     const kindEntries = entries(kindMap).filter(_ => _[1].length > 0)
     const kinds = kindEntries.map(_ => _[1])
 
-    code(
-      `import type * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'`,
-    )
-    code()
+    code`import type * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'`
+    code``
     code(Tex.title1(`Document`))
-    code()
+    code``
     code(Code.tsInterface({
       name: `$Document`,
       parameters: $ScalarsTypeParameter,
@@ -52,18 +50,18 @@ export const ModuleGeneratorSelectionSets = createModuleGenerator(
         ${config.schema.kindMap.index.Root.mutation ? `mutation?: Record<string, Mutation<${i._$Scalars}>>` : ``}
       `,
     }))
-    code()
+    code``
 
     kindEntries.forEach(([name, kind]) => {
       code(Tex.title1(name))
-      code()
+      code``
       kind.forEach(type => {
         code(kindRenderMap[name]({ config, type: type as never }))
-        code()
+        code``
       })
     })
 
-    code(`
+    code`
       /**
        * [1] These definitions serve to allow field selection interfaces to extend their respective object type without
        *     name clashing between the field name and the object name.
@@ -71,7 +69,7 @@ export const ModuleGeneratorSelectionSets = createModuleGenerator(
        *     For example imagine \`Query.Foo\` field with type also called \`Foo\`. Our generated interfaces for each field
        *     would end up with an error of \`export interface Foo extends Foo ...\`
        */
-    `)
+    `
     const namedTypes = kinds.flat().map(type => {
       if (Grafaid.Schema.isEnumType(type)) {
         return Code.tsAlias$({
@@ -86,12 +84,12 @@ export const ModuleGeneratorSelectionSets = createModuleGenerator(
       })
     }).join(`\n`)
 
-    code(`
+    code`
       export namespace $NamedTypes {
         ${namedTypes}
       }
-    `)
-    code()
+    `
+    code``
   },
 )
 
@@ -114,7 +112,7 @@ const Union = createCodeGenerator<{ type: Grafaid.Schema.UnionType }>(
     }))
 
     code(H.fragmentInlineInterface(type))
-    code()
+    code``
   },
 )
 
@@ -152,9 +150,9 @@ const Interface = createCodeGenerator<{ type: Grafaid.Schema.InterfaceType }>(
         renderName(type),
       )
     ).join(`\n`)
-    code()
+    code``
     code(Tex.title2(type.name))
-    code()
+    code``
     code(Code.tsInterface({
       tsDoc: getTsDocContents(config, type),
       name: type.name,
@@ -167,15 +165,15 @@ const Interface = createCodeGenerator<{ type: Grafaid.Schema.InterfaceType }>(
         ${H.__typenameField(`interface`)}
       `,
     }))
-    code()
+    code``
     code(H.fragmentInlineInterface(type))
-    code()
-    code(`
+    code``
+    code`
       export namespace ${renderName(type)} {
         ${directFields.map((field) => renderOutputField({ config, field })).join(`\n`)}
       }
-    `)
-    code()
+    `
+    code``
   },
 )
 
@@ -184,9 +182,9 @@ const OutputObject = createCodeGenerator<{ type: Grafaid.Schema.ObjectType }>(
     const fields = Object.values(type.getFields())
 
     code(Tex.title2(type.name))
-    code()
+    code``
     code(Tex.title3(`Entrypoint Interface`))
-    code()
+    code``
 
     const fieldKeys = fields.map(field => {
       const typeKind = Grafaid.getTypeAndKind(Grafaid.Schema.getNamedType(field.type))
@@ -218,17 +216,17 @@ const OutputObject = createCodeGenerator<{ type: Grafaid.Schema.ObjectType }>(
         ${H.__typenameField(`object`)}
       `,
     }))
-    code()
+    code``
     code(H.fragmentInlineInterface(type))
-    code()
+    code``
     code(Tex.title3(`Fields`))
-    code()
-    code(`
+    code``
+    code`
       export namespace ${renderName(type)} {
         ${fields.map((field) => renderOutputField({ config, field })).join(`\n// ${borderThin}\n\n`)}
       }
-    `)
-    code()
+    `
+    code``
   },
 )
 
@@ -264,7 +262,7 @@ const renderOutputField = createCodeGenerator<{ field: Grafaid.Schema.Field<any,
       parameters: $ScalarsTypeParameter,
       type: Code.tsUnionItems([indicator, selectionSetRef]),
     }))
-    code()
+    code``
 
     const propertyArguments = renderFieldPropertyArguments({
       config,
@@ -285,7 +283,7 @@ const renderOutputField = createCodeGenerator<{ field: Grafaid.Schema.Field<any,
       extends: [`${$.$$Utilities}.DocumentBuilderKit.Select.Bases.Base`, objectLikeTypeReference],
       block: propertyArguments,
     }))
-    code()
+    code``
 
     if (argsAnalysis.hasAny) {
       code(Code.tsInterface({
@@ -293,14 +291,14 @@ const renderOutputField = createCodeGenerator<{ field: Grafaid.Schema.Field<any,
         parameters: $ScalarsTypeParameter,
         block: field.args.map(arg => getInputFieldLike(config, arg)),
       }))
-      code()
+      code``
     }
 
-    code(`// --- expanded ---`)
-    code()
+    code`// --- expanded ---`
+    code``
     code(H.tsTypeExpanded(field, Code.tsUnionItems([indicator, selectionSetRef])))
-    code()
-    code()
+    code``
+    code``
   },
 )
 

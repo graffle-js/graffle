@@ -17,31 +17,31 @@ export const ModuleGeneratorSchema = createModuleGenerator(
     const kinds = entries(kindMap)
 
     // todo methods root is unused
-    code(`
+    code`
       ${importModuleGenerator(config, ModuleGeneratorData)}
       ${importModuleGenerator(config, ModuleGeneratorScalar)}
       import type { Schema as $ } from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
       import type * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
-    `)
-    code()
+    `
+    code``
 
-    code(`export namespace ${$.Schema} {`)
+    code`export namespace ${$.Schema} {`
 
     for (const [kindName, kind] of kinds) {
       const renderer = kindRenderers[kindName] as CodeGenerator<{ type: Grafaid.Schema.Types }>
       code(Tex.title1(kindName))
-      code()
+      code``
       for (const type of kind) {
         code(Tex.title2(type.name))
-        code()
+        code``
         code(renderer({ config, type }))
-        code()
+        code``
       }
     }
 
     code(Tex.title1(`Named Types Index`))
-    code()
-    code(`
+    code``
+    code`
       /**
        * [1] These definitions serve to allow field selection interfaces to extend their respective object type without
        *     name clashing between the field name and the object name.
@@ -49,8 +49,8 @@ export const ModuleGeneratorSchema = createModuleGenerator(
        *     For example imagine \`Query.Foo\` field with type also called \`Foo\`. Our generated interfaces for each field
        *     would end up with an error of \`export interface Foo extends Foo ...\`
        */
-    `)
-    code()
+    `
+    code``
     code(
       Code.tsNamespace(
         `$$NamedTypes`,
@@ -62,11 +62,9 @@ export const ModuleGeneratorSchema = createModuleGenerator(
           }).join(`\n`),
       ),
     )
-    code()
-
-    code(`}`)
-    code()
-
+    code``
+    code`}`
+    code``
     code(SchemaGenerator({ config }))
   },
 )
@@ -94,12 +92,12 @@ const OutputObject = createCodeGenerator<{ type: Grafaid.Schema.ObjectType }>(({
       fields: interfaceFields,
     },
   }))
-  code()
+  code``
 
   // Fields of the Type
 
   code(OutputFields({ config, type }))
-  code()
+  code``
 })
 
 const Enum = createCodeGenerator<{ type: Grafaid.Schema.EnumType }>(({ config, code, type }) => {
@@ -117,7 +115,7 @@ const Enum = createCodeGenerator<{ type: Grafaid.Schema.EnumType }>(({ config, c
       },
     }),
   )
-  code()
+  code``
 })
 const InputObject = createCodeGenerator<{ type: Grafaid.Schema.InputObjectType }>(({ config, code, type }) => {
   code(
@@ -137,7 +135,7 @@ const InputObject = createCodeGenerator<{ type: Grafaid.Schema.InputObjectType }
       },
     }),
   )
-  code()
+  code``
   code(Code.esmExport(Code.tsNamespace(
     type.name,
     values(type.getFields())
@@ -157,17 +155,17 @@ const InputObject = createCodeGenerator<{ type: Grafaid.Schema.InputObjectType }
       })
       .join(`\n\n`),
   )))
-  code()
+  code``
 })
 
 const ScalarStandard = createCodeGenerator<{ type: Grafaid.Schema.ScalarType }>(({ code, type }) => {
   code(Code.esmExport(Code.tsType(type.name, `$.StandardTypes.${type.name}`)))
-  code()
+  code``
 })
 
 const ScalarCustom = createCodeGenerator<{ type: Grafaid.Schema.ScalarType }>(({ code, type }) => {
   code(Code.esmExport(Code.tsType(type.name, `$$Scalar.${type.name}`)))
-  code()
+  code``
 })
 
 const Union = createCodeGenerator<{ type: Grafaid.Schema.UnionType }>(({ config, code, type }) => {
@@ -185,7 +183,7 @@ const Union = createCodeGenerator<{ type: Grafaid.Schema.UnionType }>(({ config,
       membersIndex: Object.fromEntries(memberNames.map(n => [n, renderName(n)])),
     },
   }))
-  code()
+  code``
 })
 
 const Interface = createCodeGenerator<{ type: Grafaid.Schema.InterfaceType }>(({ config, code, type }) => {
@@ -205,10 +203,10 @@ const Interface = createCodeGenerator<{ type: Grafaid.Schema.InterfaceType }>(({
       implementorsIndex: Object.fromEntries(implementorNames.map(n => [n, renderName(n)])),
     },
   }))
-  code()
+  code``
 
   code(OutputFields({ config, type }))
-  code()
+  code``
 })
 
 const OutputFields = createCodeGenerator<{ type: Grafaid.Schema.ObjectType | Grafaid.Schema.InterfaceType }>(
@@ -342,7 +340,7 @@ export const SchemaGenerator = createCodeGenerator(
     // ---
 
     code(Tex.title1(`Schema`))
-    code()
+    code``
     code(
       Code.tsInterface({
         name: $.Schema,

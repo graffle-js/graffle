@@ -15,7 +15,7 @@ export const ModuleGeneratorGlobal = createModuleGenerator(
     code(importModuleGenerator(config, ModuleGeneratorMethodsDocument))
     code(importModuleGenerator(config, ModuleGeneratorMethodsRoot))
     code(importModuleGenerator(config, ModuleGeneratorSchema))
-    code()
+    code``
 
     const defaultSchemaUrlTsDoc = config.options.defaultSchemaUrl
       ? config.options.defaultSchemaUrl.href
@@ -37,7 +37,7 @@ export const ModuleGeneratorGlobal = createModuleGenerator(
       },
     })
 
-    code(`
+    code`
       declare global {
         export namespace GraffleGlobal {
           export interface Clients {
@@ -45,6 +45,6 @@ export const ModuleGeneratorGlobal = createModuleGenerator(
           }
         }
       }
-    `)
+    `
   },
 )

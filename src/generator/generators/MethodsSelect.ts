@@ -14,12 +14,10 @@ export const ModuleGeneratorMethodsSelect = createModuleGenerator(
     const kinds = entries(kindMap)
 
     code(importModuleGenerator(config, ModuleGeneratorSelectionSets))
-    code(
-      `import type * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'`,
-    )
-    code()
+    code`import type * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'`
+    code``
     code(Tex.title1(`Select Methods Interface`))
-    code()
+    code``
     code(Code.tsInterface({
       name: `$MethodsSelect`,
       block: values(kindMap).flatMap(type => {
@@ -28,10 +26,10 @@ export const ModuleGeneratorMethodsSelect = createModuleGenerator(
         })
       }),
     }))
-    code()
+    code``
     for (const [kindName, kind] of kinds) {
       code(Tex.title1(kindName))
-      code()
+      code``
       for (const type of kind) {
         code(Code.tsInterface({
           name: type.name,
@@ -40,7 +38,7 @@ export const ModuleGeneratorMethodsSelect = createModuleGenerator(
               $SelectionSet
           `,
         }))
-        code()
+        code``
       }
     }
   },
