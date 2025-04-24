@@ -1,5 +1,5 @@
 import { Code } from '../../lib/Code.js'
-import { identifiers } from '../helpers/identifiers.js'
+import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { ModuleGeneratorData } from './Data.js'
 import { ModuleGeneratorMethodsDocument } from './MethodsDocument.js'
@@ -15,7 +15,7 @@ export const ModuleGeneratorGlobal = createModuleGenerator(
     code(importModuleGenerator(config, ModuleGeneratorMethodsDocument))
     code(importModuleGenerator(config, ModuleGeneratorMethodsRoot))
     code(importModuleGenerator(config, ModuleGeneratorSchema))
-    code()
+    code``
 
     const defaultSchemaUrlTsDoc = config.options.defaultSchemaUrl
       ? config.options.defaultSchemaUrl.href
@@ -23,12 +23,12 @@ export const ModuleGeneratorGlobal = createModuleGenerator(
 
     const Clients = Code.termObjectFields({
       [config.name]: {
-        name: `${identifiers.$$Data}.Name`,
-        schema: `${identifiers.$$Schema}.${identifiers.Schema}`,
+        name: `${$.$$Data}.Name`,
+        schema: `${$.$$Schema}.${$.Schema}`,
         interfaces: {
-          MethodsSelect: `${identifiers.$$MethodsSelect}.$MethodsSelect`,
-          Document: `${identifiers.$$MethodsDocument}.BuilderMethodsDocumentFn`,
-          Root: `${identifiers.$$MethodsRoot}.BuilderMethodsRootFn`,
+          MethodsSelect: `${$.$$MethodsSelect}.$MethodsSelect`,
+          Document: `${$.$$MethodsDocument}.BuilderMethodsDocumentFn`,
+          Root: `${$.$$MethodsRoot}.BuilderMethodsRootFn`,
         },
         defaultSchemaUrl: {
           $TS_DOC: defaultSchemaUrlTsDoc,
@@ -37,7 +37,7 @@ export const ModuleGeneratorGlobal = createModuleGenerator(
       },
     })
 
-    code(`
+    code`
       declare global {
         export namespace GraffleGlobal {
           export interface Clients {
@@ -45,6 +45,6 @@ export const ModuleGeneratorGlobal = createModuleGenerator(
           }
         }
       }
-    `)
+    `
   },
 )

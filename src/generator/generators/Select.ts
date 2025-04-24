@@ -1,7 +1,7 @@
 // todo jsdoc
 import { entries } from '../../lib/prelude.js'
 import { Tex } from '../../lib/tex/_namespace.js'
-import { identifiers } from '../helpers/identifiers.js'
+import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { renderName } from '../helpers/render.js'
 import { ModuleGeneratorData } from './Data.js'
@@ -11,34 +11,36 @@ import { ModuleGeneratorSelectionSets } from './SelectionSets.js'
 export const ModuleGeneratorSelect = createModuleGenerator(
   `select`,
   ({ config, code }) => {
-    const iSchema = `${identifiers.$$Schema}.Schema`
+    const iSchema = `${$.$$Schema}.Schema`
     const enumMemberName = {
       query: `QUERY `,
       mutation: `MUTATION`,
       subscription: `SUBSCRIPTION`,
     } as const
-    code(`
-      ${importModuleGenerator(config, ModuleGeneratorData)}
-      ${importModuleGenerator(config, ModuleGeneratorSchema)}
-      ${importModuleGenerator(config, ModuleGeneratorSelectionSets)}
+    code(importModuleGenerator(config, ModuleGeneratorData))
+    code(importModuleGenerator(config, ModuleGeneratorSchema))
+    code(importModuleGenerator(config, ModuleGeneratorSelectionSets))
+    code`
       import type { OperationTypeNode } from 'graphql'
-      import type * as ${identifiers.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
-    `)
-    code()
-    code(Tex.title1(`Runtime`))
-    code(`import { createSelect } from '${config.paths.imports.grafflePackage.client}'`)
-    code(`export const Select = createSelect(${identifiers.$$Data}.Name)`)
-    code()
-    code(Tex.title1(`Buildtime`))
-    code()
-    code(`export namespace Select {`)
-    code(Tex.title2(`Root`))
+      import type * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
+      
+      ${Tex.title1(`Runtime`)}
+
+      import { createSelect } from '${config.paths.imports.grafflePackage.client}'
+      export const Select = createSelect(${$.$$Data}.Name)
+      
+      ${Tex.title1(`Buildtime`)}
+
+      export namespace Select {
+
+      ${Tex.title2(`Root`)}
+    `
     code(
       ...entries(config.schema.kindMap.index.Root).map(([operationType, type]) => {
         if (!type) return null
         return `export type ${type.name}<$SelectionSet extends $$SelectionSets.${
           renderName(type)
-        }> = ${identifiers.$$Utilities}.DocumentBuilderKit.InferResult.Operation<$SelectionSet, ${iSchema}, OperationTypeNode.${
+        }> = ${$.$$Utilities}.DocumentBuilderKit.InferResult.Operation<$SelectionSet, ${iSchema}, OperationTypeNode.${
           enumMemberName[operationType]
         }>`
       }),
@@ -47,21 +49,21 @@ export const ModuleGeneratorSelect = createModuleGenerator(
     code(...config.schema.kindMap.list.OutputObject.map((type) => {
       return `export type ${type.name}<$SelectionSet extends $$SelectionSets.${
         renderName(type)
-      }> = ${identifiers.$$Utilities}.DocumentBuilderKit.InferResult.OutputObjectLike<$SelectionSet, ${iSchema}, ${iSchema}['allTypes']['${type.name}']>`
+      }> = ${$.$$Utilities}.DocumentBuilderKit.InferResult.OutputObjectLike<$SelectionSet, ${iSchema}, ${iSchema}['allTypes']['${type.name}']>`
     }))
     code(Tex.title2(`Union`))
     code(...config.schema.kindMap.list.Union.map((type) => {
       return `export type ${type.name}<$SelectionSet extends $$SelectionSets.${
         renderName(type)
-      }> = ${identifiers.$$Utilities}.DocumentBuilderKit.InferResult.Union<$SelectionSet, ${iSchema}, ${iSchema}['allTypes']['${type.name}']>`
+      }> = ${$.$$Utilities}.DocumentBuilderKit.InferResult.Union<$SelectionSet, ${iSchema}, ${iSchema}['allTypes']['${type.name}']>`
     }))
     code(Tex.title2(`Interface`))
     code(...config.schema.kindMap.list.Interface.map((type) => {
       return `export type ${type.name}<$SelectionSet extends $$SelectionSets.${
         renderName(type)
-      }> = ${identifiers.$$Utilities}.DocumentBuilderKit.InferResult.Interface<$SelectionSet, ${iSchema}, ${iSchema}['allTypes']['${type.name}']>`
+      }> = ${$.$$Utilities}.DocumentBuilderKit.InferResult.Interface<$SelectionSet, ${iSchema}, ${iSchema}['allTypes']['${type.name}']>`
     }))
 
-    code(`}`)
+    code`}`
   },
 )

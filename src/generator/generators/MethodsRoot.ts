@@ -2,7 +2,7 @@
 import { Grafaid } from '../../lib/grafaid/_namespace.js'
 import { createFromObjectTypeAndMapOrThrow } from '../../lib/grafaid/schema/RootDetails.js'
 import { capitalizeFirstLetter } from '../../lib/prelude.js'
-import { identifiers } from '../helpers/identifiers.js'
+import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
 import { renderDocumentation, renderName } from '../helpers/render.js'
@@ -14,31 +14,27 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
   ({ config, code }) => {
     code(importModuleGenerator(config, ModuleGeneratorSelectionSets, true))
     code(importModuleGenerator(config, ModuleGeneratorSchema, true))
-    code(
-      `import type * as ${identifiers.$$Utilities}  from '${config.paths.imports.grafflePackage.utilitiesForGenerated}';`,
-    )
-    code()
-    code()
+    code`import type * as ${$.$$Utilities}  from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'`
+    code``
+    code``
     config.schema.kindMap.list.Root.forEach(node => {
       code(renderRootType({ config, node }))
-      code()
+      code``
     })
-    code(`
-      export interface BuilderMethodsRoot<$Context extends ${identifiers.$$Utilities}.Context> {
+    code`
+      export interface BuilderMethodsRoot<$Context extends ${$.$$Utilities}.Context> {
         ${
       config.schema.kindMap.root.list.map(node => {
         return `${node.operationType}: ${node.name.canonical}Methods<$Context>`
       }).join(`\n`)
     }
       }
-    `)
-    code()
-    code(`
-      export interface BuilderMethodsRootFn extends ${identifiers.$$Utilities}.TypeFunction {
+
+      export interface BuilderMethodsRootFn extends ${$.$$Utilities}.TypeFunction {
         // @ts-expect-error parameter is Untyped.
         return: BuilderMethodsRoot<this['params']>
       }
-    `)
+    `
   },
 )
 
@@ -47,27 +43,27 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
   const { operationType } = createFromObjectTypeAndMapOrThrow(node, config.schema.kindMap.root)
 
   // dprint-ignore
-  code(`
-    export interface ${node.name}Methods<$Context extends ${identifiers.$$Utilities}.Context> {
+  code`
+    export interface ${node.name}Methods<$Context extends ${$.$$Utilities}.Context> {
       $batch:
-        ${identifiers.$$Utilities}.GraffleKit.Context.Configuration.Check.Preflight<
+        ${$.$$Utilities}.GraffleKit.Context.Configuration.Check.Preflight<
           $Context,
-          <$SelectionSet>(selectionSet: ${identifiers.$$Utilities}.Exact<$SelectionSet, ${identifiers.$$SelectionSets}.${node.name}<$Context['scalars']>>) =>
+          <$SelectionSet>(selectionSet: ${$.$$Utilities}.Exact<$SelectionSet, ${$.$$SelectionSets}.${node.name}<$Context['scalars']>>) =>
             Promise<
               & (null | {})
-              & ${identifiers.$$Utilities}.HandleOutput<
+              & ${$.$$Utilities}.HandleOutput<
                   $Context,
-                  ${identifiers.$$Utilities}.DocumentBuilderKit.InferResult.Operation${capitalizeFirstLetter(operationType)}<${identifiers.$$Utilities}.AssertExtendsObject<$SelectionSet>, ${identifiers.$$Schema}.${identifiers.Schema}<$Context['scalars']>>
+                  ${$.$$Utilities}.DocumentBuilderKit.InferResult.Operation${capitalizeFirstLetter(operationType)}<${$.$$Utilities}.AssertExtendsObject<$SelectionSet>, ${$.$$Schema}.${$.Schema}<$Context['scalars']>>
                 >
             >
         >
       __typename:
-        ${identifiers.$$Utilities}.GraffleKit.Context.Configuration.Check.Preflight<
+        ${$.$$Utilities}.GraffleKit.Context.Configuration.Check.Preflight<
           $Context,
           () =>
             Promise<
               & (null | {})
-              & ${identifiers.$$Utilities}.HandleOutputDocumentBuilderRootField<
+              & ${$.$$Utilities}.HandleOutputDocumentBuilderRootField<
                   $Context,
                   { __typename: '${node.name}' },
                   '__typename'
@@ -75,7 +71,8 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
             >
         >
       ${fieldMethods}
-    }`)
+    }
+  `
 })
 
 const renderFieldMethods = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(({ node, config, code }) => {
@@ -90,20 +87,20 @@ const renderFieldMethods = createCodeGenerator<{ node: Grafaid.Schema.ObjectType
 
     const { operationType } = createFromObjectTypeAndMapOrThrow(node, config.schema.kindMap.root)
     // dprint-ignore
-    code(`
+    code`
       ${field.name}:
-        ${identifiers.$$Utilities}.GraffleKit.Context.Configuration.Check.Preflight<
+        ${$.$$Utilities}.GraffleKit.Context.Configuration.Check.Preflight<
           $Context,
-          <$SelectionSet>(selectionSet${isOptional ? `?` : ``}: ${identifiers.$$Utilities}.Exact<$SelectionSet, ${identifiers.$$SelectionSets}.${renderName(node.name)}.${renderName(field)}<$Context['scalars']>>) =>
+          <$SelectionSet>(selectionSet${isOptional ? `?` : ``}: ${$.$$Utilities}.Exact<$SelectionSet, ${$.$$SelectionSets}.${renderName(node.name)}.${renderName(field)}<$Context['scalars']>>) =>
             Promise<
               & (null | {})
-              & ${identifiers.$$Utilities}.HandleOutputDocumentBuilderRootField<
+              & ${$.$$Utilities}.HandleOutputDocumentBuilderRootField<
                   $Context,
-                  ${identifiers.$$Utilities}.DocumentBuilderKit.InferResult.Operation${capitalizeFirstLetter(operationType)}<{ ${field.name}: $SelectionSet}, ${identifiers.$$Schema}.${identifiers.Schema}<$Context['scalars']>>,
+                  ${$.$$Utilities}.DocumentBuilderKit.InferResult.Operation${capitalizeFirstLetter(operationType)}<{ ${field.name}: $SelectionSet}, ${$.$$Schema}.${$.Schema}<$Context['scalars']>>,
                   '${field.name}'
                 >
             >
         >
-    `)
+    `
   }
 })
