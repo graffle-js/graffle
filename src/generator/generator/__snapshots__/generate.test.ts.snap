@@ -6,6 +6,7 @@ exports[`custom scalars module results in client prefilling those custom scalars
 import * as CustomScalars from "../../scalars.js";
 
 export * from "../../scalars.js";
+import { Date } from "../../scalars.js";
 //
 //
 //
@@ -45,7 +46,7 @@ export * from "graffle/generator-helpers/standard-scalar-types";
 
 export const $registry = {
   map: {
-    Date: Date,
+    Date: CustomScalars.Date,
   },
 } as $Registry;
 
