@@ -1050,6 +1050,7 @@ snapshots:
       es-toolkit: 1.35.0
       graphql: 16.10.0
       is-plain-obj: 4.1.0
+      type-fest: 4.40.0
     optionalDependencies:
       '@opentelemetry/api': 1.9.0
 
