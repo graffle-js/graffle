@@ -4,73 +4,31 @@
   "version": "0.0.0-dripip",
   "packageManager": "pnpm@10.2.1",
   "type": "module",
-  "bin": {
-    "graffle": "./execute.sh"
-  },
+  "bin": "cli.sh",
   "exports": {
-    ".": {
-      "default": "./build/entrypoints/index.js"
-    },
-    "./graffle": {
-      "default": "./build/entrypoints/graffle.js"
-    },
-    "./generator": {
-      "default": "./build/entrypoints/generator.js"
-    },
-    "./extension": {
-      "default": "./build/entrypoints/extension.js"
-    },
-    "./extensions/upload": {
-      "default": "./build/entrypoints/extensions/upload/runtime.js"
-    },
-    "./extensions/throws": {
-      "default": "./build/entrypoints/extensions/throws/runtime.js"
-    },
-    "./extensions/opentelemetry": {
-      "default": "./build/entrypoints/extensions/opentelemetry/runtime.js"
-    },
-    "./extensions/introspection": {
-      "default": "./build/entrypoints/extensions/introspection/runtime.js"
-    },
-    "./extensions/schema-errors": {
-      "default": "./build/entrypoints/extensions/schema-errors/runtime.js"
-    },
-    "./extensions/schema-errors/generator": {
-      "default": "./build/entrypoints/extensions/schema-errors/gentime.js"
-    },
-    "./extensions/document-builder": {
-      "default": "./build/entrypoints/extensions/document-builder/runtime.js"
-    },
-    "./extensions/document-builder/kit": {
-      "default": "./build/entrypoints/extensions/document-builder/kit.js"
-    },
-    "./extensions/transport-memory": {
-      "default": "./build/entrypoints/extensions/transport-memory/runtime.js"
-    },
-    "./extensions/transport-http": {
-      "default": "./build/entrypoints/extensions/transport-http/runtime.js"
-    },
-    "./presets/bare": {
-      "default": "./build/entrypoints/presets/bare.js"
-    },
-    "./presets/basic": {
-      "default": "./build/entrypoints/presets/basic.js"
-    },
-    "./presets/minimal": {
-      "default": "./build/entrypoints/presets/minimal.js"
-    },
-    "./client": {
-      "default": "./build/entrypoints/client.js"
-    },
-    "./schema": {
-      "default": "./build/entrypoints/schema.js"
-    },
-    "./generator-helpers/standard-scalar-types": {
-      "default": "./build/entrypoints/generator-helpers/standardScalarTypes.js"
-    },
-    "./utilities-for-generated": {
-      "default": "./build/entrypoints/utilities-for-generated.js"
-    }
+    "./client": "./build/exports/client.js",
+    "./extension": "./build/exports/extension.js",
+    "./extension-exports": "./build/exports/extension_exports.js",
+    "./generator": "./build/exports/generator.js",
+    "./graffle": "./build/exports/graffle.js",
+    ".": "./build/exports/index.js",
+    "./kit": "./build/exports/kit.js",
+    "./schema": "./build/exports/schema.js",
+    "./utilities-for-generated": "./build/exports/utilities-for-generated.js",
+    "./generator-helpers/standard-scalar-types": "./build/exports/generator-helpers/standardScalarTypes.js",
+    "./presets/bare": "./build/exports/presets/bare.js",
+    "./presets/basic": "./build/exports/presets/basic.js",
+    "./presets/minimal": "./build/exports/presets/minimal.js",
+    "./extensions/document-builder/kit": "./build/exports/extensions/document-builder/kit.js",
+    "./extensions/document-builder/runtime": "./build/exports/extensions/document-builder/runtime.js",
+    "./extensions/opentelemetry/runtime": "./build/exports/extensions/opentelemetry/runtime.js",
+    "./extensions/introspection/runtime": "./build/exports/extensions/introspection/runtime.js",
+    "./extensions/throws/runtime": "./build/exports/extensions/throws/runtime.js",
+    "./extensions/schema-errors/gentime": "./build/exports/extensions/schema-errors/gentime.js",
+    "./extensions/schema-errors/runtime": "./build/exports/extensions/schema-errors/runtime.js",
+    "./extensions/transport-http/runtime": "./build/exports/extensions/transport-http/runtime.js",
+    "./extensions/transport-memory/runtime": "./build/exports/extensions/transport-memory/runtime.js",
+    "./extensions/upload/runtime": "./build/exports/extensions/upload/runtime.js"
   },
   "files": [
     "build",
@@ -105,7 +63,6 @@
     "gen:graffle": "pnpm test:e2e:github:gen:graffle && pnpm extension:schema-errors:test:generate-fixtures && pnpm extension:document-builder:test:generate-fixtures && pnpm website:gen:graffle",
     "examples:gen:graffle": "pnpm build && cd examples && pnpm i && pnpm gen:graffle",
     "examples:link-mode": "cd examples && pnpm add ..",
-    "examples:check:types": "cd examples && tsc --noEmit",
     "examples:test": "cd examples && pnpm test",
     "examples:gen:website": "tsx scripts/generate-examples-derivatives/generate.ts && pnpm fix:format",
     "examples:gen:outputs": "tsx scripts/generate-examples-derivatives/generate.ts --outputs",
@@ -113,7 +70,7 @@
     "website:gen:graffle": "pnpm build && cd website && pnpm i && pnpm gen:graffle",
     "fix:format": "pnpm build:docs && dprint fmt",
     "fix:lint": "eslint . --fix --ignore-pattern 'website' --ignore-pattern 'build'",
-    "check": "pnpm check:types && pnpm check:format && pnpm check:lint && pnpm check:publint && pnpm examples:check:types",
+    "check:examples:types": "cd examples && tsc --noEmit",
     "check:types": "tsc --noEmit",
     "check:format": "dprint check && pnpm build:docs && git diff --exit-code README.md",
     "check:lint": "eslint . --max-warnings 0 --ignore-pattern 'website' --ignore-pattern 'build'",
@@ -122,12 +79,10 @@
     "build:docs": "doctoc README.md --notitle && dprint fmt README.md",
     "dev": "pnpm build:watch:emit",
     "build:emit": "pnpm build --noCheck",
-    "build:watch": "pnpm build --watch",
-    "build:watch:emit": "pnpm build --watch --noCheck",
-    "build": "pnpm tsc --project tsconfig.build.json",
-    "prebuild": "pnpm clean",
+    "build:watch": "tsc --build tsconfig.build.json --watch",
+    "build:watch:emit": "pnpm build:watch --noCheck",
+    "build": "tsc --build tsconfig.build.json",
     "postbuild": "chmod +x ./build/generator/cli/generate.js",
-    "clean": "tsc --build --clean",
     "test:unit": "vitest --dir src",
     "test:integration": "vitest --dir tests/integration",
     "test:e2e": "vitest --dir tests/e2e --testTimeout 30000 --run",
@@ -138,7 +93,14 @@
     "test:coverage": "pnpm test -- --coverage",
     "release:stable": "dripip stable",
     "release:preview": "dripip preview",
-    "release:pr": "dripip pr"
+    "release:pr": "dripip pr",
+    "fixcheck": "pnpm run '/fix:.*/' && pnpm run '/check:.*/'",
+    "fix": "pnpm run '/fix:.*/'",
+    "release": "dripip stable",
+    "build:clean": "pnpm tsc --build tsconfig.build.json --clean && rm -rf build",
+    "prepack": "pnpm build",
+    "check": "pnpm run '/check:.*/'",
+    "prebuild": "pnpm build:clean"
   },
   "dependencies": {
     "@0no-co/graphql.web": "^1.0.12",
@@ -217,6 +179,20 @@
     "typescript-eslint": "^8.30.1",
     "vitepress": "^1.6.3",
     "vitest": "^3.1.1",
-    "zod": "^3.24.3"
+    "zod": "^3.24.3",
+    "@tsconfig/node-lts": "^22.0.1"
+  },
+  "imports": {
+    "#*": {
+      "default": "./build/*"
+    }
+  },
+  "libra": {
+    "entities": {
+      "generated": [
+        "website/pokemon",
+        "website/graffle"
+      ]
+    }
   }
 }

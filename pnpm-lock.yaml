@@ -54,6 +54,9 @@ importers:
       '@pothos/plugin-zod':
         specifier: ^4.2.0
         version: 4.2.0(@pothos/core@4.6.0(graphql@16.10.0))(graphql@16.10.0)(zod@3.24.3)
+      '@tsconfig/node-lts':
+        specifier: ^22.0.1
+        version: 22.0.1
       '@tsconfig/node20':
         specifier: ^20.1.5
         version: 20.1.5
@@ -1181,6 +1184,9 @@ packages:
 
   '@textlint/markdown-to-ast@12.6.1':
     resolution: {integrity: sha512-T0HO+VrU9VbLRiEx/kH4+gwGMHNMIGkp0Pok+p0I33saOOLyhfGvwOKQgvt2qkxzQEV2L5MtGB8EnW4r5d3CqQ==}
+
+  '@tsconfig/node-lts@22.0.1':
+    resolution: {integrity: sha512-BwlbLiYurZKrj+Pa6etSE1jXmr3VEDdgJto1jEYKcpBVwZZSWVkCPyFEFYbHdIOaFMlSTtV206DYPlT109aqug==}
 
   '@tsconfig/node20@20.1.5':
     resolution: {integrity: sha512-Vm8e3WxDTqMGPU4GATF9keQAIy1Drd7bPwlgzKJnZtoOsTm1tduUTbDjg0W5qERvGuxPI2h9RbMufH0YdfBylA==}
@@ -5138,6 +5144,8 @@ snapshots:
       unified: 9.2.2
     transitivePeerDependencies:
       - supports-color
+
+  '@tsconfig/node-lts@22.0.1': {}
 
   '@tsconfig/node20@20.1.5': {}
 
