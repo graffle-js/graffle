@@ -1,4 +1,4 @@
-import { Extension } from '../../entrypoints/extension.js'
+import { Extension } from '../../exports/extension.js'
 import { Errors } from '../../lib/errors/_namespace.js'
 import { normalizeRequestToNode } from '../../lib/grafaid/request.js'
 // import { type ExcludeNullAndUndefined, isString } from '../../lib/prelude.js'

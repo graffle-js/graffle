@@ -1,6 +1,6 @@
 // import { expectTypeOf } from 'vitest'
 import { test } from '../../../tests/_/helpers.js'
-import { Graffle } from '../../entrypoints/index.js'
+import { Graffle } from '../../exports/index.js'
 // import { Transport } from '../types/Transport.js'
 
 // test(`anyware hooks are typed to memory transport`, () => {

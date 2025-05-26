@@ -1,5 +1,5 @@
 import { trace, type Tracer } from '@opentelemetry/api'
-import { Extension } from '../../entrypoints/extension.js'
+import { Extension } from '../../exports/extension.js'
 
 export const OpenTelemetry = Extension
   .create(`openTelemetry`)
