@@ -11,14 +11,14 @@ const generate = async (
   const schema = TestSchemas[input.name]
 
   const config = await Generator.generate({
-    name: input.name,
+    name: input.name + (input.scalarsFile ? 'WithScalars' : ''),
     currentWorkingDirectory: import.meta.dirname,
     schema: {
       type: `instance`,
       instance: schema,
     },
     outputSDL: true,
-    outputDirPath: input.name,
+    outputDirPath: input.name + (input.scalarsFile ? '-with-scalars' : ''),
     advanced: {
       schemaInterfaceExtendsEnabled: true,
     },
@@ -41,3 +41,4 @@ const generate = async (
 await generate({ name: `queryOnly` })
 await generate({ name: `mutationOnly` })
 await generate({ name: `possible`, scalarsFile: true })
+await generate({ name: `possible`, scalarsFile: false })
