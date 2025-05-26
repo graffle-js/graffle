@@ -7,7 +7,7 @@ hero:
   tagline: Minimal. Extensible. Type Safe. Runs everywhere.
   actions:
     - theme: brand
-      text: Guides 
+      text: Guides
       link: /guides
     - theme: alt
       text: Examples

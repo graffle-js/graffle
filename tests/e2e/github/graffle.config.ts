@@ -1,4 +1,4 @@
-import { Generator } from '../../../src/entrypoints/generator.js'
+import { Generator } from '../../../src/exports/generator.js'
 
 export default Generator
   .configure({
@@ -12,11 +12,11 @@ export default Generator
       missingCustomScalarCodec: false,
     },
     libraryPaths: {
-      client: `../../../src/entrypoints/client.ts`,
-      schema: `../../../src/entrypoints/schema.ts`,
+      client: `../../../src/exports/client.ts`,
+      schema: `../../../src/exports/schema.ts`,
       scalars: `../../../src/types/Schema/StandardTypes/scalar.ts`,
-      utilitiesForGenerated: `../../../src/entrypoints/utilities-for-generated.ts`,
-      extensionTransportHttp: `../../../src/entrypoints/extensions/transport-http/runtime.ts`,
-      extensionDocumentBuilder: `../../../src/entrypoints/extensions/document-builder/runtime.ts`,
+      utilitiesForGenerated: `../../../src/exports/utilities-for-generated.ts`,
+      extensionTransportHttp: `../../../src/exports/extensions/transport-http/runtime.ts`,
+      extensionDocumentBuilder: `../../../src/exports/extensions/document-builder/runtime.ts`,
     },
   })

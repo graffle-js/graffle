@@ -1,4 +1,4 @@
-import { Extension } from '../../../src/entrypoints/extension.js'
+import { Extension } from '../../../src/exports/extension.js'
 
 // ----------------------------
 // ATransportBuilder

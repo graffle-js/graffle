@@ -1,0 +1,39 @@
+// @libra
+{
+  "extends": [
+    "@tsconfig/strictest/tsconfig.json",
+    "@tsconfig/node-lts/tsconfig.json"
+  ],
+  "compilerOptions": {
+    // Package
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+
+    // Output
+    "verbatimModuleSyntax": true,
+
+    // DX
+    "moduleDetection": "force",
+    "tsBuildInfoFile": "node_modules/.cache/.tsbuildinfo",
+    "noErrorTruncation": true,
+    "incremental": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "#*": ["./src/*"]
+    },
+
+    // DX covered by ESLint:
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+
+    // DX for Downstream
+    "isolatedModules": true, // performance
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true
+  },
+  "exclude": ["build", "eslint.config.js"]
+}

@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest'
-import { Extension } from '../../entrypoints/extension.js'
-import { GraffleBare } from '../../entrypoints/presets/bare.js'
+import { Extension } from '../../exports/extension.js'
+import { GraffleBare } from '../../exports/presets/bare.js'
 import { Throws } from './Throws.js'
 
 const graffle = GraffleBare

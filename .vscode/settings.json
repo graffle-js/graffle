@@ -21,7 +21,23 @@
   },
   "prettier.enable": false,
   "vite.autoStart": false,
-  "typescript.preferences.autoImportSpecifierExcludeRegexes": [
-    "node:test"
-  ]
+  "typescript.preferences.autoImportSpecifierExcludeRegexes": ["node:test"],
+  "files.exclude": {
+    "tsconfig.json": true,
+    "tsconfig.build.json": true,
+    "tsconfig.libra.json": true,
+    ".gitignore": true,
+    ".github": true,
+    "pnpm-workspace.yaml": true,
+    "pnpm-lock.yaml": true,
+    ".vscode": true,
+    "dprint.json": true,
+    "eslint.config.js": true,
+    "vitest.config.ts": true,
+    "build": true,
+    "node_modules": true,
+    ".dprint": true,
+    ".vitepress/dist": true,
+    ".vitepress/cache": true
+  }
 }

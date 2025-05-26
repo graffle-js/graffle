@@ -1,7 +1,7 @@
 import type { IntrospectionQuery } from 'graphql'
 import { expect } from 'vitest'
 import { test } from '../../../tests/_/helpers.js'
-import { GraffleBasic } from '../../entrypoints/presets/basic.js'
+import { GraffleBasic } from '../../exports/presets/basic.js'
 import { assertEqual } from '../../lib/assert-equal.js'
 import { Introspection } from './Introspection.js'
 

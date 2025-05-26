@@ -1,4 +1,4 @@
-import type * as $$Utilities from '../../../../../../entrypoints/utilities-for-generated.js'
+import type * as $$Utilities from '../../../../../../exports/utilities-for-generated.js'
 import * as $$Scalar from './scalar.js'
 //
 //
@@ -42,7 +42,7 @@ const String = $$Scalar.String
 //
 //
 
-const Date = $$Scalar.Date
+const Date = 'Date'
 
 //
 //

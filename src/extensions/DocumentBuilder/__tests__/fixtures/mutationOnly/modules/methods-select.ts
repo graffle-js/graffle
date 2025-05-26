@@ -1,4 +1,4 @@
-import type * as $$Utilities from '../../../../../../entrypoints/utilities-for-generated.js'
+import type * as $$Utilities from '../../../../../../exports/utilities-for-generated.js'
 import * as $$SelectionSets from './selection-sets.js'
 
 //

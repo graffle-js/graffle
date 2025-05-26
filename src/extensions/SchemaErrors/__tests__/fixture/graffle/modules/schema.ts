@@ -1,5 +1,5 @@
-import type { Schema as $ } from '../../../../../../entrypoints/utilities-for-generated.js'
-import type * as $$Utilities from '../../../../../../entrypoints/utilities-for-generated.js'
+import type { Schema as $ } from '../../../../../../exports/utilities-for-generated.js'
+import type * as $$Utilities from '../../../../../../exports/utilities-for-generated.js'
 import * as $$Data from './data.js'
 import * as $$Scalar from './scalar.js'
 

@@ -2,12 +2,12 @@
 // @vitest-environment node
 
 import { expect, test as testBase } from 'vitest'
-import { Graffle } from '../../entrypoints/index.js'
+import { Graffle } from '../../exports/index.js'
 import * as UploadSchema from './__fixtures__/schema.js'
 import { Upload } from './Upload.js'
 
 import { type SchemaService, serveSchema } from '../../../tests/_/lib/serveSchema.js'
-import type { GraffleKit } from '../../entrypoints/kit.js'
+import type { GraffleKit } from '../../exports/kit.js'
 
 interface Context {
   graffle: Graffle.Client<

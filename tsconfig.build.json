@@ -1,9 +1,16 @@
+// @libra
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "build",
-    "rootDir": "src"
+    "outDir": "./build",
+    "rootDir": "./src",
+    "noEmit": false
   },
-  "include": ["src"],
-  "exclude": ["src/**/*.test.ts", "src/**/*.spec.ts", "src/**/__tests__", "**/*.test-d.ts", "**/tests/**/*"]
+  "include": ["./src"],
+  "exclude": [
+    "./src/**/*.test.*",
+    "./src/**/*.test-d.*",
+    "./src/**/*.spec.*",
+    "./src/**/__tests__"
+  ]
 }

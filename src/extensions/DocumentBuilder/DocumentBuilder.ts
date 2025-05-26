@@ -1,6 +1,6 @@
 import { OperationTypeNode } from 'graphql'
-import { Extension } from '../../entrypoints/extension.js'
-import type { GlobalRegistry, GraffleKit } from '../../entrypoints/utilities-for-generated.js'
+import { Extension } from '../../exports/extension.js'
+import type { GlobalRegistry, GraffleKit } from '../../exports/utilities-for-generated.js'
 import type { TypeFunction } from '../../lib/type-function/__.js'
 import { createMethodDocument, createMethodOperationType } from './_exports.js'
 

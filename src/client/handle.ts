@@ -7,7 +7,7 @@ import {
   type OutputChannelConfig,
   readErrorCategoryOutputChannel,
 } from '../context/fragments/configuration/output/configuration.js'
-import type { Normalized } from '../entrypoints/index.js'
+import type { Normalized } from '../exports/index.js'
 import type { Anyware } from '../lib/anyware/_namespace.js'
 import { Errors } from '../lib/errors/_namespace.js'
 import type { Grafaid } from '../lib/grafaid/_namespace.js'

@@ -1,4 +1,4 @@
-import type { SchemaDrivenDataMap } from '../../../../entrypoints/utilities-for-generated.js'
+import type { SchemaDrivenDataMap } from '../../../../exports/utilities-for-generated.js'
 import type { Grafaid } from '../../../../lib/grafaid/_namespace.js'
 import { Nodes } from '../../../../lib/grafaid/_Nodes.js'
 import { Select } from '../../Select/__.js'

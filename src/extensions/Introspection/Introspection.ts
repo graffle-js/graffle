@@ -3,8 +3,8 @@ import type { GraphQLSchema, IntrospectionOptions } from 'graphql'
 import type { HandleOutput } from '../../client/handle.js'
 import type { Configuration } from '../../context/fragments/configuration/_namespace.js'
 import type { Properties } from '../../context/fragments/properties/_namespace.js'
-import { Extension } from '../../entrypoints/extension.js'
-import type { Context } from '../../entrypoints/utilities-for-generated.js'
+import { Extension } from '../../exports/extension.js'
+import type { Context } from '../../exports/utilities-for-generated.js'
 import type { InputIntrospectionOptions } from '../../generator/_exports.js'
 
 export type ConfigurationInput = {

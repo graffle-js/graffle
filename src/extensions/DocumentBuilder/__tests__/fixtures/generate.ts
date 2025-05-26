@@ -11,25 +11,25 @@ const generate = async (
   const schema = TestSchemas[input.name]
 
   const config = await Generator.generate({
-    name: input.name,
+    name: input.name + (input.scalarsFile ? 'WithScalars' : ''),
     currentWorkingDirectory: import.meta.dirname,
     schema: {
       type: `instance`,
       instance: schema,
     },
     outputSDL: true,
-    outputDirPath: input.name,
+    outputDirPath: input.name + (input.scalarsFile ? '-with-scalars' : ''),
     advanced: {
       schemaInterfaceExtendsEnabled: true,
     },
     scalars: input.scalarsFile ? `./${input.name}.scalars.ts` : undefined,
     libraryPaths: {
-      client: `../../../../entrypoints/client.ts`,
-      schema: `../../../../entrypoints/schema.ts`,
+      client: `../../../../exports/client.ts`,
+      schema: `../../../../exports/schema.ts`,
       scalars: `../../../../types/Schema/StandardTypes/scalar.ts`,
-      utilitiesForGenerated: `../../../../entrypoints/utilities-for-generated.ts`,
-      extensionTransportHttp: `../../../../entrypoints/extensions/transport-http/runtime.ts`,
-      extensionDocumentBuilder: `../../../../entrypoints/extensions/document-builder/runtime.ts`,
+      utilitiesForGenerated: `../../../../exports/utilities-for-generated.ts`,
+      extensionTransportHttp: `../../../../exports/extensions/transport-http/runtime.ts`,
+      extensionDocumentBuilder: `../../../../exports/extensions/document-builder/runtime.ts`,
     },
     nameNamespace: true,
     ...input.input,
@@ -41,3 +41,4 @@ const generate = async (
 await generate({ name: `queryOnly` })
 await generate({ name: `mutationOnly` })
 await generate({ name: `possible`, scalarsFile: true })
+await generate({ name: `possible`, scalarsFile: false })

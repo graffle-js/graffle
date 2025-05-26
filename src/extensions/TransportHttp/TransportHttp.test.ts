@@ -1,7 +1,7 @@
 import { describe, expect, expectTypeOf } from 'vitest'
 import { createGraphQLResponse, createGraphQLResponseData, test as testBase } from '../../../tests/_/helpers.js'
 import { serveSchema } from '../../../tests/_/lib/serveSchema.js'
-import { GraffleBare } from '../../entrypoints/presets/bare.js'
+import { GraffleBare } from '../../exports/presets/bare.js'
 import { ACCEPT_REC, CONTENT_TYPE_REC } from '../../lib/grafaid/http/http.js'
 import { TransportHttp } from './TransportHttp.js'
 

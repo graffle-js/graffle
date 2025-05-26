@@ -1,4 +1,4 @@
-import { Schema } from '../entrypoints/schema.js'
+import { Schema } from '../exports/schema.js'
 import { Grafaid } from '../lib/grafaid/_namespace.js'
 import { SchemaDrivenDataMap } from '../types/SchemaDrivenDataMap/_namespace.js'
 

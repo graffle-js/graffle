@@ -2,7 +2,7 @@ import { nodeResolve } from '@rollup/plugin-node-resolve'
 import terser from '@rollup/plugin-terser'
 import typescript from '@rollup/plugin-typescript'
 import { bundleStats } from 'rollup-plugin-bundle-stats'
-import {visualizer} from 'rollup-plugin-visualizer'
+import { visualizer } from 'rollup-plugin-visualizer'
 /**
  * @param {string} name - The name of the config
  * @returns {import('rollup').RollupOptions}
@@ -10,7 +10,7 @@ import {visualizer} from 'rollup-plugin-visualizer'
 export const createConfig = (name) => ({
   input: `./${name}/main.ts`,
   output: {
-    file: `./${name}/bundle.js`,
+    file: `./${name}/build/bundle.js`,
     format: `esm`,
     sourcemap: false,
   },
@@ -37,7 +37,7 @@ export const createConfig = (name) => ({
       title: `Graffle Bundle Size: ${name}`,
       gzipSize: true,
       brotliSize: true,
-      filename: `./${name}/bundle-visualization.html`,
+      filename: `./${name}/build/bundle-visualization.html`,
     }),
     bundleStats({
       outDir: `./${name}`,
