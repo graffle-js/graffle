@@ -5,5 +5,14 @@
     // TODO enable, leads to lots of errors currently.
     "exactOptionalPropertyTypes": false
   },
-  "exclude": ["build", "eslint.config.js", "bundle-sizes"]
+  "exclude": [
+    "build",
+    "eslint.config.js",
+    "bundle-sizes",
+    "tests",
+    "examples",
+    "website",
+    "src/**/__tests__",
+    "src/**/*.test.ts"
+  ]
 }
