@@ -4,5 +4,6 @@
     "lib": ["DOM", "DOM.Iterable", "ES2023"],
     // TODO enable, leads to lots of errors currently.
     "exactOptionalPropertyTypes": false
-  }
+  },
+  "exclude": ["build", "eslint.config.js", "bundle-sizes"]
 }

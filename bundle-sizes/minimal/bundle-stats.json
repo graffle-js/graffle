@@ -2079,13 +2079,13 @@
       ]
     },
     {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/entrypoints/presets/_minimal.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/entrypoints/presets/_minimal.js",
+      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/exports/presets/_minimal.js",
+      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/exports/presets/_minimal.js",
       "biggerIsBetter": false,
       "changed": true,
       "runs": [
         {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/entrypoints/presets/_minimal.js",
+          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/exports/presets/_minimal.js",
           "value": 120,
           "chunkIds": [
             "ae35f81"
@@ -5373,8 +5373,8 @@
       ]
     },
     {
-      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/entrypoints/presets/_basic.js",
-      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/entrypoints/presets/_basic.js",
+      "key": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/exports/presets/_basic.js",
+      "label": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/exports/presets/_basic.js",
       "biggerIsBetter": false,
       "changed": true,
       "runs": [
@@ -5389,7 +5389,7 @@
           "regression": false
         },
         {
-          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/entrypoints/presets/_basic.js",
+          "name": "./node_modules/.pnpm/graffle@file+.._graphql@16.10.0/node_modules/graffle/build/exports/presets/_basic.js",
           "value": 182,
           "chunkIds": [
             "0537d63"

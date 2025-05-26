@@ -82,7 +82,7 @@
     "build:watch": "tsc --build tsconfig.build.json --watch",
     "build:watch:emit": "pnpm build:watch --noCheck",
     "build": "tsc --build tsconfig.build.json",
-    "postbuild": "chmod +x ./build/generator/cli/generate.js",
+    "postbuild": "chmod +x ./build/cli/index.js",
     "test:unit": "vitest --dir src",
     "test:integration": "vitest --dir tests/integration",
     "test:e2e": "vitest --dir tests/e2e --testTimeout 30000 --run",

@@ -10,7 +10,7 @@ case `uname` in
     *CYGWIN*) basedir=`cygpath -w "$basedir"`;;
 esac
 
-entrypoint="$basedir/build/generator/cli/generate.js"
+entrypoint="$basedir/build/cli/index.js"
 
 if command -v ./node_modules/.bin/tsx >/dev/null 2>&1; then
   exec node --import=tsx "$entrypoint" "$@"
