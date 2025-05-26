@@ -6,7 +6,7 @@ import type { RequestDocument } from './types.js'
  * instead of the entire package (greater than 500KiB) where tree-shaking is not supported.
  * @see https://github.com/jasonkuhrt/graphql-request/pull/543
  */
-import { type DocumentNode, OperationTypeNode } from 'graphql'
+import type { DocumentNode } from 'graphql'
 import { parse } from 'graphql'
 import { print } from 'graphql'
 
@@ -32,7 +32,11 @@ const extractIsMutation = (document: DocumentNode): boolean => {
   const defs = document.definitions.filter(isOperationDefinitionNode)
 
   if (defs.length === 1) {
-    isMutation = defs[0]!.operation === OperationTypeNode.MUTATION
+    /* eslint-disable-next-line @typescript-eslint/no-unsafe-enum-comparison --
+     * graphql@15's `OperationTypeNode` is a type, but graphql@16's `OperationTypeNode` is a native TypeScript enum
+     * Therefore, we cannot use `OperationTypeNode.MUTATION` here because it wouldn't work with graphql@15
+     **/
+    isMutation = defs[0]!.operation === `mutation`
   }
 
   return isMutation
