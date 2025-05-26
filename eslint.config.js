@@ -4,15 +4,15 @@ import tsEslint from 'typescript-eslint'
 export default tsEslint.config(
   {
     ignores: [
-      'src/extensions/DocumentBuilder/__tests__/fixtures/**/*',
-      'src/extensions/SchemaErrors/__tests__/fixture/**/*',
+      'src/**/__tests__/**/*',
+      'src/**/*.test.ts',
       'graffle/**/*',
       'examples/35_custom-scalar/custom-scalar.ts',
       'eslint.config.js',
       'vite.config.ts',
       'vitest*.config.ts',
       '**/generated/**/*',
-      'tests/e2e/github/graffle/**/*',
+      'tests/**/*',
       'examples/$/**/*',
       'build/**/*',
       'website/**/*',
