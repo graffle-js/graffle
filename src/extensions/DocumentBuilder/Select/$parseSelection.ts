@@ -1,4 +1,3 @@
-import { Grafaid } from '#lib/grafaid/_namespace.js'
 import { Select } from './../Select/__.js'
 import type { SelectionSet } from './_.js'
 import { Arguments, Directive, Indicator, InlineFragment, SelectAlias, SelectScalarsWildcard } from './_.js'
