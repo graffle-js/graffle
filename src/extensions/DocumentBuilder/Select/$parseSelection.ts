@@ -90,15 +90,15 @@ export const parseSelectionInlineFragment = (key: string, value: any): ParsedInl
 
 export const parseSelection = (key: string, value: any): ParsedSelection => {
   if (key === Arguments.key) {
-    const argumentsNormalized = Grafaid.mapVariables(value, (key, value) => {
-      return {
-        key: Select.Arguments.enumKeyPrefixStrip(key),
-        value,
-      }
-    })
+    // Only strip enum prefix from top-level argument keys, not from nested object values
+    const argumentsNormalized: Record<string, any> = {}
+    for (const [argKey, argValue] of Object.entries(value)) {
+      const normalizedKey = Select.Arguments.enumKeyPrefixStrip(argKey)
+      argumentsNormalized[normalizedKey] = argValue
+    }
     return {
       type: `Arguments`,
-      arguments: argumentsNormalized ?? {},
+      arguments: argumentsNormalized,
     }
   }
 
