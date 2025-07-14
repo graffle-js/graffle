@@ -2,6 +2,7 @@ import type { Grafaid } from '../../../../lib/grafaid/_namespace.js'
 import { Nodes } from '../../../../lib/grafaid/_Nodes.js'
 import { Schema } from '../../../../types/Schema/_namespace.js'
 import { SchemaDrivenDataMap } from '../../../../types/SchemaDrivenDataMap/_namespace.js'
+import { Select } from '../../Select/__.js'
 import type { OperationContext } from '../context.js'
 import { type GraphQLPostOperationMapper } from '../mapper.js'
 
@@ -41,9 +42,23 @@ export const toGraphQLValue: ValueMapper = (context, sddm, value) => {
     const sddmInputObject = sddm?.nt
     return Nodes.ObjectValue({
       fields: Object.entries(value).map(([fieldName, fieldValue]) => {
+        // When processing input object fields, check for the enum prefix ($) that was
+        // preserved by parseSelection. This $ prefix is our signal that this field's
+        // value should be rendered as a GraphQL enum value (unquoted) rather than a
+        // string literal (quoted). This is the second half of the enum handling logic:
+        // parseSelection preserves the prefix, and here we detect and act on it.
+        const isEnumField = Select.Arguments.isEnumKey(fieldName)
+        const actualFieldName = isEnumField ? Select.Arguments.enumKeyPrefixStrip(fieldName) : fieldName
+
+        // Get the field's schema info using the actual field name (without $)
+        const fieldSddm = sddmInputObject?.f?.[actualFieldName]
+
+        // Pass enum context down so string values are rendered as enum values
+        const fieldContext = isEnumField ? { ...context, value: { isEnum: true } } : context
+
         return Nodes.ObjectField({
-          name: Nodes.Name({ value: fieldName }),
-          value: toGraphQLValue(context, sddmInputObject?.f?.[fieldName], fieldValue),
+          name: Nodes.Name({ value: actualFieldName }),
+          value: toGraphQLValue(fieldContext, fieldSddm, fieldValue),
         })
       }),
     })

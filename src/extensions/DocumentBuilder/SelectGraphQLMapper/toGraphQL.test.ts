@@ -83,6 +83,7 @@ const cases = testEachQueryWithDescription([
     // arguments
   [`args - enum`                                 , { stringWithArgEnum: { $: { $ABCEnum: `A` }}}],
   [`args - input object enum`                    , { stringWithArgInputObjectEnum: { $: { input: { $abcEnum: `A` }}}}],
+  [`args - nested input object enum multiple`    , { stringWithArgInputObjectEnum: { $: { input: { $abcEnum: `B`, id: `test` }}}}],
   [`args - on union`                             , { result: { $: { $case: `Object1` }, __typename: true } }],
   [`args - string with args`                     , { stringWithArgs: { $: { boolean: true, float: 1 } } }],
   [`args - alias`                                , { stringWithArgs: [[`a`, { $: { id: `` }}]] }],
@@ -131,7 +132,7 @@ const cases = testEachQueryWithDescription([
   [`object scalar`                        , { object: { id: true } }],
   [`object nested`                        , { objectNested: { object: { string: true, id: true, int: false } } }],
 ])
-// cases(...tester({ variables: true, scalars: {} }))
+cases(...tester({ variables: true, scalars: {} }))
 cases(...tester({ variables: false, scalars: {} }))
 
 // dprint-ignore

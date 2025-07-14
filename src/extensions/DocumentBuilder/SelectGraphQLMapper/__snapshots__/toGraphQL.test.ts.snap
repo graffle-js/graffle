@@ -712,7 +712,32 @@ exports[`( variables: false; scalars: (none) ) - Query - args - input object enu
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
 {
-  stringWithArgInputObjectEnum(input: {abcEnum: "A"})
+  stringWithArgInputObjectEnum(input: {abcEnum: A})
+}
+----------------
+{
+  "$default": {}
+}
+"
+`;
+
+exports[`( variables: false; scalars: (none) ) - Query - args - nested input object enum multiple > args - nested input object enum multiple 1`] = `
+"
+
+--------------GRAFFLE QUERY-------------
+{
+  "stringWithArgInputObjectEnum": {
+    "$": {
+      "input": {
+        "$abcEnum": "B",
+        "id": "test"
+      }
+    }
+  }
+}
+--------GRAPHQL DOCUMENT & VARIABLES--------
+{
+  stringWithArgInputObjectEnum(input: {abcEnum: B, id: "test"})
 }
 ----------------
 {
@@ -2238,6 +2263,36 @@ query ($input: InputObjectEnum!) {
   "$default": {
     "input": {
       "abcEnum": "A"
+    }
+  }
+}
+"
+`;
+
+exports[`( variables: true; scalars: (none) ) - Query - args - nested input object enum multiple > args - nested input object enum multiple 1`] = `
+"
+
+--------------GRAFFLE QUERY-------------
+{
+  "stringWithArgInputObjectEnum": {
+    "$": {
+      "input": {
+        "$abcEnum": "B",
+        "id": "test"
+      }
+    }
+  }
+}
+--------GRAPHQL DOCUMENT & VARIABLES--------
+query ($input: InputObjectEnum!) {
+  stringWithArgInputObjectEnum(input: $input)
+}
+----------------
+{
+  "$default": {
+    "input": {
+      "abcEnum": "B",
+      "id": "test"
     }
   }
 }

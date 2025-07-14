@@ -72,34 +72,3 @@ export const normalizeRequestToNode = <$R extends RequestInput | RequestAnalyzed
     query,
 	} as any
 }
-
-export const mapVariables = (
-  variables: Grafaid.Variables | undefined,
-  visitor: (key: string, value: Grafaid.VariableValue) => undefined | { key: string; value: Grafaid.VariableValue },
-): Grafaid.Variables | undefined => {
-  if (variables === undefined) return
-  return mapVariableValue(variables, visitor)
-}
-
-export const mapVariableValue = <$Value extends Grafaid.VariableValue>(
-  value: $Value,
-  visitor: (key: string, value: Grafaid.VariableValue) => undefined | { key: string; value: Grafaid.VariableValue },
-): $Value => {
-  if (Array.isArray(value)) {
-    return value.map(item => mapVariableValue(item, visitor)) as any
-  } else if (isPlainObject(value)) {
-    const newObject: Grafaid.Variables = {}
-    for (const currentKey in value) {
-      const currentValue = mapVariableValue(value[currentKey]!, visitor)
-      const visitorResult = visitor(currentKey, currentValue)
-      if (visitorResult) {
-        newObject[visitorResult.key] = visitorResult.value
-      } else {
-        newObject[currentKey] = currentValue
-      }
-    }
-    return newObject as any
-  }
-
-  return value
-}

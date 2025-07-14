@@ -2,6 +2,7 @@ import type { Grafaid } from '../../../lib/grafaid/_namespace.js'
 import { Nodes } from '../../../lib/grafaid/_Nodes.js'
 import type { Schema } from '../../../types/Schema/_namespace.js'
 import type { SchemaDrivenDataMap } from '../../../types/SchemaDrivenDataMap/_namespace.js'
+import { Select } from '../Select/__.js'
 import { inferVariableType } from './inferVariableType.js'
 import type { Options } from './nodes/1_Document.js'
 
@@ -46,10 +47,13 @@ export const createOperationContext = (options?: Options): OperationContext => {
           nameIndex++
         }
 
+        // Strip enum prefixes from the captured value
+        const processedValue = Select.Arguments.enumKeyPrefixStripFromObject(input.value)
+
         context.variables.data.push({
           name: potentialVariableName,
           typeName: inferVariableType(input.sddmArgument),
-          value: input.value,
+          value: processedValue,
         })
 
         return Nodes.Argument({

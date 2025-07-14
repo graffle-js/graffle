@@ -1,4 +1,3 @@
-import { Grafaid } from '../../../lib/grafaid/_namespace.js'
 import { Select } from './../Select/__.js'
 import type { SelectionSet } from './_.js'
 import { Arguments, Directive, Indicator, InlineFragment, SelectAlias, SelectScalarsWildcard } from './_.js'
@@ -90,15 +89,21 @@ export const parseSelectionInlineFragment = (key: string, value: any): ParsedInl
 
 export const parseSelection = (key: string, value: any): ParsedSelection => {
   if (key === Arguments.key) {
-    const argumentsNormalized = Grafaid.mapVariables(value, (key, value) => {
-      return {
-        key: Select.Arguments.enumKeyPrefixStrip(key),
-        value,
-      }
-    })
+    // Strip enum prefix ($) from argument keys only, preserving nested values as-is.
+    // This separation is crucial: argument keys need their $ prefix removed for GraphQL
+    // (e.g., $case -> case), but values within arguments must keep their $ prefixes
+    // so that enum fields in input objects can be detected later during value processing.
+    // Example: { $case: 'Foo', input: { $direction: 'ASC' } }
+    //   - $case is stripped to 'case' (argument key)
+    //   - $direction keeps its $ prefix (will be processed in Value.ts)
+    const argumentsNormalized: Record<string, any> = {}
+    for (const [argKey, argValue] of Object.entries(value)) {
+      const normalizedKey = Select.Arguments.enumKeyPrefixStrip(argKey)
+      argumentsNormalized[normalizedKey] = argValue
+    }
     return {
       type: `Arguments`,
-      arguments: argumentsNormalized ?? {},
+      arguments: argumentsNormalized,
     }
   }
 
