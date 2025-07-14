@@ -7,7 +7,7 @@ import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
-import { renderInlineType } from '../helpers/render.js'
+import { renderInlineType, renderName } from '../helpers/render.js'
 import type { KindRenderers } from '../helpers/types.js'
 import { ModuleGeneratorScalar } from './Scalar.js'
 
@@ -165,7 +165,7 @@ const ScalarTypeCustom = createCodeGenerator<
 >(
   ({ config, code, type }) => {
     if (config.options.isImportsCustomScalars) {
-      code(Code.termConst(type.name, `${$.$$Scalar}.${type.name}`))
+      code(Code.termConst(type.name, `${$.$$Scalar}.${renderName(type.name)}`))
     } else {
       code(Code.termConst(type.name, Code.string(type.name)))
     }

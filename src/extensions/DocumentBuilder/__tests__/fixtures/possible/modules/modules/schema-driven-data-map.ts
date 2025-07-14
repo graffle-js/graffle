@@ -1,4 +1,4 @@
-import type * as $$Utilities from '../../../../../../exports/utilities-for-generated.js'
+import type * as $$Utilities from 'graffle/utilities-for-generated'
 import * as $$Scalar from './scalar.js'
 //
 //
@@ -16,15 +16,15 @@ import * as $$Scalar from './scalar.js'
 //
 //
 
-const Boolean = $$Scalar.Boolean
-
-const Float = $$Scalar.Float
-
-const ID = $$Scalar.ID
-
 const Int = $$Scalar.Int
 
 const String = $$Scalar.String
+
+const ID = $$Scalar.ID
+
+const Boolean = $$Scalar.Boolean
+
+const Float = $$Scalar.Float
 
 //
 //
@@ -203,7 +203,6 @@ const DateObject2: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 }
 
 const ErrorOne: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  e: 1,
   f: {
     infoId: {},
     message: {},
@@ -211,7 +210,6 @@ const ErrorOne: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 }
 
 const ErrorTwo: $$Utilities.SchemaDrivenDataMap.OutputObject = {
-  e: 1,
   f: {
     infoInt: {},
     message: {},
@@ -634,7 +632,6 @@ const Query: $$Utilities.SchemaDrivenDataMap.OutputObject = {
           it: [1],
         },
       },
-      r: 1,
       // nt: Result, <-- Assigned later to avoid potential circular dependency.
     },
     resultNonNull: {
@@ -644,7 +641,6 @@ const Query: $$Utilities.SchemaDrivenDataMap.OutputObject = {
           it: [0],
         },
       },
-      r: 1,
       // nt: Result, <-- Assigned later to avoid potential circular dependency.
     },
     string: {},
@@ -829,11 +825,11 @@ const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
   },
   directives: {},
   types: {
-    Boolean,
-    Float,
-    ID,
     Int,
     String,
+    ID,
+    Boolean,
+    Float,
     Date,
     bigint,
     ABCEnum,

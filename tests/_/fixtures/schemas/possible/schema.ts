@@ -18,12 +18,25 @@ const builder = new SchemaBuilder<{
       Input: Date
       Output: Date
     }
+    bigint: {
+      Input: bigint
+      Output: bigint
+    }
   }
 }>({
   plugins: [SimpleObjectsPlugin],
 })
 
 builder.addScalarType(`Date`, DateTimeISOResolver, {})
+
+// Add a scalar with a TypeScript reserved keyword name for testing issue #1354
+builder.scalarType(`bigint`, {
+  serialize: (value) => String(value),
+  parseValue: (value) => {
+    if (typeof value === 'string') return BigInt(value)
+    throw new Error('bigint must be a string')
+  },
+})
 
 const InterfaceGrandparent = builder.interfaceRef<db.InterfaceGrandparent>(`InterfaceGrandparent`).implement({
   resolveType(parent) {
@@ -602,6 +615,17 @@ builder.queryType({
       resolve: (_, args) => {
         return args.case ? db[args.case] : db.Object1
       },
+    }),
+    // Test field for issue #1354 - scalar with reserved TypeScript keyword name
+    bigintField: t.field({
+      type: 'bigint',
+      nullable: true,
+      resolve: () => BigInt(123),
+    }),
+    bigintFieldNonNull: t.field({
+      type: 'bigint',
+      nullable: false,
+      resolve: () => BigInt(456),
     }),
   }),
 })

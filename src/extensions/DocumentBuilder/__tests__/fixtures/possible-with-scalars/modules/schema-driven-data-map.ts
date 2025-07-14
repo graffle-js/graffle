@@ -44,6 +44,8 @@ const String = $$Scalar.String
 
 const Date = $$Scalar.Date
 
+const bigint = $$Scalar.$bigint
+
 //
 //
 //
@@ -430,6 +432,12 @@ const Query: $$Utilities.SchemaDrivenDataMap.OutputObject = {
           it: [0],
         },
       },
+    },
+    bigintField: {
+      nt: bigint,
+    },
+    bigintFieldNonNull: {
+      nt: bigint,
     },
     date: {
       nt: Date,
@@ -823,6 +831,7 @@ const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
     Int,
     String,
     Date,
+    bigint,
     ABCEnum,
     Case,
     ChildAInterfaceHierarchyMember,

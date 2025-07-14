@@ -73,6 +73,18 @@ export interface Query<
     | Query.argInputObjectCircular$Expanded<_$Scalars>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.argInputObjectCircular<_$Scalars>>
   /**
+   * Select the `bigintField` field on the `Query` object. Its type is `bigint` (a `ScalarCustom` kind of type).
+   */
+  bigintField?:
+    | Query.bigintField$Expanded<_$Scalars>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.bigintField<_$Scalars>>
+  /**
+   * Select the `bigintFieldNonNull` field on the `Query` object. Its type is `bigint` (a `ScalarCustom` kind of type).
+   */
+  bigintFieldNonNull?:
+    | Query.bigintFieldNonNull$Expanded<_$Scalars>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.bigintFieldNonNull<_$Scalars>>
+  /**
    * Select the `date` field on the `Query` object. Its type is `Date` (a `ScalarCustom` kind of type).
    */
   date?:
@@ -537,6 +549,58 @@ export namespace Query {
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | argInputObjectCircular$SelectionSet<_$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type bigintField<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > =
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | bigintField$SelectionSet<_$Scalars>
+
+  export interface bigintField$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `bigintField` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type bigintField$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | bigintField$SelectionSet<_$Scalars>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type bigintFieldNonNull<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > =
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | bigintFieldNonNull$SelectionSet<_$Scalars>
+
+  export interface bigintFieldNonNull$SelectionSet<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `bigintFieldNonNull` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type bigintFieldNonNull$Expanded<
+    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | bigintFieldNonNull$SelectionSet<_$Scalars>
   >
 
   // --------------------------------------------------------------------------------------------------

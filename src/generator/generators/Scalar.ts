@@ -3,9 +3,7 @@ import { Grafaid } from '../../lib/grafaid/_namespace.js'
 import { Tex } from '../../lib/tex/_namespace.js'
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
-import { typeTitle2 } from '../helpers/render.js'
-// TODO: Uncomment to fix issue #1354
-// import { renderName, typeTitle2 } from '../helpers/render.js'
+import { renderName, typeTitle2 } from '../helpers/render.js'
 
 export const ModuleGeneratorScalar = createModuleGenerator(
   `scalar`,
@@ -34,13 +32,16 @@ export const ModuleGeneratorScalar = createModuleGenerator(
         code(typeTitle2(`custom scalar type`)(scalar))
         code``
         code`
-          // TODO: Fix issue #1354 - use renderName() here
-          export type ${scalar.name} = typeof ${$.CustomScalars}.${scalar.name}
+          export type ${renderName(scalar.name)} = typeof ${$.CustomScalars}.${scalar.name}
           // Without this we get error:
           // "Exported type alias 'DateDecoded' has or is using private name 'Date'."
-          type ${scalar.name}_ = typeof ${$.CustomScalars}.${scalar.name}
-          export type ${scalar.name}Decoded = ${$.$$Utilities}.Schema.Scalar.GetDecoded<${scalar.name}_>
-          export type ${scalar.name}Encoded = ${$.$$Utilities}.Schema.Scalar.GetEncoded<${scalar.name}_>
+          type ${renderName(scalar.name)}_ = typeof ${$.CustomScalars}.${scalar.name}
+          export type ${renderName(scalar.name)}Decoded = ${$.$$Utilities}.Schema.Scalar.GetDecoded<${
+          renderName(scalar.name)
+        }_>
+          export type ${renderName(scalar.name)}Encoded = ${$.$$Utilities}.Schema.Scalar.GetEncoded<${
+          renderName(scalar.name)
+        }_>
         `
         code``
       }
@@ -59,8 +60,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
       for (const scalar of config.schema.kindMap.list.ScalarCustom) {
         code(typeTitle2(`custom scalar type`)(scalar))
         code``
-        // TODO: Fix issue #1354 - use renderName() here
-        code`export type ${scalar.name} = ${$.$$Utilities}.Schema.Scalar.ScalarCodecless<'${scalar.name}'>`
+        code`export type ${renderName(scalar.name)} = ${$.$$Utilities}.Schema.Scalar.ScalarCodecless<'${scalar.name}'>`
         // code(`import type { String as ${scalar.name} } from '${config.paths.imports.grafflePackage.scalars}'`)
         // code()
         // code(`export { String as ${scalar.name} } from '${config.paths.imports.grafflePackage.scalars}'`)
