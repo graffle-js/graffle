@@ -1,4 +1,4 @@
-import { Grafaid } from '../../../lib/grafaid/_namespace.js'
+import type { Grafaid } from '../../../lib/grafaid/_namespace.js'
 import { Nodes } from '../../../lib/grafaid/_Nodes.js'
 import type { Schema } from '../../../types/Schema/_namespace.js'
 import type { SchemaDrivenDataMap } from '../../../types/SchemaDrivenDataMap/_namespace.js'
@@ -33,22 +33,6 @@ export interface Captures {
   variables: CapturedVariable[]
 }
 
-/**
- * Strip enum prefix ($) from keys in variable values.
- * This ensures that GraphQL variables don't contain the $ prefix
- * that Graffle uses to indicate enum values.
- */
-const stripEnumPrefixesFromVariableValue = (value: unknown): unknown => {
-  return Grafaid.mapVariableValue(value as any, (key, value) => {
-    if (Select.Arguments.isEnumKey(key)) {
-      return {
-        key: Select.Arguments.enumKeyPrefixStrip(key),
-        value: value,
-      }
-    }
-    return undefined
-  })
-}
 
 export const createOperationContext = (options?: Options): OperationContext => {
   const context: OperationContext = {
@@ -65,7 +49,7 @@ export const createOperationContext = (options?: Options): OperationContext => {
         }
 
         // Strip enum prefixes from the captured value
-        const processedValue = stripEnumPrefixesFromVariableValue(input.value)
+        const processedValue = Select.Arguments.enumKeyPrefixStripFromObject(input.value)
 
         context.variables.data.push({
           name: potentialVariableName,
