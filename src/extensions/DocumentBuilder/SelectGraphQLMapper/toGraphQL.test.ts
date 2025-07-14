@@ -132,7 +132,7 @@ const cases = testEachQueryWithDescription([
   [`object scalar`                        , { object: { id: true } }],
   [`object nested`                        , { objectNested: { object: { string: true, id: true, int: false } } }],
 ])
-// cases(...tester({ variables: true, scalars: {} }))
+cases(...tester({ variables: true, scalars: {} }))
 cases(...tester({ variables: false, scalars: {} }))
 
 // dprint-ignore
