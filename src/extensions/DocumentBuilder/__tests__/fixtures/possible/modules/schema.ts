@@ -33,6 +33,8 @@ export namespace Schema {
       InputObjectNestedNonNull: Query.InputObjectNestedNonNull
       abcEnum: Query.abcEnum
       argInputObjectCircular: Query.argInputObjectCircular
+      bigintField: Query.bigintField
+      bigintFieldNonNull: Query.bigintFieldNonNull
       date: Query.date
       dateArg: Query.dateArg
       dateArgInputObject: Query.dateArgInputObject
@@ -153,6 +155,22 @@ export namespace Schema {
       }
       inlineType: [0]
       namedType: $$NamedTypes.$$String
+    }
+
+    export interface bigintField extends $.OutputField {
+      kind: 'OutputField'
+      name: 'bigintField'
+      arguments: {}
+      inlineType: [0]
+      namedType: $$NamedTypes.$$bigint
+    }
+
+    export interface bigintFieldNonNull extends $.OutputField {
+      kind: 'OutputField'
+      name: 'bigintFieldNonNull'
+      arguments: {}
+      inlineType: [1]
+      namedType: $$NamedTypes.$$bigint
     }
 
     export interface date extends $.OutputField {
@@ -2348,6 +2366,12 @@ export namespace Schema {
 
   export type Date = $$Scalar.Date
 
+  //                                               bigint
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export type $bigint = $$Scalar.$bigint
+
   //
   //
   //
@@ -2461,6 +2485,7 @@ export namespace Schema {
     export type $$GrandparentInterfaceHierarchyMember = GrandparentInterfaceHierarchyMember
     export type $$ParentInterfaceHierarchyMember = ParentInterfaceHierarchyMember
     export type $$Date = Date
+    export type $$bigint = $bigint
     export type $$Boolean = Boolean
     export type $$Float = Float
     export type $$ID = ID
@@ -2570,6 +2595,7 @@ export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$
   }
   scalarNamesUnion:
     | 'Date'
+    | 'bigint'
     | 'Boolean'
     | 'Float'
     | 'ID'
@@ -2577,6 +2603,7 @@ export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$
     | 'String'
   scalars: {
     Date: Schema.Date
+    bigint: Schema.$bigint
     Boolean: Schema.Boolean
     Float: Schema.Float
     ID: Schema.ID

@@ -106,6 +106,40 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
+  bigintField: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
+    $Context,
+    <$SelectionSet>(
+      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.bigintField<$Context['scalars']>>,
+    ) => Promise<
+      & (null | {})
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
+        $Context,
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+          { bigintField: $SelectionSet },
+          $$Schema.Schema<$Context['scalars']>
+        >,
+        'bigintField'
+      >
+    >
+  >
+
+  bigintFieldNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
+    $Context,
+    <$SelectionSet>(
+      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.bigintFieldNonNull<$Context['scalars']>>,
+    ) => Promise<
+      & (null | {})
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
+        $Context,
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+          { bigintFieldNonNull: $SelectionSet },
+          $$Schema.Schema<$Context['scalars']>
+        >,
+        'bigintFieldNonNull'
+      >
+    >
+  >
+
   date: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(

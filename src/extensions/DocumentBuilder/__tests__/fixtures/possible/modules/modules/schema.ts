@@ -1,5 +1,5 @@
-import type { Schema as $ } from '../../../../../../exports/utilities-for-generated.js'
-import type * as $$Utilities from '../../../../../../exports/utilities-for-generated.js'
+import type { Schema as $ } from 'graffle/utilities-for-generated'
+import type * as $$Utilities from 'graffle/utilities-for-generated'
 import * as $$Data from './data.js'
 import * as $$Scalar from './scalar.js'
 
@@ -24,7 +24,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface Query extends $.OutputObject {
+  export interface Query {
     kind: 'Object'
     name: 'Query'
     fields: {
@@ -90,7 +90,7 @@ export namespace Schema {
   }
 
   export namespace Query {
-    export interface __typename extends $.OutputField {
+    export interface __typename {
       kind: 'OutputField'
       name: '__typename'
       arguments: {}
@@ -101,7 +101,7 @@ export namespace Schema {
       }
     }
 
-    export interface InputObjectNested extends $.OutputField {
+    export interface InputObjectNested {
       kind: 'OutputField'
       name: 'InputObjectNested'
       arguments: {
@@ -116,7 +116,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$ID
     }
 
-    export interface InputObjectNestedNonNull extends $.OutputField {
+    export interface InputObjectNestedNonNull {
       kind: 'OutputField'
       name: 'InputObjectNestedNonNull'
       arguments: {
@@ -134,7 +134,7 @@ export namespace Schema {
     /**
      * Query enum field documentation.
      */
-    export interface abcEnum extends $.OutputField {
+    export interface abcEnum {
       kind: 'OutputField'
       name: 'abcEnum'
       arguments: {}
@@ -142,7 +142,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$ABCEnum
     }
 
-    export interface argInputObjectCircular extends $.OutputField {
+    export interface argInputObjectCircular {
       kind: 'OutputField'
       name: 'argInputObjectCircular'
       arguments: {
@@ -157,7 +157,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$String
     }
 
-    export interface bigintField extends $.OutputField {
+    export interface bigintField {
       kind: 'OutputField'
       name: 'bigintField'
       arguments: {}
@@ -165,7 +165,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$bigint
     }
 
-    export interface bigintFieldNonNull extends $.OutputField {
+    export interface bigintFieldNonNull {
       kind: 'OutputField'
       name: 'bigintFieldNonNull'
       arguments: {}
@@ -173,7 +173,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$bigint
     }
 
-    export interface date extends $.OutputField {
+    export interface date {
       kind: 'OutputField'
       name: 'date'
       arguments: {}
@@ -181,7 +181,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$Date
     }
 
-    export interface dateArg extends $.OutputField {
+    export interface dateArg {
       kind: 'OutputField'
       name: 'dateArg'
       arguments: {
@@ -196,7 +196,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$Date
     }
 
-    export interface dateArgInputObject extends $.OutputField {
+    export interface dateArgInputObject {
       kind: 'OutputField'
       name: 'dateArgInputObject'
       arguments: {
@@ -211,7 +211,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$Date
     }
 
-    export interface dateArgList extends $.OutputField {
+    export interface dateArgList {
       kind: 'OutputField'
       name: 'dateArgList'
       arguments: {
@@ -226,7 +226,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$Date
     }
 
-    export interface dateArgNonNull extends $.OutputField {
+    export interface dateArgNonNull {
       kind: 'OutputField'
       name: 'dateArgNonNull'
       arguments: {
@@ -241,7 +241,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$Date
     }
 
-    export interface dateArgNonNullList extends $.OutputField {
+    export interface dateArgNonNullList {
       kind: 'OutputField'
       name: 'dateArgNonNullList'
       arguments: {
@@ -256,7 +256,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$Date
     }
 
-    export interface dateArgNonNullListNonNull extends $.OutputField {
+    export interface dateArgNonNullListNonNull {
       kind: 'OutputField'
       name: 'dateArgNonNullListNonNull'
       arguments: {
@@ -271,7 +271,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$Date
     }
 
-    export interface dateInterface1 extends $.OutputField {
+    export interface dateInterface1 {
       kind: 'OutputField'
       name: 'dateInterface1'
       arguments: {}
@@ -279,7 +279,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$DateInterface1
     }
 
-    export interface dateList extends $.OutputField {
+    export interface dateList {
       kind: 'OutputField'
       name: 'dateList'
       arguments: {}
@@ -287,7 +287,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$Date
     }
 
-    export interface dateListList extends $.OutputField {
+    export interface dateListList {
       kind: 'OutputField'
       name: 'dateListList'
       arguments: {}
@@ -295,7 +295,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$Date
     }
 
-    export interface dateListNonNull extends $.OutputField {
+    export interface dateListNonNull {
       kind: 'OutputField'
       name: 'dateListNonNull'
       arguments: {}
@@ -303,7 +303,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$Date
     }
 
-    export interface dateNonNull extends $.OutputField {
+    export interface dateNonNull {
       kind: 'OutputField'
       name: 'dateNonNull'
       arguments: {}
@@ -311,7 +311,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$Date
     }
 
-    export interface dateObject1 extends $.OutputField {
+    export interface dateObject1 {
       kind: 'OutputField'
       name: 'dateObject1'
       arguments: {}
@@ -319,7 +319,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$DateObject1
     }
 
-    export interface dateUnion extends $.OutputField {
+    export interface dateUnion {
       kind: 'OutputField'
       name: 'dateUnion'
       arguments: {}
@@ -327,7 +327,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$DateUnion
     }
 
-    export interface error extends $.OutputField {
+    export interface error {
       kind: 'OutputField'
       name: 'error'
       arguments: {
@@ -342,7 +342,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$String
     }
 
-    export interface id extends $.OutputField {
+    export interface id {
       kind: 'OutputField'
       name: 'id'
       arguments: {}
@@ -350,7 +350,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$ID
     }
 
-    export interface idNonNull extends $.OutputField {
+    export interface idNonNull {
       kind: 'OutputField'
       name: 'idNonNull'
       arguments: {}
@@ -358,7 +358,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$ID
     }
 
-    export interface $interface extends $.OutputField {
+    export interface $interface {
       kind: 'OutputField'
       name: 'interface'
       arguments: {}
@@ -366,7 +366,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$Interface
     }
 
-    export interface interfaceHierarchyChildA extends $.OutputField {
+    export interface interfaceHierarchyChildA {
       kind: 'OutputField'
       name: 'interfaceHierarchyChildA'
       arguments: {
@@ -381,7 +381,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$InterfaceChildA
     }
 
-    export interface interfaceHierarchyChildB extends $.OutputField {
+    export interface interfaceHierarchyChildB {
       kind: 'OutputField'
       name: 'interfaceHierarchyChildB'
       arguments: {
@@ -396,7 +396,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$InterfaceChildB
     }
 
-    export interface interfaceHierarchyGrandparents extends $.OutputField {
+    export interface interfaceHierarchyGrandparents {
       kind: 'OutputField'
       name: 'interfaceHierarchyGrandparents'
       arguments: {
@@ -411,7 +411,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$InterfaceGrandparent
     }
 
-    export interface interfaceHierarchyParents extends $.OutputField {
+    export interface interfaceHierarchyParents {
       kind: 'OutputField'
       name: 'interfaceHierarchyParents'
       arguments: {
@@ -426,7 +426,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$InterfaceParent
     }
 
-    export interface interfaceNonNull extends $.OutputField {
+    export interface interfaceNonNull {
       kind: 'OutputField'
       name: 'interfaceNonNull'
       arguments: {}
@@ -434,7 +434,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$Interface
     }
 
-    export interface interfaceWithArgs extends $.OutputField {
+    export interface interfaceWithArgs {
       kind: 'OutputField'
       name: 'interfaceWithArgs'
       arguments: {
@@ -449,7 +449,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$Interface
     }
 
-    export interface listInt extends $.OutputField {
+    export interface listInt {
       kind: 'OutputField'
       name: 'listInt'
       arguments: {}
@@ -457,7 +457,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$Int
     }
 
-    export interface listIntNonNull extends $.OutputField {
+    export interface listIntNonNull {
       kind: 'OutputField'
       name: 'listIntNonNull'
       arguments: {}
@@ -465,7 +465,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$Int
     }
 
-    export interface listListInt extends $.OutputField {
+    export interface listListInt {
       kind: 'OutputField'
       name: 'listListInt'
       arguments: {}
@@ -473,7 +473,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$Int
     }
 
-    export interface listListIntNonNull extends $.OutputField {
+    export interface listListIntNonNull {
       kind: 'OutputField'
       name: 'listListIntNonNull'
       arguments: {}
@@ -481,7 +481,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$Int
     }
 
-    export interface lowerCaseUnion extends $.OutputField {
+    export interface lowerCaseUnion {
       kind: 'OutputField'
       name: 'lowerCaseUnion'
       arguments: {}
@@ -489,7 +489,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$lowerCaseUnion
     }
 
-    export interface $object extends $.OutputField {
+    export interface $object {
       kind: 'OutputField'
       name: 'object'
       arguments: {}
@@ -497,7 +497,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$Object1
     }
 
-    export interface objectList extends $.OutputField {
+    export interface objectList {
       kind: 'OutputField'
       name: 'objectList'
       arguments: {}
@@ -505,7 +505,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$Object1
     }
 
-    export interface objectListNonNull extends $.OutputField {
+    export interface objectListNonNull {
       kind: 'OutputField'
       name: 'objectListNonNull'
       arguments: {}
@@ -513,7 +513,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$Object1
     }
 
-    export interface objectNested extends $.OutputField {
+    export interface objectNested {
       kind: 'OutputField'
       name: 'objectNested'
       arguments: {}
@@ -521,7 +521,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$ObjectNested
     }
 
-    export interface objectNonNull extends $.OutputField {
+    export interface objectNonNull {
       kind: 'OutputField'
       name: 'objectNonNull'
       arguments: {}
@@ -529,7 +529,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$Object1
     }
 
-    export interface objectWithArgs extends $.OutputField {
+    export interface objectWithArgs {
       kind: 'OutputField'
       name: 'objectWithArgs'
       arguments: {
@@ -568,7 +568,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$Object1
     }
 
-    export interface result extends $.OutputField {
+    export interface result {
       kind: 'OutputField'
       name: 'result'
       arguments: {
@@ -583,7 +583,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$Result
     }
 
-    export interface resultNonNull extends $.OutputField {
+    export interface resultNonNull {
       kind: 'OutputField'
       name: 'resultNonNull'
       arguments: {
@@ -598,7 +598,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$Result
     }
 
-    export interface $string extends $.OutputField {
+    export interface $string {
       kind: 'OutputField'
       name: 'string'
       arguments: {}
@@ -606,7 +606,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$String
     }
 
-    export interface stringWithArgEnum extends $.OutputField {
+    export interface stringWithArgEnum {
       kind: 'OutputField'
       name: 'stringWithArgEnum'
       arguments: {
@@ -621,7 +621,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$String
     }
 
-    export interface stringWithArgInputObject extends $.OutputField {
+    export interface stringWithArgInputObject {
       kind: 'OutputField'
       name: 'stringWithArgInputObject'
       arguments: {
@@ -636,7 +636,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$String
     }
 
-    export interface stringWithArgInputObjectEnum extends $.OutputField {
+    export interface stringWithArgInputObjectEnum {
       kind: 'OutputField'
       name: 'stringWithArgInputObjectEnum'
       arguments: {
@@ -651,7 +651,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$String
     }
 
-    export interface stringWithArgInputObjectRequired extends $.OutputField {
+    export interface stringWithArgInputObjectRequired {
       kind: 'OutputField'
       name: 'stringWithArgInputObjectRequired'
       arguments: {
@@ -669,7 +669,7 @@ export namespace Schema {
     /**
      * The given arguments are reflected back as a JSON string.
      */
-    export interface stringWithArgs extends $.OutputField {
+    export interface stringWithArgs {
       kind: 'OutputField'
       name: 'stringWithArgs'
       arguments: {
@@ -714,7 +714,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$String
     }
 
-    export interface stringWithListArg extends $.OutputField {
+    export interface stringWithListArg {
       kind: 'OutputField'
       name: 'stringWithListArg'
       arguments: {
@@ -729,7 +729,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$String
     }
 
-    export interface stringWithListArgRequired extends $.OutputField {
+    export interface stringWithListArgRequired {
       kind: 'OutputField'
       name: 'stringWithListArgRequired'
       arguments: {
@@ -744,7 +744,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$String
     }
 
-    export interface stringWithRequiredArg extends $.OutputField {
+    export interface stringWithRequiredArg {
       kind: 'OutputField'
       name: 'stringWithRequiredArg'
       arguments: {
@@ -759,7 +759,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$String
     }
 
-    export interface unionFooBar extends $.OutputField {
+    export interface unionFooBar {
       kind: 'OutputField'
       name: 'unionFooBar'
       arguments: {}
@@ -767,7 +767,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$FooBarUnion
     }
 
-    export interface unionFooBarNonNull extends $.OutputField {
+    export interface unionFooBarNonNull {
       kind: 'OutputField'
       name: 'unionFooBarNonNull'
       arguments: {}
@@ -775,7 +775,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$FooBarUnion
     }
 
-    export interface unionFooBarWithArgs extends $.OutputField {
+    export interface unionFooBarWithArgs {
       kind: 'OutputField'
       name: 'unionFooBarWithArgs'
       arguments: {
@@ -790,7 +790,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$FooBarUnion
     }
 
-    export interface unionObject extends $.OutputField {
+    export interface unionObject {
       kind: 'OutputField'
       name: 'unionObject'
       arguments: {}
@@ -798,7 +798,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$ObjectUnion
     }
 
-    export interface unionObjectNonNull extends $.OutputField {
+    export interface unionObjectNonNull {
       kind: 'OutputField'
       name: 'unionObjectNonNull'
       arguments: {}
@@ -811,7 +811,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface Mutation extends $.OutputObject {
+  export interface Mutation {
     kind: 'Object'
     name: 'Mutation'
     fields: {
@@ -822,7 +822,7 @@ export namespace Schema {
   }
 
   export namespace Mutation {
-    export interface __typename extends $.OutputField {
+    export interface __typename {
       kind: 'OutputField'
       name: '__typename'
       arguments: {}
@@ -833,7 +833,7 @@ export namespace Schema {
       }
     }
 
-    export interface id extends $.OutputField {
+    export interface id {
       kind: 'OutputField'
       name: 'id'
       arguments: {}
@@ -841,7 +841,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$ID
     }
 
-    export interface idNonNull extends $.OutputField {
+    export interface idNonNull {
       kind: 'OutputField'
       name: 'idNonNull'
       arguments: {}
@@ -870,7 +870,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface Bar extends $.OutputObject {
+  export interface Bar {
     kind: 'Object'
     name: 'Bar'
     fields: {
@@ -880,7 +880,7 @@ export namespace Schema {
   }
 
   export namespace Bar {
-    export interface __typename extends $.OutputField {
+    export interface __typename {
       kind: 'OutputField'
       name: '__typename'
       arguments: {}
@@ -891,7 +891,7 @@ export namespace Schema {
       }
     }
 
-    export interface int extends $.OutputField {
+    export interface int {
       kind: 'OutputField'
       name: 'int'
       arguments: {}
@@ -904,7 +904,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface DateObject1 extends $.OutputObject {
+  export interface DateObject1 {
     kind: 'Object'
     name: 'DateObject1'
     fields: {
@@ -914,7 +914,7 @@ export namespace Schema {
   }
 
   export namespace DateObject1 {
-    export interface __typename extends $.OutputField {
+    export interface __typename {
       kind: 'OutputField'
       name: '__typename'
       arguments: {}
@@ -925,7 +925,7 @@ export namespace Schema {
       }
     }
 
-    export interface date1 extends $.OutputField {
+    export interface date1 {
       kind: 'OutputField'
       name: 'date1'
       arguments: {}
@@ -938,7 +938,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface DateObject2 extends $.OutputObject {
+  export interface DateObject2 {
     kind: 'Object'
     name: 'DateObject2'
     fields: {
@@ -948,7 +948,7 @@ export namespace Schema {
   }
 
   export namespace DateObject2 {
-    export interface __typename extends $.OutputField {
+    export interface __typename {
       kind: 'OutputField'
       name: '__typename'
       arguments: {}
@@ -959,7 +959,7 @@ export namespace Schema {
       }
     }
 
-    export interface date2 extends $.OutputField {
+    export interface date2 {
       kind: 'OutputField'
       name: 'date2'
       arguments: {}
@@ -972,7 +972,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface ErrorOne extends $.OutputObject {
+  export interface ErrorOne {
     kind: 'Object'
     name: 'ErrorOne'
     fields: {
@@ -983,7 +983,7 @@ export namespace Schema {
   }
 
   export namespace ErrorOne {
-    export interface __typename extends $.OutputField {
+    export interface __typename {
       kind: 'OutputField'
       name: '__typename'
       arguments: {}
@@ -994,7 +994,7 @@ export namespace Schema {
       }
     }
 
-    export interface infoId extends $.OutputField {
+    export interface infoId {
       kind: 'OutputField'
       name: 'infoId'
       arguments: {}
@@ -1002,7 +1002,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$ID
     }
 
-    export interface message extends $.OutputField {
+    export interface message {
       kind: 'OutputField'
       name: 'message'
       arguments: {}
@@ -1015,7 +1015,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface ErrorTwo extends $.OutputObject {
+  export interface ErrorTwo {
     kind: 'Object'
     name: 'ErrorTwo'
     fields: {
@@ -1026,7 +1026,7 @@ export namespace Schema {
   }
 
   export namespace ErrorTwo {
-    export interface __typename extends $.OutputField {
+    export interface __typename {
       kind: 'OutputField'
       name: '__typename'
       arguments: {}
@@ -1037,7 +1037,7 @@ export namespace Schema {
       }
     }
 
-    export interface infoInt extends $.OutputField {
+    export interface infoInt {
       kind: 'OutputField'
       name: 'infoInt'
       arguments: {}
@@ -1045,7 +1045,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$Int
     }
 
-    export interface message extends $.OutputField {
+    export interface message {
       kind: 'OutputField'
       name: 'message'
       arguments: {}
@@ -1061,7 +1061,7 @@ export namespace Schema {
   /**
    * Object documentation.
    */
-  export interface Foo extends $.OutputObject {
+  export interface Foo {
     kind: 'Object'
     name: 'Foo'
     fields: {
@@ -1071,7 +1071,7 @@ export namespace Schema {
   }
 
   export namespace Foo {
-    export interface __typename extends $.OutputField {
+    export interface __typename {
       kind: 'OutputField'
       name: '__typename'
       arguments: {}
@@ -1087,7 +1087,7 @@ export namespace Schema {
      *
      * @deprecated Field a is deprecated.
      */
-    export interface id extends $.OutputField {
+    export interface id {
       kind: 'OutputField'
       name: 'id'
       arguments: {}
@@ -1100,7 +1100,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface Object1 extends $.OutputObject {
+  export interface Object1 {
     kind: 'Object'
     name: 'Object1'
     fields: {
@@ -1115,7 +1115,7 @@ export namespace Schema {
   }
 
   export namespace Object1 {
-    export interface __typename extends $.OutputField {
+    export interface __typename {
       kind: 'OutputField'
       name: '__typename'
       arguments: {}
@@ -1126,7 +1126,7 @@ export namespace Schema {
       }
     }
 
-    export interface ABCEnum extends $.OutputField {
+    export interface ABCEnum {
       kind: 'OutputField'
       name: 'ABCEnum'
       arguments: {}
@@ -1134,7 +1134,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$ABCEnum
     }
 
-    export interface $boolean extends $.OutputField {
+    export interface $boolean {
       kind: 'OutputField'
       name: 'boolean'
       arguments: {}
@@ -1142,7 +1142,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$Boolean
     }
 
-    export interface float extends $.OutputField {
+    export interface float {
       kind: 'OutputField'
       name: 'float'
       arguments: {}
@@ -1150,7 +1150,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$Float
     }
 
-    export interface id extends $.OutputField {
+    export interface id {
       kind: 'OutputField'
       name: 'id'
       arguments: {}
@@ -1158,7 +1158,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$ID
     }
 
-    export interface int extends $.OutputField {
+    export interface int {
       kind: 'OutputField'
       name: 'int'
       arguments: {}
@@ -1166,7 +1166,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$Int
     }
 
-    export interface $string extends $.OutputField {
+    export interface $string {
       kind: 'OutputField'
       name: 'string'
       arguments: {}
@@ -1179,7 +1179,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface Object1ImplementingInterface extends $.OutputObject {
+  export interface Object1ImplementingInterface {
     kind: 'Object'
     name: 'Object1ImplementingInterface'
     fields: {
@@ -1190,7 +1190,7 @@ export namespace Schema {
   }
 
   export namespace Object1ImplementingInterface {
-    export interface __typename extends $.OutputField {
+    export interface __typename {
       kind: 'OutputField'
       name: '__typename'
       arguments: {}
@@ -1201,7 +1201,7 @@ export namespace Schema {
       }
     }
 
-    export interface id extends $.OutputField {
+    export interface id {
       kind: 'OutputField'
       name: 'id'
       arguments: {}
@@ -1209,7 +1209,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$ID
     }
 
-    export interface int extends $.OutputField {
+    export interface int {
       kind: 'OutputField'
       name: 'int'
       arguments: {}
@@ -1222,7 +1222,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface Object2ImplementingInterface extends $.OutputObject {
+  export interface Object2ImplementingInterface {
     kind: 'Object'
     name: 'Object2ImplementingInterface'
     fields: {
@@ -1233,7 +1233,7 @@ export namespace Schema {
   }
 
   export namespace Object2ImplementingInterface {
-    export interface __typename extends $.OutputField {
+    export interface __typename {
       kind: 'OutputField'
       name: '__typename'
       arguments: {}
@@ -1244,7 +1244,7 @@ export namespace Schema {
       }
     }
 
-    export interface $boolean extends $.OutputField {
+    export interface $boolean {
       kind: 'OutputField'
       name: 'boolean'
       arguments: {}
@@ -1252,7 +1252,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$Boolean
     }
 
-    export interface id extends $.OutputField {
+    export interface id {
       kind: 'OutputField'
       name: 'id'
       arguments: {}
@@ -1265,7 +1265,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface ObjectChildA extends $.OutputObject {
+  export interface ObjectChildA {
     kind: 'Object'
     name: 'ObjectChildA'
     fields: {
@@ -1278,7 +1278,7 @@ export namespace Schema {
   }
 
   export namespace ObjectChildA {
-    export interface __typename extends $.OutputField {
+    export interface __typename {
       kind: 'OutputField'
       name: '__typename'
       arguments: {}
@@ -1289,7 +1289,7 @@ export namespace Schema {
       }
     }
 
-    export interface a extends $.OutputField {
+    export interface a {
       kind: 'OutputField'
       name: 'a'
       arguments: {}
@@ -1297,7 +1297,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$String
     }
 
-    export interface b extends $.OutputField {
+    export interface b {
       kind: 'OutputField'
       name: 'b'
       arguments: {}
@@ -1305,7 +1305,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$String
     }
 
-    export interface c1 extends $.OutputField {
+    export interface c1 {
       kind: 'OutputField'
       name: 'c1'
       arguments: {}
@@ -1313,7 +1313,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$String
     }
 
-    export interface me extends $.OutputField {
+    export interface me {
       kind: 'OutputField'
       name: 'me'
       arguments: {}
@@ -1326,7 +1326,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface ObjectChildB extends $.OutputObject {
+  export interface ObjectChildB {
     kind: 'Object'
     name: 'ObjectChildB'
     fields: {
@@ -1339,7 +1339,7 @@ export namespace Schema {
   }
 
   export namespace ObjectChildB {
-    export interface __typename extends $.OutputField {
+    export interface __typename {
       kind: 'OutputField'
       name: '__typename'
       arguments: {}
@@ -1350,7 +1350,7 @@ export namespace Schema {
       }
     }
 
-    export interface a extends $.OutputField {
+    export interface a {
       kind: 'OutputField'
       name: 'a'
       arguments: {}
@@ -1358,7 +1358,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$String
     }
 
-    export interface b extends $.OutputField {
+    export interface b {
       kind: 'OutputField'
       name: 'b'
       arguments: {}
@@ -1366,7 +1366,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$String
     }
 
-    export interface c2 extends $.OutputField {
+    export interface c2 {
       kind: 'OutputField'
       name: 'c2'
       arguments: {}
@@ -1374,7 +1374,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$String
     }
 
-    export interface me extends $.OutputField {
+    export interface me {
       kind: 'OutputField'
       name: 'me'
       arguments: {}
@@ -1387,7 +1387,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface ObjectGrandparent extends $.OutputObject {
+  export interface ObjectGrandparent {
     kind: 'Object'
     name: 'ObjectGrandparent'
     fields: {
@@ -1398,7 +1398,7 @@ export namespace Schema {
   }
 
   export namespace ObjectGrandparent {
-    export interface __typename extends $.OutputField {
+    export interface __typename {
       kind: 'OutputField'
       name: '__typename'
       arguments: {}
@@ -1409,7 +1409,7 @@ export namespace Schema {
       }
     }
 
-    export interface a extends $.OutputField {
+    export interface a {
       kind: 'OutputField'
       name: 'a'
       arguments: {}
@@ -1417,7 +1417,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$String
     }
 
-    export interface me extends $.OutputField {
+    export interface me {
       kind: 'OutputField'
       name: 'me'
       arguments: {}
@@ -1430,7 +1430,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface ObjectNested extends $.OutputObject {
+  export interface ObjectNested {
     kind: 'Object'
     name: 'ObjectNested'
     fields: {
@@ -1441,7 +1441,7 @@ export namespace Schema {
   }
 
   export namespace ObjectNested {
-    export interface __typename extends $.OutputField {
+    export interface __typename {
       kind: 'OutputField'
       name: '__typename'
       arguments: {}
@@ -1452,7 +1452,7 @@ export namespace Schema {
       }
     }
 
-    export interface id extends $.OutputField {
+    export interface id {
       kind: 'OutputField'
       name: 'id'
       arguments: {}
@@ -1460,7 +1460,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$ID
     }
 
-    export interface $object extends $.OutputField {
+    export interface $object {
       kind: 'OutputField'
       name: 'object'
       arguments: {}
@@ -1473,7 +1473,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface ObjectParent extends $.OutputObject {
+  export interface ObjectParent {
     kind: 'Object'
     name: 'ObjectParent'
     fields: {
@@ -1485,7 +1485,7 @@ export namespace Schema {
   }
 
   export namespace ObjectParent {
-    export interface __typename extends $.OutputField {
+    export interface __typename {
       kind: 'OutputField'
       name: '__typename'
       arguments: {}
@@ -1496,7 +1496,7 @@ export namespace Schema {
       }
     }
 
-    export interface a extends $.OutputField {
+    export interface a {
       kind: 'OutputField'
       name: 'a'
       arguments: {}
@@ -1504,7 +1504,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$String
     }
 
-    export interface b extends $.OutputField {
+    export interface b {
       kind: 'OutputField'
       name: 'b'
       arguments: {}
@@ -1512,7 +1512,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$String
     }
 
-    export interface me extends $.OutputField {
+    export interface me {
       kind: 'OutputField'
       name: 'me'
       arguments: {}
@@ -1525,7 +1525,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface ObjectUnion extends $.OutputObject {
+  export interface ObjectUnion {
     kind: 'Object'
     name: 'ObjectUnion'
     fields: {
@@ -1535,7 +1535,7 @@ export namespace Schema {
   }
 
   export namespace ObjectUnion {
-    export interface __typename extends $.OutputField {
+    export interface __typename {
       kind: 'OutputField'
       name: '__typename'
       arguments: {}
@@ -1546,7 +1546,7 @@ export namespace Schema {
       }
     }
 
-    export interface fooBarUnion extends $.OutputField {
+    export interface fooBarUnion {
       kind: 'OutputField'
       name: 'fooBarUnion'
       arguments: {}
@@ -1559,7 +1559,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface lowerCaseObject extends $.OutputObject {
+  export interface lowerCaseObject {
     kind: 'Object'
     name: 'lowerCaseObject'
     fields: {
@@ -1569,7 +1569,7 @@ export namespace Schema {
   }
 
   export namespace lowerCaseObject {
-    export interface __typename extends $.OutputField {
+    export interface __typename {
       kind: 'OutputField'
       name: '__typename'
       arguments: {}
@@ -1580,7 +1580,7 @@ export namespace Schema {
       }
     }
 
-    export interface id extends $.OutputField {
+    export interface id {
       kind: 'OutputField'
       name: 'id'
       arguments: {}
@@ -1593,7 +1593,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface lowerCaseObject2 extends $.OutputObject {
+  export interface lowerCaseObject2 {
     kind: 'Object'
     name: 'lowerCaseObject2'
     fields: {
@@ -1603,7 +1603,7 @@ export namespace Schema {
   }
 
   export namespace lowerCaseObject2 {
-    export interface __typename extends $.OutputField {
+    export interface __typename {
       kind: 'OutputField'
       name: '__typename'
       arguments: {}
@@ -1614,7 +1614,7 @@ export namespace Schema {
       }
     }
 
-    export interface int extends $.OutputField {
+    export interface int {
       kind: 'OutputField'
       name: 'int'
       arguments: {}
@@ -1643,7 +1643,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface InputObject extends $.InputObject {
+  export interface InputObject {
     kind: 'InputObject'
     name: 'InputObject'
     isAllFieldsNullable: true
@@ -1657,35 +1657,35 @@ export namespace Schema {
   }
 
   export namespace InputObject {
-    export interface abcEnum extends $.InputField {
+    export interface abcEnum {
       kind: 'InputField'
       name: 'abcEnum'
       inlineType: [0]
       namedType: $$NamedTypes.$$ABCEnum
     }
 
-    export interface date extends $.InputField {
+    export interface date {
       kind: 'InputField'
       name: 'date'
       inlineType: [0]
       namedType: $$NamedTypes.$$Date
     }
 
-    export interface dateRequired extends $.InputField {
+    export interface dateRequired {
       kind: 'InputField'
       name: 'dateRequired'
       inlineType: [1]
       namedType: $$NamedTypes.$$Date
     }
 
-    export interface id extends $.InputField {
+    export interface id {
       kind: 'InputField'
       name: 'id'
       inlineType: [0]
       namedType: $$NamedTypes.$$ID
     }
 
-    export interface idRequired extends $.InputField {
+    export interface idRequired {
       kind: 'InputField'
       name: 'idRequired'
       inlineType: [1]
@@ -1697,7 +1697,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface InputObjectCircular extends $.InputObject {
+  export interface InputObjectCircular {
     kind: 'InputObject'
     name: 'InputObjectCircular'
     isAllFieldsNullable: true
@@ -1708,14 +1708,14 @@ export namespace Schema {
   }
 
   export namespace InputObjectCircular {
-    export interface circular extends $.InputField {
+    export interface circular {
       kind: 'InputField'
       name: 'circular'
       inlineType: [0]
       namedType: $$NamedTypes.$$InputObjectCircular
     }
 
-    export interface date extends $.InputField {
+    export interface date {
       kind: 'InputField'
       name: 'date'
       inlineType: [0]
@@ -1727,7 +1727,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface InputObjectEnum extends $.InputObject {
+  export interface InputObjectEnum {
     kind: 'InputObject'
     name: 'InputObjectEnum'
     isAllFieldsNullable: true
@@ -1737,7 +1737,7 @@ export namespace Schema {
   }
 
   export namespace InputObjectEnum {
-    export interface abcEnum extends $.InputField {
+    export interface abcEnum {
       kind: 'InputField'
       name: 'abcEnum'
       inlineType: [0]
@@ -1749,7 +1749,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface InputObjectNested extends $.InputObject {
+  export interface InputObjectNested {
     kind: 'InputObject'
     name: 'InputObjectNested'
     isAllFieldsNullable: true
@@ -1759,7 +1759,7 @@ export namespace Schema {
   }
 
   export namespace InputObjectNested {
-    export interface InputObject extends $.InputField {
+    export interface InputObject {
       kind: 'InputField'
       name: 'InputObject'
       inlineType: [0]
@@ -1771,7 +1771,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface InputObjectNestedNonNull extends $.InputObject {
+  export interface InputObjectNestedNonNull {
     kind: 'InputObject'
     name: 'InputObjectNestedNonNull'
     isAllFieldsNullable: false
@@ -1781,7 +1781,7 @@ export namespace Schema {
   }
 
   export namespace InputObjectNestedNonNull {
-    export interface InputObject extends $.InputField {
+    export interface InputObject {
       kind: 'InputField'
       name: 'InputObject'
       inlineType: [1]
@@ -1809,7 +1809,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface DateInterface1 extends $.Interface {
+  export interface DateInterface1 {
     kind: 'Interface'
     fields: {
       date1: DateInterface1.date1
@@ -1823,7 +1823,7 @@ export namespace Schema {
   }
 
   export namespace DateInterface1 {
-    export interface __typename extends $.OutputField {
+    export interface __typename {
       kind: 'OutputField'
       name: '__typename'
       arguments: {}
@@ -1834,7 +1834,7 @@ export namespace Schema {
       }
     }
 
-    export interface date1 extends $.OutputField {
+    export interface date1 {
       kind: 'OutputField'
       name: 'date1'
       arguments: {}
@@ -1847,7 +1847,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface Error extends $.Interface {
+  export interface Error {
     kind: 'Interface'
     fields: {
       message: Error.message
@@ -1864,7 +1864,7 @@ export namespace Schema {
   }
 
   export namespace Error {
-    export interface __typename extends $.OutputField {
+    export interface __typename {
       kind: 'OutputField'
       name: '__typename'
       arguments: {}
@@ -1875,7 +1875,7 @@ export namespace Schema {
       }
     }
 
-    export interface message extends $.OutputField {
+    export interface message {
       kind: 'OutputField'
       name: 'message'
       arguments: {}
@@ -1888,7 +1888,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface Interface extends $.Interface {
+  export interface Interface {
     kind: 'Interface'
     fields: {
       id: Interface.id
@@ -1905,7 +1905,7 @@ export namespace Schema {
   }
 
   export namespace Interface {
-    export interface __typename extends $.OutputField {
+    export interface __typename {
       kind: 'OutputField'
       name: '__typename'
       arguments: {}
@@ -1916,7 +1916,7 @@ export namespace Schema {
       }
     }
 
-    export interface id extends $.OutputField {
+    export interface id {
       kind: 'OutputField'
       name: 'id'
       arguments: {}
@@ -1929,7 +1929,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface InterfaceChildA extends $.Interface {
+  export interface InterfaceChildA {
     kind: 'Interface'
     fields: {
       a: InterfaceChildA.a
@@ -1945,7 +1945,7 @@ export namespace Schema {
   }
 
   export namespace InterfaceChildA {
-    export interface __typename extends $.OutputField {
+    export interface __typename {
       kind: 'OutputField'
       name: '__typename'
       arguments: {}
@@ -1956,7 +1956,7 @@ export namespace Schema {
       }
     }
 
-    export interface a extends $.OutputField {
+    export interface a {
       kind: 'OutputField'
       name: 'a'
       arguments: {}
@@ -1964,7 +1964,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$String
     }
 
-    export interface b extends $.OutputField {
+    export interface b {
       kind: 'OutputField'
       name: 'b'
       arguments: {}
@@ -1972,7 +1972,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$String
     }
 
-    export interface c1 extends $.OutputField {
+    export interface c1 {
       kind: 'OutputField'
       name: 'c1'
       arguments: {}
@@ -1985,7 +1985,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface InterfaceChildB extends $.Interface {
+  export interface InterfaceChildB {
     kind: 'Interface'
     fields: {
       a: InterfaceChildB.a
@@ -2001,7 +2001,7 @@ export namespace Schema {
   }
 
   export namespace InterfaceChildB {
-    export interface __typename extends $.OutputField {
+    export interface __typename {
       kind: 'OutputField'
       name: '__typename'
       arguments: {}
@@ -2012,7 +2012,7 @@ export namespace Schema {
       }
     }
 
-    export interface a extends $.OutputField {
+    export interface a {
       kind: 'OutputField'
       name: 'a'
       arguments: {}
@@ -2020,7 +2020,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$String
     }
 
-    export interface b extends $.OutputField {
+    export interface b {
       kind: 'OutputField'
       name: 'b'
       arguments: {}
@@ -2028,7 +2028,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$String
     }
 
-    export interface c2 extends $.OutputField {
+    export interface c2 {
       kind: 'OutputField'
       name: 'c2'
       arguments: {}
@@ -2041,7 +2041,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface InterfaceGrandparent extends $.Interface {
+  export interface InterfaceGrandparent {
     kind: 'Interface'
     fields: {
       a: InterfaceGrandparent.a
@@ -2076,7 +2076,7 @@ export namespace Schema {
   }
 
   export namespace InterfaceGrandparent {
-    export interface __typename extends $.OutputField {
+    export interface __typename {
       kind: 'OutputField'
       name: '__typename'
       arguments: {}
@@ -2087,7 +2087,7 @@ export namespace Schema {
       }
     }
 
-    export interface a extends $.OutputField {
+    export interface a {
       kind: 'OutputField'
       name: 'a'
       arguments: {}
@@ -2100,7 +2100,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface InterfaceParent extends $.Interface {
+  export interface InterfaceParent {
     kind: 'Interface'
     fields: {
       a: InterfaceParent.a
@@ -2124,7 +2124,7 @@ export namespace Schema {
   }
 
   export namespace InterfaceParent {
-    export interface __typename extends $.OutputField {
+    export interface __typename {
       kind: 'OutputField'
       name: '__typename'
       arguments: {}
@@ -2135,7 +2135,7 @@ export namespace Schema {
       }
     }
 
-    export interface a extends $.OutputField {
+    export interface a {
       kind: 'OutputField'
       name: 'a'
       arguments: {}
@@ -2143,7 +2143,7 @@ export namespace Schema {
       namedType: $$NamedTypes.$$String
     }
 
-    export interface b extends $.OutputField {
+    export interface b {
       kind: 'OutputField'
       name: 'b'
       arguments: {}
@@ -2172,7 +2172,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface DateUnion extends $.Union {
+  export interface DateUnion {
     kind: 'Union'
     name: 'DateUnion'
     members: [DateObject1, DateObject2]
@@ -2192,7 +2192,7 @@ export namespace Schema {
   /**
    * Union documentation.
    */
-  export interface FooBarUnion extends $.Union {
+  export interface FooBarUnion {
     kind: 'Union'
     name: 'FooBarUnion'
     members: [Bar, Foo]
@@ -2209,7 +2209,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface Result extends $.Union {
+  export interface Result {
     kind: 'Union'
     name: 'Result'
     members: [ErrorOne, ErrorTwo, Object1]
@@ -2228,7 +2228,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface lowerCaseUnion extends $.Union {
+  export interface lowerCaseUnion {
     kind: 'Union'
     name: 'lowerCaseUnion'
     members: [lowerCaseObject, lowerCaseObject2]
@@ -2269,7 +2269,7 @@ export namespace Schema {
    * "B" - Enum B member documentation.
    * "C" - (DEPRECATED: Enum value C is deprecated.)
    */
-  export interface ABCEnum extends $.Enum {
+  export interface ABCEnum {
     kind: 'Enum'
     name: 'ABCEnum'
     members: ['A', 'B', 'C']
@@ -2283,7 +2283,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface Case extends $.Enum {
+  export interface Case {
     kind: 'Enum'
     name: 'Case'
     members: ['ErrorOne', 'ErrorTwo', 'Object1']
@@ -2297,7 +2297,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface ChildAInterfaceHierarchyMember extends $.Enum {
+  export interface ChildAInterfaceHierarchyMember {
     kind: 'Enum'
     name: 'ChildAInterfaceHierarchyMember'
     members: ['InterfaceChildA']
@@ -2308,7 +2308,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface ChildBInterfaceHierarchyMember extends $.Enum {
+  export interface ChildBInterfaceHierarchyMember {
     kind: 'Enum'
     name: 'ChildBInterfaceHierarchyMember'
     members: ['InterfaceChildB']
@@ -2319,7 +2319,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface GrandparentInterfaceHierarchyMember extends $.Enum {
+  export interface GrandparentInterfaceHierarchyMember {
     kind: 'Enum'
     name: 'GrandparentInterfaceHierarchyMember'
     members: ['InterfaceChildA', 'InterfaceChildB', 'InterfaceGrandparent', 'InterfaceParent']
@@ -2334,7 +2334,7 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export interface ParentInterfaceHierarchyMember extends $.Enum {
+  export interface ParentInterfaceHierarchyMember {
     kind: 'Enum'
     name: 'ParentInterfaceHierarchyMember'
     members: ['InterfaceChildA', 'InterfaceChildB', 'InterfaceParent']
@@ -2388,24 +2388,6 @@ export namespace Schema {
   //
   //
 
-  //                                              Boolean
-  // --------------------------------------------------------------------------------------------------
-  //
-
-  export type Boolean = $.StandardTypes.Boolean
-
-  //                                               Float
-  // --------------------------------------------------------------------------------------------------
-  //
-
-  export type Float = $.StandardTypes.Float
-
-  //                                                 ID
-  // --------------------------------------------------------------------------------------------------
-  //
-
-  export type ID = $.StandardTypes.ID
-
   //                                                Int
   // --------------------------------------------------------------------------------------------------
   //
@@ -2417,6 +2399,24 @@ export namespace Schema {
   //
 
   export type String = $.StandardTypes.String
+
+  //                                                 ID
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export type ID = $.StandardTypes.ID
+
+  //                                              Boolean
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export type Boolean = $.StandardTypes.Boolean
+
+  //                                               Float
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export type Float = $.StandardTypes.Float
 
   //
   //
@@ -2486,11 +2486,11 @@ export namespace Schema {
     export type $$ParentInterfaceHierarchyMember = ParentInterfaceHierarchyMember
     export type $$Date = Date
     export type $$bigint = $bigint
-    export type $$Boolean = Boolean
-    export type $$Float = Float
-    export type $$ID = ID
     export type $$Int = Int
     export type $$String = String
+    export type $$ID = ID
+    export type $$Boolean = Boolean
+    export type $$Float = Float
   }
 }
 
@@ -2510,7 +2510,7 @@ export namespace Schema {
 //
 //
 
-export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Scalar.$Registry> extends $ {
+export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Scalar.$Registry> {
   name: $$Data.Name
   operationsAvailable: ['query', 'mutation']
   RootUnion:
@@ -2596,19 +2596,19 @@ export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$
   scalarNamesUnion:
     | 'Date'
     | 'bigint'
-    | 'Boolean'
-    | 'Float'
-    | 'ID'
     | 'Int'
     | 'String'
+    | 'ID'
+    | 'Boolean'
+    | 'Float'
   scalars: {
     Date: Schema.Date
-    bigint: Schema.$bigint
-    Boolean: Schema.Boolean
-    Float: Schema.Float
-    ID: Schema.ID
+    bigint: Schema.bigint
     Int: Schema.Int
     String: Schema.String
+    ID: Schema.ID
+    Boolean: Schema.Boolean
+    Float: Schema.Float
   }
   scalarRegistry: $Scalars
   extensions: $$Utilities.GlobalRegistry.TypeExtensions

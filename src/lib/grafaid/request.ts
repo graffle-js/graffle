@@ -1,4 +1,3 @@
-import { isPlainObject } from 'es-toolkit'
 import type { GraphQLError, OperationDefinitionNode, OperationTypeNode } from 'graphql'
 import type { Errors } from '../errors/_namespace.js'
 import type { Grafaid } from './_namespace.js'

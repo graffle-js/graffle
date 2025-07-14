@@ -58,7 +58,7 @@
   "scripts": {
     "extension:document-builder:test:generate-fixtures": "tsx src/extensions/DocumentBuilder/__tests__/fixtures/generate.ts",
     "extension:schema-errors:test:generate-fixtures": "pnpm graffle --project src/extensions/SchemaErrors/__tests__/fixture",
-    "graffle": "tsx ./src/generator/cli/generate.ts",
+    "graffle": "tsx ./src/cli/index.ts",
     "serve:pokemon": "tsx tests/_/services/pokemonManual.ts",
     "gen:graffle": "pnpm test:e2e:github:gen:graffle && pnpm extension:schema-errors:test:generate-fixtures && pnpm extension:document-builder:test:generate-fixtures && pnpm website:gen:graffle",
     "examples:gen:graffle": "pnpm build && cd examples && pnpm i && pnpm gen:graffle",

@@ -1,5 +1,4 @@
 import type * as $$Utilities from '../../../../../src/exports/utilities-for-generated.js'
-
 export * from '../../../../../src/types/Schema/StandardTypes/scalar.js'
 
 //

@@ -195,6 +195,8 @@ type Query {
   """Query enum field documentation."""
   abcEnum: ABCEnum
   argInputObjectCircular(input: InputObjectCircular): String
+  bigintField: bigint
+  bigintFieldNonNull: bigint!
   date: Date
   dateArg(date: Date): Date
   dateArgInputObject(input: InputObject): Date
@@ -259,6 +261,8 @@ type Query {
 }
 
 union Result = ErrorOne | ErrorTwo | Object1
+
+scalar bigint
 
 type lowerCaseObject {
   id: ID
