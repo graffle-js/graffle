@@ -290,8 +290,8 @@ export const SchemaGenerator = createCodeGenerator(
     const interfaces = kindMap.list.Interface.map(_ => [_.name, `${$.Schema}.${_.name}`] as const)
     const enums = kindMap.list.Enum.map(_ => [_.name, `${$.Schema}.${_.name}`] as const)
     const scalars = [
-      ...kindMap.list.ScalarCustom.map(_ => [_.name, `${$.Schema}.${_.name}`] as const),
-      ...kindMap.list.ScalarStandard.map(_ => [_.name, `${$.Schema}.${_.name}`] as const),
+      ...kindMap.list.ScalarCustom.map(_ => [_.name, `${$.Schema}.${renderName(_.name)}`] as const),
+      ...kindMap.list.ScalarStandard.map(_ => [_.name, `${$.Schema}.${renderName(_.name)}`] as const),
     ]
     const operationsAvailable = entries(kindMap.index.Root).filter(_ => _[1] !== null).map(_ => _[0])
     const schema: Code.TermObject = {

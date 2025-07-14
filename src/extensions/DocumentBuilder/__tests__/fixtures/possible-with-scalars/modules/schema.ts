@@ -2603,7 +2603,7 @@ export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$
     | 'String'
   scalars: {
     Date: Schema.Date
-    bigint: Schema.bigint
+    bigint: Schema.$bigint
     Boolean: Schema.Boolean
     Float: Schema.Float
     ID: Schema.ID

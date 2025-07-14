@@ -118,4 +118,14 @@ describe('Issue #1354 - TypeScript reserved keywords', () => {
     // Runtime map uses original names
     expect(scalar).toContain('bigint: CustomScalars.bigint')
   })
+
+  test('schema scalars object uses escaped names for reserved keywords', async () => {
+    await generate({ fs, schema: { type: 'sdl', sdl: schemas.bigintOnly } })
+    const { schema } = readGeneratedFiles()
+
+    // BUG: This currently fails because Schema.ts uses _.name instead of renderName(_.name)
+    // The scalars object should reference the escaped name Schema.$bigint, not Schema.bigint
+    expect(schema).toContain('bigint: Schema.$bigint')
+    expect(schema).not.toContain('bigint: Schema.bigint')
+  })
 })
