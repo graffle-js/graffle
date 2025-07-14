@@ -42,15 +42,15 @@ export const toGraphQLValue: ValueMapper = (context, sddm, value) => {
     return Nodes.ObjectValue({
       fields: Object.entries(value).map(([fieldName, fieldValue]) => {
         // Check if the original field name starts with $ (enum indicator)
-        const isEnumField = fieldName.startsWith('$')
+        const isEnumField = fieldName.startsWith(`$`)
         const actualFieldName = isEnumField ? fieldName.substring(1) : fieldName
-        
+
         // Get the field's schema info using the actual field name (without $)
         const fieldSddm = sddmInputObject?.f?.[actualFieldName]
-        
+
         // Update context if this is an enum field
         const fieldContext = isEnumField ? { ...context, value: { isEnum: true } } : context
-        
+
         return Nodes.ObjectField({
           name: Nodes.Name({ value: actualFieldName }),
           value: toGraphQLValue(fieldContext, fieldSddm, fieldValue),
