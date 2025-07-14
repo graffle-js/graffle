@@ -1,4 +1,4 @@
-import { isPlainObject } from 'es-toolkit'
+import { mapEntriesDeep, type DeepObjectValue } from '../../../lib/object-utils.js'
 
 export type ArgValue = string | boolean | null | number | ArgsObject
 
@@ -19,20 +19,14 @@ export const isEnumKey = (key: string) => key.startsWith(enumKeyPrefix)
  * This is useful for processing variable values where enum field names need to have
  * their $ prefix removed for GraphQL compatibility.
  */
-export const enumKeyPrefixStripFromObject = <T>(value: T): T => {
-  if (Array.isArray(value)) {
-    return value.map(item => enumKeyPrefixStripFromObject(item)) as T
-  } else if (isPlainObject(value)) {
-    const newObject: any = {}
-    for (const currentKey in value) {
-      const processedValue = enumKeyPrefixStripFromObject(value[currentKey])
-      if (isEnumKey(currentKey)) {
-        newObject[enumKeyPrefixStrip(currentKey)] = processedValue
-      } else {
-        newObject[currentKey] = processedValue
+export const enumKeyPrefixStripFromObject = <T extends DeepObjectValue>(value: T): T => {
+  return mapEntriesDeep(value, (key, value) => {
+    if (isEnumKey(key)) {
+      return {
+        key: enumKeyPrefixStrip(key),
+        value: value,
       }
     }
-    return newObject as T
-  }
-  return value
+    return undefined
+  })
 }
