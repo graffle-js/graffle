@@ -1,6 +1,5 @@
 import { isPlainObject } from 'es-toolkit'
 import type { GraphQLError, OperationDefinitionNode, OperationTypeNode } from 'graphql'
-import { mapEntriesDeep, type DeepObjectValue } from '../object-utils.js'
 import type { Errors } from '../errors/_namespace.js'
 import type { Grafaid } from './_namespace.js'
 import { getOperationDefinition, normalizeDocumentToNode } from './document.js'
@@ -74,29 +73,3 @@ export const normalizeRequestToNode = <$R extends RequestInput | RequestAnalyzed
 	} as any
 }
 
-/**
- * Apply a visitor function to all key-value pairs in a variables object.
- * 
- * @deprecated Use `mapEntriesDeep` from object-utils instead. This is a thin wrapper 
- * that will be removed in a future version.
- */
-export const mapVariables = (
-  variables: Grafaid.Variables | undefined,
-  visitor: (key: string, value: Grafaid.VariableValue) => undefined | { key: string; value: Grafaid.VariableValue },
-): Grafaid.Variables | undefined => {
-  if (variables === undefined) return
-  return mapVariableValue(variables, visitor)
-}
-
-/**
- * Apply a visitor function to all key-value pairs in a nested variable value structure.
- * 
- * @deprecated Use `mapEntriesDeep` from object-utils instead. This is a thin wrapper 
- * that will be removed in a future version.
- */
-export const mapVariableValue = <$Value extends Grafaid.VariableValue>(
-  value: $Value,
-  visitor: (key: string, value: Grafaid.VariableValue) => undefined | { key: string; value: Grafaid.VariableValue },
-): $Value => {
-  return mapEntriesDeep(value as DeepObjectValue, visitor) as $Value
-}

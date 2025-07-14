@@ -33,7 +33,6 @@ export interface Captures {
   variables: CapturedVariable[]
 }
 
-
 export const createOperationContext = (options?: Options): OperationContext => {
   const context: OperationContext = {
     sddm: options?.sddm ?? undefined,

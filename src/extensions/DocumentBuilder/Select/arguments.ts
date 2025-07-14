@@ -1,4 +1,4 @@
-import { mapEntriesDeep, type DeepObjectValue } from '../../../lib/object-utils.js'
+import { type DeepObjectValue, mapEntriesDeep } from '../../../lib/object-utils.js'
 
 export type ArgValue = string | boolean | null | number | ArgsObject
 
