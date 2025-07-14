@@ -721,6 +721,31 @@ exports[`( variables: false; scalars: (none) ) - Query - args - input object enu
 "
 `;
 
+exports[`( variables: false; scalars: (none) ) - Query - args - nested input object enum multiple > args - nested input object enum multiple 1`] = `
+"
+
+--------------GRAFFLE QUERY-------------
+{
+  "stringWithArgInputObjectEnum": {
+    "$": {
+      "input": {
+        "$abcEnum": "B",
+        "id": "test"
+      }
+    }
+  }
+}
+--------GRAPHQL DOCUMENT & VARIABLES--------
+{
+  stringWithArgInputObjectEnum(input: {abcEnum: B, id: "test"})
+}
+----------------
+{
+  "$default": {}
+}
+"
+`;
+
 exports[`( variables: false; scalars: (none) ) - Query - args - object with args (empty object) > args - object with args (empty object) 1`] = `
 "
 
