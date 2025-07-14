@@ -2262,7 +2262,7 @@ query ($input: InputObjectEnum!) {
 {
   "$default": {
     "input": {
-      "$abcEnum": "A"
+      "abcEnum": "A"
     }
   }
 }
@@ -2291,7 +2291,7 @@ query ($input: InputObjectEnum!) {
 {
   "$default": {
     "input": {
-      "$abcEnum": "B",
+      "abcEnum": "B",
       "id": "test"
     }
   }
