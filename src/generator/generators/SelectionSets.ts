@@ -46,8 +46,8 @@ export const ModuleGeneratorSelectionSets = createModuleGenerator(
       parameters: $ScalarsTypeParameter,
       // dprint-ignore
       block: `
-        ${config.schema.kindMap.index.Root.query ? `query?: Record<string, Query<${i._$Scalars}>>` : ``}
-        ${config.schema.kindMap.index.Root.mutation ? `mutation?: Record<string, Mutation<${i._$Scalars}>>` : ``}
+        ${config.schema.kindMap.index.Root.query ? `query?: Record<string, ${renderName(config.schema.kindMap.index.Root.query)}<${i._$Scalars}>>` : ``}
+        ${config.schema.kindMap.index.Root.mutation ? `mutation?: Record<string, ${renderName(config.schema.kindMap.index.Root.mutation)}<${i._$Scalars}>>` : ``}
       `,
     }))
     code``
