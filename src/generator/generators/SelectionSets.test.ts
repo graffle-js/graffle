@@ -27,7 +27,7 @@ describe('custom root type names', () => {
       type QueryRoot { x: String }
       type MutationRoot { y: String }
     `)
-    
+
     expect(doc).toContain('QueryRoot<_$Scalars>')
     expect(doc).toContain('MutationRoot<_$Scalars>')
     expect(doc).not.toContain(': Query<')
@@ -39,7 +39,7 @@ describe('custom root type names', () => {
       type Query { x: String }
       type Mutation { y: String }
     `)
-    
+
     expect(doc).toContain('Query<_$Scalars>')
     expect(doc).toContain('Mutation<_$Scalars>')
   })
@@ -49,7 +49,7 @@ describe('custom root type names', () => {
       schema { query: MyQuery }
       type MyQuery { x: String }
     `)
-    
+
     expect(doc).toContain('MyQuery<_$Scalars>')
     expect(doc).not.toContain('mutation?:')
   })
