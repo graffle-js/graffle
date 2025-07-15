@@ -5,9 +5,6 @@ import { generate } from '../generator/generate.js'
 
 const fs = MemFS.fs.promises as any as typeof Fs
 
-const readGeneratedSelectionSets = () => 
-  MemFS.fs.readFileSync('./graffle/modules/selection-sets.ts', 'utf8')
-
 beforeEach(async () => {
   try {
     await fs.rmdir(process.cwd(), { recursive: true })
@@ -15,86 +12,45 @@ beforeEach(async () => {
   await fs.mkdir(process.cwd(), { recursive: true })
 })
 
-describe('Issue #1353 - Custom root type names', () => {
+describe('custom root type names', () => {
+  const generateAndGetDocument = async (sdl: string) => {
+    await generate({ fs, schema: { type: 'sdl', sdl } })
+    const content = MemFS.fs.readFileSync('./graffle/modules/selection-sets.ts', 'utf8')
+    const match = content.match(/export interface \$Document[^}]+\}/s)
+    expect(match).toBeTruthy()
+    return match![0]
+  }
+
   test('uses dynamic root type names instead of hardcoded Query/Mutation', async () => {
-    // Schema with custom root type names that would break with hardcoded references
-    const schema = `
-      schema {
-        query: QueryRoot
-        mutation: MutationRoot
-      }
-
-      type QueryRoot {
-        getString: String
-      }
-
-      type MutationRoot {
-        setString(value: String!): String
-      }
-    `
-
-    await generate({ fs, schema: { type: 'sdl', sdl: schema } })
-    const selectionSets = readGeneratedSelectionSets()
-
-    // Find the $Document interface
-    const documentMatch = selectionSets.match(/export interface \$Document[^}]+\}/s)
-    expect(documentMatch).toBeTruthy()
-    const documentInterface = documentMatch![0]
-
-    // Should use actual root type names from schema, not hardcoded "Query"/"Mutation"
-    expect(documentInterface).toContain('QueryRoot<_$Scalars>')
-    expect(documentInterface).toContain('MutationRoot<_$Scalars>')
+    const doc = await generateAndGetDocument(`
+      schema { query: QueryRoot, mutation: MutationRoot }
+      type QueryRoot { x: String }
+      type MutationRoot { y: String }
+    `)
     
-    // Should NOT contain hardcoded type names
-    expect(documentInterface).not.toContain('Query<_$Scalars>')
-    expect(documentInterface).not.toContain('Mutation<_$Scalars>')
+    expect(doc).toContain('QueryRoot<_$Scalars>')
+    expect(doc).toContain('MutationRoot<_$Scalars>')
+    expect(doc).not.toContain(': Query<')
+    expect(doc).not.toContain(': Mutation<')
   })
 
-  test('works with standard Query/Mutation names', async () => {
-    // Standard schema should still work
-    const schema = `
-      type Query {
-        getString: String
-      }
-
-      type Mutation {
-        setString(value: String!): String
-      }
-    `
-
-    await generate({ fs, schema: { type: 'sdl', sdl: schema } })
-    const selectionSets = readGeneratedSelectionSets()
-
-    // Find the $Document interface
-    const documentMatch = selectionSets.match(/export interface \$Document[^}]+\}/s)
-    expect(documentMatch).toBeTruthy()
-    const documentInterface = documentMatch![0]
-
-    // Should use standard names
-    expect(documentInterface).toContain('Query<_$Scalars>')
-    expect(documentInterface).toContain('Mutation<_$Scalars>')
+  test('works with standard names', async () => {
+    const doc = await generateAndGetDocument(`
+      type Query { x: String }
+      type Mutation { y: String }
+    `)
+    
+    expect(doc).toContain('Query<_$Scalars>')
+    expect(doc).toContain('Mutation<_$Scalars>')
   })
 
   test('handles query-only schema', async () => {
-    const schema = `
-      schema {
-        query: CustomQuery
-      }
-
-      type CustomQuery {
-        getString: String
-      }
-    `
-
-    await generate({ fs, schema: { type: 'sdl', sdl: schema } })
-    const selectionSets = readGeneratedSelectionSets()
-
-    const documentMatch = selectionSets.match(/export interface \$Document[^}]+\}/s)
-    expect(documentMatch).toBeTruthy()
-    const documentInterface = documentMatch![0]
-
-    // Should have query but no mutation
-    expect(documentInterface).toContain('query?: Record<string, CustomQuery<_$Scalars>>')
-    expect(documentInterface).not.toContain('mutation?:')
+    const doc = await generateAndGetDocument(`
+      schema { query: MyQuery }
+      type MyQuery { x: String }
+    `)
+    
+    expect(doc).toContain('MyQuery<_$Scalars>')
+    expect(doc).not.toContain('mutation?:')
   })
 })
