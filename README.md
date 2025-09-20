@@ -101,26 +101,26 @@ await client.request(document)
 ## Examples
 
 - Request:
-  - [Authentication via HTTP header](./examples/request-authentication-via-http-header.ts)
-  - [Method GET](./examples/request-method-get.ts)
-  - [Cancellation](./examples/request-cancellation.ts)
-  - [Headers Per Request (static)](./examples/request-headers-static-per-request.ts)
-  - [Headers Per Request (dynamic)](./examples/request-headers-dynamic-per-request.ts)
-  - [Handle Raw Response](./examples/request-handle-raw-response.ts)
+  - [Authentication via HTTP header](https://github.com/graffle-js/graffle/blob/graphql-request/examples/request-authentication-via-http-header.ts)
+  - [Method GET](https://github.com/graffle-js/graffle/blob/graphql-request/examples/request-method-get.ts)
+  - [Cancellation](https://github.com/graffle-js/graffle/blob/graphql-request/examples/request-cancellation.ts)
+  - [Headers Per Request (static)](https://github.com/graffle-js/graffle/blob/graphql-request/examples/request-headers-static-per-request.ts)
+  - [Headers Per Request (dynamic)](https://github.com/graffle-js/graffle/blob/graphql-request/examples/request-headers-dynamic-per-request.ts)
+  - [Handle Raw Response](https://github.com/graffle-js/graffle/blob/graphql-request/examples/request-handle-raw-response.ts)
 - GraphQL:
-  - [Document Variables](./examples/graphql-document-variables.ts)
-  - [Mutation](./examples/graphql-mutations.ts)
-  - [Batching Requests](./examples/graphql-batching-requests.ts)
+  - [Document Variables](https://github.com/graffle-js/graffle/blob/graphql-request/examples/graphql-document-variables.ts)
+  - [Mutation](https://github.com/graffle-js/graffle/blob/graphql-request/examples/graphql-mutations.ts)
+  - [Batching Requests](https://github.com/graffle-js/graffle/blob/graphql-request/examples/graphql-batching-requests.ts)
 - Configuration:
-  - [Fetch: Passing Options](./examples/configuration-fetch-options.ts)
-  - [Custom JSON Serializer](./examples/configuration-request-json-serializer.ts)
-  - [Incremental: Set Endpoint](./examples/configuration-incremental-endpoint.ts)
-  - [Incremental: Set Request Headers](./examples/configuration-incremental-request-headers.ts)
+  - [Fetch: Passing Options](https://github.com/graffle-js/graffle/blob/graphql-request/examples/configuration-fetch-options.ts)
+  - [Custom JSON Serializer](https://github.com/graffle-js/graffle/blob/graphql-request/examples/configuration-request-json-serializer.ts)
+  - [Incremental: Set Endpoint](https://github.com/graffle-js/graffle/blob/graphql-request/examples/configuration-incremental-endpoint.ts)
+  - [Incremental: Set Request Headers](https://github.com/graffle-js/graffle/blob/graphql-request/examples/configuration-incremental-request-headers.ts)
 - TypeScript:
-  - [Use `TypedDocumentNode`](./examples/typescript-typed-document-node.ts)
+  - [Use `TypedDocumentNode`](https://github.com/graffle-js/graffle/blob/graphql-request/examples/typescript-typed-document-node.ts)
 - Other:
-  - [Middleware](./examples/other-middleware.ts)
-  - [Error Handling](./examples/other-error-handling.ts)
+  - [Middleware](https://github.com/graffle-js/graffle/blob/graphql-request/examples/other-middleware.ts)
+  - [Error Handling](https://github.com/graffle-js/graffle/blob/graphql-request/examples/other-error-handling.ts)
 
 ## Node Version Support
 
@@ -136,7 +136,7 @@ Any issue that exists solely for an unsupported version of Nodejs will be reject
 
 ## Reference
 
-⚠️ This reference is incomplete. Check out the [examples](./examples/) for more reference material.
+⚠️ This reference is incomplete. Check out the [examples](https://github.com/graffle-js/graffle/blob/graphql-request/examples/) for more reference material.
 
 ### Configuration
 
