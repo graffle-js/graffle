@@ -1,7 +1,8 @@
----------------------------------------- SHOW ----------------------------------------
-true
----------------------------------------- SHOW ----------------------------------------
-[
-  { name: 'Pikachu', birthday: 1850-01-01T00:00:00.000Z },
-  { name: 'Squirtle', birthday: 1910-01-01T00:00:00.000Z }
-]
+ERROR TYPE: ContextualError
+ERROR MESSAGE: There was an error in the core implementation of hook "exchange".
+ERROR CONTEXT: {"hookName":"exchange","source":"implementation"}
+CAUSED BY:
+  - TypeError: fetch failed
+  - AggregateError [ECONNREFUSED]:
+  - Error: connect ECONNREFUSED ::1:3000
+  - Error: connect ECONNREFUSED 127.0.0.1:3000

@@ -1,6 +1,5 @@
-import * as ErrorStackParser from 'error-stack-parser'
 import { capitalize, kebabCase } from 'es-toolkit'
-import { execa, ExecaError } from 'execa'
+import { execa } from 'execa'
 import { globby } from 'globby'
 import * as Path from 'node:path'
 import stripAnsi from 'strip-ansi'
@@ -193,145 +192,42 @@ export const runExample = async (filePath: string) => {
     ? currentDir
     : Path.join(currentDir, 'examples')
 
-  // Strip the examples/ prefix if present
-  const relativePath = filePath.replace(/^\.\/examples\//, './').replace(/^examples\//, './')
+  // Get the absolute path to the example file
+  const absoluteExamplePath = Path.isAbsolute(filePath)
+    ? filePath
+    : Path.join(examplesDir, filePath.replace(/^\.\/examples\//, './').replace(/^examples\//, './'))
+
+  // Use the example runner wrapper that handles error formatting
+  const runnerPath = Path.join(
+    currentDir.endsWith('/examples') ? Path.dirname(currentDir) : currentDir,
+    'scripts/generate-examples-derivatives/example-runner.ts',
+  )
 
   // Pass environment variables including any POKEMON_SCHEMA_URL from vitest
   const result = await execa({
     reject: false,
-    cwd: examplesDir,
     env: {
       ...process.env,
       // Ensure the subprocess gets the server URL if set by vitest
       POKEMON_SCHEMA_URL: process.env['POKEMON_SCHEMA_URL'],
     },
-  })`pnpm tsx ${relativePath}`
+  })`pnpm tsx ${runnerPath} ${absoluteExamplePath}`
 
   let exampleOutput = ``
 
-  // Handle different scenarios
-  if (filePath.includes(`_throws`)) {
-    // For examples that are expected to throw, capture stderr
-    exampleOutput = result.stderr || result.stdout || ''
-  } else if (result.failed) {
-    // If the command failed, capture stderr (error output)
-    exampleOutput = result.stderr || ''
-  } else {
-    // For successful runs, capture stdout
-    exampleOutput = result.stdout || ''
+  // Always capture stdout since that's where our formatted output goes
+  // The runner handles all error formatting, so we just capture the output
+  exampleOutput = result.stdout || ''
+
+  // If there's no stdout but there is stderr, something went wrong with the runner itself
+  if (!exampleOutput && result.stderr) {
+    exampleOutput = result.stderr
   }
 
   exampleOutput = stripAnsi(exampleOutput)
-  exampleOutput = rewriteDynamicError(exampleOutput)
 
   return exampleOutput
 }
 
-export const rewriteDynamicError = (value: string) => {
-  // For test output, create a clean, deterministic format
-  // that focuses on the error messages and cause chain
-
-  // Extract error information using a structured approach
-  const lines = value.split('\n')
-  const output: string[] = []
-
-  // Check if this is an error output
-  const hasError = value.includes('Error:') || value.includes('ContextualError:')
-  if (!hasError) {
-    // Not an error, just normalize dates and return
-    return value.replace(/date: '.*GMT'/, `date: 'NORMALIZED_DATE'`)
-  }
-
-  // Parse the error structure to extract key information
-  let currentError: {
-    type?: string
-    message?: string
-    code?: string
-    context?: any
-    causedBy?: string[]
-  } = {}
-
-  let inCause = false
-  let depth = 0
-
-  for (const line of lines) {
-    // Main error type and message
-    if (line.includes('ContextualError:')) {
-      currentError.type = 'ContextualError'
-      currentError.message = line.split('ContextualError:')[1]?.trim()
-    } else if (line.match(/^[A-Z]\w*Error:/)) {
-      const match = line.match(/^([A-Z]\w*Error):\s*(.*)/)
-      if (match) {
-        currentError.type = match[1]
-        currentError.message = match[2]
-      }
-    } // Error properties
-    else if (line.includes('code:')) {
-      const match = line.match(/code:\s*'([^']+)'/)
-      if (match) currentError.code = match[1]
-    } else if (line.includes('context:')) {
-      // Extract context object
-      const contextMatch = line.match(/context:\s*({.+})/)
-      if (contextMatch) {
-        try {
-          currentError.context = contextMatch[1]
-        } catch {
-          currentError.context = line.split('context:')[1]?.trim()
-        }
-      }
-    } // Cause chain
-    else if (line.includes('cause:') || line.includes('[cause]:')) {
-      inCause = true
-      if (!currentError.causedBy) currentError.causedBy = []
-      const causeMatch = line.match(/\[?cause\]?:\s*(.+)/)
-      if (causeMatch) {
-        currentError.causedBy.push(causeMatch[1]!)
-      }
-    } else if (inCause && line.match(/^\s*at\s+/)) {
-      // Skip stack traces in test output
-      continue
-    }
-  }
-
-  // Format the output in a clean, deterministic way
-  if (currentError.type) {
-    output.push(`ERROR TYPE: ${currentError.type}`)
-  }
-  if (currentError.message) {
-    output.push(`ERROR MESSAGE: ${currentError.message}`)
-  }
-  if (currentError.code) {
-    output.push(`ERROR CODE: ${currentError.code}`)
-  }
-  if (currentError.context) {
-    output.push(`ERROR CONTEXT: ${currentError.context}`)
-  }
-  if (currentError.causedBy && currentError.causedBy.length > 0) {
-    output.push(`CAUSED BY:`)
-    currentError.causedBy.forEach(cause => {
-      output.push(`  - ${cause}`)
-    })
-  }
-
-  // If we couldn't parse it properly, fall back to simplified normalization
-  if (output.length === 0) {
-    // Just extract error messages and remove all file paths and stack traces
-    const errorLines = lines.filter(line =>
-      (line.includes('Error:') || line.includes('error:'))
-      && !line.includes('/')
-      && !line.match(/^\s*at\s+/)
-    )
-
-    if (errorLines.length > 0) {
-      return errorLines.join('\n')
-    }
-
-    // Last resort: return first few meaningful lines
-    return lines
-      .filter(line => line.trim() && !line.match(/^\s*at\s+/))
-      .slice(0, 5)
-      .join('\n')
-  }
-
-  return output.join('\n')
-}
+// Removed: rewriteDynamicError function is no longer needed
+// Errors are now properly formatted in the example-runner.ts wrapper

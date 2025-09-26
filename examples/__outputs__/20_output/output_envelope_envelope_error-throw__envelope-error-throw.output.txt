@@ -1,4 +1,5 @@
 ERROR TYPE: ContextualError
 ERROR MESSAGE: There was an error in the interceptor "anonymous" (use named functions to improve this error message) while running hook "encode".
+ERROR CONTEXT: {"hookName":"encode","source":"extension","interceptorName":"anonymous"}
 CAUSED BY:
   - Error: Something went wrong.

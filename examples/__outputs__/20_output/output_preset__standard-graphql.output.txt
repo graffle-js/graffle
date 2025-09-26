@@ -1,7 +1,6 @@
 ERROR TYPE: ContextualError
 ERROR MESSAGE: There was an error in the core implementation of hook "exchange".
-ERROR CODE: ERR_INVALID_URL
-ERROR CONTEXT: { hookName: 'exchange', source: 'implementation' }
+ERROR CONTEXT: {"hookName":"exchange","source":"implementation"}
 CAUSED BY:
   - TypeError: Failed to parse URL from bad
   - TypeError: Invalid URL

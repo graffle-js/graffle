@@ -23,26 +23,11 @@
   },
   body: '{"query":"mutation { addPokemon(attack:0, defense:0, hp:1, name:\\"Nano\\", type: grass) { name } }"}'
 }
----------------------------------------- SHOW ----------------------------------------
-{
-  methodMode: 'getReads',
-  headers: Headers {
-    accept: 'application/graphql-response+json; charset=utf-8, application/json; charset=utf-8',
-    tenant: 'nano'
-  },
-  method: 'get',
-  url: URL {
-    href: 'http://localhost:3000/graphql?query=query+%7B+pokemonByName%28name%3A+%22Nano%22%29+%7B+hp+%7D+%7D',
-    origin: 'http://localhost:3000',
-    protocol: 'http:',
-    username: '',
-    password: '',
-    host: 'localhost:3000',
-    hostname: 'localhost',
-    port: '3000',
-    pathname: '/graphql',
-    search: '?query=query+%7B+pokemonByName%28name%3A+%22Nano%22%29+%7B+hp+%7D+%7D',
-    searchParams: URLSearchParams { 'query' => 'query { pokemonByName(name: "Nano") { hp } }' },
-    hash: ''
-  }
-}
+ERROR TYPE: ContextualError
+ERROR MESSAGE: There was an error in the core implementation of hook "exchange".
+ERROR CONTEXT: {"hookName":"exchange","source":"implementation"}
+CAUSED BY:
+  - TypeError: fetch failed
+  - AggregateError [ECONNREFUSED]:
+  - Error: connect ECONNREFUSED ::1:3000
+  - Error: connect ECONNREFUSED 127.0.0.1:3000

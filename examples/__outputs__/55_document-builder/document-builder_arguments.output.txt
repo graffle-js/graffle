@@ -1,15 +1,8 @@
----------------------------------------- SHOW ----------------------------------------
-[
-  {
-    "name": "Pikachu",
-    "trainer": {
-      "name": "Ash"
-    }
-  },
-  {
-    "name": "Charizard",
-    "trainer": {
-      "name": "Ash"
-    }
-  }
-]
+ERROR TYPE: ContextualError
+ERROR MESSAGE: There was an error in the core implementation of hook "exchange".
+ERROR CONTEXT: {"hookName":"exchange","source":"implementation"}
+CAUSED BY:
+  - TypeError: fetch failed
+  - AggregateError [ECONNREFUSED]:
+  - Error: connect ECONNREFUSED ::1:3000
+  - Error: connect ECONNREFUSED 127.0.0.1:3000
