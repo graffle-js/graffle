@@ -139,6 +139,76 @@ describe(`configuration`, () => {
   })
 })
 
+describe(`relative URLs`, () => {
+  test(`can use relative URL path`, async ({ g1, fetch }) => {
+    fetch.mockImplementationOnce(() => Promise.resolve(createGraphQLResponse({ data: { id: `abc` } })))
+    const g2 = g1.transport({ url: `/api/graphql` })
+    await g2.gql`query { id }`.send()
+    // For relative URLs, fetch is called with (url, options) instead of (Request)
+    const [urlOrRequest, options] = fetch.mock.calls[0] ?? []
+    if (typeof urlOrRequest === 'string') {
+      expect(urlOrRequest).toEqual(`/api/graphql`)
+      expect(options?.method).toEqual(`post`)
+    } else {
+      expect(urlOrRequest?.url).toEqual(`/api/graphql`)
+      expect(urlOrRequest?.method).toEqual(`POST`)
+    }
+  })
+
+  test(`relative URL with GET method mode`, async ({ g1, fetch }) => {
+    fetch.mockImplementationOnce(() => Promise.resolve(createGraphQLResponse({ data: { user: { name: `foo` } } })))
+    const g2 = g1.transport({ url: `/api/graphql`, methodMode: `getReads` })
+    await g2.gql`query foo($id: ID!){user(id:$id){name}}`.send(`foo`, { 'id': `QVBJcy5ndXJ1` })
+    // For relative URLs, fetch is called with (url, options) instead of (Request)
+    const [urlOrRequest, options] = fetch.mock.calls[0] ?? []
+    if (typeof urlOrRequest === 'string') {
+      expect(options?.method).toEqual(`get`)
+      expect(urlOrRequest).toContain(`/api/graphql?`)
+      expect(urlOrRequest).toContain(`query=`)
+      expect(urlOrRequest).toContain(`variables=`)
+    } else {
+      expect(urlOrRequest?.method).toEqual(`GET`)
+      expect(urlOrRequest?.url).toContain(`/api/graphql?`)
+      expect(urlOrRequest?.url).toContain(`query=`)
+      expect(urlOrRequest?.url).toContain(`variables=`)
+    }
+  })
+
+  test(`relative URL with existing query params`, async ({ g1, fetch }) => {
+    fetch.mockImplementationOnce(() => Promise.resolve(createGraphQLResponse({ data: { id: `abc` } })))
+    const g2 = g1.transport({ url: `/api/graphql?token=xyz`, methodMode: `getReads` })
+    await g2.gql`query { id }`.send()
+    // For relative URLs, fetch is called with (url, options) instead of (Request)
+    const [urlOrRequest, options] = fetch.mock.calls[0] ?? []
+    if (typeof urlOrRequest === 'string') {
+      expect(urlOrRequest).toContain(`/api/graphql?`)
+      expect(urlOrRequest).toContain(`token=xyz`)
+      expect(urlOrRequest).toContain(`query=`)
+    } else {
+      expect(urlOrRequest?.url).toContain(`/api/graphql?`)
+      expect(urlOrRequest?.url).toContain(`token=xyz`)
+      expect(urlOrRequest?.url).toContain(`query=`)
+    }
+  })
+
+  test(`can still use absolute URL strings`, async ({ g1, fetch }) => {
+    fetch.mockImplementationOnce(() => Promise.resolve(createGraphQLResponse({ data: { id: `abc` } })))
+    const g2 = g1.transport({ url: `https://api.example.com/graphql` })
+    await g2.gql`query { id }`.send()
+    const request = fetch.mock.calls[0]?.[0]
+    expect(request?.url).toEqual(`https://api.example.com/graphql`)
+  })
+
+  test(`can still use URL objects`, async ({ g1, fetch }) => {
+    fetch.mockImplementationOnce(() => Promise.resolve(createGraphQLResponse({ data: { id: `abc` } })))
+    const urlObject = new URL(`https://api.example.com/graphql`)
+    const g2 = g1.transport({ url: urlObject })
+    await g2.gql`query { id }`.send()
+    const request = fetch.mock.calls[0]?.[0]
+    expect(request?.url).toEqual(`https://api.example.com/graphql`)
+  })
+})
+
 // const url = new URL(`https://foo.io/api/graphql`)
 
 // describe.skip(`output`, () => {

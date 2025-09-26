@@ -33,7 +33,7 @@ export type ConfigurationInput = {
 }
 
 export interface ConfigurationNormalized {
-  url: URL
+  url: URL | string
   methodMode: MethodMode
   headers?: Headers
   raw?: RequestInit
@@ -56,7 +56,7 @@ export interface ConfigurationInputResolver$Func_<
   _Input = $Parameters['input'],
   _Current = $Parameters['current'],
 > extends Partial<ConfigurationNormalized> {
-  url: 'url' extends keyof _Current ? URL : 'url' extends keyof _Input ? URL : undefined
+  url: 'url' extends keyof _Current ? URL | string : 'url' extends keyof _Input ? URL | string : undefined
   methodMode: 'methodMode' extends keyof _Current ? MethodMode : 'methodMode' extends keyof _Input ? MethodMode : undefined
 }
 
@@ -79,7 +79,7 @@ const httpTransportConfigurator = Extension.Configurator()
     return {
       methodMode: input.methodMode ?? current.methodMode,
       raw: input.raw ?? current.raw,
-      url: input.url ? new URL(input.url) : current.url,
+      url: input.url ?? current.url,
       headers: mergeHeadersInitWithStrategyMerge(current.headers, input.headers),
     }
   })
@@ -172,14 +172,33 @@ export const TransportHttp = Extension.create(`TransportHttp`)
       })
       .exchange({
         slots: {
-          fetch: (request: Request): MaybePromise<Response> => fetch(request),
+          fetch: (url: string | URL | Request, init?: RequestInit): MaybePromise<Response> => fetch(url, init),
         },
         async run(input, slots) {
-          const request = new Request(input.request.url, input.request)
-          const response = await slots.fetch(request)
-          return {
-            ...input,
-            response,
+          // For relative URLs, we need to be careful with the Request constructor
+          // which doesn't support them in Node.js environments. Instead, we'll
+          // pass the URL and init options directly to fetch when dealing with strings.
+          const url = input.request.url
+
+          // Try to determine if this is likely a relative URL
+          const isRelativeUrl = typeof url === 'string' && !url.match(/^[a-zA-Z][a-zA-Z0-9+.-]*:/)
+
+          if (isRelativeUrl) {
+            // For relative URLs, pass URL and options directly to fetch
+            // This allows frameworks like SvelteKit to handle relative URLs properly
+            const response = await slots.fetch(url, input.request)
+            return {
+              ...input,
+              response,
+            }
+          } else {
+            // For absolute URLs (string or URL object), use Request constructor as before
+            const request = new Request(url, input.request)
+            const response = await slots.fetch(request)
+            return {
+              ...input,
+              response,
+            }
           }
         },
       })

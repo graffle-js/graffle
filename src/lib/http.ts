@@ -63,10 +63,23 @@ export const searchParamsAppendAllMutate = (url: URL, additionalSearchParams: Se
   })
 }
 
-export const searchParamsAppendAll = (url: URL | string, additionalSearchParams: SearchParamsInit) => {
-  const url2 = new URL(url)
-  searchParamsAppendAllMutate(url2, additionalSearchParams)
-  return url2
+export const searchParamsAppendAll = (url: URL | string, additionalSearchParams: SearchParamsInit): URL | string => {
+  // If it's already a URL object, manipulate it directly
+  if (url instanceof URL) {
+    const url2 = new URL(url)
+    searchParamsAppendAllMutate(url2, additionalSearchParams)
+    return url2
+  }
+
+  // For strings (which might be relative paths), use a dummy base URL
+  // to safely manipulate search params, then extract the result
+  const dummyBase = 'http://dummy'
+  const tempUrl = new URL(url, dummyBase)
+  searchParamsAppendAllMutate(tempUrl, additionalSearchParams)
+
+  // Extract the pathname and search params (everything after the origin)
+  // This preserves relative URLs like "/api/graphql?query=..."
+  return tempUrl.pathname + tempUrl.search
 }
 
 /**
