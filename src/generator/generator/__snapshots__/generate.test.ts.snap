@@ -3,8 +3,7 @@
 exports[`custom scalars module results in client prefilling those custom scalars 1`] = `
 "import type * as $$Utilities from "graffle/utilities-for-generated";
 import * as CustomScalars from "../../scalars.js";
-
-export * from "../../scalars.js";
+export { Date } from "../../scalars.js";
 //
 //
 //
