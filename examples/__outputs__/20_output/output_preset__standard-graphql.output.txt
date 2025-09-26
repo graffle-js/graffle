@@ -2,6 +2,7 @@
           return new ContextualError(message, { hookName: signal.hookName, source: signal.source }, signal.error)
                  ^
 
+
 ContextualError: There was an error in the core implementation of hook "exchange".
     at runPipeline (/some/path/to/runPipeline.ts:XX:XX:XX)
     at async runPipeline (/some/path/to/runPipeline.ts:XX:XX:XX)

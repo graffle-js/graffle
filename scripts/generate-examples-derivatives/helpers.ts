@@ -212,7 +212,4 @@ export const rewriteDynamicError = (value: string) => {
     .replaceAll(/(.+):\d+:\d+\)/g, `$1:XX:XX)`)
     // Handle column numbers that appear after already-masked line numbers (e.g., :XX:XX:31)
     .replaceAll(/(:XX:XX):\d+/g, `$1:XX`)
-    // Normalize error formatting: remove extra blank line after caret (^) line
-    // Some Node versions add an extra blank line, some don't
-    .replaceAll(/\^\n\n/g, '^\n')
 }
