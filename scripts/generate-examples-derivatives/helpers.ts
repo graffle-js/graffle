@@ -203,8 +203,8 @@ export const runExample = async (filePath: string) => {
     env: {
       ...process.env,
       // Ensure the subprocess gets the server URL if set by vitest
-      POKEMON_SCHEMA_URL: process.env.POKEMON_SCHEMA_URL,
-    }
+      POKEMON_SCHEMA_URL: process.env['POKEMON_SCHEMA_URL'],
+    },
   })`pnpm tsx ${relativePath}`
 
   let exampleOutput = ``
@@ -252,9 +252,11 @@ export const rewriteDynamicError = (value: string) => {
     } else if (line.match(/^\s*\^+\s*$/)) {
       // Caret line - keep as is but ensure consistent formatting
       processedLines.push(line)
-      // Add blank line after caret for consistency
-      if (i + 1 < lines.length && lines[i + 1]?.trim() !== '') {
+      // Always preserve the blank line after caret that exists in the raw output
+      // Node.js consistently adds a blank line after the caret
+      if (i + 1 < lines.length && lines[i + 1]?.trim() === '') {
         processedLines.push('')
+        i++ // Skip the blank line we just processed
       }
     } else if (inStackTrace && line.match(/^\s*at\s+/)) {
       // Stack trace lines - normalize them
