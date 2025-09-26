@@ -38,9 +38,9 @@ You can give the Graffle generator access to your scalar definitions. This is sl
 
 1. _In general_ the generator is able to better optimize the types that it generates. For example various type parameters are able to be stripped out. This improves TypeScript performance and aids in better readability of inferred types. In practice Graffle already tries hard to maintain type performance and readable inferred types so consider this more of a passive bonus than a game changer.
 
-2. Certain statically exported features of the Graffle generator can only know about custom scalars this way. That is, you get features that immediately know about the custom scalars because they've been registered for you behind the scenes by the generator. This feature set is currently small and likely only of intersect to you if you are using the [Document Builder](./04_document_builder.md). The features are:
+2. Certain statically exported features of the Graffle generator can only know about custom scalars this way. That is, you get features that immediately know about the custom scalars because they've been registered for you behind the scenes by the generator. This feature set is currently small and likely only of interest to you if you are using the Document Builder. The features are:
 
-   - The [Select utility](../35_document-builder/40_Select.md).
+   - The Select utility.
 
    Note that these features are always available to you after generation, but with knowledge of your custom scalars, their types in the above features will be correct, rather than always just `string`.
 

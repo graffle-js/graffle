@@ -126,7 +126,7 @@ You will see a directory named `graffle` has been created in the current working
 |
 ```
 
-Note let's use the extension and rewrite our GraphQL document using the document builder. You should notice some new client methods in your IDE like `.document` and `.query.countries`.
+Now let's use the extension and rewrite our GraphQL document using the document builder. You should notice some new client methods in your IDE like `.document` and `.query.countries`.
 
 ```ts
 // todo twoslash
@@ -234,4 +234,4 @@ Refer to the [Selection Sets Example](/examples/70_type-level/selection-sets.md)
 
 We hope this introductory tutorial has been useful for you. Graffle has many more features to discover, such as extensions, anyware, custom scalar support, how every GraphQL query language feature is realized in the document builder, and more. Peruse these docs to learn about it all.
 
-Thanks for taking time to learn Graffle. Let us know how your experience goes as your begin to build your projects with it!
+Thanks for taking time to learn Graffle. Let us know how your experience goes as you begin to build your projects with it!
