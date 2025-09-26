@@ -1,5 +1,5 @@
-import { capitalize, kebabCase } from 'es-toolkit'
 import ErrorStackParser from 'error-stack-parser'
+import { capitalize, kebabCase } from 'es-toolkit'
 import { execa, ExecaError } from 'execa'
 import { globby } from 'globby'
 import * as Path from 'node:path'
@@ -195,15 +195,16 @@ export const runExample = async (filePath: string) => {
 
   let exampleOutput = ``
 
-  // todo: switch z
-  // todo: better understand the Execa API
+  // Handle different scenarios
   if (filePath.includes(`_throws`)) {
-    if (result instanceof ExecaError) {
-      // @ts-expect-error fixme
-      exampleOutput = result.stdout
-    }
+    // For examples that are expected to throw, capture stderr
+    exampleOutput = result.stderr || result.stdout || ''
+  } else if (result.failed) {
+    // If the command failed, capture stderr (error output)
+    exampleOutput = result.stderr || ''
   } else {
-    exampleOutput = result.failed ? result.stderr : result.stdout
+    // For successful runs, capture stdout
+    exampleOutput = result.stdout || ''
   }
 
   exampleOutput = stripAnsi(exampleOutput)
@@ -223,7 +224,10 @@ export const rewriteDynamicError = (value: string) => {
     const line = lines[i]!
 
     // Check if this looks like the start of a stack trace
-    if (line.match(/^\s*at\s+/) || line.includes('Error:') || line.includes('Error [') || line.includes('ContextualError:')) {
+    if (
+      line.match(/^\s*at\s+/) || line.includes('Error:') || line.includes('Error [')
+      || line.includes('ContextualError:')
+    ) {
       inStackTrace = true
     }
 
