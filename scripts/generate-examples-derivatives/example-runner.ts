@@ -40,7 +40,8 @@ const formatError = (error: unknown): void => {
     if (currentCause instanceof Error) {
       // Special handling for AggregateError
       if (currentCause instanceof AggregateError) {
-        causes.push(`AggregateError [${currentCause.code || ''}]: `.trim())
+        const code = 'code' in currentCause ? String(currentCause.code) : ''
+        causes.push(`AggregateError [${code}]: `.trim())
         currentCause.errors.forEach(e => {
           if (e instanceof Error) {
             causes.push(`${e.constructor.name}: ${e.message}`)
