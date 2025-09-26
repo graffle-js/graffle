@@ -29,7 +29,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
 
       // Use explicit named exports for custom scalars to avoid TypeScript export conflict
       // where type exports shadow value exports
-      const scalarNames = config.schema.kindMap.list.ScalarCustom.map(scalar => scalar.name).join(',\n  ')
+      const scalarNames = config.schema.kindMap.list.ScalarCustom.map(scalar => scalar.name).join(`,\n  `)
       code`
         export {
           ${scalarNames}
