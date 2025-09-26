@@ -252,11 +252,12 @@ export const rewriteDynamicError = (value: string) => {
     } else if (line.match(/^\s*\^+\s*$/)) {
       // Caret line - keep as is but ensure consistent formatting
       processedLines.push(line)
-      // Always preserve the blank line after caret that exists in the raw output
-      // Node.js consistently adds a blank line after the caret
-      if (i + 1 < lines.length && lines[i + 1]?.trim() === '') {
-        processedLines.push('')
-        i++ // Skip the blank line we just processed
+      // Always add exactly one blank line after caret for consistency
+      // Different Node versions may produce different blank line counts
+      processedLines.push('')
+      // Skip any existing blank lines after the caret
+      while (i + 1 < lines.length && lines[i + 1]?.trim() === '') {
+        i++
       }
     } else if (inStackTrace && line.match(/^\s*at\s+/)) {
       // Stack trace lines - normalize them
