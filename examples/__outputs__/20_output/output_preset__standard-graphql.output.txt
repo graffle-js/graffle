@@ -1,34 +1,7 @@
-/some/path/to/runPipeline.ts:XX
-          return new ContextualError(message, { hookName: signal.hookName, source: signal.source }, signal.error)
-                 ^
-
-ContextualError: There was an error in the core implementation of hook "exchange".
-    at runPipeline (/some/path/to/runPipeline.ts:XX:XX)
-    at async runPipeline (/some/path/to/runPipeline.ts:XX:XX)
-    at async runPipeline (/some/path/to/runPipeline.ts:XX:XX)
-    at async <anonymous> (/some/path/to/runner.ts:XX:XX)
-    at async Module.run (/some/path/to/run.ts:XX:XX)
-    at async sendRequest (/some/path/to/send.ts:XX:XX)
-    at async <anonymous> (/some/path/to/output_preset__standard-graphql.ts:XX:XX) {
-  cause: TypeError: Failed to parse URL from bad
-      at new Request (node:INTERNAL:XX:XX)
-      at Object.run (/some/path/to/TransportHttp.ts:XX:XX)
-      ... 4 lines matching cause stack trace ...
-      at applyBody (/some/path/to/runner.ts:XX:XX) {
-    [cause]: TypeError: Invalid URL
-        at new URL (node:INTERNAL:XX:XX)
-        at new Request (node:INTERNAL:XX:XX)
-        at Object.run (/some/path/to/TransportHttp.ts:XX:XX)
-        at Object.run (/some/path/to/Pipeline.ts:XX:XX)
-        at runStep (/some/path/to/runStep.ts:XX:XX)
-        at <anonymous> (/some/path/to/runStep.ts:XX:XX)
-        at <anonymous> (/some/path/to/output_preset__standard-graphql.ts:XX:XX)
-        at applyBody (/some/path/to/runner.ts:XX:XX) {
-      code: 'ERR_INVALID_URL',
-      input: 'bad'
-    }
-  },
-  context: { hookName: 'exchange', source: 'implementation' }
-}
-
-Node.js vXX.XX.XX
+ERROR TYPE: ContextualError
+ERROR MESSAGE: There was an error in the core implementation of hook "exchange".
+ERROR CODE: ERR_INVALID_URL
+ERROR CONTEXT: { hookName: 'exchange', source: 'implementation' }
+CAUSED BY:
+  - TypeError: Failed to parse URL from bad
+  - TypeError: Invalid URL

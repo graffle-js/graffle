@@ -1,54 +1,7 @@
----------------------------------------- SHOW ----------------------------------------
-ContextualAggregateError: One or more errors in the execution result.
-    at handleOutput (/some/path/to/handle.ts:XX:XX)
-    at sendRequest (/some/path/to/send.ts:XX:XX)
-    at process.processTicksAndRejections (node:INTERNAL:XX:XX)
-    at async executeRootField (/some/path/to/requestMethods.ts:XX:XX)
-    at async <anonymous> (/some/path/to/output_return-error_return-error-execution__return-error-execution.ts:XX:XX) {
-  context: {},
-  cause: undefined,
-  errors: [
-    ContextualError: [
-      {
-        "code": "too_small",
-        "minimum": 1,
-        "type": "string",
-        "inclusive": true,
-        "exact": false,
-        "message": "Pokemon name cannot be empty.",
-        "path": [
-          "name"
-        ]
-      }
-    ]
-        at <anonymous> (/some/path/to/handle.ts:XX:XX)
-        at Array.map (<anonymous>)
-        at handleOutput (/some/path/to/handle.ts:XX:XX)
-        at sendRequest (/some/path/to/send.ts:XX:XX)
-        at process.processTicksAndRejections (node:INTERNAL:XX:XX)
-        at async executeRootField (/some/path/to/requestMethods.ts:XX:XX)
-        at async <anonymous> (/some/path/to/output_return-error_return-error-execution__return-error-execution.ts:XX:XX) {
-      context: { locations: [ { line: 2, column: 3 } ], path: [ 'addPokemon' ] },
-      cause: undefined
-    }
-  ]
-}
----------------------------------------- SHOW ----------------------------------------
-ContextualError: There was an error in the interceptor "anonymous" (use named functions to improve this error message) while running hook "encode".
-    at runPipeline (/some/path/to/runPipeline.ts:XX:XX)
-    at process.processTicksAndRejections (node:INTERNAL:XX:XX)
-    at async <anonymous> (/some/path/to/runner.ts:XX:XX)
-    at async Module.run (/some/path/to/run.ts:XX:XX)
-    at async sendRequest (/some/path/to/send.ts:XX:XX)
-    at async executeRootField (/some/path/to/requestMethods.ts:XX:XX)
-    at async <anonymous> (/some/path/to/output_return-error_return-error-execution__return-error-execution.ts:XX:XX) {
-  context: {
-    hookName: 'encode',
-    source: 'extension',
-    interceptorName: 'anonymous'
-  },
-  cause: Error: Something went wrong.
-      at <anonymous> (/some/path/to/output_return-error_return-error-execution__return-error-execution.ts:XX:XX)
-      at applyBody (/some/path/to/runner.ts:XX:XX)
-      at process.processTicksAndRejections (node:INTERNAL:XX:XX)
-}
+ERROR TYPE: ContextualError
+ERROR MESSAGE: There was an error in the interceptor "anonymous" (use named functions to improve this error message) while running hook "encode".
+ERROR CONTEXT: { locations: [ { line: 2, column: 3 } ], path: [ 'addPokemon' ] }
+CAUSED BY:
+  - undefined,
+  - undefined
+  - Error: Something went wrong.

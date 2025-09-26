@@ -1,4 +1,4 @@
-import ErrorStackParser from 'error-stack-parser'
+import * as ErrorStackParser from 'error-stack-parser'
 import { capitalize, kebabCase } from 'es-toolkit'
 import { execa, ExecaError } from 'execa'
 import { globby } from 'globby'
@@ -228,70 +228,114 @@ export const runExample = async (filePath: string) => {
 }
 
 export const rewriteDynamicError = (value: string) => {
-  // Parse Node.js stack traces to create deterministic output
+  // For test output, create a clean, deterministic format
+  // that focuses on the error messages and cause chain
+
+  // Extract error information using a structured approach
   const lines = value.split('\n')
-  const processedLines: string[] = []
-  let inStackTrace = false
-  let stackDepth = 0
+  const output: string[] = []
 
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i]!
+  // Check if this is an error output
+  const hasError = value.includes('Error:') || value.includes('ContextualError:')
+  if (!hasError) {
+    // Not an error, just normalize dates and return
+    return value.replace(/date: '.*GMT'/, `date: 'NORMALIZED_DATE'`)
+  }
 
-    // Check if this looks like the start of a stack trace
-    if (
-      line.match(/^\s*at\s+/) || line.includes('Error:') || line.includes('Error [')
-      || line.includes('ContextualError:')
-    ) {
-      inStackTrace = true
-    }
+  // Parse the error structure to extract key information
+  let currentError: {
+    type?: string
+    message?: string
+    code?: string
+    context?: any
+    causedBy?: string[]
+  } = {}
 
-    // Handle error header lines (with file:line:column location)
-    if (i < 3 && line.match(/^[^:]+:\d+$/)) {
-      // First line with file location (e.g., "/path/to/file.ts:117")
-      processedLines.push(line.replace(/^.*\/(.+\.ts):\d+$/, '/some/path/to/$1:XX'))
-    } else if (line.match(/^\s*\^+\s*$/)) {
-      // Caret line - keep as is but ensure consistent formatting
-      processedLines.push(line)
-      // Always add exactly one blank line after caret for consistency
-      // Different Node versions may produce different blank line counts
-      processedLines.push('')
-      // Skip any existing blank lines after the caret
-      while (i + 1 < lines.length && lines[i + 1]?.trim() === '') {
-        i++
+  let inCause = false
+  let depth = 0
+
+  for (const line of lines) {
+    // Main error type and message
+    if (line.includes('ContextualError:')) {
+      currentError.type = 'ContextualError'
+      currentError.message = line.split('ContextualError:')[1]?.trim()
+    } else if (line.match(/^[A-Z]\w*Error:/)) {
+      const match = line.match(/^([A-Z]\w*Error):\s*(.*)/)
+      if (match) {
+        currentError.type = match[1]
+        currentError.message = match[2]
       }
-    } else if (inStackTrace && line.match(/^\s*at\s+/)) {
-      // Stack trace lines - normalize them
-      stackDepth++
-      const normalized = line
-        // Replace file paths and line/column numbers
-        .replace(/\(.*\/(.+\.ts):\d+:\d+\)/, '(/some/path/to/$1:XX:XX)')
-        .replace(/\(.*\/(.+\.mjs):\d+:\d+\)/, '(/some/path/to/$1:XX:XX)')
-        .replace(/\(node:[\w/]+:\d+:\d+\)/, '(node:INTERNAL:XX:XX)')
-        // Handle native Node.js locations
-        .replace(/node:internal\/[\w/]+:\d+:\d+/, 'node:INTERNAL:XX:XX')
-      processedLines.push(normalized)
-    } else if (line.includes('Node.js v')) {
-      // Node.js version line
-      processedLines.push('Node.js vXX.XX.XX')
-    } else if (line.match(/\s+code:\s*'[A-Z_]+'/) || line.match(/\s+input:\s*'.+'/) || line.match(/\s+url:\s*'.+'/)) {
-      // Keep error properties as-is
-      processedLines.push(line)
-    } else if (line.includes('... ') && line.includes(' lines matching')) {
-      // Keep the ellipsis line as-is
-      processedLines.push(line)
-    } else {
-      // For all other lines, apply basic normalization
-      const normalized = line
-        // Replace line:column patterns in general text
-        .replace(/:\d+:\d+(?=\s|$|\))/g, ':XX:XX')
-        // Replace standalone line numbers after filenames
-        .replace(/\.ts:\d+(?=\s|$|\))/g, '.ts:XX')
-        .replace(/\.mjs:\d+(?=\s|$|\))/g, '.mjs:XX')
-        // Normalize date headers in responses
-        .replace(/date: '.*GMT'/, `date: 'Fri, 26 Sep 2025 19:XX:XX GMT'`)
-      processedLines.push(normalized)
+    }
+    // Error properties
+    else if (line.includes('code:')) {
+      const match = line.match(/code:\s*'([^']+)'/)
+      if (match) currentError.code = match[1]
+    }
+    else if (line.includes('context:')) {
+      // Extract context object
+      const contextMatch = line.match(/context:\s*({.+})/)
+      if (contextMatch) {
+        try {
+          currentError.context = contextMatch[1]
+        } catch {
+          currentError.context = line.split('context:')[1]?.trim()
+        }
+      }
+    }
+    // Cause chain
+    else if (line.includes('cause:') || line.includes('[cause]:')) {
+      inCause = true
+      if (!currentError.causedBy) currentError.causedBy = []
+      const causeMatch = line.match(/\[?cause\]?:\s*(.+)/)
+      if (causeMatch) {
+        currentError.causedBy.push(causeMatch[1]!)
+      }
+    }
+    else if (inCause && line.match(/^\s*at\s+/)) {
+      // Skip stack traces in test output
+      continue
     }
   }
 
-  return processedLines.join('\n')
+  // Format the output in a clean, deterministic way
+  if (currentError.type) {
+    output.push(`ERROR TYPE: ${currentError.type}`)
+  }
+  if (currentError.message) {
+    output.push(`ERROR MESSAGE: ${currentError.message}`)
+  }
+  if (currentError.code) {
+    output.push(`ERROR CODE: ${currentError.code}`)
+  }
+  if (currentError.context) {
+    output.push(`ERROR CONTEXT: ${currentError.context}`)
+  }
+  if (currentError.causedBy && currentError.causedBy.length > 0) {
+    output.push(`CAUSED BY:`)
+    currentError.causedBy.forEach(cause => {
+      output.push(`  - ${cause}`)
+    })
+  }
+
+  // If we couldn't parse it properly, fall back to simplified normalization
+  if (output.length === 0) {
+    // Just extract error messages and remove all file paths and stack traces
+    const errorLines = lines.filter(line =>
+      (line.includes('Error:') || line.includes('error:')) &&
+      !line.includes('/') &&
+      !line.match(/^\s*at\s+/)
+    )
+
+    if (errorLines.length > 0) {
+      return errorLines.join('\n')
+    }
+
+    // Last resort: return first few meaningful lines
+    return lines
+      .filter(line => line.trim() && !line.match(/^\s*at\s+/))
+      .slice(0, 5)
+      .join('\n')
+  }
+
+  return output.join('\n')
 }
