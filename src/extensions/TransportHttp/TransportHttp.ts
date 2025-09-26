@@ -76,10 +76,24 @@ const httpTransportConfigurator = Extension.Configurator()
   .normalized<ConfigurationNormalized>()
   .default(configurationDefault)
   .inputResolver<ConfigurationInputResolver$Func>(({ current, input }) => {
+    // For URL handling:
+    // - Keep relative paths as strings (e.g., "/api/graphql")
+    // - Convert absolute URL strings to URL objects for consistency
+    // - Keep URL objects as-is
+    let url = input.url ?? current.url
+    if (typeof url === 'string') {
+      // Try to parse as absolute URL
+      try {
+        url = new URL(url)
+      } catch {
+        // If parsing fails, it's a relative URL - keep as string
+      }
+    }
+
     return {
       methodMode: input.methodMode ?? current.methodMode,
       raw: input.raw ?? current.raw,
-      url: input.url ?? current.url,
+      url,
       headers: mergeHeadersInitWithStrategyMerge(current.headers, input.headers),
     }
   })
@@ -175,16 +189,13 @@ export const TransportHttp = Extension.create(`TransportHttp`)
           fetch: (url: string | URL | Request, init?: RequestInit): MaybePromise<Response> => fetch(url, init),
         },
         async run(input, slots) {
-          // For relative URLs, we need to be careful with the Request constructor
+          // For relative URLs (kept as strings), we need to be careful with the Request constructor
           // which doesn't support them in Node.js environments. Instead, we'll
-          // pass the URL and init options directly to fetch when dealing with strings.
+          // pass the URL and init options directly to fetch when dealing with relative URL strings.
           const url = input.request.url
 
-          // Try to determine if this is likely a relative URL
-          const isRelativeUrl = typeof url === 'string' && !url.match(/^[a-zA-Z][a-zA-Z0-9+.-]*:/)
-
-          if (isRelativeUrl) {
-            // For relative URLs, pass URL and options directly to fetch
+          if (typeof url === 'string') {
+            // This is a relative URL - pass directly to fetch with options
             // This allows frameworks like SvelteKit to handle relative URLs properly
             const response = await slots.fetch(url, input.request)
             return {
@@ -192,7 +203,7 @@ export const TransportHttp = Extension.create(`TransportHttp`)
               response,
             }
           } else {
-            // For absolute URLs (string or URL object), use Request constructor as before
+            // URL object - use Request constructor as before
             const request = new Request(url, input.request)
             const response = await slots.fetch(request)
             return {
