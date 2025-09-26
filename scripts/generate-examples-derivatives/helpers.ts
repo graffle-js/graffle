@@ -265,13 +265,11 @@ export const rewriteDynamicError = (value: string) => {
         currentError.type = match[1]
         currentError.message = match[2]
       }
-    }
-    // Error properties
+    } // Error properties
     else if (line.includes('code:')) {
       const match = line.match(/code:\s*'([^']+)'/)
       if (match) currentError.code = match[1]
-    }
-    else if (line.includes('context:')) {
+    } else if (line.includes('context:')) {
       // Extract context object
       const contextMatch = line.match(/context:\s*({.+})/)
       if (contextMatch) {
@@ -281,8 +279,7 @@ export const rewriteDynamicError = (value: string) => {
           currentError.context = line.split('context:')[1]?.trim()
         }
       }
-    }
-    // Cause chain
+    } // Cause chain
     else if (line.includes('cause:') || line.includes('[cause]:')) {
       inCause = true
       if (!currentError.causedBy) currentError.causedBy = []
@@ -290,8 +287,7 @@ export const rewriteDynamicError = (value: string) => {
       if (causeMatch) {
         currentError.causedBy.push(causeMatch[1]!)
       }
-    }
-    else if (inCause && line.match(/^\s*at\s+/)) {
+    } else if (inCause && line.match(/^\s*at\s+/)) {
       // Skip stack traces in test output
       continue
     }
@@ -321,9 +317,9 @@ export const rewriteDynamicError = (value: string) => {
   if (output.length === 0) {
     // Just extract error messages and remove all file paths and stack traces
     const errorLines = lines.filter(line =>
-      (line.includes('Error:') || line.includes('error:')) &&
-      !line.includes('/') &&
-      !line.match(/^\s*at\s+/)
+      (line.includes('Error:') || line.includes('error:'))
+      && !line.includes('/')
+      && !line.match(/^\s*at\s+/)
     )
 
     if (errorLines.length > 0) {
