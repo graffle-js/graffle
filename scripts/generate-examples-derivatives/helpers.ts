@@ -186,12 +186,26 @@ export const computeCombinations = (arr: string[]): string[][] => {
 export const runExample = async (filePath: string) => {
   // The filePath might be like "./examples/20_output/foo.ts" or "./20_output/foo.ts"
   // We need to run it from the examples directory with the path relative to that directory
-  const examplesDir = Path.join(process.cwd(), 'examples')
+
+  // Check if we're already in the examples directory
+  const currentDir = process.cwd()
+  const examplesDir = currentDir.endsWith('/examples')
+    ? currentDir
+    : Path.join(currentDir, 'examples')
 
   // Strip the examples/ prefix if present
   const relativePath = filePath.replace(/^\.\/examples\//, './').replace(/^examples\//, './')
 
-  const result = await execa({ reject: false, cwd: examplesDir })`pnpm tsx ${relativePath}`
+  // Pass environment variables including any POKEMON_SCHEMA_URL from vitest
+  const result = await execa({
+    reject: false,
+    cwd: examplesDir,
+    env: {
+      ...process.env,
+      // Ensure the subprocess gets the server URL if set by vitest
+      POKEMON_SCHEMA_URL: process.env.POKEMON_SCHEMA_URL,
+    }
+  })`pnpm tsx ${relativePath}`
 
   let exampleOutput = ``
 
