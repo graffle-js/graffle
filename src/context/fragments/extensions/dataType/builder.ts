@@ -69,10 +69,13 @@ export const create: Create = (name) => {
           }
           constructor.configurator = data.configurator
           constructor.definition = data
+          // Attach static properties to the constructor
+          Object.assign(constructor, data.static)
           return constructor
         }
 
-        return data
+        // Attach static properties to the data object
+        return Object.assign(data, data.static)
       },
     },
   }) as any

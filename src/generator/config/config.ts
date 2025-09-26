@@ -109,9 +109,26 @@ export const createConfig = async (configInit: ConfigInit): Promise<Config> => {
     )
   }
 
+  // Get import format early to use in path processing
+  const importFormat = configInit.importFormat ?? defaultImportFormat
+
+  // Helper to get the correct extension based on importFormat
+  const getImportExtension = (path: string): string => {
+    switch (importFormat) {
+      case `jsExtension`:
+        return path.replace(/\.ts$/, `.js`)
+      case `tsExtension`:
+        return path // Keep .ts extension
+      case `noExtension`:
+        return path.replace(/\.(ts|js)$/, ``) // Remove any extension
+      default:
+        return path.replace(/\.ts$/, `.js`)
+    }
+  }
+
   const scalarsImportPath = Path.relative(
     outputDirPathModules,
-    inputPathScalars.replace(/\.ts$/, `.js`),
+    getImportExtension(inputPathScalars),
   )
 
   // --- Schema ---
@@ -158,7 +175,7 @@ To suppress this warning disable formatting in one of the following ways:
   // --- Library Paths ---
 
   const processLibraryPath = (path: string) => {
-    const pathAbsolute = toAbsolutePath(cwd, path).replace(/\.ts$/, `.js`)
+    const pathAbsolute = getImportExtension(toAbsolutePath(cwd, path))
     return Path.relative(outputDirPathModules, pathAbsolute)
   }
 
@@ -210,7 +227,7 @@ To suppress this warning disable formatting in one of the following ways:
   return {
     fs,
     name,
-    importFormat: configInit.importFormat ?? defaultImportFormat,
+    importFormat,
     nameNamespace,
     extensions: configInit.extensions ?? [],
     outputCase,

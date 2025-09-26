@@ -97,6 +97,46 @@ describe('Issue #1370 - TypeScript export conflict with custom scalars', () => {
   })
 })
 
+describe('Issue #1367 - Import format noExtension not working', () => {
+  test('noExtension importFormat should not add .js extensions to scalar imports', async () => {
+    const customScalarsBigIntDateTime = `
+      import { Graffle } from 'graffle'
+
+      export const BigInt = Graffle.Scalars.create('BigInt', {
+        decode: (value) => globalThis.BigInt(value),
+        encode: (value) => String(value),
+      })
+
+      export const DateTime = Graffle.Scalars.create('DateTime', {
+        decode: (value) => new Date(value),
+        encode: (value) => value.toISOString(),
+      })
+    `
+
+    const schemaWithCustomScalars = `
+      scalar BigInt
+      scalar DateTime
+
+      type Query {
+        getBigInt: BigInt
+        getDateTime: DateTime
+      }
+    `
+
+    await fs.writeFile('./scalars.ts', customScalarsBigIntDateTime)
+    await generate({
+      fs,
+      schema: { type: 'sdl', sdl: schemaWithCustomScalars },
+      importFormat: 'noExtension',
+    })
+    const { scalar } = readGeneratedFiles()
+
+    // Should NOT have .js extension when importFormat is noExtension
+    expect(scalar).toContain('export { BigInt, DateTime } from "../../scalars"')
+    expect(scalar).not.toContain('from "../../scalars.js"')
+  })
+})
+
 describe('Issue #1354 - TypeScript reserved keywords', () => {
   test('escapes reserved keywords in codecless scalars', async () => {
     await generate({ fs, schema: { type: 'sdl', sdl: schemas.withReservedScalars } })
