@@ -25,9 +25,17 @@ export const ModuleGeneratorScalar = createModuleGenerator(
     if (Grafaid.Schema.KindMap.hasCustomScalars(config.schema.kindMap) && config.options.customScalars) {
       code`
         import * as ${$.CustomScalars} from '${config.paths.imports.scalars}'
-
-        export * from '${config.paths.imports.scalars}'
       `
+
+      // Use explicit named exports for custom scalars to avoid TypeScript export conflict
+      // where type exports shadow value exports
+      const scalarNames = config.schema.kindMap.list.ScalarCustom.map(scalar => scalar.name).join(`,\n  `)
+      code`
+        export {
+          ${scalarNames}
+        } from '${config.paths.imports.scalars}'
+      `
+
       for (const scalar of config.schema.kindMap.list.ScalarCustom) {
         code(typeTitle2(`custom scalar type`)(scalar))
         code``
