@@ -195,12 +195,28 @@ export const TransportHttp = Extension.create(`TransportHttp`)
           const url = input.request.url
 
           if (typeof url === 'string') {
-            // This is a relative URL - pass directly to fetch with options
-            // This allows frameworks like SvelteKit to handle relative URLs properly
-            const response = await slots.fetch(url, input.request)
-            return {
-              ...input,
-              response,
+            // Check if this looks like a relative URL (starts with / or ./ or ../)
+            // If it's not a valid relative URL pattern, use Request constructor
+            // to maintain consistent error handling for invalid URLs like "bad"
+            const isRelativeUrl = url.startsWith('/') || url.startsWith('./') || url.startsWith('../')
+
+            if (isRelativeUrl) {
+              // This is a relative URL - pass directly to fetch with options
+              // This allows frameworks like SvelteKit to handle relative URLs properly
+              const response = await slots.fetch(url, input.request)
+              return {
+                ...input,
+                response,
+              }
+            } else {
+              // Not a relative URL pattern - use Request constructor
+              // This maintains backward compatibility for error handling
+              const request = new Request(url, input.request)
+              const response = await slots.fetch(request)
+              return {
+                ...input,
+                response,
+              }
             }
           } else {
             // URL object - use Request constructor as before
