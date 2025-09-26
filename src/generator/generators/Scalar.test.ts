@@ -127,7 +127,7 @@ describe('Issue #1367 - Import format noExtension not working', () => {
     await generate({
       fs,
       schema: { type: 'sdl', sdl: schemaWithCustomScalars },
-      importFormat: 'noExtension'
+      importFormat: 'noExtension',
     })
     const { scalar } = readGeneratedFiles()
 

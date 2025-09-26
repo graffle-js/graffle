@@ -115,14 +115,14 @@ export const createConfig = async (configInit: ConfigInit): Promise<Config> => {
   // Helper to get the correct extension based on importFormat
   const getImportExtension = (path: string): string => {
     switch (importFormat) {
-      case 'jsExtension':
-        return path.replace(/\.ts$/, '.js')
-      case 'tsExtension':
+      case `jsExtension`:
+        return path.replace(/\.ts$/, `.js`)
+      case `tsExtension`:
         return path // Keep .ts extension
-      case 'noExtension':
-        return path.replace(/\.(ts|js)$/, '') // Remove any extension
+      case `noExtension`:
+        return path.replace(/\.(ts|js)$/, ``) // Remove any extension
       default:
-        return path.replace(/\.ts$/, '.js')
+        return path.replace(/\.ts$/, `.js`)
     }
   }
 
