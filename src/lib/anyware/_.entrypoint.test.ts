@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import { describe, expect, test } from 'vitest'
 import type { ContextualAggregateError } from '../errors/ContextualAggregateError.js'
 import { _ } from '../prelude.js'

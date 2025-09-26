@@ -32,6 +32,6 @@ export const configure = (input: BuilderInput): Builder => {
   }
 }
 
-export const isBuilder = (value: unknown): value is Builder => {
+export const isBuilder = (_value: unknown): _value is Builder => {
   return true // todo
 }

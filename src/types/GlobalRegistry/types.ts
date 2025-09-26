@@ -63,11 +63,9 @@ export type HasDefaultUrlForSchema<$Schema extends Client> =
       ? false
       : true
 
-// eslint-disable-next-line
 // @ts-ignore passes after generation
 export type GetSchema<$Name extends ClientNames> = GraffleGlobal.Clients[$Name]['schema']
 
-// eslint-disable-next-line
 // @ts-ignore passes after generation
 export type SchemaDefault = GetSchema<DefaultClientName>
 
@@ -78,7 +76,6 @@ export type Has<$Name extends string> =
       : false
 
 export type Get<$Name extends string> = $Name extends ClientNames
-  // eslint-disable-next-line
   // @ts-ignore passes after generation
   ? GraffleGlobal.Clients[$Name]
   : never
@@ -94,10 +91,10 @@ export type GetOrGeneric<$Name extends string> =
 // dprint-ignore
 export type GetOrDefault<$Name extends ClientNames | undefined> =
     $Name extends ClientNames
-      // eslint-disable-next-line
+      
       // @ts-ignore passes after generation
       ? GraffleGlobal.Clients[$Name]
-      // eslint-disable-next-line
+      
       // @ts-ignore passes after generation
       : GraffleGlobal.Clients[DefaultClientName]
 

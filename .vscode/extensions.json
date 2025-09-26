@@ -1,7 +1,0 @@
-{
-  "recommendations": [
-    "dprint.dprint",
-    "dbaeumer.vscode-eslint",
-    "orta.vscode-twoslash-queries"
-  ]
-}

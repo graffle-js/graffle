@@ -66,14 +66,7 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
       }),
       directives: {},
       types: Code.directiveTermObject({
-        $literal: [
-          ...kinds.map(([, _]) => _).flat().map((_) => _.name),
-          // We also include the custom scalars here to facilitate encoding. Encoding has names of variables and
-          // that need to be looked up to determine which are/have custom scalars.
-          // ...config.schema.typeMapByKind.GraphQLScalarTypeCustom.map(_ => {
-          //   return `${_.name}: ${identifiers.$CustomScalars}.${_.name},`
-          // }),
-        ].join(`,\n`),
+        $literal: kinds.map(([, _]) => _).flat().map((_) => _.name).join(`,\n`),
       }),
     }))
     code``

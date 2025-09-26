@@ -24,7 +24,7 @@ export const getOutputEncoderFilePathFromExampleFilePath = (filePath: string) =>
 export const readFileOrNull = async (filePath: string) => {
   try {
     return await FS.readFile(filePath, `utf-8`)
-  } catch (error) {
+  } catch {
     return null
   }
 }
@@ -52,9 +52,7 @@ export const generateOutputs = async (name?: string) => {
 
   // Handle case of renaming or deleting examples.
   if (isGeneratingAll) {
-    await Promise.all([
-      deleteFiles({ pattern: `${directories.outputs}/**/*${outputExtension}` }),
-    ])
+    await deleteFiles({ pattern: `${directories.outputs}/**/*${outputExtension}` })
   }
 
   const diff: { path: string; type: `created` | `updated` | `same` }[] = []

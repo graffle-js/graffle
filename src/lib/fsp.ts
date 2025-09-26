@@ -43,7 +43,7 @@ export const readJsonFile = async <$Json extends JsonValue>(fs: Fs, path: string
 
   try {
     content = await fs.readFile(path, `utf8`)
-  } catch (error) {
+  } catch {
     return null
   }
 

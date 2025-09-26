@@ -178,7 +178,7 @@ describe(`overload`, () => {
               name: 'a'
               slots: {}
               input: initialInput & dObject & { ex: 1 }
-              output: void // eslint-disable-line
+              output: void
             }
           }
         },

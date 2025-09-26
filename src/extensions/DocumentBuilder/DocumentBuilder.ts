@@ -27,15 +27,13 @@ type Properties_<
 > =
   // todo
   // GlobalRegistry.Has<$Context['name']> extends false
-  // eslint-disable-next-line
+
   // @ts-ignore passes after generation
   GlobalRegistry.Has<__Name> extends false ? {}
     : (
-      // eslint-disable-next-line
       // @ts-ignore Passes after generation
       & TypeFunction.Call<GlobalRegistry.GetOrDefault<__Name>['interfaces']['Root'], $Parameters['context']>
       & {
-        // // eslint-disable-next-line
         // // @ts-ignore Passes after generation
         document: GraffleKit.Context.Configuration.Check.Preflight<
           $Parameters['context'],

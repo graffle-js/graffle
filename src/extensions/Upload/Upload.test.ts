@@ -19,7 +19,7 @@ interface Context {
 }
 
 const test = testBase.extend<Context>({
-  schemaServer: async ({}, use) => { // eslint-disable-line
+  schemaServer: async ({}, use) => {
     const schemaServer = await serveSchema({ schema: UploadSchema.schema })
     await use(schemaServer)
     await schemaServer.stop()

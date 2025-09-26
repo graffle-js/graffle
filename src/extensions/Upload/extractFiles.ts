@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import isPlainObject from 'is-plain-obj'
 
 const extractFiles = (value: any, isExtractable: (value: unknown) => boolean, path: string): {

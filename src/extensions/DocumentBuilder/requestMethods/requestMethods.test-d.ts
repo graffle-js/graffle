@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { expectTypeOf, test } from 'vitest'
 import { DateScalar } from '../../../../tests/_/fixtures/scalars.js'
 import { Possible } from '../__tests__/fixtures/possible/_namespace.js'

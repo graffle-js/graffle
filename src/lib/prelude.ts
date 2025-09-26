@@ -5,7 +5,6 @@ import type { HasRequiredKeys, IsAny, IsEmptyObject, IsNever, IsUnknown, Simplif
 
 import type { ConfigManager } from './config-manager/_namespace.js'
 
-/* eslint-disable */
 export type RemoveIndex<T> = {
   [K in keyof T as string extends K ? never : number extends K ? never : K]: T[K]
 }

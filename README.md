@@ -1,11 +1,11 @@
-# Graffle
-
 > [!NOTE]
 > Looking for `graphql-request`? It's been renamed to Graffle and the old version is available on the [`graphql-request` branch](https://github.com/graffle-js/graffle/tree/graphql-request).
 
 <p align="center">
-  <img src="https://graffle.js.org/logo.svg" width="200" alt="Graffle Logo">
+  <img src="./website/content/public/_assets/logo-dark.png" width="200" alt="Graffle Logo">
 </p>
+
+<h1 align="center">Graffle</h1>
 
 <p align="center">
   Simple, type-safe GraphQL client for JavaScript.
@@ -15,15 +15,6 @@
   <a href="https://graffle.js.org">Documentation</a> •
   <a href="https://graffle.js.org/guides/getting-started">Getting Started</a> •
   <a href="https://graffle.js.org/examples">Examples</a>
-</p>
-
-<p align="center">
-  <a href="https://github.com/graffle-js/graffle/actions/workflows/trunk.yml">
-    <img src="https://github.com/graffle-js/graffle/workflows/trunk/badge.svg" alt="CI Status">
-  </a>
-  <a href="https://www.npmjs.com/package/graffle">
-    <img src="https://badge.fury.io/js/graffle.svg" alt="npm version">
-  </a>
 </p>
 
 ## Installation

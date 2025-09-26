@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { type ExecutionResult } from 'graphql'
 import { describe } from 'node:test'
 import { expect, expectTypeOf } from 'vitest'

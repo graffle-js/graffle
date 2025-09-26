@@ -8,12 +8,7 @@ import { directories, type Example } from './helpers.js'
 
 export const generateTests = async (examples: Example[]) => {
   // Handle case of renaming or deleting examples.
-  await Promise.all([
-    // ...hm, Do not delete test output files because then that means having to re-run the tests to get the snaps back.
-    // Manually cleaning them up is not so bad.
-    // deleteFiles({ pattern: `${directories.outputs}/*/*${encodedOutputExtension}` }),
-    deleteFiles({ pattern: `${directories.tests}/*.test.ts` }),
-  ])
+  await deleteFiles({ pattern: `${directories.tests}/*.test.ts` })
 
   await Promise.all(examples.map(async (example) => {
     const dir = Path.join(directories.tests, example.group.dirName)

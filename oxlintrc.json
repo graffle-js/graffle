@@ -1,0 +1,53 @@
+{
+  "rules": {
+    "no-unused-vars": "off",
+    "no-console": "off",
+    "no-debugger": "warn",
+    "prefer-const": "warn",
+    "no-empty": "warn",
+    "no-constant-condition": "warn",
+    "no-unreachable": "warn",
+    "no-duplicate-imports": "warn",
+    "no-useless-escape": "warn",
+    "no-extra-boolean-cast": "warn",
+    "no-extra-semi": "warn",
+    "no-irregular-whitespace": "warn",
+    "no-undef": "off",
+    "no-redeclare": "off"
+  },
+  "ignorePatterns": [
+    "build/**/*",
+    "graffle/**/*",
+    "website/**/*",
+    "examples/$/**/*",
+    "tests/**/*",
+    "**/generated/**/*",
+    "bundle-sizes/**/*.js",
+    "bundle-sizes/**/*.json",
+    "node_modules/**/*",
+    "*.config.js",
+    "*.config.ts",
+    "src/**/__tests__/**/*",
+    "src/**/*.test.ts",
+    "src/**/*.test-d.ts",
+    "examples/35_custom-scalar/custom-scalar.ts"
+  ],
+  "env": {
+    "node": true,
+    "es2022": true
+  },
+  "globals": {
+    "console": "readonly",
+    "process": "readonly",
+    "Buffer": "readonly",
+    "globalThis": "readonly",
+    "URL": "readonly",
+    "fetch": "readonly",
+    "Headers": "readonly",
+    "Request": "readonly",
+    "Response": "readonly",
+    "FormData": "readonly",
+    "AbortController": "readonly",
+    "AbortSignal": "readonly"
+  }
+}

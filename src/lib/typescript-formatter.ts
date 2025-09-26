@@ -19,7 +19,7 @@ export const getTypeScriptFormatterPrettier = async (): Promise<Formatter | null
     return {
       formatText: (content) => prettier.format(content, { parser: `typescript` }),
     }
-  } catch (error) {
+  } catch {
     return null
   }
 }
@@ -60,7 +60,7 @@ export const getTypeScriptFormatterDprint = async (fs: Fs): Promise<Formatter | 
         }
       },
     }
-  } catch (error) {
+  } catch {
     return null
   }
 }

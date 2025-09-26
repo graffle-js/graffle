@@ -73,9 +73,9 @@ assertType<DData | null>(await g1.gql(d3).send({}))
   assertType<DData | null>(await g1.gql<Grafaid.Document.Typed.Node<DData, { x?: 1 }>              >``.send())
   assertType<DData | null>(await g1.gql<Grafaid.Document.Typed.Node<DData, { x?: 1 }>              >``.send({ x: 1 }))
   assertType<DData | null>(await g1.gql<Grafaid.Document.Typed.Node<DData, {}>                     >``.send())
-  assertType<DData | null>(await g1.gql<Grafaid.Document.Typed.Node<DData, Grafaid.Document.Typed.Variables>>``.send()) // eslint-disable-line
-  assertType<DData | null>(await g1.gql<Grafaid.Document.Typed.Node<DData, Grafaid.Document.Typed.Variables>>``.send({ x: 1 })) // eslint-disable-line
-  assertType<DData | null>(await g1.gql<Grafaid.Document.Typed.Node<DData, Grafaid.Document.Typed.Variables>>``.send(`abc`, { x: 1 }))  // eslint-disable-line
+  assertType<DData | null>(await g1.gql<Grafaid.Document.Typed.Node<DData, Grafaid.Document.Typed.Variables>>``.send()) 
+  assertType<DData | null>(await g1.gql<Grafaid.Document.Typed.Node<DData, Grafaid.Document.Typed.Variables>>``.send({ x: 1 })) 
+  assertType<DData | null>(await g1.gql<Grafaid.Document.Typed.Node<DData, Grafaid.Document.Typed.Variables>>``.send(`abc`, { x: 1 }))  
   await g1.gql<Grafaid.Document.Typed.Node<DData, { x: 1 }>               >``
     // @ts-expect-error - wrong argument type
     .send({ x: 2 })
@@ -84,9 +84,9 @@ assertType<DData | null>(await g1.gql(d3).send({}))
   assertType<DData | null>(await g1.gql<Grafaid.Document.Typed.String<DData, { x?: 1 }>              >``.send())
   assertType<DData | null>(await g1.gql<Grafaid.Document.Typed.String<DData, { x?: 1 }>              >``.send({ x: 1 }))
   assertType<DData | null>(await g1.gql<Grafaid.Document.Typed.String<DData, {}>                     >``.send())
-  assertType<DData | null>(await g1.gql<Grafaid.Document.Typed.String<DData, Grafaid.Document.Typed.Variables>>``.send()) // eslint-disable-line
-  assertType<DData | null>(await g1.gql<Grafaid.Document.Typed.String<DData, Grafaid.Document.Typed.Variables>>``.send({ x: 1 })) // eslint-disable-line
-  assertType<DData | null>(await g1.gql<Grafaid.Document.Typed.String<DData, Grafaid.Document.Typed.Variables>>``.send(`abc`, { x: 1 })) // eslint-disable-line
+  assertType<DData | null>(await g1.gql<Grafaid.Document.Typed.String<DData, Grafaid.Document.Typed.Variables>>``.send()) 
+  assertType<DData | null>(await g1.gql<Grafaid.Document.Typed.String<DData, Grafaid.Document.Typed.Variables>>``.send({ x: 1 })) 
+  assertType<DData | null>(await g1.gql<Grafaid.Document.Typed.String<DData, Grafaid.Document.Typed.Variables>>``.send(`abc`, { x: 1 })) 
   await g1.gql<Grafaid.Document.Typed.String<DData, { x: 1 }>               >``
     // @ts-expect-error - wrong argument type
     .send({ x: 2 })

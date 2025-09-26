@@ -114,11 +114,11 @@ type HandleOutput_Extensions<
   $Context['configuration']['output']['current'],
   $Envelope
 > // todo
-// eslint-disable-next-line
+
 // @ts-ignore fixme
 // Extension.TypeHooks.RunTypeHookOnRequestResult<$Context, {
 //   result: $Envelope
-//   // eslint-disable-next-line
+
 //   // @ts-ignore fixme
 //   registeredSchema: GlobalRegistry.GetOrDefault<$Context['name']>
 // }>['result']

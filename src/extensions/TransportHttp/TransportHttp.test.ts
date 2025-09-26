@@ -37,7 +37,6 @@ const createG1 = () => GraffleBare.create().use(TransportHttp)
 const test = testBase.extend<{
   g1: ReturnType<typeof createG1>
 }>({
-  // eslint-disable-next-line
   g1: async ({}, use) => {
     const g0 = createG1()
     await use(g0)

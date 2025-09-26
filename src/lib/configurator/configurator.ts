@@ -247,7 +247,7 @@ export namespace Configurator {
       $Input extends Configuration = Configuration,
       $Normalized extends $Input = $Input,
       // todo
-      // eslint-disable-next-line
+
       $Default extends Partial<$Normalized> = Partial<$Normalized>,
     > {
       parameters: unknown // Parameters<$Input, $Normalized, $Default>
