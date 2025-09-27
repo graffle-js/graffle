@@ -22,6 +22,7 @@ GraffleBare.create().use(TransportHttp).transport({
 The transport supports relative URLs, which are useful in browser environments and framework integrations.
 
 > **Note**: Node.js's native fetch does not support relative URLs. They only work in:
+>
 > - Browser environments (where they're [resolved against the page origin](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#url))
 > - Frameworks that provide enhanced fetch implementations (like [SvelteKit's load function](https://kit.svelte.dev/docs/load#making-fetch-requests))
 
@@ -33,17 +34,17 @@ import { GraffleBare } from 'graffle/presets/bare'
 
 // Relative paths are supported
 GraffleBare.create().use(TransportHttp).transport({
-  url: '/api/graphql',  // Relative to current origin
+  url: '/api/graphql', // Relative to current origin
 })
 
 // Also supports parent directory traversal
 GraffleBare.create().use(TransportHttp).transport({
-  url: '../graphql',  // Relative to parent directory
+  url: '../graphql', // Relative to parent directory
 })
 
 // And current directory paths
 GraffleBare.create().use(TransportHttp).transport({
-  url: './graphql',  // Relative to current directory
+  url: './graphql', // Relative to current directory
 })
 ```
 
@@ -147,6 +148,24 @@ Hooks are augmented in the following ways:
 | --------- | ------ | ---------------------- | --------- | ---------- | ---------- |
 | Input     | -      | `url` `headers` `body` | `request` | `response` | `response` |
 | Functions | -      | -                      | `fetch`   |            |            |
+
+### URL Type in Anyware
+
+The `request.url` in the Exchange hook is a discriminated union that preserves whether the URL is a relative path or absolute URL:
+
+```ts
+.anyware(async ({ exchange }) => {
+  // Access the discriminated union
+  if (exchange.input.request.url._tag === 'path') {
+    // It's a relative path (string)
+    console.log('Path:', exchange.input.request.url.value)
+  } else {
+    // It's an absolute URL (URL object)
+    console.log('URL:', exchange.input.request.url.value.href)
+  }
+  return exchange()
+})
+```
 
 ## Raw
 
