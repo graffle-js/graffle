@@ -7,7 +7,7 @@ import { examplePaths } from './paths.generated.js'
 const toString = S.encodeSync(FsLoc.FsLoc)
 
 describe('examples', () => {
-  test.concurrent.for(examplePaths)('%s', async (loc) => {
+  test.for(examplePaths)('%s', async (loc) => {
     const exampleResult = await runExampleForTest(toString(loc))
 
     // Build snapshot path using FsLoc
