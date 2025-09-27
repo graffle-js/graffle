@@ -188,11 +188,21 @@ export const runExample = async (filePath: string) => {
   const isInExamplesDir = await FS.access('../package.json').then(() => true).catch(() => false)
 
   // Resolve the path based on current working directory
-  const resolvedPath = isInExamplesDir
-    ? filePath // Already in examples directory, use path as-is
-    : filePath.startsWith('./examples/')
-    ? filePath // Path already includes examples/
-    : `./examples/${filePath.replace(/^\.\//, '')}` // Add examples/ prefix
+  let resolvedPath: string
+  if (isInExamplesDir) {
+    // Already in examples directory, use path as-is
+    resolvedPath = filePath
+  } else if (filePath.startsWith('./examples/')) {
+    // Path already includes examples/
+    resolvedPath = filePath
+  } else if (filePath.startsWith('./')) {
+    // Relative path that needs examples/ prefix (when running from root)
+    resolvedPath = `./examples/${filePath.slice(2)}`
+  } else {
+    // Other paths, add examples/ prefix
+    resolvedPath = `./examples/${filePath}`
+  }
+
 
   // Pass environment variables including any POKEMON_SCHEMA_URL from vitest
   const result = await execa({
