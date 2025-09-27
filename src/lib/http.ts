@@ -4,6 +4,47 @@ export const CONTENT_TYPE_JSON = `application/json`
 export const CONTENT_TYPE_GQL = `application/graphql-response+json`
 export const CONTENT_TYPE_MULTIPART_FORM_DATA = `multipart/form-data`
 
+/**
+ * Discriminated union for URL input that clearly distinguishes between
+ * relative paths and absolute URLs
+ */
+export type URLInput =
+  | { _tag: 'path'; value: string } // Relative paths: /api, ./api, ../api
+  | { _tag: 'url'; value: URL } // Absolute URLs
+
+export const URLInput = {
+  /**
+   * Create a path variant of URLInput
+   */
+  path: (value: string): URLInput => ({ _tag: 'path', value }),
+
+  /**
+   * Create a URL variant of URLInput
+   */
+  url: (value: URL): URLInput => ({ _tag: 'url', value }),
+}
+
+/**
+ * Parse a string into a URLInput discriminated union.
+ * If the string starts with '/', './', or '../', it's treated as a path.
+ * Otherwise, it must be a valid absolute URL.
+ */
+export const parseURLInput = (input: string | URL): URLInput => {
+  // If already a URL object, return as URL type
+  if (input instanceof URL) {
+    return URLInput.url(input)
+  }
+
+  // Check if it's a relative path
+  if (input.startsWith('/') || input.startsWith('./') || input.startsWith('../')) {
+    return URLInput.path(input)
+  }
+
+  // Otherwise, it must be a valid absolute URL
+  // Let this throw if the URL is invalid - no try/catch
+  return URLInput.url(new URL(input))
+}
+
 export const statusCodes = {
   success: 200,
 }
@@ -67,6 +108,15 @@ export const searchParamsAppendAll = (url: URL | string, additionalSearchParams:
   const url2 = new URL(url)
   searchParamsAppendAllMutate(url2, additionalSearchParams)
   return url2
+}
+
+export const searchParamsAppendAllToPath = (path: string, additionalSearchParams: SearchParamsInit): string => {
+  // Use a dummy base to safely manipulate search params for a path
+  const dummyBase = 'http://dummy'
+  const tempUrl = new URL(path, dummyBase)
+  searchParamsAppendAllMutate(tempUrl, additionalSearchParams)
+  // Extract everything after the dummy origin
+  return tempUrl.href.slice(dummyBase.length)
 }
 
 /**

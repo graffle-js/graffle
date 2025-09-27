@@ -1,7 +1,7 @@
 ::: details Example
 
 <div class="ExampleSnippet">
-<a href="../../examples/document-builder/root-field">Root Field</a>
+<a href="../../examples/document-builder/document-builder_root-field">Root Field</a>
 
 <!-- dprint-ignore-start -->
 ```ts twoslash

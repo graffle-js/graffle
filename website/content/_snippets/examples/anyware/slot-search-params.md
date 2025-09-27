@@ -1,5 +1,5 @@
 <div class="ExampleSnippet">
-<a href="../../examples/anyware/slot-search-params">Slot Search Params</a>
+<a href="../../examples/anyware/anyware_slot_slot-body__slot-search-params">Slot Search Params</a>
 
 <!-- dprint-ignore-start -->
 ```ts twoslash

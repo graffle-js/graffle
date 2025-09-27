@@ -4,7 +4,15 @@ import type { Grafaid } from '../../lib/grafaid/_namespace.js'
 import { OperationTypeToAccessKind, print } from '../../lib/grafaid/document.js'
 import { getRequestEncodeSearchParameters, postRequestEncodeBody } from '../../lib/grafaid/http/http.js'
 import { getRequestHeadersRec, parseExecutionResult, postRequestHeadersRec } from '../../lib/grafaid/http/http.js'
-import { mergeHeadersInitWithStrategyMerge, mergeRequestInit, searchParamsAppendAll } from '../../lib/http.js'
+import {
+  mergeHeadersInitWithStrategyMerge,
+  mergeRequestInit,
+  parseURLInput,
+  searchParamsAppendAll,
+  searchParamsAppendAllToPath,
+  URLInput,
+  type URLInput as URLInputType,
+} from '../../lib/http.js'
 import type { httpMethodGet, httpMethodPost } from '../../lib/http.js'
 import { _, isString, type MaybePromise } from '../../lib/prelude.js'
 
@@ -13,6 +21,19 @@ import { _, isString, type MaybePromise } from '../../lib/prelude.js'
 // ----------------------------
 
 export type ConfigurationInput = {
+  /**
+   * The GraphQL endpoint URL.
+   *
+   * Can be:
+   * - An absolute URL string (e.g., `https://api.example.com/graphql`)
+   * - A relative path string (e.g., `/api/graphql`, `./graphql`, `../graphql`)
+   * - A URL object
+   *
+   * Note: Node.js's native fetch does not support relative URLs (they are only supported in browsers).
+   * Relative paths are particularly useful for:
+   * - Browser environments where {@link https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API relative URLs are resolved against the page origin}
+   * - Framework integrations like {@link https://kit.svelte.dev/docs/load#making-fetch-requests SvelteKit} where the framework provides an enhanced fetch
+   */
   url?: URL | string
   /**
    * The HTTP method to use to make the request.
@@ -33,7 +54,7 @@ export type ConfigurationInput = {
 }
 
 export interface ConfigurationNormalized {
-  url: URL
+  url: URL | string
   methodMode: MethodMode
   headers?: Headers
   raw?: RequestInit
@@ -56,7 +77,7 @@ export interface ConfigurationInputResolver$Func_<
   _Input = $Parameters['input'],
   _Current = $Parameters['current'],
 > extends Partial<ConfigurationNormalized> {
-  url: 'url' extends keyof _Current ? URL : 'url' extends keyof _Input ? URL : undefined
+  url: 'url' extends keyof _Current ? URL | string : 'url' extends keyof _Input ? URL | string : undefined
   methodMode: 'methodMode' extends keyof _Current ? MethodMode : 'methodMode' extends keyof _Input ? MethodMode : undefined
 }
 
@@ -76,10 +97,21 @@ const httpTransportConfigurator = Extension.Configurator()
   .normalized<ConfigurationNormalized>()
   .default(configurationDefault)
   .inputResolver<ConfigurationInputResolver$Func>(({ current, input }) => {
+    // Parse and validate URL at configuration time
+    // This ensures invalid URLs fail early, not at runtime
+    let url = current.url
+    if (input.url !== undefined) {
+      // Validate the URL by parsing it
+      // parseURLInput will throw if the URL is invalid
+      const parsed = parseURLInput(input.url)
+      // Store back as the original type (string or URL)
+      url = input.url
+    }
+
     return {
       methodMode: input.methodMode ?? current.methodMode,
       raw: input.raw ?? current.raw,
-      url: input.url ? new URL(input.url) : current.url,
+      url,
       headers: mergeHeadersInitWithStrategyMerge(current.headers, input.headers),
     }
   })
@@ -96,14 +128,14 @@ export type ExchangeRequest = ExchangePostRequest | ExchangeGetRequest
 export type ExchangePostRequest = Omit<RequestInit, 'body' | 'method'> & {
   methodMode: MethodModePost | MethodModeGetReads
   method: httpMethodPost
-  url: string | URL // todo URL for config and string only for input. Requires anyware to allow different types for input and existing config.
+  url: URLInputType // Preserve discriminated union for anyware extensions
   body: BodyInit
 }
 
 export type ExchangeGetRequest = Omit<RequestInit, 'body' | 'method'> & {
   methodMode: MethodModeGetReads
   method: httpMethodGet
-  url: string | URL
+  url: URLInputType // Preserve discriminated union for anyware extensions
 }
 
 // ----------------------------
@@ -150,18 +182,29 @@ export const TransportHttp = Extension.create(`TransportHttp`)
               headers: input.transport.headers,
             },
           )
+          // Parse the URL at runtime to determine if it's a path or absolute URL
+          const parsedUrl = parseURLInput(input.transport.url)
+
+          // For GET requests, we need to append search params
+          // Handle paths and URLs differently while preserving the discriminated union
+          const urlWithParams: URLInputType = requestMethod === `get`
+            ? parsedUrl._tag === 'path'
+              ? URLInput.path(searchParamsAppendAllToPath(parsedUrl.value, slots.searchParams(graphqlRequest)))
+              : URLInput.url(searchParamsAppendAll(parsedUrl.value, slots.searchParams(graphqlRequest)))
+            : parsedUrl
+
           const request: ExchangeRequest = requestMethod === `get`
             ? {
               methodMode: methodMode as MethodModeGetReads,
               ...baseRequestInit,
               method: `get`,
-              url: searchParamsAppendAll(input.transport.url, slots.searchParams(graphqlRequest)),
+              url: urlWithParams,
             }
             : {
               methodMode: methodMode,
               ...baseRequestInit,
               method: `post`,
-              url: input.transport.url,
+              url: parsedUrl,
               body: slots.body(graphqlRequest),
             }
           return {
@@ -172,11 +215,10 @@ export const TransportHttp = Extension.create(`TransportHttp`)
       })
       .exchange({
         slots: {
-          fetch: (request: Request): MaybePromise<Response> => fetch(request),
+          fetch: (url: string | URL, init?: RequestInit): MaybePromise<Response> => fetch(url, init),
         },
         async run(input, slots) {
-          const request = new Request(input.request.url, input.request)
-          const response = await slots.fetch(request)
+          const response = await slots.fetch(input.request.url.value, input.request)
           return {
             ...input,
             response,

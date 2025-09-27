@@ -1,5 +1,5 @@
 <div class="ExampleSnippet">
-<a href="../../examples/anyware/slot-body">Slot Body</a>
+<a href="../../examples/anyware/anyware_slot_slot-body__slot-body">Slot Body</a>
 
 <!-- dprint-ignore-start -->
 ```ts twoslash

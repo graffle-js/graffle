@@ -1,5 +1,5 @@
 <div class="ExampleSnippet">
-<a href="../../examples/gql/gql-string">Gql String</a>
+<a href="../../examples/gql/gql_gql-string">Gql String</a>
 
 <!-- dprint-ignore-start -->
 ```ts twoslash

@@ -6,7 +6,7 @@ export const documentQueryContinents = {
 
 export const publicGraphQLSchemaEndpoints = {
   Atlas: `https://countries.trevorblades.com/graphql`,
-  Pokemon: `http://localhost:3000/graphql`,
+  Pokemon: process.env['POKEMON_SCHEMA_URL'] || `http://localhost:3000/graphql`,
 }
 
 export const dynamicValue = `DYNAMIC_VALUE`

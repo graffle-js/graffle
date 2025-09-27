@@ -129,5 +129,6 @@ test(`custom headers can be set on introspection request`, async ({ fetch }) => 
       },
     },
   })
-  expect(fetch.mock.calls[0]?.[0].headers.get(`x-custom`)).toBe(`test`)
+  const init = fetch.mock.calls[0]?.[1]
+  expect(new Headers(init?.headers).get(`x-custom`)).toBe(`test`)
 })

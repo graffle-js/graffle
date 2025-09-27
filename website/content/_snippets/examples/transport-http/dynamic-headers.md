@@ -1,5 +1,5 @@
 <div class="ExampleSnippet">
-<a href="../../examples/transport-http/dynamic-headers">Dynamic Headers</a>
+<a href="../../examples/transport-http/transport-http_extension_headers__dynamicHeaders">Dynamic Headers</a>
 
 <!-- dprint-ignore-start -->
 ```ts twoslash
@@ -50,22 +50,25 @@ await graffle.gql`{ pokemons { name } }`.send()
       'application/graphql-response+json; charset=utf-8, application/json; charset=utf-8'
     ],
     [ 'content-type', 'application/json' ],
-    [ 'X-Sent-At-Time', '1745012194302' ]
+    [ 'X-Sent-At-Time', '1758979139873' ]
   ],
   method: 'post',
-  url: URL {
-    href: 'http://localhost:3000/graphql',
-    origin: 'http://localhost:3000',
-    protocol: 'http:',
-    username: '',
-    password: '',
-    host: 'localhost:3000',
-    hostname: 'localhost',
-    port: '3000',
-    pathname: '/graphql',
-    search: '',
-    searchParams: URLSearchParams {},
-    hash: ''
+  url: {
+    _tag: 'url',
+    value: URL {
+      href: 'http://localhost:3000/graphql',
+      origin: 'http://localhost:3000',
+      protocol: 'http:',
+      username: '',
+      password: '',
+      host: 'localhost:3000',
+      hostname: 'localhost',
+      port: '3000',
+      pathname: '/graphql',
+      search: '',
+      searchParams: URLSearchParams {},
+      hash: ''
+    }
   },
   body: '{"query":"{ pokemons { name } }"}'
 }

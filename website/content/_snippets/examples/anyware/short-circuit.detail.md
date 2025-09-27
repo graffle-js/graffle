@@ -1,7 +1,7 @@
 ::: details Example
 
 <div class="ExampleSnippet">
-<a href="../../examples/anyware/short-circuit">Short Circuit</a>
+<a href="../../examples/anyware/anyware_short-circuit__short-circuit">Short Circuit</a>
 
 <!-- dprint-ignore-start -->
 ```ts twoslash

@@ -1,5 +1,5 @@
 <div class="ExampleSnippet">
-<a href="../../examples/extension/throws">Throws</a>
+<a href="../../examples/extension/extension_throws__throws">Throws</a>
 
 <!-- dprint-ignore-start -->
 ```ts twoslash
@@ -31,20 +31,20 @@ console.log(`This line will never be reached because of thrown error.`)
 <!-- dprint-ignore-start -->
 ```txt
 ContextualError: There was an error in the interceptor "anonymous" (use named functions to improve this error message) while running hook "encode".
-    at runPipeline (/some/path/to/runPipeline.ts:XX:XX:18)
-    at async <anonymous> (/some/path/to/runner.ts:XX:XX:20)
-    at async Module.run (/some/path/to/run.ts:XX:XX:10)
-    at async sendRequest (/some/path/to/send.ts:XX:XX:18)
-    at async executeRootField (/some/path/to/requestMethods.ts:XX:XX:18)
-    at async <anonymous> (/some/path/to/extension_throws__throws.ts:XX:XX:17) {
+    at runPipeline (/some/path/to/runPipeline.ts:XX:XX)
+    at async <anonymous> (/some/path/to/runner.ts:XX:XX)
+    at async Module.run (/some/path/to/run.ts:XX:XX)
+    at async sendRequest (/some/path/to/send.ts:XX:XX)
+    at async executeRootField (/some/path/to/requestMethods.ts:XX:XX)
+    at async <anonymous> (/some/path/to/extension_throws__throws.ts:XX:XX) {
   context: {
     hookName: 'encode',
     source: 'extension',
     interceptorName: 'anonymous'
   },
   cause: Error: Something went wrong.
-      at <anonymous> (/some/path/to/extension_throws__throws.ts:XX:XX:11)
-      at applyBody (/some/path/to/runner.ts:XX:XX:28)
+      at <anonymous> (/some/path/to/extension_throws__throws.ts:XX:XX)
+      at applyBody (/some/path/to/runner.ts:XX:XX)
 }
 ```
 <!-- dprint-ignore-end -->
@@ -53,20 +53,20 @@ ContextualError: There was an error in the interceptor "anonymous" (use named fu
 UNCAUGHT EXCEPTION:
 
 ContextualError: There was an error in the interceptor "anonymous" (use named functions to improve this error message) while running hook "encode".
-    at runPipeline (/some/path/to/runPipeline.ts:XX:XX:18)
-    at async <anonymous> (/some/path/to/runner.ts:XX:XX:20)
-    at async Module.run (/some/path/to/run.ts:XX:XX:10)
-    at async sendRequest (/some/path/to/send.ts:XX:XX:18)
-    at async executeRootField (/some/path/to/requestMethods.ts:XX:XX:18)
-    at async <anonymous> (/some/path/to/extension_throws__throws.ts:XX:XX:1) {
+    at runPipeline (/some/path/to/runPipeline.ts:XX:XX)
+    at async <anonymous> (/some/path/to/runner.ts:XX:XX)
+    at async Module.run (/some/path/to/run.ts:XX:XX)
+    at async sendRequest (/some/path/to/send.ts:XX:XX)
+    at async executeRootField (/some/path/to/requestMethods.ts:XX:XX)
+    at async <anonymous> (/some/path/to/extension_throws__throws.ts:XX:XX) {
   context: {
     hookName: 'encode',
     source: 'extension',
     interceptorName: 'anonymous'
   },
   cause: Error: Something went wrong.
-      at <anonymous> (/some/path/to/extension_throws__throws.ts:XX:XX:11)
-      at applyBody (/some/path/to/runner.ts:XX:XX:28)
+      at <anonymous> (/some/path/to/extension_throws__throws.ts:XX:XX)
+      at applyBody (/some/path/to/runner.ts:XX:XX)
 }
 ```
 <!-- dprint-ignore-end -->

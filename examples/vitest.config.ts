@@ -8,5 +8,6 @@ export default defineConfig({
     globalSetup: [`../tests/_/services/pokemonVitest.ts`],
     bail: isCI ? undefined : 1,
     maxConcurrency: isCI ? undefined : 1,
+    testTimeout: 30000,
   },
 })

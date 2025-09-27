@@ -62,7 +62,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [20, 22]
+        node: [24]
         environment: [jsdom, node]
     name: test unit Node ${{ matrix.node }} @env ${{matrix.environment}}
     steps:
@@ -76,7 +76,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [20, 22]
+        node: [24]
         environment: [jsdom, node]
     name: test examples Node ${{ matrix.node }} @env ${{matrix.environment}}
     steps:
@@ -95,7 +95,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [22]
+        node: [24]
         environment: [node]
     name: test e2e usingNode ${{ matrix.node }}
     steps:

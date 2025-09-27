@@ -1,5 +1,5 @@
 <div class="ExampleSnippet">
-<a href="../../examples/transport-http/raw">Raw</a>
+<a href="../../examples/transport-http/transport-http_raw">Raw</a>
 
 <!-- dprint-ignore-start -->
 ```ts twoslash
@@ -38,19 +38,22 @@ await graffle.gql`{ pokemons { name } }`.send()
   },
   mode: 'cors',
   method: 'post',
-  url: URL {
-    href: 'http://localhost:3000/graphql',
-    origin: 'http://localhost:3000',
-    protocol: 'http:',
-    username: '',
-    password: '',
-    host: 'localhost:3000',
-    hostname: 'localhost',
-    port: '3000',
-    pathname: '/graphql',
-    search: '',
-    searchParams: URLSearchParams {},
-    hash: ''
+  url: {
+    _tag: 'url',
+    value: URL {
+      href: 'http://localhost:3000/graphql',
+      origin: 'http://localhost:3000',
+      protocol: 'http:',
+      username: '',
+      password: '',
+      host: 'localhost:3000',
+      hostname: 'localhost',
+      port: '3000',
+      pathname: '/graphql',
+      search: '',
+      searchParams: URLSearchParams {},
+      hash: ''
+    }
   },
   body: '{"query":"{ pokemons { name } }"}'
 }

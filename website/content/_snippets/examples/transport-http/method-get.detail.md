@@ -1,7 +1,7 @@
 ::: details Example
 
 <div class="ExampleSnippet">
-<a href="../../examples/transport-http/method-get">Method Get</a>
+<a href="../../examples/transport-http/transport-http_method-get">Method Get</a>
 
 <!-- dprint-ignore-start -->
 ```ts twoslash
@@ -45,19 +45,22 @@ await graffle.gql`query { pokemonByName(name: "Nano") { hp } }`.send()
     tenant: 'nano'
   },
   method: 'post',
-  url: URL {
-    href: 'http://localhost:3000/graphql',
-    origin: 'http://localhost:3000',
-    protocol: 'http:',
-    username: '',
-    password: '',
-    host: 'localhost:3000',
-    hostname: 'localhost',
-    port: '3000',
-    pathname: '/graphql',
-    search: '',
-    searchParams: URLSearchParams {},
-    hash: ''
+  url: {
+    _tag: 'url',
+    value: URL {
+      href: 'http://localhost:3000/graphql',
+      origin: 'http://localhost:3000',
+      protocol: 'http:',
+      username: '',
+      password: '',
+      host: 'localhost:3000',
+      hostname: 'localhost',
+      port: '3000',
+      pathname: '/graphql',
+      search: '',
+      searchParams: URLSearchParams {},
+      hash: ''
+    }
   },
   body: '{"query":"mutation { addPokemon(attack:0, defense:0, hp:1, name:\\"Nano\\", type: grass) { name } }"}'
 }
@@ -72,19 +75,22 @@ await graffle.gql`query { pokemonByName(name: "Nano") { hp } }`.send()
     tenant: 'nano'
   },
   method: 'get',
-  url: URL {
-    href: 'http://localhost:3000/graphql?query=query+%7B+pokemonByName%28name%3A+%22Nano%22%29+%7B+hp+%7D+%7D',
-    origin: 'http://localhost:3000',
-    protocol: 'http:',
-    username: '',
-    password: '',
-    host: 'localhost:3000',
-    hostname: 'localhost',
-    port: '3000',
-    pathname: '/graphql',
-    search: '?query=query+%7B+pokemonByName%28name%3A+%22Nano%22%29+%7B+hp+%7D+%7D',
-    searchParams: URLSearchParams { 'query' => 'query { pokemonByName(name: "Nano") { hp } }' },
-    hash: ''
+  url: {
+    _tag: 'url',
+    value: URL {
+      href: 'http://localhost:3000/graphql?query=query+%7B+pokemonByName%28name%3A+%22Nano%22%29+%7B+hp+%7D+%7D',
+      origin: 'http://localhost:3000',
+      protocol: 'http:',
+      username: '',
+      password: '',
+      host: 'localhost:3000',
+      hostname: 'localhost',
+      port: '3000',
+      pathname: '/graphql',
+      search: '?query=query+%7B+pokemonByName%28name%3A+%22Nano%22%29+%7B+hp+%7D+%7D',
+      searchParams: URLSearchParams { 'query' => 'query { pokemonByName(name: "Nano") { hp } }' },
+      hash: ''
+    }
   }
 }
 ```

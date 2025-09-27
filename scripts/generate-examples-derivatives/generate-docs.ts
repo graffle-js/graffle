@@ -108,7 +108,9 @@ const generateExampleLinksSnippets = async (examplesTransformed: ExampleTransfor
   await Promise.all(
     Object.entries(groups).map(async ([groupName, examples]) => {
       const codeLinks = examples.map(example => {
-        return `<a href="../../examples/${example.group.humanName}/${example.fileName.canonical}">${example.fileName.canonicalTitle}</a>`
+        // Use the actual file name without extension
+        const actualFileName = example.file.name.replace('.ts', '')
+        return `<a href="../../examples/${example.group.humanName}/${actualFileName}">${example.fileName.canonicalTitle}</a>`
       }).join(` <span class="ExampleLinksSeparator"></span> `)
       const code =
         `<p class="ExampleLinks">Examples <span class="ExampleLinksTitleSeparator">-></span> ${codeLinks}</p>`
@@ -244,10 +246,11 @@ ${codeBlock}
 ${outputs}
 `.trim()
 
+  const actualFileName = example.file.name.replace('.ts', '')
   const snippet = {
     content: `
 <div class="ExampleSnippet">
-<a href="../../examples/${example.group.humanName}/${example.fileName.canonical}">${example.fileName.canonicalTitle}</a>
+<a href="../../examples/${example.group.humanName}/${actualFileName}">${example.fileName.canonicalTitle}</a>
 
 ${[codeBlock, outputBlocks].filter(_ => _ !== ``).join(`\n\n`).trim()}
 

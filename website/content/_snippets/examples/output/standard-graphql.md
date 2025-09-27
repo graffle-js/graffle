@@ -1,5 +1,5 @@
 <div class="ExampleSnippet">
-<a href="../../examples/output/standard-graphql">Standard Graphql</a>
+<a href="../../examples/output/output_preset__standard-graphql">Standard Graphql</a>
 
 <!-- dprint-ignore-start -->
 ```ts twoslash
@@ -26,35 +26,36 @@ console.log(result)
 
 <!-- dprint-ignore-start -->
 ```txt
-/some/path/to/runPipeline.ts:XX:XX
+/some/path/to/runPipeline.ts:XX
           return new ContextualError(message, { hookName: signal.hookName, source: signal.source }, signal.error)
                  ^
 
 
 ContextualError: There was an error in the core implementation of hook "exchange".
-    at runPipeline (/some/path/to/runPipeline.ts:XX:XX:18)
-    at async runPipeline (/some/path/to/runPipeline.ts:XX:XX:14)
-    at async runPipeline (/some/path/to/runPipeline.ts:XX:XX:14)
-    at async <anonymous> (/some/path/to/runner.ts:XX:XX:20)
-    at async Module.run (/some/path/to/run.ts:XX:XX:10)
-    at async sendRequest (/some/path/to/send.ts:XX:XX:18)
-    at async <anonymous> (/some/path/to/output_preset__standard-graphql.ts:XX:XX:16) {
-  cause: TypeError: Failed to parse URL from bad
-      at new Request (node:internal/deps/undici/undici:XX:XX)
-      at Object.run (/some/path/to/TransportHttp.ts:XX:XX:27)
-      ... 4 lines matching cause stack trace ...
-      at applyBody (/some/path/to/runner.ts:XX:XX:28) {
+    at runPipeline (/some/path/to/runPipeline.ts:XX:XX)
+    at async runPipeline (/some/path/to/runPipeline.ts:XX:XX)
+    at async runPipeline (/some/path/to/runPipeline.ts:XX:XX)
+    at async <anonymous> (/some/path/to/runner.ts:XX:XX)
+    at async Module.run (/some/path/to/run.ts:XX:XX)
+    at async sendRequest (/some/path/to/send.ts:XX:XX)
+    at async <anonymous> (/some/path/to/output_preset__standard-graphql.ts:XX:XX) {
+  cause: TypeError: Failed to parse URL from undefined
+      at node:internal/deps/undici/undici:13510:13
+      at async Object.run (/some/path/to/TransportHttp.ts:XX:XX)
+      at async runStep (/some/path/to/runStep.ts:XX:XX) {
     [cause]: TypeError: Invalid URL
-        at new URL (node:internal/url:XX:XX)
-        at new Request (node:internal/deps/undici/undici:XX:XX)
-        at Object.run (/some/path/to/TransportHttp.ts:XX:XX:27)
-        at Object.run (/some/path/to/Pipeline.ts:XX:XX:51)
-        at runStep (/some/path/to/runStep.ts:XX:XX:37)
-        at <anonymous> (/some/path/to/runStep.ts:XX:XX:14)
-        at <anonymous> (/some/path/to/output_preset__standard-graphql.ts:XX:XX:12)
-        at applyBody (/some/path/to/runner.ts:XX:XX:28) {
+        at new URL (node:internal/url:825:25)
+        at new Request (node:internal/deps/undici/undici:9586:25)
+        at fetch (node:internal/deps/undici/undici:10315:25)
+        at fetch (node:internal/deps/undici/undici:13508:10)
+        at fetch (node:internal/bootstrap/web/exposed-window-or-worker:75:12)
+        at Object.fetch (/some/path/to/TransportHttp.ts:XX:XX)
+        at Object.run (/some/path/to/TransportHttp.ts:XX:XX)
+        at Object.run (/some/path/to/Pipeline.ts:XX:XX)
+        at runStep (/some/path/to/runStep.ts:XX:XX)
+        at <anonymous> (/some/path/to/runStep.ts:XX:XX) {
       code: 'ERR_INVALID_URL',
-      input: 'bad'
+      input: 'undefined'
     }
   },
   context: { hookName: 'exchange', source: 'implementation' }

@@ -1,6 +1,7 @@
 import { capitalize, kebabCase } from 'es-toolkit'
 import { execa, ExecaError } from 'execa'
 import { globby } from 'globby'
+import * as FS from 'node:fs/promises'
 import * as Path from 'node:path'
 import stripAnsi from 'strip-ansi'
 import { showPartition } from '../../examples/$/helpers.js'
@@ -183,7 +184,34 @@ export const computeCombinations = (arr: string[]): string[][] => {
 }
 
 export const runExample = async (filePath: string) => {
-  const result = await execa({ reject: false })`pnpm tsx ${filePath}`
+  // Detect if we're in the examples directory by checking if ../package.json exists
+  const isInExamplesDir = await FS.access('../package.json').then(() => true).catch(() => false)
+
+  // Resolve the path based on current working directory
+  let resolvedPath: string
+  if (isInExamplesDir) {
+    // Already in examples directory, use path as-is
+    resolvedPath = filePath
+  } else if (filePath.startsWith('./examples/')) {
+    // Path already includes examples/
+    resolvedPath = filePath
+  } else if (filePath.startsWith('./')) {
+    // Relative path that needs examples/ prefix (when running from root)
+    resolvedPath = `./examples/${filePath.slice(2)}`
+  } else {
+    // Other paths, add examples/ prefix
+    resolvedPath = `./examples/${filePath}`
+  }
+
+  // Pass environment variables including any POKEMON_SCHEMA_URL from vitest
+  const result = await execa({
+    reject: false,
+    env: {
+      ...process.env,
+      // Ensure the subprocess gets the server URL if set by vitest
+      POKEMON_SCHEMA_URL: process.env['POKEMON_SCHEMA_URL'],
+    },
+  })`pnpm tsx ${resolvedPath}`
 
   let exampleOutput = ``
 
@@ -199,15 +227,108 @@ export const runExample = async (filePath: string) => {
   }
 
   exampleOutput = stripAnsi(exampleOutput)
-  exampleOutput = rewriteDynamicError(exampleOutput)
+  // Apply masking to website outputs for cleaner documentation
+  exampleOutput = rewriteDynamicErrorForWebsite(exampleOutput)
 
   return exampleOutput
 }
 
-export const rewriteDynamicError = (value: string) => {
+/**
+ * Rewrite error output for website documentation.
+ * Masks paths with XX:XX format for line numbers to keep documentation clean.
+ */
+export const rewriteDynamicErrorForWebsite = (value: string) => {
   return value
-    .replaceAll(/\/.*\/(.+)\.ts(:?:\d+)?/g, `/some/path/to/$1.ts:XX:XX`)
+    // Mask any absolute path that contains node_modules, examples, src, etc.
+    // Match paths like /any/path/to/file.ts:109:18 (line:column)
+    .replaceAll(
+      /\/[\w\-/.@+]*\/([\w-]+\.(?:ts|js|mjs|cjs)):\d+:\d+/g,
+      `/some/path/to/$1:XX:XX`,
+    )
+    // Match paths in parentheses like (/any/path/to/file.ts:12:34)
+    .replaceAll(
+      /\(\/[\w\-/.@+]*\/([\w-]+\.(?:ts|js|mjs|cjs)):\d+:\d+\)/g,
+      `(/some/path/to/$1:XX:XX)`,
+    )
+    // Match paths like /any/path/to/file.ts:12 (with just line number)
+    .replaceAll(
+      /\/[\w\-/.@+]*\/([\w-]+\.(?:ts|js|mjs|cjs)):\d+(?!\d)/g,
+      `/some/path/to/$1:XX`,
+    )
+    // Match paths without line numbers
+    .replaceAll(
+      /\/[\w\-/.@+]*\/([\w-]+\.(?:ts|js|mjs|cjs))(?=\s|$)/g,
+      `/some/path/to/$1`,
+    )
     // When Node.js process exits via an uncaught thrown error, version is printed at bottom.
     .replaceAll(/Node\.js v.+/g, `Node.js vXX.XX.XX`)
-    .replaceAll(/(.+):\d+:\d+\)/g, `$1:XX:XX)`)
+}
+
+export const rewriteDynamicError = (value: string) => {
+  return value
+    // Normalize blank lines after caret to always be single blank line for consistency
+    // Node.js error output can vary between versions and environments
+    .replaceAll(/\^\n\n+/g, '^\n\n')
+    // Mask Node.js internal module line numbers that vary between versions
+    // Match patterns like node:internal/deps/undici/undici:13510:13 or node:internal/url:825:25
+    .replaceAll(
+      /\b(node:[\w/-]+):\d+:\d+/g,
+      `$1:XX:XX`,
+    )
+    // Mask any absolute path that contains node_modules, examples, src, etc.
+    // Match paths like /any/path/to/file.ts:12:34 (with line and column)
+    .replaceAll(
+      /\/[\w\-/.@+]*\/([\w-]+\.(?:ts|js|mjs|cjs)):\d+:\d+/g,
+      `/some/path/to/$1:XX:XX`,
+    )
+    // Match paths like /any/path/to/file.ts:12 (with just line number)
+    .replaceAll(
+      /\/[\w\-/.@+]*\/([\w-]+\.(?:ts|js|mjs|cjs)):\d+(?!\d)/g,
+      `/some/path/to/$1:XX`,
+    )
+    // Match paths in parentheses like (/any/path/to/file.ts:12:34)
+    .replaceAll(
+      /\(\/[\w\-/.@+]*\/([\w-]+\.(?:ts|js|mjs|cjs)):\d+:\d+\)/g,
+      `(/some/path/to/$1:XX:XX)`,
+    )
+    // Match paths without line numbers
+    .replaceAll(
+      /\/[\w\-/.@+]*\/([\w-]+\.(?:ts|js|mjs|cjs))(?=\s|$)/g,
+      `/some/path/to/$1`,
+    )
+    // When Node.js process exits via an uncaught thrown error, version is printed at bottom.
+    .replaceAll(/Node\.js v.+/g, `Node.js vXX.XX.XX`)
+}
+
+/**
+ * Run an example for testing purposes.
+ * Masks paths to make tests deterministic across different environments.
+ * Applies any encoder if one exists for the example.
+ */
+export const runExampleForTest = async (filePath: string) => {
+  // Run the example directly
+  let output = await runExample(filePath)
+
+  // Apply path masking for CI/local compatibility
+  output = rewriteDynamicError(output)
+
+  // Check if an encoder exists for this example
+  // filePath is like "10_transport-http/transport-http_extension_headers__dynamicHeaders.ts"
+  const exampleName = Path.basename(filePath, '.ts')
+  const dir = Path.dirname(filePath)
+
+  // Build the encoder path using the standard naming convention
+  const encoderPath = `../examples/__outputs__/${dir}/${exampleName}.output.encoder.js`
+
+  try {
+    // Try to dynamically import the encoder module if it exists
+    const encoderModule = await import(encoderPath)
+    if (encoderModule.encode && typeof encoderModule.encode === 'function') {
+      output = encoderModule.encode(output)
+    }
+  } catch {
+    // No encoder exists, that's fine - most examples don't need one
+  }
+
+  return output
 }
