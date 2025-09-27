@@ -1,20 +1,13 @@
 import { FsLoc } from '@wollybeard/kit'
 import { S } from '@wollybeard/kit/sch'
-import { Test } from '@wollybeard/kit/test'
-import { expect } from 'vitest'
+import { describe, expect, test } from 'vitest'
 import { runExampleForTest } from '../../scripts/generate-examples-derivatives/helpers.js'
 import { examplePaths } from './paths.generated.js'
 
 const toString = S.encodeSync(FsLoc.FsLoc)
 
-Test.describe('examples')
-  .i<FsLoc.RelFile>()
-  .concurrent()
-  .cases(...examplePaths.map(loc => ({
-    i: loc,
-    o: undefined,
-  })))
-  .test(async (loc) => {
+describe('examples', () => {
+  test.concurrent.for(examplePaths)('%s', async (loc) => {
     const exampleResult = await runExampleForTest(toString(loc))
 
     // Build snapshot path using FsLoc
@@ -24,3 +17,4 @@ Test.describe('examples')
 
     await expect(exampleResult).toMatchFileSnapshot(snapshotPath)
   })
+})
