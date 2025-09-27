@@ -4,7 +4,7 @@ import type { Grafaid } from '../../lib/grafaid/_namespace.js'
 import { OperationTypeToAccessKind, print } from '../../lib/grafaid/document.js'
 import { getRequestEncodeSearchParameters, postRequestEncodeBody } from '../../lib/grafaid/http/http.js'
 import { getRequestHeadersRec, parseExecutionResult, postRequestHeadersRec } from '../../lib/grafaid/http/http.js'
-import { mergeHeadersInitWithStrategyMerge, mergeRequestInit, searchParamsAppendAll } from '../../lib/http.js'
+import { mergeHeadersInitWithStrategyMerge, mergeRequestInit, parseURLInput, searchParamsAppendAll, type URLInput } from '../../lib/http.js'
 import type { httpMethodGet, httpMethodPost } from '../../lib/http.js'
 import { _, isString, type MaybePromise } from '../../lib/prelude.js'
 
@@ -76,18 +76,15 @@ const httpTransportConfigurator = Extension.Configurator()
   .normalized<ConfigurationNormalized>()
   .default(configurationDefault)
   .inputResolver<ConfigurationInputResolver$Func>(({ current, input }) => {
-    // For URL handling:
-    // - Keep relative paths as strings (e.g., "/api/graphql")
-    // - Convert absolute URL strings to URL objects for consistency
-    // - Keep URL objects as-is
-    let url = input.url ?? current.url
-    if (typeof url === 'string') {
-      // Try to parse as absolute URL
-      try {
-        url = new URL(url)
-      } catch {
-        // If parsing fails, it's a relative URL - keep as string
-      }
+    // Parse and validate URL at configuration time
+    // This ensures invalid URLs fail early, not at runtime
+    let url = current.url
+    if (input.url !== undefined) {
+      // Validate the URL by parsing it
+      // parseURLInput will throw if the URL is invalid
+      const parsed = parseURLInput(input.url)
+      // Store back as the original type (string or URL)
+      url = input.url
     }
 
     return {
@@ -164,18 +161,22 @@ export const TransportHttp = Extension.create(`TransportHttp`)
               headers: input.transport.headers,
             },
           )
+          // Parse the URL at runtime to determine if it's a path or absolute URL
+          const parsedUrl = parseURLInput(input.transport.url)
+          const urlValue = parsedUrl.value
+
           const request: ExchangeRequest = requestMethod === `get`
             ? {
               methodMode: methodMode as MethodModeGetReads,
               ...baseRequestInit,
               method: `get`,
-              url: searchParamsAppendAll(input.transport.url, slots.searchParams(graphqlRequest)),
+              url: searchParamsAppendAll(urlValue, slots.searchParams(graphqlRequest)),
             }
             : {
               methodMode: methodMode,
               ...baseRequestInit,
               method: `post`,
-              url: input.transport.url,
+              url: urlValue,
               body: slots.body(graphqlRequest),
             }
           return {
@@ -189,34 +190,17 @@ export const TransportHttp = Extension.create(`TransportHttp`)
           fetch: (url: string | URL | Request, init?: RequestInit): MaybePromise<Response> => fetch(url, init),
         },
         async run(input, slots) {
-          // For relative URLs (kept as strings), we need to be careful with the Request constructor
-          // which doesn't support them in Node.js environments. Instead, we'll
-          // pass the URL and init options directly to fetch when dealing with relative URL strings.
           const url = input.request.url
 
+          // At this point, validation has already happened.
+          // We know that strings are paths (relative URLs)
           if (typeof url === 'string') {
-            // Check if this looks like a relative URL (starts with / or ./ or ../)
-            // If it's not a valid relative URL pattern, use Request constructor
-            // to maintain consistent error handling for invalid URLs like "bad"
-            const isRelativeUrl = url.startsWith('/') || url.startsWith('./') || url.startsWith('../')
-
-            if (isRelativeUrl) {
-              // This is a relative URL - pass directly to fetch with options
-              // This allows frameworks like SvelteKit to handle relative URLs properly
-              const response = await slots.fetch(url, input.request)
-              return {
-                ...input,
-                response,
-              }
-            } else {
-              // Not a relative URL pattern - use Request constructor
-              // This maintains backward compatibility for error handling
-              const request = new Request(url, input.request)
-              const response = await slots.fetch(request)
-              return {
-                ...input,
-                response,
-              }
+            // This is a path - pass directly to fetch
+            // This allows frameworks like SvelteKit to handle relative URLs properly
+            const response = await slots.fetch(url, input.request)
+            return {
+              ...input,
+              response,
             }
           } else {
             // URL object - use Request constructor as before

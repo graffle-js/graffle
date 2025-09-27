@@ -1,8 +1,54 @@
-ERROR TYPE: ContextualError
-ERROR MESSAGE: There was an error in the core implementation of hook "exchange".
-ERROR CONTEXT: {"hookName":"exchange","source":"implementation"}
-CAUSED BY:
-  - TypeError: fetch failed
-  - AggregateError [ECONNREFUSED]:
-  - Error: connect ECONNREFUSED ::1:3000
-  - Error: connect ECONNREFUSED 127.0.0.1:3000
+---------------------------------------- SHOW ----------------------------------------
+ContextualAggregateError: One or more errors in the execution result.
+    at handleOutput (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/client/handle.ts:70:19)
+    at sendRequest (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/client/send.ts:36:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async executeRootField (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/extensions/DocumentBuilder/requestMethods/requestMethods.ts:42:18)
+    at async <anonymous> (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/20_output/output_return-error_return-error-execution__return-error-execution.ts:22:16) {
+  context: {},
+  cause: undefined,
+  errors: [
+    ContextualError: [
+      {
+        "code": "too_small",
+        "minimum": 1,
+        "type": "string",
+        "inclusive": true,
+        "exact": false,
+        "message": "Pokemon name cannot be empty.",
+        "path": [
+          "name"
+        ]
+      }
+    ]
+        at <anonymous> (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/client/handle.ts:76:16)
+        at Array.map (<anonymous>)
+        at handleOutput (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/client/handle.ts:73:27)
+        at sendRequest (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/client/send.ts:36:10)
+        at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+        at async executeRootField (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/extensions/DocumentBuilder/requestMethods/requestMethods.ts:42:18)
+        at async <anonymous> (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/20_output/output_return-error_return-error-execution__return-error-execution.ts:22:16) {
+      context: { locations: [ { line: 2, column: 3 } ], path: [ 'addPokemon' ] },
+      cause: undefined
+    }
+  ]
+}
+---------------------------------------- SHOW ----------------------------------------
+ContextualError: There was an error in the interceptor "anonymous" (use named functions to improve this error message) while running hook "encode".
+    at runPipeline (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/lib/anyware/run/runPipeline.ts:109:18)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async <anonymous> (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/lib/anyware/run/runner.ts:38:20)
+    at async Module.run (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/lib/anyware/run/run.ts:18:10)
+    at async sendRequest (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/client/send.ts:30:18)
+    at async executeRootField (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/extensions/DocumentBuilder/requestMethods/requestMethods.ts:42:18)
+    at async <anonymous> (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/20_output/output_return-error_return-error-execution__return-error-execution.ts:32:3) {
+  context: {
+    hookName: 'encode',
+    source: 'extension',
+    interceptorName: 'anonymous'
+  },
+  cause: Error: Something went wrong.
+      at <anonymous> (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/20_output/output_return-error_return-error-execution__return-error-execution.ts:34:13)
+      at applyBody (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/lib/anyware/run/runner.ts:59:28)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+}

@@ -4,6 +4,35 @@ export const CONTENT_TYPE_JSON = `application/json`
 export const CONTENT_TYPE_GQL = `application/graphql-response+json`
 export const CONTENT_TYPE_MULTIPART_FORM_DATA = `multipart/form-data`
 
+/**
+ * Discriminated union for URL input that clearly distinguishes between
+ * relative paths and absolute URLs
+ */
+export type URLInput =
+  | { _tag: 'path'; value: string }  // Relative paths: /api, ./api, ../api
+  | { _tag: 'url'; value: URL }       // Absolute URLs
+
+/**
+ * Parse a string into a URLInput discriminated union.
+ * If the string starts with '/', './', or '../', it's treated as a path.
+ * Otherwise, it must be a valid absolute URL.
+ */
+export const parseURLInput = (input: string | URL): URLInput => {
+  // If already a URL object, return as URL type
+  if (input instanceof URL) {
+    return { _tag: 'url', value: input }
+  }
+
+  // Check if it's a relative path
+  if (input.startsWith('/') || input.startsWith('./') || input.startsWith('../')) {
+    return { _tag: 'path', value: input }
+  }
+
+  // Otherwise, it must be a valid absolute URL
+  // Let this throw if the URL is invalid - no try/catch
+  return { _tag: 'url', value: new URL(input) }
+}
+
 export const statusCodes = {
   success: 200,
 }
