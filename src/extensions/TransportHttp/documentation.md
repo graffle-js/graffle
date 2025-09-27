@@ -17,6 +17,51 @@ GraffleBare.create().use(TransportHttp).transport({
 })
 ```
 
+## Relative URLs
+
+The transport supports relative URLs, which is particularly useful for framework integrations like SvelteKit where the framework provides a custom fetch implementation that handles relative paths:
+
+```ts
+import { TransportHttp } from 'graffle/extensions/transport-http'
+import { GraffleBare } from 'graffle/presets/bare'
+
+// Relative paths are supported
+GraffleBare.create().use(TransportHttp).transport({
+  url: '/api/graphql',  // Relative to current origin
+})
+
+// Also supports parent directory traversal
+GraffleBare.create().use(TransportHttp).transport({
+  url: '../graphql',  // Relative to parent directory
+})
+
+// And current directory paths
+GraffleBare.create().use(TransportHttp).transport({
+  url: './graphql',  // Relative to current directory
+})
+```
+
+This is especially useful in frameworks like SvelteKit where you can use the framework's enhanced fetch that handles SSR correctly:
+
+```ts
+// In a SvelteKit load function
+export async function load({ fetch }) {
+  const client = GraffleBare
+    .create()
+    .use(TransportHttp)
+    .transport({ url: '/api/graphql' })
+    .anyware(({ exchange }) => {
+      // Use SvelteKit's enhanced fetch
+      exchange.fetch = fetch
+      return exchange()
+    })
+
+  // Client will now use relative URLs with SvelteKit's fetch
+  const data = await client.gql`{ posts { title } }`.send()
+  return { posts: data.posts }
+}
+```
+
 ## Configuration
 
 You can generally configure aspects of the transport in three ways:

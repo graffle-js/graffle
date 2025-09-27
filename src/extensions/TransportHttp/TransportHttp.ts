@@ -21,6 +21,17 @@ import { _, isString, type MaybePromise } from '../../lib/prelude.js'
 // ----------------------------
 
 export type ConfigurationInput = {
+  /**
+   * The GraphQL endpoint URL.
+   *
+   * Can be:
+   * - An absolute URL string (e.g., `https://api.example.com/graphql`)
+   * - A relative path string (e.g., `/api/graphql`, `./graphql`, `../graphql`)
+   * - A URL object
+   *
+   * Relative paths are particularly useful for framework integrations like SvelteKit
+   * where the framework's custom fetch implementation handles relative URLs.
+   */
   url?: URL | string
   /**
    * The HTTP method to use to make the request.
