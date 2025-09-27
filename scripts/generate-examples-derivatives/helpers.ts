@@ -1,6 +1,7 @@
 import { capitalize, kebabCase } from 'es-toolkit'
 import { execa, ExecaError } from 'execa'
 import { globby } from 'globby'
+import * as FS from 'node:fs/promises'
 import * as Path from 'node:path'
 import stripAnsi from 'strip-ansi'
 import { showPartition } from '../../examples/$/helpers.js'
@@ -183,6 +184,16 @@ export const computeCombinations = (arr: string[]): string[][] => {
 }
 
 export const runExample = async (filePath: string) => {
+  // Detect if we're in the examples directory by checking if ../package.json exists
+  const isInExamplesDir = await FS.access('../package.json').then(() => true).catch(() => false)
+
+  // Resolve the path based on current working directory
+  const resolvedPath = isInExamplesDir
+    ? filePath // Already in examples directory, use path as-is
+    : filePath.startsWith('./examples/')
+    ? filePath // Path already includes examples/
+    : `./examples/${filePath.replace(/^\.\//, '')}` // Add examples/ prefix
+
   // Pass environment variables including any POKEMON_SCHEMA_URL from vitest
   const result = await execa({
     reject: false,
@@ -191,7 +202,7 @@ export const runExample = async (filePath: string) => {
       // Ensure the subprocess gets the server URL if set by vitest
       POKEMON_SCHEMA_URL: process.env['POKEMON_SCHEMA_URL'],
     },
-  })`pnpm tsx ${filePath}`
+  })`pnpm tsx ${resolvedPath}`
 
   let exampleOutput = ``
 

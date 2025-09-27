@@ -32,7 +32,7 @@ import { expect, test } from 'vitest'${
     }
 
 test(\`${example.file.name}\`, async () => {
-  const exampleResult = await runExampleForTest(\`${example.file.path.full}\`)
+  const exampleResult = await runExampleForTest(\`${example.file.path.full.replace('./examples/', './')}\`)
   // Examples should output their data results.
   const exampleResultMaybeEncoded = ${example.output.encoder ? `encode(exampleResult)` : `exampleResult`}
   // If ever outputs vary by Node version, you can use this to snapshot by Node version.

@@ -9,7 +9,7 @@ import { runExampleForTest } from '../../../scripts/generate-examples-derivative
 
 test(`gql_gql-document-node_gql-typed_gql-document-node-typed__gql-document-node-typed`, async () => {
   const exampleResult = await runExampleForTest(
-    `./examples/30_gql/gql_gql-document-node_gql-typed_gql-document-node-typed__gql-document-node-typed.ts`,
+    `./30_gql/gql_gql-document-node_gql-typed_gql-document-node-typed__gql-document-node-typed.ts`,
   )
   // Examples should output their data results.
   const exampleResultMaybeEncoded = exampleResult

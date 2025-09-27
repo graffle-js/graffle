@@ -8,7 +8,7 @@ import { expect, test } from 'vitest'
 import { runExampleForTest } from '../../../scripts/generate-examples-derivatives/helpers.js'
 
 test(`custom-scalar`, async () => {
-  const exampleResult = await runExampleForTest(`./examples/35_custom-scalar/custom-scalar.ts`)
+  const exampleResult = await runExampleForTest(`./35_custom-scalar/custom-scalar.ts`)
   // Examples should output their data results.
   const exampleResultMaybeEncoded = exampleResult
   // If ever outputs vary by Node version, you can use this to snapshot by Node version.

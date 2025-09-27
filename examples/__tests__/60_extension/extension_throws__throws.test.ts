@@ -8,7 +8,7 @@ import { expect, test } from 'vitest'
 import { runExampleForTest } from '../../../scripts/generate-examples-derivatives/helpers.js'
 
 test(`extension_throws__throws`, async () => {
-  const exampleResult = await runExampleForTest(`./examples/60_extension/extension_throws__throws.ts`)
+  const exampleResult = await runExampleForTest(`./60_extension/extension_throws__throws.ts`)
   // Examples should output their data results.
   const exampleResultMaybeEncoded = exampleResult
   // If ever outputs vary by Node version, you can use this to snapshot by Node version.

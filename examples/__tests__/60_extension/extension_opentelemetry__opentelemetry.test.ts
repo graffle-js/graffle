@@ -9,7 +9,7 @@ import { runExampleForTest } from '../../../scripts/generate-examples-derivative
 import { encode } from '../../__outputs__/60_extension/extension_opentelemetry__opentelemetry.output.encoder.js'
 
 test(`extension_opentelemetry__opentelemetry`, async () => {
-  const exampleResult = await runExampleForTest(`./examples/60_extension/extension_opentelemetry__opentelemetry.ts`)
+  const exampleResult = await runExampleForTest(`./60_extension/extension_opentelemetry__opentelemetry.ts`)
   // Examples should output their data results.
   const exampleResultMaybeEncoded = encode(exampleResult)
   // If ever outputs vary by Node version, you can use this to snapshot by Node version.

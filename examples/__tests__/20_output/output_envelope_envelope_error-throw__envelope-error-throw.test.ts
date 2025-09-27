@@ -9,7 +9,7 @@ import { runExampleForTest } from '../../../scripts/generate-examples-derivative
 
 test(`output_envelope_envelope_error-throw__envelope-error-throw`, async () => {
   const exampleResult = await runExampleForTest(
-    `./examples/20_output/output_envelope_envelope_error-throw__envelope-error-throw.ts`,
+    `./20_output/output_envelope_envelope_error-throw__envelope-error-throw.ts`,
   )
   // Examples should output their data results.
   const exampleResultMaybeEncoded = exampleResult

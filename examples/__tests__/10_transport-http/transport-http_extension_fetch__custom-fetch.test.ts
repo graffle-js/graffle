@@ -8,9 +8,7 @@ import { expect, test } from 'vitest'
 import { runExampleForTest } from '../../../scripts/generate-examples-derivatives/helpers.js'
 
 test(`transport-http_extension_fetch__custom-fetch`, async () => {
-  const exampleResult = await runExampleForTest(
-    `./examples/10_transport-http/transport-http_extension_fetch__custom-fetch.ts`,
-  )
+  const exampleResult = await runExampleForTest(`./10_transport-http/transport-http_extension_fetch__custom-fetch.ts`)
   // Examples should output their data results.
   const exampleResultMaybeEncoded = exampleResult
   // If ever outputs vary by Node version, you can use this to snapshot by Node version.
