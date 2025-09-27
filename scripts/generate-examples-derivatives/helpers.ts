@@ -203,7 +203,6 @@ export const runExample = async (filePath: string) => {
     resolvedPath = `./examples/${filePath}`
   }
 
-
   // Pass environment variables including any POKEMON_SCHEMA_URL from vitest
   const result = await execa({
     reject: false,
@@ -243,22 +242,22 @@ export const rewriteDynamicErrorForWebsite = (value: string) => {
     // Mask any absolute path that contains node_modules, examples, src, etc.
     // Match paths like /any/path/to/file.ts:109:18 (line:column)
     .replaceAll(
-      /\/[\w\-\/\.@\+]*\/([\w\-]+\.(?:ts|js|mjs|cjs)):\d+:\d+/g,
+      /\/[\w\-/.@+]*\/([\w-]+\.(?:ts|js|mjs|cjs)):\d+:\d+/g,
       `/some/path/to/$1:XX:XX`,
     )
     // Match paths in parentheses like (/any/path/to/file.ts:12:34)
     .replaceAll(
-      /\(\/[\w\-\/\.@\+]*\/([\w\-]+\.(?:ts|js|mjs|cjs)):\d+:\d+\)/g,
+      /\(\/[\w\-/.@+]*\/([\w-]+\.(?:ts|js|mjs|cjs)):\d+:\d+\)/g,
       `(/some/path/to/$1:XX:XX)`,
     )
     // Match paths like /any/path/to/file.ts:12 (with just line number)
     .replaceAll(
-      /\/[\w\-\/\.@\+]*\/([\w\-]+\.(?:ts|js|mjs|cjs)):\d+(?!\d)/g,
+      /\/[\w\-/.@+]*\/([\w-]+\.(?:ts|js|mjs|cjs)):\d+(?!\d)/g,
       `/some/path/to/$1:XX`,
     )
     // Match paths without line numbers
     .replaceAll(
-      /\/[\w\-\/\.@\+]*\/([\w\-]+\.(?:ts|js|mjs|cjs))(?=\s|$)/g,
+      /\/[\w\-/.@+]*\/([\w-]+\.(?:ts|js|mjs|cjs))(?=\s|$)/g,
       `/some/path/to/$1`,
     )
     // When Node.js process exits via an uncaught thrown error, version is printed at bottom.
@@ -273,28 +272,28 @@ export const rewriteDynamicError = (value: string) => {
     // Mask Node.js internal module line numbers that vary between versions
     // Match patterns like node:internal/deps/undici/undici:13510:13 or node:internal/url:825:25
     .replaceAll(
-      /\b(node:[\w\/\-]+):\d+:\d+/g,
+      /\b(node:[\w/-]+):\d+:\d+/g,
       `$1:XX:XX`,
     )
     // Mask any absolute path that contains node_modules, examples, src, etc.
     // Match paths like /any/path/to/file.ts:12:34 (with line and column)
     .replaceAll(
-      /\/[\w\-\/\.@\+]*\/([\w\-]+\.(?:ts|js|mjs|cjs)):\d+:\d+/g,
+      /\/[\w\-/.@+]*\/([\w-]+\.(?:ts|js|mjs|cjs)):\d+:\d+/g,
       `/some/path/to/$1:XX:XX`,
     )
     // Match paths like /any/path/to/file.ts:12 (with just line number)
     .replaceAll(
-      /\/[\w\-\/\.@\+]*\/([\w\-]+\.(?:ts|js|mjs|cjs)):\d+(?!\d)/g,
+      /\/[\w\-/.@+]*\/([\w-]+\.(?:ts|js|mjs|cjs)):\d+(?!\d)/g,
       `/some/path/to/$1:XX`,
     )
     // Match paths in parentheses like (/any/path/to/file.ts:12:34)
     .replaceAll(
-      /\(\/[\w\-\/\.@\+]*\/([\w\-]+\.(?:ts|js|mjs|cjs)):\d+:\d+\)/g,
+      /\(\/[\w\-/.@+]*\/([\w-]+\.(?:ts|js|mjs|cjs)):\d+:\d+\)/g,
       `(/some/path/to/$1:XX:XX)`,
     )
     // Match paths without line numbers
     .replaceAll(
-      /\/[\w\-\/\.@\+]*\/([\w\-]+\.(?:ts|js|mjs|cjs))(?=\s|$)/g,
+      /\/[\w\-/.@+]*\/([\w-]+\.(?:ts|js|mjs|cjs))(?=\s|$)/g,
       `/some/path/to/$1`,
     )
     // When Node.js process exits via an uncaught thrown error, version is printed at bottom.
