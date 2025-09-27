@@ -218,10 +218,41 @@ export const runExample = async (filePath: string) => {
   }
 
   exampleOutput = stripAnsi(exampleOutput)
-  // Don't mask paths for website outputs - keep them real
-  // exampleOutput = rewriteDynamicError(exampleOutput)
+  // Apply masking to website outputs for cleaner documentation
+  exampleOutput = rewriteDynamicErrorForWebsite(exampleOutput)
 
   return exampleOutput
+}
+
+/**
+ * Rewrite error output for website documentation.
+ * Masks paths with XX:XX format for line numbers to keep documentation clean.
+ */
+export const rewriteDynamicErrorForWebsite = (value: string) => {
+  return value
+    // Mask any absolute path that contains node_modules, examples, src, etc.
+    // Match paths like /any/path/to/file.ts:109:18 (line:column)
+    .replaceAll(
+      /\/[\w\-\/\.@\+]*\/([\w\-]+\.(?:ts|js|mjs|cjs)):\d+:\d+/g,
+      `/some/path/to/$1:XX:XX`,
+    )
+    // Match paths in parentheses like (/any/path/to/file.ts:12:34)
+    .replaceAll(
+      /\(\/[\w\-\/\.@\+]*\/([\w\-]+\.(?:ts|js|mjs|cjs)):\d+:\d+\)/g,
+      `(/some/path/to/$1:XX:XX)`,
+    )
+    // Match paths like /any/path/to/file.ts:12 (with just line number)
+    .replaceAll(
+      /\/[\w\-\/\.@\+]*\/([\w\-]+\.(?:ts|js|mjs|cjs)):\d+(?!\d)/g,
+      `/some/path/to/$1:XX`,
+    )
+    // Match paths without line numbers
+    .replaceAll(
+      /\/[\w\-\/\.@\+]*\/([\w\-]+\.(?:ts|js|mjs|cjs))(?=\s|$)/g,
+      `/some/path/to/$1`,
+    )
+    // When Node.js process exits via an uncaught thrown error, version is printed at bottom.
+    .replaceAll(/Node\.js v.+/g, `Node.js vXX.XX.XX`)
 }
 
 export const rewriteDynamicError = (value: string) => {
