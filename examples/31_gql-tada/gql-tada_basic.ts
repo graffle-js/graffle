@@ -1,25 +1,31 @@
 /**
- * Basic gql-tada Integration
+ * Basic gql-tada Integration (Idiomatic)
  *
- * This example shows how to use gql-tada with a generated Graffle client
- * for compile-time type-safe GraphQL queries.
+ * This example shows the idiomatic usage where gql-tada is an implementation detail.
+ * Users simply use the generated Graffle client with template literals and get
+ * type safety automatically.
+ *
+ * Note: For this to work with full type checking, you need:
+ * 1. A generated Graffle client (which includes tada.ts)
+ * 2. TypeScript configured with the gql-tada plugin
+ * 3. The plugin configured to recognize .gql template literals
  */
 
-import { Graffle } from '../$/graffle/_exports.js'
-import { initGraphQLTada } from 'gql.tada'
-import type { introspection } from '../$/graffle/modules/tada.js'
+import { Graffle } from '../$/graffle/_namespace.js'
 import { show } from '../$/helpers.js'
 
-// Initialize gql-tada with Graffle's generated introspection types
-const graphql = initGraphQLTada<{
-  introspection: introspection
-}>()
-
-// Create the Graffle client
+// Create the Graffle client - gql-tada is handled internally
 const graffle = Graffle.create()
+const gql = graffle.gql
+/*
+const graphql: initGraphQLTada<{
+    introspection: introspection;
+}>
+*/
 
-// Define a type-safe query using gql-tada
-const pokemonsQuery = graphql(`
+// Use template literals directly with the .gql method
+// The type safety comes from gql-tada working behind the scenes
+const result = await gql`
   query GetPokemons {
     pokemons {
       id
@@ -29,16 +35,29 @@ const pokemonsQuery = graphql(`
       defense
     }
   }
-`)
+`.send()
 
-// Execute the query with Graffle
-const result = await graffle.gql(pokemonsQuery).send()
-
-// The result is fully typed!
-// TypeScript knows exactly what fields are available
+// The result would be typed if the TypeScript plugin is configured
 show(result)
 
-// Type-safe access to the data
+// With proper setup, TypeScript would know the shape of the data
 result?.pokemons?.forEach(pokemon => {
   console.log(`${pokemon.name}: HP=${pokemon.hp}, Attack=${pokemon.attack}`)
 })
+
+/**
+ * To enable full type checking for this idiomatic usage, add to tsconfig.json:
+ *
+ * {
+ *   "compilerOptions": {
+ *     "plugins": [
+ *       {
+ *         "name": "@0no-co/graphqlsp",
+ *         "schema": "../$/graffle/schema.graphql",
+ *         "template": "gql",
+ *         "templateIsCallExpression": true
+ *       }
+ *     ]
+ *   }
+ * }
+ */
