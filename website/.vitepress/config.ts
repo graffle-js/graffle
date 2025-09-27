@@ -97,6 +97,16 @@ export default defineConfig({
     config(md) {
       md.use(tabsMarkdownPlugin)
     },
+    // Optimize Shiki for performance - only load required languages and themes
+    shiki: {
+      // Only load the languages we actually use
+      langs: ['typescript', 'javascript', 'json', 'shell', 'text', 'sh'],
+      // Only load the themes we need (VitePress uses these by default)
+      themes: {
+        light: 'github-light',
+        dark: 'github-dark',
+      },
+    },
     codeTransformers: (process.env.disable_twoslash ? [] : [
       transformerTwoslash({
         typesCache: createFileSystemTypesCache({
