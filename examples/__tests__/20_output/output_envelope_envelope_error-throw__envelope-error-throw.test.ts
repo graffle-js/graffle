@@ -9,13 +9,13 @@ import { runExampleForTest } from '../../../scripts/generate-examples-derivative
 
 test(`output_envelope_envelope_error-throw__envelope-error-throw`, async () => {
   const exampleResult = await runExampleForTest(
-    `./20_output/output_envelope_envelope_error-throw__envelope-error-throw.ts`,
+    `./examples/20_output/output_envelope_envelope_error-throw__envelope-error-throw.ts`,
   )
   // Examples should output their data results.
   const exampleResultMaybeEncoded = exampleResult
   // If ever outputs vary by Node version, you can use this to snapshot by Node version.
   // const nodeMajor = process.version.match(/v(\d+)/)?.[1] ?? `unknown`
   await expect(exampleResultMaybeEncoded).toMatchFileSnapshot(
-    `../../__outputs__/20_output/output_envelope_envelope_error-throw__envelope-error-throw.output.txt`,
+    `../../__outputs__/20_output/output_envelope_envelope_error-throw__envelope-error-throw.output.test.txt`,
   )
 })

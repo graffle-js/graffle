@@ -5,13 +5,9 @@ aside: false
 # Transport Memory
 
 This example shows how you can send requests against an in-memory GraphQL schema instead of one hosted over HTTP.
-
--
-
+*
 Imagine this example as server code that receives HTTP requests and internally fulfills them with requests to a GraphQL schema.
-
--
-
+*
 Included here is how to work with Graffle's lightweight client-forking model to create a request-scoped Graffle client.
 By having a Graffle instance per request, the context value that the GraphQL resolvers get during execution can reflect
 the user making the request.

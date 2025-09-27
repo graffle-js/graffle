@@ -8,10 +8,10 @@ import { expect, test } from 'vitest'
 import { runExampleForTest } from '../../../scripts/generate-examples-derivatives/helpers.js'
 
 test(`preset_bare`, async () => {
-  const exampleResult = await runExampleForTest(`./65_preset/preset_bare.ts`)
+  const exampleResult = await runExampleForTest(`./examples/65_preset/preset_bare.ts`)
   // Examples should output their data results.
   const exampleResultMaybeEncoded = exampleResult
   // If ever outputs vary by Node version, you can use this to snapshot by Node version.
   // const nodeMajor = process.version.match(/v(\d+)/)?.[1] ?? `unknown`
-  await expect(exampleResultMaybeEncoded).toMatchFileSnapshot(`../../__outputs__/65_preset/preset_bare.output.txt`)
+  await expect(exampleResultMaybeEncoded).toMatchFileSnapshot(`../../__outputs__/65_preset/preset_bare.output.test.txt`)
 })

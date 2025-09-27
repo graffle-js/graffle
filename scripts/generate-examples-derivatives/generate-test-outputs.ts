@@ -1,0 +1,85 @@
+import * as FS from 'node:fs/promises'
+import * as Path from 'node:path'
+import { schema } from '../../tests/_/fixtures/schemas/pokemon/schema.js'
+import { serveSchema } from '../../tests/_/lib/serveSchema.js'
+import { deleteFiles } from '../lib/deleteFiles.js'
+import { directories, readExampleFiles, runExampleForTest } from './helpers.js'
+
+export const testOutputExtension = `.output.test.txt`
+
+export const getTestOutputFilePathFromExampleFilePath = (filePath: string) => {
+  const dirPathWithinExamples = Path.dirname(filePath.replace(directories.examples, ``))
+  const outputFileName = Path.basename(filePath, Path.extname(filePath)) + testOutputExtension
+  const dir = Path.join(directories.outputs, dirPathWithinExamples)
+  const outputFilePath = Path.join(dir, outputFileName)
+  return outputFilePath
+}
+
+export const readFileOrNull = async (filePath: string) => {
+  try {
+    return await FS.readFile(filePath, `utf-8`)
+  } catch {
+    return null
+  }
+}
+
+export const generateTestOutputs = async (name?: string) => {
+  if (name) {
+    console.log(`Generating test outputs for example file paths matching "${name}"`)
+  }
+
+  const service = await serveSchema({ schema: schema, log: true })
+  const exampleFiles = await readExampleFiles(name)
+
+  if (name && exampleFiles.filtered.length === 0) {
+    const message = `WARNING: No example files found matching "${name}". The files found were: ${
+      exampleFiles.all.map(file => file.path.full).join(`\n`)
+    }`
+    console.log(message)
+    await service.stop()
+    return
+  }
+
+  const isGeneratingAll = !name
+
+  // Handle case of renaming or deleting examples.
+  if (isGeneratingAll) {
+    await deleteFiles({ pattern: `${directories.outputs}/**/*${testOutputExtension}` })
+  }
+
+  const diff: { path: string; type: `created` | `updated` | `same` }[] = []
+
+  await Promise.all(
+    exampleFiles.filtered.map(async (file) => {
+      // Use runExampleForTest to get masked output
+      const content = await runExampleForTest(file.path.full)
+
+      const dirPathWithinExamples = Path.dirname(file.path.full.replace(directories.examples, ``))
+      const dir = Path.join(directories.outputs, dirPathWithinExamples)
+      await FS.mkdir(dir, { recursive: true })
+
+      const filePath = getTestOutputFilePathFromExampleFilePath(file.path.full)
+      const previousContent = await readFileOrNull(filePath)
+
+      const diffType = previousContent && previousContent === content ? `same` : previousContent ? `updated` : `created`
+      console.log(`${diffType} ${file.path.full}`)
+      diff.push({ path: file.path.full, type: diffType })
+
+      if (diffType !== `same`) {
+        await FS.writeFile(filePath, content)
+      }
+    }),
+  )
+
+  await service.stop()
+
+  console.log(
+    `Generated test outputs for examples:\n${
+      exampleFiles.filtered.map(file =>
+        `    ${diff.find(d => d.path === file.path.full)!.type} ${file.path.full} -> ${
+          getTestOutputFilePathFromExampleFilePath(file.path.full)
+        }`
+      ).join(`\n`)
+    }`,
+  )
+}

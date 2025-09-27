@@ -28,41 +28,42 @@ console.log(result)
 
 <!-- dprint-ignore-start -->
 ```txt
-/some/path/to/runPipeline.ts:XX:XX
+/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/lib/anyware/run/runPipeline.ts:117
           return new ContextualError(message, { hookName: signal.hookName, source: signal.source }, signal.error)
                  ^
 
 
 ContextualError: There was an error in the core implementation of hook "exchange".
-    at runPipeline (/some/path/to/runPipeline.ts:XX:XX:18)
-    at async runPipeline (/some/path/to/runPipeline.ts:XX:XX:14)
-    at async runPipeline (/some/path/to/runPipeline.ts:XX:XX:14)
-    at async <anonymous> (/some/path/to/runner.ts:XX:XX:20)
-    at async Module.run (/some/path/to/run.ts:XX:XX:10)
-    at async sendRequest (/some/path/to/send.ts:XX:XX:18)
-    at async <anonymous> (/some/path/to/output_preset__standard-graphql.ts:XX:XX:16) {
-  cause: TypeError: Failed to parse URL from bad
-      at new Request (node:internal/deps/undici/undici:XX:XX)
-      at Object.run (/some/path/to/TransportHttp.ts:XX:XX:27)
-      ... 4 lines matching cause stack trace ...
-      at applyBody (/some/path/to/runner.ts:XX:XX:28) {
+    at runPipeline (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/lib/anyware/run/runPipeline.ts:117:18)
+    at async runPipeline (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/lib/anyware/run/runPipeline.ts:71:14)
+    at async runPipeline (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/lib/anyware/run/runPipeline.ts:71:14)
+    at async <anonymous> (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/lib/anyware/run/runner.ts:38:20)
+    at async Module.run (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/lib/anyware/run/run.ts:18:10)
+    at async sendRequest (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/client/send.ts:30:18)
+    at async <anonymous> (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/20_output/output_preset__standard-graphql.ts:15:16) {
+  cause: TypeError: Failed to parse URL from undefined
+      at node:internal/deps/undici/undici:13510:13
+      at async Object.run (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/extensions/TransportHttp/TransportHttp.ts:221:28)
+      at async runStep (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/lib/anyware/run/runStep.ts:263:16) {
     [cause]: TypeError: Invalid URL
-        at new URL (node:internal/url:XX:XX)
-        at new Request (node:internal/deps/undici/undici:XX:XX)
-        at Object.run (/some/path/to/TransportHttp.ts:XX:XX:27)
-        at Object.run (/some/path/to/Pipeline.ts:XX:XX:51)
-        at runStep (/some/path/to/runStep.ts:XX:XX:37)
-        at <anonymous> (/some/path/to/runStep.ts:XX:XX:14)
-        at <anonymous> (/some/path/to/output_preset__standard-graphql.ts:XX:XX:12)
-        at applyBody (/some/path/to/runner.ts:XX:XX:28) {
+        at new URL (node:internal/url:825:25)
+        at new Request (node:internal/deps/undici/undici:9586:25)
+        at fetch (node:internal/deps/undici/undici:10315:25)
+        at fetch (node:internal/deps/undici/undici:13508:10)
+        at fetch (node:internal/bootstrap/web/exposed-window-or-worker:75:12)
+        at Object.fetch (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/extensions/TransportHttp/TransportHttp.ts:218:85)
+        at Object.run (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/extensions/TransportHttp/TransportHttp.ts:221:40)
+        at Object.run (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/lib/anyware/Pipeline/Pipeline.ts:57:51)
+        at runStep (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/lib/anyware/run/runStep.ts:263:37)
+        at <anonymous> (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/lib/anyware/run/runStep.ts:155:14) {
       code: 'ERR_INVALID_URL',
-      input: 'bad'
+      input: 'undefined'
     }
   },
   context: { hookName: 'exchange', source: 'implementation' }
 }
 
-Node.js vXX.XX.XX
+Node.js v22.20.0
 ```
 <!-- dprint-ignore-end -->
 

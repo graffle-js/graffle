@@ -12,9 +12,10 @@ export const generateTests = async (examples: Example[]) => {
 
   await Promise.all(examples.map(async (example) => {
     const dir = Path.join(directories.tests, example.group.dirName)
+    // Use a .test.txt file for test snapshots with masked paths
     const outputFilePath = getOutputFilePathFromExampleFilePath(example.file.path.full).replace(
-      `.txt`,
-      example.output.encoder ? `.test.txt` : `.txt`,
+      `.output.txt`,
+      `.output.test.txt`,
     )
     const relativePathToSnapshot = Path.relative(dir, outputFilePath)
     const code = `// @vitest-environment node
@@ -31,7 +32,7 @@ import { expect, test } from 'vitest'${
     }
 
 test(\`${example.file.name}\`, async () => {
-  const exampleResult = await runExampleForTest(\`${example.file.path.full.replace(`./examples/`, `./`)}\`)
+  const exampleResult = await runExampleForTest(\`${example.file.path.full}\`)
   // Examples should output their data results.
   const exampleResultMaybeEncoded = ${example.output.encoder ? `encode(exampleResult)` : `exampleResult`}
   // If ever outputs vary by Node version, you can use this to snapshot by Node version.

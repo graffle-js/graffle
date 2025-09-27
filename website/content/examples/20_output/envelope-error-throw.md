@@ -40,28 +40,28 @@ await pokemon.query.pokemons({ name: true })
 
 <!-- dprint-ignore-start -->
 ```txt
-/some/path/to/runPipeline.ts:XX:XX
+/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/lib/anyware/run/runPipeline.ts:109
           return new ContextualError(message, {
                  ^
 
 
 ContextualError: There was an error in the interceptor "anonymous" (use named functions to improve this error message) while running hook "encode".
-    at runPipeline (/some/path/to/runPipeline.ts:XX:XX:18)
-    at async <anonymous> (/some/path/to/runner.ts:XX:XX:20)
-    at async Module.run (/some/path/to/run.ts:XX:XX:10)
-    at async sendRequest (/some/path/to/send.ts:XX:XX:18)
-    at async executeRootField (/some/path/to/requestMethods.ts:XX:XX:18)
-    at async <anonymous> (/some/path/to/output_envelope_envelope_error-throw__envelope-error-throw.ts:XX:XX:1) {
+    at runPipeline (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/lib/anyware/run/runPipeline.ts:109:18)
+    at async <anonymous> (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/lib/anyware/run/runner.ts:38:20)
+    at async Module.run (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/lib/anyware/run/run.ts:18:10)
+    at async sendRequest (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/client/send.ts:30:18)
+    at async executeRootField (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/extensions/DocumentBuilder/requestMethods/requestMethods.ts:42:18)
+    at async <anonymous> (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/20_output/output_envelope_envelope_error-throw__envelope-error-throw.ts:24:1) {
   context: {
     hookName: 'encode',
     source: 'extension',
     interceptorName: 'anonymous'
   },
   cause: Error: Something went wrong.
-      at <anonymous> (/some/path/to/output_envelope_envelope_error-throw__envelope-error-throw.ts:XX:XX:11)
-      at applyBody (/some/path/to/runner.ts:XX:XX:28)
+      at <anonymous> (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/20_output/output_envelope_envelope_error-throw__envelope-error-throw.ts:20:11)
+      at applyBody (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/lib/anyware/run/runner.ts:59:28)
 }
 
-Node.js vXX.XX.XX
+Node.js v22.20.0
 ```
 <!-- dprint-ignore-end -->

@@ -10,7 +10,7 @@ import { encode } from '../../__outputs__/10_transport-http/transport-http_exten
 
 test(`transport-http_extension_headers__dynamicHeaders`, async () => {
   const exampleResult = await runExampleForTest(
-    `./10_transport-http/transport-http_extension_headers__dynamicHeaders.ts`,
+    `./examples/10_transport-http/transport-http_extension_headers__dynamicHeaders.ts`,
   )
   // Examples should output their data results.
   const exampleResultMaybeEncoded = encode(exampleResult)

@@ -8,12 +8,12 @@ import { expect, test } from 'vitest'
 import { runExampleForTest } from '../../../scripts/generate-examples-derivatives/helpers.js'
 
 test(`document-builder_root-field`, async () => {
-  const exampleResult = await runExampleForTest(`./55_document-builder/document-builder_root-field.ts`)
+  const exampleResult = await runExampleForTest(`./examples/55_document-builder/document-builder_root-field.ts`)
   // Examples should output their data results.
   const exampleResultMaybeEncoded = exampleResult
   // If ever outputs vary by Node version, you can use this to snapshot by Node version.
   // const nodeMajor = process.version.match(/v(\d+)/)?.[1] ?? `unknown`
   await expect(exampleResultMaybeEncoded).toMatchFileSnapshot(
-    `../../__outputs__/55_document-builder/document-builder_root-field.output.txt`,
+    `../../__outputs__/55_document-builder/document-builder_root-field.output.test.txt`,
   )
 })

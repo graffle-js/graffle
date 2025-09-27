@@ -8,10 +8,10 @@ import { expect, test } from 'vitest'
 import { runExampleForTest } from '../../../scripts/generate-examples-derivatives/helpers.js'
 
 test(`gql_gql-string`, async () => {
-  const exampleResult = await runExampleForTest(`./30_gql/gql_gql-string.ts`)
+  const exampleResult = await runExampleForTest(`./examples/30_gql/gql_gql-string.ts`)
   // Examples should output their data results.
   const exampleResultMaybeEncoded = exampleResult
   // If ever outputs vary by Node version, you can use this to snapshot by Node version.
   // const nodeMajor = process.version.match(/v(\d+)/)?.[1] ?? `unknown`
-  await expect(exampleResultMaybeEncoded).toMatchFileSnapshot(`../../__outputs__/30_gql/gql_gql-string.output.txt`)
+  await expect(exampleResultMaybeEncoded).toMatchFileSnapshot(`../../__outputs__/30_gql/gql_gql-string.output.test.txt`)
 })

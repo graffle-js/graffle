@@ -215,20 +215,24 @@ export const runExample = async (filePath: string) => {
 
 export const rewriteDynamicError = (value: string) => {
   return value
-    // Mask absolute paths in stack traces - handle complex paths with dots, @, +, etc.
-    .replaceAll(/\/[\w\-\/\.@\+]+\/([\w\-]+\.(?:ts|js|mjs|cjs))(:\d+:\d+)?/g, `/some/path/to/$1:XX:XX`)
+    // Mask absolute paths in stack traces while preserving the filename
+    // Match paths like /Users/username/path/to/file.ts:12:34
+    .replaceAll(/\/[\w\-\/\.@\+]+\/([\w\-]+\.(?:ts|js|mjs|cjs)):\d+:\d+/g, `/some/path/to/$1:XX:XX`)
+    // Match paths in parentheses like (/Users/username/path/to/file.ts:12:34)
+    .replaceAll(/\(\/[\w\-\/\.@\+]+\/([\w\-]+\.(?:ts|js|mjs|cjs)):\d+:\d+\)/g, `(/some/path/to/$1:XX:XX)`)
+    // Match paths without line numbers
+    .replaceAll(/\/[\w\-\/\.@\+]+\/([\w\-]+\.(?:ts|js|mjs|cjs))(?=\s|$)/g, `/some/path/to/$1`)
     // When Node.js process exits via an uncaught thrown error, version is printed at bottom.
     .replaceAll(/Node\.js v.+/g, `Node.js vXX.XX.XX`)
-    // Mask line numbers in parentheses at end of lines
-    .replaceAll(/(\S+\.(?:ts|js|mjs|cjs)):\d+:\d+\)/g, `$1:XX:XX)`)
 }
 
 /**
  * Run an example for testing purposes.
- * Just runs the example directly - snapshot comparison will handle path differences.
+ * Masks paths to make tests deterministic across different environments.
  */
 export const runExampleForTest = async (filePath: string) => {
-  // Run the example directly - no masking, let snapshots match the actual output files
+  // Run the example directly
   const output = await runExample(filePath)
-  return output
+  // Apply path masking for CI/local compatibility
+  return rewriteDynamicError(output)
 }

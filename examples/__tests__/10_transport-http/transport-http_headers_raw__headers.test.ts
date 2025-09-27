@@ -8,12 +8,12 @@ import { expect, test } from 'vitest'
 import { runExampleForTest } from '../../../scripts/generate-examples-derivatives/helpers.js'
 
 test(`transport-http_headers_raw__headers`, async () => {
-  const exampleResult = await runExampleForTest(`./10_transport-http/transport-http_headers_raw__headers.ts`)
+  const exampleResult = await runExampleForTest(`./examples/10_transport-http/transport-http_headers_raw__headers.ts`)
   // Examples should output their data results.
   const exampleResultMaybeEncoded = exampleResult
   // If ever outputs vary by Node version, you can use this to snapshot by Node version.
   // const nodeMajor = process.version.match(/v(\d+)/)?.[1] ?? `unknown`
   await expect(exampleResultMaybeEncoded).toMatchFileSnapshot(
-    `../../__outputs__/10_transport-http/transport-http_headers_raw__headers.output.txt`,
+    `../../__outputs__/10_transport-http/transport-http_headers_raw__headers.output.test.txt`,
   )
 })
