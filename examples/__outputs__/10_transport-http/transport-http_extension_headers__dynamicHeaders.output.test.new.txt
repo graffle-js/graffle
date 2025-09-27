@@ -1,0 +1,40 @@
+---------------------------------------- SHOW ----------------------------------------
+{
+  methodMode: [32m'post'[39m,
+  headers: [
+    [
+      [32m'accept'[39m,
+      [32m'application/graphql-response+json; charset=utf-8, application/json; charset=utf-8'[39m
+    ],
+    [ [32m'content-type'[39m, [32m'application/json'[39m ],
+    [ [32m'X-Sent-At-Time'[39m, [32m'1758950631801'[39m ]
+  ],
+  method: [32m'post'[39m,
+  url: {
+    _tag: [32m'url'[39m,
+    value: URL {
+      href: [32m'http://localhost:3000/graphql'[39m,
+      origin: [32m'http://localhost:3000'[39m,
+      protocol: [32m'http:'[39m,
+      username: [32m''[39m,
+      password: [32m''[39m,
+      host: [32m'localhost:3000'[39m,
+      hostname: [32m'localhost'[39m,
+      port: [32m'3000'[39m,
+      pathname: [32m'/graphql'[39m,
+      search: [32m''[39m,
+      searchParams: URLSearchParams {},
+      hash: [32m''[39m
+    }
+  },
+  body: [32m'{"query":"{ pokemons { name } }"}'[39m
+}
+/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/lib/anyware/run/runPipeline.ts:117
+          return new ContextualError(message, { hookName: signal.hookName, source: signal.source }, signal.error)
+                 ^
+
+
+ContextualError: There was an error in the core implementation of hook "exchange".
+    at runPipeline (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/lib/anyware/run/runPipeline.ts:117:18)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async runPipeline (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/lib/anyware/run/runPipeline.ts:71:14)
