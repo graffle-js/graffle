@@ -84,3 +84,72 @@ test(`configured schema introspection options are passed to introspection`, asyn
   expect(c1.schema.sdl).toMatch(/A date-time string at UTC/)
   expect(c2.schema.sdl).not.toMatch(/A date-time string at UTC/)
 })
+
+describe(`defaultSchemaUrl`, () => {
+  test(`when false, should not set URL even for URL schema`, async ({ pokemonService }) => {
+    const config = await createConfig({
+      schema: {
+        type: `url`,
+        url: pokemonService.url,
+      },
+      defaultSchemaUrl: false,
+    })
+    expect(config.options.defaultSchemaUrl).toBeNull()
+  })
+
+  test(`when true, should set URL from URL schema`, async ({ pokemonService }) => {
+    const config = await createConfig({
+      schema: {
+        type: `url`,
+        url: pokemonService.url,
+      },
+      defaultSchemaUrl: true,
+    })
+    expect(config.options.defaultSchemaUrl).toEqual(pokemonService.url)
+  })
+
+  test(`when omitted, should default to true and set URL from URL schema`, async ({ pokemonService }) => {
+    const config = await createConfig({
+      schema: {
+        type: `url`,
+        url: pokemonService.url,
+      },
+    })
+    expect(config.options.defaultSchemaUrl).toEqual(pokemonService.url)
+  })
+
+  test(`when explicit URL provided, should use that URL`, async ({ pokemonService }) => {
+    const customUrl = new URL(`https://custom.example.com/graphql`)
+    const config = await createConfig({
+      schema: {
+        type: `url`,
+        url: pokemonService.url,
+      },
+      defaultSchemaUrl: customUrl,
+    })
+    expect(config.options.defaultSchemaUrl).toEqual(customUrl)
+  })
+
+  test(`when false with SDL schema, should be null`, async () => {
+    const config = await createConfig({
+      schema,
+      defaultSchemaUrl: false,
+    })
+    expect(config.options.defaultSchemaUrl).toBeNull()
+  })
+
+  test(`when true with SDL schema, should be null`, async () => {
+    const config = await createConfig({
+      schema,
+      defaultSchemaUrl: true,
+    })
+    expect(config.options.defaultSchemaUrl).toBeNull()
+  })
+
+  test(`when omitted with SDL schema, should be null`, async () => {
+    const config = await createConfig({
+      schema,
+    })
+    expect(config.options.defaultSchemaUrl).toBeNull()
+  })
+})

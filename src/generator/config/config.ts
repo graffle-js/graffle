@@ -139,13 +139,15 @@ export const createConfig = async (configInit: ConfigInit): Promise<Config> => {
 
   // dprint-ignore
   const defaultSchemaUrl =
-    typeof configInit.defaultSchemaUrl === `boolean`
-      ? configInit.schema instanceof Grafaid.Schema.Schema
-        ? null
-        : configInit.schema.type === `url`
-          ? configInit.schema.url
-          : null
-      : configInit.defaultSchemaUrl ?? null
+    configInit.defaultSchemaUrl === false
+      ? null
+      : typeof configInit.defaultSchemaUrl === `boolean` || configInit.defaultSchemaUrl === undefined
+        ? configInit.schema instanceof Grafaid.Schema.Schema
+          ? null
+          : configInit.schema.type === `url`
+            ? configInit.schema.url
+            : null
+        : configInit.defaultSchemaUrl
 
   // --- Formatting ---
 
