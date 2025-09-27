@@ -8,9 +8,9 @@ import * as $$SchemaDrivenDataMap from './schema-driven-data-map.js'
 import * as $$Tada from './tada.js'
 
 // Initialize gql-tada with the generated introspection types
-const graphql = initGraphQLTada<{
+type GqlTada = ReturnType<typeof initGraphQLTada<{
   introspection: $$Tada.introspection
-}>()
+}>>
 
 const context = $$Utilities.pipe(
   $$Utilities.contextEmpty,
@@ -26,31 +26,11 @@ const context = $$Utilities.pipe(
   ctx => $$Utilities.Scalars.set(ctx, { scalars: $$Scalar.$registry }),
 )
 
-const createWithGqlTada = (input) => {
-  const client = $$Utilities.createConstructorWithContext(context)(input)
+const _create = $$Utilities.createConstructorWithContext(context)
 
-  // Override the gql method to use gql-tada
-  const originalGql = client.gql.bind(client)
-  client.gql = (...args) => {
-    // If it's a template literal call, use gql-tada
-    if (args[0] && args[0].raw) {
-      // gql-tada expects the template literal to be joined into a string
-      const strings = args[0]
-      const values = args.slice(1)
-      let query = strings[0]
-      for (let i = 0; i < values.length; i++) {
-        query += String(values[i]) + strings[i + 1]
-      }
-      const document = graphql(query)
-      return {
-        send: (variables) => originalGql(document).send(variables)
-      }
-    }
-    // Otherwise use the original implementation (for TypedDocumentNode)
-    return originalGql(...args)
-  }
-
+export const create = (input?: any) => {
+  const client = _create(input)
+  // Cast the gql method to gql-tada for type inference
+  client.gql = client.gql as any as GqlTada
   return client
 }
-
-export const create = createWithGqlTada
