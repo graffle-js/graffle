@@ -229,6 +229,12 @@ export const rewriteDynamicError = (value: string) => {
     // Normalize blank lines after caret to always be single blank line for consistency
     // Node.js error output can vary between versions and environments
     .replaceAll(/\^\n\n+/g, '^\n\n')
+    // Mask Node.js internal module line numbers that vary between versions
+    // Match patterns like node:internal/deps/undici/undici:13510:13 or node:internal/url:825:25
+    .replaceAll(
+      /\b(node:[\w\/\-]+):\d+:\d+/g,
+      `$1:XX:XX`,
+    )
     // Mask any absolute path that contains node_modules, examples, src, etc.
     // Match paths like /any/path/to/file.ts:12:34 (with line and column)
     .replaceAll(
