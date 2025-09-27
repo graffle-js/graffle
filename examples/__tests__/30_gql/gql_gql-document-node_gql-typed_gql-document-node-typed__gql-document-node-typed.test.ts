@@ -5,10 +5,10 @@
 // Do not modify this file directly.
 
 import { expect, test } from 'vitest'
-import { runExample } from '../../../scripts/generate-examples-derivatives/helpers.js'
+import { runExampleForTest } from '../../../scripts/generate-examples-derivatives/helpers.js'
 
 test(`gql_gql-document-node_gql-typed_gql-document-node-typed__gql-document-node-typed`, async () => {
-  const exampleResult = await runExample(
+  const exampleResult = await runExampleForTest(
     `./30_gql/gql_gql-document-node_gql-typed_gql-document-node-typed__gql-document-node-typed.ts`,
   )
   // Examples should output their data results.

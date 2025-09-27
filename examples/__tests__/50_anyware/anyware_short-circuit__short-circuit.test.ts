@@ -5,10 +5,10 @@
 // Do not modify this file directly.
 
 import { expect, test } from 'vitest'
-import { runExample } from '../../../scripts/generate-examples-derivatives/helpers.js'
+import { runExampleForTest } from '../../../scripts/generate-examples-derivatives/helpers.js'
 
 test(`anyware_short-circuit__short-circuit`, async () => {
-  const exampleResult = await runExample(`./50_anyware/anyware_short-circuit__short-circuit.ts`)
+  const exampleResult = await runExampleForTest(`./50_anyware/anyware_short-circuit__short-circuit.ts`)
   // Examples should output their data results.
   const exampleResultMaybeEncoded = exampleResult
   // If ever outputs vary by Node version, you can use this to snapshot by Node version.

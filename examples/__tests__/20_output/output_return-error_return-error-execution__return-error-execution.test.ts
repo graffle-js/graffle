@@ -5,10 +5,10 @@
 // Do not modify this file directly.
 
 import { expect, test } from 'vitest'
-import { runExample } from '../../../scripts/generate-examples-derivatives/helpers.js'
+import { runExampleForTest } from '../../../scripts/generate-examples-derivatives/helpers.js'
 
 test(`output_return-error_return-error-execution__return-error-execution`, async () => {
-  const exampleResult = await runExample(
+  const exampleResult = await runExampleForTest(
     `./20_output/output_return-error_return-error-execution__return-error-execution.ts`,
   )
   // Examples should output their data results.

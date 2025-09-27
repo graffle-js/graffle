@@ -1,5 +1,5 @@
 import { capitalize, kebabCase } from 'es-toolkit'
-import { execa } from 'execa'
+import { execa, ExecaError } from 'execa'
 import { globby } from 'globby'
 import * as Path from 'node:path'
 import stripAnsi from 'strip-ansi'
@@ -183,6 +183,48 @@ export const computeCombinations = (arr: string[]): string[][] => {
 }
 
 export const runExample = async (filePath: string) => {
+  // Pass environment variables including any POKEMON_SCHEMA_URL from vitest
+  const result = await execa({
+    reject: false,
+    env: {
+      ...process.env,
+      // Ensure the subprocess gets the server URL if set by vitest
+      POKEMON_SCHEMA_URL: process.env['POKEMON_SCHEMA_URL'],
+    },
+  })`pnpm tsx ${filePath}`
+
+  let exampleOutput = ``
+
+  // todo: switch z
+  // todo: better understand the Execa API
+  if (filePath.includes(`_throws`)) {
+    if (result instanceof ExecaError) {
+      // @ts-expect-error fixme
+      exampleOutput = result.stdout
+    }
+  } else {
+    exampleOutput = result.failed ? result.stderr : result.stdout
+  }
+
+  exampleOutput = stripAnsi(exampleOutput)
+  exampleOutput = rewriteDynamicError(exampleOutput)
+
+  return exampleOutput
+}
+
+export const rewriteDynamicError = (value: string) => {
+  return value
+    .replaceAll(/\/.*\/(.+)\.ts(:?:\d+)?/g, `/some/path/to/$1.ts:XX:XX`)
+    // When Node.js process exits via an uncaught thrown error, version is printed at bottom.
+    .replaceAll(/Node\.js v.+/g, `Node.js vXX.XX.XX`)
+    .replaceAll(/(.+):\d+:\d+\)/g, `$1:XX:XX)`)
+}
+
+/**
+ * Run an example for testing purposes using the wrapper that provides
+ * deterministic error formatting for snapshot testing.
+ */
+export const runExampleForTest = async (filePath: string) => {
   // The filePath might be like "./examples/20_output/foo.ts" or "./20_output/foo.ts"
   // We need to run it from the examples directory with the path relative to that directory
 
@@ -228,6 +270,3 @@ export const runExample = async (filePath: string) => {
 
   return exampleOutput
 }
-
-// Removed: rewriteDynamicError function is no longer needed
-// Errors are now properly formatted in the example-runner.ts wrapper

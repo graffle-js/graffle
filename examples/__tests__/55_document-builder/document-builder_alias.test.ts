@@ -5,10 +5,10 @@
 // Do not modify this file directly.
 
 import { expect, test } from 'vitest'
-import { runExample } from '../../../scripts/generate-examples-derivatives/helpers.js'
+import { runExampleForTest } from '../../../scripts/generate-examples-derivatives/helpers.js'
 
 test(`document-builder_alias`, async () => {
-  const exampleResult = await runExample(`./55_document-builder/document-builder_alias.ts`)
+  const exampleResult = await runExampleForTest(`./55_document-builder/document-builder_alias.ts`)
   // Examples should output their data results.
   const exampleResultMaybeEncoded = exampleResult
   // If ever outputs vary by Node version, you can use this to snapshot by Node version.

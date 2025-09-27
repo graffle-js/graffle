@@ -5,11 +5,13 @@
 // Do not modify this file directly.
 
 import { expect, test } from 'vitest'
-import { runExample } from '../../../scripts/generate-examples-derivatives/helpers.js'
+import { runExampleForTest } from '../../../scripts/generate-examples-derivatives/helpers.js'
 import { encode } from '../../__outputs__/10_transport-http/transport-http_extension_headers__dynamicHeaders.output.encoder.js'
 
 test(`transport-http_extension_headers__dynamicHeaders`, async () => {
-  const exampleResult = await runExample(`./10_transport-http/transport-http_extension_headers__dynamicHeaders.ts`)
+  const exampleResult = await runExampleForTest(
+    `./10_transport-http/transport-http_extension_headers__dynamicHeaders.ts`,
+  )
   // Examples should output their data results.
   const exampleResultMaybeEncoded = encode(exampleResult)
   // If ever outputs vary by Node version, you can use this to snapshot by Node version.

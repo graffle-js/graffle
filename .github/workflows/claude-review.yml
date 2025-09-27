@@ -20,4 +20,6 @@ jobs:
     steps:
       - uses: anthropics/claude-code-action@v1
         with:
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          # For Max subscription, use OAuth token instead of API key
+          oauth_token: ${{ secrets.CLAUDE_OAUTH_TOKEN }}
+          # anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }} # Only for API users
