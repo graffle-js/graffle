@@ -19,7 +19,13 @@ GraffleBare.create().use(TransportHttp).transport({
 
 ## Relative URLs
 
-The transport supports relative URLs, which is particularly useful for framework integrations like SvelteKit where the framework provides a custom fetch implementation that handles relative paths:
+The transport supports relative URLs, which are useful in browser environments and framework integrations.
+
+> **Note**: Node.js's native fetch does not support relative URLs. They only work in:
+> - Browser environments (where they're [resolved against the page origin](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#url))
+> - Frameworks that provide enhanced fetch implementations (like [SvelteKit's load function](https://kit.svelte.dev/docs/load#making-fetch-requests))
+
+### Basic Usage
 
 ```ts
 import { TransportHttp } from 'graffle/extensions/transport-http'
@@ -41,7 +47,9 @@ GraffleBare.create().use(TransportHttp).transport({
 })
 ```
 
-This is especially useful in frameworks like SvelteKit where you can use the framework's enhanced fetch that handles SSR correctly:
+### Framework Integration Example (SvelteKit)
+
+In frameworks like [SvelteKit](https://kit.svelte.dev), you can leverage the framework's enhanced fetch that properly handles relative URLs during server-side rendering:
 
 ```ts
 // In a SvelteKit load function
@@ -61,6 +69,8 @@ export async function load({ fetch }) {
   return { posts: data.posts }
 }
 ```
+
+For more information about URL resolution in browsers, see [MDN's documentation on the Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#supplying_request_options).
 
 ## Configuration
 

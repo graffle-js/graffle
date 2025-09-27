@@ -29,8 +29,10 @@ export type ConfigurationInput = {
    * - A relative path string (e.g., `/api/graphql`, `./graphql`, `../graphql`)
    * - A URL object
    *
-   * Relative paths are particularly useful for framework integrations like SvelteKit
-   * where the framework's custom fetch implementation handles relative URLs.
+   * Note: Node.js's native fetch does not support relative URLs (they are only supported in browsers).
+   * Relative paths are particularly useful for:
+   * - Browser environments where {@link https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API relative URLs are resolved against the page origin}
+   * - Framework integrations like {@link https://kit.svelte.dev/docs/load#making-fetch-requests SvelteKit} where the framework provides an enhanced fetch
    */
   url?: URL | string
   /**
