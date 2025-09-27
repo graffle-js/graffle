@@ -207,66 +207,28 @@ export const runExample = async (filePath: string) => {
   }
 
   exampleOutput = stripAnsi(exampleOutput)
-  exampleOutput = rewriteDynamicError(exampleOutput)
+  // Don't mask paths for website outputs - keep them real
+  // exampleOutput = rewriteDynamicError(exampleOutput)
 
   return exampleOutput
 }
 
 export const rewriteDynamicError = (value: string) => {
   return value
-    .replaceAll(/\/.*\/(.+)\.ts(:?:\d+)?/g, `/some/path/to/$1.ts:XX:XX`)
+    // Mask absolute paths in stack traces - handle complex paths with dots, @, +, etc.
+    .replaceAll(/\/[\w\-\/\.@\+]+\/([\w\-]+\.(?:ts|js|mjs|cjs))(:\d+:\d+)?/g, `/some/path/to/$1:XX:XX`)
     // When Node.js process exits via an uncaught thrown error, version is printed at bottom.
     .replaceAll(/Node\.js v.+/g, `Node.js vXX.XX.XX`)
-    .replaceAll(/(.+):\d+:\d+\)/g, `$1:XX:XX)`)
+    // Mask line numbers in parentheses at end of lines
+    .replaceAll(/(\S+\.(?:ts|js|mjs|cjs)):\d+:\d+\)/g, `$1:XX:XX)`)
 }
 
 /**
- * Run an example for testing purposes using the wrapper that provides
- * deterministic error formatting for snapshot testing.
+ * Run an example for testing purposes.
+ * Just runs the example directly - snapshot comparison will handle path differences.
  */
 export const runExampleForTest = async (filePath: string) => {
-  // The filePath might be like "./examples/20_output/foo.ts" or "./20_output/foo.ts"
-  // We need to run it from the examples directory with the path relative to that directory
-
-  // Check if we're already in the examples directory
-  const currentDir = process.cwd()
-  const examplesDir = currentDir.endsWith('/examples')
-    ? currentDir
-    : Path.join(currentDir, 'examples')
-
-  // Get the absolute path to the example file
-  const absoluteExamplePath = Path.isAbsolute(filePath)
-    ? filePath
-    : Path.join(examplesDir, filePath.replace(/^\.\/examples\//, './').replace(/^examples\//, './'))
-
-  // Use the example runner wrapper that handles error formatting
-  const runnerPath = Path.join(
-    currentDir.endsWith('/examples') ? Path.dirname(currentDir) : currentDir,
-    'scripts/generate-examples-derivatives/example-runner.ts',
-  )
-
-  // Pass environment variables including any POKEMON_SCHEMA_URL from vitest
-  const result = await execa({
-    reject: false,
-    env: {
-      ...process.env,
-      // Ensure the subprocess gets the server URL if set by vitest
-      POKEMON_SCHEMA_URL: process.env['POKEMON_SCHEMA_URL'],
-    },
-  })`pnpm tsx ${runnerPath} ${absoluteExamplePath}`
-
-  let exampleOutput = ``
-
-  // Always capture stdout since that's where our formatted output goes
-  // The runner handles all error formatting, so we just capture the output
-  exampleOutput = result.stdout || ''
-
-  // If there's no stdout but there is stderr, something went wrong with the runner itself
-  if (!exampleOutput && result.stderr) {
-    exampleOutput = result.stderr
-  }
-
-  exampleOutput = stripAnsi(exampleOutput)
-
-  return exampleOutput
+  // Run the example directly - no masking, let snapshots match the actual output files
+  const output = await runExample(filePath)
+  return output
 }
