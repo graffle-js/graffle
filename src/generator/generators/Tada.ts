@@ -1,5 +1,3 @@
-import { Grafaid } from '../../lib/grafaid/_namespace.js'
-import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 import type {
   GraphQLEnumType,
   GraphQLInputObjectType,
@@ -7,6 +5,8 @@ import type {
   GraphQLObjectType,
   GraphQLUnionType,
 } from 'graphql'
+import { Grafaid } from '../../lib/grafaid/_namespace.js'
+import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 
 /**
  * Generate gql-tada compatible introspection types for the schema.
@@ -45,7 +45,9 @@ export const ModuleGeneratorTada = createModuleGenerator(
         const objType = type as GraphQLObjectType | GraphQLInterfaceType
         const fields = Object.values(objType.getFields())
 
-        code`  '${type.name}': { kind: '${Grafaid.Schema.isInterfaceType(type) ? 'INTERFACE' : 'OBJECT'}'; name: '${type.name}'; fields: {`
+        code`  '${type.name}': { kind: '${
+          Grafaid.Schema.isInterfaceType(type) ? 'INTERFACE' : 'OBJECT'
+        }'; name: '${type.name}'; fields: {`
 
         for (const field of fields) {
           const fieldType = renderTadaType(field.type)
@@ -67,7 +69,9 @@ export const ModuleGeneratorTada = createModuleGenerator(
       } else if (Grafaid.Schema.isUnionType(type)) {
         const unionType = type as GraphQLUnionType
         const possibleTypes = unionType.getTypes().map(t => `'${t.name}'`).join(' | ')
-        code`  '${type.name}': { kind: 'UNION'; name: '${type.name}'; fields: {}; possibleTypes: ${possibleTypes || 'never'}; };`
+        code`  '${type.name}': { kind: 'UNION'; name: '${type.name}'; fields: {}; possibleTypes: ${
+          possibleTypes || 'never'
+        }; };`
       } else if (Grafaid.Schema.isInputObjectType(type)) {
         const inputType = type as GraphQLInputObjectType
         const fields = Object.values(inputType.getFields())
@@ -99,7 +103,7 @@ export const ModuleGeneratorTada = createModuleGenerator(
     code`  subscription: ${subscriptionType === 'never' ? 'never' : `'${subscriptionType}'`};`
     code`  types: introspection_types;`
     code`};`
-  }
+  },
 )
 
 /**

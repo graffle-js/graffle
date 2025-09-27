@@ -5,8 +5,8 @@
  * introspection types, enabling type-safe GraphQL template literals.
  */
 
-import { Graffle } from './graffle/_exports.js'
 import { initGraphQLTada } from 'gql.tada'
+import { Graffle } from './graffle/_exports.js'
 import type { introspection } from './graffle/modules/tada.js'
 
 // Initialize gql-tada with Graffle's generated introspection types

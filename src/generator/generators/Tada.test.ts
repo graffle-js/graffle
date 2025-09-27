@@ -1,6 +1,6 @@
-import { test, expect } from 'vitest'
-import { createConfig } from '../config/config.js'
+import { expect, test } from 'vitest'
 import { Grafaid } from '../../lib/grafaid/_namespace.js'
+import { createConfig } from '../config/config.js'
 import { ModuleGeneratorTada } from './Tada.js'
 
 test('generates gql-tada compatible introspection types', async () => {

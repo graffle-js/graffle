@@ -5,8 +5,8 @@
  * compile-time type safety for Graffle's .gql method.
  */
 
-import { Graffle } from 'graffle'
 import { initGraphQLTada, type ResultOf, type VariablesOf } from 'gql.tada'
+import { Graffle } from 'graffle'
 import type { introspection } from './graphql-env.d.ts'
 
 // Initialize gql-tada with the schema introspection
@@ -50,9 +50,9 @@ const pokemonQuery = graphql(`
 // The TypedDocumentNode from gql-tada is compatible with Graffle!
 async function fetchPokemonWithTypes() {
   const result = await graffle
-    .gql(pokemonQuery)  // ← gql-tada's TypedDocumentNode works here!
+    .gql(pokemonQuery) // ← gql-tada's TypedDocumentNode works here!
     .send({
-      name: 'Pikachu'   // ← Type-safe variables (auto-completion works)
+      name: 'Pikachu', // ← Type-safe variables (auto-completion works)
     })
 
   // result is fully typed!
@@ -61,9 +61,9 @@ async function fetchPokemonWithTypes() {
   const pokemons = result?.pokemonByName
   if (pokemons && pokemons.length > 0) {
     const pokemon = pokemons[0]!
-    console.log('Pokemon:', pokemon.name)      // string
-    console.log('HP:', pokemon.hp)            // number
-    console.log('Trainer:', pokemon.trainer?.name)  // string | undefined
+    console.log('Pokemon:', pokemon.name) // string
+    console.log('HP:', pokemon.hp) // number
+    console.log('Trainer:', pokemon.trainer?.name) // string | undefined
 
     // This would cause a TypeScript error:
     // console.log(pokemon.invalidField) // ← Error: Property 'invalidField' does not exist
@@ -88,7 +88,7 @@ async function fetchPokemonInline() {
           type
         }
       }
-    `)
+    `),
   ).send() // No variables needed for this query
 
   // TypeScript knows the exact structure
@@ -136,9 +136,9 @@ const _queryResult: GetPokemonResult = {
       attack: 55,
       defense: 40,
       trainer: { name: 'Ash' },
-      type: 'electric'
-    }
-  ]
+      type: 'electric',
+    },
+  ],
 }
 
 const _mutationVars: AddPokemonVariables = {
@@ -146,7 +146,7 @@ const _mutationVars: AddPokemonVariables = {
   type: 'fire',
   hp: 78,
   attack: 84,
-  defense: 78
+  defense: 78,
 }
 
 /**

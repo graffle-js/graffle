@@ -36,8 +36,8 @@ The generated `tada.ts` file contains:
 ### Basic Example
 
 ```typescript
-import { Graffle } from './graffle/_exports.js'
 import { initGraphQLTada } from 'gql.tada'
+import { Graffle } from './graffle/_exports.js'
 import type { introspection } from './graffle/modules/tada.js'
 
 // Initialize gql-tada with Graffle's generated types
@@ -92,7 +92,7 @@ Note: Make sure to enable SDL output in your Graffle configuration:
 // graffle.config.ts
 export default {
   schema: '...',
-  outputSDL: true
+  outputSDL: true,
 }
 ```
 
@@ -128,7 +128,9 @@ import { Graffle as GitHubClient } from './github-graffle/_exports.js'
 import type { introspection as GitHubIntrospection } from './github-graffle/modules/tada.js'
 
 // Each has its own typed graphql function
-const pokemonGraphql = initGraphQLTada<{ introspection: PokemonIntrospection }>()
+const pokemonGraphql = initGraphQLTada<
+  { introspection: PokemonIntrospection }
+>()
 const githubGraphql = initGraphQLTada<{ introspection: GitHubIntrospection }>()
 ```
 
@@ -176,13 +178,16 @@ const userFragment = graphql(`
   }
 `)
 
-const query = graphql(`
+const query = graphql(
+  `
   query GetUsers {
     users {
       ...UserFields
     }
   }
-`, [userFragment])
+`,
+  [userFragment],
+)
 ```
 
 ## Limitations

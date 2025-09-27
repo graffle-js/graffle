@@ -25,8 +25,8 @@ gql-tada produces `TypedDocumentNode` instances from GraphQL template literals, 
 
 ```typescript
 import { initGraphQLTada } from 'gql.tada'
-import type { introspection } from './graphql-env.d.ts'
 import { Graffle } from 'graffle'
+import type { introspection } from './graphql-env.d.ts'
 
 // Initialize gql-tada
 const graphql = initGraphQLTada<{
