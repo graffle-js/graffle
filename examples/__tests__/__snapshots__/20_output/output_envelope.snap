@@ -13,13 +13,7 @@
   response: Response {
     status: 200,
     statusText: 'OK',
-    headers: Headers {
-      'content-type': 'application/graphql-response+json; charset=utf-8',
-      'content-length': '142',
-      date: 'Sat, 27 Sep 2025 13:33:22 GMT',
-      connection: 'keep-alive',
-      'keep-alive': 'timeout=5'
-    },
+    headers: DYNAMIC_VALUE,
     body: ReadableStream { locked: true, state: 'closed', supportsBYOB: true },
     bodyUsed: true,
     ok: true,

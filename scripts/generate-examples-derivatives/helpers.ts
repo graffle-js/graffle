@@ -303,10 +303,32 @@ export const rewriteDynamicError = (value: string) => {
 /**
  * Run an example for testing purposes.
  * Masks paths to make tests deterministic across different environments.
+ * Applies any encoder if one exists for the example.
  */
 export const runExampleForTest = async (filePath: string) => {
   // Run the example directly
-  const output = await runExample(filePath)
+  let output = await runExample(filePath)
+
   // Apply path masking for CI/local compatibility
-  return rewriteDynamicError(output)
+  output = rewriteDynamicError(output)
+
+  // Check if an encoder exists for this example
+  // filePath is like "10_transport-http/transport-http_extension_headers__dynamicHeaders.ts"
+  const exampleName = Path.basename(filePath, '.ts')
+  const dir = Path.dirname(filePath)
+
+  // Build the encoder path using the standard naming convention
+  const encoderPath = `../examples/__outputs__/${dir}/${exampleName}.output.encoder.js`
+
+  try {
+    // Try to dynamically import the encoder module if it exists
+    const encoderModule = await import(encoderPath)
+    if (encoderModule.encode && typeof encoderModule.encode === 'function') {
+      output = encoderModule.encode(output)
+    }
+  } catch {
+    // No encoder exists, that's fine - most examples don't need one
+  }
+
+  return output
 }
