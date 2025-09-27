@@ -4,6 +4,7 @@ import { ModuleGenerator_exports } from '../generators/_exports.js'
 import { ModuleGenerator_namespace } from '../generators/_namespace.js'
 import { ModuleGeneratorClient } from '../generators/Client.js'
 import { ModuleGeneratorData } from '../generators/Data.js'
+import { ModuleGeneratorDocument } from '../generators/Document.js'
 import { ModuleGeneratorGlobal } from '../generators/global.js'
 import { ModuleGeneratorMethodsDocument } from '../generators/MethodsDocument.js'
 import { ModuleGeneratorMethodsRoot } from '../generators/MethodsRoot.js'
@@ -18,6 +19,7 @@ import { getFileName, isExportsModule } from '../helpers/moduleGenerator.js'
 const moduleGenerators = [
   ModuleGeneratorGlobal,
   ModuleGeneratorClient,
+  ModuleGeneratorDocument,
   ModuleGeneratorData,
   ModuleGeneratorScalar,
   // Packaging Stuff

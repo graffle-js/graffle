@@ -1945,14 +1945,12 @@ exports[`( variables: true; scalars: (none) ) - Query - args - alias > args - al
   ]
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
-query ($id: ID) {
-  a: stringWithArgs(id: $id)
+{
+  a: stringWithArgs(id: "")
 }
 ----------------
 {
-  "$default": {
-    "id": ""
-  }
+  "$default": {}
 }
 "
 `;
@@ -1969,14 +1967,12 @@ exports[`( variables: true; scalars: (none) ) - Query - args - custom scalar - a
   }
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
-query ($date: Date) {
-  dateArg(date: $date)
+{
+  dateArg(date: "0")
 }
 ----------------
 {
-  "$default": {
-    "date": "0"
-  }
+  "$default": {}
 }
 "
 `;
@@ -1993,14 +1989,12 @@ exports[`( variables: true; scalars: (none) ) - Query - args - custom scalar - a
   }
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
-query ($date: [Date!]) {
-  dateArgList(date: $date)
+{
+  dateArgList(date: null)
 }
 ----------------
 {
-  "$default": {
-    "date": null
-  }
+  "$default": {}
 }
 "
 `;
@@ -2020,17 +2014,12 @@ exports[`( variables: true; scalars: (none) ) - Query - args - custom scalar - a
   }
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
-query ($date: [Date!]) {
-  dateArgList(date: $date)
+{
+  dateArgList(date: ["0", "1"])
 }
 ----------------
 {
-  "$default": {
-    "date": [
-      "0",
-      "1"
-    ]
-  }
+  "$default": {}
 }
 "
 `;
@@ -2047,14 +2036,12 @@ exports[`( variables: true; scalars: (none) ) - Query - args - custom scalar - a
   }
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
-query ($date: Date!) {
-  dateArgNonNull(date: $date)
+{
+  dateArgNonNull(date: "0")
 }
 ----------------
 {
-  "$default": {
-    "date": "0"
-  }
+  "$default": {}
 }
 "
 `;
@@ -2074,17 +2061,12 @@ exports[`( variables: true; scalars: (none) ) - Query - args - custom scalar - a
   }
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
-query ($date: [Date]!) {
-  dateArgNonNullList(date: $date)
+{
+  dateArgNonNullList(date: ["0", "1"])
 }
 ----------------
 {
-  "$default": {
-    "date": [
-      "0",
-      "1"
-    ]
-  }
+  "$default": {}
 }
 "
 `;
@@ -2104,17 +2086,12 @@ exports[`( variables: true; scalars: (none) ) - Query - args - custom scalar - a
   }
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
-query ($date: [Date]!) {
-  dateArgNonNullList(date: $date)
+{
+  dateArgNonNullList(date: [null, "0"])
 }
 ----------------
 {
-  "$default": {
-    "date": [
-      null,
-      "0"
-    ]
-  }
+  "$default": {}
 }
 "
 `;
@@ -2134,17 +2111,12 @@ exports[`( variables: true; scalars: (none) ) - Query - args - custom scalar - a
   }
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
-query ($date: [Date!]!) {
-  dateArgNonNullListNonNull(date: $date)
+{
+  dateArgNonNullListNonNull(date: ["0", "1"])
 }
 ----------------
 {
-  "$default": {
-    "date": [
-      "0",
-      "1"
-    ]
-  }
+  "$default": {}
 }
 "
 `;
@@ -2165,18 +2137,12 @@ exports[`( variables: true; scalars: (none) ) - Query - args - custom scalar - i
   }
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
-query ($input: InputObject) {
-  dateArgInputObject(input: $input)
+{
+  dateArgInputObject(input: {idRequired: "", dateRequired: "0", date: "1"})
 }
 ----------------
 {
-  "$default": {
-    "input": {
-      "idRequired": "",
-      "dateRequired": "0",
-      "date": "1"
-    }
-  }
+  "$default": {}
 }
 "
 `;
@@ -2199,20 +2165,14 @@ exports[`( variables: true; scalars: (none) ) - Query - args - custom scalar - n
   }
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
-query ($input: InputObjectNested) {
-  InputObjectNested(input: $input)
+{
+  InputObjectNested(
+    input: {InputObject: {idRequired: "", dateRequired: "0", date: "1"}}
+  )
 }
 ----------------
 {
-  "$default": {
-    "input": {
-      "InputObject": {
-        "idRequired": "",
-        "dateRequired": "0",
-        "date": "1"
-      }
-    }
-  }
+  "$default": {}
 }
 "
 `;
@@ -2229,14 +2189,12 @@ exports[`( variables: true; scalars: (none) ) - Query - args - enum > args - enu
   }
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
-query ($ABCEnum: ABCEnum) {
-  stringWithArgEnum(ABCEnum: $ABCEnum)
+{
+  stringWithArgEnum(ABCEnum: A)
 }
 ----------------
 {
-  "$default": {
-    "ABCEnum": "A"
-  }
+  "$default": {}
 }
 "
 `;
@@ -2255,16 +2213,12 @@ exports[`( variables: true; scalars: (none) ) - Query - args - input object enum
   }
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
-query ($input: InputObjectEnum!) {
-  stringWithArgInputObjectEnum(input: $input)
+{
+  stringWithArgInputObjectEnum(input: {abcEnum: A})
 }
 ----------------
 {
-  "$default": {
-    "input": {
-      "abcEnum": "A"
-    }
-  }
+  "$default": {}
 }
 "
 `;
@@ -2284,17 +2238,12 @@ exports[`( variables: true; scalars: (none) ) - Query - args - nested input obje
   }
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
-query ($input: InputObjectEnum!) {
-  stringWithArgInputObjectEnum(input: $input)
+{
+  stringWithArgInputObjectEnum(input: {abcEnum: B, id: "test"})
 }
 ----------------
 {
-  "$default": {
-    "input": {
-      "abcEnum": "B",
-      "id": "test"
-    }
-  }
+  "$default": {}
 }
 "
 `;
@@ -2335,16 +2284,14 @@ exports[`( variables: true; scalars: (none) ) - Query - args - object with args 
   }
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
-query ($id: ID) {
-  objectWithArgs(id: $id) {
+{
+  objectWithArgs(id: "") {
     id
   }
 }
 ----------------
 {
-  "$default": {
-    "id": ""
-  }
+  "$default": {}
 }
 "
 `;
@@ -2362,16 +2309,14 @@ exports[`( variables: true; scalars: (none) ) - Query - args - on union > args -
   }
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
-query ($case: Case!) {
-  result(case: $case) {
+{
+  result(case: Object1) {
     __typename
   }
 }
 ----------------
 {
-  "$default": {
-    "case": "Object1"
-  }
+  "$default": {}
 }
 "
 `;
@@ -2409,15 +2354,12 @@ exports[`( variables: true; scalars: (none) ) - Query - args - string with args 
   }
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
-query ($boolean: Boolean, $float: Float) {
-  stringWithArgs(boolean: $boolean, float: $float)
+{
+  stringWithArgs(boolean: true, float: 1)
 }
 ----------------
 {
-  "$default": {
-    "boolean": true,
-    "float": 1
-  }
+  "$default": {}
 }
 "
 `;
@@ -2447,16 +2389,13 @@ exports[`( variables: true; scalars: (none) ) - Query - args - x2 same > args - 
   ]
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
-query ($id: ID, $id_2: ID) {
-  a: stringWithArgs(id: $id)
-  b: stringWithArgs(id: $id_2)
+{
+  a: stringWithArgs(id: "")
+  b: stringWithArgs(id: "")
 }
 ----------------
 {
-  "$default": {
-    "id": "",
-    "id_2": ""
-  }
+  "$default": {}
 }
 "
 `;
@@ -2849,14 +2788,12 @@ exports[`( variables: true; scalars: Date ) - Query - args - custom scalar - arg
   }
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
-query ($date: Date) {
-  dateArg(date: $date)
+{
+  dateArg(date: "1970-01-01T00:00:00.000Z")
 }
 ----------------
 {
-  "$default": {
-    "date": "1970-01-01T00:00:00.000Z"
-  }
+  "$default": {}
 }
 "
 `;
@@ -2873,14 +2810,12 @@ exports[`( variables: true; scalars: Date ) - Query - args - custom scalar - arg
   }
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
-query ($date: [Date!]) {
-  dateArgList(date: $date)
+{
+  dateArgList(date: null)
 }
 ----------------
 {
-  "$default": {
-    "date": null
-  }
+  "$default": {}
 }
 "
 `;
@@ -2900,17 +2835,12 @@ exports[`( variables: true; scalars: Date ) - Query - args - custom scalar - arg
   }
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
-query ($date: [Date!]) {
-  dateArgList(date: $date)
+{
+  dateArgList(date: ["1970-01-01T00:00:00.000Z", "1970-01-01T00:00:00.001Z"])
 }
 ----------------
 {
-  "$default": {
-    "date": [
-      "1970-01-01T00:00:00.000Z",
-      "1970-01-01T00:00:00.001Z"
-    ]
-  }
+  "$default": {}
 }
 "
 `;
@@ -2927,14 +2857,12 @@ exports[`( variables: true; scalars: Date ) - Query - args - custom scalar - arg
   }
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
-query ($date: Date!) {
-  dateArgNonNull(date: $date)
+{
+  dateArgNonNull(date: "1970-01-01T00:00:00.000Z")
 }
 ----------------
 {
-  "$default": {
-    "date": "1970-01-01T00:00:00.000Z"
-  }
+  "$default": {}
 }
 "
 `;
@@ -2954,17 +2882,14 @@ exports[`( variables: true; scalars: Date ) - Query - args - custom scalar - arg
   }
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
-query ($date: [Date]!) {
-  dateArgNonNullList(date: $date)
+{
+  dateArgNonNullList(
+    date: ["1970-01-01T00:00:00.000Z", "1970-01-01T00:00:00.001Z"]
+  )
 }
 ----------------
 {
-  "$default": {
-    "date": [
-      "1970-01-01T00:00:00.000Z",
-      "1970-01-01T00:00:00.001Z"
-    ]
-  }
+  "$default": {}
 }
 "
 `;
@@ -2984,17 +2909,12 @@ exports[`( variables: true; scalars: Date ) - Query - args - custom scalar - arg
   }
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
-query ($date: [Date]!) {
-  dateArgNonNullList(date: $date)
+{
+  dateArgNonNullList(date: [null, "1970-01-01T00:00:00.000Z"])
 }
 ----------------
 {
-  "$default": {
-    "date": [
-      null,
-      "1970-01-01T00:00:00.000Z"
-    ]
-  }
+  "$default": {}
 }
 "
 `;
@@ -3014,17 +2934,14 @@ exports[`( variables: true; scalars: Date ) - Query - args - custom scalar - arg
   }
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
-query ($date: [Date!]!) {
-  dateArgNonNullListNonNull(date: $date)
+{
+  dateArgNonNullListNonNull(
+    date: ["1970-01-01T00:00:00.000Z", "1970-01-01T00:00:00.001Z"]
+  )
 }
 ----------------
 {
-  "$default": {
-    "date": [
-      "1970-01-01T00:00:00.000Z",
-      "1970-01-01T00:00:00.001Z"
-    ]
-  }
+  "$default": {}
 }
 "
 `;
@@ -3045,18 +2962,14 @@ exports[`( variables: true; scalars: Date ) - Query - args - custom scalar - inp
   }
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
-query ($input: InputObject) {
-  dateArgInputObject(input: $input)
+{
+  dateArgInputObject(
+    input: {idRequired: "", dateRequired: "1970-01-01T00:00:00.000Z", date: "1970-01-01T00:00:00.001Z"}
+  )
 }
 ----------------
 {
-  "$default": {
-    "input": {
-      "idRequired": "",
-      "dateRequired": "1970-01-01T00:00:00.000Z",
-      "date": "1970-01-01T00:00:00.001Z"
-    }
-  }
+  "$default": {}
 }
 "
 `;
@@ -3079,20 +2992,14 @@ exports[`( variables: true; scalars: Date ) - Query - args - custom scalar - nes
   }
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
-query ($input: InputObjectNested) {
-  InputObjectNested(input: $input)
+{
+  InputObjectNested(
+    input: {InputObject: {idRequired: "", dateRequired: "1970-01-01T00:00:00.000Z", date: "1970-01-01T00:00:00.001Z"}}
+  )
 }
 ----------------
 {
-  "$default": {
-    "input": {
-      "InputObject": {
-        "idRequired": "",
-        "dateRequired": "1970-01-01T00:00:00.000Z",
-        "date": "1970-01-01T00:00:00.001Z"
-      }
-    }
-  }
+  "$default": {}
 }
 "
 `;

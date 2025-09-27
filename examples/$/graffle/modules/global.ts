@@ -15,10 +15,7 @@ declare global {
           Document: $$MethodsDocument.BuilderMethodsDocumentFn
           Root: $$MethodsRoot.BuilderMethodsRootFn
         }
-        /**
-         * http://localhost:3000/graphql
-         */
-        defaultSchemaUrl: string
+        defaultSchemaUrl: null
       }
     }
   }

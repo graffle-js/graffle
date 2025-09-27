@@ -15,9 +15,10 @@ export interface OperationContext {
      */
     enabled: boolean
     capture: (input: {
-      name: string
+      name: string // This is the variable name (may be renamed)
+      argName?: string // The actual argument name if different from variable name
       value: any
-      sddmArgument: SchemaDrivenDataMap.ArgumentOrInputField
+      sddmArgument: SchemaDrivenDataMap.ArgumentOrInputField | undefined
     }) => Grafaid.Document.ArgumentNode
     data: CapturedVariable[]
   }
@@ -27,6 +28,7 @@ export interface CapturedVariable {
   name: string
   typeName: string
   value: unknown
+  defaultValue?: unknown
 }
 
 export interface Captures {
@@ -54,10 +56,11 @@ export const createOperationContext = (options?: Options): OperationContext => {
           name: potentialVariableName,
           typeName: inferVariableType(input.sddmArgument),
           value: processedValue,
+          defaultValue: input.value !== undefined ? processedValue : undefined,
         })
 
         return Nodes.Argument({
-          name: Nodes.Name({ value: input.name }),
+          name: Nodes.Name({ value: input.argName ?? input.name }),
           value: Nodes.Variable({
             name: Nodes.Name({ value: potentialVariableName }),
           }),

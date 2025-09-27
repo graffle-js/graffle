@@ -7,7 +7,12 @@ import { SchemaDrivenDataMap } from '../../../types/SchemaDrivenDataMap/_namespa
  *
  * Aside: Interestingly its representation in a GraphQL operation variable is as a string, not any kind of node.
  */
-export const inferVariableType = (sddmArgLike: SchemaDrivenDataMap.ArgumentOrInputField): string => {
+export const inferVariableType = (sddmArgLike: SchemaDrivenDataMap.ArgumentOrInputField | undefined): string => {
+  // Fallback for when no SDDM is available (e.g., static builder without schema map)
+  if (!sddmArgLike) {
+    return `Unknown`
+  }
+
   if (sddmArgLike.it) {
     const isRequiredIndicator = sddmArgLike.it[0] === 1 ? `!` : ``
     const namedType = inferNamedType(sddmArgLike)
