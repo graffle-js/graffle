@@ -4,7 +4,7 @@ import type { Grafaid } from '../../lib/grafaid/_namespace.js'
 import { OperationTypeToAccessKind, print } from '../../lib/grafaid/document.js'
 import { getRequestEncodeSearchParameters, postRequestEncodeBody } from '../../lib/grafaid/http/http.js'
 import { getRequestHeadersRec, parseExecutionResult, postRequestHeadersRec } from '../../lib/grafaid/http/http.js'
-import { mergeHeadersInitWithStrategyMerge, mergeRequestInit, parseURLInput, searchParamsAppendAll, type URLInput } from '../../lib/http.js'
+import { mergeHeadersInitWithStrategyMerge, mergeRequestInit, parseURLInput, searchParamsAppendAll, searchParamsAppendAllMutate, type URLInput } from '../../lib/http.js'
 import type { httpMethodGet, httpMethodPost } from '../../lib/http.js'
 import { _, isString, type MaybePromise } from '../../lib/prelude.js'
 
@@ -163,20 +163,34 @@ export const TransportHttp = Extension.create(`TransportHttp`)
           )
           // Parse the URL at runtime to determine if it's a path or absolute URL
           const parsedUrl = parseURLInput(input.transport.url)
-          const urlValue = parsedUrl.value
+
+          // For GET requests, we need to append search params
+          // Handle paths and URLs differently
+          const urlWithParams = requestMethod === `get`
+            ? parsedUrl._tag === 'path'
+              ? (() => {
+                  // For paths, use a dummy base to safely manipulate search params
+                  const dummyBase = 'http://dummy'
+                  const tempUrl = new URL(parsedUrl.value, dummyBase)
+                  searchParamsAppendAllMutate(tempUrl, slots.searchParams(graphqlRequest))
+                  // Extract the pathname and search (everything after the origin)
+                  return tempUrl.pathname + tempUrl.search
+                })()
+              : searchParamsAppendAll(parsedUrl.value, slots.searchParams(graphqlRequest))
+            : parsedUrl.value
 
           const request: ExchangeRequest = requestMethod === `get`
             ? {
               methodMode: methodMode as MethodModeGetReads,
               ...baseRequestInit,
               method: `get`,
-              url: searchParamsAppendAll(urlValue, slots.searchParams(graphqlRequest)),
+              url: urlWithParams,
             }
             : {
               methodMode: methodMode,
               ...baseRequestInit,
               method: `post`,
-              url: urlValue,
+              url: parsedUrl.value,
               body: slots.body(graphqlRequest),
             }
           return {
