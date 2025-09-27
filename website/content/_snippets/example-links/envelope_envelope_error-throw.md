@@ -1,1 +1,1 @@
-<p class="ExampleLinks">Examples <span class="ExampleLinksTitleSeparator">-></span> <a href="../../examples/output/envelope-error-throw">Envelope Error Throw</a></p>
+<p class="ExampleLinks">Examples <span class="ExampleLinksTitleSeparator">-></span> <a href="../../examples/output/output_envelope_envelope_error-throw__envelope-error-throw">Envelope Error Throw</a></p>

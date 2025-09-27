@@ -1,5 +1,5 @@
 <div class="ExampleSnippet">
-<a href="../../examples/output/return-error-execution">Return Error Execution</a>
+<a href="../../examples/output/output_return-error_return-error-execution__return-error-execution">Return Error Execution</a>
 
 <!-- dprint-ignore-start -->
 ```ts twoslash
@@ -50,11 +50,11 @@ try {
 <!-- dprint-ignore-start -->
 ```txt
 ContextualAggregateError: One or more errors in the execution result.
-    at handleOutput (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/client/handle.ts:70:19)
-    at sendRequest (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/client/send.ts:36:10)
+    at handleOutput (/some/path/to/handle.ts:XX:XX)
+    at sendRequest (/some/path/to/send.ts:XX:XX)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async executeRootField (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/extensions/DocumentBuilder/requestMethods/requestMethods.ts:42:18)
-    at async <anonymous> (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/20_output/output_return-error_return-error-execution__return-error-execution.ts:22:16) {
+    at async executeRootField (/some/path/to/requestMethods.ts:XX:XX)
+    at async <anonymous> (/some/path/to/output_return-error_return-error-execution__return-error-execution.ts:XX:XX) {
   context: {},
   cause: undefined,
   errors: [
@@ -71,13 +71,13 @@ ContextualAggregateError: One or more errors in the execution result.
         ]
       }
     ]
-        at <anonymous> (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/client/handle.ts:76:16)
+        at <anonymous> (/some/path/to/handle.ts:XX:XX)
         at Array.map (<anonymous>)
-        at handleOutput (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/client/handle.ts:73:27)
-        at sendRequest (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/client/send.ts:36:10)
+        at handleOutput (/some/path/to/handle.ts:XX:XX)
+        at sendRequest (/some/path/to/send.ts:XX:XX)
         at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-        at async executeRootField (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/extensions/DocumentBuilder/requestMethods/requestMethods.ts:42:18)
-        at async <anonymous> (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/20_output/output_return-error_return-error-execution__return-error-execution.ts:22:16) {
+        at async executeRootField (/some/path/to/requestMethods.ts:XX:XX)
+        at async <anonymous> (/some/path/to/output_return-error_return-error-execution__return-error-execution.ts:XX:XX) {
       context: { locations: [ { line: 2, column: 3 } ], path: [ 'addPokemon' ] },
       cause: undefined
     }
@@ -88,21 +88,21 @@ ContextualAggregateError: One or more errors in the execution result.
 <!-- dprint-ignore-start -->
 ```txt
 ContextualError: There was an error in the interceptor "anonymous" (use named functions to improve this error message) while running hook "encode".
-    at runPipeline (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/lib/anyware/run/runPipeline.ts:109:18)
+    at runPipeline (/some/path/to/runPipeline.ts:XX:XX)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async <anonymous> (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/lib/anyware/run/runner.ts:38:20)
-    at async Module.run (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/lib/anyware/run/run.ts:18:10)
-    at async sendRequest (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/client/send.ts:30:18)
-    at async executeRootField (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/extensions/DocumentBuilder/requestMethods/requestMethods.ts:42:18)
-    at async <anonymous> (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/20_output/output_return-error_return-error-execution__return-error-execution.ts:32:3) {
+    at async <anonymous> (/some/path/to/runner.ts:XX:XX)
+    at async Module.run (/some/path/to/run.ts:XX:XX)
+    at async sendRequest (/some/path/to/send.ts:XX:XX)
+    at async executeRootField (/some/path/to/requestMethods.ts:XX:XX)
+    at async <anonymous> (/some/path/to/output_return-error_return-error-execution__return-error-execution.ts:XX:XX) {
   context: {
     hookName: 'encode',
     source: 'extension',
     interceptorName: 'anonymous'
   },
   cause: Error: Something went wrong.
-      at <anonymous> (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/20_output/output_return-error_return-error-execution__return-error-execution.ts:34:13)
-      at applyBody (/Users/jasonkuhrt/projects/jasonkuhrt/graffle/examples/node_modules/.pnpm/graffle@file+.._@opentelemetry+api@1.9.0_graphql@16.10.0/node_modules/graffle/src/lib/anyware/run/runner.ts:59:28)
+      at <anonymous> (/some/path/to/output_return-error_return-error-execution__return-error-execution.ts:XX:XX)
+      at applyBody (/some/path/to/runner.ts:XX:XX)
       at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
 }
 ```

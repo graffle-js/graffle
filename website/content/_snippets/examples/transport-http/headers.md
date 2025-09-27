@@ -1,5 +1,5 @@
 <div class="ExampleSnippet">
-<a href="../../examples/transport-http/headers">Headers</a>
+<a href="../../examples/transport-http/transport-http_headers_raw__headers">Headers</a>
 
 <!-- dprint-ignore-start -->
 ```ts twoslash

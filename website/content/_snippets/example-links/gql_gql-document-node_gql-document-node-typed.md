@@ -1,1 +1,1 @@
-<p class="ExampleLinks">Examples <span class="ExampleLinksTitleSeparator">-></span> <a href="../../examples/gql/gql-document-node-typed">Gql Document Node Typed</a></p>
+<p class="ExampleLinks">Examples <span class="ExampleLinksTitleSeparator">-></span> <a href="../../examples/gql/gql_gql-document-node_gql-typed_gql-document-node-typed__gql-document-node-typed">Gql Document Node Typed</a></p>

@@ -1,5 +1,5 @@
 <div class="ExampleSnippet">
-<a href="../../examples/transport-http/custom-fetch">Custom Fetch</a>
+<a href="../../examples/transport-http/transport-http_extension_fetch__custom-fetch">Custom Fetch</a>
 
 <!-- dprint-ignore-start -->
 ```ts twoslash

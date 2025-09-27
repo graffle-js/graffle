@@ -1,5 +1,5 @@
 <div class="ExampleSnippet">
-<a href="../../examples/extension/introspection">Introspection</a>
+<a href="../../examples/extension/extension_introspection__introspection">Introspection</a>
 
 <!-- dprint-ignore-start -->
 ```ts twoslash

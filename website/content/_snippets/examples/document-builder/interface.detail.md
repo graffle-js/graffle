@@ -1,7 +1,7 @@
 ::: details Example
 
 <div class="ExampleSnippet">
-<a href="../../examples/document-builder/interface">Interface</a>
+<a href="../../examples/document-builder/document-builder_interface">Interface</a>
 
 <!-- dprint-ignore-start -->
 ```ts twoslash

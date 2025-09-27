@@ -1,5 +1,5 @@
 <div class="ExampleSnippet">
-<a href="../../examples/document-builder/directive">Directive</a>
+<a href="../../examples/document-builder/document-builder_directive">Directive</a>
 
 <!-- dprint-ignore-start -->
 ```ts twoslash

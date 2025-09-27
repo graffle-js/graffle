@@ -1,7 +1,7 @@
 ::: details Example
 
 <div class="ExampleSnippet">
-<a href="../../examples/document-builder/union">Union</a>
+<a href="../../examples/document-builder/document-builder_union">Union</a>
 
 <!-- dprint-ignore-start -->
 ```ts twoslash

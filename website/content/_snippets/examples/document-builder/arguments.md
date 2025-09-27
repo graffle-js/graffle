@@ -1,5 +1,5 @@
 <div class="ExampleSnippet">
-<a href="../../examples/document-builder/arguments">Arguments</a>
+<a href="../../examples/document-builder/document-builder_arguments">Arguments</a>
 
 <!-- dprint-ignore-start -->
 ```ts twoslash

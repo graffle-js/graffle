@@ -1,5 +1,5 @@
 <div class="ExampleSnippet">
-<a href="../../examples/preset/minimal">Minimal</a>
+<a href="../../examples/preset/preset_minimal">Minimal</a>
 
 <!-- dprint-ignore-start -->
 ```ts twoslash

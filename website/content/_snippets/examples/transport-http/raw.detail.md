@@ -1,7 +1,7 @@
 ::: details Example
 
 <div class="ExampleSnippet">
-<a href="../../examples/transport-http/raw">Raw</a>
+<a href="../../examples/transport-http/transport-http_raw">Raw</a>
 
 <!-- dprint-ignore-start -->
 ```ts twoslash

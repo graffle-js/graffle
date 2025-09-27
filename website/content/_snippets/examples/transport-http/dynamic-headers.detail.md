@@ -1,7 +1,7 @@
 ::: details Example
 
 <div class="ExampleSnippet">
-<a href="../../examples/transport-http/dynamic-headers">Dynamic Headers</a>
+<a href="../../examples/transport-http/transport-http_extension_headers__dynamicHeaders">Dynamic Headers</a>
 
 <!-- dprint-ignore-start -->
 ```ts twoslash
@@ -52,7 +52,7 @@ await graffle.gql`{ pokemons { name } }`.send()
       'application/graphql-response+json; charset=utf-8, application/json; charset=utf-8'
     ],
     [ 'content-type', 'application/json' ],
-    [ 'X-Sent-At-Time', '1758950604793' ]
+    [ 'X-Sent-At-Time', '1758979139873' ]
   ],
   method: 'post',
   url: {

@@ -1,7 +1,7 @@
 ::: details Example
 
 <div class="ExampleSnippet">
-<a href="../../examples/output/default">Default</a>
+<a href="../../examples/output/output_default">Default</a>
 
 <!-- dprint-ignore-start -->
 ```ts twoslash

@@ -1,5 +1,5 @@
 <div class="ExampleSnippet">
-<a href="../../examples/transport-http/method-get">Method Get</a>
+<a href="../../examples/transport-http/transport-http_method-get">Method Get</a>
 
 <!-- dprint-ignore-start -->
 ```ts twoslash

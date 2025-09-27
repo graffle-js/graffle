@@ -3,7 +3,6 @@ import { z } from 'zod'
 import { generateDocs } from './generate-docs.js'
 import { generateOutputs } from './generate-outputs.js'
 import { generatePaths } from './generate-paths.js'
-import { generateTestOutputs } from './generate-test-outputs.js'
 import { readExamples } from './helpers.js'
 
 const args = Command.create()
@@ -19,7 +18,6 @@ if (args.outputs) {
   await generatePaths()
 } else {
   await generateOutputs(args.name)
-  await generateTestOutputs(args.name)
 
   const examples = await readExamples()
 

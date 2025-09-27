@@ -1,7 +1,7 @@
 ::: details Example
 
 <div class="ExampleSnippet">
-<a href="../../examples/gql/gql-string-typed">Gql String Typed</a>
+<a href="../../examples/gql/gql_gql-string_gql-typed__gql-string-typed">Gql String Typed</a>
 
 <!-- dprint-ignore-start -->
 ```ts twoslash

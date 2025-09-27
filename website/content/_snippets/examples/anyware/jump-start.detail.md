@@ -1,7 +1,7 @@
 ::: details Example
 
 <div class="ExampleSnippet">
-<a href="../../examples/anyware/jump-start">Jump Start</a>
+<a href="../../examples/anyware/anyware_jump-start__jump-start">Jump Start</a>
 
 <!-- dprint-ignore-start -->
 ```ts twoslash

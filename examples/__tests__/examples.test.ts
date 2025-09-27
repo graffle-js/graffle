@@ -1,21 +1,26 @@
-// @vitest-environment node
-
+import { FsLoc } from '@wollybeard/kit'
+import { S } from '@wollybeard/kit/sch'
 import { Test } from '@wollybeard/kit/test'
 import { expect } from 'vitest'
 import { runExampleForTest } from '../../scripts/generate-examples-derivatives/helpers.js'
 import { examplePaths } from './paths.generated.js'
 
-// Use Test.describe with just the paths as cases
-Test.describe('examples')
-  .cases(examplePaths.map(path => [path]))
-  .test(async (path) => {
-    const exampleResult = await runExampleForTest(path)
+const toString = S.encodeSync(FsLoc.FsLoc)
 
-    // Extract directory and filename to build snapshot path
-    const pathParts = path.match(/^\.\/(.+)\/(.+)\.ts$/)
-    if (!pathParts) throw new Error(`Invalid path format: ${path}`)
-    const [, dir, filename] = pathParts
-    const snapshotPath = `../__outputs__/${dir}/${filename}.output.test.txt`
+Test.describe('examples')
+  .i<FsLoc.RelFile>()
+  .concurrent()
+  .cases(...examplePaths.map(loc => ({
+    i: loc,
+    o: undefined,
+  })))
+  .test(async (loc) => {
+    const exampleResult = await runExampleForTest(toString(loc))
+
+    // Build snapshot path using FsLoc
+    const dir = FsLoc.toDir(loc)
+    const filename = FsLoc.stem(loc)
+    const snapshotPath = toString(FsLoc.fromString(`./__snapshots__/${dir}/${filename}.snap`))
 
     await expect(exampleResult).toMatchFileSnapshot(snapshotPath)
   })

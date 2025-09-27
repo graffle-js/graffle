@@ -1,5 +1,5 @@
 <div class="ExampleSnippet">
-<a href="../../examples/transport-http/abort">Abort</a>
+<a href="../../examples/transport-http/transport-http_abort">Abort</a>
 
 <!-- dprint-ignore-start -->
 ```ts twoslash
