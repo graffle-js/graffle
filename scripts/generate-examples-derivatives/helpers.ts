@@ -226,6 +226,9 @@ export const runExample = async (filePath: string) => {
 
 export const rewriteDynamicError = (value: string) => {
   return value
+    // Normalize blank lines after caret to always be single blank line for consistency
+    // Node.js error output can vary between versions and environments
+    .replaceAll(/\^\n\n+/g, '^\n\n')
     // Mask any absolute path that contains node_modules, examples, src, etc.
     // Match paths like /any/path/to/file.ts:12:34 (with line and column)
     .replaceAll(
