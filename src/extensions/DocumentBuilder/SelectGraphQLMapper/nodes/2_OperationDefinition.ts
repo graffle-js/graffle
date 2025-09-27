@@ -6,6 +6,7 @@ import { createOperationContext } from '../context.js'
 import { type GraphQLPreOperationMapper } from '../mapper.js'
 import type { Options } from './1_Document.js'
 import { toGraphQLSelectionSetRoot } from './3_GraffleSelectionSetRoot.js'
+import { toGraphQLValue } from './Value.js'
 
 export const toGraphQLOperationDefinition: GraphQLPreOperationMapper<
   SchemaDrivenDataMap.OutputObject,
@@ -31,6 +32,9 @@ export const toGraphQLOperationDefinition: GraphQLPreOperationMapper<
     return Nodes.VariableDefinition({
       variable: Nodes.Variable({ name: Nodes.Name({ value: captured.name }) }),
       type: Nodes.NamedType({ name: Nodes.Name({ value: captured.typeName }) }),
+      defaultValue: captured.defaultValue !== undefined
+        ? toGraphQLValue({ ...context, value: { isEnum: false } }, undefined, captured.defaultValue) as any
+        : undefined,
     })
   })
 
