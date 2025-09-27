@@ -11,7 +11,7 @@ import type { introspection } from '../$/graffle/modules/tada.js'
 import { show } from '../$/helpers.js'
 
 // Initialize gql-tada with Graffle's generated introspection types
-const gql2 = initGraphQLTada<{
+const gql = initGraphQLTada<{
   introspection: introspection
 }>()
 
@@ -19,7 +19,7 @@ const gql2 = initGraphQLTada<{
 const graffle = Graffle.create()
 
 // Define a type-safe query using gql-tada
-const pokemonsQuery = gql2(`
+const pokemonsQuery = gql(`
   query GetPokemons {
     pokemons {
       id
