@@ -215,25 +215,25 @@ export const runExample = async (filePath: string) => {
 
 export const rewriteDynamicError = (value: string) => {
   return value
-    // Mask absolute paths - match any path starting with / and containing multiple segments
-    // This handles paths like /Users/jasonkuhrt/projects/.../file.ts:12:34
+    // Mask any absolute path that contains node_modules, examples, src, etc.
+    // Match paths like /any/path/to/file.ts:12:34 (with line and column)
     .replaceAll(
-      /\/(?:Users|home|var|tmp|opt)\/[\w\-\/\.@\+]+\/([\w\-]+\.(?:ts|js|mjs|cjs)):\d+/g,
-      `/some/path/to/$1:XX`,
-    )
-    // Match paths with full line:column like file.ts:12:34
-    .replaceAll(
-      /\/(?:Users|home|var|tmp|opt)\/[\w\-\/\.@\+]+\/([\w\-]+\.(?:ts|js|mjs|cjs)):\d+:\d+/g,
+      /\/[\w\-\/\.@\+]*\/([\w\-]+\.(?:ts|js|mjs|cjs)):\d+:\d+/g,
       `/some/path/to/$1:XX:XX`,
     )
-    // Match paths in parentheses like (/Users/username/path/to/file.ts:12:34)
+    // Match paths like /any/path/to/file.ts:12 (with just line number)
     .replaceAll(
-      /\(\/(?:Users|home|var|tmp|opt)\/[\w\-\/\.@\+]+\/([\w\-]+\.(?:ts|js|mjs|cjs)):\d+:\d+\)/g,
+      /\/[\w\-\/\.@\+]*\/([\w\-]+\.(?:ts|js|mjs|cjs)):\d+(?!\d)/g,
+      `/some/path/to/$1:XX`,
+    )
+    // Match paths in parentheses like (/any/path/to/file.ts:12:34)
+    .replaceAll(
+      /\(\/[\w\-\/\.@\+]*\/([\w\-]+\.(?:ts|js|mjs|cjs)):\d+:\d+\)/g,
       `(/some/path/to/$1:XX:XX)`,
     )
     // Match paths without line numbers
     .replaceAll(
-      /\/(?:Users|home|var|tmp|opt)\/[\w\-\/\.@\+]+\/([\w\-]+\.(?:ts|js|mjs|cjs))(?=\s|$)/g,
+      /\/[\w\-\/\.@\+]*\/([\w\-]+\.(?:ts|js|mjs|cjs))(?=\s|$)/g,
       `/some/path/to/$1`,
     )
     // When Node.js process exits via an uncaught thrown error, version is printed at bottom.
