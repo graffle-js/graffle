@@ -22,10 +22,26 @@ export const ModuleGeneratorDocument = createModuleGenerator(
     // Generate typed interfaces for each root type builder
     if (queryType) {
       code`
+        import type * as $$Utilities from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
+        import type * as $$Schema from './schema.js'
+
+        // Helper to extract variables from selection set
+        type ExtractVariables<$SelectionSet> = $SelectionSet extends Record<string, any>
+          ? $SelectionSet extends { $: infer Args }
+            ? ExtractVariablesFromArgs<Args>
+            : UnionToIntersection<{ [K in keyof $SelectionSet]: ExtractVariables<$SelectionSet[K]> }[keyof $SelectionSet]>
+          : {}
+
+        type ExtractVariablesFromArgs<Args> = Args extends Record<string, any>
+          ? { [K in keyof Args as Args[K] extends $$Utilities.DocumentBuilderKit.VariableMarker ? K : never]: boolean }
+          : {}
+
+        type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never
+
         export interface QueryBuilder {
           ${
         Object.keys(queryType.getFields()).map(fieldName =>
-          `${fieldName}: <$SelectionSet extends SelectionSets.Query['${fieldName}']>(selection?: $SelectionSet) => TypedDocument.String<SelectionSets.Query$Infer<{ ${fieldName}: $SelectionSet }>, SelectionSets.Query$Variables<{ ${fieldName}: $SelectionSet }>>`
+          `${fieldName}: <$SelectionSet extends SelectionSets.Query['${fieldName}']>(selection?: $SelectionSet) => TypedDocument.String<$$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ ${fieldName}: $SelectionSet }, $$Schema.Schema>, ExtractVariables<{ ${fieldName}: $SelectionSet }>>`
         ).join('\n  ')
       }
         }
@@ -36,10 +52,27 @@ export const ModuleGeneratorDocument = createModuleGenerator(
 
     if (mutationType) {
       code`
+        ${!queryType ? `import type * as $$Utilities from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'` : ''}
+        ${!queryType ? `import type * as $$Schema from './schema.js'` : ''}
+        ${!queryType ? `
+        // Helper to extract variables from selection set
+        type ExtractVariables<$SelectionSet> = $SelectionSet extends Record<string, any>
+          ? $SelectionSet extends { $: infer Args }
+            ? ExtractVariablesFromArgs<Args>
+            : UnionToIntersection<{ [K in keyof $SelectionSet]: ExtractVariables<$SelectionSet[K]> }[keyof $SelectionSet]>
+          : {}
+
+        type ExtractVariablesFromArgs<Args> = Args extends Record<string, any>
+          ? { [K in keyof Args as Args[K] extends $$Utilities.DocumentBuilderKit.VariableMarker ? K : never]: boolean }
+          : {}
+
+        type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never
+        ` : ''}
+
         export interface MutationBuilder {
           ${
         Object.keys(mutationType.getFields()).map(fieldName =>
-          `${fieldName}: <$SelectionSet extends SelectionSets.Mutation['${fieldName}']>(selection?: $SelectionSet) => TypedDocument.String<SelectionSets.Mutation$Infer<{ ${fieldName}: $SelectionSet }>, SelectionSets.Mutation$Variables<{ ${fieldName}: $SelectionSet }>>`
+          `${fieldName}: <$SelectionSet extends SelectionSets.Mutation['${fieldName}']>(selection?: $SelectionSet) => TypedDocument.String<$$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ ${fieldName}: $SelectionSet }, $$Schema.Schema>, ExtractVariables<{ ${fieldName}: $SelectionSet }>>`
         ).join('\n  ')
       }
         }
@@ -50,10 +83,27 @@ export const ModuleGeneratorDocument = createModuleGenerator(
 
     if (subscriptionType) {
       code`
+        ${!queryType && !mutationType ? `import type * as $$Utilities from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'` : ''}
+        ${!queryType && !mutationType ? `import type * as $$Schema from './schema.js'` : ''}
+        ${!queryType && !mutationType ? `
+        // Helper to extract variables from selection set
+        type ExtractVariables<$SelectionSet> = $SelectionSet extends Record<string, any>
+          ? $SelectionSet extends { $: infer Args }
+            ? ExtractVariablesFromArgs<Args>
+            : UnionToIntersection<{ [K in keyof $SelectionSet]: ExtractVariables<$SelectionSet[K]> }[keyof $SelectionSet]>
+          : {}
+
+        type ExtractVariablesFromArgs<Args> = Args extends Record<string, any>
+          ? { [K in keyof Args as Args[K] extends $$Utilities.DocumentBuilderKit.VariableMarker ? K : never]: boolean }
+          : {}
+
+        type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never
+        ` : ''}
+
         export interface SubscriptionBuilder {
           ${
         Object.keys(subscriptionType.getFields()).map(fieldName =>
-          `${fieldName}: <$SelectionSet extends SelectionSets.Subscription['${fieldName}']>(selection?: $SelectionSet) => TypedDocument.String<SelectionSets.Subscription$Infer<{ ${fieldName}: $SelectionSet }>, SelectionSets.Subscription$Variables<{ ${fieldName}: $SelectionSet }>>`
+          `${fieldName}: <$SelectionSet extends SelectionSets.Subscription['${fieldName}']>(selection?: $SelectionSet) => TypedDocument.String<$$Utilities.DocumentBuilderKit.InferResult.OperationSubscription<{ ${fieldName}: $SelectionSet }, $$Schema.Schema>, ExtractVariables<{ ${fieldName}: $SelectionSet }>>`
         ).join('\n  ')
       }
         }

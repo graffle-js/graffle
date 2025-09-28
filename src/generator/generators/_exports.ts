@@ -1,6 +1,7 @@
 import { createModuleGenerator, getImportName } from '../helpers/moduleGenerator.js'
 import { ModuleGeneratorClient } from './Client.js'
 import { ModuleGeneratorData } from './Data.js'
+import { ModuleGeneratorDocument } from './Document.js'
 import { ModuleGeneratorGlobal } from './global.js'
 import { ModuleGeneratorSchemaDrivenDataMap } from './SchemaDrivenDataMap.js'
 import { ModuleGeneratorSelect } from './Select.js'
@@ -21,6 +22,7 @@ export const ModuleGenerator_exports = createModuleGenerator(
       `export { Name } from './modules/${getImportName(config, ModuleGeneratorData)}'`,
       `export { Select } from './modules/${getImportName(config, ModuleGeneratorSelect)}'`,
       `export { create } from './modules/${getImportName(config, ModuleGeneratorClient)}'`,
+      `export { mutation, query } from './modules/${getImportName(config, ModuleGeneratorDocument)}'`,
       `export * as SelectionSets from './modules/${getImportName(config, ModuleGeneratorSelectionSets)}'`,
       `export { schemaDrivenDataMap as schemaMap } from './modules/${
         getImportName(config, ModuleGeneratorSchemaDrivenDataMap)

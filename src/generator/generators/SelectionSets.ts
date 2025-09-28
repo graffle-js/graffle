@@ -61,11 +61,80 @@ export const ModuleGeneratorSelectionSets = createModuleGenerator(
       })
     })
 
+    // Generate root type inference utilities
+    if (config.schema.kindMap.index.Root.query) {
+      code`
+        import type * as ${$.$$Schema} from './schema.js'
+
+        // Helper type to extract variables from selection sets
+        type ExtractVariablesFromArgs<Args> = Args extends Record<string, any>
+          ? { [K in keyof Args as Args[K] extends ${$.$$Utilities}.DocumentBuilderKit.VariableMarker ? K : never]: boolean }
+          : {}
+
+        type ExtractVariables<T> = T extends Record<string, any>
+          ? T extends { $: infer Args }
+            ? ExtractVariablesFromArgs<Args> & ExtractVariables<Omit<T, '$'>>
+            : UnionToIntersection<{ [K in keyof T]: ExtractVariables<T[K]> }[keyof T]>
+          : {}
+
+        type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never
+
+        export type Query$Infer<$SelectionSet extends object> = ${$.$$Utilities}.DocumentBuilderKit.InferResult.OperationQuery<$SelectionSet, ${$.$$Schema}.${$.Schema}>
+        export type Query$Variables<$SelectionSet> = ExtractVariables<$SelectionSet>
+      `
+    }
+
+    if (config.schema.kindMap.index.Root.mutation) {
+      code`
+        ${!config.schema.kindMap.index.Root.query ? `import type * as ${$.$$Schema} from './schema.js'` : ''}
+        ${!config.schema.kindMap.index.Root.query ? `
+        // Helper type to extract variables from selection sets
+        type ExtractVariablesFromArgs<Args> = Args extends Record<string, any>
+          ? { [K in keyof Args as Args[K] extends ${$.$$Utilities}.DocumentBuilderKit.VariableMarker ? K : never]: boolean }
+          : {}
+
+        type ExtractVariables<T> = T extends Record<string, any>
+          ? T extends { $: infer Args }
+            ? ExtractVariablesFromArgs<Args> & ExtractVariables<Omit<T, '$'>>
+            : UnionToIntersection<{ [K in keyof T]: ExtractVariables<T[K]> }[keyof T]>
+          : {}
+
+        type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never
+        ` : ''}
+
+        export type Mutation$Infer<$SelectionSet extends object> = ${$.$$Utilities}.DocumentBuilderKit.InferResult.OperationMutation<$SelectionSet, ${$.$$Schema}.${$.Schema}>
+        export type Mutation$Variables<$SelectionSet> = ExtractVariables<$SelectionSet>
+      `
+    }
+
+    if (config.schema.kindMap.index.Root.subscription) {
+      code`
+        ${!config.schema.kindMap.index.Root.query && !config.schema.kindMap.index.Root.mutation ? `import type * as ${$.$$Schema} from './schema.js'` : ''}
+        ${!config.schema.kindMap.index.Root.query && !config.schema.kindMap.index.Root.mutation ? `
+        // Helper type to extract variables from selection sets
+        type ExtractVariablesFromArgs<Args> = Args extends Record<string, any>
+          ? { [K in keyof Args as Args[K] extends ${$.$$Utilities}.DocumentBuilderKit.VariableMarker ? K : never]: boolean }
+          : {}
+
+        type ExtractVariables<T> = T extends Record<string, any>
+          ? T extends { $: infer Args }
+            ? ExtractVariablesFromArgs<Args> & ExtractVariables<Omit<T, '$'>>
+            : UnionToIntersection<{ [K in keyof T]: ExtractVariables<T[K]> }[keyof T]>
+          : {}
+
+        type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never
+        ` : ''}
+
+        export type Subscription$Infer<$SelectionSet extends object> = ${$.$$Utilities}.DocumentBuilderKit.InferResult.OperationSubscription<$SelectionSet, ${$.$$Schema}.${$.Schema}>
+        export type Subscription$Variables<$SelectionSet> = ExtractVariables<$SelectionSet>
+      `
+    }
+
     code`
       /**
        * [1] These definitions serve to allow field selection interfaces to extend their respective object type without
        *     name clashing between the field name and the object name.
-       * 
+       *
        *     For example imagine \`Query.Foo\` field with type also called \`Foo\`. Our generated interfaces for each field
        *     would end up with an error of \`export interface Foo extends Foo ...\`
        */
@@ -348,23 +417,26 @@ const renderArgumentType = (type: Grafaid.Schema.InputTypes): string => {
 
   const nullableRendered = Grafaid.Schema.isNullableType(type) ? `| undefined | null` : ``
 
+  // Always allow VariableMarker for any argument type
+  const variableMarkerType = `| ${i.$$Utilities}.DocumentBuilderKit.VariableMarker`
+
   if (Grafaid.Schema.isListType(sansNullabilityType)) {
     const innerType = Grafaid.Schema.getNullableType(sansNullabilityType.ofType)
-    return `Array<${renderArgumentType(innerType)}> ${nullableRendered}`
+    return `Array<${renderArgumentType(innerType)}> ${nullableRendered} ${variableMarkerType}`
   }
 
   if (Grafaid.Schema.isScalarType(sansNullabilityType)) {
     if (Grafaid.Schema.isScalarTypeCustom(sansNullabilityType)) {
       const scalarTypeRendered =
         `${i.$$Utilities}.Schema.Scalar.GetDecoded<${i.$$Utilities}.Schema.Scalar.LookupCustomScalarOrFallbackToString<'${sansNullabilityType.name}', ${i._$Scalars}>>`
-      return `${scalarTypeRendered} ${nullableRendered}`
+      return `${scalarTypeRendered} ${nullableRendered} ${variableMarkerType}`
     }
     const scalarTypeRendered =
       Grafaid.StandardScalarTypeTypeScriptMapping[sansNullabilityType.name as Grafaid.StandardScalarTypeNames]
-    return `${scalarTypeRendered} ${nullableRendered}`
+    return `${scalarTypeRendered} ${nullableRendered} ${variableMarkerType}`
   }
 
-  return `${H.namedTypesReference(sansNullabilityType)} ${nullableRendered}`
+  return `${H.namedTypesReference(sansNullabilityType)} ${nullableRendered} ${variableMarkerType}`
 }
 
 // --------------------------------------------------------------------------------------------------

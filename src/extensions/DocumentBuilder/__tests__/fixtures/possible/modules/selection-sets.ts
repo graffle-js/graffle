@@ -439,7 +439,7 @@ export namespace Query {
   export interface InputObjectNested$Arguments<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > {
-    input?: $NamedTypes.$InputObjectNested<_$Scalars> | undefined | null
+    input?: $NamedTypes.$InputObjectNested<_$Scalars> | undefined | null | $$Utilities.DocumentBuilderKit.VariableMarker
   }
 
   // --- expanded ---
@@ -474,7 +474,7 @@ export namespace Query {
   export interface InputObjectNestedNonNull$Arguments<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > {
-    input: $NamedTypes.$InputObjectNestedNonNull<_$Scalars>
+    input: $NamedTypes.$InputObjectNestedNonNull<_$Scalars> | $$Utilities.DocumentBuilderKit.VariableMarker
   }
 
   // --- expanded ---
@@ -534,7 +534,11 @@ export namespace Query {
   export interface argInputObjectCircular$Arguments<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > {
-    input?: $NamedTypes.$InputObjectCircular<_$Scalars> | undefined | null
+    input?:
+      | $NamedTypes.$InputObjectCircular<_$Scalars>
+      | undefined
+      | null
+      | $$Utilities.DocumentBuilderKit.VariableMarker
   }
 
   // --- expanded ---
@@ -651,6 +655,7 @@ export namespace Query {
       >
       | undefined
       | null
+      | $$Utilities.DocumentBuilderKit.VariableMarker
   }
 
   // --- expanded ---
@@ -687,7 +692,7 @@ export namespace Query {
   export interface dateArgInputObject$Arguments<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > {
-    input?: $NamedTypes.$InputObject<_$Scalars> | undefined | null
+    input?: $NamedTypes.$InputObject<_$Scalars> | undefined | null | $$Utilities.DocumentBuilderKit.VariableMarker
   }
 
   // --- expanded ---
@@ -731,9 +736,11 @@ export namespace Query {
         >
         | undefined
         | null
+        | $$Utilities.DocumentBuilderKit.VariableMarker
       >
       | undefined
       | null
+      | $$Utilities.DocumentBuilderKit.VariableMarker
   }
 
   // --- expanded ---
@@ -768,9 +775,11 @@ export namespace Query {
   export interface dateArgNonNull$Arguments<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > {
-    date: $$Utilities.Schema.Scalar.GetDecoded<
-      $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', _$Scalars>
-    >
+    date:
+      | $$Utilities.Schema.Scalar.GetDecoded<
+        $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', _$Scalars>
+      >
+      | $$Utilities.DocumentBuilderKit.VariableMarker
   }
 
   // --- expanded ---
@@ -804,13 +813,16 @@ export namespace Query {
   export interface dateArgNonNullList$Arguments<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > {
-    date: Array<
-      | $$Utilities.Schema.Scalar.GetDecoded<
-        $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', _$Scalars>
+    date:
+      | Array<
+        | $$Utilities.Schema.Scalar.GetDecoded<
+          $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', _$Scalars>
+        >
+        | undefined
+        | null
+        | $$Utilities.DocumentBuilderKit.VariableMarker
       >
-      | undefined
-      | null
-    >
+      | $$Utilities.DocumentBuilderKit.VariableMarker
   }
 
   // --- expanded ---
@@ -844,13 +856,16 @@ export namespace Query {
   export interface dateArgNonNullListNonNull$Arguments<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > {
-    date: Array<
-      | $$Utilities.Schema.Scalar.GetDecoded<
-        $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', _$Scalars>
+    date:
+      | Array<
+        | $$Utilities.Schema.Scalar.GetDecoded<
+          $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', _$Scalars>
+        >
+        | undefined
+        | null
+        | $$Utilities.DocumentBuilderKit.VariableMarker
       >
-      | undefined
-      | null
-    >
+      | $$Utilities.DocumentBuilderKit.VariableMarker
   }
 
   // --- expanded ---
@@ -1057,7 +1072,7 @@ export namespace Query {
   export interface error$Arguments<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > {
-    case?: string | undefined | null
+    case?: string | undefined | null | $$Utilities.DocumentBuilderKit.VariableMarker
   }
 
   // --- expanded ---
@@ -1165,7 +1180,11 @@ export namespace Query {
   export interface interfaceHierarchyChildA$Arguments<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > {
-    $type?: $NamedTypes.$ChildAInterfaceHierarchyMember | undefined | null
+    $type?:
+      | $NamedTypes.$ChildAInterfaceHierarchyMember
+      | undefined
+      | null
+      | $$Utilities.DocumentBuilderKit.VariableMarker
   }
 
   // --- expanded ---
@@ -1199,7 +1218,11 @@ export namespace Query {
   export interface interfaceHierarchyChildB$Arguments<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > {
-    $type?: $NamedTypes.$ChildBInterfaceHierarchyMember | undefined | null
+    $type?:
+      | $NamedTypes.$ChildBInterfaceHierarchyMember
+      | undefined
+      | null
+      | $$Utilities.DocumentBuilderKit.VariableMarker
   }
 
   // --- expanded ---
@@ -1233,7 +1256,11 @@ export namespace Query {
   export interface interfaceHierarchyGrandparents$Arguments<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > {
-    $type?: $NamedTypes.$GrandparentInterfaceHierarchyMember | undefined | null
+    $type?:
+      | $NamedTypes.$GrandparentInterfaceHierarchyMember
+      | undefined
+      | null
+      | $$Utilities.DocumentBuilderKit.VariableMarker
   }
 
   // --- expanded ---
@@ -1267,7 +1294,11 @@ export namespace Query {
   export interface interfaceHierarchyParents$Arguments<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > {
-    $type?: $NamedTypes.$ParentInterfaceHierarchyMember | undefined | null
+    $type?:
+      | $NamedTypes.$ParentInterfaceHierarchyMember
+      | undefined
+      | null
+      | $$Utilities.DocumentBuilderKit.VariableMarker
   }
 
   // --- expanded ---
@@ -1324,7 +1355,7 @@ export namespace Query {
   export interface interfaceWithArgs$Arguments<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > {
-    id: string
+    id: string | $$Utilities.DocumentBuilderKit.VariableMarker
   }
 
   // --- expanded ---
@@ -1597,11 +1628,11 @@ export namespace Query {
   export interface objectWithArgs$Arguments<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > {
-    boolean?: boolean | undefined | null
-    float?: number | undefined | null
-    id?: string | undefined | null
-    int?: number | undefined | null
-    string?: string | undefined | null
+    boolean?: boolean | undefined | null | $$Utilities.DocumentBuilderKit.VariableMarker
+    float?: number | undefined | null | $$Utilities.DocumentBuilderKit.VariableMarker
+    id?: string | undefined | null | $$Utilities.DocumentBuilderKit.VariableMarker
+    int?: number | undefined | null | $$Utilities.DocumentBuilderKit.VariableMarker
+    string?: string | undefined | null | $$Utilities.DocumentBuilderKit.VariableMarker
   }
 
   // --- expanded ---
@@ -1634,7 +1665,7 @@ export namespace Query {
   export interface result$Arguments<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > {
-    $case: $NamedTypes.$Case
+    $case: $NamedTypes.$Case | $$Utilities.DocumentBuilderKit.VariableMarker
   }
 
   // --- expanded ---
@@ -1668,7 +1699,7 @@ export namespace Query {
   export interface resultNonNull$Arguments<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > {
-    $case?: $NamedTypes.$Case | undefined | null
+    $case?: $NamedTypes.$Case | undefined | null | $$Utilities.DocumentBuilderKit.VariableMarker
   }
 
   // --- expanded ---
@@ -1728,7 +1759,7 @@ export namespace Query {
   export interface stringWithArgEnum$Arguments<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > {
-    $ABCEnum?: $NamedTypes.$ABCEnum | undefined | null
+    $ABCEnum?: $NamedTypes.$ABCEnum | undefined | null | $$Utilities.DocumentBuilderKit.VariableMarker
   }
 
   // --- expanded ---
@@ -1765,7 +1796,7 @@ export namespace Query {
   export interface stringWithArgInputObject$Arguments<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > {
-    input?: $NamedTypes.$InputObject<_$Scalars> | undefined | null
+    input?: $NamedTypes.$InputObject<_$Scalars> | undefined | null | $$Utilities.DocumentBuilderKit.VariableMarker
   }
 
   // --- expanded ---
@@ -1800,7 +1831,7 @@ export namespace Query {
   export interface stringWithArgInputObjectEnum$Arguments<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > {
-    input: $NamedTypes.$InputObjectEnum<_$Scalars>
+    input: $NamedTypes.$InputObjectEnum<_$Scalars> | $$Utilities.DocumentBuilderKit.VariableMarker
   }
 
   // --- expanded ---
@@ -1834,7 +1865,7 @@ export namespace Query {
   export interface stringWithArgInputObjectRequired$Arguments<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > {
-    input: $NamedTypes.$InputObject<_$Scalars>
+    input: $NamedTypes.$InputObject<_$Scalars> | $$Utilities.DocumentBuilderKit.VariableMarker
   }
 
   // --- expanded ---
@@ -1870,17 +1901,17 @@ export namespace Query {
   export interface stringWithArgs$Arguments<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > {
-    boolean?: boolean | undefined | null
-    float?: number | undefined | null
-    id?: string | undefined | null
+    boolean?: boolean | undefined | null | $$Utilities.DocumentBuilderKit.VariableMarker
+    float?: number | undefined | null | $$Utilities.DocumentBuilderKit.VariableMarker
+    id?: string | undefined | null | $$Utilities.DocumentBuilderKit.VariableMarker
     /**
      * @deprecated Example of argument deprecation reason here.
      */
-    int?: number | undefined | null
+    int?: number | undefined | null | $$Utilities.DocumentBuilderKit.VariableMarker
     /**
      * Example of some argument documentation here.
      */
-    string?: string | undefined | null
+    string?: string | undefined | null | $$Utilities.DocumentBuilderKit.VariableMarker
   }
 
   // --- expanded ---
@@ -1917,7 +1948,11 @@ export namespace Query {
   export interface stringWithListArg$Arguments<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > {
-    ints?: Array<number | undefined | null> | undefined | null
+    ints?:
+      | Array<number | undefined | null | $$Utilities.DocumentBuilderKit.VariableMarker>
+      | undefined
+      | null
+      | $$Utilities.DocumentBuilderKit.VariableMarker
   }
 
   // --- expanded ---
@@ -1952,7 +1987,9 @@ export namespace Query {
   export interface stringWithListArgRequired$Arguments<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > {
-    ints: Array<number | undefined | null>
+    ints:
+      | Array<number | undefined | null | $$Utilities.DocumentBuilderKit.VariableMarker>
+      | $$Utilities.DocumentBuilderKit.VariableMarker
   }
 
   // --- expanded ---
@@ -1986,7 +2023,7 @@ export namespace Query {
   export interface stringWithRequiredArg$Arguments<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > {
-    string: string
+    string: string | $$Utilities.DocumentBuilderKit.VariableMarker
   }
 
   // --- expanded ---
@@ -2066,7 +2103,7 @@ export namespace Query {
   export interface unionFooBarWithArgs$Arguments<
     _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
   > {
-    id?: string | undefined | null
+    id?: string | undefined | null | $$Utilities.DocumentBuilderKit.VariableMarker
   }
 
   // --- expanded ---
@@ -2300,48 +2337,56 @@ export type ParentInterfaceHierarchyMember =
 export interface InputObject<
   _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
 > {
-  $abcEnum?: $NamedTypes.$ABCEnum | undefined | null
+  $abcEnum?: $NamedTypes.$ABCEnum | undefined | null | $$Utilities.DocumentBuilderKit.VariableMarker
   date?:
     | $$Utilities.Schema.Scalar.GetDecoded<
       $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', _$Scalars>
     >
     | undefined
     | null
-  dateRequired: $$Utilities.Schema.Scalar.GetDecoded<
-    $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', _$Scalars>
-  >
-  id?: string | undefined | null
-  idRequired: string
+    | $$Utilities.DocumentBuilderKit.VariableMarker
+  dateRequired:
+    | $$Utilities.Schema.Scalar.GetDecoded<
+      $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', _$Scalars>
+    >
+    | $$Utilities.DocumentBuilderKit.VariableMarker
+  id?: string | undefined | null | $$Utilities.DocumentBuilderKit.VariableMarker
+  idRequired: string | $$Utilities.DocumentBuilderKit.VariableMarker
 }
 
 export interface InputObjectCircular<
   _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
 > {
-  circular?: $NamedTypes.$InputObjectCircular<_$Scalars> | undefined | null
+  circular?:
+    | $NamedTypes.$InputObjectCircular<_$Scalars>
+    | undefined
+    | null
+    | $$Utilities.DocumentBuilderKit.VariableMarker
   date?:
     | $$Utilities.Schema.Scalar.GetDecoded<
       $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', _$Scalars>
     >
     | undefined
     | null
+    | $$Utilities.DocumentBuilderKit.VariableMarker
 }
 
 export interface InputObjectEnum<
   _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
 > {
-  $abcEnum?: $NamedTypes.$ABCEnum | undefined | null
+  $abcEnum?: $NamedTypes.$ABCEnum | undefined | null | $$Utilities.DocumentBuilderKit.VariableMarker
 }
 
 export interface InputObjectNested<
   _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
 > {
-  InputObject?: $NamedTypes.$InputObject<_$Scalars> | undefined | null
+  InputObject?: $NamedTypes.$InputObject<_$Scalars> | undefined | null | $$Utilities.DocumentBuilderKit.VariableMarker
 }
 
 export interface InputObjectNestedNonNull<
   _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
 > {
-  InputObject: $NamedTypes.$InputObject<_$Scalars>
+  InputObject: $NamedTypes.$InputObject<_$Scalars> | $$Utilities.DocumentBuilderKit.VariableMarker
 }
 
 //
@@ -4897,6 +4942,30 @@ export namespace InterfaceParent {
   >
 }
 
+import type * as $$Schema from './schema.js'
+
+// Helper type to extract variables from selection sets
+type ExtractVariablesFromArgs<Args> = Args extends Record<string, any>
+  ? { [K in keyof Args as Args[K] extends $$Utilities.DocumentBuilderKit.VariableMarker ? K : never]: boolean }
+  : {}
+
+type ExtractVariables<T> = T extends Record<string, any>
+  ? T extends { $: infer Args } ? ExtractVariablesFromArgs<Args> & ExtractVariables<Omit<T, '$'>>
+  : UnionToIntersection<{ [K in keyof T]: ExtractVariables<T[K]> }[keyof T]>
+  : {}
+
+type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never
+
+export type Query$Infer<$SelectionSet extends object> = $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+  $SelectionSet,
+  $$Schema.Schema
+>
+export type Query$Variables<$SelectionSet> = ExtractVariables<$SelectionSet>
+export type Mutation$Infer<$SelectionSet extends object> = $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+  $SelectionSet,
+  $$Schema.Schema
+>
+export type Mutation$Variables<$SelectionSet> = ExtractVariables<$SelectionSet>
 /**
  * [1] These definitions serve to allow field selection interfaces to extend their respective object type without
  *     name clashing between the field name and the object name.

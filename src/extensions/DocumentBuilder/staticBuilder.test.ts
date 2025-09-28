@@ -1,8 +1,9 @@
+import { Graffle } from '#extensions/DocumentBuilder/__tests__/fixtures/possible/_namespace.js'
 import type { Grafaid } from '#lib/grafaid/_namespace.js'
 import { Ts } from '@wollybeard/kit'
 import { Test } from '@wollybeard/kit/test'
 import { OperationTypeNode } from 'graphql'
-import { expect, test } from 'vitest'
+import { expect, expectTypeOf, test } from 'vitest'
 import { Possible } from './__tests__/fixtures/possible/_namespace.js'
 import { createStaticRootType } from './staticBuilder.js'
 import { $var } from './variable.js'
@@ -79,7 +80,12 @@ test('static builder type inference', () => {
   Ts.assertEqual<Grafaid.Document.Typed.String<{ object: { id: string } }, {}>>()(actual)
 })
 
-test('static builder type inference with $var', () => {
+test('static builder type inference with $var', async () => {
   const actual = Possible.query.stringWithArgs({ $: { boolean: $var } })
-  Ts.assertEqual<Grafaid.Document.Typed.String<{ stringWithArgs: string }, { boolean: boolean }>>()(actual)
+  const graffle = Possible.create()
+  const x = await graffle.gql(actual).send({ boolean: true })
+  // type z = Grafaid.Document.Typed.String<{ stringWithArgs: string|null }|null, { boolean: boolean }>
+  type z = 5
+  // Ts.assertEqual<z>()(actual)
+  expectTypeOf(actual).toEqualTypeOf<z>()
 })

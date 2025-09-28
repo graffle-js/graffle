@@ -10,7 +10,7 @@ const VarSymbol = Symbol.for(`graffle.var`)
  * Used to indicate that an argument should become a GraphQL variable
  * rather than a hardcoded value in the query.
  */
-class VariableMarker {
+export class VariableMarker {
   [VarSymbol] = true
   _name?: string
   _default?: unknown

@@ -139,6 +139,25 @@ export namespace Query {
   >
 }
 
+import type * as $$Schema from './schema.js'
+
+// Helper type to extract variables from selection sets
+type ExtractVariablesFromArgs<Args> = Args extends Record<string, any>
+  ? { [K in keyof Args as Args[K] extends $$Utilities.DocumentBuilderKit.VariableMarker ? K : never]: boolean }
+  : {}
+
+type ExtractVariables<T> = T extends Record<string, any>
+  ? T extends { $: infer Args } ? ExtractVariablesFromArgs<Args> & ExtractVariables<Omit<T, '$'>>
+  : UnionToIntersection<{ [K in keyof T]: ExtractVariables<T[K]> }[keyof T]>
+  : {}
+
+type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never
+
+export type Query$Infer<$SelectionSet extends object> = $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+  $SelectionSet,
+  $$Schema.Schema
+>
+export type Query$Variables<$SelectionSet> = ExtractVariables<$SelectionSet>
 /**
  * [1] These definitions serve to allow field selection interfaces to extend their respective object type without
  *     name clashing between the field name and the object name.
