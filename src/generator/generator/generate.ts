@@ -13,6 +13,7 @@ import { ModuleGeneratorSchema } from '../generators/Schema.js'
 import { ModuleGeneratorSchemaDrivenDataMap } from '../generators/SchemaDrivenDataMap.js'
 import { ModuleGeneratorSelect } from '../generators/Select.js'
 import { ModuleGeneratorSelectionSets } from '../generators/SelectionSets.js'
+import { ModuleGeneratorTada } from '../generators/Tada.js'
 import { getFileName, isExportsModule } from '../helpers/moduleGenerator.js'
 
 const moduleGenerators = [
@@ -20,6 +21,7 @@ const moduleGenerators = [
   ModuleGeneratorClient,
   ModuleGeneratorData,
   ModuleGeneratorScalar,
+  ModuleGeneratorTada,
   // Packaging Stuff
   ModuleGenerator_namespace,
   ModuleGenerator_exports,
