@@ -1,7 +1,6 @@
 import type * as $$Utilities from '../../../../../../exports/utilities-for-generated.js'
 import * as CustomScalars from '../../possible.scalars.js'
-
-export * from '../../possible.scalars.js'
+export { bigint, Date } from '../../possible.scalars.js'
 //
 //
 //

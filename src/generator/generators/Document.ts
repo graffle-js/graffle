@@ -15,6 +15,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
     code`
       import { createStaticRootType } from '${config.paths.imports.grafflePackage.extensionDocumentBuilder}'
       import { OperationTypeNode } from 'graphql'
+      import type { TypedDocument } from '${config.paths.imports.grafflePackage.client}'
       import type * as SelectionSets from './selection-sets.js'
     `
 
@@ -23,8 +24,8 @@ export const ModuleGeneratorDocument = createModuleGenerator(
       code`
         export interface QueryBuilder {
           ${
-        Object.keys(queryType.fields ?? {}).map(fieldName =>
-          `${fieldName}: <$SelectionSet extends SelectionSets.Query['${fieldName}']>(selection?: $SelectionSet) => string`
+        Object.keys(queryType.getFields()).map(fieldName =>
+          `${fieldName}: <$SelectionSet extends SelectionSets.Query['${fieldName}']>(selection?: $SelectionSet) => TypedDocument.String<SelectionSets.Query$Infer<{ ${fieldName}: $SelectionSet }>, SelectionSets.Query$Variables<{ ${fieldName}: $SelectionSet }>>`
         ).join('\n  ')
       }
         }
@@ -37,8 +38,8 @@ export const ModuleGeneratorDocument = createModuleGenerator(
       code`
         export interface MutationBuilder {
           ${
-        Object.keys(mutationType.fields ?? {}).map(fieldName =>
-          `${fieldName}: <$SelectionSet extends SelectionSets.Mutation['${fieldName}']>(selection?: $SelectionSet) => string`
+        Object.keys(mutationType.getFields()).map(fieldName =>
+          `${fieldName}: <$SelectionSet extends SelectionSets.Mutation['${fieldName}']>(selection?: $SelectionSet) => TypedDocument.String<SelectionSets.Mutation$Infer<{ ${fieldName}: $SelectionSet }>, SelectionSets.Mutation$Variables<{ ${fieldName}: $SelectionSet }>>`
         ).join('\n  ')
       }
         }
@@ -51,8 +52,8 @@ export const ModuleGeneratorDocument = createModuleGenerator(
       code`
         export interface SubscriptionBuilder {
           ${
-        Object.keys(subscriptionType.fields ?? {}).map(fieldName =>
-          `${fieldName}: <$SelectionSet extends SelectionSets.Subscription['${fieldName}']>(selection?: $SelectionSet) => string`
+        Object.keys(subscriptionType.getFields()).map(fieldName =>
+          `${fieldName}: <$SelectionSet extends SelectionSets.Subscription['${fieldName}']>(selection?: $SelectionSet) => TypedDocument.String<SelectionSets.Subscription$Infer<{ ${fieldName}: $SelectionSet }>, SelectionSets.Subscription$Variables<{ ${fieldName}: $SelectionSet }>>`
         ).join('\n  ')
       }
         }
