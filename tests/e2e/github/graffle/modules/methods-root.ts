@@ -6,7 +6,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   $batch: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Query<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutput<
@@ -35,7 +38,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   codeOfConduct: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.codeOfConduct<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Query.codeOfConduct<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -54,7 +60,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   codesOfConduct: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.codesOfConduct<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Query.codesOfConduct<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -73,7 +82,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   enterprise: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.enterprise<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Query.enterprise<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -94,7 +106,9 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Query.enterpriseAdministratorInvitation<$Context['scalars']>
+        $$SelectionSets.Query.enterpriseAdministratorInvitation<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -116,7 +130,9 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Query.enterpriseAdministratorInvitationByToken<$Context['scalars']>
+        $$SelectionSets.Query.enterpriseAdministratorInvitationByToken<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -138,7 +154,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Query.enterpriseMemberInvitation<$Context['scalars']>
+        $$SelectionSets.Query.enterpriseMemberInvitation<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -160,7 +176,9 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Query.enterpriseMemberInvitationByToken<$Context['scalars']>
+        $$SelectionSets.Query.enterpriseMemberInvitationByToken<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -180,7 +198,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   id: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.id<$Context['scalars']>>,
+      selectionSet?: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Query.id<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -199,7 +220,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   license: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.license<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Query.license<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -218,7 +242,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   licenses: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.licenses<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Query.licenses<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -237,7 +264,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   marketplaceCategories: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.marketplaceCategories<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Query.marketplaceCategories<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -256,7 +286,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   marketplaceCategory: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.marketplaceCategory<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Query.marketplaceCategory<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -275,7 +308,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   marketplaceListing: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.marketplaceListing<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Query.marketplaceListing<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -294,7 +330,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   marketplaceListings: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.marketplaceListings<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Query.marketplaceListings<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -313,7 +352,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   meta: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.meta<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Query.meta<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -332,7 +374,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   node: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.node<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Query.node<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -351,7 +396,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   nodes: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.nodes<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Query.nodes<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -370,7 +418,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   organization: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.organization<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Query.organization<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -389,7 +440,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   rateLimit: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.rateLimit<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Query.rateLimit<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -409,7 +463,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   relay: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.relay<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Query.relay<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -428,7 +485,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   repository: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.repository<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Query.repository<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -447,7 +507,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   repositoryOwner: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.repositoryOwner<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Query.repositoryOwner<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -466,7 +529,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   resource: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.resource<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Query.resource<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -485,7 +551,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   search: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.search<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Query.search<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -504,7 +573,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   securityAdvisories: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.securityAdvisories<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Query.securityAdvisories<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -523,7 +595,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   securityAdvisory: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.securityAdvisory<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Query.securityAdvisory<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -544,7 +619,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Query.securityVulnerabilities<$Context['scalars']>
+        $$SelectionSets.Query.securityVulnerabilities<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -564,7 +639,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   sponsorables: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.sponsorables<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Query.sponsorables<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -583,7 +661,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   topic: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.topic<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Query.topic<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -602,7 +683,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   user: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.user<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Query.user<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -621,7 +705,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   viewer: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.viewer<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Query.viewer<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -640,7 +727,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   $batch: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutput<
@@ -671,7 +761,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.abortQueuedMigrations<$Context['scalars']>
+        $$SelectionSets.Mutation.abortQueuedMigrations<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -693,7 +783,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.abortRepositoryMigration<$Context['scalars']>
+        $$SelectionSets.Mutation.abortRepositoryMigration<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -715,7 +805,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.acceptEnterpriseAdministratorInvitation<$Context['scalars']>
+        $$SelectionSets.Mutation.acceptEnterpriseAdministratorInvitation<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -737,7 +829,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.acceptEnterpriseMemberInvitation<$Context['scalars']>
+        $$SelectionSets.Mutation.acceptEnterpriseMemberInvitation<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -759,7 +853,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.acceptTopicSuggestion<$Context['scalars']>
+        $$SelectionSets.Mutation.acceptTopicSuggestion<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -781,7 +875,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.accessUserNamespaceRepository<$Context['scalars']>
+        $$SelectionSets.Mutation.accessUserNamespaceRepository<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -803,7 +899,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.addAssigneesToAssignable<$Context['scalars']>
+        $$SelectionSets.Mutation.addAssigneesToAssignable<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -823,7 +919,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   addComment: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.addComment<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.addComment<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -844,7 +943,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.addDiscussionComment<$Context['scalars']>
+        $$SelectionSets.Mutation.addDiscussionComment<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -866,7 +965,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.addDiscussionPollVote<$Context['scalars']>
+        $$SelectionSets.Mutation.addDiscussionPollVote<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -888,7 +987,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.addEnterpriseOrganizationMember<$Context['scalars']>
+        $$SelectionSets.Mutation.addEnterpriseOrganizationMember<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -910,7 +1011,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.addEnterpriseSupportEntitlement<$Context['scalars']>
+        $$SelectionSets.Mutation.addEnterpriseSupportEntitlement<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -932,7 +1035,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.addLabelsToLabelable<$Context['scalars']>
+        $$SelectionSets.Mutation.addLabelsToLabelable<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -952,7 +1055,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   addProjectCard: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.addProjectCard<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.addProjectCard<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -971,7 +1077,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   addProjectColumn: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.addProjectColumn<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.addProjectColumn<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -992,7 +1101,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.addProjectV2DraftIssue<$Context['scalars']>
+        $$SelectionSets.Mutation.addProjectV2DraftIssue<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -1014,7 +1123,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.addProjectV2ItemById<$Context['scalars']>
+        $$SelectionSets.Mutation.addProjectV2ItemById<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -1036,7 +1145,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.addPullRequestReview<$Context['scalars']>
+        $$SelectionSets.Mutation.addPullRequestReview<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -1058,7 +1167,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.addPullRequestReviewComment<$Context['scalars']>
+        $$SelectionSets.Mutation.addPullRequestReviewComment<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -1080,7 +1189,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.addPullRequestReviewThread<$Context['scalars']>
+        $$SelectionSets.Mutation.addPullRequestReviewThread<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -1102,7 +1211,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.addPullRequestReviewThreadReply<$Context['scalars']>
+        $$SelectionSets.Mutation.addPullRequestReviewThreadReply<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -1122,7 +1233,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   addReaction: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.addReaction<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.addReaction<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1141,7 +1255,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   addStar: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.addStar<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.addStar<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1160,7 +1277,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   addSubIssue: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.addSubIssue<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.addSubIssue<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1179,7 +1299,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   addUpvote: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.addUpvote<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.addUpvote<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1198,7 +1321,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   addVerifiableDomain: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.addVerifiableDomain<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.addVerifiableDomain<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1217,7 +1343,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   approveDeployments: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.approveDeployments<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.approveDeployments<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1238,7 +1367,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.approveVerifiableDomain<$Context['scalars']>
+        $$SelectionSets.Mutation.approveVerifiableDomain<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -1260,7 +1389,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.archiveProjectV2Item<$Context['scalars']>
+        $$SelectionSets.Mutation.archiveProjectV2Item<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -1280,7 +1409,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   archiveRepository: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.archiveRepository<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.archiveRepository<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1301,7 +1433,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.cancelEnterpriseAdminInvitation<$Context['scalars']>
+        $$SelectionSets.Mutation.cancelEnterpriseAdminInvitation<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -1323,7 +1457,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.cancelEnterpriseMemberInvitation<$Context['scalars']>
+        $$SelectionSets.Mutation.cancelEnterpriseMemberInvitation<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -1343,7 +1479,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   cancelSponsorship: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.cancelSponsorship<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.cancelSponsorship<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1362,7 +1501,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   changeUserStatus: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.changeUserStatus<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.changeUserStatus<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1383,7 +1525,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.clearLabelsFromLabelable<$Context['scalars']>
+        $$SelectionSets.Mutation.clearLabelsFromLabelable<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -1407,7 +1549,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.clearProjectV2ItemFieldValue<$Context['scalars']>
+        $$SelectionSets.Mutation.clearProjectV2ItemFieldValue<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -1427,7 +1569,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   cloneProject: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.cloneProject<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.cloneProject<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1448,7 +1593,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.cloneTemplateRepository<$Context['scalars']>
+        $$SelectionSets.Mutation.cloneTemplateRepository<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -1468,7 +1613,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   closeDiscussion: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.closeDiscussion<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.closeDiscussion<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1487,7 +1635,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   closeIssue: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.closeIssue<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.closeIssue<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1506,7 +1657,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   closePullRequest: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.closePullRequest<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.closePullRequest<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1527,7 +1681,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.convertProjectCardNoteToIssue<$Context['scalars']>
+        $$SelectionSets.Mutation.convertProjectCardNoteToIssue<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -1549,7 +1705,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.convertProjectV2DraftIssueItemToIssue<$Context['scalars']>
+        $$SelectionSets.Mutation.convertProjectV2DraftIssueItemToIssue<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -1571,7 +1729,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.convertPullRequestToDraft<$Context['scalars']>
+        $$SelectionSets.Mutation.convertPullRequestToDraft<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -1591,7 +1749,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   copyProjectV2: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.copyProjectV2<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.copyProjectV2<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1612,7 +1773,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.createAttributionInvitation<$Context['scalars']>
+        $$SelectionSets.Mutation.createAttributionInvitation<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -1634,7 +1795,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.createBranchProtectionRule<$Context['scalars']>
+        $$SelectionSets.Mutation.createBranchProtectionRule<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -1654,7 +1815,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   createCheckRun: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.createCheckRun<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.createCheckRun<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1673,7 +1837,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   createCheckSuite: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.createCheckSuite<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.createCheckSuite<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1735,7 +1902,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.createCommitOnBranch<$Context['scalars']>
+        $$SelectionSets.Mutation.createCommitOnBranch<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -1755,7 +1922,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   createDeployment: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.createDeployment<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.createDeployment<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1776,7 +1946,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.createDeploymentStatus<$Context['scalars']>
+        $$SelectionSets.Mutation.createDeploymentStatus<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -1796,7 +1966,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   createDiscussion: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.createDiscussion<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.createDiscussion<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1822,7 +1995,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.createEnterpriseOrganization<$Context['scalars']>
+        $$SelectionSets.Mutation.createEnterpriseOrganization<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -1842,7 +2015,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   createEnvironment: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.createEnvironment<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.createEnvironment<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1863,7 +2039,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.createIpAllowListEntry<$Context['scalars']>
+        $$SelectionSets.Mutation.createIpAllowListEntry<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -1883,7 +2059,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   createIssue: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.createIssue<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.createIssue<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1902,7 +2081,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   createLabel: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.createLabel<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.createLabel<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1921,7 +2103,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   createLinkedBranch: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.createLinkedBranch<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.createLinkedBranch<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1942,7 +2127,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.createMigrationSource<$Context['scalars']>
+        $$SelectionSets.Mutation.createMigrationSource<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -1962,7 +2147,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   createProject: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.createProject<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.createProject<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1981,7 +2169,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   createProjectV2: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.createProjectV2<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.createProjectV2<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2002,7 +2193,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.createProjectV2Field<$Context['scalars']>
+        $$SelectionSets.Mutation.createProjectV2Field<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -2024,7 +2215,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.createProjectV2StatusUpdate<$Context['scalars']>
+        $$SelectionSets.Mutation.createProjectV2StatusUpdate<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -2044,7 +2235,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   createPullRequest: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.createPullRequest<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.createPullRequest<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2063,7 +2257,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   createRef: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.createRef<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.createRef<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2082,7 +2279,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   createRepository: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.createRepository<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.createRepository<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2103,7 +2303,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.createRepositoryRuleset<$Context['scalars']>
+        $$SelectionSets.Mutation.createRepositoryRuleset<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -2125,7 +2325,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.createSponsorsListing<$Context['scalars']>
+        $$SelectionSets.Mutation.createSponsorsListing<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -2145,7 +2345,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   createSponsorsTier: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.createSponsorsTier<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.createSponsorsTier<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2164,7 +2367,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   createSponsorship: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.createSponsorship<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.createSponsorship<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2184,7 +2390,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   createSponsorships: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.createSponsorships<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.createSponsorships<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2205,7 +2414,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.createTeamDiscussion<$Context['scalars']>
+        $$SelectionSets.Mutation.createTeamDiscussion<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -2227,7 +2436,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.createTeamDiscussionComment<$Context['scalars']>
+        $$SelectionSets.Mutation.createTeamDiscussionComment<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -2247,7 +2456,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   createUserList: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.createUserList<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.createUserList<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2268,7 +2480,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.declineTopicSuggestion<$Context['scalars']>
+        $$SelectionSets.Mutation.declineTopicSuggestion<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -2290,7 +2502,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.deleteBranchProtectionRule<$Context['scalars']>
+        $$SelectionSets.Mutation.deleteBranchProtectionRule<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -2310,7 +2522,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   deleteDeployment: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.deleteDeployment<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.deleteDeployment<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2329,7 +2544,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   deleteDiscussion: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.deleteDiscussion<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.deleteDiscussion<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2350,7 +2568,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.deleteDiscussionComment<$Context['scalars']>
+        $$SelectionSets.Mutation.deleteDiscussionComment<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -2370,7 +2588,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   deleteEnvironment: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.deleteEnvironment<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.deleteEnvironment<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2391,7 +2612,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.deleteIpAllowListEntry<$Context['scalars']>
+        $$SelectionSets.Mutation.deleteIpAllowListEntry<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -2411,7 +2632,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   deleteIssue: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.deleteIssue<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.deleteIssue<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2430,7 +2654,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   deleteIssueComment: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.deleteIssueComment<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.deleteIssueComment<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2449,7 +2676,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   deleteLabel: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.deleteLabel<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.deleteLabel<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2468,7 +2698,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   deleteLinkedBranch: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.deleteLinkedBranch<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.deleteLinkedBranch<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2489,7 +2722,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.deletePackageVersion<$Context['scalars']>
+        $$SelectionSets.Mutation.deletePackageVersion<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -2509,7 +2742,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   deleteProject: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.deleteProject<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.deleteProject<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2528,7 +2764,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   deleteProjectCard: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.deleteProjectCard<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.deleteProjectCard<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2547,7 +2786,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   deleteProjectColumn: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.deleteProjectColumn<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.deleteProjectColumn<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2566,7 +2808,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   deleteProjectV2: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.deleteProjectV2<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.deleteProjectV2<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2587,7 +2832,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.deleteProjectV2Field<$Context['scalars']>
+        $$SelectionSets.Mutation.deleteProjectV2Field<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -2607,7 +2852,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   deleteProjectV2Item: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.deleteProjectV2Item<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.deleteProjectV2Item<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2628,7 +2876,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.deleteProjectV2StatusUpdate<$Context['scalars']>
+        $$SelectionSets.Mutation.deleteProjectV2StatusUpdate<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -2650,7 +2898,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.deleteProjectV2Workflow<$Context['scalars']>
+        $$SelectionSets.Mutation.deleteProjectV2Workflow<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -2672,7 +2920,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.deletePullRequestReview<$Context['scalars']>
+        $$SelectionSets.Mutation.deletePullRequestReview<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -2694,7 +2942,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.deletePullRequestReviewComment<$Context['scalars']>
+        $$SelectionSets.Mutation.deletePullRequestReviewComment<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -2714,7 +2964,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   deleteRef: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.deleteRef<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.deleteRef<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2735,7 +2988,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.deleteRepositoryRuleset<$Context['scalars']>
+        $$SelectionSets.Mutation.deleteRepositoryRuleset<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -2757,7 +3010,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.deleteTeamDiscussion<$Context['scalars']>
+        $$SelectionSets.Mutation.deleteTeamDiscussion<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -2779,7 +3032,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.deleteTeamDiscussionComment<$Context['scalars']>
+        $$SelectionSets.Mutation.deleteTeamDiscussionComment<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -2799,7 +3052,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   deleteUserList: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.deleteUserList<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.deleteUserList<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2820,7 +3076,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.deleteVerifiableDomain<$Context['scalars']>
+        $$SelectionSets.Mutation.deleteVerifiableDomain<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -2840,7 +3096,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   dequeuePullRequest: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.dequeuePullRequest<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.dequeuePullRequest<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2861,7 +3120,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.disablePullRequestAutoMerge<$Context['scalars']>
+        $$SelectionSets.Mutation.disablePullRequestAutoMerge<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -2883,7 +3142,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.dismissPullRequestReview<$Context['scalars']>
+        $$SelectionSets.Mutation.dismissPullRequestReview<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -2905,7 +3164,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.dismissRepositoryVulnerabilityAlert<$Context['scalars']>
+        $$SelectionSets.Mutation.dismissRepositoryVulnerabilityAlert<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -2927,7 +3188,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.enablePullRequestAutoMerge<$Context['scalars']>
+        $$SelectionSets.Mutation.enablePullRequestAutoMerge<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -2947,7 +3208,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   enqueuePullRequest: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.enqueuePullRequest<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.enqueuePullRequest<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2966,7 +3230,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   followOrganization: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.followOrganization<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.followOrganization<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2985,7 +3252,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   followUser: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.followUser<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.followUser<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3006,7 +3276,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.grantEnterpriseOrganizationsMigratorRole<$Context['scalars']>
+        $$SelectionSets.Mutation.grantEnterpriseOrganizationsMigratorRole<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -3026,7 +3298,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   grantMigratorRole: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.grantMigratorRole<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.grantMigratorRole<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3045,7 +3320,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   importProject: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.importProject<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.importProject<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3066,7 +3344,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.inviteEnterpriseAdmin<$Context['scalars']>
+        $$SelectionSets.Mutation.inviteEnterpriseAdmin<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -3088,7 +3366,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.inviteEnterpriseMember<$Context['scalars']>
+        $$SelectionSets.Mutation.inviteEnterpriseMember<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -3110,7 +3388,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.linkProjectV2ToRepository<$Context['scalars']>
+        $$SelectionSets.Mutation.linkProjectV2ToRepository<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -3130,7 +3408,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   linkProjectV2ToTeam: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.linkProjectV2ToTeam<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.linkProjectV2ToTeam<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3151,7 +3432,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.linkRepositoryToProject<$Context['scalars']>
+        $$SelectionSets.Mutation.linkRepositoryToProject<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -3171,7 +3452,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   lockLockable: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.lockLockable<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.lockLockable<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3192,7 +3476,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.markDiscussionCommentAsAnswer<$Context['scalars']>
+        $$SelectionSets.Mutation.markDiscussionCommentAsAnswer<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -3212,7 +3498,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   markFileAsViewed: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.markFileAsViewed<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.markFileAsViewed<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3233,7 +3522,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.markProjectV2AsTemplate<$Context['scalars']>
+        $$SelectionSets.Mutation.markProjectV2AsTemplate<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -3255,7 +3544,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.markPullRequestReadyForReview<$Context['scalars']>
+        $$SelectionSets.Mutation.markPullRequestReadyForReview<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -3275,7 +3566,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   mergeBranch: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.mergeBranch<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.mergeBranch<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3294,7 +3588,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   mergePullRequest: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.mergePullRequest<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.mergePullRequest<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3313,7 +3610,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   minimizeComment: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.minimizeComment<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.minimizeComment<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3332,7 +3632,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   moveProjectCard: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.moveProjectCard<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.moveProjectCard<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3351,7 +3654,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   moveProjectColumn: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.moveProjectColumn<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.moveProjectColumn<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3370,7 +3676,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   pinEnvironment: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.pinEnvironment<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.pinEnvironment<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3389,7 +3698,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   pinIssue: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.pinIssue<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.pinIssue<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3408,7 +3720,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   publishSponsorsTier: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.publishSponsorsTier<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.publishSponsorsTier<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3429,7 +3744,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.regenerateEnterpriseIdentityProviderRecoveryCodes<$Context['scalars']>
+        $$SelectionSets.Mutation.regenerateEnterpriseIdentityProviderRecoveryCodes<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -3451,7 +3768,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.regenerateVerifiableDomainToken<$Context['scalars']>
+        $$SelectionSets.Mutation.regenerateVerifiableDomainToken<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -3471,7 +3790,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   rejectDeployments: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.rejectDeployments<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.rejectDeployments<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3492,7 +3814,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.removeAssigneesFromAssignable<$Context['scalars']>
+        $$SelectionSets.Mutation.removeAssigneesFromAssignable<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -3514,7 +3838,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.removeEnterpriseAdmin<$Context['scalars']>
+        $$SelectionSets.Mutation.removeEnterpriseAdmin<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -3537,7 +3861,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.removeEnterpriseIdentityProvider<$Context['scalars']>
+        $$SelectionSets.Mutation.removeEnterpriseIdentityProvider<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -3559,7 +3885,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.removeEnterpriseMember<$Context['scalars']>
+        $$SelectionSets.Mutation.removeEnterpriseMember<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -3581,7 +3907,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.removeEnterpriseOrganization<$Context['scalars']>
+        $$SelectionSets.Mutation.removeEnterpriseOrganization<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -3603,7 +3929,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.removeEnterpriseSupportEntitlement<$Context['scalars']>
+        $$SelectionSets.Mutation.removeEnterpriseSupportEntitlement<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -3625,7 +3953,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.removeLabelsFromLabelable<$Context['scalars']>
+        $$SelectionSets.Mutation.removeLabelsFromLabelable<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -3647,7 +3975,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.removeOutsideCollaborator<$Context['scalars']>
+        $$SelectionSets.Mutation.removeOutsideCollaborator<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -3667,7 +3995,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   removeReaction: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.removeReaction<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.removeReaction<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3686,7 +4017,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   removeStar: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.removeStar<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.removeStar<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3705,7 +4039,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   removeSubIssue: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.removeSubIssue<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.removeSubIssue<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3724,7 +4061,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   removeUpvote: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.removeUpvote<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.removeUpvote<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3743,7 +4083,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   reopenDiscussion: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.reopenDiscussion<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.reopenDiscussion<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3762,7 +4105,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   reopenIssue: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.reopenIssue<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.reopenIssue<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3781,7 +4127,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   reopenPullRequest: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.reopenPullRequest<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.reopenPullRequest<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3800,7 +4149,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   reorderEnvironment: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.reorderEnvironment<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.reorderEnvironment<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3821,7 +4173,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.reprioritizeSubIssue<$Context['scalars']>
+        $$SelectionSets.Mutation.reprioritizeSubIssue<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -3841,7 +4193,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   requestReviews: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.requestReviews<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.requestReviews<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3860,7 +4215,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   rerequestCheckSuite: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.rerequestCheckSuite<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.rerequestCheckSuite<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3879,7 +4237,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   resolveReviewThread: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.resolveReviewThread<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.resolveReviewThread<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3898,7 +4259,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   retireSponsorsTier: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.retireSponsorsTier<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.retireSponsorsTier<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3917,7 +4281,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   revertPullRequest: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.revertPullRequest<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.revertPullRequest<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3938,7 +4305,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.revokeEnterpriseOrganizationsMigratorRole<$Context['scalars']>
+        $$SelectionSets.Mutation.revokeEnterpriseOrganizationsMigratorRole<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -3958,7 +4327,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   revokeMigratorRole: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.revokeMigratorRole<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.revokeMigratorRole<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -3979,7 +4351,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.setEnterpriseIdentityProvider<$Context['scalars']>
+        $$SelectionSets.Mutation.setEnterpriseIdentityProvider<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -4001,7 +4375,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.setOrganizationInteractionLimit<$Context['scalars']>
+        $$SelectionSets.Mutation.setOrganizationInteractionLimit<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -4023,7 +4399,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.setRepositoryInteractionLimit<$Context['scalars']>
+        $$SelectionSets.Mutation.setRepositoryInteractionLimit<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -4045,7 +4423,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.setUserInteractionLimit<$Context['scalars']>
+        $$SelectionSets.Mutation.setUserInteractionLimit<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -4067,7 +4445,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.startOrganizationMigration<$Context['scalars']>
+        $$SelectionSets.Mutation.startOrganizationMigration<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -4089,7 +4467,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.startRepositoryMigration<$Context['scalars']>
+        $$SelectionSets.Mutation.startRepositoryMigration<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -4111,7 +4489,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.submitPullRequestReview<$Context['scalars']>
+        $$SelectionSets.Mutation.submitPullRequestReview<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -4133,7 +4511,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.transferEnterpriseOrganization<$Context['scalars']>
+        $$SelectionSets.Mutation.transferEnterpriseOrganization<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -4153,7 +4533,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   transferIssue: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.transferIssue<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.transferIssue<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -4174,7 +4557,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.unarchiveProjectV2Item<$Context['scalars']>
+        $$SelectionSets.Mutation.unarchiveProjectV2Item<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -4194,7 +4577,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   unarchiveRepository: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.unarchiveRepository<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.unarchiveRepository<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -4215,7 +4601,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.unfollowOrganization<$Context['scalars']>
+        $$SelectionSets.Mutation.unfollowOrganization<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -4235,7 +4621,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   unfollowUser: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.unfollowUser<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.unfollowUser<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -4256,7 +4645,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.unlinkProjectV2FromRepository<$Context['scalars']>
+        $$SelectionSets.Mutation.unlinkProjectV2FromRepository<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -4278,7 +4669,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.unlinkProjectV2FromTeam<$Context['scalars']>
+        $$SelectionSets.Mutation.unlinkProjectV2FromTeam<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -4300,7 +4691,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.unlinkRepositoryFromProject<$Context['scalars']>
+        $$SelectionSets.Mutation.unlinkRepositoryFromProject<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -4320,7 +4711,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   unlockLockable: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.unlockLockable<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.unlockLockable<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -4341,7 +4735,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.unmarkDiscussionCommentAsAnswer<$Context['scalars']>
+        $$SelectionSets.Mutation.unmarkDiscussionCommentAsAnswer<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -4361,7 +4757,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   unmarkFileAsViewed: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.unmarkFileAsViewed<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.unmarkFileAsViewed<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -4382,7 +4781,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.unmarkIssueAsDuplicate<$Context['scalars']>
+        $$SelectionSets.Mutation.unmarkIssueAsDuplicate<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -4404,7 +4803,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.unmarkProjectV2AsTemplate<$Context['scalars']>
+        $$SelectionSets.Mutation.unmarkProjectV2AsTemplate<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -4424,7 +4823,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   unminimizeComment: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.unminimizeComment<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.unminimizeComment<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -4443,7 +4845,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   unpinIssue: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.unpinIssue<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.unpinIssue<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -4464,7 +4869,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.unresolveReviewThread<$Context['scalars']>
+        $$SelectionSets.Mutation.unresolveReviewThread<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -4486,7 +4891,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateBranchProtectionRule<$Context['scalars']>
+        $$SelectionSets.Mutation.updateBranchProtectionRule<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -4506,7 +4911,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   updateCheckRun: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.updateCheckRun<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.updateCheckRun<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -4527,7 +4935,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateCheckSuitePreferences<$Context['scalars']>
+        $$SelectionSets.Mutation.updateCheckSuitePreferences<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -4547,7 +4955,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   updateDiscussion: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.updateDiscussion<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.updateDiscussion<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -4568,7 +4979,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateDiscussionComment<$Context['scalars']>
+        $$SelectionSets.Mutation.updateDiscussionComment<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -4590,7 +5001,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateEnterpriseAdministratorRole<$Context['scalars']>
+        $$SelectionSets.Mutation.updateEnterpriseAdministratorRole<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -4612,7 +5025,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateEnterpriseAllowPrivateRepositoryForkingSetting<$Context['scalars']>
+        $$SelectionSets.Mutation.updateEnterpriseAllowPrivateRepositoryForkingSetting<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -4634,7 +5049,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateEnterpriseDefaultRepositoryPermissionSetting<$Context['scalars']>
+        $$SelectionSets.Mutation.updateEnterpriseDefaultRepositoryPermissionSetting<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -4656,7 +5073,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateEnterpriseDeployKeySetting<$Context['scalars']>
+        $$SelectionSets.Mutation.updateEnterpriseDeployKeySetting<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -4679,7 +5098,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       <$SelectionSet>(
         selectionSet: $$Utilities.Exact<
           $SelectionSet,
-          $$SelectionSets.Mutation.updateEnterpriseMembersCanChangeRepositoryVisibilitySetting<$Context['scalars']>
+          $$SelectionSets.Mutation.updateEnterpriseMembersCanChangeRepositoryVisibilitySetting<
+            { scalars: $Context['scalars']; variablesEnabled: false }
+          >
         >,
       ) => Promise<
         & (null | {})
@@ -4701,7 +5122,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateEnterpriseMembersCanCreateRepositoriesSetting<$Context['scalars']>
+        $$SelectionSets.Mutation.updateEnterpriseMembersCanCreateRepositoriesSetting<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -4723,7 +5146,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateEnterpriseMembersCanDeleteIssuesSetting<$Context['scalars']>
+        $$SelectionSets.Mutation.updateEnterpriseMembersCanDeleteIssuesSetting<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -4745,7 +5170,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateEnterpriseMembersCanDeleteRepositoriesSetting<$Context['scalars']>
+        $$SelectionSets.Mutation.updateEnterpriseMembersCanDeleteRepositoriesSetting<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -4767,7 +5194,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateEnterpriseMembersCanInviteCollaboratorsSetting<$Context['scalars']>
+        $$SelectionSets.Mutation.updateEnterpriseMembersCanInviteCollaboratorsSetting<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -4789,7 +5218,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateEnterpriseMembersCanMakePurchasesSetting<$Context['scalars']>
+        $$SelectionSets.Mutation.updateEnterpriseMembersCanMakePurchasesSetting<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -4812,7 +5243,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       <$SelectionSet>(
         selectionSet: $$Utilities.Exact<
           $SelectionSet,
-          $$SelectionSets.Mutation.updateEnterpriseMembersCanUpdateProtectedBranchesSetting<$Context['scalars']>
+          $$SelectionSets.Mutation.updateEnterpriseMembersCanUpdateProtectedBranchesSetting<
+            { scalars: $Context['scalars']; variablesEnabled: false }
+          >
         >,
       ) => Promise<
         & (null | {})
@@ -4834,7 +5267,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateEnterpriseMembersCanViewDependencyInsightsSetting<$Context['scalars']>
+        $$SelectionSets.Mutation.updateEnterpriseMembersCanViewDependencyInsightsSetting<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -4856,7 +5291,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateEnterpriseOrganizationProjectsSetting<$Context['scalars']>
+        $$SelectionSets.Mutation.updateEnterpriseOrganizationProjectsSetting<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -4878,7 +5315,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateEnterpriseOwnerOrganizationRole<$Context['scalars']>
+        $$SelectionSets.Mutation.updateEnterpriseOwnerOrganizationRole<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -4900,7 +5339,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateEnterpriseProfile<$Context['scalars']>
+        $$SelectionSets.Mutation.updateEnterpriseProfile<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -4922,7 +5361,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateEnterpriseRepositoryProjectsSetting<$Context['scalars']>
+        $$SelectionSets.Mutation.updateEnterpriseRepositoryProjectsSetting<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -4944,7 +5385,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateEnterpriseTeamDiscussionsSetting<$Context['scalars']>
+        $$SelectionSets.Mutation.updateEnterpriseTeamDiscussionsSetting<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -4967,7 +5410,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       <$SelectionSet>(
         selectionSet: $$Utilities.Exact<
           $SelectionSet,
-          $$SelectionSets.Mutation.updateEnterpriseTwoFactorAuthenticationDisallowedMethodsSetting<$Context['scalars']>
+          $$SelectionSets.Mutation.updateEnterpriseTwoFactorAuthenticationDisallowedMethodsSetting<
+            { scalars: $Context['scalars']; variablesEnabled: false }
+          >
         >,
       ) => Promise<
         & (null | {})
@@ -4989,7 +5434,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateEnterpriseTwoFactorAuthenticationRequiredSetting<$Context['scalars']>
+        $$SelectionSets.Mutation.updateEnterpriseTwoFactorAuthenticationRequiredSetting<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -5009,7 +5456,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   updateEnvironment: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.updateEnvironment<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.updateEnvironment<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -5030,7 +5480,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateIpAllowListEnabledSetting<$Context['scalars']>
+        $$SelectionSets.Mutation.updateIpAllowListEnabledSetting<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -5052,7 +5504,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateIpAllowListEntry<$Context['scalars']>
+        $$SelectionSets.Mutation.updateIpAllowListEntry<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -5074,7 +5526,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateIpAllowListForInstalledAppsEnabledSetting<$Context['scalars']>
+        $$SelectionSets.Mutation.updateIpAllowListForInstalledAppsEnabledSetting<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -5094,7 +5548,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   updateIssue: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.updateIssue<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.updateIssue<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -5113,7 +5570,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   updateIssueComment: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.updateIssueComment<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.updateIssueComment<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -5132,7 +5592,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   updateLabel: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.updateLabel<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.updateLabel<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -5153,7 +5616,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateNotificationRestrictionSetting<$Context['scalars']>
+        $$SelectionSets.Mutation.updateNotificationRestrictionSetting<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -5175,7 +5640,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateOrganizationAllowPrivateRepositoryForkingSetting<$Context['scalars']>
+        $$SelectionSets.Mutation.updateOrganizationAllowPrivateRepositoryForkingSetting<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -5197,7 +5664,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateOrganizationWebCommitSignoffSetting<$Context['scalars']>
+        $$SelectionSets.Mutation.updateOrganizationWebCommitSignoffSetting<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -5222,7 +5691,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updatePatreonSponsorability<$Context['scalars']>
+        $$SelectionSets.Mutation.updatePatreonSponsorability<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -5242,7 +5711,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   updateProject: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.updateProject<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.updateProject<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -5261,7 +5733,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   updateProjectCard: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.updateProjectCard<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.updateProjectCard<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -5280,7 +5755,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   updateProjectColumn: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.updateProjectColumn<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.updateProjectColumn<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -5299,7 +5777,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   updateProjectV2: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.updateProjectV2<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.updateProjectV2<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -5320,7 +5801,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateProjectV2Collaborators<$Context['scalars']>
+        $$SelectionSets.Mutation.updateProjectV2Collaborators<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -5342,7 +5823,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateProjectV2DraftIssue<$Context['scalars']>
+        $$SelectionSets.Mutation.updateProjectV2DraftIssue<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -5364,7 +5845,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateProjectV2Field<$Context['scalars']>
+        $$SelectionSets.Mutation.updateProjectV2Field<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -5387,7 +5868,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateProjectV2ItemFieldValue<$Context['scalars']>
+        $$SelectionSets.Mutation.updateProjectV2ItemFieldValue<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -5409,7 +5892,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateProjectV2ItemPosition<$Context['scalars']>
+        $$SelectionSets.Mutation.updateProjectV2ItemPosition<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -5431,7 +5914,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateProjectV2StatusUpdate<$Context['scalars']>
+        $$SelectionSets.Mutation.updateProjectV2StatusUpdate<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -5451,7 +5934,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   updatePullRequest: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.updatePullRequest<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.updatePullRequest<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -5472,7 +5958,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updatePullRequestBranch<$Context['scalars']>
+        $$SelectionSets.Mutation.updatePullRequestBranch<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -5494,7 +5980,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updatePullRequestReview<$Context['scalars']>
+        $$SelectionSets.Mutation.updatePullRequestReview<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -5516,7 +6002,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updatePullRequestReviewComment<$Context['scalars']>
+        $$SelectionSets.Mutation.updatePullRequestReviewComment<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -5536,7 +6024,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   updateRef: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.updateRef<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.updateRef<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -5572,7 +6063,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   updateRefs: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.updateRefs<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.updateRefs<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -5591,7 +6085,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   updateRepository: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.updateRepository<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.updateRepository<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -5612,7 +6109,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateRepositoryRuleset<$Context['scalars']>
+        $$SelectionSets.Mutation.updateRepositoryRuleset<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -5634,7 +6131,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateRepositoryWebCommitSignoffSetting<$Context['scalars']>
+        $$SelectionSets.Mutation.updateRepositoryWebCommitSignoffSetting<
+          { scalars: $Context['scalars']; variablesEnabled: false }
+        >
       >,
     ) => Promise<
       & (null | {})
@@ -5656,7 +6155,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateSponsorshipPreferences<$Context['scalars']>
+        $$SelectionSets.Mutation.updateSponsorshipPreferences<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -5676,7 +6175,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   updateSubscription: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.updateSubscription<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.updateSubscription<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -5697,7 +6199,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateTeamDiscussion<$Context['scalars']>
+        $$SelectionSets.Mutation.updateTeamDiscussion<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -5719,7 +6221,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateTeamDiscussionComment<$Context['scalars']>
+        $$SelectionSets.Mutation.updateTeamDiscussionComment<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -5741,7 +6243,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateTeamReviewAssignment<$Context['scalars']>
+        $$SelectionSets.Mutation.updateTeamReviewAssignment<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -5763,7 +6265,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateTeamsRepository<$Context['scalars']>
+        $$SelectionSets.Mutation.updateTeamsRepository<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -5783,7 +6285,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   updateTopics: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.updateTopics<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.updateTopics<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -5802,7 +6307,10 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   updateUserList: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.updateUserList<$Context['scalars']>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Mutation.updateUserList<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -5823,7 +6331,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.updateUserListsForItem<$Context['scalars']>
+        $$SelectionSets.Mutation.updateUserListsForItem<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})
@@ -5845,7 +6353,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.verifyVerifiableDomain<$Context['scalars']>
+        $$SelectionSets.Mutation.verifyVerifiableDomain<{ scalars: $Context['scalars']; variablesEnabled: false }>
       >,
     ) => Promise<
       & (null | {})

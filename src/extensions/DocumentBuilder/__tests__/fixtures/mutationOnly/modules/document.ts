@@ -2,33 +2,37 @@ import { OperationTypeNode } from 'graphql'
 import type { TypedDocument } from '../../../../../../exports/client.js'
 import { createStaticRootType } from '../../../../../../exports/extensions/document-builder/runtime.js'
 import type * as $$Utilities from '../../../../../../exports/utilities-for-generated.js'
+import type * as ArgumentsMap from './arguments-map.js'
 import type * as $$Schema from './schema.js'
 import type * as SelectionSets from './selection-sets.js'
-
-// Helper to extract variables from selection set
-type ExtractVariables<$SelectionSet> = $SelectionSet extends Record<string, any>
-  ? $SelectionSet extends { $: infer Args } ? ExtractVariablesFromArgs<Args>
-  : UnionToIntersection<{ [K in keyof $SelectionSet]: ExtractVariables<$SelectionSet[K]> }[keyof $SelectionSet]>
-  : {}
-
-type ExtractVariablesFromArgs<Args> = Args extends Record<string, any>
-  ? { [K in keyof Args as Args[K] extends $$Utilities.DocumentBuilderKit.VariableMarker ? K : never]: boolean }
-  : {}
-
-type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never
+import type { $TypeInputsIndex } from './type-inputs-index.js'
 
 export interface MutationBuilder {
-  id: <$SelectionSet extends SelectionSets.Mutation['id']>(
+  id: <$SelectionSet extends SelectionSets.Mutation<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['id']>(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ id: $SelectionSet }, $$Schema.Schema>,
-    ExtractVariables<{ id: $SelectionSet }>
+    $SelectionSet extends undefined ? {}
+      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
+        { id: $SelectionSet },
+        ArgumentsMap.ArgumentsMap['mutation'],
+        $TypeInputsIndex
+      >
   >
-  idNonNull: <$SelectionSet extends SelectionSets.Mutation['idNonNull']>(
+  idNonNull: <
+    $SelectionSet extends SelectionSets.Mutation<
+      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+    >['idNonNull'],
+  >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ idNonNull: $SelectionSet }, $$Schema.Schema>,
-    ExtractVariables<{ idNonNull: $SelectionSet }>
+    $SelectionSet extends undefined ? {}
+      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
+        { idNonNull: $SelectionSet },
+        ArgumentsMap.ArgumentsMap['mutation'],
+        $TypeInputsIndex
+      >
   >
 }
 

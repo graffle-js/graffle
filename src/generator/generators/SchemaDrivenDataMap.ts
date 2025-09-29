@@ -49,8 +49,12 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
     code``
     if (referenceAssignments.length === 0) {
       code`// None of your types have references to other non-scalar/enum types.`
+    } else {
+      code`// TODO: Contribute helper to Utilities to cast readonly data to mutable at type level.`
+      code`// These assignments are needed to avoid circular references during module initialization.`
     }
     for (const referenceAssignment of referenceAssignments) {
+      code`// @ts-expect-error Assignment to readonly property is needed for circular reference handling.`
       code(referenceAssignment)
     }
     code``
@@ -158,7 +162,7 @@ const ScalarTypeCustom = createCodeGenerator<
 >(
   ({ config, code, type }) => {
     if (config.options.isImportsCustomScalars) {
-      code(Code.termConst(type.name, `${$.$$Scalar}.${renderName(type.name)}`))
+      code(Code.termConst(type.name, `${$.$$Scalar}.${type.name}`))
     } else {
       code(Code.termConst(type.name, Code.string(type.name)))
     }

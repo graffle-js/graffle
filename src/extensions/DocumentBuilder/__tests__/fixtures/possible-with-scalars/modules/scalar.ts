@@ -67,10 +67,10 @@ export const $registry = {
 export type $Registry = $$Utilities.Schema.Scalar.Registry<
   {
     Date: Date_
-    bigint: bigint_
+    bigint: $bigint_
   },
   | $$Utilities.Schema.Scalar.GetEncoded<Date_>
-  | $$Utilities.Schema.Scalar.GetEncoded<bigint_>,
+  | $$Utilities.Schema.Scalar.GetEncoded<$bigint_>,
   | $$Utilities.Schema.Scalar.GetDecoded<Date_>
-  | $$Utilities.Schema.Scalar.GetDecoded<bigint_>
+  | $$Utilities.Schema.Scalar.GetDecoded<$bigint_>
 >

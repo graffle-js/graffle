@@ -776,34 +776,65 @@ const Mutation: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 
+// TODO: Contribute helper to Utilities to cast readonly data to mutable at type level.
+// These assignments are needed to avoid circular references during module initialization.
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 InputObjectCircular.f![`circular`]!.nt = InputObjectCircular
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 InputObjectNested.f![`InputObject`]!.nt = InputObject
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 InputObjectNestedNonNull.f![`InputObject`]!.nt = InputObject
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ObjectNested.f[`object`]!.nt = Object1
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ObjectUnion.f[`fooBarUnion`]!.nt = FooBarUnion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`dateInterface1`]!.nt = DateInterface1
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`dateObject1`]!.nt = DateObject1
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`dateUnion`]!.nt = DateUnion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`interface`]!.nt = Interface
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`interfaceHierarchyChildA`]!.nt = InterfaceChildA
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`interfaceHierarchyChildB`]!.nt = InterfaceChildB
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`interfaceHierarchyGrandparents`]!.nt = InterfaceGrandparent
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`interfaceHierarchyParents`]!.nt = InterfaceParent
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`interfaceNonNull`]!.nt = Interface
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`interfaceWithArgs`]!.nt = Interface
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`lowerCaseUnion`]!.nt = lowerCaseUnion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`object`]!.nt = Object1
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`objectList`]!.nt = Object1
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`objectListNonNull`]!.nt = Object1
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`objectNested`]!.nt = ObjectNested
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`objectNonNull`]!.nt = Object1
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`objectWithArgs`]!.nt = Object1
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`result`]!.nt = Result
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`resultNonNull`]!.nt = Result
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`unionFooBar`]!.nt = FooBarUnion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`unionFooBarNonNull`]!.nt = FooBarUnion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`unionFooBarWithArgs`]!.nt = FooBarUnion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`unionObject`]!.nt = ObjectUnion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`unionObjectNonNull`]!.nt = ObjectUnion
 
 //

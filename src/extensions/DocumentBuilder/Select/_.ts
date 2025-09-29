@@ -1,5 +1,6 @@
 export * from './$parseSelection.js'
 export * as Arguments from './arguments.js'
+export * from './context.js'
 export * from './Directive/__.js'
 export * as Document from './document.js'
 export * from './Indicator/__.js'

@@ -33861,2397 +33861,4778 @@ const Mutation: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 
+// TODO: Contribute helper to Utilities to cast readonly data to mutable at type level.
+// These assignments are needed to avoid circular references during module initialization.
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CheckRunOutput.f![`images`]!.nt = CheckRunOutputImage
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateCheckRunInput.f![`output`]!.nt = CheckRunOutput
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateCommitOnBranchInput.f![`fileChanges`]!.nt = FileChanges
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 FileChanges.f![`additions`]!.nt = FileAddition
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateCheckRunInput.f![`output`]!.nt = CheckRunOutput
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateProjectV2ItemFieldValueInput.f![`value`]!.nt = ProjectV2FieldValue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateRefsInput.f![`refUpdates`]!.nt = RefUpdate
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AcceptEnterpriseAdministratorInvitationPayload.f[`invitation`]!.nt = EnterpriseAdministratorInvitation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AcceptEnterpriseMemberInvitationPayload.f[`invitation`]!.nt = EnterpriseMemberInvitation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AcceptTopicSuggestionPayload.f[`topic`]!.nt = Topic
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AccessUserNamespaceRepositoryPayload.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AddAssigneesToAssignablePayload.f[`assignable`]!.nt = Assignable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AddCommentPayload.f[`commentEdge`]!.nt = IssueCommentEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AddCommentPayload.f[`subject`]!.nt = Node
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AddCommentPayload.f[`timelineEdge`]!.nt = IssueTimelineItemEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AddDiscussionCommentPayload.f[`comment`]!.nt = DiscussionComment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AddDiscussionPollVotePayload.f[`pollOption`]!.nt = DiscussionPollOption
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AddEnterpriseOrganizationMemberPayload.f[`users`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AddLabelsToLabelablePayload.f[`labelable`]!.nt = Labelable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AddProjectCardPayload.f[`cardEdge`]!.nt = ProjectCardEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AddProjectCardPayload.f[`projectColumn`]!.nt = ProjectColumn
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AddProjectColumnPayload.f[`columnEdge`]!.nt = ProjectColumnEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AddProjectColumnPayload.f[`project`]!.nt = Project
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AddProjectV2DraftIssuePayload.f[`projectItem`]!.nt = ProjectV2Item
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AddProjectV2ItemByIdPayload.f[`item`]!.nt = ProjectV2Item
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AddPullRequestReviewCommentPayload.f[`comment`]!.nt = PullRequestReviewComment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AddPullRequestReviewCommentPayload.f[`commentEdge`]!.nt = PullRequestReviewCommentEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AddPullRequestReviewPayload.f[`pullRequestReview`]!.nt = PullRequestReview
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AddPullRequestReviewPayload.f[`reviewEdge`]!.nt = PullRequestReviewEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AddPullRequestReviewThreadPayload.f[`thread`]!.nt = PullRequestReviewThread
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AddPullRequestReviewThreadReplyPayload.f[`comment`]!.nt = PullRequestReviewComment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AddReactionPayload.f[`reaction`]!.nt = Reaction
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AddReactionPayload.f[`reactionGroups`]!.nt = ReactionGroup
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AddReactionPayload.f[`subject`]!.nt = Reactable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AddStarPayload.f[`starrable`]!.nt = Starrable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AddSubIssuePayload.f[`issue`]!.nt = Issue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AddSubIssuePayload.f[`subIssue`]!.nt = Issue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AddUpvotePayload.f[`subject`]!.nt = Votable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AddVerifiableDomainPayload.f[`domain`]!.nt = VerifiableDomain
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AddedToMergeQueueEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AddedToMergeQueueEvent.f[`enqueuer`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AddedToMergeQueueEvent.f[`mergeQueue`]!.nt = MergeQueue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AddedToMergeQueueEvent.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AddedToProjectEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AddedToProjectEvent.f[`project`]!.nt = Project
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AddedToProjectEvent.f[`projectCard`]!.nt = ProjectCard
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 App.f[`ipAllowListEntries`]!.nt = IpAllowListEntryConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ApproveDeploymentsPayload.f[`deployments`]!.nt = Deployment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ApproveVerifiableDomainPayload.f[`domain`]!.nt = VerifiableDomain
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ArchiveProjectV2ItemPayload.f[`item`]!.nt = ProjectV2Item
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ArchiveRepositoryPayload.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AssignedEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AssignedEvent.f[`assignable`]!.nt = Assignable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AssignedEvent.f[`assignee`]!.nt = Assignee
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AssignedEvent.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AutoMergeDisabledEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AutoMergeDisabledEvent.f[`disabler`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AutoMergeDisabledEvent.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AutoMergeEnabledEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AutoMergeEnabledEvent.f[`enabler`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AutoMergeEnabledEvent.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AutoMergeRequest.f[`enabledBy`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AutoMergeRequest.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AutoRebaseEnabledEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AutoRebaseEnabledEvent.f[`enabler`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AutoRebaseEnabledEvent.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AutoSquashEnabledEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AutoSquashEnabledEvent.f[`enabler`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AutoSquashEnabledEvent.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AutomaticBaseChangeFailedEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AutomaticBaseChangeFailedEvent.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AutomaticBaseChangeSucceededEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 AutomaticBaseChangeSucceededEvent.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BaseRefChangedEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BaseRefChangedEvent.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BaseRefDeletedEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BaseRefDeletedEvent.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BaseRefForcePushedEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BaseRefForcePushedEvent.f[`afterCommit`]!.nt = Commit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BaseRefForcePushedEvent.f[`beforeCommit`]!.nt = Commit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BaseRefForcePushedEvent.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BaseRefForcePushedEvent.f[`ref`]!.nt = Ref
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Blame.f[`ranges`]!.nt = BlameRange
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BlameRange.f[`commit`]!.nt = Commit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Blob.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BranchProtectionRule.f[`branchProtectionRuleConflicts`]!.nt = BranchProtectionRuleConflictConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BranchProtectionRule.f[`bypassForcePushAllowances`]!.nt = BypassForcePushAllowanceConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BranchProtectionRule.f[`bypassPullRequestAllowances`]!.nt = BypassPullRequestAllowanceConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BranchProtectionRule.f[`creator`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BranchProtectionRule.f[`matchingRefs`]!.nt = RefConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BranchProtectionRule.f[`pushAllowances`]!.nt = PushAllowanceConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BranchProtectionRule.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BranchProtectionRule.f[`requiredStatusChecks`]!.nt = RequiredStatusCheckDescription
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BranchProtectionRule.f[`reviewDismissalAllowances`]!.nt = ReviewDismissalAllowanceConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BranchProtectionRuleConflict.f[`branchProtectionRule`]!.nt = BranchProtectionRule
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BranchProtectionRuleConflict.f[`conflictingBranchProtectionRule`]!.nt = BranchProtectionRule
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BranchProtectionRuleConflict.f[`ref`]!.nt = Ref
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BranchProtectionRuleConflictConnection.f[`edges`]!.nt = BranchProtectionRuleConflictEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BranchProtectionRuleConflictConnection.f[`nodes`]!.nt = BranchProtectionRuleConflict
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BranchProtectionRuleConflictConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BranchProtectionRuleConflictEdge.f[`node`]!.nt = BranchProtectionRuleConflict
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BranchProtectionRuleConnection.f[`edges`]!.nt = BranchProtectionRuleEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BranchProtectionRuleConnection.f[`nodes`]!.nt = BranchProtectionRule
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BranchProtectionRuleConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BranchProtectionRuleEdge.f[`node`]!.nt = BranchProtectionRule
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BypassForcePushAllowance.f[`actor`]!.nt = BranchActorAllowanceActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BypassForcePushAllowance.f[`branchProtectionRule`]!.nt = BranchProtectionRule
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BypassForcePushAllowanceConnection.f[`edges`]!.nt = BypassForcePushAllowanceEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BypassForcePushAllowanceConnection.f[`nodes`]!.nt = BypassForcePushAllowance
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BypassForcePushAllowanceConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BypassForcePushAllowanceEdge.f[`node`]!.nt = BypassForcePushAllowance
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BypassPullRequestAllowance.f[`actor`]!.nt = BranchActorAllowanceActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BypassPullRequestAllowance.f[`branchProtectionRule`]!.nt = BranchProtectionRule
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BypassPullRequestAllowanceConnection.f[`edges`]!.nt = BypassPullRequestAllowanceEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BypassPullRequestAllowanceConnection.f[`nodes`]!.nt = BypassPullRequestAllowance
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BypassPullRequestAllowanceConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BypassPullRequestAllowanceEdge.f[`node`]!.nt = BypassPullRequestAllowance
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CWEConnection.f[`edges`]!.nt = CWEEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CWEConnection.f[`nodes`]!.nt = CWE
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CWEConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CWEEdge.f[`node`]!.nt = CWE
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CancelEnterpriseAdminInvitationPayload.f[`invitation`]!.nt = EnterpriseAdministratorInvitation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CancelEnterpriseMemberInvitationPayload.f[`invitation`]!.nt = EnterpriseMemberInvitation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CancelSponsorshipPayload.f[`sponsorsTier`]!.nt = SponsorsTier
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ChangeUserStatusPayload.f[`status`]!.nt = UserStatus
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CheckAnnotation.f[`location`]!.nt = CheckAnnotationSpan
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CheckAnnotationConnection.f[`edges`]!.nt = CheckAnnotationEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CheckAnnotationConnection.f[`nodes`]!.nt = CheckAnnotation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CheckAnnotationConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CheckAnnotationEdge.f[`node`]!.nt = CheckAnnotation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CheckAnnotationSpan.f[`end`]!.nt = CheckAnnotationPosition
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CheckAnnotationSpan.f[`start`]!.nt = CheckAnnotationPosition
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CheckRun.f[`annotations`]!.nt = CheckAnnotationConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CheckRun.f[`checkSuite`]!.nt = CheckSuite
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CheckRun.f[`deployment`]!.nt = Deployment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CheckRun.f[`pendingDeploymentRequest`]!.nt = DeploymentRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CheckRun.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CheckRun.f[`steps`]!.nt = CheckStepConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CheckRunConnection.f[`edges`]!.nt = CheckRunEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CheckRunConnection.f[`nodes`]!.nt = CheckRun
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CheckRunConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CheckRunEdge.f[`node`]!.nt = CheckRun
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CheckStepConnection.f[`edges`]!.nt = CheckStepEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CheckStepConnection.f[`nodes`]!.nt = CheckStep
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CheckStepConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CheckStepEdge.f[`node`]!.nt = CheckStep
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CheckSuite.f[`app`]!.nt = App
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CheckSuite.f[`branch`]!.nt = Ref
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CheckSuite.f[`checkRuns`]!.nt = CheckRunConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CheckSuite.f[`commit`]!.nt = Commit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CheckSuite.f[`creator`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CheckSuite.f[`matchingPullRequests`]!.nt = PullRequestConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CheckSuite.f[`push`]!.nt = Push
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CheckSuite.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CheckSuite.f[`workflowRun`]!.nt = WorkflowRun
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CheckSuiteConnection.f[`edges`]!.nt = CheckSuiteEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CheckSuiteConnection.f[`nodes`]!.nt = CheckSuite
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CheckSuiteConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CheckSuiteEdge.f[`node`]!.nt = CheckSuite
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ClearLabelsFromLabelablePayload.f[`labelable`]!.nt = Labelable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ClearProjectV2ItemFieldValuePayload.f[`projectV2Item`]!.nt = ProjectV2Item
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CloneProjectPayload.f[`project`]!.nt = Project
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CloneTemplateRepositoryPayload.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CloseDiscussionPayload.f[`discussion`]!.nt = Discussion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CloseIssuePayload.f[`issue`]!.nt = Issue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ClosePullRequestPayload.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ClosedEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ClosedEvent.f[`closable`]!.nt = Closable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ClosedEvent.f[`closer`]!.nt = Closer
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CodeScanningParameters.f[`codeScanningTools`]!.nt = CodeScanningTool
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CommentDeletedEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CommentDeletedEvent.f[`deletedCommentAuthor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Commit.f[`associatedPullRequests`]!.nt = PullRequestConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Commit.f[`author`]!.nt = GitActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Commit.f[`authors`]!.nt = GitActorConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Commit.f[`blame`]!.nt = Blame
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Commit.f[`checkSuites`]!.nt = CheckSuiteConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Commit.f[`comments`]!.nt = CommitCommentConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Commit.f[`committer`]!.nt = GitActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Commit.f[`deployments`]!.nt = DeploymentConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Commit.f[`file`]!.nt = TreeEntry
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Commit.f[`history`]!.nt = CommitHistoryConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Commit.f[`onBehalfOf`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Commit.f[`parents`]!.nt = CommitConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Commit.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Commit.f[`signature`]!.nt = GitSignature
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Commit.f[`status`]!.nt = Status
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Commit.f[`statusCheckRollup`]!.nt = StatusCheckRollup
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Commit.f[`submodules`]!.nt = SubmoduleConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Commit.f[`tree`]!.nt = Tree
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CommitComment.f[`author`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CommitComment.f[`commit`]!.nt = Commit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CommitComment.f[`editor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CommitComment.f[`reactionGroups`]!.nt = ReactionGroup
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CommitComment.f[`reactions`]!.nt = ReactionConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CommitComment.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CommitComment.f[`userContentEdits`]!.nt = UserContentEditConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CommitCommentConnection.f[`edges`]!.nt = CommitCommentEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CommitCommentConnection.f[`nodes`]!.nt = CommitComment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CommitCommentConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CommitCommentEdge.f[`node`]!.nt = CommitComment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CommitCommentThread.f[`comments`]!.nt = CommitCommentConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CommitCommentThread.f[`commit`]!.nt = Commit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CommitCommentThread.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CommitConnection.f[`edges`]!.nt = CommitEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CommitConnection.f[`nodes`]!.nt = Commit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CommitConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CommitContributionsByRepository.f[`contributions`]!.nt = CreatedCommitContributionConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CommitContributionsByRepository.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CommitEdge.f[`node`]!.nt = Commit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CommitHistoryConnection.f[`edges`]!.nt = CommitEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CommitHistoryConnection.f[`nodes`]!.nt = Commit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CommitHistoryConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Comparison.f[`baseTarget`]!.nt = GitObject
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Comparison.f[`commits`]!.nt = ComparisonCommitConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Comparison.f[`headTarget`]!.nt = GitObject
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ComparisonCommitConnection.f[`edges`]!.nt = CommitEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ComparisonCommitConnection.f[`nodes`]!.nt = Commit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ComparisonCommitConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ConnectedEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ConnectedEvent.f[`source`]!.nt = ReferencedSubject
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ConnectedEvent.f[`subject`]!.nt = ReferencedSubject
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ContributionCalendar.f[`months`]!.nt = ContributionCalendarMonth
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ContributionCalendar.f[`weeks`]!.nt = ContributionCalendarWeek
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ContributionCalendarWeek.f[`contributionDays`]!.nt = ContributionCalendarDay
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ContributionsCollection.f[`commitContributionsByRepository`]!.nt = CommitContributionsByRepository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ContributionsCollection.f[`contributionCalendar`]!.nt = ContributionCalendar
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ContributionsCollection.f[`firstIssueContribution`]!.nt = CreatedIssueOrRestrictedContribution
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ContributionsCollection.f[`firstPullRequestContribution`]!.nt = CreatedPullRequestOrRestrictedContribution
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ContributionsCollection.f[`firstRepositoryContribution`]!.nt = CreatedRepositoryOrRestrictedContribution
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ContributionsCollection.f[`issueContributions`]!.nt = CreatedIssueContributionConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ContributionsCollection.f[`issueContributionsByRepository`]!.nt = IssueContributionsByRepository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ContributionsCollection.f[`joinedGitHubContribution`]!.nt = JoinedGitHubContribution
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ContributionsCollection.f[`mostRecentCollectionWithActivity`]!.nt = ContributionsCollection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ContributionsCollection.f[`mostRecentCollectionWithoutActivity`]!.nt = ContributionsCollection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ContributionsCollection.f[`popularIssueContribution`]!.nt = CreatedIssueContribution
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ContributionsCollection.f[`popularPullRequestContribution`]!.nt = CreatedPullRequestContribution
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ContributionsCollection.f[`pullRequestContributions`]!.nt = CreatedPullRequestContributionConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ContributionsCollection.f[`pullRequestContributionsByRepository`]!.nt = PullRequestContributionsByRepository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ContributionsCollection.f[`pullRequestReviewContributions`]!.nt = CreatedPullRequestReviewContributionConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ContributionsCollection.f[`pullRequestReviewContributionsByRepository`]!.nt = PullRequestReviewContributionsByRepository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ContributionsCollection.f[`repositoryContributions`]!.nt = CreatedRepositoryContributionConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ContributionsCollection.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ConvertProjectCardNoteToIssuePayload.f[`projectCard`]!.nt = ProjectCard
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ConvertProjectV2DraftIssueItemToIssuePayload.f[`item`]!.nt = ProjectV2Item
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ConvertPullRequestToDraftPayload.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ConvertToDraftEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ConvertToDraftEvent.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ConvertedNoteToIssueEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ConvertedNoteToIssueEvent.f[`project`]!.nt = Project
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ConvertedNoteToIssueEvent.f[`projectCard`]!.nt = ProjectCard
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ConvertedToDiscussionEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ConvertedToDiscussionEvent.f[`discussion`]!.nt = Discussion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CopyProjectV2Payload.f[`projectV2`]!.nt = ProjectV2
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateAttributionInvitationPayload.f[`owner`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateAttributionInvitationPayload.f[`source`]!.nt = Claimable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateAttributionInvitationPayload.f[`target`]!.nt = Claimable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateBranchProtectionRulePayload.f[`branchProtectionRule`]!.nt = BranchProtectionRule
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateCheckRunPayload.f[`checkRun`]!.nt = CheckRun
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateCheckSuitePayload.f[`checkSuite`]!.nt = CheckSuite
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateCommitOnBranchPayload.f[`commit`]!.nt = Commit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateCommitOnBranchPayload.f[`ref`]!.nt = Ref
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateDeploymentPayload.f[`deployment`]!.nt = Deployment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateDeploymentStatusPayload.f[`deploymentStatus`]!.nt = DeploymentStatus
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateDiscussionPayload.f[`discussion`]!.nt = Discussion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateEnterpriseOrganizationPayload.f[`enterprise`]!.nt = Enterprise
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateEnterpriseOrganizationPayload.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateEnvironmentPayload.f[`environment`]!.nt = Environment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateIpAllowListEntryPayload.f[`ipAllowListEntry`]!.nt = IpAllowListEntry
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateIssuePayload.f[`issue`]!.nt = Issue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateLabelPayload.f[`label`]!.nt = Label
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateLinkedBranchPayload.f[`issue`]!.nt = Issue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateLinkedBranchPayload.f[`linkedBranch`]!.nt = LinkedBranch
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateMigrationSourcePayload.f[`migrationSource`]!.nt = MigrationSource
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateProjectPayload.f[`project`]!.nt = Project
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateProjectV2FieldPayload.f[`projectV2Field`]!.nt = ProjectV2FieldConfiguration
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateProjectV2Payload.f[`projectV2`]!.nt = ProjectV2
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateProjectV2StatusUpdatePayload.f[`statusUpdate`]!.nt = ProjectV2StatusUpdate
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreatePullRequestPayload.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateRefPayload.f[`ref`]!.nt = Ref
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateRepositoryPayload.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateRepositoryRulesetPayload.f[`ruleset`]!.nt = RepositoryRuleset
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateSponsorsListingPayload.f[`sponsorsListing`]!.nt = SponsorsListing
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateSponsorsTierPayload.f[`sponsorsTier`]!.nt = SponsorsTier
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateSponsorshipPayload.f[`sponsorship`]!.nt = Sponsorship
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateSponsorshipsPayload.f[`sponsorables`]!.nt = Sponsorable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateTeamDiscussionCommentPayload.f[`teamDiscussionComment`]!.nt = TeamDiscussionComment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateTeamDiscussionPayload.f[`teamDiscussion`]!.nt = TeamDiscussion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateUserListPayload.f[`list`]!.nt = UserList
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreateUserListPayload.f[`viewer`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreatedCommitContribution.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreatedCommitContribution.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreatedCommitContributionConnection.f[`edges`]!.nt = CreatedCommitContributionEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreatedCommitContributionConnection.f[`nodes`]!.nt = CreatedCommitContribution
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreatedCommitContributionConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreatedCommitContributionEdge.f[`node`]!.nt = CreatedCommitContribution
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreatedIssueContribution.f[`issue`]!.nt = Issue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreatedIssueContribution.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreatedIssueContributionConnection.f[`edges`]!.nt = CreatedIssueContributionEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreatedIssueContributionConnection.f[`nodes`]!.nt = CreatedIssueContribution
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreatedIssueContributionConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreatedIssueContributionEdge.f[`node`]!.nt = CreatedIssueContribution
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreatedPullRequestContribution.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreatedPullRequestContribution.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreatedPullRequestContributionConnection.f[`edges`]!.nt = CreatedPullRequestContributionEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreatedPullRequestContributionConnection.f[`nodes`]!.nt = CreatedPullRequestContribution
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreatedPullRequestContributionConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreatedPullRequestContributionEdge.f[`node`]!.nt = CreatedPullRequestContribution
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreatedPullRequestReviewContribution.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreatedPullRequestReviewContribution.f[`pullRequestReview`]!.nt = PullRequestReview
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreatedPullRequestReviewContribution.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreatedPullRequestReviewContribution.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreatedPullRequestReviewContributionConnection.f[`edges`]!.nt = CreatedPullRequestReviewContributionEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreatedPullRequestReviewContributionConnection.f[`nodes`]!.nt = CreatedPullRequestReviewContribution
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreatedPullRequestReviewContributionConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreatedPullRequestReviewContributionEdge.f[`node`]!.nt = CreatedPullRequestReviewContribution
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreatedRepositoryContribution.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreatedRepositoryContribution.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreatedRepositoryContributionConnection.f[`edges`]!.nt = CreatedRepositoryContributionEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreatedRepositoryContributionConnection.f[`nodes`]!.nt = CreatedRepositoryContribution
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreatedRepositoryContributionConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CreatedRepositoryContributionEdge.f[`node`]!.nt = CreatedRepositoryContribution
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CrossReferencedEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CrossReferencedEvent.f[`source`]!.nt = ReferencedSubject
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CrossReferencedEvent.f[`target`]!.nt = ReferencedSubject
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CvssSeverities.f[`cvssV3`]!.nt = CVSS
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CvssSeverities.f[`cvssV4`]!.nt = CVSS
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeclineTopicSuggestionPayload.f[`topic`]!.nt = Topic
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeleteDiscussionCommentPayload.f[`comment`]!.nt = DiscussionComment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeleteDiscussionPayload.f[`discussion`]!.nt = Discussion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeleteIpAllowListEntryPayload.f[`ipAllowListEntry`]!.nt = IpAllowListEntry
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeleteIssuePayload.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeleteLinkedBranchPayload.f[`issue`]!.nt = Issue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeleteProjectCardPayload.f[`column`]!.nt = ProjectColumn
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeleteProjectColumnPayload.f[`project`]!.nt = Project
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeleteProjectPayload.f[`owner`]!.nt = ProjectOwner
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeleteProjectV2FieldPayload.f[`projectV2Field`]!.nt = ProjectV2FieldConfiguration
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeleteProjectV2Payload.f[`projectV2`]!.nt = ProjectV2
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeleteProjectV2StatusUpdatePayload.f[`projectV2`]!.nt = ProjectV2
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeleteProjectV2WorkflowPayload.f[`projectV2`]!.nt = ProjectV2
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeletePullRequestReviewCommentPayload.f[`pullRequestReview`]!.nt = PullRequestReview
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeletePullRequestReviewCommentPayload.f[`pullRequestReviewComment`]!.nt = PullRequestReviewComment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeletePullRequestReviewPayload.f[`pullRequestReview`]!.nt = PullRequestReview
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeleteUserListPayload.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeleteVerifiableDomainPayload.f[`owner`]!.nt = VerifiableDomainOwner
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DemilestonedEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DemilestonedEvent.f[`subject`]!.nt = MilestoneItem
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DependabotUpdate.f[`error`]!.nt = DependabotUpdateError
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DependabotUpdate.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DependabotUpdate.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DependencyGraphDependency.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DependencyGraphDependencyConnection.f[`edges`]!.nt = DependencyGraphDependencyEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DependencyGraphDependencyConnection.f[`nodes`]!.nt = DependencyGraphDependency
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DependencyGraphDependencyConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DependencyGraphDependencyEdge.f[`node`]!.nt = DependencyGraphDependency
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DependencyGraphManifest.f[`dependencies`]!.nt = DependencyGraphDependencyConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DependencyGraphManifest.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DependencyGraphManifestConnection.f[`edges`]!.nt = DependencyGraphManifestEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DependencyGraphManifestConnection.f[`nodes`]!.nt = DependencyGraphManifest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DependencyGraphManifestConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DependencyGraphManifestEdge.f[`node`]!.nt = DependencyGraphManifest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeployKeyConnection.f[`edges`]!.nt = DeployKeyEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeployKeyConnection.f[`nodes`]!.nt = DeployKey
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeployKeyConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeployKeyEdge.f[`node`]!.nt = DeployKey
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeployedEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeployedEvent.f[`deployment`]!.nt = Deployment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeployedEvent.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeployedEvent.f[`ref`]!.nt = Ref
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Deployment.f[`commit`]!.nt = Commit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Deployment.f[`creator`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Deployment.f[`latestStatus`]!.nt = DeploymentStatus
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Deployment.f[`ref`]!.nt = Ref
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Deployment.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Deployment.f[`statuses`]!.nt = DeploymentStatusConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeploymentConnection.f[`edges`]!.nt = DeploymentEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeploymentConnection.f[`nodes`]!.nt = Deployment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeploymentConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeploymentEdge.f[`node`]!.nt = Deployment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeploymentEnvironmentChangedEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeploymentEnvironmentChangedEvent.f[`deploymentStatus`]!.nt = DeploymentStatus
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeploymentEnvironmentChangedEvent.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeploymentProtectionRule.f[`reviewers`]!.nt = DeploymentReviewerConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeploymentProtectionRuleConnection.f[`edges`]!.nt = DeploymentProtectionRuleEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeploymentProtectionRuleConnection.f[`nodes`]!.nt = DeploymentProtectionRule
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeploymentProtectionRuleConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeploymentProtectionRuleEdge.f[`node`]!.nt = DeploymentProtectionRule
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeploymentRequest.f[`environment`]!.nt = Environment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeploymentRequest.f[`reviewers`]!.nt = DeploymentReviewerConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeploymentRequestConnection.f[`edges`]!.nt = DeploymentRequestEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeploymentRequestConnection.f[`nodes`]!.nt = DeploymentRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeploymentRequestConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeploymentRequestEdge.f[`node`]!.nt = DeploymentRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeploymentReview.f[`environments`]!.nt = EnvironmentConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeploymentReview.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeploymentReviewConnection.f[`edges`]!.nt = DeploymentReviewEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeploymentReviewConnection.f[`nodes`]!.nt = DeploymentReview
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeploymentReviewConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeploymentReviewEdge.f[`node`]!.nt = DeploymentReview
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeploymentReviewerConnection.f[`edges`]!.nt = DeploymentReviewerEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeploymentReviewerConnection.f[`nodes`]!.nt = DeploymentReviewer
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeploymentReviewerConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeploymentReviewerEdge.f[`node`]!.nt = DeploymentReviewer
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeploymentStatus.f[`creator`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeploymentStatus.f[`deployment`]!.nt = Deployment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeploymentStatusConnection.f[`edges`]!.nt = DeploymentStatusEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeploymentStatusConnection.f[`nodes`]!.nt = DeploymentStatus
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeploymentStatusConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DeploymentStatusEdge.f[`node`]!.nt = DeploymentStatus
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DequeuePullRequestPayload.f[`mergeQueueEntry`]!.nt = MergeQueueEntry
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DisablePullRequestAutoMergePayload.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DisablePullRequestAutoMergePayload.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DisconnectedEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DisconnectedEvent.f[`source`]!.nt = ReferencedSubject
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DisconnectedEvent.f[`subject`]!.nt = ReferencedSubject
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Discussion.f[`answer`]!.nt = DiscussionComment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Discussion.f[`answerChosenBy`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Discussion.f[`author`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Discussion.f[`category`]!.nt = DiscussionCategory
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Discussion.f[`comments`]!.nt = DiscussionCommentConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Discussion.f[`editor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Discussion.f[`labels`]!.nt = LabelConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Discussion.f[`poll`]!.nt = DiscussionPoll
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Discussion.f[`reactionGroups`]!.nt = ReactionGroup
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Discussion.f[`reactions`]!.nt = ReactionConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Discussion.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Discussion.f[`userContentEdits`]!.nt = UserContentEditConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DiscussionCategory.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DiscussionCategoryConnection.f[`edges`]!.nt = DiscussionCategoryEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DiscussionCategoryConnection.f[`nodes`]!.nt = DiscussionCategory
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DiscussionCategoryConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DiscussionCategoryEdge.f[`node`]!.nt = DiscussionCategory
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DiscussionComment.f[`author`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DiscussionComment.f[`discussion`]!.nt = Discussion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DiscussionComment.f[`editor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DiscussionComment.f[`reactionGroups`]!.nt = ReactionGroup
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DiscussionComment.f[`reactions`]!.nt = ReactionConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DiscussionComment.f[`replies`]!.nt = DiscussionCommentConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DiscussionComment.f[`replyTo`]!.nt = DiscussionComment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DiscussionComment.f[`userContentEdits`]!.nt = UserContentEditConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DiscussionCommentConnection.f[`edges`]!.nt = DiscussionCommentEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DiscussionCommentConnection.f[`nodes`]!.nt = DiscussionComment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DiscussionCommentConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DiscussionCommentEdge.f[`node`]!.nt = DiscussionComment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DiscussionConnection.f[`edges`]!.nt = DiscussionEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DiscussionConnection.f[`nodes`]!.nt = Discussion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DiscussionConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DiscussionEdge.f[`node`]!.nt = Discussion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DiscussionPoll.f[`discussion`]!.nt = Discussion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DiscussionPoll.f[`options`]!.nt = DiscussionPollOptionConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DiscussionPollOption.f[`poll`]!.nt = DiscussionPoll
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DiscussionPollOptionConnection.f[`edges`]!.nt = DiscussionPollOptionEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DiscussionPollOptionConnection.f[`nodes`]!.nt = DiscussionPollOption
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DiscussionPollOptionConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DiscussionPollOptionEdge.f[`node`]!.nt = DiscussionPollOption
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DismissPullRequestReviewPayload.f[`pullRequestReview`]!.nt = PullRequestReview
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DismissRepositoryVulnerabilityAlertPayload.f[`repositoryVulnerabilityAlert`]!.nt = RepositoryVulnerabilityAlert
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DraftIssue.f[`assignees`]!.nt = UserConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DraftIssue.f[`creator`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DraftIssue.f[`projectV2Items`]!.nt = ProjectV2ItemConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 DraftIssue.f[`projectsV2`]!.nt = ProjectV2Connection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnablePullRequestAutoMergePayload.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnablePullRequestAutoMergePayload.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnqueuePullRequestPayload.f[`mergeQueueEntry`]!.nt = MergeQueueEntry
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Enterprise.f[`announcementBanner`]!.nt = AnnouncementBanner
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Enterprise.f[`billingInfo`]!.nt = EnterpriseBillingInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Enterprise.f[`members`]!.nt = EnterpriseMemberConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Enterprise.f[`organizations`]!.nt = OrganizationConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Enterprise.f[`ownerInfo`]!.nt = EnterpriseOwnerInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Enterprise.f[`ruleset`]!.nt = RepositoryRuleset
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Enterprise.f[`rulesets`]!.nt = RepositoryRulesetConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Enterprise.f[`userNamespaceRepositories`]!.nt = UserNamespaceRepositoryConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseAdministratorConnection.f[`edges`]!.nt = EnterpriseAdministratorEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseAdministratorConnection.f[`nodes`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseAdministratorConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseAdministratorEdge.f[`node`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseAdministratorInvitation.f[`enterprise`]!.nt = Enterprise
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseAdministratorInvitation.f[`invitee`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseAdministratorInvitation.f[`inviter`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseAdministratorInvitationConnection.f[`edges`]!.nt = EnterpriseAdministratorInvitationEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseAdministratorInvitationConnection.f[`nodes`]!.nt = EnterpriseAdministratorInvitation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseAdministratorInvitationConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseAdministratorInvitationEdge.f[`node`]!.nt = EnterpriseAdministratorInvitation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseConnection.f[`edges`]!.nt = EnterpriseEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseConnection.f[`nodes`]!.nt = Enterprise
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseEdge.f[`node`]!.nt = Enterprise
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseFailedInvitationConnection.f[`edges`]!.nt = EnterpriseFailedInvitationEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseFailedInvitationConnection.f[`nodes`]!.nt = OrganizationInvitation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseFailedInvitationConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseFailedInvitationEdge.f[`node`]!.nt = OrganizationInvitation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseIdentityProvider.f[`enterprise`]!.nt = Enterprise
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseIdentityProvider.f[`externalIdentities`]!.nt = ExternalIdentityConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseMemberConnection.f[`edges`]!.nt = EnterpriseMemberEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseMemberConnection.f[`nodes`]!.nt = EnterpriseMember
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseMemberConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseMemberEdge.f[`node`]!.nt = EnterpriseMember
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseMemberInvitation.f[`enterprise`]!.nt = Enterprise
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseMemberInvitation.f[`invitee`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseMemberInvitation.f[`inviter`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseMemberInvitationConnection.f[`edges`]!.nt = EnterpriseMemberInvitationEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseMemberInvitationConnection.f[`nodes`]!.nt = EnterpriseMemberInvitation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseMemberInvitationConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseMemberInvitationEdge.f[`node`]!.nt = EnterpriseMemberInvitation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOrganizationMembershipConnection.f[`edges`]!.nt = EnterpriseOrganizationMembershipEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOrganizationMembershipConnection.f[`nodes`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOrganizationMembershipConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOrganizationMembershipEdge.f[`node`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOutsideCollaboratorConnection.f[`edges`]!.nt = EnterpriseOutsideCollaboratorEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOutsideCollaboratorConnection.f[`nodes`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOutsideCollaboratorConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOutsideCollaboratorEdge.f[`node`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOutsideCollaboratorEdge.f[`repositories`]!.nt = EnterpriseRepositoryInfoConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOwnerInfo.f[`admins`]!.nt = EnterpriseAdministratorConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOwnerInfo.f[`affiliatedUsersWithTwoFactorDisabled`]!.nt = UserConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOwnerInfo.f[`allowPrivateRepositoryForkingSettingOrganizations`]!.nt = OrganizationConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOwnerInfo.f[`defaultRepositoryPermissionSettingOrganizations`]!.nt = OrganizationConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOwnerInfo.f[`domains`]!.nt = VerifiableDomainConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOwnerInfo.f[`enterpriseServerInstallations`]!.nt = EnterpriseServerInstallationConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOwnerInfo.f[`failedInvitations`]!.nt = EnterpriseFailedInvitationConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOwnerInfo.f[`ipAllowListEntries`]!.nt = IpAllowListEntryConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOwnerInfo.f[`membersCanChangeRepositoryVisibilitySettingOrganizations`]!.nt = OrganizationConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOwnerInfo.f[`membersCanCreateRepositoriesSettingOrganizations`]!.nt = OrganizationConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOwnerInfo.f[`membersCanDeleteIssuesSettingOrganizations`]!.nt = OrganizationConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOwnerInfo.f[`membersCanDeleteRepositoriesSettingOrganizations`]!.nt = OrganizationConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOwnerInfo.f[`membersCanInviteCollaboratorsSettingOrganizations`]!.nt = OrganizationConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOwnerInfo.f[`membersCanUpdateProtectedBranchesSettingOrganizations`]!.nt = OrganizationConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOwnerInfo.f[`membersCanViewDependencyInsightsSettingOrganizations`]!.nt = OrganizationConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOwnerInfo.f[`oidcProvider`]!.nt = OIDCProvider
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOwnerInfo.f[`organizationProjectsSettingOrganizations`]!.nt = OrganizationConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOwnerInfo.f[`outsideCollaborators`]!.nt = EnterpriseOutsideCollaboratorConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOwnerInfo.f[`pendingAdminInvitations`]!.nt = EnterpriseAdministratorInvitationConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOwnerInfo.f[`pendingCollaboratorInvitations`]!.nt = RepositoryInvitationConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOwnerInfo.f[`pendingMemberInvitations`]!.nt = EnterprisePendingMemberInvitationConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOwnerInfo.f[`pendingUnaffiliatedMemberInvitations`]!.nt = EnterpriseMemberInvitationConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOwnerInfo.f[`repositoryDeployKeySettingOrganizations`]!.nt = OrganizationConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOwnerInfo.f[`repositoryProjectsSettingOrganizations`]!.nt = OrganizationConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOwnerInfo.f[`samlIdentityProvider`]!.nt = EnterpriseIdentityProvider
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOwnerInfo.f[`samlIdentityProviderSettingOrganizations`]!.nt = OrganizationConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOwnerInfo.f[`supportEntitlements`]!.nt = EnterpriseMemberConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOwnerInfo.f[`teamDiscussionsSettingOrganizations`]!.nt = OrganizationConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseOwnerInfo.f[`twoFactorRequiredSettingOrganizations`]!.nt = OrganizationConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterprisePendingMemberInvitationConnection.f[`edges`]!.nt = EnterprisePendingMemberInvitationEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterprisePendingMemberInvitationConnection.f[`nodes`]!.nt = OrganizationInvitation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterprisePendingMemberInvitationConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterprisePendingMemberInvitationEdge.f[`node`]!.nt = OrganizationInvitation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseRepositoryInfoConnection.f[`edges`]!.nt = EnterpriseRepositoryInfoEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseRepositoryInfoConnection.f[`nodes`]!.nt = EnterpriseRepositoryInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseRepositoryInfoConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseRepositoryInfoEdge.f[`node`]!.nt = EnterpriseRepositoryInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseServerInstallation.f[`userAccounts`]!.nt = EnterpriseServerUserAccountConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseServerInstallation.f[`userAccountsUploads`]!.nt = EnterpriseServerUserAccountsUploadConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseServerInstallationConnection.f[`edges`]!.nt = EnterpriseServerInstallationEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseServerInstallationConnection.f[`nodes`]!.nt = EnterpriseServerInstallation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseServerInstallationConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseServerInstallationEdge.f[`node`]!.nt = EnterpriseServerInstallation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseServerInstallationMembershipConnection.f[`edges`]!.nt = EnterpriseServerInstallationMembershipEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseServerInstallationMembershipConnection.f[`nodes`]!.nt = EnterpriseServerInstallation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseServerInstallationMembershipConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseServerInstallationMembershipEdge.f[`node`]!.nt = EnterpriseServerInstallation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseServerUserAccount.f[`emails`]!.nt = EnterpriseServerUserAccountEmailConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseServerUserAccount.f[`enterpriseServerInstallation`]!.nt = EnterpriseServerInstallation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseServerUserAccountConnection.f[`edges`]!.nt = EnterpriseServerUserAccountEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseServerUserAccountConnection.f[`nodes`]!.nt = EnterpriseServerUserAccount
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseServerUserAccountConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseServerUserAccountEdge.f[`node`]!.nt = EnterpriseServerUserAccount
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseServerUserAccountEmail.f[`userAccount`]!.nt = EnterpriseServerUserAccount
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseServerUserAccountEmailConnection.f[`edges`]!.nt = EnterpriseServerUserAccountEmailEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseServerUserAccountEmailConnection.f[`nodes`]!.nt = EnterpriseServerUserAccountEmail
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseServerUserAccountEmailConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseServerUserAccountEmailEdge.f[`node`]!.nt = EnterpriseServerUserAccountEmail
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseServerUserAccountsUpload.f[`enterprise`]!.nt = Enterprise
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseServerUserAccountsUpload.f[`enterpriseServerInstallation`]!.nt = EnterpriseServerInstallation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseServerUserAccountsUploadConnection.f[`edges`]!.nt = EnterpriseServerUserAccountsUploadEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseServerUserAccountsUploadConnection.f[`nodes`]!.nt = EnterpriseServerUserAccountsUpload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseServerUserAccountsUploadConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseServerUserAccountsUploadEdge.f[`node`]!.nt = EnterpriseServerUserAccountsUpload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseUserAccount.f[`enterprise`]!.nt = Enterprise
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseUserAccount.f[`enterpriseInstallations`]!.nt = EnterpriseServerInstallationMembershipConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseUserAccount.f[`organizations`]!.nt = EnterpriseOrganizationMembershipConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnterpriseUserAccount.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Environment.f[`latestCompletedDeployment`]!.nt = Deployment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Environment.f[`protectionRules`]!.nt = DeploymentProtectionRuleConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnvironmentConnection.f[`edges`]!.nt = EnvironmentEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnvironmentConnection.f[`nodes`]!.nt = Environment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnvironmentConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 EnvironmentEdge.f[`node`]!.nt = Environment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ExternalIdentity.f[`organizationInvitation`]!.nt = OrganizationInvitation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ExternalIdentity.f[`samlIdentity`]!.nt = ExternalIdentitySamlAttributes
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ExternalIdentity.f[`scimIdentity`]!.nt = ExternalIdentityScimAttributes
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ExternalIdentity.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ExternalIdentityConnection.f[`edges`]!.nt = ExternalIdentityEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ExternalIdentityConnection.f[`nodes`]!.nt = ExternalIdentity
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ExternalIdentityConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ExternalIdentityEdge.f[`node`]!.nt = ExternalIdentity
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ExternalIdentitySamlAttributes.f[`attributes`]!.nt = ExternalIdentityAttribute
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ExternalIdentitySamlAttributes.f[`emails`]!.nt = UserEmailMetadata
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ExternalIdentityScimAttributes.f[`emails`]!.nt = UserEmailMetadata
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 FollowOrganizationPayload.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 FollowUserPayload.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 FollowerConnection.f[`edges`]!.nt = UserEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 FollowerConnection.f[`nodes`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 FollowerConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 FollowingConnection.f[`edges`]!.nt = UserEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 FollowingConnection.f[`nodes`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 FollowingConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Gist.f[`comments`]!.nt = GistCommentConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Gist.f[`files`]!.nt = GistFile
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Gist.f[`forks`]!.nt = GistConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Gist.f[`owner`]!.nt = RepositoryOwner
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Gist.f[`stargazers`]!.nt = StargazerConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 GistComment.f[`author`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 GistComment.f[`editor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 GistComment.f[`gist`]!.nt = Gist
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 GistComment.f[`userContentEdits`]!.nt = UserContentEditConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 GistCommentConnection.f[`edges`]!.nt = GistCommentEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 GistCommentConnection.f[`nodes`]!.nt = GistComment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 GistCommentConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 GistCommentEdge.f[`node`]!.nt = GistComment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 GistConnection.f[`edges`]!.nt = GistEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 GistConnection.f[`nodes`]!.nt = Gist
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 GistConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 GistEdge.f[`node`]!.nt = Gist
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 GistFile.f[`language`]!.nt = Language
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 GitActor.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 GitActorConnection.f[`edges`]!.nt = GitActorEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 GitActorConnection.f[`nodes`]!.nt = GitActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 GitActorConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 GitActorEdge.f[`node`]!.nt = GitActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 GpgSignature.f[`signer`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 GrantEnterpriseOrganizationsMigratorRolePayload.f[`organizations`]!.nt = OrganizationConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 HeadRefDeletedEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 HeadRefDeletedEvent.f[`headRef`]!.nt = Ref
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 HeadRefDeletedEvent.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 HeadRefForcePushedEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 HeadRefForcePushedEvent.f[`afterCommit`]!.nt = Commit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 HeadRefForcePushedEvent.f[`beforeCommit`]!.nt = Commit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 HeadRefForcePushedEvent.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 HeadRefForcePushedEvent.f[`ref`]!.nt = Ref
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 HeadRefRestoredEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 HeadRefRestoredEvent.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Hovercard.f[`contexts`]!.nt = HovercardContext
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ImportProjectPayload.f[`project`]!.nt = Project
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 InviteEnterpriseAdminPayload.f[`invitation`]!.nt = EnterpriseAdministratorInvitation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 InviteEnterpriseMemberPayload.f[`invitation`]!.nt = EnterpriseMemberInvitation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 IpAllowListEntry.f[`owner`]!.nt = IpAllowListOwner
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 IpAllowListEntryConnection.f[`edges`]!.nt = IpAllowListEntryEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 IpAllowListEntryConnection.f[`nodes`]!.nt = IpAllowListEntry
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 IpAllowListEntryConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 IpAllowListEntryEdge.f[`node`]!.nt = IpAllowListEntry
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Issue.f[`assignees`]!.nt = UserConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Issue.f[`author`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Issue.f[`closedByPullRequestsReferences`]!.nt = PullRequestConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Issue.f[`comments`]!.nt = IssueCommentConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Issue.f[`editor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Issue.f[`hovercard`]!.nt = Hovercard
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Issue.f[`labels`]!.nt = LabelConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Issue.f[`linkedBranches`]!.nt = LinkedBranchConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Issue.f[`milestone`]!.nt = Milestone
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Issue.f[`parent`]!.nt = Issue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Issue.f[`participants`]!.nt = UserConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Issue.f[`projectCards`]!.nt = ProjectCardConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Issue.f[`projectItems`]!.nt = ProjectV2ItemConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Issue.f[`projectV2`]!.nt = ProjectV2
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Issue.f[`projectsV2`]!.nt = ProjectV2Connection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Issue.f[`reactionGroups`]!.nt = ReactionGroup
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Issue.f[`reactions`]!.nt = ReactionConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Issue.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Issue.f[`subIssues`]!.nt = IssueConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Issue.f[`subIssuesSummary`]!.nt = SubIssuesSummary
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Issue.f[`timeline`]!.nt = IssueTimelineConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Issue.f[`timelineItems`]!.nt = IssueTimelineItemsConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Issue.f[`trackedInIssues`]!.nt = IssueConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Issue.f[`trackedIssues`]!.nt = IssueConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Issue.f[`userContentEdits`]!.nt = UserContentEditConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 IssueComment.f[`author`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 IssueComment.f[`editor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 IssueComment.f[`issue`]!.nt = Issue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 IssueComment.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 IssueComment.f[`reactionGroups`]!.nt = ReactionGroup
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 IssueComment.f[`reactions`]!.nt = ReactionConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 IssueComment.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 IssueComment.f[`userContentEdits`]!.nt = UserContentEditConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 IssueCommentConnection.f[`edges`]!.nt = IssueCommentEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 IssueCommentConnection.f[`nodes`]!.nt = IssueComment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 IssueCommentConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 IssueCommentEdge.f[`node`]!.nt = IssueComment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 IssueConnection.f[`edges`]!.nt = IssueEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 IssueConnection.f[`nodes`]!.nt = Issue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 IssueConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 IssueContributionsByRepository.f[`contributions`]!.nt = CreatedIssueContributionConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 IssueContributionsByRepository.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 IssueEdge.f[`node`]!.nt = Issue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 IssueTemplate.f[`assignees`]!.nt = UserConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 IssueTemplate.f[`labels`]!.nt = LabelConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 IssueTimelineConnection.f[`edges`]!.nt = IssueTimelineItemEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 IssueTimelineConnection.f[`nodes`]!.nt = IssueTimelineItem
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 IssueTimelineConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 IssueTimelineItemEdge.f[`node`]!.nt = IssueTimelineItem
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 IssueTimelineItemsConnection.f[`edges`]!.nt = IssueTimelineItemsEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 IssueTimelineItemsConnection.f[`nodes`]!.nt = IssueTimelineItems
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 IssueTimelineItemsConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 IssueTimelineItemsEdge.f[`node`]!.nt = IssueTimelineItems
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 JoinedGitHubContribution.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Label.f[`issues`]!.nt = IssueConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Label.f[`pullRequests`]!.nt = PullRequestConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Label.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 LabelConnection.f[`edges`]!.nt = LabelEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 LabelConnection.f[`nodes`]!.nt = Label
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 LabelConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 LabelEdge.f[`node`]!.nt = Label
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 LabeledEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 LabeledEvent.f[`label`]!.nt = Label
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 LabeledEvent.f[`labelable`]!.nt = Labelable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 LanguageConnection.f[`edges`]!.nt = LanguageEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 LanguageConnection.f[`nodes`]!.nt = Language
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 LanguageConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 LanguageEdge.f[`node`]!.nt = Language
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 License.f[`conditions`]!.nt = LicenseRule
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 License.f[`limitations`]!.nt = LicenseRule
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 License.f[`permissions`]!.nt = LicenseRule
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 LinkProjectV2ToRepositoryPayload.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 LinkProjectV2ToTeamPayload.f[`team`]!.nt = Team
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 LinkRepositoryToProjectPayload.f[`project`]!.nt = Project
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 LinkRepositoryToProjectPayload.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 LinkedBranch.f[`ref`]!.nt = Ref
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 LinkedBranchConnection.f[`edges`]!.nt = LinkedBranchEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 LinkedBranchConnection.f[`nodes`]!.nt = LinkedBranch
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 LinkedBranchConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 LinkedBranchEdge.f[`node`]!.nt = LinkedBranch
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 LockLockablePayload.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 LockLockablePayload.f[`lockedRecord`]!.nt = Lockable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 LockedEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 LockedEvent.f[`lockable`]!.nt = Lockable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mannequin.f[`claimant`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MannequinConnection.f[`edges`]!.nt = MannequinEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MannequinConnection.f[`nodes`]!.nt = Mannequin
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MannequinConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MannequinEdge.f[`node`]!.nt = Mannequin
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MarkDiscussionCommentAsAnswerPayload.f[`discussion`]!.nt = Discussion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MarkFileAsViewedPayload.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MarkProjectV2AsTemplatePayload.f[`projectV2`]!.nt = ProjectV2
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MarkPullRequestReadyForReviewPayload.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MarkedAsDuplicateEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MarkedAsDuplicateEvent.f[`canonical`]!.nt = IssueOrPullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MarkedAsDuplicateEvent.f[`duplicate`]!.nt = IssueOrPullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MarketplaceListing.f[`app`]!.nt = App
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MarketplaceListing.f[`primaryCategory`]!.nt = MarketplaceCategory
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MarketplaceListing.f[`secondaryCategory`]!.nt = MarketplaceCategory
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MarketplaceListingConnection.f[`edges`]!.nt = MarketplaceListingEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MarketplaceListingConnection.f[`nodes`]!.nt = MarketplaceListing
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MarketplaceListingConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MarketplaceListingEdge.f[`node`]!.nt = MarketplaceListing
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MembersCanDeleteReposClearAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MembersCanDeleteReposClearAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MembersCanDeleteReposClearAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MembersCanDeleteReposClearAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MembersCanDeleteReposDisableAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MembersCanDeleteReposDisableAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MembersCanDeleteReposDisableAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MembersCanDeleteReposDisableAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MembersCanDeleteReposEnableAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MembersCanDeleteReposEnableAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MembersCanDeleteReposEnableAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MembersCanDeleteReposEnableAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MentionedEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MergeBranchPayload.f[`mergeCommit`]!.nt = Commit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MergePullRequestPayload.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MergePullRequestPayload.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MergeQueue.f[`configuration`]!.nt = MergeQueueConfiguration
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MergeQueue.f[`entries`]!.nt = MergeQueueEntryConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MergeQueue.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MergeQueueEntry.f[`baseCommit`]!.nt = Commit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MergeQueueEntry.f[`enqueuer`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MergeQueueEntry.f[`headCommit`]!.nt = Commit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MergeQueueEntry.f[`mergeQueue`]!.nt = MergeQueue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MergeQueueEntry.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MergeQueueEntryConnection.f[`edges`]!.nt = MergeQueueEntryEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MergeQueueEntryConnection.f[`nodes`]!.nt = MergeQueueEntry
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MergeQueueEntryConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MergeQueueEntryEdge.f[`node`]!.nt = MergeQueueEntry
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MergedEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MergedEvent.f[`commit`]!.nt = Commit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MergedEvent.f[`mergeRef`]!.nt = Ref
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MergedEvent.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Milestone.f[`creator`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Milestone.f[`issues`]!.nt = IssueConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Milestone.f[`pullRequests`]!.nt = PullRequestConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Milestone.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MilestoneConnection.f[`edges`]!.nt = MilestoneEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MilestoneConnection.f[`nodes`]!.nt = Milestone
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MilestoneConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MilestoneEdge.f[`node`]!.nt = Milestone
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MilestonedEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MilestonedEvent.f[`subject`]!.nt = MilestoneItem
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MinimizeCommentPayload.f[`minimizedComment`]!.nt = Minimizable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MoveProjectCardPayload.f[`cardEdge`]!.nt = ProjectCardEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MoveProjectColumnPayload.f[`columnEdge`]!.nt = ProjectColumnEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MovedColumnsInProjectEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MovedColumnsInProjectEvent.f[`project`]!.nt = Project
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 MovedColumnsInProjectEvent.f[`projectCard`]!.nt = ProjectCard
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OIDCProvider.f[`enterprise`]!.nt = Enterprise
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OIDCProvider.f[`externalIdentities`]!.nt = ExternalIdentityConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OauthApplicationCreateAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OauthApplicationCreateAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OauthApplicationCreateAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OauthApplicationCreateAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgAddBillingManagerAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgAddBillingManagerAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgAddBillingManagerAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgAddBillingManagerAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgAddMemberAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgAddMemberAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgAddMemberAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgAddMemberAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgBlockUserAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgBlockUserAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgBlockUserAuditEntry.f[`blockedUser`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgBlockUserAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgBlockUserAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgConfigDisableCollaboratorsOnlyAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgConfigDisableCollaboratorsOnlyAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgConfigDisableCollaboratorsOnlyAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgConfigDisableCollaboratorsOnlyAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgConfigEnableCollaboratorsOnlyAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgConfigEnableCollaboratorsOnlyAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgConfigEnableCollaboratorsOnlyAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgConfigEnableCollaboratorsOnlyAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgCreateAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgCreateAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgCreateAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgCreateAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgDisableOauthAppRestrictionsAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgDisableOauthAppRestrictionsAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgDisableOauthAppRestrictionsAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgDisableOauthAppRestrictionsAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgDisableSamlAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgDisableSamlAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgDisableSamlAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgDisableSamlAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgDisableTwoFactorRequirementAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgDisableTwoFactorRequirementAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgDisableTwoFactorRequirementAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgDisableTwoFactorRequirementAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgEnableOauthAppRestrictionsAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgEnableOauthAppRestrictionsAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgEnableOauthAppRestrictionsAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgEnableOauthAppRestrictionsAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgEnableSamlAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgEnableSamlAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgEnableSamlAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgEnableSamlAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgEnableTwoFactorRequirementAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgEnableTwoFactorRequirementAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgEnableTwoFactorRequirementAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgEnableTwoFactorRequirementAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgInviteMemberAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgInviteMemberAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgInviteMemberAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgInviteMemberAuditEntry.f[`organizationInvitation`]!.nt = OrganizationInvitation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgInviteMemberAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgInviteToBusinessAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgInviteToBusinessAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgInviteToBusinessAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgInviteToBusinessAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgOauthAppAccessApprovedAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgOauthAppAccessApprovedAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgOauthAppAccessApprovedAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgOauthAppAccessApprovedAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgOauthAppAccessBlockedAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgOauthAppAccessBlockedAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgOauthAppAccessBlockedAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgOauthAppAccessBlockedAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgOauthAppAccessDeniedAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgOauthAppAccessDeniedAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgOauthAppAccessDeniedAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgOauthAppAccessDeniedAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgOauthAppAccessRequestedAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgOauthAppAccessRequestedAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgOauthAppAccessRequestedAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgOauthAppAccessRequestedAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgOauthAppAccessUnblockedAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgOauthAppAccessUnblockedAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgOauthAppAccessUnblockedAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgOauthAppAccessUnblockedAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgRemoveBillingManagerAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgRemoveBillingManagerAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgRemoveBillingManagerAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgRemoveBillingManagerAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgRemoveMemberAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgRemoveMemberAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgRemoveMemberAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgRemoveMemberAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgRemoveOutsideCollaboratorAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgRemoveOutsideCollaboratorAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgRemoveOutsideCollaboratorAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgRemoveOutsideCollaboratorAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgRestoreMemberAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgRestoreMemberAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgRestoreMemberAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgRestoreMemberAuditEntry.f[`restoredMemberships`]!.nt = OrgRestoreMemberAuditEntryMembership
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgRestoreMemberAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgRestoreMemberMembershipOrganizationAuditEntryData.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgRestoreMemberMembershipRepositoryAuditEntryData.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgRestoreMemberMembershipTeamAuditEntryData.f[`team`]!.nt = Team
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgUnblockUserAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgUnblockUserAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgUnblockUserAuditEntry.f[`blockedUser`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgUnblockUserAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgUnblockUserAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgUpdateDefaultRepositoryPermissionAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgUpdateDefaultRepositoryPermissionAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgUpdateDefaultRepositoryPermissionAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgUpdateDefaultRepositoryPermissionAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgUpdateMemberAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgUpdateMemberAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgUpdateMemberAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgUpdateMemberAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgUpdateMemberRepositoryCreationPermissionAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgUpdateMemberRepositoryCreationPermissionAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgUpdateMemberRepositoryCreationPermissionAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgUpdateMemberRepositoryCreationPermissionAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgUpdateMemberRepositoryInvitationPermissionAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgUpdateMemberRepositoryInvitationPermissionAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgUpdateMemberRepositoryInvitationPermissionAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrgUpdateMemberRepositoryInvitationPermissionAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`announcementBanner`]!.nt = AnnouncementBanner
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`auditLog`]!.nt = OrganizationAuditEntryConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`domains`]!.nt = VerifiableDomainConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`enterpriseOwners`]!.nt = OrganizationEnterpriseOwnerConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`interactionAbility`]!.nt = RepositoryInteractionAbility
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`ipAllowListEntries`]!.nt = IpAllowListEntryConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`itemShowcase`]!.nt = ProfileItemShowcase
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`lifetimeReceivedSponsorshipValues`]!.nt = SponsorAndLifetimeValueConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`mannequins`]!.nt = MannequinConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`memberStatuses`]!.nt = UserStatusConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`membersWithRole`]!.nt = OrganizationMemberConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`packages`]!.nt = PackageConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`pendingMembers`]!.nt = UserConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`pinnableItems`]!.nt = PinnableItemConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`pinnedItems`]!.nt = PinnableItemConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`project`]!.nt = Project
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`projectV2`]!.nt = ProjectV2
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`projects`]!.nt = ProjectConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`projectsV2`]!.nt = ProjectV2Connection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`recentProjects`]!.nt = ProjectV2Connection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`repositories`]!.nt = RepositoryConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`repositoryDiscussionComments`]!.nt = DiscussionCommentConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`repositoryDiscussions`]!.nt = DiscussionConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`repositoryMigrations`]!.nt = RepositoryMigrationConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`ruleset`]!.nt = RepositoryRuleset
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`rulesets`]!.nt = RepositoryRulesetConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`samlIdentityProvider`]!.nt = OrganizationIdentityProvider
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`sponsoring`]!.nt = SponsorConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`sponsors`]!.nt = SponsorConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`sponsorsActivities`]!.nt = SponsorsActivityConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`sponsorsListing`]!.nt = SponsorsListing
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`sponsorshipForViewerAsSponsor`]!.nt = Sponsorship
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`sponsorshipForViewerAsSponsorable`]!.nt = Sponsorship
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`sponsorshipNewsletters`]!.nt = SponsorshipNewsletterConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`sponsorshipsAsMaintainer`]!.nt = SponsorshipConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`sponsorshipsAsSponsor`]!.nt = SponsorshipConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`team`]!.nt = Team
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Organization.f[`teams`]!.nt = TeamConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrganizationAuditEntryConnection.f[`edges`]!.nt = OrganizationAuditEntryEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrganizationAuditEntryConnection.f[`nodes`]!.nt = OrganizationAuditEntry
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrganizationAuditEntryConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrganizationAuditEntryEdge.f[`node`]!.nt = OrganizationAuditEntry
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrganizationConnection.f[`edges`]!.nt = OrganizationEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrganizationConnection.f[`nodes`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrganizationConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrganizationEdge.f[`node`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrganizationEnterpriseOwnerConnection.f[`edges`]!.nt = OrganizationEnterpriseOwnerEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrganizationEnterpriseOwnerConnection.f[`nodes`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrganizationEnterpriseOwnerConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrganizationEnterpriseOwnerEdge.f[`node`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrganizationIdentityProvider.f[`externalIdentities`]!.nt = ExternalIdentityConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrganizationIdentityProvider.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrganizationInvitation.f[`invitee`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrganizationInvitation.f[`inviter`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrganizationInvitation.f[`inviterActor`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrganizationInvitation.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrganizationInvitationConnection.f[`edges`]!.nt = OrganizationInvitationEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrganizationInvitationConnection.f[`nodes`]!.nt = OrganizationInvitation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrganizationInvitationConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrganizationInvitationEdge.f[`node`]!.nt = OrganizationInvitation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrganizationMemberConnection.f[`edges`]!.nt = OrganizationMemberEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrganizationMemberConnection.f[`nodes`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrganizationMemberConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrganizationMemberEdge.f[`node`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrganizationTeamsHovercardContext.f[`relevantTeams`]!.nt = TeamConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 OrganizationsHovercardContext.f[`relevantOrganizations`]!.nt = OrganizationConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Package.f[`latestVersion`]!.nt = PackageVersion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Package.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Package.f[`statistics`]!.nt = PackageStatistics
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Package.f[`version`]!.nt = PackageVersion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Package.f[`versions`]!.nt = PackageVersionConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PackageConnection.f[`edges`]!.nt = PackageEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PackageConnection.f[`nodes`]!.nt = Package
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PackageConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PackageEdge.f[`node`]!.nt = Package
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PackageFile.f[`packageVersion`]!.nt = PackageVersion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PackageFileConnection.f[`edges`]!.nt = PackageFileEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PackageFileConnection.f[`nodes`]!.nt = PackageFile
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PackageFileConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PackageFileEdge.f[`node`]!.nt = PackageFile
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PackageTag.f[`version`]!.nt = PackageVersion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PackageVersion.f[`files`]!.nt = PackageFileConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PackageVersion.f[`package`]!.nt = Package
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PackageVersion.f[`release`]!.nt = Release
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PackageVersion.f[`statistics`]!.nt = PackageVersionStatistics
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PackageVersionConnection.f[`edges`]!.nt = PackageVersionEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PackageVersionConnection.f[`nodes`]!.nt = PackageVersion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PackageVersionConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PackageVersionEdge.f[`node`]!.nt = PackageVersion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ParentIssueAddedEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ParentIssueAddedEvent.f[`parent`]!.nt = Issue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ParentIssueRemovedEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ParentIssueRemovedEvent.f[`parent`]!.nt = Issue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PermissionSource.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PermissionSource.f[`source`]!.nt = PermissionGranter
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PinEnvironmentPayload.f[`environment`]!.nt = Environment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PinEnvironmentPayload.f[`pinnedEnvironment`]!.nt = PinnedEnvironment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PinIssuePayload.f[`issue`]!.nt = Issue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PinnableItemConnection.f[`edges`]!.nt = PinnableItemEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PinnableItemConnection.f[`nodes`]!.nt = PinnableItem
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PinnableItemConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PinnableItemEdge.f[`node`]!.nt = PinnableItem
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PinnedDiscussion.f[`discussion`]!.nt = Discussion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PinnedDiscussion.f[`pinnedBy`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PinnedDiscussion.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PinnedDiscussionConnection.f[`edges`]!.nt = PinnedDiscussionEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PinnedDiscussionConnection.f[`nodes`]!.nt = PinnedDiscussion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PinnedDiscussionConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PinnedDiscussionEdge.f[`node`]!.nt = PinnedDiscussion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PinnedEnvironment.f[`environment`]!.nt = Environment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PinnedEnvironment.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PinnedEnvironmentConnection.f[`edges`]!.nt = PinnedEnvironmentEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PinnedEnvironmentConnection.f[`nodes`]!.nt = PinnedEnvironment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PinnedEnvironmentConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PinnedEnvironmentEdge.f[`node`]!.nt = PinnedEnvironment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PinnedEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PinnedEvent.f[`issue`]!.nt = Issue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PinnedIssue.f[`issue`]!.nt = Issue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PinnedIssue.f[`pinnedBy`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PinnedIssue.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PinnedIssueConnection.f[`edges`]!.nt = PinnedIssueEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PinnedIssueConnection.f[`nodes`]!.nt = PinnedIssue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PinnedIssueConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PinnedIssueEdge.f[`node`]!.nt = PinnedIssue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PrivateRepositoryForkingDisableAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PrivateRepositoryForkingDisableAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PrivateRepositoryForkingDisableAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PrivateRepositoryForkingDisableAuditEntry.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PrivateRepositoryForkingDisableAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PrivateRepositoryForkingEnableAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PrivateRepositoryForkingEnableAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PrivateRepositoryForkingEnableAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PrivateRepositoryForkingEnableAuditEntry.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PrivateRepositoryForkingEnableAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProfileItemShowcase.f[`items`]!.nt = PinnableItemConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Project.f[`columns`]!.nt = ProjectColumnConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Project.f[`creator`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Project.f[`owner`]!.nt = ProjectOwner
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Project.f[`pendingCards`]!.nt = ProjectCardConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Project.f[`progress`]!.nt = ProjectProgress
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectCard.f[`column`]!.nt = ProjectColumn
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectCard.f[`content`]!.nt = ProjectCardItem
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectCard.f[`creator`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectCard.f[`project`]!.nt = Project
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectCardConnection.f[`edges`]!.nt = ProjectCardEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectCardConnection.f[`nodes`]!.nt = ProjectCard
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectCardConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectCardEdge.f[`node`]!.nt = ProjectCard
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectColumn.f[`cards`]!.nt = ProjectCardConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectColumn.f[`project`]!.nt = Project
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectColumnConnection.f[`edges`]!.nt = ProjectColumnEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectColumnConnection.f[`nodes`]!.nt = ProjectColumn
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectColumnConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectColumnEdge.f[`node`]!.nt = ProjectColumn
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectConnection.f[`edges`]!.nt = ProjectEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectConnection.f[`nodes`]!.nt = Project
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectEdge.f[`node`]!.nt = Project
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2.f[`creator`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2.f[`field`]!.nt = ProjectV2FieldConfiguration
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2.f[`fields`]!.nt = ProjectV2FieldConfigurationConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2.f[`items`]!.nt = ProjectV2ItemConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2.f[`owner`]!.nt = ProjectV2Owner
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2.f[`repositories`]!.nt = RepositoryConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2.f[`statusUpdates`]!.nt = ProjectV2StatusUpdateConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2.f[`teams`]!.nt = TeamConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2.f[`view`]!.nt = ProjectV2View
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2.f[`views`]!.nt = ProjectV2ViewConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2.f[`workflow`]!.nt = ProjectV2Workflow
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2.f[`workflows`]!.nt = ProjectV2WorkflowConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ActorConnection.f[`edges`]!.nt = ProjectV2ActorEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ActorConnection.f[`nodes`]!.nt = ProjectV2Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ActorConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ActorEdge.f[`node`]!.nt = ProjectV2Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2Connection.f[`edges`]!.nt = ProjectV2Edge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2Connection.f[`nodes`]!.nt = ProjectV2
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2Connection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2Edge.f[`node`]!.nt = ProjectV2
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2Field.f[`project`]!.nt = ProjectV2
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2FieldConfigurationConnection.f[`edges`]!.nt = ProjectV2FieldConfigurationEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2FieldConfigurationConnection.f[`nodes`]!.nt = ProjectV2FieldConfiguration
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2FieldConfigurationConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2FieldConfigurationEdge.f[`node`]!.nt = ProjectV2FieldConfiguration
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2FieldConnection.f[`edges`]!.nt = ProjectV2FieldEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2FieldConnection.f[`nodes`]!.nt = ProjectV2Field
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2FieldConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2FieldEdge.f[`node`]!.nt = ProjectV2Field
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2Item.f[`content`]!.nt = ProjectV2ItemContent
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2Item.f[`creator`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2Item.f[`fieldValueByName`]!.nt = ProjectV2ItemFieldValue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2Item.f[`fieldValues`]!.nt = ProjectV2ItemFieldValueConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2Item.f[`project`]!.nt = ProjectV2
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ItemConnection.f[`edges`]!.nt = ProjectV2ItemEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ItemConnection.f[`nodes`]!.nt = ProjectV2Item
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ItemConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ItemEdge.f[`node`]!.nt = ProjectV2Item
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ItemFieldDateValue.f[`creator`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ItemFieldDateValue.f[`field`]!.nt = ProjectV2FieldConfiguration
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ItemFieldDateValue.f[`item`]!.nt = ProjectV2Item
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ItemFieldIterationValue.f[`creator`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ItemFieldIterationValue.f[`field`]!.nt = ProjectV2FieldConfiguration
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ItemFieldIterationValue.f[`item`]!.nt = ProjectV2Item
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ItemFieldLabelValue.f[`field`]!.nt = ProjectV2FieldConfiguration
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ItemFieldLabelValue.f[`labels`]!.nt = LabelConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ItemFieldMilestoneValue.f[`field`]!.nt = ProjectV2FieldConfiguration
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ItemFieldMilestoneValue.f[`milestone`]!.nt = Milestone
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ItemFieldNumberValue.f[`creator`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ItemFieldNumberValue.f[`field`]!.nt = ProjectV2FieldConfiguration
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ItemFieldNumberValue.f[`item`]!.nt = ProjectV2Item
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ItemFieldPullRequestValue.f[`field`]!.nt = ProjectV2FieldConfiguration
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ItemFieldPullRequestValue.f[`pullRequests`]!.nt = PullRequestConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ItemFieldRepositoryValue.f[`field`]!.nt = ProjectV2FieldConfiguration
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ItemFieldRepositoryValue.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ItemFieldReviewerValue.f[`field`]!.nt = ProjectV2FieldConfiguration
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ItemFieldReviewerValue.f[`reviewers`]!.nt = RequestedReviewerConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ItemFieldSingleSelectValue.f[`creator`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ItemFieldSingleSelectValue.f[`field`]!.nt = ProjectV2FieldConfiguration
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ItemFieldSingleSelectValue.f[`item`]!.nt = ProjectV2Item
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ItemFieldTextValue.f[`creator`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ItemFieldTextValue.f[`field`]!.nt = ProjectV2FieldConfiguration
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ItemFieldTextValue.f[`item`]!.nt = ProjectV2Item
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ItemFieldUserValue.f[`field`]!.nt = ProjectV2FieldConfiguration
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ItemFieldUserValue.f[`users`]!.nt = UserConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ItemFieldValueConnection.f[`edges`]!.nt = ProjectV2ItemFieldValueEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ItemFieldValueConnection.f[`nodes`]!.nt = ProjectV2ItemFieldValue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ItemFieldValueConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ItemFieldValueEdge.f[`node`]!.nt = ProjectV2ItemFieldValue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2IterationField.f[`configuration`]!.nt = ProjectV2IterationFieldConfiguration
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2IterationField.f[`project`]!.nt = ProjectV2
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2IterationFieldConfiguration.f[`completedIterations`]!.nt = ProjectV2IterationFieldIteration
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2IterationFieldConfiguration.f[`iterations`]!.nt = ProjectV2IterationFieldIteration
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2SingleSelectField.f[`options`]!.nt = ProjectV2SingleSelectFieldOption
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2SingleSelectField.f[`project`]!.nt = ProjectV2
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2SortBy.f[`field`]!.nt = ProjectV2Field
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2SortByConnection.f[`edges`]!.nt = ProjectV2SortByEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2SortByConnection.f[`nodes`]!.nt = ProjectV2SortBy
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2SortByConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2SortByEdge.f[`node`]!.nt = ProjectV2SortBy
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2SortByField.f[`field`]!.nt = ProjectV2FieldConfiguration
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2SortByFieldConnection.f[`edges`]!.nt = ProjectV2SortByFieldEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2SortByFieldConnection.f[`nodes`]!.nt = ProjectV2SortByField
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2SortByFieldConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2SortByFieldEdge.f[`node`]!.nt = ProjectV2SortByField
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2StatusUpdate.f[`creator`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2StatusUpdate.f[`project`]!.nt = ProjectV2
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2StatusUpdateConnection.f[`edges`]!.nt = ProjectV2StatusUpdateEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2StatusUpdateConnection.f[`nodes`]!.nt = ProjectV2StatusUpdate
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2StatusUpdateConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2StatusUpdateEdge.f[`node`]!.nt = ProjectV2StatusUpdate
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2View.f[`fields`]!.nt = ProjectV2FieldConfigurationConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2View.f[`groupBy`]!.nt = ProjectV2FieldConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2View.f[`groupByFields`]!.nt = ProjectV2FieldConfigurationConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2View.f[`project`]!.nt = ProjectV2
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2View.f[`sortBy`]!.nt = ProjectV2SortByConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2View.f[`sortByFields`]!.nt = ProjectV2SortByFieldConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2View.f[`verticalGroupBy`]!.nt = ProjectV2FieldConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2View.f[`verticalGroupByFields`]!.nt = ProjectV2FieldConfigurationConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2View.f[`visibleFields`]!.nt = ProjectV2FieldConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ViewConnection.f[`edges`]!.nt = ProjectV2ViewEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ViewConnection.f[`nodes`]!.nt = ProjectV2View
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ViewConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2ViewEdge.f[`node`]!.nt = ProjectV2View
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2Workflow.f[`project`]!.nt = ProjectV2
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2WorkflowConnection.f[`edges`]!.nt = ProjectV2WorkflowEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2WorkflowConnection.f[`nodes`]!.nt = ProjectV2Workflow
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2WorkflowConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ProjectV2WorkflowEdge.f[`node`]!.nt = ProjectV2Workflow
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PublicKeyConnection.f[`edges`]!.nt = PublicKeyEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PublicKeyConnection.f[`nodes`]!.nt = PublicKey
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PublicKeyConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PublicKeyEdge.f[`node`]!.nt = PublicKey
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PublishSponsorsTierPayload.f[`sponsorsTier`]!.nt = SponsorsTier
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`assignees`]!.nt = UserConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`author`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`autoMergeRequest`]!.nt = AutoMergeRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`baseRef`]!.nt = Ref
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`baseRepository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`closingIssuesReferences`]!.nt = IssueConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`comments`]!.nt = IssueCommentConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`commits`]!.nt = PullRequestCommitConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`editor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`files`]!.nt = PullRequestChangedFileConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`headRef`]!.nt = Ref
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`headRepository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`headRepositoryOwner`]!.nt = RepositoryOwner
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`hovercard`]!.nt = Hovercard
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`labels`]!.nt = LabelConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`latestOpinionatedReviews`]!.nt = PullRequestReviewConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`latestReviews`]!.nt = PullRequestReviewConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`mergeCommit`]!.nt = Commit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`mergeQueue`]!.nt = MergeQueue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`mergeQueueEntry`]!.nt = MergeQueueEntry
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`mergedBy`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`milestone`]!.nt = Milestone
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`participants`]!.nt = UserConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`potentialMergeCommit`]!.nt = Commit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`projectCards`]!.nt = ProjectCardConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`projectItems`]!.nt = ProjectV2ItemConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`projectV2`]!.nt = ProjectV2
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`projectsV2`]!.nt = ProjectV2Connection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`reactionGroups`]!.nt = ReactionGroup
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`reactions`]!.nt = ReactionConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`reviewRequests`]!.nt = ReviewRequestConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`reviewThreads`]!.nt = PullRequestReviewThreadConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`reviews`]!.nt = PullRequestReviewConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`statusCheckRollup`]!.nt = StatusCheckRollup
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`suggestedReviewers`]!.nt = SuggestedReviewer
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`timeline`]!.nt = PullRequestTimelineConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`timelineItems`]!.nt = PullRequestTimelineItemsConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`userContentEdits`]!.nt = UserContentEditConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`viewerLatestReview`]!.nt = PullRequestReview
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequest.f[`viewerLatestReviewRequest`]!.nt = ReviewRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestChangedFileConnection.f[`edges`]!.nt = PullRequestChangedFileEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestChangedFileConnection.f[`nodes`]!.nt = PullRequestChangedFile
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestChangedFileConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestChangedFileEdge.f[`node`]!.nt = PullRequestChangedFile
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestCommit.f[`commit`]!.nt = Commit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestCommit.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestCommitCommentThread.f[`comments`]!.nt = CommitCommentConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestCommitCommentThread.f[`commit`]!.nt = Commit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestCommitCommentThread.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestCommitCommentThread.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestCommitConnection.f[`edges`]!.nt = PullRequestCommitEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestCommitConnection.f[`nodes`]!.nt = PullRequestCommit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestCommitConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestCommitEdge.f[`node`]!.nt = PullRequestCommit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestConnection.f[`edges`]!.nt = PullRequestEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestConnection.f[`nodes`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestContributionsByRepository.f[`contributions`]!.nt = CreatedPullRequestContributionConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestContributionsByRepository.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestEdge.f[`node`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReview.f[`author`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReview.f[`comments`]!.nt = PullRequestReviewCommentConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReview.f[`commit`]!.nt = Commit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReview.f[`editor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReview.f[`onBehalfOf`]!.nt = TeamConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReview.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReview.f[`reactionGroups`]!.nt = ReactionGroup
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReview.f[`reactions`]!.nt = ReactionConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReview.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReview.f[`userContentEdits`]!.nt = UserContentEditConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReviewComment.f[`author`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReviewComment.f[`commit`]!.nt = Commit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReviewComment.f[`editor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReviewComment.f[`originalCommit`]!.nt = Commit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReviewComment.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReviewComment.f[`pullRequestReview`]!.nt = PullRequestReview
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReviewComment.f[`reactionGroups`]!.nt = ReactionGroup
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReviewComment.f[`reactions`]!.nt = ReactionConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReviewComment.f[`replyTo`]!.nt = PullRequestReviewComment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReviewComment.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReviewComment.f[`userContentEdits`]!.nt = UserContentEditConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReviewCommentConnection.f[`edges`]!.nt = PullRequestReviewCommentEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReviewCommentConnection.f[`nodes`]!.nt = PullRequestReviewComment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReviewCommentConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReviewCommentEdge.f[`node`]!.nt = PullRequestReviewComment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReviewConnection.f[`edges`]!.nt = PullRequestReviewEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReviewConnection.f[`nodes`]!.nt = PullRequestReview
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReviewConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReviewContributionsByRepository.f[`contributions`]!.nt = CreatedPullRequestReviewContributionConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReviewContributionsByRepository.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReviewEdge.f[`node`]!.nt = PullRequestReview
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReviewThread.f[`comments`]!.nt = PullRequestReviewCommentConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReviewThread.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReviewThread.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReviewThread.f[`resolvedBy`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReviewThreadConnection.f[`edges`]!.nt = PullRequestReviewThreadEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReviewThreadConnection.f[`nodes`]!.nt = PullRequestReviewThread
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReviewThreadConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestReviewThreadEdge.f[`node`]!.nt = PullRequestReviewThread
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestRevisionMarker.f[`lastSeenCommit`]!.nt = Commit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestRevisionMarker.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestTemplate.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestThread.f[`comments`]!.nt = PullRequestReviewCommentConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestThread.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestThread.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestThread.f[`resolvedBy`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestTimelineConnection.f[`edges`]!.nt = PullRequestTimelineItemEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestTimelineConnection.f[`nodes`]!.nt = PullRequestTimelineItem
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestTimelineConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestTimelineItemEdge.f[`node`]!.nt = PullRequestTimelineItem
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestTimelineItemsConnection.f[`edges`]!.nt = PullRequestTimelineItemsEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestTimelineItemsConnection.f[`nodes`]!.nt = PullRequestTimelineItems
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestTimelineItemsConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PullRequestTimelineItemsEdge.f[`node`]!.nt = PullRequestTimelineItems
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Push.f[`pusher`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Push.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PushAllowance.f[`actor`]!.nt = PushAllowanceActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PushAllowance.f[`branchProtectionRule`]!.nt = BranchProtectionRule
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PushAllowanceConnection.f[`edges`]!.nt = PushAllowanceEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PushAllowanceConnection.f[`nodes`]!.nt = PushAllowance
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PushAllowanceConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PushAllowanceEdge.f[`node`]!.nt = PushAllowance
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReactingUserConnection.f[`edges`]!.nt = ReactingUserEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReactingUserConnection.f[`nodes`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReactingUserConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReactingUserEdge.f[`node`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Reaction.f[`reactable`]!.nt = Reactable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Reaction.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReactionConnection.f[`edges`]!.nt = ReactionEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReactionConnection.f[`nodes`]!.nt = Reaction
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReactionConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReactionEdge.f[`node`]!.nt = Reaction
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReactionGroup.f[`reactors`]!.nt = ReactorConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReactionGroup.f[`subject`]!.nt = Reactable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReactionGroup.f[`users`]!.nt = ReactingUserConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReactorConnection.f[`edges`]!.nt = ReactorEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReactorConnection.f[`nodes`]!.nt = Reactor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReactorConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReactorEdge.f[`node`]!.nt = Reactor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReadyForReviewEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReadyForReviewEvent.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Ref.f[`associatedPullRequests`]!.nt = PullRequestConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Ref.f[`branchProtectionRule`]!.nt = BranchProtectionRule
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Ref.f[`compare`]!.nt = Comparison
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Ref.f[`refUpdateRule`]!.nt = RefUpdateRule
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Ref.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Ref.f[`rules`]!.nt = RepositoryRuleConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Ref.f[`target`]!.nt = GitObject
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RefConnection.f[`edges`]!.nt = RefEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RefConnection.f[`nodes`]!.nt = Ref
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RefConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RefEdge.f[`node`]!.nt = Ref
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReferencedEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReferencedEvent.f[`commit`]!.nt = Commit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReferencedEvent.f[`commitRepository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReferencedEvent.f[`subject`]!.nt = ReferencedSubject
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RegenerateEnterpriseIdentityProviderRecoveryCodesPayload.f[`identityProvider`]!.nt = EnterpriseIdentityProvider
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RejectDeploymentsPayload.f[`deployments`]!.nt = Deployment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Release.f[`author`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Release.f[`mentions`]!.nt = UserConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Release.f[`reactionGroups`]!.nt = ReactionGroup
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Release.f[`reactions`]!.nt = ReactionConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Release.f[`releaseAssets`]!.nt = ReleaseAssetConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Release.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Release.f[`tag`]!.nt = Ref
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Release.f[`tagCommit`]!.nt = Commit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReleaseAsset.f[`release`]!.nt = Release
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReleaseAsset.f[`uploadedBy`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReleaseAssetConnection.f[`edges`]!.nt = ReleaseAssetEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReleaseAssetConnection.f[`nodes`]!.nt = ReleaseAsset
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReleaseAssetConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReleaseAssetEdge.f[`node`]!.nt = ReleaseAsset
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReleaseConnection.f[`edges`]!.nt = ReleaseEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReleaseConnection.f[`nodes`]!.nt = Release
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReleaseConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReleaseEdge.f[`node`]!.nt = Release
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RemoveAssigneesFromAssignablePayload.f[`assignable`]!.nt = Assignable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RemoveEnterpriseAdminPayload.f[`admin`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RemoveEnterpriseAdminPayload.f[`enterprise`]!.nt = Enterprise
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RemoveEnterpriseAdminPayload.f[`viewer`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RemoveEnterpriseIdentityProviderPayload.f[`identityProvider`]!.nt = EnterpriseIdentityProvider
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RemoveEnterpriseMemberPayload.f[`enterprise`]!.nt = Enterprise
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RemoveEnterpriseMemberPayload.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RemoveEnterpriseMemberPayload.f[`viewer`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RemoveEnterpriseOrganizationPayload.f[`enterprise`]!.nt = Enterprise
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RemoveEnterpriseOrganizationPayload.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RemoveEnterpriseOrganizationPayload.f[`viewer`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RemoveLabelsFromLabelablePayload.f[`labelable`]!.nt = Labelable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RemoveOutsideCollaboratorPayload.f[`removedUser`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RemoveReactionPayload.f[`reaction`]!.nt = Reaction
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RemoveReactionPayload.f[`reactionGroups`]!.nt = ReactionGroup
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RemoveReactionPayload.f[`subject`]!.nt = Reactable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RemoveStarPayload.f[`starrable`]!.nt = Starrable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RemoveSubIssuePayload.f[`issue`]!.nt = Issue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RemoveSubIssuePayload.f[`subIssue`]!.nt = Issue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RemoveUpvotePayload.f[`subject`]!.nt = Votable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RemovedFromMergeQueueEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RemovedFromMergeQueueEvent.f[`beforeCommit`]!.nt = Commit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RemovedFromMergeQueueEvent.f[`enqueuer`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RemovedFromMergeQueueEvent.f[`mergeQueue`]!.nt = MergeQueue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RemovedFromMergeQueueEvent.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RemovedFromProjectEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RemovedFromProjectEvent.f[`project`]!.nt = Project
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RenamedTitleEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RenamedTitleEvent.f[`subject`]!.nt = RenamedTitleSubject
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReopenDiscussionPayload.f[`discussion`]!.nt = Discussion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReopenIssuePayload.f[`issue`]!.nt = Issue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReopenPullRequestPayload.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReopenedEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReopenedEvent.f[`closable`]!.nt = Closable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReorderEnvironmentPayload.f[`environment`]!.nt = Environment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoAccessAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoAccessAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoAccessAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoAccessAuditEntry.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoAccessAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoAddMemberAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoAddMemberAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoAddMemberAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoAddMemberAuditEntry.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoAddMemberAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoAddTopicAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoAddTopicAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoAddTopicAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoAddTopicAuditEntry.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoAddTopicAuditEntry.f[`topic`]!.nt = Topic
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoAddTopicAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoArchivedAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoArchivedAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoArchivedAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoArchivedAuditEntry.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoArchivedAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoChangeMergeSettingAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoChangeMergeSettingAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoChangeMergeSettingAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoChangeMergeSettingAuditEntry.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoChangeMergeSettingAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigDisableAnonymousGitAccessAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigDisableAnonymousGitAccessAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigDisableAnonymousGitAccessAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigDisableAnonymousGitAccessAuditEntry.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigDisableAnonymousGitAccessAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigDisableCollaboratorsOnlyAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigDisableCollaboratorsOnlyAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigDisableCollaboratorsOnlyAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigDisableCollaboratorsOnlyAuditEntry.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigDisableCollaboratorsOnlyAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigDisableContributorsOnlyAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigDisableContributorsOnlyAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigDisableContributorsOnlyAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigDisableContributorsOnlyAuditEntry.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigDisableContributorsOnlyAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigDisableSockpuppetDisallowedAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigDisableSockpuppetDisallowedAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigDisableSockpuppetDisallowedAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigDisableSockpuppetDisallowedAuditEntry.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigDisableSockpuppetDisallowedAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigEnableAnonymousGitAccessAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigEnableAnonymousGitAccessAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigEnableAnonymousGitAccessAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigEnableAnonymousGitAccessAuditEntry.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigEnableAnonymousGitAccessAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigEnableCollaboratorsOnlyAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigEnableCollaboratorsOnlyAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigEnableCollaboratorsOnlyAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigEnableCollaboratorsOnlyAuditEntry.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigEnableCollaboratorsOnlyAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigEnableContributorsOnlyAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigEnableContributorsOnlyAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigEnableContributorsOnlyAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigEnableContributorsOnlyAuditEntry.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigEnableContributorsOnlyAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigEnableSockpuppetDisallowedAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigEnableSockpuppetDisallowedAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigEnableSockpuppetDisallowedAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigEnableSockpuppetDisallowedAuditEntry.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigEnableSockpuppetDisallowedAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigLockAnonymousGitAccessAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigLockAnonymousGitAccessAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigLockAnonymousGitAccessAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigLockAnonymousGitAccessAuditEntry.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigLockAnonymousGitAccessAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigUnlockAnonymousGitAccessAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigUnlockAnonymousGitAccessAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigUnlockAnonymousGitAccessAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigUnlockAnonymousGitAccessAuditEntry.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoConfigUnlockAnonymousGitAccessAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoCreateAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoCreateAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoCreateAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoCreateAuditEntry.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoCreateAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoDestroyAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoDestroyAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoDestroyAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoDestroyAuditEntry.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoDestroyAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoRemoveMemberAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoRemoveMemberAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoRemoveMemberAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoRemoveMemberAuditEntry.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoRemoveMemberAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoRemoveTopicAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoRemoveTopicAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoRemoveTopicAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoRemoveTopicAuditEntry.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoRemoveTopicAuditEntry.f[`topic`]!.nt = Topic
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepoRemoveTopicAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`assignableUsers`]!.nt = UserConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`branchProtectionRules`]!.nt = BranchProtectionRuleConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`codeOfConduct`]!.nt = CodeOfConduct
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`codeowners`]!.nt = RepositoryCodeowners
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`collaborators`]!.nt = RepositoryCollaboratorConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`commitComments`]!.nt = CommitCommentConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`contactLinks`]!.nt = RepositoryContactLink
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`contributingGuidelines`]!.nt = ContributingGuidelines
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`defaultBranchRef`]!.nt = Ref
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`dependencyGraphManifests`]!.nt = DependencyGraphManifestConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`deployKeys`]!.nt = DeployKeyConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`deployments`]!.nt = DeploymentConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`discussion`]!.nt = Discussion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`discussionCategories`]!.nt = DiscussionCategoryConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`discussionCategory`]!.nt = DiscussionCategory
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`discussions`]!.nt = DiscussionConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`environment`]!.nt = Environment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`environments`]!.nt = EnvironmentConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`forks`]!.nt = RepositoryConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`fundingLinks`]!.nt = FundingLink
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`interactionAbility`]!.nt = RepositoryInteractionAbility
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`issue`]!.nt = Issue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`issueOrPullRequest`]!.nt = IssueOrPullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`issueTemplates`]!.nt = IssueTemplate
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`issues`]!.nt = IssueConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`label`]!.nt = Label
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`labels`]!.nt = LabelConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`languages`]!.nt = LanguageConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`latestRelease`]!.nt = Release
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`licenseInfo`]!.nt = License
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`mentionableUsers`]!.nt = UserConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`mergeQueue`]!.nt = MergeQueue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`milestone`]!.nt = Milestone
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`milestones`]!.nt = MilestoneConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`object`]!.nt = GitObject
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`owner`]!.nt = RepositoryOwner
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`packages`]!.nt = PackageConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`parent`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`pinnedDiscussions`]!.nt = PinnedDiscussionConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`pinnedEnvironments`]!.nt = PinnedEnvironmentConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`pinnedIssues`]!.nt = PinnedIssueConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`planFeatures`]!.nt = RepositoryPlanFeatures
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`primaryLanguage`]!.nt = Language
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`project`]!.nt = Project
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`projectV2`]!.nt = ProjectV2
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`projects`]!.nt = ProjectConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`projectsV2`]!.nt = ProjectV2Connection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`pullRequestTemplates`]!.nt = PullRequestTemplate
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`pullRequests`]!.nt = PullRequestConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`recentProjects`]!.nt = ProjectV2Connection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`ref`]!.nt = Ref
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`refs`]!.nt = RefConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`release`]!.nt = Release
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`releases`]!.nt = ReleaseConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`repositoryTopics`]!.nt = RepositoryTopicConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`ruleset`]!.nt = RepositoryRuleset
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`rulesets`]!.nt = RepositoryRulesetConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`stargazers`]!.nt = StargazerConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`submodules`]!.nt = SubmoduleConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`templateRepository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`vulnerabilityAlert`]!.nt = RepositoryVulnerabilityAlert
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`vulnerabilityAlerts`]!.nt = RepositoryVulnerabilityAlertConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Repository.f[`watchers`]!.nt = UserConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryCodeowners.f[`errors`]!.nt = RepositoryCodeownersError
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryCollaboratorConnection.f[`edges`]!.nt = RepositoryCollaboratorEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryCollaboratorConnection.f[`nodes`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryCollaboratorConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryCollaboratorEdge.f[`node`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryCollaboratorEdge.f[`permissionSources`]!.nt = PermissionSource
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryConnection.f[`edges`]!.nt = RepositoryEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryConnection.f[`nodes`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryEdge.f[`node`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryInvitation.f[`invitee`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryInvitation.f[`inviter`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryInvitation.f[`repository`]!.nt = RepositoryInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryInvitationConnection.f[`edges`]!.nt = RepositoryInvitationEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryInvitationConnection.f[`nodes`]!.nt = RepositoryInvitation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryInvitationConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryInvitationEdge.f[`node`]!.nt = RepositoryInvitation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryMigration.f[`migrationSource`]!.nt = MigrationSource
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryMigrationConnection.f[`edges`]!.nt = RepositoryMigrationEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryMigrationConnection.f[`nodes`]!.nt = RepositoryMigration
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryMigrationConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryMigrationEdge.f[`node`]!.nt = RepositoryMigration
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryPropertyConditionTarget.f[`exclude`]!.nt = PropertyTargetDefinition
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryPropertyConditionTarget.f[`include`]!.nt = PropertyTargetDefinition
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryRule.f[`parameters`]!.nt = RuleParameters
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryRule.f[`repositoryRuleset`]!.nt = RepositoryRuleset
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryRuleConditions.f[`refName`]!.nt = RefNameConditionTarget
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryRuleConditions.f[`repositoryId`]!.nt = RepositoryIdConditionTarget
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryRuleConditions.f[`repositoryName`]!.nt = RepositoryNameConditionTarget
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryRuleConditions.f[`repositoryProperty`]!.nt = RepositoryPropertyConditionTarget
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryRuleConnection.f[`edges`]!.nt = RepositoryRuleEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryRuleConnection.f[`nodes`]!.nt = RepositoryRule
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryRuleConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryRuleEdge.f[`node`]!.nt = RepositoryRule
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryRuleset.f[`bypassActors`]!.nt = RepositoryRulesetBypassActorConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryRuleset.f[`conditions`]!.nt = RepositoryRuleConditions
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryRuleset.f[`rules`]!.nt = RepositoryRuleConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryRuleset.f[`source`]!.nt = RuleSource
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryRulesetBypassActor.f[`actor`]!.nt = BypassActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryRulesetBypassActor.f[`repositoryRuleset`]!.nt = RepositoryRuleset
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryRulesetBypassActorConnection.f[`edges`]!.nt = RepositoryRulesetBypassActorEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryRulesetBypassActorConnection.f[`nodes`]!.nt = RepositoryRulesetBypassActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryRulesetBypassActorConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryRulesetBypassActorEdge.f[`node`]!.nt = RepositoryRulesetBypassActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryRulesetConnection.f[`edges`]!.nt = RepositoryRulesetEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryRulesetConnection.f[`nodes`]!.nt = RepositoryRuleset
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryRulesetConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryRulesetEdge.f[`node`]!.nt = RepositoryRuleset
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryTopic.f[`topic`]!.nt = Topic
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryTopicConnection.f[`edges`]!.nt = RepositoryTopicEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryTopicConnection.f[`nodes`]!.nt = RepositoryTopic
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryTopicConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryTopicEdge.f[`node`]!.nt = RepositoryTopic
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryVisibilityChangeDisableAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryVisibilityChangeDisableAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryVisibilityChangeDisableAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryVisibilityChangeDisableAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryVisibilityChangeEnableAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryVisibilityChangeEnableAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryVisibilityChangeEnableAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryVisibilityChangeEnableAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryVulnerabilityAlert.f[`dependabotUpdate`]!.nt = DependabotUpdate
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryVulnerabilityAlert.f[`dismisser`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryVulnerabilityAlert.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryVulnerabilityAlert.f[`securityAdvisory`]!.nt = SecurityAdvisory
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryVulnerabilityAlert.f[`securityVulnerability`]!.nt = SecurityVulnerability
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryVulnerabilityAlertConnection.f[`edges`]!.nt = RepositoryVulnerabilityAlertEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryVulnerabilityAlertConnection.f[`nodes`]!.nt = RepositoryVulnerabilityAlert
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryVulnerabilityAlertConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RepositoryVulnerabilityAlertEdge.f[`node`]!.nt = RepositoryVulnerabilityAlert
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReprioritizeSubIssuePayload.f[`issue`]!.nt = Issue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RequestReviewsPayload.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RequestReviewsPayload.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RequestReviewsPayload.f[`requestedReviewersEdge`]!.nt = UserEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RequestedReviewerConnection.f[`edges`]!.nt = RequestedReviewerEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RequestedReviewerConnection.f[`nodes`]!.nt = RequestedReviewer
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RequestedReviewerConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RequestedReviewerEdge.f[`node`]!.nt = RequestedReviewer
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RequiredStatusCheckDescription.f[`app`]!.nt = App
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RequiredStatusChecksParameters.f[`requiredStatusChecks`]!.nt = StatusCheckConfiguration
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RerequestCheckSuitePayload.f[`checkSuite`]!.nt = CheckSuite
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ResolveReviewThreadPayload.f[`thread`]!.nt = PullRequestReviewThread
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RestrictedContribution.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RetireSponsorsTierPayload.f[`sponsorsTier`]!.nt = SponsorsTier
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RevertPullRequestPayload.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RevertPullRequestPayload.f[`revertPullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReviewDismissalAllowance.f[`actor`]!.nt = ReviewDismissalAllowanceActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReviewDismissalAllowance.f[`branchProtectionRule`]!.nt = BranchProtectionRule
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReviewDismissalAllowanceConnection.f[`edges`]!.nt = ReviewDismissalAllowanceEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReviewDismissalAllowanceConnection.f[`nodes`]!.nt = ReviewDismissalAllowance
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReviewDismissalAllowanceConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReviewDismissalAllowanceEdge.f[`node`]!.nt = ReviewDismissalAllowance
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReviewDismissedEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReviewDismissedEvent.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReviewDismissedEvent.f[`pullRequestCommit`]!.nt = PullRequestCommit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReviewDismissedEvent.f[`review`]!.nt = PullRequestReview
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReviewRequest.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReviewRequest.f[`requestedReviewer`]!.nt = RequestedReviewer
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReviewRequestConnection.f[`edges`]!.nt = ReviewRequestEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReviewRequestConnection.f[`nodes`]!.nt = ReviewRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReviewRequestConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReviewRequestEdge.f[`node`]!.nt = ReviewRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReviewRequestRemovedEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReviewRequestRemovedEvent.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReviewRequestRemovedEvent.f[`requestedReviewer`]!.nt = RequestedReviewer
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReviewRequestedEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReviewRequestedEvent.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ReviewRequestedEvent.f[`requestedReviewer`]!.nt = RequestedReviewer
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 RevokeEnterpriseOrganizationsMigratorRolePayload.f[`organizations`]!.nt = OrganizationConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SavedReply.f[`user`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SavedReplyConnection.f[`edges`]!.nt = SavedReplyEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SavedReplyConnection.f[`nodes`]!.nt = SavedReply
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SavedReplyConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SavedReplyEdge.f[`node`]!.nt = SavedReply
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SearchResultItemConnection.f[`edges`]!.nt = SearchResultItemEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SearchResultItemConnection.f[`nodes`]!.nt = SearchResultItem
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SearchResultItemConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SearchResultItemEdge.f[`node`]!.nt = SearchResultItem
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SearchResultItemEdge.f[`textMatches`]!.nt = TextMatch
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SecurityAdvisory.f[`cvss`]!.nt = CVSS
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SecurityAdvisory.f[`cvssSeverities`]!.nt = CvssSeverities
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SecurityAdvisory.f[`cwes`]!.nt = CWEConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SecurityAdvisory.f[`epss`]!.nt = EPSS
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SecurityAdvisory.f[`identifiers`]!.nt = SecurityAdvisoryIdentifier
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SecurityAdvisory.f[`references`]!.nt = SecurityAdvisoryReference
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SecurityAdvisory.f[`vulnerabilities`]!.nt = SecurityVulnerabilityConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SecurityAdvisoryConnection.f[`edges`]!.nt = SecurityAdvisoryEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SecurityAdvisoryConnection.f[`nodes`]!.nt = SecurityAdvisory
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SecurityAdvisoryConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SecurityAdvisoryEdge.f[`node`]!.nt = SecurityAdvisory
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SecurityVulnerability.f[`advisory`]!.nt = SecurityAdvisory
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SecurityVulnerability.f[`firstPatchedVersion`]!.nt = SecurityAdvisoryPackageVersion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SecurityVulnerability.f[`package`]!.nt = SecurityAdvisoryPackage
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SecurityVulnerabilityConnection.f[`edges`]!.nt = SecurityVulnerabilityEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SecurityVulnerabilityConnection.f[`nodes`]!.nt = SecurityVulnerability
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SecurityVulnerabilityConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SecurityVulnerabilityEdge.f[`node`]!.nt = SecurityVulnerability
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SetEnterpriseIdentityProviderPayload.f[`identityProvider`]!.nt = EnterpriseIdentityProvider
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SetOrganizationInteractionLimitPayload.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SetRepositoryInteractionLimitPayload.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SetUserInteractionLimitPayload.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SmimeSignature.f[`signer`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SocialAccountConnection.f[`edges`]!.nt = SocialAccountEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SocialAccountConnection.f[`nodes`]!.nt = SocialAccount
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SocialAccountConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SocialAccountEdge.f[`node`]!.nt = SocialAccount
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorAndLifetimeValue.f[`sponsor`]!.nt = Sponsorable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorAndLifetimeValue.f[`sponsorable`]!.nt = Sponsorable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorAndLifetimeValueConnection.f[`edges`]!.nt = SponsorAndLifetimeValueEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorAndLifetimeValueConnection.f[`nodes`]!.nt = SponsorAndLifetimeValue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorAndLifetimeValueConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorAndLifetimeValueEdge.f[`node`]!.nt = SponsorAndLifetimeValue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorConnection.f[`edges`]!.nt = SponsorEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorConnection.f[`nodes`]!.nt = Sponsor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorEdge.f[`node`]!.nt = Sponsor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorableItemConnection.f[`edges`]!.nt = SponsorableItemEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorableItemConnection.f[`nodes`]!.nt = SponsorableItem
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorableItemConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorableItemEdge.f[`node`]!.nt = SponsorableItem
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorsActivity.f[`previousSponsorsTier`]!.nt = SponsorsTier
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorsActivity.f[`sponsor`]!.nt = Sponsor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorsActivity.f[`sponsorable`]!.nt = Sponsorable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorsActivity.f[`sponsorsTier`]!.nt = SponsorsTier
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorsActivityConnection.f[`edges`]!.nt = SponsorsActivityEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorsActivityConnection.f[`nodes`]!.nt = SponsorsActivity
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorsActivityConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorsActivityEdge.f[`node`]!.nt = SponsorsActivity
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorsListing.f[`activeGoal`]!.nt = SponsorsGoal
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorsListing.f[`activeStripeConnectAccount`]!.nt = StripeConnectAccount
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorsListing.f[`featuredItems`]!.nt = SponsorsListingFeaturedItem
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorsListing.f[`fiscalHost`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorsListing.f[`sponsorable`]!.nt = Sponsorable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorsListing.f[`tiers`]!.nt = SponsorsTierConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorsListingFeaturedItem.f[`featureable`]!.nt = SponsorsListingFeatureableItem
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorsListingFeaturedItem.f[`sponsorsListing`]!.nt = SponsorsListing
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorsTier.f[`adminInfo`]!.nt = SponsorsTierAdminInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorsTier.f[`closestLesserValueTier`]!.nt = SponsorsTier
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorsTier.f[`sponsorsListing`]!.nt = SponsorsListing
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorsTierAdminInfo.f[`sponsorships`]!.nt = SponsorshipConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorsTierConnection.f[`edges`]!.nt = SponsorsTierEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorsTierConnection.f[`nodes`]!.nt = SponsorsTier
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorsTierConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorsTierEdge.f[`node`]!.nt = SponsorsTier
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Sponsorship.f[`maintainer`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Sponsorship.f[`sponsor`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Sponsorship.f[`sponsorEntity`]!.nt = Sponsor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Sponsorship.f[`sponsorable`]!.nt = Sponsorable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Sponsorship.f[`tier`]!.nt = SponsorsTier
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorshipConnection.f[`edges`]!.nt = SponsorshipEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorshipConnection.f[`nodes`]!.nt = Sponsorship
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorshipConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorshipEdge.f[`node`]!.nt = Sponsorship
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorshipNewsletter.f[`author`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorshipNewsletter.f[`sponsorable`]!.nt = Sponsorable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorshipNewsletterConnection.f[`edges`]!.nt = SponsorshipNewsletterEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorshipNewsletterConnection.f[`nodes`]!.nt = SponsorshipNewsletter
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorshipNewsletterConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SponsorshipNewsletterEdge.f[`node`]!.nt = SponsorshipNewsletter
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SshSignature.f[`signer`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 StargazerConnection.f[`edges`]!.nt = StargazerEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 StargazerConnection.f[`nodes`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 StargazerConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 StargazerEdge.f[`node`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 StarredRepositoryConnection.f[`edges`]!.nt = StarredRepositoryEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 StarredRepositoryConnection.f[`nodes`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 StarredRepositoryConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 StarredRepositoryEdge.f[`node`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 StartOrganizationMigrationPayload.f[`orgMigration`]!.nt = OrganizationMigration
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 StartRepositoryMigrationPayload.f[`repositoryMigration`]!.nt = RepositoryMigration
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Status.f[`combinedContexts`]!.nt = StatusCheckRollupContextConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Status.f[`commit`]!.nt = Commit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Status.f[`context`]!.nt = StatusContext
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Status.f[`contexts`]!.nt = StatusContext
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 StatusCheckRollup.f[`commit`]!.nt = Commit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 StatusCheckRollup.f[`contexts`]!.nt = StatusCheckRollupContextConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 StatusCheckRollupContextConnection.f[`checkRunCountsByState`]!.nt = CheckRunStateCount
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 StatusCheckRollupContextConnection.f[`edges`]!.nt = StatusCheckRollupContextEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 StatusCheckRollupContextConnection.f[`nodes`]!.nt = StatusCheckRollupContext
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 StatusCheckRollupContextConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 StatusCheckRollupContextConnection.f[`statusContextCountsByState`]!.nt = StatusContextStateCount
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 StatusCheckRollupContextEdge.f[`node`]!.nt = StatusCheckRollupContext
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 StatusContext.f[`commit`]!.nt = Commit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 StatusContext.f[`creator`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 StripeConnectAccount.f[`sponsorsListing`]!.nt = SponsorsListing
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SubIssueAddedEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SubIssueAddedEvent.f[`subIssue`]!.nt = Issue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SubIssueRemovedEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SubIssueRemovedEvent.f[`subIssue`]!.nt = Issue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SubmitPullRequestReviewPayload.f[`pullRequestReview`]!.nt = PullRequestReview
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SubmoduleConnection.f[`edges`]!.nt = SubmoduleEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SubmoduleConnection.f[`nodes`]!.nt = Submodule
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SubmoduleConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SubmoduleEdge.f[`node`]!.nt = Submodule
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SubscribedEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SubscribedEvent.f[`subscribable`]!.nt = Subscribable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 SuggestedReviewer.f[`reviewer`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Tag.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Tag.f[`tagger`]!.nt = GitActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Tag.f[`target`]!.nt = GitObject
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Team.f[`ancestors`]!.nt = TeamConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Team.f[`childTeams`]!.nt = TeamConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Team.f[`discussion`]!.nt = TeamDiscussion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Team.f[`discussions`]!.nt = TeamDiscussionConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Team.f[`invitations`]!.nt = OrganizationInvitationConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Team.f[`memberStatuses`]!.nt = UserStatusConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Team.f[`members`]!.nt = TeamMemberConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Team.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Team.f[`parentTeam`]!.nt = Team
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Team.f[`projectV2`]!.nt = ProjectV2
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Team.f[`projectsV2`]!.nt = ProjectV2Connection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Team.f[`repositories`]!.nt = TeamRepositoryConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamAddMemberAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamAddMemberAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamAddMemberAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamAddMemberAuditEntry.f[`team`]!.nt = Team
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamAddMemberAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamAddRepositoryAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamAddRepositoryAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamAddRepositoryAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamAddRepositoryAuditEntry.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamAddRepositoryAuditEntry.f[`team`]!.nt = Team
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamAddRepositoryAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamChangeParentTeamAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamChangeParentTeamAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamChangeParentTeamAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamChangeParentTeamAuditEntry.f[`parentTeam`]!.nt = Team
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamChangeParentTeamAuditEntry.f[`parentTeamWas`]!.nt = Team
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamChangeParentTeamAuditEntry.f[`team`]!.nt = Team
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamChangeParentTeamAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamConnection.f[`edges`]!.nt = TeamEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamConnection.f[`nodes`]!.nt = Team
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamDiscussion.f[`author`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamDiscussion.f[`comments`]!.nt = TeamDiscussionCommentConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamDiscussion.f[`editor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamDiscussion.f[`reactionGroups`]!.nt = ReactionGroup
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamDiscussion.f[`reactions`]!.nt = ReactionConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamDiscussion.f[`team`]!.nt = Team
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamDiscussion.f[`userContentEdits`]!.nt = UserContentEditConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamDiscussionComment.f[`author`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamDiscussionComment.f[`discussion`]!.nt = TeamDiscussion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamDiscussionComment.f[`editor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamDiscussionComment.f[`reactionGroups`]!.nt = ReactionGroup
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamDiscussionComment.f[`reactions`]!.nt = ReactionConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamDiscussionComment.f[`userContentEdits`]!.nt = UserContentEditConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamDiscussionCommentConnection.f[`edges`]!.nt = TeamDiscussionCommentEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamDiscussionCommentConnection.f[`nodes`]!.nt = TeamDiscussionComment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamDiscussionCommentConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamDiscussionCommentEdge.f[`node`]!.nt = TeamDiscussionComment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamDiscussionConnection.f[`edges`]!.nt = TeamDiscussionEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamDiscussionConnection.f[`nodes`]!.nt = TeamDiscussion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamDiscussionConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamDiscussionEdge.f[`node`]!.nt = TeamDiscussion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamEdge.f[`node`]!.nt = Team
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamMemberConnection.f[`edges`]!.nt = TeamMemberEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamMemberConnection.f[`nodes`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamMemberConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamMemberEdge.f[`node`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamRemoveMemberAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamRemoveMemberAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamRemoveMemberAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamRemoveMemberAuditEntry.f[`team`]!.nt = Team
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamRemoveMemberAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamRemoveRepositoryAuditEntry.f[`actor`]!.nt = AuditEntryActor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamRemoveRepositoryAuditEntry.f[`actorLocation`]!.nt = ActorLocation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamRemoveRepositoryAuditEntry.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamRemoveRepositoryAuditEntry.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamRemoveRepositoryAuditEntry.f[`team`]!.nt = Team
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamRemoveRepositoryAuditEntry.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamRepositoryConnection.f[`edges`]!.nt = TeamRepositoryEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamRepositoryConnection.f[`nodes`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamRepositoryConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TeamRepositoryEdge.f[`node`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TextMatch.f[`highlights`]!.nt = TextMatchHighlight
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Topic.f[`relatedTopics`]!.nt = Topic
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Topic.f[`repositories`]!.nt = RepositoryConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Topic.f[`stargazers`]!.nt = StargazerConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TransferEnterpriseOrganizationPayload.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TransferIssuePayload.f[`issue`]!.nt = Issue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TransferredEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TransferredEvent.f[`fromRepository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TransferredEvent.f[`issue`]!.nt = Issue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Tree.f[`entries`]!.nt = TreeEntry
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Tree.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TreeEntry.f[`language`]!.nt = Language
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TreeEntry.f[`object`]!.nt = GitObject
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TreeEntry.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 TreeEntry.f[`submodule`]!.nt = Submodule
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UnarchiveProjectV2ItemPayload.f[`item`]!.nt = ProjectV2Item
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UnarchiveRepositoryPayload.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UnassignedEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UnassignedEvent.f[`assignable`]!.nt = Assignable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UnassignedEvent.f[`assignee`]!.nt = Assignee
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UnassignedEvent.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UnfollowOrganizationPayload.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UnfollowUserPayload.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UnknownSignature.f[`signer`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UnlabeledEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UnlabeledEvent.f[`label`]!.nt = Label
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UnlabeledEvent.f[`labelable`]!.nt = Labelable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UnlinkProjectV2FromRepositoryPayload.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UnlinkProjectV2FromTeamPayload.f[`team`]!.nt = Team
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UnlinkRepositoryFromProjectPayload.f[`project`]!.nt = Project
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UnlinkRepositoryFromProjectPayload.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UnlockLockablePayload.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UnlockLockablePayload.f[`unlockedRecord`]!.nt = Lockable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UnlockedEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UnlockedEvent.f[`lockable`]!.nt = Lockable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UnmarkDiscussionCommentAsAnswerPayload.f[`discussion`]!.nt = Discussion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UnmarkFileAsViewedPayload.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UnmarkIssueAsDuplicatePayload.f[`duplicate`]!.nt = IssueOrPullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UnmarkProjectV2AsTemplatePayload.f[`projectV2`]!.nt = ProjectV2
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UnmarkedAsDuplicateEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UnmarkedAsDuplicateEvent.f[`canonical`]!.nt = IssueOrPullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UnmarkedAsDuplicateEvent.f[`duplicate`]!.nt = IssueOrPullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UnminimizeCommentPayload.f[`unminimizedComment`]!.nt = Minimizable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UnpinIssuePayload.f[`issue`]!.nt = Issue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UnpinnedEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UnpinnedEvent.f[`issue`]!.nt = Issue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UnresolveReviewThreadPayload.f[`thread`]!.nt = PullRequestReviewThread
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UnsubscribedEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UnsubscribedEvent.f[`subscribable`]!.nt = Subscribable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateBranchProtectionRulePayload.f[`branchProtectionRule`]!.nt = BranchProtectionRule
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateCheckRunPayload.f[`checkRun`]!.nt = CheckRun
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateCheckSuitePreferencesPayload.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateDiscussionCommentPayload.f[`comment`]!.nt = DiscussionComment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateDiscussionPayload.f[`discussion`]!.nt = Discussion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateEnterpriseAllowPrivateRepositoryForkingSettingPayload.f[`enterprise`]!.nt = Enterprise
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateEnterpriseDefaultRepositoryPermissionSettingPayload.f[`enterprise`]!.nt = Enterprise
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateEnterpriseDeployKeySettingPayload.f[`enterprise`]!.nt = Enterprise
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateEnterpriseMembersCanChangeRepositoryVisibilitySettingPayload.f[`enterprise`]!.nt = Enterprise
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateEnterpriseMembersCanCreateRepositoriesSettingPayload.f[`enterprise`]!.nt = Enterprise
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateEnterpriseMembersCanDeleteIssuesSettingPayload.f[`enterprise`]!.nt = Enterprise
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateEnterpriseMembersCanDeleteRepositoriesSettingPayload.f[`enterprise`]!.nt = Enterprise
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateEnterpriseMembersCanInviteCollaboratorsSettingPayload.f[`enterprise`]!.nt = Enterprise
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateEnterpriseMembersCanMakePurchasesSettingPayload.f[`enterprise`]!.nt = Enterprise
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateEnterpriseMembersCanUpdateProtectedBranchesSettingPayload.f[`enterprise`]!.nt = Enterprise
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateEnterpriseMembersCanViewDependencyInsightsSettingPayload.f[`enterprise`]!.nt = Enterprise
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateEnterpriseOrganizationProjectsSettingPayload.f[`enterprise`]!.nt = Enterprise
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateEnterpriseProfilePayload.f[`enterprise`]!.nt = Enterprise
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateEnterpriseRepositoryProjectsSettingPayload.f[`enterprise`]!.nt = Enterprise
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateEnterpriseTeamDiscussionsSettingPayload.f[`enterprise`]!.nt = Enterprise
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateEnterpriseTwoFactorAuthenticationDisallowedMethodsSettingPayload.f[`enterprise`]!.nt = Enterprise
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateEnterpriseTwoFactorAuthenticationRequiredSettingPayload.f[`enterprise`]!.nt = Enterprise
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateEnvironmentPayload.f[`environment`]!.nt = Environment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateIpAllowListEnabledSettingPayload.f[`owner`]!.nt = IpAllowListOwner
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateIpAllowListEntryPayload.f[`ipAllowListEntry`]!.nt = IpAllowListEntry
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateIpAllowListForInstalledAppsEnabledSettingPayload.f[`owner`]!.nt = IpAllowListOwner
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateIssueCommentPayload.f[`issueComment`]!.nt = IssueComment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateIssuePayload.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateIssuePayload.f[`issue`]!.nt = Issue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateLabelPayload.f[`label`]!.nt = Label
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateNotificationRestrictionSettingPayload.f[`owner`]!.nt = VerifiableDomainOwner
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateOrganizationAllowPrivateRepositoryForkingSettingPayload.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateOrganizationWebCommitSignoffSettingPayload.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdatePatreonSponsorabilityPayload.f[`sponsorsListing`]!.nt = SponsorsListing
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateProjectCardPayload.f[`projectCard`]!.nt = ProjectCard
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateProjectColumnPayload.f[`projectColumn`]!.nt = ProjectColumn
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateProjectPayload.f[`project`]!.nt = Project
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateProjectV2CollaboratorsPayload.f[`collaborators`]!.nt = ProjectV2ActorConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateProjectV2DraftIssuePayload.f[`draftIssue`]!.nt = DraftIssue
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateProjectV2FieldPayload.f[`projectV2Field`]!.nt = ProjectV2FieldConfiguration
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateProjectV2ItemFieldValuePayload.f[`projectV2Item`]!.nt = ProjectV2Item
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateProjectV2ItemPositionPayload.f[`items`]!.nt = ProjectV2ItemConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateProjectV2Payload.f[`projectV2`]!.nt = ProjectV2
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateProjectV2StatusUpdatePayload.f[`statusUpdate`]!.nt = ProjectV2StatusUpdate
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdatePullRequestBranchPayload.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdatePullRequestPayload.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdatePullRequestPayload.f[`pullRequest`]!.nt = PullRequest
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdatePullRequestReviewCommentPayload.f[`pullRequestReviewComment`]!.nt = PullRequestReviewComment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdatePullRequestReviewPayload.f[`pullRequestReview`]!.nt = PullRequestReview
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateRefPayload.f[`ref`]!.nt = Ref
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateRepositoryPayload.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateRepositoryRulesetPayload.f[`ruleset`]!.nt = RepositoryRuleset
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateRepositoryWebCommitSignoffSettingPayload.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateSponsorshipPreferencesPayload.f[`sponsorship`]!.nt = Sponsorship
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateSubscriptionPayload.f[`subscribable`]!.nt = Subscribable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateTeamDiscussionCommentPayload.f[`teamDiscussionComment`]!.nt = TeamDiscussionComment
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateTeamDiscussionPayload.f[`teamDiscussion`]!.nt = TeamDiscussion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateTeamReviewAssignmentPayload.f[`team`]!.nt = Team
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateTeamsRepositoryPayload.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateTeamsRepositoryPayload.f[`teams`]!.nt = Team
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateTopicsPayload.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateUserListPayload.f[`list`]!.nt = UserList
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateUserListsForItemPayload.f[`item`]!.nt = UserListItems
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateUserListsForItemPayload.f[`lists`]!.nt = UserList
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UpdateUserListsForItemPayload.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`commitComments`]!.nt = CommitCommentConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`contributionsCollection`]!.nt = ContributionsCollection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`copilotEndpoints`]!.nt = CopilotEndpoints
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`enterprises`]!.nt = EnterpriseConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`followers`]!.nt = FollowerConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`following`]!.nt = FollowingConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`gist`]!.nt = Gist
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`gistComments`]!.nt = GistCommentConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`gists`]!.nt = GistConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`hovercard`]!.nt = Hovercard
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`interactionAbility`]!.nt = RepositoryInteractionAbility
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`issueComments`]!.nt = IssueCommentConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`issues`]!.nt = IssueConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`itemShowcase`]!.nt = ProfileItemShowcase
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`lifetimeReceivedSponsorshipValues`]!.nt = SponsorAndLifetimeValueConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`lists`]!.nt = UserListConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`organizations`]!.nt = OrganizationConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`packages`]!.nt = PackageConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`pinnableItems`]!.nt = PinnableItemConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`pinnedItems`]!.nt = PinnableItemConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`project`]!.nt = Project
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`projectV2`]!.nt = ProjectV2
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`projects`]!.nt = ProjectConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`projectsV2`]!.nt = ProjectV2Connection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`publicKeys`]!.nt = PublicKeyConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`pullRequests`]!.nt = PullRequestConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`recentProjects`]!.nt = ProjectV2Connection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`repositories`]!.nt = RepositoryConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`repositoriesContributedTo`]!.nt = RepositoryConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`repositoryDiscussionComments`]!.nt = DiscussionCommentConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`repositoryDiscussions`]!.nt = DiscussionConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`savedReplies`]!.nt = SavedReplyConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`socialAccounts`]!.nt = SocialAccountConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`sponsoring`]!.nt = SponsorConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`sponsors`]!.nt = SponsorConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`sponsorsActivities`]!.nt = SponsorsActivityConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`sponsorsListing`]!.nt = SponsorsListing
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`sponsorshipForViewerAsSponsor`]!.nt = Sponsorship
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`sponsorshipForViewerAsSponsorable`]!.nt = Sponsorship
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`sponsorshipNewsletters`]!.nt = SponsorshipNewsletterConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`sponsorshipsAsMaintainer`]!.nt = SponsorshipConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`sponsorshipsAsSponsor`]!.nt = SponsorshipConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`starredRepositories`]!.nt = StarredRepositoryConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`status`]!.nt = UserStatus
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`suggestedListNames`]!.nt = UserListSuggestion
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`topRepositories`]!.nt = RepositoryConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 User.f[`watching`]!.nt = RepositoryConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UserBlockedEvent.f[`actor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UserBlockedEvent.f[`subject`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UserConnection.f[`edges`]!.nt = UserEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UserConnection.f[`nodes`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UserConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UserContentEdit.f[`deletedBy`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UserContentEdit.f[`editor`]!.nt = Actor
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UserContentEditConnection.f[`edges`]!.nt = UserContentEditEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UserContentEditConnection.f[`nodes`]!.nt = UserContentEdit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UserContentEditConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UserContentEditEdge.f[`node`]!.nt = UserContentEdit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UserEdge.f[`node`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UserList.f[`items`]!.nt = UserListItemsConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UserList.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UserListConnection.f[`edges`]!.nt = UserListEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UserListConnection.f[`nodes`]!.nt = UserList
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UserListConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UserListEdge.f[`node`]!.nt = UserList
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UserListItemsConnection.f[`edges`]!.nt = UserListItemsEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UserListItemsConnection.f[`nodes`]!.nt = UserListItems
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UserListItemsConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UserListItemsEdge.f[`node`]!.nt = UserListItems
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UserNamespaceRepository.f[`owner`]!.nt = RepositoryOwner
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UserNamespaceRepository.f[`repository`]!.nt = RepositoryInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UserNamespaceRepositoryConnection.f[`edges`]!.nt = UserNamespaceRepositoryEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UserNamespaceRepositoryConnection.f[`nodes`]!.nt = UserNamespaceRepository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UserNamespaceRepositoryConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UserNamespaceRepositoryEdge.f[`node`]!.nt = UserNamespaceRepository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UserStatus.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UserStatus.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UserStatusConnection.f[`edges`]!.nt = UserStatusEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UserStatusConnection.f[`nodes`]!.nt = UserStatus
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UserStatusConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 UserStatusEdge.f[`node`]!.nt = UserStatus
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 VerifiableDomain.f[`owner`]!.nt = VerifiableDomainOwner
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 VerifiableDomainConnection.f[`edges`]!.nt = VerifiableDomainEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 VerifiableDomainConnection.f[`nodes`]!.nt = VerifiableDomain
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 VerifiableDomainConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 VerifiableDomainEdge.f[`node`]!.nt = VerifiableDomain
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 VerifyVerifiableDomainPayload.f[`domain`]!.nt = VerifiableDomain
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ViewerHovercardContext.f[`viewer`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Workflow.f[`runs`]!.nt = WorkflowRunConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 WorkflowRun.f[`checkSuite`]!.nt = CheckSuite
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 WorkflowRun.f[`deploymentReviews`]!.nt = DeploymentReviewConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 WorkflowRun.f[`file`]!.nt = WorkflowRunFile
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 WorkflowRun.f[`pendingDeploymentRequests`]!.nt = DeploymentRequestConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 WorkflowRun.f[`workflow`]!.nt = Workflow
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 WorkflowRunConnection.f[`edges`]!.nt = WorkflowRunEdge
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 WorkflowRunConnection.f[`nodes`]!.nt = WorkflowRun
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 WorkflowRunConnection.f[`pageInfo`]!.nt = PageInfo
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 WorkflowRunEdge.f[`node`]!.nt = WorkflowRun
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 WorkflowRunFile.f[`run`]!.nt = WorkflowRun
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 WorkflowsParameters.f[`workflows`]!.nt = WorkflowFileReference
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`codeOfConduct`]!.nt = CodeOfConduct
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`codesOfConduct`]!.nt = CodeOfConduct
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`enterprise`]!.nt = Enterprise
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`enterpriseAdministratorInvitation`]!.nt = EnterpriseAdministratorInvitation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`enterpriseAdministratorInvitationByToken`]!.nt = EnterpriseAdministratorInvitation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`enterpriseMemberInvitation`]!.nt = EnterpriseMemberInvitation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`enterpriseMemberInvitationByToken`]!.nt = EnterpriseMemberInvitation
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`license`]!.nt = License
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`licenses`]!.nt = License
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`marketplaceCategories`]!.nt = MarketplaceCategory
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`marketplaceCategory`]!.nt = MarketplaceCategory
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`marketplaceListing`]!.nt = MarketplaceListing
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`marketplaceListings`]!.nt = MarketplaceListingConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`meta`]!.nt = GitHubMetadata
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`node`]!.nt = Node
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`nodes`]!.nt = Node
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`organization`]!.nt = Organization
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`rateLimit`]!.nt = RateLimit
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`relay`]!.nt = Query
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`repository`]!.nt = Repository
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`repositoryOwner`]!.nt = RepositoryOwner
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`resource`]!.nt = UniformResourceLocatable
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`search`]!.nt = SearchResultItemConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`securityAdvisories`]!.nt = SecurityAdvisoryConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`securityAdvisory`]!.nt = SecurityAdvisory
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`securityVulnerabilities`]!.nt = SecurityVulnerabilityConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`sponsorables`]!.nt = SponsorableItemConnection
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`topic`]!.nt = Topic
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`user`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`viewer`]!.nt = User
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`abortQueuedMigrations`]!.nt = AbortQueuedMigrationsPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`abortRepositoryMigration`]!.nt = AbortRepositoryMigrationPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`acceptEnterpriseAdministratorInvitation`]!.nt = AcceptEnterpriseAdministratorInvitationPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`acceptEnterpriseMemberInvitation`]!.nt = AcceptEnterpriseMemberInvitationPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`acceptTopicSuggestion`]!.nt = AcceptTopicSuggestionPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`accessUserNamespaceRepository`]!.nt = AccessUserNamespaceRepositoryPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`addAssigneesToAssignable`]!.nt = AddAssigneesToAssignablePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`addComment`]!.nt = AddCommentPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`addDiscussionComment`]!.nt = AddDiscussionCommentPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`addDiscussionPollVote`]!.nt = AddDiscussionPollVotePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`addEnterpriseOrganizationMember`]!.nt = AddEnterpriseOrganizationMemberPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`addEnterpriseSupportEntitlement`]!.nt = AddEnterpriseSupportEntitlementPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`addLabelsToLabelable`]!.nt = AddLabelsToLabelablePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`addProjectCard`]!.nt = AddProjectCardPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`addProjectColumn`]!.nt = AddProjectColumnPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`addProjectV2DraftIssue`]!.nt = AddProjectV2DraftIssuePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`addProjectV2ItemById`]!.nt = AddProjectV2ItemByIdPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`addPullRequestReview`]!.nt = AddPullRequestReviewPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`addPullRequestReviewComment`]!.nt = AddPullRequestReviewCommentPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`addPullRequestReviewThread`]!.nt = AddPullRequestReviewThreadPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`addPullRequestReviewThreadReply`]!.nt = AddPullRequestReviewThreadReplyPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`addReaction`]!.nt = AddReactionPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`addStar`]!.nt = AddStarPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`addSubIssue`]!.nt = AddSubIssuePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`addUpvote`]!.nt = AddUpvotePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`addVerifiableDomain`]!.nt = AddVerifiableDomainPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`approveDeployments`]!.nt = ApproveDeploymentsPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`approveVerifiableDomain`]!.nt = ApproveVerifiableDomainPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`archiveProjectV2Item`]!.nt = ArchiveProjectV2ItemPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`archiveRepository`]!.nt = ArchiveRepositoryPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`cancelEnterpriseAdminInvitation`]!.nt = CancelEnterpriseAdminInvitationPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`cancelEnterpriseMemberInvitation`]!.nt = CancelEnterpriseMemberInvitationPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`cancelSponsorship`]!.nt = CancelSponsorshipPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`changeUserStatus`]!.nt = ChangeUserStatusPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`clearLabelsFromLabelable`]!.nt = ClearLabelsFromLabelablePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`clearProjectV2ItemFieldValue`]!.nt = ClearProjectV2ItemFieldValuePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`cloneProject`]!.nt = CloneProjectPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`cloneTemplateRepository`]!.nt = CloneTemplateRepositoryPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`closeDiscussion`]!.nt = CloseDiscussionPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`closeIssue`]!.nt = CloseIssuePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`closePullRequest`]!.nt = ClosePullRequestPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`convertProjectCardNoteToIssue`]!.nt = ConvertProjectCardNoteToIssuePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`convertProjectV2DraftIssueItemToIssue`]!.nt = ConvertProjectV2DraftIssueItemToIssuePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`convertPullRequestToDraft`]!.nt = ConvertPullRequestToDraftPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`copyProjectV2`]!.nt = CopyProjectV2Payload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`createAttributionInvitation`]!.nt = CreateAttributionInvitationPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`createBranchProtectionRule`]!.nt = CreateBranchProtectionRulePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`createCheckRun`]!.nt = CreateCheckRunPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`createCheckSuite`]!.nt = CreateCheckSuitePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`createCommitOnBranch`]!.nt = CreateCommitOnBranchPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`createDeployment`]!.nt = CreateDeploymentPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`createDeploymentStatus`]!.nt = CreateDeploymentStatusPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`createDiscussion`]!.nt = CreateDiscussionPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`createEnterpriseOrganization`]!.nt = CreateEnterpriseOrganizationPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`createEnvironment`]!.nt = CreateEnvironmentPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`createIpAllowListEntry`]!.nt = CreateIpAllowListEntryPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`createIssue`]!.nt = CreateIssuePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`createLabel`]!.nt = CreateLabelPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`createLinkedBranch`]!.nt = CreateLinkedBranchPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`createMigrationSource`]!.nt = CreateMigrationSourcePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`createProject`]!.nt = CreateProjectPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`createProjectV2`]!.nt = CreateProjectV2Payload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`createProjectV2Field`]!.nt = CreateProjectV2FieldPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`createProjectV2StatusUpdate`]!.nt = CreateProjectV2StatusUpdatePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`createPullRequest`]!.nt = CreatePullRequestPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`createRef`]!.nt = CreateRefPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`createRepository`]!.nt = CreateRepositoryPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`createRepositoryRuleset`]!.nt = CreateRepositoryRulesetPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`createSponsorsListing`]!.nt = CreateSponsorsListingPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`createSponsorsTier`]!.nt = CreateSponsorsTierPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`createSponsorship`]!.nt = CreateSponsorshipPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`createSponsorships`]!.nt = CreateSponsorshipsPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`createTeamDiscussion`]!.nt = CreateTeamDiscussionPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`createTeamDiscussionComment`]!.nt = CreateTeamDiscussionCommentPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`createUserList`]!.nt = CreateUserListPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`declineTopicSuggestion`]!.nt = DeclineTopicSuggestionPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`deleteBranchProtectionRule`]!.nt = DeleteBranchProtectionRulePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`deleteDeployment`]!.nt = DeleteDeploymentPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`deleteDiscussion`]!.nt = DeleteDiscussionPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`deleteDiscussionComment`]!.nt = DeleteDiscussionCommentPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`deleteEnvironment`]!.nt = DeleteEnvironmentPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`deleteIpAllowListEntry`]!.nt = DeleteIpAllowListEntryPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`deleteIssue`]!.nt = DeleteIssuePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`deleteIssueComment`]!.nt = DeleteIssueCommentPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`deleteLabel`]!.nt = DeleteLabelPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`deleteLinkedBranch`]!.nt = DeleteLinkedBranchPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`deletePackageVersion`]!.nt = DeletePackageVersionPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`deleteProject`]!.nt = DeleteProjectPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`deleteProjectCard`]!.nt = DeleteProjectCardPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`deleteProjectColumn`]!.nt = DeleteProjectColumnPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`deleteProjectV2`]!.nt = DeleteProjectV2Payload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`deleteProjectV2Field`]!.nt = DeleteProjectV2FieldPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`deleteProjectV2Item`]!.nt = DeleteProjectV2ItemPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`deleteProjectV2StatusUpdate`]!.nt = DeleteProjectV2StatusUpdatePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`deleteProjectV2Workflow`]!.nt = DeleteProjectV2WorkflowPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`deletePullRequestReview`]!.nt = DeletePullRequestReviewPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`deletePullRequestReviewComment`]!.nt = DeletePullRequestReviewCommentPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`deleteRef`]!.nt = DeleteRefPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`deleteRepositoryRuleset`]!.nt = DeleteRepositoryRulesetPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`deleteTeamDiscussion`]!.nt = DeleteTeamDiscussionPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`deleteTeamDiscussionComment`]!.nt = DeleteTeamDiscussionCommentPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`deleteUserList`]!.nt = DeleteUserListPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`deleteVerifiableDomain`]!.nt = DeleteVerifiableDomainPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`dequeuePullRequest`]!.nt = DequeuePullRequestPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`disablePullRequestAutoMerge`]!.nt = DisablePullRequestAutoMergePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`dismissPullRequestReview`]!.nt = DismissPullRequestReviewPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`dismissRepositoryVulnerabilityAlert`]!.nt = DismissRepositoryVulnerabilityAlertPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`enablePullRequestAutoMerge`]!.nt = EnablePullRequestAutoMergePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`enqueuePullRequest`]!.nt = EnqueuePullRequestPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`followOrganization`]!.nt = FollowOrganizationPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`followUser`]!.nt = FollowUserPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`grantEnterpriseOrganizationsMigratorRole`]!.nt = GrantEnterpriseOrganizationsMigratorRolePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`grantMigratorRole`]!.nt = GrantMigratorRolePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`importProject`]!.nt = ImportProjectPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`inviteEnterpriseAdmin`]!.nt = InviteEnterpriseAdminPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`inviteEnterpriseMember`]!.nt = InviteEnterpriseMemberPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`linkProjectV2ToRepository`]!.nt = LinkProjectV2ToRepositoryPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`linkProjectV2ToTeam`]!.nt = LinkProjectV2ToTeamPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`linkRepositoryToProject`]!.nt = LinkRepositoryToProjectPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`lockLockable`]!.nt = LockLockablePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`markDiscussionCommentAsAnswer`]!.nt = MarkDiscussionCommentAsAnswerPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`markFileAsViewed`]!.nt = MarkFileAsViewedPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`markProjectV2AsTemplate`]!.nt = MarkProjectV2AsTemplatePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`markPullRequestReadyForReview`]!.nt = MarkPullRequestReadyForReviewPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`mergeBranch`]!.nt = MergeBranchPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`mergePullRequest`]!.nt = MergePullRequestPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`minimizeComment`]!.nt = MinimizeCommentPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`moveProjectCard`]!.nt = MoveProjectCardPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`moveProjectColumn`]!.nt = MoveProjectColumnPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`pinEnvironment`]!.nt = PinEnvironmentPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`pinIssue`]!.nt = PinIssuePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`publishSponsorsTier`]!.nt = PublishSponsorsTierPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`regenerateEnterpriseIdentityProviderRecoveryCodes`]!.nt =
   RegenerateEnterpriseIdentityProviderRecoveryCodesPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`regenerateVerifiableDomainToken`]!.nt = RegenerateVerifiableDomainTokenPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`rejectDeployments`]!.nt = RejectDeploymentsPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`removeAssigneesFromAssignable`]!.nt = RemoveAssigneesFromAssignablePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`removeEnterpriseAdmin`]!.nt = RemoveEnterpriseAdminPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`removeEnterpriseIdentityProvider`]!.nt = RemoveEnterpriseIdentityProviderPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`removeEnterpriseMember`]!.nt = RemoveEnterpriseMemberPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`removeEnterpriseOrganization`]!.nt = RemoveEnterpriseOrganizationPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`removeEnterpriseSupportEntitlement`]!.nt = RemoveEnterpriseSupportEntitlementPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`removeLabelsFromLabelable`]!.nt = RemoveLabelsFromLabelablePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`removeOutsideCollaborator`]!.nt = RemoveOutsideCollaboratorPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`removeReaction`]!.nt = RemoveReactionPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`removeStar`]!.nt = RemoveStarPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`removeSubIssue`]!.nt = RemoveSubIssuePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`removeUpvote`]!.nt = RemoveUpvotePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`reopenDiscussion`]!.nt = ReopenDiscussionPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`reopenIssue`]!.nt = ReopenIssuePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`reopenPullRequest`]!.nt = ReopenPullRequestPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`reorderEnvironment`]!.nt = ReorderEnvironmentPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`reprioritizeSubIssue`]!.nt = ReprioritizeSubIssuePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`requestReviews`]!.nt = RequestReviewsPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`rerequestCheckSuite`]!.nt = RerequestCheckSuitePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`resolveReviewThread`]!.nt = ResolveReviewThreadPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`retireSponsorsTier`]!.nt = RetireSponsorsTierPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`revertPullRequest`]!.nt = RevertPullRequestPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`revokeEnterpriseOrganizationsMigratorRole`]!.nt = RevokeEnterpriseOrganizationsMigratorRolePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`revokeMigratorRole`]!.nt = RevokeMigratorRolePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`setEnterpriseIdentityProvider`]!.nt = SetEnterpriseIdentityProviderPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`setOrganizationInteractionLimit`]!.nt = SetOrganizationInteractionLimitPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`setRepositoryInteractionLimit`]!.nt = SetRepositoryInteractionLimitPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`setUserInteractionLimit`]!.nt = SetUserInteractionLimitPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`startOrganizationMigration`]!.nt = StartOrganizationMigrationPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`startRepositoryMigration`]!.nt = StartRepositoryMigrationPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`submitPullRequestReview`]!.nt = SubmitPullRequestReviewPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`transferEnterpriseOrganization`]!.nt = TransferEnterpriseOrganizationPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`transferIssue`]!.nt = TransferIssuePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`unarchiveProjectV2Item`]!.nt = UnarchiveProjectV2ItemPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`unarchiveRepository`]!.nt = UnarchiveRepositoryPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`unfollowOrganization`]!.nt = UnfollowOrganizationPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`unfollowUser`]!.nt = UnfollowUserPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`unlinkProjectV2FromRepository`]!.nt = UnlinkProjectV2FromRepositoryPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`unlinkProjectV2FromTeam`]!.nt = UnlinkProjectV2FromTeamPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`unlinkRepositoryFromProject`]!.nt = UnlinkRepositoryFromProjectPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`unlockLockable`]!.nt = UnlockLockablePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`unmarkDiscussionCommentAsAnswer`]!.nt = UnmarkDiscussionCommentAsAnswerPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`unmarkFileAsViewed`]!.nt = UnmarkFileAsViewedPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`unmarkIssueAsDuplicate`]!.nt = UnmarkIssueAsDuplicatePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`unmarkProjectV2AsTemplate`]!.nt = UnmarkProjectV2AsTemplatePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`unminimizeComment`]!.nt = UnminimizeCommentPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`unpinIssue`]!.nt = UnpinIssuePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`unresolveReviewThread`]!.nt = UnresolveReviewThreadPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateBranchProtectionRule`]!.nt = UpdateBranchProtectionRulePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateCheckRun`]!.nt = UpdateCheckRunPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateCheckSuitePreferences`]!.nt = UpdateCheckSuitePreferencesPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateDiscussion`]!.nt = UpdateDiscussionPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateDiscussionComment`]!.nt = UpdateDiscussionCommentPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateEnterpriseAdministratorRole`]!.nt = UpdateEnterpriseAdministratorRolePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateEnterpriseAllowPrivateRepositoryForkingSetting`]!.nt =
   UpdateEnterpriseAllowPrivateRepositoryForkingSettingPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateEnterpriseDefaultRepositoryPermissionSetting`]!.nt =
   UpdateEnterpriseDefaultRepositoryPermissionSettingPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateEnterpriseDeployKeySetting`]!.nt = UpdateEnterpriseDeployKeySettingPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateEnterpriseMembersCanChangeRepositoryVisibilitySetting`]!.nt =
   UpdateEnterpriseMembersCanChangeRepositoryVisibilitySettingPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateEnterpriseMembersCanCreateRepositoriesSetting`]!.nt =
   UpdateEnterpriseMembersCanCreateRepositoriesSettingPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateEnterpriseMembersCanDeleteIssuesSetting`]!.nt = UpdateEnterpriseMembersCanDeleteIssuesSettingPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateEnterpriseMembersCanDeleteRepositoriesSetting`]!.nt =
   UpdateEnterpriseMembersCanDeleteRepositoriesSettingPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateEnterpriseMembersCanInviteCollaboratorsSetting`]!.nt =
   UpdateEnterpriseMembersCanInviteCollaboratorsSettingPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateEnterpriseMembersCanMakePurchasesSetting`]!.nt = UpdateEnterpriseMembersCanMakePurchasesSettingPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateEnterpriseMembersCanUpdateProtectedBranchesSetting`]!.nt =
   UpdateEnterpriseMembersCanUpdateProtectedBranchesSettingPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateEnterpriseMembersCanViewDependencyInsightsSetting`]!.nt =
   UpdateEnterpriseMembersCanViewDependencyInsightsSettingPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateEnterpriseOrganizationProjectsSetting`]!.nt = UpdateEnterpriseOrganizationProjectsSettingPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateEnterpriseOwnerOrganizationRole`]!.nt = UpdateEnterpriseOwnerOrganizationRolePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateEnterpriseProfile`]!.nt = UpdateEnterpriseProfilePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateEnterpriseRepositoryProjectsSetting`]!.nt = UpdateEnterpriseRepositoryProjectsSettingPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateEnterpriseTeamDiscussionsSetting`]!.nt = UpdateEnterpriseTeamDiscussionsSettingPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateEnterpriseTwoFactorAuthenticationDisallowedMethodsSetting`]!.nt =
   UpdateEnterpriseTwoFactorAuthenticationDisallowedMethodsSettingPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateEnterpriseTwoFactorAuthenticationRequiredSetting`]!.nt =
   UpdateEnterpriseTwoFactorAuthenticationRequiredSettingPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateEnvironment`]!.nt = UpdateEnvironmentPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateIpAllowListEnabledSetting`]!.nt = UpdateIpAllowListEnabledSettingPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateIpAllowListEntry`]!.nt = UpdateIpAllowListEntryPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateIpAllowListForInstalledAppsEnabledSetting`]!.nt =
   UpdateIpAllowListForInstalledAppsEnabledSettingPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateIssue`]!.nt = UpdateIssuePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateIssueComment`]!.nt = UpdateIssueCommentPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateLabel`]!.nt = UpdateLabelPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateNotificationRestrictionSetting`]!.nt = UpdateNotificationRestrictionSettingPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateOrganizationAllowPrivateRepositoryForkingSetting`]!.nt =
   UpdateOrganizationAllowPrivateRepositoryForkingSettingPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateOrganizationWebCommitSignoffSetting`]!.nt = UpdateOrganizationWebCommitSignoffSettingPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updatePatreonSponsorability`]!.nt = UpdatePatreonSponsorabilityPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateProject`]!.nt = UpdateProjectPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateProjectCard`]!.nt = UpdateProjectCardPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateProjectColumn`]!.nt = UpdateProjectColumnPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateProjectV2`]!.nt = UpdateProjectV2Payload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateProjectV2Collaborators`]!.nt = UpdateProjectV2CollaboratorsPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateProjectV2DraftIssue`]!.nt = UpdateProjectV2DraftIssuePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateProjectV2Field`]!.nt = UpdateProjectV2FieldPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateProjectV2ItemFieldValue`]!.nt = UpdateProjectV2ItemFieldValuePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateProjectV2ItemPosition`]!.nt = UpdateProjectV2ItemPositionPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateProjectV2StatusUpdate`]!.nt = UpdateProjectV2StatusUpdatePayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updatePullRequest`]!.nt = UpdatePullRequestPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updatePullRequestBranch`]!.nt = UpdatePullRequestBranchPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updatePullRequestReview`]!.nt = UpdatePullRequestReviewPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updatePullRequestReviewComment`]!.nt = UpdatePullRequestReviewCommentPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateRef`]!.nt = UpdateRefPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateRefs`]!.nt = UpdateRefsPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateRepository`]!.nt = UpdateRepositoryPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateRepositoryRuleset`]!.nt = UpdateRepositoryRulesetPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateRepositoryWebCommitSignoffSetting`]!.nt = UpdateRepositoryWebCommitSignoffSettingPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateSponsorshipPreferences`]!.nt = UpdateSponsorshipPreferencesPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateSubscription`]!.nt = UpdateSubscriptionPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateTeamDiscussion`]!.nt = UpdateTeamDiscussionPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateTeamDiscussionComment`]!.nt = UpdateTeamDiscussionCommentPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateTeamReviewAssignment`]!.nt = UpdateTeamReviewAssignmentPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateTeamsRepository`]!.nt = UpdateTeamsRepositoryPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateTopics`]!.nt = UpdateTopicsPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateUserList`]!.nt = UpdateUserListPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`updateUserListsForItem`]!.nt = UpdateUserListsForItemPayload
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`verifyVerifiableDomain`]!.nt = VerifyVerifiableDomainPayload
 
 //

@@ -40,5 +40,5 @@ const generate = async (
 
 await generate({ name: `queryOnly` })
 await generate({ name: `mutationOnly` })
-await generate({ name: `possible`, scalarsFile: true })
 await generate({ name: `possible`, scalarsFile: false })
+await generate({ name: `possible`, scalarsFile: true })

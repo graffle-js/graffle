@@ -17,9 +17,10 @@ import type * as $$Utilities from '../../../../../../exports/utilities-for-gener
 //
 
 export interface $Document<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
-  query?: Record<string, Query<_$Scalars>>
+  query?: Record<string, Query<_$Context>>
 }
 
 //
@@ -45,18 +46,19 @@ export interface $Document<
 // ----------------------------------------| Entrypoint Interface |
 
 export interface Query<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
   /**
    * Select the `id` field on the `Query` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
-  id?: Query.id$Expanded<_$Scalars> | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.id<_$Scalars>>
+  id?: Query.id$Expanded<_$Context> | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.id<_$Context>>
   /**
    * Select the `idNonNull` field on the `Query` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
   idNonNull?:
-    | Query.idNonNull$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.idNonNull<_$Scalars>>
+    | Query.idNonNull$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.idNonNull<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -67,8 +69,8 @@ export interface Query<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | Query$FragmentInline<_$Scalars>
-    | Query$FragmentInline<_$Scalars>[]
+    | Query$FragmentInline<_$Context>
+    | Query$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -83,19 +85,24 @@ export interface Query<
 }
 
 export interface Query$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends Query<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends Query<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace Query {
-  export type id<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type id<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
+    | id$SelectionSet<_$Context>
 
   export interface id$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -106,22 +113,25 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
+    | id$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type idNonNull<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | idNonNull$SelectionSet<_$Scalars>
+    | idNonNull$SelectionSet<_$Context>
 
   export interface idNonNull$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -132,32 +142,21 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type idNonNull$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | idNonNull$SelectionSet<_$Scalars>
+    | idNonNull$SelectionSet<_$Context>
   >
 }
 
 import type * as $$Schema from './schema.js'
 
-// Helper type to extract variables from selection sets
-type ExtractVariablesFromArgs<Args> = Args extends Record<string, any>
-  ? { [K in keyof Args as Args[K] extends $$Utilities.DocumentBuilderKit.VariableMarker ? K : never]: boolean }
-  : {}
-
-type ExtractVariables<T> = T extends Record<string, any>
-  ? T extends { $: infer Args } ? ExtractVariablesFromArgs<Args> & ExtractVariables<Omit<T, '$'>>
-  : UnionToIntersection<{ [K in keyof T]: ExtractVariables<T[K]> }[keyof T]>
-  : {}
-
-type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never
-
 export type Query$Infer<$SelectionSet extends object> = $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
   $SelectionSet,
   $$Schema.Schema
 >
-export type Query$Variables<$SelectionSet> = ExtractVariables<$SelectionSet>
+export type Query$Variables<$SelectionSet> = any // Temporarily any - will be replaced with new analysis system
 /**
  * [1] These definitions serve to allow field selection interfaces to extend their respective object type without
  *     name clashing between the field name and the object name.
@@ -166,6 +165,8 @@ export type Query$Variables<$SelectionSet> = ExtractVariables<$SelectionSet>
  *     would end up with an error of `export interface Foo extends Foo ...`
  */
 export namespace $NamedTypes {
-  export type $Query<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    Query<_$Scalars>
+  export type $Query<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = Query<_$Context>
 }

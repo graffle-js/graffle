@@ -18,16 +18,35 @@ export const ModuleGenerator_exports = createModuleGenerator(
       import './modules/${getImportName(config, ModuleGeneratorGlobal)}'
     `)
     code()
-    code(
+
+    // Build the list of document exports based on what root types exist
+    const documentExports = []
+    if (config.schema.kindMap.index.Root.query) {
+      documentExports.push('query')
+    }
+    if (config.schema.kindMap.index.Root.mutation) {
+      documentExports.push('mutation')
+    }
+    if (config.schema.kindMap.index.Root.subscription) {
+      documentExports.push('subscription')
+    }
+
+    const documentExportLine = documentExports.length > 0
+      ? `export { ${documentExports.join(', ')} } from './modules/${getImportName(config, ModuleGeneratorDocument)}'`
+      : ''
+
+    const exports = [
       `export { Name } from './modules/${getImportName(config, ModuleGeneratorData)}'`,
       `export { Select } from './modules/${getImportName(config, ModuleGeneratorSelect)}'`,
       `export { create } from './modules/${getImportName(config, ModuleGeneratorClient)}'`,
-      `export { mutation, query } from './modules/${getImportName(config, ModuleGeneratorDocument)}'`,
+      documentExportLine,
       `export * as SelectionSets from './modules/${getImportName(config, ModuleGeneratorSelectionSets)}'`,
       `export { schemaDrivenDataMap as schemaMap } from './modules/${
         getImportName(config, ModuleGeneratorSchemaDrivenDataMap)
       }'`,
-    )
+    ].filter(line => line !== '') // Remove empty lines
+
+    code(...exports)
 
     return code
   },

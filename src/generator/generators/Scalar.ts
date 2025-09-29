@@ -90,7 +90,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
 
     const buildtimeMap = config.options.customScalars
       ? config.schema.kindMap.list.ScalarCustom.map(_ => {
-        return [_.name, _.name + `_`]
+        return [_.name, renderName(_.name) + `_`]
       })
       : {}
 
@@ -105,8 +105,8 @@ export const ModuleGeneratorScalar = createModuleGenerator(
       // dprint-ignore
       ? `$$Utilities.Schema.Scalar.Registry<
           ${Code.termObject(buildtimeMap)},
-          ${Code.tsUnionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Schema.Scalar.GetEncoded<${_.name}_>`))},
-          ${Code.tsUnionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Schema.Scalar.GetDecoded<${_.name}_>`))},
+          ${Code.tsUnionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Schema.Scalar.GetEncoded<${renderName(_.name)}_>`))},
+          ${Code.tsUnionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Schema.Scalar.GetDecoded<${renderName(_.name)}_>`))},
         >`
       : `$$Utilities.Schema.Scalar.Registry.Empty`
 

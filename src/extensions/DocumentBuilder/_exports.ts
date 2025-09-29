@@ -1,3 +1,4 @@
+export { type Infer as InferOperationVariablesFromSelectionSet } from './InferOperationVariablesFromSelectionSet/__.js'
 export * from './InferResult/__.js'
 export * from './requestMethods/document.js'
 export * from './requestMethods/requestMethods.js'

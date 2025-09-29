@@ -21,16 +21,16 @@ declare global {
 
     namespace SchemaDrivenDataMap {
       export interface Enum {
-        k: `enum`
-        n: string
+        readonly k: `enum`
+        readonly n: string
       }
 
       export interface OutputObject {
         /**
          * Fields of this output object.
          */
-        f: {
-          [key: string]: OutputField
+        readonly f: {
+          readonly [key: string]: OutputField
         }
       }
 
@@ -42,7 +42,7 @@ declare global {
          * - operationVariables is enabled and field has arguments.
          * - customScalars is enabled and field has arguments that contain custom scalars.
          */
-        a?: ArgumentsOrInputObjectFields
+        readonly a?: ArgumentsOrInputObjectFields
         /**
          * The field's output type.
          *
@@ -50,7 +50,7 @@ declare global {
          * - `CodecString` when customScalars enabled and this field's named type is a custom scalar.
          * - `OutputObject` when customScalars enabled and this field's type contains custom scalars.
          */
-        nt?: OutputNodes
+        readonly nt?: OutputNodes
       }
 
       export interface InputObject {
@@ -60,30 +60,30 @@ declare global {
          * This is only present when operationVariables is enabled, because that feature requires
          * all input object fields to be mapped, thus requiring a meta field to identify the custom scalar ones.
          */
-        fcs?: string[]
+        readonly fcs?: readonly string[]
         /**
          * Name of the input object. Only present when "variables" is enabled.
          */
-        n?: string
+        readonly n?: string
         /**
          * Fields of the input object.
          */
-        f?: ArgumentsOrInputObjectFields
+        readonly f?: ArgumentsOrInputObjectFields
       }
 
       export interface ArgumentsOrInputObjectFields {
-        [key: string]: ArgumentOrInputField
+        readonly [key: string]: ArgumentOrInputField
       }
 
       export interface ArgumentOrInputField {
         /**
          * Inline types (nullable/non-nullable, list) of this argument or input field. Only present when operationVariables is enabled.
          */
-        it?: InlineType
+        readonly it?: InlineType
         /**
          * Named type of this argument or input field. Only present when customScalars is enabled.
          */
-        nt?: InputNodes
+        readonly nt?: InputNodes
       }
     }
   }

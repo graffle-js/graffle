@@ -18,10 +18,10 @@ import type { KindRenderers } from '../helpers/types.js'
 
 const i = {
   ...$,
-  _$Scalars: `_$Scalars`,
+  _$Context: `_$Context`,
 }
-const $ScalarsTypeParameter =
-  `${i._$Scalars} extends ${$.$$Utilities}.Schema.Scalar.Registry = ${$.$$Utilities}.Schema.Scalar.Registry.Empty`
+const $ContextTypeParameter =
+  `${i._$Context} extends ${$.$$Utilities}.DocumentBuilderKit.Select.SelectionContext = ${$.$$Utilities}.DocumentBuilderKit.Select.DefaultContext`
 
 export const ModuleGeneratorSelectionSets = createModuleGenerator(
   `SelectionSets`,
@@ -43,11 +43,11 @@ export const ModuleGeneratorSelectionSets = createModuleGenerator(
     code``
     code(Code.tsInterface({
       name: `$Document`,
-      parameters: $ScalarsTypeParameter,
+      parameters: $ContextTypeParameter,
       // dprint-ignore
       block: `
-        ${config.schema.kindMap.index.Root.query ? `query?: Record<string, ${renderName(config.schema.kindMap.index.Root.query)}<${i._$Scalars}>>` : ``}
-        ${config.schema.kindMap.index.Root.mutation ? `mutation?: Record<string, ${renderName(config.schema.kindMap.index.Root.mutation)}<${i._$Scalars}>>` : ``}
+        ${config.schema.kindMap.index.Root.query ? `query?: Record<string, ${renderName(config.schema.kindMap.index.Root.query)}<${i._$Context}>>` : ``}
+        ${config.schema.kindMap.index.Root.mutation ? `mutation?: Record<string, ${renderName(config.schema.kindMap.index.Root.mutation)}<${i._$Context}>>` : ``}
       `,
     }))
     code``
@@ -66,69 +66,29 @@ export const ModuleGeneratorSelectionSets = createModuleGenerator(
       code`
         import type * as ${$.$$Schema} from './schema.js'
 
-        // Helper type to extract variables from selection sets
-        type ExtractVariablesFromArgs<Args> = Args extends Record<string, any>
-          ? { [K in keyof Args as Args[K] extends ${$.$$Utilities}.DocumentBuilderKit.VariableMarker ? K : never]: boolean }
-          : {}
-
-        type ExtractVariables<T> = T extends Record<string, any>
-          ? T extends { $: infer Args }
-            ? ExtractVariablesFromArgs<Args> & ExtractVariables<Omit<T, '$'>>
-            : UnionToIntersection<{ [K in keyof T]: ExtractVariables<T[K]> }[keyof T]>
-          : {}
-
-        type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never
-
         export type Query$Infer<$SelectionSet extends object> = ${$.$$Utilities}.DocumentBuilderKit.InferResult.OperationQuery<$SelectionSet, ${$.$$Schema}.${$.Schema}>
-        export type Query$Variables<$SelectionSet> = ExtractVariables<$SelectionSet>
+        export type Query$Variables<$SelectionSet> = any // Temporarily any - will be replaced with new analysis system
       `
     }
 
     if (config.schema.kindMap.index.Root.mutation) {
       code`
         ${!config.schema.kindMap.index.Root.query ? `import type * as ${$.$$Schema} from './schema.js'` : ''}
-        ${!config.schema.kindMap.index.Root.query ? `
-        // Helper type to extract variables from selection sets
-        type ExtractVariablesFromArgs<Args> = Args extends Record<string, any>
-          ? { [K in keyof Args as Args[K] extends ${$.$$Utilities}.DocumentBuilderKit.VariableMarker ? K : never]: boolean }
-          : {}
-
-        type ExtractVariables<T> = T extends Record<string, any>
-          ? T extends { $: infer Args }
-            ? ExtractVariablesFromArgs<Args> & ExtractVariables<Omit<T, '$'>>
-            : UnionToIntersection<{ [K in keyof T]: ExtractVariables<T[K]> }[keyof T]>
-          : {}
-
-        type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never
-        ` : ''}
 
         export type Mutation$Infer<$SelectionSet extends object> = ${$.$$Utilities}.DocumentBuilderKit.InferResult.OperationMutation<$SelectionSet, ${$.$$Schema}.${$.Schema}>
-        export type Mutation$Variables<$SelectionSet> = ExtractVariables<$SelectionSet>
+        export type Mutation$Variables<$SelectionSet> = any // Temporarily any - will be replaced with new analysis system
       `
     }
 
     if (config.schema.kindMap.index.Root.subscription) {
       code`
         ${!config.schema.kindMap.index.Root.query && !config.schema.kindMap.index.Root.mutation ? `import type * as ${$.$$Schema} from './schema.js'` : ''}
-        ${!config.schema.kindMap.index.Root.query && !config.schema.kindMap.index.Root.mutation ? `
-        // Helper type to extract variables from selection sets
-        type ExtractVariablesFromArgs<Args> = Args extends Record<string, any>
-          ? { [K in keyof Args as Args[K] extends ${$.$$Utilities}.DocumentBuilderKit.VariableMarker ? K : never]: boolean }
-          : {}
-
-        type ExtractVariables<T> = T extends Record<string, any>
-          ? T extends { $: infer Args }
-            ? ExtractVariablesFromArgs<Args> & ExtractVariables<Omit<T, '$'>>
-            : UnionToIntersection<{ [K in keyof T]: ExtractVariables<T[K]> }[keyof T]>
-          : {}
-
-        type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never
-        ` : ''}
 
         export type Subscription$Infer<$SelectionSet extends object> = ${$.$$Utilities}.DocumentBuilderKit.InferResult.OperationSubscription<$SelectionSet, ${$.$$Schema}.${$.Schema}>
-        export type Subscription$Variables<$SelectionSet> = ExtractVariables<$SelectionSet>
+        export type Subscription$Variables<$SelectionSet> = any // Temporarily any - will be replaced with new analysis system
       `
     }
+
 
     code`
       /**
@@ -148,7 +108,7 @@ export const ModuleGeneratorSelectionSets = createModuleGenerator(
       }
       return Code.tsAlias$({
         name: `$${renderName(type)}`,
-        parameters: $ScalarsTypeParameter,
+        parameters: $ContextTypeParameter,
         type: H.reference(type),
       })
     }).join(`\n`)
@@ -166,13 +126,13 @@ const Union = createCodeGenerator<{ type: Grafaid.Schema.UnionType }>(
   ({ config, type, code }) => {
     const fragmentsInlineType = type.getTypes().map((type) =>
       `${DocumentBuilderKit.Select.InlineFragment.typeConditionPRefix}${type.name}?: ${
-        H.forwardTypeParameter$Scalars(type)
+        H.forwardTypeParameter$Context(type)
       }`
     ).join(`\n`)
     code(Code.tsInterface({
       tsDoc: getTsDocContents(config, type),
       name: type.name,
-      parameters: $ScalarsTypeParameter,
+      parameters: $ContextTypeParameter,
       block: `
         ${H.__typenameField(`union`)}
         ${fragmentsInlineType}
@@ -200,7 +160,7 @@ const InputObject = createCodeGenerator<{ type: Grafaid.Schema.InputObjectType }
     code(Code.tsInterface({
       tsDoc: getTsDocContents(config, type),
       name: type.name,
-      parameters: $ScalarsTypeParameter,
+      parameters: $ContextTypeParameter,
       block: values(type.getFields()).map(field => getInputFieldLike(config, field)),
     }))
   },
@@ -225,7 +185,7 @@ const Interface = createCodeGenerator<{ type: Grafaid.Schema.InterfaceType }>(
     code(Code.tsInterface({
       tsDoc: getTsDocContents(config, type),
       name: type.name,
-      parameters: $ScalarsTypeParameter,
+      parameters: $ContextTypeParameter,
       extends: [`${$.$$Utilities}.DocumentBuilderKit.Select.Bases.ObjectLike`],
       block: `
         ${fieldsRendered}
@@ -277,7 +237,7 @@ const OutputObject = createCodeGenerator<{ type: Grafaid.Schema.ObjectType }>(
     code(Code.tsInterface({
       tsDoc: getTsDocContents(config, type),
       name: type.name,
-      parameters: $ScalarsTypeParameter,
+      parameters: $ContextTypeParameter,
       extends: [extendsClause],
       block: `
         ${fieldKeys}
@@ -328,7 +288,7 @@ const renderOutputField = createCodeGenerator<{ field: Grafaid.Schema.Field<any,
 
     code(Code.tsAlias$({
       name: field.name,
-      parameters: $ScalarsTypeParameter,
+      parameters: $ContextTypeParameter,
       type: Code.tsUnionItems([indicator, selectionSetRef]),
     }))
     code``
@@ -348,7 +308,7 @@ const renderOutputField = createCodeGenerator<{ field: Grafaid.Schema.Field<any,
 
     code(Code.tsInterface({
       name: selectionSetName,
-      parameters: $ScalarsTypeParameter,
+      parameters: $ContextTypeParameter,
       extends: [`${$.$$Utilities}.DocumentBuilderKit.Select.Bases.Base`, objectLikeTypeReference],
       block: propertyArguments,
     }))
@@ -357,7 +317,7 @@ const renderOutputField = createCodeGenerator<{ field: Grafaid.Schema.Field<any,
     if (argsAnalysis.hasAny) {
       code(Code.tsInterface({
         name: argumentsName,
-        parameters: $ScalarsTypeParameter,
+        parameters: $ContextTypeParameter,
         block: field.args.map(arg => getInputFieldLike(config, arg)),
       }))
       code``
@@ -417,8 +377,8 @@ const renderArgumentType = (type: Grafaid.Schema.InputTypes): string => {
 
   const nullableRendered = Grafaid.Schema.isNullableType(type) ? `| undefined | null` : ``
 
-  // Always allow VariableMarker for any argument type
-  const variableMarkerType = `| ${i.$$Utilities}.DocumentBuilderKit.VariableMarker`
+  // Conditionally allow VariableMarker based on context
+  const variableMarkerType = `| (${i._$Context} extends { variablesEnabled: true } ? ${i.$$Utilities}.DocumentBuilderKit.VariableMarker : never)`
 
   if (Grafaid.Schema.isListType(sansNullabilityType)) {
     const innerType = Grafaid.Schema.getNullableType(sansNullabilityType.ofType)
@@ -428,7 +388,7 @@ const renderArgumentType = (type: Grafaid.Schema.InputTypes): string => {
   if (Grafaid.Schema.isScalarType(sansNullabilityType)) {
     if (Grafaid.Schema.isScalarTypeCustom(sansNullabilityType)) {
       const scalarTypeRendered =
-        `${i.$$Utilities}.Schema.Scalar.GetDecoded<${i.$$Utilities}.Schema.Scalar.LookupCustomScalarOrFallbackToString<'${sansNullabilityType.name}', ${i._$Scalars}>>`
+        `${i.$$Utilities}.Schema.Scalar.GetDecoded<${i.$$Utilities}.Schema.Scalar.LookupCustomScalarOrFallbackToString<'${sansNullabilityType.name}', ${i._$Context} extends { scalars: infer S } ? S : ${i.$$Utilities}.Schema.Scalar.Registry.Empty>>`
       return `${scalarTypeRendered} ${nullableRendered} ${variableMarkerType}`
     }
     const scalarTypeRendered =
@@ -444,8 +404,8 @@ const renderArgumentType = (type: Grafaid.Schema.InputTypes): string => {
 namespace H {
   export type Name = string | Grafaid.Schema.NamedTypes | Grafaid.Schema.Field<any, any>
 
-  export const forwardTypeParameter$Scalars = (type: Name) => {
-    return `${renderName(type)}<${i._$Scalars}>`
+  export const forwardTypeParameter$Context = (type: Name) => {
+    return `${renderName(type)}<${i._$Context}>`
   }
 
   export const namedTypesReference = (type: Grafaid.Schema.NamedTypes) => {
@@ -457,7 +417,7 @@ namespace H {
     if (Grafaid.Schema.isEnumType(name)) {
       return renderName(name)
     }
-    return `${renderName(name)}<${i._$Scalars}>`
+    return `${renderName(name)}<${i._$Context}>`
   }
 
   export const propOpt = (type: Grafaid.Schema.Types) => {
@@ -468,7 +428,7 @@ namespace H {
     const name_ = renderName(name)
     return Code.tsAlias$({
       name: `${name_}$Expanded`,
-      parameters: $ScalarsTypeParameter,
+      parameters: $ContextTypeParameter,
       type: `${i.$$Utilities}.Simplify<${type}>`,
       tsDoc: `
         This is the "expanded" version of the \`${name_}\` type. It is identical except for the fact
@@ -533,9 +493,9 @@ namespace H {
   ) => {
     return Code.tsInterface({
       name: `${renderName(node)}${fragmentInlineNameSuffix}`,
-      parameters: $ScalarsTypeParameter,
+      parameters: $ContextTypeParameter,
       extends: [
-        forwardTypeParameter$Scalars(node),
+        forwardTypeParameter$Context(node),
         `${$.$$Utilities}.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields`,
       ],
       block: {},

@@ -17,10 +17,11 @@ import type * as $$Utilities from '../../../../../../exports/utilities-for-gener
 //
 
 export interface $Document<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
-  query?: Record<string, Query<_$Scalars>>
-  mutation?: Record<string, Mutation<_$Scalars>>
+  query?: Record<string, Query<_$Context>>
+  mutation?: Record<string, Mutation<_$Context>>
 }
 
 //
@@ -46,348 +47,349 @@ export interface $Document<
 // ----------------------------------------| Entrypoint Interface |
 
 export interface Query<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
   /**
    * Select the `InputObjectNested` field on the `Query` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
   InputObjectNested?:
-    | Query.InputObjectNested$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.InputObjectNested<_$Scalars>>
+    | Query.InputObjectNested$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.InputObjectNested<_$Context>>
   /**
    * Select the `InputObjectNestedNonNull` field on the `Query` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
   InputObjectNestedNonNull?:
-    | Query.InputObjectNestedNonNull<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.InputObjectNestedNonNull<_$Scalars>>
+    | Query.InputObjectNestedNonNull<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.InputObjectNestedNonNull<_$Context>>
   /**
    * Select the `abcEnum` field on the `Query` object. Its type is `ABCEnum` (a `Enum` kind of type).
    */
   abcEnum?:
-    | Query.abcEnum$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.abcEnum<_$Scalars>>
+    | Query.abcEnum$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.abcEnum<_$Context>>
   /**
    * Select the `argInputObjectCircular` field on the `Query` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   argInputObjectCircular?:
-    | Query.argInputObjectCircular$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.argInputObjectCircular<_$Scalars>>
+    | Query.argInputObjectCircular$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.argInputObjectCircular<_$Context>>
   /**
    * Select the `bigintField` field on the `Query` object. Its type is `bigint` (a `ScalarCustom` kind of type).
    */
   bigintField?:
-    | Query.bigintField$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.bigintField<_$Scalars>>
+    | Query.bigintField$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.bigintField<_$Context>>
   /**
    * Select the `bigintFieldNonNull` field on the `Query` object. Its type is `bigint` (a `ScalarCustom` kind of type).
    */
   bigintFieldNonNull?:
-    | Query.bigintFieldNonNull$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.bigintFieldNonNull<_$Scalars>>
+    | Query.bigintFieldNonNull$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.bigintFieldNonNull<_$Context>>
   /**
    * Select the `date` field on the `Query` object. Its type is `Date` (a `ScalarCustom` kind of type).
    */
   date?:
-    | Query.date$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.date<_$Scalars>>
+    | Query.date$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.date<_$Context>>
   /**
    * Select the `dateArg` field on the `Query` object. Its type is `Date` (a `ScalarCustom` kind of type).
    */
   dateArg?:
-    | Query.dateArg$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateArg<_$Scalars>>
+    | Query.dateArg$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateArg<_$Context>>
   /**
    * Select the `dateArgInputObject` field on the `Query` object. Its type is `Date` (a `ScalarCustom` kind of type).
    */
   dateArgInputObject?:
-    | Query.dateArgInputObject$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateArgInputObject<_$Scalars>>
+    | Query.dateArgInputObject$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateArgInputObject<_$Context>>
   /**
    * Select the `dateArgList` field on the `Query` object. Its type is `Date` (a `ScalarCustom` kind of type).
    */
   dateArgList?:
-    | Query.dateArgList$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateArgList<_$Scalars>>
+    | Query.dateArgList$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateArgList<_$Context>>
   /**
    * Select the `dateArgNonNull` field on the `Query` object. Its type is `Date` (a `ScalarCustom` kind of type).
    */
   dateArgNonNull?:
-    | Query.dateArgNonNull<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateArgNonNull<_$Scalars>>
+    | Query.dateArgNonNull<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateArgNonNull<_$Context>>
   /**
    * Select the `dateArgNonNullList` field on the `Query` object. Its type is `Date` (a `ScalarCustom` kind of type).
    */
   dateArgNonNullList?:
-    | Query.dateArgNonNullList<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateArgNonNullList<_$Scalars>>
+    | Query.dateArgNonNullList<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateArgNonNullList<_$Context>>
   /**
    * Select the `dateArgNonNullListNonNull` field on the `Query` object. Its type is `Date` (a `ScalarCustom` kind of type).
    */
   dateArgNonNullListNonNull?:
-    | Query.dateArgNonNullListNonNull<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateArgNonNullListNonNull<_$Scalars>>
+    | Query.dateArgNonNullListNonNull<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateArgNonNullListNonNull<_$Context>>
   /**
    * Select the `dateInterface1` field on the `Query` object. Its type is `DateInterface1` (a `Interface` kind of type).
    */
   dateInterface1?:
-    | Query.dateInterface1$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateInterface1<_$Scalars>>
+    | Query.dateInterface1$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateInterface1<_$Context>>
   /**
    * Select the `dateList` field on the `Query` object. Its type is `Date` (a `ScalarCustom` kind of type).
    */
   dateList?:
-    | Query.dateList$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateList<_$Scalars>>
+    | Query.dateList$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateList<_$Context>>
   /**
    * Select the `dateListList` field on the `Query` object. Its type is `Date` (a `ScalarCustom` kind of type).
    */
   dateListList?:
-    | Query.dateListList$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateListList<_$Scalars>>
+    | Query.dateListList$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateListList<_$Context>>
   /**
    * Select the `dateListNonNull` field on the `Query` object. Its type is `Date` (a `ScalarCustom` kind of type).
    */
   dateListNonNull?:
-    | Query.dateListNonNull$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateListNonNull<_$Scalars>>
+    | Query.dateListNonNull$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateListNonNull<_$Context>>
   /**
    * Select the `dateNonNull` field on the `Query` object. Its type is `Date` (a `ScalarCustom` kind of type).
    */
   dateNonNull?:
-    | Query.dateNonNull$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateNonNull<_$Scalars>>
+    | Query.dateNonNull$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateNonNull<_$Context>>
   /**
    * Select the `dateObject1` field on the `Query` object. Its type is `DateObject1` (a `OutputObject` kind of type).
    */
   dateObject1?:
-    | Query.dateObject1$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateObject1<_$Scalars>>
+    | Query.dateObject1$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateObject1<_$Context>>
   /**
    * Select the `dateUnion` field on the `Query` object. Its type is `DateUnion` (a `Union` kind of type).
    */
   dateUnion?:
-    | Query.dateUnion$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateUnion<_$Scalars>>
+    | Query.dateUnion$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateUnion<_$Context>>
   /**
    * Select the `error` field on the `Query` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   error?:
-    | Query.error$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.error<_$Scalars>>
+    | Query.error$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.error<_$Context>>
   /**
    * Select the `id` field on the `Query` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
-  id?: Query.id$Expanded<_$Scalars> | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.id<_$Scalars>>
+  id?: Query.id$Expanded<_$Context> | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.id<_$Context>>
   /**
    * Select the `idNonNull` field on the `Query` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
   idNonNull?:
-    | Query.idNonNull$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.idNonNull<_$Scalars>>
+    | Query.idNonNull$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.idNonNull<_$Context>>
   /**
    * Select the `interface` field on the `Query` object. Its type is `Interface` (a `Interface` kind of type).
    */
   interface?:
-    | Query.$interface$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.$interface<_$Scalars>>
+    | Query.$interface$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.$interface<_$Context>>
   /**
    * Select the `interfaceHierarchyChildA` field on the `Query` object. Its type is `InterfaceChildA` (a `Interface` kind of type).
    */
   interfaceHierarchyChildA?:
-    | Query.interfaceHierarchyChildA$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.interfaceHierarchyChildA<_$Scalars>>
+    | Query.interfaceHierarchyChildA$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.interfaceHierarchyChildA<_$Context>>
   /**
    * Select the `interfaceHierarchyChildB` field on the `Query` object. Its type is `InterfaceChildB` (a `Interface` kind of type).
    */
   interfaceHierarchyChildB?:
-    | Query.interfaceHierarchyChildB$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.interfaceHierarchyChildB<_$Scalars>>
+    | Query.interfaceHierarchyChildB$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.interfaceHierarchyChildB<_$Context>>
   /**
    * Select the `interfaceHierarchyGrandparents` field on the `Query` object. Its type is `InterfaceGrandparent` (a `Interface` kind of type).
    */
   interfaceHierarchyGrandparents?:
-    | Query.interfaceHierarchyGrandparents$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.interfaceHierarchyGrandparents<_$Scalars>>
+    | Query.interfaceHierarchyGrandparents$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.interfaceHierarchyGrandparents<_$Context>>
   /**
    * Select the `interfaceHierarchyParents` field on the `Query` object. Its type is `InterfaceParent` (a `Interface` kind of type).
    */
   interfaceHierarchyParents?:
-    | Query.interfaceHierarchyParents$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.interfaceHierarchyParents<_$Scalars>>
+    | Query.interfaceHierarchyParents$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.interfaceHierarchyParents<_$Context>>
   /**
    * Select the `interfaceNonNull` field on the `Query` object. Its type is `Interface` (a `Interface` kind of type).
    */
   interfaceNonNull?:
-    | Query.interfaceNonNull$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.interfaceNonNull<_$Scalars>>
+    | Query.interfaceNonNull$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.interfaceNonNull<_$Context>>
   /**
    * Select the `interfaceWithArgs` field on the `Query` object. Its type is `Interface` (a `Interface` kind of type).
    */
   interfaceWithArgs?:
-    | Query.interfaceWithArgs<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.interfaceWithArgs<_$Scalars>>
+    | Query.interfaceWithArgs<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.interfaceWithArgs<_$Context>>
   /**
    * Select the `listInt` field on the `Query` object. Its type is `Int` (a `ScalarStandard` kind of type).
    */
   listInt?:
-    | Query.listInt$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.listInt<_$Scalars>>
+    | Query.listInt$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.listInt<_$Context>>
   /**
    * Select the `listIntNonNull` field on the `Query` object. Its type is `Int` (a `ScalarStandard` kind of type).
    */
   listIntNonNull?:
-    | Query.listIntNonNull$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.listIntNonNull<_$Scalars>>
+    | Query.listIntNonNull$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.listIntNonNull<_$Context>>
   /**
    * Select the `listListInt` field on the `Query` object. Its type is `Int` (a `ScalarStandard` kind of type).
    */
   listListInt?:
-    | Query.listListInt$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.listListInt<_$Scalars>>
+    | Query.listListInt$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.listListInt<_$Context>>
   /**
    * Select the `listListIntNonNull` field on the `Query` object. Its type is `Int` (a `ScalarStandard` kind of type).
    */
   listListIntNonNull?:
-    | Query.listListIntNonNull$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.listListIntNonNull<_$Scalars>>
+    | Query.listListIntNonNull$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.listListIntNonNull<_$Context>>
   /**
    * Select the `lowerCaseUnion` field on the `Query` object. Its type is `lowerCaseUnion` (a `Union` kind of type).
    */
   lowerCaseUnion?:
-    | Query.lowerCaseUnion$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.lowerCaseUnion<_$Scalars>>
+    | Query.lowerCaseUnion$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.lowerCaseUnion<_$Context>>
   /**
    * Select the `object` field on the `Query` object. Its type is `Object1` (a `OutputObject` kind of type).
    */
   object?:
-    | Query.$object$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.$object<_$Scalars>>
+    | Query.$object$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.$object<_$Context>>
   /**
    * Select the `objectList` field on the `Query` object. Its type is `Object1` (a `OutputObject` kind of type).
    */
   objectList?:
-    | Query.objectList$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.objectList<_$Scalars>>
+    | Query.objectList$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.objectList<_$Context>>
   /**
    * Select the `objectListNonNull` field on the `Query` object. Its type is `Object1` (a `OutputObject` kind of type).
    */
   objectListNonNull?:
-    | Query.objectListNonNull$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.objectListNonNull<_$Scalars>>
+    | Query.objectListNonNull$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.objectListNonNull<_$Context>>
   /**
    * Select the `objectNested` field on the `Query` object. Its type is `ObjectNested` (a `OutputObject` kind of type).
    */
   objectNested?:
-    | Query.objectNested$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.objectNested<_$Scalars>>
+    | Query.objectNested$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.objectNested<_$Context>>
   /**
    * Select the `objectNonNull` field on the `Query` object. Its type is `Object1` (a `OutputObject` kind of type).
    */
   objectNonNull?:
-    | Query.objectNonNull$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.objectNonNull<_$Scalars>>
+    | Query.objectNonNull$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.objectNonNull<_$Context>>
   /**
    * Select the `objectWithArgs` field on the `Query` object. Its type is `Object1` (a `OutputObject` kind of type).
    */
   objectWithArgs?:
-    | Query.objectWithArgs$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.objectWithArgs<_$Scalars>>
+    | Query.objectWithArgs$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.objectWithArgs<_$Context>>
   /**
    * Select the `result` field on the `Query` object. Its type is `Result` (a `Union` kind of type).
    */
   result?:
-    | Query.result<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.result<_$Scalars>>
+    | Query.result<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.result<_$Context>>
   /**
    * Select the `resultNonNull` field on the `Query` object. Its type is `Result` (a `Union` kind of type).
    */
   resultNonNull?:
-    | Query.resultNonNull$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.resultNonNull<_$Scalars>>
+    | Query.resultNonNull$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.resultNonNull<_$Context>>
   /**
    * Select the `string` field on the `Query` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   string?:
-    | Query.$string$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.$string<_$Scalars>>
+    | Query.$string$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.$string<_$Context>>
   /**
    * Select the `stringWithArgEnum` field on the `Query` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   stringWithArgEnum?:
-    | Query.stringWithArgEnum$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.stringWithArgEnum<_$Scalars>>
+    | Query.stringWithArgEnum$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.stringWithArgEnum<_$Context>>
   /**
    * Select the `stringWithArgInputObject` field on the `Query` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   stringWithArgInputObject?:
-    | Query.stringWithArgInputObject$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.stringWithArgInputObject<_$Scalars>>
+    | Query.stringWithArgInputObject$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.stringWithArgInputObject<_$Context>>
   /**
    * Select the `stringWithArgInputObjectEnum` field on the `Query` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   stringWithArgInputObjectEnum?:
-    | Query.stringWithArgInputObjectEnum<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.stringWithArgInputObjectEnum<_$Scalars>>
+    | Query.stringWithArgInputObjectEnum<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.stringWithArgInputObjectEnum<_$Context>>
   /**
    * Select the `stringWithArgInputObjectRequired` field on the `Query` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   stringWithArgInputObjectRequired?:
-    | Query.stringWithArgInputObjectRequired<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.stringWithArgInputObjectRequired<_$Scalars>>
+    | Query.stringWithArgInputObjectRequired<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.stringWithArgInputObjectRequired<_$Context>>
   /**
    * Select the `stringWithArgs` field on the `Query` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   stringWithArgs?:
-    | Query.stringWithArgs$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.stringWithArgs<_$Scalars>>
+    | Query.stringWithArgs$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.stringWithArgs<_$Context>>
   /**
    * Select the `stringWithListArg` field on the `Query` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   stringWithListArg?:
-    | Query.stringWithListArg$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.stringWithListArg<_$Scalars>>
+    | Query.stringWithListArg$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.stringWithListArg<_$Context>>
   /**
    * Select the `stringWithListArgRequired` field on the `Query` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   stringWithListArgRequired?:
-    | Query.stringWithListArgRequired<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.stringWithListArgRequired<_$Scalars>>
+    | Query.stringWithListArgRequired<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.stringWithListArgRequired<_$Context>>
   /**
    * Select the `stringWithRequiredArg` field on the `Query` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   stringWithRequiredArg?:
-    | Query.stringWithRequiredArg<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.stringWithRequiredArg<_$Scalars>>
+    | Query.stringWithRequiredArg<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.stringWithRequiredArg<_$Context>>
   /**
    * Select the `unionFooBar` field on the `Query` object. Its type is `FooBarUnion` (a `Union` kind of type).
    */
   unionFooBar?:
-    | Query.unionFooBar$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.unionFooBar<_$Scalars>>
+    | Query.unionFooBar$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.unionFooBar<_$Context>>
   /**
    * Select the `unionFooBarNonNull` field on the `Query` object. Its type is `FooBarUnion` (a `Union` kind of type).
    */
   unionFooBarNonNull?:
-    | Query.unionFooBarNonNull$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.unionFooBarNonNull<_$Scalars>>
+    | Query.unionFooBarNonNull$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.unionFooBarNonNull<_$Context>>
   /**
    * Select the `unionFooBarWithArgs` field on the `Query` object. Its type is `FooBarUnion` (a `Union` kind of type).
    */
   unionFooBarWithArgs?:
-    | Query.unionFooBarWithArgs$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.unionFooBarWithArgs<_$Scalars>>
+    | Query.unionFooBarWithArgs$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.unionFooBarWithArgs<_$Context>>
   /**
    * Select the `unionObject` field on the `Query` object. Its type is `ObjectUnion` (a `OutputObject` kind of type).
    */
   unionObject?:
-    | Query.unionObject$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.unionObject<_$Scalars>>
+    | Query.unionObject$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.unionObject<_$Context>>
   /**
    * Select the `unionObjectNonNull` field on the `Query` object. Its type is `ObjectUnion` (a `OutputObject` kind of type).
    */
   unionObjectNonNull?:
-    | Query.unionObjectNonNull$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.unionObjectNonNull<_$Scalars>>
+    | Query.unionObjectNonNull$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.unionObjectNonNull<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -398,8 +400,8 @@ export interface Query<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | Query$FragmentInline<_$Scalars>
-    | Query$FragmentInline<_$Scalars>[]
+    | Query$FragmentInline<_$Context>
+    | Query$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -414,32 +416,40 @@ export interface Query<
 }
 
 export interface Query$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends Query<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends Query<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace Query {
   export type InputObjectNested<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | InputObjectNested$SelectionSet<_$Scalars>
+    | InputObjectNested$SelectionSet<_$Context>
 
   export interface InputObjectNested$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `InputObjectNested` field. No arguments are required so you may omit this.
      */
-    $?: InputObjectNested$Arguments<_$Scalars>
+    $?: InputObjectNested$Arguments<_$Context>
   }
 
   export interface InputObjectNested$Arguments<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    input?: $NamedTypes.$InputObjectNested<_$Scalars> | undefined | null
+    input?:
+      | $NamedTypes.$InputObjectNested<_$Context>
+      | undefined
+      | null
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -450,31 +460,37 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type InputObjectNested$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | InputObjectNested$SelectionSet<_$Scalars>
+    | InputObjectNested$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type InputObjectNestedNonNull<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = InputObjectNestedNonNull$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = InputObjectNestedNonNull$SelectionSet<_$Context>
 
   export interface InputObjectNestedNonNull$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `InputObjectNestedNonNull` field. All arguments are required so you must include this.
      */
-    $: InputObjectNestedNonNull$Arguments<_$Scalars>
+    $: InputObjectNestedNonNull$Arguments<_$Context>
   }
 
   export interface InputObjectNestedNonNull$Arguments<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    input: $NamedTypes.$InputObjectNestedNonNull<_$Scalars>
+    input:
+      | $NamedTypes.$InputObjectNestedNonNull<_$Context>
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -485,19 +501,24 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type InputObjectNestedNonNull$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    InputObjectNestedNonNull$SelectionSet<_$Scalars>
+    InputObjectNestedNonNull$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type abcEnum<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type abcEnum<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | abcEnum$SelectionSet<_$Scalars>
+    | abcEnum$SelectionSet<_$Context>
 
   export interface abcEnum$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -508,33 +529,41 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type abcEnum$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | abcEnum$SelectionSet<_$Scalars>
+    | abcEnum$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type argInputObjectCircular<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | argInputObjectCircular$SelectionSet<_$Scalars>
+    | argInputObjectCircular$SelectionSet<_$Context>
 
   export interface argInputObjectCircular$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `argInputObjectCircular` field. No arguments are required so you may omit this.
      */
-    $?: argInputObjectCircular$Arguments<_$Scalars>
+    $?: argInputObjectCircular$Arguments<_$Context>
   }
 
   export interface argInputObjectCircular$Arguments<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    input?: $NamedTypes.$InputObjectCircular<_$Scalars> | undefined | null
+    input?:
+      | $NamedTypes.$InputObjectCircular<_$Context>
+      | undefined
+      | null
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -545,22 +574,25 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type argInputObjectCircular$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | argInputObjectCircular$SelectionSet<_$Scalars>
+    | argInputObjectCircular$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type bigintField<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | bigintField$SelectionSet<_$Scalars>
+    | bigintField$SelectionSet<_$Context>
 
   export interface bigintField$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -571,22 +603,25 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type bigintField$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | bigintField$SelectionSet<_$Scalars>
+    | bigintField$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type bigintFieldNonNull<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | bigintFieldNonNull$SelectionSet<_$Scalars>
+    | bigintFieldNonNull$SelectionSet<_$Context>
 
   export interface bigintFieldNonNull$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -597,20 +632,25 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type bigintFieldNonNull$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | bigintFieldNonNull$SelectionSet<_$Scalars>
+    | bigintFieldNonNull$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type date<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type date<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | date$SelectionSet<_$Scalars>
+    | date$SelectionSet<_$Context>
 
   export interface date$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -621,36 +661,46 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type date$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | date$SelectionSet<_$Scalars>
+    | date$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type dateArg<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type dateArg<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | dateArg$SelectionSet<_$Scalars>
+    | dateArg$SelectionSet<_$Context>
 
   export interface dateArg$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `dateArg` field. No arguments are required so you may omit this.
      */
-    $?: dateArg$Arguments<_$Scalars>
+    $?: dateArg$Arguments<_$Context>
   }
 
   export interface dateArg$Arguments<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
     date?:
       | $$Utilities.Schema.Scalar.GetDecoded<
-        $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', _$Scalars>
+        $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
+          'Date',
+          _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
+        >
       >
       | undefined
       | null
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -661,33 +711,41 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateArg$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | dateArg$SelectionSet<_$Scalars>
+    | dateArg$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type dateArgInputObject<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | dateArgInputObject$SelectionSet<_$Scalars>
+    | dateArgInputObject$SelectionSet<_$Context>
 
   export interface dateArgInputObject$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `dateArgInputObject` field. No arguments are required so you may omit this.
      */
-    $?: dateArgInputObject$Arguments<_$Scalars>
+    $?: dateArgInputObject$Arguments<_$Context>
   }
 
   export interface dateArgInputObject$Arguments<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    input?: $NamedTypes.$InputObject<_$Scalars> | undefined | null
+    input?:
+      | $NamedTypes.$InputObject<_$Context>
+      | undefined
+      | null
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -698,42 +756,51 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateArgInputObject$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | dateArgInputObject$SelectionSet<_$Scalars>
+    | dateArgInputObject$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type dateArgList<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | dateArgList$SelectionSet<_$Scalars>
+    | dateArgList$SelectionSet<_$Context>
 
   export interface dateArgList$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `dateArgList` field. No arguments are required so you may omit this.
      */
-    $?: dateArgList$Arguments<_$Scalars>
+    $?: dateArgList$Arguments<_$Context>
   }
 
   export interface dateArgList$Arguments<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
     date?:
       | Array<
         | $$Utilities.Schema.Scalar.GetDecoded<
-          $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', _$Scalars>
+          $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
+            'Date',
+            _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
+          >
         >
         | undefined
         | null
+        | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
       >
       | undefined
       | null
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -744,33 +811,42 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateArgList$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | dateArgList$SelectionSet<_$Scalars>
+    | dateArgList$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type dateArgNonNull<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = dateArgNonNull$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = dateArgNonNull$SelectionSet<_$Context>
 
   export interface dateArgNonNull$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `dateArgNonNull` field. All arguments are required so you must include this.
      */
-    $: dateArgNonNull$Arguments<_$Scalars>
+    $: dateArgNonNull$Arguments<_$Context>
   }
 
   export interface dateArgNonNull$Arguments<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    date: $$Utilities.Schema.Scalar.GetDecoded<
-      $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', _$Scalars>
-    >
+    date:
+      | $$Utilities.Schema.Scalar.GetDecoded<
+        $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
+          'Date',
+          _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
+        >
+      >
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -781,36 +857,46 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateArgNonNull$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    dateArgNonNull$SelectionSet<_$Scalars>
+    dateArgNonNull$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type dateArgNonNullList<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = dateArgNonNullList$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = dateArgNonNullList$SelectionSet<_$Context>
 
   export interface dateArgNonNullList$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `dateArgNonNullList` field. All arguments are required so you must include this.
      */
-    $: dateArgNonNullList$Arguments<_$Scalars>
+    $: dateArgNonNullList$Arguments<_$Context>
   }
 
   export interface dateArgNonNullList$Arguments<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    date: Array<
-      | $$Utilities.Schema.Scalar.GetDecoded<
-        $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', _$Scalars>
+    date:
+      | Array<
+        | $$Utilities.Schema.Scalar.GetDecoded<
+          $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
+            'Date',
+            _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
+          >
+        >
+        | undefined
+        | null
+        | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
       >
-      | undefined
-      | null
-    >
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -821,36 +907,46 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateArgNonNullList$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    dateArgNonNullList$SelectionSet<_$Scalars>
+    dateArgNonNullList$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type dateArgNonNullListNonNull<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = dateArgNonNullListNonNull$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = dateArgNonNullListNonNull$SelectionSet<_$Context>
 
   export interface dateArgNonNullListNonNull$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `dateArgNonNullListNonNull` field. All arguments are required so you must include this.
      */
-    $: dateArgNonNullListNonNull$Arguments<_$Scalars>
+    $: dateArgNonNullListNonNull$Arguments<_$Context>
   }
 
   export interface dateArgNonNullListNonNull$Arguments<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    date: Array<
-      | $$Utilities.Schema.Scalar.GetDecoded<
-        $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', _$Scalars>
+    date:
+      | Array<
+        | $$Utilities.Schema.Scalar.GetDecoded<
+          $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
+            'Date',
+            _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
+          >
+        >
+        | undefined
+        | null
+        | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
       >
-      | undefined
-      | null
-    >
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -861,20 +957,23 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateArgNonNullListNonNull$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    dateArgNonNullListNonNull$SelectionSet<_$Scalars>
+    dateArgNonNullListNonNull$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type dateInterface1<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = dateInterface1$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = dateInterface1$SelectionSet<_$Context>
 
   export interface dateInterface1$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$DateInterface1<_$Scalars> {}
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$DateInterface1<_$Context> {}
 
   // --- expanded ---
 
@@ -884,21 +983,24 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateInterface1$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    dateInterface1$SelectionSet<_$Scalars>
+    dateInterface1$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type dateList<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | dateList$SelectionSet<_$Scalars>
+    | dateList$SelectionSet<_$Context>
 
   export interface dateList$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -909,22 +1011,25 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateList$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | dateList$SelectionSet<_$Scalars>
+    | dateList$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type dateListList<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | dateListList$SelectionSet<_$Scalars>
+    | dateListList$SelectionSet<_$Context>
 
   export interface dateListList$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -935,22 +1040,25 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateListList$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | dateListList$SelectionSet<_$Scalars>
+    | dateListList$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type dateListNonNull<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | dateListNonNull$SelectionSet<_$Scalars>
+    | dateListNonNull$SelectionSet<_$Context>
 
   export interface dateListNonNull$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -961,22 +1069,25 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateListNonNull$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | dateListNonNull$SelectionSet<_$Scalars>
+    | dateListNonNull$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type dateNonNull<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | dateNonNull$SelectionSet<_$Scalars>
+    | dateNonNull$SelectionSet<_$Context>
 
   export interface dateNonNull$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -987,21 +1098,24 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateNonNull$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | dateNonNull$SelectionSet<_$Scalars>
+    | dateNonNull$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type dateObject1<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = dateObject1$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = dateObject1$SelectionSet<_$Context>
 
   export interface dateObject1$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$DateObject1<_$Scalars> {}
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$DateObject1<_$Context> {}
 
   // --- expanded ---
 
@@ -1011,20 +1125,23 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateObject1$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    dateObject1$SelectionSet<_$Scalars>
+    dateObject1$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type dateUnion<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = dateUnion$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = dateUnion$SelectionSet<_$Context>
 
   export interface dateUnion$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$DateUnion<_$Scalars> {}
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$DateUnion<_$Context> {}
 
   // --- expanded ---
 
@@ -1034,30 +1151,40 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateUnion$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    dateUnion$SelectionSet<_$Scalars>
+    dateUnion$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type error<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type error<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | error$SelectionSet<_$Scalars>
+    | error$SelectionSet<_$Context>
 
   export interface error$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `error` field. No arguments are required so you may omit this.
      */
-    $?: error$Arguments<_$Scalars>
+    $?: error$Arguments<_$Context>
   }
 
   export interface error$Arguments<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    case?: string | undefined | null
+    case?:
+      | string
+      | undefined
+      | null
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -1068,20 +1195,25 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type error$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | error$SelectionSet<_$Scalars>
+    | error$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type id<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type id<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
+    | id$SelectionSet<_$Context>
 
   export interface id$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1092,22 +1224,25 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
+    | id$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type idNonNull<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | idNonNull$SelectionSet<_$Scalars>
+    | idNonNull$SelectionSet<_$Context>
 
   export interface idNonNull$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1118,21 +1253,24 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type idNonNull$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | idNonNull$SelectionSet<_$Scalars>
+    | idNonNull$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type $interface<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = $interface$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = $interface$SelectionSet<_$Context>
 
   export interface $interface$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Interface<_$Scalars> {}
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Interface<_$Context> {}
 
   // --- expanded ---
 
@@ -1142,30 +1280,38 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type $interface$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    $interface$SelectionSet<_$Scalars>
+    $interface$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type interfaceHierarchyChildA<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = interfaceHierarchyChildA$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = interfaceHierarchyChildA$SelectionSet<_$Context>
 
   export interface interfaceHierarchyChildA$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$InterfaceChildA<_$Scalars> {
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$InterfaceChildA<_$Context> {
     /**
      * Arguments for `interfaceHierarchyChildA` field. No arguments are required so you may omit this.
      */
-    $?: interfaceHierarchyChildA$Arguments<_$Scalars>
+    $?: interfaceHierarchyChildA$Arguments<_$Context>
   }
 
   export interface interfaceHierarchyChildA$Arguments<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    $type?: $NamedTypes.$ChildAInterfaceHierarchyMember | undefined | null
+    $type?:
+      | $NamedTypes.$ChildAInterfaceHierarchyMember
+      | undefined
+      | null
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -1176,30 +1322,38 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type interfaceHierarchyChildA$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    interfaceHierarchyChildA$SelectionSet<_$Scalars>
+    interfaceHierarchyChildA$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type interfaceHierarchyChildB<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = interfaceHierarchyChildB$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = interfaceHierarchyChildB$SelectionSet<_$Context>
 
   export interface interfaceHierarchyChildB$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$InterfaceChildB<_$Scalars> {
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$InterfaceChildB<_$Context> {
     /**
      * Arguments for `interfaceHierarchyChildB` field. No arguments are required so you may omit this.
      */
-    $?: interfaceHierarchyChildB$Arguments<_$Scalars>
+    $?: interfaceHierarchyChildB$Arguments<_$Context>
   }
 
   export interface interfaceHierarchyChildB$Arguments<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    $type?: $NamedTypes.$ChildBInterfaceHierarchyMember | undefined | null
+    $type?:
+      | $NamedTypes.$ChildBInterfaceHierarchyMember
+      | undefined
+      | null
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -1210,30 +1364,38 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type interfaceHierarchyChildB$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    interfaceHierarchyChildB$SelectionSet<_$Scalars>
+    interfaceHierarchyChildB$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type interfaceHierarchyGrandparents<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = interfaceHierarchyGrandparents$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = interfaceHierarchyGrandparents$SelectionSet<_$Context>
 
   export interface interfaceHierarchyGrandparents$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$InterfaceGrandparent<_$Scalars> {
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$InterfaceGrandparent<_$Context> {
     /**
      * Arguments for `interfaceHierarchyGrandparents` field. No arguments are required so you may omit this.
      */
-    $?: interfaceHierarchyGrandparents$Arguments<_$Scalars>
+    $?: interfaceHierarchyGrandparents$Arguments<_$Context>
   }
 
   export interface interfaceHierarchyGrandparents$Arguments<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    $type?: $NamedTypes.$GrandparentInterfaceHierarchyMember | undefined | null
+    $type?:
+      | $NamedTypes.$GrandparentInterfaceHierarchyMember
+      | undefined
+      | null
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -1244,30 +1406,38 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type interfaceHierarchyGrandparents$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    interfaceHierarchyGrandparents$SelectionSet<_$Scalars>
+    interfaceHierarchyGrandparents$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type interfaceHierarchyParents<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = interfaceHierarchyParents$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = interfaceHierarchyParents$SelectionSet<_$Context>
 
   export interface interfaceHierarchyParents$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$InterfaceParent<_$Scalars> {
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$InterfaceParent<_$Context> {
     /**
      * Arguments for `interfaceHierarchyParents` field. No arguments are required so you may omit this.
      */
-    $?: interfaceHierarchyParents$Arguments<_$Scalars>
+    $?: interfaceHierarchyParents$Arguments<_$Context>
   }
 
   export interface interfaceHierarchyParents$Arguments<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    $type?: $NamedTypes.$ParentInterfaceHierarchyMember | undefined | null
+    $type?:
+      | $NamedTypes.$ParentInterfaceHierarchyMember
+      | undefined
+      | null
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -1278,20 +1448,23 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type interfaceHierarchyParents$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    interfaceHierarchyParents$SelectionSet<_$Scalars>
+    interfaceHierarchyParents$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type interfaceNonNull<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = interfaceNonNull$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = interfaceNonNull$SelectionSet<_$Context>
 
   export interface interfaceNonNull$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Interface<_$Scalars> {}
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Interface<_$Context> {}
 
   // --- expanded ---
 
@@ -1301,30 +1474,34 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type interfaceNonNull$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    interfaceNonNull$SelectionSet<_$Scalars>
+    interfaceNonNull$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type interfaceWithArgs<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = interfaceWithArgs$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = interfaceWithArgs$SelectionSet<_$Context>
 
   export interface interfaceWithArgs$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Interface<_$Scalars> {
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Interface<_$Context> {
     /**
      * Arguments for `interfaceWithArgs` field. All arguments are required so you must include this.
      */
-    $: interfaceWithArgs$Arguments<_$Scalars>
+    $: interfaceWithArgs$Arguments<_$Context>
   }
 
   export interface interfaceWithArgs$Arguments<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    id: string
+    id: string | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -1335,19 +1512,24 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type interfaceWithArgs$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    interfaceWithArgs$SelectionSet<_$Scalars>
+    interfaceWithArgs$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type listInt<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type listInt<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | listInt$SelectionSet<_$Scalars>
+    | listInt$SelectionSet<_$Context>
 
   export interface listInt$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1358,22 +1540,25 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type listInt$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | listInt$SelectionSet<_$Scalars>
+    | listInt$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type listIntNonNull<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | listIntNonNull$SelectionSet<_$Scalars>
+    | listIntNonNull$SelectionSet<_$Context>
 
   export interface listIntNonNull$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1384,22 +1569,25 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type listIntNonNull$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | listIntNonNull$SelectionSet<_$Scalars>
+    | listIntNonNull$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type listListInt<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | listListInt$SelectionSet<_$Scalars>
+    | listListInt$SelectionSet<_$Context>
 
   export interface listListInt$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1410,22 +1598,25 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type listListInt$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | listListInt$SelectionSet<_$Scalars>
+    | listListInt$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type listListIntNonNull<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | listListIntNonNull$SelectionSet<_$Scalars>
+    | listListIntNonNull$SelectionSet<_$Context>
 
   export interface listListIntNonNull$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1436,21 +1627,24 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type listListIntNonNull$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | listListIntNonNull$SelectionSet<_$Scalars>
+    | listListIntNonNull$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type lowerCaseUnion<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = lowerCaseUnion$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = lowerCaseUnion$SelectionSet<_$Context>
 
   export interface lowerCaseUnion$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$lowerCaseUnion<_$Scalars> {}
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$lowerCaseUnion<_$Context> {}
 
   // --- expanded ---
 
@@ -1460,19 +1654,23 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type lowerCaseUnion$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    lowerCaseUnion$SelectionSet<_$Scalars>
+    lowerCaseUnion$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type $object<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    $object$SelectionSet<_$Scalars>
+  export type $object<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = $object$SelectionSet<_$Context>
 
   export interface $object$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Object1<_$Scalars> {}
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Object1<_$Context> {}
 
   // --- expanded ---
 
@@ -1482,20 +1680,23 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type $object$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    $object$SelectionSet<_$Scalars>
+    $object$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type objectList<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = objectList$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = objectList$SelectionSet<_$Context>
 
   export interface objectList$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Object1<_$Scalars> {}
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Object1<_$Context> {}
 
   // --- expanded ---
 
@@ -1505,20 +1706,23 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type objectList$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    objectList$SelectionSet<_$Scalars>
+    objectList$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type objectListNonNull<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = objectListNonNull$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = objectListNonNull$SelectionSet<_$Context>
 
   export interface objectListNonNull$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Object1<_$Scalars> {}
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Object1<_$Context> {}
 
   // --- expanded ---
 
@@ -1528,20 +1732,23 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type objectListNonNull$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    objectListNonNull$SelectionSet<_$Scalars>
+    objectListNonNull$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type objectNested<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = objectNested$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = objectNested$SelectionSet<_$Context>
 
   export interface objectNested$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$ObjectNested<_$Scalars> {}
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$ObjectNested<_$Context> {}
 
   // --- expanded ---
 
@@ -1551,20 +1758,23 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type objectNested$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    objectNested$SelectionSet<_$Scalars>
+    objectNested$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type objectNonNull<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = objectNonNull$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = objectNonNull$SelectionSet<_$Context>
 
   export interface objectNonNull$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Object1<_$Scalars> {}
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Object1<_$Context> {}
 
   // --- expanded ---
 
@@ -1574,34 +1784,58 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type objectNonNull$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    objectNonNull$SelectionSet<_$Scalars>
+    objectNonNull$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type objectWithArgs<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = objectWithArgs$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = objectWithArgs$SelectionSet<_$Context>
 
   export interface objectWithArgs$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Object1<_$Scalars> {
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Object1<_$Context> {
     /**
      * Arguments for `objectWithArgs` field. No arguments are required so you may omit this.
      */
-    $?: objectWithArgs$Arguments<_$Scalars>
+    $?: objectWithArgs$Arguments<_$Context>
   }
 
   export interface objectWithArgs$Arguments<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    boolean?: boolean | undefined | null
-    float?: number | undefined | null
-    id?: string | undefined | null
-    int?: number | undefined | null
-    string?: string | undefined | null
+    boolean?:
+      | boolean
+      | undefined
+      | null
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+    float?:
+      | number
+      | undefined
+      | null
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+    id?:
+      | string
+      | undefined
+      | null
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+    int?:
+      | number
+      | undefined
+      | null
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+    string?:
+      | string
+      | undefined
+      | null
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -1612,29 +1846,36 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type objectWithArgs$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    objectWithArgs$SelectionSet<_$Scalars>
+    objectWithArgs$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type result<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    result$SelectionSet<_$Scalars>
+  export type result<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = result$SelectionSet<_$Context>
 
   export interface result$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Result<_$Scalars> {
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Result<_$Context> {
     /**
      * Arguments for `result` field. All arguments are required so you must include this.
      */
-    $: result$Arguments<_$Scalars>
+    $: result$Arguments<_$Context>
   }
 
   export interface result$Arguments<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    $case: $NamedTypes.$Case
+    $case:
+      | $NamedTypes.$Case
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -1645,30 +1886,38 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type result$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    result$SelectionSet<_$Scalars>
+    result$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type resultNonNull<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = resultNonNull$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = resultNonNull$SelectionSet<_$Context>
 
   export interface resultNonNull$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Result<_$Scalars> {
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Result<_$Context> {
     /**
      * Arguments for `resultNonNull` field. No arguments are required so you may omit this.
      */
-    $?: resultNonNull$Arguments<_$Scalars>
+    $?: resultNonNull$Arguments<_$Context>
   }
 
   export interface resultNonNull$Arguments<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    $case?: $NamedTypes.$Case | undefined | null
+    $case?:
+      | $NamedTypes.$Case
+      | undefined
+      | null
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -1679,19 +1928,24 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type resultNonNull$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    resultNonNull$SelectionSet<_$Scalars>
+    resultNonNull$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type $string<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type $string<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | $string$SelectionSet<_$Scalars>
+    | $string$SelectionSet<_$Context>
 
   export interface $string$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1702,33 +1956,41 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type $string$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | $string$SelectionSet<_$Scalars>
+    | $string$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type stringWithArgEnum<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | stringWithArgEnum$SelectionSet<_$Scalars>
+    | stringWithArgEnum$SelectionSet<_$Context>
 
   export interface stringWithArgEnum$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `stringWithArgEnum` field. No arguments are required so you may omit this.
      */
-    $?: stringWithArgEnum$Arguments<_$Scalars>
+    $?: stringWithArgEnum$Arguments<_$Context>
   }
 
   export interface stringWithArgEnum$Arguments<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    $ABCEnum?: $NamedTypes.$ABCEnum | undefined | null
+    $ABCEnum?:
+      | $NamedTypes.$ABCEnum
+      | undefined
+      | null
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -1739,33 +2001,41 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type stringWithArgEnum$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | stringWithArgEnum$SelectionSet<_$Scalars>
+    | stringWithArgEnum$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type stringWithArgInputObject<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | stringWithArgInputObject$SelectionSet<_$Scalars>
+    | stringWithArgInputObject$SelectionSet<_$Context>
 
   export interface stringWithArgInputObject$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `stringWithArgInputObject` field. No arguments are required so you may omit this.
      */
-    $?: stringWithArgInputObject$Arguments<_$Scalars>
+    $?: stringWithArgInputObject$Arguments<_$Context>
   }
 
   export interface stringWithArgInputObject$Arguments<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    input?: $NamedTypes.$InputObject<_$Scalars> | undefined | null
+    input?:
+      | $NamedTypes.$InputObject<_$Context>
+      | undefined
+      | null
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -1776,31 +2046,37 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type stringWithArgInputObject$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | stringWithArgInputObject$SelectionSet<_$Scalars>
+    | stringWithArgInputObject$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type stringWithArgInputObjectEnum<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = stringWithArgInputObjectEnum$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = stringWithArgInputObjectEnum$SelectionSet<_$Context>
 
   export interface stringWithArgInputObjectEnum$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `stringWithArgInputObjectEnum` field. All arguments are required so you must include this.
      */
-    $: stringWithArgInputObjectEnum$Arguments<_$Scalars>
+    $: stringWithArgInputObjectEnum$Arguments<_$Context>
   }
 
   export interface stringWithArgInputObjectEnum$Arguments<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    input: $NamedTypes.$InputObjectEnum<_$Scalars>
+    input:
+      | $NamedTypes.$InputObjectEnum<_$Context>
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -1811,30 +2087,36 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type stringWithArgInputObjectEnum$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    stringWithArgInputObjectEnum$SelectionSet<_$Scalars>
+    stringWithArgInputObjectEnum$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type stringWithArgInputObjectRequired<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = stringWithArgInputObjectRequired$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = stringWithArgInputObjectRequired$SelectionSet<_$Context>
 
   export interface stringWithArgInputObjectRequired$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `stringWithArgInputObjectRequired` field. All arguments are required so you must include this.
      */
-    $: stringWithArgInputObjectRequired$Arguments<_$Scalars>
+    $: stringWithArgInputObjectRequired$Arguments<_$Context>
   }
 
   export interface stringWithArgInputObjectRequired$Arguments<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    input: $NamedTypes.$InputObject<_$Scalars>
+    input:
+      | $NamedTypes.$InputObject<_$Context>
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -1845,42 +2127,66 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type stringWithArgInputObjectRequired$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    stringWithArgInputObjectRequired$SelectionSet<_$Scalars>
+    stringWithArgInputObjectRequired$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type stringWithArgs<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | stringWithArgs$SelectionSet<_$Scalars>
+    | stringWithArgs$SelectionSet<_$Context>
 
   export interface stringWithArgs$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `stringWithArgs` field. No arguments are required so you may omit this.
      */
-    $?: stringWithArgs$Arguments<_$Scalars>
+    $?: stringWithArgs$Arguments<_$Context>
   }
 
   export interface stringWithArgs$Arguments<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    boolean?: boolean | undefined | null
-    float?: number | undefined | null
-    id?: string | undefined | null
+    boolean?:
+      | boolean
+      | undefined
+      | null
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+    float?:
+      | number
+      | undefined
+      | null
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+    id?:
+      | string
+      | undefined
+      | null
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
     /**
      * @deprecated Example of argument deprecation reason here.
      */
-    int?: number | undefined | null
+    int?:
+      | number
+      | undefined
+      | null
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
     /**
      * Example of some argument documentation here.
      */
-    string?: string | undefined | null
+    string?:
+      | string
+      | undefined
+      | null
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -1891,33 +2197,46 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type stringWithArgs$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | stringWithArgs$SelectionSet<_$Scalars>
+    | stringWithArgs$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type stringWithListArg<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | stringWithListArg$SelectionSet<_$Scalars>
+    | stringWithListArg$SelectionSet<_$Context>
 
   export interface stringWithListArg$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `stringWithListArg` field. No arguments are required so you may omit this.
      */
-    $?: stringWithListArg$Arguments<_$Scalars>
+    $?: stringWithListArg$Arguments<_$Context>
   }
 
   export interface stringWithListArg$Arguments<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    ints?: Array<number | undefined | null> | undefined | null
+    ints?:
+      | Array<
+        | number
+        | undefined
+        | null
+        | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+      >
+      | undefined
+      | null
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -1928,31 +2247,42 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type stringWithListArg$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | stringWithListArg$SelectionSet<_$Scalars>
+    | stringWithListArg$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type stringWithListArgRequired<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = stringWithListArgRequired$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = stringWithListArgRequired$SelectionSet<_$Context>
 
   export interface stringWithListArgRequired$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `stringWithListArgRequired` field. All arguments are required so you must include this.
      */
-    $: stringWithListArgRequired$Arguments<_$Scalars>
+    $: stringWithListArgRequired$Arguments<_$Context>
   }
 
   export interface stringWithListArgRequired$Arguments<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    ints: Array<number | undefined | null>
+    ints:
+      | Array<
+        | number
+        | undefined
+        | null
+        | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+      >
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -1963,30 +2293,36 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type stringWithListArgRequired$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    stringWithListArgRequired$SelectionSet<_$Scalars>
+    stringWithListArgRequired$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type stringWithRequiredArg<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = stringWithRequiredArg$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = stringWithRequiredArg$SelectionSet<_$Context>
 
   export interface stringWithRequiredArg$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `stringWithRequiredArg` field. All arguments are required so you must include this.
      */
-    $: stringWithRequiredArg$Arguments<_$Scalars>
+    $: stringWithRequiredArg$Arguments<_$Context>
   }
 
   export interface stringWithRequiredArg$Arguments<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    string: string
+    string:
+      | string
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -1997,20 +2333,23 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type stringWithRequiredArg$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    stringWithRequiredArg$SelectionSet<_$Scalars>
+    stringWithRequiredArg$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type unionFooBar<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = unionFooBar$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = unionFooBar$SelectionSet<_$Context>
 
   export interface unionFooBar$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$FooBarUnion<_$Scalars> {}
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$FooBarUnion<_$Context> {}
 
   // --- expanded ---
 
@@ -2020,20 +2359,23 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type unionFooBar$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    unionFooBar$SelectionSet<_$Scalars>
+    unionFooBar$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type unionFooBarNonNull<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = unionFooBarNonNull$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = unionFooBarNonNull$SelectionSet<_$Context>
 
   export interface unionFooBarNonNull$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$FooBarUnion<_$Scalars> {}
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$FooBarUnion<_$Context> {}
 
   // --- expanded ---
 
@@ -2043,30 +2385,38 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type unionFooBarNonNull$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    unionFooBarNonNull$SelectionSet<_$Scalars>
+    unionFooBarNonNull$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type unionFooBarWithArgs<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = unionFooBarWithArgs$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = unionFooBarWithArgs$SelectionSet<_$Context>
 
   export interface unionFooBarWithArgs$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$FooBarUnion<_$Scalars> {
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$FooBarUnion<_$Context> {
     /**
      * Arguments for `unionFooBarWithArgs` field. No arguments are required so you may omit this.
      */
-    $?: unionFooBarWithArgs$Arguments<_$Scalars>
+    $?: unionFooBarWithArgs$Arguments<_$Context>
   }
 
   export interface unionFooBarWithArgs$Arguments<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    id?: string | undefined | null
+    id?:
+      | string
+      | undefined
+      | null
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -2077,20 +2427,23 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type unionFooBarWithArgs$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    unionFooBarWithArgs$SelectionSet<_$Scalars>
+    unionFooBarWithArgs$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type unionObject<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = unionObject$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = unionObject$SelectionSet<_$Context>
 
   export interface unionObject$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$ObjectUnion<_$Scalars> {}
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$ObjectUnion<_$Context> {}
 
   // --- expanded ---
 
@@ -2100,20 +2453,23 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type unionObject$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    unionObject$SelectionSet<_$Scalars>
+    unionObject$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type unionObjectNonNull<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = unionObjectNonNull$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = unionObjectNonNull$SelectionSet<_$Context>
 
   export interface unionObjectNonNull$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$ObjectUnion<_$Scalars> {}
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$ObjectUnion<_$Context> {}
 
   // --- expanded ---
 
@@ -2123,9 +2479,10 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type unionObjectNonNull$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    unionObjectNonNull$SelectionSet<_$Scalars>
+    unionObjectNonNull$SelectionSet<_$Context>
   >
 }
 
@@ -2136,20 +2493,21 @@ export namespace Query {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface Mutation<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
   /**
    * Select the `id` field on the `Mutation` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
   id?:
-    | Mutation.id$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Mutation.id<_$Scalars>>
+    | Mutation.id$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Mutation.id<_$Context>>
   /**
    * Select the `idNonNull` field on the `Mutation` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
   idNonNull?:
-    | Mutation.idNonNull$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Mutation.idNonNull<_$Scalars>>
+    | Mutation.idNonNull$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Mutation.idNonNull<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -2160,8 +2518,8 @@ export interface Mutation<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | Mutation$FragmentInline<_$Scalars>
-    | Mutation$FragmentInline<_$Scalars>[]
+    | Mutation$FragmentInline<_$Context>
+    | Mutation$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -2176,19 +2534,24 @@ export interface Mutation<
 }
 
 export interface Mutation$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends Mutation<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends Mutation<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace Mutation {
-  export type id<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type id<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
+    | id$SelectionSet<_$Context>
 
   export interface id$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -2199,22 +2562,25 @@ export namespace Mutation {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
+    | id$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type idNonNull<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | idNonNull$SelectionSet<_$Scalars>
+    | idNonNull$SelectionSet<_$Context>
 
   export interface idNonNull$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -2225,10 +2591,11 @@ export namespace Mutation {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type idNonNull$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | idNonNull$SelectionSet<_$Scalars>
+    | idNonNull$SelectionSet<_$Context>
   >
 }
 
@@ -2298,50 +2665,92 @@ export type ParentInterfaceHierarchyMember =
 //
 
 export interface InputObject<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
-  $abcEnum?: $NamedTypes.$ABCEnum | undefined | null
+  $abcEnum?:
+    | $NamedTypes.$ABCEnum
+    | undefined
+    | null
+    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
   date?:
     | $$Utilities.Schema.Scalar.GetDecoded<
-      $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', _$Scalars>
+      $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
+        'Date',
+        _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
+      >
     >
     | undefined
     | null
-  dateRequired: $$Utilities.Schema.Scalar.GetDecoded<
-    $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', _$Scalars>
-  >
-  id?: string | undefined | null
-  idRequired: string
+    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+  dateRequired:
+    | $$Utilities.Schema.Scalar.GetDecoded<
+      $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
+        'Date',
+        _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
+      >
+    >
+    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+  id?:
+    | string
+    | undefined
+    | null
+    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+  idRequired:
+    | string
+    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
 }
 
 export interface InputObjectCircular<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
-  circular?: $NamedTypes.$InputObjectCircular<_$Scalars> | undefined | null
+  circular?:
+    | $NamedTypes.$InputObjectCircular<_$Context>
+    | undefined
+    | null
+    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
   date?:
     | $$Utilities.Schema.Scalar.GetDecoded<
-      $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', _$Scalars>
+      $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
+        'Date',
+        _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
+      >
     >
     | undefined
     | null
+    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
 }
 
 export interface InputObjectEnum<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
-  $abcEnum?: $NamedTypes.$ABCEnum | undefined | null
+  $abcEnum?:
+    | $NamedTypes.$ABCEnum
+    | undefined
+    | null
+    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
 }
 
 export interface InputObjectNested<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
-  InputObject?: $NamedTypes.$InputObject<_$Scalars> | undefined | null
+  InputObject?:
+    | $NamedTypes.$InputObject<_$Context>
+    | undefined
+    | null
+    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
 }
 
 export interface InputObjectNestedNonNull<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
-  InputObject: $NamedTypes.$InputObject<_$Scalars>
+  InputObject:
+    | $NamedTypes.$InputObject<_$Context>
+    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
 }
 
 //
@@ -2366,13 +2775,14 @@ export interface InputObjectNestedNonNull<
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface Bar<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty>
-  extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike
-{
+export interface Bar<
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * Select the `int` field on the `Bar` object. Its type is `Int` (a `ScalarStandard` kind of type).
    */
-  int?: Bar.int$Expanded<_$Scalars> | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Bar.int<_$Scalars>>
+  int?: Bar.int$Expanded<_$Context> | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Bar.int<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -2383,8 +2793,8 @@ export interface Bar<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Ut
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | Bar$FragmentInline<_$Scalars>
-    | Bar$FragmentInline<_$Scalars>[]
+    | Bar$FragmentInline<_$Context>
+    | Bar$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -2399,19 +2809,24 @@ export interface Bar<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Ut
 }
 
 export interface Bar$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends Bar<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends Bar<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace Bar {
-  export type int<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type int<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | int$SelectionSet<_$Scalars>
+    | int$SelectionSet<_$Context>
 
   export interface int$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -2422,10 +2837,11 @@ export namespace Bar {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type int$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | int$SelectionSet<_$Scalars>
+    | int$SelectionSet<_$Context>
   >
 }
 
@@ -2436,14 +2852,15 @@ export namespace Bar {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface DateObject1<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * Select the `date1` field on the `DateObject1` object. Its type is `Date` (a `ScalarCustom` kind of type).
    */
   date1?:
-    | DateObject1.date1$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<DateObject1.date1<_$Scalars>>
+    | DateObject1.date1$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<DateObject1.date1<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -2454,8 +2871,8 @@ export interface DateObject1<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | DateObject1$FragmentInline<_$Scalars>
-    | DateObject1$FragmentInline<_$Scalars>[]
+    | DateObject1$FragmentInline<_$Context>
+    | DateObject1$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -2470,19 +2887,24 @@ export interface DateObject1<
 }
 
 export interface DateObject1$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends DateObject1<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends DateObject1<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace DateObject1 {
-  export type date1<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type date1<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | date1$SelectionSet<_$Scalars>
+    | date1$SelectionSet<_$Context>
 
   export interface date1$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -2493,10 +2915,11 @@ export namespace DateObject1 {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type date1$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | date1$SelectionSet<_$Scalars>
+    | date1$SelectionSet<_$Context>
   >
 }
 
@@ -2507,14 +2930,15 @@ export namespace DateObject1 {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface DateObject2<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * Select the `date2` field on the `DateObject2` object. Its type is `Date` (a `ScalarCustom` kind of type).
    */
   date2?:
-    | DateObject2.date2$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<DateObject2.date2<_$Scalars>>
+    | DateObject2.date2$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<DateObject2.date2<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -2525,8 +2949,8 @@ export interface DateObject2<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | DateObject2$FragmentInline<_$Scalars>
-    | DateObject2$FragmentInline<_$Scalars>[]
+    | DateObject2$FragmentInline<_$Context>
+    | DateObject2$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -2541,19 +2965,24 @@ export interface DateObject2<
 }
 
 export interface DateObject2$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends DateObject2<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends DateObject2<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace DateObject2 {
-  export type date2<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type date2<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | date2$SelectionSet<_$Scalars>
+    | date2$SelectionSet<_$Context>
 
   export interface date2$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -2564,10 +2993,11 @@ export namespace DateObject2 {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type date2$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | date2$SelectionSet<_$Scalars>
+    | date2$SelectionSet<_$Context>
   >
 }
 
@@ -2578,20 +3008,21 @@ export namespace DateObject2 {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface ErrorOne<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * Select the `infoId` field on the `ErrorOne` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
   infoId?:
-    | ErrorOne.infoId$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ErrorOne.infoId<_$Scalars>>
+    | ErrorOne.infoId$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ErrorOne.infoId<_$Context>>
   /**
    * Select the `message` field on the `ErrorOne` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   message?:
-    | ErrorOne.message$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ErrorOne.message<_$Scalars>>
+    | ErrorOne.message$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ErrorOne.message<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -2602,8 +3033,8 @@ export interface ErrorOne<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | ErrorOne$FragmentInline<_$Scalars>
-    | ErrorOne$FragmentInline<_$Scalars>[]
+    | ErrorOne$FragmentInline<_$Context>
+    | ErrorOne$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -2618,19 +3049,24 @@ export interface ErrorOne<
 }
 
 export interface ErrorOne$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends ErrorOne<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends ErrorOne<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace ErrorOne {
-  export type infoId<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type infoId<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | infoId$SelectionSet<_$Scalars>
+    | infoId$SelectionSet<_$Context>
 
   export interface infoId$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -2641,20 +3077,25 @@ export namespace ErrorOne {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type infoId$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | infoId$SelectionSet<_$Scalars>
+    | infoId$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type message<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type message<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | message$SelectionSet<_$Scalars>
+    | message$SelectionSet<_$Context>
 
   export interface message$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -2665,10 +3106,11 @@ export namespace ErrorOne {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type message$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | message$SelectionSet<_$Scalars>
+    | message$SelectionSet<_$Context>
   >
 }
 
@@ -2679,20 +3121,21 @@ export namespace ErrorOne {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface ErrorTwo<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * Select the `infoInt` field on the `ErrorTwo` object. Its type is `Int` (a `ScalarStandard` kind of type).
    */
   infoInt?:
-    | ErrorTwo.infoInt$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ErrorTwo.infoInt<_$Scalars>>
+    | ErrorTwo.infoInt$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ErrorTwo.infoInt<_$Context>>
   /**
    * Select the `message` field on the `ErrorTwo` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   message?:
-    | ErrorTwo.message$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ErrorTwo.message<_$Scalars>>
+    | ErrorTwo.message$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ErrorTwo.message<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -2703,8 +3146,8 @@ export interface ErrorTwo<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | ErrorTwo$FragmentInline<_$Scalars>
-    | ErrorTwo$FragmentInline<_$Scalars>[]
+    | ErrorTwo$FragmentInline<_$Context>
+    | ErrorTwo$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -2719,19 +3162,24 @@ export interface ErrorTwo<
 }
 
 export interface ErrorTwo$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends ErrorTwo<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends ErrorTwo<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace ErrorTwo {
-  export type infoInt<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type infoInt<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | infoInt$SelectionSet<_$Scalars>
+    | infoInt$SelectionSet<_$Context>
 
   export interface infoInt$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -2742,20 +3190,25 @@ export namespace ErrorTwo {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type infoInt$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | infoInt$SelectionSet<_$Scalars>
+    | infoInt$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type message<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type message<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | message$SelectionSet<_$Scalars>
+    | message$SelectionSet<_$Context>
 
   export interface message$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -2766,10 +3219,11 @@ export namespace ErrorTwo {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type message$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | message$SelectionSet<_$Scalars>
+    | message$SelectionSet<_$Context>
   >
 }
 
@@ -2782,13 +3236,14 @@ export namespace ErrorTwo {
 /**
  * Object documentation.
  */
-export interface Foo<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty>
-  extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike
-{
+export interface Foo<
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * Select the `id` field on the `Foo` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
-  id?: Foo.id$Expanded<_$Scalars> | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Foo.id<_$Scalars>>
+  id?: Foo.id$Expanded<_$Context> | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Foo.id<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -2799,8 +3254,8 @@ export interface Foo<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Ut
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | Foo$FragmentInline<_$Scalars>
-    | Foo$FragmentInline<_$Scalars>[]
+    | Foo$FragmentInline<_$Context>
+    | Foo$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -2815,19 +3270,24 @@ export interface Foo<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Ut
 }
 
 export interface Foo$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends Foo<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends Foo<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace Foo {
-  export type id<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type id<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
+    | id$SelectionSet<_$Context>
 
   export interface id$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -2838,10 +3298,11 @@ export namespace Foo {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
+    | id$SelectionSet<_$Context>
   >
 }
 
@@ -2852,44 +3313,45 @@ export namespace Foo {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface Object1<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * Select the `ABCEnum` field on the `Object1` object. Its type is `ABCEnum` (a `Enum` kind of type).
    */
   ABCEnum?:
-    | Object1.ABCEnum$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Object1.ABCEnum<_$Scalars>>
+    | Object1.ABCEnum$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Object1.ABCEnum<_$Context>>
   /**
    * Select the `boolean` field on the `Object1` object. Its type is `Boolean` (a `ScalarStandard` kind of type).
    */
   boolean?:
-    | Object1.$boolean$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Object1.$boolean<_$Scalars>>
+    | Object1.$boolean$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Object1.$boolean<_$Context>>
   /**
    * Select the `float` field on the `Object1` object. Its type is `Float` (a `ScalarStandard` kind of type).
    */
   float?:
-    | Object1.float$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Object1.float<_$Scalars>>
+    | Object1.float$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Object1.float<_$Context>>
   /**
    * Select the `id` field on the `Object1` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
   id?:
-    | Object1.id$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Object1.id<_$Scalars>>
+    | Object1.id$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Object1.id<_$Context>>
   /**
    * Select the `int` field on the `Object1` object. Its type is `Int` (a `ScalarStandard` kind of type).
    */
   int?:
-    | Object1.int$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Object1.int<_$Scalars>>
+    | Object1.int$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Object1.int<_$Context>>
   /**
    * Select the `string` field on the `Object1` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   string?:
-    | Object1.$string$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Object1.$string<_$Scalars>>
+    | Object1.$string$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Object1.$string<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -2900,8 +3362,8 @@ export interface Object1<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | Object1$FragmentInline<_$Scalars>
-    | Object1$FragmentInline<_$Scalars>[]
+    | Object1$FragmentInline<_$Context>
+    | Object1$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -2916,19 +3378,24 @@ export interface Object1<
 }
 
 export interface Object1$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends Object1<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends Object1<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace Object1 {
-  export type ABCEnum<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type ABCEnum<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | ABCEnum$SelectionSet<_$Scalars>
+    | ABCEnum$SelectionSet<_$Context>
 
   export interface ABCEnum$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -2939,22 +3406,25 @@ export namespace Object1 {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type ABCEnum$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | ABCEnum$SelectionSet<_$Scalars>
+    | ABCEnum$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type $boolean<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | $boolean$SelectionSet<_$Scalars>
+    | $boolean$SelectionSet<_$Context>
 
   export interface $boolean$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -2965,20 +3435,25 @@ export namespace Object1 {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type $boolean$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | $boolean$SelectionSet<_$Scalars>
+    | $boolean$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type float<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type float<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | float$SelectionSet<_$Scalars>
+    | float$SelectionSet<_$Context>
 
   export interface float$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -2989,20 +3464,25 @@ export namespace Object1 {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type float$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | float$SelectionSet<_$Scalars>
+    | float$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type id<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type id<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
+    | id$SelectionSet<_$Context>
 
   export interface id$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -3013,20 +3493,25 @@ export namespace Object1 {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
+    | id$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type int<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type int<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | int$SelectionSet<_$Scalars>
+    | int$SelectionSet<_$Context>
 
   export interface int$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -3037,20 +3522,25 @@ export namespace Object1 {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type int$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | int$SelectionSet<_$Scalars>
+    | int$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type $string<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type $string<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | $string$SelectionSet<_$Scalars>
+    | $string$SelectionSet<_$Context>
 
   export interface $string$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -3061,10 +3551,11 @@ export namespace Object1 {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type $string$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | $string$SelectionSet<_$Scalars>
+    | $string$SelectionSet<_$Context>
   >
 }
 
@@ -3075,20 +3566,21 @@ export namespace Object1 {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface Object1ImplementingInterface<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * Select the `id` field on the `Object1ImplementingInterface` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
   id?:
-    | Object1ImplementingInterface.id$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Object1ImplementingInterface.id<_$Scalars>>
+    | Object1ImplementingInterface.id$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Object1ImplementingInterface.id<_$Context>>
   /**
    * Select the `int` field on the `Object1ImplementingInterface` object. Its type is `Int` (a `ScalarStandard` kind of type).
    */
   int?:
-    | Object1ImplementingInterface.int$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Object1ImplementingInterface.int<_$Scalars>>
+    | Object1ImplementingInterface.int$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Object1ImplementingInterface.int<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -3099,8 +3591,8 @@ export interface Object1ImplementingInterface<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | Object1ImplementingInterface$FragmentInline<_$Scalars>
-    | Object1ImplementingInterface$FragmentInline<_$Scalars>[]
+    | Object1ImplementingInterface$FragmentInline<_$Context>
+    | Object1ImplementingInterface$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -3115,9 +3607,10 @@ export interface Object1ImplementingInterface<
 }
 
 export interface Object1ImplementingInterface$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends
-  Object1ImplementingInterface<_$Scalars>,
+  Object1ImplementingInterface<_$Context>,
   $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields
 {
 }
@@ -3125,12 +3618,16 @@ export interface Object1ImplementingInterface$FragmentInline<
 // ----------------------------------------| Fields |
 
 export namespace Object1ImplementingInterface {
-  export type id<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type id<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
+    | id$SelectionSet<_$Context>
 
   export interface id$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -3141,20 +3638,25 @@ export namespace Object1ImplementingInterface {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
+    | id$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type int<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type int<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | int$SelectionSet<_$Scalars>
+    | int$SelectionSet<_$Context>
 
   export interface int$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -3165,10 +3667,11 @@ export namespace Object1ImplementingInterface {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type int$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | int$SelectionSet<_$Scalars>
+    | int$SelectionSet<_$Context>
   >
 }
 
@@ -3179,20 +3682,21 @@ export namespace Object1ImplementingInterface {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface Object2ImplementingInterface<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * Select the `boolean` field on the `Object2ImplementingInterface` object. Its type is `Boolean` (a `ScalarStandard` kind of type).
    */
   boolean?:
-    | Object2ImplementingInterface.$boolean$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Object2ImplementingInterface.$boolean<_$Scalars>>
+    | Object2ImplementingInterface.$boolean$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Object2ImplementingInterface.$boolean<_$Context>>
   /**
    * Select the `id` field on the `Object2ImplementingInterface` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
   id?:
-    | Object2ImplementingInterface.id$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Object2ImplementingInterface.id<_$Scalars>>
+    | Object2ImplementingInterface.id$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Object2ImplementingInterface.id<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -3203,8 +3707,8 @@ export interface Object2ImplementingInterface<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | Object2ImplementingInterface$FragmentInline<_$Scalars>
-    | Object2ImplementingInterface$FragmentInline<_$Scalars>[]
+    | Object2ImplementingInterface$FragmentInline<_$Context>
+    | Object2ImplementingInterface$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -3219,9 +3723,10 @@ export interface Object2ImplementingInterface<
 }
 
 export interface Object2ImplementingInterface$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends
-  Object2ImplementingInterface<_$Scalars>,
+  Object2ImplementingInterface<_$Context>,
   $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields
 {
 }
@@ -3230,13 +3735,15 @@ export interface Object2ImplementingInterface$FragmentInline<
 
 export namespace Object2ImplementingInterface {
   export type $boolean<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | $boolean$SelectionSet<_$Scalars>
+    | $boolean$SelectionSet<_$Context>
 
   export interface $boolean$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -3247,20 +3754,25 @@ export namespace Object2ImplementingInterface {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type $boolean$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | $boolean$SelectionSet<_$Scalars>
+    | $boolean$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type id<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type id<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
+    | id$SelectionSet<_$Context>
 
   export interface id$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -3271,10 +3783,11 @@ export namespace Object2ImplementingInterface {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
+    | id$SelectionSet<_$Context>
   >
 }
 
@@ -3285,32 +3798,33 @@ export namespace Object2ImplementingInterface {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface ObjectChildA<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * Select the `a` field on the `ObjectChildA` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   a?:
-    | ObjectChildA.a$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectChildA.a<_$Scalars>>
+    | ObjectChildA.a$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectChildA.a<_$Context>>
   /**
    * Select the `b` field on the `ObjectChildA` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   b?:
-    | ObjectChildA.b$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectChildA.b<_$Scalars>>
+    | ObjectChildA.b$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectChildA.b<_$Context>>
   /**
    * Select the `c1` field on the `ObjectChildA` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   c1?:
-    | ObjectChildA.c1$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectChildA.c1<_$Scalars>>
+    | ObjectChildA.c1$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectChildA.c1<_$Context>>
   /**
    * Select the `me` field on the `ObjectChildA` object. Its type is `Boolean` (a `ScalarStandard` kind of type).
    */
   me?:
-    | ObjectChildA.me$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectChildA.me<_$Scalars>>
+    | ObjectChildA.me$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectChildA.me<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -3321,8 +3835,8 @@ export interface ObjectChildA<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | ObjectChildA$FragmentInline<_$Scalars>
-    | ObjectChildA$FragmentInline<_$Scalars>[]
+    | ObjectChildA$FragmentInline<_$Context>
+    | ObjectChildA$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -3337,19 +3851,24 @@ export interface ObjectChildA<
 }
 
 export interface ObjectChildA$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends ObjectChildA<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends ObjectChildA<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace ObjectChildA {
-  export type a<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type a<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | a$SelectionSet<_$Scalars>
+    | a$SelectionSet<_$Context>
 
   export interface a$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -3360,20 +3879,25 @@ export namespace ObjectChildA {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type a$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | a$SelectionSet<_$Scalars>
+    | a$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type b<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type b<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | b$SelectionSet<_$Scalars>
+    | b$SelectionSet<_$Context>
 
   export interface b$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -3384,20 +3908,25 @@ export namespace ObjectChildA {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type b$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | b$SelectionSet<_$Scalars>
+    | b$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type c1<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type c1<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | c1$SelectionSet<_$Scalars>
+    | c1$SelectionSet<_$Context>
 
   export interface c1$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -3408,20 +3937,25 @@ export namespace ObjectChildA {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type c1$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | c1$SelectionSet<_$Scalars>
+    | c1$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type me<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type me<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | me$SelectionSet<_$Scalars>
+    | me$SelectionSet<_$Context>
 
   export interface me$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -3432,10 +3966,11 @@ export namespace ObjectChildA {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type me$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | me$SelectionSet<_$Scalars>
+    | me$SelectionSet<_$Context>
   >
 }
 
@@ -3446,32 +3981,33 @@ export namespace ObjectChildA {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface ObjectChildB<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * Select the `a` field on the `ObjectChildB` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   a?:
-    | ObjectChildB.a$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectChildB.a<_$Scalars>>
+    | ObjectChildB.a$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectChildB.a<_$Context>>
   /**
    * Select the `b` field on the `ObjectChildB` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   b?:
-    | ObjectChildB.b$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectChildB.b<_$Scalars>>
+    | ObjectChildB.b$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectChildB.b<_$Context>>
   /**
    * Select the `c2` field on the `ObjectChildB` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   c2?:
-    | ObjectChildB.c2$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectChildB.c2<_$Scalars>>
+    | ObjectChildB.c2$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectChildB.c2<_$Context>>
   /**
    * Select the `me` field on the `ObjectChildB` object. Its type is `Int` (a `ScalarStandard` kind of type).
    */
   me?:
-    | ObjectChildB.me$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectChildB.me<_$Scalars>>
+    | ObjectChildB.me$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectChildB.me<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -3482,8 +4018,8 @@ export interface ObjectChildB<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | ObjectChildB$FragmentInline<_$Scalars>
-    | ObjectChildB$FragmentInline<_$Scalars>[]
+    | ObjectChildB$FragmentInline<_$Context>
+    | ObjectChildB$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -3498,19 +4034,24 @@ export interface ObjectChildB<
 }
 
 export interface ObjectChildB$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends ObjectChildB<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends ObjectChildB<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace ObjectChildB {
-  export type a<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type a<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | a$SelectionSet<_$Scalars>
+    | a$SelectionSet<_$Context>
 
   export interface a$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -3521,20 +4062,25 @@ export namespace ObjectChildB {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type a$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | a$SelectionSet<_$Scalars>
+    | a$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type b<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type b<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | b$SelectionSet<_$Scalars>
+    | b$SelectionSet<_$Context>
 
   export interface b$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -3545,20 +4091,25 @@ export namespace ObjectChildB {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type b$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | b$SelectionSet<_$Scalars>
+    | b$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type c2<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type c2<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | c2$SelectionSet<_$Scalars>
+    | c2$SelectionSet<_$Context>
 
   export interface c2$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -3569,20 +4120,25 @@ export namespace ObjectChildB {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type c2$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | c2$SelectionSet<_$Scalars>
+    | c2$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type me<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type me<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | me$SelectionSet<_$Scalars>
+    | me$SelectionSet<_$Context>
 
   export interface me$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -3593,10 +4149,11 @@ export namespace ObjectChildB {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type me$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | me$SelectionSet<_$Scalars>
+    | me$SelectionSet<_$Context>
   >
 }
 
@@ -3607,20 +4164,21 @@ export namespace ObjectChildB {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface ObjectGrandparent<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * Select the `a` field on the `ObjectGrandparent` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   a?:
-    | ObjectGrandparent.a$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectGrandparent.a<_$Scalars>>
+    | ObjectGrandparent.a$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectGrandparent.a<_$Context>>
   /**
    * Select the `me` field on the `ObjectGrandparent` object. Its type is `Int` (a `ScalarStandard` kind of type).
    */
   me?:
-    | ObjectGrandparent.me$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectGrandparent.me<_$Scalars>>
+    | ObjectGrandparent.me$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectGrandparent.me<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -3631,8 +4189,8 @@ export interface ObjectGrandparent<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | ObjectGrandparent$FragmentInline<_$Scalars>
-    | ObjectGrandparent$FragmentInline<_$Scalars>[]
+    | ObjectGrandparent$FragmentInline<_$Context>
+    | ObjectGrandparent$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -3647,19 +4205,24 @@ export interface ObjectGrandparent<
 }
 
 export interface ObjectGrandparent$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends ObjectGrandparent<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends ObjectGrandparent<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace ObjectGrandparent {
-  export type a<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type a<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | a$SelectionSet<_$Scalars>
+    | a$SelectionSet<_$Context>
 
   export interface a$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -3670,20 +4233,25 @@ export namespace ObjectGrandparent {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type a$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | a$SelectionSet<_$Scalars>
+    | a$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type me<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type me<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | me$SelectionSet<_$Scalars>
+    | me$SelectionSet<_$Context>
 
   export interface me$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -3694,10 +4262,11 @@ export namespace ObjectGrandparent {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type me$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | me$SelectionSet<_$Scalars>
+    | me$SelectionSet<_$Context>
   >
 }
 
@@ -3708,20 +4277,21 @@ export namespace ObjectGrandparent {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface ObjectNested<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * Select the `id` field on the `ObjectNested` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
   id?:
-    | ObjectNested.id$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectNested.id<_$Scalars>>
+    | ObjectNested.id$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectNested.id<_$Context>>
   /**
    * Select the `object` field on the `ObjectNested` object. Its type is `Object1` (a `OutputObject` kind of type).
    */
   object?:
-    | ObjectNested.$object$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectNested.$object<_$Scalars>>
+    | ObjectNested.$object$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectNested.$object<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -3732,8 +4302,8 @@ export interface ObjectNested<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | ObjectNested$FragmentInline<_$Scalars>
-    | ObjectNested$FragmentInline<_$Scalars>[]
+    | ObjectNested$FragmentInline<_$Context>
+    | ObjectNested$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -3748,19 +4318,24 @@ export interface ObjectNested<
 }
 
 export interface ObjectNested$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends ObjectNested<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends ObjectNested<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace ObjectNested {
-  export type id<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type id<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
+    | id$SelectionSet<_$Context>
 
   export interface id$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -3771,20 +4346,24 @@ export namespace ObjectNested {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
+    | id$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type $object<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    $object$SelectionSet<_$Scalars>
+  export type $object<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = $object$SelectionSet<_$Context>
 
   export interface $object$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Object1<_$Scalars> {}
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Object1<_$Context> {}
 
   // --- expanded ---
 
@@ -3794,9 +4373,10 @@ export namespace ObjectNested {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type $object$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    $object$SelectionSet<_$Scalars>
+    $object$SelectionSet<_$Context>
   >
 }
 
@@ -3807,26 +4387,27 @@ export namespace ObjectNested {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface ObjectParent<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * Select the `a` field on the `ObjectParent` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   a?:
-    | ObjectParent.a$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectParent.a<_$Scalars>>
+    | ObjectParent.a$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectParent.a<_$Context>>
   /**
    * Select the `b` field on the `ObjectParent` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   b?:
-    | ObjectParent.b$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectParent.b<_$Scalars>>
+    | ObjectParent.b$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectParent.b<_$Context>>
   /**
    * Select the `me` field on the `ObjectParent` object. Its type is `String` (a `ScalarStandard` kind of type).
    */
   me?:
-    | ObjectParent.me$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectParent.me<_$Scalars>>
+    | ObjectParent.me$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectParent.me<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -3837,8 +4418,8 @@ export interface ObjectParent<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | ObjectParent$FragmentInline<_$Scalars>
-    | ObjectParent$FragmentInline<_$Scalars>[]
+    | ObjectParent$FragmentInline<_$Context>
+    | ObjectParent$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -3853,19 +4434,24 @@ export interface ObjectParent<
 }
 
 export interface ObjectParent$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends ObjectParent<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends ObjectParent<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace ObjectParent {
-  export type a<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type a<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | a$SelectionSet<_$Scalars>
+    | a$SelectionSet<_$Context>
 
   export interface a$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -3876,20 +4462,25 @@ export namespace ObjectParent {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type a$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | a$SelectionSet<_$Scalars>
+    | a$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type b<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type b<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | b$SelectionSet<_$Scalars>
+    | b$SelectionSet<_$Context>
 
   export interface b$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -3900,20 +4491,25 @@ export namespace ObjectParent {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type b$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | b$SelectionSet<_$Scalars>
+    | b$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type me<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type me<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | me$SelectionSet<_$Scalars>
+    | me$SelectionSet<_$Context>
 
   export interface me$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -3924,10 +4520,11 @@ export namespace ObjectParent {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type me$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | me$SelectionSet<_$Scalars>
+    | me$SelectionSet<_$Context>
   >
 }
 
@@ -3938,14 +4535,15 @@ export namespace ObjectParent {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface ObjectUnion<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * Select the `fooBarUnion` field on the `ObjectUnion` object. Its type is `FooBarUnion` (a `Union` kind of type).
    */
   fooBarUnion?:
-    | ObjectUnion.fooBarUnion$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectUnion.fooBarUnion<_$Scalars>>
+    | ObjectUnion.fooBarUnion$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectUnion.fooBarUnion<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -3956,8 +4554,8 @@ export interface ObjectUnion<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | ObjectUnion$FragmentInline<_$Scalars>
-    | ObjectUnion$FragmentInline<_$Scalars>[]
+    | ObjectUnion$FragmentInline<_$Context>
+    | ObjectUnion$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -3972,20 +4570,23 @@ export interface ObjectUnion<
 }
 
 export interface ObjectUnion$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends ObjectUnion<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends ObjectUnion<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace ObjectUnion {
   export type fooBarUnion<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = fooBarUnion$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = fooBarUnion$SelectionSet<_$Context>
 
   export interface fooBarUnion$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$FooBarUnion<_$Scalars> {}
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$FooBarUnion<_$Context> {}
 
   // --- expanded ---
 
@@ -3995,9 +4596,10 @@ export namespace ObjectUnion {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type fooBarUnion$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    fooBarUnion$SelectionSet<_$Scalars>
+    fooBarUnion$SelectionSet<_$Context>
   >
 }
 
@@ -4008,14 +4610,15 @@ export namespace ObjectUnion {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface lowerCaseObject<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * Select the `id` field on the `lowerCaseObject` object. Its type is `ID` (a `ScalarStandard` kind of type).
    */
   id?:
-    | lowerCaseObject.id$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<lowerCaseObject.id<_$Scalars>>
+    | lowerCaseObject.id$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<lowerCaseObject.id<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -4026,8 +4629,8 @@ export interface lowerCaseObject<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | lowerCaseObject$FragmentInline<_$Scalars>
-    | lowerCaseObject$FragmentInline<_$Scalars>[]
+    | lowerCaseObject$FragmentInline<_$Context>
+    | lowerCaseObject$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -4042,19 +4645,24 @@ export interface lowerCaseObject<
 }
 
 export interface lowerCaseObject$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends lowerCaseObject<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends lowerCaseObject<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace lowerCaseObject {
-  export type id<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type id<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
+    | id$SelectionSet<_$Context>
 
   export interface id$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -4065,10 +4673,11 @@ export namespace lowerCaseObject {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
+    | id$SelectionSet<_$Context>
   >
 }
 
@@ -4079,14 +4688,15 @@ export namespace lowerCaseObject {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface lowerCaseObject2<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * Select the `int` field on the `lowerCaseObject2` object. Its type is `Int` (a `ScalarStandard` kind of type).
    */
   int?:
-    | lowerCaseObject2.int$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<lowerCaseObject2.int<_$Scalars>>
+    | lowerCaseObject2.int$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<lowerCaseObject2.int<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -4097,8 +4707,8 @@ export interface lowerCaseObject2<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | lowerCaseObject2$FragmentInline<_$Scalars>
-    | lowerCaseObject2$FragmentInline<_$Scalars>[]
+    | lowerCaseObject2$FragmentInline<_$Context>
+    | lowerCaseObject2$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -4113,19 +4723,24 @@ export interface lowerCaseObject2<
 }
 
 export interface lowerCaseObject2$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends lowerCaseObject2<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends lowerCaseObject2<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace lowerCaseObject2 {
-  export type int<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type int<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | int$SelectionSet<_$Scalars>
+    | int$SelectionSet<_$Context>
 
   export interface int$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -4136,10 +4751,11 @@ export namespace lowerCaseObject2 {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type int$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | int$SelectionSet<_$Scalars>
+    | int$SelectionSet<_$Context>
   >
 }
 
@@ -4160,7 +4776,8 @@ export namespace lowerCaseObject2 {
 //
 
 export interface DateUnion<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
   /**
    * A meta field. Is the name of the type being selected. Since this is a union type and thus polymorphic,
@@ -4174,8 +4791,8 @@ export interface DateUnion<
       $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     >
 
-  ___on_DateObject1?: DateObject1<_$Scalars>
-  ___on_DateObject2?: DateObject2<_$Scalars>
+  ___on_DateObject1?: DateObject1<_$Context>
+  ___on_DateObject2?: DateObject2<_$Context>
 
   /**
    * Inline fragments for field groups.
@@ -4186,19 +4803,21 @@ export interface DateUnion<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | DateUnion$FragmentInline<_$Scalars>
-    | DateUnion$FragmentInline<_$Scalars>[]
+    | DateUnion$FragmentInline<_$Context>
+    | DateUnion$FragmentInline<_$Context>[]
 }
 export interface DateUnion$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends DateUnion<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends DateUnion<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 /**
  * Union documentation.
  */
 export interface FooBarUnion<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
   /**
    * A meta field. Is the name of the type being selected. Since this is a union type and thus polymorphic,
@@ -4212,8 +4831,8 @@ export interface FooBarUnion<
       $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     >
 
-  ___on_Bar?: Bar<_$Scalars>
-  ___on_Foo?: Foo<_$Scalars>
+  ___on_Bar?: Bar<_$Context>
+  ___on_Foo?: Foo<_$Context>
 
   /**
    * Inline fragments for field groups.
@@ -4224,16 +4843,18 @@ export interface FooBarUnion<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | FooBarUnion$FragmentInline<_$Scalars>
-    | FooBarUnion$FragmentInline<_$Scalars>[]
+    | FooBarUnion$FragmentInline<_$Context>
+    | FooBarUnion$FragmentInline<_$Context>[]
 }
 export interface FooBarUnion$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends FooBarUnion<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends FooBarUnion<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 export interface Result<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
   /**
    * A meta field. Is the name of the type being selected. Since this is a union type and thus polymorphic,
@@ -4247,9 +4868,9 @@ export interface Result<
       $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     >
 
-  ___on_ErrorOne?: ErrorOne<_$Scalars>
-  ___on_ErrorTwo?: ErrorTwo<_$Scalars>
-  ___on_Object1?: Object1<_$Scalars>
+  ___on_ErrorOne?: ErrorOne<_$Context>
+  ___on_ErrorTwo?: ErrorTwo<_$Context>
+  ___on_Object1?: Object1<_$Context>
 
   /**
    * Inline fragments for field groups.
@@ -4260,16 +4881,18 @@ export interface Result<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | Result$FragmentInline<_$Scalars>
-    | Result$FragmentInline<_$Scalars>[]
+    | Result$FragmentInline<_$Context>
+    | Result$FragmentInline<_$Context>[]
 }
 export interface Result$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends Result<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends Result<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 export interface lowerCaseUnion<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
   /**
    * A meta field. Is the name of the type being selected. Since this is a union type and thus polymorphic,
@@ -4283,8 +4906,8 @@ export interface lowerCaseUnion<
       $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     >
 
-  ___on_lowerCaseObject?: lowerCaseObject<_$Scalars>
-  ___on_lowerCaseObject2?: lowerCaseObject2<_$Scalars>
+  ___on_lowerCaseObject?: lowerCaseObject<_$Context>
+  ___on_lowerCaseObject2?: lowerCaseObject2<_$Context>
 
   /**
    * Inline fragments for field groups.
@@ -4295,12 +4918,13 @@ export interface lowerCaseUnion<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | lowerCaseUnion$FragmentInline<_$Scalars>
-    | lowerCaseUnion$FragmentInline<_$Scalars>[]
+    | lowerCaseUnion$FragmentInline<_$Context>
+    | lowerCaseUnion$FragmentInline<_$Context>[]
 }
 export interface lowerCaseUnion$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends lowerCaseUnion<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends lowerCaseUnion<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 //
@@ -4324,10 +4948,11 @@ export interface lowerCaseUnion$FragmentInline<
 //
 
 export interface DateInterface1<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
-  date1?: DateInterface1.date1<_$Scalars>
-  ___on_DateObject1?: DateObject1<_$Scalars>
+  date1?: DateInterface1.date1<_$Context>
+  ___on_DateObject1?: DateObject1<_$Context>
 
   /**
    * Inline fragments for field groups.
@@ -4338,8 +4963,8 @@ export interface DateInterface1<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | DateInterface1$FragmentInline<_$Scalars>
-    | DateInterface1$FragmentInline<_$Scalars>[]
+    | DateInterface1$FragmentInline<_$Context>
+    | DateInterface1$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected. Since this is a interface type and thus polymorphic,
@@ -4355,17 +4980,22 @@ export interface DateInterface1<
 }
 
 export interface DateInterface1$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends DateInterface1<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends DateInterface1<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 export namespace DateInterface1 {
-  export type date1<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type date1<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | date1$SelectionSet<_$Scalars>
+    | date1$SelectionSet<_$Context>
 
   export interface date1$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -4376,10 +5006,11 @@ export namespace DateInterface1 {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type date1$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | date1$SelectionSet<_$Scalars>
+    | date1$SelectionSet<_$Context>
   >
 }
 
@@ -4387,12 +5018,13 @@ export namespace DateInterface1 {
 // --------------------------------------------------------------------------------------------------
 //
 
-export interface Error<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty>
-  extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike
-{
-  message?: Error.message<_$Scalars>
-  ___on_ErrorOne?: ErrorOne<_$Scalars>
-  ___on_ErrorTwo?: ErrorTwo<_$Scalars>
+export interface Error<
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
+  message?: Error.message<_$Context>
+  ___on_ErrorOne?: ErrorOne<_$Context>
+  ___on_ErrorTwo?: ErrorTwo<_$Context>
 
   /**
    * Inline fragments for field groups.
@@ -4403,8 +5035,8 @@ export interface Error<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | Error$FragmentInline<_$Scalars>
-    | Error$FragmentInline<_$Scalars>[]
+    | Error$FragmentInline<_$Context>
+    | Error$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected. Since this is a interface type and thus polymorphic,
@@ -4420,17 +5052,22 @@ export interface Error<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$
 }
 
 export interface Error$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends Error<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends Error<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 export namespace Error {
-  export type message<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type message<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | message$SelectionSet<_$Scalars>
+    | message$SelectionSet<_$Context>
 
   export interface message$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -4441,10 +5078,11 @@ export namespace Error {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type message$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | message$SelectionSet<_$Scalars>
+    | message$SelectionSet<_$Context>
   >
 }
 
@@ -4453,11 +5091,12 @@ export namespace Error {
 //
 
 export interface Interface<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
-  id?: Interface.id<_$Scalars>
-  ___on_Object1ImplementingInterface?: Object1ImplementingInterface<_$Scalars>
-  ___on_Object2ImplementingInterface?: Object2ImplementingInterface<_$Scalars>
+  id?: Interface.id<_$Context>
+  ___on_Object1ImplementingInterface?: Object1ImplementingInterface<_$Context>
+  ___on_Object2ImplementingInterface?: Object2ImplementingInterface<_$Context>
 
   /**
    * Inline fragments for field groups.
@@ -4468,8 +5107,8 @@ export interface Interface<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | Interface$FragmentInline<_$Scalars>
-    | Interface$FragmentInline<_$Scalars>[]
+    | Interface$FragmentInline<_$Context>
+    | Interface$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected. Since this is a interface type and thus polymorphic,
@@ -4485,17 +5124,22 @@ export interface Interface<
 }
 
 export interface Interface$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends Interface<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends Interface<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 export namespace Interface {
-  export type id<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type id<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
+    | id$SelectionSet<_$Context>
 
   export interface id$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -4506,10 +5150,11 @@ export namespace Interface {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
+    | id$SelectionSet<_$Context>
   >
 }
 
@@ -4518,12 +5163,13 @@ export namespace Interface {
 //
 
 export interface InterfaceChildA<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
-  a?: InterfaceChildA.a<_$Scalars>
-  b?: InterfaceChildA.b<_$Scalars>
-  c1?: InterfaceChildA.c1<_$Scalars>
-  ___on_ObjectChildA?: ObjectChildA<_$Scalars>
+  a?: InterfaceChildA.a<_$Context>
+  b?: InterfaceChildA.b<_$Context>
+  c1?: InterfaceChildA.c1<_$Context>
+  ___on_ObjectChildA?: ObjectChildA<_$Context>
 
   /**
    * Inline fragments for field groups.
@@ -4534,8 +5180,8 @@ export interface InterfaceChildA<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | InterfaceChildA$FragmentInline<_$Scalars>
-    | InterfaceChildA$FragmentInline<_$Scalars>[]
+    | InterfaceChildA$FragmentInline<_$Context>
+    | InterfaceChildA$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected. Since this is a interface type and thus polymorphic,
@@ -4551,17 +5197,22 @@ export interface InterfaceChildA<
 }
 
 export interface InterfaceChildA$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends InterfaceChildA<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends InterfaceChildA<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 export namespace InterfaceChildA {
-  export type a<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type a<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | a$SelectionSet<_$Scalars>
+    | a$SelectionSet<_$Context>
 
   export interface a$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -4572,18 +5223,23 @@ export namespace InterfaceChildA {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type a$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | a$SelectionSet<_$Scalars>
+    | a$SelectionSet<_$Context>
   >
 
-  export type b<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type b<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | b$SelectionSet<_$Scalars>
+    | b$SelectionSet<_$Context>
 
   export interface b$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -4594,18 +5250,23 @@ export namespace InterfaceChildA {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type b$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | b$SelectionSet<_$Scalars>
+    | b$SelectionSet<_$Context>
   >
 
-  export type c1<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type c1<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | c1$SelectionSet<_$Scalars>
+    | c1$SelectionSet<_$Context>
 
   export interface c1$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -4616,10 +5277,11 @@ export namespace InterfaceChildA {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type c1$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | c1$SelectionSet<_$Scalars>
+    | c1$SelectionSet<_$Context>
   >
 }
 
@@ -4628,12 +5290,13 @@ export namespace InterfaceChildA {
 //
 
 export interface InterfaceChildB<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
-  a?: InterfaceChildB.a<_$Scalars>
-  b?: InterfaceChildB.b<_$Scalars>
-  c2?: InterfaceChildB.c2<_$Scalars>
-  ___on_ObjectChildB?: ObjectChildB<_$Scalars>
+  a?: InterfaceChildB.a<_$Context>
+  b?: InterfaceChildB.b<_$Context>
+  c2?: InterfaceChildB.c2<_$Context>
+  ___on_ObjectChildB?: ObjectChildB<_$Context>
 
   /**
    * Inline fragments for field groups.
@@ -4644,8 +5307,8 @@ export interface InterfaceChildB<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | InterfaceChildB$FragmentInline<_$Scalars>
-    | InterfaceChildB$FragmentInline<_$Scalars>[]
+    | InterfaceChildB$FragmentInline<_$Context>
+    | InterfaceChildB$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected. Since this is a interface type and thus polymorphic,
@@ -4661,17 +5324,22 @@ export interface InterfaceChildB<
 }
 
 export interface InterfaceChildB$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends InterfaceChildB<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends InterfaceChildB<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 export namespace InterfaceChildB {
-  export type a<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type a<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | a$SelectionSet<_$Scalars>
+    | a$SelectionSet<_$Context>
 
   export interface a$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -4682,18 +5350,23 @@ export namespace InterfaceChildB {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type a$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | a$SelectionSet<_$Scalars>
+    | a$SelectionSet<_$Context>
   >
 
-  export type b<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type b<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | b$SelectionSet<_$Scalars>
+    | b$SelectionSet<_$Context>
 
   export interface b$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -4704,18 +5377,23 @@ export namespace InterfaceChildB {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type b$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | b$SelectionSet<_$Scalars>
+    | b$SelectionSet<_$Context>
   >
 
-  export type c2<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type c2<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | c2$SelectionSet<_$Scalars>
+    | c2$SelectionSet<_$Context>
 
   export interface c2$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -4726,10 +5404,11 @@ export namespace InterfaceChildB {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type c2$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | c2$SelectionSet<_$Scalars>
+    | c2$SelectionSet<_$Context>
   >
 }
 
@@ -4738,16 +5417,17 @@ export namespace InterfaceChildB {
 //
 
 export interface InterfaceGrandparent<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
-  a?: InterfaceGrandparent.a<_$Scalars>
-  ___on_ObjectChildA?: ObjectChildA<_$Scalars>
-  ___on_ObjectChildB?: ObjectChildB<_$Scalars>
-  ___on_ObjectGrandparent?: ObjectGrandparent<_$Scalars>
-  ___on_ObjectParent?: ObjectParent<_$Scalars>
-  ___on_InterfaceChildA?: InterfaceChildA<_$Scalars>
-  ___on_InterfaceChildB?: InterfaceChildB<_$Scalars>
-  ___on_InterfaceParent?: InterfaceParent<_$Scalars>
+  a?: InterfaceGrandparent.a<_$Context>
+  ___on_ObjectChildA?: ObjectChildA<_$Context>
+  ___on_ObjectChildB?: ObjectChildB<_$Context>
+  ___on_ObjectGrandparent?: ObjectGrandparent<_$Context>
+  ___on_ObjectParent?: ObjectParent<_$Context>
+  ___on_InterfaceChildA?: InterfaceChildA<_$Context>
+  ___on_InterfaceChildB?: InterfaceChildB<_$Context>
+  ___on_InterfaceParent?: InterfaceParent<_$Context>
 
   /**
    * Inline fragments for field groups.
@@ -4758,8 +5438,8 @@ export interface InterfaceGrandparent<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | InterfaceGrandparent$FragmentInline<_$Scalars>
-    | InterfaceGrandparent$FragmentInline<_$Scalars>[]
+    | InterfaceGrandparent$FragmentInline<_$Context>
+    | InterfaceGrandparent$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected. Since this is a interface type and thus polymorphic,
@@ -4775,20 +5455,25 @@ export interface InterfaceGrandparent<
 }
 
 export interface InterfaceGrandparent$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends
-  InterfaceGrandparent<_$Scalars>,
+  InterfaceGrandparent<_$Context>,
   $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields
 {
 }
 
 export namespace InterfaceGrandparent {
-  export type a<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type a<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | a$SelectionSet<_$Scalars>
+    | a$SelectionSet<_$Context>
 
   export interface a$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -4799,10 +5484,11 @@ export namespace InterfaceGrandparent {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type a$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | a$SelectionSet<_$Scalars>
+    | a$SelectionSet<_$Context>
   >
 }
 
@@ -4811,15 +5497,16 @@ export namespace InterfaceGrandparent {
 //
 
 export interface InterfaceParent<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
-  a?: InterfaceParent.a<_$Scalars>
-  b?: InterfaceParent.b<_$Scalars>
-  ___on_ObjectChildA?: ObjectChildA<_$Scalars>
-  ___on_ObjectChildB?: ObjectChildB<_$Scalars>
-  ___on_ObjectParent?: ObjectParent<_$Scalars>
-  ___on_InterfaceChildA?: InterfaceChildA<_$Scalars>
-  ___on_InterfaceChildB?: InterfaceChildB<_$Scalars>
+  a?: InterfaceParent.a<_$Context>
+  b?: InterfaceParent.b<_$Context>
+  ___on_ObjectChildA?: ObjectChildA<_$Context>
+  ___on_ObjectChildB?: ObjectChildB<_$Context>
+  ___on_ObjectParent?: ObjectParent<_$Context>
+  ___on_InterfaceChildA?: InterfaceChildA<_$Context>
+  ___on_InterfaceChildB?: InterfaceChildB<_$Context>
 
   /**
    * Inline fragments for field groups.
@@ -4830,8 +5517,8 @@ export interface InterfaceParent<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | InterfaceParent$FragmentInline<_$Scalars>
-    | InterfaceParent$FragmentInline<_$Scalars>[]
+    | InterfaceParent$FragmentInline<_$Context>
+    | InterfaceParent$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected. Since this is a interface type and thus polymorphic,
@@ -4847,17 +5534,22 @@ export interface InterfaceParent<
 }
 
 export interface InterfaceParent$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends InterfaceParent<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends InterfaceParent<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 export namespace InterfaceParent {
-  export type a<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type a<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | a$SelectionSet<_$Scalars>
+    | a$SelectionSet<_$Context>
 
   export interface a$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -4868,18 +5560,23 @@ export namespace InterfaceParent {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type a$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | a$SelectionSet<_$Scalars>
+    | a$SelectionSet<_$Context>
   >
 
-  export type b<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type b<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | b$SelectionSet<_$Scalars>
+    | b$SelectionSet<_$Context>
 
   export interface b$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -4890,13 +5587,26 @@ export namespace InterfaceParent {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type b$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | b$SelectionSet<_$Scalars>
+    | b$SelectionSet<_$Context>
   >
 }
 
+import type * as $$Schema from './schema.js'
+
+export type Query$Infer<$SelectionSet extends object> = $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+  $SelectionSet,
+  $$Schema.Schema
+>
+export type Query$Variables<$SelectionSet> = any // Temporarily any - will be replaced with new analysis system
+export type Mutation$Infer<$SelectionSet extends object> = $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+  $SelectionSet,
+  $$Schema.Schema
+>
+export type Mutation$Variables<$SelectionSet> = any // Temporarily any - will be replaced with new analysis system
 /**
  * [1] These definitions serve to allow field selection interfaces to extend their respective object type without
  *     name clashing between the field name and the object name.
@@ -4905,11 +5615,14 @@ export namespace InterfaceParent {
  *     would end up with an error of `export interface Foo extends Foo ...`
  */
 export namespace $NamedTypes {
-  export type $Query<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    Query<_$Scalars>
+  export type $Query<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = Query<_$Context>
   export type $Mutation<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = Mutation<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = Mutation<_$Context>
   export type $ABCEnum = ABCEnum
   export type $Case = Case
   export type $ChildAInterfaceHierarchyMember = ChildAInterfaceHierarchyMember
@@ -4917,98 +5630,135 @@ export namespace $NamedTypes {
   export type $GrandparentInterfaceHierarchyMember = GrandparentInterfaceHierarchyMember
   export type $ParentInterfaceHierarchyMember = ParentInterfaceHierarchyMember
   export type $InputObject<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = InputObject<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = InputObject<_$Context>
   export type $InputObjectCircular<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = InputObjectCircular<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = InputObjectCircular<_$Context>
   export type $InputObjectEnum<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = InputObjectEnum<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = InputObjectEnum<_$Context>
   export type $InputObjectNested<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = InputObjectNested<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = InputObjectNested<_$Context>
   export type $InputObjectNestedNonNull<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = InputObjectNestedNonNull<_$Scalars>
-  export type $Bar<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    Bar<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = InputObjectNestedNonNull<_$Context>
+  export type $Bar<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = Bar<_$Context>
   export type $DateObject1<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = DateObject1<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = DateObject1<_$Context>
   export type $DateObject2<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = DateObject2<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = DateObject2<_$Context>
   export type $ErrorOne<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = ErrorOne<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = ErrorOne<_$Context>
   export type $ErrorTwo<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = ErrorTwo<_$Scalars>
-  export type $Foo<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    Foo<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = ErrorTwo<_$Context>
+  export type $Foo<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = Foo<_$Context>
   export type $Object1<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = Object1<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = Object1<_$Context>
   export type $Object1ImplementingInterface<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = Object1ImplementingInterface<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = Object1ImplementingInterface<_$Context>
   export type $Object2ImplementingInterface<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = Object2ImplementingInterface<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = Object2ImplementingInterface<_$Context>
   export type $ObjectChildA<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = ObjectChildA<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = ObjectChildA<_$Context>
   export type $ObjectChildB<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = ObjectChildB<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = ObjectChildB<_$Context>
   export type $ObjectGrandparent<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = ObjectGrandparent<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = ObjectGrandparent<_$Context>
   export type $ObjectNested<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = ObjectNested<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = ObjectNested<_$Context>
   export type $ObjectParent<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = ObjectParent<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = ObjectParent<_$Context>
   export type $ObjectUnion<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = ObjectUnion<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = ObjectUnion<_$Context>
   export type $lowerCaseObject<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = lowerCaseObject<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = lowerCaseObject<_$Context>
   export type $lowerCaseObject2<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = lowerCaseObject2<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = lowerCaseObject2<_$Context>
   export type $DateUnion<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = DateUnion<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = DateUnion<_$Context>
   export type $FooBarUnion<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = FooBarUnion<_$Scalars>
-  export type $Result<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    Result<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = FooBarUnion<_$Context>
+  export type $Result<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = Result<_$Context>
   export type $lowerCaseUnion<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = lowerCaseUnion<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = lowerCaseUnion<_$Context>
   export type $DateInterface1<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = DateInterface1<_$Scalars>
-  export type $Error<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    Error<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = DateInterface1<_$Context>
+  export type $Error<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = Error<_$Context>
   export type $Interface<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = Interface<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = Interface<_$Context>
   export type $InterfaceChildA<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = InterfaceChildA<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = InterfaceChildA<_$Context>
   export type $InterfaceChildB<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = InterfaceChildB<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = InterfaceChildB<_$Context>
   export type $InterfaceGrandparent<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = InterfaceGrandparent<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = InterfaceGrandparent<_$Context>
   export type $InterfaceParent<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = InterfaceParent<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = InterfaceParent<_$Context>
 }

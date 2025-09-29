@@ -1,4 +1,3 @@
-import { Graffle } from '#extensions/DocumentBuilder/__tests__/fixtures/possible/_namespace.js'
 import type { Grafaid } from '#lib/grafaid/_namespace.js'
 import { Ts } from '@wollybeard/kit'
 import { Test } from '@wollybeard/kit/test'
@@ -82,10 +81,9 @@ test('static builder type inference', () => {
 
 test('static builder type inference with $var', async () => {
   const actual = Possible.query.stringWithArgs({ $: { boolean: $var } })
-  const graffle = Possible.create()
-  const x = await graffle.gql(actual).send({ boolean: true })
-  // type z = Grafaid.Document.Typed.String<{ stringWithArgs: string|null }|null, { boolean: boolean }>
-  type z = 5
-  // Ts.assertEqual<z>()(actual)
-  expectTypeOf(actual).toEqualTypeOf<z>()
+  type expected = Grafaid.Document.Typed.String<{ stringWithArgs: string | null } | null, { boolean: boolean }>
+  Ts.assertEqual<expected>()(actual)
+  // const graffle = Possible.create()
+  // const x = await graffle.gql(actual).send({ boolean: true })
+  // expectTypeOf(actual).toEqualTypeOf<z>()
 })
