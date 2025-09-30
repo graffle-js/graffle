@@ -7,7 +7,7 @@
 
 import type { Obj } from '@wollybeard/kit'
 
-const VarSymbol = Symbol.for(`graffle.var`)
+const VarMarkerSymbol = Symbol.for(`graffle.var`)
 
 export interface BuilderState {
   default: undefined | unknown
@@ -22,11 +22,11 @@ export interface BuilderStateEmpty extends BuilderState {
 }
 
 /**
- * Type-safe variable marker for GraphQL document generation.
+ * Type-safe variable builder for GraphQL document generation.
  *
  * @remarks
- * VariableMarker provides a fluent API for declaring GraphQL variables with full type safety.
- * The marker tracks variable metadata at the type level, enabling compile-time inference
+ * Builder provides a fluent API for declaring GraphQL variables with full type safety.
+ * The builder tracks variable metadata at the type level, enabling compile-time inference
  * of variable types, names, defaults, and requirements.
  *
  * State is stored directly on the `_` property for simple type-level access without helper types.
@@ -36,19 +36,19 @@ export interface BuilderStateEmpty extends BuilderState {
  * @example Type-level tracking
  * ```ts
  * // The type system tracks all variable metadata
- * const marker = $var.name('userId').default('123').required
- * // Type: VariableMarker<{ default: '123', required: true, name: 'userId' }>
+ * const builder = $var.name('userId').default('123').required
+ * // Type: Builder<{ default: '123', required: true, name: 'userId' }>
  *
  * // This enables compile-time variable inference
- * const doc = MySchema.query.user({ $: { id: marker } })
+ * const doc = MySchema.query.user({ $: { id: builder } })
  * // Variables type inferred as: { userId: string }
  * ```
  */
-export interface VariableMarker<$State extends BuilderState = BuilderStateEmpty> {
+export interface Builder<$Type = unknown, $State extends BuilderState = BuilderState> {
   /**
    * Internal marker for runtime detection
    */
-  readonly [VarSymbol]: true
+  readonly [VarMarkerSymbol]: true
 
   /**
    * Type-level state stored directly on object
@@ -56,71 +56,74 @@ export interface VariableMarker<$State extends BuilderState = BuilderStateEmpty>
   readonly _: $State
 
   /**
-   * Runtime state (mirrors type-level state)
-   */
-  readonly _name?: $State['name']
-  readonly _default?: $State['default']
-  readonly _required?: $State['required']
-
-  /**
    * Specify a custom name for the GraphQL variable.
    * By default, the variable uses the same name as the argument.
    */
-  name<TNewName extends string>(
-    name: TNewName,
-  ): VariableMarker<Obj.ReplaceProperty<$State, 'name', TNewName>>
+  readonly name: <$name extends string>(
+    name: $name,
+  ) => Builder<$Type, Obj.ReplaceProperty<$State, 'name', $name>>
 
   /**
    * Specify a default value for the GraphQL variable.
    * The variable will be optional with this default in the GraphQL operation.
    */
-  default<T>(
-    value: T,
-  ): VariableMarker<Obj.ReplaceProperty<$State, 'default', T>>
+  readonly default: <$value extends $Type>(
+    value: $value,
+  ) => Builder<$Type, Obj.ReplaceProperty<$State, 'default', $value>>
 
   /**
    * Force an optional argument to be required in the GraphQL variables.
    * Useful when you want to make an optional GraphQL field required at the client level.
    */
-  readonly required: VariableMarker<Obj.ReplaceProperty<$State, 'required', true>>
+  readonly required: () => Builder<$Type, Obj.ReplaceProperty<$State, 'required', true>>
+
+  /**
+   * Force a required argument to be optional in the GraphQL variables.
+   * Useful when you want to make a required GraphQL field optional at the client level.
+   */
+  readonly optional: () => Builder<$Type, Obj.ReplaceProperty<$State, 'required', false>>
 }
 
 /**
- * Create a new variable marker
+ * Create a new variable builder
  */
-const createVariableMarker = <$State extends BuilderState = BuilderStateEmpty>(
+const createVariableBuilder = <$Type = unknown, $State extends BuilderState = BuilderStateEmpty>(
   state: $State = { default: undefined, required: undefined, name: undefined } as $State,
-): VariableMarker<$State> => {
-  const marker: VariableMarker<$State> = {
-    [VarSymbol]: true,
+): Builder<$Type, $State> => {
+  const builder: Builder<$Type, $State> = {
+    [VarMarkerSymbol]: true,
     _: state,
-    _name: state.name,
-    _default: state.default,
-    _required: state.required,
 
     name(name) {
-      return createVariableMarker({
+      return createVariableBuilder<$Type>({
         ...state,
         name,
       }) as any
     },
 
     default(value) {
-      return createVariableMarker({
+      return createVariableBuilder<$Type>({
         ...state,
         default: value,
       }) as any
     },
 
-    get required() {
-      return createVariableMarker({
+    required() {
+      return createVariableBuilder<$Type>({
         ...state,
         required: true,
       }) as any
     },
+
+    optional() {
+      return createVariableBuilder<$Type>({
+        ...state,
+        required: false,
+      }) as any
+    },
   }
 
-  return marker
+  return builder
 }
 
 /**
@@ -135,6 +138,7 @@ const createVariableMarker = <$State extends BuilderState = BuilderStateEmpty>(
  * - Custom variable naming
  * - Default values (making variables optional)
  * - Forcing optional arguments to be required
+ * - Forcing required arguments to be optional
  * - Method chaining for fluent configuration
  *
  * @example Basic usage
@@ -163,12 +167,12 @@ const createVariableMarker = <$State extends BuilderState = BuilderStateEmpty>(
  * })
  * ```
  *
- * @example Required variables
+ * @example Required modifier
  * ```ts
  * // Force optional GraphQL argument to be required
  * const doc = Schema.query.search({
  *   $: {
- *     query: Var.$var.required,  // Variable: { query: string } (required)
+ *     query: Var.$var.required(),  // Variable: { query: string } (required)
  *     limit: Var.$var            // Variable: { limit?: number } (optional)
  *   }
  * })
@@ -198,53 +202,65 @@ const createVariableMarker = <$State extends BuilderState = BuilderStateEmpty>(
  * })
  * ```
  *
- * @see {@link VariableMarker} for the full API
+ * @see {@link Builder} for the full API
  * @see {@link https://graffle.js.org/guides/variables | Variables Guide}
  */
-export const $var: VariableMarker = createVariableMarker()
+export const $var: Builder<unknown, BuilderStateEmpty> = createVariableBuilder()
 
 /**
- * Type guard to check if a value is a variable marker.
+ * Type guard to check if a value is a variable builder.
  *
  * @param value - The value to check
- * @returns True if the value is a VariableMarker instance
+ * @returns True if the value is a Builder instance
  *
  * @example
  * ```ts
  * const maybeVar = someValue as unknown
- * if (isVariableMarker(maybeVar)) {
- *   // TypeScript knows maybeVar is VariableMarker
+ * if (isVariableBuilder(maybeVar)) {
+ *   // TypeScript knows maybeVar is Builder
  *   const info = extractVariableInfo(maybeVar, 'defaultName')
  * }
  * ```
  *
  * @internal
  */
-export const isVariableMarker = (value: unknown): value is VariableMarker => {
-  return value != null && typeof value === `object` && VarSymbol in value
+export const isVariableBuilder = (value: unknown): value is Builder<any, any> => {
+  return value != null && typeof value === `object` && VarMarkerSymbol in value
 }
 
 /**
- * Extract runtime variable information from a variable marker.
+ * Extract runtime variable information from a variable builder.
  *
- * @param marker - The variable marker to extract information from
- * @param argName - The default name to use if the marker doesn't specify a custom name
+ * @param builder - The variable builder to extract information from
+ * @param argName - The default name to use if the builder doesn't specify a custom name
  * @returns Variable configuration including name, default value, and requirement status
  *
  * @example
  * ```ts
- * const marker = $var.name('userId').default('123')
- * const info = extractVariableInfo(marker, 'id')
+ * const builder = $var.name('userId').default('123')
+ * const info = extractVariableInfo(builder, 'id')
  * // Returns: { name: 'userId', hasDefault: true, defaultValue: '123', isRequired: false }
  * ```
  *
  * @internal
  */
-export const extractVariableInfo = (marker: VariableMarker, argName: string) => {
+export const extractVariableInfo = (builder: Builder, argName: string) => {
   return {
-    name: marker._name ?? argName,
-    hasDefault: marker._default !== undefined,
-    defaultValue: marker._default,
-    isRequired: Boolean(marker._required),
+    name: builder._.name ?? argName,
+    hasDefault: builder._.default !== undefined,
+    defaultValue: builder._.default,
+    isRequired: builder._.required === true,
+    isOptional: builder._.required === false,
   }
 }
+
+// Backward compatibility exports
+/**
+ * @deprecated Use Builder instead
+ */
+export type VariableMarker<$Type = unknown, $State extends BuilderState = BuilderState> = Builder<$Type, $State>
+
+/**
+ * @deprecated Use isVariableBuilder instead
+ */
+export const isVariableMarker = isVariableBuilder

@@ -2,10 +2,8 @@ import type { Grafaid } from '#lib/grafaid/_namespace.js'
 import { Ts } from '@wollybeard/kit'
 import { Test } from '@wollybeard/kit/test'
 import { OperationTypeNode } from 'graphql'
-import { expect, expectTypeOf, test } from 'vitest'
-import type * as $$Utilities from '../../exports/utilities-for-generated.js'
+import { expect, test } from 'vitest'
 import { Possible } from './__tests__/fixtures/possible/_namespace.js'
-import type * as PossibleSchema from './__tests__/fixtures/possible/modules/schema.js'
 import { createStaticRootType } from './staticBuilder.js'
 import { Var } from './var/$.js'
 
@@ -90,9 +88,12 @@ test('static builder type inference', () => {
   const q12 = Possible.query.stringWithArgs({ $: { boolean: $var.name('isActive') } })
   Ts.assertEqual<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { isActive: boolean | undefined }>>()(q12)
 
-  // $var.required on optional argument
-  const q12b = Possible.query.stringWithArgs({ $: { string: $var.required } })
+  // $var.required() on optional argument
+  const q12b = Possible.query.stringWithArgs({ $: { string: $var.required() } })
   Ts.assertEqual<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { string: string }>>()(q12b) // NOT undefined!
+
+  // Note: $var.optional() was removed - you cannot make required fields optional
+  // Use .default() to provide a default value instead
 
   // List argument with $var
   const q13 = Possible.query.stringWithListArg({ $: { ints: $var } })

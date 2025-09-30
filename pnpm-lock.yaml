@@ -73,8 +73,8 @@ importers:
         specifier: ^22.14.1
         version: 22.14.1
       '@wollybeard/kit':
-        specifier: ^0.64.0
-        version: 0.64.0(@effect/platform@0.91.1(effect@3.17.14))(effect@3.17.14)
+        specifier: ^0.66.0
+        version: 0.66.0(@effect/platform@0.91.1(effect@3.17.14))(effect@3.17.14)
       async-cleanup:
         specifier: ^1.0.0
         version: 1.0.0
@@ -1203,8 +1203,11 @@ packages:
   '@types/node@22.14.1':
     resolution: {integrity: sha512-u0HuPQwe/dHrItgHHpmw3N2fYCR6x4ivMNbPHRkBVP4CvN+kiRrKHWk3i8tXiO/joPwXLMYvF9TTF0eqgHIuOw==}
 
-  '@types/node@24.5.2':
-    resolution: {integrity: sha512-FYxk1I7wPv3K2XBaoyH2cTnocQEu8AOZ60hPbsyukMPLv5/5qr7V1i8PLHdl6Zf87I+xZXFvPCXYjiTFq+YSDQ==}
+  '@types/node@24.6.0':
+    resolution: {integrity: sha512-F1CBxgqwOMc4GKJ7eY22hWhBVQuMYTtqI8L0FcszYcpYX0fzfDGpez22Xau8Mgm7O9fI+zA/TYIdq3tGWfweBA==}
+
+  '@types/object-inspect@1.13.0':
+    resolution: {integrity: sha512-lwGTVESDDV+XsQ1pH4UifpJ1f7OtXzQ6QBOX2Afq2bM/T3oOt8hF6exJMjjIjtEWeAN2YAo25J7HxWh97CCz9w==}
 
   '@types/parse-git-config@3.0.4':
     resolution: {integrity: sha512-jz5eGdk9lBgAd4rMbXTP7MRG7AsGQ8DrXsRumDcXDLClHcpKluislylPVMP/qp90J/LlIrrPZRZIQUflHfrDnQ==}
@@ -1381,8 +1384,8 @@ packages:
     resolution: {integrity: sha512-ydxzH1iox9AzLe+uaX9jjyVFkQO+h15j+JClropw0P4Vz+ES4+xTZVu5leUsWW8AYTVZBFkiC0iHl/PwFZ+Q1Q==}
     engines: {node: '>=18.0.0'}
 
-  '@wollybeard/kit@0.64.0':
-    resolution: {integrity: sha512-Tk1wlfWdXTAH1GrNfP8ZwybnsVIExygsUIHzY6ynil05/3xdoNneIazpog6VJQxCItsCkou7OAbzpTl/5I4o+g==}
+  '@wollybeard/kit@0.66.0':
+    resolution: {integrity: sha512-hj/k+QF/rp7OIjodfDRKoglxFeLvJsDjR924Cl0GdqAWugJOaeEMq75/Tf+8/eL5Xa4thvIsuuR2UCg9ucl6kQ==}
     peerDependencies:
       '@effect/platform': '>=0.90.0 <1.0.0'
       effect: ^3.17.0
@@ -1417,8 +1420,8 @@ packages:
     resolution: {integrity: sha512-zbB9rCJAT1rbjiVDb2hqKFHNYLxgtk8NURxZ3IZwD3F6NtxbXZQCnnSi1Lkx+IDohdPlFp222wVALIheZJQSEg==}
     engines: {node: '>=8'}
 
-  ansis@4.1.0:
-    resolution: {integrity: sha512-BGcItUBWSMRgOCe+SVZJ+S7yTRG0eGt9cXAHev72yuGcY23hnLA7Bky5L/xLyPINoSN95geovfBkqoTlNZYa7w==}
+  ansis@4.2.0:
+    resolution: {integrity: sha512-HqZ5rWlFjGiV0tDm3UxxgNRqsOTniqoKZu0pIAfh7TZQMGuZK+hH0drySty0si0QXj1ieop4+SkSfPZBPPkHig==}
     engines: {node: '>=14'}
 
   any-promise@1.3.0:
@@ -2202,6 +2205,10 @@ packages:
     resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
     engines: {node: '>=0.10.0'}
 
+  object-inspect@1.13.4:
+    resolution: {integrity: sha512-W67iLl4J2EXEGTbfeHCffrjDfitvLANg0UlX3wFUUSTx92KXRFegMHUVgSqE+wvhAbi4WqjGg9czysTV2Epbew==}
+    engines: {node: '>= 0.4'}
+
   once@1.4.0:
     resolution: {integrity: sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==}
 
@@ -2659,8 +2666,8 @@ packages:
   undici-types@6.21.0:
     resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
 
-  undici-types@7.12.0:
-    resolution: {integrity: sha512-goOacqME2GYyOZZfb5Lgtu+1IDmAlAEu5xnD3+xTzS10hT0vzpf0SPjkXwAw9Jm+4n/mQGDP3LO8CPbYROeBfQ==}
+  undici-types@7.13.0:
+    resolution: {integrity: sha512-Ov2Rr9Sx+fRgagJ5AX0qvItZG/JKKoBRAVITs1zk7IqZGTJUwgUr7qoYBpWwakpWilTZFM98rG/AFRocu10iIQ==}
 
   unicode-emoji-modifier-base@1.0.0:
     resolution: {integrity: sha512-yLSH4py7oFH3oG/9K+XWrz1pSi3dfUrWEnInbxMfArOfc1+33BlGPQtLsOYwvdMy11AwUBetYuaRxSPqgkq+8g==}
@@ -3924,9 +3931,11 @@ snapshots:
     dependencies:
       undici-types: 6.21.0
 
-  '@types/node@24.5.2':
+  '@types/node@24.6.0':
     dependencies:
-      undici-types: 7.12.0
+      undici-types: 7.13.0
+
+  '@types/object-inspect@1.13.0': {}
 
   '@types/parse-git-config@3.0.4': {}
 
@@ -4132,16 +4141,18 @@ snapshots:
       '@whatwg-node/promise-helpers': 1.3.1
       tslib: 2.8.1
 
-  '@wollybeard/kit@0.64.0(@effect/platform@0.91.1(effect@3.17.14))(effect@3.17.14)':
+  '@wollybeard/kit@0.66.0(@effect/platform@0.91.1(effect@3.17.14))(effect@3.17.14)':
     dependencies:
       '@effect/platform': 0.91.1(effect@3.17.14)
-      '@types/node': 24.5.2
-      ansis: 4.1.0
+      '@types/node': 24.6.0
+      '@types/object-inspect': 1.13.0
+      ansis: 4.2.0
       consola: 3.4.2
       effect: 3.17.14
       es-toolkit: 1.39.10
       fast-check: 4.3.0
       jsonc-parser: 3.3.1
+      object-inspect: 1.13.4
       pathe: 2.0.3
       tinyglobby: 0.2.15
       type-fest: 5.0.1
@@ -4190,7 +4201,7 @@ snapshots:
     dependencies:
       color-convert: 2.0.1
 
-  ansis@4.1.0: {}
+  ansis@4.2.0: {}
 
   any-promise@1.3.0: {}
 
@@ -5028,6 +5039,8 @@ snapshots:
 
   object-assign@4.1.1: {}
 
+  object-inspect@1.13.4: {}
+
   once@1.4.0:
     dependencies:
       wrappy: 1.0.2
@@ -5460,7 +5473,7 @@ snapshots:
 
   undici-types@6.21.0: {}
 
-  undici-types@7.12.0: {}
+  undici-types@7.13.0: {}
 
   unicode-emoji-modifier-base@1.0.0: {}
 

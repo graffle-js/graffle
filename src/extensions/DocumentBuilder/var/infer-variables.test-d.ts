@@ -103,81 +103,65 @@ type _1 = Ts.Cases<
   >
 >
 
+// dprint-ignore
 type _2 = Ts.Cases<
   // ====================================================================
   //                        INPUT OBJECTS
   // ====================================================================
   // Optional input object
   Ts.AssertEqual<
-    $<
-      { dateArgInputObject: { $: { input: typeof $var } } },
-      ArgumentsMapWithScalars['query'],
-      TypeInputsIndexWithScalars
-    >,
+    $<{ dateArgInputObject: { $: { input: typeof $var } } }, ArgumentsMapWithScalars['query'], TypeInputsIndexWithScalars>,
     { input?: TypeInputsIndexWithScalars['InputObject'] | undefined }
   >,
+
   // Required input object
   Ts.AssertEqual<
-    $<
-      { stringWithArgInputObjectRequired: { $: { input: typeof $var } } },
-      ArgumentsMapWithScalars['query'],
-      TypeInputsIndexWithScalars
-    >,
+    $<{ stringWithArgInputObjectRequired: { $: { input: typeof $var } } }, ArgumentsMapWithScalars['query'], TypeInputsIndexWithScalars>,
     { input: TypeInputsIndexWithScalars['InputObject'] }
   >,
+
   // Multiple input objects with same variable name (required wins)
   Ts.AssertEqual<
-    $<
-      {
-        dateArgInputObject: { $: { input: typeof $var } }
-        stringWithArgInputObjectRequired: { $: { input: typeof $var } }
-      },
-      ArgumentsMapWithScalars['query'],
-      TypeInputsIndexWithScalars
-    >,
-    { input: TypeInputsIndexWithScalars['InputObject'] } // Required wins over optional
+    $<{ dateArgInputObject: { $: { input: typeof $var } }, stringWithArgInputObjectRequired: { $: { input: typeof $var } } }, ArgumentsMapWithScalars['query'], TypeInputsIndexWithScalars>,
+    { input: TypeInputsIndexWithScalars['InputObject'] }
   >,
+
   // Nested input object
   Ts.AssertEqual<
     $<{ InputObjectNested: { $: { input: typeof $var } } }, ArgumentsMap['query'], TypeInputsIndex>,
     { input?: TypeInputsIndex['InputObjectNested'] | undefined }
   >,
+
   // Circular input object (self-referential)
   Ts.AssertEqual<
     $<{ argInputObjectCircular: { $: { input: typeof $var } } }, ArgumentsMap['query'], TypeInputsIndex>,
     { input?: TypeInputsIndex['InputObjectCircular'] | undefined }
   >,
+
   // ====================================================================
   //                    VARIABLE MODIFIERS
   // ====================================================================
   // Required modifier - forces optional argument to be required
   Ts.AssertEqual<
-    $<{ objectWithArgs: { $: { id: typeof $var.required } } }, ArgumentsMap['query'], TypeInputsIndex>,
-    { id: string } // No longer optional
+    $<{ objectWithArgs: { $: { id: ReturnType<typeof $var.required> } } }, ArgumentsMap['query'], TypeInputsIndex>,
+    { id: string }
   >,
+
   // Default value modifier - makes any argument optional
   Ts.AssertEqual<
-    $<
-      { stringWithRequiredArg: { $: { string: typeof $varWithDefaultHello } } },
-      ArgumentsMap['query'],
-      TypeInputsIndex
-    >,
-    { string?: string } // Now optional because it has a default
+    $<{ stringWithRequiredArg: { $: { string: typeof $varWithDefaultHello } } }, ArgumentsMap['query'], TypeInputsIndex>,
+    { string?: string }
   >,
+
   // Combining required with other arguments
   Ts.AssertEqual<
-    $<
-      {
-        objectWithArgs: { $: { id: typeof $var.required; boolean: typeof $var } }
-      },
-      ArgumentsMap['query'],
-      TypeInputsIndex
-    >,
-    { id: string; boolean?: boolean | undefined } // id is required, boolean stays optional
+    $<{ objectWithArgs: { $: { id: ReturnType<typeof $var.required>; boolean: typeof $var } } }, ArgumentsMap['query'], TypeInputsIndex>,
+    { id: string; boolean?: boolean | undefined }
   >,
+
   // Default with different types
   Ts.AssertEqual<
     $<{ objectWithArgs: { $: { int: typeof $varWithDefault42 } } }, ArgumentsMap['query'], TypeInputsIndex>,
-    { int?: number } // Optional with default value
+    { int?: number }
   >
 >

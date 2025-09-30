@@ -23,7 +23,6 @@ export const ModuleGeneratorArgumentsMap = createModuleGenerator(
     const kinds = entries(kindMap)
 
     code`
-      import type * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
       import type * as TypeInputsIndex from './type-inputs-index.js'
     `
     code``

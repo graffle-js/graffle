@@ -455,7 +455,10 @@ export namespace Query {
       | $NamedTypes.$InputObjectNested<_$Context>
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<
+          $NamedTypes.$InputObjectNested<_$Context> | null | undefined
+        >
+        : never)
   }
 
   // --- expanded ---
@@ -496,7 +499,9 @@ export namespace Query {
   > {
     input:
       | $NamedTypes.$InputObjectNestedNonNull<_$Context>
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true }
+        ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<$NamedTypes.$InputObjectNestedNonNull<_$Context>>
+        : never)
   }
 
   // --- expanded ---
@@ -569,7 +574,10 @@ export namespace Query {
       | $NamedTypes.$InputObjectCircular<_$Context>
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<
+          $NamedTypes.$InputObjectCircular<_$Context> | null | undefined
+        >
+        : never)
   }
 
   // --- expanded ---
@@ -706,7 +714,17 @@ export namespace Query {
       >
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.Builder<
+          | $$Utilities.Schema.Scalar.GetDecoded<
+            $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
+              'Date',
+              _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
+            >
+          >
+          | null
+          | undefined
+        >
+        : never)
   }
 
   // --- expanded ---
@@ -751,7 +769,9 @@ export namespace Query {
       | $NamedTypes.$InputObject<_$Context>
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true }
+        ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<$NamedTypes.$InputObject<_$Context> | null | undefined>
+        : never)
   }
 
   // --- expanded ---
@@ -802,11 +822,33 @@ export namespace Query {
         >
         | undefined
         | null
-        | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+        | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.Builder<
+            | $$Utilities.Schema.Scalar.GetDecoded<
+              $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
+                'Date',
+                _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
+              >
+            >
+            | null
+            | undefined
+          >
+          : never)
       >
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.Builder<
+          | Array<
+            $$Utilities.Schema.Scalar.GetDecoded<
+              $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
+                'Date',
+                _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
+              >
+            >
+          >
+          | null
+          | undefined
+        >
+        : never)
   }
 
   // --- expanded ---
@@ -852,7 +894,15 @@ export namespace Query {
           _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
         >
       >
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.Builder<
+          $$Utilities.Schema.Scalar.GetDecoded<
+            $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
+              'Date',
+              _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
+            >
+          >
+        >
+        : never)
   }
 
   // --- expanded ---
@@ -900,9 +950,29 @@ export namespace Query {
         >
         | undefined
         | null
-        | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+        | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.Builder<
+            | $$Utilities.Schema.Scalar.GetDecoded<
+              $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
+                'Date',
+                _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
+              >
+            >
+            | null
+            | undefined
+          >
+          : never)
       >
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.Builder<
+          Array<
+            $$Utilities.Schema.Scalar.GetDecoded<
+              $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
+                'Date',
+                _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
+              >
+            >
+          >
+        >
+        : never)
   }
 
   // --- expanded ---
@@ -950,9 +1020,29 @@ export namespace Query {
         >
         | undefined
         | null
-        | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+        | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.Builder<
+            | $$Utilities.Schema.Scalar.GetDecoded<
+              $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
+                'Date',
+                _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
+              >
+            >
+            | null
+            | undefined
+          >
+          : never)
       >
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.Builder<
+          Array<
+            $$Utilities.Schema.Scalar.GetDecoded<
+              $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
+                'Date',
+                _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
+              >
+            >
+          >
+        >
+        : never)
   }
 
   // --- expanded ---
@@ -1190,7 +1280,9 @@ export namespace Query {
       | string
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true }
+        ? $$Utilities.DocumentBuilderKit.Var.Builder<string | null | undefined>
+        : never)
   }
 
   // --- expanded ---
@@ -1317,7 +1409,10 @@ export namespace Query {
       | $NamedTypes.$ChildAInterfaceHierarchyMember
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<
+          $NamedTypes.$ChildAInterfaceHierarchyMember | null | undefined
+        >
+        : never)
   }
 
   // --- expanded ---
@@ -1359,7 +1454,10 @@ export namespace Query {
       | $NamedTypes.$ChildBInterfaceHierarchyMember
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<
+          $NamedTypes.$ChildBInterfaceHierarchyMember | null | undefined
+        >
+        : never)
   }
 
   // --- expanded ---
@@ -1401,7 +1499,10 @@ export namespace Query {
       | $NamedTypes.$GrandparentInterfaceHierarchyMember
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<
+          $NamedTypes.$GrandparentInterfaceHierarchyMember | null | undefined
+        >
+        : never)
   }
 
   // --- expanded ---
@@ -1443,7 +1544,10 @@ export namespace Query {
       | $NamedTypes.$ParentInterfaceHierarchyMember
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<
+          $NamedTypes.$ParentInterfaceHierarchyMember | null | undefined
+        >
+        : never)
   }
 
   // --- expanded ---
@@ -1509,7 +1613,7 @@ export namespace Query {
   > {
     id:
       | string
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.Builder<string> : never)
   }
 
   // --- expanded ---
@@ -1849,27 +1953,37 @@ export namespace Query {
       | boolean
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true }
+        ? $$Utilities.DocumentBuilderKit.Var.Builder<boolean | null | undefined>
+        : never)
     float?:
       | number
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true }
+        ? $$Utilities.DocumentBuilderKit.Var.Builder<number | null | undefined>
+        : never)
     id?:
       | string
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true }
+        ? $$Utilities.DocumentBuilderKit.Var.Builder<string | null | undefined>
+        : never)
     int?:
       | number
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true }
+        ? $$Utilities.DocumentBuilderKit.Var.Builder<number | null | undefined>
+        : never)
     string?:
       | string
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true }
+        ? $$Utilities.DocumentBuilderKit.Var.Builder<string | null | undefined>
+        : never)
   }
 
   // --- expanded ---
@@ -1909,7 +2023,9 @@ export namespace Query {
   > {
     $case:
       | $NamedTypes.$Case
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true }
+        ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<$NamedTypes.$Case>
+        : never)
   }
 
   // --- expanded ---
@@ -1951,7 +2067,9 @@ export namespace Query {
       | $NamedTypes.$Case
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true }
+        ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<$NamedTypes.$Case | null | undefined>
+        : never)
   }
 
   // --- expanded ---
@@ -2024,7 +2142,9 @@ export namespace Query {
       | $NamedTypes.$ABCEnum
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true }
+        ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<$NamedTypes.$ABCEnum | null | undefined>
+        : never)
   }
 
   // --- expanded ---
@@ -2069,7 +2189,9 @@ export namespace Query {
       | $NamedTypes.$InputObject<_$Context>
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true }
+        ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<$NamedTypes.$InputObject<_$Context> | null | undefined>
+        : never)
   }
 
   // --- expanded ---
@@ -2110,7 +2232,9 @@ export namespace Query {
   > {
     input:
       | $NamedTypes.$InputObjectEnum<_$Context>
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true }
+        ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<$NamedTypes.$InputObjectEnum<_$Context>>
+        : never)
   }
 
   // --- expanded ---
@@ -2150,7 +2274,9 @@ export namespace Query {
   > {
     input:
       | $NamedTypes.$InputObject<_$Context>
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true }
+        ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<$NamedTypes.$InputObject<_$Context>>
+        : never)
   }
 
   // --- expanded ---
@@ -2194,17 +2320,23 @@ export namespace Query {
       | boolean
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true }
+        ? $$Utilities.DocumentBuilderKit.Var.Builder<boolean | null | undefined>
+        : never)
     float?:
       | number
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true }
+        ? $$Utilities.DocumentBuilderKit.Var.Builder<number | null | undefined>
+        : never)
     id?:
       | string
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true }
+        ? $$Utilities.DocumentBuilderKit.Var.Builder<string | null | undefined>
+        : never)
     /**
      * @deprecated Example of argument deprecation reason here.
      */
@@ -2212,7 +2344,9 @@ export namespace Query {
       | number
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true }
+        ? $$Utilities.DocumentBuilderKit.Var.Builder<number | null | undefined>
+        : never)
     /**
      * Example of some argument documentation here.
      */
@@ -2220,7 +2354,9 @@ export namespace Query {
       | string
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true }
+        ? $$Utilities.DocumentBuilderKit.Var.Builder<string | null | undefined>
+        : never)
   }
 
   // --- expanded ---
@@ -2266,11 +2402,15 @@ export namespace Query {
         | number
         | undefined
         | null
-        | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+        | (_$Context extends { variablesEnabled: true }
+          ? $$Utilities.DocumentBuilderKit.Var.Builder<number | null | undefined>
+          : never)
       >
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true }
+        ? $$Utilities.DocumentBuilderKit.Var.Builder<Array<number> | null | undefined>
+        : never)
   }
 
   // --- expanded ---
@@ -2314,9 +2454,12 @@ export namespace Query {
         | number
         | undefined
         | null
-        | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+        | (_$Context extends { variablesEnabled: true }
+          ? $$Utilities.DocumentBuilderKit.Var.Builder<number | null | undefined>
+          : never)
       >
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.Builder<Array<number>>
+        : never)
   }
 
   // --- expanded ---
@@ -2356,7 +2499,7 @@ export namespace Query {
   > {
     string:
       | string
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.Builder<string> : never)
   }
 
   // --- expanded ---
@@ -2450,7 +2593,9 @@ export namespace Query {
       | string
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true }
+        ? $$Utilities.DocumentBuilderKit.Var.Builder<string | null | undefined>
+        : never)
   }
 
   // --- expanded ---
@@ -2706,7 +2851,9 @@ export interface InputObject<
     | $NamedTypes.$ABCEnum
     | undefined
     | null
-    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+    | (_$Context extends { variablesEnabled: true }
+      ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<$NamedTypes.$ABCEnum | null | undefined>
+      : never)
   date?:
     | $$Utilities.Schema.Scalar.GetDecoded<
       $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
@@ -2716,7 +2863,17 @@ export interface InputObject<
     >
     | undefined
     | null
-    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.Builder<
+        | $$Utilities.Schema.Scalar.GetDecoded<
+          $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
+            'Date',
+            _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
+          >
+        >
+        | null
+        | undefined
+      >
+      : never)
   dateRequired:
     | $$Utilities.Schema.Scalar.GetDecoded<
       $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
@@ -2724,15 +2881,25 @@ export interface InputObject<
         _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
       >
     >
-    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.Builder<
+        $$Utilities.Schema.Scalar.GetDecoded<
+          $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
+            'Date',
+            _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
+          >
+        >
+      >
+      : never)
   id?:
     | string
     | undefined
     | null
-    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+    | (_$Context extends { variablesEnabled: true }
+      ? $$Utilities.DocumentBuilderKit.Var.Builder<string | null | undefined>
+      : never)
   idRequired:
     | string
-    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.Builder<string> : never)
 }
 
 export interface InputObjectCircular<
@@ -2743,7 +2910,10 @@ export interface InputObjectCircular<
     | $NamedTypes.$InputObjectCircular<_$Context>
     | undefined
     | null
-    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<
+        $NamedTypes.$InputObjectCircular<_$Context> | null | undefined
+      >
+      : never)
   date?:
     | $$Utilities.Schema.Scalar.GetDecoded<
       $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
@@ -2753,7 +2923,17 @@ export interface InputObjectCircular<
     >
     | undefined
     | null
-    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.Builder<
+        | $$Utilities.Schema.Scalar.GetDecoded<
+          $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
+            'Date',
+            _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
+          >
+        >
+        | null
+        | undefined
+      >
+      : never)
 }
 
 export interface InputObjectEnum<
@@ -2764,7 +2944,9 @@ export interface InputObjectEnum<
     | $NamedTypes.$ABCEnum
     | undefined
     | null
-    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+    | (_$Context extends { variablesEnabled: true }
+      ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<$NamedTypes.$ABCEnum | null | undefined>
+      : never)
 }
 
 export interface InputObjectNested<
@@ -2775,7 +2957,9 @@ export interface InputObjectNested<
     | $NamedTypes.$InputObject<_$Context>
     | undefined
     | null
-    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+    | (_$Context extends { variablesEnabled: true }
+      ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<$NamedTypes.$InputObject<_$Context> | null | undefined>
+      : never)
 }
 
 export interface InputObjectNestedNonNull<
@@ -2784,7 +2968,9 @@ export interface InputObjectNestedNonNull<
 > {
   InputObject:
     | $NamedTypes.$InputObject<_$Context>
-    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+    | (_$Context extends { variablesEnabled: true }
+      ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<$NamedTypes.$InputObject<_$Context>>
+      : never)
 }
 
 //
@@ -4498,7 +4684,9 @@ export namespace ObjectNestedWithArgs {
       | string
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true }
+        ? $$Utilities.DocumentBuilderKit.Var.Builder<string | null | undefined>
+        : never)
   }
 
   // --- expanded ---
@@ -4541,22 +4729,30 @@ export namespace ObjectNestedWithArgs {
       | boolean
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true }
+        ? $$Utilities.DocumentBuilderKit.Var.Builder<boolean | null | undefined>
+        : never)
     float?:
       | number
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true }
+        ? $$Utilities.DocumentBuilderKit.Var.Builder<number | null | undefined>
+        : never)
     int?:
       | number
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true }
+        ? $$Utilities.DocumentBuilderKit.Var.Builder<number | null | undefined>
+        : never)
     string?:
       | string
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true }
+        ? $$Utilities.DocumentBuilderKit.Var.Builder<string | null | undefined>
+        : never)
   }
 
   // --- expanded ---

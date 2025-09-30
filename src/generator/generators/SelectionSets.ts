@@ -380,27 +380,74 @@ const renderArgumentType = (type: Grafaid.Schema.InputTypes): string => {
 
   const nullableRendered = Grafaid.Schema.isNullableType(type) ? `| undefined | null` : ``
 
-  // Conditionally allow VariableMarker based on context
-  const variableMarkerType =
-    `| (${i._$Context} extends { variablesEnabled: true } ? ${i.$$Utilities}.DocumentBuilderKit.Var.VariableMarker : never)`
+  // Get the base TypeScript type for the Builder constraint
+  let baseTypeForMarker: string
 
   if (Grafaid.Schema.isListType(sansNullabilityType)) {
     const innerType = Grafaid.Schema.getNullableType(sansNullabilityType.ofType)
-    return `Array<${renderArgumentType(innerType)}> ${nullableRendered} ${variableMarkerType}`
+    const innerTypeRendered = renderArgumentType(innerType)
+    // Extract just the base type without nullability and variable marker
+    const innerBaseType = getBaseTypeWithoutBuilder(innerType)
+    baseTypeForMarker = `Array<${innerBaseType}>`
+
+    // Conditionally allow typed Builder based on context
+    // Note: We include nullability in the type constraint for accurate type checking
+    const fullType = nullableRendered ? `${baseTypeForMarker} | null | undefined` : baseTypeForMarker
+    const variableMarkerType =
+      `| (${i._$Context} extends { variablesEnabled: true } ? ${i.$$Utilities}.DocumentBuilderKit.Var.Builder<${fullType}> : never)`
+
+    return `Array<${innerTypeRendered}> ${nullableRendered} ${variableMarkerType}`
   }
 
   if (Grafaid.Schema.isScalarType(sansNullabilityType)) {
     if (Grafaid.Schema.isScalarTypeCustom(sansNullabilityType)) {
       const scalarTypeRendered =
         `${i.$$Utilities}.Schema.Scalar.GetDecoded<${i.$$Utilities}.Schema.Scalar.LookupCustomScalarOrFallbackToString<'${sansNullabilityType.name}', ${i._$Context} extends { scalars: infer S } ? S : ${i.$$Utilities}.Schema.Scalar.Registry.Empty>>`
-      return `${scalarTypeRendered} ${nullableRendered} ${variableMarkerType}`
+      baseTypeForMarker = scalarTypeRendered
+    } else {
+      const scalarTypeRendered =
+        Grafaid.StandardScalarTypeTypeScriptMapping[sansNullabilityType.name as Grafaid.StandardScalarTypeNames]
+      baseTypeForMarker = scalarTypeRendered
     }
-    const scalarTypeRendered =
-      Grafaid.StandardScalarTypeTypeScriptMapping[sansNullabilityType.name as Grafaid.StandardScalarTypeNames]
-    return `${scalarTypeRendered} ${nullableRendered} ${variableMarkerType}`
+
+    // Conditionally allow typed Builder based on context
+    // Note: We include nullability in the type constraint for accurate type checking
+    const fullType = nullableRendered ? `${baseTypeForMarker} | null | undefined` : baseTypeForMarker
+    const variableMarkerType =
+      `| (${i._$Context} extends { variablesEnabled: true } ? ${i.$$Utilities}.DocumentBuilderKit.Var.Builder<${fullType}> : never)`
+
+    return `${baseTypeForMarker} ${nullableRendered} ${variableMarkerType}`
   }
 
-  return `${H.namedTypesReference(sansNullabilityType)} ${nullableRendered} ${variableMarkerType}`
+  // Input object or enum type
+  baseTypeForMarker = H.namedTypesReference(sansNullabilityType)
+
+  // Conditionally allow typed Builder based on context
+  // Note: We include nullability in the type constraint for accurate type checking
+  const fullType = nullableRendered ? `${baseTypeForMarker} | null | undefined` : baseTypeForMarker
+  const variableMarkerType =
+    `| (${i._$Context} extends { variablesEnabled: true } ? ${i.$$Utilities}.DocumentBuilderKit.Var.VariableMarker<${fullType}> : never)`
+
+  return `${baseTypeForMarker} ${nullableRendered} ${variableMarkerType}`
+}
+
+// Helper to get base type without variable marker and nullability
+const getBaseTypeWithoutBuilder = (type: Grafaid.Schema.InputTypes): string => {
+  const sansNullabilityType = Grafaid.Schema.getNullableType(type)
+
+  if (Grafaid.Schema.isListType(sansNullabilityType)) {
+    const innerType = Grafaid.Schema.getNullableType(sansNullabilityType.ofType)
+    return `Array<${getBaseTypeWithoutBuilder(innerType)}>`
+  }
+
+  if (Grafaid.Schema.isScalarType(sansNullabilityType)) {
+    if (Grafaid.Schema.isScalarTypeCustom(sansNullabilityType)) {
+      return `${i.$$Utilities}.Schema.Scalar.GetDecoded<${i.$$Utilities}.Schema.Scalar.LookupCustomScalarOrFallbackToString<'${sansNullabilityType.name}', ${i._$Context} extends { scalars: infer S } ? S : ${i.$$Utilities}.Schema.Scalar.Registry.Empty>>`
+    }
+    return Grafaid.StandardScalarTypeTypeScriptMapping[sansNullabilityType.name as Grafaid.StandardScalarTypeNames]
+  }
+
+  return H.namedTypesReference(sansNullabilityType)
 }
 
 // --------------------------------------------------------------------------------------------------

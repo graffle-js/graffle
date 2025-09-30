@@ -1,4 +1,3 @@
-import type * as $$Utilities from '../../../../../src/exports/utilities-for-generated.js'
 import type * as TypeInputsIndex from './type-inputs-index.js'
 
 //
