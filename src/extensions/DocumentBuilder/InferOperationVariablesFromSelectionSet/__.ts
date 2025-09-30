@@ -20,17 +20,19 @@ type DistributeToProperty<T extends PropertySignature> = T extends any ? Propert
 
 // dprint-ignore
 export type Infer<
-  $SelectionSet extends Select.SelectionSet.RootType<Select.StaticBuilderContext>,
+  $SelectionSet extends Select.SelectionSet.RootType<Select.StaticBuilderContext> | {},
   $ArgumentsMap extends SchemaDrivenDataMap.OutputObject,
   $TypeInputsIndex extends Record<string, any>,
-  ___$Extracted extends PropertySignature | unknown = FromRootType<$SelectionSet, $ArgumentsMap, $TypeInputsIndex>,
+  ___$Extracted extends PropertySignature | unknown = $SelectionSet extends Select.SelectionSet.RootType<Select.StaticBuilderContext> ? FromRootType<$SelectionSet, $ArgumentsMap, $TypeInputsIndex> : unknown,
 > =
-Simplify<
-  // Prevent distributing over ___$Extracted when its a union
-  [___$Extracted] extends [PropertySignature]
-    ? UnionToIntersection<DistributeToProperty<___$Extracted>>
-    : never
->
+[keyof $SelectionSet] extends [never]
+  ? {}  // Empty selection set (e.g., scalar field with no selection)
+  : Simplify<
+      // Prevent distributing over ___$Extracted when its a union
+      [___$Extracted] extends [PropertySignature]
+        ? UnionToIntersection<DistributeToProperty<___$Extracted>>
+        : never
+    >
 
 /**
  * Extract variables from a selection set recursively

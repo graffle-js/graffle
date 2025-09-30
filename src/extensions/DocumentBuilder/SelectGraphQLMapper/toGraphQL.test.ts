@@ -3,7 +3,7 @@ import { db } from '../../../../tests/_/fixtures/schemas/possible/db.js'
 import { Grafaid } from '../../../lib/grafaid/_namespace.js'
 import type { Schema } from '../../../types/Schema/_namespace.js'
 import { PossibleWithScalars } from '../__tests__/fixtures/possible-with-scalars/_namespace.js'
-import { Date } from '../__tests__/fixtures/possible.scalars.js'
+import { Date as DateScalar } from '../__tests__/fixtures/possible.scalars.js'
 import { Possible } from '../__tests__/fixtures/possible/_namespace.js'
 import { Select } from '../Select/__.js'
 import { toGraphQLDocument } from './nodes/1_Document.js'
@@ -15,9 +15,10 @@ type CasesDescriptiveQuery = [
 ]
 const testEachQueryWithDescription = test.for.bind(test)<CasesDescriptiveQuery>
 
-type QueryWithDate = Possible.SelectionSets.Query<
-  Schema.Scalar.Registry.AddScalar<Schema.Scalar.Registry.Empty, typeof DateScalar>
->
+type QueryWithDate = Possible.SelectionSets.Query<{
+  scalars: Schema.Scalar.Registry.AddScalar<Schema.Scalar.Registry.Empty, typeof DateScalar>
+  variablesEnabled: false
+}>
 
 type CasesDescriptiveQueryWithCustomScalars = [
   description: string,
@@ -83,7 +84,7 @@ const cases = testEachQueryWithDescription([
     // arguments
   [`args - enum`                                 , { stringWithArgEnum: { $: { $ABCEnum: `A` }}}],
   [`args - input object enum`                    , { stringWithArgInputObjectEnum: { $: { input: { $abcEnum: `A` }}}}],
-  [`args - nested input object enum multiple`    , { stringWithArgInputObjectEnum: { $: { input: { $abcEnum: `B`, id: `test` }}}}],
+  [`args - nested input object enum multiple`    , { stringWithArgInputObjectEnum: { $: { input: { $abcEnum: `B` }}}}],
   [`args - on union`                             , { result: { $: { $case: `Object1` }, __typename: true } }],
   [`args - string with args`                     , { stringWithArgs: { $: { boolean: true, float: 1 } } }],
   [`args - alias`                                , { stringWithArgs: [[`a`, { $: { id: `` }}]] }],
@@ -147,5 +148,5 @@ const customScalarWithCodecCases = testEachQueryWithDescriptionWithCustomScalars
   [`args - custom scalar - input object field`                       , { dateArgInputObject: { $: { input: { idRequired: ``, dateRequired: db.date0, date: db.date1 } } } }],
   [`args - custom scalar - nested input object field`                , { InputObjectNested: { $: { input: { InputObject: { idRequired: ``, dateRequired: db.date0, date: db.date1 } } } } }],
 ])
-customScalarWithCodecCases(...tester({ variables: true, scalars: { Date } }))
-customScalarWithCodecCases(...tester({ variables: false, scalars: { Date } }))
+customScalarWithCodecCases(...tester({ variables: true, scalars: { Date: DateScalar } }))
+customScalarWithCodecCases(...tester({ variables: false, scalars: { Date: DateScalar } }))

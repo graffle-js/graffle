@@ -154,9 +154,11 @@ describe(`relative URLs`, () => {
     if (typeof urlOrRequest === 'string') {
       expect(urlOrRequest).toEqual(`/api/graphql`)
       expect(options?.method).toEqual(`post`)
-    } else {
-      expect(urlOrRequest?.url).toEqual(`/api/graphql`)
-      expect(urlOrRequest?.method).toEqual(`POST`)
+    } else if (urlOrRequest instanceof Request) {
+      expect(urlOrRequest.url).toEqual(`/api/graphql`)
+      expect(urlOrRequest.method).toEqual(`POST`)
+    } else if (urlOrRequest instanceof URL) {
+      expect(urlOrRequest.toString()).toEqual(`/api/graphql`)
     }
   })
 
@@ -171,11 +173,15 @@ describe(`relative URLs`, () => {
       expect(urlOrRequest).toContain(`/api/graphql?`)
       expect(urlOrRequest).toContain(`query=`)
       expect(urlOrRequest).toContain(`variables=`)
-    } else {
-      expect(urlOrRequest?.method).toEqual(`GET`)
-      expect(urlOrRequest?.url).toContain(`/api/graphql?`)
-      expect(urlOrRequest?.url).toContain(`query=`)
-      expect(urlOrRequest?.url).toContain(`variables=`)
+    } else if (urlOrRequest instanceof Request) {
+      expect(urlOrRequest.method).toEqual(`GET`)
+      expect(urlOrRequest.url).toContain(`/api/graphql?`)
+      expect(urlOrRequest.url).toContain(`query=`)
+      expect(urlOrRequest.url).toContain(`variables=`)
+    } else if (urlOrRequest instanceof URL) {
+      expect(urlOrRequest.toString()).toContain(`/api/graphql?`)
+      expect(urlOrRequest.toString()).toContain(`query=`)
+      expect(urlOrRequest.toString()).toContain(`variables=`)
     }
   })
 
@@ -189,10 +195,14 @@ describe(`relative URLs`, () => {
       expect(urlOrRequest).toContain(`/api/graphql?`)
       expect(urlOrRequest).toContain(`token=xyz`)
       expect(urlOrRequest).toContain(`query=`)
-    } else {
-      expect(urlOrRequest?.url).toContain(`/api/graphql?`)
-      expect(urlOrRequest?.url).toContain(`token=xyz`)
-      expect(urlOrRequest?.url).toContain(`query=`)
+    } else if (urlOrRequest instanceof Request) {
+      expect(urlOrRequest.url).toContain(`/api/graphql?`)
+      expect(urlOrRequest.url).toContain(`token=xyz`)
+      expect(urlOrRequest.url).toContain(`query=`)
+    } else if (urlOrRequest instanceof URL) {
+      expect(urlOrRequest.toString()).toContain(`/api/graphql?`)
+      expect(urlOrRequest.toString()).toContain(`token=xyz`)
+      expect(urlOrRequest.toString()).toContain(`query=`)
     }
   })
 

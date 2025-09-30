@@ -5,9 +5,40 @@ import { Select } from './Select/__.js'
 import { toGraphQLDocument } from './SelectGraphQLMapper/nodes/1_Document.js'
 
 /**
- * Create a static root type builder that generates GraphQL document strings.
- * This is a lightweight proxy that mirrors the instance builder pattern but
- * returns document strings instead of executing queries.
+ * Create a static root type builder for generating type-safe GraphQL documents at build time.
+ *
+ * @remarks
+ * The static builder provides compile-time GraphQL document generation with full type safety.
+ * Unlike runtime builders, it produces document strings that can be statically analyzed and optimized.
+ * This is particularly useful for:
+ * - Build-time document generation and validation
+ * - Static analysis tools and linters
+ * - Reducing runtime overhead
+ * - Ensuring all queries are known at build time
+ *
+ * @param operationType - The GraphQL operation type (Query, Mutation, or Subscription)
+ * @returns A proxy object that generates typed GraphQL document strings
+ *
+ * @example
+ * ```ts
+ * import { createStaticRootType } from 'graffle'
+ * import { OperationTypeNode } from 'graphql'
+ *
+ * const query = createStaticRootType(OperationTypeNode.QUERY)
+ *
+ * // Generate a typed document string
+ * const userQuery = query.user({
+ *   id: true,
+ *   name: true,
+ *   posts: {
+ *     title: true,
+ *     content: true
+ *   }
+ * })
+ * // Returns: "{ user { id name posts { title content } } }"
+ * ```
+ *
+ * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
  */
 export const createStaticRootType = (operationType: OperationTypeNode) => {
   return new Proxy({}, {

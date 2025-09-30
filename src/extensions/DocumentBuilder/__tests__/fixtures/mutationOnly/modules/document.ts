@@ -12,12 +12,11 @@ export interface MutationBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ id: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { id: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['mutation'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
+      { id: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['mutation'],
+      $TypeInputsIndex
+    >
   >
   idNonNull: <
     $SelectionSet extends SelectionSets.Mutation<
@@ -27,12 +26,11 @@ export interface MutationBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ idNonNull: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { idNonNull: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['mutation'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
+      { idNonNull: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['mutation'],
+      $TypeInputsIndex
+    >
   >
 }
 

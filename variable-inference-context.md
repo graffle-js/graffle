@@ -1,11 +1,13 @@
 # Variable Inference Context - Graffle Project
 
 ## Current Task
+
 Implementing type inference for GraphQL variables in static document builder at `/Users/jasonkuhrt/projects/jasonkuhrt/graffle/src/extensions/DocumentBuilder/InferOperationVariablesFromSelectionSet`
 
 ## Key Architectural Decisions
 
 ### 1. Context System for Selection Sets
+
 - Implemented context-based selection set types with `SelectionContext` containing:
   - `scalars`: Custom scalar registry
   - `variablesEnabled`: Boolean flag to conditionally allow `VariableMarker` in arguments
@@ -17,6 +19,7 @@ Implementing type inference for GraphQL variables in static document builder at 
 ### 2. Type System Architecture
 
 #### Current Redundant Systems (TO BE UNIFIED)
+
 1. **ArgsMapComputed** (in SelectionSets.ts generator)
    - Generates type maps with `any` placeholders
    - Duplicates SDDM information
@@ -34,6 +37,7 @@ Implementing type inference for GraphQL variables in static document builder at 
    - Contains `arguments` property with `inlineType` and `namedType` for each field
 
 #### Unified Approach (PLANNED)
+
 - Use SDDM as single source of truth
 - Generate SDDM with literal types (`as const`)
 - Export type aliases for SDDM objects
@@ -43,6 +47,7 @@ Implementing type inference for GraphQL variables in static document builder at 
 ### 3. Variable Inference Implementation
 
 #### Current State
+
 ```typescript
 // In FromArgsOrInputObject
 $Args[k] extends VariableMarker
@@ -55,6 +60,7 @@ $Args[k] extends VariableMarker
 ```
 
 #### Needed Implementation
+
 - Pass SDDM literal type through inference functions
 - Extract actual types from SDDM: `$FieldSDDM['a'][$ArgName]`
 - Map SDDM type info (`nt`, `it`) to TypeScript types
@@ -63,15 +69,18 @@ $Args[k] extends VariableMarker
 ### 4. Key Files
 
 #### Core Implementation
+
 - `/src/extensions/DocumentBuilder/InferOperationVariablesFromSelectionSet/__.ts` - Main inference logic
 - `/src/extensions/DocumentBuilder/Select/context.ts` - Context types
 - `/src/extensions/DocumentBuilder/Select/arguments.ts` - Argument types with conditional VariableMarker
 
 #### Generators
+
 - `/src/generator/generators/SelectionSets.ts` - Contains redundant ArgsMapComputed generator (to be removed)
 - `/src/generator/generators/SchemaDrivenDataMap.ts` - SDDM generator (needs literal type export)
 
 #### Test Fixtures
+
 - `/src/extensions/DocumentBuilder/__tests__/fixtures/possible/modules/schema-driven-data-map.ts`
 - `/src/extensions/DocumentBuilder/__tests__/fixtures/possible/modules/schema.ts`
 - `/src/extensions/DocumentBuilder/__tests__/fixtures/possible/modules/selection-sets.ts`

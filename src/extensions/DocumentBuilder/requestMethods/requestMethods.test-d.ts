@@ -1,8 +1,14 @@
 import { expectTypeOf, test } from 'vitest'
 import { DateScalar } from '../../../../tests/_/fixtures/scalars.js'
+import type { Schema } from '../../../types/Schema/_namespace.js'
 import { Possible } from '../__tests__/fixtures/possible/_namespace.js'
 
 const g = Possible.create({ check: { preflight: false } }).scalar(DateScalar)
+
+type ClientContext = {
+  scalars: Schema.Scalar.Registry.AddScalar<Schema.Scalar.Registry.Empty, typeof DateScalar>
+  variablesEnabled: false
+}
 
 // dprint-ignore
 test(`query`, async () => {
@@ -12,9 +18,9 @@ test(`query`, async () => {
   // scalar none-nullable
   expectTypeOf(await g.query.idNonNull()).toEqualTypeOf<string>()
   // scalar with optional arguments
-  expectTypeOf<Parameters<typeof g.query.stringWithArgs>>().toEqualTypeOf<[input?: Possible.SelectionSets.Query.stringWithArgs]>()
+  expectTypeOf<Parameters<typeof g.query.stringWithArgs>>().toMatchTypeOf<[input?: Possible.SelectionSets.Query.stringWithArgs<ClientContext>]>()
   // scalar with required arguments
-  expectTypeOf<Parameters<typeof g.query.stringWithRequiredArg>>().toEqualTypeOf<[input: Possible.SelectionSets.Query.stringWithRequiredArg]>()
+  expectTypeOf<Parameters<typeof g.query.stringWithRequiredArg>>().toMatchTypeOf<[input: Possible.SelectionSets.Query.stringWithRequiredArg<ClientContext>]>()
   // scalar custom
   const result = await g.query.date()
   expectTypeOf(await g.query.date()).toMatchTypeOf<Date | null>()

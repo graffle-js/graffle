@@ -82,13 +82,16 @@ export const ModuleGeneratorSelectionSets = createModuleGenerator(
 
     if (config.schema.kindMap.index.Root.subscription) {
       code`
-        ${!config.schema.kindMap.index.Root.query && !config.schema.kindMap.index.Root.mutation ? `import type * as ${$.$$Schema} from './schema.js'` : ''}
+        ${
+        !config.schema.kindMap.index.Root.query && !config.schema.kindMap.index.Root.mutation
+          ? `import type * as ${$.$$Schema} from './schema.js'`
+          : ''
+      }
 
         export type Subscription$Infer<$SelectionSet extends object> = ${$.$$Utilities}.DocumentBuilderKit.InferResult.OperationSubscription<$SelectionSet, ${$.$$Schema}.${$.Schema}>
         export type Subscription$Variables<$SelectionSet> = any // Temporarily any - will be replaced with new analysis system
       `
     }
-
 
     code`
       /**
@@ -378,7 +381,8 @@ const renderArgumentType = (type: Grafaid.Schema.InputTypes): string => {
   const nullableRendered = Grafaid.Schema.isNullableType(type) ? `| undefined | null` : ``
 
   // Conditionally allow VariableMarker based on context
-  const variableMarkerType = `| (${i._$Context} extends { variablesEnabled: true } ? ${i.$$Utilities}.DocumentBuilderKit.VariableMarker : never)`
+  const variableMarkerType =
+    `| (${i._$Context} extends { variablesEnabled: true } ? ${i.$$Utilities}.DocumentBuilderKit.VariableMarker : never)`
 
   if (Grafaid.Schema.isListType(sansNullabilityType)) {
     const innerType = Grafaid.Schema.getNullableType(sansNullabilityType.ofType)

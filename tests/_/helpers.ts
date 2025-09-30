@@ -55,7 +55,7 @@ export const mockIntrospectionData = {
 } satisfies IntrospectionQuery
 
 interface Fixtures {
-  fetch: Mock<(request: Request) => Promise<Response>>
+  fetch: Mock<typeof globalThis.fetch>
   g0: ClientEmpty
   c0: GraffleKit.Context.ContextEmpty
   pokemonService: SchemaService
@@ -152,7 +152,7 @@ export const test = testBase.extend<Fixtures>({
     await use(project)
   },
   // eslint-disable-next-line
-  fetch: async ({}, use) => {
+  fetch: async ({}, use: any) => {
     const fetch = globalThis.fetch
     const fetchMock = vi.fn()
     // fetchMock.original = fetch

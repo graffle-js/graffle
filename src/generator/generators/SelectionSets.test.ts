@@ -16,7 +16,7 @@ describe('custom root type names', () => {
   const generateAndGetDocument = async (sdl: string) => {
     await generate({ fs, schema: { type: 'sdl', sdl } })
     const content = MemFS.fs.readFileSync('./graffle/modules/selection-sets.ts', 'utf8')
-    const match = content.match(/export interface \$Document[^}]+\}/s)
+    const match = content.toString().match(/export interface \$Document[^}]+\}/s)
     expect(match).toBeTruthy()
     return match![0]
   }
@@ -28,8 +28,8 @@ describe('custom root type names', () => {
       type MutationRoot { y: String }
     `)
 
-    expect(doc).toContain('QueryRoot<_$Scalars>')
-    expect(doc).toContain('MutationRoot<_$Scalars>')
+    expect(doc).toContain('QueryRoot<_$Context>')
+    expect(doc).toContain('MutationRoot<_$Context>')
     expect(doc).not.toContain(': Query<')
     expect(doc).not.toContain(': Mutation<')
   })
@@ -40,8 +40,8 @@ describe('custom root type names', () => {
       type Mutation { y: String }
     `)
 
-    expect(doc).toContain('Query<_$Scalars>')
-    expect(doc).toContain('Mutation<_$Scalars>')
+    expect(doc).toContain('Query<_$Context>')
+    expect(doc).toContain('Mutation<_$Context>')
   })
 
   test('handles query-only schema', async () => {
@@ -50,7 +50,7 @@ describe('custom root type names', () => {
       type MyQuery { x: String }
     `)
 
-    expect(doc).toContain('MyQuery<_$Scalars>')
+    expect(doc).toContain('MyQuery<_$Context>')
     expect(doc).not.toContain('mutation?:')
   })
 })

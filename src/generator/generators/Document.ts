@@ -39,20 +39,65 @@ export const ModuleGeneratorDocument = createModuleGenerator(
     if (queryType) {
       // Always pass the proper ArgumentsMap type even if no fields have arguments
       // This is needed for proper type inference
-      const argsMapType = 'ArgumentsMap.ArgumentsMap[\'query\']'
+      const argsMapType = "ArgumentsMap.ArgumentsMap['query']"
 
       code`
         import type * as $$Utilities from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
         import type * as $$Schema from './schema.js'
 
+        /**
+         * Static query builder for compile-time GraphQL document generation.
+         *
+         * @remarks
+         * Each field method generates a fully typed GraphQL document string with:
+         * - Type-safe selection sets matching your schema
+         * - Automatic variable inference from \`$var\` usage
+         * - Compile-time validation of field selections
+         * - Zero runtime overhead - documents are generated at build time
+         *
+         * @example Basic query
+         * \`\`\`ts
+         * const getUserDoc = query.user({
+         *   id: true,
+         *   name: true,
+         *   email: true
+         * })
+         * // Generates: query { user { id name email } }
+         * \`\`\`
+         *
+         * @example With variables
+         * \`\`\`ts
+         * import { $var } from 'graffle'
+         *
+         * const getUserByIdDoc = query.user({
+         *   $: { id: $var },
+         *   name: true,
+         *   posts: { title: true }
+         * })
+         * // Generates: query ($id: ID!) { user(id: $id) { name posts { title } } }
+         * // Variables type: { id: string }
+         * \`\`\`
+         *
+         * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
+         */
         export interface QueryBuilder {
           ${
         Object.keys(queryType.getFields()).map(fieldName =>
-          `${fieldName}: <$SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['${fieldName}']>(selection?: $SelectionSet) => TypedDocument.String<$$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ ${fieldName}: $SelectionSet }, $$Schema.Schema>, $SelectionSet extends undefined ? {} : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<{ ${fieldName}: $SelectionSet }, ${argsMapType}, $TypeInputsIndex>>`
-        ).join('\n  ')
+          `${fieldName}: <$SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['${fieldName}']>(selection?: $SelectionSet) => TypedDocument.String<$$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ ${fieldName}: $SelectionSet }, $$Schema.Schema>, $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<{ ${fieldName}: Exclude<$SelectionSet, undefined> }, ${argsMapType}, $TypeInputsIndex>>`
+        ).join('\n          ')
       }
         }
 
+        /**
+         * Static query document builder instance.
+         *
+         * @example
+         * \`\`\`ts
+         * import { query } from './generated/document.js'
+         *
+         * const myQuery = query.user({ id: true, name: true })
+         * \`\`\`
+         */
         export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY) as any
       `
     }
@@ -60,20 +105,59 @@ export const ModuleGeneratorDocument = createModuleGenerator(
     if (mutationType) {
       // Always pass the proper ArgumentsMap type even if no fields have arguments
       // This is needed for proper type inference
-      const argsMapType = 'ArgumentsMap.ArgumentsMap[\'mutation\']'
+      const argsMapType = "ArgumentsMap.ArgumentsMap['mutation']"
 
       code`
-        ${!queryType ? `import type * as $$Utilities from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'` : ''}
+        ${
+        !queryType
+          ? `import type * as $$Utilities from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'`
+          : ''
+      }
         ${!queryType ? `import type * as $$Schema from './schema.js'` : ''}
 
+        /**
+         * Static mutation builder for compile-time GraphQL document generation.
+         *
+         * @remarks
+         * Each field method generates a fully typed GraphQL mutation document with:
+         * - Type-safe selection sets and input types
+         * - Automatic variable inference from \`$var\` usage
+         * - Compile-time validation of mutations
+         * - Zero runtime overhead - documents are generated at build time
+         *
+         * @example
+         * \`\`\`ts
+         * import { $var } from 'graffle'
+         *
+         * const createUserDoc = mutation.createUser({
+         *   $: { input: $var },
+         *   id: true,
+         *   name: true
+         * })
+         * // Generates: mutation ($input: CreateUserInput!) { createUser(input: $input) { id name } }
+         * \`\`\`
+         */
         export interface MutationBuilder {
           ${
         Object.keys(mutationType.getFields()).map(fieldName =>
-          `${fieldName}: <$SelectionSet extends SelectionSets.Mutation<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['${fieldName}']>(selection?: $SelectionSet) => TypedDocument.String<$$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ ${fieldName}: $SelectionSet }, $$Schema.Schema>, $SelectionSet extends undefined ? {} : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<{ ${fieldName}: $SelectionSet }, ${argsMapType}, $TypeInputsIndex>>`
-        ).join('\n  ')
+          `${fieldName}: <$SelectionSet extends SelectionSets.Mutation<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['${fieldName}']>(selection?: $SelectionSet) => TypedDocument.String<$$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ ${fieldName}: $SelectionSet }, $$Schema.Schema>, $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<{ ${fieldName}: Exclude<$SelectionSet, undefined> }, ${argsMapType}, $TypeInputsIndex>>`
+        ).join('\n          ')
       }
         }
 
+        /**
+         * Static mutation document builder instance.
+         *
+         * @example
+         * \`\`\`ts
+         * import { mutation } from './generated/document.js'
+         *
+         * const myMutation = mutation.createUser({
+         *   $: { input: { name: 'Alice', email: 'alice@example.com' } },
+         *   id: true
+         * })
+         * \`\`\`
+         */
         export const mutation: MutationBuilder = createStaticRootType(OperationTypeNode.MUTATION) as any
       `
     }
@@ -81,20 +165,61 @@ export const ModuleGeneratorDocument = createModuleGenerator(
     if (subscriptionType) {
       // Always pass the proper ArgumentsMap type even if no fields have arguments
       // This is needed for proper type inference
-      const argsMapType = 'ArgumentsMap.ArgumentsMap[\'subscription\']'
+      const argsMapType = "ArgumentsMap.ArgumentsMap['subscription']"
 
       code`
-        ${!queryType && !mutationType ? `import type * as $$Utilities from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'` : ''}
+        ${
+        !queryType && !mutationType
+          ? `import type * as $$Utilities from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'`
+          : ''
+      }
         ${!queryType && !mutationType ? `import type * as $$Schema from './schema.js'` : ''}
 
+        /**
+         * Static subscription builder for compile-time GraphQL document generation.
+         *
+         * @remarks
+         * Each field method generates a fully typed GraphQL subscription document with:
+         * - Type-safe selection sets for real-time data
+         * - Automatic variable inference from \`$var\` usage
+         * - Compile-time validation of subscriptions
+         * - Zero runtime overhead - documents are generated at build time
+         *
+         * @example
+         * \`\`\`ts
+         * import { $var } from 'graffle'
+         *
+         * const onUserUpdateDoc = subscription.onUserUpdate({
+         *   $: { userId: $var },
+         *   id: true,
+         *   name: true,
+         *   status: true
+         * })
+         * // Generates: subscription ($userId: ID!) { onUserUpdate(userId: $userId) { id name status } }
+         * \`\`\`
+         */
         export interface SubscriptionBuilder {
           ${
         Object.keys(subscriptionType.getFields()).map(fieldName =>
-          `${fieldName}: <$SelectionSet extends SelectionSets.Subscription<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['${fieldName}']>(selection?: $SelectionSet) => TypedDocument.String<$$Utilities.DocumentBuilderKit.InferResult.OperationSubscription<{ ${fieldName}: $SelectionSet }, $$Schema.Schema>, $SelectionSet extends undefined ? {} : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<{ ${fieldName}: $SelectionSet }, ${argsMapType}, $TypeInputsIndex>>`
-        ).join('\n  ')
+          `${fieldName}: <$SelectionSet extends SelectionSets.Subscription<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['${fieldName}']>(selection?: $SelectionSet) => TypedDocument.String<$$Utilities.DocumentBuilderKit.InferResult.OperationSubscription<{ ${fieldName}: $SelectionSet }, $$Schema.Schema>, $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<{ ${fieldName}: Exclude<$SelectionSet, undefined> }, ${argsMapType}, $TypeInputsIndex>>`
+        ).join('\n          ')
       }
         }
 
+        /**
+         * Static subscription document builder instance.
+         *
+         * @example
+         * \`\`\`ts
+         * import { subscription } from './generated/document.js'
+         *
+         * const mySubscription = subscription.onMessage({
+         *   id: true,
+         *   content: true,
+         *   timestamp: true
+         * })
+         * \`\`\`
+         */
         export const subscription: SubscriptionBuilder = createStaticRootType(OperationTypeNode.SUBSCRIPTION) as any
       `
     }

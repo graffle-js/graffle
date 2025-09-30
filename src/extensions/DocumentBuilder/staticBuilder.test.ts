@@ -3,87 +3,132 @@ import { Ts } from '@wollybeard/kit'
 import { Test } from '@wollybeard/kit/test'
 import { OperationTypeNode } from 'graphql'
 import { expect, expectTypeOf, test } from 'vitest'
+import type * as $$Utilities from '../../exports/utilities-for-generated.js'
 import { Possible } from './__tests__/fixtures/possible/_namespace.js'
+import type * as PossibleSchema from './__tests__/fixtures/possible/modules/schema.js'
 import { createStaticRootType } from './staticBuilder.js'
 import { $var } from './variable.js'
 
 // Phantom value for type casting
 const _ = null as any
 
-const query = createStaticRootType(OperationTypeNode.QUERY)
-const mutation = createStaticRootType(OperationTypeNode.MUTATION)
-const subscription = createStaticRootType(OperationTypeNode.SUBSCRIPTION)
+const query = createStaticRootType(OperationTypeNode.QUERY) as any
+const mutation = createStaticRootType(OperationTypeNode.MUTATION) as any
+const subscription = createStaticRootType(OperationTypeNode.SUBSCRIPTION) as any
 
 // dprint-ignore
 Test.describe(`static document builder`)
-  .i<{ builder: any; field: string; selection: any }>()
+  .i<any>()
   .o<{ y: string[]; n?: string[] }>()
   .cases(
-    {
-      n: `simple query`,
-      i: { builder: query, field: `user`, selection: { id: true, name: true } },
-      o: { y: [`user`, `id`, `name`], n: [`query (`, `$`] },
-    },
-    {
-      n: `$var creates variable`,
-      i: { builder: query, field: `user`, selection: { $: { id: $var }, name: true } },
-      o: { y: [`query ($id:`, `user(id: $id)`, `name`] },
-    },
-    {
-      n: `$var.name() renames variable`,
-      i: { builder: query, field: `user`, selection: { $: { id: $var.name(`userId`) }, name: true } },
-      o: { y: [`query ($userId:`, `user(id: $userId)`] },
-    },
-    {
-      n: `$var.default() adds default value`,
-      i: { builder: query, field: `users`, selection: { $: { first: $var.default(10) }, name: true } },
-      o: { y: [`$first:`, `= 10`, `users(first: $first)`] },
-    },
-    {
-      n: `$var chaining`,
-      i: { builder: query, field: `users`, selection: { $: { first: $var.name(`limit`).default(20) }, name: true } },
-      o: { y: [`$limit:`, `= 20`, `users(first: $limit)`] },
-    },
-    {
-      n: `mixed variables and literals`,
-      i: { builder: query, field: `users`, selection: { $: { first: 10, filter: $var }, name: true } },
-      o: { y: [`query ($filter:`, `users(first: 10, filter: $filter)`], n: [`$first`] },
-    },
-    {
-      n: `mutation with variable`,
-      i: { builder: mutation, field: `createUser`, selection: { $: { input: $var }, id: true, name: true } },
-      o: { y: [`mutation ($input:`, `createUser(input: $input)`] },
-    },
-    {
-      n: `subscription with variable`,
-      i: { builder: subscription, field: `onUserUpdate`, selection: { $: { userId: $var }, id: true, name: true } },
-      o: { y: [`subscription ($userId:`, `onUserUpdate(userId: $userId)`] },
-    },
+    [[query.user({ id: true, name: true })],                                  { y: [`user`, `id`, `name`],                                                        n: [`query (`, `$`] }],
+    [[query.user({ $: { id: $var }, name: true })],                           { y: [`query ($id:`, `user(id: $id)`, `name`] }],
+    [[query.user({ $: { id: $var.name(`userId`) }, name: true })],           { y: [`query ($userId:`, `user(id: $userId)`] }],
+    [[query.users({ $: { first: $var.default(10) }, name: true })],          { y: [`$first:`, `= 10`, `users(first: $first)`] }],
+    [[query.users({ $: { first: $var.name(`limit`).default(20) }, name: true })], { y: [`$limit:`, `= 20`, `users(first: $limit)`] }],
+    [[query.users({ $: { first: 10, filter: $var }, name: true })],          { y: [`query ($filter:`, `users(first: 10, filter: $filter)`],                     n: [`$first`] }],
+    [[mutation.createUser({ $: { input: $var }, id: true, name: true })],    { y: [`mutation ($input:`, `createUser(input: $input)`] }],
+    [[subscription.onUserUpdate({ $: { userId: $var }, id: true, name: true })], { y: [`subscription ($userId:`, `onUserUpdate(userId: $userId)`] }],
   )
-  .test((input, output) => {
-    const doc = input.builder[input.field](input.selection)
-
-    for (const y of output.y) {
+  .test(([doc], expectations) => {
+    for (const y of expectations.y) {
       expect(doc).toContain(y)
     }
 
-    if (output.n) {
-      for (const n of output.n) {
+    if (expectations.n) {
+      for (const n of expectations.n) {
         expect(doc).not.toContain(n)
       }
     }
   })
 
+// dprint-ignore
 test('static builder type inference', () => {
-  const actual = Possible.query.object({ id: true })
-  Ts.assertEqual<Grafaid.Document.Typed.String<{ object: { id: string } }, {}>>()(actual)
-})
+  // Scalar fields
+  const q1 = Possible.query.string(true)
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ string: string | null }, {}>>()(q1)
 
-test('static builder type inference with $var', async () => {
-  const actual = Possible.query.stringWithArgs({ $: { boolean: $var } })
-  type expected = Grafaid.Document.Typed.String<{ stringWithArgs: string | null } | null, { boolean: boolean }>
-  Ts.assertEqual<expected>()(actual)
-  // const graffle = Possible.create()
-  // const x = await graffle.gql(actual).send({ boolean: true })
-  // expectTypeOf(actual).toEqualTypeOf<z>()
+  const q2 = Possible.query.idNonNull(true)
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ idNonNull: string }, {}>>()(q2)
+
+  // Custom scalar
+  const q3 = Possible.query.date(true)
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ date: Date | null }, {}>>()(q3) // Custom scalar Date
+
+  const q4 = Possible.query.dateNonNull(true)
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ dateNonNull: Date }, {}>>()(q4)
+
+  // Lists
+  const q5 = Possible.query.listInt(true)
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ listInt: Array<number | null> | null }, {}>>()(q5)
+
+  const q6 = Possible.query.listIntNonNull(true)
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ listIntNonNull: Array<number> }, {}>>()(q6)
+
+  const q7 = Possible.query.listListInt(true)
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ listListInt: Array<Array<number | null> | null> | null }, {}>>()(q7)
+
+  // Object with fields
+  const q8 = Possible.query.object({ id: true, string: true, int: true, float: true, boolean: true })
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ object: { id: string, string: string | null, int: number | null, float: number | null, boolean: boolean | null } | null }, {}>>()(q8)
+
+  // Field with $var
+  const q9 = Possible.query.stringWithArgs({ $: { boolean: $var } })
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { boolean: boolean | undefined }>>()(q9)
+
+  // Required argument with $var
+  const q10 = Possible.query.stringWithRequiredArg({ $: { string: $var } })
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ stringWithRequiredArg: string | null }, { string: string }>>()(q10) // NOT undefined!
+
+  // $var with default
+  const q11 = Possible.query.stringWithArgs({ $: { int: $var.default(10) } })
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { int: number | undefined }>>()(q11)
+
+  // $var with custom name
+  const q12 = Possible.query.stringWithArgs({ $: { boolean: $var.name('isActive') } })
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { isActive: boolean | undefined }>>()(q12)
+
+  // $var.required() on optional argument
+  const q12b = Possible.query.stringWithArgs({ $: { string: $var.required() } })
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { string: string }>>()(q12b) // NOT undefined!
+
+  // List argument with $var
+  const q13 = Possible.query.stringWithListArg({ $: { ints: $var } })
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ stringWithListArg: string | null }, { ints: Array<number | null> | null | undefined }>>()(q13)
+
+  const q14 = Possible.query.stringWithListArgRequired({ $: { ints: $var } })
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ stringWithListArgRequired: string | null }, { ints: Array<number> }>>()(q14)
+
+  // Multiple $var types
+  const q15 = Possible.query.stringWithArgs({ $: { boolean: $var, string: $var, int: $var, float: $var, id: $var } })
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { boolean: boolean | undefined, string: string | undefined, int: number | undefined, float: number | undefined, id: string | undefined }>>()(q15)
+
+  // Mixed $var and literals
+  const q16 = Possible.query.stringWithArgs({ $: { boolean: true, string: $var, int: 42 } })
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { string: string | undefined }>>()(q16)
+
+  // Nested selection
+  const q17 = Possible.query.objectNested({ id: true, object: { id: true, string: true, int: true } })
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ objectNested: { id: string | null, object: { id: string, string: string | null, int: number | null } | null } | null }, {}>>()(q17)
+
+  // Union type
+  const q18 = Possible.query.unionFooBar({ ___on_Foo: { id: true }, Bar: { int: true } })
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ unionFooBar: { id?: string | null, int?: number | null } | null }, {}>>()(q18)
+
+  // Interface type
+  const q19 = Possible.query.interface({ id: true })
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ interface: { id: string | null } | null }, {}>>()(q19)
+
+  // Alias with $var
+  const q20 = Possible.query.$({
+    myAlias: { stringWithArgs: { $: { boolean: $var, int: $var }, $select: true } }
+  })
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ myAlias: string | null }, { boolean: boolean | undefined, int: number | undefined }>>()(q20)
+
+  // Multiple aliases with different variables
+  const q21 = Possible.query.$({
+    first: { stringWithArgs: { $: { boolean: true }, $select: true } },
+    second: { stringWithArgs: { $: { int: $var }, $select: true } }
+  })
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ first: string | null, second: string | null }, { int: number | undefined }>>()(q21)
 })

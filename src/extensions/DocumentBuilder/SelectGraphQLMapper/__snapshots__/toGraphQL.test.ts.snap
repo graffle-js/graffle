@@ -729,15 +729,14 @@ exports[`( variables: false; scalars: (none) ) - Query - args - nested input obj
   "stringWithArgInputObjectEnum": {
     "$": {
       "input": {
-        "$abcEnum": "B",
-        "id": "test"
+        "$abcEnum": "B"
       }
     }
   }
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
 {
-  stringWithArgInputObjectEnum(input: {abcEnum: B, id: "test"})
+  stringWithArgInputObjectEnum(input: {abcEnum: B})
 }
 ----------------
 {
@@ -2231,15 +2230,14 @@ exports[`( variables: true; scalars: (none) ) - Query - args - nested input obje
   "stringWithArgInputObjectEnum": {
     "$": {
       "input": {
-        "$abcEnum": "B",
-        "id": "test"
+        "$abcEnum": "B"
       }
     }
   }
 }
 --------GRAPHQL DOCUMENT & VARIABLES--------
 {
-  stringWithArgInputObjectEnum(input: {abcEnum: B, id: "test"})
+  stringWithArgInputObjectEnum(input: {abcEnum: B})
 }
 ----------------
 {

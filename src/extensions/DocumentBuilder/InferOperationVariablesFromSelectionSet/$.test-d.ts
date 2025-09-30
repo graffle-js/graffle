@@ -155,7 +155,6 @@ type _2 = Ts.Cases<
     $<{ objectWithArgs: { $: { id: typeof $var.required } } }, ArgumentsMap['query'], TypeInputsIndex>,
     { id: string } // No longer optional
   >,
-
   // Default value modifier - makes any argument optional
   Ts.AssertEqual<
     $<
@@ -165,19 +164,17 @@ type _2 = Ts.Cases<
     >,
     { string?: string } // Now optional because it has a default
   >,
-
   // Combining required with other arguments
   Ts.AssertEqual<
     $<
       {
-        objectWithArgs: { $: { id: typeof $var.required, boolean: typeof $var } }
+        objectWithArgs: { $: { id: typeof $var.required; boolean: typeof $var } }
       },
       ArgumentsMap['query'],
       TypeInputsIndex
     >,
-    { id: string, boolean?: boolean | undefined } // id is required, boolean stays optional
+    { id: string; boolean?: boolean | undefined } // id is required, boolean stays optional
   >,
-
   // Default with different types
   Ts.AssertEqual<
     $<{ objectWithArgs: { $: { int: typeof $varWithDefault42 } } }, ArgumentsMap['query'], TypeInputsIndex>,

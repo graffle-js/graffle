@@ -12,8 +12,9 @@ type $<$SelectionSet extends Possible.SelectionSets.Query> = RequestResult.Simpl
 >
 
 type $Registry = Registry.AddScalar<Registry.Empty, typeof DateScalar>
+type $Context = { scalars: $Registry; variablesEnabled: false }
 
-type $WithDate<$SelectionSet extends Possible.SelectionSets.Query<$Registry>> = InferResult.OperationQuery<
+type $WithDate<$SelectionSet extends Possible.SelectionSets.Query<$Context>> = InferResult.OperationQuery<
   $SelectionSet,
   Schema<$Registry>
 >

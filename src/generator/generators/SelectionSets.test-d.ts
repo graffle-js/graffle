@@ -5,7 +5,10 @@ import type * as SelectionSets from '../../extensions/DocumentBuilder/__tests__/
 import type { Schema } from '../../types/Schema/_namespace.js'
 
 type Q = SelectionSets.Query
-type QWithDate = SelectionSets.Query<Schema.Scalar.Registry.AddScalar<Schema.Scalar.Registry.Empty, typeof DateScalar>>
+type QWithDate = SelectionSets.Query<{
+  scalars: Schema.Scalar.Registry.AddScalar<Schema.Scalar.Registry.Empty, typeof DateScalar>
+  variablesEnabled: false
+}>
 
 // dprint-ignore
 test(`Query`, () => {

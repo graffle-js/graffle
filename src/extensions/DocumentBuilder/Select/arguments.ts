@@ -1,5 +1,5 @@
-import type { VariableMarker } from '../variable.js'
 import { type DeepObjectValue, mapEntriesDeep } from '../../../lib/object-utils.js'
+import type { VariableMarker } from '../variable.js'
 import type { DefaultContext } from './context.js'
 
 export type ArgValue<$Context = DefaultContext> =
