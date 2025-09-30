@@ -815,6 +815,26 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     >
   >
 
+  objectNestedWithArgs: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
+    $Context,
+    <$SelectionSet>(
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSets.Query.objectNestedWithArgs<{ scalars: $Context['scalars']; variablesEnabled: false }>
+      >,
+    ) => Promise<
+      & (null | {})
+      & $$Utilities.HandleOutputDocumentBuilderRootField<
+        $Context,
+        $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+          { objectNestedWithArgs: $SelectionSet },
+          $$Schema.Schema<$Context['scalars']>
+        >,
+        'objectNestedWithArgs'
+      >
+    >
+  >
+
   objectNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(

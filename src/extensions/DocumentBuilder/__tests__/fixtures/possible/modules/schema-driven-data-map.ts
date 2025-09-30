@@ -281,6 +281,40 @@ const ObjectNested: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   },
 }
 
+const ObjectNestedWithArgs: $$Utilities.SchemaDrivenDataMap.OutputObject = {
+  f: {
+    id: {
+      a: {
+        filter: {
+          nt: ID,
+          it: [0],
+        },
+      },
+    },
+    object: {
+      a: {
+        boolean: {
+          nt: Boolean,
+          it: [0],
+        },
+        float: {
+          nt: Float,
+          it: [0],
+        },
+        int: {
+          nt: Int,
+          it: [0],
+        },
+        string: {
+          nt: String,
+          it: [0],
+        },
+      },
+      // nt: Object1, <-- Assigned later to avoid potential circular dependency.
+    },
+  },
+}
+
 const ObjectParent: $$Utilities.SchemaDrivenDataMap.OutputObject = {
   f: {
     a: {},
@@ -597,6 +631,9 @@ const Query: $$Utilities.SchemaDrivenDataMap.OutputObject = {
     objectNested: {
       // nt: ObjectNested, <-- Assigned later to avoid potential circular dependency.
     },
+    objectNestedWithArgs: {
+      // nt: ObjectNestedWithArgs, <-- Assigned later to avoid potential circular dependency.
+    },
     objectNonNull: {
       // nt: Object1, <-- Assigned later to avoid potential circular dependency.
     },
@@ -783,6 +820,8 @@ InputObjectNestedNonNull.f![`InputObject`]!.nt = InputObject
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ObjectNested.f[`object`]!.nt = Object1
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
+ObjectNestedWithArgs.f[`object`]!.nt = Object1
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 ObjectUnion.f[`fooBarUnion`]!.nt = FooBarUnion
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`dateInterface1`]!.nt = DateInterface1
@@ -814,6 +853,8 @@ Query.f[`objectList`]!.nt = Object1
 Query.f[`objectListNonNull`]!.nt = Object1
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`objectNested`]!.nt = ObjectNested
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
+Query.f[`objectNestedWithArgs`]!.nt = ObjectNestedWithArgs
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`objectNonNull`]!.nt = Object1
 // @ts-expect-error Assignment to readonly property is needed for circular reference handling.
@@ -887,6 +928,7 @@ const $schemaDrivenDataMap: $$Utilities.SchemaDrivenDataMap = {
     ObjectChildB,
     ObjectGrandparent,
     ObjectNested,
+    ObjectNestedWithArgs,
     ObjectParent,
     ObjectUnion,
     lowerCaseObject,

@@ -1,5 +1,5 @@
 import { type DeepObjectValue, mapEntriesDeep } from '../../../lib/object-utils.js'
-import type { VariableMarker } from '../variable.js'
+import { Var } from '../var/$.js'
 import type { DefaultContext } from './context.js'
 
 export type ArgValue<$Context = DefaultContext> =
@@ -8,7 +8,7 @@ export type ArgValue<$Context = DefaultContext> =
   | null
   | number
   | ArgsObject<$Context>
-  | ($Context extends { variablesEnabled: true } ? VariableMarker<any, any> : never)
+  | ($Context extends { variablesEnabled: true } ? Var.VariableMarker<any> : never)
 
 export type ArgsObject<$Context = DefaultContext> = {
   [k: string]: ArgValue<$Context>

@@ -177,6 +177,10 @@ export const db = {
     id,
     nested: Object1,
   },
+  ObjectNestedWithArgs: {
+    id,
+    object: Object1,
+  },
   ObjectUnion: {
     fooBarUnion: Foo,
   },

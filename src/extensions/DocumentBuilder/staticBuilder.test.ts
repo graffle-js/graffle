@@ -7,7 +7,9 @@ import type * as $$Utilities from '../../exports/utilities-for-generated.js'
 import { Possible } from './__tests__/fixtures/possible/_namespace.js'
 import type * as PossibleSchema from './__tests__/fixtures/possible/modules/schema.js'
 import { createStaticRootType } from './staticBuilder.js'
-import { $var } from './variable.js'
+import { Var } from './var/$.js'
+
+const $var = Var.$var
 
 // Phantom value for type casting
 const _ = null as any
@@ -18,7 +20,7 @@ const subscription = createStaticRootType(OperationTypeNode.SUBSCRIPTION) as any
 
 // dprint-ignore
 Test.describe(`static document builder`)
-  .i<any>()
+  .i<string>()
   .o<{ y: string[]; n?: string[] }>()
   .cases(
     [[query.user({ id: true, name: true })],                                  { y: [`user`, `id`, `name`],                                                        n: [`query (`, `$`] }],
@@ -30,7 +32,7 @@ Test.describe(`static document builder`)
     [[mutation.createUser({ $: { input: $var }, id: true, name: true })],    { y: [`mutation ($input:`, `createUser(input: $input)`] }],
     [[subscription.onUserUpdate({ $: { userId: $var }, id: true, name: true })], { y: [`subscription ($userId:`, `onUserUpdate(userId: $userId)`] }],
   )
-  .test(([doc], expectations) => {
+  .test((doc, expectations) => {
     for (const y of expectations.y) {
       expect(doc).toContain(y)
     }
@@ -88,8 +90,8 @@ test('static builder type inference', () => {
   const q12 = Possible.query.stringWithArgs({ $: { boolean: $var.name('isActive') } })
   Ts.assertEqual<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { isActive: boolean | undefined }>>()(q12)
 
-  // $var.required() on optional argument
-  const q12b = Possible.query.stringWithArgs({ $: { string: $var.required() } })
+  // $var.required on optional argument
+  const q12b = Possible.query.stringWithArgs({ $: { string: $var.required } })
   Ts.assertEqual<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { string: string }>>()(q12b) // NOT undefined!
 
   // List argument with $var
@@ -119,16 +121,19 @@ test('static builder type inference', () => {
   const q19 = Possible.query.interface({ id: true })
   Ts.assertEqual<Grafaid.Document.Typed.String<{ interface: { id: string | null } | null }, {}>>()(q19)
 
-  // Alias with $var
-  const q20 = Possible.query.$({
-    myAlias: { stringWithArgs: { $: { boolean: $var, int: $var }, $select: true } }
+  // Alias with $var on nested object field
+  const q20 = Possible.query.objectNestedWithArgs({
+    id: [`myId`, { $: { filter: $var } }],
+    myObject: [`myObject`, { $: { boolean: $var, int: $var } }]
   })
-  Ts.assertEqual<Grafaid.Document.Typed.String<{ myAlias: string | null }, { boolean: boolean | undefined, int: number | undefined }>>()(q20)
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ objectNestedWithArgs: { myId: string | null, myObject: { id: string, string: string | null, int: number | null, float: number | null, boolean: boolean | null, ABCEnum: 'A' | 'B' | 'C' | null } | null } | null }, { filter: string | undefined, boolean: boolean | undefined, int: number | undefined }>>()(q20)
 
-  // Multiple aliases with different variables
-  const q21 = Possible.query.$({
-    first: { stringWithArgs: { $: { boolean: true }, $select: true } },
-    second: { stringWithArgs: { $: { int: $var }, $select: true } }
+  // Multiple aliases with different variables on nested object fields
+  const q21 = Possible.query.objectNestedWithArgs({
+    object: [
+      [`first`, { $: { boolean: true } }],
+      [`second`, { $: { int: $var } }]
+    ]
   })
-  Ts.assertEqual<Grafaid.Document.Typed.String<{ first: string | null, second: string | null }, { int: number | undefined }>>()(q21)
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ objectNestedWithArgs: { first: { id: string, string: string | null, int: number | null, float: number | null, boolean: boolean | null, ABCEnum: 'A' | 'B' | 'C' | null } | null, second: { id: string, string: string | null, int: number | null, float: number | null, boolean: boolean | null, ABCEnum: 'A' | 'B' | 'C' | null } | null } | null }, { int: number | undefined }>>()(q21)
 })

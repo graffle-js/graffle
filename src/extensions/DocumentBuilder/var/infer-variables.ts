@@ -11,7 +11,7 @@ import type { UnionToIntersection } from '../../../lib/prelude.js'
 import type { SchemaDrivenDataMap } from '../../../types/SchemaDrivenDataMap/_namespace.js'
 import type { PropertySignature } from '../PropertySignature.js'
 import type { Select } from '../Select/__.js'
-import type { VariableMarker } from '../variable.js'
+import type { VariableMarker } from './var.js'
 
 export type ValuesOr<$Obj extends object, $Or> = [keyof $Obj] extends [never] ? $Or : $Obj[keyof $Obj]
 
@@ -19,7 +19,7 @@ export type ValuesOr<$Obj extends object, $Or> = [keyof $Obj] extends [never] ? 
 type DistributeToProperty<T extends PropertySignature> = T extends any ? PropertySignature.ToProperty<T> : never
 
 // dprint-ignore
-export type Infer<
+export type InferVariables<
   $SelectionSet extends Select.SelectionSet.RootType<Select.StaticBuilderContext> | {},
   $ArgumentsMap extends SchemaDrivenDataMap.OutputObject,
   $TypeInputsIndex extends Record<string, any>,
@@ -71,7 +71,7 @@ export type FromArgsOrInputObject<
   $TypeInputsIndex extends Record<string, any>
 > = {
   [k in keyof $Args]:
-    $Args[k] extends VariableMarker<any, any>
+    $Args[k] extends VariableMarker<any>
       ? k extends keyof $ArgumentsMap
         ? $ArgumentsMap[k] extends SchemaDrivenDataMap.ArgumentOrInputField
           ? {

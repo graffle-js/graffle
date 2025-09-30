@@ -382,7 +382,7 @@ const renderArgumentType = (type: Grafaid.Schema.InputTypes): string => {
 
   // Conditionally allow VariableMarker based on context
   const variableMarkerType =
-    `| (${i._$Context} extends { variablesEnabled: true } ? ${i.$$Utilities}.DocumentBuilderKit.VariableMarker : never)`
+    `| (${i._$Context} extends { variablesEnabled: true } ? ${i.$$Utilities}.DocumentBuilderKit.Var.VariableMarker : never)`
 
   if (Grafaid.Schema.isListType(sansNullabilityType)) {
     const innerType = Grafaid.Schema.getNullableType(sansNullabilityType.ofType)

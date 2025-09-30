@@ -67,7 +67,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
          *
          * @example With variables
          * \`\`\`ts
-         * import { $var } from 'graffle'
+         * import { Var } from 'graffle'
          *
          * const getUserByIdDoc = query.user({
          *   $: { id: $var },
@@ -83,7 +83,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
         export interface QueryBuilder {
           ${
         Object.keys(queryType.getFields()).map(fieldName =>
-          `${fieldName}: <$SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['${fieldName}']>(selection?: $SelectionSet) => TypedDocument.String<$$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ ${fieldName}: $SelectionSet }, $$Schema.Schema>, $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<{ ${fieldName}: Exclude<$SelectionSet, undefined> }, ${argsMapType}, $TypeInputsIndex>>`
+          `${fieldName}: <$SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['${fieldName}']>(selection?: $SelectionSet) => TypedDocument.String<$$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ ${fieldName}: $SelectionSet }, $$Schema.Schema>, $$Utilities.DocumentBuilderKit.Var.Infer<{ ${fieldName}: Exclude<$SelectionSet, undefined> }, ${argsMapType}, $TypeInputsIndex>>`
         ).join('\n          ')
       }
         }
@@ -127,7 +127,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
          *
          * @example
          * \`\`\`ts
-         * import { $var } from 'graffle'
+         * import { Var } from 'graffle'
          *
          * const createUserDoc = mutation.createUser({
          *   $: { input: $var },
@@ -140,7 +140,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
         export interface MutationBuilder {
           ${
         Object.keys(mutationType.getFields()).map(fieldName =>
-          `${fieldName}: <$SelectionSet extends SelectionSets.Mutation<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['${fieldName}']>(selection?: $SelectionSet) => TypedDocument.String<$$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ ${fieldName}: $SelectionSet }, $$Schema.Schema>, $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<{ ${fieldName}: Exclude<$SelectionSet, undefined> }, ${argsMapType}, $TypeInputsIndex>>`
+          `${fieldName}: <$SelectionSet extends SelectionSets.Mutation<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['${fieldName}']>(selection?: $SelectionSet) => TypedDocument.String<$$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ ${fieldName}: $SelectionSet }, $$Schema.Schema>, $$Utilities.DocumentBuilderKit.Var.Infer<{ ${fieldName}: Exclude<$SelectionSet, undefined> }, ${argsMapType}, $TypeInputsIndex>>`
         ).join('\n          ')
       }
         }
@@ -187,10 +187,10 @@ export const ModuleGeneratorDocument = createModuleGenerator(
          *
          * @example
          * \`\`\`ts
-         * import { $var } from 'graffle'
+         * import { Var } from 'graffle'
          *
          * const onUserUpdateDoc = subscription.onUserUpdate({
-         *   $: { userId: $var },
+         *   $: { userId: Var.$var },
          *   id: true,
          *   name: true,
          *   status: true
@@ -201,7 +201,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
         export interface SubscriptionBuilder {
           ${
         Object.keys(subscriptionType.getFields()).map(fieldName =>
-          `${fieldName}: <$SelectionSet extends SelectionSets.Subscription<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['${fieldName}']>(selection?: $SelectionSet) => TypedDocument.String<$$Utilities.DocumentBuilderKit.InferResult.OperationSubscription<{ ${fieldName}: $SelectionSet }, $$Schema.Schema>, $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<{ ${fieldName}: Exclude<$SelectionSet, undefined> }, ${argsMapType}, $TypeInputsIndex>>`
+          `${fieldName}: <$SelectionSet extends SelectionSets.Subscription<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['${fieldName}']>(selection?: $SelectionSet) => TypedDocument.String<$$Utilities.DocumentBuilderKit.InferResult.OperationSubscription<{ ${fieldName}: $SelectionSet }, $$Schema.Schema>, $$Utilities.DocumentBuilderKit.Var.Infer<{ ${fieldName}: Exclude<$SelectionSet, undefined> }, ${argsMapType}, $TypeInputsIndex>>`
         ).join('\n          ')
       }
         }

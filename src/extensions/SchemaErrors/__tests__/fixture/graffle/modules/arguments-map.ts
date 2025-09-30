@@ -113,7 +113,43 @@ export type InputObjectNestedNonNull = {
 //
 //
 
-// No OutputObject types with arguments in your schema.
+export type ObjectNestedWithArgs = {
+  readonly f: {
+    readonly id: {
+      readonly a: {
+        readonly filter: {
+          readonly nt: 'ID'
+          readonly it: readonly [0]
+          readonly $t: TypeInputsIndex.ID | undefined
+        }
+      }
+    }
+    readonly object: {
+      readonly a: {
+        readonly boolean: {
+          readonly nt: 'Boolean'
+          readonly it: readonly [0]
+          readonly $t: TypeInputsIndex.Boolean | undefined
+        }
+        readonly float: {
+          readonly nt: 'Float'
+          readonly it: readonly [0]
+          readonly $t: TypeInputsIndex.Float | undefined
+        }
+        readonly int: {
+          readonly nt: 'Int'
+          readonly it: readonly [0]
+          readonly $t: TypeInputsIndex.Int | undefined
+        }
+        readonly string: {
+          readonly nt: 'String'
+          readonly it: readonly [0]
+          readonly $t: TypeInputsIndex.String | undefined
+        }
+      }
+    }
+  }
+}
 
 //
 //

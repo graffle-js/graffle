@@ -68,6 +68,7 @@ export namespace Schema {
       objectList: Query.objectList
       objectListNonNull: Query.objectListNonNull
       objectNested: Query.objectNested
+      objectNestedWithArgs: Query.objectNestedWithArgs
       objectNonNull: Query.objectNonNull
       objectWithArgs: Query.objectWithArgs
       result: Query.result
@@ -519,6 +520,14 @@ export namespace Schema {
       arguments: {}
       inlineType: [0]
       namedType: $$NamedTypes.$$ObjectNested
+    }
+
+    export interface objectNestedWithArgs extends $.OutputField {
+      kind: 'OutputField'
+      name: 'objectNestedWithArgs'
+      arguments: {}
+      inlineType: [0]
+      namedType: $$NamedTypes.$$ObjectNestedWithArgs
     }
 
     export interface objectNonNull extends $.OutputField {
@@ -1464,6 +1473,81 @@ export namespace Schema {
       kind: 'OutputField'
       name: 'object'
       arguments: {}
+      inlineType: [0]
+      namedType: $$NamedTypes.$$Object1
+    }
+  }
+
+  //                                        ObjectNestedWithArgs
+  // --------------------------------------------------------------------------------------------------
+  //
+
+  export interface ObjectNestedWithArgs extends $.OutputObject {
+    kind: 'Object'
+    name: 'ObjectNestedWithArgs'
+    fields: {
+      __typename: ObjectNestedWithArgs.__typename
+      id: ObjectNestedWithArgs.id
+      object: ObjectNestedWithArgs.$object
+    }
+  }
+
+  export namespace ObjectNestedWithArgs {
+    export interface __typename extends $.OutputField {
+      kind: 'OutputField'
+      name: '__typename'
+      arguments: {}
+      inlineType: [1]
+      namedType: {
+        kind: '__typename'
+        value: 'ObjectNestedWithArgs'
+      }
+    }
+
+    export interface id extends $.OutputField {
+      kind: 'OutputField'
+      name: 'id'
+      arguments: {
+        filter: {
+          kind: 'InputField'
+          name: 'filter'
+          inlineType: [0]
+          namedType: $$NamedTypes.$$ID
+        }
+      }
+      inlineType: [0]
+      namedType: $$NamedTypes.$$ID
+    }
+
+    export interface $object extends $.OutputField {
+      kind: 'OutputField'
+      name: 'object'
+      arguments: {
+        boolean: {
+          kind: 'InputField'
+          name: 'boolean'
+          inlineType: [0]
+          namedType: $$NamedTypes.$$Boolean
+        }
+        float: {
+          kind: 'InputField'
+          name: 'float'
+          inlineType: [0]
+          namedType: $$NamedTypes.$$Float
+        }
+        int: {
+          kind: 'InputField'
+          name: 'int'
+          inlineType: [0]
+          namedType: $$NamedTypes.$$Int
+        }
+        string: {
+          kind: 'InputField'
+          name: 'string'
+          inlineType: [0]
+          namedType: $$NamedTypes.$$String
+        }
+      }
       inlineType: [0]
       namedType: $$NamedTypes.$$Object1
     }
@@ -2458,6 +2542,7 @@ export namespace Schema {
     export type $$ObjectChildB = ObjectChildB
     export type $$ObjectGrandparent = ObjectGrandparent
     export type $$ObjectNested = ObjectNested
+    export type $$ObjectNestedWithArgs = ObjectNestedWithArgs
     export type $$ObjectParent = ObjectParent
     export type $$ObjectUnion = ObjectUnion
     export type $$lowerCaseObject = lowerCaseObject
@@ -2543,6 +2628,7 @@ export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$
     ObjectChildB: Schema.ObjectChildB
     ObjectGrandparent: Schema.ObjectGrandparent
     ObjectNested: Schema.ObjectNested
+    ObjectNestedWithArgs: Schema.ObjectNestedWithArgs
     ObjectParent: Schema.ObjectParent
     ObjectUnion: Schema.ObjectUnion
     lowerCaseObject: Schema.lowerCaseObject
@@ -2573,6 +2659,7 @@ export interface Schema<$Scalars extends $$Utilities.Schema.Scalar.Registry = $$
     ObjectChildB: Schema.ObjectChildB
     ObjectGrandparent: Schema.ObjectGrandparent
     ObjectNested: Schema.ObjectNested
+    ObjectNestedWithArgs: Schema.ObjectNestedWithArgs
     ObjectParent: Schema.ObjectParent
     ObjectUnion: Schema.ObjectUnion
     lowerCaseObject: Schema.lowerCaseObject

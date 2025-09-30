@@ -1,7 +1,7 @@
 import { Nodes } from '../../../../lib/grafaid/_Nodes.js'
 import { SchemaDrivenDataMap } from '../../../../types/SchemaDrivenDataMap/_namespace.js'
 import { Select } from '../../Select/__.js'
-import { extractVariableInfo, isVariableMarker } from '../../variable.js'
+import { Var } from '../../var/$.js'
 import type { GraphQLPostOperationMapper } from '../mapper.js'
 import { collectForInlineFragmentLike } from './_collect.js'
 import { toGraphQLArgument } from './Argument.js'
@@ -44,10 +44,10 @@ export const toGraphQLField: GraphQLPostOperationMapper<
           const argValue = keyParsed.arguments[argName]
 
           // Check if this argument should become a variable
-          const shouldBeVariable = context.variables.enabled && isVariableMarker(argValue)
+          const shouldBeVariable = context.variables.enabled && Var.isVariableMarker(argValue)
 
           if (shouldBeVariable) {
-            const varInfo = extractVariableInfo(argValue, argNameSchema)
+            const varInfo = Var.extractVariableInfo(argValue, argNameSchema)
             const argument = context.variables.capture({
               name: varInfo.name,
               argName: argNameSchema, // Always pass the original argument name

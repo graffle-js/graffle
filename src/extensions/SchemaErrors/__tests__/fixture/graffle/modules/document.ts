@@ -7,6 +7,41 @@ import type * as $$Schema from './schema.js'
 import type * as SelectionSets from './selection-sets.js'
 import type { $TypeInputsIndex } from './type-inputs-index.js'
 
+/**
+ * Static query builder for compile-time GraphQL document generation.
+ *
+ * @remarks
+ * Each field method generates a fully typed GraphQL document string with:
+ * - Type-safe selection sets matching your schema
+ * - Automatic variable inference from `$var` usage
+ * - Compile-time validation of field selections
+ * - Zero runtime overhead - documents are generated at build time
+ *
+ * @example Basic query
+ * ```ts
+ * const getUserDoc = query.user({
+ *   id: true,
+ *   name: true,
+ *   email: true
+ * })
+ * // Generates: query { user { id name email } }
+ * ```
+ *
+ * @example With variables
+ * ```ts
+ * import { Var } from 'graffle'
+ *
+ * const getUserByIdDoc = query.user({
+ *   $: { id: $var },
+ *   name: true,
+ *   posts: { title: true }
+ * })
+ * // Generates: query ($id: ID!) { user(id: $id) { name posts { title } } }
+ * // Variables type: { id: string }
+ * ```
+ *
+ * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
+ */
 export interface QueryBuilder {
   InputObjectNested: <
     $SelectionSet extends SelectionSets.Query<
@@ -16,12 +51,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ InputObjectNested: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { InputObjectNested: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { InputObjectNested: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   InputObjectNestedNonNull: <
     $SelectionSet extends SelectionSets.Query<
@@ -34,12 +68,11 @@ export interface QueryBuilder {
       { InputObjectNestedNonNull: $SelectionSet },
       $$Schema.Schema
     >,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { InputObjectNestedNonNull: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { InputObjectNestedNonNull: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   abcEnum: <
     $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['abcEnum'],
@@ -47,12 +80,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ abcEnum: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { abcEnum: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { abcEnum: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   argInputObjectCircular: <
     $SelectionSet extends SelectionSets.Query<
@@ -65,12 +97,11 @@ export interface QueryBuilder {
       { argInputObjectCircular: $SelectionSet },
       $$Schema.Schema
     >,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { argInputObjectCircular: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { argInputObjectCircular: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   bigintField: <
     $SelectionSet extends SelectionSets.Query<
@@ -80,12 +111,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ bigintField: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { bigintField: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { bigintField: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   bigintFieldNonNull: <
     $SelectionSet extends SelectionSets.Query<
@@ -95,23 +125,21 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ bigintFieldNonNull: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { bigintFieldNonNull: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { bigintFieldNonNull: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   date: <$SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['date']>(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ date: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { date: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { date: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   dateArg: <
     $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['dateArg'],
@@ -119,12 +147,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ dateArg: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { dateArg: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { dateArg: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   dateArgInputObject: <
     $SelectionSet extends SelectionSets.Query<
@@ -134,12 +161,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ dateArgInputObject: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { dateArgInputObject: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { dateArgInputObject: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   dateArgList: <
     $SelectionSet extends SelectionSets.Query<
@@ -149,12 +175,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ dateArgList: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { dateArgList: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { dateArgList: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   dateArgNonNull: <
     $SelectionSet extends SelectionSets.Query<
@@ -164,12 +189,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ dateArgNonNull: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { dateArgNonNull: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { dateArgNonNull: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   dateArgNonNullList: <
     $SelectionSet extends SelectionSets.Query<
@@ -179,12 +203,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ dateArgNonNullList: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { dateArgNonNullList: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { dateArgNonNullList: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   dateArgNonNullListNonNull: <
     $SelectionSet extends SelectionSets.Query<
@@ -197,12 +220,11 @@ export interface QueryBuilder {
       { dateArgNonNullListNonNull: $SelectionSet },
       $$Schema.Schema
     >,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { dateArgNonNullListNonNull: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { dateArgNonNullListNonNull: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   dateInterface1: <
     $SelectionSet extends SelectionSets.Query<
@@ -212,12 +234,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ dateInterface1: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { dateInterface1: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { dateInterface1: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   dateList: <
     $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['dateList'],
@@ -225,12 +246,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ dateList: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { dateList: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { dateList: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   dateListList: <
     $SelectionSet extends SelectionSets.Query<
@@ -240,12 +260,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ dateListList: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { dateListList: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { dateListList: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   dateListNonNull: <
     $SelectionSet extends SelectionSets.Query<
@@ -255,12 +274,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ dateListNonNull: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { dateListNonNull: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { dateListNonNull: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   dateNonNull: <
     $SelectionSet extends SelectionSets.Query<
@@ -270,12 +288,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ dateNonNull: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { dateNonNull: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { dateNonNull: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   dateObject1: <
     $SelectionSet extends SelectionSets.Query<
@@ -285,12 +302,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ dateObject1: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { dateObject1: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { dateObject1: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   dateUnion: <
     $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['dateUnion'],
@@ -298,12 +314,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ dateUnion: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { dateUnion: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { dateUnion: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   error: <
     $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['error'],
@@ -311,23 +326,21 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ error: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { error: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { error: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   id: <$SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['id']>(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ id: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { id: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { id: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   idNonNull: <
     $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['idNonNull'],
@@ -335,12 +348,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ idNonNull: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { idNonNull: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { idNonNull: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   interface: <
     $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['interface'],
@@ -348,12 +360,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ interface: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { interface: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { interface: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   interfaceHierarchyChildA: <
     $SelectionSet extends SelectionSets.Query<
@@ -366,12 +377,11 @@ export interface QueryBuilder {
       { interfaceHierarchyChildA: $SelectionSet },
       $$Schema.Schema
     >,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { interfaceHierarchyChildA: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { interfaceHierarchyChildA: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   interfaceHierarchyChildB: <
     $SelectionSet extends SelectionSets.Query<
@@ -384,12 +394,11 @@ export interface QueryBuilder {
       { interfaceHierarchyChildB: $SelectionSet },
       $$Schema.Schema
     >,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { interfaceHierarchyChildB: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { interfaceHierarchyChildB: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   interfaceHierarchyGrandparents: <
     $SelectionSet extends SelectionSets.Query<
@@ -402,12 +411,11 @@ export interface QueryBuilder {
       { interfaceHierarchyGrandparents: $SelectionSet },
       $$Schema.Schema
     >,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { interfaceHierarchyGrandparents: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { interfaceHierarchyGrandparents: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   interfaceHierarchyParents: <
     $SelectionSet extends SelectionSets.Query<
@@ -420,12 +428,11 @@ export interface QueryBuilder {
       { interfaceHierarchyParents: $SelectionSet },
       $$Schema.Schema
     >,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { interfaceHierarchyParents: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { interfaceHierarchyParents: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   interfaceNonNull: <
     $SelectionSet extends SelectionSets.Query<
@@ -435,12 +442,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ interfaceNonNull: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { interfaceNonNull: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { interfaceNonNull: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   interfaceWithArgs: <
     $SelectionSet extends SelectionSets.Query<
@@ -450,12 +456,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ interfaceWithArgs: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { interfaceWithArgs: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { interfaceWithArgs: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   listInt: <
     $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['listInt'],
@@ -463,12 +468,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ listInt: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { listInt: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { listInt: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   listIntNonNull: <
     $SelectionSet extends SelectionSets.Query<
@@ -478,12 +482,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ listIntNonNull: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { listIntNonNull: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { listIntNonNull: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   listListInt: <
     $SelectionSet extends SelectionSets.Query<
@@ -493,12 +496,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ listListInt: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { listListInt: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { listListInt: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   listListIntNonNull: <
     $SelectionSet extends SelectionSets.Query<
@@ -508,12 +510,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ listListIntNonNull: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { listListIntNonNull: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { listListIntNonNull: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   lowerCaseUnion: <
     $SelectionSet extends SelectionSets.Query<
@@ -523,12 +524,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ lowerCaseUnion: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { lowerCaseUnion: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { lowerCaseUnion: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   object: <
     $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['object'],
@@ -536,12 +536,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ object: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { object: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { object: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   objectList: <
     $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['objectList'],
@@ -549,12 +548,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ objectList: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { objectList: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { objectList: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   objectListNonNull: <
     $SelectionSet extends SelectionSets.Query<
@@ -564,12 +562,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ objectListNonNull: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { objectListNonNull: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { objectListNonNull: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   objectNested: <
     $SelectionSet extends SelectionSets.Query<
@@ -579,12 +576,25 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ objectNested: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { objectNested: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { objectNested: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
+  >
+  objectNestedWithArgs: <
+    $SelectionSet extends SelectionSets.Query<
+      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+    >['objectNestedWithArgs'],
+  >(
+    selection?: $SelectionSet,
+  ) => TypedDocument.String<
+    $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ objectNestedWithArgs: $SelectionSet }, $$Schema.Schema>,
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { objectNestedWithArgs: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   objectNonNull: <
     $SelectionSet extends SelectionSets.Query<
@@ -594,12 +604,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ objectNonNull: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { objectNonNull: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { objectNonNull: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   objectWithArgs: <
     $SelectionSet extends SelectionSets.Query<
@@ -609,12 +618,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ objectWithArgs: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { objectWithArgs: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { objectWithArgs: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   result: <
     $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['result'],
@@ -622,12 +630,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ result: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { result: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { result: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   resultNonNull: <
     $SelectionSet extends SelectionSets.Query<
@@ -637,12 +644,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ resultNonNull: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { resultNonNull: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { resultNonNull: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   string: <
     $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['string'],
@@ -650,12 +656,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ string: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { string: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { string: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   stringWithArgEnum: <
     $SelectionSet extends SelectionSets.Query<
@@ -665,12 +670,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ stringWithArgEnum: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { stringWithArgEnum: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { stringWithArgEnum: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   stringWithArgInputObject: <
     $SelectionSet extends SelectionSets.Query<
@@ -683,12 +687,11 @@ export interface QueryBuilder {
       { stringWithArgInputObject: $SelectionSet },
       $$Schema.Schema
     >,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { stringWithArgInputObject: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { stringWithArgInputObject: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   stringWithArgInputObjectEnum: <
     $SelectionSet extends SelectionSets.Query<
@@ -701,12 +704,11 @@ export interface QueryBuilder {
       { stringWithArgInputObjectEnum: $SelectionSet },
       $$Schema.Schema
     >,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { stringWithArgInputObjectEnum: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { stringWithArgInputObjectEnum: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   stringWithArgInputObjectRequired: <
     $SelectionSet extends SelectionSets.Query<
@@ -719,12 +721,11 @@ export interface QueryBuilder {
       { stringWithArgInputObjectRequired: $SelectionSet },
       $$Schema.Schema
     >,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { stringWithArgInputObjectRequired: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { stringWithArgInputObjectRequired: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   stringWithArgs: <
     $SelectionSet extends SelectionSets.Query<
@@ -734,12 +735,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ stringWithArgs: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { stringWithArgs: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { stringWithArgs: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   stringWithListArg: <
     $SelectionSet extends SelectionSets.Query<
@@ -749,12 +749,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ stringWithListArg: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { stringWithListArg: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { stringWithListArg: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   stringWithListArgRequired: <
     $SelectionSet extends SelectionSets.Query<
@@ -767,12 +766,11 @@ export interface QueryBuilder {
       { stringWithListArgRequired: $SelectionSet },
       $$Schema.Schema
     >,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { stringWithListArgRequired: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { stringWithListArgRequired: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   stringWithRequiredArg: <
     $SelectionSet extends SelectionSets.Query<
@@ -785,12 +783,11 @@ export interface QueryBuilder {
       { stringWithRequiredArg: $SelectionSet },
       $$Schema.Schema
     >,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { stringWithRequiredArg: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { stringWithRequiredArg: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   unionFooBar: <
     $SelectionSet extends SelectionSets.Query<
@@ -800,12 +797,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ unionFooBar: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { unionFooBar: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { unionFooBar: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   unionFooBarNonNull: <
     $SelectionSet extends SelectionSets.Query<
@@ -815,12 +811,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ unionFooBarNonNull: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { unionFooBarNonNull: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { unionFooBarNonNull: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   unionFooBarWithArgs: <
     $SelectionSet extends SelectionSets.Query<
@@ -830,12 +825,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ unionFooBarWithArgs: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { unionFooBarWithArgs: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { unionFooBarWithArgs: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   unionObject: <
     $SelectionSet extends SelectionSets.Query<
@@ -845,12 +839,11 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ unionObject: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { unionObject: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { unionObject: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
   unionObjectNonNull: <
     $SelectionSet extends SelectionSets.Query<
@@ -860,27 +853,57 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ unionObjectNonNull: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { unionObjectNonNull: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['query'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { unionObjectNonNull: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['query'],
+      $TypeInputsIndex
+    >
   >
 }
 
+/**
+ * Static query document builder instance.
+ *
+ * @example
+ * ```ts
+ * import { query } from './generated/document.js'
+ *
+ * const myQuery = query.user({ id: true, name: true })
+ * ```
+ */
 export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY) as any
+/**
+ * Static mutation builder for compile-time GraphQL document generation.
+ *
+ * @remarks
+ * Each field method generates a fully typed GraphQL mutation document with:
+ * - Type-safe selection sets and input types
+ * - Automatic variable inference from `$var` usage
+ * - Compile-time validation of mutations
+ * - Zero runtime overhead - documents are generated at build time
+ *
+ * @example
+ * ```ts
+ * import { Var } from 'graffle'
+ *
+ * const createUserDoc = mutation.createUser({
+ *   $: { input: $var },
+ *   id: true,
+ *   name: true
+ * })
+ * // Generates: mutation ($input: CreateUserInput!) { createUser(input: $input) { id name } }
+ * ```
+ */
 export interface MutationBuilder {
   id: <$SelectionSet extends SelectionSets.Mutation<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['id']>(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ id: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { id: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['mutation'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { id: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['mutation'],
+      $TypeInputsIndex
+    >
   >
   idNonNull: <
     $SelectionSet extends SelectionSets.Mutation<
@@ -890,13 +913,25 @@ export interface MutationBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ idNonNull: $SelectionSet }, $$Schema.Schema>,
-    $SelectionSet extends undefined ? {}
-      : $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
-        { idNonNull: $SelectionSet },
-        ArgumentsMap.ArgumentsMap['mutation'],
-        $TypeInputsIndex
-      >
+    $$Utilities.DocumentBuilderKit.Var.Infer<
+      { idNonNull: Exclude<$SelectionSet, undefined> },
+      ArgumentsMap.ArgumentsMap['mutation'],
+      $TypeInputsIndex
+    >
   >
 }
 
+/**
+ * Static mutation document builder instance.
+ *
+ * @example
+ * ```ts
+ * import { mutation } from './generated/document.js'
+ *
+ * const myMutation = mutation.createUser({
+ *   $: { input: { name: 'Alice', email: 'alice@example.com' } },
+ *   id: true
+ * })
+ * ```
+ */
 export const mutation: MutationBuilder = createStaticRootType(OperationTypeNode.MUTATION) as any

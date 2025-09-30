@@ -7,12 +7,47 @@ import type * as $$Schema from './schema.js'
 import type * as SelectionSets from './selection-sets.js'
 import type { $TypeInputsIndex } from './type-inputs-index.js'
 
+/**
+ * Static query builder for compile-time GraphQL document generation.
+ *
+ * @remarks
+ * Each field method generates a fully typed GraphQL document string with:
+ * - Type-safe selection sets matching your schema
+ * - Automatic variable inference from `$var` usage
+ * - Compile-time validation of field selections
+ * - Zero runtime overhead - documents are generated at build time
+ *
+ * @example Basic query
+ * ```ts
+ * const getUserDoc = query.user({
+ *   id: true,
+ *   name: true,
+ *   email: true
+ * })
+ * // Generates: query { user { id name email } }
+ * ```
+ *
+ * @example With variables
+ * ```ts
+ * import { Var } from 'graffle'
+ *
+ * const getUserByIdDoc = query.user({
+ *   $: { id: $var },
+ *   name: true,
+ *   posts: { title: true }
+ * })
+ * // Generates: query ($id: ID!) { user(id: $id) { name posts { title } } }
+ * // Variables type: { id: string }
+ * ```
+ *
+ * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
+ */
 export interface QueryBuilder {
   id: <$SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['id']>(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ id: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
+    $$Utilities.DocumentBuilderKit.Var.Infer<
       { id: Exclude<$SelectionSet, undefined> },
       ArgumentsMap.ArgumentsMap['query'],
       $TypeInputsIndex
@@ -24,7 +59,7 @@ export interface QueryBuilder {
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ idNonNull: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.InferOperationVariablesFromSelectionSet<
+    $$Utilities.DocumentBuilderKit.Var.Infer<
       { idNonNull: Exclude<$SelectionSet, undefined> },
       ArgumentsMap.ArgumentsMap['query'],
       $TypeInputsIndex
@@ -32,4 +67,14 @@ export interface QueryBuilder {
   >
 }
 
+/**
+ * Static query document builder instance.
+ *
+ * @example
+ * ```ts
+ * import { query } from './generated/document.js'
+ *
+ * const myQuery = query.user({ id: true, name: true })
+ * ```
+ */
 export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY) as any

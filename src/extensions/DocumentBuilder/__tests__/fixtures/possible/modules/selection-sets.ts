@@ -283,6 +283,12 @@ export interface Query<
     | Query.objectNested$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.objectNested<_$Context>>
   /**
+   * Select the `objectNestedWithArgs` field on the `Query` object. Its type is `ObjectNestedWithArgs` (a `OutputObject` kind of type).
+   */
+  objectNestedWithArgs?:
+    | Query.objectNestedWithArgs$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.objectNestedWithArgs<_$Context>>
+  /**
    * Select the `objectNonNull` field on the `Query` object. Its type is `Object1` (a `OutputObject` kind of type).
    */
   objectNonNull?:
@@ -449,7 +455,7 @@ export namespace Query {
       | $NamedTypes.$InputObjectNested<_$Context>
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -490,7 +496,7 @@ export namespace Query {
   > {
     input:
       | $NamedTypes.$InputObjectNestedNonNull<_$Context>
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -563,7 +569,7 @@ export namespace Query {
       | $NamedTypes.$InputObjectCircular<_$Context>
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -700,7 +706,7 @@ export namespace Query {
       >
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -745,7 +751,7 @@ export namespace Query {
       | $NamedTypes.$InputObject<_$Context>
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -796,11 +802,11 @@ export namespace Query {
         >
         | undefined
         | null
-        | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+        | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
       >
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -846,7 +852,7 @@ export namespace Query {
           _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
         >
       >
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -894,9 +900,9 @@ export namespace Query {
         >
         | undefined
         | null
-        | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+        | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
       >
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -944,9 +950,9 @@ export namespace Query {
         >
         | undefined
         | null
-        | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+        | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
       >
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -1184,7 +1190,7 @@ export namespace Query {
       | string
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -1311,7 +1317,7 @@ export namespace Query {
       | $NamedTypes.$ChildAInterfaceHierarchyMember
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -1353,7 +1359,7 @@ export namespace Query {
       | $NamedTypes.$ChildBInterfaceHierarchyMember
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -1395,7 +1401,7 @@ export namespace Query {
       | $NamedTypes.$GrandparentInterfaceHierarchyMember
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -1437,7 +1443,7 @@ export namespace Query {
       | $NamedTypes.$ParentInterfaceHierarchyMember
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -1501,7 +1507,9 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    id: string | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+    id:
+      | string
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -1766,6 +1774,32 @@ export namespace Query {
 
   // --------------------------------------------------------------------------------------------------
 
+  export type objectNestedWithArgs<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = objectNestedWithArgs$SelectionSet<_$Context>
+
+  export interface objectNestedWithArgs$SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$ObjectNestedWithArgs<_$Context> {}
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `objectNestedWithArgs` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type objectNestedWithArgs$Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = $$Utilities.Simplify<
+    objectNestedWithArgs$SelectionSet<_$Context>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
   export type objectNonNull<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
@@ -1815,27 +1849,27 @@ export namespace Query {
       | boolean
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
     float?:
       | number
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
     id?:
       | string
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
     int?:
       | number
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
     string?:
       | string
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -1875,7 +1909,7 @@ export namespace Query {
   > {
     $case:
       | $NamedTypes.$Case
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -1917,7 +1951,7 @@ export namespace Query {
       | $NamedTypes.$Case
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -1990,7 +2024,7 @@ export namespace Query {
       | $NamedTypes.$ABCEnum
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -2035,7 +2069,7 @@ export namespace Query {
       | $NamedTypes.$InputObject<_$Context>
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -2076,7 +2110,7 @@ export namespace Query {
   > {
     input:
       | $NamedTypes.$InputObjectEnum<_$Context>
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -2116,7 +2150,7 @@ export namespace Query {
   > {
     input:
       | $NamedTypes.$InputObject<_$Context>
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -2160,17 +2194,17 @@ export namespace Query {
       | boolean
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
     float?:
       | number
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
     id?:
       | string
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
     /**
      * @deprecated Example of argument deprecation reason here.
      */
@@ -2178,7 +2212,7 @@ export namespace Query {
       | number
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
     /**
      * Example of some argument documentation here.
      */
@@ -2186,7 +2220,7 @@ export namespace Query {
       | string
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -2232,11 +2266,11 @@ export namespace Query {
         | number
         | undefined
         | null
-        | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+        | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
       >
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -2280,9 +2314,9 @@ export namespace Query {
         | number
         | undefined
         | null
-        | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+        | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
       >
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -2322,7 +2356,7 @@ export namespace Query {
   > {
     string:
       | string
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -2416,7 +2450,7 @@ export namespace Query {
       | string
       | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
   }
 
   // --- expanded ---
@@ -2672,7 +2706,7 @@ export interface InputObject<
     | $NamedTypes.$ABCEnum
     | undefined
     | null
-    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
   date?:
     | $$Utilities.Schema.Scalar.GetDecoded<
       $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
@@ -2682,7 +2716,7 @@ export interface InputObject<
     >
     | undefined
     | null
-    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
   dateRequired:
     | $$Utilities.Schema.Scalar.GetDecoded<
       $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
@@ -2690,15 +2724,15 @@ export interface InputObject<
         _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
       >
     >
-    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
   id?:
     | string
     | undefined
     | null
-    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
   idRequired:
     | string
-    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
 }
 
 export interface InputObjectCircular<
@@ -2709,7 +2743,7 @@ export interface InputObjectCircular<
     | $NamedTypes.$InputObjectCircular<_$Context>
     | undefined
     | null
-    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
   date?:
     | $$Utilities.Schema.Scalar.GetDecoded<
       $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
@@ -2719,7 +2753,7 @@ export interface InputObjectCircular<
     >
     | undefined
     | null
-    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
 }
 
 export interface InputObjectEnum<
@@ -2730,7 +2764,7 @@ export interface InputObjectEnum<
     | $NamedTypes.$ABCEnum
     | undefined
     | null
-    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
 }
 
 export interface InputObjectNested<
@@ -2741,7 +2775,7 @@ export interface InputObjectNested<
     | $NamedTypes.$InputObject<_$Context>
     | undefined
     | null
-    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
 }
 
 export interface InputObjectNestedNonNull<
@@ -2750,7 +2784,7 @@ export interface InputObjectNestedNonNull<
 > {
   InputObject:
     | $NamedTypes.$InputObject<_$Context>
-    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
+    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
 }
 
 //
@@ -4380,6 +4414,166 @@ export namespace ObjectNested {
   >
 }
 
+//                                        ObjectNestedWithArgs
+// --------------------------------------------------------------------------------------------------
+//
+
+// ----------------------------------------| Entrypoint Interface |
+
+export interface ObjectNestedWithArgs<
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
+  /**
+   * Select the `id` field on the `ObjectNestedWithArgs` object. Its type is `ID` (a `ScalarStandard` kind of type).
+   */
+  id?:
+    | ObjectNestedWithArgs.id$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectNestedWithArgs.id<_$Context>>
+  /**
+   * Select the `object` field on the `ObjectNestedWithArgs` object. Its type is `Object1` (a `OutputObject` kind of type).
+   */
+  object?:
+    | ObjectNestedWithArgs.$object$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectNestedWithArgs.$object<_$Context>>
+
+  /**
+   * Inline fragments for field groups.
+   *
+   * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
+   * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
+   *
+   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   */
+  ___?:
+    | ObjectNestedWithArgs$FragmentInline<_$Context>
+    | ObjectNestedWithArgs$FragmentInline<_$Context>[]
+
+  /**
+   * A meta field. Is the name of the type being selected.
+   *
+   * @see https://graphql.org/learn/queries/#meta-fields
+   */
+  __typename?:
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator$Expanded
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
+      $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    >
+}
+
+export interface ObjectNestedWithArgs$FragmentInline<
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends
+  ObjectNestedWithArgs<_$Context>,
+  $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields
+{
+}
+
+// ----------------------------------------| Fields |
+
+export namespace ObjectNestedWithArgs {
+  export type id<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | id$SelectionSet<_$Context>
+
+  export interface id$SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+    /**
+     * Arguments for `id` field. No arguments are required so you may omit this.
+     */
+    $?: id$Arguments<_$Context>
+  }
+
+  export interface id$Arguments<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > {
+    filter?:
+      | string
+      | undefined
+      | null
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+  }
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `id` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type id$Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | id$SelectionSet<_$Context>
+  >
+
+  // --------------------------------------------------------------------------------------------------
+
+  export type $object<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = $object$SelectionSet<_$Context>
+
+  export interface $object$SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Object1<_$Context> {
+    /**
+     * Arguments for `object` field. No arguments are required so you may omit this.
+     */
+    $?: $object$Arguments<_$Context>
+  }
+
+  export interface $object$Arguments<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > {
+    boolean?:
+      | boolean
+      | undefined
+      | null
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+    float?:
+      | number
+      | undefined
+      | null
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+    int?:
+      | number
+      | undefined
+      | null
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+    string?:
+      | string
+      | undefined
+      | null
+      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker : never)
+  }
+
+  // --- expanded ---
+
+  /**
+   * This is the "expanded" version of the `$object` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $object$Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = $$Utilities.Simplify<
+    $object$SelectionSet<_$Context>
+  >
+}
+
 //                                            ObjectParent
 // --------------------------------------------------------------------------------------------------
 //
@@ -5701,6 +5895,10 @@ export namespace $NamedTypes {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = ObjectNested<_$Context>
+  export type $ObjectNestedWithArgs<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = ObjectNestedWithArgs<_$Context>
   export type $ObjectParent<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,

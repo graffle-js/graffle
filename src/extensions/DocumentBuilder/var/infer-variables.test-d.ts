@@ -3,12 +3,12 @@ import type { ArgumentsMap as ArgumentsMapWithScalars } from '../__tests__/fixtu
 import type { $TypeInputsIndex as TypeInputsIndexWithScalars } from '../__tests__/fixtures/possible-with-scalars/modules/type-inputs-index.js'
 import type { ArgumentsMap } from '../__tests__/fixtures/possible/modules/arguments-map.js'
 import type { $TypeInputsIndex as TypeInputsIndex } from '../__tests__/fixtures/possible/modules/type-inputs-index.js'
-import { $var } from '../variable.js'
-import type { Infer as $ } from './__.js'
+import type { InferVariables as $ } from './infer-variables.js'
+import { $var } from './var.js'
 
 // Create test variable instances
-const $varWithDefaultHello = $var.withDefault('hello')
-const $varWithDefault42 = $var.withDefault(42)
+const $varWithDefaultHello = $var.default('hello')
+const $varWithDefault42 = $var.default(42)
 
 // dprint-ignore
 type _1 = Ts.Cases<

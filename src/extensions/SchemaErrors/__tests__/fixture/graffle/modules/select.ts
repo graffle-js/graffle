@@ -131,6 +131,12 @@ export namespace Select {
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['ObjectNested']
     >
+  export type ObjectNestedWithArgs<$SelectionSet extends $$SelectionSets.ObjectNestedWithArgs> =
+    $$Utilities.DocumentBuilderKit.InferResult.OutputObjectLike<
+      $SelectionSet,
+      $$Schema.Schema,
+      $$Schema.Schema['allTypes']['ObjectNestedWithArgs']
+    >
   export type ObjectParent<$SelectionSet extends $$SelectionSets.ObjectParent> =
     $$Utilities.DocumentBuilderKit.InferResult.OutputObjectLike<
       $SelectionSet,

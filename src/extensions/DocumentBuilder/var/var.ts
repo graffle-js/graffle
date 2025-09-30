@@ -5,7 +5,21 @@
  * Provides compile-time variable inference and validation.
  */
 
+import type { Obj } from '@wollybeard/kit'
+
 const VarSymbol = Symbol.for(`graffle.var`)
+
+export interface BuilderState {
+  default: undefined | unknown
+  required: undefined | boolean
+  name: undefined | string
+}
+
+export interface BuilderStateEmpty extends BuilderState {
+  default: undefined
+  required: undefined
+  name: undefined
+}
 
 /**
  * Type-safe variable marker for GraphQL document generation.
@@ -17,26 +31,20 @@ const VarSymbol = Symbol.for(`graffle.var`)
  *
  * State is stored directly on the `_` property for simple type-level access without helper types.
  *
- * @typeParam TDefault - The default value type for the variable (undefined if no default)
- * @typeParam TRequired - Whether the variable is required (boolean literal type)
- * @typeParam TName - Custom variable name (string literal type or undefined)
+ * @typeParam $State - The builder state containing default, required, and name properties
  *
  * @example Type-level tracking
  * ```ts
  * // The type system tracks all variable metadata
- * const marker = $var.name('userId').withDefault('123').required
- * // Type: VariableMarker<'123', true, 'userId'>
+ * const marker = $var.name('userId').default('123').required
+ * // Type: VariableMarker<{ default: '123', required: true, name: 'userId' }>
  *
  * // This enables compile-time variable inference
  * const doc = MySchema.query.user({ $: { id: marker } })
  * // Variables type inferred as: { userId: string }
  * ```
  */
-export interface VariableMarker<
-  TDefault = undefined,
-  TRequired extends boolean = false,
-  TName extends string | undefined = undefined,
-> {
+export interface VariableMarker<$State extends BuilderState = BuilderStateEmpty> {
   /**
    * Internal marker for runtime detection
    */
@@ -45,18 +53,14 @@ export interface VariableMarker<
   /**
    * Type-level state stored directly on object
    */
-  readonly _: {
-    readonly default: TDefault
-    readonly required: TRequired
-    readonly name: TName
-  }
+  readonly _: $State
 
   /**
    * Runtime state (mirrors type-level state)
    */
-  readonly _name?: TName
-  readonly _default?: TDefault
-  readonly _required?: TRequired
+  readonly _name?: $State['name']
+  readonly _default?: $State['default']
+  readonly _required?: $State['required']
 
   /**
    * Specify a custom name for the GraphQL variable.
@@ -64,76 +68,53 @@ export interface VariableMarker<
    */
   name<TNewName extends string>(
     name: TNewName,
-  ): VariableMarker<TDefault, TRequired, TNewName>
+  ): VariableMarker<Obj.ReplaceProperty<$State, 'name', TNewName>>
 
   /**
    * Specify a default value for the GraphQL variable.
    * The variable will be optional with this default in the GraphQL operation.
    */
-  withDefault<T>(
+  default<T>(
     value: T,
-  ): VariableMarker<T, TRequired, TName>
-
-  /**
-   * Alias for withDefault() - specify a default value for the GraphQL variable.
-   * @deprecated Use withDefault() instead to avoid reserved keyword issues
-   */
-  ['default']<T>(
-    value: T,
-  ): VariableMarker<T, TRequired, TName>
+  ): VariableMarker<Obj.ReplaceProperty<$State, 'default', T>>
 
   /**
    * Force an optional argument to be required in the GraphQL variables.
    * Useful when you want to make an optional GraphQL field required at the client level.
    */
-  readonly required: VariableMarker<TDefault, true, TName>
+  readonly required: VariableMarker<Obj.ReplaceProperty<$State, 'required', true>>
 }
 
 /**
  * Create a new variable marker
  */
-const createVariableMarker = <
-  TDefault = undefined,
-  TRequired extends boolean = false,
-  TName extends string | undefined = undefined,
->(
-  state: { name?: TName; default?: TDefault; required?: TRequired } = {},
-): VariableMarker<TDefault, TRequired, TName> => {
-  const marker: VariableMarker<TDefault, TRequired, TName> = {
+const createVariableMarker = <$State extends BuilderState = BuilderStateEmpty>(
+  state: $State = { default: undefined, required: undefined, name: undefined } as $State,
+): VariableMarker<$State> => {
+  const marker: VariableMarker<$State> = {
     [VarSymbol]: true,
-    _: {
-      default: state.default as TDefault,
-      required: (state.required ?? false) as TRequired,
-      name: state.name as TName,
-    },
+    _: state,
     _name: state.name,
     _default: state.default,
     _required: state.required,
 
     name(name) {
       return createVariableMarker({
+        ...state,
         name,
-        default: state.default,
-        required: state.required,
       }) as any
     },
 
-    withDefault(value) {
+    default(value) {
       return createVariableMarker({
-        name: state.name,
+        ...state,
         default: value,
-        required: state.required,
       }) as any
-    },
-
-    ['default'](value) {
-      return this.withDefault(value)
     },
 
     get required() {
       return createVariableMarker({
-        name: state.name,
-        default: state.default,
+        ...state,
         required: true,
       }) as any
     },
@@ -158,11 +139,11 @@ const createVariableMarker = <
  *
  * @example Basic usage
  * ```ts
- * import { $var } from 'graffle'
+ * import { Var } from 'graffle'
  *
  * // Use argument name as variable name
  * const doc = Schema.query.users({
- *   $: { first: $var }  // Variable: { first: number }
+ *   $: { first: Var.$var }  // Variable: { first: number }
  * })
  * ```
  *
@@ -170,7 +151,7 @@ const createVariableMarker = <
  * ```ts
  * // Rename variable for clarity
  * const doc = Schema.query.users({
- *   $: { first: $var.name('limit') }  // Variable: { limit: number }
+ *   $: { first: Var.$var.name('limit') }  // Variable: { limit: number }
  * })
  * ```
  *
@@ -178,7 +159,7 @@ const createVariableMarker = <
  * ```ts
  * // Make variable optional with default
  * const doc = Schema.query.users({
- *   $: { first: $var.withDefault(10) }  // Variable: { first?: number }
+ *   $: { first: Var.$var.default(10) }  // Variable: { first?: number }
  * })
  * ```
  *
@@ -187,8 +168,8 @@ const createVariableMarker = <
  * // Force optional GraphQL argument to be required
  * const doc = Schema.query.search({
  *   $: {
- *     query: $var.required,  // Variable: { query: string } (required)
- *     limit: $var            // Variable: { limit?: number } (optional)
+ *     query: Var.$var.required,  // Variable: { query: string } (required)
+ *     limit: Var.$var            // Variable: { limit?: number } (optional)
  *   }
  * })
  * ```
@@ -198,9 +179,9 @@ const createVariableMarker = <
  * // Combine multiple modifiers
  * const doc = Schema.query.users({
  *   $: {
- *     first: $var
+ *     first: Var.$var
  *       .name('pageSize')
- *       .withDefault(20)
+ *       .default(20)
  *       .required  // Variable: { pageSize: number } with default 20
  *   }
  * })
@@ -211,8 +192,8 @@ const createVariableMarker = <
  * // Variables respect custom scalar types
  * const doc = Schema.query.events({
  *   $: {
- *     after: $var,  // Variable: { after: Date } if Date is custom scalar
- *     before: $var.withDefault(new Date())
+ *     after: Var.$var,  // Variable: { after: Date } if Date is custom scalar
+ *     before: Var.$var.default(new Date())
  *   }
  * })
  * ```
@@ -252,7 +233,7 @@ export const isVariableMarker = (value: unknown): value is VariableMarker => {
  *
  * @example
  * ```ts
- * const marker = $var.name('userId').withDefault('123')
+ * const marker = $var.name('userId').default('123')
  * const info = extractVariableInfo(marker, 'id')
  * // Returns: { name: 'userId', hasDefault: true, defaultValue: '123', isRequired: false }
  * ```
