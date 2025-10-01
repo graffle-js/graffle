@@ -53,7 +53,9 @@ interface StaticDocumentContext {
  */
 export interface QueryBuilder {
   battles: <
-    $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>["battles"],
+    const $SelectionSet extends SelectionSets.Query<
+      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+    >["battles"],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
@@ -70,7 +72,9 @@ export interface QueryBuilder {
     >
   >;
   beings: <
-    $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>["beings"],
+    const $SelectionSet extends SelectionSets.Query<
+      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+    >["beings"],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
@@ -87,7 +91,7 @@ export interface QueryBuilder {
     >
   >;
   pokemonByName: <
-    $SelectionSet extends SelectionSets.Query<
+    const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >["pokemonByName"],
   >(
@@ -106,7 +110,9 @@ export interface QueryBuilder {
     >
   >;
   pokemons: <
-    $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>["pokemons"],
+    const $SelectionSet extends SelectionSets.Query<
+      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+    >["pokemons"],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
@@ -123,7 +129,7 @@ export interface QueryBuilder {
     >
   >;
   trainerByName: <
-    $SelectionSet extends SelectionSets.Query<
+    const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >["trainerByName"],
   >(
@@ -142,7 +148,9 @@ export interface QueryBuilder {
     >
   >;
   trainers: <
-    $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>["trainers"],
+    const $SelectionSet extends SelectionSets.Query<
+      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+    >["trainers"],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
@@ -195,7 +203,7 @@ export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY)
  */
 export interface MutationBuilder {
   addPokemon: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >["addPokemon"],
   >(

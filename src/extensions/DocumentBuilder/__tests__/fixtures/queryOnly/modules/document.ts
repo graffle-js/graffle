@@ -52,7 +52,9 @@ interface StaticDocumentContext {
  * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
  */
 export interface QueryBuilder {
-  id: <$SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['id']>(
+  id: <
+    const $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['id'],
+  >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
@@ -68,7 +70,9 @@ export interface QueryBuilder {
     >
   >
   idNonNull: <
-    $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['idNonNull'],
+    const $SelectionSet extends SelectionSets.Query<
+      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+    >['idNonNull'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<

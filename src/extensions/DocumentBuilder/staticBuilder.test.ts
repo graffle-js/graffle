@@ -141,9 +141,6 @@ test('type output inference', () => {
     // id: ['id2', {$:{filter:$var}}]
   })
   Ts.assertEqual<Grafaid.Document.Typed.String<
-    // TODO: Type widening issue - alias key becomes index signature instead of literal 'object2'
-    // curerntly returns this:
-    // { objectNestedWithArgs: { [x: string]: { id: string | null } | null } | null },
     { objectNestedWithArgs: { object2: { id: string | null } | null } | null },
     { int?: number | undefined }
   >>()(q20)

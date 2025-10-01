@@ -15,6 +15,7 @@
  * ArgumentsMap provides a complete type-level representation of all arguments in your GraphQL schema. It enables the Static Document Builder to infer variable types and requirements from your selection sets when you use `$var` placeholders.
  *
  * This module is generated from your GraphQL schema and creates TypeScript interfaces that encode:
+ *
  * - Which fields accept arguments
  * - The types and nullability of those arguments
  * - Nested argument structures in complex queries
@@ -103,7 +104,9 @@
  * Where `ObjectNestedWithArgs` is defined elsewhere:
  *
  * ```typescript
- * export interface ObjectNestedWithArgs extends $$Utilities.SchemaDrivenDataMap.OutputObject {
+ * export interface ObjectNestedWithArgs
+ *   extends $$Utilities.SchemaDrivenDataMap.OutputObject
+ * {
  *   readonly f: {
  *     readonly object: {
  *       readonly a: {

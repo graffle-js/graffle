@@ -20,6 +20,7 @@ hero:
     src: /_assets/logo-dark-squared.png
     alt: Graffle
 features:
+  # Row 1
   - title: Spec Compliant
     details: Graffle complies with the <a href="https://graphql.github.io/graphql-over-http">GraphQL over HTTP</a> and <a href="https://github.com/jaydenseric/graphql-multipart-request-spec">GraphQL Multipart Request</a> specifications.
     icon: 🎫
@@ -32,6 +33,7 @@ features:
   - title: Multi-Transport
     details: Not just a great way to query GraphQL APIs. Execute documents against in-memory schemas just as easily with the same interface.
     icon: 🚛
+  # Row 2
   - title: Custom Scalars
     details: Easily add client-side codecs for custom scalars in the schema to enable automatic encoding of arguments and decoding of data on every request.
     icon: 🧙
@@ -44,6 +46,10 @@ features:
   - title: Schema Errors<br/><span style="opacity:0.25;">( Extension )</span>
     details: First class support for schemas that have modelled errors into their design. Result Fields can be made to throw on errors or automatically map to error classes.
     icon: 🎲
+  # Row 3
+  # - title: Static Document Builder
+  #   details: Generate typed GraphQL documents at compile-time without a client instance. Perfect for passing to other GraphQL clients or building tools. Zero runtime overhead.
+  #   icon: 📄
 ---
 
 <script setup>

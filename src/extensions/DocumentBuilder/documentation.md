@@ -19,6 +19,40 @@ In addition to using this extension programmatically you must also run the [gene
 pnpm graffle --schema ./my-schema.graphql
 ```
 
+## Static Document Builder
+
+Generate typed GraphQL document strings at compile-time without a client instance. Perfect for passing typed documents to other GraphQL clients (graphql-request, urql, Apollo, etc.) or building tools.
+
+### How it works
+
+After running the generator, import `query`, `mutation`, or `subscription` builders from your generated code. Call methods to generate `TypedDocument.String` objects with the GraphQL string and full TypeScript types.
+
+```ts
+import { query } from './graffle/modules/document.js'
+import { $var } from 'graffle/extensions/document-builder/var'
+
+const doc = query.user({
+  $: { id: $var },  // Variables automatically extracted
+  name: true,
+  email: true
+})
+
+// doc.document → GraphQL string
+// doc → typed as TypedDocument.String<ResultType, VariablesType>
+```
+
+### Key Features
+
+- **Variables**: Use `$var` marker for automatic extraction with proper types
+- **Modifiers**: Control nullability (`$var.optional`) and lists (`$var.list`)
+- **Aliases**: Request same field multiple times with different arguments
+- **Nested Arguments**: Arguments work at any nesting level
+- **Type Inference**: Result types automatically inferred from selections
+- **Zero Runtime**: Documents generated at compile-time
+
+**Example:**
+- [Complete Example](../../../examples/55_document-builder/document-builder_static.ts)
+
 ## GraphQL Feature Mapping
 
 ### Aliases

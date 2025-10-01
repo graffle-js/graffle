@@ -39,7 +39,11 @@ interface StaticDocumentContext {
  * ```
  */
 export interface MutationBuilder {
-  id: <$SelectionSet extends SelectionSets.Mutation<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['id']>(
+  id: <
+    const $SelectionSet extends SelectionSets.Mutation<
+      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+    >['id'],
+  >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
@@ -55,7 +59,7 @@ export interface MutationBuilder {
     >
   >
   idNonNull: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['idNonNull'],
   >(

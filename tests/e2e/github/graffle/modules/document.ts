@@ -53,7 +53,7 @@ interface StaticDocumentContext {
  */
 export interface QueryBuilder {
   codeOfConduct: <
-    $SelectionSet extends SelectionSets.Query<
+    const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['codeOfConduct'],
   >(
@@ -72,7 +72,7 @@ export interface QueryBuilder {
     >
   >
   codesOfConduct: <
-    $SelectionSet extends SelectionSets.Query<
+    const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['codesOfConduct'],
   >(
@@ -91,7 +91,9 @@ export interface QueryBuilder {
     >
   >
   enterprise: <
-    $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['enterprise'],
+    const $SelectionSet extends SelectionSets.Query<
+      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+    >['enterprise'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
@@ -108,7 +110,7 @@ export interface QueryBuilder {
     >
   >
   enterpriseAdministratorInvitation: <
-    $SelectionSet extends SelectionSets.Query<
+    const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['enterpriseAdministratorInvitation'],
   >(
@@ -130,7 +132,7 @@ export interface QueryBuilder {
     >
   >
   enterpriseAdministratorInvitationByToken: <
-    $SelectionSet extends SelectionSets.Query<
+    const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['enterpriseAdministratorInvitationByToken'],
   >(
@@ -152,7 +154,7 @@ export interface QueryBuilder {
     >
   >
   enterpriseMemberInvitation: <
-    $SelectionSet extends SelectionSets.Query<
+    const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['enterpriseMemberInvitation'],
   >(
@@ -174,7 +176,7 @@ export interface QueryBuilder {
     >
   >
   enterpriseMemberInvitationByToken: <
-    $SelectionSet extends SelectionSets.Query<
+    const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['enterpriseMemberInvitationByToken'],
   >(
@@ -195,7 +197,9 @@ export interface QueryBuilder {
       >
     >
   >
-  id: <$SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['id']>(
+  id: <
+    const $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['id'],
+  >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
@@ -211,7 +215,9 @@ export interface QueryBuilder {
     >
   >
   license: <
-    $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['license'],
+    const $SelectionSet extends SelectionSets.Query<
+      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+    >['license'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
@@ -228,7 +234,9 @@ export interface QueryBuilder {
     >
   >
   licenses: <
-    $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['licenses'],
+    const $SelectionSet extends SelectionSets.Query<
+      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+    >['licenses'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
@@ -245,7 +253,7 @@ export interface QueryBuilder {
     >
   >
   marketplaceCategories: <
-    $SelectionSet extends SelectionSets.Query<
+    const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['marketplaceCategories'],
   >(
@@ -267,7 +275,7 @@ export interface QueryBuilder {
     >
   >
   marketplaceCategory: <
-    $SelectionSet extends SelectionSets.Query<
+    const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['marketplaceCategory'],
   >(
@@ -286,7 +294,7 @@ export interface QueryBuilder {
     >
   >
   marketplaceListing: <
-    $SelectionSet extends SelectionSets.Query<
+    const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['marketplaceListing'],
   >(
@@ -305,7 +313,7 @@ export interface QueryBuilder {
     >
   >
   marketplaceListings: <
-    $SelectionSet extends SelectionSets.Query<
+    const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['marketplaceListings'],
   >(
@@ -323,7 +331,9 @@ export interface QueryBuilder {
       >
     >
   >
-  meta: <$SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['meta']>(
+  meta: <
+    const $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['meta'],
+  >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
@@ -338,7 +348,9 @@ export interface QueryBuilder {
       >
     >
   >
-  node: <$SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['node']>(
+  node: <
+    const $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['node'],
+  >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
@@ -354,7 +366,9 @@ export interface QueryBuilder {
     >
   >
   nodes: <
-    $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['nodes'],
+    const $SelectionSet extends SelectionSets.Query<
+      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+    >['nodes'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
@@ -371,7 +385,7 @@ export interface QueryBuilder {
     >
   >
   organization: <
-    $SelectionSet extends SelectionSets.Query<
+    const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['organization'],
   >(
@@ -390,7 +404,9 @@ export interface QueryBuilder {
     >
   >
   rateLimit: <
-    $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['rateLimit'],
+    const $SelectionSet extends SelectionSets.Query<
+      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+    >['rateLimit'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
@@ -407,7 +423,9 @@ export interface QueryBuilder {
     >
   >
   relay: <
-    $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['relay'],
+    const $SelectionSet extends SelectionSets.Query<
+      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+    >['relay'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
@@ -424,7 +442,9 @@ export interface QueryBuilder {
     >
   >
   repository: <
-    $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['repository'],
+    const $SelectionSet extends SelectionSets.Query<
+      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+    >['repository'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
@@ -441,7 +461,7 @@ export interface QueryBuilder {
     >
   >
   repositoryOwner: <
-    $SelectionSet extends SelectionSets.Query<
+    const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['repositoryOwner'],
   >(
@@ -460,7 +480,9 @@ export interface QueryBuilder {
     >
   >
   resource: <
-    $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['resource'],
+    const $SelectionSet extends SelectionSets.Query<
+      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+    >['resource'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
@@ -477,7 +499,9 @@ export interface QueryBuilder {
     >
   >
   search: <
-    $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['search'],
+    const $SelectionSet extends SelectionSets.Query<
+      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+    >['search'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
@@ -494,7 +518,7 @@ export interface QueryBuilder {
     >
   >
   securityAdvisories: <
-    $SelectionSet extends SelectionSets.Query<
+    const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['securityAdvisories'],
   >(
@@ -513,7 +537,7 @@ export interface QueryBuilder {
     >
   >
   securityAdvisory: <
-    $SelectionSet extends SelectionSets.Query<
+    const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['securityAdvisory'],
   >(
@@ -532,7 +556,7 @@ export interface QueryBuilder {
     >
   >
   securityVulnerabilities: <
-    $SelectionSet extends SelectionSets.Query<
+    const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['securityVulnerabilities'],
   >(
@@ -554,7 +578,7 @@ export interface QueryBuilder {
     >
   >
   sponsorables: <
-    $SelectionSet extends SelectionSets.Query<
+    const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['sponsorables'],
   >(
@@ -573,7 +597,9 @@ export interface QueryBuilder {
     >
   >
   topic: <
-    $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['topic'],
+    const $SelectionSet extends SelectionSets.Query<
+      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+    >['topic'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
@@ -589,7 +615,9 @@ export interface QueryBuilder {
       >
     >
   >
-  user: <$SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['user']>(
+  user: <
+    const $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['user'],
+  >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
     $$Utilities.RequestResult.Simplify<
@@ -605,7 +633,9 @@ export interface QueryBuilder {
     >
   >
   viewer: <
-    $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['viewer'],
+    const $SelectionSet extends SelectionSets.Query<
+      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+    >['viewer'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
@@ -658,7 +688,7 @@ export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY)
  */
 export interface MutationBuilder {
   abortQueuedMigrations: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['abortQueuedMigrations'],
   >(
@@ -680,7 +710,7 @@ export interface MutationBuilder {
     >
   >
   abortRepositoryMigration: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['abortRepositoryMigration'],
   >(
@@ -702,7 +732,7 @@ export interface MutationBuilder {
     >
   >
   acceptEnterpriseAdministratorInvitation: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['acceptEnterpriseAdministratorInvitation'],
   >(
@@ -724,7 +754,7 @@ export interface MutationBuilder {
     >
   >
   acceptEnterpriseMemberInvitation: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['acceptEnterpriseMemberInvitation'],
   >(
@@ -746,7 +776,7 @@ export interface MutationBuilder {
     >
   >
   acceptTopicSuggestion: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['acceptTopicSuggestion'],
   >(
@@ -768,7 +798,7 @@ export interface MutationBuilder {
     >
   >
   accessUserNamespaceRepository: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['accessUserNamespaceRepository'],
   >(
@@ -790,7 +820,7 @@ export interface MutationBuilder {
     >
   >
   addAssigneesToAssignable: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['addAssigneesToAssignable'],
   >(
@@ -812,7 +842,7 @@ export interface MutationBuilder {
     >
   >
   addComment: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['addComment'],
   >(
@@ -831,7 +861,7 @@ export interface MutationBuilder {
     >
   >
   addDiscussionComment: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['addDiscussionComment'],
   >(
@@ -853,7 +883,7 @@ export interface MutationBuilder {
     >
   >
   addDiscussionPollVote: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['addDiscussionPollVote'],
   >(
@@ -875,7 +905,7 @@ export interface MutationBuilder {
     >
   >
   addEnterpriseOrganizationMember: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['addEnterpriseOrganizationMember'],
   >(
@@ -897,7 +927,7 @@ export interface MutationBuilder {
     >
   >
   addEnterpriseSupportEntitlement: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['addEnterpriseSupportEntitlement'],
   >(
@@ -919,7 +949,7 @@ export interface MutationBuilder {
     >
   >
   addLabelsToLabelable: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['addLabelsToLabelable'],
   >(
@@ -941,7 +971,7 @@ export interface MutationBuilder {
     >
   >
   addProjectCard: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['addProjectCard'],
   >(
@@ -960,7 +990,7 @@ export interface MutationBuilder {
     >
   >
   addProjectColumn: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['addProjectColumn'],
   >(
@@ -979,7 +1009,7 @@ export interface MutationBuilder {
     >
   >
   addProjectV2DraftIssue: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['addProjectV2DraftIssue'],
   >(
@@ -1001,7 +1031,7 @@ export interface MutationBuilder {
     >
   >
   addProjectV2ItemById: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['addProjectV2ItemById'],
   >(
@@ -1023,7 +1053,7 @@ export interface MutationBuilder {
     >
   >
   addPullRequestReview: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['addPullRequestReview'],
   >(
@@ -1045,7 +1075,7 @@ export interface MutationBuilder {
     >
   >
   addPullRequestReviewComment: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['addPullRequestReviewComment'],
   >(
@@ -1067,7 +1097,7 @@ export interface MutationBuilder {
     >
   >
   addPullRequestReviewThread: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['addPullRequestReviewThread'],
   >(
@@ -1089,7 +1119,7 @@ export interface MutationBuilder {
     >
   >
   addPullRequestReviewThreadReply: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['addPullRequestReviewThreadReply'],
   >(
@@ -1111,7 +1141,7 @@ export interface MutationBuilder {
     >
   >
   addReaction: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['addReaction'],
   >(
@@ -1130,7 +1160,9 @@ export interface MutationBuilder {
     >
   >
   addStar: <
-    $SelectionSet extends SelectionSets.Mutation<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['addStar'],
+    const $SelectionSet extends SelectionSets.Mutation<
+      $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
+    >['addStar'],
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
@@ -1147,7 +1179,7 @@ export interface MutationBuilder {
     >
   >
   addSubIssue: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['addSubIssue'],
   >(
@@ -1166,7 +1198,7 @@ export interface MutationBuilder {
     >
   >
   addUpvote: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['addUpvote'],
   >(
@@ -1185,7 +1217,7 @@ export interface MutationBuilder {
     >
   >
   addVerifiableDomain: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['addVerifiableDomain'],
   >(
@@ -1207,7 +1239,7 @@ export interface MutationBuilder {
     >
   >
   approveDeployments: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['approveDeployments'],
   >(
@@ -1229,7 +1261,7 @@ export interface MutationBuilder {
     >
   >
   approveVerifiableDomain: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['approveVerifiableDomain'],
   >(
@@ -1251,7 +1283,7 @@ export interface MutationBuilder {
     >
   >
   archiveProjectV2Item: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['archiveProjectV2Item'],
   >(
@@ -1273,7 +1305,7 @@ export interface MutationBuilder {
     >
   >
   archiveRepository: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['archiveRepository'],
   >(
@@ -1295,7 +1327,7 @@ export interface MutationBuilder {
     >
   >
   cancelEnterpriseAdminInvitation: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['cancelEnterpriseAdminInvitation'],
   >(
@@ -1317,7 +1349,7 @@ export interface MutationBuilder {
     >
   >
   cancelEnterpriseMemberInvitation: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['cancelEnterpriseMemberInvitation'],
   >(
@@ -1339,7 +1371,7 @@ export interface MutationBuilder {
     >
   >
   cancelSponsorship: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['cancelSponsorship'],
   >(
@@ -1361,7 +1393,7 @@ export interface MutationBuilder {
     >
   >
   changeUserStatus: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['changeUserStatus'],
   >(
@@ -1380,7 +1412,7 @@ export interface MutationBuilder {
     >
   >
   clearLabelsFromLabelable: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['clearLabelsFromLabelable'],
   >(
@@ -1402,7 +1434,7 @@ export interface MutationBuilder {
     >
   >
   clearProjectV2ItemFieldValue: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['clearProjectV2ItemFieldValue'],
   >(
@@ -1424,7 +1456,7 @@ export interface MutationBuilder {
     >
   >
   cloneProject: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['cloneProject'],
   >(
@@ -1443,7 +1475,7 @@ export interface MutationBuilder {
     >
   >
   cloneTemplateRepository: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['cloneTemplateRepository'],
   >(
@@ -1465,7 +1497,7 @@ export interface MutationBuilder {
     >
   >
   closeDiscussion: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['closeDiscussion'],
   >(
@@ -1484,7 +1516,7 @@ export interface MutationBuilder {
     >
   >
   closeIssue: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['closeIssue'],
   >(
@@ -1503,7 +1535,7 @@ export interface MutationBuilder {
     >
   >
   closePullRequest: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['closePullRequest'],
   >(
@@ -1522,7 +1554,7 @@ export interface MutationBuilder {
     >
   >
   convertProjectCardNoteToIssue: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['convertProjectCardNoteToIssue'],
   >(
@@ -1544,7 +1576,7 @@ export interface MutationBuilder {
     >
   >
   convertProjectV2DraftIssueItemToIssue: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['convertProjectV2DraftIssueItemToIssue'],
   >(
@@ -1566,7 +1598,7 @@ export interface MutationBuilder {
     >
   >
   convertPullRequestToDraft: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['convertPullRequestToDraft'],
   >(
@@ -1588,7 +1620,7 @@ export interface MutationBuilder {
     >
   >
   copyProjectV2: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['copyProjectV2'],
   >(
@@ -1607,7 +1639,7 @@ export interface MutationBuilder {
     >
   >
   createAttributionInvitation: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['createAttributionInvitation'],
   >(
@@ -1629,7 +1661,7 @@ export interface MutationBuilder {
     >
   >
   createBranchProtectionRule: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['createBranchProtectionRule'],
   >(
@@ -1651,7 +1683,7 @@ export interface MutationBuilder {
     >
   >
   createCheckRun: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['createCheckRun'],
   >(
@@ -1670,7 +1702,7 @@ export interface MutationBuilder {
     >
   >
   createCheckSuite: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['createCheckSuite'],
   >(
@@ -1689,7 +1721,7 @@ export interface MutationBuilder {
     >
   >
   createCommitOnBranch: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['createCommitOnBranch'],
   >(
@@ -1711,7 +1743,7 @@ export interface MutationBuilder {
     >
   >
   createDeployment: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['createDeployment'],
   >(
@@ -1730,7 +1762,7 @@ export interface MutationBuilder {
     >
   >
   createDeploymentStatus: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['createDeploymentStatus'],
   >(
@@ -1752,7 +1784,7 @@ export interface MutationBuilder {
     >
   >
   createDiscussion: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['createDiscussion'],
   >(
@@ -1771,7 +1803,7 @@ export interface MutationBuilder {
     >
   >
   createEnterpriseOrganization: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['createEnterpriseOrganization'],
   >(
@@ -1793,7 +1825,7 @@ export interface MutationBuilder {
     >
   >
   createEnvironment: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['createEnvironment'],
   >(
@@ -1815,7 +1847,7 @@ export interface MutationBuilder {
     >
   >
   createIpAllowListEntry: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['createIpAllowListEntry'],
   >(
@@ -1837,7 +1869,7 @@ export interface MutationBuilder {
     >
   >
   createIssue: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['createIssue'],
   >(
@@ -1856,7 +1888,7 @@ export interface MutationBuilder {
     >
   >
   createLabel: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['createLabel'],
   >(
@@ -1875,7 +1907,7 @@ export interface MutationBuilder {
     >
   >
   createLinkedBranch: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['createLinkedBranch'],
   >(
@@ -1897,7 +1929,7 @@ export interface MutationBuilder {
     >
   >
   createMigrationSource: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['createMigrationSource'],
   >(
@@ -1919,7 +1951,7 @@ export interface MutationBuilder {
     >
   >
   createProject: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['createProject'],
   >(
@@ -1938,7 +1970,7 @@ export interface MutationBuilder {
     >
   >
   createProjectV2: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['createProjectV2'],
   >(
@@ -1957,7 +1989,7 @@ export interface MutationBuilder {
     >
   >
   createProjectV2Field: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['createProjectV2Field'],
   >(
@@ -1979,7 +2011,7 @@ export interface MutationBuilder {
     >
   >
   createProjectV2StatusUpdate: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['createProjectV2StatusUpdate'],
   >(
@@ -2001,7 +2033,7 @@ export interface MutationBuilder {
     >
   >
   createPullRequest: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['createPullRequest'],
   >(
@@ -2023,7 +2055,7 @@ export interface MutationBuilder {
     >
   >
   createRef: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['createRef'],
   >(
@@ -2042,7 +2074,7 @@ export interface MutationBuilder {
     >
   >
   createRepository: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['createRepository'],
   >(
@@ -2061,7 +2093,7 @@ export interface MutationBuilder {
     >
   >
   createRepositoryRuleset: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['createRepositoryRuleset'],
   >(
@@ -2083,7 +2115,7 @@ export interface MutationBuilder {
     >
   >
   createSponsorsListing: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['createSponsorsListing'],
   >(
@@ -2105,7 +2137,7 @@ export interface MutationBuilder {
     >
   >
   createSponsorsTier: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['createSponsorsTier'],
   >(
@@ -2127,7 +2159,7 @@ export interface MutationBuilder {
     >
   >
   createSponsorship: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['createSponsorship'],
   >(
@@ -2149,7 +2181,7 @@ export interface MutationBuilder {
     >
   >
   createSponsorships: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['createSponsorships'],
   >(
@@ -2171,7 +2203,7 @@ export interface MutationBuilder {
     >
   >
   createTeamDiscussion: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['createTeamDiscussion'],
   >(
@@ -2193,7 +2225,7 @@ export interface MutationBuilder {
     >
   >
   createTeamDiscussionComment: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['createTeamDiscussionComment'],
   >(
@@ -2215,7 +2247,7 @@ export interface MutationBuilder {
     >
   >
   createUserList: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['createUserList'],
   >(
@@ -2234,7 +2266,7 @@ export interface MutationBuilder {
     >
   >
   declineTopicSuggestion: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['declineTopicSuggestion'],
   >(
@@ -2256,7 +2288,7 @@ export interface MutationBuilder {
     >
   >
   deleteBranchProtectionRule: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['deleteBranchProtectionRule'],
   >(
@@ -2278,7 +2310,7 @@ export interface MutationBuilder {
     >
   >
   deleteDeployment: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['deleteDeployment'],
   >(
@@ -2297,7 +2329,7 @@ export interface MutationBuilder {
     >
   >
   deleteDiscussion: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['deleteDiscussion'],
   >(
@@ -2316,7 +2348,7 @@ export interface MutationBuilder {
     >
   >
   deleteDiscussionComment: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['deleteDiscussionComment'],
   >(
@@ -2338,7 +2370,7 @@ export interface MutationBuilder {
     >
   >
   deleteEnvironment: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['deleteEnvironment'],
   >(
@@ -2360,7 +2392,7 @@ export interface MutationBuilder {
     >
   >
   deleteIpAllowListEntry: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['deleteIpAllowListEntry'],
   >(
@@ -2382,7 +2414,7 @@ export interface MutationBuilder {
     >
   >
   deleteIssue: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['deleteIssue'],
   >(
@@ -2401,7 +2433,7 @@ export interface MutationBuilder {
     >
   >
   deleteIssueComment: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['deleteIssueComment'],
   >(
@@ -2423,7 +2455,7 @@ export interface MutationBuilder {
     >
   >
   deleteLabel: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['deleteLabel'],
   >(
@@ -2442,7 +2474,7 @@ export interface MutationBuilder {
     >
   >
   deleteLinkedBranch: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['deleteLinkedBranch'],
   >(
@@ -2464,7 +2496,7 @@ export interface MutationBuilder {
     >
   >
   deletePackageVersion: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['deletePackageVersion'],
   >(
@@ -2486,7 +2518,7 @@ export interface MutationBuilder {
     >
   >
   deleteProject: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['deleteProject'],
   >(
@@ -2505,7 +2537,7 @@ export interface MutationBuilder {
     >
   >
   deleteProjectCard: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['deleteProjectCard'],
   >(
@@ -2527,7 +2559,7 @@ export interface MutationBuilder {
     >
   >
   deleteProjectColumn: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['deleteProjectColumn'],
   >(
@@ -2549,7 +2581,7 @@ export interface MutationBuilder {
     >
   >
   deleteProjectV2: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['deleteProjectV2'],
   >(
@@ -2568,7 +2600,7 @@ export interface MutationBuilder {
     >
   >
   deleteProjectV2Field: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['deleteProjectV2Field'],
   >(
@@ -2590,7 +2622,7 @@ export interface MutationBuilder {
     >
   >
   deleteProjectV2Item: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['deleteProjectV2Item'],
   >(
@@ -2612,7 +2644,7 @@ export interface MutationBuilder {
     >
   >
   deleteProjectV2StatusUpdate: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['deleteProjectV2StatusUpdate'],
   >(
@@ -2634,7 +2666,7 @@ export interface MutationBuilder {
     >
   >
   deleteProjectV2Workflow: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['deleteProjectV2Workflow'],
   >(
@@ -2656,7 +2688,7 @@ export interface MutationBuilder {
     >
   >
   deletePullRequestReview: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['deletePullRequestReview'],
   >(
@@ -2678,7 +2710,7 @@ export interface MutationBuilder {
     >
   >
   deletePullRequestReviewComment: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['deletePullRequestReviewComment'],
   >(
@@ -2700,7 +2732,7 @@ export interface MutationBuilder {
     >
   >
   deleteRef: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['deleteRef'],
   >(
@@ -2719,7 +2751,7 @@ export interface MutationBuilder {
     >
   >
   deleteRepositoryRuleset: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['deleteRepositoryRuleset'],
   >(
@@ -2741,7 +2773,7 @@ export interface MutationBuilder {
     >
   >
   deleteTeamDiscussion: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['deleteTeamDiscussion'],
   >(
@@ -2763,7 +2795,7 @@ export interface MutationBuilder {
     >
   >
   deleteTeamDiscussionComment: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['deleteTeamDiscussionComment'],
   >(
@@ -2785,7 +2817,7 @@ export interface MutationBuilder {
     >
   >
   deleteUserList: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['deleteUserList'],
   >(
@@ -2804,7 +2836,7 @@ export interface MutationBuilder {
     >
   >
   deleteVerifiableDomain: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['deleteVerifiableDomain'],
   >(
@@ -2826,7 +2858,7 @@ export interface MutationBuilder {
     >
   >
   dequeuePullRequest: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['dequeuePullRequest'],
   >(
@@ -2848,7 +2880,7 @@ export interface MutationBuilder {
     >
   >
   disablePullRequestAutoMerge: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['disablePullRequestAutoMerge'],
   >(
@@ -2870,7 +2902,7 @@ export interface MutationBuilder {
     >
   >
   dismissPullRequestReview: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['dismissPullRequestReview'],
   >(
@@ -2892,7 +2924,7 @@ export interface MutationBuilder {
     >
   >
   dismissRepositoryVulnerabilityAlert: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['dismissRepositoryVulnerabilityAlert'],
   >(
@@ -2914,7 +2946,7 @@ export interface MutationBuilder {
     >
   >
   enablePullRequestAutoMerge: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['enablePullRequestAutoMerge'],
   >(
@@ -2936,7 +2968,7 @@ export interface MutationBuilder {
     >
   >
   enqueuePullRequest: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['enqueuePullRequest'],
   >(
@@ -2958,7 +2990,7 @@ export interface MutationBuilder {
     >
   >
   followOrganization: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['followOrganization'],
   >(
@@ -2980,7 +3012,7 @@ export interface MutationBuilder {
     >
   >
   followUser: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['followUser'],
   >(
@@ -2999,7 +3031,7 @@ export interface MutationBuilder {
     >
   >
   grantEnterpriseOrganizationsMigratorRole: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['grantEnterpriseOrganizationsMigratorRole'],
   >(
@@ -3021,7 +3053,7 @@ export interface MutationBuilder {
     >
   >
   grantMigratorRole: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['grantMigratorRole'],
   >(
@@ -3043,7 +3075,7 @@ export interface MutationBuilder {
     >
   >
   importProject: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['importProject'],
   >(
@@ -3062,7 +3094,7 @@ export interface MutationBuilder {
     >
   >
   inviteEnterpriseAdmin: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['inviteEnterpriseAdmin'],
   >(
@@ -3084,7 +3116,7 @@ export interface MutationBuilder {
     >
   >
   inviteEnterpriseMember: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['inviteEnterpriseMember'],
   >(
@@ -3106,7 +3138,7 @@ export interface MutationBuilder {
     >
   >
   linkProjectV2ToRepository: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['linkProjectV2ToRepository'],
   >(
@@ -3128,7 +3160,7 @@ export interface MutationBuilder {
     >
   >
   linkProjectV2ToTeam: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['linkProjectV2ToTeam'],
   >(
@@ -3150,7 +3182,7 @@ export interface MutationBuilder {
     >
   >
   linkRepositoryToProject: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['linkRepositoryToProject'],
   >(
@@ -3172,7 +3204,7 @@ export interface MutationBuilder {
     >
   >
   lockLockable: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['lockLockable'],
   >(
@@ -3191,7 +3223,7 @@ export interface MutationBuilder {
     >
   >
   markDiscussionCommentAsAnswer: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['markDiscussionCommentAsAnswer'],
   >(
@@ -3213,7 +3245,7 @@ export interface MutationBuilder {
     >
   >
   markFileAsViewed: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['markFileAsViewed'],
   >(
@@ -3232,7 +3264,7 @@ export interface MutationBuilder {
     >
   >
   markProjectV2AsTemplate: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['markProjectV2AsTemplate'],
   >(
@@ -3254,7 +3286,7 @@ export interface MutationBuilder {
     >
   >
   markPullRequestReadyForReview: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['markPullRequestReadyForReview'],
   >(
@@ -3276,7 +3308,7 @@ export interface MutationBuilder {
     >
   >
   mergeBranch: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['mergeBranch'],
   >(
@@ -3295,7 +3327,7 @@ export interface MutationBuilder {
     >
   >
   mergePullRequest: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['mergePullRequest'],
   >(
@@ -3314,7 +3346,7 @@ export interface MutationBuilder {
     >
   >
   minimizeComment: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['minimizeComment'],
   >(
@@ -3333,7 +3365,7 @@ export interface MutationBuilder {
     >
   >
   moveProjectCard: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['moveProjectCard'],
   >(
@@ -3352,7 +3384,7 @@ export interface MutationBuilder {
     >
   >
   moveProjectColumn: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['moveProjectColumn'],
   >(
@@ -3374,7 +3406,7 @@ export interface MutationBuilder {
     >
   >
   pinEnvironment: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['pinEnvironment'],
   >(
@@ -3393,7 +3425,7 @@ export interface MutationBuilder {
     >
   >
   pinIssue: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['pinIssue'],
   >(
@@ -3412,7 +3444,7 @@ export interface MutationBuilder {
     >
   >
   publishSponsorsTier: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['publishSponsorsTier'],
   >(
@@ -3434,7 +3466,7 @@ export interface MutationBuilder {
     >
   >
   regenerateEnterpriseIdentityProviderRecoveryCodes: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['regenerateEnterpriseIdentityProviderRecoveryCodes'],
   >(
@@ -3456,7 +3488,7 @@ export interface MutationBuilder {
     >
   >
   regenerateVerifiableDomainToken: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['regenerateVerifiableDomainToken'],
   >(
@@ -3478,7 +3510,7 @@ export interface MutationBuilder {
     >
   >
   rejectDeployments: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['rejectDeployments'],
   >(
@@ -3500,7 +3532,7 @@ export interface MutationBuilder {
     >
   >
   removeAssigneesFromAssignable: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['removeAssigneesFromAssignable'],
   >(
@@ -3522,7 +3554,7 @@ export interface MutationBuilder {
     >
   >
   removeEnterpriseAdmin: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['removeEnterpriseAdmin'],
   >(
@@ -3544,7 +3576,7 @@ export interface MutationBuilder {
     >
   >
   removeEnterpriseIdentityProvider: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['removeEnterpriseIdentityProvider'],
   >(
@@ -3566,7 +3598,7 @@ export interface MutationBuilder {
     >
   >
   removeEnterpriseMember: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['removeEnterpriseMember'],
   >(
@@ -3588,7 +3620,7 @@ export interface MutationBuilder {
     >
   >
   removeEnterpriseOrganization: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['removeEnterpriseOrganization'],
   >(
@@ -3610,7 +3642,7 @@ export interface MutationBuilder {
     >
   >
   removeEnterpriseSupportEntitlement: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['removeEnterpriseSupportEntitlement'],
   >(
@@ -3632,7 +3664,7 @@ export interface MutationBuilder {
     >
   >
   removeLabelsFromLabelable: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['removeLabelsFromLabelable'],
   >(
@@ -3654,7 +3686,7 @@ export interface MutationBuilder {
     >
   >
   removeOutsideCollaborator: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['removeOutsideCollaborator'],
   >(
@@ -3676,7 +3708,7 @@ export interface MutationBuilder {
     >
   >
   removeReaction: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['removeReaction'],
   >(
@@ -3695,7 +3727,7 @@ export interface MutationBuilder {
     >
   >
   removeStar: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['removeStar'],
   >(
@@ -3714,7 +3746,7 @@ export interface MutationBuilder {
     >
   >
   removeSubIssue: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['removeSubIssue'],
   >(
@@ -3733,7 +3765,7 @@ export interface MutationBuilder {
     >
   >
   removeUpvote: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['removeUpvote'],
   >(
@@ -3752,7 +3784,7 @@ export interface MutationBuilder {
     >
   >
   reopenDiscussion: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['reopenDiscussion'],
   >(
@@ -3771,7 +3803,7 @@ export interface MutationBuilder {
     >
   >
   reopenIssue: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['reopenIssue'],
   >(
@@ -3790,7 +3822,7 @@ export interface MutationBuilder {
     >
   >
   reopenPullRequest: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['reopenPullRequest'],
   >(
@@ -3812,7 +3844,7 @@ export interface MutationBuilder {
     >
   >
   reorderEnvironment: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['reorderEnvironment'],
   >(
@@ -3834,7 +3866,7 @@ export interface MutationBuilder {
     >
   >
   reprioritizeSubIssue: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['reprioritizeSubIssue'],
   >(
@@ -3856,7 +3888,7 @@ export interface MutationBuilder {
     >
   >
   requestReviews: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['requestReviews'],
   >(
@@ -3875,7 +3907,7 @@ export interface MutationBuilder {
     >
   >
   rerequestCheckSuite: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['rerequestCheckSuite'],
   >(
@@ -3897,7 +3929,7 @@ export interface MutationBuilder {
     >
   >
   resolveReviewThread: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['resolveReviewThread'],
   >(
@@ -3919,7 +3951,7 @@ export interface MutationBuilder {
     >
   >
   retireSponsorsTier: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['retireSponsorsTier'],
   >(
@@ -3941,7 +3973,7 @@ export interface MutationBuilder {
     >
   >
   revertPullRequest: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['revertPullRequest'],
   >(
@@ -3963,7 +3995,7 @@ export interface MutationBuilder {
     >
   >
   revokeEnterpriseOrganizationsMigratorRole: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['revokeEnterpriseOrganizationsMigratorRole'],
   >(
@@ -3985,7 +4017,7 @@ export interface MutationBuilder {
     >
   >
   revokeMigratorRole: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['revokeMigratorRole'],
   >(
@@ -4007,7 +4039,7 @@ export interface MutationBuilder {
     >
   >
   setEnterpriseIdentityProvider: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['setEnterpriseIdentityProvider'],
   >(
@@ -4029,7 +4061,7 @@ export interface MutationBuilder {
     >
   >
   setOrganizationInteractionLimit: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['setOrganizationInteractionLimit'],
   >(
@@ -4051,7 +4083,7 @@ export interface MutationBuilder {
     >
   >
   setRepositoryInteractionLimit: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['setRepositoryInteractionLimit'],
   >(
@@ -4073,7 +4105,7 @@ export interface MutationBuilder {
     >
   >
   setUserInteractionLimit: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['setUserInteractionLimit'],
   >(
@@ -4095,7 +4127,7 @@ export interface MutationBuilder {
     >
   >
   startOrganizationMigration: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['startOrganizationMigration'],
   >(
@@ -4117,7 +4149,7 @@ export interface MutationBuilder {
     >
   >
   startRepositoryMigration: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['startRepositoryMigration'],
   >(
@@ -4139,7 +4171,7 @@ export interface MutationBuilder {
     >
   >
   submitPullRequestReview: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['submitPullRequestReview'],
   >(
@@ -4161,7 +4193,7 @@ export interface MutationBuilder {
     >
   >
   transferEnterpriseOrganization: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['transferEnterpriseOrganization'],
   >(
@@ -4183,7 +4215,7 @@ export interface MutationBuilder {
     >
   >
   transferIssue: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['transferIssue'],
   >(
@@ -4202,7 +4234,7 @@ export interface MutationBuilder {
     >
   >
   unarchiveProjectV2Item: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['unarchiveProjectV2Item'],
   >(
@@ -4224,7 +4256,7 @@ export interface MutationBuilder {
     >
   >
   unarchiveRepository: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['unarchiveRepository'],
   >(
@@ -4246,7 +4278,7 @@ export interface MutationBuilder {
     >
   >
   unfollowOrganization: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['unfollowOrganization'],
   >(
@@ -4268,7 +4300,7 @@ export interface MutationBuilder {
     >
   >
   unfollowUser: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['unfollowUser'],
   >(
@@ -4287,7 +4319,7 @@ export interface MutationBuilder {
     >
   >
   unlinkProjectV2FromRepository: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['unlinkProjectV2FromRepository'],
   >(
@@ -4309,7 +4341,7 @@ export interface MutationBuilder {
     >
   >
   unlinkProjectV2FromTeam: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['unlinkProjectV2FromTeam'],
   >(
@@ -4331,7 +4363,7 @@ export interface MutationBuilder {
     >
   >
   unlinkRepositoryFromProject: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['unlinkRepositoryFromProject'],
   >(
@@ -4353,7 +4385,7 @@ export interface MutationBuilder {
     >
   >
   unlockLockable: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['unlockLockable'],
   >(
@@ -4372,7 +4404,7 @@ export interface MutationBuilder {
     >
   >
   unmarkDiscussionCommentAsAnswer: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['unmarkDiscussionCommentAsAnswer'],
   >(
@@ -4394,7 +4426,7 @@ export interface MutationBuilder {
     >
   >
   unmarkFileAsViewed: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['unmarkFileAsViewed'],
   >(
@@ -4416,7 +4448,7 @@ export interface MutationBuilder {
     >
   >
   unmarkIssueAsDuplicate: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['unmarkIssueAsDuplicate'],
   >(
@@ -4438,7 +4470,7 @@ export interface MutationBuilder {
     >
   >
   unmarkProjectV2AsTemplate: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['unmarkProjectV2AsTemplate'],
   >(
@@ -4460,7 +4492,7 @@ export interface MutationBuilder {
     >
   >
   unminimizeComment: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['unminimizeComment'],
   >(
@@ -4482,7 +4514,7 @@ export interface MutationBuilder {
     >
   >
   unpinIssue: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['unpinIssue'],
   >(
@@ -4501,7 +4533,7 @@ export interface MutationBuilder {
     >
   >
   unresolveReviewThread: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['unresolveReviewThread'],
   >(
@@ -4523,7 +4555,7 @@ export interface MutationBuilder {
     >
   >
   updateBranchProtectionRule: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateBranchProtectionRule'],
   >(
@@ -4545,7 +4577,7 @@ export interface MutationBuilder {
     >
   >
   updateCheckRun: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateCheckRun'],
   >(
@@ -4564,7 +4596,7 @@ export interface MutationBuilder {
     >
   >
   updateCheckSuitePreferences: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateCheckSuitePreferences'],
   >(
@@ -4586,7 +4618,7 @@ export interface MutationBuilder {
     >
   >
   updateDiscussion: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateDiscussion'],
   >(
@@ -4605,7 +4637,7 @@ export interface MutationBuilder {
     >
   >
   updateDiscussionComment: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateDiscussionComment'],
   >(
@@ -4627,7 +4659,7 @@ export interface MutationBuilder {
     >
   >
   updateEnterpriseAdministratorRole: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateEnterpriseAdministratorRole'],
   >(
@@ -4649,7 +4681,7 @@ export interface MutationBuilder {
     >
   >
   updateEnterpriseAllowPrivateRepositoryForkingSetting: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateEnterpriseAllowPrivateRepositoryForkingSetting'],
   >(
@@ -4671,7 +4703,7 @@ export interface MutationBuilder {
     >
   >
   updateEnterpriseDefaultRepositoryPermissionSetting: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateEnterpriseDefaultRepositoryPermissionSetting'],
   >(
@@ -4693,7 +4725,7 @@ export interface MutationBuilder {
     >
   >
   updateEnterpriseDeployKeySetting: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateEnterpriseDeployKeySetting'],
   >(
@@ -4715,7 +4747,7 @@ export interface MutationBuilder {
     >
   >
   updateEnterpriseMembersCanChangeRepositoryVisibilitySetting: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateEnterpriseMembersCanChangeRepositoryVisibilitySetting'],
   >(
@@ -4737,7 +4769,7 @@ export interface MutationBuilder {
     >
   >
   updateEnterpriseMembersCanCreateRepositoriesSetting: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateEnterpriseMembersCanCreateRepositoriesSetting'],
   >(
@@ -4759,7 +4791,7 @@ export interface MutationBuilder {
     >
   >
   updateEnterpriseMembersCanDeleteIssuesSetting: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateEnterpriseMembersCanDeleteIssuesSetting'],
   >(
@@ -4781,7 +4813,7 @@ export interface MutationBuilder {
     >
   >
   updateEnterpriseMembersCanDeleteRepositoriesSetting: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateEnterpriseMembersCanDeleteRepositoriesSetting'],
   >(
@@ -4803,7 +4835,7 @@ export interface MutationBuilder {
     >
   >
   updateEnterpriseMembersCanInviteCollaboratorsSetting: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateEnterpriseMembersCanInviteCollaboratorsSetting'],
   >(
@@ -4825,7 +4857,7 @@ export interface MutationBuilder {
     >
   >
   updateEnterpriseMembersCanMakePurchasesSetting: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateEnterpriseMembersCanMakePurchasesSetting'],
   >(
@@ -4847,7 +4879,7 @@ export interface MutationBuilder {
     >
   >
   updateEnterpriseMembersCanUpdateProtectedBranchesSetting: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateEnterpriseMembersCanUpdateProtectedBranchesSetting'],
   >(
@@ -4869,7 +4901,7 @@ export interface MutationBuilder {
     >
   >
   updateEnterpriseMembersCanViewDependencyInsightsSetting: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateEnterpriseMembersCanViewDependencyInsightsSetting'],
   >(
@@ -4891,7 +4923,7 @@ export interface MutationBuilder {
     >
   >
   updateEnterpriseOrganizationProjectsSetting: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateEnterpriseOrganizationProjectsSetting'],
   >(
@@ -4913,7 +4945,7 @@ export interface MutationBuilder {
     >
   >
   updateEnterpriseOwnerOrganizationRole: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateEnterpriseOwnerOrganizationRole'],
   >(
@@ -4935,7 +4967,7 @@ export interface MutationBuilder {
     >
   >
   updateEnterpriseProfile: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateEnterpriseProfile'],
   >(
@@ -4957,7 +4989,7 @@ export interface MutationBuilder {
     >
   >
   updateEnterpriseRepositoryProjectsSetting: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateEnterpriseRepositoryProjectsSetting'],
   >(
@@ -4979,7 +5011,7 @@ export interface MutationBuilder {
     >
   >
   updateEnterpriseTeamDiscussionsSetting: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateEnterpriseTeamDiscussionsSetting'],
   >(
@@ -5001,7 +5033,7 @@ export interface MutationBuilder {
     >
   >
   updateEnterpriseTwoFactorAuthenticationDisallowedMethodsSetting: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateEnterpriseTwoFactorAuthenticationDisallowedMethodsSetting'],
   >(
@@ -5023,7 +5055,7 @@ export interface MutationBuilder {
     >
   >
   updateEnterpriseTwoFactorAuthenticationRequiredSetting: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateEnterpriseTwoFactorAuthenticationRequiredSetting'],
   >(
@@ -5045,7 +5077,7 @@ export interface MutationBuilder {
     >
   >
   updateEnvironment: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateEnvironment'],
   >(
@@ -5067,7 +5099,7 @@ export interface MutationBuilder {
     >
   >
   updateIpAllowListEnabledSetting: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateIpAllowListEnabledSetting'],
   >(
@@ -5089,7 +5121,7 @@ export interface MutationBuilder {
     >
   >
   updateIpAllowListEntry: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateIpAllowListEntry'],
   >(
@@ -5111,7 +5143,7 @@ export interface MutationBuilder {
     >
   >
   updateIpAllowListForInstalledAppsEnabledSetting: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateIpAllowListForInstalledAppsEnabledSetting'],
   >(
@@ -5133,7 +5165,7 @@ export interface MutationBuilder {
     >
   >
   updateIssue: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateIssue'],
   >(
@@ -5152,7 +5184,7 @@ export interface MutationBuilder {
     >
   >
   updateIssueComment: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateIssueComment'],
   >(
@@ -5174,7 +5206,7 @@ export interface MutationBuilder {
     >
   >
   updateLabel: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateLabel'],
   >(
@@ -5193,7 +5225,7 @@ export interface MutationBuilder {
     >
   >
   updateNotificationRestrictionSetting: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateNotificationRestrictionSetting'],
   >(
@@ -5215,7 +5247,7 @@ export interface MutationBuilder {
     >
   >
   updateOrganizationAllowPrivateRepositoryForkingSetting: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateOrganizationAllowPrivateRepositoryForkingSetting'],
   >(
@@ -5237,7 +5269,7 @@ export interface MutationBuilder {
     >
   >
   updateOrganizationWebCommitSignoffSetting: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateOrganizationWebCommitSignoffSetting'],
   >(
@@ -5259,7 +5291,7 @@ export interface MutationBuilder {
     >
   >
   updatePatreonSponsorability: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updatePatreonSponsorability'],
   >(
@@ -5281,7 +5313,7 @@ export interface MutationBuilder {
     >
   >
   updateProject: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateProject'],
   >(
@@ -5300,7 +5332,7 @@ export interface MutationBuilder {
     >
   >
   updateProjectCard: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateProjectCard'],
   >(
@@ -5322,7 +5354,7 @@ export interface MutationBuilder {
     >
   >
   updateProjectColumn: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateProjectColumn'],
   >(
@@ -5344,7 +5376,7 @@ export interface MutationBuilder {
     >
   >
   updateProjectV2: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateProjectV2'],
   >(
@@ -5363,7 +5395,7 @@ export interface MutationBuilder {
     >
   >
   updateProjectV2Collaborators: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateProjectV2Collaborators'],
   >(
@@ -5385,7 +5417,7 @@ export interface MutationBuilder {
     >
   >
   updateProjectV2DraftIssue: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateProjectV2DraftIssue'],
   >(
@@ -5407,7 +5439,7 @@ export interface MutationBuilder {
     >
   >
   updateProjectV2Field: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateProjectV2Field'],
   >(
@@ -5429,7 +5461,7 @@ export interface MutationBuilder {
     >
   >
   updateProjectV2ItemFieldValue: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateProjectV2ItemFieldValue'],
   >(
@@ -5451,7 +5483,7 @@ export interface MutationBuilder {
     >
   >
   updateProjectV2ItemPosition: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateProjectV2ItemPosition'],
   >(
@@ -5473,7 +5505,7 @@ export interface MutationBuilder {
     >
   >
   updateProjectV2StatusUpdate: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateProjectV2StatusUpdate'],
   >(
@@ -5495,7 +5527,7 @@ export interface MutationBuilder {
     >
   >
   updatePullRequest: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updatePullRequest'],
   >(
@@ -5517,7 +5549,7 @@ export interface MutationBuilder {
     >
   >
   updatePullRequestBranch: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updatePullRequestBranch'],
   >(
@@ -5539,7 +5571,7 @@ export interface MutationBuilder {
     >
   >
   updatePullRequestReview: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updatePullRequestReview'],
   >(
@@ -5561,7 +5593,7 @@ export interface MutationBuilder {
     >
   >
   updatePullRequestReviewComment: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updatePullRequestReviewComment'],
   >(
@@ -5583,7 +5615,7 @@ export interface MutationBuilder {
     >
   >
   updateRef: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateRef'],
   >(
@@ -5602,7 +5634,7 @@ export interface MutationBuilder {
     >
   >
   updateRefs: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateRefs'],
   >(
@@ -5621,7 +5653,7 @@ export interface MutationBuilder {
     >
   >
   updateRepository: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateRepository'],
   >(
@@ -5640,7 +5672,7 @@ export interface MutationBuilder {
     >
   >
   updateRepositoryRuleset: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateRepositoryRuleset'],
   >(
@@ -5662,7 +5694,7 @@ export interface MutationBuilder {
     >
   >
   updateRepositoryWebCommitSignoffSetting: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateRepositoryWebCommitSignoffSetting'],
   >(
@@ -5684,7 +5716,7 @@ export interface MutationBuilder {
     >
   >
   updateSponsorshipPreferences: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateSponsorshipPreferences'],
   >(
@@ -5706,7 +5738,7 @@ export interface MutationBuilder {
     >
   >
   updateSubscription: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateSubscription'],
   >(
@@ -5728,7 +5760,7 @@ export interface MutationBuilder {
     >
   >
   updateTeamDiscussion: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateTeamDiscussion'],
   >(
@@ -5750,7 +5782,7 @@ export interface MutationBuilder {
     >
   >
   updateTeamDiscussionComment: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateTeamDiscussionComment'],
   >(
@@ -5772,7 +5804,7 @@ export interface MutationBuilder {
     >
   >
   updateTeamReviewAssignment: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateTeamReviewAssignment'],
   >(
@@ -5794,7 +5826,7 @@ export interface MutationBuilder {
     >
   >
   updateTeamsRepository: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateTeamsRepository'],
   >(
@@ -5816,7 +5848,7 @@ export interface MutationBuilder {
     >
   >
   updateTopics: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateTopics'],
   >(
@@ -5835,7 +5867,7 @@ export interface MutationBuilder {
     >
   >
   updateUserList: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateUserList'],
   >(
@@ -5854,7 +5886,7 @@ export interface MutationBuilder {
     >
   >
   updateUserListsForItem: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['updateUserListsForItem'],
   >(
@@ -5876,7 +5908,7 @@ export interface MutationBuilder {
     >
   >
   verifyVerifiableDomain: <
-    $SelectionSet extends SelectionSets.Mutation<
+    const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
     >['verifyVerifiableDomain'],
   >(
