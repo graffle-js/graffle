@@ -13,6 +13,6 @@ export const defaults = {
   outputCase: `kebab`,
   importFormat: `jsExtension`,
   lint: {
-    missingCustomScalarCodec: true,
+    missingCustomScalarCodec: true as boolean,
   },
 } satisfies Partial<ConfigInit>
