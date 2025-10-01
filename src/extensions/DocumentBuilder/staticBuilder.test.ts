@@ -22,12 +22,12 @@ Test.describe(`static document builder`)
   .i<string>()
   .o<{ y: string[]; n?: string[] }>()
   .cases(
-    [[query.user({ id: true, name: true })],                                  { y: [`user`, `id`, `name`],                                                        n: [`query (`, `$`] }],
-    [[query.user({ $: { id: $var }, name: true })],                           { y: [`query ($id:`, `user(id: $id)`, `name`] }],
+    [[query.user({ id: true, name: true })],                                 { y: [`user`, `id`, `name`],                                                        n: [`query (`, `$`] }],
+    [[query.user({ $: { id: $var }, name: true })],                          { y: [`query ($id:`, `user(id: $id)`, `name`] }],
     [[query.user({ $: { id: $var.name(`userId`) }, name: true })],           { y: [`query ($userId:`, `user(id: $userId)`] }],
     [[query.users({ $: { first: $var.default(10) }, name: true })],          { y: [`$first:`, `= 10`, `users(first: $first)`] }],
     [[query.users({ $: { first: $var.name(`limit`).default(20) }, name: true })], { y: [`$limit:`, `= 20`, `users(first: $limit)`] }],
-    [[query.users({ $: { first: 10, filter: $var }, name: true })],          { y: [`query ($filter:`, `users(first: 10, filter: $filter)`],                     n: [`$first`] }],
+    [[query.users({ $: { first: 10, filter: $var }, name: true })],          { y: [`$first:`, `$filter:`, `users(first: $first, filter: $filter)`] }],
     [[mutation.createUser({ $: { input: $var }, id: true, name: true })],    { y: [`mutation ($input:`, `createUser(input: $input)`] }],
     [[subscription.onUserUpdate({ $: { userId: $var }, id: true, name: true })], { y: [`subscription ($userId:`, `onUserUpdate(userId: $userId)`] }],
   )
@@ -123,15 +123,6 @@ test('type output inference', () => {
   const q16 = Possible.query.stringWithArgs({ $: { boolean: true, string: $var, int: 42 } })
   Ts.assertEqual<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { string?: string | undefined }>>()(q16)
 
-  const p = Possible.create()
-  const x = p.query.objectNestedWithArgs({
-    object: ['object2', { $: { int: $var }, id:true }]
-    // TODO: this should be a type error! (no fields selected, just $)
-    // object: ['object2', { $: { int: $var } }]
-    // TODO: this should be a type error!
-    // id: ['id2', {$:{filter:$var}}]
-  })
-
   // Alias with $var on nested object field
   const q20 = Possible.query.objectNestedWithArgs({
     object: ['object2', { $: { int: $var }, id:true }]
@@ -161,26 +152,22 @@ test('conflict resolution: $var marker and auto-hoisted both want same name', ()
   expect(doc).toContain('userId: $userId_2')
 })
 
-test('operationVariables: false - inline args NOT hoisted, $var still extracted', () => {
-  const originalDefault = staticBuilderDefaults.operationVariables
-  staticBuilderDefaults.operationVariables = false
-
-  try {
-    const doc = query.stringWithArgs({
+test('hoistArguments: false - inline args NOT hoisted, $var still extracted', () => {
+  const doc = query.stringWithArgs(
+    {
       $: {
         string: $var.name('explicitVar'),  // Should be variable
         int: 42,                            // Should be inline
       },
-    })
+    },
+    { hoistArguments: false }  // Local override
+  )
 
-    // Verify: $var is extracted
-    expect(doc).toContain('$explicitVar')
-    expect(doc).toContain('string: $explicitVar')
+  // Verify: $var is extracted
+  expect(doc).toContain('$explicitVar')
+  expect(doc).toContain('string: $explicitVar')
 
-    // Verify: inline arg is NOT extracted (appears as literal)
-    expect(doc).toContain('int: 42')
-    expect(doc).not.toContain('$int')
-  } finally {
-    staticBuilderDefaults.operationVariables = originalDefault
-  }
+  // Verify: inline arg is NOT extracted (appears as literal)
+  expect(doc).toContain('int: 42')
+  expect(doc).not.toContain('$int')
 })

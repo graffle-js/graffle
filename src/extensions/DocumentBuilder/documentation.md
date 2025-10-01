@@ -54,6 +54,95 @@ const doc = query.user({
 
 - [Complete Example](../../../examples/55_document-builder/document-builder_static.ts)
 
+### Configuration
+
+The static document builder can be configured in two ways:
+
+**Global defaults** (affects all queries):
+```ts
+import { staticBuilderDefaults } from 'graffle/extensions/document-builder'
+
+// Change default behavior for all queries
+staticBuilderDefaults.hoistArguments = false
+```
+
+**Local override** (per-query):
+```ts
+const doc = query.user(
+  { $: { id: "123" }, name: true },
+  { hoistArguments: false }  // Override for this query only
+)
+```
+
+#### Hoisting Arguments
+
+By default, the static builder extracts **all** arguments as GraphQL variables (`hoistArguments: true`). This provides:
+- Better query caching (same query structure, different variable values)
+- Automatic custom scalar encoding
+- Alignment with GraphQL best practices
+
+**Example with default behavior:**
+
+```ts
+const doc = query.user({
+  $: { id: "123", status: "ACTIVE" },
+  name: true
+})
+
+// Generates:
+// query($id: ID!, $status: String!) {
+//   user(id: $id, status: $status) { name }
+// }
+// Variables: { id: "123", status: "ACTIVE" }
+```
+
+**Disabling automatic extraction:**
+
+```ts
+staticBuilderDefaults.hoistArguments = false
+
+const doc = query.user({
+  $: { id: "123" },
+  name: true
+})
+
+// Generates:
+// query { user(id: "123") { name } }
+```
+
+**Note:** Explicit `$var` markers are ALWAYS extracted as variables, regardless of this setting:
+
+```ts
+staticBuilderDefaults.hoistArguments = false
+
+const doc = query.user({
+  $: {
+    id: $var('userId'),  // Always extracted
+    name: "John"         // Inlined (due to setting)
+  },
+  name: true
+})
+
+// Generates:
+// query($userId: ID!) {
+//   user(id: $userId, name: "John") { name }
+// }
+```
+
+#### Conflict Resolution
+
+When both explicit `$var` markers and auto-hoisted arguments want the same variable name, automatic renaming occurs:
+
+```ts
+const doc = query.user({
+  $: {
+    id: $var('userId'),    // Gets: $userId
+    userId: "123"          // Gets: $userId_2 (auto-renamed)
+  },
+  name: true
+})
+```
+
 ## Overview: GraphQL vs Graffle
 
 This section shows how common GraphQL patterns map to Graffle's TypeScript interface.

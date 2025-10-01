@@ -1,7 +1,15 @@
-import type { Obj, Ts } from '@wollybeard/kit'
+// TODO: Restore @wollybeard/kit import once it becomes a production dependency
+// import type { Obj, Ts } from '@wollybeard/kit'
 import type { SchemaDrivenDataMap } from '../../../types/SchemaDrivenDataMap/_namespace.js'
 import type { Select } from '../Select/__.js'
 import type { Builder as VarBuilder, BuilderSentinel } from './var.js'
+
+/**
+ * Local type utilities (temporary replacement for @wollybeard/kit).
+ * TODO: Remove once @wollybeard/kit becomes a production dependency.
+ */
+type ValuesOr<$Obj, $Fallback> = keyof $Obj extends never ? $Fallback : $Obj[keyof $Obj]
+type NotExtends<$Type, $Constraint> = $Type extends $Constraint ? false : true
 
 /**
  * Context threaded through type-level traversal to enable resolution of input object types.
@@ -30,7 +38,7 @@ export type ExtractFromObjectType<
   $ArgsMapOutputObject extends SchemaDrivenDataMap.OutputObject,
   $Ctx extends Context,
 > =
-  Obj.ValuesOr<{
+  ValuesOr<{
     [k in keyof $SS & keyof $ArgsMapOutputObject['f']]:
       ExtractFromOutputFieldWithAliasSupport<
         $SS[k],
@@ -120,7 +128,7 @@ export type VarBuilderToType<
   $VarBuilder extends VarBuilder
 > =
   $VarBuilder['_']['required'] extends true                         ? Exclude<$Type,undefined> :
-  Ts.NotExtends<$VarBuilder['_']['default'], undefined> extends true   ? $Type | undefined :
+  NotExtends<$VarBuilder['_']['default'], undefined> extends true   ? $Type | undefined :
                                                                       $Type
 
 // dprint-ignore
@@ -128,6 +136,6 @@ export type IsOptionalVar<
   $Type,
   $VarBuilder extends VarBuilder,
 > = $VarBuilder['_']['required'] extends true                       ? false
-  : Ts.NotExtends<$VarBuilder['_']['default'], undefined> extends true ? true
+  : NotExtends<$VarBuilder['_']['default'], undefined> extends true ? true
   : undefined extends $Type                                         ? true
   : false

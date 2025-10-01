@@ -2,6 +2,7 @@ import { print } from '@0no-co/graphql.web'
 import type { OperationTypeNode } from 'graphql'
 import { isSymbol } from '../../lib/prelude.js'
 import { Select } from './Select/__.js'
+import type { Options } from './SelectGraphQLMapper/nodes/1_Document.js'
 import { toGraphQLDocument } from './SelectGraphQLMapper/nodes/1_Document.js'
 import { defaults } from './staticBuilderDefaults.js'
 
@@ -46,7 +47,7 @@ export const createStaticRootType = (operationType: OperationTypeNode) => {
     get: (_, fieldName: string) => {
       if (isSymbol(fieldName)) throw new Error(`Symbols not supported`)
 
-      return (selection?: Select.SelectionSet.AnySelectionSet) => {
+      return (selection?: Select.SelectionSet.AnySelectionSet, options?: Partial<Options>) => {
         // Create root type selection set with the field
         const rootTypeSelectionSet = {
           [fieldName]: selection ?? true,
@@ -60,7 +61,8 @@ export const createStaticRootType = (operationType: OperationTypeNode) => {
 
         // Convert to GraphQL document using existing mapper
         const result = toGraphQLDocument(documentNormalized, {
-          operationVariables: defaults.operationVariables,
+          ...defaults,
+          ...options,
           // Note: No SDDM or scalars needed for static builder
           // Types are handled at compile time
         })
