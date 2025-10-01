@@ -44,7 +44,7 @@ const tester = <$Scalars extends Schema.Scalar.ScalarMap>(
       const { document, operationsVariables } = toGraphQLDocument(documentNormalized, {
         sddm: hasScalars ? PossibleWithScalars.schemaMap : Possible.schemaMap,
         scalars: input.scalars,
-        operationVariables: input.variables,
+        hoistArguments: input.variables,
       })
 
       const beforeAndAfter = `\n`
