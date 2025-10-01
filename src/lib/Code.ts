@@ -182,6 +182,45 @@ export namespace Code {
     return `type ${renderName(name)} = ${type_}`
   }
 
+  /**
+   * Export a declaration, handling reserved keywords by using re-export syntax.
+   * For reserved keywords: creates internal declaration + re-exports with original name.
+   * For normal names: uses direct export.
+   *
+   * @param isType - Whether this is a type export (true) or value export (false)
+   * @returns A function that takes (name, declaration) and returns the export string
+   */
+  export const exportWithKeywordHandling = (isType: boolean = true) => (name: string, declaration: string) => {
+    const isReserved = reservedTypeScriptInterfaceNames.includes(name as any)
+
+    if (isReserved) {
+      const escapedName = renderName(name)
+      const kindPrefix = isType ? 'type ' : ''
+      return `${declaration}\nexport { ${kindPrefix}${escapedName} as ${name} }`
+    } else {
+      return `export ${declaration}`
+    }
+  }
+
+  /**
+   * Export a type with keyword handling.
+   */
+  export const exportTypeWithKeywordHandling = exportWithKeywordHandling(true)
+
+  /**
+   * Export a value with keyword handling.
+   */
+  export const exportValueWithKeywordHandling = exportWithKeywordHandling(false)
+
+  /**
+   * Export a type alias, handling reserved keywords automatically.
+   */
+  export const tsTypeExport = (name: string, type: string | TermObject) => {
+    const escapedName = renderName(name)
+    const type_ = typeof type === `string` ? type : termObject(type)
+    return exportTypeWithKeywordHandling(name, `type ${escapedName} = ${type_}`)
+  }
+
   type TypeParametersInput = string | null | (string | null)[]
 
   const tsTypeParameters = (typeParameters: TypeParametersInput): string => {
@@ -263,11 +302,8 @@ export namespace Code {
     return `\n\n// ${line} //\n// ${titlePrefixSpace + title + titleSuffixSpace} //\n// ${line} //\n\n`
   }
 
-  export const reservedTypeScriptInterfaceNames = [
-    `private`,
-    `protected`,
-    `public`,
-    `package`,
+  // JavaScript reserved keywords - cannot be used as identifiers in any context
+  const reservedJavaScriptKeywords = [
     `break`,
     `case`,
     `catch`,
@@ -305,8 +341,21 @@ export namespace Code {
     `while`,
     `with`,
     `implements`,
+    `interface`,
+    `let`,
+    `package`,
+    `private`,
+    `protected`,
+    `public`,
+    `static`,
+    `yield`,
+  ] as const
+
+  // TypeScript type keywords - would shadow built-in types if used as type names
+  const reservedTypeScriptTypeNames = [
     `any`,
     `boolean`,
+    `bigint`,
     `never`,
     `number`,
     `object`,
@@ -314,11 +363,13 @@ export namespace Code {
     `symbol`,
     `undefined`,
     `unknown`,
-    `bigint`,
-    `break`,
-    `with`,
-    `break`,
-    `of`,
-    `interface`,
+    `void`,
+  ] as const
+
+  // Combined list for general identifier checking (type and value contexts)
+  export const reservedTypeScriptInterfaceNames = [
+    ...reservedJavaScriptKeywords,
+    ...reservedTypeScriptTypeNames,
+    `of`, // Iterator keyword
   ]
 }

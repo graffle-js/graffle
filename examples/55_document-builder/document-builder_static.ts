@@ -9,8 +9,8 @@
  * └───────────────────────────────────────────────────────────┘
  */
 
+import { mutation, query } from '../$/graffle/modules/document.js'
 import { showJson } from '../$/helpers.js'
-import { query, mutation } from '../$/graffle/modules/document.js'
 //     ^^^^^  ^^^^^^^^
 // Static builders - no runtime client needed!
 
@@ -38,8 +38,8 @@ console.log(doc1.document)
 
 const doc2 = query.pokemonByName({
   $: { name: $var },
-//         ^^^^
-// Automatically extracted as GraphQL variable
+  //         ^^^^
+  // Automatically extracted as GraphQL variable
   name: true,
   type: true,
 })
@@ -59,11 +59,11 @@ const doc3 = query.pokemons({
   $: {
     filter: {
       name: { in: $var.optional.list },
-//                ^^^^^^^^^^^^^^^^^^
-//                Optional list of strings
+      //                ^^^^^^^^^^^^^^^^^^
+      //                Optional list of strings
       hp: { gte: $var },
-//              ^^^^
-//          Required number
+      //              ^^^^
+      //          Required number
     },
   },
   name: true,
@@ -128,15 +128,15 @@ console.log(doc4.document)
 const doc5 = query.trainers({
   $: {
     filter: { class: { eq: $var } },
-//                         ^^^^
-//                    Root-level argument
+    //                         ^^^^
+    //                    Root-level argument
   },
   name: true,
   pokemons: {
     $: {
       filter: { type: $var },
-//                    ^^^^
-//              Nested field argument ヽ(´▽`)/
+      //                    ^^^^
+      //              Nested field argument ヽ(´▽`)/
     },
     name: true,
     type: true,

@@ -28,13 +28,13 @@ Generate typed GraphQL document strings at compile-time without a client instanc
 After running the generator, import `query`, `mutation`, or `subscription` builders from your generated code. Call methods to generate `TypedDocument.String` objects with the GraphQL string and full TypeScript types.
 
 ```ts
+import { $var } from 'graffle/extensions/document-builder'
 import { query } from './graffle/modules/document.js'
-import { $var } from 'graffle/extensions/document-builder/var'
 
 const doc = query.user({
-  $: { id: $var },  // Variables automatically extracted
+  $: { id: $var }, // Variables automatically extracted
   name: true,
-  email: true
+  email: true,
 })
 
 // doc.document → GraphQL string
@@ -51,6 +51,7 @@ const doc = query.user({
 - **Zero Runtime**: Documents generated at compile-time
 
 **Example:**
+
 - [Complete Example](../../../examples/55_document-builder/document-builder_static.ts)
 
 ## GraphQL Feature Mapping
