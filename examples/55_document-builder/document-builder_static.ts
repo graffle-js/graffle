@@ -9,12 +9,10 @@
  * └───────────────────────────────────────────────────────────┘
  */
 
-import { mutation, query } from '../$/graffle/modules/document.js'
+import { Graffle } from '../$/graffle/_namespace.js'
 import { showJson } from '../$/helpers.js'
-//     ^^^^^  ^^^^^^^^
-// Static builders - no runtime client needed!
 
-import { $var } from 'graffle/extensions/document-builder/var'
+import { $var } from 'graffle/extensions/document-builder'
 //     ^^^^
 // Special marker for variable extraction
 
@@ -22,7 +20,7 @@ import { $var } from 'graffle/extensions/document-builder/var'
 // │ 1. Basic Selection                                          │
 // └─────────────────────────────────────────────────────────────┘
 
-const doc1 = query.pokemons({
+const doc1 = Graffle.query.pokemons({
   name: true,
   hp: true,
   trainer: { name: true },
@@ -36,7 +34,7 @@ console.log(doc1.document)
 // │ 2. Variables with $var                                      │
 // └─────────────────────────────────────────────────────────────┘
 
-const doc2 = query.pokemonByName({
+const doc2 = Graffle.query.pokemonByName({
   $: { name: $var },
   //         ^^^^
   // Automatically extracted as GraphQL variable
@@ -55,7 +53,7 @@ console.log(doc2.document)
 // │ 3. Variable Modifiers                                       │
 // └─────────────────────────────────────────────────────────────┘
 
-const doc3 = query.pokemons({
+const doc3 = Graffle.query.pokemons({
   $: {
     filter: {
       name: { in: $var.optional.list },
@@ -90,7 +88,7 @@ const day = 1000 * 60 * 60 * 24
 const year = day * 365.25
 
 // dprint-ignore
-const doc4 = query.$batch({
+const doc4 = Graffle.query.$batch({
   elderPokemons: ['elderPokemons', {
 //               ^^^^^^^^^^^^^^^^^^
 //               Alias name
@@ -125,7 +123,7 @@ console.log(doc4.document)
 // │ 5. Nested Arguments                                         │
 // └─────────────────────────────────────────────────────────────┘
 
-const doc5 = query.trainers({
+const doc5 = Graffle.query.trainers({
   $: {
     filter: { class: { eq: $var } },
     //                         ^^^^
@@ -159,7 +157,7 @@ console.log(doc5.document)
 // │ 6. Mutations                                                │
 // └─────────────────────────────────────────────────────────────┘
 
-const doc6 = mutation.addPokemon({
+const doc6 = Graffle.mutation.addPokemon({
   $: {
     name: $var,
     type: $var,

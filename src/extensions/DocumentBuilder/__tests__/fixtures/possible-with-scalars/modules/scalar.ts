@@ -32,12 +32,13 @@ export type DateEncoded = $$Utilities.Schema.Scalar.GetEncoded<Date_>
 //
 //
 
-export type $bigint = typeof CustomScalars.bigint
+type $bigint = typeof CustomScalars.bigint
+export { type $bigint as bigint }
 // Without this we get error:
 // "Exported type alias 'DateDecoded' has or is using private name 'Date'."
 type $bigint_ = typeof CustomScalars.bigint
-export type $bigintDecoded = $$Utilities.Schema.Scalar.GetDecoded<$bigint_>
-export type $bigintEncoded = $$Utilities.Schema.Scalar.GetEncoded<$bigint_>
+export type bigintDecoded = $$Utilities.Schema.Scalar.GetDecoded<$bigint_>
+export type bigintEncoded = $$Utilities.Schema.Scalar.GetEncoded<$bigint_>
 
 export * from '../../../../../../types/Schema/StandardTypes/scalar.js'
 

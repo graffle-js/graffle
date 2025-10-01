@@ -106,7 +106,7 @@ export const createOperationContext = (options?: Options): OperationContext => {
     sddm: options?.sddm ?? undefined,
     scalars: options?.scalars ?? {},
     variables: {
-      enabled: options?.operationVariables ?? true,
+      enabled: options?.hoistArguments ?? true,
       capture: (input) => {
         let potentialVariableName = input.name
         let nameIndex = 2

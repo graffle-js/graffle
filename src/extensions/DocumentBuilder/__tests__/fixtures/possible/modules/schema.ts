@@ -2454,7 +2454,8 @@ export namespace Schema {
   // --------------------------------------------------------------------------------------------------
   //
 
-  export type $bigint = $$Scalar.$bigint
+  type $bigint = $$Scalar.$bigint
+  export { type $bigint as bigint }
 
   //
   //
