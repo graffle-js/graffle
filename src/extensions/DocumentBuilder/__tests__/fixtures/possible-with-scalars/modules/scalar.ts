@@ -1,6 +1,5 @@
 import type * as $$Utilities from '../../../../../../exports/utilities-for-generated.js'
 import * as CustomScalars from '../../possible.scalars.js'
-export { bigint, Date } from '../../possible.scalars.js'
 //
 //
 //
@@ -13,12 +12,10 @@ export { bigint, Date } from '../../possible.scalars.js'
 //
 //
 
+export const Date = CustomScalars.Date
 export type Date = typeof CustomScalars.Date
-// Without this we get error:
-// "Exported type alias 'DateDecoded' has or is using private name 'Date'."
-type Date_ = typeof CustomScalars.Date
-export type DateDecoded = $$Utilities.Schema.Scalar.GetDecoded<Date_>
-export type DateEncoded = $$Utilities.Schema.Scalar.GetEncoded<Date_>
+export type DateDecoded = $$Utilities.Schema.Scalar.GetDecoded<Date>
+export type DateEncoded = $$Utilities.Schema.Scalar.GetEncoded<Date>
 
 //
 //
@@ -32,13 +29,11 @@ export type DateEncoded = $$Utilities.Schema.Scalar.GetEncoded<Date_>
 //
 //
 
+const $bigint = CustomScalars.bigint
 type $bigint = typeof CustomScalars.bigint
-export { type $bigint as bigint }
-// Without this we get error:
-// "Exported type alias 'DateDecoded' has or is using private name 'Date'."
-type $bigint_ = typeof CustomScalars.bigint
-export type bigintDecoded = $$Utilities.Schema.Scalar.GetDecoded<$bigint_>
-export type bigintEncoded = $$Utilities.Schema.Scalar.GetEncoded<$bigint_>
+export { $bigint as bigint }
+export type bigintDecoded = $$Utilities.Schema.Scalar.GetDecoded<$bigint>
+export type bigintEncoded = $$Utilities.Schema.Scalar.GetEncoded<$bigint>
 
 export * from '../../../../../../types/Schema/StandardTypes/scalar.js'
 
@@ -67,11 +62,11 @@ export const $registry = {
 
 export type $Registry = $$Utilities.Schema.Scalar.Registry<
   {
-    Date: Date_
-    bigint: $bigint_
+    Date: Date
+    bigint: $bigint
   },
-  | $$Utilities.Schema.Scalar.GetEncoded<Date_>
-  | $$Utilities.Schema.Scalar.GetEncoded<$bigint_>,
-  | $$Utilities.Schema.Scalar.GetDecoded<Date_>
-  | $$Utilities.Schema.Scalar.GetDecoded<$bigint_>
+  | $$Utilities.Schema.Scalar.GetEncoded<Date>
+  | $$Utilities.Schema.Scalar.GetEncoded<$bigint>,
+  | $$Utilities.Schema.Scalar.GetDecoded<Date>
+  | $$Utilities.Schema.Scalar.GetDecoded<$bigint>
 >

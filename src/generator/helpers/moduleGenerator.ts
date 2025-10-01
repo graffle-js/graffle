@@ -35,6 +35,12 @@ export interface ModuleGenerator<$Name extends string = string> {
 export interface GeneratedModule<$Name extends string = string> {
   name: $Name
   content: string
+  /**
+   * Optional custom file path relative to modules directory.
+   * If provided, overrides the default path construction.
+   * Example: "schema/types/Query/fields.ts"
+   */
+  filePath?: string
 }
 
 export const createModuleGenerator: FactoryModuleGenerator = (name, sourceFileUrlOrRunner, runnerImplementation) => {
@@ -94,9 +100,16 @@ export const importModuleGenerator = (config: Config, generator: ModuleGenerator
 }
 
 export const getBaseName = (config: Config, generator: ModuleGenerator | GeneratedModule) => {
-  return isExportsModule(generator.name)
-    ? generator.name
-    : caseFormatters[config.outputCase](generator.name)
+  if (isExportsModule(generator.name)) {
+    return generator.name
+  }
+
+  // Handle paths (e.g., "schema/$" should become "schema/$", not "schema-dollar")
+  if (generator.name.includes('/')) {
+    return generator.name
+  }
+
+  return caseFormatters[config.outputCase](generator.name)
 }
 
 export const getFileName = (config: Config, generator: ModuleGenerator | GeneratedModule) => {

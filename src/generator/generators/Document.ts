@@ -40,7 +40,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
     if (queryType) {
       code`
         import type * as $$Utilities from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
-        import type * as $$Schema from './schema.js'
+        import type * as $$Schema from './schema/$.js'
 
         /**
          * Context for static document type inference.
@@ -115,7 +115,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
           ? `import type * as $$Utilities from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'`
           : ''
       }
-        ${!queryType ? `import type * as $$Schema from './schema.js'` : ''}
+        ${!queryType ? `import type * as $$Schema from './schema/$.js'` : ''}
         ${
         !queryType
           ? `
@@ -184,7 +184,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
           ? `import type * as $$Utilities from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'`
           : ''
       }
-        ${!queryType && !mutationType ? `import type * as $$Schema from './schema.js'` : ''}
+        ${!queryType && !mutationType ? `import type * as $$Schema from './schema/$.js'` : ''}
         ${
         !queryType && !mutationType
           ? `

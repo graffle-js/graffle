@@ -152,7 +152,7 @@ export namespace Mutation {
   >
 }
 
-import type * as $$Schema from './schema.js'
+import type * as $$Schema from './schema/$.js'
 
 export type Mutation$Infer<$SelectionSet extends object> = $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
   $SelectionSet,

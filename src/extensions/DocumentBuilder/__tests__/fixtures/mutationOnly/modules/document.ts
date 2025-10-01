@@ -4,7 +4,7 @@ import { createStaticRootType } from '../../../../../../exports/extensions/docum
 import type * as $$Utilities from '../../../../../../exports/utilities-for-generated.js'
 import type * as ArgumentsMap from './arguments-map.js'
 import type * as $$Scalar from './scalar.js'
-import type * as $$Schema from './schema.js'
+import type * as $$Schema from './schema/$.js'
 import type * as SelectionSets from './selection-sets.js'
 
 /**

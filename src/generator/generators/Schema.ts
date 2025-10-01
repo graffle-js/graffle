@@ -1,354 +1,526 @@
+import { CodePusher } from '../../lib/code-pusher/index.js'
 import { Code } from '../../lib/Code.js'
 import { Grafaid } from '../../lib/grafaid/_namespace.js'
 import { entries, isObjectEmpty, values } from '../../lib/prelude.js'
 import { Tex } from '../../lib/tex/_namespace.js'
+import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
-import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
+import { type GeneratedModule, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { type CodeGenerator, createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
+import { getUtilitiesPath } from '../helpers/pathHelpers.js'
 import { getTsDocContents, renderInlineType, renderName } from '../helpers/render.js'
-import type { KindRenderers } from '../helpers/types.js'
 import { ModuleGeneratorData } from './Data.js'
 import { ModuleGeneratorScalar } from './Scalar.js'
 
-export const ModuleGeneratorSchema = createModuleGenerator(
-  `schema`,
-  ({ config, code }) => {
+export const ModuleGeneratorSchema = {
+  name: `schema/$`,
+  generate: (config: Config): GeneratedModule[] => {
+    const modules: GeneratedModule[] = []
     const kindMap = config.schema.kindMap.list
-    const kinds = entries(kindMap)
 
-    // todo methods root is unused
-    code`
-      ${importModuleGenerator(config, ModuleGeneratorData)}
-      ${importModuleGenerator(config, ModuleGeneratorScalar)}
-      import type { Schema as $ } from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
-      import type * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
-    `
-    code``
-
-    code`export namespace ${$.Schema} {`
-
-    for (const [kindName, kind] of kinds) {
-      const renderer = kindRenderers[kindName] as CodeGenerator<{ type: Grafaid.Schema.Types }>
-      code(Tex.title1(kindName))
-      code``
-      for (const type of kind) {
-        code(Tex.title2(type.name))
-        code``
-        code(renderer({ config, type }))
-        code``
-      }
+    // Generate scalars - one file per scalar in schema/scalars/
+    for (const scalar of [...kindMap.ScalarCustom, ...kindMap.ScalarStandard]) {
+      modules.push(generateScalarModule(config, scalar))
     }
 
-    code(Tex.title1(`Named Types Index`))
-    code``
-    code`
-      /**
-       * [1] These definitions serve to allow field selection interfaces to extend their respective object type without
-       *     name clashing between the field name and the object name.
-       * 
-       *     For example imagine \`Query.Foo\` field with type also called \`Foo\`. Our generated interfaces for each field
-       *     would end up with an error of \`export interface Foo extends Foo ...\`
-       */
-    `
-    code``
-    code(
-      Code.tsNamespace(
-        `$$NamedTypes`,
-        kinds
-          .map(([, type]) => type)
-          .flat()
-          .map((type) => {
-            return Code.esmExport(Code.tsType(`$$${type.name}`, renderName(type)))
-          }).join(`\n`),
-      ),
-    )
-    code``
-    code`}`
-    code``
-    code(SchemaGenerator({ config }))
-  },
-)
+    // Generate enums - one file per enum in schema/enums/
+    for (const enumType of kindMap.Enum) {
+      modules.push(generateEnumModule(config, enumType))
+    }
 
-const OutputObject = createCodeGenerator<{ type: Grafaid.Schema.ObjectType }>(({ config, code, type }) => {
+    // Generate unions - one file per union in schema/unions/
+    for (const unionType of kindMap.Union) {
+      modules.push(generateUnionModule(config, unionType))
+    }
+
+    // Generate input objects - directory per input object in schema/input-objects/
+    for (const inputObject of kindMap.InputObject) {
+      modules.push(...generateInputObjectModule(config, inputObject))
+    }
+
+    // Generate roots - directory per root in schema/roots/
+    for (const root of kindMap.Root) {
+      modules.push(...generateTypeModule(config, root, 'roots'))
+    }
+
+    // Generate objects - directory per object in schema/objects/
+    for (const object of kindMap.OutputObject) {
+      modules.push(...generateTypeModule(config, object, 'objects'))
+    }
+
+    // Generate interfaces - directory per interface in schema/interfaces/
+    for (const iface of kindMap.Interface) {
+      modules.push(...generateTypeModule(config, iface, 'interfaces'))
+    }
+
+    // Generate schema/$$.ts (main module with re-exports)
+    modules.push(generateSchemaBarrelModule(config, kindMap))
+
+    // Generate schema/$.ts (namespace export + Schema interface)
+    modules.push(generateSchemaNamespaceModule(config, kindMap))
+
+    return modules
+  },
+}
+
+// Individual module generators
+
+const generateScalarModule = (config: Config, scalar: Grafaid.Schema.ScalarType): GeneratedModule => {
+  const code = CodePusher.create()
+  const renderedName = renderName(scalar)
+  const originalName = scalar.name
+  const isCustom = config.schema.kindMap.list.ScalarCustom.includes(scalar)
+
+  // Export names are never escaped - use re-export with aliasing if needed
+  if (isCustom) {
+    code(`export type { ${originalName} } from '../../scalar.js'`)
+  } else {
+    const utilitiesPath = getUtilitiesPath(config, `schema/scalars/${renderedName}.ts`)
+    code(`export type { ${originalName} } from '${utilitiesPath}'`)
+  }
+
+  return {
+    name: `schema/scalars/${scalar.name}`,
+    filePath: `schema/scalars/${renderedName}.ts`,
+    content: code.toString(),
+  }
+}
+
+const generateEnumModule = (config: Config, enumType: Grafaid.Schema.EnumType): GeneratedModule => {
+  const code = CodePusher.create()
+
+  if (config.code.schemaInterfaceExtendsEnabled) {
+    const utilitiesPath = getUtilitiesPath(config, `schema/enums/${enumType.name}.ts`)
+    code(`import type * as $ from '${utilitiesPath}'`)
+    code()
+  }
+
+  code(
+    Code.tsInterface({
+      tsDoc: getTsDocContents(config, enumType),
+      export: true,
+      name: enumType.name,
+      extends: config.code.schemaInterfaceExtendsEnabled ? `$.Schema.Enum` : null,
+      block: {
+        kind: Code.string(Grafaid.Schema.TypeKind.Enum),
+        name: Code.string(enumType.name),
+        members: Code.tsTuple(enumType.getValues().map((_) => Code.string(_.name))),
+        membersUnion: Code.tsUnionItems(enumType.getValues().map((_) => Code.string(_.name))),
+      },
+    }),
+  )
+
+  return {
+    name: `schema/enums/${enumType.name}`,
+    filePath: `schema/enums/${enumType.name}.ts`,
+    content: code.toString(),
+  }
+}
+
+const generateUnionModule = (config: Config, unionType: Grafaid.Schema.UnionType): GeneratedModule => {
+  const code = CodePusher.create()
+
+  if (config.code.schemaInterfaceExtendsEnabled) {
+    const utilitiesPath = getUtilitiesPath(config, `schema/unions/${unionType.name}.ts`)
+    code(`import type * as $ from '${utilitiesPath}'`)
+  }
+
+  const members = unionType.getTypes()
+  const memberNames = members.map((_) => _.name)
+
+  // Import member types from their respective directories
+  for (const member of members) {
+    // Determine which directory the member is in
+    const isRoot = config.schema.kindMap.list.Root.some(r => r.name === member.name)
+    const dir = isRoot ? 'roots' : 'objects'
+    code(`import type { ${member.name} } from '../${dir}/${member.name}/$.js'`)
+  }
+  code()
+
+  code(Code.tsInterface({
+    tsDoc: getTsDocContents(config, unionType),
+    export: true,
+    name: unionType.name,
+    extends: config.code.schemaInterfaceExtendsEnabled ? `$.Schema.Union` : null,
+    block: {
+      kind: Code.string(Grafaid.Schema.TypeKind.Union),
+      name: Code.string(unionType.name),
+      members: Code.tsTuple(memberNames),
+      membersUnion: Code.tsUnionItems(memberNames),
+      membersIndex: Object.fromEntries(memberNames.map(n => [n, n])),
+    },
+  }))
+
+  return {
+    name: `schema/unions/${unionType.name}`,
+    filePath: `schema/unions/${unionType.name}.ts`,
+    content: code.toString(),
+  }
+}
+
+const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.InputObjectType): GeneratedModule[] => {
+  const modules: GeneratedModule[] = []
+
+  // Generate fields.ts
+  const fieldsCode = CodePusher.create()
+  if (config.code.schemaInterfaceExtendsEnabled) {
+    const utilitiesPath = getUtilitiesPath(config, `schema/input-objects/${inputObject.name}/fields.ts`)
+    fieldsCode(`import type * as $ from '${utilitiesPath}'`)
+  }
+  fieldsCode(`import type { Schema as $Schema } from '../../$.js'`)
+  fieldsCode()
+
+  // Generate field interfaces
+  for (const field of values(inputObject.getFields())) {
+    const namedType = Grafaid.Schema.getNamedType(field.type)
+
+    fieldsCode(Code.tsInterface({
+      tsDoc: getTsDocContents(config, field),
+      export: true,
+      name: field.name,
+      extends: config.code.schemaInterfaceExtendsEnabled ? `$.Schema.InputField` : null,
+      block: {
+        kind: Code.string(`InputField`),
+        name: Code.string(field.name),
+        inlineType: renderInlineType(field.type),
+        namedType: namedTypesTypeReference(namedType),
+      },
+    }))
+    fieldsCode()
+  }
+
+  modules.push({
+    name: `schema/input-objects/${inputObject.name}/fields`,
+    filePath: `schema/input-objects/${inputObject.name}/fields.ts`,
+    content: fieldsCode.toString(),
+  })
+
+  // Generate $.ts (namespace export + interface)
+  const namespaceCode = CodePusher.create()
+  if (config.code.schemaInterfaceExtendsEnabled) {
+    const utilitiesPath = getUtilitiesPath(config, `schema/input-objects/${inputObject.name}/$.ts`)
+    namespaceCode(`import type * as $ from '${utilitiesPath}'`)
+  }
+  namespaceCode(`import type * as $Fields from './fields.js'`)
+  namespaceCode()
+  namespaceCode(`export * as ${inputObject.name} from './fields.js'`)
+  namespaceCode()
+
   const interfaceFields = Object.fromEntries(
-    [[`__typename`, `${renderName(type)}.__typename`]].concat(
+    values(inputObject.getFields()).map((field) => {
+      const name = field.name
+      // Always use original name - export alias handles reserved keywords
+      const fieldTypeReference = `$Fields.${name}`
+      return [name, fieldTypeReference]
+    }),
+  )
+
+  namespaceCode(Code.tsInterface({
+    tsDoc: getTsDocContents(config, inputObject),
+    export: true,
+    name: inputObject.name,
+    extends: config.code.schemaInterfaceExtendsEnabled ? `$.Schema.InputObject` : null,
+    block: {
+      kind: Code.string(Grafaid.Schema.TypeKind.InputObject),
+      name: Code.string(inputObject.name),
+      isAllFieldsNullable: Code.boolean(Grafaid.Schema.isAllInputObjectFieldsNullable(inputObject)),
+      fields: interfaceFields,
+    },
+  }))
+
+  modules.push({
+    name: `schema/input-objects/${inputObject.name}/$`,
+    filePath: `schema/input-objects/${inputObject.name}/$.ts`,
+    content: namespaceCode.toString(),
+  })
+
+  return modules
+}
+
+const generateSchemaNamespaceModule = (config: Config, kindMap: Grafaid.Schema.KindMap['list']): GeneratedModule => {
+  const code = CodePusher.create()
+  const utilitiesPath = getUtilitiesPath(config, `schema/$.ts`)
+
+  code(`import type * as $ from '${utilitiesPath}'`)
+  code(`import * as $$Data from '../data.js'`)
+  code(`import * as $$Scalar from '../scalar.js'`)
+  code(`import * as $Types from './$$.js'`)
+  code()
+  code(`export * as Schema from './$$.js'`)
+  code()
+
+  // Generate Schema interface here to avoid name conflict
+  const root = kindMap.Root.map(_ => [_.name, `$Types.${_.name}`] as const)
+  const objects = kindMap.OutputObject.map(_ => [_.name, `$Types.${_.name}`] as const)
+  const unions = kindMap.Union.map(_ => [_.name, `$Types.${_.name}`] as const)
+  const interfaces = kindMap.Interface.map(_ => [_.name, `$Types.${_.name}`] as const)
+  const enums = kindMap.Enum.map(_ => [_.name, `$Types.${_.name}`] as const)
+  const scalars = [
+    ...kindMap.ScalarCustom.map(_ => [_.name, `$Types.${_.name}`] as const),
+    ...kindMap.ScalarStandard.map(_ => [_.name, `$Types.${_.name}`] as const),
+  ]
+  const operationsAvailable = entries(config.schema.kindMap.index.Root).filter(_ => _[1] !== null).map(_ => _[0])
+
+  const schema: Code.TermObject = {
+    name: `$$Data.Name`,
+    operationsAvailable: Code.tsTuple(operationsAvailable.map(_ => Code.string(_))),
+    RootUnion: Code.tsUnionItems(kindMap.Root.map(_ => `$Types.${_.name}`)),
+    Root: {
+      [Grafaid.Document.OperationTypeNode.QUERY]: config.schema.kindMap.index.Root.query?.name
+        ? `$Types.${config.schema.kindMap.index.Root.query.name}`
+        : null,
+      [Grafaid.Document.OperationTypeNode.MUTATION]: config.schema.kindMap.index.Root.mutation?.name
+        ? `$Types.${config.schema.kindMap.index.Root.mutation.name}`
+        : null,
+      [Grafaid.Document.OperationTypeNode.SUBSCRIPTION]: config.schema.kindMap.index.Root.subscription?.name
+        ? `$Types.${config.schema.kindMap.index.Root.subscription.name}`
+        : null,
+    },
+    allTypes: Object.fromEntries([
+      ...root,
+      ...enums,
+      ...objects,
+      ...unions,
+      ...interfaces,
+    ]),
+    objects,
+    unions,
+    interfaces,
+    scalarNamesUnion: Code.tsUnionItems(scalars.map(_ => _[0]).map(Code.string)),
+    scalars,
+    scalarRegistry: `$$Scalar.$Registry`,
+    extensions: `$.GlobalRegistry.TypeExtensions`,
+  }
+
+  const extensions: Code.TermObject = {}
+  config.extensions.forEach(_ => {
+    _.onSchema?.({ config, schema: extensions })
+  })
+  if (!isObjectEmpty(extensions)) {
+    schema[`extensions`] = extensions
+  }
+
+  code(Code.tsInterface({
+    export: true,
+    name: `Schema`,
+    parameters: `$Scalars extends $.Schema.Scalar.Registry = $$Scalar.$Registry`,
+    extends: config.code.schemaInterfaceExtendsEnabled ? `$.Schema` : null,
+    block: schema,
+  }))
+
+  return {
+    name: `schema/$`,
+    filePath: `schema/$.ts`,
+    content: code.toString(),
+  }
+}
+
+const generateSchemaBarrelModule = (config: Config, kindMap: Grafaid.Schema.KindMap['list']): GeneratedModule => {
+  const code = CodePusher.create()
+
+  // Re-export roots
+  for (const type of kindMap.Root) {
+    code(`export type * from './roots/${type.name}/$.js'`)
+  }
+
+  // Re-export objects
+  for (const type of kindMap.OutputObject) {
+    code(`export type * from './objects/${type.name}/$.js'`)
+  }
+
+  // Re-export interfaces
+  for (const type of kindMap.Interface) {
+    code(`export type * from './interfaces/${type.name}/$.js'`)
+  }
+
+  // Re-export scalars
+  const scalars = [
+    ...kindMap.ScalarCustom,
+    ...kindMap.ScalarStandard,
+  ]
+  for (const scalar of scalars) {
+    const renderedName = renderName(scalar)
+    code(`export type * from './scalars/${renderedName}.js'`)
+  }
+
+  // Re-export enums
+  for (const type of kindMap.Enum) {
+    code(`export type * from './enums/${type.name}.js'`)
+  }
+
+  // Re-export unions
+  for (const type of kindMap.Union) {
+    code(`export type * from './unions/${type.name}.js'`)
+  }
+
+  // Re-export input objects
+  for (const type of kindMap.InputObject) {
+    code(`export type * from './input-objects/${type.name}/$.js'`)
+  }
+  code()
+
+  return {
+    name: `schema/$$`,
+    filePath: `schema/$$.ts`,
+    content: code.toString(),
+  }
+}
+
+const generateTypeModule = (
+  config: Config,
+  type: Grafaid.Schema.ObjectType | Grafaid.Schema.InterfaceType,
+  kind: 'roots' | 'objects' | 'interfaces',
+): GeneratedModule[] => {
+  const modules: GeneratedModule[] = []
+
+  // Generate fields.ts
+  const fieldsCode = CodePusher.create()
+  if (config.code.schemaInterfaceExtendsEnabled) {
+    const utilitiesPath = getUtilitiesPath(config, `schema/${kind}/${type.name}/fields.ts`)
+    fieldsCode(`import type * as $ from '${utilitiesPath}'`)
+  }
+  fieldsCode(`import type { Schema as $Schema } from '../../$.js'`)
+  fieldsCode()
+
+  // __typename field
+  fieldsCode(Code.tsInterface({
+    export: true,
+    name: `__typename`,
+    extends: config.code.schemaInterfaceExtendsEnabled ? `$.Schema.OutputField` : null,
+    block: {
+      kind: Code.string(`OutputField`),
+      name: Code.string(`__typename`),
+      arguments: {},
+      inlineType: `[1]`,
+      namedType: {
+        kind: Code.string(`__typename`),
+        value: Code.string(type.name),
+      },
+    },
+  }))
+  fieldsCode()
+
+  // Regular fields
+  for (const field of values(type.getFields())) {
+    const namedType = Grafaid.Schema.getNamedType(field.type)
+
+    fieldsCode(Code.tsInterface({
+      tsDoc: getTsDocContents(config, field),
+      export: true,
+      name: field.name,
+      extends: config.code.schemaInterfaceExtendsEnabled ? `$.Schema.OutputField` : null,
+      block: {
+        kind: Code.string(`OutputField`),
+        name: Code.string(field.name),
+        arguments: Object.fromEntries(field.args.map(arg => {
+          return [
+            arg.name,
+            Code.objectField$({
+              tsDoc: getTsDocContents(config, arg),
+              value: {
+                kind: Code.string(`InputField`),
+                name: Code.string(arg.name),
+                inlineType: renderInlineType(arg.type),
+                namedType: namedTypesTypeReference(Grafaid.Schema.getNamedType(arg.type)),
+              },
+            }),
+          ]
+        })),
+        inlineType: renderInlineType(field.type),
+        namedType: namedTypesTypeReference(namedType),
+      },
+    }))
+    fieldsCode()
+  }
+
+  modules.push({
+    name: `schema/${kind}/${type.name}/fields`,
+    filePath: `schema/${kind}/${type.name}/fields.ts`,
+    content: fieldsCode.toString(),
+  })
+
+  // Generate $.ts (namespace export + interface)
+  const namespaceCode = CodePusher.create()
+  if (config.code.schemaInterfaceExtendsEnabled) {
+    const utilitiesPath = getUtilitiesPath(config, `schema/${kind}/${type.name}/$.ts`)
+    namespaceCode(`import type * as $ from '${utilitiesPath}'`)
+  }
+  namespaceCode(`import type * as $Fields from './fields.js'`)
+
+  // For interfaces, import implementor types from the barrel
+  const isInterface = type instanceof Grafaid.Schema.InterfaceType
+  if (isInterface) {
+    const implementors = Grafaid.Schema.KindMap.getInterfaceImplementors(
+      config.schema.kindMap,
+      type as Grafaid.Schema.InterfaceType,
+    )
+    if (implementors.length > 0) {
+      // Import from barrel which is 2 levels up from schema/{kind}/{TypeName}/
+      namespaceCode(`import type { ${implementors.map(_ => _.name).join(', ')} } from '../../$$.js'`)
+    }
+  }
+
+  namespaceCode()
+  namespaceCode(`export * as ${type.name} from './fields.js'`)
+  namespaceCode()
+
+  const interfaceFields = Object.fromEntries(
+    [[`__typename`, `$Fields.__typename`]].concat(
       values(type.getFields()).map((field) => {
         const name = field.name
-        const fieldTypeReference = `${renderName(type.name)}.${renderName(field.name)}`
+        // Always use original name - export alias handles reserved keywords
+        const fieldTypeReference = `$Fields.${name}`
         return [name, fieldTypeReference]
       }),
     ),
   )
 
-  // The Type
-
-  code(Code.tsInterface({
-    tsDoc: getTsDocContents(config, type),
-    name: type.name,
-    extends: config.code.schemaInterfaceExtendsEnabled ? `$.OutputObject` : null,
-    block: {
-      kind: Code.string(Grafaid.Schema.TypeKind.Object),
-      name: Code.string(type.name),
-      fields: interfaceFields,
-    },
-  }))
-  code``
-
-  // Fields of the Type
-
-  code(OutputFields({ config, type }))
-  code``
-})
-
-const Enum = createCodeGenerator<{ type: Grafaid.Schema.EnumType }>(({ config, code, type }) => {
-  code(
-    Code.tsInterface({
-      tsDoc: getTsDocContents(config, type),
-      export: true,
-      name: type.name,
-      extends: config.code.schemaInterfaceExtendsEnabled ? `$.Enum` : null,
-      block: {
-        kind: Code.string(Grafaid.Schema.TypeKind.Enum),
-        name: Code.string(type.name),
-        members: Code.tsTuple(type.getValues().map((_) => Code.string(_.name))),
-        membersUnion: Code.tsUnionItems(type.getValues().map((_) => Code.string(_.name))),
-      },
-    }),
-  )
-  code``
-})
-const InputObject = createCodeGenerator<{ type: Grafaid.Schema.InputObjectType }>(({ config, code, type }) => {
-  code(
-    Code.tsInterface({
-      tsDoc: getTsDocContents(config, type),
-      name: type.name,
-      extends: config.code.schemaInterfaceExtendsEnabled ? `$.InputObject` : null,
-      block: {
-        kind: Code.string(Grafaid.Schema.TypeKind.InputObject),
-        name: Code.string(type.name),
-        isAllFieldsNullable: Code.boolean(Grafaid.Schema.isAllInputObjectFieldsNullable(type)),
-        fields: Object.fromEntries(
-          values(type.getFields()).map(field => {
-            return [field.name, `${renderName(type)}.${renderName(field)}`]
-          }),
-        ),
-      },
-    }),
-  )
-  code``
-  code(Code.esmExport(Code.tsNamespace(
-    type.name,
-    values(type.getFields())
-      .map((field) => {
-        const namedType = Grafaid.Schema.getNamedType(field.type)
-        return Code.tsInterface({
-          tsDoc: getTsDocContents(config, field),
-          name: field.name,
-          extends: config.code.schemaInterfaceExtendsEnabled ? `$.InputField` : null,
-          block: {
-            kind: Code.string(`InputField`), // todo pull this from schema data type
-            name: Code.string(field.name),
-            inlineType: renderInlineType(field.type),
-            namedType: namedTypesTypeReference(namedType),
-          },
-        })
-      })
-      .join(`\n\n`),
-  )))
-  code``
-})
-
-const ScalarStandard = createCodeGenerator<{ type: Grafaid.Schema.ScalarType }>(({ code, type }) => {
-  code(Code.esmExport(Code.tsType(type.name, `$.StandardTypes.${type.name}`)))
-  code``
-})
-
-const ScalarCustom = createCodeGenerator<{ type: Grafaid.Schema.ScalarType }>(({ code, type }) => {
-  const escapedName = renderName(type.name)
-  code(Code.tsTypeExport(type.name, `$$Scalar.${escapedName}`))
-  code``
-})
-
-const Union = createCodeGenerator<{ type: Grafaid.Schema.UnionType }>(({ config, code, type }) => {
-  const memberNames = type.getTypes().map((_) => renderName(_))
-  code(Code.tsInterface({
+  namespaceCode(Code.tsInterface({
     tsDoc: getTsDocContents(config, type),
     export: true,
     name: type.name,
-    extends: config.code.schemaInterfaceExtendsEnabled ? `$.Union` : null,
+    extends: config.code.schemaInterfaceExtendsEnabled
+      ? (isInterface ? `$.Schema.Interface` : `$.Schema.OutputObject`)
+      : null,
     block: {
-      kind: Code.string(Grafaid.Schema.TypeKind.Union),
+      kind: Code.string(isInterface ? Grafaid.Schema.TypeKind.Interface : Grafaid.Schema.TypeKind.Object),
       name: Code.string(type.name),
-      members: Code.tsTuple(memberNames),
-      membersUnion: Code.tsUnionItems(memberNames),
-      membersIndex: Object.fromEntries(memberNames.map(n => [n, renderName(n)])),
+      fields: interfaceFields,
+      ...(isInterface
+        ? {
+          implementors: Code.tsTuple(
+            Grafaid.Schema.KindMap.getInterfaceImplementors(config.schema.kindMap, type as Grafaid.Schema.InterfaceType)
+              .map(_ => _.name),
+          ),
+          implementorsUnion:
+            Grafaid.Schema.KindMap.getInterfaceImplementors(config.schema.kindMap, type as Grafaid.Schema.InterfaceType)
+                .length > 0
+              ? Code.tsUnionItems(
+                Grafaid.Schema.KindMap.getInterfaceImplementors(
+                  config.schema.kindMap,
+                  type as Grafaid.Schema.InterfaceType,
+                ).map(_ => _.name),
+              )
+              : `never`,
+          implementorsIndex: Object.fromEntries(
+            Grafaid.Schema.KindMap.getInterfaceImplementors(config.schema.kindMap, type as Grafaid.Schema.InterfaceType)
+              .map(n => [n.name, n.name]),
+          ),
+        }
+        : {}),
     },
   }))
-  code``
-})
 
-const Interface = createCodeGenerator<{ type: Grafaid.Schema.InterfaceType }>(({ config, code, type }) => {
-  const implementorTypes = Grafaid.Schema.KindMap.getInterfaceImplementors(config.schema.kindMap, type)
-  const implementorNames = implementorTypes.map((_) => _.name)
+  modules.push({
+    name: `schema/${kind}/${type.name}/$`,
+    filePath: `schema/${kind}/${type.name}/$.ts`,
+    content: namespaceCode.toString(),
+  })
 
-  code(Code.tsInterface({
-    tsDoc: getTsDocContents(config, type),
-    name: type.name,
-    extends: config.code.schemaInterfaceExtendsEnabled ? `$.Interface` : null,
-    block: {
-      kind: Code.string(Grafaid.Schema.TypeKind.Interface),
-      fields: Object.fromEntries(values(type.getFields()).map((_) => [_.name, `${renderName(type)}.${renderName(_)}`])),
-      name: Code.string(type.name),
-      implementors: Code.tsTuple(implementorNames),
-      implementorsUnion: implementorNames.length > 0 ? Code.tsUnionItems(implementorNames) : `never`,
-      implementorsIndex: Object.fromEntries(implementorNames.map(n => [n, renderName(n)])),
-    },
-  }))
-  code``
-
-  code(OutputFields({ config, type }))
-  code``
-})
-
-const OutputFields = createCodeGenerator<{ type: Grafaid.Schema.ObjectType | Grafaid.Schema.InterfaceType }>(
-  ({ config, code, type }) => {
-    code(Code.esmExport(Code.tsNamespace(
-      type.name,
-      [Code.tsInterface({
-        export: true,
-        name: `__typename`,
-        extends: config.code.schemaInterfaceExtendsEnabled ? `$.OutputField` : null,
-        block: {
-          kind: Code.string(`OutputField`), // todo pull this from schema data type
-          name: Code.string(`__typename`),
-          arguments: {},
-          inlineType: `[1]`,
-          namedType: {
-            kind: Code.string(`__typename`),
-            value: Code.string(type.name),
-          },
-        },
-      })].concat(
-        values(type.getFields())
-          .map((field) => {
-            const namedType = Grafaid.Schema.getNamedType(field.type)
-            return Code.tsInterface({
-              tsDoc: getTsDocContents(config, field),
-              export: true,
-              name: field.name,
-              extends: config.code.schemaInterfaceExtendsEnabled ? `$.OutputField` : null,
-              block: {
-                kind: Code.string(`OutputField`), // todo pull this from schema data type
-                name: Code.string(field.name),
-                arguments: Object.fromEntries(field.args.map(arg => {
-                  return [
-                    arg.name,
-                    Code.objectField$({
-                      tsDoc: getTsDocContents(config, arg),
-                      value: {
-                        kind: Code.string(`InputField`),
-                        name: Code.string(arg.name),
-                        inlineType: renderInlineType(arg.type),
-                        namedType: namedTypesTypeReference(Grafaid.Schema.getNamedType(arg.type)),
-                      },
-                    }),
-                  ]
-                })),
-                inlineType: renderInlineType(field.type),
-                namedType: namedTypesTypeReference(namedType),
-              },
-            })
-          }),
-      )
-        .join(`\n\n`),
-    )))
-  },
-)
-
-const kindRenderers = {
-  Root: OutputObject,
-  OutputObject,
-  Union,
-  Interface,
-  Enum,
-  InputObject,
-  ScalarStandard,
-  ScalarCustom,
-} satisfies KindRenderers
+  return modules
+}
 
 const namedTypesTypeReference = (name: string | Grafaid.Schema.NamedTypes) => {
   const name_ = typeof name === `string` ? name : name.name
-  return `$$NamedTypes.$$${name_}`
+  return `$Schema.${name_}`
 }
-
-export const SchemaGenerator = createCodeGenerator(
-  ({ config, code }) => {
-    const kindMap = config.schema.kindMap
-    // dprint-ignore
-    const root = kindMap.list.Root.map(_ => [_.name, `${$.Schema}.${_.name}`] as const)
-    const objects = kindMap.list.OutputObject.map(_ => [_.name, `${$.Schema}.${_.name}`] as const)
-    const unions = kindMap.list.Union.map(_ => [_.name, `${$.Schema}.${_.name}`] as const)
-    const interfaces = kindMap.list.Interface.map(_ => [_.name, `${$.Schema}.${_.name}`] as const)
-    const enums = kindMap.list.Enum.map(_ => [_.name, `${$.Schema}.${_.name}`] as const)
-    const scalars = [
-      ...kindMap.list.ScalarCustom.map(_ => [_.name, `${$.Schema}.${renderName(_.name)}`] as const),
-      ...kindMap.list.ScalarStandard.map(_ => [_.name, `${$.Schema}.${renderName(_.name)}`] as const),
-    ]
-    const operationsAvailable = entries(kindMap.index.Root).filter(_ => _[1] !== null).map(_ => _[0])
-    const schema: Code.TermObject = {
-      name: `$$Data.Name`,
-      operationsAvailable: Code.tsTuple(operationsAvailable.map(_ => Code.string(_))),
-      RootUnion: Code.tsUnionItems(kindMap.list.Root.map(_ => `${$.Schema}.${_.name}`)),
-      Root: {
-        [Grafaid.Document.OperationTypeNode.QUERY]: kindMap.index.Root.query?.name
-          ? `${$.Schema}.${kindMap.index.Root.query.name}`
-          : null,
-        [Grafaid.Document.OperationTypeNode.MUTATION]: kindMap.index.Root.mutation?.name
-          ? `${$.Schema}.${kindMap.index.Root.mutation.name}`
-          : null,
-        [Grafaid.Document.OperationTypeNode.SUBSCRIPTION]: kindMap.index.Root.subscription?.name
-          ? `${$.Schema}.${kindMap.index.Root.subscription.name}`
-          : null,
-      },
-      allTypes: Object.fromEntries([
-        ...root,
-        ...enums,
-        ...objects,
-        ...unions,
-        ...interfaces,
-      ]),
-      objects,
-      unions,
-      interfaces,
-      scalarNamesUnion: Code.tsUnionItems(scalars.map(_ => _[0]).map(Code.string)),
-      scalars,
-      scalarRegistry: `$Scalars`,
-      extensions: `${$.$$Utilities}.GlobalRegistry.TypeExtensions`,
-    }
-
-    // --- Extensions ---
-    // If the extensions object is populated it will override the default generic type.
-
-    const extensions: Code.TermObject = {}
-
-    config.extensions.forEach(_ => {
-      _.onSchema?.({ config, schema: extensions })
-    })
-    if (!isObjectEmpty(extensions)) {
-      schema[`extensions`] = extensions
-    }
-
-    // ---
-
-    code(Tex.title1(`Schema`))
-    code``
-    code(
-      Code.tsInterface({
-        name: $.Schema,
-        parameters: `$Scalars extends ${$.$$Utilities}.Schema.Scalar.Registry = ${$.$$Scalar}.$Registry`,
-        extends: config.code.schemaInterfaceExtendsEnabled ? `$` : null,
-        block: schema,
-      }),
-    )
-  },
-)

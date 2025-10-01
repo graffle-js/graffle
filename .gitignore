@@ -9,3 +9,6 @@ bundle-stats.html
 **/.dprint/
 **/.vitepress/dist/
 **/.vitepress/cache/
+
+# Generated GraphQL clients
+tests/e2e/github/graffle/

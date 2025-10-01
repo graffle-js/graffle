@@ -3136,10 +3136,10 @@ export namespace ErrorTwo {
 
 // ----------------------------------------| Entrypoint Interface |
 
-/**
+export /**
  * Object documentation.
  */
-export interface Foo<
+interface Foo<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
@@ -4855,10 +4855,10 @@ export interface DateUnion$FragmentInline<
 > extends DateUnion<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
-/**
+export /**
  * Union documentation.
  */
-export interface FooBarUnion<
+interface FooBarUnion<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
@@ -5638,7 +5638,7 @@ export namespace InterfaceParent {
   >
 }
 
-import type * as $$Schema from './schema.js'
+import type * as $$Schema from './schema/$.js'
 
 export type Query$Infer<$SelectionSet extends object> = $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
   $SelectionSet,

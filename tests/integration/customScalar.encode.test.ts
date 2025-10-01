@@ -48,6 +48,7 @@ testCases(`%s`, async ([_, query, expectedVariables]) => {
     {
       sddm: Possible.schemaMap,
       operationVariables: true,
+      scalars: { Date: DateScalar },
     },
   )
   const documentString = Grafaid.Document.print(document)

@@ -47,7 +47,10 @@ export const generate = async (init: ConfigInit): Promise<Config> => {
 
   const generatedModules = await Promise.all(
     moduleGenerators
-      .map(generator => generator.generate(config))
+      .flatMap(generator => {
+        const result = generator.generate(config)
+        return Array.isArray(result) ? result : [result]
+      })
       .map(async code => ({
         ...code,
         content: await config.formatter.formatText(code.content),
@@ -64,9 +67,14 @@ export const generate = async (init: ConfigInit): Promise<Config> => {
   }
 
   await Promise.all(
-    generatedModules.map((generatedModule) => {
+    generatedModules.map(async (generatedModule) => {
       // dprint-ignore
-      const filePath = `${config.paths.project.outputs.root}/${isExportsModule(generatedModule.name) ? `` : `modules/`}${getFileName(config, generatedModule)}`
+      const filePath = generatedModule.filePath
+        ? `${config.paths.project.outputs.root}/modules/${generatedModule.filePath}`
+        : `${config.paths.project.outputs.root}/${isExportsModule(generatedModule.name) ? `` : `modules/`}${getFileName(config, generatedModule)}`
+      // Create parent directory if it doesn't exist
+      const dirPath = filePath.substring(0, filePath.lastIndexOf('/'))
+      await config.fs.mkdir(dirPath, { recursive: true })
       return config.fs.writeFile(filePath, generatedModule.content)
     }),
   )

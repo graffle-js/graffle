@@ -140,14 +140,14 @@ test('type output inference', () => {
 test('conflict resolution: $var marker and auto-hoisted both want same name', () => {
   const doc = query.stringWithArgs({
     $: {
-      string: $var.name('userId'),  // Explicit: wants "userId"
-      userId: 'literal-value',      // Auto-hoisted: also wants "userId"
+      string: $var.name('userId'), // Explicit: wants "userId"
+      userId: 'literal-value', // Auto-hoisted: also wants "userId"
     },
   })
 
   // Verify: Both variables exist but with different names
-  expect(doc).toContain('$userId')    // Explicit $var gets the name
-  expect(doc).toContain('$userId_2')  // Auto-hoisted gets renamed
+  expect(doc).toContain('$userId') // Explicit $var gets the name
+  expect(doc).toContain('$userId_2') // Auto-hoisted gets renamed
   expect(doc).toContain('string: $userId')
   expect(doc).toContain('userId: $userId_2')
 })
@@ -156,11 +156,11 @@ test('hoistArguments: false - inline args NOT hoisted, $var still extracted', ()
   const doc = query.stringWithArgs(
     {
       $: {
-        string: $var.name('explicitVar'),  // Should be variable
-        int: 42,                            // Should be inline
+        string: $var.name('explicitVar'), // Should be variable
+        int: 42, // Should be inline
       },
     },
-    { hoistArguments: false }  // Local override
+    { hoistArguments: false }, // Local override
   )
 
   // Verify: $var is extracted

@@ -150,7 +150,7 @@ export namespace Query {
   >
 }
 
-import type * as $$Schema from './schema.js'
+import type * as $$Schema from './schema/$.js'
 
 export type Query$Infer<$SelectionSet extends object> = $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
   $SelectionSet,

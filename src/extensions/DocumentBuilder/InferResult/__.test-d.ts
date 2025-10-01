@@ -4,11 +4,10 @@ import { assertEqual } from '../../../lib/assert-equal.js'
 import type { RequestResult } from '../../../types/RequestResult/__.js'
 import type { Registry } from '../../../types/Schema/nodes/Scalar/helpers.js'
 import type { Possible } from '../__tests__/fixtures/possible/_namespace.js'
-import type { Schema } from '../__tests__/fixtures/possible/modules/schema.js'
 import type { InferResult } from './__.js'
 
 type $<$SelectionSet extends Possible.SelectionSets.Query> = RequestResult.SimplifyWithEmptyContext<
-  InferResult.OperationQuery<$SelectionSet, Schema>
+  InferResult.OperationQuery<$SelectionSet, Possible.$.Schema>
 >
 
 type $Registry = Registry.AddScalar<Registry.Empty, typeof DateScalar>
@@ -16,7 +15,7 @@ type $Context = { scalars: $Registry; variablesEnabled: false }
 
 type $WithDate<$SelectionSet extends Possible.SelectionSets.Query<$Context>> = InferResult.OperationQuery<
   $SelectionSet,
-  Schema<$Registry>
+  Possible.$.Schema<$Registry>
 >
 
 // dprint-ignore
@@ -181,7 +180,7 @@ assertEqual<$<{ ___: { $skip: false; id: true }}>                               
 // @ts-expect-error invalid query
 type Result =  $<{ id2: true }>
 // unknown field
-assertEqual<Result, { id2: InferResult.Errors.UnknownKey<'id2', Schema.Query> }>()
+assertEqual<Result, { id2: InferResult.Errors.UnknownKey<'id2', Possible.$.Schema.Query> }>()
 
 // Interface Hierarchy
 

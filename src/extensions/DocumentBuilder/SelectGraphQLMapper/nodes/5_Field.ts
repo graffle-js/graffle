@@ -40,22 +40,44 @@ export const toGraphQLField: GraphQLPostOperationMapper<
         const sddmArguments = sddm?.a
         for (const argName in keyParsed.arguments) {
           const argNameSchema = argName
-          const sddmArgument = sddmArguments?.[argNameSchema]
           const argValue = keyParsed.arguments[argName]
 
-          // Check if this argument should become a variable
-          const shouldBeVariable = context.variables.enabled && Var.isVariableMarker(argValue)
+          // Detect if this is an enum argument (has $ prefix) BEFORE stripping
+          const isEnum = Select.Arguments.isEnumKey(argNameSchema)
 
-          if (shouldBeVariable) {
-            const varInfo = Var.extractVariableInfo(argValue, argNameSchema)
+          // Strip enum prefix for schema argument name
+          const argNameSchemaStripped = argNameSchema.replace(Select.Arguments.enumKeyPrefixPattern, ``)
+          const sddmArgument = sddmArguments?.[argNameSchemaStripped]
+
+          // Check if this is a $var marker
+          const isVarMarker = Var.isVariableMarker(argValue)
+
+          if (isVarMarker) {
+            // Extract variable from $var marker (explicit user marking)
+            const varInfo = Var.extractVariableInfo(argValue, argNameSchemaStripped)
             const argument = context.variables.capture({
               name: varInfo.name,
-              argName: argNameSchema, // Always pass the original argument name
+              argName: argNameSchemaStripped,
               value: varInfo.defaultValue,
+              defaultValue: varInfo.defaultValue, // Include default in GraphQL definition if provided
+              isEnum,
+              sddmArgument,
+            })
+            arguments_.push(argument)
+          } else if (context.variables.enabled) {
+            // Extract all arguments as variables when hoistArguments: true
+            // Don't include defaultValue - we always send the value in variables object
+            const argument = context.variables.capture({
+              name: argNameSchemaStripped,
+              argName: argNameSchemaStripped,
+              value: argValue,
+              // defaultValue intentionally omitted - not needed when we always pass the value
+              isEnum,
               sddmArgument,
             })
             arguments_.push(argument)
           } else {
+            // Inline the value
             const argument = toGraphQLArgument(context, sddmArgument, { name: argName, value: argValue })
             arguments_.push(argument)
           }

@@ -65,7 +65,7 @@ export const ModuleGeneratorSelectionSets = createModuleGenerator(
     // Generate root type inference utilities
     if (config.schema.kindMap.index.Root.query) {
       code`
-        import type * as ${$.$$Schema} from './schema.js'
+        import type * as ${$.$$Schema} from './schema/$.js'
 
         export type Query$Infer<$SelectionSet extends object> = ${$.$$Utilities}.DocumentBuilderKit.InferResult.OperationQuery<$SelectionSet, ${$.$$Schema}.${$.Schema}>
         export type Query$Variables<$SelectionSet> = any // Temporarily any - will be replaced with new analysis system
@@ -74,7 +74,7 @@ export const ModuleGeneratorSelectionSets = createModuleGenerator(
 
     if (config.schema.kindMap.index.Root.mutation) {
       code`
-        ${!config.schema.kindMap.index.Root.query ? `import type * as ${$.$$Schema} from './schema.js'` : ''}
+        ${!config.schema.kindMap.index.Root.query ? `import type * as ${$.$$Schema} from './schema/$.js'` : ''}
 
         export type Mutation$Infer<$SelectionSet extends object> = ${$.$$Utilities}.DocumentBuilderKit.InferResult.OperationMutation<$SelectionSet, ${$.$$Schema}.${$.Schema}>
         export type Mutation$Variables<$SelectionSet> = any // Temporarily any - will be replaced with new analysis system
@@ -85,7 +85,7 @@ export const ModuleGeneratorSelectionSets = createModuleGenerator(
       code`
         ${
         !config.schema.kindMap.index.Root.query && !config.schema.kindMap.index.Root.mutation
-          ? `import type * as ${$.$$Schema} from './schema.js'`
+          ? `import type * as ${$.$$Schema} from './schema/$.js'`
           : ''
       }
 
