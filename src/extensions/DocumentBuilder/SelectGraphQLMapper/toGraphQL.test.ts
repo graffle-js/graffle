@@ -17,7 +17,6 @@ const testEachQueryWithDescription = test.for.bind(test)<CasesDescriptiveQuery>
 
 type QueryWithDate = Possible.SelectionSets.Query<{
   scalars: Schema.Scalar.Registry.AddScalar<Schema.Scalar.Registry.Empty, typeof DateScalar>
-  variablesEnabled: false
 }>
 
 type CasesDescriptiveQueryWithCustomScalars = [
