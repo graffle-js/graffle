@@ -164,7 +164,8 @@ const ScalarStandard = createCodeGenerator<{ type: Grafaid.Schema.ScalarType }>(
 })
 
 const ScalarCustom = createCodeGenerator<{ type: Grafaid.Schema.ScalarType }>(({ code, type }) => {
-  code(Code.esmExport(Code.tsType(type.name, `$$Scalar.${renderName(type.name)}`)))
+  const escapedName = renderName(type.name)
+  code(Code.tsTypeExport(type.name, `$$Scalar.${escapedName}`))
   code``
 })
 

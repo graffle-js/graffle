@@ -39,18 +39,15 @@ export const ModuleGeneratorScalar = createModuleGenerator(
       for (const scalar of config.schema.kindMap.list.ScalarCustom) {
         code(typeTitle2(`custom scalar type`)(scalar))
         code``
+        const escapedName = renderName(scalar.name)
+        code(Code.tsTypeExport(scalar.name, `typeof ${$.CustomScalars}.${scalar.name}`))
         code`
-          export type ${renderName(scalar.name)} = typeof ${$.CustomScalars}.${scalar.name}
           // Without this we get error:
           // "Exported type alias 'DateDecoded' has or is using private name 'Date'."
-          type ${renderName(scalar.name)}_ = typeof ${$.CustomScalars}.${scalar.name}
-          export type ${renderName(scalar.name)}Decoded = ${$.$$Utilities}.Schema.Scalar.GetDecoded<${
-          renderName(scalar.name)
-        }_>
-          export type ${renderName(scalar.name)}Encoded = ${$.$$Utilities}.Schema.Scalar.GetEncoded<${
-          renderName(scalar.name)
-        }_>
+          type ${escapedName}_ = typeof ${$.CustomScalars}.${scalar.name}
         `
+        code(Code.tsTypeExport(`${scalar.name}Decoded`, `${$.$$Utilities}.Schema.Scalar.GetDecoded<${escapedName}_>`))
+        code(Code.tsTypeExport(`${scalar.name}Encoded`, `${$.$$Utilities}.Schema.Scalar.GetEncoded<${escapedName}_>`))
         code``
       }
     }
@@ -68,7 +65,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
       for (const scalar of config.schema.kindMap.list.ScalarCustom) {
         code(typeTitle2(`custom scalar type`)(scalar))
         code``
-        code`export type ${renderName(scalar.name)} = ${$.$$Utilities}.Schema.Scalar.ScalarCodecless<'${scalar.name}'>`
+        code(Code.tsTypeExport(scalar.name, `${$.$$Utilities}.Schema.Scalar.ScalarCodecless<'${scalar.name}'>`))
         // code(`import type { String as ${scalar.name} } from '${config.paths.imports.grafflePackage.scalars}'`)
         // code()
         // code(`export { String as ${scalar.name} } from '${config.paths.imports.grafflePackage.scalars}'`)
