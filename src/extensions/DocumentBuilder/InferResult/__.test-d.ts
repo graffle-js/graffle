@@ -1,7 +1,7 @@
 import type { DateScalar } from '../../../../tests/_/fixtures/scalars.js'
 import type { db } from '../../../../tests/_/fixtures/schemas/possible/db.js'
 import { assertEqual } from '../../../lib/assert-equal.js'
-import type { RequestResult } from '../../../types/RequestResult.ts/__.js'
+import type { RequestResult } from '../../../types/RequestResult/__.js'
 import type { Registry } from '../../../types/Schema/nodes/Scalar/helpers.js'
 import type { Possible } from '../__tests__/fixtures/possible/_namespace.js'
 import type { Schema } from '../__tests__/fixtures/possible/modules/schema.js'
@@ -117,6 +117,12 @@ assertEqual<
 // AssertEqual<RS<{ id_as_$: true }>, { id_as_$: InferResult.Errors.UnknownFieldName<'id_as_$', Schema.Root.Query> }>()
 // union fragment
 assertEqual<$<{ unionFooBar: { ___on_Foo: { id: ['id2', true] } } }>, { unionFooBar: null | {} | { id2: null|string } }>()
+// duplicate?
+// nested object with alias (simple)
+assertEqual<$<{ objectNested: { object: ['obj2', { id: true }] } }>, { objectNested: null | { obj2: { id: null|string } | null } }>()
+// nested object with alias and arguments
+type NestedObjectAliasWithArgsTest = $<{ objectNestedWithArgs: { object: ['obj2', { $: { int: 5 }, id: true }] } }>
+assertEqual<NestedObjectAliasWithArgsTest, { objectNestedWithArgs: null | { obj2: { id: null|string } | null } }>()
 
 
 // Directive @include

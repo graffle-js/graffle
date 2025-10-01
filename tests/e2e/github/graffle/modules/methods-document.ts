@@ -8,7 +8,7 @@ export interface Document<$Context> {
       $Document,
       $$SelectionSets.$Document<
         // @ts-expect-error Context constraint missing to avoid TS compare depth limit.
-        { scalars: $Context['scalars']; variablesEnabled: false }
+        { scalars: $Context['scalars'] }
       >
     >,
   ): $$Utilities.DocumentBuilderKit.DocumentRunner<

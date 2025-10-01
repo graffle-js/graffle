@@ -15,6 +15,7 @@ const hasFieldsWithArguments = (type: GraphQLObjectType | null): boolean => {
  */
 export const ModuleGeneratorDocument = createModuleGenerator(
   `document`,
+  import.meta.url,
   ({ config, code }) => {
     // Only generate for root types that exist in the schema
     const queryType = config.schema.kindMap.index.Root.query
@@ -31,19 +32,24 @@ export const ModuleGeneratorDocument = createModuleGenerator(
       import { OperationTypeNode } from 'graphql'
       import type { TypedDocument } from '${config.paths.imports.grafflePackage.client}'
       import type * as SelectionSets from './selection-sets.js'
+      import type * as $$Scalar from './scalar.js'
       import type * as ArgumentsMap from './arguments-map.js'
-      import type { $TypeInputsIndex } from './type-inputs-index.js'
     `
 
     // Generate typed interfaces for each root type builder
     if (queryType) {
-      // Always pass the proper ArgumentsMap type even if no fields have arguments
-      // This is needed for proper type inference
-      const argsMapType = "ArgumentsMap.ArgumentsMap['query']"
-
       code`
         import type * as $$Utilities from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
         import type * as $$Schema from './schema.js'
+
+        /**
+         * Context for static document type inference.
+         * Static documents have no runtime extensions, hence typeHookRequestResultDataTypes is never.
+         */
+        interface StaticDocumentContext {
+          typeHookRequestResultDataTypes: never
+          scalars: $$Scalar.$Registry
+        }
 
         /**
          * Static query builder for compile-time GraphQL document generation.
@@ -83,7 +89,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
         export interface QueryBuilder {
           ${
         Object.keys(queryType.getFields()).map(fieldName =>
-          `${fieldName}: <$SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['${fieldName}']>(selection?: $SelectionSet) => TypedDocument.String<$$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ ${fieldName}: $SelectionSet }, $$Schema.Schema>, $$Utilities.DocumentBuilderKit.Var.Infer<{ ${fieldName}: Exclude<$SelectionSet, undefined> }, ${argsMapType}, $TypeInputsIndex>>`
+          `${fieldName}: <$SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['${fieldName}']>(selection?: $SelectionSet) => TypedDocument.String<$$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ ${fieldName}: $SelectionSet }, $$Schema.Schema>>, $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.DocumentBuilderKit.Var.InferFromQuery<{ ${fieldName}: Exclude<$SelectionSet, undefined> }, ArgumentsMap.ArgumentsMap>>>`
         ).join('\n          ')
       }
         }
@@ -103,10 +109,6 @@ export const ModuleGeneratorDocument = createModuleGenerator(
     }
 
     if (mutationType) {
-      // Always pass the proper ArgumentsMap type even if no fields have arguments
-      // This is needed for proper type inference
-      const argsMapType = "ArgumentsMap.ArgumentsMap['mutation']"
-
       code`
         ${
         !queryType
@@ -114,6 +116,19 @@ export const ModuleGeneratorDocument = createModuleGenerator(
           : ''
       }
         ${!queryType ? `import type * as $$Schema from './schema.js'` : ''}
+        ${
+        !queryType
+          ? `
+        /**
+         * Context for static document type inference.
+         * Static documents have no runtime extensions, hence typeHookRequestResultDataTypes is never.
+         */
+        interface StaticDocumentContext {
+          typeHookRequestResultDataTypes: never
+          scalars: $$Scalar.$Registry
+        }`
+          : ''
+      }
 
         /**
          * Static mutation builder for compile-time GraphQL document generation.
@@ -140,7 +155,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
         export interface MutationBuilder {
           ${
         Object.keys(mutationType.getFields()).map(fieldName =>
-          `${fieldName}: <$SelectionSet extends SelectionSets.Mutation<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['${fieldName}']>(selection?: $SelectionSet) => TypedDocument.String<$$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ ${fieldName}: $SelectionSet }, $$Schema.Schema>, $$Utilities.DocumentBuilderKit.Var.Infer<{ ${fieldName}: Exclude<$SelectionSet, undefined> }, ${argsMapType}, $TypeInputsIndex>>`
+          `${fieldName}: <$SelectionSet extends SelectionSets.Mutation<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['${fieldName}']>(selection?: $SelectionSet) => TypedDocument.String<$$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ ${fieldName}: $SelectionSet }, $$Schema.Schema>>, $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.DocumentBuilderKit.Var.InferFromMutation<{ ${fieldName}: Exclude<$SelectionSet, undefined> }, ArgumentsMap.ArgumentsMap>>>`
         ).join('\n          ')
       }
         }
@@ -163,10 +178,6 @@ export const ModuleGeneratorDocument = createModuleGenerator(
     }
 
     if (subscriptionType) {
-      // Always pass the proper ArgumentsMap type even if no fields have arguments
-      // This is needed for proper type inference
-      const argsMapType = "ArgumentsMap.ArgumentsMap['subscription']"
-
       code`
         ${
         !queryType && !mutationType
@@ -174,6 +185,19 @@ export const ModuleGeneratorDocument = createModuleGenerator(
           : ''
       }
         ${!queryType && !mutationType ? `import type * as $$Schema from './schema.js'` : ''}
+        ${
+        !queryType && !mutationType
+          ? `
+        /**
+         * Context for static document type inference.
+         * Static documents have no runtime extensions, hence typeHookRequestResultDataTypes is never.
+         */
+        interface StaticDocumentContext {
+          typeHookRequestResultDataTypes: never
+          scalars: $$Scalar.$Registry
+        }`
+          : ''
+      }
 
         /**
          * Static subscription builder for compile-time GraphQL document generation.
@@ -201,7 +225,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
         export interface SubscriptionBuilder {
           ${
         Object.keys(subscriptionType.getFields()).map(fieldName =>
-          `${fieldName}: <$SelectionSet extends SelectionSets.Subscription<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['${fieldName}']>(selection?: $SelectionSet) => TypedDocument.String<$$Utilities.DocumentBuilderKit.InferResult.OperationSubscription<{ ${fieldName}: $SelectionSet }, $$Schema.Schema>, $$Utilities.DocumentBuilderKit.Var.Infer<{ ${fieldName}: Exclude<$SelectionSet, undefined> }, ${argsMapType}, $TypeInputsIndex>>`
+          `${fieldName}: <$SelectionSet extends SelectionSets.Subscription<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['${fieldName}']>(selection?: $SelectionSet) => TypedDocument.String<$$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.DocumentBuilderKit.InferResult.OperationSubscription<{ ${fieldName}: $SelectionSet }, $$Schema.Schema>>, $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.DocumentBuilderKit.Var.InferFromSubscription<{ ${fieldName}: Exclude<$SelectionSet, undefined> }, ArgumentsMap.ArgumentsMap>>>`
         ).join('\n          ')
       }
         }

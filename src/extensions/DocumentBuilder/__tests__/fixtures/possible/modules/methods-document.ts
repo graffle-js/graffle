@@ -7,7 +7,7 @@ export interface Document<$Context extends $$Utilities.Context> {
     document: $$Utilities.ExactNonEmpty<
       $Document,
       $$SelectionSets.$Document<
-        { scalars: $Context['scalars']; variablesEnabled: false }
+        { scalars: $Context['scalars'] }
       >
     >,
   ): $$Utilities.DocumentBuilderKit.DocumentRunner<

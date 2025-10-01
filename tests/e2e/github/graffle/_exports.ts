@@ -4,6 +4,7 @@
 // setups where this still indeed does help.
 import './modules/global.js'
 
+export * as $ from './_internals.js'
 export { create } from './modules/client.js'
 export { Name } from './modules/data.js'
 export { mutation, query } from './modules/document.js'

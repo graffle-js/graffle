@@ -6,8 +6,16 @@
  */
 
 import type { Obj } from '@wollybeard/kit'
+import type { Covariant } from '../../../lib/prelude.js'
 
-const VarMarkerSymbol = Symbol.for(`graffle.var`)
+const BuilderSymbol = Symbol.for(`graffle.var`)
+
+export interface BuilderSentinel {
+  /**
+   * Internal marker for runtime detection
+   */
+  readonly [BuilderSymbol]: true
+}
 
 export interface BuilderState {
   default: undefined | unknown
@@ -20,6 +28,12 @@ export interface BuilderStateEmpty extends BuilderState {
   required: undefined
   name: undefined
 }
+
+export const builderStateEmpty = (): BuilderStateEmpty => ({
+  default: undefined,
+  name: undefined,
+  required: undefined,
+})
 
 /**
  * Type-safe variable builder for GraphQL document generation.
@@ -44,16 +58,20 @@ export interface BuilderStateEmpty extends BuilderState {
  * // Variables type inferred as: { userId: string }
  * ```
  */
-export interface Builder<$Type = unknown, $State extends BuilderState = BuilderState> {
-  /**
-   * Internal marker for runtime detection
-   */
-  readonly [VarMarkerSymbol]: true
-
+export interface Builder<$Type = unknown, $State extends BuilderState = BuilderState> extends BuilderSentinel {
   /**
    * Type-level state stored directly on object
    */
   readonly _: $State
+
+  /**
+   * Phantom property to enforce covariant type parameter checking.
+   * This ensures Builder<T> is only assignable to Builder<U> when T extends U.
+   * For example, Builder<'hello'> can be assigned to Builder<string>, but Builder<1> cannot.
+   * @internal
+   * @see {@link Covariant} for details on covariance
+   */
+  readonly __type?: Covariant<$Type>
 
   /**
    * Specify a custom name for the GraphQL variable.
@@ -66,10 +84,12 @@ export interface Builder<$Type = unknown, $State extends BuilderState = BuilderS
   /**
    * Specify a default value for the GraphQL variable.
    * The variable will be optional with this default in the GraphQL operation.
+   *
+   * @remarks input is 'const' typed so that literal types are preserved. This allows seamless use with enums fields where the default must be a specific enum value.
    */
-  readonly default: <$value extends $Type>(
+  readonly default: <const $value extends $Type>(
     value: $value,
-  ) => Builder<$Type, Obj.ReplaceProperty<$State, 'default', $value>>
+  ) => Builder<$value, Obj.ReplaceProperty<$State, 'default', $value>>
 
   /**
    * Force an optional argument to be required in the GraphQL variables.
@@ -77,53 +97,49 @@ export interface Builder<$Type = unknown, $State extends BuilderState = BuilderS
    */
   readonly required: () => Builder<$Type, Obj.ReplaceProperty<$State, 'required', true>>
 
-  /**
-   * Force a required argument to be optional in the GraphQL variables.
-   * Useful when you want to make a required GraphQL field optional at the client level.
-   */
-  readonly optional: () => Builder<$Type, Obj.ReplaceProperty<$State, 'required', false>>
+  // No optional() method - use .default() to make optional instead
+  // readonly optional: () => Builder<$Type, Obj.ReplaceProperty<$State, 'required', false>>
 }
 
 /**
  * Create a new variable builder
  */
-const createVariableBuilder = <$Type = unknown, $State extends BuilderState = BuilderStateEmpty>(
-  state: $State = { default: undefined, required: undefined, name: undefined } as $State,
-): Builder<$Type, $State> => {
+const createVariableBuilder = <$Type>(): Builder<$Type, BuilderStateEmpty> => {
+  return createVariableBuilder_(builderStateEmpty())
+}
+
+const createVariableBuilder_ = <$Type, $State extends BuilderState>(
+  state: $State,
+): Builder<$Type, BuilderStateEmpty> => {
+  const self = createVariableBuilder_
+
   const builder: Builder<$Type, $State> = {
-    [VarMarkerSymbol]: true,
+    [BuilderSymbol]: true,
     _: state,
 
     name(name) {
-      return createVariableBuilder<$Type>({
+      return self({
         ...state,
         name,
       }) as any
     },
 
     default(value) {
-      return createVariableBuilder<$Type>({
+      return self({
         ...state,
         default: value,
       }) as any
     },
 
     required() {
-      return createVariableBuilder<$Type>({
+      return self({
         ...state,
         required: true,
       }) as any
     },
-
-    optional() {
-      return createVariableBuilder<$Type>({
-        ...state,
-        required: false,
-      }) as any
-    },
   }
 
-  return builder
+  return builder as any
 }
 
 /**
@@ -205,7 +221,7 @@ const createVariableBuilder = <$Type = unknown, $State extends BuilderState = Bu
  * @see {@link Builder} for the full API
  * @see {@link https://graffle.js.org/guides/variables | Variables Guide}
  */
-export const $var: Builder<unknown, BuilderStateEmpty> = createVariableBuilder()
+export const $var: Builder<any, BuilderStateEmpty> = createVariableBuilder()
 
 /**
  * Type guard to check if a value is a variable builder.
@@ -225,7 +241,7 @@ export const $var: Builder<unknown, BuilderStateEmpty> = createVariableBuilder()
  * @internal
  */
 export const isVariableBuilder = (value: unknown): value is Builder<any, any> => {
-  return value != null && typeof value === `object` && VarMarkerSymbol in value
+  return value != null && typeof value === `object` && BuilderSymbol in value
 }
 
 /**

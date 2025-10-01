@@ -19,6 +19,7 @@ export { type AssertExtendsObject, type Exact, type ExactNonEmpty, type UnionExp
 export { TypeFunction } from '../lib/type-function/__.js'
 export { ContextFragments } from '../types/ContextFragment.js'
 export { type GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
+export * from '../types/RequestResult/__.js'
 export { Schema } from '../types/Schema/_namespace.js'
 export * from '../types/Schema/StandardTypes/scalar.js'
 export { type SchemaDrivenDataMap } from '../types/SchemaDrivenDataMap/_namespace.js'

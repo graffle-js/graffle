@@ -3,9 +3,18 @@ import type { TypedDocument } from '../../../../../src/exports/client.js'
 import { createStaticRootType } from '../../../../../src/exports/extensions/document-builder/runtime.js'
 import type * as $$Utilities from '../../../../../src/exports/utilities-for-generated.js'
 import type * as ArgumentsMap from './arguments-map.js'
+import type * as $$Scalar from './scalar.js'
 import type * as $$Schema from './schema.js'
 import type * as SelectionSets from './selection-sets.js'
-import type { $TypeInputsIndex } from './type-inputs-index.js'
+
+/**
+ * Context for static document type inference.
+ * Static documents have no runtime extensions, hence typeHookRequestResultDataTypes is never.
+ */
+interface StaticDocumentContext {
+  typeHookRequestResultDataTypes: never
+  scalars: $$Scalar.$Registry
+}
 
 /**
  * Static query builder for compile-time GraphQL document generation.
@@ -50,11 +59,16 @@ export interface QueryBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ codeOfConduct: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { codeOfConduct: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['query'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ codeOfConduct: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+        { codeOfConduct: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   codesOfConduct: <
@@ -64,11 +78,16 @@ export interface QueryBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ codesOfConduct: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { codesOfConduct: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['query'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ codesOfConduct: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+        { codesOfConduct: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   enterprise: <
@@ -76,11 +95,16 @@ export interface QueryBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ enterprise: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { enterprise: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['query'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ enterprise: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+        { enterprise: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   enterpriseAdministratorInvitation: <
@@ -90,14 +114,19 @@ export interface QueryBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
-      { enterpriseAdministratorInvitation: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        { enterpriseAdministratorInvitation: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { enterpriseAdministratorInvitation: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['query'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+        { enterpriseAdministratorInvitation: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   enterpriseAdministratorInvitationByToken: <
@@ -107,14 +136,19 @@ export interface QueryBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
-      { enterpriseAdministratorInvitationByToken: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        { enterpriseAdministratorInvitationByToken: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { enterpriseAdministratorInvitationByToken: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['query'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+        { enterpriseAdministratorInvitationByToken: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   enterpriseMemberInvitation: <
@@ -124,14 +158,19 @@ export interface QueryBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
-      { enterpriseMemberInvitation: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        { enterpriseMemberInvitation: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { enterpriseMemberInvitation: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['query'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+        { enterpriseMemberInvitation: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   enterpriseMemberInvitationByToken: <
@@ -141,24 +180,34 @@ export interface QueryBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
-      { enterpriseMemberInvitationByToken: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        { enterpriseMemberInvitationByToken: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { enterpriseMemberInvitationByToken: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['query'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+        { enterpriseMemberInvitationByToken: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   id: <$SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['id']>(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ id: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { id: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['query'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ id: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+        { id: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   license: <
@@ -166,11 +215,16 @@ export interface QueryBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ license: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { license: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['query'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ license: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+        { license: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   licenses: <
@@ -178,11 +232,16 @@ export interface QueryBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ licenses: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { licenses: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['query'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ licenses: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+        { licenses: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   marketplaceCategories: <
@@ -192,14 +251,19 @@ export interface QueryBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
-      { marketplaceCategories: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        { marketplaceCategories: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { marketplaceCategories: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['query'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+        { marketplaceCategories: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   marketplaceCategory: <
@@ -209,11 +273,16 @@ export interface QueryBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ marketplaceCategory: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { marketplaceCategory: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['query'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ marketplaceCategory: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+        { marketplaceCategory: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   marketplaceListing: <
@@ -223,11 +292,16 @@ export interface QueryBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ marketplaceListing: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { marketplaceListing: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['query'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ marketplaceListing: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+        { marketplaceListing: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   marketplaceListings: <
@@ -237,31 +311,46 @@ export interface QueryBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ marketplaceListings: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { marketplaceListings: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['query'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ marketplaceListings: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+        { marketplaceListings: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   meta: <$SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['meta']>(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ meta: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { meta: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['query'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ meta: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+        { meta: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   node: <$SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['node']>(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ node: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { node: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['query'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ node: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+        { node: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   nodes: <
@@ -269,11 +358,16 @@ export interface QueryBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ nodes: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { nodes: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['query'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ nodes: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+        { nodes: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   organization: <
@@ -283,11 +377,16 @@ export interface QueryBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ organization: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { organization: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['query'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ organization: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+        { organization: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   rateLimit: <
@@ -295,11 +394,16 @@ export interface QueryBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ rateLimit: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { rateLimit: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['query'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ rateLimit: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+        { rateLimit: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   relay: <
@@ -307,11 +411,16 @@ export interface QueryBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ relay: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { relay: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['query'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ relay: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+        { relay: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   repository: <
@@ -319,11 +428,16 @@ export interface QueryBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ repository: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { repository: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['query'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ repository: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+        { repository: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   repositoryOwner: <
@@ -333,11 +447,16 @@ export interface QueryBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ repositoryOwner: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { repositoryOwner: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['query'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ repositoryOwner: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+        { repositoryOwner: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   resource: <
@@ -345,11 +464,16 @@ export interface QueryBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ resource: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { resource: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['query'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ resource: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+        { resource: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   search: <
@@ -357,11 +481,16 @@ export interface QueryBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ search: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { search: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['query'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ search: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+        { search: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   securityAdvisories: <
@@ -371,11 +500,16 @@ export interface QueryBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ securityAdvisories: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { securityAdvisories: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['query'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ securityAdvisories: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+        { securityAdvisories: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   securityAdvisory: <
@@ -385,11 +519,16 @@ export interface QueryBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ securityAdvisory: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { securityAdvisory: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['query'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ securityAdvisory: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+        { securityAdvisory: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   securityVulnerabilities: <
@@ -399,14 +538,19 @@ export interface QueryBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
-      { securityVulnerabilities: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+        { securityVulnerabilities: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { securityVulnerabilities: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['query'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+        { securityVulnerabilities: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   sponsorables: <
@@ -416,11 +560,16 @@ export interface QueryBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ sponsorables: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { sponsorables: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['query'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ sponsorables: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+        { sponsorables: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   topic: <
@@ -428,21 +577,31 @@ export interface QueryBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ topic: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { topic: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['query'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ topic: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+        { topic: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   user: <$SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['user']>(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ user: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { user: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['query'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ user: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+        { user: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   viewer: <
@@ -450,11 +609,16 @@ export interface QueryBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ viewer: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { viewer: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['query'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ viewer: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+        { viewer: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
 }
@@ -500,14 +664,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { abortQueuedMigrations: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { abortQueuedMigrations: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { abortQueuedMigrations: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { abortQueuedMigrations: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   abortRepositoryMigration: <
@@ -517,14 +686,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { abortRepositoryMigration: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { abortRepositoryMigration: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { abortRepositoryMigration: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { abortRepositoryMigration: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   acceptEnterpriseAdministratorInvitation: <
@@ -534,14 +708,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { acceptEnterpriseAdministratorInvitation: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { acceptEnterpriseAdministratorInvitation: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { acceptEnterpriseAdministratorInvitation: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { acceptEnterpriseAdministratorInvitation: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   acceptEnterpriseMemberInvitation: <
@@ -551,14 +730,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { acceptEnterpriseMemberInvitation: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { acceptEnterpriseMemberInvitation: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { acceptEnterpriseMemberInvitation: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { acceptEnterpriseMemberInvitation: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   acceptTopicSuggestion: <
@@ -568,14 +752,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { acceptTopicSuggestion: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { acceptTopicSuggestion: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { acceptTopicSuggestion: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { acceptTopicSuggestion: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   accessUserNamespaceRepository: <
@@ -585,14 +774,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { accessUserNamespaceRepository: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { accessUserNamespaceRepository: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { accessUserNamespaceRepository: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { accessUserNamespaceRepository: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   addAssigneesToAssignable: <
@@ -602,14 +796,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { addAssigneesToAssignable: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { addAssigneesToAssignable: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { addAssigneesToAssignable: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { addAssigneesToAssignable: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   addComment: <
@@ -619,11 +818,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ addComment: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { addComment: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ addComment: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { addComment: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   addDiscussionComment: <
@@ -633,14 +837,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { addDiscussionComment: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { addDiscussionComment: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { addDiscussionComment: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { addDiscussionComment: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   addDiscussionPollVote: <
@@ -650,14 +859,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { addDiscussionPollVote: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { addDiscussionPollVote: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { addDiscussionPollVote: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { addDiscussionPollVote: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   addEnterpriseOrganizationMember: <
@@ -667,14 +881,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { addEnterpriseOrganizationMember: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { addEnterpriseOrganizationMember: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { addEnterpriseOrganizationMember: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { addEnterpriseOrganizationMember: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   addEnterpriseSupportEntitlement: <
@@ -684,14 +903,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { addEnterpriseSupportEntitlement: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { addEnterpriseSupportEntitlement: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { addEnterpriseSupportEntitlement: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { addEnterpriseSupportEntitlement: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   addLabelsToLabelable: <
@@ -701,14 +925,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { addLabelsToLabelable: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { addLabelsToLabelable: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { addLabelsToLabelable: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { addLabelsToLabelable: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   addProjectCard: <
@@ -718,11 +947,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ addProjectCard: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { addProjectCard: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ addProjectCard: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { addProjectCard: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   addProjectColumn: <
@@ -732,11 +966,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ addProjectColumn: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { addProjectColumn: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ addProjectColumn: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { addProjectColumn: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   addProjectV2DraftIssue: <
@@ -746,14 +985,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { addProjectV2DraftIssue: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { addProjectV2DraftIssue: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { addProjectV2DraftIssue: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { addProjectV2DraftIssue: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   addProjectV2ItemById: <
@@ -763,14 +1007,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { addProjectV2ItemById: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { addProjectV2ItemById: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { addProjectV2ItemById: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { addProjectV2ItemById: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   addPullRequestReview: <
@@ -780,14 +1029,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { addPullRequestReview: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { addPullRequestReview: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { addPullRequestReview: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { addPullRequestReview: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   addPullRequestReviewComment: <
@@ -797,14 +1051,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { addPullRequestReviewComment: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { addPullRequestReviewComment: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { addPullRequestReviewComment: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { addPullRequestReviewComment: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   addPullRequestReviewThread: <
@@ -814,14 +1073,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { addPullRequestReviewThread: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { addPullRequestReviewThread: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { addPullRequestReviewThread: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { addPullRequestReviewThread: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   addPullRequestReviewThreadReply: <
@@ -831,14 +1095,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { addPullRequestReviewThreadReply: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { addPullRequestReviewThreadReply: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { addPullRequestReviewThreadReply: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { addPullRequestReviewThreadReply: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   addReaction: <
@@ -848,11 +1117,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ addReaction: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { addReaction: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ addReaction: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { addReaction: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   addStar: <
@@ -860,11 +1134,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ addStar: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { addStar: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ addStar: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { addStar: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   addSubIssue: <
@@ -874,11 +1153,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ addSubIssue: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { addSubIssue: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ addSubIssue: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { addSubIssue: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   addUpvote: <
@@ -888,11 +1172,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ addUpvote: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { addUpvote: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ addUpvote: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { addUpvote: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   addVerifiableDomain: <
@@ -902,14 +1191,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { addVerifiableDomain: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { addVerifiableDomain: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { addVerifiableDomain: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { addVerifiableDomain: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   approveDeployments: <
@@ -919,14 +1213,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { approveDeployments: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { approveDeployments: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { approveDeployments: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { approveDeployments: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   approveVerifiableDomain: <
@@ -936,14 +1235,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { approveVerifiableDomain: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { approveVerifiableDomain: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { approveVerifiableDomain: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { approveVerifiableDomain: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   archiveProjectV2Item: <
@@ -953,14 +1257,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { archiveProjectV2Item: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { archiveProjectV2Item: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { archiveProjectV2Item: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { archiveProjectV2Item: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   archiveRepository: <
@@ -970,11 +1279,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ archiveRepository: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { archiveRepository: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { archiveRepository: $SelectionSet },
+        $$Schema.Schema
+      >
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { archiveRepository: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   cancelEnterpriseAdminInvitation: <
@@ -984,14 +1301,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { cancelEnterpriseAdminInvitation: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { cancelEnterpriseAdminInvitation: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { cancelEnterpriseAdminInvitation: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { cancelEnterpriseAdminInvitation: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   cancelEnterpriseMemberInvitation: <
@@ -1001,14 +1323,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { cancelEnterpriseMemberInvitation: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { cancelEnterpriseMemberInvitation: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { cancelEnterpriseMemberInvitation: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { cancelEnterpriseMemberInvitation: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   cancelSponsorship: <
@@ -1018,11 +1345,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ cancelSponsorship: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { cancelSponsorship: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { cancelSponsorship: $SelectionSet },
+        $$Schema.Schema
+      >
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { cancelSponsorship: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   changeUserStatus: <
@@ -1032,11 +1367,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ changeUserStatus: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { changeUserStatus: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ changeUserStatus: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { changeUserStatus: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   clearLabelsFromLabelable: <
@@ -1046,14 +1386,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { clearLabelsFromLabelable: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { clearLabelsFromLabelable: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { clearLabelsFromLabelable: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { clearLabelsFromLabelable: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   clearProjectV2ItemFieldValue: <
@@ -1063,14 +1408,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { clearProjectV2ItemFieldValue: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { clearProjectV2ItemFieldValue: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { clearProjectV2ItemFieldValue: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { clearProjectV2ItemFieldValue: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   cloneProject: <
@@ -1080,11 +1430,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ cloneProject: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { cloneProject: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ cloneProject: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { cloneProject: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   cloneTemplateRepository: <
@@ -1094,14 +1449,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { cloneTemplateRepository: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { cloneTemplateRepository: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { cloneTemplateRepository: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { cloneTemplateRepository: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   closeDiscussion: <
@@ -1111,11 +1471,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ closeDiscussion: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { closeDiscussion: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ closeDiscussion: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { closeDiscussion: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   closeIssue: <
@@ -1125,11 +1490,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ closeIssue: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { closeIssue: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ closeIssue: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { closeIssue: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   closePullRequest: <
@@ -1139,11 +1509,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ closePullRequest: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { closePullRequest: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ closePullRequest: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { closePullRequest: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   convertProjectCardNoteToIssue: <
@@ -1153,14 +1528,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { convertProjectCardNoteToIssue: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { convertProjectCardNoteToIssue: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { convertProjectCardNoteToIssue: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { convertProjectCardNoteToIssue: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   convertProjectV2DraftIssueItemToIssue: <
@@ -1170,14 +1550,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { convertProjectV2DraftIssueItemToIssue: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { convertProjectV2DraftIssueItemToIssue: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { convertProjectV2DraftIssueItemToIssue: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { convertProjectV2DraftIssueItemToIssue: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   convertPullRequestToDraft: <
@@ -1187,14 +1572,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { convertPullRequestToDraft: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { convertPullRequestToDraft: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { convertPullRequestToDraft: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { convertPullRequestToDraft: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   copyProjectV2: <
@@ -1204,11 +1594,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ copyProjectV2: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { copyProjectV2: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ copyProjectV2: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { copyProjectV2: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   createAttributionInvitation: <
@@ -1218,14 +1613,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { createAttributionInvitation: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { createAttributionInvitation: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { createAttributionInvitation: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { createAttributionInvitation: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   createBranchProtectionRule: <
@@ -1235,14 +1635,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { createBranchProtectionRule: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { createBranchProtectionRule: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { createBranchProtectionRule: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { createBranchProtectionRule: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   createCheckRun: <
@@ -1252,11 +1657,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ createCheckRun: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { createCheckRun: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ createCheckRun: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { createCheckRun: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   createCheckSuite: <
@@ -1266,11 +1676,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ createCheckSuite: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { createCheckSuite: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ createCheckSuite: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { createCheckSuite: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   createCommitOnBranch: <
@@ -1280,14 +1695,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { createCommitOnBranch: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { createCommitOnBranch: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { createCommitOnBranch: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { createCommitOnBranch: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   createDeployment: <
@@ -1297,11 +1717,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ createDeployment: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { createDeployment: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ createDeployment: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { createDeployment: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   createDeploymentStatus: <
@@ -1311,14 +1736,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { createDeploymentStatus: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { createDeploymentStatus: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { createDeploymentStatus: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { createDeploymentStatus: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   createDiscussion: <
@@ -1328,11 +1758,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ createDiscussion: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { createDiscussion: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ createDiscussion: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { createDiscussion: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   createEnterpriseOrganization: <
@@ -1342,14 +1777,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { createEnterpriseOrganization: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { createEnterpriseOrganization: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { createEnterpriseOrganization: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { createEnterpriseOrganization: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   createEnvironment: <
@@ -1359,11 +1799,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ createEnvironment: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { createEnvironment: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { createEnvironment: $SelectionSet },
+        $$Schema.Schema
+      >
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { createEnvironment: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   createIpAllowListEntry: <
@@ -1373,14 +1821,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { createIpAllowListEntry: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { createIpAllowListEntry: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { createIpAllowListEntry: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { createIpAllowListEntry: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   createIssue: <
@@ -1390,11 +1843,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ createIssue: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { createIssue: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ createIssue: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { createIssue: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   createLabel: <
@@ -1404,11 +1862,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ createLabel: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { createLabel: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ createLabel: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { createLabel: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   createLinkedBranch: <
@@ -1418,14 +1881,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { createLinkedBranch: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { createLinkedBranch: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { createLinkedBranch: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { createLinkedBranch: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   createMigrationSource: <
@@ -1435,14 +1903,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { createMigrationSource: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { createMigrationSource: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { createMigrationSource: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { createMigrationSource: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   createProject: <
@@ -1452,11 +1925,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ createProject: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { createProject: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ createProject: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { createProject: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   createProjectV2: <
@@ -1466,11 +1944,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ createProjectV2: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { createProjectV2: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ createProjectV2: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { createProjectV2: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   createProjectV2Field: <
@@ -1480,14 +1963,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { createProjectV2Field: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { createProjectV2Field: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { createProjectV2Field: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { createProjectV2Field: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   createProjectV2StatusUpdate: <
@@ -1497,14 +1985,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { createProjectV2StatusUpdate: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { createProjectV2StatusUpdate: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { createProjectV2StatusUpdate: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { createProjectV2StatusUpdate: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   createPullRequest: <
@@ -1514,11 +2007,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ createPullRequest: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { createPullRequest: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { createPullRequest: $SelectionSet },
+        $$Schema.Schema
+      >
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { createPullRequest: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   createRef: <
@@ -1528,11 +2029,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ createRef: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { createRef: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ createRef: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { createRef: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   createRepository: <
@@ -1542,11 +2048,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ createRepository: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { createRepository: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ createRepository: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { createRepository: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   createRepositoryRuleset: <
@@ -1556,14 +2067,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { createRepositoryRuleset: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { createRepositoryRuleset: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { createRepositoryRuleset: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { createRepositoryRuleset: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   createSponsorsListing: <
@@ -1573,14 +2089,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { createSponsorsListing: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { createSponsorsListing: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { createSponsorsListing: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { createSponsorsListing: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   createSponsorsTier: <
@@ -1590,14 +2111,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { createSponsorsTier: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { createSponsorsTier: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { createSponsorsTier: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { createSponsorsTier: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   createSponsorship: <
@@ -1607,11 +2133,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ createSponsorship: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { createSponsorship: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { createSponsorship: $SelectionSet },
+        $$Schema.Schema
+      >
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { createSponsorship: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   createSponsorships: <
@@ -1621,14 +2155,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { createSponsorships: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { createSponsorships: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { createSponsorships: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { createSponsorships: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   createTeamDiscussion: <
@@ -1638,14 +2177,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { createTeamDiscussion: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { createTeamDiscussion: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { createTeamDiscussion: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { createTeamDiscussion: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   createTeamDiscussionComment: <
@@ -1655,14 +2199,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { createTeamDiscussionComment: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { createTeamDiscussionComment: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { createTeamDiscussionComment: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { createTeamDiscussionComment: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   createUserList: <
@@ -1672,11 +2221,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ createUserList: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { createUserList: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ createUserList: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { createUserList: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   declineTopicSuggestion: <
@@ -1686,14 +2240,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { declineTopicSuggestion: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { declineTopicSuggestion: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { declineTopicSuggestion: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { declineTopicSuggestion: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   deleteBranchProtectionRule: <
@@ -1703,14 +2262,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { deleteBranchProtectionRule: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { deleteBranchProtectionRule: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { deleteBranchProtectionRule: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { deleteBranchProtectionRule: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   deleteDeployment: <
@@ -1720,11 +2284,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ deleteDeployment: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { deleteDeployment: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ deleteDeployment: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { deleteDeployment: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   deleteDiscussion: <
@@ -1734,11 +2303,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ deleteDiscussion: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { deleteDiscussion: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ deleteDiscussion: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { deleteDiscussion: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   deleteDiscussionComment: <
@@ -1748,14 +2322,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { deleteDiscussionComment: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { deleteDiscussionComment: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { deleteDiscussionComment: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { deleteDiscussionComment: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   deleteEnvironment: <
@@ -1765,11 +2344,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ deleteEnvironment: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { deleteEnvironment: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { deleteEnvironment: $SelectionSet },
+        $$Schema.Schema
+      >
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { deleteEnvironment: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   deleteIpAllowListEntry: <
@@ -1779,14 +2366,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { deleteIpAllowListEntry: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { deleteIpAllowListEntry: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { deleteIpAllowListEntry: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { deleteIpAllowListEntry: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   deleteIssue: <
@@ -1796,11 +2388,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ deleteIssue: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { deleteIssue: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ deleteIssue: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { deleteIssue: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   deleteIssueComment: <
@@ -1810,14 +2407,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { deleteIssueComment: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { deleteIssueComment: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { deleteIssueComment: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { deleteIssueComment: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   deleteLabel: <
@@ -1827,11 +2429,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ deleteLabel: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { deleteLabel: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ deleteLabel: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { deleteLabel: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   deleteLinkedBranch: <
@@ -1841,14 +2448,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { deleteLinkedBranch: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { deleteLinkedBranch: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { deleteLinkedBranch: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { deleteLinkedBranch: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   deletePackageVersion: <
@@ -1858,14 +2470,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { deletePackageVersion: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { deletePackageVersion: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { deletePackageVersion: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { deletePackageVersion: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   deleteProject: <
@@ -1875,11 +2492,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ deleteProject: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { deleteProject: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ deleteProject: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { deleteProject: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   deleteProjectCard: <
@@ -1889,11 +2511,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ deleteProjectCard: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { deleteProjectCard: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { deleteProjectCard: $SelectionSet },
+        $$Schema.Schema
+      >
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { deleteProjectCard: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   deleteProjectColumn: <
@@ -1903,14 +2533,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { deleteProjectColumn: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { deleteProjectColumn: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { deleteProjectColumn: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { deleteProjectColumn: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   deleteProjectV2: <
@@ -1920,11 +2555,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ deleteProjectV2: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { deleteProjectV2: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ deleteProjectV2: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { deleteProjectV2: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   deleteProjectV2Field: <
@@ -1934,14 +2574,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { deleteProjectV2Field: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { deleteProjectV2Field: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { deleteProjectV2Field: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { deleteProjectV2Field: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   deleteProjectV2Item: <
@@ -1951,14 +2596,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { deleteProjectV2Item: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { deleteProjectV2Item: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { deleteProjectV2Item: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { deleteProjectV2Item: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   deleteProjectV2StatusUpdate: <
@@ -1968,14 +2618,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { deleteProjectV2StatusUpdate: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { deleteProjectV2StatusUpdate: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { deleteProjectV2StatusUpdate: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { deleteProjectV2StatusUpdate: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   deleteProjectV2Workflow: <
@@ -1985,14 +2640,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { deleteProjectV2Workflow: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { deleteProjectV2Workflow: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { deleteProjectV2Workflow: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { deleteProjectV2Workflow: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   deletePullRequestReview: <
@@ -2002,14 +2662,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { deletePullRequestReview: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { deletePullRequestReview: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { deletePullRequestReview: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { deletePullRequestReview: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   deletePullRequestReviewComment: <
@@ -2019,14 +2684,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { deletePullRequestReviewComment: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { deletePullRequestReviewComment: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { deletePullRequestReviewComment: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { deletePullRequestReviewComment: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   deleteRef: <
@@ -2036,11 +2706,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ deleteRef: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { deleteRef: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ deleteRef: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { deleteRef: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   deleteRepositoryRuleset: <
@@ -2050,14 +2725,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { deleteRepositoryRuleset: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { deleteRepositoryRuleset: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { deleteRepositoryRuleset: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { deleteRepositoryRuleset: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   deleteTeamDiscussion: <
@@ -2067,14 +2747,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { deleteTeamDiscussion: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { deleteTeamDiscussion: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { deleteTeamDiscussion: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { deleteTeamDiscussion: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   deleteTeamDiscussionComment: <
@@ -2084,14 +2769,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { deleteTeamDiscussionComment: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { deleteTeamDiscussionComment: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { deleteTeamDiscussionComment: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { deleteTeamDiscussionComment: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   deleteUserList: <
@@ -2101,11 +2791,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ deleteUserList: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { deleteUserList: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ deleteUserList: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { deleteUserList: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   deleteVerifiableDomain: <
@@ -2115,14 +2810,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { deleteVerifiableDomain: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { deleteVerifiableDomain: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { deleteVerifiableDomain: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { deleteVerifiableDomain: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   dequeuePullRequest: <
@@ -2132,14 +2832,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { dequeuePullRequest: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { dequeuePullRequest: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { dequeuePullRequest: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { dequeuePullRequest: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   disablePullRequestAutoMerge: <
@@ -2149,14 +2854,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { disablePullRequestAutoMerge: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { disablePullRequestAutoMerge: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { disablePullRequestAutoMerge: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { disablePullRequestAutoMerge: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   dismissPullRequestReview: <
@@ -2166,14 +2876,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { dismissPullRequestReview: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { dismissPullRequestReview: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { dismissPullRequestReview: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { dismissPullRequestReview: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   dismissRepositoryVulnerabilityAlert: <
@@ -2183,14 +2898,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { dismissRepositoryVulnerabilityAlert: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { dismissRepositoryVulnerabilityAlert: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { dismissRepositoryVulnerabilityAlert: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { dismissRepositoryVulnerabilityAlert: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   enablePullRequestAutoMerge: <
@@ -2200,14 +2920,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { enablePullRequestAutoMerge: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { enablePullRequestAutoMerge: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { enablePullRequestAutoMerge: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { enablePullRequestAutoMerge: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   enqueuePullRequest: <
@@ -2217,14 +2942,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { enqueuePullRequest: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { enqueuePullRequest: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { enqueuePullRequest: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { enqueuePullRequest: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   followOrganization: <
@@ -2234,14 +2964,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { followOrganization: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { followOrganization: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { followOrganization: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { followOrganization: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   followUser: <
@@ -2251,11 +2986,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ followUser: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { followUser: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ followUser: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { followUser: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   grantEnterpriseOrganizationsMigratorRole: <
@@ -2265,14 +3005,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { grantEnterpriseOrganizationsMigratorRole: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { grantEnterpriseOrganizationsMigratorRole: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { grantEnterpriseOrganizationsMigratorRole: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { grantEnterpriseOrganizationsMigratorRole: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   grantMigratorRole: <
@@ -2282,11 +3027,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ grantMigratorRole: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { grantMigratorRole: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { grantMigratorRole: $SelectionSet },
+        $$Schema.Schema
+      >
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { grantMigratorRole: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   importProject: <
@@ -2296,11 +3049,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ importProject: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { importProject: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ importProject: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { importProject: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   inviteEnterpriseAdmin: <
@@ -2310,14 +3068,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { inviteEnterpriseAdmin: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { inviteEnterpriseAdmin: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { inviteEnterpriseAdmin: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { inviteEnterpriseAdmin: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   inviteEnterpriseMember: <
@@ -2327,14 +3090,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { inviteEnterpriseMember: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { inviteEnterpriseMember: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { inviteEnterpriseMember: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { inviteEnterpriseMember: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   linkProjectV2ToRepository: <
@@ -2344,14 +3112,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { linkProjectV2ToRepository: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { linkProjectV2ToRepository: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { linkProjectV2ToRepository: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { linkProjectV2ToRepository: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   linkProjectV2ToTeam: <
@@ -2361,14 +3134,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { linkProjectV2ToTeam: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { linkProjectV2ToTeam: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { linkProjectV2ToTeam: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { linkProjectV2ToTeam: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   linkRepositoryToProject: <
@@ -2378,14 +3156,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { linkRepositoryToProject: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { linkRepositoryToProject: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { linkRepositoryToProject: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { linkRepositoryToProject: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   lockLockable: <
@@ -2395,11 +3178,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ lockLockable: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { lockLockable: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ lockLockable: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { lockLockable: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   markDiscussionCommentAsAnswer: <
@@ -2409,14 +3197,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { markDiscussionCommentAsAnswer: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { markDiscussionCommentAsAnswer: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { markDiscussionCommentAsAnswer: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { markDiscussionCommentAsAnswer: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   markFileAsViewed: <
@@ -2426,11 +3219,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ markFileAsViewed: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { markFileAsViewed: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ markFileAsViewed: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { markFileAsViewed: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   markProjectV2AsTemplate: <
@@ -2440,14 +3238,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { markProjectV2AsTemplate: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { markProjectV2AsTemplate: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { markProjectV2AsTemplate: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { markProjectV2AsTemplate: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   markPullRequestReadyForReview: <
@@ -2457,14 +3260,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { markPullRequestReadyForReview: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { markPullRequestReadyForReview: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { markPullRequestReadyForReview: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { markPullRequestReadyForReview: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   mergeBranch: <
@@ -2474,11 +3282,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ mergeBranch: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { mergeBranch: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ mergeBranch: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { mergeBranch: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   mergePullRequest: <
@@ -2488,11 +3301,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ mergePullRequest: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { mergePullRequest: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ mergePullRequest: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { mergePullRequest: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   minimizeComment: <
@@ -2502,11 +3320,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ minimizeComment: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { minimizeComment: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ minimizeComment: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { minimizeComment: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   moveProjectCard: <
@@ -2516,11 +3339,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ moveProjectCard: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { moveProjectCard: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ moveProjectCard: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { moveProjectCard: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   moveProjectColumn: <
@@ -2530,11 +3358,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ moveProjectColumn: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { moveProjectColumn: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { moveProjectColumn: $SelectionSet },
+        $$Schema.Schema
+      >
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { moveProjectColumn: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   pinEnvironment: <
@@ -2544,11 +3380,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ pinEnvironment: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { pinEnvironment: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ pinEnvironment: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { pinEnvironment: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   pinIssue: <
@@ -2558,11 +3399,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ pinIssue: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { pinIssue: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ pinIssue: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { pinIssue: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   publishSponsorsTier: <
@@ -2572,14 +3418,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { publishSponsorsTier: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { publishSponsorsTier: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { publishSponsorsTier: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { publishSponsorsTier: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   regenerateEnterpriseIdentityProviderRecoveryCodes: <
@@ -2589,14 +3440,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { regenerateEnterpriseIdentityProviderRecoveryCodes: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { regenerateEnterpriseIdentityProviderRecoveryCodes: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { regenerateEnterpriseIdentityProviderRecoveryCodes: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { regenerateEnterpriseIdentityProviderRecoveryCodes: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   regenerateVerifiableDomainToken: <
@@ -2606,14 +3462,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { regenerateVerifiableDomainToken: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { regenerateVerifiableDomainToken: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { regenerateVerifiableDomainToken: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { regenerateVerifiableDomainToken: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   rejectDeployments: <
@@ -2623,11 +3484,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ rejectDeployments: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { rejectDeployments: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { rejectDeployments: $SelectionSet },
+        $$Schema.Schema
+      >
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { rejectDeployments: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   removeAssigneesFromAssignable: <
@@ -2637,14 +3506,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { removeAssigneesFromAssignable: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { removeAssigneesFromAssignable: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { removeAssigneesFromAssignable: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { removeAssigneesFromAssignable: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   removeEnterpriseAdmin: <
@@ -2654,14 +3528,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { removeEnterpriseAdmin: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { removeEnterpriseAdmin: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { removeEnterpriseAdmin: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { removeEnterpriseAdmin: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   removeEnterpriseIdentityProvider: <
@@ -2671,14 +3550,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { removeEnterpriseIdentityProvider: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { removeEnterpriseIdentityProvider: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { removeEnterpriseIdentityProvider: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { removeEnterpriseIdentityProvider: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   removeEnterpriseMember: <
@@ -2688,14 +3572,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { removeEnterpriseMember: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { removeEnterpriseMember: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { removeEnterpriseMember: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { removeEnterpriseMember: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   removeEnterpriseOrganization: <
@@ -2705,14 +3594,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { removeEnterpriseOrganization: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { removeEnterpriseOrganization: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { removeEnterpriseOrganization: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { removeEnterpriseOrganization: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   removeEnterpriseSupportEntitlement: <
@@ -2722,14 +3616,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { removeEnterpriseSupportEntitlement: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { removeEnterpriseSupportEntitlement: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { removeEnterpriseSupportEntitlement: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { removeEnterpriseSupportEntitlement: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   removeLabelsFromLabelable: <
@@ -2739,14 +3638,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { removeLabelsFromLabelable: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { removeLabelsFromLabelable: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { removeLabelsFromLabelable: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { removeLabelsFromLabelable: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   removeOutsideCollaborator: <
@@ -2756,14 +3660,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { removeOutsideCollaborator: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { removeOutsideCollaborator: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { removeOutsideCollaborator: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { removeOutsideCollaborator: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   removeReaction: <
@@ -2773,11 +3682,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ removeReaction: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { removeReaction: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ removeReaction: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { removeReaction: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   removeStar: <
@@ -2787,11 +3701,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ removeStar: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { removeStar: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ removeStar: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { removeStar: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   removeSubIssue: <
@@ -2801,11 +3720,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ removeSubIssue: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { removeSubIssue: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ removeSubIssue: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { removeSubIssue: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   removeUpvote: <
@@ -2815,11 +3739,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ removeUpvote: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { removeUpvote: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ removeUpvote: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { removeUpvote: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   reopenDiscussion: <
@@ -2829,11 +3758,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ reopenDiscussion: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { reopenDiscussion: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ reopenDiscussion: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { reopenDiscussion: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   reopenIssue: <
@@ -2843,11 +3777,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ reopenIssue: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { reopenIssue: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ reopenIssue: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { reopenIssue: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   reopenPullRequest: <
@@ -2857,11 +3796,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ reopenPullRequest: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { reopenPullRequest: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { reopenPullRequest: $SelectionSet },
+        $$Schema.Schema
+      >
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { reopenPullRequest: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   reorderEnvironment: <
@@ -2871,14 +3818,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { reorderEnvironment: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { reorderEnvironment: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { reorderEnvironment: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { reorderEnvironment: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   reprioritizeSubIssue: <
@@ -2888,14 +3840,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { reprioritizeSubIssue: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { reprioritizeSubIssue: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { reprioritizeSubIssue: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { reprioritizeSubIssue: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   requestReviews: <
@@ -2905,11 +3862,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ requestReviews: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { requestReviews: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ requestReviews: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { requestReviews: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   rerequestCheckSuite: <
@@ -2919,14 +3881,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { rerequestCheckSuite: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { rerequestCheckSuite: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { rerequestCheckSuite: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { rerequestCheckSuite: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   resolveReviewThread: <
@@ -2936,14 +3903,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { resolveReviewThread: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { resolveReviewThread: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { resolveReviewThread: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { resolveReviewThread: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   retireSponsorsTier: <
@@ -2953,14 +3925,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { retireSponsorsTier: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { retireSponsorsTier: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { retireSponsorsTier: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { retireSponsorsTier: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   revertPullRequest: <
@@ -2970,11 +3947,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ revertPullRequest: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { revertPullRequest: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { revertPullRequest: $SelectionSet },
+        $$Schema.Schema
+      >
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { revertPullRequest: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   revokeEnterpriseOrganizationsMigratorRole: <
@@ -2984,14 +3969,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { revokeEnterpriseOrganizationsMigratorRole: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { revokeEnterpriseOrganizationsMigratorRole: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { revokeEnterpriseOrganizationsMigratorRole: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { revokeEnterpriseOrganizationsMigratorRole: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   revokeMigratorRole: <
@@ -3001,14 +3991,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { revokeMigratorRole: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { revokeMigratorRole: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { revokeMigratorRole: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { revokeMigratorRole: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   setEnterpriseIdentityProvider: <
@@ -3018,14 +4013,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { setEnterpriseIdentityProvider: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { setEnterpriseIdentityProvider: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { setEnterpriseIdentityProvider: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { setEnterpriseIdentityProvider: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   setOrganizationInteractionLimit: <
@@ -3035,14 +4035,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { setOrganizationInteractionLimit: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { setOrganizationInteractionLimit: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { setOrganizationInteractionLimit: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { setOrganizationInteractionLimit: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   setRepositoryInteractionLimit: <
@@ -3052,14 +4057,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { setRepositoryInteractionLimit: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { setRepositoryInteractionLimit: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { setRepositoryInteractionLimit: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { setRepositoryInteractionLimit: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   setUserInteractionLimit: <
@@ -3069,14 +4079,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { setUserInteractionLimit: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { setUserInteractionLimit: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { setUserInteractionLimit: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { setUserInteractionLimit: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   startOrganizationMigration: <
@@ -3086,14 +4101,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { startOrganizationMigration: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { startOrganizationMigration: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { startOrganizationMigration: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { startOrganizationMigration: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   startRepositoryMigration: <
@@ -3103,14 +4123,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { startRepositoryMigration: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { startRepositoryMigration: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { startRepositoryMigration: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { startRepositoryMigration: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   submitPullRequestReview: <
@@ -3120,14 +4145,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { submitPullRequestReview: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { submitPullRequestReview: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { submitPullRequestReview: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { submitPullRequestReview: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   transferEnterpriseOrganization: <
@@ -3137,14 +4167,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { transferEnterpriseOrganization: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { transferEnterpriseOrganization: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { transferEnterpriseOrganization: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { transferEnterpriseOrganization: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   transferIssue: <
@@ -3154,11 +4189,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ transferIssue: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { transferIssue: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ transferIssue: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { transferIssue: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   unarchiveProjectV2Item: <
@@ -3168,14 +4208,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { unarchiveProjectV2Item: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { unarchiveProjectV2Item: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { unarchiveProjectV2Item: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { unarchiveProjectV2Item: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   unarchiveRepository: <
@@ -3185,14 +4230,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { unarchiveRepository: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { unarchiveRepository: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { unarchiveRepository: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { unarchiveRepository: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   unfollowOrganization: <
@@ -3202,14 +4252,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { unfollowOrganization: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { unfollowOrganization: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { unfollowOrganization: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { unfollowOrganization: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   unfollowUser: <
@@ -3219,11 +4274,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ unfollowUser: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { unfollowUser: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ unfollowUser: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { unfollowUser: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   unlinkProjectV2FromRepository: <
@@ -3233,14 +4293,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { unlinkProjectV2FromRepository: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { unlinkProjectV2FromRepository: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { unlinkProjectV2FromRepository: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { unlinkProjectV2FromRepository: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   unlinkProjectV2FromTeam: <
@@ -3250,14 +4315,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { unlinkProjectV2FromTeam: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { unlinkProjectV2FromTeam: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { unlinkProjectV2FromTeam: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { unlinkProjectV2FromTeam: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   unlinkRepositoryFromProject: <
@@ -3267,14 +4337,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { unlinkRepositoryFromProject: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { unlinkRepositoryFromProject: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { unlinkRepositoryFromProject: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { unlinkRepositoryFromProject: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   unlockLockable: <
@@ -3284,11 +4359,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ unlockLockable: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { unlockLockable: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ unlockLockable: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { unlockLockable: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   unmarkDiscussionCommentAsAnswer: <
@@ -3298,14 +4378,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { unmarkDiscussionCommentAsAnswer: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { unmarkDiscussionCommentAsAnswer: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { unmarkDiscussionCommentAsAnswer: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { unmarkDiscussionCommentAsAnswer: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   unmarkFileAsViewed: <
@@ -3315,14 +4400,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { unmarkFileAsViewed: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { unmarkFileAsViewed: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { unmarkFileAsViewed: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { unmarkFileAsViewed: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   unmarkIssueAsDuplicate: <
@@ -3332,14 +4422,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { unmarkIssueAsDuplicate: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { unmarkIssueAsDuplicate: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { unmarkIssueAsDuplicate: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { unmarkIssueAsDuplicate: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   unmarkProjectV2AsTemplate: <
@@ -3349,14 +4444,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { unmarkProjectV2AsTemplate: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { unmarkProjectV2AsTemplate: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { unmarkProjectV2AsTemplate: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { unmarkProjectV2AsTemplate: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   unminimizeComment: <
@@ -3366,11 +4466,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ unminimizeComment: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { unminimizeComment: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { unminimizeComment: $SelectionSet },
+        $$Schema.Schema
+      >
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { unminimizeComment: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   unpinIssue: <
@@ -3380,11 +4488,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ unpinIssue: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { unpinIssue: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ unpinIssue: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { unpinIssue: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   unresolveReviewThread: <
@@ -3394,14 +4507,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { unresolveReviewThread: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { unresolveReviewThread: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { unresolveReviewThread: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { unresolveReviewThread: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateBranchProtectionRule: <
@@ -3411,14 +4529,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateBranchProtectionRule: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateBranchProtectionRule: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateBranchProtectionRule: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateBranchProtectionRule: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateCheckRun: <
@@ -3428,11 +4551,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ updateCheckRun: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateCheckRun: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ updateCheckRun: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateCheckRun: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateCheckSuitePreferences: <
@@ -3442,14 +4570,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateCheckSuitePreferences: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateCheckSuitePreferences: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateCheckSuitePreferences: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateCheckSuitePreferences: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateDiscussion: <
@@ -3459,11 +4592,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ updateDiscussion: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateDiscussion: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ updateDiscussion: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateDiscussion: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateDiscussionComment: <
@@ -3473,14 +4611,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateDiscussionComment: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateDiscussionComment: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateDiscussionComment: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateDiscussionComment: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateEnterpriseAdministratorRole: <
@@ -3490,14 +4633,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateEnterpriseAdministratorRole: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateEnterpriseAdministratorRole: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateEnterpriseAdministratorRole: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateEnterpriseAdministratorRole: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateEnterpriseAllowPrivateRepositoryForkingSetting: <
@@ -3507,14 +4655,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateEnterpriseAllowPrivateRepositoryForkingSetting: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateEnterpriseAllowPrivateRepositoryForkingSetting: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateEnterpriseAllowPrivateRepositoryForkingSetting: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateEnterpriseAllowPrivateRepositoryForkingSetting: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateEnterpriseDefaultRepositoryPermissionSetting: <
@@ -3524,14 +4677,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateEnterpriseDefaultRepositoryPermissionSetting: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateEnterpriseDefaultRepositoryPermissionSetting: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateEnterpriseDefaultRepositoryPermissionSetting: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateEnterpriseDefaultRepositoryPermissionSetting: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateEnterpriseDeployKeySetting: <
@@ -3541,14 +4699,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateEnterpriseDeployKeySetting: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateEnterpriseDeployKeySetting: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateEnterpriseDeployKeySetting: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateEnterpriseDeployKeySetting: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateEnterpriseMembersCanChangeRepositoryVisibilitySetting: <
@@ -3558,14 +4721,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateEnterpriseMembersCanChangeRepositoryVisibilitySetting: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateEnterpriseMembersCanChangeRepositoryVisibilitySetting: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateEnterpriseMembersCanChangeRepositoryVisibilitySetting: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateEnterpriseMembersCanChangeRepositoryVisibilitySetting: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateEnterpriseMembersCanCreateRepositoriesSetting: <
@@ -3575,14 +4743,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateEnterpriseMembersCanCreateRepositoriesSetting: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateEnterpriseMembersCanCreateRepositoriesSetting: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateEnterpriseMembersCanCreateRepositoriesSetting: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateEnterpriseMembersCanCreateRepositoriesSetting: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateEnterpriseMembersCanDeleteIssuesSetting: <
@@ -3592,14 +4765,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateEnterpriseMembersCanDeleteIssuesSetting: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateEnterpriseMembersCanDeleteIssuesSetting: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateEnterpriseMembersCanDeleteIssuesSetting: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateEnterpriseMembersCanDeleteIssuesSetting: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateEnterpriseMembersCanDeleteRepositoriesSetting: <
@@ -3609,14 +4787,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateEnterpriseMembersCanDeleteRepositoriesSetting: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateEnterpriseMembersCanDeleteRepositoriesSetting: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateEnterpriseMembersCanDeleteRepositoriesSetting: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateEnterpriseMembersCanDeleteRepositoriesSetting: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateEnterpriseMembersCanInviteCollaboratorsSetting: <
@@ -3626,14 +4809,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateEnterpriseMembersCanInviteCollaboratorsSetting: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateEnterpriseMembersCanInviteCollaboratorsSetting: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateEnterpriseMembersCanInviteCollaboratorsSetting: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateEnterpriseMembersCanInviteCollaboratorsSetting: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateEnterpriseMembersCanMakePurchasesSetting: <
@@ -3643,14 +4831,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateEnterpriseMembersCanMakePurchasesSetting: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateEnterpriseMembersCanMakePurchasesSetting: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateEnterpriseMembersCanMakePurchasesSetting: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateEnterpriseMembersCanMakePurchasesSetting: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateEnterpriseMembersCanUpdateProtectedBranchesSetting: <
@@ -3660,14 +4853,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateEnterpriseMembersCanUpdateProtectedBranchesSetting: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateEnterpriseMembersCanUpdateProtectedBranchesSetting: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateEnterpriseMembersCanUpdateProtectedBranchesSetting: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateEnterpriseMembersCanUpdateProtectedBranchesSetting: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateEnterpriseMembersCanViewDependencyInsightsSetting: <
@@ -3677,14 +4875,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateEnterpriseMembersCanViewDependencyInsightsSetting: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateEnterpriseMembersCanViewDependencyInsightsSetting: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateEnterpriseMembersCanViewDependencyInsightsSetting: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateEnterpriseMembersCanViewDependencyInsightsSetting: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateEnterpriseOrganizationProjectsSetting: <
@@ -3694,14 +4897,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateEnterpriseOrganizationProjectsSetting: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateEnterpriseOrganizationProjectsSetting: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateEnterpriseOrganizationProjectsSetting: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateEnterpriseOrganizationProjectsSetting: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateEnterpriseOwnerOrganizationRole: <
@@ -3711,14 +4919,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateEnterpriseOwnerOrganizationRole: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateEnterpriseOwnerOrganizationRole: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateEnterpriseOwnerOrganizationRole: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateEnterpriseOwnerOrganizationRole: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateEnterpriseProfile: <
@@ -3728,14 +4941,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateEnterpriseProfile: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateEnterpriseProfile: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateEnterpriseProfile: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateEnterpriseProfile: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateEnterpriseRepositoryProjectsSetting: <
@@ -3745,14 +4963,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateEnterpriseRepositoryProjectsSetting: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateEnterpriseRepositoryProjectsSetting: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateEnterpriseRepositoryProjectsSetting: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateEnterpriseRepositoryProjectsSetting: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateEnterpriseTeamDiscussionsSetting: <
@@ -3762,14 +4985,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateEnterpriseTeamDiscussionsSetting: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateEnterpriseTeamDiscussionsSetting: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateEnterpriseTeamDiscussionsSetting: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateEnterpriseTeamDiscussionsSetting: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateEnterpriseTwoFactorAuthenticationDisallowedMethodsSetting: <
@@ -3779,14 +5007,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateEnterpriseTwoFactorAuthenticationDisallowedMethodsSetting: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateEnterpriseTwoFactorAuthenticationDisallowedMethodsSetting: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateEnterpriseTwoFactorAuthenticationDisallowedMethodsSetting: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateEnterpriseTwoFactorAuthenticationDisallowedMethodsSetting: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateEnterpriseTwoFactorAuthenticationRequiredSetting: <
@@ -3796,14 +5029,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateEnterpriseTwoFactorAuthenticationRequiredSetting: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateEnterpriseTwoFactorAuthenticationRequiredSetting: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateEnterpriseTwoFactorAuthenticationRequiredSetting: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateEnterpriseTwoFactorAuthenticationRequiredSetting: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateEnvironment: <
@@ -3813,11 +5051,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ updateEnvironment: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateEnvironment: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateEnvironment: $SelectionSet },
+        $$Schema.Schema
+      >
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateEnvironment: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateIpAllowListEnabledSetting: <
@@ -3827,14 +5073,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateIpAllowListEnabledSetting: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateIpAllowListEnabledSetting: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateIpAllowListEnabledSetting: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateIpAllowListEnabledSetting: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateIpAllowListEntry: <
@@ -3844,14 +5095,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateIpAllowListEntry: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateIpAllowListEntry: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateIpAllowListEntry: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateIpAllowListEntry: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateIpAllowListForInstalledAppsEnabledSetting: <
@@ -3861,14 +5117,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateIpAllowListForInstalledAppsEnabledSetting: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateIpAllowListForInstalledAppsEnabledSetting: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateIpAllowListForInstalledAppsEnabledSetting: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateIpAllowListForInstalledAppsEnabledSetting: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateIssue: <
@@ -3878,11 +5139,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ updateIssue: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateIssue: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ updateIssue: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateIssue: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateIssueComment: <
@@ -3892,14 +5158,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateIssueComment: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateIssueComment: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateIssueComment: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateIssueComment: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateLabel: <
@@ -3909,11 +5180,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ updateLabel: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateLabel: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ updateLabel: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateLabel: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateNotificationRestrictionSetting: <
@@ -3923,14 +5199,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateNotificationRestrictionSetting: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateNotificationRestrictionSetting: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateNotificationRestrictionSetting: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateNotificationRestrictionSetting: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateOrganizationAllowPrivateRepositoryForkingSetting: <
@@ -3940,14 +5221,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateOrganizationAllowPrivateRepositoryForkingSetting: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateOrganizationAllowPrivateRepositoryForkingSetting: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateOrganizationAllowPrivateRepositoryForkingSetting: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateOrganizationAllowPrivateRepositoryForkingSetting: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateOrganizationWebCommitSignoffSetting: <
@@ -3957,14 +5243,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateOrganizationWebCommitSignoffSetting: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateOrganizationWebCommitSignoffSetting: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateOrganizationWebCommitSignoffSetting: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateOrganizationWebCommitSignoffSetting: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updatePatreonSponsorability: <
@@ -3974,14 +5265,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updatePatreonSponsorability: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updatePatreonSponsorability: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updatePatreonSponsorability: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updatePatreonSponsorability: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateProject: <
@@ -3991,11 +5287,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ updateProject: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateProject: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ updateProject: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateProject: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateProjectCard: <
@@ -4005,11 +5306,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ updateProjectCard: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateProjectCard: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateProjectCard: $SelectionSet },
+        $$Schema.Schema
+      >
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateProjectCard: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateProjectColumn: <
@@ -4019,14 +5328,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateProjectColumn: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateProjectColumn: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateProjectColumn: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateProjectColumn: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateProjectV2: <
@@ -4036,11 +5350,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ updateProjectV2: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateProjectV2: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ updateProjectV2: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateProjectV2: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateProjectV2Collaborators: <
@@ -4050,14 +5369,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateProjectV2Collaborators: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateProjectV2Collaborators: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateProjectV2Collaborators: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateProjectV2Collaborators: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateProjectV2DraftIssue: <
@@ -4067,14 +5391,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateProjectV2DraftIssue: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateProjectV2DraftIssue: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateProjectV2DraftIssue: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateProjectV2DraftIssue: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateProjectV2Field: <
@@ -4084,14 +5413,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateProjectV2Field: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateProjectV2Field: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateProjectV2Field: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateProjectV2Field: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateProjectV2ItemFieldValue: <
@@ -4101,14 +5435,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateProjectV2ItemFieldValue: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateProjectV2ItemFieldValue: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateProjectV2ItemFieldValue: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateProjectV2ItemFieldValue: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateProjectV2ItemPosition: <
@@ -4118,14 +5457,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateProjectV2ItemPosition: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateProjectV2ItemPosition: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateProjectV2ItemPosition: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateProjectV2ItemPosition: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateProjectV2StatusUpdate: <
@@ -4135,14 +5479,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateProjectV2StatusUpdate: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateProjectV2StatusUpdate: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateProjectV2StatusUpdate: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateProjectV2StatusUpdate: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updatePullRequest: <
@@ -4152,11 +5501,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ updatePullRequest: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updatePullRequest: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updatePullRequest: $SelectionSet },
+        $$Schema.Schema
+      >
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updatePullRequest: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updatePullRequestBranch: <
@@ -4166,14 +5523,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updatePullRequestBranch: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updatePullRequestBranch: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updatePullRequestBranch: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updatePullRequestBranch: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updatePullRequestReview: <
@@ -4183,14 +5545,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updatePullRequestReview: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updatePullRequestReview: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updatePullRequestReview: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updatePullRequestReview: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updatePullRequestReviewComment: <
@@ -4200,14 +5567,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updatePullRequestReviewComment: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updatePullRequestReviewComment: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updatePullRequestReviewComment: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updatePullRequestReviewComment: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateRef: <
@@ -4217,11 +5589,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ updateRef: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateRef: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ updateRef: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateRef: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateRefs: <
@@ -4231,11 +5608,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ updateRefs: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateRefs: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ updateRefs: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateRefs: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateRepository: <
@@ -4245,11 +5627,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ updateRepository: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateRepository: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ updateRepository: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateRepository: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateRepositoryRuleset: <
@@ -4259,14 +5646,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateRepositoryRuleset: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateRepositoryRuleset: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateRepositoryRuleset: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateRepositoryRuleset: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateRepositoryWebCommitSignoffSetting: <
@@ -4276,14 +5668,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateRepositoryWebCommitSignoffSetting: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateRepositoryWebCommitSignoffSetting: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateRepositoryWebCommitSignoffSetting: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateRepositoryWebCommitSignoffSetting: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateSponsorshipPreferences: <
@@ -4293,14 +5690,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateSponsorshipPreferences: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateSponsorshipPreferences: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateSponsorshipPreferences: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateSponsorshipPreferences: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateSubscription: <
@@ -4310,14 +5712,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateSubscription: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateSubscription: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateSubscription: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateSubscription: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateTeamDiscussion: <
@@ -4327,14 +5734,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateTeamDiscussion: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateTeamDiscussion: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateTeamDiscussion: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateTeamDiscussion: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateTeamDiscussionComment: <
@@ -4344,14 +5756,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateTeamDiscussionComment: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateTeamDiscussionComment: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateTeamDiscussionComment: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateTeamDiscussionComment: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateTeamReviewAssignment: <
@@ -4361,14 +5778,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateTeamReviewAssignment: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateTeamReviewAssignment: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateTeamReviewAssignment: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateTeamReviewAssignment: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateTeamsRepository: <
@@ -4378,14 +5800,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateTeamsRepository: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateTeamsRepository: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateTeamsRepository: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateTeamsRepository: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateTopics: <
@@ -4395,11 +5822,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ updateTopics: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateTopics: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ updateTopics: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateTopics: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateUserList: <
@@ -4409,11 +5841,16 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ updateUserList: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateUserList: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ updateUserList: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateUserList: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   updateUserListsForItem: <
@@ -4423,14 +5860,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { updateUserListsForItem: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { updateUserListsForItem: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { updateUserListsForItem: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { updateUserListsForItem: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   verifyVerifiableDomain: <
@@ -4440,14 +5882,19 @@ export interface MutationBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
-      { verifyVerifiableDomain: $SelectionSet },
-      $$Schema.Schema
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+        { verifyVerifiableDomain: $SelectionSet },
+        $$Schema.Schema
+      >
     >,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { verifyVerifiableDomain: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['mutation'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromMutation<
+        { verifyVerifiableDomain: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
 }

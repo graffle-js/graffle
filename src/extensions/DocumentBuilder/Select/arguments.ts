@@ -8,7 +8,7 @@ export type ArgValue<$Context = DefaultContext> =
   | null
   | number
   | ArgsObject<$Context>
-  | ($Context extends { variablesEnabled: true } ? Var.Builder<any> : never)
+  | Var.Builder<any>
 
 export type ArgsObject<$Context = DefaultContext> = {
   [k: string]: ArgValue<$Context>

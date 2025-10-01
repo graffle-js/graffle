@@ -6,10 +6,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   $batch: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
-        $SelectionSet,
-        $$SelectionSets.Mutation<{ scalars: $Context['scalars']; variablesEnabled: false }>
-      >,
+      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation<{ scalars: $Context['scalars'] }>>,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutput<
@@ -36,10 +33,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   id: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
-        $SelectionSet,
-        $$SelectionSets.Mutation.id<{ scalars: $Context['scalars']; variablesEnabled: false }>
-      >,
+      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.id<{ scalars: $Context['scalars'] }>>,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -58,7 +52,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.idNonNull<{ scalars: $Context['scalars']; variablesEnabled: false }>
+        $$SelectionSets.Mutation.idNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})

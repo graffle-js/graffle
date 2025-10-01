@@ -451,14 +451,7 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    input?:
-      | $NamedTypes.$InputObjectNested<_$Context>
-      | undefined
-      | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<
-          $NamedTypes.$InputObjectNested<_$Context> | null | undefined
-        >
-        : never)
+    input?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$InputObjectNested<_$Context> | null | undefined>
   }
 
   // --- expanded ---
@@ -497,11 +490,7 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    input:
-      | $NamedTypes.$InputObjectNestedNonNull<_$Context>
-      | (_$Context extends { variablesEnabled: true }
-        ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<$NamedTypes.$InputObjectNestedNonNull<_$Context>>
-        : never)
+    input: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$InputObjectNestedNonNull<_$Context>>
   }
 
   // --- expanded ---
@@ -570,14 +559,7 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    input?:
-      | $NamedTypes.$InputObjectCircular<_$Context>
-      | undefined
-      | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<
-          $NamedTypes.$InputObjectCircular<_$Context> | null | undefined
-        >
-        : never)
+    input?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$InputObjectCircular<_$Context> | null | undefined>
   }
 
   // --- expanded ---
@@ -705,26 +687,16 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    date?:
+    date?: $$Utilities.DocumentBuilderKit.Var.Maybe<
       | $$Utilities.Schema.Scalar.GetDecoded<
         $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
           'Date',
           _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
         >
       >
-      | undefined
       | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.Builder<
-          | $$Utilities.Schema.Scalar.GetDecoded<
-            $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
-              'Date',
-              _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
-            >
-          >
-          | null
-          | undefined
-        >
-        : never)
+      | undefined
+    >
   }
 
   // --- expanded ---
@@ -765,13 +737,7 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    input?:
-      | $NamedTypes.$InputObject<_$Context>
-      | undefined
-      | null
-      | (_$Context extends { variablesEnabled: true }
-        ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<$NamedTypes.$InputObject<_$Context> | null | undefined>
-        : never)
+    input?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$InputObject<_$Context> | null | undefined>
   }
 
   // --- expanded ---
@@ -812,43 +778,22 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    date?:
+    date?: $$Utilities.DocumentBuilderKit.Var.Maybe<
       | Array<
-        | $$Utilities.Schema.Scalar.GetDecoded<
-          $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
-            'Date',
-            _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
-          >
-        >
-        | undefined
-        | null
-        | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.Builder<
-            | $$Utilities.Schema.Scalar.GetDecoded<
-              $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
-                'Date',
-                _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
-              >
-            >
-            | null
-            | undefined
-          >
-          : never)
-      >
-      | undefined
-      | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.Builder<
-          | Array<
-            $$Utilities.Schema.Scalar.GetDecoded<
-              $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
-                'Date',
-                _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
-              >
+        $$Utilities.DocumentBuilderKit.Var.Maybe<
+          | $$Utilities.Schema.Scalar.GetDecoded<
+            $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
+              'Date',
+              _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
             >
           >
           | null
           | undefined
         >
-        : never)
+      >
+      | null
+      | undefined
+    >
   }
 
   // --- expanded ---
@@ -887,22 +832,14 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    date:
-      | $$Utilities.Schema.Scalar.GetDecoded<
+    date: $$Utilities.DocumentBuilderKit.Var.Maybe<
+      $$Utilities.Schema.Scalar.GetDecoded<
         $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
           'Date',
           _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
         >
       >
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.Builder<
-          $$Utilities.Schema.Scalar.GetDecoded<
-            $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
-              'Date',
-              _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
-            >
-          >
-        >
-        : never)
+    >
   }
 
   // --- expanded ---
@@ -940,39 +877,20 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    date:
-      | Array<
-        | $$Utilities.Schema.Scalar.GetDecoded<
-          $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
-            'Date',
-            _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
-          >
-        >
-        | undefined
-        | null
-        | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.Builder<
-            | $$Utilities.Schema.Scalar.GetDecoded<
-              $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
-                'Date',
-                _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
-              >
+    date: $$Utilities.DocumentBuilderKit.Var.Maybe<
+      Array<
+        $$Utilities.DocumentBuilderKit.Var.Maybe<
+          | $$Utilities.Schema.Scalar.GetDecoded<
+            $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
+              'Date',
+              _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
             >
-            | null
-            | undefined
           >
-          : never)
+          | null
+          | undefined
+        >
       >
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.Builder<
-          Array<
-            $$Utilities.Schema.Scalar.GetDecoded<
-              $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
-                'Date',
-                _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
-              >
-            >
-          >
-        >
-        : never)
+    >
   }
 
   // --- expanded ---
@@ -1010,39 +928,20 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    date:
-      | Array<
-        | $$Utilities.Schema.Scalar.GetDecoded<
-          $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
-            'Date',
-            _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
-          >
-        >
-        | undefined
-        | null
-        | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.Builder<
-            | $$Utilities.Schema.Scalar.GetDecoded<
-              $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
-                'Date',
-                _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
-              >
+    date: $$Utilities.DocumentBuilderKit.Var.Maybe<
+      Array<
+        $$Utilities.DocumentBuilderKit.Var.Maybe<
+          | $$Utilities.Schema.Scalar.GetDecoded<
+            $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
+              'Date',
+              _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
             >
-            | null
-            | undefined
           >
-          : never)
+          | null
+          | undefined
+        >
       >
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.Builder<
-          Array<
-            $$Utilities.Schema.Scalar.GetDecoded<
-              $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
-                'Date',
-                _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
-              >
-            >
-          >
-        >
-        : never)
+    >
   }
 
   // --- expanded ---
@@ -1276,13 +1175,7 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    case?:
-      | string
-      | undefined
-      | null
-      | (_$Context extends { variablesEnabled: true }
-        ? $$Utilities.DocumentBuilderKit.Var.Builder<string | null | undefined>
-        : never)
+    case?: $$Utilities.DocumentBuilderKit.Var.Maybe<string | null | undefined>
   }
 
   // --- expanded ---
@@ -1405,14 +1298,7 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    $type?:
-      | $NamedTypes.$ChildAInterfaceHierarchyMember
-      | undefined
-      | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<
-          $NamedTypes.$ChildAInterfaceHierarchyMember | null | undefined
-        >
-        : never)
+    $type?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$ChildAInterfaceHierarchyMember | null | undefined>
   }
 
   // --- expanded ---
@@ -1450,14 +1336,7 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    $type?:
-      | $NamedTypes.$ChildBInterfaceHierarchyMember
-      | undefined
-      | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<
-          $NamedTypes.$ChildBInterfaceHierarchyMember | null | undefined
-        >
-        : never)
+    $type?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$ChildBInterfaceHierarchyMember | null | undefined>
   }
 
   // --- expanded ---
@@ -1495,14 +1374,9 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    $type?:
-      | $NamedTypes.$GrandparentInterfaceHierarchyMember
-      | undefined
-      | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<
-          $NamedTypes.$GrandparentInterfaceHierarchyMember | null | undefined
-        >
-        : never)
+    $type?: $$Utilities.DocumentBuilderKit.Var.Maybe<
+      $NamedTypes.$GrandparentInterfaceHierarchyMember | null | undefined
+    >
   }
 
   // --- expanded ---
@@ -1540,14 +1414,7 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    $type?:
-      | $NamedTypes.$ParentInterfaceHierarchyMember
-      | undefined
-      | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<
-          $NamedTypes.$ParentInterfaceHierarchyMember | null | undefined
-        >
-        : never)
+    $type?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$ParentInterfaceHierarchyMember | null | undefined>
   }
 
   // --- expanded ---
@@ -1611,9 +1478,7 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    id:
-      | string
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.Builder<string> : never)
+    id: $$Utilities.DocumentBuilderKit.Var.Maybe<string>
   }
 
   // --- expanded ---
@@ -1949,41 +1814,11 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    boolean?:
-      | boolean
-      | undefined
-      | null
-      | (_$Context extends { variablesEnabled: true }
-        ? $$Utilities.DocumentBuilderKit.Var.Builder<boolean | null | undefined>
-        : never)
-    float?:
-      | number
-      | undefined
-      | null
-      | (_$Context extends { variablesEnabled: true }
-        ? $$Utilities.DocumentBuilderKit.Var.Builder<number | null | undefined>
-        : never)
-    id?:
-      | string
-      | undefined
-      | null
-      | (_$Context extends { variablesEnabled: true }
-        ? $$Utilities.DocumentBuilderKit.Var.Builder<string | null | undefined>
-        : never)
-    int?:
-      | number
-      | undefined
-      | null
-      | (_$Context extends { variablesEnabled: true }
-        ? $$Utilities.DocumentBuilderKit.Var.Builder<number | null | undefined>
-        : never)
-    string?:
-      | string
-      | undefined
-      | null
-      | (_$Context extends { variablesEnabled: true }
-        ? $$Utilities.DocumentBuilderKit.Var.Builder<string | null | undefined>
-        : never)
+    boolean?: $$Utilities.DocumentBuilderKit.Var.Maybe<boolean | null | undefined>
+    float?: $$Utilities.DocumentBuilderKit.Var.Maybe<number | null | undefined>
+    id?: $$Utilities.DocumentBuilderKit.Var.Maybe<string | null | undefined>
+    int?: $$Utilities.DocumentBuilderKit.Var.Maybe<number | null | undefined>
+    string?: $$Utilities.DocumentBuilderKit.Var.Maybe<string | null | undefined>
   }
 
   // --- expanded ---
@@ -2021,11 +1856,7 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    $case:
-      | $NamedTypes.$Case
-      | (_$Context extends { variablesEnabled: true }
-        ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<$NamedTypes.$Case>
-        : never)
+    $case: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$Case>
   }
 
   // --- expanded ---
@@ -2063,13 +1894,7 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    $case?:
-      | $NamedTypes.$Case
-      | undefined
-      | null
-      | (_$Context extends { variablesEnabled: true }
-        ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<$NamedTypes.$Case | null | undefined>
-        : never)
+    $case?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$Case | null | undefined>
   }
 
   // --- expanded ---
@@ -2138,13 +1963,7 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    $ABCEnum?:
-      | $NamedTypes.$ABCEnum
-      | undefined
-      | null
-      | (_$Context extends { variablesEnabled: true }
-        ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<$NamedTypes.$ABCEnum | null | undefined>
-        : never)
+    $ABCEnum?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$ABCEnum | null | undefined>
   }
 
   // --- expanded ---
@@ -2185,13 +2004,7 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    input?:
-      | $NamedTypes.$InputObject<_$Context>
-      | undefined
-      | null
-      | (_$Context extends { variablesEnabled: true }
-        ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<$NamedTypes.$InputObject<_$Context> | null | undefined>
-        : never)
+    input?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$InputObject<_$Context> | null | undefined>
   }
 
   // --- expanded ---
@@ -2230,11 +2043,7 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    input:
-      | $NamedTypes.$InputObjectEnum<_$Context>
-      | (_$Context extends { variablesEnabled: true }
-        ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<$NamedTypes.$InputObjectEnum<_$Context>>
-        : never)
+    input: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$InputObjectEnum<_$Context>>
   }
 
   // --- expanded ---
@@ -2272,11 +2081,7 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    input:
-      | $NamedTypes.$InputObject<_$Context>
-      | (_$Context extends { variablesEnabled: true }
-        ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<$NamedTypes.$InputObject<_$Context>>
-        : never)
+    input: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$InputObject<_$Context>>
   }
 
   // --- expanded ---
@@ -2316,47 +2121,17 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    boolean?:
-      | boolean
-      | undefined
-      | null
-      | (_$Context extends { variablesEnabled: true }
-        ? $$Utilities.DocumentBuilderKit.Var.Builder<boolean | null | undefined>
-        : never)
-    float?:
-      | number
-      | undefined
-      | null
-      | (_$Context extends { variablesEnabled: true }
-        ? $$Utilities.DocumentBuilderKit.Var.Builder<number | null | undefined>
-        : never)
-    id?:
-      | string
-      | undefined
-      | null
-      | (_$Context extends { variablesEnabled: true }
-        ? $$Utilities.DocumentBuilderKit.Var.Builder<string | null | undefined>
-        : never)
+    boolean?: $$Utilities.DocumentBuilderKit.Var.Maybe<boolean | null | undefined>
+    float?: $$Utilities.DocumentBuilderKit.Var.Maybe<number | null | undefined>
+    id?: $$Utilities.DocumentBuilderKit.Var.Maybe<string | null | undefined>
     /**
      * @deprecated Example of argument deprecation reason here.
      */
-    int?:
-      | number
-      | undefined
-      | null
-      | (_$Context extends { variablesEnabled: true }
-        ? $$Utilities.DocumentBuilderKit.Var.Builder<number | null | undefined>
-        : never)
+    int?: $$Utilities.DocumentBuilderKit.Var.Maybe<number | null | undefined>
     /**
      * Example of some argument documentation here.
      */
-    string?:
-      | string
-      | undefined
-      | null
-      | (_$Context extends { variablesEnabled: true }
-        ? $$Utilities.DocumentBuilderKit.Var.Builder<string | null | undefined>
-        : never)
+    string?: $$Utilities.DocumentBuilderKit.Var.Maybe<string | null | undefined>
   }
 
   // --- expanded ---
@@ -2397,20 +2172,9 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    ints?:
-      | Array<
-        | number
-        | undefined
-        | null
-        | (_$Context extends { variablesEnabled: true }
-          ? $$Utilities.DocumentBuilderKit.Var.Builder<number | null | undefined>
-          : never)
-      >
-      | undefined
-      | null
-      | (_$Context extends { variablesEnabled: true }
-        ? $$Utilities.DocumentBuilderKit.Var.Builder<Array<number> | null | undefined>
-        : never)
+    ints?: $$Utilities.DocumentBuilderKit.Var.Maybe<
+      Array<$$Utilities.DocumentBuilderKit.Var.Maybe<number | null | undefined>> | null | undefined
+    >
   }
 
   // --- expanded ---
@@ -2449,17 +2213,9 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    ints:
-      | Array<
-        | number
-        | undefined
-        | null
-        | (_$Context extends { variablesEnabled: true }
-          ? $$Utilities.DocumentBuilderKit.Var.Builder<number | null | undefined>
-          : never)
-      >
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.Builder<Array<number>>
-        : never)
+    ints: $$Utilities.DocumentBuilderKit.Var.Maybe<
+      Array<$$Utilities.DocumentBuilderKit.Var.Maybe<number | null | undefined>>
+    >
   }
 
   // --- expanded ---
@@ -2497,9 +2253,7 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    string:
-      | string
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.Builder<string> : never)
+    string: $$Utilities.DocumentBuilderKit.Var.Maybe<string>
   }
 
   // --- expanded ---
@@ -2589,13 +2343,7 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    id?:
-      | string
-      | undefined
-      | null
-      | (_$Context extends { variablesEnabled: true }
-        ? $$Utilities.DocumentBuilderKit.Var.Builder<string | null | undefined>
-        : never)
+    id?: $$Utilities.DocumentBuilderKit.Var.Maybe<string | null | undefined>
   }
 
   // --- expanded ---
@@ -2847,130 +2595,65 @@ export interface InputObject<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
-  $abcEnum?:
-    | $NamedTypes.$ABCEnum
-    | undefined
-    | null
-    | (_$Context extends { variablesEnabled: true }
-      ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<$NamedTypes.$ABCEnum | null | undefined>
-      : never)
-  date?:
+  $abcEnum?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$ABCEnum | null | undefined>
+  date?: $$Utilities.DocumentBuilderKit.Var.Maybe<
     | $$Utilities.Schema.Scalar.GetDecoded<
       $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
         'Date',
         _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
       >
     >
-    | undefined
     | null
-    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.Builder<
-        | $$Utilities.Schema.Scalar.GetDecoded<
-          $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
-            'Date',
-            _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
-          >
-        >
-        | null
-        | undefined
-      >
-      : never)
-  dateRequired:
-    | $$Utilities.Schema.Scalar.GetDecoded<
+    | undefined
+  >
+  dateRequired: $$Utilities.DocumentBuilderKit.Var.Maybe<
+    $$Utilities.Schema.Scalar.GetDecoded<
       $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
         'Date',
         _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
       >
     >
-    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.Builder<
-        $$Utilities.Schema.Scalar.GetDecoded<
-          $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
-            'Date',
-            _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
-          >
-        >
-      >
-      : never)
-  id?:
-    | string
-    | undefined
-    | null
-    | (_$Context extends { variablesEnabled: true }
-      ? $$Utilities.DocumentBuilderKit.Var.Builder<string | null | undefined>
-      : never)
-  idRequired:
-    | string
-    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.Builder<string> : never)
+  >
+  id?: $$Utilities.DocumentBuilderKit.Var.Maybe<string | null | undefined>
+  idRequired: $$Utilities.DocumentBuilderKit.Var.Maybe<string>
 }
 
 export interface InputObjectCircular<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
-  circular?:
-    | $NamedTypes.$InputObjectCircular<_$Context>
-    | undefined
-    | null
-    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<
-        $NamedTypes.$InputObjectCircular<_$Context> | null | undefined
-      >
-      : never)
-  date?:
+  circular?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$InputObjectCircular<_$Context> | null | undefined>
+  date?: $$Utilities.DocumentBuilderKit.Var.Maybe<
     | $$Utilities.Schema.Scalar.GetDecoded<
       $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
         'Date',
         _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
       >
     >
-    | undefined
     | null
-    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.Var.Builder<
-        | $$Utilities.Schema.Scalar.GetDecoded<
-          $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
-            'Date',
-            _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
-          >
-        >
-        | null
-        | undefined
-      >
-      : never)
+    | undefined
+  >
 }
 
 export interface InputObjectEnum<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
-  $abcEnum?:
-    | $NamedTypes.$ABCEnum
-    | undefined
-    | null
-    | (_$Context extends { variablesEnabled: true }
-      ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<$NamedTypes.$ABCEnum | null | undefined>
-      : never)
+  $abcEnum?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$ABCEnum | null | undefined>
 }
 
 export interface InputObjectNested<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
-  InputObject?:
-    | $NamedTypes.$InputObject<_$Context>
-    | undefined
-    | null
-    | (_$Context extends { variablesEnabled: true }
-      ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<$NamedTypes.$InputObject<_$Context> | null | undefined>
-      : never)
+  InputObject?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$InputObject<_$Context> | null | undefined>
 }
 
 export interface InputObjectNestedNonNull<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
-  InputObject:
-    | $NamedTypes.$InputObject<_$Context>
-    | (_$Context extends { variablesEnabled: true }
-      ? $$Utilities.DocumentBuilderKit.Var.VariableMarker<$NamedTypes.$InputObject<_$Context>>
-      : never)
+  InputObject: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$InputObject<_$Context>>
 }
 
 //
@@ -4680,13 +4363,7 @@ export namespace ObjectNestedWithArgs {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    filter?:
-      | string
-      | undefined
-      | null
-      | (_$Context extends { variablesEnabled: true }
-        ? $$Utilities.DocumentBuilderKit.Var.Builder<string | null | undefined>
-        : never)
+    filter?: $$Utilities.DocumentBuilderKit.Var.Maybe<string | null | undefined>
   }
 
   // --- expanded ---
@@ -4725,34 +4402,10 @@ export namespace ObjectNestedWithArgs {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    boolean?:
-      | boolean
-      | undefined
-      | null
-      | (_$Context extends { variablesEnabled: true }
-        ? $$Utilities.DocumentBuilderKit.Var.Builder<boolean | null | undefined>
-        : never)
-    float?:
-      | number
-      | undefined
-      | null
-      | (_$Context extends { variablesEnabled: true }
-        ? $$Utilities.DocumentBuilderKit.Var.Builder<number | null | undefined>
-        : never)
-    int?:
-      | number
-      | undefined
-      | null
-      | (_$Context extends { variablesEnabled: true }
-        ? $$Utilities.DocumentBuilderKit.Var.Builder<number | null | undefined>
-        : never)
-    string?:
-      | string
-      | undefined
-      | null
-      | (_$Context extends { variablesEnabled: true }
-        ? $$Utilities.DocumentBuilderKit.Var.Builder<string | null | undefined>
-        : never)
+    boolean?: $$Utilities.DocumentBuilderKit.Var.Maybe<boolean | null | undefined>
+    float?: $$Utilities.DocumentBuilderKit.Var.Maybe<number | null | undefined>
+    int?: $$Utilities.DocumentBuilderKit.Var.Maybe<number | null | undefined>
+    string?: $$Utilities.DocumentBuilderKit.Var.Maybe<string | null | undefined>
   }
 
   // --- expanded ---

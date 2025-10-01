@@ -31,7 +31,7 @@ export const ModuleGeneratorMethodsDocument = createModuleGenerator(
           $Document,
           ${$.$$SelectionSets}.$Document<
             ${contextTsExpectError}
-            { scalars: $Context['scalars'], variablesEnabled: false }>
+            { scalars: $Context['scalars'] }>
           >
         ): ${$.$$Utilities}.DocumentBuilderKit.DocumentRunner<
           $Context,

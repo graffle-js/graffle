@@ -21,7 +21,7 @@ import {
   type Values,
 } from '../lib/prelude.js'
 import type { RequestPipeline } from '../requestPipeline/_namespace.js'
-import type { RequestResult } from '../types/RequestResult.ts/__.js'
+import type { RequestResult } from '../types/RequestResult/__.js'
 
 export type GraffleExecutionResultEnvelope = {
   errors?: ReadonlyArray<

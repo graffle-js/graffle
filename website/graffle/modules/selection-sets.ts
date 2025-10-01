@@ -191,9 +191,7 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    name:
-      | string
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never);
+    name: $$Utilities.DocumentBuilderKit.Var.Maybe<string>;
   }
 
   // --- expanded ---
@@ -231,11 +229,7 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    filter?:
-      | $NamedTypes.$PokemonFilter<_$Context>
-      | undefined
-      | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never);
+    filter?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$PokemonFilter<_$Context> | null | undefined>;
   }
 
   // --- expanded ---
@@ -273,9 +267,7 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    name:
-      | string
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never);
+    name: $$Utilities.DocumentBuilderKit.Var.Maybe<string>;
   }
 
   // --- expanded ---
@@ -388,27 +380,11 @@ export namespace Mutation {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    attack?:
-      | number
-      | undefined
-      | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never);
-    defense?:
-      | number
-      | undefined
-      | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never);
-    hp?:
-      | number
-      | undefined
-      | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never);
-    name:
-      | string
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never);
-    $type:
-      | $NamedTypes.$PokemonType
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never);
+    attack?: $$Utilities.DocumentBuilderKit.Var.Maybe<number | null | undefined>;
+    defense?: $$Utilities.DocumentBuilderKit.Var.Maybe<number | null | undefined>;
+    hp?: $$Utilities.DocumentBuilderKit.Var.Maybe<number | null | undefined>;
+    name: $$Utilities.DocumentBuilderKit.Var.Maybe<string>;
+    $type: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$PokemonType>;
   }
 
   // --- expanded ---
@@ -489,68 +465,45 @@ export interface DateFilter<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
-  gte?:
+  gte?: $$Utilities.DocumentBuilderKit.Var.Maybe<
     | $$Utilities.Schema.Scalar.GetDecoded<
       $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
         "Date",
         _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
       >
     >
-    | undefined
     | null
-    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never);
-  lte?:
+    | undefined
+  >;
+  lte?: $$Utilities.DocumentBuilderKit.Var.Maybe<
     | $$Utilities.Schema.Scalar.GetDecoded<
       $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
         "Date",
         _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
       >
     >
-    | undefined
     | null
-    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never);
+    | undefined
+  >;
 }
 
 export interface PokemonFilter<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
-  birthday?:
-    | $NamedTypes.$DateFilter<_$Context>
-    | undefined
-    | null
-    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never);
-  name?:
-    | $NamedTypes.$StringFilter<_$Context>
-    | undefined
-    | null
-    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never);
-  $type?:
-    | $NamedTypes.$PokemonType
-    | undefined
-    | null
-    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never);
+  birthday?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$DateFilter<_$Context> | null | undefined>;
+  name?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$StringFilter<_$Context> | null | undefined>;
+  $type?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$PokemonType | null | undefined>;
 }
 
 export interface StringFilter<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
-  contains?:
-    | string
-    | undefined
-    | null
-    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never);
-  in?:
-    | Array<
-      | string
-      | undefined
-      | null
-      | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never)
-    >
-    | undefined
-    | null
-    | (_$Context extends { variablesEnabled: true } ? $$Utilities.DocumentBuilderKit.VariableMarker : never);
+  contains?: $$Utilities.DocumentBuilderKit.Var.Maybe<string | null | undefined>;
+  in?: $$Utilities.DocumentBuilderKit.Var.Maybe<
+    Array<$$Utilities.DocumentBuilderKit.Var.Maybe<string | null | undefined>> | null | undefined
+  >;
 }
 
 //

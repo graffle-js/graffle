@@ -15,6 +15,7 @@ type ReferenceAssignments = string[]
 
 export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
   `SchemaDrivenDataMap`,
+  import.meta.url,
   ({ config, code }) => {
     const rootsWithOpType = entries(config.schema.kindMap.index.Root)
       .map(_ => {

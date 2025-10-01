@@ -6,10 +6,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   $batch: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
-        $SelectionSet,
-        $$SelectionSets.Query<{ scalars: $Context["scalars"]; variablesEnabled: false }>
-      >,
+      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query<{ scalars: $Context["scalars"] }>>,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutput<
@@ -36,10 +33,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   battles: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
-        $SelectionSet,
-        $$SelectionSets.Query.battles<{ scalars: $Context["scalars"]; variablesEnabled: false }>
-      >,
+      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.battles<{ scalars: $Context["scalars"] }>>,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -56,10 +50,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   beings: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
-        $SelectionSet,
-        $$SelectionSets.Query.beings<{ scalars: $Context["scalars"]; variablesEnabled: false }>
-      >,
+      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.beings<{ scalars: $Context["scalars"] }>>,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -78,7 +69,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Query.pokemonByName<{ scalars: $Context["scalars"]; variablesEnabled: false }>
+        $$SelectionSets.Query.pokemonByName<{ scalars: $Context["scalars"] }>
       >,
     ) => Promise<
       & (null | {})
@@ -96,10 +87,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   pokemons: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
-        $SelectionSet,
-        $$SelectionSets.Query.pokemons<{ scalars: $Context["scalars"]; variablesEnabled: false }>
-      >,
+      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.pokemons<{ scalars: $Context["scalars"] }>>,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -118,7 +106,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Query.trainerByName<{ scalars: $Context["scalars"]; variablesEnabled: false }>
+        $$SelectionSets.Query.trainerByName<{ scalars: $Context["scalars"] }>
       >,
     ) => Promise<
       & (null | {})
@@ -136,10 +124,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   trainers: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
-        $SelectionSet,
-        $$SelectionSets.Query.trainers<{ scalars: $Context["scalars"]; variablesEnabled: false }>
-      >,
+      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.trainers<{ scalars: $Context["scalars"] }>>,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -158,10 +143,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   $batch: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
-        $SelectionSet,
-        $$SelectionSets.Mutation<{ scalars: $Context["scalars"]; variablesEnabled: false }>
-      >,
+      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation<{ scalars: $Context["scalars"] }>>,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutput<
@@ -190,7 +172,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.addPokemon<{ scalars: $Context["scalars"]; variablesEnabled: false }>
+        $$SelectionSets.Mutation.addPokemon<{ scalars: $Context["scalars"] }>
       >,
     ) => Promise<
       & (null | {})

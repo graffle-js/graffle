@@ -8,6 +8,7 @@ import { renderName } from '../helpers/render.js'
 
 export const ModuleGeneratorTypeInputsIndex = createModuleGenerator(
   `type-inputs-index`,
+  import.meta.url,
   ({ config, code }) => {
     code`
       import type * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'

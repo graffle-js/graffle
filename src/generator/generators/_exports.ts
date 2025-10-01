@@ -1,4 +1,5 @@
 import { createModuleGenerator, getImportName } from '../helpers/moduleGenerator.js'
+import { ModuleGenerator_internals } from './_internals.js'
 import { ModuleGeneratorClient } from './Client.js'
 import { ModuleGeneratorData } from './Data.js'
 import { ModuleGeneratorDocument } from './Document.js'
@@ -44,6 +45,7 @@ export const ModuleGenerator_exports = createModuleGenerator(
       `export { schemaDrivenDataMap as schemaMap } from './modules/${
         getImportName(config, ModuleGeneratorSchemaDrivenDataMap)
       }'`,
+      `export * as $ from './${getImportName(config, ModuleGenerator_internals)}'`,
     ].filter(line => line !== '') // Remove empty lines
 
     code(...exports)

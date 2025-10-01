@@ -25,6 +25,7 @@ const $ContextTypeParameter =
 
 export const ModuleGeneratorSelectionSets = createModuleGenerator(
   `SelectionSets`,
+  import.meta.url,
   ({ config, code }) => {
     const kindMap = pick(config.schema.kindMap.list, [
       `Root`,
@@ -386,49 +387,36 @@ const renderArgumentType = (type: Grafaid.Schema.InputTypes): string => {
   if (Grafaid.Schema.isListType(sansNullabilityType)) {
     const innerType = Grafaid.Schema.getNullableType(sansNullabilityType.ofType)
     const innerTypeRendered = renderArgumentType(innerType)
-    // Extract just the base type without nullability and variable marker
-    const innerBaseType = getBaseTypeWithoutBuilder(innerType)
-    baseTypeForMarker = `Array<${innerBaseType}>`
 
-    // Conditionally allow typed Builder based on context
-    // Note: We include nullability in the type constraint for accurate type checking
-    const fullType = nullableRendered ? `${baseTypeForMarker} | null | undefined` : baseTypeForMarker
-    const variableMarkerType =
-      `| (${i._$Context} extends { variablesEnabled: true } ? ${i.$$Utilities}.DocumentBuilderKit.Var.Builder<${fullType}> : never)`
+    // Wrap entire array type (with nullability) in Var.Maybe to allow variable markers
+    const arrayType = `Array<${innerTypeRendered}>`
+    const fullType = nullableRendered ? `${arrayType} | null | undefined` : arrayType
 
-    return `Array<${innerTypeRendered}> ${nullableRendered} ${variableMarkerType}`
+    return `${i.$$Utilities}.DocumentBuilderKit.Var.Maybe<${fullType}>`
   }
 
   if (Grafaid.Schema.isScalarType(sansNullabilityType)) {
     if (Grafaid.Schema.isScalarTypeCustom(sansNullabilityType)) {
-      const scalarTypeRendered =
+      baseTypeForMarker =
         `${i.$$Utilities}.Schema.Scalar.GetDecoded<${i.$$Utilities}.Schema.Scalar.LookupCustomScalarOrFallbackToString<'${sansNullabilityType.name}', ${i._$Context} extends { scalars: infer S } ? S : ${i.$$Utilities}.Schema.Scalar.Registry.Empty>>`
-      baseTypeForMarker = scalarTypeRendered
     } else {
-      const scalarTypeRendered =
+      baseTypeForMarker =
         Grafaid.StandardScalarTypeTypeScriptMapping[sansNullabilityType.name as Grafaid.StandardScalarTypeNames]
-      baseTypeForMarker = scalarTypeRendered
     }
 
-    // Conditionally allow typed Builder based on context
-    // Note: We include nullability in the type constraint for accurate type checking
+    // Wrap scalar type (with nullability) in Var.Maybe to allow variable markers
     const fullType = nullableRendered ? `${baseTypeForMarker} | null | undefined` : baseTypeForMarker
-    const variableMarkerType =
-      `| (${i._$Context} extends { variablesEnabled: true } ? ${i.$$Utilities}.DocumentBuilderKit.Var.Builder<${fullType}> : never)`
 
-    return `${baseTypeForMarker} ${nullableRendered} ${variableMarkerType}`
+    return `${i.$$Utilities}.DocumentBuilderKit.Var.Maybe<${fullType}>`
   }
 
   // Input object or enum type
   baseTypeForMarker = H.namedTypesReference(sansNullabilityType)
 
-  // Conditionally allow typed Builder based on context
-  // Note: We include nullability in the type constraint for accurate type checking
+  // Wrap type (with nullability) in Var.Maybe to allow variable markers
   const fullType = nullableRendered ? `${baseTypeForMarker} | null | undefined` : baseTypeForMarker
-  const variableMarkerType =
-    `| (${i._$Context} extends { variablesEnabled: true } ? ${i.$$Utilities}.DocumentBuilderKit.Var.VariableMarker<${fullType}> : never)`
 
-  return `${baseTypeForMarker} ${nullableRendered} ${variableMarkerType}`
+  return `${i.$$Utilities}.DocumentBuilderKit.Var.Maybe<${fullType}>`
 }
 
 // Helper to get base type without variable marker and nullability

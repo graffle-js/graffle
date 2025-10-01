@@ -17,7 +17,7 @@ import type * as TypeInputsIndex from "./type-inputs-index.js";
 //
 //
 
-export type DateFilter = {
+export interface DateFilter extends $$Utilities.SchemaDrivenDataMap.InputObject {
   readonly n: "DateFilter";
   readonly f: {
     readonly gte: {
@@ -31,9 +31,9 @@ export type DateFilter = {
       readonly $t: TypeInputsIndex.Date | undefined;
     };
   };
-};
+}
 
-export type PokemonFilter = {
+export interface PokemonFilter extends $$Utilities.SchemaDrivenDataMap.InputObject {
   readonly n: "PokemonFilter";
   readonly f: {
     readonly birthday: {
@@ -52,9 +52,9 @@ export type PokemonFilter = {
       readonly $t: TypeInputsIndex.PokemonType | undefined;
     };
   };
-};
+}
 
-export type StringFilter = {
+export interface StringFilter extends $$Utilities.SchemaDrivenDataMap.InputObject {
   readonly n: "StringFilter";
   readonly f: {
     readonly contains: {
@@ -68,7 +68,7 @@ export type StringFilter = {
       readonly $t: readonly TypeInputsIndex.String[] | undefined;
     };
   };
-};
+}
 
 //
 //
@@ -140,39 +140,7 @@ export type StringFilter = {
 //
 //
 
-export type Query = {
-  readonly f: {
-    readonly pokemonByName: {
-      readonly a: {
-        readonly name: {
-          readonly nt: "String";
-          readonly it: readonly [1];
-          readonly $t: TypeInputsIndex.String;
-        };
-      };
-    };
-    readonly pokemons: {
-      readonly a: {
-        readonly filter: {
-          readonly nt: "PokemonFilter";
-          readonly it: readonly [0];
-          readonly $t: TypeInputsIndex.PokemonFilter | undefined;
-        };
-      };
-    };
-    readonly trainerByName: {
-      readonly a: {
-        readonly name: {
-          readonly nt: "String";
-          readonly it: readonly [1];
-          readonly $t: TypeInputsIndex.String;
-        };
-      };
-    };
-  };
-};
-
-export type Mutation = {
+export interface Mutation extends $$Utilities.SchemaDrivenDataMap.OutputObject {
   readonly f: {
     readonly addPokemon: {
       readonly a: {
@@ -204,7 +172,39 @@ export type Mutation = {
       };
     };
   };
-};
+}
+
+export interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
+  readonly f: {
+    readonly pokemonByName: {
+      readonly a: {
+        readonly name: {
+          readonly nt: "String";
+          readonly it: readonly [1];
+          readonly $t: TypeInputsIndex.String;
+        };
+      };
+    };
+    readonly pokemons: {
+      readonly a: {
+        readonly filter: {
+          readonly nt: "PokemonFilter";
+          readonly it: readonly [0];
+          readonly $t: TypeInputsIndex.PokemonFilter | undefined;
+        };
+      };
+    };
+    readonly trainerByName: {
+      readonly a: {
+        readonly name: {
+          readonly nt: "String";
+          readonly it: readonly [1];
+          readonly $t: TypeInputsIndex.String;
+        };
+      };
+    };
+  };
+}
 
 //
 //
@@ -222,7 +222,17 @@ export type Mutation = {
 //
 //
 
-export type ArgumentsMap = {
-  query: Query;
-  mutation: Mutation;
-};
+export interface ArgumentsMap {
+  operations: {
+    query: Query;
+    mutation: Mutation;
+  };
+  directives: {};
+  types: {
+    Mutation: Mutation;
+    Query: Query;
+    DateFilter: DateFilter;
+    PokemonFilter: PokemonFilter;
+    StringFilter: StringFilter;
+  };
+}

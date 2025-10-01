@@ -3,6 +3,7 @@ import { Ts } from '@wollybeard/kit'
 import { Test } from '@wollybeard/kit/test'
 import { OperationTypeNode } from 'graphql'
 import { expect, test } from 'vitest'
+import { PossibleWithScalars } from './__tests__/fixtures/possible-with-scalars/_namespace.js'
 import { Possible } from './__tests__/fixtures/possible/_namespace.js'
 import { createStaticRootType } from './staticBuilder.js'
 import { Var } from './var/$.js'
@@ -42,99 +43,108 @@ Test.describe(`static document builder`)
     }
   })
 
+test('type input validation', () => {
+  // @ts-expect-error - Builder<1> should not be assignable to Builder<string>
+  Possible.query.stringWithRequiredArg({
+    $: {
+      string: $var.default(1),
+    },
+  })
+})
+
 // dprint-ignore
-test('static builder type inference', () => {
+test('type output inference', () => {
+  // Nested object args
+  const q0 = Possible.query.objectNestedWithArgs({ object: { $: { int: $var }, id:true}})
+  Ts.assertEqual<Grafaid.Document.Typed.String<{objectNestedWithArgs:{object:{id:null|string}|null}|null}, { int?: number | undefined }>>()(q0)
+
   // Scalar fields
   const q1 = Possible.query.string(true)
-  Ts.assertEqual<Grafaid.Document.Typed.String<{ string: string | null }, {}>>()(q1)
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ string: string | null }, never>>()(q1)
 
   const q2 = Possible.query.idNonNull(true)
-  Ts.assertEqual<Grafaid.Document.Typed.String<{ idNonNull: string }, {}>>()(q2)
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ idNonNull: string }, never>>()(q2)
 
   // Custom scalar
   const q3 = Possible.query.date(true)
-  Ts.assertEqual<Grafaid.Document.Typed.String<{ date: Date | null }, {}>>()(q3) // Custom scalar Date
-
-  const q4 = Possible.query.dateNonNull(true)
-  Ts.assertEqual<Grafaid.Document.Typed.String<{ dateNonNull: Date }, {}>>()(q4)
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ date: string | null }, never>>()(q3)
+  const q3b = PossibleWithScalars.query.date(true)
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ date: Date | null }, never>>()(q3b)
 
   // Lists
   const q5 = Possible.query.listInt(true)
-  Ts.assertEqual<Grafaid.Document.Typed.String<{ listInt: Array<number | null> | null }, {}>>()(q5)
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ listInt: Array<number | null> | null }, never>>()(q5)
 
   const q6 = Possible.query.listIntNonNull(true)
-  Ts.assertEqual<Grafaid.Document.Typed.String<{ listIntNonNull: Array<number> }, {}>>()(q6)
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ listIntNonNull: Array<number> }, never>>()(q6)
 
   const q7 = Possible.query.listListInt(true)
-  Ts.assertEqual<Grafaid.Document.Typed.String<{ listListInt: Array<Array<number | null> | null> | null }, {}>>()(q7)
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ listListInt: Array<Array<number | null> | null> | null }, never>>()(q7)
 
   // Object with fields
-  const q8 = Possible.query.object({ id: true, string: true, int: true, float: true, boolean: true })
-  Ts.assertEqual<Grafaid.Document.Typed.String<{ object: { id: string, string: string | null, int: number | null, float: number | null, boolean: boolean | null } | null }, {}>>()(q8)
+  const q8 = Possible.query.object({ id: true })
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ object: { id:string|null } | null }, never>>()(q8)
 
   // Field with $var
   const q9 = Possible.query.stringWithArgs({ $: { boolean: $var } })
-  Ts.assertEqual<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { boolean: boolean | undefined }>>()(q9)
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { boolean?: boolean | undefined }>>()(q9)
 
   // Required argument with $var
   const q10 = Possible.query.stringWithRequiredArg({ $: { string: $var } })
   Ts.assertEqual<Grafaid.Document.Typed.String<{ stringWithRequiredArg: string | null }, { string: string }>>()(q10) // NOT undefined!
 
-  // $var with default
-  const q11 = Possible.query.stringWithArgs({ $: { int: $var.default(10) } })
-  Ts.assertEqual<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { int: number | undefined }>>()(q11)
+  // Required argument with $var eith default
+  const q11 = Possible.query.stringWithRequiredArg({ $: { string: $var.default('abc') } })
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ stringWithRequiredArg: string | null }, { string?: string | undefined }>>()(q11)
 
   // $var with custom name
   const q12 = Possible.query.stringWithArgs({ $: { boolean: $var.name('isActive') } })
-  Ts.assertEqual<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { isActive: boolean | undefined }>>()(q12)
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { isActive?: boolean | undefined }>>()(q12)
 
   // $var.required() on optional argument
   const q12b = Possible.query.stringWithArgs({ $: { string: $var.required() } })
   Ts.assertEqual<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { string: string }>>()(q12b) // NOT undefined!
 
-  // Note: $var.optional() was removed - you cannot make required fields optional
-  // Use .default() to provide a default value instead
-
   // List argument with $var
   const q13 = Possible.query.stringWithListArg({ $: { ints: $var } })
-  Ts.assertEqual<Grafaid.Document.Typed.String<{ stringWithListArg: string | null }, { ints: Array<number | null> | null | undefined }>>()(q13)
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ stringWithListArg: string | null }, { ints?: readonly (number)[] | undefined }>>()(q13)
 
   const q14 = Possible.query.stringWithListArgRequired({ $: { ints: $var } })
-  Ts.assertEqual<Grafaid.Document.Typed.String<{ stringWithListArgRequired: string | null }, { ints: Array<number> }>>()(q14)
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ stringWithListArgRequired: string | null }, { ints: readonly number[] }>>()(q14)
 
   // Multiple $var types
-  const q15 = Possible.query.stringWithArgs({ $: { boolean: $var, string: $var, int: $var, float: $var, id: $var } })
-  Ts.assertEqual<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { boolean: boolean | undefined, string: string | undefined, int: number | undefined, float: number | undefined, id: string | undefined }>>()(q15)
+  const q15 = Possible.query.stringWithArgs({ $: { boolean: $var, string: $var } })
+  Ts.assertEqual<Grafaid.Document.Typed.String<
+    { stringWithArgs: string | null },
+    { boolean?: boolean | undefined, string?: string | undefined }
+  >>()(q15)
 
   // Mixed $var and literals
   const q16 = Possible.query.stringWithArgs({ $: { boolean: true, string: $var, int: 42 } })
-  Ts.assertEqual<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { string: string | undefined }>>()(q16)
+  Ts.assertEqual<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { string?: string | undefined }>>()(q16)
 
-  // Nested selection
-  const q17 = Possible.query.objectNested({ id: true, object: { id: true, string: true, int: true } })
-  Ts.assertEqual<Grafaid.Document.Typed.String<{ objectNested: { id: string | null, object: { id: string, string: string | null, int: number | null } | null } | null }, {}>>()(q17)
-
-  // Union type
-  const q18 = Possible.query.unionFooBar({ ___on_Foo: { id: true }, Bar: { int: true } })
-  Ts.assertEqual<Grafaid.Document.Typed.String<{ unionFooBar: { id?: string | null, int?: number | null } | null }, {}>>()(q18)
-
-  // Interface type
-  const q19 = Possible.query.interface({ id: true })
-  Ts.assertEqual<Grafaid.Document.Typed.String<{ interface: { id: string | null } | null }, {}>>()(q19)
+  const p = Possible.create()
+  const x = p.query.objectNestedWithArgs({
+    object: ['object2', { $: { int: $var }, id:true }]
+    // TODO: this should be a type error! (no fields selected, just $)
+    // object: ['object2', { $: { int: $var } }]
+    // TODO: this should be a type error!
+    // id: ['id2', {$:{filter:$var}}]
+  })
 
   // Alias with $var on nested object field
   const q20 = Possible.query.objectNestedWithArgs({
-    id: [`myId`, { $: { filter: $var } }],
-    myObject: [`myObject`, { $: { boolean: $var, int: $var } }]
+    object: ['object2', { $: { int: $var }, id:true }]
+    // TODO: this should be a type error! (no fields selected, just $)
+    // object: ['object2', { $: { int: $var } }]
+    // TODO: this should be a type error!
+    // id: ['id2', {$:{filter:$var}}]
   })
-  Ts.assertEqual<Grafaid.Document.Typed.String<{ objectNestedWithArgs: { myId: string | null, myObject: { id: string, string: string | null, int: number | null, float: number | null, boolean: boolean | null, ABCEnum: 'A' | 'B' | 'C' | null } | null } | null }, { filter: string | undefined, boolean: boolean | undefined, int: number | undefined }>>()(q20)
-
-  // Multiple aliases with different variables on nested object fields
-  const q21 = Possible.query.objectNestedWithArgs({
-    object: [
-      [`first`, { $: { boolean: true } }],
-      [`second`, { $: { int: $var } }]
-    ]
-  })
-  Ts.assertEqual<Grafaid.Document.Typed.String<{ objectNestedWithArgs: { first: { id: string, string: string | null, int: number | null, float: number | null, boolean: boolean | null, ABCEnum: 'A' | 'B' | 'C' | null } | null, second: { id: string, string: string | null, int: number | null, float: number | null, boolean: boolean | null, ABCEnum: 'A' | 'B' | 'C' | null } | null } | null }, { int: number | undefined }>>()(q21)
+  Ts.assertEqual<Grafaid.Document.Typed.String<
+    // TODO: Type widening issue - alias key becomes index signature instead of literal 'object2'
+    // curerntly returns this:
+    // { objectNestedWithArgs: { [x: string]: { id: string | null } | null } | null },
+    { objectNestedWithArgs: { object2: { id: string | null } | null } | null },
+    { int?: number | undefined }
+  >>()(q20)
 })

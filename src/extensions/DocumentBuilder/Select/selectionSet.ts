@@ -16,13 +16,13 @@ export type AnySelectionSet<$Context = DefaultContext> = {
 //   // $?: any // ArgsObject
 // }
 
-export type FieldValue<$Context = DefaultContext> = AnySelectionSet<$Context> | Indicator.Indicator
+export type FieldValue<$Context = DefaultContext> = AnySelectionSet<$Context> | Indicator.Indicator | SelectAlias<any>
 
 export const isSelectionSet = (value: unknown): value is AnySelectionSet => {
   return typeof value === `object` && value !== null
 }
 
-export type Any<$Context = DefaultContext> = AnyExceptAlias<$Context> | SelectAlias
+export type Any<$Context = DefaultContext> = AnyExceptAlias<$Context> | SelectAlias<any>
 
 export type AnyExceptAlias<$Context = DefaultContext> = AnySelectionSet<$Context> | Indicator.Indicator
 

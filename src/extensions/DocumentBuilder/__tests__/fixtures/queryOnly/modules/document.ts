@@ -3,9 +3,18 @@ import type { TypedDocument } from '../../../../../../exports/client.js'
 import { createStaticRootType } from '../../../../../../exports/extensions/document-builder/runtime.js'
 import type * as $$Utilities from '../../../../../../exports/utilities-for-generated.js'
 import type * as ArgumentsMap from './arguments-map.js'
+import type * as $$Scalar from './scalar.js'
 import type * as $$Schema from './schema.js'
 import type * as SelectionSets from './selection-sets.js'
-import type { $TypeInputsIndex } from './type-inputs-index.js'
+
+/**
+ * Context for static document type inference.
+ * Static documents have no runtime extensions, hence typeHookRequestResultDataTypes is never.
+ */
+interface StaticDocumentContext {
+  typeHookRequestResultDataTypes: never
+  scalars: $$Scalar.$Registry
+}
 
 /**
  * Static query builder for compile-time GraphQL document generation.
@@ -46,11 +55,16 @@ export interface QueryBuilder {
   id: <$SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['id']>(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ id: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { id: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['query'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ id: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+        { id: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
   idNonNull: <
@@ -58,11 +72,16 @@ export interface QueryBuilder {
   >(
     selection?: $SelectionSet,
   ) => TypedDocument.String<
-    $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ idNonNull: $SelectionSet }, $$Schema.Schema>,
-    $$Utilities.DocumentBuilderKit.Var.Infer<
-      { idNonNull: Exclude<$SelectionSet, undefined> },
-      ArgumentsMap.ArgumentsMap['query'],
-      $TypeInputsIndex
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ idNonNull: $SelectionSet }, $$Schema.Schema>
+    >,
+    $$Utilities.RequestResult.Simplify<
+      StaticDocumentContext,
+      $$Utilities.DocumentBuilderKit.Var.InferFromQuery<
+        { idNonNull: Exclude<$SelectionSet, undefined> },
+        ArgumentsMap.ArgumentsMap
+      >
     >
   >
 }
