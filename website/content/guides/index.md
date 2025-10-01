@@ -16,5 +16,7 @@ Graffle's website documentation is primarily divided between these guides and [e
 
 Guides are built around domains rather than technical locality so for example many aspects of configuration are embedded into each one's respective area of concern like [HTTP Transport](transports/http.md) or [Output](10_overview/output.md). Throughout, guides reference [Examples](../examples/raw) in context helping you jump between theory and practice. As well, know that all examples are automatically tested in Graffle's continuous integration so you can be confident in their functionality.
 
+For information about GraphQL features not yet supported, see the [Limitations](30_appendix/limitations.md) page.
+
 > [!note] Generated Client Icon <span style="font-size:2em;line-height:0;" title="generation required">⩕</span>
 > This icon is used throughout the guides to denote that the content **only applies to the generated client**.

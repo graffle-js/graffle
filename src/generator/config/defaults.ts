@@ -1,18 +1,18 @@
-import type { ConfigInitLibraryPaths, InputImportFormat, InputOutputCase } from './configInit.js'
+import type { ConfigInit } from './configInit.js'
 
-export const defaultNamespace = `Graffle`
-
-export const defaultName = `default`
-
-export const defaultLibraryPaths = {
-  client: `graffle/client`,
-  scalars: `graffle/generator-helpers/standard-scalar-types`,
-  schema: `graffle/schema`,
-  utilitiesForGenerated: `graffle/utilities-for-generated`,
-  extensionTransportHttp: `graffle/extensions/transport-http`,
-  extensionDocumentBuilder: `graffle/extensions/document-builder`,
-} satisfies ConfigInitLibraryPaths
-
-export const defaultOutputCase: InputOutputCase = `kebab`
-
-export const defaultImportFormat: InputImportFormat = `jsExtension`
+export const defaults = {
+  name: `default`,
+  libraryPaths: {
+    client: `graffle/client`,
+    scalars: `graffle/generator-helpers/standard-scalar-types`,
+    schema: `graffle/schema`,
+    utilitiesForGenerated: `graffle/utilities-for-generated`,
+    extensionTransportHttp: `graffle/extensions/transport-http`,
+    extensionDocumentBuilder: `graffle/extensions/document-builder`,
+  },
+  outputCase: `kebab`,
+  importFormat: `jsExtension`,
+  lint: {
+    missingCustomScalarCodec: true,
+  },
+} satisfies Partial<ConfigInit>

@@ -16,8 +16,7 @@ import {
   type InputOutputCase,
   libraryPathKeys,
 } from './configInit.js'
-import { defaultImportFormat, defaultLibraryPaths, defaultNamespace, defaultOutputCase } from './defaults.js'
-import { defaultName } from './defaults.js'
+import { defaults } from './defaults.js'
 
 export interface Config {
   fs: Fs
@@ -83,7 +82,7 @@ export const createConfig = async (configInit: ConfigInit): Promise<Config> => {
 
   // --- Output Case ---
 
-  const outputCase = configInit.outputCase ?? defaultOutputCase
+  const outputCase = configInit.outputCase ?? defaults.outputCase
 
   // --- Paths ---
 
@@ -110,7 +109,7 @@ export const createConfig = async (configInit: ConfigInit): Promise<Config> => {
   }
 
   // Get import format early to use in path processing
-  const importFormat = configInit.importFormat ?? defaultImportFormat
+  const importFormat = configInit.importFormat ?? defaults.importFormat
 
   // Helper to get the correct extension based on importFormat
   const getImportExtension = (path: string): string => {
@@ -195,7 +194,7 @@ To suppress this warning disable formatting in one of the following ways:
   // --- Lint ---
 
   const lint: Config['lint'] = {
-    missingCustomScalarCodec: configInit.lint?.missingCustomScalarCodec ?? true,
+    missingCustomScalarCodec: configInit.lint?.missingCustomScalarCodec ?? defaults.lint.missingCustomScalarCodec,
   }
 
   // --- Output SDL ---
@@ -210,15 +209,15 @@ To suppress this warning disable formatting in one of the following ways:
 
   // --- name ---
 
-  const name = configInit.name ?? defaultName
+  const name = configInit.name ?? defaults.name
 
   const nameNamespace = configInit.nameNamespace === true
     ? configInit.name
       ? pascalCase(configInit.name)
-      : defaultNamespace
+      : `Graffle`
     : isString(configInit.nameNamespace)
     ? configInit.nameNamespace
-    : defaultNamespace
+    : `Graffle`
 
   // --- advanced ---
 
@@ -265,7 +264,7 @@ To suppress this warning disable formatting in one of the following ways:
       imports: {
         scalars: scalarsImportPath,
         grafflePackage: ConfigManager.mergeDefaults(
-          defaultLibraryPaths,
+          defaults.libraryPaths,
           libraryPaths,
         ),
       },

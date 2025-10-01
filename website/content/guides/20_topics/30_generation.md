@@ -87,3 +87,36 @@ await Generator.generate({
   // ...
 })
 ```
+
+## Global Defaults
+
+For advanced use cases like testing, you can mutate global generator defaults at runtime. This is useful when you want to suppress warnings or change default behaviors without passing configuration to each generator call.
+
+```ts
+import { Generator } from 'graffle/generator'
+
+// Suppress custom scalar warnings globally (useful in test suites)
+Generator.defaults.lint.missingCustomScalarCodec = false
+
+// All subsequent generation will use the modified defaults
+await Generator.generate({ schema: '...' })
+```
+
+**Use cases:**
+
+- **Testing**: Suppress warnings in test suites to keep output clean
+- **Scripting**: Set defaults once for multiple generator runs
+- **CI/CD**: Configure build-time behavior without config files
+
+**Note**: Changes to `defaults` affect all generator calls in the same process. These are _global_ defaults that can still be overridden by explicit configuration:
+
+```ts
+// Global default
+Generator.defaults.lint.missingCustomScalarCodec = false
+
+// Explicit override takes precedence
+await Generator.generate({
+  lint: { missingCustomScalarCodec: true },
+  schema: '...',
+})
+```

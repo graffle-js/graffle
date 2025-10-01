@@ -371,6 +371,10 @@ graffle.query.$batch({
 
 - [Directive Example](../../../examples/55_document-builder/document-builder_directive.ts)
 
+**Note on @defer and @stream:**
+
+The experimental `@defer` and `@stream` directives are not yet supported in Graffle. These directives enable incremental delivery of GraphQL responses. Support is planned as a future extension. [Track progress in #1134](https://github.com/graffle-js/graffle/issues/1134).
+
 ### Enums
 
 Enum values are passed as strings and automatically validated by TypeScript based on your schema.
