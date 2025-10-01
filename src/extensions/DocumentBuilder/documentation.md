@@ -59,6 +59,7 @@ const doc = query.user({
 The static document builder can be configured in two ways:
 
 **Global defaults** (affects all queries):
+
 ```ts
 import { staticBuilderDefaults } from 'graffle/extensions/document-builder'
 
@@ -67,16 +68,18 @@ staticBuilderDefaults.hoistArguments = false
 ```
 
 **Local override** (per-query):
+
 ```ts
 const doc = query.user(
-  { $: { id: "123" }, name: true },
-  { hoistArguments: false }  // Override for this query only
+  { $: { id: '123' }, name: true },
+  { hoistArguments: false }, // Override for this query only
 )
 ```
 
 #### Hoisting Arguments
 
 By default, the static builder extracts **all** arguments as GraphQL variables (`hoistArguments: true`). This provides:
+
 - Better query caching (same query structure, different variable values)
 - Automatic custom scalar encoding
 - Alignment with GraphQL best practices
@@ -85,8 +88,8 @@ By default, the static builder extracts **all** arguments as GraphQL variables (
 
 ```ts
 const doc = query.user({
-  $: { id: "123", status: "ACTIVE" },
-  name: true
+  $: { id: '123', status: 'ACTIVE' },
+  name: true,
 })
 
 // Generates:
@@ -102,8 +105,8 @@ const doc = query.user({
 staticBuilderDefaults.hoistArguments = false
 
 const doc = query.user({
-  $: { id: "123" },
-  name: true
+  $: { id: '123' },
+  name: true,
 })
 
 // Generates:
@@ -117,10 +120,10 @@ staticBuilderDefaults.hoistArguments = false
 
 const doc = query.user({
   $: {
-    id: $var('userId'),  // Always extracted
-    name: "John"         // Inlined (due to setting)
+    id: $var('userId'), // Always extracted
+    name: 'John', // Inlined (due to setting)
   },
-  name: true
+  name: true,
 })
 
 // Generates:
@@ -136,10 +139,10 @@ When both explicit `$var` markers and auto-hoisted arguments want the same varia
 ```ts
 const doc = query.user({
   $: {
-    id: $var('userId'),    // Gets: $userId
-    userId: "123"          // Gets: $userId_2 (auto-renamed)
+    id: $var('userId'), // Gets: $userId
+    userId: '123', // Gets: $userId_2 (auto-renamed)
   },
-  name: true
+  name: true,
 })
 ```
 
@@ -152,11 +155,13 @@ This section shows how common GraphQL patterns map to Graffle's TypeScript inter
 ### Basic Query
 
 **GraphQL:**
+
 ```graphql
 query { user { name } }
 ```
 
 **Graffle:**
+
 ```ts
 query.user({ name: true })
 ```
@@ -164,23 +169,27 @@ query.user({ name: true })
 ### Arguments
 
 **GraphQL:**
+
 ```graphql
 query { user(id: "123") { name } }
 ```
 
 **Graffle:**
+
 ```ts
-query.user({ $: { id: "123" }, name: true })
+query.user({ $: { id: '123' }, name: true })
 ```
 
 ### Variables
 
 **GraphQL:**
+
 ```graphql
 query ($id: ID!) { user(id: $id) { name } }
 ```
 
 **Graffle:**
+
 ```ts
 query.user({ $: { id: $var }, name: true })
 ```
@@ -188,27 +197,31 @@ query.user({ $: { id: $var }, name: true })
 ### Aliases
 
 **GraphQL:**
+
 ```graphql
 query { admin: user(id: "1") { name } }
 ```
 
 **Graffle:**
+
 ```ts
 query.$batch({
   user: [
-    ["admin", { $: { id: "1" }, name: true }]
-  ]
+    ['admin', { $: { id: '1' }, name: true }],
+  ],
 })
 ```
 
 ### Directives
 
 **GraphQL:**
+
 ```graphql
 query { user { id @skip(if: true) } }
 ```
 
 **Graffle:**
+
 ```ts
 query.user({ id: { $skip: true } })
 ```
@@ -216,11 +229,13 @@ query.user({ id: { $skip: true } })
 ### Inline Fragments (Union)
 
 **GraphQL:**
+
 ```graphql
 query { result { ... on User { name } } }
 ```
 
 **Graffle:**
+
 ```ts
 query.result({ ___on_User: { name: true } })
 ```
@@ -228,11 +243,13 @@ query.result({ ___on_User: { name: true } })
 ### Inline Fragments (Interface)
 
 **GraphQL:**
+
 ```graphql
 query { nodes { ... on User { email } } }
 ```
 
 **Graffle:**
+
 ```ts
 query.nodes({ ___on_User: { email: true } })
 ```
@@ -240,23 +257,27 @@ query.nodes({ ___on_User: { email: true } })
 ### Mutations
 
 **GraphQL:**
+
 ```graphql
 mutation { createUser(name: "Alice") { id } }
 ```
 
 **Graffle:**
+
 ```ts
-mutation.createUser({ $: { name: "Alice" }, id: true })
+mutation.createUser({ $: { name: 'Alice' }, id: true })
 ```
 
 ### Nested Arguments
 
 **GraphQL:**
+
 ```graphql
 query { user { posts(limit: 10) { title } } }
 ```
 
 **Graffle:**
+
 ```ts
 query.user({ posts: { $: { limit: 10 }, title: true } })
 ```
