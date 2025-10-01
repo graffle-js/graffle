@@ -38,7 +38,7 @@ features:
     details: Easily add client-side codecs for custom scalars in the schema to enable automatic encoding of arguments and decoding of data on every request.
     icon: 🧙
   - title: Document Builder
-    details: Optional TypeScript alternative to GQL syntax for building type-safe documents including tailored methods for root fields, batch method for multiple root fields, an a document method for 1:1 with GraphQL.
+    details: Optional TypeScript alternative to GQL syntax for building type-safe documents including tailored methods for root fields, batch method for multiple root fields, and a document method for 1:1 with GraphQL.
     icon: 🪵
   - title: Type Safe Results <br/><span style="opacity:0.25;">( Document Builder )</span>
     details: Automatically inferred type safe results based on your document's structure including selection sets, aliases, directives, inline fragments, unions, and more.

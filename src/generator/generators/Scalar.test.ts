@@ -142,10 +142,13 @@ describe('Issue #1354 - TypeScript reserved keywords', () => {
     await generate({ fs, schema: { type: 'sdl', sdl: schemas.withReservedScalars } })
     const { scalar } = readGeneratedFiles()
 
-    // Escaped type names
-    expect(scalar).toContain('export type $bigint =')
-    expect(scalar).toContain('export type $boolean =')
-    expect(scalar).toContain('export type $interface =')
+    // Uses re-export syntax for reserved keywords
+    expect(scalar).toContain('type $bigint = ')
+    expect(scalar).toContain('export { type $bigint as bigint }')
+    expect(scalar).toContain('type $boolean = ')
+    expect(scalar).toContain('export { type $boolean as boolean }')
+    expect(scalar).toContain('type $interface = ')
+    expect(scalar).toContain('export { type $interface as interface }')
 
     // Original names in ScalarCodecless
     expect(scalar).toContain('ScalarCodecless<"bigint">')
@@ -158,11 +161,14 @@ describe('Issue #1354 - TypeScript reserved keywords', () => {
     await generate({ fs, schema: { type: 'sdl', sdl: schemas.bigintOnly } })
     const { scalar } = readGeneratedFiles()
 
-    // Escaped type definitions
-    expect(scalar).toContain('export type $bigint = typeof')
+    // Uses re-export syntax for reserved keyword scalar
+    expect(scalar).toContain('type $bigint = typeof')
+    expect(scalar).toContain('export { type $bigint as bigint }')
     expect(scalar).toContain('type $bigint_ = typeof')
-    expect(scalar).toContain('export type $bigintDecoded =')
-    expect(scalar).toContain('export type $bigintEncoded =')
+
+    // Decoded/Encoded types use plain name (not reserved)
+    expect(scalar).toContain('export type bigintDecoded =')
+    expect(scalar).toContain('export type bigintEncoded =')
 
     // Original names in runtime references
     expect(scalar).toContain('typeof CustomScalars.bigint')
@@ -172,17 +178,17 @@ describe('Issue #1354 - TypeScript reserved keywords', () => {
     await generate({ fs, schema: { type: 'sdl', sdl: schemas.withReservedScalars } })
     const { schema, sddm } = readGeneratedFiles()
 
-    // Schema module exports with escaped names
-    expect(schema).toContain('export type $bigint = $$Scalar.bigint')
-    expect(schema).toContain('export type $interface = $$Scalar.interface')
-
     // SDDM uses string literals for codecless scalars
     expect(sddm).toContain('const bigint = "bigint"')
     expect(sddm).toContain('const interface = "interface"')
 
-    // Field types reference escaped names
+    // Field types reference escaped names in Schema namespace
     expect(schema).toContain('namedType: $$NamedTypes.$$bigint')
     expect(schema).toContain('namedType: $$NamedTypes.$$interface')
+
+    // Schema interface scalars object uses escaped internal names
+    expect(schema).toContain('bigint: Schema.$bigint')
+    expect(schema).toContain('interface: Schema.$interface')
   })
 
   test('cross-module references with custom scalar codecs', async () => {
@@ -190,17 +196,19 @@ describe('Issue #1354 - TypeScript reserved keywords', () => {
     await generate({ fs, schema: { type: 'sdl', sdl: schemas.withReservedScalars } })
     const { scalar, schema, sddm } = readGeneratedFiles()
 
-    // Scalar module with escaped types
-    expect(scalar).toContain('export type $bigint = typeof CustomScalars.bigint')
-    expect(scalar).toContain('export type $boolean = typeof CustomScalars.boolean')
-
-    // Schema module references
-    expect(schema).toContain('export type $bigint = $$Scalar.bigint')
-    expect(schema).toContain('export type $boolean = $$Scalar.boolean')
+    // Scalar module uses re-export syntax for reserved keywords
+    expect(scalar).toContain('type $bigint = typeof CustomScalars.bigint')
+    expect(scalar).toContain('export { type $bigint as bigint }')
+    expect(scalar).toContain('type $boolean = typeof CustomScalars.boolean')
+    expect(scalar).toContain('export { type $boolean as boolean }')
 
     // SDDM references with custom scalars
     expect(sddm).toContain('const bigint = $$Scalar.bigint')
     expect(sddm).toContain('const boolean = $$Scalar.boolean')
+
+    // Schema interface scalars object uses escaped internal names
+    expect(schema).toContain('bigint: Schema.$bigint')
+    expect(schema).toContain('boolean: Schema.$boolean')
 
     // Runtime map uses original names
     expect(scalar).toContain('bigint: CustomScalars.bigint')
@@ -210,9 +218,7 @@ describe('Issue #1354 - TypeScript reserved keywords', () => {
     await generate({ fs, schema: { type: 'sdl', sdl: schemas.bigintOnly } })
     const { schema } = readGeneratedFiles()
 
-    // BUG: This currently fails because Schema.ts uses _.name instead of renderName(_.name)
-    // The scalars object should reference the escaped name Schema.$bigint, not Schema.bigint
-    expect(schema).toContain('bigint: Schema.bigint')
-    expect(schema).not.toContain('bigint: Schema.bigint')
+    // The Schema interface scalars object should reference the internal escaped name
+    expect(schema).toContain('bigint: Schema.$bigint')
   })
 })

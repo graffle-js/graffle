@@ -57,7 +57,7 @@ const graffle = Graffle.create({
 
 1. `errors` – errors that you have chosen to include in the envelope.
 2. `extensions` – GraphQL execution result extensions.
-3. `response` – Only present if [transport](#link-todo) is `http`. The HTTP response to the request that was sent for the given GraphQL document.
+3. `response` – Only present if [transport](/extensions/transport-http.md) is `http`. The HTTP response to the request that was sent for the given GraphQL document.
 
 ## Errors
 
