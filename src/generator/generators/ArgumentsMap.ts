@@ -6,6 +6,7 @@ import { propertyNames } from '../../types/SchemaDrivenDataMap/SchemaDrivenDataM
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 import { createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
+import { importUtilities } from '../helpers/pathHelpers.js'
 import { renderInlineType, renderName } from '../helpers/render.js'
 
 /**
@@ -47,10 +48,8 @@ export const ModuleGeneratorArgumentsMap = createModuleGenerator(
     const mutationType = config.schema.instance.getMutationType()
     const subscriptionType = config.schema.instance.getSubscriptionType()
 
-    code`
-      import type * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
-      import type * as TypeInputsIndex from './type-inputs-index.js'
-    `
+    code(importUtilities(config))
+    code`import type * as TypeInputsIndex from './type-inputs-index.js'`
     code``
 
     // Group types by kind for organized output

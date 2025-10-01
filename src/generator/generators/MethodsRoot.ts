@@ -5,6 +5,7 @@ import { capitalizeFirstLetter } from '../../lib/prelude.js'
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
+import { importUtilities } from '../helpers/pathHelpers.js'
 import { renderDocumentation, renderName } from '../helpers/render.js'
 import { ModuleGeneratorSchema } from './Schema.js'
 import { ModuleGeneratorSelectionSets } from './SelectionSets.js'
@@ -14,7 +15,7 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
   ({ config, code }) => {
     code(importModuleGenerator(config, ModuleGeneratorSelectionSets, true))
     code(importModuleGenerator(config, ModuleGeneratorSchema, true))
-    code`import type * as ${$.$$Utilities}  from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'`
+    code(importUtilities(config))
     code``
     code``
     config.schema.kindMap.list.Root.forEach(node => {

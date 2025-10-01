@@ -59,9 +59,33 @@ When Graffle finds your configuration module, it will look at the default export
 
 Any arguments you provide on the command line will take precedence over the configuration file.
 
-If you run `$ graffle` with `node@^22.6.0` then the [`--experimental-strip-types` flag](https://nodejs.org/docs/latest/api/cli.html#--experimental-strip-types) will be used. This produces a warning which may annoy you. You can get rid of it by installing `tsx` either globally or locally which will be used if present.
+**TypeScript Configuration Files:**
 
-If you are using a TypeScript configuration module _and_ you run `$ graffle` with `node@<22.6.0` then you must have `tsx` installed globally or locally. Local installation of `tsx` will be preferred when both present.
+With **Node.js 24.0+** or **Node.js 22.18+**, TypeScript config files work natively using Node's built-in type stripping. No additional setup required.
+
+**Advanced TypeScript Features:**
+
+If your config file uses or imports code with advanced TypeScript features (enums, namespaces, parameter properties), you have two options:
+
+1. **Use Node's transform flag** (recommended):
+   ```bash
+   NODE_OPTIONS=--experimental-transform-types pnpm graffle
+   ```
+
+2. **Use tsx** (for fully stable transformation):
+   ```bash
+   GRAFFLE_USE_TSX=1 pnpm graffle
+   ```
+   Requires `tsx` installed locally (`pnpm add -D tsx`) or globally.
+
+**Older Node Versions:**
+
+For Node.js versions older than 22.18, you must install and use `tsx`:
+
+```bash
+pnpm add -D tsx
+GRAFFLE_USE_TSX=1 pnpm graffle
+```
 
 Example:
 

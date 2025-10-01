@@ -1,4 +1,6 @@
+import { Code } from '../../lib/Code.js'
 import type { Config } from '../config/config.js'
+import { $ } from './identifiers.js'
 
 /**
  * Computes relative import path from a source file to a target module specifier.
@@ -68,4 +70,25 @@ export const getUtilitiesPath = (config: Config, sourceFilePath: string): string
     sourceFilePath,
     config.paths.imports.grafflePackage.utilitiesForGenerated,
   )
+}
+
+/**
+ * Generates the utilities import statement used by all generators.
+ * This provides a consistent way to import the graffle utilities module.
+ *
+ * @param config - Generator config containing the utilities import path
+ * @returns Import statement: `import type * as $$Utilities from 'path/to/utilities'`
+ *
+ * @example
+ * ```typescript
+ * code(importUtilities(config))
+ * // Generates: import type * as $$Utilities from 'graffle/utilities-for-generated'
+ * ```
+ */
+export const importUtilities = (config: Config): string => {
+  return Code.importAll({
+    as: $.$$Utilities,
+    from: config.paths.imports.grafflePackage.utilitiesForGenerated,
+    type: true,
+  })
 }

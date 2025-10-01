@@ -13,6 +13,7 @@ import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 import { createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
+import { importUtilities } from '../helpers/pathHelpers.js'
 import { getTsDocContents, renderName } from '../helpers/render.js'
 import type { KindRenderers } from '../helpers/types.js'
 
@@ -38,7 +39,7 @@ export const ModuleGeneratorSelectionSets = createModuleGenerator(
     const kindEntries = entries(kindMap).filter(_ => _[1].length > 0)
     const kinds = kindEntries.map(_ => _[1])
 
-    code`import type * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'`
+    code(importUtilities(config))
     code``
     code(Tex.title1(`Document`))
     code``

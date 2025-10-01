@@ -3,6 +3,7 @@ import { Grafaid } from '../../lib/grafaid/_namespace.js'
 import { Tex } from '../../lib/tex/_namespace.js'
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
+import { importUtilities } from '../helpers/pathHelpers.js'
 import { renderName, typeTitle2 } from '../helpers/render.js'
 
 export const ModuleGeneratorScalar = createModuleGenerator(
@@ -19,8 +20,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
     //   inImplementationButMissingInSchema:
     // }
 
-    // dprint-ignore
-    code`import type * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'`
+    code(importUtilities(config))
 
     if (Grafaid.Schema.KindMap.hasCustomScalars(config.schema.kindMap) && config.options.customScalars) {
       code`
@@ -58,7 +58,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
       }
     }
 
-    code`export * from '${config.paths.imports.grafflePackage.scalars}'`
+    code(Code.reexportAll({ from: config.paths.imports.grafflePackage.scalars }))
     code``
 
     if (isNeedCustomScalarDefaults) {

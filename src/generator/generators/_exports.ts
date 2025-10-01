@@ -1,3 +1,4 @@
+import { Code } from '../../lib/Code.js'
 import { createModuleGenerator, getImportName } from '../helpers/moduleGenerator.js'
 import { ModuleGenerator_internals } from './_internals.js'
 import { ModuleGeneratorClient } from './Client.js'
@@ -32,23 +33,30 @@ export const ModuleGenerator_exports = createModuleGenerator(
       documentExports.push('subscription')
     }
 
-    const documentExportLine = documentExports.length > 0
-      ? `export { ${documentExports.join(', ')} } from './modules/${getImportName(config, ModuleGeneratorDocument)}'`
-      : ''
+    code(Code.reexportNamed({ names: 'Name', from: `./modules/${getImportName(config, ModuleGeneratorData)}` }))
+    code(Code.reexportNamed({ names: 'Select', from: `./modules/${getImportName(config, ModuleGeneratorSelect)}` }))
+    code(Code.reexportNamed({ names: 'create', from: `./modules/${getImportName(config, ModuleGeneratorClient)}` }))
 
-    const exports = [
-      `export { Name } from './modules/${getImportName(config, ModuleGeneratorData)}'`,
-      `export { Select } from './modules/${getImportName(config, ModuleGeneratorSelect)}'`,
-      `export { create } from './modules/${getImportName(config, ModuleGeneratorClient)}'`,
-      documentExportLine,
-      `export * as SelectionSets from './modules/${getImportName(config, ModuleGeneratorSelectionSets)}'`,
-      `export { schemaDrivenDataMap as schemaMap } from './modules/${
-        getImportName(config, ModuleGeneratorSchemaDrivenDataMap)
-      }'`,
-      `export * as $ from './${getImportName(config, ModuleGenerator_internals)}'`,
-    ].filter(line => line !== '') // Remove empty lines
+    if (documentExports.length > 0) {
+      code(
+        Code.reexportNamed({
+          names: documentExports,
+          from: `./modules/${getImportName(config, ModuleGeneratorDocument)}`,
+        }),
+      )
+    }
 
-    code(...exports)
+    code(
+      Code.reexportNamespace({
+        as: 'SelectionSets',
+        from: `./modules/${getImportName(config, ModuleGeneratorSelectionSets)}`,
+      }),
+    )
+    code(Code.reexportNamed({
+      names: { schemaDrivenDataMap: 'schemaMap' },
+      from: `./modules/${getImportName(config, ModuleGeneratorSchemaDrivenDataMap)}`,
+    }))
+    code(Code.reexportNamespace({ as: '$', from: `./${getImportName(config, ModuleGenerator_internals)}` }))
 
     return code
   },

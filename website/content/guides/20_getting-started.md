@@ -20,11 +20,11 @@ pnpm init
 
 We're going to use TypeScript for this project but you don't have to.
 
-- [`tsx`](https://github.com/privatenumber/tsx) makes running TypeScript files easy.
 - [`@tsconfig/strictest`](https://github.com/tsconfig/bases/blob/main/bases/strictest.json) makes having strict TypeScript settings easy.
+- With **Node.js 24.0+** or **22.18+**, you can run TypeScript files natively without additional tooling.
 
 ```sh
-pnpm add --save-dev typescript tsx @tsconfig/strictest
+pnpm add --save-dev typescript @tsconfig/strictest
 ```
 
 ```sh
@@ -59,8 +59,9 @@ Graffle is an [ESM only package built around package `exports`](https://github.c
    - Your project is using ESM ([`"type": "module"`](https://nodejs.org/api/packages.html#type)).
    - Your project is using CJS with [`node@^22.12.0`](https://bsky.app/profile/kuhrt.me/post/3lckonbltrs2i) or `node@^20.17` with [`--experimental-require-module`](https://nodejs.org/api/cli.html#--experimental-require-module).
 2. _If you are using TypeScript_:
-   1. If you are using TypeScript your `tsconfig.json` must set `module` and [`moduleResolution`](https://www.typescriptlang.org/tsconfig/#moduleResolution) to `Node16` or `Bundler`. Otherwise TypeScript will not be able to find the types when you attempt to import entrypoints from `graffle`.
+   1. Your `tsconfig.json` must set `module` and [`moduleResolution`](https://www.typescriptlang.org/tsconfig/#moduleResolution) to `Node16` or `Bundler`. Otherwise TypeScript will not be able to find the types when you attempt to import entrypoints from `graffle`.
    2. Your TypeScript version must be `typescript@^4.9`.
+   3. For native TypeScript execution (recommended), use **Node.js 24.0+** or **Node.js 22.18+**.
 3. _If you are using React Native_:
    1. [Do this](https://reactnative.dev/blog/2023/06/21/package-exports-support#enabling-package-exports-beta) to enable support for package `exports`.
 

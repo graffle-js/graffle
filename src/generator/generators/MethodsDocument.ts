@@ -3,6 +3,7 @@
 import { Code } from '../../lib/Code.js'
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
+import { importUtilities } from '../helpers/pathHelpers.js'
 import { ModuleGeneratorSchema } from './Schema.js'
 import { ModuleGeneratorSelectionSets } from './SelectionSets.js'
 
@@ -11,9 +12,7 @@ export const ModuleGeneratorMethodsDocument = createModuleGenerator(
   ({ config, code }) => {
     code(importModuleGenerator(config, ModuleGeneratorSelectionSets, true))
     code(importModuleGenerator(config, ModuleGeneratorSchema, true))
-    code`
-      import type * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
-    `
+    code(importUtilities(config))
     code``
 
     const contextTsExpectError = config.code.schemaInterfaceExtendsEnabled

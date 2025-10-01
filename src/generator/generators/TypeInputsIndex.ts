@@ -4,15 +4,14 @@ import { Tex } from '../../lib/tex/_namespace.js'
 import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
+import { importUtilities } from '../helpers/pathHelpers.js'
 import { renderName } from '../helpers/render.js'
 
 export const ModuleGeneratorTypeInputsIndex = createModuleGenerator(
   `type-inputs-index`,
   import.meta.url,
   ({ config, code }) => {
-    code`
-      import type * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
-    `
+    code(importUtilities(config))
 
     // Import custom scalar implementations if available
     if (config.options.isImportsCustomScalars) {

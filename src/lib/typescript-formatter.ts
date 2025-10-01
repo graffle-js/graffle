@@ -33,12 +33,24 @@ export const getTypeScriptFormatterDprint = async (fs: Fs): Promise<Formatter | 
   try {
     const { createFromBuffer } = await import(`@dprint/formatter`)
     const { getPath } = await import(`@dprint/typescript`)
-    const formatter = createFromBuffer(await fs.readFile(getPath()))
+    const formatter = createFromBuffer(await fs.readFile(getPath()) as BufferSource)
     // todo handle failing to read configuration file gracefully. Don't swallow those errors.
     // TODO don't read config file manually? https://github.com/dprint/js-formatter/issues/13
     const localConfig = await readJsonFile<{ typescript?: JsonObject }>(fs, `dprint.json`) ?? {}
     return {
       formatText: async (fileText, customFormatterConfig) => {
+        // Skip formatting for very large files to avoid dprint stack overflow
+        // Large generated files can be formatted with dprint CLI afterwards
+        const MAX_SIZE_FOR_DPRINT = 5 * 1024 * 1024 // 5MB
+        if (fileText.length > MAX_SIZE_FOR_DPRINT) {
+          console.warn(
+            `Skipping dprint formatting for large file (${
+              (fileText.length / 1024 / 1024).toFixed(1)
+            }MB). Format with dprint CLI afterwards.`,
+          )
+          return fileText
+        }
+
         const overrideConfig = {
           ...localConfig.typescript,
           ...customFormatterConfig,

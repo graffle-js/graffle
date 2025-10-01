@@ -12,13 +12,16 @@ esac
 
 entrypoint="$basedir/build/cli/index.js"
 
-if command -v ./node_modules/.bin/tsx >/dev/null 2>&1; then
-  exec node --import=tsx "$entrypoint" "$@"
-elif command -v tsx >/dev/null 2>&1; then
-	exec tsx "$entrypoint" "$@"
-elif node --experimental-strip-types -e "" 2>/dev/null; then
-	# https://nodejs.org/docs/latest/api/cli.html#--experimental-strip-types
-	exec node --experimental-strip-types "$entrypoint" "$@"
-else
-	exec node "$entrypoint" "$@"
+# Allow users to force tsx for advanced use cases (e.g., full TypeScript transformation)
+if [ "$GRAFFLE_USE_TSX" = "1" ]; then
+  if command -v ./node_modules/.bin/tsx >/dev/null 2>&1; then
+    exec ./node_modules/.bin/tsx "$entrypoint" "$@"
+  elif command -v tsx >/dev/null 2>&1; then
+    exec tsx "$entrypoint" "$@"
+  else
+    echo "Warning: GRAFFLE_USE_TSX=1 but tsx not found. Falling back to node." >&2
+  fi
 fi
+
+# Node 24.0+/22.18+ has native TypeScript support with type stripping enabled by default
+exec node "$entrypoint" "$@"

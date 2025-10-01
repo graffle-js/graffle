@@ -6,7 +6,6 @@ import type * as ArgumentsMap from './arguments-map.js'
 import type * as $$Scalar from './scalar.js'
 import type * as $$Schema from './schema/$.js'
 import type * as SelectionSets from './selection-sets.js'
-
 /**
  * Context for static document type inference.
  * Static documents have no runtime extensions, hence typeHookRequestResultDataTypes is never.

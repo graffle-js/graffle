@@ -73,10 +73,10 @@ const generateScalarModule = (config: Config, scalar: Grafaid.Schema.ScalarType)
 
   // Export names are never escaped - use re-export with aliasing if needed
   if (isCustom) {
-    code(`export type { ${originalName} } from '../../scalar.js'`)
+    code(Code.reexportNamed({ names: originalName, from: '../../scalar.js', type: true }))
   } else {
     const utilitiesPath = getUtilitiesPath(config, `schema/scalars/${renderedName}.ts`)
-    code(`export type { ${originalName} } from '${utilitiesPath}'`)
+    code(Code.reexportNamed({ names: originalName, from: utilitiesPath, type: true }))
   }
 
   return {
@@ -203,7 +203,7 @@ const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.I
   }
   namespaceCode(`import type * as $Fields from './fields.js'`)
   namespaceCode()
-  namespaceCode(`export * as ${inputObject.name} from './fields.js'`)
+  namespaceCode(Code.reexportNamespace({ as: inputObject.name, from: './fields.js' }))
   namespaceCode()
 
   const interfaceFields = Object.fromEntries(
@@ -246,7 +246,7 @@ const generateSchemaNamespaceModule = (config: Config, kindMap: Grafaid.Schema.K
   code(`import * as $$Scalar from '../scalar.js'`)
   code(`import * as $Types from './$$.js'`)
   code()
-  code(`export * as Schema from './$$.js'`)
+  code(Code.reexportNamespace({ as: 'Schema', from: './$$.js' }))
   code()
 
   // Generate Schema interface here to avoid name conflict

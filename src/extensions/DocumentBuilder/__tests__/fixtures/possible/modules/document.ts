@@ -1202,6 +1202,7 @@ export interface QueryBuilder {
  * ```
  */
 export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY) as any
+
 /**
  * Static mutation builder for compile-time GraphQL document generation.
  *

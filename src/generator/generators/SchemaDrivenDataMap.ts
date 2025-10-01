@@ -7,6 +7,7 @@ import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
+import { importUtilities } from '../helpers/pathHelpers.js'
 import { renderInlineType, renderName } from '../helpers/render.js'
 import type { KindRenderers } from '../helpers/types.js'
 import { ModuleGeneratorScalar } from './Scalar.js'
@@ -26,9 +27,7 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
     const kinds = entries(kindMap)
 
     code(importModuleGenerator(config, ModuleGeneratorScalar))
-    code`
-      import type * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
-    `
+    code(importUtilities(config))
 
     const referenceAssignments: ReferenceAssignments = []
 

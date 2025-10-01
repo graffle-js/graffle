@@ -19,7 +19,6 @@ import * as $$SelectionSets from './selection-sets.js'
 //
 //
 //
-
 import { createSelect } from '../../../../../../exports/client.js'
 export const Select = createSelect($$Data.Name)
 
@@ -38,7 +37,6 @@ export const Select = createSelect($$Data.Name)
 //
 //
 //
-
 export namespace Select {
   //                                                Root
   // --------------------------------------------------------------------------------------------------

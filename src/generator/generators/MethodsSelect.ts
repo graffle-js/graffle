@@ -4,6 +4,7 @@ import { entries, pick, values } from '../../lib/prelude.js'
 import { Tex } from '../../lib/tex/_namespace.js'
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
+import { importUtilities } from '../helpers/pathHelpers.js'
 import { renderName } from '../helpers/render.js'
 import { ModuleGeneratorSelectionSets } from './SelectionSets.js'
 
@@ -14,7 +15,7 @@ export const ModuleGeneratorMethodsSelect = createModuleGenerator(
     const kinds = entries(kindMap)
 
     code(importModuleGenerator(config, ModuleGeneratorSelectionSets))
-    code`import type * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'`
+    code(importUtilities(config))
     code``
     code(Tex.title1(`Select Methods Interface`))
     code``

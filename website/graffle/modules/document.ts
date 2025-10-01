@@ -4,7 +4,7 @@ import type * as $$Utilities from "graffle/utilities-for-generated";
 import { OperationTypeNode } from "graphql";
 import type * as ArgumentsMap from "./arguments-map.js";
 import type * as $$Scalar from "./scalar.js";
-import type * as $$Schema from "./schema.js";
+import type * as $$Schema from "./schema/$.js";
 import type * as SelectionSets from "./selection-sets.js";
 
 /**
@@ -179,6 +179,7 @@ export interface QueryBuilder {
  * ```
  */
 export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY) as any;
+
 /**
  * Static mutation builder for compile-time GraphQL document generation.
  *
