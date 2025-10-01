@@ -334,7 +334,9 @@ export interface RootTypeCustomNameForQueryMethods<
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.RootTypeCustomNameForQuery<$Context["scalars"]>
+        $$SelectionSets.RootTypeCustomNameForQuery<{
+          scalars: $Context["scalars"];
+        }>
       >,
     ) => Promise<
       (null | {}) &
@@ -364,7 +366,9 @@ export interface RootTypeCustomNameForQueryMethods<
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.RootTypeCustomNameForQuery.id<$Context["scalars"]>
+        $$SelectionSets.RootTypeCustomNameForQuery.id<{
+          scalars: $Context["scalars"];
+        }>
       >,
     ) => Promise<
       (null | {}) &

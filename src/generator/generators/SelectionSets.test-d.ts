@@ -7,7 +7,6 @@ import type { Schema } from '../../types/Schema/_namespace.js'
 type Q = SelectionSets.Query
 type QWithDate = SelectionSets.Query<{
   scalars: Schema.Scalar.Registry.AddScalar<Schema.Scalar.Registry.Empty, typeof DateScalar>
-  variablesEnabled: false
 }>
 
 // dprint-ignore

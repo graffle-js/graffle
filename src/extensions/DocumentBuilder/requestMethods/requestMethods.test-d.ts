@@ -7,7 +7,6 @@ const g = Possible.create({ check: { preflight: false } }).scalar(DateScalar)
 
 type ClientContext = {
   scalars: Schema.Scalar.Registry.AddScalar<Schema.Scalar.Registry.Empty, typeof DateScalar>
-  variablesEnabled: false
 }
 
 // dprint-ignore

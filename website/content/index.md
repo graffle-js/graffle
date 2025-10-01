@@ -47,9 +47,15 @@ features:
     details: First class support for schemas that have modelled errors into their design. Result Fields can be made to throw on errors or automatically map to error classes.
     icon: 🎲
   # Row 3
-  # - title: Static Document Builder
-  #   details: Generate typed GraphQL documents at compile-time without a client instance. Perfect for passing to other GraphQL clients or building tools. Zero runtime overhead.
-  #   icon: 📄
+  - title: Static Document Builder
+    details: Generate typed GraphQL documents at compile-time without a client instance. Perfect for passing to other GraphQL clients or building tools. Zero runtime overhead.
+    icon: 📄
+  - title: Output Modes
+    details: Control error handling patterns with envelope mode (wrap results), return-error mode (errors as values), or throw mode. Configure globally or per-request.
+    icon: 📮
+  - title: gql.tada Support<br/><span style="opacity:0.25;">( Coming Soon )</span>
+    details: Automatic integration with gql.tada for type-safe GraphQL documents using the standard GraphQL syntax. Best of both worlds.
+    icon: 🎭
 ---
 
 <script setup>
