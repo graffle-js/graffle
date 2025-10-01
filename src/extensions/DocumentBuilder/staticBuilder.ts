@@ -3,6 +3,7 @@ import type { OperationTypeNode } from 'graphql'
 import { isSymbol } from '../../lib/prelude.js'
 import { Select } from './Select/__.js'
 import { toGraphQLDocument } from './SelectGraphQLMapper/nodes/1_Document.js'
+import { defaults } from './staticBuilderDefaults.js'
 
 /**
  * Create a static root type builder for generating type-safe GraphQL documents at build time.
@@ -58,9 +59,8 @@ export const createStaticRootType = (operationType: OperationTypeNode) => {
         )
 
         // Convert to GraphQL document using existing mapper
-        // Enable variables for proper $var handling
         const result = toGraphQLDocument(documentNormalized, {
-          operationVariables: true,
+          operationVariables: defaults.operationVariables,
           // Note: No SDDM or scalars needed for static builder
           // Types are handled at compile time
         })

@@ -145,3 +145,42 @@ test('type output inference', () => {
     { int?: number | undefined }
   >>()(q20)
 })
+
+test('conflict resolution: $var marker and auto-hoisted both want same name', () => {
+  const doc = query.stringWithArgs({
+    $: {
+      string: $var.name('userId'),  // Explicit: wants "userId"
+      userId: 'literal-value',      // Auto-hoisted: also wants "userId"
+    },
+  })
+
+  // Verify: Both variables exist but with different names
+  expect(doc).toContain('$userId')    // Explicit $var gets the name
+  expect(doc).toContain('$userId_2')  // Auto-hoisted gets renamed
+  expect(doc).toContain('string: $userId')
+  expect(doc).toContain('userId: $userId_2')
+})
+
+test('operationVariables: false - inline args NOT hoisted, $var still extracted', () => {
+  const originalDefault = staticBuilderDefaults.operationVariables
+  staticBuilderDefaults.operationVariables = false
+
+  try {
+    const doc = query.stringWithArgs({
+      $: {
+        string: $var.name('explicitVar'),  // Should be variable
+        int: 42,                            // Should be inline
+      },
+    })
+
+    // Verify: $var is extracted
+    expect(doc).toContain('$explicitVar')
+    expect(doc).toContain('string: $explicitVar')
+
+    // Verify: inline arg is NOT extracted (appears as literal)
+    expect(doc).toContain('int: 42')
+    expect(doc).not.toContain('$int')
+  } finally {
+    staticBuilderDefaults.operationVariables = originalDefault
+  }
+})

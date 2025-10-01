@@ -27,6 +27,7 @@ export const toGraphQLDirective: GraphQLPostOperationMapper<
       argument = context.variables.capture({
         name: argumentName,
         value: argumentValue,
+        isEnum: false,
         sddmArgument,
       })
     } else {

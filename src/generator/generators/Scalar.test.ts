@@ -1,7 +1,11 @@
 import * as MemFS from 'memfs'
 import * as Fs from 'node:fs/promises'
 import { beforeEach, describe, expect, test } from 'vitest'
+import { defaults } from '../config/defaults.js'
 import { generate } from '../generator/generate.js'
+
+// Suppress warnings in tests
+defaults.lint.missingCustomScalarCodec = false
 
 const fs = MemFS.fs.promises as any as typeof Fs
 

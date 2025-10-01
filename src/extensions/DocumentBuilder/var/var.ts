@@ -5,7 +5,8 @@
  * Provides compile-time variable inference and validation.
  */
 
-import type { Obj } from '@wollybeard/kit'
+// TODO: Restore @wollybeard/kit import once it becomes a production dependency
+// import type { Obj } from '@wollybeard/kit'
 import type { Covariant } from '../../../lib/prelude.js'
 
 const BuilderSymbol = Symbol.for(`graffle.var`)
@@ -79,7 +80,7 @@ export interface Builder<$Type = unknown, $State extends BuilderState = BuilderS
    */
   readonly name: <$name extends string>(
     name: $name,
-  ) => Builder<$Type, Obj.ReplaceProperty<$State, 'name', $name>>
+  ) => Builder<$Type, Omit<$State, 'name'> & { name: $name }>
 
   /**
    * Specify a default value for the GraphQL variable.
@@ -89,13 +90,13 @@ export interface Builder<$Type = unknown, $State extends BuilderState = BuilderS
    */
   readonly default: <const $value extends $Type>(
     value: $value,
-  ) => Builder<$value, Obj.ReplaceProperty<$State, 'default', $value>>
+  ) => Builder<$value, Omit<$State, 'default'> & { default: $value }>
 
   /**
    * Force an optional argument to be required in the GraphQL variables.
    * Useful when you want to make an optional GraphQL field required at the client level.
    */
-  readonly required: () => Builder<$Type, Obj.ReplaceProperty<$State, 'required', true>>
+  readonly required: () => Builder<$Type, Omit<$State, 'required'> & { required: true }>
 
   // No optional() method - use .default() to make optional instead
   // readonly optional: () => Builder<$Type, Obj.ReplaceProperty<$State, 'required', false>>
