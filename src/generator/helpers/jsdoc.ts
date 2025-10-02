@@ -471,3 +471,112 @@ export const getInlineFragmentDoc = (
 
   return parts.join('\n')
 }
+
+/**
+ * Generate enhanced JSDoc for static document builder fields.
+ */
+export const getStaticDocumentFieldDoc = (
+  config: Config,
+  field: Grafaid.Schema.Field<any, any>,
+  parentType: Grafaid.Schema.ObjectType,
+  operationType: 'query' | 'mutation' | 'subscription',
+): string | null => {
+  const namedType = Grafaid.Schema.getNamedType(field.type)
+  const typeAndKind = Grafaid.getTypeAndKind(namedType)
+  const schemaDescription = field.description
+
+  // Type information
+  const isNonNull = Grafaid.Schema.isNonNullType(field.type)
+  const isList = Grafaid.Schema.isListType(Grafaid.Schema.isNonNullType(field.type) ? field.type.ofType : field.type)
+  const listMarker = isList ? '[]' : ''
+  const nullMarker = isNonNull ? '!' : ''
+  const typeSignature = `{@link $Schema.${typeAndKind.typeName}}${listMarker}${nullMarker}`
+  const kindDocUrl = getKindDocUrl(typeAndKind.kindName)
+  const fieldPath = `${parentType.name}.${field.name}`
+
+  // Build table rows
+  const table = markdownTable({
+    'Type': typeSignature,
+    'Kind': `{@link ${kindDocUrl} | ${typeAndKind.kindName}} ↗`,
+    'Parent': `{@link $Schema.${parentType.name}}`,
+    'Path': `\`${fieldPath}\``,
+    '⚠ Deprecated': field.deprecationReason || undefined,
+    'Nullability': isNonNull ? 'Required' : 'Optional',
+    'List': isList ? 'Yes' : undefined,
+    'Arguments': field.args.length > 0 ? `${field.args.length}` : undefined,
+  })
+
+  // Combine parts
+  const parts: string[] = []
+
+  if (schemaDescription) {
+    parts.push(schemaDescription)
+    parts.push('')
+  }
+
+  // Add GraphQL SDL signature
+  if (field.astNode) {
+    const fieldSignature = print({ ...field.astNode, description: undefined })
+    parts.push('```graphql')
+    parts.push(fieldSignature)
+
+    // Add named type definition
+    if (namedType.astNode) {
+      const typeDefinition = Grafaid.Document.printWithoutDescriptions(namedType.astNode)
+      if (typeDefinition.trim()) {
+        parts.push('')
+        parts.push(typeDefinition)
+      }
+    }
+
+    parts.push('```')
+    parts.push('')
+  }
+
+  parts.push('# Info')
+  parts.push('')
+  parts.push(table)
+  parts.push('')
+
+  // Add example
+  parts.push('@example')
+  parts.push('```ts')
+
+  // Generate example based on field characteristics
+  const hasArgs = field.args.length > 0
+  const isObject = Grafaid.Schema.isObjectType(namedType)
+  const isInterface = Grafaid.Schema.isInterfaceType(namedType)
+  const isUnion = Grafaid.Schema.isUnionType(namedType)
+
+  if (isUnion || isInterface) {
+    parts.push(`const doc = ${operationType}.${field.name}({`)
+    if (isUnion) {
+      parts.push(`  __typename: true,`)
+      parts.push(`  ___on_SomeType: { /* ... */ }`)
+    } else {
+      parts.push(`  id: true,`)
+      parts.push(`  ___on_SomeImplementation: { /* ... */ }`)
+    }
+    parts.push(`})`)
+  } else if (isObject) {
+    const objectType = namedType as Grafaid.Schema.ObjectType
+    const fields = Object.values(objectType.getFields()).slice(0, 3)
+    parts.push(`const doc = ${operationType}.${field.name}({`)
+    if (hasArgs) {
+      parts.push(`  // $: { ...variables },`)
+    }
+    fields.forEach(f => {
+      parts.push(`  ${f.name}: true,`)
+    })
+    if (fields.length > 0) {
+      parts.push(`  // ...`)
+    }
+    parts.push(`})`)
+  } else {
+    parts.push(`const doc = ${operationType}.${field.name}()`)
+  }
+
+  parts.push('```')
+
+  return parts.join('\n')
+}

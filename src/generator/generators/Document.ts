@@ -1,9 +1,9 @@
 import type { GraphQLObjectType } from 'graphql'
 import { Code } from '../../lib/Code.js'
 import { values } from '../../lib/prelude.js'
-import { getStaticDocumentBuilderDoc } from '../helpers/jsdoc.js'
+import { getStaticDocumentBuilderDoc, getStaticDocumentFieldDoc } from '../helpers/jsdoc.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
-import { importUtilities } from '../helpers/pathHelpers.js'
+import { buildImportPath, codeImportAll, importUtilities } from '../helpers/pathHelpers.js'
 import { getTsDocContents } from '../helpers/render.js'
 
 /**
@@ -69,7 +69,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
         export interface QueryBuilder {
           ${
         values(queryType.getFields()).map(field => {
-          const fieldDoc = getTsDocContents(config, field)
+          const fieldDoc = getStaticDocumentFieldDoc(config, field, queryType, 'query')
           const docComment = fieldDoc ? Code.TSDoc(fieldDoc) + '\n          ' : ''
           return `${docComment}${field.name}: <const $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['${field.name}']>(
             selection?: $SelectionSet
@@ -98,7 +98,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
     if (mutationType) {
       if (!queryType) {
         code(importUtilities(config))
-        code`import type * as $$Schema from './schema/$.js'`
+        code(codeImportAll(config, { as: '$$Schema', from: './schema/$', type: true }))
       }
       if (!queryType) {
         code`
@@ -126,7 +126,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
         export interface MutationBuilder {
           ${
         values(mutationType.getFields()).map(field => {
-          const fieldDoc = getTsDocContents(config, field)
+          const fieldDoc = getStaticDocumentFieldDoc(config, field, mutationType, 'mutation')
           const docComment = fieldDoc ? Code.TSDoc(fieldDoc) + '\n          ' : ''
           return `${docComment}${field.name}: <const $SelectionSet extends SelectionSets.Mutation<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['${field.name}']>(
             selection?: $SelectionSet
@@ -155,7 +155,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
     if (subscriptionType) {
       if (!queryType && !mutationType) {
         code(importUtilities(config))
-        code`import type * as $$Schema from './schema/$.js'`
+        code(codeImportAll(config, { as: '$$Schema', from: './schema/$', type: true }))
       }
       if (!queryType && !mutationType) {
         code`
@@ -183,7 +183,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
         export interface SubscriptionBuilder {
           ${
         values(subscriptionType.getFields()).map(field => {
-          const fieldDoc = getTsDocContents(config, field)
+          const fieldDoc = getStaticDocumentFieldDoc(config, field, subscriptionType, 'subscription')
           const docComment = fieldDoc ? Code.TSDoc(fieldDoc) + '\n          ' : ''
           return `${docComment}${field.name}: <const $SelectionSet extends SelectionSets.Subscription<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['${field.name}']>(
             selection?: $SelectionSet

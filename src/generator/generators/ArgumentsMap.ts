@@ -6,7 +6,7 @@ import { propertyNames } from '../../types/SchemaDrivenDataMap/SchemaDrivenDataM
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 import { createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
-import { importUtilities } from '../helpers/pathHelpers.js'
+import { codeImportAll, importUtilities } from '../helpers/pathHelpers.js'
 import { renderInlineType, renderName } from '../helpers/render.js'
 
 /**
@@ -49,7 +49,7 @@ export const ModuleGeneratorArgumentsMap = createModuleGenerator(
     const subscriptionType = config.schema.instance.getSubscriptionType()
 
     code(importUtilities(config))
-    code`import type * as TypeInputsIndex from './type-inputs-index.js'`
+    code(codeImportAll(config, { as: 'TypeInputsIndex', from: './type-inputs-index', type: true }))
     code``
 
     // Group types by kind for organized output

@@ -8,7 +8,15 @@ import { $ } from '../helpers/identifiers.js'
 import { getKindDocUrl, markdownTable } from '../helpers/jsdoc.js'
 import { type GeneratedModule, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { type CodeGenerator, createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
-import { getUtilitiesPath } from '../helpers/pathHelpers.js'
+import {
+  applyImportExtension,
+  buildImportPath,
+  codeImportAll,
+  codeImportNamed,
+  codeReexportAll,
+  codeReexportNamespace,
+  getUtilitiesPath,
+} from '../helpers/pathHelpers.js'
 import { getTsDocContents, renderInlineType, renderName } from '../helpers/render.js'
 import { ModuleGeneratorData } from './Data.js'
 import { ModuleGeneratorScalar } from './Scalar.js'
@@ -74,7 +82,7 @@ const generateScalarModule = (config: Config, scalar: Grafaid.Schema.ScalarType)
 
   // Export names are never escaped - use re-export with aliasing if needed
   if (isCustom) {
-    code(Code.reexportNamed({ names: originalName, from: '../../scalar.js', type: true }))
+    code(Code.reexportNamed({ names: originalName, from: buildImportPath(config, '..', '..', 'scalar'), type: true }))
   } else {
     const utilitiesPath = getUtilitiesPath(config, `schema/scalars/${renderedName}.ts`)
     code(Code.reexportNamed({ names: originalName, from: utilitiesPath, type: true }))
@@ -134,9 +142,9 @@ const generateUnionModule = (config: Config, unionType: Grafaid.Schema.UnionType
     // Determine which directory the member is in
     const isRoot = config.schema.kindMap.list.Root.some(r => r.name === member.name)
     const dir = isRoot ? 'roots' : 'objects'
-    code(`import type { ${member.name} } from '../${dir}/${member.name}/$.js'`)
+    code(codeImportNamed(config, { names: member.name, from: `../${dir}/${member.name}/$`, type: true }))
   }
-  code(`import type { Schema as $Schema } from '../$.js'`)
+  code(codeImportNamed(config, { names: { Schema: '$Schema' }, from: '../$', type: true }))
   code()
 
   code(Code.tsInterface({
@@ -259,7 +267,7 @@ const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.I
     const utilitiesPath = getUtilitiesPath(config, `schema/input-objects/${inputObject.name}/fields.ts`)
     fieldsCode(`import type * as $ from '${utilitiesPath}'`)
   }
-  fieldsCode(`import type { Schema as $Schema } from '../../$.js'`)
+  fieldsCode(codeImportNamed(config, { names: { Schema: '$Schema' }, from: '../../$', type: true }))
   fieldsCode()
 
   // Generate field interfaces
@@ -293,9 +301,9 @@ const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.I
     const utilitiesPath = getUtilitiesPath(config, `schema/input-objects/${inputObject.name}/$.ts`)
     namespaceCode(`import type * as $ from '${utilitiesPath}'`)
   }
-  namespaceCode(`import type * as $Fields from './fields.js'`)
+  namespaceCode(codeImportAll(config, { as: '$Fields', from: './fields', type: true }))
   namespaceCode()
-  namespaceCode(Code.reexportNamespace({ as: inputObject.name, from: './fields.js' }))
+  namespaceCode(codeReexportNamespace(config, { as: inputObject.name, from: './fields' }))
   namespaceCode()
 
   const interfaceFields = Object.fromEntries(
@@ -332,14 +340,13 @@ const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.I
 const generateSchemaNamespaceModule = (config: Config, kindMap: Grafaid.Schema.KindMap['list']): GeneratedModule => {
   const code = CodePusher.create()
   const utilitiesPath = getUtilitiesPath(config, `schema/$.ts`)
-  const ext = config.importFormat === 'noExtension' ? `` : `.js`
 
   code(`import type * as $ from '${utilitiesPath}'`)
-  code(`import * as $$Data from '../data${ext}'`)
-  code(`import * as $$Scalar from '../scalar${ext}'`)
-  code(`import * as $Types from './$$${ext}'`)
+  code(`import * as $$Data from '${buildImportPath(config, '..', 'data')}'`)
+  code(`import * as $$Scalar from '${buildImportPath(config, '..', 'scalar')}'`)
+  code(`import * as $Types from '${buildImportPath(config, '.', '$$')}'`)
   code()
-  code(Code.reexportNamespace({ as: 'Schema', from: `./$$${ext}` }))
+  code(codeReexportNamespace(config, { as: 'Schema', from: './$$' }))
   code()
 
   // Generate Schema interface here to avoid name conflict
@@ -413,17 +420,17 @@ const generateSchemaBarrelModule = (config: Config, kindMap: Grafaid.Schema.Kind
 
   // Re-export roots
   for (const type of kindMap.Root) {
-    code(`export type * from './roots/${type.name}/$.js'`)
+    code(codeReexportAll(config, { from: `./roots/${type.name}/$`, type: true }))
   }
 
   // Re-export objects
   for (const type of kindMap.OutputObject) {
-    code(`export type * from './objects/${type.name}/$.js'`)
+    code(codeReexportAll(config, { from: `./objects/${type.name}/$`, type: true }))
   }
 
   // Re-export interfaces
   for (const type of kindMap.Interface) {
-    code(`export type * from './interfaces/${type.name}/$.js'`)
+    code(codeReexportAll(config, { from: `./interfaces/${type.name}/$`, type: true }))
   }
 
   // Re-export scalars
@@ -433,22 +440,22 @@ const generateSchemaBarrelModule = (config: Config, kindMap: Grafaid.Schema.Kind
   ]
   for (const scalar of scalars) {
     const renderedName = renderName(scalar)
-    code(`export type * from './scalars/${renderedName}.js'`)
+    code(codeReexportAll(config, { from: `./scalars/${renderedName}`, type: true }))
   }
 
   // Re-export enums
   for (const type of kindMap.Enum) {
-    code(`export type * from './enums/${type.name}.js'`)
+    code(codeReexportAll(config, { from: `./enums/${type.name}`, type: true }))
   }
 
   // Re-export unions
   for (const type of kindMap.Union) {
-    code(`export type * from './unions/${type.name}.js'`)
+    code(codeReexportAll(config, { from: `./unions/${type.name}`, type: true }))
   }
 
   // Re-export input objects
   for (const type of kindMap.InputObject) {
-    code(`export type * from './input-objects/${type.name}/$.js'`)
+    code(codeReexportAll(config, { from: `./input-objects/${type.name}/$`, type: true }))
   }
   code()
 
@@ -772,7 +779,7 @@ const generateTypeModule = (
     const utilitiesPath = getUtilitiesPath(config, `schema/${kind}/${type.name}/fields.ts`)
     fieldsCode(`import type * as $ from '${utilitiesPath}'`)
   }
-  fieldsCode(`import type { Schema as $Schema } from '../../$.js'`)
+  fieldsCode(codeImportNamed(config, { names: { Schema: '$Schema' }, from: '../../$', type: true }))
   fieldsCode()
 
   // __typename field
@@ -839,7 +846,7 @@ const generateTypeModule = (
     const utilitiesPath = getUtilitiesPath(config, `schema/${kind}/${type.name}/$.ts`)
     namespaceCode(`import type * as $ from '${utilitiesPath}'`)
   }
-  namespaceCode(`import type * as $Fields from './fields.js'`)
+  namespaceCode(codeImportAll(config, { as: '$Fields', from: './fields', type: true }))
 
   // For interfaces, import implementor types from the barrel
   const isInterface = type instanceof Grafaid.Schema.InterfaceType
@@ -850,12 +857,12 @@ const generateTypeModule = (
     )
     if (implementors.length > 0) {
       // Import from barrel which is 2 levels up from schema/{kind}/{TypeName}/
-      namespaceCode(`import type { ${implementors.map(_ => _.name).join(', ')} } from '../../$$.js'`)
+      namespaceCode(codeImportNamed(config, { names: implementors.map(_ => _.name), from: '../../$$', type: true }))
     }
   }
 
   namespaceCode()
-  namespaceCode(`export * as ${type.name} from './fields.js'`)
+  namespaceCode(codeReexportNamespace(config, { as: type.name, from: './fields' }))
   namespaceCode()
 
   const interfaceFields = Object.fromEntries(

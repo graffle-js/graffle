@@ -14,7 +14,7 @@ import { $ } from '../helpers/identifiers.js'
 import { getInlineFragmentDoc, getOutputFieldSelectionSetDoc, getRootTypeDoc } from '../helpers/jsdoc.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 import { createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
-import { importUtilities } from '../helpers/pathHelpers.js'
+import { buildImportPath, codeImportAll, importUtilities } from '../helpers/pathHelpers.js'
 import { getTsDocContents, renderName } from '../helpers/render.js'
 import type { KindRenderers } from '../helpers/types.js'
 
@@ -66,31 +66,31 @@ export const ModuleGeneratorSelectionSets = createModuleGenerator(
 
     // Generate root type inference utilities
     if (config.schema.kindMap.index.Root.query) {
+      code(codeImportAll(config, { as: $.$$Schema, from: './schema/$', type: true }))
+      code``
       code`
-        import type * as ${$.$$Schema} from './schema/$.js'
-
         export type Query$Infer<$SelectionSet extends object> = ${$.$$Utilities}.DocumentBuilderKit.InferResult.OperationQuery<$SelectionSet, ${$.$$Schema}.${$.Schema}>
         export type Query$Variables<_$SelectionSet> = any // Temporarily any - will be replaced with new analysis system
       `
     }
 
     if (config.schema.kindMap.index.Root.mutation) {
+      if (!config.schema.kindMap.index.Root.query) {
+        code(codeImportAll(config, { as: $.$$Schema, from: './schema/$', type: true }))
+        code``
+      }
       code`
-        ${!config.schema.kindMap.index.Root.query ? `import type * as ${$.$$Schema} from './schema/$.js'` : ''}
-
         export type Mutation$Infer<$SelectionSet extends object> = ${$.$$Utilities}.DocumentBuilderKit.InferResult.OperationMutation<$SelectionSet, ${$.$$Schema}.${$.Schema}>
         export type Mutation$Variables<_$SelectionSet> = any // Temporarily any - will be replaced with new analysis system
       `
     }
 
     if (config.schema.kindMap.index.Root.subscription) {
-      code`
-        ${
-        !config.schema.kindMap.index.Root.query && !config.schema.kindMap.index.Root.mutation
-          ? `import type * as ${$.$$Schema} from './schema/$.js'`
-          : ''
+      if (!config.schema.kindMap.index.Root.query && !config.schema.kindMap.index.Root.mutation) {
+        code(codeImportAll(config, { as: $.$$Schema, from: './schema/$', type: true }))
+        code``
       }
-
+      code`
         export type Subscription$Infer<$SelectionSet extends object> = ${$.$$Utilities}.DocumentBuilderKit.InferResult.OperationSubscription<$SelectionSet, ${$.$$Schema}.${$.Schema}>
         export type Subscription$Variables<_$SelectionSet> = any // Temporarily any - will be replaced with new analysis system
       `

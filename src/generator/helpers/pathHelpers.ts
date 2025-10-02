@@ -104,3 +104,180 @@ export const importUtilities = (config: Config): string => {
     type: true,
   })
 }
+
+/**
+ * Apply import extension to a path based on config.importFormat setting.
+ * Strips any existing .ts or .js extension before applying the configured extension.
+ *
+ * @param config - Generator config containing importFormat setting
+ * @param path - Path without or with extension
+ * @returns Path with correct extension based on config
+ *
+ * @example
+ * ```typescript
+ * applyImportExtension(config, './scalar') // './scalar.js' (jsExtension)
+ * applyImportExtension(config, './scalar.js') // './scalar.js' (jsExtension)
+ * applyImportExtension(config, './scalar') // './scalar' (noExtension)
+ * ```
+ */
+export const applyImportExtension = (config: Config, path: string): string => {
+  // Check if this is a bare module specifier (package import)
+  // Bare specifiers don't need extensions
+  const isBareSpecifier = !path.startsWith('.')
+    && !path.startsWith('/')
+    && !path.startsWith('~')
+
+  if (isBareSpecifier) {
+    return path
+  }
+
+  // Strip any existing extension
+  const cleanPath = path.replace(/\.(ts|js)$/, '')
+
+  // Apply extension based on config
+  switch (config.importFormat) {
+    case 'jsExtension':
+      return `${cleanPath}.js`
+    case 'tsExtension':
+      return `${cleanPath}.ts`
+    case 'noExtension':
+      return cleanPath
+    default:
+      throw new Error(`Unknown import format: ${config.importFormat}`)
+  }
+}
+
+/**
+ * Join path segments into a single path string.
+ *
+ * @param segments - Path segments to join
+ * @returns Joined path
+ *
+ * @example
+ * ```typescript
+ * buildPath('schema', 'scalars', 'Date') // 'schema/scalars/Date'
+ * buildPath('..', '..', 'scalar') // '../../scalar'
+ * ```
+ */
+export const buildPath = (...segments: string[]): string => {
+  return segments.join('/')
+}
+
+/**
+ * Build an import path with proper extension based on config.
+ * Combines path building and extension application.
+ *
+ * @param config - Generator config containing importFormat setting
+ * @param segments - Path segments to join
+ * @returns Complete import path with correct extension
+ *
+ * @example
+ * ```typescript
+ * buildImportPath(config, '..', '..', 'scalar') // '../../scalar.js' (jsExtension)
+ * buildImportPath(config, 'fields') // './fields.js' (jsExtension)
+ * buildImportPath(config, 'schema', '$') // 'schema/$.js' (jsExtension)
+ * ```
+ */
+export const buildImportPath = (config: Config, ...segments: string[]): string => {
+  const path = buildPath(...segments)
+  return applyImportExtension(config, path)
+}
+
+/**
+ * Re-export all exports from a module with proper extension handling.
+ *
+ * @example
+ * ```typescript
+ * codeReexportAll(config, { from: './types' }) // export * from './types.js'
+ * codeReexportAll(config, { from: './types', type: true }) // export type * from './types.js'
+ * ```
+ */
+export const codeReexportAll = (config: Config, input: {
+  from: string
+  type?: boolean
+}): string => {
+  return Code.reexportAll({
+    ...input,
+    from: applyImportExtension(config, input.from),
+  })
+}
+
+/**
+ * Re-export all exports as a namespace with proper extension handling.
+ *
+ * @example
+ * ```typescript
+ * codeReexportNamespace(config, { as: 'Name', from: './path' })
+ * // export * as Name from './path.js'
+ * ```
+ */
+export const codeReexportNamespace = (config: Config, input: {
+  as: string
+  from: string
+  type?: boolean
+}): string => {
+  return Code.reexportNamespace({
+    ...input,
+    from: applyImportExtension(config, input.from),
+  })
+}
+
+/**
+ * Re-export named exports from a module with proper extension handling.
+ *
+ * @example
+ * ```typescript
+ * codeReexportNamed(config, { names: 'Name', from: './path' })
+ * // export { Name } from './path.js'
+ * ```
+ */
+export const codeReexportNamed = (config: Config, input: {
+  names: string | string[] | Record<string, string>
+  from: string
+  type?: boolean
+}): string => {
+  return Code.reexportNamed({
+    ...input,
+    from: applyImportExtension(config, input.from),
+  })
+}
+
+/**
+ * Import all exports as a namespace with proper extension handling.
+ *
+ * @example
+ * ```typescript
+ * codeImportAll(config, { as: 'Name', from: './path' })
+ * // import * as Name from './path.js'
+ * ```
+ */
+export const codeImportAll = (config: Config, input: {
+  as: string
+  from: string
+  type?: boolean
+}): string => {
+  return Code.importAll({
+    ...input,
+    from: applyImportExtension(config, input.from),
+  })
+}
+
+/**
+ * Import named exports from a module with proper extension handling.
+ *
+ * @example
+ * ```typescript
+ * codeImportNamed(config, { names: 'Name', from: './path' })
+ * // import { Name } from './path.js'
+ * ```
+ */
+export const codeImportNamed = (config: Config, input: {
+  names: string | string[] | Record<string, string>
+  from: string
+  type?: boolean
+}): string => {
+  return Code.importNamed({
+    ...input,
+    from: applyImportExtension(config, input.from),
+  })
+}
