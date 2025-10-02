@@ -1,4 +1,5 @@
-import { DocumentBuilder, TransportHttp } from 'graffle'
+import { DocumentBuilder } from '../../../../../src/exports/extensions/document-builder/runtime.js'
+import { TransportHttp } from '../../../../../src/exports/extensions/transport-http/runtime.js'
 import * as $$Utilities from '../../../../../src/exports/utilities-for-generated.js'
 import * as $$Data from './data.js'
 import * as $$Scalar from './scalar.js'
