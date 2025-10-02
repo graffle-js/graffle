@@ -225,9 +225,9 @@ const query = createStaticRootType(OperationTypeNode.QUERY)
 
 query.user({
   $: {
-    id: '123',        // Inferred as: String
-    age: 42,          // Inferred as: Int
-    active: true,     // Inferred as: Boolean
+    id: '123', // Inferred as: String
+    age: 42, // Inferred as: Int
+    active: true, // Inferred as: Boolean
     tags: ['a', 'b'], // Inferred as: [String]
   },
   name: true,
@@ -240,13 +240,13 @@ query.user({
 
 **Type Inference Rules:**
 
-| JavaScript Type | GraphQL Type |
-| --- | --- |
-| `string` | `String` |
-| `number` (integer) | `Int` |
-| `number` (decimal) | `Float` |
-| `boolean` | `Boolean` |
-| `Array<T>` | `[InferredType<T>]` |
+| JavaScript Type    | GraphQL Type        |
+| ------------------ | ------------------- |
+| `string`           | `String`            |
+| `number` (integer) | `Int`               |
+| `number` (decimal) | `Float`             |
+| `boolean`          | `Boolean`           |
+| `Array<T>`         | `[InferredType<T>]` |
 
 **Note:** Schema-driven inference provides more accurate types (e.g., `ID!` vs `String`, custom scalars) and is recommended for production use. Value-based inference is a fallback for development or when schema access is limited.
 
