@@ -28,7 +28,7 @@ Test.describe('DocumentBuilder Runtime')
     { n: 'string with args',              i: { stringWithArgs: { $: { boolean: true, float: 1 } } },                     o: { with: { y: ['$boolean: Boolean', '$float: Float', 'stringWithArgs(boolean: $boolean, float: $float)'] }, without: { y: ['stringWithArgs(boolean: true, float: 1)'] } }, hoistArguments: true },
     { n: 'string with args (empty)',      i: { stringWithArgs: { $: {} } },                                               o: { with: { y: ['stringWithArgs'], n: ['$'] } },                                                                 hoistArguments: true },
     { n: 'object with args',              i: { objectWithArgs: { $: { id: `` }, id: true } },                            o: { with: { y: ['$id: ID', 'objectWithArgs(id: $id)'] },         without: { y: ['objectWithArgs(id: "")'] } },          hoistArguments: true },
-    { n: 'object with args (empty)',      i: { objectWithArgs: { $: {}, id: true } },                                    o: { with: { y: ['objectWithArgs', 'id'] }, n: ['$'] },                                                           hoistArguments: true },
+    { n: 'object with args (empty)',      i: { objectWithArgs: { $: {}, id: true } },                                    o: { with: { y: ['objectWithArgs', 'id'], n: ['$'] } },                                                           hoistArguments: true },
     { n: 'on union',                      i: { result: { $: { $case: `Object1` }, __typename: true } },                  o: { with: { y: ['$case: Case!', 'result(case: $case)'] },        without: { y: ['result(case: "Object1")'] } },         hoistArguments: true },
   )
   .casesIn<{ hoistArguments?: boolean }>('Directives - $include')(
