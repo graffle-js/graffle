@@ -19,7 +19,7 @@ export interface __typename {
 }
 
 /**
- * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.Query}.
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.Query}.
  *
  * Retrieve all battles that have occurred.
  *
@@ -28,7 +28,7 @@ export interface __typename {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Battle}[]! |
- * | **Kind** | `Union` ↗ {@link https://graphql.org/graphql-js/type/#graphqluniontype | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
  * | **Parent** | {@link $Schema.Query} |
  * | **Path** | `Query.battles` |
  * | **Nullability** | Required |
@@ -43,7 +43,7 @@ export interface battles {
 }
 
 /**
- * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.Query}.
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.Query}.
  *
  * Retrieve all beings (Pokemon, Trainers, and Patrons).
  *
@@ -52,7 +52,7 @@ export interface battles {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Being}[]! |
- * | **Kind** | `Interface` ↗ {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
  * | **Parent** | {@link $Schema.Query} |
  * | **Path** | `Query.beings` |
  * | **Nullability** | Required |
@@ -67,7 +67,7 @@ export interface beings {
 }
 
 /**
- * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.Query}.
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.Query}.
  *
  * Find Pokemon by their name.
  *
@@ -76,7 +76,7 @@ export interface beings {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Pokemon}[] |
- * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
  * | **Parent** | {@link $Schema.Query} |
  * | **Path** | `Query.pokemonByName` |
  * | **Nullability** | Optional |
@@ -102,7 +102,7 @@ export interface pokemonByName {
 }
 
 /**
- * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.Query}.
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.Query}.
  *
  * Retrieve all Pokemon, optionally filtered.
  *
@@ -111,7 +111,7 @@ export interface pokemonByName {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Pokemon}[] |
- * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
  * | **Parent** | {@link $Schema.Query} |
  * | **Path** | `Query.pokemons` |
  * | **Nullability** | Optional |
@@ -137,7 +137,7 @@ export interface pokemons {
 }
 
 /**
- * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.Query}.
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.Query}.
  *
  * Find a trainer by their name.
  *
@@ -146,7 +146,7 @@ export interface pokemons {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Trainer} |
- * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
  * | **Parent** | {@link $Schema.Query} |
  * | **Path** | `Query.trainerByName` |
  * | **Nullability** | Optional |
@@ -171,7 +171,7 @@ export interface trainerByName {
 }
 
 /**
- * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.Query}.
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.Query}.
  *
  * Retrieve all trainers.
  *
@@ -180,7 +180,7 @@ export interface trainerByName {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Trainer}[] |
- * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
  * | **Parent** | {@link $Schema.Query} |
  * | **Path** | `Query.trainers` |
  * | **Nullability** | Optional |

@@ -19,7 +19,7 @@ export interface __typename {
 }
 
 /**
- * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.CombatantSinglePokemon}.
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.CombatantSinglePokemon}.
  *
  * The Pokemon used by this combatant.
  *
@@ -28,7 +28,7 @@ export interface __typename {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Pokemon} |
- * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
  * | **Parent** | {@link $Schema.CombatantSinglePokemon} |
  * | **Path** | `CombatantSinglePokemon.pokemon` |
  * | **Nullability** | Optional |
@@ -42,7 +42,7 @@ export interface pokemon {
 }
 
 /**
- * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.CombatantSinglePokemon}.
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.CombatantSinglePokemon}.
  *
  * The trainer commanding this Pokemon.
  *
@@ -51,7 +51,7 @@ export interface pokemon {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Trainer} |
- * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
  * | **Parent** | {@link $Schema.CombatantSinglePokemon} |
  * | **Path** | `CombatantSinglePokemon.trainer` |
  * | **Nullability** | Optional |

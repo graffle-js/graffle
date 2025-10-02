@@ -20,14 +20,14 @@ export interface __typename extends $.Schema.OutputField {
 }
 
 /**
- * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.Object1}.
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.Object1}.
  *
  * # Info
  *
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.ABCEnum} |
- * | **Kind** | `Enum` ↗ {@link https://graphql.org/graphql-js/type/#graphqlenumtype | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum} ↗ |
  * | **Parent** | {@link $Schema.Object1} |
  * | **Path** | `Object1.ABCEnum` |
  * | **Nullability** | Optional |
@@ -41,14 +41,14 @@ export interface ABCEnum extends $.Schema.OutputField {
 }
 
 /**
- * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.Object1}.
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.Object1}.
  *
  * # Info
  *
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Boolean} |
- * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
  * | **Parent** | {@link $Schema.Object1} |
  * | **Path** | `Object1.boolean` |
  * | **Nullability** | Optional |
@@ -63,14 +63,14 @@ interface $boolean extends $.Schema.OutputField {
 export { type $boolean as boolean }
 
 /**
- * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.Object1}.
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.Object1}.
  *
  * # Info
  *
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Float} |
- * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
  * | **Parent** | {@link $Schema.Object1} |
  * | **Path** | `Object1.float` |
  * | **Nullability** | Optional |
@@ -84,14 +84,14 @@ export interface float extends $.Schema.OutputField {
 }
 
 /**
- * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.Object1}.
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.Object1}.
  *
  * # Info
  *
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.ID} |
- * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
  * | **Parent** | {@link $Schema.Object1} |
  * | **Path** | `Object1.id` |
  * | **Nullability** | Optional |
@@ -105,14 +105,14 @@ export interface id extends $.Schema.OutputField {
 }
 
 /**
- * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.Object1}.
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.Object1}.
  *
  * # Info
  *
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Int} |
- * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
  * | **Parent** | {@link $Schema.Object1} |
  * | **Path** | `Object1.int` |
  * | **Nullability** | Optional |
@@ -126,14 +126,14 @@ export interface int extends $.Schema.OutputField {
 }
 
 /**
- * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.Object1}.
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.Object1}.
  *
  * # Info
  *
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.String} |
- * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
  * | **Parent** | {@link $Schema.Object1} |
  * | **Path** | `Object1.string` |
  * | **Nullability** | Optional |

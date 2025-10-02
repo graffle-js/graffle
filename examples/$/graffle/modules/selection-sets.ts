@@ -2645,8 +2645,89 @@ export interface Battle<
       $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     >
 
+  /**
+   * Inline fragment selection for {@link $Schema.BattleRoyale} member.
+   *
+   * When the runtime value is of type {@link $Schema.BattleRoyale}, this selection set is applied, allowing you to select fields specific to this member type.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.BattleRoyale} |
+   * | **Kind** | Union Member |
+   * | **Parent** | {@link $Schema.Battle} |
+   * | **Path** | `Battle -> BattleRoyale` |
+   *
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
+   * @see {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union Types} ↗
+   *
+   * @example
+   * ```ts
+   * query.battles({
+   * __typename: true,
+   * ___on_BattleRoyale: {
+   * // ... BattleRoyale-specific fields
+   * }
+   * })
+   * ```
+   */
   ___on_BattleRoyale?: BattleRoyale<_$Context>
+  /**
+   * Inline fragment selection for {@link $Schema.BattleTrainer} member.
+   *
+   * When the runtime value is of type {@link $Schema.BattleTrainer}, this selection set is applied, allowing you to select fields specific to this member type.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.BattleTrainer} |
+   * | **Kind** | Union Member |
+   * | **Parent** | {@link $Schema.Battle} |
+   * | **Path** | `Battle -> BattleTrainer` |
+   *
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
+   * @see {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union Types} ↗
+   *
+   * @example
+   * ```ts
+   * query.battles({
+   * __typename: true,
+   * ___on_BattleTrainer: {
+   * // ... BattleTrainer-specific fields
+   * }
+   * })
+   * ```
+   */
   ___on_BattleTrainer?: BattleTrainer<_$Context>
+  /**
+   * Inline fragment selection for {@link $Schema.BattleWild} member.
+   *
+   * When the runtime value is of type {@link $Schema.BattleWild}, this selection set is applied, allowing you to select fields specific to this member type.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.BattleWild} |
+   * | **Kind** | Union Member |
+   * | **Parent** | {@link $Schema.Battle} |
+   * | **Path** | `Battle -> BattleWild` |
+   *
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
+   * @see {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union Types} ↗
+   *
+   * @example
+   * ```ts
+   * query.battles({
+   * __typename: true,
+   * ___on_BattleWild: {
+   * // ... BattleWild-specific fields
+   * }
+   * })
+   * ```
+   */
   ___on_BattleWild?: BattleWild<_$Context>
 
   /**
@@ -2696,8 +2777,92 @@ export interface Being<
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   id?: Being.id<_$Context>
   name?: Being.name<_$Context>
+  /**
+   * Inline fragment selection for {@link $Schema.Patron} implementor.
+   *
+   * When the runtime value is of type {@link $Schema.Patron}, this selection set is applied, allowing you to select fields specific to this implementor type.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Patron} |
+   * | **Kind** | Interface Implementor |
+   * | **Parent** | {@link $Schema.Being} |
+   * | **Path** | `Being -> Patron` |
+   *
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
+   * @see {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface Types} ↗
+   *
+   * @example
+   * ```ts
+   * query.beings({
+   * id: true,
+   * name: true,
+   * ___on_Patron: {
+   * // ... Patron-specific fields
+   * }
+   * })
+   * ```
+   */
   ___on_Patron?: Patron<_$Context>
+  /**
+   * Inline fragment selection for {@link $Schema.Pokemon} implementor.
+   *
+   * When the runtime value is of type {@link $Schema.Pokemon}, this selection set is applied, allowing you to select fields specific to this implementor type.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Pokemon} |
+   * | **Kind** | Interface Implementor |
+   * | **Parent** | {@link $Schema.Being} |
+   * | **Path** | `Being -> Pokemon` |
+   *
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
+   * @see {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface Types} ↗
+   *
+   * @example
+   * ```ts
+   * query.beings({
+   * id: true,
+   * name: true,
+   * ___on_Pokemon: {
+   * // ... Pokemon-specific fields
+   * }
+   * })
+   * ```
+   */
   ___on_Pokemon?: Pokemon<_$Context>
+  /**
+   * Inline fragment selection for {@link $Schema.Trainer} implementor.
+   *
+   * When the runtime value is of type {@link $Schema.Trainer}, this selection set is applied, allowing you to select fields specific to this implementor type.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Trainer} |
+   * | **Kind** | Interface Implementor |
+   * | **Parent** | {@link $Schema.Being} |
+   * | **Path** | `Being -> Trainer` |
+   *
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
+   * @see {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface Types} ↗
+   *
+   * @example
+   * ```ts
+   * query.beings({
+   * id: true,
+   * name: true,
+   * ___on_Trainer: {
+   * // ... Trainer-specific fields
+   * }
+   * })
+   * ```
+   */
   ___on_Trainer?: Trainer<_$Context>
 
   /**

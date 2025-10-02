@@ -8,7 +8,6 @@ import type {
   ObjectGrandparent,
   ObjectParent,
 } from '../../$$.js'
-import type { Schema as $Schema } from '../../$.js'
 import type * as $Fields from './fields.js'
 
 export * as InterfaceGrandparent from './fields.js'

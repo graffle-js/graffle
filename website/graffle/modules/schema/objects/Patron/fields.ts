@@ -19,7 +19,7 @@ export interface __typename {
 }
 
 /**
- * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.Patron}.
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.Patron}.
  *
  * The unique identifier for this patron.
  *
@@ -28,7 +28,7 @@ export interface __typename {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.ID} |
- * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
  * | **Parent** | {@link $Schema.Patron} |
  * | **Path** | `Patron.id` |
  * | **Nullability** | Optional |
@@ -42,7 +42,7 @@ export interface id {
 }
 
 /**
- * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.Patron}.
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.Patron}.
  *
  * The amount of money this patron has.
  *
@@ -51,7 +51,7 @@ export interface id {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Int} |
- * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
  * | **Parent** | {@link $Schema.Patron} |
  * | **Path** | `Patron.money` |
  * | **Nullability** | Optional |
@@ -65,7 +65,7 @@ export interface money {
 }
 
 /**
- * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.Patron}.
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.Patron}.
  *
  * The name of this patron.
  *
@@ -74,7 +74,7 @@ export interface money {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.String} |
- * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
  * | **Parent** | {@link $Schema.Patron} |
  * | **Path** | `Patron.name` |
  * | **Nullability** | Optional |

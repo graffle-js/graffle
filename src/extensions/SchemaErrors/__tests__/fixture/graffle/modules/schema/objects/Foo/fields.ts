@@ -20,7 +20,7 @@ export interface __typename extends $.Schema.OutputField {
 }
 
 /**
- * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.Foo}.
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.Foo}.
  *
  * Field documentation.
  *
@@ -31,7 +31,7 @@ export interface __typename extends $.Schema.OutputField {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.ID} |
- * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
  * | **Parent** | {@link $Schema.Foo} |
  * | **Path** | `Foo.id` |
  * | **⚠ Deprecated** | Field a is deprecated. |

@@ -1,6 +1,5 @@
 import type * as $ from '../../../../../../../../../exports/utilities-for-generated.js'
 import type { InterfaceChildA, InterfaceChildB, ObjectChildA, ObjectChildB, ObjectParent } from '../../$$.js'
-import type { Schema as $Schema } from '../../$.js'
 import type * as $Fields from './fields.js'
 
 export * as InterfaceParent from './fields.js'

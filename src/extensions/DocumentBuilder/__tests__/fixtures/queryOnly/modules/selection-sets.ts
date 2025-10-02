@@ -175,7 +175,7 @@ export type Query$Infer<$SelectionSet extends object> = $$Utilities.DocumentBuil
   $SelectionSet,
   $$Schema.Schema
 >
-export type Query$Variables<$SelectionSet> = any // Temporarily any - will be replaced with new analysis system
+export type Query$Variables<_$SelectionSet> = any // Temporarily any - will be replaced with new analysis system
 /**
  * [1] These definitions serve to allow field selection interfaces to extend their respective object type without
  *     name clashing between the field name and the object name.

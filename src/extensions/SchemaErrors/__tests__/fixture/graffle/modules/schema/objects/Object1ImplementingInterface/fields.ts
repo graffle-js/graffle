@@ -20,14 +20,14 @@ export interface __typename extends $.Schema.OutputField {
 }
 
 /**
- * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.Object1ImplementingInterface}.
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.Object1ImplementingInterface}.
  *
  * # Info
  *
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.ID} |
- * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
  * | **Parent** | {@link $Schema.Object1ImplementingInterface} |
  * | **Path** | `Object1ImplementingInterface.id` |
  * | **Nullability** | Optional |
@@ -41,14 +41,14 @@ export interface id extends $.Schema.OutputField {
 }
 
 /**
- * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.Object1ImplementingInterface}.
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.Object1ImplementingInterface}.
  *
  * # Info
  *
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Int} |
- * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
  * | **Parent** | {@link $Schema.Object1ImplementingInterface} |
  * | **Path** | `Object1ImplementingInterface.int` |
  * | **Nullability** | Optional |

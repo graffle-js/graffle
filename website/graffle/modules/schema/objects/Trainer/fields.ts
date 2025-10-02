@@ -19,7 +19,7 @@ export interface __typename {
 }
 
 /**
- * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.Trainer}.
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.Trainer}.
  *
  * The class or specialty of this trainer.
  *
@@ -28,7 +28,7 @@ export interface __typename {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.TrainerClass} |
- * | **Kind** | `Enum` ↗ {@link https://graphql.org/graphql-js/type/#graphqlenumtype | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum} ↗ |
  * | **Parent** | {@link $Schema.Trainer} |
  * | **Path** | `Trainer.class` |
  * | **Nullability** | Optional |
@@ -43,7 +43,7 @@ interface $class {
 export { type $class as class };
 
 /**
- * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.Trainer}.
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.Trainer}.
  *
  * The patrons who are fans of this trainer.
  *
@@ -52,7 +52,7 @@ export { type $class as class };
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Patron}[] |
- * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
  * | **Parent** | {@link $Schema.Trainer} |
  * | **Path** | `Trainer.fans` |
  * | **Nullability** | Optional |
@@ -67,7 +67,7 @@ export interface fans {
 }
 
 /**
- * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.Trainer}.
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.Trainer}.
  *
  * The unique identifier for this trainer.
  *
@@ -76,7 +76,7 @@ export interface fans {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.ID} |
- * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
  * | **Parent** | {@link $Schema.Trainer} |
  * | **Path** | `Trainer.id` |
  * | **Nullability** | Optional |
@@ -90,7 +90,7 @@ export interface id {
 }
 
 /**
- * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.Trainer}.
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.Trainer}.
  *
  * The name of this trainer.
  *
@@ -99,7 +99,7 @@ export interface id {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.String} |
- * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
  * | **Parent** | {@link $Schema.Trainer} |
  * | **Path** | `Trainer.name` |
  * | **Nullability** | Optional |
@@ -113,7 +113,7 @@ export interface name {
 }
 
 /**
- * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.Trainer}.
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.Trainer}.
  *
  * The Pokemon owned by this trainer.
  *
@@ -122,7 +122,7 @@ export interface name {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Pokemon}[] |
- * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
  * | **Parent** | {@link $Schema.Trainer} |
  * | **Path** | `Trainer.pokemon` |
  * | **Nullability** | Optional |

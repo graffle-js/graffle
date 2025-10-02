@@ -5674,7 +5674,61 @@ export interface DateUnion<
       $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     >
 
+  /**
+   * Inline fragment selection for {@link $Schema.DateObject1} member.
+   *
+   * When the runtime value is of type {@link $Schema.DateObject1}, this selection set is applied, allowing you to select fields specific to this member type.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.DateObject1} |
+   * | **Kind** | Union Member |
+   * | **Parent** | {@link $Schema.DateUnion} |
+   * | **Path** | `DateUnion -> DateObject1` |
+   *
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
+   * @see {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union Types} ↗
+   *
+   * @example
+   * ```ts
+   * query.dateunions({
+   * __typename: true,
+   * ___on_DateObject1: {
+   * // ... DateObject1-specific fields
+   * }
+   * })
+   * ```
+   */
   ___on_DateObject1?: DateObject1<_$Context>
+  /**
+   * Inline fragment selection for {@link $Schema.DateObject2} member.
+   *
+   * When the runtime value is of type {@link $Schema.DateObject2}, this selection set is applied, allowing you to select fields specific to this member type.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.DateObject2} |
+   * | **Kind** | Union Member |
+   * | **Parent** | {@link $Schema.DateUnion} |
+   * | **Path** | `DateUnion -> DateObject2` |
+   *
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
+   * @see {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union Types} ↗
+   *
+   * @example
+   * ```ts
+   * query.dateunions({
+   * __typename: true,
+   * ___on_DateObject2: {
+   * // ... DateObject2-specific fields
+   * }
+   * })
+   * ```
+   */
   ___on_DateObject2?: DateObject2<_$Context>
 
   /**
@@ -5714,7 +5768,61 @@ export interface FooBarUnion<
       $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     >
 
+  /**
+   * Inline fragment selection for {@link $Schema.Bar} member.
+   *
+   * When the runtime value is of type {@link $Schema.Bar}, this selection set is applied, allowing you to select fields specific to this member type.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Bar} |
+   * | **Kind** | Union Member |
+   * | **Parent** | {@link $Schema.FooBarUnion} |
+   * | **Path** | `FooBarUnion -> Bar` |
+   *
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
+   * @see {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union Types} ↗
+   *
+   * @example
+   * ```ts
+   * query.foobarunions({
+   * __typename: true,
+   * ___on_Bar: {
+   * // ... Bar-specific fields
+   * }
+   * })
+   * ```
+   */
   ___on_Bar?: Bar<_$Context>
+  /**
+   * Inline fragment selection for {@link $Schema.Foo} member.
+   *
+   * When the runtime value is of type {@link $Schema.Foo}, this selection set is applied, allowing you to select fields specific to this member type.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Foo} |
+   * | **Kind** | Union Member |
+   * | **Parent** | {@link $Schema.FooBarUnion} |
+   * | **Path** | `FooBarUnion -> Foo` |
+   *
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
+   * @see {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union Types} ↗
+   *
+   * @example
+   * ```ts
+   * query.foobarunions({
+   * __typename: true,
+   * ___on_Foo: {
+   * // ... Foo-specific fields
+   * }
+   * })
+   * ```
+   */
   ___on_Foo?: Foo<_$Context>
 
   /**
@@ -5751,8 +5859,89 @@ export interface Result<
       $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     >
 
+  /**
+   * Inline fragment selection for {@link $Schema.ErrorOne} member.
+   *
+   * When the runtime value is of type {@link $Schema.ErrorOne}, this selection set is applied, allowing you to select fields specific to this member type.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ErrorOne} |
+   * | **Kind** | Union Member |
+   * | **Parent** | {@link $Schema.Result} |
+   * | **Path** | `Result -> ErrorOne` |
+   *
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
+   * @see {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union Types} ↗
+   *
+   * @example
+   * ```ts
+   * query.results({
+   * __typename: true,
+   * ___on_ErrorOne: {
+   * // ... ErrorOne-specific fields
+   * }
+   * })
+   * ```
+   */
   ___on_ErrorOne?: ErrorOne<_$Context>
+  /**
+   * Inline fragment selection for {@link $Schema.ErrorTwo} member.
+   *
+   * When the runtime value is of type {@link $Schema.ErrorTwo}, this selection set is applied, allowing you to select fields specific to this member type.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ErrorTwo} |
+   * | **Kind** | Union Member |
+   * | **Parent** | {@link $Schema.Result} |
+   * | **Path** | `Result -> ErrorTwo` |
+   *
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
+   * @see {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union Types} ↗
+   *
+   * @example
+   * ```ts
+   * query.results({
+   * __typename: true,
+   * ___on_ErrorTwo: {
+   * // ... ErrorTwo-specific fields
+   * }
+   * })
+   * ```
+   */
   ___on_ErrorTwo?: ErrorTwo<_$Context>
+  /**
+   * Inline fragment selection for {@link $Schema.Object1} member.
+   *
+   * When the runtime value is of type {@link $Schema.Object1}, this selection set is applied, allowing you to select fields specific to this member type.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Object1} |
+   * | **Kind** | Union Member |
+   * | **Parent** | {@link $Schema.Result} |
+   * | **Path** | `Result -> Object1` |
+   *
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
+   * @see {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union Types} ↗
+   *
+   * @example
+   * ```ts
+   * query.results({
+   * __typename: true,
+   * ___on_Object1: {
+   * // ... Object1-specific fields
+   * }
+   * })
+   * ```
+   */
   ___on_Object1?: Object1<_$Context>
 
   /**
@@ -5789,7 +5978,61 @@ export interface lowerCaseUnion<
       $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     >
 
+  /**
+   * Inline fragment selection for {@link $Schema.lowerCaseObject} member.
+   *
+   * When the runtime value is of type {@link $Schema.lowerCaseObject}, this selection set is applied, allowing you to select fields specific to this member type.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.lowerCaseObject} |
+   * | **Kind** | Union Member |
+   * | **Parent** | {@link $Schema.lowerCaseUnion} |
+   * | **Path** | `lowerCaseUnion -> lowerCaseObject` |
+   *
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
+   * @see {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union Types} ↗
+   *
+   * @example
+   * ```ts
+   * query.lowercaseunions({
+   * __typename: true,
+   * ___on_lowerCaseObject: {
+   * // ... lowerCaseObject-specific fields
+   * }
+   * })
+   * ```
+   */
   ___on_lowerCaseObject?: lowerCaseObject<_$Context>
+  /**
+   * Inline fragment selection for {@link $Schema.lowerCaseObject2} member.
+   *
+   * When the runtime value is of type {@link $Schema.lowerCaseObject2}, this selection set is applied, allowing you to select fields specific to this member type.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.lowerCaseObject2} |
+   * | **Kind** | Union Member |
+   * | **Parent** | {@link $Schema.lowerCaseUnion} |
+   * | **Path** | `lowerCaseUnion -> lowerCaseObject2` |
+   *
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
+   * @see {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union Types} ↗
+   *
+   * @example
+   * ```ts
+   * query.lowercaseunions({
+   * __typename: true,
+   * ___on_lowerCaseObject2: {
+   * // ... lowerCaseObject2-specific fields
+   * }
+   * })
+   * ```
+   */
   ___on_lowerCaseObject2?: lowerCaseObject2<_$Context>
 
   /**
@@ -5835,6 +6078,34 @@ export interface DateInterface1<
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   date1?: DateInterface1.date1<_$Context>
+  /**
+   * Inline fragment selection for {@link $Schema.DateObject1} implementor.
+   *
+   * When the runtime value is of type {@link $Schema.DateObject1}, this selection set is applied, allowing you to select fields specific to this implementor type.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.DateObject1} |
+   * | **Kind** | Interface Implementor |
+   * | **Parent** | {@link $Schema.DateInterface1} |
+   * | **Path** | `DateInterface1 -> DateObject1` |
+   *
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
+   * @see {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface Types} ↗
+   *
+   * @example
+   * ```ts
+   * query.dateinterface1s({
+   * id: true,
+   * name: true,
+   * ___on_DateObject1: {
+   * // ... DateObject1-specific fields
+   * }
+   * })
+   * ```
+   */
   ___on_DateObject1?: DateObject1<_$Context>
 
   /**
@@ -5906,7 +6177,63 @@ export interface Error<
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   message?: Error.message<_$Context>
+  /**
+   * Inline fragment selection for {@link $Schema.ErrorOne} implementor.
+   *
+   * When the runtime value is of type {@link $Schema.ErrorOne}, this selection set is applied, allowing you to select fields specific to this implementor type.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ErrorOne} |
+   * | **Kind** | Interface Implementor |
+   * | **Parent** | {@link $Schema.Error} |
+   * | **Path** | `Error -> ErrorOne` |
+   *
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
+   * @see {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface Types} ↗
+   *
+   * @example
+   * ```ts
+   * query.errors({
+   * id: true,
+   * name: true,
+   * ___on_ErrorOne: {
+   * // ... ErrorOne-specific fields
+   * }
+   * })
+   * ```
+   */
   ___on_ErrorOne?: ErrorOne<_$Context>
+  /**
+   * Inline fragment selection for {@link $Schema.ErrorTwo} implementor.
+   *
+   * When the runtime value is of type {@link $Schema.ErrorTwo}, this selection set is applied, allowing you to select fields specific to this implementor type.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ErrorTwo} |
+   * | **Kind** | Interface Implementor |
+   * | **Parent** | {@link $Schema.Error} |
+   * | **Path** | `Error -> ErrorTwo` |
+   *
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
+   * @see {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface Types} ↗
+   *
+   * @example
+   * ```ts
+   * query.errors({
+   * id: true,
+   * name: true,
+   * ___on_ErrorTwo: {
+   * // ... ErrorTwo-specific fields
+   * }
+   * })
+   * ```
+   */
   ___on_ErrorTwo?: ErrorTwo<_$Context>
 
   /**
@@ -5978,7 +6305,63 @@ export interface Interface<
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   id?: Interface.id<_$Context>
+  /**
+   * Inline fragment selection for {@link $Schema.Object1ImplementingInterface} implementor.
+   *
+   * When the runtime value is of type {@link $Schema.Object1ImplementingInterface}, this selection set is applied, allowing you to select fields specific to this implementor type.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Object1ImplementingInterface} |
+   * | **Kind** | Interface Implementor |
+   * | **Parent** | {@link $Schema.Interface} |
+   * | **Path** | `Interface -> Object1ImplementingInterface` |
+   *
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
+   * @see {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface Types} ↗
+   *
+   * @example
+   * ```ts
+   * query.interfaces({
+   * id: true,
+   * name: true,
+   * ___on_Object1ImplementingInterface: {
+   * // ... Object1ImplementingInterface-specific fields
+   * }
+   * })
+   * ```
+   */
   ___on_Object1ImplementingInterface?: Object1ImplementingInterface<_$Context>
+  /**
+   * Inline fragment selection for {@link $Schema.Object2ImplementingInterface} implementor.
+   *
+   * When the runtime value is of type {@link $Schema.Object2ImplementingInterface}, this selection set is applied, allowing you to select fields specific to this implementor type.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Object2ImplementingInterface} |
+   * | **Kind** | Interface Implementor |
+   * | **Parent** | {@link $Schema.Interface} |
+   * | **Path** | `Interface -> Object2ImplementingInterface` |
+   *
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
+   * @see {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface Types} ↗
+   *
+   * @example
+   * ```ts
+   * query.interfaces({
+   * id: true,
+   * name: true,
+   * ___on_Object2ImplementingInterface: {
+   * // ... Object2ImplementingInterface-specific fields
+   * }
+   * })
+   * ```
+   */
   ___on_Object2ImplementingInterface?: Object2ImplementingInterface<_$Context>
 
   /**
@@ -6052,6 +6435,34 @@ export interface InterfaceChildA<
   a?: InterfaceChildA.a<_$Context>
   b?: InterfaceChildA.b<_$Context>
   c1?: InterfaceChildA.c1<_$Context>
+  /**
+   * Inline fragment selection for {@link $Schema.ObjectChildA} implementor.
+   *
+   * When the runtime value is of type {@link $Schema.ObjectChildA}, this selection set is applied, allowing you to select fields specific to this implementor type.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ObjectChildA} |
+   * | **Kind** | Interface Implementor |
+   * | **Parent** | {@link $Schema.InterfaceChildA} |
+   * | **Path** | `InterfaceChildA -> ObjectChildA` |
+   *
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
+   * @see {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface Types} ↗
+   *
+   * @example
+   * ```ts
+   * query.interfacechildas({
+   * id: true,
+   * name: true,
+   * ___on_ObjectChildA: {
+   * // ... ObjectChildA-specific fields
+   * }
+   * })
+   * ```
+   */
   ___on_ObjectChildA?: ObjectChildA<_$Context>
 
   /**
@@ -6179,6 +6590,34 @@ export interface InterfaceChildB<
   a?: InterfaceChildB.a<_$Context>
   b?: InterfaceChildB.b<_$Context>
   c2?: InterfaceChildB.c2<_$Context>
+  /**
+   * Inline fragment selection for {@link $Schema.ObjectChildB} implementor.
+   *
+   * When the runtime value is of type {@link $Schema.ObjectChildB}, this selection set is applied, allowing you to select fields specific to this implementor type.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ObjectChildB} |
+   * | **Kind** | Interface Implementor |
+   * | **Parent** | {@link $Schema.InterfaceChildB} |
+   * | **Path** | `InterfaceChildB -> ObjectChildB` |
+   *
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
+   * @see {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface Types} ↗
+   *
+   * @example
+   * ```ts
+   * query.interfacechildbs({
+   * id: true,
+   * name: true,
+   * ___on_ObjectChildB: {
+   * // ... ObjectChildB-specific fields
+   * }
+   * })
+   * ```
+   */
   ___on_ObjectChildB?: ObjectChildB<_$Context>
 
   /**
@@ -6304,13 +6743,122 @@ export interface InterfaceGrandparent<
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   a?: InterfaceGrandparent.a<_$Context>
+  /**
+   * Inline fragment selection for {@link $Schema.ObjectChildA} implementor.
+   *
+   * When the runtime value is of type {@link $Schema.ObjectChildA}, this selection set is applied, allowing you to select fields specific to this implementor type.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ObjectChildA} |
+   * | **Kind** | Interface Implementor |
+   * | **Parent** | {@link $Schema.InterfaceGrandparent} |
+   * | **Path** | `InterfaceGrandparent -> ObjectChildA` |
+   *
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
+   * @see {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface Types} ↗
+   *
+   * @example
+   * ```ts
+   * query.interfacegrandparents({
+   * id: true,
+   * name: true,
+   * ___on_ObjectChildA: {
+   * // ... ObjectChildA-specific fields
+   * }
+   * })
+   * ```
+   */
   ___on_ObjectChildA?: ObjectChildA<_$Context>
+  /**
+   * Inline fragment selection for {@link $Schema.ObjectChildB} implementor.
+   *
+   * When the runtime value is of type {@link $Schema.ObjectChildB}, this selection set is applied, allowing you to select fields specific to this implementor type.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ObjectChildB} |
+   * | **Kind** | Interface Implementor |
+   * | **Parent** | {@link $Schema.InterfaceGrandparent} |
+   * | **Path** | `InterfaceGrandparent -> ObjectChildB` |
+   *
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
+   * @see {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface Types} ↗
+   *
+   * @example
+   * ```ts
+   * query.interfacegrandparents({
+   * id: true,
+   * name: true,
+   * ___on_ObjectChildB: {
+   * // ... ObjectChildB-specific fields
+   * }
+   * })
+   * ```
+   */
   ___on_ObjectChildB?: ObjectChildB<_$Context>
+  /**
+   * Inline fragment selection for {@link $Schema.ObjectGrandparent} implementor.
+   *
+   * When the runtime value is of type {@link $Schema.ObjectGrandparent}, this selection set is applied, allowing you to select fields specific to this implementor type.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ObjectGrandparent} |
+   * | **Kind** | Interface Implementor |
+   * | **Parent** | {@link $Schema.InterfaceGrandparent} |
+   * | **Path** | `InterfaceGrandparent -> ObjectGrandparent` |
+   *
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
+   * @see {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface Types} ↗
+   *
+   * @example
+   * ```ts
+   * query.interfacegrandparents({
+   * id: true,
+   * name: true,
+   * ___on_ObjectGrandparent: {
+   * // ... ObjectGrandparent-specific fields
+   * }
+   * })
+   * ```
+   */
   ___on_ObjectGrandparent?: ObjectGrandparent<_$Context>
+  /**
+   * Inline fragment selection for {@link $Schema.ObjectParent} implementor.
+   *
+   * When the runtime value is of type {@link $Schema.ObjectParent}, this selection set is applied, allowing you to select fields specific to this implementor type.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ObjectParent} |
+   * | **Kind** | Interface Implementor |
+   * | **Parent** | {@link $Schema.InterfaceGrandparent} |
+   * | **Path** | `InterfaceGrandparent -> ObjectParent` |
+   *
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
+   * @see {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface Types} ↗
+   *
+   * @example
+   * ```ts
+   * query.interfacegrandparents({
+   * id: true,
+   * name: true,
+   * ___on_ObjectParent: {
+   * // ... ObjectParent-specific fields
+   * }
+   * })
+   * ```
+   */
   ___on_ObjectParent?: ObjectParent<_$Context>
-  ___on_InterfaceChildA?: InterfaceChildA<_$Context>
-  ___on_InterfaceChildB?: InterfaceChildB<_$Context>
-  ___on_InterfaceParent?: InterfaceParent<_$Context>
 
   /**
    * Inline fragments for field groups.
@@ -6385,11 +6933,93 @@ export interface InterfaceParent<
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   a?: InterfaceParent.a<_$Context>
   b?: InterfaceParent.b<_$Context>
+  /**
+   * Inline fragment selection for {@link $Schema.ObjectChildA} implementor.
+   *
+   * When the runtime value is of type {@link $Schema.ObjectChildA}, this selection set is applied, allowing you to select fields specific to this implementor type.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ObjectChildA} |
+   * | **Kind** | Interface Implementor |
+   * | **Parent** | {@link $Schema.InterfaceParent} |
+   * | **Path** | `InterfaceParent -> ObjectChildA` |
+   *
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
+   * @see {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface Types} ↗
+   *
+   * @example
+   * ```ts
+   * query.interfaceparents({
+   * id: true,
+   * name: true,
+   * ___on_ObjectChildA: {
+   * // ... ObjectChildA-specific fields
+   * }
+   * })
+   * ```
+   */
   ___on_ObjectChildA?: ObjectChildA<_$Context>
+  /**
+   * Inline fragment selection for {@link $Schema.ObjectChildB} implementor.
+   *
+   * When the runtime value is of type {@link $Schema.ObjectChildB}, this selection set is applied, allowing you to select fields specific to this implementor type.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ObjectChildB} |
+   * | **Kind** | Interface Implementor |
+   * | **Parent** | {@link $Schema.InterfaceParent} |
+   * | **Path** | `InterfaceParent -> ObjectChildB` |
+   *
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
+   * @see {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface Types} ↗
+   *
+   * @example
+   * ```ts
+   * query.interfaceparents({
+   * id: true,
+   * name: true,
+   * ___on_ObjectChildB: {
+   * // ... ObjectChildB-specific fields
+   * }
+   * })
+   * ```
+   */
   ___on_ObjectChildB?: ObjectChildB<_$Context>
+  /**
+   * Inline fragment selection for {@link $Schema.ObjectParent} implementor.
+   *
+   * When the runtime value is of type {@link $Schema.ObjectParent}, this selection set is applied, allowing you to select fields specific to this implementor type.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ObjectParent} |
+   * | **Kind** | Interface Implementor |
+   * | **Parent** | {@link $Schema.InterfaceParent} |
+   * | **Path** | `InterfaceParent -> ObjectParent` |
+   *
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
+   * @see {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface Types} ↗
+   *
+   * @example
+   * ```ts
+   * query.interfaceparents({
+   * id: true,
+   * name: true,
+   * ___on_ObjectParent: {
+   * // ... ObjectParent-specific fields
+   * }
+   * })
+   * ```
+   */
   ___on_ObjectParent?: ObjectParent<_$Context>
-  ___on_InterfaceChildA?: InterfaceChildA<_$Context>
-  ___on_InterfaceChildB?: InterfaceChildB<_$Context>
 
   /**
    * Inline fragments for field groups.
@@ -6484,12 +7114,12 @@ export type Query$Infer<$SelectionSet extends object> = $$Utilities.DocumentBuil
   $SelectionSet,
   $$Schema.Schema
 >
-export type Query$Variables<$SelectionSet> = any // Temporarily any - will be replaced with new analysis system
+export type Query$Variables<_$SelectionSet> = any // Temporarily any - will be replaced with new analysis system
 export type Mutation$Infer<$SelectionSet extends object> = $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
   $SelectionSet,
   $$Schema.Schema
 >
-export type Mutation$Variables<$SelectionSet> = any // Temporarily any - will be replaced with new analysis system
+export type Mutation$Variables<_$SelectionSet> = any // Temporarily any - will be replaced with new analysis system
 /**
  * [1] These definitions serve to allow field selection interfaces to extend their respective object type without
  *     name clashing between the field name and the object name.

@@ -1,12 +1,21 @@
 import type * as $ from '../../../../../../../../exports/utilities-for-generated.js'
 
 /**
+ * GraphQL {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum}.
+ *
  * Enum documentation.
  *
- * Members
- * "A" - (DEPRECATED: Enum value A is deprecated.)
- * "B" - Enum B member documentation.
- * "C" - (DEPRECATED: Enum value C is deprecated.)
+ * **Members:**
+ * - `A`
+ * - `B` - Enum B member documentation.
+ * - `C`
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum} ↗ |
+ * | **Members** | 3 |
  */
 export interface ABCEnum extends $.Schema.Enum {
   kind: 'Enum'

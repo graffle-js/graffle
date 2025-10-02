@@ -4,6 +4,17 @@ import type * as $Fields from './fields.js'
 
 export * as InterfaceParent from './fields.js'
 
+/**
+ * GraphQL {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface}.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+ * | **Fields** | 2 |
+ * | **Implementors** | {@link $Schema.ObjectChildA}, {@link $Schema.ObjectChildB}, {@link $Schema.ObjectParent}, {@link $Schema.InterfaceChildA}, {@link $Schema.InterfaceChildB} |
+ */
 export interface InterfaceParent extends $.Schema.Interface {
   kind: 'Interface'
   name: 'InterfaceParent'

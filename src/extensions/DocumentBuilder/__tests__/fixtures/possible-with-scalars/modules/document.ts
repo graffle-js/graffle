@@ -15,7 +15,6 @@ interface StaticDocumentContext {
   typeHookRequestResultDataTypes: never
   scalars: $$Scalar.$Registry
 }
-
 /**
  * Static query builder for compile-time GraphQL document generation.
  *
@@ -1253,16 +1252,40 @@ export interface QueryBuilder {
     >
   >
 }
-
 /**
- * Static query document builder instance.
+ * Static query builder for compile-time GraphQL document generation.
  *
- * @example
+ * @remarks
+ * Each field method generates a fully typed GraphQL document string with:
+ * - Type-safe selection sets matching your schema
+ * - Automatic variable inference from `$` usage
+ * - Compile-time validation of field selections
+ * - Zero runtime overhead - documents are generated at build time
+ *
+ * @example Basic query
  * ```ts
- * import { query } from './generated/document.js'
- *
- * const myQuery = query.user({ id: true, name: true })
+ * const getUserDoc = query.user({
+ *   id: true,
+ *   name: true,
+ *   email: true
+ * })
+ * // Generates: query { user { id name email } }
  * ```
+ *
+ * @example With variables
+ * ```ts
+ * import { Var } from 'graffle'
+ *
+ * const getUserByIdDoc = query.user({
+ *   $: { id: $ },
+ *   name: true,
+ *   posts: { title: true }
+ * })
+ * // Generates: query ($id: ID!) { user(id: $id) { name posts { title } } }
+ * // Variables type: { id: string }
+ * ```
+ *
+ * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
  */
 export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY) as any
 
@@ -1287,6 +1310,8 @@ export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY)
  * })
  * // Generates: mutation ($input: CreateUserInput!) { createUser(input: $input) { id name } }
  * ```
+ *
+ * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
  */
 export interface MutationBuilder {
   id: <
@@ -1329,18 +1354,28 @@ export interface MutationBuilder {
     >
   >
 }
-
 /**
- * Static mutation document builder instance.
+ * Static mutation builder for compile-time GraphQL document generation.
+ *
+ * @remarks
+ * Each field method generates a fully typed GraphQL mutation document with:
+ * - Type-safe selection sets and input types
+ * - Automatic variable inference from `$` usage
+ * - Compile-time validation of mutations
+ * - Zero runtime overhead - documents are generated at build time
  *
  * @example
  * ```ts
- * import { mutation } from './generated/document.js'
+ * import { Var } from 'graffle'
  *
- * const myMutation = mutation.createUser({
- *   $: { input: { name: 'Alice', email: 'alice@example.com' } },
- *   id: true
+ * const createUserDoc = mutation.createUser({
+ *   $: { input: $ },
+ *   id: true,
+ *   name: true
  * })
+ * // Generates: mutation ($input: CreateUserInput!) { createUser(input: $input) { id name } }
  * ```
+ *
+ * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
  */
 export const mutation: MutationBuilder = createStaticRootType(OperationTypeNode.MUTATION) as any

@@ -307,3 +307,70 @@ export const getOutputFieldMethodDoc = (
 
   return parts.join('\n')
 }
+
+/**
+ * Generate enhanced JSDoc for inline fragment fields (___on_TypeName) in unions and interfaces.
+ */
+export const getInlineFragmentDoc = (
+  memberType: Grafaid.Schema.ObjectType,
+  parentType: Grafaid.Schema.UnionType | Grafaid.Schema.InterfaceType,
+  fragmentKind: 'union' | 'interface',
+): string => {
+  const memberTypeName = memberType.name
+  const parentTypeName = parentType.name
+  const kindLabel = fragmentKind === 'union' ? 'Union Member' : 'Interface Implementor'
+  const relationLabel = fragmentKind === 'union' ? 'member' : 'implementor'
+  const kindDocUrl = fragmentKind === 'union'
+    ? 'https://graphql.org/graphql-js/type/#graphqluniontype'
+    : 'https://graphql.org/graphql-js/type/#graphqlinterfacetype'
+  const kindDisplayName = fragmentKind === 'union' ? 'Union Types' : 'Interface Types'
+
+  // Build table
+  const table = markdownTable({
+    'Type': `{@link $Schema.${memberTypeName}}`,
+    'Kind': kindLabel,
+    'Parent': `{@link $Schema.${parentTypeName}}`,
+    'Path': `\`${parentTypeName} -> ${memberTypeName}\``,
+  })
+
+  // Build example based on fragment kind
+  let exampleCode: string
+  if (fragmentKind === 'union') {
+    exampleCode = `query.${parentTypeName.toLowerCase()}s({
+  __typename: true,
+  ___on_${memberTypeName}: {
+    // ... ${memberTypeName}-specific fields
+  }
+})`
+  } else {
+    exampleCode = `query.${parentTypeName.toLowerCase()}s({
+  id: true,
+  name: true,
+  ___on_${memberTypeName}: {
+    // ... ${memberTypeName}-specific fields
+  }
+})`
+  }
+
+  // Combine parts
+  const parts: string[] = []
+  parts.push(`Inline fragment selection for {@link $Schema.${memberTypeName}} ${relationLabel}.`)
+  parts.push('')
+  parts.push(
+    `When the runtime value is of type {@link $Schema.${memberTypeName}}, this selection set is applied, allowing you to select fields specific to this ${relationLabel} type.`,
+  )
+  parts.push('')
+  parts.push('# Info')
+  parts.push('')
+  parts.push(table)
+  parts.push('')
+  parts.push('@see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗')
+  parts.push(`@see {@link ${kindDocUrl} | ${kindDisplayName}} ↗`)
+  parts.push('')
+  parts.push('@example')
+  parts.push('```ts')
+  parts.push(exampleCode)
+  parts.push('```')
+
+  return parts.join('\n')
+}

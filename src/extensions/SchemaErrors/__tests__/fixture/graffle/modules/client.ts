@@ -1,5 +1,4 @@
-import { DocumentBuilder } from '../../../../../../exports/extensions/document-builder/runtime.js'
-import { TransportHttp } from '../../../../../../exports/extensions/transport-http/runtime.js'
+import { DocumentBuilder, TransportHttp } from 'graffle'
 import * as $$Utilities from '../../../../../../exports/utilities-for-generated.js'
 import * as $$Data from './data.js'
 import * as $$Scalar from './scalar.js'
@@ -17,6 +16,6 @@ const context = $$Utilities.pipe(
       },
     }),
   ctx => $$Utilities.Scalars.set(ctx, { scalars: $$Scalar.$registry }),
-) as any
+)
 
-export const create: $$Utilities.Create<typeof context> = $$Utilities.createConstructorWithContext(context)
+export const create = $$Utilities.createConstructorWithContext(context)

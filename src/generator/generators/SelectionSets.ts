@@ -11,7 +11,7 @@ import { Tex } from '../../lib/tex/_namespace.js'
 import { borderThin } from '../../lib/tex/tex.js'
 import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
-import { getOutputFieldSelectionSetDoc, getRootTypeDoc } from '../helpers/jsdoc.js'
+import { getInlineFragmentDoc, getOutputFieldSelectionSetDoc, getRootTypeDoc } from '../helpers/jsdoc.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 import { createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
 import { importUtilities } from '../helpers/pathHelpers.js'
@@ -130,11 +130,13 @@ export const ModuleGeneratorSelectionSets = createModuleGenerator(
 
 const Union = createCodeGenerator<{ type: Grafaid.Schema.UnionType }>(
   ({ config, type, code }) => {
-    const fragmentsInlineType = type.getTypes().map((type) =>
-      `${DocumentBuilderKit.Select.InlineFragment.typeConditionPRefix}${type.name}?: ${
-        H.forwardTypeParameter$Context(type)
+    const fragmentsInlineType = type.getTypes().map((memberType) => {
+      const doc = Code.TSDoc(getInlineFragmentDoc(memberType, type, 'union'))
+      const field = `${DocumentBuilderKit.Select.InlineFragment.typeConditionPRefix}${memberType.name}?: ${
+        H.forwardTypeParameter$Context(memberType)
       }`
-    ).join(`\n`)
+      return `${doc}\n${field}`
+    }).join(`\n`)
     code(Code.tsInterface({
       tsDoc: getTsDocContents(config, type),
       name: type.name,
@@ -179,12 +181,16 @@ const Interface = createCodeGenerator<{ type: Grafaid.Schema.InterfaceType }>(
       return H.outputFieldReference(field.name, `${renderName(type)}.${renderName(field)}`)
     }).join(`\n`)
     const implementorTypes = Grafaid.Schema.KindMap.getInterfaceImplementors(config.schema.kindMap, type)
-    const onTypesRendered = implementorTypes.map(type =>
-      H.outputFieldReference(
-        `${DocumentBuilderKit.Select.InlineFragment.typeConditionPRefix}${type.name}`,
-        renderName(type),
+    // Filter to only object types for inline fragment fields
+    const implementorObjectTypes = implementorTypes.filter(Grafaid.Schema.isObjectType)
+    const onTypesRendered = implementorObjectTypes.map(implementorType => {
+      const doc = Code.TSDoc(getInlineFragmentDoc(implementorType, type, 'interface'))
+      const field = H.outputFieldReference(
+        `${DocumentBuilderKit.Select.InlineFragment.typeConditionPRefix}${implementorType.name}`,
+        renderName(implementorType),
       )
-    ).join(`\n`)
+      return `${doc}\n${field}`
+    }).join(`\n`)
     code``
     code(Tex.title2(type.name))
     code``

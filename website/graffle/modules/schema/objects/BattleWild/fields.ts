@@ -19,7 +19,7 @@ export interface __typename {
 }
 
 /**
- * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.BattleWild}.
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.BattleWild}.
  *
  * The date when this battle took place, stored as a Unix timestamp.
  *
@@ -28,7 +28,7 @@ export interface __typename {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Float} |
- * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
  * | **Parent** | {@link $Schema.BattleWild} |
  * | **Path** | `BattleWild.date` |
  * | **Nullability** | Optional |
@@ -42,7 +42,7 @@ export interface date {
 }
 
 /**
- * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.BattleWild}.
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.BattleWild}.
  *
  * The unique identifier for this battle.
  *
@@ -51,7 +51,7 @@ export interface date {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.ID} |
- * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
  * | **Parent** | {@link $Schema.BattleWild} |
  * | **Path** | `BattleWild.id` |
  * | **Nullability** | Optional |
@@ -65,7 +65,7 @@ export interface id {
 }
 
 /**
- * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.BattleWild}.
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.BattleWild}.
  *
  * The trainer's Pokemon that participated in this battle.
  *
@@ -74,7 +74,7 @@ export interface id {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Pokemon} |
- * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
  * | **Parent** | {@link $Schema.BattleWild} |
  * | **Path** | `BattleWild.pokemon` |
  * | **Nullability** | Optional |
@@ -88,7 +88,7 @@ export interface pokemon {
 }
 
 /**
- * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.BattleWild}.
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.BattleWild}.
  *
  * The outcome of this wild Pokemon battle.
  *
@@ -97,7 +97,7 @@ export interface pokemon {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.BattleWildResult} |
- * | **Kind** | `Enum` ↗ {@link https://graphql.org/graphql-js/type/#graphqlenumtype | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum} ↗ |
  * | **Parent** | {@link $Schema.BattleWild} |
  * | **Path** | `BattleWild.result` |
  * | **Nullability** | Optional |
@@ -111,7 +111,7 @@ export interface result {
 }
 
 /**
- * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.BattleWild}.
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.BattleWild}.
  *
  * The trainer who engaged in this wild battle.
  *
@@ -120,7 +120,7 @@ export interface result {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Trainer} |
- * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
  * | **Parent** | {@link $Schema.BattleWild} |
  * | **Path** | `BattleWild.trainer` |
  * | **Nullability** | Optional |
@@ -134,7 +134,7 @@ export interface trainer {
 }
 
 /**
- * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.BattleWild}.
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.BattleWild}.
  *
  * The wild Pokemon encountered in this battle.
  *
@@ -143,7 +143,7 @@ export interface trainer {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Pokemon}[] |
- * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
  * | **Parent** | {@link $Schema.BattleWild} |
  * | **Path** | `BattleWild.wildPokemons` |
  * | **Nullability** | Optional |
