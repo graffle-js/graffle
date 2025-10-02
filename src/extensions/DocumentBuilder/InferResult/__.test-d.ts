@@ -1,4 +1,3 @@
-import type { Simplify } from 'type-fest'
 import type { DateScalar } from '../../../../tests/_/fixtures/scalars.js'
 import type { db } from '../../../../tests/_/fixtures/schemas/possible/db.js'
 import { assertEqual } from '../../../lib/assert-equal.js'
@@ -49,7 +48,6 @@ assertEqual<$<{ id: true; string: undefined }>, { id: null | string }>()
 // Custom Scalar
 assertEqual<$<{ date: true }>, { date: null | string }>()
 assertEqual<$WithDate<{ date: true }>, { date: null | Date }>()
-type x = Simplify<$WithDate<{ date: true }>>
 
 // List
 assertEqual<$<{ listIntNonNull: true }>, { listIntNonNull: number[] }>()

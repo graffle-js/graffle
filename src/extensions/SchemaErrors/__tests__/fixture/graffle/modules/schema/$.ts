@@ -107,7 +107,7 @@ export interface Schema<$Scalars extends $.Schema.Scalar.Registry = $$Scalar.$Re
     Int: $Types.Int
     String: $Types.String
   }
-  scalarRegistry: $$Scalar.$Registry
+  scalarRegistry: $Scalars
   extensions: {
     SchemaErrors: {
       objectNames: 'ErrorOne' | 'ErrorTwo'

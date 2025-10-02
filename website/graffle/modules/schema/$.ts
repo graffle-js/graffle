@@ -64,6 +64,6 @@ export interface Schema<$Scalars extends $.Schema.Scalar.Registry = $$Scalar.$Re
     Int: $Types.Int;
     Boolean: $Types.Boolean;
   };
-  scalarRegistry: $$Scalar.$Registry;
+  scalarRegistry: $Scalars;
   extensions: $.GlobalRegistry.TypeExtensions;
 }

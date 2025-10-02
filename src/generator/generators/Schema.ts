@@ -288,7 +288,7 @@ const generateSchemaNamespaceModule = (config: Config, kindMap: Grafaid.Schema.K
     interfaces,
     scalarNamesUnion: Code.tsUnionItems(scalars.map(_ => _[0]).map(Code.string)),
     scalars,
-    scalarRegistry: `$$Scalar.$Registry`,
+    scalarRegistry: `$Scalars`,
     extensions: `$.GlobalRegistry.TypeExtensions`,
   }
 
