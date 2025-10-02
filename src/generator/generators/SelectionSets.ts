@@ -181,15 +181,22 @@ const Interface = createCodeGenerator<{ type: Grafaid.Schema.InterfaceType }>(
       return H.outputFieldReference(field.name, `${renderName(type)}.${renderName(field)}`)
     }).join(`\n`)
     const implementorTypes = Grafaid.Schema.KindMap.getInterfaceImplementors(config.schema.kindMap, type)
-    // Filter to only object types for inline fragment fields
-    const implementorObjectTypes = implementorTypes.filter(Grafaid.Schema.isObjectType)
-    const onTypesRendered = implementorObjectTypes.map(implementorType => {
-      const doc = Code.TSDoc(getInlineFragmentDoc(implementorType, type, 'interface'))
-      const field = H.outputFieldReference(
-        `${DocumentBuilderKit.Select.InlineFragment.typeConditionPRefix}${implementorType.name}`,
-        renderName(implementorType),
-      )
-      return `${doc}\n${field}`
+    const onTypesRendered = implementorTypes.map(implementorType => {
+      // Only generate JSDoc for object types, not for interface implementors
+      if (Grafaid.Schema.isObjectType(implementorType)) {
+        const doc = Code.TSDoc(getInlineFragmentDoc(implementorType, type, 'interface'))
+        const field = H.outputFieldReference(
+          `${DocumentBuilderKit.Select.InlineFragment.typeConditionPRefix}${implementorType.name}`,
+          renderName(implementorType),
+        )
+        return `${doc}\n${field}`
+      } else {
+        // Interface implementors don't get JSDoc (they're intermediate types in hierarchy)
+        return H.outputFieldReference(
+          `${DocumentBuilderKit.Select.InlineFragment.typeConditionPRefix}${implementorType.name}`,
+          renderName(implementorType),
+        )
+      }
     }).join(`\n`)
     code``
     code(Tex.title2(type.name))

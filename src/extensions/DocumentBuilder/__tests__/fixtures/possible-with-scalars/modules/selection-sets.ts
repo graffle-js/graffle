@@ -6859,6 +6859,9 @@ export interface InterfaceGrandparent<
    * ```
    */
   ___on_ObjectParent?: ObjectParent<_$Context>
+  ___on_InterfaceChildA?: InterfaceChildA<_$Context>
+  ___on_InterfaceChildB?: InterfaceChildB<_$Context>
+  ___on_InterfaceParent?: InterfaceParent<_$Context>
 
   /**
    * Inline fragments for field groups.
@@ -7020,6 +7023,8 @@ export interface InterfaceParent<
    * ```
    */
   ___on_ObjectParent?: ObjectParent<_$Context>
+  ___on_InterfaceChildA?: InterfaceChildA<_$Context>
+  ___on_InterfaceChildB?: InterfaceChildB<_$Context>
 
   /**
    * Inline fragments for field groups.
