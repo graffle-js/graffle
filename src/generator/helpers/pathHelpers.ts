@@ -3,26 +3,38 @@ import type { Config } from '../config/config.js'
 import { $ } from './identifiers.js'
 
 /**
- * Computes relative import path from a source file to a target module specifier.
+ * Computes the import path from a source file to a target module specifier.
  *
  * This handles:
- * - Calculating proper depth (number of ../ needed) from the source file's location
+ * - Bare module specifiers (package imports): Kept as-is with extension added
+ * - Relative paths: Calculating proper depth (number of ../ needed) from the source file's location
  * - Respecting the config's importFormat setting (.js/.ts/no extension)
- * - Working with bare module specifiers that get resolved through the module system
  *
  * @param config - Generator config containing importFormat settings
  * @param sourceFilePath - Path of source file relative to modules/ directory
  *   Examples: "schema/scalars/Date.ts", "schema/objects/Pokemon/fields.ts"
- * @param targetModuleSpecifier - Target bare module specifier (without extension)
+ * @param targetModuleSpecifier - Target module specifier (bare or relative, without extension)
  *   Examples: "graffle/utilities-for-generated", "../scalar"
- * @returns Relative import path with correct extension based on config
- *   Examples: "../../../graffle/utilities-for-generated.js", "../../scalar.js"
+ * @returns Import path with correct extension based on config
+ *   Examples: "graffle/utilities-for-generated", "../../scalar.js"
  */
 export const getRelativeImportPath = (
   config: Config,
   sourceFilePath: string,
   targetModuleSpecifier: string,
 ): string => {
+  // Check if this is a bare module specifier (package import)
+  // Bare specifiers don't start with '.', '/', or '~'
+  const isBareSpecifier = !targetModuleSpecifier.startsWith('.')
+    && !targetModuleSpecifier.startsWith('/')
+    && !targetModuleSpecifier.startsWith('~')
+
+  // If it's a bare specifier, return it as-is (no extension needed for package imports)
+  if (isBareSpecifier) {
+    return targetModuleSpecifier
+  }
+
+  // For relative/absolute paths, apply the relative path logic
   // Calculate depth from the source file path
   // Count the number of directory separators to determine nesting level
   const pathSegments = sourceFilePath.split('/')
@@ -55,14 +67,14 @@ export const getRelativeImportPath = (
 }
 
 /**
- * Convenience function to get the relative import path to the utilities module.
+ * Convenience function to get the import path to the utilities module.
  * This is a common operation in generated files that need to import runtime utilities.
  *
  * @param config - Generator config
  * @param sourceFilePath - Path of source file relative to modules/ directory
  *   Examples: "schema/scalars/Date.ts", "schema/objects/Pokemon/fields.ts"
- * @returns Relative import path to utilities with correct extension
- *   Example: "../../../graffle/utilities-for-generated.js"
+ * @returns Import path to utilities with correct extension
+ *   Example: "graffle/utilities-for-generated" (when using bare specifier in config)
  */
 export const getUtilitiesPath = (config: Config, sourceFilePath: string): string => {
   return getRelativeImportPath(

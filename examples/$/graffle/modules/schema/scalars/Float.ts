@@ -1,1 +1,1 @@
-export type { Float } from '../../graffle/utilities-for-generated.js'
+export type { Float } from 'graffle/utilities-for-generated'

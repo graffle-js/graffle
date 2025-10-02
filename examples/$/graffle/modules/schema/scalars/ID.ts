@@ -1,1 +1,1 @@
-export type { ID } from '../../graffle/utilities-for-generated.js'
+export type { ID } from 'graffle/utilities-for-generated'
