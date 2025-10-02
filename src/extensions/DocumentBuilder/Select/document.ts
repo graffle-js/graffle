@@ -1,7 +1,7 @@
 import type { OperationTypeNode } from 'graphql'
-import { Grafaid } from '../../../lib/grafaid/_namespace.js'
+import { Grafaid } from '../../../lib/grafaid/$.js'
 import type { AssertExtendsObject, FirstNonUnknownNever, Values } from '../../../lib/prelude.js'
-import type { Select } from './__.js'
+import type { Select } from './$.js'
 import type { DefaultContext } from './context.js'
 
 export type OperationName = string

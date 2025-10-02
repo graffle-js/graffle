@@ -2,9 +2,9 @@ import { describe, expect, expectTypeOf } from 'vitest'
 import { DateScalar } from '../../../../tests/_/fixtures/scalars.js'
 import { db } from '../../../../tests/_/fixtures/schemas/possible/db.js'
 import { test as testBase } from '../../../../tests/_/helpers.js'
-import type { Grafaid } from '../../../lib/grafaid/_namespace.js'
+import type { Grafaid } from '../../../lib/grafaid/$.js'
 import { TransportMemory } from '../../TransportMemory/TransportMemory.js'
-import { Possible } from '../__tests__/fixtures/possible/_namespace.js'
+import { Possible } from '../__tests__/fixtures/possible/$.js'
 
 const createPossible = (schema: Grafaid.Schema.Schema) =>
   Possible

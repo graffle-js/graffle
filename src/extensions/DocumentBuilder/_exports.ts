@@ -1,7 +1,0 @@
-export * from './InferResult/__.js'
-export * from './requestMethods/document.js'
-export * from './requestMethods/requestMethods.js'
-export * from './Select/__.js'
-export * from './SelectGraphQLMapper/_namespace.js'
-export { createStaticRootType } from './staticBuilder.js'
-export { Var } from './var/$.js'

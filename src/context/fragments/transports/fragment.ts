@@ -2,7 +2,7 @@ import type { Configurator } from '../../../lib/configurator/configurator.js'
 import { type EmptyObject, emptyObject } from '../../../lib/prelude.js'
 import type { RequestPipeline } from '../../../requestPipeline/RequestPipeline.js'
 import { requestPipelineBaseDefinition } from '../../../requestPipeline/RequestPipeline.js'
-import type { Transport } from './dataType/_namespace.js'
+import type { Transport } from './dataType/$.js'
 
 export interface ContextTransportsEmpty extends ContextTransports {
   readonly registry: EmptyObject

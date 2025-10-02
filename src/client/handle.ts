@@ -8,9 +8,9 @@ import {
   readErrorCategoryOutputChannel,
 } from '../context/fragments/configuration/output/configuration.js'
 import type { Normalized } from '../exports/index.js'
-import type { Anyware } from '../lib/anyware/_namespace.js'
-import { Errors } from '../lib/errors/_namespace.js'
-import type { Grafaid } from '../lib/grafaid/_namespace.js'
+import type { Anyware } from '../lib/anyware/$.js'
+import { Errors } from '../lib/errors/$.js'
+import type { Grafaid } from '../lib/grafaid/$.js'
 import type { SomeObjectData } from '../lib/grafaid/graphql.js'
 import type { GraphQLExecutionResultError } from '../lib/grafaid/graphql.js'
 import {
@@ -20,8 +20,8 @@ import {
   type GetOrNever,
   type Values,
 } from '../lib/prelude.js'
-import type { RequestPipeline } from '../requestPipeline/_namespace.js'
-import type { RequestResult } from '../types/RequestResult/__.js'
+import type { RequestPipeline } from '../requestPipeline/$.js'
+import type { RequestResult } from '../types/RequestResult/$.js'
 
 export type GraffleExecutionResultEnvelope = {
   errors?: ReadonlyArray<

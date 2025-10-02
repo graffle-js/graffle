@@ -14,7 +14,7 @@ This example shows how to configure output to use the envelope.
 import './graffle/modules/global.js'
 // ---cut---
 
-import { Graffle } from './graffle/_namespace.js'
+import { Graffle } from './graffle/$.js'
 
 const pokemon = Graffle.create({
   output: {

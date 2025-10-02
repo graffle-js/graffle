@@ -1,7 +1,7 @@
 import type { SchemaDrivenDataMap } from '../../../../exports/utilities-for-generated.js'
-import type { Grafaid } from '../../../../lib/grafaid/_namespace.js'
+import type { Grafaid } from '../../../../lib/grafaid/$.js'
 import { Nodes } from '../../../../lib/grafaid/_Nodes.js'
-import { Select } from '../../Select/__.js'
+import { Select } from '../../Select/$.js'
 import type { GraphQLPostOperationMapper } from '../mapper.js'
 import { collectForInlineFragmentLike } from './_collect.js'
 

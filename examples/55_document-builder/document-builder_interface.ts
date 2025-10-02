@@ -2,7 +2,7 @@
  * This example shows how to work with interface types.
  */
 
-import { Graffle } from '../$/graffle/_namespace.js'
+import { Graffle } from '../$/graffle/$.js'
 import { show } from '../$/helpers.js'
 
 const pokemon = Graffle.create()

@@ -1,5 +1,5 @@
 import * as Path from 'node:path'
-import { Errors } from '../../lib/errors/_namespace.js'
+import { Errors } from '../../lib/errors/$.js'
 import { isPathToADirectory, toAbsolutePath } from '../../lib/fsp.js'
 import { importFirst } from '../../lib/import-first.js'
 import { isError } from '../../lib/prelude.js'

@@ -1,10 +1,10 @@
 import { Extension } from '../../exports/extension.js'
-import { Errors } from '../../lib/errors/_namespace.js'
+import { Errors } from '../../lib/errors/$.js'
 import { normalizeRequestToNode } from '../../lib/grafaid/request.js'
 // import { type ExcludeNullAndUndefined, isString } from '../../lib/prelude.js'
 import { isRecordLikeObject, isString } from '../../lib/prelude.js'
-// import type { RequestPipelineBaseInterceptor } from '../../requestPipeline/_namespace.js'
-import { SchemaDrivenDataMap } from '../../types/SchemaDrivenDataMap/_namespace.js'
+// import type { RequestPipelineBaseInterceptor } from '../../requestPipeline/$.js'
+import { SchemaDrivenDataMap } from '../../types/SchemaDrivenDataMap/$.js'
 // import type { GeneratedExtensions } from './global.js'
 import { injectTypenameOnRootResultFields } from './injectTypenameOnRootResultFields.js'
 

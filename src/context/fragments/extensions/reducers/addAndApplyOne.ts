@@ -1,9 +1,9 @@
-// import type { Anyware } from '../../../../lib/anyware/_namespace.js'
+// import type { Anyware } from '../../../../lib/anyware/$.js'
 // import { type UnknownOrAnyToNever } from '../../../../lib/prelude.js'
 import type { Context } from '../../../context.js'
-// import type { Properties } from '../../properties/_namespace.js'
-// import type { Transports } from '../../transports/_namespace.js'
-import type { Extension } from '../dataType/_namespace.js'
+// import type { Properties } from '../../properties/$.js'
+// import type { Transports } from '../../transports/$.js'
+import type { Extension } from '../dataType/$.js'
 import type { AddAndApplyMany } from './addAndApplyMany.js'
 
 // dprint-ignore

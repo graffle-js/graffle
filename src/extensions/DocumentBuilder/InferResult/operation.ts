@@ -1,5 +1,5 @@
 import type { OperationTypeNode } from 'graphql'
-import type { Grafaid } from '../../../lib/grafaid/_namespace.js'
+import type { Grafaid } from '../../../lib/grafaid/$.js'
 import { type ExcludeNull } from '../../../lib/prelude.js'
 import type { OutputObjectLike } from './OutputObjectLike.js'
 

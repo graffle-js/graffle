@@ -14,7 +14,7 @@ This example shows how to use special fields to write GraphQL document directive
 import './graffle/modules/global.js'
 // ---cut---
 
-import { Graffle } from './graffle/_namespace.js'
+import { Graffle } from './graffle/$.js'
 
 const pokemon = Graffle.create()
 

@@ -1,6 +1,6 @@
 import { Extension } from '../../exports/extension.js'
-import type { Anyware } from '../../lib/anyware/_namespace.js'
-import type { Grafaid } from '../../lib/grafaid/_namespace.js'
+import type { Anyware } from '../../lib/anyware/$.js'
+import type { Grafaid } from '../../lib/grafaid/$.js'
 import { print } from '../../lib/grafaid/document.js'
 import { execute } from '../../lib/grafaid/execute.js'
 import type { RequestPipeline } from '../../requestPipeline/RequestPipeline.js'

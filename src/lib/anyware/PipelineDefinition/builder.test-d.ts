@@ -3,7 +3,7 @@ import { Configurator } from '../../configurator/configurator.js'
 import { _ } from '../../prelude.js'
 import type { initialInput } from '../_.test-helpers.js'
 import { results, slots, stepA, stepB } from '../_.test-helpers.js'
-import { PipelineDefinition } from './_namespace.js'
+import { PipelineDefinition } from './$.js'
 import type { Config } from './Config.js'
 
 const b0 = PipelineDefinition.create().input<initialInput>()

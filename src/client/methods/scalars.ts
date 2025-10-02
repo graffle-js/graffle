@@ -1,7 +1,7 @@
 import type { Context } from '../../context/context.js'
-import type { Scalars } from '../../context/fragments/scalars/_namespace.js'
+import type { Scalars } from '../../context/fragments/scalars/$.js'
 import type { GlobalRegistry } from '../../types/GlobalRegistry/GlobalRegistry.js'
-import { Schema } from '../../types/Schema/_namespace.js'
+import { Schema } from '../../types/Schema/$.js'
 import type { Client } from '../client.js'
 
 export interface ScalarMethod<

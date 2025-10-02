@@ -1,8 +1,8 @@
 import { type Config, createConfig } from '../config/config.js'
 import type { ConfigInit } from '../config/configInit.js'
-import { ModuleGenerator_exports } from '../generators/_exports.js'
+import { ModuleGenerator$$ } from '../generators/$$.js'
+import { ModuleGenerator$ } from '../generators/$.js'
 import { ModuleGenerator_internals } from '../generators/_internals.js'
-import { ModuleGenerator_namespace } from '../generators/_namespace.js'
 import { ModuleGeneratorArgumentsMap } from '../generators/ArgumentsMap.js'
 import { ModuleGeneratorClient } from '../generators/Client.js'
 import { ModuleGeneratorData } from '../generators/Data.js'
@@ -27,8 +27,8 @@ const moduleGenerators = [
   ModuleGeneratorScalar,
   // Packaging Stuff
   ModuleGenerator_internals,
-  ModuleGenerator_exports,
-  ModuleGenerator_namespace,
+  ModuleGenerator$$,
+  ModuleGenerator$,
   // Schema Stuff
   ModuleGeneratorSchema,
   ModuleGeneratorSchemaDrivenDataMap,

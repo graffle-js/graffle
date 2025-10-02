@@ -1,3 +1,3 @@
-import type { Grafaid } from '../../lib/grafaid/_namespace.js'
+import type { Grafaid } from '../../lib/grafaid/$.js'
 
 export type KindRenderers = Record<keyof Grafaid.Schema.KindMap['list'], Function | null>

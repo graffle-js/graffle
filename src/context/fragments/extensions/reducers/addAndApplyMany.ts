@@ -1,12 +1,12 @@
 import type { Configurator } from '../../../../lib/configurator/configurator.js'
 import { type Tuple, type UnionIgnoreAnyOrUnknown, type Writeable } from '../../../../lib/prelude.js'
 import type { Context } from '../../../context.js'
-import { Configuration } from '../../configuration/_namespace.js'
-import { Properties } from '../../properties/_namespace.js'
-import { RequestInterceptors } from '../../requestInterceptors/_namespace.js'
-import { Transports } from '../../transports/_namespace.js'
+import { Configuration } from '../../configuration/$.js'
+import { Properties } from '../../properties/$.js'
+import { RequestInterceptors } from '../../requestInterceptors/$.js'
+import { Transports } from '../../transports/$.js'
 import type { Data } from '../../transports/dataType/data.js'
-import type { Extension } from '../dataType/_namespace.js'
+import type { Extension } from '../dataType/$.js'
 
 // dprint-ignore
 export type AddAndApplyMany<

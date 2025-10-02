@@ -1,7 +1,7 @@
-export { type TypedDocument } from '../lib/grafaid/typed-document/__.js'
+export { type TypedDocument } from '../lib/grafaid/typed-document/$.js'
 // todo figure this export out. Was just put there to resolve a type error about "...cannot be named..."
 export { type Client, type Create } from '../client/client.js'
-export { type Normalized } from '../context/fragments/configuration/output/_exports.js'
+export { type Normalized } from '../context/fragments/configuration/output/$$.js'
 export { DocumentBuilder } from '../extensions/DocumentBuilder/DocumentBuilder.js'
 export type * from '../extensions/DocumentBuilder/DocumentBuilder.js'
 export { TransportHttp } from '../extensions/TransportHttp/TransportHttp.js'

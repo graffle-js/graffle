@@ -9,7 +9,7 @@
 import './graffle/modules/global.js'
 // ---cut---
 
-import { Graffle } from './graffle/_namespace.js'
+import { Graffle } from './graffle/$.js'
 
 const graffle = Graffle
   .create()

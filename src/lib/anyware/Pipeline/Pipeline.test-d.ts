@@ -1,7 +1,7 @@
 import { expectTypeOf, test } from 'vitest'
 import type { results } from '../_.test-helpers.js'
 import { type initialInput, slots, stepA } from '../_.test-helpers.js'
-import { PipelineDefinition } from '../_exports.js'
+import { PipelineDefinition } from '../$$.js'
 import type { Config } from '../PipelineDefinition/Config.js'
 import type { StepRunner } from '../StepRunner.js'
 import { Pipeline } from './Pipeline.js'

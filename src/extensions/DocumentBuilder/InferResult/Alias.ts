@@ -1,6 +1,6 @@
 import type { Tuple, UnionMerge, ValuesOrEmptyObject } from '../../../lib/prelude.js'
-import type { Schema } from '../../../types/Schema/_namespace.js'
-import type { Select } from '../Select/__.js'
+import type { Schema } from '../../../types/Schema/$.js'
+import type { Select } from '../Select/$.js'
 import type { OutputField } from './OutputField.js'
 
 // dprint-ignore

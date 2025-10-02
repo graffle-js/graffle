@@ -2,7 +2,7 @@ import { type Client as BaseClient, createConstructorWithContext } from '../../c
 import { type Context as BaseContext } from '../../context/context.js'
 import { contextEmpty } from '../../context/ContextEmpty.js'
 import { addAndApplyMany } from '../../context/fragments/extensions/fragment.js'
-import type { ConfigManager } from '../../lib/config-manager/_namespace.js'
+import type { ConfigManager } from '../../lib/config-manager/$.js'
 import type { PartialOrUndefined } from '../../lib/prelude.js'
 import { DocumentBuilder } from '../extensions/document-builder/runtime.js'
 import { TransportHttp } from '../extensions/transport-http/runtime.js'

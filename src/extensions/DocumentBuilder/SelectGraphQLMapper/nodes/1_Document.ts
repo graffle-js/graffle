@@ -1,7 +1,7 @@
 import type { Schema, SchemaDrivenDataMap } from '../../../../exports/utilities-for-generated.js'
-import type { Grafaid } from '../../../../lib/grafaid/_namespace.js'
+import type { Grafaid } from '../../../../lib/grafaid/$.js'
 import { Nodes } from '../../../../lib/grafaid/_Nodes.js'
-import type { Select } from '../../Select/__.js'
+import type { Select } from '../../Select/$.js'
 import { toGraphQLOperationDefinition } from './2_OperationDefinition.js'
 
 const defaultOperationName = `$default`

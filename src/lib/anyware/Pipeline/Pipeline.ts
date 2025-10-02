@@ -5,8 +5,8 @@ import type {
   IntersectionIgnoreNeverOrAny,
   Tuple,
 } from '../../prelude.js'
-import type { PipelineDefinition } from '../_exports.js'
-import type { Overload } from '../Overload/_namespace.js'
+import type { PipelineDefinition } from '../$$.js'
+import type { Overload } from '../Overload/$.js'
 import type { Config } from '../PipelineDefinition/Config.js'
 import type { Step } from '../Step.js'
 import type { StepDefinition } from '../StepDefinition.js'
@@ -95,7 +95,7 @@ export namespace Pipeline {
     readonly input: VAR_Steps extends Tuple.NonEmpty
       ? VAR_Steps[0]['input']
       : $PipelineDef['input']
-    readonly output: 
+    readonly output:
       VAR_Steps extends Tuple.NonEmpty
         ? Awaited<Tuple.GetLastValue<VAR_Steps>['output']>
         : $PipelineDef['input']
@@ -170,7 +170,7 @@ export namespace Pipeline {
       }
     // 2. The output
     & IntersectionIgnoreNeverOrAny<$Overload['steps'][$StepName]['output']>
-      
+
 
     : never
 

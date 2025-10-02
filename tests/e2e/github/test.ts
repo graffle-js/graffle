@@ -6,7 +6,7 @@
  * If such errors are present, they will be caught by our type check step. Then we can come here to debug further.
  */
 
-import { Github } from './graffle/_namespace.js'
+import { Github } from './graffle/$.js'
 
 const github = Github.create({ check: { preflight: false } })
 

@@ -1,5 +1,5 @@
 import { assertEqual } from '../assert-equal.js'
-import type { TypeFunction } from './__.js'
+import type { TypeFunction } from './$.js'
 
 interface a extends TypeFunction {
   // @ts-expect-error

@@ -1,6 +1,6 @@
 import type { Tuple } from '../../prelude.js'
 import type { Result } from '../Result.js'
-import type { PipelineDefinition } from './_namespace.js'
+import type { PipelineDefinition } from './$.js'
 
 export namespace Utilities {
   // dprint-ignore

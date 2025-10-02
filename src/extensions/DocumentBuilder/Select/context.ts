@@ -6,7 +6,7 @@
  * - Future extensibility for other context-dependent features
  */
 
-import type { Schema } from '../../../types/Schema/_namespace.js'
+import type { Schema } from '../../../types/Schema/$.js'
 
 /**
  * Context type that flows through all selection set types

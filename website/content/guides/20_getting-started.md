@@ -198,13 +198,13 @@ Graffle gives you utilities beyond the direct client itself. For example you can
 ::: code-group
 
 ```ts twoslash [Graffle Namespace]
-import { Graffle } from './graffle/_namespace.js'
+import { Graffle } from './graffle/$.js'
 
 const PokemonSelection = Graffle.Select.Pokemon({ name: true })
 ```
 
 ```ts twoslash [Barrel Import]
-import { Select } from './graffle/_exports.js'
+import { Select } from './graffle/$$.js'
 
 const PokemonSelection = Select.Pokemon({ name: true })
 ```
@@ -216,13 +216,13 @@ You can also do the same thing at the type level which can sometimes be handy wh
 ::: code-group
 
 ```ts twoslash [Graffle Namespace]
-import { type Graffle } from './graffle/_namespace.js'
+import { type Graffle } from './graffle/$.js'
 
 type Pokemon = Graffle.Select.Pokemon<{ name: true }>
 ```
 
 ```ts twoslash [Barrel Import]
-import { type Select } from './graffle/_exports.js'
+import { type Select } from './graffle/$$.js'
 
 type Pokemon = Select.Pokemon<{ name: true }>
 ```

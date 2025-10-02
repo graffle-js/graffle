@@ -9,9 +9,9 @@
 // import type { UnionToIntersection } from '../../../lib/prelude.js'
 import type { ExtractFromOperation } from '#extensions/DocumentBuilder/var/extract.js'
 import type { Simplify, UnionToIntersection } from 'type-fest'
-import type { SchemaDrivenDataMap } from '../../../types/SchemaDrivenDataMap/_namespace.js'
+import type { SchemaDrivenDataMap } from '../../../types/SchemaDrivenDataMap/$.js'
 import type { PropertySignature } from '../PropertySignature.js'
-import type { Select } from '../Select/__.js'
+import type { Select } from '../Select/$.js'
 
 /**
  * Infer variables from a query operation selection set.

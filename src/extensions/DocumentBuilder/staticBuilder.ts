@@ -1,7 +1,7 @@
 import { print } from '@0no-co/graphql.web'
 import type { OperationTypeNode } from 'graphql'
 import { isSymbol } from '../../lib/prelude.js'
-import { Select } from './Select/__.js'
+import { Select } from './Select/$.js'
 import type { Options } from './SelectGraphQLMapper/nodes/1_Document.js'
 import { toGraphQLDocument } from './SelectGraphQLMapper/nodes/1_Document.js'
 import { defaults } from './staticBuilderDefaults.js'

@@ -3,7 +3,7 @@
  */
 
 import { Throws } from 'graffle/extensions/throws'
-import { Graffle } from '../$/graffle/_namespace.js'
+import { Graffle } from '../$/graffle/$.js'
 import { interceptAndShowUncaughtErrors, show } from '../$/show.js'
 
 interceptAndShowUncaughtErrors()

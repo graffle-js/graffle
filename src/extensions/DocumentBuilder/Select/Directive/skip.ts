@@ -1,4 +1,4 @@
-import { Schema } from '../../../../types/Schema/_namespace.js'
+import { Schema } from '../../../../types/Schema/$.js'
 import type { Definition } from './$types.js'
 
 export const Skip: Definition = {

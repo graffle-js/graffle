@@ -1,6 +1,6 @@
-import { Transport } from '../../context/fragments/transports/dataType/_namespace.js' // TODO import from entrypoint
+import { Transport } from '../../context/fragments/transports/dataType/$.js' // TODO import from entrypoint
 import { Extension } from '../../exports/extension.js'
-import type { Grafaid } from '../../lib/grafaid/_namespace.js'
+import type { Grafaid } from '../../lib/grafaid/$.js'
 import { OperationTypeToAccessKind, print } from '../../lib/grafaid/document.js'
 import { getRequestEncodeSearchParameters, postRequestEncodeBody } from '../../lib/grafaid/http/http.js'
 import { getRequestHeadersRec, parseExecutionResult, postRequestHeadersRec } from '../../lib/grafaid/http/http.js'

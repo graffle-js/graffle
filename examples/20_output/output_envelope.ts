@@ -2,7 +2,7 @@
  * This example shows how to configure output to use the envelope.
  */
 
-import { Graffle } from '../$/graffle/_namespace.js'
+import { Graffle } from '../$/graffle/$.js'
 import { show } from '../$/helpers.js'
 
 const pokemon = Graffle.create({

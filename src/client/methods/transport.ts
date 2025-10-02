@@ -1,5 +1,5 @@
 import type { Context } from '../../context/context.js'
-import { Transports } from '../../context/fragments/transports/_namespace.js'
+import { Transports } from '../../context/fragments/transports/$.js'
 import type { ContextTransports, ContextTransportsNonEmpty } from '../../context/fragments/transports/fragment.js'
 import type { AddMany } from '../../context/fragments/transports/reducers/addMany.js'
 import type { Exact, Objekt, StringKeyof } from '../../lib/prelude.js'

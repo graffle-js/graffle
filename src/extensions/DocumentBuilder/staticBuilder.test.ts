@@ -1,10 +1,10 @@
-import type { Grafaid } from '#lib/grafaid/_namespace.js'
+import type { Grafaid } from '#lib/grafaid/$.js'
 import { Ts } from '@wollybeard/kit'
 import { Test } from '@wollybeard/kit/test'
 import { OperationTypeNode } from 'graphql'
 import { expect, test } from 'vitest'
-import { PossibleWithScalars } from './__tests__/fixtures/possible-with-scalars/_namespace.js'
-import { Possible } from './__tests__/fixtures/possible/_namespace.js'
+import { PossibleWithScalars } from './__tests__/fixtures/possible-with-scalars/$.js'
+import { Possible } from './__tests__/fixtures/possible/$.js'
 import { createStaticRootType } from './staticBuilder.js'
 import { Var } from './var/$.js'
 

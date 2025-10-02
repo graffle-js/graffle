@@ -1,7 +1,7 @@
 // TODO: Restore @wollybeard/kit import once it becomes a production dependency
 // import type { Obj, Ts } from '@wollybeard/kit'
-import type { SchemaDrivenDataMap } from '../../../types/SchemaDrivenDataMap/_namespace.js'
-import type { Select } from '../Select/__.js'
+import type { SchemaDrivenDataMap } from '../../../types/SchemaDrivenDataMap/$.js'
+import type { Select } from '../Select/$.js'
 import type { Builder as VarBuilder, BuilderSentinel } from './var.js'
 
 /**

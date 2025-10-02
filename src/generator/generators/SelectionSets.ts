@@ -1,13 +1,13 @@
 // todo: generate in JSDoc how the feature maps to GQL syntax.
 // todo: on union fields, JSDoc that mentions the syntax `on*`
 
-// todo import from '../../extensions/DocumentBuilder/kit/__.js'
-import { DocumentBuilderKit } from '../../extensions/DocumentBuilder/_namespace.js'
+// todo import from '../../extensions/DocumentBuilder/kit/$.js'
+import { DocumentBuilderKit } from '../../extensions/DocumentBuilder/$.js'
 import { Code } from '../../lib/Code.js'
-import { Grafaid } from '../../lib/grafaid/_namespace.js'
+import { Grafaid } from '../../lib/grafaid/$.js'
 import { analyzeArgsNullability } from '../../lib/grafaid/schema/args.js'
 import { entries, pick, values } from '../../lib/prelude.js'
-import { Tex } from '../../lib/tex/_namespace.js'
+import { Tex } from '../../lib/tex/$.js'
 import { borderThin } from '../../lib/tex/tex.js'
 import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'

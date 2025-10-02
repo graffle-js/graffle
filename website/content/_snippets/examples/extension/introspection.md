@@ -10,7 +10,7 @@ import './graffle/modules/global.js'
 // ---cut---
 
 import { Introspection } from 'graffle/extensions/introspection'
-import { Graffle } from './graffle/_namespace.js'
+import { Graffle } from './graffle/$.js'
 
 const pokemon = Graffle.create().use(Introspection())
 

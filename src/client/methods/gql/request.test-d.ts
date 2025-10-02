@@ -4,9 +4,9 @@ import {
   RequiredConfigurationTransportB,
 } from '../../../../tests/_/fixtures/transports.js'
 import { g0 } from '../../../../tests/_/helpers.js'
-import type { Context } from '../../../context/_namespace.js'
+import type { Context } from '../../../context/$.js'
 import { assertType } from '../../../lib/assert-equal.js'
-import type { Grafaid } from '../../../lib/grafaid/_namespace.js'
+import type { Grafaid } from '../../../lib/grafaid/$.js'
 import { undefinedAs } from '../../../lib/prelude.js'
 
 const g1 = g0.transport(ATransport)

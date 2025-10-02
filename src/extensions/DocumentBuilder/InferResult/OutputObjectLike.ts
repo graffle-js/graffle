@@ -2,8 +2,8 @@ import type { IsNever } from 'type-fest'
 import { assertEqual } from '../../../lib/assert-equal.js'
 import type { AssertExtendsObject, GetOrNever, PropertyKeyToString, StringKeyof } from '../../../lib/prelude.js'
 import type { TSErrorDescriptive } from '../../../lib/ts-error.js'
-import type { Schema } from '../../../types/Schema/_namespace.js'
-import type { Select } from '../Select/__.js'
+import type { Schema } from '../../../types/Schema/$.js'
+import type { Select } from '../Select/$.js'
 import type { Alias } from './Alias.js'
 import type {
   IsArgumentsOrDirectiveKey,

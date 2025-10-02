@@ -1,7 +1,7 @@
 import type { ArgsObject } from './arguments.js'
 import type { DefaultContext } from './context.js'
-import type { Directive } from './Directive/__.js'
-import type { Indicator } from './Indicator/__.js'
+import type { Directive } from './Directive/$.js'
+import type { Indicator } from './Indicator/$.js'
 import { type SelectAlias } from './SelectAlias.js'
 
 export type RootType<$Context = DefaultContext> = AnySelectionSet<$Context>

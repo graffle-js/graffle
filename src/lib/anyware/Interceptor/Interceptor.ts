@@ -1,6 +1,6 @@
 import type { Simplify } from 'type-fest'
 import type { Deferred, MaybePromise } from '../../prelude.js'
-import type { Pipeline } from '../_exports.js'
+import type { Pipeline } from '../$$.js'
 import type { ResultSuccess } from '../Result.js'
 import type { Step } from '../Step.js'
 import type { StepTrigger } from '../StepTrigger.js'

@@ -1,4 +1,4 @@
-import type { Extension } from './__.js'
+import type { Extension } from './$.js'
 
 export namespace States {
   export interface Empty extends Extension {

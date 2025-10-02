@@ -1,9 +1,9 @@
-import { Var } from '#extensions/DocumentBuilder/_exports.js'
 import { Test } from '@wollybeard/kit/test'
 import { expect } from 'vitest'
-import { Grafaid } from '../../../lib/grafaid/_namespace.js'
-import { Possible } from '../__tests__/fixtures/possible/_namespace.js'
-import { Select } from '../Select/__.js'
+import { Grafaid } from '../../../lib/grafaid/$.js'
+import { Var } from '../$$.js'
+import { Possible } from '../__tests__/fixtures/possible/$.js'
+import { Select } from '../Select/$.js'
 import { toGraphQLDocument } from './nodes/1_Document.js'
 
 const $ = Var.$

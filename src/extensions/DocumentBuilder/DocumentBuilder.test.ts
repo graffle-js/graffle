@@ -2,7 +2,7 @@ import { describe, expect } from 'vitest'
 import { test } from '../../../tests/_/helpers.js'
 import { Graffle } from '../../exports/index.js'
 import { Throws } from '../Throws/Throws.js'
-import { Possible } from './__tests__/fixtures/possible/_namespace.js'
+import { Possible } from './__tests__/fixtures/possible/$.js'
 import { DocumentBuilder } from './DocumentBuilder.js'
 
 describe(`without a registered client, document builder is not statically available but still works at runtime`, () => {

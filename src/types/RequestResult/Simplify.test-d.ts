@@ -1,7 +1,7 @@
 import type { ContextEmpty } from '../../context/ContextEmpty.js'
 import type { Add } from '../../context/fragments/scalars/fragment.js'
 import { assertEqual } from '../../lib/assert-equal.js'
-import type { Schema } from '../Schema/_namespace.js'
+import type { Schema } from '../Schema/$.js'
 import type { _SimplifyExcept, Simplify, SimplifyWithEmptyContext } from './Simplify.js'
 
 // dprint-ignore

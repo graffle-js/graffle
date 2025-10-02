@@ -29,8 +29,8 @@ import { isString } from '../prelude.js'
 import { Kind } from './document/kind.js'
 import { OperationTypeNode } from './document/OperationTypeNode.js'
 import type { RequestDocumentNodeInput, RequestInput } from './graphql.js'
-import { TypedDocument } from './typed-document/__.js'
-export { OperationType } from './schema/OperationType/__.js'
+import { TypedDocument } from './typed-document/$.js'
+export { OperationType } from './schema/OperationType/$.js'
 
 export type {
   ArgumentNode,

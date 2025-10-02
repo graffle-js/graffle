@@ -1,7 +1,7 @@
 import type { Simplify } from 'type-fest'
 import { expect, expectTypeOf, test } from 'vitest'
 import { Configurator } from '../../../../lib/configurator/configurator.js'
-import { contextEmpty } from '../../../_exports.js'
+import { contextEmpty } from '../../../$$.js'
 import { addType } from './addType.js'
 
 const nameA = `a`

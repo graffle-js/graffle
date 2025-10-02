@@ -1,6 +1,6 @@
-import type { Grafaid } from '../../lib/grafaid/_namespace.js'
+import type { Grafaid } from '../../lib/grafaid/$.js'
 import { Nodes } from '../../lib/grafaid/graphql.js'
-import type { SchemaDrivenDataMap } from '../../types/SchemaDrivenDataMap/_namespace.js'
+import type { SchemaDrivenDataMap } from '../../types/SchemaDrivenDataMap/$.js'
 
 export const injectTypenameOnRootResultFields = (
   { request, sddm }: {

@@ -9,7 +9,7 @@ import { $ } from 'graffle/extensions/document-builder'
 //       ^
 // Variable marker with flexible API
 
-import { Graffle } from '../$/graffle/_namespace.js'
+import { Graffle } from '../$/graffle/$.js'
 import { show } from '../$/show.js'
 
 const { mutation, query } = Graffle

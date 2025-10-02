@@ -1,4 +1,4 @@
-import type { Anyware } from '../../../../lib/anyware/_namespace.js'
+import type { Anyware } from '../../../../lib/anyware/$.js'
 import type { Configurator } from '../../../../lib/configurator/configurator.js'
 
 export interface Data<

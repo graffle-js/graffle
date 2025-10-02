@@ -1,7 +1,7 @@
 import { Kind } from 'graphql'
 import { Schema } from '../exports/schema.js'
-import type { Grafaid } from '../lib/grafaid/_namespace.js'
-import { SchemaDrivenDataMap } from '../types/SchemaDrivenDataMap/_namespace.js'
+import type { Grafaid } from '../lib/grafaid/$.js'
+import { SchemaDrivenDataMap } from '../types/SchemaDrivenDataMap/$.js'
 
 /**
  * If a document is given then aliases will be decoded as well.

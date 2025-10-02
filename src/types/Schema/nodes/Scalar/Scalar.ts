@@ -1,7 +1,7 @@
-import type { Grafaid } from '../../../../lib/grafaid/_namespace.js'
+import type { Grafaid } from '../../../../lib/grafaid/$.js'
 import type { Codec } from './codec.js'
 
-export * as Scalar from './_.js'
+export * as Scalar from './$$.js'
 
 export interface Scalar<
   $Name extends string = string,

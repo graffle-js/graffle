@@ -1,4 +1,4 @@
-import { Errors } from '../../errors/_namespace.js'
+import { Errors } from '../../errors/$.js'
 import { casesExhausted, createDeferred, debugSub, errorFromMaybeError } from '../../prelude.js'
 import type { InterceptorGeneric } from '../Interceptor/Interceptor.js'
 import type { Pipeline } from '../Pipeline/Pipeline.js'
