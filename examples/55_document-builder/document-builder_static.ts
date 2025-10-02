@@ -1,199 +1,163 @@
 /**
- * ┌───────────────────────────────────────────────────────────┐
- * │                                                           │
- * │   Static Document Builder                                │
- * │                                                           │
- * │   Generate typed GraphQL documents at compile-time!      │
- * │   No client needed (•̀ᴗ•́)و                              │
- * │                                                           │
- * └───────────────────────────────────────────────────────────┘
+ * This example demonstrates the Static Document Builder.
+ *
+ * Generate typed GraphQL documents at compile-time!
+ * No client needed (•̀ᴗ•́)و
  */
 
-import { Graffle } from '../$/graffle/_namespace.js'
-import { showJson } from '../$/helpers.js'
-
 import { $var } from 'graffle/extensions/document-builder'
-//     ^^^^
+//       ^^^^
 // Special marker for variable extraction
 
-// ┌─────────────────────────────────────────────────────────────┐
-// │ 1. Basic Selection                                          │
-// └─────────────────────────────────────────────────────────────┘
+import { Graffle } from '../$/graffle/_namespace.js'
+import { show } from '../$/show.js'
 
-const doc1 = Graffle.query.pokemons({
+const { mutation, query } = Graffle
+
+/*
+
+1. Basic Selection
+------------------------------------------------------------------------
+
+query {
+  pokemons {
+    name
+    hp
+    trainer {
+      name
+    }
+  }
+}
+
+*/
+
+const doc1 = query.pokemons({
   name: true,
   hp: true,
   trainer: { name: true },
 })
 
-console.log('\n1. Basic selection:')
-console.log(doc1.document)
-// query { pokemons { name hp trainer { name } } }
+show(doc1)
 
-// ┌─────────────────────────────────────────────────────────────┐
-// │ 2. Variables with $var                                      │
-// └─────────────────────────────────────────────────────────────┘
+/*
 
-const doc2 = Graffle.query.pokemonByName({
-  $: { name: $var },
-  //         ^^^^
-  // Automatically extracted as GraphQL variable
+2. Variables with $var
+------------------------------------------------------------------------
+
+query ($pokemonName: String!) {
+  pokemonByName(name: $pokemonName) {
+    name
+    type
+  }
+}
+
+Variables type: { pokemonName: string }
+
+*/
+
+const doc2 = query.pokemonByName({
+  $: { name: $var.name('pokemonName').required() },
+  //         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  // Automatically extracted as GraphQL variable with custom name
   name: true,
   type: true,
 })
 
-console.log('\n2. With variable:')
-console.log(doc2.document)
-// query ($name: String!) {
-//   pokemonByName(name: $name) { name type }
-// }
-// Variables type: { name: string }
+show(doc2)
 
-// ┌─────────────────────────────────────────────────────────────┐
-// │ 3. Variable Modifiers                                       │
-// └─────────────────────────────────────────────────────────────┘
+/*
 
-const doc3 = Graffle.query.pokemons({
+3. Filter Arguments
+------------------------------------------------------------------------
+
+query ($in: [String!]!) {
+  pokemons(filter: { name: { in: $in } }) {
+    name
+    hp
+  }
+}
+
+Variables type: { in: string[] }
+
+*/
+
+const doc3 = query.pokemons({
   $: {
     filter: {
-      name: { in: $var.optional.list },
-      //                ^^^^^^^^^^^^^^^^^^
-      //                Optional list of strings
-      hp: { gte: $var },
-      //              ^^^^
-      //          Required number
+      name: { in: $var.required() },
+      //          ^^^^^^^^^^^^^^^
+      //          Required variable for name filter
     },
   },
   name: true,
   hp: true,
 })
 
-console.log('\n3. Variable modifiers:')
-console.log(doc3.document)
-// Variables type: { in?: string[] | undefined, gte: number }
-//
-// Modifiers:
-// $var                       → Required (Type!)
-// $var.optional              → Optional (Type)
-// $var.list                  → Required list ([Type!]!)
-// $var.optional.list         → Optional list ([Type!])
-// $var.list.optional         → Required list of optional ([Type]!)
-// $var.optional.list.optional → Fully optional ([Type])
+show(doc3)
 
-// ┌─────────────────────────────────────────────────────────────┐
-// │ 4. Aliases                                                  │
-// └─────────────────────────────────────────────────────────────┘
+/*
 
-const day = 1000 * 60 * 60 * 24
-const year = day * 365.25
+4. Nested Arguments
+------------------------------------------------------------------------
 
-// dprint-ignore
-const doc4 = Graffle.query.$batch({
-  elderPokemons: ['elderPokemons', {
-//               ^^^^^^^^^^^^^^^^^^
-//               Alias name
-    $: {
-      filter: {
-        birthday: { lte: $var },
-      },
-    },
-    name: true,
-  }],
-  youngPokemons: ['youngPokemons', {
-    $: {
-      filter: {
-        birthday: { gte: $var },
-      },
-    },
-    name: true,
-  }],
-})
+query ($eq: String = "mystic", $type: PokemonType!) {
+  trainers(filter: { class: { eq: $eq } }) {
+    name
+    pokemons(filter: { type: $type }) {
+      name
+      type
+    }
+  }
+}
 
-console.log('\n4. Aliases:')
-console.log(doc4.document)
-// query ($lte: Date!, $gte: Date!) {
-//   elderPokemons: pokemons(filter: { birthday: { lte: $lte } }) { name }
-//   ^^^^^^^^^^^^^^
-//   youngPokemons: pokemons(filter: { birthday: { gte: $gte } }) { name }
-//   ^^^^^^^^^^^^^^
-// }
-// Result type: { elderPokemons: ..., youngPokemons: ... }
+*/
 
-// ┌─────────────────────────────────────────────────────────────┐
-// │ 5. Nested Arguments                                         │
-// └─────────────────────────────────────────────────────────────┘
-
-const doc5 = Graffle.query.trainers({
+const doc4 = query.trainers({
   $: {
-    filter: { class: { eq: $var } },
-    //                         ^^^^
-    //                    Root-level argument
+    filter: { class: { eq: $var.default('mystic') } },
+    //                     ^^^^^^^^^^^^^^^^^^^^^^
+    //                     Root-level argument with default value
   },
   name: true,
   pokemons: {
     $: {
       filter: { type: $var },
-      //                    ^^^^
-      //              Nested field argument ヽ(´▽`)/
+      //              ^^^^
+      //              Nested field argument
     },
     name: true,
     type: true,
   },
 })
 
-console.log('\n5. Nested arguments:')
-console.log(doc5.document)
-// query ($eq: String!, $type: PokemonType!) {
-//   trainers(filter: { class: { eq: $eq } }) {
-//     name
-//     pokemons(filter: { type: $type }) {
-//                      ^^^^^^^^^^^^^^^^ Arguments on nested field!
-//       name type
-//     }
-//   }
-// }
+show(doc4)
 
-// ┌─────────────────────────────────────────────────────────────┐
-// │ 6. Mutations                                                │
-// └─────────────────────────────────────────────────────────────┘
+/*
 
-const doc6 = Graffle.mutation.addPokemon({
+5. Controlling Optional/Required Variables
+------------------------------------------------------------------------
+
+mutation ($name: String = "Pikachu", $attack: Int!, $defense: Int!, $hp: Int!, $type: PokemonType!) {
+  addPokemon(name: $name, attack: $attack, defense: $defense, hp: $hp, type: $type) {
+    name
+    type
+  }
+}
+
+*/
+
+const doc5 = mutation.addPokemon({
   $: {
-    name: $var,
-    type: $var,
-    hp: $var.optional,
-    attack: $var.optional,
-    defense: $var.optional,
+    name: $var.default('Pikachu'),
+    //          Make required field optional with default value
+    attack: $var.required(),
+    defense: $var.required(),
+    hp: $var.required(),
+    //          Make optional fields required
+    $type: $var,
   },
   name: true,
   type: true,
 })
 
-console.log('\n6. Mutation:')
-console.log(doc6.document)
-// mutation ($name: String!, $type: PokemonType!, $hp: Int, ...) {
-//   addPokemon(name: $name, type: $type, hp: $hp, ...) {
-//     name type
-//   }
-// }
-
-// ┌─────────────────────────────────────────────────────────────┐
-// │ Using with Other Clients                                    │
-// └─────────────────────────────────────────────────────────────┘
-
-showJson({
-  summary: 'All documents are typed and ready to use! ¯\\_(ツ)_/¯',
-
-  basicDocument: doc1.document,
-
-  withVariables: {
-    document: doc2.document,
-    // TypeScript knows: { name: string }
-  },
-
-  withOtherClients: 'Pass doc.document to graphql-request, urql, Apollo, etc.',
-
-  typeInference: 'Result types are automatically inferred from your selection!',
-
-  zeroRuntime: 'Documents generated at compile-time (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧',
-})
+show(doc5)
