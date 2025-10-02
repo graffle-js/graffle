@@ -18,7 +18,7 @@ WARNING: Custom scalars detected in the schema, but you have not created a custo
 ]
 `;
 
-exports[`client works with generation 1`] = `
+exports[`client uses prettier formatter if installed 1`] = `
 [
   undefined,
   "[
@@ -34,7 +34,7 @@ exports[`client works with generation 1`] = `
 ]
 `;
 
-exports[`project uses graffle config file if present 1`] = `
+exports[`client works with generation 1`] = `
 [
   undefined,
   "[
