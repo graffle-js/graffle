@@ -17,7 +17,7 @@ describe(`importFormat`, () => {
       fs,
       schema,
     })
-    const SchemaTs = Memfs.fs.readFileSync(`./graffle/modules/schema.ts`, `utf8`)
+    const SchemaTs = Memfs.fs.readFileSync(`./graffle/modules/schema/$.ts`, `utf8`)
     expect(SchemaTs).toMatch(/import.*".\/data.js"/)
   })
   test(`noExtension`, async () => {
@@ -26,7 +26,7 @@ describe(`importFormat`, () => {
       schema,
       importFormat: `noExtension`,
     })
-    const SchemaTs = Memfs.fs.readFileSync(`./graffle/modules/schema.ts`, `utf8`)
+    const SchemaTs = Memfs.fs.readFileSync(`./graffle/modules/schema/$.ts`, `utf8`)
     expect(SchemaTs).toMatch(/import.*".\/data"/)
   })
 })
@@ -59,9 +59,9 @@ test(`root-types-mapped`, async () => {
     },
   })
 
-  const SchemaTs = Memfs.fs.readFileSync(`./graffle/modules/schema.ts`, `utf8`)
+  const SchemaTs = Memfs.fs.readFileSync(`./graffle/modules/schema/$.ts`, `utf8`)
   expect(SchemaTs).includes(`operationsAvailable: ["query"]`)
-  expect(SchemaTs).includes(`RootUnion: Schema.${RootTypeCustomNameForQuery}`)
+  expect(SchemaTs).includes(`RootUnion: $Types.${RootTypeCustomNameForQuery}`)
   expect(SchemaTs).toMatchSnapshot()
 
   const MethodsRootTs = Memfs.fs.readFileSync(`./graffle/modules/methods-root.ts`, `utf8`)
@@ -84,7 +84,7 @@ test(`schema with long type name`, async () => {
     },
   })
 
-  const SchemaTs = Memfs.fs.readFileSync(`./graffle/modules/schema.ts`, `utf8`)
+  const SchemaTs = Memfs.fs.readFileSync(`./graffle/modules/schema/$.ts`, `utf8`)
   expect(SchemaTs).toMatchSnapshot()
 })
 
