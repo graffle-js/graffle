@@ -20,7 +20,15 @@ const graffle = Graffle
   .create({ output: Preset.traditionalGraphqlOutput })
   .transport({ url: `http://localhost:3000/graphql` })
   .anyware(async ({ exchange }) => {
-    return exchange({ input: { ...exchange.input, request: { ...exchange.input.request, url: `bad` } } })
+    return exchange({
+      input: {
+        ...exchange.input,
+        request: {
+          ...exchange.input.request,
+          url: { _tag: 'url', value: new URL('bad') },
+        },
+      },
+    })
   })
 
 const result = await graffle.gql(`{ query { thisWillError } }`).send()
@@ -34,11 +42,11 @@ console.log(result)
 <!-- dprint-ignore-start -->
 ```txt
 /some/path/to/runPipeline.ts:XX
-          return new ContextualError(message, { hookName: signal.hookName, source: signal.source }, signal.error)
+          return new ContextualError(message, {
                  ^
 
 
-ContextualError: There was an error in the core implementation of hook "exchange".
+ContextualError: There was an error in the interceptor "anonymous" (use named functions to improve this error message) while running hook "exchange".
     at runPipeline (/some/path/to/runPipeline.ts:XX:XX)
     at async runPipeline (/some/path/to/runPipeline.ts:XX:XX)
     at async runPipeline (/some/path/to/runPipeline.ts:XX:XX)
@@ -46,26 +54,18 @@ ContextualError: There was an error in the core implementation of hook "exchange
     at async Module.run (/some/path/to/run.ts:XX:XX)
     at async sendRequest (/some/path/to/send.ts:XX:XX)
     at async <anonymous> (/some/path/to/output_preset__standard-graphql.ts:XX:XX) {
-  cause: TypeError: Failed to parse URL from undefined
-      at node:internal/deps/undici/undici:13510:13
-      at async Object.run (/some/path/to/TransportHttp.ts:XX:XX)
-      at async runStep (/some/path/to/runStep.ts:XX:XX) {
-    [cause]: TypeError: Invalid URL
-        at new URL (node:internal/url:825:25)
-        at new Request (node:internal/deps/undici/undici:9586:25)
-        at fetch (node:internal/deps/undici/undici:10315:25)
-        at fetch (node:internal/deps/undici/undici:13508:10)
-        at fetch (node:internal/bootstrap/web/exposed-window-or-worker:75:12)
-        at Object.fetch (/some/path/to/TransportHttp.ts:XX:XX)
-        at Object.run (/some/path/to/TransportHttp.ts:XX:XX)
-        at Object.run (/some/path/to/Pipeline.ts:XX:XX)
-        at runStep (/some/path/to/runStep.ts:XX:XX)
-        at <anonymous> (/some/path/to/runStep.ts:XX:XX) {
-      code: 'ERR_INVALID_URL',
-      input: 'undefined'
-    }
+  context: {
+    hookName: 'exchange',
+    source: 'extension',
+    interceptorName: 'anonymous'
   },
-  context: { hookName: 'exchange', source: 'implementation' }
+  cause: TypeError: Invalid URL
+      at new URL (node:internal/url:825:25)
+      at <anonymous> (/some/path/to/output_preset__standard-graphql.ts:XX:XX)
+      at applyBody (/some/path/to/runner.ts:XX:XX) {
+    code: 'ERR_INVALID_URL',
+    input: 'bad'
+  }
 }
 
 Node.js vXX.XX.XX

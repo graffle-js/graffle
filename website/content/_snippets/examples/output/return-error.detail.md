@@ -24,7 +24,7 @@ const pokemon = Graffle
   })
   .anyware(({ encode: _ }) => {
     throw new Error(`Something went wrong.`)
-//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   })
 
 const pokemons = await pokemon.query.pokemons({ name: true })

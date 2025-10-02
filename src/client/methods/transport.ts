@@ -24,7 +24,9 @@ export type TransportMethod<
   ? {
       /**
        * Configure the current transport.
-       * TODO
+       *
+       * Pass a configuration object to update settings of the currently selected transport,
+       * such as URL, headers, or other transport-specific options.
        */
       <
         const configurationInput extends $Context['transports']['registry'][$Context['transports']['current']]['configurator']['input'],
@@ -36,8 +38,10 @@ export type TransportMethod<
             ? Client<$Context> // todo: access to current client type?
             : Client<Transports.ConfigureCurrent<$Context, configurationInput>>
       /**
-       * Set the current Transport, selected from amongst the registered ones, and optionally change its configuration.
-       * TODO
+       * Set the current transport, selected from registered transports, and optionally configure it.
+       *
+       * Pass a transport name to switch to a different registered transport. Optionally provide
+       * a second argument to configure the selected transport at the same time.
        */
       <
         const name extends GetNames<$Context['transports']>,
