@@ -294,7 +294,6 @@ const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.I
     namespaceCode(`import type * as $ from '${utilitiesPath}'`)
   }
   namespaceCode(`import type * as $Fields from './fields.js'`)
-  namespaceCode(`import type { Schema as $Schema } from '../../$.js'`)
   namespaceCode()
   namespaceCode(Code.reexportNamespace({ as: inputObject.name, from: './fields.js' }))
   namespaceCode()
@@ -333,13 +332,14 @@ const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.I
 const generateSchemaNamespaceModule = (config: Config, kindMap: Grafaid.Schema.KindMap['list']): GeneratedModule => {
   const code = CodePusher.create()
   const utilitiesPath = getUtilitiesPath(config, `schema/$.ts`)
+  const ext = config.importFormat === 'noExtension' ? `` : `.js`
 
   code(`import type * as $ from '${utilitiesPath}'`)
-  code(`import * as $$Data from '../data.js'`)
-  code(`import * as $$Scalar from '../scalar.js'`)
-  code(`import * as $Types from './$$.js'`)
+  code(`import * as $$Data from '../data${ext}'`)
+  code(`import * as $$Scalar from '../scalar${ext}'`)
+  code(`import * as $Types from './$$${ext}'`)
   code()
-  code(Code.reexportNamespace({ as: 'Schema', from: './$$.js' }))
+  code(Code.reexportNamespace({ as: 'Schema', from: `./$$${ext}` }))
   code()
 
   // Generate Schema interface here to avoid name conflict
@@ -840,7 +840,6 @@ const generateTypeModule = (
     namespaceCode(`import type * as $ from '${utilitiesPath}'`)
   }
   namespaceCode(`import type * as $Fields from './fields.js'`)
-  namespaceCode(`import type { Schema as $Schema } from '../../$.js'`)
 
   // For interfaces, import implementor types from the barrel
   const isInterface = type instanceof Grafaid.Schema.InterfaceType

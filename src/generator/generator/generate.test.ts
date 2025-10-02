@@ -18,7 +18,7 @@ describe(`importFormat`, () => {
       schema,
     })
     const SchemaTs = Memfs.fs.readFileSync(`./graffle/modules/schema/$.ts`, `utf8`)
-    expect(SchemaTs).toMatch(/import.*".\/data.js"/)
+    expect(SchemaTs).toMatch(/import.*"\.\.\/data.js"/)
   })
   test(`noExtension`, async () => {
     await generate({
@@ -27,7 +27,7 @@ describe(`importFormat`, () => {
       importFormat: `noExtension`,
     })
     const SchemaTs = Memfs.fs.readFileSync(`./graffle/modules/schema/$.ts`, `utf8`)
-    expect(SchemaTs).toMatch(/import.*".\/data"/)
+    expect(SchemaTs).toMatch(/import.*"\.\.\/data"/)
   })
 })
 

@@ -11,7 +11,10 @@ export const ModuleGeneratorTypeInputsIndex = createModuleGenerator(
   `type-inputs-index`,
   import.meta.url,
   ({ config, code }) => {
-    code(importUtilities(config))
+    // Only import utilities if we need them (for GetEncoded type)
+    if (config.options.isImportsCustomScalars && Grafaid.Schema.KindMap.hasCustomScalars(config.schema.kindMap)) {
+      code(importUtilities(config))
+    }
 
     // Import custom scalar implementations if available
     if (config.options.isImportsCustomScalars) {

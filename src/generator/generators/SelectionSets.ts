@@ -70,7 +70,7 @@ export const ModuleGeneratorSelectionSets = createModuleGenerator(
         import type * as ${$.$$Schema} from './schema/$.js'
 
         export type Query$Infer<$SelectionSet extends object> = ${$.$$Utilities}.DocumentBuilderKit.InferResult.OperationQuery<$SelectionSet, ${$.$$Schema}.${$.Schema}>
-        export type Query$Variables<$SelectionSet> = any // Temporarily any - will be replaced with new analysis system
+        export type Query$Variables<_$SelectionSet> = any // Temporarily any - will be replaced with new analysis system
       `
     }
 
@@ -79,7 +79,7 @@ export const ModuleGeneratorSelectionSets = createModuleGenerator(
         ${!config.schema.kindMap.index.Root.query ? `import type * as ${$.$$Schema} from './schema/$.js'` : ''}
 
         export type Mutation$Infer<$SelectionSet extends object> = ${$.$$Utilities}.DocumentBuilderKit.InferResult.OperationMutation<$SelectionSet, ${$.$$Schema}.${$.Schema}>
-        export type Mutation$Variables<$SelectionSet> = any // Temporarily any - will be replaced with new analysis system
+        export type Mutation$Variables<_$SelectionSet> = any // Temporarily any - will be replaced with new analysis system
       `
     }
 
@@ -92,7 +92,7 @@ export const ModuleGeneratorSelectionSets = createModuleGenerator(
       }
 
         export type Subscription$Infer<$SelectionSet extends object> = ${$.$$Utilities}.DocumentBuilderKit.InferResult.OperationSubscription<$SelectionSet, ${$.$$Schema}.${$.Schema}>
-        export type Subscription$Variables<$SelectionSet> = any // Temporarily any - will be replaced with new analysis system
+        export type Subscription$Variables<_$SelectionSet> = any // Temporarily any - will be replaced with new analysis system
       `
     }
 
