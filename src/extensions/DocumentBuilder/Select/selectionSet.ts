@@ -6,8 +6,8 @@ import { type SelectAlias } from './SelectAlias.js'
 
 export type RootType<$Context = DefaultContext> = AnySelectionSet<$Context>
 
-export type AnySelectionSet<$Context = DefaultContext> = {
-  [k: string]: FieldValue<$Context> | ArgsObject<$Context>
+export type AnySelectionSet<$Context = DefaultContext, $Keys extends string = string> = {
+  [k in $Keys]?: FieldValue<$Context> | ArgsObject<$Context>
 } // & SpecialFields
 
 // interface SpecialFields extends Directive.$Fields {

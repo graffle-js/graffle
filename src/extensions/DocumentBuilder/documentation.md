@@ -194,6 +194,62 @@ query ($id: ID!) { user(id: $id) { name } }
 query.user({ $: { id: $var }, name: true })
 ```
 
+#### Variable Type Inference
+
+Graffle automatically infers GraphQL types for variables using two strategies:
+
+**1. Schema-Driven (with generated client):**
+
+When using a generated client, Graffle uses Schema-Driven Data Map (SDDM) metadata to infer precise GraphQL types including nullability, list types, and custom scalars:
+
+```ts
+import { query } from './graffle/modules/document.js'
+
+query.user({
+  $: { id: '123' }, // Inferred as: $id: ID!
+  name: true,
+})
+
+// Generated: query($id: ID!) { user(id: $id) { name } }
+```
+
+**2. Value-Based (without schema):**
+
+When schema information is unavailable (e.g., using static builder without generation), Graffle infers types from runtime values:
+
+```ts
+import { createStaticRootType } from 'graffle/extensions/document-builder'
+import { OperationTypeNode } from 'graphql'
+
+const query = createStaticRootType(OperationTypeNode.QUERY)
+
+query.user({
+  $: {
+    id: '123',        // Inferred as: String
+    age: 42,          // Inferred as: Int
+    active: true,     // Inferred as: Boolean
+    tags: ['a', 'b'], // Inferred as: [String]
+  },
+  name: true,
+})
+
+// Generated: query($id: String, $age: Int, $active: Boolean, $tags: [String]) {
+//   user(id: $id, age: $age, active: $active, tags: $tags) { name }
+// }
+```
+
+**Type Inference Rules:**
+
+| JavaScript Type | GraphQL Type |
+| --- | --- |
+| `string` | `String` |
+| `number` (integer) | `Int` |
+| `number` (decimal) | `Float` |
+| `boolean` | `Boolean` |
+| `Array<T>` | `[InferredType<T>]` |
+
+**Note:** Schema-driven inference provides more accurate types (e.g., `ID!` vs `String`, custom scalars) and is recommended for production use. Value-based inference is a fallback for development or when schema access is limited.
+
 ### Aliases
 
 **GraphQL:**

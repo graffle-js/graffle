@@ -55,6 +55,7 @@ export const toGraphQLField: GraphQLPostOperationMapper<
           if (isVarMarker) {
             // Extract variable from $var marker (explicit user marking)
             const varInfo = Var.extractVariableInfo(argValue, argNameSchemaStripped)
+
             const argument = context.variables.capture({
               name: varInfo.name,
               argName: argNameSchemaStripped,
@@ -66,7 +67,8 @@ export const toGraphQLField: GraphQLPostOperationMapper<
             arguments_.push(argument)
           } else if (context.variables.enabled) {
             // Extract all arguments as variables when hoistArguments: true
-            // Don't include defaultValue - we always send the value in variables object
+            // When SDDM is available, use it for precise type inference
+            // When SDDM is unavailable, infer types from runtime values
             const argument = context.variables.capture({
               name: argNameSchemaStripped,
               argName: argNameSchemaStripped,

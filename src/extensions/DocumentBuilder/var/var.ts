@@ -246,13 +246,11 @@ export interface BuilderEntrypoint<$Type = unknown, $State extends BuilderState 
   extends Builder<$Type, $State>
 {
   /**
-   * Use as standalone marker (variable name inferred from argument name)
-   */
-  (): Builder<$Type, BuilderStateEmpty>
-
-  /**
    * Create a named variable
-   * @param name - Custom variable name
+   * @param name - Custom variable name (required)
+   *
+   * @remarks
+   * If you want to use builder methods without a custom name, use `$.method()` directly instead of `$().method()`.
    */
   <$name extends string>(name: $name): Builder<$Type, Omit<BuilderStateEmpty, 'name'> & { name: $name }>
 }
@@ -319,17 +317,12 @@ const createEntrypoint = <$Type>(): BuilderEntrypoint<$Type, BuilderStateEmpty> 
   const baseBuilder = createVariableBuilder_<$Type, BuilderStateEmpty>(builderStateEmpty())
 
   // Create a function that can be called to set the name
-  const entrypoint = ((name?: string) => {
-    if (name === undefined) {
-      // Called as $() - return a new builder with empty state
-      return createVariableBuilder_<$Type, BuilderStateEmpty>(builderStateEmpty())
-    } else {
-      // Called as $('name') - return a builder with the name set
-      return createVariableBuilder_({
-        ...builderStateEmpty(),
-        name,
-      })
-    }
+  const entrypoint = ((name: string) => {
+    // Called as $('name') - return a builder with the name set
+    return createVariableBuilder_({
+      ...builderStateEmpty(),
+      name,
+    })
   }) as BuilderEntrypoint<$Type, BuilderStateEmpty>
 
   // Copy all builder properties to the function
@@ -340,6 +333,14 @@ const createEntrypoint = <$Type>(): BuilderEntrypoint<$Type, BuilderStateEmpty> 
       Object.defineProperty(entrypoint, key, descriptor)
     }
   }
+
+  // Explicitly copy the Symbol property (Object.keys doesn't enumerate Symbols)
+  Object.defineProperty(entrypoint, BuilderSymbol, {
+    value: true,
+    enumerable: false,
+    writable: false,
+    configurable: false,
+  })
 
   return entrypoint
 }
@@ -473,7 +474,7 @@ export const $: BuilderEntrypoint<any, BuilderStateEmpty> = createEntrypoint()
  * @internal
  */
 export const isVariableBuilder = (value: unknown): value is Builder<any, any> => {
-  return value != null && typeof value === `object` && BuilderSymbol in value
+  return value != null && (typeof value === `object` || typeof value === `function`) && BuilderSymbol in value
 }
 
 /**

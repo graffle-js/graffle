@@ -1,6 +1,7 @@
 import type { GraphQLObjectType } from 'graphql'
 import { Code } from '../../lib/Code.js'
 import { values } from '../../lib/prelude.js'
+import { getStaticDocumentBuilderDoc } from '../helpers/jsdoc.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 import { importUtilities } from '../helpers/pathHelpers.js'
 import { getTsDocContents } from '../helpers/render.js'
@@ -54,42 +55,17 @@ export const ModuleGeneratorDocument = createModuleGenerator(
           typeHookRequestResultDataTypes: never
           scalars: $$Scalar.$Registry
         }
+      `
 
-        /**
-         * Static query builder for compile-time GraphQL document generation.
-         *
-         * @remarks
-         * Each field method generates a fully typed GraphQL document string with:
-         * - Type-safe selection sets matching your schema
-         * - Automatic variable inference from \`$\` usage
-         * - Compile-time validation of field selections
-         * - Zero runtime overhead - documents are generated at build time
-         *
-         * @example Basic query
-         * \`\`\`ts
-         * const getUserDoc = query.user({
-         *   id: true,
-         *   name: true,
-         *   email: true
-         * })
-         * // Generates: query { user { id name email } }
-         * \`\`\`
-         *
-         * @example With variables
-         * \`\`\`ts
-         * import { Var } from 'graffle'
-         *
-         * const getUserByIdDoc = query.user({
-         *   $: { id: $ },
-         *   name: true,
-         *   posts: { title: true }
-         * })
-         * // Generates: query ($id: ID!) { user(id: $id) { name posts { title } } }
-         * // Variables type: { id: string }
-         * \`\`\`
-         *
-         * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
-         */
+      // Interface JSDoc
+      const interfaceDoc = getStaticDocumentBuilderDoc('query')
+      code(`/**`)
+      interfaceDoc.split('\n').forEach(line => {
+        code(` * ${line}`)
+      })
+      code(` */`)
+
+      code`
         export interface QueryBuilder {
           ${
         values(queryType.getFields()).map(field => {
@@ -104,17 +80,17 @@ export const ModuleGeneratorDocument = createModuleGenerator(
         }).join('\n\n          ')
       }
         }
+      `
 
-        /**
-         * Static query document builder instance.
-         *
-         * @example
-         * \`\`\`ts
-         * import { query } from './generated/document.js'
-         *
-         * const myQuery = query.user({ id: true, name: true })
-         * \`\`\`
-         */
+      // Const JSDoc
+      const constDoc = getStaticDocumentBuilderDoc('query')
+      code(`/**`)
+      constDoc.split('\n').forEach(line => {
+        code(` * ${line}`)
+      })
+      code(` */`)
+
+      code`
         export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY) as any
       `
     }
@@ -137,29 +113,16 @@ export const ModuleGeneratorDocument = createModuleGenerator(
         `
       }
       code``
+
+      // Interface JSDoc
+      const mutationInterfaceDoc = getStaticDocumentBuilderDoc('mutation')
+      code(`/**`)
+      mutationInterfaceDoc.split('\n').forEach(line => {
+        code(` * ${line}`)
+      })
+      code(` */`)
+
       code`
-        /**
-         * Static mutation builder for compile-time GraphQL document generation.
-         *
-         * @remarks
-         * Each field method generates a fully typed GraphQL mutation document with:
-         * - Type-safe selection sets and input types
-         * - Automatic variable inference from \`$\` usage
-         * - Compile-time validation of mutations
-         * - Zero runtime overhead - documents are generated at build time
-         *
-         * @example
-         * \`\`\`ts
-         * import { Var } from 'graffle'
-         *
-         * const createUserDoc = mutation.createUser({
-         *   $: { input: $ },
-         *   id: true,
-         *   name: true
-         * })
-         * // Generates: mutation ($input: CreateUserInput!) { createUser(input: $input) { id name } }
-         * \`\`\`
-         */
         export interface MutationBuilder {
           ${
         values(mutationType.getFields()).map(field => {
@@ -174,20 +137,17 @@ export const ModuleGeneratorDocument = createModuleGenerator(
         }).join('\n\n          ')
       }
         }
+      `
 
-        /**
-         * Static mutation document builder instance.
-         *
-         * @example
-         * \`\`\`ts
-         * import { mutation } from './generated/document.js'
-         *
-         * const myMutation = mutation.createUser({
-         *   $: { input: { name: 'Alice', email: 'alice@example.com' } },
-         *   id: true
-         * })
-         * \`\`\`
-         */
+      // Const JSDoc
+      const mutationConstDoc = getStaticDocumentBuilderDoc('mutation')
+      code(`/**`)
+      mutationConstDoc.split('\n').forEach(line => {
+        code(` * ${line}`)
+      })
+      code(` */`)
+
+      code`
         export const mutation: MutationBuilder = createStaticRootType(OperationTypeNode.MUTATION) as any
       `
     }
@@ -210,30 +170,16 @@ export const ModuleGeneratorDocument = createModuleGenerator(
         `
       }
       code``
+
+      // Interface JSDoc
+      const subscriptionInterfaceDoc = getStaticDocumentBuilderDoc('subscription')
+      code(`/**`)
+      subscriptionInterfaceDoc.split('\n').forEach(line => {
+        code(` * ${line}`)
+      })
+      code(` */`)
+
       code`
-        /**
-         * Static subscription builder for compile-time GraphQL document generation.
-         *
-         * @remarks
-         * Each field method generates a fully typed GraphQL subscription document with:
-         * - Type-safe selection sets for real-time data
-         * - Automatic variable inference from \`$\` usage
-         * - Compile-time validation of subscriptions
-         * - Zero runtime overhead - documents are generated at build time
-         *
-         * @example
-         * \`\`\`ts
-         * import { Var } from 'graffle'
-         *
-         * const onUserUpdateDoc = subscription.onUserUpdate({
-         *   $: { userId: Var.$ },
-         *   id: true,
-         *   name: true,
-         *   status: true
-         * })
-         * // Generates: subscription ($userId: ID!) { onUserUpdate(userId: $userId) { id name status } }
-         * \`\`\`
-         */
         export interface SubscriptionBuilder {
           ${
         values(subscriptionType.getFields()).map(field => {
@@ -248,21 +194,17 @@ export const ModuleGeneratorDocument = createModuleGenerator(
         }).join('\n\n          ')
       }
         }
+      `
 
-        /**
-         * Static subscription document builder instance.
-         *
-         * @example
-         * \`\`\`ts
-         * import { subscription } from './generated/document.js'
-         *
-         * const mySubscription = subscription.onMessage({
-         *   id: true,
-         *   content: true,
-         *   timestamp: true
-         * })
-         * \`\`\`
-         */
+      // Const JSDoc
+      const subscriptionConstDoc = getStaticDocumentBuilderDoc('subscription')
+      code(`/**`)
+      subscriptionConstDoc.split('\n').forEach(line => {
+        code(` * ${line}`)
+      })
+      code(` */`)
+
+      code`
         export const subscription: SubscriptionBuilder = createStaticRootType(OperationTypeNode.SUBSCRIPTION) as any
       `
     }

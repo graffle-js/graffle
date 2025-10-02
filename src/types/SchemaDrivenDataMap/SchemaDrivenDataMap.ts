@@ -280,3 +280,64 @@ export type Node =
   | Scalar
   | Enum
   | CustomScalarName
+
+/**
+ * Convert argument metadata to a complete GraphQL type syntax string.
+ * Includes inline type modifiers (list brackets and non-null markers).
+ *
+ * @example
+ * argumentTypeToSyntax(stringArg) // => "String"
+ * argumentTypeToSyntax(requiredStringArg) // => "String!"
+ * argumentTypeToSyntax(listArg) // => "[String!]"
+ */
+export const argumentTypeToSyntax = (
+  sddmArgLike: ArgumentOrInputField,
+): string => {
+  if (sddmArgLike.it) {
+    const isRequiredIndicator = sddmArgLike.it[0] === 1 ? `!` : ``
+    const namedType = argumentNamedTypeToSyntax(sddmArgLike)
+    return inlineTypeToSyntax(sddmArgLike.it[1], namedType) + isRequiredIndicator
+  }
+  return argumentNamedTypeToSyntax(sddmArgLike)
+}
+
+/**
+ * Extract the named type (base type name) from argument metadata.
+ *
+ * @example
+ * argumentNamedTypeToSyntax(stringArg) // => "String"
+ * argumentNamedTypeToSyntax(customScalarArg) // => "DateTime"
+ */
+const argumentNamedTypeToSyntax = (sddmNode: ArgumentOrInputField): string => {
+  if (isScalar(sddmNode.nt)) {
+    return sddmNode.nt.name
+  }
+  if (isCustomScalarName(sddmNode.nt)) {
+    return sddmNode.nt
+  }
+
+  if (sddmNode.nt?.n) {
+    return sddmNode.nt.n
+  }
+
+  throw new Error(`Unknown sddm node: ${String(sddmNode)}`)
+}
+
+/**
+ * Convert SDDM inline type metadata into GraphQL type syntax string.
+ *
+ * In GraphQL, "inline types" refer to the wrapping type modifiers applied to named types:
+ * - `String` - named type
+ * - `String!` - non-null modifier
+ * - `[String]` - list modifier
+ * - `[String!]!` - nested modifiers
+ *
+ * @example
+ * inlineTypeToSyntax([1, undefined], 'String') // => '[String!]'
+ * inlineTypeToSyntax([0, [1, undefined]], 'Int') // => '[[Int!]]'
+ */
+const inlineTypeToSyntax = (sddmInlineType: undefined | InlineType, typeName: string): string => {
+  if (!sddmInlineType) return typeName
+  const isRequiredIndicator = sddmInlineType[0] === 1 ? `!` : ``
+  return `[${inlineTypeToSyntax(sddmInlineType[1], typeName)}${isRequiredIndicator}]`
+}

@@ -1,9 +1,8 @@
-import type { Grafaid } from '../../../lib/grafaid/_namespace.js'
+import { Grafaid } from '../../../lib/grafaid/_namespace.js'
 import { Nodes } from '../../../lib/grafaid/_Nodes.js'
 import type { Schema } from '../../../types/Schema/_namespace.js'
-import type { SchemaDrivenDataMap } from '../../../types/SchemaDrivenDataMap/_namespace.js'
+import { SchemaDrivenDataMap } from '../../../types/SchemaDrivenDataMap/_namespace.js'
 import { Select } from '../Select/__.js'
-import { inferVariableType } from './inferVariableType.js'
 import type { Options } from './nodes/1_Document.js'
 
 /**
@@ -90,7 +89,7 @@ export interface OperationContext {
 
 export interface CapturedVariable {
   name: string
-  typeName: string
+  type: string
   value: unknown
   defaultValue?: unknown
   isEnum: boolean
@@ -123,7 +122,9 @@ export const createOperationContext = (options?: Options): OperationContext => {
 
         context.variables.data.push({
           name: potentialVariableName,
-          typeName: inferVariableType(input.sddmArgument),
+          type: input.sddmArgument
+            ? SchemaDrivenDataMap.argumentTypeToSyntax(input.sddmArgument)
+            : Grafaid.inferTypeSyntaxFromValueElseString(processedValue, { context: `input` }),
           value: processedValue,
           defaultValue: processedDefaultValue,
           isEnum: input.isEnum,

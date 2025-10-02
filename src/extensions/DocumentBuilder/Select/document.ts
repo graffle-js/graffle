@@ -1,6 +1,7 @@
 import type { OperationTypeNode } from 'graphql'
 import { Grafaid } from '../../../lib/grafaid/_namespace.js'
 import type { AssertExtendsObject, FirstNonUnknownNever, Values } from '../../../lib/prelude.js'
+import type { DefaultContext } from './context.js'
 import type { Select } from './__.js'
 
 export type OperationName = string
@@ -62,11 +63,15 @@ export interface DocumentNormalized {
   }
 }
 
-export const createDocumentNormalizedFromQuerySelection = (
-  selectionSet: Select.SelectionSet.AnySelectionSet,
+export const createDocumentNormalizedFromQuerySelection = <$SelectionSet extends object>(
+  selectionSet: $SelectionSet,
   operationName?: string,
 ): DocumentNormalized =>
-  createDocumentNormalizedFromRootTypeSelection(Grafaid.Document.OperationTypeNode.QUERY, selectionSet, operationName)
+  createDocumentNormalizedFromRootTypeSelection(
+    Grafaid.Document.OperationTypeNode.QUERY,
+    selectionSet as Select.SelectionSet.AnySelectionSet<DefaultContext, keyof $SelectionSet & string>,
+    operationName,
+  )
 
 export const createDocumentNormalizedFromRootTypeSelection = (
   operationType: Grafaid.Document.OperationTypeNode,

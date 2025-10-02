@@ -31,7 +31,7 @@ export const toGraphQLOperationDefinition: GraphQLPreOperationMapper<
   const variableDefinitions = context.variables.data.map((captured) => {
     return Nodes.VariableDefinition({
       variable: Nodes.Variable({ name: Nodes.Name({ value: captured.name }) }),
-      type: Nodes.NamedType({ name: Nodes.Name({ value: captured.typeName }) }),
+      type: Nodes.NamedType({ name: Nodes.Name({ value: captured.type }) }),
       defaultValue: captured.defaultValue !== undefined
         ? toGraphQLValue(
           { ...context, value: { isEnum: captured.isEnum } },

@@ -125,6 +125,95 @@ export const getTypenameMethodDoc = (
 }
 
 /**
+ * Generate JSDoc for static document builder (both interface and const).
+ * Used for query, mutation, and subscription builders.
+ */
+export const getStaticDocumentBuilderDoc = (
+  operationType: 'query' | 'mutation' | 'subscription',
+): string => {
+  const operationTypeCapitalized = operationType.charAt(0).toUpperCase() + operationType.slice(1)
+
+  const parts: string[] = []
+  parts.push(`Static ${operationType} builder for compile-time GraphQL document generation.`)
+  parts.push('')
+  parts.push('@remarks')
+
+  if (operationType === 'query') {
+    parts.push('Each field method generates a fully typed GraphQL document string with:')
+    parts.push('- Type-safe selection sets matching your schema')
+    parts.push('- Automatic variable inference from `$` usage')
+    parts.push('- Compile-time validation of field selections')
+    parts.push('- Zero runtime overhead - documents are generated at build time')
+    parts.push('')
+    parts.push('@example Basic query')
+    parts.push('```ts')
+    parts.push('const getUserDoc = query.user({')
+    parts.push('  id: true,')
+    parts.push('  name: true,')
+    parts.push('  email: true')
+    parts.push('})')
+    parts.push('// Generates: query { user { id name email } }')
+    parts.push('```')
+    parts.push('')
+    parts.push('@example With variables')
+    parts.push('```ts')
+    parts.push('import { Var } from \'graffle\'')
+    parts.push('')
+    parts.push('const getUserByIdDoc = query.user({')
+    parts.push('  $: { id: $ },')
+    parts.push('  name: true,')
+    parts.push('  posts: { title: true }')
+    parts.push('})')
+    parts.push('// Generates: query ($id: ID!) { user(id: $id) { name posts { title } } }')
+    parts.push('// Variables type: { id: string }')
+    parts.push('```')
+  } else if (operationType === 'mutation') {
+    parts.push('Each field method generates a fully typed GraphQL mutation document with:')
+    parts.push('- Type-safe selection sets and input types')
+    parts.push('- Automatic variable inference from `$` usage')
+    parts.push('- Compile-time validation of mutations')
+    parts.push('- Zero runtime overhead - documents are generated at build time')
+    parts.push('')
+    parts.push('@example')
+    parts.push('```ts')
+    parts.push('import { Var } from \'graffle\'')
+    parts.push('')
+    parts.push('const createUserDoc = mutation.createUser({')
+    parts.push('  $: { input: $ },')
+    parts.push('  id: true,')
+    parts.push('  name: true')
+    parts.push('})')
+    parts.push('// Generates: mutation ($input: CreateUserInput!) { createUser(input: $input) { id name } }')
+    parts.push('```')
+  } else {
+    // subscription
+    parts.push('Each field method generates a fully typed GraphQL subscription document with:')
+    parts.push('- Type-safe selection sets for real-time data')
+    parts.push('- Automatic variable inference from `$` usage')
+    parts.push('- Compile-time validation of subscriptions')
+    parts.push('- Zero runtime overhead - documents are generated at build time')
+    parts.push('')
+    parts.push('@example')
+    parts.push('```ts')
+    parts.push('import { Var } from \'graffle\'')
+    parts.push('')
+    parts.push('const onUserUpdateDoc = subscription.onUserUpdate({')
+    parts.push('  $: { userId: Var.$ },')
+    parts.push('  id: true,')
+    parts.push('  name: true,')
+    parts.push('  status: true')
+    parts.push('})')
+    parts.push('// Generates: subscription ($userId: ID!) { onUserUpdate(userId: $userId) { id name status } }')
+    parts.push('```')
+  }
+
+  parts.push('')
+  parts.push('@see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}')
+
+  return parts.join('\n')
+}
+
+/**
  * Generate enhanced JSDoc for an output field in selection sets.
  */
 export const getOutputFieldSelectionSetDoc = (
