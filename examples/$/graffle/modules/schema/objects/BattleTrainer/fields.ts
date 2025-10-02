@@ -19,7 +19,7 @@ export interface __typename {
 }
 
 /**
- * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.BattleTrainer}.
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.BattleTrainer}.
  *
  * The first combatant in this trainer battle.
  *
@@ -28,7 +28,7 @@ export interface __typename {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.CombatantSinglePokemon} |
- * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
  * | **Parent** | {@link $Schema.BattleTrainer} |
  * | **Path** | `BattleTrainer.combatant1` |
  * | **Nullability** | Optional |
@@ -42,7 +42,7 @@ export interface combatant1 {
 }
 
 /**
- * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.BattleTrainer}.
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.BattleTrainer}.
  *
  * The second combatant in this trainer battle.
  *
@@ -51,7 +51,7 @@ export interface combatant1 {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.CombatantSinglePokemon} |
- * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
  * | **Parent** | {@link $Schema.BattleTrainer} |
  * | **Path** | `BattleTrainer.combatant2` |
  * | **Nullability** | Optional |
@@ -65,7 +65,7 @@ export interface combatant2 {
 }
 
 /**
- * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.BattleTrainer}.
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.BattleTrainer}.
  *
  * The date when this battle took place, stored as a Unix timestamp.
  *
@@ -74,7 +74,7 @@ export interface combatant2 {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Float} |
- * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
  * | **Parent** | {@link $Schema.BattleTrainer} |
  * | **Path** | `BattleTrainer.date` |
  * | **Nullability** | Optional |
@@ -88,7 +88,7 @@ export interface date {
 }
 
 /**
- * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.BattleTrainer}.
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.BattleTrainer}.
  *
  * The unique identifier for this battle.
  *
@@ -97,7 +97,7 @@ export interface date {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.ID} |
- * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
  * | **Parent** | {@link $Schema.BattleTrainer} |
  * | **Path** | `BattleTrainer.id` |
  * | **Nullability** | Optional |
@@ -111,7 +111,7 @@ export interface id {
 }
 
 /**
- * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.BattleTrainer}.
+ * GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.BattleTrainer}.
  *
  * The trainer who won this battle.
  *
@@ -120,7 +120,7 @@ export interface id {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Trainer} |
- * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
  * | **Parent** | {@link $Schema.BattleTrainer} |
  * | **Path** | `BattleTrainer.winner` |
  * | **Nullability** | Optional |

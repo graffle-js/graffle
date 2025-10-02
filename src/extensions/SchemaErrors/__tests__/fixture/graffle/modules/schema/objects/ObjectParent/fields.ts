@@ -20,20 +20,17 @@ export interface __typename extends $.Schema.OutputField {
 }
 
 /**
- * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.ObjectParent}.
  *
- * | Property | Value |
- * | -------- | ----- |
+ * # Info
+ *
+ * | | |
+ * | - | - |
  * | **Type** | {@link $Schema.String}! |
- * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
  * | **Parent** | {@link $Schema.ObjectParent} |
+ * | **Path** | `ObjectParent.a` |
  * | **Nullability** | Required |
- *
- * Type: {@link $Schema.String}!
- *
- * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
- *
- * Parent: {@link $Schema.ObjectParent}
  */
 export interface a extends $.Schema.OutputField {
   kind: 'OutputField'
@@ -44,20 +41,17 @@ export interface a extends $.Schema.OutputField {
 }
 
 /**
- * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.ObjectParent}.
  *
- * | Property | Value |
- * | -------- | ----- |
+ * # Info
+ *
+ * | | |
+ * | - | - |
  * | **Type** | {@link $Schema.String}! |
- * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
  * | **Parent** | {@link $Schema.ObjectParent} |
+ * | **Path** | `ObjectParent.b` |
  * | **Nullability** | Required |
- *
- * Type: {@link $Schema.String}!
- *
- * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
- *
- * Parent: {@link $Schema.ObjectParent}
  */
 export interface b extends $.Schema.OutputField {
   kind: 'OutputField'
@@ -68,20 +62,17 @@ export interface b extends $.Schema.OutputField {
 }
 
 /**
- * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.ObjectParent}.
  *
- * | Property | Value |
- * | -------- | ----- |
+ * # Info
+ *
+ * | | |
+ * | - | - |
  * | **Type** | {@link $Schema.String}! |
- * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
  * | **Parent** | {@link $Schema.ObjectParent} |
+ * | **Path** | `ObjectParent.me` |
  * | **Nullability** | Required |
- *
- * Type: {@link $Schema.String}!
- *
- * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
- *
- * Parent: {@link $Schema.ObjectParent}
  */
 export interface me extends $.Schema.OutputField {
   kind: 'OutputField'

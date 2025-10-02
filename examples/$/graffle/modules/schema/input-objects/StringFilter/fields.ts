@@ -1,7 +1,7 @@
 import type { Schema as $Schema } from '../../$.js'
 
 /**
- * GraphQL input field (↗ {@link https://graphql.org/learn/schema/#input-types | lang docs}) on type {@link $Schema.StringFilter}.
+ * GraphQL {@link https://graphql.org/learn/schema/#input-types | input field} ↗ on type {@link $Schema.StringFilter}.
  *
  * Filter for strings containing this substring.
  *
@@ -10,7 +10,7 @@ import type { Schema as $Schema } from '../../$.js'
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.String} |
- * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
  * | **Parent** | {@link $Schema.StringFilter} |
  * | **Path** | `StringFilter.contains` |
  * | **Nullability** | Optional |
@@ -23,7 +23,7 @@ export interface contains {
 }
 
 /**
- * GraphQL input field (↗ {@link https://graphql.org/learn/schema/#input-types | lang docs}) on type {@link $Schema.StringFilter}.
+ * GraphQL {@link https://graphql.org/learn/schema/#input-types | input field} ↗ on type {@link $Schema.StringFilter}.
  *
  * Filter for strings matching any value in this list.
  *
@@ -32,7 +32,7 @@ export interface contains {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.String}[] |
- * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
  * | **Parent** | {@link $Schema.StringFilter} |
  * | **Path** | `StringFilter.in` |
  * | **Nullability** | Optional |

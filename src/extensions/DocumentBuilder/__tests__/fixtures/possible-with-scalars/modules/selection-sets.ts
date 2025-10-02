@@ -46,352 +46,863 @@ export interface $Document<
 
 // ----------------------------------------| Entrypoint Interface |
 
+/**
+ * GraphQL root {@link https://graphql.org/learn/schema/#the-query-and-mutation-types | Query} type.
+ */
 export interface Query<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
   /**
-   * Select the `InputObjectNested` field on the `Query` object. Its type is `ID` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.InputObjectNested` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
    */
   InputObjectNested?:
     | Query.InputObjectNested$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.InputObjectNested<_$Context>>
   /**
-   * Select the `InputObjectNestedNonNull` field on the `Query` object. Its type is `ID` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.InputObjectNestedNonNull` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
    */
   InputObjectNestedNonNull?:
     | Query.InputObjectNestedNonNull<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.InputObjectNestedNonNull<_$Context>>
   /**
-   * Select the `abcEnum` field on the `Query` object. Its type is `ABCEnum` (a `Enum` kind of type).
+   * Query enum field documentation.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ABCEnum} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.abcEnum` |
+   * | **Nullability** | Optional |
    */
   abcEnum?:
     | Query.abcEnum$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.abcEnum<_$Context>>
   /**
-   * Select the `argInputObjectCircular` field on the `Query` object. Its type is `String` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.argInputObjectCircular` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
    */
   argInputObjectCircular?:
     | Query.argInputObjectCircular$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.argInputObjectCircular<_$Context>>
   /**
-   * Select the `bigintField` field on the `Query` object. Its type is `bigint` (a `ScalarCustom` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$bigint} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.bigintField` |
+   * | **Nullability** | Optional |
    */
   bigintField?:
     | Query.bigintField$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.bigintField<_$Context>>
   /**
-   * Select the `bigintFieldNonNull` field on the `Query` object. Its type is `bigint` (a `ScalarCustom` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$bigint}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.bigintFieldNonNull` |
+   * | **Nullability** | Required |
    */
   bigintFieldNonNull?:
     | Query.bigintFieldNonNull$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.bigintFieldNonNull<_$Context>>
   /**
-   * Select the `date` field on the `Query` object. Its type is `Date` (a `ScalarCustom` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Date} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.date` |
+   * | **Nullability** | Optional |
    */
   date?:
     | Query.date$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.date<_$Context>>
   /**
-   * Select the `dateArg` field on the `Query` object. Its type is `Date` (a `ScalarCustom` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Date} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.dateArg` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
    */
   dateArg?:
     | Query.dateArg$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateArg<_$Context>>
   /**
-   * Select the `dateArgInputObject` field on the `Query` object. Its type is `Date` (a `ScalarCustom` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Date} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.dateArgInputObject` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
    */
   dateArgInputObject?:
     | Query.dateArgInputObject$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateArgInputObject<_$Context>>
   /**
-   * Select the `dateArgList` field on the `Query` object. Its type is `Date` (a `ScalarCustom` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Date} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.dateArgList` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
    */
   dateArgList?:
     | Query.dateArgList$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateArgList<_$Context>>
   /**
-   * Select the `dateArgNonNull` field on the `Query` object. Its type is `Date` (a `ScalarCustom` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Date} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.dateArgNonNull` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
    */
   dateArgNonNull?:
     | Query.dateArgNonNull<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateArgNonNull<_$Context>>
   /**
-   * Select the `dateArgNonNullList` field on the `Query` object. Its type is `Date` (a `ScalarCustom` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Date} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.dateArgNonNullList` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
    */
   dateArgNonNullList?:
     | Query.dateArgNonNullList<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateArgNonNullList<_$Context>>
   /**
-   * Select the `dateArgNonNullListNonNull` field on the `Query` object. Its type is `Date` (a `ScalarCustom` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Date} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.dateArgNonNullListNonNull` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
    */
   dateArgNonNullListNonNull?:
     | Query.dateArgNonNullListNonNull<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateArgNonNullListNonNull<_$Context>>
   /**
-   * Select the `dateInterface1` field on the `Query` object. Its type is `DateInterface1` (a `Interface` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$DateInterface1} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.dateInterface1` |
+   * | **Nullability** | Optional |
    */
   dateInterface1?:
     | Query.dateInterface1$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateInterface1<_$Context>>
   /**
-   * Select the `dateList` field on the `Query` object. Its type is `Date` (a `ScalarCustom` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Date}[] |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.dateList` |
+   * | **Nullability** | Optional |
+   * | **List** | Yes |
    */
   dateList?:
     | Query.dateList$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateList<_$Context>>
   /**
-   * Select the `dateListList` field on the `Query` object. Its type is `Date` (a `ScalarCustom` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Date}[] |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.dateListList` |
+   * | **Nullability** | Optional |
+   * | **List** | Yes |
    */
   dateListList?:
     | Query.dateListList$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateListList<_$Context>>
   /**
-   * Select the `dateListNonNull` field on the `Query` object. Its type is `Date` (a `ScalarCustom` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Date}[]! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.dateListNonNull` |
+   * | **Nullability** | Required |
+   * | **List** | Yes |
    */
   dateListNonNull?:
     | Query.dateListNonNull$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateListNonNull<_$Context>>
   /**
-   * Select the `dateNonNull` field on the `Query` object. Its type is `Date` (a `ScalarCustom` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Date}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.dateNonNull` |
+   * | **Nullability** | Required |
    */
   dateNonNull?:
     | Query.dateNonNull$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateNonNull<_$Context>>
   /**
-   * Select the `dateObject1` field on the `Query` object. Its type is `DateObject1` (a `OutputObject` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$DateObject1} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.dateObject1` |
+   * | **Nullability** | Optional |
    */
   dateObject1?:
     | Query.dateObject1$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateObject1<_$Context>>
   /**
-   * Select the `dateUnion` field on the `Query` object. Its type is `DateUnion` (a `Union` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$DateUnion} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.dateUnion` |
+   * | **Nullability** | Optional |
    */
   dateUnion?:
     | Query.dateUnion$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.dateUnion<_$Context>>
   /**
-   * Select the `error` field on the `Query` object. Its type is `String` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.error` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
    */
   error?:
     | Query.error$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.error<_$Context>>
   /**
-   * Select the `id` field on the `Query` object. Its type is `ID` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.id` |
+   * | **Nullability** | Optional |
    */
   id?: Query.id$Expanded<_$Context> | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.id<_$Context>>
   /**
-   * Select the `idNonNull` field on the `Query` object. Its type is `ID` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ID}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.idNonNull` |
+   * | **Nullability** | Required |
    */
   idNonNull?:
     | Query.idNonNull$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.idNonNull<_$Context>>
   /**
-   * Select the `interface` field on the `Query` object. Its type is `Interface` (a `Interface` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Interface} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.interface` |
+   * | **Nullability** | Optional |
    */
   interface?:
     | Query.$interface$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.$interface<_$Context>>
   /**
-   * Select the `interfaceHierarchyChildA` field on the `Query` object. Its type is `InterfaceChildA` (a `Interface` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$InterfaceChildA}[]! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.interfaceHierarchyChildA` |
+   * | **Nullability** | Required |
+   * | **List** | Yes |
+   * | **Arguments** | 1 |
    */
   interfaceHierarchyChildA?:
     | Query.interfaceHierarchyChildA$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.interfaceHierarchyChildA<_$Context>>
   /**
-   * Select the `interfaceHierarchyChildB` field on the `Query` object. Its type is `InterfaceChildB` (a `Interface` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$InterfaceChildB}[]! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.interfaceHierarchyChildB` |
+   * | **Nullability** | Required |
+   * | **List** | Yes |
+   * | **Arguments** | 1 |
    */
   interfaceHierarchyChildB?:
     | Query.interfaceHierarchyChildB$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.interfaceHierarchyChildB<_$Context>>
   /**
-   * Select the `interfaceHierarchyGrandparents` field on the `Query` object. Its type is `InterfaceGrandparent` (a `Interface` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$InterfaceGrandparent}[]! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.interfaceHierarchyGrandparents` |
+   * | **Nullability** | Required |
+   * | **List** | Yes |
+   * | **Arguments** | 1 |
    */
   interfaceHierarchyGrandparents?:
     | Query.interfaceHierarchyGrandparents$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.interfaceHierarchyGrandparents<_$Context>>
   /**
-   * Select the `interfaceHierarchyParents` field on the `Query` object. Its type is `InterfaceParent` (a `Interface` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$InterfaceParent}[]! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.interfaceHierarchyParents` |
+   * | **Nullability** | Required |
+   * | **List** | Yes |
+   * | **Arguments** | 1 |
    */
   interfaceHierarchyParents?:
     | Query.interfaceHierarchyParents$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.interfaceHierarchyParents<_$Context>>
   /**
-   * Select the `interfaceNonNull` field on the `Query` object. Its type is `Interface` (a `Interface` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Interface}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.interfaceNonNull` |
+   * | **Nullability** | Required |
    */
   interfaceNonNull?:
     | Query.interfaceNonNull$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.interfaceNonNull<_$Context>>
   /**
-   * Select the `interfaceWithArgs` field on the `Query` object. Its type is `Interface` (a `Interface` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Interface} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.interfaceWithArgs` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
    */
   interfaceWithArgs?:
     | Query.interfaceWithArgs<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.interfaceWithArgs<_$Context>>
   /**
-   * Select the `listInt` field on the `Query` object. Its type is `Int` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Int}[] |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.listInt` |
+   * | **Nullability** | Optional |
+   * | **List** | Yes |
    */
   listInt?:
     | Query.listInt$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.listInt<_$Context>>
   /**
-   * Select the `listIntNonNull` field on the `Query` object. Its type is `Int` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Int}[]! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.listIntNonNull` |
+   * | **Nullability** | Required |
+   * | **List** | Yes |
    */
   listIntNonNull?:
     | Query.listIntNonNull$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.listIntNonNull<_$Context>>
   /**
-   * Select the `listListInt` field on the `Query` object. Its type is `Int` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Int}[] |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.listListInt` |
+   * | **Nullability** | Optional |
+   * | **List** | Yes |
    */
   listListInt?:
     | Query.listListInt$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.listListInt<_$Context>>
   /**
-   * Select the `listListIntNonNull` field on the `Query` object. Its type is `Int` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Int}[]! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.listListIntNonNull` |
+   * | **Nullability** | Required |
+   * | **List** | Yes |
    */
   listListIntNonNull?:
     | Query.listListIntNonNull$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.listListIntNonNull<_$Context>>
   /**
-   * Select the `lowerCaseUnion` field on the `Query` object. Its type is `lowerCaseUnion` (a `Union` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$lowerCaseUnion} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.lowerCaseUnion` |
+   * | **Nullability** | Optional |
    */
   lowerCaseUnion?:
     | Query.lowerCaseUnion$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.lowerCaseUnion<_$Context>>
   /**
-   * Select the `object` field on the `Query` object. Its type is `Object1` (a `OutputObject` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Object1} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.object` |
+   * | **Nullability** | Optional |
    */
   object?:
     | Query.$object$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.$object<_$Context>>
   /**
-   * Select the `objectList` field on the `Query` object. Its type is `Object1` (a `OutputObject` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Object1}[] |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.objectList` |
+   * | **Nullability** | Optional |
+   * | **List** | Yes |
    */
   objectList?:
     | Query.objectList$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.objectList<_$Context>>
   /**
-   * Select the `objectListNonNull` field on the `Query` object. Its type is `Object1` (a `OutputObject` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Object1}[]! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.objectListNonNull` |
+   * | **Nullability** | Required |
+   * | **List** | Yes |
    */
   objectListNonNull?:
     | Query.objectListNonNull$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.objectListNonNull<_$Context>>
   /**
-   * Select the `objectNested` field on the `Query` object. Its type is `ObjectNested` (a `OutputObject` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ObjectNested} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.objectNested` |
+   * | **Nullability** | Optional |
    */
   objectNested?:
     | Query.objectNested$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.objectNested<_$Context>>
   /**
-   * Select the `objectNestedWithArgs` field on the `Query` object. Its type is `ObjectNestedWithArgs` (a `OutputObject` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ObjectNestedWithArgs} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.objectNestedWithArgs` |
+   * | **Nullability** | Optional |
    */
   objectNestedWithArgs?:
     | Query.objectNestedWithArgs$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.objectNestedWithArgs<_$Context>>
   /**
-   * Select the `objectNonNull` field on the `Query` object. Its type is `Object1` (a `OutputObject` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Object1}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.objectNonNull` |
+   * | **Nullability** | Required |
    */
   objectNonNull?:
     | Query.objectNonNull$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.objectNonNull<_$Context>>
   /**
-   * Select the `objectWithArgs` field on the `Query` object. Its type is `Object1` (a `OutputObject` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Object1} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.objectWithArgs` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 5 |
    */
   objectWithArgs?:
     | Query.objectWithArgs$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.objectWithArgs<_$Context>>
   /**
-   * Select the `result` field on the `Query` object. Its type is `Result` (a `Union` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Result} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.result` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
    */
   result?:
     | Query.result<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.result<_$Context>>
   /**
-   * Select the `resultNonNull` field on the `Query` object. Its type is `Result` (a `Union` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Result}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.resultNonNull` |
+   * | **Nullability** | Required |
+   * | **Arguments** | 1 |
    */
   resultNonNull?:
     | Query.resultNonNull$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.resultNonNull<_$Context>>
   /**
-   * Select the `string` field on the `Query` object. Its type is `String` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.string` |
+   * | **Nullability** | Optional |
    */
   string?:
     | Query.$string$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.$string<_$Context>>
   /**
-   * Select the `stringWithArgEnum` field on the `Query` object. Its type is `String` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.stringWithArgEnum` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
    */
   stringWithArgEnum?:
     | Query.stringWithArgEnum$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.stringWithArgEnum<_$Context>>
   /**
-   * Select the `stringWithArgInputObject` field on the `Query` object. Its type is `String` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.stringWithArgInputObject` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
    */
   stringWithArgInputObject?:
     | Query.stringWithArgInputObject$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.stringWithArgInputObject<_$Context>>
   /**
-   * Select the `stringWithArgInputObjectEnum` field on the `Query` object. Its type is `String` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.stringWithArgInputObjectEnum` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
    */
   stringWithArgInputObjectEnum?:
     | Query.stringWithArgInputObjectEnum<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.stringWithArgInputObjectEnum<_$Context>>
   /**
-   * Select the `stringWithArgInputObjectRequired` field on the `Query` object. Its type is `String` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.stringWithArgInputObjectRequired` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
    */
   stringWithArgInputObjectRequired?:
     | Query.stringWithArgInputObjectRequired<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.stringWithArgInputObjectRequired<_$Context>>
   /**
-   * Select the `stringWithArgs` field on the `Query` object. Its type is `String` (a `ScalarStandard` kind of type).
+   * The given arguments are reflected back as a JSON string.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.stringWithArgs` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 5 |
    */
   stringWithArgs?:
     | Query.stringWithArgs$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.stringWithArgs<_$Context>>
   /**
-   * Select the `stringWithListArg` field on the `Query` object. Its type is `String` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.stringWithListArg` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
    */
   stringWithListArg?:
     | Query.stringWithListArg$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.stringWithListArg<_$Context>>
   /**
-   * Select the `stringWithListArgRequired` field on the `Query` object. Its type is `String` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.stringWithListArgRequired` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
    */
   stringWithListArgRequired?:
     | Query.stringWithListArgRequired<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.stringWithListArgRequired<_$Context>>
   /**
-   * Select the `stringWithRequiredArg` field on the `Query` object. Its type is `String` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.stringWithRequiredArg` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
    */
   stringWithRequiredArg?:
     | Query.stringWithRequiredArg<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.stringWithRequiredArg<_$Context>>
   /**
-   * Select the `unionFooBar` field on the `Query` object. Its type is `FooBarUnion` (a `Union` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$FooBarUnion} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.unionFooBar` |
+   * | **Nullability** | Optional |
    */
   unionFooBar?:
     | Query.unionFooBar$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.unionFooBar<_$Context>>
   /**
-   * Select the `unionFooBarNonNull` field on the `Query` object. Its type is `FooBarUnion` (a `Union` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$FooBarUnion}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.unionFooBarNonNull` |
+   * | **Nullability** | Required |
    */
   unionFooBarNonNull?:
     | Query.unionFooBarNonNull$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.unionFooBarNonNull<_$Context>>
   /**
-   * Select the `unionFooBarWithArgs` field on the `Query` object. Its type is `FooBarUnion` (a `Union` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$FooBarUnion} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.unionFooBarWithArgs` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
    */
   unionFooBarWithArgs?:
     | Query.unionFooBarWithArgs$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.unionFooBarWithArgs<_$Context>>
   /**
-   * Select the `unionObject` field on the `Query` object. Its type is `ObjectUnion` (a `OutputObject` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ObjectUnion} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.unionObject` |
+   * | **Nullability** | Optional |
    */
   unionObject?:
     | Query.unionObject$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.unionObject<_$Context>>
   /**
-   * Select the `unionObjectNonNull` field on the `Query` object. Its type is `ObjectUnion` (a `OutputObject` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ObjectUnion}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.unionObjectNonNull` |
+   * | **Nullability** | Required |
    */
   unionObjectNonNull?:
     | Query.unionObjectNonNull$Expanded<_$Context>
@@ -2419,18 +2930,37 @@ export namespace Query {
 
 // ----------------------------------------| Entrypoint Interface |
 
+/**
+ * GraphQL root {@link https://graphql.org/learn/schema/#the-mutation-and-mutation-types | Mutation} type.
+ */
 export interface Mutation<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
   /**
-   * Select the `id` field on the `Mutation` object. Its type is `ID` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Mutation} |
+   * | **Path** | `Mutation.id` |
+   * | **Nullability** | Optional |
    */
   id?:
     | Mutation.id$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Mutation.id<_$Context>>
   /**
-   * Select the `idNonNull` field on the `Mutation` object. Its type is `ID` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ID}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Mutation} |
+   * | **Path** | `Mutation.idNonNull` |
+   * | **Nullability** | Required |
    */
   idNonNull?:
     | Mutation.idNonNull$Expanded<_$Context>
@@ -2683,7 +3213,15 @@ export interface Bar<
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
-   * Select the `int` field on the `Bar` object. Its type is `Int` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Int} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Bar} |
+   * | **Path** | `Bar.int` |
+   * | **Nullability** | Optional |
    */
   int?: Bar.int$Expanded<_$Context> | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Bar.int<_$Context>>
 
@@ -2759,7 +3297,15 @@ export interface DateObject1<
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
-   * Select the `date1` field on the `DateObject1` object. Its type is `Date` (a `ScalarCustom` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Date} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $NamedTypes.$DateObject1} |
+   * | **Path** | `DateObject1.date1` |
+   * | **Nullability** | Optional |
    */
   date1?:
     | DateObject1.date1$Expanded<_$Context>
@@ -2837,7 +3383,15 @@ export interface DateObject2<
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
-   * Select the `date2` field on the `DateObject2` object. Its type is `Date` (a `ScalarCustom` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Date} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $NamedTypes.$DateObject2} |
+   * | **Path** | `DateObject2.date2` |
+   * | **Nullability** | Optional |
    */
   date2?:
     | DateObject2.date2$Expanded<_$Context>
@@ -2915,13 +3469,29 @@ export interface ErrorOne<
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
-   * Select the `infoId` field on the `ErrorOne` object. Its type is `ID` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$ErrorOne} |
+   * | **Path** | `ErrorOne.infoId` |
+   * | **Nullability** | Optional |
    */
   infoId?:
     | ErrorOne.infoId$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ErrorOne.infoId<_$Context>>
   /**
-   * Select the `message` field on the `ErrorOne` object. Its type is `String` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$String}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$ErrorOne} |
+   * | **Path** | `ErrorOne.message` |
+   * | **Nullability** | Required |
    */
   message?:
     | ErrorOne.message$Expanded<_$Context>
@@ -3028,13 +3598,29 @@ export interface ErrorTwo<
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
-   * Select the `infoInt` field on the `ErrorTwo` object. Its type is `Int` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Int} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$ErrorTwo} |
+   * | **Path** | `ErrorTwo.infoInt` |
+   * | **Nullability** | Optional |
    */
   infoInt?:
     | ErrorTwo.infoInt$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ErrorTwo.infoInt<_$Context>>
   /**
-   * Select the `message` field on the `ErrorTwo` object. Its type is `String` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$String}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$ErrorTwo} |
+   * | **Path** | `ErrorTwo.message` |
+   * | **Nullability** | Required |
    */
   message?:
     | ErrorTwo.message$Expanded<_$Context>
@@ -3144,7 +3730,18 @@ export interface Foo<
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
-   * Select the `id` field on the `Foo` object. Its type is `ID` (a `ScalarStandard` kind of type).
+   * Field documentation.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Foo} |
+   * | **Path** | `Foo.id` |
+   * | **⚠ Deprecated** | Field a is deprecated. |
+   * | **Nullability** | Optional |
    */
   id?: Foo.id$Expanded<_$Context> | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Foo.id<_$Context>>
 
@@ -3220,37 +3817,85 @@ export interface Object1<
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
-   * Select the `ABCEnum` field on the `Object1` object. Its type is `ABCEnum` (a `Enum` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ABCEnum} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Object1} |
+   * | **Path** | `Object1.ABCEnum` |
+   * | **Nullability** | Optional |
    */
   ABCEnum?:
     | Object1.ABCEnum$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Object1.ABCEnum<_$Context>>
   /**
-   * Select the `boolean` field on the `Object1` object. Its type is `Boolean` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Boolean} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Object1} |
+   * | **Path** | `Object1.boolean` |
+   * | **Nullability** | Optional |
    */
   boolean?:
     | Object1.$boolean$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Object1.$boolean<_$Context>>
   /**
-   * Select the `float` field on the `Object1` object. Its type is `Float` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Float} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Object1} |
+   * | **Path** | `Object1.float` |
+   * | **Nullability** | Optional |
    */
   float?:
     | Object1.float$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Object1.float<_$Context>>
   /**
-   * Select the `id` field on the `Object1` object. Its type is `ID` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Object1} |
+   * | **Path** | `Object1.id` |
+   * | **Nullability** | Optional |
    */
   id?:
     | Object1.id$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Object1.id<_$Context>>
   /**
-   * Select the `int` field on the `Object1` object. Its type is `Int` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Int} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Object1} |
+   * | **Path** | `Object1.int` |
+   * | **Nullability** | Optional |
    */
   int?:
     | Object1.int$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Object1.int<_$Context>>
   /**
-   * Select the `string` field on the `Object1` object. Its type is `String` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Object1} |
+   * | **Path** | `Object1.string` |
+   * | **Nullability** | Optional |
    */
   string?:
     | Object1.$string$Expanded<_$Context>
@@ -3473,13 +4118,29 @@ export interface Object1ImplementingInterface<
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
-   * Select the `id` field on the `Object1ImplementingInterface` object. Its type is `ID` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Object1ImplementingInterface} |
+   * | **Path** | `Object1ImplementingInterface.id` |
+   * | **Nullability** | Optional |
    */
   id?:
     | Object1ImplementingInterface.id$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Object1ImplementingInterface.id<_$Context>>
   /**
-   * Select the `int` field on the `Object1ImplementingInterface` object. Its type is `Int` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Int} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Object1ImplementingInterface} |
+   * | **Path** | `Object1ImplementingInterface.int` |
+   * | **Nullability** | Optional |
    */
   int?:
     | Object1ImplementingInterface.int$Expanded<_$Context>
@@ -3589,13 +4250,29 @@ export interface Object2ImplementingInterface<
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
-   * Select the `boolean` field on the `Object2ImplementingInterface` object. Its type is `Boolean` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Boolean} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Object2ImplementingInterface} |
+   * | **Path** | `Object2ImplementingInterface.boolean` |
+   * | **Nullability** | Optional |
    */
   boolean?:
     | Object2ImplementingInterface.$boolean$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Object2ImplementingInterface.$boolean<_$Context>>
   /**
-   * Select the `id` field on the `Object2ImplementingInterface` object. Its type is `ID` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Object2ImplementingInterface} |
+   * | **Path** | `Object2ImplementingInterface.id` |
+   * | **Nullability** | Optional |
    */
   id?:
     | Object2ImplementingInterface.id$Expanded<_$Context>
@@ -3705,25 +4382,57 @@ export interface ObjectChildA<
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
-   * Select the `a` field on the `ObjectChildA` object. Its type is `String` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$String}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$ObjectChildA} |
+   * | **Path** | `ObjectChildA.a` |
+   * | **Nullability** | Required |
    */
   a?:
     | ObjectChildA.a$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectChildA.a<_$Context>>
   /**
-   * Select the `b` field on the `ObjectChildA` object. Its type is `String` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$String}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$ObjectChildA} |
+   * | **Path** | `ObjectChildA.b` |
+   * | **Nullability** | Required |
    */
   b?:
     | ObjectChildA.b$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectChildA.b<_$Context>>
   /**
-   * Select the `c1` field on the `ObjectChildA` object. Its type is `String` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$String}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$ObjectChildA} |
+   * | **Path** | `ObjectChildA.c1` |
+   * | **Nullability** | Required |
    */
   c1?:
     | ObjectChildA.c1$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectChildA.c1<_$Context>>
   /**
-   * Select the `me` field on the `ObjectChildA` object. Its type is `Boolean` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Boolean}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$ObjectChildA} |
+   * | **Path** | `ObjectChildA.me` |
+   * | **Nullability** | Required |
    */
   me?:
     | ObjectChildA.me$Expanded<_$Context>
@@ -3888,25 +4597,58 @@ export interface ObjectChildB<
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
-   * Select the `a` field on the `ObjectChildB` object. Its type is `String` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$String}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$ObjectChildB} |
+   * | **Path** | `ObjectChildB.a` |
+   * | **Nullability** | Required |
    */
   a?:
     | ObjectChildB.a$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectChildB.a<_$Context>>
   /**
-   * Select the `b` field on the `ObjectChildB` object. Its type is `String` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$String}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$ObjectChildB} |
+   * | **Path** | `ObjectChildB.b` |
+   * | **Nullability** | Required |
    */
   b?:
     | ObjectChildB.b$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectChildB.b<_$Context>>
   /**
-   * Select the `c2` field on the `ObjectChildB` object. Its type is `String` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$String}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$ObjectChildB} |
+   * | **Path** | `ObjectChildB.c2` |
+   * | **Nullability** | Required |
    */
   c2?:
     | ObjectChildB.c2$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectChildB.c2<_$Context>>
   /**
-   * Select the `me` field on the `ObjectChildB` object. Its type is `Int` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Int}[]! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$ObjectChildB} |
+   * | **Path** | `ObjectChildB.me` |
+   * | **Nullability** | Required |
+   * | **List** | Yes |
    */
   me?:
     | ObjectChildB.me$Expanded<_$Context>
@@ -4071,13 +4813,29 @@ export interface ObjectGrandparent<
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
-   * Select the `a` field on the `ObjectGrandparent` object. Its type is `String` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$String}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$ObjectGrandparent} |
+   * | **Path** | `ObjectGrandparent.a` |
+   * | **Nullability** | Required |
    */
   a?:
     | ObjectGrandparent.a$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectGrandparent.a<_$Context>>
   /**
-   * Select the `me` field on the `ObjectGrandparent` object. Its type is `Int` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Int}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$ObjectGrandparent} |
+   * | **Path** | `ObjectGrandparent.me` |
+   * | **Nullability** | Required |
    */
   me?:
     | ObjectGrandparent.me$Expanded<_$Context>
@@ -4184,13 +4942,29 @@ export interface ObjectNested<
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
-   * Select the `id` field on the `ObjectNested` object. Its type is `ID` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$ObjectNested} |
+   * | **Path** | `ObjectNested.id` |
+   * | **Nullability** | Optional |
    */
   id?:
     | ObjectNested.id$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectNested.id<_$Context>>
   /**
-   * Select the `object` field on the `ObjectNested` object. Its type is `Object1` (a `OutputObject` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Object1} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$ObjectNested} |
+   * | **Path** | `ObjectNested.object` |
+   * | **Nullability** | Optional |
    */
   object?:
     | ObjectNested.$object$Expanded<_$Context>
@@ -4294,13 +5068,31 @@ export interface ObjectNestedWithArgs<
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
-   * Select the `id` field on the `ObjectNestedWithArgs` object. Its type is `ID` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$ObjectNestedWithArgs} |
+   * | **Path** | `ObjectNestedWithArgs.id` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
    */
   id?:
     | ObjectNestedWithArgs.id$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectNestedWithArgs.id<_$Context>>
   /**
-   * Select the `object` field on the `ObjectNestedWithArgs` object. Its type is `Object1` (a `OutputObject` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Object1} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$ObjectNestedWithArgs} |
+   * | **Path** | `ObjectNestedWithArgs.object` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 4 |
    */
   object?:
     | ObjectNestedWithArgs.$object$Expanded<_$Context>
@@ -4434,19 +5226,43 @@ export interface ObjectParent<
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
-   * Select the `a` field on the `ObjectParent` object. Its type is `String` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$String}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$ObjectParent} |
+   * | **Path** | `ObjectParent.a` |
+   * | **Nullability** | Required |
    */
   a?:
     | ObjectParent.a$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectParent.a<_$Context>>
   /**
-   * Select the `b` field on the `ObjectParent` object. Its type is `String` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$String}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$ObjectParent} |
+   * | **Path** | `ObjectParent.b` |
+   * | **Nullability** | Required |
    */
   b?:
     | ObjectParent.b$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<ObjectParent.b<_$Context>>
   /**
-   * Select the `me` field on the `ObjectParent` object. Its type is `String` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$String}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$ObjectParent} |
+   * | **Path** | `ObjectParent.me` |
+   * | **Nullability** | Required |
    */
   me?:
     | ObjectParent.me$Expanded<_$Context>
@@ -4582,7 +5398,15 @@ export interface ObjectUnion<
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
-   * Select the `fooBarUnion` field on the `ObjectUnion` object. Its type is `FooBarUnion` (a `Union` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$FooBarUnion} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+   * | **Parent** | {@link $NamedTypes.$ObjectUnion} |
+   * | **Path** | `ObjectUnion.fooBarUnion` |
+   * | **Nullability** | Optional |
    */
   fooBarUnion?:
     | ObjectUnion.fooBarUnion$Expanded<_$Context>
@@ -4657,7 +5481,15 @@ export interface lowerCaseObject<
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
-   * Select the `id` field on the `lowerCaseObject` object. Its type is `ID` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$lowerCaseObject} |
+   * | **Path** | `lowerCaseObject.id` |
+   * | **Nullability** | Optional |
    */
   id?:
     | lowerCaseObject.id$Expanded<_$Context>
@@ -4735,7 +5567,15 @@ export interface lowerCaseObject2<
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
-   * Select the `int` field on the `lowerCaseObject2` object. Its type is `Int` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Int} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$lowerCaseObject2} |
+   * | **Path** | `lowerCaseObject2.int` |
+   * | **Nullability** | Optional |
    */
   int?:
     | lowerCaseObject2.int$Expanded<_$Context>

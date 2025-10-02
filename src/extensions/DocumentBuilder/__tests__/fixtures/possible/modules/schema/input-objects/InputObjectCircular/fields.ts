@@ -2,14 +2,14 @@ import type * as $ from '../../../../../../../../../exports/utilities-for-genera
 import type { Schema as $Schema } from '../../$.js'
 
 /**
- * GraphQL input field (↗ {@link https://graphql.org/learn/schema/#input-types | lang docs}) on type {@link $Schema.InputObjectCircular}.
+ * GraphQL {@link https://graphql.org/learn/schema/#input-types | input field} ↗ on type {@link $Schema.InputObjectCircular}.
  *
  * # Info
  *
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.InputObjectCircular} |
- * | **Kind** | `InputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlinputobjecttype | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinputobjecttype | InputObject} ↗ |
  * | **Parent** | {@link $Schema.InputObjectCircular} |
  * | **Path** | `InputObjectCircular.circular` |
  * | **Nullability** | Optional |
@@ -22,14 +22,14 @@ export interface circular extends $.Schema.InputField {
 }
 
 /**
- * GraphQL input field (↗ {@link https://graphql.org/learn/schema/#input-types | lang docs}) on type {@link $Schema.InputObjectCircular}.
+ * GraphQL {@link https://graphql.org/learn/schema/#input-types | input field} ↗ on type {@link $Schema.InputObjectCircular}.
  *
  * # Info
  *
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Date} |
- * | **Kind** | `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
  * | **Parent** | {@link $Schema.InputObjectCircular} |
  * | **Path** | `InputObjectCircular.date` |
  * | **Nullability** | Optional |

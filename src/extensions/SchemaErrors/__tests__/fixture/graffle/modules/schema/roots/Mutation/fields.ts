@@ -20,20 +20,17 @@ export interface __typename extends $.Schema.OutputField {
 }
 
 /**
- * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.Mutation}.
  *
- * | Property | Value |
- * | -------- | ----- |
+ * # Info
+ *
+ * | | |
+ * | - | - |
  * | **Type** | {@link $Schema.ID} |
- * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
  * | **Parent** | {@link $Schema.Mutation} |
+ * | **Path** | `Mutation.id` |
  * | **Nullability** | Optional |
- *
- * Type: {@link $Schema.ID}
- *
- * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
- *
- * Parent: {@link $Schema.Mutation}
  */
 export interface id extends $.Schema.OutputField {
   kind: 'OutputField'
@@ -44,20 +41,17 @@ export interface id extends $.Schema.OutputField {
 }
 
 /**
- * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.Mutation}.
  *
- * | Property | Value |
- * | -------- | ----- |
+ * # Info
+ *
+ * | | |
+ * | - | - |
  * | **Type** | {@link $Schema.ID}! |
- * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
  * | **Parent** | {@link $Schema.Mutation} |
+ * | **Path** | `Mutation.idNonNull` |
  * | **Nullability** | Required |
- *
- * Type: {@link $Schema.ID}!
- *
- * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
- *
- * Parent: {@link $Schema.Mutation}
  */
 export interface idNonNull extends $.Schema.OutputField {
   kind: 'OutputField'

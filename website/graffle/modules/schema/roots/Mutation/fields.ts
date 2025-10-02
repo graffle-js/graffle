@@ -19,23 +19,20 @@ export interface __typename {
 }
 
 /**
- * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.Mutation}.
  *
  * Add a new Pokemon to the database.
  *
- * | Property | Value |
- * | -------- | ----- |
+ * # Info
+ *
+ * | | |
+ * | - | - |
  * | **Type** | {@link $Schema.Pokemon} |
- * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Docs} |
+ * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | lang docs} |
  * | **Parent** | {@link $Schema.Mutation} |
+ * | **Path** | `Mutation.addPokemon` |
  * | **Nullability** | Optional |
  * | **Arguments** | 5 |
- *
- * Type: {@link $Schema.Pokemon}
- *
- * Kind: `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Official Documentation}
- *
- * Parent: {@link $Schema.Mutation}
  */
 export interface addPokemon {
   kind: "OutputField";

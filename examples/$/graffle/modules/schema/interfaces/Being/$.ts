@@ -1,10 +1,21 @@
 import type { Patron, Pokemon, Trainer } from '../../$$.js'
+import type { Schema as $Schema } from '../../$.js'
 import type * as $Fields from './fields.js'
 
 export * as Being from './fields.js'
 
 /**
+ * GraphQL {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface}.
+ *
  * A being in the Pokemon world - either a Pokemon, Trainer, or Patron.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+ * | **Fields** | 2 |
+ * | **Implementors** | {@link $Schema.Patron}, {@link $Schema.Pokemon}, {@link $Schema.Trainer} |
  */
 export interface Being {
   kind: 'Interface'

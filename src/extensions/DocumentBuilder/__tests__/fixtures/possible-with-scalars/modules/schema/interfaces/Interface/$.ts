@@ -1,9 +1,21 @@
 import type * as $ from '../../../../../../../../../exports/utilities-for-generated.js'
 import type { Object1ImplementingInterface, Object2ImplementingInterface } from '../../$$.js'
+import type { Schema as $Schema } from '../../$.js'
 import type * as $Fields from './fields.js'
 
 export * as Interface from './fields.js'
 
+/**
+ * GraphQL {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface}.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+ * | **Fields** | 1 |
+ * | **Implementors** | {@link $Schema.Object1ImplementingInterface}, {@link $Schema.Object2ImplementingInterface} |
+ */
 export interface Interface extends $.Schema.Interface {
   kind: 'Interface'
   name: 'Interface'

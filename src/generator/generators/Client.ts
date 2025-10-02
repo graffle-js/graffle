@@ -12,8 +12,7 @@ export const ModuleGeneratorClient = createModuleGenerator(
     code(importModuleGenerator(config, ModuleGeneratorScalar))
     code`
       import * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
-      import { TransportHttp } from '${config.paths.imports.grafflePackage.extensionTransportHttp}'
-      import { DocumentBuilder } from '${config.paths.imports.grafflePackage.extensionDocumentBuilder}'
+      import { TransportHttp, DocumentBuilder } from 'graffle'
 
       const context = ${$.$$Utilities}.pipe(
         ${$.$$Utilities}.contextEmpty,

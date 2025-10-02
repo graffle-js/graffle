@@ -20,20 +20,17 @@ export interface __typename extends $.Schema.OutputField {
 }
 
 /**
- * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.ErrorOne}.
  *
- * | Property | Value |
- * | -------- | ----- |
+ * # Info
+ *
+ * | | |
+ * | - | - |
  * | **Type** | {@link $Schema.ID} |
- * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
  * | **Parent** | {@link $Schema.ErrorOne} |
+ * | **Path** | `ErrorOne.infoId` |
  * | **Nullability** | Optional |
- *
- * Type: {@link $Schema.ID}
- *
- * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
- *
- * Parent: {@link $Schema.ErrorOne}
  */
 export interface infoId extends $.Schema.OutputField {
   kind: 'OutputField'
@@ -44,20 +41,17 @@ export interface infoId extends $.Schema.OutputField {
 }
 
 /**
- * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.ErrorOne}.
  *
- * | Property | Value |
- * | -------- | ----- |
+ * # Info
+ *
+ * | | |
+ * | - | - |
  * | **Type** | {@link $Schema.String}! |
- * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
  * | **Parent** | {@link $Schema.ErrorOne} |
+ * | **Path** | `ErrorOne.message` |
  * | **Nullability** | Required |
- *
- * Type: {@link $Schema.String}!
- *
- * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
- *
- * Parent: {@link $Schema.ErrorOne}
  */
 export interface message extends $.Schema.OutputField {
   kind: 'OutputField'

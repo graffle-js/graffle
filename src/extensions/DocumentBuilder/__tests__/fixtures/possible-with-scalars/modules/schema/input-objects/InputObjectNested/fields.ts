@@ -2,14 +2,14 @@ import type * as $ from '../../../../../../../../../exports/utilities-for-genera
 import type { Schema as $Schema } from '../../$.js'
 
 /**
- * GraphQL input field (↗ {@link https://graphql.org/learn/schema/#input-types | lang docs}) on type {@link $Schema.InputObjectNested}.
+ * GraphQL {@link https://graphql.org/learn/schema/#input-types | input field} ↗ on type {@link $Schema.InputObjectNested}.
  *
  * # Info
  *
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.InputObject} |
- * | **Kind** | `InputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlinputobjecttype | lang docs} |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinputobjecttype | InputObject} ↗ |
  * | **Parent** | {@link $Schema.InputObjectNested} |
  * | **Path** | `InputObjectNested.InputObject` |
  * | **Nullability** | Optional |

@@ -1,6 +1,7 @@
 import SchemaBuilder from '@pothos/core'
 import SimpleObjectsPlugin from '@pothos/plugin-simple-objects'
 import ZodPlugin from '@pothos/plugin-zod'
+import type { GraphQLSchema } from 'graphql'
 import { DateTimeISOResolver } from 'graphql-scalars'
 import { DatabaseServer } from './data.js'
 
@@ -350,7 +351,7 @@ builder.mutationField(`addPokemon`, (t) =>
     },
   }))
 
-const schema = builder.toSchema()
+const schema: GraphQLSchema = builder.toSchema()
 
 DatabaseServer.seed(DatabaseServer.tenant())
 

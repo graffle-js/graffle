@@ -19,22 +19,19 @@ export interface __typename {
 }
 
 /**
- * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.BattleWild}.
  *
  * The date when this battle took place, stored as a Unix timestamp.
  *
- * | Property | Value |
- * | -------- | ----- |
+ * # Info
+ *
+ * | | |
+ * | - | - |
  * | **Type** | {@link $Schema.Float} |
- * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
  * | **Parent** | {@link $Schema.BattleWild} |
+ * | **Path** | `BattleWild.date` |
  * | **Nullability** | Optional |
- *
- * Type: {@link $Schema.Float}
- *
- * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
- *
- * Parent: {@link $Schema.BattleWild}
  */
 export interface date {
   kind: "OutputField";
@@ -45,22 +42,19 @@ export interface date {
 }
 
 /**
- * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.BattleWild}.
  *
  * The unique identifier for this battle.
  *
- * | Property | Value |
- * | -------- | ----- |
+ * # Info
+ *
+ * | | |
+ * | - | - |
  * | **Type** | {@link $Schema.ID} |
- * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
  * | **Parent** | {@link $Schema.BattleWild} |
+ * | **Path** | `BattleWild.id` |
  * | **Nullability** | Optional |
- *
- * Type: {@link $Schema.ID}
- *
- * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
- *
- * Parent: {@link $Schema.BattleWild}
  */
 export interface id {
   kind: "OutputField";
@@ -71,22 +65,19 @@ export interface id {
 }
 
 /**
- * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.BattleWild}.
  *
  * The trainer's Pokemon that participated in this battle.
  *
- * | Property | Value |
- * | -------- | ----- |
+ * # Info
+ *
+ * | | |
+ * | - | - |
  * | **Type** | {@link $Schema.Pokemon} |
- * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Docs} |
+ * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | lang docs} |
  * | **Parent** | {@link $Schema.BattleWild} |
+ * | **Path** | `BattleWild.pokemon` |
  * | **Nullability** | Optional |
- *
- * Type: {@link $Schema.Pokemon}
- *
- * Kind: `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Official Documentation}
- *
- * Parent: {@link $Schema.BattleWild}
  */
 export interface pokemon {
   kind: "OutputField";
@@ -97,22 +88,19 @@ export interface pokemon {
 }
 
 /**
- * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.BattleWild}.
  *
  * The outcome of this wild Pokemon battle.
  *
- * | Property | Value |
- * | -------- | ----- |
+ * # Info
+ *
+ * | | |
+ * | - | - |
  * | **Type** | {@link $Schema.BattleWildResult} |
- * | **Kind** | `Enum` ↗ {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Docs} |
+ * | **Kind** | `Enum` ↗ {@link https://graphql.org/graphql-js/type/#graphqlenumtype | lang docs} |
  * | **Parent** | {@link $Schema.BattleWild} |
+ * | **Path** | `BattleWild.result` |
  * | **Nullability** | Optional |
- *
- * Type: {@link $Schema.BattleWildResult}
- *
- * Kind: `Enum` ↗ {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Official Documentation}
- *
- * Parent: {@link $Schema.BattleWild}
  */
 export interface result {
   kind: "OutputField";
@@ -123,22 +111,19 @@ export interface result {
 }
 
 /**
- * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.BattleWild}.
  *
  * The trainer who engaged in this wild battle.
  *
- * | Property | Value |
- * | -------- | ----- |
+ * # Info
+ *
+ * | | |
+ * | - | - |
  * | **Type** | {@link $Schema.Trainer} |
- * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Docs} |
+ * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | lang docs} |
  * | **Parent** | {@link $Schema.BattleWild} |
+ * | **Path** | `BattleWild.trainer` |
  * | **Nullability** | Optional |
- *
- * Type: {@link $Schema.Trainer}
- *
- * Kind: `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Official Documentation}
- *
- * Parent: {@link $Schema.BattleWild}
  */
 export interface trainer {
   kind: "OutputField";
@@ -149,23 +134,20 @@ export interface trainer {
 }
 
 /**
- * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.BattleWild}.
  *
  * The wild Pokemon encountered in this battle.
  *
- * | Property | Value |
- * | -------- | ----- |
+ * # Info
+ *
+ * | | |
+ * | - | - |
  * | **Type** | {@link $Schema.Pokemon}[] |
- * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Docs} |
+ * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | lang docs} |
  * | **Parent** | {@link $Schema.BattleWild} |
+ * | **Path** | `BattleWild.wildPokemons` |
  * | **Nullability** | Optional |
  * | **List** | Yes |
- *
- * Type: {@link $Schema.Pokemon}[]
- *
- * Kind: `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Official Documentation}
- *
- * Parent: {@link $Schema.BattleWild}
  */
 export interface wildPokemons {
   kind: "OutputField";

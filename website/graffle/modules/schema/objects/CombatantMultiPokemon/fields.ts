@@ -19,23 +19,20 @@ export interface __typename {
 }
 
 /**
- * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.CombatantMultiPokemon}.
  *
  * The team of Pokemon used by this combatant.
  *
- * | Property | Value |
- * | -------- | ----- |
+ * # Info
+ *
+ * | | |
+ * | - | - |
  * | **Type** | {@link $Schema.Pokemon}[] |
- * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Docs} |
+ * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | lang docs} |
  * | **Parent** | {@link $Schema.CombatantMultiPokemon} |
+ * | **Path** | `CombatantMultiPokemon.pokemons` |
  * | **Nullability** | Optional |
  * | **List** | Yes |
- *
- * Type: {@link $Schema.Pokemon}[]
- *
- * Kind: `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Official Documentation}
- *
- * Parent: {@link $Schema.CombatantMultiPokemon}
  */
 export interface pokemons {
   kind: "OutputField";
@@ -46,22 +43,19 @@ export interface pokemons {
 }
 
 /**
- * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.CombatantMultiPokemon}.
  *
  * The trainer commanding this team of Pokemon.
  *
- * | Property | Value |
- * | -------- | ----- |
+ * # Info
+ *
+ * | | |
+ * | - | - |
  * | **Type** | {@link $Schema.Trainer} |
- * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Docs} |
+ * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | lang docs} |
  * | **Parent** | {@link $Schema.CombatantMultiPokemon} |
+ * | **Path** | `CombatantMultiPokemon.trainer` |
  * | **Nullability** | Optional |
- *
- * Type: {@link $Schema.Trainer}
- *
- * Kind: `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Official Documentation}
- *
- * Parent: {@link $Schema.CombatantMultiPokemon}
  */
 export interface trainer {
   kind: "OutputField";

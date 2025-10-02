@@ -1,22 +1,19 @@
 import type { Schema as $Schema } from "../../$.js";
 
 /**
- * GraphQL Input Field ↗ {@link https://graphql.org/learn/schema/#input-types | Official Documentation}
+ * GraphQL input field (↗ {@link https://graphql.org/learn/schema/#input-types | lang docs}) on type {@link $Schema.StringFilter}.
  *
  * Filter for strings containing this substring.
  *
- * | Property | Value |
- * | -------- | ----- |
+ * # Info
+ *
+ * | | |
+ * | - | - |
  * | **Type** | {@link $Schema.String} |
- * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
  * | **Parent** | {@link $Schema.StringFilter} |
+ * | **Path** | `StringFilter.contains` |
  * | **Nullability** | Optional |
- *
- * Type: {@link $Schema.String}
- *
- * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
- *
- * Parent: {@link $Schema.StringFilter}
  */
 export interface contains {
   kind: "InputField";
@@ -26,23 +23,20 @@ export interface contains {
 }
 
 /**
- * GraphQL Input Field ↗ {@link https://graphql.org/learn/schema/#input-types | Official Documentation}
+ * GraphQL input field (↗ {@link https://graphql.org/learn/schema/#input-types | lang docs}) on type {@link $Schema.StringFilter}.
  *
  * Filter for strings matching any value in this list.
  *
- * | Property | Value |
- * | -------- | ----- |
+ * # Info
+ *
+ * | | |
+ * | - | - |
  * | **Type** | {@link $Schema.String}[] |
- * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
  * | **Parent** | {@link $Schema.StringFilter} |
+ * | **Path** | `StringFilter.in` |
  * | **Nullability** | Optional |
  * | **List** | Yes |
- *
- * Type: {@link $Schema.String}[]
- *
- * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
- *
- * Parent: {@link $Schema.StringFilter}
  */
 interface $in {
   kind: "InputField";

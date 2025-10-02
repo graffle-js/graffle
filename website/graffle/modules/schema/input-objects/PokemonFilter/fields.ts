@@ -1,22 +1,19 @@
 import type { Schema as $Schema } from "../../$.js";
 
 /**
- * GraphQL Input Field ↗ {@link https://graphql.org/learn/schema/#input-types | Official Documentation}
+ * GraphQL input field (↗ {@link https://graphql.org/learn/schema/#input-types | lang docs}) on type {@link $Schema.PokemonFilter}.
  *
  * Filter by Pokemon birth/catch date.
  *
- * | Property | Value |
- * | -------- | ----- |
+ * # Info
+ *
+ * | | |
+ * | - | - |
  * | **Type** | {@link $Schema.DateFilter} |
- * | **Kind** | `InputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlinputobjecttype | Docs} |
+ * | **Kind** | `InputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlinputobjecttype | lang docs} |
  * | **Parent** | {@link $Schema.PokemonFilter} |
+ * | **Path** | `PokemonFilter.birthday` |
  * | **Nullability** | Optional |
- *
- * Type: {@link $Schema.DateFilter}
- *
- * Kind: `InputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlinputobjecttype | Official Documentation}
- *
- * Parent: {@link $Schema.PokemonFilter}
  */
 export interface birthday {
   kind: "InputField";
@@ -26,22 +23,19 @@ export interface birthday {
 }
 
 /**
- * GraphQL Input Field ↗ {@link https://graphql.org/learn/schema/#input-types | Official Documentation}
+ * GraphQL input field (↗ {@link https://graphql.org/learn/schema/#input-types | lang docs}) on type {@link $Schema.PokemonFilter}.
  *
  * Filter by Pokemon name.
  *
- * | Property | Value |
- * | -------- | ----- |
+ * # Info
+ *
+ * | | |
+ * | - | - |
  * | **Type** | {@link $Schema.StringFilter} |
- * | **Kind** | `InputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlinputobjecttype | Docs} |
+ * | **Kind** | `InputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlinputobjecttype | lang docs} |
  * | **Parent** | {@link $Schema.PokemonFilter} |
+ * | **Path** | `PokemonFilter.name` |
  * | **Nullability** | Optional |
- *
- * Type: {@link $Schema.StringFilter}
- *
- * Kind: `InputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlinputobjecttype | Official Documentation}
- *
- * Parent: {@link $Schema.PokemonFilter}
  */
 export interface name {
   kind: "InputField";
@@ -51,22 +45,19 @@ export interface name {
 }
 
 /**
- * GraphQL Input Field ↗ {@link https://graphql.org/learn/schema/#input-types | Official Documentation}
+ * GraphQL input field (↗ {@link https://graphql.org/learn/schema/#input-types | lang docs}) on type {@link $Schema.PokemonFilter}.
  *
  * Filter by Pokemon type.
  *
- * | Property | Value |
- * | -------- | ----- |
+ * # Info
+ *
+ * | | |
+ * | - | - |
  * | **Type** | {@link $Schema.PokemonType} |
- * | **Kind** | `Enum` ↗ {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Docs} |
+ * | **Kind** | `Enum` ↗ {@link https://graphql.org/graphql-js/type/#graphqlenumtype | lang docs} |
  * | **Parent** | {@link $Schema.PokemonFilter} |
+ * | **Path** | `PokemonFilter.type` |
  * | **Nullability** | Optional |
- *
- * Type: {@link $Schema.PokemonType}
- *
- * Kind: `Enum` ↗ {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Official Documentation}
- *
- * Parent: {@link $Schema.PokemonFilter}
  */
 export interface type {
   kind: "InputField";

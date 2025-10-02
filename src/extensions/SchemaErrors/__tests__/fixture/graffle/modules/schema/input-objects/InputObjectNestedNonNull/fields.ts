@@ -2,20 +2,17 @@ import type * as $ from '../../../../../../../../../exports/utilities-for-genera
 import type { Schema as $Schema } from '../../$.js'
 
 /**
- * GraphQL Input Field ↗ {@link https://graphql.org/learn/schema/#input-types | Official Documentation}
+ * GraphQL input field (↗ {@link https://graphql.org/learn/schema/#input-types | lang docs}) on type {@link $Schema.InputObjectNestedNonNull}.
  *
- * | Property | Value |
- * | -------- | ----- |
+ * # Info
+ *
+ * | | |
+ * | - | - |
  * | **Type** | {@link $Schema.InputObject}! |
- * | **Kind** | `InputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlinputobjecttype | Docs} |
+ * | **Kind** | `InputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlinputobjecttype | lang docs} |
  * | **Parent** | {@link $Schema.InputObjectNestedNonNull} |
+ * | **Path** | `InputObjectNestedNonNull.InputObject` |
  * | **Nullability** | Required |
- *
- * Type: {@link $Schema.InputObject}!
- *
- * Kind: `InputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlinputobjecttype | Official Documentation}
- *
- * Parent: {@link $Schema.InputObjectNestedNonNull}
  */
 export interface InputObject extends $.Schema.InputField {
   kind: 'InputField'

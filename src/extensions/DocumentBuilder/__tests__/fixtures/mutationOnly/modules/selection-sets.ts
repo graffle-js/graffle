@@ -45,18 +45,37 @@ export interface $Document<
 
 // ----------------------------------------| Entrypoint Interface |
 
+/**
+ * GraphQL root {@link https://graphql.org/learn/schema/#the-mutation-and-mutation-types | Mutation} type.
+ */
 export interface Mutation<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
   /**
-   * Select the `id` field on the `Mutation` object. Its type is `ID` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Mutation} |
+   * | **Path** | `Mutation.id` |
+   * | **Nullability** | Optional |
    */
   id?:
     | Mutation.id$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Mutation.id<_$Context>>
   /**
-   * Select the `idNonNull` field on the `Mutation` object. Its type is `ID` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ID}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Mutation} |
+   * | **Path** | `Mutation.idNonNull` |
+   * | **Nullability** | Required |
    */
   idNonNull?:
     | Mutation.idNonNull$Expanded<_$Context>

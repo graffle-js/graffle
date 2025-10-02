@@ -2,20 +2,17 @@ import type * as $ from '../../../../../../../../../exports/utilities-for-genera
 import type { Schema as $Schema } from '../../$.js'
 
 /**
- * GraphQL Input Field ↗ {@link https://graphql.org/learn/schema/#input-types | Official Documentation}
+ * GraphQL input field (↗ {@link https://graphql.org/learn/schema/#input-types | lang docs}) on type {@link $Schema.InputObject}.
  *
- * | Property | Value |
- * | -------- | ----- |
+ * # Info
+ *
+ * | | |
+ * | - | - |
  * | **Type** | {@link $Schema.ABCEnum} |
- * | **Kind** | `Enum` ↗ {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Docs} |
+ * | **Kind** | `Enum` ↗ {@link https://graphql.org/graphql-js/type/#graphqlenumtype | lang docs} |
  * | **Parent** | {@link $Schema.InputObject} |
+ * | **Path** | `InputObject.abcEnum` |
  * | **Nullability** | Optional |
- *
- * Type: {@link $Schema.ABCEnum}
- *
- * Kind: `Enum` ↗ {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Official Documentation}
- *
- * Parent: {@link $Schema.InputObject}
  */
 export interface abcEnum extends $.Schema.InputField {
   kind: 'InputField'
@@ -25,20 +22,17 @@ export interface abcEnum extends $.Schema.InputField {
 }
 
 /**
- * GraphQL Input Field ↗ {@link https://graphql.org/learn/schema/#input-types | Official Documentation}
+ * GraphQL input field (↗ {@link https://graphql.org/learn/schema/#input-types | lang docs}) on type {@link $Schema.InputObject}.
  *
- * | Property | Value |
- * | -------- | ----- |
+ * # Info
+ *
+ * | | |
+ * | - | - |
  * | **Type** | {@link $Schema.Date} |
- * | **Kind** | `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | Docs} |
+ * | **Kind** | `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | lang docs} |
  * | **Parent** | {@link $Schema.InputObject} |
+ * | **Path** | `InputObject.date` |
  * | **Nullability** | Optional |
- *
- * Type: {@link $Schema.Date}
- *
- * Kind: `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | Official Documentation}
- *
- * Parent: {@link $Schema.InputObject}
  */
 export interface date extends $.Schema.InputField {
   kind: 'InputField'
@@ -48,20 +42,17 @@ export interface date extends $.Schema.InputField {
 }
 
 /**
- * GraphQL Input Field ↗ {@link https://graphql.org/learn/schema/#input-types | Official Documentation}
+ * GraphQL input field (↗ {@link https://graphql.org/learn/schema/#input-types | lang docs}) on type {@link $Schema.InputObject}.
  *
- * | Property | Value |
- * | -------- | ----- |
+ * # Info
+ *
+ * | | |
+ * | - | - |
  * | **Type** | {@link $Schema.Date}! |
- * | **Kind** | `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | Docs} |
+ * | **Kind** | `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | lang docs} |
  * | **Parent** | {@link $Schema.InputObject} |
+ * | **Path** | `InputObject.dateRequired` |
  * | **Nullability** | Required |
- *
- * Type: {@link $Schema.Date}!
- *
- * Kind: `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | Official Documentation}
- *
- * Parent: {@link $Schema.InputObject}
  */
 export interface dateRequired extends $.Schema.InputField {
   kind: 'InputField'
@@ -71,20 +62,17 @@ export interface dateRequired extends $.Schema.InputField {
 }
 
 /**
- * GraphQL Input Field ↗ {@link https://graphql.org/learn/schema/#input-types | Official Documentation}
+ * GraphQL input field (↗ {@link https://graphql.org/learn/schema/#input-types | lang docs}) on type {@link $Schema.InputObject}.
  *
- * | Property | Value |
- * | -------- | ----- |
+ * # Info
+ *
+ * | | |
+ * | - | - |
  * | **Type** | {@link $Schema.ID} |
- * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
  * | **Parent** | {@link $Schema.InputObject} |
+ * | **Path** | `InputObject.id` |
  * | **Nullability** | Optional |
- *
- * Type: {@link $Schema.ID}
- *
- * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
- *
- * Parent: {@link $Schema.InputObject}
  */
 export interface id extends $.Schema.InputField {
   kind: 'InputField'
@@ -94,20 +82,17 @@ export interface id extends $.Schema.InputField {
 }
 
 /**
- * GraphQL Input Field ↗ {@link https://graphql.org/learn/schema/#input-types | Official Documentation}
+ * GraphQL input field (↗ {@link https://graphql.org/learn/schema/#input-types | lang docs}) on type {@link $Schema.InputObject}.
  *
- * | Property | Value |
- * | -------- | ----- |
+ * # Info
+ *
+ * | | |
+ * | - | - |
  * | **Type** | {@link $Schema.ID}! |
- * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
  * | **Parent** | {@link $Schema.InputObject} |
+ * | **Path** | `InputObject.idRequired` |
  * | **Nullability** | Required |
- *
- * Type: {@link $Schema.ID}!
- *
- * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
- *
- * Parent: {@link $Schema.InputObject}
  */
 export interface idRequired extends $.Schema.InputField {
   kind: 'InputField'

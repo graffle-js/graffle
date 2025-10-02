@@ -1,22 +1,19 @@
 import type { Schema as $Schema } from "../../$.js";
 
 /**
- * GraphQL Input Field ↗ {@link https://graphql.org/learn/schema/#input-types | Official Documentation}
+ * GraphQL input field (↗ {@link https://graphql.org/learn/schema/#input-types | lang docs}) on type {@link $Schema.DateFilter}.
  *
  * The minimum date (greater than or equal to).
  *
- * | Property | Value |
- * | -------- | ----- |
+ * # Info
+ *
+ * | | |
+ * | - | - |
  * | **Type** | {@link $Schema.Date} |
- * | **Kind** | `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | Docs} |
+ * | **Kind** | `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | lang docs} |
  * | **Parent** | {@link $Schema.DateFilter} |
+ * | **Path** | `DateFilter.gte` |
  * | **Nullability** | Optional |
- *
- * Type: {@link $Schema.Date}
- *
- * Kind: `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | Official Documentation}
- *
- * Parent: {@link $Schema.DateFilter}
  */
 export interface gte {
   kind: "InputField";
@@ -26,22 +23,19 @@ export interface gte {
 }
 
 /**
- * GraphQL Input Field ↗ {@link https://graphql.org/learn/schema/#input-types | Official Documentation}
+ * GraphQL input field (↗ {@link https://graphql.org/learn/schema/#input-types | lang docs}) on type {@link $Schema.DateFilter}.
  *
  * The maximum date (less than or equal to).
  *
- * | Property | Value |
- * | -------- | ----- |
+ * # Info
+ *
+ * | | |
+ * | - | - |
  * | **Type** | {@link $Schema.Date} |
- * | **Kind** | `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | Docs} |
+ * | **Kind** | `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | lang docs} |
  * | **Parent** | {@link $Schema.DateFilter} |
+ * | **Path** | `DateFilter.lte` |
  * | **Nullability** | Optional |
- *
- * Type: {@link $Schema.Date}
- *
- * Kind: `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | Official Documentation}
- *
- * Parent: {@link $Schema.DateFilter}
  */
 export interface lte {
   kind: "InputField";

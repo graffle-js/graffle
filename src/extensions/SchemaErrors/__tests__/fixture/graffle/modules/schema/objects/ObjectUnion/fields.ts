@@ -20,20 +20,17 @@ export interface __typename extends $.Schema.OutputField {
 }
 
 /**
- * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.ObjectUnion}.
  *
- * | Property | Value |
- * | -------- | ----- |
+ * # Info
+ *
+ * | | |
+ * | - | - |
  * | **Type** | {@link $Schema.FooBarUnion} |
- * | **Kind** | `Union` ↗ {@link https://graphql.org/graphql-js/type/#graphqluniontype | Docs} |
+ * | **Kind** | `Union` ↗ {@link https://graphql.org/graphql-js/type/#graphqluniontype | lang docs} |
  * | **Parent** | {@link $Schema.ObjectUnion} |
+ * | **Path** | `ObjectUnion.fooBarUnion` |
  * | **Nullability** | Optional |
- *
- * Type: {@link $Schema.FooBarUnion}
- *
- * Kind: `Union` ↗ {@link https://graphql.org/graphql-js/type/#graphqluniontype | Official Documentation}
- *
- * Parent: {@link $Schema.ObjectUnion}
  */
 export interface fooBarUnion extends $.Schema.OutputField {
   kind: 'OutputField'

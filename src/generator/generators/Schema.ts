@@ -5,6 +5,7 @@ import { entries, isObjectEmpty, values } from '../../lib/prelude.js'
 import { Tex } from '../../lib/tex/_namespace.js'
 import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
+import { getKindDocUrl, markdownTable } from '../helpers/jsdoc.js'
 import { type GeneratedModule, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { type CodeGenerator, createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
 import { getUtilitiesPath } from '../helpers/pathHelpers.js'
@@ -97,7 +98,7 @@ const generateEnumModule = (config: Config, enumType: Grafaid.Schema.EnumType): 
 
   code(
     Code.tsInterface({
-      tsDoc: getTsDocContents(config, enumType),
+      tsDoc: getEnumTypeDoc(config, enumType),
       export: true,
       name: enumType.name,
       extends: config.code.schemaInterfaceExtendsEnabled ? `$.Schema.Enum` : null,
@@ -135,10 +136,11 @@ const generateUnionModule = (config: Config, unionType: Grafaid.Schema.UnionType
     const dir = isRoot ? 'roots' : 'objects'
     code(`import type { ${member.name} } from '../${dir}/${member.name}/$.js'`)
   }
+  code(`import type { Schema as $Schema } from '../$.js'`)
   code()
 
   code(Code.tsInterface({
-    tsDoc: getTsDocContents(config, unionType),
+    tsDoc: getUnionTypeDoc(config, unionType),
     export: true,
     name: unionType.name,
     extends: config.code.schemaInterfaceExtendsEnabled ? `$.Schema.Union` : null,
@@ -156,22 +158,6 @@ const generateUnionModule = (config: Config, unionType: Grafaid.Schema.UnionType
     filePath: `schema/unions/${unionType.name}.ts`,
     content: code.toString(),
   }
-}
-
-/**
- * Map GraphQL kind names to their official documentation URLs.
- */
-const getKindDocUrl = (kindName: string): string => {
-  const kindToUrl: Record<string, string> = {
-    'ScalarStandard': 'https://graphql.org/graphql-js/type/#scalars',
-    'ScalarCustom': 'https://graphql.org/graphql-js/type/#graphqlscalartype',
-    'OutputObject': 'https://graphql.org/graphql-js/type/#graphqlobjecttype',
-    'Interface': 'https://graphql.org/graphql-js/type/#graphqlinterfacetype',
-    'Union': 'https://graphql.org/graphql-js/type/#graphqluniontype',
-    'Enum': 'https://graphql.org/graphql-js/type/#graphqlenumtype',
-    'InputObject': 'https://graphql.org/graphql-js/type/#graphqlinputobjecttype',
-  }
-  return kindToUrl[kindName] || 'https://graphql.org/graphql-js/type/'
 }
 
 /**
@@ -217,16 +203,15 @@ const getInputFieldDoc = (
   const defaultValue = field.defaultValue
 
   // Check for custom directives
-  const customDirectives = field.astNode?.directives?.filter(d =>
-    !['deprecated', 'skip', 'include'].includes(d.name.value)
-  ) ?? []
+  const customDirectives =
+    field.astNode?.directives?.filter(d => !['deprecated', 'skip', 'include'].includes(d.name.value)) ?? []
 
   // Build markdown table (empty headers but required for table syntax)
   const tableLines: string[] = []
   tableLines.push(`| | |`)
   tableLines.push(`| - | - |`)
   tableLines.push(`| **Type** | ${typeSignature} |`)
-  tableLines.push(`| **Kind** | \`${typeAndKind.kindName}\` ↗ {@link ${kindDocUrl} | lang docs} |`)
+  tableLines.push(`| **Kind** | {@link ${kindDocUrl} | ${typeAndKind.kindName}} ↗ |`)
   tableLines.push(`| **Parent** | {@link $Schema.${parentType.name}} |`)
   tableLines.push(`| **Path** | \`${fieldPath}\` |`)
   if (isDeprecated) {
@@ -248,7 +233,9 @@ const getInputFieldDoc = (
   const parts: string[] = []
 
   // Add field type header with link to GraphQL input type docs
-  parts.push(`GraphQL input field (↗ {@link https://graphql.org/learn/schema/#input-types | lang docs}) on type {@link $Schema.${parentType.name}}.`)
+  parts.push(
+    `GraphQL {@link https://graphql.org/learn/schema/#input-types | input field} ↗ on type {@link $Schema.${parentType.name}}.`,
+  )
 
   if (schemaDescription) {
     parts.push('') // blank line
@@ -307,6 +294,7 @@ const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.I
     namespaceCode(`import type * as $ from '${utilitiesPath}'`)
   }
   namespaceCode(`import type * as $Fields from './fields.js'`)
+  namespaceCode(`import type { Schema as $Schema } from '../../$.js'`)
   namespaceCode()
   namespaceCode(Code.reexportNamespace({ as: inputObject.name, from: './fields.js' }))
   namespaceCode()
@@ -321,7 +309,7 @@ const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.I
   )
 
   namespaceCode(Code.tsInterface({
-    tsDoc: getTsDocContents(config, inputObject),
+    tsDoc: getInputObjectTypeDoc(config, inputObject),
     export: true,
     name: inputObject.name,
     extends: config.code.schemaInterfaceExtendsEnabled ? `$.Schema.InputObject` : null,
@@ -500,16 +488,15 @@ const getOutputFieldDoc = (
   const deprecationReason = field.deprecationReason
 
   // Check for custom directives
-  const customDirectives = field.astNode?.directives?.filter(d =>
-    !['deprecated', 'skip', 'include'].includes(d.name.value)
-  ) ?? []
+  const customDirectives =
+    field.astNode?.directives?.filter(d => !['deprecated', 'skip', 'include'].includes(d.name.value)) ?? []
 
   // Build markdown table (empty headers but required for table syntax)
   const tableLines: string[] = []
   tableLines.push(`| | |`)
   tableLines.push(`| - | - |`)
   tableLines.push(`| **Type** | ${typeSignature} |`)
-  tableLines.push(`| **Kind** | \`${typeAndKind.kindName}\` ↗ {@link ${kindDocUrl} | lang docs} |`)
+  tableLines.push(`| **Kind** | {@link ${kindDocUrl} | ${typeAndKind.kindName}} ↗ |`)
   tableLines.push(`| **Parent** | {@link $Schema.${parentType.name}} |`)
   tableLines.push(`| **Path** | \`${fieldPath}\` |`)
   if (isDeprecated) {
@@ -531,7 +518,9 @@ const getOutputFieldDoc = (
   const parts: string[] = []
 
   // Add field type header with link to GraphQL fields docs
-  parts.push(`GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.${parentType.name}}.`)
+  parts.push(
+    `GraphQL {@link https://graphql.org/learn/queries/#fields | output field} ↗ on type {@link $Schema.${parentType.name}}.`,
+  )
 
   if (schemaDescription) {
     parts.push('') // blank line
@@ -542,6 +531,230 @@ const getOutputFieldDoc = (
   parts.push('# Info')
   parts.push('') // blank line after heading
   parts.push(tableLines.join('\n'))
+
+  return parts.join('\n')
+}
+
+/**
+ * Generate enhanced JSDoc for an Object type.
+ */
+const getObjectTypeDoc = (
+  config: Config,
+  type: Grafaid.Schema.ObjectType,
+  isRoot: boolean,
+): string | null => {
+  const schemaDescription = getTsDocContents(config, type)
+  const kindDocUrl = getKindDocUrl('OutputObject')
+  const fields = Object.values(type.getFields())
+  const fieldCount = fields.length
+
+  // Check if this object implements any interfaces
+  const interfaces = type.getInterfaces()
+
+  // Determine operation type for roots
+  let operationType: 'query' | 'mutation' | 'subscription' | null = null
+  if (isRoot) {
+    if (config.schema.kindMap.index.Root.query?.name === type.name) operationType = 'query'
+    else if (config.schema.kindMap.index.Root.mutation?.name === type.name) operationType = 'mutation'
+    else if (config.schema.kindMap.index.Root.subscription?.name === type.name) operationType = 'subscription'
+  }
+
+  // Build table
+  const table = markdownTable({
+    'Kind': `{@link ${kindDocUrl} | Object} ↗`,
+    'Fields': `${fieldCount}`,
+    'Implements': interfaces.length > 0
+      ? interfaces.map(i => `{@link $Schema.${i.name}}`).join(', ')
+      : undefined,
+  })
+
+  // Combine parts
+  const parts: string[] = []
+
+  // Add narrative based on whether it's a root type
+  if (isRoot && operationType) {
+    const operationTypeCapitalized = operationType.charAt(0).toUpperCase() + operationType.slice(1)
+    parts.push(
+      `GraphQL root {@link https://graphql.org/learn/schema/#the-${operationType}-and-mutation-types | ${operationTypeCapitalized}} type.`,
+    )
+  } else {
+    parts.push(`GraphQL {@link https://graphql.org/learn/schema/#object-types | Object} type.`)
+  }
+
+  if (schemaDescription) {
+    parts.push('')
+    parts.push(schemaDescription)
+  }
+
+  parts.push('')
+  parts.push('# Info')
+  parts.push('')
+  parts.push(table)
+
+  return parts.join('\n')
+}
+
+/**
+ * Generate enhanced JSDoc for an Interface type.
+ */
+const getInterfaceTypeDoc = (
+  config: Config,
+  type: Grafaid.Schema.InterfaceType,
+  kindMap: Grafaid.Schema.KindMap,
+): string | null => {
+  const schemaDescription = getTsDocContents(config, type)
+  const kindDocUrl = getKindDocUrl('Interface')
+  const fields = Object.values(type.getFields())
+  const fieldCount = fields.length
+
+  // Get implementors
+  const implementors = Grafaid.Schema.KindMap.getInterfaceImplementors(kindMap, type)
+
+  // Build table
+  const table = markdownTable({
+    'Kind': `{@link ${kindDocUrl} | Interface} ↗`,
+    'Fields': `${fieldCount}`,
+    'Implementors': implementors.length > 0
+      ? implementors.map(i => `{@link $Schema.${i.name}}`).join(', ')
+      : undefined,
+  })
+
+  // Combine parts
+  const parts: string[] = []
+  parts.push(`GraphQL {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface}.`)
+
+  if (schemaDescription) {
+    parts.push('')
+    parts.push(schemaDescription)
+  }
+
+  parts.push('')
+  parts.push('# Info')
+  parts.push('')
+  parts.push(table)
+
+  return parts.join('\n')
+}
+
+/**
+ * Generate enhanced JSDoc for a Union type.
+ */
+const getUnionTypeDoc = (
+  config: Config,
+  type: Grafaid.Schema.UnionType,
+): string | null => {
+  const schemaDescription = getTsDocContents(config, type)
+  const kindDocUrl = getKindDocUrl('Union')
+  const members = type.getTypes()
+
+  // Build table
+  const table = markdownTable({
+    'Kind': `{@link ${kindDocUrl} | Union} ↗`,
+    'Members': `${members.length}`,
+    'Types': members.map(m => `{@link $Schema.${m.name}}`).join(', '),
+  })
+
+  // Combine parts
+  const parts: string[] = []
+  parts.push(`GraphQL {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union}.`)
+
+  if (schemaDescription) {
+    parts.push('')
+    parts.push(schemaDescription)
+  }
+
+  parts.push('')
+  parts.push('# Info')
+  parts.push('')
+  parts.push(table)
+
+  return parts.join('\n')
+}
+
+/**
+ * Generate enhanced JSDoc for an InputObject type.
+ */
+const getInputObjectTypeDoc = (
+  config: Config,
+  type: Grafaid.Schema.InputObjectType,
+): string | null => {
+  const schemaDescription = getTsDocContents(config, type)
+  const kindDocUrl = getKindDocUrl('InputObject')
+  const fields = Object.values(type.getFields())
+  const fieldCount = fields.length
+  const isAllFieldsNullable = Grafaid.Schema.isAllInputObjectFieldsNullable(type)
+
+  // Build table
+  const table = markdownTable({
+    'Kind': `{@link ${kindDocUrl} | InputObject} ↗`,
+    'Fields': `${fieldCount}`,
+    'All Fields Nullable': isAllFieldsNullable ? 'Yes' : 'No',
+  })
+
+  // Combine parts
+  const parts: string[] = []
+  parts.push(`GraphQL {@link https://graphql.org/learn/schema/#input-types | InputObject}.`)
+
+  if (schemaDescription) {
+    parts.push('')
+    parts.push(schemaDescription)
+  }
+
+  parts.push('')
+  parts.push('# Info')
+  parts.push('')
+  parts.push(table)
+
+  return parts.join('\n')
+}
+
+/**
+ * Generate enhanced JSDoc for an Enum type.
+ */
+const getEnumTypeDoc = (
+  config: Config,
+  type: Grafaid.Schema.EnumType,
+): string | null => {
+  // For enums, don't use getTsDocContents because it already formats members
+  // We want to format them our own way
+  const schemaDescription = type.description
+  const kindDocUrl = getKindDocUrl('Enum')
+  const members = type.getValues()
+  const memberCount = members.length
+
+  // Build table
+  const table = markdownTable({
+    'Kind': `{@link ${kindDocUrl} | Enum} ↗`,
+    'Members': `${memberCount}`,
+  })
+
+  // Combine parts
+  const parts: string[] = []
+  parts.push(`GraphQL {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum}.`)
+
+  if (schemaDescription) {
+    parts.push('')
+    parts.push(schemaDescription)
+  }
+
+  // Add members list after description
+  if (members.length > 0) {
+    parts.push('')
+    parts.push('**Members:**')
+    for (const member of members) {
+      const memberDescription = member.description
+      if (memberDescription) {
+        parts.push(`- \`${member.name}\` - ${memberDescription}`)
+      } else {
+        parts.push(`- \`${member.name}\``)
+      }
+    }
+  }
+
+  parts.push('')
+  parts.push('# Info')
+  parts.push('')
+  parts.push(table)
 
   return parts.join('\n')
 }
@@ -627,6 +840,7 @@ const generateTypeModule = (
     namespaceCode(`import type * as $ from '${utilitiesPath}'`)
   }
   namespaceCode(`import type * as $Fields from './fields.js'`)
+  namespaceCode(`import type { Schema as $Schema } from '../../$.js'`)
 
   // For interfaces, import implementor types from the barrel
   const isInterface = type instanceof Grafaid.Schema.InterfaceType
@@ -657,7 +871,9 @@ const generateTypeModule = (
   )
 
   namespaceCode(Code.tsInterface({
-    tsDoc: getTsDocContents(config, type),
+    tsDoc: isInterface
+      ? getInterfaceTypeDoc(config, type as Grafaid.Schema.InterfaceType, config.schema.kindMap)
+      : getObjectTypeDoc(config, type as Grafaid.Schema.ObjectType, kind === 'roots'),
     export: true,
     name: type.name,
     extends: config.code.schemaInterfaceExtendsEnabled

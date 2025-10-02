@@ -2,7 +2,18 @@ import type * as $$Utilities from '../../../../../../exports/utilities-for-gener
 import type * as $$Schema from './schema/$.js'
 import type * as $$SelectionSets from './selection-sets.js'
 
+/**
+ * GraphQL {@link https://graphql.org/learn/schema/#the-mutation-and-mutation-types | Mutation} root methods.
+ *
+ * All methods return Promises. Use `.mutation.$batch(...)` to select multiple fields at once.
+ */
 export interface MutationMethods<$Context extends $$Utilities.Context> {
+  /**
+   * Select multiple Mutation fields at once.
+   *
+   * Pass a selection set object that includes the fields you want.
+   * Use this method to request multiple fields in a single request for better performance.
+   */
   $batch: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -18,6 +29,11 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
+  /**
+   * Request the {@link https://graphql.org/learn/schema/#the-__typename-field | `__typename`} meta-field.
+   *
+   * The `__typename` field returns the name of the object type. In this case, it will always return `"Mutation"`.
+   */
   __typename: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     () => Promise<
@@ -29,7 +45,17 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Mutation} |
+   * | **Path** | `Mutation.id` |
+   * | **Nullability** | Optional |
+   */
   id: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -46,7 +72,17 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ID}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Mutation} |
+   * | **Path** | `Mutation.idNonNull` |
+   * | **Nullability** | Required |
+   */
   idNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(

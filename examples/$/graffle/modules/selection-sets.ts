@@ -47,6 +47,8 @@ export interface $Document<
 // ----------------------------------------| Entrypoint Interface |
 
 /**
+ * GraphQL root {@link https://graphql.org/learn/schema/#the-query-and-mutation-types | Query} type.
+ *
  * Root query type for fetching Pokemon data.
  */
 export interface Query<
@@ -54,37 +56,105 @@ export interface Query<
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
   /**
-   * Select the `battles` field on the `Query` object. Its type is `Battle` (a `Union` kind of type).
+   * Retrieve all battles that have occurred.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Battle}[]! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.battles` |
+   * | **Nullability** | Required |
+   * | **List** | Yes |
    */
   battles?:
     | Query.battles$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.battles<_$Context>>
   /**
-   * Select the `beings` field on the `Query` object. Its type is `Being` (a `Interface` kind of type).
+   * Retrieve all beings (Pokemon, Trainers, and Patrons).
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Being}[]! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.beings` |
+   * | **Nullability** | Required |
+   * | **List** | Yes |
    */
   beings?:
     | Query.beings$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.beings<_$Context>>
   /**
-   * Select the `pokemonByName` field on the `Query` object. Its type is `Pokemon` (a `OutputObject` kind of type).
+   * Find Pokemon by their name.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Pokemon}[] |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.pokemonByName` |
+   * | **Nullability** | Optional |
+   * | **List** | Yes |
+   * | **Arguments** | 1 |
    */
   pokemonByName?:
     | Query.pokemonByName<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.pokemonByName<_$Context>>
   /**
-   * Select the `pokemons` field on the `Query` object. Its type is `Pokemon` (a `OutputObject` kind of type).
+   * Retrieve all Pokemon, optionally filtered.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Pokemon}[] |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.pokemons` |
+   * | **Nullability** | Optional |
+   * | **List** | Yes |
+   * | **Arguments** | 1 |
    */
   pokemons?:
     | Query.pokemons$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.pokemons<_$Context>>
   /**
-   * Select the `trainerByName` field on the `Query` object. Its type is `Trainer` (a `OutputObject` kind of type).
+   * Find a trainer by their name.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Trainer} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.trainerByName` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
    */
   trainerByName?:
     | Query.trainerByName<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.trainerByName<_$Context>>
   /**
-   * Select the `trainers` field on the `Query` object. Its type is `Trainer` (a `OutputObject` kind of type).
+   * Retrieve all trainers.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Trainer}[] |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.trainers` |
+   * | **Nullability** | Optional |
+   * | **List** | Yes |
    */
   trainers?:
     | Query.trainers$Expanded<_$Context>
@@ -330,6 +400,8 @@ export namespace Query {
 // ----------------------------------------| Entrypoint Interface |
 
 /**
+ * GraphQL root {@link https://graphql.org/learn/schema/#the-mutation-and-mutation-types | Mutation} type.
+ *
  * Root mutation type for modifying Pokemon data.
  */
 export interface Mutation<
@@ -337,7 +409,18 @@ export interface Mutation<
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
   /**
-   * Select the `addPokemon` field on the `Mutation` object. Its type is `Pokemon` (a `OutputObject` kind of type).
+   * Add a new Pokemon to the database.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Pokemon} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Mutation} |
+   * | **Path** | `Mutation.addPokemon` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 5 |
    */
   addPokemon?:
     | Mutation.addPokemon<_$Context>
@@ -632,25 +715,66 @@ export interface BattleRoyale<
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
-   * Select the `combatants` field on the `BattleRoyale` object. Its type is `CombatantMultiPokemon` (a `OutputObject` kind of type).
+   * The list of combatants participating in this battle royale.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$CombatantMultiPokemon}[] |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$BattleRoyale} |
+   * | **Path** | `BattleRoyale.combatants` |
+   * | **Nullability** | Optional |
+   * | **List** | Yes |
    */
   combatants?:
     | BattleRoyale.combatants$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleRoyale.combatants<_$Context>>
   /**
-   * Select the `date` field on the `BattleRoyale` object. Its type is `Float` (a `ScalarStandard` kind of type).
+   * The date when this battle took place, stored as a Unix timestamp.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Float} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$BattleRoyale} |
+   * | **Path** | `BattleRoyale.date` |
+   * | **Nullability** | Optional |
    */
   date?:
     | BattleRoyale.date$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleRoyale.date<_$Context>>
   /**
-   * Select the `id` field on the `BattleRoyale` object. Its type is `ID` (a `ScalarStandard` kind of type).
+   * The unique identifier for this battle.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$BattleRoyale} |
+   * | **Path** | `BattleRoyale.id` |
+   * | **Nullability** | Optional |
    */
   id?:
     | BattleRoyale.id$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleRoyale.id<_$Context>>
   /**
-   * Select the `winner` field on the `BattleRoyale` object. Its type is `Trainer` (a `OutputObject` kind of type).
+   * The trainer who won this battle royale.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Trainer} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$BattleRoyale} |
+   * | **Path** | `BattleRoyale.winner` |
+   * | **Nullability** | Optional |
    */
   winner?:
     | BattleRoyale.winner$Expanded<_$Context>
@@ -812,31 +936,81 @@ export interface BattleTrainer<
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
-   * Select the `combatant1` field on the `BattleTrainer` object. Its type is `CombatantSinglePokemon` (a `OutputObject` kind of type).
+   * The first combatant in this trainer battle.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$CombatantSinglePokemon} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$BattleTrainer} |
+   * | **Path** | `BattleTrainer.combatant1` |
+   * | **Nullability** | Optional |
    */
   combatant1?:
     | BattleTrainer.combatant1$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleTrainer.combatant1<_$Context>>
   /**
-   * Select the `combatant2` field on the `BattleTrainer` object. Its type is `CombatantSinglePokemon` (a `OutputObject` kind of type).
+   * The second combatant in this trainer battle.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$CombatantSinglePokemon} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$BattleTrainer} |
+   * | **Path** | `BattleTrainer.combatant2` |
+   * | **Nullability** | Optional |
    */
   combatant2?:
     | BattleTrainer.combatant2$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleTrainer.combatant2<_$Context>>
   /**
-   * Select the `date` field on the `BattleTrainer` object. Its type is `Float` (a `ScalarStandard` kind of type).
+   * The date when this battle took place, stored as a Unix timestamp.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Float} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$BattleTrainer} |
+   * | **Path** | `BattleTrainer.date` |
+   * | **Nullability** | Optional |
    */
   date?:
     | BattleTrainer.date$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleTrainer.date<_$Context>>
   /**
-   * Select the `id` field on the `BattleTrainer` object. Its type is `ID` (a `ScalarStandard` kind of type).
+   * The unique identifier for this battle.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$BattleTrainer} |
+   * | **Path** | `BattleTrainer.id` |
+   * | **Nullability** | Optional |
    */
   id?:
     | BattleTrainer.id$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleTrainer.id<_$Context>>
   /**
-   * Select the `winner` field on the `BattleTrainer` object. Its type is `Trainer` (a `OutputObject` kind of type).
+   * The trainer who won this battle.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Trainer} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$BattleTrainer} |
+   * | **Path** | `BattleTrainer.winner` |
+   * | **Nullability** | Optional |
    */
   winner?:
     | BattleTrainer.winner$Expanded<_$Context>
@@ -1024,37 +1198,98 @@ export interface BattleWild<
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
-   * Select the `date` field on the `BattleWild` object. Its type is `Float` (a `ScalarStandard` kind of type).
+   * The date when this battle took place, stored as a Unix timestamp.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Float} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$BattleWild} |
+   * | **Path** | `BattleWild.date` |
+   * | **Nullability** | Optional |
    */
   date?:
     | BattleWild.date$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleWild.date<_$Context>>
   /**
-   * Select the `id` field on the `BattleWild` object. Its type is `ID` (a `ScalarStandard` kind of type).
+   * The unique identifier for this battle.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$BattleWild} |
+   * | **Path** | `BattleWild.id` |
+   * | **Nullability** | Optional |
    */
   id?:
     | BattleWild.id$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleWild.id<_$Context>>
   /**
-   * Select the `pokemon` field on the `BattleWild` object. Its type is `Pokemon` (a `OutputObject` kind of type).
+   * The trainer's Pokemon that participated in this battle.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Pokemon} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$BattleWild} |
+   * | **Path** | `BattleWild.pokemon` |
+   * | **Nullability** | Optional |
    */
   pokemon?:
     | BattleWild.pokemon$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleWild.pokemon<_$Context>>
   /**
-   * Select the `result` field on the `BattleWild` object. Its type is `BattleWildResult` (a `Enum` kind of type).
+   * The outcome of this wild Pokemon battle.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$BattleWildResult} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum} ↗ |
+   * | **Parent** | {@link $NamedTypes.$BattleWild} |
+   * | **Path** | `BattleWild.result` |
+   * | **Nullability** | Optional |
    */
   result?:
     | BattleWild.result$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleWild.result<_$Context>>
   /**
-   * Select the `trainer` field on the `BattleWild` object. Its type is `Trainer` (a `OutputObject` kind of type).
+   * The trainer who engaged in this wild battle.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Trainer} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$BattleWild} |
+   * | **Path** | `BattleWild.trainer` |
+   * | **Nullability** | Optional |
    */
   trainer?:
     | BattleWild.trainer$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleWild.trainer<_$Context>>
   /**
-   * Select the `wildPokemons` field on the `BattleWild` object. Its type is `Pokemon` (a `OutputObject` kind of type).
+   * The wild Pokemon encountered in this battle.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Pokemon}[] |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$BattleWild} |
+   * | **Path** | `BattleWild.wildPokemons` |
+   * | **Nullability** | Optional |
+   * | **List** | Yes |
    */
   wildPokemons?:
     | BattleWild.wildPokemons$Expanded<_$Context>
@@ -1271,13 +1506,34 @@ export interface CombatantMultiPokemon<
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
-   * Select the `pokemons` field on the `CombatantMultiPokemon` object. Its type is `Pokemon` (a `OutputObject` kind of type).
+   * The team of Pokemon used by this combatant.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Pokemon}[] |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$CombatantMultiPokemon} |
+   * | **Path** | `CombatantMultiPokemon.pokemons` |
+   * | **Nullability** | Optional |
+   * | **List** | Yes |
    */
   pokemons?:
     | CombatantMultiPokemon.pokemons$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<CombatantMultiPokemon.pokemons<_$Context>>
   /**
-   * Select the `trainer` field on the `CombatantMultiPokemon` object. Its type is `Trainer` (a `OutputObject` kind of type).
+   * The trainer commanding this team of Pokemon.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Trainer} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$CombatantMultiPokemon} |
+   * | **Path** | `CombatantMultiPokemon.trainer` |
+   * | **Nullability** | Optional |
    */
   trainer?:
     | CombatantMultiPokemon.trainer$Expanded<_$Context>
@@ -1384,13 +1640,33 @@ export interface CombatantSinglePokemon<
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
-   * Select the `pokemon` field on the `CombatantSinglePokemon` object. Its type is `Pokemon` (a `OutputObject` kind of type).
+   * The Pokemon used by this combatant.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Pokemon} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$CombatantSinglePokemon} |
+   * | **Path** | `CombatantSinglePokemon.pokemon` |
+   * | **Nullability** | Optional |
    */
   pokemon?:
     | CombatantSinglePokemon.pokemon$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<CombatantSinglePokemon.pokemon<_$Context>>
   /**
-   * Select the `trainer` field on the `CombatantSinglePokemon` object. Its type is `Trainer` (a `OutputObject` kind of type).
+   * The trainer commanding this Pokemon.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Trainer} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$CombatantSinglePokemon} |
+   * | **Path** | `CombatantSinglePokemon.trainer` |
+   * | **Nullability** | Optional |
    */
   trainer?:
     | CombatantSinglePokemon.trainer$Expanded<_$Context>
@@ -1497,19 +1773,49 @@ export interface Patron<
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
-   * Select the `id` field on the `Patron` object. Its type is `ID` (a `ScalarStandard` kind of type).
+   * The unique identifier for this patron.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Patron} |
+   * | **Path** | `Patron.id` |
+   * | **Nullability** | Optional |
    */
   id?:
     | Patron.id$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Patron.id<_$Context>>
   /**
-   * Select the `money` field on the `Patron` object. Its type is `Int` (a `ScalarStandard` kind of type).
+   * The amount of money this patron has.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Int} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Patron} |
+   * | **Path** | `Patron.money` |
+   * | **Nullability** | Optional |
    */
   money?:
     | Patron.money$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Patron.money<_$Context>>
   /**
-   * Select the `name` field on the `Patron` object. Its type is `String` (a `ScalarStandard` kind of type).
+   * The name of this patron.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Patron} |
+   * | **Path** | `Patron.name` |
+   * | **Nullability** | Optional |
    */
   name?:
     | Patron.name$Expanded<_$Context>
@@ -1648,49 +1954,129 @@ export interface Pokemon<
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
-   * Select the `attack` field on the `Pokemon` object. Its type is `Int` (a `ScalarStandard` kind of type).
+   * The attack power of this Pokemon.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Int}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Pokemon} |
+   * | **Path** | `Pokemon.attack` |
+   * | **Nullability** | Required |
    */
   attack?:
     | Pokemon.attack$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Pokemon.attack<_$Context>>
   /**
-   * Select the `birthday` field on the `Pokemon` object. Its type is `Date` (a `ScalarCustom` kind of type).
+   * The date this Pokemon was born or caught.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Date}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Pokemon} |
+   * | **Path** | `Pokemon.birthday` |
+   * | **Nullability** | Required |
    */
   birthday?:
     | Pokemon.birthday$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Pokemon.birthday<_$Context>>
   /**
-   * Select the `defense` field on the `Pokemon` object. Its type is `Int` (a `ScalarStandard` kind of type).
+   * The defense power of this Pokemon.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Int}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Pokemon} |
+   * | **Path** | `Pokemon.defense` |
+   * | **Nullability** | Required |
    */
   defense?:
     | Pokemon.defense$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Pokemon.defense<_$Context>>
   /**
-   * Select the `hp` field on the `Pokemon` object. Its type is `Int` (a `ScalarStandard` kind of type).
+   * The health points (HP) of this Pokemon.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Int}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Pokemon} |
+   * | **Path** | `Pokemon.hp` |
+   * | **Nullability** | Required |
    */
   hp?:
     | Pokemon.hp$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Pokemon.hp<_$Context>>
   /**
-   * Select the `id` field on the `Pokemon` object. Its type is `ID` (a `ScalarStandard` kind of type).
+   * The unique identifier for this Pokemon.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ID}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Pokemon} |
+   * | **Path** | `Pokemon.id` |
+   * | **Nullability** | Required |
    */
   id?:
     | Pokemon.id$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Pokemon.id<_$Context>>
   /**
-   * Select the `name` field on the `Pokemon` object. Its type is `String` (a `ScalarStandard` kind of type).
+   * The name of this Pokemon.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$String}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Pokemon} |
+   * | **Path** | `Pokemon.name` |
+   * | **Nullability** | Required |
    */
   name?:
     | Pokemon.name$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Pokemon.name<_$Context>>
   /**
-   * Select the `trainer` field on the `Pokemon` object. Its type is `Trainer` (a `OutputObject` kind of type).
+   * The trainer who owns this Pokemon, if any.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Trainer} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Pokemon} |
+   * | **Path** | `Pokemon.trainer` |
+   * | **Nullability** | Optional |
    */
   trainer?:
     | Pokemon.trainer$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Pokemon.trainer<_$Context>>
   /**
-   * Select the `type` field on the `Pokemon` object. Its type is `PokemonType` (a `Enum` kind of type).
+   * The elemental type of this Pokemon.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$PokemonType}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Pokemon} |
+   * | **Path** | `Pokemon.type` |
+   * | **Nullability** | Required |
    */
   type?:
     | Pokemon.type$Expanded<_$Context>
@@ -1971,31 +2357,83 @@ export interface Trainer<
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
-   * Select the `class` field on the `Trainer` object. Its type is `TrainerClass` (a `Enum` kind of type).
+   * The class or specialty of this trainer.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$TrainerClass} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Trainer} |
+   * | **Path** | `Trainer.class` |
+   * | **Nullability** | Optional |
    */
   class?:
     | Trainer.$class$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Trainer.$class<_$Context>>
   /**
-   * Select the `fans` field on the `Trainer` object. Its type is `Patron` (a `OutputObject` kind of type).
+   * The patrons who are fans of this trainer.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Patron}[] |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Trainer} |
+   * | **Path** | `Trainer.fans` |
+   * | **Nullability** | Optional |
+   * | **List** | Yes |
    */
   fans?:
     | Trainer.fans$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Trainer.fans<_$Context>>
   /**
-   * Select the `id` field on the `Trainer` object. Its type is `ID` (a `ScalarStandard` kind of type).
+   * The unique identifier for this trainer.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Trainer} |
+   * | **Path** | `Trainer.id` |
+   * | **Nullability** | Optional |
    */
   id?:
     | Trainer.id$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Trainer.id<_$Context>>
   /**
-   * Select the `name` field on the `Trainer` object. Its type is `String` (a `ScalarStandard` kind of type).
+   * The name of this trainer.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Trainer} |
+   * | **Path** | `Trainer.name` |
+   * | **Nullability** | Optional |
    */
   name?:
     | Trainer.name$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Trainer.name<_$Context>>
   /**
-   * Select the `pokemon` field on the `Trainer` object. Its type is `Pokemon` (a `OutputObject` kind of type).
+   * The Pokemon owned by this trainer.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Pokemon}[] |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Trainer} |
+   * | **Path** | `Trainer.pokemon` |
+   * | **Nullability** | Optional |
+   * | **List** | Yes |
    */
   pokemon?:
     | Trainer.pokemon$Expanded<_$Context>

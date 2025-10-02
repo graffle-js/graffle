@@ -1,5 +1,4 @@
-import { DocumentBuilder } from 'graffle/extensions/document-builder'
-import { TransportHttp } from 'graffle/extensions/transport-http'
+import { DocumentBuilder, TransportHttp } from 'graffle'
 import * as $$Utilities from 'graffle/utilities-for-generated'
 import * as $$Data from './data.js'
 import * as $$Scalar from './scalar.js'

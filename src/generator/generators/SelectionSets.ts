@@ -11,6 +11,7 @@ import { Tex } from '../../lib/tex/_namespace.js'
 import { borderThin } from '../../lib/tex/tex.js'
 import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
+import { getOutputFieldSelectionSetDoc, getRootTypeDoc } from '../helpers/jsdoc.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 import { createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
 import { importUtilities } from '../helpers/pathHelpers.js'
@@ -222,9 +223,9 @@ const OutputObject = createCodeGenerator<{ type: Grafaid.Schema.ObjectType }>(
 
     const fieldKeys = fields.map(field => {
       const typeKind = Grafaid.getTypeAndKind(Grafaid.Schema.getNamedType(field.type))
-      const doc = Code.TSDoc(`
-        Select the \`${field.name}\` field on the \`${type.name}\` object. Its type is \`${typeKind.typeName}\` (a \`${typeKind.kindName}\` kind of type).
-      `)
+      const doc = Code.TSDoc(
+        getOutputFieldSelectionSetDoc(field, type.name, typeKind.kindName, typeKind.typeName),
+      )
       const key = H.outputFieldKey(
         field.name,
         `${renderName(type)}.${renderName(field)}`,
@@ -239,8 +240,18 @@ const OutputObject = createCodeGenerator<{ type: Grafaid.Schema.ObjectType }>(
     const isRootType = config.schema.kindMap.list.Root.some(_ => _.name === type.name)
     const extendsClause = isRootType ? null : `${$.$$Utilities}.DocumentBuilderKit.Select.Bases.ObjectLike`
 
+    // Determine operation type for root types
+    let operationType: 'query' | 'mutation' | 'subscription' | null = null
+    if (isRootType) {
+      if (config.schema.kindMap.index.Root.query?.name === type.name) operationType = 'query'
+      else if (config.schema.kindMap.index.Root.mutation?.name === type.name) operationType = 'mutation'
+      else if (config.schema.kindMap.index.Root.subscription?.name === type.name) operationType = 'subscription'
+    }
+
     code(Code.tsInterface({
-      tsDoc: getTsDocContents(config, type),
+      tsDoc: isRootType && operationType
+        ? getRootTypeDoc(config, type, operationType)
+        : getTsDocContents(config, type),
       name: type.name,
       parameters: $ContextTypeParameter,
       extends: [extendsClause],

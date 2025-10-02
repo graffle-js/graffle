@@ -2,7 +2,18 @@ import type * as $$Utilities from '../../../../../../exports/utilities-for-gener
 import type * as $$Schema from './schema/$.js'
 import type * as $$SelectionSets from './selection-sets.js'
 
+/**
+ * GraphQL {@link https://graphql.org/learn/schema/#the-query-and-mutation-types | Query} root methods.
+ *
+ * All methods return Promises. Use `.query.$batch(...)` to select multiple fields at once.
+ */
 export interface QueryMethods<$Context extends $$Utilities.Context> {
+  /**
+   * Select multiple Query fields at once.
+   *
+   * Pass a selection set object that includes the fields you want.
+   * Use this method to request multiple fields in a single request for better performance.
+   */
   $batch: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -18,6 +29,11 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
+  /**
+   * Request the {@link https://graphql.org/learn/schema/#the-__typename-field | `__typename`} meta-field.
+   *
+   * The `__typename` field returns the name of the object type. In this case, it will always return `"Query"`.
+   */
   __typename: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     () => Promise<
@@ -29,7 +45,18 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.InputObjectNested` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   */
   InputObjectNested: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -49,7 +76,18 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.InputObjectNestedNonNull` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   */
   InputObjectNestedNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -71,6 +109,16 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Query enum field documentation.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ABCEnum} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.abcEnum` |
+   * | **Nullability** | Optional |
    */
   abcEnum: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
@@ -88,7 +136,18 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.argInputObjectCircular` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   */
   argInputObjectCircular: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -108,7 +167,17 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.bigint} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.bigintField` |
+   * | **Nullability** | Optional |
+   */
   bigintField: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -128,7 +197,17 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.bigint}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.bigintFieldNonNull` |
+   * | **Nullability** | Required |
+   */
   bigintFieldNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -148,7 +227,17 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Date} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.date` |
+   * | **Nullability** | Optional |
+   */
   date: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -165,7 +254,18 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Date} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.dateArg` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   */
   dateArg: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -182,7 +282,18 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Date} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.dateArgInputObject` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   */
   dateArgInputObject: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -202,7 +313,18 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Date} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.dateArgList` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   */
   dateArgList: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -222,7 +344,18 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Date} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.dateArgNonNull` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   */
   dateArgNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -242,7 +375,18 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Date} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.dateArgNonNullList` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   */
   dateArgNonNullList: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -262,7 +406,18 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Date} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.dateArgNonNullListNonNull` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   */
   dateArgNonNullListNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -282,7 +437,17 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.DateInterface1} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.dateInterface1` |
+   * | **Nullability** | Optional |
+   */
   dateInterface1: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -302,7 +467,18 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Date}[] |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.dateList` |
+   * | **Nullability** | Optional |
+   * | **List** | Yes |
+   */
   dateList: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -319,7 +495,18 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Date}[] |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.dateListList` |
+   * | **Nullability** | Optional |
+   * | **List** | Yes |
+   */
   dateListList: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -339,7 +526,18 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Date}[]! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.dateListNonNull` |
+   * | **Nullability** | Required |
+   * | **List** | Yes |
+   */
   dateListNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -359,7 +557,17 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Date}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.dateNonNull` |
+   * | **Nullability** | Required |
+   */
   dateNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -379,7 +587,17 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.DateObject1} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.dateObject1` |
+   * | **Nullability** | Optional |
+   */
   dateObject1: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -399,7 +617,17 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.DateUnion} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.dateUnion` |
+   * | **Nullability** | Optional |
+   */
   dateUnion: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -416,7 +644,18 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.error` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   */
   error: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -433,7 +672,17 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.id` |
+   * | **Nullability** | Optional |
+   */
   id: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -450,7 +699,17 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ID}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.idNonNull` |
+   * | **Nullability** | Required |
+   */
   idNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -470,7 +729,17 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Interface} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.interface` |
+   * | **Nullability** | Optional |
+   */
   interface: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -490,7 +759,19 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.InterfaceChildA}[]! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.interfaceHierarchyChildA` |
+   * | **Nullability** | Required |
+   * | **List** | Yes |
+   * | **Arguments** | 1 |
+   */
   interfaceHierarchyChildA: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -510,7 +791,19 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.InterfaceChildB}[]! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.interfaceHierarchyChildB` |
+   * | **Nullability** | Required |
+   * | **List** | Yes |
+   * | **Arguments** | 1 |
+   */
   interfaceHierarchyChildB: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -530,7 +823,19 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.InterfaceGrandparent}[]! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.interfaceHierarchyGrandparents` |
+   * | **Nullability** | Required |
+   * | **List** | Yes |
+   * | **Arguments** | 1 |
+   */
   interfaceHierarchyGrandparents: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -550,7 +855,19 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.InterfaceParent}[]! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.interfaceHierarchyParents` |
+   * | **Nullability** | Required |
+   * | **List** | Yes |
+   * | **Arguments** | 1 |
+   */
   interfaceHierarchyParents: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -570,7 +887,17 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Interface}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.interfaceNonNull` |
+   * | **Nullability** | Required |
+   */
   interfaceNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -590,7 +917,18 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Interface} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.interfaceWithArgs` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   */
   interfaceWithArgs: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -610,7 +948,18 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Int}[] |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.listInt` |
+   * | **Nullability** | Optional |
+   * | **List** | Yes |
+   */
   listInt: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -627,7 +976,18 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Int}[]! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.listIntNonNull` |
+   * | **Nullability** | Required |
+   * | **List** | Yes |
+   */
   listIntNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -647,7 +1007,18 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Int}[] |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.listListInt` |
+   * | **Nullability** | Optional |
+   * | **List** | Yes |
+   */
   listListInt: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -667,7 +1038,18 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Int}[]! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.listListIntNonNull` |
+   * | **Nullability** | Required |
+   * | **List** | Yes |
+   */
   listListIntNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -687,7 +1069,17 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.lowerCaseUnion} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.lowerCaseUnion` |
+   * | **Nullability** | Optional |
+   */
   lowerCaseUnion: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -707,7 +1099,17 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Object1} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.object` |
+   * | **Nullability** | Optional |
+   */
   object: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -724,7 +1126,18 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Object1}[] |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.objectList` |
+   * | **Nullability** | Optional |
+   * | **List** | Yes |
+   */
   objectList: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -744,7 +1157,18 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Object1}[]! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.objectListNonNull` |
+   * | **Nullability** | Required |
+   * | **List** | Yes |
+   */
   objectListNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -764,7 +1188,17 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ObjectNested} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.objectNested` |
+   * | **Nullability** | Optional |
+   */
   objectNested: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -784,7 +1218,17 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ObjectNestedWithArgs} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.objectNestedWithArgs` |
+   * | **Nullability** | Optional |
+   */
   objectNestedWithArgs: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -804,7 +1248,17 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Object1}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.objectNonNull` |
+   * | **Nullability** | Required |
+   */
   objectNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -824,7 +1278,18 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Object1} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.objectWithArgs` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 5 |
+   */
   objectWithArgs: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -844,7 +1309,18 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Result} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.result` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   */
   result: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -861,7 +1337,18 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Result}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.resultNonNull` |
+   * | **Nullability** | Required |
+   * | **Arguments** | 1 |
+   */
   resultNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -881,7 +1368,17 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.string` |
+   * | **Nullability** | Optional |
+   */
   string: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -898,7 +1395,18 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.stringWithArgEnum` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   */
   stringWithArgEnum: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -918,7 +1426,18 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.stringWithArgInputObject` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   */
   stringWithArgInputObject: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -938,7 +1457,18 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.stringWithArgInputObjectEnum` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   */
   stringWithArgInputObjectEnum: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -958,7 +1488,18 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.stringWithArgInputObjectRequired` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   */
   stringWithArgInputObjectRequired: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -980,6 +1521,17 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * The given arguments are reflected back as a JSON string.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.stringWithArgs` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 5 |
    */
   stringWithArgs: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
@@ -1000,7 +1552,18 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.stringWithListArg` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   */
   stringWithListArg: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -1020,7 +1583,18 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.stringWithListArgRequired` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   */
   stringWithListArgRequired: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -1040,7 +1614,18 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.stringWithRequiredArg` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   */
   stringWithRequiredArg: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -1060,7 +1645,17 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.FooBarUnion} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.unionFooBar` |
+   * | **Nullability** | Optional |
+   */
   unionFooBar: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -1080,7 +1675,17 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.FooBarUnion}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.unionFooBarNonNull` |
+   * | **Nullability** | Required |
+   */
   unionFooBarNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -1100,7 +1705,18 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.FooBarUnion} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.unionFooBarWithArgs` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   */
   unionFooBarWithArgs: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -1120,7 +1736,17 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ObjectUnion} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.unionObject` |
+   * | **Nullability** | Optional |
+   */
   unionObject: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -1140,7 +1766,17 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ObjectUnion}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.unionObjectNonNull` |
+   * | **Nullability** | Required |
+   */
   unionObjectNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -1162,7 +1798,18 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   >
 }
 
+/**
+ * GraphQL {@link https://graphql.org/learn/schema/#the-mutation-and-mutation-types | Mutation} root methods.
+ *
+ * All methods return Promises. Use `.mutation.$batch(...)` to select multiple fields at once.
+ */
 export interface MutationMethods<$Context extends $$Utilities.Context> {
+  /**
+   * Select multiple Mutation fields at once.
+   *
+   * Pass a selection set object that includes the fields you want.
+   * Use this method to request multiple fields in a single request for better performance.
+   */
   $batch: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -1178,6 +1825,11 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
+  /**
+   * Request the {@link https://graphql.org/learn/schema/#the-__typename-field | `__typename`} meta-field.
+   *
+   * The `__typename` field returns the name of the object type. In this case, it will always return `"Mutation"`.
+   */
   __typename: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     () => Promise<
@@ -1189,7 +1841,17 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Mutation} |
+   * | **Path** | `Mutation.id` |
+   * | **Nullability** | Optional |
+   */
   id: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -1206,7 +1868,17 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
-
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ID}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Mutation} |
+   * | **Path** | `Mutation.idNonNull` |
+   * | **Nullability** | Required |
+   */
   idNonNull: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(

@@ -17,6 +17,6 @@ const context = $$Utilities.pipe(
       },
     }),
   ctx => $$Utilities.Scalars.set(ctx, { scalars: $$Scalar.$registry }),
-)
+) as any
 
-export const create = $$Utilities.createConstructorWithContext(context)
+export const create: $$Utilities.Create<typeof context> = $$Utilities.createConstructorWithContext(context)

@@ -45,16 +45,35 @@ export interface $Document<
 
 // ----------------------------------------| Entrypoint Interface |
 
+/**
+ * GraphQL root {@link https://graphql.org/learn/schema/#the-query-and-mutation-types | Query} type.
+ */
 export interface Query<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
   /**
-   * Select the `id` field on the `Query` object. Its type is `ID` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.id` |
+   * | **Nullability** | Optional |
    */
   id?: Query.id$Expanded<_$Context> | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.id<_$Context>>
   /**
-   * Select the `idNonNull` field on the `Query` object. Its type is `ID` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ID}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.idNonNull` |
+   * | **Nullability** | Required |
    */
   idNonNull?:
     | Query.idNonNull$Expanded<_$Context>
