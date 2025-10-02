@@ -22,7 +22,7 @@ interface StaticDocumentContext {
  * @remarks
  * Each field method generates a fully typed GraphQL document string with:
  * - Type-safe selection sets matching your schema
- * - Automatic variable inference from `$var` usage
+ * - Automatic variable inference from `$` usage
  * - Compile-time validation of field selections
  * - Zero runtime overhead - documents are generated at build time
  *
@@ -41,7 +41,7 @@ interface StaticDocumentContext {
  * import { Var } from 'graffle'
  *
  * const getUserByIdDoc = query.user({
- *   $: { id: $var },
+ *   $: { id: $ },
  *   name: true,
  *   posts: { title: true }
  * })
@@ -71,6 +71,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   InputObjectNestedNonNull: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -93,6 +94,10 @@ export interface QueryBuilder {
       >
     >
   >
+
+  /**
+   * Query enum field documentation.
+   */
   abcEnum: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -112,6 +117,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   argInputObjectCircular: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -134,6 +140,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   bigintField: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -153,6 +160,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   bigintFieldNonNull: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -172,6 +180,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   date: <
     const $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['date'],
   >(
@@ -189,6 +198,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   dateArg: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -208,6 +218,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   dateArgInputObject: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -227,6 +238,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   dateArgList: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -246,6 +258,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   dateArgNonNull: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -265,6 +278,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   dateArgNonNullList: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -284,6 +298,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   dateArgNonNullListNonNull: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -306,6 +321,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   dateInterface1: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -325,6 +341,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   dateList: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -344,6 +361,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   dateListList: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -363,6 +381,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   dateListNonNull: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -382,6 +401,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   dateNonNull: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -401,6 +421,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   dateObject1: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -420,6 +441,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   dateUnion: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -439,6 +461,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   error: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -458,6 +481,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   id: <
     const $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['id'],
   >(
@@ -475,6 +499,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   idNonNull: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -494,6 +519,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   interface: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -513,6 +539,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   interfaceHierarchyChildA: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -535,6 +562,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   interfaceHierarchyChildB: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -557,6 +585,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   interfaceHierarchyGrandparents: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -579,6 +608,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   interfaceHierarchyParents: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -601,6 +631,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   interfaceNonNull: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -620,6 +651,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   interfaceWithArgs: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -639,6 +671,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   listInt: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -658,6 +691,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   listIntNonNull: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -677,6 +711,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   listListInt: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -696,6 +731,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   listListIntNonNull: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -715,6 +751,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   lowerCaseUnion: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -734,6 +771,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   object: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -753,6 +791,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   objectList: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -772,6 +811,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   objectListNonNull: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -791,6 +831,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   objectNested: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -810,6 +851,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   objectNestedWithArgs: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -832,6 +874,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   objectNonNull: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -851,6 +894,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   objectWithArgs: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -870,6 +914,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   result: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -889,6 +934,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   resultNonNull: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -908,6 +954,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   string: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -927,6 +974,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   stringWithArgEnum: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -946,6 +994,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   stringWithArgInputObject: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -968,6 +1017,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   stringWithArgInputObjectEnum: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -990,6 +1040,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   stringWithArgInputObjectRequired: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1012,6 +1063,10 @@ export interface QueryBuilder {
       >
     >
   >
+
+  /**
+   * The given arguments are reflected back as a JSON string.
+   */
   stringWithArgs: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1031,6 +1086,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   stringWithListArg: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1050,6 +1106,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   stringWithListArgRequired: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1072,6 +1129,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   stringWithRequiredArg: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1094,6 +1152,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   unionFooBar: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1113,6 +1172,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   unionFooBarNonNull: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1132,6 +1192,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   unionFooBarWithArgs: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1151,6 +1212,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   unionObject: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1170,6 +1232,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   unionObjectNonNull: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1209,7 +1272,7 @@ export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY)
  * @remarks
  * Each field method generates a fully typed GraphQL mutation document with:
  * - Type-safe selection sets and input types
- * - Automatic variable inference from `$var` usage
+ * - Automatic variable inference from `$` usage
  * - Compile-time validation of mutations
  * - Zero runtime overhead - documents are generated at build time
  *
@@ -1218,7 +1281,7 @@ export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY)
  * import { Var } from 'graffle'
  *
  * const createUserDoc = mutation.createUser({
- *   $: { input: $var },
+ *   $: { input: $ },
  *   id: true,
  *   name: true
  * })
@@ -1245,6 +1308,7 @@ export interface MutationBuilder {
       >
     >
   >
+
   idNonNull: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext

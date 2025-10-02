@@ -22,7 +22,7 @@ interface StaticDocumentContext {
  * @remarks
  * Each field method generates a fully typed GraphQL document string with:
  * - Type-safe selection sets matching your schema
- * - Automatic variable inference from `$var` usage
+ * - Automatic variable inference from `$` usage
  * - Compile-time validation of field selections
  * - Zero runtime overhead - documents are generated at build time
  *
@@ -41,7 +41,7 @@ interface StaticDocumentContext {
  * import { Var } from 'graffle'
  *
  * const getUserByIdDoc = query.user({
- *   $: { id: $var },
+ *   $: { id: $ },
  *   name: true,
  *   posts: { title: true }
  * })
@@ -52,6 +52,9 @@ interface StaticDocumentContext {
  * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
  */
 export interface QueryBuilder {
+  /**
+   * Look up a code of conduct by its key
+   */
   codeOfConduct: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -71,6 +74,10 @@ export interface QueryBuilder {
       >
     >
   >
+
+  /**
+   * Look up a code of conduct by its key
+   */
   codesOfConduct: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -90,6 +97,10 @@ export interface QueryBuilder {
       >
     >
   >
+
+  /**
+   * Look up an enterprise by URL slug.
+   */
   enterprise: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -109,6 +120,10 @@ export interface QueryBuilder {
       >
     >
   >
+
+  /**
+   * Look up a pending enterprise administrator invitation by invitee, enterprise and role.
+   */
   enterpriseAdministratorInvitation: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -131,6 +146,10 @@ export interface QueryBuilder {
       >
     >
   >
+
+  /**
+   * Look up a pending enterprise administrator invitation by invitation token.
+   */
   enterpriseAdministratorInvitationByToken: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -153,6 +172,10 @@ export interface QueryBuilder {
       >
     >
   >
+
+  /**
+   * Look up a pending enterprise unaffiliated member invitation by invitee and enterprise.
+   */
   enterpriseMemberInvitation: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -175,6 +198,10 @@ export interface QueryBuilder {
       >
     >
   >
+
+  /**
+   * Look up a pending enterprise unaffiliated member invitation by invitation token.
+   */
   enterpriseMemberInvitationByToken: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -197,6 +224,10 @@ export interface QueryBuilder {
       >
     >
   >
+
+  /**
+   * ID of the object.
+   */
   id: <
     const $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['id'],
   >(
@@ -214,6 +245,10 @@ export interface QueryBuilder {
       >
     >
   >
+
+  /**
+   * Look up an open source license by its key
+   */
   license: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -233,6 +268,10 @@ export interface QueryBuilder {
       >
     >
   >
+
+  /**
+   * Return a list of known open source licenses
+   */
   licenses: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -252,6 +291,10 @@ export interface QueryBuilder {
       >
     >
   >
+
+  /**
+   * Get alphabetically sorted list of Marketplace categories
+   */
   marketplaceCategories: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -274,6 +317,10 @@ export interface QueryBuilder {
       >
     >
   >
+
+  /**
+   * Look up a Marketplace category by its slug.
+   */
   marketplaceCategory: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -293,6 +340,10 @@ export interface QueryBuilder {
       >
     >
   >
+
+  /**
+   * Look up a single Marketplace listing
+   */
   marketplaceListing: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -312,6 +363,10 @@ export interface QueryBuilder {
       >
     >
   >
+
+  /**
+   * Look up Marketplace listings
+   */
   marketplaceListings: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -331,6 +386,10 @@ export interface QueryBuilder {
       >
     >
   >
+
+  /**
+   * Return information about the GitHub instance
+   */
   meta: <
     const $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['meta'],
   >(
@@ -348,6 +407,10 @@ export interface QueryBuilder {
       >
     >
   >
+
+  /**
+   * Fetches an object given its ID.
+   */
   node: <
     const $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['node'],
   >(
@@ -365,6 +428,10 @@ export interface QueryBuilder {
       >
     >
   >
+
+  /**
+   * Lookup nodes by a list of IDs.
+   */
   nodes: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -384,6 +451,10 @@ export interface QueryBuilder {
       >
     >
   >
+
+  /**
+   * Lookup a organization by login.
+   */
   organization: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -403,6 +474,10 @@ export interface QueryBuilder {
       >
     >
   >
+
+  /**
+   * The client's rate limit information.
+   */
   rateLimit: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -422,6 +497,11 @@ export interface QueryBuilder {
       >
     >
   >
+
+  /**
+   * Workaround for re-exposing the root query object. (Refer to
+   * https://github.com/facebook/relay/issues/112 for more information.)
+   */
   relay: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -441,6 +521,10 @@ export interface QueryBuilder {
       >
     >
   >
+
+  /**
+   * Lookup a given repository by the owner and repository name.
+   */
   repository: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -460,6 +544,10 @@ export interface QueryBuilder {
       >
     >
   >
+
+  /**
+   * Lookup a repository owner (ie. either a User or an Organization) by login.
+   */
   repositoryOwner: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -479,6 +567,10 @@ export interface QueryBuilder {
       >
     >
   >
+
+  /**
+   * Lookup resource by a URL.
+   */
   resource: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -498,6 +590,10 @@ export interface QueryBuilder {
       >
     >
   >
+
+  /**
+   * Perform a search across resources, returning a maximum of 1,000 results.
+   */
   search: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -517,6 +613,10 @@ export interface QueryBuilder {
       >
     >
   >
+
+  /**
+   * GitHub Security Advisories
+   */
   securityAdvisories: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -536,6 +636,10 @@ export interface QueryBuilder {
       >
     >
   >
+
+  /**
+   * Fetch a Security Advisory by its GHSA ID
+   */
   securityAdvisory: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -555,6 +659,10 @@ export interface QueryBuilder {
       >
     >
   >
+
+  /**
+   * Software Vulnerabilities documented by GitHub Security Advisories
+   */
   securityVulnerabilities: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -577,6 +685,10 @@ export interface QueryBuilder {
       >
     >
   >
+
+  /**
+   * Users and organizations who can be sponsored via GitHub Sponsors.
+   */
   sponsorables: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -596,6 +708,10 @@ export interface QueryBuilder {
       >
     >
   >
+
+  /**
+   * Look up a topic by name.
+   */
   topic: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -615,6 +731,10 @@ export interface QueryBuilder {
       >
     >
   >
+
+  /**
+   * Lookup a user by login.
+   */
   user: <
     const $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['user'],
   >(
@@ -632,6 +752,10 @@ export interface QueryBuilder {
       >
     >
   >
+
+  /**
+   * The currently authenticated user.
+   */
   viewer: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -671,7 +795,7 @@ export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY)
  * @remarks
  * Each field method generates a fully typed GraphQL mutation document with:
  * - Type-safe selection sets and input types
- * - Automatic variable inference from `$var` usage
+ * - Automatic variable inference from `$` usage
  * - Compile-time validation of mutations
  * - Zero runtime overhead - documents are generated at build time
  *
@@ -680,7 +804,7 @@ export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY)
  * import { Var } from 'graffle'
  *
  * const createUserDoc = mutation.createUser({
- *   $: { input: $var },
+ *   $: { input: $ },
  *   id: true,
  *   name: true
  * })
@@ -688,6 +812,9 @@ export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY)
  * ```
  */
 export interface MutationBuilder {
+  /**
+   * Clear all of a customer's queued migrations
+   */
   abortQueuedMigrations: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -710,6 +837,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Abort a repository migration queued or in progress.
+   */
   abortRepositoryMigration: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -732,6 +863,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Accepts a pending invitation for a user to become an administrator of an enterprise.
+   */
   acceptEnterpriseAdministratorInvitation: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -754,6 +889,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Accepts a pending invitation for a user to become an unaffiliated member of an enterprise.
+   */
   acceptEnterpriseMemberInvitation: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -776,6 +915,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Applies a suggested topic to the repository.
+   */
   acceptTopicSuggestion: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -798,6 +941,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Access user namespace repository for a temporary duration.
+   */
   accessUserNamespaceRepository: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -820,6 +967,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Adds assignees to an assignable object.
+   */
   addAssigneesToAssignable: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -842,6 +993,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Adds a comment to an Issue or Pull Request.
+   */
   addComment: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -861,6 +1016,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Adds a comment to a Discussion, possibly as a reply to another comment.
+   */
   addDiscussionComment: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -883,6 +1042,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Vote for an option in a discussion poll.
+   */
   addDiscussionPollVote: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -905,6 +1068,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Adds enterprise members to an organization within the enterprise.
+   */
   addEnterpriseOrganizationMember: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -927,6 +1094,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Adds a support entitlement to an enterprise member.
+   */
   addEnterpriseSupportEntitlement: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -949,6 +1120,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Adds labels to a labelable object.
+   */
   addLabelsToLabelable: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -971,6 +1146,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Adds a card to a ProjectColumn. Either `contentId` or `note` must be provided but **not** both.
+   */
   addProjectCard: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -990,6 +1169,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Adds a column to a Project.
+   */
   addProjectColumn: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1009,6 +1192,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Creates a new draft issue and add it to a Project.
+   */
   addProjectV2DraftIssue: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1031,6 +1218,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Links an existing content instance to a Project.
+   */
   addProjectV2ItemById: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1053,6 +1244,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Adds a review to a Pull Request.
+   */
   addPullRequestReview: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1075,6 +1270,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Adds a comment to a review.
+   */
   addPullRequestReviewComment: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1097,6 +1296,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Adds a new thread to a pending Pull Request Review.
+   */
   addPullRequestReviewThread: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1119,6 +1322,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Adds a reply to an existing Pull Request Review Thread.
+   */
   addPullRequestReviewThreadReply: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1141,6 +1348,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Adds a reaction to a subject.
+   */
   addReaction: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1160,6 +1371,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Adds a star to a Starrable.
+   */
   addStar: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1179,6 +1394,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Adds a sub-issue to a given issue
+   */
   addSubIssue: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1198,6 +1417,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Add an upvote to a discussion or discussion comment.
+   */
   addUpvote: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1217,6 +1440,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Adds a verifiable domain to an owning account.
+   */
   addVerifiableDomain: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1239,6 +1466,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Approve all pending deployments under one or more environments
+   */
   approveDeployments: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1261,6 +1492,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Approve a verifiable domain for notification delivery.
+   */
   approveVerifiableDomain: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1283,6 +1518,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Archives a ProjectV2Item
+   */
   archiveProjectV2Item: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1305,6 +1544,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Marks a repository as archived.
+   */
   archiveRepository: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1327,6 +1570,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Cancels a pending invitation for an administrator to join an enterprise.
+   */
   cancelEnterpriseAdminInvitation: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1349,6 +1596,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Cancels a pending invitation for an unaffiliated member to join an enterprise.
+   */
   cancelEnterpriseMemberInvitation: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1371,6 +1622,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Cancel an active sponsorship.
+   */
   cancelSponsorship: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1393,6 +1648,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Update your status on GitHub.
+   */
   changeUserStatus: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1412,6 +1671,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Clears all labels from a labelable object.
+   */
   clearLabelsFromLabelable: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1434,6 +1697,12 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * This mutation clears the value of a field for an item in a Project. Currently
+   * only text, number, date, assignees, labels, single-select, iteration and
+   * milestone fields are supported.
+   */
   clearProjectV2ItemFieldValue: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1456,6 +1725,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Creates a new project by cloning configuration from an existing project.
+   */
   cloneProject: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1475,6 +1748,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Create a new repository with the same files and directory structure as a template repository.
+   */
   cloneTemplateRepository: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1497,6 +1774,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Close a discussion.
+   */
   closeDiscussion: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1516,6 +1797,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Close an issue.
+   */
   closeIssue: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1535,6 +1820,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Close a pull request.
+   */
   closePullRequest: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1554,6 +1843,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Convert a project note card to one associated with a newly created issue.
+   */
   convertProjectCardNoteToIssue: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1576,6 +1869,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Converts a projectV2 draft issue item to an issue.
+   */
   convertProjectV2DraftIssueItemToIssue: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1598,6 +1895,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Converts a pull request to draft
+   */
   convertPullRequestToDraft: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1620,6 +1921,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Copy a project.
+   */
   copyProjectV2: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1639,6 +1944,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Invites a user to claim reattributable data
+   */
   createAttributionInvitation: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1661,6 +1970,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Create a new branch protection rule
+   */
   createBranchProtectionRule: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1683,6 +1996,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Create a check run.
+   */
   createCheckRun: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1702,6 +2019,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Create a check suite
+   */
   createCheckSuite: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1721,6 +2042,51 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Appends a commit to the given branch as the authenticated user.
+   *
+   * This mutation creates a commit whose parent is the HEAD of the provided
+   * branch and also updates that branch to point to the new commit.
+   * It can be thought of as similar to `git commit`.
+   *
+   * ### Locating a Branch
+   *
+   * Commits are appended to a `branch` of type `Ref`.
+   * This must refer to a git branch (i.e.  the fully qualified path must
+   * begin with `refs/heads/`, although including this prefix is optional.
+   *
+   * Callers may specify the `branch` to commit to either by its global node
+   * ID or by passing both of `repositoryNameWithOwner` and `refName`.  For
+   * more details see the documentation for `CommittableBranch`.
+   *
+   * ### Describing Changes
+   *
+   * `fileChanges` are specified as a `FilesChanges` object describing
+   * `FileAdditions` and `FileDeletions`.
+   *
+   * Please see the documentation for `FileChanges` for more information on
+   * how to use this argument to describe any set of file changes.
+   *
+   * ### Authorship
+   *
+   * Similar to the web commit interface, this mutation does not support
+   * specifying the author or committer of the commit and will not add
+   * support for this in the future.
+   *
+   * A commit created by a successful execution of this mutation will be
+   * authored by the owner of the credential which authenticates the API
+   * request.  The committer will be identical to that of commits authored
+   * using the web interface.
+   *
+   * If you need full control over author and committer information, please
+   * use the Git Database REST API instead.
+   *
+   * ### Commit Signing
+   *
+   * Commits made using this mutation are automatically signed by GitHub if
+   * supported and will be marked as verified in the user interface.
+   */
   createCommitOnBranch: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1743,6 +2109,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Creates a new deployment event.
+   */
   createDeployment: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1762,6 +2132,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Create a deployment status.
+   */
   createDeploymentStatus: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1784,6 +2158,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Create a discussion.
+   */
   createDiscussion: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1803,6 +2181,15 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Creates an organization as part of an enterprise account. A personal access
+   * token used to create an organization is implicitly permitted to update the
+   * organization it created, if the organization is part of an enterprise that has
+   * SAML enabled or uses Enterprise Managed Users. If the organization is not part
+   * of such an enterprise, and instead has SAML enabled for it individually, the
+   * token will then require SAML authorization to continue working against that organization.
+   */
   createEnterpriseOrganization: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1825,6 +2212,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Creates an environment or simply returns it if already exists.
+   */
   createEnvironment: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1847,6 +2238,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Creates a new IP allow list entry.
+   */
   createIpAllowListEntry: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1869,6 +2264,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Creates a new issue.
+   */
   createIssue: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1888,6 +2287,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Creates a new label.
+   */
   createLabel: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1907,6 +2310,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Create a branch linked to an issue.
+   */
   createLinkedBranch: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1929,6 +2336,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Creates a GitHub Enterprise Importer (GEI) migration source.
+   */
   createMigrationSource: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1951,6 +2362,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Creates a new project.
+   */
   createProject: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1970,6 +2385,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Creates a new project.
+   */
   createProjectV2: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1989,6 +2408,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Create a new project field.
+   */
   createProjectV2Field: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2011,6 +2434,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Creates a status update within a Project.
+   */
   createProjectV2StatusUpdate: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2033,6 +2460,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Create a new pull request
+   */
   createPullRequest: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2055,6 +2486,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Create a new Git Ref.
+   */
   createRef: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2074,6 +2509,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Create a new repository.
+   */
   createRepository: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2093,6 +2532,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Create a repository ruleset
+   */
   createRepositoryRuleset: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2115,6 +2558,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Create a GitHub Sponsors profile to allow others to sponsor you or your organization.
+   */
   createSponsorsListing: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2137,6 +2584,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Create a new payment tier for your GitHub Sponsors profile.
+   */
   createSponsorsTier: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2159,6 +2610,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Start a new sponsorship of a maintainer in GitHub Sponsors, or reactivate a past sponsorship.
+   */
   createSponsorship: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2181,6 +2636,11 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Make many sponsorships for different sponsorable users or organizations at
+   * once. Can only sponsor those who have a public GitHub Sponsors profile.
+   */
   createSponsorships: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2203,6 +2663,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Creates a new team discussion.
+   */
   createTeamDiscussion: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2225,6 +2689,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Creates a new team discussion comment.
+   */
   createTeamDiscussionComment: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2247,6 +2715,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Creates a new user list.
+   */
   createUserList: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2266,6 +2738,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Rejects a suggested topic for the repository.
+   */
   declineTopicSuggestion: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2288,6 +2764,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Delete a branch protection rule
+   */
   deleteBranchProtectionRule: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2310,6 +2790,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Deletes a deployment.
+   */
   deleteDeployment: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2329,6 +2813,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Delete a discussion and all of its replies.
+   */
   deleteDiscussion: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2348,6 +2836,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Delete a discussion comment. If it has replies, wipe it instead.
+   */
   deleteDiscussionComment: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2370,6 +2862,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Deletes an environment
+   */
   deleteEnvironment: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2392,6 +2888,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Deletes an IP allow list entry.
+   */
   deleteIpAllowListEntry: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2414,6 +2914,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Deletes an Issue object.
+   */
   deleteIssue: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2433,6 +2937,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Deletes an IssueComment object.
+   */
   deleteIssueComment: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2455,6 +2963,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Deletes a label.
+   */
   deleteLabel: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2474,6 +2986,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Unlink a branch from an issue.
+   */
   deleteLinkedBranch: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2496,6 +3012,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Delete a package version.
+   */
   deletePackageVersion: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2518,6 +3038,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Deletes a project.
+   */
   deleteProject: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2537,6 +3061,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Deletes a project card.
+   */
   deleteProjectCard: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2559,6 +3087,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Deletes a project column.
+   */
   deleteProjectColumn: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2581,6 +3113,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Delete a project.
+   */
   deleteProjectV2: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2600,6 +3136,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Delete a project field.
+   */
   deleteProjectV2Field: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2622,6 +3162,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Deletes an item from a Project.
+   */
   deleteProjectV2Item: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2644,6 +3188,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Deletes a project status update.
+   */
   deleteProjectV2StatusUpdate: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2666,6 +3214,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Deletes a project workflow.
+   */
   deleteProjectV2Workflow: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2688,6 +3240,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Deletes a pull request review.
+   */
   deletePullRequestReview: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2710,6 +3266,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Deletes a pull request review comment.
+   */
   deletePullRequestReviewComment: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2732,6 +3292,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Delete a Git Ref.
+   */
   deleteRef: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2751,6 +3315,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Delete a repository ruleset
+   */
   deleteRepositoryRuleset: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2773,6 +3341,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Deletes a team discussion.
+   */
   deleteTeamDiscussion: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2795,6 +3367,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Deletes a team discussion comment.
+   */
   deleteTeamDiscussionComment: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2817,6 +3393,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Deletes a user list.
+   */
   deleteUserList: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2836,6 +3416,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Deletes a verifiable domain.
+   */
   deleteVerifiableDomain: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2858,6 +3442,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Remove a pull request from the merge queue.
+   */
   dequeuePullRequest: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2880,6 +3468,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Disable auto merge on the given pull request
+   */
   disablePullRequestAutoMerge: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2902,6 +3494,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Dismisses an approved or rejected pull request review.
+   */
   dismissPullRequestReview: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2924,6 +3520,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Dismisses the Dependabot alert.
+   */
   dismissRepositoryVulnerabilityAlert: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2946,6 +3546,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Enable the default auto-merge on a pull request.
+   */
   enablePullRequestAutoMerge: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2968,6 +3572,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Add a pull request to the merge queue.
+   */
   enqueuePullRequest: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -2990,6 +3598,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Follow an organization.
+   */
   followOrganization: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3012,6 +3624,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Follow a user.
+   */
   followUser: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3031,6 +3647,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Grant the migrator role to a user for all organizations under an enterprise account.
+   */
   grantEnterpriseOrganizationsMigratorRole: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3053,6 +3673,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Grant the migrator role to a user or a team.
+   */
   grantMigratorRole: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3075,6 +3699,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Creates a new project by importing columns and a list of issues/PRs.
+   */
   importProject: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3094,6 +3722,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Invite someone to become an administrator of the enterprise.
+   */
   inviteEnterpriseAdmin: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3116,6 +3748,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Invite someone to become an unaffiliated member of the enterprise.
+   */
   inviteEnterpriseMember: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3138,6 +3774,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Links a project to a repository.
+   */
   linkProjectV2ToRepository: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3160,6 +3800,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Links a project to a team.
+   */
   linkProjectV2ToTeam: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3182,6 +3826,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Creates a repository link for a project.
+   */
   linkRepositoryToProject: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3204,6 +3852,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Lock a lockable object
+   */
   lockLockable: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3223,6 +3875,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Mark a discussion comment as the chosen answer for discussions in an answerable category.
+   */
   markDiscussionCommentAsAnswer: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3245,6 +3901,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Mark a pull request file as viewed
+   */
   markFileAsViewed: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3264,6 +3924,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Mark a project as a template. Note that only projects which are owned by an Organization can be marked as a template.
+   */
   markProjectV2AsTemplate: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3286,6 +3950,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Marks a pull request ready for review.
+   */
   markPullRequestReadyForReview: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3308,6 +3976,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Merge a head into a branch.
+   */
   mergeBranch: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3327,6 +3999,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Merge a pull request.
+   */
   mergePullRequest: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3346,6 +4022,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Minimizes a comment on an Issue, Commit, Pull Request, or Gist
+   */
   minimizeComment: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3365,6 +4045,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Moves a project card to another place.
+   */
   moveProjectCard: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3384,6 +4068,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Moves a project column to another place.
+   */
   moveProjectColumn: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3406,6 +4094,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Pin an environment to a repository
+   */
   pinEnvironment: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3425,6 +4117,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Pin an issue to a repository
+   */
   pinIssue: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3444,6 +4140,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Publish an existing sponsorship tier that is currently still a draft to a GitHub Sponsors profile.
+   */
   publishSponsorsTier: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3466,6 +4166,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Regenerates the identity provider recovery codes for an enterprise
+   */
   regenerateEnterpriseIdentityProviderRecoveryCodes: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3488,6 +4192,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Regenerates a verifiable domain's verification token.
+   */
   regenerateVerifiableDomainToken: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3510,6 +4218,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Reject all pending deployments under one or more environments
+   */
   rejectDeployments: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3532,6 +4244,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Removes assignees from an assignable object.
+   */
   removeAssigneesFromAssignable: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3554,6 +4270,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Removes an administrator from the enterprise.
+   */
   removeEnterpriseAdmin: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3576,6 +4296,11 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Removes the identity provider from an enterprise. Owners of enterprises both
+   * with and without Enterprise Managed Users may use this mutation.
+   */
   removeEnterpriseIdentityProvider: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3598,6 +4323,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Removes a user from all organizations within the enterprise
+   */
   removeEnterpriseMember: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3620,6 +4349,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Removes an organization from the enterprise
+   */
   removeEnterpriseOrganization: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3642,6 +4375,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Removes a support entitlement from an enterprise member.
+   */
   removeEnterpriseSupportEntitlement: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3664,6 +4401,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Removes labels from a Labelable object.
+   */
   removeLabelsFromLabelable: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3686,6 +4427,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Removes outside collaborator from all repositories in an organization.
+   */
   removeOutsideCollaborator: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3708,6 +4453,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Removes a reaction from a subject.
+   */
   removeReaction: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3727,6 +4476,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Removes a star from a Starrable.
+   */
   removeStar: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3746,6 +4499,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Removes a sub-issue from a given issue
+   */
   removeSubIssue: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3765,6 +4522,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Remove an upvote to a discussion or discussion comment.
+   */
   removeUpvote: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3784,6 +4545,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Reopen a discussion.
+   */
   reopenDiscussion: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3803,6 +4568,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Reopen a issue.
+   */
   reopenIssue: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3822,6 +4591,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Reopen a pull request.
+   */
   reopenPullRequest: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3844,6 +4617,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Reorder a pinned repository environment
+   */
   reorderEnvironment: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3866,6 +4643,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Reprioritizes a sub-issue to a different position in the parent list.
+   */
   reprioritizeSubIssue: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3888,6 +4669,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Set review requests on a pull request.
+   */
   requestReviews: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3907,6 +4692,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Rerequests an existing check suite.
+   */
   rerequestCheckSuite: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3929,6 +4718,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Marks a review thread as resolved.
+   */
   resolveReviewThread: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3951,6 +4744,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Retire a published payment tier from your GitHub Sponsors profile so it cannot be used to start new sponsorships.
+   */
   retireSponsorsTier: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3973,6 +4770,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Create a pull request that reverts the changes from a merged pull request.
+   */
   revertPullRequest: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -3995,6 +4796,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Revoke the migrator role to a user for all organizations under an enterprise account.
+   */
   revokeEnterpriseOrganizationsMigratorRole: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4017,6 +4822,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Revoke the migrator role from a user or a team.
+   */
   revokeMigratorRole: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4039,6 +4848,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Creates or updates the identity provider for an enterprise.
+   */
   setEnterpriseIdentityProvider: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4061,6 +4874,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Set an organization level interaction limit for an organization's public repositories.
+   */
   setOrganizationInteractionLimit: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4083,6 +4900,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Sets an interaction limit setting for a repository.
+   */
   setRepositoryInteractionLimit: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4105,6 +4926,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Set a user level interaction limit for an user's public repositories.
+   */
   setUserInteractionLimit: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4127,6 +4952,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Starts a GitHub Enterprise Importer organization migration.
+   */
   startOrganizationMigration: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4149,6 +4978,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Starts a GitHub Enterprise Importer (GEI) repository migration.
+   */
   startRepositoryMigration: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4171,6 +5004,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Submits a pending pull request review.
+   */
   submitPullRequestReview: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4193,6 +5030,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Transfer an organization from one enterprise to another enterprise.
+   */
   transferEnterpriseOrganization: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4215,6 +5056,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Transfer an issue to a different repository
+   */
   transferIssue: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4234,6 +5079,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Unarchives a ProjectV2Item
+   */
   unarchiveProjectV2Item: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4256,6 +5105,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Unarchives a repository.
+   */
   unarchiveRepository: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4278,6 +5131,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Unfollow an organization.
+   */
   unfollowOrganization: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4300,6 +5157,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Unfollow a user.
+   */
   unfollowUser: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4319,6 +5180,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Unlinks a project from a repository.
+   */
   unlinkProjectV2FromRepository: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4341,6 +5206,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Unlinks a project to a team.
+   */
   unlinkProjectV2FromTeam: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4363,6 +5232,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Deletes a repository link from a project.
+   */
   unlinkRepositoryFromProject: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4385,6 +5258,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Unlock a lockable object
+   */
   unlockLockable: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4404,6 +5281,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Unmark a discussion comment as the chosen answer for discussions in an answerable category.
+   */
   unmarkDiscussionCommentAsAnswer: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4426,6 +5307,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Unmark a pull request file as viewed
+   */
   unmarkFileAsViewed: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4448,6 +5333,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Unmark an issue as a duplicate of another issue.
+   */
   unmarkIssueAsDuplicate: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4470,6 +5359,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Unmark a project as a template.
+   */
   unmarkProjectV2AsTemplate: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4492,6 +5385,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Unminimizes a comment on an Issue, Commit, Pull Request, or Gist
+   */
   unminimizeComment: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4514,6 +5411,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Unpin a pinned issue from a repository
+   */
   unpinIssue: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4533,6 +5434,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Marks a review thread as unresolved.
+   */
   unresolveReviewThread: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4555,6 +5460,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Update a branch protection rule
+   */
   updateBranchProtectionRule: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4577,6 +5486,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Update a check run
+   */
   updateCheckRun: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4596,6 +5509,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Modifies the settings of an existing check suite
+   */
   updateCheckSuitePreferences: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4618,6 +5535,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Update a discussion
+   */
   updateDiscussion: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4637,6 +5558,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Update the contents of a comment on a Discussion
+   */
   updateDiscussionComment: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4659,6 +5584,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Updates the role of an enterprise administrator.
+   */
   updateEnterpriseAdministratorRole: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4681,6 +5610,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Sets whether private repository forks are enabled for an enterprise.
+   */
   updateEnterpriseAllowPrivateRepositoryForkingSetting: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4703,6 +5636,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Sets the base repository permission for organizations in an enterprise.
+   */
   updateEnterpriseDefaultRepositoryPermissionSetting: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4725,6 +5662,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Sets whether deploy keys are allowed to be created and used for an enterprise.
+   */
   updateEnterpriseDeployKeySetting: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4747,6 +5688,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Sets whether organization members with admin permissions on a repository can change repository visibility.
+   */
   updateEnterpriseMembersCanChangeRepositoryVisibilitySetting: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4769,6 +5714,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Sets the members can create repositories setting for an enterprise.
+   */
   updateEnterpriseMembersCanCreateRepositoriesSetting: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4791,6 +5740,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Sets the members can delete issues setting for an enterprise.
+   */
   updateEnterpriseMembersCanDeleteIssuesSetting: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4813,6 +5766,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Sets the members can delete repositories setting for an enterprise.
+   */
   updateEnterpriseMembersCanDeleteRepositoriesSetting: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4835,6 +5792,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Sets whether members can invite collaborators are enabled for an enterprise.
+   */
   updateEnterpriseMembersCanInviteCollaboratorsSetting: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4857,6 +5818,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Sets whether or not an organization owner can make purchases.
+   */
   updateEnterpriseMembersCanMakePurchasesSetting: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4879,6 +5844,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Sets the members can update protected branches setting for an enterprise.
+   */
   updateEnterpriseMembersCanUpdateProtectedBranchesSetting: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4901,6 +5870,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Sets the members can view dependency insights for an enterprise.
+   */
   updateEnterpriseMembersCanViewDependencyInsightsSetting: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4923,6 +5896,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Sets whether organization projects are enabled for an enterprise.
+   */
   updateEnterpriseOrganizationProjectsSetting: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4945,6 +5922,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Updates the role of an enterprise owner with an organization.
+   */
   updateEnterpriseOwnerOrganizationRole: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4967,6 +5948,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Updates an enterprise's profile.
+   */
   updateEnterpriseProfile: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -4989,6 +5974,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Sets whether repository projects are enabled for a enterprise.
+   */
   updateEnterpriseRepositoryProjectsSetting: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5011,6 +6000,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Sets whether team discussions are enabled for an enterprise.
+   */
   updateEnterpriseTeamDiscussionsSetting: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5033,6 +6026,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Sets the two-factor authentication methods that users of an enterprise may not use.
+   */
   updateEnterpriseTwoFactorAuthenticationDisallowedMethodsSetting: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5055,6 +6052,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Sets whether two factor authentication is required for all users in an enterprise.
+   */
   updateEnterpriseTwoFactorAuthenticationRequiredSetting: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5077,6 +6078,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Updates an environment.
+   */
   updateEnvironment: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5099,6 +6104,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Sets whether an IP allow list is enabled on an owner.
+   */
   updateIpAllowListEnabledSetting: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5121,6 +6130,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Updates an IP allow list entry.
+   */
   updateIpAllowListEntry: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5143,6 +6156,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Sets whether IP allow list configuration for installed GitHub Apps is enabled on an owner.
+   */
   updateIpAllowListForInstalledAppsEnabledSetting: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5165,6 +6182,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Updates an Issue.
+   */
   updateIssue: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5184,6 +6205,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Updates an IssueComment object.
+   */
   updateIssueComment: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5206,6 +6231,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Updates an existing label.
+   */
   updateLabel: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5225,6 +6254,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Update the setting to restrict notifications to only verified or approved domains available to an owner.
+   */
   updateNotificationRestrictionSetting: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5247,6 +6280,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Sets whether private repository forks are enabled for an organization.
+   */
   updateOrganizationAllowPrivateRepositoryForkingSetting: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5269,6 +6306,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Sets whether contributors are required to sign off on web-based commits for repositories in an organization.
+   */
   updateOrganizationWebCommitSignoffSetting: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5291,6 +6332,13 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Toggle the setting for your GitHub Sponsors profile that allows other GitHub
+   * accounts to sponsor you on GitHub while paying for the sponsorship on Patreon.
+   * Only applicable when you have a GitHub Sponsors profile and have connected
+   * your GitHub account with Patreon.
+   */
   updatePatreonSponsorability: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5313,6 +6361,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Updates an existing project.
+   */
   updateProject: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5332,6 +6384,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Updates an existing project card.
+   */
   updateProjectCard: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5354,6 +6410,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Updates an existing project column.
+   */
   updateProjectColumn: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5376,6 +6436,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Updates an existing project.
+   */
   updateProjectV2: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5395,6 +6459,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Update the collaborators on a team or a project
+   */
   updateProjectV2Collaborators: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5417,6 +6485,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Updates a draft issue within a Project.
+   */
   updateProjectV2DraftIssue: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5439,6 +6511,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Update a project field.
+   */
   updateProjectV2Field: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5461,6 +6537,11 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * This mutation updates the value of a field for an item in a Project. Currently
+   * only single-select, text, number, date, and iteration fields are supported.
+   */
   updateProjectV2ItemFieldValue: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5483,6 +6564,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * This mutation updates the position of the item in the project, where the position represents the priority of an item.
+   */
   updateProjectV2ItemPosition: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5505,6 +6590,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Updates a status update within a Project.
+   */
   updateProjectV2StatusUpdate: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5527,6 +6616,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Update a pull request
+   */
   updatePullRequest: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5549,6 +6642,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Merge or Rebase HEAD from upstream branch into pull request branch
+   */
   updatePullRequestBranch: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5571,6 +6668,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Updates the body of a pull request review.
+   */
   updatePullRequestReview: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5593,6 +6694,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Updates a pull request review comment.
+   */
   updatePullRequestReviewComment: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5615,6 +6720,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Update a Git Ref.
+   */
   updateRef: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5634,6 +6743,27 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Creates, updates and/or deletes multiple refs in a repository.
+   *
+   * This mutation takes a list of `RefUpdate`s and performs these updates
+   * on the repository. All updates are performed atomically, meaning that
+   * if one of them is rejected, no other ref will be modified.
+   *
+   * `RefUpdate.beforeOid` specifies that the given reference needs to point
+   * to the given value before performing any updates. A value of
+   * `0000000000000000000000000000000000000000` can be used to verify that
+   * the references should not exist.
+   *
+   * `RefUpdate.afterOid` specifies the value that the given reference
+   * will point to after performing all updates. A value of
+   * `0000000000000000000000000000000000000000` can be used to delete a
+   * reference.
+   *
+   * If `RefUpdate.force` is set to `true`, a non-fast-forward updates
+   * for the given reference will be allowed.
+   */
   updateRefs: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5653,6 +6783,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Update information about a repository.
+   */
   updateRepository: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5672,6 +6806,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Update a repository ruleset
+   */
   updateRepositoryRuleset: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5694,6 +6832,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Sets whether contributors are required to sign off on web-based commits for a repository.
+   */
   updateRepositoryWebCommitSignoffSetting: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5716,6 +6858,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Change visibility of your sponsorship and opt in or out of email updates from the maintainer.
+   */
   updateSponsorshipPreferences: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5738,6 +6884,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Updates the state for subscribable subjects.
+   */
   updateSubscription: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5760,6 +6910,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Updates a team discussion.
+   */
   updateTeamDiscussion: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5782,6 +6936,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Updates a discussion comment.
+   */
   updateTeamDiscussionComment: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5804,6 +6962,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Updates team review assignment.
+   */
   updateTeamReviewAssignment: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5826,6 +6988,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Update team repository.
+   */
   updateTeamsRepository: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5848,6 +7014,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Replaces the repository's topics with the given topics.
+   */
   updateTopics: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5867,6 +7037,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Updates an existing user list.
+   */
   updateUserList: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5886,6 +7060,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Updates which of the viewer's lists an item belongs to
+   */
   updateUserListsForItem: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -5908,6 +7086,10 @@ export interface MutationBuilder {
       >
     >
   >
+
+  /**
+   * Verify that a verifiable domain has the expected DNS record.
+   */
   verifyVerifiableDomain: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext

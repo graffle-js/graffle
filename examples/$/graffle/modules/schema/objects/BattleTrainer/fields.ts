@@ -1,5 +1,12 @@
 import type { Schema as $Schema } from '../../$.js'
 
+/**
+ * GraphQL `__typename` meta-field. The name of the object type currently being queried.
+ *
+ * Type: `"BattleTrainer"`
+ *
+ * {@link https://graphql.org/learn/queries/#meta-fields | GraphQL __typename documentation}
+ */
 export interface __typename {
   kind: 'OutputField'
   name: '__typename'
@@ -11,6 +18,21 @@ export interface __typename {
   }
 }
 
+/**
+ * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.BattleTrainer}.
+ *
+ * The first combatant in this trainer battle.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Type** | {@link $Schema.CombatantSinglePokemon} |
+ * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | lang docs} |
+ * | **Parent** | {@link $Schema.BattleTrainer} |
+ * | **Path** | `BattleTrainer.combatant1` |
+ * | **Nullability** | Optional |
+ */
 export interface combatant1 {
   kind: 'OutputField'
   name: 'combatant1'
@@ -19,6 +41,21 @@ export interface combatant1 {
   namedType: $Schema.CombatantSinglePokemon
 }
 
+/**
+ * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.BattleTrainer}.
+ *
+ * The second combatant in this trainer battle.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Type** | {@link $Schema.CombatantSinglePokemon} |
+ * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | lang docs} |
+ * | **Parent** | {@link $Schema.BattleTrainer} |
+ * | **Path** | `BattleTrainer.combatant2` |
+ * | **Nullability** | Optional |
+ */
 export interface combatant2 {
   kind: 'OutputField'
   name: 'combatant2'
@@ -27,6 +64,21 @@ export interface combatant2 {
   namedType: $Schema.CombatantSinglePokemon
 }
 
+/**
+ * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.BattleTrainer}.
+ *
+ * The date when this battle took place, stored as a Unix timestamp.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Type** | {@link $Schema.Float} |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
+ * | **Parent** | {@link $Schema.BattleTrainer} |
+ * | **Path** | `BattleTrainer.date` |
+ * | **Nullability** | Optional |
+ */
 export interface date {
   kind: 'OutputField'
   name: 'date'
@@ -35,6 +87,21 @@ export interface date {
   namedType: $Schema.Float
 }
 
+/**
+ * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.BattleTrainer}.
+ *
+ * The unique identifier for this battle.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Type** | {@link $Schema.ID} |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
+ * | **Parent** | {@link $Schema.BattleTrainer} |
+ * | **Path** | `BattleTrainer.id` |
+ * | **Nullability** | Optional |
+ */
 export interface id {
   kind: 'OutputField'
   name: 'id'
@@ -43,6 +110,21 @@ export interface id {
   namedType: $Schema.ID
 }
 
+/**
+ * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.BattleTrainer}.
+ *
+ * The trainer who won this battle.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Type** | {@link $Schema.Trainer} |
+ * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | lang docs} |
+ * | **Parent** | {@link $Schema.BattleTrainer} |
+ * | **Path** | `BattleTrainer.winner` |
+ * | **Nullability** | Optional |
+ */
 export interface winner {
   kind: 'OutputField'
   name: 'winner'

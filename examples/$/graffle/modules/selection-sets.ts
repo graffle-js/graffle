@@ -46,6 +46,9 @@ export interface $Document<
 
 // ----------------------------------------| Entrypoint Interface |
 
+/**
+ * Root query type for fetching Pokemon data.
+ */
 export interface Query<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
@@ -191,6 +194,9 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
+    /**
+     * The name of the Pokemon to search for.
+     */
     name: $$Utilities.DocumentBuilderKit.Var.Maybe<string>
   }
 
@@ -229,6 +235,9 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
+    /**
+     * Optional filter criteria for Pokemon.
+     */
     filter?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$PokemonFilter<_$Context> | null | undefined>
   }
 
@@ -267,6 +276,9 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
+    /**
+     * The name of the trainer to search for.
+     */
     name: $$Utilities.DocumentBuilderKit.Var.Maybe<string>
   }
 
@@ -317,6 +329,9 @@ export namespace Query {
 
 // ----------------------------------------| Entrypoint Interface |
 
+/**
+ * Root mutation type for modifying Pokemon data.
+ */
 export interface Mutation<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
@@ -380,10 +395,25 @@ export namespace Mutation {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
+    /**
+     * The attack power of the new Pokemon.
+     */
     attack?: $$Utilities.DocumentBuilderKit.Var.Maybe<number | null | undefined>
+    /**
+     * The defense power of the new Pokemon.
+     */
     defense?: $$Utilities.DocumentBuilderKit.Var.Maybe<number | null | undefined>
+    /**
+     * The health points of the new Pokemon.
+     */
     hp?: $$Utilities.DocumentBuilderKit.Var.Maybe<number | null | undefined>
+    /**
+     * The name of the new Pokemon.
+     */
     name: $$Utilities.DocumentBuilderKit.Var.Maybe<string>
+    /**
+     * The elemental type of the new Pokemon.
+     */
     $type: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$PokemonType>
   }
 
@@ -418,11 +448,29 @@ export namespace Mutation {
 //
 //
 
+/**
+ * Possible outcomes of a wild Pokemon battle.
+ *
+ * Members
+ * "pokemonsCaptured" - The wild Pokemon were successfully captured.
+ * "pokemonsDefeated" - The wild Pokemon were defeated but not captured.
+ * "trainerDefeated" - The trainer was defeated by the wild Pokemon.
+ */
 export type BattleWildResult =
   | 'pokemonsCaptured'
   | 'pokemonsDefeated'
   | 'trainerDefeated'
 
+/**
+ * The elemental type of a Pokemon.
+ *
+ * Members
+ * "bug" - Bug-type Pokemon are insects and arthropods.
+ * "electric" - Electric-type Pokemon can generate and control electricity.
+ * "fire" - Fire-type Pokemon can create and manipulate flames.
+ * "grass" - Grass-type Pokemon have plant-like characteristics.
+ * "water" - Water-type Pokemon live in or control water.
+ */
 export type PokemonType =
   | 'bug'
   | 'electric'
@@ -430,6 +478,24 @@ export type PokemonType =
   | 'grass'
   | 'water'
 
+/**
+ * The class or specialty of a Pokemon trainer.
+ *
+ * Members
+ * "bugCatcher" - A trainer who specializes in Bug-type Pokemon.
+ * "camper" - A trainer who enjoys camping and outdoor activities.
+ * "picnicker" - A trainer who enjoys picnics and nature.
+ * "psychic" - A trainer with psychic abilities.
+ * "psychicMedium" - A psychic trainer who serves as a spiritual medium.
+ * "psychicYoungster" - A young trainer with developing psychic powers.
+ * "sailor" - A trainer who works on ships and the sea.
+ * "superNerd" - A highly intelligent trainer focused on science and technology.
+ * "tamer" - A trainer who specializes in taming and befriending Pokemon.
+ * "teamRocketGrunt" - A member of the villainous Team Rocket organization.
+ * "triathlete" - A trainer who excels in multiple types of competitions.
+ * "youngster" - A young, inexperienced trainer just starting their journey.
+ * "youth" - A young trainer with enthusiasm but limited experience.
+ */
 export type TrainerClass =
   | 'bugCatcher'
   | 'camper'
@@ -461,10 +527,16 @@ export type TrainerClass =
 //
 //
 
+/**
+ * Input filter for querying by date ranges.
+ */
 export interface DateFilter<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
+  /**
+   * The minimum date (greater than or equal to).
+   */
   gte?: $$Utilities.DocumentBuilderKit.Var.Maybe<
     | $$Utilities.Schema.Scalar.GetDecoded<
       $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
@@ -475,6 +547,9 @@ export interface DateFilter<
     | null
     | undefined
   >
+  /**
+   * The maximum date (less than or equal to).
+   */
   lte?: $$Utilities.DocumentBuilderKit.Var.Maybe<
     | $$Utilities.Schema.Scalar.GetDecoded<
       $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
@@ -487,20 +562,41 @@ export interface DateFilter<
   >
 }
 
+/**
+ * Input filter for querying Pokemon.
+ */
 export interface PokemonFilter<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
+  /**
+   * Filter by Pokemon birth/catch date.
+   */
   birthday?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$DateFilter<_$Context> | null | undefined>
+  /**
+   * Filter by Pokemon name.
+   */
   name?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$StringFilter<_$Context> | null | undefined>
+  /**
+   * Filter by Pokemon type.
+   */
   $type?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$PokemonType | null | undefined>
 }
 
+/**
+ * Input filter for querying by string values.
+ */
 export interface StringFilter<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
+  /**
+   * Filter for strings containing this substring.
+   */
   contains?: $$Utilities.DocumentBuilderKit.Var.Maybe<string | null | undefined>
+  /**
+   * Filter for strings matching any value in this list.
+   */
   in?: $$Utilities.DocumentBuilderKit.Var.Maybe<
     Array<$$Utilities.DocumentBuilderKit.Var.Maybe<string | null | undefined>> | null | undefined
   >
@@ -528,6 +624,9 @@ export interface StringFilter<
 
 // ----------------------------------------| Entrypoint Interface |
 
+/**
+ * A battle royale where multiple trainers compete with their Pokemon teams.
+ */
 export interface BattleRoyale<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
@@ -705,6 +804,9 @@ export namespace BattleRoyale {
 
 // ----------------------------------------| Entrypoint Interface |
 
+/**
+ * A one-on-one battle between two trainers.
+ */
 export interface BattleTrainer<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
@@ -914,6 +1016,9 @@ export namespace BattleTrainer {
 
 // ----------------------------------------| Entrypoint Interface |
 
+/**
+ * A battle between a trainer and wild Pokemon.
+ */
 export interface BattleWild<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
@@ -1158,6 +1263,9 @@ export namespace BattleWild {
 
 // ----------------------------------------| Entrypoint Interface |
 
+/**
+ * A combatant in a battle royale with multiple Pokemon.
+ */
 export interface CombatantMultiPokemon<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
@@ -1268,6 +1376,9 @@ export namespace CombatantMultiPokemon {
 
 // ----------------------------------------| Entrypoint Interface |
 
+/**
+ * A combatant in a one-on-one battle with a single Pokemon.
+ */
 export interface CombatantSinglePokemon<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
@@ -1378,6 +1489,9 @@ export namespace CombatantSinglePokemon {
 
 // ----------------------------------------| Entrypoint Interface |
 
+/**
+ * A patron who is a fan of a particular trainer.
+ */
 export interface Patron<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
@@ -1526,6 +1640,9 @@ export namespace Patron {
 
 // ----------------------------------------| Entrypoint Interface |
 
+/**
+ * A Pokemon with stats, type, and trainer information.
+ */
 export interface Pokemon<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
@@ -1846,6 +1963,9 @@ export namespace Pokemon {
 
 // ----------------------------------------| Entrypoint Interface |
 
+/**
+ * A Pokemon trainer who catches and battles with Pokemon.
+ */
 export interface Trainer<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
@@ -2068,6 +2188,9 @@ export namespace Trainer {
 //
 //
 
+/**
+ * Represents any kind of battle that can occur in the Pokemon world.
+ */
 export interface Battle<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
@@ -2126,6 +2249,9 @@ export interface Battle$FragmentInline<
 // --------------------------------------------------------------------------------------------------
 //
 
+/**
+ * A being in the Pokemon world - either a Pokemon, Trainer, or Patron.
+ */
 export interface Being<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,

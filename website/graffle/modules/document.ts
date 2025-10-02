@@ -22,7 +22,7 @@ interface StaticDocumentContext {
  * @remarks
  * Each field method generates a fully typed GraphQL document string with:
  * - Type-safe selection sets matching your schema
- * - Automatic variable inference from `$var` usage
+ * - Automatic variable inference from `$` usage
  * - Compile-time validation of field selections
  * - Zero runtime overhead - documents are generated at build time
  *
@@ -41,7 +41,7 @@ interface StaticDocumentContext {
  * import { Var } from 'graffle'
  *
  * const getUserByIdDoc = query.user({
- *   $: { id: $var },
+ *   $: { id: $ },
  *   name: true,
  *   posts: { title: true }
  * })
@@ -52,6 +52,9 @@ interface StaticDocumentContext {
  * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
  */
 export interface QueryBuilder {
+  /**
+   * Retrieve all battles that have occurred.
+   */
   battles: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -71,6 +74,10 @@ export interface QueryBuilder {
       >
     >
   >;
+
+  /**
+   * Retrieve all beings (Pokemon, Trainers, and Patrons).
+   */
   beings: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -90,6 +97,10 @@ export interface QueryBuilder {
       >
     >
   >;
+
+  /**
+   * Find Pokemon by their name.
+   */
   pokemonByName: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -109,6 +120,10 @@ export interface QueryBuilder {
       >
     >
   >;
+
+  /**
+   * Retrieve all Pokemon, optionally filtered.
+   */
   pokemons: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -128,6 +143,10 @@ export interface QueryBuilder {
       >
     >
   >;
+
+  /**
+   * Find a trainer by their name.
+   */
   trainerByName: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -147,6 +166,10 @@ export interface QueryBuilder {
       >
     >
   >;
+
+  /**
+   * Retrieve all trainers.
+   */
   trainers: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -186,7 +209,7 @@ export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY)
  * @remarks
  * Each field method generates a fully typed GraphQL mutation document with:
  * - Type-safe selection sets and input types
- * - Automatic variable inference from `$var` usage
+ * - Automatic variable inference from `$` usage
  * - Compile-time validation of mutations
  * - Zero runtime overhead - documents are generated at build time
  *
@@ -195,7 +218,7 @@ export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY)
  * import { Var } from 'graffle'
  *
  * const createUserDoc = mutation.createUser({
- *   $: { input: $var },
+ *   $: { input: $ },
  *   id: true,
  *   name: true
  * })
@@ -203,6 +226,9 @@ export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY)
  * ```
  */
 export interface MutationBuilder {
+  /**
+   * Add a new Pokemon to the database.
+   */
   addPokemon: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext

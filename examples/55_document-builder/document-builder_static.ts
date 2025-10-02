@@ -5,9 +5,9 @@
  * No client needed (•̀ᴗ•́)و
  */
 
-import { $var } from 'graffle/extensions/document-builder'
-//       ^^^^
-// Special marker for variable extraction
+import { $ } from 'graffle/extensions/document-builder'
+//       ^
+// Variable marker with flexible API
 
 import { Graffle } from '../$/graffle/_namespace.js'
 import { show } from '../$/show.js'
@@ -56,9 +56,9 @@ Variables type: { pokemonName: string }
 */
 
 const doc2 = query.pokemonByName({
-  $: { name: $var.name('pokemonName').required() },
-  //         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  // Automatically extracted as GraphQL variable with custom name
+  $: { name: $('pokemonName').required() },
+  //         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  // Named variable with required modifier
   name: true,
   type: true,
 })
@@ -84,8 +84,8 @@ Variables type: { in: string[] }
 const doc3 = query.pokemons({
   $: {
     filter: {
-      name: { in: $var.required() },
-      //          ^^^^^^^^^^^^^^^
+      name: { in: $.required() },
+      //          ^^^^^^^^^^^^
       //          Required variable for name filter
     },
   },
@@ -114,16 +114,16 @@ query ($eq: String = "mystic", $type: PokemonType!) {
 
 const doc4 = query.trainers({
   $: {
-    filter: { class: { eq: $var.default('mystic') } },
-    //                     ^^^^^^^^^^^^^^^^^^^^^^
+    filter: { class: { eq: $.default('mystic') } },
+    //                     ^^^^^^^^^^^^^^^^^^^^
     //                     Root-level argument with default value
   },
   name: true,
   pokemons: {
     $: {
-      filter: { type: $var },
-      //              ^^^^
-      //              Nested field argument
+      filter: { type: $ },
+      //              ^
+      //              Standalone marker (name inferred)
     },
     name: true,
     type: true,
@@ -148,13 +148,13 @@ mutation ($name: String = "Pikachu", $attack: Int!, $defense: Int!, $hp: Int!, $
 
 const doc5 = mutation.addPokemon({
   $: {
-    name: $var.default('Pikachu'),
-    //          Make required field optional with default value
-    attack: $var.required(),
-    defense: $var.required(),
-    hp: $var.required(),
-    //          Make optional fields required
-    $type: $var,
+    name: $.default('Pikachu'),
+    //    Make required field optional with default value
+    attack: $.required(),
+    defense: $.required(),
+    hp: $.required(),
+    //      Make optional fields required
+    $type: $,
   },
   name: true,
   type: true,

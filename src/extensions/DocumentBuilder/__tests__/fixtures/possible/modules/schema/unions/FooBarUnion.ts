@@ -2,10 +2,10 @@ import type * as $ from '../../../../../../../../exports/utilities-for-generated
 import type { Bar } from '../objects/Bar/$.js'
 import type { Foo } from '../objects/Foo/$.js'
 
-export /**
+/**
  * Union documentation.
  */
-interface FooBarUnion extends $.Schema.Union {
+export interface FooBarUnion extends $.Schema.Union {
   kind: 'Union'
   name: 'FooBarUnion'
   members: [Bar, Foo]

@@ -2,6 +2,9 @@ import type * as $Fields from './fields.js'
 
 export * as Pokemon from './fields.js'
 
+/**
+ * A Pokemon with stats, type, and trainer information.
+ */
 export interface Pokemon {
   kind: 'Object'
   name: 'Pokemon'

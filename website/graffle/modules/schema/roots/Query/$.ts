@@ -2,6 +2,9 @@ import type * as $Fields from "./fields.js";
 
 export * as Query from "./fields.js";
 
+/**
+ * Root query type for fetching Pokemon data.
+ */
 export interface Query {
   kind: "Object";
   name: "Query";

@@ -1,6 +1,13 @@
 import type * as $ from '../../../../../../../../../exports/utilities-for-generated.js'
 import type { Schema as $Schema } from '../../$.js'
 
+/**
+ * GraphQL `__typename` meta-field. The name of the object type currently being queried.
+ *
+ * Type: `"Object2ImplementingInterface"`
+ *
+ * {@link https://graphql.org/learn/queries/#meta-fields | GraphQL __typename documentation}
+ */
 export interface __typename extends $.Schema.OutputField {
   kind: 'OutputField'
   name: '__typename'
@@ -12,6 +19,19 @@ export interface __typename extends $.Schema.OutputField {
   }
 }
 
+/**
+ * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.Object2ImplementingInterface}.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Type** | {@link $Schema.Boolean} |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
+ * | **Parent** | {@link $Schema.Object2ImplementingInterface} |
+ * | **Path** | `Object2ImplementingInterface.boolean` |
+ * | **Nullability** | Optional |
+ */
 interface $boolean extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'boolean'
@@ -21,6 +41,19 @@ interface $boolean extends $.Schema.OutputField {
 }
 export { type $boolean as boolean }
 
+/**
+ * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.Object2ImplementingInterface}.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Type** | {@link $Schema.ID} |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
+ * | **Parent** | {@link $Schema.Object2ImplementingInterface} |
+ * | **Path** | `Object2ImplementingInterface.id` |
+ * | **Nullability** | Optional |
+ */
 export interface id extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'id'

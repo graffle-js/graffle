@@ -2,6 +2,9 @@ import type * as $Fields from './fields.js'
 
 export * as BattleWild from './fields.js'
 
+/**
+ * A battle between a trainer and wild Pokemon.
+ */
 export interface BattleWild {
   kind: 'Object'
   name: 'BattleWild'

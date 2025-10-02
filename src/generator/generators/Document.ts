@@ -1,6 +1,9 @@
 import type { GraphQLObjectType } from 'graphql'
+import { Code } from '../../lib/Code.js'
+import { values } from '../../lib/prelude.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 import { importUtilities } from '../helpers/pathHelpers.js'
+import { getTsDocContents } from '../helpers/render.js'
 
 /**
  * Check if a root type has any fields with arguments (recursively checking all fields).
@@ -58,7 +61,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
          * @remarks
          * Each field method generates a fully typed GraphQL document string with:
          * - Type-safe selection sets matching your schema
-         * - Automatic variable inference from \`$var\` usage
+         * - Automatic variable inference from \`$\` usage
          * - Compile-time validation of field selections
          * - Zero runtime overhead - documents are generated at build time
          *
@@ -77,7 +80,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
          * import { Var } from 'graffle'
          *
          * const getUserByIdDoc = query.user({
-         *   $: { id: $var },
+         *   $: { id: $ },
          *   name: true,
          *   posts: { title: true }
          * })
@@ -89,14 +92,16 @@ export const ModuleGeneratorDocument = createModuleGenerator(
          */
         export interface QueryBuilder {
           ${
-        Object.keys(queryType.getFields()).map(fieldName =>
-          `${fieldName}: <const $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['${fieldName}']>(
+        values(queryType.getFields()).map(field => {
+          const fieldDoc = getTsDocContents(config, field)
+          const docComment = fieldDoc ? Code.TSDoc(fieldDoc) + '\n          ' : ''
+          return `${docComment}${field.name}: <const $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['${field.name}']>(
             selection?: $SelectionSet
           ) => TypedDocument.String<
-            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ ${fieldName}: $SelectionSet }, $$Schema.Schema>>,
-            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.DocumentBuilderKit.Var.InferFromQuery<{ ${fieldName}: Exclude<$SelectionSet, undefined> }, ArgumentsMap.ArgumentsMap>>
+            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ ${field.name}: $SelectionSet }, $$Schema.Schema>>,
+            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.DocumentBuilderKit.Var.InferFromQuery<{ ${field.name}: Exclude<$SelectionSet, undefined> }, ArgumentsMap.ArgumentsMap>>
           >`
-        ).join('\n          ')
+        }).join('\n\n          ')
       }
         }
 
@@ -139,7 +144,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
          * @remarks
          * Each field method generates a fully typed GraphQL mutation document with:
          * - Type-safe selection sets and input types
-         * - Automatic variable inference from \`$var\` usage
+         * - Automatic variable inference from \`$\` usage
          * - Compile-time validation of mutations
          * - Zero runtime overhead - documents are generated at build time
          *
@@ -148,7 +153,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
          * import { Var } from 'graffle'
          *
          * const createUserDoc = mutation.createUser({
-         *   $: { input: $var },
+         *   $: { input: $ },
          *   id: true,
          *   name: true
          * })
@@ -157,14 +162,16 @@ export const ModuleGeneratorDocument = createModuleGenerator(
          */
         export interface MutationBuilder {
           ${
-        Object.keys(mutationType.getFields()).map(fieldName =>
-          `${fieldName}: <const $SelectionSet extends SelectionSets.Mutation<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['${fieldName}']>(
+        values(mutationType.getFields()).map(field => {
+          const fieldDoc = getTsDocContents(config, field)
+          const docComment = fieldDoc ? Code.TSDoc(fieldDoc) + '\n          ' : ''
+          return `${docComment}${field.name}: <const $SelectionSet extends SelectionSets.Mutation<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['${field.name}']>(
             selection?: $SelectionSet
           ) => TypedDocument.String<
-            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ ${fieldName}: $SelectionSet }, $$Schema.Schema>>,
-            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.DocumentBuilderKit.Var.InferFromMutation<{ ${fieldName}: Exclude<$SelectionSet, undefined> }, ArgumentsMap.ArgumentsMap>>
+            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ ${field.name}: $SelectionSet }, $$Schema.Schema>>,
+            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.DocumentBuilderKit.Var.InferFromMutation<{ ${field.name}: Exclude<$SelectionSet, undefined> }, ArgumentsMap.ArgumentsMap>>
           >`
-        ).join('\n          ')
+        }).join('\n\n          ')
       }
         }
 
@@ -210,7 +217,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
          * @remarks
          * Each field method generates a fully typed GraphQL subscription document with:
          * - Type-safe selection sets for real-time data
-         * - Automatic variable inference from \`$var\` usage
+         * - Automatic variable inference from \`$\` usage
          * - Compile-time validation of subscriptions
          * - Zero runtime overhead - documents are generated at build time
          *
@@ -219,7 +226,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
          * import { Var } from 'graffle'
          *
          * const onUserUpdateDoc = subscription.onUserUpdate({
-         *   $: { userId: Var.$var },
+         *   $: { userId: Var.$ },
          *   id: true,
          *   name: true,
          *   status: true
@@ -229,14 +236,16 @@ export const ModuleGeneratorDocument = createModuleGenerator(
          */
         export interface SubscriptionBuilder {
           ${
-        Object.keys(subscriptionType.getFields()).map(fieldName =>
-          `${fieldName}: <const $SelectionSet extends SelectionSets.Subscription<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['${fieldName}']>(
+        values(subscriptionType.getFields()).map(field => {
+          const fieldDoc = getTsDocContents(config, field)
+          const docComment = fieldDoc ? Code.TSDoc(fieldDoc) + '\n          ' : ''
+          return `${docComment}${field.name}: <const $SelectionSet extends SelectionSets.Subscription<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['${field.name}']>(
             selection?: $SelectionSet
           ) => TypedDocument.String<
-            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.DocumentBuilderKit.InferResult.OperationSubscription<{ ${fieldName}: $SelectionSet }, $$Schema.Schema>>,
-            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.DocumentBuilderKit.Var.InferFromSubscription<{ ${fieldName}: Exclude<$SelectionSet, undefined> }, ArgumentsMap.ArgumentsMap>>
+            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.DocumentBuilderKit.InferResult.OperationSubscription<{ ${field.name}: $SelectionSet }, $$Schema.Schema>>,
+            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.DocumentBuilderKit.Var.InferFromSubscription<{ ${field.name}: Exclude<$SelectionSet, undefined> }, ArgumentsMap.ArgumentsMap>>
           >`
-        ).join('\n          ')
+        }).join('\n\n          ')
       }
         }
 

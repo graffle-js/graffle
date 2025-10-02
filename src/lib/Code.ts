@@ -357,19 +357,19 @@ export namespace Code {
       ? termObject(Object.fromEntries(block))
       : termObject(block ?? {})
 
-    const interfaceDeclaration = `${tsDoc_}interface ${name_} ${typeParametersClause} ${extends___} ${block_}`
+    const interfaceDeclaration = `interface ${name_} ${typeParametersClause} ${extends___} ${block_}`
 
     // Handle export with automatic keyword aliasing
     if (export_ === false) {
-      return interfaceDeclaration
+      return tsDoc_ + interfaceDeclaration
     }
 
     const isReserved = reservedTypeScriptInterfaceNames.includes(name as any)
     if (isReserved) {
       // Don't export the interface directly, only export via alias
-      return `${interfaceDeclaration}\nexport { type ${name_} as ${name} }`
+      return `${tsDoc_}${interfaceDeclaration}\nexport { type ${name_} as ${name} }`
     } else {
-      return `export ${interfaceDeclaration}`
+      return `${tsDoc_}export ${interfaceDeclaration}`
     }
   }
 

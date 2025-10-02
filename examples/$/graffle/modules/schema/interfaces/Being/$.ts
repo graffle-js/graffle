@@ -3,6 +3,9 @@ import type * as $Fields from './fields.js'
 
 export * as Being from './fields.js'
 
+/**
+ * A being in the Pokemon world - either a Pokemon, Trainer, or Patron.
+ */
 export interface Being {
   kind: 'Interface'
   name: 'Being'

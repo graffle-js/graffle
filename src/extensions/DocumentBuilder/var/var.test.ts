@@ -4,7 +4,7 @@ import { describe, expect, test } from 'vitest'
 import { Var } from './$.js'
 
 const as = <$value>(value?: unknown): $value => value as any
-const $var = Var.$var
+const $var = Var.$
 
 // Helper to test assignability (for positive tests)
 const accepts = <$Expected>() => <$Actual extends $Expected>(_value: $Actual) => {}

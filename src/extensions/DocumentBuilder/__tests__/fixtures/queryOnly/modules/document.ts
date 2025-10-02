@@ -22,7 +22,7 @@ interface StaticDocumentContext {
  * @remarks
  * Each field method generates a fully typed GraphQL document string with:
  * - Type-safe selection sets matching your schema
- * - Automatic variable inference from `$var` usage
+ * - Automatic variable inference from `$` usage
  * - Compile-time validation of field selections
  * - Zero runtime overhead - documents are generated at build time
  *
@@ -41,7 +41,7 @@ interface StaticDocumentContext {
  * import { Var } from 'graffle'
  *
  * const getUserByIdDoc = query.user({
- *   $: { id: $var },
+ *   $: { id: $ },
  *   name: true,
  *   posts: { title: true }
  * })
@@ -69,6 +69,7 @@ export interface QueryBuilder {
       >
     >
   >
+
   idNonNull: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext

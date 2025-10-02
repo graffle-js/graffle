@@ -32,7 +32,7 @@ export type InferFromQuery<
  */
 // dprint-ignore
 export type InferFromMutation<
-  $SS extends Select.SelectionSet.RootType<Select.StaticBuilderContext>,
+  $SS extends object,
   $ArgsMap extends SchemaDrivenDataMap.SchemaDrivenDataMapWithMutation,
   // @ts-expect-error todo
   ___$OperationMap = $ArgsMap['operations']['mutation']
@@ -46,7 +46,7 @@ export type InferFromMutation<
  */
 // dprint-ignore
 export type InferFromSubscription<
-  $SS extends Select.SelectionSet.RootType<Select.StaticBuilderContext>,
+  $SS extends object,
   $ArgsMap extends SchemaDrivenDataMap.SchemaDrivenDataMapWithSubscription,
   // @ts-expect-error todo
   ___$OperationMap = $ArgsMap['operations']['subscription']

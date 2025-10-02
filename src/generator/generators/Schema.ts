@@ -158,6 +158,111 @@ const generateUnionModule = (config: Config, unionType: Grafaid.Schema.UnionType
   }
 }
 
+/**
+ * Map GraphQL kind names to their official documentation URLs.
+ */
+const getKindDocUrl = (kindName: string): string => {
+  const kindToUrl: Record<string, string> = {
+    'ScalarStandard': 'https://graphql.org/graphql-js/type/#scalars',
+    'ScalarCustom': 'https://graphql.org/graphql-js/type/#graphqlscalartype',
+    'OutputObject': 'https://graphql.org/graphql-js/type/#graphqlobjecttype',
+    'Interface': 'https://graphql.org/graphql-js/type/#graphqlinterfacetype',
+    'Union': 'https://graphql.org/graphql-js/type/#graphqluniontype',
+    'Enum': 'https://graphql.org/graphql-js/type/#graphqlenumtype',
+    'InputObject': 'https://graphql.org/graphql-js/type/#graphqlinputobjecttype',
+  }
+  return kindToUrl[kindName] || 'https://graphql.org/graphql-js/type/'
+}
+
+/**
+ * Generate JSDoc for the special __typename meta-field.
+ */
+const getTypeNameFieldDoc = (typeName: string): string => {
+  return `GraphQL \`__typename\` meta-field. The name of the object type currently being queried.
+
+Type: \`"${typeName}"\`
+
+{@link https://graphql.org/learn/queries/#meta-fields | GraphQL __typename documentation}`
+}
+
+/**
+ * Generate enhanced JSDoc for an input field including type, kind, and parent metadata.
+ */
+const getInputFieldDoc = (
+  config: Config,
+  field: Grafaid.Schema.InputField,
+  parentType: Grafaid.Schema.InputObjectType,
+): string | null => {
+  const namedType = Grafaid.Schema.getNamedType(field.type)
+  const typeAndKind = Grafaid.getTypeAndKind(namedType)
+
+  // Get the base description from the schema
+  const schemaDescription = getTsDocContents(config, field)
+
+  // Type information
+  const isNonNull = Grafaid.Schema.isNonNullType(field.type)
+  const isList = Grafaid.Schema.isListType(Grafaid.Schema.isNonNullType(field.type) ? field.type.ofType : field.type)
+  const listMarker = isList ? '[]' : ''
+  const nullMarker = isNonNull ? '!' : ''
+  const typeSignature = `{@link $Schema.${typeAndKind.typeName}}${listMarker}${nullMarker}`
+  const kindDocUrl = getKindDocUrl(typeAndKind.kindName)
+  const fieldPath = `${parentType.name}.${field.name}`
+
+  // Check for deprecation
+  const isDeprecated = field.deprecationReason !== undefined && field.deprecationReason !== null
+  const deprecationReason = field.deprecationReason
+
+  // Check for default value
+  const hasDefaultValue = field.defaultValue !== undefined && field.defaultValue !== null
+  const defaultValue = field.defaultValue
+
+  // Check for custom directives
+  const customDirectives = field.astNode?.directives?.filter(d =>
+    !['deprecated', 'skip', 'include'].includes(d.name.value)
+  ) ?? []
+
+  // Build markdown table (empty headers but required for table syntax)
+  const tableLines: string[] = []
+  tableLines.push(`| | |`)
+  tableLines.push(`| - | - |`)
+  tableLines.push(`| **Type** | ${typeSignature} |`)
+  tableLines.push(`| **Kind** | \`${typeAndKind.kindName}\` ↗ {@link ${kindDocUrl} | lang docs} |`)
+  tableLines.push(`| **Parent** | {@link $Schema.${parentType.name}} |`)
+  tableLines.push(`| **Path** | \`${fieldPath}\` |`)
+  if (isDeprecated) {
+    tableLines.push(`| **⚠ Deprecated** | ${deprecationReason} |`)
+  }
+  if (hasDefaultValue) {
+    tableLines.push(`| **Default** | \`${JSON.stringify(defaultValue)}\` |`)
+  }
+  tableLines.push(`| **Nullability** | ${isNonNull ? 'Required' : 'Optional'} |`)
+  if (isList) {
+    tableLines.push(`| **List** | Yes |`)
+  }
+  if (customDirectives.length > 0) {
+    const directiveNames = customDirectives.map(d => `@${d.name.value}`).join(', ')
+    tableLines.push(`| **Directives** | ${directiveNames} |`)
+  }
+
+  // Combine parts with proper formatting
+  const parts: string[] = []
+
+  // Add field type header with link to GraphQL input type docs
+  parts.push(`GraphQL input field (↗ {@link https://graphql.org/learn/schema/#input-types | lang docs}) on type {@link $Schema.${parentType.name}}.`)
+
+  if (schemaDescription) {
+    parts.push('') // blank line
+    parts.push(schemaDescription)
+  }
+
+  parts.push('') // blank line before table
+  parts.push('# Info')
+  parts.push('') // blank line after heading
+  parts.push(tableLines.join('\n'))
+
+  return parts.join('\n')
+}
+
 const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.InputObjectType): GeneratedModule[] => {
   const modules: GeneratedModule[] = []
 
@@ -175,7 +280,7 @@ const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.I
     const namedType = Grafaid.Schema.getNamedType(field.type)
 
     fieldsCode(Code.tsInterface({
-      tsDoc: getTsDocContents(config, field),
+      tsDoc: getInputFieldDoc(config, field, inputObject),
       export: true,
       name: field.name,
       extends: config.code.schemaInterfaceExtendsEnabled ? `$.Schema.InputField` : null,
@@ -366,6 +471,81 @@ const generateSchemaBarrelModule = (config: Config, kindMap: Grafaid.Schema.Kind
   }
 }
 
+/**
+ * Generate enhanced JSDoc for an output field including type, kind, and parent metadata.
+ */
+const getOutputFieldDoc = (
+  config: Config,
+  field: Grafaid.Schema.Field<any, any>,
+  parentType: Grafaid.Schema.ObjectType | Grafaid.Schema.InterfaceType,
+): string | null => {
+  const namedType = Grafaid.Schema.getNamedType(field.type)
+  const typeAndKind = Grafaid.getTypeAndKind(namedType)
+
+  // Get the base description from the schema
+  const schemaDescription = getTsDocContents(config, field)
+
+  // Type information
+  const isNonNull = Grafaid.Schema.isNonNullType(field.type)
+  const isList = Grafaid.Schema.isListType(Grafaid.Schema.isNonNullType(field.type) ? field.type.ofType : field.type)
+  const listMarker = isList ? '[]' : ''
+  const nullMarker = isNonNull ? '!' : ''
+  const typeSignature = `{@link $Schema.${typeAndKind.typeName}}${listMarker}${nullMarker}`
+  const kindDocUrl = getKindDocUrl(typeAndKind.kindName)
+  const hasArgs = field.args.length > 0
+  const fieldPath = `${parentType.name}.${field.name}`
+
+  // Check for deprecation
+  const isDeprecated = field.deprecationReason !== undefined && field.deprecationReason !== null
+  const deprecationReason = field.deprecationReason
+
+  // Check for custom directives
+  const customDirectives = field.astNode?.directives?.filter(d =>
+    !['deprecated', 'skip', 'include'].includes(d.name.value)
+  ) ?? []
+
+  // Build markdown table (empty headers but required for table syntax)
+  const tableLines: string[] = []
+  tableLines.push(`| | |`)
+  tableLines.push(`| - | - |`)
+  tableLines.push(`| **Type** | ${typeSignature} |`)
+  tableLines.push(`| **Kind** | \`${typeAndKind.kindName}\` ↗ {@link ${kindDocUrl} | lang docs} |`)
+  tableLines.push(`| **Parent** | {@link $Schema.${parentType.name}} |`)
+  tableLines.push(`| **Path** | \`${fieldPath}\` |`)
+  if (isDeprecated) {
+    tableLines.push(`| **⚠ Deprecated** | ${deprecationReason} |`)
+  }
+  tableLines.push(`| **Nullability** | ${isNonNull ? 'Required' : 'Optional'} |`)
+  if (isList) {
+    tableLines.push(`| **List** | Yes |`)
+  }
+  if (hasArgs) {
+    tableLines.push(`| **Arguments** | ${field.args.length} |`)
+  }
+  if (customDirectives.length > 0) {
+    const directiveNames = customDirectives.map(d => `@${d.name.value}`).join(', ')
+    tableLines.push(`| **Directives** | ${directiveNames} |`)
+  }
+
+  // Combine parts with proper formatting
+  const parts: string[] = []
+
+  // Add field type header with link to GraphQL fields docs
+  parts.push(`GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.${parentType.name}}.`)
+
+  if (schemaDescription) {
+    parts.push('') // blank line
+    parts.push(schemaDescription)
+  }
+
+  parts.push('') // blank line before table
+  parts.push('# Info')
+  parts.push('') // blank line after heading
+  parts.push(tableLines.join('\n'))
+
+  return parts.join('\n')
+}
+
 const generateTypeModule = (
   config: Config,
   type: Grafaid.Schema.ObjectType | Grafaid.Schema.InterfaceType,
@@ -384,6 +564,7 @@ const generateTypeModule = (
 
   // __typename field
   fieldsCode(Code.tsInterface({
+    tsDoc: getTypeNameFieldDoc(type.name),
     export: true,
     name: `__typename`,
     extends: config.code.schemaInterfaceExtendsEnabled ? `$.Schema.OutputField` : null,
@@ -405,7 +586,7 @@ const generateTypeModule = (
     const namedType = Grafaid.Schema.getNamedType(field.type)
 
     fieldsCode(Code.tsInterface({
-      tsDoc: getTsDocContents(config, field),
+      tsDoc: getOutputFieldDoc(config, field, type),
       export: true,
       name: field.name,
       extends: config.code.schemaInterfaceExtendsEnabled ? `$.Schema.OutputField` : null,

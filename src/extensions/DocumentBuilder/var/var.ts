@@ -39,13 +39,6 @@ export const builderStateEmpty = (): BuilderStateEmpty => ({
 /**
  * Type-safe variable builder for GraphQL document generation.
  *
- * @remarks
- * Builder provides a fluent API for declaring GraphQL variables with full type safety.
- * The builder tracks variable metadata at the type level, enabling compile-time inference
- * of variable types, names, defaults, and requirements.
- *
- * State is stored directly on the `_` property for simple type-level access without helper types.
- *
  * @typeParam $State - The builder state containing default, required, and name properties
  *
  * @example Type-level tracking
@@ -58,6 +51,13 @@ export const builderStateEmpty = (): BuilderStateEmpty => ({
  * const doc = MySchema.query.user({ $: { id: builder } })
  * // Variables type inferred as: { userId: string }
  * ```
+ *
+ * @remarks
+ * Builder provides a fluent API for declaring GraphQL variables with full type safety.
+ * The builder tracks variable metadata at the type level, enabling compile-time inference
+ * of variable types, names, defaults, and requirements.
+ *
+ * State is stored directly on the `_` property for simple type-level access without helper types.
  */
 export interface Builder<$Type = unknown, $State extends BuilderState = BuilderState> extends BuilderSentinel {
   /**
@@ -76,30 +76,185 @@ export interface Builder<$Type = unknown, $State extends BuilderState = BuilderS
 
   /**
    * Specify a custom name for the GraphQL variable.
-   * By default, the variable uses the same name as the argument.
+   *
+   * @example
+   * ```ts
+   * query.user({
+   *   $: { id: $.name('userId') },
+   *   name: true
+   * })
+   * ```
+   * ```gql
+   * query ($userId: ID!) {
+   *   user(id: $userId) {
+   *     name
+   *   }
+   * }
+   * ```
+   *
+   * @remarks
+   * By default, variable names are inferred from the field name.
+   * Use this to provide an explicit name that differs from the field.
    */
   readonly name: <$name extends string>(
     name: $name,
   ) => Builder<$Type, Omit<$State, 'name'> & { name: $name }>
 
   /**
-   * Specify a default value for the GraphQL variable.
-   * The variable will be optional with this default in the GraphQL operation.
+   * Specify a custom name for the GraphQL variable (SQL-style alias).
    *
-   * @remarks input is 'const' typed so that literal types are preserved. This allows seamless use with enums fields where the default must be a specific enum value.
+   * @example
+   * ```ts
+   * query.user({
+   *   $: { id: $.as('userId') },
+   *   name: true
+   * })
+   * ```
+   * ```gql
+   * query ($userId: ID!) {
+   *   user(id: $userId) {
+   *     name
+   *   }
+   * }
+   * ```
+   *
+   * @remarks
+   * Identical to `.name()` but reads more naturally in some contexts.
+   * Inspired by SQL's `AS` keyword for column aliasing.
+   */
+  readonly as: <$name extends string>(
+    name: $name,
+  ) => Builder<$Type, Omit<$State, 'name'> & { name: $name }>
+
+  /**
+   * Make a required field optional by providing a default value.
+   *
+   * @example
+   * ```ts
+   * query.users({
+   *   $: { limit: $.default(10) },
+   *   name: true
+   * })
+   * ```
+   * ```gql
+   * query ($limit: Int = 10) {
+   *   users(limit: $limit) {
+   *     name
+   *   }
+   * }
+   * ```
+   *
+   * @example With enums
+   * ```ts
+   * query.pokemons({
+   *   $: { type: $.default('fire') },
+   *   name: true
+   * })
+   * ```
+   * ```gql
+   * query ($type: PokemonType = "fire") {
+   *   pokemons(type: $type) {
+   *     name
+   *   }
+   * }
+   * ```
+   *
+   * @remarks
+   * Adds a default value to the GraphQL variable declaration, making it optional.
+   * The input is 'const' typed so literal types are preserved for enums.
    */
   readonly default: <const $value extends $Type>(
     value: $value,
   ) => Builder<$value, Omit<$State, 'default'> & { default: $value }>
 
   /**
-   * Force an optional argument to be required in the GraphQL variables.
-   * Useful when you want to make an optional GraphQL field required at the client level.
+   * Force an optional field to be required in the GraphQL variables.
+   *
+   * @example
+   * ```ts
+   * query.search({
+   *   $: { query: $.required() },
+   *   results: true
+   * })
+   * ```
+   * ```gql
+   * query ($query: String!) {
+   *   search(query: $query) {
+   *     results
+   *   }
+   * }
+   * ```
+   *
+   * @remarks
+   * Useful when you want to make an optional GraphQL argument required at the client level.
+   * The variable will have a non-nullable type in the generated operation.
    */
   readonly required: () => Builder<$Type, Omit<$State, 'required'> & { required: true }>
 
   // No optional() method - use .default() to make optional instead
   // readonly optional: () => Builder<$Type, Obj.ReplaceProperty<$State, 'required', false>>
+}
+
+/**
+ * Entrypoint for the variable builder system.
+ *
+ * @typeParam $Type - The type of the variable value
+ * @typeParam $State - The builder state containing default, required, and name properties
+ *
+ * @example Multiple usage patterns
+ * ```ts
+ * // Standalone marker (uses argument name as variable name)
+ * const doc = query.user({
+ *   $: { id: $ }
+ * })
+ *
+ * // Callable with name
+ * const doc = query.user({
+ *   $: { id: $('userId') }
+ * })
+ *
+ * // Method chaining with .as()
+ * const doc = query.user({
+ *   $: { id: $.as('userId') }
+ * })
+ *
+ * // Method chaining with .default()
+ * const doc = query.users({
+ *   $: { limit: $.default(10) }
+ * })
+ *
+ * // Method chaining with .required()
+ * const doc = query.search({
+ *   $: { query: $.required() }
+ * })
+ *
+ * // Complex chaining
+ * const doc = query.users({
+ *   $: { limit: $('pageSize').default(20).required() }
+ * })
+ * ```
+ *
+ * @remarks
+ * BuilderEntrypoint extends Builder to support multiple usage patterns:
+ * - Standalone marker: `$`
+ * - Callable with name: `$('customName')`
+ * - Method chaining: `$.as('name')`, `$.default(value)`, `$.required()`
+ *
+ * All methods return a Builder instance for further chaining.
+ */
+export interface BuilderEntrypoint<$Type = unknown, $State extends BuilderState = BuilderStateEmpty>
+  extends Builder<$Type, $State>
+{
+  /**
+   * Use as standalone marker (variable name inferred from argument name)
+   */
+  (): Builder<$Type, BuilderStateEmpty>
+
+  /**
+   * Create a named variable
+   * @param name - Custom variable name
+   */
+  <$name extends string>(name: $name): Builder<$Type, Omit<BuilderStateEmpty, 'name'> & { name: $name }>
 }
 
 /**
@@ -125,6 +280,13 @@ const createVariableBuilder_ = <$Type, $State extends BuilderState>(
       }) as any
     },
 
+    as(name) {
+      return self({
+        ...state,
+        name,
+      }) as any
+    },
+
     default(value) {
       return self({
         ...state,
@@ -144,85 +306,154 @@ const createVariableBuilder_ = <$Type, $State extends BuilderState>(
 }
 
 /**
- * Variable marker for type-safe GraphQL variable declarations.
+ * Create the entrypoint that supports both callable and method usage.
  *
  * @remarks
- * Use `$var` to declare GraphQL variables in your selection sets when using the static document builder.
- * Variables are automatically inferred at compile time, providing full type safety for your GraphQL operations.
+ * Creates a function object that:
+ * - Can be used standalone: `$`
+ * - Can be called with a name: `$('customName')`
+ * - Has all builder methods: `$.as()`, `$.default()`, `$.required()`
+ */
+const createEntrypoint = <$Type>(): BuilderEntrypoint<$Type, BuilderStateEmpty> => {
+  // Create the base builder with empty state
+  const baseBuilder = createVariableBuilder_<$Type, BuilderStateEmpty>(builderStateEmpty())
+
+  // Create a function that can be called to set the name
+  const entrypoint = ((name?: string) => {
+    if (name === undefined) {
+      // Called as $() - return a new builder with empty state
+      return createVariableBuilder_<$Type, BuilderStateEmpty>(builderStateEmpty())
+    } else {
+      // Called as $('name') - return a builder with the name set
+      return createVariableBuilder_({
+        ...builderStateEmpty(),
+        name,
+      })
+    }
+  }) as BuilderEntrypoint<$Type, BuilderStateEmpty>
+
+  // Copy all builder properties to the function
+  // Use Object.defineProperty to avoid readonly property errors
+  for (const key of Object.keys(baseBuilder)) {
+    const descriptor = Object.getOwnPropertyDescriptor(baseBuilder, key)
+    if (descriptor) {
+      Object.defineProperty(entrypoint, key, descriptor)
+    }
+  }
+
+  return entrypoint
+}
+
+/**
+ * Type-safe GraphQL variable marker with flexible, ergonomic API.
  *
- * The variable system supports:
- * - Automatic type inference from schema
- * - Custom variable naming
- * - Default values (making variables optional)
- * - Forcing optional arguments to be required
- * - Forcing required arguments to be optional
- * - Method chaining for fluent configuration
- *
- * @example Basic usage
+ * @example Standalone - Variable name inferred from field
  * ```ts
- * import { Var } from 'graffle'
- *
- * // Use argument name as variable name
- * const doc = Schema.query.users({
- *   $: { first: Var.$var }  // Variable: { first: number }
+ * query.user({
+ *   $: { id: $ },
+ *   name: true
  * })
  * ```
- *
- * @example Custom variable name
- * ```ts
- * // Rename variable for clarity
- * const doc = Schema.query.users({
- *   $: { first: Var.$var.name('limit') }  // Variable: { limit: number }
- * })
+ * ```gql
+ * query ($id: ID!) {
+ *   user(id: $id) {
+ *     name
+ *   }
+ * }
  * ```
  *
- * @example Default values
+ * @example Named - Function call syntax
  * ```ts
- * // Make variable optional with default
- * const doc = Schema.query.users({
- *   $: { first: Var.$var.default(10) }  // Variable: { first?: number }
+ * query.user({
+ *   $: { id: $('userId') },
+ *   name: true
  * })
+ * ```
+ * ```gql
+ * query ($userId: ID!) {
+ *   user(id: $userId) {
+ *     name
+ *   }
+ * }
+ * ```
+ *
+ * @example Named - SQL-style method
+ * ```ts
+ * query.user({
+ *   $: { id: $.as('userId') },
+ *   name: true
+ * })
+ * ```
+ * ```gql
+ * query ($userId: ID!) {
+ *   user(id: $userId) {
+ *     name
+ *   }
+ * }
+ * ```
+ *
+ * @example Default value
+ * ```ts
+ * query.users({
+ *   $: { limit: $.default(10) },
+ *   name: true
+ * })
+ * ```
+ * ```gql
+ * query ($limit: Int = 10) {
+ *   users(limit: $limit) {
+ *     name
+ *   }
+ * }
  * ```
  *
  * @example Required modifier
  * ```ts
- * // Force optional GraphQL argument to be required
- * const doc = Schema.query.search({
- *   $: {
- *     query: Var.$var.required(),  // Variable: { query: string } (required)
- *     limit: Var.$var            // Variable: { limit?: number } (optional)
- *   }
+ * query.search({
+ *   $: { query: $.required() },
+ *   results: true
  * })
  * ```
+ * ```gql
+ * query ($query: String!) {
+ *   search(query: $query) {
+ *     results
+ *   }
+ * }
+ * ```
  *
- * @example Method chaining
+ * @example Chaining
  * ```ts
- * // Combine multiple modifiers
- * const doc = Schema.query.users({
- *   $: {
- *     first: Var.$var
- *       .name('pageSize')
- *       .default(20)
- *       .required  // Variable: { pageSize: number } with default 20
- *   }
+ * mutation.add({
+ *   $: { name: $('title').default('Untitled') },
+ *   id: true
  * })
  * ```
- *
- * @example With custom scalars
- * ```ts
- * // Variables respect custom scalar types
- * const doc = Schema.query.events({
- *   $: {
- *     after: Var.$var,  // Variable: { after: Date } if Date is custom scalar
- *     before: Var.$var.default(new Date())
+ * ```gql
+ * mutation ($title: String = "Untitled") {
+ *   add(name: $title) {
+ *     id
  *   }
- * })
+ * }
  * ```
  *
- * @see {@link Builder} for the full API
- * @see {@link https://graffle.js.org/guides/variables | Variables Guide}
+ * @remarks
+ * Create GraphQL variables with compile-time type safety and runtime validation.
+ * The `$` marker supports multiple patterns for maximum flexibility and expressiveness:
+ *
+ * - **Standalone**: `type: $` - Variable name inferred from field name
+ * - **Named**: `name: $('customName')` - Explicit variable naming via function call
+ * - **SQL-style**: `id: $.as('userId')` - Explicit variable naming via method
+ * - **Default**: `limit: $.default(10)` - Make variable optional with default value
+ * - **Required**: `query: $.required()` - Force optional field to be required variable
+ * - **Chaining**: `limit: $('pageSize').default(20)` - Combine multiple modifiers
+ *
+ * All patterns are fully typed and provide compile-time variable inference.
+ *
+ * @see {@link BuilderEntrypoint} - Full TypeScript interface
+ * @see {@link Builder} - Chaining API details
  */
-export const $var: Builder<any, BuilderStateEmpty> = createVariableBuilder()
+export const $: BuilderEntrypoint<any, BuilderStateEmpty> = createEntrypoint()
 
 /**
  * Type guard to check if a value is a variable builder.

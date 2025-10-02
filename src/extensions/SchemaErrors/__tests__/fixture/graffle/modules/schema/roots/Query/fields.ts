@@ -1,6 +1,13 @@
 import type * as $ from '../../../../../../../../../exports/utilities-for-generated.js'
 import type { Schema as $Schema } from '../../$.js'
 
+/**
+ * GraphQL `__typename` meta-field. The name of the object type currently being queried.
+ *
+ * Type: `"Query"`
+ *
+ * {@link https://graphql.org/learn/queries/#meta-fields | GraphQL __typename documentation}
+ */
 export interface __typename extends $.Schema.OutputField {
   kind: 'OutputField'
   name: '__typename'
@@ -12,6 +19,23 @@ export interface __typename extends $.Schema.OutputField {
   }
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.ID} |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ * | **Arguments** | 1 |
+ *
+ * Type: {@link $Schema.ID}
+ *
+ * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface InputObjectNested extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'InputObjectNested'
@@ -27,6 +51,23 @@ export interface InputObjectNested extends $.Schema.OutputField {
   namedType: $Schema.ID
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.ID} |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ * | **Arguments** | 1 |
+ *
+ * Type: {@link $Schema.ID}
+ *
+ * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface InputObjectNestedNonNull extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'InputObjectNestedNonNull'
@@ -42,10 +83,25 @@ export interface InputObjectNestedNonNull extends $.Schema.OutputField {
   namedType: $Schema.ID
 }
 
-export /**
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
  * Query enum field documentation.
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.ABCEnum} |
+ * | **Kind** | `Enum` ↗ {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ *
+ * Type: {@link $Schema.ABCEnum}
+ *
+ * Kind: `Enum` ↗ {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
  */
-interface abcEnum extends $.Schema.OutputField {
+export interface abcEnum extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'abcEnum'
   arguments: {}
@@ -53,6 +109,23 @@ interface abcEnum extends $.Schema.OutputField {
   namedType: $Schema.ABCEnum
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.String} |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ * | **Arguments** | 1 |
+ *
+ * Type: {@link $Schema.String}
+ *
+ * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface argInputObjectCircular extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'argInputObjectCircular'
@@ -68,6 +141,22 @@ export interface argInputObjectCircular extends $.Schema.OutputField {
   namedType: $Schema.String
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.bigint} |
+ * | **Kind** | `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ *
+ * Type: {@link $Schema.bigint}
+ *
+ * Kind: `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface bigintField extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'bigintField'
@@ -76,6 +165,22 @@ export interface bigintField extends $.Schema.OutputField {
   namedType: $Schema.bigint
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.bigint}! |
+ * | **Kind** | `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Required |
+ *
+ * Type: {@link $Schema.bigint}!
+ *
+ * Kind: `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface bigintFieldNonNull extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'bigintFieldNonNull'
@@ -84,6 +189,22 @@ export interface bigintFieldNonNull extends $.Schema.OutputField {
   namedType: $Schema.bigint
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.Date} |
+ * | **Kind** | `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ *
+ * Type: {@link $Schema.Date}
+ *
+ * Kind: `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface date extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'date'
@@ -92,6 +213,23 @@ export interface date extends $.Schema.OutputField {
   namedType: $Schema.Date
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.Date} |
+ * | **Kind** | `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ * | **Arguments** | 1 |
+ *
+ * Type: {@link $Schema.Date}
+ *
+ * Kind: `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface dateArg extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'dateArg'
@@ -107,6 +245,23 @@ export interface dateArg extends $.Schema.OutputField {
   namedType: $Schema.Date
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.Date} |
+ * | **Kind** | `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ * | **Arguments** | 1 |
+ *
+ * Type: {@link $Schema.Date}
+ *
+ * Kind: `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface dateArgInputObject extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'dateArgInputObject'
@@ -122,6 +277,23 @@ export interface dateArgInputObject extends $.Schema.OutputField {
   namedType: $Schema.Date
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.Date} |
+ * | **Kind** | `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ * | **Arguments** | 1 |
+ *
+ * Type: {@link $Schema.Date}
+ *
+ * Kind: `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface dateArgList extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'dateArgList'
@@ -137,6 +309,23 @@ export interface dateArgList extends $.Schema.OutputField {
   namedType: $Schema.Date
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.Date} |
+ * | **Kind** | `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ * | **Arguments** | 1 |
+ *
+ * Type: {@link $Schema.Date}
+ *
+ * Kind: `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface dateArgNonNull extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'dateArgNonNull'
@@ -152,6 +341,23 @@ export interface dateArgNonNull extends $.Schema.OutputField {
   namedType: $Schema.Date
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.Date} |
+ * | **Kind** | `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ * | **Arguments** | 1 |
+ *
+ * Type: {@link $Schema.Date}
+ *
+ * Kind: `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface dateArgNonNullList extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'dateArgNonNullList'
@@ -167,6 +373,23 @@ export interface dateArgNonNullList extends $.Schema.OutputField {
   namedType: $Schema.Date
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.Date} |
+ * | **Kind** | `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ * | **Arguments** | 1 |
+ *
+ * Type: {@link $Schema.Date}
+ *
+ * Kind: `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface dateArgNonNullListNonNull extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'dateArgNonNullListNonNull'
@@ -182,6 +405,22 @@ export interface dateArgNonNullListNonNull extends $.Schema.OutputField {
   namedType: $Schema.Date
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.DateInterface1} |
+ * | **Kind** | `Interface` ↗ {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ *
+ * Type: {@link $Schema.DateInterface1}
+ *
+ * Kind: `Interface` ↗ {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface dateInterface1 extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'dateInterface1'
@@ -190,6 +429,23 @@ export interface dateInterface1 extends $.Schema.OutputField {
   namedType: $Schema.DateInterface1
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.Date}[] |
+ * | **Kind** | `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ * | **List** | Yes |
+ *
+ * Type: {@link $Schema.Date}[]
+ *
+ * Kind: `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface dateList extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'dateList'
@@ -198,6 +454,23 @@ export interface dateList extends $.Schema.OutputField {
   namedType: $Schema.Date
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.Date}[] |
+ * | **Kind** | `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ * | **List** | Yes |
+ *
+ * Type: {@link $Schema.Date}[]
+ *
+ * Kind: `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface dateListList extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'dateListList'
@@ -206,6 +479,23 @@ export interface dateListList extends $.Schema.OutputField {
   namedType: $Schema.Date
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.Date}[]! |
+ * | **Kind** | `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Required |
+ * | **List** | Yes |
+ *
+ * Type: {@link $Schema.Date}[]!
+ *
+ * Kind: `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface dateListNonNull extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'dateListNonNull'
@@ -214,6 +504,22 @@ export interface dateListNonNull extends $.Schema.OutputField {
   namedType: $Schema.Date
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.Date}! |
+ * | **Kind** | `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Required |
+ *
+ * Type: {@link $Schema.Date}!
+ *
+ * Kind: `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface dateNonNull extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'dateNonNull'
@@ -222,6 +528,22 @@ export interface dateNonNull extends $.Schema.OutputField {
   namedType: $Schema.Date
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.DateObject1} |
+ * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ *
+ * Type: {@link $Schema.DateObject1}
+ *
+ * Kind: `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface dateObject1 extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'dateObject1'
@@ -230,6 +552,22 @@ export interface dateObject1 extends $.Schema.OutputField {
   namedType: $Schema.DateObject1
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.DateUnion} |
+ * | **Kind** | `Union` ↗ {@link https://graphql.org/graphql-js/type/#graphqluniontype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ *
+ * Type: {@link $Schema.DateUnion}
+ *
+ * Kind: `Union` ↗ {@link https://graphql.org/graphql-js/type/#graphqluniontype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface dateUnion extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'dateUnion'
@@ -238,6 +576,23 @@ export interface dateUnion extends $.Schema.OutputField {
   namedType: $Schema.DateUnion
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.String} |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ * | **Arguments** | 1 |
+ *
+ * Type: {@link $Schema.String}
+ *
+ * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface error extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'error'
@@ -253,6 +608,22 @@ export interface error extends $.Schema.OutputField {
   namedType: $Schema.String
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.ID} |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ *
+ * Type: {@link $Schema.ID}
+ *
+ * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface id extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'id'
@@ -261,6 +632,22 @@ export interface id extends $.Schema.OutputField {
   namedType: $Schema.ID
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.ID}! |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Required |
+ *
+ * Type: {@link $Schema.ID}!
+ *
+ * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface idNonNull extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'idNonNull'
@@ -269,6 +656,22 @@ export interface idNonNull extends $.Schema.OutputField {
   namedType: $Schema.ID
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.Interface} |
+ * | **Kind** | `Interface` ↗ {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ *
+ * Type: {@link $Schema.Interface}
+ *
+ * Kind: `Interface` ↗ {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 interface $interface extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'interface'
@@ -278,6 +681,24 @@ interface $interface extends $.Schema.OutputField {
 }
 export { type $interface as interface }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.InterfaceChildA}[]! |
+ * | **Kind** | `Interface` ↗ {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Required |
+ * | **List** | Yes |
+ * | **Arguments** | 1 |
+ *
+ * Type: {@link $Schema.InterfaceChildA}[]!
+ *
+ * Kind: `Interface` ↗ {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface interfaceHierarchyChildA extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'interfaceHierarchyChildA'
@@ -293,6 +714,24 @@ export interface interfaceHierarchyChildA extends $.Schema.OutputField {
   namedType: $Schema.InterfaceChildA
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.InterfaceChildB}[]! |
+ * | **Kind** | `Interface` ↗ {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Required |
+ * | **List** | Yes |
+ * | **Arguments** | 1 |
+ *
+ * Type: {@link $Schema.InterfaceChildB}[]!
+ *
+ * Kind: `Interface` ↗ {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface interfaceHierarchyChildB extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'interfaceHierarchyChildB'
@@ -308,6 +747,24 @@ export interface interfaceHierarchyChildB extends $.Schema.OutputField {
   namedType: $Schema.InterfaceChildB
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.InterfaceGrandparent}[]! |
+ * | **Kind** | `Interface` ↗ {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Required |
+ * | **List** | Yes |
+ * | **Arguments** | 1 |
+ *
+ * Type: {@link $Schema.InterfaceGrandparent}[]!
+ *
+ * Kind: `Interface` ↗ {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface interfaceHierarchyGrandparents extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'interfaceHierarchyGrandparents'
@@ -323,6 +780,24 @@ export interface interfaceHierarchyGrandparents extends $.Schema.OutputField {
   namedType: $Schema.InterfaceGrandparent
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.InterfaceParent}[]! |
+ * | **Kind** | `Interface` ↗ {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Required |
+ * | **List** | Yes |
+ * | **Arguments** | 1 |
+ *
+ * Type: {@link $Schema.InterfaceParent}[]!
+ *
+ * Kind: `Interface` ↗ {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface interfaceHierarchyParents extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'interfaceHierarchyParents'
@@ -338,6 +813,22 @@ export interface interfaceHierarchyParents extends $.Schema.OutputField {
   namedType: $Schema.InterfaceParent
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.Interface}! |
+ * | **Kind** | `Interface` ↗ {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Required |
+ *
+ * Type: {@link $Schema.Interface}!
+ *
+ * Kind: `Interface` ↗ {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface interfaceNonNull extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'interfaceNonNull'
@@ -346,6 +837,23 @@ export interface interfaceNonNull extends $.Schema.OutputField {
   namedType: $Schema.Interface
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.Interface} |
+ * | **Kind** | `Interface` ↗ {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ * | **Arguments** | 1 |
+ *
+ * Type: {@link $Schema.Interface}
+ *
+ * Kind: `Interface` ↗ {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface interfaceWithArgs extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'interfaceWithArgs'
@@ -361,6 +869,23 @@ export interface interfaceWithArgs extends $.Schema.OutputField {
   namedType: $Schema.Interface
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.Int}[] |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ * | **List** | Yes |
+ *
+ * Type: {@link $Schema.Int}[]
+ *
+ * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface listInt extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'listInt'
@@ -369,6 +894,23 @@ export interface listInt extends $.Schema.OutputField {
   namedType: $Schema.Int
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.Int}[]! |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Required |
+ * | **List** | Yes |
+ *
+ * Type: {@link $Schema.Int}[]!
+ *
+ * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface listIntNonNull extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'listIntNonNull'
@@ -377,6 +919,23 @@ export interface listIntNonNull extends $.Schema.OutputField {
   namedType: $Schema.Int
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.Int}[] |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ * | **List** | Yes |
+ *
+ * Type: {@link $Schema.Int}[]
+ *
+ * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface listListInt extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'listListInt'
@@ -385,6 +944,23 @@ export interface listListInt extends $.Schema.OutputField {
   namedType: $Schema.Int
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.Int}[]! |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Required |
+ * | **List** | Yes |
+ *
+ * Type: {@link $Schema.Int}[]!
+ *
+ * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface listListIntNonNull extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'listListIntNonNull'
@@ -393,6 +969,22 @@ export interface listListIntNonNull extends $.Schema.OutputField {
   namedType: $Schema.Int
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.lowerCaseUnion} |
+ * | **Kind** | `Union` ↗ {@link https://graphql.org/graphql-js/type/#graphqluniontype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ *
+ * Type: {@link $Schema.lowerCaseUnion}
+ *
+ * Kind: `Union` ↗ {@link https://graphql.org/graphql-js/type/#graphqluniontype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface lowerCaseUnion extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'lowerCaseUnion'
@@ -401,6 +993,22 @@ export interface lowerCaseUnion extends $.Schema.OutputField {
   namedType: $Schema.lowerCaseUnion
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.Object1} |
+ * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ *
+ * Type: {@link $Schema.Object1}
+ *
+ * Kind: `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 interface $object extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'object'
@@ -410,6 +1018,23 @@ interface $object extends $.Schema.OutputField {
 }
 export { type $object as object }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.Object1}[] |
+ * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ * | **List** | Yes |
+ *
+ * Type: {@link $Schema.Object1}[]
+ *
+ * Kind: `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface objectList extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'objectList'
@@ -418,6 +1043,23 @@ export interface objectList extends $.Schema.OutputField {
   namedType: $Schema.Object1
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.Object1}[]! |
+ * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Required |
+ * | **List** | Yes |
+ *
+ * Type: {@link $Schema.Object1}[]!
+ *
+ * Kind: `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface objectListNonNull extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'objectListNonNull'
@@ -426,6 +1068,22 @@ export interface objectListNonNull extends $.Schema.OutputField {
   namedType: $Schema.Object1
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.ObjectNested} |
+ * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ *
+ * Type: {@link $Schema.ObjectNested}
+ *
+ * Kind: `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface objectNested extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'objectNested'
@@ -434,6 +1092,22 @@ export interface objectNested extends $.Schema.OutputField {
   namedType: $Schema.ObjectNested
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.ObjectNestedWithArgs} |
+ * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ *
+ * Type: {@link $Schema.ObjectNestedWithArgs}
+ *
+ * Kind: `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface objectNestedWithArgs extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'objectNestedWithArgs'
@@ -442,6 +1116,22 @@ export interface objectNestedWithArgs extends $.Schema.OutputField {
   namedType: $Schema.ObjectNestedWithArgs
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.Object1}! |
+ * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Required |
+ *
+ * Type: {@link $Schema.Object1}!
+ *
+ * Kind: `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface objectNonNull extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'objectNonNull'
@@ -450,6 +1140,23 @@ export interface objectNonNull extends $.Schema.OutputField {
   namedType: $Schema.Object1
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.Object1} |
+ * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ * | **Arguments** | 5 |
+ *
+ * Type: {@link $Schema.Object1}
+ *
+ * Kind: `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface objectWithArgs extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'objectWithArgs'
@@ -489,6 +1196,23 @@ export interface objectWithArgs extends $.Schema.OutputField {
   namedType: $Schema.Object1
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.Result} |
+ * | **Kind** | `Union` ↗ {@link https://graphql.org/graphql-js/type/#graphqluniontype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ * | **Arguments** | 1 |
+ *
+ * Type: {@link $Schema.Result}
+ *
+ * Kind: `Union` ↗ {@link https://graphql.org/graphql-js/type/#graphqluniontype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface result extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'result'
@@ -504,6 +1228,23 @@ export interface result extends $.Schema.OutputField {
   namedType: $Schema.Result
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.Result}! |
+ * | **Kind** | `Union` ↗ {@link https://graphql.org/graphql-js/type/#graphqluniontype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Required |
+ * | **Arguments** | 1 |
+ *
+ * Type: {@link $Schema.Result}!
+ *
+ * Kind: `Union` ↗ {@link https://graphql.org/graphql-js/type/#graphqluniontype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface resultNonNull extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'resultNonNull'
@@ -519,6 +1260,22 @@ export interface resultNonNull extends $.Schema.OutputField {
   namedType: $Schema.Result
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.String} |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ *
+ * Type: {@link $Schema.String}
+ *
+ * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 interface $string extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'string'
@@ -528,6 +1285,23 @@ interface $string extends $.Schema.OutputField {
 }
 export { type $string as string }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.String} |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ * | **Arguments** | 1 |
+ *
+ * Type: {@link $Schema.String}
+ *
+ * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface stringWithArgEnum extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'stringWithArgEnum'
@@ -543,6 +1317,23 @@ export interface stringWithArgEnum extends $.Schema.OutputField {
   namedType: $Schema.String
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.String} |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ * | **Arguments** | 1 |
+ *
+ * Type: {@link $Schema.String}
+ *
+ * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface stringWithArgInputObject extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'stringWithArgInputObject'
@@ -558,6 +1349,23 @@ export interface stringWithArgInputObject extends $.Schema.OutputField {
   namedType: $Schema.String
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.String} |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ * | **Arguments** | 1 |
+ *
+ * Type: {@link $Schema.String}
+ *
+ * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface stringWithArgInputObjectEnum extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'stringWithArgInputObjectEnum'
@@ -573,6 +1381,23 @@ export interface stringWithArgInputObjectEnum extends $.Schema.OutputField {
   namedType: $Schema.String
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.String} |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ * | **Arguments** | 1 |
+ *
+ * Type: {@link $Schema.String}
+ *
+ * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface stringWithArgInputObjectRequired extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'stringWithArgInputObjectRequired'
@@ -588,10 +1413,26 @@ export interface stringWithArgInputObjectRequired extends $.Schema.OutputField {
   namedType: $Schema.String
 }
 
-export /**
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
  * The given arguments are reflected back as a JSON string.
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.String} |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ * | **Arguments** | 5 |
+ *
+ * Type: {@link $Schema.String}
+ *
+ * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
  */
-interface stringWithArgs extends $.Schema.OutputField {
+export interface stringWithArgs extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'stringWithArgs'
   arguments: {
@@ -636,6 +1477,23 @@ interface stringWithArgs extends $.Schema.OutputField {
   namedType: $Schema.String
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.String} |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ * | **Arguments** | 1 |
+ *
+ * Type: {@link $Schema.String}
+ *
+ * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface stringWithListArg extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'stringWithListArg'
@@ -651,6 +1509,23 @@ export interface stringWithListArg extends $.Schema.OutputField {
   namedType: $Schema.String
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.String} |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ * | **Arguments** | 1 |
+ *
+ * Type: {@link $Schema.String}
+ *
+ * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface stringWithListArgRequired extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'stringWithListArgRequired'
@@ -666,6 +1541,23 @@ export interface stringWithListArgRequired extends $.Schema.OutputField {
   namedType: $Schema.String
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.String} |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ * | **Arguments** | 1 |
+ *
+ * Type: {@link $Schema.String}
+ *
+ * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface stringWithRequiredArg extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'stringWithRequiredArg'
@@ -681,6 +1573,22 @@ export interface stringWithRequiredArg extends $.Schema.OutputField {
   namedType: $Schema.String
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.FooBarUnion} |
+ * | **Kind** | `Union` ↗ {@link https://graphql.org/graphql-js/type/#graphqluniontype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ *
+ * Type: {@link $Schema.FooBarUnion}
+ *
+ * Kind: `Union` ↗ {@link https://graphql.org/graphql-js/type/#graphqluniontype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface unionFooBar extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'unionFooBar'
@@ -689,6 +1597,22 @@ export interface unionFooBar extends $.Schema.OutputField {
   namedType: $Schema.FooBarUnion
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.FooBarUnion}! |
+ * | **Kind** | `Union` ↗ {@link https://graphql.org/graphql-js/type/#graphqluniontype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Required |
+ *
+ * Type: {@link $Schema.FooBarUnion}!
+ *
+ * Kind: `Union` ↗ {@link https://graphql.org/graphql-js/type/#graphqluniontype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface unionFooBarNonNull extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'unionFooBarNonNull'
@@ -697,6 +1621,23 @@ export interface unionFooBarNonNull extends $.Schema.OutputField {
   namedType: $Schema.FooBarUnion
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.FooBarUnion} |
+ * | **Kind** | `Union` ↗ {@link https://graphql.org/graphql-js/type/#graphqluniontype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ * | **Arguments** | 1 |
+ *
+ * Type: {@link $Schema.FooBarUnion}
+ *
+ * Kind: `Union` ↗ {@link https://graphql.org/graphql-js/type/#graphqluniontype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface unionFooBarWithArgs extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'unionFooBarWithArgs'
@@ -712,6 +1653,22 @@ export interface unionFooBarWithArgs extends $.Schema.OutputField {
   namedType: $Schema.FooBarUnion
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.ObjectUnion} |
+ * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Optional |
+ *
+ * Type: {@link $Schema.ObjectUnion}
+ *
+ * Kind: `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface unionObject extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'unionObject'
@@ -720,6 +1677,22 @@ export interface unionObject extends $.Schema.OutputField {
   namedType: $Schema.ObjectUnion
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.ObjectUnion}! |
+ * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Docs} |
+ * | **Parent** | {@link $Schema.Query} |
+ * | **Nullability** | Required |
+ *
+ * Type: {@link $Schema.ObjectUnion}!
+ *
+ * Kind: `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Query}
+ */
 export interface unionObjectNonNull extends $.Schema.OutputField {
   kind: 'OutputField'
   name: 'unionObjectNonNull'

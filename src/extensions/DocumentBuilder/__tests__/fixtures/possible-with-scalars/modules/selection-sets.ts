@@ -3136,10 +3136,10 @@ export namespace ErrorTwo {
 
 // ----------------------------------------| Entrypoint Interface |
 
-export /**
+/**
  * Object documentation.
  */
-interface Foo<
+export interface Foo<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
@@ -4855,10 +4855,10 @@ export interface DateUnion$FragmentInline<
 > extends DateUnion<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
-export /**
+/**
  * Union documentation.
  */
-interface FooBarUnion<
+export interface FooBarUnion<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
     $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {

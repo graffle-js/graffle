@@ -2,6 +2,7 @@ export * from './extract.js'
 export * from './infer.js'
 export { type InferVariables as Infer } from './infer.js'
 export * from './var.js'
+export { $ } from './var.js'
 
 import type { Builder } from './var.js'
 

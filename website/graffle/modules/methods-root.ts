@@ -29,7 +29,9 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >;
-
+  /**
+   * Retrieve all battles that have occurred.
+   */
   battles: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -46,7 +48,9 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >;
-
+  /**
+   * Retrieve all beings (Pokemon, Trainers, and Patrons).
+   */
   beings: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -63,7 +67,9 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >;
-
+  /**
+   * Find Pokemon by their name.
+   */
   pokemonByName: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -83,7 +89,9 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >;
-
+  /**
+   * Retrieve all Pokemon, optionally filtered.
+   */
   pokemons: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -100,7 +108,9 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >;
-
+  /**
+   * Find a trainer by their name.
+   */
   trainerByName: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -120,7 +130,9 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >;
-
+  /**
+   * Retrieve all trainers.
+   */
   trainers: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -166,7 +178,9 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       >
     >
   >;
-
+  /**
+   * Add a new Pokemon to the database.
+   */
   addPokemon: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(

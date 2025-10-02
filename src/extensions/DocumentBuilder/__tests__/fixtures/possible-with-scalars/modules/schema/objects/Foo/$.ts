@@ -3,10 +3,10 @@ import type * as $Fields from './fields.js'
 
 export * as Foo from './fields.js'
 
-export /**
+/**
  * Object documentation.
  */
-interface Foo extends $.Schema.OutputObject {
+export interface Foo extends $.Schema.OutputObject {
   kind: 'Object'
   name: 'Foo'
   fields: {

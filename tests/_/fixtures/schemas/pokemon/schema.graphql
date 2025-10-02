@@ -1,47 +1,160 @@
+"""
+Represents any kind of battle that can occur in the Pokemon world.
+"""
 union Battle = BattleRoyale | BattleTrainer | BattleWild
 
+"""
+A battle royale where multiple trainers compete with their Pokemon teams.
+"""
 type BattleRoyale {
+  """
+  The list of combatants participating in this battle royale.
+  """
   combatants: [CombatantMultiPokemon!]
+
+  """
+  The date when this battle took place, stored as a Unix timestamp.
+  """
   date: Float
+
+  """
+  The unique identifier for this battle.
+  """
   id: ID
+
+  """
+  The trainer who won this battle royale.
+  """
   winner: Trainer
 }
 
+"""
+A one-on-one battle between two trainers.
+"""
 type BattleTrainer {
+  """
+  The first combatant in this trainer battle.
+  """
   combatant1: CombatantSinglePokemon
+
+  """
+  The second combatant in this trainer battle.
+  """
   combatant2: CombatantSinglePokemon
+
+  """
+  The date when this battle took place, stored as a Unix timestamp.
+  """
   date: Float
+
+  """
+  The unique identifier for this battle.
+  """
   id: ID
+
+  """
+  The trainer who won this battle.
+  """
   winner: Trainer
 }
 
+"""
+A battle between a trainer and wild Pokemon.
+"""
 type BattleWild {
+  """
+  The date when this battle took place, stored as a Unix timestamp.
+  """
   date: Float
+
+  """
+  The unique identifier for this battle.
+  """
   id: ID
+
+  """
+  The trainer's Pokemon that participated in this battle.
+  """
   pokemon: Pokemon
+
+  """
+  The outcome of this wild Pokemon battle.
+  """
   result: BattleWildResult
+
+  """
+  The trainer who engaged in this wild battle.
+  """
   trainer: Trainer
+
+  """
+  The wild Pokemon encountered in this battle.
+  """
   wildPokemons: [Pokemon!]
 }
 
+"""
+Possible outcomes of a wild Pokemon battle.
+"""
 enum BattleWildResult {
+  """
+  The wild Pokemon were successfully captured.
+  """
   pokemonsCaptured
+
+  """
+  The wild Pokemon were defeated but not captured.
+  """
   pokemonsDefeated
+
+  """
+  The trainer was defeated by the wild Pokemon.
+  """
   trainerDefeated
 }
 
+"""
+A being in the Pokemon world - either a Pokemon, Trainer, or Patron.
+"""
 interface Being {
+  """
+  The unique identifier for this being.
+  """
   id: ID
+
+  """
+  The name of this being.
+  """
   name: String
 }
 
+"""
+A combatant in a battle royale with multiple Pokemon.
+"""
 type CombatantMultiPokemon {
+  """
+  The team of Pokemon used by this combatant.
+  """
   pokemons: [Pokemon!]
+
+  """
+  The trainer commanding this team of Pokemon.
+  """
   trainer: Trainer
 }
 
+"""
+A combatant in a one-on-one battle with a single Pokemon.
+"""
 type CombatantSinglePokemon {
+  """
+  The Pokemon used by this combatant.
+  """
   pokemon: Pokemon
+
+  """
+  The trainer commanding this Pokemon.
+  """
   trainer: Trainer
 }
 
@@ -50,80 +163,332 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `dat
 """
 scalar Date
 
+"""
+Input filter for querying by date ranges.
+"""
 input DateFilter {
+  """
+  The minimum date (greater than or equal to).
+  """
   gte: Date
+
+  """
+  The maximum date (less than or equal to).
+  """
   lte: Date
 }
 
+"""
+Root mutation type for modifying Pokemon data.
+"""
 type Mutation {
-  addPokemon(attack: Int, defense: Int, hp: Int, name: String!, type: PokemonType!): Pokemon
+  """
+  Add a new Pokemon to the database.
+  """
+  addPokemon(
+    """
+    The attack power of the new Pokemon.
+    """
+    attack: Int
+
+    """
+    The defense power of the new Pokemon.
+    """
+    defense: Int
+
+    """
+    The health points of the new Pokemon.
+    """
+    hp: Int
+
+    """
+    The name of the new Pokemon.
+    """
+    name: String!
+
+    """
+    The elemental type of the new Pokemon.
+    """
+    type: PokemonType!
+  ): Pokemon
 }
 
+"""
+A patron who is a fan of a particular trainer.
+"""
 type Patron implements Being {
+  """
+  The unique identifier for this patron.
+  """
   id: ID
+
+  """
+  The amount of money this patron has.
+  """
   money: Int
+
+  """
+  The name of this patron.
+  """
   name: String
 }
 
+"""
+A Pokemon with stats, type, and trainer information.
+"""
 type Pokemon implements Being {
+  """
+  The attack power of this Pokemon.
+  """
   attack: Int!
+
+  """
+  The date this Pokemon was born or caught.
+  """
   birthday: Date!
+
+  """
+  The defense power of this Pokemon.
+  """
   defense: Int!
+
+  """
+  The health points (HP) of this Pokemon.
+  """
   hp: Int!
+
+  """
+  The unique identifier for this Pokemon.
+  """
   id: ID!
+
+  """
+  The name of this Pokemon.
+  """
   name: String!
+
+  """
+  The trainer who owns this Pokemon, if any.
+  """
   trainer: Trainer
+
+  """
+  The elemental type of this Pokemon.
+  """
   type: PokemonType!
 }
 
+"""
+Input filter for querying Pokemon.
+"""
 input PokemonFilter {
+  """
+  Filter by Pokemon birth/catch date.
+  """
   birthday: DateFilter
+
+  """
+  Filter by Pokemon name.
+  """
   name: StringFilter
+
+  """
+  Filter by Pokemon type.
+  """
   type: PokemonType
 }
 
+"""
+The elemental type of a Pokemon.
+"""
 enum PokemonType {
+  """
+  Bug-type Pokemon are insects and arthropods.
+  """
   bug
+
+  """
+  Electric-type Pokemon can generate and control electricity.
+  """
   electric
+
+  """
+  Fire-type Pokemon can create and manipulate flames.
+  """
   fire
+
+  """
+  Grass-type Pokemon have plant-like characteristics.
+  """
   grass
+
+  """
+  Water-type Pokemon live in or control water.
+  """
   water
 }
 
+"""
+Root query type for fetching Pokemon data.
+"""
 type Query {
+  """
+  Retrieve all battles that have occurred.
+  """
   battles: [Battle!]!
+
+  """
+  Retrieve all beings (Pokemon, Trainers, and Patrons).
+  """
   beings: [Being!]!
-  pokemonByName(name: String!): [Pokemon!]
-  pokemons(filter: PokemonFilter): [Pokemon!]
-  trainerByName(name: String!): Trainer
+
+  """
+  Find Pokemon by their name.
+  """
+  pokemonByName(
+    """
+    The name of the Pokemon to search for.
+    """
+    name: String!
+  ): [Pokemon!]
+
+  """
+  Retrieve all Pokemon, optionally filtered.
+  """
+  pokemons(
+    """
+    Optional filter criteria for Pokemon.
+    """
+    filter: PokemonFilter
+  ): [Pokemon!]
+
+  """
+  Find a trainer by their name.
+  """
+  trainerByName(
+    """
+    The name of the trainer to search for.
+    """
+    name: String!
+  ): Trainer
+
+  """
+  Retrieve all trainers.
+  """
   trainers: [Trainer!]
 }
 
+"""
+Input filter for querying by string values.
+"""
 input StringFilter {
+  """
+  Filter for strings containing this substring.
+  """
   contains: String
+
+  """
+  Filter for strings matching any value in this list.
+  """
   in: [String!]
 }
 
+"""
+A Pokemon trainer who catches and battles with Pokemon.
+"""
 type Trainer implements Being {
+  """
+  The class or specialty of this trainer.
+  """
   class: TrainerClass
+
+  """
+  The patrons who are fans of this trainer.
+  """
   fans: [Patron!]
+
+  """
+  The unique identifier for this trainer.
+  """
   id: ID
+
+  """
+  The name of this trainer.
+  """
   name: String
+
+  """
+  The Pokemon owned by this trainer.
+  """
   pokemon: [Pokemon!]
 }
 
+"""
+The class or specialty of a Pokemon trainer.
+"""
 enum TrainerClass {
+  """
+  A trainer who specializes in Bug-type Pokemon.
+  """
   bugCatcher
+
+  """
+  A trainer who enjoys camping and outdoor activities.
+  """
   camper
+
+  """
+  A trainer who enjoys picnics and nature.
+  """
   picnicker
+
+  """
+  A trainer with psychic abilities.
+  """
   psychic
+
+  """
+  A psychic trainer who serves as a spiritual medium.
+  """
   psychicMedium
+
+  """
+  A young trainer with developing psychic powers.
+  """
   psychicYoungster
+
+  """
+  A trainer who works on ships and the sea.
+  """
   sailor
+
+  """
+  A highly intelligent trainer focused on science and technology.
+  """
   superNerd
+
+  """
+  A trainer who specializes in taming and befriending Pokemon.
+  """
   tamer
+
+  """
+  A member of the villainous Team Rocket organization.
+  """
   teamRocketGrunt
+
+  """
+  A trainer who excels in multiple types of competitions.
+  """
   triathlete
+
+  """
+  A young, inexperienced trainer just starting their journey.
+  """
   youngster
+
+  """
+  A young trainer with enthusiasm but limited experience.
+  """
   youth
 }

@@ -1,5 +1,5 @@
+import type * as $ from "graffle/utilities-for-generated";
 import * as $$Data from "../data.js";
-import type * as $ from "../graffle/utilities-for-generated.js";
 import * as $$Scalar from "../scalar.js";
 import * as $Types from "./$$.js";
 

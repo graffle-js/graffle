@@ -1,5 +1,12 @@
 import type { Schema as $Schema } from "../../$.js";
 
+/**
+ * GraphQL `__typename` meta-field. The name of the object type currently being queried.
+ *
+ * Type: `"Pokemon"`
+ *
+ * {@link https://graphql.org/learn/queries/#meta-fields | GraphQL __typename documentation}
+ */
 export interface __typename {
   kind: "OutputField";
   name: "__typename";
@@ -11,6 +18,24 @@ export interface __typename {
   };
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * The attack power of this Pokemon.
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.Int}! |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Parent** | {@link $Schema.Pokemon} |
+ * | **Nullability** | Required |
+ *
+ * Type: {@link $Schema.Int}!
+ *
+ * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
+ *
+ * Parent: {@link $Schema.Pokemon}
+ */
 export interface attack {
   kind: "OutputField";
   name: "attack";
@@ -19,6 +44,24 @@ export interface attack {
   namedType: $Schema.Int;
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * The date this Pokemon was born or caught.
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.Date}! |
+ * | **Kind** | `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | Docs} |
+ * | **Parent** | {@link $Schema.Pokemon} |
+ * | **Nullability** | Required |
+ *
+ * Type: {@link $Schema.Date}!
+ *
+ * Kind: `ScalarCustom` ↗ {@link https://graphql.org/graphql-js/type/#graphqlscalartype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Pokemon}
+ */
 export interface birthday {
   kind: "OutputField";
   name: "birthday";
@@ -27,6 +70,24 @@ export interface birthday {
   namedType: $Schema.Date;
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * The defense power of this Pokemon.
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.Int}! |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Parent** | {@link $Schema.Pokemon} |
+ * | **Nullability** | Required |
+ *
+ * Type: {@link $Schema.Int}!
+ *
+ * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
+ *
+ * Parent: {@link $Schema.Pokemon}
+ */
 export interface defense {
   kind: "OutputField";
   name: "defense";
@@ -35,6 +96,24 @@ export interface defense {
   namedType: $Schema.Int;
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * The health points (HP) of this Pokemon.
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.Int}! |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Parent** | {@link $Schema.Pokemon} |
+ * | **Nullability** | Required |
+ *
+ * Type: {@link $Schema.Int}!
+ *
+ * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
+ *
+ * Parent: {@link $Schema.Pokemon}
+ */
 export interface hp {
   kind: "OutputField";
   name: "hp";
@@ -43,6 +122,24 @@ export interface hp {
   namedType: $Schema.Int;
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * The unique identifier for this Pokemon.
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.ID}! |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Parent** | {@link $Schema.Pokemon} |
+ * | **Nullability** | Required |
+ *
+ * Type: {@link $Schema.ID}!
+ *
+ * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
+ *
+ * Parent: {@link $Schema.Pokemon}
+ */
 export interface id {
   kind: "OutputField";
   name: "id";
@@ -51,6 +148,24 @@ export interface id {
   namedType: $Schema.ID;
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * The name of this Pokemon.
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.String}! |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Docs} |
+ * | **Parent** | {@link $Schema.Pokemon} |
+ * | **Nullability** | Required |
+ *
+ * Type: {@link $Schema.String}!
+ *
+ * Kind: `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | Official Documentation}
+ *
+ * Parent: {@link $Schema.Pokemon}
+ */
 export interface name {
   kind: "OutputField";
   name: "name";
@@ -59,6 +174,24 @@ export interface name {
   namedType: $Schema.String;
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * The trainer who owns this Pokemon, if any.
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.Trainer} |
+ * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Docs} |
+ * | **Parent** | {@link $Schema.Pokemon} |
+ * | **Nullability** | Optional |
+ *
+ * Type: {@link $Schema.Trainer}
+ *
+ * Kind: `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Pokemon}
+ */
 export interface trainer {
   kind: "OutputField";
   name: "trainer";
@@ -67,6 +200,24 @@ export interface trainer {
   namedType: $Schema.Trainer;
 }
 
+/**
+ * GraphQL Field ↗ {@link https://graphql.org/learn/queries/#fields | Official Documentation}
+ *
+ * The elemental type of this Pokemon.
+ *
+ * | Property | Value |
+ * | -------- | ----- |
+ * | **Type** | {@link $Schema.PokemonType}! |
+ * | **Kind** | `Enum` ↗ {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Docs} |
+ * | **Parent** | {@link $Schema.Pokemon} |
+ * | **Nullability** | Required |
+ *
+ * Type: {@link $Schema.PokemonType}!
+ *
+ * Kind: `Enum` ↗ {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Official Documentation}
+ *
+ * Parent: {@link $Schema.Pokemon}
+ */
 export interface type {
   kind: "OutputField";
   name: "type";

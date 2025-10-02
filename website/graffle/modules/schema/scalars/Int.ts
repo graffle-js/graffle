@@ -1,1 +1,1 @@
-export type { Int } from "../../graffle/utilities-for-generated.js";
+export type { Int } from "graffle/utilities-for-generated";

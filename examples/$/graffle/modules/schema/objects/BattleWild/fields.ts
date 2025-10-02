@@ -1,5 +1,12 @@
 import type { Schema as $Schema } from '../../$.js'
 
+/**
+ * GraphQL `__typename` meta-field. The name of the object type currently being queried.
+ *
+ * Type: `"BattleWild"`
+ *
+ * {@link https://graphql.org/learn/queries/#meta-fields | GraphQL __typename documentation}
+ */
 export interface __typename {
   kind: 'OutputField'
   name: '__typename'
@@ -11,6 +18,21 @@ export interface __typename {
   }
 }
 
+/**
+ * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.BattleWild}.
+ *
+ * The date when this battle took place, stored as a Unix timestamp.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Type** | {@link $Schema.Float} |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
+ * | **Parent** | {@link $Schema.BattleWild} |
+ * | **Path** | `BattleWild.date` |
+ * | **Nullability** | Optional |
+ */
 export interface date {
   kind: 'OutputField'
   name: 'date'
@@ -19,6 +41,21 @@ export interface date {
   namedType: $Schema.Float
 }
 
+/**
+ * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.BattleWild}.
+ *
+ * The unique identifier for this battle.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Type** | {@link $Schema.ID} |
+ * | **Kind** | `ScalarStandard` ↗ {@link https://graphql.org/graphql-js/type/#scalars | lang docs} |
+ * | **Parent** | {@link $Schema.BattleWild} |
+ * | **Path** | `BattleWild.id` |
+ * | **Nullability** | Optional |
+ */
 export interface id {
   kind: 'OutputField'
   name: 'id'
@@ -27,6 +64,21 @@ export interface id {
   namedType: $Schema.ID
 }
 
+/**
+ * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.BattleWild}.
+ *
+ * The trainer's Pokemon that participated in this battle.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Type** | {@link $Schema.Pokemon} |
+ * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | lang docs} |
+ * | **Parent** | {@link $Schema.BattleWild} |
+ * | **Path** | `BattleWild.pokemon` |
+ * | **Nullability** | Optional |
+ */
 export interface pokemon {
   kind: 'OutputField'
   name: 'pokemon'
@@ -35,6 +87,21 @@ export interface pokemon {
   namedType: $Schema.Pokemon
 }
 
+/**
+ * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.BattleWild}.
+ *
+ * The outcome of this wild Pokemon battle.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Type** | {@link $Schema.BattleWildResult} |
+ * | **Kind** | `Enum` ↗ {@link https://graphql.org/graphql-js/type/#graphqlenumtype | lang docs} |
+ * | **Parent** | {@link $Schema.BattleWild} |
+ * | **Path** | `BattleWild.result` |
+ * | **Nullability** | Optional |
+ */
 export interface result {
   kind: 'OutputField'
   name: 'result'
@@ -43,6 +110,21 @@ export interface result {
   namedType: $Schema.BattleWildResult
 }
 
+/**
+ * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.BattleWild}.
+ *
+ * The trainer who engaged in this wild battle.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Type** | {@link $Schema.Trainer} |
+ * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | lang docs} |
+ * | **Parent** | {@link $Schema.BattleWild} |
+ * | **Path** | `BattleWild.trainer` |
+ * | **Nullability** | Optional |
+ */
 export interface trainer {
   kind: 'OutputField'
   name: 'trainer'
@@ -51,6 +133,22 @@ export interface trainer {
   namedType: $Schema.Trainer
 }
 
+/**
+ * GraphQL output field (↗ {@link https://graphql.org/learn/queries/#fields | lang docs}) on type {@link $Schema.BattleWild}.
+ *
+ * The wild Pokemon encountered in this battle.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Type** | {@link $Schema.Pokemon}[] |
+ * | **Kind** | `OutputObject` ↗ {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | lang docs} |
+ * | **Parent** | {@link $Schema.BattleWild} |
+ * | **Path** | `BattleWild.wildPokemons` |
+ * | **Nullability** | Optional |
+ * | **List** | Yes |
+ */
 export interface wildPokemons {
   kind: 'OutputField'
   name: 'wildPokemons'

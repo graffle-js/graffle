@@ -21,7 +21,7 @@ interface StaticDocumentContext {
  * @remarks
  * Each field method generates a fully typed GraphQL mutation document with:
  * - Type-safe selection sets and input types
- * - Automatic variable inference from `$var` usage
+ * - Automatic variable inference from `$` usage
  * - Compile-time validation of mutations
  * - Zero runtime overhead - documents are generated at build time
  *
@@ -30,7 +30,7 @@ interface StaticDocumentContext {
  * import { Var } from 'graffle'
  *
  * const createUserDoc = mutation.createUser({
- *   $: { input: $var },
+ *   $: { input: $ },
  *   id: true,
  *   name: true
  * })
@@ -57,6 +57,7 @@ export interface MutationBuilder {
       >
     >
   >
+
   idNonNull: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
