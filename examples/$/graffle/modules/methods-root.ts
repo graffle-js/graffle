@@ -50,6 +50,12 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Retrieve all battles that have occurred.
    *
+   * ```graphql
+   * battles: [Battle!]!
+   *
+   * union Battle = BattleRoyale | BattleTrainer | BattleWild
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -80,6 +86,15 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Retrieve all beings (Pokemon, Trainers, and Patrons).
    *
+   * ```graphql
+   * beings: [Being!]!
+   *
+   * interface Being {
+   *   id: ID
+   *   name: String
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -109,6 +124,24 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Find Pokemon by their name.
+   *
+   * ```graphql
+   * pokemonByName(
+   *   """The name of the Pokemon to search for."""
+   *   name: String!
+   * ): [Pokemon!]
+   *
+   * type Pokemon implements Being {
+   *   attack: Int!
+   *   birthday: Date!
+   *   defense: Int!
+   *   hp: Int!
+   *   id: ID!
+   *   name: String!
+   *   trainer: Trainer
+   *   type: PokemonType!
+   * }
+   * ```
    *
    * # Info
    *
@@ -144,6 +177,24 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Retrieve all Pokemon, optionally filtered.
    *
+   * ```graphql
+   * pokemons(
+   *   """Optional filter criteria for Pokemon."""
+   *   filter: PokemonFilter
+   * ): [Pokemon!]
+   *
+   * type Pokemon implements Being {
+   *   attack: Int!
+   *   birthday: Date!
+   *   defense: Int!
+   *   hp: Int!
+   *   id: ID!
+   *   name: String!
+   *   trainer: Trainer
+   *   type: PokemonType!
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -174,6 +225,21 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Find a trainer by their name.
+   *
+   * ```graphql
+   * trainerByName(
+   *   """The name of the trainer to search for."""
+   *   name: String!
+   * ): Trainer
+   *
+   * type Trainer implements Being {
+   *   class: TrainerClass
+   *   fans: [Patron!]
+   *   id: ID
+   *   name: String
+   *   pokemon: [Pokemon!]
+   * }
+   * ```
    *
    * # Info
    *
@@ -207,6 +273,18 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Retrieve all trainers.
+   *
+   * ```graphql
+   * trainers: [Trainer!]
+   *
+   * type Trainer implements Being {
+   *   class: TrainerClass
+   *   fans: [Patron!]
+   *   id: ID
+   *   name: String
+   *   pokemon: [Pokemon!]
+   * }
+   * ```
    *
    * # Info
    *
@@ -285,6 +363,32 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Add a new Pokemon to the database.
    *
+   * ```graphql
+   * addPokemon(
+   *   """The attack power of the new Pokemon."""
+   *   attack: Int
+   *   """The defense power of the new Pokemon."""
+   *   defense: Int
+   *   """The health points of the new Pokemon."""
+   *   hp: Int
+   *   """The name of the new Pokemon."""
+   *   name: String!
+   *   """The elemental type of the new Pokemon."""
+   *   type: PokemonType!
+   * ): Pokemon
+   *
+   * type Pokemon implements Being {
+   *   attack: Int!
+   *   birthday: Date!
+   *   defense: Int!
+   *   hp: Int!
+   *   id: ID!
+   *   name: String!
+   *   trainer: Trainer
+   *   type: PokemonType!
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -318,7 +422,48 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
 }
 
 export interface BuilderMethodsRoot<$Context extends $$Utilities.Context> {
+  /**
+   * Access to {@link https://graphql.org/learn/schema/#the-query-and-mutation-types | Query} root field methods.
+   *
+   * Each method corresponds to a root field on the GraphQL schema and returns a Promise.
+   * Use `.$batch(...)` to select multiple query fields in a single request.
+   *
+   * @example Single field
+   * ```ts
+   * const user = await graffle.query.user({ id: true, name: true })
+   * ```
+   *
+   * @example Multiple fields with $batch
+   * ```ts
+   * const data = await graffle.query.$batch({
+   *   user: { id: true, name: true },
+   *   posts: { title: true, content: true }
+   * })
+   * ```
+   */
   query: QueryMethods<$Context>
+  /**
+   * Access to {@link https://graphql.org/learn/schema/#the-mutation-and-mutation-types | Mutation} root field methods.
+   *
+   * Each method corresponds to a root field on the GraphQL schema and returns a Promise.
+   * Use `.$batch(...)` to select multiple mutation fields in a single request.
+   *
+   * @example Single field
+   * ```ts
+   * const result = await graffle.mutation.createUser({
+   *   id: true,
+   *   name: true
+   * })
+   * ```
+   *
+   * @example Multiple fields with $batch
+   * ```ts
+   * const data = await graffle.mutation.$batch({
+   *   createUser: { id: true, name: true },
+   *   createPost: { id: true, title: true }
+   * })
+   * ```
+   */
   mutation: MutationMethods<$Context>
 }
 

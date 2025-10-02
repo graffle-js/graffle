@@ -13,6 +13,9 @@ import { type DocumentController } from './send.js'
  * This interface defines the method signatures for accepting GraphQL documents as strings
  * or template literals. Returns a {@link DocumentController} for sending the request.
  *
+ * **Immutability**: Returns a new client instance. The original client is not modified.
+ * If the operation results in no effective change, the same instance is returned for performance.
+ *
  * @example
  * ```ts
  * // String document

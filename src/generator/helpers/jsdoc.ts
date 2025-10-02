@@ -2,6 +2,7 @@
  * Reusable JSDoc generation helpers for consistent documentation across generated modules.
  */
 
+import { print } from 'graphql'
 import { Grafaid } from '../../lib/grafaid/$.js'
 import type { Config } from '../config/config.js'
 
@@ -125,6 +126,68 @@ export const getTypenameMethodDoc = (
 }
 
 /**
+ * Generate JSDoc for BuilderMethodsRoot properties (query, mutation, subscription).
+ */
+export const getRootPropertyDoc = (
+  operationType: 'query' | 'mutation' | 'subscription',
+): string => {
+  const operationTypeCapitalized = operationType.charAt(0).toUpperCase() + operationType.slice(1)
+
+  const parts: string[] = []
+  parts.push(
+    `Access to {@link https://graphql.org/learn/schema/#the-${operationType}-and-mutation-types | ${operationTypeCapitalized}} root field methods.`,
+  )
+  parts.push('')
+  parts.push('Each method corresponds to a root field on the GraphQL schema and returns a Promise.')
+  parts.push(`Use \`.$batch(...)\` to select multiple ${operationType} fields in a single request.`)
+  parts.push('')
+  parts.push('@example Single field')
+  parts.push('```ts')
+
+  if (operationType === 'query') {
+    parts.push('const user = await graffle.query.user({ id: true, name: true })')
+  } else if (operationType === 'mutation') {
+    parts.push('const result = await graffle.mutation.createUser({')
+    parts.push('  id: true,')
+    parts.push('  name: true')
+    parts.push('})')
+  } else {
+    // subscription
+    parts.push('const stream = await graffle.subscription.onUserUpdate({')
+    parts.push('  id: true,')
+    parts.push('  status: true')
+    parts.push('})')
+  }
+
+  parts.push('```')
+  parts.push('')
+  parts.push('@example Multiple fields with $batch')
+  parts.push('```ts')
+
+  if (operationType === 'query') {
+    parts.push('const data = await graffle.query.$batch({')
+    parts.push('  user: { id: true, name: true },')
+    parts.push('  posts: { title: true, content: true }')
+    parts.push('})')
+  } else if (operationType === 'mutation') {
+    parts.push('const data = await graffle.mutation.$batch({')
+    parts.push('  createUser: { id: true, name: true },')
+    parts.push('  createPost: { id: true, title: true }')
+    parts.push('})')
+  } else {
+    // subscription
+    parts.push('const stream = await graffle.subscription.$batch({')
+    parts.push('  onUserUpdate: { id: true, status: true },')
+    parts.push('  onPostCreate: { id: true, title: true }')
+    parts.push('})')
+  }
+
+  parts.push('```')
+
+  return parts.join('\n')
+}
+
+/**
  * Generate JSDoc for static document builder (both interface and const).
  * Used for query, mutation, and subscription builders.
  */
@@ -219,9 +282,9 @@ export const getStaticDocumentBuilderDoc = (
 export const getOutputFieldSelectionSetDoc = (
   field: Grafaid.Schema.Field<any, any>,
   parentTypeName: string,
-  typeKindName: string,
-  typeName: string,
+  namedType: Grafaid.Schema.NamedTypes,
 ): string => {
+  const typeAndKind = Grafaid.getTypeAndKind(namedType)
   const schemaDescription = field.description
 
   // Type information
@@ -229,14 +292,14 @@ export const getOutputFieldSelectionSetDoc = (
   const isList = Grafaid.Schema.isListType(Grafaid.Schema.isNonNullType(field.type) ? field.type.ofType : field.type)
   const listMarker = isList ? '[]' : ''
   const nullMarker = isNonNull ? '!' : ''
-  const typeSignature = `{@link $NamedTypes.$${typeName}}${listMarker}${nullMarker}`
-  const kindDocUrl = getKindDocUrl(typeKindName)
+  const typeSignature = `{@link $NamedTypes.$${typeAndKind.typeName}}${listMarker}${nullMarker}`
+  const kindDocUrl = getKindDocUrl(typeAndKind.kindName)
   const fieldPath = `${parentTypeName}.${field.name}`
 
   // Build table
   const table = markdownTable({
     'Type': typeSignature,
-    'Kind': `{@link ${kindDocUrl} | ${typeKindName}} ↗`,
+    'Kind': `{@link ${kindDocUrl} | ${typeAndKind.kindName}} ↗`,
     'Parent': `{@link $NamedTypes.$${parentTypeName}}`,
     'Path': `\`${fieldPath}\``,
     '⚠ Deprecated': field.deprecationReason || undefined,
@@ -250,6 +313,23 @@ export const getOutputFieldSelectionSetDoc = (
 
   if (schemaDescription) {
     parts.push(schemaDescription)
+    parts.push('')
+  }
+
+  // Add GraphQL SDL signature
+  if (field.astNode) {
+    const fieldSignature = print({ ...field.astNode, description: undefined })
+    parts.push('```graphql')
+    parts.push(fieldSignature)
+
+    // Add named type definition
+    if (namedType.astNode) {
+      const typeDefinition = Grafaid.Document.printWithoutDescriptions(namedType.astNode)
+      parts.push('')
+      parts.push(typeDefinition)
+    }
+
+    parts.push('```')
     parts.push('')
   }
 
@@ -298,6 +378,23 @@ export const getOutputFieldMethodDoc = (
 
   if (schemaDescription) {
     parts.push(schemaDescription)
+    parts.push('')
+  }
+
+  // Add GraphQL SDL signature
+  if (field.astNode) {
+    const fieldSignature = print({ ...field.astNode, description: undefined })
+    parts.push('```graphql')
+    parts.push(fieldSignature)
+
+    // Add named type definition
+    if (namedType.astNode) {
+      const typeDefinition = Grafaid.Document.printWithoutDescriptions(namedType.astNode)
+      parts.push('')
+      parts.push(typeDefinition)
+    }
+
+    parts.push('```')
     parts.push('')
   }
 

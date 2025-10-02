@@ -235,9 +235,9 @@ const OutputObject = createCodeGenerator<{ type: Grafaid.Schema.ObjectType }>(
     code``
 
     const fieldKeys = fields.map(field => {
-      const typeKind = Grafaid.getTypeAndKind(Grafaid.Schema.getNamedType(field.type))
+      const namedType = Grafaid.Schema.getNamedType(field.type)
       const doc = Code.TSDoc(
-        getOutputFieldSelectionSetDoc(field, type.name, typeKind.kindName, typeKind.typeName),
+        getOutputFieldSelectionSetDoc(field, type.name, namedType),
       )
       const key = H.outputFieldKey(
         field.name,

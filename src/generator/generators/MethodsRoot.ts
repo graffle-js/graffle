@@ -7,6 +7,7 @@ import {
   getBatchMethodDoc,
   getOutputFieldMethodDoc,
   getRootMethodsInterfaceDoc,
+  getRootPropertyDoc,
   getTypenameMethodDoc,
 } from '../helpers/jsdoc.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
@@ -28,15 +29,19 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
       code(renderRootType({ config, node }))
       code``
     })
+    code(`export interface BuilderMethodsRoot<$Context extends ${$.$$Utilities}.Context> {`)
+    config.schema.kindMap.root.list.forEach(node => {
+      const propertyDoc = getRootPropertyDoc(node.operationType)
+      code(`  /**`)
+      propertyDoc.split('\n').forEach(line => {
+        code(`   * ${line}`)
+      })
+      code(`   */`)
+      code(`  ${node.operationType}: ${node.name.canonical}Methods<$Context>`)
+    })
+    code(`}`)
+    code``
     code`
-      export interface BuilderMethodsRoot<$Context extends ${$.$$Utilities}.Context> {
-        ${
-      config.schema.kindMap.root.list.map(node => {
-        return `${node.operationType}: ${node.name.canonical}Methods<$Context>`
-      }).join(`\n`)
-    }
-      }
-
       export interface BuilderMethodsRootFn extends ${$.$$Utilities}.TypeFunction {
         // @ts-expect-error parameter is Untyped.
         return: BuilderMethodsRoot<this['params']>

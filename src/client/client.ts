@@ -37,6 +37,15 @@ export type Client<
 > = __
 
 export interface ClientBase<$Context extends Context> {
+  /**
+   * Internal client context state.
+   *
+   * Contains the accumulated configuration, registered transports, extensions, scalars,
+   * and other internal state. This property is primarily for internal use and debugging.
+   *
+   * **Note**: In a future version, this property may be hidden by default and only
+   * accessible when debug mode is enabled.
+   */
   _: $Context
   /**
    * Execute a GraphQL document using GraphQL syntax.
@@ -46,6 +55,9 @@ export interface ClientBase<$Context extends Context> {
    *
    * For multiple operations in one document, specify the operation name when calling `send()`.
    * For operations with variables, pass them to `send()`.
+   *
+   * **Immutability**: Returns a new client instance. The original client is not modified.
+   * If the operation results in no effective change, the same instance is returned for performance.
    *
    * @example
    * ```ts
@@ -71,6 +83,9 @@ export interface ClientBase<$Context extends Context> {
    * Scalars must be registered before they can be used in queries. The codec provides
    * `encode` and `decode` functions to transform values between JavaScript and GraphQL
    * representations.
+   *
+   * **Immutability**: Returns a new client instance. The original client is not modified.
+   * If the operation results in no effective change, the same instance is returned for performance.
    *
    * @example
    * ```ts
@@ -101,14 +116,35 @@ export interface ClientBase<$Context extends Context> {
   /**
    * Configure or change the transport layer used for GraphQL requests.
    *
-   * Use this method to:
-   * - Add a new transport type (e.g., HTTP, WebSocket)
-   * - Select which registered transport to use
-   * - Configure the current or selected transport (e.g., set URL, headers)
+   * This method has three distinct behaviors depending on what you pass:
+   *
+   * ## 1. Add Transport (Transport Object/Builder)
+   *
+   * Pass a Transport or TransportBuilder object to register a new transport type.
+   * - The **first** transport registered automatically becomes the current transport
+   * - **Subsequent** transports are added to the registry but do NOT become current
+   * - **Error**: Cannot register a transport with a duplicate name (type error + runtime error)
+   *
+   * ## 2. Configure Current Transport (Configuration Object)
+   *
+   * Pass a configuration object to update the current transport's settings.
+   * - Only available after at least one transport is registered
+   * - Empty config `{}` is a **no-op** (returns the same instance)
+   * - Updates transport-specific options like URL, headers, etc.
+   *
+   * ## 3. Switch Transport (Transport Name String)
+   *
+   * Pass a transport name to switch to a different registered transport.
+   * - Only available after transports are registered
+   * - Optionally provide configuration as a second parameter
+   * - Switching to current transport without config is a **no-op** (returns the same instance)
+   *
+   * **Immutability**: Returns a new client instance. The original client is not modified.
+   * If the operation results in no effective change, the same instance is returned for performance.
    *
    * @example
    * ```ts
-   * // Set HTTP transport with URL
+   * // Add first transport (becomes current)
    * const graffle = Graffle
    *   .create()
    *   .transport({ url: 'https://api.example.com/graphql' })
@@ -116,23 +152,31 @@ export interface ClientBase<$Context extends Context> {
    *
    * @example
    * ```ts
-   * // Configure headers
-   * const graffle = Graffle
-   *   .create()
-   *   .transport({
-   *     url: 'https://api.example.com/graphql',
-   *     headers: { Authorization: 'Bearer token123' }
-   *   })
+   * // Add second transport (doesn't become current)
+   * const graffle2 = graffle.transport(WebSocketTransport)
+   * // Current is still HTTP
    * ```
    *
    * @example
    * ```ts
-   * // Switch to a different registered transport
-   * const graffle = Graffle
-   *   .create()
-   *   .transport(HttpTransport)
-   *   .transport(WebSocketTransport)
-   *   .transport('HttpTransport') // Switch back to HTTP
+   * // Configure current transport
+   * const graffle3 = graffle.transport({
+   *   headers: { Authorization: 'Bearer token123' }
+   * })
+   * ```
+   *
+   * @example
+   * ```ts
+   * // Switch to registered transport by name
+   * const graffle4 = graffle2.transport('WebSocketTransport')
+   * ```
+   *
+   * @example
+   * ```ts
+   * // Switch and configure simultaneously
+   * const graffle5 = graffle2.transport('HttpTransport', {
+   *   url: 'https://new-api.example.com/graphql'
+   * })
    * ```
    */
   transport: TransportMethod<$Context>
@@ -141,6 +185,9 @@ export interface ClientBase<$Context extends Context> {
    *
    * Properties can be static values or computed functions that receive the client context.
    * Computed properties are recalculated each time the client is copied (e.g., when chaining methods).
+   *
+   * **Immutability**: Returns a new client instance. The original client is not modified.
+   * If the operation results in no effective change, the same instance is returned for performance.
    *
    * @example
    * ```ts
@@ -187,6 +234,9 @@ export interface ClientBase<$Context extends Context> {
    * Common extensions include DocumentBuilder for type-safe query building and SchemaErrors
    * for enhanced error handling.
    *
+   * **Immutability**: Returns a new client instance. The original client is not modified.
+   * If the operation results in no effective change, the same instance is returned for performance.
+   *
    * @example
    * ```ts
    * import { DocumentBuilder } from 'graffle/extensions/document-builder'
@@ -215,6 +265,9 @@ export interface ClientBase<$Context extends Context> {
    *
    * Interceptors (called "anyware") allow you to intercept and modify requests at various stages,
    * such as adding authentication headers, logging, error handling, or retrying failed requests.
+   *
+   * **Immutability**: Returns a new client instance. The original client is not modified.
+   * If the operation results in no effective change, the same instance is returned for performance.
    *
    * @example
    * ```ts
@@ -255,6 +308,9 @@ export interface ClientBase<$Context extends Context> {
    *
    * This method allows you to customize client behavior such as output format (envelope, errors),
    * schema mapping, and extension-specific configuration.
+   *
+   * **Immutability**: Returns a new client instance. The original client is not modified.
+   * If the operation results in no effective change, the same instance is returned for performance.
    *
    * @example
    * ```ts
@@ -299,6 +355,33 @@ export type ExtensionChainableArguments = [Context, object, ExtensionChainableRe
 
 // Almost identical to `with` except that input is optional.
 // dprint-ignore
+/**
+ * Create a new Graffle client instance.
+ *
+ * This is the entry point for building a GraphQL client. You can optionally provide
+ * initial configuration for output handling, schema mapping, or other settings.
+ *
+ * All configuration can also be added later using the {@link ClientBase.with} method.
+ *
+ * @example
+ * ```ts
+ * import { Graffle } from 'graffle'
+ *
+ * // Create with no configuration
+ * const graffle = Graffle.create()
+ * ```
+ *
+ * @example
+ * ```ts
+ * // Create with initial configuration
+ * const graffle = Graffle.create({
+ *   output: {
+ *     envelope: true,
+ *     errors: { execution: 'return' }
+ *   }
+ * })
+ * ```
+ */
 export type Create<$Context extends Context = ContextEmpty> =
   <
     const configurationInput extends CalcConfigurationInputForContext<$Context>,
@@ -322,6 +405,11 @@ export const createConstructorWithContext = <$Context extends Context>(
   return createWithContext(newContext) as any
 }
 
+/**
+ * Create a new Graffle client instance.
+ *
+ * @see {@link Create} for detailed documentation and examples.
+ */
 export const create: Create = createConstructorWithContext(contextEmpty)
 
 export const createWithContext = <$Context extends Context>(

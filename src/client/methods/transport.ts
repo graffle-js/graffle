@@ -27,6 +27,9 @@ export type TransportMethod<
        *
        * Pass a configuration object to update settings of the currently selected transport,
        * such as URL, headers, or other transport-specific options.
+       *
+       * **Immutability**: Returns a new client instance. The original client is not modified.
+       * If the operation results in no effective change, the same instance is returned for performance.
        */
       <
         const configurationInput extends $Context['transports']['registry'][$Context['transports']['current']]['configurator']['input'],
@@ -42,6 +45,9 @@ export type TransportMethod<
        *
        * Pass a transport name to switch to a different registered transport. Optionally provide
        * a second argument to configure the selected transport at the same time.
+       *
+       * **Immutability**: Returns a new client instance. The original client is not modified.
+       * If the operation results in no effective change, the same instance is returned for performance.
        */
       <
         const name extends GetNames<$Context['transports']>,

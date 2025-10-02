@@ -19,6 +19,9 @@ export interface ScalarMethod<
    * Provide the scalar name and an object with `encode` and `decode` functions to transform
    * values between their JavaScript and GraphQL representations.
    *
+   * **Immutability**: Returns a new client instance. The original client is not modified.
+   * If the operation results in no effective change, the same instance is returned for performance.
+   *
    * @param name - The name of the scalar type as defined in the GraphQL schema
    * @param $Codec - An object containing encode and decode functions
    */
@@ -33,6 +36,9 @@ export interface ScalarMethod<
    * Register a pre-configured scalar object.
    *
    * Pass a {@link Schema.Scalar} object that was created with `Schema.Scalar.create()`.
+   *
+   * **Immutability**: Returns a new client instance. The original client is not modified.
+   * If the operation results in no effective change, the same instance is returned for performance.
    *
    * @param scalar - A pre-configured scalar object
    */
