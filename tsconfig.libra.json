@@ -29,7 +29,10 @@
       "#lib/grafaid": ["./src/lib/grafaid/$.ts"],
       "#lib/md-jsdoc": ["./src/lib/md-jsdoc/$.ts"],
       "#lib/tex": ["./src/lib/tex/$.ts"],
-      "#lib/type-function": ["./src/lib/type-function/$.ts"]
+      "#lib/type-function": ["./src/lib/type-function/$.ts"],
+      "#tests/fixtures/possible/client": ["./tests/_/fixtures/schemas/possible/client.ts"],
+      "#tests/fixtures/pokemon/client": ["./tests/_/fixtures/schemas/pokemon/client.ts"],
+      "#tests/fixtures/minimal/client": ["./tests/_/fixtures/schemas/minimal/client.ts"]
     },
 
     // DX covered by ESLint:
