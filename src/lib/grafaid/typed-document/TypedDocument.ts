@@ -14,9 +14,13 @@ export { type TypedQueryDocumentNode as Query } from 'graphql'
 // types are allowed.
 
 // dprint-ignore
-export type TypedDocumentLike<$Result extends SomeObjectData = SomeObjectData, $Variables extends Variables = any> =
+export type TypedDocumentLike<
+  $Result extends SomeObjectData = SomeObjectData,
+  $Variables extends Variables = any,
+  $RequiresSDDM extends boolean = boolean
+> =
   | TypedQueryDocumentNode<$Result, $Variables>
-  | TypedDocumentString   <$Result, $Variables>
+  | TypedDocumentString   <$Result, $Variables, $RequiresSDDM>
   | TypedDocumentNode     <$Result, $Variables>
 
 export type TypedDocumentNodeLike<$Result extends SomeObjectData = SomeObjectData, $Variables extends Variables = any> =
@@ -28,8 +32,17 @@ export type TypedDocumentNodeLike<$Result extends SomeObjectData = SomeObjectDat
  * @see https://github.com/dotansimha/graphql-typed-document-node/issues/163
  */
 // dprint-ignore
-interface TypedDocumentString<$Result = SomeObjectData, $Variables = Variables> extends String, DocumentTypeDecoration<$Result, $Variables> {
- // nothing
+interface TypedDocumentString<
+  $Result = SomeObjectData,
+  $Variables = Variables,
+  $RequiresSDDM extends boolean = false
+> extends String, DocumentTypeDecoration<$Result, $Variables> {
+  /**
+   * Phantom brand to track whether this document requires SDDM (Schema-Driven Data Map).
+   * This is a compile-time-only property used to prevent SDDM documents from being
+   * executed by clients without SDDM support.
+   */
+  readonly __sddm?: $RequiresSDDM
 }
 
 /**
@@ -44,7 +57,10 @@ interface TypedDocumentNode<$Result = SomeObjectData, $Variables = Variables> ex
   // nothing
 }
 
-export { type TypedDocumentNode as Node, type TypedDocumentString as String }
+export {
+  type TypedDocumentNode as Node,
+  type TypedDocumentString as String,
+}
 
 //
 //
@@ -85,21 +101,26 @@ export const unType = (document: TypedDocumentLike): string | DocumentNode => do
 
 // dprint-ignore
 export type ResultOf<$Document extends TypedDocumentLike> =
-  $Document extends string                                                              ? SomeObjectData :
-  $Document extends TypedQueryDocumentNode <infer $R extends SomeObjectData, infer _>   ? $R :
-  $Document extends TypedDocumentNode      <infer $R extends SomeObjectData, infer _>   ? $R :
-  $Document extends TypedDocumentString    <infer $R extends SomeObjectData, infer _>   ? $R :
+  $Document extends string                                                                                ? SomeObjectData :
+  $Document extends TypedQueryDocumentNode <infer $R extends SomeObjectData, infer __vars>                ? $R :
+  $Document extends TypedDocumentNode      <infer $R extends SomeObjectData, infer __vars>                ? $R :
+  $Document extends TypedDocumentString    <infer $R extends SomeObjectData, infer __vars, infer __sddm>  ? $R :
                                                                    never
 
 // dprint-ignore
 export type VariablesOf<$Document extends TypedDocumentLike> =
-  $Document extends TypedDocumentString    <infer _, infer $V>   ? $V :
-  $Document extends TypedQueryDocumentNode <infer _, infer $V>   ? $V :
-  $Document extends TypedDocumentNode      <infer _, infer $V>   ? IsUnknown<$V> extends true
-                                                                    // This catches case of DocumentNode being passed
-                                                                    // which is a subtype of TypedDocumentNode, however,
-                                                                    // extracting variables from it will always yield
-                                                                    // unknown.
-                                                                    ? Variables
-                                                                    : $V :
-                                                                   never
+  $Document extends TypedDocumentString    <infer __result, infer $V, infer __sddm>   ? $V :
+  $Document extends TypedQueryDocumentNode <infer __result, infer $V>                   ? $V :
+  $Document extends TypedDocumentNode      <infer __result, infer $V>                   ? IsUnknown<$V> extends true
+                                                                                           // This catches case of DocumentNode being passed
+                                                                                           // which is a subtype of TypedDocumentNode, however,
+                                                                                           // extracting variables from it will always yield
+                                                                                           // unknown.
+                                                                                           ? Variables
+                                                                                           : $V :
+                                                                                         never
+
+// dprint-ignore
+export type RequiresSDDMOf<$Document extends TypedDocumentLike> =
+  $Document extends TypedDocumentString<infer __result, infer __vars, infer $RequiresSDDM> ? $RequiresSDDM :
+                                                                                              false
