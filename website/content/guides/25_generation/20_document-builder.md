@@ -232,29 +232,21 @@ Graffle.query.trainerByName({
 // Generated: query($name: String!) { trainerByName(name: $name) { name } }
 ```
 
-**2. Value-Based (without schema):**
+**2. Value-Based (without SDDM):**
 
-When schema information is unavailable (e.g., using static builder without generation), Graffle infers types from runtime values:
+When SDDM metadata is unavailable (e.g., stripped for bundle size), the same generated client falls back to inferring GraphQL types from JavaScript runtime values:
 
-```ts
-import { createStaticRootType } from 'graffle/extensions/document-builder'
-import { OperationTypeNode } from 'graphql'
+```ts twoslash
+import { Graffle } from './graffle/$.js'
 
-const query = createStaticRootType(OperationTypeNode.QUERY)
-
-query.someField({
-  $: {
-    stringArg: 'value', // Inferred as: String
-    numberArg: 42, // Inferred as: Int
-    boolArg: true, // Inferred as: Boolean
-    arrayArg: ['a', 'b'], // Inferred as: [String]
-  },
+// Without SDDM, types are inferred from JS values:
+Graffle.query.trainerByName({
+  $: { name: 'Ash' }, // Inferred as: String (not ID!)
   name: true,
 })
 
-// Generated: query($stringArg: String, $numberArg: Int, $boolArg: Boolean, $arrayArg: [String]) {
-//   someField(stringArg: $stringArg, numberArg: $numberArg, boolArg: $boolArg, arrayArg: $arrayArg) { name }
-// }
+// Generated: query($name: String) { trainerByName(name: $name) { name } }
+// Note: String vs ID! - less precise than schema-driven inference
 ```
 
 **Type Inference Rules:**
