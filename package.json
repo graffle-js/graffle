@@ -191,10 +191,7 @@
     "#lib/grafaid": "./build/lib/grafaid/$.js",
     "#lib/md-jsdoc": "./build/lib/md-jsdoc/$.js",
     "#lib/tex": "./build/lib/tex/$.js",
-    "#lib/type-function": "./build/lib/type-function/$.js",
-    "#tests/fixtures/possible/client": "./tests/_/fixtures/schemas/possible/client.js",
-    "#tests/fixtures/pokemon/client": "./tests/_/fixtures/schemas/pokemon/client.js",
-    "#tests/fixtures/minimal/client": "./tests/_/fixtures/schemas/minimal/client.js"
+    "#lib/type-function": "./build/lib/type-function/$.js"
   },
   "libra": {
     "entities": {
