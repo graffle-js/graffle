@@ -1,11 +1,13 @@
 import { OperationTypeNode } from 'graphql'
 import type { TypedDocument } from '../../../../../../exports/client.js'
 import { createStaticRootType } from '../../../../../../exports/extensions/document-builder/runtime.js'
-import type * as $$Utilities from '../../../../../../exports/utilities-for-generated.js'
 import type * as ArgumentsMap from './arguments-map.js'
 import type * as $$Scalar from './scalar.js'
-import type * as $$Schema from './schema/$.js'
 import type * as SelectionSets from './selection-sets.js'
+
+import type * as $$Utilities from '../../../../../../exports/utilities-for-generated.js'
+import type * as $$Schema from './schema/$.js'
+
 /**
  * Context for static document type inference.
  * Static documents have no runtime extensions, hence typeHookRequestResultDataTypes is never.
@@ -30,9 +32,9 @@ interface StaticDocumentContext {
  * import { Var } from 'graffle'
  *
  * const createUserDoc = mutation.createUser({
- *   $: { input: $ },
- *   id: true,
- *   name: true
+ * $: { input: $ },
+ * id: true,
+ * name: true
  * })
  * // Generates: mutation ($input: CreateUserInput!) { createUser(input: $input) { id name } }
  * ```
@@ -40,6 +42,22 @@ interface StaticDocumentContext {
  * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
  */
 export interface MutationBuilder {
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Mutation} |
+   * | **Path** | `Mutation.id` |
+   * | **Nullability** | Optional |
+   *
+   * @example
+   * ```ts
+   * const doc = mutation.id()
+   * ```
+   */
   id: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -60,6 +78,22 @@ export interface MutationBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ID}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Mutation} |
+   * | **Path** | `Mutation.idNonNull` |
+   * | **Nullability** | Required |
+   *
+   * @example
+   * ```ts
+   * const doc = mutation.idNonNull()
+   * ```
+   */
   idNonNull: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -95,9 +129,9 @@ export interface MutationBuilder {
  * import { Var } from 'graffle'
  *
  * const createUserDoc = mutation.createUser({
- *   $: { input: $ },
- *   id: true,
- *   name: true
+ * $: { input: $ },
+ * id: true,
+ * name: true
  * })
  * // Generates: mutation ($input: CreateUserInput!) { createUser(input: $input) { id name } }
  * ```

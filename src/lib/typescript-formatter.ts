@@ -55,21 +55,12 @@ export const getTypeScriptFormatterDprint = async (fs: Fs): Promise<Formatter | 
           ...localConfig.typescript,
           ...customFormatterConfig,
         }
-        try {
-          const contentFormatted = formatter.formatText({
-            filePath: `memory.ts`,
-            fileText,
-            overrideConfig,
-          })
-          return contentFormatted
-        } catch (error) {
-          if (process.env[`DEBUG`]) {
-            const path = `./syntax-error.ts`
-            await fs.writeFile(path, fileText)
-            console.log(`Wrote contents to ${path} for debugging.`)
-          }
-          throw error
-        }
+        const contentFormatted = formatter.formatText({
+          filePath: `memory.ts`,
+          fileText,
+          overrideConfig,
+        })
+        return contentFormatted
       },
     }
   } catch {

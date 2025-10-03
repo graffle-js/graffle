@@ -318,7 +318,7 @@ export const getOutputFieldSelectionSetDoc = (
 
   // Add GraphQL SDL signature
   if (field.astNode) {
-    const fieldSignature = print({ ...field.astNode, description: undefined })
+    const fieldSignature = Grafaid.Document.printWithoutDescriptions(field.astNode)
     parts.push('```graphql')
     parts.push(fieldSignature)
 
@@ -383,7 +383,7 @@ export const getOutputFieldMethodDoc = (
 
   // Add GraphQL SDL signature
   if (field.astNode) {
-    const fieldSignature = print({ ...field.astNode, description: undefined })
+    const fieldSignature = Grafaid.Document.printWithoutDescriptions(field.astNode)
     parts.push('```graphql')
     parts.push(fieldSignature)
 
@@ -516,7 +516,7 @@ export const getStaticDocumentFieldDoc = (
 
   // Add GraphQL SDL signature
   if (field.astNode) {
-    const fieldSignature = print({ ...field.astNode, description: undefined })
+    const fieldSignature = Grafaid.Document.printWithoutDescriptions(field.astNode)
     parts.push('```graphql')
     parts.push(fieldSignature)
 
@@ -552,10 +552,14 @@ export const getStaticDocumentFieldDoc = (
     parts.push(`const doc = ${operationType}.${field.name}({`)
     if (isUnion) {
       parts.push(`  __typename: true,`)
-      parts.push(`  ___on_SomeType: { /* ... */ }`)
+      parts.push(`  ___on_SomeType: {`)
+      parts.push(`    // ... fields for this type`)
+      parts.push(`  }`)
     } else {
       parts.push(`  id: true,`)
-      parts.push(`  ___on_SomeImplementation: { /* ... */ }`)
+      parts.push(`  ___on_SomeImplementation: {`)
+      parts.push(`    // ... fields for this implementation`)
+      parts.push(`  }`)
     }
     parts.push(`})`)
   } else if (isObject) {
@@ -563,12 +567,16 @@ export const getStaticDocumentFieldDoc = (
     const fields = Object.values(objectType.getFields()).slice(0, 3)
     parts.push(`const doc = ${operationType}.${field.name}({`)
     if (hasArgs) {
-      parts.push(`  // $: { ...variables },`)
+      parts.push(`  // $: { ...variables }`)
     }
-    fields.forEach(f => {
-      parts.push(`  ${f.name}: true,`)
+    fields.forEach((f, index) => {
+      const isLast = index === fields.length - 1
+      const hasMoreFields = Object.values(objectType.getFields()).length > fields.length
+      // Add trailing comma on last field if there are more fields (indicated by comment)
+      const needsComma = !isLast || hasMoreFields
+      parts.push(`  ${f.name}: true${needsComma ? ',' : ''}`)
     })
-    if (fields.length > 0) {
+    if (Object.values(objectType.getFields()).length > fields.length) {
       parts.push(`  // ...`)
     }
     parts.push(`})`)

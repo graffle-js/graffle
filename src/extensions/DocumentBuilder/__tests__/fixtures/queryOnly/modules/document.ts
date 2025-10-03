@@ -1,11 +1,12 @@
 import { OperationTypeNode } from 'graphql'
 import type { TypedDocument } from '../../../../../../exports/client.js'
 import { createStaticRootType } from '../../../../../../exports/extensions/document-builder/runtime.js'
-import type * as $$Utilities from '../../../../../../exports/utilities-for-generated.js'
 import type * as ArgumentsMap from './arguments-map.js'
 import type * as $$Scalar from './scalar.js'
-import type * as $$Schema from './schema/$.js'
 import type * as SelectionSets from './selection-sets.js'
+
+import type * as $$Utilities from '../../../../../../exports/utilities-for-generated.js'
+import type * as $$Schema from './schema/$.js'
 
 /**
  * Context for static document type inference.
@@ -15,6 +16,7 @@ interface StaticDocumentContext {
   typeHookRequestResultDataTypes: never
   scalars: $$Scalar.$Registry
 }
+
 /**
  * Static query builder for compile-time GraphQL document generation.
  *
@@ -28,9 +30,9 @@ interface StaticDocumentContext {
  * @example Basic query
  * ```ts
  * const getUserDoc = query.user({
- *   id: true,
- *   name: true,
- *   email: true
+ * id: true,
+ * name: true,
+ * email: true
  * })
  * // Generates: query { user { id name email } }
  * ```
@@ -40,9 +42,9 @@ interface StaticDocumentContext {
  * import { Var } from 'graffle'
  *
  * const getUserByIdDoc = query.user({
- *   $: { id: $ },
- *   name: true,
- *   posts: { title: true }
+ * $: { id: $ },
+ * name: true,
+ * posts: { title: true }
  * })
  * // Generates: query ($id: ID!) { user(id: $id) { name posts { title } } }
  * // Variables type: { id: string }
@@ -51,6 +53,22 @@ interface StaticDocumentContext {
  * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
  */
 export interface QueryBuilder {
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.id` |
+   * | **Nullability** | Optional |
+   *
+   * @example
+   * ```ts
+   * const doc = query.id()
+   * ```
+   */
   id: <
     const $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['id'],
   >(
@@ -69,6 +87,22 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ID}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.idNonNull` |
+   * | **Nullability** | Required |
+   *
+   * @example
+   * ```ts
+   * const doc = query.idNonNull()
+   * ```
+   */
   idNonNull: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -102,9 +136,9 @@ export interface QueryBuilder {
  * @example Basic query
  * ```ts
  * const getUserDoc = query.user({
- *   id: true,
- *   name: true,
- *   email: true
+ * id: true,
+ * name: true,
+ * email: true
  * })
  * // Generates: query { user { id name email } }
  * ```
@@ -114,9 +148,9 @@ export interface QueryBuilder {
  * import { Var } from 'graffle'
  *
  * const getUserByIdDoc = query.user({
- *   $: { id: $ },
- *   name: true,
- *   posts: { title: true }
+ * $: { id: $ },
+ * name: true,
+ * posts: { title: true }
  * })
  * // Generates: query ($id: ID!) { user(id: $id) { name posts { title } } }
  * // Variables type: { id: string }

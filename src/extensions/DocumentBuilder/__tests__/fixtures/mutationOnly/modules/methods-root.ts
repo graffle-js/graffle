@@ -105,6 +105,28 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
 }
 
 export interface BuilderMethodsRoot<$Context extends $$Utilities.Context> {
+  /**
+   * Access to {@link https://graphql.org/learn/schema/#the-mutation-and-mutation-types | Mutation} root field methods.
+   *
+   * Each method corresponds to a root field on the GraphQL schema and returns a Promise.
+   * Use `.$batch(...)` to select multiple mutation fields in a single request.
+   *
+   * @example Single field
+   * ```ts
+   * const result = await graffle.mutation.createUser({
+   *   id: true,
+   *   name: true
+   * })
+   * ```
+   *
+   * @example Multiple fields with $batch
+   * ```ts
+   * const data = await graffle.mutation.$batch({
+   *   createUser: { id: true, name: true },
+   *   createPost: { id: true, title: true }
+   * })
+   * ```
+   */
   mutation: MutationMethods<$Context>
 }
 

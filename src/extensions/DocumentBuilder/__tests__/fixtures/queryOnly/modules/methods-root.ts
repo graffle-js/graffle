@@ -105,6 +105,25 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
 }
 
 export interface BuilderMethodsRoot<$Context extends $$Utilities.Context> {
+  /**
+   * Access to {@link https://graphql.org/learn/schema/#the-query-and-mutation-types | Query} root field methods.
+   *
+   * Each method corresponds to a root field on the GraphQL schema and returns a Promise.
+   * Use `.$batch(...)` to select multiple query fields in a single request.
+   *
+   * @example Single field
+   * ```ts
+   * const user = await graffle.query.user({ id: true, name: true })
+   * ```
+   *
+   * @example Multiple fields with $batch
+   * ```ts
+   * const data = await graffle.query.$batch({
+   *   user: { id: true, name: true },
+   *   posts: { title: true, content: true }
+   * })
+   * ```
+   */
   query: QueryMethods<$Context>
 }
 

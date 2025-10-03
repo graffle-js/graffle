@@ -32,38 +32,33 @@ export const ModuleGeneratorDocument = createModuleGenerator(
     const mutationHasArgs = hasFieldsWithArguments(mutationType)
     const subscriptionHasArgs = hasFieldsWithArguments(subscriptionType)
 
-    code`
-      import { createStaticRootType } from '${config.paths.imports.grafflePackage.extensionDocumentBuilder}'
-      import { OperationTypeNode } from 'graphql'
-      import type { TypedDocument } from '${config.paths.imports.grafflePackage.client}'
-      import type * as SelectionSets from './selection-sets.js'
-      import type * as $$Scalar from './scalar.js'
-      import type * as ArgumentsMap from './arguments-map.js'
-    `
+    code(`import { createStaticRootType } from '${config.paths.imports.grafflePackage.extensionDocumentBuilder}'`)
+    code(`import { OperationTypeNode } from 'graphql'`)
+    code(`import type { TypedDocument } from '${config.paths.imports.grafflePackage.client}'`)
+    code(codeImportAll(config, { as: 'SelectionSets', from: './selection-sets', type: true }))
+    code(codeImportAll(config, { as: '$$Scalar', from: './scalar', type: true }))
+    code(codeImportAll(config, { as: 'ArgumentsMap', from: './arguments-map', type: true }))
+    code``
 
     // Generate typed interfaces for each root type builder
     if (queryType) {
       code(importUtilities(config))
-      code`
-        import type * as $$Schema from './schema/$.js'
-
-        /**
-         * Context for static document type inference.
-         * Static documents have no runtime extensions, hence typeHookRequestResultDataTypes is never.
-         */
-        interface StaticDocumentContext {
-          typeHookRequestResultDataTypes: never
-          scalars: $$Scalar.$Registry
-        }
-      `
+      code(codeImportAll(config, { as: '$$Schema', from: './schema/$', type: true }))
+      code``
+      code(
+        Code.TSDoc(
+          `Context for static document type inference.\nStatic documents have no runtime extensions, hence typeHookRequestResultDataTypes is never.`,
+        ),
+      )
+      code(`interface StaticDocumentContext {`)
+      code(`  typeHookRequestResultDataTypes: never`)
+      code(`  scalars: $$Scalar.$Registry`)
+      code(`}`)
+      code``
 
       // Interface JSDoc
       const interfaceDoc = getStaticDocumentBuilderDoc('query')
-      code(`/**`)
-      interfaceDoc.split('\n').forEach(line => {
-        code(` * ${line}`)
-      })
-      code(` */`)
+      code(Code.TSDoc(interfaceDoc))
 
       code`
         export interface QueryBuilder {
@@ -84,15 +79,9 @@ export const ModuleGeneratorDocument = createModuleGenerator(
 
       // Const JSDoc
       const constDoc = getStaticDocumentBuilderDoc('query')
-      code(`/**`)
-      constDoc.split('\n').forEach(line => {
-        code(` * ${line}`)
-      })
-      code(` */`)
-
-      code`
-        export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY) as any
-      `
+      code(Code.TSDoc(constDoc))
+      code(`export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY) as any`)
+      code``
     }
 
     if (mutationType) {
@@ -101,26 +90,22 @@ export const ModuleGeneratorDocument = createModuleGenerator(
         code(codeImportAll(config, { as: '$$Schema', from: './schema/$', type: true }))
       }
       if (!queryType) {
-        code`
-          /**
-           * Context for static document type inference.
-           * Static documents have no runtime extensions, hence typeHookRequestResultDataTypes is never.
-           */
-          interface StaticDocumentContext {
-            typeHookRequestResultDataTypes: never
-            scalars: $$Scalar.$Registry
-          }
-        `
+        code``
+        code(
+          Code.TSDoc(
+            `Context for static document type inference.\nStatic documents have no runtime extensions, hence typeHookRequestResultDataTypes is never.`,
+          ),
+        )
+        code(`interface StaticDocumentContext {`)
+        code(`  typeHookRequestResultDataTypes: never`)
+        code(`  scalars: $$Scalar.$Registry`)
+        code(`}`)
       }
       code``
 
       // Interface JSDoc
       const mutationInterfaceDoc = getStaticDocumentBuilderDoc('mutation')
-      code(`/**`)
-      mutationInterfaceDoc.split('\n').forEach(line => {
-        code(` * ${line}`)
-      })
-      code(` */`)
+      code(Code.TSDoc(mutationInterfaceDoc))
 
       code`
         export interface MutationBuilder {
@@ -141,15 +126,9 @@ export const ModuleGeneratorDocument = createModuleGenerator(
 
       // Const JSDoc
       const mutationConstDoc = getStaticDocumentBuilderDoc('mutation')
-      code(`/**`)
-      mutationConstDoc.split('\n').forEach(line => {
-        code(` * ${line}`)
-      })
-      code(` */`)
-
-      code`
-        export const mutation: MutationBuilder = createStaticRootType(OperationTypeNode.MUTATION) as any
-      `
+      code(Code.TSDoc(mutationConstDoc))
+      code(`export const mutation: MutationBuilder = createStaticRootType(OperationTypeNode.MUTATION) as any`)
+      code``
     }
 
     if (subscriptionType) {
@@ -158,26 +137,22 @@ export const ModuleGeneratorDocument = createModuleGenerator(
         code(codeImportAll(config, { as: '$$Schema', from: './schema/$', type: true }))
       }
       if (!queryType && !mutationType) {
-        code`
-          /**
-           * Context for static document type inference.
-           * Static documents have no runtime extensions, hence typeHookRequestResultDataTypes is never.
-           */
-          interface StaticDocumentContext {
-            typeHookRequestResultDataTypes: never
-            scalars: $$Scalar.$Registry
-          }
-        `
+        code``
+        code(
+          Code.TSDoc(
+            `Context for static document type inference.\nStatic documents have no runtime extensions, hence typeHookRequestResultDataTypes is never.`,
+          ),
+        )
+        code(`interface StaticDocumentContext {`)
+        code(`  typeHookRequestResultDataTypes: never`)
+        code(`  scalars: $$Scalar.$Registry`)
+        code(`}`)
       }
       code``
 
       // Interface JSDoc
       const subscriptionInterfaceDoc = getStaticDocumentBuilderDoc('subscription')
-      code(`/**`)
-      subscriptionInterfaceDoc.split('\n').forEach(line => {
-        code(` * ${line}`)
-      })
-      code(` */`)
+      code(Code.TSDoc(subscriptionInterfaceDoc))
 
       code`
         export interface SubscriptionBuilder {
@@ -198,15 +173,11 @@ export const ModuleGeneratorDocument = createModuleGenerator(
 
       // Const JSDoc
       const subscriptionConstDoc = getStaticDocumentBuilderDoc('subscription')
-      code(`/**`)
-      subscriptionConstDoc.split('\n').forEach(line => {
-        code(` * ${line}`)
-      })
-      code(` */`)
-
-      code`
-        export const subscription: SubscriptionBuilder = createStaticRootType(OperationTypeNode.SUBSCRIPTION) as any
-      `
+      code(Code.TSDoc(subscriptionConstDoc))
+      code(
+        `export const subscription: SubscriptionBuilder = createStaticRootType(OperationTypeNode.SUBSCRIPTION) as any`,
+      )
+      code``
     }
   },
 )

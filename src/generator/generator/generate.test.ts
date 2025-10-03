@@ -2,7 +2,7 @@ import * as Memfs from 'memfs'
 import { describe, expect } from 'vitest'
 import { createGraphQLResponseData, mockIntrospectionData, test } from '../../../tests/_/helpers.js'
 import type { ConfigInitSchemaSdl } from '../$$.js'
-import { generate } from './generate.js'
+import { generate, generateModules } from './generate.js'
 
 const fs = Memfs.fs.promises as any
 
@@ -13,21 +13,37 @@ const schema: ConfigInitSchemaSdl = {
 
 describe(`importFormat`, () => {
   test(`default is jsExtension`, async () => {
-    await generate({
-      fs,
-      schema,
-    })
-    const SchemaTs = Memfs.fs.readFileSync(`./graffle/modules/schema/$.ts`, `utf8`)
-    expect(SchemaTs).toMatch(/import.*"\.\.\/data.js"/)
+    const { modules } = await generateModules({ schema })
+    const schemaModule = modules.find(m => m.name === `schema/$`)!
+    expect(schemaModule.content).toMatch(/import.*'\.\.\/data\.js'/)
+    expect(schemaModule.content).toMatch(/import.*'\.\.\/scalar\.js'/)
   })
-  test(`noExtension`, async () => {
-    await generate({
-      fs,
+
+  test(`noExtension removes all .js extensions`, async () => {
+    const { modules } = await generateModules({
       schema,
       importFormat: `noExtension`,
     })
-    const SchemaTs = Memfs.fs.readFileSync(`./graffle/modules/schema/$.ts`, `utf8`)
-    expect(SchemaTs).toMatch(/import.*"\.\.\/data"/)
+
+    // Check schema module
+    const schemaModule = modules.find(m => m.name === `schema/$`)!
+    expect(schemaModule.content).toMatch(/import.*'\.\.\/data'/)
+    expect(schemaModule.content).toMatch(/import.*'\.\.\/scalar'/)
+    expect(schemaModule.content).toMatch(/import.*'\.\/\$\$'/)
+    expect(schemaModule.content).not.toContain(`.js'`)
+
+    // Check schema barrel
+    const schemaBarrel = modules.find(m => m.name === `schema/$$`)!
+    expect(schemaBarrel.content).not.toContain(`.js'`)
+
+    // Check scalar module
+    const scalarModule = modules.find(m => m.name === `scalar`)!
+    expect(scalarModule.content).not.toContain(`.js'`)
+
+    // Verify ALL modules have no .js extensions
+    modules.forEach(module => {
+      expect(module.content, `Module ${module.name} should not contain .js extensions`).not.toContain(`.js'`)
+    })
   })
 })
 

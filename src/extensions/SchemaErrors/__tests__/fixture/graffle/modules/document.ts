@@ -1,11 +1,12 @@
 import { OperationTypeNode } from 'graphql'
 import type { TypedDocument } from '../../../../../../exports/client.js'
 import { createStaticRootType } from '../../../../../../exports/extensions/document-builder/runtime.js'
-import type * as $$Utilities from '../../../../../../exports/utilities-for-generated.js'
 import type * as ArgumentsMap from './arguments-map.js'
 import type * as $$Scalar from './scalar.js'
-import type * as $$Schema from './schema/$.js'
 import type * as SelectionSets from './selection-sets.js'
+
+import type * as $$Utilities from '../../../../../../exports/utilities-for-generated.js'
+import type * as $$Schema from './schema/$.js'
 
 /**
  * Context for static document type inference.
@@ -15,6 +16,7 @@ interface StaticDocumentContext {
   typeHookRequestResultDataTypes: never
   scalars: $$Scalar.$Registry
 }
+
 /**
  * Static query builder for compile-time GraphQL document generation.
  *
@@ -28,9 +30,9 @@ interface StaticDocumentContext {
  * @example Basic query
  * ```ts
  * const getUserDoc = query.user({
- *   id: true,
- *   name: true,
- *   email: true
+ * id: true,
+ * name: true,
+ * email: true
  * })
  * // Generates: query { user { id name email } }
  * ```
@@ -40,9 +42,9 @@ interface StaticDocumentContext {
  * import { Var } from 'graffle'
  *
  * const getUserByIdDoc = query.user({
- *   $: { id: $ },
- *   name: true,
- *   posts: { title: true }
+ * $: { id: $ },
+ * name: true,
+ * posts: { title: true }
  * })
  * // Generates: query ($id: ID!) { user(id: $id) { name posts { title } } }
  * // Variables type: { id: string }
@@ -51,6 +53,23 @@ interface StaticDocumentContext {
  * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
  */
 export interface QueryBuilder {
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.InputObjectNested` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   *
+   * @example
+   * ```ts
+   * const doc = query.InputObjectNested()
+   * ```
+   */
   InputObjectNested: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -71,6 +90,23 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.InputObjectNestedNonNull` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   *
+   * @example
+   * ```ts
+   * const doc = query.InputObjectNestedNonNull()
+   * ```
+   */
   InputObjectNestedNonNull: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -96,6 +132,21 @@ export interface QueryBuilder {
 
   /**
    * Query enum field documentation.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ABCEnum} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.abcEnum` |
+   * | **Nullability** | Optional |
+   *
+   * @example
+   * ```ts
+   * const doc = query.abcEnum()
+   * ```
    */
   abcEnum: <
     const $SelectionSet extends SelectionSets.Query<
@@ -117,6 +168,23 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.argInputObjectCircular` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   *
+   * @example
+   * ```ts
+   * const doc = query.argInputObjectCircular()
+   * ```
+   */
   argInputObjectCircular: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -140,6 +208,22 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.bigint} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.bigintField` |
+   * | **Nullability** | Optional |
+   *
+   * @example
+   * ```ts
+   * const doc = query.bigintField()
+   * ```
+   */
   bigintField: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -160,6 +244,22 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.bigint}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.bigintFieldNonNull` |
+   * | **Nullability** | Required |
+   *
+   * @example
+   * ```ts
+   * const doc = query.bigintFieldNonNull()
+   * ```
+   */
   bigintFieldNonNull: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -180,6 +280,22 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Date} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.date` |
+   * | **Nullability** | Optional |
+   *
+   * @example
+   * ```ts
+   * const doc = query.date()
+   * ```
+   */
   date: <
     const $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['date'],
   >(
@@ -198,6 +314,23 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Date} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.dateArg` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   *
+   * @example
+   * ```ts
+   * const doc = query.dateArg()
+   * ```
+   */
   dateArg: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -218,6 +351,23 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Date} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.dateArgInputObject` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   *
+   * @example
+   * ```ts
+   * const doc = query.dateArgInputObject()
+   * ```
+   */
   dateArgInputObject: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -238,6 +388,23 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Date} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.dateArgList` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   *
+   * @example
+   * ```ts
+   * const doc = query.dateArgList()
+   * ```
+   */
   dateArgList: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -258,6 +425,23 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Date} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.dateArgNonNull` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   *
+   * @example
+   * ```ts
+   * const doc = query.dateArgNonNull()
+   * ```
+   */
   dateArgNonNull: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -278,6 +462,23 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Date} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.dateArgNonNullList` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   *
+   * @example
+   * ```ts
+   * const doc = query.dateArgNonNullList()
+   * ```
+   */
   dateArgNonNullList: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -298,6 +499,23 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Date} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.dateArgNonNullListNonNull` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   *
+   * @example
+   * ```ts
+   * const doc = query.dateArgNonNullListNonNull()
+   * ```
+   */
   dateArgNonNullListNonNull: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -321,6 +539,27 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.DateInterface1} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.dateInterface1` |
+   * | **Nullability** | Optional |
+   *
+   * @example
+   * ```ts
+   * const doc = query.dateInterface1({
+   * id: true,
+   * ___on_SomeImplementation: {
+   * // ... fields for this implementation
+   * }
+   * })
+   * ```
+   */
   dateInterface1: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -341,6 +580,23 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Date}[] |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.dateList` |
+   * | **Nullability** | Optional |
+   * | **List** | Yes |
+   *
+   * @example
+   * ```ts
+   * const doc = query.dateList()
+   * ```
+   */
   dateList: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -361,6 +617,23 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Date}[] |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.dateListList` |
+   * | **Nullability** | Optional |
+   * | **List** | Yes |
+   *
+   * @example
+   * ```ts
+   * const doc = query.dateListList()
+   * ```
+   */
   dateListList: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -381,6 +654,23 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Date}[]! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.dateListNonNull` |
+   * | **Nullability** | Required |
+   * | **List** | Yes |
+   *
+   * @example
+   * ```ts
+   * const doc = query.dateListNonNull()
+   * ```
+   */
   dateListNonNull: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -401,6 +691,22 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Date}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.dateNonNull` |
+   * | **Nullability** | Required |
+   *
+   * @example
+   * ```ts
+   * const doc = query.dateNonNull()
+   * ```
+   */
   dateNonNull: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -421,6 +727,24 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.DateObject1} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.dateObject1` |
+   * | **Nullability** | Optional |
+   *
+   * @example
+   * ```ts
+   * const doc = query.dateObject1({
+   * date1: true
+   * })
+   * ```
+   */
   dateObject1: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -441,6 +765,27 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.DateUnion} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.dateUnion` |
+   * | **Nullability** | Optional |
+   *
+   * @example
+   * ```ts
+   * const doc = query.dateUnion({
+   * __typename: true,
+   * ___on_SomeType: {
+   * // ... fields for this type
+   * }
+   * })
+   * ```
+   */
   dateUnion: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -461,6 +806,23 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.error` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   *
+   * @example
+   * ```ts
+   * const doc = query.error()
+   * ```
+   */
   error: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -481,6 +843,22 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.id` |
+   * | **Nullability** | Optional |
+   *
+   * @example
+   * ```ts
+   * const doc = query.id()
+   * ```
+   */
   id: <
     const $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['id'],
   >(
@@ -499,6 +877,22 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ID}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.idNonNull` |
+   * | **Nullability** | Required |
+   *
+   * @example
+   * ```ts
+   * const doc = query.idNonNull()
+   * ```
+   */
   idNonNull: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -519,6 +913,27 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Interface} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.interface` |
+   * | **Nullability** | Optional |
+   *
+   * @example
+   * ```ts
+   * const doc = query.interface({
+   * id: true,
+   * ___on_SomeImplementation: {
+   * // ... fields for this implementation
+   * }
+   * })
+   * ```
+   */
   interface: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -539,6 +954,29 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.InterfaceChildA}[]! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.interfaceHierarchyChildA` |
+   * | **Nullability** | Required |
+   * | **List** | Yes |
+   * | **Arguments** | 1 |
+   *
+   * @example
+   * ```ts
+   * const doc = query.interfaceHierarchyChildA({
+   * id: true,
+   * ___on_SomeImplementation: {
+   * // ... fields for this implementation
+   * }
+   * })
+   * ```
+   */
   interfaceHierarchyChildA: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -562,6 +1000,29 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.InterfaceChildB}[]! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.interfaceHierarchyChildB` |
+   * | **Nullability** | Required |
+   * | **List** | Yes |
+   * | **Arguments** | 1 |
+   *
+   * @example
+   * ```ts
+   * const doc = query.interfaceHierarchyChildB({
+   * id: true,
+   * ___on_SomeImplementation: {
+   * // ... fields for this implementation
+   * }
+   * })
+   * ```
+   */
   interfaceHierarchyChildB: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -585,6 +1046,29 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.InterfaceGrandparent}[]! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.interfaceHierarchyGrandparents` |
+   * | **Nullability** | Required |
+   * | **List** | Yes |
+   * | **Arguments** | 1 |
+   *
+   * @example
+   * ```ts
+   * const doc = query.interfaceHierarchyGrandparents({
+   * id: true,
+   * ___on_SomeImplementation: {
+   * // ... fields for this implementation
+   * }
+   * })
+   * ```
+   */
   interfaceHierarchyGrandparents: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -608,6 +1092,29 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.InterfaceParent}[]! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.interfaceHierarchyParents` |
+   * | **Nullability** | Required |
+   * | **List** | Yes |
+   * | **Arguments** | 1 |
+   *
+   * @example
+   * ```ts
+   * const doc = query.interfaceHierarchyParents({
+   * id: true,
+   * ___on_SomeImplementation: {
+   * // ... fields for this implementation
+   * }
+   * })
+   * ```
+   */
   interfaceHierarchyParents: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -631,6 +1138,27 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Interface}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.interfaceNonNull` |
+   * | **Nullability** | Required |
+   *
+   * @example
+   * ```ts
+   * const doc = query.interfaceNonNull({
+   * id: true,
+   * ___on_SomeImplementation: {
+   * // ... fields for this implementation
+   * }
+   * })
+   * ```
+   */
   interfaceNonNull: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -651,6 +1179,28 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Interface} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.interfaceWithArgs` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   *
+   * @example
+   * ```ts
+   * const doc = query.interfaceWithArgs({
+   * id: true,
+   * ___on_SomeImplementation: {
+   * // ... fields for this implementation
+   * }
+   * })
+   * ```
+   */
   interfaceWithArgs: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -671,6 +1221,23 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Int}[] |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.listInt` |
+   * | **Nullability** | Optional |
+   * | **List** | Yes |
+   *
+   * @example
+   * ```ts
+   * const doc = query.listInt()
+   * ```
+   */
   listInt: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -691,6 +1258,23 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Int}[]! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.listIntNonNull` |
+   * | **Nullability** | Required |
+   * | **List** | Yes |
+   *
+   * @example
+   * ```ts
+   * const doc = query.listIntNonNull()
+   * ```
+   */
   listIntNonNull: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -711,6 +1295,23 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Int}[] |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.listListInt` |
+   * | **Nullability** | Optional |
+   * | **List** | Yes |
+   *
+   * @example
+   * ```ts
+   * const doc = query.listListInt()
+   * ```
+   */
   listListInt: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -731,6 +1332,23 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Int}[]! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.listListIntNonNull` |
+   * | **Nullability** | Required |
+   * | **List** | Yes |
+   *
+   * @example
+   * ```ts
+   * const doc = query.listListIntNonNull()
+   * ```
+   */
   listListIntNonNull: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -751,6 +1369,27 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.lowerCaseUnion} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.lowerCaseUnion` |
+   * | **Nullability** | Optional |
+   *
+   * @example
+   * ```ts
+   * const doc = query.lowerCaseUnion({
+   * __typename: true,
+   * ___on_SomeType: {
+   * // ... fields for this type
+   * }
+   * })
+   * ```
+   */
   lowerCaseUnion: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -771,6 +1410,27 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Object1} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.object` |
+   * | **Nullability** | Optional |
+   *
+   * @example
+   * ```ts
+   * const doc = query.object({
+   * ABCEnum: true,
+   * boolean: true,
+   * float: true,
+   * // ...
+   * })
+   * ```
+   */
   object: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -791,6 +1451,28 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Object1}[] |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.objectList` |
+   * | **Nullability** | Optional |
+   * | **List** | Yes |
+   *
+   * @example
+   * ```ts
+   * const doc = query.objectList({
+   * ABCEnum: true,
+   * boolean: true,
+   * float: true,
+   * // ...
+   * })
+   * ```
+   */
   objectList: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -811,6 +1493,28 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Object1}[]! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.objectListNonNull` |
+   * | **Nullability** | Required |
+   * | **List** | Yes |
+   *
+   * @example
+   * ```ts
+   * const doc = query.objectListNonNull({
+   * ABCEnum: true,
+   * boolean: true,
+   * float: true,
+   * // ...
+   * })
+   * ```
+   */
   objectListNonNull: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -831,6 +1535,25 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ObjectNested} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.objectNested` |
+   * | **Nullability** | Optional |
+   *
+   * @example
+   * ```ts
+   * const doc = query.objectNested({
+   * id: true,
+   * object: true
+   * })
+   * ```
+   */
   objectNested: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -851,6 +1574,25 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ObjectNestedWithArgs} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.objectNestedWithArgs` |
+   * | **Nullability** | Optional |
+   *
+   * @example
+   * ```ts
+   * const doc = query.objectNestedWithArgs({
+   * id: true,
+   * object: true
+   * })
+   * ```
+   */
   objectNestedWithArgs: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -874,6 +1616,27 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Object1}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.objectNonNull` |
+   * | **Nullability** | Required |
+   *
+   * @example
+   * ```ts
+   * const doc = query.objectNonNull({
+   * ABCEnum: true,
+   * boolean: true,
+   * float: true,
+   * // ...
+   * })
+   * ```
+   */
   objectNonNull: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -894,6 +1657,29 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Object1} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.objectWithArgs` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 5 |
+   *
+   * @example
+   * ```ts
+   * const doc = query.objectWithArgs({
+   * // $: { ...variables }
+   * ABCEnum: true,
+   * boolean: true,
+   * float: true,
+   * // ...
+   * })
+   * ```
+   */
   objectWithArgs: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -914,6 +1700,28 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Result} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.result` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   *
+   * @example
+   * ```ts
+   * const doc = query.result({
+   * __typename: true,
+   * ___on_SomeType: {
+   * // ... fields for this type
+   * }
+   * })
+   * ```
+   */
   result: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -934,6 +1742,28 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Result}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.resultNonNull` |
+   * | **Nullability** | Required |
+   * | **Arguments** | 1 |
+   *
+   * @example
+   * ```ts
+   * const doc = query.resultNonNull({
+   * __typename: true,
+   * ___on_SomeType: {
+   * // ... fields for this type
+   * }
+   * })
+   * ```
+   */
   resultNonNull: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -954,6 +1784,22 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.string` |
+   * | **Nullability** | Optional |
+   *
+   * @example
+   * ```ts
+   * const doc = query.string()
+   * ```
+   */
   string: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -974,6 +1820,23 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.stringWithArgEnum` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   *
+   * @example
+   * ```ts
+   * const doc = query.stringWithArgEnum()
+   * ```
+   */
   stringWithArgEnum: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -994,6 +1857,23 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.stringWithArgInputObject` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   *
+   * @example
+   * ```ts
+   * const doc = query.stringWithArgInputObject()
+   * ```
+   */
   stringWithArgInputObject: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1017,6 +1897,23 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.stringWithArgInputObjectEnum` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   *
+   * @example
+   * ```ts
+   * const doc = query.stringWithArgInputObjectEnum()
+   * ```
+   */
   stringWithArgInputObjectEnum: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1040,6 +1937,23 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.stringWithArgInputObjectRequired` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   *
+   * @example
+   * ```ts
+   * const doc = query.stringWithArgInputObjectRequired()
+   * ```
+   */
   stringWithArgInputObjectRequired: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1065,6 +1979,22 @@ export interface QueryBuilder {
 
   /**
    * The given arguments are reflected back as a JSON string.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.stringWithArgs` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 5 |
+   *
+   * @example
+   * ```ts
+   * const doc = query.stringWithArgs()
+   * ```
    */
   stringWithArgs: <
     const $SelectionSet extends SelectionSets.Query<
@@ -1086,6 +2016,23 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.stringWithListArg` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   *
+   * @example
+   * ```ts
+   * const doc = query.stringWithListArg()
+   * ```
+   */
   stringWithListArg: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1106,6 +2053,23 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.stringWithListArgRequired` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   *
+   * @example
+   * ```ts
+   * const doc = query.stringWithListArgRequired()
+   * ```
+   */
   stringWithListArgRequired: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1129,6 +2093,23 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.stringWithRequiredArg` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   *
+   * @example
+   * ```ts
+   * const doc = query.stringWithRequiredArg()
+   * ```
+   */
   stringWithRequiredArg: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1152,6 +2133,27 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.FooBarUnion} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.unionFooBar` |
+   * | **Nullability** | Optional |
+   *
+   * @example
+   * ```ts
+   * const doc = query.unionFooBar({
+   * __typename: true,
+   * ___on_SomeType: {
+   * // ... fields for this type
+   * }
+   * })
+   * ```
+   */
   unionFooBar: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1172,6 +2174,27 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.FooBarUnion}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.unionFooBarNonNull` |
+   * | **Nullability** | Required |
+   *
+   * @example
+   * ```ts
+   * const doc = query.unionFooBarNonNull({
+   * __typename: true,
+   * ___on_SomeType: {
+   * // ... fields for this type
+   * }
+   * })
+   * ```
+   */
   unionFooBarNonNull: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1192,6 +2215,28 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.FooBarUnion} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.unionFooBarWithArgs` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
+   *
+   * @example
+   * ```ts
+   * const doc = query.unionFooBarWithArgs({
+   * __typename: true,
+   * ___on_SomeType: {
+   * // ... fields for this type
+   * }
+   * })
+   * ```
+   */
   unionFooBarWithArgs: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1212,6 +2257,24 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ObjectUnion} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.unionObject` |
+   * | **Nullability** | Optional |
+   *
+   * @example
+   * ```ts
+   * const doc = query.unionObject({
+   * fooBarUnion: true
+   * })
+   * ```
+   */
   unionObject: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1232,6 +2295,24 @@ export interface QueryBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ObjectUnion}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $Schema.Query} |
+   * | **Path** | `Query.unionObjectNonNull` |
+   * | **Nullability** | Required |
+   *
+   * @example
+   * ```ts
+   * const doc = query.unionObjectNonNull({
+   * fooBarUnion: true
+   * })
+   * ```
+   */
   unionObjectNonNull: <
     const $SelectionSet extends SelectionSets.Query<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1265,9 +2346,9 @@ export interface QueryBuilder {
  * @example Basic query
  * ```ts
  * const getUserDoc = query.user({
- *   id: true,
- *   name: true,
- *   email: true
+ * id: true,
+ * name: true,
+ * email: true
  * })
  * // Generates: query { user { id name email } }
  * ```
@@ -1277,9 +2358,9 @@ export interface QueryBuilder {
  * import { Var } from 'graffle'
  *
  * const getUserByIdDoc = query.user({
- *   $: { id: $ },
- *   name: true,
- *   posts: { title: true }
+ * $: { id: $ },
+ * name: true,
+ * posts: { title: true }
  * })
  * // Generates: query ($id: ID!) { user(id: $id) { name posts { title } } }
  * // Variables type: { id: string }
@@ -1304,9 +2385,9 @@ export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY)
  * import { Var } from 'graffle'
  *
  * const createUserDoc = mutation.createUser({
- *   $: { input: $ },
- *   id: true,
- *   name: true
+ * $: { input: $ },
+ * id: true,
+ * name: true
  * })
  * // Generates: mutation ($input: CreateUserInput!) { createUser(input: $input) { id name } }
  * ```
@@ -1314,6 +2395,22 @@ export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY)
  * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
  */
 export interface MutationBuilder {
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Mutation} |
+   * | **Path** | `Mutation.id` |
+   * | **Nullability** | Optional |
+   *
+   * @example
+   * ```ts
+   * const doc = mutation.id()
+   * ```
+   */
   id: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1334,6 +2431,22 @@ export interface MutationBuilder {
     >
   >
 
+  /**
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ID}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.Mutation} |
+   * | **Path** | `Mutation.idNonNull` |
+   * | **Nullability** | Required |
+   *
+   * @example
+   * ```ts
+   * const doc = mutation.idNonNull()
+   * ```
+   */
   idNonNull: <
     const $SelectionSet extends SelectionSets.Mutation<
       $$Utilities.DocumentBuilderKit.Select.StaticBuilderContext
@@ -1369,9 +2482,9 @@ export interface MutationBuilder {
  * import { Var } from 'graffle'
  *
  * const createUserDoc = mutation.createUser({
- *   $: { input: $ },
- *   id: true,
- *   name: true
+ * $: { input: $ },
+ * id: true,
+ * name: true
  * })
  * // Generates: mutation ($input: CreateUserInput!) { createUser(input: $input) { id name } }
  * ```

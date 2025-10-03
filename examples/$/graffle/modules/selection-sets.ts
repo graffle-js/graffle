@@ -58,6 +58,12 @@ export interface Query<
   /**
    * Retrieve all battles that have occurred.
    *
+   * ```graphql
+   * battles: [Battle!]!
+   *
+   * union Battle = BattleRoyale | BattleTrainer | BattleWild
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -75,6 +81,15 @@ export interface Query<
   /**
    * Retrieve all beings (Pokemon, Trainers, and Patrons).
    *
+   * ```graphql
+   * beings: [Being!]!
+   *
+   * interface Being {
+   * id: ID
+   * name: String
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -91,6 +106,21 @@ export interface Query<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.beings<_$Context>>
   /**
    * Find Pokemon by their name.
+   *
+   * ```graphql
+   * pokemonByName(name: String!): [Pokemon!]
+   *
+   * type Pokemon implements Being {
+   * attack: Int!
+   * birthday: Date!
+   * defense: Int!
+   * hp: Int!
+   * id: ID!
+   * name: String!
+   * trainer: Trainer
+   * type: PokemonType!
+   * }
+   * ```
    *
    * # Info
    *
@@ -110,6 +140,21 @@ export interface Query<
   /**
    * Retrieve all Pokemon, optionally filtered.
    *
+   * ```graphql
+   * pokemons(filter: PokemonFilter): [Pokemon!]
+   *
+   * type Pokemon implements Being {
+   * attack: Int!
+   * birthday: Date!
+   * defense: Int!
+   * hp: Int!
+   * id: ID!
+   * name: String!
+   * trainer: Trainer
+   * type: PokemonType!
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -128,6 +173,18 @@ export interface Query<
   /**
    * Find a trainer by their name.
    *
+   * ```graphql
+   * trainerByName(name: String!): Trainer
+   *
+   * type Trainer implements Being {
+   * class: TrainerClass
+   * fans: [Patron!]
+   * id: ID
+   * name: String
+   * pokemon: [Pokemon!]
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -144,6 +201,18 @@ export interface Query<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.trainerByName<_$Context>>
   /**
    * Retrieve all trainers.
+   *
+   * ```graphql
+   * trainers: [Trainer!]
+   *
+   * type Trainer implements Being {
+   * class: TrainerClass
+   * fans: [Patron!]
+   * id: ID
+   * name: String
+   * pokemon: [Pokemon!]
+   * }
+   * ```
    *
    * # Info
    *
@@ -410,6 +479,21 @@ export interface Mutation<
 > {
   /**
    * Add a new Pokemon to the database.
+   *
+   * ```graphql
+   * addPokemon(attack: Int, defense: Int, hp: Int, name: String!, type: PokemonType!): Pokemon
+   *
+   * type Pokemon implements Being {
+   * attack: Int!
+   * birthday: Date!
+   * defense: Int!
+   * hp: Int!
+   * id: ID!
+   * name: String!
+   * trainer: Trainer
+   * type: PokemonType!
+   * }
+   * ```
    *
    * # Info
    *
@@ -717,6 +801,15 @@ export interface BattleRoyale<
   /**
    * The list of combatants participating in this battle royale.
    *
+   * ```graphql
+   * combatants: [CombatantMultiPokemon!]
+   *
+   * type CombatantMultiPokemon {
+   * pokemons: [Pokemon!]
+   * trainer: Trainer
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -734,6 +827,10 @@ export interface BattleRoyale<
   /**
    * The date when this battle took place, stored as a Unix timestamp.
    *
+   * ```graphql
+   * date: Float
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -750,6 +847,10 @@ export interface BattleRoyale<
   /**
    * The unique identifier for this battle.
    *
+   * ```graphql
+   * id: ID
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -765,6 +866,18 @@ export interface BattleRoyale<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleRoyale.id<_$Context>>
   /**
    * The trainer who won this battle royale.
+   *
+   * ```graphql
+   * winner: Trainer
+   *
+   * type Trainer implements Being {
+   * class: TrainerClass
+   * fans: [Patron!]
+   * id: ID
+   * name: String
+   * pokemon: [Pokemon!]
+   * }
+   * ```
    *
    * # Info
    *
@@ -938,6 +1051,15 @@ export interface BattleTrainer<
   /**
    * The first combatant in this trainer battle.
    *
+   * ```graphql
+   * combatant1: CombatantSinglePokemon
+   *
+   * type CombatantSinglePokemon {
+   * pokemon: Pokemon
+   * trainer: Trainer
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -953,6 +1075,15 @@ export interface BattleTrainer<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleTrainer.combatant1<_$Context>>
   /**
    * The second combatant in this trainer battle.
+   *
+   * ```graphql
+   * combatant2: CombatantSinglePokemon
+   *
+   * type CombatantSinglePokemon {
+   * pokemon: Pokemon
+   * trainer: Trainer
+   * }
+   * ```
    *
    * # Info
    *
@@ -970,6 +1101,10 @@ export interface BattleTrainer<
   /**
    * The date when this battle took place, stored as a Unix timestamp.
    *
+   * ```graphql
+   * date: Float
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -986,6 +1121,10 @@ export interface BattleTrainer<
   /**
    * The unique identifier for this battle.
    *
+   * ```graphql
+   * id: ID
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -1001,6 +1140,18 @@ export interface BattleTrainer<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleTrainer.id<_$Context>>
   /**
    * The trainer who won this battle.
+   *
+   * ```graphql
+   * winner: Trainer
+   *
+   * type Trainer implements Being {
+   * class: TrainerClass
+   * fans: [Patron!]
+   * id: ID
+   * name: String
+   * pokemon: [Pokemon!]
+   * }
+   * ```
    *
    * # Info
    *
@@ -1200,6 +1351,10 @@ export interface BattleWild<
   /**
    * The date when this battle took place, stored as a Unix timestamp.
    *
+   * ```graphql
+   * date: Float
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -1215,6 +1370,10 @@ export interface BattleWild<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleWild.date<_$Context>>
   /**
    * The unique identifier for this battle.
+   *
+   * ```graphql
+   * id: ID
+   * ```
    *
    * # Info
    *
@@ -1232,6 +1391,21 @@ export interface BattleWild<
   /**
    * The trainer's Pokemon that participated in this battle.
    *
+   * ```graphql
+   * pokemon: Pokemon
+   *
+   * type Pokemon implements Being {
+   * attack: Int!
+   * birthday: Date!
+   * defense: Int!
+   * hp: Int!
+   * id: ID!
+   * name: String!
+   * trainer: Trainer
+   * type: PokemonType!
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -1247,6 +1421,16 @@ export interface BattleWild<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleWild.pokemon<_$Context>>
   /**
    * The outcome of this wild Pokemon battle.
+   *
+   * ```graphql
+   * result: BattleWildResult
+   *
+   * enum BattleWildResult {
+   * pokemonsCaptured
+   * pokemonsDefeated
+   * trainerDefeated
+   * }
+   * ```
    *
    * # Info
    *
@@ -1264,6 +1448,18 @@ export interface BattleWild<
   /**
    * The trainer who engaged in this wild battle.
    *
+   * ```graphql
+   * trainer: Trainer
+   *
+   * type Trainer implements Being {
+   * class: TrainerClass
+   * fans: [Patron!]
+   * id: ID
+   * name: String
+   * pokemon: [Pokemon!]
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -1279,6 +1475,21 @@ export interface BattleWild<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleWild.trainer<_$Context>>
   /**
    * The wild Pokemon encountered in this battle.
+   *
+   * ```graphql
+   * wildPokemons: [Pokemon!]
+   *
+   * type Pokemon implements Being {
+   * attack: Int!
+   * birthday: Date!
+   * defense: Int!
+   * hp: Int!
+   * id: ID!
+   * name: String!
+   * trainer: Trainer
+   * type: PokemonType!
+   * }
+   * ```
    *
    * # Info
    *
@@ -1508,6 +1719,21 @@ export interface CombatantMultiPokemon<
   /**
    * The team of Pokemon used by this combatant.
    *
+   * ```graphql
+   * pokemons: [Pokemon!]
+   *
+   * type Pokemon implements Being {
+   * attack: Int!
+   * birthday: Date!
+   * defense: Int!
+   * hp: Int!
+   * id: ID!
+   * name: String!
+   * trainer: Trainer
+   * type: PokemonType!
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -1524,6 +1750,18 @@ export interface CombatantMultiPokemon<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<CombatantMultiPokemon.pokemons<_$Context>>
   /**
    * The trainer commanding this team of Pokemon.
+   *
+   * ```graphql
+   * trainer: Trainer
+   *
+   * type Trainer implements Being {
+   * class: TrainerClass
+   * fans: [Patron!]
+   * id: ID
+   * name: String
+   * pokemon: [Pokemon!]
+   * }
+   * ```
    *
    * # Info
    *
@@ -1642,6 +1880,21 @@ export interface CombatantSinglePokemon<
   /**
    * The Pokemon used by this combatant.
    *
+   * ```graphql
+   * pokemon: Pokemon
+   *
+   * type Pokemon implements Being {
+   * attack: Int!
+   * birthday: Date!
+   * defense: Int!
+   * hp: Int!
+   * id: ID!
+   * name: String!
+   * trainer: Trainer
+   * type: PokemonType!
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -1657,6 +1910,18 @@ export interface CombatantSinglePokemon<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<CombatantSinglePokemon.pokemon<_$Context>>
   /**
    * The trainer commanding this Pokemon.
+   *
+   * ```graphql
+   * trainer: Trainer
+   *
+   * type Trainer implements Being {
+   * class: TrainerClass
+   * fans: [Patron!]
+   * id: ID
+   * name: String
+   * pokemon: [Pokemon!]
+   * }
+   * ```
    *
    * # Info
    *
@@ -1775,6 +2040,10 @@ export interface Patron<
   /**
    * The unique identifier for this patron.
    *
+   * ```graphql
+   * id: ID
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -1791,6 +2060,10 @@ export interface Patron<
   /**
    * The amount of money this patron has.
    *
+   * ```graphql
+   * money: Int
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -1806,6 +2079,10 @@ export interface Patron<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Patron.money<_$Context>>
   /**
    * The name of this patron.
+   *
+   * ```graphql
+   * name: String
+   * ```
    *
    * # Info
    *
@@ -1956,6 +2233,10 @@ export interface Pokemon<
   /**
    * The attack power of this Pokemon.
    *
+   * ```graphql
+   * attack: Int!
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -1971,6 +2252,12 @@ export interface Pokemon<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Pokemon.attack<_$Context>>
   /**
    * The date this Pokemon was born or caught.
+   *
+   * ```graphql
+   * birthday: Date!
+   *
+   * scalar Date
+   * ```
    *
    * # Info
    *
@@ -1988,6 +2275,10 @@ export interface Pokemon<
   /**
    * The defense power of this Pokemon.
    *
+   * ```graphql
+   * defense: Int!
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -2003,6 +2294,10 @@ export interface Pokemon<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Pokemon.defense<_$Context>>
   /**
    * The health points (HP) of this Pokemon.
+   *
+   * ```graphql
+   * hp: Int!
+   * ```
    *
    * # Info
    *
@@ -2020,6 +2315,10 @@ export interface Pokemon<
   /**
    * The unique identifier for this Pokemon.
    *
+   * ```graphql
+   * id: ID!
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -2035,6 +2334,10 @@ export interface Pokemon<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Pokemon.id<_$Context>>
   /**
    * The name of this Pokemon.
+   *
+   * ```graphql
+   * name: String!
+   * ```
    *
    * # Info
    *
@@ -2052,6 +2355,18 @@ export interface Pokemon<
   /**
    * The trainer who owns this Pokemon, if any.
    *
+   * ```graphql
+   * trainer: Trainer
+   *
+   * type Trainer implements Being {
+   * class: TrainerClass
+   * fans: [Patron!]
+   * id: ID
+   * name: String
+   * pokemon: [Pokemon!]
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -2067,6 +2382,18 @@ export interface Pokemon<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Pokemon.trainer<_$Context>>
   /**
    * The elemental type of this Pokemon.
+   *
+   * ```graphql
+   * type: PokemonType!
+   *
+   * enum PokemonType {
+   * bug
+   * electric
+   * fire
+   * grass
+   * water
+   * }
+   * ```
    *
    * # Info
    *
@@ -2359,6 +2686,26 @@ export interface Trainer<
   /**
    * The class or specialty of this trainer.
    *
+   * ```graphql
+   * class: TrainerClass
+   *
+   * enum TrainerClass {
+   * bugCatcher
+   * camper
+   * picnicker
+   * psychic
+   * psychicMedium
+   * psychicYoungster
+   * sailor
+   * superNerd
+   * tamer
+   * teamRocketGrunt
+   * triathlete
+   * youngster
+   * youth
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -2374,6 +2721,16 @@ export interface Trainer<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Trainer.$class<_$Context>>
   /**
    * The patrons who are fans of this trainer.
+   *
+   * ```graphql
+   * fans: [Patron!]
+   *
+   * type Patron implements Being {
+   * id: ID
+   * money: Int
+   * name: String
+   * }
+   * ```
    *
    * # Info
    *
@@ -2392,6 +2749,10 @@ export interface Trainer<
   /**
    * The unique identifier for this trainer.
    *
+   * ```graphql
+   * id: ID
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -2408,6 +2769,10 @@ export interface Trainer<
   /**
    * The name of this trainer.
    *
+   * ```graphql
+   * name: String
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -2423,6 +2788,21 @@ export interface Trainer<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Trainer.name<_$Context>>
   /**
    * The Pokemon owned by this trainer.
+   *
+   * ```graphql
+   * pokemon: [Pokemon!]
+   *
+   * type Pokemon implements Being {
+   * attack: Int!
+   * birthday: Date!
+   * defense: Int!
+   * hp: Int!
+   * id: ID!
+   * name: String!
+   * trainer: Trainer
+   * type: PokemonType!
+   * }
+   * ```
    *
    * # Info
    *

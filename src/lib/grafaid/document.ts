@@ -281,6 +281,11 @@ export const print = (document: TypedDocument.TypedDocumentLike): string => {
 const stripDescriptions = (node: any): any => {
   const result = { ...node, description: undefined }
 
+  // Handle arguments on the node itself (for individual field definitions)
+  if (result.arguments) {
+    result.arguments = result.arguments.map((arg: any) => ({ ...arg, description: undefined }))
+  }
+
   // Handle fields (ObjectType, InterfaceType, InputObjectType)
   if (result.fields) {
     result.fields = result.fields.map((field: any) => ({

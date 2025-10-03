@@ -126,10 +126,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
    * Find Pokemon by their name.
    *
    * ```graphql
-   * pokemonByName(
-   *   """The name of the Pokemon to search for."""
-   *   name: String!
-   * ): [Pokemon!]
+   * pokemonByName(name: String!): [Pokemon!]
    *
    * type Pokemon implements Being {
    *   attack: Int!
@@ -178,10 +175,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
    * Retrieve all Pokemon, optionally filtered.
    *
    * ```graphql
-   * pokemons(
-   *   """Optional filter criteria for Pokemon."""
-   *   filter: PokemonFilter
-   * ): [Pokemon!]
+   * pokemons(filter: PokemonFilter): [Pokemon!]
    *
    * type Pokemon implements Being {
    *   attack: Int!
@@ -227,10 +221,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
    * Find a trainer by their name.
    *
    * ```graphql
-   * trainerByName(
-   *   """The name of the trainer to search for."""
-   *   name: String!
-   * ): Trainer
+   * trainerByName(name: String!): Trainer
    *
    * type Trainer implements Being {
    *   class: TrainerClass
@@ -364,18 +355,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
    * Add a new Pokemon to the database.
    *
    * ```graphql
-   * addPokemon(
-   *   """The attack power of the new Pokemon."""
-   *   attack: Int
-   *   """The defense power of the new Pokemon."""
-   *   defense: Int
-   *   """The health points of the new Pokemon."""
-   *   hp: Int
-   *   """The name of the new Pokemon."""
-   *   name: String!
-   *   """The elemental type of the new Pokemon."""
-   *   type: PokemonType!
-   * ): Pokemon
+   * addPokemon(attack: Int, defense: Int, hp: Int, name: String!, type: PokemonType!): Pokemon
    *
    * type Pokemon implements Being {
    *   attack: Int!

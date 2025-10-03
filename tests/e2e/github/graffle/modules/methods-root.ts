@@ -50,6 +50,19 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Look up a code of conduct by its key
    *
+   * ```graphql
+   * codeOfConduct(key: String!): CodeOfConduct
+   *
+   * type CodeOfConduct implements Node {
+   *   body: String
+   *   id: ID!
+   *   key: String!
+   *   name: String!
+   *   resourcePath: URI
+   *   url: URI
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -82,6 +95,19 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Look up a code of conduct by its key
+   *
+   * ```graphql
+   * codesOfConduct: [CodeOfConduct]
+   *
+   * type CodeOfConduct implements Node {
+   *   body: String
+   *   id: ID!
+   *   key: String!
+   *   name: String!
+   *   resourcePath: URI
+   *   url: URI
+   * }
+   * ```
    *
    * # Info
    *
@@ -116,6 +142,41 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Look up an enterprise by URL slug.
    *
+   * ```graphql
+   * enterprise(invitationToken: String, slug: String!): Enterprise
+   *
+   * type Enterprise implements AnnouncementBannerI & Node {
+   *   announcement: String @deprecated(reason: "The individual `announcementX` fields do not follow our standard GraphQL patterns. Use the `announcementBanner` object instead. Removal on 2025-04-01 UTC.")
+   *   announcementBanner: AnnouncementBanner
+   *   announcementCreatedAt: DateTime @deprecated(reason: "The individual `announcementX` fields do not follow our standard GraphQL patterns. Use the `announcementBanner` object instead. Removal on 2025-04-01 UTC.")
+   *   announcementExpiresAt: DateTime @deprecated(reason: "The individual `announcementX` fields do not follow our standard GraphQL patterns. Use the `announcementBanner` object instead. Removal on 2025-04-01 UTC.")
+   *   announcementUserDismissible: Boolean @deprecated(reason: "The individual `announcementX` fields do not follow our standard GraphQL patterns. Use the `announcementBanner` object instead. Removal on 2025-04-01 UTC.")
+   *   avatarUrl(size: Int): URI!
+   *   billingEmail: String
+   *   billingInfo: EnterpriseBillingInfo
+   *   createdAt: DateTime!
+   *   databaseId: Int
+   *   description: String
+   *   descriptionHTML: HTML!
+   *   id: ID!
+   *   location: String
+   *   members(after: String, before: String, deployment: EnterpriseUserDeployment, first: Int, hasTwoFactorEnabled: Boolean = null, last: Int, orderBy: EnterpriseMemberOrder = {field: LOGIN, direction: ASC}, organizationLogins: [String!], query: String, role: EnterpriseUserAccountMembershipRole, twoFactorMethodSecurity: TwoFactorCredentialSecurityType = null): EnterpriseMemberConnection!
+   *   name: String!
+   *   organizations(after: String, before: String, first: Int, last: Int, orderBy: OrganizationOrder = {field: LOGIN, direction: ASC}, query: String, viewerOrganizationRole: RoleInOrganization): OrganizationConnection!
+   *   ownerInfo: EnterpriseOwnerInfo
+   *   readme: String
+   *   readmeHTML: HTML!
+   *   resourcePath: URI!
+   *   ruleset(databaseId: Int!): RepositoryRuleset
+   *   rulesets(after: String, before: String, first: Int, last: Int): RepositoryRulesetConnection
+   *   slug: String!
+   *   url: URI!
+   *   userNamespaceRepositories(after: String, before: String, first: Int, last: Int, orderBy: RepositoryOrder = {field: NAME, direction: ASC}, query: String): UserNamespaceRepositoryConnection!
+   *   viewerIsAdmin: Boolean!
+   *   websiteUrl: URI
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -148,6 +209,20 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Look up a pending enterprise administrator invitation by invitee, enterprise and role.
+   *
+   * ```graphql
+   * enterpriseAdministratorInvitation(enterpriseSlug: String!, role: EnterpriseAdministratorRole!, userLogin: String!): EnterpriseAdministratorInvitation
+   *
+   * type EnterpriseAdministratorInvitation implements Node {
+   *   createdAt: DateTime!
+   *   email: String
+   *   enterprise: Enterprise!
+   *   id: ID!
+   *   invitee: User
+   *   inviter: User
+   *   role: EnterpriseAdministratorRole!
+   * }
+   * ```
    *
    * # Info
    *
@@ -182,6 +257,20 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Look up a pending enterprise administrator invitation by invitation token.
    *
+   * ```graphql
+   * enterpriseAdministratorInvitationByToken(invitationToken: String!): EnterpriseAdministratorInvitation
+   *
+   * type EnterpriseAdministratorInvitation implements Node {
+   *   createdAt: DateTime!
+   *   email: String
+   *   enterprise: Enterprise!
+   *   id: ID!
+   *   invitee: User
+   *   inviter: User
+   *   role: EnterpriseAdministratorRole!
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -214,6 +303,19 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Look up a pending enterprise unaffiliated member invitation by invitee and enterprise.
+   *
+   * ```graphql
+   * enterpriseMemberInvitation(enterpriseSlug: String!, userLogin: String!): EnterpriseMemberInvitation
+   *
+   * type EnterpriseMemberInvitation implements Node {
+   *   createdAt: DateTime!
+   *   email: String
+   *   enterprise: Enterprise!
+   *   id: ID!
+   *   invitee: User
+   *   inviter: User
+   * }
+   * ```
    *
    * # Info
    *
@@ -248,6 +350,19 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Look up a pending enterprise unaffiliated member invitation by invitation token.
    *
+   * ```graphql
+   * enterpriseMemberInvitationByToken(invitationToken: String!): EnterpriseMemberInvitation
+   *
+   * type EnterpriseMemberInvitation implements Node {
+   *   createdAt: DateTime!
+   *   email: String
+   *   enterprise: Enterprise!
+   *   id: ID!
+   *   invitee: User
+   *   inviter: User
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -281,6 +396,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * ID of the object.
    *
+   * ```graphql
+   * id: ID!
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -309,6 +428,28 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Look up an open source license by its key
+   *
+   * ```graphql
+   * license(key: String!): License
+   *
+   * type License implements Node {
+   *   body: String!
+   *   conditions: [LicenseRule]!
+   *   description: String
+   *   featured: Boolean!
+   *   hidden: Boolean!
+   *   id: ID!
+   *   implementation: String
+   *   key: String!
+   *   limitations: [LicenseRule]!
+   *   name: String!
+   *   nickname: String
+   *   permissions: [LicenseRule]!
+   *   pseudoLicense: Boolean!
+   *   spdxId: String
+   *   url: URI
+   * }
+   * ```
    *
    * # Info
    *
@@ -340,6 +481,28 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Return a list of known open source licenses
    *
+   * ```graphql
+   * licenses: [License]!
+   *
+   * type License implements Node {
+   *   body: String!
+   *   conditions: [LicenseRule]!
+   *   description: String
+   *   featured: Boolean!
+   *   hidden: Boolean!
+   *   id: ID!
+   *   implementation: String
+   *   key: String!
+   *   limitations: [LicenseRule]!
+   *   name: String!
+   *   nickname: String
+   *   permissions: [LicenseRule]!
+   *   pseudoLicense: Boolean!
+   *   spdxId: String
+   *   url: URI
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -369,6 +532,22 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Get alphabetically sorted list of Marketplace categories
+   *
+   * ```graphql
+   * marketplaceCategories(excludeEmpty: Boolean, excludeSubcategories: Boolean, includeCategories: [String!]): [MarketplaceCategory!]!
+   *
+   * type MarketplaceCategory implements Node {
+   *   description: String
+   *   howItWorks: String
+   *   id: ID!
+   *   name: String!
+   *   primaryListingCount: Int!
+   *   resourcePath: URI!
+   *   secondaryListingCount: Int!
+   *   slug: String!
+   *   url: URI!
+   * }
+   * ```
    *
    * # Info
    *
@@ -404,6 +583,22 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Look up a Marketplace category by its slug.
    *
+   * ```graphql
+   * marketplaceCategory(slug: String!, useTopicAliases: Boolean): MarketplaceCategory
+   *
+   * type MarketplaceCategory implements Node {
+   *   description: String
+   *   howItWorks: String
+   *   id: ID!
+   *   name: String!
+   *   primaryListingCount: Int!
+   *   resourcePath: URI!
+   *   secondaryListingCount: Int!
+   *   slug: String!
+   *   url: URI!
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -436,6 +631,69 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Look up a single Marketplace listing
+   *
+   * ```graphql
+   * marketplaceListing(slug: String!): MarketplaceListing
+   *
+   * type MarketplaceListing implements Node {
+   *   app: App
+   *   companyUrl: URI
+   *   configurationResourcePath: URI!
+   *   configurationUrl: URI!
+   *   documentationUrl: URI
+   *   extendedDescription: String
+   *   extendedDescriptionHTML: HTML!
+   *   fullDescription: String!
+   *   fullDescriptionHTML: HTML!
+   *   hasPublishedFreeTrialPlans: Boolean!
+   *   hasTermsOfService: Boolean!
+   *   hasVerifiedOwner: Boolean!
+   *   howItWorks: String
+   *   howItWorksHTML: HTML!
+   *   id: ID!
+   *   installationUrl: URI
+   *   installedForViewer: Boolean!
+   *   isArchived: Boolean!
+   *   isDraft: Boolean!
+   *   isPaid: Boolean!
+   *   isPublic: Boolean!
+   *   isRejected: Boolean!
+   *   isUnverified: Boolean!
+   *   isUnverifiedPending: Boolean!
+   *   isVerificationPendingFromDraft: Boolean!
+   *   isVerificationPendingFromUnverified: Boolean!
+   *   isVerified: Boolean!
+   *   logoBackgroundColor: String!
+   *   logoUrl(size: Int = 400): URI
+   *   name: String!
+   *   normalizedShortDescription: String!
+   *   pricingUrl: URI
+   *   primaryCategory: MarketplaceCategory!
+   *   privacyPolicyUrl: URI!
+   *   resourcePath: URI!
+   *   screenshotUrls: [String]!
+   *   secondaryCategory: MarketplaceCategory
+   *   shortDescription: String!
+   *   slug: String!
+   *   statusUrl: URI
+   *   supportEmail: String
+   *   supportUrl: URI!
+   *   termsOfServiceUrl: URI
+   *   url: URI!
+   *   viewerCanAddPlans: Boolean!
+   *   viewerCanApprove: Boolean!
+   *   viewerCanDelist: Boolean!
+   *   viewerCanEdit: Boolean!
+   *   viewerCanEditCategories: Boolean!
+   *   viewerCanEditPlans: Boolean!
+   *   viewerCanRedraft: Boolean!
+   *   viewerCanReject: Boolean!
+   *   viewerCanRequestApproval: Boolean!
+   *   viewerHasPurchased: Boolean!
+   *   viewerHasPurchasedForAllOrganizations: Boolean!
+   *   viewerIsListingAdmin: Boolean!
+   * }
+   * ```
    *
    * # Info
    *
@@ -470,6 +728,17 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Look up Marketplace listings
    *
+   * ```graphql
+   * marketplaceListings(adminId: ID, after: String, allStates: Boolean, before: String, categorySlug: String, first: Int, last: Int, organizationId: ID, primaryCategoryOnly: Boolean = false, slugs: [String], useTopicAliases: Boolean, viewerCanAdmin: Boolean, withFreeTrialsOnly: Boolean = false): MarketplaceListingConnection!
+   *
+   * type MarketplaceListingConnection {
+   *   edges: [MarketplaceListingEdge]
+   *   nodes: [MarketplaceListing]
+   *   pageInfo: PageInfo!
+   *   totalCount: Int!
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -503,6 +772,20 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Return information about the GitHub instance
    *
+   * ```graphql
+   * meta: GitHubMetadata!
+   *
+   * type GitHubMetadata {
+   *   gitHubServicesSha: GitObjectID!
+   *   gitIpAddresses: [String!]
+   *   githubEnterpriseImporterIpAddresses: [String!]
+   *   hookIpAddresses: [String!]
+   *   importerIpAddresses: [String!]
+   *   isPasswordAuthenticationVerifiable: Boolean!
+   *   pagesIpAddresses: [String!]
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -531,6 +814,14 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Fetches an object given its ID.
+   *
+   * ```graphql
+   * node(id: ID!): Node
+   *
+   * interface Node {
+   *   id: ID!
+   * }
+   * ```
    *
    * # Info
    *
@@ -562,6 +853,14 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Lookup nodes by a list of IDs.
    *
+   * ```graphql
+   * nodes(ids: [ID!]!): [Node]!
+   *
+   * interface Node {
+   *   id: ID!
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -592,6 +891,103 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Lookup a organization by login.
+   *
+   * ```graphql
+   * organization(login: String!): Organization
+   *
+   * type Organization implements Actor & AnnouncementBannerI & MemberStatusable & Node & PackageOwner & ProfileOwner & ProjectOwner & ProjectV2Owner & ProjectV2Recent & RepositoryDiscussionAuthor & RepositoryDiscussionCommentAuthor & RepositoryOwner & Sponsorable & UniformResourceLocatable {
+   *   announcement: String @deprecated(reason: "The individual `announcementX` fields do not follow our standard GraphQL patterns. Use the `announcementBanner` object instead. Removal on 2025-04-01 UTC.")
+   *   announcementBanner: AnnouncementBanner
+   *   announcementCreatedAt: DateTime @deprecated(reason: "The individual `announcementX` fields do not follow our standard GraphQL patterns. Use the `announcementBanner` object instead. Removal on 2025-04-01 UTC.")
+   *   announcementExpiresAt: DateTime @deprecated(reason: "The individual `announcementX` fields do not follow our standard GraphQL patterns. Use the `announcementBanner` object instead. Removal on 2025-04-01 UTC.")
+   *   announcementUserDismissible: Boolean @deprecated(reason: "The individual `announcementX` fields do not follow our standard GraphQL patterns. Use the `announcementBanner` object instead. Removal on 2025-04-01 UTC.")
+   *   anyPinnableItems(type: PinnableItemType): Boolean!
+   *   archivedAt: DateTime
+   *   auditLog(after: String, before: String, first: Int, last: Int, orderBy: AuditLogOrder = {field: CREATED_AT, direction: DESC}, query: String): OrganizationAuditEntryConnection!
+   *   avatarUrl(size: Int): URI!
+   *   createdAt: DateTime!
+   *   databaseId: Int
+   *   description: String
+   *   descriptionHTML: String
+   *   domains(after: String, before: String, first: Int, isApproved: Boolean = null, isVerified: Boolean = null, last: Int, orderBy: VerifiableDomainOrder = {field: DOMAIN, direction: ASC}): VerifiableDomainConnection
+   *   email: String
+   *   enterpriseOwners(after: String, before: String, first: Int, last: Int, orderBy: OrgEnterpriseOwnerOrder = {field: LOGIN, direction: ASC}, organizationRole: RoleInOrganization, query: String): OrganizationEnterpriseOwnerConnection!
+   *   estimatedNextSponsorsPayoutInCents: Int!
+   *   hasSponsorsListing: Boolean!
+   *   id: ID!
+   *   interactionAbility: RepositoryInteractionAbility
+   *   ipAllowListEnabledSetting: IpAllowListEnabledSettingValue!
+   *   ipAllowListEntries(after: String, before: String, first: Int, last: Int, orderBy: IpAllowListEntryOrder = {field: ALLOW_LIST_VALUE, direction: ASC}): IpAllowListEntryConnection!
+   *   ipAllowListForInstalledAppsEnabledSetting: IpAllowListForInstalledAppsEnabledSettingValue!
+   *   isSponsoredBy(accountLogin: String!): Boolean!
+   *   isSponsoringViewer: Boolean!
+   *   isVerified: Boolean!
+   *   itemShowcase: ProfileItemShowcase!
+   *   lifetimeReceivedSponsorshipValues(after: String, before: String, first: Int, last: Int, orderBy: SponsorAndLifetimeValueOrder = {field: SPONSOR_LOGIN, direction: ASC}): SponsorAndLifetimeValueConnection!
+   *   location: String
+   *   login: String!
+   *   mannequins(after: String, before: String, first: Int, last: Int, login: String, orderBy: MannequinOrder = {field: CREATED_AT, direction: ASC}): MannequinConnection!
+   *   memberStatuses(after: String, before: String, first: Int, last: Int, orderBy: UserStatusOrder = {field: UPDATED_AT, direction: DESC}): UserStatusConnection!
+   *   membersCanForkPrivateRepositories: Boolean!
+   *   membersWithRole(after: String, before: String, first: Int, last: Int): OrganizationMemberConnection!
+   *   monthlyEstimatedSponsorsIncomeInCents: Int!
+   *   name: String
+   *   newTeamResourcePath: URI!
+   *   newTeamUrl: URI!
+   *   notificationDeliveryRestrictionEnabledSetting: NotificationRestrictionSettingValue!
+   *   organizationBillingEmail: String
+   *   packages(after: String, before: String, first: Int, last: Int, names: [String], orderBy: PackageOrder = {field: CREATED_AT, direction: DESC}, packageType: PackageType, repositoryId: ID): PackageConnection!
+   *   pendingMembers(after: String, before: String, first: Int, last: Int): UserConnection!
+   *   pinnableItems(after: String, before: String, first: Int, last: Int, types: [PinnableItemType!]): PinnableItemConnection!
+   *   pinnedItems(after: String, before: String, first: Int, last: Int, types: [PinnableItemType!]): PinnableItemConnection!
+   *   pinnedItemsRemaining: Int!
+   *   project(number: Int!): Project
+   *   projectV2(number: Int!): ProjectV2
+   *   projects(after: String, before: String, first: Int, last: Int, orderBy: ProjectOrder, search: String, states: [ProjectState!]): ProjectConnection!
+   *   projectsResourcePath: URI!
+   *   projectsUrl: URI!
+   *   projectsV2(after: String, before: String, first: Int, last: Int, minPermissionLevel: ProjectV2PermissionLevel = READ, orderBy: ProjectV2Order = {field: NUMBER, direction: DESC}, query: String): ProjectV2Connection!
+   *   recentProjects(after: String, before: String, first: Int, last: Int): ProjectV2Connection!
+   *   repositories(affiliations: [RepositoryAffiliation], after: String, before: String, first: Int, hasIssuesEnabled: Boolean, isArchived: Boolean, isFork: Boolean, isLocked: Boolean, last: Int, orderBy: RepositoryOrder, ownerAffiliations: [RepositoryAffiliation] = [OWNER, COLLABORATOR], privacy: RepositoryPrivacy, visibility: RepositoryVisibility): RepositoryConnection!
+   *   repository(followRenames: Boolean = true, name: String!): Repository
+   *   repositoryDiscussionComments(after: String, before: String, first: Int, last: Int, onlyAnswers: Boolean = false, repositoryId: ID): DiscussionCommentConnection!
+   *   repositoryDiscussions(after: String, answered: Boolean = null, before: String, first: Int, last: Int, orderBy: DiscussionOrder = {field: CREATED_AT, direction: DESC}, repositoryId: ID, states: [DiscussionState!] = []): DiscussionConnection!
+   *   repositoryMigrations(after: String, before: String, first: Int, last: Int, orderBy: RepositoryMigrationOrder = {field: CREATED_AT, direction: ASC}, repositoryName: String, state: MigrationState): RepositoryMigrationConnection!
+   *   requiresTwoFactorAuthentication: Boolean
+   *   resourcePath: URI!
+   *   ruleset(databaseId: Int!, includeParents: Boolean = true): RepositoryRuleset
+   *   rulesets(after: String, before: String, first: Int, includeParents: Boolean = true, last: Int, targets: [RepositoryRulesetTarget!] = null): RepositoryRulesetConnection
+   *   samlIdentityProvider: OrganizationIdentityProvider
+   *   sponsoring(after: String, before: String, first: Int, last: Int, orderBy: SponsorOrder = {field: RELEVANCE, direction: DESC}): SponsorConnection!
+   *   sponsors(after: String, before: String, first: Int, last: Int, orderBy: SponsorOrder = {field: RELEVANCE, direction: DESC}, tierId: ID): SponsorConnection!
+   *   sponsorsActivities(actions: [SponsorsActivityAction!] = [], after: String, before: String, first: Int, includeAsSponsor: Boolean = false, includePrivate: Boolean = true, last: Int, orderBy: SponsorsActivityOrder = {field: TIMESTAMP, direction: DESC}, period: SponsorsActivityPeriod = MONTH, since: DateTime, until: DateTime): SponsorsActivityConnection!
+   *   sponsorsListing: SponsorsListing
+   *   sponsorshipForViewerAsSponsor(activeOnly: Boolean = true): Sponsorship
+   *   sponsorshipForViewerAsSponsorable(activeOnly: Boolean = true): Sponsorship
+   *   sponsorshipNewsletters(after: String, before: String, first: Int, last: Int, orderBy: SponsorshipNewsletterOrder = {field: CREATED_AT, direction: DESC}): SponsorshipNewsletterConnection!
+   *   sponsorshipsAsMaintainer(activeOnly: Boolean = true, after: String, before: String, first: Int, includePrivate: Boolean = false, last: Int, orderBy: SponsorshipOrder): SponsorshipConnection!
+   *   sponsorshipsAsSponsor(activeOnly: Boolean = true, after: String, before: String, first: Int, last: Int, maintainerLogins: [String!], orderBy: SponsorshipOrder): SponsorshipConnection!
+   *   team(slug: String!): Team
+   *   teams(after: String, before: String, first: Int, last: Int, ldapMapped: Boolean, notificationSetting: TeamNotificationSetting, orderBy: TeamOrder, privacy: TeamPrivacy, query: String, role: TeamRole, rootTeamsOnly: Boolean = false, userLogins: [String!]): TeamConnection!
+   *   teamsResourcePath: URI!
+   *   teamsUrl: URI!
+   *   totalSponsorshipAmountAsSponsorInCents(since: DateTime, sponsorableLogins: [String!] = [], until: DateTime): Int
+   *   twitterUsername: String
+   *   updatedAt: DateTime!
+   *   url: URI!
+   *   viewerCanAdminister: Boolean!
+   *   viewerCanChangePinnedItems: Boolean!
+   *   viewerCanCreateProjects: Boolean!
+   *   viewerCanCreateRepositories: Boolean!
+   *   viewerCanCreateTeams: Boolean!
+   *   viewerCanSponsor: Boolean!
+   *   viewerIsAMember: Boolean!
+   *   viewerIsFollowing: Boolean!
+   *   viewerIsSponsoring: Boolean!
+   *   webCommitSignoffRequired: Boolean!
+   *   websiteUrl: URI
+   * }
+   * ```
    *
    * # Info
    *
@@ -626,6 +1022,19 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * The client's rate limit information.
    *
+   * ```graphql
+   * rateLimit(dryRun: Boolean = false): RateLimit
+   *
+   * type RateLimit {
+   *   cost: Int!
+   *   limit: Int!
+   *   nodeCount: Int!
+   *   remaining: Int!
+   *   resetAt: DateTime!
+   *   used: Int!
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -657,6 +1066,44 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
    * Workaround for re-exposing the root query object. (Refer to
    * https://github.com/facebook/relay/issues/112 for more information.)
    *
+   * ```graphql
+   * relay: Query!
+   *
+   * type Query implements Node {
+   *   codeOfConduct(key: String!): CodeOfConduct
+   *   codesOfConduct: [CodeOfConduct]
+   *   enterprise(invitationToken: String, slug: String!): Enterprise
+   *   enterpriseAdministratorInvitation(enterpriseSlug: String!, role: EnterpriseAdministratorRole!, userLogin: String!): EnterpriseAdministratorInvitation
+   *   enterpriseAdministratorInvitationByToken(invitationToken: String!): EnterpriseAdministratorInvitation
+   *   enterpriseMemberInvitation(enterpriseSlug: String!, userLogin: String!): EnterpriseMemberInvitation
+   *   enterpriseMemberInvitationByToken(invitationToken: String!): EnterpriseMemberInvitation
+   *   id: ID!
+   *   license(key: String!): License
+   *   licenses: [License]!
+   *   marketplaceCategories(excludeEmpty: Boolean, excludeSubcategories: Boolean, includeCategories: [String!]): [MarketplaceCategory!]!
+   *   marketplaceCategory(slug: String!, useTopicAliases: Boolean): MarketplaceCategory
+   *   marketplaceListing(slug: String!): MarketplaceListing
+   *   marketplaceListings(adminId: ID, after: String, allStates: Boolean, before: String, categorySlug: String, first: Int, last: Int, organizationId: ID, primaryCategoryOnly: Boolean = false, slugs: [String], useTopicAliases: Boolean, viewerCanAdmin: Boolean, withFreeTrialsOnly: Boolean = false): MarketplaceListingConnection!
+   *   meta: GitHubMetadata!
+   *   node(id: ID!): Node
+   *   nodes(ids: [ID!]!): [Node]!
+   *   organization(login: String!): Organization
+   *   rateLimit(dryRun: Boolean = false): RateLimit
+   *   relay: Query!
+   *   repository(followRenames: Boolean = true, name: String!, owner: String!): Repository
+   *   repositoryOwner(login: String!): RepositoryOwner
+   *   resource(url: URI!): UniformResourceLocatable
+   *   search(after: String, before: String, first: Int, last: Int, query: String!, type: SearchType!): SearchResultItemConnection!
+   *   securityAdvisories(after: String, before: String, classifications: [SecurityAdvisoryClassification!], epssPercentage: Float, epssPercentile: Float, first: Int, identifier: SecurityAdvisoryIdentifierFilter, last: Int, orderBy: SecurityAdvisoryOrder = {field: UPDATED_AT, direction: DESC}, publishedSince: DateTime, updatedSince: DateTime): SecurityAdvisoryConnection!
+   *   securityAdvisory(ghsaId: String!): SecurityAdvisory
+   *   securityVulnerabilities(after: String, before: String, classifications: [SecurityAdvisoryClassification!], ecosystem: SecurityAdvisoryEcosystem, first: Int, last: Int, orderBy: SecurityVulnerabilityOrder = {field: UPDATED_AT, direction: DESC}, package: String, severities: [SecurityAdvisorySeverity!]): SecurityVulnerabilityConnection!
+   *   sponsorables(after: String, before: String, dependencyEcosystem: SecurityAdvisoryEcosystem, ecosystem: DependencyGraphEcosystem, first: Int, last: Int, onlyDependencies: Boolean = false, orderBy: SponsorableOrder = {field: LOGIN, direction: ASC}, orgLoginForDependencies: String): SponsorableItemConnection!
+   *   topic(name: String!): Topic
+   *   user(login: String!): User
+   *   viewer: User!
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -685,6 +1132,145 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Lookup a given repository by the owner and repository name.
+   *
+   * ```graphql
+   * repository(followRenames: Boolean = true, name: String!, owner: String!): Repository
+   *
+   * type Repository implements Node & PackageOwner & ProjectOwner & ProjectV2Recent & RepositoryInfo & Starrable & Subscribable & UniformResourceLocatable {
+   *   allowUpdateBranch: Boolean!
+   *   archivedAt: DateTime
+   *   assignableUsers(after: String, before: String, first: Int, last: Int, query: String): UserConnection!
+   *   autoMergeAllowed: Boolean!
+   *   branchProtectionRules(after: String, before: String, first: Int, last: Int): BranchProtectionRuleConnection!
+   *   codeOfConduct: CodeOfConduct
+   *   codeowners(refName: String): RepositoryCodeowners
+   *   collaborators(affiliation: CollaboratorAffiliation, after: String, before: String, first: Int, last: Int, login: String, query: String): RepositoryCollaboratorConnection
+   *   commitComments(after: String, before: String, first: Int, last: Int): CommitCommentConnection!
+   *   contactLinks: [RepositoryContactLink!]
+   *   contributingGuidelines: ContributingGuidelines
+   *   createdAt: DateTime!
+   *   databaseId: Int
+   *   defaultBranchRef: Ref
+   *   deleteBranchOnMerge: Boolean!
+   *   dependencyGraphManifests(after: String, before: String, dependenciesAfter: String, dependenciesFirst: Int, first: Int, last: Int, withDependencies: Boolean): DependencyGraphManifestConnection
+   *   deployKeys(after: String, before: String, first: Int, last: Int): DeployKeyConnection!
+   *   deployments(after: String, before: String, environments: [String!], first: Int, last: Int, orderBy: DeploymentOrder = {field: CREATED_AT, direction: ASC}): DeploymentConnection!
+   *   description: String
+   *   descriptionHTML: HTML!
+   *   discussion(number: Int!): Discussion
+   *   discussionCategories(after: String, before: String, filterByAssignable: Boolean = false, first: Int, last: Int): DiscussionCategoryConnection!
+   *   discussionCategory(slug: String!): DiscussionCategory
+   *   discussions(after: String, answered: Boolean = null, before: String, categoryId: ID = null, first: Int, last: Int, orderBy: DiscussionOrder = {field: UPDATED_AT, direction: DESC}, states: [DiscussionState!] = []): DiscussionConnection!
+   *   diskUsage: Int
+   *   environment(name: String!): Environment
+   *   environments(after: String, before: String, first: Int, last: Int, names: [String!] = [], orderBy: Environments = {field: NAME, direction: ASC}, pinnedEnvironmentFilter: EnvironmentPinnedFilterField = ALL): EnvironmentConnection!
+   *   forkCount: Int!
+   *   forkingAllowed: Boolean!
+   *   forks(affiliations: [RepositoryAffiliation], after: String, before: String, first: Int, hasIssuesEnabled: Boolean, isLocked: Boolean, last: Int, orderBy: RepositoryOrder, ownerAffiliations: [RepositoryAffiliation] = [OWNER, COLLABORATOR], privacy: RepositoryPrivacy, visibility: RepositoryVisibility): RepositoryConnection!
+   *   fundingLinks: [FundingLink!]!
+   *   hasDiscussionsEnabled: Boolean!
+   *   hasIssuesEnabled: Boolean!
+   *   hasProjectsEnabled: Boolean!
+   *   hasSponsorshipsEnabled: Boolean!
+   *   hasVulnerabilityAlertsEnabled: Boolean!
+   *   hasWikiEnabled: Boolean!
+   *   homepageUrl: URI
+   *   id: ID!
+   *   interactionAbility: RepositoryInteractionAbility
+   *   isArchived: Boolean!
+   *   isBlankIssuesEnabled: Boolean!
+   *   isDisabled: Boolean!
+   *   isEmpty: Boolean!
+   *   isFork: Boolean!
+   *   isInOrganization: Boolean!
+   *   isLocked: Boolean!
+   *   isMirror: Boolean!
+   *   isPrivate: Boolean!
+   *   isSecurityPolicyEnabled: Boolean
+   *   isTemplate: Boolean!
+   *   isUserConfigurationRepository: Boolean!
+   *   issue(number: Int!): Issue
+   *   issueOrPullRequest(number: Int!): IssueOrPullRequest
+   *   issueTemplates: [IssueTemplate!]
+   *   issues(after: String, before: String, filterBy: IssueFilters, first: Int, labels: [String!], last: Int, orderBy: IssueOrder, states: [IssueState!]): IssueConnection!
+   *   label(name: String!): Label
+   *   labels(after: String, before: String, first: Int, last: Int, orderBy: LabelOrder = {field: CREATED_AT, direction: ASC}, query: String): LabelConnection
+   *   languages(after: String, before: String, first: Int, last: Int, orderBy: LanguageOrder): LanguageConnection
+   *   latestRelease: Release
+   *   licenseInfo: License
+   *   lockReason: RepositoryLockReason
+   *   mentionableUsers(after: String, before: String, first: Int, last: Int, query: String): UserConnection!
+   *   mergeCommitAllowed: Boolean!
+   *   mergeCommitMessage: MergeCommitMessage!
+   *   mergeCommitTitle: MergeCommitTitle!
+   *   mergeQueue(branch: String): MergeQueue
+   *   milestone(number: Int!): Milestone
+   *   milestones(after: String, before: String, first: Int, last: Int, orderBy: MilestoneOrder, query: String, states: [MilestoneState!]): MilestoneConnection
+   *   mirrorUrl: URI
+   *   name: String!
+   *   nameWithOwner: String!
+   *   object(expression: String, oid: GitObjectID): GitObject
+   *   openGraphImageUrl: URI!
+   *   owner: RepositoryOwner!
+   *   packages(after: String, before: String, first: Int, last: Int, names: [String], orderBy: PackageOrder = {field: CREATED_AT, direction: DESC}, packageType: PackageType, repositoryId: ID): PackageConnection!
+   *   parent: Repository
+   *   pinnedDiscussions(after: String, before: String, first: Int, last: Int): PinnedDiscussionConnection!
+   *   pinnedEnvironments(after: String, before: String, first: Int, last: Int, orderBy: PinnedEnvironmentOrder = {field: POSITION, direction: ASC}): PinnedEnvironmentConnection
+   *   pinnedIssues(after: String, before: String, first: Int, last: Int): PinnedIssueConnection
+   *   planFeatures: RepositoryPlanFeatures!
+   *   primaryLanguage: Language
+   *   project(number: Int!): Project
+   *   projectV2(number: Int!): ProjectV2
+   *   projects(after: String, before: String, first: Int, last: Int, orderBy: ProjectOrder, search: String, states: [ProjectState!]): ProjectConnection!
+   *   projectsResourcePath: URI!
+   *   projectsUrl: URI!
+   *   projectsV2(after: String, before: String, first: Int, last: Int, minPermissionLevel: ProjectV2PermissionLevel = READ, orderBy: ProjectV2Order = {field: NUMBER, direction: DESC}, query: String): ProjectV2Connection!
+   *   pullRequest(number: Int!): PullRequest
+   *   pullRequestTemplates: [PullRequestTemplate!]
+   *   pullRequests(after: String, baseRefName: String, before: String, first: Int, headRefName: String, labels: [String!], last: Int, orderBy: IssueOrder, states: [PullRequestState!]): PullRequestConnection!
+   *   pushedAt: DateTime
+   *   rebaseMergeAllowed: Boolean!
+   *   recentProjects(after: String, before: String, first: Int, last: Int): ProjectV2Connection!
+   *   ref(qualifiedName: String!): Ref
+   *   refs(after: String, before: String, direction: OrderDirection, first: Int, last: Int, orderBy: RefOrder, query: String, refPrefix: String!): RefConnection
+   *   release(tagName: String!): Release
+   *   releases(after: String, before: String, first: Int, last: Int, orderBy: ReleaseOrder): ReleaseConnection!
+   *   repositoryTopics(after: String, before: String, first: Int, last: Int): RepositoryTopicConnection!
+   *   resourcePath: URI!
+   *   ruleset(databaseId: Int!, includeParents: Boolean = true): RepositoryRuleset
+   *   rulesets(after: String, before: String, first: Int, includeParents: Boolean = true, last: Int, targets: [RepositoryRulesetTarget!] = null): RepositoryRulesetConnection
+   *   securityPolicyUrl: URI
+   *   shortDescriptionHTML(limit: Int = 200): HTML!
+   *   squashMergeAllowed: Boolean!
+   *   squashMergeCommitMessage: SquashMergeCommitMessage!
+   *   squashMergeCommitTitle: SquashMergeCommitTitle!
+   *   squashPrTitleUsedAsDefault: Boolean! @deprecated(reason: "`squashPrTitleUsedAsDefault` will be removed. Use `Repository.squashMergeCommitTitle` instead. Removal on 2023-04-01 UTC.")
+   *   sshUrl: GitSSHRemote!
+   *   stargazerCount: Int!
+   *   stargazers(after: String, before: String, first: Int, last: Int, orderBy: StarOrder): StargazerConnection!
+   *   submodules(after: String, before: String, first: Int, last: Int): SubmoduleConnection!
+   *   tempCloneToken: String
+   *   templateRepository: Repository
+   *   updatedAt: DateTime!
+   *   url: URI!
+   *   usesCustomOpenGraphImage: Boolean!
+   *   viewerCanAdminister: Boolean!
+   *   viewerCanCreateProjects: Boolean!
+   *   viewerCanSubscribe: Boolean!
+   *   viewerCanUpdateTopics: Boolean!
+   *   viewerDefaultCommitEmail: String
+   *   viewerDefaultMergeMethod: PullRequestMergeMethod!
+   *   viewerHasStarred: Boolean!
+   *   viewerPermission: RepositoryPermission
+   *   viewerPossibleCommitEmails: [String!]
+   *   viewerSubscription: SubscriptionState
+   *   visibility: RepositoryVisibility!
+   *   vulnerabilityAlert(number: Int!): RepositoryVulnerabilityAlert
+   *   vulnerabilityAlerts(after: String, before: String, dependencyScopes: [RepositoryVulnerabilityAlertDependencyScope!], first: Int, last: Int, states: [RepositoryVulnerabilityAlertState!]): RepositoryVulnerabilityAlertConnection
+   *   watchers(after: String, before: String, first: Int, last: Int): UserConnection!
+   *   webCommitSignoffRequired: Boolean!
+   * }
+   * ```
    *
    * # Info
    *
@@ -719,6 +1305,20 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Lookup a repository owner (ie. either a User or an Organization) by login.
    *
+   * ```graphql
+   * repositoryOwner(login: String!): RepositoryOwner
+   *
+   * interface RepositoryOwner {
+   *   avatarUrl(size: Int): URI!
+   *   id: ID!
+   *   login: String!
+   *   repositories(affiliations: [RepositoryAffiliation], after: String, before: String, first: Int, hasIssuesEnabled: Boolean, isArchived: Boolean, isFork: Boolean, isLocked: Boolean, last: Int, orderBy: RepositoryOrder, ownerAffiliations: [RepositoryAffiliation] = [OWNER, COLLABORATOR], privacy: RepositoryPrivacy, visibility: RepositoryVisibility): RepositoryConnection!
+   *   repository(followRenames: Boolean = true, name: String!): Repository
+   *   resourcePath: URI!
+   *   url: URI!
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -752,6 +1352,15 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Lookup resource by a URL.
    *
+   * ```graphql
+   * resource(url: URI!): UniformResourceLocatable
+   *
+   * interface UniformResourceLocatable {
+   *   resourcePath: URI!
+   *   url: URI!
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -782,6 +1391,22 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Perform a search across resources, returning a maximum of 1,000 results.
    *
+   * ```graphql
+   * search(after: String, before: String, first: Int, last: Int, query: String!, type: SearchType!): SearchResultItemConnection!
+   *
+   * type SearchResultItemConnection {
+   *   codeCount: Int!
+   *   discussionCount: Int!
+   *   edges: [SearchResultItemEdge]
+   *   issueCount: Int!
+   *   nodes: [SearchResultItem]
+   *   pageInfo: PageInfo!
+   *   repositoryCount: Int!
+   *   userCount: Int!
+   *   wikiCount: Int!
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -811,6 +1436,17 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * GitHub Security Advisories
+   *
+   * ```graphql
+   * securityAdvisories(after: String, before: String, classifications: [SecurityAdvisoryClassification!], epssPercentage: Float, epssPercentile: Float, first: Int, identifier: SecurityAdvisoryIdentifierFilter, last: Int, orderBy: SecurityAdvisoryOrder = {field: UPDATED_AT, direction: DESC}, publishedSince: DateTime, updatedSince: DateTime): SecurityAdvisoryConnection!
+   *
+   * type SecurityAdvisoryConnection {
+   *   edges: [SecurityAdvisoryEdge]
+   *   nodes: [SecurityAdvisory]
+   *   pageInfo: PageInfo!
+   *   totalCount: Int!
+   * }
+   * ```
    *
    * # Info
    *
@@ -845,6 +1481,33 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Fetch a Security Advisory by its GHSA ID
    *
+   * ```graphql
+   * securityAdvisory(ghsaId: String!): SecurityAdvisory
+   *
+   * type SecurityAdvisory implements Node {
+   *   classification: SecurityAdvisoryClassification!
+   *   cvss: CVSS! @deprecated(reason: "`cvss` will be removed. New `cvss_severities` field will now contain both `cvss_v3` and `cvss_v4` properties. Removal on 2025-10-01 UTC.")
+   *   cvssSeverities: CvssSeverities!
+   *   cwes(after: String, before: String, first: Int, last: Int): CWEConnection!
+   *   databaseId: Int
+   *   description: String!
+   *   epss: EPSS
+   *   ghsaId: String!
+   *   id: ID!
+   *   identifiers: [SecurityAdvisoryIdentifier!]!
+   *   notificationsPermalink: URI
+   *   origin: String!
+   *   permalink: URI
+   *   publishedAt: DateTime!
+   *   references: [SecurityAdvisoryReference!]!
+   *   severity: SecurityAdvisorySeverity!
+   *   summary: String!
+   *   updatedAt: DateTime!
+   *   vulnerabilities(after: String, before: String, classifications: [SecurityAdvisoryClassification!], ecosystem: SecurityAdvisoryEcosystem, first: Int, last: Int, orderBy: SecurityVulnerabilityOrder = {field: UPDATED_AT, direction: DESC}, package: String, severities: [SecurityAdvisorySeverity!]): SecurityVulnerabilityConnection!
+   *   withdrawnAt: DateTime
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -877,6 +1540,17 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Software Vulnerabilities documented by GitHub Security Advisories
+   *
+   * ```graphql
+   * securityVulnerabilities(after: String, before: String, classifications: [SecurityAdvisoryClassification!], ecosystem: SecurityAdvisoryEcosystem, first: Int, last: Int, orderBy: SecurityVulnerabilityOrder = {field: UPDATED_AT, direction: DESC}, package: String, severities: [SecurityAdvisorySeverity!]): SecurityVulnerabilityConnection!
+   *
+   * type SecurityVulnerabilityConnection {
+   *   edges: [SecurityVulnerabilityEdge]
+   *   nodes: [SecurityVulnerability]
+   *   pageInfo: PageInfo!
+   *   totalCount: Int!
+   * }
+   * ```
    *
    * # Info
    *
@@ -911,6 +1585,17 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Users and organizations who can be sponsored via GitHub Sponsors.
    *
+   * ```graphql
+   * sponsorables(after: String, before: String, dependencyEcosystem: SecurityAdvisoryEcosystem, ecosystem: DependencyGraphEcosystem, first: Int, last: Int, onlyDependencies: Boolean = false, orderBy: SponsorableOrder = {field: LOGIN, direction: ASC}, orgLoginForDependencies: String): SponsorableItemConnection!
+   *
+   * type SponsorableItemConnection {
+   *   edges: [SponsorableItemEdge]
+   *   nodes: [SponsorableItem]
+   *   pageInfo: PageInfo!
+   *   totalCount: Int!
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -944,6 +1629,20 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Look up a topic by name.
    *
+   * ```graphql
+   * topic(name: String!): Topic
+   *
+   * type Topic implements Node & Starrable {
+   *   id: ID!
+   *   name: String!
+   *   relatedTopics(first: Int = 3): [Topic!]!
+   *   repositories(affiliations: [RepositoryAffiliation], after: String, before: String, first: Int, hasIssuesEnabled: Boolean, isLocked: Boolean, last: Int, orderBy: RepositoryOrder, ownerAffiliations: [RepositoryAffiliation] = [OWNER, COLLABORATOR], privacy: RepositoryPrivacy, sponsorableOnly: Boolean = false, visibility: RepositoryVisibility): RepositoryConnection!
+   *   stargazerCount: Int!
+   *   stargazers(after: String, before: String, first: Int, last: Int, orderBy: StarOrder): StargazerConnection!
+   *   viewerHasStarred: Boolean!
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -974,6 +1673,108 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   /**
    * Lookup a user by login.
    *
+   * ```graphql
+   * user(login: String!): User
+   *
+   * type User implements Actor & Node & PackageOwner & ProfileOwner & ProjectOwner & ProjectV2Owner & ProjectV2Recent & RepositoryDiscussionAuthor & RepositoryDiscussionCommentAuthor & RepositoryOwner & Sponsorable & UniformResourceLocatable {
+   *   anyPinnableItems(type: PinnableItemType): Boolean!
+   *   avatarUrl(size: Int): URI!
+   *   bio: String
+   *   bioHTML: HTML!
+   *   canReceiveOrganizationEmailsWhenNotificationsRestricted(login: String!): Boolean!
+   *   commitComments(after: String, before: String, first: Int, last: Int): CommitCommentConnection!
+   *   company: String
+   *   companyHTML: HTML!
+   *   contributionsCollection(from: DateTime, organizationID: ID, to: DateTime): ContributionsCollection!
+   *   copilotEndpoints: CopilotEndpoints
+   *   createdAt: DateTime!
+   *   databaseId: Int
+   *   email: String!
+   *   enterprises(after: String, before: String, first: Int, last: Int, membershipType: EnterpriseMembershipType = ALL, orderBy: EnterpriseOrder = {field: NAME, direction: ASC}): EnterpriseConnection
+   *   estimatedNextSponsorsPayoutInCents: Int!
+   *   followers(after: String, before: String, first: Int, last: Int): FollowerConnection!
+   *   following(after: String, before: String, first: Int, last: Int): FollowingConnection!
+   *   gist(name: String!): Gist
+   *   gistComments(after: String, before: String, first: Int, last: Int): GistCommentConnection!
+   *   gists(after: String, before: String, first: Int, last: Int, orderBy: GistOrder, privacy: GistPrivacy): GistConnection!
+   *   hasSponsorsListing: Boolean!
+   *   hovercard(primarySubjectId: ID): Hovercard!
+   *   id: ID!
+   *   interactionAbility: RepositoryInteractionAbility
+   *   isBountyHunter: Boolean!
+   *   isCampusExpert: Boolean!
+   *   isDeveloperProgramMember: Boolean!
+   *   isEmployee: Boolean!
+   *   isFollowingViewer: Boolean!
+   *   isGitHubStar: Boolean!
+   *   isHireable: Boolean!
+   *   isSiteAdmin: Boolean!
+   *   isSponsoredBy(accountLogin: String!): Boolean!
+   *   isSponsoringViewer: Boolean!
+   *   isViewer: Boolean!
+   *   issueComments(after: String, before: String, first: Int, last: Int, orderBy: IssueCommentOrder): IssueCommentConnection!
+   *   issues(after: String, before: String, filterBy: IssueFilters, first: Int, labels: [String!], last: Int, orderBy: IssueOrder, states: [IssueState!]): IssueConnection!
+   *   itemShowcase: ProfileItemShowcase!
+   *   lifetimeReceivedSponsorshipValues(after: String, before: String, first: Int, last: Int, orderBy: SponsorAndLifetimeValueOrder = {field: SPONSOR_LOGIN, direction: ASC}): SponsorAndLifetimeValueConnection!
+   *   lists(after: String, before: String, first: Int, last: Int): UserListConnection!
+   *   location: String
+   *   login: String!
+   *   monthlyEstimatedSponsorsIncomeInCents: Int!
+   *   name: String
+   *   organization(login: String!): Organization
+   *   organizationVerifiedDomainEmails(login: String!): [String!]!
+   *   organizations(after: String, before: String, first: Int, last: Int, orderBy: OrganizationOrder = null): OrganizationConnection!
+   *   packages(after: String, before: String, first: Int, last: Int, names: [String], orderBy: PackageOrder = {field: CREATED_AT, direction: DESC}, packageType: PackageType, repositoryId: ID): PackageConnection!
+   *   pinnableItems(after: String, before: String, first: Int, last: Int, types: [PinnableItemType!]): PinnableItemConnection!
+   *   pinnedItems(after: String, before: String, first: Int, last: Int, types: [PinnableItemType!]): PinnableItemConnection!
+   *   pinnedItemsRemaining: Int!
+   *   project(number: Int!): Project
+   *   projectV2(number: Int!): ProjectV2
+   *   projects(after: String, before: String, first: Int, last: Int, orderBy: ProjectOrder, search: String, states: [ProjectState!]): ProjectConnection!
+   *   projectsResourcePath: URI!
+   *   projectsUrl: URI!
+   *   projectsV2(after: String, before: String, first: Int, last: Int, minPermissionLevel: ProjectV2PermissionLevel = READ, orderBy: ProjectV2Order = {field: NUMBER, direction: DESC}, query: String): ProjectV2Connection!
+   *   pronouns: String
+   *   publicKeys(after: String, before: String, first: Int, last: Int): PublicKeyConnection!
+   *   pullRequests(after: String, baseRefName: String, before: String, first: Int, headRefName: String, labels: [String!], last: Int, orderBy: IssueOrder, states: [PullRequestState!]): PullRequestConnection!
+   *   recentProjects(after: String, before: String, first: Int, last: Int): ProjectV2Connection!
+   *   repositories(affiliations: [RepositoryAffiliation], after: String, before: String, first: Int, hasIssuesEnabled: Boolean, isArchived: Boolean, isFork: Boolean, isLocked: Boolean, last: Int, orderBy: RepositoryOrder, ownerAffiliations: [RepositoryAffiliation] = [OWNER, COLLABORATOR], privacy: RepositoryPrivacy, visibility: RepositoryVisibility): RepositoryConnection!
+   *   repositoriesContributedTo(after: String, before: String, contributionTypes: [RepositoryContributionType], first: Int, hasIssues: Boolean, includeUserRepositories: Boolean, isLocked: Boolean, last: Int, orderBy: RepositoryOrder, privacy: RepositoryPrivacy): RepositoryConnection!
+   *   repository(followRenames: Boolean = true, name: String!): Repository
+   *   repositoryDiscussionComments(after: String, before: String, first: Int, last: Int, onlyAnswers: Boolean = false, repositoryId: ID): DiscussionCommentConnection!
+   *   repositoryDiscussions(after: String, answered: Boolean = null, before: String, first: Int, last: Int, orderBy: DiscussionOrder = {field: CREATED_AT, direction: DESC}, repositoryId: ID, states: [DiscussionState!] = []): DiscussionConnection!
+   *   resourcePath: URI!
+   *   savedReplies(after: String, before: String, first: Int, last: Int, orderBy: SavedReplyOrder = {field: UPDATED_AT, direction: DESC}): SavedReplyConnection
+   *   socialAccounts(after: String, before: String, first: Int, last: Int): SocialAccountConnection!
+   *   sponsoring(after: String, before: String, first: Int, last: Int, orderBy: SponsorOrder = {field: RELEVANCE, direction: DESC}): SponsorConnection!
+   *   sponsors(after: String, before: String, first: Int, last: Int, orderBy: SponsorOrder = {field: RELEVANCE, direction: DESC}, tierId: ID): SponsorConnection!
+   *   sponsorsActivities(actions: [SponsorsActivityAction!] = [], after: String, before: String, first: Int, includeAsSponsor: Boolean = false, includePrivate: Boolean = true, last: Int, orderBy: SponsorsActivityOrder = {field: TIMESTAMP, direction: DESC}, period: SponsorsActivityPeriod = MONTH, since: DateTime, until: DateTime): SponsorsActivityConnection!
+   *   sponsorsListing: SponsorsListing
+   *   sponsorshipForViewerAsSponsor(activeOnly: Boolean = true): Sponsorship
+   *   sponsorshipForViewerAsSponsorable(activeOnly: Boolean = true): Sponsorship
+   *   sponsorshipNewsletters(after: String, before: String, first: Int, last: Int, orderBy: SponsorshipNewsletterOrder = {field: CREATED_AT, direction: DESC}): SponsorshipNewsletterConnection!
+   *   sponsorshipsAsMaintainer(activeOnly: Boolean = true, after: String, before: String, first: Int, includePrivate: Boolean = false, last: Int, orderBy: SponsorshipOrder): SponsorshipConnection!
+   *   sponsorshipsAsSponsor(activeOnly: Boolean = true, after: String, before: String, first: Int, last: Int, maintainerLogins: [String!], orderBy: SponsorshipOrder): SponsorshipConnection!
+   *   starredRepositories(after: String, before: String, first: Int, last: Int, orderBy: StarOrder, ownedByViewer: Boolean): StarredRepositoryConnection!
+   *   status: UserStatus
+   *   suggestedListNames: [UserListSuggestion!]!
+   *   topRepositories(after: String, before: String, first: Int, last: Int, orderBy: RepositoryOrder!, since: DateTime): RepositoryConnection!
+   *   totalSponsorshipAmountAsSponsorInCents(since: DateTime, sponsorableLogins: [String!] = [], until: DateTime): Int
+   *   twitterUsername: String
+   *   updatedAt: DateTime!
+   *   url: URI!
+   *   userViewType: UserViewType!
+   *   viewerCanChangePinnedItems: Boolean!
+   *   viewerCanCreateProjects: Boolean!
+   *   viewerCanFollow: Boolean!
+   *   viewerCanSponsor: Boolean!
+   *   viewerIsFollowing: Boolean!
+   *   viewerIsSponsoring: Boolean!
+   *   watching(affiliations: [RepositoryAffiliation], after: String, before: String, first: Int, hasIssuesEnabled: Boolean, isLocked: Boolean, last: Int, orderBy: RepositoryOrder, ownerAffiliations: [RepositoryAffiliation] = [OWNER, COLLABORATOR], privacy: RepositoryPrivacy, visibility: RepositoryVisibility): RepositoryConnection!
+   *   websiteUrl: URI
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -1003,6 +1804,108 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * The currently authenticated user.
+   *
+   * ```graphql
+   * viewer: User!
+   *
+   * type User implements Actor & Node & PackageOwner & ProfileOwner & ProjectOwner & ProjectV2Owner & ProjectV2Recent & RepositoryDiscussionAuthor & RepositoryDiscussionCommentAuthor & RepositoryOwner & Sponsorable & UniformResourceLocatable {
+   *   anyPinnableItems(type: PinnableItemType): Boolean!
+   *   avatarUrl(size: Int): URI!
+   *   bio: String
+   *   bioHTML: HTML!
+   *   canReceiveOrganizationEmailsWhenNotificationsRestricted(login: String!): Boolean!
+   *   commitComments(after: String, before: String, first: Int, last: Int): CommitCommentConnection!
+   *   company: String
+   *   companyHTML: HTML!
+   *   contributionsCollection(from: DateTime, organizationID: ID, to: DateTime): ContributionsCollection!
+   *   copilotEndpoints: CopilotEndpoints
+   *   createdAt: DateTime!
+   *   databaseId: Int
+   *   email: String!
+   *   enterprises(after: String, before: String, first: Int, last: Int, membershipType: EnterpriseMembershipType = ALL, orderBy: EnterpriseOrder = {field: NAME, direction: ASC}): EnterpriseConnection
+   *   estimatedNextSponsorsPayoutInCents: Int!
+   *   followers(after: String, before: String, first: Int, last: Int): FollowerConnection!
+   *   following(after: String, before: String, first: Int, last: Int): FollowingConnection!
+   *   gist(name: String!): Gist
+   *   gistComments(after: String, before: String, first: Int, last: Int): GistCommentConnection!
+   *   gists(after: String, before: String, first: Int, last: Int, orderBy: GistOrder, privacy: GistPrivacy): GistConnection!
+   *   hasSponsorsListing: Boolean!
+   *   hovercard(primarySubjectId: ID): Hovercard!
+   *   id: ID!
+   *   interactionAbility: RepositoryInteractionAbility
+   *   isBountyHunter: Boolean!
+   *   isCampusExpert: Boolean!
+   *   isDeveloperProgramMember: Boolean!
+   *   isEmployee: Boolean!
+   *   isFollowingViewer: Boolean!
+   *   isGitHubStar: Boolean!
+   *   isHireable: Boolean!
+   *   isSiteAdmin: Boolean!
+   *   isSponsoredBy(accountLogin: String!): Boolean!
+   *   isSponsoringViewer: Boolean!
+   *   isViewer: Boolean!
+   *   issueComments(after: String, before: String, first: Int, last: Int, orderBy: IssueCommentOrder): IssueCommentConnection!
+   *   issues(after: String, before: String, filterBy: IssueFilters, first: Int, labels: [String!], last: Int, orderBy: IssueOrder, states: [IssueState!]): IssueConnection!
+   *   itemShowcase: ProfileItemShowcase!
+   *   lifetimeReceivedSponsorshipValues(after: String, before: String, first: Int, last: Int, orderBy: SponsorAndLifetimeValueOrder = {field: SPONSOR_LOGIN, direction: ASC}): SponsorAndLifetimeValueConnection!
+   *   lists(after: String, before: String, first: Int, last: Int): UserListConnection!
+   *   location: String
+   *   login: String!
+   *   monthlyEstimatedSponsorsIncomeInCents: Int!
+   *   name: String
+   *   organization(login: String!): Organization
+   *   organizationVerifiedDomainEmails(login: String!): [String!]!
+   *   organizations(after: String, before: String, first: Int, last: Int, orderBy: OrganizationOrder = null): OrganizationConnection!
+   *   packages(after: String, before: String, first: Int, last: Int, names: [String], orderBy: PackageOrder = {field: CREATED_AT, direction: DESC}, packageType: PackageType, repositoryId: ID): PackageConnection!
+   *   pinnableItems(after: String, before: String, first: Int, last: Int, types: [PinnableItemType!]): PinnableItemConnection!
+   *   pinnedItems(after: String, before: String, first: Int, last: Int, types: [PinnableItemType!]): PinnableItemConnection!
+   *   pinnedItemsRemaining: Int!
+   *   project(number: Int!): Project
+   *   projectV2(number: Int!): ProjectV2
+   *   projects(after: String, before: String, first: Int, last: Int, orderBy: ProjectOrder, search: String, states: [ProjectState!]): ProjectConnection!
+   *   projectsResourcePath: URI!
+   *   projectsUrl: URI!
+   *   projectsV2(after: String, before: String, first: Int, last: Int, minPermissionLevel: ProjectV2PermissionLevel = READ, orderBy: ProjectV2Order = {field: NUMBER, direction: DESC}, query: String): ProjectV2Connection!
+   *   pronouns: String
+   *   publicKeys(after: String, before: String, first: Int, last: Int): PublicKeyConnection!
+   *   pullRequests(after: String, baseRefName: String, before: String, first: Int, headRefName: String, labels: [String!], last: Int, orderBy: IssueOrder, states: [PullRequestState!]): PullRequestConnection!
+   *   recentProjects(after: String, before: String, first: Int, last: Int): ProjectV2Connection!
+   *   repositories(affiliations: [RepositoryAffiliation], after: String, before: String, first: Int, hasIssuesEnabled: Boolean, isArchived: Boolean, isFork: Boolean, isLocked: Boolean, last: Int, orderBy: RepositoryOrder, ownerAffiliations: [RepositoryAffiliation] = [OWNER, COLLABORATOR], privacy: RepositoryPrivacy, visibility: RepositoryVisibility): RepositoryConnection!
+   *   repositoriesContributedTo(after: String, before: String, contributionTypes: [RepositoryContributionType], first: Int, hasIssues: Boolean, includeUserRepositories: Boolean, isLocked: Boolean, last: Int, orderBy: RepositoryOrder, privacy: RepositoryPrivacy): RepositoryConnection!
+   *   repository(followRenames: Boolean = true, name: String!): Repository
+   *   repositoryDiscussionComments(after: String, before: String, first: Int, last: Int, onlyAnswers: Boolean = false, repositoryId: ID): DiscussionCommentConnection!
+   *   repositoryDiscussions(after: String, answered: Boolean = null, before: String, first: Int, last: Int, orderBy: DiscussionOrder = {field: CREATED_AT, direction: DESC}, repositoryId: ID, states: [DiscussionState!] = []): DiscussionConnection!
+   *   resourcePath: URI!
+   *   savedReplies(after: String, before: String, first: Int, last: Int, orderBy: SavedReplyOrder = {field: UPDATED_AT, direction: DESC}): SavedReplyConnection
+   *   socialAccounts(after: String, before: String, first: Int, last: Int): SocialAccountConnection!
+   *   sponsoring(after: String, before: String, first: Int, last: Int, orderBy: SponsorOrder = {field: RELEVANCE, direction: DESC}): SponsorConnection!
+   *   sponsors(after: String, before: String, first: Int, last: Int, orderBy: SponsorOrder = {field: RELEVANCE, direction: DESC}, tierId: ID): SponsorConnection!
+   *   sponsorsActivities(actions: [SponsorsActivityAction!] = [], after: String, before: String, first: Int, includeAsSponsor: Boolean = false, includePrivate: Boolean = true, last: Int, orderBy: SponsorsActivityOrder = {field: TIMESTAMP, direction: DESC}, period: SponsorsActivityPeriod = MONTH, since: DateTime, until: DateTime): SponsorsActivityConnection!
+   *   sponsorsListing: SponsorsListing
+   *   sponsorshipForViewerAsSponsor(activeOnly: Boolean = true): Sponsorship
+   *   sponsorshipForViewerAsSponsorable(activeOnly: Boolean = true): Sponsorship
+   *   sponsorshipNewsletters(after: String, before: String, first: Int, last: Int, orderBy: SponsorshipNewsletterOrder = {field: CREATED_AT, direction: DESC}): SponsorshipNewsletterConnection!
+   *   sponsorshipsAsMaintainer(activeOnly: Boolean = true, after: String, before: String, first: Int, includePrivate: Boolean = false, last: Int, orderBy: SponsorshipOrder): SponsorshipConnection!
+   *   sponsorshipsAsSponsor(activeOnly: Boolean = true, after: String, before: String, first: Int, last: Int, maintainerLogins: [String!], orderBy: SponsorshipOrder): SponsorshipConnection!
+   *   starredRepositories(after: String, before: String, first: Int, last: Int, orderBy: StarOrder, ownedByViewer: Boolean): StarredRepositoryConnection!
+   *   status: UserStatus
+   *   suggestedListNames: [UserListSuggestion!]!
+   *   topRepositories(after: String, before: String, first: Int, last: Int, orderBy: RepositoryOrder!, since: DateTime): RepositoryConnection!
+   *   totalSponsorshipAmountAsSponsorInCents(since: DateTime, sponsorableLogins: [String!] = [], until: DateTime): Int
+   *   twitterUsername: String
+   *   updatedAt: DateTime!
+   *   url: URI!
+   *   userViewType: UserViewType!
+   *   viewerCanChangePinnedItems: Boolean!
+   *   viewerCanCreateProjects: Boolean!
+   *   viewerCanFollow: Boolean!
+   *   viewerCanSponsor: Boolean!
+   *   viewerIsFollowing: Boolean!
+   *   viewerIsSponsoring: Boolean!
+   *   watching(affiliations: [RepositoryAffiliation], after: String, before: String, first: Int, hasIssuesEnabled: Boolean, isLocked: Boolean, last: Int, orderBy: RepositoryOrder, ownerAffiliations: [RepositoryAffiliation] = [OWNER, COLLABORATOR], privacy: RepositoryPrivacy, visibility: RepositoryVisibility): RepositoryConnection!
+   *   websiteUrl: URI
+   * }
+   * ```
    *
    * # Info
    *
@@ -1080,6 +1983,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Clear all of a customer's queued migrations
    *
+   * ```graphql
+   * abortQueuedMigrations(input: AbortQueuedMigrationsInput!): AbortQueuedMigrationsPayload
+   *
+   * type AbortQueuedMigrationsPayload {
+   *   clientMutationId: String
+   *   success: Boolean
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -1112,6 +2024,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Abort a repository migration queued or in progress.
+   *
+   * ```graphql
+   * abortRepositoryMigration(input: AbortRepositoryMigrationInput!): AbortRepositoryMigrationPayload
+   *
+   * type AbortRepositoryMigrationPayload {
+   *   clientMutationId: String
+   *   success: Boolean
+   * }
+   * ```
    *
    * # Info
    *
@@ -1146,6 +2067,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Accepts a pending invitation for a user to become an administrator of an enterprise.
    *
+   * ```graphql
+   * acceptEnterpriseAdministratorInvitation(input: AcceptEnterpriseAdministratorInvitationInput!): AcceptEnterpriseAdministratorInvitationPayload
+   *
+   * type AcceptEnterpriseAdministratorInvitationPayload {
+   *   clientMutationId: String
+   *   invitation: EnterpriseAdministratorInvitation
+   *   message: String
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -1178,6 +2109,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Accepts a pending invitation for a user to become an unaffiliated member of an enterprise.
+   *
+   * ```graphql
+   * acceptEnterpriseMemberInvitation(input: AcceptEnterpriseMemberInvitationInput!): AcceptEnterpriseMemberInvitationPayload
+   *
+   * type AcceptEnterpriseMemberInvitationPayload {
+   *   clientMutationId: String
+   *   invitation: EnterpriseMemberInvitation
+   *   message: String
+   * }
+   * ```
    *
    * # Info
    *
@@ -1212,6 +2153,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Applies a suggested topic to the repository.
    *
+   * ```graphql
+   * acceptTopicSuggestion(input: AcceptTopicSuggestionInput!): AcceptTopicSuggestionPayload
+   *
+   * type AcceptTopicSuggestionPayload {
+   *   clientMutationId: String
+   *   topic: Topic @deprecated(reason: "Suggested topics are no longer supported Removal on 2024-04-01 UTC.")
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -1244,6 +2194,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Access user namespace repository for a temporary duration.
+   *
+   * ```graphql
+   * accessUserNamespaceRepository(input: AccessUserNamespaceRepositoryInput!): AccessUserNamespaceRepositoryPayload
+   *
+   * type AccessUserNamespaceRepositoryPayload {
+   *   clientMutationId: String
+   *   expiresAt: DateTime
+   *   repository: Repository
+   * }
+   * ```
    *
    * # Info
    *
@@ -1278,6 +2238,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Adds assignees to an assignable object.
    *
+   * ```graphql
+   * addAssigneesToAssignable(input: AddAssigneesToAssignableInput!): AddAssigneesToAssignablePayload
+   *
+   * type AddAssigneesToAssignablePayload {
+   *   assignable: Assignable
+   *   clientMutationId: String
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -1310,6 +2279,17 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Adds a comment to an Issue or Pull Request.
+   *
+   * ```graphql
+   * addComment(input: AddCommentInput!): AddCommentPayload
+   *
+   * type AddCommentPayload {
+   *   clientMutationId: String
+   *   commentEdge: IssueCommentEdge
+   *   subject: Node
+   *   timelineEdge: IssueTimelineItemEdge
+   * }
+   * ```
    *
    * # Info
    *
@@ -1344,6 +2324,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Adds a comment to a Discussion, possibly as a reply to another comment.
    *
+   * ```graphql
+   * addDiscussionComment(input: AddDiscussionCommentInput!): AddDiscussionCommentPayload
+   *
+   * type AddDiscussionCommentPayload {
+   *   clientMutationId: String
+   *   comment: DiscussionComment
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -1376,6 +2365,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Vote for an option in a discussion poll.
+   *
+   * ```graphql
+   * addDiscussionPollVote(input: AddDiscussionPollVoteInput!): AddDiscussionPollVotePayload
+   *
+   * type AddDiscussionPollVotePayload {
+   *   clientMutationId: String
+   *   pollOption: DiscussionPollOption
+   * }
+   * ```
    *
    * # Info
    *
@@ -1410,6 +2408,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Adds enterprise members to an organization within the enterprise.
    *
+   * ```graphql
+   * addEnterpriseOrganizationMember(input: AddEnterpriseOrganizationMemberInput!): AddEnterpriseOrganizationMemberPayload
+   *
+   * type AddEnterpriseOrganizationMemberPayload {
+   *   clientMutationId: String
+   *   users: [User!]
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -1442,6 +2449,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Adds a support entitlement to an enterprise member.
+   *
+   * ```graphql
+   * addEnterpriseSupportEntitlement(input: AddEnterpriseSupportEntitlementInput!): AddEnterpriseSupportEntitlementPayload
+   *
+   * type AddEnterpriseSupportEntitlementPayload {
+   *   clientMutationId: String
+   *   message: String
+   * }
+   * ```
    *
    * # Info
    *
@@ -1476,6 +2492,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Adds labels to a labelable object.
    *
+   * ```graphql
+   * addLabelsToLabelable(input: AddLabelsToLabelableInput!): AddLabelsToLabelablePayload
+   *
+   * type AddLabelsToLabelablePayload {
+   *   clientMutationId: String
+   *   labelable: Labelable
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -1508,6 +2533,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Adds a card to a ProjectColumn. Either `contentId` or `note` must be provided but **not** both.
+   *
+   * ```graphql
+   * addProjectCard(input: AddProjectCardInput!): AddProjectCardPayload
+   *
+   * type AddProjectCardPayload {
+   *   cardEdge: ProjectCardEdge
+   *   clientMutationId: String
+   *   projectColumn: ProjectColumn
+   * }
+   * ```
    *
    * # Info
    *
@@ -1542,6 +2577,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Adds a column to a Project.
    *
+   * ```graphql
+   * addProjectColumn(input: AddProjectColumnInput!): AddProjectColumnPayload
+   *
+   * type AddProjectColumnPayload {
+   *   clientMutationId: String
+   *   columnEdge: ProjectColumnEdge
+   *   project: Project
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -1574,6 +2619,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Creates a new draft issue and add it to a Project.
+   *
+   * ```graphql
+   * addProjectV2DraftIssue(input: AddProjectV2DraftIssueInput!): AddProjectV2DraftIssuePayload
+   *
+   * type AddProjectV2DraftIssuePayload {
+   *   clientMutationId: String
+   *   projectItem: ProjectV2Item
+   * }
+   * ```
    *
    * # Info
    *
@@ -1608,6 +2662,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Links an existing content instance to a Project.
    *
+   * ```graphql
+   * addProjectV2ItemById(input: AddProjectV2ItemByIdInput!): AddProjectV2ItemByIdPayload
+   *
+   * type AddProjectV2ItemByIdPayload {
+   *   clientMutationId: String
+   *   item: ProjectV2Item
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -1640,6 +2703,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Adds a review to a Pull Request.
+   *
+   * ```graphql
+   * addPullRequestReview(input: AddPullRequestReviewInput!): AddPullRequestReviewPayload
+   *
+   * type AddPullRequestReviewPayload {
+   *   clientMutationId: String
+   *   pullRequestReview: PullRequestReview
+   *   reviewEdge: PullRequestReviewEdge
+   * }
+   * ```
    *
    * # Info
    *
@@ -1674,6 +2747,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Adds a comment to a review.
    *
+   * ```graphql
+   * addPullRequestReviewComment(input: AddPullRequestReviewCommentInput!): AddPullRequestReviewCommentPayload
+   *
+   * type AddPullRequestReviewCommentPayload {
+   *   clientMutationId: String
+   *   comment: PullRequestReviewComment
+   *   commentEdge: PullRequestReviewCommentEdge
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -1706,6 +2789,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Adds a new thread to a pending Pull Request Review.
+   *
+   * ```graphql
+   * addPullRequestReviewThread(input: AddPullRequestReviewThreadInput!): AddPullRequestReviewThreadPayload
+   *
+   * type AddPullRequestReviewThreadPayload {
+   *   clientMutationId: String
+   *   thread: PullRequestReviewThread
+   * }
+   * ```
    *
    * # Info
    *
@@ -1740,6 +2832,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Adds a reply to an existing Pull Request Review Thread.
    *
+   * ```graphql
+   * addPullRequestReviewThreadReply(input: AddPullRequestReviewThreadReplyInput!): AddPullRequestReviewThreadReplyPayload
+   *
+   * type AddPullRequestReviewThreadReplyPayload {
+   *   clientMutationId: String
+   *   comment: PullRequestReviewComment
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -1772,6 +2873,17 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Adds a reaction to a subject.
+   *
+   * ```graphql
+   * addReaction(input: AddReactionInput!): AddReactionPayload
+   *
+   * type AddReactionPayload {
+   *   clientMutationId: String
+   *   reaction: Reaction
+   *   reactionGroups: [ReactionGroup!]
+   *   subject: Reactable
+   * }
+   * ```
    *
    * # Info
    *
@@ -1806,6 +2918,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Adds a star to a Starrable.
    *
+   * ```graphql
+   * addStar(input: AddStarInput!): AddStarPayload
+   *
+   * type AddStarPayload {
+   *   clientMutationId: String
+   *   starrable: Starrable
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -1838,6 +2959,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Adds a sub-issue to a given issue
+   *
+   * ```graphql
+   * addSubIssue(input: AddSubIssueInput!): AddSubIssuePayload
+   *
+   * type AddSubIssuePayload {
+   *   clientMutationId: String
+   *   issue: Issue
+   *   subIssue: Issue
+   * }
+   * ```
    *
    * # Info
    *
@@ -1872,6 +3003,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Add an upvote to a discussion or discussion comment.
    *
+   * ```graphql
+   * addUpvote(input: AddUpvoteInput!): AddUpvotePayload
+   *
+   * type AddUpvotePayload {
+   *   clientMutationId: String
+   *   subject: Votable
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -1904,6 +3044,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Adds a verifiable domain to an owning account.
+   *
+   * ```graphql
+   * addVerifiableDomain(input: AddVerifiableDomainInput!): AddVerifiableDomainPayload
+   *
+   * type AddVerifiableDomainPayload {
+   *   clientMutationId: String
+   *   domain: VerifiableDomain
+   * }
+   * ```
    *
    * # Info
    *
@@ -1938,6 +3087,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Approve all pending deployments under one or more environments
    *
+   * ```graphql
+   * approveDeployments(input: ApproveDeploymentsInput!): ApproveDeploymentsPayload
+   *
+   * type ApproveDeploymentsPayload {
+   *   clientMutationId: String
+   *   deployments: [Deployment!]
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -1970,6 +3128,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Approve a verifiable domain for notification delivery.
+   *
+   * ```graphql
+   * approveVerifiableDomain(input: ApproveVerifiableDomainInput!): ApproveVerifiableDomainPayload
+   *
+   * type ApproveVerifiableDomainPayload {
+   *   clientMutationId: String
+   *   domain: VerifiableDomain
+   * }
+   * ```
    *
    * # Info
    *
@@ -2004,6 +3171,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Archives a ProjectV2Item
    *
+   * ```graphql
+   * archiveProjectV2Item(input: ArchiveProjectV2ItemInput!): ArchiveProjectV2ItemPayload
+   *
+   * type ArchiveProjectV2ItemPayload {
+   *   clientMutationId: String
+   *   item: ProjectV2Item
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -2036,6 +3212,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Marks a repository as archived.
+   *
+   * ```graphql
+   * archiveRepository(input: ArchiveRepositoryInput!): ArchiveRepositoryPayload
+   *
+   * type ArchiveRepositoryPayload {
+   *   clientMutationId: String
+   *   repository: Repository
+   * }
+   * ```
    *
    * # Info
    *
@@ -2070,6 +3255,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Cancels a pending invitation for an administrator to join an enterprise.
    *
+   * ```graphql
+   * cancelEnterpriseAdminInvitation(input: CancelEnterpriseAdminInvitationInput!): CancelEnterpriseAdminInvitationPayload
+   *
+   * type CancelEnterpriseAdminInvitationPayload {
+   *   clientMutationId: String
+   *   invitation: EnterpriseAdministratorInvitation
+   *   message: String
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -2102,6 +3297,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Cancels a pending invitation for an unaffiliated member to join an enterprise.
+   *
+   * ```graphql
+   * cancelEnterpriseMemberInvitation(input: CancelEnterpriseMemberInvitationInput!): CancelEnterpriseMemberInvitationPayload
+   *
+   * type CancelEnterpriseMemberInvitationPayload {
+   *   clientMutationId: String
+   *   invitation: EnterpriseMemberInvitation
+   *   message: String
+   * }
+   * ```
    *
    * # Info
    *
@@ -2136,6 +3341,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Cancel an active sponsorship.
    *
+   * ```graphql
+   * cancelSponsorship(input: CancelSponsorshipInput!): CancelSponsorshipPayload
+   *
+   * type CancelSponsorshipPayload {
+   *   clientMutationId: String
+   *   sponsorsTier: SponsorsTier
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -2169,6 +3383,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Update your status on GitHub.
    *
+   * ```graphql
+   * changeUserStatus(input: ChangeUserStatusInput!): ChangeUserStatusPayload
+   *
+   * type ChangeUserStatusPayload {
+   *   clientMutationId: String
+   *   status: UserStatus
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -2201,6 +3424,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Clears all labels from a labelable object.
+   *
+   * ```graphql
+   * clearLabelsFromLabelable(input: ClearLabelsFromLabelableInput!): ClearLabelsFromLabelablePayload
+   *
+   * type ClearLabelsFromLabelablePayload {
+   *   clientMutationId: String
+   *   labelable: Labelable
+   * }
+   * ```
    *
    * # Info
    *
@@ -2237,6 +3469,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
    * only text, number, date, assignees, labels, single-select, iteration and
    * milestone fields are supported.
    *
+   * ```graphql
+   * clearProjectV2ItemFieldValue(input: ClearProjectV2ItemFieldValueInput!): ClearProjectV2ItemFieldValuePayload
+   *
+   * type ClearProjectV2ItemFieldValuePayload {
+   *   clientMutationId: String
+   *   projectV2Item: ProjectV2Item
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -2269,6 +3510,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Creates a new project by cloning configuration from an existing project.
+   *
+   * ```graphql
+   * cloneProject(input: CloneProjectInput!): CloneProjectPayload
+   *
+   * type CloneProjectPayload {
+   *   clientMutationId: String
+   *   jobStatusId: String
+   *   project: Project
+   * }
+   * ```
    *
    * # Info
    *
@@ -2303,6 +3554,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Create a new repository with the same files and directory structure as a template repository.
    *
+   * ```graphql
+   * cloneTemplateRepository(input: CloneTemplateRepositoryInput!): CloneTemplateRepositoryPayload
+   *
+   * type CloneTemplateRepositoryPayload {
+   *   clientMutationId: String
+   *   repository: Repository
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -2335,6 +3595,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Close a discussion.
+   *
+   * ```graphql
+   * closeDiscussion(input: CloseDiscussionInput!): CloseDiscussionPayload
+   *
+   * type CloseDiscussionPayload {
+   *   clientMutationId: String
+   *   discussion: Discussion
+   * }
+   * ```
    *
    * # Info
    *
@@ -2369,6 +3638,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Close an issue.
    *
+   * ```graphql
+   * closeIssue(input: CloseIssueInput!): CloseIssuePayload
+   *
+   * type CloseIssuePayload {
+   *   clientMutationId: String
+   *   issue: Issue
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -2401,6 +3679,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Close a pull request.
+   *
+   * ```graphql
+   * closePullRequest(input: ClosePullRequestInput!): ClosePullRequestPayload
+   *
+   * type ClosePullRequestPayload {
+   *   clientMutationId: String
+   *   pullRequest: PullRequest
+   * }
+   * ```
    *
    * # Info
    *
@@ -2435,6 +3722,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Convert a project note card to one associated with a newly created issue.
    *
+   * ```graphql
+   * convertProjectCardNoteToIssue(input: ConvertProjectCardNoteToIssueInput!): ConvertProjectCardNoteToIssuePayload
+   *
+   * type ConvertProjectCardNoteToIssuePayload {
+   *   clientMutationId: String
+   *   projectCard: ProjectCard
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -2467,6 +3763,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Converts a projectV2 draft issue item to an issue.
+   *
+   * ```graphql
+   * convertProjectV2DraftIssueItemToIssue(input: ConvertProjectV2DraftIssueItemToIssueInput!): ConvertProjectV2DraftIssueItemToIssuePayload
+   *
+   * type ConvertProjectV2DraftIssueItemToIssuePayload {
+   *   clientMutationId: String
+   *   item: ProjectV2Item
+   * }
+   * ```
    *
    * # Info
    *
@@ -2501,6 +3806,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Converts a pull request to draft
    *
+   * ```graphql
+   * convertPullRequestToDraft(input: ConvertPullRequestToDraftInput!): ConvertPullRequestToDraftPayload
+   *
+   * type ConvertPullRequestToDraftPayload {
+   *   clientMutationId: String
+   *   pullRequest: PullRequest
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -2533,6 +3847,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Copy a project.
+   *
+   * ```graphql
+   * copyProjectV2(input: CopyProjectV2Input!): CopyProjectV2Payload
+   *
+   * type CopyProjectV2Payload {
+   *   clientMutationId: String
+   *   projectV2: ProjectV2
+   * }
+   * ```
    *
    * # Info
    *
@@ -2567,6 +3890,17 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Invites a user to claim reattributable data
    *
+   * ```graphql
+   * createAttributionInvitation(input: CreateAttributionInvitationInput!): CreateAttributionInvitationPayload
+   *
+   * type CreateAttributionInvitationPayload {
+   *   clientMutationId: String
+   *   owner: Organization
+   *   source: Claimable
+   *   target: Claimable
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -2599,6 +3933,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Create a new branch protection rule
+   *
+   * ```graphql
+   * createBranchProtectionRule(input: CreateBranchProtectionRuleInput!): CreateBranchProtectionRulePayload
+   *
+   * type CreateBranchProtectionRulePayload {
+   *   branchProtectionRule: BranchProtectionRule
+   *   clientMutationId: String
+   * }
+   * ```
    *
    * # Info
    *
@@ -2633,6 +3976,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Create a check run.
    *
+   * ```graphql
+   * createCheckRun(input: CreateCheckRunInput!): CreateCheckRunPayload
+   *
+   * type CreateCheckRunPayload {
+   *   checkRun: CheckRun
+   *   clientMutationId: String
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -2665,6 +4017,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Create a check suite
+   *
+   * ```graphql
+   * createCheckSuite(input: CreateCheckSuiteInput!): CreateCheckSuitePayload
+   *
+   * type CreateCheckSuitePayload {
+   *   checkSuite: CheckSuite
+   *   clientMutationId: String
+   * }
+   * ```
    *
    * # Info
    *
@@ -2740,6 +4101,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
    * Commits made using this mutation are automatically signed by GitHub if
    * supported and will be marked as verified in the user interface.
    *
+   * ```graphql
+   * createCommitOnBranch(input: CreateCommitOnBranchInput!): CreateCommitOnBranchPayload
+   *
+   * type CreateCommitOnBranchPayload {
+   *   clientMutationId: String
+   *   commit: Commit
+   *   ref: Ref
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -2772,6 +4143,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Creates a new deployment event.
+   *
+   * ```graphql
+   * createDeployment(input: CreateDeploymentInput!): CreateDeploymentPayload
+   *
+   * type CreateDeploymentPayload {
+   *   autoMerged: Boolean
+   *   clientMutationId: String
+   *   deployment: Deployment
+   * }
+   * ```
    *
    * # Info
    *
@@ -2806,6 +4187,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Create a deployment status.
    *
+   * ```graphql
+   * createDeploymentStatus(input: CreateDeploymentStatusInput!): CreateDeploymentStatusPayload
+   *
+   * type CreateDeploymentStatusPayload {
+   *   clientMutationId: String
+   *   deploymentStatus: DeploymentStatus
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -2838,6 +4228,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Create a discussion.
+   *
+   * ```graphql
+   * createDiscussion(input: CreateDiscussionInput!): CreateDiscussionPayload
+   *
+   * type CreateDiscussionPayload {
+   *   clientMutationId: String
+   *   discussion: Discussion
+   * }
+   * ```
    *
    * # Info
    *
@@ -2877,6 +4276,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
    * of such an enterprise, and instead has SAML enabled for it individually, the
    * token will then require SAML authorization to continue working against that organization.
    *
+   * ```graphql
+   * createEnterpriseOrganization(input: CreateEnterpriseOrganizationInput!): CreateEnterpriseOrganizationPayload
+   *
+   * type CreateEnterpriseOrganizationPayload {
+   *   clientMutationId: String
+   *   enterprise: Enterprise
+   *   organization: Organization
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -2909,6 +4318,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Creates an environment or simply returns it if already exists.
+   *
+   * ```graphql
+   * createEnvironment(input: CreateEnvironmentInput!): CreateEnvironmentPayload
+   *
+   * type CreateEnvironmentPayload {
+   *   clientMutationId: String
+   *   environment: Environment
+   * }
+   * ```
    *
    * # Info
    *
@@ -2943,6 +4361,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Creates a new IP allow list entry.
    *
+   * ```graphql
+   * createIpAllowListEntry(input: CreateIpAllowListEntryInput!): CreateIpAllowListEntryPayload
+   *
+   * type CreateIpAllowListEntryPayload {
+   *   clientMutationId: String
+   *   ipAllowListEntry: IpAllowListEntry
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -2975,6 +4402,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Creates a new issue.
+   *
+   * ```graphql
+   * createIssue(input: CreateIssueInput!): CreateIssuePayload
+   *
+   * type CreateIssuePayload {
+   *   clientMutationId: String
+   *   issue: Issue
+   * }
+   * ```
    *
    * # Info
    *
@@ -3009,6 +4445,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Creates a new label.
    *
+   * ```graphql
+   * createLabel(input: CreateLabelInput!): CreateLabelPayload
+   *
+   * type CreateLabelPayload {
+   *   clientMutationId: String
+   *   label: Label
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -3041,6 +4486,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Create a branch linked to an issue.
+   *
+   * ```graphql
+   * createLinkedBranch(input: CreateLinkedBranchInput!): CreateLinkedBranchPayload
+   *
+   * type CreateLinkedBranchPayload {
+   *   clientMutationId: String
+   *   issue: Issue
+   *   linkedBranch: LinkedBranch
+   * }
+   * ```
    *
    * # Info
    *
@@ -3075,6 +4530,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Creates a GitHub Enterprise Importer (GEI) migration source.
    *
+   * ```graphql
+   * createMigrationSource(input: CreateMigrationSourceInput!): CreateMigrationSourcePayload
+   *
+   * type CreateMigrationSourcePayload {
+   *   clientMutationId: String
+   *   migrationSource: MigrationSource
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -3107,6 +4571,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Creates a new project.
+   *
+   * ```graphql
+   * createProject(input: CreateProjectInput!): CreateProjectPayload
+   *
+   * type CreateProjectPayload {
+   *   clientMutationId: String
+   *   project: Project
+   * }
+   * ```
    *
    * # Info
    *
@@ -3141,6 +4614,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Creates a new project.
    *
+   * ```graphql
+   * createProjectV2(input: CreateProjectV2Input!): CreateProjectV2Payload
+   *
+   * type CreateProjectV2Payload {
+   *   clientMutationId: String
+   *   projectV2: ProjectV2
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -3173,6 +4655,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Create a new project field.
+   *
+   * ```graphql
+   * createProjectV2Field(input: CreateProjectV2FieldInput!): CreateProjectV2FieldPayload
+   *
+   * type CreateProjectV2FieldPayload {
+   *   clientMutationId: String
+   *   projectV2Field: ProjectV2FieldConfiguration
+   * }
+   * ```
    *
    * # Info
    *
@@ -3207,6 +4698,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Creates a status update within a Project.
    *
+   * ```graphql
+   * createProjectV2StatusUpdate(input: CreateProjectV2StatusUpdateInput!): CreateProjectV2StatusUpdatePayload
+   *
+   * type CreateProjectV2StatusUpdatePayload {
+   *   clientMutationId: String
+   *   statusUpdate: ProjectV2StatusUpdate
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -3239,6 +4739,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Create a new pull request
+   *
+   * ```graphql
+   * createPullRequest(input: CreatePullRequestInput!): CreatePullRequestPayload
+   *
+   * type CreatePullRequestPayload {
+   *   clientMutationId: String
+   *   pullRequest: PullRequest
+   * }
+   * ```
    *
    * # Info
    *
@@ -3273,6 +4782,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Create a new Git Ref.
    *
+   * ```graphql
+   * createRef(input: CreateRefInput!): CreateRefPayload
+   *
+   * type CreateRefPayload {
+   *   clientMutationId: String
+   *   ref: Ref
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -3305,6 +4823,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Create a new repository.
+   *
+   * ```graphql
+   * createRepository(input: CreateRepositoryInput!): CreateRepositoryPayload
+   *
+   * type CreateRepositoryPayload {
+   *   clientMutationId: String
+   *   repository: Repository
+   * }
+   * ```
    *
    * # Info
    *
@@ -3339,6 +4866,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Create a repository ruleset
    *
+   * ```graphql
+   * createRepositoryRuleset(input: CreateRepositoryRulesetInput!): CreateRepositoryRulesetPayload
+   *
+   * type CreateRepositoryRulesetPayload {
+   *   clientMutationId: String
+   *   ruleset: RepositoryRuleset
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -3371,6 +4907,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Create a GitHub Sponsors profile to allow others to sponsor you or your organization.
+   *
+   * ```graphql
+   * createSponsorsListing(input: CreateSponsorsListingInput!): CreateSponsorsListingPayload
+   *
+   * type CreateSponsorsListingPayload {
+   *   clientMutationId: String
+   *   sponsorsListing: SponsorsListing
+   * }
+   * ```
    *
    * # Info
    *
@@ -3405,6 +4950,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Create a new payment tier for your GitHub Sponsors profile.
    *
+   * ```graphql
+   * createSponsorsTier(input: CreateSponsorsTierInput!): CreateSponsorsTierPayload
+   *
+   * type CreateSponsorsTierPayload {
+   *   clientMutationId: String
+   *   sponsorsTier: SponsorsTier
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -3437,6 +4991,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Start a new sponsorship of a maintainer in GitHub Sponsors, or reactivate a past sponsorship.
+   *
+   * ```graphql
+   * createSponsorship(input: CreateSponsorshipInput!): CreateSponsorshipPayload
+   *
+   * type CreateSponsorshipPayload {
+   *   clientMutationId: String
+   *   sponsorship: Sponsorship
+   * }
+   * ```
    *
    * # Info
    *
@@ -3472,6 +5035,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
    * Make many sponsorships for different sponsorable users or organizations at
    * once. Can only sponsor those who have a public GitHub Sponsors profile.
    *
+   * ```graphql
+   * createSponsorships(input: CreateSponsorshipsInput!): CreateSponsorshipsPayload
+   *
+   * type CreateSponsorshipsPayload {
+   *   clientMutationId: String
+   *   sponsorables: [Sponsorable!]
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -3504,6 +5076,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Creates a new team discussion.
+   *
+   * ```graphql
+   * createTeamDiscussion(input: CreateTeamDiscussionInput!): CreateTeamDiscussionPayload
+   *
+   * type CreateTeamDiscussionPayload {
+   *   clientMutationId: String
+   *   teamDiscussion: TeamDiscussion @deprecated(reason: "The Team Discussions feature is deprecated in favor of Organization Discussions. Follow the guide at https://github.blog/changelog/2023-02-08-sunset-notice-team-discussions/ to find a suitable replacement. Removal on 2024-07-01 UTC.")
+   * }
+   * ```
    *
    * # Info
    *
@@ -3538,6 +5119,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Creates a new team discussion comment.
    *
+   * ```graphql
+   * createTeamDiscussionComment(input: CreateTeamDiscussionCommentInput!): CreateTeamDiscussionCommentPayload
+   *
+   * type CreateTeamDiscussionCommentPayload {
+   *   clientMutationId: String
+   *   teamDiscussionComment: TeamDiscussionComment @deprecated(reason: "The Team Discussions feature is deprecated in favor of Organization Discussions. Follow the guide at https://github.blog/changelog/2023-02-08-sunset-notice-team-discussions/ to find a suitable replacement. Removal on 2024-07-01 UTC.")
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -3570,6 +5160,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Creates a new user list.
+   *
+   * ```graphql
+   * createUserList(input: CreateUserListInput!): CreateUserListPayload
+   *
+   * type CreateUserListPayload {
+   *   clientMutationId: String
+   *   list: UserList
+   *   viewer: User
+   * }
+   * ```
    *
    * # Info
    *
@@ -3604,6 +5204,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Rejects a suggested topic for the repository.
    *
+   * ```graphql
+   * declineTopicSuggestion(input: DeclineTopicSuggestionInput!): DeclineTopicSuggestionPayload
+   *
+   * type DeclineTopicSuggestionPayload {
+   *   clientMutationId: String
+   *   topic: Topic @deprecated(reason: "Suggested topics are no longer supported Removal on 2024-04-01 UTC.")
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -3636,6 +5245,14 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Delete a branch protection rule
+   *
+   * ```graphql
+   * deleteBranchProtectionRule(input: DeleteBranchProtectionRuleInput!): DeleteBranchProtectionRulePayload
+   *
+   * type DeleteBranchProtectionRulePayload {
+   *   clientMutationId: String
+   * }
+   * ```
    *
    * # Info
    *
@@ -3670,6 +5287,14 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Deletes a deployment.
    *
+   * ```graphql
+   * deleteDeployment(input: DeleteDeploymentInput!): DeleteDeploymentPayload
+   *
+   * type DeleteDeploymentPayload {
+   *   clientMutationId: String
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -3702,6 +5327,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Delete a discussion and all of its replies.
+   *
+   * ```graphql
+   * deleteDiscussion(input: DeleteDiscussionInput!): DeleteDiscussionPayload
+   *
+   * type DeleteDiscussionPayload {
+   *   clientMutationId: String
+   *   discussion: Discussion
+   * }
+   * ```
    *
    * # Info
    *
@@ -3736,6 +5370,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Delete a discussion comment. If it has replies, wipe it instead.
    *
+   * ```graphql
+   * deleteDiscussionComment(input: DeleteDiscussionCommentInput!): DeleteDiscussionCommentPayload
+   *
+   * type DeleteDiscussionCommentPayload {
+   *   clientMutationId: String
+   *   comment: DiscussionComment
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -3768,6 +5411,14 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Deletes an environment
+   *
+   * ```graphql
+   * deleteEnvironment(input: DeleteEnvironmentInput!): DeleteEnvironmentPayload
+   *
+   * type DeleteEnvironmentPayload {
+   *   clientMutationId: String
+   * }
+   * ```
    *
    * # Info
    *
@@ -3802,6 +5453,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Deletes an IP allow list entry.
    *
+   * ```graphql
+   * deleteIpAllowListEntry(input: DeleteIpAllowListEntryInput!): DeleteIpAllowListEntryPayload
+   *
+   * type DeleteIpAllowListEntryPayload {
+   *   clientMutationId: String
+   *   ipAllowListEntry: IpAllowListEntry
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -3834,6 +5494,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Deletes an Issue object.
+   *
+   * ```graphql
+   * deleteIssue(input: DeleteIssueInput!): DeleteIssuePayload
+   *
+   * type DeleteIssuePayload {
+   *   clientMutationId: String
+   *   repository: Repository
+   * }
+   * ```
    *
    * # Info
    *
@@ -3868,6 +5537,14 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Deletes an IssueComment object.
    *
+   * ```graphql
+   * deleteIssueComment(input: DeleteIssueCommentInput!): DeleteIssueCommentPayload
+   *
+   * type DeleteIssueCommentPayload {
+   *   clientMutationId: String
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -3900,6 +5577,14 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Deletes a label.
+   *
+   * ```graphql
+   * deleteLabel(input: DeleteLabelInput!): DeleteLabelPayload
+   *
+   * type DeleteLabelPayload {
+   *   clientMutationId: String
+   * }
+   * ```
    *
    * # Info
    *
@@ -3934,6 +5619,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Unlink a branch from an issue.
    *
+   * ```graphql
+   * deleteLinkedBranch(input: DeleteLinkedBranchInput!): DeleteLinkedBranchPayload
+   *
+   * type DeleteLinkedBranchPayload {
+   *   clientMutationId: String
+   *   issue: Issue
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -3966,6 +5660,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Delete a package version.
+   *
+   * ```graphql
+   * deletePackageVersion(input: DeletePackageVersionInput!): DeletePackageVersionPayload
+   *
+   * type DeletePackageVersionPayload {
+   *   clientMutationId: String
+   *   success: Boolean
+   * }
+   * ```
    *
    * # Info
    *
@@ -4000,6 +5703,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Deletes a project.
    *
+   * ```graphql
+   * deleteProject(input: DeleteProjectInput!): DeleteProjectPayload
+   *
+   * type DeleteProjectPayload {
+   *   clientMutationId: String
+   *   owner: ProjectOwner
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -4032,6 +5744,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Deletes a project card.
+   *
+   * ```graphql
+   * deleteProjectCard(input: DeleteProjectCardInput!): DeleteProjectCardPayload
+   *
+   * type DeleteProjectCardPayload {
+   *   clientMutationId: String
+   *   column: ProjectColumn
+   *   deletedCardId: ID
+   * }
+   * ```
    *
    * # Info
    *
@@ -4066,6 +5788,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Deletes a project column.
    *
+   * ```graphql
+   * deleteProjectColumn(input: DeleteProjectColumnInput!): DeleteProjectColumnPayload
+   *
+   * type DeleteProjectColumnPayload {
+   *   clientMutationId: String
+   *   deletedColumnId: ID
+   *   project: Project
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -4098,6 +5830,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Delete a project.
+   *
+   * ```graphql
+   * deleteProjectV2(input: DeleteProjectV2Input!): DeleteProjectV2Payload
+   *
+   * type DeleteProjectV2Payload {
+   *   clientMutationId: String
+   *   projectV2: ProjectV2
+   * }
+   * ```
    *
    * # Info
    *
@@ -4132,6 +5873,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Delete a project field.
    *
+   * ```graphql
+   * deleteProjectV2Field(input: DeleteProjectV2FieldInput!): DeleteProjectV2FieldPayload
+   *
+   * type DeleteProjectV2FieldPayload {
+   *   clientMutationId: String
+   *   projectV2Field: ProjectV2FieldConfiguration
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -4164,6 +5914,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Deletes an item from a Project.
+   *
+   * ```graphql
+   * deleteProjectV2Item(input: DeleteProjectV2ItemInput!): DeleteProjectV2ItemPayload
+   *
+   * type DeleteProjectV2ItemPayload {
+   *   clientMutationId: String
+   *   deletedItemId: ID
+   * }
+   * ```
    *
    * # Info
    *
@@ -4198,6 +5957,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Deletes a project status update.
    *
+   * ```graphql
+   * deleteProjectV2StatusUpdate(input: DeleteProjectV2StatusUpdateInput!): DeleteProjectV2StatusUpdatePayload
+   *
+   * type DeleteProjectV2StatusUpdatePayload {
+   *   clientMutationId: String
+   *   deletedStatusUpdateId: ID
+   *   projectV2: ProjectV2
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -4230,6 +5999,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Deletes a project workflow.
+   *
+   * ```graphql
+   * deleteProjectV2Workflow(input: DeleteProjectV2WorkflowInput!): DeleteProjectV2WorkflowPayload
+   *
+   * type DeleteProjectV2WorkflowPayload {
+   *   clientMutationId: String
+   *   deletedWorkflowId: ID
+   *   projectV2: ProjectV2
+   * }
+   * ```
    *
    * # Info
    *
@@ -4264,6 +6043,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Deletes a pull request review.
    *
+   * ```graphql
+   * deletePullRequestReview(input: DeletePullRequestReviewInput!): DeletePullRequestReviewPayload
+   *
+   * type DeletePullRequestReviewPayload {
+   *   clientMutationId: String
+   *   pullRequestReview: PullRequestReview
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -4296,6 +6084,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Deletes a pull request review comment.
+   *
+   * ```graphql
+   * deletePullRequestReviewComment(input: DeletePullRequestReviewCommentInput!): DeletePullRequestReviewCommentPayload
+   *
+   * type DeletePullRequestReviewCommentPayload {
+   *   clientMutationId: String
+   *   pullRequestReview: PullRequestReview
+   *   pullRequestReviewComment: PullRequestReviewComment
+   * }
+   * ```
    *
    * # Info
    *
@@ -4330,6 +6128,14 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Delete a Git Ref.
    *
+   * ```graphql
+   * deleteRef(input: DeleteRefInput!): DeleteRefPayload
+   *
+   * type DeleteRefPayload {
+   *   clientMutationId: String
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -4362,6 +6168,14 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Delete a repository ruleset
+   *
+   * ```graphql
+   * deleteRepositoryRuleset(input: DeleteRepositoryRulesetInput!): DeleteRepositoryRulesetPayload
+   *
+   * type DeleteRepositoryRulesetPayload {
+   *   clientMutationId: String
+   * }
+   * ```
    *
    * # Info
    *
@@ -4396,6 +6210,14 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Deletes a team discussion.
    *
+   * ```graphql
+   * deleteTeamDiscussion(input: DeleteTeamDiscussionInput!): DeleteTeamDiscussionPayload
+   *
+   * type DeleteTeamDiscussionPayload {
+   *   clientMutationId: String
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -4428,6 +6250,14 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Deletes a team discussion comment.
+   *
+   * ```graphql
+   * deleteTeamDiscussionComment(input: DeleteTeamDiscussionCommentInput!): DeleteTeamDiscussionCommentPayload
+   *
+   * type DeleteTeamDiscussionCommentPayload {
+   *   clientMutationId: String
+   * }
+   * ```
    *
    * # Info
    *
@@ -4462,6 +6292,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Deletes a user list.
    *
+   * ```graphql
+   * deleteUserList(input: DeleteUserListInput!): DeleteUserListPayload
+   *
+   * type DeleteUserListPayload {
+   *   clientMutationId: String
+   *   user: User
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -4494,6 +6333,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Deletes a verifiable domain.
+   *
+   * ```graphql
+   * deleteVerifiableDomain(input: DeleteVerifiableDomainInput!): DeleteVerifiableDomainPayload
+   *
+   * type DeleteVerifiableDomainPayload {
+   *   clientMutationId: String
+   *   owner: VerifiableDomainOwner
+   * }
+   * ```
    *
    * # Info
    *
@@ -4528,6 +6376,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Remove a pull request from the merge queue.
    *
+   * ```graphql
+   * dequeuePullRequest(input: DequeuePullRequestInput!): DequeuePullRequestPayload
+   *
+   * type DequeuePullRequestPayload {
+   *   clientMutationId: String
+   *   mergeQueueEntry: MergeQueueEntry
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -4560,6 +6417,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Disable auto merge on the given pull request
+   *
+   * ```graphql
+   * disablePullRequestAutoMerge(input: DisablePullRequestAutoMergeInput!): DisablePullRequestAutoMergePayload
+   *
+   * type DisablePullRequestAutoMergePayload {
+   *   actor: Actor
+   *   clientMutationId: String
+   *   pullRequest: PullRequest
+   * }
+   * ```
    *
    * # Info
    *
@@ -4594,6 +6461,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Dismisses an approved or rejected pull request review.
    *
+   * ```graphql
+   * dismissPullRequestReview(input: DismissPullRequestReviewInput!): DismissPullRequestReviewPayload
+   *
+   * type DismissPullRequestReviewPayload {
+   *   clientMutationId: String
+   *   pullRequestReview: PullRequestReview
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -4626,6 +6502,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Dismisses the Dependabot alert.
+   *
+   * ```graphql
+   * dismissRepositoryVulnerabilityAlert(input: DismissRepositoryVulnerabilityAlertInput!): DismissRepositoryVulnerabilityAlertPayload
+   *
+   * type DismissRepositoryVulnerabilityAlertPayload {
+   *   clientMutationId: String
+   *   repositoryVulnerabilityAlert: RepositoryVulnerabilityAlert
+   * }
+   * ```
    *
    * # Info
    *
@@ -4660,6 +6545,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Enable the default auto-merge on a pull request.
    *
+   * ```graphql
+   * enablePullRequestAutoMerge(input: EnablePullRequestAutoMergeInput!): EnablePullRequestAutoMergePayload
+   *
+   * type EnablePullRequestAutoMergePayload {
+   *   actor: Actor
+   *   clientMutationId: String
+   *   pullRequest: PullRequest
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -4692,6 +6587,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Add a pull request to the merge queue.
+   *
+   * ```graphql
+   * enqueuePullRequest(input: EnqueuePullRequestInput!): EnqueuePullRequestPayload
+   *
+   * type EnqueuePullRequestPayload {
+   *   clientMutationId: String
+   *   mergeQueueEntry: MergeQueueEntry
+   * }
+   * ```
    *
    * # Info
    *
@@ -4726,6 +6630,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Follow an organization.
    *
+   * ```graphql
+   * followOrganization(input: FollowOrganizationInput!): FollowOrganizationPayload
+   *
+   * type FollowOrganizationPayload {
+   *   clientMutationId: String
+   *   organization: Organization
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -4758,6 +6671,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Follow a user.
+   *
+   * ```graphql
+   * followUser(input: FollowUserInput!): FollowUserPayload
+   *
+   * type FollowUserPayload {
+   *   clientMutationId: String
+   *   user: User
+   * }
+   * ```
    *
    * # Info
    *
@@ -4792,6 +6714,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Grant the migrator role to a user for all organizations under an enterprise account.
    *
+   * ```graphql
+   * grantEnterpriseOrganizationsMigratorRole(input: GrantEnterpriseOrganizationsMigratorRoleInput!): GrantEnterpriseOrganizationsMigratorRolePayload
+   *
+   * type GrantEnterpriseOrganizationsMigratorRolePayload {
+   *   clientMutationId: String
+   *   organizations(after: String, before: String, first: Int, last: Int): OrganizationConnection
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -4824,6 +6755,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Grant the migrator role to a user or a team.
+   *
+   * ```graphql
+   * grantMigratorRole(input: GrantMigratorRoleInput!): GrantMigratorRolePayload
+   *
+   * type GrantMigratorRolePayload {
+   *   clientMutationId: String
+   *   success: Boolean
+   * }
+   * ```
    *
    * # Info
    *
@@ -4858,6 +6798,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Creates a new project by importing columns and a list of issues/PRs.
    *
+   * ```graphql
+   * importProject(input: ImportProjectInput!): ImportProjectPayload
+   *
+   * type ImportProjectPayload {
+   *   clientMutationId: String
+   *   project: Project
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -4890,6 +6839,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Invite someone to become an administrator of the enterprise.
+   *
+   * ```graphql
+   * inviteEnterpriseAdmin(input: InviteEnterpriseAdminInput!): InviteEnterpriseAdminPayload
+   *
+   * type InviteEnterpriseAdminPayload {
+   *   clientMutationId: String
+   *   invitation: EnterpriseAdministratorInvitation
+   * }
+   * ```
    *
    * # Info
    *
@@ -4924,6 +6882,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Invite someone to become an unaffiliated member of the enterprise.
    *
+   * ```graphql
+   * inviteEnterpriseMember(input: InviteEnterpriseMemberInput!): InviteEnterpriseMemberPayload
+   *
+   * type InviteEnterpriseMemberPayload {
+   *   clientMutationId: String
+   *   invitation: EnterpriseMemberInvitation
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -4956,6 +6923,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Links a project to a repository.
+   *
+   * ```graphql
+   * linkProjectV2ToRepository(input: LinkProjectV2ToRepositoryInput!): LinkProjectV2ToRepositoryPayload
+   *
+   * type LinkProjectV2ToRepositoryPayload {
+   *   clientMutationId: String
+   *   repository: Repository
+   * }
+   * ```
    *
    * # Info
    *
@@ -4990,6 +6966,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Links a project to a team.
    *
+   * ```graphql
+   * linkProjectV2ToTeam(input: LinkProjectV2ToTeamInput!): LinkProjectV2ToTeamPayload
+   *
+   * type LinkProjectV2ToTeamPayload {
+   *   clientMutationId: String
+   *   team: Team
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -5022,6 +7007,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Creates a repository link for a project.
+   *
+   * ```graphql
+   * linkRepositoryToProject(input: LinkRepositoryToProjectInput!): LinkRepositoryToProjectPayload
+   *
+   * type LinkRepositoryToProjectPayload {
+   *   clientMutationId: String
+   *   project: Project
+   *   repository: Repository
+   * }
+   * ```
    *
    * # Info
    *
@@ -5056,6 +7051,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Lock a lockable object
    *
+   * ```graphql
+   * lockLockable(input: LockLockableInput!): LockLockablePayload
+   *
+   * type LockLockablePayload {
+   *   actor: Actor
+   *   clientMutationId: String
+   *   lockedRecord: Lockable
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -5088,6 +7093,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Mark a discussion comment as the chosen answer for discussions in an answerable category.
+   *
+   * ```graphql
+   * markDiscussionCommentAsAnswer(input: MarkDiscussionCommentAsAnswerInput!): MarkDiscussionCommentAsAnswerPayload
+   *
+   * type MarkDiscussionCommentAsAnswerPayload {
+   *   clientMutationId: String
+   *   discussion: Discussion
+   * }
+   * ```
    *
    * # Info
    *
@@ -5122,6 +7136,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Mark a pull request file as viewed
    *
+   * ```graphql
+   * markFileAsViewed(input: MarkFileAsViewedInput!): MarkFileAsViewedPayload
+   *
+   * type MarkFileAsViewedPayload {
+   *   clientMutationId: String
+   *   pullRequest: PullRequest
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -5154,6 +7177,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Mark a project as a template. Note that only projects which are owned by an Organization can be marked as a template.
+   *
+   * ```graphql
+   * markProjectV2AsTemplate(input: MarkProjectV2AsTemplateInput!): MarkProjectV2AsTemplatePayload
+   *
+   * type MarkProjectV2AsTemplatePayload {
+   *   clientMutationId: String
+   *   projectV2: ProjectV2
+   * }
+   * ```
    *
    * # Info
    *
@@ -5188,6 +7220,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Marks a pull request ready for review.
    *
+   * ```graphql
+   * markPullRequestReadyForReview(input: MarkPullRequestReadyForReviewInput!): MarkPullRequestReadyForReviewPayload
+   *
+   * type MarkPullRequestReadyForReviewPayload {
+   *   clientMutationId: String
+   *   pullRequest: PullRequest
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -5220,6 +7261,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Merge a head into a branch.
+   *
+   * ```graphql
+   * mergeBranch(input: MergeBranchInput!): MergeBranchPayload
+   *
+   * type MergeBranchPayload {
+   *   clientMutationId: String
+   *   mergeCommit: Commit
+   * }
+   * ```
    *
    * # Info
    *
@@ -5254,6 +7304,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Merge a pull request.
    *
+   * ```graphql
+   * mergePullRequest(input: MergePullRequestInput!): MergePullRequestPayload
+   *
+   * type MergePullRequestPayload {
+   *   actor: Actor
+   *   clientMutationId: String
+   *   pullRequest: PullRequest
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -5286,6 +7346,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Minimizes a comment on an Issue, Commit, Pull Request, or Gist
+   *
+   * ```graphql
+   * minimizeComment(input: MinimizeCommentInput!): MinimizeCommentPayload
+   *
+   * type MinimizeCommentPayload {
+   *   clientMutationId: String
+   *   minimizedComment: Minimizable
+   * }
+   * ```
    *
    * # Info
    *
@@ -5320,6 +7389,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Moves a project card to another place.
    *
+   * ```graphql
+   * moveProjectCard(input: MoveProjectCardInput!): MoveProjectCardPayload
+   *
+   * type MoveProjectCardPayload {
+   *   cardEdge: ProjectCardEdge
+   *   clientMutationId: String
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -5352,6 +7430,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Moves a project column to another place.
+   *
+   * ```graphql
+   * moveProjectColumn(input: MoveProjectColumnInput!): MoveProjectColumnPayload
+   *
+   * type MoveProjectColumnPayload {
+   *   clientMutationId: String
+   *   columnEdge: ProjectColumnEdge
+   * }
+   * ```
    *
    * # Info
    *
@@ -5386,6 +7473,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Pin an environment to a repository
    *
+   * ```graphql
+   * pinEnvironment(input: PinEnvironmentInput!): PinEnvironmentPayload
+   *
+   * type PinEnvironmentPayload {
+   *   clientMutationId: String
+   *   environment: Environment
+   *   pinnedEnvironment: PinnedEnvironment
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -5418,6 +7515,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Pin an issue to a repository
+   *
+   * ```graphql
+   * pinIssue(input: PinIssueInput!): PinIssuePayload
+   *
+   * type PinIssuePayload {
+   *   clientMutationId: String
+   *   issue: Issue
+   * }
+   * ```
    *
    * # Info
    *
@@ -5452,6 +7558,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Publish an existing sponsorship tier that is currently still a draft to a GitHub Sponsors profile.
    *
+   * ```graphql
+   * publishSponsorsTier(input: PublishSponsorsTierInput!): PublishSponsorsTierPayload
+   *
+   * type PublishSponsorsTierPayload {
+   *   clientMutationId: String
+   *   sponsorsTier: SponsorsTier
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -5484,6 +7599,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Regenerates the identity provider recovery codes for an enterprise
+   *
+   * ```graphql
+   * regenerateEnterpriseIdentityProviderRecoveryCodes(input: RegenerateEnterpriseIdentityProviderRecoveryCodesInput!): RegenerateEnterpriseIdentityProviderRecoveryCodesPayload
+   *
+   * type RegenerateEnterpriseIdentityProviderRecoveryCodesPayload {
+   *   clientMutationId: String
+   *   identityProvider: EnterpriseIdentityProvider
+   * }
+   * ```
    *
    * # Info
    *
@@ -5518,6 +7642,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Regenerates a verifiable domain's verification token.
    *
+   * ```graphql
+   * regenerateVerifiableDomainToken(input: RegenerateVerifiableDomainTokenInput!): RegenerateVerifiableDomainTokenPayload
+   *
+   * type RegenerateVerifiableDomainTokenPayload {
+   *   clientMutationId: String
+   *   verificationToken: String
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -5550,6 +7683,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Reject all pending deployments under one or more environments
+   *
+   * ```graphql
+   * rejectDeployments(input: RejectDeploymentsInput!): RejectDeploymentsPayload
+   *
+   * type RejectDeploymentsPayload {
+   *   clientMutationId: String
+   *   deployments: [Deployment!]
+   * }
+   * ```
    *
    * # Info
    *
@@ -5584,6 +7726,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Removes assignees from an assignable object.
    *
+   * ```graphql
+   * removeAssigneesFromAssignable(input: RemoveAssigneesFromAssignableInput!): RemoveAssigneesFromAssignablePayload
+   *
+   * type RemoveAssigneesFromAssignablePayload {
+   *   assignable: Assignable
+   *   clientMutationId: String
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -5616,6 +7767,18 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Removes an administrator from the enterprise.
+   *
+   * ```graphql
+   * removeEnterpriseAdmin(input: RemoveEnterpriseAdminInput!): RemoveEnterpriseAdminPayload
+   *
+   * type RemoveEnterpriseAdminPayload {
+   *   admin: User
+   *   clientMutationId: String
+   *   enterprise: Enterprise
+   *   message: String
+   *   viewer: User
+   * }
+   * ```
    *
    * # Info
    *
@@ -5651,6 +7814,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
    * Removes the identity provider from an enterprise. Owners of enterprises both
    * with and without Enterprise Managed Users may use this mutation.
    *
+   * ```graphql
+   * removeEnterpriseIdentityProvider(input: RemoveEnterpriseIdentityProviderInput!): RemoveEnterpriseIdentityProviderPayload
+   *
+   * type RemoveEnterpriseIdentityProviderPayload {
+   *   clientMutationId: String
+   *   identityProvider: EnterpriseIdentityProvider
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -5683,6 +7855,17 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Removes a user from all organizations within the enterprise
+   *
+   * ```graphql
+   * removeEnterpriseMember(input: RemoveEnterpriseMemberInput!): RemoveEnterpriseMemberPayload
+   *
+   * type RemoveEnterpriseMemberPayload {
+   *   clientMutationId: String
+   *   enterprise: Enterprise
+   *   user: User
+   *   viewer: User
+   * }
+   * ```
    *
    * # Info
    *
@@ -5717,6 +7900,17 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Removes an organization from the enterprise
    *
+   * ```graphql
+   * removeEnterpriseOrganization(input: RemoveEnterpriseOrganizationInput!): RemoveEnterpriseOrganizationPayload
+   *
+   * type RemoveEnterpriseOrganizationPayload {
+   *   clientMutationId: String
+   *   enterprise: Enterprise
+   *   organization: Organization
+   *   viewer: User
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -5749,6 +7943,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Removes a support entitlement from an enterprise member.
+   *
+   * ```graphql
+   * removeEnterpriseSupportEntitlement(input: RemoveEnterpriseSupportEntitlementInput!): RemoveEnterpriseSupportEntitlementPayload
+   *
+   * type RemoveEnterpriseSupportEntitlementPayload {
+   *   clientMutationId: String
+   *   message: String
+   * }
+   * ```
    *
    * # Info
    *
@@ -5783,6 +7986,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Removes labels from a Labelable object.
    *
+   * ```graphql
+   * removeLabelsFromLabelable(input: RemoveLabelsFromLabelableInput!): RemoveLabelsFromLabelablePayload
+   *
+   * type RemoveLabelsFromLabelablePayload {
+   *   clientMutationId: String
+   *   labelable: Labelable
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -5815,6 +8027,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Removes outside collaborator from all repositories in an organization.
+   *
+   * ```graphql
+   * removeOutsideCollaborator(input: RemoveOutsideCollaboratorInput!): RemoveOutsideCollaboratorPayload
+   *
+   * type RemoveOutsideCollaboratorPayload {
+   *   clientMutationId: String
+   *   removedUser: User
+   * }
+   * ```
    *
    * # Info
    *
@@ -5849,6 +8070,17 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Removes a reaction from a subject.
    *
+   * ```graphql
+   * removeReaction(input: RemoveReactionInput!): RemoveReactionPayload
+   *
+   * type RemoveReactionPayload {
+   *   clientMutationId: String
+   *   reaction: Reaction
+   *   reactionGroups: [ReactionGroup!]
+   *   subject: Reactable
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -5881,6 +8113,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Removes a star from a Starrable.
+   *
+   * ```graphql
+   * removeStar(input: RemoveStarInput!): RemoveStarPayload
+   *
+   * type RemoveStarPayload {
+   *   clientMutationId: String
+   *   starrable: Starrable
+   * }
+   * ```
    *
    * # Info
    *
@@ -5915,6 +8156,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Removes a sub-issue from a given issue
    *
+   * ```graphql
+   * removeSubIssue(input: RemoveSubIssueInput!): RemoveSubIssuePayload
+   *
+   * type RemoveSubIssuePayload {
+   *   clientMutationId: String
+   *   issue: Issue
+   *   subIssue: Issue
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -5947,6 +8198,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Remove an upvote to a discussion or discussion comment.
+   *
+   * ```graphql
+   * removeUpvote(input: RemoveUpvoteInput!): RemoveUpvotePayload
+   *
+   * type RemoveUpvotePayload {
+   *   clientMutationId: String
+   *   subject: Votable
+   * }
+   * ```
    *
    * # Info
    *
@@ -5981,6 +8241,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Reopen a discussion.
    *
+   * ```graphql
+   * reopenDiscussion(input: ReopenDiscussionInput!): ReopenDiscussionPayload
+   *
+   * type ReopenDiscussionPayload {
+   *   clientMutationId: String
+   *   discussion: Discussion
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -6013,6 +8282,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Reopen a issue.
+   *
+   * ```graphql
+   * reopenIssue(input: ReopenIssueInput!): ReopenIssuePayload
+   *
+   * type ReopenIssuePayload {
+   *   clientMutationId: String
+   *   issue: Issue
+   * }
+   * ```
    *
    * # Info
    *
@@ -6047,6 +8325,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Reopen a pull request.
    *
+   * ```graphql
+   * reopenPullRequest(input: ReopenPullRequestInput!): ReopenPullRequestPayload
+   *
+   * type ReopenPullRequestPayload {
+   *   clientMutationId: String
+   *   pullRequest: PullRequest
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -6079,6 +8366,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Reorder a pinned repository environment
+   *
+   * ```graphql
+   * reorderEnvironment(input: ReorderEnvironmentInput!): ReorderEnvironmentPayload
+   *
+   * type ReorderEnvironmentPayload {
+   *   clientMutationId: String
+   *   environment: Environment
+   * }
+   * ```
    *
    * # Info
    *
@@ -6113,6 +8409,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Reprioritizes a sub-issue to a different position in the parent list.
    *
+   * ```graphql
+   * reprioritizeSubIssue(input: ReprioritizeSubIssueInput!): ReprioritizeSubIssuePayload
+   *
+   * type ReprioritizeSubIssuePayload {
+   *   clientMutationId: String
+   *   issue: Issue
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -6145,6 +8450,17 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Set review requests on a pull request.
+   *
+   * ```graphql
+   * requestReviews(input: RequestReviewsInput!): RequestReviewsPayload
+   *
+   * type RequestReviewsPayload {
+   *   actor: Actor
+   *   clientMutationId: String
+   *   pullRequest: PullRequest
+   *   requestedReviewersEdge: UserEdge
+   * }
+   * ```
    *
    * # Info
    *
@@ -6179,6 +8495,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Rerequests an existing check suite.
    *
+   * ```graphql
+   * rerequestCheckSuite(input: RerequestCheckSuiteInput!): RerequestCheckSuitePayload
+   *
+   * type RerequestCheckSuitePayload {
+   *   checkSuite: CheckSuite
+   *   clientMutationId: String
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -6211,6 +8536,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Marks a review thread as resolved.
+   *
+   * ```graphql
+   * resolveReviewThread(input: ResolveReviewThreadInput!): ResolveReviewThreadPayload
+   *
+   * type ResolveReviewThreadPayload {
+   *   clientMutationId: String
+   *   thread: PullRequestReviewThread
+   * }
+   * ```
    *
    * # Info
    *
@@ -6245,6 +8579,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Retire a published payment tier from your GitHub Sponsors profile so it cannot be used to start new sponsorships.
    *
+   * ```graphql
+   * retireSponsorsTier(input: RetireSponsorsTierInput!): RetireSponsorsTierPayload
+   *
+   * type RetireSponsorsTierPayload {
+   *   clientMutationId: String
+   *   sponsorsTier: SponsorsTier
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -6277,6 +8620,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Create a pull request that reverts the changes from a merged pull request.
+   *
+   * ```graphql
+   * revertPullRequest(input: RevertPullRequestInput!): RevertPullRequestPayload
+   *
+   * type RevertPullRequestPayload {
+   *   clientMutationId: String
+   *   pullRequest: PullRequest
+   *   revertPullRequest: PullRequest
+   * }
+   * ```
    *
    * # Info
    *
@@ -6311,6 +8664,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Revoke the migrator role to a user for all organizations under an enterprise account.
    *
+   * ```graphql
+   * revokeEnterpriseOrganizationsMigratorRole(input: RevokeEnterpriseOrganizationsMigratorRoleInput!): RevokeEnterpriseOrganizationsMigratorRolePayload
+   *
+   * type RevokeEnterpriseOrganizationsMigratorRolePayload {
+   *   clientMutationId: String
+   *   organizations(after: String, before: String, first: Int, last: Int): OrganizationConnection
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -6343,6 +8705,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Revoke the migrator role from a user or a team.
+   *
+   * ```graphql
+   * revokeMigratorRole(input: RevokeMigratorRoleInput!): RevokeMigratorRolePayload
+   *
+   * type RevokeMigratorRolePayload {
+   *   clientMutationId: String
+   *   success: Boolean
+   * }
+   * ```
    *
    * # Info
    *
@@ -6377,6 +8748,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Creates or updates the identity provider for an enterprise.
    *
+   * ```graphql
+   * setEnterpriseIdentityProvider(input: SetEnterpriseIdentityProviderInput!): SetEnterpriseIdentityProviderPayload
+   *
+   * type SetEnterpriseIdentityProviderPayload {
+   *   clientMutationId: String
+   *   identityProvider: EnterpriseIdentityProvider
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -6409,6 +8789,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Set an organization level interaction limit for an organization's public repositories.
+   *
+   * ```graphql
+   * setOrganizationInteractionLimit(input: SetOrganizationInteractionLimitInput!): SetOrganizationInteractionLimitPayload
+   *
+   * type SetOrganizationInteractionLimitPayload {
+   *   clientMutationId: String
+   *   organization: Organization
+   * }
+   * ```
    *
    * # Info
    *
@@ -6443,6 +8832,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Sets an interaction limit setting for a repository.
    *
+   * ```graphql
+   * setRepositoryInteractionLimit(input: SetRepositoryInteractionLimitInput!): SetRepositoryInteractionLimitPayload
+   *
+   * type SetRepositoryInteractionLimitPayload {
+   *   clientMutationId: String
+   *   repository: Repository
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -6475,6 +8873,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Set a user level interaction limit for an user's public repositories.
+   *
+   * ```graphql
+   * setUserInteractionLimit(input: SetUserInteractionLimitInput!): SetUserInteractionLimitPayload
+   *
+   * type SetUserInteractionLimitPayload {
+   *   clientMutationId: String
+   *   user: User
+   * }
+   * ```
    *
    * # Info
    *
@@ -6509,6 +8916,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Starts a GitHub Enterprise Importer organization migration.
    *
+   * ```graphql
+   * startOrganizationMigration(input: StartOrganizationMigrationInput!): StartOrganizationMigrationPayload
+   *
+   * type StartOrganizationMigrationPayload {
+   *   clientMutationId: String
+   *   orgMigration: OrganizationMigration
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -6541,6 +8957,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Starts a GitHub Enterprise Importer (GEI) repository migration.
+   *
+   * ```graphql
+   * startRepositoryMigration(input: StartRepositoryMigrationInput!): StartRepositoryMigrationPayload
+   *
+   * type StartRepositoryMigrationPayload {
+   *   clientMutationId: String
+   *   repositoryMigration: RepositoryMigration
+   * }
+   * ```
    *
    * # Info
    *
@@ -6575,6 +9000,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Submits a pending pull request review.
    *
+   * ```graphql
+   * submitPullRequestReview(input: SubmitPullRequestReviewInput!): SubmitPullRequestReviewPayload
+   *
+   * type SubmitPullRequestReviewPayload {
+   *   clientMutationId: String
+   *   pullRequestReview: PullRequestReview
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -6607,6 +9041,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Transfer an organization from one enterprise to another enterprise.
+   *
+   * ```graphql
+   * transferEnterpriseOrganization(input: TransferEnterpriseOrganizationInput!): TransferEnterpriseOrganizationPayload
+   *
+   * type TransferEnterpriseOrganizationPayload {
+   *   clientMutationId: String
+   *   organization: Organization
+   * }
+   * ```
    *
    * # Info
    *
@@ -6641,6 +9084,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Transfer an issue to a different repository
    *
+   * ```graphql
+   * transferIssue(input: TransferIssueInput!): TransferIssuePayload
+   *
+   * type TransferIssuePayload {
+   *   clientMutationId: String
+   *   issue: Issue
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -6673,6 +9125,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Unarchives a ProjectV2Item
+   *
+   * ```graphql
+   * unarchiveProjectV2Item(input: UnarchiveProjectV2ItemInput!): UnarchiveProjectV2ItemPayload
+   *
+   * type UnarchiveProjectV2ItemPayload {
+   *   clientMutationId: String
+   *   item: ProjectV2Item
+   * }
+   * ```
    *
    * # Info
    *
@@ -6707,6 +9168,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Unarchives a repository.
    *
+   * ```graphql
+   * unarchiveRepository(input: UnarchiveRepositoryInput!): UnarchiveRepositoryPayload
+   *
+   * type UnarchiveRepositoryPayload {
+   *   clientMutationId: String
+   *   repository: Repository
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -6739,6 +9209,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Unfollow an organization.
+   *
+   * ```graphql
+   * unfollowOrganization(input: UnfollowOrganizationInput!): UnfollowOrganizationPayload
+   *
+   * type UnfollowOrganizationPayload {
+   *   clientMutationId: String
+   *   organization: Organization
+   * }
+   * ```
    *
    * # Info
    *
@@ -6773,6 +9252,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Unfollow a user.
    *
+   * ```graphql
+   * unfollowUser(input: UnfollowUserInput!): UnfollowUserPayload
+   *
+   * type UnfollowUserPayload {
+   *   clientMutationId: String
+   *   user: User
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -6805,6 +9293,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Unlinks a project from a repository.
+   *
+   * ```graphql
+   * unlinkProjectV2FromRepository(input: UnlinkProjectV2FromRepositoryInput!): UnlinkProjectV2FromRepositoryPayload
+   *
+   * type UnlinkProjectV2FromRepositoryPayload {
+   *   clientMutationId: String
+   *   repository: Repository
+   * }
+   * ```
    *
    * # Info
    *
@@ -6839,6 +9336,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Unlinks a project to a team.
    *
+   * ```graphql
+   * unlinkProjectV2FromTeam(input: UnlinkProjectV2FromTeamInput!): UnlinkProjectV2FromTeamPayload
+   *
+   * type UnlinkProjectV2FromTeamPayload {
+   *   clientMutationId: String
+   *   team: Team
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -6871,6 +9377,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Deletes a repository link from a project.
+   *
+   * ```graphql
+   * unlinkRepositoryFromProject(input: UnlinkRepositoryFromProjectInput!): UnlinkRepositoryFromProjectPayload
+   *
+   * type UnlinkRepositoryFromProjectPayload {
+   *   clientMutationId: String
+   *   project: Project
+   *   repository: Repository
+   * }
+   * ```
    *
    * # Info
    *
@@ -6905,6 +9421,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Unlock a lockable object
    *
+   * ```graphql
+   * unlockLockable(input: UnlockLockableInput!): UnlockLockablePayload
+   *
+   * type UnlockLockablePayload {
+   *   actor: Actor
+   *   clientMutationId: String
+   *   unlockedRecord: Lockable
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -6937,6 +9463,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Unmark a discussion comment as the chosen answer for discussions in an answerable category.
+   *
+   * ```graphql
+   * unmarkDiscussionCommentAsAnswer(input: UnmarkDiscussionCommentAsAnswerInput!): UnmarkDiscussionCommentAsAnswerPayload
+   *
+   * type UnmarkDiscussionCommentAsAnswerPayload {
+   *   clientMutationId: String
+   *   discussion: Discussion
+   * }
+   * ```
    *
    * # Info
    *
@@ -6971,6 +9506,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Unmark a pull request file as viewed
    *
+   * ```graphql
+   * unmarkFileAsViewed(input: UnmarkFileAsViewedInput!): UnmarkFileAsViewedPayload
+   *
+   * type UnmarkFileAsViewedPayload {
+   *   clientMutationId: String
+   *   pullRequest: PullRequest
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -7003,6 +9547,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Unmark an issue as a duplicate of another issue.
+   *
+   * ```graphql
+   * unmarkIssueAsDuplicate(input: UnmarkIssueAsDuplicateInput!): UnmarkIssueAsDuplicatePayload
+   *
+   * type UnmarkIssueAsDuplicatePayload {
+   *   clientMutationId: String
+   *   duplicate: IssueOrPullRequest
+   * }
+   * ```
    *
    * # Info
    *
@@ -7037,6 +9590,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Unmark a project as a template.
    *
+   * ```graphql
+   * unmarkProjectV2AsTemplate(input: UnmarkProjectV2AsTemplateInput!): UnmarkProjectV2AsTemplatePayload
+   *
+   * type UnmarkProjectV2AsTemplatePayload {
+   *   clientMutationId: String
+   *   projectV2: ProjectV2
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -7069,6 +9631,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Unminimizes a comment on an Issue, Commit, Pull Request, or Gist
+   *
+   * ```graphql
+   * unminimizeComment(input: UnminimizeCommentInput!): UnminimizeCommentPayload
+   *
+   * type UnminimizeCommentPayload {
+   *   clientMutationId: String
+   *   unminimizedComment: Minimizable
+   * }
+   * ```
    *
    * # Info
    *
@@ -7103,6 +9674,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Unpin a pinned issue from a repository
    *
+   * ```graphql
+   * unpinIssue(input: UnpinIssueInput!): UnpinIssuePayload
+   *
+   * type UnpinIssuePayload {
+   *   clientMutationId: String
+   *   id: ID
+   *   issue: Issue
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -7135,6 +9716,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Marks a review thread as unresolved.
+   *
+   * ```graphql
+   * unresolveReviewThread(input: UnresolveReviewThreadInput!): UnresolveReviewThreadPayload
+   *
+   * type UnresolveReviewThreadPayload {
+   *   clientMutationId: String
+   *   thread: PullRequestReviewThread
+   * }
+   * ```
    *
    * # Info
    *
@@ -7169,6 +9759,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Update a branch protection rule
    *
+   * ```graphql
+   * updateBranchProtectionRule(input: UpdateBranchProtectionRuleInput!): UpdateBranchProtectionRulePayload
+   *
+   * type UpdateBranchProtectionRulePayload {
+   *   branchProtectionRule: BranchProtectionRule
+   *   clientMutationId: String
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -7201,6 +9800,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Update a check run
+   *
+   * ```graphql
+   * updateCheckRun(input: UpdateCheckRunInput!): UpdateCheckRunPayload
+   *
+   * type UpdateCheckRunPayload {
+   *   checkRun: CheckRun
+   *   clientMutationId: String
+   * }
+   * ```
    *
    * # Info
    *
@@ -7235,6 +9843,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Modifies the settings of an existing check suite
    *
+   * ```graphql
+   * updateCheckSuitePreferences(input: UpdateCheckSuitePreferencesInput!): UpdateCheckSuitePreferencesPayload
+   *
+   * type UpdateCheckSuitePreferencesPayload {
+   *   clientMutationId: String
+   *   repository: Repository
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -7267,6 +9884,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Update a discussion
+   *
+   * ```graphql
+   * updateDiscussion(input: UpdateDiscussionInput!): UpdateDiscussionPayload
+   *
+   * type UpdateDiscussionPayload {
+   *   clientMutationId: String
+   *   discussion: Discussion
+   * }
+   * ```
    *
    * # Info
    *
@@ -7301,6 +9927,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Update the contents of a comment on a Discussion
    *
+   * ```graphql
+   * updateDiscussionComment(input: UpdateDiscussionCommentInput!): UpdateDiscussionCommentPayload
+   *
+   * type UpdateDiscussionCommentPayload {
+   *   clientMutationId: String
+   *   comment: DiscussionComment
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -7333,6 +9968,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Updates the role of an enterprise administrator.
+   *
+   * ```graphql
+   * updateEnterpriseAdministratorRole(input: UpdateEnterpriseAdministratorRoleInput!): UpdateEnterpriseAdministratorRolePayload
+   *
+   * type UpdateEnterpriseAdministratorRolePayload {
+   *   clientMutationId: String
+   *   message: String
+   * }
+   * ```
    *
    * # Info
    *
@@ -7367,6 +10011,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Sets whether private repository forks are enabled for an enterprise.
    *
+   * ```graphql
+   * updateEnterpriseAllowPrivateRepositoryForkingSetting(input: UpdateEnterpriseAllowPrivateRepositoryForkingSettingInput!): UpdateEnterpriseAllowPrivateRepositoryForkingSettingPayload
+   *
+   * type UpdateEnterpriseAllowPrivateRepositoryForkingSettingPayload {
+   *   clientMutationId: String
+   *   enterprise: Enterprise
+   *   message: String
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -7399,6 +10053,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Sets the base repository permission for organizations in an enterprise.
+   *
+   * ```graphql
+   * updateEnterpriseDefaultRepositoryPermissionSetting(input: UpdateEnterpriseDefaultRepositoryPermissionSettingInput!): UpdateEnterpriseDefaultRepositoryPermissionSettingPayload
+   *
+   * type UpdateEnterpriseDefaultRepositoryPermissionSettingPayload {
+   *   clientMutationId: String
+   *   enterprise: Enterprise
+   *   message: String
+   * }
+   * ```
    *
    * # Info
    *
@@ -7433,6 +10097,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Sets whether deploy keys are allowed to be created and used for an enterprise.
    *
+   * ```graphql
+   * updateEnterpriseDeployKeySetting(input: UpdateEnterpriseDeployKeySettingInput!): UpdateEnterpriseDeployKeySettingPayload
+   *
+   * type UpdateEnterpriseDeployKeySettingPayload {
+   *   clientMutationId: String
+   *   enterprise: Enterprise
+   *   message: String
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -7465,6 +10139,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Sets whether organization members with admin permissions on a repository can change repository visibility.
+   *
+   * ```graphql
+   * updateEnterpriseMembersCanChangeRepositoryVisibilitySetting(input: UpdateEnterpriseMembersCanChangeRepositoryVisibilitySettingInput!): UpdateEnterpriseMembersCanChangeRepositoryVisibilitySettingPayload
+   *
+   * type UpdateEnterpriseMembersCanChangeRepositoryVisibilitySettingPayload {
+   *   clientMutationId: String
+   *   enterprise: Enterprise
+   *   message: String
+   * }
+   * ```
    *
    * # Info
    *
@@ -7502,6 +10186,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Sets the members can create repositories setting for an enterprise.
    *
+   * ```graphql
+   * updateEnterpriseMembersCanCreateRepositoriesSetting(input: UpdateEnterpriseMembersCanCreateRepositoriesSettingInput!): UpdateEnterpriseMembersCanCreateRepositoriesSettingPayload
+   *
+   * type UpdateEnterpriseMembersCanCreateRepositoriesSettingPayload {
+   *   clientMutationId: String
+   *   enterprise: Enterprise
+   *   message: String
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -7534,6 +10228,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Sets the members can delete issues setting for an enterprise.
+   *
+   * ```graphql
+   * updateEnterpriseMembersCanDeleteIssuesSetting(input: UpdateEnterpriseMembersCanDeleteIssuesSettingInput!): UpdateEnterpriseMembersCanDeleteIssuesSettingPayload
+   *
+   * type UpdateEnterpriseMembersCanDeleteIssuesSettingPayload {
+   *   clientMutationId: String
+   *   enterprise: Enterprise
+   *   message: String
+   * }
+   * ```
    *
    * # Info
    *
@@ -7568,6 +10272,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Sets the members can delete repositories setting for an enterprise.
    *
+   * ```graphql
+   * updateEnterpriseMembersCanDeleteRepositoriesSetting(input: UpdateEnterpriseMembersCanDeleteRepositoriesSettingInput!): UpdateEnterpriseMembersCanDeleteRepositoriesSettingPayload
+   *
+   * type UpdateEnterpriseMembersCanDeleteRepositoriesSettingPayload {
+   *   clientMutationId: String
+   *   enterprise: Enterprise
+   *   message: String
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -7600,6 +10314,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Sets whether members can invite collaborators are enabled for an enterprise.
+   *
+   * ```graphql
+   * updateEnterpriseMembersCanInviteCollaboratorsSetting(input: UpdateEnterpriseMembersCanInviteCollaboratorsSettingInput!): UpdateEnterpriseMembersCanInviteCollaboratorsSettingPayload
+   *
+   * type UpdateEnterpriseMembersCanInviteCollaboratorsSettingPayload {
+   *   clientMutationId: String
+   *   enterprise: Enterprise
+   *   message: String
+   * }
+   * ```
    *
    * # Info
    *
@@ -7634,6 +10358,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Sets whether or not an organization owner can make purchases.
    *
+   * ```graphql
+   * updateEnterpriseMembersCanMakePurchasesSetting(input: UpdateEnterpriseMembersCanMakePurchasesSettingInput!): UpdateEnterpriseMembersCanMakePurchasesSettingPayload
+   *
+   * type UpdateEnterpriseMembersCanMakePurchasesSettingPayload {
+   *   clientMutationId: String
+   *   enterprise: Enterprise
+   *   message: String
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -7666,6 +10400,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Sets the members can update protected branches setting for an enterprise.
+   *
+   * ```graphql
+   * updateEnterpriseMembersCanUpdateProtectedBranchesSetting(input: UpdateEnterpriseMembersCanUpdateProtectedBranchesSettingInput!): UpdateEnterpriseMembersCanUpdateProtectedBranchesSettingPayload
+   *
+   * type UpdateEnterpriseMembersCanUpdateProtectedBranchesSettingPayload {
+   *   clientMutationId: String
+   *   enterprise: Enterprise
+   *   message: String
+   * }
+   * ```
    *
    * # Info
    *
@@ -7703,6 +10447,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Sets the members can view dependency insights for an enterprise.
    *
+   * ```graphql
+   * updateEnterpriseMembersCanViewDependencyInsightsSetting(input: UpdateEnterpriseMembersCanViewDependencyInsightsSettingInput!): UpdateEnterpriseMembersCanViewDependencyInsightsSettingPayload
+   *
+   * type UpdateEnterpriseMembersCanViewDependencyInsightsSettingPayload {
+   *   clientMutationId: String
+   *   enterprise: Enterprise
+   *   message: String
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -7738,6 +10492,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Sets whether organization projects are enabled for an enterprise.
    *
+   * ```graphql
+   * updateEnterpriseOrganizationProjectsSetting(input: UpdateEnterpriseOrganizationProjectsSettingInput!): UpdateEnterpriseOrganizationProjectsSettingPayload
+   *
+   * type UpdateEnterpriseOrganizationProjectsSettingPayload {
+   *   clientMutationId: String
+   *   enterprise: Enterprise
+   *   message: String
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -7770,6 +10534,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Updates the role of an enterprise owner with an organization.
+   *
+   * ```graphql
+   * updateEnterpriseOwnerOrganizationRole(input: UpdateEnterpriseOwnerOrganizationRoleInput!): UpdateEnterpriseOwnerOrganizationRolePayload
+   *
+   * type UpdateEnterpriseOwnerOrganizationRolePayload {
+   *   clientMutationId: String
+   *   message: String
+   * }
+   * ```
    *
    * # Info
    *
@@ -7804,6 +10577,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Updates an enterprise's profile.
    *
+   * ```graphql
+   * updateEnterpriseProfile(input: UpdateEnterpriseProfileInput!): UpdateEnterpriseProfilePayload
+   *
+   * type UpdateEnterpriseProfilePayload {
+   *   clientMutationId: String
+   *   enterprise: Enterprise
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -7836,6 +10618,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Sets whether repository projects are enabled for a enterprise.
+   *
+   * ```graphql
+   * updateEnterpriseRepositoryProjectsSetting(input: UpdateEnterpriseRepositoryProjectsSettingInput!): UpdateEnterpriseRepositoryProjectsSettingPayload
+   *
+   * type UpdateEnterpriseRepositoryProjectsSettingPayload {
+   *   clientMutationId: String
+   *   enterprise: Enterprise
+   *   message: String
+   * }
+   * ```
    *
    * # Info
    *
@@ -7870,6 +10662,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Sets whether team discussions are enabled for an enterprise.
    *
+   * ```graphql
+   * updateEnterpriseTeamDiscussionsSetting(input: UpdateEnterpriseTeamDiscussionsSettingInput!): UpdateEnterpriseTeamDiscussionsSettingPayload
+   *
+   * type UpdateEnterpriseTeamDiscussionsSettingPayload {
+   *   clientMutationId: String
+   *   enterprise: Enterprise
+   *   message: String
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -7902,6 +10704,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Sets the two-factor authentication methods that users of an enterprise may not use.
+   *
+   * ```graphql
+   * updateEnterpriseTwoFactorAuthenticationDisallowedMethodsSetting(input: UpdateEnterpriseTwoFactorAuthenticationDisallowedMethodsSettingInput!): UpdateEnterpriseTwoFactorAuthenticationDisallowedMethodsSettingPayload
+   *
+   * type UpdateEnterpriseTwoFactorAuthenticationDisallowedMethodsSettingPayload {
+   *   clientMutationId: String
+   *   enterprise: Enterprise
+   *   message: String
+   * }
+   * ```
    *
    * # Info
    *
@@ -7939,6 +10751,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Sets whether two factor authentication is required for all users in an enterprise.
    *
+   * ```graphql
+   * updateEnterpriseTwoFactorAuthenticationRequiredSetting(input: UpdateEnterpriseTwoFactorAuthenticationRequiredSettingInput!): UpdateEnterpriseTwoFactorAuthenticationRequiredSettingPayload
+   *
+   * type UpdateEnterpriseTwoFactorAuthenticationRequiredSettingPayload {
+   *   clientMutationId: String
+   *   enterprise: Enterprise
+   *   message: String
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -7974,6 +10796,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Updates an environment.
    *
+   * ```graphql
+   * updateEnvironment(input: UpdateEnvironmentInput!): UpdateEnvironmentPayload
+   *
+   * type UpdateEnvironmentPayload {
+   *   clientMutationId: String
+   *   environment: Environment
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -8006,6 +10837,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Sets whether an IP allow list is enabled on an owner.
+   *
+   * ```graphql
+   * updateIpAllowListEnabledSetting(input: UpdateIpAllowListEnabledSettingInput!): UpdateIpAllowListEnabledSettingPayload
+   *
+   * type UpdateIpAllowListEnabledSettingPayload {
+   *   clientMutationId: String
+   *   owner: IpAllowListOwner
+   * }
+   * ```
    *
    * # Info
    *
@@ -8040,6 +10880,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Updates an IP allow list entry.
    *
+   * ```graphql
+   * updateIpAllowListEntry(input: UpdateIpAllowListEntryInput!): UpdateIpAllowListEntryPayload
+   *
+   * type UpdateIpAllowListEntryPayload {
+   *   clientMutationId: String
+   *   ipAllowListEntry: IpAllowListEntry
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -8072,6 +10921,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Sets whether IP allow list configuration for installed GitHub Apps is enabled on an owner.
+   *
+   * ```graphql
+   * updateIpAllowListForInstalledAppsEnabledSetting(input: UpdateIpAllowListForInstalledAppsEnabledSettingInput!): UpdateIpAllowListForInstalledAppsEnabledSettingPayload
+   *
+   * type UpdateIpAllowListForInstalledAppsEnabledSettingPayload {
+   *   clientMutationId: String
+   *   owner: IpAllowListOwner
+   * }
+   * ```
    *
    * # Info
    *
@@ -8106,6 +10964,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Updates an Issue.
    *
+   * ```graphql
+   * updateIssue(input: UpdateIssueInput!): UpdateIssuePayload
+   *
+   * type UpdateIssuePayload {
+   *   actor: Actor
+   *   clientMutationId: String
+   *   issue: Issue
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -8138,6 +11006,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Updates an IssueComment object.
+   *
+   * ```graphql
+   * updateIssueComment(input: UpdateIssueCommentInput!): UpdateIssueCommentPayload
+   *
+   * type UpdateIssueCommentPayload {
+   *   clientMutationId: String
+   *   issueComment: IssueComment
+   * }
+   * ```
    *
    * # Info
    *
@@ -8172,6 +11049,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Updates an existing label.
    *
+   * ```graphql
+   * updateLabel(input: UpdateLabelInput!): UpdateLabelPayload
+   *
+   * type UpdateLabelPayload {
+   *   clientMutationId: String
+   *   label: Label
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -8205,6 +11091,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Update the setting to restrict notifications to only verified or approved domains available to an owner.
    *
+   * ```graphql
+   * updateNotificationRestrictionSetting(input: UpdateNotificationRestrictionSettingInput!): UpdateNotificationRestrictionSettingPayload
+   *
+   * type UpdateNotificationRestrictionSettingPayload {
+   *   clientMutationId: String
+   *   owner: VerifiableDomainOwner
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -8237,6 +11132,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Sets whether private repository forks are enabled for an organization.
+   *
+   * ```graphql
+   * updateOrganizationAllowPrivateRepositoryForkingSetting(input: UpdateOrganizationAllowPrivateRepositoryForkingSettingInput!): UpdateOrganizationAllowPrivateRepositoryForkingSettingPayload
+   *
+   * type UpdateOrganizationAllowPrivateRepositoryForkingSettingPayload {
+   *   clientMutationId: String
+   *   message: String
+   *   organization: Organization
+   * }
+   * ```
    *
    * # Info
    *
@@ -8272,6 +11177,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Sets whether contributors are required to sign off on web-based commits for repositories in an organization.
+   *
+   * ```graphql
+   * updateOrganizationWebCommitSignoffSetting(input: UpdateOrganizationWebCommitSignoffSettingInput!): UpdateOrganizationWebCommitSignoffSettingPayload
+   *
+   * type UpdateOrganizationWebCommitSignoffSettingPayload {
+   *   clientMutationId: String
+   *   message: String
+   *   organization: Organization
+   * }
+   * ```
    *
    * # Info
    *
@@ -8309,6 +11224,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
    * Only applicable when you have a GitHub Sponsors profile and have connected
    * your GitHub account with Patreon.
    *
+   * ```graphql
+   * updatePatreonSponsorability(input: UpdatePatreonSponsorabilityInput!): UpdatePatreonSponsorabilityPayload
+   *
+   * type UpdatePatreonSponsorabilityPayload {
+   *   clientMutationId: String
+   *   sponsorsListing: SponsorsListing
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -8341,6 +11265,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Updates an existing project.
+   *
+   * ```graphql
+   * updateProject(input: UpdateProjectInput!): UpdateProjectPayload
+   *
+   * type UpdateProjectPayload {
+   *   clientMutationId: String
+   *   project: Project
+   * }
+   * ```
    *
    * # Info
    *
@@ -8375,6 +11308,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Updates an existing project card.
    *
+   * ```graphql
+   * updateProjectCard(input: UpdateProjectCardInput!): UpdateProjectCardPayload
+   *
+   * type UpdateProjectCardPayload {
+   *   clientMutationId: String
+   *   projectCard: ProjectCard
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -8407,6 +11349,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Updates an existing project column.
+   *
+   * ```graphql
+   * updateProjectColumn(input: UpdateProjectColumnInput!): UpdateProjectColumnPayload
+   *
+   * type UpdateProjectColumnPayload {
+   *   clientMutationId: String
+   *   projectColumn: ProjectColumn
+   * }
+   * ```
    *
    * # Info
    *
@@ -8441,6 +11392,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Updates an existing project.
    *
+   * ```graphql
+   * updateProjectV2(input: UpdateProjectV2Input!): UpdateProjectV2Payload
+   *
+   * type UpdateProjectV2Payload {
+   *   clientMutationId: String
+   *   projectV2: ProjectV2
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -8473,6 +11433,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Update the collaborators on a team or a project
+   *
+   * ```graphql
+   * updateProjectV2Collaborators(input: UpdateProjectV2CollaboratorsInput!): UpdateProjectV2CollaboratorsPayload
+   *
+   * type UpdateProjectV2CollaboratorsPayload {
+   *   clientMutationId: String
+   *   collaborators(after: String, before: String, first: Int, last: Int): ProjectV2ActorConnection
+   * }
+   * ```
    *
    * # Info
    *
@@ -8507,6 +11476,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Updates a draft issue within a Project.
    *
+   * ```graphql
+   * updateProjectV2DraftIssue(input: UpdateProjectV2DraftIssueInput!): UpdateProjectV2DraftIssuePayload
+   *
+   * type UpdateProjectV2DraftIssuePayload {
+   *   clientMutationId: String
+   *   draftIssue: DraftIssue
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -8539,6 +11517,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Update a project field.
+   *
+   * ```graphql
+   * updateProjectV2Field(input: UpdateProjectV2FieldInput!): UpdateProjectV2FieldPayload
+   *
+   * type UpdateProjectV2FieldPayload {
+   *   clientMutationId: String
+   *   projectV2Field: ProjectV2FieldConfiguration
+   * }
+   * ```
    *
    * # Info
    *
@@ -8574,6 +11561,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
    * This mutation updates the value of a field for an item in a Project. Currently
    * only single-select, text, number, date, and iteration fields are supported.
    *
+   * ```graphql
+   * updateProjectV2ItemFieldValue(input: UpdateProjectV2ItemFieldValueInput!): UpdateProjectV2ItemFieldValuePayload
+   *
+   * type UpdateProjectV2ItemFieldValuePayload {
+   *   clientMutationId: String
+   *   projectV2Item: ProjectV2Item
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -8606,6 +11602,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * This mutation updates the position of the item in the project, where the position represents the priority of an item.
+   *
+   * ```graphql
+   * updateProjectV2ItemPosition(input: UpdateProjectV2ItemPositionInput!): UpdateProjectV2ItemPositionPayload
+   *
+   * type UpdateProjectV2ItemPositionPayload {
+   *   clientMutationId: String
+   *   items(after: String, before: String, first: Int, last: Int): ProjectV2ItemConnection
+   * }
+   * ```
    *
    * # Info
    *
@@ -8640,6 +11645,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Updates a status update within a Project.
    *
+   * ```graphql
+   * updateProjectV2StatusUpdate(input: UpdateProjectV2StatusUpdateInput!): UpdateProjectV2StatusUpdatePayload
+   *
+   * type UpdateProjectV2StatusUpdatePayload {
+   *   clientMutationId: String
+   *   statusUpdate: ProjectV2StatusUpdate
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -8672,6 +11686,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Update a pull request
+   *
+   * ```graphql
+   * updatePullRequest(input: UpdatePullRequestInput!): UpdatePullRequestPayload
+   *
+   * type UpdatePullRequestPayload {
+   *   actor: Actor
+   *   clientMutationId: String
+   *   pullRequest: PullRequest
+   * }
+   * ```
    *
    * # Info
    *
@@ -8706,6 +11730,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Merge or Rebase HEAD from upstream branch into pull request branch
    *
+   * ```graphql
+   * updatePullRequestBranch(input: UpdatePullRequestBranchInput!): UpdatePullRequestBranchPayload
+   *
+   * type UpdatePullRequestBranchPayload {
+   *   clientMutationId: String
+   *   pullRequest: PullRequest
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -8738,6 +11771,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Updates the body of a pull request review.
+   *
+   * ```graphql
+   * updatePullRequestReview(input: UpdatePullRequestReviewInput!): UpdatePullRequestReviewPayload
+   *
+   * type UpdatePullRequestReviewPayload {
+   *   clientMutationId: String
+   *   pullRequestReview: PullRequestReview
+   * }
+   * ```
    *
    * # Info
    *
@@ -8772,6 +11814,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Updates a pull request review comment.
    *
+   * ```graphql
+   * updatePullRequestReviewComment(input: UpdatePullRequestReviewCommentInput!): UpdatePullRequestReviewCommentPayload
+   *
+   * type UpdatePullRequestReviewCommentPayload {
+   *   clientMutationId: String
+   *   pullRequestReviewComment: PullRequestReviewComment
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -8804,6 +11855,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Update a Git Ref.
+   *
+   * ```graphql
+   * updateRef(input: UpdateRefInput!): UpdateRefPayload
+   *
+   * type UpdateRefPayload {
+   *   clientMutationId: String
+   *   ref: Ref
+   * }
+   * ```
    *
    * # Info
    *
@@ -8855,6 +11915,14 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
    * If `RefUpdate.force` is set to `true`, a non-fast-forward updates
    * for the given reference will be allowed.
    *
+   * ```graphql
+   * updateRefs(input: UpdateRefsInput!): UpdateRefsPayload
+   *
+   * type UpdateRefsPayload {
+   *   clientMutationId: String
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -8887,6 +11955,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Update information about a repository.
+   *
+   * ```graphql
+   * updateRepository(input: UpdateRepositoryInput!): UpdateRepositoryPayload
+   *
+   * type UpdateRepositoryPayload {
+   *   clientMutationId: String
+   *   repository: Repository
+   * }
+   * ```
    *
    * # Info
    *
@@ -8921,6 +11998,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Update a repository ruleset
    *
+   * ```graphql
+   * updateRepositoryRuleset(input: UpdateRepositoryRulesetInput!): UpdateRepositoryRulesetPayload
+   *
+   * type UpdateRepositoryRulesetPayload {
+   *   clientMutationId: String
+   *   ruleset: RepositoryRuleset
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -8953,6 +12039,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Sets whether contributors are required to sign off on web-based commits for a repository.
+   *
+   * ```graphql
+   * updateRepositoryWebCommitSignoffSetting(input: UpdateRepositoryWebCommitSignoffSettingInput!): UpdateRepositoryWebCommitSignoffSettingPayload
+   *
+   * type UpdateRepositoryWebCommitSignoffSettingPayload {
+   *   clientMutationId: String
+   *   message: String
+   *   repository: Repository
+   * }
+   * ```
    *
    * # Info
    *
@@ -8987,6 +12083,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Change visibility of your sponsorship and opt in or out of email updates from the maintainer.
    *
+   * ```graphql
+   * updateSponsorshipPreferences(input: UpdateSponsorshipPreferencesInput!): UpdateSponsorshipPreferencesPayload
+   *
+   * type UpdateSponsorshipPreferencesPayload {
+   *   clientMutationId: String
+   *   sponsorship: Sponsorship
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -9019,6 +12124,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Updates the state for subscribable subjects.
+   *
+   * ```graphql
+   * updateSubscription(input: UpdateSubscriptionInput!): UpdateSubscriptionPayload
+   *
+   * type UpdateSubscriptionPayload {
+   *   clientMutationId: String
+   *   subscribable: Subscribable
+   * }
+   * ```
    *
    * # Info
    *
@@ -9053,6 +12167,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Updates a team discussion.
    *
+   * ```graphql
+   * updateTeamDiscussion(input: UpdateTeamDiscussionInput!): UpdateTeamDiscussionPayload
+   *
+   * type UpdateTeamDiscussionPayload {
+   *   clientMutationId: String
+   *   teamDiscussion: TeamDiscussion
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -9085,6 +12208,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Updates a discussion comment.
+   *
+   * ```graphql
+   * updateTeamDiscussionComment(input: UpdateTeamDiscussionCommentInput!): UpdateTeamDiscussionCommentPayload
+   *
+   * type UpdateTeamDiscussionCommentPayload {
+   *   clientMutationId: String
+   *   teamDiscussionComment: TeamDiscussionComment
+   * }
+   * ```
    *
    * # Info
    *
@@ -9119,6 +12251,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Updates team review assignment.
    *
+   * ```graphql
+   * updateTeamReviewAssignment(input: UpdateTeamReviewAssignmentInput!): UpdateTeamReviewAssignmentPayload
+   *
+   * type UpdateTeamReviewAssignmentPayload {
+   *   clientMutationId: String
+   *   team: Team
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -9151,6 +12292,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Update team repository.
+   *
+   * ```graphql
+   * updateTeamsRepository(input: UpdateTeamsRepositoryInput!): UpdateTeamsRepositoryPayload
+   *
+   * type UpdateTeamsRepositoryPayload {
+   *   clientMutationId: String
+   *   repository: Repository
+   *   teams: [Team!]
+   * }
+   * ```
    *
    * # Info
    *
@@ -9185,6 +12336,16 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Replaces the repository's topics with the given topics.
    *
+   * ```graphql
+   * updateTopics(input: UpdateTopicsInput!): UpdateTopicsPayload
+   *
+   * type UpdateTopicsPayload {
+   *   clientMutationId: String
+   *   invalidTopicNames: [String!]
+   *   repository: Repository
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -9217,6 +12378,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Updates an existing user list.
+   *
+   * ```graphql
+   * updateUserList(input: UpdateUserListInput!): UpdateUserListPayload
+   *
+   * type UpdateUserListPayload {
+   *   clientMutationId: String
+   *   list: UserList
+   * }
+   * ```
    *
    * # Info
    *
@@ -9251,6 +12421,17 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   /**
    * Updates which of the viewer's lists an item belongs to
    *
+   * ```graphql
+   * updateUserListsForItem(input: UpdateUserListsForItemInput!): UpdateUserListsForItemPayload
+   *
+   * type UpdateUserListsForItemPayload {
+   *   clientMutationId: String
+   *   item: UserListItems
+   *   lists: [UserList!]
+   *   user: User
+   * }
+   * ```
+   *
    * # Info
    *
    * | | |
@@ -9283,6 +12464,15 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   >
   /**
    * Verify that a verifiable domain has the expected DNS record.
+   *
+   * ```graphql
+   * verifyVerifiableDomain(input: VerifyVerifiableDomainInput!): VerifyVerifiableDomainPayload
+   *
+   * type VerifyVerifiableDomainPayload {
+   *   clientMutationId: String
+   *   domain: VerifiableDomain
+   * }
+   * ```
    *
    * # Info
    *
@@ -9317,7 +12507,48 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
 }
 
 export interface BuilderMethodsRoot<$Context extends $$Utilities.Context> {
+  /**
+   * Access to {@link https://graphql.org/learn/schema/#the-query-and-mutation-types | Query} root field methods.
+   *
+   * Each method corresponds to a root field on the GraphQL schema and returns a Promise.
+   * Use `.$batch(...)` to select multiple query fields in a single request.
+   *
+   * @example Single field
+   * ```ts
+   * const user = await graffle.query.user({ id: true, name: true })
+   * ```
+   *
+   * @example Multiple fields with $batch
+   * ```ts
+   * const data = await graffle.query.$batch({
+   *   user: { id: true, name: true },
+   *   posts: { title: true, content: true }
+   * })
+   * ```
+   */
   query: QueryMethods<$Context>
+  /**
+   * Access to {@link https://graphql.org/learn/schema/#the-mutation-and-mutation-types | Mutation} root field methods.
+   *
+   * Each method corresponds to a root field on the GraphQL schema and returns a Promise.
+   * Use `.$batch(...)` to select multiple mutation fields in a single request.
+   *
+   * @example Single field
+   * ```ts
+   * const result = await graffle.mutation.createUser({
+   *   id: true,
+   *   name: true
+   * })
+   * ```
+   *
+   * @example Multiple fields with $batch
+   * ```ts
+   * const data = await graffle.mutation.$batch({
+   *   createUser: { id: true, name: true },
+   *   createPost: { id: true, title: true }
+   * })
+   * ```
+   */
   mutation: MutationMethods<$Context>
 }
 

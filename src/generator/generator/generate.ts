@@ -42,7 +42,13 @@ const moduleGenerators = [
   ModuleGeneratorMethodsDocument,
 ]
 
-export const generate = async (init: ConfigInit): Promise<Config> => {
+/**
+ * Generate modules in memory without writing to filesystem.
+ * Useful for testing and programmatic access to generated code.
+ *
+ * @returns Generated modules with their content and metadata
+ */
+export const generateModules = async (init: ConfigInit) => {
   const config = await createConfig(init)
 
   const generatedModules = await Promise.all(
@@ -51,11 +57,36 @@ export const generate = async (init: ConfigInit): Promise<Config> => {
         const result = generator.generate(config)
         return Array.isArray(result) ? result : [result]
       })
-      .map(async code => ({
-        ...code,
-        content: await config.formatter.formatText(code.content),
-      })),
+      .map(async code => {
+        try {
+          return {
+            ...code,
+            content: await config.formatter.formatText(code.content),
+          }
+        } catch (error) {
+          console.error(`Warning: Failed to format ${code.name}. Continuing with unformatted content.`)
+          console.error(`Error:`, error instanceof Error ? error.message : String(error))
+          return {
+            ...code,
+            content: code.content,
+          }
+        }
+      }),
   )
+
+  return {
+    config,
+    modules: generatedModules,
+  }
+}
+
+/**
+ * Generate modules and write them to the filesystem.
+ *
+ * @returns The configuration used for generation
+ */
+export const generate = async (init: ConfigInit): Promise<Config> => {
+  const { config, modules: generatedModules } = await generateModules(init)
 
   // todo clear directory before generating so that removed or renamed files are cleaned up.
   await config.fs.mkdir(config.paths.project.outputs.root, { recursive: true })
