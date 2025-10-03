@@ -10,10 +10,10 @@ After running the generator, import `query`, `mutation`, or `subscription` build
 import { $ } from 'graffle/extensions/document-builder'
 import { Graffle } from './graffle/$.js'
 
-const doc = Graffle.query.user({
-  $: { id: $ }, // Variables automatically extracted
+const doc = Graffle.query.trainerByName({
+  $: { name: $ }, // Variables automatically extracted
   name: true,
-  email: true,
+  class: true,
 })
 
 // doc.document → GraphQL string
