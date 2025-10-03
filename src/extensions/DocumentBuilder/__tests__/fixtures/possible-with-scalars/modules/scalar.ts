@@ -1,4 +1,4 @@
-import type * as $$Utilities from '../../../../../../exports/utilities-for-generated.js'
+import type * as $$Utilities from '#graffle/utilities-for-generated'
 import * as CustomScalars from '../../possible.scalars.js'
 //
 //
@@ -35,7 +35,7 @@ export { $bigint as bigint }
 export type bigintDecoded = $$Utilities.Schema.Scalar.GetDecoded<$bigint>
 export type bigintEncoded = $$Utilities.Schema.Scalar.GetEncoded<$bigint>
 
-export * from '../../../../../../types/Schema/StandardTypes/scalar.js'
+export * from '#graffle/generator-helpers/standard-scalar-types'
 
 //
 //

@@ -146,7 +146,7 @@
     "@types/body-parser": "^1.19.5",
     "@types/express": "^5.0.1",
     "@types/node": "^22.14.1",
-    "@wollybeard/kit": "^0.66.0",
+    "@wollybeard/kit": "^0.67.0",
     "async-cleanup": "^1.0.0",
     "dprint": "^0.50.2",
     "dripip": "^0.10.0",
@@ -174,7 +174,35 @@
   "imports": {
     "#*": {
       "default": "./build/*"
-    }
+    },
+    "#graffle": "./src/exports/index.js",
+    "#graffle/client": "./src/exports/client.js",
+    "#graffle/extension": "./src/exports/extension.js",
+    "#graffle/generator": "./src/exports/generator.js",
+    "#graffle/kit": "./src/exports/kit.js",
+    "#graffle/schema": "./src/exports/schema.js",
+    "#graffle/utilities-for-generated": "./src/exports/utilities-for-generated.js",
+    "#graffle/generator-helpers/standard-scalar-types": "./src/types/Schema/StandardTypes/scalar.js",
+    "#graffle/extensions/transport-http": "./src/exports/extensions/transport-http/runtime.js",
+    "#graffle/extensions/document-builder": "./src/exports/extensions/document-builder/runtime.js",
+    "#lib/anyware": "./src/lib/anyware/$.js",
+    "#lib/config-manager": "./src/lib/config-manager/$.js",
+    "#lib/errors": "./src/lib/errors/$.js",
+    "#lib/grafaid": "./src/lib/grafaid/$.js",
+    "#lib/md-jsdoc": "./src/lib/md-jsdoc/$.js",
+    "#lib/tex": "./src/lib/tex/$.js",
+    "#lib/type-function": "./src/lib/type-function/$.js",
+    "graffle": "./src/exports/index.js",
+    "graffle/client": "./src/exports/client.js",
+    "graffle/extension": "./src/exports/extension.js",
+    "graffle/generator": "./src/exports/generator.js",
+    "graffle/kit": "./src/exports/kit.js",
+    "graffle/schema": "./src/exports/schema.js",
+    "graffle/utilities-for-generated": "./src/exports/utilities-for-generated.js",
+    "graffle/generator-helpers/standard-scalar-types": "./src/types/Schema/StandardTypes/scalar.js",
+    "#tests/fixtures/possible/client": "./tests/_/fixtures/schemas/possible/client.js",
+    "#tests/fixtures/pokemon/client": "./tests/_/fixtures/schemas/pokemon/client.js",
+    "#tests/fixtures/minimal/client": "./tests/_/fixtures/schemas/minimal/client.js"
   },
   "libra": {
     "entities": {

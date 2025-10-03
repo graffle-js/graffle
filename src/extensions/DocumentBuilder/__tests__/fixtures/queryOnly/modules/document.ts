@@ -1,11 +1,11 @@
+import type { TypedDocument } from '#graffle/client'
+import { createStaticRootType } from '#graffle/extensions/document-builder'
 import { OperationTypeNode } from 'graphql'
-import type { TypedDocument } from '../../../../../../exports/client.js'
-import { createStaticRootType } from '../../../../../../exports/extensions/document-builder/runtime.js'
 import type * as ArgumentsMap from './arguments-map.js'
 import type * as $$Scalar from './scalar.js'
 import type * as SelectionSets from './selection-sets.js'
 
-import type * as $$Utilities from '../../../../../../exports/utilities-for-generated.js'
+import type * as $$Utilities from '#graffle/utilities-for-generated'
 import type * as $$Schema from './schema/$.js'
 
 /**

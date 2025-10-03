@@ -12,11 +12,11 @@ export default Generator
       missingCustomScalarCodec: false,
     },
     libraryPaths: {
-      client: `../../../src/exports/client.ts`,
-      schema: `../../../src/exports/schema.ts`,
-      scalars: `../../../src/types/Schema/StandardTypes/scalar.ts`,
-      utilitiesForGenerated: `../../../src/exports/utilities-for-generated.ts`,
-      extensionTransportHttp: `../../../src/exports/extensions/transport-http/runtime.ts`,
-      extensionDocumentBuilder: `../../../src/exports/extensions/document-builder/runtime.ts`,
+      client: `#graffle/client`,
+      schema: `#graffle/schema`,
+      scalars: `#graffle/generator-helpers/standard-scalar-types`,
+      utilitiesForGenerated: `#graffle/utilities-for-generated`,
+      extensionTransportHttp: `#graffle/extensions/transport-http`,
+      extensionDocumentBuilder: `#graffle/extensions/document-builder`,
     },
   })

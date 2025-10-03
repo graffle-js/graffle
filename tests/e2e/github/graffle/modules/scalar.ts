@@ -1,5 +1,5 @@
-import type * as $$Utilities from '../../../../../src/exports/utilities-for-generated.js'
-export * from '../../../../../src/types/Schema/StandardTypes/scalar.js'
+import type * as $$Utilities from '#graffle/utilities-for-generated'
+export * from '#graffle/generator-helpers/standard-scalar-types'
 
 //
 //

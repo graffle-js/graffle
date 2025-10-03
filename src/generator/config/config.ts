@@ -176,6 +176,10 @@ To suppress this warning disable formatting in one of the following ways:
   // --- Library Paths ---
 
   const processLibraryPath = (path: string) => {
+    // Subpaths starting with # should not be rewritten
+    if (path.startsWith('#')) {
+      return path
+    }
     const pathAbsolute = getImportExtension(toAbsolutePath(cwd, path))
     return Path.relative(outputDirPathModules, pathAbsolute)
   }
