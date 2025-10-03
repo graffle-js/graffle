@@ -1,4 +1,4 @@
-import type * as $ from '../../../../../../../../../exports/utilities-for-generated.js'
+import type * as $ from '#graffle/utilities-for-generated'
 import type * as $Fields from './fields.js'
 
 export * as lowerCaseObject2 from './fields.js'

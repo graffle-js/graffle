@@ -146,7 +146,7 @@
     "@types/body-parser": "^1.19.5",
     "@types/express": "^5.0.1",
     "@types/node": "^22.14.1",
-    "@wollybeard/kit": "^0.66.0",
+    "@wollybeard/kit": "^0.67.0",
     "async-cleanup": "^1.0.0",
     "dprint": "^0.50.2",
     "dripip": "^0.10.0",
@@ -174,7 +174,24 @@
   "imports": {
     "#*": {
       "default": "./build/*"
-    }
+    },
+    "#graffle": "./build/exports/index.js",
+    "#graffle/client": "./build/exports/client.js",
+    "#graffle/extension": "./build/exports/extension.js",
+    "#graffle/generator": "./build/exports/generator.js",
+    "#graffle/kit": "./build/exports/kit.js",
+    "#graffle/schema": "./build/exports/schema.js",
+    "#graffle/utilities-for-generated": "./build/exports/utilities-for-generated.js",
+    "#graffle/generator-helpers/standard-scalar-types": "./build/types/Schema/StandardTypes/scalar.js",
+    "#graffle/extensions/transport-http": "./build/exports/extensions/transport-http/runtime.js",
+    "#graffle/extensions/document-builder": "./build/exports/extensions/document-builder/runtime.js",
+    "#lib/anyware": "./build/lib/anyware/$.js",
+    "#lib/config-manager": "./build/lib/config-manager/$.js",
+    "#lib/errors": "./build/lib/errors/$.js",
+    "#lib/grafaid": "./build/lib/grafaid/$.js",
+    "#lib/md-jsdoc": "./build/lib/md-jsdoc/$.js",
+    "#lib/tex": "./build/lib/tex/$.js",
+    "#lib/type-function": "./build/lib/type-function/$.js"
   },
   "libra": {
     "entities": {

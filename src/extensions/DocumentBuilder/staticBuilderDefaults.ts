@@ -1,5 +1,5 @@
 import type { Options } from './SelectGraphQLMapper/nodes/1_Document.js'
 
-export const defaults = {
+export const defaults: Partial<Options> = {
   hoistArguments: true,
-} satisfies Partial<Options>
+}

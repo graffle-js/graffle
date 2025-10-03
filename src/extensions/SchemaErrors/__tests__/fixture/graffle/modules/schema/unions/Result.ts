@@ -1,4 +1,4 @@
-import type * as $ from '../../../../../../../../exports/utilities-for-generated.js'
+import type * as $ from '#graffle/utilities-for-generated'
 import type { Schema as $Schema } from '../$.js'
 import type { ErrorOne } from '../objects/ErrorOne/$.js'
 import type { ErrorTwo } from '../objects/ErrorTwo/$.js'

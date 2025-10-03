@@ -73,8 +73,8 @@ importers:
         specifier: ^22.14.1
         version: 22.14.1
       '@wollybeard/kit':
-        specifier: ^0.66.0
-        version: 0.66.0(@effect/platform@0.91.1(effect@3.17.14))(effect@3.17.14)
+        specifier: ^0.67.0
+        version: 0.67.0(@effect/platform@0.91.1(effect@3.17.14))(effect@3.17.14)
       async-cleanup:
         specifier: ^1.0.0
         version: 1.0.0
@@ -1203,8 +1203,8 @@ packages:
   '@types/node@22.14.1':
     resolution: {integrity: sha512-u0HuPQwe/dHrItgHHpmw3N2fYCR6x4ivMNbPHRkBVP4CvN+kiRrKHWk3i8tXiO/joPwXLMYvF9TTF0eqgHIuOw==}
 
-  '@types/node@24.6.0':
-    resolution: {integrity: sha512-F1CBxgqwOMc4GKJ7eY22hWhBVQuMYTtqI8L0FcszYcpYX0fzfDGpez22Xau8Mgm7O9fI+zA/TYIdq3tGWfweBA==}
+  '@types/node@24.6.2':
+    resolution: {integrity: sha512-d2L25Y4j+W3ZlNAeMKcy7yDsK425ibcAOO2t7aPTz6gNMH0z2GThtwENCDc0d/Pw9wgyRqE5Px1wkV7naz8ang==}
 
   '@types/object-inspect@1.13.0':
     resolution: {integrity: sha512-lwGTVESDDV+XsQ1pH4UifpJ1f7OtXzQ6QBOX2Afq2bM/T3oOt8hF6exJMjjIjtEWeAN2YAo25J7HxWh97CCz9w==}
@@ -1384,8 +1384,8 @@ packages:
     resolution: {integrity: sha512-ydxzH1iox9AzLe+uaX9jjyVFkQO+h15j+JClropw0P4Vz+ES4+xTZVu5leUsWW8AYTVZBFkiC0iHl/PwFZ+Q1Q==}
     engines: {node: '>=18.0.0'}
 
-  '@wollybeard/kit@0.66.0':
-    resolution: {integrity: sha512-hj/k+QF/rp7OIjodfDRKoglxFeLvJsDjR924Cl0GdqAWugJOaeEMq75/Tf+8/eL5Xa4thvIsuuR2UCg9ucl6kQ==}
+  '@wollybeard/kit@0.67.0':
+    resolution: {integrity: sha512-KurNytoV12wwGIo87Ag1szuM6/e3jnxaZVYarulZXzbdlx1lMIuERSeXD3ABOx5XsJ+UsjWUDZVMlP20U7HVVw==}
     peerDependencies:
       '@effect/platform': '>=0.90.0 <1.0.0'
       effect: ^3.17.0
@@ -3931,7 +3931,7 @@ snapshots:
     dependencies:
       undici-types: 6.21.0
 
-  '@types/node@24.6.0':
+  '@types/node@24.6.2':
     dependencies:
       undici-types: 7.13.0
 
@@ -4141,10 +4141,10 @@ snapshots:
       '@whatwg-node/promise-helpers': 1.3.1
       tslib: 2.8.1
 
-  '@wollybeard/kit@0.66.0(@effect/platform@0.91.1(effect@3.17.14))(effect@3.17.14)':
+  '@wollybeard/kit@0.67.0(@effect/platform@0.91.1(effect@3.17.14))(effect@3.17.14)':
     dependencies:
       '@effect/platform': 0.91.1(effect@3.17.14)
-      '@types/node': 24.6.0
+      '@types/node': 24.6.2
       '@types/object-inspect': 1.13.0
       ansis: 4.2.0
       consola: 3.4.2

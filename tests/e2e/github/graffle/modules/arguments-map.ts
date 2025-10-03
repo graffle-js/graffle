@@ -141,7 +141,7 @@
  * @see {@link https://graffle.js.org/guides/document-builder | Static Document Builder Guide}
  */
 
-import type * as $$Utilities from '../../../../../src/exports/utilities-for-generated.js'
+import type * as $$Utilities from '#graffle/utilities-for-generated'
 import type * as TypeInputsIndex from './type-inputs-index.js'
 
 //
