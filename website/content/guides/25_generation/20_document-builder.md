@@ -236,7 +236,7 @@ Graffle.query.trainerByName({
 
 When schema information is unavailable (e.g., using static builder without generation), Graffle infers types from runtime values:
 
-```ts twoslash
+```ts
 import { createStaticRootType } from 'graffle/extensions/document-builder'
 import { OperationTypeNode } from 'graphql'
 
