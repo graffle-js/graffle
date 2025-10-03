@@ -31,16 +31,6 @@ Support for named fragments (fragment definitions and spreads) is unclear. While
 **Status:** Unknown
 **Related:** [Issue #240](https://github.com/graffle-js/graffle/issues/240)
 
-## Planned Features
-
-These features are planned for future releases:
-
-| Feature                           | Description                                                                                                            | Tracking                                                   |
-| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
-| Request Batching                  | Automatic batching of multiple GraphQL requests into a single network call. Each request is currently sent separately. | [#1017](https://github.com/graffle-js/graffle/issues/1017) |
-| Automatic Persisted Queries (APQ) | Reduce bandwidth by sending query hashes instead of full query strings.                                                | [#269](https://github.com/graffle-js/graffle/issues/269)   |
-| graphql-config Support            | Integration with [`graphql-config`](https://the-guild.dev/graphql/config) for configuration management.                | [#948](https://github.com/graffle-js/graffle/issues/948)   |
-
 ## Other Limitations
 
 ### Incremental Delivery (@defer/@stream)
