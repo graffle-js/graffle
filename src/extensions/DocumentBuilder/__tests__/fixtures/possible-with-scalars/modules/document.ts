@@ -1,5 +1,6 @@
 import type { TypedDocument } from '#graffle/client'
 import { createStaticRootType } from '#graffle/extensions/document-builder'
+import type * as $$StaticBuilder from '#graffle/extensions/document-builder'
 import { OperationTypeNode } from 'graphql'
 import type * as ArgumentsMap from './arguments-map.js'
 import type * as $$Scalar from './scalar.js'
@@ -15,6 +16,15 @@ import type * as $$Schema from './schema/$.js'
 interface StaticDocumentContext {
   typeHookRequestResultDataTypes: never
   scalars: $$Scalar.$Registry
+}
+
+/**
+ * Configuration for static document builders.
+ * Generated code always has SDDM enabled since the generator creates the schema-driven data map.
+ */
+type DocumentConfig = {
+  schema: $$Schema.Schema
+  sddmEnabled: true
 }
 
 /**
@@ -52,6 +62,7 @@ interface StaticDocumentContext {
  *
  * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
  */
+// Note: This interface conforms to StaticDocumentBuilder<DocumentConfig, OperationTypeNode.QUERY>
 export interface QueryBuilder {
   /**
    * # Info
@@ -87,7 +98,8 @@ export interface QueryBuilder {
         { InputObjectNested: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -127,7 +139,8 @@ export interface QueryBuilder {
         { InputObjectNestedNonNull: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -165,7 +178,8 @@ export interface QueryBuilder {
         { abcEnum: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -205,7 +219,8 @@ export interface QueryBuilder {
         { argInputObjectCircular: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -241,7 +256,8 @@ export interface QueryBuilder {
         { bigintField: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -277,7 +293,8 @@ export interface QueryBuilder {
         { bigintFieldNonNull: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -311,7 +328,8 @@ export interface QueryBuilder {
         { date: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -348,7 +366,8 @@ export interface QueryBuilder {
         { dateArg: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -385,7 +404,8 @@ export interface QueryBuilder {
         { dateArgInputObject: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -422,7 +442,8 @@ export interface QueryBuilder {
         { dateArgList: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -459,7 +480,8 @@ export interface QueryBuilder {
         { dateArgNonNull: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -496,7 +518,8 @@ export interface QueryBuilder {
         { dateArgNonNullList: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -536,7 +559,8 @@ export interface QueryBuilder {
         { dateArgNonNullListNonNull: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -577,7 +601,8 @@ export interface QueryBuilder {
         { dateInterface1: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -614,7 +639,8 @@ export interface QueryBuilder {
         { dateList: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -651,7 +677,8 @@ export interface QueryBuilder {
         { dateListList: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -688,7 +715,8 @@ export interface QueryBuilder {
         { dateListNonNull: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -724,7 +752,8 @@ export interface QueryBuilder {
         { dateNonNull: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -762,7 +791,8 @@ export interface QueryBuilder {
         { dateObject1: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -803,7 +833,8 @@ export interface QueryBuilder {
         { dateUnion: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -840,7 +871,8 @@ export interface QueryBuilder {
         { error: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -874,7 +906,8 @@ export interface QueryBuilder {
         { id: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -910,7 +943,8 @@ export interface QueryBuilder {
         { idNonNull: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -951,7 +985,8 @@ export interface QueryBuilder {
         { interface: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -997,7 +1032,8 @@ export interface QueryBuilder {
         { interfaceHierarchyChildA: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1043,7 +1079,8 @@ export interface QueryBuilder {
         { interfaceHierarchyChildB: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1089,7 +1126,8 @@ export interface QueryBuilder {
         { interfaceHierarchyGrandparents: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1135,7 +1173,8 @@ export interface QueryBuilder {
         { interfaceHierarchyParents: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1176,7 +1215,8 @@ export interface QueryBuilder {
         { interfaceNonNull: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1218,7 +1258,8 @@ export interface QueryBuilder {
         { interfaceWithArgs: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1255,7 +1296,8 @@ export interface QueryBuilder {
         { listInt: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1292,7 +1334,8 @@ export interface QueryBuilder {
         { listIntNonNull: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1329,7 +1372,8 @@ export interface QueryBuilder {
         { listListInt: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1366,7 +1410,8 @@ export interface QueryBuilder {
         { listListIntNonNull: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1407,7 +1452,8 @@ export interface QueryBuilder {
         { lowerCaseUnion: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1448,7 +1494,8 @@ export interface QueryBuilder {
         { object: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1490,7 +1537,8 @@ export interface QueryBuilder {
         { objectList: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1532,7 +1580,8 @@ export interface QueryBuilder {
         { objectListNonNull: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1571,7 +1620,8 @@ export interface QueryBuilder {
         { objectNested: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1613,7 +1663,8 @@ export interface QueryBuilder {
         { objectNestedWithArgs: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1654,7 +1705,8 @@ export interface QueryBuilder {
         { objectNonNull: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1697,7 +1749,8 @@ export interface QueryBuilder {
         { objectWithArgs: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1739,7 +1792,8 @@ export interface QueryBuilder {
         { result: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1781,7 +1835,8 @@ export interface QueryBuilder {
         { resultNonNull: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1817,7 +1872,8 @@ export interface QueryBuilder {
         { string: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1854,7 +1910,8 @@ export interface QueryBuilder {
         { stringWithArgEnum: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1894,7 +1951,8 @@ export interface QueryBuilder {
         { stringWithArgInputObject: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1934,7 +1992,8 @@ export interface QueryBuilder {
         { stringWithArgInputObjectEnum: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1974,7 +2033,8 @@ export interface QueryBuilder {
         { stringWithArgInputObjectRequired: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -2013,7 +2073,8 @@ export interface QueryBuilder {
         { stringWithArgs: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -2050,7 +2111,8 @@ export interface QueryBuilder {
         { stringWithListArg: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -2090,7 +2152,8 @@ export interface QueryBuilder {
         { stringWithListArgRequired: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -2130,7 +2193,8 @@ export interface QueryBuilder {
         { stringWithRequiredArg: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -2171,7 +2235,8 @@ export interface QueryBuilder {
         { unionFooBar: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -2212,7 +2277,8 @@ export interface QueryBuilder {
         { unionFooBarNonNull: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -2254,7 +2320,8 @@ export interface QueryBuilder {
         { unionFooBarWithArgs: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -2292,7 +2359,8 @@ export interface QueryBuilder {
         { unionObject: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -2330,7 +2398,8 @@ export interface QueryBuilder {
         { unionObjectNonNull: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 }
 /**
@@ -2394,6 +2463,7 @@ export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY)
  *
  * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
  */
+// Note: This interface conforms to StaticDocumentBuilder<DocumentConfig, OperationTypeNode.MUTATION>
 export interface MutationBuilder {
   /**
    * # Info
@@ -2428,7 +2498,8 @@ export interface MutationBuilder {
         { id: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -2464,7 +2535,8 @@ export interface MutationBuilder {
         { idNonNull: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 }
 /**

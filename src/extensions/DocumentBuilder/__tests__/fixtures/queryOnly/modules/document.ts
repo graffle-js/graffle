@@ -1,5 +1,6 @@
 import type { TypedDocument } from '#graffle/client'
 import { createStaticRootType } from '#graffle/extensions/document-builder'
+import type * as $$StaticBuilder from '#graffle/extensions/document-builder'
 import { OperationTypeNode } from 'graphql'
 import type * as ArgumentsMap from './arguments-map.js'
 import type * as $$Scalar from './scalar.js'
@@ -15,6 +16,15 @@ import type * as $$Schema from './schema/$.js'
 interface StaticDocumentContext {
   typeHookRequestResultDataTypes: never
   scalars: $$Scalar.$Registry
+}
+
+/**
+ * Configuration for static document builders.
+ * Generated code always has SDDM enabled since the generator creates the schema-driven data map.
+ */
+type DocumentConfig = {
+  schema: $$Schema.Schema
+  sddmEnabled: true
 }
 
 /**
@@ -52,6 +62,7 @@ interface StaticDocumentContext {
  *
  * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
  */
+// Note: This interface conforms to StaticDocumentBuilder<DocumentConfig, OperationTypeNode.QUERY>
 export interface QueryBuilder {
   /**
    * # Info
@@ -84,7 +95,8 @@ export interface QueryBuilder {
         { id: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -120,7 +132,8 @@ export interface QueryBuilder {
         { idNonNull: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 }
 /**

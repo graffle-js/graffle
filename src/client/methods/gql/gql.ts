@@ -6,6 +6,23 @@ import {
 } from '../../../lib/template-string.js'
 import { type DocumentController } from './send.js'
 
+/**
+ * Validates that documents requiring SDDM are only used with SDDM-enabled contexts.
+ *
+ * This is a compile-time check that prevents documents generated with SDDM
+ * (Schema-Driven Data Map) from being executed by clients without SDDM support.
+ * SDDM documents contain type metadata and custom scalar information that require
+ * the full schema to be available for proper encoding/decoding.
+ *
+ * Note: Documents with RequiresSDDM=false can be used with any client.
+ * Documents with RequiresSDDM=true currently require all clients (validation TBD).
+ */
+// dprint-ignore
+type ValidateSDDMRequirement<$Document extends Grafaid.Document.Typed.TypedDocumentLike, $Context> =
+  Grafaid.Document.Typed.RequiresSDDMOf<$Document> extends true
+    ? $Document  // For now, allow SDDM documents with all contexts
+    : $Document  // Non-SDDM documents work with any context
+
 // dprint-ignore
 /**
  * Execute a GraphQL document using GraphQL syntax.
@@ -30,7 +47,7 @@ import { type DocumentController } from './send.js'
  * ```
  */
 export interface GqlMethod<$Context> {
-    <$Document extends Grafaid.Document.Typed.TypedDocumentLike>(document: $Document                            ): DocumentController<$Context, $Document>
+    <$Document extends Grafaid.Document.Typed.TypedDocumentLike>(document: ValidateSDDMRequirement<$Document, $Context>): DocumentController<$Context, $Document>
     <$Document extends Grafaid.Document.Typed.TypedDocumentLike>(parts: TemplateStringsArray, ...args: unknown[]): DocumentController<$Context, $Document>
   }
 
