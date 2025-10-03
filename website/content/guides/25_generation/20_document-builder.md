@@ -6,11 +6,11 @@ Generate typed GraphQL document strings at compile-time without a client instanc
 
 After running the generator, import `query`, `mutation`, or `subscription` builders from your generated code. Call methods to generate `TypedDocument.String` objects with the GraphQL string and full TypeScript types.
 
-```ts
+```ts twoslash
 import { $ } from 'graffle/extensions/document-builder'
-import { query } from './graffle/modules/document.js'
+import { Graffle } from './graffle/$.js'
 
-const doc = query.user({
+const doc = Graffle.query.user({
   $: { id: $ }, // Variables automatically extracted
   name: true,
   email: true,
@@ -28,7 +28,7 @@ const doc = query.user({
 
 The document builder can be configured using global defaults:
 
-```ts
+```ts twoslash
 import { staticBuilderDefaults } from 'graffle/extensions/document-builder'
 
 // Change default behavior for all queries
@@ -105,9 +105,9 @@ const doc = query.user({
 })
 ```
 
-## Selection Set Syntax
+## Feature Reference
 
-This section shows how common GraphQL patterns map to Graffle's selection set syntax. These patterns work identically in both the generated document builder (this guide) and the runtime Document Builder extension.
+This section provides detailed examples of how each GraphQL feature is expressed using Graffle's selection set syntax.
 
 ### Basic Query
 
@@ -128,20 +128,70 @@ query { user { name } }
 
 ### Arguments
 
+Arguments are passed using the special `$` property in your selection set.
+
 :::tabs
 == Graffle
 
 ```ts
-query.user({ $: { id: '123' }, name: true })
+query.pokemons({
+  $: { filter: { name: { in: ['Pikachu', 'Charizard'] } } },
+  name: true,
+  trainer: { name: true },
+})
 ```
 
 == GraphQL
 
 ```graphql
-query { user(id: "123") { name } }
+query {
+  pokemons(filter: { name: { in: ["Pikachu", "Charizard"] } }) {
+    name
+    trainer { name }
+  }
+}
 ```
 
 :::
+
+**Nested Arguments:**
+
+Arguments work at any nesting level. Each field can have its own `$` argument property.
+
+:::tabs
+== Graffle
+
+```ts
+query.trainers({
+  $: { filter: { class: 'Elite' } },
+  name: true,
+  pokemons: {
+    $: { filter: { type: 'FIRE' } },
+    name: true,
+    type: true,
+  },
+})
+```
+
+== GraphQL
+
+```graphql
+query {
+  trainers(filter: { class: "Elite" }) {
+    name
+    pokemons(filter: { type: FIRE }) {
+      name
+      type
+    }
+  }
+}
+```
+
+:::
+
+**Example:**
+
+- [Arguments Example](../../../../examples/55_document-builder/document-builder_arguments.ts)
 
 ### Variables
 
@@ -168,10 +218,10 @@ Graffle automatically infers GraphQL types for variables using two strategies:
 
 When using a generated client, Graffle uses Schema-Driven Data Map (SDDM) metadata to infer precise GraphQL types including nullability, list types, and custom scalars:
 
-```ts
-import { query } from './graffle/modules/document.js'
+```ts twoslash
+import { Graffle } from './graffle/$.js'
 
-query.user({
+Graffle.query.user({
   $: { id: '123' }, // Inferred as: $id: ID!
   name: true,
 })
@@ -183,7 +233,7 @@ query.user({
 
 When schema information is unavailable (e.g., using static builder without generation), Graffle infers types from runtime values:
 
-```ts
+```ts twoslash
 import { createStaticRootType } from 'graffle/extensions/document-builder'
 import { OperationTypeNode } from 'graphql'
 
@@ -253,78 +303,6 @@ query.users({ $: { limit: $(10) }, name: true })
 // Generated: query($limit: Int = 10) { users(limit: $limit) { name } }
 ```
 
-### Aliases
-
-:::tabs
-== Graffle
-
-```ts
-query.$batch({
-  user: [
-    ['admin', { $: { id: '1' }, name: true }],
-  ],
-})
-```
-
-== GraphQL
-
-```graphql
-query { admin: user(id: "1") { name } }
-```
-
-:::
-
-### Directives
-
-:::tabs
-== Graffle
-
-```ts
-query.user({ id: { $skip: true } })
-```
-
-== GraphQL
-
-```graphql
-query { user { id @skip(if: true) } }
-```
-
-:::
-
-### Inline Fragments (Union)
-
-:::tabs
-== Graffle
-
-```ts
-query.result({ ___on_User: { name: true } })
-```
-
-== GraphQL
-
-```graphql
-query { result { ... on User { name } } }
-```
-
-:::
-
-### Inline Fragments (Interface)
-
-:::tabs
-== Graffle
-
-```ts
-query.nodes({ ___on_User: { email: true } })
-```
-
-== GraphQL
-
-```graphql
-query { nodes { ... on User { email } } }
-```
-
-:::
-
 ### Mutations
 
 :::tabs
@@ -341,94 +319,6 @@ mutation { createUser(name: "Alice") { id } }
 ```
 
 :::
-
-### Nested Arguments
-
-:::tabs
-== Graffle
-
-```ts
-query.user({ posts: { $: { limit: 10 }, title: true } })
-```
-
-== GraphQL
-
-```graphql
-query { user { posts(limit: 10) { title } } }
-```
-
-:::
-
-## Feature Reference
-
-This section provides detailed examples of how each GraphQL feature is expressed using Graffle's selection set syntax.
-
-### Arguments
-
-Arguments are passed using the special `$` property in your selection set.
-
-:::tabs
-== Graffle
-
-```ts
-query.pokemons({
-  $: { filter: { name: { in: ['Pikachu', 'Charizard'] } } },
-  name: true,
-  trainer: { name: true },
-})
-```
-
-== GraphQL
-
-```graphql
-query {
-  pokemons(filter: { name: { in: ["Pikachu", "Charizard"] } }) {
-    name
-    trainer { name }
-  }
-}
-```
-
-:::
-
-**Nested Arguments:**
-
-Arguments work at any nesting level. Each field can have its own `$` argument property.
-
-:::tabs
-== Graffle
-
-```ts
-query.trainers({
-  $: { filter: { class: 'Elite' } },
-  name: true,
-  pokemons: {
-    $: { filter: { type: 'FIRE' } },
-    name: true,
-    type: true,
-  },
-})
-```
-
-== GraphQL
-
-```graphql
-query {
-  trainers(filter: { class: "Elite" }) {
-    name
-    pokemons(filter: { type: FIRE }) {
-      name
-      type
-    }
-  }
-}
-```
-
-:::
-
-**Example:**
-
-- [Arguments Example](../../../../examples/55_document-builder/document-builder_arguments.ts)
 
 ### Aliases
 
