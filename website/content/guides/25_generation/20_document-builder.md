@@ -242,15 +242,18 @@ import { OperationTypeNode } from 'graphql'
 
 const query = createStaticRootType(OperationTypeNode.QUERY)
 
-query.trainerByName({
+query.someField({
   $: {
-    name: 'Ash', // Inferred as: String
+    stringArg: 'value', // Inferred as: String
+    numberArg: 42, // Inferred as: Int
+    boolArg: true, // Inferred as: Boolean
+    arrayArg: ['a', 'b'], // Inferred as: [String]
   },
   name: true,
 })
 
-// Generated: query($name: String) {
-//   trainerByName(name: $name) { name }
+// Generated: query($stringArg: String, $numberArg: Int, $boolArg: Boolean, $arrayArg: [String]) {
+//   someField(stringArg: $stringArg, numberArg: $numberArg, boolArg: $boolArg, arrayArg: $arrayArg) { name }
 // }
 ```
 
