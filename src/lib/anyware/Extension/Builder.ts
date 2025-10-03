@@ -1,6 +1,6 @@
-import { Overload } from '../Overload/_namespace.js'
-import type { PipelineDefinition } from '../PipelineDefinition/_namespace.js'
-import type { Extension } from './__.js'
+import { Overload } from '../Overload/$.js'
+import type { PipelineDefinition } from '../PipelineDefinition/$.js'
+import type { Extension } from './$.js'
 
 type Create = <$Pipeline extends PipelineDefinition>() => Builder<$Pipeline, Extension.States.Empty>
 

@@ -172,6 +172,11 @@ type ObjectNested {
   object: Object1
 }
 
+type ObjectNestedWithArgs {
+  id(filter: ID): ID
+  object(boolean: Boolean, float: Float, int: Int, string: String): Object1
+}
+
 type ObjectParent implements InterfaceGrandparent & InterfaceParent {
   a: String!
   b: String!
@@ -230,6 +235,7 @@ type Query {
   objectList: [Object1!]
   objectListNonNull: [Object1!]!
   objectNested: ObjectNested
+  objectNestedWithArgs: ObjectNestedWithArgs
   objectNonNull: Object1!
   objectWithArgs(boolean: Boolean, float: Float, id: ID, int: Int, string: String): Object1
   result(case: Case!): Result

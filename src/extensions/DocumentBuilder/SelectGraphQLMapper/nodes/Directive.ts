@@ -1,6 +1,6 @@
 import type { SchemaDrivenDataMap } from '../../../../exports/utilities-for-generated.js'
 import { Nodes } from '../../../../lib/grafaid/_Nodes.js'
-import type { Select } from '../../Select/__.js'
+import type { Select } from '../../Select/$.js'
 import type { GraphQLPostOperationMapper } from '../mapper.js'
 import { toGraphQLValue } from './Value.js'
 
@@ -27,6 +27,7 @@ export const toGraphQLDirective: GraphQLPostOperationMapper<
       argument = context.variables.capture({
         name: argumentName,
         value: argumentValue,
+        isEnum: false,
         sddmArgument,
       })
     } else {

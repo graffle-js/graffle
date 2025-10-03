@@ -1,9 +1,9 @@
 import type { Writable } from 'type-fest'
-import type { ConfigManager } from '../../config-manager/_namespace.js'
+import type { ConfigManager } from '../../config-manager/$.js'
 import { Configurator } from '../../configurator/configurator.js'
 import { createMutableBuilder } from '../../mutableBuilder.js'
 import type { _, Tuple } from '../../prelude.js'
-import type { PipelineDefinition } from '../PipelineDefinition/_namespace.js'
+import type { PipelineDefinition } from '../PipelineDefinition/$.js'
 import type { StepDefinition } from '../StepDefinition.js'
 import type { Data, DataEmpty } from './Data.js'
 

@@ -1,8 +1,9 @@
 // todo jsdoc
 import { entries } from '../../lib/prelude.js'
-import { Tex } from '../../lib/tex/_namespace.js'
+import { Tex } from '../../lib/tex/$.js'
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
+import { importUtilities } from '../helpers/pathHelpers.js'
 import { renderName } from '../helpers/render.js'
 import { ModuleGeneratorData } from './Data.js'
 import { ModuleGeneratorSchema } from './Schema.js'
@@ -20,21 +21,20 @@ export const ModuleGeneratorSelect = createModuleGenerator(
     code(importModuleGenerator(config, ModuleGeneratorData))
     code(importModuleGenerator(config, ModuleGeneratorSchema))
     code(importModuleGenerator(config, ModuleGeneratorSelectionSets))
+    code`import type { OperationTypeNode } from 'graphql'`
+    code(importUtilities(config))
+    code``
+    code(Tex.title1(`Runtime`))
     code`
-      import type { OperationTypeNode } from 'graphql'
-      import type * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
-      
-      ${Tex.title1(`Runtime`)}
-
       import { createSelect } from '${config.paths.imports.grafflePackage.client}'
       export const Select = createSelect(${$.$$Data}.Name)
-      
-      ${Tex.title1(`Buildtime`)}
-
-      export namespace Select {
-
-      ${Tex.title2(`Root`)}
     `
+    code``
+    code(Tex.title1(`Buildtime`))
+    code`
+      export namespace Select {
+    `
+    code(Tex.title2(`Root`))
     code(
       ...entries(config.schema.kindMap.index.Root).map(([operationType, type]) => {
         if (!type) return null

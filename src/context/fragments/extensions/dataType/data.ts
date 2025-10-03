@@ -1,9 +1,9 @@
 import type { Configurator } from '../../../../lib/configurator/configurator.js'
 import { undefinedAs } from '../../../../lib/prelude.js'
-import type { RequestPipeline } from '../../../../requestPipeline/_namespace.js'
-import type { RequestInterceptors } from '../../../_exports.js'
-import type { Properties } from '../../properties/_namespace.js'
-import type { Transport } from '../../transports/dataType/_namespace.js'
+import type { RequestPipeline } from '../../../../requestPipeline/$.js'
+import type { RequestInterceptors } from '../../../$$.js'
+import type { Properties } from '../../properties/$.js'
+import type { Transport } from '../../transports/dataType/$.js'
 import type * as _re_export from './properties.js'
 
 export interface Data<

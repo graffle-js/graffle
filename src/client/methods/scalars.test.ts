@@ -3,8 +3,8 @@ import { AScalar, BScalar } from '../../../tests/_/fixtures/scalars.js'
 import { g0, test } from '../../../tests/_/helpers.js'
 import { contextEmpty } from '../../context/ContextEmpty.js'
 import { type GlobalRegistry } from '../../exports/utilities-for-generated.js'
-import type { Schema } from '../../types/Schema/_namespace.js'
-import type { SchemaDrivenDataMap } from '../../types/SchemaDrivenDataMap/_namespace.js'
+import type { Schema } from '../../types/Schema/$.js'
+import type { SchemaDrivenDataMap } from '../../types/SchemaDrivenDataMap/$.js'
 import type { ScalarMethod } from './scalars.js'
 
 declare global {

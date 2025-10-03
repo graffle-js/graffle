@@ -11,8 +11,6 @@
     "bundle-sizes",
     "tests",
     "examples",
-    "website",
-    "src/**/__tests__",
-    "src/**/*.test.ts"
+    "website"
   ]
 }

@@ -1,30 +1,33 @@
 // todo: generate in JSDoc how the feature maps to GQL syntax.
 // todo: on union fields, JSDoc that mentions the syntax `on*`
 
-// todo import from '../../extensions/DocumentBuilder/kit/__.js'
-import { DocumentBuilderKit } from '../../extensions/DocumentBuilder/_namespace.js'
+// todo import from '../../extensions/DocumentBuilder/kit/$.js'
+import { DocumentBuilderKit } from '../../extensions/DocumentBuilder/$.js'
 import { Code } from '../../lib/Code.js'
-import { Grafaid } from '../../lib/grafaid/_namespace.js'
+import { Grafaid } from '../../lib/grafaid/$.js'
 import { analyzeArgsNullability } from '../../lib/grafaid/schema/args.js'
 import { entries, pick, values } from '../../lib/prelude.js'
-import { Tex } from '../../lib/tex/_namespace.js'
+import { Tex } from '../../lib/tex/$.js'
 import { borderThin } from '../../lib/tex/tex.js'
 import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
+import { getInlineFragmentDoc, getOutputFieldSelectionSetDoc, getRootTypeDoc } from '../helpers/jsdoc.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 import { createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
+import { buildImportPath, codeImportAll, importUtilities } from '../helpers/pathHelpers.js'
 import { getTsDocContents, renderName } from '../helpers/render.js'
 import type { KindRenderers } from '../helpers/types.js'
 
 const i = {
   ...$,
-  _$Scalars: `_$Scalars`,
+  _$Context: `_$Context`,
 }
-const $ScalarsTypeParameter =
-  `${i._$Scalars} extends ${$.$$Utilities}.Schema.Scalar.Registry = ${$.$$Utilities}.Schema.Scalar.Registry.Empty`
+const $ContextTypeParameter =
+  `${i._$Context} extends ${$.$$Utilities}.DocumentBuilderKit.Select.SelectionContext = ${$.$$Utilities}.DocumentBuilderKit.Select.DefaultContext`
 
 export const ModuleGeneratorSelectionSets = createModuleGenerator(
   `SelectionSets`,
+  import.meta.url,
   ({ config, code }) => {
     const kindMap = pick(config.schema.kindMap.list, [
       `Root`,
@@ -37,17 +40,17 @@ export const ModuleGeneratorSelectionSets = createModuleGenerator(
     const kindEntries = entries(kindMap).filter(_ => _[1].length > 0)
     const kinds = kindEntries.map(_ => _[1])
 
-    code`import type * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'`
+    code(importUtilities(config))
     code``
     code(Tex.title1(`Document`))
     code``
     code(Code.tsInterface({
       name: `$Document`,
-      parameters: $ScalarsTypeParameter,
+      parameters: $ContextTypeParameter,
       // dprint-ignore
       block: `
-        ${config.schema.kindMap.index.Root.query ? `query?: Record<string, ${renderName(config.schema.kindMap.index.Root.query)}<${i._$Scalars}>>` : ``}
-        ${config.schema.kindMap.index.Root.mutation ? `mutation?: Record<string, ${renderName(config.schema.kindMap.index.Root.mutation)}<${i._$Scalars}>>` : ``}
+        ${config.schema.kindMap.index.Root.query ? `query?: Record<string, ${renderName(config.schema.kindMap.index.Root.query)}<${i._$Context}>>` : ``}
+        ${config.schema.kindMap.index.Root.mutation ? `mutation?: Record<string, ${renderName(config.schema.kindMap.index.Root.mutation)}<${i._$Context}>>` : ``}
       `,
     }))
     code``
@@ -61,11 +64,43 @@ export const ModuleGeneratorSelectionSets = createModuleGenerator(
       })
     })
 
+    // Generate root type inference utilities
+    if (config.schema.kindMap.index.Root.query) {
+      code(codeImportAll(config, { as: $.$$Schema, from: './schema/$', type: true }))
+      code``
+      code`
+        export type Query$Infer<$SelectionSet extends object> = ${$.$$Utilities}.DocumentBuilderKit.InferResult.OperationQuery<$SelectionSet, ${$.$$Schema}.${$.Schema}>
+        export type Query$Variables<_$SelectionSet> = any // Temporarily any - will be replaced with new analysis system
+      `
+    }
+
+    if (config.schema.kindMap.index.Root.mutation) {
+      if (!config.schema.kindMap.index.Root.query) {
+        code(codeImportAll(config, { as: $.$$Schema, from: './schema/$', type: true }))
+        code``
+      }
+      code`
+        export type Mutation$Infer<$SelectionSet extends object> = ${$.$$Utilities}.DocumentBuilderKit.InferResult.OperationMutation<$SelectionSet, ${$.$$Schema}.${$.Schema}>
+        export type Mutation$Variables<_$SelectionSet> = any // Temporarily any - will be replaced with new analysis system
+      `
+    }
+
+    if (config.schema.kindMap.index.Root.subscription) {
+      if (!config.schema.kindMap.index.Root.query && !config.schema.kindMap.index.Root.mutation) {
+        code(codeImportAll(config, { as: $.$$Schema, from: './schema/$', type: true }))
+        code``
+      }
+      code`
+        export type Subscription$Infer<$SelectionSet extends object> = ${$.$$Utilities}.DocumentBuilderKit.InferResult.OperationSubscription<$SelectionSet, ${$.$$Schema}.${$.Schema}>
+        export type Subscription$Variables<_$SelectionSet> = any // Temporarily any - will be replaced with new analysis system
+      `
+    }
+
     code`
       /**
        * [1] These definitions serve to allow field selection interfaces to extend their respective object type without
        *     name clashing between the field name and the object name.
-       * 
+       *
        *     For example imagine \`Query.Foo\` field with type also called \`Foo\`. Our generated interfaces for each field
        *     would end up with an error of \`export interface Foo extends Foo ...\`
        */
@@ -79,7 +114,7 @@ export const ModuleGeneratorSelectionSets = createModuleGenerator(
       }
       return Code.tsAlias$({
         name: `$${renderName(type)}`,
-        parameters: $ScalarsTypeParameter,
+        parameters: $ContextTypeParameter,
         type: H.reference(type),
       })
     }).join(`\n`)
@@ -95,15 +130,17 @@ export const ModuleGeneratorSelectionSets = createModuleGenerator(
 
 const Union = createCodeGenerator<{ type: Grafaid.Schema.UnionType }>(
   ({ config, type, code }) => {
-    const fragmentsInlineType = type.getTypes().map((type) =>
-      `${DocumentBuilderKit.Select.InlineFragment.typeConditionPRefix}${type.name}?: ${
-        H.forwardTypeParameter$Scalars(type)
+    const fragmentsInlineType = type.getTypes().map((memberType) => {
+      const doc = Code.TSDoc(getInlineFragmentDoc(memberType, type, 'union'))
+      const field = `${DocumentBuilderKit.Select.InlineFragment.typeConditionPRefix}${memberType.name}?: ${
+        H.forwardTypeParameter$Context(memberType)
       }`
-    ).join(`\n`)
+      return `${doc}\n${field}`
+    }).join(`\n`)
     code(Code.tsInterface({
       tsDoc: getTsDocContents(config, type),
       name: type.name,
-      parameters: $ScalarsTypeParameter,
+      parameters: $ContextTypeParameter,
       block: `
         ${H.__typenameField(`union`)}
         ${fragmentsInlineType}
@@ -131,7 +168,7 @@ const InputObject = createCodeGenerator<{ type: Grafaid.Schema.InputObjectType }
     code(Code.tsInterface({
       tsDoc: getTsDocContents(config, type),
       name: type.name,
-      parameters: $ScalarsTypeParameter,
+      parameters: $ContextTypeParameter,
       block: values(type.getFields()).map(field => getInputFieldLike(config, field)),
     }))
   },
@@ -144,19 +181,30 @@ const Interface = createCodeGenerator<{ type: Grafaid.Schema.InterfaceType }>(
       return H.outputFieldReference(field.name, `${renderName(type)}.${renderName(field)}`)
     }).join(`\n`)
     const implementorTypes = Grafaid.Schema.KindMap.getInterfaceImplementors(config.schema.kindMap, type)
-    const onTypesRendered = implementorTypes.map(type =>
-      H.outputFieldReference(
-        `${DocumentBuilderKit.Select.InlineFragment.typeConditionPRefix}${type.name}`,
-        renderName(type),
-      )
-    ).join(`\n`)
+    const onTypesRendered = implementorTypes.map(implementorType => {
+      // Only generate JSDoc for object types, not for interface implementors
+      if (Grafaid.Schema.isObjectType(implementorType)) {
+        const doc = Code.TSDoc(getInlineFragmentDoc(implementorType, type, 'interface'))
+        const field = H.outputFieldReference(
+          `${DocumentBuilderKit.Select.InlineFragment.typeConditionPRefix}${implementorType.name}`,
+          renderName(implementorType),
+        )
+        return `${doc}\n${field}`
+      } else {
+        // Interface implementors don't get JSDoc (they're intermediate types in hierarchy)
+        return H.outputFieldReference(
+          `${DocumentBuilderKit.Select.InlineFragment.typeConditionPRefix}${implementorType.name}`,
+          renderName(implementorType),
+        )
+      }
+    }).join(`\n`)
     code``
     code(Tex.title2(type.name))
     code``
     code(Code.tsInterface({
       tsDoc: getTsDocContents(config, type),
       name: type.name,
-      parameters: $ScalarsTypeParameter,
+      parameters: $ContextTypeParameter,
       extends: [`${$.$$Utilities}.DocumentBuilderKit.Select.Bases.ObjectLike`],
       block: `
         ${fieldsRendered}
@@ -187,10 +235,10 @@ const OutputObject = createCodeGenerator<{ type: Grafaid.Schema.ObjectType }>(
     code``
 
     const fieldKeys = fields.map(field => {
-      const typeKind = Grafaid.getTypeAndKind(Grafaid.Schema.getNamedType(field.type))
-      const doc = Code.TSDoc(`
-        Select the \`${field.name}\` field on the \`${type.name}\` object. Its type is \`${typeKind.typeName}\` (a \`${typeKind.kindName}\` kind of type).
-      `)
+      const namedType = Grafaid.Schema.getNamedType(field.type)
+      const doc = Code.TSDoc(
+        getOutputFieldSelectionSetDoc(field, type.name, namedType),
+      )
       const key = H.outputFieldKey(
         field.name,
         `${renderName(type)}.${renderName(field)}`,
@@ -205,10 +253,20 @@ const OutputObject = createCodeGenerator<{ type: Grafaid.Schema.ObjectType }>(
     const isRootType = config.schema.kindMap.list.Root.some(_ => _.name === type.name)
     const extendsClause = isRootType ? null : `${$.$$Utilities}.DocumentBuilderKit.Select.Bases.ObjectLike`
 
+    // Determine operation type for root types
+    let operationType: 'query' | 'mutation' | 'subscription' | null = null
+    if (isRootType) {
+      if (config.schema.kindMap.index.Root.query?.name === type.name) operationType = 'query'
+      else if (config.schema.kindMap.index.Root.mutation?.name === type.name) operationType = 'mutation'
+      else if (config.schema.kindMap.index.Root.subscription?.name === type.name) operationType = 'subscription'
+    }
+
     code(Code.tsInterface({
-      tsDoc: getTsDocContents(config, type),
+      tsDoc: isRootType && operationType
+        ? getRootTypeDoc(config, type, operationType)
+        : getTsDocContents(config, type),
       name: type.name,
-      parameters: $ScalarsTypeParameter,
+      parameters: $ContextTypeParameter,
       extends: [extendsClause],
       block: `
         ${fieldKeys}
@@ -259,7 +317,7 @@ const renderOutputField = createCodeGenerator<{ field: Grafaid.Schema.Field<any,
 
     code(Code.tsAlias$({
       name: field.name,
-      parameters: $ScalarsTypeParameter,
+      parameters: $ContextTypeParameter,
       type: Code.tsUnionItems([indicator, selectionSetRef]),
     }))
     code``
@@ -279,7 +337,7 @@ const renderOutputField = createCodeGenerator<{ field: Grafaid.Schema.Field<any,
 
     code(Code.tsInterface({
       name: selectionSetName,
-      parameters: $ScalarsTypeParameter,
+      parameters: $ContextTypeParameter,
       extends: [`${$.$$Utilities}.DocumentBuilderKit.Select.Bases.Base`, objectLikeTypeReference],
       block: propertyArguments,
     }))
@@ -288,7 +346,7 @@ const renderOutputField = createCodeGenerator<{ field: Grafaid.Schema.Field<any,
     if (argsAnalysis.hasAny) {
       code(Code.tsInterface({
         name: argumentsName,
-        parameters: $ScalarsTypeParameter,
+        parameters: $ContextTypeParameter,
         block: field.args.map(arg => getInputFieldLike(config, arg)),
       }))
       code``
@@ -348,23 +406,61 @@ const renderArgumentType = (type: Grafaid.Schema.InputTypes): string => {
 
   const nullableRendered = Grafaid.Schema.isNullableType(type) ? `| undefined | null` : ``
 
+  // Get the base TypeScript type for the Builder constraint
+  let baseTypeForMarker: string
+
   if (Grafaid.Schema.isListType(sansNullabilityType)) {
     const innerType = Grafaid.Schema.getNullableType(sansNullabilityType.ofType)
-    return `Array<${renderArgumentType(innerType)}> ${nullableRendered}`
+    const innerTypeRendered = renderArgumentType(innerType)
+
+    // Wrap entire array type (with nullability) in Var.Maybe to allow variable markers
+    const arrayType = `Array<${innerTypeRendered}>`
+    const fullType = nullableRendered ? `${arrayType} | null | undefined` : arrayType
+
+    return `${i.$$Utilities}.DocumentBuilderKit.Var.Maybe<${fullType}>`
   }
 
   if (Grafaid.Schema.isScalarType(sansNullabilityType)) {
     if (Grafaid.Schema.isScalarTypeCustom(sansNullabilityType)) {
-      const scalarTypeRendered =
-        `${i.$$Utilities}.Schema.Scalar.GetDecoded<${i.$$Utilities}.Schema.Scalar.LookupCustomScalarOrFallbackToString<'${sansNullabilityType.name}', ${i._$Scalars}>>`
-      return `${scalarTypeRendered} ${nullableRendered}`
+      baseTypeForMarker =
+        `${i.$$Utilities}.Schema.Scalar.GetDecoded<${i.$$Utilities}.Schema.Scalar.LookupCustomScalarOrFallbackToString<'${sansNullabilityType.name}', ${i._$Context} extends { scalars: infer S } ? S : ${i.$$Utilities}.Schema.Scalar.Registry.Empty>>`
+    } else {
+      baseTypeForMarker =
+        Grafaid.StandardScalarTypeTypeScriptMapping[sansNullabilityType.name as Grafaid.StandardScalarTypeNames]
     }
-    const scalarTypeRendered =
-      Grafaid.StandardScalarTypeTypeScriptMapping[sansNullabilityType.name as Grafaid.StandardScalarTypeNames]
-    return `${scalarTypeRendered} ${nullableRendered}`
+
+    // Wrap scalar type (with nullability) in Var.Maybe to allow variable markers
+    const fullType = nullableRendered ? `${baseTypeForMarker} | null | undefined` : baseTypeForMarker
+
+    return `${i.$$Utilities}.DocumentBuilderKit.Var.Maybe<${fullType}>`
   }
 
-  return `${H.namedTypesReference(sansNullabilityType)} ${nullableRendered}`
+  // Input object or enum type
+  baseTypeForMarker = H.namedTypesReference(sansNullabilityType)
+
+  // Wrap type (with nullability) in Var.Maybe to allow variable markers
+  const fullType = nullableRendered ? `${baseTypeForMarker} | null | undefined` : baseTypeForMarker
+
+  return `${i.$$Utilities}.DocumentBuilderKit.Var.Maybe<${fullType}>`
+}
+
+// Helper to get base type without variable marker and nullability
+const getBaseTypeWithoutBuilder = (type: Grafaid.Schema.InputTypes): string => {
+  const sansNullabilityType = Grafaid.Schema.getNullableType(type)
+
+  if (Grafaid.Schema.isListType(sansNullabilityType)) {
+    const innerType = Grafaid.Schema.getNullableType(sansNullabilityType.ofType)
+    return `Array<${getBaseTypeWithoutBuilder(innerType)}>`
+  }
+
+  if (Grafaid.Schema.isScalarType(sansNullabilityType)) {
+    if (Grafaid.Schema.isScalarTypeCustom(sansNullabilityType)) {
+      return `${i.$$Utilities}.Schema.Scalar.GetDecoded<${i.$$Utilities}.Schema.Scalar.LookupCustomScalarOrFallbackToString<'${sansNullabilityType.name}', ${i._$Context} extends { scalars: infer S } ? S : ${i.$$Utilities}.Schema.Scalar.Registry.Empty>>`
+    }
+    return Grafaid.StandardScalarTypeTypeScriptMapping[sansNullabilityType.name as Grafaid.StandardScalarTypeNames]
+  }
+
+  return H.namedTypesReference(sansNullabilityType)
 }
 
 // --------------------------------------------------------------------------------------------------
@@ -372,8 +468,8 @@ const renderArgumentType = (type: Grafaid.Schema.InputTypes): string => {
 namespace H {
   export type Name = string | Grafaid.Schema.NamedTypes | Grafaid.Schema.Field<any, any>
 
-  export const forwardTypeParameter$Scalars = (type: Name) => {
-    return `${renderName(type)}<${i._$Scalars}>`
+  export const forwardTypeParameter$Context = (type: Name) => {
+    return `${renderName(type)}<${i._$Context}>`
   }
 
   export const namedTypesReference = (type: Grafaid.Schema.NamedTypes) => {
@@ -385,7 +481,7 @@ namespace H {
     if (Grafaid.Schema.isEnumType(name)) {
       return renderName(name)
     }
-    return `${renderName(name)}<${i._$Scalars}>`
+    return `${renderName(name)}<${i._$Context}>`
   }
 
   export const propOpt = (type: Grafaid.Schema.Types) => {
@@ -396,7 +492,7 @@ namespace H {
     const name_ = renderName(name)
     return Code.tsAlias$({
       name: `${name_}$Expanded`,
-      parameters: $ScalarsTypeParameter,
+      parameters: $ContextTypeParameter,
       type: `${i.$$Utilities}.Simplify<${type}>`,
       tsDoc: `
         This is the "expanded" version of the \`${name_}\` type. It is identical except for the fact
@@ -461,9 +557,9 @@ namespace H {
   ) => {
     return Code.tsInterface({
       name: `${renderName(node)}${fragmentInlineNameSuffix}`,
-      parameters: $ScalarsTypeParameter,
+      parameters: $ContextTypeParameter,
       extends: [
-        forwardTypeParameter$Scalars(node),
+        forwardTypeParameter$Context(node),
         `${$.$$Utilities}.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields`,
       ],
       block: {},

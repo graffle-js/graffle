@@ -1,7 +1,7 @@
 import type { Context } from '../../context/context.js'
-import type { Scalars } from '../../context/fragments/scalars/_namespace.js'
+import type { Scalars } from '../../context/fragments/scalars/$.js'
 import type { GlobalRegistry } from '../../types/GlobalRegistry/GlobalRegistry.js'
-import { Schema } from '../../types/Schema/_namespace.js'
+import { Schema } from '../../types/Schema/$.js'
 import type { Client } from '../client.js'
 
 export interface ScalarMethod<
@@ -14,7 +14,16 @@ export interface ScalarMethod<
   >['schema'],
 > {
   /**
-   * TODO Docs.
+   * Register a custom scalar codec by name.
+   *
+   * Provide the scalar name and an object with `encode` and `decode` functions to transform
+   * values between their JavaScript and GraphQL representations.
+   *
+   * **Immutability**: Returns a new client instance. The original client is not modified.
+   * If the operation results in no effective change, the same instance is returned for performance.
+   *
+   * @param name - The name of the scalar type as defined in the GraphQL schema
+   * @param $Codec - An object containing encode and decode functions
    */
   <$Name extends _Schema['scalarNamesUnion'], $Decoded>(
     name: $Name,
@@ -23,6 +32,16 @@ export interface ScalarMethod<
       encode: (value: $Decoded) => string
     },
   ): Client<Scalars.Add<$Context, Schema.Scalar<$Name, $Decoded, string>>>
+  /**
+   * Register a pre-configured scalar object.
+   *
+   * Pass a {@link Schema.Scalar} object that was created with `Schema.Scalar.create()`.
+   *
+   * **Immutability**: Returns a new client instance. The original client is not modified.
+   * If the operation results in no effective change, the same instance is returned for performance.
+   *
+   * @param scalar - A pre-configured scalar object
+   */
   <$Scalar extends Schema.Scalar<_Schema['scalarNamesUnion']>>(
     scalar: $Scalar,
   ): Client<Scalars.Add<$Context, $Scalar>>

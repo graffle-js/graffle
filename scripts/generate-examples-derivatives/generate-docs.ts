@@ -134,13 +134,13 @@ const transformRewriteGraffleImports = (example: Example) => {
   const defaultSchema = `pokemon`
 
   let newContent = example.file.content
-    .replaceAll(/from '..\/\$\/graffle\/_namespace.js'/g, `from './graffle/_namespace.js'`)
+    .replaceAll(/from '\.\.\/\$\/graffle\/\$.js'/g, `from './graffle/$.js'`)
     // The examples that use Pokemon schema are mapped to the default schema in the documentation.
     // This works with Twoslash because we generate a pokemon schema in the website root directory.
     .replaceAll(new RegExp(`(import.*./)${defaultSchema}`, `g`), `$1graffle`)
     .replaceAll(new RegExp(`(import.*{.*)${pascalCase(defaultSchema)}(.*})`, `g`), `$1Graffle$2`)
-    // Any $ imports are entirely removed.
-    .replaceAll(/import.*'.*\$.*'\n/g, ``)
+    // Remove helper imports from ../$ (but keep the graffle import)
+    .replaceAll(/import.*from '\.\.\/\$\/(?!graffle).*'\n/g, ``)
 
   newContent = `
 // Our website uses Vitepress+Twoslash. Twoslash does not discover the generated Graffle modules.

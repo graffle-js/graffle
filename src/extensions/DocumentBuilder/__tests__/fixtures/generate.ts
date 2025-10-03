@@ -1,5 +1,5 @@
-import { TestSchemas } from '../../../../../tests/_/fixtures/schemas/_namespaces.js'
-import { Generator } from '../../../../generator/_namespace.js'
+import { TestSchemas } from '../../../../../tests/_/fixtures/schemas/$.js'
+import { Generator } from '../../../../generator/$.js'
 
 const generate = async (
   input: {
@@ -40,5 +40,5 @@ const generate = async (
 
 await generate({ name: `queryOnly` })
 await generate({ name: `mutationOnly` })
-await generate({ name: `possible`, scalarsFile: true })
 await generate({ name: `possible`, scalarsFile: false })
+await generate({ name: `possible`, scalarsFile: true })

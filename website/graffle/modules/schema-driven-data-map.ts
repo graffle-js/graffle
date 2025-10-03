@@ -398,28 +398,53 @@ const Mutation: $$Utilities.SchemaDrivenDataMap.OutputObject = {
 //
 //
 
+// TODO: Contribute helper to Utilities to cast readonly data to mutable at type level.
+// These assignments are needed to avoid circular references during module initialization.
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 PokemonFilter.f![`birthday`]!.nt = DateFilter;
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BattleRoyale.f[`combatants`]!.nt = CombatantMultiPokemon;
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BattleRoyale.f[`winner`]!.nt = Trainer;
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BattleTrainer.f[`combatant1`]!.nt = CombatantSinglePokemon;
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BattleTrainer.f[`combatant2`]!.nt = CombatantSinglePokemon;
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BattleTrainer.f[`winner`]!.nt = Trainer;
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BattleWild.f[`pokemon`]!.nt = Pokemon;
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BattleWild.f[`trainer`]!.nt = Trainer;
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 BattleWild.f[`wildPokemons`]!.nt = Pokemon;
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CombatantMultiPokemon.f[`pokemons`]!.nt = Pokemon;
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CombatantMultiPokemon.f[`trainer`]!.nt = Trainer;
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CombatantSinglePokemon.f[`pokemon`]!.nt = Pokemon;
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 CombatantSinglePokemon.f[`trainer`]!.nt = Trainer;
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Pokemon.f[`trainer`]!.nt = Trainer;
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Trainer.f[`fans`]!.nt = Patron;
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Trainer.f[`pokemon`]!.nt = Pokemon;
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`battles`]!.nt = Battle;
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`beings`]!.nt = Being;
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`pokemonByName`]!.nt = Pokemon;
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`pokemons`]!.nt = Pokemon;
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`trainerByName`]!.nt = Trainer;
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Query.f[`trainers`]!.nt = Trainer;
+// @ts-expect-error Assignment to readonly property is needed for circular reference handling.
 Mutation.f[`addPokemon`]!.nt = Pokemon;
 
 //

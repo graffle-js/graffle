@@ -1,7 +1,11 @@
 import * as MemFS from 'memfs'
 import * as Fs from 'node:fs/promises'
 import { beforeEach, describe, expect, test } from 'vitest'
+import { defaults } from '../config/defaults.js'
 import { generate } from '../generator/generate.js'
+
+// Suppress warnings in tests
+defaults.lint.missingCustomScalarCodec = false
 
 const fs = MemFS.fs.promises as any as typeof Fs
 
@@ -39,7 +43,7 @@ const customScalarsCode = `
 
 const readGeneratedFiles = () => ({
   scalar: MemFS.fs.readFileSync('./graffle/modules/scalar.ts', 'utf8'),
-  schema: MemFS.fs.readFileSync('./graffle/modules/schema.ts', 'utf8'),
+  schema: MemFS.fs.readFileSync('./graffle/modules/schema/$.ts', 'utf8'),
   sddm: MemFS.fs.readFileSync('./graffle/modules/schema-driven-data-map.ts', 'utf8'),
 })
 
@@ -80,15 +84,13 @@ describe('Issue #1370 - TypeScript export conflict with custom scalars', () => {
     await generate({ fs, schema: { type: 'sdl', sdl: schemaWithCustomScalars } })
     const { scalar, sddm } = readGeneratedFiles()
 
-    // The scalar module should not use wildcard export for custom scalars
-    // as it shadows the value exports when followed by type exports
-    expect(scalar).not.toContain('export * from "../../scalars.js"')
+    // The scalar module should import custom scalars namespace
+    expect(scalar).toContain('import * as CustomScalars from "../../scalars.js"')
 
-    // Should use explicit named exports for custom scalars
-    expect(scalar).toContain('export { BigInt, DateTime } from "../../scalars.js"')
-
-    // Type exports should coexist with value exports
+    // Should export both const and type for each custom scalar
+    expect(scalar).toContain('export const BigInt = CustomScalars.BigInt')
     expect(scalar).toContain('export type BigInt = typeof CustomScalars.BigInt')
+    expect(scalar).toContain('export const DateTime = CustomScalars.DateTime')
     expect(scalar).toContain('export type DateTime = typeof CustomScalars.DateTime')
 
     // SDDM should be able to reference scalars as values
@@ -132,7 +134,7 @@ describe('Issue #1367 - Import format noExtension not working', () => {
     const { scalar } = readGeneratedFiles()
 
     // Should NOT have .js extension when importFormat is noExtension
-    expect(scalar).toContain('export { BigInt, DateTime } from "../../scalars"')
+    expect(scalar).toContain('import * as CustomScalars from "../../scalars"')
     expect(scalar).not.toContain('from "../../scalars.js"')
   })
 })
@@ -142,15 +144,18 @@ describe('Issue #1354 - TypeScript reserved keywords', () => {
     await generate({ fs, schema: { type: 'sdl', sdl: schemas.withReservedScalars } })
     const { scalar } = readGeneratedFiles()
 
-    // Escaped type names
-    expect(scalar).toContain('export type $bigint =')
-    expect(scalar).toContain('export type $boolean =')
-    expect(scalar).toContain('export type $interface =')
+    // Codecless reserved keywords use escaped names with export aliases
+    expect(scalar).toContain('type $bigint =')
+    expect(scalar).toContain('export { type $bigint as bigint }')
+    expect(scalar).toContain(`ScalarCodecless<"bigint">`)
 
-    // Original names in ScalarCodecless
-    expect(scalar).toContain('ScalarCodecless<"bigint">')
-    expect(scalar).toContain('ScalarCodecless<"boolean">')
-    expect(scalar).toContain('ScalarCodecless<"interface">')
+    expect(scalar).toContain('type $boolean =')
+    expect(scalar).toContain('export { type $boolean as boolean }')
+    expect(scalar).toContain(`ScalarCodecless<"boolean">`)
+
+    expect(scalar).toContain('type $interface =')
+    expect(scalar).toContain('export { type $interface as interface }')
+    expect(scalar).toContain(`ScalarCodecless<"interface">`)
   })
 
   test('escapes reserved keywords with custom scalar codecs', async () => {
@@ -158,11 +163,14 @@ describe('Issue #1354 - TypeScript reserved keywords', () => {
     await generate({ fs, schema: { type: 'sdl', sdl: schemas.bigintOnly } })
     const { scalar } = readGeneratedFiles()
 
-    // Escaped type definitions
-    expect(scalar).toContain('export type $bigint = typeof')
-    expect(scalar).toContain('type $bigint_ = typeof')
-    expect(scalar).toContain('export type $bigintDecoded =')
-    expect(scalar).toContain('export type $bigintEncoded =')
+    // Uses dual export pattern for reserved keyword scalar
+    expect(scalar).toContain('const $bigint = CustomScalars.bigint')
+    expect(scalar).toContain('type $bigint = typeof CustomScalars.bigint')
+    expect(scalar).toContain('export { $bigint as bigint }')
+
+    // Decoded/Encoded types use plain name (not reserved)
+    expect(scalar).toContain('export type bigintDecoded =')
+    expect(scalar).toContain('export type bigintEncoded =')
 
     // Original names in runtime references
     expect(scalar).toContain('typeof CustomScalars.bigint')
@@ -172,17 +180,13 @@ describe('Issue #1354 - TypeScript reserved keywords', () => {
     await generate({ fs, schema: { type: 'sdl', sdl: schemas.withReservedScalars } })
     const { schema, sddm } = readGeneratedFiles()
 
-    // Schema module exports with escaped names
-    expect(schema).toContain('export type $bigint = $$Scalar.$bigint')
-    expect(schema).toContain('export type $interface = $$Scalar.$interface')
-
     // SDDM uses string literals for codecless scalars
     expect(sddm).toContain('const bigint = "bigint"')
     expect(sddm).toContain('const interface = "interface"')
 
-    // Field types reference escaped names
-    expect(schema).toContain('namedType: $$NamedTypes.$$bigint')
-    expect(schema).toContain('namedType: $$NamedTypes.$$interface')
+    // Schema interface scalars object uses types from barrel
+    expect(schema).toContain('bigint: $Types.bigint')
+    expect(schema).toContain('interface: $Types.interface')
   })
 
   test('cross-module references with custom scalar codecs', async () => {
@@ -190,17 +194,21 @@ describe('Issue #1354 - TypeScript reserved keywords', () => {
     await generate({ fs, schema: { type: 'sdl', sdl: schemas.withReservedScalars } })
     const { scalar, schema, sddm } = readGeneratedFiles()
 
-    // Scalar module with escaped types
-    expect(scalar).toContain('export type $bigint = typeof CustomScalars.bigint')
-    expect(scalar).toContain('export type $boolean = typeof CustomScalars.boolean')
-
-    // Schema module references
-    expect(schema).toContain('export type $bigint = $$Scalar.$bigint')
-    expect(schema).toContain('export type $boolean = $$Scalar.$boolean')
+    // Scalar module uses re-export syntax for reserved keywords
+    expect(scalar).toContain('const $bigint = CustomScalars.bigint')
+    expect(scalar).toContain('type $bigint = typeof CustomScalars.bigint')
+    expect(scalar).toContain('export { $bigint as bigint }')
+    expect(scalar).toContain('const $boolean = CustomScalars.boolean')
+    expect(scalar).toContain('type $boolean = typeof CustomScalars.boolean')
+    expect(scalar).toContain('export { $boolean as boolean }')
 
     // SDDM references with custom scalars
-    expect(sddm).toContain('const bigint = $$Scalar.$bigint')
-    expect(sddm).toContain('const boolean = $$Scalar.$boolean')
+    expect(sddm).toContain('const bigint = $$Scalar.bigint')
+    expect(sddm).toContain('const boolean = $$Scalar.boolean')
+
+    // Schema interface scalars object uses types from barrel
+    expect(schema).toContain('bigint: $Types.bigint')
+    expect(schema).toContain('boolean: $Types.boolean')
 
     // Runtime map uses original names
     expect(scalar).toContain('bigint: CustomScalars.bigint')
@@ -210,9 +218,7 @@ describe('Issue #1354 - TypeScript reserved keywords', () => {
     await generate({ fs, schema: { type: 'sdl', sdl: schemas.bigintOnly } })
     const { schema } = readGeneratedFiles()
 
-    // BUG: This currently fails because Schema.ts uses _.name instead of renderName(_.name)
-    // The scalars object should reference the escaped name Schema.$bigint, not Schema.bigint
-    expect(schema).toContain('bigint: Schema.$bigint')
-    expect(schema).not.toContain('bigint: Schema.bigint')
+    // The Schema interface scalars object should reference types from barrel
+    expect(schema).toContain('bigint: $Types.bigint')
   })
 })

@@ -1,12 +1,13 @@
 import { Code } from '../../lib/Code.js'
-import { Grafaid } from '../../lib/grafaid/_namespace.js'
+import { Grafaid } from '../../lib/grafaid/$.js'
 import { entries } from '../../lib/prelude.js'
-import { Tex } from '../../lib/tex/_namespace.js'
+import { Tex } from '../../lib/tex/$.js'
 import { propertyNames } from '../../types/SchemaDrivenDataMap/SchemaDrivenDataMap.js'
 import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
+import { importUtilities } from '../helpers/pathHelpers.js'
 import { renderInlineType, renderName } from '../helpers/render.js'
 import type { KindRenderers } from '../helpers/types.js'
 import { ModuleGeneratorScalar } from './Scalar.js'
@@ -15,6 +16,7 @@ type ReferenceAssignments = string[]
 
 export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
   `SchemaDrivenDataMap`,
+  import.meta.url,
   ({ config, code }) => {
     const rootsWithOpType = entries(config.schema.kindMap.index.Root)
       .map(_ => {
@@ -25,9 +27,7 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
     const kinds = entries(kindMap)
 
     code(importModuleGenerator(config, ModuleGeneratorScalar))
-    code`
-      import type * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
-    `
+    code(importUtilities(config))
 
     const referenceAssignments: ReferenceAssignments = []
 
@@ -49,8 +49,12 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
     code``
     if (referenceAssignments.length === 0) {
       code`// None of your types have references to other non-scalar/enum types.`
+    } else {
+      code`// TODO: Contribute helper to Utilities to cast readonly data to mutable at type level.`
+      code`// These assignments are needed to avoid circular references during module initialization.`
     }
     for (const referenceAssignment of referenceAssignments) {
+      code`// @ts-expect-error Assignment to readonly property is needed for circular reference handling.`
       code(referenceAssignment)
     }
     code``
@@ -158,7 +162,7 @@ const ScalarTypeCustom = createCodeGenerator<
 >(
   ({ config, code, type }) => {
     if (config.options.isImportsCustomScalars) {
-      code(Code.termConst(type.name, `${$.$$Scalar}.${renderName(type.name)}`))
+      code(Code.termConst(type.name, `${$.$$Scalar}.${type.name}`))
     } else {
       code(Code.termConst(type.name, Code.string(type.name)))
     }

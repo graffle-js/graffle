@@ -17,10 +17,11 @@ import type * as $$Utilities from 'graffle/utilities-for-generated'
 //
 
 export interface $Document<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
-  query?: Record<string, Query<_$Scalars>>
-  mutation?: Record<string, Mutation<_$Scalars>>
+  query?: Record<string, Query<_$Context>>
+  mutation?: Record<string, Mutation<_$Context>>
 }
 
 //
@@ -45,45 +46,188 @@ export interface $Document<
 
 // ----------------------------------------| Entrypoint Interface |
 
+/**
+ * GraphQL root {@link https://graphql.org/learn/schema/#the-query-and-mutation-types | Query} type.
+ *
+ * Root query type for fetching Pokemon data.
+ */
 export interface Query<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
   /**
-   * Select the `battles` field on the `Query` object. Its type is `Battle` (a `Union` kind of type).
+   * Retrieve all battles that have occurred.
+   *
+   * ```graphql
+   * battles: [Battle!]!
+   *
+   * union Battle = BattleRoyale | BattleTrainer | BattleWild
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Battle}[]! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.battles` |
+   * | **Nullability** | Required |
+   * | **List** | Yes |
    */
   battles?:
-    | Query.battles$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.battles<_$Scalars>>
+    | Query.battles$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.battles<_$Context>>
   /**
-   * Select the `beings` field on the `Query` object. Its type is `Being` (a `Interface` kind of type).
+   * Retrieve all beings (Pokemon, Trainers, and Patrons).
+   *
+   * ```graphql
+   * beings: [Being!]!
+   *
+   * interface Being {
+   * id: ID
+   * name: String
+   * }
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Being}[]! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.beings` |
+   * | **Nullability** | Required |
+   * | **List** | Yes |
    */
   beings?:
-    | Query.beings$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.beings<_$Scalars>>
+    | Query.beings$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.beings<_$Context>>
   /**
-   * Select the `pokemonByName` field on the `Query` object. Its type is `Pokemon` (a `OutputObject` kind of type).
+   * Find Pokemon by their name.
+   *
+   * ```graphql
+   * pokemonByName(name: String!): [Pokemon!]
+   *
+   * type Pokemon implements Being {
+   * attack: Int!
+   * birthday: Date!
+   * defense: Int!
+   * hp: Int!
+   * id: ID!
+   * name: String!
+   * trainer: Trainer
+   * type: PokemonType!
+   * }
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Pokemon}[] |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.pokemonByName` |
+   * | **Nullability** | Optional |
+   * | **List** | Yes |
+   * | **Arguments** | 1 |
    */
   pokemonByName?:
-    | Query.pokemonByName<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.pokemonByName<_$Scalars>>
+    | Query.pokemonByName<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.pokemonByName<_$Context>>
   /**
-   * Select the `pokemons` field on the `Query` object. Its type is `Pokemon` (a `OutputObject` kind of type).
+   * Retrieve all Pokemon, optionally filtered.
+   *
+   * ```graphql
+   * pokemons(filter: PokemonFilter): [Pokemon!]
+   *
+   * type Pokemon implements Being {
+   * attack: Int!
+   * birthday: Date!
+   * defense: Int!
+   * hp: Int!
+   * id: ID!
+   * name: String!
+   * trainer: Trainer
+   * type: PokemonType!
+   * }
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Pokemon}[] |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.pokemons` |
+   * | **Nullability** | Optional |
+   * | **List** | Yes |
+   * | **Arguments** | 1 |
    */
   pokemons?:
-    | Query.pokemons$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.pokemons<_$Scalars>>
+    | Query.pokemons$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.pokemons<_$Context>>
   /**
-   * Select the `trainerByName` field on the `Query` object. Its type is `Trainer` (a `OutputObject` kind of type).
+   * Find a trainer by their name.
+   *
+   * ```graphql
+   * trainerByName(name: String!): Trainer
+   *
+   * type Trainer implements Being {
+   * class: TrainerClass
+   * fans: [Patron!]
+   * id: ID
+   * name: String
+   * pokemon: [Pokemon!]
+   * }
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Trainer} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.trainerByName` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 1 |
    */
   trainerByName?:
-    | Query.trainerByName<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.trainerByName<_$Scalars>>
+    | Query.trainerByName<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.trainerByName<_$Context>>
   /**
-   * Select the `trainers` field on the `Query` object. Its type is `Trainer` (a `OutputObject` kind of type).
+   * Retrieve all trainers.
+   *
+   * ```graphql
+   * trainers: [Trainer!]
+   *
+   * type Trainer implements Being {
+   * class: TrainerClass
+   * fans: [Patron!]
+   * id: ID
+   * name: String
+   * pokemon: [Pokemon!]
+   * }
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Trainer}[] |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Query} |
+   * | **Path** | `Query.trainers` |
+   * | **Nullability** | Optional |
+   * | **List** | Yes |
    */
   trainers?:
-    | Query.trainers$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.trainers<_$Scalars>>
+    | Query.trainers$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Query.trainers<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -94,8 +238,8 @@ export interface Query<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | Query$FragmentInline<_$Scalars>
-    | Query$FragmentInline<_$Scalars>[]
+    | Query$FragmentInline<_$Context>
+    | Query$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -110,19 +254,23 @@ export interface Query<
 }
 
 export interface Query$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends Query<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends Query<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace Query {
-  export type battles<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    battles$SelectionSet<_$Scalars>
+  export type battles<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = battles$SelectionSet<_$Context>
 
   export interface battles$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Battle<_$Scalars> {}
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Battle<_$Context> {}
 
   // --- expanded ---
 
@@ -132,19 +280,23 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type battles$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    battles$SelectionSet<_$Scalars>
+    battles$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type beings<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    beings$SelectionSet<_$Scalars>
+  export type beings<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = beings$SelectionSet<_$Context>
 
   export interface beings$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Being<_$Scalars> {}
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Being<_$Context> {}
 
   // --- expanded ---
 
@@ -154,30 +306,37 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type beings$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    beings$SelectionSet<_$Scalars>
+    beings$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type pokemonByName<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = pokemonByName$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = pokemonByName$SelectionSet<_$Context>
 
   export interface pokemonByName$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Pokemon<_$Scalars> {
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Pokemon<_$Context> {
     /**
      * Arguments for `pokemonByName` field. All arguments are required so you must include this.
      */
-    $: pokemonByName$Arguments<_$Scalars>
+    $: pokemonByName$Arguments<_$Context>
   }
 
   export interface pokemonByName$Arguments<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    name: string
+    /**
+     * The name of the Pokemon to search for.
+     */
+    name: $$Utilities.DocumentBuilderKit.Var.Maybe<string>
   }
 
   // --- expanded ---
@@ -188,30 +347,37 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type pokemonByName$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    pokemonByName$SelectionSet<_$Scalars>
+    pokemonByName$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type pokemons<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = pokemons$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = pokemons$SelectionSet<_$Context>
 
   export interface pokemons$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Pokemon<_$Scalars> {
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Pokemon<_$Context> {
     /**
      * Arguments for `pokemons` field. No arguments are required so you may omit this.
      */
-    $?: pokemons$Arguments<_$Scalars>
+    $?: pokemons$Arguments<_$Context>
   }
 
   export interface pokemons$Arguments<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    filter?: $NamedTypes.$PokemonFilter<_$Scalars> | undefined | null
+    /**
+     * Optional filter criteria for Pokemon.
+     */
+    filter?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$PokemonFilter<_$Context> | null | undefined>
   }
 
   // --- expanded ---
@@ -222,30 +388,37 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type pokemons$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    pokemons$SelectionSet<_$Scalars>
+    pokemons$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type trainerByName<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = trainerByName$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = trainerByName$SelectionSet<_$Context>
 
   export interface trainerByName$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Trainer<_$Scalars> {
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Trainer<_$Context> {
     /**
      * Arguments for `trainerByName` field. All arguments are required so you must include this.
      */
-    $: trainerByName$Arguments<_$Scalars>
+    $: trainerByName$Arguments<_$Context>
   }
 
   export interface trainerByName$Arguments<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    name: string
+    /**
+     * The name of the trainer to search for.
+     */
+    name: $$Utilities.DocumentBuilderKit.Var.Maybe<string>
   }
 
   // --- expanded ---
@@ -256,20 +429,23 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type trainerByName$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    trainerByName$SelectionSet<_$Scalars>
+    trainerByName$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type trainers<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = trainers$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = trainers$SelectionSet<_$Context>
 
   export interface trainers$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Trainer<_$Scalars> {}
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Trainer<_$Context> {}
 
   // --- expanded ---
 
@@ -279,9 +455,10 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type trainers$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    trainers$SelectionSet<_$Scalars>
+    trainers$SelectionSet<_$Context>
   >
 }
 
@@ -291,15 +468,47 @@ export namespace Query {
 
 // ----------------------------------------| Entrypoint Interface |
 
+/**
+ * GraphQL root {@link https://graphql.org/learn/schema/#the-mutation-and-mutation-types | Mutation} type.
+ *
+ * Root mutation type for modifying Pokemon data.
+ */
 export interface Mutation<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
   /**
-   * Select the `addPokemon` field on the `Mutation` object. Its type is `Pokemon` (a `OutputObject` kind of type).
+   * Add a new Pokemon to the database.
+   *
+   * ```graphql
+   * addPokemon(attack: Int, defense: Int, hp: Int, name: String!, type: PokemonType!): Pokemon
+   *
+   * type Pokemon implements Being {
+   * attack: Int!
+   * birthday: Date!
+   * defense: Int!
+   * hp: Int!
+   * id: ID!
+   * name: String!
+   * trainer: Trainer
+   * type: PokemonType!
+   * }
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Pokemon} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Mutation} |
+   * | **Path** | `Mutation.addPokemon` |
+   * | **Nullability** | Optional |
+   * | **Arguments** | 5 |
    */
   addPokemon?:
-    | Mutation.addPokemon<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Mutation.addPokemon<_$Scalars>>
+    | Mutation.addPokemon<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Mutation.addPokemon<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -310,8 +519,8 @@ export interface Mutation<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | Mutation$FragmentInline<_$Scalars>
-    | Mutation$FragmentInline<_$Scalars>[]
+    | Mutation$FragmentInline<_$Context>
+    | Mutation$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -326,34 +535,53 @@ export interface Mutation<
 }
 
 export interface Mutation$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends Mutation<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends Mutation<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace Mutation {
   export type addPokemon<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = addPokemon$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = addPokemon$SelectionSet<_$Context>
 
   export interface addPokemon$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Pokemon<_$Scalars> {
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Pokemon<_$Context> {
     /**
      * Arguments for `addPokemon` field. Some (2/5) arguments are required so you must include this.
      */
-    $: addPokemon$Arguments<_$Scalars>
+    $: addPokemon$Arguments<_$Context>
   }
 
   export interface addPokemon$Arguments<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
-    attack?: number | undefined | null
-    defense?: number | undefined | null
-    hp?: number | undefined | null
-    name: string
-    $type: $NamedTypes.$PokemonType
+    /**
+     * The attack power of the new Pokemon.
+     */
+    attack?: $$Utilities.DocumentBuilderKit.Var.Maybe<number | null | undefined>
+    /**
+     * The defense power of the new Pokemon.
+     */
+    defense?: $$Utilities.DocumentBuilderKit.Var.Maybe<number | null | undefined>
+    /**
+     * The health points of the new Pokemon.
+     */
+    hp?: $$Utilities.DocumentBuilderKit.Var.Maybe<number | null | undefined>
+    /**
+     * The name of the new Pokemon.
+     */
+    name: $$Utilities.DocumentBuilderKit.Var.Maybe<string>
+    /**
+     * The elemental type of the new Pokemon.
+     */
+    $type: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$PokemonType>
   }
 
   // --- expanded ---
@@ -364,9 +592,10 @@ export namespace Mutation {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type addPokemon$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    addPokemon$SelectionSet<_$Scalars>
+    addPokemon$SelectionSet<_$Context>
   >
 }
 
@@ -386,11 +615,29 @@ export namespace Mutation {
 //
 //
 
+/**
+ * Possible outcomes of a wild Pokemon battle.
+ *
+ * Members
+ * "pokemonsCaptured" - The wild Pokemon were successfully captured.
+ * "pokemonsDefeated" - The wild Pokemon were defeated but not captured.
+ * "trainerDefeated" - The trainer was defeated by the wild Pokemon.
+ */
 export type BattleWildResult =
   | 'pokemonsCaptured'
   | 'pokemonsDefeated'
   | 'trainerDefeated'
 
+/**
+ * The elemental type of a Pokemon.
+ *
+ * Members
+ * "bug" - Bug-type Pokemon are insects and arthropods.
+ * "electric" - Electric-type Pokemon can generate and control electricity.
+ * "fire" - Fire-type Pokemon can create and manipulate flames.
+ * "grass" - Grass-type Pokemon have plant-like characteristics.
+ * "water" - Water-type Pokemon live in or control water.
+ */
 export type PokemonType =
   | 'bug'
   | 'electric'
@@ -398,6 +645,24 @@ export type PokemonType =
   | 'grass'
   | 'water'
 
+/**
+ * The class or specialty of a Pokemon trainer.
+ *
+ * Members
+ * "bugCatcher" - A trainer who specializes in Bug-type Pokemon.
+ * "camper" - A trainer who enjoys camping and outdoor activities.
+ * "picnicker" - A trainer who enjoys picnics and nature.
+ * "psychic" - A trainer with psychic abilities.
+ * "psychicMedium" - A psychic trainer who serves as a spiritual medium.
+ * "psychicYoungster" - A young trainer with developing psychic powers.
+ * "sailor" - A trainer who works on ships and the sea.
+ * "superNerd" - A highly intelligent trainer focused on science and technology.
+ * "tamer" - A trainer who specializes in taming and befriending Pokemon.
+ * "teamRocketGrunt" - A member of the villainous Team Rocket organization.
+ * "triathlete" - A trainer who excels in multiple types of competitions.
+ * "youngster" - A young, inexperienced trainer just starting their journey.
+ * "youth" - A young trainer with enthusiasm but limited experience.
+ */
 export type TrainerClass =
   | 'bugCatcher'
   | 'camper'
@@ -429,36 +694,79 @@ export type TrainerClass =
 //
 //
 
+/**
+ * Input filter for querying by date ranges.
+ */
 export interface DateFilter<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
-  gte?:
+  /**
+   * The minimum date (greater than or equal to).
+   */
+  gte?: $$Utilities.DocumentBuilderKit.Var.Maybe<
     | $$Utilities.Schema.Scalar.GetDecoded<
-      $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', _$Scalars>
+      $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
+        'Date',
+        _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
+      >
     >
-    | undefined
     | null
-  lte?:
+    | undefined
+  >
+  /**
+   * The maximum date (less than or equal to).
+   */
+  lte?: $$Utilities.DocumentBuilderKit.Var.Maybe<
     | $$Utilities.Schema.Scalar.GetDecoded<
-      $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<'Date', _$Scalars>
+      $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
+        'Date',
+        _$Context extends { scalars: infer S } ? S : $$Utilities.Schema.Scalar.Registry.Empty
+      >
     >
-    | undefined
     | null
+    | undefined
+  >
 }
 
+/**
+ * Input filter for querying Pokemon.
+ */
 export interface PokemonFilter<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
-  birthday?: $NamedTypes.$DateFilter<_$Scalars> | undefined | null
-  name?: $NamedTypes.$StringFilter<_$Scalars> | undefined | null
-  $type?: $NamedTypes.$PokemonType | undefined | null
+  /**
+   * Filter by Pokemon birth/catch date.
+   */
+  birthday?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$DateFilter<_$Context> | null | undefined>
+  /**
+   * Filter by Pokemon name.
+   */
+  name?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$StringFilter<_$Context> | null | undefined>
+  /**
+   * Filter by Pokemon type.
+   */
+  $type?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$PokemonType | null | undefined>
 }
 
+/**
+ * Input filter for querying by string values.
+ */
 export interface StringFilter<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
-  contains?: string | undefined | null
-  in?: Array<string | undefined | null> | undefined | null
+  /**
+   * Filter for strings containing this substring.
+   */
+  contains?: $$Utilities.DocumentBuilderKit.Var.Maybe<string | null | undefined>
+  /**
+   * Filter for strings matching any value in this list.
+   */
+  in?: $$Utilities.DocumentBuilderKit.Var.Maybe<
+    Array<$$Utilities.DocumentBuilderKit.Var.Maybe<string | null | undefined>> | null | undefined
+  >
 }
 
 //
@@ -483,33 +791,107 @@ export interface StringFilter<
 
 // ----------------------------------------| Entrypoint Interface |
 
+/**
+ * A battle royale where multiple trainers compete with their Pokemon teams.
+ */
 export interface BattleRoyale<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
-   * Select the `combatants` field on the `BattleRoyale` object. Its type is `CombatantMultiPokemon` (a `OutputObject` kind of type).
+   * The list of combatants participating in this battle royale.
+   *
+   * ```graphql
+   * combatants: [CombatantMultiPokemon!]
+   *
+   * type CombatantMultiPokemon {
+   * pokemons: [Pokemon!]
+   * trainer: Trainer
+   * }
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$CombatantMultiPokemon}[] |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$BattleRoyale} |
+   * | **Path** | `BattleRoyale.combatants` |
+   * | **Nullability** | Optional |
+   * | **List** | Yes |
    */
   combatants?:
-    | BattleRoyale.combatants$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleRoyale.combatants<_$Scalars>>
+    | BattleRoyale.combatants$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleRoyale.combatants<_$Context>>
   /**
-   * Select the `date` field on the `BattleRoyale` object. Its type is `Float` (a `ScalarStandard` kind of type).
+   * The date when this battle took place, stored as a Unix timestamp.
+   *
+   * ```graphql
+   * date: Float
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Float} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$BattleRoyale} |
+   * | **Path** | `BattleRoyale.date` |
+   * | **Nullability** | Optional |
    */
   date?:
-    | BattleRoyale.date$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleRoyale.date<_$Scalars>>
+    | BattleRoyale.date$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleRoyale.date<_$Context>>
   /**
-   * Select the `id` field on the `BattleRoyale` object. Its type is `ID` (a `ScalarStandard` kind of type).
+   * The unique identifier for this battle.
+   *
+   * ```graphql
+   * id: ID
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$BattleRoyale} |
+   * | **Path** | `BattleRoyale.id` |
+   * | **Nullability** | Optional |
    */
   id?:
-    | BattleRoyale.id$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleRoyale.id<_$Scalars>>
+    | BattleRoyale.id$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleRoyale.id<_$Context>>
   /**
-   * Select the `winner` field on the `BattleRoyale` object. Its type is `Trainer` (a `OutputObject` kind of type).
+   * The trainer who won this battle royale.
+   *
+   * ```graphql
+   * winner: Trainer
+   *
+   * type Trainer implements Being {
+   * class: TrainerClass
+   * fans: [Patron!]
+   * id: ID
+   * name: String
+   * pokemon: [Pokemon!]
+   * }
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Trainer} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$BattleRoyale} |
+   * | **Path** | `BattleRoyale.winner` |
+   * | **Nullability** | Optional |
    */
   winner?:
-    | BattleRoyale.winner$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleRoyale.winner<_$Scalars>>
+    | BattleRoyale.winner$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleRoyale.winner<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -520,8 +902,8 @@ export interface BattleRoyale<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | BattleRoyale$FragmentInline<_$Scalars>
-    | BattleRoyale$FragmentInline<_$Scalars>[]
+    | BattleRoyale$FragmentInline<_$Context>
+    | BattleRoyale$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -536,20 +918,23 @@ export interface BattleRoyale<
 }
 
 export interface BattleRoyale$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends BattleRoyale<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends BattleRoyale<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace BattleRoyale {
   export type combatants<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = combatants$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = combatants$SelectionSet<_$Context>
 
   export interface combatants$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$CombatantMultiPokemon<_$Scalars> {}
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$CombatantMultiPokemon<_$Context> {}
 
   // --- expanded ---
 
@@ -559,19 +944,24 @@ export namespace BattleRoyale {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type combatants$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    combatants$SelectionSet<_$Scalars>
+    combatants$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type date<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type date<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | date$SelectionSet<_$Scalars>
+    | date$SelectionSet<_$Context>
 
   export interface date$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -582,20 +972,25 @@ export namespace BattleRoyale {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type date$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | date$SelectionSet<_$Scalars>
+    | date$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type id<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type id<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
+    | id$SelectionSet<_$Context>
 
   export interface id$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -606,20 +1001,24 @@ export namespace BattleRoyale {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
+    | id$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type winner<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    winner$SelectionSet<_$Scalars>
+  export type winner<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = winner$SelectionSet<_$Context>
 
   export interface winner$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Trainer<_$Scalars> {}
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Trainer<_$Context> {}
 
   // --- expanded ---
 
@@ -629,9 +1028,10 @@ export namespace BattleRoyale {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type winner$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    winner$SelectionSet<_$Scalars>
+    winner$SelectionSet<_$Context>
   >
 }
 
@@ -641,39 +1041,131 @@ export namespace BattleRoyale {
 
 // ----------------------------------------| Entrypoint Interface |
 
+/**
+ * A one-on-one battle between two trainers.
+ */
 export interface BattleTrainer<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
-   * Select the `combatant1` field on the `BattleTrainer` object. Its type is `CombatantSinglePokemon` (a `OutputObject` kind of type).
+   * The first combatant in this trainer battle.
+   *
+   * ```graphql
+   * combatant1: CombatantSinglePokemon
+   *
+   * type CombatantSinglePokemon {
+   * pokemon: Pokemon
+   * trainer: Trainer
+   * }
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$CombatantSinglePokemon} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$BattleTrainer} |
+   * | **Path** | `BattleTrainer.combatant1` |
+   * | **Nullability** | Optional |
    */
   combatant1?:
-    | BattleTrainer.combatant1$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleTrainer.combatant1<_$Scalars>>
+    | BattleTrainer.combatant1$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleTrainer.combatant1<_$Context>>
   /**
-   * Select the `combatant2` field on the `BattleTrainer` object. Its type is `CombatantSinglePokemon` (a `OutputObject` kind of type).
+   * The second combatant in this trainer battle.
+   *
+   * ```graphql
+   * combatant2: CombatantSinglePokemon
+   *
+   * type CombatantSinglePokemon {
+   * pokemon: Pokemon
+   * trainer: Trainer
+   * }
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$CombatantSinglePokemon} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$BattleTrainer} |
+   * | **Path** | `BattleTrainer.combatant2` |
+   * | **Nullability** | Optional |
    */
   combatant2?:
-    | BattleTrainer.combatant2$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleTrainer.combatant2<_$Scalars>>
+    | BattleTrainer.combatant2$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleTrainer.combatant2<_$Context>>
   /**
-   * Select the `date` field on the `BattleTrainer` object. Its type is `Float` (a `ScalarStandard` kind of type).
+   * The date when this battle took place, stored as a Unix timestamp.
+   *
+   * ```graphql
+   * date: Float
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Float} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$BattleTrainer} |
+   * | **Path** | `BattleTrainer.date` |
+   * | **Nullability** | Optional |
    */
   date?:
-    | BattleTrainer.date$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleTrainer.date<_$Scalars>>
+    | BattleTrainer.date$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleTrainer.date<_$Context>>
   /**
-   * Select the `id` field on the `BattleTrainer` object. Its type is `ID` (a `ScalarStandard` kind of type).
+   * The unique identifier for this battle.
+   *
+   * ```graphql
+   * id: ID
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$BattleTrainer} |
+   * | **Path** | `BattleTrainer.id` |
+   * | **Nullability** | Optional |
    */
   id?:
-    | BattleTrainer.id$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleTrainer.id<_$Scalars>>
+    | BattleTrainer.id$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleTrainer.id<_$Context>>
   /**
-   * Select the `winner` field on the `BattleTrainer` object. Its type is `Trainer` (a `OutputObject` kind of type).
+   * The trainer who won this battle.
+   *
+   * ```graphql
+   * winner: Trainer
+   *
+   * type Trainer implements Being {
+   * class: TrainerClass
+   * fans: [Patron!]
+   * id: ID
+   * name: String
+   * pokemon: [Pokemon!]
+   * }
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Trainer} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$BattleTrainer} |
+   * | **Path** | `BattleTrainer.winner` |
+   * | **Nullability** | Optional |
    */
   winner?:
-    | BattleTrainer.winner$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleTrainer.winner<_$Scalars>>
+    | BattleTrainer.winner$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleTrainer.winner<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -684,8 +1176,8 @@ export interface BattleTrainer<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | BattleTrainer$FragmentInline<_$Scalars>
-    | BattleTrainer$FragmentInline<_$Scalars>[]
+    | BattleTrainer$FragmentInline<_$Context>
+    | BattleTrainer$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -700,20 +1192,23 @@ export interface BattleTrainer<
 }
 
 export interface BattleTrainer$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends BattleTrainer<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends BattleTrainer<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace BattleTrainer {
   export type combatant1<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = combatant1$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = combatant1$SelectionSet<_$Context>
 
   export interface combatant1$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$CombatantSinglePokemon<_$Scalars> {}
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$CombatantSinglePokemon<_$Context> {}
 
   // --- expanded ---
 
@@ -723,20 +1218,23 @@ export namespace BattleTrainer {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type combatant1$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    combatant1$SelectionSet<_$Scalars>
+    combatant1$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type combatant2<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = combatant2$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = combatant2$SelectionSet<_$Context>
 
   export interface combatant2$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$CombatantSinglePokemon<_$Scalars> {}
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$CombatantSinglePokemon<_$Context> {}
 
   // --- expanded ---
 
@@ -746,19 +1244,24 @@ export namespace BattleTrainer {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type combatant2$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    combatant2$SelectionSet<_$Scalars>
+    combatant2$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type date<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type date<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | date$SelectionSet<_$Scalars>
+    | date$SelectionSet<_$Context>
 
   export interface date$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -769,20 +1272,25 @@ export namespace BattleTrainer {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type date$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | date$SelectionSet<_$Scalars>
+    | date$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type id<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type id<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
+    | id$SelectionSet<_$Context>
 
   export interface id$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -793,20 +1301,24 @@ export namespace BattleTrainer {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
+    | id$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type winner<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    winner$SelectionSet<_$Scalars>
+  export type winner<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = winner$SelectionSet<_$Context>
 
   export interface winner$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Trainer<_$Scalars> {}
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Trainer<_$Context> {}
 
   // --- expanded ---
 
@@ -816,9 +1328,10 @@ export namespace BattleTrainer {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type winner$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    winner$SelectionSet<_$Scalars>
+    winner$SelectionSet<_$Context>
   >
 }
 
@@ -828,45 +1341,170 @@ export namespace BattleTrainer {
 
 // ----------------------------------------| Entrypoint Interface |
 
+/**
+ * A battle between a trainer and wild Pokemon.
+ */
 export interface BattleWild<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
-   * Select the `date` field on the `BattleWild` object. Its type is `Float` (a `ScalarStandard` kind of type).
+   * The date when this battle took place, stored as a Unix timestamp.
+   *
+   * ```graphql
+   * date: Float
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Float} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$BattleWild} |
+   * | **Path** | `BattleWild.date` |
+   * | **Nullability** | Optional |
    */
   date?:
-    | BattleWild.date$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleWild.date<_$Scalars>>
+    | BattleWild.date$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleWild.date<_$Context>>
   /**
-   * Select the `id` field on the `BattleWild` object. Its type is `ID` (a `ScalarStandard` kind of type).
+   * The unique identifier for this battle.
+   *
+   * ```graphql
+   * id: ID
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$BattleWild} |
+   * | **Path** | `BattleWild.id` |
+   * | **Nullability** | Optional |
    */
   id?:
-    | BattleWild.id$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleWild.id<_$Scalars>>
+    | BattleWild.id$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleWild.id<_$Context>>
   /**
-   * Select the `pokemon` field on the `BattleWild` object. Its type is `Pokemon` (a `OutputObject` kind of type).
+   * The trainer's Pokemon that participated in this battle.
+   *
+   * ```graphql
+   * pokemon: Pokemon
+   *
+   * type Pokemon implements Being {
+   * attack: Int!
+   * birthday: Date!
+   * defense: Int!
+   * hp: Int!
+   * id: ID!
+   * name: String!
+   * trainer: Trainer
+   * type: PokemonType!
+   * }
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Pokemon} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$BattleWild} |
+   * | **Path** | `BattleWild.pokemon` |
+   * | **Nullability** | Optional |
    */
   pokemon?:
-    | BattleWild.pokemon$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleWild.pokemon<_$Scalars>>
+    | BattleWild.pokemon$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleWild.pokemon<_$Context>>
   /**
-   * Select the `result` field on the `BattleWild` object. Its type is `BattleWildResult` (a `Enum` kind of type).
+   * The outcome of this wild Pokemon battle.
+   *
+   * ```graphql
+   * result: BattleWildResult
+   *
+   * enum BattleWildResult {
+   * pokemonsCaptured
+   * pokemonsDefeated
+   * trainerDefeated
+   * }
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$BattleWildResult} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum} ↗ |
+   * | **Parent** | {@link $NamedTypes.$BattleWild} |
+   * | **Path** | `BattleWild.result` |
+   * | **Nullability** | Optional |
    */
   result?:
-    | BattleWild.result$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleWild.result<_$Scalars>>
+    | BattleWild.result$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleWild.result<_$Context>>
   /**
-   * Select the `trainer` field on the `BattleWild` object. Its type is `Trainer` (a `OutputObject` kind of type).
+   * The trainer who engaged in this wild battle.
+   *
+   * ```graphql
+   * trainer: Trainer
+   *
+   * type Trainer implements Being {
+   * class: TrainerClass
+   * fans: [Patron!]
+   * id: ID
+   * name: String
+   * pokemon: [Pokemon!]
+   * }
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Trainer} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$BattleWild} |
+   * | **Path** | `BattleWild.trainer` |
+   * | **Nullability** | Optional |
    */
   trainer?:
-    | BattleWild.trainer$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleWild.trainer<_$Scalars>>
+    | BattleWild.trainer$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleWild.trainer<_$Context>>
   /**
-   * Select the `wildPokemons` field on the `BattleWild` object. Its type is `Pokemon` (a `OutputObject` kind of type).
+   * The wild Pokemon encountered in this battle.
+   *
+   * ```graphql
+   * wildPokemons: [Pokemon!]
+   *
+   * type Pokemon implements Being {
+   * attack: Int!
+   * birthday: Date!
+   * defense: Int!
+   * hp: Int!
+   * id: ID!
+   * name: String!
+   * trainer: Trainer
+   * type: PokemonType!
+   * }
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Pokemon}[] |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$BattleWild} |
+   * | **Path** | `BattleWild.wildPokemons` |
+   * | **Nullability** | Optional |
+   * | **List** | Yes |
    */
   wildPokemons?:
-    | BattleWild.wildPokemons$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleWild.wildPokemons<_$Scalars>>
+    | BattleWild.wildPokemons$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<BattleWild.wildPokemons<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -877,8 +1515,8 @@ export interface BattleWild<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | BattleWild$FragmentInline<_$Scalars>
-    | BattleWild$FragmentInline<_$Scalars>[]
+    | BattleWild$FragmentInline<_$Context>
+    | BattleWild$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -893,19 +1531,24 @@ export interface BattleWild<
 }
 
 export interface BattleWild$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends BattleWild<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends BattleWild<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace BattleWild {
-  export type date<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type date<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | date$SelectionSet<_$Scalars>
+    | date$SelectionSet<_$Context>
 
   export interface date$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -916,20 +1559,25 @@ export namespace BattleWild {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type date$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | date$SelectionSet<_$Scalars>
+    | date$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type id<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type id<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
+    | id$SelectionSet<_$Context>
 
   export interface id$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -940,20 +1588,24 @@ export namespace BattleWild {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
+    | id$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type pokemon<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    pokemon$SelectionSet<_$Scalars>
+  export type pokemon<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = pokemon$SelectionSet<_$Context>
 
   export interface pokemon$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Pokemon<_$Scalars> {}
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Pokemon<_$Context> {}
 
   // --- expanded ---
 
@@ -963,19 +1615,24 @@ export namespace BattleWild {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type pokemon$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    pokemon$SelectionSet<_$Scalars>
+    pokemon$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type result<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type result<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | result$SelectionSet<_$Scalars>
+    | result$SelectionSet<_$Context>
 
   export interface result$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -986,20 +1643,24 @@ export namespace BattleWild {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type result$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | result$SelectionSet<_$Scalars>
+    | result$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type trainer<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    trainer$SelectionSet<_$Scalars>
+  export type trainer<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = trainer$SelectionSet<_$Context>
 
   export interface trainer$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Trainer<_$Scalars> {}
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Trainer<_$Context> {}
 
   // --- expanded ---
 
@@ -1009,20 +1670,23 @@ export namespace BattleWild {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type trainer$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    trainer$SelectionSet<_$Scalars>
+    trainer$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type wildPokemons<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = wildPokemons$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = wildPokemons$SelectionSet<_$Context>
 
   export interface wildPokemons$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Pokemon<_$Scalars> {}
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Pokemon<_$Context> {}
 
   // --- expanded ---
 
@@ -1032,9 +1696,10 @@ export namespace BattleWild {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type wildPokemons$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    wildPokemons$SelectionSet<_$Scalars>
+    wildPokemons$SelectionSet<_$Context>
   >
 }
 
@@ -1044,21 +1709,73 @@ export namespace BattleWild {
 
 // ----------------------------------------| Entrypoint Interface |
 
+/**
+ * A combatant in a battle royale with multiple Pokemon.
+ */
 export interface CombatantMultiPokemon<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
-   * Select the `pokemons` field on the `CombatantMultiPokemon` object. Its type is `Pokemon` (a `OutputObject` kind of type).
+   * The team of Pokemon used by this combatant.
+   *
+   * ```graphql
+   * pokemons: [Pokemon!]
+   *
+   * type Pokemon implements Being {
+   * attack: Int!
+   * birthday: Date!
+   * defense: Int!
+   * hp: Int!
+   * id: ID!
+   * name: String!
+   * trainer: Trainer
+   * type: PokemonType!
+   * }
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Pokemon}[] |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$CombatantMultiPokemon} |
+   * | **Path** | `CombatantMultiPokemon.pokemons` |
+   * | **Nullability** | Optional |
+   * | **List** | Yes |
    */
   pokemons?:
-    | CombatantMultiPokemon.pokemons$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<CombatantMultiPokemon.pokemons<_$Scalars>>
+    | CombatantMultiPokemon.pokemons$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<CombatantMultiPokemon.pokemons<_$Context>>
   /**
-   * Select the `trainer` field on the `CombatantMultiPokemon` object. Its type is `Trainer` (a `OutputObject` kind of type).
+   * The trainer commanding this team of Pokemon.
+   *
+   * ```graphql
+   * trainer: Trainer
+   *
+   * type Trainer implements Being {
+   * class: TrainerClass
+   * fans: [Patron!]
+   * id: ID
+   * name: String
+   * pokemon: [Pokemon!]
+   * }
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Trainer} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$CombatantMultiPokemon} |
+   * | **Path** | `CombatantMultiPokemon.trainer` |
+   * | **Nullability** | Optional |
    */
   trainer?:
-    | CombatantMultiPokemon.trainer$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<CombatantMultiPokemon.trainer<_$Scalars>>
+    | CombatantMultiPokemon.trainer$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<CombatantMultiPokemon.trainer<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -1069,8 +1786,8 @@ export interface CombatantMultiPokemon<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | CombatantMultiPokemon$FragmentInline<_$Scalars>
-    | CombatantMultiPokemon$FragmentInline<_$Scalars>[]
+    | CombatantMultiPokemon$FragmentInline<_$Context>
+    | CombatantMultiPokemon$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -1085,9 +1802,10 @@ export interface CombatantMultiPokemon<
 }
 
 export interface CombatantMultiPokemon$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends
-  CombatantMultiPokemon<_$Scalars>,
+  CombatantMultiPokemon<_$Context>,
   $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields
 {
 }
@@ -1096,12 +1814,14 @@ export interface CombatantMultiPokemon$FragmentInline<
 
 export namespace CombatantMultiPokemon {
   export type pokemons<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = pokemons$SelectionSet<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = pokemons$SelectionSet<_$Context>
 
   export interface pokemons$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Pokemon<_$Scalars> {}
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Pokemon<_$Context> {}
 
   // --- expanded ---
 
@@ -1111,19 +1831,23 @@ export namespace CombatantMultiPokemon {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type pokemons$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    pokemons$SelectionSet<_$Scalars>
+    pokemons$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type trainer<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    trainer$SelectionSet<_$Scalars>
+  export type trainer<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = trainer$SelectionSet<_$Context>
 
   export interface trainer$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Trainer<_$Scalars> {}
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Trainer<_$Context> {}
 
   // --- expanded ---
 
@@ -1133,9 +1857,10 @@ export namespace CombatantMultiPokemon {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type trainer$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    trainer$SelectionSet<_$Scalars>
+    trainer$SelectionSet<_$Context>
   >
 }
 
@@ -1145,21 +1870,72 @@ export namespace CombatantMultiPokemon {
 
 // ----------------------------------------| Entrypoint Interface |
 
+/**
+ * A combatant in a one-on-one battle with a single Pokemon.
+ */
 export interface CombatantSinglePokemon<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
-   * Select the `pokemon` field on the `CombatantSinglePokemon` object. Its type is `Pokemon` (a `OutputObject` kind of type).
+   * The Pokemon used by this combatant.
+   *
+   * ```graphql
+   * pokemon: Pokemon
+   *
+   * type Pokemon implements Being {
+   * attack: Int!
+   * birthday: Date!
+   * defense: Int!
+   * hp: Int!
+   * id: ID!
+   * name: String!
+   * trainer: Trainer
+   * type: PokemonType!
+   * }
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Pokemon} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$CombatantSinglePokemon} |
+   * | **Path** | `CombatantSinglePokemon.pokemon` |
+   * | **Nullability** | Optional |
    */
   pokemon?:
-    | CombatantSinglePokemon.pokemon$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<CombatantSinglePokemon.pokemon<_$Scalars>>
+    | CombatantSinglePokemon.pokemon$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<CombatantSinglePokemon.pokemon<_$Context>>
   /**
-   * Select the `trainer` field on the `CombatantSinglePokemon` object. Its type is `Trainer` (a `OutputObject` kind of type).
+   * The trainer commanding this Pokemon.
+   *
+   * ```graphql
+   * trainer: Trainer
+   *
+   * type Trainer implements Being {
+   * class: TrainerClass
+   * fans: [Patron!]
+   * id: ID
+   * name: String
+   * pokemon: [Pokemon!]
+   * }
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Trainer} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$CombatantSinglePokemon} |
+   * | **Path** | `CombatantSinglePokemon.trainer` |
+   * | **Nullability** | Optional |
    */
   trainer?:
-    | CombatantSinglePokemon.trainer$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<CombatantSinglePokemon.trainer<_$Scalars>>
+    | CombatantSinglePokemon.trainer$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<CombatantSinglePokemon.trainer<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -1170,8 +1946,8 @@ export interface CombatantSinglePokemon<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | CombatantSinglePokemon$FragmentInline<_$Scalars>
-    | CombatantSinglePokemon$FragmentInline<_$Scalars>[]
+    | CombatantSinglePokemon$FragmentInline<_$Context>
+    | CombatantSinglePokemon$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -1186,9 +1962,10 @@ export interface CombatantSinglePokemon<
 }
 
 export interface CombatantSinglePokemon$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends
-  CombatantSinglePokemon<_$Scalars>,
+  CombatantSinglePokemon<_$Context>,
   $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields
 {
 }
@@ -1196,12 +1973,15 @@ export interface CombatantSinglePokemon$FragmentInline<
 // ----------------------------------------| Fields |
 
 export namespace CombatantSinglePokemon {
-  export type pokemon<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    pokemon$SelectionSet<_$Scalars>
+  export type pokemon<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = pokemon$SelectionSet<_$Context>
 
   export interface pokemon$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Pokemon<_$Scalars> {}
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Pokemon<_$Context> {}
 
   // --- expanded ---
 
@@ -1211,19 +1991,23 @@ export namespace CombatantSinglePokemon {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type pokemon$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    pokemon$SelectionSet<_$Scalars>
+    pokemon$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type trainer<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    trainer$SelectionSet<_$Scalars>
+  export type trainer<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = trainer$SelectionSet<_$Context>
 
   export interface trainer$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Trainer<_$Scalars> {}
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Trainer<_$Context> {}
 
   // --- expanded ---
 
@@ -1233,9 +2017,10 @@ export namespace CombatantSinglePokemon {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type trainer$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    trainer$SelectionSet<_$Scalars>
+    trainer$SelectionSet<_$Context>
   >
 }
 
@@ -1245,27 +2030,73 @@ export namespace CombatantSinglePokemon {
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface Patron<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty>
-  extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike
-{
+/**
+ * A patron who is a fan of a particular trainer.
+ */
+export interface Patron<
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
-   * Select the `id` field on the `Patron` object. Its type is `ID` (a `ScalarStandard` kind of type).
+   * The unique identifier for this patron.
+   *
+   * ```graphql
+   * id: ID
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Patron} |
+   * | **Path** | `Patron.id` |
+   * | **Nullability** | Optional |
    */
   id?:
-    | Patron.id$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Patron.id<_$Scalars>>
+    | Patron.id$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Patron.id<_$Context>>
   /**
-   * Select the `money` field on the `Patron` object. Its type is `Int` (a `ScalarStandard` kind of type).
+   * The amount of money this patron has.
+   *
+   * ```graphql
+   * money: Int
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Int} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Patron} |
+   * | **Path** | `Patron.money` |
+   * | **Nullability** | Optional |
    */
   money?:
-    | Patron.money$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Patron.money<_$Scalars>>
+    | Patron.money$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Patron.money<_$Context>>
   /**
-   * Select the `name` field on the `Patron` object. Its type is `String` (a `ScalarStandard` kind of type).
+   * The name of this patron.
+   *
+   * ```graphql
+   * name: String
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Patron} |
+   * | **Path** | `Patron.name` |
+   * | **Nullability** | Optional |
    */
   name?:
-    | Patron.name$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Patron.name<_$Scalars>>
+    | Patron.name$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Patron.name<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -1276,8 +2107,8 @@ export interface Patron<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | Patron$FragmentInline<_$Scalars>
-    | Patron$FragmentInline<_$Scalars>[]
+    | Patron$FragmentInline<_$Context>
+    | Patron$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -1292,19 +2123,24 @@ export interface Patron<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $
 }
 
 export interface Patron$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends Patron<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends Patron<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace Patron {
-  export type id<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type id<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
+    | id$SelectionSet<_$Context>
 
   export interface id$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1315,20 +2151,25 @@ export namespace Patron {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
+    | id$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type money<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type money<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | money$SelectionSet<_$Scalars>
+    | money$SelectionSet<_$Context>
 
   export interface money$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1339,20 +2180,25 @@ export namespace Patron {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type money$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | money$SelectionSet<_$Scalars>
+    | money$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type name<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type name<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | name$SelectionSet<_$Scalars>
+    | name$SelectionSet<_$Context>
 
   export interface name$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1363,10 +2209,11 @@ export namespace Patron {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type name$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | name$SelectionSet<_$Scalars>
+    | name$SelectionSet<_$Context>
   >
 }
 
@@ -1376,57 +2223,191 @@ export namespace Patron {
 
 // ----------------------------------------| Entrypoint Interface |
 
+/**
+ * A Pokemon with stats, type, and trainer information.
+ */
 export interface Pokemon<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
-   * Select the `attack` field on the `Pokemon` object. Its type is `Int` (a `ScalarStandard` kind of type).
+   * The attack power of this Pokemon.
+   *
+   * ```graphql
+   * attack: Int!
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Int}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Pokemon} |
+   * | **Path** | `Pokemon.attack` |
+   * | **Nullability** | Required |
    */
   attack?:
-    | Pokemon.attack$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Pokemon.attack<_$Scalars>>
+    | Pokemon.attack$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Pokemon.attack<_$Context>>
   /**
-   * Select the `birthday` field on the `Pokemon` object. Its type is `Date` (a `ScalarCustom` kind of type).
+   * The date this Pokemon was born or caught.
+   *
+   * ```graphql
+   * birthday: Date!
+   *
+   * scalar Date
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Date}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Pokemon} |
+   * | **Path** | `Pokemon.birthday` |
+   * | **Nullability** | Required |
    */
   birthday?:
-    | Pokemon.birthday$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Pokemon.birthday<_$Scalars>>
+    | Pokemon.birthday$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Pokemon.birthday<_$Context>>
   /**
-   * Select the `defense` field on the `Pokemon` object. Its type is `Int` (a `ScalarStandard` kind of type).
+   * The defense power of this Pokemon.
+   *
+   * ```graphql
+   * defense: Int!
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Int}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Pokemon} |
+   * | **Path** | `Pokemon.defense` |
+   * | **Nullability** | Required |
    */
   defense?:
-    | Pokemon.defense$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Pokemon.defense<_$Scalars>>
+    | Pokemon.defense$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Pokemon.defense<_$Context>>
   /**
-   * Select the `hp` field on the `Pokemon` object. Its type is `Int` (a `ScalarStandard` kind of type).
+   * The health points (HP) of this Pokemon.
+   *
+   * ```graphql
+   * hp: Int!
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Int}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Pokemon} |
+   * | **Path** | `Pokemon.hp` |
+   * | **Nullability** | Required |
    */
   hp?:
-    | Pokemon.hp$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Pokemon.hp<_$Scalars>>
+    | Pokemon.hp$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Pokemon.hp<_$Context>>
   /**
-   * Select the `id` field on the `Pokemon` object. Its type is `ID` (a `ScalarStandard` kind of type).
+   * The unique identifier for this Pokemon.
+   *
+   * ```graphql
+   * id: ID!
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ID}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Pokemon} |
+   * | **Path** | `Pokemon.id` |
+   * | **Nullability** | Required |
    */
   id?:
-    | Pokemon.id$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Pokemon.id<_$Scalars>>
+    | Pokemon.id$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Pokemon.id<_$Context>>
   /**
-   * Select the `name` field on the `Pokemon` object. Its type is `String` (a `ScalarStandard` kind of type).
+   * The name of this Pokemon.
+   *
+   * ```graphql
+   * name: String!
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$String}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Pokemon} |
+   * | **Path** | `Pokemon.name` |
+   * | **Nullability** | Required |
    */
   name?:
-    | Pokemon.name$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Pokemon.name<_$Scalars>>
+    | Pokemon.name$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Pokemon.name<_$Context>>
   /**
-   * Select the `trainer` field on the `Pokemon` object. Its type is `Trainer` (a `OutputObject` kind of type).
+   * The trainer who owns this Pokemon, if any.
+   *
+   * ```graphql
+   * trainer: Trainer
+   *
+   * type Trainer implements Being {
+   * class: TrainerClass
+   * fans: [Patron!]
+   * id: ID
+   * name: String
+   * pokemon: [Pokemon!]
+   * }
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Trainer} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Pokemon} |
+   * | **Path** | `Pokemon.trainer` |
+   * | **Nullability** | Optional |
    */
   trainer?:
-    | Pokemon.trainer$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Pokemon.trainer<_$Scalars>>
+    | Pokemon.trainer$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Pokemon.trainer<_$Context>>
   /**
-   * Select the `type` field on the `Pokemon` object. Its type is `PokemonType` (a `Enum` kind of type).
+   * The elemental type of this Pokemon.
+   *
+   * ```graphql
+   * type: PokemonType!
+   *
+   * enum PokemonType {
+   * bug
+   * electric
+   * fire
+   * grass
+   * water
+   * }
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$PokemonType}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Pokemon} |
+   * | **Path** | `Pokemon.type` |
+   * | **Nullability** | Required |
    */
   type?:
-    | Pokemon.type$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Pokemon.type<_$Scalars>>
+    | Pokemon.type$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Pokemon.type<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -1437,8 +2418,8 @@ export interface Pokemon<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | Pokemon$FragmentInline<_$Scalars>
-    | Pokemon$FragmentInline<_$Scalars>[]
+    | Pokemon$FragmentInline<_$Context>
+    | Pokemon$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -1453,19 +2434,24 @@ export interface Pokemon<
 }
 
 export interface Pokemon$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends Pokemon<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends Pokemon<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace Pokemon {
-  export type attack<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type attack<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | attack$SelectionSet<_$Scalars>
+    | attack$SelectionSet<_$Context>
 
   export interface attack$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1476,22 +2462,25 @@ export namespace Pokemon {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type attack$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | attack$SelectionSet<_$Scalars>
+    | attack$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type birthday<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | birthday$SelectionSet<_$Scalars>
+    | birthday$SelectionSet<_$Context>
 
   export interface birthday$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1502,20 +2491,25 @@ export namespace Pokemon {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type birthday$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | birthday$SelectionSet<_$Scalars>
+    | birthday$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type defense<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type defense<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | defense$SelectionSet<_$Scalars>
+    | defense$SelectionSet<_$Context>
 
   export interface defense$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1526,20 +2520,25 @@ export namespace Pokemon {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type defense$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | defense$SelectionSet<_$Scalars>
+    | defense$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type hp<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type hp<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | hp$SelectionSet<_$Scalars>
+    | hp$SelectionSet<_$Context>
 
   export interface hp$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1550,20 +2549,25 @@ export namespace Pokemon {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type hp$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | hp$SelectionSet<_$Scalars>
+    | hp$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type id<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type id<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
+    | id$SelectionSet<_$Context>
 
   export interface id$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1574,20 +2578,25 @@ export namespace Pokemon {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
+    | id$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type name<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type name<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | name$SelectionSet<_$Scalars>
+    | name$SelectionSet<_$Context>
 
   export interface name$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1598,20 +2607,24 @@ export namespace Pokemon {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type name$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | name$SelectionSet<_$Scalars>
+    | name$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type trainer<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    trainer$SelectionSet<_$Scalars>
+  export type trainer<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = trainer$SelectionSet<_$Context>
 
   export interface trainer$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Trainer<_$Scalars> {}
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Trainer<_$Context> {}
 
   // --- expanded ---
 
@@ -1621,19 +2634,24 @@ export namespace Pokemon {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type trainer$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    trainer$SelectionSet<_$Scalars>
+    trainer$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type type<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type type<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | type$SelectionSet<_$Scalars>
+    | type$SelectionSet<_$Context>
 
   export interface type$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1644,10 +2662,11 @@ export namespace Pokemon {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type type$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | type$SelectionSet<_$Scalars>
+    | type$SelectionSet<_$Context>
   >
 }
 
@@ -1657,39 +2676,148 @@ export namespace Pokemon {
 
 // ----------------------------------------| Entrypoint Interface |
 
+/**
+ * A Pokemon trainer who catches and battles with Pokemon.
+ */
 export interface Trainer<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
-   * Select the `class` field on the `Trainer` object. Its type is `TrainerClass` (a `Enum` kind of type).
+   * The class or specialty of this trainer.
+   *
+   * ```graphql
+   * class: TrainerClass
+   *
+   * enum TrainerClass {
+   * bugCatcher
+   * camper
+   * picnicker
+   * psychic
+   * psychicMedium
+   * psychicYoungster
+   * sailor
+   * superNerd
+   * tamer
+   * teamRocketGrunt
+   * triathlete
+   * youngster
+   * youth
+   * }
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$TrainerClass} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Trainer} |
+   * | **Path** | `Trainer.class` |
+   * | **Nullability** | Optional |
    */
   class?:
-    | Trainer.$class$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Trainer.$class<_$Scalars>>
+    | Trainer.$class$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Trainer.$class<_$Context>>
   /**
-   * Select the `fans` field on the `Trainer` object. Its type is `Patron` (a `OutputObject` kind of type).
+   * The patrons who are fans of this trainer.
+   *
+   * ```graphql
+   * fans: [Patron!]
+   *
+   * type Patron implements Being {
+   * id: ID
+   * money: Int
+   * name: String
+   * }
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Patron}[] |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Trainer} |
+   * | **Path** | `Trainer.fans` |
+   * | **Nullability** | Optional |
+   * | **List** | Yes |
    */
   fans?:
-    | Trainer.fans$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Trainer.fans<_$Scalars>>
+    | Trainer.fans$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Trainer.fans<_$Context>>
   /**
-   * Select the `id` field on the `Trainer` object. Its type is `ID` (a `ScalarStandard` kind of type).
+   * The unique identifier for this trainer.
+   *
+   * ```graphql
+   * id: ID
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Trainer} |
+   * | **Path** | `Trainer.id` |
+   * | **Nullability** | Optional |
    */
   id?:
-    | Trainer.id$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Trainer.id<_$Scalars>>
+    | Trainer.id$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Trainer.id<_$Context>>
   /**
-   * Select the `name` field on the `Trainer` object. Its type is `String` (a `ScalarStandard` kind of type).
+   * The name of this trainer.
+   *
+   * ```graphql
+   * name: String
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$String} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Trainer} |
+   * | **Path** | `Trainer.name` |
+   * | **Nullability** | Optional |
    */
   name?:
-    | Trainer.name$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Trainer.name<_$Scalars>>
+    | Trainer.name$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Trainer.name<_$Context>>
   /**
-   * Select the `pokemon` field on the `Trainer` object. Its type is `Pokemon` (a `OutputObject` kind of type).
+   * The Pokemon owned by this trainer.
+   *
+   * ```graphql
+   * pokemon: [Pokemon!]
+   *
+   * type Pokemon implements Being {
+   * attack: Int!
+   * birthday: Date!
+   * defense: Int!
+   * hp: Int!
+   * id: ID!
+   * name: String!
+   * trainer: Trainer
+   * type: PokemonType!
+   * }
+   * ```
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$Pokemon}[] |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Trainer} |
+   * | **Path** | `Trainer.pokemon` |
+   * | **Nullability** | Optional |
+   * | **List** | Yes |
    */
   pokemon?:
-    | Trainer.pokemon$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Trainer.pokemon<_$Scalars>>
+    | Trainer.pokemon$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Trainer.pokemon<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -1700,8 +2828,8 @@ export interface Trainer<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | Trainer$FragmentInline<_$Scalars>
-    | Trainer$FragmentInline<_$Scalars>[]
+    | Trainer$FragmentInline<_$Context>
+    | Trainer$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -1716,19 +2844,24 @@ export interface Trainer<
 }
 
 export interface Trainer$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends Trainer<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends Trainer<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace Trainer {
-  export type $class<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type $class<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | $class$SelectionSet<_$Scalars>
+    | $class$SelectionSet<_$Context>
 
   export interface $class$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1739,20 +2872,24 @@ export namespace Trainer {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type $class$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | $class$SelectionSet<_$Scalars>
+    | $class$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type fans<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    fans$SelectionSet<_$Scalars>
+  export type fans<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = fans$SelectionSet<_$Context>
 
   export interface fans$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Patron<_$Scalars> {}
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Patron<_$Context> {}
 
   // --- expanded ---
 
@@ -1762,19 +2899,24 @@ export namespace Trainer {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type fans$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    fans$SelectionSet<_$Scalars>
+    fans$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type id<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type id<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
+    | id$SelectionSet<_$Context>
 
   export interface id$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1785,20 +2927,25 @@ export namespace Trainer {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
+    | id$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type name<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type name<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | name$SelectionSet<_$Scalars>
+    | name$SelectionSet<_$Context>
 
   export interface name$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1809,20 +2956,24 @@ export namespace Trainer {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type name$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | name$SelectionSet<_$Scalars>
+    | name$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type pokemon<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    pokemon$SelectionSet<_$Scalars>
+  export type pokemon<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = pokemon$SelectionSet<_$Context>
 
   export interface pokemon$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Pokemon<_$Scalars> {}
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Pokemon<_$Context> {}
 
   // --- expanded ---
 
@@ -1832,9 +2983,10 @@ export namespace Trainer {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type pokemon$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
-    pokemon$SelectionSet<_$Scalars>
+    pokemon$SelectionSet<_$Context>
   >
 }
 
@@ -1854,8 +3006,12 @@ export namespace Trainer {
 //
 //
 
+/**
+ * Represents any kind of battle that can occur in the Pokemon world.
+ */
 export interface Battle<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
   /**
    * A meta field. Is the name of the type being selected. Since this is a union type and thus polymorphic,
@@ -1869,9 +3025,90 @@ export interface Battle<
       $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     >
 
-  ___on_BattleRoyale?: BattleRoyale<_$Scalars>
-  ___on_BattleTrainer?: BattleTrainer<_$Scalars>
-  ___on_BattleWild?: BattleWild<_$Scalars>
+  /**
+   * Inline fragment selection for {@link $Schema.BattleRoyale} member.
+   *
+   * When the runtime value is of type {@link $Schema.BattleRoyale}, this selection set is applied, allowing you to select fields specific to this member type.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.BattleRoyale} |
+   * | **Kind** | Union Member |
+   * | **Parent** | {@link $Schema.Battle} |
+   * | **Path** | `Battle -> BattleRoyale` |
+   *
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
+   * @see {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union Types} ↗
+   *
+   * @example
+   * ```ts
+   * query.battles({
+   * __typename: true,
+   * ___on_BattleRoyale: {
+   * // ... BattleRoyale-specific fields
+   * }
+   * })
+   * ```
+   */
+  ___on_BattleRoyale?: BattleRoyale<_$Context>
+  /**
+   * Inline fragment selection for {@link $Schema.BattleTrainer} member.
+   *
+   * When the runtime value is of type {@link $Schema.BattleTrainer}, this selection set is applied, allowing you to select fields specific to this member type.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.BattleTrainer} |
+   * | **Kind** | Union Member |
+   * | **Parent** | {@link $Schema.Battle} |
+   * | **Path** | `Battle -> BattleTrainer` |
+   *
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
+   * @see {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union Types} ↗
+   *
+   * @example
+   * ```ts
+   * query.battles({
+   * __typename: true,
+   * ___on_BattleTrainer: {
+   * // ... BattleTrainer-specific fields
+   * }
+   * })
+   * ```
+   */
+  ___on_BattleTrainer?: BattleTrainer<_$Context>
+  /**
+   * Inline fragment selection for {@link $Schema.BattleWild} member.
+   *
+   * When the runtime value is of type {@link $Schema.BattleWild}, this selection set is applied, allowing you to select fields specific to this member type.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.BattleWild} |
+   * | **Kind** | Union Member |
+   * | **Parent** | {@link $Schema.Battle} |
+   * | **Path** | `Battle -> BattleWild` |
+   *
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
+   * @see {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union Types} ↗
+   *
+   * @example
+   * ```ts
+   * query.battles({
+   * __typename: true,
+   * ___on_BattleWild: {
+   * // ... BattleWild-specific fields
+   * }
+   * })
+   * ```
+   */
+  ___on_BattleWild?: BattleWild<_$Context>
 
   /**
    * Inline fragments for field groups.
@@ -1882,12 +3119,13 @@ export interface Battle<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | Battle$FragmentInline<_$Scalars>
-    | Battle$FragmentInline<_$Scalars>[]
+    | Battle$FragmentInline<_$Context>
+    | Battle$FragmentInline<_$Context>[]
 }
 export interface Battle$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends Battle<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends Battle<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 //
@@ -1910,14 +3148,102 @@ export interface Battle$FragmentInline<
 // --------------------------------------------------------------------------------------------------
 //
 
-export interface Being<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty>
-  extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike
-{
-  id?: Being.id<_$Scalars>
-  name?: Being.name<_$Scalars>
-  ___on_Patron?: Patron<_$Scalars>
-  ___on_Pokemon?: Pokemon<_$Scalars>
-  ___on_Trainer?: Trainer<_$Scalars>
+/**
+ * A being in the Pokemon world - either a Pokemon, Trainer, or Patron.
+ */
+export interface Being<
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
+  id?: Being.id<_$Context>
+  name?: Being.name<_$Context>
+  /**
+   * Inline fragment selection for {@link $Schema.Patron} implementor.
+   *
+   * When the runtime value is of type {@link $Schema.Patron}, this selection set is applied, allowing you to select fields specific to this implementor type.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Patron} |
+   * | **Kind** | Interface Implementor |
+   * | **Parent** | {@link $Schema.Being} |
+   * | **Path** | `Being -> Patron` |
+   *
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
+   * @see {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface Types} ↗
+   *
+   * @example
+   * ```ts
+   * query.beings({
+   * id: true,
+   * name: true,
+   * ___on_Patron: {
+   * // ... Patron-specific fields
+   * }
+   * })
+   * ```
+   */
+  ___on_Patron?: Patron<_$Context>
+  /**
+   * Inline fragment selection for {@link $Schema.Pokemon} implementor.
+   *
+   * When the runtime value is of type {@link $Schema.Pokemon}, this selection set is applied, allowing you to select fields specific to this implementor type.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Pokemon} |
+   * | **Kind** | Interface Implementor |
+   * | **Parent** | {@link $Schema.Being} |
+   * | **Path** | `Being -> Pokemon` |
+   *
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
+   * @see {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface Types} ↗
+   *
+   * @example
+   * ```ts
+   * query.beings({
+   * id: true,
+   * name: true,
+   * ___on_Pokemon: {
+   * // ... Pokemon-specific fields
+   * }
+   * })
+   * ```
+   */
+  ___on_Pokemon?: Pokemon<_$Context>
+  /**
+   * Inline fragment selection for {@link $Schema.Trainer} implementor.
+   *
+   * When the runtime value is of type {@link $Schema.Trainer}, this selection set is applied, allowing you to select fields specific to this implementor type.
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.Trainer} |
+   * | **Kind** | Interface Implementor |
+   * | **Parent** | {@link $Schema.Being} |
+   * | **Path** | `Being -> Trainer` |
+   *
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
+   * @see {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface Types} ↗
+   *
+   * @example
+   * ```ts
+   * query.beings({
+   * id: true,
+   * name: true,
+   * ___on_Trainer: {
+   * // ... Trainer-specific fields
+   * }
+   * })
+   * ```
+   */
+  ___on_Trainer?: Trainer<_$Context>
 
   /**
    * Inline fragments for field groups.
@@ -1928,8 +3254,8 @@ export interface Being<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | Being$FragmentInline<_$Scalars>
-    | Being$FragmentInline<_$Scalars>[]
+    | Being$FragmentInline<_$Context>
+    | Being$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected. Since this is a interface type and thus polymorphic,
@@ -1945,17 +3271,22 @@ export interface Being<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$
 }
 
 export interface Being$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends Being<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends Being<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 export namespace Being {
-  export type id<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type id<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
+    | id$SelectionSet<_$Context>
 
   export interface id$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1966,18 +3297,23 @@ export namespace Being {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
+    | id$SelectionSet<_$Context>
   >
 
-  export type name<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type name<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | name$SelectionSet<_$Scalars>
+    | name$SelectionSet<_$Context>
 
   export interface name$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1988,13 +3324,26 @@ export namespace Being {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type name$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | name$SelectionSet<_$Scalars>
+    | name$SelectionSet<_$Context>
   >
 }
 
+import type * as $$Schema from './schema/$.js'
+
+export type Query$Infer<$SelectionSet extends object> = $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<
+  $SelectionSet,
+  $$Schema.Schema
+>
+export type Query$Variables<_$SelectionSet> = any // Temporarily any - will be replaced with new analysis system
+export type Mutation$Infer<$SelectionSet extends object> = $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+  $SelectionSet,
+  $$Schema.Schema
+>
+export type Mutation$Variables<_$SelectionSet> = any // Temporarily any - will be replaced with new analysis system
 /**
  * [1] These definitions serve to allow field selection interfaces to extend their respective object type without
  *     name clashing between the field name and the object name.
@@ -2003,48 +3352,67 @@ export namespace Being {
  *     would end up with an error of `export interface Foo extends Foo ...`
  */
 export namespace $NamedTypes {
-  export type $Query<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    Query<_$Scalars>
+  export type $Query<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = Query<_$Context>
   export type $Mutation<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = Mutation<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = Mutation<_$Context>
   export type $BattleWildResult = BattleWildResult
   export type $PokemonType = PokemonType
   export type $TrainerClass = TrainerClass
   export type $DateFilter<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = DateFilter<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = DateFilter<_$Context>
   export type $PokemonFilter<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = PokemonFilter<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = PokemonFilter<_$Context>
   export type $StringFilter<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = StringFilter<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = StringFilter<_$Context>
   export type $BattleRoyale<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = BattleRoyale<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = BattleRoyale<_$Context>
   export type $BattleTrainer<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = BattleTrainer<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = BattleTrainer<_$Context>
   export type $BattleWild<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = BattleWild<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = BattleWild<_$Context>
   export type $CombatantMultiPokemon<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = CombatantMultiPokemon<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = CombatantMultiPokemon<_$Context>
   export type $CombatantSinglePokemon<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = CombatantSinglePokemon<_$Scalars>
-  export type $Patron<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    Patron<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = CombatantSinglePokemon<_$Context>
+  export type $Patron<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = Patron<_$Context>
   export type $Pokemon<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = Pokemon<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = Pokemon<_$Context>
   export type $Trainer<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = Trainer<_$Scalars>
-  export type $Battle<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    Battle<_$Scalars>
-  export type $Being<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
-    Being<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = Trainer<_$Context>
+  export type $Battle<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = Battle<_$Context>
+  export type $Being<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = Being<_$Context>
 }

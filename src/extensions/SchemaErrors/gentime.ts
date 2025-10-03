@@ -1,8 +1,8 @@
 import { Extension } from '../../exports/extension.js'
 import type { Config as GeneratorConfig } from '../../generator/config/config.js'
 import { Code } from '../../lib/Code.js'
-import { ConfigManager } from '../../lib/config-manager/_namespace.js'
-import { Grafaid } from '../../lib/grafaid/_namespace.js'
+import { ConfigManager } from '../../lib/config-manager/$.js'
+import { Grafaid } from '../../lib/grafaid/$.js'
 
 const propertyNames = {
   r: `r`,

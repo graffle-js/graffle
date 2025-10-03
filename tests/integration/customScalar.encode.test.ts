@@ -1,9 +1,9 @@
 import { expect } from 'vitest'
 import { DocumentBuilderKit } from '../../src/exports/extensions/document-builder/kit.js'
 import { GraffleBasic } from '../../src/exports/presets/basic.js'
-import { Possible } from '../../src/extensions/DocumentBuilder/__tests__/fixtures/possible/_namespace.js'
-import { Grafaid } from '../../src/lib/grafaid/_namespace.js'
-import type { Schema } from '../../src/types/Schema/_namespace.js'
+import { Possible } from '../../src/extensions/DocumentBuilder/__tests__/fixtures/possible/$.js'
+import { Grafaid } from '../../src/lib/grafaid/$.js'
+import type { Schema } from '../../src/types/Schema/$.js'
 import { DateScalar } from '../_/fixtures/scalars.js'
 import { db } from '../_/fixtures/schemas/possible/db.js'
 import { possibleSchema } from '../_/fixtures/schemas/possible/schema.js'
@@ -48,6 +48,7 @@ testCases(`%s`, async ([_, query, expectedVariables]) => {
     {
       sddm: Possible.schemaMap,
       operationVariables: true,
+      scalars: { Date: DateScalar },
     },
   )
   const documentString = Grafaid.Document.print(document)

@@ -1,6 +1,6 @@
 import type { Client_justContext, ClientEmpty } from '../../../client/client.js'
 import type { Configurator } from '../../../exports/extension_exports.js'
-import type { Anyware } from '../../../lib/anyware/_namespace.js'
+import type { Anyware } from '../../../lib/anyware/$.js'
 import type { RequestPipeline } from '../../../requestPipeline/RequestPipeline.js'
 import type { Context } from '../../context.js'
 import type { ContextComputerParameters } from '../types.js'

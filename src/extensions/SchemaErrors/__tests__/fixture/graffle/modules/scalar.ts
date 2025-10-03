@@ -26,7 +26,8 @@ export type Date = $$Utilities.Schema.Scalar.ScalarCodecless<'Date'>
 //
 //
 
-export type $bigint = $$Utilities.Schema.Scalar.ScalarCodecless<'bigint'>
+type $bigint = $$Utilities.Schema.Scalar.ScalarCodecless<'bigint'>
+export { type $bigint as bigint }
 
 //
 //

@@ -2,7 +2,7 @@
  * This example shows how to configure output to have errors returned instead of e.g. thrown.
  */
 
-import { Graffle } from '../$/graffle/_namespace.js'
+import { Graffle } from '../$/graffle/$.js'
 import { show } from '../$/helpers.js'
 
 // dprint-ignore
@@ -18,7 +18,7 @@ const pokemon = Graffle
   // dprint-ignore
   .anyware(({ encode: _ }) => {
     throw new Error(`Something went wrong.`)
-//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
+//  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   })
 
 const pokemons = await pokemon.query.pokemons({ name: true })

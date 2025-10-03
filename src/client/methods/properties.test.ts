@@ -2,7 +2,7 @@ import { describe, expect, expectTypeOf } from 'vitest'
 import { test } from '../../../tests/_/helpers.js'
 import type { Context } from '../../context/context.js'
 import { type ContextEmpty, contextEmpty } from '../../context/ContextEmpty.js'
-import { type Configuration } from '../../context/fragments/configuration/_namespace.js'
+import { type Configuration } from '../../context/fragments/configuration/$.js'
 import {
   propertiesComputerParameters,
   propertiesComputerPreflight,

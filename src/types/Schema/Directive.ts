@@ -1,4 +1,4 @@
-import type { Scalar } from './_exports.js'
+import type { Scalar } from './$$.js'
 import { IncludeDirective } from './directives/Include.js'
 import { SkipDirective } from './directives/Skip.js'
 

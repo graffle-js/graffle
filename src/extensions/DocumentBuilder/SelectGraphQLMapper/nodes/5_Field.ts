@@ -1,6 +1,7 @@
 import { Nodes } from '../../../../lib/grafaid/_Nodes.js'
-import { SchemaDrivenDataMap } from '../../../../types/SchemaDrivenDataMap/_namespace.js'
-import { Select } from '../../Select/__.js'
+import { SchemaDrivenDataMap } from '../../../../types/SchemaDrivenDataMap/$.js'
+import { Select } from '../../Select/$.js'
+import { Var } from '../../var/$.js'
 import type { GraphQLPostOperationMapper } from '../mapper.js'
 import { collectForInlineFragmentLike } from './_collect.js'
 import { toGraphQLArgument } from './Argument.js'
@@ -39,17 +40,46 @@ export const toGraphQLField: GraphQLPostOperationMapper<
         const sddmArguments = sddm?.a
         for (const argName in keyParsed.arguments) {
           const argNameSchema = argName
-          const sddmArgument = sddmArguments?.[argNameSchema]
           const argValue = keyParsed.arguments[argName]
 
-          if (context.variables.enabled && sddmArgument) {
+          // Detect if this is an enum argument (has $ prefix) BEFORE stripping
+          const isEnum = Select.Arguments.isEnumKey(argNameSchema)
+
+          // Strip enum prefix for schema argument name
+          const argNameSchemaStripped = argNameSchema.replace(Select.Arguments.enumKeyPrefixPattern, ``)
+          const sddmArgument = sddmArguments?.[argNameSchemaStripped]
+
+          // Check if this is a $var marker
+          const isVarMarker = Var.isVariableMarker(argValue)
+
+          if (isVarMarker) {
+            // Extract variable from $var marker (explicit user marking)
+            const varInfo = Var.extractVariableInfo(argValue, argNameSchemaStripped)
+
             const argument = context.variables.capture({
-              name: argNameSchema,
+              name: varInfo.name,
+              argName: argNameSchemaStripped,
+              value: varInfo.defaultValue,
+              defaultValue: varInfo.defaultValue, // Include default in GraphQL definition if provided
+              isEnum,
+              sddmArgument,
+            })
+            arguments_.push(argument)
+          } else if (context.variables.enabled) {
+            // Extract all arguments as variables when hoistArguments: true
+            // When SDDM is available, use it for precise type inference
+            // When SDDM is unavailable, infer types from runtime values
+            const argument = context.variables.capture({
+              name: argNameSchemaStripped,
+              argName: argNameSchemaStripped,
               value: argValue,
+              // defaultValue intentionally omitted - not needed when we always pass the value
+              isEnum,
               sddmArgument,
             })
             arguments_.push(argument)
           } else {
+            // Inline the value
             const argument = toGraphQLArgument(context, sddmArgument, { name: argName, value: argValue })
             arguments_.push(argument)
           }

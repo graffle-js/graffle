@@ -1,8 +1,8 @@
 import type { UnionToTuple } from 'type-fest'
 import type { HandleOutput } from '../../../client/handle.js'
 import type { IsTupleMultiple } from '../../../lib/prelude.js'
-import type { InferResult } from '../InferResult/__.js'
-import type { Select } from '../Select/__.js'
+import type { InferResult } from '../InferResult/$.js'
+import type { Select } from '../Select/$.js'
 
 // dprint-ignore
 export type DocumentRunner<

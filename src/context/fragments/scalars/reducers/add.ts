@@ -1,5 +1,5 @@
 import type { UnionIgnoreAnyOrUnknown } from '../../../../lib/prelude.js'
-import type { Schema } from '../../../../types/Schema/_namespace.js'
+import type { Schema } from '../../../../types/Schema/$.js'
 import type { ContextFragment } from '../fragment.js'
 
 export type Add<

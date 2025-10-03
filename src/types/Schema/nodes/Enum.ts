@@ -1,4 +1,4 @@
-import type { Grafaid } from '../../../lib/grafaid/_namespace.js'
+import type { Grafaid } from '../../../lib/grafaid/$.js'
 
 export interface Enum<
   $Name extends string = string,

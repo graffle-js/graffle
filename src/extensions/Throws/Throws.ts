@@ -1,5 +1,5 @@
 // import type { Context } from '../../context/context.js'
-import type { Properties } from '../../context/fragments/properties/_namespace.js'
+import type { Properties } from '../../context/fragments/properties/$.js'
 import { Extension } from '../../exports/extension.js'
 import type { GraffleKit } from '../../exports/kit.js'
 

@@ -1,4 +1,4 @@
-import type { Grafaid } from '../../../lib/grafaid/_namespace.js'
+import type { Grafaid } from '../../../lib/grafaid/$.js'
 import {
   isTemplateStringArguments,
   joinTemplateStringArrayAndArgs,
@@ -7,6 +7,28 @@ import {
 import { type DocumentController } from './send.js'
 
 // dprint-ignore
+/**
+ * Execute a GraphQL document using GraphQL syntax.
+ *
+ * This interface defines the method signatures for accepting GraphQL documents as strings
+ * or template literals. Returns a {@link DocumentController} for sending the request.
+ *
+ * **Immutability**: Returns a new client instance. The original client is not modified.
+ * If the operation results in no effective change, the same instance is returned for performance.
+ *
+ * @example
+ * ```ts
+ * // String document
+ * const doc = graffle.gql('{ pokemons { name } }')
+ * const data = await doc.send()
+ * ```
+ *
+ * @example
+ * ```ts
+ * // Template literal
+ * const data = await graffle.gql`{ pokemons { name } }`.send()
+ * ```
+ */
 export interface GqlMethod<$Context> {
     <$Document extends Grafaid.Document.Typed.TypedDocumentLike>(document: $Document                            ): DocumentController<$Context, $Document>
     <$Document extends Grafaid.Document.Typed.TypedDocumentLike>(parts: TemplateStringsArray, ...args: unknown[]): DocumentController<$Context, $Document>

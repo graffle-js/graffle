@@ -14,7 +14,7 @@ export const ModuleGeneratorGlobal = createModuleGenerator(
     code(importModuleGenerator(config, ModuleGeneratorMethodsSelect))
     code(importModuleGenerator(config, ModuleGeneratorMethodsDocument))
     code(importModuleGenerator(config, ModuleGeneratorMethodsRoot))
-    code(importModuleGenerator(config, ModuleGeneratorSchema))
+    code(importModuleGenerator(config, ModuleGeneratorSchema, true))
     code``
 
     const defaultSchemaUrlTsDoc = config.options.defaultSchemaUrl

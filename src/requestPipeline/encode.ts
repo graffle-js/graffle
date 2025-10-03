@@ -1,6 +1,6 @@
 import { Schema } from '../exports/schema.js'
-import { Grafaid } from '../lib/grafaid/_namespace.js'
-import { SchemaDrivenDataMap } from '../types/SchemaDrivenDataMap/_namespace.js'
+import { Grafaid } from '../lib/grafaid/$.js'
+import { SchemaDrivenDataMap } from '../types/SchemaDrivenDataMap/$.js'
 
 export const encodeRequestVariables = ({ sddm, request, scalars }: {
   sddm: SchemaDrivenDataMap

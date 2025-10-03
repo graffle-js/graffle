@@ -1,6 +1,6 @@
-import type { Anyware } from '../../../../lib/anyware/_namespace.js'
+import type { Anyware } from '../../../../lib/anyware/$.js'
 import { Configurator } from '../../../../lib/configurator/configurator.js'
-import type { RequestPipeline } from '../../../../requestPipeline/_namespace.js'
+import type { RequestPipeline } from '../../../../requestPipeline/$.js'
 import { type Data, TypeSymbol as DataTypeSymbol } from './data.js'
 
 // ------------------------------------------------------------

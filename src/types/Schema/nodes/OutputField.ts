@@ -1,5 +1,5 @@
 import type { InlineType } from '../../SchemaDrivenDataMap/InlineType.js'
-import type { __typename } from '../_exports.js'
+import type { __typename } from '../$$.js'
 import type { NamedOutputTypes } from '../typeGroups.js'
 import type { InputFields } from './InputField.js'
 

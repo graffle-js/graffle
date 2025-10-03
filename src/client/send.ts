@@ -1,6 +1,6 @@
 import type { Context } from '../context/context.js'
-import { Anyware } from '../lib/anyware/_namespace.js'
-import type { RequestAnalyzedInput } from '../lib/grafaid/_exports.js'
+import { Anyware } from '../lib/anyware/$.js'
+import type { RequestAnalyzedInput } from '../lib/grafaid/$$.js'
 import type { RequestPipeline } from '../requestPipeline/RequestPipeline.js'
 import { handleOutput } from './handle.js'
 

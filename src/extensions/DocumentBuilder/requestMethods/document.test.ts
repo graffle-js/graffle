@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest'
 import { db } from '../../../../tests/_/fixtures/schemas/possible/db.js'
 import { possibleSchema } from '../../../../tests/_/fixtures/schemas/possible/schema.js'
 import { Graffle } from '../../../exports/index.js'
-import type { Errors } from '../../../lib/errors/_namespace.js'
+import type { Errors } from '../../../lib/errors/$.js'
 import { TransportMemory } from '../../TransportMemory/TransportMemory.js'
 import { DocumentBuilder } from '../DocumentBuilder.js'
 

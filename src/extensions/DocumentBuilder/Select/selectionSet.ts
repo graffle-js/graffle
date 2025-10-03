@@ -1,12 +1,13 @@
 import type { ArgsObject } from './arguments.js'
-import type { Directive } from './Directive/__.js'
-import type { Indicator } from './Indicator/__.js'
+import type { DefaultContext } from './context.js'
+import type { Directive } from './Directive/$.js'
+import type { Indicator } from './Indicator/$.js'
 import { type SelectAlias } from './SelectAlias.js'
 
-export type RootType = AnySelectionSet
+export type RootType<$Context = DefaultContext> = AnySelectionSet<$Context>
 
-export type AnySelectionSet = {
-  [k: string]: FieldValue | ArgsObject
+export type AnySelectionSet<$Context = DefaultContext, $Keys extends string = string> = {
+  [k in $Keys]?: FieldValue<$Context> | ArgsObject<$Context>
 } // & SpecialFields
 
 // interface SpecialFields extends Directive.$Fields {
@@ -15,20 +16,20 @@ export type AnySelectionSet = {
 //   // $?: any // ArgsObject
 // }
 
-export type FieldValue = AnySelectionSet | Indicator.Indicator
+export type FieldValue<$Context = DefaultContext> = AnySelectionSet<$Context> | Indicator.Indicator | SelectAlias<any>
 
 export const isSelectionSet = (value: unknown): value is AnySelectionSet => {
   return typeof value === `object` && value !== null
 }
 
-export type Any = AnyExceptAlias | SelectAlias
+export type Any<$Context = DefaultContext> = AnyExceptAlias<$Context> | SelectAlias<any>
 
-export type AnyExceptAlias = AnySelectionSet | Indicator.Indicator
+export type AnyExceptAlias<$Context = DefaultContext> = AnySelectionSet<$Context> | Indicator.Indicator
 
 export namespace Bases {
-  export interface Base extends Directive.$Fields {}
+  export interface Base<$Context = DefaultContext> extends Directive.$Fields {}
 
-  export interface ObjectLike extends Base {
+  export interface ObjectLike<$Context = DefaultContext> extends Base<$Context> {
     /**
      * Special property to select all scalars.
      */

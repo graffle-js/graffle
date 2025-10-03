@@ -1,4 +1,4 @@
-import type { PipelineDefinition } from './_namespace.js'
+import type { PipelineDefinition } from './$.js'
 
 export namespace States {
   export interface Empty extends PipelineDefinition {

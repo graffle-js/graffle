@@ -1,4 +1,5 @@
 import { parse, print as graphqlWebPrint } from '@0no-co/graphql.web'
+import { print as graphqlPrint } from 'graphql'
 import {
   type ArgumentNode,
   type BooleanValueNode,
@@ -29,8 +30,8 @@ import { isString } from '../prelude.js'
 import { Kind } from './document/kind.js'
 import { OperationTypeNode } from './document/OperationTypeNode.js'
 import type { RequestDocumentNodeInput, RequestInput } from './graphql.js'
-import { TypedDocument } from './typed-document/__.js'
-export { OperationType } from './schema/OperationType/__.js'
+import { TypedDocument } from './typed-document/$.js'
+export { OperationType } from './schema/OperationType/$.js'
 
 export type {
   ArgumentNode,
@@ -271,6 +272,46 @@ export const OperationTypeToAccessKind = {
 export const print = (document: TypedDocument.TypedDocumentLike): string => {
   const documentUntyped = TypedDocument.unType(document)
   return isString(documentUntyped) ? documentUntyped : graphqlWebPrint(documentUntyped)
+}
+
+/**
+ * Strip all description fields from a GraphQL AST node.
+ * Handles fields, arguments, enum values, and nested descriptions.
+ */
+const stripDescriptions = (node: any): any => {
+  const result = { ...node, description: undefined }
+
+  // Handle arguments on the node itself (for individual field definitions)
+  if (result.arguments) {
+    result.arguments = result.arguments.map((arg: any) => ({ ...arg, description: undefined }))
+  }
+
+  // Handle fields (ObjectType, InterfaceType, InputObjectType)
+  if (result.fields) {
+    result.fields = result.fields.map((field: any) => ({
+      ...field,
+      description: undefined,
+      arguments: field.arguments?.map((arg: any) => ({ ...arg, description: undefined })),
+    }))
+  }
+
+  // Handle enum values
+  if (result.values) {
+    result.values = result.values.map((value: any) => ({ ...value, description: undefined }))
+  }
+
+  return result
+}
+
+/**
+ * Print a GraphQL AST node to SDL string without any descriptions.
+ * Useful for compact type signatures in documentation.
+ *
+ * Accepts any AST node including schema definition nodes.
+ * Uses standard graphql print (not @0no-co/graphql.web) to support schema nodes.
+ */
+export const printWithoutDescriptions = (ast: any): string => {
+  return graphqlPrint(stripDescriptions(ast))
 }
 
 export const getNamedType = (type: TypeNode): NamedTypeNode => {

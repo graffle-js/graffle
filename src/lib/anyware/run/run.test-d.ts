@@ -1,7 +1,7 @@
 import { expectTypeOf, test } from 'vitest'
+import { Pipeline } from '../$$.js'
 import type { initialInput } from '../_.test-helpers.js'
-import { Pipeline } from '../_exports.js'
-import { PipelineDefinition } from '../PipelineDefinition/_namespace.js'
+import { PipelineDefinition } from '../PipelineDefinition/$.js'
 import type { Result } from '../Result.js'
 
 const def = PipelineDefinition.create().input<initialInput>()

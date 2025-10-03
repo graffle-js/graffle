@@ -3,7 +3,6 @@
 exports[`custom scalars module results in client prefilling those custom scalars 1`] = `
 "import type * as $$Utilities from "graffle/utilities-for-generated";
 import * as CustomScalars from "../../scalars.js";
-export { Date } from "../../scalars.js";
 //
 //
 //
@@ -16,12 +15,10 @@ export { Date } from "../../scalars.js";
 //
 //
 
+export const Date = CustomScalars.Date;
 export type Date = typeof CustomScalars.Date;
-// Without this we get error:
-// "Exported type alias 'DateDecoded' has or is using private name 'Date'."
-type Date_ = typeof CustomScalars.Date;
-export type DateDecoded = $$Utilities.Schema.Scalar.GetDecoded<Date_>;
-export type DateEncoded = $$Utilities.Schema.Scalar.GetEncoded<Date_>;
+export type DateDecoded = $$Utilities.Schema.Scalar.GetDecoded<Date>;
+export type DateEncoded = $$Utilities.Schema.Scalar.GetEncoded<Date>;
 
 export * from "graffle/generator-helpers/standard-scalar-types";
 
@@ -49,292 +46,78 @@ export const $registry = {
 
 export type $Registry = $$Utilities.Schema.Scalar.Registry<
   {
-    Date: Date_;
+    Date: Date;
   },
-  $$Utilities.Schema.Scalar.GetEncoded<Date_>,
-  $$Utilities.Schema.Scalar.GetDecoded<Date_>
+  $$Utilities.Schema.Scalar.GetEncoded<Date>,
+  $$Utilities.Schema.Scalar.GetDecoded<Date>
 >;
 "
 `;
 
 exports[`root-types-mapped 1`] = `
-"import * as $$Data from "./data.js";
-import * as $$Scalar from "./scalar.js";
-import type { Schema as $ } from "graffle/utilities-for-generated";
-import type * as $$Utilities from "graffle/utilities-for-generated";
+"import type * as $ from "graffle/utilities-for-generated";
+import * as $$Data from "../data.js";
+import * as $$Scalar from "../scalar.js";
+import * as $Types from "./$$.js";
 
-export namespace Schema {
-  //
-  //
-  //
-  //
-  //
-  //
-  // ==================================================================================================
-  //                                                Root
-  // ==================================================================================================
-  //
-  //
-  //
-  //
-  //
-  //
-
-  //                                     RootTypeCustomNameForQuery
-  // --------------------------------------------------------------------------------------------------
-  //
-
-  export interface RootTypeCustomNameForQuery {
-    kind: "Object";
-    name: "RootTypeCustomNameForQuery";
-    fields: {
-      __typename: RootTypeCustomNameForQuery.__typename;
-      id: RootTypeCustomNameForQuery.id;
-    };
-  }
-
-  export namespace RootTypeCustomNameForQuery {
-    export interface __typename {
-      kind: "OutputField";
-      name: "__typename";
-      arguments: {};
-      inlineType: [1];
-      namedType: {
-        kind: "__typename";
-        value: "RootTypeCustomNameForQuery";
-      };
-    }
-
-    export interface id {
-      kind: "OutputField";
-      name: "id";
-      arguments: {};
-      inlineType: [0];
-      namedType: $$NamedTypes.$$ID;
-    }
-  }
-
-  //
-  //
-  //
-  //
-  //
-  //
-  // ==================================================================================================
-  //                                            OutputObject
-  // ==================================================================================================
-  //
-  //
-  //
-  //
-  //
-  //
-
-  //
-  //
-  //
-  //
-  //
-  //
-  // ==================================================================================================
-  //                                            InputObject
-  // ==================================================================================================
-  //
-  //
-  //
-  //
-  //
-  //
-
-  //
-  //
-  //
-  //
-  //
-  //
-  // ==================================================================================================
-  //                                             Interface
-  // ==================================================================================================
-  //
-  //
-  //
-  //
-  //
-  //
-
-  //
-  //
-  //
-  //
-  //
-  //
-  // ==================================================================================================
-  //                                               Union
-  // ==================================================================================================
-  //
-  //
-  //
-  //
-  //
-  //
-
-  //
-  //
-  //
-  //
-  //
-  //
-  // ==================================================================================================
-  //                                                Enum
-  // ==================================================================================================
-  //
-  //
-  //
-  //
-  //
-  //
-
-  //
-  //
-  //
-  //
-  //
-  //
-  // ==================================================================================================
-  //                                            ScalarCustom
-  // ==================================================================================================
-  //
-  //
-  //
-  //
-  //
-  //
-
-  //
-  //
-  //
-  //
-  //
-  //
-  // ==================================================================================================
-  //                                           ScalarStandard
-  // ==================================================================================================
-  //
-  //
-  //
-  //
-  //
-  //
-
-  //                                                 ID
-  // --------------------------------------------------------------------------------------------------
-  //
-
-  export type ID = $.StandardTypes.ID;
-
-  //                                              Boolean
-  // --------------------------------------------------------------------------------------------------
-  //
-
-  export type Boolean = $.StandardTypes.Boolean;
-
-  //                                               String
-  // --------------------------------------------------------------------------------------------------
-  //
-
-  export type String = $.StandardTypes.String;
-
-  //
-  //
-  //
-  //
-  //
-  //
-  // ==================================================================================================
-  //                                         Named Types Index
-  // ==================================================================================================
-  //
-  //
-  //
-  //
-  //
-  //
-
-  /**
-   * [1] These definitions serve to allow field selection interfaces to extend their respective object type without
-   *     name clashing between the field name and the object name.
-   *
-   *     For example imagine \`Query.Foo\` field with type also called \`Foo\`. Our generated interfaces for each field
-   *     would end up with an error of \`export interface Foo extends Foo ...\`
-   */
-
-  namespace $$NamedTypes {
-    export type $$RootTypeCustomNameForQuery = RootTypeCustomNameForQuery;
-    export type $$ID = ID;
-    export type $$Boolean = Boolean;
-    export type $$String = String;
-  }
-}
-
-//
-//
-//
-//
-//
-//
-// ==================================================================================================
-//                                               Schema
-// ==================================================================================================
-//
-//
-//
-//
-//
-//
+export * as Schema from "./$$.js";
 
 export interface Schema<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Scalar.$Registry,
+  $Scalars extends $.Schema.Scalar.Registry = $$Scalar.$Registry,
 > {
   name: $$Data.Name;
   operationsAvailable: ["query"];
-  RootUnion: Schema.RootTypeCustomNameForQuery;
+  RootUnion: $Types.RootTypeCustomNameForQuery;
   Root: {
-    query: Schema.RootTypeCustomNameForQuery;
+    query: $Types.RootTypeCustomNameForQuery;
     mutation: null;
     subscription: null;
   };
   allTypes: {
-    RootTypeCustomNameForQuery: Schema.RootTypeCustomNameForQuery;
+    RootTypeCustomNameForQuery: $Types.RootTypeCustomNameForQuery;
   };
   objects: {};
   unions: {};
   interfaces: {};
   scalarNamesUnion: "ID" | "Boolean" | "String";
   scalars: {
-    ID: Schema.ID;
-    Boolean: Schema.Boolean;
-    String: Schema.String;
+    ID: $Types.ID;
+    Boolean: $Types.Boolean;
+    String: $Types.String;
   };
   scalarRegistry: $Scalars;
-  extensions: $$Utilities.GlobalRegistry.TypeExtensions;
+  extensions: $.GlobalRegistry.TypeExtensions;
 }
 "
 `;
 
 exports[`root-types-mapped 2`] = `
 "import type * as $$SelectionSets from "./selection-sets.js";
-import type * as $$Schema from "./schema.js";
+import type * as $$Schema from "./schema/$.js";
 import type * as $$Utilities from "graffle/utilities-for-generated";
 
+/**
+ * GraphQL {@link https://graphql.org/learn/schema/#the-query-and-mutation-types | Query} root methods.
+ *
+ * All methods return Promises. Use \`.query.$batch(...)\` to select multiple fields at once.
+ */
 export interface RootTypeCustomNameForQueryMethods<
   $Context extends $$Utilities.Context,
 > {
+  /**
+   * Select multiple Query fields at once.
+   *
+   * Pass a selection set object that includes the fields you want.
+   * Use this method to request multiple fields in a single request for better performance.
+   */
   $batch: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.RootTypeCustomNameForQuery<$Context["scalars"]>
+        $$SelectionSets.RootTypeCustomNameForQuery<{
+          scalars: $Context["scalars"];
+        }>
       >,
     ) => Promise<
       (null | {}) &
@@ -347,6 +130,11 @@ export interface RootTypeCustomNameForQueryMethods<
         >
     >
   >;
+  /**
+   * Request the {@link https://graphql.org/learn/schema/#the-__typename-field | \`__typename\`} meta-field.
+   *
+   * The \`__typename\` field returns the name of the object type. In this case, it will always return \`"RootTypeCustomNameForQuery"\`.
+   */
   __typename: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     () => Promise<
@@ -358,13 +146,29 @@ export interface RootTypeCustomNameForQueryMethods<
         >
     >
   >;
-
+  /**
+   * \`\`\`graphql
+   * id: ID
+   * \`\`\`
+   *
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $Schema.ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $Schema.RootTypeCustomNameForQuery} |
+   * | **Path** | \`RootTypeCustomNameForQuery.id\` |
+   * | **Nullability** | Optional |
+   */
   id: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.RootTypeCustomNameForQuery.id<$Context["scalars"]>
+        $$SelectionSets.RootTypeCustomNameForQuery.id<{
+          scalars: $Context["scalars"];
+        }>
       >,
     ) => Promise<
       (null | {}) &
@@ -381,6 +185,25 @@ export interface RootTypeCustomNameForQueryMethods<
 }
 
 export interface BuilderMethodsRoot<$Context extends $$Utilities.Context> {
+  /**
+   * Access to {@link https://graphql.org/learn/schema/#the-query-and-mutation-types | Query} root field methods.
+   *
+   * Each method corresponds to a root field on the GraphQL schema and returns a Promise.
+   * Use \`.$batch(...)\` to select multiple query fields in a single request.
+   *
+   * @example Single field
+   * \`\`\`ts
+   * const user = await graffle.query.user({ id: true, name: true })
+   * \`\`\`
+   *
+   * @example Multiple fields with $batch
+   * \`\`\`ts
+   * const data = await graffle.query.$batch({
+   *   user: { id: true, name: true },
+   *   posts: { title: true, content: true }
+   * })
+   * \`\`\`
+   */
   query: RootTypeCustomNameForQueryMethods<$Context>;
 }
 
@@ -392,304 +215,41 @@ export interface BuilderMethodsRootFn extends $$Utilities.TypeFunction {
 `;
 
 exports[`schema with long type name 1`] = `
-"import * as $$Data from "./data.js";
-import * as $$Scalar from "./scalar.js";
-import type { Schema as $ } from "graffle/utilities-for-generated";
-import type * as $$Utilities from "graffle/utilities-for-generated";
+"import type * as $ from "graffle/utilities-for-generated";
+import * as $$Data from "../data.js";
+import * as $$Scalar from "../scalar.js";
+import * as $Types from "./$$.js";
 
-export namespace Schema {
-  //
-  //
-  //
-  //
-  //
-  //
-  // ==================================================================================================
-  //                                                Root
-  // ==================================================================================================
-  //
-  //
-  //
-  //
-  //
-  //
-
-  //                                               Query
-  // --------------------------------------------------------------------------------------------------
-  //
-
-  export interface Query {
-    kind: "Object";
-    name: "Query";
-    fields: {
-      __typename: Query.__typename;
-      longTypeName: Query.longTypeName;
-    };
-  }
-
-  export namespace Query {
-    export interface __typename {
-      kind: "OutputField";
-      name: "__typename";
-      arguments: {};
-      inlineType: [1];
-      namedType: {
-        kind: "__typename";
-        value: "Query";
-      };
-    }
-
-    export interface longTypeName {
-      kind: "OutputField";
-      name: "longTypeName";
-      arguments: {};
-      inlineType: [0];
-      namedType: $$NamedTypes.$$aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa;
-    }
-  }
-
-  //
-  //
-  //
-  //
-  //
-  //
-  // ==================================================================================================
-  //                                            OutputObject
-  // ==================================================================================================
-  //
-  //
-  //
-  //
-  //
-  //
-
-  // aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-  // --------------------------------------------------------------------------------------------------
-  //
-
-  export interface aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa {
-    kind: "Object";
-    name: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-    fields: {
-      __typename: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.__typename;
-      id: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.id;
-    };
-  }
-
-  export namespace aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa {
-    export interface __typename {
-      kind: "OutputField";
-      name: "__typename";
-      arguments: {};
-      inlineType: [1];
-      namedType: {
-        kind: "__typename";
-        value: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-      };
-    }
-
-    export interface id {
-      kind: "OutputField";
-      name: "id";
-      arguments: {};
-      inlineType: [0];
-      namedType: $$NamedTypes.$$ID;
-    }
-  }
-
-  //
-  //
-  //
-  //
-  //
-  //
-  // ==================================================================================================
-  //                                            InputObject
-  // ==================================================================================================
-  //
-  //
-  //
-  //
-  //
-  //
-
-  //
-  //
-  //
-  //
-  //
-  //
-  // ==================================================================================================
-  //                                             Interface
-  // ==================================================================================================
-  //
-  //
-  //
-  //
-  //
-  //
-
-  //
-  //
-  //
-  //
-  //
-  //
-  // ==================================================================================================
-  //                                               Union
-  // ==================================================================================================
-  //
-  //
-  //
-  //
-  //
-  //
-
-  //
-  //
-  //
-  //
-  //
-  //
-  // ==================================================================================================
-  //                                                Enum
-  // ==================================================================================================
-  //
-  //
-  //
-  //
-  //
-  //
-
-  //
-  //
-  //
-  //
-  //
-  //
-  // ==================================================================================================
-  //                                            ScalarCustom
-  // ==================================================================================================
-  //
-  //
-  //
-  //
-  //
-  //
-
-  //
-  //
-  //
-  //
-  //
-  //
-  // ==================================================================================================
-  //                                           ScalarStandard
-  // ==================================================================================================
-  //
-  //
-  //
-  //
-  //
-  //
-
-  //                                                 ID
-  // --------------------------------------------------------------------------------------------------
-  //
-
-  export type ID = $.StandardTypes.ID;
-
-  //                                              Boolean
-  // --------------------------------------------------------------------------------------------------
-  //
-
-  export type Boolean = $.StandardTypes.Boolean;
-
-  //                                               String
-  // --------------------------------------------------------------------------------------------------
-  //
-
-  export type String = $.StandardTypes.String;
-
-  //
-  //
-  //
-  //
-  //
-  //
-  // ==================================================================================================
-  //                                         Named Types Index
-  // ==================================================================================================
-  //
-  //
-  //
-  //
-  //
-  //
-
-  /**
-   * [1] These definitions serve to allow field selection interfaces to extend their respective object type without
-   *     name clashing between the field name and the object name.
-   *
-   *     For example imagine \`Query.Foo\` field with type also called \`Foo\`. Our generated interfaces for each field
-   *     would end up with an error of \`export interface Foo extends Foo ...\`
-   */
-
-  namespace $$NamedTypes {
-    export type $$Query = Query;
-    export type $$aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa =
-      aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa;
-    export type $$ID = ID;
-    export type $$Boolean = Boolean;
-    export type $$String = String;
-  }
-}
-
-//
-//
-//
-//
-//
-//
-// ==================================================================================================
-//                                               Schema
-// ==================================================================================================
-//
-//
-//
-//
-//
-//
+export * as Schema from "./$$.js";
 
 export interface Schema<
-  $Scalars extends $$Utilities.Schema.Scalar.Registry = $$Scalar.$Registry,
+  $Scalars extends $.Schema.Scalar.Registry = $$Scalar.$Registry,
 > {
   name: $$Data.Name;
   operationsAvailable: ["query"];
-  RootUnion: Schema.Query;
+  RootUnion: $Types.Query;
   Root: {
-    query: Schema.Query;
+    query: $Types.Query;
     mutation: null;
     subscription: null;
   };
   allTypes: {
-    Query: Schema.Query;
-    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: Schema.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa;
+    Query: $Types.Query;
+    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: $Types.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa;
   };
   objects: {
-    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: Schema.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa;
+    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: $Types.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa;
   };
   unions: {};
   interfaces: {};
   scalarNamesUnion: "ID" | "Boolean" | "String";
   scalars: {
-    ID: Schema.ID;
-    Boolean: Schema.Boolean;
-    String: Schema.String;
+    ID: $Types.ID;
+    Boolean: $Types.Boolean;
+    String: $Types.String;
   };
   scalarRegistry: $Scalars;
-  extensions: $$Utilities.GlobalRegistry.TypeExtensions;
+  extensions: $.GlobalRegistry.TypeExtensions;
 }
 "
 `;

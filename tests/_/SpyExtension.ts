@@ -1,6 +1,6 @@
 import { beforeEach } from 'vitest'
 import { Extension } from '../../src/exports/extension.js'
-import type { RequestPipeline } from '../../src/requestPipeline/_namespace.js'
+import type { RequestPipeline } from '../../src/requestPipeline/$.js'
 
 interface SpyData {
   encode: {

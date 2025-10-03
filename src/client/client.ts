@@ -1,17 +1,17 @@
 import type { Context } from '../context/context.js'
 import { type ContextEmpty, contextEmpty } from '../context/ContextEmpty.js'
-import { Configuration } from '../context/fragments/configuration/_namespace.js'
-import { Extensions } from '../context/fragments/extensions/_namespace.js'
-import type { Extension } from '../context/fragments/extensions/dataType/_namespace.js'
+import { Configuration } from '../context/fragments/configuration/$.js'
+import { Extensions } from '../context/fragments/extensions/$.js'
+import type { Extension } from '../context/fragments/extensions/dataType/$.js'
 import type { AddAndApplyOne } from '../context/fragments/extensions/reducers/addAndApplyOne.js'
-import { Properties } from '../context/fragments/properties/_namespace.js'
-import { RequestInterceptors } from '../context/fragments/requestInterceptors/_namespace.js'
-import { Scalars } from '../context/fragments/scalars/_namespace.js'
-import { Transports } from '../context/fragments/transports/_namespace.js'
-import type { Anyware } from '../lib/anyware/_namespace.js'
+import { Properties } from '../context/fragments/properties/$.js'
+import { RequestInterceptors } from '../context/fragments/requestInterceptors/$.js'
+import { Scalars } from '../context/fragments/scalars/$.js'
+import { Transports } from '../context/fragments/transports/$.js'
+import type { Anyware } from '../lib/anyware/$.js'
 import { getOperationType } from '../lib/grafaid/document.js'
 import type { Exact } from '../lib/prelude.js'
-import type { TypeFunction } from '../lib/type-function/__.js'
+import type { TypeFunction } from '../lib/type-function/$.js'
 import type { RequestPipeline } from '../requestPipeline/RequestPipeline.js'
 import { type ContextFragment, ContextFragments } from '../types/ContextFragment.js'
 import { GqlMethod } from './methods/gql/gql.js'
@@ -37,26 +37,181 @@ export type Client<
 > = __
 
 export interface ClientBase<$Context extends Context> {
+  /**
+   * Internal client context state.
+   *
+   * Contains the accumulated configuration, registered transports, extensions, scalars,
+   * and other internal state. This property is primarily for internal use and debugging.
+   *
+   * **Note**: In a future version, this property may be hidden by default and only
+   * accessible when debug mode is enabled.
+   */
   _: $Context
   /**
-   * TODO
+   * Execute a GraphQL document using GraphQL syntax.
+   *
+   * This method accepts a GraphQL document as a string or template literal and returns a document controller
+   * that allows you to send the request with {@link DocumentController.send}.
+   *
+   * For multiple operations in one document, specify the operation name when calling `send()`.
+   * For operations with variables, pass them to `send()`.
+   *
+   * **Immutability**: Returns a new client instance. The original client is not modified.
+   * If the operation results in no effective change, the same instance is returned for performance.
+   *
+   * @example
+   * ```ts
+   * const data = await graffle.gql`{ pokemons { name } }`.send()
+   * ```
+   *
+   * @example
+   * ```ts
+   * const data = await graffle.gql`
+   *   query ($type: PokemonType!) {
+   *     pokemons(filter: { type: $type }) { name }
+   *   }
+   * `.send({ type: 'electric' })
+   * ```
    */
   gql: Configuration.Check.Preflight<
     $Context,
     GqlMethod<$Context>
   >
   /**
-   * TODO
+   * Register a custom scalar codec for encoding and decoding GraphQL scalar values.
+   *
+   * Scalars must be registered before they can be used in queries. The codec provides
+   * `encode` and `decode` functions to transform values between JavaScript and GraphQL
+   * representations.
+   *
+   * **Immutability**: Returns a new client instance. The original client is not modified.
+   * If the operation results in no effective change, the same instance is returned for performance.
+   *
+   * @example
+   * ```ts
+   * const graffle = Graffle
+   *   .create()
+   *   .scalar('Date', {
+   *     encode: (value: Date) => value.toISOString(),
+   *     decode: (value: string) => new Date(value)
+   *   })
+   * ```
+   *
+   * @example
+   * ```ts
+   * // Using Schema.Scalar helper
+   * import { Schema } from 'graffle'
+   *
+   * const DateScalar = Schema.Scalar.create('Date', {
+   *   encode: (value: Date) => value.toISOString(),
+   *   decode: (value: string) => new Date(value)
+   * })
+   *
+   * const graffle = Graffle.create().scalar(DateScalar)
+   * ```
    */
   scalar: undefined extends $Context['configuration']['schema']['current']['map']
     ? ScalarMethod.TypeErrorMissingSchemaMap
     : ScalarMethod<$Context>
   /**
-   * TODO
+   * Configure or change the transport layer used for GraphQL requests.
+   *
+   * This method has three distinct behaviors depending on what you pass:
+   *
+   * ## 1. Add Transport (Transport Object/Builder)
+   *
+   * Pass a Transport or TransportBuilder object to register a new transport type.
+   * - The **first** transport registered automatically becomes the current transport
+   * - **Subsequent** transports are added to the registry but do NOT become current
+   * - **Error**: Cannot register a transport with a duplicate name (type error + runtime error)
+   *
+   * ## 2. Configure Current Transport (Configuration Object)
+   *
+   * Pass a configuration object to update the current transport's settings.
+   * - Only available after at least one transport is registered
+   * - Empty config `{}` is a **no-op** (returns the same instance)
+   * - Updates transport-specific options like URL, headers, etc.
+   *
+   * ## 3. Switch Transport (Transport Name String)
+   *
+   * Pass a transport name to switch to a different registered transport.
+   * - Only available after transports are registered
+   * - Optionally provide configuration as a second parameter
+   * - Switching to current transport without config is a **no-op** (returns the same instance)
+   *
+   * **Immutability**: Returns a new client instance. The original client is not modified.
+   * If the operation results in no effective change, the same instance is returned for performance.
+   *
+   * @example
+   * ```ts
+   * // Add first transport (becomes current)
+   * const graffle = Graffle
+   *   .create()
+   *   .transport({ url: 'https://api.example.com/graphql' })
+   * ```
+   *
+   * @example
+   * ```ts
+   * // Add second transport (doesn't become current)
+   * const graffle2 = graffle.transport(WebSocketTransport)
+   * // Current is still HTTP
+   * ```
+   *
+   * @example
+   * ```ts
+   * // Configure current transport
+   * const graffle3 = graffle.transport({
+   *   headers: { Authorization: 'Bearer token123' }
+   * })
+   * ```
+   *
+   * @example
+   * ```ts
+   * // Switch to registered transport by name
+   * const graffle4 = graffle2.transport('WebSocketTransport')
+   * ```
+   *
+   * @example
+   * ```ts
+   * // Switch and configure simultaneously
+   * const graffle5 = graffle2.transport('HttpTransport', {
+   *   url: 'https://new-api.example.com/graphql'
+   * })
+   * ```
    */
   transport: TransportMethod<$Context>
   /**
-   * TODO
+   * Add custom properties or methods to the client instance.
+   *
+   * Properties can be static values or computed functions that receive the client context.
+   * Computed properties are recalculated each time the client is copied (e.g., when chaining methods).
+   *
+   * **Immutability**: Returns a new client instance. The original client is not modified.
+   * If the operation results in no effective change, the same instance is returned for performance.
+   *
+   * @example
+   * ```ts
+   * // Add static properties
+   * const graffle = Graffle
+   *   .create()
+   *   .properties({
+   *     customMethod: () => console.log('Hello'),
+   *     apiVersion: 'v1'
+   *   })
+   *
+   * graffle.customMethod() // 'Hello'
+   * graffle.apiVersion // 'v1'
+   * ```
+   *
+   * @example
+   * ```ts
+   * // Add computed properties
+   * const graffle = Graffle
+   *   .create()
+   *   .properties(({ client, context }) => ({
+   *     currentTransport: context.transports.current
+   *   }))
+   * ```
    */
   // todo have the client type be passed through too? Using `this` from parent?
   properties: <$Properties extends Properties.Properties>(
@@ -73,11 +228,75 @@ export interface ClientBase<$Context extends Context> {
   >
 
   /**
-   * TODO
+   * Add an extension to the client to enhance its functionality.
+   *
+   * Extensions can add new methods, modify behavior, or integrate additional features.
+   * Common extensions include DocumentBuilder for type-safe query building and SchemaErrors
+   * for enhanced error handling.
+   *
+   * **Immutability**: Returns a new client instance. The original client is not modified.
+   * If the operation results in no effective change, the same instance is returned for performance.
+   *
+   * @example
+   * ```ts
+   * import { DocumentBuilder } from 'graffle/extensions/document-builder'
+   *
+   * const graffle = Graffle
+   *   .create()
+   *   .transport({ url: 'https://api.example.com/graphql' })
+   *   .use(DocumentBuilder())
+   *
+   * // Now you can use document builder methods
+   * const data = await graffle.document({ query: { ... } }).send()
+   * ```
+   *
+   * @example
+   * ```ts
+   * import { SchemaErrors } from 'graffle/extensions/schema-errors'
+   *
+   * const graffle = Graffle
+   *   .create()
+   *   .use(SchemaErrors())
+   * ```
    */
   use: <extension extends Extension.Data>(extension: extension) => Client<AddAndApplyOne<$Context, extension>>
   /**
-   * TODO
+   * Add an interceptor to the request pipeline for cross-cutting concerns.
+   *
+   * Interceptors (called "anyware") allow you to intercept and modify requests at various stages,
+   * such as adding authentication headers, logging, error handling, or retrying failed requests.
+   *
+   * **Immutability**: Returns a new client instance. The original client is not modified.
+   * If the operation results in no effective change, the same instance is returned for performance.
+   *
+   * @example
+   * ```ts
+   * // Add authentication header
+   * const graffle = Graffle
+   *   .create()
+   *   .anyware(async ({ pack }) => {
+   *     if (pack.input.transportType !== 'http') return pack()
+   *     return pack({
+   *       input: {
+   *         ...pack.input,
+   *         headers: { Authorization: 'Bearer token123' }
+   *       }
+   *     })
+   *   })
+   * ```
+   *
+   * @example
+   * ```ts
+   * // Add request logging
+   * const graffle = Graffle
+   *   .create()
+   *   .anyware(async ({ pack }) => {
+   *     console.log('Sending request:', pack.input)
+   *     const result = await pack()
+   *     console.log('Response:', result)
+   *     return result
+   *   })
+   * ```
    */
   anyware: (
     interceptor: Anyware.Interceptor.InferFromPipeline<
@@ -85,7 +304,38 @@ export interface ClientBase<$Context extends Context> {
     >,
   ) => Client<$Context>
   /**
-   * TODO
+   * Configure the client with various settings.
+   *
+   * This method allows you to customize client behavior such as output format (envelope, errors),
+   * schema mapping, and extension-specific configuration.
+   *
+   * **Immutability**: Returns a new client instance. The original client is not modified.
+   * If the operation results in no effective change, the same instance is returned for performance.
+   *
+   * @example
+   * ```ts
+   * // Configure output handling
+   * const graffle = Graffle
+   *   .create()
+   *   .with({
+   *     output: {
+   *       envelope: true,
+   *       errors: { execution: 'return' }
+   *     }
+   *   })
+   * ```
+   *
+   * @example
+   * ```ts
+   * // Configure schema
+   * const graffle = Graffle
+   *   .create()
+   *   .with({
+   *     schema: {
+   *       map: schemaMap
+   *     }
+   *   })
+   * ```
    */
   with: <
     const configurationInput extends CalcConfigurationInputForContext<$Context>,
@@ -105,6 +355,33 @@ export type ExtensionChainableArguments = [Context, object, ExtensionChainableRe
 
 // Almost identical to `with` except that input is optional.
 // dprint-ignore
+/**
+ * Create a new Graffle client instance.
+ *
+ * This is the entry point for building a GraphQL client. You can optionally provide
+ * initial configuration for output handling, schema mapping, or other settings.
+ *
+ * All configuration can also be added later using the {@link ClientBase.with} method.
+ *
+ * @example
+ * ```ts
+ * import { Graffle } from 'graffle'
+ *
+ * // Create with no configuration
+ * const graffle = Graffle.create()
+ * ```
+ *
+ * @example
+ * ```ts
+ * // Create with initial configuration
+ * const graffle = Graffle.create({
+ *   output: {
+ *     envelope: true,
+ *     errors: { execution: 'return' }
+ *   }
+ * })
+ * ```
+ */
 export type Create<$Context extends Context = ContextEmpty> =
   <
     const configurationInput extends CalcConfigurationInputForContext<$Context>,
@@ -128,6 +405,11 @@ export const createConstructorWithContext = <$Context extends Context>(
   return createWithContext(newContext) as any
 }
 
+/**
+ * Create a new Graffle client instance.
+ *
+ * @see {@link Create} for detailed documentation and examples.
+ */
 export const create: Create = createConstructorWithContext(contextEmpty)
 
 export const createWithContext = <$Context extends Context>(

@@ -1,11 +1,11 @@
-import type { ConfigManager } from '../../config-manager/_namespace.js'
+import type { ConfigManager } from '../../config-manager/$.js'
 import { type Tuple } from '../../prelude.js'
-import type { Extension } from '../Extension/__.js'
-import { Overload } from '../Overload/_namespace.js'
+import type { Extension } from '../Extension/$.js'
+import { Overload } from '../Overload/$.js'
 import { Pipeline } from '../Pipeline/Pipeline.js'
 import type { StepDefinition } from '../StepDefinition.js'
 import type { StepRunner } from '../StepRunner.js'
-import type { PipelineDefinition } from './_namespace.js'
+import type { PipelineDefinition } from './$.js'
 import { type Options, resolveOptions } from './Config.js'
 
 /**

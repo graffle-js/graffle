@@ -2,8 +2,8 @@ import type { IsNever } from 'type-fest'
 import { assertEqual } from '../../../lib/assert-equal.js'
 import type { AssertExtendsObject, GetOrNever, PropertyKeyToString, StringKeyof } from '../../../lib/prelude.js'
 import type { TSErrorDescriptive } from '../../../lib/ts-error.js'
-import type { Schema } from '../../../types/Schema/_namespace.js'
-import type { Select } from '../Select/__.js'
+import type { Schema } from '../../../types/Schema/$.js'
+import type { Select } from '../Select/$.js'
 import type { Alias } from './Alias.js'
 import type {
   IsArgumentsOrDirectiveKey,
@@ -14,9 +14,11 @@ import type {
 import type { OutputField } from './OutputField.js'
 import type { ScalarsWildcard } from './ScalarsWildcard.js'
 
+type SelectionSet = object
+
 // dprint-ignore
 export type OutputObjectLike<
-  $SelectionSet extends object,
+  $SelectionSet extends SelectionSet,
   $Schema,
   $Node
 > =
@@ -35,7 +37,7 @@ export type OutputObjectLike<
 
 // dprint-ignore
 type OutputObjectLike_<
-  $SelectionSet extends object,
+  $SelectionSet extends SelectionSet,
   $Schema,
   $Node extends Schema.OutputObjectLike
 > =
@@ -43,7 +45,7 @@ type OutputObjectLike_<
       // todo this needs to be an extension and/or only available when sddm is present
       // todo what about when scalars wildcard is combined with other fields like relations?
       ? ScalarsWildcard<$SelectionSet, $Schema, $Node>
-      : 
+      :
         & OtherKeys<$SelectionSet, $Schema, $Node>
         & Alias<$Schema, $Node, $SelectionSet>
 
@@ -160,7 +162,7 @@ export type IsFieldKey<$Key extends PropertyKey> =
 //
 // dprint-ignore
 {
-	
+
 assertEqual<PickApplicableFieldKeys<{ a: true }>                 , 'a'>()
 assertEqual<PickApplicableFieldKeys<{ a: ['b', true]; b: true }> , 'b'>()
 

@@ -1,5 +1,5 @@
 import { describe, expect, expectTypeOf, test } from 'vitest'
-import { ConfigManager } from './_namespace.js'
+import { ConfigManager } from './$.js'
 
 test(`defaults are merged into input value`, () => {
   const defaults = { a: 1 }

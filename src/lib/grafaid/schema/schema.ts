@@ -63,9 +63,11 @@ export {
 
 export * as Args from './args.js'
 
+export * as ArgsIndex from './argsIndex.js'
+
 export * as CustomScalars from './customScalars.js'
 
-export * from './KindMap/__.js'
+export * from './KindMap/$.js'
 
 export * from './typeGuards.js'
 

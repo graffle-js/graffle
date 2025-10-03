@@ -110,7 +110,7 @@ Note:
 
 <!--@include: @/_snippets/example-links/method-get.md-->
 
-By default all requests use HTTP POST. However you can configure queries and subscriptions to be sent over HTTP GET.
+By default all requests use HTTP POST. However you can configure queries to be sent over HTTP GET.
 
 ```ts twoslash
 import { Graffle } from 'graffle'

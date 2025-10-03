@@ -59,9 +59,33 @@ When Graffle finds your configuration module, it will look at the default export
 
 Any arguments you provide on the command line will take precedence over the configuration file.
 
-If you run `$ graffle` with `node@^22.6.0` then the [`--experimental-strip-types` flag](https://nodejs.org/docs/latest/api/cli.html#--experimental-strip-types) will be used. This produces a warning which may annoy you. You can get rid of it by installing `tsx` either globally or locally which will be used if present.
+**TypeScript Configuration Files:**
 
-If you are using a TypeScript configuration module _and_ you run `$ graffle` with `node@<22.6.0` then you must have `tsx` installed globally or locally. Local installation of `tsx` will be preferred when both present.
+With **Node.js 24.0+** or **Node.js 22.18+**, TypeScript config files work natively using Node's built-in type stripping. No additional setup required.
+
+**Advanced TypeScript Features:**
+
+If your config file uses or imports code with advanced TypeScript features (enums, namespaces, parameter properties), you have two options:
+
+1. **Use Node's transform flag** (recommended):
+   ```bash
+   NODE_OPTIONS=--experimental-transform-types pnpm graffle
+   ```
+
+2. **Use tsx** (for fully stable transformation):
+   ```bash
+   GRAFFLE_USE_TSX=1 pnpm graffle
+   ```
+   Requires `tsx` installed locally (`pnpm add -D tsx`) or globally.
+
+**Older Node Versions:**
+
+For Node.js versions older than 22.18, you must install and use `tsx`:
+
+```bash
+pnpm add -D tsx
+GRAFFLE_USE_TSX=1 pnpm graffle
+```
 
 Example:
 
@@ -85,5 +109,38 @@ import { Generator } from 'graffle/generator'
 
 await Generator.generate({
   // ...
+})
+```
+
+## Global Defaults
+
+For advanced use cases like testing, you can mutate global generator defaults at runtime. This is useful when you want to suppress warnings or change default behaviors without passing configuration to each generator call.
+
+```ts
+import { Generator } from 'graffle/generator'
+
+// Suppress custom scalar warnings globally (useful in test suites)
+Generator.defaults.lint.missingCustomScalarCodec = false
+
+// All subsequent generation will use the modified defaults
+await Generator.generate({ schema: '...' })
+```
+
+**Use cases:**
+
+- **Testing**: Suppress warnings in test suites to keep output clean
+- **Scripting**: Set defaults once for multiple generator runs
+- **CI/CD**: Configure build-time behavior without config files
+
+**Note**: Changes to `defaults` affect all generator calls in the same process. These are _global_ defaults that can still be overridden by explicit configuration:
+
+```ts
+// Global default
+Generator.defaults.lint.missingCustomScalarCodec = false
+
+// Explicit override takes precedence
+await Generator.generate({
+  lint: { missingCustomScalarCodec: true },
+  schema: '...',
 })
 ```

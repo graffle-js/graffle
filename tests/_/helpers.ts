@@ -12,13 +12,13 @@ import { GraffleBare } from '../../src/exports/presets/bare.js'
 // import type { SchemaDrivenDataMap } from '../../src/exports/utilities-for-generated.js'
 // import { TransportMemory } from '../../src/extensions/TransportMemory/TransportMemory.js'
 // import type { ConfigManager } from '../../src/lib/config-manager/__.js'
-import { Grafaid } from '../../src/lib/grafaid/_namespace.js'
+import { Grafaid } from '../../src/lib/grafaid/$.js'
 import { CONTENT_TYPE_REC } from '../../src/lib/grafaid/http/http.js'
 import { type SchemaService, serveSchema } from './lib/serveSchema.js'
 // import { db } from './schemas/db.js'
 import type { IntrospectionQuery } from 'graphql'
 import { GraffleKit } from '../../src/exports/kit.js'
-import { TestSchemas } from './fixtures/schemas/_namespaces.js'
+import { TestSchemas } from './fixtures/schemas/$.js'
 import { schema } from './fixtures/schemas/pokemon/schema.js'
 
 interface Project {
@@ -55,7 +55,7 @@ export const mockIntrospectionData = {
 } satisfies IntrospectionQuery
 
 interface Fixtures {
-  fetch: Mock<(request: Request) => Promise<Response>>
+  fetch: Mock<typeof globalThis.fetch>
   g0: ClientEmpty
   c0: GraffleKit.Context.ContextEmpty
   pokemonService: SchemaService
@@ -152,7 +152,7 @@ export const test = testBase.extend<Fixtures>({
     await use(project)
   },
   // eslint-disable-next-line
-  fetch: async ({}, use) => {
+  fetch: async ({}, use: any) => {
     const fetch = globalThis.fetch
     const fetchMock = vi.fn()
     // fetchMock.original = fetch

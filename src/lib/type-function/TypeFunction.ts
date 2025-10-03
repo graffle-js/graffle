@@ -1,4 +1,4 @@
-import type { TypeFunction } from './__.js'
+import type { TypeFunction } from './$.js'
 
 /**
  * A composed set of type functions.

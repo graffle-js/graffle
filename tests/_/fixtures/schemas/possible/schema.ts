@@ -290,6 +290,26 @@ const ObjectNested = builder.simpleObject(`ObjectNested`, {
   }),
 })
 
+const ObjectNestedWithArgs = builder.simpleObject(`ObjectNestedWithArgs`, {
+  fields: t => ({
+    id: t.field({
+      type: `ID`,
+      args: {
+        filter: t.arg({ type: `ID` }),
+      },
+    }),
+    object: t.field({
+      type: Object1,
+      args: {
+        string: t.arg.string(),
+        int: t.arg.int(),
+        float: t.arg.float(),
+        boolean: t.arg.boolean(),
+      },
+    }),
+  }),
+})
+
 const lowerCaseObject = builder.simpleObject(`lowerCaseObject`, {
   fields: t => ({
     id: t.id(),
@@ -546,6 +566,10 @@ builder.queryType({
     objectNested: t.field({
       type: ObjectNested,
       resolve: () => db.ObjectNested,
+    }),
+    objectNestedWithArgs: t.field({
+      type: ObjectNestedWithArgs,
+      resolve: () => db.ObjectNestedWithArgs,
     }),
     objectWithArgs: t.field({
       args: {

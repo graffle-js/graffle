@@ -33,6 +33,7 @@ export interface $MethodsSelect {
   ObjectChildB: ObjectChildB
   ObjectGrandparent: ObjectGrandparent
   ObjectNested: ObjectNested
+  ObjectNestedWithArgs: ObjectNestedWithArgs
   ObjectParent: ObjectParent
   ObjectUnion: ObjectUnion
   lowerCaseObject: lowerCaseObject
@@ -144,6 +145,10 @@ export interface ObjectGrandparent {
 
 export interface ObjectNested {
   <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.ObjectNested>): $SelectionSet
+}
+
+export interface ObjectNestedWithArgs {
+  <$SelectionSet>(selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.ObjectNestedWithArgs>): $SelectionSet
 }
 
 export interface ObjectParent {

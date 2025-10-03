@@ -1,7 +1,7 @@
 import type { OperationTypeNode } from 'graphql'
 import type * as $$Utilities from '../../../../../../exports/utilities-for-generated.js'
 import * as $$Data from './data.js'
-import * as $$Schema from './schema.js'
+import * as $$Schema from './schema/$.js'
 import * as $$SelectionSets from './selection-sets.js'
 
 //
@@ -19,7 +19,6 @@ import * as $$SelectionSets from './selection-sets.js'
 //
 //
 //
-
 import { createSelect } from '../../../../../../exports/client.js'
 export const Select = createSelect($$Data.Name)
 
@@ -38,7 +37,6 @@ export const Select = createSelect($$Data.Name)
 //
 //
 //
-
 export namespace Select {
   //                                                Root
   // --------------------------------------------------------------------------------------------------
@@ -130,6 +128,12 @@ export namespace Select {
       $SelectionSet,
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['ObjectNested']
+    >
+  export type ObjectNestedWithArgs<$SelectionSet extends $$SelectionSets.ObjectNestedWithArgs> =
+    $$Utilities.DocumentBuilderKit.InferResult.OutputObjectLike<
+      $SelectionSet,
+      $$Schema.Schema,
+      $$Schema.Schema['allTypes']['ObjectNestedWithArgs']
     >
   export type ObjectParent<$SelectionSet extends $$SelectionSets.ObjectParent> =
     $$Utilities.DocumentBuilderKit.InferResult.OutputObjectLike<

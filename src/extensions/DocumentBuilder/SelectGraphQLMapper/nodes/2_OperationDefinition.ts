@@ -1,11 +1,12 @@
-import type { Grafaid } from '../../../../lib/grafaid/_namespace.js'
+import type { Grafaid } from '../../../../lib/grafaid/$.js'
 import { Nodes } from '../../../../lib/grafaid/_Nodes.js'
-import type { SchemaDrivenDataMap } from '../../../../types/SchemaDrivenDataMap/_namespace.js'
-import type { Select } from '../../Select/__.js'
+import { SchemaDrivenDataMap } from '../../../../types/SchemaDrivenDataMap/$.js'
+import type { Select } from '../../Select/$.js'
 import { createOperationContext } from '../context.js'
 import { type GraphQLPreOperationMapper } from '../mapper.js'
 import type { Options } from './1_Document.js'
 import { toGraphQLSelectionSetRoot } from './3_GraffleSelectionSetRoot.js'
+import { toGraphQLValue } from './Value.js'
 
 export const toGraphQLOperationDefinition: GraphQLPreOperationMapper<
   SchemaDrivenDataMap.OutputObject,
@@ -30,7 +31,14 @@ export const toGraphQLOperationDefinition: GraphQLPreOperationMapper<
   const variableDefinitions = context.variables.data.map((captured) => {
     return Nodes.VariableDefinition({
       variable: Nodes.Variable({ name: Nodes.Name({ value: captured.name }) }),
-      type: Nodes.NamedType({ name: Nodes.Name({ value: captured.typeName }) }),
+      type: Nodes.NamedType({ name: Nodes.Name({ value: captured.type }) }),
+      defaultValue: captured.defaultValue !== undefined
+        ? toGraphQLValue(
+          { ...context, value: { isEnum: captured.isEnum } },
+          captured.sddmArgument,
+          captured.defaultValue,
+        ) as any
+        : undefined,
     })
   })
 
@@ -52,5 +60,3 @@ export const toGraphQLOperationDefinition: GraphQLPreOperationMapper<
     variables,
   }
 }
-
-// TODO: optimization: skip when using SDDM b/c we don't need $-directed enums

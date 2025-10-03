@@ -2,10 +2,12 @@ import { assertType, test } from 'vitest'
 import type { DateScalar } from '../../../tests/_/fixtures/scalars.js'
 import { db } from '../../../tests/_/fixtures/schemas/possible/db.js'
 import type * as SelectionSets from '../../extensions/DocumentBuilder/__tests__/fixtures/possible/modules/selection-sets.js'
-import type { Schema } from '../../types/Schema/_namespace.js'
+import type { Schema } from '../../types/Schema/$.js'
 
 type Q = SelectionSets.Query
-type QWithDate = SelectionSets.Query<Schema.Scalar.Registry.AddScalar<Schema.Scalar.Registry.Empty, typeof DateScalar>>
+type QWithDate = SelectionSets.Query<{
+  scalars: Schema.Scalar.Registry.AddScalar<Schema.Scalar.Registry.Empty, typeof DateScalar>
+}>
 
 // dprint-ignore
 test(`Query`, () => {

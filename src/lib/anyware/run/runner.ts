@@ -1,5 +1,5 @@
-import { partitionAndAggregateErrors } from '../../errors/_exports.js'
-import { Errors } from '../../errors/_namespace.js'
+import { partitionAndAggregateErrors } from '../../errors/$$.js'
+import { Errors } from '../../errors/$.js'
 import { createDeferred } from '../../prelude.js'
 import { casesExhausted } from '../../prelude.js'
 import {
@@ -8,7 +8,7 @@ import {
   type NonRetryingInterceptorInput,
 } from '../Interceptor/Interceptor.js'
 import type { Pipeline } from '../Pipeline/Pipeline.js'
-import type { PipelineDefinition } from '../PipelineDefinition/_namespace.js'
+import type { PipelineDefinition } from '../PipelineDefinition/$.js'
 import { successfulResult } from '../Result.js'
 import type { StepDefinition } from '../StepDefinition.js'
 import type { StepResultErrorExtension } from '../StepResult.js'

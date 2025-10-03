@@ -1,5 +1,5 @@
 import { GraphQLError } from 'graphql'
-import { Errors } from '../../../../../src/lib/errors/_namespace.js'
+import { Errors } from '../../../../../src/lib/errors/$.js'
 
 const date0 = new Date(0)
 
@@ -176,6 +176,10 @@ export const db = {
   ObjectNested: {
     id,
     nested: Object1,
+  },
+  ObjectNestedWithArgs: {
+    id,
+    object: Object1,
   },
   ObjectUnion: {
     fooBarUnion: Foo,

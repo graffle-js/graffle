@@ -1,10 +1,31 @@
 import { type DeepObjectValue, mapEntriesDeep } from '../../../lib/object-utils.js'
+import { Var } from '../var/$.js'
+import type { DefaultContext } from './context.js'
 
-export type ArgValue = string | boolean | null | number | ArgsObject
+export type ArgValue<$Context = DefaultContext> =
+  | string
+  | boolean
+  | null
+  | number
+  | ArgsObject<$Context>
+  | Var.Builder<any>
 
-export type ArgsObject = { [k: string]: ArgValue }
+export type ArgsObject<$Context = DefaultContext> = {
+  [k: string]: ArgValue<$Context>
+}
+
+/**
+ * This type loosely captures an arguments object
+ * by being an indexed type that can recurse (for input objects)
+ * and allow unknown values to permit accepting custom scalars.
+ */
+export type ArgsObjectLoose = {
+  [k: string]: unknown | ArgsObjectLoose
+}
 
 export const key = `$`
+
+export type key = typeof key
 
 export const enumKeyPrefix = `$`
 

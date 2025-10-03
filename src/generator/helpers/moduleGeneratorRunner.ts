@@ -6,7 +6,7 @@ type FactoryModuleGeneratorRunner = <$CustomInput extends object = {}>(
   runnerImplementation: ModuleGeneratorRunnerImplementation<$CustomInput>,
 ) => CodeGenerator<$CustomInput>
 
-export type ModuleGeneratorRunner = (config: Config) => GeneratedModule
+export type ModuleGeneratorRunner = (config: Config) => GeneratedModule | GeneratedModule[]
 
 export type CodeGenerator<$CustomInput extends object = {}> = (input: $CustomInput & BaseInput) => CodePusher.Code
 

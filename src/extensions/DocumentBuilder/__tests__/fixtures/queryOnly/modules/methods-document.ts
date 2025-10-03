@@ -1,5 +1,5 @@
 import type * as $$Utilities from '../../../../../../exports/utilities-for-generated.js'
-import type * as $$Schema from './schema.js'
+import type * as $$Schema from './schema/$.js'
 import type * as $$SelectionSets from './selection-sets.js'
 
 export interface Document<$Context extends $$Utilities.Context> {
@@ -7,7 +7,7 @@ export interface Document<$Context extends $$Utilities.Context> {
     document: $$Utilities.ExactNonEmpty<
       $Document,
       $$SelectionSets.$Document<
-        $Context['scalars']
+        { scalars: $Context['scalars'] }
       >
     >,
   ): $$Utilities.DocumentBuilderKit.DocumentRunner<

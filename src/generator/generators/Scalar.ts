@@ -1,8 +1,9 @@
 import { Code } from '../../lib/Code.js'
-import { Grafaid } from '../../lib/grafaid/_namespace.js'
-import { Tex } from '../../lib/tex/_namespace.js'
+import { Grafaid } from '../../lib/grafaid/$.js'
+import { Tex } from '../../lib/tex/$.js'
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
+import { importUtilities } from '../helpers/pathHelpers.js'
 import { renderName, typeTitle2 } from '../helpers/render.js'
 
 export const ModuleGeneratorScalar = createModuleGenerator(
@@ -19,43 +20,45 @@ export const ModuleGeneratorScalar = createModuleGenerator(
     //   inImplementationButMissingInSchema:
     // }
 
-    // dprint-ignore
-    code`import type * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'`
+    code(importUtilities(config))
 
     if (Grafaid.Schema.KindMap.hasCustomScalars(config.schema.kindMap) && config.options.customScalars) {
       code`
         import * as ${$.CustomScalars} from '${config.paths.imports.scalars}'
       `
 
-      // Use explicit named exports for custom scalars to avoid TypeScript export conflict
-      // where type exports shadow value exports
-      const scalarNames = config.schema.kindMap.list.ScalarCustom.map(scalar => scalar.name).join(`,\n  `)
-      code`
-        export {
-          ${scalarNames}
-        } from '${config.paths.imports.scalars}'
-      `
-
       for (const scalar of config.schema.kindMap.list.ScalarCustom) {
         code(typeTitle2(`custom scalar type`)(scalar))
         code``
-        code`
-          export type ${renderName(scalar.name)} = typeof ${$.CustomScalars}.${scalar.name}
-          // Without this we get error:
-          // "Exported type alias 'DateDecoded' has or is using private name 'Date'."
-          type ${renderName(scalar.name)}_ = typeof ${$.CustomScalars}.${scalar.name}
-          export type ${renderName(scalar.name)}Decoded = ${$.$$Utilities}.Schema.Scalar.GetDecoded<${
-          renderName(scalar.name)
-        }_>
-          export type ${renderName(scalar.name)}Encoded = ${$.$$Utilities}.Schema.Scalar.GetEncoded<${
-          renderName(scalar.name)
-        }_>
-        `
+
+        const dualExportResult = Code.dualExport({
+          name: scalar.name,
+          const: {
+            value: `${$.CustomScalars}.${scalar.name}`,
+          },
+          type: {
+            type: `typeof ${$.CustomScalars}.${scalar.name}`,
+          },
+        })
+
+        code(dualExportResult.code)
+        code(
+          Code.tsTypeExport(
+            `${scalar.name}Decoded`,
+            `${$.$$Utilities}.Schema.Scalar.GetDecoded<${dualExportResult.internalName}>`,
+          ),
+        )
+        code(
+          Code.tsTypeExport(
+            `${scalar.name}Encoded`,
+            `${$.$$Utilities}.Schema.Scalar.GetEncoded<${dualExportResult.internalName}>`,
+          ),
+        )
         code``
       }
     }
 
-    code`export * from '${config.paths.imports.grafflePackage.scalars}'`
+    code(Code.reexportAll({ from: config.paths.imports.grafflePackage.scalars }))
     code``
 
     if (isNeedCustomScalarDefaults) {
@@ -68,7 +71,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
       for (const scalar of config.schema.kindMap.list.ScalarCustom) {
         code(typeTitle2(`custom scalar type`)(scalar))
         code``
-        code`export type ${renderName(scalar.name)} = ${$.$$Utilities}.Schema.Scalar.ScalarCodecless<'${scalar.name}'>`
+        code(Code.tsTypeExport(scalar.name, `${$.$$Utilities}.Schema.Scalar.ScalarCodecless<'${scalar.name}'>`))
         // code(`import type { String as ${scalar.name} } from '${config.paths.imports.grafflePackage.scalars}'`)
         // code()
         // code(`export { String as ${scalar.name} } from '${config.paths.imports.grafflePackage.scalars}'`)
@@ -90,7 +93,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
 
     const buildtimeMap = config.options.customScalars
       ? config.schema.kindMap.list.ScalarCustom.map(_ => {
-        return [_.name, _.name + `_`]
+        return [_.name, renderName(_.name)]
       })
       : {}
 
@@ -105,8 +108,8 @@ export const ModuleGeneratorScalar = createModuleGenerator(
       // dprint-ignore
       ? `$$Utilities.Schema.Scalar.Registry<
           ${Code.termObject(buildtimeMap)},
-          ${Code.tsUnionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Schema.Scalar.GetEncoded<${_.name}_>`))},
-          ${Code.tsUnionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Schema.Scalar.GetDecoded<${_.name}_>`))},
+          ${Code.tsUnionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Schema.Scalar.GetEncoded<${renderName(_.name)}>`))},
+          ${Code.tsUnionItems(config.schema.kindMap.list.ScalarCustom.map(_ => `${$.$$Utilities}.Schema.Scalar.GetDecoded<${renderName(_.name)}>`))},
         >`
       : `$$Utilities.Schema.Scalar.Registry.Empty`
 

@@ -6,7 +6,7 @@ import {
   propertiesComputerPreflight$Func,
   propertiesStatic1,
 } from '../../context/fragments/properties/_tests/_fixtures.js'
-import { RequestInterceptors } from '../../context/fragments/requestInterceptors/_namespace.js'
+import { RequestInterceptors } from '../../context/fragments/requestInterceptors/$.js'
 import { Extension } from '../../exports/extension.js'
 
 const aExtension = Extension.create(`aExtension`).return()

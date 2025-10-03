@@ -1,5 +1,5 @@
 import type { Context } from '../../context/context.js'
-import { Transports } from '../../context/fragments/transports/_namespace.js'
+import { Transports } from '../../context/fragments/transports/$.js'
 import type { ContextTransports, ContextTransportsNonEmpty } from '../../context/fragments/transports/fragment.js'
 import type { AddMany } from '../../context/fragments/transports/reducers/addMany.js'
 import type { Exact, Objekt, StringKeyof } from '../../lib/prelude.js'
@@ -24,7 +24,12 @@ export type TransportMethod<
   ? {
       /**
        * Configure the current transport.
-       * TODO
+       *
+       * Pass a configuration object to update settings of the currently selected transport,
+       * such as URL, headers, or other transport-specific options.
+       *
+       * **Immutability**: Returns a new client instance. The original client is not modified.
+       * If the operation results in no effective change, the same instance is returned for performance.
        */
       <
         const configurationInput extends $Context['transports']['registry'][$Context['transports']['current']]['configurator']['input'],
@@ -36,8 +41,13 @@ export type TransportMethod<
             ? Client<$Context> // todo: access to current client type?
             : Client<Transports.ConfigureCurrent<$Context, configurationInput>>
       /**
-       * Set the current Transport, selected from amongst the registered ones, and optionally change its configuration.
-       * TODO
+       * Set the current transport, selected from registered transports, and optionally configure it.
+       *
+       * Pass a transport name to switch to a different registered transport. Optionally provide
+       * a second argument to configure the selected transport at the same time.
+       *
+       * **Immutability**: Returns a new client instance. The original client is not modified.
+       * If the operation results in no effective change, the same instance is returned for performance.
        */
       <
         const name extends GetNames<$Context['transports']>,

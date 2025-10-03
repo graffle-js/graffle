@@ -17,9 +17,10 @@ import type * as $$Utilities from '../../../../../../exports/utilities-for-gener
 //
 
 export interface $Document<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
-  mutation?: Record<string, Mutation<_$Scalars>>
+  mutation?: Record<string, Mutation<_$Context>>
 }
 
 //
@@ -44,21 +45,41 @@ export interface $Document<
 
 // ----------------------------------------| Entrypoint Interface |
 
+/**
+ * GraphQL root {@link https://graphql.org/learn/schema/#the-mutation-and-mutation-types | Mutation} type.
+ */
 export interface Mutation<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
 > {
   /**
-   * Select the `id` field on the `Mutation` object. Its type is `ID` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ID} |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Mutation} |
+   * | **Path** | `Mutation.id` |
+   * | **Nullability** | Optional |
    */
   id?:
-    | Mutation.id$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Mutation.id<_$Scalars>>
+    | Mutation.id$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Mutation.id<_$Context>>
   /**
-   * Select the `idNonNull` field on the `Mutation` object. Its type is `ID` (a `ScalarStandard` kind of type).
+   * # Info
+   *
+   * | | |
+   * | - | - |
+   * | **Type** | {@link $NamedTypes.$ID}! |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Parent** | {@link $NamedTypes.$Mutation} |
+   * | **Path** | `Mutation.idNonNull` |
+   * | **Nullability** | Required |
    */
   idNonNull?:
-    | Mutation.idNonNull$Expanded<_$Scalars>
-    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Mutation.idNonNull<_$Scalars>>
+    | Mutation.idNonNull$Expanded<_$Context>
+    | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<Mutation.idNonNull<_$Context>>
 
   /**
    * Inline fragments for field groups.
@@ -69,8 +90,8 @@ export interface Mutation<
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
   ___?:
-    | Mutation$FragmentInline<_$Scalars>
-    | Mutation$FragmentInline<_$Scalars>[]
+    | Mutation$FragmentInline<_$Context>
+    | Mutation$FragmentInline<_$Context>[]
 
   /**
    * A meta field. Is the name of the type being selected.
@@ -85,19 +106,24 @@ export interface Mutation<
 }
 
 export interface Mutation$FragmentInline<
-  _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-> extends Mutation<_$Scalars>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+> extends Mutation<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace Mutation {
-  export type id<_$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty> =
+  export type id<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
+    | id$SelectionSet<_$Context>
 
   export interface id$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -108,22 +134,25 @@ export namespace Mutation {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | id$SelectionSet<_$Scalars>
+    | id$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
   export type idNonNull<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | idNonNull$SelectionSet<_$Scalars>
+    | idNonNull$SelectionSet<_$Context>
 
   export interface idNonNull$SelectionSet<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -134,13 +163,21 @@ export namespace Mutation {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type idNonNull$Expanded<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-    | idNonNull$SelectionSet<_$Scalars>
+    | idNonNull$SelectionSet<_$Context>
   >
 }
 
+import type * as $$Schema from './schema/$.js'
+
+export type Mutation$Infer<$SelectionSet extends object> = $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
+  $SelectionSet,
+  $$Schema.Schema
+>
+export type Mutation$Variables<_$SelectionSet> = any // Temporarily any - will be replaced with new analysis system
 /**
  * [1] These definitions serve to allow field selection interfaces to extend their respective object type without
  *     name clashing between the field name and the object name.
@@ -150,6 +187,7 @@ export namespace Mutation {
  */
 export namespace $NamedTypes {
   export type $Mutation<
-    _$Scalars extends $$Utilities.Schema.Scalar.Registry = $$Utilities.Schema.Scalar.Registry.Empty,
-  > = Mutation<_$Scalars>
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
+      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  > = Mutation<_$Context>
 }

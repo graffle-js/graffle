@@ -5,7 +5,7 @@ import { Extension } from '../../../../exports/extension.js'
 import { Configurator } from '../../../../exports/extension_exports.js'
 import { pipe } from '../../../../lib/prelude.js'
 import { contextEmpty } from '../../../ContextEmpty.js'
-import { Configuration } from '../../configuration/_namespace.js'
+import { Configuration } from '../../configuration/$.js'
 import { propertiesComputerPreflight$Func } from '../../properties/_tests/_fixtures.js'
 import { addAndApplyMany } from './addAndApplyMany.js'
 

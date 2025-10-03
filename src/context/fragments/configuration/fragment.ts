@@ -1,8 +1,8 @@
 import type { Configurator } from '../../../lib/configurator/configurator.js'
-import { Check } from './check/_namespace.js'
+import { Check } from './check/$.js'
 import { createEntry } from './createEntry.js'
-import { Output } from './output/_namespace.js'
-import { Schema } from './schema/_namespace.js'
+import { Output } from './output/$.js'
+import { Schema } from './schema/$.js'
 
 export interface ContextFragment {
   readonly configuration: {

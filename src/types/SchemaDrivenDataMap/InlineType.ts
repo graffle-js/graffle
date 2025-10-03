@@ -6,7 +6,7 @@
  * The outer most tuple DOES NOT represent a list, but the nullability of the named type itself. E.g. `[0]` would indicate
  * that a scalar field is nullable while `[1]` would indicate that it is non-nullable.
  */
-export type InlineType = [InlineType.Nullable | InlineType.NonNull, InlineType?]
+export type InlineType = readonly [InlineType.Nullable | InlineType.NonNull, (InlineType | undefined)?]
 
 export namespace InlineType {
   export type Nullable = 0
