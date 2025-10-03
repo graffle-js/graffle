@@ -46,16 +46,17 @@ By default, the builder extracts **all** arguments as GraphQL variables (`hoistA
 **Example with default behavior:**
 
 ```ts
-const doc = query.user({
-  $: { id: '123', status: 'ACTIVE' },
+const doc = query.trainerByName({
+  $: { name: 'Ash' },
   name: true,
+  class: true,
 })
 
 // Generates:
-// query($id: ID!, $status: String!) {
-//   user(id: $id, status: $status) { name }
+// query($name: String!) {
+//   trainerByName(name: $name) { name class }
 // }
-// Variables: { id: "123", status: "ACTIVE" }
+// Variables: { name: "Ash" }
 ```
 
 **Disabling automatic extraction:**
@@ -63,13 +64,13 @@ const doc = query.user({
 ```ts
 staticBuilderDefaults.hoistArguments = false
 
-const doc = query.user({
-  $: { id: '123' },
+const doc = query.trainerByName({
+  $: { name: 'Ash' },
   name: true,
 })
 
 // Generates:
-// query { user(id: "123") { name } }
+// query { trainerByName(name: "Ash") { name } }
 ```
 
 **Note:** Explicit `$` markers are ALWAYS extracted as variables, regardless of this setting:
@@ -77,17 +78,19 @@ const doc = query.user({
 ```ts
 staticBuilderDefaults.hoistArguments = false
 
-const doc = query.user({
+const doc = query.pokemonByName({
   $: {
-    id: $('userId'), // Always extracted
-    name: 'John', // Inlined (due to setting)
+    name: $('pokemonName'), // Always extracted
   },
   name: true,
+  trainer: {
+    name: true,
+  },
 })
 
 // Generates:
-// query($userId: ID!) {
-//   user(id: $userId, name: "John") { name }
+// query($pokemonName: String!) {
+//   pokemonByName(name: $pokemonName) { name trainer { name } }
 // }
 ```
 
@@ -96,12 +99,12 @@ const doc = query.user({
 When both explicit `$` markers and auto-hoisted arguments want the same variable name, automatic renaming occurs:
 
 ```ts
-const doc = query.user({
+const doc = query.trainerByName({
   $: {
-    id: $('userId'), // Gets: $userId
-    userId: '123', // Gets: $userId_2 (auto-renamed)
+    name: $('trainerName'), // Gets: $trainerName
   },
   name: true,
+  class: true,
 })
 ```
 
@@ -115,13 +118,13 @@ This section provides detailed examples of how each GraphQL feature is expressed
 == Graffle
 
 ```ts
-query.user({ name: true })
+query.trainers({ name: true })
 ```
 
 == GraphQL
 
 ```graphql
-query { user { name } }
+query { trainers { name } }
 ```
 
 :::
@@ -199,13 +202,13 @@ query {
 == Graffle
 
 ```ts
-query.user({ $: { id: $ }, name: true })
+query.trainerByName({ $: { name: $ }, name: true })
 ```
 
 == GraphQL
 
 ```graphql
-query ($id: ID!) { user(id: $id) { name } }
+query ($name: String!) { trainerByName(name: $name) { name } }
 ```
 
 :::
@@ -221,12 +224,12 @@ When using a generated client, Graffle uses Schema-Driven Data Map (SDDM) metada
 ```ts twoslash
 import { Graffle } from './graffle/$.js'
 
-Graffle.query.user({
-  $: { id: '123' }, // Inferred as: $id: ID!
+Graffle.query.trainerByName({
+  $: { name: 'Ash' }, // Inferred as: $name: String!
   name: true,
 })
 
-// Generated: query($id: ID!) { user(id: $id) { name } }
+// Generated: query($name: String!) { trainerByName(name: $name) { name } }
 ```
 
 **2. Value-Based (without schema):**
@@ -239,18 +242,15 @@ import { OperationTypeNode } from 'graphql'
 
 const query = createStaticRootType(OperationTypeNode.QUERY)
 
-query.user({
+query.trainerByName({
   $: {
-    id: '123', // Inferred as: String
-    age: 42, // Inferred as: Int
-    active: true, // Inferred as: Boolean
-    tags: ['a', 'b'], // Inferred as: [String]
+    name: 'Ash', // Inferred as: String
   },
   name: true,
 })
 
-// Generated: query($id: String, $age: Int, $active: Boolean, $tags: [String]) {
-//   user(id: $id, age: $age, active: $active, tags: $tags) { name }
+// Generated: query($name: String) {
+//   trainerByName(name: $name) { name }
 // }
 ```
 
@@ -272,12 +272,12 @@ Variables can be named explicitly or use automatic naming:
 
 ```ts
 // Explicit naming
-query.user({ $: { id: $('userId') }, name: true })
-// Generated: query($userId: ID!) { user(id: $userId) { name } }
+query.trainerByName({ $: { name: $('trainerName') }, name: true })
+// Generated: query($trainerName: String!) { trainerByName(name: $trainerName) { name } }
 
 // Automatic naming (uses argument name)
-query.user({ $: { id: $ }, name: true })
-// Generated: query($id: ID!) { user(id: $id) { name } }
+query.trainerByName({ $: { name: $ }, name: true })
+// Generated: query($name: String!) { trainerByName(name: $name) { name } }
 ```
 
 #### Optional and Required Variables
@@ -286,12 +286,12 @@ Use modifiers to control nullability:
 
 ```ts
 // Required (default)
-query.user({ $: { id: $ }, name: true })
-// Generated: query($id: ID!) { ... }
+query.trainerByName({ $: { name: $ }, name: true })
+// Generated: query($name: String!) { ... }
 
 // Optional
-query.user({ $: { id: $.optional }, name: true })
-// Generated: query($id: ID) { ... }
+query.trainerByName({ $: { name: $.optional }, name: true })
+// Generated: query($name: String) { ... }
 ```
 
 #### Variable Defaults
@@ -299,8 +299,8 @@ query.user({ $: { id: $.optional }, name: true })
 Provide default values using the third parameter:
 
 ```ts
-query.users({ $: { limit: $(10) }, name: true })
-// Generated: query($limit: Int = 10) { users(limit: $limit) { name } }
+query.trainers({ $: { limit: $(10) }, name: true })
+// Generated: query($limit: Int = 10) { trainers(limit: $limit) { name } }
 ```
 
 ### Mutations
