@@ -21,7 +21,7 @@ import { type DocumentController } from './send.js'
 type ValidateSDDMRequirement<$Document extends Grafaid.Document.Typed.TypedDocumentLike, $Context> =
   Grafaid.Document.Typed.RequiresSDDMOf<$Document> extends true
     ? $Document  // For now, allow SDDM documents with all contexts
-    : $Document  // Non-SDDM documents work with any context
+    : $Document // Non-SDDM documents work with any context
 
 // dprint-ignore
 /**

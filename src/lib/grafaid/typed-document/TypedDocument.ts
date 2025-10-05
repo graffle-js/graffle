@@ -57,10 +57,7 @@ interface TypedDocumentNode<$Result = SomeObjectData, $Variables = Variables> ex
   // nothing
 }
 
-export {
-  type TypedDocumentNode as Node,
-  type TypedDocumentString as String,
-}
+export { type TypedDocumentNode as Node, type TypedDocumentString as String }
 
 //
 //

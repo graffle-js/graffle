@@ -56,7 +56,6 @@ export type Config = {
    * documents (cast to `any`), so SDDM branding only applies when using generated types.
    */
   sddmEnabled: boolean
-
   // Future extensibility:
   // customScalars?: Schema.Scalar.Registry
   // namingConvention?: 'camelCase' | 'snake_case'
