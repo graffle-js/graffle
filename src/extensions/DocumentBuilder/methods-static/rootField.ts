@@ -6,7 +6,7 @@ import type { OperationTypeNode } from 'graphql'
 import { Select } from '../Select/$.js'
 import type { Options } from '../SelectGraphQLMapper/nodes/1_Document.js'
 import { toGraphQLDocument } from '../SelectGraphQLMapper/nodes/1_Document.js'
-import { defaults } from '../staticBuilderDefaults.js'
+import { defaults as packageLevelDefaults } from '../staticBuilderDefaults.js'
 
 //
 //
@@ -133,16 +133,20 @@ export type StaticDocumentBuilder<
  *
  * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
  */
-export const createStaticRootType = (operationType: OperationTypeNode) => {
+export const createStaticRootType = (operationType: OperationTypeNode, options?: Options) => {
   return new Proxy({}, {
     get: (_, fieldName: string) => {
       if (isSymbol(fieldName)) throw new Error(`Symbols not supported`)
-      return createStaticRootField(operationType, fieldName)
+      return createStaticRootField(operationType, fieldName, options)
     },
   })
 }
 
-export const createStaticRootField = (operationType: OperationTypeNode, fieldName: string) => {
+export const createStaticRootField = (
+  operationType: OperationTypeNode,
+  fieldName: string,
+  factoryLevelDefaults?: Options,
+) => {
   return (selection?: Select.SelectionSet.AnySelectionSet, options?: Partial<Options>) => {
     // Create root type selection set with the field
     const rootTypeSelectionSet = {
@@ -156,11 +160,11 @@ export const createStaticRootField = (operationType: OperationTypeNode, fieldNam
     )
 
     // Convert to GraphQL document using existing mapper
+    // Merge default options (including SDDM) with call-time options
     const result = toGraphQLDocument(documentNormalized, {
-      ...defaults,
+      ...packageLevelDefaults,
+      ...factoryLevelDefaults,
       ...options,
-      // Note: No SDDM or scalars needed for static builder
-      // Types are handled at compile time
     })
 
     // Return the printed document string

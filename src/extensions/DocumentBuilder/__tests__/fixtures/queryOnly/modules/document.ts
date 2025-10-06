@@ -5,6 +5,7 @@ import type { InferOperations } from '#graffle/extensions/document-builder'
 import { OperationTypeNode } from 'graphql'
 import type * as ArgumentsMap from './arguments-map.js'
 import type * as $$Scalar from './scalar.js'
+import { schemaDrivenDataMap as sddm } from './schema-driven-data-map.js'
 import type * as SelectionSets from './selection-sets.js'
 
 import type * as $$Utilities from '#graffle/utilities-for-generated'
@@ -172,7 +173,7 @@ export interface QueryBuilder {
  *
  * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
  */
-export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY) as any
+export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY, { sddm }) as any
 
 /**
  * Create a full GraphQL document with one or more named operations.

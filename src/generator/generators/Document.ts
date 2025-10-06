@@ -3,8 +3,7 @@ import { values } from '#src/lib/prelude.js'
 import type { GraphQLObjectType } from 'graphql'
 import { getStaticDocumentBuilderDoc, getStaticDocumentFieldDoc } from '../helpers/jsdoc.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
-import { buildImportPath, codeImportAll, importUtilities } from '../helpers/pathHelpers.js'
-import { getTsDocContents } from '../helpers/render.js'
+import { codeImportAll, codeImportNamed, importUtilities } from '../helpers/pathHelpers.js'
 
 /**
  * Check if a root type has any fields with arguments (recursively checking all fields).
@@ -38,6 +37,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
     code(`import type * as $$StaticBuilder from '${config.paths.imports.grafflePackage.extensionDocumentBuilder}'`)
     code(`import type { InferOperations } from '${config.paths.imports.grafflePackage.extensionDocumentBuilder}'`)
     code(`import { OperationTypeNode } from 'graphql'`)
+    code(codeImportNamed(config, { names: { schemaDrivenDataMap: 'sddm' }, from: './schema-driven-data-map' }))
     code(
       `import type { TypedDocument, TypedFullDocumentString, OperationMetadata } from '${config.paths.imports.grafflePackage.client}'`,
     )
@@ -98,7 +98,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
       // Const JSDoc
       const constDoc = getStaticDocumentBuilderDoc('query')
       code(Code.TSDoc(constDoc))
-      code(`export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY) as any`)
+      code(`export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY, { sddm }) as any`)
       code``
     }
 
@@ -157,7 +157,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
       // Const JSDoc
       const mutationConstDoc = getStaticDocumentBuilderDoc('mutation')
       code(Code.TSDoc(mutationConstDoc))
-      code(`export const mutation: MutationBuilder = createStaticRootType(OperationTypeNode.MUTATION) as any`)
+      code(`export const mutation: MutationBuilder = createStaticRootType(OperationTypeNode.MUTATION, { sddm }) as any`)
       code``
     }
 
@@ -217,7 +217,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
       const subscriptionConstDoc = getStaticDocumentBuilderDoc('subscription')
       code(Code.TSDoc(subscriptionConstDoc))
       code(
-        `export const subscription: SubscriptionBuilder = createStaticRootType(OperationTypeNode.SUBSCRIPTION) as any`,
+        `export const subscription: SubscriptionBuilder = createStaticRootType(OperationTypeNode.SUBSCRIPTION, { sddm }) as any`,
       )
       code``
     }
