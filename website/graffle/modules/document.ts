@@ -581,7 +581,7 @@ export const mutation: MutationBuilder = createStaticRootType(OperationTypeNode.
  * const user = await client.send(doc, 'getUser')
  * ```
  */
-export const document = documentBuilder as Document;
+export const document = ((documentObject: any) => documentBuilder(documentObject, { sddm })) as Document;
 
 /**
  * Document builder function type for creating multi-operation documents.

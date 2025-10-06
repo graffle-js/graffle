@@ -42,24 +42,24 @@ test('document is type checked', () => {
 //            INTEGRATION: send() with mixed query/mutation
 // ====================================================================
 
-test('send() with mixed query/mutation document', () => {
+test('send() with mixed query/mutation document and $ prefix stripping', () => {
   const doc = Possible.document({
     query: {
-      getUser: {
-        id: {
-          $: { id: $ },
+      getUserWithArgs: {
+        objectWithArgs: {
+          $: {
+            // $-prefixed keys should map to variable names without $
+            $id: $.required(),
+            $string: $.required(),
+          },
+          id: true,
         },
       },
     },
     mutation: {
       updateUser: {
-        idNonNull: {
-          $: {
-            // $-prefixed key should map to variable name without $
-            $type: $.required(),
-            name: $.required(),
-          },
-        },
+        // Mutation fields in Possible schema don't accept arguments
+        idNonNull: true,
       },
     },
   })
@@ -67,9 +67,12 @@ test('send() with mixed query/mutation document', () => {
   // Create a typed client (not executing, just testing types)
   const client = Possible.create({ check: { preflight: false } })
 
-  // @ts-expect-error - variables must include 'type' not '$type'
-  client.send(doc, 'updateUser', { $type: 'foo', name: 'bar' })
+  // @ts-expect-error - variables must include 'id' and 'string' (without $ prefix), not '$id' and '$string'
+  client.send(doc, 'getUserWithArgs', { $id: 'foo', $string: 'bar' })
 
-  // Should accept 'type' (without $)
-  client.send(doc, 'updateUser', { type: 'foo', name: 'bar' })
+  // Should accept 'id' and 'string' (without $ prefix)
+  client.send(doc, 'getUserWithArgs', { id: 'foo', string: 'bar' })
+
+  // Mutation operation with no variables works
+  client.send(doc, 'updateUser')
 })
