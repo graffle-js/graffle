@@ -245,7 +245,7 @@ const doc = document({
 const user = await client.send(doc, 'getUser')
 \`\`\``,
       ))
-      code`export const document = documentBuilder as Document`
+      code`export const document = ((documentObject: any) => documentBuilder(documentObject, { sddm })) as Document`
       code``
 
       // Generate Document interface with proper typing using imported InferOperations

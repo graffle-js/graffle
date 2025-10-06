@@ -5,8 +5,8 @@ import type { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
 import { print } from '@0no-co/graphql.web'
 import type { DocumentBuilderKit } from '../$.js'
 import { Select } from '../Select/$.js'
-import { toGraphQLDocument } from '../SelectGraphQLMapper/nodes/1_Document.js'
-import { defaults } from '../staticBuilderDefaults.js'
+import { type Options, toGraphQLDocument } from '../SelectGraphQLMapper/nodes/1_Document.js'
+import { defaults as packageLevelDefaults } from '../staticBuilderDefaults.js'
 
 /**
  * Infer operation metadata from a full document selection set.
@@ -91,15 +91,15 @@ export type InferOperations<
  */
 export const document = (
   documentObject: Select.Document.DocumentObject,
+  options?: Options,
 ): TypedFullDocument.TypedFullDocumentString<any> => {
   // Normalize the document object into internal representation
   const documentNormalized = Select.Document.normalizeOrThrow(documentObject)
 
   // Convert to GraphQL document
   const result = toGraphQLDocument(documentNormalized, {
-    ...defaults,
-    // Note: SDDM and scalars are not needed for static builder
-    // Type safety is provided at compile time via TypedFullDocumentString
+    ...packageLevelDefaults,
+    ...options,
   })
 
   // Print and return as TypedFullDocumentString

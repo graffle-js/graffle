@@ -96,13 +96,17 @@ show(doc3)
 
 /*
 
-4. Nested Arguments
+4. Variables with Default Values and Name Mapping
 ------------------------------------------------------------------------
 
-query ($eq: String = "mystic", $type: PokemonType!) {
-  trainers(filter: { class: { eq: $eq } }) {
+This example shows how to use default values for variables
+and how to map variable names using the $ prefix.
+
+query ($trainerName: String = "Ash") {
+  trainerByName(name: $trainerName) {
     name
-    pokemons(filter: { type: $type }) {
+    class
+    pokemon {
       name
       type
     }
@@ -111,19 +115,15 @@ query ($eq: String = "mystic", $type: PokemonType!) {
 
 */
 
-const doc4 = Graffle.query.trainers({
+const doc4 = Graffle.query.trainerByName({
   $: {
-    filter: { class: { eq: $.default('mystic') } },
-    //                     ^^^^^^^^^^^^^^^^^^^^
-    //                     Root-level argument with default value
+    name: $.default('Ash'),
+    //     ^^^^^^^^^^^^^^^^
+    //     Variable with default value and custom name
   },
   name: true,
-  pokemons: {
-    $: {
-      filter: { type: $ },
-      //              ^
-      //              Standalone marker (name inferred)
-    },
+  class: true,
+  pokemon: {
     name: true,
     type: true,
   },
@@ -275,7 +275,7 @@ show(pokemon)
 // Execute mutation operation
 const newPokemon = await client.send(mixedDoc, 'addNewPokemon', {
   name: 'Mew',
-  type: 'psychic',
+  $type: 'electric',
   hp: 100,
   attack: 100,
   defense: 100,
