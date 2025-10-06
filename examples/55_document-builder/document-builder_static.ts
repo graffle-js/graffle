@@ -147,12 +147,12 @@ mutation ($name: String = "Pikachu", $attack: Int!, $defense: Int!, $hp: Int!, $
 const doc5 = Graffle.mutation.addPokemon({
   $: {
     name: $.default('Pikachu'),
-    //    Make required field optional with default value
+    // Make required field optional with default value
     attack: $.required(),
     defense: $.required(),
     hp: $.required(),
-    //      Make optional fields required
-    $type: $,
+    // Make optional fields required
+    $type: $.required(),
   },
   name: true,
   type: true,
@@ -274,7 +274,7 @@ show(pokemon)
 // Execute mutation operation
 const newPokemon = await client.send(mixedDoc, 'addNewPokemon', {
   name: 'Mew',
-  $type: 'electric',
+  type: 'electric',
   hp: 100,
   attack: 100,
   defense: 100,
