@@ -1,6 +1,55 @@
 import { expect } from 'vitest'
 import { test } from '../_/helpers.js'
 
+// Register the snapshot serializer
+expect.addSnapshotSerializer({
+  test(value: unknown): boolean {
+    // Check if this is a stdio tuple [unknown, string, string]
+    if (!Array.isArray(value) || value.length !== 3) {
+      return false
+    }
+    // Check if the second and third elements are strings (stdout and stderr)
+    return typeof value[1] === 'string' && typeof value[2] === 'string'
+  },
+
+  serialize(value: [unknown, string, string]): string {
+    const [stdin, stdout, stderr] = value
+
+    // Normalize full paths containing temp directories
+    // Replace entire paths like /private/var/folders/xx/xxx/T/xxxxx with <TMP_PATH>
+    const normalizedStdout = stdout
+      .replace(/\/private\/var\/folders\/[^/]+\/[^/]+\/T\/[a-f0-9]{20,}/gi, '<TMP_PATH>')
+      .replace(/\/var\/folders\/[^/]+\/[^/]+\/T\/[a-f0-9]{20,}/gi, '<TMP_PATH>')
+      .replace(/\/tmp\/[a-f0-9]+/gi, '<TMP_PATH>')
+
+    const normalizedStderr = stderr
+      .replace(/\/private\/var\/folders\/[^/]+\/[^/]+\/T\/[a-f0-9]{20,}/gi, '<TMP_PATH>')
+      .replace(/\/var\/folders\/[^/]+\/[^/]+\/T\/[a-f0-9]{20,}/gi, '<TMP_PATH>')
+      .replace(/\/tmp\/[a-f0-9]+/gi, '<TMP_PATH>')
+
+    // Format output to be human-readable by preserving the actual string content
+    const formatValue = (val: unknown): string => {
+      if (val === undefined) return 'undefined'
+      if (val === '') return '""'
+      if (typeof val === 'string') {
+        // For multiline strings, show them as-is with backticks
+        if (val.includes('\n')) {
+          return '`' + val + '`'
+        }
+        // For single line strings, use quotes
+        return JSON.stringify(val)
+      }
+      return JSON.stringify(val, null, 2)
+    }
+
+    return `[
+  ${formatValue(stdin)},
+  ${formatValue(normalizedStdout)},
+  ${formatValue(normalizedStderr)},
+]`
+  },
+})
+
 // - new project no generation
 // 	- type error if try give name to constructor
 
@@ -87,11 +136,11 @@ test(`client uses dprint formatter if installed`, async ({ project }) => {
   const genResultStdout = genResult.stdout as string
   expect(genResultStdout.includes(`No TypeScript formatter found`)).toEqual(false)
 
+  // Verify the generated code passes dprint validation
   await project.run`pnpm dprint check graffle/**/*`
 })
 
 test(`client uses prettier formatter if installed`, async ({ project }) => {
-  // await project.addDprintConfig()
   const path = await project.addPokemonSchemaSDL()
 
   await project.run`pnpm add --save-dev prettier`
@@ -100,6 +149,7 @@ test(`client uses prettier formatter if installed`, async ({ project }) => {
   const genResultStdout = genResult.stdout as string
   expect(genResultStdout.includes(`No TypeScript formatter found`)).toEqual(false)
 
+  // Verify the generated code passes prettier validation
   await project.run`pnpm prettier --check graffle/**/*`
 })
 

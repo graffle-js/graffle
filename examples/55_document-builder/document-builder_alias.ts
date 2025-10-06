@@ -9,14 +9,14 @@ const pokemon = Graffle.create()
 
 const day = 1000 * 60 * 60 * 24
 const year = day * 365.25
-const yearsAgo100 = new Date(Date.now() - year * 100).toISOString()
-const yearsAgo1 = new Date(Date.now() - year).toISOString()
+const yearsAgo100 = new Date(Date.now() - year * 100)
+const yearsAgo1 = new Date(Date.now() - year)
 
 // dprint-ignore
 const pokemons = await pokemon.query.$batch({
   pokemons: [
     [`elderPokemons`, {
-//   ^^^^^^^^^^^^^^^      
+//   ^^^^^^^^^^^^^^^
       $: { filter: { birthday: { lte: yearsAgo100 } } },
       name: true,
     }],

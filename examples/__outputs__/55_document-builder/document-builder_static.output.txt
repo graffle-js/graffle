@@ -16,7 +16,7 @@ query ($pokemonName: String!) {
   }
 }
 ---------------------------------------- SHOW ----------------------------------------
-query ($filter: String!) {
+query ($filter: PokemonFilter) {
   pokemons(filter: $filter) {
     name
     hp
@@ -33,7 +33,7 @@ query ($filter: String!, $filter_2: String!) {
   }
 }
 ---------------------------------------- SHOW ----------------------------------------
-mutation ($name: String! = "Pikachu", $attack: String!, $defense: String!, $hp: String!, $type: String!) {
+mutation ($name: String! = "Pikachu", $attack: Int, $defense: Int, $hp: Int, $type: PokemonType!) {
   addPokemon(
     name: $name
     attack: $attack
