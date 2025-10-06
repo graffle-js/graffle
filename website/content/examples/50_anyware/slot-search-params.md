@@ -57,7 +57,8 @@ console.log(result)
     { name: 'Squirtle' },
     { name: 'Bulbasaur' },
     { name: 'Caterpie' },
-    { name: 'Weedle' }
+    { name: 'Weedle' },
+    { name: 'Mew' }
   ]
 }
 ```

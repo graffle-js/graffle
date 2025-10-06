@@ -50,7 +50,7 @@ await graffle.gql`{ pokemons { name } }`.send()
       'application/graphql-response+json; charset=utf-8, application/json; charset=utf-8'
     ],
     [ 'content-type', 'application/json' ],
-    [ 'X-Sent-At-Time', '1759444520180' ]
+    [ 'X-Sent-At-Time', '1759776426279' ]
   ],
   method: 'post',
   url: {

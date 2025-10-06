@@ -29,7 +29,8 @@ console.log(pokemons)
   { name: 'Squirtle' },
   { name: 'Bulbasaur' },
   { name: 'Caterpie' },
-  { name: 'Weedle' }
+  { name: 'Weedle' },
+  { name: 'Mew' }
 ]
 ```
 <!-- dprint-ignore-end -->
