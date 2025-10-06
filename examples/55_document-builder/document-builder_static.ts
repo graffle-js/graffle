@@ -96,11 +96,10 @@ show(doc3)
 
 /*
 
-4. Variables with Default Values and Name Mapping
+4. Variables with Default Values
 ------------------------------------------------------------------------
 
-This example shows how to use default values for variables
-and how to map variable names using the $ prefix.
+This example shows how to use default values for variables.
 
 query ($trainerName: String = "Ash") {
   trainerByName(name: $trainerName) {
@@ -119,7 +118,7 @@ const doc4 = Graffle.query.trainerByName({
   $: {
     name: $.default('Ash'),
     //     ^^^^^^^^^^^^^^^^
-    //     Variable with default value and custom name
+    //     Variable with default value
   },
   name: true,
   class: true,
