@@ -1,10 +1,5 @@
+import type { __FORCE_UNION_DISTRIBUTION__, ExcludeUndefined, IntersectionIgnoreNeverOrAny, Tuple } from '#/lib/prelude'
 import type { IsUnknown, Simplify } from 'type-fest'
-import type {
-  __FORCE_UNION_DISTRIBUTION__,
-  ExcludeUndefined,
-  IntersectionIgnoreNeverOrAny,
-  Tuple,
-} from '../../prelude.js'
 import type { PipelineDefinition } from '../$$.js'
 import type { Overload } from '../Overload/$.js'
 import type { Config } from '../PipelineDefinition/Config.js'

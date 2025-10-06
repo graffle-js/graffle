@@ -1,4 +1,4 @@
-import { Code } from '../../lib/Code.js'
+import { Code } from '#/lib/Code'
 import { createModuleGenerator, getImportName } from '../helpers/moduleGenerator.js'
 import { ModuleGenerator$$ } from './$$.js'
 import { ModuleGeneratorSchemaDrivenDataMap } from './SchemaDrivenDataMap.js'

@@ -1,5 +1,5 @@
-import type { Tuple, UnionMerge, ValuesOrEmptyObject } from '../../../lib/prelude.js'
-import type { Schema } from '../../../types/Schema/$.js'
+import type { Tuple, UnionMerge, ValuesOrEmptyObject } from '#/lib/prelude'
+import type { Schema } from '#/types/Schema/$'
 import type { Select } from '../Select/$.js'
 import type { OutputField } from './OutputField.js'
 

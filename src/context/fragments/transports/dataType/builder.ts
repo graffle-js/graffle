@@ -1,6 +1,6 @@
-import type { Anyware } from '../../../../lib/anyware/$.js'
-import { Configurator } from '../../../../lib/configurator/configurator.js'
-import type { RequestPipeline } from '../../../../requestPipeline/$.js'
+import { Configurator } from '#/lib/configurator/configurator'
+import type { RequestPipeline } from '#/requestPipeline/$'
+import type { Anyware } from '#lib/anyware'
 import { type Data, TypeSymbol as DataTypeSymbol } from './data.js'
 
 // ------------------------------------------------------------
@@ -105,7 +105,7 @@ export interface Builder<
     [TypeSymbol]: true
     /**
      * Define the configuration for this transport.
-     * 
+     *
      * Its normalized form will become available on step input as `input.transport`.
      */
     configurator: <$Configurator extends Configurator>(

@@ -1,1 +1,1 @@
-export { OpenTelemetry } from '../../../extensions/Opentelemetry/Opentelemetry.js'
+export { OpenTelemetry } from '#/extensions/Opentelemetry/Opentelemetry'

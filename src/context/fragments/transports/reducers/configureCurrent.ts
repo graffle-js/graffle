@@ -1,4 +1,4 @@
-import type { Configurator } from '../../../../lib/configurator/configurator.js'
+import type { Configurator } from '#/lib/configurator/configurator'
 import type { ContextFragment } from '../fragment.js'
 import { type Configure, configure } from './configure.js'
 

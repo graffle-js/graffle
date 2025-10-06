@@ -1,6 +1,6 @@
+import { Schema } from '#graffle/schema'
+import type { Grafaid } from '#lib/grafaid'
 import { Kind } from 'graphql'
-import { Schema } from '../exports/schema.js'
-import type { Grafaid } from '../lib/grafaid/$.js'
 import { SchemaDrivenDataMap } from '../types/SchemaDrivenDataMap/$.js'
 
 /**

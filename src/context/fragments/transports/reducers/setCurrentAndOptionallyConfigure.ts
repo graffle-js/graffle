@@ -1,4 +1,4 @@
-import { isObjectEmpty } from '../../../../lib/prelude.js'
+import { isObjectEmpty } from '#/lib/prelude'
 import type { ContextFragment } from '../fragment.js'
 import { type Configure, configure } from './configure.js'
 

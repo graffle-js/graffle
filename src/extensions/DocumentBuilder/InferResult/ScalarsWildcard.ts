@@ -1,4 +1,4 @@
-import type { Schema } from '../../../types/Schema/$.js'
+import type { Schema } from '#/types/Schema/$'
 import type { OutputField } from './OutputField.js'
 
 export type ScalarsWildcard<
@@ -13,7 +13,7 @@ export type ScalarsWildcard<
 type PickScalarFields<$Object extends Schema.OutputObjectLike> = {
   [
     $Key in keyof $Object['fields']
-    as Schema.GetNamedType<$Object['fields'][$Key]['namedType']> extends Schema.ScalarLikeTypes 
+    as Schema.GetNamedType<$Object['fields'][$Key]['namedType']> extends Schema.ScalarLikeTypes
       ? $Key
       : never
   ]: $Object['fields'][$Key]

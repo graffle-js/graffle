@@ -1,4 +1,4 @@
-import type { Digit, Letter } from '../../../lib/prelude.js'
+import type { Digit, Letter } from '#/lib/prelude'
 
 /**
  * @see http://spec.graphql.org/draft/#sec-Names

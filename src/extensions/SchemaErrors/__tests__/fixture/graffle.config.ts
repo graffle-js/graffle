@@ -1,5 +1,5 @@
-import { schema } from '../../../../../tests/_/fixtures/schemas/possible/schema.js'
-import { Generator } from '../../../../exports/generator.js'
+import { Generator } from '#graffle/generator'
+import { schema } from '#test/schema/possible/schema'
 import { SchemaErrors } from '../../gentime.js'
 
 export default Generator

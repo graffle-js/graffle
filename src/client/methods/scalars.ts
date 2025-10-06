@@ -1,6 +1,6 @@
-import type { Context } from '../../context/context.js'
+import type { Context } from '#/context/context'
+import type { GlobalRegistry } from '#/types/GlobalRegistry/GlobalRegistry'
 import type { Scalars } from '../../context/fragments/scalars/$.js'
-import type { GlobalRegistry } from '../../types/GlobalRegistry/GlobalRegistry.js'
 import { Schema } from '../../types/Schema/$.js'
 import type { Client } from '../client.js'
 

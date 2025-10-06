@@ -1,5 +1,5 @@
-import type { Configurator } from '../../../../lib/configurator/configurator.js'
-import { type Tuple, type UnionIgnoreAnyOrUnknown, type Writeable } from '../../../../lib/prelude.js'
+import type { Configurator } from '#/lib/configurator/configurator'
+import { type Tuple, type UnionIgnoreAnyOrUnknown, type Writeable } from '#/lib/prelude'
 import type { Context } from '../../../context.js'
 import { Configuration } from '../../configuration/$.js'
 import { Properties } from '../../properties/$.js'
@@ -31,7 +31,7 @@ export type AddAndApplyMany<
   __propertiesComputedTypeFunctions$ extends readonly Properties.PropertiesComputer$Func[] =
     Tuple.Flatten<{ [_ in keyof $Extensions]: $Extensions[_]['propertiesComputedTypeFunctions$'] }>,
   __propertiesStatic extends Properties.Properties =
-    Tuple.ReduceObjectsMergeShallow<{ [_ in keyof $Extensions]: $Extensions[_]['propertiesStatic'] }> 
+    Tuple.ReduceObjectsMergeShallow<{ [_ in keyof $Extensions]: $Extensions[_]['propertiesStatic'] }>
 > = {
       readonly [_ in keyof $Context]:
         _ extends 'configuration' ?
@@ -43,8 +43,8 @@ export type AddAndApplyMany<
         _ extends 'properties' ?
           Properties.Add<$Context, __propertiesStatic, __propertiesComputedTypeFunctions$> :
         _ extends 'transports' ?
-          __transports extends readonly [] 
-            ? $Context['transports'] 
+          __transports extends readonly []
+            ? $Context['transports']
             : Transports.AddMany<$Context, __transports>['transports'] :
         _ extends 'requestPipelineDefinition' ?
           __transports extends readonly []

@@ -1,6 +1,6 @@
+import type { Schema } from '#/types/Schema/$'
+import { DateScalar } from '#test/fixtures/scalars'
 import { expectTypeOf, test } from 'vitest'
-import { DateScalar } from '../../../../tests/_/fixtures/scalars.js'
-import type { Schema } from '../../../types/Schema/$.js'
 import { Possible } from '../__tests__/fixtures/possible/$.js'
 
 const g = Possible.create({ check: { preflight: false } }).scalar(DateScalar)
@@ -42,9 +42,9 @@ test(`query`, async () => {
   expectTypeOf(g.query.dateObject1({ $scalars: true })).resolves.toEqualTypeOf<{ __typename: `DateObject1`; date1: Date | null } | null>()
 
   // @ts-expect-error missing input selection set
-  g.query.dateObject1()  
+  g.query.dateObject1()
   // @ts-expect-error excess properties
-  g.query.dateObject1({ abc: true })  
+  g.query.dateObject1({ abc: true })
   // todo @ts-expect-error empty object
-  // client.query.dateObject1({})  
+  // client.query.dateObject1({})
 })

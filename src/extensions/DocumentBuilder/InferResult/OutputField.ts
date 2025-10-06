@@ -1,6 +1,6 @@
-import type { TSErrorDescriptive } from '../../../lib/ts-error.js'
-import type { Schema } from '../../../types/Schema/$.js'
-import type { InlineType } from '../../../types/SchemaDrivenDataMap/InlineType.js'
+import type { TSErrorDescriptive } from '#/lib/ts-error'
+import type { Schema } from '#/types/Schema/$'
+import type { InlineType } from '#/types/SchemaDrivenDataMap/InlineType'
 import type { Interface } from './Interface.js'
 import type { OutputObjectLike } from './OutputObjectLike.js'
 import type { Union } from './Union.js'
@@ -21,7 +21,7 @@ type FieldType<
   $Schema,
   $SelectionSet,
   $Node,
-> = 
+> =
   $Node extends Schema.OutputObject                      ? $SelectionSet extends object
                                                             ? OutputObjectLike<$SelectionSet, $Schema, $Node>
                                                             : TSErrorDescriptive<'FieldType', 'When $Node extends Schema.OutputObject then $SelectionSet must extend object', { $Type: $Node; $SelectionSet: $SelectionSet; $Schema:$Schema } > :

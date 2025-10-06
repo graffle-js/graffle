@@ -1,4 +1,4 @@
-import { Code } from '../../lib/Code.js'
+import { Code } from '#/lib/Code'
 import { createModuleGenerator, getImportName } from '../helpers/moduleGenerator.js'
 import { ModuleGenerator_internals } from './_internals.js'
 import { ModuleGeneratorClient } from './Client.js'

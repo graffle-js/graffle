@@ -1,12 +1,12 @@
+import { fileExists, type Fs, isPathToADirectory, toAbsolutePath, toFilePath } from '#/lib/fsp'
+import { isString, keysStrict } from '#/lib/prelude'
+import { type Formatter, getTypeScriptFormatter, passthroughFormatter } from '#/lib/typescript-formatter'
+import { Graffle } from '#graffle'
+import { ConfigManager } from '#lib/config-manager'
+import { Grafaid } from '#lib/grafaid'
 import { pascalCase } from 'es-toolkit'
 import * as Path from 'node:path'
-import { Graffle } from '../../exports/index.js'
 import { Introspection } from '../../extensions/Introspection/Introspection.js'
-import { ConfigManager } from '../../lib/config-manager/$.js'
-import { fileExists, type Fs, isPathToADirectory, toAbsolutePath, toFilePath } from '../../lib/fsp.js'
-import { Grafaid } from '../../lib/grafaid/$.js'
-import { isString, keysStrict } from '../../lib/prelude.js'
-import { type Formatter, getTypeScriptFormatter, passthroughFormatter } from '../../lib/typescript-formatter.js'
 import type { Extension } from '../extension/types.js'
 import {
   type ConfigInit,

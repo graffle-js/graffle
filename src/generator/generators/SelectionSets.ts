@@ -2,13 +2,13 @@
 // todo: on union fields, JSDoc that mentions the syntax `on*`
 
 // todo import from '../../extensions/DocumentBuilder/kit/$.js'
+import { Code } from '#/lib/Code'
+import { analyzeArgsNullability } from '#/lib/grafaid/schema/args'
+import { entries, pick, values } from '#/lib/prelude'
+import { borderThin } from '#/lib/tex/tex'
+import { Grafaid } from '#lib/grafaid'
+import { Tex } from '#lib/tex'
 import { DocumentBuilderKit } from '../../extensions/DocumentBuilder/$.js'
-import { Code } from '../../lib/Code.js'
-import { Grafaid } from '../../lib/grafaid/$.js'
-import { analyzeArgsNullability } from '../../lib/grafaid/schema/args.js'
-import { entries, pick, values } from '../../lib/prelude.js'
-import { Tex } from '../../lib/tex/$.js'
-import { borderThin } from '../../lib/tex/tex.js'
 import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
 import {
@@ -559,11 +559,11 @@ namespace H {
     type: Grafaid.Schema.ObjectType | Grafaid.Schema.UnionType | Grafaid.Schema.InterfaceType,
   ) => {
     const doc = Code.TSDoc(`
-      Inline fragments for field groups. 
-     
+      Inline fragments for field groups.
+
       Generally a niche feature. This can be useful for example to apply an \`@include\` directive to a subset of the
       selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
-       
+
       @see https://spec.graphql.org/draft/#sec-Inline-Fragments
     `)
 
@@ -595,7 +595,7 @@ namespace H {
     if (kind === `object`) {
       return Code.TSDoc(`
         A meta field. Is the name of the type being selected.
-          
+
         ${see}
       `)
     }
@@ -604,7 +604,7 @@ namespace H {
     return Code.TSDoc(`
        A meta field. Is the name of the type being selected. Since this is a ${kind} type and thus polymorphic,
        the name is one of the ${relation} type names, whichever is ultimately returned at runtime.
-       
+
        ${see}
     `)
   }

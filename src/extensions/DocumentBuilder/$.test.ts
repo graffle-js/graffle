@@ -1,6 +1,6 @@
+import { Grafaid } from '#lib/grafaid'
 import { Test } from '@wollybeard/kit/test'
 import { expect } from 'vitest'
-import { Grafaid } from '../../lib/grafaid/$.js'
 import { Var } from './$$.js'
 import { Possible } from './__tests__/fixtures/possible/$.js'
 import { Select } from './Select/$.js'

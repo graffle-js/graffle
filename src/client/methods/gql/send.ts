@@ -1,10 +1,10 @@
-import type { Grafaid } from '../../../lib/grafaid/$.js'
-import { isString, type SimplifyNullable } from '../../../lib/prelude.js'
+import { isString, type SimplifyNullable } from '#/lib/prelude'
+import type { Grafaid } from '#lib/grafaid'
 import type { HandleOutput } from '../../handle.js'
 
 // dprint-ignore
 export type SendArguments<$TypedDocument extends string | Grafaid.Document.Typed.TypedDocumentLike> =
-  $TypedDocument extends string 
+  $TypedDocument extends string
     ? ([operationName?: string] | [operationName?: string, variables?: Grafaid.Document.Typed.Variables] | [variables?: Grafaid.Document.Typed.Variables])
     : SendArguments_<Grafaid.Document.Typed.VariablesOf<$TypedDocument>>
 

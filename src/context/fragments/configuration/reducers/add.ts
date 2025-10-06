@@ -1,5 +1,5 @@
-import type { Configurator } from '../../../../lib/configurator/configurator.js'
-import { hasNonUndefinedKeys, type Writeable } from '../../../../lib/prelude.js'
+import type { Configurator } from '#/lib/configurator/configurator'
+import { hasNonUndefinedKeys, type Writeable } from '#/lib/prelude'
 import type { ContextFragment, Index } from '../fragment.js'
 
 export const add = <

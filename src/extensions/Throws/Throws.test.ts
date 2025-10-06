@@ -1,6 +1,6 @@
+import { Extension } from '#graffle/extension'
+import { GraffleBare } from '#graffle/presets/bare'
 import { expect, test } from 'vitest'
-import { Extension } from '../../exports/extension.js'
-import { GraffleBare } from '../../exports/presets/bare.js'
 import { Throws } from './Throws.js'
 
 const graffle = GraffleBare

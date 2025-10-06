@@ -1,6 +1,6 @@
+import { Code } from '#/lib/Code'
+import { values } from '#/lib/prelude'
 import type { GraphQLObjectType } from 'graphql'
-import { Code } from '../../lib/Code.js'
-import { values } from '../../lib/prelude.js'
 import { getStaticDocumentBuilderDoc, getStaticDocumentFieldDoc } from '../helpers/jsdoc.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 import { buildImportPath, codeImportAll, importUtilities } from '../helpers/pathHelpers.js'

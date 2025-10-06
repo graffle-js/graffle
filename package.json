@@ -172,9 +172,7 @@
     "zod": "^3.24.3"
   },
   "imports": {
-    "#*": {
-      "default": "./build/*"
-    },
+    "#/*": "./build/*.js",
     "#graffle": "./build/exports/index.js",
     "#graffle/client": "./build/exports/client.js",
     "#graffle/extension": "./build/exports/extension.js",

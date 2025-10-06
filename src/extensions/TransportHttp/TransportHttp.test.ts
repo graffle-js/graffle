@@ -1,8 +1,8 @@
+import { ACCEPT_REC, CONTENT_TYPE_REC } from '#/lib/grafaid/http/http'
+import { GraffleBare } from '#graffle/presets/bare'
+import { createGraphQLResponse, createGraphQLResponseData, test as testBase } from '#test/helpers'
+import { serveSchema } from '#test/lib/serveSchema'
 import { describe, expect, expectTypeOf } from 'vitest'
-import { createGraphQLResponse, createGraphQLResponseData, test as testBase } from '../../../tests/_/helpers.js'
-import { serveSchema } from '../../../tests/_/lib/serveSchema.js'
-import { GraffleBare } from '../../exports/presets/bare.js'
-import { ACCEPT_REC, CONTENT_TYPE_REC } from '../../lib/grafaid/http/http.js'
 import { TransportHttp } from './TransportHttp.js'
 
 const url = new URL(`https://foo.io/api/graphql`)

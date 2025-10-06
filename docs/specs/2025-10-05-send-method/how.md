@@ -144,8 +144,8 @@ This is the static counterpart to `Graffle.query()` and `Graffle.mutation()`, bu
 Add a new exported function alongside `createStaticRootType`:
 
 ````typescript
+import type { TypedFullDocumentString } from '#/lib/grafaid/typed-full-document/$.js'
 import type { OperationTypeNode } from 'graphql'
-import type { TypedFullDocumentString } from '../../lib/grafaid/typed-full-document/$.js'
 import { Select } from './Select/$.js'
 import { toGraphQLDocument } from './SelectGraphQLMapper/nodes/1_Document.js'
 import { defaults } from './staticBuilderDefaults.js'
@@ -239,9 +239,9 @@ This provides the one-shot API for sending pre-built documents from static build
 **File: `/src/client/methods/send.ts`** (new file)
 
 ````typescript
-import type { Grafaid } from '../../lib/grafaid/$.js'
-import type { TypedFullDocumentString } from '../../lib/grafaid/typed-full-document/$.js'
-import type { SimplifyNullable } from '../../lib/prelude.js'
+import type { TypedFullDocumentString } from '#/lib/grafaid/typed-full-document/$.js'
+import type { SimplifyNullable } from '#/lib/prelude.js'
+import type { Grafaid } from '#lib/grafaid'
 import type { HandleOutput } from '../handle.js'
 import type { SendArguments } from './gql/send.js'
 
@@ -450,6 +450,7 @@ We need to verify the integration between static builder and client instance met
 **File: `/src/client/methods/send.test.ts`** (new file)
 
 ```typescript
+import type { TypedFullDocumentString } from '#/lib/grafaid/typed-full-document/$.js'
 import { Ts } from '@wollybeard/kit'
 import { Test } from '@wollybeard/kit/test'
 import { expect, test } from 'vitest'
@@ -459,7 +460,6 @@ import { Graffle } from '../../exports/index.js'
 import { Possible } from '../../extensions/DocumentBuilder/__tests__/fixtures/possible/$.js'
 import { document } from '../../extensions/DocumentBuilder/staticBuilder.js'
 import { TransportMemory } from '../../extensions/TransportMemory/TransportMemory.js'
-import type { TypedFullDocumentString } from '../../lib/grafaid/typed-full-document/$.js'
 
 // Note: In real usage, users would import document from generated code
 // For testing, we import directly from static builder

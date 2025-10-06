@@ -1,7 +1,7 @@
 // todo remove use of Utils.Aug when schema errors not in use
-import { Grafaid } from '../../lib/grafaid/$.js'
-import { createFromObjectTypeAndMapOrThrow } from '../../lib/grafaid/schema/RootDetails.js'
-import { capitalizeFirstLetter } from '../../lib/prelude.js'
+import { createFromObjectTypeAndMapOrThrow } from '#/lib/grafaid/schema/RootDetails'
+import { capitalizeFirstLetter } from '#/lib/prelude'
+import { Grafaid } from '#lib/grafaid'
 import { $ } from '../helpers/identifiers.js'
 import {
   getBatchMethodDoc,

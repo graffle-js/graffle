@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
+import { type ConfigInit, ImportFormat, OutputCase } from '#/generator/config/configInit'
+import { toAbsolutePath } from '#/lib/fsp'
+import { isError, urlParseSafe } from '#/lib/prelude'
 import { Command } from '@molt/command'
 import * as Path from 'node:path'
 import { z } from 'zod'
 import { Generator } from '../generator/$.js'
-import { type ConfigInit, ImportFormat, OutputCase } from '../generator/config/configInit.js'
-import { toAbsolutePath } from '../lib/fsp.js'
-import { isError, urlParseSafe } from '../lib/prelude.js'
 
 const args = Command.create()
   .description(`Generate a type safe GraphQL client.`)

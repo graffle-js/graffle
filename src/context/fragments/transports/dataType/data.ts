@@ -1,5 +1,5 @@
-import type { Anyware } from '../../../../lib/anyware/$.js'
-import type { Configurator } from '../../../../lib/configurator/configurator.js'
+import type { Configurator } from '#/lib/configurator/configurator'
+import type { Anyware } from '#lib/anyware'
 
 export interface Data<
   $Name extends string = string,

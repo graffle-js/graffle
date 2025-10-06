@@ -1,5 +1,5 @@
-import { TestSchemas } from '../../../../../tests/_/fixtures/schemas/$.js'
-import { Generator } from '../../../../generator/$.js'
+import { Generator } from '#/generator/$'
+import { TestSchemas } from '#test/fixtures/schemas/$'
 
 const generate = async (
   input: {

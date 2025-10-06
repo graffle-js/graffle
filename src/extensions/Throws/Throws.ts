@@ -1,7 +1,7 @@
-// import type { Context } from '../../context/context.js'
+// import type { Context } from '#/context/context'
+import { Extension } from '#graffle/extension'
+import type { GraffleKit } from '#graffle/kit'
 import type { Properties } from '../../context/fragments/properties/$.js'
-import { Extension } from '../../exports/extension.js'
-import type { GraffleKit } from '../../exports/kit.js'
 
 export const Throws = Extension
   .create(`throws`)

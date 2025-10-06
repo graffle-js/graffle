@@ -1,3 +1,5 @@
+import { db } from '#test/schema/possible/db'
+import { possibleSchema } from '#test/schema/possible/schema'
 import { expect } from 'vitest'
 import { DocumentBuilderKit } from '../../src/exports/extensions/document-builder/kit.js'
 import { GraffleBasic } from '../../src/exports/presets/basic.js'
@@ -5,8 +7,6 @@ import { Possible } from '../../src/extensions/DocumentBuilder/__tests__/fixture
 import { Grafaid } from '../../src/lib/grafaid/$.js'
 import type { Schema } from '../../src/types/Schema/$.js'
 import { DateScalar } from '../_/fixtures/scalars.js'
-import { db } from '../_/fixtures/schemas/possible/db.js'
-import { possibleSchema } from '../_/fixtures/schemas/possible/schema.js'
 import { test } from '../_/helpers.js'
 import { RequestSpy } from '../_/SpyExtension.js'
 

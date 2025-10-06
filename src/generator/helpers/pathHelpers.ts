@@ -1,4 +1,4 @@
-import { Code } from '../../lib/Code.js'
+import { Code } from '#/lib/Code'
 import type { Config } from '../config/config.js'
 import { $ } from './identifiers.js'
 

@@ -1,5 +1,5 @@
+import { type Tuple } from '#/lib/prelude'
 import type { ConfigManager } from '../../config-manager/$.js'
-import { type Tuple } from '../../prelude.js'
 import type { Extension } from '../Extension/$.js'
 import { Overload } from '../Overload/$.js'
 import { Pipeline } from '../Pipeline/Pipeline.js'

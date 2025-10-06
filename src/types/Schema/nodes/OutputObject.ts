@@ -1,4 +1,4 @@
-import type { Grafaid } from '../../../lib/grafaid/$.js'
+import type { Grafaid } from '#lib/grafaid'
 import type { __typename } from './__typename.js'
 import type { OutputField, OutputFields } from './OutputField.js'
 

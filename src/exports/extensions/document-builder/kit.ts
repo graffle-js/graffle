@@ -1,1 +1,1 @@
-export { DocumentBuilderKit } from '../../../extensions/DocumentBuilder/$.js'
+export { DocumentBuilderKit } from '#/extensions/DocumentBuilder/$'

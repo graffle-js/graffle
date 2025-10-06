@@ -1,8 +1,8 @@
+import type { TypedFullDocument } from '#/lib/grafaid/typed-full-document/$'
+import type { RequestResult } from '#/types/RequestResult/$'
+import type { Schema } from '#/types/Schema/$'
+import type { SchemaDrivenDataMap } from '#/types/SchemaDrivenDataMap/$'
 import { print } from '@0no-co/graphql.web'
-import type { TypedFullDocumentString } from '../../../lib/grafaid/typed-full-document/$$.js'
-import type { RequestResult } from '../../../types/RequestResult/$.js'
-import type { Schema } from '../../../types/Schema/$.js'
-import type { SchemaDrivenDataMap } from '../../../types/SchemaDrivenDataMap/$.js'
 import type { DocumentBuilderKit } from '../$.js'
 import { Select } from '../Select/$.js'
 import { toGraphQLDocument } from '../SelectGraphQLMapper/nodes/1_Document.js'
@@ -89,7 +89,9 @@ export type InferOperations<
  * // Returns: TypedFullDocumentString with 3 operations
  * ```
  */
-export const document = (documentObject: Select.Document.DocumentObject): TypedFullDocumentString<any> => {
+export const document = (
+  documentObject: Select.Document.DocumentObject,
+): TypedFullDocument.TypedFullDocumentString<any> => {
   // Normalize the document object into internal representation
   const documentNormalized = Select.Document.normalizeOrThrow(documentObject)
 

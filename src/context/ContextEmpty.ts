@@ -1,4 +1,4 @@
-import { type EmptyArray } from '../lib/prelude.js'
+import { type EmptyArray } from '#/lib/prelude'
 import type { Context } from './context.js'
 import { Configuration } from './fragments/configuration/$.js'
 import { Extensions } from './fragments/extensions/$.js'

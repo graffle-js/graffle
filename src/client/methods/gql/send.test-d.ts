@@ -1,5 +1,5 @@
-import { assertEqual } from '../../../lib/assert-equal.js'
-import type { Grafaid } from '../../../lib/grafaid/$.js'
+import { assertEqual } from '#/lib/assert-equal'
+import type { Grafaid } from '#lib/grafaid'
 import type { SendArguments } from './send.js'
 
 assertEqual<

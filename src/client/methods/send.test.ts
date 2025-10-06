@@ -1,10 +1,10 @@
-import { Var } from '#exports/client.js'
 import { Graffle } from '#graffle'
+import { Var } from '#graffle/client'
+import { db } from '#test/schema/possible/db'
+import { possibleSchema } from '#test/schema/possible/schema'
 import { Ts } from '@wollybeard/kit'
 import { Test } from '@wollybeard/kit/test'
 import { describe, expect, test } from 'vitest'
-import { db } from '../../../tests/_/fixtures/schemas/possible/db.js'
-import { possibleSchema } from '../../../tests/_/fixtures/schemas/possible/schema.js'
 import { Possible } from '../../extensions/DocumentBuilder/__tests__/fixtures/possible/$.js'
 import { TransportMemory } from '../../extensions/TransportMemory/TransportMemory.js'
 const $ = Var.$

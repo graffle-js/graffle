@@ -1,4 +1,4 @@
-import { Code } from '../../lib/Code.js'
+import { Code } from '#/lib/Code'
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { ModuleGeneratorData } from './Data.js'

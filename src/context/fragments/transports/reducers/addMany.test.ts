@@ -1,6 +1,6 @@
+import { ATransport, BTransport } from '#test/fixtures/transports'
+import { test } from '#test/helpers'
 import { expectTypeOf } from 'vitest'
-import { ATransport, BTransport } from '../../../../../tests/_/fixtures/transports.js'
-import { test } from '../../../../../tests/_/helpers.js'
 import { addMany } from './addMany.js'
 
 test(`can add one transport`, ({ c0 }) => {

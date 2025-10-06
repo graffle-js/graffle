@@ -1,1 +1,1 @@
-export { Upload } from '../../../extensions/Upload/Upload.js'
+export { Upload } from '#/extensions/Upload/Upload'

@@ -1,1 +1,1 @@
-export { TransportHttp } from '../../../extensions/TransportHttp/TransportHttp.js'
+export { TransportHttp } from '#/extensions/TransportHttp/TransportHttp'

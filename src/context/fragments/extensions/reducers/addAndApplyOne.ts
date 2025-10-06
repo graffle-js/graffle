@@ -1,5 +1,5 @@
-// import type { Anyware } from '../../../../lib/anyware/$.js'
-// import { type UnknownOrAnyToNever } from '../../../../lib/prelude.js'
+// import type { Anyware } from '#lib/anyware'
+// import { type UnknownOrAnyToNever } from '#/lib/prelude'
 import type { Context } from '../../../context.js'
 // import type { Properties } from '../../properties/$.js'
 // import type { Transports } from '../../transports/$.js'

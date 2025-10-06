@@ -1,7 +1,7 @@
+import { createDeferred } from '#/lib/prelude'
+import { casesExhausted } from '#/lib/prelude'
+import { Errors } from '#lib/errors'
 import { partitionAndAggregateErrors } from '../../errors/$$.js'
-import { Errors } from '../../errors/$.js'
-import { createDeferred } from '../../prelude.js'
-import { casesExhausted } from '../../prelude.js'
 import {
   createRetryingInterceptor,
   type InterceptorInput,

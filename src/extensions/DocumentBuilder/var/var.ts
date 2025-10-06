@@ -7,7 +7,7 @@
 
 // TODO: Restore @wollybeard/kit import once it becomes a production dependency
 // import type { Obj } from '@wollybeard/kit'
-import type { Covariant } from '../../../lib/prelude.js'
+import type { Covariant } from '#/lib/prelude'
 
 const BuilderSymbol = Symbol.for(`graffle.var`)
 

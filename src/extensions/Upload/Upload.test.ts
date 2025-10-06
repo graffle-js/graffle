@@ -1,13 +1,13 @@
 // todo in order to test jsdom, we need to boot the server in a separate process
 // @vitest-environment node
 
+import { Graffle } from '#graffle'
 import { expect, test as testBase } from 'vitest'
-import { Graffle } from '../../exports/index.js'
 import * as UploadSchema from './__fixtures__/schema.js'
 import { Upload } from './Upload.js'
 
-import { type SchemaService, serveSchema } from '../../../tests/_/lib/serveSchema.js'
-import type { GraffleKit } from '../../exports/kit.js'
+import type { GraffleKit } from '#graffle/kit'
+import { type SchemaService, serveSchema } from '#test/lib/serveSchema'
 
 interface Context {
   graffle: Graffle.Client<

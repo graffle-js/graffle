@@ -1,4 +1,4 @@
-import { CodePusher } from '../../lib/code-pusher/index.js'
+import { CodePusher } from '#/lib/code-pusher/index'
 import type { Config } from '../config/config.js'
 import type { GeneratedModule } from './moduleGenerator.js'
 

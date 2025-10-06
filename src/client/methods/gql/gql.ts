@@ -1,9 +1,9 @@
-import type { Grafaid } from '../../../lib/grafaid/$.js'
 import {
   isTemplateStringArguments,
   joinTemplateStringArrayAndArgs,
   type TemplateStringsArguments,
-} from '../../../lib/template-string.js'
+} from '#/lib/template-string'
+import type { Grafaid } from '#lib/grafaid'
 import { type DocumentController } from './send.js'
 
 /**

@@ -2,7 +2,7 @@
  * Reusable JSDoc generation helpers for consistent documentation across generated modules.
  */
 
-import { Grafaid } from '../../lib/grafaid/$.js'
+import { Grafaid } from '#lib/grafaid'
 import type { Config } from '../config/config.js'
 
 /**

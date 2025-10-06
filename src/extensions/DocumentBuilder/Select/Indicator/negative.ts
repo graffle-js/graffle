@@ -1,4 +1,4 @@
-import type { UnionExpanded } from '../../../../lib/prelude.js'
+import type { UnionExpanded } from '#/lib/prelude'
 
 export const negativeIndicatorEnum = {
   false: false,

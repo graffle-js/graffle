@@ -1,4 +1,4 @@
-import type * as $ from '../../../../../../../../exports/utilities-for-generated.js'
+import type * as $ from '#graffle/utilities-for-generated'
 import * as $$Scalar from '../../scalar.js'
 
 //                                                Date

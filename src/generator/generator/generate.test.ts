@@ -1,6 +1,6 @@
+import { createGraphQLResponseData, mockIntrospectionData, test } from '#test/helpers'
 import * as Memfs from 'memfs'
 import { describe, expect } from 'vitest'
-import { createGraphQLResponseData, mockIntrospectionData, test } from '../../../tests/_/helpers.js'
 import type { ConfigInitSchemaSdl } from '../$$.js'
 import { generate, generateModules } from './generate.js'
 

@@ -22,7 +22,7 @@
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
     "paths": {
-      "#*": ["./src/*"],
+      "#/*": ["./src/*.ts"],
       "#graffle": ["./src/exports/index.ts"],
       "#graffle/client": ["./src/exports/client.ts"],
       "#graffle/extension": ["./src/exports/extension.ts"],
@@ -33,6 +33,10 @@
       "#graffle/generator-helpers/standard-scalar-types": ["./src/types/Schema/StandardTypes/scalar.ts"],
       "#graffle/extensions/transport-http": ["./src/exports/extensions/transport-http/runtime.ts"],
       "#graffle/extensions/document-builder": ["./src/exports/extensions/document-builder/runtime.ts"],
+      "#graffle/extension-exports": ["./src/exports/extension_exports.ts"],
+      "#graffle/presets/bare": ["./src/exports/presets/bare.ts"],
+      "#graffle/presets/basic": ["./src/exports/presets/basic.ts"],
+      "#graffle/presets/minimal": ["./src/exports/presets/minimal.ts"],
       "#lib/anyware": ["./src/lib/anyware/$.ts"],
       "#lib/config-manager": ["./src/lib/config-manager/$.ts"],
       "#lib/errors": ["./src/lib/errors/$.ts"],
@@ -40,9 +44,8 @@
       "#lib/md-jsdoc": ["./src/lib/md-jsdoc/$.ts"],
       "#lib/tex": ["./src/lib/tex/$.ts"],
       "#lib/type-function": ["./src/lib/type-function/$.ts"],
-      "#tests/fixtures/possible/client": ["./tests/_/fixtures/schemas/possible/client.ts"],
-      "#tests/fixtures/pokemon/client": ["./tests/_/fixtures/schemas/pokemon/client.ts"],
-      "#tests/fixtures/minimal/client": ["./tests/_/fixtures/schemas/minimal/client.ts"]
+      "#test/schema/*": ["./tests/_/fixtures/schemas/*.ts"],
+      "#test/*": ["./tests/_/*.ts"]
     },
 
     // DX covered by ESLint:
@@ -55,5 +58,5 @@
     "declaration": true,
     "declarationMap": true
   },
-  "exclude": ["build", "eslint.config.js"]
+  "exclude": ["build"]
 }

@@ -1,10 +1,10 @@
-export { DocumentBuilder } from '../../../extensions/DocumentBuilder/DocumentBuilder.js'
-export { document, type InferOperations } from '../../../extensions/DocumentBuilder/methods-static/document.js'
+export { DocumentBuilder } from '#/extensions/DocumentBuilder/DocumentBuilder'
+export { document, type InferOperations } from '#/extensions/DocumentBuilder/methods-static/document'
 export {
   type Config,
   createStaticRootType,
   type StaticDocumentBuilder,
-} from '../../../extensions/DocumentBuilder/methods-static/rootField.js'
-export { defaults as staticBuilderDefaults } from '../../../extensions/DocumentBuilder/staticBuilderDefaults.js'
+} from '#/extensions/DocumentBuilder/methods-static/rootField'
+export { defaults as staticBuilderDefaults } from '#/extensions/DocumentBuilder/staticBuilderDefaults'
+export { Var } from '#/extensions/DocumentBuilder/var/$'
 export { $ } from '../../../extensions/DocumentBuilder/var/$$.js'
-export { Var } from '../../../extensions/DocumentBuilder/var/$.js'

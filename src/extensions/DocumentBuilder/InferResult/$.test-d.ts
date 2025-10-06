@@ -1,8 +1,8 @@
-import type { DateScalar } from '../../../../tests/_/fixtures/scalars.js'
-import type { db } from '../../../../tests/_/fixtures/schemas/possible/db.js'
-import { assertEqual } from '../../../lib/assert-equal.js'
-import type { RequestResult } from '../../../types/RequestResult/$.js'
-import type { Registry } from '../../../types/Schema/nodes/Scalar/helpers.js'
+import { assertEqual } from '#/lib/assert-equal'
+import type { RequestResult } from '#/types/RequestResult/$'
+import type { Registry } from '#/types/Schema/nodes/Scalar/helpers'
+import type { DateScalar } from '#test/fixtures/scalars'
+import type { db } from '#test/schema/possible/db'
 import type { Possible } from '../__tests__/fixtures/possible/$.js'
 import type { InferResult } from './$.js'
 

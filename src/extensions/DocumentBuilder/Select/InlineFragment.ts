@@ -1,4 +1,4 @@
-import type { OmitKeysWithPrefix } from '../../../lib/prelude.js'
+import type { OmitKeysWithPrefix } from '#/lib/prelude'
 import type { AnySelectionSet } from './selectionSet.js'
 
 export const prefix = `___`

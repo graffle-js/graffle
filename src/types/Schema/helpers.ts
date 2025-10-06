@@ -1,4 +1,4 @@
-// import type { TSErrorDescriptive } from '../../lib/ts-error.js'
+// import type { TSErrorDescriptive } from '#/lib/ts-error'
 import type { Schema } from './$.js'
 import type { __typename } from './nodes/__typename.js'
 import type { List } from './nodes/List.js'

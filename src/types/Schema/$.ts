@@ -1,6 +1,6 @@
 export * as Schema from './$$.js'
 
-import type { Grafaid } from '../../lib/grafaid/$.js'
+import type { Grafaid } from '#lib/grafaid'
 import type { GlobalRegistry } from '../GlobalRegistry/GlobalRegistry.js'
 import type { Enum } from './nodes/Enum.js'
 import type { Interface } from './nodes/Interface.js'

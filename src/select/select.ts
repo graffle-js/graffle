@@ -1,9 +1,9 @@
-import { identityProxy } from '../lib/prelude.js'
-import type { GlobalRegistry } from '../types/GlobalRegistry/GlobalRegistry.js'
+import { identityProxy } from '#/lib/prelude'
+import type { GlobalRegistry } from '#/types/GlobalRegistry/GlobalRegistry'
 
 // dprint-ignore
 type Create = <$Name extends GlobalRegistry.ClientNames>(name: $Name) =>
-  
+
   // @ts-ignore passes after generation
   GlobalRegistry.GetOrDefault<$Name>['interfaces']['MethodsSelect']
 

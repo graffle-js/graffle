@@ -1,8 +1,8 @@
+import { assertEqual } from '#/lib/assert-equal'
+import { GraffleBasic } from '#graffle/presets/basic'
+import { test } from '#test/helpers'
 import type { IntrospectionQuery } from 'graphql'
 import { expect } from 'vitest'
-import { test } from '../../../tests/_/helpers.js'
-import { GraffleBasic } from '../../exports/presets/basic.js'
-import { assertEqual } from '../../lib/assert-equal.js'
 import { Introspection } from './Introspection.js'
 
 test(`adds an introspection method that introspects the schema`, async ({ schemas: { minimal: schema } }) => {

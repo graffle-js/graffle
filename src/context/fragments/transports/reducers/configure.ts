@@ -1,5 +1,5 @@
-import type { Configurator } from '../../../../lib/configurator/configurator.js'
-import { isObjectEmpty } from '../../../../lib/prelude.js'
+import type { Configurator } from '#/lib/configurator/configurator'
+import { isObjectEmpty } from '#/lib/prelude'
 import type { ContextFragment } from '../fragment.js'
 
 export const configure = <
