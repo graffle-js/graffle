@@ -1,7 +1,8 @@
+import { serveSchema } from '#test/lib/serveSchema'
+import { schema } from '#test/schema/pokemon/schema'
+import { Graffle } from 'graffle'
 import * as FS from 'node:fs/promises'
 import * as Path from 'node:path'
-import { schema } from '../../tests/_/fixtures/schemas/pokemon/schema.js'
-import { serveSchema } from '../../tests/_/lib/serveSchema.js'
 import { deleteFiles } from '../lib/deleteFiles.js'
 import { directories, readExampleFiles, runExample } from './helpers.js'
 
@@ -57,26 +58,33 @@ export const generateOutputs = async (name?: string) => {
 
   const diff: { path: string; type: `created` | `updated` | `same` }[] = []
 
-  await Promise.all(
-    exampleFiles.filtered.map(async (file) => {
-      const content = await runExample(file.path.full)
+  // Create Graffle client for resetting database
+  const graffle = Graffle.create().transport({ url: service.url.href })
 
-      const dirPathWithinExamples = Path.dirname(file.path.full.replace(directories.examples, ``))
-      const dir = Path.join(directories.outputs, dirPathWithinExamples)
-      await FS.mkdir(dir, { recursive: true })
+  // Run examples sequentially instead of in parallel to ensure database resets
+  // don't create race conditions where one example might read data while another
+  // is resetting, leading to inconsistent outputs
+  for (const file of exampleFiles.filtered) {
+    // Reset database before each example
+    await graffle.gql` mutation { resetData }`.send()
 
-      const filePath = getOutputFilePathFromExampleFilePath(file.path.full)
-      const previousContent = await readFileOrNull(filePath)
+    const content = await runExample(file.path.full)
 
-      const diffType = previousContent && previousContent === content ? `same` : previousContent ? `updated` : `created`
-      console.log(`${diffType} ${file.path.full}`)
-      diff.push({ path: file.path.full, type: diffType })
+    const dirPathWithinExamples = Path.dirname(file.path.full.replace(directories.examples, ``))
+    const dir = Path.join(directories.outputs, dirPathWithinExamples)
+    await FS.mkdir(dir, { recursive: true })
 
-      if (diffType !== `same`) {
-        await FS.writeFile(filePath, content)
-      }
-    }),
-  )
+    const filePath = getOutputFilePathFromExampleFilePath(file.path.full)
+    const previousContent = await readFileOrNull(filePath)
+
+    const diffType = previousContent && previousContent === content ? `same` : previousContent ? `updated` : `created`
+    console.log(`${diffType} ${file.path.full}`)
+    diff.push({ path: file.path.full, type: diffType })
+
+    if (diffType !== `same`) {
+      await FS.writeFile(filePath, content)
+    }
+  }
 
   await service.stop()
 

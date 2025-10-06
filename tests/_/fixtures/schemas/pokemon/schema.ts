@@ -351,6 +351,17 @@ builder.mutationField(`addPokemon`, (t) =>
     },
   }))
 
+builder.mutationField(`resetData`, (t) =>
+  t.field({
+    type: `Boolean`,
+    nullable: false,
+    resolve: (_, __, ctx) => {
+      const database = DatabaseServer.tenant(ctx.tenant)
+      DatabaseServer.reset(database)
+      return true
+    },
+  }))
+
 const schema: GraphQLSchema = builder.toSchema()
 
 DatabaseServer.seed(DatabaseServer.tenant())
