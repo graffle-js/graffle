@@ -12,6 +12,18 @@ type ValuesOr<$Obj, $Fallback> = keyof $Obj extends never ? $Fallback : $Obj[key
 type NotExtends<$Type, $Constraint> = $Type extends $Constraint ? false : true
 
 /**
+ * Strip leading `$` from a string type.
+ * Used to convert JavaScript property names like `$type` to GraphQL variable names like `type`.
+ *
+ * @example
+ * ```ts
+ * type A = StripLeadingDollar<'$type'> // 'type'
+ * type B = StripLeadingDollar<'name'>  // 'name'
+ * ```
+ */
+type StripLeadingDollar<$T> = $T extends `$${infer $Rest}` ? $Rest : $T
+
+/**
  * Context threaded through type-level traversal to enable resolution of input object types.
  */
 interface Context {
@@ -99,7 +111,7 @@ export type ExtractFromArgsOrInputObject<
     $SSArgs[k] extends BuilderSentinel ?
       {
         // @ts-expect-error
-        name: $SSArgs[k]['_']['name'] extends string ? $SSArgs[k]['_']['name'] : k;
+        name: $SSArgs[k]['_']['name'] extends string ? $SSArgs[k]['_']['name'] : StripLeadingDollar<k>;
         // @ts-expect-error
         type: VarBuilderToType<$ArgsMapArgs[k]['$t'], $SSArgs[k]>
         // type: $ArgumentsMap

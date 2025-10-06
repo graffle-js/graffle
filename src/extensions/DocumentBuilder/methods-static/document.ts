@@ -43,25 +43,38 @@ type InferOperationsFromQuery<
 }
 
 // dprint-ignore
+type InferOperationsFromMutation<
+  $Mutation extends object,
+  $Schema extends Schema,
+  $ArgumentsMap extends SchemaDrivenDataMap.SchemaDrivenDataMapWithMutation,
+  $Context
+> = {
+  [K in keyof $Mutation as $Mutation[K] extends object ? K : never]:
+    $Mutation[K] extends object
+      ? {
+          result:    RequestResult.Simplify<$Context, DocumentBuilderKit.InferResult.OperationMutation<$Mutation[K], $Schema>>
+          variables: RequestResult.Simplify<$Context, DocumentBuilderKit.Var.InferFromMutation<$Mutation[K], $ArgumentsMap>>
+        }
+      : never
+}
+
+// dprint-ignore
 export type InferOperations<
   $Document,
   $Schema extends Schema,
   $ArgumentsMap extends SchemaDrivenDataMap,
-  $Context// = { typeHookRequestResultDataTypes: never; scalars: $Scalars },
+  $Context
 > =
-  $Document extends { query: infer $Query extends object }
+  & ($Document extends { query: infer $Query extends object }
     ? $ArgumentsMap extends SchemaDrivenDataMap.SchemaDrivenDataMapWithQuery
       ? InferOperationsFromQuery<$Query, $Schema, $ArgumentsMap, $Context>
-      : never
-    : never
-// & ($Document extends { mutation: infer $Mutation extends Record<string, any> }
-//     ? $ArgumentsMap extends SchemaDrivenDataMap.SchemaDrivenDataMapWithMutation ? {
-//         [K in keyof $Mutation]: $Mutation[K] extends object ? {
-//           result: RequestResult.Simplify<___Context, DocumentBuilderKit.InferResult.OperationMutation<$Mutation[K], $Schema>>
-//           variables: RequestResult.Simplify<___Context, DocumentBuilderKit.Var.InferFromMutation<{ [_ in K]: Exclude<$Mutation[K], undefined> }, $ArgumentsMap>>
-//         } : never
-//       } : {}
-//     : {})
+      : {}
+    : {})
+  & ($Document extends { mutation: infer $Mutation extends object }
+    ? $ArgumentsMap extends SchemaDrivenDataMap.SchemaDrivenDataMapWithMutation
+      ? InferOperationsFromMutation<$Mutation, $Schema, $ArgumentsMap, $Context>
+      : {}
+    : {})
 
 /**
  * Create a static document containing one or more named operations.

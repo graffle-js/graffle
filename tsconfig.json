@@ -8,7 +8,6 @@
   "exclude": [
     "build",
     "bundle-sizes",
-    "tests",
     "examples",
     "website"
   ]
