@@ -1,7 +1,7 @@
 import type { Grafaid } from '#lib/grafaid'
-import { parseType } from 'graphql'
 import { Nodes } from '#src/lib/grafaid/_Nodes.js'
 import { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
+import { parseType } from 'graphql'
 import type { Select } from '../../Select/$.js'
 import { createOperationContext } from '../context.js'
 import { type GraphQLPreOperationMapper } from '../mapper.js'
