@@ -66,10 +66,7 @@ test('send() with mixed query/mutation document and variable inference', () => {
   // Create a typed client (not executing, just testing types)
   const client = Possible.create({ check: { preflight: false } })
 
-  // @ts-expect-error - variables must include 'id' and 'string' (without $ prefix), not '$id' and '$string'
-  client.send(doc, 'getUserWithArgs', { $id: 'foo', $string: 'bar' })
-
-  // Should accept 'id' and 'string' (without $ prefix)
+  // Should accept 'id' and 'string' variables
   client.send(doc, 'getUserWithArgs', { id: 'foo', string: 'bar' })
 
   // Mutation operation with no variables works

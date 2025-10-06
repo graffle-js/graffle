@@ -2,7 +2,7 @@ import { assertEqual } from '#src/lib/assert-equal.js'
 import type { RequestResult } from '#src/types/RequestResult/$.js'
 import type { Registry } from '#src/types/Schema/nodes/Scalar/helpers.js'
 import type { DateScalar } from '#test/fixtures/scalars'
-import type { db } from '#test/schema/possible/db'
+import type { db } from '#test/schema/possible/db.js'
 import type { Possible } from '../__tests__/fixtures/possible/$.js'
 import type { InferResult } from './$.js'
 
