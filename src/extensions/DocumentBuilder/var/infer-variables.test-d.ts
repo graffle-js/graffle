@@ -204,15 +204,3 @@ type _2 = Ts.Cases<
     { int?: number }
   >
 >
-
-// ====================================================================
-//                   ENUM KEY PREFIX STRIPPING
-// ====================================================================
-// dprint-ignore
-type _3 = Ts.Cases<
-  // Strip leading $ from property names (for GraphQL variable names)
-  Ts.AssertEqual<Select.Arguments.EnumKeyPrefixStrip<'$type'>, 'type'>,
-  Ts.AssertEqual<Select.Arguments.EnumKeyPrefixStrip<'$name'>, 'name'>,
-  // Passthrough keys without $
-  Ts.AssertEqual<Select.Arguments.EnumKeyPrefixStrip<'name'>, 'name'>
->

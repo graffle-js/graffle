@@ -39,54 +39,37 @@ test('document is type checked', () => {
 })
 
 // ====================================================================
-//                   INFER OPERATIONS TYPE TESTS
+//            INTEGRATION: send() with mixed query/mutation
 // ====================================================================
-// dprint-ignore
-type _1 = Ts.Cases<
-  // InferOperations with both query and mutation operations
-  Ts.AssertEqual<
-    InferOperations<
-      {
-        query: {
-          getUser: { id: true }
-        }
-        mutation: {
-          updateUser: { idNonNull: true }
-        }
+
+test('send() with mixed query/mutation document', () => {
+  const doc = Possible.document({
+    query: {
+      getUser: {
+        id: {
+          $: { id: $ },
+        },
       },
-      Possible.$.Schema,
-      Possible.$.ArgumentsMap,
-      { typeHookRequestResultDataTypes: never; scalars: {} }
-    >,
-    {
-      getUser: { result: { id: string | null }; variables: {} }
-      updateUser: { result: { idNonNull: string }; variables: {} }
-    }
-  >,
-  // InferOperations with mutation variables including $-prefixed keys
-  Ts.AssertEqual<
-    InferOperations<
-      {
-        mutation: {
-          addItem: {
-            id: {
-              $: {
-                $type: $
-                name: $
-              }
-            }
-          }
-        }
+    },
+    mutation: {
+      updateUser: {
+        idNonNull: {
+          $: {
+            // $-prefixed key should map to variable name without $
+            $type: $.required(),
+            name: $.required(),
+          },
+        },
       },
-      Possible.$.Schema,
-      Possible.$.ArgumentsMap,
-      { typeHookRequestResultDataTypes: never; scalars: {} }
-    >,
-    {
-      addItem: {
-        result: { id: string | null }
-        variables: { type?: string | undefined; name?: string | undefined }
-      }
-    }
-  >
->
+    },
+  })
+
+  // Create a typed client (not executing, just testing types)
+  const client = Possible.create({ check: { preflight: false } })
+
+  // @ts-expect-error - variables must include 'type' not '$type'
+  client.send(doc, 'updateUser', { $type: 'foo', name: 'bar' })
+
+  // Should accept 'type' (without $)
+  client.send(doc, 'updateUser', { type: 'foo', name: 'bar' })
+})
