@@ -37,56 +37,88 @@ describe('TypedFullDocumentString', () => {
     Ts.assertEqual<Promise<{ id: string | null } | null>>()(result)
   })
 
-  test('single operation, optional var -> no name, yes variables optional', () => {
+  test('single operation, optional var -> no name, yes variables optional', async () => {
     const doc = Possible.document({ query: { foo: { stringWithRequiredArg: { $: { string: $.default('abc') } } } } })
-    g.send(doc)
-    g.send(doc, { string: '' })
-    // @ts-expect-error - inavlid type
-    g.send(doc, { string: 1 })
+    await g.send(doc)
+    await g.send(doc, { string: '' })
+
+    // Type checking only - not executed
+    if (false) {
+      // @ts-expect-error - invalid type
+      g.send(doc, { string: 1 })
+    }
+
     Ts.assertEqual<Promise<{ stringWithRequiredArg: string | null } | null>>()(g.send(doc))
   })
 
-  test('single operation, required var -> variables parameter is required', () => {
+  test('single operation, required var -> variables parameter is required', async () => {
     const doc = Possible.document({ query: { foo: { stringWithRequiredArg: { $: { string: $ } } } } })
-    // @ts-expect-error - missing required variables
-    g.send(doc)
-    // @ts-expect-error - inavlid type
-    g.send(doc, { string: 1 })
+
+    // Type checking only - not executed
+    if (false) {
+      // @ts-expect-error - missing required variables
+      g.send(doc)
+      // @ts-expect-error - invalid type
+      g.send(doc, { string: 1 })
+    }
+
+    const result = await g.send(doc, { string: '' })
+    expect(result).toEqual({ stringWithRequiredArg: '' })
     Ts.assertEqual<Promise<{ stringWithRequiredArg: string | null } | null>>()(g.send(doc, { string: '' }))
   })
 
-  test('multiple operations, no var -> operation name required', () => {
+  test('multiple operations, no var -> operation name required', async () => {
     const doc = Possible.document({
       query: {
         a: { id: true },
         b: { idNonNull: true },
       },
     })
-    // @ts-expect-error - misisng operation name
-    g.send(doc)
-    // @ts-expect-error - invalid operation name
-    g.send(doc, 'c')
+
+    // Type checking only - not executed
+    if (false) {
+      // @ts-expect-error - missing operation name
+      g.send(doc)
+      // @ts-expect-error - invalid operation name
+      g.send(doc, 'c')
+    }
+
+    const resultA = await g.send(doc, 'a')
+    const resultB = await g.send(doc, 'b')
+    expect(resultA).toEqual({ id: db.id1 })
+    expect(resultB).toEqual({ idNonNull: db.id1 })
+
     Ts.assertEqual<Promise<{ id: string | null } | null>>()(g.send(doc, 'a'))
     Ts.assertEqual<Promise<{ idNonNull: string } | null>>()(g.send(doc, 'b'))
   })
 
-  test('multiple operations, 1 optional var/1 required var -> name required, var optional/var required', () => {
+  test('multiple operations, 1 optional var/1 required var -> name required, var optional/var required', async () => {
     const doc = Possible.document({
       query: {
         a: { stringWithRequiredArg: { $: { string: $ } } },
         b: { stringWithRequiredArg: { $: { string: $.default('') } } },
       },
     })
-    // @ts-expect-error - misisng operation name
-    g.send(doc)
-    // @ts-expect-error - invalid operation name
-    g.send(doc, 'c')
-    // @ts-expect-error - missing variable arguments
-    g.send(doc, 'a')
-    Ts.assertEqual<Promise<{ stringWithRequiredArg: string | null } | null>>()(g.send(doc, 'a', { string: '' }))
+
+    // Type checking only - not executed
+    if (false) {
+      // @ts-expect-error - missing operation name
+      g.send(doc)
+      // @ts-expect-error - invalid operation name
+      g.send(doc, 'c')
+      // @ts-expect-error - missing variable arguments
+      g.send(doc, 'a')
+    }
+
+    const resultA = await g.send(doc, 'a', { string: '' })
+    expect(resultA).toEqual({ stringWithRequiredArg: '' })
+
     const resultB = g.send(doc, 'b', { string: '' })
+    const resultBDefault = g.send(doc, 'b')
+
+    Ts.assertEqual<Promise<{ stringWithRequiredArg: string | null } | null>>()(g.send(doc, 'a', { string: '' }))
     Ts.assertEqual<Promise<{ stringWithRequiredArg: string | null } | null>>()(resultB)
-    Ts.assertEqual<typeof resultB>()(g.send(doc, 'b'))
+    Ts.assertEqual<typeof resultB>()(resultBDefault)
   })
 
   // TODO: Plain string support

@@ -1,5 +1,6 @@
 import type { Anyware } from '#lib/anyware'
 import { Configurator } from '#src/lib/configurator/configurator.js'
+import { hasSymbolProperty } from '#src/lib/symbol.js'
 import type { RequestPipeline } from '#src/requestPipeline/$.js'
 import { type Data, TypeSymbol as DataTypeSymbol } from './data.js'
 
@@ -184,6 +185,6 @@ export namespace Builder {
   }
 
   export const is = (value: any): value is Builder<Data> => {
-    return typeof value === `object` && value !== null && value[TypeSymbol] === true
+    return hasSymbolProperty(value, TypeSymbol, true, `TransportBuilder`)
   }
 }
