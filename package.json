@@ -188,8 +188,6 @@
     "#graffle/presets/bare": "./build/exports/presets/bare.js",
     "#graffle/presets/basic": "./build/exports/presets/basic.js",
     "#graffle/presets/minimal": "./build/exports/presets/minimal.js",
-    "#test/*": "./tests/_/*.js",
-    "#test/schema/*": "./tests/_/fixtures/schemas/*.js",
     "#lib/anyware": "./build/lib/anyware/$.js",
     "#lib/config-manager": "./build/lib/config-manager/$.js",
     "#lib/errors": "./build/lib/errors/$.js",
