@@ -962,6 +962,16 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `InputObjectNested` |
+     * | **Parent** | {@link $NamedTypes.$Query}.InputObjectNested |
+     * | **Path** | `Query.InputObjectNested(input)` |
+     * | **Nullability** | Optional |
+     */
     input?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$InputObjectNested<_$Context> | null | undefined>
   }
 
@@ -1001,6 +1011,16 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `InputObjectNestedNonNull!` |
+     * | **Parent** | {@link $NamedTypes.$Query}.InputObjectNestedNonNull |
+     * | **Path** | `Query.InputObjectNestedNonNull(input)` |
+     * | **Nullability** | Required |
+     */
     input: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$InputObjectNestedNonNull<_$Context>>
   }
 
@@ -1070,6 +1090,16 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `InputObjectCircular` |
+     * | **Parent** | {@link $NamedTypes.$Query}.argInputObjectCircular |
+     * | **Path** | `Query.argInputObjectCircular(input)` |
+     * | **Nullability** | Optional |
+     */
     input?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$InputObjectCircular<_$Context> | null | undefined>
   }
 
@@ -1198,6 +1228,16 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `Date` |
+     * | **Parent** | {@link $NamedTypes.$Query}.dateArg |
+     * | **Path** | `Query.dateArg(date)` |
+     * | **Nullability** | Optional |
+     */
     date?: $$Utilities.DocumentBuilderKit.Var.Maybe<
       | $$Utilities.Schema.Scalar.GetDecoded<
         $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
@@ -1248,6 +1288,16 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `InputObject` |
+     * | **Parent** | {@link $NamedTypes.$Query}.dateArgInputObject |
+     * | **Path** | `Query.dateArgInputObject(input)` |
+     * | **Nullability** | Optional |
+     */
     input?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$InputObject<_$Context> | null | undefined>
   }
 
@@ -1289,6 +1339,16 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `[Date!]` |
+     * | **Parent** | {@link $NamedTypes.$Query}.dateArgList |
+     * | **Path** | `Query.dateArgList(date)` |
+     * | **Nullability** | Optional |
+     */
     date?: $$Utilities.DocumentBuilderKit.Var.Maybe<
       | Array<
         $$Utilities.DocumentBuilderKit.Var.Maybe<
@@ -1343,6 +1403,16 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `Date!` |
+     * | **Parent** | {@link $NamedTypes.$Query}.dateArgNonNull |
+     * | **Path** | `Query.dateArgNonNull(date)` |
+     * | **Nullability** | Required |
+     */
     date: $$Utilities.DocumentBuilderKit.Var.Maybe<
       $$Utilities.Schema.Scalar.GetDecoded<
         $$Utilities.Schema.Scalar.LookupCustomScalarOrFallbackToString<
@@ -1388,6 +1458,16 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `[Date]!` |
+     * | **Parent** | {@link $NamedTypes.$Query}.dateArgNonNullList |
+     * | **Path** | `Query.dateArgNonNullList(date)` |
+     * | **Nullability** | Required |
+     */
     date: $$Utilities.DocumentBuilderKit.Var.Maybe<
       Array<
         $$Utilities.DocumentBuilderKit.Var.Maybe<
@@ -1439,6 +1519,16 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `[Date!]!` |
+     * | **Parent** | {@link $NamedTypes.$Query}.dateArgNonNullListNonNull |
+     * | **Path** | `Query.dateArgNonNullListNonNull(date)` |
+     * | **Nullability** | Required |
+     */
     date: $$Utilities.DocumentBuilderKit.Var.Maybe<
       Array<
         $$Utilities.DocumentBuilderKit.Var.Maybe<
@@ -1686,6 +1776,16 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `String` |
+     * | **Parent** | {@link $NamedTypes.$Query}.error |
+     * | **Path** | `Query.error(case)` |
+     * | **Nullability** | Optional |
+     */
     case?: $$Utilities.DocumentBuilderKit.Var.Maybe<string | null | undefined>
   }
 
@@ -1809,6 +1909,16 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `ChildAInterfaceHierarchyMember` |
+     * | **Parent** | {@link $NamedTypes.$Query}.interfaceHierarchyChildA |
+     * | **Path** | `Query.interfaceHierarchyChildA(type)` |
+     * | **Nullability** | Optional |
+     */
     $type?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$ChildAInterfaceHierarchyMember | null | undefined>
   }
 
@@ -1847,6 +1957,16 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `ChildBInterfaceHierarchyMember` |
+     * | **Parent** | {@link $NamedTypes.$Query}.interfaceHierarchyChildB |
+     * | **Path** | `Query.interfaceHierarchyChildB(type)` |
+     * | **Nullability** | Optional |
+     */
     $type?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$ChildBInterfaceHierarchyMember | null | undefined>
   }
 
@@ -1885,6 +2005,16 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `GrandparentInterfaceHierarchyMember` |
+     * | **Parent** | {@link $NamedTypes.$Query}.interfaceHierarchyGrandparents |
+     * | **Path** | `Query.interfaceHierarchyGrandparents(type)` |
+     * | **Nullability** | Optional |
+     */
     $type?: $$Utilities.DocumentBuilderKit.Var.Maybe<
       $NamedTypes.$GrandparentInterfaceHierarchyMember | null | undefined
     >
@@ -1925,6 +2055,16 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `ParentInterfaceHierarchyMember` |
+     * | **Parent** | {@link $NamedTypes.$Query}.interfaceHierarchyParents |
+     * | **Path** | `Query.interfaceHierarchyParents(type)` |
+     * | **Nullability** | Optional |
+     */
     $type?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$ParentInterfaceHierarchyMember | null | undefined>
   }
 
@@ -1989,6 +2129,16 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `ID!` |
+     * | **Parent** | {@link $NamedTypes.$Query}.interfaceWithArgs |
+     * | **Path** | `Query.interfaceWithArgs(id)` |
+     * | **Nullability** | Required |
+     */
     id: $$Utilities.DocumentBuilderKit.Var.Maybe<string>
   }
 
@@ -2325,10 +2475,60 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `Boolean` |
+     * | **Parent** | {@link $NamedTypes.$Query}.objectWithArgs |
+     * | **Path** | `Query.objectWithArgs(boolean)` |
+     * | **Nullability** | Optional |
+     */
     boolean?: $$Utilities.DocumentBuilderKit.Var.Maybe<boolean | null | undefined>
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `Float` |
+     * | **Parent** | {@link $NamedTypes.$Query}.objectWithArgs |
+     * | **Path** | `Query.objectWithArgs(float)` |
+     * | **Nullability** | Optional |
+     */
     float?: $$Utilities.DocumentBuilderKit.Var.Maybe<number | null | undefined>
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `ID` |
+     * | **Parent** | {@link $NamedTypes.$Query}.objectWithArgs |
+     * | **Path** | `Query.objectWithArgs(id)` |
+     * | **Nullability** | Optional |
+     */
     id?: $$Utilities.DocumentBuilderKit.Var.Maybe<string | null | undefined>
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `Int` |
+     * | **Parent** | {@link $NamedTypes.$Query}.objectWithArgs |
+     * | **Path** | `Query.objectWithArgs(int)` |
+     * | **Nullability** | Optional |
+     */
     int?: $$Utilities.DocumentBuilderKit.Var.Maybe<number | null | undefined>
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `String` |
+     * | **Parent** | {@link $NamedTypes.$Query}.objectWithArgs |
+     * | **Path** | `Query.objectWithArgs(string)` |
+     * | **Nullability** | Optional |
+     */
     string?: $$Utilities.DocumentBuilderKit.Var.Maybe<string | null | undefined>
   }
 
@@ -2367,6 +2567,16 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `Case!` |
+     * | **Parent** | {@link $NamedTypes.$Query}.result |
+     * | **Path** | `Query.result(case)` |
+     * | **Nullability** | Required |
+     */
     $case: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$Case>
   }
 
@@ -2405,6 +2615,16 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `Case` |
+     * | **Parent** | {@link $NamedTypes.$Query}.resultNonNull |
+     * | **Path** | `Query.resultNonNull(case)` |
+     * | **Nullability** | Optional |
+     */
     $case?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$Case | null | undefined>
   }
 
@@ -2474,6 +2694,16 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `ABCEnum` |
+     * | **Parent** | {@link $NamedTypes.$Query}.stringWithArgEnum |
+     * | **Path** | `Query.stringWithArgEnum(ABCEnum)` |
+     * | **Nullability** | Optional |
+     */
     $ABCEnum?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$ABCEnum | null | undefined>
   }
 
@@ -2515,6 +2745,16 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `InputObject` |
+     * | **Parent** | {@link $NamedTypes.$Query}.stringWithArgInputObject |
+     * | **Path** | `Query.stringWithArgInputObject(input)` |
+     * | **Nullability** | Optional |
+     */
     input?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$InputObject<_$Context> | null | undefined>
   }
 
@@ -2554,6 +2794,16 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `InputObjectEnum!` |
+     * | **Parent** | {@link $NamedTypes.$Query}.stringWithArgInputObjectEnum |
+     * | **Path** | `Query.stringWithArgInputObjectEnum(input)` |
+     * | **Nullability** | Required |
+     */
     input: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$InputObjectEnum<_$Context>>
   }
 
@@ -2592,6 +2842,16 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `InputObject!` |
+     * | **Parent** | {@link $NamedTypes.$Query}.stringWithArgInputObjectRequired |
+     * | **Path** | `Query.stringWithArgInputObjectRequired(input)` |
+     * | **Nullability** | Required |
+     */
     input: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$InputObject<_$Context>>
   }
 
@@ -2632,15 +2892,62 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `Boolean` |
+     * | **Parent** | {@link $NamedTypes.$Query}.stringWithArgs |
+     * | **Path** | `Query.stringWithArgs(boolean)` |
+     * | **Nullability** | Optional |
+     */
     boolean?: $$Utilities.DocumentBuilderKit.Var.Maybe<boolean | null | undefined>
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `Float` |
+     * | **Parent** | {@link $NamedTypes.$Query}.stringWithArgs |
+     * | **Path** | `Query.stringWithArgs(float)` |
+     * | **Nullability** | Optional |
+     */
     float?: $$Utilities.DocumentBuilderKit.Var.Maybe<number | null | undefined>
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `ID` |
+     * | **Parent** | {@link $NamedTypes.$Query}.stringWithArgs |
+     * | **Path** | `Query.stringWithArgs(id)` |
+     * | **Nullability** | Optional |
+     */
     id?: $$Utilities.DocumentBuilderKit.Var.Maybe<string | null | undefined>
     /**
-     * @deprecated Example of argument deprecation reason here.
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `Int` |
+     * | **Parent** | {@link $NamedTypes.$Query}.stringWithArgs |
+     * | **Path** | `Query.stringWithArgs(int)` |
+     * | **Nullability** | Optional |
+     * | **⚠ Deprecated** | Example of argument deprecation reason here. |
      */
     int?: $$Utilities.DocumentBuilderKit.Var.Maybe<number | null | undefined>
     /**
      * Example of some argument documentation here.
+     *
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `String` |
+     * | **Parent** | {@link $NamedTypes.$Query}.stringWithArgs |
+     * | **Path** | `Query.stringWithArgs(string)` |
+     * | **Nullability** | Optional |
      */
     string?: $$Utilities.DocumentBuilderKit.Var.Maybe<string | null | undefined>
   }
@@ -2683,6 +2990,16 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `[Int]` |
+     * | **Parent** | {@link $NamedTypes.$Query}.stringWithListArg |
+     * | **Path** | `Query.stringWithListArg(ints)` |
+     * | **Nullability** | Optional |
+     */
     ints?: $$Utilities.DocumentBuilderKit.Var.Maybe<
       Array<$$Utilities.DocumentBuilderKit.Var.Maybe<number | null | undefined>> | null | undefined
     >
@@ -2724,6 +3041,16 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `[Int!]!` |
+     * | **Parent** | {@link $NamedTypes.$Query}.stringWithListArgRequired |
+     * | **Path** | `Query.stringWithListArgRequired(ints)` |
+     * | **Nullability** | Required |
+     */
     ints: $$Utilities.DocumentBuilderKit.Var.Maybe<
       Array<$$Utilities.DocumentBuilderKit.Var.Maybe<number | null | undefined>>
     >
@@ -2764,6 +3091,16 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `String!` |
+     * | **Parent** | {@link $NamedTypes.$Query}.stringWithRequiredArg |
+     * | **Path** | `Query.stringWithRequiredArg(string)` |
+     * | **Nullability** | Required |
+     */
     string: $$Utilities.DocumentBuilderKit.Var.Maybe<string>
   }
 
@@ -2854,6 +3191,16 @@ export namespace Query {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `ID` |
+     * | **Parent** | {@link $NamedTypes.$Query}.unionFooBarWithArgs |
+     * | **Path** | `Query.unionFooBarWithArgs(id)` |
+     * | **Nullability** | Optional |
+     */
     id?: $$Utilities.DocumentBuilderKit.Var.Maybe<string | null | undefined>
   }
 
@@ -5155,6 +5502,16 @@ export namespace ObjectNestedWithArgs {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `ID` |
+     * | **Parent** | {@link $NamedTypes.$ObjectNestedWithArgs}.id |
+     * | **Path** | `ObjectNestedWithArgs.id(filter)` |
+     * | **Nullability** | Optional |
+     */
     filter?: $$Utilities.DocumentBuilderKit.Var.Maybe<string | null | undefined>
   }
 
@@ -5194,9 +5551,49 @@ export namespace ObjectNestedWithArgs {
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
       $$Utilities.DocumentBuilderKit.Select.DefaultContext,
   > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `Boolean` |
+     * | **Parent** | {@link $NamedTypes.$ObjectNestedWithArgs}.object |
+     * | **Path** | `ObjectNestedWithArgs.object(boolean)` |
+     * | **Nullability** | Optional |
+     */
     boolean?: $$Utilities.DocumentBuilderKit.Var.Maybe<boolean | null | undefined>
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `Float` |
+     * | **Parent** | {@link $NamedTypes.$ObjectNestedWithArgs}.object |
+     * | **Path** | `ObjectNestedWithArgs.object(float)` |
+     * | **Nullability** | Optional |
+     */
     float?: $$Utilities.DocumentBuilderKit.Var.Maybe<number | null | undefined>
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `Int` |
+     * | **Parent** | {@link $NamedTypes.$ObjectNestedWithArgs}.object |
+     * | **Path** | `ObjectNestedWithArgs.object(int)` |
+     * | **Nullability** | Optional |
+     */
     int?: $$Utilities.DocumentBuilderKit.Var.Maybe<number | null | undefined>
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `String` |
+     * | **Parent** | {@link $NamedTypes.$ObjectNestedWithArgs}.object |
+     * | **Path** | `ObjectNestedWithArgs.object(string)` |
+     * | **Nullability** | Optional |
+     */
     string?: $$Utilities.DocumentBuilderKit.Var.Maybe<string | null | undefined>
   }
 

@@ -24,6 +24,90 @@ const doc = Graffle.query.trainerByName({
 
 - [Complete Example](../../../../examples/55_document-builder/document-builder_static.ts)
 
+## Building Full Documents
+
+The `Graffle.document()` function creates complete GraphQL documents containing multiple named operations (queries and/or mutations). This is useful when you want to define several operations in one document and execute them selectively.
+
+```ts twoslash
+import { $ } from 'graffle/extensions/document-builder'
+import { Graffle } from './graffle/$.js'
+
+const doc = Graffle.document({
+  query: {
+    getUser: {
+      user: {
+        $: { id: $('userId') },
+        id: true,
+        name: true,
+      },
+    },
+    getPosts: {
+      posts: {
+        title: true,
+        content: true,
+      },
+    },
+  },
+  mutation: {
+    updateUser: {
+      updateUser: {
+        $: { id: $('userId'), name: $('userName') },
+        id: true,
+        name: true,
+      },
+    },
+  },
+})
+```
+
+### Sending Documents with `client.send()`
+
+Use the `client.send()` method to execute documents directly without chaining from `.gql()`:
+
+```ts twoslash
+import { Graffle } from './graffle/$.js'
+
+const client = Graffle.create({
+  schema: { url: 'https://api.example.com/graphql' },
+})
+
+// Single operation - no operation name needed
+const singleOpDoc = Graffle.document({
+  query: {
+    getUser: { user: { id: true, name: true } },
+  },
+})
+const user = await client.send(singleOpDoc, { userId: '123' })
+
+// Multiple operations - operation name required
+const multiOpDoc = Graffle.document({
+  query: {
+    getUser: { user: { id: true } },
+    getPosts: { posts: { title: true } },
+  },
+})
+const userResult = await client.send(multiOpDoc, 'getUser', { userId: '123' })
+const postsResult = await client.send(multiOpDoc, 'getPosts')
+```
+
+### Comparison with `.gql()`
+
+Both approaches are supported:
+
+```ts
+// Chained API
+const result = await client.gql(doc).send({ id: '123' })
+
+// One-shot API
+const result = await client.send(doc, { id: '123' })
+```
+
+Use `.send()` when you have a pre-built document from static builders or codegen. Use `.gql().send()` when building the document inline.
+
+**Example:**
+
+- [Full Document Examples](../../../../examples/55_document-builder/document-builder_static.ts#L163-L285)
+
 ## Configuration
 
 The document builder can be configured using global defaults:

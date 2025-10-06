@@ -1,5 +1,7 @@
-import type { TypedDocument } from '#graffle/client'
-import { createStaticRootType } from '#graffle/extensions/document-builder'
+import type { OperationMetadata, TypedDocument, TypedFullDocumentString } from '#graffle/client'
+import { createStaticRootType, document as documentBuilder } from '#graffle/extensions/document-builder'
+import type * as $$StaticBuilder from '#graffle/extensions/document-builder'
+import type { InferOperations } from '#graffle/extensions/document-builder'
 import { OperationTypeNode } from 'graphql'
 import type * as ArgumentsMap from './arguments-map.js'
 import type * as $$Scalar from './scalar.js'
@@ -15,6 +17,15 @@ import type * as $$Schema from './schema/$.js'
 interface StaticDocumentContext {
   typeHookRequestResultDataTypes: never
   scalars: $$Scalar.$Registry
+}
+
+/**
+ * Configuration for static document builders.
+ * Generated code always has SDDM enabled since the generator creates the schema-driven data map.
+ */
+type DocumentConfig = {
+  schema: $$Schema.Schema
+  sddmEnabled: true
 }
 
 /**
@@ -52,6 +63,7 @@ interface StaticDocumentContext {
  *
  * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
  */
+// Note: This interface conforms to StaticDocumentBuilder<DocumentConfig, OperationTypeNode.QUERY>
 export interface QueryBuilder {
   /**
    * Look up a code of conduct by its key
@@ -108,7 +120,8 @@ export interface QueryBuilder {
         { codeOfConduct: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -165,7 +178,8 @@ export interface QueryBuilder {
         { codesOfConduct: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -245,7 +259,8 @@ export interface QueryBuilder {
         { enterprise: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -307,7 +322,8 @@ export interface QueryBuilder {
         { enterpriseAdministratorInvitation: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -369,7 +385,8 @@ export interface QueryBuilder {
         { enterpriseAdministratorInvitationByToken: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -430,7 +447,8 @@ export interface QueryBuilder {
         { enterpriseMemberInvitation: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -491,7 +509,8 @@ export interface QueryBuilder {
         { enterpriseMemberInvitationByToken: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -531,7 +550,8 @@ export interface QueryBuilder {
         { id: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -598,7 +618,8 @@ export interface QueryBuilder {
         { license: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -664,7 +685,8 @@ export interface QueryBuilder {
         { licenses: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -729,7 +751,8 @@ export interface QueryBuilder {
         { marketplaceCategories: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -790,7 +813,8 @@ export interface QueryBuilder {
         { marketplaceCategory: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -898,7 +922,8 @@ export interface QueryBuilder {
         { marketplaceListing: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -954,7 +979,8 @@ export interface QueryBuilder {
         { marketplaceListings: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1009,7 +1035,8 @@ export interface QueryBuilder {
         { meta: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1059,7 +1086,8 @@ export interface QueryBuilder {
         { node: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1112,7 +1140,8 @@ export interface QueryBuilder {
         { nodes: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1254,7 +1283,8 @@ export interface QueryBuilder {
         { organization: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1312,7 +1342,8 @@ export interface QueryBuilder {
         { rateLimit: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1394,7 +1425,8 @@ export interface QueryBuilder {
         { relay: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1578,7 +1610,8 @@ export interface QueryBuilder {
         { repository: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1636,7 +1669,8 @@ export interface QueryBuilder {
         { repositoryOwner: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1689,7 +1723,8 @@ export interface QueryBuilder {
         { resource: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1750,7 +1785,8 @@ export interface QueryBuilder {
         { search: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1806,7 +1842,8 @@ export interface QueryBuilder {
         { securityAdvisories: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1878,7 +1915,8 @@ export interface QueryBuilder {
         { securityAdvisory: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1937,7 +1975,8 @@ export interface QueryBuilder {
         { securityVulnerabilities: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -1993,7 +2032,8 @@ export interface QueryBuilder {
         { sponsorables: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -2052,7 +2092,8 @@ export interface QueryBuilder {
         { topic: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -2197,7 +2238,8 @@ export interface QueryBuilder {
         { user: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -2342,7 +2384,8 @@ export interface QueryBuilder {
         { viewer: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 }
 /**
@@ -2406,6 +2449,7 @@ export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY)
  *
  * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
  */
+// Note: This interface conforms to StaticDocumentBuilder<DocumentConfig, OperationTypeNode.MUTATION>
 export interface MutationBuilder {
   /**
    * Clear all of a customer's queued migrations
@@ -2459,7 +2503,8 @@ export interface MutationBuilder {
         { abortQueuedMigrations: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -2514,7 +2559,8 @@ export interface MutationBuilder {
         { abortRepositoryMigration: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -2571,7 +2617,8 @@ export interface MutationBuilder {
         { acceptEnterpriseAdministratorInvitation: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -2628,7 +2675,8 @@ export interface MutationBuilder {
         { acceptEnterpriseMemberInvitation: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -2683,7 +2731,8 @@ export interface MutationBuilder {
         { acceptTopicSuggestion: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -2740,7 +2789,8 @@ export interface MutationBuilder {
         { accessUserNamespaceRepository: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -2795,7 +2845,8 @@ export interface MutationBuilder {
         { addAssigneesToAssignable: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -2851,7 +2902,8 @@ export interface MutationBuilder {
         { addComment: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -2906,7 +2958,8 @@ export interface MutationBuilder {
         { addDiscussionComment: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -2961,7 +3014,8 @@ export interface MutationBuilder {
         { addDiscussionPollVote: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -3016,7 +3070,8 @@ export interface MutationBuilder {
         { addEnterpriseOrganizationMember: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -3071,7 +3126,8 @@ export interface MutationBuilder {
         { addEnterpriseSupportEntitlement: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -3126,7 +3182,8 @@ export interface MutationBuilder {
         { addLabelsToLabelable: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -3180,7 +3237,8 @@ export interface MutationBuilder {
         { addProjectCard: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -3234,7 +3292,8 @@ export interface MutationBuilder {
         { addProjectColumn: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -3289,7 +3348,8 @@ export interface MutationBuilder {
         { addProjectV2DraftIssue: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -3344,7 +3404,8 @@ export interface MutationBuilder {
         { addProjectV2ItemById: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -3401,7 +3462,8 @@ export interface MutationBuilder {
         { addPullRequestReview: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -3458,7 +3520,8 @@ export interface MutationBuilder {
         { addPullRequestReviewComment: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -3513,7 +3576,8 @@ export interface MutationBuilder {
         { addPullRequestReviewThread: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -3568,7 +3632,8 @@ export interface MutationBuilder {
         { addPullRequestReviewThreadReply: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -3624,7 +3689,8 @@ export interface MutationBuilder {
         { addReaction: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -3676,7 +3742,8 @@ export interface MutationBuilder {
         { addStar: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -3730,7 +3797,8 @@ export interface MutationBuilder {
         { addSubIssue: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -3782,7 +3850,8 @@ export interface MutationBuilder {
         { addUpvote: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -3837,7 +3906,8 @@ export interface MutationBuilder {
         { addVerifiableDomain: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -3892,7 +3962,8 @@ export interface MutationBuilder {
         { approveDeployments: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -3947,7 +4018,8 @@ export interface MutationBuilder {
         { approveVerifiableDomain: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -4002,7 +4074,8 @@ export interface MutationBuilder {
         { archiveProjectV2Item: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -4057,7 +4130,8 @@ export interface MutationBuilder {
         { archiveRepository: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -4114,7 +4188,8 @@ export interface MutationBuilder {
         { cancelEnterpriseAdminInvitation: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -4171,7 +4246,8 @@ export interface MutationBuilder {
         { cancelEnterpriseMemberInvitation: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -4226,7 +4302,8 @@ export interface MutationBuilder {
         { cancelSponsorship: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -4278,7 +4355,8 @@ export interface MutationBuilder {
         { changeUserStatus: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -4333,7 +4411,8 @@ export interface MutationBuilder {
         { clearLabelsFromLabelable: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -4390,7 +4469,8 @@ export interface MutationBuilder {
         { clearProjectV2ItemFieldValue: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -4444,7 +4524,8 @@ export interface MutationBuilder {
         { cloneProject: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -4499,7 +4580,8 @@ export interface MutationBuilder {
         { cloneTemplateRepository: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -4551,7 +4633,8 @@ export interface MutationBuilder {
         { closeDiscussion: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -4603,7 +4686,8 @@ export interface MutationBuilder {
         { closeIssue: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -4655,7 +4739,8 @@ export interface MutationBuilder {
         { closePullRequest: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -4710,7 +4795,8 @@ export interface MutationBuilder {
         { convertProjectCardNoteToIssue: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -4765,7 +4851,8 @@ export interface MutationBuilder {
         { convertProjectV2DraftIssueItemToIssue: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -4820,7 +4907,8 @@ export interface MutationBuilder {
         { convertPullRequestToDraft: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -4872,7 +4960,8 @@ export interface MutationBuilder {
         { copyProjectV2: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -4931,7 +5020,8 @@ export interface MutationBuilder {
         { createAttributionInvitation: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -4986,7 +5076,8 @@ export interface MutationBuilder {
         { createBranchProtectionRule: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -5038,7 +5129,8 @@ export interface MutationBuilder {
         { createCheckRun: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -5090,7 +5182,8 @@ export interface MutationBuilder {
         { createCheckSuite: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -5188,7 +5281,8 @@ export interface MutationBuilder {
         { createCommitOnBranch: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -5242,7 +5336,8 @@ export interface MutationBuilder {
         { createDeployment: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -5297,7 +5392,8 @@ export interface MutationBuilder {
         { createDeploymentStatus: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -5349,7 +5445,8 @@ export interface MutationBuilder {
         { createDiscussion: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -5411,7 +5508,8 @@ export interface MutationBuilder {
         { createEnterpriseOrganization: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -5466,7 +5564,8 @@ export interface MutationBuilder {
         { createEnvironment: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -5521,7 +5620,8 @@ export interface MutationBuilder {
         { createIpAllowListEntry: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -5573,7 +5673,8 @@ export interface MutationBuilder {
         { createIssue: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -5625,7 +5726,8 @@ export interface MutationBuilder {
         { createLabel: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -5682,7 +5784,8 @@ export interface MutationBuilder {
         { createLinkedBranch: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -5737,7 +5840,8 @@ export interface MutationBuilder {
         { createMigrationSource: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -5789,7 +5893,8 @@ export interface MutationBuilder {
         { createProject: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -5841,7 +5946,8 @@ export interface MutationBuilder {
         { createProjectV2: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -5896,7 +6002,8 @@ export interface MutationBuilder {
         { createProjectV2Field: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -5951,7 +6058,8 @@ export interface MutationBuilder {
         { createProjectV2StatusUpdate: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -6006,7 +6114,8 @@ export interface MutationBuilder {
         { createPullRequest: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -6058,7 +6167,8 @@ export interface MutationBuilder {
         { createRef: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -6110,7 +6220,8 @@ export interface MutationBuilder {
         { createRepository: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -6165,7 +6276,8 @@ export interface MutationBuilder {
         { createRepositoryRuleset: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -6220,7 +6332,8 @@ export interface MutationBuilder {
         { createSponsorsListing: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -6275,7 +6388,8 @@ export interface MutationBuilder {
         { createSponsorsTier: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -6330,7 +6444,8 @@ export interface MutationBuilder {
         { createSponsorship: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -6386,7 +6501,8 @@ export interface MutationBuilder {
         { createSponsorships: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -6441,7 +6557,8 @@ export interface MutationBuilder {
         { createTeamDiscussion: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -6496,7 +6613,8 @@ export interface MutationBuilder {
         { createTeamDiscussionComment: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -6550,7 +6668,8 @@ export interface MutationBuilder {
         { createUserList: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -6605,7 +6724,8 @@ export interface MutationBuilder {
         { declineTopicSuggestion: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -6658,7 +6778,8 @@ export interface MutationBuilder {
         { deleteBranchProtectionRule: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -6708,7 +6829,8 @@ export interface MutationBuilder {
         { deleteDeployment: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -6760,7 +6882,8 @@ export interface MutationBuilder {
         { deleteDiscussion: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -6815,7 +6938,8 @@ export interface MutationBuilder {
         { deleteDiscussionComment: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -6868,7 +6992,8 @@ export interface MutationBuilder {
         { deleteEnvironment: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -6923,7 +7048,8 @@ export interface MutationBuilder {
         { deleteIpAllowListEntry: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -6975,7 +7101,8 @@ export interface MutationBuilder {
         { deleteIssue: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -7028,7 +7155,8 @@ export interface MutationBuilder {
         { deleteIssueComment: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -7078,7 +7206,8 @@ export interface MutationBuilder {
         { deleteLabel: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -7133,7 +7262,8 @@ export interface MutationBuilder {
         { deleteLinkedBranch: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -7188,7 +7318,8 @@ export interface MutationBuilder {
         { deletePackageVersion: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -7240,7 +7371,8 @@ export interface MutationBuilder {
         { deleteProject: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -7297,7 +7429,8 @@ export interface MutationBuilder {
         { deleteProjectCard: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -7354,7 +7487,8 @@ export interface MutationBuilder {
         { deleteProjectColumn: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -7406,7 +7540,8 @@ export interface MutationBuilder {
         { deleteProjectV2: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -7461,7 +7596,8 @@ export interface MutationBuilder {
         { deleteProjectV2Field: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -7516,7 +7652,8 @@ export interface MutationBuilder {
         { deleteProjectV2Item: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -7573,7 +7710,8 @@ export interface MutationBuilder {
         { deleteProjectV2StatusUpdate: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -7630,7 +7768,8 @@ export interface MutationBuilder {
         { deleteProjectV2Workflow: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -7685,7 +7824,8 @@ export interface MutationBuilder {
         { deletePullRequestReview: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -7742,7 +7882,8 @@ export interface MutationBuilder {
         { deletePullRequestReviewComment: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -7792,7 +7933,8 @@ export interface MutationBuilder {
         { deleteRef: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -7845,7 +7987,8 @@ export interface MutationBuilder {
         { deleteRepositoryRuleset: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -7898,7 +8041,8 @@ export interface MutationBuilder {
         { deleteTeamDiscussion: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -7951,7 +8095,8 @@ export interface MutationBuilder {
         { deleteTeamDiscussionComment: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -8003,7 +8148,8 @@ export interface MutationBuilder {
         { deleteUserList: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -8058,7 +8204,8 @@ export interface MutationBuilder {
         { deleteVerifiableDomain: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -8113,7 +8260,8 @@ export interface MutationBuilder {
         { dequeuePullRequest: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -8170,7 +8318,8 @@ export interface MutationBuilder {
         { disablePullRequestAutoMerge: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -8225,7 +8374,8 @@ export interface MutationBuilder {
         { dismissPullRequestReview: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -8280,7 +8430,8 @@ export interface MutationBuilder {
         { dismissRepositoryVulnerabilityAlert: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -8337,7 +8488,8 @@ export interface MutationBuilder {
         { enablePullRequestAutoMerge: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -8392,7 +8544,8 @@ export interface MutationBuilder {
         { enqueuePullRequest: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -8447,7 +8600,8 @@ export interface MutationBuilder {
         { followOrganization: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -8499,7 +8653,8 @@ export interface MutationBuilder {
         { followUser: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -8554,7 +8709,8 @@ export interface MutationBuilder {
         { grantEnterpriseOrganizationsMigratorRole: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -8609,7 +8765,8 @@ export interface MutationBuilder {
         { grantMigratorRole: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -8661,7 +8818,8 @@ export interface MutationBuilder {
         { importProject: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -8716,7 +8874,8 @@ export interface MutationBuilder {
         { inviteEnterpriseAdmin: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -8771,7 +8930,8 @@ export interface MutationBuilder {
         { inviteEnterpriseMember: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -8826,7 +8986,8 @@ export interface MutationBuilder {
         { linkProjectV2ToRepository: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -8881,7 +9042,8 @@ export interface MutationBuilder {
         { linkProjectV2ToTeam: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -8938,7 +9100,8 @@ export interface MutationBuilder {
         { linkRepositoryToProject: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -8992,7 +9155,8 @@ export interface MutationBuilder {
         { lockLockable: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -9047,7 +9211,8 @@ export interface MutationBuilder {
         { markDiscussionCommentAsAnswer: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -9099,7 +9264,8 @@ export interface MutationBuilder {
         { markFileAsViewed: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -9154,7 +9320,8 @@ export interface MutationBuilder {
         { markProjectV2AsTemplate: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -9209,7 +9376,8 @@ export interface MutationBuilder {
         { markPullRequestReadyForReview: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -9261,7 +9429,8 @@ export interface MutationBuilder {
         { mergeBranch: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -9315,7 +9484,8 @@ export interface MutationBuilder {
         { mergePullRequest: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -9367,7 +9537,8 @@ export interface MutationBuilder {
         { minimizeComment: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -9419,7 +9590,8 @@ export interface MutationBuilder {
         { moveProjectCard: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -9474,7 +9646,8 @@ export interface MutationBuilder {
         { moveProjectColumn: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -9528,7 +9701,8 @@ export interface MutationBuilder {
         { pinEnvironment: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -9580,7 +9754,8 @@ export interface MutationBuilder {
         { pinIssue: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -9635,7 +9810,8 @@ export interface MutationBuilder {
         { publishSponsorsTier: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -9690,7 +9866,8 @@ export interface MutationBuilder {
         { regenerateEnterpriseIdentityProviderRecoveryCodes: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -9745,7 +9922,8 @@ export interface MutationBuilder {
         { regenerateVerifiableDomainToken: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -9800,7 +9978,8 @@ export interface MutationBuilder {
         { rejectDeployments: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -9855,7 +10034,8 @@ export interface MutationBuilder {
         { removeAssigneesFromAssignable: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -9915,7 +10095,8 @@ export interface MutationBuilder {
         { removeEnterpriseAdmin: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -9971,7 +10152,8 @@ export interface MutationBuilder {
         { removeEnterpriseIdentityProvider: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -10030,7 +10212,8 @@ export interface MutationBuilder {
         { removeEnterpriseMember: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -10089,7 +10272,8 @@ export interface MutationBuilder {
         { removeEnterpriseOrganization: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -10144,7 +10328,8 @@ export interface MutationBuilder {
         { removeEnterpriseSupportEntitlement: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -10199,7 +10384,8 @@ export interface MutationBuilder {
         { removeLabelsFromLabelable: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -10254,7 +10440,8 @@ export interface MutationBuilder {
         { removeOutsideCollaborator: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -10310,7 +10497,8 @@ export interface MutationBuilder {
         { removeReaction: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -10362,7 +10550,8 @@ export interface MutationBuilder {
         { removeStar: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -10416,7 +10605,8 @@ export interface MutationBuilder {
         { removeSubIssue: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -10468,7 +10658,8 @@ export interface MutationBuilder {
         { removeUpvote: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -10520,7 +10711,8 @@ export interface MutationBuilder {
         { reopenDiscussion: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -10572,7 +10764,8 @@ export interface MutationBuilder {
         { reopenIssue: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -10627,7 +10820,8 @@ export interface MutationBuilder {
         { reopenPullRequest: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -10682,7 +10876,8 @@ export interface MutationBuilder {
         { reorderEnvironment: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -10737,7 +10932,8 @@ export interface MutationBuilder {
         { reprioritizeSubIssue: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -10793,7 +10989,8 @@ export interface MutationBuilder {
         { requestReviews: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -10848,7 +11045,8 @@ export interface MutationBuilder {
         { rerequestCheckSuite: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -10903,7 +11101,8 @@ export interface MutationBuilder {
         { resolveReviewThread: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -10958,7 +11157,8 @@ export interface MutationBuilder {
         { retireSponsorsTier: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -11015,7 +11215,8 @@ export interface MutationBuilder {
         { revertPullRequest: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -11070,7 +11271,8 @@ export interface MutationBuilder {
         { revokeEnterpriseOrganizationsMigratorRole: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -11125,7 +11327,8 @@ export interface MutationBuilder {
         { revokeMigratorRole: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -11180,7 +11383,8 @@ export interface MutationBuilder {
         { setEnterpriseIdentityProvider: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -11235,7 +11439,8 @@ export interface MutationBuilder {
         { setOrganizationInteractionLimit: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -11290,7 +11495,8 @@ export interface MutationBuilder {
         { setRepositoryInteractionLimit: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -11345,7 +11551,8 @@ export interface MutationBuilder {
         { setUserInteractionLimit: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -11400,7 +11607,8 @@ export interface MutationBuilder {
         { startOrganizationMigration: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -11455,7 +11663,8 @@ export interface MutationBuilder {
         { startRepositoryMigration: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -11510,7 +11719,8 @@ export interface MutationBuilder {
         { submitPullRequestReview: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -11565,7 +11775,8 @@ export interface MutationBuilder {
         { transferEnterpriseOrganization: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -11617,7 +11828,8 @@ export interface MutationBuilder {
         { transferIssue: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -11672,7 +11884,8 @@ export interface MutationBuilder {
         { unarchiveProjectV2Item: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -11727,7 +11940,8 @@ export interface MutationBuilder {
         { unarchiveRepository: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -11782,7 +11996,8 @@ export interface MutationBuilder {
         { unfollowOrganization: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -11834,7 +12049,8 @@ export interface MutationBuilder {
         { unfollowUser: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -11889,7 +12105,8 @@ export interface MutationBuilder {
         { unlinkProjectV2FromRepository: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -11944,7 +12161,8 @@ export interface MutationBuilder {
         { unlinkProjectV2FromTeam: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -12001,7 +12219,8 @@ export interface MutationBuilder {
         { unlinkRepositoryFromProject: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -12055,7 +12274,8 @@ export interface MutationBuilder {
         { unlockLockable: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -12110,7 +12330,8 @@ export interface MutationBuilder {
         { unmarkDiscussionCommentAsAnswer: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -12165,7 +12386,8 @@ export interface MutationBuilder {
         { unmarkFileAsViewed: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -12220,7 +12442,8 @@ export interface MutationBuilder {
         { unmarkIssueAsDuplicate: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -12275,7 +12498,8 @@ export interface MutationBuilder {
         { unmarkProjectV2AsTemplate: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -12330,7 +12554,8 @@ export interface MutationBuilder {
         { unminimizeComment: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -12384,7 +12609,8 @@ export interface MutationBuilder {
         { unpinIssue: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -12439,7 +12665,8 @@ export interface MutationBuilder {
         { unresolveReviewThread: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -12494,7 +12721,8 @@ export interface MutationBuilder {
         { updateBranchProtectionRule: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -12546,7 +12774,8 @@ export interface MutationBuilder {
         { updateCheckRun: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -12601,7 +12830,8 @@ export interface MutationBuilder {
         { updateCheckSuitePreferences: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -12653,7 +12883,8 @@ export interface MutationBuilder {
         { updateDiscussion: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -12708,7 +12939,8 @@ export interface MutationBuilder {
         { updateDiscussionComment: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -12763,7 +12995,8 @@ export interface MutationBuilder {
         { updateEnterpriseAdministratorRole: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -12820,7 +13053,8 @@ export interface MutationBuilder {
         { updateEnterpriseAllowPrivateRepositoryForkingSetting: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -12877,7 +13111,8 @@ export interface MutationBuilder {
         { updateEnterpriseDefaultRepositoryPermissionSetting: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -12934,7 +13169,8 @@ export interface MutationBuilder {
         { updateEnterpriseDeployKeySetting: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -12991,7 +13227,8 @@ export interface MutationBuilder {
         { updateEnterpriseMembersCanChangeRepositoryVisibilitySetting: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -13048,7 +13285,8 @@ export interface MutationBuilder {
         { updateEnterpriseMembersCanCreateRepositoriesSetting: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -13105,7 +13343,8 @@ export interface MutationBuilder {
         { updateEnterpriseMembersCanDeleteIssuesSetting: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -13162,7 +13401,8 @@ export interface MutationBuilder {
         { updateEnterpriseMembersCanDeleteRepositoriesSetting: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -13219,7 +13459,8 @@ export interface MutationBuilder {
         { updateEnterpriseMembersCanInviteCollaboratorsSetting: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -13276,7 +13517,8 @@ export interface MutationBuilder {
         { updateEnterpriseMembersCanMakePurchasesSetting: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -13333,7 +13575,8 @@ export interface MutationBuilder {
         { updateEnterpriseMembersCanUpdateProtectedBranchesSetting: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -13390,7 +13633,8 @@ export interface MutationBuilder {
         { updateEnterpriseMembersCanViewDependencyInsightsSetting: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -13447,7 +13691,8 @@ export interface MutationBuilder {
         { updateEnterpriseOrganizationProjectsSetting: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -13502,7 +13747,8 @@ export interface MutationBuilder {
         { updateEnterpriseOwnerOrganizationRole: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -13557,7 +13803,8 @@ export interface MutationBuilder {
         { updateEnterpriseProfile: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -13614,7 +13861,8 @@ export interface MutationBuilder {
         { updateEnterpriseRepositoryProjectsSetting: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -13671,7 +13919,8 @@ export interface MutationBuilder {
         { updateEnterpriseTeamDiscussionsSetting: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -13728,7 +13977,8 @@ export interface MutationBuilder {
         { updateEnterpriseTwoFactorAuthenticationDisallowedMethodsSetting: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -13785,7 +14035,8 @@ export interface MutationBuilder {
         { updateEnterpriseTwoFactorAuthenticationRequiredSetting: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -13840,7 +14091,8 @@ export interface MutationBuilder {
         { updateEnvironment: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -13895,7 +14147,8 @@ export interface MutationBuilder {
         { updateIpAllowListEnabledSetting: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -13950,7 +14203,8 @@ export interface MutationBuilder {
         { updateIpAllowListEntry: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -14005,7 +14259,8 @@ export interface MutationBuilder {
         { updateIpAllowListForInstalledAppsEnabledSetting: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -14059,7 +14314,8 @@ export interface MutationBuilder {
         { updateIssue: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -14114,7 +14370,8 @@ export interface MutationBuilder {
         { updateIssueComment: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -14166,7 +14423,8 @@ export interface MutationBuilder {
         { updateLabel: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -14221,7 +14479,8 @@ export interface MutationBuilder {
         { updateNotificationRestrictionSetting: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -14278,7 +14537,8 @@ export interface MutationBuilder {
         { updateOrganizationAllowPrivateRepositoryForkingSetting: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -14335,7 +14595,8 @@ export interface MutationBuilder {
         { updateOrganizationWebCommitSignoffSetting: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -14393,7 +14654,8 @@ export interface MutationBuilder {
         { updatePatreonSponsorability: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -14445,7 +14707,8 @@ export interface MutationBuilder {
         { updateProject: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -14500,7 +14763,8 @@ export interface MutationBuilder {
         { updateProjectCard: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -14555,7 +14819,8 @@ export interface MutationBuilder {
         { updateProjectColumn: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -14607,7 +14872,8 @@ export interface MutationBuilder {
         { updateProjectV2: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -14662,7 +14928,8 @@ export interface MutationBuilder {
         { updateProjectV2Collaborators: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -14717,7 +14984,8 @@ export interface MutationBuilder {
         { updateProjectV2DraftIssue: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -14772,7 +15040,8 @@ export interface MutationBuilder {
         { updateProjectV2Field: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -14828,7 +15097,8 @@ export interface MutationBuilder {
         { updateProjectV2ItemFieldValue: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -14883,7 +15153,8 @@ export interface MutationBuilder {
         { updateProjectV2ItemPosition: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -14938,7 +15209,8 @@ export interface MutationBuilder {
         { updateProjectV2StatusUpdate: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -14995,7 +15267,8 @@ export interface MutationBuilder {
         { updatePullRequest: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -15050,7 +15323,8 @@ export interface MutationBuilder {
         { updatePullRequestBranch: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -15105,7 +15379,8 @@ export interface MutationBuilder {
         { updatePullRequestReview: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -15160,7 +15435,8 @@ export interface MutationBuilder {
         { updatePullRequestReviewComment: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -15212,7 +15488,8 @@ export interface MutationBuilder {
         { updateRef: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -15279,7 +15556,8 @@ export interface MutationBuilder {
         { updateRefs: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -15331,7 +15609,8 @@ export interface MutationBuilder {
         { updateRepository: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -15386,7 +15665,8 @@ export interface MutationBuilder {
         { updateRepositoryRuleset: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -15443,7 +15723,8 @@ export interface MutationBuilder {
         { updateRepositoryWebCommitSignoffSetting: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -15498,7 +15779,8 @@ export interface MutationBuilder {
         { updateSponsorshipPreferences: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -15553,7 +15835,8 @@ export interface MutationBuilder {
         { updateSubscription: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -15608,7 +15891,8 @@ export interface MutationBuilder {
         { updateTeamDiscussion: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -15663,7 +15947,8 @@ export interface MutationBuilder {
         { updateTeamDiscussionComment: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -15718,7 +16003,8 @@ export interface MutationBuilder {
         { updateTeamReviewAssignment: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -15775,7 +16061,8 @@ export interface MutationBuilder {
         { updateTeamsRepository: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -15829,7 +16116,8 @@ export interface MutationBuilder {
         { updateTopics: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -15881,7 +16169,8 @@ export interface MutationBuilder {
         { updateUserList: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -15940,7 +16229,8 @@ export interface MutationBuilder {
         { updateUserListsForItem: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 
   /**
@@ -15995,7 +16285,8 @@ export interface MutationBuilder {
         { verifyVerifiableDomain: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >
 }
 /**
@@ -16023,3 +16314,42 @@ export interface MutationBuilder {
  * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
  */
 export const mutation: MutationBuilder = createStaticRootType(OperationTypeNode.MUTATION) as any
+
+/**
+ * Create a full GraphQL document with one or more named operations.
+ *
+ * Unlike `query` and `mutation` which create single-operation documents, this function creates a full document that can contain multiple operations. Returns a `TypedFullDocumentString` that captures type information for all operations.
+ *
+ * @param documentObject - Document object with query and/or mutation operations
+ * @returns TypedFullDocumentString representing the complete document
+ *
+ * @example
+ * ```ts
+ * const doc = document({
+ * query: {
+ * getUser: { user: { id: true, name: true } },
+ * getPost: { post: { id: true, title: true } }
+ * }
+ * })
+ *
+ * // Use with client.send()
+ * const user = await client.send(doc, 'getUser')
+ * ```
+ */
+export const document = documentBuilder as Document
+
+/**
+ * Document builder function type for creating multi-operation documents.
+ */
+export interface Document {
+  <$Document>(
+    document: $$Utilities.ExactNonEmpty<
+      $Document,
+      SelectionSets.$Document<
+        { scalars: $$Scalar.$Registry }
+      >
+    >,
+  ): TypedFullDocumentString<
+    InferOperations<$Document, $$Schema.Schema, ArgumentsMap.ArgumentsMap, StaticDocumentContext>
+  >
+}

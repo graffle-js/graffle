@@ -2,7 +2,7 @@ import { OperationTypeNode } from 'graphql'
 import { Extension } from '../../exports/extension.js'
 import type { GlobalRegistry, GraffleKit } from '../../exports/utilities-for-generated.js'
 import type { TypeFunction } from '../../lib/type-function/$.js'
-import { createMethodDocument, createMethodOperationType } from './$$.js'
+import { createMethodDocument, createMethodOperationType } from './methods-instance/requestMethods.js'
 
 export const DocumentBuilder = Extension
   .create(`DocumentBuilder`)

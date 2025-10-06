@@ -32,10 +32,15 @@ export const ModuleGeneratorDocument = createModuleGenerator(
     const mutationHasArgs = hasFieldsWithArguments(mutationType)
     const subscriptionHasArgs = hasFieldsWithArguments(subscriptionType)
 
-    code(`import { createStaticRootType } from '${config.paths.imports.grafflePackage.extensionDocumentBuilder}'`)
+    code(
+      `import { createStaticRootType, document as documentBuilder } from '${config.paths.imports.grafflePackage.extensionDocumentBuilder}'`,
+    )
     code(`import type * as $$StaticBuilder from '${config.paths.imports.grafflePackage.extensionDocumentBuilder}'`)
+    code(`import type { InferOperations } from '${config.paths.imports.grafflePackage.extensionDocumentBuilder}'`)
     code(`import { OperationTypeNode } from 'graphql'`)
-    code(`import type { TypedDocument } from '${config.paths.imports.grafflePackage.client}'`)
+    code(
+      `import type { TypedDocument, TypedFullDocumentString, OperationMetadata } from '${config.paths.imports.grafflePackage.client}'`,
+    )
     code(codeImportAll(config, { as: 'SelectionSets', from: './selection-sets', type: true }))
     code(codeImportAll(config, { as: '$$Scalar', from: './scalar', type: true }))
     code(codeImportAll(config, { as: 'ArgumentsMap', from: './arguments-map', type: true }))
@@ -214,6 +219,49 @@ export const ModuleGeneratorDocument = createModuleGenerator(
       code(
         `export const subscription: SubscriptionBuilder = createStaticRootType(OperationTypeNode.SUBSCRIPTION) as any`,
       )
+      code``
+    }
+
+    // Generate document() function for multi-operation documents
+    if (queryType || mutationType) {
+      code(Code.TSDoc(
+        `Create a full GraphQL document with one or more named operations.
+
+Unlike \`query\` and \`mutation\` which create single-operation documents, this function creates a full document that can contain multiple operations. Returns a \`TypedFullDocumentString\` that captures type information for all operations.
+
+@param documentObject - Document object with query and/or mutation operations
+@returns TypedFullDocumentString representing the complete document
+
+@example
+\`\`\`ts
+const doc = document({
+  query: {
+    getUser: { user: { id: true, name: true } },
+    getPost: { post: { id: true, title: true } }
+  }
+})
+
+// Use with client.send()
+const user = await client.send(doc, 'getUser')
+\`\`\``,
+      ))
+      code`export const document = documentBuilder as Document`
+      code``
+
+      // Generate Document interface with proper typing using imported InferOperations
+      code(Code.TSDoc(`Document builder function type for creating multi-operation documents.`))
+      code`export interface Document {`
+      code`  <$Document>(`
+      code`    document: $$Utilities.ExactNonEmpty<`
+      code`      $Document,`
+      code`      SelectionSets.$Document<`
+      code`        { scalars: $$Scalar.$Registry }`
+      code`      >`
+      code`    >,`
+      code`  ): TypedFullDocumentString<`
+      code`    InferOperations<$Document, $$Schema.Schema, ArgumentsMap.ArgumentsMap, StaticDocumentContext>`
+      code`  >`
+      code`}`
       code``
     }
   },

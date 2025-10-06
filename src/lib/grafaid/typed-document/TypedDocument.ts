@@ -119,5 +119,5 @@ export type VariablesOf<$Document extends TypedDocumentLike> =
 
 // dprint-ignore
 export type RequiresSDDMOf<$Document extends TypedDocumentLike> =
-  $Document extends { __sddm?: infer $RequiresSDDM extends boolean } ? $RequiresSDDM :
-                                                                         false
+  $Document extends { __sddm?: infer $RequiresSDDM extends boolean | undefined } ?  Exclude<$RequiresSDDM, undefined> :
+                                                                                    false

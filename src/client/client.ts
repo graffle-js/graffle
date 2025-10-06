@@ -17,6 +17,7 @@ import { type ContextFragment, ContextFragments } from '../types/ContextFragment
 import { GqlMethod } from './methods/gql/gql.js'
 import { GqlMethodSendMethod } from './methods/gql/send.js'
 import { ScalarMethod } from './methods/scalars.js'
+import { SendMethod } from './methods/send.js'
 import { TransportMethod } from './methods/transport.js'
 import { sendRequest } from './send.js'
 
@@ -77,6 +78,23 @@ export interface ClientBase<$Context extends Context> {
     $Context,
     GqlMethod<$Context>
   >
+  /**
+   * Send a GraphQL document directly.
+   *
+   * Accepts documents from static builders (Graffle.document()), codegen (TypedDocumentNode),
+   * or plain strings. Returns the result directly without chaining.
+   *
+   * For single-operation documents, operation name is optional.
+   * For multi-operation documents, operation name is required.
+   *
+   * @example
+   * ```ts
+   * import { Graffle } from './graffle/__.js'
+   * const doc = Graffle.document({ query: { getUser: { user: { id: true } } } })
+   * const result = await graffle.send(doc, { id: '123' })
+   * ```
+   */
+  send: SendMethod<$Context>
   /**
    * Register a custom scalar codec for encoding and decoding GraphQL scalar values.
    *
@@ -491,6 +509,32 @@ export const createWithContext = <$Context extends Context>(
           return sendRequest(context, analyzedRequest)
         },
       }
+    }) as any,
+    send: (async (...args: any[]) => {
+      if (!context.transports.current) throw new Error(`No transport selected`)
+
+      const { document, operationName, variables } = SendMethod.normalizeArguments(args)
+
+      // Build the request
+      const request = {
+        query: document,
+        variables,
+        operationName,
+      }
+
+      // Get operation type
+      const operationType = getOperationType(request)
+      if (!operationType) throw new Error(`Could not get operation type`)
+
+      // Build analyzed request
+      const analyzedRequest = {
+        operation: operationType,
+        query: document,
+        variables,
+        operationName,
+      }
+
+      return sendRequest(context, analyzedRequest)
     }) as any,
   }
 

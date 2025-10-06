@@ -15,13 +15,21 @@ import { type DocumentController } from './send.js'
  * the full schema to be available for proper encoding/decoding.
  *
  * Note: Documents with RequiresSDDM=false can be used with any client.
- * Documents with RequiresSDDM=true currently require all clients (validation TBD).
+ * Documents with RequiresSDDM=true require clients configured with schema.map.
  */
+// dprint-ignore
+type HasSDDM<$Context> =
+  $Context extends { configuration: { schema: { current: { map: infer $Map } } } }
+    ? $Map extends undefined ? false : true
+    : false
+
 // dprint-ignore
 type ValidateSDDMRequirement<$Document extends Grafaid.Document.Typed.TypedDocumentLike, $Context> =
   Grafaid.Document.Typed.RequiresSDDMOf<$Document> extends true
-    ? $Document  // For now, allow SDDM documents with all contexts
-    : $Document // Non-SDDM documents work with any context
+    ? HasSDDM<$Context> extends true
+      ? $Document
+      : `❌ This document requires SDDM. Configure client with schema.map`
+    : $Document
 
 // dprint-ignore
 /**

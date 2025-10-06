@@ -32,6 +32,10 @@ export const ModuleGenerator$$ = createModuleGenerator(
     if (config.schema.kindMap.index.Root.subscription) {
       documentExports.push('subscription')
     }
+    // Include document() function if query or mutation exists
+    if (config.schema.kindMap.index.Root.query || config.schema.kindMap.index.Root.mutation) {
+      documentExports.push('document')
+    }
 
     code(Code.reexportNamed({ names: 'Name', from: `./modules/${getImportName(config, ModuleGeneratorData)}` }))
     code(Code.reexportNamed({ names: 'Select', from: `./modules/${getImportName(config, ModuleGeneratorSelect)}` }))

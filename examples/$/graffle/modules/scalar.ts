@@ -1,6 +1,5 @@
 import type * as $$Utilities from 'graffle/utilities-for-generated'
-export * from 'graffle/generator-helpers/standard-scalar-types'
-
+import * as CustomScalars from '../../../scalars.js'
 //
 //
 //
@@ -13,7 +12,12 @@ export * from 'graffle/generator-helpers/standard-scalar-types'
 //
 //
 
-export type Date = $$Utilities.Schema.Scalar.ScalarCodecless<'Date'>
+export const Date = CustomScalars.Date
+export type Date = typeof CustomScalars.Date
+export type DateDecoded = $$Utilities.Schema.Scalar.GetDecoded<Date>
+export type DateEncoded = $$Utilities.Schema.Scalar.GetEncoded<Date>
+
+export * from 'graffle/generator-helpers/standard-scalar-types'
 
 //
 //
@@ -32,7 +36,15 @@ export type Date = $$Utilities.Schema.Scalar.ScalarCodecless<'Date'>
 //
 
 export const $registry = {
-  map: {},
+  map: {
+    Date: CustomScalars.Date,
+  },
 } as $Registry
 
-export type $Registry = $$Utilities.Schema.Scalar.Registry.Empty
+export type $Registry = $$Utilities.Schema.Scalar.Registry<
+  {
+    Date: Date
+  },
+  $$Utilities.Schema.Scalar.GetEncoded<Date>,
+  $$Utilities.Schema.Scalar.GetDecoded<Date>
+>

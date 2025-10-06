@@ -64,7 +64,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
     if (isNeedCustomScalarDefaults) {
       if (config.lint.missingCustomScalarCodec) {
         console.log(
-          `WARNING: Custom scalars detected in the schema, but you have not created a custom scalars module to import implementations from.`,
+          `WARNING: Custom scalars detected in the schema, but you have not created a custom scalars module to import implementations from. Create one at: ${config.paths.project.inputs.scalars}`,
         )
       }
 
