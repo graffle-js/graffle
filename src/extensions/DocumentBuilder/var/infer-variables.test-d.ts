@@ -1,6 +1,7 @@
 import { Ts } from '@wollybeard/kit'
 import type { PossibleWithScalars } from '../__tests__/fixtures/possible-with-scalars/$.js'
 import type { Possible } from '../__tests__/fixtures/possible/$.js'
+import type { Select } from '../Select/$.js'
 import type { InferFromQuery } from './infer.js'
 import { $ } from './var.js'
 
@@ -202,4 +203,16 @@ type _2 = Ts.Cases<
     InferFromQuery<{ objectWithArgs: { $: { int: $WithDefault42 } } }, Possible.$.ArgumentsMap>,
     { int?: number }
   >
+>
+
+// ====================================================================
+//                   ENUM KEY PREFIX STRIPPING
+// ====================================================================
+// dprint-ignore
+type _3 = Ts.Cases<
+  // Strip leading $ from property names (for GraphQL variable names)
+  Ts.AssertEqual<Select.Arguments.EnumKeyPrefixStrip<'$type'>, 'type'>,
+  Ts.AssertEqual<Select.Arguments.EnumKeyPrefixStrip<'$name'>, 'name'>,
+  // Passthrough keys without $
+  Ts.AssertEqual<Select.Arguments.EnumKeyPrefixStrip<'name'>, 'name'>
 >
