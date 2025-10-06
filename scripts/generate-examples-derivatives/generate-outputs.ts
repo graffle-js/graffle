@@ -1,6 +1,6 @@
 import { serveSchema } from '#test/lib/serveSchema'
 import { schema } from '#test/schema/pokemon/schema'
-import { Graffle } from 'graffle'
+import { Graffle } from '#graffle'
 import * as FS from 'node:fs/promises'
 import * as Path from 'node:path'
 import { deleteFiles } from '../lib/deleteFiles.js'
