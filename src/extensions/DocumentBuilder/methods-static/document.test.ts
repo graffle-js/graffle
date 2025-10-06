@@ -42,15 +42,14 @@ test('document is type checked', () => {
 //            INTEGRATION: send() with mixed query/mutation
 // ====================================================================
 
-test('send() with mixed query/mutation document and $ prefix stripping', () => {
+test('send() with mixed query/mutation document and variable inference', () => {
   const doc = Possible.document({
     query: {
       getUserWithArgs: {
         objectWithArgs: {
           $: {
-            // $-prefixed keys should map to variable names without $
-            $id: $.required(),
-            $string: $.required(),
+            id: $.required(),
+            string: $.required(),
           },
           id: true,
         },

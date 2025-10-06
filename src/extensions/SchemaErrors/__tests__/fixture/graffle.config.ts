@@ -1,5 +1,5 @@
 import { Generator } from '#graffle/generator'
-import { schema } from '#test/schema/possible/schema'
+import { schema } from '#test/schema/possible/schema.js'
 import { SchemaErrors } from '../../gentime.js'
 
 export default Generator

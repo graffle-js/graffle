@@ -14,7 +14,7 @@ export default async ({ provide }: GlobalSetupContext) => {
   const service = await serveSchema({ schema, log: true })
 
   // Set environment variable for subprocesses spawned by tests
-  process.env.POKEMON_SCHEMA_URL = service.url.href
+  process.env['POKEMON_SCHEMA_URL'] = service.url.href
 
   provide(`service`, {
     url: service.url.href,
@@ -22,7 +22,7 @@ export default async ({ provide }: GlobalSetupContext) => {
 
   return () => {
     // Clean up environment variable when stopping
-    delete process.env.POKEMON_SCHEMA_URL
+    delete process.env['POKEMON_SCHEMA_URL']
     return service.stop()
   }
 }

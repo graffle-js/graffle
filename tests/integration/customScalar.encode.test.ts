@@ -1,5 +1,5 @@
-import { db } from '#test/schema/possible/db'
-import { possibleSchema } from '#test/schema/possible/schema'
+import { db } from '#test/schema/possible/db.js'
+import { possibleSchema } from '#test/schema/possible/schema.js'
 import { expect } from 'vitest'
 import { DocumentBuilderKit } from '../../src/exports/extensions/document-builder/kit.js'
 import { GraffleBasic } from '../../src/exports/presets/basic.js'
@@ -10,9 +10,9 @@ import { DateScalar } from '../_/fixtures/scalars.js'
 import { test } from '../_/helpers.js'
 import { RequestSpy } from '../_/SpyExtension.js'
 
-type QueryWithDate = Possible.SelectionSets.Query<
-  Schema.Scalar.Registry.AddScalar<Schema.Scalar.Registry.Empty, typeof DateScalar>
->
+type QueryWithDate = Possible.SelectionSets.Query<{
+  scalars: Schema.Scalar.Registry.AddScalar<Schema.Scalar.Registry.Empty, typeof DateScalar>
+}>
 
 type TestCase = [
   description: string,
@@ -47,7 +47,6 @@ testCases(`%s`, async ([_, query, expectedVariables]) => {
     DocumentBuilderKit.Select.Document.createDocumentNormalizedFromQuerySelection(query as any),
     {
       sddm: Possible.schemaMap,
-      operationVariables: true,
       scalars: { Date: DateScalar },
     },
   )

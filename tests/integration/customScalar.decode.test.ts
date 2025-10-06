@@ -1,4 +1,4 @@
-import { db } from '#test/schema/possible/db'
+import { db } from '#test/schema/possible/db.js'
 import { describe, expect } from 'vitest'
 import { DocumentBuilderKit } from '../../src/extensions/DocumentBuilder/$.js'
 import { Possible } from '../../src/extensions/DocumentBuilder/__tests__/fixtures/possible/$.js'

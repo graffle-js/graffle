@@ -1,5 +1,5 @@
 import type { DateScalar } from '#test/fixtures/scalars'
-import { db } from '#test/schema/possible/db'
+import { db } from '#test/schema/possible/db.js'
 import { assertType, test } from 'vitest'
 import type * as SelectionSets from '../../extensions/DocumentBuilder/__tests__/fixtures/possible/modules/selection-sets.js'
 import type { Schema } from '../../types/Schema/$.js'
