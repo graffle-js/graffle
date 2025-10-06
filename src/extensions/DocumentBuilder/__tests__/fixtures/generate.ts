@@ -1,5 +1,7 @@
 import { Generator } from '#src/generator/$.js'
 import { TestSchemas } from '#test/fixtures/schemas/$'
+import { rmSync } from 'node:fs'
+import { join } from 'node:path'
 
 const generate = async (
   input: {
@@ -9,6 +11,11 @@ const generate = async (
   },
 ) => {
   const schema = TestSchemas[input.name]
+  const outputDirPath = input.name + (input.scalarsFile ? '-with-scalars' : '')
+  const fullOutputPath = join(import.meta.dirname, outputDirPath)
+
+  // Clean up existing generated directory
+  rmSync(fullOutputPath, { recursive: true, force: true })
 
   const config = await Generator.generate({
     name: input.name + (input.scalarsFile ? 'WithScalars' : ''),

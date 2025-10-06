@@ -196,7 +196,7 @@ export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY,
  * const user = await client.send(doc, 'getUser')
  * ```
  */
-export const document = documentBuilder as Document
+export const document = ((documentObject: any) => documentBuilder(documentObject, { sddm })) as Document
 
 /**
  * Document builder function type for creating multi-operation documents.
