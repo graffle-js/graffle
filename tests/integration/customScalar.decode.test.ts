@@ -7,9 +7,9 @@ import type { Schema } from '../../src/types/Schema/$.js'
 import { DateScalar } from '../_/fixtures/scalars.js'
 import { createGraphQLResponse, createGraphQLResponseData, test } from '../_/helpers.js'
 
-type QueryWithDate = Possible.SelectionSets.Query<
-  Schema.Scalar.Registry.AddScalar<Schema.Scalar.Registry.Empty, typeof DateScalar>
->
+type QueryWithDate = Possible.SelectionSets.Query<{
+  scalars: Schema.Scalar.Registry.AddScalar<Schema.Scalar.Registry.Empty, typeof DateScalar>
+}>
 
 type TestCase = [
   describe: string,

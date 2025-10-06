@@ -16351,6 +16351,7 @@ export interface Document {
       >
     >,
   ): TypedFullDocumentString<
+    // @ts-expect-error - Excessive stack depth with large schema (GitHub has 16k+ lines). This is a known TypeScript limitation.
     InferOperations<$Document, $$Schema.Schema, ArgumentsMap.ArgumentsMap, StaticDocumentContext>
   >
 }
