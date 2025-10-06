@@ -112,7 +112,7 @@ export const test = testBase.extend<Fixtures>({
         // TODO: Find a better solution for GraphQL module duplication in tests
         const sdlPath = Path.join(import.meta.dirname, `./fixtures/schemas/pokemon/schema.graphql`)
         const contents = await FsJetpack.readAsync(sdlPath, 'utf8')
-        await fs.writeAsync(pathRelative, contents)
+        await fs.writeAsync(pathRelative, contents!)
         return {
           relative: pathRelative,
           absolute: Path.join(fs.cwd(), pathRelative),
