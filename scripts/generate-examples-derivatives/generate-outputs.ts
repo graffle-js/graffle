@@ -1,8 +1,8 @@
-import { serveSchema } from '#test/lib/serveSchema'
-import { schema } from '#test/schema/pokemon/schema'
 import { Graffle } from '#graffle'
 import * as FS from 'node:fs/promises'
 import * as Path from 'node:path'
+import { schema } from '../../tests/_/fixtures/schemas/pokemon/schema.js'
+import { serveSchema } from '../../tests/_/lib/serveSchema.js'
 import { deleteFiles } from '../lib/deleteFiles.js'
 import { directories, readExampleFiles, runExample } from './helpers.js'
 
