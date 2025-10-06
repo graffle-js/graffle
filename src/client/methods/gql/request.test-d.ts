@@ -1,7 +1,7 @@
-import type { Context } from '#/context/$'
-import { assertType } from '#/lib/assert-equal'
-import { undefinedAs } from '#/lib/prelude'
 import type { Grafaid } from '#lib/grafaid'
+import type { Context } from '#src/context/$.js'
+import { assertType } from '#src/lib/assert-equal.js'
+import { undefinedAs } from '#src/lib/prelude.js'
 import { ATransport, RequiredConfigurationTransportA, RequiredConfigurationTransportB } from '#test/fixtures/transports'
 import { g0 } from '#test/helpers'
 

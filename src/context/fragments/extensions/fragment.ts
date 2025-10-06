@@ -1,8 +1,8 @@
-import { type EmptyArray, emptyArray, emptyObject } from '#/lib/prelude'
+import { type EmptyArray, emptyArray, emptyObject } from '#src/lib/prelude.js'
 import type { EmptyObject } from 'type-fest'
 import type { Extension } from './dataType/$.js'
 
-export * from '#/client/methods/transport'
+export * from '#src/client/methods/transport.js'
 export * from './reducers/addAndApplyMany.js'
 export * from './reducers/addAndApplyOne.js'
 

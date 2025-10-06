@@ -1,4 +1,4 @@
-import { _ } from '#/lib/prelude'
+import { _ } from '#src/lib/prelude.js'
 import { describe, expectTypeOf, test } from 'vitest'
 import { Configurator } from '../../configurator/configurator.js'
 import type { initialInput } from '../_.test-helpers.js'

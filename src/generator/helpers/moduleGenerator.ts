@@ -1,5 +1,5 @@
-import { markdownToJsDoc } from '#/lib/md-jsdoc/md-jsdoc'
-import { casesExhausted } from '#/lib/prelude'
+import { markdownToJsDoc } from '#src/lib/md-jsdoc/md-jsdoc.js'
+import { casesExhausted } from '#src/lib/prelude.js'
 import { camelCase, kebabCase, pascalCase, snakeCase } from 'es-toolkit'
 import fs from 'node:fs'
 import path from 'node:path'

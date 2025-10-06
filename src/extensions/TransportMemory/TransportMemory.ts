@@ -1,9 +1,9 @@
-import { print } from '#/lib/grafaid/document'
-import { execute } from '#/lib/grafaid/execute'
-import type { RequestPipeline } from '#/requestPipeline/RequestPipeline'
 import { Extension } from '#graffle/extension'
 import type { Anyware } from '#lib/anyware'
 import type { Grafaid } from '#lib/grafaid'
+import { print } from '#src/lib/grafaid/document.js'
+import { execute } from '#src/lib/grafaid/execute.js'
+import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
 
 // ----------------------------
 // Configuration

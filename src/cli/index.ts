@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-import { type ConfigInit, ImportFormat, OutputCase } from '#/generator/config/configInit'
-import { toAbsolutePath } from '#/lib/fsp'
-import { isError, urlParseSafe } from '#/lib/prelude'
+import { type ConfigInit, ImportFormat, OutputCase } from '#src/generator/config/configInit.js'
+import { toAbsolutePath } from '#src/lib/fsp.js'
+import { isError, urlParseSafe } from '#src/lib/prelude.js'
 import { Command } from '@molt/command'
 import * as Path from 'node:path'
 import { z } from 'zod'

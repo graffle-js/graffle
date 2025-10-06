@@ -1,4 +1,4 @@
-import type { Deferred, MaybePromise } from '#/lib/prelude'
+import type { Deferred, MaybePromise } from '#src/lib/prelude.js'
 import type { Simplify } from 'type-fest'
 import type { Pipeline } from '../$$.js'
 import type { ResultSuccess } from '../Result.js'

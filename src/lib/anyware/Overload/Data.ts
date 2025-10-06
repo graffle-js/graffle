@@ -1,4 +1,4 @@
-import type { DiscriminantPropertyValue } from '#/lib/prelude'
+import type { DiscriminantPropertyValue } from '#src/lib/prelude.js'
 import type { Configurator } from '../../configurator/configurator.js'
 import type { StepDefinition } from '../StepDefinition.js'
 

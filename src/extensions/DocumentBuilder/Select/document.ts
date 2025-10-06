@@ -1,5 +1,5 @@
-import type { AssertExtendsObject, FirstNonUnknownNever, Values } from '#/lib/prelude'
 import { Grafaid } from '#lib/grafaid'
+import type { AssertExtendsObject, FirstNonUnknownNever, Values } from '#src/lib/prelude.js'
 import type { OperationTypeNode } from 'graphql'
 import type { Select } from './$.js'
 import type { DefaultContext } from './context.js'

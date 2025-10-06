@@ -1,4 +1,4 @@
-import { Configurator } from '#/lib/configurator/configurator'
+import { Configurator } from '#src/lib/configurator/configurator.js'
 import type { Simplify } from 'type-fest'
 import { expect, expectTypeOf, test } from 'vitest'
 import { contextEmpty } from '../../../$$.js'

@@ -1,7 +1,7 @@
 // todo jsdoc
-import { Code } from '#/lib/Code'
-import { entries, pick, values } from '#/lib/prelude'
 import { Tex } from '#lib/tex'
+import { Code } from '#src/lib/Code.js'
+import { entries, pick, values } from '#src/lib/prelude.js'
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { importUtilities } from '../helpers/pathHelpers.js'

@@ -1,5 +1,5 @@
-import type { Configurator } from '#/lib/configurator/configurator'
 import type { Anyware } from '#lib/anyware'
+import type { Configurator } from '#src/lib/configurator/configurator.js'
 
 export interface Data<
   $Name extends string = string,

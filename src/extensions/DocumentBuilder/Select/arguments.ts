@@ -1,4 +1,4 @@
-import { type DeepObjectValue, mapEntriesDeep } from '#/lib/object-utils'
+import { type DeepObjectValue, mapEntriesDeep } from '#src/lib/object-utils.js'
 import { Var } from '../var/$.js'
 import type { DefaultContext } from './context.js'
 

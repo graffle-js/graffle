@@ -1,4 +1,4 @@
-import { casesExhausted, createDeferred, debug } from '#/lib/prelude'
+import { casesExhausted, createDeferred, debug } from '#src/lib/prelude.js'
 import type { Errors } from '../../errors/$.js'
 import { ContextualError } from '../../errors/ContextualError.js'
 import type { InterceptorGeneric } from '../Interceptor/Interceptor.js'

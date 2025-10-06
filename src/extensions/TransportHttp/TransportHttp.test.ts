@@ -1,5 +1,5 @@
-import { ACCEPT_REC, CONTENT_TYPE_REC } from '#/lib/grafaid/http/http'
 import { GraffleBare } from '#graffle/presets/bare'
+import { ACCEPT_REC, CONTENT_TYPE_REC } from '#src/lib/grafaid/http/http.js'
 import { createGraphQLResponse, createGraphQLResponseData, test as testBase } from '#test/helpers'
 import { serveSchema } from '#test/lib/serveSchema'
 import { describe, expect, expectTypeOf } from 'vitest'

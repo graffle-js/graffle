@@ -1,4 +1,4 @@
-import { Configurator as C } from '#/lib/configurator/configurator'
+import { Configurator as C } from '#src/lib/configurator/configurator.js'
 import type { Transports } from '../../transports/$.js'
 
 /**

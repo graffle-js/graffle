@@ -1,4 +1,4 @@
-import type { TypedFullDocument } from '#/lib/grafaid/typed-full-document/$'
+import type { TypedFullDocument } from '#src/lib/grafaid/typed-full-document/$.js'
 import { Test } from '@wollybeard/kit/test'
 import { expect, test } from 'vitest'
 import { Possible } from '../__tests__/fixtures/possible/$.js'

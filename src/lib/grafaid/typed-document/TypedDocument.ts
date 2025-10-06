@@ -1,4 +1,4 @@
-import { type HasKeys, type IsHasIndexType } from '#/lib/prelude'
+import { type HasKeys, type IsHasIndexType } from '#src/lib/prelude.js'
 import type { DocumentTypeDecoration } from '@graphql-typed-document-node/core'
 import { type DocumentNode, type TypedQueryDocumentNode } from 'graphql'
 import type { HasRequiredKeys, IsNever, IsUnknown } from 'type-fest'

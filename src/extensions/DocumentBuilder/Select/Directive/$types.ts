@@ -1,4 +1,4 @@
-import type { Schema } from '#/types/Schema/$'
+import type { Schema } from '#src/types/Schema/$.js'
 import type { Include, Skip } from './$$.js'
 
 export interface Definition {

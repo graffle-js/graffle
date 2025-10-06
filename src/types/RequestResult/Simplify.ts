@@ -1,5 +1,5 @@
-import type { ContextEmpty } from '#/context/ContextEmpty'
-import type { AnyAndUnknownToNever } from '#/lib/prelude'
+import type { ContextEmpty } from '#src/context/ContextEmpty.js'
+import type { AnyAndUnknownToNever } from '#src/lib/prelude.js'
 
 export type SimplifyWithEmptyContext<$Type> = Simplify<ContextEmpty, $Type>
 

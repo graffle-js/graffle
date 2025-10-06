@@ -1,4 +1,4 @@
-import { type AnyAndUnknownToNever, type EmptyObject, emptyObject } from '#/lib/prelude'
+import { type AnyAndUnknownToNever, type EmptyObject, emptyObject } from '#src/lib/prelude.js'
 import { String } from '../../StandardTypes/scalar.js'
 import type { Mapper } from './codec.js'
 import type { Scalar } from './Scalar.js'

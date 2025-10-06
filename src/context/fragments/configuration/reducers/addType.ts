@@ -1,4 +1,4 @@
-import type { Configurator } from '#/lib/configurator/configurator'
+import type { Configurator } from '#src/lib/configurator/configurator.js'
 import type { Context } from '../../../context.js'
 import { createEntry } from '../createEntry.js'
 import type { CreateEntry } from '../createEntry.js'

@@ -1,1 +1,1 @@
-export { Throws } from '#/extensions/Throws/Throws'
+export { Throws } from '#src/extensions/Throws/Throws.js'

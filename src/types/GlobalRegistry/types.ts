@@ -1,7 +1,7 @@
-import type { Values } from '#/lib/prelude'
-import type { TSErrorDescriptive } from '#/lib/ts-error'
 import type { Schema, TypeFunction } from '#graffle/utilities-for-generated'
 import type { ConfigManager } from '#lib/config-manager'
+import type { Values } from '#src/lib/prelude.js'
+import type { TSErrorDescriptive } from '#src/lib/ts-error.js'
 import type { IsNever } from 'type-fest'
 
 interface ZeroClient extends Client {

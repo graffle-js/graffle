@@ -1,4 +1,4 @@
-import { Generator } from '#/generator/$'
+import { Generator } from '#src/generator/$.js'
 import { TestSchemas } from '#test/fixtures/schemas/$'
 
 const generate = async (

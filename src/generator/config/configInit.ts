@@ -1,5 +1,5 @@
-import type { Fs } from '#/lib/fsp'
 import type { Grafaid } from '#lib/grafaid'
+import type { Fs } from '#src/lib/fsp.js'
 import type { IntrospectionOptions } from 'graphql'
 import type { Extension } from '../extension/types.js'
 

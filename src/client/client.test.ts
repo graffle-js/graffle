@@ -1,4 +1,4 @@
-import { type ContextEmpty, contextEmpty } from '#/context/ContextEmpty'
+import { type ContextEmpty, contextEmpty } from '#src/context/ContextEmpty.js'
 import { expect, expectTypeOf, test } from 'vitest'
 import { create } from './client.js'
 

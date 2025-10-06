@@ -1,5 +1,5 @@
-import { type GetKeyOr } from '#/lib/prelude'
-import type { Schema } from '#/types/Schema/$'
+import { type GetKeyOr } from '#src/lib/prelude.js'
+import type { Schema } from '#src/types/Schema/$.js'
 import type { Select } from '../Select/$.js'
 import type { OutputObjectLike } from './OutputObjectLike.js'
 

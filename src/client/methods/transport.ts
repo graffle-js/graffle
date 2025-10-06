@@ -1,7 +1,7 @@
-import type { Context } from '#/context/context'
-import type { ContextTransports, ContextTransportsNonEmpty } from '#/context/fragments/transports/fragment'
-import type { AddMany } from '#/context/fragments/transports/reducers/addMany'
-import type { Exact, Objekt, StringKeyof } from '#/lib/prelude'
+import type { Context } from '#src/context/context.js'
+import type { ContextTransports, ContextTransportsNonEmpty } from '#src/context/fragments/transports/fragment.js'
+import type { AddMany } from '#src/context/fragments/transports/reducers/addMany.js'
+import type { Exact, Objekt, StringKeyof } from '#src/lib/prelude.js'
 import { Transports } from '../../context/fragments/transports/$.js'
 import type { Client } from '../client.js'
 

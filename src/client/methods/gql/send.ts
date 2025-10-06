@@ -1,5 +1,5 @@
-import { isString, type SimplifyNullable } from '#/lib/prelude'
 import type { Grafaid } from '#lib/grafaid'
+import { isString, type SimplifyNullable } from '#src/lib/prelude.js'
 import type { HandleOutput } from '../../handle.js'
 
 // dprint-ignore

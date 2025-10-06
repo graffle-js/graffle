@@ -1,5 +1,5 @@
-import type { Configurator } from '#/lib/configurator/configurator'
-import { type Tuple, type UnionIgnoreAnyOrUnknown, type Writeable } from '#/lib/prelude'
+import type { Configurator } from '#src/lib/configurator/configurator.js'
+import { type Tuple, type UnionIgnoreAnyOrUnknown, type Writeable } from '#src/lib/prelude.js'
 import type { Context } from '../../../context.js'
 import { Configuration } from '../../configuration/$.js'
 import { Properties } from '../../properties/$.js'

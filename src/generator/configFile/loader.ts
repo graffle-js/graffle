@@ -1,7 +1,7 @@
-import { isPathToADirectory, toAbsolutePath } from '#/lib/fsp'
-import { importFirst } from '#/lib/import-first'
-import { isError } from '#/lib/prelude'
 import { Errors } from '#lib/errors'
+import { isPathToADirectory, toAbsolutePath } from '#src/lib/fsp.js'
+import { importFirst } from '#src/lib/import-first.js'
+import { isError } from '#src/lib/prelude.js'
 import * as Path from 'node:path'
 import { type Builder, isBuilder } from './builder.js'
 

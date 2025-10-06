@@ -1,5 +1,5 @@
-import { shallowMergeDefaults } from '#/lib/prelude'
-import { Schema } from '#/types/Schema/$'
+import { shallowMergeDefaults } from '#src/lib/prelude.js'
+import { Schema } from '#src/types/Schema/$.js'
 import type { Definition } from './$types.js'
 
 export const Include: Definition = {

@@ -1,5 +1,5 @@
-import type { _, Tuple } from '#/lib/prelude'
 import type { ConfigManager } from '#lib/config-manager'
+import type { _, Tuple } from '#src/lib/prelude.js'
 import type { Writable } from 'type-fest'
 import { Configurator } from '../../configurator/configurator.js'
 import { createMutableBuilder } from '../../mutableBuilder.js'

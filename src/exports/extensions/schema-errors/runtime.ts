@@ -1,1 +1,1 @@
-export { SchemaErrors } from '#/extensions/SchemaErrors/runtime'
+export { SchemaErrors } from '#src/extensions/SchemaErrors/runtime.js'

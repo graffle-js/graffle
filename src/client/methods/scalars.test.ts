@@ -1,5 +1,5 @@
-import { contextEmpty } from '#/context/ContextEmpty'
 import { type GlobalRegistry } from '#graffle/utilities-for-generated'
+import { contextEmpty } from '#src/context/ContextEmpty.js'
 import { AScalar, BScalar } from '#test/fixtures/scalars'
 import { g0, test } from '#test/helpers'
 import { expect, expectTypeOf } from 'vitest'

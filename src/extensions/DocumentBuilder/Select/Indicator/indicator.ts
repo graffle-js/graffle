@@ -1,4 +1,4 @@
-import type { UnionExpanded } from '#/lib/prelude'
+import type { UnionExpanded } from '#src/lib/prelude.js'
 import type { Simplify } from 'type-fest'
 import type { Directive } from '../$$.js'
 import { isNegativeIndicator, type Negative } from './negative.js'

@@ -1,9 +1,9 @@
+import { Extension } from '#graffle/extension'
 import {
   propertiesComputerParameters,
   propertiesComputerPreflight$Func,
   propertiesStatic1,
-} from '#/context/fragments/properties/_tests/_fixtures'
-import { Extension } from '#graffle/extension'
+} from '#src/context/fragments/properties/_tests/_fixtures.js'
 import { ATransport, ATransportBuilder } from '#test/fixtures/transports'
 import { test } from '#test/helpers'
 import { describe, expect, expectTypeOf } from 'vitest'

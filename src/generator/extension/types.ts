@@ -1,5 +1,5 @@
-import type { Code } from '#/lib/Code'
 import type { Grafaid } from '#lib/grafaid'
+import type { Code } from '#src/lib/Code.js'
 import type { Config } from '../config/config.js'
 
 export interface Extension {

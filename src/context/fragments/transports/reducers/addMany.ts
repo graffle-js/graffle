@@ -1,6 +1,6 @@
-import type { Tuple, Writeable } from '#/lib/prelude'
-import type { RequestPipeline } from '#/requestPipeline/RequestPipeline'
 import type { Anyware } from '#lib/anyware'
+import type { Tuple, Writeable } from '#src/lib/prelude.js'
+import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
 import type { Transport } from '../dataType/$.js'
 import type { ContextFragment, ContextTransports_Configurations, ContextTransports_Registry } from '../fragment.js'
 

@@ -1,6 +1,6 @@
-import type { ContextEmpty } from '#/context/ContextEmpty'
-import type { Add } from '#/context/fragments/scalars/fragment'
-import { assertEqual } from '#/lib/assert-equal'
+import type { ContextEmpty } from '#src/context/ContextEmpty.js'
+import type { Add } from '#src/context/fragments/scalars/fragment.js'
+import { assertEqual } from '#src/lib/assert-equal.js'
 import type { Schema } from '../Schema/$.js'
 import type { _SimplifyExcept, Simplify, SimplifyWithEmptyContext } from './Simplify.js'
 

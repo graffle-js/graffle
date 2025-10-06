@@ -2,12 +2,12 @@
 // todo: on union fields, JSDoc that mentions the syntax `on*`
 
 // todo import from '../../extensions/DocumentBuilder/kit/$.js'
-import { Code } from '#/lib/Code'
-import { analyzeArgsNullability } from '#/lib/grafaid/schema/args'
-import { entries, pick, values } from '#/lib/prelude'
-import { borderThin } from '#/lib/tex/tex'
 import { Grafaid } from '#lib/grafaid'
 import { Tex } from '#lib/tex'
+import { Code } from '#src/lib/Code.js'
+import { analyzeArgsNullability } from '#src/lib/grafaid/schema/args.js'
+import { entries, pick, values } from '#src/lib/prelude.js'
+import { borderThin } from '#src/lib/tex/tex.js'
 import { DocumentBuilderKit } from '../../extensions/DocumentBuilder/$.js'
 import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'

@@ -1,4 +1,4 @@
-import { renderName } from '#/generator/helpers/render'
+import { renderName } from '#src/generator/helpers/render.js'
 import { entries, isString, toArray } from './prelude.js'
 import { linesPrepend, linesTrim } from './tex/tex.js'
 

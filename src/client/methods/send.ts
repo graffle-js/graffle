@@ -1,5 +1,5 @@
-import type { SimplifyNullable } from '#/lib/prelude'
 import type { Grafaid } from '#lib/grafaid'
+import type { SimplifyNullable } from '#src/lib/prelude.js'
 import type { UnionToTuple } from 'type-fest'
 import type { TypedFullDocument } from '../../lib/grafaid/typed-full-document/$.js'
 import type { HandleOutput } from '../handle.js'

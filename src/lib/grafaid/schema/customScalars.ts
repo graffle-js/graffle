@@ -1,4 +1,4 @@
-import { casesExhausted } from '#/lib/prelude'
+import { casesExhausted } from '#src/lib/prelude.js'
 import {
   getNamedType,
   type GraphQLArgument,

@@ -1,7 +1,7 @@
 // import { expectTypeOf } from 'vitest'
 import { Graffle } from '#graffle'
 import { test } from '#test/helpers'
-// import { Transport } from '#/types/Transport'
+// import { Transport } from '#src/types/Transport.js'
 
 // test(`anyware hooks are typed to memory transport`, () => {
 //   Graffle.create({ schema }).anyware(async ({ encode }) => {

@@ -1,7 +1,7 @@
-import type { Configurator } from '#/lib/configurator/configurator'
-import { type EmptyObject, emptyObject } from '#/lib/prelude'
-import type { RequestPipeline } from '#/requestPipeline/RequestPipeline'
-import { requestPipelineBaseDefinition } from '#/requestPipeline/RequestPipeline'
+import type { Configurator } from '#src/lib/configurator/configurator.js'
+import { type EmptyObject, emptyObject } from '#src/lib/prelude.js'
+import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
+import { requestPipelineBaseDefinition } from '#src/requestPipeline/RequestPipeline.js'
 import type { Transport } from './dataType/$.js'
 
 export interface ContextTransportsEmpty extends ContextTransports {

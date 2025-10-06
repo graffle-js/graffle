@@ -1,4 +1,4 @@
-import type { Tuple } from '#/lib/prelude'
+import type { Tuple } from '#src/lib/prelude.js'
 import type { Result } from '../Result.js'
 import type { PipelineDefinition } from './$.js'
 

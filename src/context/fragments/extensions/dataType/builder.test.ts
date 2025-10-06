@@ -1,5 +1,5 @@
-import { assertExtends } from '#/lib/assert-equal'
-import { Configurator } from '#/lib/configurator/configurator'
+import { assertExtends } from '#src/lib/assert-equal.js'
+import { Configurator } from '#src/lib/configurator/configurator.js'
 import { describe, expect, expectTypeOf, test } from 'vitest'
 import type { Context } from '../../../context.js'
 import { type Chain, create } from './builder.js'

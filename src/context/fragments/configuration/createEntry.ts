@@ -1,4 +1,4 @@
-import type { Configurator } from '#/lib/configurator/configurator'
+import type { Configurator } from '#src/lib/configurator/configurator.js'
 
 export const createEntry = <
   $Configurator extends Configurator,

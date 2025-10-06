@@ -22,7 +22,7 @@
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
     "paths": {
-      "#/*": ["./src/*.ts"],
+      "#src/*": ["./src/*"],
       "#graffle": ["./src/exports/index.ts"],
       "#graffle/client": ["./src/exports/client.ts"],
       "#graffle/extension": ["./src/exports/extension.ts"],

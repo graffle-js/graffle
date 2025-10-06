@@ -172,7 +172,8 @@
     "zod": "^3.24.3"
   },
   "imports": {
-    "#/*": "./build/*.js",
+    "#src/*.js": "./build/*.js",
+    "#src/*": "./build/*",
     "#graffle": "./build/exports/index.js",
     "#graffle/client": "./build/exports/client.js",
     "#graffle/extension": "./build/exports/extension.js",
@@ -183,6 +184,12 @@
     "#graffle/generator-helpers/standard-scalar-types": "./build/types/Schema/StandardTypes/scalar.js",
     "#graffle/extensions/transport-http": "./build/exports/extensions/transport-http/runtime.js",
     "#graffle/extensions/document-builder": "./build/exports/extensions/document-builder/runtime.js",
+    "#graffle/extension-exports": "./build/exports/extension_exports.js",
+    "#graffle/presets/bare": "./build/exports/presets/bare.js",
+    "#graffle/presets/basic": "./build/exports/presets/basic.js",
+    "#graffle/presets/minimal": "./build/exports/presets/minimal.js",
+    "#test/*": "./tests/_/*.js",
+    "#test/schema/*": "./tests/_/fixtures/schemas/*.js",
     "#lib/anyware": "./build/lib/anyware/$.js",
     "#lib/config-manager": "./build/lib/config-manager/$.js",
     "#lib/errors": "./build/lib/errors/$.js",

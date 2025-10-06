@@ -1,8 +1,8 @@
-import { type ContextEmpty, contextEmpty } from '#/context/ContextEmpty'
+import { type ContextEmpty, contextEmpty } from '#src/context/ContextEmpty.js'
 import {
   type ContextFragmentTransportsEmpty,
   contextFragmentTransportsEmpty,
-} from '#/context/fragments/transports/fragment'
+} from '#src/context/fragments/transports/fragment.js'
 import { ATransport, ATransportBuilder, BTransport } from '#test/fixtures/transports'
 import { test } from '#test/helpers'
 import { describe, expect, expectTypeOf } from 'vitest'

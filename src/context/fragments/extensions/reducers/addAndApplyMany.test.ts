@@ -1,6 +1,6 @@
-import { pipe } from '#/lib/prelude'
 import { Extension } from '#graffle/extension'
 import { Configurator } from '#graffle/extension-exports'
+import { pipe } from '#src/lib/prelude.js'
 import { ATransport } from '#test/fixtures/transports'
 import { test } from '#test/helpers'
 import { describe, expect, expectTypeOf } from 'vitest'

@@ -1,11 +1,11 @@
-import type { Context } from '#/context/context'
-import { type ContextEmpty, contextEmpty } from '#/context/ContextEmpty'
+import type { Context } from '#src/context/context.js'
+import { type ContextEmpty, contextEmpty } from '#src/context/ContextEmpty.js'
 import {
   propertiesComputerParameters,
   propertiesComputerPreflight,
   propertiesComputerPreflight$Func,
   propertiesStatic1,
-} from '#/context/fragments/properties/_tests/_fixtures'
+} from '#src/context/fragments/properties/_tests/_fixtures.js'
 import { test } from '#test/helpers'
 import { describe, expect, expectTypeOf } from 'vitest'
 import { type Configuration } from '../../context/fragments/configuration/$.js'

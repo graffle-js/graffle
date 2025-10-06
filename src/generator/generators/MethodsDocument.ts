@@ -1,6 +1,6 @@
 // todo remove use of Utils.Aug when schema errors not in use
 // todo jsdoc
-import { Code } from '#/lib/Code'
+import { Code } from '#src/lib/Code.js'
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { importUtilities } from '../helpers/pathHelpers.js'

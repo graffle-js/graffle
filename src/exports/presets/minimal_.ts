@@ -1,12 +1,12 @@
-import { type Client, createConstructorWithContext } from '#/client/client'
-import { type Context as BaseContext } from '#/context/context'
-import { contextEmpty } from '#/context/ContextEmpty'
-import { addAndApplyMany } from '#/context/fragments/extensions/fragment'
-import type { PartialOrUndefined } from '#/lib/prelude'
 import type { ConfigManager } from '#lib/config-manager'
+import { type Client, createConstructorWithContext } from '#src/client/client.js'
+import { type Context as BaseContext } from '#src/context/context.js'
+import { contextEmpty } from '#src/context/ContextEmpty.js'
+import { addAndApplyMany } from '#src/context/fragments/extensions/fragment.js'
+import type { PartialOrUndefined } from '#src/lib/prelude.js'
 import { TransportHttp } from '../extensions/transport-http/runtime.js'
 
-export { type Client } from '#/client/client'
+export { type Client } from '#src/client/client.js'
 
 const contextEmptyMinimal = addAndApplyMany(contextEmpty, [TransportHttp])
 

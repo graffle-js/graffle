@@ -1,5 +1,5 @@
-import { assertEqual } from '#/lib/assert-equal'
 import { GraffleBasic } from '#graffle/presets/basic'
+import { assertEqual } from '#src/lib/assert-equal.js'
 import { test } from '#test/helpers'
 import type { IntrospectionQuery } from 'graphql'
 import { expect } from 'vitest'

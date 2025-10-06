@@ -1,4 +1,4 @@
-import type { Schema } from '#/types/Schema/$'
+import type { Schema } from '#src/types/Schema/$.js'
 import { DateScalar } from '#test/fixtures/scalars'
 import { expectTypeOf, test } from 'vitest'
 import { Possible } from '../__tests__/fixtures/possible/$.js'

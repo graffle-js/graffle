@@ -1,4 +1,4 @@
-import { casesExhausted, createDeferred, debugSub, errorFromMaybeError } from '#/lib/prelude'
+import { casesExhausted, createDeferred, debugSub, errorFromMaybeError } from '#src/lib/prelude.js'
 import { Errors } from '../../errors/$.js'
 import type { InterceptorGeneric } from '../Interceptor/Interceptor.js'
 import type { Pipeline } from '../Pipeline/Pipeline.js'

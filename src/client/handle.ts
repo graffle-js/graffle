@@ -1,23 +1,23 @@
-import type { Context } from '#/context/context'
-import type { ErrorCategory } from '#/context/fragments/configuration/output/configuration'
+import type { Normalized } from '#graffle'
+import type { Anyware } from '#lib/anyware'
+import { Errors } from '#lib/errors'
+import type { Grafaid } from '#lib/grafaid'
+import type { Context } from '#src/context/context.js'
+import type { ErrorCategory } from '#src/context/fragments/configuration/output/configuration.js'
 import {
   isOutputTraditionalGraphQLOutput,
   type OutputChannelConfig,
   readErrorCategoryOutputChannel,
-} from '#/context/fragments/configuration/output/configuration'
-import type { SomeObjectData } from '#/lib/grafaid/graphql'
-import type { GraphQLExecutionResultError } from '#/lib/grafaid/graphql'
+} from '#src/context/fragments/configuration/output/configuration.js'
+import type { SomeObjectData } from '#src/lib/grafaid/graphql.js'
+import type { GraphQLExecutionResultError } from '#src/lib/grafaid/graphql.js'
 import {
   type ExcludeNull,
   type ExcludeNullAndUndefined,
   type ExcludeUndefined,
   type GetOrNever,
   type Values,
-} from '#/lib/prelude'
-import type { Normalized } from '#graffle'
-import type { Anyware } from '#lib/anyware'
-import { Errors } from '#lib/errors'
-import type { Grafaid } from '#lib/grafaid'
+} from '#src/lib/prelude.js'
 import type { GraphQLError } from 'graphql'
 import type { Simplify } from 'type-fest'
 import type { RequestPipeline } from '../requestPipeline/$.js'

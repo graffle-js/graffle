@@ -1,5 +1,5 @@
-import { type ExcludeNull } from '#/lib/prelude'
 import type { Grafaid } from '#lib/grafaid'
+import { type ExcludeNull } from '#src/lib/prelude.js'
 import type { OperationTypeNode } from 'graphql'
 import type { OutputObjectLike } from './OutputObjectLike.js'
 

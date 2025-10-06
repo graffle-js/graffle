@@ -1,4 +1,4 @@
-import type { SchemaDrivenDataMap } from '#/types/SchemaDrivenDataMap/$'
+import type { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
 import type { OperationContext } from './context.js'
 
 export type GraphQLPreOperationMapper<

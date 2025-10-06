@@ -1,6 +1,6 @@
-import { Code } from '#/lib/Code'
 import { Grafaid } from '#lib/grafaid'
 import { Tex } from '#lib/tex'
+import { Code } from '#src/lib/Code.js'
 import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'

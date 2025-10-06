@@ -1,7 +1,7 @@
-import type { Context } from '#/context/context'
-import type { RequestPipeline } from '#/requestPipeline/RequestPipeline'
 import { Anyware } from '#lib/anyware'
 import type { Grafaid } from '#lib/grafaid'
+import type { Context } from '#src/context/context.js'
+import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
 import { handleOutput } from './handle.js'
 
 export const sendRequest = async (context: Context, analyzedRequest: Grafaid.RequestAnalyzedInput) => {

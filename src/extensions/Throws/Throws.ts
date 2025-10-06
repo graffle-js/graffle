@@ -1,4 +1,4 @@
-// import type { Context } from '#/context/context'
+// import type { Context } from '#src/context/context.js'
 import { Extension } from '#graffle/extension'
 import type { GraffleKit } from '#graffle/kit'
 import type { Properties } from '../../context/fragments/properties/$.js'

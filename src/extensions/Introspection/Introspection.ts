@@ -1,6 +1,6 @@
-import type { HandleOutput } from '#/client/handle'
 import { Extension } from '#graffle/extension'
 import type { Context } from '#graffle/utilities-for-generated'
+import type { HandleOutput } from '#src/client/handle.js'
 import { getIntrospectionQuery, type IntrospectionQuery } from 'graphql'
 import type { GraphQLSchema, IntrospectionOptions } from 'graphql'
 import type { Configuration } from '../../context/fragments/configuration/$.js'
