@@ -4,9 +4,9 @@
 // todo import from '../../extensions/DocumentBuilder/kit/$.js'
 import { Grafaid } from '#lib/grafaid'
 import { Tex } from '#lib/tex'
+import { Obj } from '@wollybeard/kit'
 import { Code } from '#src/lib/Code.js'
 import { analyzeArgsNullability } from '#src/lib/grafaid/schema/args.js'
-import { entries, pick, values } from '#src/lib/prelude.js'
 import { borderThin } from '#src/lib/tex/tex.js'
 import { DocumentBuilderKit } from '../../extensions/DocumentBuilder/$.js'
 import type { Config } from '../config/config.js'
@@ -34,7 +34,7 @@ export const ModuleGeneratorSelectionSets = createModuleGenerator(
   `SelectionSets`,
   import.meta.url,
   ({ config, code }) => {
-    const kindMap = pick(config.schema.kindMap.list, [
+    const kindMap = Obj.pick(config.schema.kindMap.list, [
       `Root`,
       `Enum`,
       `InputObject`,
@@ -42,7 +42,7 @@ export const ModuleGeneratorSelectionSets = createModuleGenerator(
       `Union`,
       `Interface`,
     ])
-    const kindEntries = entries(kindMap).filter(_ => _[1].length > 0)
+    const kindEntries = Obj.entries(kindMap).filter(_ => _[1].length > 0)
     const kinds = kindEntries.map(_ => _[1])
 
     code(importUtilities(config))
@@ -174,14 +174,14 @@ const InputObject = createCodeGenerator<{ type: Grafaid.Schema.InputObjectType }
       tsDoc: getTsDocContents(config, type),
       name: type.name,
       parameters: $ContextTypeParameter,
-      block: values(type.getFields()).map(field => getInputFieldLike(config, field)),
+      block: Obj.values(type.getFields()).map(field => getInputFieldLike(config, field)),
     }))
   },
 )
 
 const Interface = createCodeGenerator<{ type: Grafaid.Schema.InterfaceType }>(
   ({ config, type, code }) => {
-    const directFields = values(type.getFields())
+    const directFields = Obj.values(type.getFields())
     const fieldsRendered = directFields.map(field => {
       return H.outputFieldReference(field.name, `${renderName(type)}.${renderName(field)}`)
     }).join(`\n`)

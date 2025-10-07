@@ -1,8 +1,9 @@
 import { Grafaid } from '#lib/grafaid'
 import { Tex } from '#lib/tex'
+import { Obj } from '@wollybeard/kit'
 import { CodePusher } from '#src/lib/code-pusher/index.js'
 import { Code } from '#src/lib/Code.js'
-import { entries, isObjectEmpty, values } from '#src/lib/prelude.js'
+import { isObjectEmpty } from '#src/lib/prelude.js'
 import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
 import { getKindDocUrl, markdownTable } from '../helpers/jsdoc.js'
@@ -271,7 +272,7 @@ const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.I
   fieldsCode()
 
   // Generate field interfaces
-  for (const field of values(inputObject.getFields())) {
+  for (const field of Obj.values(inputObject.getFields())) {
     const namedType = Grafaid.Schema.getNamedType(field.type)
 
     fieldsCode(Code.tsInterface({
@@ -307,7 +308,7 @@ const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.I
   namespaceCode()
 
   const interfaceFields = Object.fromEntries(
-    values(inputObject.getFields()).map((field) => {
+    Obj.values(inputObject.getFields()).map((field) => {
       const name = field.name
       // Always use original name - export alias handles reserved keywords
       const fieldTypeReference = `$Fields.${name}`
@@ -359,7 +360,7 @@ const generateSchemaNamespaceModule = (config: Config, kindMap: Grafaid.Schema.K
     ...kindMap.ScalarCustom.map(_ => [_.name, `$Types.${_.name}`] as const),
     ...kindMap.ScalarStandard.map(_ => [_.name, `$Types.${_.name}`] as const),
   ]
-  const operationsAvailable = entries(config.schema.kindMap.index.Root).filter(_ => _[1] !== null).map(_ => _[0])
+  const operationsAvailable = Obj.entries(config.schema.kindMap.index.Root).filter(_ => _[1] !== null).map(_ => _[0])
 
   const schema: Code.TermObject = {
     name: `$$Data.Name`,
@@ -802,7 +803,7 @@ const generateTypeModule = (
   fieldsCode()
 
   // Regular fields
-  for (const field of values(type.getFields())) {
+  for (const field of Obj.values(type.getFields())) {
     const namedType = Grafaid.Schema.getNamedType(field.type)
 
     fieldsCode(Code.tsInterface({
@@ -867,7 +868,7 @@ const generateTypeModule = (
 
   const interfaceFields = Object.fromEntries(
     [[`__typename`, `$Fields.__typename`]].concat(
-      values(type.getFields()).map((field) => {
+      Obj.values(type.getFields()).map((field) => {
         const name = field.name
         // Always use original name - export alias handles reserved keywords
         const fieldTypeReference = `$Fields.${name}`

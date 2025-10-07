@@ -1,8 +1,8 @@
 import { Grafaid } from '#lib/grafaid'
 import { Tex } from '#lib/tex'
 import { Code } from '#src/lib/Code.js'
-import { entries } from '#src/lib/prelude.js'
 import { propertyNames } from '#src/types/SchemaDrivenDataMap/SchemaDrivenDataMap.js'
+import { Obj } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
@@ -18,13 +18,13 @@ export const ModuleGeneratorSchemaDrivenDataMap = createModuleGenerator(
   `SchemaDrivenDataMap`,
   import.meta.url,
   ({ config, code }) => {
-    const rootsWithOpType = entries(config.schema.kindMap.index.Root)
+    const rootsWithOpType = Obj.entries(config.schema.kindMap.index.Root)
       .map(_ => {
         if (_[1] === null) return null
         return { operationType: _[0], objectType: _[1] }
       }).filter(_ => _ !== null)
     const kindMap: Grafaid.Schema.KindMap['list'] = getKindMap(config)
-    const kinds = entries(kindMap)
+    const kinds = Obj.entries(kindMap)
 
     code(importModuleGenerator(config, ModuleGeneratorScalar))
     code(importUtilities(config))
