@@ -1,5 +1,5 @@
 import { Grafaid } from '#lib/grafaid'
-import type { AssertExtendsObject, Values } from '#src/lib/prelude.js'
+import type { AssertExtendsObject } from '#src/lib/prelude.js'
 import type { Arr, Obj } from '@wollybeard/kit'
 import type { OperationTypeNode } from 'graphql'
 import type { Select } from './$.js'
@@ -28,11 +28,11 @@ export interface SomeDocument {
 //   ]>
 
 // dprint-ignore
-export type GetOperationNames<$Document extends SomeDocument> = Values<
+export type GetOperationNames<$Document extends SomeDocument> = Obj.values<
   {
     [$OperationType in keyof $Document]: keyof $Document[$OperationType] & string
   }
->
+>[number]
 
 // dprint-ignore
 export type GetOperationType<$Document extends SomeDocument, $Name extends string> =

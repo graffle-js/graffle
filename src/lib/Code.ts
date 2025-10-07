@@ -1,5 +1,6 @@
 import { renderName } from '#src/generator/helpers/render.js'
-import { entries, isString, toArray } from './prelude.js'
+import { Obj } from '@wollybeard/kit'
+import { isString, toArray } from './prelude.js'
 import { linesPrepend, linesTrim } from './tex/tex.js'
 
 type FieldTuple = [k: string, v: string | null, tsDoc?: string | null]
@@ -92,7 +93,7 @@ export namespace Code {
   }
 
   export const termObjectFields = (object: TermObject | DirectiveTermObject): string =>
-    entries(object)
+    Obj.entries(object)
       .map(([key, value]): [string, DirectiveField] => {
         value
         if (value === null) return [key, { $VALUE: null }]

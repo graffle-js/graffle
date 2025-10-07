@@ -2,8 +2,8 @@
 
 import SchemaBuilder from '@pothos/core'
 import SimpleObjectsPlugin from '@pothos/plugin-simple-objects'
+import { Obj } from '@wollybeard/kit'
 import { DateTimeISOResolver } from 'graphql-scalars'
-import { values } from '../../../../../src/lib/prelude.js'
 import {
   db,
   GrandparentInterfaceHierarchyMemberEnum,
@@ -333,19 +333,19 @@ const ObjectUnion = builder.simpleObject(`ObjectUnion`, {
 })
 
 const InterfaceHierarchyMemberGrandparent = builder.enumType(`GrandparentInterfaceHierarchyMember`, {
-  values: values(GrandparentInterfaceHierarchyMemberEnum),
+  values: Obj.values(GrandparentInterfaceHierarchyMemberEnum),
 })
 
 const InterfaceHierarchyMemberParent = builder.enumType(`ParentInterfaceHierarchyMember`, {
-  values: values(InterfaceParentEnum),
+  values: Obj.values(InterfaceParentEnum),
 })
 
 const InterfaceHierarchyMemberChildA = builder.enumType(`ChildAInterfaceHierarchyMember`, {
-  values: values(InterfaceChildAEnum),
+  values: Obj.values(InterfaceChildAEnum),
 })
 
 const InterfaceHierarchyMemberChildB = builder.enumType(`ChildBInterfaceHierarchyMember`, {
-  values: values(InterfaceChildBEnum),
+  values: Obj.values(InterfaceChildBEnum),
 })
 
 builder.queryType({

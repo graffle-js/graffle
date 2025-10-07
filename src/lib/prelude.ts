@@ -1,3 +1,4 @@
+import { Prom, Rec, type Ts } from '@wollybeard/kit'
 import type { HasRequiredKeys, IsAny, IsEmptyObject, IsNever, IsUnknown, Simplify } from 'type-fest'
 import type { ConfigManager } from './config-manager/$.js'
 
@@ -74,20 +75,12 @@ import type { ConfigManager } from './config-manager/$.js'
 //   )
 // }
 
-export const isRecordLikeObject = (value: unknown): value is Record<string, unknown> => {
-  return typeof value === `object` && value !== null && !Array.isArray(value)
-}
-
-export const entries = <T extends Record<string, any>>(obj: T) => Object.entries(obj) as [keyof T, T[keyof T]][]
-
-export const stringKeyEntries = <T extends Record<string, any>>(obj: T) =>
-  Object.entries(obj) as [keyof T & string, T[keyof T & string]][]
+// export const stringKeyEntries = <T extends Record<string, any>>(obj: T) =>
+//   Object.entries(obj) as [keyof T & string, T[keyof T & string]][]
 
 // dprint-ignore
-export const entriesStrict = <T extends Record<string, any>>(obj: T): { [K in keyof T]: [K, ExcludeUndefined<T[K]>] }[keyof T][] =>
-  Object.entries(obj).filter(([_, value]) => value !== undefined) as any
-
-export const values = <T extends Record<string, unknown>>(obj: T): T[keyof T][] => Object.values(obj) as T[keyof T][]
+// export const entriesStrict = <T extends Record<string, any>>(obj: T): { [K in keyof T]: [K, ExcludeUndefined<T[K]>] }[keyof T][] =>
+//   Object.entries(obj).filter(([_, value]) => value !== undefined) as any
 
 export type ExactNonEmpty<$Value, $Constraint> = IsEmptyObject<$Value> extends true ? never : Exact<$Value, $Constraint>
 // dprint-ignore
@@ -118,8 +111,6 @@ export type Narrowable = string | number | bigint | boolean | []
 
 // export type NotEmptyObject<T> = keyof T extends never ? never : T
 
-export type Values<T> = T[keyof T]
-
 export type ValuesOrEmptyObject<T> = keyof T extends never ? {} : T[keyof T]
 
 export type GetKeyOr<T, Key, Or> = Key extends keyof T ? T[Key] : Or
@@ -127,19 +118,6 @@ export type GetKeyOr<T, Key, Or> = Key extends keyof T ? T[Key] : Or
 export type As<T, U> = U extends T ? U : never
 
 export type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never
-
-export type LastOf<T> = UnionToIntersection<T extends any ? () => T : never> extends () => infer R ? R : never
-
-// // TS4.0+
-// export type Push<T extends any[], V> = [...T, V]
-
-// // TS4.1+
-// export type UnionToTuple<T, L = LastOf<T>, N = [T] extends [never] ? true : false> = true extends N ? []
-//   : Push<UnionToTuple<Exclude<T, L>>, L>
-
-// export type IsMultipleKeys<T> = IsMultiple<CountKeys<T>>
-// export type CountKeys<T> = keyof T extends never ? 0 : UnionToTuple<keyof T>['length']
-// export type IsMultiple<T> = T extends 0 ? false : T extends 1 ? false : true
 
 export type ExcludeNull<T> = Exclude<T, null>
 export type ExcludeUndefined<T> = Exclude<T, undefined>
@@ -171,13 +149,11 @@ export function assertObject(v: unknown): asserts v is object {
   if (v === null || typeof v !== `object`) throw new Error(`Expected object. Got: ${String(v)}`)
 }
 
-export type MaybePromise<T> = T | Promise<T>
-
 export const capitalizeFirstLetter = (string: string) => string.charAt(0).toUpperCase() + string.slice(1)
 
 export type SomeAsyncFunction = (...args: any[]) => Promise<any>
 
-export type SomeFunction = (...args: any[]) => MaybePromise<any>
+export type SomeFunction = (...args: any[]) => Prom.Maybe<any>
 
 export type Deferred<T> = {
   promise: Promise<T>
@@ -185,7 +161,6 @@ export type Deferred<T> = {
   resolve: (value: T) => void
   reject: (error: unknown) => void
 }
-
 export const createDeferred = <$T>(options?: { strict?: boolean }): Deferred<$T> => {
   let isResolved = false
   let resolve: (value: $T) => void
@@ -453,7 +428,7 @@ export const proxyGet = <$Target>(
         return value
       }
 
-      if (isRecordLikeObject(value)) {
+      if (Rec.is(value)) {
         return proxyGet(value, handler, [...path, property])
       }
 
@@ -520,7 +495,7 @@ export type HasOptionalProperty<$Object extends object, $Property extends keyof 
 export type Push<T extends any[], V> = [...T, V]
 
 // dprint-ignore
-export type UnionToTuple<$Union, L = LastOf<$Union>, N = [$Union] extends [never] ? true : false> =
+export type UnionToTuple<$Union, L = Ts.Union.LastOf<$Union>, N = [$Union] extends [never] ? true : false> =
   true extends N
     ? []
     : Push<UnionToTuple<Exclude<$Union, L>>, L>

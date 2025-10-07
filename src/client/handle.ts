@@ -11,7 +11,7 @@ import {
 } from '#src/context/fragments/configuration/output/configuration.js'
 import type { SomeObjectData } from '#src/lib/grafaid/graphql.js'
 import type { GraphQLExecutionResultError } from '#src/lib/grafaid/graphql.js'
-import { type ExcludeNull, type ExcludeNullAndUndefined, type ExcludeUndefined, type Values } from '#src/lib/prelude.js'
+import { type ExcludeNull, type ExcludeNullAndUndefined, type ExcludeUndefined } from '#src/lib/prelude.js'
 import type { Obj } from '@wollybeard/kit'
 import type { GraphQLError } from 'graphql'
 import type { Simplify } from 'type-fest'
@@ -195,7 +195,7 @@ type ObjMap<T = unknown> = {
 // dprint-ignore
 type IsEnvelopeWithoutErrors<$OutputConfig extends Normalized> =
   $OutputConfig['envelope']['enabled'] extends true
-    ? Values<$OutputConfig['envelope']['errors']> extends false
+    ? Obj.values<$OutputConfig['envelope']['errors']>[number] extends false
       ? true
     : false
   : false

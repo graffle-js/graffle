@@ -13,7 +13,8 @@ import {
   type URLInput as URLInputType,
 } from '#src/lib/http.js'
 import type { httpMethodGet, httpMethodPost } from '#src/lib/http.js'
-import { _, isString, type MaybePromise } from '#src/lib/prelude.js'
+import { _, isString } from '#src/lib/prelude.js'
+import type { Prom } from '@wollybeard/kit'
 import { Transport } from '../../context/fragments/transports/dataType/$.js' // TODO import from entrypoint
 
 // ----------------------------
@@ -215,7 +216,7 @@ export const TransportHttp = Extension.create(`TransportHttp`)
       })
       .exchange({
         slots: {
-          fetch: (url: string | URL, init?: RequestInit): MaybePromise<Response> => fetch(url, init),
+          fetch: (url: string | URL, init?: RequestInit): Prom.Maybe<Response> => fetch(url, init),
         },
         async run(input, slots) {
           const response = await slots.fetch(input.request.url.value, input.request)

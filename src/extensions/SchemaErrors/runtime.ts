@@ -2,7 +2,8 @@ import { Extension } from '#graffle/extension'
 import { Errors } from '#lib/errors'
 import { normalizeRequestToNode } from '#src/lib/grafaid/request.js'
 // import { type ExcludeNullAndUndefined, isString } from '#src/lib/prelude.js'
-import { isRecordLikeObject, isString } from '#src/lib/prelude.js'
+import { isString } from '#src/lib/prelude.js'
+import { Rec } from '@wollybeard/kit'
 // import type { RequestPipelineBaseInterceptor } from '../../requestPipeline/$.js'
 import { SchemaDrivenDataMap } from '../../types/SchemaDrivenDataMap/$.js'
 // import type { GeneratedExtensions } from './global.js'
@@ -38,7 +39,7 @@ export const SchemaErrors = Extension
       // const sddmNodeField = sddm.roots[rootTypeName]?.f[rootFieldName]
       // if (!sddmNodeField) return null
       // if (!isPlainObject(rootFieldValue)) return new Error(`Expected result field to be an object.`)
-      if (!isRecordLikeObject(rootFieldValue)) continue
+      if (!Rec.is(rootFieldValue)) continue
 
       // If __typename is not selected we assume that this is not a result field.
       // The extension makes sure that the __typename would have been selected if it were a result field.

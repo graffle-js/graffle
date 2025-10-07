@@ -1,4 +1,5 @@
-import type { Deferred, MaybePromise } from '#src/lib/prelude.js'
+import type { Deferred } from '#src/lib/prelude.js'
+import type { Prom } from '@wollybeard/kit'
 import type { Simplify } from 'type-fest'
 import type { Pipeline } from '../$$.js'
 import type { ResultSuccess } from '../Result.js'
@@ -81,9 +82,9 @@ export type InterceptorInput<$Input extends object = any> =
 
 export type NonRetryingInterceptorInput<$Input extends object = any> = (
   input: $Input,
-) => MaybePromise<unknown>
+) => Prom.Maybe<unknown>
 
 export type RetryingInterceptorInput<$Input extends object = any> = {
   retrying: boolean
-  run: (input: $Input) => MaybePromise<unknown>
+  run: (input: $Input) => Prom.Maybe<unknown>
 }
