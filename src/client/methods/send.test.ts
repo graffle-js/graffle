@@ -1,3 +1,4 @@
+/* oxlint-disable no-constant-condition */
 import { Graffle } from '#graffle'
 import { Var } from '#graffle/client'
 import { db } from '#test/schema/possible/db.js'
