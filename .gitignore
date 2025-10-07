@@ -12,3 +12,5 @@ bundle-stats.html
 
 # Generated GraphQL clients
 tests/e2e/github/graffle/
+examples/$/graffle/
+website/graffle/
