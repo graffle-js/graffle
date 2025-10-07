@@ -53,6 +53,8 @@ jobs:
       - name: Build Website
         working-directory: website
         run:  pnpm build
+        env:
+          NODE_OPTIONS: --max-old-space-size=8192
       - name: Save Types Cache
         uses: actions/cache/save@v4
         with:

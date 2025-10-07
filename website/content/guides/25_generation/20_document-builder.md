@@ -6,7 +6,7 @@ Generate typed GraphQL document strings at compile-time without a client instanc
 
 After running the generator, import `query`, `mutation`, or `subscription` builders from your generated code. Call methods to generate `TypedDocument.String` objects with the GraphQL string and full TypeScript types.
 
-```ts twoslash
+```ts
 import { $ } from 'graffle/extensions/document-builder'
 import { Graffle } from './graffle/$.js'
 
@@ -28,32 +28,33 @@ const doc = Graffle.query.trainerByName({
 
 The `Graffle.document()` function creates complete GraphQL documents containing multiple named operations (queries and/or mutations). This is useful when you want to define several operations in one document and execute them selectively.
 
-```ts twoslash
+```ts
 import { $ } from 'graffle/extensions/document-builder'
 import { Graffle } from './graffle/$.js'
 
 const doc = Graffle.document({
   query: {
-    getUser: {
-      user: {
-        $: { id: $('userId') },
+    getTrainer: {
+      trainerByName: {
+        $: { name: $('trainerName') },
         id: true,
         name: true,
+        class: true,
       },
     },
-    getPosts: {
-      posts: {
-        title: true,
-        content: true,
+    getPokemons: {
+      pokemons: {
+        name: true,
+        type: true,
       },
     },
   },
   mutation: {
-    updateUser: {
-      updateUser: {
-        $: { id: $('userId'), name: $('userName') },
-        id: true,
+    addTrainer: {
+      addPokemon: {
+        $: { name: $('pokemonName'), $type: $('pokemonType') },
         name: true,
+        type: true,
       },
     },
   },
@@ -64,30 +65,29 @@ const doc = Graffle.document({
 
 Use the `client.send()` method to execute documents directly without chaining from `.gql()`:
 
-```ts twoslash
+```ts
+import { $ } from 'graffle/extensions/document-builder'
 import { Graffle } from './graffle/$.js'
 
-const client = Graffle.create({
-  schema: { url: 'https://api.example.com/graphql' },
-})
+const client = Graffle.create()
 
 // Single operation - no operation name needed
 const singleOpDoc = Graffle.document({
   query: {
-    getUser: { user: { id: true, name: true } },
+    getTrainer: { trainerByName: { $: { name: $('name') }, id: true, name: true } },
   },
 })
-const user = await client.send(singleOpDoc, { userId: '123' })
+const trainer = await client.send(singleOpDoc, { name: 'Ash' })
 
 // Multiple operations - operation name required
 const multiOpDoc = Graffle.document({
   query: {
-    getUser: { user: { id: true } },
-    getPosts: { posts: { title: true } },
+    getTrainer: { trainerByName: { $: { name: $('name') }, id: true } },
+    getPokemons: { pokemons: { name: true } },
   },
 })
-const userResult = await client.send(multiOpDoc, 'getUser', { userId: '123' })
-const postsResult = await client.send(multiOpDoc, 'getPosts')
+const trainerResult = await client.send(multiOpDoc, 'getTrainer', { name: 'Ash' })
+const pokemonsResult = await client.send(multiOpDoc, 'getPokemons')
 ```
 
 ### Comparison with `.gql()`
@@ -112,7 +112,7 @@ Use `.send()` when you have a pre-built document from static builders or codegen
 
 The document builder can be configured using global defaults:
 
-```ts twoslash
+```ts
 import { staticBuilderDefaults } from 'graffle/extensions/document-builder'
 
 // Change default behavior for all queries
@@ -305,7 +305,7 @@ Graffle automatically infers GraphQL types for variables using two strategies:
 
 When using a generated client, Graffle uses Schema-Driven Data Map (SDDM) metadata to infer precise GraphQL types including nullability, list types, and custom scalars:
 
-```ts twoslash
+```ts
 import { Graffle } from './graffle/$.js'
 
 Graffle.query.trainerByName({
@@ -320,7 +320,7 @@ Graffle.query.trainerByName({
 
 When SDDM metadata is unavailable (e.g., stripped for bundle size), the same generated client falls back to inferring GraphQL types from JavaScript runtime values:
 
-```ts twoslash
+```ts
 import { Graffle } from './graffle/$.js'
 
 // Without SDDM, types are inferred from JS values:
@@ -388,13 +388,13 @@ query.trainers({ $: { limit: $(10) }, name: true })
 == Graffle
 
 ```ts
-mutation.createUser({ $: { name: 'Alice' }, id: true })
+mutation.addPokemon({ $: { name: 'Pikachu', $type: 'ELECTRIC' }, id: true, name: true, type: true })
 ```
 
 == GraphQL
 
 ```graphql
-mutation { createUser(name: "Alice") { id } }
+mutation { addPokemon(name: "Pikachu", type: ELECTRIC) { id name type } }
 ```
 
 :::
