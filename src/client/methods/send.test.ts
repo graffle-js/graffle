@@ -133,7 +133,7 @@ describe('TypedFullDocumentString', () => {
   test('send() with mixed query/mutation document and variable inference', () => {
     const doc = Possible.document({
       query: {
-        getUserWithArgs: {
+        a: {
           objectWithArgs: {
             $: {
               id: $.required(),
@@ -144,7 +144,7 @@ describe('TypedFullDocumentString', () => {
         },
       },
       mutation: {
-        updateUser: {
+        b: {
           // Mutation fields in Possible schema don't accept arguments
           idNonNull: true,
         },
@@ -157,10 +157,10 @@ describe('TypedFullDocumentString', () => {
       const client = Possible.create({ check: { preflight: false } })
 
       // Should accept 'id' and 'string' variables
-      client.send(doc, 'getUserWithArgs', { id: 'foo', string: 'bar' })
+      client.send(doc, 'a', { id: 'foo', string: 'bar' })
 
       // Mutation operation with no variables works
-      client.send(doc, 'updateUser')
+      client.send(doc, 'b')
     }
   })
 
