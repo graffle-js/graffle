@@ -1,5 +1,6 @@
 import type { HasRequiredKeys, IsAny, IsEmptyObject, IsNever, IsUnknown, Simplify } from 'type-fest'
 
+import type { Str } from '@wollybeard/kit'
 import type { ConfigManager } from './config-manager/$.js'
 
 export type RemoveIndex<T> = {
@@ -131,65 +132,6 @@ export type Exact<$Value, $Constraint> =
 //   | ($Value extends Narrowable ? $Value : never)
 
 export type Narrowable = string | number | bigint | boolean | []
-
-export type Letter = LetterLower | LetterUpper
-
-export type Digit = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
-
-export type LetterLower =
-  | 'a'
-  | 'b'
-  | 'c'
-  | 'd'
-  | 'e'
-  | 'f'
-  | 'g'
-  | 'h'
-  | 'i'
-  | 'j'
-  | 'k'
-  | 'l'
-  | 'm'
-  | 'n'
-  | 'o'
-  | 'p'
-  | 'q'
-  | 'r'
-  | 's'
-  | 't'
-  | 'u'
-  | 'v'
-  | 'w'
-  | 'x'
-  | 'y'
-  | 'z'
-export type LetterUpper =
-  | 'A'
-  | 'B'
-  | 'C'
-  | 'D'
-  | 'E'
-  | 'F'
-  | 'G'
-  | 'H'
-  | 'I'
-  | 'J'
-  | 'K'
-  | 'L'
-  | 'M'
-  | 'N'
-  | 'O'
-  | 'P'
-  | 'Q'
-  | 'R'
-  | 'S'
-  | 'T'
-  | 'U'
-  | 'V'
-  | 'W'
-  | 'X'
-  | 'Y'
-  | 'Z'
 
 // export type StringNonEmpty = `${Letter}${string}`
 
