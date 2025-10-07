@@ -36,6 +36,7 @@ describe('TypedFullDocumentString', () => {
     const doc = Possible.document({ query: { foo: { id: true } } })
     // Type checking only
     if (false) {
+      // @ts-expect-error - Unreachable code for type testing
       const result = g.send(doc)
       Ts.assertEqual<Promise<{ id: string | null } | null>>()(result)
     }
@@ -119,6 +120,7 @@ describe('TypedFullDocumentString', () => {
 
     // Type checking only - not executed
     if (false) {
+      // @ts-expect-error - Unreachable code for type testing
       const resultB = g.send(doc, 'b', { string: '' })
       const resultBDefault = g.send(doc, 'b')
 
@@ -151,6 +153,7 @@ describe('TypedFullDocumentString', () => {
 
     // Type checking only - not executed
     if (false) {
+      // @ts-expect-error - Unreachable code for type testing
       const client = Possible.create({ check: { preflight: false } })
 
       // Should accept 'id' and 'string' variables
