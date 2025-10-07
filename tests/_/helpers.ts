@@ -12,7 +12,6 @@ import { GraffleBare } from '../../src/exports/presets/bare.js'
 // import type { SchemaDrivenDataMap } from '../../src/exports/utilities-for-generated.js'
 // import { TransportMemory } from '../../src/extensions/TransportMemory/TransportMemory.js'
 // import type { ConfigManager } from '../../src/lib/config-manager/__.js'
-import { Grafaid } from '../../src/lib/grafaid/$.js'
 import { CONTENT_TYPE_REC } from '../../src/lib/grafaid/http/http.js'
 import { type SchemaService, serveSchema } from './lib/serveSchema.js'
 // import { db } from './schemas/db.js'
@@ -105,8 +104,15 @@ export const test = testBase.extend<Fixtures>({
         const pathRelative = relativePath
           ? Path.join(relativePath, `schema.graphql`)
           : Path.join(`./`, `schema.graphql`)
-        const contents = Grafaid.Schema.print(schema)
-        await fs.writeAsync(pathRelative, contents)
+        // HACK: We read the pre-existing SDL file instead of using printSchema because
+        // the schema object was created with Pothos using a different GraphQL instance
+        // than what's available in this test context, causing "Cannot use GraphQLUnionType
+        // from another module or realm" errors. This happens even with matching GraphQL
+        // versions due to how Vitest/Node resolves modules differently across test boundaries.
+        // TODO: Find a better solution for GraphQL module duplication in tests
+        const sdlPath = Path.join(import.meta.dirname, `./fixtures/schemas/pokemon/schema.graphql`)
+        const contents = await FsJetpack.readAsync(sdlPath, 'utf8')
+        await fs.writeAsync(pathRelative, contents!)
         return {
           relative: pathRelative,
           absolute: Path.join(fs.cwd(), pathRelative),
@@ -123,7 +129,7 @@ export const test = testBase.extend<Fixtures>({
       },
       dependencies: {
         tsx: `4.19.1`,
-        graphql: `16.9.0`,
+        graphql: `16.10.0`,
         typescript: `5.6.3`,
         '@tsconfig/strictest': `2.0.5`,
         // '@rollup/plugin-node-resolve': `^15.3.0`,
@@ -141,6 +147,8 @@ export const test = testBase.extend<Fixtures>({
         module: `Node16`,
         moduleResolution: `Node16`,
         target: `ES2023`,
+        noUnusedLocals: false,
+        noUnusedParameters: false,
       },
     })
 

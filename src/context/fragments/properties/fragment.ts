@@ -1,6 +1,6 @@
-import type { Client_justContext } from '../../../client/client.js'
-import type { Configurator } from '../../../lib/configurator/configurator.js'
-import { type EmptyArray, emptyArray, type EmptyObject, emptyObject, undefinedAs } from '../../../lib/prelude.js'
+import type { Client_justContext } from '#src/client/client.js'
+import type { Configurator } from '#src/lib/configurator/configurator.js'
+import { type EmptyArray, emptyArray, type EmptyObject, emptyObject, undefinedAs } from '#src/lib/prelude.js'
 import type { Context } from '../../context.js'
 import type { ContextComputerParameters } from '../types.js'
 

@@ -1,5 +1,5 @@
-import type { ConfigManager } from '../../../../lib/config-manager/$.js'
-import { Configurator as C } from '../../../../lib/configurator/configurator.js'
+import type { ConfigManager } from '#lib/config-manager'
+import { Configurator as C } from '#src/lib/configurator/configurator.js'
 
 export type OutputChannel = 'throw' | 'return'
 
@@ -146,7 +146,7 @@ export interface InputResolver<
         : false
     errors: {
       execution: ConfigManager.GetAtPathOrDefault<$Input, ['envelope','errors','execution'], true>
-      other: ConfigManager.GetAtPathOrDefault<$Input, ['envelope','errors','other'], false> 
+      other: ConfigManager.GetAtPathOrDefault<$Input, ['envelope','errors','other'], false>
       schema: ConfigManager.GetAtPathOrDefault<$Input, ['envelope','errors','schema'], false>
     }
   }

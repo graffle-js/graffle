@@ -1,6 +1,6 @@
+import type { Grafaid } from '#lib/grafaid'
+import type { Fs } from '#src/lib/fsp.js'
 import type { IntrospectionOptions } from 'graphql'
-import type { Fs } from '../../lib/fsp.js'
-import type { Grafaid } from '../../lib/grafaid/$.js'
 import type { Extension } from '../extension/types.js'
 
 export interface InputLint {

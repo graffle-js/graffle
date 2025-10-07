@@ -1,1 +1,1 @@
-export { TransportMemory } from '../../../extensions/TransportMemory/TransportMemory.js'
+export { TransportMemory } from '#src/extensions/TransportMemory/TransportMemory.js'

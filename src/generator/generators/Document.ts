@@ -1,10 +1,9 @@
+import { Code } from '#src/lib/Code.js'
+import { values } from '#src/lib/prelude.js'
 import type { GraphQLObjectType } from 'graphql'
-import { Code } from '../../lib/Code.js'
-import { values } from '../../lib/prelude.js'
 import { getStaticDocumentBuilderDoc, getStaticDocumentFieldDoc } from '../helpers/jsdoc.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
-import { buildImportPath, codeImportAll, importUtilities } from '../helpers/pathHelpers.js'
-import { getTsDocContents } from '../helpers/render.js'
+import { codeImportAll, codeImportNamed, importUtilities } from '../helpers/pathHelpers.js'
 
 /**
  * Check if a root type has any fields with arguments (recursively checking all fields).
@@ -32,9 +31,16 @@ export const ModuleGeneratorDocument = createModuleGenerator(
     const mutationHasArgs = hasFieldsWithArguments(mutationType)
     const subscriptionHasArgs = hasFieldsWithArguments(subscriptionType)
 
-    code(`import { createStaticRootType } from '${config.paths.imports.grafflePackage.extensionDocumentBuilder}'`)
+    code(
+      `import { createStaticRootType, document as documentBuilder } from '${config.paths.imports.grafflePackage.extensionDocumentBuilder}'`,
+    )
+    code(`import type * as $$StaticBuilder from '${config.paths.imports.grafflePackage.extensionDocumentBuilder}'`)
+    code(`import type { InferOperations } from '${config.paths.imports.grafflePackage.extensionDocumentBuilder}'`)
     code(`import { OperationTypeNode } from 'graphql'`)
-    code(`import type { TypedDocument } from '${config.paths.imports.grafflePackage.client}'`)
+    code(codeImportNamed(config, { names: { schemaDrivenDataMap: 'sddm' }, from: './schema-driven-data-map' }))
+    code(
+      `import type { TypedDocument, TypedFullDocumentString, OperationMetadata } from '${config.paths.imports.grafflePackage.client}'`,
+    )
     code(codeImportAll(config, { as: 'SelectionSets', from: './selection-sets', type: true }))
     code(codeImportAll(config, { as: '$$Scalar', from: './scalar', type: true }))
     code(codeImportAll(config, { as: 'ArgumentsMap', from: './arguments-map', type: true }))
@@ -55,11 +61,22 @@ export const ModuleGeneratorDocument = createModuleGenerator(
       code(`  scalars: $$Scalar.$Registry`)
       code(`}`)
       code``
+      code(
+        Code.TSDoc(
+          `Configuration for static document builders.\nGenerated code always has SDDM enabled since the generator creates the schema-driven data map.`,
+        ),
+      )
+      code(`type DocumentConfig = {`)
+      code(`  schema: $$Schema.Schema`)
+      code(`  sddmEnabled: true`)
+      code(`}`)
+      code``
 
       // Interface JSDoc
       const interfaceDoc = getStaticDocumentBuilderDoc('query')
       code(Code.TSDoc(interfaceDoc))
 
+      code(`// Note: This interface conforms to StaticDocumentBuilder<DocumentConfig, OperationTypeNode.QUERY>`)
       code`
         export interface QueryBuilder {
           ${
@@ -70,7 +87,8 @@ export const ModuleGeneratorDocument = createModuleGenerator(
             selection?: $SelectionSet
           ) => TypedDocument.String<
             $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.DocumentBuilderKit.InferResult.OperationQuery<{ ${field.name}: $SelectionSet }, $$Schema.Schema>>,
-            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.DocumentBuilderKit.Var.InferFromQuery<{ ${field.name}: Exclude<$SelectionSet, undefined> }, ArgumentsMap.ArgumentsMap>>
+            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.DocumentBuilderKit.Var.InferFromQuery<{ ${field.name}: Exclude<$SelectionSet, undefined> }, ArgumentsMap.ArgumentsMap>>,
+            true
           >`
         }).join('\n\n          ')
       }
@@ -80,7 +98,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
       // Const JSDoc
       const constDoc = getStaticDocumentBuilderDoc('query')
       code(Code.TSDoc(constDoc))
-      code(`export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY) as any`)
+      code(`export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY, { sddm }) as any`)
       code``
     }
 
@@ -100,6 +118,16 @@ export const ModuleGeneratorDocument = createModuleGenerator(
         code(`  typeHookRequestResultDataTypes: never`)
         code(`  scalars: $$Scalar.$Registry`)
         code(`}`)
+        code``
+        code(
+          Code.TSDoc(
+            `Configuration for static document builders.\nGenerated code always has SDDM enabled since the generator creates the schema-driven data map.`,
+          ),
+        )
+        code(`type DocumentConfig = {`)
+        code(`  schema: $$Schema.Schema`)
+        code(`  sddmEnabled: true`)
+        code(`}`)
       }
       code``
 
@@ -107,6 +135,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
       const mutationInterfaceDoc = getStaticDocumentBuilderDoc('mutation')
       code(Code.TSDoc(mutationInterfaceDoc))
 
+      code(`// Note: This interface conforms to StaticDocumentBuilder<DocumentConfig, OperationTypeNode.MUTATION>`)
       code`
         export interface MutationBuilder {
           ${
@@ -117,7 +146,8 @@ export const ModuleGeneratorDocument = createModuleGenerator(
             selection?: $SelectionSet
           ) => TypedDocument.String<
             $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<{ ${field.name}: $SelectionSet }, $$Schema.Schema>>,
-            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.DocumentBuilderKit.Var.InferFromMutation<{ ${field.name}: Exclude<$SelectionSet, undefined> }, ArgumentsMap.ArgumentsMap>>
+            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.DocumentBuilderKit.Var.InferFromMutation<{ ${field.name}: Exclude<$SelectionSet, undefined> }, ArgumentsMap.ArgumentsMap>>,
+            true
           >`
         }).join('\n\n          ')
       }
@@ -127,7 +157,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
       // Const JSDoc
       const mutationConstDoc = getStaticDocumentBuilderDoc('mutation')
       code(Code.TSDoc(mutationConstDoc))
-      code(`export const mutation: MutationBuilder = createStaticRootType(OperationTypeNode.MUTATION) as any`)
+      code(`export const mutation: MutationBuilder = createStaticRootType(OperationTypeNode.MUTATION, { sddm }) as any`)
       code``
     }
 
@@ -147,6 +177,16 @@ export const ModuleGeneratorDocument = createModuleGenerator(
         code(`  typeHookRequestResultDataTypes: never`)
         code(`  scalars: $$Scalar.$Registry`)
         code(`}`)
+        code``
+        code(
+          Code.TSDoc(
+            `Configuration for static document builders.\nGenerated code always has SDDM enabled since the generator creates the schema-driven data map.`,
+          ),
+        )
+        code(`type DocumentConfig = {`)
+        code(`  schema: $$Schema.Schema`)
+        code(`  sddmEnabled: true`)
+        code(`}`)
       }
       code``
 
@@ -154,6 +194,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
       const subscriptionInterfaceDoc = getStaticDocumentBuilderDoc('subscription')
       code(Code.TSDoc(subscriptionInterfaceDoc))
 
+      code(`// Note: This interface conforms to StaticDocumentBuilder<DocumentConfig, OperationTypeNode.SUBSCRIPTION>`)
       code`
         export interface SubscriptionBuilder {
           ${
@@ -164,7 +205,8 @@ export const ModuleGeneratorDocument = createModuleGenerator(
             selection?: $SelectionSet
           ) => TypedDocument.String<
             $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.DocumentBuilderKit.InferResult.OperationSubscription<{ ${field.name}: $SelectionSet }, $$Schema.Schema>>,
-            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.DocumentBuilderKit.Var.InferFromSubscription<{ ${field.name}: Exclude<$SelectionSet, undefined> }, ArgumentsMap.ArgumentsMap>>
+            $$Utilities.RequestResult.Simplify<StaticDocumentContext, $$Utilities.DocumentBuilderKit.Var.InferFromSubscription<{ ${field.name}: Exclude<$SelectionSet, undefined> }, ArgumentsMap.ArgumentsMap>>,
+            true
           >`
         }).join('\n\n          ')
       }
@@ -175,8 +217,51 @@ export const ModuleGeneratorDocument = createModuleGenerator(
       const subscriptionConstDoc = getStaticDocumentBuilderDoc('subscription')
       code(Code.TSDoc(subscriptionConstDoc))
       code(
-        `export const subscription: SubscriptionBuilder = createStaticRootType(OperationTypeNode.SUBSCRIPTION) as any`,
+        `export const subscription: SubscriptionBuilder = createStaticRootType(OperationTypeNode.SUBSCRIPTION, { sddm }) as any`,
       )
+      code``
+    }
+
+    // Generate document() function for multi-operation documents
+    if (queryType || mutationType) {
+      code(Code.TSDoc(
+        `Create a full GraphQL document with one or more named operations.
+
+Unlike \`query\` and \`mutation\` which create single-operation documents, this function creates a full document that can contain multiple operations. Returns a \`TypedFullDocumentString\` that captures type information for all operations.
+
+@param documentObject - Document object with query and/or mutation operations
+@returns TypedFullDocumentString representing the complete document
+
+@example
+\`\`\`ts
+const doc = document({
+  query: {
+    getUser: { user: { id: true, name: true } },
+    getPost: { post: { id: true, title: true } }
+  }
+})
+
+// Use with client.send()
+const user = await client.send(doc, 'getUser')
+\`\`\``,
+      ))
+      code`export const document = ((documentObject: any) => documentBuilder(documentObject, { sddm })) as Document`
+      code``
+
+      // Generate Document interface with proper typing using imported InferOperations
+      code(Code.TSDoc(`Document builder function type for creating multi-operation documents.`))
+      code`export interface Document {`
+      code`  <$Document>(`
+      code`    document: $$Utilities.ExactNonEmpty<`
+      code`      $Document,`
+      code`      SelectionSets.$Document<`
+      code`        { scalars: $$Scalar.$Registry }`
+      code`      >`
+      code`    >,`
+      code`  ): TypedFullDocumentString<`
+      code`    InferOperations<$Document, $$Schema.Schema, ArgumentsMap.ArgumentsMap, StaticDocumentContext>`
+      code`  >`
+      code`}`
       code``
     }
   },

@@ -60,6 +60,7 @@ input DateFilter {
 
 type Mutation {
   addPokemon(attack: Int, defense: Int, hp: Int, name: String!, type: PokemonType!): Pokemon
+  resetData: Boolean!
 }
 
 type Patron implements Being {

@@ -1,5 +1,5 @@
+import { type ContextEmpty, contextEmpty } from '#src/context/ContextEmpty.js'
 import { expect, expectTypeOf, test } from 'vitest'
-import { type ContextEmpty, contextEmpty } from '../context/ContextEmpty.js'
 import { create } from './client.js'
 
 test(`created WITHOUT configuration uses the default configuration`, () => {

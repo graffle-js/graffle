@@ -42,7 +42,7 @@ const Boolean = $$Scalar.Boolean;
 //
 //
 
-const Date = "Date";
+const Date = $$Scalar.Date;
 
 //
 //

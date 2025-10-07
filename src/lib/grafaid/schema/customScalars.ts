@@ -1,3 +1,4 @@
+import { casesExhausted } from '#src/lib/prelude.js'
 import {
   getNamedType,
   type GraphQLArgument,
@@ -11,7 +12,6 @@ import {
   isUnionType,
 } from 'graphql'
 import type { GraphQLInputObjectType, GraphQLNamedOutputType } from 'graphql'
-import { casesExhausted } from '../../prelude.js'
 import { isInputFieldLike, isOutputField, isScalarTypeAndCustom } from './typeGuards.js'
 
 export const isHasCustomScalars = (

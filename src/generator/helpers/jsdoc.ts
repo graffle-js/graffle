@@ -2,8 +2,7 @@
  * Reusable JSDoc generation helpers for consistent documentation across generated modules.
  */
 
-import { print } from 'graphql'
-import { Grafaid } from '../../lib/grafaid/$.js'
+import { Grafaid } from '#lib/grafaid'
 import type { Config } from '../config/config.js'
 
 /**
@@ -468,6 +467,62 @@ export const getInlineFragmentDoc = (
   parts.push('```ts')
   parts.push(exampleCode)
   parts.push('```')
+
+  return parts.join('\n')
+}
+
+/**
+ * Generate enhanced JSDoc for field arguments in selection sets.
+ */
+export const getArgumentDoc = (
+  config: Config,
+  arg: Grafaid.Schema.Argument,
+  parentField: Grafaid.Schema.Field<any, any>,
+  parentType: Grafaid.Schema.ObjectType,
+): string | null => {
+  const schemaDescription = arg.description
+  const namedType = Grafaid.Schema.getNamedType(arg.type)
+  const typeAndKind = Grafaid.getTypeAndKind(namedType)
+
+  // Type information
+  const isNonNull = Grafaid.Schema.isNonNullType(arg.type)
+  const isList = Grafaid.Schema.isListType(Grafaid.Schema.isNonNullType(arg.type) ? arg.type.ofType : arg.type)
+
+  // GraphQL type signature (e.g., "String!", "[ID!]")
+  const graphqlType = String(arg.type)
+
+  // Path notation
+  const argPath = `${parentType.name}.${parentField.name}(${arg.name})`
+
+  // Default value
+  const hasDefault = arg.defaultValue !== undefined && arg.defaultValue !== null
+  const defaultValueStr = hasDefault
+    ? typeof arg.defaultValue === 'string'
+      ? `"${arg.defaultValue}"`
+      : JSON.stringify(arg.defaultValue)
+    : undefined
+
+  // Build table
+  const table = markdownTable({
+    'GraphQL Type': `\`${graphqlType}\``,
+    'Parent': `{@link $NamedTypes.$${parentType.name}}.${parentField.name}`,
+    'Path': `\`${argPath}\``,
+    'Nullability': isNonNull ? 'Required' : 'Optional',
+    'Default': defaultValueStr ? `\`${defaultValueStr}\`` : undefined,
+    '⚠ Deprecated': arg.deprecationReason || undefined,
+  })
+
+  // Combine parts
+  const parts: string[] = []
+
+  if (schemaDescription) {
+    parts.push(schemaDescription)
+    parts.push('')
+  }
+
+  parts.push('# Info')
+  parts.push('')
+  parts.push(table)
 
   return parts.join('\n')
 }

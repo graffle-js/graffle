@@ -1,4 +1,4 @@
-import { type DeepObjectValue, mapEntriesDeep } from '../../../lib/object-utils.js'
+import { type DeepObjectValue, mapEntriesDeep } from '#src/lib/object-utils.js'
 import { Var } from '../var/$.js'
 import type { DefaultContext } from './context.js'
 
@@ -32,6 +32,18 @@ export const enumKeyPrefix = `$`
 export const enumKeyPrefixPattern = /^\$/g
 
 export const enumKeyPrefixStrip = (key: string) => key.replace(enumKeyPrefixPattern, ``)
+
+/**
+ * Strip leading `$` from a string type.
+ * Type-level equivalent of {@link enumKeyPrefixStrip}.
+ *
+ * @example
+ * ```ts
+ * type A = EnumKeyPrefixStrip<'$type'> // 'type'
+ * type B = EnumKeyPrefixStrip<'name'>  // 'name'
+ * ```
+ */
+export type EnumKeyPrefixStrip<$T> = $T extends `$${infer $Rest}` ? $Rest : $T
 
 export const isEnumKey = (key: string) => key.startsWith(enumKeyPrefix)
 

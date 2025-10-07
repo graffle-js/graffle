@@ -1,8 +1,8 @@
+import { Configurator } from '#src/lib/configurator/configurator.js'
+import { createMutableBuilder } from '#src/lib/mutableBuilder.js'
+import { __, type ObjectMergeShallow } from '#src/lib/prelude.js'
+import type { RequestPipeline } from '#src/requestPipeline/$.js'
 import type { WritableDeep } from 'type-fest'
-import { Configurator } from '../../../../lib/configurator/configurator.js'
-import { createMutableBuilder } from '../../../../lib/mutableBuilder.js'
-import { __, type ObjectMergeShallow } from '../../../../lib/prelude.js'
-import type { RequestPipeline } from '../../../../requestPipeline/$.js'
 import type { Context } from '../../../context.js'
 import type { Configuration } from '../../configuration/$.js'
 import type { Properties } from '../../properties/$.js'
@@ -109,12 +109,12 @@ export interface Chain<
   ) => Chain<$Context, {
     readonly [_ in keyof $Data]: _ extends 'configurator' ? $Configurator : $Data[_]
   }>
-  
+
   /**
    * TODO 0
    */
   transport: MethodTransport<$Context, $Data, __$ConfigurationNormalized>
-  
+
   /**
    * todo
    */
@@ -128,7 +128,7 @@ export interface Chain<
   ) => Chain<$Context, {
     readonly [_ in keyof $Data]: _ extends 'requestInterceptor' ? $RequestInterceptor : $Data[_]
   }>
-  
+
   /**
    * todo
    */
@@ -147,7 +147,7 @@ export interface Chain<
           : $Data['propertiesComputedTypeFunctions$'] :
       $Data[_]
   }>
-  
+
   /**
    * todo
    */
@@ -156,8 +156,8 @@ export interface Chain<
   ) => Chain<$Context, {
     readonly [_ in keyof $Data]: _ extends 'static' ? properties : $Data[_]
   }>
-  
-  
+
+
   /**
    * Type(s) that show up in request result data which Graffle should NOT
    * "simplify" (aka. "expand", "compute").
@@ -171,14 +171,14 @@ export interface Chain<
   typeOfNoExpandResultDataType: <$DataType>() => Chain<$Context, {
     readonly [_ in keyof $Data]: _ extends 'noExpandResultDataType' ? $DataType : $Data[_]
   }>
-  
+
   /**
    * TODO
    */
   // dprint-ignore
   return: () =>
       & ($Data['configurator'] extends Configurator
-          // ? (...args: Configurator.InferParameters<$Data['configurator']>) => $Data 
+          // ? (...args: Configurator.InferParameters<$Data['configurator']>) => $Data
           ? & (
                 <$Args extends Configurator.InferParameters<$Data['configurator']>>(...args: $Args) =>
                   & $Data

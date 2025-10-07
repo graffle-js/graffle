@@ -1,5 +1,5 @@
-import { emptyArray } from '../../../lib/prelude.js'
-import type { RequestPipeline } from '../../../requestPipeline/RequestPipeline.js'
+import { emptyArray } from '#src/lib/prelude.js'
+import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
 import type { RequestInterceptorComputer } from './helpers.js'
 
 export interface ContextFragment {

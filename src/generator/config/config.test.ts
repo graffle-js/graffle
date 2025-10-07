@@ -1,9 +1,9 @@
+import { type Fs, writeFileAndCreateDir } from '#src/lib/fsp.js'
+import { test } from '#test/helpers'
 import * as Memfs from 'memfs'
 import * as Path from 'node:path'
 import { expect } from 'vitest'
 import { describe } from 'vitest'
-import { test } from '../../../tests/_/helpers.js'
-import { type Fs, writeFileAndCreateDir } from '../../lib/fsp.js'
 import { createConfig } from './config.js'
 import type { ConfigInitSchemaSdl } from './configInit.js'
 

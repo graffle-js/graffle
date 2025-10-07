@@ -7,9 +7,7 @@
   },
   "exclude": [
     "build",
-    "eslint.config.js",
     "bundle-sizes",
-    "tests",
     "examples",
     "website"
   ]

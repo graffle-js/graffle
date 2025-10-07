@@ -30,11 +30,11 @@ import type { TypedDocumentNode as Node2 } from '@graphql-typed-document-node/co
   assertEqual<VariablesOf<Node2   <{x:1},{}>>, {}>()
   assertEqual<VariablesOf<Node    <{x:1},{}>>, {}>()
   assertEqual<VariablesOf<Query   <{x:1},{}>>, {}>()
-  assertEqual<VariablesOf<String  <{x:1},{}>>, {}>()
+  assertEqual<VariablesOf<String  <{x:1},{}, false>>, {}>()
 
   assertEqual<ResultOf<string>           , SomeObjectData>()
   assertEqual<ResultOf<Node2  <{x:1},{}>>, {x:1}>()
   assertEqual<ResultOf<Node   <{x:1},{}>>, {x:1}>()
   assertEqual<ResultOf<Query  <{x:1},{}>>, {x:1}>()
-  assertEqual<ResultOf<String <{x:1},{}>>, {x:1}>()
+  assertEqual<ResultOf<String <{x:1},{}, false>>, {x:1}>()
 }

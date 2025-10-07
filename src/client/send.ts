@@ -1,10 +1,10 @@
-import type { Context } from '../context/context.js'
-import { Anyware } from '../lib/anyware/$.js'
-import type { RequestAnalyzedInput } from '../lib/grafaid/$$.js'
-import type { RequestPipeline } from '../requestPipeline/RequestPipeline.js'
+import { Anyware } from '#lib/anyware'
+import type { Grafaid } from '#lib/grafaid'
+import type { Context } from '#src/context/context.js'
+import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
 import { handleOutput } from './handle.js'
 
-export const sendRequest = async (context: Context, analyzedRequest: RequestAnalyzedInput) => {
+export const sendRequest = async (context: Context, analyzedRequest: Grafaid.RequestAnalyzedInput) => {
   if (!context.transports.current) throw new Error(`No transport selected`)
 
   const initialInput = {

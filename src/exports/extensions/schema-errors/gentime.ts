@@ -1,1 +1,1 @@
-export { SchemaErrors } from '../../../extensions/SchemaErrors/gentime.js'
+export { SchemaErrors } from '#src/extensions/SchemaErrors/gentime.js'

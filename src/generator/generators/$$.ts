@@ -1,4 +1,4 @@
-import { Code } from '../../lib/Code.js'
+import { Code } from '#src/lib/Code.js'
 import { createModuleGenerator, getImportName } from '../helpers/moduleGenerator.js'
 import { ModuleGenerator_internals } from './_internals.js'
 import { ModuleGeneratorClient } from './Client.js'
@@ -31,6 +31,10 @@ export const ModuleGenerator$$ = createModuleGenerator(
     }
     if (config.schema.kindMap.index.Root.subscription) {
       documentExports.push('subscription')
+    }
+    // Include document() function if query or mutation exists
+    if (config.schema.kindMap.index.Root.query || config.schema.kindMap.index.Root.mutation) {
+      documentExports.push('document')
     }
 
     code(Code.reexportNamed({ names: 'Name', from: `./modules/${getImportName(config, ModuleGeneratorData)}` }))

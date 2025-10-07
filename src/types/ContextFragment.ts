@@ -1,5 +1,5 @@
-import type { Context } from '../context/context.js'
-import type { ObjectMergeShallow } from '../lib/prelude.js'
+import type { Context } from '#src/context/context.js'
+import type { ObjectMergeShallow } from '#src/lib/prelude.js'
 
 export type ContextFragment = Partial<Context>
 

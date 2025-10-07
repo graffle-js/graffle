@@ -1,13 +1,9 @@
-import {
-  ATransport,
-  RequiredConfigurationTransportA,
-  RequiredConfigurationTransportB,
-} from '../../../../tests/_/fixtures/transports.js'
-import { g0 } from '../../../../tests/_/helpers.js'
-import type { Context } from '../../../context/$.js'
-import { assertType } from '../../../lib/assert-equal.js'
-import type { Grafaid } from '../../../lib/grafaid/$.js'
-import { undefinedAs } from '../../../lib/prelude.js'
+import type { Grafaid } from '#lib/grafaid'
+import type { Context } from '#src/context/$.js'
+import { assertType } from '#src/lib/assert-equal.js'
+import { undefinedAs } from '#src/lib/prelude.js'
+import { ATransport, RequiredConfigurationTransportA, RequiredConfigurationTransportB } from '#test/fixtures/transports'
+import { g0 } from '#test/helpers'
 
 const g1 = g0.transport(ATransport)
 const g2 = g0.transport(RequiredConfigurationTransportA).transport(RequiredConfigurationTransportB)
@@ -73,9 +69,9 @@ assertType<DData | null>(await g1.gql(d3).send({}))
   assertType<DData | null>(await g1.gql<Grafaid.Document.Typed.Node<DData, { x?: 1 }>              >``.send())
   assertType<DData | null>(await g1.gql<Grafaid.Document.Typed.Node<DData, { x?: 1 }>              >``.send({ x: 1 }))
   assertType<DData | null>(await g1.gql<Grafaid.Document.Typed.Node<DData, {}>                     >``.send())
-  assertType<DData | null>(await g1.gql<Grafaid.Document.Typed.Node<DData, Grafaid.Document.Typed.Variables>>``.send()) 
-  assertType<DData | null>(await g1.gql<Grafaid.Document.Typed.Node<DData, Grafaid.Document.Typed.Variables>>``.send({ x: 1 })) 
-  assertType<DData | null>(await g1.gql<Grafaid.Document.Typed.Node<DData, Grafaid.Document.Typed.Variables>>``.send(`abc`, { x: 1 }))  
+  assertType<DData | null>(await g1.gql<Grafaid.Document.Typed.Node<DData, Grafaid.Document.Typed.Variables>>``.send())
+  assertType<DData | null>(await g1.gql<Grafaid.Document.Typed.Node<DData, Grafaid.Document.Typed.Variables>>``.send({ x: 1 }))
+  assertType<DData | null>(await g1.gql<Grafaid.Document.Typed.Node<DData, Grafaid.Document.Typed.Variables>>``.send(`abc`, { x: 1 }))
   await g1.gql<Grafaid.Document.Typed.Node<DData, { x: 1 }>               >``
     // @ts-expect-error - wrong argument type
     .send({ x: 2 })
@@ -84,13 +80,13 @@ assertType<DData | null>(await g1.gql(d3).send({}))
   assertType<DData | null>(await g1.gql<Grafaid.Document.Typed.String<DData, { x?: 1 }>              >``.send())
   assertType<DData | null>(await g1.gql<Grafaid.Document.Typed.String<DData, { x?: 1 }>              >``.send({ x: 1 }))
   assertType<DData | null>(await g1.gql<Grafaid.Document.Typed.String<DData, {}>                     >``.send())
-  assertType<DData | null>(await g1.gql<Grafaid.Document.Typed.String<DData, Grafaid.Document.Typed.Variables>>``.send()) 
-  assertType<DData | null>(await g1.gql<Grafaid.Document.Typed.String<DData, Grafaid.Document.Typed.Variables>>``.send({ x: 1 })) 
-  assertType<DData | null>(await g1.gql<Grafaid.Document.Typed.String<DData, Grafaid.Document.Typed.Variables>>``.send(`abc`, { x: 1 })) 
+  assertType<DData | null>(await g1.gql<Grafaid.Document.Typed.String<DData, Grafaid.Document.Typed.Variables>>``.send())
+  assertType<DData | null>(await g1.gql<Grafaid.Document.Typed.String<DData, Grafaid.Document.Typed.Variables>>``.send({ x: 1 }))
+  assertType<DData | null>(await g1.gql<Grafaid.Document.Typed.String<DData, Grafaid.Document.Typed.Variables>>``.send(`abc`, { x: 1 }))
   await g1.gql<Grafaid.Document.Typed.String<DData, { x: 1 }>               >``
     // @ts-expect-error - wrong argument type
     .send({ x: 2 })
-  
+
   assertType<Grafaid.SomeObjectData | null>(await g1.gql``.send())
   assertType<Grafaid.SomeObjectData | null>(await g1.gql``.send(`foo`))
   assertType<Grafaid.SomeObjectData | null>(await g1.gql``.send(`foo`, { x: 1 }))

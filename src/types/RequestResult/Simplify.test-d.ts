@@ -1,6 +1,6 @@
-import type { ContextEmpty } from '../../context/ContextEmpty.js'
-import type { Add } from '../../context/fragments/scalars/fragment.js'
-import { assertEqual } from '../../lib/assert-equal.js'
+import type { ContextEmpty } from '#src/context/ContextEmpty.js'
+import type { Add } from '#src/context/fragments/scalars/fragment.js'
+import { assertEqual } from '#src/lib/assert-equal.js'
 import type { Schema } from '../Schema/$.js'
 import type { _SimplifyExcept, Simplify, SimplifyWithEmptyContext } from './Simplify.js'
 
@@ -14,7 +14,7 @@ type CEmpty = ContextEmpty
 // 	requestResultDataTypes: Text,
 // }>
 // type CExtAndScalar = AddScalar<CExt, DateScalar>
-	
+
 type _1 = Simplify<CEmpty                   , {x:Date|null}>
 // @ts-expect-error
 assertEqual<_1									            , {x:Date|null}>()

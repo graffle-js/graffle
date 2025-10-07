@@ -1,8 +1,8 @@
+import type { Schema, TypeFunction } from '#graffle/utilities-for-generated'
+import type { ConfigManager } from '#lib/config-manager'
+import type { Values } from '#src/lib/prelude.js'
+import type { TSErrorDescriptive } from '#src/lib/ts-error.js'
 import type { IsNever } from 'type-fest'
-import type { Schema, TypeFunction } from '../../exports/utilities-for-generated.js'
-import type { ConfigManager } from '../../lib/config-manager/$.js'
-import type { Values } from '../../lib/prelude.js'
-import type { TSErrorDescriptive } from '../../lib/ts-error.js'
 
 interface ZeroClient extends Client {
   name: DefaultClientName
@@ -91,10 +91,10 @@ export type GetOrGeneric<$Name extends string> =
 // dprint-ignore
 export type GetOrDefault<$Name extends ClientNames | undefined> =
     $Name extends ClientNames
-      
+
       // @ts-ignore passes after generation
       ? GraffleGlobal.Clients[$Name]
-      
+
       // @ts-ignore passes after generation
       : GraffleGlobal.Clients[DefaultClientName]
 

@@ -1,3 +1,4 @@
+// todo: remove this in favour of using kit
 export type PropertySignature = {
   name: string
   type: any

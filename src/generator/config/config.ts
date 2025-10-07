@@ -1,12 +1,12 @@
+import { Graffle } from '#graffle'
+import { ConfigManager } from '#lib/config-manager'
+import { Grafaid } from '#lib/grafaid'
+import { fileExists, type Fs, isPathToADirectory, toAbsolutePath, toFilePath } from '#src/lib/fsp.js'
+import { isString, keysStrict } from '#src/lib/prelude.js'
+import { type Formatter, getTypeScriptFormatter, passthroughFormatter } from '#src/lib/typescript-formatter.js'
 import { pascalCase } from 'es-toolkit'
 import * as Path from 'node:path'
-import { Graffle } from '../../exports/index.js'
 import { Introspection } from '../../extensions/Introspection/Introspection.js'
-import { ConfigManager } from '../../lib/config-manager/$.js'
-import { fileExists, type Fs, isPathToADirectory, toAbsolutePath, toFilePath } from '../../lib/fsp.js'
-import { Grafaid } from '../../lib/grafaid/$.js'
-import { isString, keysStrict } from '../../lib/prelude.js'
-import { type Formatter, getTypeScriptFormatter, passthroughFormatter } from '../../lib/typescript-formatter.js'
 import type { Extension } from '../extension/types.js'
 import {
   type ConfigInit,
@@ -176,6 +176,10 @@ To suppress this warning disable formatting in one of the following ways:
   // --- Library Paths ---
 
   const processLibraryPath = (path: string) => {
+    // Subpaths starting with # should not be rewritten
+    if (path.startsWith('#')) {
+      return path
+    }
     const pathAbsolute = getImportExtension(toAbsolutePath(cwd, path))
     return Path.relative(outputDirPathModules, pathAbsolute)
   }

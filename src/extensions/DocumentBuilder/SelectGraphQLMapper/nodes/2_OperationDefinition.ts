@@ -1,6 +1,7 @@
-import type { Grafaid } from '../../../../lib/grafaid/$.js'
-import { Nodes } from '../../../../lib/grafaid/_Nodes.js'
-import { SchemaDrivenDataMap } from '../../../../types/SchemaDrivenDataMap/$.js'
+import type { Grafaid } from '#lib/grafaid'
+import { Nodes } from '#src/lib/grafaid/_Nodes.js'
+import { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
+import { parseType } from 'graphql'
 import type { Select } from '../../Select/$.js'
 import { createOperationContext } from '../context.js'
 import { type GraphQLPreOperationMapper } from '../mapper.js'
@@ -31,7 +32,7 @@ export const toGraphQLOperationDefinition: GraphQLPreOperationMapper<
   const variableDefinitions = context.variables.data.map((captured) => {
     return Nodes.VariableDefinition({
       variable: Nodes.Variable({ name: Nodes.Name({ value: captured.name }) }),
-      type: Nodes.NamedType({ name: Nodes.Name({ value: captured.type }) }),
+      type: parseType(captured.type),
       defaultValue: captured.defaultValue !== undefined
         ? toGraphQLValue(
           { ...context, value: { isEnum: captured.isEnum } },

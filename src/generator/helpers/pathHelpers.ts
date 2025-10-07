@@ -1,4 +1,4 @@
-import { Code } from '../../lib/Code.js'
+import { Code } from '#src/lib/Code.js'
 import type { Config } from '../config/config.js'
 import { $ } from './identifiers.js'
 
@@ -24,10 +24,11 @@ export const getRelativeImportPath = (
   targetModuleSpecifier: string,
 ): string => {
   // Check if this is a bare module specifier (package import)
-  // Bare specifiers don't start with '.', '/', or '~'
-  const isBareSpecifier = !targetModuleSpecifier.startsWith('.')
+  // Bare specifiers don't start with '.', '/', or '~', OR they start with '#' (subpaths)
+  const isBareSpecifier = (!targetModuleSpecifier.startsWith('.')
     && !targetModuleSpecifier.startsWith('/')
-    && !targetModuleSpecifier.startsWith('~')
+    && !targetModuleSpecifier.startsWith('~'))
+    || targetModuleSpecifier.startsWith('#')
 
   // If it's a bare specifier, return it as-is (no extension needed for package imports)
   if (isBareSpecifier) {
@@ -122,10 +123,11 @@ export const importUtilities = (config: Config): string => {
  */
 export const applyImportExtension = (config: Config, path: string): string => {
   // Check if this is a bare module specifier (package import)
-  // Bare specifiers don't need extensions
-  const isBareSpecifier = !path.startsWith('.')
+  // Bare specifiers don't need extensions, OR they start with '#' (subpaths)
+  const isBareSpecifier = (!path.startsWith('.')
     && !path.startsWith('/')
-    && !path.startsWith('~')
+    && !path.startsWith('~'))
+    || path.startsWith('#')
 
   if (isBareSpecifier) {
     return path

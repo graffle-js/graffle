@@ -1,10 +1,35 @@
-import type { Grafaid } from '../../../lib/grafaid/$.js'
+import type { Grafaid } from '#lib/grafaid'
 import {
   isTemplateStringArguments,
   joinTemplateStringArrayAndArgs,
   type TemplateStringsArguments,
-} from '../../../lib/template-string.js'
+} from '#src/lib/template-string.js'
 import { type DocumentController } from './send.js'
+
+/**
+ * Validates that documents requiring SDDM are only used with SDDM-enabled contexts.
+ *
+ * This is a compile-time check that prevents documents generated with SDDM
+ * (Schema-Driven Data Map) from being executed by clients without SDDM support.
+ * SDDM documents contain type metadata and custom scalar information that require
+ * the full schema to be available for proper encoding/decoding.
+ *
+ * Note: Documents with RequiresSDDM=false can be used with any client.
+ * Documents with RequiresSDDM=true require clients configured with schema.map.
+ */
+// dprint-ignore
+type HasSDDM<$Context> =
+  $Context extends { configuration: { schema: { current: { map: infer $Map } } } }
+    ? $Map extends undefined ? false : true
+    : false
+
+// dprint-ignore
+type ValidateSDDMRequirement<$Document extends Grafaid.Document.Typed.TypedDocumentLike, $Context> =
+  Grafaid.Document.Typed.RequiresSDDMOf<$Document> extends true
+    ? HasSDDM<$Context> extends true
+      ? $Document
+      : `❌ This document requires SDDM. Configure client with schema.map`
+    : $Document
 
 // dprint-ignore
 /**
@@ -30,7 +55,7 @@ import { type DocumentController } from './send.js'
  * ```
  */
 export interface GqlMethod<$Context> {
-    <$Document extends Grafaid.Document.Typed.TypedDocumentLike>(document: $Document                            ): DocumentController<$Context, $Document>
+    <$Document extends Grafaid.Document.Typed.TypedDocumentLike>(document: ValidateSDDMRequirement<$Document, $Context>): DocumentController<$Context, $Document>
     <$Document extends Grafaid.Document.Typed.TypedDocumentLike>(parts: TemplateStringsArray, ...args: unknown[]): DocumentController<$Context, $Document>
   }
 

@@ -1,1 +1,1 @@
-export { Introspection } from '../../../extensions/Introspection/Introspection.js'
+export { Introspection } from '#src/extensions/Introspection/Introspection.js'

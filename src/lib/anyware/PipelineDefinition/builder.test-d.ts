@@ -1,6 +1,6 @@
+import { _ } from '#src/lib/prelude.js'
 import { describe, expectTypeOf, test } from 'vitest'
 import { Configurator } from '../../configurator/configurator.js'
-import { _ } from '../../prelude.js'
 import type { initialInput } from '../_.test-helpers.js'
 import { results, slots, stepA, stepB } from '../_.test-helpers.js'
 import { PipelineDefinition } from './$.js'

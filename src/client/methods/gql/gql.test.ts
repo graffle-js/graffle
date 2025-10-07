@@ -1,9 +1,9 @@
+import { ATransport } from '#test/fixtures/transports'
+import { g0, test } from '#test/helpers'
 import { describe, expectTypeOf } from 'vitest'
-import { ATransport } from '../../../../tests/_/fixtures/transports.js'
-import { g0, test } from '../../../../tests/_/helpers.js'
-// import { Spy } from '../../../../tests/_/SpyExtension.js'
-import type { Grafaid } from '../../../lib/grafaid/$.js'
-import { as } from '../../../lib/prelude.js'
+// import { Spy } from '#test/SpyExtension'
+import type { Grafaid } from '#lib/grafaid'
+import { as } from '#src/lib/prelude.js'
 
 // todo test with custom scalars
 

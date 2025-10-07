@@ -1,6 +1,6 @@
-import { Code } from '../../lib/Code.js'
-import { Grafaid } from '../../lib/grafaid/$.js'
-import { Tex } from '../../lib/tex/$.js'
+import { Grafaid } from '#lib/grafaid'
+import { Tex } from '#lib/tex'
+import { Code } from '#src/lib/Code.js'
 import { SchemaDrivenDataMap } from '../../types/SchemaDrivenDataMap/$.js'
 import type { Config } from '../config/config.js'
 

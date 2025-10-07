@@ -1,22 +1,23 @@
-import type { Context } from '../context/context.js'
-import { type ContextEmpty, contextEmpty } from '../context/ContextEmpty.js'
+import type { Anyware } from '#lib/anyware'
+import type { TypeFunction } from '#lib/type-function'
+import type { Context } from '#src/context/context.js'
+import { type ContextEmpty, contextEmpty } from '#src/context/ContextEmpty.js'
+import type { AddAndApplyOne } from '#src/context/fragments/extensions/reducers/addAndApplyOne.js'
+import { getOperationType } from '#src/lib/grafaid/document.js'
+import type { Exact } from '#src/lib/prelude.js'
+import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
+import { type ContextFragment, ContextFragments } from '#src/types/ContextFragment.js'
 import { Configuration } from '../context/fragments/configuration/$.js'
 import { Extensions } from '../context/fragments/extensions/$.js'
 import type { Extension } from '../context/fragments/extensions/dataType/$.js'
-import type { AddAndApplyOne } from '../context/fragments/extensions/reducers/addAndApplyOne.js'
 import { Properties } from '../context/fragments/properties/$.js'
 import { RequestInterceptors } from '../context/fragments/requestInterceptors/$.js'
 import { Scalars } from '../context/fragments/scalars/$.js'
 import { Transports } from '../context/fragments/transports/$.js'
-import type { Anyware } from '../lib/anyware/$.js'
-import { getOperationType } from '../lib/grafaid/document.js'
-import type { Exact } from '../lib/prelude.js'
-import type { TypeFunction } from '../lib/type-function/$.js'
-import type { RequestPipeline } from '../requestPipeline/RequestPipeline.js'
-import { type ContextFragment, ContextFragments } from '../types/ContextFragment.js'
 import { GqlMethod } from './methods/gql/gql.js'
 import { GqlMethodSendMethod } from './methods/gql/send.js'
 import { ScalarMethod } from './methods/scalars.js'
+import { SendMethod } from './methods/send.js'
 import { TransportMethod } from './methods/transport.js'
 import { sendRequest } from './send.js'
 
@@ -77,6 +78,23 @@ export interface ClientBase<$Context extends Context> {
     $Context,
     GqlMethod<$Context>
   >
+  /**
+   * Send a GraphQL document directly.
+   *
+   * Accepts documents from static builders (Graffle.document()), codegen (TypedDocumentNode),
+   * or plain strings. Returns the result directly without chaining.
+   *
+   * For single-operation documents, operation name is optional.
+   * For multi-operation documents, operation name is required.
+   *
+   * @example
+   * ```ts
+   * import { Graffle } from './graffle/__.js'
+   * const doc = Graffle.document({ query: { getUser: { user: { id: true } } } })
+   * const result = await graffle.send(doc, { id: '123' })
+   * ```
+   */
+  send: SendMethod<$Context>
   /**
    * Register a custom scalar codec for encoding and decoding GraphQL scalar values.
    *
@@ -491,6 +509,32 @@ export const createWithContext = <$Context extends Context>(
           return sendRequest(context, analyzedRequest)
         },
       }
+    }) as any,
+    send: (async (...args: any[]) => {
+      if (!context.transports.current) throw new Error(`No transport selected`)
+
+      const { document, operationName, variables } = SendMethod.normalizeArguments(args)
+
+      // Build the request
+      const request = {
+        query: document,
+        variables,
+        operationName,
+      }
+
+      // Get operation type
+      const operationType = getOperationType(request)
+      if (!operationType) throw new Error(`Could not get operation type`)
+
+      // Build analyzed request
+      const analyzedRequest = {
+        operation: operationType,
+        query: document,
+        variables,
+        operationName,
+      }
+
+      return sendRequest(context, analyzedRequest)
     }) as any,
   }
 

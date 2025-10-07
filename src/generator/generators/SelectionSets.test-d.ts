@@ -1,6 +1,6 @@
+import type { DateScalar } from '#test/fixtures/scalars'
+import { db } from '#test/schema/possible/db.js'
 import { assertType, test } from 'vitest'
-import type { DateScalar } from '../../../tests/_/fixtures/scalars.js'
-import { db } from '../../../tests/_/fixtures/schemas/possible/db.js'
 import type * as SelectionSets from '../../extensions/DocumentBuilder/__tests__/fixtures/possible/modules/selection-sets.js'
 import type { Schema } from '../../types/Schema/$.js'
 
@@ -32,7 +32,7 @@ test(`Query`, () => {
   // assertType<Q>({ date: 0 })
   // assertType<Q>({ date: 1 })
   assertType<Q>({ date: undefined })
-  
+
   // Enum
   assertType<Q>({ abcEnum: true })
 
@@ -46,7 +46,7 @@ test(`Query`, () => {
   assertType<Q>({ id2: true })
   // @ts-expect-error no a2
   assertType<Q>({ object: { a2: true } })
-  
+
   // Object Nested
   assertType<Q>({ objectList: {  } })
 
@@ -84,14 +84,14 @@ test(`Query`, () => {
   assertType<Q>({ interface: { id: true, ___on_Object1ImplementingInterface2: { int: true } } })
   // directives work on fragments
   assertType<Q>({ interface: { id: true, ___on_Object1ImplementingInterface: { $include: true } } }) // todo should REQUIRE field selection
-  
+
 
 
 
 
   // Alias
   // todo test that aliases are no supported on ___on_X polymorphic fields
-  
+
   // alias: enum
   assertType<Q>({ abcEnum: [`enum`, true] })
   assertType<Q>({ __typename: [`kind`, true] })
@@ -117,7 +117,7 @@ test(`Query`, () => {
   // Make that an opt-in feature since it will potentially decrease the IDE performance for everyone even those not benefiting much from this.
   // //@ts-expect-error invalid alias key format
   // assertType<Q>({ object: [``, { id: true }] })
-  
+
   // We would have to pass the input through to Q so that it could parse the identifier. This would be complex and probably not worth it.
   // Maybe this will get easier one day.
   // // @ts-expect-error invalid alias key format
@@ -221,7 +221,7 @@ test(`Query`, () => {
   assertType<Q>({ stringWithListArgRequired: { $: {} } })
   // @ts-expect-error missing non-null "ints" arg
   assertType<Q>({ stringWithListArgRequired: { $: { ints: null } } })
-  
+
   // custom scalar arg
   // @ts-expect-error wrong type
   assertType<Q>({ dateArg: { $: { date: 0 } } })
@@ -271,7 +271,7 @@ test(`Query`, () => {
   // todo selection set of _only_ negative indicators should not be allowed
 
   // Interface Hierarchy
- 
+
   assertType<Q>({ interfaceHierarchyGrandparents: { a: true } })
   // Can verbosely nest inline fragments matching the interface hierarchy
   assertType<Q>({ interfaceHierarchyGrandparents: { ___on_InterfaceParent: { ___on_InterfaceChildA: { a: true }  } } })

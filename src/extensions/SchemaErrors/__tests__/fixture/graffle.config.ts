@@ -1,5 +1,5 @@
-import { schema } from '../../../../../tests/_/fixtures/schemas/possible/schema.js'
-import { Generator } from '../../../../exports/generator.js'
+import { Generator } from '#graffle/generator'
+import { schema } from '#test/schema/possible/schema.js'
 import { SchemaErrors } from '../../gentime.js'
 
 export default Generator
@@ -14,12 +14,12 @@ export default Generator
       missingCustomScalarCodec: false,
     },
     libraryPaths: {
-      client: `../../../../exports/client.ts`,
-      schema: `../../../../exports/schema.ts`,
-      scalars: `../../../../types/Schema/StandardTypes/scalar.ts`,
-      utilitiesForGenerated: `../../../../exports/utilities-for-generated.ts`,
-      extensionTransportHttp: `../../../../exports/extensions/transport-http/runtime.ts`,
-      extensionDocumentBuilder: `../../../../exports/extensions/document-builder/runtime.ts`,
+      client: `#graffle/client`,
+      schema: `#graffle/schema`,
+      scalars: `#graffle/generator-helpers/standard-scalar-types`,
+      utilitiesForGenerated: `#graffle/utilities-for-generated`,
+      extensionTransportHttp: `#graffle/extensions/transport-http`,
+      extensionDocumentBuilder: `#graffle/extensions/document-builder`,
     },
     advanced: {
       schemaInterfaceExtendsEnabled: true,

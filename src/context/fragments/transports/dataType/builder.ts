@@ -1,6 +1,7 @@
-import type { Anyware } from '../../../../lib/anyware/$.js'
-import { Configurator } from '../../../../lib/configurator/configurator.js'
-import type { RequestPipeline } from '../../../../requestPipeline/$.js'
+import type { Anyware } from '#lib/anyware'
+import { Configurator } from '#src/lib/configurator/configurator.js'
+import { hasSymbolProperty } from '#src/lib/symbol.js'
+import type { RequestPipeline } from '#src/requestPipeline/$.js'
 import { type Data, TypeSymbol as DataTypeSymbol } from './data.js'
 
 // ------------------------------------------------------------
@@ -105,7 +106,7 @@ export interface Builder<
     [TypeSymbol]: true
     /**
      * Define the configuration for this transport.
-     * 
+     *
      * Its normalized form will become available on step input as `input.transport`.
      */
     configurator: <$Configurator extends Configurator>(
@@ -184,6 +185,6 @@ export namespace Builder {
   }
 
   export const is = (value: any): value is Builder<Data> => {
-    return typeof value === `object` && value !== null && value[TypeSymbol] === true
+    return hasSymbolProperty(value, TypeSymbol, true, `TransportBuilder`)
   }
 }

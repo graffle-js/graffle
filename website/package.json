@@ -6,7 +6,7 @@
     "dev:twoslash": "NODE_ENV=development vitepress dev",
     "build": "vitepress build",
     "preview": "vitepress preview",
-    "gen:graffle": "graffle --defaultSchemaUrl http://localhost:3000/graphql --schema ../tests/_/fixtures/schemas/pokemon/schema.graphql",
+    "gen:graffle": "rm -rf graffle && graffle --defaultSchemaUrl http://localhost:3000/graphql --schema ../tests/_/fixtures/schemas/pokemon/schema.graphql",
     "gen": "pnpm gen:graffle"
   },
   "devDependencies": {

@@ -2,16 +2,21 @@
 // todo: on union fields, JSDoc that mentions the syntax `on*`
 
 // todo import from '../../extensions/DocumentBuilder/kit/$.js'
+import { Grafaid } from '#lib/grafaid'
+import { Tex } from '#lib/tex'
+import { Code } from '#src/lib/Code.js'
+import { analyzeArgsNullability } from '#src/lib/grafaid/schema/args.js'
+import { entries, pick, values } from '#src/lib/prelude.js'
+import { borderThin } from '#src/lib/tex/tex.js'
 import { DocumentBuilderKit } from '../../extensions/DocumentBuilder/$.js'
-import { Code } from '../../lib/Code.js'
-import { Grafaid } from '../../lib/grafaid/$.js'
-import { analyzeArgsNullability } from '../../lib/grafaid/schema/args.js'
-import { entries, pick, values } from '../../lib/prelude.js'
-import { Tex } from '../../lib/tex/$.js'
-import { borderThin } from '../../lib/tex/tex.js'
 import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
-import { getInlineFragmentDoc, getOutputFieldSelectionSetDoc, getRootTypeDoc } from '../helpers/jsdoc.js'
+import {
+  getArgumentDoc,
+  getInlineFragmentDoc,
+  getOutputFieldSelectionSetDoc,
+  getRootTypeDoc,
+} from '../helpers/jsdoc.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 import { createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
 import { buildImportPath, codeImportAll, importUtilities } from '../helpers/pathHelpers.js'
@@ -218,7 +223,7 @@ const Interface = createCodeGenerator<{ type: Grafaid.Schema.InterfaceType }>(
     code``
     code`
       export namespace ${renderName(type)} {
-        ${directFields.map((field) => renderOutputField({ config, field })).join(`\n`)}
+        ${directFields.map((field) => renderOutputField({ config, field, parentType: type })).join(`\n`)}
       }
     `
     code``
@@ -281,7 +286,7 @@ const OutputObject = createCodeGenerator<{ type: Grafaid.Schema.ObjectType }>(
     code``
     code`
       export namespace ${renderName(type)} {
-        ${fields.map((field) => renderOutputField({ config, field })).join(`\n// ${borderThin}\n\n`)}
+        ${fields.map((field) => renderOutputField({ config, field, parentType: type })).join(`\n// ${borderThin}\n\n`)}
       }
     `
     code``
@@ -299,8 +304,11 @@ const kindRenderMap = {
   ScalarStandard: null,
 } satisfies KindRenderers
 
-const renderOutputField = createCodeGenerator<{ field: Grafaid.Schema.Field<any, any> }>(
-  ({ config, field, code }) => {
+const renderOutputField = createCodeGenerator<{
+  field: Grafaid.Schema.Field<any, any>
+  parentType: Grafaid.Schema.ObjectType | Grafaid.Schema.InterfaceType
+}>(
+  ({ config, field, parentType, code }) => {
     const argsAnalysis = analyzeArgsNullability(field.args)
     const fieldNamedType = Grafaid.Schema.getNamedType(field.type)
 
@@ -347,7 +355,7 @@ const renderOutputField = createCodeGenerator<{ field: Grafaid.Schema.Field<any,
       code(Code.tsInterface({
         name: argumentsName,
         parameters: $ContextTypeParameter,
-        block: field.args.map(arg => getInputFieldLike(config, arg)),
+        block: field.args.map(arg => getArgument(config, arg, field, parentType)),
       }))
       code``
     }
@@ -391,6 +399,22 @@ const getInputFieldLike = (config: Config, inputFieldLike: Grafaid.Schema.Argume
       tsDoc: getTsDocContents(config, inputFieldLike),
       optional: Grafaid.Schema.isNullableType(inputFieldLike.type),
       value: renderArgumentType(inputFieldLike.type),
+    }),
+  ] as const
+}
+
+const getArgument = (
+  config: Config,
+  arg: Grafaid.Schema.Argument,
+  parentField: Grafaid.Schema.Field<any, any>,
+  parentType: Grafaid.Schema.ObjectType | Grafaid.Schema.InterfaceType,
+) => {
+  return [
+    getInputFieldKey(arg),
+    Code.objectField$({
+      tsDoc: getArgumentDoc(config, arg, parentField, parentType as Grafaid.Schema.ObjectType),
+      optional: Grafaid.Schema.isNullableType(arg.type),
+      value: renderArgumentType(arg.type),
     }),
   ] as const
 }
@@ -535,11 +559,11 @@ namespace H {
     type: Grafaid.Schema.ObjectType | Grafaid.Schema.UnionType | Grafaid.Schema.InterfaceType,
   ) => {
     const doc = Code.TSDoc(`
-      Inline fragments for field groups. 
-     
+      Inline fragments for field groups.
+
       Generally a niche feature. This can be useful for example to apply an \`@include\` directive to a subset of the
       selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
-       
+
       @see https://spec.graphql.org/draft/#sec-Inline-Fragments
     `)
 
@@ -571,7 +595,7 @@ namespace H {
     if (kind === `object`) {
       return Code.TSDoc(`
         A meta field. Is the name of the type being selected.
-          
+
         ${see}
       `)
     }
@@ -580,7 +604,7 @@ namespace H {
     return Code.TSDoc(`
        A meta field. Is the name of the type being selected. Since this is a ${kind} type and thus polymorphic,
        the name is one of the ${relation} type names, whichever is ultimately returned at runtime.
-       
+
        ${see}
     `)
   }

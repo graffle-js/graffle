@@ -1,6 +1,6 @@
+import { ATransport, BTransport } from '#test/fixtures/transports'
+import { g0, test } from '#test/helpers'
 import { expect, expectTypeOf } from 'vitest'
-import { ATransport, BTransport } from '../../../tests/_/fixtures/transports.js'
-import { g0, test } from '../../../tests/_/helpers.js'
 import { RequestInterceptors } from '../../context/fragments/requestInterceptors/$.js'
 
 const g1 = g0.transport(ATransport)

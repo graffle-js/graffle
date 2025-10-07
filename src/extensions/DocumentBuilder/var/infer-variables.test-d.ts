@@ -1,6 +1,7 @@
 import { Ts } from '@wollybeard/kit'
 import type { PossibleWithScalars } from '../__tests__/fixtures/possible-with-scalars/$.js'
 import type { Possible } from '../__tests__/fixtures/possible/$.js'
+import type { Select } from '../Select/$.js'
 import type { InferFromQuery } from './infer.js'
 import { $ } from './var.js'
 

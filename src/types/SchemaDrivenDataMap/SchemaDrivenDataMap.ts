@@ -1,5 +1,5 @@
-import type { Grafaid } from '../../lib/grafaid/$.js'
-import { isString } from '../../lib/prelude.js'
+import type { Grafaid } from '#lib/grafaid'
+import { isString } from '#src/lib/prelude.js'
 import { Schema } from '../Schema/$.js'
 import type { InlineType } from './InlineType.js'
 

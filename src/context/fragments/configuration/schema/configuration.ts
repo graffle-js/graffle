@@ -1,6 +1,6 @@
-import { Configurator as C } from '../../../../lib/configurator/configurator.js'
-import { GlobalRegistry } from '../../../../types/GlobalRegistry/GlobalRegistry.js'
-import type { SchemaDrivenDataMap } from '../../../../types/SchemaDrivenDataMap/$.js'
+import { Configurator as C } from '#src/lib/configurator/configurator.js'
+import { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
+import type { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
 
 /**
  * @remarks This input extends base with properties that can be filled with exports from the generated client.

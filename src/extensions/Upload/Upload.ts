@@ -1,5 +1,5 @@
-import { Extension } from '../../exports/extension.js'
-import type { RequestAnalyzedInput } from '../../lib/grafaid/graphql.js'
+import { Extension } from '#graffle/extension'
+import type { RequestAnalyzedInput } from '#src/lib/grafaid/graphql.js'
 import { createBody } from './createBody.js'
 
 // todo [1]

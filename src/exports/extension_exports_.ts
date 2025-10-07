@@ -1,5 +1,5 @@
 export * from '../context/fragments/extensions/dataType/$$.js'
 // export * from '../context/fragments/properties/$.js'
+export { Configurator } from '#src/lib/configurator/configurator.js'
 export * from '../context/fragments/transports/dataType/$.js'
 export * from '../generator/extension/$.js'
-export { Configurator } from '../lib/configurator/configurator.js'

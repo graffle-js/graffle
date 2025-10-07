@@ -1,4 +1,4 @@
-import type { GlobalRegistry } from '../../types/GlobalRegistry/GlobalRegistry.js'
+import type { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
 
 declare global {
   namespace GraffleGlobal {

@@ -1,7 +1,7 @@
-import { Grafaid } from '../../../lib/grafaid/$.js'
-import { Nodes } from '../../../lib/grafaid/_Nodes.js'
-import type { Schema } from '../../../types/Schema/$.js'
-import { SchemaDrivenDataMap } from '../../../types/SchemaDrivenDataMap/$.js'
+import { Grafaid } from '#lib/grafaid'
+import { Nodes } from '#src/lib/grafaid/_Nodes.js'
+import type { Schema } from '#src/types/Schema/$.js'
+import { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
 import { Select } from '../Select/$.js'
 import type { Options } from './nodes/1_Document.js'
 

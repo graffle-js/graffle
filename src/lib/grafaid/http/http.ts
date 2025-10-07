@@ -1,6 +1,6 @@
+import { isRecordLikeObject } from '#src/lib/prelude.js'
 import type { FormattedExecutionResult, GraphQLFormattedError } from 'graphql'
 import { CONTENT_TYPE_GQL, CONTENT_TYPE_JSON } from '../../http.js'
-import { isRecordLikeObject } from '../../prelude.js'
 import type { Variables } from '../graphql.js'
 
 export interface RequestConfig {

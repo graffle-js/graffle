@@ -1,9 +1,8 @@
-import { Transport } from '../../context/fragments/transports/dataType/$.js' // TODO import from entrypoint
-import { Extension } from '../../exports/extension.js'
-import type { Grafaid } from '../../lib/grafaid/$.js'
-import { OperationTypeToAccessKind, print } from '../../lib/grafaid/document.js'
-import { getRequestEncodeSearchParameters, postRequestEncodeBody } from '../../lib/grafaid/http/http.js'
-import { getRequestHeadersRec, parseExecutionResult, postRequestHeadersRec } from '../../lib/grafaid/http/http.js'
+import { Extension } from '#graffle/extension'
+import type { Grafaid } from '#lib/grafaid'
+import { OperationTypeToAccessKind, print } from '#src/lib/grafaid/document.js'
+import { getRequestEncodeSearchParameters, postRequestEncodeBody } from '#src/lib/grafaid/http/http.js'
+import { getRequestHeadersRec, parseExecutionResult, postRequestHeadersRec } from '#src/lib/grafaid/http/http.js'
 import {
   mergeHeadersInitWithStrategyMerge,
   mergeRequestInit,
@@ -12,9 +11,10 @@ import {
   searchParamsAppendAllToPath,
   URLInput,
   type URLInput as URLInputType,
-} from '../../lib/http.js'
-import type { httpMethodGet, httpMethodPost } from '../../lib/http.js'
-import { _, isString, type MaybePromise } from '../../lib/prelude.js'
+} from '#src/lib/http.js'
+import type { httpMethodGet, httpMethodPost } from '#src/lib/http.js'
+import { _, isString, type MaybePromise } from '#src/lib/prelude.js'
+import { Transport } from '../../context/fragments/transports/dataType/$.js' // TODO import from entrypoint
 
 // ----------------------------
 // Configuration

@@ -335,6 +335,15 @@ export namespace Query {
   > {
     /**
      * The name of the Pokemon to search for.
+     *
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `String!` |
+     * | **Parent** | {@link $NamedTypes.$Query}.pokemonByName |
+     * | **Path** | `Query.pokemonByName(name)` |
+     * | **Nullability** | Required |
      */
     name: $$Utilities.DocumentBuilderKit.Var.Maybe<string>
   }
@@ -376,6 +385,15 @@ export namespace Query {
   > {
     /**
      * Optional filter criteria for Pokemon.
+     *
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `PokemonFilter` |
+     * | **Parent** | {@link $NamedTypes.$Query}.pokemons |
+     * | **Path** | `Query.pokemons(filter)` |
+     * | **Nullability** | Optional |
      */
     filter?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$PokemonFilter<_$Context> | null | undefined>
   }
@@ -417,6 +435,15 @@ export namespace Query {
   > {
     /**
      * The name of the trainer to search for.
+     *
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `String!` |
+     * | **Parent** | {@link $NamedTypes.$Query}.trainerByName |
+     * | **Path** | `Query.trainerByName(name)` |
+     * | **Nullability** | Required |
      */
     name: $$Utilities.DocumentBuilderKit.Var.Maybe<string>
   }
@@ -564,22 +591,67 @@ export namespace Mutation {
   > {
     /**
      * The attack power of the new Pokemon.
+     *
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `Int` |
+     * | **Parent** | {@link $NamedTypes.$Mutation}.addPokemon |
+     * | **Path** | `Mutation.addPokemon(attack)` |
+     * | **Nullability** | Optional |
      */
     attack?: $$Utilities.DocumentBuilderKit.Var.Maybe<number | null | undefined>
     /**
      * The defense power of the new Pokemon.
+     *
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `Int` |
+     * | **Parent** | {@link $NamedTypes.$Mutation}.addPokemon |
+     * | **Path** | `Mutation.addPokemon(defense)` |
+     * | **Nullability** | Optional |
      */
     defense?: $$Utilities.DocumentBuilderKit.Var.Maybe<number | null | undefined>
     /**
      * The health points of the new Pokemon.
+     *
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `Int` |
+     * | **Parent** | {@link $NamedTypes.$Mutation}.addPokemon |
+     * | **Path** | `Mutation.addPokemon(hp)` |
+     * | **Nullability** | Optional |
      */
     hp?: $$Utilities.DocumentBuilderKit.Var.Maybe<number | null | undefined>
     /**
      * The name of the new Pokemon.
+     *
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `String!` |
+     * | **Parent** | {@link $NamedTypes.$Mutation}.addPokemon |
+     * | **Path** | `Mutation.addPokemon(name)` |
+     * | **Nullability** | Required |
      */
     name: $$Utilities.DocumentBuilderKit.Var.Maybe<string>
     /**
      * The elemental type of the new Pokemon.
+     *
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `PokemonType!` |
+     * | **Parent** | {@link $NamedTypes.$Mutation}.addPokemon |
+     * | **Path** | `Mutation.addPokemon(type)` |
+     * | **Nullability** | Required |
      */
     $type: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$PokemonType>
   }

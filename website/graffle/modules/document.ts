@@ -1,8 +1,11 @@
-import type { TypedDocument } from "graffle/client";
-import { createStaticRootType } from "graffle/extensions/document-builder";
+import type { OperationMetadata, TypedDocument, TypedFullDocumentString } from "graffle/client";
+import { createStaticRootType, document as documentBuilder } from "graffle/extensions/document-builder";
+import type * as $$StaticBuilder from "graffle/extensions/document-builder";
+import type { InferOperations } from "graffle/extensions/document-builder";
 import { OperationTypeNode } from "graphql";
 import type * as ArgumentsMap from "./arguments-map.js";
 import type * as $$Scalar from "./scalar.js";
+import { schemaDrivenDataMap as sddm } from "./schema-driven-data-map.js";
 import type * as SelectionSets from "./selection-sets.js";
 
 import type * as $$Utilities from "graffle/utilities-for-generated";
@@ -16,6 +19,15 @@ interface StaticDocumentContext {
   typeHookRequestResultDataTypes: never;
   scalars: $$Scalar.$Registry;
 }
+
+/**
+ * Configuration for static document builders.
+ * Generated code always has SDDM enabled since the generator creates the schema-driven data map.
+ */
+type DocumentConfig = {
+  schema: $$Schema.Schema;
+  sddmEnabled: true;
+};
 
 /**
  * Static query builder for compile-time GraphQL document generation.
@@ -52,6 +64,7 @@ interface StaticDocumentContext {
  *
  * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
  */
+// Note: This interface conforms to StaticDocumentBuilder<DocumentConfig, OperationTypeNode.QUERY>
 export interface QueryBuilder {
   /**
    * Retrieve all battles that have occurred.
@@ -100,7 +113,8 @@ export interface QueryBuilder {
         { battles: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >;
 
   /**
@@ -153,7 +167,8 @@ export interface QueryBuilder {
         { beings: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >;
 
   /**
@@ -214,7 +229,8 @@ export interface QueryBuilder {
         { pokemonByName: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >;
 
   /**
@@ -275,7 +291,8 @@ export interface QueryBuilder {
         { pokemons: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >;
 
   /**
@@ -332,7 +349,8 @@ export interface QueryBuilder {
         { trainerByName: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >;
 
   /**
@@ -388,7 +406,8 @@ export interface QueryBuilder {
         { trainers: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >;
 }
 /**
@@ -426,7 +445,7 @@ export interface QueryBuilder {
  *
  * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
  */
-export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY) as any;
+export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY, { sddm }) as any;
 
 /**
  * Static mutation builder for compile-time GraphQL document generation.
@@ -452,6 +471,7 @@ export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY)
  *
  * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
  */
+// Note: This interface conforms to StaticDocumentBuilder<DocumentConfig, OperationTypeNode.MUTATION>
 export interface MutationBuilder {
   /**
    * Add a new Pokemon to the database.
@@ -510,7 +530,8 @@ export interface MutationBuilder {
         { addPokemon: Exclude<$SelectionSet, undefined> },
         ArgumentsMap.ArgumentsMap
       >
-    >
+    >,
+    true
   >;
 }
 /**
@@ -537,4 +558,43 @@ export interface MutationBuilder {
  *
  * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
  */
-export const mutation: MutationBuilder = createStaticRootType(OperationTypeNode.MUTATION) as any;
+export const mutation: MutationBuilder = createStaticRootType(OperationTypeNode.MUTATION, { sddm }) as any;
+
+/**
+ * Create a full GraphQL document with one or more named operations.
+ *
+ * Unlike `query` and `mutation` which create single-operation documents, this function creates a full document that can contain multiple operations. Returns a `TypedFullDocumentString` that captures type information for all operations.
+ *
+ * @param documentObject - Document object with query and/or mutation operations
+ * @returns TypedFullDocumentString representing the complete document
+ *
+ * @example
+ * ```ts
+ * const doc = document({
+ * query: {
+ * getUser: { user: { id: true, name: true } },
+ * getPost: { post: { id: true, title: true } }
+ * }
+ * })
+ *
+ * // Use with client.send()
+ * const user = await client.send(doc, 'getUser')
+ * ```
+ */
+export const document = ((documentObject: any) => documentBuilder(documentObject, { sddm })) as Document;
+
+/**
+ * Document builder function type for creating multi-operation documents.
+ */
+export interface Document {
+  <$Document>(
+    document: $$Utilities.ExactNonEmpty<
+      $Document,
+      SelectionSets.$Document<
+        { scalars: $$Scalar.$Registry }
+      >
+    >,
+  ): TypedFullDocumentString<
+    InferOperations<$Document, $$Schema.Schema, ArgumentsMap.ArgumentsMap, StaticDocumentContext>
+  >;
+}

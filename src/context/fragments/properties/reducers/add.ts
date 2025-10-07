@@ -1,6 +1,6 @@
 // type MethodArguments = Properties | PropertiesComputer<Context, Properties>
 
-import { isObjectEmpty, type ObjectMergeShallow } from '../../../../lib/prelude.js'
+import { isObjectEmpty, type ObjectMergeShallow } from '#src/lib/prelude.js'
 import {
   type ContextFragment,
   contextFragmentPropertiesTypeLevel,

@@ -1,4 +1,4 @@
-import type { ConfigManager } from '../../config-manager/$.js'
+import type { ConfigManager } from '#lib/config-manager'
 import type { Overload } from '../Overload/$.js'
 import type { Extension } from './$.js'
 

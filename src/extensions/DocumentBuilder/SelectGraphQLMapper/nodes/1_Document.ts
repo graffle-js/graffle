@@ -1,6 +1,6 @@
-import type { Schema, SchemaDrivenDataMap } from '../../../../exports/utilities-for-generated.js'
-import type { Grafaid } from '../../../../lib/grafaid/$.js'
-import { Nodes } from '../../../../lib/grafaid/_Nodes.js'
+import type { Schema, SchemaDrivenDataMap } from '#graffle/utilities-for-generated'
+import type { Grafaid } from '#lib/grafaid'
+import { Nodes } from '#src/lib/grafaid/_Nodes.js'
 import type { Select } from '../../Select/$.js'
 import { toGraphQLOperationDefinition } from './2_OperationDefinition.js'
 

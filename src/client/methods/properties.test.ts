@@ -1,14 +1,14 @@
-import { describe, expect, expectTypeOf } from 'vitest'
-import { test } from '../../../tests/_/helpers.js'
-import type { Context } from '../../context/context.js'
-import { type ContextEmpty, contextEmpty } from '../../context/ContextEmpty.js'
-import { type Configuration } from '../../context/fragments/configuration/$.js'
+import type { Context } from '#src/context/context.js'
+import { type ContextEmpty, contextEmpty } from '#src/context/ContextEmpty.js'
 import {
   propertiesComputerParameters,
   propertiesComputerPreflight,
   propertiesComputerPreflight$Func,
   propertiesStatic1,
-} from '../../context/fragments/properties/_tests/_fixtures.js'
+} from '#src/context/fragments/properties/_tests/_fixtures.js'
+import { test } from '#test/helpers'
+import { describe, expect, expectTypeOf } from 'vitest'
+import { type Configuration } from '../../context/fragments/configuration/$.js'
 import { type Client_justContext } from '../client.js'
 
 test(`initial context is empty`, ({ g0 }) => {

@@ -1,8 +1,8 @@
+import { Errors } from '#lib/errors'
+import { isPathToADirectory, toAbsolutePath } from '#src/lib/fsp.js'
+import { importFirst } from '#src/lib/import-first.js'
+import { isError } from '#src/lib/prelude.js'
 import * as Path from 'node:path'
-import { Errors } from '../../lib/errors/$.js'
-import { isPathToADirectory, toAbsolutePath } from '../../lib/fsp.js'
-import { importFirst } from '../../lib/import-first.js'
-import { isError } from '../../lib/prelude.js'
 import { type Builder, isBuilder } from './builder.js'
 
 interface Config {

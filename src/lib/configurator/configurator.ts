@@ -1,5 +1,5 @@
+import { shallowMergeWithoutUndefined } from '#src/lib/prelude.js'
 import type { HasRequiredKeys } from 'type-fest'
-import { shallowMergeWithoutUndefined } from '../../lib/prelude.js'
 
 // ----------------------------
 // Data Type

@@ -1,6 +1,6 @@
-import type { Anyware } from '../../../../lib/anyware/$.js'
-import type { Tuple, Writeable } from '../../../../lib/prelude.js'
-import type { RequestPipeline } from '../../../../requestPipeline/RequestPipeline.js'
+import type { Anyware } from '#lib/anyware'
+import type { Tuple, Writeable } from '#src/lib/prelude.js'
+import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
 import type { Transport } from '../dataType/$.js'
 import type { ContextFragment, ContextTransports_Configurations, ContextTransports_Registry } from '../fragment.js'
 
@@ -80,7 +80,7 @@ export type AddMany<
         readonly current: $Context['transports']['current'] extends undefined
           ? $Transports[0]['name']
           : $Context['transports']['current']
-        readonly registry: 
+        readonly registry:
           & $Context['transports']['registry']
           & Tuple.IndexBy<$Transports, 'name'>
       } :

@@ -1,15 +1,15 @@
+import { db } from '#test/schema/possible/db.js'
 import { describe, expect } from 'vitest'
 import { DocumentBuilderKit } from '../../src/extensions/DocumentBuilder/$.js'
 import { Possible } from '../../src/extensions/DocumentBuilder/__tests__/fixtures/possible/$.js'
 import { Grafaid } from '../../src/lib/grafaid/$.js'
 import type { Schema } from '../../src/types/Schema/$.js'
 import { DateScalar } from '../_/fixtures/scalars.js'
-import { db } from '../_/fixtures/schemas/possible/db.js'
 import { createGraphQLResponse, createGraphQLResponseData, test } from '../_/helpers.js'
 
-type QueryWithDate = Possible.SelectionSets.Query<
-  Schema.Scalar.Registry.AddScalar<Schema.Scalar.Registry.Empty, typeof DateScalar>
->
+type QueryWithDate = Possible.SelectionSets.Query<{
+  scalars: Schema.Scalar.Registry.AddScalar<Schema.Scalar.Registry.Empty, typeof DateScalar>
+}>
 
 type TestCase = [
   describe: string,

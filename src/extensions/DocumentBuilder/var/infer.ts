@@ -6,12 +6,11 @@
  * using the ArgumentsMap literal types to determine proper types for each variable.
  */
 
-// import type { UnionToIntersection } from '../../../lib/prelude.js'
-import type { ExtractFromOperation } from '#extensions/DocumentBuilder/var/extract.js'
+import type { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
 import type { Simplify, UnionToIntersection } from 'type-fest'
-import type { SchemaDrivenDataMap } from '../../../types/SchemaDrivenDataMap/$.js'
 import type { PropertySignature } from '../PropertySignature.js'
 import type { Select } from '../Select/$.js'
+import type { ExtractFromOperation } from './extract.js'
 
 /**
  * Infer variables from a query operation selection set.
@@ -25,7 +24,7 @@ export type InferFromQuery<
 > =
   ___$OperationMap extends SchemaDrivenDataMap.OutputObject
     ? InferFromOperationMap<$SS, ___$OperationMap, $ArgsMap>
-    : never
+    : {}
 
 /**
  * Infer variables from a mutation operation selection set.
@@ -39,7 +38,7 @@ export type InferFromMutation<
 > =
   ___$OperationMap extends SchemaDrivenDataMap.OutputObject
     ? InferFromOperationMap<$SS, ___$OperationMap, $ArgsMap>
-    : never
+    : {}
 
 /**
  * Infer variables from a subscription operation selection set.
@@ -53,7 +52,7 @@ export type InferFromSubscription<
 > =
   ___$OperationMap extends SchemaDrivenDataMap.OutputObject
     ? InferFromOperationMap<$SS, ___$OperationMap, $ArgsMap>
-    : never
+    : {}
 
 /**
  * @deprecated Use InferFromQuery, InferFromMutation, or InferFromSubscription instead
@@ -67,7 +66,7 @@ export type InferVariables<
 > =
   ___$OperationMap extends SchemaDrivenDataMap.OutputObject
     ? InferFromOperationMap<$SS, ___$OperationMap, $ArgsMap>
-    : never
+    : {}
 
 /**
  * Core inferer that takes an operation map directly.
@@ -83,7 +82,7 @@ export type InferFromOperationMap<
   ___$ExtractedProps =
     ___$ExtractedPropSigs extends PropertySignature
       ? PropertySignature.ToProperty<___$ExtractedPropSigs>
-      : never
+      : {}
 > =
 // ___$ExtractedPropSigs
-[___$ExtractedProps] extends [never] ? never : Simplify<UnionToIntersection<___$ExtractedProps>>
+Simplify<UnionToIntersection<___$ExtractedProps>>

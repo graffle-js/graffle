@@ -140,6 +140,17 @@ export namespace DatabaseServer {
     return database
   }
 
+  export const reset = (database: Database) => {
+    // Clear all data
+    database.trainers.length = 0
+    database.pokemon.length = 0
+    database.patrons.length = 0
+    database.battles.length = 0
+
+    // Re-seed with initial data
+    seed(database)
+  }
+
   export const seed = (database: Database) => {
     const sally: Patron = { id: `0`, name: `Sally`, kind: `Patron`, money: 1_080_000 }
     const dylan: Patron = { id: `1`, name: `Dylan`, kind: `Patron`, money: 3_530_000 }

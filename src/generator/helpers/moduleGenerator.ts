@@ -1,9 +1,9 @@
+import { markdownToJsDoc } from '#src/lib/md-jsdoc/md-jsdoc.js'
+import { casesExhausted } from '#src/lib/prelude.js'
 import { camelCase, kebabCase, pascalCase, snakeCase } from 'es-toolkit'
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { markdownToJsDoc } from '../../lib/md-jsdoc/md-jsdoc.js'
-import { casesExhausted } from '../../lib/prelude.js'
 import type { Config } from '../config/config.js'
 import {
   createCodeGenerator,

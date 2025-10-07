@@ -4,6 +4,24 @@
     "@tsconfig/node22/tsconfig.json"
   ],
   "compilerOptions": {
-    "lib": ["ES2023"]
+    "lib": ["ES2023"],
+    "paths": {
+      "graffle": ["../src/exports/index.ts"],
+      "graffle/client": ["../src/exports/client.ts"],
+      "graffle/extension": ["../src/exports/extension.ts"],
+      "graffle/generator": ["../src/exports/generator.ts"],
+      "graffle/kit": ["../src/exports/kit.ts"],
+      "graffle/schema": ["../src/exports/schema.ts"],
+      "graffle/utilities-for-generated": ["../src/exports/utilities-for-generated.ts"],
+      "graffle/generator-helpers/standard-scalar-types": ["../src/types/Schema/StandardTypes/scalar.ts"],
+      "graffle/extensions/transport-http": ["../src/exports/extensions/transport-http/runtime.ts"],
+      "graffle/extensions/document-builder": ["../src/exports/extensions/document-builder/runtime.ts"],
+      "graffle/extensions/document-builder/kit": ["../src/exports/extensions/document-builder/kit.ts"],
+      "graffle/extensions/introspection": ["../src/exports/extensions/introspection/runtime.ts"],
+      "graffle/extensions/throws": ["../src/exports/extensions/throws/runtime.ts"],
+      "graffle/extensions/opentelemetry": ["../src/exports/extensions/opentelemetry/runtime.ts"],
+      "graffle/extensions/schema-errors": ["../src/exports/extensions/schema-errors/runtime.ts"],
+      "graffle/extensions/schema-errors/gentime": ["../src/exports/extensions/schema-errors/gentime.ts"]
+    }
   }
 }

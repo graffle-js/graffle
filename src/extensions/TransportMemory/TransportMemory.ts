@@ -1,9 +1,9 @@
-import { Extension } from '../../exports/extension.js'
-import type { Anyware } from '../../lib/anyware/$.js'
-import type { Grafaid } from '../../lib/grafaid/$.js'
-import { print } from '../../lib/grafaid/document.js'
-import { execute } from '../../lib/grafaid/execute.js'
-import type { RequestPipeline } from '../../requestPipeline/RequestPipeline.js'
+import { Extension } from '#graffle/extension'
+import type { Anyware } from '#lib/anyware'
+import type { Grafaid } from '#lib/grafaid'
+import { print } from '#src/lib/grafaid/document.js'
+import { execute } from '#src/lib/grafaid/execute.js'
+import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
 
 // ----------------------------
 // Configuration

@@ -2,7 +2,7 @@
   "name": "graffle",
   "description": "Simple GraphQL Client for JavaScript. Minimal. Extensible. Type Safe. Runs everywhere.",
   "version": "0.0.0-dripip",
-  "packageManager": "pnpm@10.11.0",
+  "packageManager": "pnpm@10.18.0",
   "type": "module",
   "bin": "cli.sh",
   "exports": {
@@ -57,10 +57,10 @@
   "homepage": "https://github.com/graffle-js/graffle",
   "scripts": {
     "extension:document-builder:test:generate-fixtures": "tsx src/extensions/DocumentBuilder/__tests__/fixtures/generate.ts",
-    "extension:schema-errors:test:generate-fixtures": "pnpm graffle --project src/extensions/SchemaErrors/__tests__/fixture",
+    "extension:schema-errors:test:generate-fixtures": "rm -rf src/extensions/SchemaErrors/__tests__/fixture/graffle && pnpm graffle --project src/extensions/SchemaErrors/__tests__/fixture",
     "graffle": "tsx ./src/cli/index.ts",
     "serve:pokemon": "tsx tests/_/services/pokemonManual.ts",
-    "gen:graffle": "pnpm test:e2e:github:gen:graffle && pnpm extension:schema-errors:test:generate-fixtures && pnpm extension:document-builder:test:generate-fixtures && pnpm website:gen:graffle",
+    "gen:graffle": "pnpm extension:schema-errors:test:generate-fixtures && pnpm extension:document-builder:test:generate-fixtures && pnpm website:gen:graffle",
     "examples:gen:graffle": "pnpm build && cd examples && pnpm i && pnpm gen:graffle",
     "examples:link-mode": "cd examples && pnpm add ..",
     "examples:test": "cd examples && pnpm test",
@@ -84,7 +84,6 @@
     "test:unit": "vitest --dir src",
     "test:integration": "vitest --dir tests/integration",
     "test:e2e": "vitest --dir tests/e2e --testTimeout 30000 --run",
-    "test:e2e:github:gen:graffle": "pnpm graffle --project tests/e2e/github/graffle.config.ts",
     "test": "vitest",
     "test:web": "vitest --environment jsdom",
     "test:types": "vitest --typecheck --dir src  --testNamePattern .*.test-d.ts",
@@ -146,7 +145,7 @@
     "@types/body-parser": "^1.19.5",
     "@types/express": "^5.0.1",
     "@types/node": "^22.14.1",
-    "@wollybeard/kit": "^0.66.0",
+    "@wollybeard/kit": "^0.67.0",
     "async-cleanup": "^1.0.0",
     "dprint": "^0.50.2",
     "dripip": "^0.10.0",
@@ -167,14 +166,35 @@
     "strip-ansi": "^7.1.0",
     "tsx": "^4.19.3",
     "typescript": "^5.9.3",
+    "vite-tsconfig-paths": "^5.1.4",
     "vitepress": "^1.6.3",
     "vitest": "^3.1.1",
     "zod": "^3.24.3"
   },
   "imports": {
-    "#*": {
-      "default": "./build/*"
-    }
+    "#src/*.js": "./build/*.js",
+    "#src/*": "./build/*",
+    "#graffle": "./build/exports/index.js",
+    "#graffle/client": "./build/exports/client.js",
+    "#graffle/extension": "./build/exports/extension.js",
+    "#graffle/generator": "./build/exports/generator.js",
+    "#graffle/kit": "./build/exports/kit.js",
+    "#graffle/schema": "./build/exports/schema.js",
+    "#graffle/utilities-for-generated": "./build/exports/utilities-for-generated.js",
+    "#graffle/generator-helpers/standard-scalar-types": "./build/types/Schema/StandardTypes/scalar.js",
+    "#graffle/extensions/transport-http": "./build/exports/extensions/transport-http/runtime.js",
+    "#graffle/extensions/document-builder": "./build/exports/extensions/document-builder/runtime.js",
+    "#graffle/extension-exports": "./build/exports/extension_exports.js",
+    "#graffle/presets/bare": "./build/exports/presets/bare.js",
+    "#graffle/presets/basic": "./build/exports/presets/basic.js",
+    "#graffle/presets/minimal": "./build/exports/presets/minimal.js",
+    "#lib/anyware": "./build/lib/anyware/$.js",
+    "#lib/config-manager": "./build/lib/config-manager/$.js",
+    "#lib/errors": "./build/lib/errors/$.js",
+    "#lib/grafaid": "./build/lib/grafaid/$.js",
+    "#lib/md-jsdoc": "./build/lib/md-jsdoc/$.js",
+    "#lib/tex": "./build/lib/tex/$.js",
+    "#lib/type-function": "./build/lib/type-function/$.js"
   },
   "libra": {
     "entities": {

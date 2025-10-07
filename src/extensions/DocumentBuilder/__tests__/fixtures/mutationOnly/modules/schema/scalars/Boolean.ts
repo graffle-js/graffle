@@ -1,1 +1,1 @@
-export type { Boolean } from '../../../../../../../../exports/utilities-for-generated.js'
+export type { Boolean } from '#graffle/utilities-for-generated'

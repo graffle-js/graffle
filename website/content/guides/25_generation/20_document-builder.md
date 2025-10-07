@@ -6,14 +6,14 @@ Generate typed GraphQL document strings at compile-time without a client instanc
 
 After running the generator, import `query`, `mutation`, or `subscription` builders from your generated code. Call methods to generate `TypedDocument.String` objects with the GraphQL string and full TypeScript types.
 
-```ts twoslash
+```ts
 import { $ } from 'graffle/extensions/document-builder'
 import { Graffle } from './graffle/$.js'
 
-const doc = Graffle.query.user({
-  $: { id: $ }, // Variables automatically extracted
+const doc = Graffle.query.trainerByName({
+  $: { name: $ }, // Variables automatically extracted
   name: true,
-  email: true,
+  class: true,
 })
 
 // doc.document → GraphQL string
@@ -24,11 +24,99 @@ const doc = Graffle.query.user({
 
 - [Complete Example](../../../../examples/55_document-builder/document-builder_static.ts)
 
+## Building Full Documents
+
+The `Graffle.document()` function creates complete GraphQL documents containing multiple named operations (queries and/or mutations). This is useful when you want to define several operations in one document and execute them selectively.
+
+```ts
+import { $ } from 'graffle/extensions/document-builder'
+import { Graffle } from './graffle/$.js'
+
+const doc = Graffle.document({
+  query: {
+    getTrainer: {
+      trainerByName: {
+        $: { name: $('trainerName') },
+        id: true,
+        name: true,
+        class: true,
+      },
+    },
+    getPokemons: {
+      pokemons: {
+        name: true,
+        type: true,
+      },
+    },
+  },
+  mutation: {
+    addTrainer: {
+      addPokemon: {
+        $: { name: $('pokemonName'), $type: $('pokemonType') },
+        name: true,
+        type: true,
+      },
+    },
+  },
+})
+```
+
+### Sending Documents with `client.send()`
+
+Use the `client.send()` method to execute documents directly without chaining from `.gql()`:
+
+```ts
+import { $ } from 'graffle/extensions/document-builder'
+import { Graffle } from './graffle/$.js'
+
+const client = Graffle.create()
+
+// Single operation - no operation name needed
+const singleOpDoc = Graffle.document({
+  query: {
+    getTrainer: {
+      trainerByName: { $: { name: $('name') }, id: true, name: true },
+    },
+  },
+})
+const trainer = await client.send(singleOpDoc, { name: 'Ash' })
+
+// Multiple operations - operation name required
+const multiOpDoc = Graffle.document({
+  query: {
+    getTrainer: { trainerByName: { $: { name: $('name') }, id: true } },
+    getPokemons: { pokemons: { name: true } },
+  },
+})
+const trainerResult = await client.send(multiOpDoc, 'getTrainer', {
+  name: 'Ash',
+})
+const pokemonsResult = await client.send(multiOpDoc, 'getPokemons')
+```
+
+### Comparison with `.gql()`
+
+Both approaches are supported:
+
+```ts
+// Chained API
+const result = await client.gql(doc).send({ id: '123' })
+
+// One-shot API
+const result = await client.send(doc, { id: '123' })
+```
+
+Use `.send()` when you have a pre-built document from static builders or codegen. Use `.gql().send()` when building the document inline.
+
+**Example:**
+
+- [Full Document Examples](../../../../examples/55_document-builder/document-builder_static.ts#L163-L285)
+
 ## Configuration
 
 The document builder can be configured using global defaults:
 
-```ts twoslash
+```ts
 import { staticBuilderDefaults } from 'graffle/extensions/document-builder'
 
 // Change default behavior for all queries
@@ -46,16 +134,17 @@ By default, the builder extracts **all** arguments as GraphQL variables (`hoistA
 **Example with default behavior:**
 
 ```ts
-const doc = query.user({
-  $: { id: '123', status: 'ACTIVE' },
+const doc = query.trainerByName({
+  $: { name: 'Ash' },
   name: true,
+  class: true,
 })
 
 // Generates:
-// query($id: ID!, $status: String!) {
-//   user(id: $id, status: $status) { name }
+// query($name: String!) {
+//   trainerByName(name: $name) { name class }
 // }
-// Variables: { id: "123", status: "ACTIVE" }
+// Variables: { name: "Ash" }
 ```
 
 **Disabling automatic extraction:**
@@ -63,13 +152,13 @@ const doc = query.user({
 ```ts
 staticBuilderDefaults.hoistArguments = false
 
-const doc = query.user({
-  $: { id: '123' },
+const doc = query.trainerByName({
+  $: { name: 'Ash' },
   name: true,
 })
 
 // Generates:
-// query { user(id: "123") { name } }
+// query { trainerByName(name: "Ash") { name } }
 ```
 
 **Note:** Explicit `$` markers are ALWAYS extracted as variables, regardless of this setting:
@@ -77,17 +166,19 @@ const doc = query.user({
 ```ts
 staticBuilderDefaults.hoistArguments = false
 
-const doc = query.user({
+const doc = query.pokemonByName({
   $: {
-    id: $('userId'), // Always extracted
-    name: 'John', // Inlined (due to setting)
+    name: $('pokemonName'), // Always extracted
   },
   name: true,
+  trainer: {
+    name: true,
+  },
 })
 
 // Generates:
-// query($userId: ID!) {
-//   user(id: $userId, name: "John") { name }
+// query($pokemonName: String!) {
+//   pokemonByName(name: $pokemonName) { name trainer { name } }
 // }
 ```
 
@@ -96,12 +187,12 @@ const doc = query.user({
 When both explicit `$` markers and auto-hoisted arguments want the same variable name, automatic renaming occurs:
 
 ```ts
-const doc = query.user({
+const doc = query.trainerByName({
   $: {
-    id: $('userId'), // Gets: $userId
-    userId: '123', // Gets: $userId_2 (auto-renamed)
+    name: $('trainerName'), // Gets: $trainerName
   },
   name: true,
+  class: true,
 })
 ```
 
@@ -115,13 +206,13 @@ This section provides detailed examples of how each GraphQL feature is expressed
 == Graffle
 
 ```ts
-query.user({ name: true })
+query.trainers({ name: true })
 ```
 
 == GraphQL
 
 ```graphql
-query { user { name } }
+query { trainers { name } }
 ```
 
 :::
@@ -199,13 +290,13 @@ query {
 == Graffle
 
 ```ts
-query.user({ $: { id: $ }, name: true })
+query.trainerByName({ $: { name: $ }, name: true })
 ```
 
 == GraphQL
 
 ```graphql
-query ($id: ID!) { user(id: $id) { name } }
+query ($name: String!) { trainerByName(name: $name) { name } }
 ```
 
 :::
@@ -218,40 +309,32 @@ Graffle automatically infers GraphQL types for variables using two strategies:
 
 When using a generated client, Graffle uses Schema-Driven Data Map (SDDM) metadata to infer precise GraphQL types including nullability, list types, and custom scalars:
 
-```ts twoslash
+```ts
 import { Graffle } from './graffle/$.js'
 
-Graffle.query.user({
-  $: { id: '123' }, // Inferred as: $id: ID!
+Graffle.query.trainerByName({
+  $: { name: 'Ash' }, // Inferred as: $name: String!
   name: true,
 })
 
-// Generated: query($id: ID!) { user(id: $id) { name } }
+// Generated: query($name: String!) { trainerByName(name: $name) { name } }
 ```
 
-**2. Value-Based (without schema):**
+**2. Value-Based (without SDDM):**
 
-When schema information is unavailable (e.g., using static builder without generation), Graffle infers types from runtime values:
+When SDDM metadata is unavailable (e.g., stripped for bundle size), the same generated client falls back to inferring GraphQL types from JavaScript runtime values:
 
-```ts twoslash
-import { createStaticRootType } from 'graffle/extensions/document-builder'
-import { OperationTypeNode } from 'graphql'
+```ts
+import { Graffle } from './graffle/$.js'
 
-const query = createStaticRootType(OperationTypeNode.QUERY)
-
-query.user({
-  $: {
-    id: '123', // Inferred as: String
-    age: 42, // Inferred as: Int
-    active: true, // Inferred as: Boolean
-    tags: ['a', 'b'], // Inferred as: [String]
-  },
+// Without SDDM, types are inferred from JS values:
+Graffle.query.trainerByName({
+  $: { name: 'Ash' }, // Inferred as: String (not ID!)
   name: true,
 })
 
-// Generated: query($id: String, $age: Int, $active: Boolean, $tags: [String]) {
-//   user(id: $id, age: $age, active: $active, tags: $tags) { name }
-// }
+// Generated: query($name: String) { trainerByName(name: $name) { name } }
+// Note: String vs ID! - less precise than schema-driven inference
 ```
 
 **Type Inference Rules:**
@@ -272,12 +355,12 @@ Variables can be named explicitly or use automatic naming:
 
 ```ts
 // Explicit naming
-query.user({ $: { id: $('userId') }, name: true })
-// Generated: query($userId: ID!) { user(id: $userId) { name } }
+query.trainerByName({ $: { name: $('trainerName') }, name: true })
+// Generated: query($trainerName: String!) { trainerByName(name: $trainerName) { name } }
 
 // Automatic naming (uses argument name)
-query.user({ $: { id: $ }, name: true })
-// Generated: query($id: ID!) { user(id: $id) { name } }
+query.trainerByName({ $: { name: $ }, name: true })
+// Generated: query($name: String!) { trainerByName(name: $name) { name } }
 ```
 
 #### Optional and Required Variables
@@ -286,12 +369,12 @@ Use modifiers to control nullability:
 
 ```ts
 // Required (default)
-query.user({ $: { id: $ }, name: true })
-// Generated: query($id: ID!) { ... }
+query.trainerByName({ $: { name: $ }, name: true })
+// Generated: query($name: String!) { ... }
 
 // Optional
-query.user({ $: { id: $.optional }, name: true })
-// Generated: query($id: ID) { ... }
+query.trainerByName({ $: { name: $.optional }, name: true })
+// Generated: query($name: String) { ... }
 ```
 
 #### Variable Defaults
@@ -299,8 +382,8 @@ query.user({ $: { id: $.optional }, name: true })
 Provide default values using the third parameter:
 
 ```ts
-query.users({ $: { limit: $(10) }, name: true })
-// Generated: query($limit: Int = 10) { users(limit: $limit) { name } }
+query.trainers({ $: { limit: $(10) }, name: true })
+// Generated: query($limit: Int = 10) { trainers(limit: $limit) { name } }
 ```
 
 ### Mutations
@@ -309,13 +392,18 @@ query.users({ $: { limit: $(10) }, name: true })
 == Graffle
 
 ```ts
-mutation.createUser({ $: { name: 'Alice' }, id: true })
+mutation.addPokemon({
+  $: { name: 'Pikachu', $type: 'ELECTRIC' },
+  id: true,
+  name: true,
+  type: true,
+})
 ```
 
 == GraphQL
 
 ```graphql
-mutation { createUser(name: "Alice") { id } }
+mutation { addPokemon(name: "Pikachu", type: ELECTRIC) { id name type } }
 ```
 
 :::

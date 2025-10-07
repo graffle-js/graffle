@@ -1,6 +1,6 @@
+import { ATransport, BTransport } from '#test/fixtures/transports'
+import { test as t } from '#test/helpers'
 import { expectTypeOf } from 'vitest'
-import { ATransport, BTransport } from '../../../../../tests/_/fixtures/transports.js'
-import { test as t } from '../../../../../tests/_/helpers.js'
 import type { ContextEmpty } from '../../../ContextEmpty.js'
 import { type AddMany, addMany } from './addMany.js'
 import { setCurrentAndOptionallyConfigure } from './setCurrentAndOptionallyConfigure.js'

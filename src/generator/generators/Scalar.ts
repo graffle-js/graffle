@@ -1,6 +1,6 @@
-import { Code } from '../../lib/Code.js'
-import { Grafaid } from '../../lib/grafaid/$.js'
-import { Tex } from '../../lib/tex/$.js'
+import { Grafaid } from '#lib/grafaid'
+import { Tex } from '#lib/tex'
+import { Code } from '#src/lib/Code.js'
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 import { importUtilities } from '../helpers/pathHelpers.js'
@@ -64,7 +64,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
     if (isNeedCustomScalarDefaults) {
       if (config.lint.missingCustomScalarCodec) {
         console.log(
-          `WARNING: Custom scalars detected in the schema, but you have not created a custom scalars module to import implementations from.`,
+          `WARNING: Custom scalars detected in the schema, but you have not created a custom scalars module to import implementations from. Create one at: ${config.paths.project.inputs.scalars}`,
         )
       }
 

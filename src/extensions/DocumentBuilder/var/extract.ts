@@ -1,6 +1,6 @@
 // TODO: Restore @wollybeard/kit import once it becomes a production dependency
 // import type { Obj, Ts } from '@wollybeard/kit'
-import type { SchemaDrivenDataMap } from '../../../types/SchemaDrivenDataMap/$.js'
+import type { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
 import type { Select } from '../Select/$.js'
 import type { Builder as VarBuilder, BuilderSentinel } from './var.js'
 
@@ -99,7 +99,7 @@ export type ExtractFromArgsOrInputObject<
     $SSArgs[k] extends BuilderSentinel ?
       {
         // @ts-expect-error
-        name: $SSArgs[k]['_']['name'] extends string ? $SSArgs[k]['_']['name'] : k;
+        name: $SSArgs[k]['_']['name'] extends string ? $SSArgs[k]['_']['name'] : Select.Arguments.EnumKeyPrefixStrip<k>;
         // @ts-expect-error
         type: VarBuilderToType<$ArgsMapArgs[k]['$t'], $SSArgs[k]>
         // type: $ArgumentsMap
