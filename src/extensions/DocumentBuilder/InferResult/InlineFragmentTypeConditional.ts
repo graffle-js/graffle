@@ -1,5 +1,5 @@
-import type { Obj } from '@wollybeard/kit'
 import type { Schema } from '#src/types/Schema/$.js'
+import type { Obj } from '@wollybeard/kit'
 import type { Select } from '../Select/$.js'
 import type { OutputObjectLike } from './OutputObjectLike.js'
 

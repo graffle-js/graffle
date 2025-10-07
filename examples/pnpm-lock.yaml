@@ -34,8 +34,8 @@ importers:
         specifier: ^2.0.5
         version: 2.0.5
       '@wollybeard/kit':
-        specifier: ^0.68.0
-        version: 0.68.0(@effect/platform@0.91.1(effect@3.17.14))(effect@3.17.14)
+        specifier: ^0.71.0
+        version: 0.71.0(@effect/platform@0.91.1(effect@3.17.14))(effect@3.17.14)
       tsx:
         specifier: ^4.19.3
         version: 4.19.3
@@ -449,8 +449,14 @@ packages:
   '@vitest/utils@3.1.1':
     resolution: {integrity: sha512-1XIjflyaU2k3HMArJ50bwSh3wKWPD6Q47wz/NUSmRV0zNywPc4w79ARjg/i/aNINHwA+mIALhUVqD9/aUvZNgg==}
 
-  '@wollybeard/kit@0.68.0':
-    resolution: {integrity: sha512-rJEEU0zTRKptoWwiDTDDqHaySswme1VphTvmwDPkCC1pTUZF7Luqmdlit6JR+xyuIB6Ry5X4NlqXcUNhXdwTQA==}
+  '@wollybeard/kit@0.69.0':
+    resolution: {integrity: sha512-vD+/BzSnfRTXD7FcrXCGr45iUid81gefeVtYv6aZyh1vJligWaHIRIcFzwYNyjIi6fO2e8xZA572ybSlHdEwUg==}
+    peerDependencies:
+      '@effect/platform': '>=0.90.0 <1.0.0'
+      effect: ^3.17.0
+
+  '@wollybeard/kit@0.71.0':
+    resolution: {integrity: sha512-BlvIB8bCWsx4nQoccfCgpk4M4mYlRyEp898A4TiqhuOe+IgkwpGegr9mN2O0Y8yFB4Q0CYku/iP2Z6NkH7AbMQ==}
     peerDependencies:
       '@effect/platform': '>=0.90.0 <1.0.0'
       effect: ^3.17.0
@@ -503,8 +509,8 @@ packages:
     resolution: {integrity: sha512-h5k/5U50IJJFpzfL6nO9jaaumfjO/f2NjK/oYB2Djzm4p9L+3T9qWpZqZ2hAbLPuuYq9wrU08WQyBTL5GbPk5Q==}
     engines: {node: '>=6'}
 
-  detect-libc@2.1.1:
-    resolution: {integrity: sha512-ecqj/sy1jcK1uWrwpR67UhYrIFQ+5WlGxth34WquCbamhFA6hkkwiu37o6J5xCHdo1oixJRfVRw+ywV+Hq/0Aw==}
+  detect-libc@2.1.2:
+    resolution: {integrity: sha512-Btj2BOOO83o3WyH59e8MgXsxEQVcarkUOpEYrubB0urwnN10yQ364rsiByU11nZlqWYZm05i/of7io4mzihBtQ==}
     engines: {node: '>=8'}
 
   effect@3.17.14:
@@ -1132,7 +1138,23 @@ snapshots:
       loupe: 3.1.3
       tinyrainbow: 2.0.0
 
-  '@wollybeard/kit@0.68.0(@effect/platform@0.91.1(effect@3.17.14))(effect@3.17.14)':
+  '@wollybeard/kit@0.69.0(@effect/platform@0.91.1(effect@3.17.14))(effect@3.17.14)':
+    dependencies:
+      '@effect/platform': 0.91.1(effect@3.17.14)
+      '@types/node': 24.7.0
+      '@types/object-inspect': 1.13.0
+      ansis: 4.2.0
+      consola: 3.4.2
+      effect: 3.17.14
+      es-toolkit: 1.39.10
+      fast-check: 4.3.0
+      jsonc-parser: 3.3.1
+      object-inspect: 1.13.4
+      pathe: 2.0.3
+      tinyglobby: 0.2.15
+      type-fest: 5.0.1
+
+  '@wollybeard/kit@0.71.0(@effect/platform@0.91.1(effect@3.17.14))(effect@3.17.14)':
     dependencies:
       '@effect/platform': 0.91.1(effect@3.17.14)
       '@types/node': 24.7.0
@@ -1183,7 +1205,7 @@ snapshots:
 
   deep-eql@5.0.2: {}
 
-  detect-libc@2.1.1:
+  detect-libc@2.1.2:
     optional: true
 
   effect@3.17.14:
@@ -1261,7 +1283,7 @@ snapshots:
       '@0no-co/graphql.web': 1.1.2(graphql@16.10.0)
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.10.0)
       '@molt/command': 0.9.0
-      '@wollybeard/kit': 0.68.0(@effect/platform@0.91.1(effect@3.17.14))(effect@3.17.14)
+      '@wollybeard/kit': 0.69.0(@effect/platform@0.91.1(effect@3.17.14))(effect@3.17.14)
       es-toolkit: 1.35.0
       graphql: 16.10.0
       is-plain-obj: 4.1.0
@@ -1314,7 +1336,7 @@ snapshots:
 
   node-gyp-build-optional-packages@5.2.2:
     dependencies:
-      detect-libc: 2.1.1
+      detect-libc: 2.1.2
     optional: true
 
   object-inspect@1.13.4: {}

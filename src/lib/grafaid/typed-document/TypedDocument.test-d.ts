@@ -18,21 +18,21 @@ import type { TypedDocumentNode as Node2 } from '@graphql-typed-document-node/co
 
 // dprint-ignore
 type _ = Ts.Test.Cases<
-  Ts.Test.equal<GetVariablesInputKind<Variables>        , VariablesInputKindOptional>,
-  Ts.Test.equal<GetVariablesInputKind<never>            , VariablesInputKindNone>,
-  Ts.Test.equal<GetVariablesInputKind<{}>               , VariablesInputKindNone>,
-  Ts.Test.equal<GetVariablesInputKind<{ x: 1 }>         , VariablesInputKindRequired>,
-  Ts.Test.equal<GetVariablesInputKind<{ x: 1; y?: 1 }>  , VariablesInputKindRequired>,
-  Ts.Test.equal<GetVariablesInputKind<{ x?: 1 }>        , VariablesInputKindOptional>,
-  Ts.Test.equal<GetVariablesInputKind<{ x?: 2; y?: 1 }> , VariablesInputKindOptional>,
-  Ts.Test.equal<VariablesOf<DocumentNode      >         , Variables>,
-  Ts.Test.equal<VariablesOf<Node2   <{x:1},{}>>         , {}>,
-  Ts.Test.equal<VariablesOf<Node    <{x:1},{}>>         , {}>,
-  Ts.Test.equal<VariablesOf<Query   <{x:1},{}>>         , {}>,
-  Ts.Test.equal<VariablesOf<String  <{x:1},{}, false>>  , {}>,
-  Ts.Test.equal<ResultOf<string>                        , SomeObjectData>,
-  Ts.Test.equal<ResultOf<Node2  <{x:1},{}>>             , {x:1}>,
-  Ts.Test.equal<ResultOf<Node   <{x:1},{}>>             , {x:1}>,
-  Ts.Test.equal<ResultOf<Query  <{x:1},{}>>             , {x:1}>,
-  Ts.Test.equal<ResultOf<String <{x:1},{}, false>>      , {x:1}>
+  Ts.Test.exact<GetVariablesInputKind<Variables>        , VariablesInputKindOptional>,
+  Ts.Test.exact<GetVariablesInputKind<never>            , VariablesInputKindNone>,
+  Ts.Test.exact<GetVariablesInputKind<{}>               , VariablesInputKindNone>,
+  Ts.Test.exact<GetVariablesInputKind<{ x: 1 }>         , VariablesInputKindRequired>,
+  Ts.Test.exact<GetVariablesInputKind<{ x: 1; y?: 1 }>  , VariablesInputKindRequired>,
+  Ts.Test.exact<GetVariablesInputKind<{ x?: 1 }>        , VariablesInputKindOptional>,
+  Ts.Test.exact<GetVariablesInputKind<{ x?: 2; y?: 1 }> , VariablesInputKindOptional>,
+  Ts.Test.exact<VariablesOf<DocumentNode      >         , Variables>,
+  Ts.Test.exact<VariablesOf<Node2   <{x:1},{}>>         , {}>,
+  Ts.Test.exact<VariablesOf<Node    <{x:1},{}>>         , {}>,
+  Ts.Test.exact<VariablesOf<Query   <{x:1},{}>>         , {}>,
+  Ts.Test.exact<VariablesOf<String  <{x:1},{}, false>>  , {}>,
+  Ts.Test.exact<ResultOf<string>                        , SomeObjectData>,
+  Ts.Test.exact<ResultOf<Node2  <{x:1},{}>>             , {x:1}>,
+  Ts.Test.exact<ResultOf<Node   <{x:1},{}>>             , {x:1}>,
+  Ts.Test.exact<ResultOf<Query  <{x:1},{}>>             , {x:1}>,
+  Ts.Test.exact<ResultOf<String <{x:1},{}, false>>      , {x:1}>
 >

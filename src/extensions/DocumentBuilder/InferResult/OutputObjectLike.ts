@@ -164,6 +164,6 @@ export type IsFieldKey<$Key extends PropertyKey> =
 //
 // dprint-ignore
 type _ = Ts.Test.Cases<
-  Ts.Test.equal<PickApplicableFieldKeys<{ a: true }>                 , 'a'>,
-  Ts.Test.equal<PickApplicableFieldKeys<{ a: ['b', true]; b: true }> , 'b'>
+  Ts.Test.exact<PickApplicableFieldKeys<{ a: true }>                 , 'a'>,
+  Ts.Test.exact<PickApplicableFieldKeys<{ a: ['b', true]; b: true }> , 'b'>
 >

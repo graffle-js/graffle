@@ -18,5 +18,5 @@ interface c extends TypeFunction {
 
 // dprint-ignore
 type _ = Ts.Test.Cases<
-  Ts.Test.equal<TypeFunction.CallPipeline<[a, b, c], ''> , 'abc'>
+  Ts.Test.exact<TypeFunction.CallPipeline<[a, b, c], ''> , 'abc'>
 >

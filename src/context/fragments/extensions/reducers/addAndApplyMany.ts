@@ -1,6 +1,6 @@
 import type { Configurator } from '#src/lib/configurator/configurator.js'
-import type { Ts } from '@wollybeard/kit'
 import { type Tuple } from '#src/lib/prelude.js'
+import type { Ts } from '@wollybeard/kit'
 import type { Context } from '../../../context.js'
 import { Configuration } from '../../configuration/$.js'
 import { Properties } from '../../properties/$.js'

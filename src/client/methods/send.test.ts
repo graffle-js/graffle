@@ -38,7 +38,7 @@ describe('TypedFullDocumentString', () => {
     if (false) {
       // @ts-expect-error - Unreachable code for type testing
       const result = g.send(doc)
-      Ts.Test.equal<Promise<{ id: string | null } | null>>()(result)
+      Ts.Test.exact<Promise<{ id: string | null } | null>>()(result)
     }
   })
 
@@ -52,7 +52,7 @@ describe('TypedFullDocumentString', () => {
       // @ts-expect-error - invalid type
       g.send(doc, { string: 1 })
 
-      Ts.Test.equal<Promise<{ stringWithRequiredArg: string | null } | null>>()(g.send(doc))
+      Ts.Test.exact<Promise<{ stringWithRequiredArg: string | null } | null>>()(g.send(doc))
     }
   })
 
@@ -69,7 +69,7 @@ describe('TypedFullDocumentString', () => {
 
     const result = await g.send(doc, { string: '' })
     expect(result).toEqual({ stringWithRequiredArg: '' })
-    Ts.Test.equal<Promise<{ stringWithRequiredArg: string | null } | null>>()(g.send(doc, { string: '' }))
+    Ts.Test.exact<Promise<{ stringWithRequiredArg: string | null } | null>>()(g.send(doc, { string: '' }))
   })
 
   test('multiple operations, no var -> operation name required', async () => {
@@ -93,8 +93,8 @@ describe('TypedFullDocumentString', () => {
     expect(resultA).toEqual({ id: db.id1 })
     expect(resultB).toEqual({ idNonNull: db.id1 })
 
-    Ts.Test.equal<Promise<{ id: string | null } | null>>()(g.send(doc, 'a'))
-    Ts.Test.equal<Promise<{ idNonNull: string } | null>>()(g.send(doc, 'b'))
+    Ts.Test.exact<Promise<{ id: string | null } | null>>()(g.send(doc, 'a'))
+    Ts.Test.exact<Promise<{ idNonNull: string } | null>>()(g.send(doc, 'b'))
   })
 
   test('multiple operations, 1 optional var/1 required var -> name required, var optional/var required', async () => {
@@ -124,9 +124,9 @@ describe('TypedFullDocumentString', () => {
       const resultB = g.send(doc, 'b', { string: '' })
       const resultBDefault = g.send(doc, 'b')
 
-      Ts.Test.equal<Promise<{ stringWithRequiredArg: string | null } | null>>()(g.send(doc, 'a', { string: '' }))
-      Ts.Test.equal<Promise<{ stringWithRequiredArg: string | null } | null>>()(resultB)
-      Ts.Test.equal<typeof resultB>()(resultBDefault)
+      Ts.Test.exact<Promise<{ stringWithRequiredArg: string | null } | null>>()(g.send(doc, 'a', { string: '' }))
+      Ts.Test.exact<Promise<{ stringWithRequiredArg: string | null } | null>>()(resultB)
+      Ts.Test.exact<typeof resultB>()(resultBDefault)
     }
   })
 
@@ -168,6 +168,6 @@ describe('TypedFullDocumentString', () => {
   // test('plain string - no type safety', () => {
   //   const query = `{ foo { id } }`
   //   const result = client.send(query)
-  //   Ts.Test.equal<Promise<{ [x: string]: any } | null>>()(result)
+  //   Ts.Test.exact<Promise<{ [x: string]: any } | null>>()(result)
   // })
 })

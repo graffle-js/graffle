@@ -18,7 +18,7 @@
   "devDependencies": {
     "@tsconfig/node20": "^20.1.4",
     "@tsconfig/strictest": "^2.0.5",
-    "@wollybeard/kit": "^0.68.0",
+    "@wollybeard/kit": "^0.71.0",
     "tsx": "^4.19.3",
     "vitest": "^3.1.1"
   },

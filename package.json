@@ -104,7 +104,7 @@
     "@0no-co/graphql.web": "^1.0.12",
     "@graphql-typed-document-node/core": "^3.2.0",
     "@molt/command": "^0.9.0",
-    "@wollybeard/kit": "^0.69.0",
+    "@wollybeard/kit": "^0.71.0",
     "es-toolkit": "^1.35.0",
     "is-plain-obj": "^4.1.0",
     "type-fest": "^4.40.0"

@@ -1,6 +1,6 @@
 import { Grafaid } from '#lib/grafaid'
-import type { Arr, Obj } from '@wollybeard/kit'
 import type { AssertExtendsObject, Values } from '#src/lib/prelude.js'
+import type { Arr, Obj } from '@wollybeard/kit'
 import type { OperationTypeNode } from 'graphql'
 import type { Select } from './$.js'
 import type { DefaultContext } from './context.js'

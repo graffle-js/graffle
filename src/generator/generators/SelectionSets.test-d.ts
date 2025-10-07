@@ -76,17 +76,17 @@ test(`Query`, () => {
   // Ts.Test.sub<Q>()({ interface: { __typename: { $defer: true } } })
   Ts.Test.sub<Q>()({ interface: { $scalars: true } })
   Ts.Test.sub<Q>()({ interfaceWithArgs: { $: { id: `abc` }, id: true } })
-  // todo: need new assert type that forbids excess properties
+  // todo:
   // // @ts-expect-error needs fragment
-  Ts.Test.sub<Q>()({ interface: { id: true, int: true } })
-  // todo: need new assert type that forbids excess properties
+  // Ts.Test.sub<Q>()({ interface: { id: true, int: true } })
+  // todo:
   // // @ts-expect-error needs fragment
-  Ts.Test.sub<Q>()({ interface: { id: true, boolean: true } })
-  Ts.Test.sub<Q>()({ interface: { id: true, ___on_Object1ImplementingInterface: { int: true } } })
-  Ts.Test.sub<Q>()({ interface: { id: true, ___on_Object2ImplementingInterface: { boolean: true } } })
-  // todo: need new assert type that forbids excess properties
+  // Ts.Test.sub<Q>()({ interface: { id: true, boolean: true } })
+  // Ts.Test.sub<Q>()({ interface: { id: true, ___on_Object1ImplementingInterface: { int: true } } })
+  // Ts.Test.sub<Q>()({ interface: { id: true, ___on_Object2ImplementingInterface: { boolean: true } } })
+  // todo:
   // // @ts-expect-error incorrect implementor name
-  // Ts.Test.sub<Q>()({ interface: { id: true, ___on_Object1ImplementingInterface2: { int: true } } })
+  // Ts.Test.subNoExcess<Q>()({ interface: { id: true, ___on_Object1ImplementingInterface2: { int: true } } })
   // directives work on fragments
   Ts.Test.sub<Q>()({ interface: { id: true, ___on_Object1ImplementingInterface: { $include: true } } }) // todo should REQUIRE field selection
 
@@ -175,9 +175,11 @@ test(`Query`, () => {
   // On Root (Query)
   Ts.Test.sub<Q>()({ ___: { id: true } })
   Ts.Test.sub<Q>()({ ___: { $skip: true, id: true } })
-  // todo: need new assert type that forbids excess properties
-  // // @ts-expect-error no directives on root type
-  // Ts.Test.sub<Q>()({ $skip: true, id: true })
+  Ts.Test.subNoExcess<Q>()({
+    // @ts-expect-error no directives on root type
+    $skip: true,
+    id: true
+  })
 
   // Arguments
   // all-optional on object

@@ -1,7 +1,7 @@
 import type { Anyware } from '#lib/anyware'
-import type { Ts } from '@wollybeard/kit'
 import type { Tuple } from '#src/lib/prelude.js'
 import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
+import type { Ts } from '@wollybeard/kit'
 import type { Transport } from '../dataType/$.js'
 import type { ContextFragment, ContextTransports_Configurations, ContextTransports_Registry } from '../fragment.js'
 
