@@ -1,5 +1,5 @@
 import { markdownToJsDoc } from '#src/lib/md-jsdoc/md-jsdoc.js'
-import { casesExhausted } from '#src/lib/prelude.js'
+import { Lang } from '@wollybeard/kit'
 import { camelCase, kebabCase, pascalCase, snakeCase } from 'es-toolkit'
 import fs from 'node:fs'
 import path from 'node:path'
@@ -127,7 +127,7 @@ export const getImportName = (config: Config, generator: ModuleGenerator | Gener
     case `noExtension`:
       return name
     default:
-      throw casesExhausted(config.importFormat)
+      throw Lang.neverCase(config.importFormat)
   }
 }
 

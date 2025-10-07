@@ -1,6 +1,6 @@
 import { Errors } from '#lib/errors'
 import { createDeferred } from '#src/lib/prelude.js'
-import { casesExhausted } from '#src/lib/prelude.js'
+import { Lang } from '@wollybeard/kit'
 import { partitionAndAggregateErrors } from '../../errors/$$.js'
 import {
   createRetryingInterceptor,
@@ -114,7 +114,7 @@ const toInternalInterceptor = (pipeline: PipelineDefinition.Pipeline, intercepto
       }
     }
     default:
-      throw casesExhausted(pipeline.config.entrypointSelectionMode)
+      throw Lang.neverCase(pipeline.config.entrypointSelectionMode)
   }
 }
 

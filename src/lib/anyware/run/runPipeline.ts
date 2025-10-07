@@ -1,4 +1,5 @@
-import { casesExhausted, createDeferred, debug } from '#src/lib/prelude.js'
+import { createDeferred, debug } from '#src/lib/prelude.js'
+import { Lang } from '@wollybeard/kit'
 import type { Errors } from '../../errors/$.js'
 import { ContextualError } from '../../errors/ContextualError.js'
 import type { InterceptorGeneric } from '../Interceptor/Interceptor.js'
@@ -120,11 +121,11 @@ export const runPipeline = async (
           return signal.error
         }
         default:
-          throw casesExhausted(signal)
+          throw Lang.neverCase(signal)
       }
     }
     default:
-      throw casesExhausted(signal)
+      throw Lang.neverCase(signal)
   }
 }
 

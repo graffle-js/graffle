@@ -74,10 +74,6 @@ import type { ConfigManager } from './config-manager/$.js'
 //   )
 // }
 
-export const casesExhausted = (value: never): never => {
-  throw new Error(`Unhandled case: ${String(value)}`)
-}
-
 export const isRecordLikeObject = (value: unknown): value is Record<string, unknown> => {
   return typeof value === `object` && value !== null && !Array.isArray(value)
 }

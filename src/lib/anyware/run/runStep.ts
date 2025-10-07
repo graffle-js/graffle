@@ -1,5 +1,5 @@
-import { casesExhausted, createDeferred, debugSub } from '#src/lib/prelude.js'
-import { Err } from '@wollybeard/kit'
+import { createDeferred, debugSub } from '#src/lib/prelude.js'
+import { Err, Lang } from '@wollybeard/kit'
 import { Errors } from '../../errors/$.js'
 import type { InterceptorGeneric } from '../Interceptor/Interceptor.js'
 import type { Pipeline } from '../Pipeline/Pipeline.js'
@@ -245,7 +245,7 @@ export const runStep = async (
         })
         return
       default:
-        throw casesExhausted(branch)
+        throw Lang.neverCase(branch)
     }
   } /* reached core for this hook */ else {
     debugHook(`no more interceptors to advance, run implementation`)
