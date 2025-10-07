@@ -11,5 +11,3 @@ bundle-stats.html
 **/.vitepress/cache/
 
 # Generated GraphQL clients
-examples/$/graffle/
-website/graffle/
