@@ -1,5 +1,6 @@
 import type { Configurator } from '#src/lib/configurator/configurator.js'
-import { type Tuple, type UnionIgnoreAnyOrUnknown, type Writeable } from '#src/lib/prelude.js'
+import type { Ts } from '@wollybeard/kit'
+import { type Tuple } from '#src/lib/prelude.js'
 import type { Context } from '../../../context.js'
 import { Configuration } from '../../configuration/$.js'
 import { Properties } from '../../properties/$.js'
@@ -57,7 +58,7 @@ export type AddAndApplyMany<
         _ extends 'typeHookRequestResultDataTypes' ?
           | $Context['typeHookRequestResultDataTypes']
             // todo if any extension has any/never then others get blown away. Need empty value that doesn't affect the union.
-          | UnionIgnoreAnyOrUnknown<$Extensions[number]['noExpandResultDataType']> :
+          | Ts.Union.IgnoreAnyOrUnknown<$Extensions[number]['noExpandResultDataType']> :
         // Skip
           $Context[_]
     }
@@ -78,7 +79,7 @@ export const addAndApplyMany = <
 ): AddAndApplyMany<context, extensions> => {
   if (extensions.length === 0) return context as any
 
-  const newContext: Writeable<Context> = {
+  const newContext: Ts.Writeable<Context> = {
     ...context,
     extensions: Object.freeze([...context.extensions, ...extensions]),
     extensionsIndex: Object.freeze({

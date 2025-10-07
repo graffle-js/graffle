@@ -1,5 +1,6 @@
 import type { Anyware } from '#lib/anyware'
-import type { Tuple, Writeable } from '#src/lib/prelude.js'
+import type { Ts } from '@wollybeard/kit'
+import type { Tuple } from '#src/lib/prelude.js'
 import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
 import type { Transport } from '../dataType/$.js'
 import type { ContextFragment, ContextTransports_Configurations, ContextTransports_Registry } from '../fragment.js'
@@ -21,7 +22,7 @@ export const addMany = <
 
   const contextNewConfigurations: ContextTransports_Configurations = { ...context.transports.configurations }
 
-  const contextNewOverloads: Writeable<RequestPipeline.BaseDefinition['overloads']> = [
+  const contextNewOverloads: Ts.Writeable<RequestPipeline.BaseDefinition['overloads']> = [
     ...context.requestPipelineDefinition.overloads,
   ]
 

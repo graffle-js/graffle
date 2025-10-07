@@ -7,7 +7,7 @@
 
 // TODO: Restore @wollybeard/kit import once it becomes a production dependency
 // import type { Obj } from '@wollybeard/kit'
-import type { Covariant } from '#src/lib/prelude.js'
+import type { Ts } from '@wollybeard/kit'
 
 const BuilderSymbol = Symbol.for(`graffle.var`)
 
@@ -70,9 +70,9 @@ export interface Builder<$Type = unknown, $State extends BuilderState = BuilderS
    * This ensures Builder<T> is only assignable to Builder<U> when T extends U.
    * For example, Builder<'hello'> can be assigned to Builder<string>, but Builder<1> cannot.
    * @internal
-   * @see {@link Covariant} for details on covariance
+   * @see {@link Ts.Covariant} for details on covariance
    */
-  readonly __type?: Covariant<$Type>
+  readonly __type?: Ts.Covariant<$Type>
 
   /**
    * Specify a custom name for the GraphQL variable.
