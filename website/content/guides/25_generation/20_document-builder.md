@@ -74,7 +74,9 @@ const client = Graffle.create()
 // Single operation - no operation name needed
 const singleOpDoc = Graffle.document({
   query: {
-    getTrainer: { trainerByName: { $: { name: $('name') }, id: true, name: true } },
+    getTrainer: {
+      trainerByName: { $: { name: $('name') }, id: true, name: true },
+    },
   },
 })
 const trainer = await client.send(singleOpDoc, { name: 'Ash' })
@@ -86,7 +88,9 @@ const multiOpDoc = Graffle.document({
     getPokemons: { pokemons: { name: true } },
   },
 })
-const trainerResult = await client.send(multiOpDoc, 'getTrainer', { name: 'Ash' })
+const trainerResult = await client.send(multiOpDoc, 'getTrainer', {
+  name: 'Ash',
+})
 const pokemonsResult = await client.send(multiOpDoc, 'getPokemons')
 ```
 
@@ -388,7 +392,12 @@ query.trainers({ $: { limit: $(10) }, name: true })
 == Graffle
 
 ```ts
-mutation.addPokemon({ $: { name: 'Pikachu', $type: 'ELECTRIC' }, id: true, name: true, type: true })
+mutation.addPokemon({
+  $: { name: 'Pikachu', $type: 'ELECTRIC' },
+  id: true,
+  name: true,
+  type: true,
+})
 ```
 
 == GraphQL
