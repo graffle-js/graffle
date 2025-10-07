@@ -1,3 +1,6 @@
+import type * as $$Utilities from "graffle/utilities-for-generated";
+import type * as CustomScalars from "../../scalars.js";
+
 //
 //
 //
@@ -25,7 +28,7 @@ export type Boolean = boolean;
 export type ID = string;
 
 // Custom scalars (encoded types for inputs)
-export type Date = string;
+export type Date = $$Utilities.Schema.Scalar.GetEncoded<typeof CustomScalars.Date>;
 
 // Enums
 export type BattleWildResult = "pokemonsCaptured" | "pokemonsDefeated" | "trainerDefeated";
