@@ -121,6 +121,69 @@ describe('TypedFullDocumentString', () => {
     Ts.assertEqual<typeof resultB>()(resultBDefault)
   })
 
+  test('enum argument $ prefix stripping', async () => {
+    const doc = Possible.document({
+      query: {
+        foo: {
+          stringWithArgEnum: {
+            $: {
+              // $ prefix required for enum argument to avoid conflict with enum values
+              $ABCEnum: $.default('A'),
+            },
+          },
+        },
+      },
+    })
+
+    // The $ prefix should be stripped when passing variables
+    const result = await g.send(doc, { ABCEnum: 'B' })
+    expect(result).toEqual({ stringWithArgEnum: 'B' })
+
+    // Test with default value
+    const resultDefault = await g.send(doc)
+    expect(resultDefault).toEqual({ stringWithArgEnum: 'A' })
+
+    // Type checking - ensure the variable name is WITHOUT the $
+    Ts.assertEqual<Promise<{ stringWithArgEnum: string | null } | null>>()(g.send(doc, { ABCEnum: 'A' }))
+
+    // Type checking only - not executed
+    if (false) {
+      // @ts-expect-error - should not accept $ABCEnum as variable name
+      g.send(doc, { $ABCEnum: 'A' })
+    }
+  })
+
+  test('send() with mixed query/mutation document and variable inference', () => {
+    const doc = Possible.document({
+      query: {
+        getUserWithArgs: {
+          objectWithArgs: {
+            $: {
+              id: $.required(),
+              string: $.required(),
+            },
+            id: true,
+          },
+        },
+      },
+      mutation: {
+        updateUser: {
+          // Mutation fields in Possible schema don't accept arguments
+          idNonNull: true,
+        },
+      },
+    })
+
+    // Create a typed client (not executing, just testing types)
+    const client = Possible.create({ check: { preflight: false } })
+
+    // Should accept 'id' and 'string' variables
+    client.send(doc, 'getUserWithArgs', { id: 'foo', string: 'bar' })
+
+    // Mutation operation with no variables works
+    client.send(doc, 'updateUser')
+  })
+
   // TODO: Plain string support
   // test('plain string - no type safety', () => {
   //   const query = `{ foo { id } }`
