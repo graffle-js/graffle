@@ -1,4 +1,5 @@
-import { casesExhausted, createDeferred, debugSub, errorFromMaybeError } from '#src/lib/prelude.js'
+import { casesExhausted, createDeferred, debugSub } from '#src/lib/prelude.js'
+import { Err } from '@wollybeard/kit'
 import { Errors } from '../../errors/$.js'
 import type { InterceptorGeneric } from '../Interceptor/Interceptor.js'
 import type { Pipeline } from '../Pipeline/Pipeline.js'
@@ -228,7 +229,7 @@ export const runStep = async (
           type: `error`,
           hookName: name,
           source: `extension`,
-          error: errorFromMaybeError(result),
+          error: Err.ensure(result),
           interceptorName: extension.name,
         })
         return
@@ -240,7 +241,7 @@ export const runStep = async (
           type: `error`,
           hookName: name,
           source: `implementation`,
-          error: errorFromMaybeError(result),
+          error: Err.ensure(result),
         })
         return
       default:
@@ -269,9 +270,9 @@ export const runStep = async (
       debugHook(`implementation error`)
       const lastExtension = nextInterceptorsStack[nextInterceptorsStack.length - 1]
       if (lastExtension && lastExtension.retrying) {
-        lastExtension.currentChunk.resolve(errorFromMaybeError(error))
+        lastExtension.currentChunk.resolve(Err.ensure(error))
       } else {
-        done({ type: `error`, hookName: name, source: `implementation`, error: errorFromMaybeError(error) })
+        done({ type: `error`, hookName: name, source: `implementation`, error: Err.ensure(error) })
       }
       return
     }

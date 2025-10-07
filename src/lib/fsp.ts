@@ -1,13 +1,13 @@
+import { Err } from '@wollybeard/kit'
 import type * as Fs from 'node:fs/promises'
 import { dirname, extname, isAbsolute, join } from 'node:path'
 import type { JsonValue } from 'type-fest'
-import { errorFromMaybeError } from './prelude.js'
 
 export type Fs = typeof Fs
 
 export const statMaybeExists = async (fs: Fs, path: string) => {
   return await fs.stat(path).catch((_: unknown) => {
-    const error = errorFromMaybeError(_)
+    const error = Err.ensure(_)
     return `code` in error && typeof error.code === `string` && error.code === `ENOENT`
       ? null
       : Promise.reject(error)

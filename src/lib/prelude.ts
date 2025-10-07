@@ -1,95 +1,78 @@
 import type { HasRequiredKeys, IsAny, IsEmptyObject, IsNever, IsUnknown, Simplify } from 'type-fest'
-
-import type { Str } from '@wollybeard/kit'
 import type { ConfigManager } from './config-manager/$.js'
 
-export type RemoveIndex<T> = {
-  [K in keyof T as string extends K ? never : number extends K ? never : K]: T[K]
-}
+// export const pick = <T, K extends keyof T>(obj: T, keys: K[]): Pick<T, K> => {
+//   const result: Partial<T> = {}
+//   keys.forEach(key => {
+//     result[key] = obj[key]
+//   })
+//   return result as Pick<T, K>
+// }
 
-export const includesUnknown = <T>(array: T[], value: unknown): value is T => array.includes(value as any)
+// export const uppercase = <S extends string>(str: S): Uppercase<S> => str.toUpperCase() as Uppercase<S>
 
-export const pick = <T, K extends keyof T>(obj: T, keys: K[]): Pick<T, K> => {
-  const result: Partial<T> = {}
-  keys.forEach(key => {
-    result[key] = obj[key]
-  })
-  return result as Pick<T, K>
-}
+// export const callOrIdentity = <T>(value: MaybeLazy<T>) => {
+//   return typeof value === `function` ? (value as () => T)() : value
+// }
 
-export const uppercase = <S extends string>(str: S): Uppercase<S> => str.toUpperCase() as Uppercase<S>
+// export type MaybeLazy<T> = T | (() => T)
 
-export const callOrIdentity = <T>(value: MaybeLazy<T>) => {
-  return typeof value === `function` ? (value as () => T)() : value
-}
+// export const zip = <A, B>(a: A[], b: B[]): [A, B | undefined][] => a.map((k, i) => [k, b[i]])
 
-export type MaybeLazy<T> = T | (() => T)
+// export const HeadersInitToPlainObject = (headers?: HeadersInit): Record<string, string> => {
+//   let oHeaders: Record<string, string> = {}
 
-export const zip = <A, B>(a: A[], b: B[]): [A, B | undefined][] => a.map((k, i) => [k, b[i]])
+//   if (headers instanceof Headers) {
+//     oHeaders = HeadersInstanceToPlainObject(headers)
+//   } else if (Array.isArray(headers)) {
+//     headers.forEach(([name, value]) => {
+//       if (name && value !== undefined) {
+//         oHeaders[name] = value
+//       }
+//     })
+//   } else if (headers) {
+//     oHeaders = headers
+//   }
 
-export const HeadersInitToPlainObject = (headers?: HeadersInit): Record<string, string> => {
-  let oHeaders: Record<string, string> = {}
+//   return oHeaders
+// }
 
-  if (headers instanceof Headers) {
-    oHeaders = HeadersInstanceToPlainObject(headers)
-  } else if (Array.isArray(headers)) {
-    headers.forEach(([name, value]) => {
-      if (name && value !== undefined) {
-        oHeaders[name] = value
-      }
-    })
-  } else if (headers) {
-    oHeaders = headers
-  }
+// export const HeadersInstanceToPlainObject = (headers: Response['headers']): Record<string, string> => {
+//   const o: Record<string, string> = {}
+//   headers.forEach((v, k) => {
+//     o[k] = v
+//   })
+//   return o
+// }
 
-  return oHeaders
-}
+// export const tryCatch = <$Return, $Throw extends Error = Error>(
+//   fn: () => $Return,
+// ): $Return extends Promise<any> ? Promise<Awaited<$Return> | $Throw> : $Return | $Throw => {
+//   try {
+//     const result = fn() as any
+//     if (isPromiseLikeValue(result)) {
+//       return result.catch((error) => {
+//         return errorFromMaybeError(error)
+//       }) as any
+//     }
+//     return result
+//   } catch (error) {
+//     return errorFromMaybeError(error) as any
+//   }
+// }
 
-export const HeadersInstanceToPlainObject = (headers: Response['headers']): Record<string, string> => {
-  const o: Record<string, string> = {}
-  headers.forEach((v, k) => {
-    o[k] = v
-  })
-  return o
-}
-
-export const tryCatch = <$Return, $Throw extends Error = Error>(
-  fn: () => $Return,
-): $Return extends Promise<any> ? Promise<Awaited<$Return> | $Throw> : $Return | $Throw => {
-  try {
-    const result = fn() as any
-    if (isPromiseLikeValue(result)) {
-      return result.catch((error) => {
-        return errorFromMaybeError(error)
-      }) as any
-    }
-    return result
-  } catch (error) {
-    return errorFromMaybeError(error) as any
-  }
-}
-
-/**
- * Ensure that the given value is an error and return it. If it is not an error than
- * wrap it in one, passing the given value as the error message.
- */
-export const errorFromMaybeError = (maybeError: unknown): Error => {
-  if (maybeError instanceof Error) return maybeError
-  return new Error(String(maybeError))
-}
-
-export const isPromiseLikeValue = (value: unknown): value is Promise<unknown> => {
-  return (
-    typeof value === `object`
-    && value !== null
-    && `then` in value
-    && typeof value.then === `function`
-    && `catch` in value
-    && typeof value.catch === `function`
-    && `finally` in value
-    && typeof value.finally === `function`
-  )
-}
+// export const isPromiseLikeValue = (value: unknown): value is Promise<unknown> => {
+//   return (
+//     typeof value === `object`
+//     && value !== null
+//     && `then` in value
+//     && typeof value.then === `function`
+//     && `catch` in value
+//     && typeof value.catch === `function`
+//     && `finally` in value
+//     && typeof value.finally === `function`
+//   )
+// }
 
 export const casesExhausted = (value: never): never => {
   throw new Error(`Unhandled case: ${String(value)}`)
