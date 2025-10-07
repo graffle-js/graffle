@@ -1,6 +1,6 @@
-import type { TSErrorDescriptive } from '#src/lib/ts-error.js'
 import type { Schema } from '#src/types/Schema/$.js'
 import type { InlineType } from '#src/types/SchemaDrivenDataMap/InlineType.js'
+import type { Ts } from '@wollybeard/kit'
 import type { Interface } from './Interface.js'
 import type { OutputObjectLike } from './OutputObjectLike.js'
 import type { Union } from './Union.js'
@@ -24,7 +24,7 @@ type FieldType<
 > =
   $Node extends Schema.OutputObject                      ? $SelectionSet extends object
                                                             ? OutputObjectLike<$SelectionSet, $Schema, $Node>
-                                                            : TSErrorDescriptive<'FieldType', 'When $Node extends Schema.OutputObject then $SelectionSet must extend object', { $Type: $Node; $SelectionSet: $SelectionSet; $Schema:$Schema } > :
+                                                            : Ts.StaticError<'When $Node extends Schema.OutputObject then $SelectionSet must extend object', { location: 'FieldType'; $Type: $Node; $SelectionSet: $SelectionSet; $Schema:$Schema } > :
   $Node extends Schema.Scalar                            ? Schema.Scalar.GetDecoded<$Node> : // TODO use TS compiler API to extract this type at build time.
   // @ts-expect-error: No $Schema constraint to avoid "compare depth limit"
   $Node extends Schema.Scalar.ScalarCodecless            ? Schema.Scalar.GetDecoded<GetCodecForCodecless<$Schema, $Node>> :
@@ -32,7 +32,7 @@ type FieldType<
   $Node extends Schema.Enum                              ? $Node['membersUnion'] :
   $Node extends Schema.Interface                         ? Interface<$SelectionSet, $Schema, $Node> :
   $Node extends Schema.Union                             ? Union<$SelectionSet, $Schema, $Node> :
-                                                           TSErrorDescriptive<'FieldType', `Unknown type`, { $Type: $Node; $SelectionSet: $SelectionSet; $Schema:$Schema }>
+                                                           Ts.StaticError<`Unknown type`, { location: 'FieldType'; $Type: $Node; $SelectionSet: $SelectionSet; $Schema:$Schema }>
 
 // dprint-ignore
 type GetCodecForCodecless<

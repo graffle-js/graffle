@@ -1,4 +1,3 @@
-// import type { TSErrorDescriptive } from '#src/lib/ts-error.js'
 import type { Schema } from './$.js'
 import type { __typename } from './nodes/__typename.js'
 import type { List } from './nodes/List.js'
@@ -12,7 +11,5 @@ export type GetNamedType<$Type> =
       $Type extends Nullable<infer $innerType>  ? GetNamedType<$innerType> :
       $Type extends __typename                  ? $Type :
       $Type
-// $Type extends NamedTypes                  ? $Type :
-//   TSErrorDescriptive<'Unwrap', 'Unknown $Type', { $Type: $Type }>
 
 export type Define<$Type extends Partial<Schema>> = $Type & Schema

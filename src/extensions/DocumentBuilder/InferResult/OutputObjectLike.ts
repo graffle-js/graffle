@@ -1,7 +1,7 @@
 import { assertEqual } from '#src/lib/assert-equal.js'
 import type { AssertExtendsObject, GetOrNever, PropertyKeyToString, StringKeyof } from '#src/lib/prelude.js'
-import type { TSErrorDescriptive } from '#src/lib/ts-error.js'
 import type { Schema } from '#src/types/Schema/$.js'
+import type { Ts } from '@wollybeard/kit'
 import type { IsNever } from 'type-fest'
 import type { Select } from '../Select/$.js'
 import type { Alias } from './Alias.js'
@@ -142,7 +142,10 @@ export namespace Errors {
   export type UnknownKey<
     $Key extends PropertyKey,
     $Object extends Schema.OutputObjectLike,
-  > = TSErrorDescriptive<'Object', `field "${PropertyKeyToString<$Key>}" does not exist on object "${$Object['name']}"`>
+  > = Ts.StaticError<
+    `field "${PropertyKeyToString<$Key>}" does not exist on object "${$Object['name']}"`,
+    { location: 'Object' }
+  >
 }
 
 // dprint-ignore
