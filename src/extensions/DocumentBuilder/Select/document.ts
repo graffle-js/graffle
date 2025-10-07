@@ -1,5 +1,6 @@
 import { Grafaid } from '#lib/grafaid'
-import type { AssertExtendsObject, FirstNonUnknownNever, Values } from '#src/lib/prelude.js'
+import type { Arr, Obj } from '@wollybeard/kit'
+import type { AssertExtendsObject, Values } from '#src/lib/prelude.js'
 import type { OperationTypeNode } from 'graphql'
 import type { Select } from './$.js'
 import type { DefaultContext } from './context.js'
@@ -42,7 +43,7 @@ export type GetOperationType<$Document extends SomeDocument, $Name extends strin
 // dprint-ignore
 export type GetOperation<$Document extends SomeDocument, $Name extends string> =
   AssertExtendsObject<
-    FirstNonUnknownNever<[
+    Arr.FirstNonUnknownNever<[
       // @ts-expect-error could be unknown
       $Document[OperationTypeNode.MUTATION][$Name],
       // @ts-expect-error could be unknown

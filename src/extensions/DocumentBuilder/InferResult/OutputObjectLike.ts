@@ -1,6 +1,6 @@
-import type { AssertExtendsObject, GetOrNever, PropertyKeyToString, StringKeyof } from '#src/lib/prelude.js'
+import type { AssertExtendsObject } from '#src/lib/prelude.js'
 import type { Schema } from '#src/types/Schema/$.js'
-import type { Ts } from '@wollybeard/kit'
+import type { Obj, Ts } from '@wollybeard/kit'
 import type { IsNever } from 'type-fest'
 import type { Select } from '../Select/$.js'
 import type { Alias } from './Alias.js'
@@ -78,7 +78,7 @@ type OtherKeys<
   }
 
 // dprint-ignore
-type PickApplicableFieldKeys<$SelectionSet> = StringKeyof<
+type PickApplicableFieldKeys<$SelectionSet> = Obj.StringKeyof<
   {
     [
       $Key in keyof $SelectionSet as
@@ -115,7 +115,7 @@ type InlineFragmentKeys<
 > =
   InlineFragmentKey_<
     AssertExtendsObject<
-      GetOrNever<$SelectionSet, Select.InlineFragment.Key>
+      Obj.GetOrNever<$SelectionSet, Select.InlineFragment.Key>
     >,
     $Schema,
     $Node
@@ -142,7 +142,7 @@ export namespace Errors {
     $Key extends PropertyKey,
     $Object extends Schema.OutputObjectLike,
   > = Ts.StaticError<
-    `field "${PropertyKeyToString<$Key>}" does not exist on object "${$Object['name']}"`,
+    `field "${Obj.PropertyKeyToString<$Key>}" does not exist on object "${$Object['name']}"`,
     { location: 'Object' }
   >
 }
