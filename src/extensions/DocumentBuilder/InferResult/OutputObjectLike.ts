@@ -1,4 +1,3 @@
-import { assertEqual } from '#src/lib/assert-equal.js'
 import type { AssertExtendsObject, GetOrNever, PropertyKeyToString, StringKeyof } from '#src/lib/prelude.js'
 import type { Schema } from '#src/types/Schema/$.js'
 import type { Ts } from '@wollybeard/kit'
@@ -164,9 +163,7 @@ export type IsFieldKey<$Key extends PropertyKey> =
 //
 //
 // dprint-ignore
-{
-
-assertEqual<PickApplicableFieldKeys<{ a: true }>                 , 'a'>()
-assertEqual<PickApplicableFieldKeys<{ a: ['b', true]; b: true }> , 'b'>()
-
-}
+type _ = Ts.Test.Cases<
+  Ts.Test.equal<PickApplicableFieldKeys<{ a: true }>                 , 'a'>,
+  Ts.Test.equal<PickApplicableFieldKeys<{ a: ['b', true]; b: true }> , 'b'>
+>

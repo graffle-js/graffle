@@ -1,4 +1,4 @@
-import { assertEqual } from '../assert-equal.js'
+import { Ts } from '@wollybeard/kit'
 import type { TypeFunction } from './$.js'
 
 interface a extends TypeFunction {
@@ -16,4 +16,7 @@ interface c extends TypeFunction {
   return: `${this['params']}c`
 }
 
-assertEqual<TypeFunction.CallPipeline<[a, b, c], ''>, 'abc'>()
+// dprint-ignore
+type _ = Ts.Test.Cases<
+  Ts.Test.equal<TypeFunction.CallPipeline<[a, b, c], ''> , 'abc'>
+>

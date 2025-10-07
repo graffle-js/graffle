@@ -1,5 +1,5 @@
+import { Ts } from '@wollybeard/kit'
 import type { DocumentNode } from 'graphql'
-import { assertEqual } from '../../assert-equal.js'
 import type {
   GetVariablesInputKind,
   Node,
@@ -17,24 +17,22 @@ import type {
 import type { TypedDocumentNode as Node2 } from '@graphql-typed-document-node/core'
 
 // dprint-ignore
-{
-  assertEqual<GetVariablesInputKind<Variables>, VariablesInputKindOptional>()
-  assertEqual<GetVariablesInputKind<never>, VariablesInputKindNone>()
-  assertEqual<GetVariablesInputKind<{}>, VariablesInputKindNone>()
-  assertEqual<GetVariablesInputKind<{ x: 1 }>, VariablesInputKindRequired>()
-  assertEqual<GetVariablesInputKind<{ x: 1; y?: 1 }>, VariablesInputKindRequired>()
-  assertEqual<GetVariablesInputKind<{ x?: 1 }>, VariablesInputKindOptional>()
-  assertEqual<GetVariablesInputKind<{ x?: 2; y?: 1 }>, VariablesInputKindOptional>()
-
-  assertEqual<VariablesOf<DocumentNode      >, Variables>()
-  assertEqual<VariablesOf<Node2   <{x:1},{}>>, {}>()
-  assertEqual<VariablesOf<Node    <{x:1},{}>>, {}>()
-  assertEqual<VariablesOf<Query   <{x:1},{}>>, {}>()
-  assertEqual<VariablesOf<String  <{x:1},{}, false>>, {}>()
-
-  assertEqual<ResultOf<string>           , SomeObjectData>()
-  assertEqual<ResultOf<Node2  <{x:1},{}>>, {x:1}>()
-  assertEqual<ResultOf<Node   <{x:1},{}>>, {x:1}>()
-  assertEqual<ResultOf<Query  <{x:1},{}>>, {x:1}>()
-  assertEqual<ResultOf<String <{x:1},{}, false>>, {x:1}>()
-}
+type _ = Ts.Test.Cases<
+  Ts.Test.equal<GetVariablesInputKind<Variables>        , VariablesInputKindOptional>,
+  Ts.Test.equal<GetVariablesInputKind<never>            , VariablesInputKindNone>,
+  Ts.Test.equal<GetVariablesInputKind<{}>               , VariablesInputKindNone>,
+  Ts.Test.equal<GetVariablesInputKind<{ x: 1 }>         , VariablesInputKindRequired>,
+  Ts.Test.equal<GetVariablesInputKind<{ x: 1; y?: 1 }>  , VariablesInputKindRequired>,
+  Ts.Test.equal<GetVariablesInputKind<{ x?: 1 }>        , VariablesInputKindOptional>,
+  Ts.Test.equal<GetVariablesInputKind<{ x?: 2; y?: 1 }> , VariablesInputKindOptional>,
+  Ts.Test.equal<VariablesOf<DocumentNode      >         , Variables>,
+  Ts.Test.equal<VariablesOf<Node2   <{x:1},{}>>         , {}>,
+  Ts.Test.equal<VariablesOf<Node    <{x:1},{}>>         , {}>,
+  Ts.Test.equal<VariablesOf<Query   <{x:1},{}>>         , {}>,
+  Ts.Test.equal<VariablesOf<String  <{x:1},{}, false>>  , {}>,
+  Ts.Test.equal<ResultOf<string>                        , SomeObjectData>,
+  Ts.Test.equal<ResultOf<Node2  <{x:1},{}>>             , {x:1}>,
+  Ts.Test.equal<ResultOf<Node   <{x:1},{}>>             , {x:1}>,
+  Ts.Test.equal<ResultOf<Query  <{x:1},{}>>             , {x:1}>,
+  Ts.Test.equal<ResultOf<String <{x:1},{}, false>>      , {x:1}>
+>

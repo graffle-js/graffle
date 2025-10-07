@@ -1,5 +1,5 @@
-import { assertExtends } from '#src/lib/assert-equal.js'
 import { Configurator } from '#src/lib/configurator/configurator.js'
+import { Ts } from '@wollybeard/kit'
 import { describe, expect, expectTypeOf, test } from 'vitest'
 import type { Context } from '../../../context.js'
 import { type Chain, create } from './builder.js'
@@ -88,7 +88,7 @@ describe(`creator`, () => {
         "transports": [],
       }
     `)
-    assertExtends<typeof A, expectedCreator>()
+    Ts.Test.sub<expectedCreator>()(A)
     // rejects, why?
     // expectTypeOf<expectedCreator>().toMatchTypeOf<typeof a1>()
   })
