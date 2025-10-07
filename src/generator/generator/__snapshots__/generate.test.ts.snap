@@ -2,7 +2,9 @@
 
 exports[`custom scalars module results in client prefilling those custom scalars 1`] = `
 "import type * as $$Utilities from "graffle/utilities-for-generated";
+
 import * as CustomScalars from "../../scalars.js";
+
 //
 //
 //
@@ -110,6 +112,7 @@ export interface RootTypeCustomNameForQueryMethods<
    * Pass a selection set object that includes the fields you want.
    * Use this method to request multiple fields in a single request for better performance.
    */
+
   $batch: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -130,11 +133,13 @@ export interface RootTypeCustomNameForQueryMethods<
         >
     >
   >;
+
   /**
    * Request the {@link https://graphql.org/learn/schema/#the-__typename-field | \`__typename\`} meta-field.
    *
    * The \`__typename\` field returns the name of the object type. In this case, it will always return \`"RootTypeCustomNameForQuery"\`.
    */
+
   __typename: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     () => Promise<
@@ -161,6 +166,7 @@ export interface RootTypeCustomNameForQueryMethods<
    * | **Path** | \`RootTypeCustomNameForQuery.id\` |
    * | **Nullability** | Optional |
    */
+
   id: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
