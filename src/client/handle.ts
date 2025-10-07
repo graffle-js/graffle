@@ -11,11 +11,11 @@ import {
 } from '#src/context/fragments/configuration/output/configuration.js'
 import type { SomeObjectData } from '#src/lib/grafaid/graphql.js'
 import type { GraphQLExecutionResultError } from '#src/lib/grafaid/graphql.js'
+import type { Obj } from '@wollybeard/kit'
 import {
   type ExcludeNull,
   type ExcludeNullAndUndefined,
   type ExcludeUndefined,
-  type GetOrNever,
   type Values,
 } from '#src/lib/prelude.js'
 import type { GraphQLError } from 'graphql'
@@ -236,4 +236,4 @@ type HandleOutputDocumentBuilderRootField_Data<
 > =
   $Output extends Error | GraffleExecutionResultEnvelope
     ? $Output
-    : GetOrNever<ExcludeNullAndUndefined<$Output>, $RootFieldName>
+    : Obj.GetOrNever<ExcludeNullAndUndefined<$Output>, $RootFieldName>
