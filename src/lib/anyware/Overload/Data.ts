@@ -1,4 +1,4 @@
-import type { DiscriminantPropertyValue } from '#src/lib/prelude.js'
+import type { Ts } from '@wollybeard/kit'
 import type { Configurator } from '../../configurator/configurator.js'
 import type { StepDefinition } from '../StepDefinition.js'
 
@@ -16,7 +16,7 @@ export interface Data<
 
 export interface Discriminant {
   readonly name: string
-  readonly value: DiscriminantPropertyValue
+  readonly value: Ts.Union.DiscriminantPropertyValue
 }
 
 export interface DataEmpty extends Data {

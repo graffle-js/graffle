@@ -1,5 +1,5 @@
+import { ArrMut } from '@wollybeard/kit'
 import type { Include } from '../prelude.js'
-import { partitionErrors } from '../prelude.js'
 import { ContextualError } from './ContextualError.js'
 
 /**
@@ -25,7 +25,7 @@ export class ContextualAggregateError<
 export const partitionAndAggregateErrors = <Results>(
   results: Results[],
 ): [Exclude<Results, Error>[], null | ContextualAggregateError<Include<Results, Error>>] => {
-  const [values, errors] = partitionErrors(results)
+  const [values, errors] = ArrMut.partitionErrors(results)
   const error = errors.length > 0
     ? new ContextualAggregateError(`One or more extensions are invalid.`, {}, errors)
     : null

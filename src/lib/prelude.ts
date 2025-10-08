@@ -123,20 +123,6 @@ export type ExcludeNull<T> = Exclude<T, null>
 export type ExcludeUndefined<T> = Exclude<T, undefined>
 export type ExcludeNullAndUndefined<T> = Exclude<T, null | undefined>
 
-export const mapValues = <
-  $Obj extends Record<string, any>,
-  $Fn extends (value: $Obj[keyof $Obj], key: keyof $Obj & string) => any,
->(
-  object: $Obj,
-  fn: $Fn,
-): Record<keyof $Obj, ReturnType<$Fn>> => {
-  return Object.fromEntries(
-    Object.entries(object).map(([key, value]) => {
-      return [key, fn(value, key)]
-    }),
-  ) as Record<keyof $Obj, ReturnType<$Fn>>
-}
-
 export const lowerCaseFirstLetter = (s: string) => {
   return s.charAt(0).toLowerCase() + s.slice(1)
 }
@@ -149,11 +135,7 @@ export function assertObject(v: unknown): asserts v is object {
   if (v === null || typeof v !== `object`) throw new Error(`Expected object. Got: ${String(v)}`)
 }
 
-export const capitalizeFirstLetter = (string: string) => string.charAt(0).toUpperCase() + string.slice(1)
-
-export type SomeAsyncFunction = (...args: any[]) => Promise<any>
-
-export type SomeFunction = (...args: any[]) => Prom.Maybe<any>
+export type SomeFunctionMaybeAsync = (...args: any[]) => Prom.Maybe<any>
 
 export type Deferred<T> = {
   promise: Promise<T>
@@ -379,19 +361,6 @@ export type MinusOne<n extends NumberLiteral> =
   : never
 
 export type Include<T, U> = T extends U ? T : never
-
-export const partitionErrors = <T>(array: T[]): [Exclude<T, Error>[], Include<T, Error>[]] => {
-  const errors: Include<T, Error>[] = []
-  const values: Exclude<T, Error>[] = []
-  for (const item of array) {
-    if (item instanceof Error) {
-      errors.push(item as any)
-    } else {
-      values.push(item as any)
-    }
-  }
-  return [values, errors]
-}
 
 export const urlParseSafe = (url: string) => {
   try {
@@ -728,10 +697,6 @@ export type PropertyKeyToString<$Key extends PropertyKey> = $Key extends string 
   : $Key extends number ? $Key
   : $Key extends symbol ? '<symbol>'
   : never
-
-export type DiscriminantPropertyValue = string | number | symbol
-
-export const identity = <value>(value: value): value => value
 
 export type PartialOrUndefined<T> = {
   [K in keyof T]?: T[K] | undefined

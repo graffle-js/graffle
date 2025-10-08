@@ -1,4 +1,4 @@
-import type { SomeFunction } from '../prelude.js'
+import type { SomeFunctionMaybeAsync } from '../prelude.js'
 import type { StepRunner } from './StepRunner.js'
 
 export interface StepDefinition<
@@ -64,7 +64,7 @@ export namespace StepDefinition {
 
   export type Input = object
 
-  export type Slots = Record<string, SomeFunction>
+  export type Slots = Record<string, SomeFunctionMaybeAsync>
 
   export type Name = string
 }
