@@ -17,8 +17,8 @@ const g = Graffle
 // Runtime tests using Test.describe table-driven pattern
 // dprint-ignore
 Test.describe('send() with documents')
-  .i<{ doc: string; sendArgs: any[] }>()
-  .o<object>()
+  .inputType<{ doc: string; sendArgs: any[] }>()
+  .outputType<object>()
   .casesIn('GraphQL Documents')(
     { n: 'single operation',              i: { doc: `{ id }`,                                                                                             sendArgs: [] },            o: { id: db.id1 } },
     { n: 'multiple ops - first',          i: { doc: `query getID { id } query getIDNonNull { idNonNull }`,                                                sendArgs: ['getID'] },     o: { id: db.id1 } },

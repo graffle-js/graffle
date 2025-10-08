@@ -107,8 +107,8 @@ describe('Type narrowing validation', () => {
 
 // dprint-ignore
 Test.describe('Builder runtime behavior')
-  .i<Var.Builder>()
-  .o<Var.BuilderState>()
+  .inputType<Var.Builder>()
+  .outputType<Var.BuilderState>()
   .casesIn('chain order does not matter')(
     [[$var.default(0).name('a')],                            { name: 'a', default: 0, required: undefined }],
     [[$var.name('a').default(0)],                            { name: 'a', default: 0, required: undefined }],

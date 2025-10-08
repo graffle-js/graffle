@@ -1,5 +1,5 @@
-import { createDeferred, debug } from '#src/lib/prelude.js'
-import { Lang } from '@wollybeard/kit'
+import { debug } from '#src/lib/prelude.js'
+import { Lang, Prom } from '@wollybeard/kit'
 import type { Errors } from '../../errors/$.js'
 import { ContextualError } from '../../errors/ContextualError.js'
 import type { InterceptorGeneric } from '../Interceptor/Interceptor.js'
@@ -40,7 +40,7 @@ export const runPipeline = async (
 
   debug(`hook ${stepToProcess.name}: start`)
 
-  const done = createDeferred<StepResult>({ strict: false })
+  const done = Prom.createDeferred<StepResult>({ strict: false })
 
   // We do not await the step runner here.
   // Instead we work with a deferred passed to it.
@@ -95,7 +95,7 @@ export const runPipeline = async (
         return signal.error as any // todo change return type to include object... given this instanceof permits that?
       }
 
-      const wasAsync = asyncErrorDeferred.isResolved()
+      const wasAsync = asyncErrorDeferred.isResolved
       // todo type test for this possible return value
       switch (signal.source) {
         case `extension`: {

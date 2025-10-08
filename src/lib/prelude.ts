@@ -137,36 +137,6 @@ export function assertObject(v: unknown): asserts v is object {
 
 export type SomeFunctionMaybeAsync = (...args: any[]) => Prom.Maybe<any>
 
-export type Deferred<T> = {
-  promise: Promise<T>
-  isResolved: () => boolean
-  resolve: (value: T) => void
-  reject: (error: unknown) => void
-}
-export const createDeferred = <$T>(options?: { strict?: boolean }): Deferred<$T> => {
-  let isResolved = false
-  let resolve: (value: $T) => void
-  let reject: (error: unknown) => void
-
-  const promise = new Promise<$T>(($resolve, $reject) => {
-    resolve = $resolve
-    reject = $reject
-  })
-
-  return {
-    promise,
-    isResolved: () => isResolved,
-    resolve: (value) => {
-      isResolved = true
-      if (options?.strict && isResolved) {
-        throw new Error(`Deferred is already resolved. Attempted to resolve with: ${JSON.stringify(value)}`)
-      }
-      resolve(value)
-    },
-    reject: (error) => reject(error),
-  }
-}
-
 export const debug = (...args: any[]) => {
   if (globalThis.process?.env?.['DEBUG']) {
     console.log(...args)

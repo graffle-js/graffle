@@ -1,4 +1,3 @@
-import type { Deferred } from '#src/lib/prelude.js'
 import type { Prom } from '@wollybeard/kit'
 import type { Simplify } from 'type-fest'
 import type { Pipeline } from '../$$.js'
@@ -49,16 +48,16 @@ export interface NonRetryingInterceptor {
   retrying: false
   name: string
   entrypoint: string
-  body: Deferred<unknown>
-  currentChunk: Deferred<StepTriggerEnvelope | ResultSuccess>
+  body: Prom.Deferred<unknown>
+  currentChunk: Prom.Deferred<StepTriggerEnvelope | ResultSuccess>
 }
 
 export interface RetryingInterceptor {
   retrying: true
   name: string
   entrypoint: string
-  body: Deferred<unknown>
-  currentChunk: Deferred<StepTriggerEnvelope | Error | ResultSuccess>
+  body: Prom.Deferred<unknown>
+  currentChunk: Prom.Deferred<StepTriggerEnvelope | Error | ResultSuccess>
 }
 
 export const createRetryingInterceptor = (interceptor: NonRetryingInterceptorInput): RetryingInterceptorInput => {

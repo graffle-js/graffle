@@ -16,9 +16,9 @@ const $ = Var.$
 
 // dprint-ignore
 Test.describe('DocumentBuilder Runtime')
-  .i<Possible.SelectionSets.Query>()
-  .o<{ with?: { y?: string[]; n?: string[] }; without?: { y?: string[]; n?: string[] } }>()
-  .ctx<{ hoistArguments?: boolean }>()
+  .inputType<Possible.SelectionSets.Query>()
+  .outputType<{ with?: { y?: string[]; n?: string[] }; without?: { y?: string[]; n?: string[] } }>()
+  .contextType<{ hoistArguments?: boolean }>()
   .casesIn('Arguments - Enums')(
     { n: 'enum arg',                      i: { stringWithArgEnum: { $: { $ABCEnum: `A` } } },                                o: { with: { y: ['$ABCEnum: ABCEnum', 'stringWithArgEnum(ABCEnum: $ABCEnum)'] },        without: { y: ['stringWithArgEnum(ABCEnum: "A")'] } }, hoistArguments: true },
     { n: 'enum arg - no hoisting',        i: { stringWithArgEnum: { $: { $ABCEnum: `A` } } },                                o: { with: { y: ['stringWithArgEnum(ABCEnum: A)'], n: ['$ABCEnum'] } },                 hoistArguments: false },

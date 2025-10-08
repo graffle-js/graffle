@@ -19,8 +19,8 @@ const subscription = createStaticRootType(OperationTypeNode.SUBSCRIPTION) as any
 
 // dprint-ignore
 Test.describe(`static document builder`)
-  .i<string>()
-  .o<{ y: string[]; n?: string[] }>()
+  .inputType<string>()
+  .outputType<{ y: string[]; n?: string[] }>()
   .cases(
     [[query.user({ id: true, name: true })],                              { y: [`user`, `id`, `name`],                                                        n: [`query (`, `$`] }],
     [[query.user({ $: { id: $ }, name: true })],                          { y: [`query ($id:`, `user(id: $id)`, `name`] }],

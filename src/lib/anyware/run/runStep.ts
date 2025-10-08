@@ -1,5 +1,5 @@
-import { createDeferred, debugSub } from '#src/lib/prelude.js'
-import { Err, Lang } from '@wollybeard/kit'
+import { debugSub } from '#src/lib/prelude.js'
+import { Err, Lang, Prom } from '@wollybeard/kit'
 import { Errors } from '../../errors/$.js'
 import type { InterceptorGeneric } from '../Interceptor/Interceptor.js'
 import type { Pipeline } from '../Pipeline/Pipeline.js'
@@ -13,7 +13,7 @@ type HookDoneResolver = (input: StepResult) => void
 
 const createExecutableChunk = <$Extension extends InterceptorGeneric>(extension: $Extension) => ({
   ...extension,
-  currentChunk: createDeferred<StepTriggerEnvelope | ($Extension['retrying'] extends true ? Error : never)>(),
+  currentChunk: Prom.createDeferred<StepTriggerEnvelope | ($Extension['retrying'] extends true ? Error : never)>(),
 })
 
 export const runStep = async (
@@ -78,7 +78,7 @@ export const runStep = async (
 
   if (extension) {
     const debugExtension = debugSub(`hook ${name}: extension ${extension.name}:`)
-    const hookInvokedDeferred = createDeferred()
+    const hookInvokedDeferred = Prom.createDeferred()
 
     debugExtension(`start`)
     let hookFailed = false
@@ -95,7 +95,7 @@ export const runStep = async (
       // Never resolve this hook call, the extension is in an invalid state and should not continue executing.
       // While it is possible the extension could continue by not await this hook at least if they are awaiting
       // it and so have code depending on its result it will never run.
-      if (hookInvokedDeferred.isResolved()) {
+      if (hookInvokedDeferred.isResolved) {
         if (!extension.retrying) {
           asyncErrorDeferred.resolve({
             type: `error`,
@@ -107,7 +107,7 @@ export const runStep = async (
               extensionsAfter: extensionsStackRest.map(_ => ({ name: _.name })),
             }),
           })
-          return createDeferred().promise // [1]
+          return Prom.createDeferred().promise // [1]
         } else if (!hookFailed) {
           asyncErrorDeferred.resolve({
             type: `error`,
@@ -122,7 +122,7 @@ export const runStep = async (
               },
             ),
           })
-          return createDeferred().promise // [1]
+          return Prom.createDeferred().promise // [1]
         } else {
           debugExtension(`execute branch: retry`)
           const extensionRetry = createExecutableChunk(extension)

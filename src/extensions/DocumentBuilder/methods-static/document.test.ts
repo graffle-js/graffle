@@ -8,9 +8,10 @@ const $ = Var.$
 type $ = typeof $
 
 // dprint-ignore
-Test.describe('static document builder')
-  .i <TypedFullDocument.TypedFullDocumentString>()
-  .o<{ y: string[]; n?: string[] }>()
+Test
+  .describe('static document builder')
+  .inputType<TypedFullDocument.TypedFullDocumentString>()
+  .outputType<{ y: string[]; n?: string[] }>()
   .cases(
     [[Possible.document({ query: { getUser: { id: true, idNonNull: true } } })],                                                   { y: [`query getUser`, `id`, `idNonNull`] }],
     [[Possible.document({ query: { getUser: { id: true }, getPost: { idNonNull: true } } })],                                      { y: [`query getUser`, `query getPost`, `id`, `idNonNull`] }],

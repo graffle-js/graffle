@@ -18,8 +18,8 @@ importers:
         specifier: ^0.9.0
         version: 0.9.0
       '@wollybeard/kit':
-        specifier: ^0.71.0
-        version: 0.71.0(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)
+        specifier: ^0.72.0
+        version: 0.72.0(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)
       es-toolkit:
         specifier: ^1.35.0
         version: 1.35.0
@@ -140,7 +140,7 @@ importers:
         version: 5.9.3
       vite-tsconfig-paths:
         specifier: ^5.1.4
-        version: 5.1.4(typescript@5.9.3)(vite@6.3.2(@types/node@22.14.1)(tsx@4.19.3))
+        version: 5.1.4(typescript@5.9.3)(vite@5.4.18(@types/node@22.14.1))
       vitepress:
         specifier: ^1.6.3
         version: 1.6.3(@algolia/client-search@5.23.4)(@types/node@22.14.1)(postcss@8.5.3)(search-insights@2.17.3)(typescript@5.9.3)
@@ -1390,8 +1390,8 @@ packages:
     resolution: {integrity: sha512-ydxzH1iox9AzLe+uaX9jjyVFkQO+h15j+JClropw0P4Vz+ES4+xTZVu5leUsWW8AYTVZBFkiC0iHl/PwFZ+Q1Q==}
     engines: {node: '>=18.0.0'}
 
-  '@wollybeard/kit@0.71.0':
-    resolution: {integrity: sha512-BlvIB8bCWsx4nQoccfCgpk4M4mYlRyEp898A4TiqhuOe+IgkwpGegr9mN2O0Y8yFB4Q0CYku/iP2Z6NkH7AbMQ==}
+  '@wollybeard/kit@0.72.0':
+    resolution: {integrity: sha512-S8YsLxdBSXALSGGLrNjRmtQNX8/A4AK2Vcfg23A1J1YlLlSG1o+33zP3TR+mVCePF9gE4ymHWn4m2SpxfW/JbA==}
     peerDependencies:
       '@effect/platform': '>=0.90.0 <1.0.0'
       effect: ^3.17.0
@@ -1697,8 +1697,8 @@ packages:
   es-toolkit@1.35.0:
     resolution: {integrity: sha512-kVHyrRoC0eLc1hWJ6npG8nNFtOG+nWfcMI+XE0RaFO0gxd6Ions8r0O/U64QyZgY7IeidUnS5oZlRZYUgMGCAg==}
 
-  es-toolkit@1.39.10:
-    resolution: {integrity: sha512-E0iGnTtbDhkeczB0T+mxmoVlT4YNweEKBLq7oaU4p11mecdsZpNWOglI4895Vh4usbQ+LsJiuLuI2L0Vdmfm2w==}
+  es-toolkit@1.40.0:
+    resolution: {integrity: sha512-8o6w0KFmU0CiIl0/Q/BCEOabF2IJaELM1T2PWj6e8KqzHv1gdx+7JtFnDwOx1kJH/isJ5NwlDG1nCr1HrRF94Q==}
 
   esbuild@0.21.5:
     resolution: {integrity: sha512-mg3OPMV4hXywwpoDxu3Qda5xCKQi+vCTZq8S9J/EpkhB2HzKXq4SNFZE3+NK93JYxc8VMSep+lOUSC/RVKaBqw==}
@@ -4164,7 +4164,7 @@ snapshots:
       '@whatwg-node/promise-helpers': 1.3.1
       tslib: 2.8.1
 
-  '@wollybeard/kit@0.71.0(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)':
+  '@wollybeard/kit@0.72.0(@effect/platform@0.92.1(effect@3.18.4))(effect@3.18.4)':
     dependencies:
       '@effect/platform': 0.92.1(effect@3.18.4)
       '@types/node': 24.7.0
@@ -4172,7 +4172,7 @@ snapshots:
       ansis: 4.2.0
       consola: 3.4.2
       effect: 3.18.4
-      es-toolkit: 1.39.10
+      es-toolkit: 1.40.0
       fast-check: 4.3.0
       jsonc-parser: 3.3.1
       object-inspect: 1.13.4
@@ -4479,7 +4479,7 @@ snapshots:
 
   es-toolkit@1.35.0: {}
 
-  es-toolkit@1.39.10: {}
+  es-toolkit@1.40.0: {}
 
   esbuild@0.21.5:
     optionalDependencies:
@@ -5579,13 +5579,13 @@ snapshots:
       - tsx
       - yaml
 
-  vite-tsconfig-paths@5.1.4(typescript@5.9.3)(vite@6.3.2(@types/node@22.14.1)(tsx@4.19.3)):
+  vite-tsconfig-paths@5.1.4(typescript@5.9.3)(vite@5.4.18(@types/node@22.14.1)):
     dependencies:
       debug: 4.4.0
       globrex: 0.1.2
       tsconfck: 3.1.6(typescript@5.9.3)
     optionalDependencies:
-      vite: 6.3.2(@types/node@22.14.1)(tsx@4.19.3)
+      vite: 5.4.18(@types/node@22.14.1)
     transitivePeerDependencies:
       - supports-color
       - typescript
