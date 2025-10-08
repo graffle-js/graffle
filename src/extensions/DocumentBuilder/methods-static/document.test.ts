@@ -1,38 +1,15 @@
-import type { TypedFullDocument } from '#src/lib/grafaid/typed-full-document/$.js'
 import { Test } from '@wollybeard/kit/test'
-import { expect, test } from 'vitest'
 import { Possible } from '../__tests__/fixtures/possible/$.js'
 import { Var } from '../var/$.js'
 
 const $ = Var.$
 type $ = typeof $
 
-// dprint-ignore
 Test
   .describe('static document builder')
-  .inputType<TypedFullDocument.TypedFullDocumentString>()
-  .outputType<{ y: string[]; n?: string[] }>()
-  .cases(
-    [[Possible.document({ query: { getUser: { id: true, idNonNull: true } } })],                                                   { y: [`query getUser`, `id`, `idNonNull`] }],
-    [[Possible.document({ query: { getUser: { id: true }, getPost: { idNonNull: true } } })],                                      { y: [`query getUser`, `query getPost`, `id`, `idNonNull`] }],
-    [[Possible.document({ query: { getUserWithArg: { stringWithRequiredArg: { $: { string: $ } } } } })],                          { y: [`query getUserWithArg`, `$string:`, `stringWithRequiredArg`] }],
-    [[Possible.document({ query: { getUser: { id: true } }, mutation: { updateUser: { id: true } } })],                            { y: [`query getUser`, `mutation updateUser`, `id`] }],
-  )
-  .test((doc, expectations) => {
-    for (const y of expectations.y) {
-      expect(doc).toContain(y)
-    }
-
-    if (expectations.n) {
-      for (const n of expectations.n) {
-        expect(doc).not.toContain(n)
-      }
-    }
-  })
-
-test('document is type checked', () => {
-  Possible.document({
-    // @ts-expect-error invalid document - $ syntax requires Var.$ marker, not boolean literal
-    query: { foo: { stringWithRequiredArg: { $: { string: true /* <-- should be $ */ } } } },
-  })
-})
+  .on(Possible.document)
+  .case({ query: { getUser: { id: true, idNonNull: true } } })
+  .case({ query: { getUser: { id: true }, getPost: { idNonNull: true } } })
+  .case({ query: { getUserWithArg: { stringWithRequiredArg: { $: { string: $ } } } } })
+  .case({ query: { getUser: { id: true } }, mutation: { updateUser: { id: true } } })
+  .test()

@@ -109,19 +109,19 @@ describe('Type narrowing validation', () => {
 Test.describe('Builder runtime behavior')
   .inputType<Var.Builder>()
   .outputType<Var.BuilderState>()
-  .casesIn('chain order does not matter')(
-    [[$var.default(0).name('a')],                            { name: 'a', default: 0, required: undefined }],
-    [[$var.name('a').default(0)],                            { name: 'a', default: 0, required: undefined }],
-  )
+  .describe('chain order does not matter', [
+    [$var.default(0).name('a'),                            { name: 'a', default: 0, required: undefined }],
+    [$var.name('a').default(0),                            { name: 'a', default: 0, required: undefined }],
+  ])
   .cases(
-    [[$var.name('customName')],                      { name: 'customName', default: undefined, required: undefined }],
-    [[$var.default(100)],                            { name: undefined, default: 100, required: undefined }],
-    [[$var.default(42)],                             { name: undefined, default: 42, required: undefined }],
-    [[$var.default('hello')],                        { name: undefined, default: 'hello', required: undefined }],
-    [[$var.default(true)],                           { name: undefined, default: true, required: undefined }],
-    [[$var.required()],                              { name: undefined, default: undefined, required: true }],
-    [[$var.default(10).name('limit')],               { name: 'limit', default: 10, required: undefined }],
+    [$var.name('customName'),                      { name: 'customName', default: undefined, required: undefined }],
+    [$var.default(100),                            { name: undefined, default: 100, required: undefined }],
+    [$var.default(42),                             { name: undefined, default: 42, required: undefined }],
+    [$var.default('hello'),                        { name: undefined, default: 'hello', required: undefined }],
+    [$var.default(true),                           { name: undefined, default: true, required: undefined }],
+    [$var.required(),                              { name: undefined, default: undefined, required: true }],
+    [$var.default(10).name('limit'),               { name: 'limit', default: 10, required: undefined }],
   )
-  .test((marker, expected) => {
-    expect(marker._).toEqual(expected)
+  .test(({ input, output }) => {
+    expect(input._).toEqual(output)
   })

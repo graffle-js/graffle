@@ -1,0 +1,71 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`GraphQL Documents > send() with documents > fn({ doc: '{ id }', sendArgs: [] }) 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  doc: '{ id }',
+  sendArgs: []
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS OBJECT
+[Object: null prototype] {
+  id: 'abc'
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`GraphQL Documents > send() with documents > fn({ doc: 'query getID { id } mutation mutateID { id }', sendArgs: [ 'getID' ] }) 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  doc: 'query getID { id } mutation mutateID { id }',
+  sendArgs: [ 'getID' ]
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS OBJECT
+[Object: null prototype] {
+  id: 'abc'
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`GraphQL Documents > send() with documents > fn({ doc: 'query getID { id } mutation mutateID { id }', sendArgs: [ 'mutateID' ] }) 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  doc: 'query getID { id } mutation mutateID { id }',
+  sendArgs: [ 'mutateID' ]
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS OBJECT
+[Object: null prototype] {
+  id: 'abc'
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`GraphQL Documents > send() with documents > fn({ doc: 'query getID { id } query getIDNonNull { idNonNull }', sendArgs: [ 'getID...) 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  doc: 'query getID { id } query getIDNonNull { idNonNull }',
+  sendArgs: [ 'getID' ]
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS OBJECT
+[Object: null prototype] {
+  id: 'abc'
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`GraphQL Documents > send() with documents > fn({ doc: 'query getID { id } query getIDNonNull { idNonNull }', sendArgs: [ 'getID...) 2`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  doc: 'query getID { id } query getIDNonNull { idNonNull }',
+  sendArgs: [ 'getIDNonNull' ]
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS OBJECT
+[Object: null prototype] {
+  idNonNull: 'abc'
+}
+╚══════════════════════════════════════════════════╝"
+`;

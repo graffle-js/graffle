@@ -123,18 +123,6 @@ export type ExcludeNull<T> = Exclude<T, null>
 export type ExcludeUndefined<T> = Exclude<T, undefined>
 export type ExcludeNullAndUndefined<T> = Exclude<T, null | undefined>
 
-export const lowerCaseFirstLetter = (s: string) => {
-  return s.charAt(0).toLowerCase() + s.slice(1)
-}
-
-export function assertArray(v: unknown): asserts v is unknown[] {
-  if (!Array.isArray(v)) throw new Error(`Expected array. Got: ${String(v)}`)
-}
-
-export function assertObject(v: unknown): asserts v is object {
-  if (v === null || typeof v !== `object`) throw new Error(`Expected object. Got: ${String(v)}`)
-}
-
 export type SomeFunctionMaybeAsync = (...args: any[]) => Prom.Maybe<any>
 
 export const debug = (...args: any[]) => {
@@ -340,14 +328,6 @@ export const urlParseSafe = (url: string) => {
   }
 }
 
-export type PickRequiredProperties<T extends object> = {
-  [K in keyof T as undefined extends T[K] ? never : K]: T[K]
-}
-
-export type Negate<T extends boolean> = T extends true ? false : true
-
-export type RequireProperties<O extends object, K extends keyof O> = Simplify<O & { [P in K]-?: O[P] }>
-
 export const throwNull = <V>(value: V): Exclude<V, null> => {
   if (value === null) throw new Error('Unexpected null value.')
   return value as Exclude<V, null>
@@ -376,22 +356,9 @@ export const proxyGet = <$Target>(
   })
 }
 
-type PathToValue<T, Path extends readonly string[]> = Path extends [infer First, ...infer Rest]
-  ? First extends keyof T ? Rest extends string[] ? PathToValue<T[First], Rest>
-    : never
-  : never
-  : T
-
-export const getValueAtPath = <T, Path extends readonly string[]>(
-  obj: T,
-  path: Path,
-): PathToValue<T, Path> | undefined => {
-  return path.reduce<any>((acc, key) => acc?.[key], obj)
-}
-
-export type SuffixKeyNames<$Suffix extends string, $Object extends object> = {
-  [$Key in keyof $Object & string as `${$Key}${$Suffix}`]: $Object[$Key]
-}
+// export type SuffixKeyNames<$Suffix extends string, $Object extends object> = {
+//   [$Key in keyof $Object & string as `${$Key}${$Suffix}`]: $Object[$Key]
+// }
 
 /**
  * Force intellisense to show the given union type expanded. E.g. given `Foo = A | B` then show `A | B` instead of `Foo`.

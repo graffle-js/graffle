@@ -17,28 +17,29 @@ const query = createStaticRootType(OperationTypeNode.QUERY) as any
 const mutation = createStaticRootType(OperationTypeNode.MUTATION) as any
 const subscription = createStaticRootType(OperationTypeNode.SUBSCRIPTION) as any
 
+// todo: snapshot test
 // dprint-ignore
 Test.describe(`static document builder`)
   .inputType<string>()
   .outputType<{ y: string[]; n?: string[] }>()
   .cases(
-    [[query.user({ id: true, name: true })],                              { y: [`user`, `id`, `name`],                                                        n: [`query (`, `$`] }],
-    [[query.user({ $: { id: $ }, name: true })],                          { y: [`query ($id:`, `user(id: $id)`, `name`] }],
-    [[query.user({ $: { id: $.name(`userId`) }, name: true })],           { y: [`query ($userId:`, `user(id: $userId)`] }],
-    [[query.users({ $: { first: $.default(10) }, name: true })],          { y: [`$first:`, `= 10`, `users(first: $first)`] }],
-    [[query.users({ $: { first: $.name(`limit`).default(20) }, name: true })], { y: [`$limit:`, `= 20`, `users(first: $limit)`] }],
-    [[query.users({ $: { first: 10, filter: $ }, name: true })],          { y: [`$first:`, `$filter:`, `users(first: $first, filter: $filter)`] }],
-    [[mutation.createUser({ $: { input: $ }, id: true, name: true })],    { y: [`mutation ($input:`, `createUser(input: $input)`] }],
-    [[subscription.onUserUpdate({ $: { userId: $ }, id: true, name: true })], { y: [`subscription ($userId:`, `onUserUpdate(userId: $userId)`] }],
+    [query.user({ id: true, name: true }),                              { y: [`user`, `id`, `name`],                                                        n: [`query (`, `$`] }],
+    [query.user({ $: { id: $ }, name: true }),                          { y: [`query ($id:`, `user(id: $id)`, `name`] }],
+    [query.user({ $: { id: $.name(`userId`) }, name: true }),           { y: [`query ($userId:`, `user(id: $userId)`] }],
+    [query.users({ $: { first: $.default(10) }, name: true }),          { y: [`$first:`, `= 10`, `users(first: $first)`] }],
+    [query.users({ $: { first: $.name(`limit`).default(20) }, name: true }), { y: [`$limit:`, `= 20`, `users(first: $limit)`] }],
+    [query.users({ $: { first: 10, filter: $ }, name: true }),          { y: [`$first:`, `$filter:`, `users(first: $first, filter: $filter)`] }],
+    [mutation.createUser({ $: { input: $ }, id: true, name: true }),    { y: [`mutation ($input:`, `createUser(input: $input)`] }],
+    [subscription.onUserUpdate({ $: { userId: $ }, id: true, name: true }), { y: [`subscription ($userId:`, `onUserUpdate(userId: $userId)`] }],
   )
-  .test((doc, expectations) => {
-    for (const y of expectations.y) {
-      expect(doc).toContain(y)
+  .test(({ input, output }) => {
+    for (const y of output.y) {
+      expect(input).toContain(y)
     }
 
-    if (expectations.n) {
-      for (const n of expectations.n) {
-        expect(doc).not.toContain(n)
+    if (output.n) {
+      for (const n of output.n) {
+        expect(input).not.toContain(n)
       }
     }
   })

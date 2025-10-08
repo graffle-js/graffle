@@ -14,21 +14,18 @@ const g = Graffle
   .use(TransportMemory)
   .transport(`memory`, { schema: possibleSchema })
 
-// Runtime tests using Test.describe table-driven pattern
-// dprint-ignore
-Test.describe('send() with documents')
+Test
+  .describe('send() with documents')
   .inputType<{ doc: string; sendArgs: any[] }>()
-  .outputType<object>()
-  .casesIn('GraphQL Documents')(
-    { n: 'single operation',              i: { doc: `{ id }`,                                                                                             sendArgs: [] },            o: { id: db.id1 } },
-    { n: 'multiple ops - first',          i: { doc: `query getID { id } query getIDNonNull { idNonNull }`,                                                sendArgs: ['getID'] },     o: { id: db.id1 } },
-    { n: 'multiple ops - second',         i: { doc: `query getID { id } query getIDNonNull { idNonNull }`,                                                sendArgs: ['getIDNonNull'] }, o: { idNonNull: db.id1 } },
-    { n: 'mixed query/mutation - query',  i: { doc: `query getID { id } mutation mutateID { id }`,                                                        sendArgs: ['getID'] },     o: { id: db.id1 } },
-    { n: 'mixed query/mutation - mutation', i: { doc: `query getID { id } mutation mutateID { id }`,                                                      sendArgs: ['mutateID'] },  o: { id: db.id1 } },
-  )
-  .test(async ({ doc, sendArgs }, expected) => {
-    const result = await g.send(doc as any, ...sendArgs)
-    expect(result).toEqual(expected)
+  .describeInputs('GraphQL Documents', [
+    { doc: `{ id }`, sendArgs: [] },
+    { doc: `query getID { id } query getIDNonNull { idNonNull }`, sendArgs: ['getID'] },
+    { doc: `query getID { id } query getIDNonNull { idNonNull }`, sendArgs: ['getIDNonNull'] },
+    { doc: `query getID { id } mutation mutateID { id }`, sendArgs: ['getID'] },
+    { doc: `query getID { id } mutation mutateID { id }`, sendArgs: ['mutateID'] },
+  ])
+  .test(async ({ input: { doc, sendArgs } }) => {
+    return await g.send(doc as any, ...sendArgs)
   })
 
 describe('TypedFullDocumentString', () => {
