@@ -70,9 +70,9 @@ export interface Builder<$Type = unknown, $State extends BuilderState = BuilderS
    * This ensures Builder<T> is only assignable to Builder<U> when T extends U.
    * For example, Builder<'hello'> can be assigned to Builder<string>, but Builder<1> cannot.
    * @internal
-   * @see {@link Ts.Covariant} for details on covariance
+   * @see {@link Ts.Variance.Co} for details on covariance
    */
-  readonly __type?: Ts.Covariant<$Type>
+  readonly __type?: Ts.Variance.Co<$Type>
 
   /**
    * Specify a custom name for the GraphQL variable.

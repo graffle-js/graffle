@@ -20,7 +20,7 @@ const $Required = $.required()
 type $Required = typeof $Required
 
 // dprint-ignore
-type _1 = Ts.Cases<
+type _1 = Ts.Test.Cases<
   // Custom variable name
   Ts.Test.exact<
     InferFromQuery<{ objectWithArgs: { $: { float: $WithCustomName } } }, Possible.$.ArgumentsMap>,
@@ -143,7 +143,7 @@ type _1 = Ts.Cases<
 >
 
 // dprint-ignore
-type _2 = Ts.Cases<
+type _2 = Ts.Test.Cases<
   // ====================================================================
   //                        INPUT OBJECTS
   // ====================================================================
