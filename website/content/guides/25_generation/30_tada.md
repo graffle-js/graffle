@@ -1,6 +1,6 @@
 # Tada
 
-Graffle leverages [gql-tada](https://gql-tada.0no.co)'s tooling to generate introspection types, enabling compile-time type checking for GraphQL queries using TypeScript's string literal types.
+Graffle leverages [gql-tada](https://gql-tada.0no.co)'s tooling to generate introspection types, enabling static analysis of GraphQL documents in native GraphQL syntax (as opposed to e.g. [Document Builder](/guides/methods/document)).
 
 ## Usage
 
