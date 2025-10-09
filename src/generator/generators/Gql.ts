@@ -31,7 +31,7 @@ export const ModuleGeneratorGql = createModuleGenerator(
   ({ code }) => {
     // Import type-only gql-tada types
     code`import type { initGraphQLTada } from 'gql.tada'`
-    code`import type { introspection } from './tada.js'`
+    code`import type { introspection } from './tada'`
     code`import { parse } from 'graphql'`
     code``
 
