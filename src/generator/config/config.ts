@@ -199,6 +199,7 @@ To suppress this warning disable formatting in one of the following ways:
 
   const lint: Config['lint'] = {
     missingCustomScalarCodec: configInit.lint?.missingCustomScalarCodec ?? defaults.lint.missingCustomScalarCodec,
+    missingGraphqlSP: configInit.lint?.missingGraphqlSP ?? defaults.lint.missingGraphqlSP,
   }
 
   // --- Output SDL ---

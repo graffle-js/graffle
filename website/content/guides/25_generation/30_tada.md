@@ -79,6 +79,8 @@ console.log(result?.user?.name)
 
 **This is a VALUE ADD** that brings real-time validation, linting, and autocomplete **within your GraphQL strings** as you type in your IDE. The GraphQLSP plugin will automatically check your GraphQL syntax, validate against your schema, and catch errors before runtime.
 
+The Graffle generator will check your configuration and provide helpful setup instructions if GraphQLSP is not configured. To disable this check, set `lint.missingGraphqlSP: false` in your `graffle.config.ts`.
+
 First, install the GraphQL LSP plugin:
 
 ```bash
@@ -109,6 +111,8 @@ export default {
   outputSDL: true, // Graffle will generate an SDL file
 }
 ```
+
+**Future Enhancement:** Auto-configuration of GraphQLSP in `tsconfig.json` is planned. See [#1389](https://github.com/graffle-js/graffle/issues/1389) for details.
 
 ## Limitations
 

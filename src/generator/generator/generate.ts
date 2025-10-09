@@ -20,6 +20,7 @@ import { ModuleGeneratorSelectionSets } from '../generators/SelectionSets.js'
 import { ModuleGeneratorTada } from '../generators/Tada.js'
 import { ModuleGeneratorTypeInputsIndex } from '../generators/TypeInputsIndex.js'
 import { getFileName, isExportsModule } from '../helpers/moduleGenerator.js'
+import { validateGraphQLSPConfiguration } from '../validation/graphqlsp.js'
 
 const moduleGenerators = [
   ModuleGeneratorGlobal,
@@ -113,6 +114,9 @@ export const generate = async (init: ConfigInit): Promise<Config> => {
       return config.fs.writeFile(filePath, generatedModule.content)
     }),
   )
+
+  // Validate GraphQLSP configuration and provide helpful suggestions
+  await validateGraphQLSPConfiguration(config)
 
   return config
 }
