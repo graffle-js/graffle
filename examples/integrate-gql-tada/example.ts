@@ -76,7 +76,7 @@ async function fetchPokemonWithTypes() {
  * Alternative: Using gql-tada inline with template literals
  * This shows the direct template literal usage with type checking
  */
-async function fetchPokemonInline() {
+async function _fetchPokemonInline() {
   // You can also write the query inline and get full type safety
   const result = await graffle.gql(
     graphql(`
@@ -147,6 +147,15 @@ const _mutationVars: AddPokemonVariables = {
   hp: 78,
   attack: 84,
   defense: 78,
+}
+
+const _mutationResult: AddPokemonResult = {
+  addPokemon: {
+    id: '1',
+    name: 'Charizard',
+    hp: 78,
+    type: 'fire',
+  },
 }
 
 /**
