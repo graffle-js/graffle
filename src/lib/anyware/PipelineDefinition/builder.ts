@@ -1,4 +1,4 @@
-import { type Tuple } from '#src/lib/prelude.js'
+import type { Tup } from '@wollybeard/kit'
 import type { ConfigManager } from '../../config-manager/$.js'
 import type { Extension } from '../Extension/$.js'
 import { Overload } from '../Overload/$.js'
@@ -19,8 +19,8 @@ import { type Options, resolveOptions } from './Config.js'
  */
 // dprint-ignore
 type GetNextStepParameterInput<$Context extends PipelineDefinition> =
-  $Context['steps'] extends Tuple.NonEmpty
-    ? Awaited<Tuple.GetLastValue<$Context['steps']>['output']>
+  $Context['steps'] extends Tup.NonEmpty
+    ? Awaited<Tup.GetLastValue<$Context['steps']>['output']>
     : $Context['input']
 
 export interface Builder<$PipelineDef extends PipelineDefinition = PipelineDefinition> {
@@ -122,11 +122,11 @@ interface StepMethod<$Context extends PipelineDefinition> {
 
 // dprint-ignore
 export type GetNextStepParameterPrevious<$Context extends PipelineDefinition> =
-  $Context['steps'] extends Tuple.NonEmpty
+  $Context['steps'] extends Tup.NonEmpty
     ? GetNextStepPrevious_<$Context['steps']>
     : undefined
 
-type GetNextStepPrevious_<$Steps extends readonly StepDefinition[]> = Tuple.IntersectItems<
+type GetNextStepPrevious_<$Steps extends readonly StepDefinition[]> = Tup.IntersectItems<
   {
     [$Index in keyof $Steps]: {
       [$StepName in $Steps[$Index]['name']]: {

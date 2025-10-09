@@ -1,7 +1,6 @@
 import type { Anyware } from '#lib/anyware'
-import type { Tuple } from '#src/lib/prelude.js'
 import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
-import type { Ts } from '@wollybeard/kit'
+import type { Ts, Tup } from '@wollybeard/kit'
 import type { Transport } from '../dataType/$.js'
 import type { ContextFragment, ContextTransports_Configurations, ContextTransports_Registry } from '../fragment.js'
 
@@ -67,12 +66,12 @@ export type AddMany<
       {
 
         readonly configurations:
-          & Tuple.IndexByToValueDepth2<$Transports, 'name', 'configurator', 'default'>
+          & Tup.IndexByToValueDepth2<$Transports, 'name', 'configurator', 'default'>
           // shallow merge + avoids more type instantiations
           & {
               [
                 _ in keyof $Context['transports']['configurations']
-                  as _ extends keyof Tuple.IndexByToValueDepth2<$Transports, 'name', 'configurator', 'default'>
+                  as _ extends keyof Tup.IndexByToValueDepth2<$Transports, 'name', 'configurator', 'default'>
                     ? never
                     : _
               ]:
@@ -83,7 +82,7 @@ export type AddMany<
           : $Context['transports']['current']
         readonly registry:
           & $Context['transports']['registry']
-          & Tuple.IndexBy<$Transports, 'name'>
+          & Tup.IndexBy<$Transports, 'name'>
       } :
     $Context[_]
 }

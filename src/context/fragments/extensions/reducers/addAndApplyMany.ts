@@ -1,6 +1,5 @@
 import type { Configurator } from '#src/lib/configurator/configurator.js'
-import { type Tuple } from '#src/lib/prelude.js'
-import type { Ts } from '@wollybeard/kit'
+import type { Ts, Tup } from '@wollybeard/kit'
 import type { Context } from '../../../context.js'
 import { Configuration } from '../../configuration/$.js'
 import { Properties } from '../../properties/$.js'
@@ -14,7 +13,7 @@ export type AddAndApplyMany<
   $Context extends Context,
   $Extensions extends readonly Extension.Data[],
   __extensionsIndex extends Record<string, Extension.Data> =
-    Tuple.IndexBy<$Extensions, 'name'>,
+    Tup.IndexBy<$Extensions, 'name'>,
   __configurations extends Configurator.Configuration =
     {
       [
@@ -28,11 +27,11 @@ export type AddAndApplyMany<
           : never
     },
   __transports extends readonly Data[] =
-    Tuple.Flatten<{ [_ in keyof $Extensions]: $Extensions[_]['transports'] }>,
+    Tup.Flatten<{ [_ in keyof $Extensions]: $Extensions[_]['transports'] }>,
   __propertiesComputedTypeFunctions$ extends readonly Properties.PropertiesComputer$Func[] =
-    Tuple.Flatten<{ [_ in keyof $Extensions]: $Extensions[_]['propertiesComputedTypeFunctions$'] }>,
+    Tup.Flatten<{ [_ in keyof $Extensions]: $Extensions[_]['propertiesComputedTypeFunctions$'] }>,
   __propertiesStatic extends Properties.Properties =
-    Tuple.ReduceObjectsMergeShallow<{ [_ in keyof $Extensions]: $Extensions[_]['propertiesStatic'] }>
+    Tup.ReduceObjectsMergeShallow<{ [_ in keyof $Extensions]: $Extensions[_]['propertiesStatic'] }>
 > = {
       readonly [_ in keyof $Context]:
         _ extends 'configuration' ?

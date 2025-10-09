@@ -1,6 +1,6 @@
 import type { Fn } from '@wollybeard/kit'
 import type { Simplify } from 'type-fest'
-import type { Func, Objekt } from '../prelude.js'
+import type { Objekt } from '../prelude.js'
 import type { Step } from './Step.js'
 
 export namespace StepTrigger {

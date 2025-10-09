@@ -1,7 +1,7 @@
 {
   "extends": [
     "@tsconfig/strictest/tsconfig.json",
-    "@tsconfig/node22/tsconfig.json"
+    "@tsconfig/node-lts/tsconfig.json"
   ],
   "compilerOptions": {
     "lib": ["ES2023"],

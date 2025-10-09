@@ -1,5 +1,6 @@
-import type { Tuple, UnionMerge, ValuesOrEmptyObject } from '#src/lib/prelude.js'
+import type { UnionMerge, ValuesOrEmptyObject } from '#src/lib/prelude.js'
 import type { Schema } from '#src/types/Schema/$.js'
+import type { Tup } from '@wollybeard/kit'
 import type { Select } from '../Select/$.js'
 import type { OutputField } from './OutputField.js'
 
@@ -44,7 +45,7 @@ type InferSelectAliasMultiple<
   $FieldName extends string,
   $Schema extends Schema,
   $Node extends Schema.OutputObjectLike,
-> = Tuple.IntersectItems<
+> = Tup.IntersectItems<
   {
     [_ in keyof $SelectAliasMultiple]: InferSelectAliasOne<$SelectAliasMultiple[_], $FieldName, $Schema, $Node>
   }

@@ -1,5 +1,5 @@
 import type { ConfigManager } from '#lib/config-manager'
-import type { Tuple } from '#src/lib/prelude.js'
+import type { Tup } from '@wollybeard/kit'
 import type { Writable } from 'type-fest'
 import { Configurator } from '../../configurator/configurator.js'
 import { createMutableBuilder } from '../../mutableBuilder.js'
@@ -96,7 +96,7 @@ interface MethodStep<
       & InferStepInput<
         $Data,
         Extract<$Pipeline['steps'][number], { name: $Name }>,
-        Tuple.PreviousItem<$Pipeline['steps'], { name: $Name }>
+        Tup.PreviousItem<$Pipeline['steps'], { name: $Name }>
       >
       & $InputExtension,
     $Output = unknown,

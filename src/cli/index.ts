@@ -2,9 +2,8 @@
 
 import { type ConfigInit, ImportFormat, OutputCase } from '#src/generator/config/configInit.js'
 import { toAbsolutePath } from '#src/lib/fsp.js'
-import { urlParseSafe } from '#src/lib/prelude.js'
 import { Command } from '@molt/command'
-import { Err } from '@wollybeard/kit'
+import { Err, Url } from '@wollybeard/kit'
 import * as Path from 'node:path'
 import { z } from 'zod'
 import { Generator } from '../generator/$.js'
@@ -123,7 +122,8 @@ const defaultSchemaUrl = typeof args.defaultSchemaUrl === `string`
 
 // --- Resolve Schema ---
 
-const url = args.schema ? urlParseSafe(args.schema) : null
+const urlOrError = args.schema ? Url.parse(args.schema) : null
+const url = Err.is(urlOrError) ? null : urlOrError
 
 const schemaViaCLI = args.schema
   ? url
