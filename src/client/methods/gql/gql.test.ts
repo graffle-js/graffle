@@ -3,7 +3,7 @@ import { g0, test } from '#test/helpers'
 import { describe, expectTypeOf } from 'vitest'
 // import { Spy } from '#test/SpyExtension'
 import type { Grafaid } from '#lib/grafaid'
-import { as } from '#src/lib/prelude.js'
+import { Ts } from '@wollybeard/kit'
 
 // todo test with custom scalars
 
@@ -24,7 +24,7 @@ const g1 = g0.with({ output: { envelope: false } }).transport(ATransport)
 
 type d1ResultData = { id: 0 }
 
-const d1 = as<Grafaid.Document.Typed.Node<d1ResultData, {}>>(``)
+const d1 = Ts.as<Grafaid.Document.Typed.Node<d1ResultData, {}>>(``)
 
 describe(`given typed document node`, () => {
   test(`returns typed result`, async () => {

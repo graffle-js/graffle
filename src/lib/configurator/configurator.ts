@@ -1,4 +1,4 @@
-import { shallowMergeWithoutUndefined } from '#src/lib/prelude.js'
+import { Obj } from '@wollybeard/kit'
 import type { HasRequiredKeys } from 'type-fest'
 
 // ----------------------------
@@ -91,7 +91,7 @@ namespace $ {
   }
 
   export const standardInputResolver_shallowMerge = createInputResolver(({ current, input }) =>
-    shallowMergeWithoutUndefined(current, input)
+    Obj.spreadShallow(current, input)
   )
 
   export const empty: Configurator.States.Empty = {

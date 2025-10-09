@@ -1,4 +1,4 @@
-import { analyzeFunction } from '../../analyze-function.js'
+import { Fn } from '@wollybeard/kit'
 import { ContextualError } from '../../errors/ContextualError.js'
 import type { NonRetryingInterceptorInput } from '../Interceptor/Interceptor.js'
 import type { Pipeline } from '../Pipeline/Pipeline.js'
@@ -30,7 +30,7 @@ export const getEntryStep = (
   interceptor: NonRetryingInterceptorInput,
 ): ErrorAnywareInterceptorEntrypoint | Step => {
   const stepsIndex = pipeline.stepsIndex
-  const x = analyzeFunction(interceptor)
+  const x = Fn.analyzeFunction(interceptor)
   if (x.parameters.length > 1) {
     return new ErrorAnywareInterceptorEntrypoint({ issue: InterceptorEntryHookIssue.multipleParameters })
   }

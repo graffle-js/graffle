@@ -1,4 +1,4 @@
-import { casesExhausted } from '#src/lib/prelude.js'
+import { Lang } from '@wollybeard/kit'
 import {
   getNamedType,
   type GraphQLArgument,
@@ -64,7 +64,7 @@ const isHasCustomScalarOutputs_ = (
     return node.getTypes().some(type => isHasCustomScalarOutputs_(type, typePath))
   }
 
-  throw casesExhausted(node)
+  throw Lang.neverCase(node)
 }
 
 export const isHasCustomScalarInputs = (
@@ -119,5 +119,5 @@ const isHasCustomScalarInputs_ = (
     return false
   }
 
-  throw casesExhausted(node)
+  throw Lang.neverCase(node)
 }

@@ -1,5 +1,5 @@
 import { Code } from '#src/lib/Code.js'
-import { values } from '#src/lib/prelude.js'
+import { Obj } from '@wollybeard/kit'
 import type { GraphQLObjectType } from 'graphql'
 import { getStaticDocumentBuilderDoc, getStaticDocumentFieldDoc } from '../helpers/jsdoc.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
@@ -80,7 +80,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
       code`
         export interface QueryBuilder {
           ${
-        values(queryType.getFields()).map(field => {
+        Obj.values(queryType.getFields()).map(field => {
           const fieldDoc = getStaticDocumentFieldDoc(config, field, queryType, 'query')
           const docComment = fieldDoc ? Code.TSDoc(fieldDoc) + '\n          ' : ''
           return `${docComment}${field.name}: <const $SelectionSet extends SelectionSets.Query<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['${field.name}']>(
@@ -139,7 +139,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
       code`
         export interface MutationBuilder {
           ${
-        values(mutationType.getFields()).map(field => {
+        Obj.values(mutationType.getFields()).map(field => {
           const fieldDoc = getStaticDocumentFieldDoc(config, field, mutationType, 'mutation')
           const docComment = fieldDoc ? Code.TSDoc(fieldDoc) + '\n          ' : ''
           return `${docComment}${field.name}: <const $SelectionSet extends SelectionSets.Mutation<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['${field.name}']>(
@@ -198,7 +198,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
       code`
         export interface SubscriptionBuilder {
           ${
-        values(subscriptionType.getFields()).map(field => {
+        Obj.values(subscriptionType.getFields()).map(field => {
           const fieldDoc = getStaticDocumentFieldDoc(config, field, subscriptionType, 'subscription')
           const docComment = fieldDoc ? Code.TSDoc(fieldDoc) + '\n          ' : ''
           return `${docComment}${field.name}: <const $SelectionSet extends SelectionSets.Subscription<$$Utilities.DocumentBuilderKit.Select.StaticBuilderContext>['${field.name}']>(

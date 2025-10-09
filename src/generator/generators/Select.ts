@@ -1,6 +1,6 @@
 // todo jsdoc
 import { Tex } from '#lib/tex'
-import { entries } from '#src/lib/prelude.js'
+import { Obj } from '@wollybeard/kit'
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { importUtilities } from '../helpers/pathHelpers.js'
@@ -36,7 +36,7 @@ export const ModuleGeneratorSelect = createModuleGenerator(
     `
     code(Tex.title2(`Root`))
     code(
-      ...entries(config.schema.kindMap.index.Root).map(([operationType, type]) => {
+      ...Obj.entries(config.schema.kindMap.index.Root).map(([operationType, type]) => {
         if (!type) return null
         return `export type ${type.name}<$SelectionSet extends $$SelectionSets.${
           renderName(type)

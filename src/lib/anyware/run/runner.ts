@@ -1,6 +1,5 @@
 import { Errors } from '#lib/errors'
-import { createDeferred } from '#src/lib/prelude.js'
-import { casesExhausted } from '#src/lib/prelude.js'
+import { Lang, Prom } from '@wollybeard/kit'
 import { partitionAndAggregateErrors } from '../../errors/$$.js'
 import {
   createRetryingInterceptor,
@@ -34,7 +33,7 @@ export const createRunner =
     const [initialHookStack, error] = partitionAndAggregateErrors(initialHookStackAndErrors)
     if (error) return error
 
-    const asyncErrorDeferred = createDeferred<StepResultErrorExtension>({ strict: false })
+    const asyncErrorDeferred = Prom.createDeferred<StepResultErrorExtension>({ strict: false })
     const result = await runPipeline({
       pipeline,
       stepsToProcess: pipeline.steps,
@@ -50,8 +49,8 @@ export const createRunner =
   }
 
 const toInternalInterceptor = (pipeline: PipelineDefinition.Pipeline, interceptor: InterceptorInput) => {
-  const currentChunk = createDeferred<StepTriggerEnvelope>()
-  const body = createDeferred()
+  const currentChunk = Prom.createDeferred<StepTriggerEnvelope>()
+  const body = Prom.createDeferred()
   const interceptorTrigger = typeof interceptor === `function` ? interceptor : interceptor.run
   const retrying = typeof interceptor === `function` ? false : interceptor.retrying
   const applyBody = async (input: object) => {
@@ -114,7 +113,7 @@ const toInternalInterceptor = (pipeline: PipelineDefinition.Pipeline, intercepto
       }
     }
     default:
-      throw casesExhausted(pipeline.config.entrypointSelectionMode)
+      throw Lang.neverCase(pipeline.config.entrypointSelectionMode)
   }
 }
 

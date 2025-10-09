@@ -1,4 +1,5 @@
-import { type DeepObjectValue, mapEntriesDeep } from '#src/lib/object-utils.js'
+import { type DeepObjectValue } from '#src/lib/object-utils.js'
+import { Obj } from '@wollybeard/kit'
 import { Var } from '../var/$.js'
 import type { DefaultContext } from './context.js'
 
@@ -53,7 +54,7 @@ export const isEnumKey = (key: string) => key.startsWith(enumKeyPrefix)
  * their $ prefix removed for GraphQL compatibility.
  */
 export const enumKeyPrefixStripFromObject = <T extends DeepObjectValue>(value: T): T => {
-  return mapEntriesDeep(value, (key, value) => {
+  return Obj.mapEntriesDeep(value, (key, value) => {
     if (isEnumKey(key)) {
       return {
         key: enumKeyPrefixStrip(key),

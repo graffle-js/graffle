@@ -1,5 +1,5 @@
 import type { Grafaid } from '#lib/grafaid'
-import { isString, type SimplifyNullable } from '#src/lib/prelude.js'
+import { Str, type Ts } from '@wollybeard/kit'
 import type { HandleOutput } from '../../handle.js'
 
 // dprint-ignore
@@ -60,7 +60,7 @@ export interface DocumentController<$Context, $TypedDocument extends Grafaid.Doc
    * ```
    */
   send(...args: SendArguments<$TypedDocument>):
-    Promise<SimplifyNullable<HandleOutput<$Context, Grafaid.Document.Typed.ResultOf<$TypedDocument>>>>
+    Promise<Ts.SimplifyNullable<HandleOutput<$Context, Grafaid.Document.Typed.ResultOf<$TypedDocument>>>>
 }
 
 export namespace GqlMethodSendMethod {
@@ -74,8 +74,8 @@ export namespace GqlMethodSendMethod {
     ]
 
   export const normalizeArguments = (args: Arguments) => {
-    const operationName = isString(args[0]) ? args[0] : undefined
-    const variables = isString(args[0]) ? args[1] : args[0]
+    const operationName = Str.Type.is(args[0]) ? args[0] : undefined
+    const variables = Str.Type.is(args[0]) ? args[1] : args[0]
     return {
       operationName,
       variables,

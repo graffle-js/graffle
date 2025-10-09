@@ -1,4 +1,4 @@
-import type { Tuple } from '#src/lib/prelude.js'
+import type { Tup } from '@wollybeard/kit'
 import type { Result } from '../Result.js'
 import type { PipelineDefinition } from './$.js'
 
@@ -6,8 +6,8 @@ export namespace Utilities {
   // dprint-ignore
   export type InferOutput<$PipelineDef extends PipelineDefinition> =
 		Awaited<
-			$PipelineDef['steps'] extends Tuple.NonEmpty
-        ? Tuple.GetLastValue<$PipelineDef['steps']>['output']
+			$PipelineDef['steps'] extends Tup.NonEmpty
+        ? Tup.GetLastValue<$PipelineDef['steps']>['output']
         : $PipelineDef['input']
     >
 

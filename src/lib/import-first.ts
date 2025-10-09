@@ -1,4 +1,4 @@
-import { errorFromMaybeError } from './prelude.js'
+import { Err } from '@wollybeard/kit'
 
 export const importFirst = async (
   paths: string[],
@@ -13,7 +13,7 @@ export const importFirst = async (
       if (isModuleNotFoundError(value)) {
         // silence
       } else {
-        return errorFromMaybeError(value)
+        return Err.ensure(value)
       }
     }
   }

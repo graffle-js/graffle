@@ -1,6 +1,7 @@
+import { Obj, type Undefined } from '@wollybeard/kit'
 import type { IsUnknown, PartialDeep, Simplify } from 'type-fest'
 import { isDate } from 'util/types'
-import { type ExcludeUndefined, type GuardedType, isAnyFunction, isNonNullObject, type Objekt } from '../prelude.js'
+import { type GuardedType, isAnyFunction, type Objekt } from '../prelude.js'
 
 // dprint-ignore
 export type OrDefault2<$Value, $Default> =
@@ -8,7 +9,7 @@ export type OrDefault2<$Value, $Default> =
     // then the inferred type is unknown.
     IsUnknown<$Value> extends true ? $Default :
     undefined extends $Value       ? $Default :
-                                     ExcludeUndefined<$Value>
+                                    Undefined.Exclude<$Value>
 
 // todo remove this in favour of OrDefault2
 // dprint-ignore
@@ -49,7 +50,7 @@ export type MergeDefaults<$Defaults extends object, $Input extends undefined | o
               $Key extends keyof $Input
                 ? $Input[$Key] extends undefined
                   ? $Defaults[$Key]
-                  : MergeDefaultsValues<$Defaults[$Key], ExcludeUndefined<$Input[$Key]>, $CustomScalars>
+                  : MergeDefaultsValues<$Defaults[$Key], Undefined.Exclude<$Input[$Key]>, $CustomScalars>
                 : $Defaults[$Key]
           }
   >
@@ -124,8 +125,8 @@ const mergeDefaults_: MergeDefaultsInnerFn = (
 
     if (key in i && i[key] !== undefined) {
       const inputValue = i[key]
-      if (isNonNullObject(defaultValue)) {
-        if (isNonNullObject(inputValue)) {
+      if (Obj.Type.is(defaultValue)) {
+        if (Obj.Type.is(inputValue)) {
           const isCustomScalar = customScalars.some(isCustomScalar => isCustomScalar(inputValue))
           if (!isCustomScalar) {
             mergeDefaults_(inputValue, defaultValue, customScalars)
@@ -174,7 +175,7 @@ export type GetOptional<$Value, $Path extends [...string[]]> =
 
 // dprint-ignore
 export type SetMany<$Obj extends object, $Sets extends [Path, any][]> =
-  $Sets extends []                                                                        ? $Obj : 
+  $Sets extends []                                                                        ? $Obj :
   $Sets extends [infer $Set extends [Path, any], ...infer $SetRest extends [Path, any][]] ? SetMany<
                                                                                               SetKeyAtPath<$Obj, $Set[0], $Set[1]>,
                                                                                               $SetRest
@@ -239,9 +240,9 @@ export type SetKeysOptional<
 > = {
   [_ in keyof $Obj]:
     _ extends keyof $NewObjValues
-      ? ExcludeUndefined<$NewObjValues[_]> extends never
+      ? Undefined.Exclude<$NewObjValues[_]> extends never
         ? $Obj[_]
-        : ExcludeUndefined<$NewObjValues[_]>
+        : Undefined.Exclude<$NewObjValues[_]>
       : $Obj[_]
 }
 

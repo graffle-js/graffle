@@ -1,9 +1,8 @@
 import { Extension } from '#graffle/extension'
 import { Errors } from '#lib/errors'
 import { normalizeRequestToNode } from '#src/lib/grafaid/request.js'
-// import { type ExcludeNullAndUndefined, isString } from '#src/lib/prelude.js'
-import { isRecordLikeObject, isString } from '#src/lib/prelude.js'
-// import type { RequestPipelineBaseInterceptor } from '../../requestPipeline/$.js'
+import { Rec, Str } from '@wollybeard/kit'
+
 import { SchemaDrivenDataMap } from '../../types/SchemaDrivenDataMap/$.js'
 // import type { GeneratedExtensions } from './global.js'
 import { injectTypenameOnRootResultFields } from './injectTypenameOnRootResultFields.js'
@@ -38,12 +37,12 @@ export const SchemaErrors = Extension
       // const sddmNodeField = sddm.roots[rootTypeName]?.f[rootFieldName]
       // if (!sddmNodeField) return null
       // if (!isPlainObject(rootFieldValue)) return new Error(`Expected result field to be an object.`)
-      if (!isRecordLikeObject(rootFieldValue)) continue
+      if (!Rec.is(rootFieldValue)) continue
 
       // If __typename is not selected we assume that this is not a result field.
       // The extension makes sure that the __typename would have been selected if it were a result field.
       const __typename = rootFieldValue[`__typename`]
-      if (!isString(__typename)) continue
+      if (!Str.Type.is(__typename)) continue
 
       const sddmNode = sddm.types[__typename]
       const isErrorObject = SchemaDrivenDataMap.isOutputObject(sddmNode) && Boolean(sddmNode.e)

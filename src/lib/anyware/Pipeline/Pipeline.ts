@@ -1,9 +1,5 @@
-import type {
-  __FORCE_UNION_DISTRIBUTION__,
-  ExcludeUndefined,
-  IntersectionIgnoreNeverOrAny,
-  Tuple,
-} from '#src/lib/prelude.js'
+import type { IntersectionIgnoreNeverOrAny } from '#src/lib/prelude.js'
+import type { Ts, Tup, Undefined } from '@wollybeard/kit'
 import type { IsUnknown, Simplify } from 'type-fest'
 import type { PipelineDefinition } from '../$$.js'
 import type { Overload } from '../Overload/$.js'
@@ -92,12 +88,12 @@ export namespace Pipeline {
       $PipelineDef['steps'][number]['name'],
       VAR_Steps[number]
     >
-    readonly input: VAR_Steps extends Tuple.NonEmpty
+    readonly input: VAR_Steps extends Tup.NonEmpty
       ? VAR_Steps[0]['input']
       : $PipelineDef['input']
     readonly output:
-      VAR_Steps extends Tuple.NonEmpty
-        ? Awaited<Tuple.GetLastValue<VAR_Steps>['output']>
+      VAR_Steps extends Tup.NonEmpty
+        ? Awaited<Tup.GetLastValue<VAR_Steps>['output']>
         : $PipelineDef['input']
   }
 
@@ -105,7 +101,7 @@ export namespace Pipeline {
   type InferSteps<
     $PipelineDef extends PipelineDefinition,
     VAR_StepDefs extends readonly StepDefinition[] = $PipelineDef['steps'],
-    VAR_IsHasNoOverloads extends boolean = $PipelineDef['overloads'] extends Tuple.NonEmpty ? false : true,
+    VAR_IsHasNoOverloads extends boolean = $PipelineDef['overloads'] extends Tup.NonEmpty ? false : true,
   > =  {
     readonly [i in keyof VAR_StepDefs]: {
       readonly name: VAR_StepDefs[i]['name']
@@ -137,7 +133,7 @@ export namespace Pipeline {
           >
       readonly run: IsUnknown<VAR_StepDefs[i]['run']> extends true
         ? StepRunner
-        : ExcludeUndefined<VAR_StepDefs[i]['run']>
+        : Undefined.Exclude<VAR_StepDefs[i]['run']>
     }
   }
 
@@ -150,7 +146,7 @@ export namespace Pipeline {
   // todo try putting the helper type below into a type variable above
   // dprint-ignore
   type InferStepSlots_<$Step extends StepDefinition, $Overloads extends readonly Overload.Data[]> =
-    Tuple.IntersectItems<{
+    Tup.IntersectItems<{
       [$Index in keyof $Overloads]:
         IsUnknown<$Overloads[$Index]['steps'][$Step['name']]> extends true
           ? unknown
@@ -162,7 +158,7 @@ export namespace Pipeline {
     $StepName extends Step['name'],
     $Overload extends Overload.Data,
   > =
-    $Overload extends __FORCE_UNION_DISTRIBUTION__ ?
+    $Overload extends Ts.Union.__FORCE_DISTRIBUTION__ ?
 
     // 1. The discriminant
     & $Overload extends never ? never : {
@@ -176,11 +172,11 @@ export namespace Pipeline {
 
   // dprint-ignore
   type InferStepInputFromOverload<
-    $StepIndex extends Tuple.IndexKey,
+    $StepIndex extends Tup.IndexKey,
     $StepName extends Step['name'],
     $Overload extends Overload.Data,
   > =
-    $Overload extends __FORCE_UNION_DISTRIBUTION__ ?
+    $Overload extends Ts.Union.__FORCE_DISTRIBUTION__ ?
 
     // 1. The discriminant
     & {

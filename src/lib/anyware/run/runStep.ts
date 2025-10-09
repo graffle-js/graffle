@@ -1,4 +1,4 @@
-import { casesExhausted, createDeferred, debugSub, errorFromMaybeError } from '#src/lib/prelude.js'
+import { Debug, Err, Lang, Prom } from '@wollybeard/kit'
 import { Errors } from '../../errors/$.js'
 import type { InterceptorGeneric } from '../Interceptor/Interceptor.js'
 import type { Pipeline } from '../Pipeline/Pipeline.js'
@@ -8,11 +8,13 @@ import { StepTrigger } from '../StepTrigger.js'
 import type { StepTriggerEnvelope } from '../StepTriggerEnvelope.js'
 import type { ResultEnvelop } from './resultEnvelope.js'
 
+const debug = Debug.create('anyware:step')
+
 type HookDoneResolver = (input: StepResult) => void
 
 const createExecutableChunk = <$Extension extends InterceptorGeneric>(extension: $Extension) => ({
   ...extension,
-  currentChunk: createDeferred<StepTriggerEnvelope | ($Extension['retrying'] extends true ? Error : never)>(),
+  currentChunk: Prom.createDeferred<StepTriggerEnvelope | ($Extension['retrying'] extends true ? Error : never)>(),
 })
 
 export const runStep = async (
@@ -51,7 +53,7 @@ export const runStep = async (
     asyncErrorDeferred: StepResultErrorAsync
   },
 ) => {
-  const debugHook = debugSub(`step ${name}:`)
+  const debugHook = debug.sub(`step ${name}`)
 
   debugHook(`advance to next interceptor`)
 
@@ -76,8 +78,8 @@ export const runStep = async (
    */
 
   if (extension) {
-    const debugExtension = debugSub(`hook ${name}: extension ${extension.name}:`)
-    const hookInvokedDeferred = createDeferred()
+    const debugExtension = debug.sub(`extension ${extension.name}`)
+    const hookInvokedDeferred = Prom.createDeferred()
 
     debugExtension(`start`)
     let hookFailed = false
@@ -94,7 +96,7 @@ export const runStep = async (
       // Never resolve this hook call, the extension is in an invalid state and should not continue executing.
       // While it is possible the extension could continue by not await this hook at least if they are awaiting
       // it and so have code depending on its result it will never run.
-      if (hookInvokedDeferred.isResolved()) {
+      if (hookInvokedDeferred.isResolved) {
         if (!extension.retrying) {
           asyncErrorDeferred.resolve({
             type: `error`,
@@ -106,7 +108,7 @@ export const runStep = async (
               extensionsAfter: extensionsStackRest.map(_ => ({ name: _.name })),
             }),
           })
-          return createDeferred().promise // [1]
+          return Prom.createDeferred().promise // [1]
         } else if (!hookFailed) {
           asyncErrorDeferred.resolve({
             type: `error`,
@@ -121,7 +123,7 @@ export const runStep = async (
               },
             ),
           })
-          return createDeferred().promise // [1]
+          return Prom.createDeferred().promise // [1]
         } else {
           debugExtension(`execute branch: retry`)
           const extensionRetry = createExecutableChunk(extension)
@@ -228,7 +230,7 @@ export const runStep = async (
           type: `error`,
           hookName: name,
           source: `extension`,
-          error: errorFromMaybeError(result),
+          error: Err.ensure(result),
           interceptorName: extension.name,
         })
         return
@@ -240,11 +242,11 @@ export const runStep = async (
           type: `error`,
           hookName: name,
           source: `implementation`,
-          error: errorFromMaybeError(result),
+          error: Err.ensure(result),
         })
         return
       default:
-        throw casesExhausted(branch)
+        throw Lang.neverCase(branch)
     }
   } /* reached core for this hook */ else {
     debugHook(`no more interceptors to advance, run implementation`)
@@ -269,9 +271,9 @@ export const runStep = async (
       debugHook(`implementation error`)
       const lastExtension = nextInterceptorsStack[nextInterceptorsStack.length - 1]
       if (lastExtension && lastExtension.retrying) {
-        lastExtension.currentChunk.resolve(errorFromMaybeError(error))
+        lastExtension.currentChunk.resolve(Err.ensure(error))
       } else {
-        done({ type: `error`, hookName: name, source: `implementation`, error: errorFromMaybeError(error) })
+        done({ type: `error`, hookName: name, source: `implementation`, error: Err.ensure(error) })
       }
       return
     }

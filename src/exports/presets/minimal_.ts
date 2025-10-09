@@ -3,7 +3,7 @@ import { type Client, createConstructorWithContext } from '#src/client/client.js
 import { type Context as BaseContext } from '#src/context/context.js'
 import { contextEmpty } from '#src/context/ContextEmpty.js'
 import { addAndApplyMany } from '#src/context/fragments/extensions/fragment.js'
-import type { PartialOrUndefined } from '#src/lib/prelude.js'
+import type { Obj } from '@wollybeard/kit'
 import { TransportHttp } from '../extensions/transport-http/runtime.js'
 
 export { type Client } from '#src/client/client.js'
@@ -18,7 +18,7 @@ export type ClientEmpty = Client<ContextEmpty>
 
 export namespace Client {
   // export type Context = Context
-  export type With<$ContextNewPartial extends PartialOrUndefined<BaseContext>> = Client<
+  export type With<$ContextNewPartial extends Obj.PartialOrUndefined<BaseContext>> = Client<
     ConfigManager.SetKeysOptional<
       ContextEmpty,
       $ContextNewPartial

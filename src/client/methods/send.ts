@@ -1,5 +1,5 @@
 import type { Grafaid } from '#lib/grafaid'
-import type { SimplifyNullable } from '#src/lib/prelude.js'
+import type { Ts } from '@wollybeard/kit'
 import type { UnionToTuple } from 'type-fest'
 import type { TypedFullDocument } from '../../lib/grafaid/typed-full-document/$.js'
 import type { HandleOutput } from '../handle.js'
@@ -30,10 +30,10 @@ type InferSendArguments_<
 type InferReturn<$Context, $Ops extends Record<string, TypedFullDocument.OperationMetadata>, $Args extends InferParameters<$Ops>> =
   HasOneKey<$Ops> extends true
     ? // Single operation
-      Promise<SimplifyNullable<HandleOutput<$Context, $Ops[keyof $Ops]['result']>>>
+      Promise<Ts.SimplifyNullable<HandleOutput<$Context, $Ops[keyof $Ops]['result']>>>
     : // Multiple operations - extract operation name from first argument
       $Args extends [infer $OpName extends keyof $Ops, ...any]
-        ? Promise<SimplifyNullable<HandleOutput<$Context, $Ops[$OpName]['result']>>>
+        ? Promise<Ts.SimplifyNullable<HandleOutput<$Context, $Ops[$OpName]['result']>>>
         : never
 
 /**

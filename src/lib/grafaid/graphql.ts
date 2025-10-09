@@ -1,6 +1,6 @@
+import { Lang } from '@wollybeard/kit'
 import type { GraphQLNamedType, GraphQLScalarType } from 'graphql'
 import { isEnumType, isInputObjectType, isInterfaceType, isObjectType, isScalarType, isUnionType } from 'graphql'
-import { casesExhausted } from '../prelude.js'
 import type { KindMap } from './schema/schema.js'
 import { isScalarTypeCustom } from './schema/schema.js'
 
@@ -74,7 +74,7 @@ export const getTypeAndKind = (
   } else if (isEnumType(node)) {
     kindName = `Enum`
   } else {
-    throw casesExhausted(node)
+    throw Lang.neverCase(node)
   }
   return { typeName, kindName }
 }

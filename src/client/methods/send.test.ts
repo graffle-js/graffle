@@ -14,21 +14,18 @@ const g = Graffle
   .use(TransportMemory)
   .transport(`memory`, { schema: possibleSchema })
 
-// Runtime tests using Test.describe table-driven pattern
-// dprint-ignore
-Test.describe('send() with documents')
-  .i<{ doc: string; sendArgs: any[] }>()
-  .o<object>()
-  .casesIn('GraphQL Documents')(
-    { n: 'single operation',              i: { doc: `{ id }`,                                                                                             sendArgs: [] },            o: { id: db.id1 } },
-    { n: 'multiple ops - first',          i: { doc: `query getID { id } query getIDNonNull { idNonNull }`,                                                sendArgs: ['getID'] },     o: { id: db.id1 } },
-    { n: 'multiple ops - second',         i: { doc: `query getID { id } query getIDNonNull { idNonNull }`,                                                sendArgs: ['getIDNonNull'] }, o: { idNonNull: db.id1 } },
-    { n: 'mixed query/mutation - query',  i: { doc: `query getID { id } mutation mutateID { id }`,                                                        sendArgs: ['getID'] },     o: { id: db.id1 } },
-    { n: 'mixed query/mutation - mutation', i: { doc: `query getID { id } mutation mutateID { id }`,                                                      sendArgs: ['mutateID'] },  o: { id: db.id1 } },
-  )
-  .test(async ({ doc, sendArgs }, expected) => {
-    const result = await g.send(doc as any, ...sendArgs)
-    expect(result).toEqual(expected)
+Test
+  .describe('send() with documents')
+  .inputType<{ doc: string; sendArgs: any[] }>()
+  .describeInputs('GraphQL Documents', [
+    { doc: `{ id }`, sendArgs: [] },
+    { doc: `query getID { id } query getIDNonNull { idNonNull }`, sendArgs: ['getID'] },
+    { doc: `query getID { id } query getIDNonNull { idNonNull }`, sendArgs: ['getIDNonNull'] },
+    { doc: `query getID { id } mutation mutateID { id }`, sendArgs: ['getID'] },
+    { doc: `query getID { id } mutation mutateID { id }`, sendArgs: ['mutateID'] },
+  ])
+  .test(async ({ input: { doc, sendArgs } }) => {
+    return await g.send(doc as any, ...sendArgs)
   })
 
 describe('TypedFullDocumentString', () => {
@@ -38,7 +35,7 @@ describe('TypedFullDocumentString', () => {
     if (false) {
       // @ts-expect-error - Unreachable code for type testing
       const result = g.send(doc)
-      Ts.assertEqual<Promise<{ id: string | null } | null>>()(result)
+      Ts.Test.exact<Promise<{ id: string | null } | null>>()(result)
     }
   })
 
@@ -52,7 +49,7 @@ describe('TypedFullDocumentString', () => {
       // @ts-expect-error - invalid type
       g.send(doc, { string: 1 })
 
-      Ts.assertEqual<Promise<{ stringWithRequiredArg: string | null } | null>>()(g.send(doc))
+      Ts.Test.exact<Promise<{ stringWithRequiredArg: string | null } | null>>()(g.send(doc))
     }
   })
 
@@ -69,7 +66,7 @@ describe('TypedFullDocumentString', () => {
 
     const result = await g.send(doc, { string: '' })
     expect(result).toEqual({ stringWithRequiredArg: '' })
-    Ts.assertEqual<Promise<{ stringWithRequiredArg: string | null } | null>>()(g.send(doc, { string: '' }))
+    Ts.Test.exact<Promise<{ stringWithRequiredArg: string | null } | null>>()(g.send(doc, { string: '' }))
   })
 
   test('multiple operations, no var -> operation name required', async () => {
@@ -93,8 +90,8 @@ describe('TypedFullDocumentString', () => {
     expect(resultA).toEqual({ id: db.id1 })
     expect(resultB).toEqual({ idNonNull: db.id1 })
 
-    Ts.assertEqual<Promise<{ id: string | null } | null>>()(g.send(doc, 'a'))
-    Ts.assertEqual<Promise<{ idNonNull: string } | null>>()(g.send(doc, 'b'))
+    Ts.Test.exact<Promise<{ id: string | null } | null>>()(g.send(doc, 'a'))
+    Ts.Test.exact<Promise<{ idNonNull: string } | null>>()(g.send(doc, 'b'))
   })
 
   test('multiple operations, 1 optional var/1 required var -> name required, var optional/var required', async () => {
@@ -124,9 +121,9 @@ describe('TypedFullDocumentString', () => {
       const resultB = g.send(doc, 'b', { string: '' })
       const resultBDefault = g.send(doc, 'b')
 
-      Ts.assertEqual<Promise<{ stringWithRequiredArg: string | null } | null>>()(g.send(doc, 'a', { string: '' }))
-      Ts.assertEqual<Promise<{ stringWithRequiredArg: string | null } | null>>()(resultB)
-      Ts.assertEqual<typeof resultB>()(resultBDefault)
+      Ts.Test.exact<Promise<{ stringWithRequiredArg: string | null } | null>>()(g.send(doc, 'a', { string: '' }))
+      Ts.Test.exact<Promise<{ stringWithRequiredArg: string | null } | null>>()(resultB)
+      Ts.Test.exact<typeof resultB>()(resultBDefault)
     }
   })
 
@@ -168,6 +165,6 @@ describe('TypedFullDocumentString', () => {
   // test('plain string - no type safety', () => {
   //   const query = `{ foo { id } }`
   //   const result = client.send(query)
-  //   Ts.assertEqual<Promise<{ [x: string]: any } | null>>()(result)
+  //   Ts.Test.exact<Promise<{ [x: string]: any } | null>>()(result)
   // })
 })

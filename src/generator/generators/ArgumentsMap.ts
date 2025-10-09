@@ -1,8 +1,8 @@
 import { Grafaid } from '#lib/grafaid'
 import { Tex } from '#lib/tex'
 import { Code } from '#src/lib/Code.js'
-import { entries } from '#src/lib/prelude.js'
 import { propertyNames } from '#src/types/SchemaDrivenDataMap/SchemaDrivenDataMap.js'
+import { Obj } from '@wollybeard/kit'
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 import { createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
@@ -57,7 +57,7 @@ export const ModuleGeneratorArgumentsMap = createModuleGenerator(
     const interfaceTypes: Grafaid.Schema.ArgsIndex.TypeInfo[] = []
     const rootTypes: Record<string, Grafaid.Schema.ArgsIndex.TypeInfo> = {}
 
-    for (const [typeName, typeInfo] of entries(argsIndex)) {
+    for (const [typeName, typeInfo] of Obj.entries(argsIndex)) {
       const graphqlType = typeInfo.reference
 
       // Categorize by type
@@ -317,7 +317,7 @@ const renderTypeWithArgs = createCodeGenerator<
     code`  readonly ${propertyNames.f}: {`
 
     // Include all fields in the index (they all have arguments somewhere)
-    for (const [fieldName, fieldInfo] of entries(typeInfo.fields)) {
+    for (const [fieldName, fieldInfo] of Obj.entries(typeInfo.fields)) {
       code`    readonly ${fieldName}: {`
 
       // Add arguments section if field has direct arguments

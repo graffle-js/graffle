@@ -13,7 +13,7 @@ import {
   type URLInput as URLInputType,
 } from '#src/lib/http.js'
 import type { httpMethodGet, httpMethodPost } from '#src/lib/http.js'
-import { _, isString, type MaybePromise } from '#src/lib/prelude.js'
+import { type Prom, Str } from '@wollybeard/kit'
 import { Transport } from '../../context/fragments/transports/dataType/$.js' // TODO import from entrypoint
 
 // ----------------------------
@@ -161,7 +161,7 @@ export const TransportHttp = Extension.create(`TransportHttp`)
             query: print(input.request.query),
           }
 
-          const operationType = isString(input.request.operation)
+          const operationType = Str.Type.is(input.request.operation)
             ? input.request.operation
             : input.request.operation.operation
           const methodMode = input.transport.methodMode
@@ -215,7 +215,7 @@ export const TransportHttp = Extension.create(`TransportHttp`)
       })
       .exchange({
         slots: {
-          fetch: (url: string | URL, init?: RequestInit): MaybePromise<Response> => fetch(url, init),
+          fetch: (url: string | URL, init?: RequestInit): Prom.Maybe<Response> => fetch(url, init),
         },
         async run(input, slots) {
           const response = await slots.fetch(input.request.url.value, input.request)

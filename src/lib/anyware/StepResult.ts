@@ -1,5 +1,5 @@
+import type { Prom } from '@wollybeard/kit'
 import type { Errors } from '../errors/$.js'
-import type { Deferred } from '../prelude.js'
 import type { InterceptorGeneric } from './Interceptor/Interceptor.js'
 
 export type StepResult =
@@ -46,4 +46,4 @@ export interface StepResultErrorImplementation {
   error: Error
 }
 
-export type StepResultErrorAsync = Deferred<StepResultErrorExtension>
+export type StepResultErrorAsync = Prom.Deferred<StepResultErrorExtension>

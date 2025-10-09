@@ -1,5 +1,5 @@
 import type { Grafaid } from '#lib/grafaid'
-import { type ExcludeNull } from '#src/lib/prelude.js'
+import type { Null } from '@wollybeard/kit'
 import type { OperationTypeNode } from 'graphql'
 import type { OutputObjectLike } from './OutputObjectLike.js'
 
@@ -23,5 +23,5 @@ export type Operation<
   $SelectionSet,
   $Schema,
   // @ts-expect-error: No $Schema constraint to avoid "compare depth limit"
-  ExcludeNull<$Schema['Root'][$OperationType]>
+  Null.Exclude<$Schema['Root'][$OperationType]>
 >

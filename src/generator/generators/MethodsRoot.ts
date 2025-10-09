@@ -1,7 +1,7 @@
 // todo remove use of Utils.Aug when schema errors not in use
 import { Grafaid } from '#lib/grafaid'
 import { createFromObjectTypeAndMapOrThrow } from '#src/lib/grafaid/schema/RootDetails.js'
-import { capitalizeFirstLetter } from '#src/lib/prelude.js'
+import { Str } from '@wollybeard/kit'
 import { $ } from '../helpers/identifiers.js'
 import {
   getBatchMethodDoc,
@@ -85,7 +85,7 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
               & (null | {})
               & ${$.$$Utilities}.HandleOutput<
                   $Context,
-                  ${$.$$Utilities}.DocumentBuilderKit.InferResult.Operation${capitalizeFirstLetter(operationType)}<${$.$$Utilities}.AssertExtendsObject<$SelectionSet>, ${$.$$Schema}.${$.Schema}<$Context['scalars']>>
+                  ${$.$$Utilities}.DocumentBuilderKit.InferResult.Operation${Str.Case.capFirst(operationType)}<${$.$$Utilities}.AssertExtendsObject<$SelectionSet>, ${$.$$Schema}.${$.Schema}<$Context['scalars']>>
                 >
             >
         >
@@ -146,7 +146,7 @@ const renderFieldMethods = createCodeGenerator<{ node: Grafaid.Schema.ObjectType
               & (null | {})
               & ${$.$$Utilities}.HandleOutputDocumentBuilderRootField<
                   $Context,
-                  ${$.$$Utilities}.DocumentBuilderKit.InferResult.Operation${capitalizeFirstLetter(operationType)}<{ ${field.name}: $SelectionSet}, ${$.$$Schema}.${$.Schema}<$Context['scalars']>>,
+                  ${$.$$Utilities}.DocumentBuilderKit.InferResult.Operation${Str.Case.capFirst(operationType)}<{ ${field.name}: $SelectionSet}, ${$.$$Schema}.${$.Schema}<$Context['scalars']>>,
                   '${field.name}'
                 >
             >

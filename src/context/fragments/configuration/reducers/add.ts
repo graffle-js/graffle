@@ -1,5 +1,6 @@
 import type { Configurator } from '#src/lib/configurator/configurator.js'
-import { hasNonUndefinedKeys, type Writeable } from '#src/lib/prelude.js'
+import { hasNonUndefinedKeys } from '#src/lib/prelude.js'
+import type { Ts } from '@wollybeard/kit'
 import type { ContextFragment, Index } from '../fragment.js'
 
 export const add = <
@@ -11,7 +12,7 @@ export const add = <
   // For default input resolvers we can do this automatically (shallow merge)
   // Any custom input resolvers would need to implement their own "is changed" logic.
 
-  const configuration: Writeable<ContextFragment['configuration'] & Index> = {
+  const configuration: Ts.Writeable<ContextFragment['configuration'] & Index> = {
     ...context.configuration,
   }
 

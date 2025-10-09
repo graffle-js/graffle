@@ -104,6 +104,7 @@
     "@0no-co/graphql.web": "^1.0.12",
     "@graphql-typed-document-node/core": "^3.2.0",
     "@molt/command": "^0.9.0",
+    "@wollybeard/kit": "^0.76.2",
     "es-toolkit": "^1.35.0",
     "is-plain-obj": "^4.1.0",
     "type-fest": "^4.40.0"
@@ -145,7 +146,6 @@
     "@types/body-parser": "^1.19.5",
     "@types/express": "^5.0.1",
     "@types/node": "^22.14.1",
-    "@wollybeard/kit": "^0.67.0",
     "async-cleanup": "^1.0.0",
     "dprint": "^0.50.2",
     "dripip": "^0.10.0",
@@ -164,6 +164,7 @@
     "prettier": "^3.5.3",
     "publint": "^0.3.12",
     "strip-ansi": "^7.1.0",
+    "tinyglobby": "^0.2.15",
     "tsx": "^4.19.3",
     "typescript": "^5.9.3",
     "vite-tsconfig-paths": "^5.1.4",

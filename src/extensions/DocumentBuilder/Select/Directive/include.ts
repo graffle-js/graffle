@@ -1,5 +1,5 @@
-import { shallowMergeDefaults } from '#src/lib/prelude.js'
 import { Schema } from '#src/types/Schema/$.js'
+import { Obj } from '@wollybeard/kit'
 import type { Definition } from './$types.js'
 
 export const Include: Definition = {
@@ -8,10 +8,10 @@ export const Include: Definition = {
   normalizeArguments: (input: ArgsInput): Args => {
     return typeof input === `boolean`
       ? expandShortHand(input)
-      : shallowMergeDefaults(
+      : Obj.spreadShallow(
         argumentDefaults,
         input,
-      )
+      ) as Args
   },
 }
 

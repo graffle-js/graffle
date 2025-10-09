@@ -1,7 +1,8 @@
 import type { Grafaid } from '#lib/grafaid'
 import { Nodes } from '#src/lib/grafaid/_Nodes.js'
-import { casesExhausted, isNonNull } from '#src/lib/prelude.js'
+import { isNonNull } from '#src/lib/prelude.js'
 import type { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
+import { Lang } from '@wollybeard/kit'
 import type { ParsedSelectionObjectLevel } from '../../Select/$$.js'
 import type { GraphQLPostOperationMapper } from '../mapper.js'
 import { toGraphQLField } from './5_Field.js'
@@ -56,7 +57,7 @@ export const fromGraffleSelectionObjectLevel: GraphQLPostOperationMapper<
     // todo
     // case 'FragmentSpread'
     default: {
-      throw casesExhausted(selection)
+      throw Lang.neverCase(selection)
     }
   }
 }

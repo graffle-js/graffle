@@ -1,7 +1,6 @@
 import type { Schema, TypeFunction } from '#graffle/utilities-for-generated'
 import type { ConfigManager } from '#lib/config-manager'
-import type { Values } from '#src/lib/prelude.js'
-import type { TSErrorDescriptive } from '#src/lib/ts-error.js'
+import type { Obj, Ts } from '@wollybeard/kit'
 import type { IsNever } from 'type-fest'
 
 interface ZeroClient extends Client {
@@ -51,10 +50,10 @@ export type Clients = GraffleGlobal.Clients
 
 export type IsEmpty = IsNever<keyof Clients> extends true ? true : false
 
-export type ClientUnion = IsEmpty extends true ? ZeroClient : Values<Clients>
+export type ClientUnion = IsEmpty extends true ? ZeroClient : Obj.values<Clients>[number]
 
 export type ClientNames = keyof GraffleGlobal.Clients extends never
-  ? TSErrorDescriptive<'SchemaNames', 'No schemas have been registered. Did you run graffle generate?'>
+  ? Ts.StaticError<'No schemas have been registered. Did you run graffle generate?', { location: 'SchemaNames' }>
   : keyof GraffleGlobal.Clients
 
 // dprint-ignore

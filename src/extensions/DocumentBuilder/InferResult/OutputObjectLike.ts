@@ -1,7 +1,6 @@
-import { assertEqual } from '#src/lib/assert-equal.js'
-import type { AssertExtendsObject, GetOrNever, PropertyKeyToString, StringKeyof } from '#src/lib/prelude.js'
-import type { TSErrorDescriptive } from '#src/lib/ts-error.js'
+import type { AssertExtendsObject } from '#src/lib/prelude.js'
 import type { Schema } from '#src/types/Schema/$.js'
+import type { Obj, Ts } from '@wollybeard/kit'
 import type { IsNever } from 'type-fest'
 import type { Select } from '../Select/$.js'
 import type { Alias } from './Alias.js'
@@ -79,7 +78,7 @@ type OtherKeys<
   }
 
 // dprint-ignore
-type PickApplicableFieldKeys<$SelectionSet> = StringKeyof<
+type PickApplicableFieldKeys<$SelectionSet> = Obj.StringKeyof<
   {
     [
       $Key in keyof $SelectionSet as
@@ -116,7 +115,7 @@ type InlineFragmentKeys<
 > =
   InlineFragmentKey_<
     AssertExtendsObject<
-      GetOrNever<$SelectionSet, Select.InlineFragment.Key>
+      Obj.GetOrNever<$SelectionSet, Select.InlineFragment.Key>
     >,
     $Schema,
     $Node
@@ -142,7 +141,10 @@ export namespace Errors {
   export type UnknownKey<
     $Key extends PropertyKey,
     $Object extends Schema.OutputObjectLike,
-  > = TSErrorDescriptive<'Object', `field "${PropertyKeyToString<$Key>}" does not exist on object "${$Object['name']}"`>
+  > = Ts.StaticError<
+    `field "${Obj.PropertyKeyToString<$Key>}" does not exist on object "${$Object['name']}"`,
+    { location: 'Object' }
+  >
 }
 
 // dprint-ignore
@@ -161,9 +163,7 @@ export type IsFieldKey<$Key extends PropertyKey> =
 //
 //
 // dprint-ignore
-{
-
-assertEqual<PickApplicableFieldKeys<{ a: true }>                 , 'a'>()
-assertEqual<PickApplicableFieldKeys<{ a: ['b', true]; b: true }> , 'b'>()
-
-}
+type _ = Ts.Test.Cases<
+  Ts.Test.exact<PickApplicableFieldKeys<{ a: true }>                 , 'a'>,
+  Ts.Test.exact<PickApplicableFieldKeys<{ a: ['b', true]; b: true }> , 'b'>
+>

@@ -11,13 +11,8 @@ import {
 } from '#src/context/fragments/configuration/output/configuration.js'
 import type { SomeObjectData } from '#src/lib/grafaid/graphql.js'
 import type { GraphQLExecutionResultError } from '#src/lib/grafaid/graphql.js'
-import {
-  type ExcludeNull,
-  type ExcludeNullAndUndefined,
-  type ExcludeUndefined,
-  type GetOrNever,
-  type Values,
-} from '#src/lib/prelude.js'
+import { type ExcludeNullAndUndefined } from '#src/lib/prelude.js'
+import type { Null, Obj, Undefined } from '@wollybeard/kit'
 import type { GraphQLError } from 'graphql'
 import type { Simplify } from 'type-fest'
 import type { RequestPipeline } from '../requestPipeline/$.js'
@@ -137,7 +132,7 @@ type HandleOutput_Envelope<
 > =
   $OutputConfig['envelope']['enabled'] extends true
     ? $Envelope
-    : ExcludeUndefined<$Envelope['data']> // todo make data field not undefinable
+    : Undefined.Exclude<$Envelope['data']> // todo make data field not undefinable
 
 // dprint-ignore
 type IfConfiguredGetOutputErrorReturns<$OutputConfig extends Normalized> =
@@ -200,7 +195,7 @@ type ObjMap<T = unknown> = {
 // dprint-ignore
 type IsEnvelopeWithoutErrors<$OutputConfig extends Normalized> =
   $OutputConfig['envelope']['enabled'] extends true
-    ? Values<$OutputConfig['envelope']['errors']> extends false
+    ? Obj.values<$OutputConfig['envelope']['errors']>[number] extends false
       ? true
     : false
   : false
@@ -220,7 +215,7 @@ export type HandleOutputDocumentBuilderRootField<
   $RootFieldName extends string,
 > =
   HandleOutputDocumentBuilderRootField_Data<
-    ExcludeNull<
+   Null.Exclude<
       HandleOutput<
         $Context,
         RequestResult.Simplify<$Context, $Data>
@@ -236,4 +231,4 @@ type HandleOutputDocumentBuilderRootField_Data<
 > =
   $Output extends Error | GraffleExecutionResultEnvelope
     ? $Output
-    : GetOrNever<ExcludeNullAndUndefined<$Output>, $RootFieldName>
+    : Obj.GetOrNever<ExcludeNullAndUndefined<$Output>, $RootFieldName>

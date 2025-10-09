@@ -1,8 +1,8 @@
 import { Grafaid } from '#lib/grafaid'
 import { Tex } from '#lib/tex'
-import { CodePusher } from '#src/lib/code-pusher/index.js'
 import { Code } from '#src/lib/Code.js'
-import { entries, isObjectEmpty, values } from '#src/lib/prelude.js'
+import { isObjectEmpty } from '#src/lib/prelude.js'
+import { Obj, Str } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
 import { getKindDocUrl, markdownTable } from '../helpers/jsdoc.js'
@@ -75,7 +75,7 @@ export const ModuleGeneratorSchema = {
 // Individual module generators
 
 const generateScalarModule = (config: Config, scalar: Grafaid.Schema.ScalarType): GeneratedModule => {
-  const code = CodePusher.create()
+  const code = Str.Builder()
   const renderedName = renderName(scalar)
   const originalName = scalar.name
   const isCustom = config.schema.kindMap.list.ScalarCustom.includes(scalar)
@@ -96,7 +96,7 @@ const generateScalarModule = (config: Config, scalar: Grafaid.Schema.ScalarType)
 }
 
 const generateEnumModule = (config: Config, enumType: Grafaid.Schema.EnumType): GeneratedModule => {
-  const code = CodePusher.create()
+  const code = Str.Builder()
 
   if (config.code.schemaInterfaceExtendsEnabled) {
     const utilitiesPath = getUtilitiesPath(config, `schema/enums/${enumType.name}.ts`)
@@ -127,7 +127,7 @@ const generateEnumModule = (config: Config, enumType: Grafaid.Schema.EnumType): 
 }
 
 const generateUnionModule = (config: Config, unionType: Grafaid.Schema.UnionType): GeneratedModule => {
-  const code = CodePusher.create()
+  const code = Str.Builder()
 
   if (config.code.schemaInterfaceExtendsEnabled) {
     const utilitiesPath = getUtilitiesPath(config, `schema/unions/${unionType.name}.ts`)
@@ -262,7 +262,7 @@ const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.I
   const modules: GeneratedModule[] = []
 
   // Generate fields.ts
-  const fieldsCode = CodePusher.create()
+  const fieldsCode = Str.Builder()
   if (config.code.schemaInterfaceExtendsEnabled) {
     const utilitiesPath = getUtilitiesPath(config, `schema/input-objects/${inputObject.name}/fields.ts`)
     fieldsCode(`import type * as $ from '${utilitiesPath}'`)
@@ -271,7 +271,7 @@ const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.I
   fieldsCode()
 
   // Generate field interfaces
-  for (const field of values(inputObject.getFields())) {
+  for (const field of Obj.values(inputObject.getFields())) {
     const namedType = Grafaid.Schema.getNamedType(field.type)
 
     fieldsCode(Code.tsInterface({
@@ -296,7 +296,7 @@ const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.I
   })
 
   // Generate $.ts (namespace export + interface)
-  const namespaceCode = CodePusher.create()
+  const namespaceCode = Str.Builder()
   if (config.code.schemaInterfaceExtendsEnabled) {
     const utilitiesPath = getUtilitiesPath(config, `schema/input-objects/${inputObject.name}/$.ts`)
     namespaceCode(`import type * as $ from '${utilitiesPath}'`)
@@ -307,7 +307,7 @@ const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.I
   namespaceCode()
 
   const interfaceFields = Object.fromEntries(
-    values(inputObject.getFields()).map((field) => {
+    Obj.values(inputObject.getFields()).map((field) => {
       const name = field.name
       // Always use original name - export alias handles reserved keywords
       const fieldTypeReference = `$Fields.${name}`
@@ -338,7 +338,7 @@ const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.I
 }
 
 const generateSchemaNamespaceModule = (config: Config, kindMap: Grafaid.Schema.KindMap['list']): GeneratedModule => {
-  const code = CodePusher.create()
+  const code = Str.Builder()
   const utilitiesPath = getUtilitiesPath(config, `schema/$.ts`)
 
   code(`import type * as $ from '${utilitiesPath}'`)
@@ -359,7 +359,7 @@ const generateSchemaNamespaceModule = (config: Config, kindMap: Grafaid.Schema.K
     ...kindMap.ScalarCustom.map(_ => [_.name, `$Types.${_.name}`] as const),
     ...kindMap.ScalarStandard.map(_ => [_.name, `$Types.${_.name}`] as const),
   ]
-  const operationsAvailable = entries(config.schema.kindMap.index.Root).filter(_ => _[1] !== null).map(_ => _[0])
+  const operationsAvailable = Obj.entries(config.schema.kindMap.index.Root).filter(_ => _[1] !== null).map(_ => _[0])
 
   const schema: Code.TermObject = {
     name: `$$Data.Name`,
@@ -416,7 +416,7 @@ const generateSchemaNamespaceModule = (config: Config, kindMap: Grafaid.Schema.K
 }
 
 const generateSchemaBarrelModule = (config: Config, kindMap: Grafaid.Schema.KindMap['list']): GeneratedModule => {
-  const code = CodePusher.create()
+  const code = Str.Builder()
 
   // Re-export roots
   for (const type of kindMap.Root) {
@@ -774,7 +774,7 @@ const generateTypeModule = (
   const modules: GeneratedModule[] = []
 
   // Generate fields.ts
-  const fieldsCode = CodePusher.create()
+  const fieldsCode = Str.Builder()
   if (config.code.schemaInterfaceExtendsEnabled) {
     const utilitiesPath = getUtilitiesPath(config, `schema/${kind}/${type.name}/fields.ts`)
     fieldsCode(`import type * as $ from '${utilitiesPath}'`)
@@ -802,7 +802,7 @@ const generateTypeModule = (
   fieldsCode()
 
   // Regular fields
-  for (const field of values(type.getFields())) {
+  for (const field of Obj.values(type.getFields())) {
     const namedType = Grafaid.Schema.getNamedType(field.type)
 
     fieldsCode(Code.tsInterface({
@@ -841,7 +841,7 @@ const generateTypeModule = (
   })
 
   // Generate $.ts (namespace export + interface)
-  const namespaceCode = CodePusher.create()
+  const namespaceCode = Str.Builder()
   if (config.code.schemaInterfaceExtendsEnabled) {
     const utilitiesPath = getUtilitiesPath(config, `schema/${kind}/${type.name}/$.ts`)
     namespaceCode(`import type * as $ from '${utilitiesPath}'`)
@@ -867,7 +867,7 @@ const generateTypeModule = (
 
   const interfaceFields = Object.fromEntries(
     [[`__typename`, `$Fields.__typename`]].concat(
-      values(type.getFields()).map((field) => {
+      Obj.values(type.getFields()).map((field) => {
         const name = field.name
         // Always use original name - export alias handles reserved keywords
         const fieldTypeReference = `$Fields.${name}`

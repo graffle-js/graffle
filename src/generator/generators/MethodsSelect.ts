@@ -1,7 +1,7 @@
 // todo jsdoc
 import { Tex } from '#lib/tex'
 import { Code } from '#src/lib/Code.js'
-import { entries, pick, values } from '#src/lib/prelude.js'
+import { Obj } from '@wollybeard/kit'
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { importUtilities } from '../helpers/pathHelpers.js'
@@ -11,8 +11,8 @@ import { ModuleGeneratorSelectionSets } from './SelectionSets.js'
 export const ModuleGeneratorMethodsSelect = createModuleGenerator(
   `MethodsSelect`,
   ({ config, code }) => {
-    const kindMap = pick(config.schema.kindMap.list, [`Root`, `OutputObject`, `Union`, `Interface`])
-    const kinds = entries(kindMap)
+    const kindMap = Obj.pick(config.schema.kindMap.list, [`Root`, `OutputObject`, `Union`, `Interface`])
+    const kinds = Obj.entries(kindMap)
 
     code(importModuleGenerator(config, ModuleGeneratorSelectionSets))
     code(importUtilities(config))
@@ -21,7 +21,7 @@ export const ModuleGeneratorMethodsSelect = createModuleGenerator(
     code``
     code(Code.tsInterface({
       name: `$MethodsSelect`,
-      block: values(kindMap).flatMap(type => {
+      block: Obj.values(kindMap).flatMap(type => {
         return type.map(type => {
           return [type.name, renderName(type)] as const
         })

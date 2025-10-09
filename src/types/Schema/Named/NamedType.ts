@@ -1,4 +1,4 @@
-import type { Digit, Letter } from '#src/lib/prelude.js'
+import type { Str } from '@wollybeard/kit'
 
 /**
  * @see http://spec.graphql.org/draft/#sec-Names
@@ -17,5 +17,5 @@ type NameBodyParse<S extends string> =
                                                                                 S :
                                           never
 
-export type NameHead = Letter | '_'
-export type NameBody = Letter | '_' | Digit
+export type NameHead = Str.Char.Letter | '_'
+export type NameBody = Str.Char.Letter | '_' | Str.Char.Digit

@@ -1,6 +1,4 @@
-// type MethodArguments = Properties | PropertiesComputer<Context, Properties>
-
-import { isObjectEmpty, type ObjectMergeShallow } from '#src/lib/prelude.js'
+import { Obj } from '@wollybeard/kit'
 import {
   type ContextFragment,
   contextFragmentPropertiesTypeLevel,
@@ -16,7 +14,7 @@ export const add = <$Context extends ContextFragment>(
     computed?: ReadonlyArray<PropertiesComputer>
   },
 ): ContextFragment => {
-  const isHasStatic = propertiesInput.static && !isObjectEmpty(propertiesInput.static)
+  const isHasStatic = propertiesInput.static && !Obj.isEmpty(propertiesInput.static)
   const isHasComputed = propertiesInput.computed && propertiesInput.computed.length > 0
   if (!isHasStatic && !isHasComputed) return context
 
@@ -50,7 +48,7 @@ export type Add<
   $PropertiesStatic extends Properties,
   $PropertiesComputerTypeFunctions extends readonly PropertiesComputer$Func[],
   __ = {
-    static: ObjectMergeShallow<$Context['properties']['static'], $PropertiesStatic>
+    static: Obj.MergeShallow<$Context['properties']['static'], $PropertiesStatic>
     $computedTypeFunctions: readonly [
       ...$Context['properties']['$computedTypeFunctions'],
       ...$PropertiesComputerTypeFunctions,

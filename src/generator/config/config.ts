@@ -2,8 +2,8 @@ import { Graffle } from '#graffle'
 import { ConfigManager } from '#lib/config-manager'
 import { Grafaid } from '#lib/grafaid'
 import { fileExists, type Fs, isPathToADirectory, toAbsolutePath, toFilePath } from '#src/lib/fsp.js'
-import { isString, keysStrict } from '#src/lib/prelude.js'
 import { type Formatter, getTypeScriptFormatter, passthroughFormatter } from '#src/lib/typescript-formatter.js'
+import { Obj, Str } from '@wollybeard/kit'
 import { pascalCase } from 'es-toolkit'
 import * as Path from 'node:path'
 import { Introspection } from '../../extensions/Introspection/Introspection.js'
@@ -185,7 +185,7 @@ To suppress this warning disable formatting in one of the following ways:
   }
 
   const libraryPaths = Object.fromEntries(
-    keysStrict(libraryPathKeys).map(_ => {
+    Obj.keysStrict(libraryPathKeys).map(_ => {
       return [
         _,
         configInit.libraryPaths?.[_]
@@ -206,7 +206,7 @@ To suppress this warning disable formatting in one of the following ways:
   // dprint-ignore
   const outputSDLPath =
     configInit.outputSDL
-      ? isString(configInit.outputSDL)
+      ? Str.Type.is(configInit.outputSDL)
         ? toFilePath(`schema.graphql`, toAbsolutePath(cwd, configInit.outputSDL))
         : Path.join(outputDirPathRoot, `schema.graphql`)
       : null
@@ -219,7 +219,7 @@ To suppress this warning disable formatting in one of the following ways:
     ? configInit.name
       ? pascalCase(configInit.name)
       : `Graffle`
-    : isString(configInit.nameNamespace)
+    : Str.Type.is(configInit.nameNamespace)
     ? configInit.nameNamespace
     : `Graffle`
 

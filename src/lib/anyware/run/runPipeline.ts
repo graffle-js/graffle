@@ -1,4 +1,4 @@
-import { casesExhausted, createDeferred, debug } from '#src/lib/prelude.js'
+import { Debug, Lang, Prom } from '@wollybeard/kit'
 import type { Errors } from '../../errors/$.js'
 import { ContextualError } from '../../errors/ContextualError.js'
 import type { InterceptorGeneric } from '../Interceptor/Interceptor.js'
@@ -8,6 +8,8 @@ import type { StepResult, StepResultErrorAsync } from '../StepResult.js'
 import { createResultEnvelope } from './resultEnvelope.js'
 import type { ResultEnvelop } from './resultEnvelope.js'
 import { runStep } from './runStep.js'
+
+const debug = Debug.create('anyware:pipeline')
 
 export const defaultFunctionName = `anonymous`
 
@@ -39,7 +41,7 @@ export const runPipeline = async (
 
   debug(`hook ${stepToProcess.name}: start`)
 
-  const done = createDeferred<StepResult>({ strict: false })
+  const done = Prom.createDeferred<StepResult>({ strict: false })
 
   // We do not await the step runner here.
   // Instead we work with a deferred passed to it.
@@ -94,7 +96,7 @@ export const runPipeline = async (
         return signal.error as any // todo change return type to include object... given this instanceof permits that?
       }
 
-      const wasAsync = asyncErrorDeferred.isResolved()
+      const wasAsync = asyncErrorDeferred.isResolved
       // todo type test for this possible return value
       switch (signal.source) {
         case `extension`: {
@@ -120,11 +122,11 @@ export const runPipeline = async (
           return signal.error
         }
         default:
-          throw casesExhausted(signal)
+          throw Lang.neverCase(signal)
       }
     }
     default:
-      throw casesExhausted(signal)
+      throw Lang.neverCase(signal)
   }
 }
 

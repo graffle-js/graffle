@@ -1,5 +1,5 @@
-import { type GetKeyOr } from '#src/lib/prelude.js'
 import type { Schema } from '#src/types/Schema/$.js'
+import type { Obj } from '@wollybeard/kit'
 import type { Select } from '../Select/$.js'
 import type { OutputObjectLike } from './OutputObjectLike.js'
 
@@ -12,7 +12,7 @@ export type InlineFragmentTypeConditional<
   $Node extends any // force distribution
     // ? $Node extends Schema.Interface
     //   ? {
-    //       debug: GetKeyOr<
+    //       debug: Obj.GetKeyOr<
     //         $SelectionSet,
     //         `${Select.InlineFragment.TypeConditionalKeyPrefix}${$Node['name']}`,
     //         {}
@@ -21,7 +21,7 @@ export type InlineFragmentTypeConditional<
     //     debug2: $Node['fields']
     //     }
     ? OutputObjectLike<
-        & GetKeyOr<
+        & Obj.GetKeyOr<
             $SelectionSet,
             `${Select.InlineFragment.TypeConditionalKeyPrefix}${$Node['name']}`,
             {}

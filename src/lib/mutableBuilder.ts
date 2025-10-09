@@ -1,9 +1,9 @@
-import { mapValues } from 'es-toolkit'
+import { Obj } from '@wollybeard/kit'
 
 export const createMutableBuilder = (
   parameters: { data: object; builder: Record<string, (...args: any[]) => any> },
 ) => {
-  const builderInputWrapped = mapValues(parameters.builder, (method) => {
+  const builderInputWrapped = Obj.mapValues(parameters.builder, (method) => {
     return (...args: any[]) => {
       const result = method(...args)
       if (result === undefined) return builderFinal
