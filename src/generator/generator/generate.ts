@@ -16,6 +16,7 @@ import { ModuleGeneratorSchema } from '../generators/Schema.js'
 import { ModuleGeneratorSchemaDrivenDataMap } from '../generators/SchemaDrivenDataMap.js'
 import { ModuleGeneratorSelect } from '../generators/Select.js'
 import { ModuleGeneratorSelectionSets } from '../generators/SelectionSets.js'
+import { ModuleGeneratorTada } from '../generators/Tada.js'
 import { ModuleGeneratorTypeInputsIndex } from '../generators/TypeInputsIndex.js'
 import { getFileName, isExportsModule } from '../helpers/moduleGenerator.js'
 
@@ -25,6 +26,7 @@ const moduleGenerators = [
   ModuleGeneratorDocument,
   ModuleGeneratorData,
   ModuleGeneratorScalar,
+  ModuleGeneratorTada,
   // Packaging Stuff
   ModuleGenerator_internals,
   ModuleGenerator$$,
