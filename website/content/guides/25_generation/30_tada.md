@@ -68,6 +68,7 @@ console.log(result?.user?.name)
 ```
 
 **Benefits:**
+
 - Document can be defined in one place and reused
 - Easy to test documents independently
 - Clear separation between query definition and execution
@@ -102,18 +103,19 @@ console.log(result?.user?.name)
 ```
 
 **Benefits:**
+
 - Concise syntax for one-off queries
 - Query and execution co-located
 - Familiar to users of other GraphQL clients
 
 ### Comparison
 
-| Feature | Static API | Instance API |
-|---------|-----------|--------------|
-| Syntax | `Graffle.gql()` then `client.send()` | `client.gql().send()` |
-| Use Case | Reusable documents | One-off queries |
-| Type Inference | Full gql-tada inference | Basic structure inference |
-| Multi-operation | No (use `.document()`) | No (use `.document()`) |
+| Feature         | Static API                           | Instance API              |
+| --------------- | ------------------------------------ | ------------------------- |
+| Syntax          | `Graffle.gql()` then `client.send()` | `client.gql().send()`     |
+| Use Case        | Reusable documents                   | One-off queries           |
+| Type Inference  | Full gql-tada inference              | Basic structure inference |
+| Multi-operation | No (use `.document()`)               | No (use `.document()`)    |
 
 ### TypeScript Configuration
 
@@ -242,10 +244,11 @@ import { Graffle } from './graffle/_exports.js'
 const doc = Graffle.document({
   query: {
     GetUser: {
-      user: (args) => args({ $: { id: 'ID!' } }, {
-        id: true,
-        name: true,
-      }),
+      user: (args) =>
+        args({ $: { id: 'ID!' } }, {
+          id: true,
+          name: true,
+        }),
     },
     GetPosts: {
       posts: {
@@ -265,7 +268,7 @@ const postsData = await client.send(doc).run('GetPosts')
 
 ### No Tagged Template Literal Support
 
-Graffle's gql-tada integration requires call expression syntax (`Graffle.gql("...")`) instead of tagged template syntax (``Graffle.gql`...` ``). TypeScript cannot infer const string literals from `TemplateStringsArray`, which gql-tada's type-level parser requires. See [TypeScript Issue #33304](https://github.com/microsoft/TypeScript/issues/33304).
+Graffle's gql-tada integration requires call expression syntax (`Graffle.gql("...")`) instead of tagged template syntax (`` Graffle.gql`...` ``). TypeScript cannot infer const string literals from `TemplateStringsArray`, which gql-tada's type-level parser requires. See [TypeScript Issue #33304](https://github.com/microsoft/TypeScript/issues/33304).
 
 ```typescript
 // ✅ Works - Call expression syntax

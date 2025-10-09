@@ -86,16 +86,16 @@ console.log(result.user.name) // Fully typed
 
 ## Failure States
 
-| Scenario | User Action | System Behavior | User Impact |
-|----------|-------------|-----------------|-------------|
-| Tagged template syntax used | Developer writes `client.gql\`query { ... }\`` | TypeScript shows type as `never` | No type inference; developer must use call expression syntax `client.gql("...")` |
-| Multi-operation document | Developer writes document with 2+ operations | TypeScript only infers types for first operation | Remaining operations have no type safety; must use `.document()` builder instead |
-| Invalid GraphQL syntax | Developer writes malformed query | TypeScript error from gql-tada's parser | Clear error message at compile time |
-| Variable type mismatch | Developer passes wrong variable types to `.send()` | TypeScript error | Developer corrects variable types before running |
-| Missing required variable | Developer omits required variable in `.send()` | TypeScript error | Developer adds missing variable |
-| Field doesn't exist in schema | Developer requests non-existent field | TypeScript error from gql-tada | Developer corrects field name or checks schema |
-| gql-tada not installed | Developer tries to use without dependency | Generator fails or types missing | Developer must install `gql.tada` package |
-| Schema not generated | Developer uses without running generator | Types not available | Developer must run Graffle generator first |
+| Scenario                      | User Action                                        | System Behavior                                  | User Impact                                                                      |
+| ----------------------------- | -------------------------------------------------- | ------------------------------------------------ | -------------------------------------------------------------------------------- |
+| Tagged template syntax used   | Developer writes `client.gql\`query { ... }\``     | TypeScript shows type as `never`                 | No type inference; developer must use call expression syntax `client.gql("...")` |
+| Multi-operation document      | Developer writes document with 2+ operations       | TypeScript only infers types for first operation | Remaining operations have no type safety; must use `.document()` builder instead |
+| Invalid GraphQL syntax        | Developer writes malformed query                   | TypeScript error from gql-tada's parser          | Clear error message at compile time                                              |
+| Variable type mismatch        | Developer passes wrong variable types to `.send()` | TypeScript error                                 | Developer corrects variable types before running                                 |
+| Missing required variable     | Developer omits required variable in `.send()`     | TypeScript error                                 | Developer adds missing variable                                                  |
+| Field doesn't exist in schema | Developer requests non-existent field              | TypeScript error from gql-tada                   | Developer corrects field name or checks schema                                   |
+| gql-tada not installed        | Developer tries to use without dependency          | Generator fails or types missing                 | Developer must install `gql.tada` package                                        |
+| Schema not generated          | Developer uses without running generator           | Types not available                              | Developer must run Graffle generator first                                       |
 
 ## Requirements
 
@@ -131,7 +131,7 @@ TypeScript cannot infer const string literals from `TemplateStringsArray`. Even 
 
 **Reference:** [TypeScript Issue #33304](https://github.com/microsoft/TypeScript/issues/33304)
 
-**Impact:** Cannot support `graphql\`...\`` syntax, must use `graphql("...")` syntax.
+**Impact:** Cannot support `graphql\`...\``syntax, must use`graphql("...")` syntax.
 
 ### gql-tada Limitation: Multi-Operation Documents
 
@@ -148,6 +148,7 @@ gql-tada can parse documents with multiple named operations but only provides ty
 Both raw and generated clients should provide `.gql()` that returns an extended TadaDocumentNode with `.send()` method:
 
 **Generated client (with schema):**
+
 ```typescript
 const client = Graffle.create({ schema: { name: 'Pokemon' } })
 
@@ -160,6 +161,7 @@ const result = await client
 ```
 
 **Raw client (without schema):**
+
 ```typescript
 const client = Graffle.create({ url: 'https://api.example.com/graphql' })
 
@@ -173,6 +175,7 @@ const result = await client
 ```
 
 **Key points:**
+
 - Same API surface for both raw and generated clients
 - Generated client has full type inference
 - Raw client has basic structure validation (top-level fields only)
@@ -204,6 +207,7 @@ const result = await client.send(doc, { name: 'Pikachu' })
 ```
 
 **Key points:**
+
 - Static `Graffle.gql()` returns TadaDocumentNode (no `.send()`)
 - Client has `.send(document, variables?)` method that accepts the document and optional variables
 - Variables are type-checked based on document's variable definitions

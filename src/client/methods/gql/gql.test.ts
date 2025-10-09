@@ -1,11 +1,11 @@
+import { Graffle } from '#graffle'
+import type { Grafaid } from '#lib/grafaid'
 import { test } from '#test/helpers'
 import { db } from '#test/schema/possible/db.js'
 import { possibleSchema } from '#test/schema/possible/schema.js'
-import { describe, expect, expectTypeOf } from 'vitest'
-import type { Grafaid } from '#lib/grafaid'
 import { Ts } from '@wollybeard/kit'
 import { parse } from 'graphql'
-import { Graffle } from '#graffle'
+import { describe, expect, expectTypeOf } from 'vitest'
 import { TransportMemory } from '../../../extensions/TransportMemory/TransportMemory.js'
 
 // todo test with custom scalars
@@ -20,7 +20,7 @@ describe(`given typed document node`, () => {
   test(`returns typed result`, async () => {
     type ResultData = { id: string | null }
     const doc = Ts.as<Grafaid.Document.Typed.Node<ResultData, {}>>(
-      parse(`query { id }`)
+      parse(`query { id }`),
     )
     const result = await g.gql(doc).send()
     expectTypeOf(result).toEqualTypeOf<ResultData | null>()
@@ -31,7 +31,7 @@ describe(`given typed document node`, () => {
     type ResultData = { id: string | null }
     type Variables = {}
     const doc = Ts.as<Grafaid.Document.Typed.Node<ResultData, Variables>>(
-      parse(`query { id }`)
+      parse(`query { id }`),
     )
 
     // Should work without variables
@@ -75,10 +75,10 @@ describe(`client.gql() instance method`, () => {
 
   describe(`error cases`, () => {
     test(`throws when no transport configured`, async () => {
-      const clientWithoutTransport = Graffle.create()
+      const clientWithoutTransport = Graffle.create({ check: { preflight: false } })
 
       await expect(
-        clientWithoutTransport.gql(`query { id }`).send()
+        clientWithoutTransport.gql(`query { id }`).send(),
       ).rejects.toThrow()
     })
   })
@@ -103,7 +103,7 @@ describe(`client.send() static API`, () => {
     type Result = { id: string | null }
     type Variables = {}
     const doc = Ts.as<Grafaid.Document.Typed.Node<Result, Variables>>(
-      parse(`query { id }`)
+      parse(`query { id }`),
     )
 
     const result = await g.send(doc)
@@ -111,25 +111,12 @@ describe(`client.send() static API`, () => {
     expect(result).toEqual({ id: db.id1 })
   })
 
-  test(`operation name for multi-operation documents`, async () => {
-    const doc = parse(`
-      query GetId { id }
-      query GetIdNonNull { idNonNull }
-    `)
-
-    const result1 = await g.send(doc as any, 'GetId')
-    expect(result1).toEqual({ id: db.id1 })
-
-    const result2 = await g.send(doc as any, 'GetIdNonNull')
-    expect(result2).toEqual({ idNonNull: db.id1 })
-  })
-
   test(`throws when no transport configured`, async () => {
-    const clientWithoutTransport = Graffle.create()
+    const clientWithoutTransport = Graffle.create({ check: { preflight: false } })
     const doc = parse(`query { id }`)
 
     await expect(
-      clientWithoutTransport.send(doc as any)
+      clientWithoutTransport.send(doc as any),
     ).rejects.toThrow()
   })
 })

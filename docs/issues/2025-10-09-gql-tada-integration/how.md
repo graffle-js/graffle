@@ -62,8 +62,8 @@ export const generators = {
 
 ```typescript
 import type { initGraphQLTada } from 'gql.tada'
-import type { introspection } from './tada.js'
 import { parse } from 'graphql'
+import type { introspection } from './tada.js'
 
 type GraphQLTadaAPI = initGraphQLTada<{
   introspection: introspection
@@ -120,18 +120,22 @@ export type SendMethod<$Context extends Context> = <
   $Document extends TypedDocumentNode<any, any> | DocumentNode,
 >(
   document: $Document,
-  variables?: $Document extends TypedDocumentNode<any, infer V> ? V : Record<string, any>,
-  operationName?: string
+  variables?: $Document extends TypedDocumentNode<any, infer V> ? V
+    : Record<string, any>,
+  operationName?: string,
 ) => Promise<$Document extends TypedDocumentNode<infer R, any> ? R : any>
 ```
 
 **Runtime implementation (already exists in `src/client/client.ts` lines 513-538):**
 
 ```typescript
-send: (async (...args: any[]) => {
+send: ;
+;(async (...args: any[]) => {
   if (!context.transports.current) throw new Error(`No transport selected`)
 
-  const { document, operationName, variables } = SendMethod.normalizeArguments(args)
+  const { document, operationName, variables } = SendMethod.normalizeArguments(
+    args,
+  )
 
   const request = {
     query: document,
@@ -165,7 +169,7 @@ export namespace SendMethod {
   export type Arguments = [
     document: TypedDocumentNode<any, any> | DocumentNode | string,
     variables?: Record<string, any>,
-    operationName?: string
+    operationName?: string,
   ]
 
   // ... rest of implementation
@@ -258,9 +262,9 @@ This provides the chainable instance API (`client.gql(...).send()`). This is the
 Update to support both generated and raw clients:
 
 ```typescript
+import type { Context } from '#src/context/context.js'
 import type { initGraphQLTada } from 'gql.tada'
 import { parse } from 'graphql'
-import type { Context } from '#src/context/context.js'
 import type { MinimalIntrospection } from '../gql-minimal-introspection.js'
 
 export namespace GqlMethod {
@@ -273,34 +277,35 @@ export namespace GqlMethod {
 
 // Type for generated clients with full schema
 type GqlMethodWithSchema<$Introspection> = (
-  query: string
+  query: string,
 ) => {
   send: <$Query extends string>(
     this: ReturnType<initGraphQLTada<{ introspection: $Introspection }>>,
-    variables?: any
+    variables?: any,
   ) => Promise<any>
 }
 
 // Type for raw clients with minimal schema
 type GqlMethodMinimal = (
-  query: string
+  query: string,
 ) => {
   send: (variables?: Record<string, any>) => Promise<any>
 }
 
 // Conditional type based on whether schema is available
-export type GqlMethod<$Context extends Context> =
-  undefined extends $Context['configuration']['schema']['current']['map']
-    ? GqlMethodMinimal
-    : $Context['configuration']['schema']['current']['map'] extends { introspection: infer $Introspection }
-      ? GqlMethodWithSchema<$Introspection>
-      : GqlMethodMinimal
+export type GqlMethod<$Context extends Context> = undefined extends
+  $Context['configuration']['schema']['current']['map'] ? GqlMethodMinimal
+  : $Context['configuration']['schema']['current']['map'] extends
+    { introspection: infer $Introspection }
+    ? GqlMethodWithSchema<$Introspection>
+  : GqlMethodMinimal
 ```
 
 **File: `src/client/client.ts`** (update the gql implementation around line 486)
 
 ```typescript
-gql: ((...args: GqlMethod.Arguments) => {
+gql: ;
+;((...args: GqlMethod.Arguments) => {
   const { document: query } = GqlMethod.normalizeArguments(args)
 
   // Parse the document using graphql-js
@@ -310,7 +315,8 @@ gql: ((...args: GqlMethod.Arguments) => {
     send: async (...args: GqlMethodSendMethod.Arguments) => {
       if (!context.transports.current) throw new Error(`No transport selected`)
 
-      const { operationName, variables } = GqlMethodSendMethod.normalizeArguments(args)
+      const { operationName, variables } = GqlMethodSendMethod
+        .normalizeArguments(args)
 
       const request = {
         query,
@@ -396,13 +402,13 @@ Define documents separately from execution:
 import { Graffle } from './graffle/_exports.js'
 
 const doc = Graffle.gql(\`
-  query GetPokemon($name: String!) {
-    pokemonByName(name: $name) {
-      id
-      name
-      hp
-    }
-  }
+query GetPokemon($name: String!) {
+pokemonByName(name: $name) {
+id
+name
+hp
+}
+}
 \`)
 
 const client = Graffle.create({ schema: { name: 'Pokemon' } })
@@ -417,22 +423,24 @@ Chain `.send()` directly:
 const client = Graffle.create({ schema: { name: 'Pokemon' } })
 
 const result = await client
-  .gql(\`
-    query GetPokemon($name: String!) {
-      pokemonByName(name: $name) { id name hp }
-    }
-  \`)
-  .send({ name: 'Pikachu' })
+.gql(\`
+query GetPokemon($name: String!) {
+pokemonByName(name: $name) { id name hp }
+}
+\`)
+.send({ name: 'Pikachu' })
 \`\`\`
 
 ## When to Use
 
 Use `.gql()` when:
+
 - You prefer writing GraphQL syntax directly
 - You're migrating from another GraphQL client
 - You want to copy-paste queries from GraphQL Playground
 
 Use `.document()` when:
+
 - You need multi-operation documents
 - You want maximum type safety with TypeScript's object literals
 - You prefer a builder-style API
@@ -505,7 +513,7 @@ describe('client.gql() instance method', () => {
     const client = Graffle.create({ schema: { name: 'possible' } })
 
     await expect(
-      client.gql(`query { foo { id } }`).send()
+      client.gql(`query { foo { id } }`).send(),
     ).rejects.toThrow('No transport selected')
   })
 })

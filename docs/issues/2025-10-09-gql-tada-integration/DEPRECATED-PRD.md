@@ -69,7 +69,11 @@ const gql = ((input: string) => {
       return executeQuery(doc, variables)
     },
   }
-}) as typeof graphql & (<const In extends string>(input: In) => WithSend<ReturnType<typeof graphql<In>>>)
+}) as
+  & typeof graphql
+  & (<const In extends string>(
+    input: In,
+  ) => WithSend<ReturnType<typeof graphql<In>>>)
 ```
 
 ### 4. Generated Static API: `Graffle.gql(...)`
