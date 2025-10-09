@@ -1,4 +1,4 @@
-import type { OmitKeysWithPrefix } from '#src/lib/prelude.js'
+import type { Obj } from '@wollybeard/kit'
 import type { AnySelectionSet } from './selectionSet.js'
 
 export const prefix = `___`
@@ -17,7 +17,7 @@ export interface On {
   typeOrFragmentName: string
 }
 
-export type OmitInlineFragmentsWithTypeConditions<$Object> = OmitKeysWithPrefix<
+export type OmitInlineFragmentsWithTypeConditions<$Object> = Obj.OmitKeysWithPrefix<
   // @ts-expect-error fixme
   $Object,
   TypeConditionalKeyPrefix

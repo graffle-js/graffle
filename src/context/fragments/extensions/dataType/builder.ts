@@ -1,7 +1,7 @@
 import { Configurator } from '#src/lib/configurator/configurator.js'
 import { createMutableBuilder } from '#src/lib/mutableBuilder.js'
-import { __, type ObjectMergeShallow } from '#src/lib/prelude.js'
 import type { RequestPipeline } from '#src/requestPipeline/$.js'
+import type { Obj } from '@wollybeard/kit'
 import type { WritableDeep } from 'type-fest'
 import type { Context } from '../../../context.js'
 import type { Configuration } from '../../configuration/$.js'
@@ -140,7 +140,7 @@ export interface Chain<
       _ extends 'propertiesStatic' ?
         properties extends Properties.PropertiesComputer$Func
           ? $Data['propertiesStatic']
-          : ObjectMergeShallow<$Data['propertiesStatic'], properties> :
+          : Obj.MergeShallow<$Data['propertiesStatic'], properties> :
       _ extends 'propertiesComputedTypeFunctions$' ?
         properties extends Properties.PropertiesComputer$Func
           ? readonly [properties]

@@ -1,10 +1,8 @@
 import { Extension } from '#graffle/extension'
 import { Errors } from '#lib/errors'
 import { normalizeRequestToNode } from '#src/lib/grafaid/request.js'
-// import { type ExcludeNullAndUndefined, isString } from '#src/lib/prelude.js'
-import { isString } from '#src/lib/prelude.js'
-import { Rec } from '@wollybeard/kit'
-// import type { RequestPipelineBaseInterceptor } from '../../requestPipeline/$.js'
+import { Rec, Str } from '@wollybeard/kit'
+
 import { SchemaDrivenDataMap } from '../../types/SchemaDrivenDataMap/$.js'
 // import type { GeneratedExtensions } from './global.js'
 import { injectTypenameOnRootResultFields } from './injectTypenameOnRootResultFields.js'
@@ -44,7 +42,7 @@ export const SchemaErrors = Extension
       // If __typename is not selected we assume that this is not a result field.
       // The extension makes sure that the __typename would have been selected if it were a result field.
       const __typename = rootFieldValue[`__typename`]
-      if (!isString(__typename)) continue
+      if (!Str.Type.is(__typename)) continue
 
       const sddmNode = sddm.types[__typename]
       const isErrorObject = SchemaDrivenDataMap.isOutputObject(sddmNode) && Boolean(sddmNode.e)

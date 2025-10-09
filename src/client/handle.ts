@@ -11,8 +11,8 @@ import {
 } from '#src/context/fragments/configuration/output/configuration.js'
 import type { SomeObjectData } from '#src/lib/grafaid/graphql.js'
 import type { GraphQLExecutionResultError } from '#src/lib/grafaid/graphql.js'
-import { type ExcludeNull, type ExcludeNullAndUndefined, type ExcludeUndefined } from '#src/lib/prelude.js'
-import type { Obj } from '@wollybeard/kit'
+import { type ExcludeNullAndUndefined, type ExcludeUndefined } from '#src/lib/prelude.js'
+import type { Null, Obj } from '@wollybeard/kit'
 import type { GraphQLError } from 'graphql'
 import type { Simplify } from 'type-fest'
 import type { RequestPipeline } from '../requestPipeline/$.js'
@@ -215,7 +215,7 @@ export type HandleOutputDocumentBuilderRootField<
   $RootFieldName extends string,
 > =
   HandleOutputDocumentBuilderRootField_Data<
-    ExcludeNull<
+   Null.Exclude<
       HandleOutput<
         $Context,
         RequestResult.Simplify<$Context, $Data>

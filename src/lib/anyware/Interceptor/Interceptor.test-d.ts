@@ -1,4 +1,4 @@
-import { _, type ExcludeUndefined } from '#src/lib/prelude.js'
+import { type ExcludeUndefined } from '#src/lib/prelude.js'
 import { describe, expectTypeOf, test } from 'vitest'
 import type { Interceptor } from '../$$.js'
 import { Pipeline, PipelineDefinition } from '../$$.js'

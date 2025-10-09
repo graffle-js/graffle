@@ -1,5 +1,5 @@
 import type { Grafaid } from '#lib/grafaid'
-import { isString } from '#src/lib/prelude.js'
+import { Str } from '@wollybeard/kit'
 import { Schema } from '../Schema/$.js'
 import type { InlineType } from './InlineType.js'
 
@@ -225,10 +225,10 @@ export const propertyNames = {
 export const isEnum = (
   node?: Node,
 ): node is Enum => {
-  return node ? !isString(node) && `k` in node && node.k === `enum` : false
+  return node ? !Str.Type.is(node) && `k` in node && node.k === `enum` : false
 }
 
-export const isCustomScalarName = (value: unknown): value is CustomScalarName => isString(value)
+export const isCustomScalarName = (value: unknown): value is CustomScalarName => Str.Type.is(value)
 
 export const isScalar = Schema.Scalar.isScalar
 
@@ -238,7 +238,7 @@ export const isScalarLike = (value: unknown): value is ScalarLikeNodes =>
 export const isOutputObject = (
   node?: Node,
 ): node is OutputObject => {
-  return node ? !isString(node) && propertyNames.f in node : false
+  return node ? !Str.Type.is(node) && propertyNames.f in node : false
 }
 
 export const nullabilityFlags = {
@@ -253,13 +253,13 @@ export const nullabilityFlags = {
 export const isInputObject = (
   node?: InputNodes,
 ): node is InputObject => {
-  return node ? !isString(node) && propertyNames.f in node : false
+  return node ? !Str.Type.is(node) && propertyNames.f in node : false
 }
 
 export const isOutputField = (
   node?: Node,
 ): node is GraffleGlobal.SchemaDrivenDataMap.OutputField => {
-  return node ? !isString(node) && propertyNames.a in node : false
+  return node ? !Str.Type.is(node) && propertyNames.a in node : false
 }
 
 export type NamedNodes = ScalarLikeNodes | OutputObject | Enum | InputObject

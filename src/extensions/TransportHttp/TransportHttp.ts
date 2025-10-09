@@ -13,8 +13,7 @@ import {
   type URLInput as URLInputType,
 } from '#src/lib/http.js'
 import type { httpMethodGet, httpMethodPost } from '#src/lib/http.js'
-import { _, isString } from '#src/lib/prelude.js'
-import type { Prom } from '@wollybeard/kit'
+import { type Prom, Str } from '@wollybeard/kit'
 import { Transport } from '../../context/fragments/transports/dataType/$.js' // TODO import from entrypoint
 
 // ----------------------------
@@ -162,7 +161,7 @@ export const TransportHttp = Extension.create(`TransportHttp`)
             query: print(input.request.query),
           }
 
-          const operationType = isString(input.request.operation)
+          const operationType = Str.Type.is(input.request.operation)
             ? input.request.operation
             : input.request.operation.operation
           const methodMode = input.transport.methodMode

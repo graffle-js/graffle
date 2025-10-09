@@ -1,8 +1,8 @@
 import { Extension } from '#graffle/extension'
 import { Configurator } from '#graffle/extension-exports'
-import { pipe } from '#src/lib/prelude.js'
 import { ATransport } from '#test/fixtures/transports'
 import { test } from '#test/helpers'
+import { Fn } from '@wollybeard/kit'
 import { describe, expect, expectTypeOf } from 'vitest'
 import { contextEmpty } from '../../../ContextEmpty.js'
 import { Configuration } from '../../configuration/$.js'
@@ -99,7 +99,7 @@ describe(`extension configuration`, () => {
     c.configuration[z.name]
     // Configuration value is updated
     // dprint-ignore
-    const expectedConfiguration = pipe(
+    const expectedConfiguration = Fn.pipe(
       contextEmpty,
       c => Configuration.addType(c, A.definition.name, A.definition.configurator, a.configuratorInitialInput),
       c => Configuration.addType(c, B.definition.name, B.definition.configurator, b.configuratorInitialInput),

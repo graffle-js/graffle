@@ -1,10 +1,8 @@
 import { Ts } from '@wollybeard/kit'
-import { type OmitKeysWithPrefix, type ToParameters, type Tuple } from './prelude.js'
+import { type ToParameters, type Tuple } from './prelude.js'
 
 // dprint-ignore
 type _ = Ts.Test.Cases<
-  Ts.Test.exact<OmitKeysWithPrefix<{ a: 1; b: 2 }, 'a'>                          , { a: 1; b: 2 }>,
-  Ts.Test.exact<OmitKeysWithPrefix<{ foo_a: 1; b: 2 }, 'foo'>                    , { b: 2 }>,
   Ts.Test.exact<ToParameters<{ a:1 }>                                            , [{ a:1 }]>,
   Ts.Test.exact<ToParameters<{ a?:1 }>                                           , [{ a?:1 }]|[]>,
   Ts.Test.exact<ToParameters<{}>                                                 , []>,

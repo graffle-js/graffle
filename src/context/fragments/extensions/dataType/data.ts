@@ -1,6 +1,6 @@
 import type { Configurator } from '#src/lib/configurator/configurator.js'
-import { undefinedAs } from '#src/lib/prelude.js'
 import type { RequestPipeline } from '#src/requestPipeline/$.js'
+import { Ts } from '@wollybeard/kit'
 import type { RequestInterceptors } from '../../../$$.js'
 import type { Properties } from '../../properties/$.js'
 import type { Transport } from '../../transports/dataType/$.js'
@@ -52,6 +52,6 @@ export interface DataEmpty<$Name extends string = string> extends Data<$Name> {
   readonly propertiesComputedTypeFunctions$: readonly []
 }
 
-export const dataPropertiesTypeOnly = undefinedAs<{
+export const dataPropertiesTypeOnly = Ts.as<{
   propertiesComputedTypeFunctions$: []
 }>()

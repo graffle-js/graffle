@@ -1,4 +1,5 @@
 import { parse, print as graphqlWebPrint } from '@0no-co/graphql.web'
+import { Str } from '@wollybeard/kit'
 import { print as graphqlPrint } from 'graphql'
 import {
   type ArgumentNode,
@@ -26,7 +27,6 @@ import {
   type VariableNode,
 } from 'graphql'
 import type { HasRequiredKeys } from 'type-fest'
-import { isString } from '../prelude.js'
 import { Kind } from './document/kind.js'
 import { OperationTypeNode } from './document/OperationTypeNode.js'
 import type { RequestDocumentNodeInput, RequestInput } from './graphql.js'
@@ -271,7 +271,7 @@ export const OperationTypeToAccessKind = {
 
 export const print = (document: TypedDocument.TypedDocumentLike): string => {
   const documentUntyped = TypedDocument.unType(document)
-  return isString(documentUntyped) ? documentUntyped : graphqlWebPrint(documentUntyped)
+  return Str.Type.is(documentUntyped) ? documentUntyped : graphqlWebPrint(documentUntyped)
 }
 
 /**
@@ -346,7 +346,7 @@ export const getOperationType = (request: RequestInput): OperationTypeNode | nul
 
   const documentUntyped = TypedDocument.unType(document)
 
-  if (!isString(documentUntyped)) {
+  if (!Str.Type.is(documentUntyped)) {
     const operationDefinition = getOperationDefinition({ query: documentUntyped, operationName })
     if (operationDefinition) return operationDefinition.operation
     throw new Error(`Could not parse operation type from document.`)
@@ -392,5 +392,5 @@ export const getOperationType = (request: RequestInput): OperationTypeNode | nul
 
 export const normalizeDocumentToNode = (document: TypedDocument.TypedDocumentLike): DocumentNode => {
   const d = TypedDocument.unType(document)
-  return isString(d) ? parse(d) : d
+  return Str.Type.is(d) ? parse(d) : d
 }

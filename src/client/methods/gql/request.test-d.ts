@@ -1,7 +1,5 @@
 import type { Grafaid } from '#lib/grafaid'
 import type { Context } from '#src/context/$.js'
-
-import { undefinedAs } from '#src/lib/prelude.js'
 import { ATransport, RequiredConfigurationTransportA, RequiredConfigurationTransportB } from '#test/fixtures/transports'
 import { g0 } from '#test/helpers'
 import { Ts } from '@wollybeard/kit'
@@ -28,7 +26,7 @@ Ts.Test.exact<Context.Configuration.Check.Errors.PreflightCheckTransportNotReady
 //
 //
 
-const d2 = undefinedAs<Grafaid.Document.Typed.Node<{ id: 0 }, { x?: 0 }>>()
+const d2 = Ts.as<Grafaid.Document.Typed.Node<{ id: 0 }, { x?: 0 }>>()
 
 Ts.Test.exact<DData | null>()(await g1.gql(d2).send())
 Ts.Test.exact<DData | null>()(await g1.gql(d2).send({}))
@@ -41,7 +39,7 @@ await g1.gql(d2).send({ filter: `wrong type` })
 //
 //
 
-const d3 = undefinedAs<Grafaid.Document.Typed.Node<{ id: 0 }, { x: 0 }>>()
+const d3 = Ts.as<Grafaid.Document.Typed.Node<{ id: 0 }, { x: 0 }>>()
 
 Ts.Test.exact<DData | null>()(await g1.gql(d3).send({ x: 0 }))
 // @ts-expect-error - missing argument

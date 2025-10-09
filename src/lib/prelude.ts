@@ -1,86 +1,6 @@
-import { Prom, Rec, type Ts } from '@wollybeard/kit'
-import type { HasRequiredKeys, IsAny, IsEmptyObject, IsNever, IsUnknown, Simplify } from 'type-fest'
+import { Fn, Lang, type Null, Obj, Prom, Rec, Str, Ts } from '@wollybeard/kit'
+import type { HasRequiredKeys, IsAny, IsEmptyObject, IsNever, IsUnknown } from 'type-fest'
 import type { ConfigManager } from './config-manager/$.js'
-
-// export const pick = <T, K extends keyof T>(obj: T, keys: K[]): Pick<T, K> => {
-//   const result: Partial<T> = {}
-//   keys.forEach(key => {
-//     result[key] = obj[key]
-//   })
-//   return result as Pick<T, K>
-// }
-
-// export const uppercase = <S extends string>(str: S): Uppercase<S> => str.toUpperCase() as Uppercase<S>
-
-// export const callOrIdentity = <T>(value: MaybeLazy<T>) => {
-//   return typeof value === `function` ? (value as () => T)() : value
-// }
-
-// export type MaybeLazy<T> = T | (() => T)
-
-// export const zip = <A, B>(a: A[], b: B[]): [A, B | undefined][] => a.map((k, i) => [k, b[i]])
-
-// export const HeadersInitToPlainObject = (headers?: HeadersInit): Record<string, string> => {
-//   let oHeaders: Record<string, string> = {}
-
-//   if (headers instanceof Headers) {
-//     oHeaders = HeadersInstanceToPlainObject(headers)
-//   } else if (Array.isArray(headers)) {
-//     headers.forEach(([name, value]) => {
-//       if (name && value !== undefined) {
-//         oHeaders[name] = value
-//       }
-//     })
-//   } else if (headers) {
-//     oHeaders = headers
-//   }
-
-//   return oHeaders
-// }
-
-// export const HeadersInstanceToPlainObject = (headers: Response['headers']): Record<string, string> => {
-//   const o: Record<string, string> = {}
-//   headers.forEach((v, k) => {
-//     o[k] = v
-//   })
-//   return o
-// }
-
-// export const tryCatch = <$Return, $Throw extends Error = Error>(
-//   fn: () => $Return,
-// ): $Return extends Promise<any> ? Promise<Awaited<$Return> | $Throw> : $Return | $Throw => {
-//   try {
-//     const result = fn() as any
-//     if (isPromiseLikeValue(result)) {
-//       return result.catch((error) => {
-//         return errorFromMaybeError(error)
-//       }) as any
-//     }
-//     return result
-//   } catch (error) {
-//     return errorFromMaybeError(error) as any
-//   }
-// }
-
-// export const isPromiseLikeValue = (value: unknown): value is Promise<unknown> => {
-//   return (
-//     typeof value === `object`
-//     && value !== null
-//     && `then` in value
-//     && typeof value.then === `function`
-//     && `catch` in value
-//     && typeof value.catch === `function`
-//     && `finally` in value
-//     && typeof value.finally === `function`
-//   )
-// }
-
-// export const stringKeyEntries = <T extends Record<string, any>>(obj: T) =>
-//   Object.entries(obj) as [keyof T & string, T[keyof T & string]][]
-
-// dprint-ignore
-// export const entriesStrict = <T extends Record<string, any>>(obj: T): { [K in keyof T]: [K, ExcludeUndefined<T[K]>] }[keyof T][] =>
-//   Object.entries(obj).filter(([_, value]) => value !== undefined) as any
 
 export type ExactNonEmpty<$Value, $Constraint> = IsEmptyObject<$Value> extends true ? never : Exact<$Value, $Constraint>
 // dprint-ignore
@@ -91,7 +11,7 @@ export type Exact<$Value, $Constraint> =
                                                               $Constraint :
                               never
   )
-  | ($Value extends Narrowable ? $Value : never)
+  | ($Value extends Ts.Narrowable ? $Value : never)
 
 // dprint-ignore
 // export type ExactObjectNonEmpty<$Value, $Constraint> =
@@ -103,24 +23,10 @@ export type Exact<$Value, $Constraint> =
 //   )
 //   | ($Value extends Narrowable ? $Value : never)
 
-export type Narrowable = string | number | bigint | boolean | []
-
-// export type StringNonEmpty = `${Letter}${string}`
-
-// export type MaybeList<T> = T | T[]
-
-// export type NotEmptyObject<T> = keyof T extends never ? never : T
-
 export type ValuesOrEmptyObject<T> = keyof T extends never ? {} : T[keyof T]
 
-export type GetKeyOr<T, Key, Or> = Key extends keyof T ? T[Key] : Or
-
-export type As<T, U> = U extends T ? U : never
-
-export type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never
-
-export type ExcludeNull<T> = Exclude<T, null>
 export type ExcludeUndefined<T> = Exclude<T, undefined>
+
 export type ExcludeNullAndUndefined<T> = Exclude<T, null | undefined>
 
 export type SomeFunctionMaybeAsync = (...args: any[]) => Prom.Maybe<any>
@@ -365,21 +271,6 @@ export const proxyGet = <$Target>(
  */
 export type UnionExpanded<$Union> = $Union
 
-export const shallowMergeDefaults = <$Defaults extends object, $Input extends object>(
-  defaults: $Defaults,
-  input: $Input,
-): $Defaults => {
-  const merged = { ...defaults } as Record<string, unknown>
-
-  for (const key in input) {
-    if (input[key] !== undefined) {
-      merged[key] = input[key]
-    }
-  }
-
-  return merged as any
-}
-
 export const identityProxy = new Proxy({}, {
   get: () => (value: unknown) => value,
 })
@@ -392,7 +283,7 @@ export type PickOptionalPropertyOrFallback<$Object extends object, $Property ext
     ? $Fallback
     : $Object[$Property]
 
-export type All<$Tuple extends [...boolean[]]> = $Tuple[number] extends true ? false : true
+// export type All<$Tuple extends [...boolean[]]> = $Tuple[number] extends true ? false : true
 
 export type HasOptionalProperty<$Object extends object, $Property extends keyof $Object> = undefined extends
   $Object[$Property] ? false
@@ -422,100 +313,21 @@ export type FirstNonUnknownNever<T extends any[]> =
         : First
   : never
 
-// type Test1 = FirstNonUnknownNever<[unknown, never, 'x', number]> // string
-// type Test2 = FirstNonUnknownNever<[never, 1, unknown, number, boolean]> // number
-// type Test3 = FirstNonUnknownNever<[unknown, never]> // never
-// type Test4 = FirstNonUnknownNever<[never, unknown, boolean, never]> // boolean
-
-type Optional<T> = T | undefined
-type IsCanBeOptional<T> = undefined extends T ? true : false
-
-// dprint-ignore
-export type IsKeyInObjectOptional<T extends Optional<object>, K extends string> =
-  IsCanBeOptional<T> extends true
-    ? false
-    : IsKeyInObject<
-        // @ts-expect-error TS thinks undefined could be here,
-        // it cannot because we checked with IsCanBeOptional.
-        T,
-        K
-      >
-
-// dprint-ignore
-export type IsKeyInObject<T extends object, K extends string> =
-  K extends keyof T
-    ? true
-    : false
-
-export type OmitKeysWithPrefix<$Object extends object, $Prefix extends string> = {
-  [
-    $Key in keyof $Object as $Key extends `${$Prefix}${infer $Suffix extends string}`
-      ? $Suffix extends '' ? $Key : never
-      : $Key
-  ]: $Object[$Key]
-}
-
-export const getFromEnumLooselyOrThrow = <
-  $Record extends { [_ in keyof $Record]: unknown },
-  $Key extends string,
->(
-  record: $Record,
-  key: $Key,
-): $Record[keyof $Record] => {
-  // @ts-expect-error key lookup not safe.
-  const value = record[key]
-  if (value === undefined || value === null) throw new Error(`Key not found: ${String(key)}`)
-  return value as any
-}
-
-export const getOptionalNullablePropertyOrThrow = <
-  $Record extends { [_ in keyof $Record]: unknown },
-  $Key extends keyof $Record,
->(
-  record: $Record,
-  key: $Key,
-): ExcludeNullAndUndefined<$Record[$Key]> => {
-  const value = record[key]
-  if (value === undefined || value === null) throw new Error(`Key not found: ${String(key)}`)
-  return value as ExcludeNullAndUndefined<$Record[$Key]>
-}
-
 export type StringKeyof<T> = keyof T & string
-
-export const keysStrict = <T extends object>(obj: T): (keyof T)[] => {
-  return Object.keys(obj) as (keyof T)[]
-}
 
 export type HasKeys<T> = keyof T extends never ? false : true
 
 export type IsHasIndexType<T> = string extends keyof T ? true : false
 
-export const isString = (value: unknown): value is string => {
-  return typeof value === 'string'
-}
-
 export const isSymbol = (value: unknown): value is symbol => {
   return typeof value === 'symbol'
 }
 
-export const isNonNull = <$Value>(value: $Value): value is ExcludeNull<$Value> => {
+export const isNonNull = <$Value>(value: $Value): value is Null.Exclude<$Value> => {
   return value !== null
 }
 
-export const findTyped = <$Value, $Result>(
-  values: readonly $Value[],
-  looker: (value: $Value) => null | $Result,
-): undefined | $Result => {
-  return values.find((value) => Boolean(looker(value))) as undefined | $Result
-}
-
 export type SimplifyNullable<T> = null extends T ? (T & {}) | null : T & {}
-
-// dprint-ignore
-export type GetOrNever<$O extends object, $P extends string> =
-  $P extends keyof $O
-    ? $O[$P]
-    : never
 
 // dprint-ignore
 export type AssertExtendsObject<$Type> =AssertExtends<$Type, object>
@@ -542,10 +354,6 @@ export const isAnyFunction = (value: unknown): value is (...args: any[]) => any 
   return typeof value === 'function'
 }
 
-export const isDate = (value: unknown): value is Date => {
-  return value instanceof Date
-}
-
 export const isObjectEmpty = (object: object): boolean => {
   for (const _ in object) return false
   return true
@@ -558,8 +366,6 @@ export const hasNonUndefinedKeys = (object: object): boolean => {
   }
   return false
 }
-
-export const toArray = <T>(value: T | T[]) => Array.isArray(value) ? value : [value]
 
 export const __: (...args: any[]) => never = () => {
   throw new Error(`not implemented`)
@@ -612,20 +418,6 @@ type UnionValue<U, K extends PropertyKey> = U extends any ? K extends keyof U ? 
   : never
   : never
 
-// dprint-ignore
-export type IsAnyUnionMemberExtends<T, U> =
-  true extends IsAnyUnionMemberExtends_<T, U>
-    ? true
-    : false
-
-// dprint-ignore
-type IsAnyUnionMemberExtends_<T, U> =
-  T extends any
-    ? T extends U
-      ? true
-      : never
-    : never
-
 export type AnyAndUnknownToNever<T> = IsAny<T> extends true ? never : IsUnknown<T> extends true ? never : T
 
 export type t<T> = T extends null ? {} | null : {}
@@ -654,60 +446,3 @@ export type EmptyArray = typeof emptyArray
 
 export const emptyObject = Object.freeze({})
 export type EmptyObject = typeof emptyObject
-
-// dprint-ignore
-export type ObjectMergeShallow<
-  $Object1 extends object,
-  $Object2 extends object,
-  __ =
-    {} extends $Object1
-      ? $Object2
-      : & $Object2
-        & {
-            [_ in keyof $Object1 as _ extends keyof $Object2 ? never : _]: $Object1[_]
-          }
-> = __
-
-export const as = <$Type>(value?: unknown): $Type => value as $Type
-
-export const undefinedAs = <$Type>() => as<$Type>(undefined)
-
-// dprint-ignore
-export function pipe<value>(value: value, ...reducers: []): value
-// dprint-ignore
-export function pipe<value, f1 extends (value: value) => any>(value: value, ...fns: [f1]): ReturnType<f1>
-// dprint-ignore
-export function pipe<value, f1 extends (value: value) => any, f2 extends (value: ReturnType<f1>) => any>(value: value, ...fns: [f1, f2]): ReturnType<f2>
-// dprint-ignore
-export function pipe<value, f1 extends (value: value) => any, f2 extends (value: ReturnType<f1>) => any, f3 extends (value: ReturnType<f2>) => any>(value: value, ...fns: [f1, f2, f3]): ReturnType<f3>
-// dprint-ignore
-export function pipe<value, f1 extends (value: value) => any, f2 extends (value: ReturnType<f1>) => any, f3 extends (value: ReturnType<f2>) => any, f4 extends (value: ReturnType<f3>) => any>(value: value, ...fns: [f1, f2, f3, f4]): ReturnType<f4>
-
-export function pipe(value: any, ...fns: ((...args: any[]) => any)[]) {
-  return fns.reduce((value, fn) => {
-    const nextValue = fn(value)
-    return nextValue
-  }, value)
-}
-
-/**
- * Merges two objects, filtering out undefined values from the second object
- */
-export const shallowMergeWithoutUndefined = <T extends object, U extends object>(base: T, input: U): T & U => {
-  const result = { ...base } as Record<keyof (T & U), unknown>
-
-  for (const key in input) {
-    if (Object.prototype.hasOwnProperty.call(input, key)) {
-      const value = input[key]
-      if (value !== undefined) {
-        result[key] = value
-      }
-    }
-  }
-
-  return result as T & U
-}
-
-export const isTemplateStringsArray = (args: unknown): args is TemplateStringsArray => {
-  return Array.isArray(args) && args.length > 0 && args[0] instanceof Object && `raw` in args[0] as any
-}

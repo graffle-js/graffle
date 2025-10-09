@@ -1,6 +1,5 @@
 import { renderName } from '#src/generator/helpers/render.js'
-import { Obj } from '@wollybeard/kit'
-import { isString, toArray } from './prelude.js'
+import { Arr, Obj, Str } from '@wollybeard/kit'
 import { linesPrepend, linesTrim } from './tex/tex.js'
 
 type FieldTuple = [k: string, v: string | null, tsDoc?: string | null]
@@ -27,7 +26,7 @@ export namespace Code {
   // Field
 
   const isFieldPrimitive = (value: unknown): value is TermPrimitive => {
-    return isString(value) || typeof value === `number` || typeof value === `boolean` || value === null
+    return Str.Type.is(value) || typeof value === `number` || typeof value === `boolean` || value === null
   }
 
   type FieldValue =
@@ -100,7 +99,7 @@ export namespace Code {
         if (isDirectiveTermObject(value)) return [key, { $VALUE: directiveTermObject(value) }]
         if (isDirectiveField(value)) return [key, value]
         // dprint-ignore
-        if (isString(value) || typeof value === `number` || typeof value === `boolean`) return [key, {$VALUE: String(value)}]
+        if (Str.Type.is(value) || typeof value === `number` || typeof value === `boolean`) return [key, {$VALUE: String(value)}]
         return [key, { $VALUE: termObject(value as any) }]
       })
       .map(([key, field]) => {
@@ -109,7 +108,7 @@ export namespace Code {
       .join(`,\n`)
 
   const isFieldTuples = (value: unknown): value is TermFieldTuple[] => {
-    return Array.isArray(value) && value.every(([key, _]) => isString(key))
+    return Array.isArray(value) && value.every(([key, _]) => Str.Type.is(key))
   }
 
   const termObjectField = (field: FieldValueNonDirective): string => {
@@ -310,7 +309,7 @@ export namespace Code {
   const tsTypeParameters = (typeParameters: TypeParametersInput): string => {
     if (typeParameters === null) return ``
     if (Array.isArray(typeParameters) && typeParameters.length === 0) return ``
-    return `<${toArray(typeParameters).filter(_ => _ !== null).join(`, `)}>`
+    return `<${Arr.ensure(typeParameters).filter(_ => _ !== null).join(`, `)}>`
   }
 
   type ExtendsClauseInput = string | null | (string | null)[]
@@ -348,7 +347,7 @@ export namespace Code {
     const tsDoc_ = tsDoc ? TSDoc(tsDoc) + `\n` : ``
     const name_ = renderName(name)
     const typeParametersClause = tsTypeParameters(parameters ?? null)
-    const extends__ = toArray(extends_).filter(_ => Boolean(_))
+    const extends__ = Arr.ensure(extends_).filter(_ => Boolean(_))
     const extends___ = extends__.length > 0
       ? ` extends ${extends__.join(`, `)}`
       : ``
