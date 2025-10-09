@@ -77,7 +77,7 @@ console.log(result?.user?.name)
 
 ### TypeScript Configuration (Optional Enhancement)
 
-**This is a VALUE ADD** that brings real-time validation and autocomplete **within your GraphQL strings** as you type in your IDE.
+**This is a VALUE ADD** that brings real-time validation, linting, and autocomplete **within your GraphQL strings** as you type in your IDE. The GraphQLSP plugin will automatically check your GraphQL syntax, validate against your schema, and catch errors before runtime.
 
 First, install the GraphQL LSP plugin:
 
@@ -108,53 +108,6 @@ export default {
   schema: '...', // Your schema source (URL, file, etc.)
   outputSDL: true, // Graffle will generate an SDL file
 }
-```
-
-## Benefits
-
-### 1. Type Safety Without Code Generation
-
-Graffle generates gql-tada introspection types from your schema once, then gql-tada infers types directly from your query strings. This means:
-
-- No build step for individual queries
-- Instant type feedback as you type
-- No generated query files to manage
-- Full TypeScript intellisense and autocomplete
-
-### 2. Seamless Integration
-
-The generated `gql()` function works seamlessly with Graffle's client. You get:
-
-- All of Graffle's runtime features (transport, extensions, interceptors, etc.)
-- Plus gql-tada's compile-time type safety
-- Two complementary APIs (static and instance) for different use cases
-- Best of both worlds
-
-### 3. Multi-Schema Support
-
-Each Graffle client generates its own gql() function and introspection types, so you can work with multiple GraphQL schemas in the same project:
-
-```typescript
-// Pokemon schema
-import { Graffle as PokemonGraffle } from './pokemon-graffle/_exports.js'
-
-// GitHub schema
-import { Graffle as GitHubGraffle } from './github-graffle/_exports.js'
-
-// Each has its own typed gql() function
-const pokemonDoc = PokemonGraffle.gql(`query { pokemons { name } }`)
-const githubDoc = GitHubGraffle.gql(`query { viewer { login } }`)
-
-// Create separate clients
-const pokemonClient = PokemonGraffle.create()
-  .transport({ url: 'https://pokemon-api.example.com/graphql' })
-
-const githubClient = GitHubGraffle.create()
-  .transport({ url: 'https://api.github.com/graphql' })
-
-// Execute with full type safety for each schema
-const pokemon = await pokemonClient.send(pokemonDoc)
-const viewer = await githubClient.send(githubDoc)
 ```
 
 ## Limitations
