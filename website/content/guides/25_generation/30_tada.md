@@ -1,22 +1,30 @@
 # Tada
 
-Graffle leverages [gql-tada](https://gql-tada.0no.co)'s tooling to generate introspection types, enabling static analysis of GraphQL documents in native GraphQL syntax (as opposed to e.g. [Document Builder](/guides/methods/document)).
+Graffle leverages [gql-tada](https://gql-tada.0no.co)'s tooling to generate introspection types, enabling type safety even when using native GraphQL syntax (as opposed to e.g. [Document Builder](/guides/methods/document)).
 
 ## Usage
 
 Graffle provides two complementary APIs for working with gql-tada documents:
 
+| Feature         | Static API                           | Instance API              |
+| --------------- | ------------------------------------ | ------------------------- |
+| Syntax          | `Graffle.gql()` then `client.send()` | `client.gql().send()`     |
+| Use Case        | Reusable documents                   | One-off queries           |
+| Type Inference  | Full gql-tada inference              | Basic structure inference |
+| Multi-operation | No (use `.document()`)               | No (use `.document()`)    |
+
 ### Static API
 
-The generated `Graffle.gql()` function creates typed documents that can be reused across multiple requests:
+The generated `Graffle.gql()` function creates typed documents. This is good for
+
+- Defining ahead of time, at module scope, etc., organizing centrally or some grouping strategy
+- Sharing queries across components
+- Testing documents in isolation if needed
+
+Example:
 
 ```typescript
 import { Graffle } from './graffle/_exports.js'
-
-// Create your Graffle client with transport
-const client = Graffle
-  .create({ schema: { name: 'MySchema' } })
-  .transport({ url: 'https://api.example.com/graphql' })
 
 // Define a type-safe query using the generated gql() function
 const GetUserDocument = Graffle.gql(`
@@ -29,6 +37,9 @@ const GetUserDocument = Graffle.gql(`
   }
 `)
 
+// Create your Graffle client with transport
+const client = Graffle.create()
+
 // Execute with client.send() - variables are type-checked!
 const result = await client.send(GetUserDocument, { id: '123' })
 
@@ -36,27 +47,20 @@ const result = await client.send(GetUserDocument, { id: '123' })
 console.log(result?.user?.name)
 ```
 
-**Benefits:**
-
-- Document can be defined in one place and reused
-- Easy to test documents independently
-- Clear separation between query definition and execution
-- Great for shared queries across components
-
 ### Instance API
 
-The `client.gql()` method allows chaining `.send()` directly for one-off queries:
+The `client.gql()` method allows chaining `.send()`. This is good for
+
+- Concise syntax for one-off queries
+- Colocating operations and execution
 
 ```typescript
 import { Graffle } from './graffle/_exports.js'
 
-const client = Graffle
-  .create({ schema: { name: 'MySchema' } })
-  .transport({ url: 'https://api.example.com/graphql' })
+const client = Graffle.create()
 
 // Define and execute in one expression
-const result = await client
-  .gql(`
+const result = await client.gql(`
     query GetUser($id: ID!) {
       user(id: $id) {
         id
@@ -71,24 +75,11 @@ const result = await client
 console.log(result?.user?.name)
 ```
 
-**Benefits:**
+### TypeScript Configuration (Optional Enhancement)
 
-- Concise syntax for one-off queries
-- Query and execution co-located
-- Familiar to users of other GraphQL clients
+**This is a VALUE ADD** that brings real-time validation and autocomplete **within your GraphQL strings** as you type in your IDE.
 
-### Comparison
-
-| Feature         | Static API                           | Instance API              |
-| --------------- | ------------------------------------ | ------------------------- |
-| Syntax          | `Graffle.gql()` then `client.send()` | `client.gql().send()`     |
-| Use Case        | Reusable documents                   | One-off queries           |
-| Type Inference  | Full gql-tada inference              | Basic structure inference |
-| Multi-operation | No (use `.document()`)               | No (use `.document()`)    |
-
-### TypeScript Configuration
-
-To get IDE support for gql-tada's type checking, configure the TypeScript plugin in your `tsconfig.json`:
+Configure the GraphQLSP TypeScript plugin in your `tsconfig.json`:
 
 ```json
 {
