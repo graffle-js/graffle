@@ -1,6 +1,6 @@
 # Tada
 
-Graffle generates [gql-tada](https://gql-tada.0no.co) compatible introspection types, enabling compile-time type checking for GraphQL queries using TypeScript's string literal types.
+Graffle leverages [gql-tada](https://gql-tada.0no.co)'s tooling to generate introspection types, enabling compile-time type checking for GraphQL queries using TypeScript's string literal types.
 
 ## What is gql-tada?
 
@@ -15,7 +15,7 @@ Note: While gql-tada supports tagged template literal syntax natively, **Graffle
 
 ## How It Works
 
-Graffle generates a `tada.ts` module with gql-tada compatible introspection types. This module exports types that describe your GraphQL schema in a format that gql-tada understands.
+Graffle uses gql-tada's format to generate a `tada.ts` module with introspection types. This module exports types that describe your GraphQL schema in a format that gql-tada understands.
 
 ### Generated Files
 
@@ -149,7 +149,7 @@ export default {
 
 ### 1. Type Safety Without Code Generation
 
-Graffle generates gql-tada introspection from your schema once, then gql-tada infers types directly from your query strings. This means:
+Graffle generates gql-tada introspection types from your schema once, then gql-tada infers types directly from your query strings. This means:
 
 - No build step for individual queries
 - Instant type feedback as you type
