@@ -2,8 +2,9 @@
 
 import { type ConfigInit, ImportFormat, OutputCase } from '#src/generator/config/configInit.js'
 import { toAbsolutePath } from '#src/lib/fsp.js'
-import { isError, urlParseSafe } from '#src/lib/prelude.js'
+import { urlParseSafe } from '#src/lib/prelude.js'
 import { Command } from '@molt/command'
+import { Err } from '@wollybeard/kit'
 import * as Path from 'node:path'
 import { z } from 'zod'
 import { Generator } from '../generator/$.js'
@@ -102,7 +103,7 @@ const args = Command.create()
 // --- Resolve Config File ---
 
 const configModule = await Generator.Config.load({ filePath: args.project })
-if (isError(configModule)) throw configModule
+if (Err.is(configModule)) throw configModule
 if (!configModule.builder && args.project) {
   throw new Error(
     `Could not find a configuration file at "${configModule.paths.join(`, `)}".`,

@@ -4,7 +4,7 @@ import type { GraffleExecutionResultEnvelope } from '#src/client/handle.js'
 import type { Context } from '#src/context/context.js'
 import type { Config } from '#src/lib/anyware/PipelineDefinition/Config.js'
 import { normalizeRequestToNode } from '#src/lib/grafaid/request.js'
-import { isAbortError } from '#src/lib/prelude.js'
+import { Err } from '@wollybeard/kit'
 import type { FormattedExecutionResult } from 'graphql'
 import { decodeResultData } from './decode.js'
 import { encodeRequestVariables } from './encode.js'
@@ -72,7 +72,7 @@ export const requestPipelineBaseDefinition: RequestPipeline.BaseDefinitionEmpty 
       // todo have anyware propagate the input that was passed to the hook that failed.
       // it will give us a bit more confidence that we're only allowing this abort error for fetch requests stuff
       // context.config.transport.type === Transport.http
-      return signal.hookName === `exchange` && isAbortError(signal.error)
+      return signal.hookName === `exchange` && Err.isAbortError(signal.error)
     },
   })
   .input<RequestPipeline.BaseDefinition['input']>()

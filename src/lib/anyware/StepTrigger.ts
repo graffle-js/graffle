@@ -1,3 +1,4 @@
+import type { Fn } from '@wollybeard/kit'
 import type { Simplify } from 'type-fest'
 import type { Func, Objekt } from '../prelude.js'
 import type { Step } from './Step.js'
@@ -39,7 +40,11 @@ export namespace StepTrigger {
           Objekt.IsEmpty<$Step['slots']> extends true
             ? {}
             : { using?: {
-                [$SlotName in keyof $Step['slots']]?: Func.AppendAwaitedReturnType<$Step['slots'][$SlotName], undefined>
+                [$SlotName in keyof $Step['slots']]?: Fn.ReturnInclude<
+                  undefined,
+                  // @ts-expect-error - FIXME -- slots should be typed as functions??
+                  $Step['slots'][$SlotName]
+                >
               }
             }
         )

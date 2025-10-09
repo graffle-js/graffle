@@ -1,9 +1,5 @@
-import type {
-  __FORCE_UNION_DISTRIBUTION__,
-  ExcludeUndefined,
-  IntersectionIgnoreNeverOrAny,
-  Tuple,
-} from '#src/lib/prelude.js'
+import type { __FORCE_UNION_DISTRIBUTION__, IntersectionIgnoreNeverOrAny, Tuple } from '#src/lib/prelude.js'
+import type { Undefined } from '@wollybeard/kit'
 import type { IsUnknown, Simplify } from 'type-fest'
 import type { PipelineDefinition } from '../$$.js'
 import type { Overload } from '../Overload/$.js'
@@ -137,7 +133,7 @@ export namespace Pipeline {
           >
       readonly run: IsUnknown<VAR_StepDefs[i]['run']> extends true
         ? StepRunner
-        : ExcludeUndefined<VAR_StepDefs[i]['run']>
+        : Undefined.Exclude<VAR_StepDefs[i]['run']>
     }
   }
 

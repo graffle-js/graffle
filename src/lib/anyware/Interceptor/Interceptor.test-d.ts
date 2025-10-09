@@ -1,4 +1,4 @@
-import { type ExcludeUndefined } from '#src/lib/prelude.js'
+import type { Undefined } from '@wollybeard/kit'
 import { describe, expectTypeOf, test } from 'vitest'
 import type { Interceptor } from '../$$.js'
 import { Pipeline, PipelineDefinition } from '../$$.js'
@@ -59,7 +59,7 @@ describe(`interceptor constructor`, () => {
   test(`slots are optional`, () => {
     const p = b0.step({ name: `a`, slots, run: () => results.a }).done()
     type triggerA = PipelineGetTrigger<typeof p, 'a'>
-    type triggerASlotInputs = ExcludeUndefined<ExcludeUndefined<Parameters<triggerA>[0]>['using']>
+    type triggerASlotInputs = Undefined.Exclude<Undefined.Exclude<Parameters<triggerA>[0]>['using']>
     expectTypeOf<{ m?: any; n?: any }>().toMatchTypeOf<triggerASlotInputs>()
   })
 
@@ -67,11 +67,11 @@ describe(`interceptor constructor`, () => {
     const p = b0.step({ name: `a`, slots, run: () => results.a }).done()
     type triggerA = PipelineGetTrigger<typeof p, 'a'>
     type triggerASlotMOutput = ReturnType<
-      ExcludeUndefined<ExcludeUndefined<ExcludeUndefined<Parameters<triggerA>[0]>['using']>['m']>
+      Undefined.Exclude<Undefined.Exclude<Undefined.Exclude<Parameters<triggerA>[0]>['using']>['m']>
     >
     expectTypeOf<Promise<`m` | undefined>>().toEqualTypeOf<triggerASlotMOutput>()
     type triggerASlotNOutput = ReturnType<
-      ExcludeUndefined<ExcludeUndefined<ExcludeUndefined<Parameters<triggerA>[0]>['using']>['n']>
+      Undefined.Exclude<Undefined.Exclude<Undefined.Exclude<Parameters<triggerA>[0]>['using']>['n']>
     >
     expectTypeOf<`n` | undefined>().toEqualTypeOf<triggerASlotNOutput>()
   })

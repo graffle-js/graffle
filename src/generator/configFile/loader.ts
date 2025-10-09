@@ -1,7 +1,7 @@
 import { Errors } from '#lib/errors'
 import { isPathToADirectory, toAbsolutePath } from '#src/lib/fsp.js'
 import { importFirst } from '#src/lib/import-first.js'
-import { isError } from '#src/lib/prelude.js'
+import { Err } from '@wollybeard/kit'
 import * as Path from 'node:path'
 import { type Builder, isBuilder } from './builder.js'
 
@@ -57,7 +57,7 @@ export const load = async (
     }
   }
 
-  if (isError(importedModule)) {
+  if (Err.is(importedModule)) {
     return new Errors.ContextualError(
       `Failed to import project Graffle configuration file.`,
       { importPathCandidates },

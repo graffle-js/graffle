@@ -1,5 +1,4 @@
-import { debug } from '#src/lib/prelude.js'
-import { Lang, Prom } from '@wollybeard/kit'
+import { Debug, Lang, Prom } from '@wollybeard/kit'
 import type { Errors } from '../../errors/$.js'
 import { ContextualError } from '../../errors/ContextualError.js'
 import type { InterceptorGeneric } from '../Interceptor/Interceptor.js'
@@ -9,6 +8,8 @@ import type { StepResult, StepResultErrorAsync } from '../StepResult.js'
 import { createResultEnvelope } from './resultEnvelope.js'
 import type { ResultEnvelop } from './resultEnvelope.js'
 import { runStep } from './runStep.js'
+
+const debug = Debug.create('anyware:pipeline')
 
 export const defaultFunctionName = `anonymous`
 

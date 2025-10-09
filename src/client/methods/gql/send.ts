@@ -1,6 +1,5 @@
 import type { Grafaid } from '#lib/grafaid'
-import { type SimplifyNullable } from '#src/lib/prelude.js'
-import { Str } from '@wollybeard/kit'
+import { Str, type Ts } from '@wollybeard/kit'
 import type { HandleOutput } from '../../handle.js'
 
 // dprint-ignore
@@ -61,7 +60,7 @@ export interface DocumentController<$Context, $TypedDocument extends Grafaid.Doc
    * ```
    */
   send(...args: SendArguments<$TypedDocument>):
-    Promise<SimplifyNullable<HandleOutput<$Context, Grafaid.Document.Typed.ResultOf<$TypedDocument>>>>
+    Promise<Ts.SimplifyNullable<HandleOutput<$Context, Grafaid.Document.Typed.ResultOf<$TypedDocument>>>>
 }
 
 export namespace GqlMethodSendMethod {

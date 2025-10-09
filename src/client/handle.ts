@@ -11,8 +11,8 @@ import {
 } from '#src/context/fragments/configuration/output/configuration.js'
 import type { SomeObjectData } from '#src/lib/grafaid/graphql.js'
 import type { GraphQLExecutionResultError } from '#src/lib/grafaid/graphql.js'
-import { type ExcludeNullAndUndefined, type ExcludeUndefined } from '#src/lib/prelude.js'
-import type { Null, Obj } from '@wollybeard/kit'
+import { type ExcludeNullAndUndefined } from '#src/lib/prelude.js'
+import type { Null, Obj, Undefined } from '@wollybeard/kit'
 import type { GraphQLError } from 'graphql'
 import type { Simplify } from 'type-fest'
 import type { RequestPipeline } from '../requestPipeline/$.js'
@@ -132,7 +132,7 @@ type HandleOutput_Envelope<
 > =
   $OutputConfig['envelope']['enabled'] extends true
     ? $Envelope
-    : ExcludeUndefined<$Envelope['data']> // todo make data field not undefinable
+    : Undefined.Exclude<$Envelope['data']> // todo make data field not undefinable
 
 // dprint-ignore
 type IfConfiguredGetOutputErrorReturns<$OutputConfig extends Normalized> =

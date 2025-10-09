@@ -1,5 +1,4 @@
-import { debugSub } from '#src/lib/prelude.js'
-import { Err, Lang, Prom } from '@wollybeard/kit'
+import { Debug, Err, Lang, Prom } from '@wollybeard/kit'
 import { Errors } from '../../errors/$.js'
 import type { InterceptorGeneric } from '../Interceptor/Interceptor.js'
 import type { Pipeline } from '../Pipeline/Pipeline.js'
@@ -8,6 +7,8 @@ import type { StepResult, StepResultErrorAsync } from '../StepResult.js'
 import { StepTrigger } from '../StepTrigger.js'
 import type { StepTriggerEnvelope } from '../StepTriggerEnvelope.js'
 import type { ResultEnvelop } from './resultEnvelope.js'
+
+const debug = Debug.create('anyware:step')
 
 type HookDoneResolver = (input: StepResult) => void
 
@@ -52,7 +53,7 @@ export const runStep = async (
     asyncErrorDeferred: StepResultErrorAsync
   },
 ) => {
-  const debugHook = debugSub(`step ${name}:`)
+  const debugHook = debug.sub(`step ${name}`)
 
   debugHook(`advance to next interceptor`)
 
@@ -77,7 +78,7 @@ export const runStep = async (
    */
 
   if (extension) {
-    const debugExtension = debugSub(`hook ${name}: extension ${extension.name}:`)
+    const debugExtension = debug.sub(`extension ${extension.name}`)
     const hookInvokedDeferred = Prom.createDeferred()
 
     debugExtension(`start`)

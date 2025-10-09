@@ -1,4 +1,4 @@
-import { Fn, Lang, type Null, Obj, Prom, Rec, Str, Ts } from '@wollybeard/kit'
+import { type Null, Prom, Ts } from '@wollybeard/kit'
 import type { HasRequiredKeys, IsAny, IsEmptyObject, IsNever, IsUnknown } from 'type-fest'
 import type { ConfigManager } from './config-manager/$.js'
 
@@ -25,21 +25,9 @@ export type Exact<$Value, $Constraint> =
 
 export type ValuesOrEmptyObject<T> = keyof T extends never ? {} : T[keyof T]
 
-export type ExcludeUndefined<T> = Exclude<T, undefined>
-
 export type ExcludeNullAndUndefined<T> = Exclude<T, null | undefined>
 
 export type SomeFunctionMaybeAsync = (...args: any[]) => Prom.Maybe<any>
-
-export const debug = (...args: any[]) => {
-  if (globalThis.process?.env?.['DEBUG']) {
-    console.log(...args)
-  }
-}
-
-export const debugSub = (...args: any[]) => (...subArgs: any[]) => {
-  debug(...args, ...subArgs)
-}
 
 export namespace Objekt {
   export type IsEmpty<T> = {} extends T ? true : false
@@ -234,33 +222,28 @@ export const urlParseSafe = (url: string) => {
   }
 }
 
-export const throwNull = <V>(value: V): Exclude<V, null> => {
-  if (value === null) throw new Error('Unexpected null value.')
-  return value as Exclude<V, null>
-}
+// export const proxyGet = <$Target>(
+//   target: $Target,
+//   handler: (input: { property: string; path: string[] }) => unknown,
+//   path: string[] = [],
+// ): $Target => {
+//   return new Proxy(target, {
+//     get: (target: any, property: string, receiver: any) => {
+//       const value = Reflect.get(target, property, receiver)
 
-export const proxyGet = <$Target>(
-  target: $Target,
-  handler: (input: { property: string; path: string[] }) => unknown,
-  path: string[] = [],
-): $Target => {
-  return new Proxy(target, {
-    get: (target: any, property: string, receiver: any) => {
-      const value = Reflect.get(target, property, receiver)
+//       // TODO: special casing for private _ property should go away.
+//       if (property === '_' && path.length === 0) {
+//         return value
+//       }
 
-      // TODO: special casing for private _ property should go away.
-      if (property === '_' && path.length === 0) {
-        return value
-      }
+//       if (Rec.is(value)) {
+//         return proxyGet(value, handler, [...path, property])
+//       }
 
-      if (Rec.is(value)) {
-        return proxyGet(value, handler, [...path, property])
-      }
-
-      return handler({ property, path }) ?? Reflect.get(target, property, receiver)
-    },
-  })
-}
+//       return handler({ property, path }) ?? Reflect.get(target, property, receiver)
+//     },
+//   })
+// }
 
 // export type SuffixKeyNames<$Suffix extends string, $Object extends object> = {
 //   [$Key in keyof $Object & string as `${$Key}${$Suffix}`]: $Object[$Key]
@@ -275,13 +258,7 @@ export const identityProxy = new Proxy({}, {
   get: () => (value: unknown) => value,
 })
 
-export type IfExtendsElse<$Type, $Extends, $Else> = $Type extends $Extends ? $Type : $Else
-
-// dprint-ignore
-export type PickOptionalPropertyOrFallback<$Object extends object, $Property extends keyof $Object, $Fallback> =
-  undefined extends $Object[$Property]
-    ? $Fallback
-    : $Object[$Property]
+// export type IfExtendsElse<$Type, $Extends, $Else> = $Type extends $Extends ? $Type : $Else
 
 // export type All<$Tuple extends [...boolean[]]> = $Tuple[number] extends true ? false : true
 
@@ -327,8 +304,6 @@ export const isNonNull = <$Value>(value: $Value): value is Null.Exclude<$Value> 
   return value !== null
 }
 
-export type SimplifyNullable<T> = null extends T ? (T & {}) | null : T & {}
-
 // dprint-ignore
 export type AssertExtendsObject<$Type> =AssertExtends<$Type, object>
 
@@ -339,14 +314,6 @@ export type AssertExtends<$Type, $Constraint> =
   $Type extends $Constraint
     ? $Type
     : never
-
-export const isNonNullObject = (value: unknown): value is object => {
-  return typeof value === 'object' && value !== null
-}
-
-export const isError = (value: unknown) => {
-  return value instanceof Error
-}
 
 export type GuardedType<T> = T extends (x: any) => x is infer U ? U : never
 
@@ -391,13 +358,6 @@ export type ToParametersExact<$Input extends object, $Params extends object | un
                                                 [Exact<$Input, $Params>] | []
     : []
 
-export const isAbortError = (error: any): error is DOMException & { name: 'AbortError' } => {
-  return (error instanceof DOMException && error.name === `AbortError`)
-    // Under test with JSDOM, the error must be checked this way.
-    // todo look for an open issue with JSDOM to link here, is this just artifact of JSDOM or is it a real issue that happens in browsers?
-    || (error instanceof Error && error.message.startsWith(`AbortError:`))
-}
-
 export namespace Func {
   // dprint-ignore
   export type AppendAwaitedReturnType<$F, $ReturnTypeToAdd> =
@@ -420,26 +380,14 @@ type UnionValue<U, K extends PropertyKey> = U extends any ? K extends keyof U ? 
 
 export type AnyAndUnknownToNever<T> = IsAny<T> extends true ? never : IsUnknown<T> extends true ? never : T
 
-export type t<T> = T extends null ? {} | null : {}
-
 export type PropertyKeyToString<$Key extends PropertyKey> = $Key extends string ? $Key
   : $Key extends number ? $Key
   : $Key extends symbol ? '<symbol>'
   : never
 
-export type PartialOrUndefined<T> = {
-  [K in keyof T]?: T[K] | undefined
-}
-
 export type UnionIgnoreAnyOrUnknown<T> = unknown extends T ? never : T
 
 export type IntersectionIgnoreNeverOrAny<T> = IsAny<T> extends true ? unknown : T extends never ? unknown : T
-
-export type NeverOrAnyToUnknown<T> = IsAny<T> extends true ? unknown : T extends never ? unknown : T
-
-export type MergeAll<$Objects extends object[]> = $Objects extends
-  [infer $First extends object, ...infer $Rest extends object[]] ? $First & MergeAll<$Rest>
-  : {}
 
 export const emptyArray = Object.freeze([] as const)
 export type EmptyArray = typeof emptyArray
