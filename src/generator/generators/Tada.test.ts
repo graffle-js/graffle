@@ -1,5 +1,5 @@
-import { expect, test } from 'vitest'
 import { Grafaid } from '#lib/grafaid'
+import { expect, test } from 'vitest'
 import { createConfig } from '../config/config.js'
 import { ModuleGeneratorTada } from './Tada.js'
 

@@ -8,9 +8,11 @@ import * as $$SchemaDrivenDataMap from './schema-driven-data-map.js'
 import * as $$Tada from './tada.js'
 
 // Initialize gql-tada with the generated introspection types
-type GqlTada = ReturnType<typeof initGraphQLTada<{
-  introspection: $$Tada.introspection
-}>>
+type GqlTada = ReturnType<
+  typeof initGraphQLTada<{
+    introspection: $$Tada.introspection
+  }>
+>
 
 const context = $$Utilities.pipe(
   $$Utilities.contextEmpty,
@@ -29,8 +31,7 @@ const context = $$Utilities.pipe(
 const _create = $$Utilities.createConstructorWithContext(context)
 
 export const create: typeof _create = (input) => {
-  const client = _create(input)
-  // Cast the gql method to gql-tada for type inference
+  const client = _create(input) // Cast the gql method to gql-tada for type inference
   ;(client as any).gql = client.gql as any as GqlTada
   return client
 }

@@ -1,3 +1,4 @@
+import { Grafaid } from '#lib/grafaid'
 import type {
   GraphQLEnumType,
   GraphQLInputObjectType,
@@ -5,7 +6,6 @@ import type {
   GraphQLObjectType,
   GraphQLUnionType,
 } from 'graphql'
-import { Grafaid } from '#lib/grafaid'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 
 /**
