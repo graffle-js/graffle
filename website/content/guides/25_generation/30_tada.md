@@ -2,37 +2,6 @@
 
 Graffle leverages [gql-tada](https://gql-tada.0no.co)'s tooling to generate introspection types, enabling compile-time type checking for GraphQL queries using TypeScript's string literal types.
 
-## What is gql-tada?
-
-gql-tada is a GraphQL document authoring library that provides type-safe GraphQL operations using TypeScript's type system. It offers:
-
-- **Compile-time validation** of GraphQL queries
-- **Auto-completion** for GraphQL fields and arguments
-- **Type inference** for variables and results
-- **Zero runtime overhead** - types are inferred at compile time
-
-Note: While gql-tada supports tagged template literal syntax natively, **Graffle's integration requires call expression syntax** (`graphql("...")`) due to TypeScript limitations. See [Limitations](#limitations) for details.
-
-## How It Works
-
-Graffle uses gql-tada's format to generate a `tada.ts` module with introspection types. This module exports types that describe your GraphQL schema in a format that gql-tada understands.
-
-### Generated Files
-
-```
-graffle/
-├── modules/
-│   ├── tada.ts       # gql-tada introspection types
-│   └── ...
-```
-
-### The tada.ts Module
-
-The generated `tada.ts` file contains:
-
-- `introspection_types` - Type definitions for all GraphQL types in your schema
-- `introspection` - The main introspection type used by gql-tada
-
 ## Usage
 
 Graffle provides two complementary APIs for working with gql-tada documents:
@@ -319,6 +288,28 @@ The static document builder provides superior multi-operation support with full 
 - The TypeScript plugin requires your schema to be available as an SDL file
 - Template literal type checking requires TypeScript 4.5+
 - Very large schemas may impact TypeScript performance
+
+## Appendix
+
+### How It Works
+
+Graffle uses gql-tada's format to generate a `tada.ts` module with introspection types. This module exports types that describe your GraphQL schema in a format that gql-tada understands.
+
+#### Generated Files
+
+```
+graffle/
+├── modules/
+│   ├── tada.ts       # gql-tada introspection types
+│   └── ...
+```
+
+#### The tada.ts Module
+
+The generated `tada.ts` file contains:
+
+- `introspection_types` - Type definitions for all GraphQL types in your schema
+- `introspection` - The main introspection type used by gql-tada
 
 ## Learn More
 
