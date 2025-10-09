@@ -1,6 +1,6 @@
-# gql-tada Integration
+# Tada
 
-Graffle now generates [gql-tada](https://gql-tada.0no.co) compatible introspection types, enabling compile-time type checking for GraphQL queries written as template literals.
+Graffle generates [gql-tada](https://gql-tada.0no.co) compatible introspection types, enabling compile-time type checking for GraphQL queries written as template literals.
 
 ## What is gql-tada?
 
