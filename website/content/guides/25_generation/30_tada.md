@@ -87,21 +87,20 @@ Configure the GraphQLSP TypeScript plugin in your `tsconfig.json`:
     "plugins": [
       {
         "name": "@0no-co/graphqlsp",
-        "schema": "./graffle/schema.graphql",
-        "tadaOutputLocation": "./graffle-env.d.ts"
+        "schema": "./graffle/schema.graphql"
       }
     ]
   }
 }
 ```
 
-Note: Make sure to enable SDL output in your Graffle configuration:
+Note: The GraphQLSP plugin requires your schema in SDL format. If you don't already have an SDL file as your schema source, Graffle can generate one for you:
 
 ```typescript
 // graffle.config.ts
 export default {
-  schema: '...',
-  outputSDL: true,
+  schema: '...', // Your schema source (URL, file, etc.)
+  outputSDL: true, // Graffle will generate an SDL file
 }
 ```
 
@@ -162,68 +161,6 @@ To use gql-tada with Graffle:
 
 Note: Unlike standalone gql-tada usage, you **do not** need to call `initGraphQLTada()` yourself - Graffle's generated `gql()` function already includes the proper typing.
 
-## Advanced Usage
-
-### Using gql-tada's Type Utilities
-
-gql-tada provides useful type utilities that work with the generated documents:
-
-```typescript
-import type { ResultOf, VariablesOf } from 'gql.tada'
-import { Graffle } from './graffle/_exports.js'
-
-// Create a typed document
-const GetUserDocument = Graffle.gql(`
-  query GetUser($id: ID!) {
-    user(id: $id) {
-      id
-      name
-      email
-    }
-  }
-`)
-
-// Extract types from the document
-type UserQueryVariables = VariablesOf<typeof GetUserDocument>
-type UserQueryResult = ResultOf<typeof GetUserDocument>
-
-// Use extracted types in your code
-function fetchUser(vars: UserQueryVariables): Promise<UserQueryResult> {
-  return client.send(GetUserDocument, vars)
-}
-```
-
-### When to Use `.document()` Builder
-
-For multi-operation documents or when you need TypeScript's full object literal support, use Graffle's static document builder instead:
-
-```typescript
-import { Graffle } from './graffle/_exports.js'
-
-// Multi-operation document with builder
-const doc = Graffle.document({
-  query: {
-    GetUser: {
-      user: (args) =>
-        args({ $: { id: 'ID!' } }, {
-          id: true,
-          name: true,
-        }),
-    },
-    GetPosts: {
-      posts: {
-        id: true,
-        title: true,
-      },
-    },
-  },
-})
-
-// Execute specific operation
-const userData = await client.send(doc).run('GetUser', { id: '123' })
-const postsData = await client.send(doc).run('GetPosts')
-```
-
 ## Limitations
 
 ### No Tagged Template Literal Support
@@ -273,6 +210,37 @@ const doc = Graffle.document({
 ```
 
 The static document builder provides superior multi-operation support with full type-level tracking of all operation names, variables, and results.
+
+### When to Use `.document()` Builder
+
+For multi-operation documents or when you need TypeScript's full object literal support, use Graffle's static document builder instead:
+
+```typescript
+import { Graffle } from './graffle/_exports.js'
+
+// Multi-operation document with builder
+const doc = Graffle.document({
+  query: {
+    GetUser: {
+      user: (args) =>
+        args({ $: { id: 'ID!' } }, {
+          id: true,
+          name: true,
+        }),
+    },
+    GetPosts: {
+      posts: {
+        id: true,
+        title: true,
+      },
+    },
+  },
+})
+
+// Execute specific operation
+const userData = await client.send(doc).run('GetUser', { id: '123' })
+const postsData = await client.send(doc).run('GetPosts')
+```
 
 ### Other Limitations
 
