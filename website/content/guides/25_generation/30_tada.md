@@ -79,7 +79,13 @@ console.log(result?.user?.name)
 
 **This is a VALUE ADD** that brings real-time validation and autocomplete **within your GraphQL strings** as you type in your IDE.
 
-Configure the GraphQLSP TypeScript plugin in your `tsconfig.json`:
+First, install the GraphQL LSP plugin:
+
+```bash
+npm install -D @0no-co/graphqlsp
+```
+
+Then configure the GraphQLSP TypeScript plugin in your `tsconfig.json`:
 
 ```json
 {
@@ -150,16 +156,6 @@ const githubClient = GitHubGraffle.create()
 const pokemon = await pokemonClient.send(pokemonDoc)
 const viewer = await githubClient.send(githubDoc)
 ```
-
-## Requirements
-
-To use gql-tada with Graffle:
-
-1. **Generate your Graffle client** - The latest version automatically generates gql-tada introspection types
-2. **Install gql-tada** (for type utilities only): `npm install gql.tada`
-3. **(Optional) Install GraphQL LSP** for IDE support: `npm install -D @0no-co/graphqlsp`
-
-Note: Unlike standalone gql-tada usage, you **do not** need to call `initGraphQLTada()` yourself - Graffle's generated `gql()` function already includes the proper typing.
 
 ## Limitations
 
