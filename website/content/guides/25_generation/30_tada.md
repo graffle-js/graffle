@@ -1,19 +1,21 @@
 # Tada
 
-Graffle generates [gql-tada](https://gql-tada.0no.co) compatible introspection types, enabling compile-time type checking for GraphQL queries written as template literals.
+Graffle generates [gql-tada](https://gql-tada.0no.co) compatible introspection types, enabling compile-time type checking for GraphQL queries using TypeScript's string literal types.
 
 ## What is gql-tada?
 
-gql-tada is a GraphQL document authoring library that provides type-safe GraphQL operations using TypeScript's template literal types. It offers:
+gql-tada is a GraphQL document authoring library that provides type-safe GraphQL operations using TypeScript's type system. It offers:
 
 - **Compile-time validation** of GraphQL queries
 - **Auto-completion** for GraphQL fields and arguments
 - **Type inference** for variables and results
 - **Zero runtime overhead** - types are inferred at compile time
 
+Note: While gql-tada supports tagged template literal syntax natively, **Graffle's integration requires call expression syntax** (`graphql("...")`) due to TypeScript limitations. See [Limitations](#limitations) for details.
+
 ## How It Works
 
-When you generate a Graffle client, a `tada.ts` module is automatically created with gql-tada compatible introspection types. This module exports types that describe your GraphQL schema in a format that gql-tada understands.
+Graffle generates a `tada.ts` module with gql-tada compatible introspection types. This module exports types that describe your GraphQL schema in a format that gql-tada understands.
 
 ### Generated Files
 
@@ -33,23 +35,22 @@ The generated `tada.ts` file contains:
 
 ## Usage
 
-### Basic Example
+Graffle provides two complementary APIs for working with gql-tada documents:
+
+### Static API
+
+The generated `Graffle.gql()` function creates typed documents that can be reused across multiple requests:
 
 ```typescript
-import { initGraphQLTada } from 'gql.tada'
 import { Graffle } from './graffle/_exports.js'
-import type { introspection } from './graffle/modules/tada.js'
 
-// Initialize gql-tada with Graffle's generated types
-const graphql = initGraphQLTada<{
-  introspection: introspection
-}>()
+// Create your Graffle client with transport
+const client = Graffle
+  .create({ schema: { name: 'MySchema' } })
+  .transport({ url: 'https://api.example.com/graphql' })
 
-// Create your Graffle client
-const client = Graffle.create()
-
-// Define a type-safe query
-const userQuery = graphql(`
+// Define a type-safe query using the generated gql() function
+const GetUserDocument = Graffle.gql(`
   query GetUser($id: ID!) {
     user(id: $id) {
       id
@@ -59,14 +60,60 @@ const userQuery = graphql(`
   }
 `)
 
-// Use with Graffle's .gql method
-const result = await client
-  .gql(userQuery)
-  .send({ id: '123' }) // Variables are type-checked!
+// Execute with client.send() - variables are type-checked!
+const result = await client.send(GetUserDocument, { id: '123' })
 
 // Result is fully typed
 console.log(result?.user?.name)
 ```
+
+**Benefits:**
+- Document can be defined in one place and reused
+- Easy to test documents independently
+- Clear separation between query definition and execution
+- Great for shared queries across components
+
+### Instance API
+
+The `client.gql()` method allows chaining `.send()` directly for one-off queries:
+
+```typescript
+import { Graffle } from './graffle/_exports.js'
+
+const client = Graffle
+  .create({ schema: { name: 'MySchema' } })
+  .transport({ url: 'https://api.example.com/graphql' })
+
+// Define and execute in one expression
+const result = await client
+  .gql(`
+    query GetUser($id: ID!) {
+      user(id: $id) {
+        id
+        name
+        email
+      }
+    }
+  `)
+  .send({ id: '123' })
+
+// Result is fully typed
+console.log(result?.user?.name)
+```
+
+**Benefits:**
+- Concise syntax for one-off queries
+- Query and execution co-located
+- Familiar to users of other GraphQL clients
+
+### Comparison
+
+| Feature | Static API | Instance API |
+|---------|-----------|--------------|
+| Syntax | `Graffle.gql()` then `client.send()` | `client.gql().send()` |
+| Use Case | Reusable documents | One-off queries |
+| Type Inference | Full gql-tada inference | Basic structure inference |
+| Multi-operation | No (use `.document()`) | No (use `.document()`) |
 
 ### TypeScript Configuration
 
@@ -100,97 +147,171 @@ export default {
 
 ### 1. Type Safety Without Code Generation
 
-Unlike traditional GraphQL code generators that generate types for every query, gql-tada infers types directly from your template literals. This means:
+Graffle generates gql-tada introspection from your schema once, then gql-tada infers types directly from your query strings. This means:
 
-- No build step for queries
-- Instant feedback as you type
+- No build step for individual queries
+- Instant type feedback as you type
 - No generated query files to manage
+- Full TypeScript intellisense and autocomplete
 
 ### 2. Seamless Integration
 
-The generated tada types work seamlessly with Graffle's existing `.gql` method. You get:
+The generated `gql()` function works seamlessly with Graffle's client. You get:
 
-- All of Graffle's runtime features (transport, extensions, etc.)
+- All of Graffle's runtime features (transport, extensions, interceptors, etc.)
 - Plus gql-tada's compile-time type safety
+- Two complementary APIs (static and instance) for different use cases
 - Best of both worlds
 
 ### 3. Multi-Schema Support
 
-Each Graffle client generates its own tada types, so you can work with multiple GraphQL schemas in the same project:
+Each Graffle client generates its own gql() function and introspection types, so you can work with multiple GraphQL schemas in the same project:
 
 ```typescript
 // Pokemon schema
-import { Graffle as PokemonClient } from './pokemon-graffle/_exports.js'
-import type { introspection as PokemonIntrospection } from './pokemon-graffle/modules/tada.js'
+import { Graffle as PokemonGraffle } from './pokemon-graffle/_exports.js'
 
 // GitHub schema
-import { Graffle as GitHubClient } from './github-graffle/_exports.js'
-import type { introspection as GitHubIntrospection } from './github-graffle/modules/tada.js'
+import { Graffle as GitHubGraffle } from './github-graffle/_exports.js'
 
-// Each has its own typed graphql function
-const pokemonGraphql = initGraphQLTada<
-  { introspection: PokemonIntrospection }
->()
-const githubGraphql = initGraphQLTada<{ introspection: GitHubIntrospection }>()
+// Each has its own typed gql() function
+const pokemonDoc = PokemonGraffle.gql(`query { pokemons { name } }`)
+const githubDoc = GitHubGraffle.gql(`query { viewer { login } }`)
+
+// Create separate clients
+const pokemonClient = PokemonGraffle.create()
+  .transport({ url: 'https://pokemon-api.example.com/graphql' })
+
+const githubClient = GitHubGraffle.create()
+  .transport({ url: 'https://api.github.com/graphql' })
+
+// Execute with full type safety for each schema
+const pokemon = await pokemonClient.send(pokemonDoc)
+const viewer = await githubClient.send(githubDoc)
 ```
 
 ## Requirements
 
-To use gql-tada with Graffle, you need:
+To use gql-tada with Graffle:
 
-1. Install gql-tada: `npm install gql.tada`
-2. (Optional) Install the TypeScript plugin for IDE support: `npm install -D @0no-co/graphqlsp`
-3. Generate your Graffle client with the latest version
+1. **Generate your Graffle client** - The latest version automatically generates gql-tada introspection types
+2. **Install gql-tada** (for type utilities only): `npm install gql.tada`
+3. **(Optional) Install GraphQL LSP** for IDE support: `npm install -D @0no-co/graphqlsp`
+
+Note: Unlike standalone gql-tada usage, you **do not** need to call `initGraphQLTada()` yourself - Graffle's generated `gql()` function already includes the proper typing.
 
 ## Advanced Usage
 
 ### Using gql-tada's Type Utilities
 
-gql-tada provides useful type utilities that work with the generated types:
+gql-tada provides useful type utilities that work with the generated documents:
 
 ```typescript
 import type { ResultOf, VariablesOf } from 'gql.tada'
+import { Graffle } from './graffle/_exports.js'
 
-const myQuery = graphql(`
+// Create a typed document
+const GetUserDocument = Graffle.gql(`
   query GetUser($id: ID!) {
     user(id: $id) {
       id
       name
+      email
     }
   }
 `)
 
-// Extract types
-type QueryVariables = VariablesOf<typeof myQuery>
-type QueryResult = ResultOf<typeof myQuery>
+// Extract types from the document
+type UserQueryVariables = VariablesOf<typeof GetUserDocument>
+type UserQueryResult = ResultOf<typeof GetUserDocument>
+
+// Use extracted types in your code
+function fetchUser(vars: UserQueryVariables): Promise<UserQueryResult> {
+  return client.send(GetUserDocument, vars)
+}
 ```
 
-### Fragment Composition
+### When to Use `.document()` Builder
 
-gql-tada supports GraphQL fragments for code reuse:
+For multi-operation documents or when you need TypeScript's full object literal support, use Graffle's static document builder instead:
 
 ```typescript
-const userFragment = graphql(`
-  fragment UserFields on User {
-    id
-    name
-    email
-  }
-`)
+import { Graffle } from './graffle/_exports.js'
 
-const query = graphql(
-  `
-  query GetUsers {
-    users {
-      ...UserFields
-    }
-  }
-`,
-  [userFragment],
-)
+// Multi-operation document with builder
+const doc = Graffle.document({
+  query: {
+    GetUser: {
+      user: (args) => args({ $: { id: 'ID!' } }, {
+        id: true,
+        name: true,
+      }),
+    },
+    GetPosts: {
+      posts: {
+        id: true,
+        title: true,
+      },
+    },
+  },
+})
+
+// Execute specific operation
+const userData = await client.send(doc).run('GetUser', { id: '123' })
+const postsData = await client.send(doc).run('GetPosts')
 ```
 
 ## Limitations
+
+### No Tagged Template Literal Support
+
+Graffle's gql-tada integration requires call expression syntax (`Graffle.gql("...")`) instead of tagged template syntax (``Graffle.gql`...` ``). TypeScript cannot infer const string literals from `TemplateStringsArray`, which gql-tada's type-level parser requires. See [TypeScript Issue #33304](https://github.com/microsoft/TypeScript/issues/33304).
+
+```typescript
+// ✅ Works - Call expression syntax
+const query = Graffle.gql(`query { user { id } }`)
+
+// ❌ Doesn't work - Tagged template syntax
+const query = Graffle.gql`query { user { id } }`
+//                        ^ Type error: template literal not supported
+```
+
+The same limitation applies to the instance API:
+
+```typescript
+// ✅ Works
+client.gql(`query { user { id } }`).send()
+
+// ❌ Doesn't work
+client.gql`query { user { id } }`.send()
+```
+
+### Single Operation Documents Only
+
+gql-tada's type parser can parse documents with multiple named operations, but only infers types for the first operation ([gql.tada #489](https://github.com/0no-co/gql.tada/issues/489)). This means:
+
+- Each `.gql()` call should contain **one operation only** (one query, mutation, or subscription)
+- For multi-operation documents, use Graffle's static document builder (`.document()`)
+
+```typescript
+// ❌ Multi-operation document - only first operation gets types
+const doc = Graffle.gql(`
+  query GetUser { user { id } }
+  query GetPosts { posts { id } }
+`)
+
+// ✅ Use document builder instead
+const doc = Graffle.document({
+  query: {
+    GetUser: { user: { id: true } },
+    GetPosts: { posts: { id: true } },
+  },
+})
+```
+
+The static document builder provides superior multi-operation support with full type-level tracking of all operation names, variables, and results.
+
+### Other Limitations
 
 - The TypeScript plugin requires your schema to be available as an SDL file
 - Template literal type checking requires TypeScript 4.5+

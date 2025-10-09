@@ -8,6 +8,7 @@ import { ModuleGeneratorClient } from '../generators/Client.js'
 import { ModuleGeneratorData } from '../generators/Data.js'
 import { ModuleGeneratorDocument } from '../generators/Document.js'
 import { ModuleGeneratorGlobal } from '../generators/global.js'
+import { ModuleGeneratorGql } from '../generators/Gql.js'
 import { ModuleGeneratorMethodsDocument } from '../generators/MethodsDocument.js'
 import { ModuleGeneratorMethodsRoot } from '../generators/MethodsRoot.js'
 import { ModuleGeneratorMethodsSelect } from '../generators/MethodsSelect.js'
@@ -27,6 +28,7 @@ const moduleGenerators = [
   ModuleGeneratorData,
   ModuleGeneratorScalar,
   ModuleGeneratorTada,
+  ModuleGeneratorGql,
   // Packaging Stuff
   ModuleGenerator_internals,
   ModuleGenerator$$,

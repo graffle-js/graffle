@@ -68,11 +68,20 @@ export interface SendMethod<$Context> {
     ...$parameters: $parameters
   ): InferReturn<$Context, $Operations, $parameters>
 
-  // TODO: TypedDocumentString or TypedDocumentNode (existing single-operation types)
-  // <$Doc extends Grafaid.Document.Typed.TypedDocumentNodeLike>(
-  //   doc: $Doc,
-  //   ...args: SendArguments<$Doc>
-  // ): Promise<SimplifyNullable<HandleOutput<$Context, Grafaid.Document.Typed.ResultOf<$Doc>>>>
+  // TypedDocumentNode - supports gql-tada and codegen documents
+  <
+    $Result extends Grafaid.Document.Typed.SomeObjectData,
+    $Variables extends Grafaid.Document.Typed.Variables,
+    ___VariablesKind extends Grafaid.Document.Typed.VariablesInputKind = Grafaid.Document.Typed.GetVariablesInputKind<
+      $Variables
+    >,
+  >(
+    document: Grafaid.Document.Typed.TypedDocumentNodeLike<$Result, $Variables>,
+    ...variables: ___VariablesKind extends 'none' ? []
+      : ___VariablesKind extends 'optional' ? [variables?: $Variables]
+      : ___VariablesKind extends 'required' ? [variables: $Variables]
+      : never
+  ): Promise<Ts.SimplifyNullable<HandleOutput<$Context, $Result>>>
 
   // TypedFullDocumentString - unified overload for single and multiple operations
 
