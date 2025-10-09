@@ -188,10 +188,7 @@ client.gql`query { user { id } }`.send()
 
 ### Single Operation Documents Only
 
-gql-tada's type parser can parse documents with multiple named operations, but only infers types for the first operation ([gql.tada #489](https://github.com/0no-co/gql.tada/issues/489)). This means:
-
-- Each `.gql()` call should contain **one operation only** (one query, mutation, or subscription)
-- For multi-operation documents, use Graffle's static document builder (`.document()`)
+gql-tada's type parser can parse documents with multiple named operations, but only infers types for the first operation ([gql.tada #489](https://github.com/0no-co/gql.tada/issues/489)). This means each `.gql()` call should contain **one operation only** (one query, mutation, or subscription).
 
 ```typescript
 // ❌ Multi-operation document - only first operation gets types
@@ -199,26 +196,14 @@ const doc = Graffle.gql(`
   query GetUser { user { id } }
   query GetPosts { posts { id } }
 `)
-
-// ✅ Use document builder instead
-const doc = Graffle.document({
-  query: {
-    GetUser: { user: { id: true } },
-    GetPosts: { posts: { id: true } },
-  },
-})
 ```
 
-The static document builder provides superior multi-operation support with full type-level tracking of all operation names, variables, and results.
-
-### When to Use `.document()` Builder
-
-For multi-operation documents or when you need TypeScript's full object literal support, use Graffle's static document builder instead:
+**Workaround:** Use Graffle's static document builder (`.document()`) for multi-operation documents. The document builder provides superior multi-operation support with full type-level tracking of all operation names, variables, and results:
 
 ```typescript
 import { Graffle } from './graffle/_exports.js'
 
-// Multi-operation document with builder
+// ✅ Multi-operation document with builder
 const doc = Graffle.document({
   query: {
     GetUser: {
@@ -241,12 +226,6 @@ const doc = Graffle.document({
 const userData = await client.send(doc).run('GetUser', { id: '123' })
 const postsData = await client.send(doc).run('GetPosts')
 ```
-
-### Other Limitations
-
-- The TypeScript plugin requires your schema to be available as an SDL file
-- Template literal type checking requires TypeScript 4.5+
-- Very large schemas may impact TypeScript performance
 
 ## Appendix
 
