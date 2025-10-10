@@ -1,14 +1,14 @@
 /**
  * TODO: These tests need to be rewritten for the new builder API.
  *
- * The old API used .send() on a DocumentController. The new API uses operation methods on a GqlBuilder.
+ * The old API used .send() on a DocumentController. The new API uses operation methods on a DocumentSender.
  * These tests extensively check TypedDocumentNode type inference with various variable configurations,
  * but don't have explicit operation names which makes them hard to adapt to the new API.
  *
  * Options for rewriting:
  * 1. Add operation names to all test documents
  * 2. Use .$send() with inferred operation names
- * 3. Focus on testing the builder's operation method types instead
+ * 3. Focus on testing the sender's operation method types instead
  */
 
 import type { Grafaid } from '#lib/grafaid'

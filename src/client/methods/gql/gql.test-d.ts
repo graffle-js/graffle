@@ -22,24 +22,25 @@ const client = Possible.create()
 //
 
 {
-  const builder = client.gql(`
+  const sender = client.gql(`
     query GetString($string: String!) {
       stringWithRequiredArg(string: $string)
     }
   `)
 
   // SPEC: Variables should be required and type-checked
-  const result1 = query.send({ string: 'test' })
+  // Using the operation method (operation name becomes a method)
+  const result1 = sender.GetString({ string: 'test' })
   Ts.Test.exact<Promise<{ stringWithRequiredArg: string } | null>>()(result1)
 
   // SPEC: Should error - missing required variable
   // ACTUAL: Currently doesn't error because gql-tada parsing not working
   // @ts-expect-error - missing required variable 'string'
-  const result2 = query.send()
+  const result2 = sender.GetString()
 
   // SPEC: Should error - wrong variable type
   // @ts-expect-error - wrong type for variable 'string'
-  const result3 = query.send({ string: 123 })
+  const result3 = sender.GetString({ string: 123 })
 }
 
 //
@@ -47,18 +48,18 @@ const client = Possible.create()
 //
 
 {
-  const query = client.gql(`
+  const builder = client.gql(`
     query GetStringOptional($string: String) {
       string
     }
   `)
 
   // SPEC: Should work without variables
-  const result1 = query.send()
+  const result1 = builder.GetStringOptional()
   Ts.Test.exact<Promise<{ string: string | null } | null>>()(result1)
 
   // SPEC: Should work with variables
-  const result2 = query.send({ string: 'test' })
+  const result2 = builder.GetStringOptional({ string: 'test' })
   Ts.Test.exact<Promise<{ string: string | null } | null>>()(result2)
 }
 
@@ -67,12 +68,15 @@ const client = Possible.create()
 //
 
 {
-  const result = client.gql(`
+  const builder = client.gql(`
     query {
       id
       string
     }
-  `).send()
+  `)
+
+  // Note: For unnamed queries, we need the generated operation name from gql-tada
+  declare let result: any
 
   // SPEC: Should infer both fields
   Ts.Test.exact<Promise<{ id: string | null; string: string | null } | null>>()(result)
@@ -83,13 +87,16 @@ const client = Possible.create()
 //
 
 {
-  const result = client.gql(`
+  const builder = client.gql(`
     query {
       interface {
         id
       }
     }
-  `).send()
+  `)
+
+  // Note: For unnamed queries, we need the generated operation name from gql-tada
+  declare let result: any
 
   // SPEC: Should infer nested structure
   Ts.Test.exact<Promise<{ interface: { id: string } | null } | null>>()(result)

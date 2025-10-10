@@ -20,9 +20,9 @@ describe(`given typed document node`, () => {
   test(`returns typed result`, async () => {
     type ResultData = { id: string | null }
     const doc = Ts.as<Grafaid.Document.Typed.Node<ResultData, {}>>(
-      parse(`query { id }`),
+      parse(`query GetId { id }`),
     )
-    const result = await g.gql(doc).send()
+    const result = await g.gql(doc).$send()
     expectTypeOf(result).toEqualTypeOf<ResultData | null>()
     expect(result).toEqual({ id: db.id1 })
   })
@@ -31,16 +31,18 @@ describe(`given typed document node`, () => {
     type ResultData = { id: string | null }
     type Variables = {}
     const doc = Ts.as<Grafaid.Document.Typed.Node<ResultData, Variables>>(
-      parse(`query { id }`),
+      parse(`query GetId { id }`),
     )
 
+    const sender = g.gql(doc)
+
     // Should work without variables
-    await g.gql(doc).send()
+    await sender.$send()
 
     // Type checking - cannot pass variables when none expected
     if (false) {
       // @ts-expect-error - cannot pass variables when TDN has none
-      await g.gql(doc).send({})
+      await sender.$send({})
     }
   })
 })
@@ -48,7 +50,7 @@ describe(`given typed document node`, () => {
 describe(`client.gql() instance method`, () => {
   describe(`call expression syntax`, () => {
     test(`simple query without variables`, async () => {
-      const result = await g.gql(`query { id }`).send()
+      const result = await g.gql(`query GetId { id }`).$send()
       expect(result).toEqual({ id: db.id1 })
     })
 
@@ -56,19 +58,19 @@ describe(`client.gql() instance method`, () => {
       const query = `query GetString($string: String!) {
         stringWithRequiredArg(string: $string)
       }`
-      const result = await g.gql(query).send({ string: 'test' })
+      const result = await g.gql(query).$send({ string: 'test' })
       expect(result).toEqual({ stringWithRequiredArg: 'test' })
     })
 
     test(`mutation`, async () => {
-      const result = await g.gql(`mutation { id }`).send()
+      const result = await g.gql(`mutation GetId { id }`).$send()
       expect(result).toEqual({ id: db.id1 })
     })
   })
 
   describe(`template literal syntax`, () => {
     test(`works with template literals`, async () => {
-      const result = await g.gql(`query { idNonNull }`).send()
+      const result = await g.gql(`query GetIdNonNull { idNonNull }`).$send()
       expect(result).toEqual({ idNonNull: db.id1 })
     })
   })
@@ -78,45 +80,8 @@ describe(`client.gql() instance method`, () => {
       const clientWithoutTransport = Graffle.create({ check: { preflight: false } })
 
       await expect(
-        clientWithoutTransport.gql(`query { id }`).send(),
+        clientWithoutTransport.gql(`query GetId { id }`).$send(),
       ).rejects.toThrow()
     })
-  })
-})
-
-describe(`client.send() static API`, () => {
-  test(`accepts plain DocumentNode`, async () => {
-    const doc = parse(`query { id }`)
-    const result = await g.send(doc as any)
-    expect(result).toEqual({ id: db.id1 })
-  })
-
-  test(`accepts DocumentNode with variables`, async () => {
-    const doc = parse(`query GetString($string: String!) {
-      stringWithRequiredArg(string: $string)
-    }`)
-    const result = await g.send(doc as any, { string: 'test' })
-    expect(result).toEqual({ stringWithRequiredArg: 'test' })
-  })
-
-  test(`accepts TypedDocumentNode`, async () => {
-    type Result = { id: string | null }
-    type Variables = {}
-    const doc = Ts.as<Grafaid.Document.Typed.Node<Result, Variables>>(
-      parse(`query { id }`),
-    )
-
-    const result = await g.send(doc)
-    expectTypeOf(result).toEqualTypeOf<Result | null>()
-    expect(result).toEqual({ id: db.id1 })
-  })
-
-  test(`throws when no transport configured`, async () => {
-    const clientWithoutTransport = Graffle.create({ check: { preflight: false } })
-    const doc = parse(`query { id }`)
-
-    await expect(
-      clientWithoutTransport.send(doc as any),
-    ).rejects.toThrow()
   })
 })

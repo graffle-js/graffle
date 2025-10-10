@@ -116,7 +116,7 @@ export type InferTypedFullDocument<$Operations extends object> =
   keyof $Operations extends never
     ? UntypedDocument
     : [keyof $Operations] extends [infer $Key]
-      ? $Key extends string
+      ? $Key extends keyof $Operations
         ? $Operations[$Key] extends OperationMetadata
           ? SingleOperation<$Operations[$Key]>
           : never
