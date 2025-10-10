@@ -62,16 +62,16 @@ export interface ClientBase<$Context extends Context> {
    *
    * @example
    * ```ts
-   * const data = await graffle.gql`{ pokemons { name } }`.send()
+   * const data = await graffle.gql('{ pokemons { name } }').send()
    * ```
    *
    * @example
    * ```ts
-   * const data = await graffle.gql`
+   * const data = await graffle.gql(`
    *   query ($type: PokemonType!) {
    *     pokemons(filter: { type: $type }) { name }
    *   }
-   * `.send({ type: 'electric' })
+   * `).send({ type: 'electric' })
    * ```
    */
   gql: Configuration.Check.Preflight<

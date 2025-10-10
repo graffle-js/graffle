@@ -31,21 +31,21 @@ export interface DocumentController<$Context, $TypedDocument extends Grafaid.Doc
    * @example
    *
    * ```ts
-   * const data = await graffle.gql`{ pokemons { name } }`.send()
+   * const data = await graffle.gql('{ pokemons { name } }').send()
    * ```
    *
    * @example
    * ```ts
-   * const data = await graffle.gql`
+   * const data = await graffle.gql(`
    *   query($type: PokemonType!) {
    *     pokemons(filter: { type: $type }) { name }
    *   }
-   * `.send({ type: `electric` })
+   * `).send({ type: `electric` })
    * ```
    *
    * @example
    * ```ts
-   * const document = graffle.gql`
+   * const document = graffle.gql(`
    *   mutation createPokemon($name: String!, $type: PokemonType!) {
    *     addPokemon(name: $name, type: $type) {
    *      name
@@ -54,7 +54,7 @@ export interface DocumentController<$Context, $TypedDocument extends Grafaid.Doc
    *   query pokemonsType($type: PokemonType!) {
    *     pokemons(filter: { type: $type }) { name }
    *   }
-   * `
+   * `)
    * const data1 = await document.send(`createPokemon`, { name: `Pikabar`, type: `electric` })
    * const data2 = await document.send(`pokemonsType`, { type: `electric` })
    * ```
