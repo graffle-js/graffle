@@ -14,7 +14,7 @@ import { Properties } from '../context/fragments/properties/$.js'
 import { RequestInterceptors } from '../context/fragments/requestInterceptors/$.js'
 import { Scalars } from '../context/fragments/scalars/$.js'
 import { Transports } from '../context/fragments/transports/$.js'
-import { createGqlBuilder } from './methods/gql/GqlBuilder.js'
+import { createDocumentSender } from './methods/gql/DocumentSender.js'
 import { GqlMethod } from './methods/gql/gql.js'
 import { ScalarMethod } from './methods/scalars.js'
 import { TransportMethod } from './methods/transport.js'
@@ -472,7 +472,7 @@ export const createWithContext = <$Context extends Context>(
     gql: ((...args: GqlMethod.Arguments) => {
       const { document: query } = GqlMethod.normalizeArguments(args)
 
-      return createGqlBuilder(async (operationName: string | undefined, variables?: any) => {
+      return createDocumentSender(async (operationName: string | undefined, variables?: any) => {
         if (!context.transports.current) throw new Error(`No transport selected`)
 
         const request = {

@@ -1,13 +1,3 @@
-/**
- * Type-level tests for gql-tada string literal parsing in client.gql()
- *
- * According to the spec, client.gql() should provide full gql-tada inference
- * for generated clients, parsing GraphQL string literals at the type level.
- *
- * @see docs/issues/2025-10-09-gql-tada-integration/DEPRECATED-PRD.md
- * @see docs/issues/2025-10-09-gql-tada-integration/how.md (lines 248-302)
- */
-
 import { Possible } from '#test/schema/possible/client/$.js'
 import { Ts } from '@wollybeard/kit'
 
@@ -18,14 +8,12 @@ const client = Possible.create()
 //
 
 {
-  const result = await client.gql(`
+  const builder = client.gql(`
     query {
       id
     }
-  `).send()
+  `)
 
-  // SPEC: Should infer Promise<{ id: string | null } | null>
-  // ACTUAL: Currently infers Promise<unknown> because gql-tada parsing not working
   Ts.Test.exact<{ id: string | null } | null>()(result)
 }
 
@@ -34,7 +22,7 @@ const client = Possible.create()
 //
 
 {
-  const query = client.gql(`
+  const builder = client.gql(`
     query GetString($string: String!) {
       stringWithRequiredArg(string: $string)
     }
