@@ -16,13 +16,13 @@ const g1 = g0.use(TransportMemory).transport({ schema })
 // const defaultGraffle = Graffle.create({ check: { preflight: false } })
 
 test('default is throws errors', async () => {
-  await expect(g1.gql('').send()).rejects.toThrowErrorMatchingInlineSnapshot(
+  await expect(g1.gql('query { __typename }').$send()).rejects.toThrowErrorMatchingInlineSnapshot(
     `[ContextualAggregateError: One or more errors in the execution result.]`,
   )
 })
 test('can return errors', async () => {
   const g2 = g1.with({ output: { defaults: { errorChannel: 'return' } } })
-  const result = await g2.gql('').send()
+  const result = await g2.gql('query { __typename }').$send()
   expect(result).toMatchInlineSnapshot(`[ContextualAggregateError: One or more errors in the execution result.]`)
 })
 

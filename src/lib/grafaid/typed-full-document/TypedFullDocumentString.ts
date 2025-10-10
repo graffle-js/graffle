@@ -1,5 +1,9 @@
 import type { SomeObjectData, Variables } from '../graphql.js'
 
+/**
+ * Record of operations in a GraphQL document.
+ * Each key is an operation name, each value contains result and variables types.
+ */
 export type Operations = Record<string, OperationMetadata>
 
 /**
@@ -10,34 +14,126 @@ export type OperationMetadata = {
   readonly variables: Variables
 }
 
+// ================================
+// Untyped Document (Plain Strings)
+// ================================
+
 /**
- * A typed GraphQL document string containing one or more named operations.
+ * Represents a plain GraphQL string with no type information.
  *
- * Unlike TypedDocumentString which represents a single operation, this type
- * captures complete type information for all operations in a document via
- * the $Operations object parameter, where keys are operation names.
- *
- * Created by static builders like Graffle.document() and consumed by client.send().
+ * Used when passing raw GraphQL strings to `client.gql()`.
+ * Provides fallback signatures that accept any operation name and variables.
  *
  * @example
- * ```typescript
- * type MyDoc = TypedFullDocumentString<{
- *   getUser: { result: { user: { id: string } }, variables: { id: string } },
- *   updateUser: { result: { updateUser: { id: string } }, variables: { id: string, name: string } }
- * }>
+ * ```ts
+ * // Plain string - gets UntypedDocument
+ * client.gql('query { id }').$send('anyName', { any: 'vars' })
  * ```
  */
-export interface TypedFullDocumentString<
-  $__operations extends object = Operations,
-> // $__operations extends { [_ in keyof $__operations]: OperationMetadata },
-  extends String
-{
-  /**
-   * Phantom type parameter containing operation metadata.
-   * Used purely for type-level computation - never exists at runtime.
-   *
-   * Note: This is required (not optional) to make TypedFullDocumentString
-   * structurally distinct from plain string for overload resolution.
-   */
-  readonly __operations: $__operations
+export interface UntypedDocument extends String {
+  readonly __operations: {} // Empty - no type information available
+  readonly __untyped: true
 }
+
+// ================================
+// Typed Documents
+// ================================
+
+/**
+ * A typed GraphQL document with a single operation.
+ *
+ * The operation is accessible via both `__operations[name]` and `__operation` (shortcut).
+ * Variable requirements determine which variant this resolves to.
+ *
+ * @example
+ * ```ts
+ * // From gql-tada or TypedDocumentNode
+ * const doc: SingleOperation<{ result: { id: string }, variables: {} }> = ...
+ * client.gql(doc).MyOperation() // or .$send()
+ * ```
+ */
+export interface SingleOperation<$Operation extends OperationMetadata> extends String {
+  readonly __operations: { [___name: string]: $Operation }
+  readonly __operation: $Operation // Shortcut to access the single operation
+  readonly __operationCount: 'single'
+}
+
+/**
+ * A typed GraphQL document with multiple operations.
+ *
+ * Each operation must be executed by name using `.$send('operationName', variables)`.
+ * Operation methods are also available via Proxy.
+ *
+ * @example
+ * ```ts
+ * const doc: MultiOperation<{
+ *   GetUser: { result: User, variables: { id: string } },
+ *   ListUsers: { result: User[], variables: {} }
+ * }> = ...
+ *
+ * client.gql(doc).GetUser({ id: '123' })
+ * client.gql(doc).$send('ListUsers')
+ * ```
+ */
+export interface MultiOperation<$Operations extends Operations> extends String {
+  readonly __operations: $Operations
+  readonly __operation: never // Multi-operation docs don't have a single operation
+  readonly __operationCount: 'multi'
+}
+
+// ================================
+// Union Type
+// ================================
+
+/**
+ * Union of all TypedFullDocument variants.
+ *
+ * Plain GraphQL strings (no type info) are also accepted downstream and handled via
+ * conditional checks for `__operations` property.
+ *
+ * - {@link SingleOperation} - Typed documents with one operation
+ * - {@link MultiOperation} - Typed documents with multiple operations
+ * - `string` - Plain GraphQL strings (no type information)
+ */
+export type TypedFullDocumentString =
+  | SingleOperation<OperationMetadata>
+  | MultiOperation<Operations>
+  | string
+
+// ================================
+// Type Inference Helpers
+// ================================
+
+/**
+ * Infer the correct TypedFullDocument variant from an operations object.
+ *
+ * - Empty object `{}` → {@link UntypedDocument}
+ * - Single operation → {@link SingleOperation}
+ * - Multiple operations → {@link MultiOperation}
+ */
+// dprint-ignore
+export type InferTypedFullDocument<$Operations extends object> =
+  keyof $Operations extends never
+    ? UntypedDocument
+    : [keyof $Operations] extends [infer $Key]
+      ? $Key extends string
+        ? $Operations[$Key] extends OperationMetadata
+          ? SingleOperation<$Operations[$Key]>
+          : never
+        : never
+      : MultiOperation<$Operations & Operations>
+
+/**
+ * Check if a document is untyped (plain string).
+ */
+export type IsUntyped<$Doc> = $Doc extends UntypedDocument ? true : false
+
+/**
+ * Check if a document is a single operation.
+ */
+export type IsSingleOperation<$Doc> = $Doc extends SingleOperation<any> ? true : false
+
+/**
+ * Check if a document is multi-operation.
+ */
+export type IsMultiOperation<$Doc> = $Doc extends MultiOperation<any> ? true : false

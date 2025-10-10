@@ -31,8 +31,8 @@ Prior to this implementation, the type system had a validation helper `ValidateS
 
 Non-SDDM documents come from:
 
-- **`TypedFullDocumentString`** (multi-operation documents via `document()`) - lacks `__sddm` branding
-- Manual `createStaticRootType()` usage (non-generated builders)
+- **`TypedFullDocument`** (multi-operation documents via `document()`) - lacks `__sddm` branding
+- Manual `createStaticRootType()` usage (non-gnerated builders)
 - Plain string GraphQL documents
 
 ## Implementation

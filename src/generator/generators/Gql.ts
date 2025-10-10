@@ -53,7 +53,7 @@ export const ModuleGeneratorGql = createModuleGenerator(
        *     getUser: { user: { id: true, name: true } }
        *   }
        * })
-       * // Returns: TypedFullDocumentString with operation metadata
+       * // Returns: TypedFullDocument with operation metadata
        * \`\`\`
        */
       export const gql = createGql<

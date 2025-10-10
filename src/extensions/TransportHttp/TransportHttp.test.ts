@@ -46,7 +46,7 @@ const test = testBase.extend<{
 test(`when envelope is used then response property is present even if relying on schema url default`, async ({ g1, schemas: { pokemon: schema } }) => {
   const service = await serveSchema({ schema })
   const g2 = g1.with({ output: { envelope: true } }).transport({ url: service.url })
-  const result = await g2.gql('pokemons { name }').send()
+  const result = await g2.gql('query { pokemons { name } }').$send()
   await service.stop()
   // @ts-expect-error fixme
   expectTypeOf(result.response).toEqualTypeOf<Response>()
@@ -56,7 +56,7 @@ describe(`methodMode`, () => {
   describe(`default (post)`, () => {
     test(`sends spec compliant post request by default`, async ({ fetch, g1 }) => {
       fetch.mockImplementationOnce(() => Promise.resolve(createGraphQLResponseData({ id: `abc` })))
-      await g1.transport({ url: `https://abc` }).gql('query { id }').send()
+      await g1.transport({ url: `https://abc` }).gql('query { id }').$send()
       const url = fetch.mock.calls[0]?.[0]
       const init = fetch.mock.calls[0]?.[1]
       expect(init?.method).toEqual(`post`)
@@ -68,7 +68,7 @@ describe(`methodMode`, () => {
     test(`can set method mode to get`, async ({ g1, fetch }) => {
       fetch.mockImplementationOnce(() => Promise.resolve(createGraphQLResponse({ data: { user: { name: `foo` } } })))
       const g2 = g1.transport({ url, methodMode: `getReads` })
-      await g2.gql('query foo($id: ID!){user(id:$id){name}}').send(`foo`, { 'id': `QVBJcy5ndXJ1` })
+      await g2.gql('query foo($id: ID!){user(id:$id){name}}').foo({ 'id': `QVBJcy5ndXJ1` })
       const urlArg = fetch.mock.calls[0]?.[0]
       const init = fetch.mock.calls[0]?.[1]
       expect(init?.method).toEqual(`get`)
@@ -81,14 +81,14 @@ describe(`methodMode`, () => {
     test(`if no variables or operationName then search parameters are omitted`, async ({ g1, fetch }) => {
       fetch.mockImplementationOnce(() => Promise.resolve(createGraphQLResponse({ data: { user: { name: `foo` } } })))
       const g2 = g1.transport({ url, methodMode: `getReads` })
-      await g2.gql('query {user{name}}').send()
+      await g2.gql('query {user{name}}').$send()
       const urlArg = fetch.mock.calls[0]?.[0]
       expect(urlArg?.toString()).toMatchInlineSnapshot(`"https://foo.io/api/graphql?query=query+%7Buser%7Bname%7D%7D"`)
     })
     test(`mutation still uses POST`, async ({ g1, fetch }) => {
       fetch.mockImplementationOnce(() => Promise.resolve(createGraphQLResponse({ data: { user: { name: `foo` } } })))
       const g2 = g1.transport({ url, methodMode: `getReads` })
-      await g2.gql('mutation { user { name } }').send()
+      await g2.gql('mutation { user { name } }').$send()
       const urlArg = fetch.mock.calls[0]?.[0]
       const init = fetch.mock.calls[0]?.[1]
       expect(init?.method).toEqual(`post`)
@@ -103,7 +103,7 @@ describe(`configuration`, () => {
     fetch.mockImplementationOnce(() => Promise.resolve(createGraphQLResponse({ data: { id: `abc` } })))
     const g2 = g1.transport({ url, headers: { 'x-foo': `bar` } })
     g2._.transports.configurations.http.headers
-    await g2.gql('query { id }').send()
+    await g2.gql('query { id }').$send()
     const urlArg = fetch.mock.calls[0]?.[0]
     const init = fetch.mock.calls[0]?.[1]
     expect(new Headers(init?.headers).get(`x-foo`)).toEqual(`bar`)
@@ -112,7 +112,7 @@ describe(`configuration`, () => {
   test(`can set raw (requestInit)`, async ({ g1, fetch }) => {
     fetch.mockImplementationOnce(() => Promise.resolve(createGraphQLResponse({ data: { id: `abc` } })))
     const g2 = g1.transport({ url, raw: { headers: { 'x-foo': `bar` } } })
-    await g2.gql('query { id }').send()
+    await g2.gql('query { id }').$send()
     const urlArg = fetch.mock.calls[0]?.[0]
     const init = fetch.mock.calls[0]?.[1]
     expect(new Headers(init?.headers).get(`x-foo`)).toEqual(`bar`)
@@ -123,7 +123,7 @@ describe(`configuration`, () => {
     test(`to constructor`, async ({ g1 }) => {
       const abortController = new AbortController()
       const g2 = g1.transport({ url, raw: { signal: abortController.signal } })
-      const resultPromise = g2.gql('query { id }').send()
+      const resultPromise = g2.gql('query { id }').$send()
       abortController.abort()
       const { caughtError } = await resultPromise.catch((caughtError: unknown) => ({ caughtError })) as any as {
         caughtError: Error
@@ -148,7 +148,7 @@ describe(`relative URLs`, () => {
   test(`can use relative URL path`, async ({ g1, fetch }) => {
     fetch.mockImplementationOnce(() => Promise.resolve(createGraphQLResponse({ data: { id: `abc` } })))
     const g2 = g1.transport({ url: `/api/graphql` })
-    await g2.gql('query { id }').send()
+    await g2.gql('query { id }').$send()
     // For relative URLs, fetch is called with (url, options) instead of (Request)
     const [urlOrRequest, options] = fetch.mock.calls[0] ?? []
     if (typeof urlOrRequest === 'string') {
@@ -165,7 +165,7 @@ describe(`relative URLs`, () => {
   test(`relative URL with GET method mode`, async ({ g1, fetch }) => {
     fetch.mockImplementationOnce(() => Promise.resolve(createGraphQLResponse({ data: { user: { name: `foo` } } })))
     const g2 = g1.transport({ url: `/api/graphql`, methodMode: `getReads` })
-    await g2.gql('query foo($id: ID!){user(id:$id){name}}').send(`foo`, { 'id': `QVBJcy5ndXJ1` })
+    await g2.gql('query foo($id: ID!){user(id:$id){name}}').foo({ 'id': `QVBJcy5ndXJ1` })
     // For relative URLs, fetch is called with (url, options) instead of (Request)
     const [urlOrRequest, options] = fetch.mock.calls[0] ?? []
     if (typeof urlOrRequest === 'string') {
@@ -188,7 +188,7 @@ describe(`relative URLs`, () => {
   test(`relative URL with existing query params`, async ({ g1, fetch }) => {
     fetch.mockImplementationOnce(() => Promise.resolve(createGraphQLResponse({ data: { id: `abc` } })))
     const g2 = g1.transport({ url: `/api/graphql?token=xyz`, methodMode: `getReads` })
-    await g2.gql('query { id }').send()
+    await g2.gql('query { id }').$send()
     // For relative URLs, fetch is called with (url, options) instead of (Request)
     const [urlOrRequest, options] = fetch.mock.calls[0] ?? []
     if (typeof urlOrRequest === 'string') {
@@ -209,7 +209,7 @@ describe(`relative URLs`, () => {
   test(`can still use absolute URL strings`, async ({ g1, fetch }) => {
     fetch.mockImplementationOnce(() => Promise.resolve(createGraphQLResponse({ data: { id: `abc` } })))
     const g2 = g1.transport({ url: `https://api.example.com/graphql` })
-    await g2.gql('query { id }').send()
+    await g2.gql('query { id }').$send()
     const urlArg = fetch.mock.calls[0]?.[0]
     expect(urlArg?.toString()).toEqual(`https://api.example.com/graphql`)
   })
@@ -218,7 +218,7 @@ describe(`relative URLs`, () => {
     fetch.mockImplementationOnce(() => Promise.resolve(createGraphQLResponse({ data: { id: `abc` } })))
     const urlObject = new URL(`https://api.example.com/graphql`)
     const g2 = g1.transport({ url: urlObject })
-    await g2.gql('query { id }').send()
+    await g2.gql('query { id }').$send()
     const urlArg = fetch.mock.calls[0]?.[0]
     expect(urlArg?.toString()).toEqual(`https://api.example.com/graphql`)
   })

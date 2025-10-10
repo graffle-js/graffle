@@ -38,7 +38,7 @@ test(`upload`, async ({ graffle }) => {
     mutation ($blob: Upload!) {
       readTextFile(blob: $blob)
     }
-  `).send({
+  `).$send({
     blob: new Blob([`Hello World`], { type: `text/plain` }) as any,
   })
   expect(data).toMatchInlineSnapshot(`
@@ -53,7 +53,7 @@ test(`client with upload extension making non-upload request`, async ({ graffle 
     query {
       greetings
     }
-  `).send()
+  `).$send()
   expect(data).toEqual({
     greetings: UploadSchema.data.greetings,
   })

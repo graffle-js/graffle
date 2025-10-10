@@ -16,11 +16,11 @@
 
 ---
 
-## Commit 1: Create TypedFullDocumentString type foundation
+## Commit 1: Create TypedFullDocument type foundation
 
 ### What
 
-Create the new `TypedFullDocumentString` type and supporting utilities in `/lib/grafaid/typed-full-document`.
+Create the new `TypedFullDocument` type and supporting utilities in `/lib/grafaid/typed-full-document`.
 
 ### Why
 
@@ -33,11 +33,11 @@ This type represents a full GraphQL document containing multiple operations with
 ```
 /lib/grafaid/typed-full-document/
 ├── $.ts                           # Barrel export
-├── TypedFullDocumentString.ts     # Main type definition
+├── TypedFullDocument.ts     # Main type definition
 └── helpers.ts                     # Type utilities
 ```
 
-**File: `/lib/grafaid/typed-full-document/TypedFullDocumentString.ts`**
+**File: `/lib/grafaid/typed-full-document/TypedFullDocument.ts`**
 
 ````typescript
 import type { SomeObjectData, Variables } from '../graphql.js'
@@ -62,13 +62,13 @@ export type OperationMetadata = {
  *
  * @example
  * ```typescript
- * type MyDoc = TypedFullDocumentString<[
+ * type MyDoc = TypedFullDocument<[
  *   { name: 'getUser', result: { user: { id: string } }, variables: { id: string } },
  *   { name: 'updateUser', result: { updateUser: { id: string } }, variables: { id: string, name: string } }
  * ]>
  * ```
  */
-export interface TypedFullDocumentString<
+export interface TypedFullDocument<
   $Operations extends readonly [OperationMetadata, ...OperationMetadata[]],
 > extends String {
   /**
@@ -84,8 +84,8 @@ export interface TypedFullDocumentString<
 ```typescript
 import type {
   OperationMetadata,
-  TypedFullDocumentString,
-} from './TypedFullDocumentString.js'
+  TypedFullDocument,
+} from './TypedFullDocument.js'
 
 /**
  * Extract a specific operation's metadata from operations tuple by name.
@@ -99,7 +99,7 @@ export type ExtractOperation<
  * Get the result type for a specific operation.
  */
 export type ResultOf<
-  $Doc extends TypedFullDocumentString<any>,
+  $Doc extends TypedFullDocument<any>,
   $Name extends $Doc['__operations'][number]['name'],
 > = ExtractOperation<$Doc['__operations'], $Name>['result']
 
@@ -107,14 +107,14 @@ export type ResultOf<
  * Get the variables type for a specific operation.
  */
 export type VariablesOf<
-  $Doc extends TypedFullDocumentString<any>,
+  $Doc extends TypedFullDocument<any>,
   $Name extends $Doc['__operations'][number]['name'],
 > = ExtractOperation<$Doc['__operations'], $Name>['variables']
 
 /**
- * Check if a TypedFullDocumentString has exactly one operation.
+ * Check if a TypedFullDocument has exactly one operation.
  */
-export type IsSingleOperation<$Doc extends TypedFullDocumentString<any>> =
+export type IsSingleOperation<$Doc extends TypedFullDocument<any>> =
   $Doc['__operations'] extends readonly [any] ? true : false
 ```
 
@@ -122,7 +122,7 @@ export type IsSingleOperation<$Doc extends TypedFullDocumentString<any>> =
 
 ```typescript
 export * from './helpers.js'
-export * from './TypedFullDocumentString.js'
+export * from './TypedFullDocument.js'
 ```
 
 ---
@@ -131,7 +131,7 @@ export * from './TypedFullDocumentString.js'
 
 ### What
 
-Create a new static builder function `document()` in the static builder module that accepts a document object with multiple operations and returns a `TypedFullDocumentString`.
+Create a new static builder function `document()` in the static builder module that accepts a document object with multiple operations and returns a `TypedFullDocument`.
 
 ### Why
 
@@ -144,7 +144,7 @@ This is the static counterpart to `Graffle.query()` and `Graffle.mutation()`, bu
 Add a new exported function alongside `createStaticRootType`:
 
 ````typescript
-import type { TypedFullDocumentString } from '#/lib/grafaid/typed-full-document/$.js'
+import type { TypedFullDocument } from '#/lib/grafaid/typed-full-document/$.js'
 import type { OperationTypeNode } from 'graphql'
 import { Select } from './Select/$.js'
 import { toGraphQLDocument } from './SelectGraphQLMapper/nodes/1_Document.js'
@@ -155,10 +155,10 @@ import { defaults } from './staticBuilderDefaults.js'
  *
  * Unlike createStaticRootType which creates single operations, this function
  * creates full documents that can contain multiple queries and/or mutations.
- * Returns a TypedFullDocumentString that captures type information for all operations.
+ * Returns a TypedFullDocument that captures type information for all operations.
  *
  * @param document - Document object with query and/or mutation operations
- * @returns TypedFullDocumentString representing the complete document
+ * @returns TypedFullDocument representing the complete document
  *
  * @example
  * ```ts
@@ -173,7 +173,7 @@ import { defaults } from './staticBuilderDefaults.js'
  *     updateUser: { updateUser: { id: true, name: true } }
  *   }
  * })
- * // Returns: TypedFullDocumentString with 3 operations
+ * // Returns: TypedFullDocument with 3 operations
  * ```
  */
 export const document = (documentObject: Select.Document.DocumentObject) => {
@@ -184,12 +184,12 @@ export const document = (documentObject: Select.Document.DocumentObject) => {
   const result = toGraphQLDocument(documentNormalized, {
     ...defaults,
     // Note: SDDM and scalars are not needed for static builder
-    // Type safety is provided at compile time via TypedFullDocumentString
+    // Type safety is provided at compile time via TypedFullDocument
   })
 
-  // Print and return as TypedFullDocumentString
+  // Print and return as TypedFullDocument
   // The generator will provide proper operation types in the generated code
-  return print(result.document) as any as TypedFullDocumentString<any>
+  return print(result.document) as any as TypedFullDocument<any>
 }
 ````
 
@@ -202,7 +202,7 @@ The generator will need to create a properly-typed version:
 export const document: {
   <$Doc extends Select.Document.DocumentObject>(
     doc: $Doc,
-  ): TypedFullDocumentString<
+  ): TypedFullDocument<
     // Generator computes this from $Doc
     InferOperationsTuple<$Doc>
   >
@@ -239,13 +239,13 @@ This provides the one-shot API for sending pre-built documents from static build
 **File: `/src/client/methods/send.ts`** (new file)
 
 ````typescript
-import type { TypedFullDocumentString } from '#/lib/grafaid/typed-full-document/$.js'
+import type { TypedFullDocument } from '#/lib/grafaid/typed-full-document/$.js'
 import type { SimplifyNullable } from '#/lib/prelude.js'
 import type { Grafaid } from '#lib/grafaid'
 import type { HandleOutput } from '../handle.js'
 import type { SendArguments } from './gql/send.js'
 
-// Helper to extract operation from TypedFullDocumentString
+// Helper to extract operation from TypedFullDocument
 type ExtractOperationMetadata<
   $Ops extends readonly any[],
   $Name extends string,
@@ -256,7 +256,7 @@ type ExtractOperationMetadata<
  *
  * Supports:
  * - TypedDocumentString/TypedDocumentNode (from codegen)
- * - TypedFullDocumentString (from static builders like Graffle.document())
+ * - TypedFullDocument (from static builders like Graffle.document())
  * - Plain strings (no type safety)
  *
  * @example
@@ -290,8 +290,8 @@ export interface SendMethod<$Context> {
     >
   >
 
-  // TypedFullDocumentString with single operation - no operation name needed
-  <$Doc extends TypedFullDocumentString<readonly [infer $Op]>>(
+  // TypedFullDocument with single operation - no operation name needed
+  <$Doc extends TypedFullDocument<readonly [infer $Op]>>(
     doc: $Doc,
     variables?: $Op extends { variables: infer $V } ? $V : never,
   ): Promise<
@@ -303,9 +303,9 @@ export interface SendMethod<$Context> {
     >
   >
 
-  // TypedFullDocumentString with multiple operations - operation name required
+  // TypedFullDocument with multiple operations - operation name required
   <
-    $Doc extends TypedFullDocumentString<infer $Ops>,
+    $Doc extends TypedFullDocument<infer $Ops>,
     $OpName extends $Ops[number]['name'],
     $Op extends ExtractOperationMetadata<$Ops, $OpName> =
       ExtractOperationMetadata<$Ops, $OpName>,
@@ -450,7 +450,7 @@ We need to verify the integration between static builder and client instance met
 **File: `/src/client/methods/send.test.ts`** (new file)
 
 ```typescript
-import type { TypedFullDocumentString } from '#/lib/grafaid/typed-full-document/$.js'
+import type { TypedFullDocument } from '#/lib/grafaid/typed-full-document/$.js'
 import { Ts } from '@wollybeard/kit'
 import { Test } from '@wollybeard/kit/test'
 import { expect, test } from 'vitest'
@@ -540,12 +540,12 @@ Test.describe('send() with documents')
   })
 
 // Type-level tests
-test('TypedFullDocumentString with single operation - no operation name parameter', () => {
+test('TypedFullDocument with single operation - no operation name parameter', () => {
   declare let _: any
 
   const doc = document({
     query: { foo: { id: true } },
-  }) as any as TypedFullDocumentString<
+  }) as any as TypedFullDocument<
     [{ name: 'foo'; result: { id: string }; variables: {} }]
   >
 
@@ -553,12 +553,12 @@ test('TypedFullDocumentString with single operation - no operation name paramete
   Ts.assert<Promise<{ id: string }>>()(_ as typeof result)
 })
 
-test('TypedFullDocumentString with multiple operations - operation name required', () => {
+test('TypedFullDocument with multiple operations - operation name required', () => {
   declare let _: any
 
   const doc = document({
     query: { foo: { id: true }, bar: { idNonNull: true } },
-  }) as any as TypedFullDocumentString<[
+  }) as any as TypedFullDocument<[
     { name: 'foo'; result: { id: string }; variables: {} },
     { name: 'bar'; result: { idNonNull: string }; variables: {} },
   ]>
@@ -570,12 +570,12 @@ test('TypedFullDocumentString with multiple operations - operation name required
   Ts.assert<Promise<{ idNonNull: string }>>()(_ as typeof result2)
 })
 
-test('TypedFullDocumentString - operation name determines result type', () => {
+test('TypedFullDocument - operation name determines result type', () => {
   declare let _: any
 
   const doc = document({
     query: { foo: { id: true }, bar: { idNonNull: true } },
-  }) as any as TypedFullDocumentString<[
+  }) as any as TypedFullDocument<[
     { name: 'foo'; result: { id: string }; variables: {} },
     {
       name: 'bar'
@@ -803,7 +803,7 @@ const multiOpDoc = Graffle.document({
 })
 ```
 
-Documents built this way return `TypedFullDocumentString` with complete type information for all operations.
+Documents built this way return `TypedFullDocument` with complete type information for all operations.
 ````
 
 **File: `/website/content/guides/methods.md`** (or similar)
@@ -882,7 +882,7 @@ import { document as documentRuntime } from 'graffle'
 
 export const document: <$Doc extends DocumentObject>(
   doc: $Doc,
-) => TypedFullDocumentString<InferOperationsTuple<$Doc>> = documentRuntime
+) => TypedFullDocument<InferOperationsTuple<$Doc>> = documentRuntime
 ```
 
 The `InferOperationsTuple` type would be generated based on the schema to extract operation names, results, and variables from the document object.

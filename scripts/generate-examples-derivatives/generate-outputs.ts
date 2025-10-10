@@ -66,7 +66,7 @@ export const generateOutputs = async (name?: string) => {
   // is resetting, leading to inconsistent outputs
   for (const file of exampleFiles.filtered) {
     // Reset database before each example
-    await graffle.gql('mutation { resetData }').send()
+    await graffle.gql('mutation { resetData }').$send()
 
     const content = await runExample(file.path.full)
 

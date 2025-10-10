@@ -39,7 +39,7 @@ const withGqlDocument: TestCaseWith = [
     const { document } = DocumentBuilderKit.SelectionSetGraphqlMapper.toGraphQL(
       DocumentBuilderKit.Select.Document.createDocumentNormalizedFromQuerySelection(query as any),
     )
-    expect(await possible.scalar(DateScalar).gql(document).send()).toEqual(expectedData)
+    expect(await possible.scalar(DateScalar).gql(document).$send()).toEqual(expectedData)
   },
 ]
 
@@ -51,7 +51,7 @@ const withGqlString: TestCaseWith = [
     const { document } = DocumentBuilderKit.SelectionSetGraphqlMapper.toGraphQL(
       DocumentBuilderKit.Select.Document.normalizeOrThrow({ query: { foo: query as any } }),
     )
-    expect(await possible.scalar(DateScalar).gql(Grafaid.Document.print(document)).send()).toEqual(expectedData)
+    expect(await possible.scalar(DateScalar).gql(Grafaid.Document.print(document)).$send()).toEqual(expectedData)
   },
 ]
 

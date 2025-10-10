@@ -14,10 +14,9 @@ import { Properties } from '../context/fragments/properties/$.js'
 import { RequestInterceptors } from '../context/fragments/requestInterceptors/$.js'
 import { Scalars } from '../context/fragments/scalars/$.js'
 import { Transports } from '../context/fragments/transports/$.js'
+import { createGqlBuilder } from './methods/gql/GqlBuilder.js'
 import { GqlMethod } from './methods/gql/gql.js'
-import { GqlMethodSendMethod } from './methods/gql/send.js'
 import { ScalarMethod } from './methods/scalars.js'
-import { SendMethod } from './methods/send.js'
 import { TransportMethod } from './methods/transport.js'
 import { sendRequest } from './send.js'
 
@@ -51,50 +50,37 @@ export interface ClientBase<$Context extends Context> {
   /**
    * Execute a GraphQL document using GraphQL syntax.
    *
-   * This method accepts a GraphQL document as a string or template literal and returns a document controller
-   * that allows you to send the request with {@link DocumentController.send}.
-   *
-   * For multiple operations in one document, specify the operation name when calling `send()`.
-   * For operations with variables, pass them to `send()`.
-   *
-   * **Immutability**: Returns a new client instance. The original client is not modified.
-   * If the operation results in no effective change, the same instance is returned for performance.
+   * Returns a builder with operation methods. Each operation in the document becomes a method on the builder,
+   * and you can also use the `.$send()` method to execute operations by name.
    *
    * @example
    * ```ts
-   * const data = await graffle.gql('{ pokemons { name } }').send()
+   * // Execute via operation method
+   * const builder = graffle.gql('query getPokemons { pokemons { name } }')
+   * const data = await builder.getPokemons()
    * ```
    *
    * @example
    * ```ts
-   * const data = await graffle.gql(`
-   *   query ($type: PokemonType!) {
+   * // Execute with variables using operation method
+   * const builder = graffle.gql(`
+   *   query getPokemons($type: PokemonType!) {
    *     pokemons(filter: { type: $type }) { name }
    *   }
-   * `).send({ type: 'electric' })
+   * `)
+   * const data = await builder.getPokemons({ type: 'electric' })
+   * ```
+   *
+   * @example
+   * ```ts
+   * // Execute via .$send() method
+   * const data = await builder.$send('getPokemons', { type: 'electric' })
    * ```
    */
   gql: Configuration.Check.Preflight<
     $Context,
     GqlMethod<$Context>
   >
-  /**
-   * Send a GraphQL document directly.
-   *
-   * Accepts documents from static builders (Graffle.document()), codegen (TypedDocumentNode),
-   * or plain strings. Returns the result directly without chaining.
-   *
-   * For single-operation documents, operation name is optional.
-   * For multi-operation documents, operation name is required.
-   *
-   * @example
-   * ```ts
-   * import { Graffle } from './graffle/__.js'
-   * const doc = Graffle.document({ query: { getUser: { user: { id: true } } } })
-   * const result = await graffle.send(doc, { id: '123' })
-   * ```
-   */
-  send: SendMethod<$Context>
   /**
    * Register a custom scalar codec for encoding and decoding GraphQL scalar values.
    *
@@ -486,55 +472,26 @@ export const createWithContext = <$Context extends Context>(
     gql: ((...args: GqlMethod.Arguments) => {
       const { document: query } = GqlMethod.normalizeArguments(args)
 
-      return {
-        send: async (...args: GqlMethodSendMethod.Arguments) => {
-          if (!context.transports.current) throw new Error(`No transport selected`)
+      return createGqlBuilder(async (operationName: string | undefined, variables?: any) => {
+        if (!context.transports.current) throw new Error(`No transport selected`)
 
-          const { operationName, variables } = GqlMethodSendMethod.normalizeArguments(args)
-          const request = {
-            query,
-            variables,
-            operationName,
-          }
-          const operationType = getOperationType(request)
-          if (!operationType) throw new Error(`Could not get operation type`)
+        const request = {
+          query,
+          variables,
+          operationName,
+        }
+        const operationType = getOperationType(request)
+        if (!operationType) throw new Error(`Could not get operation type`)
 
-          const analyzedRequest = {
-            operation: operationType,
-            query,
-            variables,
-            operationName,
-          }
+        const analyzedRequest = {
+          operation: operationType,
+          query,
+          variables,
+          operationName,
+        }
 
-          return sendRequest(context, analyzedRequest)
-        },
-      }
-    }) as any,
-    send: (async (...args: any[]) => {
-      if (!context.transports.current) throw new Error(`No transport selected`)
-
-      const { document, operationName, variables } = SendMethod.normalizeArguments(args)
-
-      // Build the request
-      const request = {
-        query: document,
-        variables,
-        operationName,
-      }
-
-      // Get operation type
-      const operationType = getOperationType(request)
-      if (!operationType) throw new Error(`Could not get operation type`)
-
-      // Build analyzed request
-      const analyzedRequest = {
-        operation: operationType,
-        query: document,
-        variables,
-        operationName,
-      }
-
-      return sendRequest(context, analyzedRequest)
+        return sendRequest(context, analyzedRequest)
+      })
     }) as any,
   }
 

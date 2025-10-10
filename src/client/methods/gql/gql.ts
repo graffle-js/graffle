@@ -1,5 +1,5 @@
 import type { Grafaid } from '#lib/grafaid'
-import { type DocumentController } from './send.js'
+import type { DocumentSender } from './DocumentSender.js'
 
 /**
  * Validates that documents requiring SDDM are only used with SDDM-enabled contexts.
@@ -31,28 +31,28 @@ type ValidateSDDMRequirement<$Document extends Grafaid.Document.Typed.TypedDocum
  * Execute a GraphQL document using GraphQL syntax.
  *
  * Accepts typed GraphQL documents (from gql-tada, codegen, or static builders) and returns
- * a {@link DocumentController} for sending the request.
+ * a {@link DocumentSender} with operation methods.
  *
- * **Immutability**: Returns a new client instance. The original client is not modified.
- * If the operation results in no effective change, the same instance is returned for performance.
+ * The builder provides operation methods (one per operation in the document) that can be called
+ * directly, or you can use the `.$send()` method to execute an operation by name.
  *
  * @example
  * ```ts
  * // GraphQL document string (with gql-tada type inference)
- * const doc = graffle.gql('{ pokemons { name } }')
- * const data = await doc.send()
+ * const builder = graffle.gql('{ pokemons { name } }')
+ * const data = await builder.myQuery()
  * ```
  *
  * @example
  * ```ts
- * // Template literal
- * const data = await graffle.gql({ pokemons { name } }).send()
+ * // Using .$send()
+ * const data = await graffle.gql({ pokemons { name } }).$send('myQuery', { id: '123' })
  * ```
  */
 export interface GqlMethod<$Context> {
   <$Document extends Grafaid.Document.Typed.TypedDocumentLike>(
     document: ValidateSDDMRequirement<$Document, $Context>
-  ): DocumentController<$Context, $Document>
+  ): DocumentSender<$Document, $Context>
 }
 
 export namespace GqlMethod {
@@ -77,7 +77,7 @@ type CallFunction<F, Args extends readonly unknown[]> = F extends (...args: Args
 /**
  * Adapter interface for gql-tada integration.
  *
- * Maps gql-tada's type-level GraphQL string parsing to Graffle's DocumentController.
+ * Maps gql-tada's type-level GraphQL string parsing to Graffle's GqlBuilder.
  * This enables full type inference from GraphQL strings while maintaining Graffle's API.
  *
  * Extends the base GqlMethod interface to add gql-tada string inference while preserving
@@ -85,7 +85,7 @@ type CallFunction<F, Args extends readonly unknown[]> = F extends (...args: Args
  *
  * @remarks
  * Uses gql-tada's initGraphQLTada type to parse GraphQL strings at the type level,
- * extracting Result and Variables types. Returns DocumentController for runtime execution.
+ * extracting Result and Variables types. Returns GqlBuilder for runtime execution.
  *
  * Type-only imports ensure zero runtime overhead.
  */
@@ -94,7 +94,7 @@ export interface GqlMethodWithTada<$Context, $TadaAPI> extends GqlMethod<$Contex
     query: $Query
   ): CallFunction<$TadaAPI, [$Query]> extends infer $Doc
       ? $Doc extends Grafaid.Document.Typed.TypedDocumentLike
-        ? DocumentController<$Context, $Doc>
-        : DocumentController<$Context, Grafaid.Document.Typed.TypedDocumentLike & $Doc>
-      : DocumentController<$Context, Grafaid.Document.Typed.TypedDocumentLike>
+        ? DocumentSender<$Doc, $Context>
+        : DocumentSender<Grafaid.Document.Typed.TypedDocumentLike & $Doc, $Context>
+      : DocumentSender<Grafaid.Document.Typed.TypedDocumentLike, $Context>
 }

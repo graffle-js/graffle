@@ -1,4 +1,4 @@
-import type { OperationMetadata, TypedDocument, TypedFullDocumentString } from 'graffle/client'
+import type { TypedDocument, TypedFullDocument } from 'graffle/client'
 import { createStaticRootType, document as documentBuilder } from 'graffle/extensions/document-builder'
 import type * as $$StaticBuilder from 'graffle/extensions/document-builder'
 import type { InferOperations } from 'graffle/extensions/document-builder'
@@ -563,10 +563,10 @@ export const mutation: MutationBuilder = createStaticRootType(OperationTypeNode.
 /**
  * Create a full GraphQL document with one or more named operations.
  *
- * Unlike `query` and `mutation` which create single-operation documents, this function creates a full document that can contain multiple operations. Returns a `TypedFullDocumentString` that captures type information for all operations.
+ * Unlike `query` and `mutation` which create single-operation documents, this function creates a full document that can contain multiple operations. Returns a `TypedFullDocument` that captures type information for all operations.
  *
  * @param documentObject - Document object with query and/or mutation operations
- * @returns TypedFullDocumentString representing the complete document
+ * @returns TypedFullDocument representing the complete document
  *
  * @example
  * ```ts
@@ -594,7 +594,7 @@ export interface Document {
         { scalars: $$Scalar.$Registry }
       >
     >,
-  ): TypedFullDocumentString<
+  ): TypedFullDocument<
     InferOperations<$Document, $$Schema.Schema, ArgumentsMap.ArgumentsMap, StaticDocumentContext>
   >
 }
