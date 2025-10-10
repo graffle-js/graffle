@@ -77,7 +77,7 @@ type CallFunction<F, Args extends readonly unknown[]> = F extends (...args: Args
 /**
  * Adapter interface for gql-tada integration.
  *
- * Maps gql-tada's type-level GraphQL string parsing to Graffle's GqlBuilder.
+ * Maps gql-tada's type-level GraphQL string parsing to Graffle's DocumentSender.
  * This enables full type inference from GraphQL strings while maintaining Graffle's API.
  *
  * Extends the base GqlMethod interface to add gql-tada string inference while preserving
@@ -85,7 +85,7 @@ type CallFunction<F, Args extends readonly unknown[]> = F extends (...args: Args
  *
  * @remarks
  * Uses gql-tada's initGraphQLTada type to parse GraphQL strings at the type level,
- * extracting Result and Variables types. Returns GqlBuilder for runtime execution.
+ * extracting Result and Variables types. Returns DocumentSender for runtime execution.
  *
  * Type-only imports ensure zero runtime overhead.
  */
