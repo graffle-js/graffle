@@ -1,0 +1,96 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`static document builder > fn({ query: { getUser: { id: true } }, mutation: { updateUser: { id: true } } }) 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  query: {
+    getUser: {
+      id: true
+    }
+  },
+  mutation: {
+    updateUser: {
+      id: true
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+query getUser {
+  id
+}
+
+mutation updateUser {
+  id
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`static document builder > fn({ query: { getUser: { id: true }, getPost: { idNonNull: true } } }) 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  query: {
+    getUser: {
+      id: true
+    },
+    getPost: {
+      idNonNull: true
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+query getUser {
+  id
+}
+
+query getPost {
+  idNonNull
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`static document builder > fn({ query: { getUser: { id: true, idNonNull: true } } }) 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  query: {
+    getUser: {
+      id: true,
+      idNonNull: true
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+query getUser {
+  id
+  idNonNull
+}
+╚══════════════════════════════════════════════════╝"
+`;
+
+exports[`static document builder > fn({ query: { getUserWithArg: { stringWithRequiredArg: { $: { string: [Function: na...) 1`] = `
+"
+╔══════════════════════════════════════════════════╗ GIVEN ARGUMENTS
+{
+  query: {
+    getUserWithArg: {
+      stringWithRequiredArg: {
+        $: {
+          string: [Function: name(name) {
+      return self({
+        ...state,
+        name
+      });
+    }] { name: [Function: name], _: [Object], as: [Function: as], default: [Function: default], required: [Function: required] }
+        }
+      }
+    }
+  }
+}
+╠══════════════════════════════════════════════════╣ THEN RETURNS STRING
+query getUserWithArg($string: String!) {
+  stringWithRequiredArg(string: $string)
+}
+╚══════════════════════════════════════════════════╝"
+`;

@@ -11,9 +11,6 @@ importers:
       '@0no-co/graphql.web':
         specifier: ^1.0.12
         version: 1.0.12(graphql@16.10.0)
-      '@0no-co/graphqlsp':
-        specifier: ^1.15.0
-        version: 1.15.0(graphql@16.10.0)(typescript@5.9.3)
       '@graphql-typed-document-node/core':
         specifier: ^3.2.0
         version: 3.2.0(graphql@16.10.0)
@@ -36,6 +33,9 @@ importers:
         specifier: ^4.40.0
         version: 4.40.0
     devDependencies:
+      '@0no-co/graphqlsp':
+        specifier: ^1.15.0
+        version: 1.15.0(graphql@16.10.0)(typescript@5.9.3)
       '@arethetypeswrong/cli':
         specifier: ^0.17.4
         version: 0.17.4

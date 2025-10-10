@@ -1,4 +1,5 @@
 export { type Client, create } from '#src/client/client.js'
+export { type GqlMethodWithTada } from '#src/client/methods/gql/gql.js'
 export {
   type OperationMetadata,
   type TypedFullDocumentString,

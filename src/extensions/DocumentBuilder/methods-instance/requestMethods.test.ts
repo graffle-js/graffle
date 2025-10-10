@@ -4,7 +4,7 @@ import { test as testBase } from '#test/helpers'
 import { db } from '#test/schema/possible/db.js'
 import { describe, expect, expectTypeOf } from 'vitest'
 import { TransportMemory } from '../../TransportMemory/TransportMemory.js'
-import { Possible } from '../__tests__/fixtures/possible/$.js'
+import { Possible } from '#test/schema/possible/client/$.js'
 
 const createPossible = (schema: Grafaid.Schema.Schema) =>
   Possible

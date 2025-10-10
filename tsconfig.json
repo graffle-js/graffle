@@ -7,8 +7,7 @@
     "plugins": [
       {
         "name": "@0no-co/graphqlsp",
-        "schema": "./tests/_/fixtures/schemas/pokemon/schema.graphql",
-        "templateIsCallExpression": false
+        "schema": "./tests/_/fixtures/schemas/possible/schema.graphql"
       }
     ]
   },

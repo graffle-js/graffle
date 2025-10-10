@@ -69,3 +69,32 @@ export namespace GqlMethod {
     }
   }
 }
+
+// Helper type to extract return type of calling a function with specific arguments
+type CallFunction<F, Args extends readonly unknown[]> = F extends (...args: Args) => infer R ? R : never
+
+// dprint-ignore
+/**
+ * Adapter interface for gql-tada integration.
+ *
+ * Maps gql-tada's type-level GraphQL string parsing to Graffle's DocumentController.
+ * This enables full type inference from GraphQL strings while maintaining Graffle's API.
+ *
+ * Extends the base GqlMethod interface to add gql-tada string inference while preserving
+ * support for typed documents and template literals.
+ *
+ * @remarks
+ * Uses gql-tada's initGraphQLTada type to parse GraphQL strings at the type level,
+ * extracting Result and Variables types. Returns DocumentController for runtime execution.
+ *
+ * Type-only imports ensure zero runtime overhead.
+ */
+export interface GqlMethodWithTada<$Context, $TadaAPI> extends GqlMethod<$Context> {
+  <const $Query extends string>(
+    query: $Query
+  ): CallFunction<$TadaAPI, [$Query]> extends infer $Doc
+      ? $Doc extends Grafaid.Document.Typed.TypedDocumentLike
+        ? DocumentController<$Context, $Doc>
+        : DocumentController<$Context, Grafaid.Document.Typed.TypedDocumentLike & $Doc>
+      : DocumentController<$Context, Grafaid.Document.Typed.TypedDocumentLike>
+}

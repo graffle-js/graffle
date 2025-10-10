@@ -2,7 +2,7 @@ import type { DateScalar } from '#test/fixtures/scalars'
 import { db } from '#test/schema/possible/db.js'
 import { Ts } from '@wollybeard/kit'
 import { test } from 'vitest'
-import type * as SelectionSets from '../../extensions/DocumentBuilder/__tests__/fixtures/possible/modules/selection-sets.js'
+import type * as SelectionSets from '#test/schema/possible/client/modules/selection-sets.js'
 import type { Schema } from '../../types/Schema/$.js'
 
 type Q = SelectionSets.Query

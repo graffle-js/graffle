@@ -6,7 +6,7 @@ import { possibleSchema } from '#test/schema/possible/schema.js'
 import { Ts } from '@wollybeard/kit'
 import { Test } from '@wollybeard/kit/test'
 import { describe, expect, test } from 'vitest'
-import { Possible } from '../../extensions/DocumentBuilder/__tests__/fixtures/possible/$.js'
+import { Possible } from '#test/schema/possible/client/$.js'
 import { TransportMemory } from '../../extensions/TransportMemory/TransportMemory.js'
 const $ = Var.$
 const g = Graffle
@@ -30,7 +30,7 @@ Test
 
 describe('TypedFullDocumentString', () => {
   test('with single operation - no operation name parameter', () => {
-    const doc = Possible.document({ query: { foo: { id: true } } })
+    const doc = Possible.gql({ query: { foo: { id: true } } })
     // Type checking only
     if (false) {
       // @ts-expect-error - Unreachable code for type testing
@@ -40,7 +40,7 @@ describe('TypedFullDocumentString', () => {
   })
 
   test('single operation, optional var -> no name, yes variables optional', async () => {
-    const doc = Possible.document({ query: { foo: { stringWithRequiredArg: { $: { string: $.default('abc') } } } } })
+    const doc = Possible.gql({ query: { foo: { stringWithRequiredArg: { $: { string: $.default('abc') } } } } })
     await g.send(doc)
     await g.send(doc, { string: '' })
 
@@ -54,7 +54,7 @@ describe('TypedFullDocumentString', () => {
   })
 
   test('single operation, required var -> variables parameter is required', async () => {
-    const doc = Possible.document({ query: { foo: { stringWithRequiredArg: { $: { string: $ } } } } })
+    const doc = Possible.gql({ query: { foo: { stringWithRequiredArg: { $: { string: $ } } } } })
 
     // Type checking only - not executed
     if (false) {
@@ -70,7 +70,7 @@ describe('TypedFullDocumentString', () => {
   })
 
   test('multiple operations, no var -> operation name required', async () => {
-    const doc = Possible.document({
+    const doc = Possible.gql({
       query: {
         a: { id: true },
         b: { idNonNull: true },
@@ -95,7 +95,7 @@ describe('TypedFullDocumentString', () => {
   })
 
   test('multiple operations, 1 optional var/1 required var -> name required, var optional/var required', async () => {
-    const doc = Possible.document({
+    const doc = Possible.gql({
       query: {
         a: { stringWithRequiredArg: { $: { string: $ } } },
         b: { stringWithRequiredArg: { $: { string: $.default('') } } },
@@ -128,7 +128,7 @@ describe('TypedFullDocumentString', () => {
   })
 
   test('send() with mixed query/mutation document and variable inference', () => {
-    const doc = Possible.document({
+    const doc = Possible.gql({
       query: {
         a: {
           objectWithArgs: {

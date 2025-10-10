@@ -13,6 +13,8 @@ export interface SomeDocumentOperation {
 export type DocumentObject = {
   query?: Record<string, Select.SelectionSet.AnySelectionSet>
   mutation?: Record<string, Select.SelectionSet.AnySelectionSet>
+  // query?: { [_ in string]: Select.SelectionSet.AnySelectionSet }
+  // mutation?: { [_ in string]: Select.SelectionSet.AnySelectionSet }
 }
 
 export interface SomeDocument {

@@ -58,6 +58,7 @@
   "scripts": {
     "extension:document-builder:test:generate-fixtures": "tsx src/extensions/DocumentBuilder/__tests__/fixtures/generate.ts",
     "extension:schema-errors:test:generate-fixtures": "rm -rf src/extensions/SchemaErrors/__tests__/fixture/graffle && pnpm graffle --project src/extensions/SchemaErrors/__tests__/fixture",
+    "test:generate-schema-clients": "tsx tests/_/fixtures/schemas/generate-clients.ts",
     "graffle": "tsx ./src/cli/index.ts",
     "serve:pokemon": "tsx tests/_/services/pokemonManual.ts",
     "gen:graffle": "pnpm extension:schema-errors:test:generate-fixtures && pnpm extension:document-builder:test:generate-fixtures && pnpm website:gen:graffle",
@@ -102,7 +103,6 @@
   },
   "dependencies": {
     "@0no-co/graphql.web": "^1.0.12",
-    "@0no-co/graphqlsp": "^1.15.0",
     "@graphql-typed-document-node/core": "^3.2.0",
     "@molt/command": "^0.9.0",
     "@wollybeard/kit": "^0.76.2",
@@ -133,6 +133,7 @@
     }
   },
   "devDependencies": {
+    "@0no-co/graphqlsp": "^1.15.0",
     "@arethetypeswrong/cli": "^0.17.4",
     "@dprint/formatter": "^0.4.1",
     "@dprint/typescript": "^0.95.11",
@@ -197,7 +198,10 @@
     "#lib/grafaid": "./build/lib/grafaid/$.js",
     "#lib/md-jsdoc": "./build/lib/md-jsdoc/$.js",
     "#lib/tex": "./build/lib/tex/$.js",
-    "#lib/type-function": "./build/lib/type-function/$.js"
+    "#lib/type-function": "./build/lib/type-function/$.js",
+    "#test/schema/*": "./tests/_/fixtures/schemas/*",
+    "#test/*.js": "./tests/_/*.js",
+    "#test/*": "./tests/_/*"
   },
   "libra": {
     "entities": {

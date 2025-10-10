@@ -1,7 +1,7 @@
 import { expectTypeOf, test } from 'vitest'
-import { MutationOnly } from '../__tests__/fixtures/mutationOnly/$.js'
-import { Possible } from '../__tests__/fixtures/possible/$.js'
-import { QueryOnly } from '../__tests__/fixtures/queryOnly/$.js'
+import { MutationOnly } from '#test/schema/mutation-only/client/$.js'
+import { Possible } from '#test/schema/possible/client/$.js'
+import { QueryOnly } from '#test/schema/query-only/client/$.js'
 
 const g = Possible.create({ check: { preflight: false } })
 

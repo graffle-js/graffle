@@ -4,16 +4,19 @@ Graffle leverages [gql-tada](https://gql-tada.0no.co)'s tooling to generate intr
 
 ## Usage
 
-Graffle provides two complementary APIs for working with gql-tada documents:
+Graffle offers two interfaces for creaeting documents with native GraphQL syntax:
 
-| Feature         | Static API                           | Instance API              |
-| --------------- | ------------------------------------ | ------------------------- |
-| Syntax          | `Graffle.gql()` then `client.send()` | `client.gql().send()`     |
-| Use Case        | Reusable documents                   | One-off queries           |
-| Type Inference  | Full gql-tada inference              | Basic structure inference |
-| Multi-operation | No (use `.document()`)               | No (use `.document()`)    |
+|          | Static                            | Instance                   |
+| -------- | --------------------------------- | -------------------------- |
+| Usage    | `client.send(Graffle.gql('...'))` | `client.gql('...').send()` |
+| Use-Case | Reusable documents                | One-off queries            |
+| Docs     | [todo](...)                       | [todo]()                   |
 
-### Static API
+Read their respective docs to learn more.
+
+// TODO remove this section, it should go in the real docs for this interface
+
+## Static Interface
 
 The generated `Graffle.gql()` function creates typed documents. This is good for
 
@@ -47,7 +50,9 @@ const result = await client.send(GetUserDocument, { id: '123' })
 console.log(result?.user?.name)
 ```
 
-### Instance API
+// TODO remove this section, it should go in the real docs for this interface
+
+### Instance
 
 The `client.gql()` method allows chaining `.send()`. This is good for
 
@@ -75,44 +80,42 @@ const result = await client.gql(`
 console.log(result?.user?.name)
 ```
 
-### TypeScript Configuration (Optional Enhancement)
+### Editor Validation and autocomplete (Optional)
 
-**This is a VALUE ADD** that brings real-time validation, linting, and autocomplete **within your GraphQL strings** as you type in your IDE. The GraphQLSP plugin will automatically check your GraphQL syntax, validate against your schema, and catch errors before runtime.
+You can make your editor validate and autocomplete GraphQL native documents by using the GraphQLSP plugin. Graffle CLI will check your configuration and provide helpful setup instructions if it is not correctly configured. To disable this check, set `lint.missingGraphqlSP: false` in your `graffle.config.ts`. The steps are:
 
-The Graffle generator will check your configuration and provide helpful setup instructions if GraphQLSP is not configured. To disable this check, set `lint.missingGraphqlSP: false` in your `graffle.config.ts`.
+1. Install the GraphQL LSP plugin:
 
-First, install the GraphQL LSP plugin:
+   ```sh
+   npm add -D @0no-co/graphqlsp
+   ```
 
-```bash
-npm install -D @0no-co/graphqlsp
-```
+2. Configure the GraphQLSP TypeScript plugin in your `tsconfig.json`.
 
-Then configure the GraphQLSP TypeScript plugin in your `tsconfig.json`:
+   ```json
+   {
+     "compilerOptions": {
+       "plugins": [
+         {
+           "name": "@0no-co/graphqlsp",
+           "schema": "./path/to/your/schema/as/sdl/schema.graphql"
+         }
+       ]
+     }
+   }
+   ```
 
-```json
-{
-  "compilerOptions": {
-    "plugins": [
-      {
-        "name": "@0no-co/graphqlsp",
-        "schema": "./graffle/schema.graphql"
-      }
-    ]
-  }
-}
-```
+3. (optional) As you can see you must point to your schema as an SDL file. If you don't already have that, Graffle can generate one for you:
 
-Note: The GraphQLSP plugin requires your schema in SDL format. If you don't already have an SDL file as your schema source, Graffle can generate one for you:
+   ```ts
+   // graffle.config.ts
+   export default {
+     schema: '...', // Your schema source (URL, file, etc.)
+     outputSDL: true, // Graffle will generate an SDL file
+   }
+   ```
 
-```typescript
-// graffle.config.ts
-export default {
-  schema: '...', // Your schema source (URL, file, etc.)
-  outputSDL: true, // Graffle will generate an SDL file
-}
-```
-
-**Future Enhancement:** Auto-configuration of GraphQLSP in `tsconfig.json` is planned. See [#1389](https://github.com/graffle-js/graffle/issues/1389) for details.
+Note: We want Graffle to support configuring this for you, see [#1389](https://github.com/graffle-js/graffle/issues/1389).
 
 ## Limitations
 
@@ -180,13 +183,9 @@ const userData = await client.send(doc).run('GetUser', { id: '123' })
 const postsData = await client.send(doc).run('GetPosts')
 ```
 
-## Appendix
-
-### How It Works
+## Architecture
 
 Graffle uses gql-tada's format to generate a `tada.ts` module with introspection types. This module exports types that describe your GraphQL schema in a format that gql-tada understands.
-
-#### Generated Files
 
 ```
 graffle/
@@ -195,15 +194,7 @@ graffle/
 │   └── ...
 ```
 
-#### The tada.ts Module
-
 The generated `tada.ts` file contains:
 
 - `introspection_types` - Type definitions for all GraphQL types in your schema
 - `introspection` - The main introspection type used by gql-tada
-
-## Learn More
-
-- [gql-tada Documentation](https://gql-tada.0no.co)
-- [Graffle Documentation](https://graffle.dev)
-- [Example Project](../examples/gql-tada-example/)
