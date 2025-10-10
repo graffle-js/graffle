@@ -5,7 +5,7 @@ import { rmSync } from 'node:fs'
 import { join } from 'node:path'
 
 // Schemas that have custom scalars and need NoCustomScalars variants
-const schemasWithCustomScalars = Obj.keys(Obj.pick(TestSchemas, ['possible', 'pokemon']))
+const schemasWithCustomScalars = Obj.keysStrict(Obj.pick(TestSchemas, ['possible', 'pokemon']))
 
 for (const schemaName of Obj.keysStrict(TestSchemas)) {
   const schema = TestSchemas[schemaName]

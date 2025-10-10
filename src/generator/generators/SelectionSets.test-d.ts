@@ -1,14 +1,11 @@
-import type { DateScalar } from '#test/fixtures/scalars'
+import type { Possible } from '#test/schema/possible/client/$.js'
+import type { PossibleNoCustomScalars } from '#test/schema/possible/clientNoCustomScalars/$.js'
 import { db } from '#test/schema/possible/db.js'
 import { Ts } from '@wollybeard/kit'
 import { test } from 'vitest'
-import type * as SelectionSets from '#test/schema/possible/client/modules/selection-sets.js'
-import type { Schema } from '../../types/Schema/$.js'
 
-type Q = SelectionSets.Query
-type QWithDate = SelectionSets.Query<{
-  scalars: Schema.Scalar.Registry.AddScalar<Schema.Scalar.Registry.Empty, typeof DateScalar>
-}>
+type Q = PossibleNoCustomScalars.SelectionSets.Query
+type QWithDate = Possible.SelectionSets.Query
 
 // dprint-ignore
 test(`Query`, () => {

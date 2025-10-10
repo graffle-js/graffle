@@ -4,10 +4,15 @@ import type { DateScalar } from '#test/fixtures/scalars'
 import type { db } from '#test/schema/possible/db.js'
 import { Ts } from '@wollybeard/kit'
 import type { Possible } from '#test/schema/possible/client/$.js'
+import type { PossibleNoCustomScalars } from '#test/schema/possible/clientNoCustomScalars/$.js'
 import type { InferResult } from './$.js'
 
 type $<$SelectionSet extends Possible.SelectionSets.Query> = RequestResult.SimplifyWithEmptyContext<
   InferResult.OperationQuery<$SelectionSet, Possible.$.Schema>
+>
+
+type $NoScalars<$SelectionSet extends PossibleNoCustomScalars.SelectionSets.Query> = RequestResult.SimplifyWithEmptyContext<
+  InferResult.OperationQuery<$SelectionSet, PossibleNoCustomScalars.$.Schema>
 >
 
 type $Registry = Registry.AddScalar<Registry.Empty, typeof DateScalar>
@@ -35,7 +40,7 @@ type _1 = Ts.Test.Cases<
   Ts.Test.exact<$<{ idNonNull: boolean }>                                                                                              , { idNonNull?: string }>,
   Ts.Test.exact<$<{ id: true; string: false }>                                                                                         , { id: null | string }>,
   Ts.Test.exact<$<{ id: true; string: undefined }>                                                                                     , { id: null | string }>,
-  Ts.Test.exact<$<{ date: true }>                                                                                                      , { date: null | string }>,
+  Ts.Test.exact<$NoScalars<{ date: true }>                                                                                             , { date: null | string }>,
   // TODO: should this be using simplify to all equal?
   Ts.Test.bid<$WithDate<{ date: true }>                                                                                      , { date: null | Date }>,
   Ts.Test.exact<$<{ listIntNonNull: true }>                                                                                            , { listIntNonNull: number[] }>,
