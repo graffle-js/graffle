@@ -25,7 +25,7 @@ const provider = new NodeTracerProvider({
 provider.register()
 
 const graffle = Graffle.create().use(OpenTelemetry())
-const data = await graffle.gql`query { pokemons { name } }`.send()
+const data = await graffle.gql('query { pokemons { name } }').send()
 console.log(data)
 ```
 <!-- dprint-ignore-end -->
@@ -42,14 +42,14 @@ console.log(data)
     }
   },
   instrumentationScope: { name: 'graffle', version: undefined, schemaUrl: undefined },
-  traceId: '385ee8f92cc3d7471e636615cfb6b5fa',
-  parentId: 'f389e546b720db8e',
+  traceId: '00ffc4550d7948123235107f1775d050',
+  parentId: '2ec60d2c049790e9',
   traceState: undefined,
   name: 'encode',
-  id: 'c1c0ee20db167daa',
+  id: '86df8747479295ac',
   kind: 0,
-  timestamp: 1759776426594000,
-  duration: 660.209,
+  timestamp: 1760104812157000,
+  duration: 596.041,
   attributes: {},
   status: { code: 0 },
   events: [],
@@ -69,14 +69,14 @@ console.log(data)
     }
   },
   instrumentationScope: { name: 'graffle', version: undefined, schemaUrl: undefined },
-  traceId: '385ee8f92cc3d7471e636615cfb6b5fa',
-  parentId: 'f389e546b720db8e',
+  traceId: '00ffc4550d7948123235107f1775d050',
+  parentId: '2ec60d2c049790e9',
   traceState: undefined,
   name: 'pack',
-  id: '716050d76e920b89',
+  id: 'f6c8e86fdb5f7cd4',
   kind: 0,
-  timestamp: 1759776426596000,
-  duration: 726.875,
+  timestamp: 1760104812158000,
+  duration: 648.584,
   attributes: {},
   status: { code: 0 },
   events: [],
@@ -96,14 +96,14 @@ console.log(data)
     }
   },
   instrumentationScope: { name: 'graffle', version: undefined, schemaUrl: undefined },
-  traceId: '385ee8f92cc3d7471e636615cfb6b5fa',
-  parentId: 'f389e546b720db8e',
+  traceId: '00ffc4550d7948123235107f1775d050',
+  parentId: '2ec60d2c049790e9',
   traceState: undefined,
   name: 'exchange',
-  id: '9589871499dfacc5',
+  id: 'db577fed06be8a0d',
   kind: 0,
-  timestamp: 1759776426597000,
-  duration: 16383.834,
+  timestamp: 1760104812159000,
+  duration: 15066.5,
   attributes: {},
   status: { code: 0 },
   events: [],
@@ -123,14 +123,14 @@ console.log(data)
     }
   },
   instrumentationScope: { name: 'graffle', version: undefined, schemaUrl: undefined },
-  traceId: '385ee8f92cc3d7471e636615cfb6b5fa',
-  parentId: 'f389e546b720db8e',
+  traceId: '00ffc4550d7948123235107f1775d050',
+  parentId: '2ec60d2c049790e9',
   traceState: undefined,
   name: 'unpack',
-  id: '81ba211beb8b67e7',
+  id: '10f27b9a92c57109',
   kind: 0,
-  timestamp: 1759776426613000,
-  duration: 800.792,
+  timestamp: 1760104812174000,
+  duration: 703.833,
   attributes: {},
   status: { code: 0 },
   events: [],
@@ -150,14 +150,14 @@ console.log(data)
     }
   },
   instrumentationScope: { name: 'graffle', version: undefined, schemaUrl: undefined },
-  traceId: '385ee8f92cc3d7471e636615cfb6b5fa',
-  parentId: 'f389e546b720db8e',
+  traceId: '00ffc4550d7948123235107f1775d050',
+  parentId: '2ec60d2c049790e9',
   traceState: undefined,
   name: 'decode',
-  id: '46cd02594921c7c8',
+  id: '5b6d65b257e2e73c',
   kind: 0,
-  timestamp: 1759776426614000,
-  duration: 364.166,
+  timestamp: 1760104812175000,
+  duration: 300.458,
   attributes: {},
   status: { code: 0 },
   events: [],
@@ -177,14 +177,14 @@ console.log(data)
     }
   },
   instrumentationScope: { name: 'graffle', version: undefined, schemaUrl: undefined },
-  traceId: '385ee8f92cc3d7471e636615cfb6b5fa',
+  traceId: '00ffc4550d7948123235107f1775d050',
   parentId: undefined,
   traceState: undefined,
   name: 'request',
-  id: 'f389e546b720db8e',
+  id: '2ec60d2c049790e9',
   kind: 0,
-  timestamp: 1759776426594000,
-  duration: 20857.042,
+  timestamp: 1760104812156000,
+  duration: 18962.167,
   attributes: {},
   status: { code: 0 },
   events: [],
@@ -201,8 +201,7 @@ console.log(data)
     { name: 'Squirtle' },
     { name: 'Bulbasaur' },
     { name: 'Caterpie' },
-    { name: 'Weedle' },
-    { name: 'Mew' }
+    { name: 'Weedle' }
   ]
 }
 ```

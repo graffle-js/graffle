@@ -32,14 +32,14 @@ const graffle = Graffle
     })
   })
 
-const result = await graffle.gql`
+const result = await graffle.gql(`
     query pokemons {
       pokemons { name }
     }
     query trainers {
       trainers { name }
     }
-  `.send(`pokemons`)
+  `).send(`pokemons`)
 
 console.log(result)
 ```

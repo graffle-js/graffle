@@ -29,4 +29,4 @@ const graffle = Graffle
     return exchange()
   })
 
-await graffle.gql`{ pokemons { name } }`.send()
+await graffle.gql('{ pokemons { name } }').send()

@@ -13,13 +13,13 @@ import { Graffle } from 'graffle'
 
 const graffle = Graffle.create().transport({ url: `http://localhost:3000/graphql` })
 
-const data = await graffle.gql`
+const data = await graffle.gql(`
   {
     pokemons {
       name
     }
   }
-`.send()
+`).send()
 
 console.log(data)
 ```
@@ -34,8 +34,7 @@ console.log(data)
     { name: 'Squirtle' },
     { name: 'Bulbasaur' },
     { name: 'Caterpie' },
-    { name: 'Weedle' },
-    { name: 'Mew' }
+    { name: 'Weedle' }
   ]
 }
 ```

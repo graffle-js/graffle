@@ -1,9 +1,4 @@
 import type { Grafaid } from '#lib/grafaid'
-import {
-  isTemplateStringArguments,
-  joinTemplateStringArrayAndArgs,
-  type TemplateStringsArguments,
-} from '#src/lib/template-string.js'
 import { type DocumentController } from './send.js'
 
 /**
@@ -35,15 +30,15 @@ type ValidateSDDMRequirement<$Document extends Grafaid.Document.Typed.TypedDocum
 /**
  * Execute a GraphQL document using GraphQL syntax.
  *
- * This interface defines the method signatures for accepting GraphQL documents as strings
- * or template literals. Returns a {@link DocumentController} for sending the request.
+ * Accepts typed GraphQL documents (from gql-tada, codegen, or static builders) and returns
+ * a {@link DocumentController} for sending the request.
  *
  * **Immutability**: Returns a new client instance. The original client is not modified.
  * If the operation results in no effective change, the same instance is returned for performance.
  *
  * @example
  * ```ts
- * // String document
+ * // GraphQL document string (with gql-tada type inference)
  * const doc = graffle.gql('{ pokemons { name } }')
  * const data = await doc.send()
  * ```
@@ -51,21 +46,26 @@ type ValidateSDDMRequirement<$Document extends Grafaid.Document.Typed.TypedDocum
  * @example
  * ```ts
  * // Template literal
- * const data = await graffle.gql`{ pokemons { name } }`.send()
+ * const data = await graffle.gql({ pokemons { name } }).send()
  * ```
  */
 export interface GqlMethod<$Context> {
-    <$Document extends Grafaid.Document.Typed.TypedDocumentLike>(document: ValidateSDDMRequirement<$Document, $Context>): DocumentController<$Context, $Document>
-    <$Document extends Grafaid.Document.Typed.TypedDocumentLike>(parts: TemplateStringsArray, ...args: unknown[]): DocumentController<$Context, $Document>
-  }
+  <$Document extends Grafaid.Document.Typed.TypedDocumentLike>(
+    document: ValidateSDDMRequirement<$Document, $Context>
+  ): DocumentController<$Context, $Document>
+}
 
 export namespace GqlMethod {
-  export type Arguments = [Grafaid.Document.Typed.TypedDocumentLike] | TemplateStringsArguments
+  /**
+   * Arguments accepted by the instance gql method.
+   *
+   * Only accepts TypedDocumentLike (no document builder objects at instance level).
+   */
+  export type Arguments = [document: Grafaid.Document.Typed.TypedDocumentLike]
 
   export const normalizeArguments = (args: Arguments) => {
-    const document = isTemplateStringArguments(args) ? joinTemplateStringArrayAndArgs(args) : args[0]
     return {
-      document,
+      document: args[0],
     }
   }
 }

@@ -121,11 +121,11 @@ const handleRequest = async (request: Request) => {
     },
   })
 
-  const data = await requestScopedGraffle.gql`
+  const data = await requestScopedGraffle.gql(`
     {
       account
     }
-  `.send()
+  `).send()
 
   console.log(data)
 }

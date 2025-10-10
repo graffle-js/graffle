@@ -1,13 +1,13 @@
 import type { Grafaid } from '#lib/grafaid'
 import { DateScalar } from '#test/fixtures/scalars'
 import { test as testBase } from '#test/helpers'
+import { PossibleNoCustomScalars } from '#test/schema/possible/clientNoCustomScalars/$.js'
 import { db } from '#test/schema/possible/db.js'
 import { describe, expect, expectTypeOf } from 'vitest'
 import { TransportMemory } from '../../TransportMemory/TransportMemory.js'
-import { Possible } from '#test/schema/possible/client/$.js'
 
 const createPossible = (schema: Grafaid.Schema.Schema) =>
-  Possible
+  PossibleNoCustomScalars
     .create({ check: { preflight: false } })
     .use(TransportMemory)
     .transport(`memory`, { schema })

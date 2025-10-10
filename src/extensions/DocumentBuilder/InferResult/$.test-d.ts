@@ -1,19 +1,20 @@
 import type { RequestResult } from '#src/types/RequestResult/$.js'
 import type { Registry } from '#src/types/Schema/nodes/Scalar/helpers.js'
 import type { DateScalar } from '#test/fixtures/scalars'
-import type { db } from '#test/schema/possible/db.js'
-import { Ts } from '@wollybeard/kit'
 import type { Possible } from '#test/schema/possible/client/$.js'
 import type { PossibleNoCustomScalars } from '#test/schema/possible/clientNoCustomScalars/$.js'
+import type { db } from '#test/schema/possible/db.js'
+import { Ts } from '@wollybeard/kit'
 import type { InferResult } from './$.js'
 
 type $<$SelectionSet extends Possible.SelectionSets.Query> = RequestResult.SimplifyWithEmptyContext<
   InferResult.OperationQuery<$SelectionSet, Possible.$.Schema>
 >
 
-type $NoScalars<$SelectionSet extends PossibleNoCustomScalars.SelectionSets.Query> = RequestResult.SimplifyWithEmptyContext<
-  InferResult.OperationQuery<$SelectionSet, PossibleNoCustomScalars.$.Schema>
->
+type $NoScalars<$SelectionSet extends PossibleNoCustomScalars.SelectionSets.Query> =
+  RequestResult.SimplifyWithEmptyContext<
+    InferResult.OperationQuery<$SelectionSet, PossibleNoCustomScalars.$.Schema>
+  >
 
 type $Registry = Registry.AddScalar<Registry.Empty, typeof DateScalar>
 type $Context = { scalars: $Registry; variablesEnabled: false }

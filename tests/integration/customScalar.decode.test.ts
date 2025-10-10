@@ -1,7 +1,7 @@
+import { Possible } from '#test/schema/possible/client/$.js'
 import { db } from '#test/schema/possible/db.js'
 import { describe, expect } from 'vitest'
 import { DocumentBuilderKit } from '../../src/extensions/DocumentBuilder/$.js'
-import { Possible } from '#test/schema/possible/client/$.js'
 import { Grafaid } from '../../src/lib/grafaid/$.js'
 import type { Schema } from '../../src/types/Schema/$.js'
 import { DateScalar } from '../_/fixtures/scalars.js'

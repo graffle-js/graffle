@@ -520,6 +520,18 @@ console.log(data)
             type: { kind: 'OBJECT', name: 'Pokemon', ofType: null },
             isDeprecated: false,
             deprecationReason: null
+          },
+          {
+            name: 'resetData',
+            description: null,
+            args: [],
+            type: {
+              kind: 'NON_NULL',
+              name: null,
+              ofType: { kind: 'SCALAR', name: 'Boolean', ofType: null }
+            },
+            isDeprecated: false,
+            deprecationReason: null
           }
         ],
         inputFields: null,

@@ -1,9 +1,9 @@
 import type { Grafaid } from '#lib/grafaid'
+import { Possible } from '#test/schema/possible/client/$.js'
 import { Ts } from '@wollybeard/kit'
 import { Test } from '@wollybeard/kit/test'
 import { OperationTypeNode } from 'graphql'
 import { expect, test } from 'vitest'
-import { Possible } from '#test/schema/possible/client/$.js'
 import { Var } from '../extensions/DocumentBuilder/var/$.js'
 import { createStaticRootType } from './rootField.js'
 

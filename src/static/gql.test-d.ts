@@ -4,9 +4,9 @@ import { PossibleNoCustomScalars } from '#test/schema/possible/clientNoCustomSca
 import { Ts } from '@wollybeard/kit'
 import type { TadaDocumentNode } from 'gql.tada'
 
-//
-// String input (gql-tada)
-//
+// ==================================================================================================
+//                                        String input (gql-tada)
+// ==================================================================================================
 
 Ts.Test.exact<TadaDocumentNode<{ date: Date | null }, {}, void>>()(Possible.gql(`query { date }`))
 Ts.Test.exact<TadaDocumentNode<{ date: unknown }, {}, void>>()(PossibleNoCustomScalars.gql(`query { date }`))
@@ -14,9 +14,9 @@ Ts.Test.exact<TadaDocumentNode<{ date: unknown }, {}, void>>()(PossibleNoCustomS
 // @ts-expect-error
 Possible.gql({ foo: true })
 
-//
-// Object input (document builder)
-//
+// ==================================================================================================
+//                                    Object input (document builder)
+// ==================================================================================================
 
 Ts.Test.exact<
   TypedFullDocument.TypedFullDocumentString<{

@@ -34,11 +34,11 @@ const test = testBase.extend<Context>({
 })
 
 test(`upload`, async ({ graffle }) => {
-  const data = await graffle.gql`
+  const data = await graffle.gql(`
     mutation ($blob: Upload!) {
       readTextFile(blob: $blob)
     }
-  `.send({
+  `).send({
     blob: new Blob([`Hello World`], { type: `text/plain` }) as any,
   })
   expect(data).toMatchInlineSnapshot(`
@@ -49,11 +49,11 @@ test(`upload`, async ({ graffle }) => {
 })
 
 test(`client with upload extension making non-upload request`, async ({ graffle }) => {
-  const data = await graffle.gql`
+  const data = await graffle.gql(`
     query {
       greetings
     }
-  `.send()
+  `).send()
   expect(data).toEqual({
     greetings: UploadSchema.data.greetings,
   })

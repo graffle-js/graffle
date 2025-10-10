@@ -385,6 +385,45 @@ export interface gql<
   >
 }
 
+/**
+ * Namespace for static gql function types and utilities.
+ *
+ * Provides the canonical input type definition for static document building.
+ * For instance gql (which accepts pre-built typed documents), see GqlMethod.Arguments.
+ */
+export namespace Gql {
+  /**
+   * Arguments accepted by the static gql function.
+   *
+   * Can be either:
+   * - A GraphQL document string (for gql-tada template literals)
+   * - A document builder object with optional configuration
+   */
+  export type Arguments =
+    | [graphqlDocument: string]
+    | [objectDocument: Select.Document.DocumentObject, options?: Options]
+
+  export const normalizeArguments = (args: Arguments) => {
+    const [first, second] = args
+
+    // String GraphQL document (gql-tada)
+    if (typeof first === 'string') {
+      return {
+        type: 'graphql' as const,
+        document: first as string,
+        options: undefined,
+      }
+    }
+
+    // Document builder object
+    return {
+      type: 'object' as const,
+      document: first as Select.Document.DocumentObject,
+      options: second,
+    }
+  }
+}
+
 export const createGql = <
   $Introspection extends AbstractSetupSchema['introspection'],
   $Schema extends Schema,
@@ -393,22 +432,22 @@ export const createGql = <
 >(config: {
   sddm: $ArgumentsMap
 }): gql<$Introspection, $Schema, $DocumentObjectConstraint, $ArgumentsMap> => {
-  return ((...args: [string] | [Select.Document.DocumentObject, Options?]) => {
-    const [input, options] = args
+  return ((...args: Gql.Arguments) => {
+    const normalized = Gql.normalizeArguments(args)
 
-    if (typeof input === 'string') {
-      // For string inputs, we just need to parse the GraphQL string
-      // Type inference is handled by the gql-tada types at compile time
-      return input as any
+    if (normalized.type === 'graphql') {
+      // For string inputs (gql-tada template literals), return as-is
+      // Type inference is handled by gql-tada types at compile time
+      return normalized.document as any
     }
 
     // Normalize the document object into internal representation
-    const documentNormalized = Select.Document.normalizeOrThrow(input)
+    const documentNormalized = Select.Document.normalizeOrThrow(normalized.document)
 
     // Convert to GraphQL document
     const result = toGraphQLDocument(documentNormalized, {
       ...defaults,
-      ...options,
+      ...normalized.options,
       sddm: config.sddm,
     })
 

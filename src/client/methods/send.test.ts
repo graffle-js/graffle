@@ -1,12 +1,12 @@
 /* oxlint-disable no-constant-condition */
 import { Graffle } from '#graffle'
 import { Var } from '#graffle/client'
+import { Possible } from '#test/schema/possible/client/$.js'
 import { db } from '#test/schema/possible/db.js'
 import { possibleSchema } from '#test/schema/possible/schema.js'
 import { Ts } from '@wollybeard/kit'
 import { Test } from '@wollybeard/kit/test'
 import { describe, expect, test } from 'vitest'
-import { Possible } from '#test/schema/possible/client/$.js'
 import { TransportMemory } from '../../extensions/TransportMemory/TransportMemory.js'
 const $ = Var.$
 const g = Graffle

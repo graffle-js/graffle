@@ -32,14 +32,14 @@ const graffle = Graffle
   .create()
   .transport({ url: 'https://countries.trevorblades.com/graphql' })
 
-const data = await graffle.gql`
+const data = await graffle.gql(`
   {
     countries {
       name
       emoji
     }
   }
-`.send()
+`).send()
 ```
 
 ## Learn More

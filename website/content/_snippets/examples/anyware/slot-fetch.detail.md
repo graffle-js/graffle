@@ -26,13 +26,13 @@ const graffle = Graffle
     })
   })
 
-const result = await graffle.gql`
+const result = await graffle.gql(`
   query {
     trainers {
       name
     }
   }
-`.send()
+`).send()
 
 console.log(result)
 ```

@@ -34,10 +34,9 @@ console.log(result)
 
 <!-- dprint-ignore-start -->
 ```txt
-/some/path/to/runPipeline.ts:XX
-          return new ContextualError(message, {
-                 ^
-
+file:/some/path/to/runPipeline.js:XX
+                    return new ContextualError(message, {
+                           ^
 
 ContextualError: There was an error in the interceptor "anonymous" (use named functions to improve this error message) while running hook "exchange".
     at runPipeline (/some/path/to/runPipeline.ts:XX:XX)
