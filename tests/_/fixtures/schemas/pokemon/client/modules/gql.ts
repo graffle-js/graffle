@@ -24,7 +24,7 @@ import type * as $$SelectionSets from './selection-sets.js'
  *     getUser: { user: { id: true, name: true } }
  *   }
  * })
- * // Returns: TypedFullDocumentString with operation metadata
+ * // Returns: TypedFullDocument with operation metadata
  * ```
  */
 export const gql = createGql<

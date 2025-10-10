@@ -95,7 +95,7 @@ export interface MultiOperation<$Operations extends Operations> extends String {
  * - {@link MultiOperation} - Typed documents with multiple operations
  * - `string` - Plain GraphQL strings (no type information)
  */
-export type TypedFullDocumentString =
+export type TypedFullDocument =
   | SingleOperation<OperationMetadata>
   | MultiOperation<Operations>
   | string

@@ -38,7 +38,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
     code(`import { OperationTypeNode } from 'graphql'`)
     code(codeImportNamed(config, { names: { schemaDrivenDataMap: 'sddm' }, from: './schema-driven-data-map' }))
     code(
-      `import type { TypedDocument, TypedFullDocumentString, OperationMetadata } from '${config.paths.imports.grafflePackage.client}'`,
+      `import type { TypedDocument, TypedFullDocument, OperationMetadata } from '${config.paths.imports.grafflePackage.client}'`,
     )
     code(codeImportAll(config, { as: 'SelectionSets', from: './selection-sets', type: true }))
     code(codeImportAll(config, { as: '$$Scalar', from: './scalar', type: true }))

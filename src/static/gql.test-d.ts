@@ -19,7 +19,7 @@ Possible.gql({ foo: true })
 // ==================================================================================================
 
 Ts.Test.exact<
-  TypedFullDocument.TypedFullDocumentString<{
+  TypedFullDocument.TypedFullDocument<{
     myQuery: {
       result: { date: Date | null }
       variables: {}
@@ -28,7 +28,7 @@ Ts.Test.exact<
 >()(Possible.gql({ query: { myQuery: { date: true } } }))
 
 Ts.Test.exact<
-  TypedFullDocument.TypedFullDocumentString<{
+  TypedFullDocument.TypedFullDocument<{
     myQuery: {
       result: { date: string | null }
       variables: {}

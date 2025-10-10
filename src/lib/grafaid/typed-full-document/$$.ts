@@ -1,1 +1,1 @@
-export * from './TypedFullDocumentString.js'
+export * from './typed-full-document.js'

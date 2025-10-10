@@ -344,7 +344,7 @@ export type InferOperations<
  *     getUser: { user: { id: true, name: true } }
  *   }
  * })
- * // Returns: TypedFullDocumentString with operation metadata
+ * // Returns: TypedFullDocument with operation metadata
  * ```
  */
 /**
@@ -451,7 +451,7 @@ export const createGql = <
       sddm: config.sddm,
     })
 
-    // Print and return as TypedFullDocumentString
+    // Print and return as TypedFullDocument
     return print(result.document) as any
   }) as any
 }
