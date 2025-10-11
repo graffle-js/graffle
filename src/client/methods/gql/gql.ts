@@ -1,4 +1,12 @@
 import type { Grafaid } from '#lib/grafaid'
+import type { TypeFunction } from '#lib/type-function'
+import type { Context } from '#src/context/$.js'
+import type { TypedFullDocument } from '#src/lib/grafaid/typed-full-document/$.js'
+import type { InferOperations } from '#src/static/gql.js'
+import type { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
+import type { Schema } from '#src/types/Schema/$.js'
+import type { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
+import type { Simplify } from 'type-fest'
 import type { DocumentSender } from './DocumentSender.js'
 
 /**
@@ -26,12 +34,38 @@ type ValidateSDDMRequirement<$Document extends Grafaid.Document.Typed.TypedDocum
       : `❌ This document requires SDDM. Configure client with schema.map`
     : $Document
 
+/**
+ * Extract schema and arguments map from context for document object inference.
+ */
+// dprint-ignore
+export type GetSchemaInfo<$Context> =
+  $Context extends {
+    configuration: {
+      schema: {
+        current: {
+          name: infer $Name extends string
+          map: infer $Map
+        }
+      }
+    }
+  }
+    ? $Name extends keyof GraffleGlobal.Clients
+      ? {
+          schema: GraffleGlobal.Clients[$Name]['schema']
+          map: $Map
+        }
+      : never
+    : never
+
 // dprint-ignore
 /**
- * Execute a GraphQL document using GraphQL syntax.
+ * Execute a GraphQL document using GraphQL syntax or document builder.
  *
- * Accepts typed GraphQL documents (from gql-tada, codegen, or static builders) and returns
- * a {@link DocumentSender} with operation methods.
+ * Accepts:
+ * - Typed GraphQL documents (from gql-tada, codegen, or static builders)
+ * - Inline document builder objects
+ *
+ * Returns a {@link DocumentSender} with operation methods.
  *
  * The builder provides operation methods (one per operation in the document) that can be called
  * directly, or you can use the `.$send()` method to execute an operation by name.
@@ -45,11 +79,46 @@ type ValidateSDDMRequirement<$Document extends Grafaid.Document.Typed.TypedDocum
  *
  * @example
  * ```ts
- * // Using .$send()
- * const data = await graffle.gql({ pokemons { name } }).$send('myQuery', { id: '123' })
+ * // Inline document object
+ * const data = await graffle.gql({ query: { myQuery: { id: true } } }).$send()
  * ```
+ *
+ * @remarks
+ * TODO: Currently relies on $Document's default $DefaultSelectionContext parameter.
+ * This works for statically-defined scalars but may not support runtime-added scalars
+ * via `.use({ scalars: ... })`. If dynamic scalar context becomes a requirement,
+ * revisit with HKT approach:
+ * - Create SelectionSets TypeFunction that accepts context parameter
+ * - Use TypeFunction.Call to apply runtime context to SelectionSets
+ * - Extract $Document from result with applied context
  */
-export interface GqlMethod<$Context> {
+// dprint-ignore
+export interface GqlMethod<$Context extends Context.Context> {
+  // Overload 1: Inline document builder object (must come first to match before TypedDocumentLike)
+  // @ts-expect-error
+  <$Document extends GlobalRegistry.ForContext<$Context>['selectionSets']['$Document']>(
+    document: $Document
+  ): DocumentSender<
+    TypedFullDocument.FromObject<
+      InferOperations<
+        $Document,
+        GlobalRegistry.ForContext<$Context>['schema'],
+        // @ts-expect-error
+        GlobalRegistry.ForContext<$Context>['argumentsMap'],
+            {
+              typeHookRequestResultDataTypes: $Context extends { typeHookRequestResultDataTypes: infer $Types }
+                ? $Types
+                : never
+          scalars: $Context extends { scalars: { current: { registry: infer $Registry } } }
+            ? $Registry
+            : never
+        }
+      >
+    >,
+    $Context
+  >
+
+  // Overload 2: TypedDocumentLike (gql-tada, TypedDocumentNode, etc.)
   <$Document extends Grafaid.Document.Typed.TypedDocumentLike>(
     document: ValidateSDDMRequirement<$Document, $Context>
   ): DocumentSender<$Document, $Context>
@@ -59,13 +128,25 @@ export namespace GqlMethod {
   /**
    * Arguments accepted by the instance gql method.
    *
-   * Only accepts TypedDocumentLike (no document builder objects at instance level).
+   * Can be either:
+   * - TypedDocumentLike (gql-tada, TypedDocumentNode, etc.)
+   * - Document builder object
    */
-  export type Arguments = [document: Grafaid.Document.Typed.TypedDocumentLike]
+  export type Arguments =
+    | [document: Grafaid.Document.Typed.TypedDocumentLike]
+    | [documentObject: object]
 
   export const normalizeArguments = (args: Arguments) => {
+    const first = args[0]
+
+    // TypedDocumentLike documents are strings or have specific properties
+    const isTypedDocumentLike = typeof first === 'string'
+      || 'definitions' in first // DocumentNode
+      || '__meta__' in first // TadaDocumentNode
+
     return {
-      document: args[0],
+      type: isTypedDocumentLike ? 'typedDocument' as const : 'object' as const,
+      document: first,
     }
   }
 }
@@ -89,7 +170,8 @@ type CallFunction<F, Args extends readonly unknown[]> = F extends (...args: Args
  *
  * Type-only imports ensure zero runtime overhead.
  */
-export interface GqlMethodWithTada<$Context, $TadaAPI> extends GqlMethod<$Context> {
+export interface GqlMethodWithTada<$Context extends Context.Context, $TadaAPI> extends GqlMethod<$Context> {
+  // Inline gql-tada strings
   <const $Query extends string>(
     query: $Query
   ): CallFunction<$TadaAPI, [$Query]> extends infer $Doc
@@ -97,4 +179,28 @@ export interface GqlMethodWithTada<$Context, $TadaAPI> extends GqlMethod<$Contex
         ? DocumentSender<$Doc, $Context>
         : DocumentSender<Grafaid.Document.Typed.TypedDocumentLike & $Doc, $Context>
       : DocumentSender<Grafaid.Document.Typed.TypedDocumentLike, $Context>
+
+  // Inline document builder objects (inherited from GqlMethod but must be explicit for overload resolution)
+  <const $Document extends object>(
+    documentObject: $Document extends Grafaid.Document.Typed.TypedDocumentLike ? never : $Document
+  ): GetSchemaInfo<$Context> extends { schema: infer $Schema extends Schema; map: infer $Map extends SchemaDrivenDataMap }
+    ? DocumentSender<
+        TypedFullDocument.FromObject<
+            InferOperations<
+              $Document,
+              $Schema,
+              $Map,
+              {
+                typeHookRequestResultDataTypes: $Context extends { typeHookRequestResultDataTypes: infer $Types }
+                  ? $Types
+                  : never
+                scalars: $Context extends { scalars: { current: { registry: infer $Registry } } }
+                  ? $Registry
+                  : never
+              }
+          >
+        >,
+        $Context
+      >
+    : never
 }

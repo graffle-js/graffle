@@ -11,6 +11,10 @@ interface ZeroClient extends Client {
     Document: TypeFunction
     MethodsSelect: {}
   }
+  selectionSets: {
+    $Document: any
+  }
+  argumentsMap: any
   defaultSchemaUrl: null
 }
 
@@ -36,6 +40,10 @@ export interface Client<$Extensions extends Extensions = Extensions> {
     Document: TypeFunction
     MethodsSelect: {}
   }
+  selectionSets: {
+    $Document: any
+  }
+  argumentsMap: any
   /**
    * If the code was generated with introspection, the URL used is taken as the default schema URL.
    */
@@ -102,3 +110,25 @@ export type GetSchemaOrDefault<$Name extends ClientNames | undefined> =
     $Name extends ClientNames
       ? GetSchema<$Name>
       : SchemaDefault
+
+/**
+ * Extract generated client types from the global registry for a given context.
+ *
+ * Provides convenient access to the client's generated schema, argumentsMap, and selectionSets
+ * based on the context's configured schema name.
+ *
+ * @example
+ * ```ts
+ * type MyGenerated = GlobalRegistry.ForContext<MyContext>
+ * // MyGenerated: {
+ * //   schema: ...,
+ * //   argumentsMap: ...,
+ * //   selectionSets: { $Document: ... }
+ * // }
+ * ```
+ */
+// dprint-ignore
+export type ForContext<$Context> =
+  $Context extends { configuration: { schema: { current: { name: infer $Name } } } }
+    ? GetOrDefault<$Name & (ClientNames | undefined)>
+    : never

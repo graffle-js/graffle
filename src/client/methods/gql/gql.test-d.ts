@@ -56,6 +56,11 @@ Ts.Test.exact<R1>()(await client.gql(singleNoVars).$send('myQuery'))
 Ts.Test.exact<R1>()(await client.gql(singleNoVars).$send())
 Ts.Test.exact<R1>()(await client.gql(singleNoVars).myQuery())
 Ts.Test.exact<R1>()(await client.gql(singleNoVarsTada).$send())
+// Inline tada (plain string)
+Ts.Test.exact<R1>()(await client.gql(`query myQuery { id }`).$send())
+
+// Inline object
+Ts.Test.exact<R1>()(await client.gql({ query: { myQuery: { id: true } } }).$send())
 // @ts-expect-error - invalid operation name
 client.gql(singleNoVars).bad()
 // @ts-expect-error - invalid operation name
@@ -84,6 +89,16 @@ Ts.Test.exact<R2>()(await client.gql(singleRequiredVars).$send('getById', { id: 
 Ts.Test.exact<R2>()(await client.gql(singleRequiredVars).$send({ id: '' }))
 Ts.Test.exact<R2>()(await client.gql(singleRequiredVars).getById({ id: '' }))
 Ts.Test.exact<R2Tada>()(await client.gql(singleRequiredVarsTada).$send({ id: '' }))
+// Inline tada (plain string)
+Ts.Test.exact<R2Tada>()(
+  await client.gql(`query getById($id: ID!) { interfaceWithArgs(id: $id) { id } }`).$send({ id: '' }),
+)
+// Inline object
+Ts.Test.exact<R2>()(
+  await client.gql({ query: { getById: { interfaceWithArgs: { $: { id: $.required() }, id: true } } } }).$send({
+    id: '',
+  }),
+)
 // @ts-expect-error - invalid operation name
 client.gql(singleRequiredVars).$send('bad')
 // @ts-expect-error - missing required variable 'id'
@@ -116,6 +131,20 @@ Ts.Test.exact<R3>()(await client.gql(singleOptionalVars).search({ string: 'hello
 Ts.Test.exact<R3>()(await client.gql(singleOptionalVarsTada).$send())
 Ts.Test.exact<R3>()(await client.gql(singleOptionalVarsTada).$send({}))
 Ts.Test.exact<R3>()(await client.gql(singleOptionalVarsTada).$send({ string: 'hello' }))
+// Inline tada (plain string)
+Ts.Test.exact<R3>()(await client.gql(`query search($string: String) { stringWithArgs(string: $string) }`).$send())
+Ts.Test.exact<R3>()(
+  await client.gql(`query search($string: String) { stringWithArgs(string: $string) }`).$send({ string: 'hello' }),
+)
+// Inline object
+Ts.Test.exact<R3>()(
+  await client.gql({ query: { search: { stringWithArgs: { $: { string: $ }, string: true } } } }).$send(),
+)
+Ts.Test.exact<R3>()(
+  await client.gql({ query: { search: { stringWithArgs: { $: { string: $ }, string: true } } } }).$send({
+    string: 'hello',
+  }),
+)
 // @ts-expect-error - invalid operation name
 client.gql(singleOptionalVars).$send('bad')
 // @ts-expect-error - wrong type for variable 'string'
@@ -135,6 +164,15 @@ Ts.Test.exact<R4>()(await client.gql(multiNoVars).getUser())
 Ts.Test.exact<R5>()(await client.gql(multiNoVars).addId())
 // Tada only supports first operation in multi-op documents (known limitation)
 Ts.Test.exact<R4>()(await client.gql(multiNoVarsTada).$send())
+// Inline tada (plain string) - only first operation supported
+Ts.Test.exact<R4>()(await client.gql(`query getUser { id } mutation addId { id }`).$send())
+// Inline object
+Ts.Test.exact<R4>()(
+  await client.gql({ query: { getUser: { id: true } }, mutation: { addId: { id: true } } }).$send('getUser'),
+)
+Ts.Test.exact<R5>()(
+  await client.gql({ query: { getUser: { id: true } }, mutation: { addId: { id: true } } }).$send('addId'),
+)
 // @ts-expect-error - invalid operation name
 client.gql(multiNoVars).bad()
 // @ts-expect-error - invalid operation name
@@ -168,6 +206,29 @@ Ts.Test.exact<R6a>()(await client.gql(multiRequiredVars).getById({ id: 'user-123
 Ts.Test.exact<R6b>()(await client.gql(multiRequiredVars).setId())
 // Tada only supports first operation in multi-op documents (known limitation)
 Ts.Test.exact<R6aTada>()(await client.gql(multiRequiredVarsTada).$send({ id: 'user-123' }))
+// Inline tada (plain string) - only first operation supported
+Ts.Test.exact<R6aTada>()(
+  await client
+    .gql(`query getById($id: ID!) { interfaceWithArgs(id: $id) { id } } mutation setId { idNonNull }`)
+    .$send({ id: 'user-123' }),
+)
+// Inline object
+Ts.Test.exact<R6a>()(
+  await client
+    .gql({
+      query: { getById: { interfaceWithArgs: { $: { id: $.required() }, id: true } } },
+      mutation: { setId: { idNonNull: true } },
+    })
+    .$send('getById', { id: 'user-123' }),
+)
+Ts.Test.exact<R6b>()(
+  await client
+    .gql({
+      query: { getById: { interfaceWithArgs: { $: { id: $.required() }, id: true } } },
+      mutation: { setId: { idNonNull: true } },
+    })
+    .$send('setId'),
+)
 // @ts-expect-error - invalid operation name
 client.gql(multiRequiredVars).$send('bad')
 // @ts-expect-error - missing required variable 'id'
