@@ -68,7 +68,7 @@ describe(`methodMode`, () => {
     test(`can set method mode to get`, async ({ g1, fetch }) => {
       fetch.mockImplementationOnce(() => Promise.resolve(createGraphQLResponse({ data: { user: { name: `foo` } } })))
       const g2 = g1.transport({ url, methodMode: `getReads` })
-      await g2.gql('query foo($id: ID!){user(id:$id){name}}').foo({ 'id': `QVBJcy5ndXJ1` })
+      await g2.gql('query foo($id: ID!){user(id:$id){name}}').$send('foo', { 'id': `QVBJcy5ndXJ1` })
       const urlArg = fetch.mock.calls[0]?.[0]
       const init = fetch.mock.calls[0]?.[1]
       expect(init?.method).toEqual(`get`)
@@ -165,7 +165,7 @@ describe(`relative URLs`, () => {
   test(`relative URL with GET method mode`, async ({ g1, fetch }) => {
     fetch.mockImplementationOnce(() => Promise.resolve(createGraphQLResponse({ data: { user: { name: `foo` } } })))
     const g2 = g1.transport({ url: `/api/graphql`, methodMode: `getReads` })
-    await g2.gql('query foo($id: ID!){user(id:$id){name}}').foo({ 'id': `QVBJcy5ndXJ1` })
+    await g2.gql('query foo($id: ID!){user(id:$id){name}}').$send('foo', { 'id': `QVBJcy5ndXJ1` })
     // For relative URLs, fetch is called with (url, options) instead of (Request)
     const [urlOrRequest, options] = fetch.mock.calls[0] ?? []
     if (typeof urlOrRequest === 'string') {

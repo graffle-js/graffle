@@ -368,7 +368,7 @@ export interface gql<
   <$Document extends $DocumentObjectConstraint>(
     documentObject: $Document,
     options?: Options,
-  ): TypedFullDocument.InferTypedFullDocument<
+  ): TypedFullDocument.FromObject<
     Simplify<
       InferOperations<
         $Document,
