@@ -32,14 +32,31 @@ const graffle = Graffle
   .create()
   .transport({ url: 'https://countries.trevorblades.com/graphql' })
 
-const data = await graffle.gql(`
-  {
+const data = graffle.gql(`
+  query getCountries {
     countries {
       name
+      capital
       emoji
+      currency
     }
   }
-`).$send()
+
+  query getContinents {
+    continents {
+      name
+      code
+    }
+  }
+
+  query getLanguage {
+    language(code: "en") {
+      name
+      native
+    }
+  }
+`)
+  .getCountries()
 ```
 
 ## Learn More
