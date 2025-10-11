@@ -8,7 +8,7 @@
 
 **Key insight**: This feature is about **static builders**, not instance builders.
 
-- `Graffle.document()` - NEW static builder function (like `Graffle.query`, `Graffle.mutation`)
+- `Graffle.gql()` - NEW static builder function (like `Graffle.query`, `Graffle.mutation`)
 - `client.send()` - NEW instance method to send static builder documents
 - `client.document()` - UNCHANGED instance builder (from DocumentBuilder extension)
 
@@ -24,7 +24,7 @@ Create the new `TypedFullDocument` type and supporting utilities in `/lib/grafai
 
 ### Why
 
-This type represents a full GraphQL document containing multiple operations with complete type information. It's the return type of the new `Graffle.document()` static builder and the input type for `client.send()`.
+This type represents a full GraphQL document containing multiple operations with complete type information. It's the return type of the new `Graffle.gql()` static builder and the input type for `client.send()`.
 
 ### How
 
@@ -58,7 +58,7 @@ export type OperationMetadata = {
  * captures complete type information for all operations in a document via
  * the $Operations tuple parameter.
  *
- * Created by static builders like Graffle.document() and consumed by client.send().
+ * Created by static builders like Graffle.gql() and consumed by client.send().
  *
  * @example
  * ```typescript
@@ -127,7 +127,7 @@ export * from './TypedFullDocument.js'
 
 ---
 
-## Commit 2: Add Graffle.document() static builder function
+## Commit 2: Add Graffle.gql() static builder function
 
 ### What
 
@@ -256,7 +256,7 @@ type ExtractOperationMetadata<
  *
  * Supports:
  * - TypedDocumentString/TypedDocumentNode (from codegen)
- * - TypedFullDocument (from static builders like Graffle.document())
+ * - TypedFullDocument (from static builders like Graffle.gql())
  * - Plain strings (no type safety)
  *
  * @example
@@ -269,7 +269,7 @@ type ExtractOperationMetadata<
  * ```ts
  * // Static builder document
  * import { Graffle } from './graffle/__.js'
- * const doc = Graffle.document({
+ * const doc = Graffle.gql({
  *   query: { getUser: { user: { id: true } } }
  * })
  * const user = await client.send(doc, { id: '123' })
@@ -367,7 +367,7 @@ export interface ClientBase<$Context extends Context> {
   /**
    * Send a GraphQL document directly.
    *
-   * Accepts documents from static builders (Graffle.document()), codegen (TypedDocumentNode),
+   * Accepts documents from static builders (Graffle.gql()), codegen (TypedDocumentNode),
    * or plain strings. Returns the result directly without chaining.
    *
    * For single-operation documents, operation name is optional.
@@ -376,7 +376,7 @@ export interface ClientBase<$Context extends Context> {
    * @example
    * ```ts
    * import { Graffle } from './graffle/__.js'
-   * const doc = Graffle.document({ query: { getUser: { user: { id: true } } } })
+   * const doc = Graffle.gql({ query: { getUser: { user: { id: true } } } })
    * const result = await graffle.send(doc, { id: '123' })
    * ```
    */
@@ -439,7 +439,7 @@ export const create = <$Context extends Context = ContextEmpty>(
 
 ### What
 
-Create tests verifying that `client.send()` works correctly with documents from the new `Graffle.document()` static builder, including both runtime behavior and type-level correctness.
+Create tests verifying that `client.send()` works correctly with documents from the new `Graffle.gql()` static builder, including both runtime behavior and type-level correctness.
 
 ### Why
 
@@ -607,7 +607,7 @@ test('plain string - no type safety', () => {
 
 ### What
 
-Update the static builder example to demonstrate the new `Graffle.document()` function and `client.send()` method.
+Update the static builder example to demonstrate the new `Graffle.gql()` function and `client.send()` method.
 
 ### Why
 
@@ -629,7 +629,7 @@ Build a complete document with multiple named queries and send them:
 
 */
 
-const multiOpDoc = Graffle.document({
+const multiOpDoc = Graffle.gql({
   query: {
     // First operation: get all pokemons
     allPokemons: {
@@ -676,7 +676,7 @@ When document has only one operation, no operation name needed:
 
 */
 
-const singleOpDoc = Graffle.document({
+const singleOpDoc = Graffle.gql({
   query: {
     getTrainers: {
       trainers: {
@@ -702,7 +702,7 @@ Combine queries and mutations in a single document:
 
 */
 
-const mixedDoc = Graffle.document({
+const mixedDoc = Graffle.gql({
   query: {
     getPokemon: {
       pokemonByName: {
@@ -753,11 +753,11 @@ show(newPokemon)
 
 ### What
 
-Add documentation for the new `.send()` method and `Graffle.document()` static builder to the website.
+Add documentation for the new `.send()` method and `Graffle.gql()` static builder to the website.
 
 ### Why
 
-Users need to discover and understand how to use the new one-shot `.send()` API and the `Graffle.document()` static builder for building full documents.
+Users need to discover and understand how to use the new one-shot `.send()` API and the `Graffle.gql()` static builder for building full documents.
 
 ### How
 
@@ -768,13 +768,13 @@ Add a new section documenting the static `document()` builder:
 ````markdown
 ## Building Full Documents
 
-The `Graffle.document()` static builder allows you to create documents with multiple named operations:
+The `Graffle.gql()` static builder allows you to create documents with multiple named operations:
 
 ```ts
 import { Graffle } from './graffle/__.js'
 
 // Single operation
-const getUserDoc = Graffle.document({
+const getUserDoc = Graffle.gql({
   query: {
     getUser: {
       user: {
@@ -786,7 +786,7 @@ const getUserDoc = Graffle.document({
 })
 
 // Multiple operations
-const multiOpDoc = Graffle.document({
+const multiOpDoc = Graffle.gql({
   query: {
     getUser: {
       user: { id: true, name: true },
@@ -823,14 +823,14 @@ const client = Graffle.create({
 })
 
 // From static builder - single operation
-const doc = Graffle.document({
+const doc = Graffle.gql({
   query: { getUser: { user: { id: true, name: true } } },
 })
 const user = await client.send(doc, { id: '123' })
 //    ^? { user: { id: string, name: string } }
 
 // From static builder - multiple operations (operation name required)
-const multiDoc = Graffle.document({
+const multiDoc = Graffle.gql({
   query: {
     getUser: { user: { id: true } },
     getPosts: { posts: { title: true } },
@@ -864,7 +864,7 @@ Both approaches are supported. Use `.send()` when you have a pre-built document 
 
 Add example files demonstrating:
 
-1. Building documents with `Graffle.document()`
+1. Building documents with `Graffle.gql()`
 2. Executing with `.send()`
 3. Multiple operations with operation name selection
 
@@ -892,12 +892,12 @@ The `InferOperationsTuple` type would be generated based on the schema to extrac
 Unlike my previous plan, this approach makes **zero breaking changes**:
 
 - Instance builder `client.document().run()` continues to work
-- We're only ADDING new functionality: `Graffle.document()` static builder and `client.send()`
+- We're only ADDING new functionality: `Graffle.gql()` static builder and `client.send()`
 
 ### Architecture Separation
 
 Clear separation of concerns:
 
-- **Static builders** (`Graffle.document()`, `Graffle.query()`, `Graffle.mutation()`) - Build-time document construction
+- **Static builders** (`Graffle.gql()`, `Graffle.query()`, `Graffle.mutation()`) - Build-time document construction
 - **Instance builder** (`client.document()`) - Runtime document construction with `.run()`
 - **Send method** (`client.send()`) - Universal document executor

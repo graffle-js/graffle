@@ -169,7 +169,7 @@ Build a complete document with multiple named queries and send them:
 
 */
 
-const multiOpDoc = Graffle.document({
+const multiOpDoc = Graffle.gql({
   query: {
     // First operation: get all pokemons
     allPokemons: {
@@ -211,7 +211,7 @@ When document has only one operation, no operation name needed:
 
 */
 
-const singleOpDoc = Graffle.document({
+const singleOpDoc = Graffle.gql({
   query: {
     getTrainers: {
       trainers: {
@@ -237,7 +237,7 @@ Combine queries and mutations in a single document:
 
 */
 
-const mixedDoc = Graffle.document({
+const mixedDoc = Graffle.gql({
   query: {
     getPokemon: {
       pokemonByName: {
