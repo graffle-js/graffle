@@ -1,17 +1,21 @@
-import type { SomeObjectData, Variables } from '../graphql.js'
-
 /**
  * Record of operations in a GraphQL document.
  * Each key is an operation name, each value contains result and variables types.
  */
-export type Operations = Record<string, OperationMetadata>
+export type Operations = Record<string, Operation>
 
-/**
- * Metadata for a single operation within a full document.
- */
-export type OperationMetadata = {
-  readonly result: SomeObjectData
-  readonly variables: Variables
+export type OperationResult = object
+export type OperationName = string | undefined
+export type OperationVariables = object
+
+export interface Operation<
+  $Name extends OperationName = OperationName,
+  $Result extends OperationResult = OperationResult,
+  $Variables extends OperationVariables = OperationVariables,
+> {
+  name: $Name
+  result: $Result
+  variables: $Variables
 }
 
 // ================================
@@ -52,8 +56,8 @@ export interface UntypedDocument extends String {
  * client.gql(doc).MyOperation() // or .$send()
  * ```
  */
-export interface SingleOperation<$Operation extends OperationMetadata> extends String {
-  readonly __operations: { [___name: string]: $Operation }
+export interface SingleOperation<$Operation extends Operation> extends String {
+  readonly __operations: Record<$Operation['name'] & string, $Operation>
   readonly __operation: $Operation // Shortcut to access the single operation
   readonly __operationCount: 'single'
 }
@@ -93,12 +97,10 @@ export interface MultiOperation<$Operations extends Operations> extends String {
  *
  * - {@link SingleOperation} - Typed documents with one operation
  * - {@link MultiOperation} - Typed documents with multiple operations
- * - `string` - Plain GraphQL strings (no type information)
  */
 export type TypedFullDocument =
-  | SingleOperation<OperationMetadata>
+  | SingleOperation<Operation>
   | MultiOperation<Operations>
-  | string
 
 // ================================
 // Type Inference Helpers
@@ -108,10 +110,9 @@ export type TypedFullDocument =
  * Convert a union type to an intersection type.
  * Used internally for union detection.
  */
-type UnionToIntersection<$Union> =
-  ($Union extends any ? (x: $Union) => void : never) extends (x: infer $Intersection) => void
-    ? $Intersection
-    : never
+type UnionToIntersection<$Union> = ($Union extends any ? (x: $Union) => void : never) extends
+  (x: infer $Intersection) => void ? $Intersection
+  : never
 
 /**
  * Check if a type is a union (has multiple members).
@@ -145,7 +146,7 @@ export type FromObject<$Operations extends object> =
           ? MultiOperation<$Operations>
           : never
         : $IsUnionResult extends false
-          ? $Operations[keyof $Operations] extends OperationMetadata
+          ? $Operations[keyof $Operations] extends Operation
             ? SingleOperation<$Operations[keyof $Operations]>
             : never
           : never

@@ -283,12 +283,14 @@ type InferOperationsFromQuery<
   $ArgumentsMap extends SchemaDrivenDataMap.SchemaDrivenDataMapWithQuery,
   $Context
 > = {
-  [K in keyof $Query as $Query[K] extends object ? K : never]:
-    $Query[K] extends object
-      ? {
-          result:    RequestResult.Simplify<$Context, DocumentBuilderKit.InferResult.OperationQuery<$Query[K], $Schema>>
-          variables: RequestResult.Simplify<$Context, DocumentBuilderKit.Var.InferFromQuery<$Query[K], $ArgumentsMap>>
-        }
+  [k_operationName in keyof $Query & string as $Query[k_operationName] extends object ? k_operationName : never]:
+    $Query[k_operationName] extends object
+      ?
+      TypedFullDocument.Operation<
+        k_operationName,
+        RequestResult.Simplify<$Context, DocumentBuilderKit.InferResult.OperationQuery<$Query[k_operationName], $Schema>>,
+        RequestResult.Simplify<$Context, DocumentBuilderKit.Var.InferFromQuery<$Query[k_operationName], $ArgumentsMap>>
+      >
       : never
 }
 
@@ -299,12 +301,14 @@ type InferOperationsFromMutation<
   $ArgumentsMap extends SchemaDrivenDataMap.SchemaDrivenDataMapWithMutation,
   $Context
 > = {
-  [K in keyof $Mutation as $Mutation[K] extends object ? K : never]:
-    $Mutation[K] extends object
-      ? {
-          result:    RequestResult.Simplify<$Context, DocumentBuilderKit.InferResult.OperationMutation<$Mutation[K], $Schema>>
-          variables: RequestResult.Simplify<$Context, DocumentBuilderKit.Var.InferFromMutation<$Mutation[K], $ArgumentsMap>>
-        }
+  [k_operationName in keyof $Mutation & string as $Mutation[k_operationName] extends object ? k_operationName : never]:
+    $Mutation[k_operationName] extends object
+      ?
+      TypedFullDocument.Operation<
+        k_operationName,
+        RequestResult.Simplify<$Context, DocumentBuilderKit.InferResult.OperationMutation<$Mutation[k_operationName], $Schema>>,
+        RequestResult.Simplify<$Context, DocumentBuilderKit.Var.InferFromMutation<$Mutation[k_operationName], $ArgumentsMap>>
+      >
       : never
 }
 

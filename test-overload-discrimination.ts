@@ -108,13 +108,13 @@ interface Test5 {
   <OpName extends 'getUser' | 'getPost'>(
     doc: string,
     opName: OpName,
-    vars: OpName extends 'getUser' ? { id: string } : { id: number }
+    vars: OpName extends 'getUser' ? { id: string } : { id: number },
   ): void
 
   // Multi-op without vars
   <OpName extends 'getUser' | 'getPost'>(
     doc: string,
-    opName: OpName
+    opName: OpName,
   ): void
 
   // Single-op: variables is an object
@@ -128,10 +128,10 @@ declare const test5: Test5
 
 // Test with object (should match single-op overload)
 test5('doc', {
-  name: 123  // Should give granular error
+  name: 123, // Should give granular error
 })
 
 // Test with string literal (should match multi-op overload)
 test5('doc', 'getUser', {
-  id: 456  // Should give granular error
+  id: 456, // Should give granular error
 })

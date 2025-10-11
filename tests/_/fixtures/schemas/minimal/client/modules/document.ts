@@ -1,4 +1,4 @@
-import type { OperationMetadata, TypedDocument, TypedFullDocument } from '#graffle/client'
+import type { Operation, TypedDocument, TypedFullDocument } from '#graffle/client'
 import { createStaticRootType } from '#graffle/extensions/document-builder'
 import type * as $$StaticBuilder from '#graffle/extensions/document-builder'
 import { OperationTypeNode } from 'graphql'

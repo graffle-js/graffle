@@ -1,10 +1,150 @@
 import type { Grafaid } from '#lib/grafaid'
+import type { GetVariablesInputKind } from '#src/lib/grafaid/typed-document/TypedDocument.js'
 import type { Ts } from '@wollybeard/kit'
 import type { TypedFullDocument } from '../../../lib/grafaid/typed-full-document/$.js'
 import type { HandleOutput } from '../../handle.js'
 
+export type DocumentInput =
+  | Grafaid.Document.Typed.TypedDocumentLike
+  | TypedFullDocument.TypedFullDocument
+
+// ================================================================================================
+// STATIC EXECUTORS - Function signatures for $send method
+// ================================================================================================
+
 /**
- * Builder returned from `client.gql()` that provides operation methods.
+ * Convert an operation to its static executor type (for `$send` method).
+ * Distributes over unions to create overloads.
+ */
+type OperationToStaticExecutor<
+  $Op extends TypedFullDocument.Operation,
+  $Context,
+  // @ts-expect-error - todo: loosen constraint on vars
+  ___$VarKind = GetVariablesInputKind<$Op['variables']>,
+> = ___$VarKind extends 'none' ? SingleOpNoVarsStaticExecutor<$Op, $Context>
+  : ___$VarKind extends 'optional' ? SingleOpOptionalVarsStaticExecutor<$Op, $Context>
+  : ___$VarKind extends 'required' ? SingleOpRequiredVarsStaticExecutor<$Op, $Context>
+  : never
+
+/**
+ * Static executor for single operation with no variables.
+ * Supports calling without operation name or with operation name.
+ */
+export interface SingleOpNoVarsStaticExecutor<$Op extends TypedFullDocument.Operation, $Context> {
+  (operationName?: $Op['name']): Promise<Ts.SimplifyNullable<HandleOutput<$Context, $Op['result']>>>
+}
+
+/**
+ * Static executor for single operation with optional variables.
+ * Supports multiple call patterns.
+ */
+export interface SingleOpOptionalVarsStaticExecutor<
+  $Op extends TypedFullDocument.Operation,
+  $Context,
+  ___$Return = Promise<Ts.SimplifyNullable<HandleOutput<$Context, $Op['result']>>>,
+> {
+  (): ___$Return
+  (variables?: $Op['variables']): ___$Return
+  (operationName: $Op['name'], variables?: $Op['variables']): ___$Return
+}
+
+/**
+ * Static executor for single operation with required variables.
+ */
+export interface SingleOpRequiredVarsStaticExecutor<
+  $Op extends TypedFullDocument.Operation,
+  $Context,
+  ___$Return = Promise<Ts.SimplifyNullable<HandleOutput<$Context, $Op['result']>>>,
+> {
+  (variables: $Op['variables']): ___$Return
+  (operationName: $Op['name'], variables: $Op['variables']): ___$Return
+}
+
+/**
+ * Static executor for untyped documents (plain GraphQL strings).
+ * Accepts any operation name and variables.
+ */
+export interface UntypedStaticExecutor<$Context> {
+  (operationName?: string, variables?: Record<string, unknown>): Promise<unknown>
+  (variables?: Record<string, unknown>): Promise<unknown>
+}
+
+// ================================================================================================
+// MULTI-OPERATION EXECUTOR - Single generic signature for multi-op $send method
+// ================================================================================================
+
+/**
+ * Multi-op static executor using generic signature with conditional types.
+ * This approach allows proper discrimination based on operation name.
+ */
+export interface MultiOpStaticExecutor<$Operations extends TypedFullDocument.Operations, $Context> {
+  <$OpName extends keyof $Operations & string>(
+    operationName: $OpName,
+    // @ts-expect-error - todo: loosen constraint on vars
+    ...variables: GetVariablesInputKind<$Operations[$OpName]['variables']> extends 'none' ? []
+      // @ts-expect-error - todo: loosen constraint on vars
+      : GetVariablesInputKind<$Operations[$OpName]['variables']> extends 'optional'
+        ? [variables?: $Operations[$OpName]['variables']]
+      : [variables: $Operations[$OpName]['variables']]
+  ): Promise<Ts.SimplifyNullable<HandleOutput<$Context, $Operations[$OpName]['result']>>>
+}
+
+// ================================================================================================
+// NAMED EXECUTORS - Function signatures for operation methods
+// ================================================================================================
+
+/**
+ * Convert an operation to its named executor type (for operation method).
+ * Named executors don't take operation name as parameter.
+ */
+type OperationToNamedExecutor<
+  $Op extends TypedFullDocument.Operation,
+  $Context,
+  // @ts-expect-error - todo: loosen constraint on vars
+  ___$VarKind = GetVariablesInputKind<$Op['variables']>,
+> = ___$VarKind extends 'none' ? NoVarsNamedExecutor<$Context, $Op['result']>
+  : ___$VarKind extends 'optional' ? OptionalVarsNamedExecutor<$Context, $Op['result'], $Op['variables']>
+  : ___$VarKind extends 'required' ? RequiredVarsNamedExecutor<$Context, $Op['result'], $Op['variables']>
+  : never
+
+/**
+ * Named executor for operations with no variables.
+ * Operation name is encoded in the method itself.
+ */
+export interface NoVarsNamedExecutor<$Context, $Result extends Grafaid.SomeObjectData> {
+  (): Promise<Ts.SimplifyNullable<HandleOutput<$Context, $Result>>>
+}
+
+/**
+ * Named executor for operations with optional variables.
+ * Operation name is encoded in the method itself.
+ */
+export interface OptionalVarsNamedExecutor<
+  $Context,
+  $Result extends Grafaid.SomeObjectData,
+  $Variables,
+> {
+  (variables?: $Variables): Promise<Ts.SimplifyNullable<HandleOutput<$Context, $Result>>>
+}
+
+/**
+ * Named executor for operations with required variables.
+ * Operation name is encoded in the method itself.
+ */
+export interface RequiredVarsNamedExecutor<
+  $Context,
+  $Result extends Grafaid.SomeObjectData,
+  $Variables,
+> {
+  (variables: $Variables): Promise<Ts.SimplifyNullable<HandleOutput<$Context, $Result>>>
+}
+
+// ================================================================================================
+// SENDERS - Objects with $send executor and operation methods
+// ================================================================================================
+
+/**
+ * Object returned from `client.gql()` that provides operation methods.
  *
  * - For **typed documents** (gql-tada, TypedDocumentNode), each operation becomes a method
  * - For **untyped documents** (plain strings), only `.$send()` is available with generic signature
@@ -21,110 +161,44 @@ import type { HandleOutput } from '../../handle.js'
  * ```
  */
 // dprint-ignore
-export type DocumentSender<$Doc extends Grafaid.Document.Typed.TypedDocumentLike, $Context> =
-  // Check if document has type information (__operations property)
-  $Doc extends { __operations: infer $Ops }
-    ? $Ops extends TypedFullDocument.Operations
-      ? keyof $Ops extends never
-        ? UntypedDocumentSender<$Context>                // Empty operations = untyped
-        : TypedDocumentSender<{ __operations: $Ops }, $Context>  // Has operations = typed
-      : UntypedDocumentSender<$Context>
-    : UntypedDocumentSender<$Context> // No __operations = untyped (plain string or DocumentNode)
+export type DocumentSender<$Doc extends DocumentInput, $Context> =
+$Doc extends TypedFullDocument.TypedFullDocument ?  Sender<$Doc, $Context> :
+// todo more cases
+                                                    UntypedSender<$Context>
 
-/**
- * Sender for untyped documents (plain GraphQL strings).
- *
- * Provides generic `.$send()` signature that accepts any operation name and variables.
- */
-export interface UntypedDocumentSender<$Context> {
-  /**
-   * Execute a GraphQL operation from an untyped document.
-   *
-   * @param operationName - Optional operation name (omit for single unnamed operations)
-   * @param variables - Optional variables object (untyped but constrained to records)
-   *
-   * @example
-   * ```ts
-   * // Single operation - name optional
-   * await client.gql('query { id }').$send()
-   *
-   * // Named operation
-   * await client.gql('mutation ResetData { resetData }').$send('ResetData')
-   *
-   * // With variables
-   * await client.gql('mutation($id: ID!) { delete(id: $id) }').$send({ id: '123' })
-   * await client.gql('mutation($id: ID!) { delete(id: $id) }').$send('DeleteItem', { id: '123' })
-   * ```
-   */
-  $send(operationName?: string, variables?: Record<string, unknown>): Promise<unknown>
-  $send(variables?: Record<string, unknown>): Promise<unknown>
+type Sender<
+  $Doc extends TypedFullDocument.TypedFullDocument,
+  $Context,
+> =
+  & SenderStatic<$Doc, $Context>
+  & SenderNamed<$Doc, $Context>
+
+type SenderStatic<
+  $Doc extends TypedFullDocument.TypedFullDocument,
+  $Context,
+> = $Doc extends TypedFullDocument.SingleOperation<infer $Op extends TypedFullDocument.Operation>
+  ? { $send: OperationToStaticExecutor<$Op, $Context> }
+  : $Doc extends TypedFullDocument.MultiOperation<infer $Operations extends TypedFullDocument.Operations>
+    ? { $send: MultiOpStaticExecutor<$Operations, $Context> }
+  : never
+
+type SenderNamed<
+  $Doc extends TypedFullDocument.TypedFullDocument,
+  $Context,
+> = {
+  [k in keyof $Doc['__operations']]: OperationToNamedExecutor<$Doc['__operations'][k], $Context>
 }
 
 /**
- * Sender for typed documents (gql-tada, TypedDocumentNode, etc).
- *
- * Provides type-safe operation methods and `.$send()`.
+ * Sender for untyped documents (plain GraphQL strings).
  */
-export type TypedDocumentSender<
-  $Doc extends { __operations: TypedFullDocument.Operations },
-  $Context,
-> =
-  & {
-    /**
-     * Execute an operation by name with full type safety.
-     *
-     * @example
-     * ```ts
-     * await builder.$send('GetUser', { id: '123' })
-     * ```
-     */
-    $send<$OpName extends keyof $Doc['__operations']>(
-      operationName: $OpName,
-      ...variables: InferSendArgs<$Doc['__operations'][$OpName]['variables']>
-    ): Promise<Ts.SimplifyNullable<HandleOutput<$Context, $Doc['__operations'][$OpName]['result']>>>
-  }
-  & {
-    [k in keyof $Doc['__operations']]: ExtractOperation<$Doc['__operations'], k> extends
-      { result: infer $R; variables: infer $V }
-      ? OperationMethod<$Context, $R & Grafaid.SomeObjectData, $V & Grafaid.Document.Typed.Variables>
-      : never
-  }
+export interface UntypedSender<$Context> {
+  $send: UntypedStaticExecutor<$Context>
+}
 
-/**
- * Type for a single operation method.
- *
- * The signature varies based on variable requirements:
- * - No variables: `() => Promise<Result>`
- * - Optional variables: `(variables?: Variables) => Promise<Result>`
- * - Required variables: `(variables: Variables) => Promise<Result>`
- */
-// dprint-ignore
-export type OperationMethod<$Context, $Result extends Grafaid.SomeObjectData, $Variables extends Grafaid.Document.Typed.Variables> =
-  Grafaid.Document.Typed.GetVariablesInputKind<$Variables> extends 'none'
-    ? () => Promise<Ts.SimplifyNullable<HandleOutput<$Context, $Result>>>
-  : Grafaid.Document.Typed.GetVariablesInputKind<$Variables> extends 'optional'
-    ? (variables?: $Variables) => Promise<Ts.SimplifyNullable<HandleOutput<$Context, $Result>>>
-  : Grafaid.Document.Typed.GetVariablesInputKind<$Variables> extends 'required'
-    ? (variables: $Variables) => Promise<Ts.SimplifyNullable<HandleOutput<$Context, $Result>>>
-  : never
-
-/**
- * Infer the arguments for the `.$send()` method based on variable requirements.
- *
- * Returns a tuple type representing the rest parameters.
- */
-// dprint-ignore
-type InferSendArgs<$Variables extends Grafaid.Document.Typed.Variables> =
-  Grafaid.Document.Typed.GetVariablesInputKind<$Variables> extends 'none' ? []
-  : Grafaid.Document.Typed.GetVariablesInputKind<$Variables> extends 'optional' ? [variables?: $Variables]
-  : Grafaid.Document.Typed.GetVariablesInputKind<$Variables> extends 'required' ? [variables: $Variables]
-  : never
-
-// Helper type to extract operation metadata (works around TS limitations with indexed types)
-type ExtractOperation<$Ops, $Key> = $Ops extends Record<string, infer $OpMeta>
-  ? $OpMeta extends { result: infer $R; variables: infer $V } ? { result: $R; variables: $V }
-  : never
-  : never
+// ================================================================================================
+// RUNTIME IMPLEMENTATION
+// ================================================================================================
 
 /**
  * Create a DocumentSender instance with Proxy-based operation methods.
@@ -132,7 +206,7 @@ type ExtractOperation<$Ops, $Key> = $Ops extends Record<string, infer $OpMeta>
  * @param executeOperation - Callback to execute an operation through the request pipeline
  * @returns A DocumentSender with operation methods and `.$send()`
  */
-export const createDocumentSender = <$Doc extends Grafaid.Document.Typed.TypedDocumentLike, $Context>(
+export const createDocumentSender = <$Doc extends DocumentInput, $Context>(
   executeOperation: (opName: string | undefined, variables?: any) => Promise<any>,
 ): DocumentSender<$Doc, $Context> => {
   const builder = {
