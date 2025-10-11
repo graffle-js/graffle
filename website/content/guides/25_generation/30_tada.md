@@ -156,6 +156,51 @@ const doc = Graffle.gql(`
 
 **Workaround:** Use Graffle's static document builder (`.document()`) for multi-operation documents. The document builder provides superior multi-operation support with full type-level tracking of all operation names, variables, and results:
 
+### Interface Types Include `__typename`
+
+gql-tada automatically includes `__typename` fields in the inferred types for GraphQL interface types. This differs from Graffle's Document Builder, which only includes `__typename` when explicitly requested in the selection set.
+
+```typescript
+// gql-tada inferred type includes __typename
+const tadaDoc = Graffle.gql(`
+  query GetNode($id: ID!) {
+    node(id: $id) {
+      id
+    }
+  }
+`)
+// Type: { node: { __typename?: 'User' | 'Post', id: string } | null } | null
+
+// Document Builder does NOT include __typename unless requested
+const builderDoc = Graffle.document({
+  query: {
+    GetNode: {
+      node: args =>
+        args({ $: { id: 'ID!' } }, {
+          id: true,
+        }),
+    },
+  },
+})
+// Type: { node: { id: string } | null } | null
+
+// Document Builder WITH explicit __typename
+const builderDocWithTypename = Graffle.document({
+  query: {
+    GetNode: {
+      node: args =>
+        args({ $: { id: 'ID!' } }, {
+          __typename: true,
+          id: true,
+        }),
+    },
+  },
+})
+// Type: { node: { __typename: 'User' | 'Post', id: string } | null } | null
+```
+
+This is a known difference in how gql-tada and Graffle's Document Builder infer types. If you need `__typename` with the Document Builder, explicitly include it in your selection. If you don't need it with gql-tada, you can ignore it at runtime (it won't be in the response unless explicitly requested in your query).
+
 ```typescript
 import { Graffle } from './graffle/_exports.js'
 

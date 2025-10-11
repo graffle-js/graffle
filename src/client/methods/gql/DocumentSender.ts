@@ -1,5 +1,5 @@
 import type { Grafaid } from '#lib/grafaid'
-import type { GetVariablesInputKind } from '#src/lib/grafaid/typed-document/TypedDocument.js'
+import type { GetVariablesInputKind, ResultOf, VariablesOf } from '#src/lib/grafaid/typed-document/TypedDocument.js'
 import type { Ts } from '@wollybeard/kit'
 import type { TypedFullDocument } from '../../../lib/grafaid/typed-full-document/$.js'
 import type { HandleOutput } from '../../handle.js'
@@ -162,9 +162,13 @@ export interface RequiredVarsNamedExecutor<
  */
 // dprint-ignore
 export type DocumentSender<$Doc extends DocumentInput, $Context> =
-$Doc extends TypedFullDocument.TypedFullDocument ?  Sender<$Doc, $Context> :
-// todo more cases
-                                                    UntypedSender<$Context>
+$Doc extends TypedFullDocument.TypedFullDocument
+  ? Sender<$Doc, $Context>
+  : $Doc extends string
+    ? UntypedSender<$Context>
+    : $Doc extends Grafaid.Document.Typed.TypedDocumentLike
+      ? TypedDocumentLikeSender<ResultOf<$Doc>, VariablesOf<$Doc>, $Context>
+      : UntypedSender<$Context>
 
 type Sender<
   $Doc extends TypedFullDocument.TypedFullDocument,
@@ -194,6 +198,27 @@ type SenderNamed<
  */
 export interface UntypedSender<$Context> {
   $send: UntypedStaticExecutor<$Context>
+}
+
+// ================================================================================================
+// TYPED DOCUMENT LIKE SENDER (gql-tada, TypedDocumentNode)
+// ================================================================================================
+
+/**
+ * Sender for TypedDocumentLike (gql-tada, TypedDocumentNode).
+ * These have result and variable types but no operation names in the type system.
+ * Only `.$send()` is available (no named operation methods).
+ */
+type TypedDocumentLikeSender<
+  $Result extends Grafaid.SomeObjectData,
+  $Variables extends Grafaid.Variables,
+  $Context,
+  ___$VarKind = GetVariablesInputKind<$Variables>,
+> = {
+  $send: ___$VarKind extends 'none' ? (() => Promise<Ts.SimplifyNullable<HandleOutput<$Context, $Result>>>)
+    : ___$VarKind extends 'optional'
+      ? ((variables?: $Variables) => Promise<Ts.SimplifyNullable<HandleOutput<$Context, $Result>>>)
+    : ((variables: $Variables) => Promise<Ts.SimplifyNullable<HandleOutput<$Context, $Result>>>)
 }
 
 // ================================================================================================
