@@ -103,11 +103,11 @@ Instruments GraphQL requests with [OpenTelemetry](https://opentelemetry.io) trac
 
 The following extensions and features are under consideration or in development:
 
-| Feature                               | Description                                                                                                                                                     | Tracking                                                   |
-| ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
-| Incremental Delivery (@defer/@stream) | Support for the experimental `@defer` and `@stream` directives to enable incremental delivery of GraphQL responses.                                             | [#1134](https://github.com/graffle-js/graffle/issues/1134) |
-| Logger Extension                      | Built-in logging extension for debugging and monitoring GraphQL operations.                                                                                     | [#1123](https://github.com/graffle-js/graffle/issues/1123) |
-| Request Batching                      | Automatic batching of multiple GraphQL requests into a single network call.                                                                                     | [#1017](https://github.com/graffle-js/graffle/issues/1017) |
+| Feature                               | Description                                                                                                         | Tracking                                                   |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| Incremental Delivery (@defer/@stream) | Support for the experimental `@defer` and `@stream` directives to enable incremental delivery of GraphQL responses. | [#1134](https://github.com/graffle-js/graffle/issues/1134) |
+| Logger Extension                      | Built-in logging extension for debugging and monitoring GraphQL operations.                                         | [#1123](https://github.com/graffle-js/graffle/issues/1123) |
+| Request Batching                      | Automatic batching of multiple GraphQL requests into a single network call.                                         | [#1017](https://github.com/graffle-js/graffle/issues/1017) |
 
 ## Creating Extensions
 
