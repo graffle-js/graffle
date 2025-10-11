@@ -26,16 +26,54 @@ export const validateGraphQLSPConfiguration = async (config: Config): Promise<vo
     tsconfigExists = true
   } catch {
     // tsconfig.json doesn't exist - provide basic suggestion
-    console.log(``)
-    console.log(`💡 Tip: GraphQLSP provides IDE autocomplete and validation for GraphQL strings`)
-    console.log(`   To enable it:`)
-    console.log(`   1. Install: npm install -D @0no-co/graphqlsp`)
-    console.log(`   2. Create tsconfig.json with GraphQLSP configuration`)
-    console.log(`   3. See: https://gql-tada.0no.co/get-started/installation`)
-    console.log(``)
-    console.log(`   To disable this check: set lint.missingGraphqlSP: false in graffle.config.ts`)
-    console.log(`   Auto-config feature: https://github.com/graffle-js/graffle/issues/1389`)
-    console.log(``)
+    const hasSdlOutput = config.paths.project.outputs.sdl !== null
+
+    let schemasConfig: string
+    let sdlSetupStep: string
+
+    if (hasSdlOutput) {
+      const sdlPath = Path.relative(config.paths.project.inputs.root, config.paths.project.outputs.sdl!)
+      schemasConfig = `"schemas": [{ "name": "${config.name}", "schema": "./${sdlPath}" }]`
+      sdlSetupStep = ``
+    } else {
+      schemasConfig = `"schemas": [{ "name": "${config.name}", "schema": "./graffle/schema.graphql" }]`
+      sdlSetupStep = `
+3. Enable SDL output in graffle.config.ts to satisfy the schema requirement:
+
+   export default {
+     schema: '...',
+     outputSDL: true
+   }
+`
+    }
+
+    console.log(`
+GraphQLSP provides IDE autocomplete and validation for GraphQL strings.
+
+To enable it:
+
+1. Install the plugin:
+   npm add --save-dev @0no-co/graphqlsp
+
+2. Create tsconfig.json with GraphQLSP configuration:
+
+   {
+     "compilerOptions": {
+       "plugins": [
+         {
+           "name": "@0no-co/graphqlsp",
+           ${schemasConfig}
+         }
+       ]
+     }
+   }
+${sdlSetupStep}
+Documentation:
+- Installation: https://gql-tada.0no.co/get-started/installation
+- Editor setup: https://gql-tada.0no.co/get-started/editor-setup
+
+To disable this check: set lint.missingGraphqlSP: false in graffle.config.ts
+`)
     return
   }
 
@@ -44,7 +82,7 @@ export const validateGraphQLSPConfiguration = async (config: Config): Promise<vo
   try {
     tsconfigContent = await config.fs.readFile(tsconfigPath, 'utf-8')
   } catch (error) {
-    console.warn(`⚠️  Could not read tsconfig.json: ${error instanceof Error ? error.message : String(error)}`)
+    console.warn(`Could not read tsconfig.json: ${error instanceof Error ? error.message : String(error)}`)
     return
   }
 
@@ -58,7 +96,7 @@ export const validateGraphQLSPConfiguration = async (config: Config): Promise<vo
 
     tsconfig = JSON.parse(jsonWithoutComments)
   } catch (error) {
-    console.warn(`⚠️  Could not parse tsconfig.json (may contain syntax not supported by simple parser)`)
+    console.warn(`Could not parse tsconfig.json (may contain syntax not supported by simple parser)`)
     return
   }
 
@@ -68,47 +106,56 @@ export const validateGraphQLSPConfiguration = async (config: Config): Promise<vo
 
   if (!hasGraphQLSP) {
     // GraphQLSP is not configured - provide setup instructions
-    console.log(``)
-    console.log(`✨ GraphQLSP Setup Recommendation`)
-    console.log(``)
-    console.log(`   GraphQLSP provides IDE autocomplete and validation for GraphQL strings.`)
-    console.log(``)
-    console.log(`   To enable it:`)
-    console.log(``)
-    console.log(`   1. Install the plugin:`)
-    console.log(`      npm install -D @0no-co/graphqlsp`)
-    console.log(``)
-    console.log(`   2. Add to your tsconfig.json:`)
-    console.log(`      {`)
-    console.log(`        "compilerOptions": {`)
-    console.log(`          "plugins": [`)
-    console.log(`            {`)
-    console.log(`              "name": "@0no-co/graphqlsp",`)
-    if (config.paths.project.outputs.sdl) {
-      // Calculate relative path from project root to SDL
-      const sdlPath = Path.relative(config.paths.project.inputs.root, config.paths.project.outputs.sdl)
-      console.log(`              "schema": "./${sdlPath}"`)
+    const hasSdlOutput = config.paths.project.outputs.sdl !== null
+
+    let schemasConfig: string
+    let sdlSetupStep: string
+
+    if (hasSdlOutput) {
+      const sdlPath = Path.relative(config.paths.project.inputs.root, config.paths.project.outputs.sdl!)
+      schemasConfig = `"schemas": [{ "name": "${config.name}", "schema": "./${sdlPath}" }]`
+      sdlSetupStep = ``
     } else {
-      console.log(`              "schema": "./path/to/schema.graphql"`)
+      schemasConfig = `"schemas": [{ "name": "${config.name}", "schema": "./graffle/schema.graphql" }]`
+      sdlSetupStep = `
+3. Enable SDL output in graffle.config.ts to satisfy the schema requirement:
+
+   export default {
+     schema: '...',
+     outputSDL: true
+   }
+`
     }
-    console.log(`            }`)
-    console.log(`          ]`)
-    console.log(`        }`)
-    console.log(`      }`)
-    console.log(``)
-    if (!config.paths.project.outputs.sdl) {
-      console.log(`   3. Enable SDL output in graffle.config.ts:`)
-      console.log(`      export default {`)
-      console.log(`        schema: '...',`)
-      console.log(`        outputSDL: true, // Required for GraphQLSP`)
-      console.log(`      }`)
-      console.log(``)
-    }
-    console.log(`   Learn more: https://gql-tada.0no.co/get-started/installation`)
-    console.log(``)
-    console.log(`   To disable this check: set lint.missingGraphqlSP: false in graffle.config.ts`)
-    console.log(`   Auto-config feature: https://github.com/graffle-js/graffle/issues/1389`)
-    console.log(``)
+
+    console.log(`
+GraphQLSP Setup Recommendation
+
+GraphQLSP provides IDE autocomplete and validation for GraphQL strings.
+
+To enable it:
+
+1. Install the plugin:
+   npm add --save-dev @0no-co/graphqlsp
+
+2. Add to your tsconfig.json:
+
+   {
+     "compilerOptions": {
+       "plugins": [
+         {
+           "name": "@0no-co/graphqlsp",
+           ${schemasConfig}
+         }
+       ]
+     }
+   }
+${sdlSetupStep}
+Documentation:
+- Installation: https://gql-tada.0no.co/get-started/installation
+- Editor setup: https://gql-tada.0no.co/get-started/editor-setup
+
+To disable this check: set lint.missingGraphqlSP: false in graffle.config.ts
+`)
     return
   }
 
@@ -117,17 +164,17 @@ export const validateGraphQLSPConfiguration = async (config: Config): Promise<vo
     try {
       await config.fs.stat(config.paths.project.outputs.sdl)
       // SDL file exists - all good!
-      console.log(`✓ GraphQLSP is configured and SDL schema file exists`)
+      console.log(`GraphQLSP is configured and SDL schema file exists`)
     } catch {
-      console.warn(`⚠️  GraphQLSP is configured but SDL schema file not found at: ${config.paths.project.outputs.sdl}`)
-      console.warn(`   The SDL file will be generated during this generation run.`)
+      console.warn(`GraphQLSP is configured but SDL schema file not found at: ${config.paths.project.outputs.sdl}`)
+      console.warn(`The SDL file will be generated during this generation run.`)
     }
   } else {
     // Check if user has configured schema path in tsconfig
     const graphqlspPlugin = plugins?.find(p => p.name === '@0no-co/graphqlsp') as any
     if (!graphqlspPlugin?.schema) {
-      console.warn(`⚠️  GraphQLSP is configured but no schema path is set in tsconfig.json`)
-      console.warn(`   Add "schema" to the GraphQLSP plugin configuration`)
+      console.warn(`GraphQLSP is configured but no schema path is set in tsconfig.json`)
+      console.warn(`Add "schema" to the GraphQLSP plugin configuration`)
     }
   }
 }

@@ -34,11 +34,10 @@ export const ModuleGeneratorDocument = createModuleGenerator(
     code(
       `import { createStaticRootType } from '${config.paths.imports.grafflePackage.extensionDocumentBuilder}'`,
     )
-    code(`import type * as $$StaticBuilder from '${config.paths.imports.grafflePackage.extensionDocumentBuilder}'`)
     code(`import { OperationTypeNode } from 'graphql'`)
     code(codeImportNamed(config, { names: { schemaDrivenDataMap: 'sddm' }, from: './schema-driven-data-map' }))
     code(
-      `import type { TypedDocument, TypedFullDocument, OperationMetadata } from '${config.paths.imports.grafflePackage.client}'`,
+      `import type { TypedDocument } from '${config.paths.imports.grafflePackage.client}'`,
     )
     code(codeImportAll(config, { as: 'SelectionSets', from: './selection-sets', type: true }))
     code(codeImportAll(config, { as: '$$Scalar', from: './scalar', type: true }))
@@ -60,22 +59,10 @@ export const ModuleGeneratorDocument = createModuleGenerator(
       code(`  scalars: $$Scalar.$Registry`)
       code(`}`)
       code``
-      code(
-        Code.TSDoc(
-          `Configuration for static document builders.\nGenerated code always has SDDM enabled since the generator creates the schema-driven data map.`,
-        ),
-      )
-      code(`type DocumentConfig = {`)
-      code(`  schema: $$Schema.Schema`)
-      code(`  sddmEnabled: true`)
-      code(`}`)
-      code``
 
       // Interface JSDoc
       const interfaceDoc = getStaticDocumentBuilderDoc('query')
       code(Code.TSDoc(interfaceDoc))
-
-      code(`// Note: This interface conforms to StaticDocumentBuilder<DocumentConfig, OperationTypeNode.QUERY>`)
       code`
         export interface QueryBuilder {
           ${
@@ -117,24 +104,12 @@ export const ModuleGeneratorDocument = createModuleGenerator(
         code(`  typeHookRequestResultDataTypes: never`)
         code(`  scalars: $$Scalar.$Registry`)
         code(`}`)
-        code``
-        code(
-          Code.TSDoc(
-            `Configuration for static document builders.\nGenerated code always has SDDM enabled since the generator creates the schema-driven data map.`,
-          ),
-        )
-        code(`type DocumentConfig = {`)
-        code(`  schema: $$Schema.Schema`)
-        code(`  sddmEnabled: true`)
-        code(`}`)
       }
       code``
 
       // Interface JSDoc
       const mutationInterfaceDoc = getStaticDocumentBuilderDoc('mutation')
       code(Code.TSDoc(mutationInterfaceDoc))
-
-      code(`// Note: This interface conforms to StaticDocumentBuilder<DocumentConfig, OperationTypeNode.MUTATION>`)
       code`
         export interface MutationBuilder {
           ${
@@ -176,24 +151,12 @@ export const ModuleGeneratorDocument = createModuleGenerator(
         code(`  typeHookRequestResultDataTypes: never`)
         code(`  scalars: $$Scalar.$Registry`)
         code(`}`)
-        code``
-        code(
-          Code.TSDoc(
-            `Configuration for static document builders.\nGenerated code always has SDDM enabled since the generator creates the schema-driven data map.`,
-          ),
-        )
-        code(`type DocumentConfig = {`)
-        code(`  schema: $$Schema.Schema`)
-        code(`  sddmEnabled: true`)
-        code(`}`)
       }
       code``
 
       // Interface JSDoc
       const subscriptionInterfaceDoc = getStaticDocumentBuilderDoc('subscription')
       code(Code.TSDoc(subscriptionInterfaceDoc))
-
-      code(`// Note: This interface conforms to StaticDocumentBuilder<DocumentConfig, OperationTypeNode.SUBSCRIPTION>`)
       code`
         export interface SubscriptionBuilder {
           ${

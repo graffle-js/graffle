@@ -1,5 +1,6 @@
 import type { Grafaid } from '#lib/grafaid'
 import type { Context } from '#src/context/$.js'
+import type { Configuration } from '#src/context/fragments/configuration/$.js'
 import type { GraphQLTadaAPI, schemaOfSetup, TadaDocumentNode } from '#src/lib/gql-tada/index.js'
 import type { TypedFullDocument } from '#src/lib/grafaid/typed-full-document/$.js'
 import type { ParseGraphQLObject, ParseGraphQLString } from '#src/static/gql.js'
@@ -20,41 +21,19 @@ import type { DocumentSender, UntypedSender } from './DocumentSender.js'
  * Documents with RequiresSDDM=true require clients configured with schema.map.
  */
 // dprint-ignore
-type HasSDDM<$Context> =
-  $Context extends { configuration: { schema: { current: { map: infer $Map } } } }
-    ? $Map extends undefined ? false : true
-    : false
-
-// dprint-ignore
 type ValidateSDDMRequirement<$Document extends Grafaid.Document.Typed.TypedDocumentLike, $Context> =
   Grafaid.Document.Typed.RequiresSDDMOf<$Document> extends true
-    ? HasSDDM<$Context> extends true
+    ? Configuration.Schema.HasMap<$Context> extends true
       ? $Document
       : `❌ This document requires SDDM. Configure client with schema.map`
     : $Document
 
 /**
  * Extract schema and arguments map from context for document object inference.
+ *
+ * @see {@link Configuration.Schema.Info}
  */
-// dprint-ignore
-export type GetSchemaInfo<$Context> =
-  $Context extends {
-    configuration: {
-      schema: {
-        current: {
-          name: infer $Name extends string
-          map: infer $Map
-        }
-      }
-    }
-  }
-    ? $Name extends keyof GraffleGlobal.Clients
-      ? {
-          schema: GraffleGlobal.Clients[$Name]['schema']
-          map: $Map
-        }
-      : never
-    : never
+export type GetSchemaInfo<$Context> = Configuration.Schema.Info<$Context>
 
 /**
  * Extract GraphQLTadaAPI type from context for LSP detection.
@@ -75,14 +54,23 @@ type TadaAPIFromContext<$Context> = GraphQLTadaAPI<
 >
 
 /**
- * Extract schema name from context for multi-schema LSP support.
- *
- * Falls back to `never` if no schema name is configured.
+ * Check if GlobalRegistry is configured for this context.
  */
 // dprint-ignore
-type SchemaNameFromContext<$Context> =
-  $Context extends { configuration: { schema: { current: { name: infer $Name } } } }
-    ? $Name
+type HasGlobalRegistry<$Context> =
+  GlobalRegistry.ForContext<$Context> extends never
+    ? false
+    : true
+
+/**
+ * Extract document object constraint from GlobalRegistry if available.
+ */
+// dprint-ignore
+type DocumentObjectConstraint<$Context> =
+  HasGlobalRegistry<$Context> extends true
+    ? GlobalRegistry.ForContext<$Context> extends { selectionSets: { $Document: infer $Doc } }
+      ? $Doc
+      : never
     : never
 
 // dprint-ignore
@@ -132,13 +120,14 @@ export interface GqlMethod<$Context extends Context.Context> {
                                                             UntypedSender :
   $doc extends TypedFullDocument.TypedFullDocument      ? DocumentSender<$doc, $Context> :
   $doc extends TadaDocumentNode                         ? DocumentSender<$doc, $Context> :
-  $doc extends string                                   ? DocumentSender<ParseGraphQLString<$Context, $doc>, $Context> :
+  $doc extends string                                   ? HasGlobalRegistry<$Context> extends true
+                                                            ? DocumentSender<ParseGraphQLString<$Context, $doc>, $Context>
+                                                            : UntypedSender :
   $doc extends Grafaid.Document.Typed.TypedDocumentLike ? DocumentSender<$doc, $Context> :
                                                           never
 
   // Overload: Inline document builder object (must be last as it's least specific)
-  // @ts-expect-error
-  <$Document extends GlobalRegistry.ForContext<$Context>['selectionSets']['$Document']>(
+  <$Document extends DocumentObjectConstraint<$Context>>(
     document: $Document
   ): DocumentSender<ParseGraphQLObject<$Context, $Document>, $Context>
 
@@ -148,14 +137,18 @@ export interface GqlMethod<$Context extends Context.Context> {
    * This property is used by GraphQLSP LSP in multi-schema mode to determine which
    * schema to use for validation and autocomplete. When multiple schemas are configured
    * in tsconfig.json, the LSP extracts this value to look up the appropriate schema.
+   *
+   * @see https://github.com/0no-co/GraphQLSP/blob/main/packages/graphqlsp/src/ast/checks.ts#L100-L124
    */
-  readonly __name: SchemaNameFromContext<$Context>
+  readonly __name: Configuration.Schema.Name<$Context>
 
   /**
    * LSP detection property - validates scalar/enum values against schema types.
    *
    * This property is required by GraphQLSP LSP to identify this as a gql-tada function.
    * The LSP checks for the existence of both `scalar` and `persisted` properties.
+   *
+   * @see https://github.com/0no-co/GraphQLSP/blob/main/packages/graphqlsp/src/ast/checks.ts#L19-L32
    */
   scalar: TadaAPIFromContext<$Context>['scalar']
 
@@ -164,6 +157,8 @@ export interface GqlMethod<$Context extends Context.Context> {
    *
    * This property is required by GraphQLSP LSP to identify this as a gql-tada function.
    * The LSP checks for the existence of both `scalar` and `persisted` properties.
+   *
+   * @see https://github.com/0no-co/GraphQLSP/blob/main/packages/graphqlsp/src/ast/checks.ts#L19-L32
    */
   persisted: TadaAPIFromContext<$Context>['persisted']
 }
@@ -180,7 +175,11 @@ export namespace GqlMethod {
     | [document: Grafaid.Document.Typed.TypedDocumentLike]
     | [documentObject: object]
 
-  export const normalizeArguments = (args: Arguments) => {
+  export type NormalizedArguments =
+    | { type: 'typedDocument'; document: Grafaid.Document.Typed.TypedDocumentLike }
+    | { type: 'object'; document: object }
+
+  export const normalizeArguments = (args: Arguments): NormalizedArguments => {
     const first = args[0]
 
     // TypedDocumentLike documents are strings or have specific properties
@@ -188,8 +187,15 @@ export namespace GqlMethod {
       || 'definitions' in first // DocumentNode
       || '__meta__' in first // TadaDocumentNode
 
+    if (isTypedDocumentLike) {
+      return {
+        type: 'typedDocument',
+        document: first as Grafaid.Document.Typed.TypedDocumentLike,
+      }
+    }
+
     return {
-      type: isTypedDocumentLike ? 'typedDocument' as const : 'object' as const,
+      type: 'object',
       document: first,
     }
   }

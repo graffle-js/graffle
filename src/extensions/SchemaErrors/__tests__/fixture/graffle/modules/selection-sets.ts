@@ -1,7 +1,7 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
 import type * as $$Scalar from './scalar.js'
 
-interface DefaultSelectionContext {
+export interface $DefaultSelectionContext {
   scalars: $$Scalar.$Registry
 }
 
@@ -22,7 +22,7 @@ interface DefaultSelectionContext {
 //
 
 export interface $Document<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > {
   query?: Record<string, Query<_$Context>>
   mutation?: Record<string, Mutation<_$Context>>
@@ -54,7 +54,7 @@ export interface $Document<
  * GraphQL root {@link https://graphql.org/learn/schema/#the-query-and-mutation-types | Query} type.
  */
 export interface Query<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > {
   /**
    * # Info
@@ -936,7 +936,7 @@ export interface Query<
 }
 
 export interface Query$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends Query<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
@@ -944,13 +944,13 @@ export interface Query$FragmentInline<
 
 export namespace Query {
   export type InputObjectNested<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | InputObjectNested$SelectionSet<_$Context>
 
   export interface InputObjectNested$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `InputObjectNested` field. No arguments are required so you may omit this.
@@ -959,7 +959,7 @@ export namespace Query {
   }
 
   export interface InputObjectNested$Arguments<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > {
     /**
      * # Info
@@ -982,7 +982,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type InputObjectNested$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | InputObjectNested$SelectionSet<_$Context>
@@ -991,11 +991,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type InputObjectNestedNonNull<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = InputObjectNestedNonNull$SelectionSet<_$Context>
 
   export interface InputObjectNestedNonNull$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `InputObjectNestedNonNull` field. All arguments are required so you must include this.
@@ -1004,7 +1004,7 @@ export namespace Query {
   }
 
   export interface InputObjectNestedNonNull$Arguments<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > {
     /**
      * # Info
@@ -1027,7 +1027,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type InputObjectNestedNonNull$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     InputObjectNestedNonNull$SelectionSet<_$Context>
   >
@@ -1035,13 +1035,13 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type abcEnum<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | abcEnum$SelectionSet<_$Context>
 
   export interface abcEnum$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1052,7 +1052,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type abcEnum$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | abcEnum$SelectionSet<_$Context>
@@ -1061,13 +1061,13 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type argInputObjectCircular<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | argInputObjectCircular$SelectionSet<_$Context>
 
   export interface argInputObjectCircular$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `argInputObjectCircular` field. No arguments are required so you may omit this.
@@ -1076,7 +1076,7 @@ export namespace Query {
   }
 
   export interface argInputObjectCircular$Arguments<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > {
     /**
      * # Info
@@ -1099,7 +1099,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type argInputObjectCircular$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | argInputObjectCircular$SelectionSet<_$Context>
@@ -1108,13 +1108,13 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type bigintField<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | bigintField$SelectionSet<_$Context>
 
   export interface bigintField$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1125,7 +1125,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type bigintField$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | bigintField$SelectionSet<_$Context>
@@ -1134,13 +1134,13 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type bigintFieldNonNull<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | bigintFieldNonNull$SelectionSet<_$Context>
 
   export interface bigintFieldNonNull$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1151,7 +1151,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type bigintFieldNonNull$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | bigintFieldNonNull$SelectionSet<_$Context>
@@ -1159,12 +1159,14 @@ export namespace Query {
 
   // --------------------------------------------------------------------------------------------------
 
-  export type date<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type date<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | date$SelectionSet<_$Context>
 
   export interface date$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1175,7 +1177,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type date$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | date$SelectionSet<_$Context>
@@ -1184,13 +1186,13 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type dateArg<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | dateArg$SelectionSet<_$Context>
 
   export interface dateArg$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `dateArg` field. No arguments are required so you may omit this.
@@ -1199,7 +1201,7 @@ export namespace Query {
   }
 
   export interface dateArg$Arguments<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > {
     /**
      * # Info
@@ -1231,7 +1233,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateArg$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | dateArg$SelectionSet<_$Context>
@@ -1240,13 +1242,13 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type dateArgInputObject<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | dateArgInputObject$SelectionSet<_$Context>
 
   export interface dateArgInputObject$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `dateArgInputObject` field. No arguments are required so you may omit this.
@@ -1255,7 +1257,7 @@ export namespace Query {
   }
 
   export interface dateArgInputObject$Arguments<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > {
     /**
      * # Info
@@ -1278,7 +1280,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateArgInputObject$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | dateArgInputObject$SelectionSet<_$Context>
@@ -1287,13 +1289,13 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type dateArgList<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | dateArgList$SelectionSet<_$Context>
 
   export interface dateArgList$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `dateArgList` field. No arguments are required so you may omit this.
@@ -1302,7 +1304,7 @@ export namespace Query {
   }
 
   export interface dateArgList$Arguments<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > {
     /**
      * # Info
@@ -1340,7 +1342,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateArgList$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | dateArgList$SelectionSet<_$Context>
@@ -1349,11 +1351,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type dateArgNonNull<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = dateArgNonNull$SelectionSet<_$Context>
 
   export interface dateArgNonNull$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `dateArgNonNull` field. All arguments are required so you must include this.
@@ -1362,7 +1364,7 @@ export namespace Query {
   }
 
   export interface dateArgNonNull$Arguments<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > {
     /**
      * # Info
@@ -1392,7 +1394,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateArgNonNull$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     dateArgNonNull$SelectionSet<_$Context>
   >
@@ -1400,11 +1402,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type dateArgNonNullList<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = dateArgNonNullList$SelectionSet<_$Context>
 
   export interface dateArgNonNullList$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `dateArgNonNullList` field. All arguments are required so you must include this.
@@ -1413,7 +1415,7 @@ export namespace Query {
   }
 
   export interface dateArgNonNullList$Arguments<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > {
     /**
      * # Info
@@ -1449,7 +1451,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateArgNonNullList$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     dateArgNonNullList$SelectionSet<_$Context>
   >
@@ -1457,11 +1459,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type dateArgNonNullListNonNull<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = dateArgNonNullListNonNull$SelectionSet<_$Context>
 
   export interface dateArgNonNullListNonNull$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `dateArgNonNullListNonNull` field. All arguments are required so you must include this.
@@ -1470,7 +1472,7 @@ export namespace Query {
   }
 
   export interface dateArgNonNullListNonNull$Arguments<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > {
     /**
      * # Info
@@ -1506,7 +1508,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateArgNonNullListNonNull$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     dateArgNonNullListNonNull$SelectionSet<_$Context>
   >
@@ -1514,11 +1516,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type dateInterface1<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = dateInterface1$SelectionSet<_$Context>
 
   export interface dateInterface1$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$DateInterface1<_$Context> {}
 
   // --- expanded ---
@@ -1529,7 +1531,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateInterface1$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     dateInterface1$SelectionSet<_$Context>
   >
@@ -1537,13 +1539,13 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type dateList<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | dateList$SelectionSet<_$Context>
 
   export interface dateList$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1554,7 +1556,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateList$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | dateList$SelectionSet<_$Context>
@@ -1563,13 +1565,13 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type dateListList<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | dateListList$SelectionSet<_$Context>
 
   export interface dateListList$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1580,7 +1582,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateListList$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | dateListList$SelectionSet<_$Context>
@@ -1589,13 +1591,13 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type dateListNonNull<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | dateListNonNull$SelectionSet<_$Context>
 
   export interface dateListNonNull$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1606,7 +1608,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateListNonNull$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | dateListNonNull$SelectionSet<_$Context>
@@ -1615,13 +1617,13 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type dateNonNull<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | dateNonNull$SelectionSet<_$Context>
 
   export interface dateNonNull$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1632,7 +1634,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateNonNull$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | dateNonNull$SelectionSet<_$Context>
@@ -1641,11 +1643,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type dateObject1<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = dateObject1$SelectionSet<_$Context>
 
   export interface dateObject1$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$DateObject1<_$Context> {}
 
   // --- expanded ---
@@ -1656,7 +1658,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateObject1$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     dateObject1$SelectionSet<_$Context>
   >
@@ -1664,11 +1666,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type dateUnion<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = dateUnion$SelectionSet<_$Context>
 
   export interface dateUnion$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$DateUnion<_$Context> {}
 
   // --- expanded ---
@@ -1679,7 +1681,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type dateUnion$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     dateUnion$SelectionSet<_$Context>
   >
@@ -1687,13 +1689,13 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type error<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | error$SelectionSet<_$Context>
 
   export interface error$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `error` field. No arguments are required so you may omit this.
@@ -1702,7 +1704,7 @@ export namespace Query {
   }
 
   export interface error$Arguments<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > {
     /**
      * # Info
@@ -1725,7 +1727,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type error$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | error$SelectionSet<_$Context>
@@ -1733,12 +1735,12 @@ export namespace Query {
 
   // --------------------------------------------------------------------------------------------------
 
-  export type id<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type id<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Context>
 
   export interface id$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1749,7 +1751,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Context>
@@ -1758,13 +1760,13 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type idNonNull<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | idNonNull$SelectionSet<_$Context>
 
   export interface idNonNull$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1775,7 +1777,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type idNonNull$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | idNonNull$SelectionSet<_$Context>
@@ -1784,11 +1786,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type $interface<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $interface$SelectionSet<_$Context>
 
   export interface $interface$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Interface<_$Context> {}
 
   // --- expanded ---
@@ -1799,7 +1801,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type $interface$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     $interface$SelectionSet<_$Context>
   >
@@ -1807,11 +1809,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type interfaceHierarchyChildA<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = interfaceHierarchyChildA$SelectionSet<_$Context>
 
   export interface interfaceHierarchyChildA$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$InterfaceChildA<_$Context> {
     /**
      * Arguments for `interfaceHierarchyChildA` field. No arguments are required so you may omit this.
@@ -1820,7 +1822,7 @@ export namespace Query {
   }
 
   export interface interfaceHierarchyChildA$Arguments<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > {
     /**
      * # Info
@@ -1843,7 +1845,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type interfaceHierarchyChildA$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     interfaceHierarchyChildA$SelectionSet<_$Context>
   >
@@ -1851,11 +1853,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type interfaceHierarchyChildB<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = interfaceHierarchyChildB$SelectionSet<_$Context>
 
   export interface interfaceHierarchyChildB$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$InterfaceChildB<_$Context> {
     /**
      * Arguments for `interfaceHierarchyChildB` field. No arguments are required so you may omit this.
@@ -1864,7 +1866,7 @@ export namespace Query {
   }
 
   export interface interfaceHierarchyChildB$Arguments<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > {
     /**
      * # Info
@@ -1887,7 +1889,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type interfaceHierarchyChildB$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     interfaceHierarchyChildB$SelectionSet<_$Context>
   >
@@ -1895,11 +1897,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type interfaceHierarchyGrandparents<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = interfaceHierarchyGrandparents$SelectionSet<_$Context>
 
   export interface interfaceHierarchyGrandparents$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$InterfaceGrandparent<_$Context> {
     /**
      * Arguments for `interfaceHierarchyGrandparents` field. No arguments are required so you may omit this.
@@ -1908,7 +1910,7 @@ export namespace Query {
   }
 
   export interface interfaceHierarchyGrandparents$Arguments<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > {
     /**
      * # Info
@@ -1933,7 +1935,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type interfaceHierarchyGrandparents$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     interfaceHierarchyGrandparents$SelectionSet<_$Context>
   >
@@ -1941,11 +1943,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type interfaceHierarchyParents<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = interfaceHierarchyParents$SelectionSet<_$Context>
 
   export interface interfaceHierarchyParents$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$InterfaceParent<_$Context> {
     /**
      * Arguments for `interfaceHierarchyParents` field. No arguments are required so you may omit this.
@@ -1954,7 +1956,7 @@ export namespace Query {
   }
 
   export interface interfaceHierarchyParents$Arguments<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > {
     /**
      * # Info
@@ -1977,7 +1979,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type interfaceHierarchyParents$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     interfaceHierarchyParents$SelectionSet<_$Context>
   >
@@ -1985,11 +1987,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type interfaceNonNull<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = interfaceNonNull$SelectionSet<_$Context>
 
   export interface interfaceNonNull$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Interface<_$Context> {}
 
   // --- expanded ---
@@ -2000,7 +2002,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type interfaceNonNull$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     interfaceNonNull$SelectionSet<_$Context>
   >
@@ -2008,11 +2010,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type interfaceWithArgs<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = interfaceWithArgs$SelectionSet<_$Context>
 
   export interface interfaceWithArgs$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Interface<_$Context> {
     /**
      * Arguments for `interfaceWithArgs` field. All arguments are required so you must include this.
@@ -2021,7 +2023,7 @@ export namespace Query {
   }
 
   export interface interfaceWithArgs$Arguments<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > {
     /**
      * # Info
@@ -2044,7 +2046,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type interfaceWithArgs$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     interfaceWithArgs$SelectionSet<_$Context>
   >
@@ -2052,13 +2054,13 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type listInt<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | listInt$SelectionSet<_$Context>
 
   export interface listInt$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -2069,7 +2071,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type listInt$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | listInt$SelectionSet<_$Context>
@@ -2078,13 +2080,13 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type listIntNonNull<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | listIntNonNull$SelectionSet<_$Context>
 
   export interface listIntNonNull$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -2095,7 +2097,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type listIntNonNull$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | listIntNonNull$SelectionSet<_$Context>
@@ -2104,13 +2106,13 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type listListInt<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | listListInt$SelectionSet<_$Context>
 
   export interface listListInt$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -2121,7 +2123,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type listListInt$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | listListInt$SelectionSet<_$Context>
@@ -2130,13 +2132,13 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type listListIntNonNull<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | listListIntNonNull$SelectionSet<_$Context>
 
   export interface listListIntNonNull$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -2147,7 +2149,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type listListIntNonNull$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | listListIntNonNull$SelectionSet<_$Context>
@@ -2156,11 +2158,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type lowerCaseUnion<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = lowerCaseUnion$SelectionSet<_$Context>
 
   export interface lowerCaseUnion$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$lowerCaseUnion<_$Context> {}
 
   // --- expanded ---
@@ -2171,7 +2173,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type lowerCaseUnion$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     lowerCaseUnion$SelectionSet<_$Context>
   >
@@ -2179,11 +2181,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type $object<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $object$SelectionSet<_$Context>
 
   export interface $object$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Object1<_$Context> {}
 
   // --- expanded ---
@@ -2194,7 +2196,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type $object$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     $object$SelectionSet<_$Context>
   >
@@ -2202,11 +2204,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type objectList<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = objectList$SelectionSet<_$Context>
 
   export interface objectList$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Object1<_$Context> {}
 
   // --- expanded ---
@@ -2217,7 +2219,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type objectList$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     objectList$SelectionSet<_$Context>
   >
@@ -2225,11 +2227,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type objectListNonNull<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = objectListNonNull$SelectionSet<_$Context>
 
   export interface objectListNonNull$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Object1<_$Context> {}
 
   // --- expanded ---
@@ -2240,7 +2242,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type objectListNonNull$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     objectListNonNull$SelectionSet<_$Context>
   >
@@ -2248,11 +2250,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type objectNested<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = objectNested$SelectionSet<_$Context>
 
   export interface objectNested$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$ObjectNested<_$Context> {}
 
   // --- expanded ---
@@ -2263,7 +2265,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type objectNested$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     objectNested$SelectionSet<_$Context>
   >
@@ -2271,11 +2273,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type objectNestedWithArgs<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = objectNestedWithArgs$SelectionSet<_$Context>
 
   export interface objectNestedWithArgs$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$ObjectNestedWithArgs<_$Context> {}
 
   // --- expanded ---
@@ -2286,7 +2288,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type objectNestedWithArgs$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     objectNestedWithArgs$SelectionSet<_$Context>
   >
@@ -2294,11 +2296,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type objectNonNull<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = objectNonNull$SelectionSet<_$Context>
 
   export interface objectNonNull$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Object1<_$Context> {}
 
   // --- expanded ---
@@ -2309,7 +2311,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type objectNonNull$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     objectNonNull$SelectionSet<_$Context>
   >
@@ -2317,11 +2319,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type objectWithArgs<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = objectWithArgs$SelectionSet<_$Context>
 
   export interface objectWithArgs$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Object1<_$Context> {
     /**
      * Arguments for `objectWithArgs` field. No arguments are required so you may omit this.
@@ -2330,7 +2332,7 @@ export namespace Query {
   }
 
   export interface objectWithArgs$Arguments<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > {
     /**
      * # Info
@@ -2397,7 +2399,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type objectWithArgs$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     objectWithArgs$SelectionSet<_$Context>
   >
@@ -2405,11 +2407,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type result<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = result$SelectionSet<_$Context>
 
   export interface result$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Result<_$Context> {
     /**
      * Arguments for `result` field. All arguments are required so you must include this.
@@ -2418,7 +2420,7 @@ export namespace Query {
   }
 
   export interface result$Arguments<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > {
     /**
      * # Info
@@ -2441,7 +2443,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type result$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     result$SelectionSet<_$Context>
   >
@@ -2449,11 +2451,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type resultNonNull<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = resultNonNull$SelectionSet<_$Context>
 
   export interface resultNonNull$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Result<_$Context> {
     /**
      * Arguments for `resultNonNull` field. No arguments are required so you may omit this.
@@ -2462,7 +2464,7 @@ export namespace Query {
   }
 
   export interface resultNonNull$Arguments<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > {
     /**
      * # Info
@@ -2485,7 +2487,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type resultNonNull$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     resultNonNull$SelectionSet<_$Context>
   >
@@ -2493,13 +2495,13 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type $string<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | $string$SelectionSet<_$Context>
 
   export interface $string$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -2510,7 +2512,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type $string$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | $string$SelectionSet<_$Context>
@@ -2519,13 +2521,13 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type stringWithArgEnum<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | stringWithArgEnum$SelectionSet<_$Context>
 
   export interface stringWithArgEnum$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `stringWithArgEnum` field. No arguments are required so you may omit this.
@@ -2534,7 +2536,7 @@ export namespace Query {
   }
 
   export interface stringWithArgEnum$Arguments<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > {
     /**
      * # Info
@@ -2557,7 +2559,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type stringWithArgEnum$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | stringWithArgEnum$SelectionSet<_$Context>
@@ -2566,13 +2568,13 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type stringWithArgInputObject<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | stringWithArgInputObject$SelectionSet<_$Context>
 
   export interface stringWithArgInputObject$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `stringWithArgInputObject` field. No arguments are required so you may omit this.
@@ -2581,7 +2583,7 @@ export namespace Query {
   }
 
   export interface stringWithArgInputObject$Arguments<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > {
     /**
      * # Info
@@ -2604,7 +2606,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type stringWithArgInputObject$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | stringWithArgInputObject$SelectionSet<_$Context>
@@ -2613,11 +2615,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type stringWithArgInputObjectEnum<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = stringWithArgInputObjectEnum$SelectionSet<_$Context>
 
   export interface stringWithArgInputObjectEnum$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `stringWithArgInputObjectEnum` field. All arguments are required so you must include this.
@@ -2626,7 +2628,7 @@ export namespace Query {
   }
 
   export interface stringWithArgInputObjectEnum$Arguments<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > {
     /**
      * # Info
@@ -2649,7 +2651,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type stringWithArgInputObjectEnum$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     stringWithArgInputObjectEnum$SelectionSet<_$Context>
   >
@@ -2657,11 +2659,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type stringWithArgInputObjectRequired<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = stringWithArgInputObjectRequired$SelectionSet<_$Context>
 
   export interface stringWithArgInputObjectRequired$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `stringWithArgInputObjectRequired` field. All arguments are required so you must include this.
@@ -2670,7 +2672,7 @@ export namespace Query {
   }
 
   export interface stringWithArgInputObjectRequired$Arguments<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > {
     /**
      * # Info
@@ -2693,7 +2695,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type stringWithArgInputObjectRequired$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     stringWithArgInputObjectRequired$SelectionSet<_$Context>
   >
@@ -2701,13 +2703,13 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type stringWithArgs<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | stringWithArgs$SelectionSet<_$Context>
 
   export interface stringWithArgs$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `stringWithArgs` field. No arguments are required so you may omit this.
@@ -2716,7 +2718,7 @@ export namespace Query {
   }
 
   export interface stringWithArgs$Arguments<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > {
     /**
      * # Info
@@ -2786,7 +2788,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type stringWithArgs$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | stringWithArgs$SelectionSet<_$Context>
@@ -2795,13 +2797,13 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type stringWithListArg<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | stringWithListArg$SelectionSet<_$Context>
 
   export interface stringWithListArg$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `stringWithListArg` field. No arguments are required so you may omit this.
@@ -2810,7 +2812,7 @@ export namespace Query {
   }
 
   export interface stringWithListArg$Arguments<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > {
     /**
      * # Info
@@ -2835,7 +2837,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type stringWithListArg$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | stringWithListArg$SelectionSet<_$Context>
@@ -2844,11 +2846,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type stringWithListArgRequired<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = stringWithListArgRequired$SelectionSet<_$Context>
 
   export interface stringWithListArgRequired$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `stringWithListArgRequired` field. All arguments are required so you must include this.
@@ -2857,7 +2859,7 @@ export namespace Query {
   }
 
   export interface stringWithListArgRequired$Arguments<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > {
     /**
      * # Info
@@ -2882,7 +2884,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type stringWithListArgRequired$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     stringWithListArgRequired$SelectionSet<_$Context>
   >
@@ -2890,11 +2892,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type stringWithRequiredArg<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = stringWithRequiredArg$SelectionSet<_$Context>
 
   export interface stringWithRequiredArg$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `stringWithRequiredArg` field. All arguments are required so you must include this.
@@ -2903,7 +2905,7 @@ export namespace Query {
   }
 
   export interface stringWithRequiredArg$Arguments<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > {
     /**
      * # Info
@@ -2926,7 +2928,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type stringWithRequiredArg$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     stringWithRequiredArg$SelectionSet<_$Context>
   >
@@ -2934,11 +2936,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type unionFooBar<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = unionFooBar$SelectionSet<_$Context>
 
   export interface unionFooBar$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$FooBarUnion<_$Context> {}
 
   // --- expanded ---
@@ -2949,7 +2951,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type unionFooBar$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     unionFooBar$SelectionSet<_$Context>
   >
@@ -2957,11 +2959,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type unionFooBarNonNull<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = unionFooBarNonNull$SelectionSet<_$Context>
 
   export interface unionFooBarNonNull$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$FooBarUnion<_$Context> {}
 
   // --- expanded ---
@@ -2972,7 +2974,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type unionFooBarNonNull$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     unionFooBarNonNull$SelectionSet<_$Context>
   >
@@ -2980,11 +2982,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type unionFooBarWithArgs<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = unionFooBarWithArgs$SelectionSet<_$Context>
 
   export interface unionFooBarWithArgs$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$FooBarUnion<_$Context> {
     /**
      * Arguments for `unionFooBarWithArgs` field. No arguments are required so you may omit this.
@@ -2993,7 +2995,7 @@ export namespace Query {
   }
 
   export interface unionFooBarWithArgs$Arguments<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > {
     /**
      * # Info
@@ -3016,7 +3018,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type unionFooBarWithArgs$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     unionFooBarWithArgs$SelectionSet<_$Context>
   >
@@ -3024,11 +3026,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type unionObject<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = unionObject$SelectionSet<_$Context>
 
   export interface unionObject$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$ObjectUnion<_$Context> {}
 
   // --- expanded ---
@@ -3039,7 +3041,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type unionObject$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     unionObject$SelectionSet<_$Context>
   >
@@ -3047,11 +3049,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type unionObjectNonNull<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = unionObjectNonNull$SelectionSet<_$Context>
 
   export interface unionObjectNonNull$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$ObjectUnion<_$Context> {}
 
   // --- expanded ---
@@ -3062,7 +3064,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type unionObjectNonNull$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     unionObjectNonNull$SelectionSet<_$Context>
   >
@@ -3078,7 +3080,7 @@ export namespace Query {
  * GraphQL root {@link https://graphql.org/learn/schema/#the-mutation-and-mutation-types | Mutation} type.
  */
 export interface Mutation<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > {
   /**
    * # Info
@@ -3134,19 +3136,19 @@ export interface Mutation<
 }
 
 export interface Mutation$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends Mutation<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace Mutation {
-  export type id<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type id<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Context>
 
   export interface id$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -3157,7 +3159,7 @@ export namespace Mutation {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Context>
@@ -3166,13 +3168,13 @@ export namespace Mutation {
   // --------------------------------------------------------------------------------------------------
 
   export type idNonNull<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | idNonNull$SelectionSet<_$Context>
 
   export interface idNonNull$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -3183,7 +3185,7 @@ export namespace Mutation {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type idNonNull$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | idNonNull$SelectionSet<_$Context>
@@ -3256,7 +3258,7 @@ export type ParentInterfaceHierarchyMember =
 //
 
 export interface InputObject<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > {
   $abcEnum?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$ABCEnum | null | undefined>
   date?: $$Utilities.DocumentBuilderKit.Var.Maybe<
@@ -3282,7 +3284,7 @@ export interface InputObject<
 }
 
 export interface InputObjectCircular<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > {
   circular?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$InputObjectCircular<_$Context> | null | undefined>
   date?: $$Utilities.DocumentBuilderKit.Var.Maybe<
@@ -3298,19 +3300,19 @@ export interface InputObjectCircular<
 }
 
 export interface InputObjectEnum<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > {
   $abcEnum?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$ABCEnum | null | undefined>
 }
 
 export interface InputObjectNested<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > {
   InputObject?: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$InputObject<_$Context> | null | undefined>
 }
 
 export interface InputObjectNestedNonNull<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > {
   InputObject: $$Utilities.DocumentBuilderKit.Var.Maybe<$NamedTypes.$InputObject<_$Context>>
 }
@@ -3337,9 +3339,9 @@ export interface InputObjectNestedNonNull<
 
 // ----------------------------------------| Entrypoint Interface |
 
-export interface Bar<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext>
-  extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike
-{
+export interface Bar<
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+> extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * # Info
    *
@@ -3378,19 +3380,19 @@ export interface Bar<_$Context extends $$Utilities.DocumentBuilderKit.Select.Sel
 }
 
 export interface Bar$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends Bar<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace Bar {
-  export type int<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type int<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | int$SelectionSet<_$Context>
 
   export interface int$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -3401,7 +3403,7 @@ export namespace Bar {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type int$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | int$SelectionSet<_$Context>
@@ -3415,7 +3417,7 @@ export namespace Bar {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface DateObject1<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * # Info
@@ -3457,7 +3459,7 @@ export interface DateObject1<
 }
 
 export interface DateObject1$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends DateObject1<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
@@ -3465,13 +3467,13 @@ export interface DateObject1$FragmentInline<
 
 export namespace DateObject1 {
   export type date1<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | date1$SelectionSet<_$Context>
 
   export interface date1$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -3482,7 +3484,7 @@ export namespace DateObject1 {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type date1$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | date1$SelectionSet<_$Context>
@@ -3496,7 +3498,7 @@ export namespace DateObject1 {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface DateObject2<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * # Info
@@ -3538,7 +3540,7 @@ export interface DateObject2<
 }
 
 export interface DateObject2$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends DateObject2<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
@@ -3546,13 +3548,13 @@ export interface DateObject2$FragmentInline<
 
 export namespace DateObject2 {
   export type date2<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | date2$SelectionSet<_$Context>
 
   export interface date2$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -3563,7 +3565,7 @@ export namespace DateObject2 {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type date2$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | date2$SelectionSet<_$Context>
@@ -3577,7 +3579,7 @@ export namespace DateObject2 {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface ErrorOne<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * # Info
@@ -3633,7 +3635,7 @@ export interface ErrorOne<
 }
 
 export interface ErrorOne$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends ErrorOne<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
@@ -3641,13 +3643,13 @@ export interface ErrorOne$FragmentInline<
 
 export namespace ErrorOne {
   export type infoId<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | infoId$SelectionSet<_$Context>
 
   export interface infoId$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -3658,7 +3660,7 @@ export namespace ErrorOne {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type infoId$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | infoId$SelectionSet<_$Context>
@@ -3667,13 +3669,13 @@ export namespace ErrorOne {
   // --------------------------------------------------------------------------------------------------
 
   export type message<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | message$SelectionSet<_$Context>
 
   export interface message$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -3684,7 +3686,7 @@ export namespace ErrorOne {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type message$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | message$SelectionSet<_$Context>
@@ -3698,7 +3700,7 @@ export namespace ErrorOne {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface ErrorTwo<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * # Info
@@ -3754,7 +3756,7 @@ export interface ErrorTwo<
 }
 
 export interface ErrorTwo$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends ErrorTwo<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
@@ -3762,13 +3764,13 @@ export interface ErrorTwo$FragmentInline<
 
 export namespace ErrorTwo {
   export type infoInt<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | infoInt$SelectionSet<_$Context>
 
   export interface infoInt$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -3779,7 +3781,7 @@ export namespace ErrorTwo {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type infoInt$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | infoInt$SelectionSet<_$Context>
@@ -3788,13 +3790,13 @@ export namespace ErrorTwo {
   // --------------------------------------------------------------------------------------------------
 
   export type message<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | message$SelectionSet<_$Context>
 
   export interface message$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -3805,7 +3807,7 @@ export namespace ErrorTwo {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type message$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | message$SelectionSet<_$Context>
@@ -3821,9 +3823,9 @@ export namespace ErrorTwo {
 /**
  * Object documentation.
  */
-export interface Foo<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext>
-  extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike
-{
+export interface Foo<
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+> extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * Field documentation.
    *
@@ -3865,19 +3867,19 @@ export interface Foo<_$Context extends $$Utilities.DocumentBuilderKit.Select.Sel
 }
 
 export interface Foo$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends Foo<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace Foo {
-  export type id<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type id<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Context>
 
   export interface id$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -3888,7 +3890,7 @@ export namespace Foo {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Context>
@@ -3902,7 +3904,7 @@ export namespace Foo {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface Object1<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * # Info
@@ -4014,7 +4016,7 @@ export interface Object1<
 }
 
 export interface Object1$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends Object1<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
@@ -4022,13 +4024,13 @@ export interface Object1$FragmentInline<
 
 export namespace Object1 {
   export type ABCEnum<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | ABCEnum$SelectionSet<_$Context>
 
   export interface ABCEnum$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -4039,7 +4041,7 @@ export namespace Object1 {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type ABCEnum$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | ABCEnum$SelectionSet<_$Context>
@@ -4048,13 +4050,13 @@ export namespace Object1 {
   // --------------------------------------------------------------------------------------------------
 
   export type $boolean<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | $boolean$SelectionSet<_$Context>
 
   export interface $boolean$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -4065,7 +4067,7 @@ export namespace Object1 {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type $boolean$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | $boolean$SelectionSet<_$Context>
@@ -4074,13 +4076,13 @@ export namespace Object1 {
   // --------------------------------------------------------------------------------------------------
 
   export type float<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | float$SelectionSet<_$Context>
 
   export interface float$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -4091,7 +4093,7 @@ export namespace Object1 {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type float$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | float$SelectionSet<_$Context>
@@ -4099,12 +4101,12 @@ export namespace Object1 {
 
   // --------------------------------------------------------------------------------------------------
 
-  export type id<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type id<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Context>
 
   export interface id$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -4115,7 +4117,7 @@ export namespace Object1 {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Context>
@@ -4123,12 +4125,12 @@ export namespace Object1 {
 
   // --------------------------------------------------------------------------------------------------
 
-  export type int<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type int<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | int$SelectionSet<_$Context>
 
   export interface int$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -4139,7 +4141,7 @@ export namespace Object1 {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type int$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | int$SelectionSet<_$Context>
@@ -4148,13 +4150,13 @@ export namespace Object1 {
   // --------------------------------------------------------------------------------------------------
 
   export type $string<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | $string$SelectionSet<_$Context>
 
   export interface $string$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -4165,7 +4167,7 @@ export namespace Object1 {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type $string$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | $string$SelectionSet<_$Context>
@@ -4179,7 +4181,7 @@ export namespace Object1 {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface Object1ImplementingInterface<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * # Info
@@ -4235,7 +4237,7 @@ export interface Object1ImplementingInterface<
 }
 
 export interface Object1ImplementingInterface$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends
   Object1ImplementingInterface<_$Context>,
   $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields
@@ -4245,12 +4247,12 @@ export interface Object1ImplementingInterface$FragmentInline<
 // ----------------------------------------| Fields |
 
 export namespace Object1ImplementingInterface {
-  export type id<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type id<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Context>
 
   export interface id$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -4261,7 +4263,7 @@ export namespace Object1ImplementingInterface {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Context>
@@ -4269,12 +4271,12 @@ export namespace Object1ImplementingInterface {
 
   // --------------------------------------------------------------------------------------------------
 
-  export type int<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type int<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | int$SelectionSet<_$Context>
 
   export interface int$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -4285,7 +4287,7 @@ export namespace Object1ImplementingInterface {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type int$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | int$SelectionSet<_$Context>
@@ -4299,7 +4301,7 @@ export namespace Object1ImplementingInterface {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface Object2ImplementingInterface<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * # Info
@@ -4355,7 +4357,7 @@ export interface Object2ImplementingInterface<
 }
 
 export interface Object2ImplementingInterface$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends
   Object2ImplementingInterface<_$Context>,
   $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields
@@ -4366,13 +4368,13 @@ export interface Object2ImplementingInterface$FragmentInline<
 
 export namespace Object2ImplementingInterface {
   export type $boolean<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | $boolean$SelectionSet<_$Context>
 
   export interface $boolean$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -4383,7 +4385,7 @@ export namespace Object2ImplementingInterface {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type $boolean$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | $boolean$SelectionSet<_$Context>
@@ -4391,12 +4393,12 @@ export namespace Object2ImplementingInterface {
 
   // --------------------------------------------------------------------------------------------------
 
-  export type id<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type id<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Context>
 
   export interface id$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -4407,7 +4409,7 @@ export namespace Object2ImplementingInterface {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Context>
@@ -4421,7 +4423,7 @@ export namespace Object2ImplementingInterface {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface ObjectChildA<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * # Info
@@ -4505,19 +4507,19 @@ export interface ObjectChildA<
 }
 
 export interface ObjectChildA$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends ObjectChildA<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace ObjectChildA {
-  export type a<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type a<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | a$SelectionSet<_$Context>
 
   export interface a$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -4528,7 +4530,7 @@ export namespace ObjectChildA {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type a$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | a$SelectionSet<_$Context>
@@ -4536,12 +4538,12 @@ export namespace ObjectChildA {
 
   // --------------------------------------------------------------------------------------------------
 
-  export type b<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type b<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | b$SelectionSet<_$Context>
 
   export interface b$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -4552,7 +4554,7 @@ export namespace ObjectChildA {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type b$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | b$SelectionSet<_$Context>
@@ -4560,12 +4562,12 @@ export namespace ObjectChildA {
 
   // --------------------------------------------------------------------------------------------------
 
-  export type c1<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type c1<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | c1$SelectionSet<_$Context>
 
   export interface c1$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -4576,7 +4578,7 @@ export namespace ObjectChildA {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type c1$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | c1$SelectionSet<_$Context>
@@ -4584,12 +4586,12 @@ export namespace ObjectChildA {
 
   // --------------------------------------------------------------------------------------------------
 
-  export type me<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type me<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | me$SelectionSet<_$Context>
 
   export interface me$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -4600,7 +4602,7 @@ export namespace ObjectChildA {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type me$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | me$SelectionSet<_$Context>
@@ -4614,7 +4616,7 @@ export namespace ObjectChildA {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface ObjectChildB<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * # Info
@@ -4699,19 +4701,19 @@ export interface ObjectChildB<
 }
 
 export interface ObjectChildB$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends ObjectChildB<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace ObjectChildB {
-  export type a<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type a<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | a$SelectionSet<_$Context>
 
   export interface a$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -4722,7 +4724,7 @@ export namespace ObjectChildB {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type a$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | a$SelectionSet<_$Context>
@@ -4730,12 +4732,12 @@ export namespace ObjectChildB {
 
   // --------------------------------------------------------------------------------------------------
 
-  export type b<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type b<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | b$SelectionSet<_$Context>
 
   export interface b$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -4746,7 +4748,7 @@ export namespace ObjectChildB {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type b$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | b$SelectionSet<_$Context>
@@ -4754,12 +4756,12 @@ export namespace ObjectChildB {
 
   // --------------------------------------------------------------------------------------------------
 
-  export type c2<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type c2<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | c2$SelectionSet<_$Context>
 
   export interface c2$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -4770,7 +4772,7 @@ export namespace ObjectChildB {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type c2$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | c2$SelectionSet<_$Context>
@@ -4778,12 +4780,12 @@ export namespace ObjectChildB {
 
   // --------------------------------------------------------------------------------------------------
 
-  export type me<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type me<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | me$SelectionSet<_$Context>
 
   export interface me$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -4794,7 +4796,7 @@ export namespace ObjectChildB {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type me$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | me$SelectionSet<_$Context>
@@ -4808,7 +4810,7 @@ export namespace ObjectChildB {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface ObjectGrandparent<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * # Info
@@ -4864,19 +4866,19 @@ export interface ObjectGrandparent<
 }
 
 export interface ObjectGrandparent$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends ObjectGrandparent<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace ObjectGrandparent {
-  export type a<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type a<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | a$SelectionSet<_$Context>
 
   export interface a$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -4887,7 +4889,7 @@ export namespace ObjectGrandparent {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type a$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | a$SelectionSet<_$Context>
@@ -4895,12 +4897,12 @@ export namespace ObjectGrandparent {
 
   // --------------------------------------------------------------------------------------------------
 
-  export type me<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type me<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | me$SelectionSet<_$Context>
 
   export interface me$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -4911,7 +4913,7 @@ export namespace ObjectGrandparent {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type me$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | me$SelectionSet<_$Context>
@@ -4925,7 +4927,7 @@ export namespace ObjectGrandparent {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface ObjectNested<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * # Info
@@ -4981,19 +4983,19 @@ export interface ObjectNested<
 }
 
 export interface ObjectNested$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends ObjectNested<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace ObjectNested {
-  export type id<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type id<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Context>
 
   export interface id$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -5004,7 +5006,7 @@ export namespace ObjectNested {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Context>
@@ -5013,11 +5015,11 @@ export namespace ObjectNested {
   // --------------------------------------------------------------------------------------------------
 
   export type $object<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $object$SelectionSet<_$Context>
 
   export interface $object$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Object1<_$Context> {}
 
   // --- expanded ---
@@ -5028,7 +5030,7 @@ export namespace ObjectNested {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type $object$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     $object$SelectionSet<_$Context>
   >
@@ -5041,7 +5043,7 @@ export namespace ObjectNested {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface ObjectNestedWithArgs<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * # Info
@@ -5099,7 +5101,7 @@ export interface ObjectNestedWithArgs<
 }
 
 export interface ObjectNestedWithArgs$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends
   ObjectNestedWithArgs<_$Context>,
   $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields
@@ -5109,12 +5111,12 @@ export interface ObjectNestedWithArgs$FragmentInline<
 // ----------------------------------------| Fields |
 
 export namespace ObjectNestedWithArgs {
-  export type id<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type id<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Context>
 
   export interface id$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
     /**
      * Arguments for `id` field. No arguments are required so you may omit this.
@@ -5123,7 +5125,7 @@ export namespace ObjectNestedWithArgs {
   }
 
   export interface id$Arguments<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > {
     /**
      * # Info
@@ -5146,7 +5148,7 @@ export namespace ObjectNestedWithArgs {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Context>
@@ -5155,11 +5157,11 @@ export namespace ObjectNestedWithArgs {
   // --------------------------------------------------------------------------------------------------
 
   export type $object<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $object$SelectionSet<_$Context>
 
   export interface $object$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Object1<_$Context> {
     /**
      * Arguments for `object` field. No arguments are required so you may omit this.
@@ -5168,7 +5170,7 @@ export namespace ObjectNestedWithArgs {
   }
 
   export interface $object$Arguments<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > {
     /**
      * # Info
@@ -5224,7 +5226,7 @@ export namespace ObjectNestedWithArgs {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type $object$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     $object$SelectionSet<_$Context>
   >
@@ -5237,7 +5239,7 @@ export namespace ObjectNestedWithArgs {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface ObjectParent<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * # Info
@@ -5307,19 +5309,19 @@ export interface ObjectParent<
 }
 
 export interface ObjectParent$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends ObjectParent<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace ObjectParent {
-  export type a<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type a<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | a$SelectionSet<_$Context>
 
   export interface a$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -5330,7 +5332,7 @@ export namespace ObjectParent {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type a$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | a$SelectionSet<_$Context>
@@ -5338,12 +5340,12 @@ export namespace ObjectParent {
 
   // --------------------------------------------------------------------------------------------------
 
-  export type b<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type b<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | b$SelectionSet<_$Context>
 
   export interface b$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -5354,7 +5356,7 @@ export namespace ObjectParent {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type b$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | b$SelectionSet<_$Context>
@@ -5362,12 +5364,12 @@ export namespace ObjectParent {
 
   // --------------------------------------------------------------------------------------------------
 
-  export type me<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type me<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | me$SelectionSet<_$Context>
 
   export interface me$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -5378,7 +5380,7 @@ export namespace ObjectParent {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type me$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | me$SelectionSet<_$Context>
@@ -5392,7 +5394,7 @@ export namespace ObjectParent {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface ObjectUnion<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * # Info
@@ -5434,7 +5436,7 @@ export interface ObjectUnion<
 }
 
 export interface ObjectUnion$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends ObjectUnion<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
@@ -5442,11 +5444,11 @@ export interface ObjectUnion$FragmentInline<
 
 export namespace ObjectUnion {
   export type fooBarUnion<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = fooBarUnion$SelectionSet<_$Context>
 
   export interface fooBarUnion$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$FooBarUnion<_$Context> {}
 
   // --- expanded ---
@@ -5457,7 +5459,7 @@ export namespace ObjectUnion {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type fooBarUnion$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     fooBarUnion$SelectionSet<_$Context>
   >
@@ -5470,7 +5472,7 @@ export namespace ObjectUnion {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface lowerCaseObject<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * # Info
@@ -5512,19 +5514,19 @@ export interface lowerCaseObject<
 }
 
 export interface lowerCaseObject$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends lowerCaseObject<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace lowerCaseObject {
-  export type id<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type id<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Context>
 
   export interface id$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -5535,7 +5537,7 @@ export namespace lowerCaseObject {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Context>
@@ -5549,7 +5551,7 @@ export namespace lowerCaseObject {
 // ----------------------------------------| Entrypoint Interface |
 
 export interface lowerCaseObject2<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * # Info
@@ -5591,19 +5593,19 @@ export interface lowerCaseObject2<
 }
 
 export interface lowerCaseObject2$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends lowerCaseObject2<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace lowerCaseObject2 {
-  export type int<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type int<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | int$SelectionSet<_$Context>
 
   export interface int$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -5614,7 +5616,7 @@ export namespace lowerCaseObject2 {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type int$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | int$SelectionSet<_$Context>
@@ -5638,7 +5640,7 @@ export namespace lowerCaseObject2 {
 //
 
 export interface DateUnion<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > {
   /**
    * A meta field. Is the name of the type being selected. Since this is a union type and thus polymorphic,
@@ -5722,7 +5724,7 @@ export interface DateUnion<
     | DateUnion$FragmentInline<_$Context>[]
 }
 export interface DateUnion$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends DateUnion<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
@@ -5730,7 +5732,7 @@ export interface DateUnion$FragmentInline<
  * Union documentation.
  */
 export interface FooBarUnion<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > {
   /**
    * A meta field. Is the name of the type being selected. Since this is a union type and thus polymorphic,
@@ -5814,12 +5816,12 @@ export interface FooBarUnion<
     | FooBarUnion$FragmentInline<_$Context>[]
 }
 export interface FooBarUnion$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends FooBarUnion<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 export interface Result<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > {
   /**
    * A meta field. Is the name of the type being selected. Since this is a union type and thus polymorphic,
@@ -5931,12 +5933,12 @@ export interface Result<
     | Result$FragmentInline<_$Context>[]
 }
 export interface Result$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends Result<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 export interface lowerCaseUnion<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > {
   /**
    * A meta field. Is the name of the type being selected. Since this is a union type and thus polymorphic,
@@ -6020,7 +6022,7 @@ export interface lowerCaseUnion<
     | lowerCaseUnion$FragmentInline<_$Context>[]
 }
 export interface lowerCaseUnion$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends lowerCaseUnion<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
@@ -6045,7 +6047,7 @@ export interface lowerCaseUnion$FragmentInline<
 //
 
 export interface DateInterface1<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   date1?: DateInterface1.date1<_$Context>
   /**
@@ -6104,19 +6106,19 @@ export interface DateInterface1<
 }
 
 export interface DateInterface1$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends DateInterface1<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 export namespace DateInterface1 {
   export type date1<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | date1$SelectionSet<_$Context>
 
   export interface date1$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -6127,7 +6129,7 @@ export namespace DateInterface1 {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type date1$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | date1$SelectionSet<_$Context>
@@ -6139,7 +6141,7 @@ export namespace DateInterface1 {
 //
 
 export interface Error<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   message?: Error.message<_$Context>
   /**
@@ -6227,19 +6229,19 @@ export interface Error<
 }
 
 export interface Error$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends Error<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 export namespace Error {
   export type message<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | message$SelectionSet<_$Context>
 
   export interface message$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -6250,7 +6252,7 @@ export namespace Error {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type message$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | message$SelectionSet<_$Context>
@@ -6262,7 +6264,7 @@ export namespace Error {
 //
 
 export interface Interface<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   id?: Interface.id<_$Context>
   /**
@@ -6350,17 +6352,17 @@ export interface Interface<
 }
 
 export interface Interface$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends Interface<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 export namespace Interface {
-  export type id<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type id<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Context>
 
   export interface id$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -6371,7 +6373,7 @@ export namespace Interface {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Context>
@@ -6383,7 +6385,7 @@ export namespace Interface {
 //
 
 export interface InterfaceChildA<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   a?: InterfaceChildA.a<_$Context>
   b?: InterfaceChildA.b<_$Context>
@@ -6444,17 +6446,17 @@ export interface InterfaceChildA<
 }
 
 export interface InterfaceChildA$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends InterfaceChildA<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 export namespace InterfaceChildA {
-  export type a<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type a<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | a$SelectionSet<_$Context>
 
   export interface a$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -6465,18 +6467,18 @@ export namespace InterfaceChildA {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type a$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | a$SelectionSet<_$Context>
   >
 
-  export type b<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type b<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | b$SelectionSet<_$Context>
 
   export interface b$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -6487,18 +6489,18 @@ export namespace InterfaceChildA {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type b$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | b$SelectionSet<_$Context>
   >
 
-  export type c1<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type c1<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | c1$SelectionSet<_$Context>
 
   export interface c1$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -6509,7 +6511,7 @@ export namespace InterfaceChildA {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type c1$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | c1$SelectionSet<_$Context>
@@ -6521,7 +6523,7 @@ export namespace InterfaceChildA {
 //
 
 export interface InterfaceChildB<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   a?: InterfaceChildB.a<_$Context>
   b?: InterfaceChildB.b<_$Context>
@@ -6582,17 +6584,17 @@ export interface InterfaceChildB<
 }
 
 export interface InterfaceChildB$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends InterfaceChildB<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 export namespace InterfaceChildB {
-  export type a<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type a<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | a$SelectionSet<_$Context>
 
   export interface a$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -6603,18 +6605,18 @@ export namespace InterfaceChildB {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type a$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | a$SelectionSet<_$Context>
   >
 
-  export type b<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type b<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | b$SelectionSet<_$Context>
 
   export interface b$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -6625,18 +6627,18 @@ export namespace InterfaceChildB {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type b$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | b$SelectionSet<_$Context>
   >
 
-  export type c2<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type c2<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | c2$SelectionSet<_$Context>
 
   export interface c2$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -6647,7 +6649,7 @@ export namespace InterfaceChildB {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type c2$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | c2$SelectionSet<_$Context>
@@ -6659,7 +6661,7 @@ export namespace InterfaceChildB {
 //
 
 export interface InterfaceGrandparent<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   a?: InterfaceGrandparent.a<_$Context>
   /**
@@ -6808,7 +6810,7 @@ export interface InterfaceGrandparent<
 }
 
 export interface InterfaceGrandparent$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends
   InterfaceGrandparent<_$Context>,
   $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields
@@ -6816,12 +6818,12 @@ export interface InterfaceGrandparent$FragmentInline<
 }
 
 export namespace InterfaceGrandparent {
-  export type a<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type a<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | a$SelectionSet<_$Context>
 
   export interface a$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -6832,7 +6834,7 @@ export namespace InterfaceGrandparent {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type a$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | a$SelectionSet<_$Context>
@@ -6844,7 +6846,7 @@ export namespace InterfaceGrandparent {
 //
 
 export interface InterfaceParent<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   a?: InterfaceParent.a<_$Context>
   b?: InterfaceParent.b<_$Context>
@@ -6964,17 +6966,17 @@ export interface InterfaceParent<
 }
 
 export interface InterfaceParent$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends InterfaceParent<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 export namespace InterfaceParent {
-  export type a<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type a<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | a$SelectionSet<_$Context>
 
   export interface a$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -6985,18 +6987,18 @@ export namespace InterfaceParent {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type a$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | a$SelectionSet<_$Context>
   >
 
-  export type b<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
+  export type b<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | b$SelectionSet<_$Context>
 
   export interface b$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -7007,7 +7009,7 @@ export namespace InterfaceParent {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type b$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | b$SelectionSet<_$Context>
@@ -7038,10 +7040,10 @@ export type Mutation$Variables<_$SelectionSet> = any // Temporarily any - will b
 
 export namespace $NamedTypes {
   export type $Query<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = Query<_$Context>
   export type $Mutation<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = Mutation<_$Context>
   export type $ABCEnum = ABCEnum
   export type $Case = Case
@@ -7050,103 +7052,105 @@ export namespace $NamedTypes {
   export type $GrandparentInterfaceHierarchyMember = GrandparentInterfaceHierarchyMember
   export type $ParentInterfaceHierarchyMember = ParentInterfaceHierarchyMember
   export type $InputObject<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = InputObject<_$Context>
   export type $InputObjectCircular<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = InputObjectCircular<_$Context>
   export type $InputObjectEnum<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = InputObjectEnum<_$Context>
   export type $InputObjectNested<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = InputObjectNested<_$Context>
   export type $InputObjectNestedNonNull<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = InputObjectNestedNonNull<_$Context>
-  export type $Bar<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
-    Bar<_$Context>
+  export type $Bar<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = Bar<_$Context>
   export type $DateObject1<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = DateObject1<_$Context>
   export type $DateObject2<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = DateObject2<_$Context>
   export type $ErrorOne<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = ErrorOne<_$Context>
   export type $ErrorTwo<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = ErrorTwo<_$Context>
-  export type $Foo<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext> =
-    Foo<_$Context>
+  export type $Foo<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = Foo<_$Context>
   export type $Object1<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = Object1<_$Context>
   export type $Object1ImplementingInterface<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = Object1ImplementingInterface<_$Context>
   export type $Object2ImplementingInterface<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = Object2ImplementingInterface<_$Context>
   export type $ObjectChildA<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = ObjectChildA<_$Context>
   export type $ObjectChildB<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = ObjectChildB<_$Context>
   export type $ObjectGrandparent<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = ObjectGrandparent<_$Context>
   export type $ObjectNested<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = ObjectNested<_$Context>
   export type $ObjectNestedWithArgs<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = ObjectNestedWithArgs<_$Context>
   export type $ObjectParent<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = ObjectParent<_$Context>
   export type $ObjectUnion<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = ObjectUnion<_$Context>
   export type $lowerCaseObject<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = lowerCaseObject<_$Context>
   export type $lowerCaseObject2<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = lowerCaseObject2<_$Context>
   export type $DateUnion<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = DateUnion<_$Context>
   export type $FooBarUnion<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = FooBarUnion<_$Context>
   export type $Result<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = Result<_$Context>
   export type $lowerCaseUnion<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = lowerCaseUnion<_$Context>
   export type $DateInterface1<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = DateInterface1<_$Context>
   export type $Error<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = Error<_$Context>
   export type $Interface<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = Interface<_$Context>
   export type $InterfaceChildA<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = InterfaceChildA<_$Context>
   export type $InterfaceChildB<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = InterfaceChildB<_$Context>
   export type $InterfaceGrandparent<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = InterfaceGrandparent<_$Context>
   export type $InterfaceParent<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = DefaultSelectionContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = InterfaceParent<_$Context>
 }
