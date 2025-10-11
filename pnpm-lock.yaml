@@ -18,8 +18,8 @@ importers:
         specifier: ^0.9.0
         version: 0.9.0
       '@wollybeard/kit':
-        specifier: ^0.76.2
-        version: 0.76.2(@effect/platform@0.91.1(effect@3.17.14))(effect@3.17.14)
+        specifier: ^0.78.0
+        version: 0.78.0(@effect/platform@0.91.1(effect@3.17.14))(effect@3.17.14)
       es-toolkit:
         specifier: ^1.35.0
         version: 1.35.0
@@ -1241,8 +1241,8 @@ packages:
   '@types/node@22.14.1':
     resolution: {integrity: sha512-u0HuPQwe/dHrItgHHpmw3N2fYCR6x4ivMNbPHRkBVP4CvN+kiRrKHWk3i8tXiO/joPwXLMYvF9TTF0eqgHIuOw==}
 
-  '@types/node@24.7.0':
-    resolution: {integrity: sha512-IbKooQVqUBrlzWTi79E8Fw78l8k1RNtlDDNWsFZs7XonuQSJ8oNYfEeclhprUldXISRMLzBpILuKgPlIxm+/Yw==}
+  '@types/node@24.7.2':
+    resolution: {integrity: sha512-/NbVmcGTP+lj5oa4yiYxxeBjRivKQ5Ns1eSZeB99ExsEQ6rX5XYU1Zy/gGxY/ilqtD4Etx9mKyrPxZRetiahhA==}
 
   '@types/object-inspect@1.13.0':
     resolution: {integrity: sha512-lwGTVESDDV+XsQ1pH4UifpJ1f7OtXzQ6QBOX2Afq2bM/T3oOt8hF6exJMjjIjtEWeAN2YAo25J7HxWh97CCz9w==}
@@ -1309,6 +1309,30 @@ packages:
 
   '@vitest/utils@3.1.1':
     resolution: {integrity: sha512-1XIjflyaU2k3HMArJ50bwSh3wKWPD6Q47wz/NUSmRV0zNywPc4w79ARjg/i/aNINHwA+mIALhUVqD9/aUvZNgg==}
+
+  '@vltpkg/dep-id@0.0.0-30':
+    resolution: {integrity: sha512-SvUHQgZJg0d7Mc1yec+5lF2DFiwbEgikCvdqXdxWAxjSdXhj7d6vNUH3MitrZCJPiUpdvOejS4DVHanLfcwI9g==}
+    engines: {node: '>=22'}
+
+  '@vltpkg/error-cause@0.0.0-30':
+    resolution: {integrity: sha512-j+rjUo0m1C81HdoW7qLgQFHGedg4YypzAYEdrUT04f4DGLZB3Qf9OS1Wd26IzICjMxB8OSAxFqKHikst3KR4wA==}
+    engines: {node: '>=22'}
+
+  '@vltpkg/fast-split@0.0.0-30':
+    resolution: {integrity: sha512-UhCch9sy30lyR5Ry8knwIi46MGCr8fMQ/Z3TG2dBxH2kkTWKkOPc0s8wa9uz8y0BkE9fqku2gVkTAnz1yCeROg==}
+    engines: {node: '>=22'}
+
+  '@vltpkg/semver@0.0.0-30':
+    resolution: {integrity: sha512-GWqy5Rr5L9VeJDE6Yb0BscLehLWc1GWDAShxFFmfGBqr68Vy0DF5YSWb0NvVpfQ0r+uIxA5FK7b7bK0oJKThPw==}
+    engines: {node: '>=22'}
+
+  '@vltpkg/spec@0.0.0-30':
+    resolution: {integrity: sha512-0eYijND+UJBNkrEpL7+Ammc6Sjk7bAOZC33PETYXkV3JGl8npoV3o4w3rigtwfZVuedfi81RmMcr0Nb2JjNaMw==}
+    engines: {node: '>=22'}
+
+  '@vltpkg/types@0.0.0-30':
+    resolution: {integrity: sha512-gUqYAZwVQjmjbM+xnyZNHnpMyXIvDN5nIzifWY9RKJ9XEmPVJg8Nql5zMXXPbr1MekMZzBvqvCgMeoDV53dX2g==}
+    engines: {node: '>=22'}
 
   '@vue/compiler-core@3.5.13':
     resolution: {integrity: sha512-oOdAkwqUfW1WqpwSYJce06wvt6HljgY3fGeM9NcVA1HaYOij3mZG9Rkysn0OHuyUAGMbEbARIpsG+LPVlBJ5/Q==}
@@ -1422,8 +1446,8 @@ packages:
     resolution: {integrity: sha512-ydxzH1iox9AzLe+uaX9jjyVFkQO+h15j+JClropw0P4Vz+ES4+xTZVu5leUsWW8AYTVZBFkiC0iHl/PwFZ+Q1Q==}
     engines: {node: '>=18.0.0'}
 
-  '@wollybeard/kit@0.76.2':
-    resolution: {integrity: sha512-DCsJCmliApmPqo56oeDBNcMKxCRl7xIfCT+hJZCtXy+dNKSHx2xKtDlXO/h3ugbCUxOJsFy5qvsDVSb0mquqjg==}
+  '@wollybeard/kit@0.78.0':
+    resolution: {integrity: sha512-uogjjhWZSlofiZT1TUGO6gv65C22fFxhQmNXxuX+At1A/aAJu6ikdfj2axvFGgOknsbqWEXrhcYPdIej+9i4ew==}
     peerDependencies:
       '@effect/platform': '>=0.90.0 <1.0.0'
       effect: ^3.17.0
@@ -1674,8 +1698,8 @@ packages:
     resolution: {integrity: sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==}
     engines: {node: '>=6'}
 
-  detect-libc@2.1.1:
-    resolution: {integrity: sha512-ecqj/sy1jcK1uWrwpR67UhYrIFQ+5WlGxth34WquCbamhFA6hkkwiu37o6J5xCHdo1oixJRfVRw+ywV+Hq/0Aw==}
+  detect-libc@2.1.2:
+    resolution: {integrity: sha512-Btj2BOOO83o3WyH59e8MgXsxEQVcarkUOpEYrubB0urwnN10yQ364rsiByU11nZlqWYZm05i/of7io4mzihBtQ==}
     engines: {node: '>=8'}
 
   devlop@1.1.0:
@@ -1729,8 +1753,8 @@ packages:
   es-toolkit@1.35.0:
     resolution: {integrity: sha512-kVHyrRoC0eLc1hWJ6npG8nNFtOG+nWfcMI+XE0RaFO0gxd6Ions8r0O/U64QyZgY7IeidUnS5oZlRZYUgMGCAg==}
 
-  es-toolkit@1.39.10:
-    resolution: {integrity: sha512-E0iGnTtbDhkeczB0T+mxmoVlT4YNweEKBLq7oaU4p11mecdsZpNWOglI4895Vh4usbQ+LsJiuLuI2L0Vdmfm2w==}
+  es-toolkit@1.40.0:
+    resolution: {integrity: sha512-8o6w0KFmU0CiIl0/Q/BCEOabF2IJaELM1T2PWj6e8KqzHv1gdx+7JtFnDwOx1kJH/isJ5NwlDG1nCr1HrRF94Q==}
 
   esbuild@0.21.5:
     resolution: {integrity: sha512-mg3OPMV4hXywwpoDxu3Qda5xCKQi+vCTZq8S9J/EpkhB2HzKXq4SNFZE3+NK93JYxc8VMSep+lOUSC/RVKaBqw==}
@@ -4011,7 +4035,7 @@ snapshots:
     dependencies:
       undici-types: 6.21.0
 
-  '@types/node@24.7.0':
+  '@types/node@24.7.2':
     dependencies:
       undici-types: 7.14.0
 
@@ -4088,6 +4112,34 @@ snapshots:
       '@vitest/pretty-format': 3.1.1
       loupe: 3.1.3
       tinyrainbow: 2.0.0
+
+  '@vltpkg/dep-id@0.0.0-30':
+    dependencies:
+      '@vltpkg/error-cause': 0.0.0-30
+      '@vltpkg/spec': 0.0.0-30
+      '@vltpkg/types': 0.0.0-30
+
+  '@vltpkg/error-cause@0.0.0-30': {}
+
+  '@vltpkg/fast-split@0.0.0-30': {}
+
+  '@vltpkg/semver@0.0.0-30':
+    dependencies:
+      '@vltpkg/error-cause': 0.0.0-30
+      '@vltpkg/fast-split': 0.0.0-30
+      '@vltpkg/types': 0.0.0-30
+
+  '@vltpkg/spec@0.0.0-30':
+    dependencies:
+      '@vltpkg/error-cause': 0.0.0-30
+      '@vltpkg/semver': 0.0.0-30
+
+  '@vltpkg/types@0.0.0-30':
+    dependencies:
+      '@vltpkg/dep-id': 0.0.0-30
+      '@vltpkg/error-cause': 0.0.0-30
+      '@vltpkg/semver': 0.0.0-30
+      '@vltpkg/spec': 0.0.0-30
 
   '@vue/compiler-core@3.5.13':
     dependencies:
@@ -4221,15 +4273,16 @@ snapshots:
       '@whatwg-node/promise-helpers': 1.3.1
       tslib: 2.8.1
 
-  '@wollybeard/kit@0.76.2(@effect/platform@0.91.1(effect@3.17.14))(effect@3.17.14)':
+  '@wollybeard/kit@0.78.0(@effect/platform@0.91.1(effect@3.17.14))(effect@3.17.14)':
     dependencies:
       '@effect/platform': 0.91.1(effect@3.17.14)
-      '@types/node': 24.7.0
+      '@types/node': 24.7.2
       '@types/object-inspect': 1.13.0
+      '@vltpkg/semver': 0.0.0-30
       ansis: 4.2.0
       consola: 3.4.2
       effect: 3.17.14
-      es-toolkit: 1.39.10
+      es-toolkit: 1.40.0
       fast-check: 4.3.0
       jsonc-parser: 3.3.1
       object-inspect: 1.13.4
@@ -4462,7 +4515,7 @@ snapshots:
 
   dequal@2.0.3: {}
 
-  detect-libc@2.1.1:
+  detect-libc@2.1.2:
     optional: true
 
   devlop@1.1.0:
@@ -4536,7 +4589,7 @@ snapshots:
 
   es-toolkit@1.35.0: {}
 
-  es-toolkit@1.39.10: {}
+  es-toolkit@1.40.0: {}
 
   esbuild@0.21.5:
     optionalDependencies:
@@ -5119,7 +5172,7 @@ snapshots:
 
   node-gyp-build-optional-packages@5.2.2:
     dependencies:
-      detect-libc: 2.1.1
+      detect-libc: 2.1.2
     optional: true
 
   npm-run-path@6.0.0:
