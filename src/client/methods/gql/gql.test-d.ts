@@ -74,23 +74,13 @@ client.gql(singleNoVarsTada).$send({})
 //                          SINGLE OPERATION - REQUIRED VARIABLES
 // ==================================================================================================
 type R2 = typeof singleRequiredVars['__operation']['result'] | null
-// Tada includes __typename for interface types (deviation from DocumentBuilder)
-type R2Tada = {
-  interfaceWithArgs: {
-    __typename?: 'Object1ImplementingInterface' | undefined
-    id: string | null
-  } | {
-    __typename?: 'Object2ImplementingInterface' | undefined
-    id: string | null
-  } | null
-} | null
 
 Ts.Test.exact<R2>()(await client.gql(singleRequiredVars).$send('getById', { id: '' }))
 Ts.Test.exact<R2>()(await client.gql(singleRequiredVars).$send({ id: '' }))
 Ts.Test.exact<R2>()(await client.gql(singleRequiredVars).getById({ id: '' }))
-Ts.Test.exact<R2Tada>()(await client.gql(singleRequiredVarsTada).$send({ id: '' }))
+Ts.Test.exact<R2>()(await client.gql(singleRequiredVarsTada).$send({ id: '' }))
 // Inline tada (plain string)
-Ts.Test.exact<R2Tada>()(
+Ts.Test.exact<R2>()(
   await client.gql(`query getById($id: ID!) { interfaceWithArgs(id: $id) { id } }`).$send({ id: '' }),
 )
 // Inline object
@@ -189,25 +179,15 @@ client.gql(multiNoVarsTada).$send({})
 // ==================================================================================================
 type R6a = typeof multiRequiredVars['__operations']['getById']['result'] | null
 type R6b = typeof multiRequiredVars['__operations']['setId']['result'] | null
-// Tada includes __typename for interface types (deviation from DocumentBuilder)
-type R6aTada = {
-  interfaceWithArgs: {
-    __typename?: 'Object1ImplementingInterface' | undefined
-    id: string | null
-  } | {
-    __typename?: 'Object2ImplementingInterface' | undefined
-    id: string | null
-  } | null
-} | null
 
 Ts.Test.exact<R6a>()(await client.gql(multiRequiredVars).$send('getById', { id: 'user-123' }))
 Ts.Test.exact<R6b>()(await client.gql(multiRequiredVars).$send('setId'))
 Ts.Test.exact<R6a>()(await client.gql(multiRequiredVars).getById({ id: 'user-123' }))
 Ts.Test.exact<R6b>()(await client.gql(multiRequiredVars).setId())
 // Tada only supports first operation in multi-op documents (known limitation)
-Ts.Test.exact<R6aTada>()(await client.gql(multiRequiredVarsTada).$send({ id: 'user-123' }))
+Ts.Test.exact<R6a>()(await client.gql(multiRequiredVarsTada).$send({ id: 'user-123' }))
 // Inline tada (plain string) - only first operation supported
-Ts.Test.exact<R6aTada>()(
+Ts.Test.exact<R6a>()(
   await client
     .gql(`query getById($id: ID!) { interfaceWithArgs(id: $id) { id } } mutation setId { idNonNull }`)
     .$send({ id: 'user-123' }),
@@ -246,14 +226,14 @@ client.gql(multiRequiredVarsTada).$send({ id: 0 })
 //                       TYPED DOCUMENT LIKE VARIANTS (TypedDocumentNode, etc.)
 // ==================================================================================================
 
-// TypedDocumentString (what gql-tada returns)
+// TypedDocumentString
 declare const typedDocString: Grafaid.Document.Typed.String<{ id: string | null }, { userId: string }>
 Ts.Test.exact<{ id: string | null } | null>()(await client.gql(typedDocString).$send({ userId: '123' }))
 
-// TypedDocumentNode (standard from @graphql-typed-document-node/core)
+// TypedDocumentNode
 declare const typedDocNode: Grafaid.Document.Typed.Node<{ name: string | null }, { id: string }>
 Ts.Test.exact<{ name: string | null } | null>()(await client.gql(typedDocNode).$send({ id: '456' }))
 
-// TypedQueryDocumentNode (from graphql package)
+// TypedQueryDocumentNode
 declare const typedQueryDocNode: Grafaid.Document.Typed.Query<{ title: string | null }, {}>
 Ts.Test.exact<{ title: string | null } | null>()(await client.gql(typedQueryDocNode).$send())

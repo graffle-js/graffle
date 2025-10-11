@@ -2,14 +2,16 @@ import type { DocumentBuilderKit } from '#src/extensions/DocumentBuilder/$.js'
 import { Select } from '#src/extensions/DocumentBuilder/Select/$.js'
 import type { Options } from '#src/extensions/DocumentBuilder/SelectGraphQLMapper/nodes/1_Document.js'
 import { toGraphQLDocument } from '#src/extensions/DocumentBuilder/SelectGraphQLMapper/nodes/1_Document.js'
+import type { getDocumentNode, parseDocument, schemaOfSetup } from '#src/lib/gql-tada/index.js'
+import { type AbstractSetupSchema, type initGraphQLTada } from '#src/lib/gql-tada/index.js'
 import type { TypedDocument } from '#src/lib/grafaid/typed-document/$.js'
 import type { TypedFullDocument } from '#src/lib/grafaid/typed-full-document/$.js'
 import { isSymbol } from '#src/lib/prelude.js'
+import type { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
 import type { RequestResult } from '#src/types/RequestResult/$.js'
 import type { Schema } from '#src/types/Schema/$.js'
 import type { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
 import { print } from '@0no-co/graphql.web'
-import type { AbstractSetupSchema, initGraphQLTada } from 'gql.tada'
 import type { OperationTypeNode } from 'graphql'
 import type { Simplify } from 'type-fest'
 
@@ -52,6 +54,95 @@ export type CreateGqlTada<
   introspection: $Introspection
   scalars: $Scalars
 }>
+
+/**
+ * Extract tada introspection and scalars from context to create a gql-tada function type.
+ *
+ * This utility reads from the GlobalRegistry to get the schema's introspection types
+ * and scalar mappings, then passes them to CreateGqlTada.
+ */
+// dprint-ignore
+export type CreateGqlTadaFromContext<$Context> =
+  CreateGqlTada<
+    GlobalRegistry.ForContext<$Context>['tadaIntrospection'],
+    {
+      [k in keyof GlobalRegistry.ForContext<$Context>['schema']['scalarRegistry']['map']]:
+        Schema.Scalar.GetDecoded<GlobalRegistry.ForContext<$Context>['schema']['scalarRegistry']['map'][k]>
+    }
+  >
+
+/**
+ * Type-level utility that parses a GraphQL string and returns the typed document node.
+ *
+ * This utility:
+ * 1. Parses the GraphQL string into an AST using `parseDocument`
+ * 2. Extracts introspection data from the context's GlobalRegistry
+ * 3. Uses `schemaOfSetup` to combine introspection with scalar mappings into a `SchemaLike`
+ * 4. Passes the combined schema to `getDocumentNode` to produce a fully typed `TadaDocumentNode`
+ *
+ * @typeParam $Context - The client context containing schema introspection
+ * @typeParam $Input - The GraphQL document string to parse
+ *
+ * @example
+ * ```ts
+ * type Doc = ParseGraphQLString<MyContext, 'query { id }'>
+ * // Result: TadaDocumentNode<{ id: string }, {}>
+ * ```
+ */
+export type ParseGraphQLString<
+  $Context,
+  $Input extends string,
+> = getDocumentNode<
+  parseDocument<$Input>,
+  schemaOfSetup<{
+    introspection: GlobalRegistry.ForContext<$Context>['tadaIntrospection']
+    scalars: {
+      [k in keyof GlobalRegistry.ForContext<$Context>['schema']['scalarRegistry']['map']]: Schema.Scalar.GetDecoded<
+        GlobalRegistry.ForContext<$Context>['schema']['scalarRegistry']['map'][k]
+      >
+    }
+  }>,
+  {},
+  false
+>
+
+/**
+ * Type-level utility that parses a document builder object and returns the typed document.
+ *
+ * This utility:
+ * 1. Extracts schema and arguments map from the context's GlobalRegistry
+ * 2. Extracts scalar registry and type hooks from the context
+ * 3. Uses `InferOperations` to infer result and variable types for each operation
+ * 4. Wraps the result in `TypedFullDocument.FromObject` for use with document senders
+ *
+ * @typeParam $Context - The client context containing schema and configuration
+ * @typeParam $Document - The document builder object to parse
+ *
+ * @example
+ * ```ts
+ * type Doc = ParseGraphQLObject<MyContext, { query: { myQuery: { id: true } } }>
+ * // Result: TypedFullDocument with operation metadata
+ * ```
+ */
+// dprint-ignore
+export type ParseGraphQLObject<
+  $Context,
+  $Document,
+> = TypedFullDocument.FromObject<
+  InferOperations<
+    $Document,
+    GlobalRegistry.ForContext<$Context>['schema'],
+    GlobalRegistry.ForContext<$Context>['argumentsMap'],
+    {
+      typeHookRequestResultDataTypes: $Context extends { typeHookRequestResultDataTypes: infer $Types }
+        ? $Types
+        : never
+      scalars: $Context extends { scalars: { current: { registry: infer $Registry } } }
+        ? $Registry
+        : never
+    }
+  >
+>
 
 //
 //

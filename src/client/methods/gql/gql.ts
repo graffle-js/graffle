@@ -1,13 +1,11 @@
 import type { Grafaid } from '#lib/grafaid'
-import type { TypeFunction } from '#lib/type-function'
 import type { Context } from '#src/context/$.js'
+import type { $tada, TadaDocumentNode } from '#src/lib/gql-tada/index.js'
 import type { TypedFullDocument } from '#src/lib/grafaid/typed-full-document/$.js'
-import type { InferOperations } from '#src/static/gql.js'
+import type { ParseGraphQLObject, ParseGraphQLString } from '#src/static/gql.js'
 import type { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
-import type { Schema } from '#src/types/Schema/$.js'
-import type { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
-import type { Simplify } from 'type-fest'
-import type { DocumentSender } from './DocumentSender.js'
+import type { DocumentNode } from '@0no-co/graphql.web'
+import type { DocumentSender, UntypedSender } from './DocumentSender.js'
 
 /**
  * Validates that documents requiring SDDM are only used with SDDM-enabled contexts.
@@ -94,34 +92,25 @@ export type GetSchemaInfo<$Context> =
  */
 // dprint-ignore
 export interface GqlMethod<$Context extends Context.Context> {
-  // Overload 1: Inline document builder object (must come first to match before TypedDocumentLike)
+  // Overload
+  // dprint-ignore
+  <const $doc extends Grafaid.Document.Typed.String | string | DocumentNode | TypedFullDocument.TypedFullDocument>(
+    document: $doc
+  ):
+  string extends $doc                                   ?
+    $doc extends Grafaid.Document.Typed.String            ? DocumentSender<$doc, $Context> :
+                                                            UntypedSender<$Context> :
+  $doc extends TypedFullDocument.TypedFullDocument      ? DocumentSender<$doc, $Context> :
+  $doc extends TadaDocumentNode                         ? DocumentSender<$doc, $Context> :
+  $doc extends string                                   ? DocumentSender<ParseGraphQLString<$Context, $doc>, $Context> :
+  $doc extends Grafaid.Document.Typed.TypedDocumentLike ? DocumentSender<$doc, $Context> :
+                                                          never
+
+  // Overload: Inline document builder object (must be last as it's least specific)
   // @ts-expect-error
   <$Document extends GlobalRegistry.ForContext<$Context>['selectionSets']['$Document']>(
     document: $Document
-  ): DocumentSender<
-    TypedFullDocument.FromObject<
-      InferOperations<
-        $Document,
-        GlobalRegistry.ForContext<$Context>['schema'],
-        // @ts-expect-error
-        GlobalRegistry.ForContext<$Context>['argumentsMap'],
-            {
-              typeHookRequestResultDataTypes: $Context extends { typeHookRequestResultDataTypes: infer $Types }
-                ? $Types
-                : never
-          scalars: $Context extends { scalars: { current: { registry: infer $Registry } } }
-            ? $Registry
-            : never
-        }
-      >
-    >,
-    $Context
-  >
-
-  // Overload 2: TypedDocumentLike (gql-tada, TypedDocumentNode, etc.)
-  <$Document extends Grafaid.Document.Typed.TypedDocumentLike>(
-    document: ValidateSDDMRequirement<$Document, $Context>
-  ): DocumentSender<$Document, $Context>
+  ): DocumentSender<ParseGraphQLObject<$Context, $Document>, $Context>
 }
 
 export namespace GqlMethod {
@@ -149,58 +138,4 @@ export namespace GqlMethod {
       document: first,
     }
   }
-}
-
-// Helper type to extract return type of calling a function with specific arguments
-type CallFunction<F, Args extends readonly unknown[]> = F extends (...args: Args) => infer R ? R : never
-
-// dprint-ignore
-/**
- * Adapter interface for gql-tada integration.
- *
- * Maps gql-tada's type-level GraphQL string parsing to Graffle's DocumentSender.
- * This enables full type inference from GraphQL strings while maintaining Graffle's API.
- *
- * Extends the base GqlMethod interface to add gql-tada string inference while preserving
- * support for typed documents and template literals.
- *
- * @remarks
- * Uses gql-tada's initGraphQLTada type to parse GraphQL strings at the type level,
- * extracting Result and Variables types. Returns DocumentSender for runtime execution.
- *
- * Type-only imports ensure zero runtime overhead.
- */
-export interface GqlMethodWithTada<$Context extends Context.Context, $TadaAPI> extends GqlMethod<$Context> {
-  // Inline gql-tada strings
-  <const $Query extends string>(
-    query: $Query
-  ): CallFunction<$TadaAPI, [$Query]> extends infer $Doc
-      ? $Doc extends Grafaid.Document.Typed.TypedDocumentLike
-        ? DocumentSender<$Doc, $Context>
-        : DocumentSender<Grafaid.Document.Typed.TypedDocumentLike & $Doc, $Context>
-      : DocumentSender<Grafaid.Document.Typed.TypedDocumentLike, $Context>
-
-  // Inline document builder objects (inherited from GqlMethod but must be explicit for overload resolution)
-  <const $Document extends object>(
-    documentObject: $Document extends Grafaid.Document.Typed.TypedDocumentLike ? never : $Document
-  ): GetSchemaInfo<$Context> extends { schema: infer $Schema extends Schema; map: infer $Map extends SchemaDrivenDataMap }
-    ? DocumentSender<
-        TypedFullDocument.FromObject<
-            InferOperations<
-              $Document,
-              $Schema,
-              $Map,
-              {
-                typeHookRequestResultDataTypes: $Context extends { typeHookRequestResultDataTypes: infer $Types }
-                  ? $Types
-                  : never
-                scalars: $Context extends { scalars: { current: { registry: infer $Registry } } }
-                  ? $Registry
-                  : never
-              }
-          >
-        >,
-        $Context
-      >
-    : never
 }

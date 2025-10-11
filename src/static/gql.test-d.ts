@@ -1,9 +1,9 @@
 import { $ } from '#src/extensions/DocumentBuilder/var/var.js'
+import type { TadaDocumentNode } from '#src/lib/gql-tada/index.js'
 import type { TypedFullDocument } from '#src/lib/grafaid/typed-full-document/$.js'
 import { Possible } from '#test/schema/possible/client/$.js'
 import { PossibleNoCustomScalars } from '#test/schema/possible/clientNoCustomScalars/$.js'
 import { Ts } from '@wollybeard/kit'
-import type { TadaDocumentNode } from 'gql.tada'
 
 // ==================================================================================================
 //                                   Single operation, no variables
@@ -39,12 +39,7 @@ Ts.Test.exact<
 
 Ts.Test.exact<
   TadaDocumentNode<
-    {
-      interfaceWithArgs: { __typename?: 'Object1ImplementingInterface' | undefined; id: string | null } | {
-        __typename?: 'Object2ImplementingInterface' | undefined
-        id: string | null
-      } | null
-    },
+    { interfaceWithArgs: { id: string | null } | null },
     { id: string },
     void
   >
@@ -95,12 +90,7 @@ Ts.Test.exact<
 
 Ts.Test.exact<
   TadaDocumentNode<
-    {
-      interfaceWithArgs: { __typename?: 'Object1ImplementingInterface' | undefined; id: string | null } | {
-        __typename?: 'Object2ImplementingInterface' | undefined
-        id: string | null
-      } | null
-    },
+    { interfaceWithArgs: { id: string | null } | null },
     { id: string },
     void
   >
