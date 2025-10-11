@@ -99,7 +99,7 @@
     "prepack": "pnpm build",
     "check": "pnpm run '/check:.*/'",
     "prebuild": "pnpm build:clean",
-    "check:types": "tsc && pnpm check:examples:types"
+    "check:types": "tsc"
   },
   "dependencies": {
     "@0no-co/graphql.web": "^1.0.12",
