@@ -72,7 +72,7 @@ test(`client works without generation`, async ({ project, pokemonService }) => {
     `
 		import { Graffle } from 'graffle'
 		const graffle = Graffle.create().transport({ url: '${pokemonService.url.href}' })
-		const data = await graffle.gql\`
+		const data = await graffle.gql(\`
       query ($name: String!) {
         pokemonByName (name: $name) {
           name
@@ -84,7 +84,7 @@ test(`client works without generation`, async ({ project, pokemonService }) => {
           }
         }
       }
-    \`.send({ name: 'Pikachu' })
+    \`).$send({ name: 'Pikachu' })
 		console.log(data?.['pokemonByName'])
 		`,
   )

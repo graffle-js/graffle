@@ -169,7 +169,7 @@ Build a complete document with multiple named queries and send them:
 
 */
 
-const multiOpDoc = Graffle.document({
+const multiOpDoc = Graffle.gql({
   query: {
     // First operation: get all pokemons
     allPokemons: {
@@ -195,11 +195,11 @@ show(multiOpDoc)
 const client = Graffle.create()
 
 // Execute first operation (no variables needed)
-const allPokemonsResult = await client.send(multiOpDoc, 'allPokemons')
+const allPokemonsResult = await client.gql(multiOpDoc).allPokemons()
 show(allPokemonsResult)
 
 // Execute second operation (variables required)
-const specificResult = await client.send(multiOpDoc, 'specificPokemon', { pokemonName: 'Pikachu' })
+const specificResult = await client.gql(multiOpDoc).specificPokemon({ pokemonName: 'Pikachu' })
 show(specificResult)
 
 /*
@@ -211,7 +211,7 @@ When document has only one operation, no operation name needed:
 
 */
 
-const singleOpDoc = Graffle.document({
+const singleOpDoc = Graffle.gql({
   query: {
     getTrainers: {
       trainers: {
@@ -225,7 +225,7 @@ const singleOpDoc = Graffle.document({
 show(singleOpDoc)
 
 // Send without operation name since there's only one
-const trainers = await client.send(singleOpDoc)
+const trainers = await client.gql(singleOpDoc).$send()
 show(trainers)
 
 /*
@@ -237,7 +237,7 @@ Combine queries and mutations in a single document:
 
 */
 
-const mixedDoc = Graffle.document({
+const mixedDoc = Graffle.gql({
   query: {
     getPokemon: {
       pokemonByName: {
@@ -268,11 +268,11 @@ const mixedDoc = Graffle.document({
 show(mixedDoc)
 
 // Execute query operation
-const pokemon = await client.send(mixedDoc, 'getPokemon', { name: 'Charizard' })
+const pokemon = await client.gql(mixedDoc).getPokemon({ name: 'Charizard' })
 show(pokemon)
 
 // Execute mutation operation
-const newPokemon = await client.send(mixedDoc, 'addNewPokemon', {
+const newPokemon = await client.gql(mixedDoc).addNewPokemon({
   name: 'Mew',
   type: 'electric',
   hp: 100,

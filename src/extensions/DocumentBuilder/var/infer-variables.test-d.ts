@@ -1,7 +1,5 @@
+import type { Possible } from '#test/schema/possible/client/$.js'
 import { Ts } from '@wollybeard/kit'
-import type { PossibleWithScalars } from '../__tests__/fixtures/possible-with-scalars/$.js'
-import type { Possible } from '../__tests__/fixtures/possible/$.js'
-import type { Select } from '../Select/$.js'
 import type { InferFromQuery } from './infer.js'
 import { $ } from './var.js'
 
@@ -110,13 +108,13 @@ type _1 = Ts.Test.Cases<
   // ====================================================================
   // Optional custom scalar (Date)
   Ts.Test.exact<
-    InferFromQuery<{ dateArg: { $: { date: $ } } }, PossibleWithScalars.$.ArgumentsMap>,
+    InferFromQuery<{ dateArg: { $: { date: $ } } }, Possible.$.ArgumentsMap>,
     { date?: string | undefined }  // Should be string (encoded type)
   >,
 
   // Required custom scalar (Date)
   Ts.Test.exact<
-    InferFromQuery<{ dateArgNonNull: { $: { date: $ } } }, PossibleWithScalars.$.ArgumentsMap>,
+    InferFromQuery<{ dateArgNonNull: { $: { date: $ } } }, Possible.$.ArgumentsMap>,
     { date: string }  // Should be string (encoded type)
   >,
 
@@ -125,7 +123,7 @@ type _1 = Ts.Test.Cases<
   // ====================================================================
   // Optional list of required items
   Ts.Test.exact<
-    InferFromQuery<{ dateArgList: { $: { date: $ } } }, PossibleWithScalars.$.ArgumentsMap>,
+    InferFromQuery<{ dateArgList: { $: { date: $ } } }, Possible.$.ArgumentsMap>,
     { date?: readonly string[] | undefined }
   >,
 
@@ -149,20 +147,20 @@ type _2 = Ts.Test.Cases<
   // ====================================================================
   // Optional input object
   Ts.Test.exact<
-    InferFromQuery<{ dateArgInputObject: { $: { input: $ } } }, PossibleWithScalars.$.ArgumentsMap>,
-    { input?: PossibleWithScalars.$.TypeInputsIndex['InputObject'] | undefined }
+    InferFromQuery<{ dateArgInputObject: { $: { input: $ } } }, Possible.$.ArgumentsMap>,
+    { input?: Possible.$.TypeInputsIndex['InputObject'] | undefined }
   >,
 
   // Required input object
   Ts.Test.exact<
-    InferFromQuery<{ stringWithArgInputObjectRequired: { $: { input: $ } } }, PossibleWithScalars.$.ArgumentsMap>,
-    { input: PossibleWithScalars.$.TypeInputsIndex['InputObject'] }
+    InferFromQuery<{ stringWithArgInputObjectRequired: { $: { input: $ } } }, Possible.$.ArgumentsMap>,
+    { input: Possible.$.TypeInputsIndex['InputObject'] }
   >,
 
   // Multiple input objects with same variable name (required wins)
   Ts.Test.exact<
-    InferFromQuery<{ dateArgInputObject: { $: { input: $ } }, stringWithArgInputObjectRequired: { $: { input: $ } } }, PossibleWithScalars.$.ArgumentsMap>,
-    { input: PossibleWithScalars.$.TypeInputsIndex['InputObject'] }
+    InferFromQuery<{ dateArgInputObject: { $: { input: $ } }, stringWithArgInputObjectRequired: { $: { input: $ } } }, Possible.$.ArgumentsMap>,
+    { input: Possible.$.TypeInputsIndex['InputObject'] }
   >,
 
   // Nested input object

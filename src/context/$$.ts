@@ -1,3 +1,4 @@
+export * from './context.js'
 export { type ContextEmpty, contextEmpty } from './ContextEmpty.js'
 export * from './fragments/configuration/$.js'
 export * from './fragments/extensions/$.js'

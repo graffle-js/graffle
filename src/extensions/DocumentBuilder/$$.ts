@@ -1,8 +1,6 @@
 export * from './InferResult/$.js'
 export * from './methods-instance/document.js'
 export * from './methods-instance/requestMethods.js'
-export { document } from './methods-static/document.js'
-export { type Config, createStaticRootType, type StaticDocumentBuilder } from './methods-static/rootField.js'
 export * from './Select/$.js'
 export * from './SelectGraphQLMapper/$.js'
 export { Var } from './var/$.js'

@@ -1,26 +1,21 @@
+import { PossibleNoCustomScalars } from '#test/schema/possible/clientNoCustomScalars/$.js'
 import { db } from '#test/schema/possible/db.js'
 import { describe, expect } from 'vitest'
 import { DocumentBuilderKit } from '../../src/extensions/DocumentBuilder/$.js'
-import { Possible } from '../../src/extensions/DocumentBuilder/__tests__/fixtures/possible/$.js'
 import { Grafaid } from '../../src/lib/grafaid/$.js'
-import type { Schema } from '../../src/types/Schema/$.js'
 import { DateScalar } from '../_/fixtures/scalars.js'
 import { createGraphQLResponse, createGraphQLResponseData, test } from '../_/helpers.js'
 
-type QueryWithDate = Possible.SelectionSets.Query<{
-  scalars: Schema.Scalar.Registry.AddScalar<Schema.Scalar.Registry.Empty, typeof DateScalar>
-}>
-
 type TestCase = [
   describe: string,
-  query: QueryWithDate,
+  query: PossibleNoCustomScalars.SelectionSets.Query,
   responseData: object,
   expectedData: object,
 ]
 
 type TestCaseWith = Parameters<ReturnType<typeof test.for<TestCase>>>
 
-const possible = Possible.create().transport({ url: `https://foo` })
+const possible = PossibleNoCustomScalars.create().transport({ url: `https://foo` })
 
 const withBatch: TestCaseWith = [
   `$batch query %s`,
@@ -39,7 +34,7 @@ const withGqlDocument: TestCaseWith = [
     const { document } = DocumentBuilderKit.SelectionSetGraphqlMapper.toGraphQL(
       DocumentBuilderKit.Select.Document.createDocumentNormalizedFromQuerySelection(query as any),
     )
-    expect(await possible.scalar(DateScalar).gql(document).send()).toEqual(expectedData)
+    expect(await possible.scalar(DateScalar).gql(document).$send()).toEqual(expectedData)
   },
 ]
 
@@ -51,7 +46,7 @@ const withGqlString: TestCaseWith = [
     const { document } = DocumentBuilderKit.SelectionSetGraphqlMapper.toGraphQL(
       DocumentBuilderKit.Select.Document.normalizeOrThrow({ query: { foo: query as any } }),
     )
-    expect(await possible.scalar(DateScalar).gql(Grafaid.Document.print(document)).send()).toEqual(expectedData)
+    expect(await possible.scalar(DateScalar).gql(Grafaid.Document.print(document)).$send()).toEqual(expectedData)
   },
 ]
 

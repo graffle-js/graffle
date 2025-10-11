@@ -10,6 +10,16 @@ export interface InputLint {
    * @defaultValue `true`
    */
   missingCustomScalarCodec?: boolean
+  /**
+   * Should a warning be raised if GraphQLSP is not configured in tsconfig.json?
+   *
+   * GraphQLSP provides IDE autocomplete and validation for GraphQL strings.
+   * When enabled, the generator will check if GraphQLSP is configured and provide helpful setup instructions if missing.
+   *
+   * @see https://github.com/graffle-js/graffle/issues/1389 for auto-configuration feature request
+   * @defaultValue `true`
+   */
+  missingGraphqlSP?: boolean
 }
 
 export const OutputCase = {

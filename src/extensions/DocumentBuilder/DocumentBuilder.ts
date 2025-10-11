@@ -1,15 +1,14 @@
 import { Extension } from '#graffle/extension'
-import type { GlobalRegistry, GraffleKit } from '#graffle/utilities-for-generated'
+import type { GlobalRegistry } from '#graffle/utilities-for-generated'
 import type { TypeFunction } from '#lib/type-function'
 import { OperationTypeNode } from 'graphql'
-import { createMethodDocument, createMethodOperationType } from './methods-instance/requestMethods.js'
+import { createMethodOperationType } from './methods-instance/requestMethods.js'
 
 export const DocumentBuilder = Extension
   .create(`DocumentBuilder`)
   // todo add an extensions unit test that this adds properties to the context
   .properties(({ context }) => {
     return {
-      document: createMethodDocument(context),
       query: createMethodOperationType(context, OperationTypeNode.QUERY),
       mutation: createMethodOperationType(context, OperationTypeNode.MUTATION),
     } as any as Properties
@@ -32,18 +31,5 @@ type Properties_<
   GlobalRegistry.Has<__Name> extends false ? {}
     : (
       // @ts-ignore Passes after generation
-      & TypeFunction.Call<GlobalRegistry.GetOrDefault<__Name>['interfaces']['Root'], $Parameters['context']>
-      & {
-        // // @ts-ignore Passes after generation
-        document: GraffleKit.Context.Configuration.Check.Preflight<
-          $Parameters['context'],
-          TypeFunction.Call<
-            GlobalRegistry.GetOrDefault<
-              // @ts-expect-error
-              __Name
-            >['interfaces']['Document'],
-            $Parameters['context']
-          >
-        >
-      }
+      TypeFunction.Call<GlobalRegistry.GetOrDefault<__Name>['interfaces']['Root'], $Parameters['context']>
     )

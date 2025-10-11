@@ -32,7 +32,7 @@ const graffle = GraffleBare
   .throws()
 
 test(`.gql() throws if errors array non-empty`, async () => {
-  await expect(graffle.gql`query { foo }`.send()).rejects.toMatchInlineSnapshot(
+  await expect(graffle.gql('query { foo }').$send()).rejects.toMatchInlineSnapshot(
     `[ContextualAggregateError: One or more errors in the execution result.]`,
   )
 })

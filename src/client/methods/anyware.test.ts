@@ -22,7 +22,7 @@ test(`hook inputs have transportType in interceptor`, async () => {
     transportType = pack.input.transportType
     return pack()
   })
-  await g2.gql(`query { foo }`).send()
+  await g2.gql(`query Foo { foo }`).$send()
   expect(transportType).toEqual(ATransport.name)
 })
 
@@ -33,9 +33,9 @@ test(`if two transports, then transportType could be either`, async () => {
     value = pack.input.transportType
     return pack()
   })
-  await g2.gql(`query { foo }`).send()
+  await g2.gql(`query Foo { foo }`).$send()
   expect(value).toEqual(ATransport.name)
-  await g2.transport(`BTransport`).gql(`query { foo }`).send()
+  await g2.transport(`BTransport`).gql(`query Foo { foo }`).$send()
   expect(value).toEqual(BTransport.name)
 })
 

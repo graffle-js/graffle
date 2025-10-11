@@ -16,6 +16,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
    * Pass a selection set object that includes the fields you want.
    * Use this method to request multiple fields in a single request for better performance.
    */
+
   $batch: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -31,11 +32,13 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
+
   /**
    * Request the {@link https://graphql.org/learn/schema/#the-__typename-field | `__typename`} meta-field.
    *
    * The `__typename` field returns the name of the object type. In this case, it will always return `"Query"`.
    */
+
   __typename: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     () => Promise<
@@ -67,6 +70,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
    * | **Nullability** | Required |
    * | **List** | Yes |
    */
+
   battles: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -83,6 +87,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
+
   /**
    * Retrieve all beings (Pokemon, Trainers, and Patrons).
    *
@@ -106,6 +111,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
    * | **Nullability** | Required |
    * | **List** | Yes |
    */
+
   beings: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -122,6 +128,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
+
   /**
    * Find Pokemon by their name.
    *
@@ -152,6 +159,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
    * | **List** | Yes |
    * | **Arguments** | 1 |
    */
+
   pokemonByName: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -171,6 +179,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
+
   /**
    * Retrieve all Pokemon, optionally filtered.
    *
@@ -201,6 +210,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
    * | **List** | Yes |
    * | **Arguments** | 1 |
    */
+
   pokemons: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -217,6 +227,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
+
   /**
    * Find a trainer by their name.
    *
@@ -243,6 +254,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
    * | **Nullability** | Optional |
    * | **Arguments** | 1 |
    */
+
   trainerByName: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -262,6 +274,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
+
   /**
    * Retrieve all trainers.
    *
@@ -288,6 +301,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
    * | **Nullability** | Optional |
    * | **List** | Yes |
    */
+
   trainers: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -320,6 +334,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
    * Pass a selection set object that includes the fields you want.
    * Use this method to request multiple fields in a single request for better performance.
    */
+
   $batch: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
@@ -335,11 +350,13 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
       >
     >
   >
+
   /**
    * Request the {@link https://graphql.org/learn/schema/#the-__typename-field | `__typename`} meta-field.
    *
    * The `__typename` field returns the name of the object type. In this case, it will always return `"Mutation"`.
    */
+
   __typename: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     () => Promise<
@@ -380,6 +397,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
    * | **Nullability** | Optional |
    * | **Arguments** | 5 |
    */
+
   addPokemon: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(

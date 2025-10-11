@@ -1,4 +1,9 @@
 import type * as $$Utilities from 'graffle/utilities-for-generated'
+import type * as $$Scalar from './scalar.js'
+
+export interface $DefaultSelectionContext {
+  scalars: $$Scalar.$Registry
+}
 
 //
 //
@@ -17,8 +22,7 @@ import type * as $$Utilities from 'graffle/utilities-for-generated'
 //
 
 export interface $Document<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > {
   query?: Record<string, Query<_$Context>>
   mutation?: Record<string, Mutation<_$Context>>
@@ -52,8 +56,7 @@ export interface $Document<
  * Root query type for fetching Pokemon data.
  */
 export interface Query<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > {
   /**
    * Retrieve all battles that have occurred.
@@ -254,8 +257,7 @@ export interface Query<
 }
 
 export interface Query$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends Query<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
@@ -263,13 +265,11 @@ export interface Query$FragmentInline<
 
 export namespace Query {
   export type battles<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = battles$SelectionSet<_$Context>
 
   export interface battles$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Battle<_$Context> {}
 
   // --- expanded ---
@@ -280,8 +280,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type battles$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     battles$SelectionSet<_$Context>
   >
@@ -289,13 +288,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type beings<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = beings$SelectionSet<_$Context>
 
   export interface beings$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Being<_$Context> {}
 
   // --- expanded ---
@@ -306,8 +303,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type beings$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     beings$SelectionSet<_$Context>
   >
@@ -315,13 +311,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type pokemonByName<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = pokemonByName$SelectionSet<_$Context>
 
   export interface pokemonByName$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Pokemon<_$Context> {
     /**
      * Arguments for `pokemonByName` field. All arguments are required so you must include this.
@@ -330,8 +324,7 @@ export namespace Query {
   }
 
   export interface pokemonByName$Arguments<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > {
     /**
      * The name of the Pokemon to search for.
@@ -356,8 +349,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type pokemonByName$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     pokemonByName$SelectionSet<_$Context>
   >
@@ -365,13 +357,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type pokemons<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = pokemons$SelectionSet<_$Context>
 
   export interface pokemons$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Pokemon<_$Context> {
     /**
      * Arguments for `pokemons` field. No arguments are required so you may omit this.
@@ -380,8 +370,7 @@ export namespace Query {
   }
 
   export interface pokemons$Arguments<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > {
     /**
      * Optional filter criteria for Pokemon.
@@ -406,8 +395,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type pokemons$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     pokemons$SelectionSet<_$Context>
   >
@@ -415,13 +403,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type trainerByName<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = trainerByName$SelectionSet<_$Context>
 
   export interface trainerByName$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Trainer<_$Context> {
     /**
      * Arguments for `trainerByName` field. All arguments are required so you must include this.
@@ -430,8 +416,7 @@ export namespace Query {
   }
 
   export interface trainerByName$Arguments<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > {
     /**
      * The name of the trainer to search for.
@@ -456,8 +441,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type trainerByName$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     trainerByName$SelectionSet<_$Context>
   >
@@ -465,13 +449,11 @@ export namespace Query {
   // --------------------------------------------------------------------------------------------------
 
   export type trainers<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = trainers$SelectionSet<_$Context>
 
   export interface trainers$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Trainer<_$Context> {}
 
   // --- expanded ---
@@ -482,8 +464,7 @@ export namespace Query {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type trainers$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     trainers$SelectionSet<_$Context>
   >
@@ -501,8 +482,7 @@ export namespace Query {
  * Root mutation type for modifying Pokemon data.
  */
 export interface Mutation<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > {
   /**
    * Add a new Pokemon to the database.
@@ -562,8 +542,7 @@ export interface Mutation<
 }
 
 export interface Mutation$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends Mutation<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
@@ -571,13 +550,11 @@ export interface Mutation$FragmentInline<
 
 export namespace Mutation {
   export type addPokemon<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = addPokemon$SelectionSet<_$Context>
 
   export interface addPokemon$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Pokemon<_$Context> {
     /**
      * Arguments for `addPokemon` field. Some (2/5) arguments are required so you must include this.
@@ -586,8 +563,7 @@ export namespace Mutation {
   }
 
   export interface addPokemon$Arguments<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > {
     /**
      * The attack power of the new Pokemon.
@@ -664,8 +640,7 @@ export namespace Mutation {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type addPokemon$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     addPokemon$SelectionSet<_$Context>
   >
@@ -770,8 +745,7 @@ export type TrainerClass =
  * Input filter for querying by date ranges.
  */
 export interface DateFilter<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > {
   /**
    * The minimum date (greater than or equal to).
@@ -805,8 +779,7 @@ export interface DateFilter<
  * Input filter for querying Pokemon.
  */
 export interface PokemonFilter<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > {
   /**
    * Filter by Pokemon birth/catch date.
@@ -826,8 +799,7 @@ export interface PokemonFilter<
  * Input filter for querying by string values.
  */
 export interface StringFilter<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > {
   /**
    * Filter for strings containing this substring.
@@ -867,8 +839,7 @@ export interface StringFilter<
  * A battle royale where multiple trainers compete with their Pokemon teams.
  */
 export interface BattleRoyale<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * The list of combatants participating in this battle royale.
@@ -990,8 +961,7 @@ export interface BattleRoyale<
 }
 
 export interface BattleRoyale$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends BattleRoyale<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
@@ -999,13 +969,11 @@ export interface BattleRoyale$FragmentInline<
 
 export namespace BattleRoyale {
   export type combatants<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = combatants$SelectionSet<_$Context>
 
   export interface combatants$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$CombatantMultiPokemon<_$Context> {}
 
   // --- expanded ---
@@ -1016,8 +984,7 @@ export namespace BattleRoyale {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type combatants$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     combatants$SelectionSet<_$Context>
   >
@@ -1025,15 +992,13 @@ export namespace BattleRoyale {
   // --------------------------------------------------------------------------------------------------
 
   export type date<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | date$SelectionSet<_$Context>
 
   export interface date$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1044,8 +1009,7 @@ export namespace BattleRoyale {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type date$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | date$SelectionSet<_$Context>
@@ -1053,16 +1017,12 @@ export namespace BattleRoyale {
 
   // --------------------------------------------------------------------------------------------------
 
-  export type id<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
-  > =
+  export type id<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Context>
 
   export interface id$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1073,8 +1033,7 @@ export namespace BattleRoyale {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Context>
@@ -1083,13 +1042,11 @@ export namespace BattleRoyale {
   // --------------------------------------------------------------------------------------------------
 
   export type winner<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = winner$SelectionSet<_$Context>
 
   export interface winner$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Trainer<_$Context> {}
 
   // --- expanded ---
@@ -1100,8 +1057,7 @@ export namespace BattleRoyale {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type winner$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     winner$SelectionSet<_$Context>
   >
@@ -1117,8 +1073,7 @@ export namespace BattleRoyale {
  * A one-on-one battle between two trainers.
  */
 export interface BattleTrainer<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * The first combatant in this trainer battle.
@@ -1264,8 +1219,7 @@ export interface BattleTrainer<
 }
 
 export interface BattleTrainer$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends BattleTrainer<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
@@ -1273,13 +1227,11 @@ export interface BattleTrainer$FragmentInline<
 
 export namespace BattleTrainer {
   export type combatant1<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = combatant1$SelectionSet<_$Context>
 
   export interface combatant1$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$CombatantSinglePokemon<_$Context> {}
 
   // --- expanded ---
@@ -1290,8 +1242,7 @@ export namespace BattleTrainer {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type combatant1$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     combatant1$SelectionSet<_$Context>
   >
@@ -1299,13 +1250,11 @@ export namespace BattleTrainer {
   // --------------------------------------------------------------------------------------------------
 
   export type combatant2<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = combatant2$SelectionSet<_$Context>
 
   export interface combatant2$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$CombatantSinglePokemon<_$Context> {}
 
   // --- expanded ---
@@ -1316,8 +1265,7 @@ export namespace BattleTrainer {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type combatant2$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     combatant2$SelectionSet<_$Context>
   >
@@ -1325,15 +1273,13 @@ export namespace BattleTrainer {
   // --------------------------------------------------------------------------------------------------
 
   export type date<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | date$SelectionSet<_$Context>
 
   export interface date$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1344,8 +1290,7 @@ export namespace BattleTrainer {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type date$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | date$SelectionSet<_$Context>
@@ -1353,16 +1298,12 @@ export namespace BattleTrainer {
 
   // --------------------------------------------------------------------------------------------------
 
-  export type id<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
-  > =
+  export type id<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Context>
 
   export interface id$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1373,8 +1314,7 @@ export namespace BattleTrainer {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Context>
@@ -1383,13 +1323,11 @@ export namespace BattleTrainer {
   // --------------------------------------------------------------------------------------------------
 
   export type winner<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = winner$SelectionSet<_$Context>
 
   export interface winner$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Trainer<_$Context> {}
 
   // --- expanded ---
@@ -1400,8 +1338,7 @@ export namespace BattleTrainer {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type winner$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     winner$SelectionSet<_$Context>
   >
@@ -1417,8 +1354,7 @@ export namespace BattleTrainer {
  * A battle between a trainer and wild Pokemon.
  */
 export interface BattleWild<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * The date when this battle took place, stored as a Unix timestamp.
@@ -1603,8 +1539,7 @@ export interface BattleWild<
 }
 
 export interface BattleWild$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends BattleWild<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
@@ -1612,15 +1547,13 @@ export interface BattleWild$FragmentInline<
 
 export namespace BattleWild {
   export type date<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | date$SelectionSet<_$Context>
 
   export interface date$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1631,8 +1564,7 @@ export namespace BattleWild {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type date$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | date$SelectionSet<_$Context>
@@ -1640,16 +1572,12 @@ export namespace BattleWild {
 
   // --------------------------------------------------------------------------------------------------
 
-  export type id<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
-  > =
+  export type id<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Context>
 
   export interface id$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1660,8 +1588,7 @@ export namespace BattleWild {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Context>
@@ -1670,13 +1597,11 @@ export namespace BattleWild {
   // --------------------------------------------------------------------------------------------------
 
   export type pokemon<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = pokemon$SelectionSet<_$Context>
 
   export interface pokemon$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Pokemon<_$Context> {}
 
   // --- expanded ---
@@ -1687,8 +1612,7 @@ export namespace BattleWild {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type pokemon$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     pokemon$SelectionSet<_$Context>
   >
@@ -1696,15 +1620,13 @@ export namespace BattleWild {
   // --------------------------------------------------------------------------------------------------
 
   export type result<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | result$SelectionSet<_$Context>
 
   export interface result$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -1715,8 +1637,7 @@ export namespace BattleWild {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type result$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | result$SelectionSet<_$Context>
@@ -1725,13 +1646,11 @@ export namespace BattleWild {
   // --------------------------------------------------------------------------------------------------
 
   export type trainer<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = trainer$SelectionSet<_$Context>
 
   export interface trainer$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Trainer<_$Context> {}
 
   // --- expanded ---
@@ -1742,8 +1661,7 @@ export namespace BattleWild {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type trainer$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     trainer$SelectionSet<_$Context>
   >
@@ -1751,13 +1669,11 @@ export namespace BattleWild {
   // --------------------------------------------------------------------------------------------------
 
   export type wildPokemons<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = wildPokemons$SelectionSet<_$Context>
 
   export interface wildPokemons$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Pokemon<_$Context> {}
 
   // --- expanded ---
@@ -1768,8 +1684,7 @@ export namespace BattleWild {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type wildPokemons$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     wildPokemons$SelectionSet<_$Context>
   >
@@ -1785,8 +1700,7 @@ export namespace BattleWild {
  * A combatant in a battle royale with multiple Pokemon.
  */
 export interface CombatantMultiPokemon<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * The team of Pokemon used by this combatant.
@@ -1874,8 +1788,7 @@ export interface CombatantMultiPokemon<
 }
 
 export interface CombatantMultiPokemon$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends
   CombatantMultiPokemon<_$Context>,
   $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields
@@ -1886,13 +1799,11 @@ export interface CombatantMultiPokemon$FragmentInline<
 
 export namespace CombatantMultiPokemon {
   export type pokemons<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = pokemons$SelectionSet<_$Context>
 
   export interface pokemons$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Pokemon<_$Context> {}
 
   // --- expanded ---
@@ -1903,8 +1814,7 @@ export namespace CombatantMultiPokemon {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type pokemons$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     pokemons$SelectionSet<_$Context>
   >
@@ -1912,13 +1822,11 @@ export namespace CombatantMultiPokemon {
   // --------------------------------------------------------------------------------------------------
 
   export type trainer<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = trainer$SelectionSet<_$Context>
 
   export interface trainer$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Trainer<_$Context> {}
 
   // --- expanded ---
@@ -1929,8 +1837,7 @@ export namespace CombatantMultiPokemon {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type trainer$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     trainer$SelectionSet<_$Context>
   >
@@ -1946,8 +1853,7 @@ export namespace CombatantMultiPokemon {
  * A combatant in a one-on-one battle with a single Pokemon.
  */
 export interface CombatantSinglePokemon<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * The Pokemon used by this combatant.
@@ -2034,8 +1940,7 @@ export interface CombatantSinglePokemon<
 }
 
 export interface CombatantSinglePokemon$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends
   CombatantSinglePokemon<_$Context>,
   $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields
@@ -2046,13 +1951,11 @@ export interface CombatantSinglePokemon$FragmentInline<
 
 export namespace CombatantSinglePokemon {
   export type pokemon<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = pokemon$SelectionSet<_$Context>
 
   export interface pokemon$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Pokemon<_$Context> {}
 
   // --- expanded ---
@@ -2063,8 +1966,7 @@ export namespace CombatantSinglePokemon {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type pokemon$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     pokemon$SelectionSet<_$Context>
   >
@@ -2072,13 +1974,11 @@ export namespace CombatantSinglePokemon {
   // --------------------------------------------------------------------------------------------------
 
   export type trainer<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = trainer$SelectionSet<_$Context>
 
   export interface trainer$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Trainer<_$Context> {}
 
   // --- expanded ---
@@ -2089,8 +1989,7 @@ export namespace CombatantSinglePokemon {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type trainer$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     trainer$SelectionSet<_$Context>
   >
@@ -2106,8 +2005,7 @@ export namespace CombatantSinglePokemon {
  * A patron who is a fan of a particular trainer.
  */
 export interface Patron<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * The unique identifier for this patron.
@@ -2195,24 +2093,19 @@ export interface Patron<
 }
 
 export interface Patron$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends Patron<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 // ----------------------------------------| Fields |
 
 export namespace Patron {
-  export type id<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
-  > =
+  export type id<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Context>
 
   export interface id$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -2223,8 +2116,7 @@ export namespace Patron {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Context>
@@ -2233,15 +2125,13 @@ export namespace Patron {
   // --------------------------------------------------------------------------------------------------
 
   export type money<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | money$SelectionSet<_$Context>
 
   export interface money$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -2252,8 +2142,7 @@ export namespace Patron {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type money$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | money$SelectionSet<_$Context>
@@ -2262,15 +2151,13 @@ export namespace Patron {
   // --------------------------------------------------------------------------------------------------
 
   export type name<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | name$SelectionSet<_$Context>
 
   export interface name$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -2281,8 +2168,7 @@ export namespace Patron {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type name$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | name$SelectionSet<_$Context>
@@ -2299,8 +2185,7 @@ export namespace Patron {
  * A Pokemon with stats, type, and trainer information.
  */
 export interface Pokemon<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * The attack power of this Pokemon.
@@ -2506,8 +2391,7 @@ export interface Pokemon<
 }
 
 export interface Pokemon$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends Pokemon<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
@@ -2515,15 +2399,13 @@ export interface Pokemon$FragmentInline<
 
 export namespace Pokemon {
   export type attack<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | attack$SelectionSet<_$Context>
 
   export interface attack$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -2534,8 +2416,7 @@ export namespace Pokemon {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type attack$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | attack$SelectionSet<_$Context>
@@ -2544,15 +2425,13 @@ export namespace Pokemon {
   // --------------------------------------------------------------------------------------------------
 
   export type birthday<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | birthday$SelectionSet<_$Context>
 
   export interface birthday$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -2563,8 +2442,7 @@ export namespace Pokemon {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type birthday$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | birthday$SelectionSet<_$Context>
@@ -2573,15 +2451,13 @@ export namespace Pokemon {
   // --------------------------------------------------------------------------------------------------
 
   export type defense<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | defense$SelectionSet<_$Context>
 
   export interface defense$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -2592,8 +2468,7 @@ export namespace Pokemon {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type defense$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | defense$SelectionSet<_$Context>
@@ -2601,16 +2476,12 @@ export namespace Pokemon {
 
   // --------------------------------------------------------------------------------------------------
 
-  export type hp<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
-  > =
+  export type hp<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | hp$SelectionSet<_$Context>
 
   export interface hp$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -2621,8 +2492,7 @@ export namespace Pokemon {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type hp$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | hp$SelectionSet<_$Context>
@@ -2630,16 +2500,12 @@ export namespace Pokemon {
 
   // --------------------------------------------------------------------------------------------------
 
-  export type id<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
-  > =
+  export type id<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Context>
 
   export interface id$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -2650,8 +2516,7 @@ export namespace Pokemon {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Context>
@@ -2660,15 +2525,13 @@ export namespace Pokemon {
   // --------------------------------------------------------------------------------------------------
 
   export type name<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | name$SelectionSet<_$Context>
 
   export interface name$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -2679,8 +2542,7 @@ export namespace Pokemon {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type name$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | name$SelectionSet<_$Context>
@@ -2689,13 +2551,11 @@ export namespace Pokemon {
   // --------------------------------------------------------------------------------------------------
 
   export type trainer<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = trainer$SelectionSet<_$Context>
 
   export interface trainer$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Trainer<_$Context> {}
 
   // --- expanded ---
@@ -2706,8 +2566,7 @@ export namespace Pokemon {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type trainer$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     trainer$SelectionSet<_$Context>
   >
@@ -2715,15 +2574,13 @@ export namespace Pokemon {
   // --------------------------------------------------------------------------------------------------
 
   export type type<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | type$SelectionSet<_$Context>
 
   export interface type$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -2734,8 +2591,7 @@ export namespace Pokemon {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type type$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | type$SelectionSet<_$Context>
@@ -2752,8 +2608,7 @@ export namespace Pokemon {
  * A Pokemon trainer who catches and battles with Pokemon.
  */
 export interface Trainer<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   /**
    * The class or specialty of this trainer.
@@ -2916,8 +2771,7 @@ export interface Trainer<
 }
 
 export interface Trainer$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends Trainer<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
@@ -2925,15 +2779,13 @@ export interface Trainer$FragmentInline<
 
 export namespace Trainer {
   export type $class<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | $class$SelectionSet<_$Context>
 
   export interface $class$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -2944,8 +2796,7 @@ export namespace Trainer {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type $class$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | $class$SelectionSet<_$Context>
@@ -2954,13 +2805,11 @@ export namespace Trainer {
   // --------------------------------------------------------------------------------------------------
 
   export type fans<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = fans$SelectionSet<_$Context>
 
   export interface fans$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Patron<_$Context> {}
 
   // --- expanded ---
@@ -2971,24 +2820,19 @@ export namespace Trainer {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type fans$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     fans$SelectionSet<_$Context>
   >
 
   // --------------------------------------------------------------------------------------------------
 
-  export type id<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
-  > =
+  export type id<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Context>
 
   export interface id$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -2999,8 +2843,7 @@ export namespace Trainer {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Context>
@@ -3009,15 +2852,13 @@ export namespace Trainer {
   // --------------------------------------------------------------------------------------------------
 
   export type name<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | name$SelectionSet<_$Context>
 
   export interface name$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -3028,8 +2869,7 @@ export namespace Trainer {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type name$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | name$SelectionSet<_$Context>
@@ -3038,13 +2878,11 @@ export namespace Trainer {
   // --------------------------------------------------------------------------------------------------
 
   export type pokemon<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = pokemon$SelectionSet<_$Context>
 
   export interface pokemon$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $NamedTypes.$Pokemon<_$Context> {}
 
   // --- expanded ---
@@ -3055,8 +2893,7 @@ export namespace Trainer {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type pokemon$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     pokemon$SelectionSet<_$Context>
   >
@@ -3082,8 +2919,7 @@ export namespace Trainer {
  * Represents any kind of battle that can occur in the Pokemon world.
  */
 export interface Battle<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > {
   /**
    * A meta field. Is the name of the type being selected. Since this is a union type and thus polymorphic,
@@ -3195,8 +3031,7 @@ export interface Battle<
     | Battle$FragmentInline<_$Context>[]
 }
 export interface Battle$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends Battle<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
@@ -3224,8 +3059,7 @@ export interface Battle$FragmentInline<
  * A being in the Pokemon world - either a Pokemon, Trainer, or Patron.
  */
 export interface Being<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
   id?: Being.id<_$Context>
   name?: Being.name<_$Context>
@@ -3343,22 +3177,17 @@ export interface Being<
 }
 
 export interface Being$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-    $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends Being<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
 
 export namespace Being {
-  export type id<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
-  > =
+  export type id<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Context>
 
   export interface id$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -3369,23 +3198,20 @@ export namespace Being {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type id$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | id$SelectionSet<_$Context>
   >
 
   export type name<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > =
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | name$SelectionSet<_$Context>
 
   export interface name$SelectionSet<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {}
 
   // --- expanded ---
@@ -3396,8 +3222,7 @@ export namespace Being {
    * In some cases, this is a preferable DX, making the types easier to read for users.
    */
   export type name$Expanded<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | name$SelectionSet<_$Context>
@@ -3411,11 +3236,13 @@ export type Query$Infer<$SelectionSet extends object> = $$Utilities.DocumentBuil
   $$Schema.Schema
 >
 export type Query$Variables<_$SelectionSet> = any // Temporarily any - will be replaced with new analysis system
+
 export type Mutation$Infer<$SelectionSet extends object> = $$Utilities.DocumentBuilderKit.InferResult.OperationMutation<
   $SelectionSet,
   $$Schema.Schema
 >
 export type Mutation$Variables<_$SelectionSet> = any // Temporarily any - will be replaced with new analysis system
+
 /**
  * [1] These definitions serve to allow field selection interfaces to extend their respective object type without
  *     name clashing between the field name and the object name.
@@ -3423,68 +3250,54 @@ export type Mutation$Variables<_$SelectionSet> = any // Temporarily any - will b
  *     For example imagine `Query.Foo` field with type also called `Foo`. Our generated interfaces for each field
  *     would end up with an error of `export interface Foo extends Foo ...`
  */
+
 export namespace $NamedTypes {
   export type $Query<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = Query<_$Context>
   export type $Mutation<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = Mutation<_$Context>
   export type $BattleWildResult = BattleWildResult
   export type $PokemonType = PokemonType
   export type $TrainerClass = TrainerClass
   export type $DateFilter<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = DateFilter<_$Context>
   export type $PokemonFilter<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = PokemonFilter<_$Context>
   export type $StringFilter<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = StringFilter<_$Context>
   export type $BattleRoyale<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = BattleRoyale<_$Context>
   export type $BattleTrainer<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = BattleTrainer<_$Context>
   export type $BattleWild<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = BattleWild<_$Context>
   export type $CombatantMultiPokemon<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = CombatantMultiPokemon<_$Context>
   export type $CombatantSinglePokemon<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = CombatantSinglePokemon<_$Context>
   export type $Patron<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = Patron<_$Context>
   export type $Pokemon<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = Pokemon<_$Context>
   export type $Trainer<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = Trainer<_$Context>
   export type $Battle<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = Battle<_$Context>
   export type $Being<
-    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext =
-      $$Utilities.DocumentBuilderKit.Select.DefaultContext,
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = Being<_$Context>
 }

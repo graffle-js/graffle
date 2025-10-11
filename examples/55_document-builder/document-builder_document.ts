@@ -7,8 +7,8 @@ import { showJson } from '../$/helpers.js'
 
 const pokemon = Graffle.create()
 
-const pokemons = await pokemon.document({
-  //                           ^^^^^^^^
+const pokemons = await pokemon.gql({
+  //                           ^^^
   query: { //                     An operation type.
     pokemonsAndTrainers: { //     A name chosen by you for this operation.
       trainers: { //              A selection on a Query type field (aka. root field, entrypoint).
@@ -40,6 +40,6 @@ const pokemons = await pokemon.document({
     },
   },
 })
-  .run(`pokemonsAndTrainers`) //  Set operation name to be executed and send request.
+  .pokemonsAndTrainers() //  Choose operation name to be executed and send request.
 
 showJson(pokemons)

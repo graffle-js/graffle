@@ -28,7 +28,7 @@ const i = {
   _$Context: `_$Context`,
 }
 const $ContextTypeParameter =
-  `${i._$Context} extends ${$.$$Utilities}.DocumentBuilderKit.Select.SelectionContext = ${$.$$Utilities}.DocumentBuilderKit.Select.DefaultContext`
+  `${i._$Context} extends ${$.$$Utilities}.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext`
 
 export const ModuleGeneratorSelectionSets = createModuleGenerator(
   `SelectionSets`,
@@ -46,6 +46,13 @@ export const ModuleGeneratorSelectionSets = createModuleGenerator(
     const kinds = kindEntries.map(_ => _[1])
 
     code(importUtilities(config))
+    code(codeImportAll(config, { as: $.$$Scalar, from: './scalar', type: true }))
+    code``
+    code`
+      export interface $DefaultSelectionContext {
+        scalars: ${$.$$Scalar}.$Registry
+      }
+    `
     code``
     code(Tex.title1(`Document`))
     code``

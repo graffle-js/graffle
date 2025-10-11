@@ -1,8 +1,11 @@
+import * as $$ArgumentsMap from './arguments-map.js'
 import * as $$Data from './data.js'
 import * as $$MethodsDocument from './methods-document.js'
 import * as $$MethodsRoot from './methods-root.js'
 import * as $$MethodsSelect from './methods-select.js'
 import type * as $$Schema from './schema/$.js'
+import type * as $$SelectionSets from './selection-sets.js'
+import type * as $$Tada from './tada.js'
 
 declare global {
   export namespace GraffleGlobal {
@@ -15,6 +18,11 @@ declare global {
           Document: $$MethodsDocument.BuilderMethodsDocumentFn
           Root: $$MethodsRoot.BuilderMethodsRootFn
         }
+        selectionSets: {
+          $Document: $$SelectionSets.$Document
+        }
+        argumentsMap: $$ArgumentsMap.ArgumentsMap
+        tadaIntrospection: $$Tada.introspection
         defaultSchemaUrl: null
       }
     }

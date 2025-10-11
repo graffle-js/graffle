@@ -269,6 +269,16 @@ export const rewriteDynamicError = (value: string) => {
     // Normalize blank lines after caret to always be single blank line for consistency
     // Node.js error output can vary between versions and environments
     .replaceAll(/\^\n\n+/g, '^\n\n')
+    // Strip file:// protocol prefix from paths for consistency
+    .replaceAll(/file:\/+/g, '')
+    // Normalize file extensions: .js -> .ts (since sometimes we run built code, sometimes tsx)
+    .replaceAll(/\/([\w-]+)\.(?:js|mjs|cjs)\b/g, '/$1.ts')
+    // Normalize whitespace before error carets (varies between environments)
+    // Match pattern: "    return statement..." followed by "    ^" on next line
+    .replaceAll(/^(\s+)(.+)\n\1(\s*)\^/gm, (_, indent, code, caretIndent) => {
+      // Normalize to consistent 11-space indent for code and caret
+      return `           ${code.trim()}\n                  ^`
+    })
     // Mask Node.js internal module line numbers that vary between versions
     // Match patterns like node:internal/deps/undici/undici:13510:13 or node:internal/url:825:25
     .replaceAll(

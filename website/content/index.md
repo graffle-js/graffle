@@ -53,8 +53,8 @@ features:
   - title: Output Modes
     details: Control error handling patterns with envelope mode (wrap results), return-error mode (errors as values), or throw mode. Configure globally or per-request.
     icon: 📮
-  - title: gql.tada Support<br/><span style="opacity:0.25;">( Coming Soon )</span>
-    details: Automatic integration with gql.tada for type-safe GraphQL documents using the standard GraphQL syntax. Best of both worlds. <a href="https://github.com/graffle-js/graffle/issues/1273">Track progress →</a>
+  - title: Type-Safe Native GraphQL Syntax
+    details: Full type inference for GraphQL documents using standard GraphQL syntax. Write queries and mutations with complete IDE autocomplete and type safety alongside the document builder.
     icon: 🎭
 ---
 

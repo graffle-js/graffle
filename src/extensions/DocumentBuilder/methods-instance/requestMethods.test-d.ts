@@ -1,7 +1,7 @@
 import type { Schema } from '#src/types/Schema/$.js'
 import { DateScalar } from '#test/fixtures/scalars'
+import { Possible } from '#test/schema/possible/client/$.js'
 import { expectTypeOf, test } from 'vitest'
-import { Possible } from '../__tests__/fixtures/possible/$.js'
 
 const g = Possible.create({ check: { preflight: false } }).scalar(DateScalar)
 

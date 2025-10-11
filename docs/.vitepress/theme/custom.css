@@ -1,0 +1,11 @@
+/* Highlighted word styling for Shiki transformerNotationWordHighlight */
+.highlighted-word {
+  background-color: rgba(100, 108, 255, 0.25);
+  border-radius: 3px;
+  padding: 0 2px;
+  font-weight: 600;
+}
+
+.dark .highlighted-word {
+  background-color: rgba(100, 108, 255, 0.35);
+}

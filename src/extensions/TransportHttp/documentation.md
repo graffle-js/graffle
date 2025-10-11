@@ -66,7 +66,7 @@ export async function load({ fetch }) {
     })
 
   // Client will now use relative URLs with SvelteKit's fetch
-  const data = await client.gql`{ posts { title } }`.send()
+  const data = await client.gql('{ posts { title } }').send()
   return { posts: data.posts }
 }
 ```

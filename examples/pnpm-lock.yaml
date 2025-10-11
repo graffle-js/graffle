@@ -17,9 +17,12 @@ importers:
       '@opentelemetry/sdk-trace-node':
         specifier: ^1.30.0
         version: 1.30.0(@opentelemetry/api@1.9.0)
+      gql.tada:
+        specifier: ^1.8.13
+        version: 1.8.13(graphql@16.10.0)(typescript@5.7.2)
       graffle:
         specifier: file:..
-        version: file:..(@effect/platform@0.91.1(effect@3.17.14))(@opentelemetry/api@1.9.0)(effect@3.17.14)(graphql@16.10.0)
+        version: file:..(@effect/platform@0.91.1(effect@3.17.14))(@opentelemetry/api@1.9.0)(effect@3.17.14)(graphql@16.10.0)(typescript@5.7.2)
       graphql:
         specifier: ^16.10.0
         version: 16.10.0
@@ -41,7 +44,7 @@ importers:
         version: 4.19.3
       vitest:
         specifier: ^3.1.1
-        version: 3.1.1(@types/node@24.7.0)(tsx@4.19.3)
+        version: 3.1.1(@types/node@24.7.2)(tsx@4.19.3)
 
 packages:
 
@@ -52,6 +55,12 @@ packages:
     peerDependenciesMeta:
       graphql:
         optional: true
+
+  '@0no-co/graphqlsp@1.15.0':
+    resolution: {integrity: sha512-SReJAGmOeXrHGod+9Odqrz4s43liK0b2DFUetb/jmYvxFpWmeNfFYo0seCh0jz8vG3p1pnYMav0+Tm7XwWtOJw==}
+    peerDependencies:
+      graphql: ^15.5.0 || ^16.0.0 || ^17.0.0
+      typescript: ^5.0.0
 
   '@effect/platform@0.91.1':
     resolution: {integrity: sha512-zfagdv9JRFRGksgTgcBKPK+291V1KLgQsBE0E/jkNKlXRx4PupI/rqTOv2REdiXGGNcLRsh3+hwmOGgRmGIRCQ==}
@@ -207,6 +216,26 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
+
+  '@gql.tada/cli-utils@1.7.1':
+    resolution: {integrity: sha512-wg5ysZNQxtNQm67T3laVWmZzLpGb7QfyYWZdaUD2r1OjDj5Bgftq7eQlplmH+hsdffjuUyhJw/b5XAjeE2mJtg==}
+    peerDependencies:
+      '@0no-co/graphqlsp': ^1.12.13
+      '@gql.tada/svelte-support': 1.0.1
+      '@gql.tada/vue-support': 1.0.1
+      graphql: ^15.5.0 || ^16.0.0 || ^17.0.0
+      typescript: ^5.0.0
+    peerDependenciesMeta:
+      '@gql.tada/svelte-support':
+        optional: true
+      '@gql.tada/vue-support':
+        optional: true
+
+  '@gql.tada/internal@1.0.8':
+    resolution: {integrity: sha512-XYdxJhtHC5WtZfdDqtKjcQ4d7R1s0d1rnlSs3OcBEUbYiPoJJfZU7tWsVXuv047Z6msvmr4ompJ7eLSK5Km57g==}
+    peerDependencies:
+      graphql: ^15.5.0 || ^16.0.0 || ^17.0.0
+      typescript: ^5.0.0
 
   '@graphql-typed-document-node/core@3.2.0':
     resolution: {integrity: sha512-mB9oAsNCm9aM3/SOv4YtBMqZbYj10R7dkq8byBqxGY/ncFwhf2oQzMV+LCRlWoDSEBJ3COiR1yeDvMtsoOsuFQ==}
@@ -414,8 +443,8 @@ packages:
   '@types/estree@1.0.7':
     resolution: {integrity: sha512-w28IoSUCJpidD/TGviZwwMJckNESJZXFu7NBZ5YJ4mEUnNraUn9Pm8HSZm/jDF1pDWYKspWE7oVphigUPRakIQ==}
 
-  '@types/node@24.7.0':
-    resolution: {integrity: sha512-IbKooQVqUBrlzWTi79E8Fw78l8k1RNtlDDNWsFZs7XonuQSJ8oNYfEeclhprUldXISRMLzBpILuKgPlIxm+/Yw==}
+  '@types/node@24.7.2':
+    resolution: {integrity: sha512-/NbVmcGTP+lj5oa4yiYxxeBjRivKQ5Ns1eSZeB99ExsEQ6rX5XYU1Zy/gGxY/ilqtD4Etx9mKyrPxZRetiahhA==}
 
   '@types/object-inspect@1.13.0':
     resolution: {integrity: sha512-lwGTVESDDV+XsQ1pH4UifpJ1f7OtXzQ6QBOX2Afq2bM/T3oOt8hF6exJMjjIjtEWeAN2YAo25J7HxWh97CCz9w==}
@@ -449,14 +478,38 @@ packages:
   '@vitest/utils@3.1.1':
     resolution: {integrity: sha512-1XIjflyaU2k3HMArJ50bwSh3wKWPD6Q47wz/NUSmRV0zNywPc4w79ARjg/i/aNINHwA+mIALhUVqD9/aUvZNgg==}
 
-  '@wollybeard/kit@0.69.0':
-    resolution: {integrity: sha512-vD+/BzSnfRTXD7FcrXCGr45iUid81gefeVtYv6aZyh1vJligWaHIRIcFzwYNyjIi6fO2e8xZA572ybSlHdEwUg==}
+  '@vltpkg/dep-id@0.0.0-30':
+    resolution: {integrity: sha512-SvUHQgZJg0d7Mc1yec+5lF2DFiwbEgikCvdqXdxWAxjSdXhj7d6vNUH3MitrZCJPiUpdvOejS4DVHanLfcwI9g==}
+    engines: {node: '>=22'}
+
+  '@vltpkg/error-cause@0.0.0-30':
+    resolution: {integrity: sha512-j+rjUo0m1C81HdoW7qLgQFHGedg4YypzAYEdrUT04f4DGLZB3Qf9OS1Wd26IzICjMxB8OSAxFqKHikst3KR4wA==}
+    engines: {node: '>=22'}
+
+  '@vltpkg/fast-split@0.0.0-30':
+    resolution: {integrity: sha512-UhCch9sy30lyR5Ry8knwIi46MGCr8fMQ/Z3TG2dBxH2kkTWKkOPc0s8wa9uz8y0BkE9fqku2gVkTAnz1yCeROg==}
+    engines: {node: '>=22'}
+
+  '@vltpkg/semver@0.0.0-30':
+    resolution: {integrity: sha512-GWqy5Rr5L9VeJDE6Yb0BscLehLWc1GWDAShxFFmfGBqr68Vy0DF5YSWb0NvVpfQ0r+uIxA5FK7b7bK0oJKThPw==}
+    engines: {node: '>=22'}
+
+  '@vltpkg/spec@0.0.0-30':
+    resolution: {integrity: sha512-0eYijND+UJBNkrEpL7+Ammc6Sjk7bAOZC33PETYXkV3JGl8npoV3o4w3rigtwfZVuedfi81RmMcr0Nb2JjNaMw==}
+    engines: {node: '>=22'}
+
+  '@vltpkg/types@0.0.0-30':
+    resolution: {integrity: sha512-gUqYAZwVQjmjbM+xnyZNHnpMyXIvDN5nIzifWY9RKJ9XEmPVJg8Nql5zMXXPbr1MekMZzBvqvCgMeoDV53dX2g==}
+    engines: {node: '>=22'}
+
+  '@wollybeard/kit@0.71.0':
+    resolution: {integrity: sha512-BlvIB8bCWsx4nQoccfCgpk4M4mYlRyEp898A4TiqhuOe+IgkwpGegr9mN2O0Y8yFB4Q0CYku/iP2Z6NkH7AbMQ==}
     peerDependencies:
       '@effect/platform': '>=0.90.0 <1.0.0'
       effect: ^3.17.0
 
-  '@wollybeard/kit@0.71.0':
-    resolution: {integrity: sha512-BlvIB8bCWsx4nQoccfCgpk4M4mYlRyEp898A4TiqhuOe+IgkwpGegr9mN2O0Y8yFB4Q0CYku/iP2Z6NkH7AbMQ==}
+  '@wollybeard/kit@0.78.3':
+    resolution: {integrity: sha512-3mn5uyEIYKO5tBzoI8gC/wQxTehAhnx/PKMuIRYi2iMlfBRgVq/DvelanjH82aqkizppgrF7uTNo2Xojy1hKFQ==}
     peerDependencies:
       '@effect/platform': '>=0.90.0 <1.0.0'
       effect: ^3.17.0
@@ -509,8 +562,8 @@ packages:
     resolution: {integrity: sha512-h5k/5U50IJJFpzfL6nO9jaaumfjO/f2NjK/oYB2Djzm4p9L+3T9qWpZqZ2hAbLPuuYq9wrU08WQyBTL5GbPk5Q==}
     engines: {node: '>=6'}
 
-  detect-libc@2.1.2:
-    resolution: {integrity: sha512-Btj2BOOO83o3WyH59e8MgXsxEQVcarkUOpEYrubB0urwnN10yQ364rsiByU11nZlqWYZm05i/of7io4mzihBtQ==}
+  detect-libc@2.1.1:
+    resolution: {integrity: sha512-ecqj/sy1jcK1uWrwpR67UhYrIFQ+5WlGxth34WquCbamhFA6hkkwiu37o6J5xCHdo1oixJRfVRw+ywV+Hq/0Aw==}
     engines: {node: '>=8'}
 
   effect@3.17.14:
@@ -572,6 +625,12 @@ packages:
 
   get-tsconfig@4.10.0:
     resolution: {integrity: sha512-kGzZ3LWWQcGIAmg6iWvXn0ei6WDtV26wzHRMwDSzmAbcXrTEXxHy6IehI6/4eT6VRKyMP1eF1VqwrVUmE/LR7A==}
+
+  gql.tada@1.8.13:
+    resolution: {integrity: sha512-fYoorairdPgxtE7Sf1X9/6bSN9Kt2+PN8KLg3hcF8972qFnawwUgs1OLVU8efZMHwL7EBHhhKBhrsGPlOs2lZQ==}
+    hasBin: true
+    peerDependencies:
+      typescript: ^5.0.0
 
   graffle@file:..:
     resolution: {directory: .., type: directory}
@@ -854,6 +913,12 @@ snapshots:
     optionalDependencies:
       graphql: 16.10.0
 
+  '@0no-co/graphqlsp@1.15.0(graphql@16.10.0)(typescript@5.7.2)':
+    dependencies:
+      '@gql.tada/internal': 1.0.8(graphql@16.10.0)(typescript@5.7.2)
+      graphql: 16.10.0
+      typescript: 5.7.2
+
   '@effect/platform@0.91.1(effect@3.17.14)':
     dependencies:
       effect: 3.17.14
@@ -935,6 +1000,19 @@ snapshots:
 
   '@esbuild/win32-x64@0.25.2':
     optional: true
+
+  '@gql.tada/cli-utils@1.7.1(@0no-co/graphqlsp@1.15.0(graphql@16.10.0)(typescript@5.7.2))(graphql@16.10.0)(typescript@5.7.2)':
+    dependencies:
+      '@0no-co/graphqlsp': 1.15.0(graphql@16.10.0)(typescript@5.7.2)
+      '@gql.tada/internal': 1.0.8(graphql@16.10.0)(typescript@5.7.2)
+      graphql: 16.10.0
+      typescript: 5.7.2
+
+  '@gql.tada/internal@1.0.8(graphql@16.10.0)(typescript@5.7.2)':
+    dependencies:
+      '@0no-co/graphql.web': 1.1.2(graphql@16.10.0)
+      graphql: 16.10.0
+      typescript: 5.7.2
 
   '@graphql-typed-document-node/core@3.2.0(graphql@16.10.0)':
     dependencies:
@@ -1092,7 +1170,7 @@ snapshots:
 
   '@types/estree@1.0.7': {}
 
-  '@types/node@24.7.0':
+  '@types/node@24.7.2':
     dependencies:
       undici-types: 7.14.0
 
@@ -1105,13 +1183,13 @@ snapshots:
       chai: 5.2.0
       tinyrainbow: 2.0.0
 
-  '@vitest/mocker@3.1.1(vite@6.3.2(@types/node@24.7.0)(tsx@4.19.3))':
+  '@vitest/mocker@3.1.1(vite@6.3.2(@types/node@24.7.2)(tsx@4.19.3))':
     dependencies:
       '@vitest/spy': 3.1.1
       estree-walker: 3.0.3
       magic-string: 0.30.17
     optionalDependencies:
-      vite: 6.3.2(@types/node@24.7.0)(tsx@4.19.3)
+      vite: 6.3.2(@types/node@24.7.2)(tsx@4.19.3)
 
   '@vitest/pretty-format@3.1.1':
     dependencies:
@@ -1138,10 +1216,38 @@ snapshots:
       loupe: 3.1.3
       tinyrainbow: 2.0.0
 
-  '@wollybeard/kit@0.69.0(@effect/platform@0.91.1(effect@3.17.14))(effect@3.17.14)':
+  '@vltpkg/dep-id@0.0.0-30':
+    dependencies:
+      '@vltpkg/error-cause': 0.0.0-30
+      '@vltpkg/spec': 0.0.0-30
+      '@vltpkg/types': 0.0.0-30
+
+  '@vltpkg/error-cause@0.0.0-30': {}
+
+  '@vltpkg/fast-split@0.0.0-30': {}
+
+  '@vltpkg/semver@0.0.0-30':
+    dependencies:
+      '@vltpkg/error-cause': 0.0.0-30
+      '@vltpkg/fast-split': 0.0.0-30
+      '@vltpkg/types': 0.0.0-30
+
+  '@vltpkg/spec@0.0.0-30':
+    dependencies:
+      '@vltpkg/error-cause': 0.0.0-30
+      '@vltpkg/semver': 0.0.0-30
+
+  '@vltpkg/types@0.0.0-30':
+    dependencies:
+      '@vltpkg/dep-id': 0.0.0-30
+      '@vltpkg/error-cause': 0.0.0-30
+      '@vltpkg/semver': 0.0.0-30
+      '@vltpkg/spec': 0.0.0-30
+
+  '@wollybeard/kit@0.71.0(@effect/platform@0.91.1(effect@3.17.14))(effect@3.17.14)':
     dependencies:
       '@effect/platform': 0.91.1(effect@3.17.14)
-      '@types/node': 24.7.0
+      '@types/node': 24.7.2
       '@types/object-inspect': 1.13.0
       ansis: 4.2.0
       consola: 3.4.2
@@ -1154,11 +1260,12 @@ snapshots:
       tinyglobby: 0.2.15
       type-fest: 5.0.1
 
-  '@wollybeard/kit@0.71.0(@effect/platform@0.91.1(effect@3.17.14))(effect@3.17.14)':
+  '@wollybeard/kit@0.78.3(@effect/platform@0.91.1(effect@3.17.14))(effect@3.17.14)':
     dependencies:
       '@effect/platform': 0.91.1(effect@3.17.14)
-      '@types/node': 24.7.0
+      '@types/node': 24.7.2
       '@types/object-inspect': 1.13.0
+      '@vltpkg/semver': 0.0.0-30
       ansis: 4.2.0
       consola: 3.4.2
       effect: 3.17.14
@@ -1205,7 +1312,7 @@ snapshots:
 
   deep-eql@5.0.2: {}
 
-  detect-libc@2.1.2:
+  detect-libc@2.1.1:
     optional: true
 
   effect@3.17.14:
@@ -1278,13 +1385,26 @@ snapshots:
     dependencies:
       resolve-pkg-maps: 1.0.0
 
-  graffle@file:..(@effect/platform@0.91.1(effect@3.17.14))(@opentelemetry/api@1.9.0)(effect@3.17.14)(graphql@16.10.0):
+  gql.tada@1.8.13(graphql@16.10.0)(typescript@5.7.2):
+    dependencies:
+      '@0no-co/graphql.web': 1.1.2(graphql@16.10.0)
+      '@0no-co/graphqlsp': 1.15.0(graphql@16.10.0)(typescript@5.7.2)
+      '@gql.tada/cli-utils': 1.7.1(@0no-co/graphqlsp@1.15.0(graphql@16.10.0)(typescript@5.7.2))(graphql@16.10.0)(typescript@5.7.2)
+      '@gql.tada/internal': 1.0.8(graphql@16.10.0)(typescript@5.7.2)
+      typescript: 5.7.2
+    transitivePeerDependencies:
+      - '@gql.tada/svelte-support'
+      - '@gql.tada/vue-support'
+      - graphql
+
+  graffle@file:..(@effect/platform@0.91.1(effect@3.17.14))(@opentelemetry/api@1.9.0)(effect@3.17.14)(graphql@16.10.0)(typescript@5.7.2):
     dependencies:
       '@0no-co/graphql.web': 1.1.2(graphql@16.10.0)
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.10.0)
       '@molt/command': 0.9.0
-      '@wollybeard/kit': 0.69.0(@effect/platform@0.91.1(effect@3.17.14))(effect@3.17.14)
+      '@wollybeard/kit': 0.78.3(@effect/platform@0.91.1(effect@3.17.14))(effect@3.17.14)
       es-toolkit: 1.35.0
+      gql.tada: 1.8.13(graphql@16.10.0)(typescript@5.7.2)
       graphql: 16.10.0
       is-plain-obj: 4.1.0
       type-fest: 4.40.0
@@ -1292,7 +1412,10 @@ snapshots:
       '@opentelemetry/api': 1.9.0
     transitivePeerDependencies:
       - '@effect/platform'
+      - '@gql.tada/svelte-support'
+      - '@gql.tada/vue-support'
       - effect
+      - typescript
 
   graphql@16.10.0: {}
 
@@ -1336,7 +1459,7 @@ snapshots:
 
   node-gyp-build-optional-packages@5.2.2:
     dependencies:
-      detect-libc: 2.1.2
+      detect-libc: 2.1.1
     optional: true
 
   object-inspect@1.13.4: {}
@@ -1452,13 +1575,13 @@ snapshots:
 
   undici-types@7.14.0: {}
 
-  vite-node@3.1.1(@types/node@24.7.0)(tsx@4.19.3):
+  vite-node@3.1.1(@types/node@24.7.2)(tsx@4.19.3):
     dependencies:
       cac: 6.7.14
       debug: 4.4.0
       es-module-lexer: 1.6.0
       pathe: 2.0.3
-      vite: 6.3.2(@types/node@24.7.0)(tsx@4.19.3)
+      vite: 6.3.2(@types/node@24.7.2)(tsx@4.19.3)
     transitivePeerDependencies:
       - '@types/node'
       - jiti
@@ -1473,7 +1596,7 @@ snapshots:
       - tsx
       - yaml
 
-  vite@6.3.2(@types/node@24.7.0)(tsx@4.19.3):
+  vite@6.3.2(@types/node@24.7.2)(tsx@4.19.3):
     dependencies:
       esbuild: 0.25.2
       fdir: 6.4.3(picomatch@4.0.2)
@@ -1482,14 +1605,14 @@ snapshots:
       rollup: 4.40.0
       tinyglobby: 0.2.12
     optionalDependencies:
-      '@types/node': 24.7.0
+      '@types/node': 24.7.2
       fsevents: 2.3.3
       tsx: 4.19.3
 
-  vitest@3.1.1(@types/node@24.7.0)(tsx@4.19.3):
+  vitest@3.1.1(@types/node@24.7.2)(tsx@4.19.3):
     dependencies:
       '@vitest/expect': 3.1.1
-      '@vitest/mocker': 3.1.1(vite@6.3.2(@types/node@24.7.0)(tsx@4.19.3))
+      '@vitest/mocker': 3.1.1(vite@6.3.2(@types/node@24.7.2)(tsx@4.19.3))
       '@vitest/pretty-format': 3.1.1
       '@vitest/runner': 3.1.1
       '@vitest/snapshot': 3.1.1
@@ -1505,11 +1628,11 @@ snapshots:
       tinyexec: 0.3.2
       tinypool: 1.0.2
       tinyrainbow: 2.0.0
-      vite: 6.3.2(@types/node@24.7.0)(tsx@4.19.3)
-      vite-node: 3.1.1(@types/node@24.7.0)(tsx@4.19.3)
+      vite: 6.3.2(@types/node@24.7.2)(tsx@4.19.3)
+      vite-node: 3.1.1(@types/node@24.7.2)(tsx@4.19.3)
       why-is-node-running: 2.3.0
     optionalDependencies:
-      '@types/node': 24.7.0
+      '@types/node': 24.7.2
     transitivePeerDependencies:
       - jiti
       - less

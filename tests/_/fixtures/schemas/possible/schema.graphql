@@ -1,0 +1,281 @@
+"""Enum documentation."""
+enum ABCEnum {
+  A @deprecated(reason: "Enum value A is deprecated.")
+
+  """Enum B member documentation."""
+  B
+  C @deprecated(reason: "Enum value C is deprecated.")
+}
+
+type Bar {
+  int: Int
+}
+
+enum Case {
+  ErrorOne
+  ErrorTwo
+  Object1
+}
+
+enum ChildAInterfaceHierarchyMember {
+  InterfaceChildA
+}
+
+enum ChildBInterfaceHierarchyMember {
+  InterfaceChildB
+}
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.This scalar is serialized to a string in ISO 8601 format and parsed from a string in ISO 8601 format.
+"""
+scalar Date
+
+interface DateInterface1 {
+  date1: Date
+}
+
+type DateObject1 implements DateInterface1 {
+  date1: Date
+}
+
+type DateObject2 {
+  date2: Date
+}
+
+union DateUnion = DateObject1 | DateObject2
+
+interface Error {
+  message: String!
+}
+
+type ErrorOne implements Error {
+  infoId: ID
+  message: String!
+}
+
+type ErrorTwo implements Error {
+  infoInt: Int
+  message: String!
+}
+
+"""Object documentation."""
+type Foo {
+  """Field documentation."""
+  id: ID @deprecated(reason: "Field a is deprecated.")
+}
+
+"""Union documentation."""
+union FooBarUnion = Bar | Foo
+
+enum GrandparentInterfaceHierarchyMember {
+  InterfaceChildA
+  InterfaceChildB
+  InterfaceGrandparent
+  InterfaceParent
+}
+
+input InputObject {
+  abcEnum: ABCEnum
+  date: Date
+  dateRequired: Date!
+  id: ID
+  idRequired: ID!
+}
+
+input InputObjectCircular {
+  circular: InputObjectCircular
+  date: Date
+}
+
+input InputObjectEnum {
+  abcEnum: ABCEnum
+}
+
+input InputObjectNested {
+  InputObject: InputObject
+}
+
+input InputObjectNestedNonNull {
+  InputObject: InputObject!
+}
+
+interface Interface {
+  id: ID
+}
+
+interface InterfaceChildA implements InterfaceGrandparent & InterfaceParent {
+  a: String!
+  b: String!
+  c1: String!
+}
+
+interface InterfaceChildB implements InterfaceGrandparent & InterfaceParent {
+  a: String!
+  b: String!
+  c2: String!
+}
+
+interface InterfaceGrandparent {
+  a: String!
+}
+
+interface InterfaceParent implements InterfaceGrandparent {
+  a: String!
+  b: String!
+}
+
+type Mutation {
+  id: ID
+  idNonNull: ID!
+}
+
+type Object1 {
+  ABCEnum: ABCEnum
+  boolean: Boolean
+  float: Float
+  id: ID
+  int: Int
+  string: String
+}
+
+type Object1ImplementingInterface implements Interface {
+  id: ID
+  int: Int
+}
+
+type Object2ImplementingInterface implements Interface {
+  boolean: Boolean
+  id: ID
+}
+
+type ObjectChildA implements InterfaceChildA & InterfaceGrandparent & InterfaceParent {
+  a: String!
+  b: String!
+  c1: String!
+  me: Boolean!
+}
+
+type ObjectChildB implements InterfaceChildB & InterfaceGrandparent & InterfaceParent {
+  a: String!
+  b: String!
+  c2: String!
+  me: [Int!]!
+}
+
+type ObjectGrandparent implements InterfaceGrandparent {
+  a: String!
+  me: Int!
+}
+
+type ObjectNested {
+  id: ID
+  object: Object1
+}
+
+type ObjectNestedWithArgs {
+  id(filter: ID): ID
+  object(boolean: Boolean, float: Float, int: Int, string: String): Object1
+}
+
+type ObjectParent implements InterfaceGrandparent & InterfaceParent {
+  a: String!
+  b: String!
+  me: String!
+}
+
+type ObjectUnion {
+  fooBarUnion: FooBarUnion
+}
+
+enum ParentInterfaceHierarchyMember {
+  InterfaceChildA
+  InterfaceChildB
+  InterfaceParent
+}
+
+type Query {
+  InputObjectNested(input: InputObjectNested): ID
+  InputObjectNestedNonNull(input: InputObjectNestedNonNull!): ID
+
+  """Query enum field documentation."""
+  abcEnum: ABCEnum
+  argInputObjectCircular(input: InputObjectCircular): String
+  bigintField: bigint
+  bigintFieldNonNull: bigint!
+  date: Date
+  dateArg(date: Date): Date
+  dateArgInputObject(input: InputObject): Date
+  dateArgList(date: [Date!]): Date
+  dateArgNonNull(date: Date!): Date
+  dateArgNonNullList(date: [Date]!): Date
+  dateArgNonNullListNonNull(date: [Date!]!): Date
+  dateInterface1: DateInterface1
+  dateList: [Date!]
+  dateListList: [[Date!]!]
+  dateListNonNull: [Date!]!
+  dateNonNull: Date!
+  dateObject1: DateObject1
+  dateUnion: DateUnion
+  error(case: String): String
+  id: ID
+  idNonNull: ID!
+  interface: Interface
+  interfaceHierarchyChildA(type: ChildAInterfaceHierarchyMember): [InterfaceChildA!]!
+  interfaceHierarchyChildB(type: ChildBInterfaceHierarchyMember): [InterfaceChildB!]!
+  interfaceHierarchyGrandparents(type: GrandparentInterfaceHierarchyMember): [InterfaceGrandparent!]!
+  interfaceHierarchyParents(type: ParentInterfaceHierarchyMember): [InterfaceParent!]!
+  interfaceNonNull: Interface!
+  interfaceWithArgs(id: ID!): Interface
+  listInt: [Int]
+  listIntNonNull: [Int!]!
+  listListInt: [[Int]]
+  listListIntNonNull: [[Int!]!]!
+  lowerCaseUnion: lowerCaseUnion
+  object: Object1
+  objectList: [Object1!]
+  objectListNonNull: [Object1!]!
+  objectNested: ObjectNested
+  objectNestedWithArgs: ObjectNestedWithArgs
+  objectNonNull: Object1!
+  objectWithArgs(boolean: Boolean, float: Float, id: ID, int: Int, string: String): Object1
+  result(case: Case!): Result
+  resultNonNull(case: Case): Result!
+  string: String
+  stringWithArgEnum(ABCEnum: ABCEnum): String
+  stringWithArgInputObject(input: InputObject): String
+  stringWithArgInputObjectEnum(input: InputObjectEnum!): String
+  stringWithArgInputObjectRequired(input: InputObject!): String
+
+  """The given arguments are reflected back as a JSON string."""
+  stringWithArgs(
+    boolean: Boolean
+    float: Float
+    id: ID
+    int: Int @deprecated(reason: "Example of argument deprecation reason here.")
+
+    """Example of some argument documentation here."""
+    string: String
+  ): String
+  stringWithListArg(ints: [Int]): String
+  stringWithListArgRequired(ints: [Int!]!): String
+  stringWithRequiredArg(string: String!): String
+  unionFooBar: FooBarUnion
+  unionFooBarNonNull: FooBarUnion!
+  unionFooBarWithArgs(id: ID): FooBarUnion
+  unionObject: ObjectUnion
+  unionObjectNonNull: ObjectUnion!
+}
+
+union Result = ErrorOne | ErrorTwo | Object1
+
+scalar bigint
+
+type lowerCaseObject {
+  id: ID
+}
+
+type lowerCaseObject2 {
+  int: Int
+}
+
+union lowerCaseUnion = lowerCaseObject | lowerCaseObject2

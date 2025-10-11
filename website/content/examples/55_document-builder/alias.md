@@ -58,9 +58,6 @@ console.log(pokemons)
   "babyPokemons": [
     {
       "name": "Charizard"
-    },
-    {
-      "name": "Mew"
     }
   ]
 }
