@@ -1,3 +1,4 @@
+import { Str } from '@wollybeard/kit'
 import type { Anyware } from '#lib/anyware'
 import type { TypeFunction } from '#lib/type-function'
 import type { Context } from '#src/context/context.js'
@@ -473,6 +474,15 @@ export const createWithContext = <$Context extends Context>(
       }
     }) as any,
     gql: ((...args: GqlMethod.Arguments) => {
+      // Reject template literal syntax at runtime
+      if (Str.Tpl.isCallInput(args)) {
+        throw new Error(
+          `Template literal syntax is not supported. Use call expression syntax instead:\n` +
+            `  ❌ graffle.gql\`query { id }\`\n` +
+            `  ✅ graffle.gql('query { id }')`,
+        )
+      }
+
       const normalized = GqlMethod.normalizeArguments(args)
 
       return createDocumentSender(async (operationName: string | undefined, variables?: any) => {

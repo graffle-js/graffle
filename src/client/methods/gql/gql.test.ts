@@ -84,9 +84,10 @@ describe(`client.gql() instance method`, () => {
       ).rejects.toThrow()
     })
 
-    test(`template literal syntax is not supported (type-level check)`, () => {
+    test(`template literal syntax throws at runtime`, () => {
+      // Template literal syntax is rejected at both type-level AND runtime
       // @ts-expect-error - template literal syntax not supported, use call expression: gql('...')
-      expect(() => g.gql`query GetId { id }`).toThrow()
+      expect(() => g.gql`query GetId { id }`).toThrow(/Template literal syntax is not supported/)
     })
   })
 })
