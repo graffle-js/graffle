@@ -195,11 +195,11 @@ show(multiOpDoc)
 const client = Graffle.create()
 
 // Execute first operation (no variables needed)
-const allPokemonsResult = await client.send(multiOpDoc, 'allPokemons')
+const allPokemonsResult = await client.gql(multiOpDoc).allPokemons()
 show(allPokemonsResult)
 
 // Execute second operation (variables required)
-const specificResult = await client.send(multiOpDoc, 'specificPokemon', { pokemonName: 'Pikachu' })
+const specificResult = await client.gql(multiOpDoc).specificPokemon({ pokemonName: 'Pikachu' })
 show(specificResult)
 
 /*
@@ -225,7 +225,7 @@ const singleOpDoc = Graffle.gql({
 show(singleOpDoc)
 
 // Send without operation name since there's only one
-const trainers = await client.send(singleOpDoc)
+const trainers = await client.gql(singleOpDoc).$send()
 show(trainers)
 
 /*
@@ -268,11 +268,11 @@ const mixedDoc = Graffle.gql({
 show(mixedDoc)
 
 // Execute query operation
-const pokemon = await client.send(mixedDoc, 'getPokemon', { name: 'Charizard' })
+const pokemon = await client.gql(mixedDoc).getPokemon({ name: 'Charizard' })
 show(pokemon)
 
 // Execute mutation operation
-const newPokemon = await client.send(mixedDoc, 'addNewPokemon', {
+const newPokemon = await client.gql(mixedDoc).addNewPokemon({
   name: 'Mew',
   type: 'electric',
   hp: 100,
