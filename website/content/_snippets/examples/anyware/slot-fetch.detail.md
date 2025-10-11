@@ -32,7 +32,7 @@ const result = await graffle.gql(`
       name
     }
   }
-`).send()
+`).$send()
 
 console.log(result)
 ```

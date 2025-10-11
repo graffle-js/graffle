@@ -127,7 +127,7 @@ const handleRequest = async (request: Request) => {
     {
       account
     }
-  `).send()
+  `).$send()
 
   console.log(data)
 }

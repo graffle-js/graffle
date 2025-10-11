@@ -31,7 +31,7 @@ const data = await graffle.gql(parse(`
       }
     }
   }
-`)).send({ name: `Pikachu` })
+`)).$send({ name: `Pikachu` })
 
 console.log(data)
 ```

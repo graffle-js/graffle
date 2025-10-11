@@ -24,7 +24,7 @@ const data = await graffle.gql(`
       name
     }
   }
-`).send()
+`).$send()
 
 console.log(data)
 ```
