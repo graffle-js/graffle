@@ -478,14 +478,38 @@ packages:
   '@vitest/utils@3.1.1':
     resolution: {integrity: sha512-1XIjflyaU2k3HMArJ50bwSh3wKWPD6Q47wz/NUSmRV0zNywPc4w79ARjg/i/aNINHwA+mIALhUVqD9/aUvZNgg==}
 
+  '@vltpkg/dep-id@0.0.0-30':
+    resolution: {integrity: sha512-SvUHQgZJg0d7Mc1yec+5lF2DFiwbEgikCvdqXdxWAxjSdXhj7d6vNUH3MitrZCJPiUpdvOejS4DVHanLfcwI9g==}
+    engines: {node: '>=22'}
+
+  '@vltpkg/error-cause@0.0.0-30':
+    resolution: {integrity: sha512-j+rjUo0m1C81HdoW7qLgQFHGedg4YypzAYEdrUT04f4DGLZB3Qf9OS1Wd26IzICjMxB8OSAxFqKHikst3KR4wA==}
+    engines: {node: '>=22'}
+
+  '@vltpkg/fast-split@0.0.0-30':
+    resolution: {integrity: sha512-UhCch9sy30lyR5Ry8knwIi46MGCr8fMQ/Z3TG2dBxH2kkTWKkOPc0s8wa9uz8y0BkE9fqku2gVkTAnz1yCeROg==}
+    engines: {node: '>=22'}
+
+  '@vltpkg/semver@0.0.0-30':
+    resolution: {integrity: sha512-GWqy5Rr5L9VeJDE6Yb0BscLehLWc1GWDAShxFFmfGBqr68Vy0DF5YSWb0NvVpfQ0r+uIxA5FK7b7bK0oJKThPw==}
+    engines: {node: '>=22'}
+
+  '@vltpkg/spec@0.0.0-30':
+    resolution: {integrity: sha512-0eYijND+UJBNkrEpL7+Ammc6Sjk7bAOZC33PETYXkV3JGl8npoV3o4w3rigtwfZVuedfi81RmMcr0Nb2JjNaMw==}
+    engines: {node: '>=22'}
+
+  '@vltpkg/types@0.0.0-30':
+    resolution: {integrity: sha512-gUqYAZwVQjmjbM+xnyZNHnpMyXIvDN5nIzifWY9RKJ9XEmPVJg8Nql5zMXXPbr1MekMZzBvqvCgMeoDV53dX2g==}
+    engines: {node: '>=22'}
+
   '@wollybeard/kit@0.71.0':
     resolution: {integrity: sha512-BlvIB8bCWsx4nQoccfCgpk4M4mYlRyEp898A4TiqhuOe+IgkwpGegr9mN2O0Y8yFB4Q0CYku/iP2Z6NkH7AbMQ==}
     peerDependencies:
       '@effect/platform': '>=0.90.0 <1.0.0'
       effect: ^3.17.0
 
-  '@wollybeard/kit@0.76.2':
-    resolution: {integrity: sha512-DCsJCmliApmPqo56oeDBNcMKxCRl7xIfCT+hJZCtXy+dNKSHx2xKtDlXO/h3ugbCUxOJsFy5qvsDVSb0mquqjg==}
+  '@wollybeard/kit@0.78.3':
+    resolution: {integrity: sha512-3mn5uyEIYKO5tBzoI8gC/wQxTehAhnx/PKMuIRYi2iMlfBRgVq/DvelanjH82aqkizppgrF7uTNo2Xojy1hKFQ==}
     peerDependencies:
       '@effect/platform': '>=0.90.0 <1.0.0'
       effect: ^3.17.0
@@ -1192,6 +1216,34 @@ snapshots:
       loupe: 3.1.3
       tinyrainbow: 2.0.0
 
+  '@vltpkg/dep-id@0.0.0-30':
+    dependencies:
+      '@vltpkg/error-cause': 0.0.0-30
+      '@vltpkg/spec': 0.0.0-30
+      '@vltpkg/types': 0.0.0-30
+
+  '@vltpkg/error-cause@0.0.0-30': {}
+
+  '@vltpkg/fast-split@0.0.0-30': {}
+
+  '@vltpkg/semver@0.0.0-30':
+    dependencies:
+      '@vltpkg/error-cause': 0.0.0-30
+      '@vltpkg/fast-split': 0.0.0-30
+      '@vltpkg/types': 0.0.0-30
+
+  '@vltpkg/spec@0.0.0-30':
+    dependencies:
+      '@vltpkg/error-cause': 0.0.0-30
+      '@vltpkg/semver': 0.0.0-30
+
+  '@vltpkg/types@0.0.0-30':
+    dependencies:
+      '@vltpkg/dep-id': 0.0.0-30
+      '@vltpkg/error-cause': 0.0.0-30
+      '@vltpkg/semver': 0.0.0-30
+      '@vltpkg/spec': 0.0.0-30
+
   '@wollybeard/kit@0.71.0(@effect/platform@0.91.1(effect@3.17.14))(effect@3.17.14)':
     dependencies:
       '@effect/platform': 0.91.1(effect@3.17.14)
@@ -1208,11 +1260,12 @@ snapshots:
       tinyglobby: 0.2.15
       type-fest: 5.0.1
 
-  '@wollybeard/kit@0.76.2(@effect/platform@0.91.1(effect@3.17.14))(effect@3.17.14)':
+  '@wollybeard/kit@0.78.3(@effect/platform@0.91.1(effect@3.17.14))(effect@3.17.14)':
     dependencies:
       '@effect/platform': 0.91.1(effect@3.17.14)
       '@types/node': 24.7.2
       '@types/object-inspect': 1.13.0
+      '@vltpkg/semver': 0.0.0-30
       ansis: 4.2.0
       consola: 3.4.2
       effect: 3.17.14
@@ -1349,7 +1402,7 @@ snapshots:
       '@0no-co/graphql.web': 1.1.2(graphql@16.10.0)
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.10.0)
       '@molt/command': 0.9.0
-      '@wollybeard/kit': 0.76.2(@effect/platform@0.91.1(effect@3.17.14))(effect@3.17.14)
+      '@wollybeard/kit': 0.78.3(@effect/platform@0.91.1(effect@3.17.14))(effect@3.17.14)
       es-toolkit: 1.35.0
       gql.tada: 1.8.13(graphql@16.10.0)(typescript@5.7.2)
       graphql: 16.10.0

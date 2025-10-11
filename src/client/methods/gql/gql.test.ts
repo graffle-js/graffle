@@ -83,5 +83,10 @@ describe(`client.gql() instance method`, () => {
         clientWithoutTransport.gql(`query GetId { id }`).$send(),
       ).rejects.toThrow()
     })
+
+    test(`template literal syntax is not supported (type-level check)`, () => {
+      // @ts-expect-error - template literal syntax not supported, use call expression: gql('...')
+      expect(() => g.gql`query GetId { id }`).toThrow()
+    })
   })
 })
