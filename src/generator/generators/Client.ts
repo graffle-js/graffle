@@ -16,7 +16,7 @@ export const ModuleGeneratorClient = createModuleGenerator(
       import * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
       import { TransportHttp } from '${config.paths.imports.grafflePackage.extensionTransportHttp}'
       import { DocumentBuilder } from '${config.paths.imports.grafflePackage.extensionDocumentBuilder}'
-      import { initGraphQLTada } from 'gql.tada'
+      import { initGraphQLTada } from '${config.paths.imports.grafflePackage.client}'
 
       // Initialize gql-tada with the generated introspection types and custom scalars
       type GqlTada = ReturnType<
