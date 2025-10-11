@@ -1,4 +1,3 @@
-import { Str } from '@wollybeard/kit'
 import type { Anyware } from '#lib/anyware'
 import type { TypeFunction } from '#lib/type-function'
 import type { Context } from '#src/context/context.js'
@@ -11,6 +10,7 @@ import { getOperationType } from '#src/lib/grafaid/document.js'
 import type { Exact } from '#src/lib/prelude.js'
 import type { RequestPipeline } from '#src/requestPipeline/RequestPipeline.js'
 import { type ContextFragment, ContextFragments } from '#src/types/ContextFragment.js'
+import { Str } from '@wollybeard/kit'
 import { Configuration } from '../context/fragments/configuration/$.js'
 import { Extensions } from '../context/fragments/extensions/$.js'
 import type { Extension } from '../context/fragments/extensions/dataType/$.js'
@@ -477,9 +477,9 @@ export const createWithContext = <$Context extends Context>(
       // Reject template literal syntax at runtime
       if (Str.Tpl.isCallInput(args)) {
         throw new Error(
-          `Template literal syntax is not supported. Use call expression syntax instead:\n` +
-            `  ❌ graffle.gql\`query { id }\`\n` +
-            `  ✅ graffle.gql('query { id }')`,
+          `Template literal syntax is not supported. Use call expression syntax instead:\n`
+            + `  wrong   -> graffle.gql\`query { id }\`\n`
+            + `  correct -> graffle.gql('query { id }')`,
         )
       }
 
