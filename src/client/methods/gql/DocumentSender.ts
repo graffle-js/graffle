@@ -1,4 +1,5 @@
 import type { Grafaid } from '#lib/grafaid'
+import type { Configuration } from '#src/context/fragments/configuration/$.js'
 import type { GetVariablesInputKind, ResultOf, VariablesOf } from '#src/lib/grafaid/typed-document/TypedDocument.js'
 import type { Ts } from '@wollybeard/kit'
 import type { TypedFullDocument } from '../../../lib/grafaid/typed-full-document/$.js'
@@ -165,10 +166,10 @@ export type DocumentSender<$Doc extends DocumentInput, $Context> =
 $Doc extends TypedFullDocument.TypedFullDocument
   ? Sender<$Doc, $Context>
   : $Doc extends string
-    ? UntypedSender
+    ? UntypedSender<$Context>
     : $Doc extends Grafaid.Document.Typed.TypedDocumentLike
       ? TypedDocumentLikeSender<ResultOf<$Doc>, VariablesOf<$Doc>, $Context>
-      : UntypedSender
+      : UntypedSender<$Context>
 
 type Sender<
   $Doc extends TypedFullDocument.TypedFullDocument,
@@ -181,23 +182,26 @@ type SenderStatic<
   $Doc extends TypedFullDocument.TypedFullDocument,
   $Context,
 > = $Doc extends TypedFullDocument.SingleOperation<infer $Op extends TypedFullDocument.Operation>
-  ? { $send: OperationToStaticExecutor<$Op, $Context> }
+  ? { $send: Configuration.Check.Preflight<$Context, OperationToStaticExecutor<$Op, $Context>> }
   : $Doc extends TypedFullDocument.MultiOperation<infer $Operations extends TypedFullDocument.Operations>
-    ? { $send: MultiOpStaticExecutor<$Operations, $Context> }
+    ? { $send: Configuration.Check.Preflight<$Context, MultiOpStaticExecutor<$Operations, $Context>> }
   : never
 
 type SenderNamed<
   $Doc extends TypedFullDocument.TypedFullDocument,
   $Context,
 > = {
-  [k in keyof $Doc['__operations']]: OperationToNamedExecutor<$Doc['__operations'][k], $Context>
+  [k in keyof $Doc['__operations']]: Configuration.Check.Preflight<
+    $Context,
+    OperationToNamedExecutor<$Doc['__operations'][k], $Context>
+  >
 }
 
 /**
  * Sender for untyped documents (plain GraphQL strings).
  */
-export interface UntypedSender {
-  $send: UntypedStaticExecutor
+export interface UntypedSender<$Context = any> {
+  $send: Configuration.Check.Preflight<$Context, UntypedStaticExecutor>
 }
 
 // ================================================================================================
@@ -214,11 +218,12 @@ type TypedDocumentLikeSender<
   $Variables extends Grafaid.Variables,
   $Context,
   ___$VarKind = GetVariablesInputKind<$Variables>,
-> = {
-  $send: ___$VarKind extends 'none' ? (() => Promise<Ts.SimplifyNullable<HandleOutput<$Context, $Result>>>)
+  ___$SendMethod = ___$VarKind extends 'none' ? (() => Promise<Ts.SimplifyNullable<HandleOutput<$Context, $Result>>>)
     : ___$VarKind extends 'optional'
       ? ((variables?: $Variables) => Promise<Ts.SimplifyNullable<HandleOutput<$Context, $Result>>>)
-    : ((variables: $Variables) => Promise<Ts.SimplifyNullable<HandleOutput<$Context, $Result>>>)
+    : ((variables: $Variables) => Promise<Ts.SimplifyNullable<HandleOutput<$Context, $Result>>>),
+> = {
+  $send: Configuration.Check.Preflight<$Context, ___$SendMethod>
 }
 
 // ================================================================================================

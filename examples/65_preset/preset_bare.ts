@@ -11,12 +11,13 @@ const graffle1 = GraffleBare.create()
 
 /**
  * Because we have no transports registered,
- * the request methods are not available to us.
- * This include core methods like `gql` and any
- * from extensions.
+ * the execution methods are not available to us.
+ * We can call `.gql()` to build document senders,
+ * but their execution methods (like `.$send()`)
+ * will be unavailable.
  */
 
-const _e1: 'Error: You cannot send requests yet. You must setup a transport.' = graffle1.gql
+const _e1: 'Error: You cannot send requests yet. You must setup a transport.' = graffle1.gql('{ __typename }').$send
 
 const graffle2 = graffle1.use(DocumentBuilder).use(Introspection())
 

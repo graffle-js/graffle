@@ -81,10 +81,7 @@ export interface ClientBase<$Context extends Context> {
    * const data = await builder.$send('getPokemons', { type: 'electric' })
    * ```
    */
-  gql: Configuration.Check.Preflight<
-    $Context,
-    GqlMethod<$Context>
-  >
+  gql: GqlMethod<$Context>
   /**
    * Register a custom scalar codec for encoding and decoding GraphQL scalar values.
    *

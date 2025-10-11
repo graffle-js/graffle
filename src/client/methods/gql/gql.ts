@@ -25,7 +25,7 @@ type ValidateSDDMRequirement<$Document extends Grafaid.Document.Typed.TypedDocum
   Grafaid.Document.Typed.RequiresSDDMOf<$Document> extends true
     ? Configuration.Schema.HasMap<$Context> extends true
       ? $Document
-      : `❌ This document requires SDDM. Configure client with schema.map`
+      : `Error: This document requires SDDM but your client configuration lacks it.`
     : $Document
 
 /**
@@ -113,16 +113,16 @@ export interface GqlMethod<$Context extends Context.Context> {
   // Overload
   // dprint-ignore
   <const $doc extends Grafaid.Document.Typed.String | string | DocumentNode | TypedFullDocument.TypedFullDocument>(
-    document: $doc
+    document: ValidateSDDMRequirement<$doc, $Context>
   ):
   string extends $doc                                   ?
     $doc extends Grafaid.Document.Typed.String            ? DocumentSender<$doc, $Context> :
-                                                            UntypedSender :
+                                                            UntypedSender<$Context> :
   $doc extends TypedFullDocument.TypedFullDocument      ? DocumentSender<$doc, $Context> :
   $doc extends TadaDocumentNode                         ? DocumentSender<$doc, $Context> :
   $doc extends string                                   ? HasGlobalRegistry<$Context> extends true
                                                             ? DocumentSender<ParseGraphQLString<$Context, $doc>, $Context>
-                                                            : UntypedSender :
+                                                            : UntypedSender<$Context> :
   $doc extends Grafaid.Document.Typed.TypedDocumentLike ? DocumentSender<$doc, $Context> :
                                                           never
 

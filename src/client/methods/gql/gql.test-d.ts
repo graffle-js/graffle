@@ -1,4 +1,5 @@
 import type { Grafaid } from '#lib/grafaid'
+import { Graffle } from '#src/exports/index.js'
 import { $ } from '#src/extensions/DocumentBuilder/var/var.js'
 import { Possible } from '#test/schema/possible/client/$.js'
 import { Ts } from '@wollybeard/kit'
@@ -237,3 +238,40 @@ Ts.Test.exact<{ name: string | null } | null>()(await client.gql(typedDocNode).$
 // TypedQueryDocumentNode
 declare const typedQueryDocNode: Grafaid.Document.Typed.Query<{ title: string | null }, {}>
 Ts.Test.exact<{ title: string | null } | null>()(await client.gql(typedQueryDocNode).$send())
+
+// ==================================================================================================
+//                                   SDDM TYPE SAFETY
+// ==================================================================================================
+
+// Document that requires SDDM (has custom scalars with RequiresSDDM = true)
+declare const sddmDoc: Grafaid.Document.Typed.String<{ id: string | null }, {}, true>
+
+// Client with SDDM support - should work
+const clientWithSDDM = Possible.create()
+Ts.Test.exact<{ id: string | null } | null>()(await clientWithSDDM.gql(sddmDoc).$send())
+
+const clientWithoutSDDM = Graffle.create().transport({ url: 'https://example.com/graphql' })
+// @ts-expect-error - plain client lacks SDDM support, document requires it
+clientWithoutSDDM.gql(sddmDoc)
+
+// ==================================================================================================
+//                           TRANSPORT PREFLIGHT CHECKS
+// ==================================================================================================
+
+import type { Context } from '#src/context/$.js'
+import { ATransport, RequiredConfigurationTransportA, RequiredConfigurationTransportB } from '#test/fixtures/transports'
+import { g0 } from '#test/helpers'
+
+const g1 = g0.transport(ATransport)
+const g2 = g0.transport(RequiredConfigurationTransportA).transport(RequiredConfigurationTransportB)
+
+// .gql() is callable, but $send is not available if no transports registered
+Ts.Test.exact<Context.Configuration.Check.Errors.PreflightCheckNoTransportsRegistered>()(
+  g0.gql('query { __typename }').$send,
+)
+// dprint-ignore
+// $send not available if current transport not ready
+Ts.Test.exact<Context.Configuration.Check.Errors.PreflightCheckTransportNotReady<RequiredConfigurationTransportA['name']>>()(g2.gql('query { __typename }').$send)
+// dprint-ignore
+// ... Reflects name of currently selected transport
+Ts.Test.exact<Context.Configuration.Check.Errors.PreflightCheckTransportNotReady<RequiredConfigurationTransportB['name']>>()(g2.transport(RequiredConfigurationTransportB.name).gql('query { __typename }').$send)
