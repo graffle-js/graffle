@@ -84,7 +84,7 @@ test(`client works without generation`, async ({ project, pokemonService }) => {
           }
         }
       }
-    \`.send({ name: 'Pikachu' })
+    \`.$send({ name: 'Pikachu' })
 		console.log(data?.['pokemonByName'])
 		`,
   )
