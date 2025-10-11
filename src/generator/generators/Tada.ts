@@ -7,6 +7,7 @@ import type {
   GraphQLUnionType,
 } from 'graphql'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
+import { codeImportNamed } from '../helpers/pathHelpers.js'
 
 /**
  * Generates gql-tada compatible introspection types for the GraphQL schema.
@@ -39,7 +40,7 @@ export const ModuleGeneratorTada = createModuleGenerator(
     const kindMap = config.schema.kindMap
 
     // Import Name constant from Data module
-    code`import type { Name } from './data.js'`
+    code(codeImportNamed(config, { names: 'Name', from: './data', type: true }))
     code``
 
     // Generate introspection_types object

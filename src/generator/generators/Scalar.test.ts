@@ -6,6 +6,7 @@ import { generate } from '../generator/generate.js'
 
 // Suppress warnings in tests
 defaults.lint.missingCustomScalarCodec = false
+defaults.lint.missingGraphqlSP = false
 
 const fs = MemFS.fs.promises as any as typeof Fs
 

@@ -1,5 +1,6 @@
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
+import { codeImportAll, codeImportNamed } from '../helpers/pathHelpers.js'
 import { ModuleGeneratorScalar } from './Scalar.js'
 import { ModuleGeneratorTada } from './Tada.js'
 
@@ -29,11 +30,12 @@ export const ModuleGeneratorGql = createModuleGenerator(
   ({ config, code }) => {
     code(importModuleGenerator(config, ModuleGeneratorTada))
     code`
-      import { createGql } from '${config.paths.imports.grafflePackage.extensionDocumentBuilder}'
-      import type { Schema } from './schema/$.js'
-      import { schemaDrivenDataMap as sddm } from './schema-driven-data-map.js'
-      import type * as $$SelectionSets from './selection-sets.js'
-      import type * as $$ArgumentsMap from './arguments-map.js'
+      import { createGql } from '${config.paths.imports.grafflePackage.extensionDocumentBuilder}'`
+    code(codeImportNamed(config, { names: 'Schema', from: './schema/$', type: true }))
+    code(codeImportNamed(config, { names: { schemaDrivenDataMap: 'sddm' }, from: './schema-driven-data-map' }))
+    code(codeImportAll(config, { as: '$$SelectionSets', from: './selection-sets', type: true }))
+    code(codeImportAll(config, { as: '$$ArgumentsMap', from: './arguments-map', type: true }))
+    code`
 
       /**
        * Unified \`gql\` function that accepts either:

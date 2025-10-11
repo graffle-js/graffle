@@ -39,6 +39,7 @@ for (const schemaName of Obj.keysStrict(TestSchemas)) {
     nameNamespace: true,
     lint: {
       missingCustomScalarCodec: false,
+      missingGraphqlSP: false,
     },
   })
 
@@ -73,6 +74,7 @@ for (const schemaName of Obj.keysStrict(TestSchemas)) {
       nameNamespace: true,
       lint: {
         missingCustomScalarCodec: false,
+        missingGraphqlSP: false,
       },
     })
 

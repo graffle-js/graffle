@@ -1,7 +1,5 @@
-import type { TypedDocument, TypedFullDocument } from 'graffle/client'
-import { createStaticRootType, document as documentBuilder } from 'graffle/extensions/document-builder'
-import type * as $$StaticBuilder from 'graffle/extensions/document-builder'
-import type { InferOperations } from 'graffle/extensions/document-builder'
+import type { TypedDocument } from 'graffle/client'
+import { createStaticRootType } from 'graffle/extensions/document-builder'
 import { OperationTypeNode } from 'graphql'
 import type * as ArgumentsMap from './arguments-map.js'
 import type * as $$Scalar from './scalar.js'
@@ -18,15 +16,6 @@ import type * as $$Schema from './schema/$.js'
 interface StaticDocumentContext {
   typeHookRequestResultDataTypes: never
   scalars: $$Scalar.$Registry
-}
-
-/**
- * Configuration for static document builders.
- * Generated code always has SDDM enabled since the generator creates the schema-driven data map.
- */
-type DocumentConfig = {
-  schema: $$Schema.Schema
-  sddmEnabled: true
 }
 
 /**
@@ -64,7 +53,7 @@ type DocumentConfig = {
  *
  * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
  */
-// Note: This interface conforms to StaticDocumentBuilder<DocumentConfig, OperationTypeNode.QUERY>
+
 export interface QueryBuilder {
   /**
    * Retrieve all battles that have occurred.
@@ -410,6 +399,7 @@ export interface QueryBuilder {
     true
   >
 }
+
 /**
  * Static query builder for compile-time GraphQL document generation.
  *
@@ -471,7 +461,7 @@ export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY,
  *
  * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
  */
-// Note: This interface conforms to StaticDocumentBuilder<DocumentConfig, OperationTypeNode.MUTATION>
+
 export interface MutationBuilder {
   /**
    * Add a new Pokemon to the database.
@@ -534,6 +524,7 @@ export interface MutationBuilder {
     true
   >
 }
+
 /**
  * Static mutation builder for compile-time GraphQL document generation.
  *
@@ -559,42 +550,3 @@ export interface MutationBuilder {
  * @see {@link https://graffle.js.org/guides/static-generation | Static Generation Guide}
  */
 export const mutation: MutationBuilder = createStaticRootType(OperationTypeNode.MUTATION, { sddm }) as any
-
-/**
- * Create a full GraphQL document with one or more named operations.
- *
- * Unlike `query` and `mutation` which create single-operation documents, this function creates a full document that can contain multiple operations. Returns a `TypedFullDocument` that captures type information for all operations.
- *
- * @param documentObject - Document object with query and/or mutation operations
- * @returns TypedFullDocument representing the complete document
- *
- * @example
- * ```ts
- * const doc = document({
- * query: {
- * getUser: { user: { id: true, name: true } },
- * getPost: { post: { id: true, title: true } }
- * }
- * })
- *
- * // Use with client.send()
- * const user = await client.send(doc, 'getUser')
- * ```
- */
-export const document = ((documentObject: any) => documentBuilder(documentObject, { sddm })) as Document
-
-/**
- * Document builder function type for creating multi-operation documents.
- */
-export interface Document {
-  <$Document>(
-    document: $$Utilities.ExactNonEmpty<
-      $Document,
-      SelectionSets.$Document<
-        { scalars: $$Scalar.$Registry }
-      >
-    >,
-  ): TypedFullDocument<
-    InferOperations<$Document, $$Schema.Schema, ArgumentsMap.ArgumentsMap, StaticDocumentContext>
-  >
-}
