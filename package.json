@@ -61,6 +61,7 @@
     "graffle": "tsx ./src/cli/index.ts",
     "serve:pokemon": "tsx tests/_/services/pokemonManual.ts",
     "gen:graffle": "pnpm extension:schema-errors:test:generate-fixtures && pnpm website:gen:graffle",
+    "examples:gen": "pnpm examples:gen:graffle && pnpm examples:gen:website",
     "examples:gen:graffle": "pnpm build && cd examples && pnpm i && pnpm gen:graffle",
     "examples:link-mode": "cd examples && pnpm add ..",
     "examples:test": "cd examples && pnpm test",
@@ -70,7 +71,7 @@
     "website:gen:graffle": "pnpm build && cd website && pnpm i && pnpm gen:graffle",
     "fix:format": "dprint fmt",
     "fix:lint": "oxlint --fix",
-    "check:examples:types": "echo 'todo: cd examples && tsc --noEmit'",
+    "check:examples:types": "cd examples && tsc --noEmit",
     "check:format": "dprint check",
     "check:lint": "oxlint",
     "check:publint": "tsx scripts/check-publint.ts",
@@ -98,7 +99,7 @@
     "prepack": "pnpm build",
     "check": "pnpm run '/check:.*/'",
     "prebuild": "pnpm build:clean",
-    "check:types": "tsc"
+    "check:types": "tsc && pnpm check:examples:types"
   },
   "dependencies": {
     "@0no-co/graphql.web": "^1.0.12",
