@@ -38,6 +38,10 @@ export const ModuleGeneratorTada = createModuleGenerator(
   ({ config, code }) => {
     const kindMap = config.schema.kindMap
 
+    // Import Name constant from Data module
+    code`import type { Name } from './data.js'`
+    code``
+
     // Generate introspection_types object
     code`export type introspection_types = {`
 
@@ -118,7 +122,7 @@ export const ModuleGeneratorTada = createModuleGenerator(
     const subscriptionType = kindMap.index.Root.subscription?.name || 'never'
 
     code`export type introspection = {`
-    code`  name: never;`
+    code`  name: Name;`
     code`  query: '${queryType}';`
     code`  mutation: ${mutationType === 'never' ? 'never' : `'${mutationType}'`};`
     code`  subscription: ${subscriptionType === 'never' ? 'never' : `'${subscriptionType}'`};`

@@ -64,7 +64,7 @@ export interface SingleOpRequiredVarsStaticExecutor<
  * Static executor for untyped documents (plain GraphQL strings).
  * Accepts any operation name and variables.
  */
-export interface UntypedStaticExecutor<$Context> {
+export interface UntypedStaticExecutor {
   (operationName?: string, variables?: Record<string, unknown>): Promise<unknown>
   (variables?: Record<string, unknown>): Promise<unknown>
 }
@@ -165,10 +165,10 @@ export type DocumentSender<$Doc extends DocumentInput, $Context> =
 $Doc extends TypedFullDocument.TypedFullDocument
   ? Sender<$Doc, $Context>
   : $Doc extends string
-    ? UntypedSender<$Context>
+    ? UntypedSender
     : $Doc extends Grafaid.Document.Typed.TypedDocumentLike
       ? TypedDocumentLikeSender<ResultOf<$Doc>, VariablesOf<$Doc>, $Context>
-      : UntypedSender<$Context>
+      : UntypedSender
 
 type Sender<
   $Doc extends TypedFullDocument.TypedFullDocument,
@@ -196,8 +196,8 @@ type SenderNamed<
 /**
  * Sender for untyped documents (plain GraphQL strings).
  */
-export interface UntypedSender<$Context> {
-  $send: UntypedStaticExecutor<$Context>
+export interface UntypedSender {
+  $send: UntypedStaticExecutor
 }
 
 // ================================================================================================

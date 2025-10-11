@@ -1,3 +1,5 @@
+import type { Name } from './data.js'
+
 export type introspection_types = {
   'Query': {
     kind: 'OBJECT'
@@ -290,7 +292,7 @@ export type introspection_types = {
 }
 
 export type introspection = {
-  name: never
+  name: Name
   query: 'Query'
   mutation: 'Mutation'
   subscription: never
