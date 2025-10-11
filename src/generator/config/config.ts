@@ -180,6 +180,10 @@ To suppress this warning disable formatting in one of the following ways:
     if (path.startsWith('#')) {
       return path
     }
+    // Package specifiers (not filesystem paths) should be returned as-is
+    if (!path.startsWith('.') && !path.startsWith('/')) {
+      return path
+    }
     const pathAbsolute = getImportExtension(toAbsolutePath(cwd, path))
     return Path.relative(outputDirPathModules, pathAbsolute)
   }
