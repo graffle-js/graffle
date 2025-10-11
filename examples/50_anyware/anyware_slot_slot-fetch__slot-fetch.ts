@@ -23,6 +23,6 @@ const result = await graffle.gql(`
       name
     }
   }
-`).send()
+`).$send()
 
 show(result)

@@ -2,7 +2,11 @@ import { createGraphQLResponseData, mockIntrospectionData, test } from '#test/he
 import * as Memfs from 'memfs'
 import { describe, expect } from 'vitest'
 import type { ConfigInitSchemaSdl } from '../$$.js'
+import { defaults } from '../config/defaults.js'
 import { generate, generateModules } from './generate.js'
+
+// Suppress warnings in tests
+defaults.lint.missingGraphqlSP = false
 
 const fs = Memfs.fs.promises as any
 

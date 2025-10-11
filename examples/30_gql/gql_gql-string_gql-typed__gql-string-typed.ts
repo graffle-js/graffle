@@ -43,6 +43,6 @@ const data = await graffle.gql<Document>`
       }
     }
   }
-`.send({ name: `Pikachu` })
+`.$send({ name: `Pikachu` })
 
 show(data?.pokemonByName)

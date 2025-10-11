@@ -13,8 +13,6 @@ describe(`without a registered client, document builder is not statically availa
 
   test(`unavailable methods`, () => {
     // @ts-expect-error
-    expect(typeof graffle.document).toEqual(`function`)
-    // @ts-expect-error
     expect(typeof graffle.query).toEqual(`object`)
     // @ts-expect-error
     expect(typeof graffle.mutation).toEqual(`object`)
@@ -22,7 +20,6 @@ describe(`without a registered client, document builder is not statically availa
 
   test(`available methods`, () => {
     const possible = Possible.create()
-    expect(possible.document).toBeTypeOf(`function`)
     expect(possible.query.$batch).toBeTypeOf(`function`)
     expect(possible.mutation.$batch).toBeTypeOf(`function`)
   })

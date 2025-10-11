@@ -10,28 +10,32 @@ import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 import { codeImportNamed } from '../helpers/pathHelpers.js'
 
 /**
- * Generates gql-tada compatible introspection types for the GraphQL schema.
+ * Generates introspection types for type-safe GraphQL syntax support.
  *
- * This generator creates a TypeScript module that exports introspection types in the format
- * expected by gql-tada, enabling compile-time type checking for GraphQL template literals.
+ * This generator creates a TypeScript module that exports schema introspection types,
+ * enabling full type inference for GraphQL documents using standard GraphQL syntax
+ * via the generated client's `.gql()` method.
  *
- * {@link https://gql-tada.0no.co gql-tada documentation}
+ * Generated clients automatically provide a type-safe `gql` method that supports:
+ * - Full IDE autocomplete for fields, arguments, and types
+ * - Compile-time validation of GraphQL syntax
+ * - Inferred result and variable types based on your schema
  *
- * @example
+ * @example Generated client usage
  * ```ts
- * import { initGraphQLTada } from 'gql.tada'
- * import type { introspection } from './graffle/modules/tada.js'
+ * import { Pokemon } from './graffle/_.js'
  *
- * const graphql = initGraphQLTada<{ introspection }>()
+ * const client = Pokemon.create({ schema: { url: '...' } })
  *
- * const query = graphql(`
+ * // Type-safe GraphQL with full IDE support
+ * const data = await client.gql(`
  *   query GetUser($id: ID!) {
  *     user(id: $id) {
  *       name
  *       email
  *     }
  *   }
- * `)
+ * `).send({ id: '123' })
  * ```
  */
 export const ModuleGeneratorTada = createModuleGenerator(

@@ -22,7 +22,7 @@ const resultPromise = graffle
       }
     }
   `)
-  .send()
+  .$send()
 
 abortController.abort()
 //              ^^^^^

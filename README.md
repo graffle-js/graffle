@@ -39,7 +39,7 @@ const data = await graffle.gql(`
       emoji
     }
   }
-`).send()
+`).$send()
 ```
 
 ## Learn More

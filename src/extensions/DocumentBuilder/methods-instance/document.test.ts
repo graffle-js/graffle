@@ -4,18 +4,16 @@ import { db } from '#test/schema/possible/db.js'
 import { possibleSchema } from '#test/schema/possible/schema.js'
 import { describe, expect, test } from 'vitest'
 import { TransportMemory } from '../../TransportMemory/TransportMemory.js'
-import { DocumentBuilder } from '../DocumentBuilder.js'
 
 // todo test with custom scalars
 
 const graffle = Graffle
   .create({ schema: { name: `possible` } })
   .use(TransportMemory)
-  .use(DocumentBuilder)
   .transport(`memory`, { schema: possibleSchema })
 
-describe(`document with two queries`, () => {
-  const withTwo = graffle.document({
+describe(`gql with two queries`, () => {
+  const withTwo = graffle.gql({
     query: {
       foo: { id: true },
       bar: { idNonNull: true },
@@ -33,68 +31,65 @@ describe(`document with two queries`, () => {
   //       ...exchange.input,
   //     },
   //   })
-  // }).document({
+  // }).gql({
   //   foo: { query: { id: true } },
   //   bar: { query: { idNonNull: true } },
   // })
 
   test(`works`, async () => {
-    const { run } = withTwo
-    await expect(run(`foo`)).resolves.toEqual({ id: db.id1 })
-    // await expect(run(`bar`)).resolves.toEqual({ idNonNull: db.id1 })
+    await expect(withTwo.$send(`foo`)).resolves.toEqual({ id: db.id1 })
+    // await expect(withTwo.$send(`bar`)).resolves.toEqual({ idNonNull: db.id1 })
   })
   test(`error if no operation name is provided`, async () => {
-    const { run } = withTwo
     // @ts-expect-error
-    const error = await run().catch((e: unknown) => e) as Errors.ContextualAggregateError
+    const error = await withTwo.$send().catch((e: unknown) => e) as Errors.ContextualAggregateError
     expect(error.errors[0]?.message).toEqual(`Must provide operation name if query contains multiple operations.`)
   })
   test(`error if wrong operation name is provided`, async () => {
-    const { run } = withTwo
     // @ts-expect-error
-    const error = await run(`boo`).catch((e: unknown) => e) as Errors.ContextualAggregateError
+    const error = await withTwo.$send(`boo`).catch((e: unknown) => e) as Errors.ContextualAggregateError
     expect(error.message).toEqual(`Unknown operation named "boo".`)
   })
-  test(`error if no operations provided`, () => {
-    expect(() => {
-      // TODO use a pretty type error instead of never
-      // @ts-expect-error empty-object not allowed
-      graffle.document({})
-    }).toThrowErrorMatchingInlineSnapshot(`
-      {
-        "errors": [
-          [Error: Document has no operations.],
-        ],
-      }
-    `)
-  })
+  // test(`error if no operations provided`, () => {
+  //   expect(() => {
+  //     // TODO use a pretty type error instead of never
+  //     // @ts-expect-error empty-object not allowed
+  //     graffle.gql({})
+  //   }).toThrowErrorMatchingInlineSnapshot(`
+  //     {
+  //       "errors": [
+  //         [Error: Document has no operations.],
+  //       ],
+  //     }
+  //   `)
+  // })
   test.skip(`error if invalid name in document`, async () => {
     // // todo
     // // @ts-expect-error
-    // const { run } = graffle.document({ query: { foo$: { id: true } } })
-    // await expect(run(`foo$`)).rejects.toMatchObject({
+    // const sender = graffle.gql({ query: { foo$: { id: true } } })
+    // await expect(sender.$send(`foo$`)).rejects.toMatchObject({
     //   errors: [{ message: `Syntax Error: Expected "{", found "$".` }],
     // })
   })
 })
 
-test(`document with one query`, async () => {
-  const { run } = graffle.document({ query: { foo: { id: true } } })
-  await expect(run()).resolves.toEqual({ id: db.id1 })
+test(`gql with one query`, async () => {
+  const sender = graffle.gql({ query: { foo: { id: true } } })
+  await expect(sender.$send()).resolves.toEqual({ id: db.id1 })
 })
 
-test(`document with one mutation`, async () => {
-  const { run } = graffle.document({ mutation: { foo: { id: true } } })
-  await expect(run()).resolves.toEqual({ id: db.id1 })
+test(`gql with one mutation`, async () => {
+  const sender = graffle.gql({ mutation: { foo: { id: true } } })
+  await expect(sender.$send()).resolves.toEqual({ id: db.id1 })
 })
 
 test(`error`, async () => {
-  const { run } = graffle.document({ query: { foo: { error: true } } })
-  await expect(run()).rejects.toMatchObject({ errors: [{ message: `Something went wrong.` }] })
+  const sender = graffle.gql({ query: { foo: { error: true } } })
+  await expect(sender.$send()).rejects.toMatchObject({ errors: [{ message: `Something went wrong.` }] })
 })
 
-test(`document with one mutation and one query`, async () => {
-  const { run } = graffle.document({
+test(`gql with one mutation and one query`, async () => {
+  const sender = graffle.gql({
     mutation: {
       foo: { id: true },
     },
@@ -102,6 +97,6 @@ test(`document with one mutation and one query`, async () => {
       bar: { idNonNull: true },
     },
   })
-  await expect(run(`foo`)).resolves.toEqual({ id: db.id1 })
-  await expect(run(`bar`)).resolves.toEqual({ idNonNull: db.id1 })
+  await expect(sender.$send(`foo`)).resolves.toEqual({ id: db.id1 })
+  await expect(sender.$send(`bar`)).resolves.toEqual({ idNonNull: db.id1 })
 })

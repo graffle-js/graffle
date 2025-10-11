@@ -13,7 +13,7 @@ describe('examples', () => {
     const url = process.env['POKEMON_SCHEMA_URL']
     if (url) {
       const graffle = Graffle.create().transport({ url })
-      await graffle.gql('mutation { resetData }').send()
+      await graffle.gql('mutation { resetData }').$send()
     }
   })
 

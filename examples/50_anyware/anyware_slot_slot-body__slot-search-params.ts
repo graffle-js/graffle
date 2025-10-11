@@ -28,6 +28,6 @@ const result = await graffle.gql(`
       pokemons { name }
     }
   `)
-  .send(`getTrainers`)
+  .$send(`getTrainers`)
 
 show(result)

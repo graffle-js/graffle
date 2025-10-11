@@ -13,6 +13,6 @@ const data = await graffle.gql(`
       name
     }
   }
-`).send()
+`).$send()
 
 show(data)

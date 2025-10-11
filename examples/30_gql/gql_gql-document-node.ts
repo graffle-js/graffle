@@ -25,6 +25,6 @@ const data = await graffle.gql(parse(`
       }
     }
   }
-`)).send({ name: `Pikachu` })
+`)).$send({ name: `Pikachu` })
 
 show(data)
