@@ -3,10 +3,10 @@ import * as $$Scalar from './scalar.js'
 import * as $$SchemaDrivenDataMap from './schema-driven-data-map.js'
 import * as $$Tada from './tada.js'
 
+import { initGraphQLTada } from '#graffle/client'
 import { DocumentBuilder } from '#graffle/extensions/document-builder'
 import { TransportHttp } from '#graffle/extensions/transport-http'
 import * as $$Utilities from '#graffle/utilities-for-generated'
-import { initGraphQLTada } from 'gql.tada'
 
 // Initialize gql-tada with the generated introspection types and custom scalars
 type GqlTada = ReturnType<

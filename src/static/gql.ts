@@ -28,48 +28,20 @@ import type { Simplify } from 'type-fest'
 //
 
 /**
- * Creates a gql-tada function type configured with schema introspection and custom scalars.
- *
- * This type utility is used by generated code to create a typed `gql` function that provides
- * full type inference for GraphQL queries based on the schema.
- *
- * @typeParam $Introspection - The GraphQL schema introspection data
- * @typeParam $Scalars - A map of custom scalar names to their TypeScript types
- *
- * @example
- * ```ts
- * type GqlTada = CreateGqlTada<
- *   MyIntrospection,
- *   { Date: Date; JSON: any }
- * >
- *
- * const gql = parse as any as GqlTada
- * const doc = gql(`query { id }`)  // TadaDocumentNode<{ id: string }, {}>
- * ```
- */
-export type CreateGqlTada<
-  $Introspection extends AbstractSetupSchema['introspection'],
-  $Scalars extends AbstractSetupSchema['scalars'],
-> = initGraphQLTada<{
-  introspection: $Introspection
-  scalars: $Scalars
-}>
-
-/**
  * Extract tada introspection and scalars from context to create a gql-tada function type.
  *
  * This utility reads from the GlobalRegistry to get the schema's introspection types
- * and scalar mappings, then passes them to CreateGqlTada.
+ * and scalar mappings, then creates a gql-tada function type via `initGraphQLTada`.
  */
 // dprint-ignore
 export type CreateGqlTadaFromContext<$Context> =
-  CreateGqlTada<
-    GlobalRegistry.ForContext<$Context>['tadaIntrospection'],
-    {
+  initGraphQLTada<{
+    introspection: GlobalRegistry.ForContext<$Context>['tadaIntrospection']
+    scalars: {
       [k in keyof GlobalRegistry.ForContext<$Context>['schema']['scalarRegistry']['map']]:
         Schema.Scalar.GetDecoded<GlobalRegistry.ForContext<$Context>['schema']['scalarRegistry']['map'][k]>
     }
-  >
+  }>
 
 /**
  * Type-level utility that parses a GraphQL string and returns the typed document node.
