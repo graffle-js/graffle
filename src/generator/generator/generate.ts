@@ -8,6 +8,7 @@ import { ModuleGeneratorClient } from '../generators/Client.js'
 import { ModuleGeneratorData } from '../generators/Data.js'
 import { ModuleGeneratorDocument } from '../generators/Document.js'
 import { ModuleGeneratorGlobal } from '../generators/global.js'
+import { ModuleGeneratorGql } from '../generators/Gql.js'
 import { ModuleGeneratorMethodsDocument } from '../generators/MethodsDocument.js'
 import { ModuleGeneratorMethodsRoot } from '../generators/MethodsRoot.js'
 import { ModuleGeneratorMethodsSelect } from '../generators/MethodsSelect.js'
@@ -16,8 +17,10 @@ import { ModuleGeneratorSchema } from '../generators/Schema.js'
 import { ModuleGeneratorSchemaDrivenDataMap } from '../generators/SchemaDrivenDataMap.js'
 import { ModuleGeneratorSelect } from '../generators/Select.js'
 import { ModuleGeneratorSelectionSets } from '../generators/SelectionSets.js'
+import { ModuleGeneratorTada } from '../generators/Tada.js'
 import { ModuleGeneratorTypeInputsIndex } from '../generators/TypeInputsIndex.js'
 import { getFileName, isExportsModule } from '../helpers/moduleGenerator.js'
+import { validateGraphQLSPConfiguration } from '../validation/graphqlsp.js'
 
 const moduleGenerators = [
   ModuleGeneratorGlobal,
@@ -25,6 +28,8 @@ const moduleGenerators = [
   ModuleGeneratorDocument,
   ModuleGeneratorData,
   ModuleGeneratorScalar,
+  ModuleGeneratorTada,
+  ModuleGeneratorGql,
   // Packaging Stuff
   ModuleGenerator_internals,
   ModuleGenerator$$,
@@ -109,6 +114,9 @@ export const generate = async (init: ConfigInit): Promise<Config> => {
       return config.fs.writeFile(filePath, generatedModule.content)
     }),
   )
+
+  // Validate GraphQLSP configuration and provide helpful suggestions
+  await validateGraphQLSPConfiguration(config)
 
   return config
 }

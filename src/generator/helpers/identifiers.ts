@@ -2,6 +2,8 @@ export const $ = {
   $$Schema: `$$Schema`,
   $$Scalar: `$$Scalar`,
   $$SelectionSets: `$$SelectionSets`,
+  $$ArgumentsMap: `$$ArgumentsMap`,
+  $$Tada: `$$Tada`,
   $$MethodsSelect: `$$MethodsSelect`,
   $$MethodsDocument: `$$MethodsDocument`,
   $$MethodsRoot: `$$MethodsRoot`,

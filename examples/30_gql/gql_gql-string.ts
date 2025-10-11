@@ -7,12 +7,12 @@ import { publicGraphQLSchemaEndpoints, show } from '../$/helpers.js'
 
 const graffle = Graffle.create().transport({ url: publicGraphQLSchemaEndpoints.Pokemon })
 
-const data = await graffle.gql`
+const data = await graffle.gql(`
   {
     pokemons {
       name
     }
   }
-`.send()
+`).$send()
 
 show(data)

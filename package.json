@@ -56,11 +56,12 @@
   },
   "homepage": "https://github.com/graffle-js/graffle",
   "scripts": {
-    "extension:document-builder:test:generate-fixtures": "tsx src/extensions/DocumentBuilder/__tests__/fixtures/generate.ts",
     "extension:schema-errors:test:generate-fixtures": "rm -rf src/extensions/SchemaErrors/__tests__/fixture/graffle && pnpm graffle --project src/extensions/SchemaErrors/__tests__/fixture",
+    "test:generate-schema-clients": "tsx tests/_/fixtures/schemas/generate-clients.ts",
     "graffle": "tsx ./src/cli/index.ts",
     "serve:pokemon": "tsx tests/_/services/pokemonManual.ts",
-    "gen:graffle": "pnpm extension:schema-errors:test:generate-fixtures && pnpm extension:document-builder:test:generate-fixtures && pnpm website:gen:graffle",
+    "gen:graffle": "pnpm extension:schema-errors:test:generate-fixtures && pnpm website:gen:graffle",
+    "examples:gen": "pnpm examples:gen:graffle && pnpm examples:gen:website",
     "examples:gen:graffle": "pnpm build && cd examples && pnpm i && pnpm gen:graffle",
     "examples:link-mode": "cd examples && pnpm add ..",
     "examples:test": "cd examples && pnpm test",
@@ -70,10 +71,10 @@
     "website:gen:graffle": "pnpm build && cd website && pnpm i && pnpm gen:graffle",
     "fix:format": "dprint fmt",
     "fix:lint": "oxlint --fix",
-    "check:examples:types": "echo 'todo: cd examples && tsc --noEmit'",
+    "check:examples:types": "cd examples && tsc --noEmit",
     "check:format": "dprint check",
     "check:lint": "oxlint",
-    "check:publint": "publint run --strict",
+    "check:publint": "tsx scripts/check-publint.ts",
     "prepublishOnly": "pnpm build",
     "dev": "pnpm build:watch:emit",
     "build:emit": "pnpm build --noCheck",
@@ -104,8 +105,9 @@
     "@0no-co/graphql.web": "^1.0.12",
     "@graphql-typed-document-node/core": "^3.2.0",
     "@molt/command": "^0.9.0",
-    "@wollybeard/kit": "^0.76.2",
+    "@wollybeard/kit": "^0.78.3",
     "es-toolkit": "^1.35.0",
+    "gql.tada": "^1.8.13",
     "is-plain-obj": "^4.1.0",
     "type-fest": "^4.40.0"
   },
@@ -131,6 +133,7 @@
     }
   },
   "devDependencies": {
+    "@0no-co/graphqlsp": "^1.15.0",
     "@arethetypeswrong/cli": "^0.17.4",
     "@dprint/formatter": "^0.4.1",
     "@dprint/typescript": "^0.95.11",
@@ -195,7 +198,10 @@
     "#lib/grafaid": "./build/lib/grafaid/$.js",
     "#lib/md-jsdoc": "./build/lib/md-jsdoc/$.js",
     "#lib/tex": "./build/lib/tex/$.js",
-    "#lib/type-function": "./build/lib/type-function/$.js"
+    "#lib/type-function": "./build/lib/type-function/$.js",
+    "#test/schema/*": "./tests/_/fixtures/schemas/*",
+    "#test/*.js": "./tests/_/*.js",
+    "#test/*": "./tests/_/*"
   },
   "libra": {
     "entities": {

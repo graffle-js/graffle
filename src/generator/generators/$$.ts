@@ -5,6 +5,7 @@ import { ModuleGeneratorClient } from './Client.js'
 import { ModuleGeneratorData } from './Data.js'
 import { ModuleGeneratorDocument } from './Document.js'
 import { ModuleGeneratorGlobal } from './global.js'
+import { ModuleGeneratorGql } from './Gql.js'
 import { ModuleGeneratorSchemaDrivenDataMap } from './SchemaDrivenDataMap.js'
 import { ModuleGeneratorSelect } from './Select.js'
 import { ModuleGeneratorSelectionSets } from './SelectionSets.js'
@@ -32,14 +33,11 @@ export const ModuleGenerator$$ = createModuleGenerator(
     if (config.schema.kindMap.index.Root.subscription) {
       documentExports.push('subscription')
     }
-    // Include document() function if query or mutation exists
-    if (config.schema.kindMap.index.Root.query || config.schema.kindMap.index.Root.mutation) {
-      documentExports.push('document')
-    }
 
     code(Code.reexportNamed({ names: 'Name', from: `./modules/${getImportName(config, ModuleGeneratorData)}` }))
     code(Code.reexportNamed({ names: 'Select', from: `./modules/${getImportName(config, ModuleGeneratorSelect)}` }))
     code(Code.reexportNamed({ names: 'create', from: `./modules/${getImportName(config, ModuleGeneratorClient)}` }))
+    code(Code.reexportNamed({ names: 'gql', from: `./modules/${getImportName(config, ModuleGeneratorGql)}` }))
 
     if (documentExports.length > 0) {
       code(

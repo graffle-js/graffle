@@ -1,20 +1,26 @@
 import { Code } from '#src/lib/Code.js'
 import { $ } from '../helpers/identifiers.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
+import { ModuleGeneratorArgumentsMap } from './ArgumentsMap.js'
 import { ModuleGeneratorData } from './Data.js'
 import { ModuleGeneratorMethodsDocument } from './MethodsDocument.js'
 import { ModuleGeneratorMethodsRoot } from './MethodsRoot.js'
 import { ModuleGeneratorMethodsSelect } from './MethodsSelect.js'
 import { ModuleGeneratorSchema } from './Schema.js'
+import { ModuleGeneratorSelectionSets } from './SelectionSets.js'
+import { ModuleGeneratorTada } from './Tada.js'
 
 export const ModuleGeneratorGlobal = createModuleGenerator(
   `global`,
   ({ config, code }) => {
+    code(importModuleGenerator(config, ModuleGeneratorArgumentsMap))
     code(importModuleGenerator(config, ModuleGeneratorData))
     code(importModuleGenerator(config, ModuleGeneratorMethodsSelect))
     code(importModuleGenerator(config, ModuleGeneratorMethodsDocument))
     code(importModuleGenerator(config, ModuleGeneratorMethodsRoot))
     code(importModuleGenerator(config, ModuleGeneratorSchema, true))
+    code(importModuleGenerator(config, ModuleGeneratorSelectionSets, true))
+    code(importModuleGenerator(config, ModuleGeneratorTada, true))
     code``
 
     const defaultSchemaUrlTsDoc = config.options.defaultSchemaUrl
@@ -30,6 +36,11 @@ export const ModuleGeneratorGlobal = createModuleGenerator(
           Document: `${$.$$MethodsDocument}.BuilderMethodsDocumentFn`,
           Root: `${$.$$MethodsRoot}.BuilderMethodsRootFn`,
         },
+        selectionSets: {
+          $Document: `${$.$$SelectionSets}.$Document`,
+        },
+        argumentsMap: `${$.$$ArgumentsMap}.ArgumentsMap`,
+        tadaIntrospection: `${$.$$Tada}.introspection`,
         defaultSchemaUrl: {
           $TS_DOC: defaultSchemaUrlTsDoc,
           $VALUE: config.options.defaultSchemaUrl ? `string` : `null`,

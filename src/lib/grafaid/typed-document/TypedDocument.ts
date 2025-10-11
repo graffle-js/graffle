@@ -35,8 +35,8 @@ export type TypedDocumentNodeLike<$Result extends SomeObjectData = SomeObjectDat
 // dprint-ignore
 interface TypedDocumentString<
   $Result = SomeObjectData,
-  $Variables = Variables,
-  $RequiresSDDM extends boolean = false
+  $Variables = any,
+  $RequiresSDDM extends boolean = boolean
 > extends String, DocumentTypeDecoration<$Result, $Variables> {
   /**
    * Phantom brand to track whether this document requires SDDM (Schema-Driven Data Map).
@@ -45,6 +45,7 @@ interface TypedDocumentString<
    */
   readonly __sddm?: $RequiresSDDM
 }
+export { type TypedDocumentString as String }
 
 /**
  * This type is re-defined here because importing it from `@graphql-typed-document-node/core` leads to this error:
@@ -58,7 +59,7 @@ interface TypedDocumentNode<$Result = SomeObjectData, $Variables = Variables> ex
   // nothing
 }
 
-export { type TypedDocumentNode as Node, type TypedDocumentString as String }
+export { type TypedDocumentNode as Node }
 
 //
 //

@@ -1,1 +1,1 @@
-export * as TypedFullDocument from './$$.js'
+export * as TypedFullDocument from './typed-full-document.js'

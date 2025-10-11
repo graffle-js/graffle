@@ -38,7 +38,7 @@ const graffle = Graffle
     return exchange()
   })
 
-await graffle.gql`{ pokemons { name } }`.send()
+await graffle.gql('{ pokemons { name } }').$send()
 ```
 <!-- dprint-ignore-end -->
 
@@ -52,7 +52,7 @@ await graffle.gql`{ pokemons { name } }`.send()
       'application/graphql-response+json; charset=utf-8, application/json; charset=utf-8'
     ],
     [ 'content-type', 'application/json' ],
-    [ 'X-Sent-At-Time', '1759776426279' ]
+    [ 'X-Sent-At-Time', '1760216318220' ]
   ],
   method: 'post',
   url: {

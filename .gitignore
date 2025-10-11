@@ -9,13 +9,8 @@ bundle-stats.html
 **/.dprint/
 **/.vitepress/dist/
 **/.vitepress/cache/
+**/.vitepress/.temp/
 
 # Generated GraphQL clients
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
 tests/e2e/github/graffle/
-=======
-**/.vitepress/.temp/
->>>>>>> Stashed changes
->>>>>>> Stashed changes
+website/graffle/

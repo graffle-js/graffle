@@ -1,4 +1,5 @@
 import type * as $$Utilities from 'graffle/utilities-for-generated'
+
 import type * as CustomScalars from '../../../scalars.js'
 
 //
@@ -16,10 +17,12 @@ import type * as CustomScalars from '../../../scalars.js'
 //
 //
 //
+
 /**
  * Mapping of GraphQL type names to their TypeScript input types.
  * This is used for O(1) type lookups during variable type inference.
  */
+
 // Standard GraphQL scalars
 export type String = string
 export type Int = number

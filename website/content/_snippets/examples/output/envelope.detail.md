@@ -35,8 +35,7 @@ console.log(result)
       { name: 'Squirtle' },
       { name: 'Bulbasaur' },
       { name: 'Caterpie' },
-      { name: 'Weedle' },
-      { name: 'Mew' }
+      { name: 'Weedle' }
     ]
   },
   response: Response {
@@ -44,8 +43,8 @@ console.log(result)
     statusText: 'OK',
     headers: Headers {
       'content-type': 'application/graphql-response+json; charset=utf-8',
-      'content-length': '157',
-      date: 'Mon, 06 Oct 2025 18:47:06 GMT',
+      'content-length': '142',
+      date: 'Sat, 11 Oct 2025 20:58:50 GMT',
       connection: 'keep-alive',
       'keep-alive': 'timeout=5'
     },

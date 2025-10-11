@@ -47,9 +47,6 @@ console.log(pokemons)
   },
   {
     "name": "Weedle"
-  },
-  {
-    "name": "Mew"
   }
 ]
 ```

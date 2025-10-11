@@ -70,7 +70,7 @@ export const Introspection = Extension.create(`introspection`)
         const client2 = client.with({ output: { envelope: false, errors: { execution: `return` } } })
         let introspectionQueryDocument = getIntrospectionQuery(configuration.introspection.current.options)
         // @ts-expect-error fixme
-        const result = await client2.gql(introspectionQueryDocument).send()
+        const result = await client2.gql(introspectionQueryDocument).$send()
         const featuresDropped: string[] = []
         const enabledKnownPotentiallyUnsupportedFeatures = knownPotentiallyUnsupportedFeatures.filter(_ =>
           configuration.introspection.current.options[_] !== false
@@ -85,7 +85,7 @@ export const Introspection = Extension.create(`introspection`)
               [feature]: false,
             })
             // @ts-expect-error fixme
-            const result = await client2.gql(introspectionQueryDocument).send()
+            const result = await client2.gql(introspectionQueryDocument).$send()
             if (!(result instanceof Error)) break
           }
         }
@@ -95,7 +95,7 @@ export const Introspection = Extension.create(`introspection`)
         // TODO expose the featuresDropped info on the envelope so that upstream can communicate to users what happened
         // finally at runtime.
         // @ts-expect-error fixme
-        return await client.gql(introspectionQueryDocument).send()
+        return await client.gql(introspectionQueryDocument).$send()
       },
     } as any as Properties
   })

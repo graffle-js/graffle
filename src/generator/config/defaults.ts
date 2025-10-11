@@ -14,5 +14,6 @@ export const defaults = {
   importFormat: `jsExtension`,
   lint: {
     missingCustomScalarCodec: true as boolean,
+    missingGraphqlSP: true as boolean,
   },
 } satisfies Partial<ConfigInit>

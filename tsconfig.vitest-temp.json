@@ -1,0 +1,142 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
+    "exactOptionalPropertyTypes": false,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "isolatedModules": true,
+    "checkJs": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ES2023"
+    ],
+    "module": "nodenext",
+    "target": "es2022",
+    "moduleResolution": "nodenext",
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "tsBuildInfoFile": "/Users/jasonkuhrt/projects/jasonkuhrt/graffle/node_modules/.pnpm/vitest@3.1.1_@types+debug@4.1.12_@types+node@22.14.1_jsdom@26.1.0_tsx@4.19.3/node_modules/vitest/dist/chunks/tsconfig.tmp.tsbuildinfo",
+    "noErrorTruncation": true,
+    "incremental": true,
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "#src/*": [
+        "./src/*"
+      ],
+      "#graffle": [
+        "./src/exports/index.ts"
+      ],
+      "#graffle/client": [
+        "./src/exports/client.ts"
+      ],
+      "#graffle/extension": [
+        "./src/exports/extension.ts"
+      ],
+      "#graffle/generator": [
+        "./src/exports/generator.ts"
+      ],
+      "#graffle/kit": [
+        "./src/exports/kit.ts"
+      ],
+      "#graffle/schema": [
+        "./src/exports/schema.ts"
+      ],
+      "#graffle/utilities-for-generated": [
+        "./src/exports/utilities-for-generated.ts"
+      ],
+      "#graffle/generator-helpers/standard-scalar-types": [
+        "./src/types/Schema/StandardTypes/scalar.ts"
+      ],
+      "#graffle/extensions/transport-http": [
+        "./src/exports/extensions/transport-http/runtime.ts"
+      ],
+      "#graffle/extensions/document-builder": [
+        "./src/exports/extensions/document-builder/runtime.ts"
+      ],
+      "#graffle/extension-exports": [
+        "./src/exports/extension_exports.ts"
+      ],
+      "#graffle/presets/bare": [
+        "./src/exports/presets/bare.ts"
+      ],
+      "#graffle/presets/basic": [
+        "./src/exports/presets/basic.ts"
+      ],
+      "#graffle/presets/minimal": [
+        "./src/exports/presets/minimal.ts"
+      ],
+      "#lib/anyware": [
+        "./src/lib/anyware/$.ts"
+      ],
+      "#lib/config-manager": [
+        "./src/lib/config-manager/$.ts"
+      ],
+      "#lib/errors": [
+        "./src/lib/errors/$.ts"
+      ],
+      "#lib/grafaid": [
+        "./src/lib/grafaid/$.ts"
+      ],
+      "#lib/md-jsdoc": [
+        "./src/lib/md-jsdoc/$.ts"
+      ],
+      "#lib/tex": [
+        "./src/lib/tex/$.ts"
+      ],
+      "#lib/type-function": [
+        "./src/lib/type-function/$.ts"
+      ],
+      "#test/schema/*": [
+        "./tests/_/fixtures/schemas/*"
+      ],
+      "#test/*": [
+        "./tests/_/*.ts"
+      ]
+    },
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+    "plugins": [
+      {
+        "name": "@0no-co/graphqlsp",
+        "schema": "./tests/_/fixtures/schemas/pokemon/schema.graphql",
+        "templateIsCallExpression": false
+      }
+    ],
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "strictBuiltinIteratorReturn": true,
+    "alwaysStrict": true,
+    "useUnknownInCatchVariables": true,
+    "useDefineForClassFields": true,
+    "allowSyntheticDefaultImports": true,
+    "resolvePackageJsonExports": true,
+    "resolvePackageJsonImports": true,
+    "preserveConstEnums": true,
+    "emitDeclarationOnly": false
+  },
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "_version": "22.0.0",
+  "exclude": [
+    "build",
+    "bundle-sizes",
+    "examples",
+    "website"
+  ]
+}

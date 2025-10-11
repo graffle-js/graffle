@@ -17,5 +17,5 @@ const provider = new NodeTracerProvider({
 provider.register()
 
 const graffle = Graffle.create().use(OpenTelemetry())
-const data = await graffle.gql`query { pokemons { name } }`.send()
+const data = await graffle.gql('query { pokemons { name } }').$send()
 show(data)

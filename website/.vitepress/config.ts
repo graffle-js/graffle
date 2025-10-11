@@ -107,28 +107,29 @@ export default defineConfig({
         dark: 'github-dark',
       },
     },
-    codeTransformers: (process.env.disable_twoslash ? [] : [
-      transformerTwoslash({
-        typesCache: createFileSystemTypesCache({
-          dir: './.vitepress/cache/types',
-        }),
-        twoslashOptions: {
-          handbookOptions: {
-            // noErrors: true,
-            // noErrorValidation: process.env.NODE_ENV !== 'development',
-          },
-          compilerOptions: {
-            moduleResolution: ModuleResolutionKind.Bundler,
-            module: ModuleKind.ESNext,
-            // noErrorTruncation: true,
-          },
-          shouldGetHoverInfo: (x, b, c) => {
-            const ignoreIdentifiers = ['console', 'log']
-            return !ignoreIdentifiers.includes(x)
-          },
-        },
-      }),
-    ]) as any,
+    codeTransformers: [] as any,
+    // codeTransformers: (process.env.disable_twoslash ? [] : [
+    //   transformerTwoslash({
+    //     typesCache: createFileSystemTypesCache({
+    //       dir: './.vitepress/cache/types',
+    //     }),
+    //     twoslashOptions: {
+    //       handbookOptions: {
+    //         // noErrors: true,
+    //         // noErrorValidation: process.env.NODE_ENV !== 'development',
+    //       },
+    //       compilerOptions: {
+    //         moduleResolution: ModuleResolutionKind.Bundler,
+    //         module: ModuleKind.ESNext,
+    //         // noErrorTruncation: true,
+    //       },
+    //       shouldGetHoverInfo: (x, b, c) => {
+    //         const ignoreIdentifiers = ['console', 'log']
+    //         return !ignoreIdentifiers.includes(x)
+    //       },
+    //     },
+    //   }),
+    // ]) as any,
   },
   srcDir: './content',
   themeConfig: {

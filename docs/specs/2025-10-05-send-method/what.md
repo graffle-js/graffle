@@ -76,9 +76,9 @@ const result = await client.send(doc, { id: '123' })
 
 ### Type System Changes
 
-#### New Type: TypedFullDocumentString
+#### New Type: TypedFullDocument
 
-**Location**: `/lib/grafaid/typed-full-document/TypedFullDocumentString.ts`
+**Location**: `/lib/grafaid/typed-full-document/TypedFullDocument.ts`
 
 Represents a full GraphQL document containing one or more named operations with complete type information.
 
@@ -91,7 +91,7 @@ type OperationMetadata = {
 }
 
 // The full document type
-interface TypedFullDocumentString<
+interface TypedFullDocument<
   $Operations extends readonly [OperationMetadata, ...OperationMetadata[]],
 > extends String {
   readonly __operations?: $Operations
@@ -108,7 +108,7 @@ interface TypedFullDocumentString<
 
 **Location**: `/src/extensions/DocumentBuilder/staticBuilder.ts`
 
-The static document builder currently returns `TypedDocumentString<Result, Variables>` for single operations. It will be updated to return `TypedFullDocumentString` instead.
+The static document builder currently returns `TypedDocumentString<Result, Variables>` for single operations. It will be updated to return `TypedFullDocument` instead.
 
 **Single operation**:
 
@@ -118,7 +118,7 @@ const doc = graffle.document({
     getUser: { user: { id: true } },
   },
 })
-// Returns: TypedFullDocumentString<[{ name: 'getUser', result: { user: { id: string } }, variables: {} }]>
+// Returns: TypedFullDocument<[{ name: 'getUser', result: { user: { id: string } }, variables: {} }]>
 ```
 
 **Multiple operations**:
@@ -132,7 +132,7 @@ const doc = graffle.document({
     updateUser: { updateUser: { id: true, name: true } },
   },
 })
-// Returns: TypedFullDocumentString<[
+// Returns: TypedFullDocument<[
 //   { name: 'getUser', result: { user: { id: string } }, variables: { id: string } },
 //   { name: 'updateUser', result: { updateUser: { id: string, name: string } }, variables: { id: string, name: string } }
 // ]>
@@ -154,15 +154,15 @@ interface Client {
     ...args: SendArguments<$Doc>
   ): Promise<SimplifyNullable<HandleOutput<Context, ResultOf<$Doc>>>>
 
-  // TypedFullDocumentString with single operation
-  send<$Doc extends TypedFullDocumentString<[infer Op]>>(
+  // TypedFullDocument with single operation
+  send<$Doc extends TypedFullDocument<[infer Op]>>(
     doc: $Doc,
     variables?: Op['variables'],
   ): Promise<SimplifyNullable<HandleOutput<Context, Op['result']>>>
 
-  // TypedFullDocumentString with multiple operations
+  // TypedFullDocument with multiple operations
   send<
-    $Doc extends TypedFullDocumentString<infer Ops>,
+    $Doc extends TypedFullDocument<infer Ops>,
     $OpName extends Ops[number]['name'],
   >(
     doc: $Doc,
@@ -218,11 +218,11 @@ No new HTTP clients, no new GraphQL execution logic - purely a new entry point i
 
 All failures are **type-level only** (no runtime validation in initial implementation).
 
-| Scenario                                                              | Failure Type          | Behavior                                                       |
-| --------------------------------------------------------------------- | --------------------- | -------------------------------------------------------------- |
-| TypedFullDocumentString with multiple ops, no operation name provided | TypeScript error      | Compilation fails - operation name parameter is required       |
-| TypedFullDocumentString with non-existent operation name              | TypeScript error      | Compilation fails - operation name not in union of valid names |
-| Required variables missing                                            | TypeScript error      | Compilation fails - variables parameter is required            |
-| Wrong variable types provided                                         | TypeScript error      | Compilation fails - type mismatch on variables object          |
-| Plain string document with multiple operations, no operation name     | Runtime GraphQL error | GraphQL executor returns error (existing behavior)             |
-| SDDM-required document sent to client without SDDM support            | TypeScript error      | Compilation fails - `__sddm` brand prevents invalid usage      |
+| Scenario                                                          | Failure Type          | Behavior                                                       |
+| ----------------------------------------------------------------- | --------------------- | -------------------------------------------------------------- |
+| TypedFullDocument with multiple ops, no operation name provided   | TypeScript error      | Compilation fails - operation name parameter is required       |
+| TypedFullDocument with non-existent operation name                | TypeScript error      | Compilation fails - operation name not in union of valid names |
+| Required variables missing                                        | TypeScript error      | Compilation fails - variables parameter is required            |
+| Wrong variable types provided                                     | TypeScript error      | Compilation fails - type mismatch on variables object          |
+| Plain string document with multiple operations, no operation name | Runtime GraphQL error | GraphQL executor returns error (existing behavior)             |
+| SDDM-required document sent to client without SDDM support        | TypeScript error      | Compilation fails - `__sddm` brand prevents invalid usage      |

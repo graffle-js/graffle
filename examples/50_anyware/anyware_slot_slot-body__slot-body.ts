@@ -10,7 +10,7 @@ const graffle = Graffle
   .anyware(async ({ pack }) => {
     return await pack({
       using: {
-        body: (graphqlRequest) => {
+        body(graphqlRequest) {
           return JSON.stringify({
             ...graphqlRequest,
             operationName: `trainers`,
@@ -20,13 +20,15 @@ const graffle = Graffle
     })
   })
 
-const result = await graffle.gql`
+const result = await graffle.gql(`
     query pokemons {
       pokemons { name }
     }
     query trainers {
       trainers { name }
     }
-  `.send(`pokemons`)
+  `)
+  // @ts-expect-error todo
+  .pokemons()
 
 show(result)

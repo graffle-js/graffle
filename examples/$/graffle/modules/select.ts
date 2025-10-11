@@ -19,6 +19,7 @@ import * as $$SelectionSets from './selection-sets.js'
 //
 //
 //
+
 import { createSelect } from 'graffle/client'
 export const Select = createSelect($$Data.Name)
 
@@ -37,10 +38,12 @@ export const Select = createSelect($$Data.Name)
 //
 //
 //
+
 export namespace Select {
   //                                                Root
   // --------------------------------------------------------------------------------------------------
   //
+
   export type Query<$SelectionSet extends $$SelectionSets.Query> = $$Utilities.DocumentBuilderKit.InferResult.Operation<
     $SelectionSet,
     $$Schema.Schema,
@@ -48,9 +51,11 @@ export namespace Select {
   >
   export type Mutation<$SelectionSet extends $$SelectionSets.Mutation> =
     $$Utilities.DocumentBuilderKit.InferResult.Operation<$SelectionSet, $$Schema.Schema, OperationTypeNode.MUTATION>
+
   //                                            OutputObject
   // --------------------------------------------------------------------------------------------------
   //
+
   export type BattleRoyale<$SelectionSet extends $$SelectionSets.BattleRoyale> =
     $$Utilities.DocumentBuilderKit.InferResult.OutputObjectLike<
       $SelectionSet,
@@ -99,17 +104,21 @@ export namespace Select {
       $$Schema.Schema,
       $$Schema.Schema['allTypes']['Trainer']
     >
+
   //                                               Union
   // --------------------------------------------------------------------------------------------------
   //
+
   export type Battle<$SelectionSet extends $$SelectionSets.Battle> = $$Utilities.DocumentBuilderKit.InferResult.Union<
     $SelectionSet,
     $$Schema.Schema,
     $$Schema.Schema['allTypes']['Battle']
   >
+
   //                                             Interface
   // --------------------------------------------------------------------------------------------------
   //
+
   export type Being<$SelectionSet extends $$SelectionSets.Being> = $$Utilities.DocumentBuilderKit.InferResult.Interface<
     $SelectionSet,
     $$Schema.Schema,

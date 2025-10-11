@@ -80,7 +80,7 @@ const graffle = Graffle
     url: 'https://countries.trevorblades.com/graphql',
   })
 
-const data = await graffle.gql`
+const data = await graffle.gql(`
   query myQuery ($filter: [String!]) {
     countries (filter: { name: { in: $filter } }) {
       name
@@ -89,7 +89,7 @@ const data = await graffle.gql`
       }
     }
   }
-`
+`)
   .send({ filter: [`Canada`, `Germany`, `Japan`] })
 
 console.log(data)

@@ -26,7 +26,7 @@ const graffle = Graffle
     })
   })
 
-const result = await graffle.gql(`{ query { thisWillError } }`).send()
+const result = await graffle.gql(`{ query { thisWillError } }`).$send()
 
 console.log(result)
 ```

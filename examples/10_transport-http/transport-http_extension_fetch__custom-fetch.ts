@@ -20,6 +20,6 @@ const graffle = Graffle
     })
   )
 
-const data = await graffle.gql`{ pokemon { name } }`.send()
+const data = await graffle.gql('{ pokemon { name } }').$send()
 
 showJson(data)

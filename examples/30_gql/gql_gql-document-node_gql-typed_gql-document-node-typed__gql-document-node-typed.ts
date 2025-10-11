@@ -40,6 +40,6 @@ const document = parse(`
     }
   `) as Document
 
-const data = await graffle.gql(document).send({ name: `Pikachu` })
+const data = await graffle.gql(document).$send({ name: `Pikachu` })
 
 show(data?.pokemonByName)
