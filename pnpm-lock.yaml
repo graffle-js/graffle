@@ -17,9 +17,6 @@ importers:
       '@molt/command':
         specifier: ^0.9.0
         version: 0.9.0
-      '@wollybeard/kit':
-        specifier: ^0.78.0
-        version: 0.78.0(@effect/platform@0.91.1(effect@3.17.14))(effect@3.17.14)
       es-toolkit:
         specifier: ^1.35.0
         version: 1.35.0
@@ -81,6 +78,9 @@ importers:
       '@types/node':
         specifier: ^22.14.1
         version: 22.14.1
+      '@wollybeard/kit':
+        specifier: ^0.78.1
+        version: 0.78.1(@effect/platform@0.91.1(effect@3.17.14))(effect@3.17.14)
       async-cleanup:
         specifier: ^1.0.0
         version: 1.0.0
@@ -1446,8 +1446,8 @@ packages:
     resolution: {integrity: sha512-ydxzH1iox9AzLe+uaX9jjyVFkQO+h15j+JClropw0P4Vz+ES4+xTZVu5leUsWW8AYTVZBFkiC0iHl/PwFZ+Q1Q==}
     engines: {node: '>=18.0.0'}
 
-  '@wollybeard/kit@0.78.0':
-    resolution: {integrity: sha512-uogjjhWZSlofiZT1TUGO6gv65C22fFxhQmNXxuX+At1A/aAJu6ikdfj2axvFGgOknsbqWEXrhcYPdIej+9i4ew==}
+  '@wollybeard/kit@0.78.1':
+    resolution: {integrity: sha512-Kz2siZ2K82gIAGzOTLNCmDOFnmWGJaY3nSV1jesMah2Xz01CFagg6W+ojJ0+aC9RsJmwoGWoB2IjbGo3K7a7iQ==}
     peerDependencies:
       '@effect/platform': '>=0.90.0 <1.0.0'
       effect: ^3.17.0
@@ -4273,7 +4273,7 @@ snapshots:
       '@whatwg-node/promise-helpers': 1.3.1
       tslib: 2.8.1
 
-  '@wollybeard/kit@0.78.0(@effect/platform@0.91.1(effect@3.17.14))(effect@3.17.14)':
+  '@wollybeard/kit@0.78.1(@effect/platform@0.91.1(effect@3.17.14))(effect@3.17.14)':
     dependencies:
       '@effect/platform': 0.91.1(effect@3.17.14)
       '@types/node': 24.7.2
@@ -4285,8 +4285,10 @@ snapshots:
       es-toolkit: 1.40.0
       fast-check: 4.3.0
       jsonc-parser: 3.3.1
+      lodash.snakecase: 4.1.1
       object-inspect: 1.13.4
       pathe: 2.0.3
+      string-length: 6.0.0
       tinyglobby: 0.2.15
       type-fest: 5.0.1
 
