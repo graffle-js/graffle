@@ -31,17 +31,17 @@ export type Alias<
 
 // dprint-ignore
 type InferSelectAlias<
-  $SelectAlias extends Select.SelectAlias.SelectAlias<any>,
+  $SelectAlias extends Select.SelectAlias.SelectAlias,
   $FieldName extends string,
   $Schema extends Schema,
   $Node extends Schema.OutputObjectLike,
 > =
-  $SelectAlias extends Select.SelectAlias.SelectAliasOne<any>      ? InferSelectAliasOne<$SelectAlias, $FieldName, $Schema, $Node> :
-  $SelectAlias extends Select.SelectAlias.SelectAliasMultiple<any> ? InferSelectAliasMultiple<$SelectAlias, $FieldName, $Schema, $Node> :
+  $SelectAlias extends Select.SelectAlias.SelectAliasOne<any>      ?  InferSelectAliasOne<$SelectAlias, $FieldName, $Schema, $Node> :
+  $SelectAlias extends Select.SelectAlias.SelectAliasMultiple<any> ?  InferSelectAliasMultiple<$SelectAlias, $FieldName, $Schema, $Node> :
                                                                       never
 
 type InferSelectAliasMultiple<
-  $SelectAliasMultiple extends Select.SelectAlias.SelectAliasMultiple<any>,
+  $SelectAliasMultiple extends Select.SelectAlias.SelectAliasMultiple,
   $FieldName extends string,
   $Schema extends Schema,
   $Node extends Schema.OutputObjectLike,
@@ -52,7 +52,7 @@ type InferSelectAliasMultiple<
 >
 
 type InferSelectAliasOne<
-  $SelectAliasOne extends Select.SelectAlias.SelectAliasOne<any>,
+  $SelectAliasOne extends Select.SelectAlias.SelectAliasOne,
   $FieldName extends string,
   $Schema extends Schema,
   $Node extends Schema.OutputObjectLike,

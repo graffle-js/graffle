@@ -35,6 +35,19 @@ Ts.Test.exact<{} | { int: number | null } | null>()(
 // object with scalars wildcard
 Ts.Test.exact<{ __typename: `DateObject1`; date1: Date | null } | null>()(await g.query.dateObject1({ $scalars: true }))
 
+// $batch with aliases
+Ts.Test.exact<{
+  obj1: { id: string | null } | null
+  obj2: { id: string | null } | null
+} | null>()(
+  await g.query.$batch({
+    object: [
+      [`obj1`, { id: true }],
+      [`obj2`, { id: true }],
+    ],
+  }),
+)
+
 // @ts-expect-error missing input selection set
 g.query.dateObject1()
 // @ts-expect-error excess properties
