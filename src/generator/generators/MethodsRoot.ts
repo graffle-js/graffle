@@ -137,7 +137,7 @@ const renderFieldMethods = createCodeGenerator<{ node: Grafaid.Schema.ObjectType
     const isOptional = Grafaid.Schema.isScalarType(fieldTypeUnwrapped)
       && Grafaid.Schema.Args.isAllArgsNullable(field.args)
 
-    const { operationType} = createFromObjectTypeAndMapOrThrow(node, config.schema.kindMap.root)
+    const { operationType } = createFromObjectTypeAndMapOrThrow(node, config.schema.kindMap.root)
     // dprint-ignore
     code`
       ${field.name}:
