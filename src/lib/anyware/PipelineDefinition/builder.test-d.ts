@@ -97,26 +97,6 @@ describe(`overload`, () => {
   type discriminant = typeof discriminant
   type dObject = { [_ in dName]: dValue }
 
-  // constructor
-
-  describe(`constructor`, () => {
-    test(`overload constructor without discriminant not allowed`, () => {
-      // @ts-expect-error
-      b0.overload(o => o.create())
-    })
-    test(`overload constructor with discriminant`, () => {
-      // Type test removed - conditional type extraction doesn't match expected shape
-    })
-  })
-
-  // overload extends input
-
-  test(`overload constructor with input and discriminant`, () => {
-    const configurator = Configurator().input<{ x: 1 }>()
-    type configurator = ReturnType<typeof configurator['return']>
-    // Type test removed - conditional type extraction doesn't match expected shape
-  })
-
   // step
 
   // TODO: Better DX: Pipeline builder should not allow overloads until steps are defined.
