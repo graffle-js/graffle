@@ -85,9 +85,10 @@ export const test = testBase.extend<Fixtures>({
      * logic based on the state of PATH would have its integrity compromised.
      */
     const path = process.env[`PATH`]!
+    const projectRoot = Path.resolve(import.meta.dirname, `../../`)
     const pathWithoutPackageManagerAugmentation = path
       .split(`:`)
-      .filter(_ => !_.includes(`graffle`))
+      .filter(_ => !_.startsWith(projectRoot))
       .join(`:`)
     const fs = await FsJetpack.tmpDirAsync()
     const run = execa({ cwd: fs.cwd(), env: { PATH: pathWithoutPackageManagerAugmentation } })

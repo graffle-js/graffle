@@ -55,8 +55,8 @@ export const ModuleGenerator$$ = createModuleGenerator(
       }),
     )
     code(
-      Code.reexportNamed({
-        names: '$Fields',
+      Code.reexportNamespace({
+        as: '$Fields',
         from: `./modules/${getImportName(config, ModuleGeneratorSelectionSets)}`,
       }),
     )
