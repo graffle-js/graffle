@@ -17,9 +17,9 @@ test(`query`, async () => {
   // scalar none-nullable
   expectTypeOf(await g.query.idNonNull()).toEqualTypeOf<string>()
   // scalar with optional arguments
-  expectTypeOf<Parameters<typeof g.query.stringWithArgs>>().toMatchTypeOf<[input?: Possible.SelectionSets.Query.stringWithArgs<ClientContext>]>()
+  expectTypeOf<Parameters<typeof g.query.stringWithArgs>>().toMatchTypeOf<[input?: Possible.$Fields.Query.stringWithArgs<ClientContext>]>()
   // scalar with required arguments
-  expectTypeOf<Parameters<typeof g.query.stringWithRequiredArg>>().toMatchTypeOf<[input: Possible.SelectionSets.Query.stringWithRequiredArg<ClientContext>]>()
+  expectTypeOf<Parameters<typeof g.query.stringWithRequiredArg>>().toMatchTypeOf<[input: Possible.$Fields.Query.stringWithRequiredArg<ClientContext>]>()
   // scalar custom
   const result = await g.query.date()
   expectTypeOf(await g.query.date()).toMatchTypeOf<Date | null>()

@@ -4,7 +4,7 @@ import { createGql } from '#graffle/extensions/document-builder'
 import type * as $$ArgumentsMap from './arguments-map.js'
 import { schemaDrivenDataMap as sddm } from './schema-driven-data-map.js'
 import type { Schema } from './schema/$.js'
-import type * as $$SelectionSets from './selection-sets.js'
+import type * as $$SelectionSets from './selection-sets/$.js'
 
 /**
  * Unified `gql` function that accepts either:

@@ -1,155 +1,51 @@
----------------------------------------- SHOW ----------------------------------------
-{
-  resource: {
-    attributes: {
-      'service.name': '...',
-      'telemetry.sdk.language': 'nodejs',
-      'telemetry.sdk.name': 'opentelemetry',
-      'telemetry.sdk.version': '...'
+/some/path/to/runPipeline.ts:XX
+           return new ContextualError(message, { hookName: signal.hookName, source: signal.source }, signal.error)
+                  ^
+
+ContextualError: There was an error in the core implementation of hook "exchange".
+    at runPipeline (/some/path/to/runPipeline.ts:XX:XX)
+    at process.processTicksAndRejections (node:internal/process/task_queues:XX:XX)
+    at async runPipeline (/some/path/to/runPipeline.ts:XX:XX)
+    at async runPipeline (/some/path/to/runPipeline.ts:XX:XX)
+    at async <anonymous> (/some/path/to/runner.ts:XX:XX)
+    at async Module.run (/some/path/to/run.ts:XX:XX)
+    at async sendRequest (/some/path/to/send.ts:XX:XX)
+    at async <anonymous> (/some/path/to/extension_opentelemetry__opentelemetry.ts:XX:XX) {
+  cause: TypeError: fetch failed
+      at node:internal/deps/undici/undici:XX:XX
+      at process.processTicksAndRejections (node:internal/process/task_queues:XX:XX)
+      at async Object.run (/some/path/to/TransportHttp.ts:XX:XX)
+      at async runStep (/some/path/to/runStep.ts:XX:XX) {
+    [cause]: AggregateError [ECONNREFUSED]: 
+        at internalConnectMultiple (node:net:XX:XX)
+        at afterConnectMultiple (node:net:XX:XX)
+        at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:XX:XX) {
+      code: 'ECONNREFUSED',
+      [errors]: [
+        Error: connect ECONNREFUSED ::1:3000
+            at createConnectionError (node:net:XX:XX)
+            at afterConnectMultiple (node:net:XX:XX)
+            at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:XX:XX) {
+          errno: -61,
+          code: 'ECONNREFUSED',
+          syscall: 'connect',
+          address: '::1',
+          port: 3000
+        },
+        Error: connect ECONNREFUSED 127.0.0.1:3000
+            at createConnectionError (node:net:XX:XX)
+            at afterConnectMultiple (node:net:XX:XX)
+            at TCPConnectWrap.callbackTrampoline (node:internal/async_hooks:XX:XX) {
+          errno: -61,
+          code: 'ECONNREFUSED',
+          syscall: 'connect',
+          address: '127.0.0.1',
+          port: 3000
+        }
+      ]
     }
   },
-  instrumentationScope: { name: 'graffle', version: undefined, schemaUrl: undefined },
-  traceId: '...',
-  parentId: '...',
-  traceState: undefined,
-  name: 'encode',
-  id: '...',
-  kind: 0,
-  timestamp: 0,
-  duration: 0.0,
-  attributes: {},
-  status: { code: 0 },
-  events: [],
-  links: []
+  context: { hookName: 'exchange', source: 'implementation' }
 }
----------------------------------------- SHOW ----------------------------------------
-{
-  resource: {
-    attributes: {
-      'service.name': '...',
-      'telemetry.sdk.language': 'nodejs',
-      'telemetry.sdk.name': 'opentelemetry',
-      'telemetry.sdk.version': '...'
-    }
-  },
-  instrumentationScope: { name: 'graffle', version: undefined, schemaUrl: undefined },
-  traceId: '...',
-  parentId: '...',
-  traceState: undefined,
-  name: 'pack',
-  id: '...',
-  kind: 0,
-  timestamp: 0,
-  duration: 0.0,
-  attributes: {},
-  status: { code: 0 },
-  events: [],
-  links: []
-}
----------------------------------------- SHOW ----------------------------------------
-{
-  resource: {
-    attributes: {
-      'service.name': '...',
-      'telemetry.sdk.language': 'nodejs',
-      'telemetry.sdk.name': 'opentelemetry',
-      'telemetry.sdk.version': '...'
-    }
-  },
-  instrumentationScope: { name: 'graffle', version: undefined, schemaUrl: undefined },
-  traceId: '...',
-  parentId: '...',
-  traceState: undefined,
-  name: 'exchange',
-  id: '...',
-  kind: 0,
-  timestamp: 0,
-  duration: 0.0,
-  attributes: {},
-  status: { code: 0 },
-  events: [],
-  links: []
-}
----------------------------------------- SHOW ----------------------------------------
-{
-  resource: {
-    attributes: {
-      'service.name': '...',
-      'telemetry.sdk.language': 'nodejs',
-      'telemetry.sdk.name': 'opentelemetry',
-      'telemetry.sdk.version': '...'
-    }
-  },
-  instrumentationScope: { name: 'graffle', version: undefined, schemaUrl: undefined },
-  traceId: '...',
-  parentId: '...',
-  traceState: undefined,
-  name: 'unpack',
-  id: '...',
-  kind: 0,
-  timestamp: 0,
-  duration: 0.0,
-  attributes: {},
-  status: { code: 0 },
-  events: [],
-  links: []
-}
----------------------------------------- SHOW ----------------------------------------
-{
-  resource: {
-    attributes: {
-      'service.name': '...',
-      'telemetry.sdk.language': 'nodejs',
-      'telemetry.sdk.name': 'opentelemetry',
-      'telemetry.sdk.version': '...'
-    }
-  },
-  instrumentationScope: { name: 'graffle', version: undefined, schemaUrl: undefined },
-  traceId: '...',
-  parentId: '...',
-  traceState: undefined,
-  name: 'decode',
-  id: '...',
-  kind: 0,
-  timestamp: 0,
-  duration: 0.0,
-  attributes: {},
-  status: { code: 0 },
-  events: [],
-  links: []
-}
----------------------------------------- SHOW ----------------------------------------
-{
-  resource: {
-    attributes: {
-      'service.name': '...',
-      'telemetry.sdk.language': 'nodejs',
-      'telemetry.sdk.name': 'opentelemetry',
-      'telemetry.sdk.version': '...'
-    }
-  },
-  instrumentationScope: { name: 'graffle', version: undefined, schemaUrl: undefined },
-  traceId: '...',
-  parentId: undefined,
-  traceState: undefined,
-  name: 'request',
-  id: '...',
-  kind: 0,
-  timestamp: 0,
-  duration: 0.0,
-  attributes: {},
-  status: { code: 0 },
-  events: [],
-  links: []
-}
----------------------------------------- SHOW ----------------------------------------
-{
-  pokemons: [
-    { name: 'Pikachu' },
-    { name: 'Charizard' },
-    { name: 'Squirtle' },
-    { name: 'Bulbasaur' },
-    { name: 'Caterpie' },
-    { name: 'Weedle' }
-  ]
-}
+
+Node.js vXX.XX.XX

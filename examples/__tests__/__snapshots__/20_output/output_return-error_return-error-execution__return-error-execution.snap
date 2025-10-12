@@ -1,54 +1,49 @@
----------------------------------------- SHOW ----------------------------------------
-ContextualAggregateError: One or more errors in the execution result.
-    at handleOutput (/some/path/to/handle.ts:XX:XX)
-    at sendRequest (/some/path/to/send.ts:XX:XX)
-    at process.processTicksAndRejections (node:internal/process/task_queues:XX:XX)
-    at async executeRootField (/some/path/to/requestMethods.ts:XX:XX)
-    at async <anonymous> (/some/path/to/output_return-error_return-error-execution__return-error-execution.ts:XX:XX) {
-  context: {},
-  cause: undefined,
-  errors: [
-    ContextualError: [
-      {
-        "code": "too_small",
-        "minimum": 1,
-        "type": "string",
-        "inclusive": true,
-        "exact": false,
-        "message": "Pokemon name cannot be empty.",
-        "path": [
-          "name"
-        ]
-      }
-    ]
-        at <anonymous> (/some/path/to/handle.ts:XX:XX)
-        at Array.map (<anonymous>)
-        at handleOutput (/some/path/to/handle.ts:XX:XX)
-        at sendRequest (/some/path/to/send.ts:XX:XX)
-        at process.processTicksAndRejections (node:internal/process/task_queues:XX:XX)
-        at async executeRootField (/some/path/to/requestMethods.ts:XX:XX)
-        at async <anonymous> (/some/path/to/output_return-error_return-error-execution__return-error-execution.ts:XX:XX) {
-      context: { locations: [ { line: 2, column: 3 } ], path: [ 'addPokemon' ] },
-      cause: undefined
-    }
-  ]
-}
----------------------------------------- SHOW ----------------------------------------
-ContextualError: There was an error in the interceptor "anonymous" (use named functions to improve this error message) while running hook "encode".
+/some/path/to/runPipeline.ts:XX
+           return new ContextualError(message, { hookName: signal.hookName, source: signal.source }, signal.error)
+                  ^
+
+ContextualError: There was an error in the core implementation of hook "exchange".
     at runPipeline (/some/path/to/runPipeline.ts:XX:XX)
     at process.processTicksAndRejections (node:internal/process/task_queues:XX:XX)
+    at async runPipeline (/some/path/to/runPipeline.ts:XX:XX)
+    at async runPipeline (/some/path/to/runPipeline.ts:XX:XX)
     at async <anonymous> (/some/path/to/runner.ts:XX:XX)
     at async Module.run (/some/path/to/run.ts:XX:XX)
     at async sendRequest (/some/path/to/send.ts:XX:XX)
     at async executeRootField (/some/path/to/requestMethods.ts:XX:XX)
     at async <anonymous> (/some/path/to/output_return-error_return-error-execution__return-error-execution.ts:XX:XX) {
-  context: {
-    hookName: 'encode',
-    source: 'extension',
-    interceptorName: 'anonymous'
-  },
-  cause: Error: Something went wrong.
-      at <anonymous> (/some/path/to/output_return-error_return-error-execution__return-error-execution.ts:XX:XX)
-      at applyBody (/some/path/to/runner.ts:XX:XX)
+  cause: TypeError: fetch failed
+      at node:internal/deps/undici/undici:XX:XX
       at process.processTicksAndRejections (node:internal/process/task_queues:XX:XX)
+      at async Object.run (/some/path/to/TransportHttp.ts:XX:XX)
+      at async runStep (/some/path/to/runStep.ts:XX:XX) {
+    [cause]: AggregateError [ECONNREFUSED]: 
+        at internalConnectMultiple (node:net:XX:XX)
+        at afterConnectMultiple (node:net:XX:XX) {
+      code: 'ECONNREFUSED',
+      [errors]: [
+        Error: connect ECONNREFUSED ::1:3000
+            at createConnectionError (node:net:XX:XX)
+            at afterConnectMultiple (node:net:XX:XX) {
+          errno: -61,
+          code: 'ECONNREFUSED',
+          syscall: 'connect',
+          address: '::1',
+          port: 3000
+        },
+        Error: connect ECONNREFUSED 127.0.0.1:3000
+            at createConnectionError (node:net:XX:XX)
+            at afterConnectMultiple (node:net:XX:XX) {
+          errno: -61,
+          code: 'ECONNREFUSED',
+          syscall: 'connect',
+          address: '127.0.0.1',
+          port: 3000
+        }
+      ]
+    }
+  },
+  context: { hookName: 'exchange', source: 'implementation' }
 }
+
+Node.js vXX.XX.XX

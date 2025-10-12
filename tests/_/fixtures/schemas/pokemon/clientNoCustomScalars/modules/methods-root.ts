@@ -1,6 +1,7 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
 import type * as $$Schema from './schema/$.js'
-import type * as $$SelectionSets from './selection-sets.js'
+import type * as $$SelectionSetsFields from './selection-sets/$$.fields.js'
+import type * as $$SelectionSets from './selection-sets/$.js'
 
 /**
  * GraphQL {@link https://graphql.org/learn/schema/#the-query-and-mutation-types | Query} root methods.
@@ -64,7 +65,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   battles: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.battles<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSetsFields.Query.battles<{ scalars: $Context['scalars'] }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -94,7 +98,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   beings: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.beings<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSetsFields.Query.beings<{ scalars: $Context['scalars'] }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -127,7 +134,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Query.pokemonByName<{ scalars: $Context['scalars'] }>
+        $$SelectionSetsFields.Query.pokemonByName<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -159,7 +166,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   pokemons: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.pokemons<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSetsFields.Query.pokemons<{ scalars: $Context['scalars'] }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -191,7 +201,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Query.trainerByName<{ scalars: $Context['scalars'] }>
+        $$SelectionSetsFields.Query.trainerByName<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -222,7 +232,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   trainers: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.trainers<{ scalars: $Context['scalars'] }>>,
+      selectionSet: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSetsFields.Query.trainers<{ scalars: $Context['scalars'] }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -301,7 +314,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.addPokemon<{ scalars: $Context['scalars'] }>
+        $$SelectionSetsFields.Mutation.addPokemon<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -333,7 +346,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.Mutation.resetData<{ scalars: $Context['scalars'] }>
+        $$SelectionSetsFields.Mutation.resetData<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})

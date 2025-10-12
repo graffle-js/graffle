@@ -15,7 +15,7 @@ beforeEach(async () => {
 describe('custom root type names', () => {
   const generateAndGetDocument = async (sdl: string) => {
     await generate({ fs, schema: { type: 'sdl', sdl } })
-    const content = MemFS.fs.readFileSync('./graffle/modules/selection-sets.ts', 'utf8')
+    const content = MemFS.fs.readFileSync('./graffle/modules/selection-sets/_document.ts', 'utf8')
     const match = content.toString().match(/export interface \$Document[^}]+\}/s)
     expect(match).toBeTruthy()
     return match![0]

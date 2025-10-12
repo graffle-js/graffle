@@ -48,12 +48,8 @@ export const ModuleGenerator$$ = createModuleGenerator(
       )
     }
 
-    code(
-      Code.reexportNamespace({
-        as: 'SelectionSets',
-        from: `./modules/${getImportName(config, ModuleGeneratorSelectionSets)}`,
-      }),
-    )
+    code(Code.reexportNamespace({ as: 'SelectionSets', from: `./modules/${getImportName(config, ModuleGeneratorSelectionSets)}` }))
+    code(Code.reexportNamed({ names: '$Fields', from: `./modules/${getImportName(config, ModuleGeneratorSelectionSets)}` }))
     code(Code.reexportNamed({
       names: { schemaDrivenDataMap: 'schemaMap' },
       from: `./modules/${getImportName(config, ModuleGeneratorSchemaDrivenDataMap)}`,
