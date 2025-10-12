@@ -15,15 +15,15 @@ describe(`interceptor constructor`, () => {
       .step({ name: `b`, run: () => results.b })
       .step({ name: `c`, run: () => results.c })
     const p1 = Pipeline.create(b1.type)
-    type i1 = Interceptor.InferFromPipeline<typeof p1>
+    const i1 = Ts.as<Interceptor.InferFromPipeline<typeof p1>>()
+    Ts.Test.parameters<[{ a: any; b: any; c: any }]>()(i1)
+    Ts.Test.parameters<[{
+      a: (params: { input?: initialInput }) => Promise<{ b: (params: { input?: results['a'] }) => any }>
+      b: (params: { input?: results['a'] }) => Promise<{ c: (params: { input?: results['b'] }) => any }>
+      c: (params: { input?: results['b'] }) => Promise<results['c']>
+    }]>()(i1)
     // const x: Parameters<i1>['0']['a'] = _
     // x({input:{x:1}}).then(r => r.b({input:{}}))
-    type _ = Ts.Test.Cases<
-      Ts.Test.bid<
-        Parameters<i1>,
-        [steps: { a: any; b: any; c: any }]
-      >
-    >
   })
 
   // --- trigger ---
@@ -38,10 +38,8 @@ describe(`interceptor constructor`, () => {
 
   test(`trigger arguments are optional`, () => {
     const p = b0.step({ name: `a`, run: () => results.a }).done()
-    type triggerA = PipelineGetTrigger<typeof p, 'a'>
-    type _ = Ts.Test.Cases<
-      Ts.Test.sub<Parameters<triggerA>, []>
-    >
+    const triggerA = Ts.as<PipelineGetTrigger<typeof p, 'a'>>()
+    Ts.Test.parameters<[params?: { input?: initialInput }]>()(triggerA)
   })
 
   // --- slots ---
