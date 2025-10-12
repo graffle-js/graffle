@@ -1,4 +1,5 @@
-import { describe, expect, expectTypeOf, it, test } from 'vitest'
+import { Ts } from '@wollybeard/kit'
+import { describe, expect, it, test } from 'vitest'
 import { create } from './select.js'
 
 describe(`select`, () => {
@@ -10,10 +11,10 @@ describe(`select`, () => {
   })
 
   it(`has type safe methods`, () => {
-    expectTypeOf(select.Bar({ int: true })).toEqualTypeOf<{ int: true }>()
+    Ts.Test.exact<{ int: true }>()(select.Bar({ int: true }))
     // Errors
     // @ts-expect-error Excess property check.
-    expectTypeOf(select.Bar({ int: true, int2: true })).toEqualTypeOf<{ int: true }>()
+    Ts.Test.exact<{ int: true }>()(select.Bar({ int: true, int2: true }))
   })
 })
 

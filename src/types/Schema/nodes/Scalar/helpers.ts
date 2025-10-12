@@ -66,12 +66,18 @@ export const lookupCustomScalarOrFallbackToString = (scalars: ScalarMap, name: s
 
   // Handle standard GraphQL scalars
   switch (name) {
-    case 'String': return String
-    case 'Int': return Int
-    case 'Float': return Float
-    case 'Boolean': return Boolean
-    case 'ID': return ID
-    default: return String
+    case 'String':
+      return String
+    case 'Int':
+      return Int
+    case 'Float':
+      return Float
+    case 'Boolean':
+      return Boolean
+    case 'ID':
+      return ID
+    default:
+      return String
   }
 }
 
