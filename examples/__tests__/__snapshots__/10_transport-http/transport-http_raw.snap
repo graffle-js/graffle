@@ -1,48 +1,28 @@
-/some/path/to/runPipeline.ts:XX
-           return new ContextualError(message, { hookName: signal.hookName, source: signal.source }, signal.error)
-                  ^
-
-ContextualError: There was an error in the core implementation of hook "exchange".
-    at runPipeline (/some/path/to/runPipeline.ts:XX:XX)
-    at process.processTicksAndRejections (node:internal/process/task_queues:XX:XX)
-    at async runPipeline (/some/path/to/runPipeline.ts:XX:XX)
-    at async runPipeline (/some/path/to/runPipeline.ts:XX:XX)
-    at async <anonymous> (/some/path/to/runner.ts:XX:XX)
-    at async Module.run (/some/path/to/run.ts:XX:XX)
-    at async sendRequest (/some/path/to/send.ts:XX:XX)
-    at async <anonymous> (/some/path/to/transport-http_raw.ts:XX:XX) {
-  cause: TypeError: fetch failed
-      at node:internal/deps/undici/undici:XX:XX
-      at process.processTicksAndRejections (node:internal/process/task_queues:XX:XX)
-      at async Object.run (/some/path/to/TransportHttp.ts:XX:XX)
-      at async runStep (/some/path/to/runStep.ts:XX:XX) {
-    [cause]: AggregateError [ECONNREFUSED]: 
-        at internalConnectMultiple (node:net:XX:XX)
-        at afterConnectMultiple (node:net:XX:XX) {
-      code: 'ECONNREFUSED',
-      [errors]: [
-        Error: connect ECONNREFUSED ::1:3000
-            at createConnectionError (node:net:XX:XX)
-            at afterConnectMultiple (node:net:XX:XX) {
-          errno: -61,
-          code: 'ECONNREFUSED',
-          syscall: 'connect',
-          address: '::1',
-          port: 3000
-        },
-        Error: connect ECONNREFUSED 127.0.0.1:3000
-            at createConnectionError (node:net:XX:XX)
-            at afterConnectMultiple (node:net:XX:XX) {
-          errno: -61,
-          code: 'ECONNREFUSED',
-          syscall: 'connect',
-          address: '127.0.0.1',
-          port: 3000
-        }
-      ]
+---------------------------------------- SHOW ----------------------------------------
+{
+  methodMode: 'post',
+  headers: Headers {
+    accept: 'application/graphql-response+json; charset=utf-8, application/json; charset=utf-8',
+    'content-type': 'application/json'
+  },
+  mode: 'cors',
+  method: 'post',
+  url: {
+    _tag: 'url',
+    value: URL {
+      href: 'http://localhost:3000/graphql',
+      origin: 'http://localhost:3000',
+      protocol: 'http:',
+      username: '',
+      password: '',
+      host: 'localhost:3000',
+      hostname: 'localhost',
+      port: '3000',
+      pathname: '/graphql',
+      search: '',
+      searchParams: URLSearchParams {},
+      hash: ''
     }
   },
-  context: { hookName: 'exchange', source: 'implementation' }
+  body: '{"query":"{ pokemons { name } }"}'
 }
-
-Node.js vXX.XX.XX

@@ -1,48 +1,129 @@
-/some/path/to/runPipeline.ts:XX
-           return new ContextualError(message, { hookName: signal.hookName, source: signal.source }, signal.error)
-                  ^
-
-ContextualError: There was an error in the core implementation of hook "exchange".
-    at runPipeline (/some/path/to/runPipeline.ts:XX:XX)
-    at process.processTicksAndRejections (node:internal/process/task_queues:XX:XX)
-    at async runPipeline (/some/path/to/runPipeline.ts:XX:XX)
-    at async runPipeline (/some/path/to/runPipeline.ts:XX:XX)
-    at async <anonymous> (/some/path/to/runner.ts:XX:XX)
-    at async Module.run (/some/path/to/run.ts:XX:XX)
-    at async sendRequest (/some/path/to/send.ts:XX:XX)
-    at async <anonymous> (/some/path/to/document-builder_static.ts:XX:XX) {
-  cause: TypeError: fetch failed
-      at node:internal/deps/undici/undici:XX:XX
-      at process.processTicksAndRejections (node:internal/process/task_queues:XX:XX)
-      at async Object.run (/some/path/to/TransportHttp.ts:XX:XX)
-      at async runStep (/some/path/to/runStep.ts:XX:XX) {
-    [cause]: AggregateError [ECONNREFUSED]: 
-        at internalConnectMultiple (node:net:XX:XX)
-        at afterConnectMultiple (node:net:XX:XX) {
-      code: 'ECONNREFUSED',
-      [errors]: [
-        Error: connect ECONNREFUSED ::1:3000
-            at createConnectionError (node:net:XX:XX)
-            at afterConnectMultiple (node:net:XX:XX) {
-          errno: -61,
-          code: 'ECONNREFUSED',
-          syscall: 'connect',
-          address: '::1',
-          port: 3000
-        },
-        Error: connect ECONNREFUSED 127.0.0.1:3000
-            at createConnectionError (node:net:XX:XX)
-            at afterConnectMultiple (node:net:XX:XX) {
-          errno: -61,
-          code: 'ECONNREFUSED',
-          syscall: 'connect',
-          address: '127.0.0.1',
-          port: 3000
-        }
-      ]
+---------------------------------------- SHOW ----------------------------------------
+{
+  pokemons {
+    name
+    hp
+    trainer {
+      name
     }
-  },
-  context: { hookName: 'exchange', source: 'implementation' }
+  }
+}
+---------------------------------------- SHOW ----------------------------------------
+query ($pokemonName: String!) {
+  pokemonByName(name: $pokemonName) {
+    name
+    type
+  }
+}
+---------------------------------------- SHOW ----------------------------------------
+query ($filter: PokemonFilter) {
+  pokemons(filter: $filter) {
+    name
+    hp
+  }
+}
+---------------------------------------- SHOW ----------------------------------------
+query ($name: String! = "Ash") {
+  trainerByName(name: $name) {
+    name
+    class
+    pokemon {
+      name
+      type
+    }
+  }
+}
+---------------------------------------- SHOW ----------------------------------------
+mutation ($name: String! = "Pikachu", $attack: Int, $defense: Int, $hp: Int, $type: PokemonType!) {
+  addPokemon(
+    name: $name
+    attack: $attack
+    defense: $defense
+    hp: $hp
+    type: $type
+  ) {
+    name
+    type
+  }
+}
+---------------------------------------- SHOW ----------------------------------------
+query allPokemons {
+  pokemons {
+    name
+    hp
+  }
 }
 
-Node.js vXX.XX.XX
+query specificPokemon($pokemonName: String!) {
+  pokemonByName(name: $pokemonName) {
+    name
+    type
+    hp
+  }
+}
+---------------------------------------- SHOW ----------------------------------------
+{
+  pokemons: [
+    { name: 'Pikachu', hp: 35 },
+    { name: 'Charizard', hp: 78 },
+    { name: 'Squirtle', hp: 44 },
+    { name: 'Bulbasaur', hp: 45 },
+    { name: 'Caterpie', hp: 45 },
+    { name: 'Weedle', hp: 40 }
+  ]
+}
+---------------------------------------- SHOW ----------------------------------------
+{ pokemonByName: [ { name: 'Pikachu', type: 'electric', hp: 35 } ] }
+---------------------------------------- SHOW ----------------------------------------
+query getTrainers {
+  trainers {
+    name
+    pokemon {
+      name
+    }
+  }
+}
+---------------------------------------- SHOW ----------------------------------------
+{
+  trainers: [
+    {
+      name: 'Ash',
+      pokemon: [ { name: 'Pikachu' }, { name: 'Charizard' } ]
+    },
+    { name: 'Misty', pokemon: [ { name: 'Squirtle' } ] },
+    { name: 'Brock', pokemon: [] },
+    { name: 'Gary', pokemon: [] }
+  ]
+}
+---------------------------------------- SHOW ----------------------------------------
+query getPokemon($name: String!) {
+  pokemonByName(name: $name) {
+    name
+    hp
+    attack
+  }
+}
+
+mutation addNewPokemon($name: String!, $type: PokemonType!, $hp: Int, $attack: Int, $defense: Int) {
+  addPokemon(
+    name: $name
+    type: $type
+    hp: $hp
+    attack: $attack
+    defense: $defense
+  ) {
+    name
+    type
+  }
+}
+---------------------------------------- SHOW ----------------------------------------
+{ pokemonByName: [ { name: 'Charizard', hp: 78, attack: 84 } ] }
+---------------------------------------- SHOW ----------------------------------------
+{ addPokemon: { name: 'Mew', type: 'electric' } }
+---------------------------------------- SHOW ----------------------------------------
+{
+  pokemons {
+    name
+    birthday
+  }
+}
