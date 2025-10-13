@@ -4,6 +4,7 @@ import type { Options } from '#src/extensions/DocumentBuilder/SelectGraphQLMappe
 import { toGraphQLDocument } from '#src/extensions/DocumentBuilder/SelectGraphQLMapper/nodes/1_Document.js'
 import type { getDocumentNode, parseDocument, schemaOfSetup } from '#src/lib/gql-tada/index.js'
 import { type AbstractSetupSchema, type initGraphQLTada } from '#src/lib/gql-tada/index.js'
+import type { getDocumentOperations } from '#src/lib/gql-tada/selection.js'
 import type { TypedDocument } from '#src/lib/grafaid/typed-document/$.js'
 import type { TypedFullDocument } from '#src/lib/grafaid/typed-full-document/$.js'
 import { isSymbol } from '#src/lib/prelude.js'
@@ -44,38 +45,44 @@ export type CreateGqlTadaFromContext<$Context> =
   }>
 
 /**
- * Type-level utility that parses a GraphQL string and returns the typed document node.
+ * Type-level utility that parses a GraphQL string and returns a typed document with all operations.
  *
  * This utility:
  * 1. Parses the GraphQL string into an AST using `parseDocument`
  * 2. Extracts introspection data from the context's GlobalRegistry
  * 3. Uses `schemaOfSetup` to combine introspection with scalar mappings into a `SchemaLike`
- * 4. Passes the combined schema to `getDocumentNode` to produce a fully typed `TadaDocumentNode`
+ * 4. Extracts ALL operations from the document using `getDocumentOperations`
+ * 5. Wraps the result in `TypedFullDocument.FromObject` to produce either SingleOperation or MultiOperation
  *
  * @typeParam $Context - The client context containing schema introspection
  * @typeParam $Input - The GraphQL document string to parse
  *
  * @example
  * ```ts
- * type Doc = ParseGraphQLString<MyContext, 'query { id }'>
- * // Result: TadaDocumentNode<{ id: string }, {}>
+ * type Doc = ParseGraphQLString<MyContext, 'query MyQuery { id }'>
+ * // Result: TypedFullDocument.SingleOperation<Operation<'MyQuery', { id: string }, {}>>
+ *
+ * type Doc2 = ParseGraphQLString<MyContext, 'query Q1 { id } mutation M1 { id }'>
+ * // Result: TypedFullDocument.MultiOperation<{ Q1: Operation<...>, M1: Operation<...> }>
  * ```
  */
+// dprint-ignore
 export type ParseGraphQLString<
   $Context,
   $Input extends string,
-> = getDocumentNode<
-  parseDocument<$Input>,
-  schemaOfSetup<{
-    introspection: GlobalRegistry.ForContext<$Context>['tadaIntrospection']
-    scalars: {
-      [k in keyof GlobalRegistry.ForContext<$Context>['schema']['scalarRegistry']['map']]: Schema.Scalar.GetDecoded<
-        GlobalRegistry.ForContext<$Context>['schema']['scalarRegistry']['map'][k]
-      >
-    }
-  }>,
-  {},
-  false
+> = TypedFullDocument.FromObject<
+  Simplify<
+    getDocumentOperations<
+      parseDocument<$Input>['definitions'],
+      schemaOfSetup<{
+        introspection: GlobalRegistry.ForContext<$Context>['tadaIntrospection']
+        scalars: {
+          [k in keyof GlobalRegistry.ForContext<$Context>['schema']['scalarRegistry']['map']]:
+            Schema.Scalar.GetDecoded<GlobalRegistry.ForContext<$Context>['schema']['scalarRegistry']['map'][k]>
+        }
+      }>
+    >
+  >
 >
 
 /**
@@ -432,6 +439,24 @@ export interface gql<
     }
   }>
 {
+  // Override string signature to return TypedFullDocument instead of TadaDocumentNode
+  <const $Input extends string>(
+    graphqlDocument: $Input,
+  ): TypedFullDocument.FromObject<
+    Simplify<
+      getDocumentOperations<
+        parseDocument<$Input>['definitions'],
+        schemaOfSetup<{
+          introspection: $Introspection
+          scalars: {
+            [K in keyof $Schema['scalarRegistry']['map']]: Schema.Scalar.GetDecoded<$Schema['scalarRegistry']['map'][K]>
+          }
+        }>
+      >
+    >
+  >
+
+  // Document object overload
   <$Document extends $DocumentObjectConstraint>(
     documentObject: $Document,
     options?: Options,

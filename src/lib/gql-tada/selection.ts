@@ -5,6 +5,7 @@ import type { obj } from './utils.js'
 
 import type { SchemaLike } from './introspection.js'
 import type { $tada, makeUndefinedFragmentRef } from './namespace.js'
+import type { getVariablesType } from './variables.js'
 
 type ObjectLikeType = {
   kind: 'OBJECT' | 'INTERFACE' | 'UNION'
@@ -249,6 +250,51 @@ type getFragmentSelectionType<
   : never
   : never
 
+/**
+ * Extract all operations from a GraphQL document.
+ * Returns a map of operation name to operation metadata (name, result, variables).
+ *
+ * Recursively processes all definitions in the document:
+ * - Named operations: Added to the operations map
+ * - Fragment definitions: Collected and passed to subsequent operations
+ * - Unnamed operations: Skipped (not supported for multi-operation documents)
+ */
+type getDocumentOperations<
+  Definitions,
+  Introspection extends SchemaLike,
+  Fragments extends { [name: string]: any } = {},
+  OperationsAcc = {},
+> = Definitions extends readonly [infer Definition, ...infer Rest]
+  ? Definition extends { kind: Kind.OPERATION_DEFINITION; name: any }
+    // Named operation - add to operations map
+    ? getDocumentOperations<
+      Rest,
+      Introspection,
+      Fragments,
+      OperationsAcc & {
+        [Name in Definition['name']['value']]: {
+          name: Definition['name']['value']
+          result: getOperationSelectionType<Definition, Introspection, Fragments>
+          variables: getVariablesType<{ definitions: [Definition] } & DocumentNodeLike, Introspection>
+        }
+      }
+    >
+    // Fragment definition - collect it and continue
+    : Definition extends { kind: Kind.FRAGMENT_DEFINITION; name: any }
+      ? getDocumentOperations<
+        Rest,
+        Introspection,
+        getFragmentMapRec<[Definition]> & Fragments,
+        OperationsAcc
+      >
+      // Unnamed operation or other - skip it
+      : getDocumentOperations<Rest, Introspection, Fragments, OperationsAcc>
+  : OperationsAcc
+
+/**
+ * @deprecated Use getDocumentOperations instead for multi-operation support.
+ * This type only extracts the first operation from a document.
+ */
 type getDocumentType<
   Document extends DocumentNodeLike,
   Introspection extends SchemaLike,
@@ -272,4 +318,4 @@ type getFragmentMapRec<Definitions, FragmentMap = {}> = Definitions extends read
   >
   : FragmentMap
 
-export type { getDocumentType, getFragmentMapRec }
+export type { getDocumentOperations, getDocumentType, getFragmentMapRec }
