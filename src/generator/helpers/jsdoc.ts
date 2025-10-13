@@ -875,12 +875,10 @@ export const getFragmentInlineFieldDoc = Code.jsdoc.factory<[]>((doc) => {
  * Used in SelectionSets.ts for the __typename field documentation.
  */
 export const getTypenameFieldDoc = Code.jsdoc.factory<[kind: 'union' | 'interface' | 'object']>((doc, kind) => {
-  const see = Code.jsdoc.tag.link('https://graphql.org/learn/queries/#meta-fields', 'Meta Fields')
-
   if (kind === 'object') {
     doc`A meta field. Is the name of the type being selected.`
     doc``
-    doc.$see(see.content)
+    doc.$see('https://graphql.org/learn/queries/#meta-fields', 'Meta Fields')
     return
   }
 
@@ -888,7 +886,7 @@ export const getTypenameFieldDoc = Code.jsdoc.factory<[kind: 'union' | 'interfac
   doc`A meta field. Is the name of the type being selected. Since this is a ${kind} type and thus polymorphic,`
   doc`the name is one of the ${relation} type names, whichever is ultimately returned at runtime.`
   doc``
-  doc.$see(see.content)
+  doc.$see('https://graphql.org/learn/queries/#meta-fields', 'Meta Fields')
 })
 
 /**

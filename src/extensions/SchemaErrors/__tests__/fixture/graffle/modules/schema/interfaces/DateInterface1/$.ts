@@ -11,7 +11,7 @@ export * as DateInterface1 from './fields.js'
  *
  * | | |
  * | - | - |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface ↗} |
  * | **Fields** | 1 |
  * | **Implementors** | {@link $Schema.DateObject1} |
  */

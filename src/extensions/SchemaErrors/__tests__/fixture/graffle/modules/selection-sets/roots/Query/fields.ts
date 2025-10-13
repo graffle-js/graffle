@@ -1683,6 +1683,8 @@ export namespace stringWithArgs {
      */
     id?: $Scalars.ID<_$Context>
     /**
+     * @deprecated Example of argument deprecation reason here.
+     *
      * # Info
      *
      * | | |

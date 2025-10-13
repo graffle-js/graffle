@@ -10,7 +10,7 @@ export * as ObjectUnion from './fields.js'
  *
  * | | |
  * | - | - |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object ↗} |
  * | **Fields** | 1 |
  */
 export interface ObjectUnion extends $.Schema.OutputObject {

@@ -27,7 +27,7 @@ export interface __typename extends $.Schema.OutputField {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.ID} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.ObjectNestedWithArgs} |
  * | **Path** | `ObjectNestedWithArgs.id` |
  * | **Nullability** | Optional |
@@ -56,7 +56,7 @@ export interface id extends $.Schema.OutputField {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Object1} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
  * | **Parent** | {@link $Schema.ObjectNestedWithArgs} |
  * | **Path** | `ObjectNestedWithArgs.object` |
  * | **Nullability** | Optional |

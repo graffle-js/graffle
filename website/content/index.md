@@ -91,14 +91,14 @@ Graffle combines the **simplicity of graphql-request** with **powerful type safe
 
 **Choose Graffle if you want:**
 
-- **Full Type Safety** - Complete type inference for GraphQL documents and results, with optional Document Builder for TypeScript-native query construction
-- **Flexibility** - Start simple with raw GraphQL strings, progressively adopt type-safe features as needed
-- **Extensibility** - Powerful extension system for OpenTelemetry, schema errors, custom scalars, and more
-- **Multi-Transport** - Execute against HTTP APIs or in-memory schemas with the same interface
+- **Full Type Safety** — Complete type inference with optional Document Builder
+- **Flexibility** — Start simple, progressively adopt type-safe features
+- **Extensibility** — Powerful extension system (OpenTelemetry, schema errors, custom scalars)
+- **Multi-Transport** — Execute against HTTP or in-memory schemas
 
 **Consider UI-specialized clients if:**
 
-- You're building a React/Vue/Svelte app and want deep framework integration with hooks, suspense, and state management ([Apollo Client](https://www.apollographql.com/docs/react/), [Urql](https://commerce.nearform.com/open-source/urql/), or [Relay](https://relay.dev/))
+- Building React/Vue/Svelte apps needing deep framework integration ([Apollo Client](https://www.apollographql.com/docs/react/), [Urql](https://commerce.nearform.com/open-source/urql/), [Relay](https://relay.dev/))
 
 [Read the detailed comparison →](/guides/appendix/comparison)
 
@@ -110,40 +110,116 @@ const members = [
     avatar: 'https://www.github.com/jasonkuhrt.png',
     name: 'Jason Kuhrt',
     title: 'Creator',
-    desc: 'Ex @prisma Dialogue littleBits. Creator Graffle Molt Paka Nexus. Shapeshifting Polymath ≒ Art ∙ Design ∙ Engineering. Heart humanities.  In an alternate universe ⊻ Coureur de Bois, Architect, Athlete, Lego Master Builder',
+    desc: 'Creator of Graffle, Molt, Paka, and Nexus. Former @prisma. Building tools for GraphQL and TypeScript ecosystems.',
     sponsor: 'https://github.com/sponsors/jasonkuhrt',
     links: [
       { icon: { svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle fill="none" cx="12" cy="12" r="10"/><path fill="none" d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg>' }, link: 'https://kuhrt.me' },
       { icon: 'github', link: 'https://github.com/jasonkuhrt' },
       { icon: 'twitter', link: 'https://twitter.com/jasonkuhrt' },
-      { icon: 'instagram', link: 'https://instagram.com/jasonkuhrt' },
     ]
   },
 ]
 </script>
 
 <style>
-.VPHome .vp-doc .VPTeamMembers {
-  margin-top: 1.2rem;
+/* Constrain width of content sections for better readability */
+.VPHome .vp-doc {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px;
 }
 
-.vp-doc .VPTeamMembers.small.count-1 .container {
-  max-width: none!important;
+/* Improve spacing for content sections */
+.VPHome .vp-doc h2 {
+  margin-top: 48px;
+  margin-bottom: 24px;
 }
 
-.VPTeamMembers.small .container {
-  grid-template-columns: repeat(2, 1fr)!important;
+.VPHome .vp-doc p {
+  margin-bottom: 16px;
+  line-height: 1.7;
 }
 
+/* Better list formatting */
+.VPHome .vp-doc ul {
+  margin-bottom: 24px;
+  padding-left: 24px;
+}
+
+.VPHome .vp-doc li {
+  margin-bottom: 12px;
+  line-height: 1.7;
+}
+
+/* Code blocks */
+.VPHome .vp-doc div[class*='language-'] {
+  margin: 28px 0;
+}
+
+/* Warning box */
+.VPHome .vp-doc .warning {
+  margin: 32px 0;
+}
+
+/* Custom sections container */
+.CustomSections {
+  max-width: 960px;
+  margin: 48px auto 0;
+  padding: 0 24px;
+}
+
+/* Team members styling */
+.CustomSections .VPTeamMembers {
+  margin-top: 0;
+}
+
+.CustomSections .VPTeamMembers .container {
+  max-width: 600px !important;
+  margin: 0 auto;
+}
+
+.CustomSections .VPTeamMembers.small .container {
+  grid-template-columns: 1fr !important;
+}
+
+/* Better team member card styling */
+.CustomSections .VPTeamMember {
+  padding: 24px !important;
+}
+
+.CustomSections .VPTeamMember .profile {
+  margin-bottom: 16px;
+}
+
+.CustomSections .VPTeamMember .desc {
+  line-height: 1.6;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* Responsive adjustments */
 @media (min-width: 767px) and (max-width: 1023px) {
-  .VPTeamMembers.small .container {
-    grid-template-columns: repeat(2, 1fr) !important;
+  .VPHome .vp-doc {
+    max-width: 720px;
+  }
+
+  .CustomSections {
+    max-width: 720px;
   }
 }
 
 @media (max-width: 767px) {
-  .VPTeamMembers.small .container {
-    grid-template-columns: 1fr !important;
+  .VPHome .vp-doc {
+    padding: 0 20px;
+  }
+
+  .CustomSections {
+    padding: 0 20px;
+    margin-top: 32px;
+  }
+
+  .CustomSections .VPTeamMembers .container {
+    max-width: 100% !important;
   }
 }
 </style>

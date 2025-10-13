@@ -10,7 +10,7 @@ export * as ObjectParent from './fields.js'
  *
  * | | |
  * | - | - |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object ↗} |
  * | **Fields** | 3 |
  * | **Implements** | {@link $Schema.InterfaceGrandparent}, {@link $Schema.InterfaceParent} |
  */

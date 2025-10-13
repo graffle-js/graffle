@@ -7,11 +7,12 @@ export type * as ObjectChildB from './$$.js'
 
 /**
  * Selection set for {@link https://graphql.org/learn/schema/#object-types | Object} type.
+ *
  * # Info
  *
  * | | |
  * | - | - |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object ↗} |
  * | **Fields** | 4 |
  * | **Implements** | {@link $Schema.InterfaceChildB}, {@link $Schema.InterfaceGrandparent}, {@link $Schema.InterfaceParent} |
  */
@@ -24,7 +25,7 @@ export interface ObjectChildB<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$String}! |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$ObjectChildB} |
    * | **Path** | `ObjectChildB.a` |
    * | **Nullability** | Required |
@@ -38,7 +39,7 @@ export interface ObjectChildB<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$String}! |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$ObjectChildB} |
    * | **Path** | `ObjectChildB.b` |
    * | **Nullability** | Required |
@@ -52,7 +53,7 @@ export interface ObjectChildB<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$String}! |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$ObjectChildB} |
    * | **Path** | `ObjectChildB.c2` |
    * | **Nullability** | Required |
@@ -66,7 +67,7 @@ export interface ObjectChildB<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Int}[]! |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$ObjectChildB} |
    * | **Path** | `ObjectChildB.me` |
    * | **Nullability** | Required |
@@ -82,13 +83,13 @@ export interface ObjectChildB<
    * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
    * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
    *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments}
    */
   ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
   /**
    * A meta field. Is the name of the type being selected.
    *
-   * @see https://graphql.org/learn/queries/#meta-fields
+   * @see {@link https://graphql.org/learn/queries/#meta-fields | Meta Fields}
    */
   __typename?:
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
