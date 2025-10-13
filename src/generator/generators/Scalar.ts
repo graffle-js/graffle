@@ -2,6 +2,13 @@ import { Grafaid } from '#lib/grafaid'
 import { Tex } from '#lib/tex'
 import { Code } from '#src/lib/Code.js'
 import { $ } from '../helpers/identifiers.js'
+import {
+  getScalarCodecDoc,
+  getScalarDecodedDoc,
+  getScalarEncodedDoc,
+  getScalarRegistryDoc,
+  getScalarRegistryTypeDoc,
+} from '../helpers/jsdoc.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 import { importUtilities } from '../helpers/pathHelpers.js'
 import { renderName, typeTitle2 } from '../helpers/render.js'
@@ -35,6 +42,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
           name: scalar.name,
           const: {
             value: `${$.CustomScalars}.${scalar.name}`,
+            tsDoc: getScalarCodecDoc(scalar.name),
           },
           type: {
             type: `typeof ${$.CustomScalars}.${scalar.name}`,
@@ -42,12 +50,14 @@ export const ModuleGeneratorScalar = createModuleGenerator(
         })
 
         code(dualExportResult.code)
+        code(Code.TSDoc(getScalarDecodedDoc(scalar.name)))
         code(
           Code.tsTypeExport(
             `${scalar.name}Decoded`,
             `${$.$$Utilities}.Schema.Scalar.GetDecoded<${dualExportResult.internalName}>`,
           ),
         )
+        code(Code.TSDoc(getScalarEncodedDoc(scalar.name)))
         code(
           Code.tsTypeExport(
             `${scalar.name}Encoded`,
@@ -97,6 +107,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
       })
       : {}
 
+    code(Code.TSDoc(getScalarRegistryDoc()))
     code`
       export const $registry = {
         map: ${Code.termObject(runtimeMap)},
@@ -116,6 +127,7 @@ export const ModuleGeneratorScalar = createModuleGenerator(
     code(Code.tsAlias$({
       name: `$Registry`,
       type: typeScalarRegistry,
+      tsDoc: getScalarRegistryTypeDoc(),
     }))
   },
 )

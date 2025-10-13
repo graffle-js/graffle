@@ -849,3 +849,104 @@ export const getEnumTypeSelectionSetDoc = (
 
   return parts.join('\n')
 }
+
+/**
+ * Generate JSDoc for $Expanded utility type.
+ */
+export const getExpandedTypeDoc = (fieldName: string): string => {
+  const parts: string[] = []
+  parts.push(
+    `This is the "expanded" version of the \`${fieldName}\` type. It is identical except for the fact`,
+  )
+  parts.push(`that IDEs will display its contents (a union type) directly, rather than the name of this type.`)
+  parts.push(`In some cases, this is a preferable DX, making the types easier to read for users.`)
+
+  return parts.join('\n')
+}
+
+/**
+ * Generate JSDoc for operation $Infer utility type.
+ */
+export const getOperationInferDoc = (operationType: 'Query' | 'Mutation'): string => {
+  const parts: string[] = []
+  parts.push(`Infer the result type of a ${operationType} selection set.`)
+  parts.push('')
+  parts.push(`Given a selection set object, this type computes the exact TypeScript type`)
+  parts.push(`of the data that will be returned from executing the ${operationType} operation.`)
+
+  return parts.join('\n')
+}
+
+/**
+ * Generate JSDoc for operation $Variables utility type.
+ */
+export const getOperationVariablesDoc = (operationType: 'Query' | 'Mutation'): string => {
+  const parts: string[] = []
+  parts.push(`Infer the variables type for a ${operationType} selection set.`)
+  parts.push('')
+  parts.push(`@deprecated This is temporarily typed as \`any\` and will be replaced with the new analysis system.`)
+
+  return parts.join('\n')
+}
+
+/**
+ * Generate JSDoc for custom scalar codec export.
+ */
+export const getScalarCodecDoc = (scalarName: string): string => {
+  const parts: string[] = []
+  parts.push(`Custom scalar codec for the \`${scalarName}\` type.`)
+  parts.push('')
+  parts.push(`Handles encoding (TypeScript → GraphQL) and decoding (GraphQL → TypeScript)`)
+  parts.push(`transformations for this custom scalar.`)
+
+  return parts.join('\n')
+}
+
+/**
+ * Generate JSDoc for decoded scalar type.
+ */
+export const getScalarDecodedDoc = (scalarName: string): string => {
+  const parts: string[] = []
+  parts.push(`The decoded (TypeScript-side) type for the \`${scalarName}\` scalar.`)
+  parts.push('')
+  parts.push(`This is the type you work with in your application code after the scalar`)
+  parts.push(`has been decoded from its GraphQL wire format.`)
+
+  return parts.join('\n')
+}
+
+/**
+ * Generate JSDoc for encoded scalar type.
+ */
+export const getScalarEncodedDoc = (scalarName: string): string => {
+  const parts: string[] = []
+  parts.push(`The encoded (GraphQL wire format) type for the \`${scalarName}\` scalar.`)
+  parts.push('')
+  parts.push(`This is the type used when transmitting the scalar value over the network.`)
+
+  return parts.join('\n')
+}
+
+/**
+ * Generate JSDoc for scalar registry const.
+ */
+export const getScalarRegistryDoc = (): string => {
+  const parts: string[] = []
+  parts.push(`Runtime registry of custom scalar codecs.`)
+  parts.push('')
+  parts.push(`Maps scalar type names to their codec implementations for encoding/decoding.`)
+
+  return parts.join('\n')
+}
+
+/**
+ * Generate JSDoc for scalar registry type.
+ */
+export const getScalarRegistryTypeDoc = (): string => {
+  const parts: string[] = []
+  parts.push(`Type-level registry of custom scalars.`)
+  parts.push('')
+  parts.push(`Provides type information about custom scalars for the type system.`)
+
+  return parts.join('\n')
+}

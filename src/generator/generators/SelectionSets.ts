@@ -11,10 +11,13 @@ import { $ } from '../helpers/identifiers.js'
 import {
   getArgumentDoc,
   getEnumTypeSelectionSetDoc,
+  getExpandedTypeDoc,
   getInlineFragmentDoc,
   getInputObjectTypeSelectionSetDoc,
   getInterfaceTypeSelectionSetDoc,
   getObjectTypeSelectionSetDoc,
+  getOperationInferDoc,
+  getOperationVariablesDoc,
   getOutputFieldSelectionSetDoc,
   getRootTypeDoc,
   getUnionTypeSelectionSetDoc,
@@ -683,6 +686,7 @@ const renderOutputFieldForFields = (
   }
 
   // Expanded type
+  code(`  ${Code.TSDoc(getExpandedTypeDoc(field.name))}`)
   code(
     `  export type $Expanded<${$ContextTypeParameter}> = ${i.$$Utilities}.Simplify<${
       Code.tsUnionItems([indicator, `$SelectionSet<${i._$Context}>`])
@@ -776,21 +780,29 @@ const generateBarrelModule = (config: Config, kindMap: Grafaid.Schema.KindMap['l
   }
 
   if (config.schema.kindMap.index.Root.query) {
+    code(Code.TSDoc(getOperationInferDoc('Query')))
     code(
       `export type Query$Infer<$SelectionSet extends object> = ${$.$$Utilities}.DocumentBuilderKit.InferResult.OperationQuery<$SelectionSet, ${$.$$Schema}.${$.Schema}>`,
     )
+    code()
+    code(Code.TSDoc(getOperationVariablesDoc('Query')))
     code(
       `export type Query$Variables<_$SelectionSet> = any // Temporarily any - will be replaced with new analysis system`,
     )
+    code()
   }
 
   if (config.schema.kindMap.index.Root.mutation) {
+    code(Code.TSDoc(getOperationInferDoc('Mutation')))
     code(
       `export type Mutation$Infer<$SelectionSet extends object> = ${$.$$Utilities}.DocumentBuilderKit.InferResult.OperationMutation<$SelectionSet, ${$.$$Schema}.${$.Schema}>`,
     )
+    code()
+    code(Code.TSDoc(getOperationVariablesDoc('Mutation')))
     code(
       `export type Mutation$Variables<_$SelectionSet> = any // Temporarily any - will be replaced with new analysis system`,
     )
+    code()
   }
 
   return {

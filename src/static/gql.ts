@@ -73,9 +73,8 @@ export type ParseGraphQLString<
  *
  * This utility:
  * 1. Extracts schema and arguments map from the context's GlobalRegistry
- * 2. Extracts scalar registry and type hooks from the context
- * 3. Uses `InferOperations` to infer result and variable types for each operation
- * 4. Wraps the result in `TypedFullDocument.FromObject` for use with document senders
+ * 2. Uses `InferOperations` to infer result and variable types for each operation
+ * 3. Wraps the result in `TypedFullDocument.FromObject` for use with document senders
  *
  * @typeParam $Context - The client context containing schema and configuration
  * @typeParam $Document - The document builder object to parse
@@ -95,14 +94,7 @@ export type ParseGraphQLObject<
     $Document,
     GlobalRegistry.ForContext<$Context>['schema'],
     GlobalRegistry.ForContext<$Context>['argumentsMap'],
-    {
-      typeHookRequestResultDataTypes: $Context extends { typeHookRequestResultDataTypes: infer $Types }
-        ? $Types
-        : never
-      scalars: $Context extends { scalars: { current: { registry: infer $Registry } } }
-        ? $Registry
-        : never
-    }
+    $Context
   >
 >
 
