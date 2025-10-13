@@ -58,6 +58,50 @@ features:
     icon: 🎭
 ---
 
+::: warning Pre-Release Software
+Graffle is [still in development](https://github.com/graffle-js/graffle/discussions/1163). Install with `npm install graffle@next graphql` to use the latest pre-release version.
+:::
+
+## Quick Start
+
+```ts twoslash
+import { Graffle } from 'graffle'
+
+const graffle = Graffle
+  .create()
+  .transport({ url: 'https://countries.trevorblades.com/graphql' })
+
+const data = await graffle.gql`
+  query {
+    countries(filter: { name: { in: ["Canada", "Germany", "Japan"] } }) {
+      name
+      capital
+      emoji
+    }
+  }
+`.send()
+
+console.log(data)
+//          ^?
+```
+
+## Why Choose Graffle?
+
+Graffle combines the **simplicity of graphql-request** with **powerful type safety** and **extensibility**.
+
+**Choose Graffle if you want:**
+
+- **Full Type Safety** - Complete type inference for GraphQL documents and results, with optional Document Builder for TypeScript-native query construction
+- **Flexibility** - Start simple with raw GraphQL strings, progressively adopt type-safe features as needed
+- **Extensibility** - Powerful extension system for OpenTelemetry, schema errors, custom scalars, and more
+- **Multi-Transport** - Execute against HTTP APIs or in-memory schemas with the same interface
+
+**Consider UI-specialized clients if:**
+
+- You're building a React/Vue/Svelte app and want deep framework integration with hooks, suspense, and state management ([Apollo Client](https://www.apollographql.com/docs/react/), [Urql](https://commerce.nearform.com/open-source/urql/), or [Relay](https://relay.dev/))
+
+[Read the detailed comparison →](/guides/appendix/comparison)
+
 <script setup>
 import { VPTeamMembers } from 'vitepress/theme'
 

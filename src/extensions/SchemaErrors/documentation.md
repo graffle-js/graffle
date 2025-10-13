@@ -9,11 +9,11 @@ This extension requires generation and also itself extends the generator. You mu
 ```ts
 // graffle.config.ts
 
-import { SchemaErrors } from 'graffle/extensions/schema-errors/generator'
+import { SchemaErrors } from 'graffle/extensions/schema-errors/gentime'
 import { Generator } from 'graffle/generator'
 
 export default Generator
-  .create()
+  .configure()
   .use(SchemaErrors())
 ```
 
@@ -22,7 +22,7 @@ export default Generator
 import { Graffle } from 'graffle'
 import { SchemaErrors } from 'graffle/extensions/schema-errors'
 
-const graffle = Graffle.create().use(SchemaErrors())
+const graffle = Graffle.create().use(SchemaErrors)
 ```
 
 ## Configuration
@@ -37,7 +37,7 @@ By default all objects whose name begin with `Error` will be considered to be "e
 
 ```ts
 // graffle.config.ts
-import { SchemaErrors } from 'graffle/extensions/schema-errors/generator'
+import { SchemaErrors } from 'graffle/extensions/schema-errors/gentime'
 import { Generator } from 'graffle/generator'
 
 export default Generator

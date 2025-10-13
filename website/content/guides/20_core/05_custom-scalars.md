@@ -52,7 +52,7 @@ You can give the Graffle generator access to your scalar definitions. This is sl
    // @filename: scalars.ts
    import { Graffle } from 'graffle'
 
-   export const Date = Graffle.Scalar.create(`Date`, {
+   export const Date = Graffle.Scalars.create(`Date`, {
      decode: (value) => new globalThis.Date(value),
      encode: (value) => value.toISOString(),
    })

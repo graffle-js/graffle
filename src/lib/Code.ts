@@ -544,16 +544,661 @@ export namespace Code {
    * @param content - User-provided text (e.g., GraphQL descriptions)
    * @returns Escaped content safe for JSDoc
    */
-  export const escapeJSDocContent = (content: string | null): string | null => {
-    if (content === null) return null
+  export const escapeJSDocContent = (content: string | null | undefined): string | null => {
+    if (content === null || content === undefined) return null
 
     return content
       // Escape */ to prevent closing the JSDoc comment
       .replace(/\*\//g, '* /')
       // Escape @ at line start to prevent unintended JSDoc tags
       // Only escape if followed by common tag names
-      .replace(/^@(param|returns|deprecated|see|example|link|remarks|throws|since|alpha|beta|public|private|internal)/gm, '\\@$1')
+      .replace(
+        /^@(param|returns|deprecated|see|example|link|remarks|throws|since|alpha|beta|public|private|internal)/gm,
+        '\\@$1',
+      )
   }
+
+  /**
+   * Branded type for content marked as safe for JSDoc injection.
+   * Create with {@link jsDocRaw}.
+   */
+  export interface JSDocRaw {
+    readonly __jsDocSafe: true
+    readonly content: string
+  }
+
+  /**
+   * Mark content as safe for JSDoc (already escaped or intentionally raw).
+   *
+   * Use this for JSDoc tags, links, and other special syntax that should NOT be escaped.
+   *
+   * @example
+   * ```ts
+   * // Link will not be escaped
+   * const link = Code.jsDocRaw(`{@link $Schema.${typeName}}`)
+   * const doc = Code.jsdoc`Type: ${link}`
+   * ```
+   */
+  export const jsDocRaw = (content: string): JSDocRaw => ({
+    __jsDocSafe: true as const,
+    content,
+  })
+
+  /**
+   * Wrap value in markdown inline code (backticks).
+   * Returns JSDocRaw so it won't be escaped in templates or tables.
+   *
+   * @example
+   * ```ts
+   * doc.table({
+   *   'GraphQL Type': Code.markdownCode(arg.type.toString()),
+   *   'Path': Code.markdownCode(`${parentType}.${field.name}`)
+   * })
+   * ```
+   */
+  export const markdownCode = (value: string): JSDocRaw => jsDocRaw(`\`${value}\``)
+
+  /**
+   * Create a markdown inline link.
+   * Returns JSDocRaw so it won't be escaped in templates or tables.
+   *
+   * @example
+   * ```ts
+   * doc.table({
+   *   'Type': Code.markdownLink(`$Schema.${typeName}`, typeName)
+   * })
+   * ```
+   */
+  export const markdownLink = (url: string, text?: string): JSDocRaw =>
+    jsDocRaw(text ? `[${text}](${url})` : `[${url}](${url})`)
+
+  /**
+   * Generate a markdown table from key-value pairs.
+   * Automatically filters out undefined/null values.
+   *
+   * Returns plain string (not JSDocRaw) - use within TSDoc() or doc builder.
+   *
+   * @example
+   * ```ts
+   * const table = Code.markdownTable({
+   *   'Kind': '{@link ...}',
+   *   'Fields': '10',
+   *   'Optional': undefined  // filtered out
+   * })
+   * ```
+   */
+  export const markdownTable = (rows: Record<string, string | undefined | null>): string => {
+    const entries = Object.entries(rows).filter(([_, value]) => value !== undefined && value !== null)
+    if (entries.length === 0) return ''
+
+    const lines: string[] = []
+    lines.push(`| | |`)
+    lines.push(`| - | - |`)
+    for (const [key, value] of entries) {
+      lines.push(`| **${key}** | ${value} |`)
+    }
+    return lines.join('\n')
+  }
+
+  /**
+   * Structured JSDoc tag helpers.
+   *
+   * These helpers generate properly formatted JSDoc tags with automatic escaping.
+   * All helpers return `JSDocRaw` (safe for injection) or `null` for graceful handling.
+   *
+   * @example
+   * ```ts
+   * Code.jsdoc`
+   *   ${description}
+   *   ${Code.jsDocTag.deprecated(reason)}
+   *   ${Code.jsDocTag.see('https://example.com', 'Documentation')}
+   * `
+   * ```
+   */
+  export namespace jsDocTag {
+    /**
+     * Generate `@deprecated` tag with escaped reason.
+     * Returns null if reason is null/undefined for graceful template handling.
+     */
+    export const deprecated = (reason: string | null | undefined): JSDocRaw | null => {
+      if (!reason) return null
+      return jsDocRaw(`@deprecated ${escapeJSDocContent(reason)}`)
+    }
+
+    /**
+     * Generate `@see` tag with link.
+     * Optionally includes display text.
+     */
+    export const see = (url: string, text?: string): JSDocRaw => {
+      return jsDocRaw(text ? `@see {@link ${url} | ${text}}` : `@see {@link ${url}}`)
+    }
+
+    /**
+     * Generate inline `{@link}` reference (not a block tag).
+     * Use for inline documentation links.
+     */
+    export const link = (url: string, text?: string): JSDocRaw => {
+      return jsDocRaw(text ? `{@link ${url} | ${text}}` : `{@link ${url}}`)
+    }
+
+    /**
+     * Generate `@example` tag with code block.
+     * Automatically wraps code in markdown code fence.
+     */
+    export const example = (code: string, lang: string = 'ts'): JSDocRaw => {
+      return jsDocRaw(`@example\n\`\`\`${lang}\n${code}\n\`\`\``)
+    }
+
+    /**
+     * Generate `@remarks` tag with escaped content.
+     * Returns null if content is null/undefined.
+     */
+    export const remarks = (content: string | null | undefined): JSDocRaw | null => {
+      if (!content) return null
+      return jsDocRaw(`@remarks\n${escapeJSDocContent(content)}`)
+    }
+
+    /**
+     * Generate `@param` tag with escaped description.
+     */
+    export const param = (name: string, description: string): JSDocRaw => {
+      return jsDocRaw(`@param ${name} - ${escapeJSDocContent(description)}`)
+    }
+
+    /**
+     * Generate `@returns` tag with escaped description.
+     */
+    export const returns = (description: string): JSDocRaw => {
+      return jsDocRaw(`@returns ${escapeJSDocContent(description)}`)
+    }
+  }
+
+  /**
+   * JSDoc builder interface for imperative JSDoc construction.
+   *
+   * Provides a fluent API for building JSDoc with conditionals, loops, and tag helpers.
+   */
+  export interface JsDocBuilder {
+    /**
+     * Add a line to the JSDoc. Automatically escapes user content.
+     * Use empty template for blank lines: `doc``\``
+     */
+    (strings: TemplateStringsArray, ...values: Array<string | number | JSDocRaw | null | undefined>): JsDocBuilder
+
+    /**
+     * Add content with auto-escaping. Skips if null/undefined.
+     * Perfect for chaining with optional content.
+     * @example
+     * ```ts
+     * doc
+     *   .add(field.description)  // skips if null/undefined
+     *   .add('# Info')
+     * ```
+     */
+    add(content: string | null | undefined): JsDocBuilder
+
+    /**
+     * Add raw content without escaping. Skips if null/undefined.
+     * Use for pre-escaped content or JSDoc syntax.
+     * @example
+     * ```ts
+     * doc.addRaw(sdlSignature)  // skips if null/undefined
+     * ```
+     */
+    addRaw(content: string | null | undefined): JsDocBuilder
+
+    /**
+     * Add a blank line.
+     * @example
+     * ```ts
+     * doc
+     *   .add('First paragraph')
+     *   .blank()
+     *   .add('Second paragraph')
+     * ```
+     */
+    blank(): JsDocBuilder
+
+    /**
+     * Add raw content without escaping (already safe JSDocRaw content).
+     * Returns builder for chaining.
+     * @deprecated Use `.addRaw()` instead for consistent API
+     */
+    raw(content: string): JsDocBuilder
+
+    /**
+     * Add a markdown table from key-value pairs.
+     * Automatically filters out undefined/null/empty-array values.
+     *
+     * **Value handling:**
+     * - JSDocRaw values (from Code.markdownCode(), Code.jsdoc.tag.link(), etc.): Used directly, already safe
+     * - Plain strings: Automatically escaped for JSDoc safety
+     * - Arrays: Items joined with `, ` (each item handled by type)
+     * - Empty arrays: Treated as undefined (filtered out)
+     *
+     * Returns builder for chaining.
+     *
+     * @example
+     * ```ts
+     * doc.table({
+     *   'GraphQL Type': Code.markdownCode(arg.type.toString()),
+     *   'Parent': Code.jsdoc.tag.link(`$Schema.${parentType.name}`),
+     *   'Implements': interfaces.map(i => Code.jsdoc.tag.link(`$Schema.${i.name}`)),  // auto-joined
+     *   'Description': userDescription  // auto-escaped
+     * })
+     * ```
+     */
+    table(rows: Record<string, string | JSDocRaw | Array<string | JSDocRaw> | undefined | null>): JsDocBuilder
+
+    /**
+     * Add a markdown code block with language syntax highlighting.
+     * Skips if content is null/undefined.
+     * @example
+     * ```ts
+     * doc.codeblock('graphql', `
+     *   type User {
+     *     id: ID!
+     *   }
+     * `)
+     * ```
+     */
+    codeblock(lang: string, content: string | null | undefined): JsDocBuilder
+
+    /**
+     * Add `@deprecated` tag with escaped reason.
+     * Returns builder for chaining. Skips if reason is null/undefined.
+     */
+    $deprecated(reason: string | null | undefined): JsDocBuilder
+
+    /**
+     * Add `@example` tag with code block.
+     *
+     * **Two modes:**
+     * - Template mode (2 params): Returns template function for code content
+     * - Direct mode (3 params): Accepts code string directly and returns builder
+     *
+     * @example
+     * ```ts
+     * // Template mode
+     * doc.$example('Basic usage', 'ts')`
+     *   const result = await api.query()
+     * `
+     *
+     * // Direct mode
+     * const code = 'const x = 1'
+     * doc.$example('Basic usage', 'ts', code)
+     * ```
+     */
+    $example(label?: string, lang?: string): (strings: TemplateStringsArray, ...values: any[]) => JsDocBuilder
+    $example(label: string | undefined, lang: string, code: string): JsDocBuilder
+
+    /**
+     * Add `@see` tag with link.
+     * Returns builder for chaining.
+     */
+    $see(url: string, text?: string): JsDocBuilder
+
+    /**
+     * Generate inline `{@link}` reference for embedding in templates.
+     * Returns JSDocRaw (not the builder).
+     */
+    $link(url: string, text?: string): JSDocRaw
+
+    /**
+     * Add `@remarks` tag with content from template literal.
+     * Returns builder for chaining. Skips if content is empty.
+     */
+    $remarks(strings: TemplateStringsArray, ...values: any[]): JsDocBuilder
+
+    /**
+     * Build the final JSDoc string with whitespace normalization.
+     */
+    build(): string
+  }
+
+  /**
+   * JSDoc template function type with builder property.
+   */
+  export interface JsDocTemplate {
+    /**
+     * Tagged template for building JSDoc content with automatic escaping.
+     *
+     * By default, interpolated values are escaped to prevent JSDoc injection.
+     * Use {@link jsDocRaw} to inject pre-escaped or intentionally raw content.
+     *
+     * @example
+     * ```ts
+     * // User content is automatically escaped
+     * const doc = Code.jsdoc`
+     *   ${field.description}
+     *
+     *   @deprecated ${field.deprecationReason}
+     * `
+     *
+     * // Use jsDocRaw for links and tags
+     * const link = Code.jsDocRaw(`{@link $Schema.User}`)
+     * const doc = Code.jsdoc`
+     *   Field type: ${link}
+     *   Description: ${field.description}
+     * `
+     * ```
+     */
+    (strings: TemplateStringsArray, ...values: Array<string | number | JSDocRaw | null | undefined>): string
+
+    /**
+     * Create a new JSDoc builder for imperative construction.
+     * Perfect for JSDoc generation with conditionals, loops, and complex logic.
+     */
+    builder: () => JsDocBuilder
+
+    /**
+     * Create a JSDoc generator function from a builder callback.
+     * Automatically calls `.build()` and returns the result.
+     *
+     * @example
+     * ```ts
+     * export const getUnionDoc = Code.jsdoc.factory<[type: Grafaid.Schema.UnionType]>((doc, type) => {
+     *   const members = type.getTypes()
+     *   const unionLink = Code.jsdoc.tag.link('...', 'Union')
+     *
+     *   doc`Selection set for ${unionLink}.`
+     *   doc``
+     *   doc.add(type.description)
+     *   doc``
+     *   doc.table({ 'Members': `${members.length}` })
+     * })
+     *
+     * // Usage: getUnionDoc(type) -> string
+     * ```
+     */
+    factory: <$Args extends any[]>(fn: (doc: JsDocBuilder, ...args: $Args) => void) => (...args: $Args) => string
+
+    /**
+     * JSDoc tag helpers for generating properly formatted tags.
+     */
+    tag: typeof jsDocTag
+  }
+
+  /**
+   * Create a new JSDoc builder for imperative construction.
+   *
+   * Perfect for JSDoc generation with conditionals, loops, and complex logic.
+   *
+   * @example
+   * ```ts
+   * const doc = Code.jsdoc.builder()
+   *
+   * doc`Access to ${typeLink} root methods.`
+   * doc``  // empty line
+   *
+   * if (showExample) {
+   *   doc.$example('Basic usage', 'ts')`
+   *     const result = await api.query()
+   *   `
+   * }
+   *
+   * doc.$deprecated`Use newMethod() instead`
+   *
+   * return doc.build()
+   * ```
+   */
+  const builderFactory = (): JsDocBuilder => {
+    const lines: string[] = []
+
+    const addLine = (content: string) => {
+      lines.push(content)
+    }
+
+    // Process template with escaping (same logic as jsdoc template)
+    const processTemplate = (
+      strings: TemplateStringsArray,
+      values: Array<string | number | JSDocRaw | null | undefined>,
+    ): string => {
+      let result = ''
+      for (let i = 0; i < strings.length; i++) {
+        result += strings[i]
+        if (i < values.length) {
+          const value = values[i]
+          if (value === null || value === undefined) {
+            // Skip nullish values
+          } else if (typeof value === 'object' && '__jsDocSafe' in value) {
+            // Already safe - inject directly
+            result += value.content
+          } else {
+            // Escape user content
+            result += escapeJSDocContent(String(value)) ?? ''
+          }
+        }
+      }
+      return result
+    }
+
+    // Main template function
+    const builderFn = (
+      strings: TemplateStringsArray,
+      ...values: Array<string | number | JSDocRaw | null | undefined>
+    ): JsDocBuilder => {
+      const content = processTemplate(strings, values)
+      addLine(content)
+      return builderFn
+    }
+
+    builderFn.add = (content: string | null | undefined) => {
+      if (content !== null && content !== undefined) {
+        const escaped = escapeJSDocContent(content)
+        if (escaped !== null) {
+          addLine(escaped)
+        }
+      }
+      return builderFn
+    }
+
+    builderFn.addRaw = (content: string | null | undefined) => {
+      if (content !== null && content !== undefined) {
+        addLine(content)
+      }
+      return builderFn
+    }
+
+    builderFn.blank = () => {
+      addLine('')
+      return builderFn
+    }
+
+    builderFn.raw = (content: string) => {
+      addLine(content)
+      return builderFn
+    }
+
+    builderFn.table = (rows: Record<string, string | JSDocRaw | Array<string | JSDocRaw> | undefined | null>) => {
+      const entries = Object.entries(rows).filter(
+        (entry): entry is [string, string | JSDocRaw | Array<string | JSDocRaw>] => {
+          const value = entry[1]
+          // Filter out undefined, null, and empty arrays
+          return value !== undefined && value !== null && !(Array.isArray(value) && value.length === 0)
+        },
+      )
+      if (entries.length === 0) return builderFn
+
+      addLine(`| | |`)
+      addLine(`| - | - |`)
+      for (const [key, value] of entries) {
+        let valueStr: string
+
+        if (Array.isArray(value)) {
+          // Handle array: process each item and join with comma-space
+          valueStr = value.map(item => {
+            if (typeof item === 'object' && '__jsDocSafe' in item) {
+              return item.content
+            } else {
+              return escapeJSDocContent(item) ?? ''
+            }
+          }).join(', ')
+        } else if (typeof value === 'object' && '__jsDocSafe' in value) {
+          // Handle JSDocRaw: use content directly (already safe)
+          valueStr = value.content
+        } else {
+          // Handle plain string: auto-escape for safety
+          valueStr = escapeJSDocContent(value) ?? ''
+        }
+
+        addLine(`| **${key}** | ${valueStr} |`)
+      }
+      return builderFn
+    }
+
+    builderFn.codeblock = (lang: string, content: string | null | undefined) => {
+      if (content !== null && content !== undefined && content.trim()) {
+        addLine(`\`\`\`${lang}`)
+        addLine(content)
+        addLine(`\`\`\``)
+      }
+      return builderFn
+    }
+
+    // Attach tag helper methods
+    builderFn.$deprecated = (reason: string | null | undefined) => {
+      if (reason) {
+        addLine(`@deprecated ${escapeJSDocContent(reason)}`)
+      }
+      return builderFn
+    }
+
+    builderFn.$example = ((label?: string, lang?: string, code?: string): any => {
+      // Direct mode: 3 params with code string
+      if (code !== undefined && typeof code === 'string') {
+        addLine(label ? `@example ${label}` : `@example`)
+        addLine(`\`\`\`${lang ?? 'ts'}`)
+        code.split('\n').forEach(line => addLine(line))
+        addLine(`\`\`\``)
+        return builderFn
+      }
+
+      // Template mode: return template function
+      return (strings: TemplateStringsArray, ...values: any[]) => {
+        const codeContent = processTemplate(strings as any, values)
+        addLine(label ? `@example ${label}` : `@example`)
+        addLine(`\`\`\`${lang ?? 'ts'}`)
+        codeContent.split('\n').forEach(line => addLine(line))
+        addLine(`\`\`\``)
+        return builderFn
+      }
+    }) as JsDocBuilder['$example']
+
+    builderFn.$see = (url: string, text?: string) => {
+      addLine(text ? `@see {@link ${url} | ${text}}` : `@see {@link ${url}}`)
+      return builderFn
+    }
+
+    builderFn.$link = (url: string, text?: string) => {
+      return jsDocRaw(text ? `{@link ${url} | ${text}}` : `{@link ${url}}`)
+    }
+
+    builderFn.$remarks = (strings: TemplateStringsArray, ...values: any[]) => {
+      const content = processTemplate(strings as any, values)
+      if (content.trim()) {
+        addLine(`@remarks`)
+        addLine(content)
+      }
+      return builderFn
+    }
+
+    builderFn.build = () => {
+      // Apply same whitespace cleanup as jsdoc template
+      const trimmedLines: string[] = []
+      let lastWasEmpty = false
+
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i]!.trimStart()
+        const isEmpty = line === ''
+
+        // Skip leading empty lines
+        if (isEmpty && trimmedLines.length === 0) continue
+
+        // Collapse consecutive empty lines into one
+        if (isEmpty && lastWasEmpty) continue
+
+        trimmedLines.push(line)
+        lastWasEmpty = isEmpty
+      }
+
+      // Remove trailing empty lines
+      while (trimmedLines.length > 0 && trimmedLines[trimmedLines.length - 1] === '') {
+        trimmedLines.pop()
+      }
+
+      return trimmedLines.join('\n')
+    }
+
+    return builderFn as JsDocBuilder
+  }
+
+  /**
+   * Tagged template for building JSDoc content with automatic escaping.
+   * Also provides `.builder()` for imperative JSDoc construction and `.tag` for tag helpers.
+   */
+  export const jsdoc = (() => {
+    const jsDocTemplateFn = (
+      strings: TemplateStringsArray,
+      ...values: Array<string | number | JSDocRaw | null | undefined>
+    ): string => {
+      let result = ''
+      for (let i = 0; i < strings.length; i++) {
+        result += strings[i]
+        if (i < values.length) {
+          const value = values[i]
+          if (value === null || value === undefined) {
+            // Skip nullish values
+          } else if (typeof value === 'object' && '__jsDocSafe' in value) {
+            // Already safe - inject directly
+            result += value.content
+          } else {
+            // Escape user content
+            result += escapeJSDocContent(String(value)) ?? ''
+          }
+        }
+      }
+
+      // Clean up: remove leading/trailing whitespace lines and trim each line
+      const lines = result.split('\n')
+      const trimmedLines: string[] = []
+      let lastWasEmpty = false
+
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i]!.trimStart()
+        const isEmpty = line === ''
+
+        // Skip leading empty lines
+        if (isEmpty && trimmedLines.length === 0) continue
+
+        // Collapse consecutive empty lines into one
+        if (isEmpty && lastWasEmpty) continue
+
+        trimmedLines.push(line)
+        lastWasEmpty = isEmpty
+      }
+
+      // Remove trailing empty lines
+      while (trimmedLines.length > 0 && trimmedLines[trimmedLines.length - 1] === '') {
+        trimmedLines.pop()
+      }
+
+      return trimmedLines.join('\n')
+    }
+
+    // Attach builder and tag namespace as properties
+    jsDocTemplateFn.builder = builderFactory
+    jsDocTemplateFn.tag = jsDocTag
+    jsDocTemplateFn.factory = <$Args extends any[]>(fn: (doc: JsDocBuilder, ...args: $Args) => void) => {
+      return (...args: $Args): string => {
+        const doc = builderFactory()
+        fn(doc, ...args)
+        return doc.build()
+      }
+    }
+
+    return jsDocTemplateFn as JsDocTemplate
+  })()
 
   export const group = (...content: string[]) => content.join(`\n`)
   export const commentSectionTitle = (title: string) => {

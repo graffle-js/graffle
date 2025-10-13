@@ -229,7 +229,6 @@ export interface BuilderMethodsRoot<$Context extends $$Utilities.Context> {
    * \`\`\`ts
    * const user = await graffle.query.user({ id: true, name: true })
    * \`\`\`
-   *
    * @example Multiple fields with $batch
    * \`\`\`ts
    * const data = await graffle.query.$batch({

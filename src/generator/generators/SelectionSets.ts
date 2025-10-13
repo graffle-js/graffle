@@ -12,6 +12,7 @@ import {
   getArgumentDoc,
   getEnumTypeSelectionSetDoc,
   getExpandedTypeDoc,
+  getFragmentInlineFieldDoc,
   getInlineFragmentDoc,
   getInputObjectTypeSelectionSetDoc,
   getInterfaceTypeSelectionSetDoc,
@@ -20,6 +21,10 @@ import {
   getOperationVariablesDoc,
   getOutputFieldSelectionSetDoc,
   getRootTypeDoc,
+  getScalarBaseDoc,
+  getScalarNonNullDoc,
+  getScalarNullableDoc,
+  getTypenameFieldDoc,
   getUnionTypeSelectionSetDoc,
 } from '../helpers/jsdoc.js'
 import type { GeneratedModule } from '../helpers/moduleGenerator.js'
@@ -199,12 +204,7 @@ const generateScalarsModule = (config: Config, kindMap: Grafaid.Schema.KindMap['
   scalarsCode()
 
   // Generate JSDoc for $Scalar base utility
-  scalarsCode(Code.TSDoc(`
-    Raw scalar type with context-aware custom scalar resolution.
-
-    This is the base decoded scalar type without any wrappers.
-    Use \`Nullable\` or \`NonNull\` wrappers, or the pre-generated scalar variants.
-  `))
+  scalarsCode(Code.TSDoc(getScalarBaseDoc()))
   scalarsCode(`export type $Scalar<`)
   scalarsCode(`  $ScalarName extends string,`)
   scalarsCode(
@@ -219,19 +219,11 @@ const generateScalarsModule = (config: Config, kindMap: Grafaid.Schema.KindMap['
   scalarsCode()
 
   // Generate wrapper utilities
-  scalarsCode(Code.TSDoc(`
-    Wraps a type for nullable input fields.
-
-    Adds variable marker and allows null/undefined values.
-  `))
+  scalarsCode(Code.TSDoc(getScalarNullableDoc()))
   scalarsCode(`export type Nullable<$Type> = ${$.$$Utilities}.DocumentBuilderKit.Var.Maybe<$Type | null | undefined>`)
   scalarsCode()
 
-  scalarsCode(Code.TSDoc(`
-    Wraps a type for non-null input fields.
-
-    Adds variable marker but does not allow null (undefined still allowed for optionality).
-  `))
+  scalarsCode(Code.TSDoc(getScalarNonNullDoc()))
   scalarsCode(`export type NonNull<$Type> = ${$.$$Utilities}.DocumentBuilderKit.Var.Maybe<$Type>`)
   scalarsCode()
 
@@ -940,14 +932,7 @@ namespace H {
   export const fragmentInlineField = (
     type: Grafaid.Schema.ObjectType | Grafaid.Schema.UnionType | Grafaid.Schema.InterfaceType,
   ) => {
-    const doc = Code.TSDoc(`
-      Inline fragments for field groups.
-
-      Generally a niche feature. This can be useful for example to apply an \`@include\` directive to a subset of the
-      selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
-
-      @see https://spec.graphql.org/draft/#sec-Inline-Fragments
-    `)
+    const doc = Code.TSDoc(getFragmentInlineFieldDoc())
 
     return `${doc}\n___?: $FragmentInline<${i._$Context}> | $FragmentInline<${i._$Context}>[]`
   }
@@ -968,21 +953,6 @@ namespace H {
   }
 
   const __typenameDoc = (kind: 'union' | 'interface' | 'object') => {
-    const see = `@see https://graphql.org/learn/queries/#meta-fields`
-    if (kind === `object`) {
-      return Code.TSDoc(`
-        A meta field. Is the name of the type being selected.
-
-        ${see}
-      `)
-    }
-
-    const relation = kind === `interface` ? `implementor` : `member`
-    return Code.TSDoc(`
-       A meta field. Is the name of the type being selected. Since this is a ${kind} type and thus polymorphic,
-       the name is one of the ${relation} type names, whichever is ultimately returned at runtime.
-
-       ${see}
-    `)
+    return Code.TSDoc(getTypenameFieldDoc(kind))
   }
 }

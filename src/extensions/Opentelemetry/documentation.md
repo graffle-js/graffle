@@ -23,7 +23,7 @@ const graffle = Graffle.create().use(OpenTelemetry())
 
 ## Span Structure
 
-Each request executed has a span created named `request` under a tracer called (by default) `graffle`. Within the request there is a span for each [hook](/todo).
+Each request executed has a span created named `request` under a tracer called (by default) `graffle`. Within the request there is a span for each [hook](../../../website/content/guides/20_core/12_request-anyware.md).
 
 ```
 |- request

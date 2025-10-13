@@ -56,11 +56,11 @@ export const renderDocumentation = (config: Config, node: Grafaid.Schema.Describ
   return Code.TSDoc(getTsDocContents(config, node))
 }
 export const getTsDocContents = (config: Config, node: Grafaid.Schema.DescribableTypes) => {
-  const generalDescription = node.description
+  const generalDescription = Code.escapeJSDocContent(node.description)
     ?? (config.options.TSDoc.noDocPolicy === `message` ? defaultDescription(node) : null)
 
   const deprecationDescription = Grafaid.Schema.isDeprecatableNode(node) && node.deprecationReason
-    ? `@deprecated ${node.deprecationReason}`
+    ? `@deprecated ${Code.escapeJSDocContent(node.deprecationReason)}`
     : null
 
   const enumMemberDescriptions: string[] = Grafaid.Schema.isEnumType(node)
@@ -68,13 +68,12 @@ export const getTsDocContents = (config: Config, node: Grafaid.Schema.Describabl
       .getValues()
       .map((_) => {
         const deprecationDescription = _.deprecationReason
-          ? `(DEPRECATED: ${_.deprecationReason})`
+          ? `(DEPRECATED: ${Code.escapeJSDocContent(_.deprecationReason)})`
           : null
-        const generalDescription = _.description
-          ? _.description
-          : config.options.TSDoc.noDocPolicy === `message`
-          ? `Missing description.`
-          : null
+        const generalDescription = Code.escapeJSDocContent(_.description)
+          ?? (config.options.TSDoc.noDocPolicy === `message`
+            ? `Missing description.`
+            : null)
         if (!generalDescription && !deprecationDescription) return null
         const content = [generalDescription, deprecationDescription]
           .filter((_) => _ !== null)
