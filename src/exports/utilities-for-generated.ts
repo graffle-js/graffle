@@ -17,7 +17,7 @@ export type gql<
   $Introspection extends Docpar.String.IntrospectionLikeInput,
   $Schema extends Schema,
   $DocumentObjectConstraint,
-  $ArgumentsMap extends SchemaDrivenDataMap
+  $ArgumentsMap extends SchemaDrivenDataMap,
 > = Docpar.gql<
   $Introspection,
   $Schema,

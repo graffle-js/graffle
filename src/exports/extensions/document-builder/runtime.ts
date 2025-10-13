@@ -12,7 +12,7 @@ export type InferOperations<
   $Document,
   $Schema extends Schema,
   $ArgumentsMap extends SchemaDrivenDataMap,
-  $Context
+  $Context,
 > = Docpar.InferOperations<
   $Document,
   $Schema,
@@ -21,6 +21,6 @@ export type InferOperations<
 >
 export type StaticDocumentBuilder<
   $Config extends Docpar.Config,
-  $OperationType extends OperationTypeNode
+  $OperationType extends OperationTypeNode,
 > = Docpar.StaticDocumentBuilder<$Config, $OperationType>
 export { $ } from '../../../docpar/object/var/var.js'

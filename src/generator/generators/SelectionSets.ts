@@ -5,7 +5,7 @@ import { Grafaid } from '#lib/grafaid'
 import { Code } from '#src/lib/Code.js'
 import { analyzeArgsNullability } from '#src/lib/grafaid/schema/args.js'
 import { Obj, Str } from '@wollybeard/kit'
-import { DocumentBuilderKit } from '../../extensions/DocumentBuilder/$.js'
+import * as DocumentBuilderKit from '#src/docpar/object/$$.js'
 import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
 import {
