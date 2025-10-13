@@ -19,4 +19,8 @@ export * as Graffle from './graffle.js'
 // The inferred type of 'Date' cannot be named without a reference
 // to './node_modules/graffle/build/types/Schema/$$.js'.
 // This is likely not portable. A type annotation is necessary. (ts 2742)
-export * from '../types/Schema/$$.js'
+export { Scalar } from '../types/Schema/$$.js'
+// error TS2742: The inferred type of 'create' cannot be named without a reference to '.pnpm/@wollybeard+kit@0.78.3_@effect+platform@0.91.1_effect@3.17.14__effect@3.17.14/node_modules/@wollybeard/kit/prom'. This is likely not portable. A type annotation is necessary.
+// 44 export const create = $$Utilities.createConstructorWithContext(context)
+//                 ~~~~~~
+export * from '@wollybeard/kit/prom'
