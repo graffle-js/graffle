@@ -1,5 +1,6 @@
 import { Configurator as C } from '#src/lib/configurator/configurator.js'
 import type { Transports } from '../../transports/$.js'
+import type * as Helpers from './helpers.js'
 
 /**
  * @remarks This input extends base with properties that can be filled with exports from the generated client.
@@ -28,11 +29,11 @@ export type Preflight<
   $Context,
   $SuccessValue = true,
 > =
-  // @ts-expect-error context constraint missing to avoid TS compare depth limit
-  $Context['configuration']['check']['current']['preflight'] extends false
+  Helpers.IsPreflightDisabled<$Context> extends true
     ? $SuccessValue
-    // @ts-expect-error context constraint missing to avoid TS compare depth limit
-    : Preflight_<$Context['transports'], $SuccessValue>
+    : $Context extends { transports: infer $Transports extends Transports.ContextFragment['transports'] }
+      ? Preflight_<$Transports, $SuccessValue>
+      : $SuccessValue
 
 // dprint-ignore
 export type Preflight_<
