@@ -1,11 +1,10 @@
 export { DocumentBuilder } from '#src/extensions/DocumentBuilder/DocumentBuilder.js'
-export { Var } from '#src/extensions/DocumentBuilder/var/$.js'
-export {
-  type Config,
-  createGql,
-  createStaticRootType,
-  defaults as staticBuilderDefaults,
-  type InferOperations,
-  type StaticDocumentBuilder,
-} from '#src/static/gql.js'
-export { $ } from '../../../extensions/DocumentBuilder/var/$$.js'
+import { Docpar } from '#docpar'
+export { Var } from '#docpar/object/var/$.js'
+export const createGql = Docpar.createGql
+export const createStaticRootType = Docpar.createStaticRootType
+export const staticBuilderDefaults = Docpar.defaults
+export type Config = Docpar.Config
+export type InferOperations = Docpar.InferOperations
+export type StaticDocumentBuilder = Docpar.StaticDocumentBuilder
+export { $ } from '../../../docpar/object/var/$.js'

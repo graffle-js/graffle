@@ -3,10 +3,10 @@ import { isSymbol } from '#src/lib/prelude.js'
 import type { Schema } from '#src/types/Schema/$.js'
 import { print } from '@0no-co/graphql.web'
 import type { OperationTypeNode } from 'graphql'
-import { Select } from '../extensions/DocumentBuilder/Select/$.js'
-import type { Options } from '../extensions/DocumentBuilder/SelectGraphQLMapper/nodes/1_Document.js'
-import { toGraphQLDocument } from '../extensions/DocumentBuilder/SelectGraphQLMapper/nodes/1_Document.js'
-import { defaults as packageLevelDefaults } from '../extensions/DocumentBuilder/staticBuilderDefaults.js'
+import { Select } from './object/Select/$.js'
+import type { Options } from './object/SelectGraphQLMapper/nodes/1_Document.js'
+import { toGraphQLDocument } from './object/SelectGraphQLMapper/nodes/1_Document.js'
+import { defaults as packageLevelDefaults } from './object/staticBuilderDefaults.js'
 
 //
 //

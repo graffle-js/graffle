@@ -1,9 +1,8 @@
-import type { Docpar } from '#lib/docpar'
 import type { Grafaid } from '#lib/grafaid'
 import type { Context } from '#src/context/$.js'
 import type { Configuration } from '#src/context/fragments/configuration/$.js'
-import type { TypedFullDocument } from '#src/lib/grafaid/typed-full-document/$.js'
-import type { ParseGraphQLObject, ParseGraphQLString } from '#src/static/gql.js'
+import type { Docpar } from '#docpar'
+import type * as TypedFullDocument from '#src/docpar/typed-full-document.js'
 import type { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
 
 import type { DocumentNode } from '@0no-co/graphql.web'
@@ -42,8 +41,8 @@ export type GetSchemaInfo<$Context> = Configuration.Schema.Info<$Context>
  * looks for to identify gql-tada functions and determine which schema to use in multi-schema mode.
  */
 // dprint-ignore
-type TadaAPIFromContext<$Context> = Docpar.GraphQLTadaAPI<
-  Docpar.schemaOfSetup<{
+type TadaAPIFromContext<$Context> = Docpar.String.GraphQLTadaAPI<
+  Docpar.String.schemaOfSetup<{
     introspection: GlobalRegistry.ForContext<$Context>['tadaIntrospection']
     scalars: GlobalRegistry.ForContext<$Context>['schema']['scalarRegistry']['map']
   }>,
@@ -117,7 +116,7 @@ export interface GqlMethod<$Context extends Context.Context> {
                                                             UntypedSender<$Context> :
   $doc extends TypedFullDocument.TypedFullDocument      ? DocumentSender<$doc, $Context> :
   $doc extends string                                   ? HasGlobalRegistry<$Context> extends true
-                                                            ? DocumentSender<ParseGraphQLString<$Context, $doc>, $Context>
+                                                            ? DocumentSender<Docpar.ParseGraphQLString<$Context, $doc>, $Context>
                                                             : UntypedSender<$Context> :
   $doc extends Grafaid.Document.Typed.TypedDocumentLike ? DocumentSender<$doc, $Context> :
                                                           never
@@ -125,7 +124,7 @@ export interface GqlMethod<$Context extends Context.Context> {
   // Overload: Inline document builder object (must be last as it's least specific)
   <$Document extends DocumentObjectConstraint<$Context>>(
     document: $Document
-  ): DocumentSender<ParseGraphQLObject<$Context, $Document>, $Context>
+  ): DocumentSender<Docpar.ParseGraphQLObject<$Context, $Document>, $Context>
 
   /**
    * LSP detection property - identifies the schema name for multi-schema support.

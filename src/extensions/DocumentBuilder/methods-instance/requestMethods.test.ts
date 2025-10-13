@@ -4,7 +4,7 @@ import { test as testBase } from '#test/helpers'
 import { PossibleNoCustomScalars } from '#test/schema/possible/clientNoCustomScalars/$.js'
 import { db } from '#test/schema/possible/db.js'
 import { describe, expect, expectTypeOf } from 'vitest'
-import { TransportMemory } from '../../TransportMemory/TransportMemory.js'
+import { TransportMemory } from '#src/extensions/TransportMemory/TransportMemory.js'
 
 const createPossible = (schema: Grafaid.Schema.Schema) =>
   PossibleNoCustomScalars

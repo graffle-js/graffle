@@ -202,7 +202,7 @@
     "#lib/config-manager": "./build/lib/config-manager/$.js",
     "#lib/errors": "./build/lib/errors/$.js",
     "#lib/grafaid": "./build/lib/grafaid/$.js",
-    "#lib/docpar": "./build/lib/docpar/$.js",
+    "#docpar": "./build/docpar/$.js",
     "#lib/md-jsdoc": "./build/lib/md-jsdoc/$.js",
     "#lib/tex": "./build/lib/tex/$.js",
     "#lib/type-function": "./build/lib/type-function/$.js",

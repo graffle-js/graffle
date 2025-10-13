@@ -1,6 +1,6 @@
 import type { Grafaid } from '#lib/grafaid'
 import { Graffle } from '#src/exports/index.js'
-import { $ } from '#src/extensions/DocumentBuilder/var/var.js'
+import { $ } from '#src/docpar/object/var/var.js'
 import { Possible } from '#test/schema/possible/client/$.js'
 import { Ts } from '@wollybeard/kit'
 

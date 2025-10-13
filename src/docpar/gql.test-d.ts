@@ -1,5 +1,5 @@
-import { $ } from '#src/extensions/DocumentBuilder/var/var.js'
-import type { TypedFullDocument } from '#src/lib/grafaid/typed-full-document/$.js'
+import { $ } from '#src/docpar/object/var/var.js'
+import type { Docpar } from '#docpar'
 import { Possible } from '#test/schema/possible/client/$.js'
 import { Ts } from '@wollybeard/kit'
 import type { IsNever } from 'type-fest'
@@ -8,8 +8,8 @@ import type { IsNever } from 'type-fest'
 //                                   Single operation, no variables
 // ==================================================================================================
 
-type SingleOpNoVars = TypedFullDocument.SingleOperation<
-  TypedFullDocument.Operation<'myQuery', { date: Date | null }, {}>
+type SingleOpNoVars = Docpar.TypedFullDocument.SingleOperation<
+  Docpar.TypedFullDocument.Operation<'myQuery', { date: Date | null }, {}>
 >
 
 Ts.Test.exact<SingleOpNoVars>()(Possible.gql(`query myQuery { date }`))
@@ -19,8 +19,8 @@ Ts.Test.exact<SingleOpNoVars>()(Possible.gql({ query: { myQuery: { date: true } 
 //                                 Single operation, required variables
 // ==================================================================================================
 
-type SingleOpRequiredVars = TypedFullDocument.SingleOperation<
-  TypedFullDocument.Operation<'getById', { interfaceWithArgs: { id: string | null } | null }, { id: string }>
+type SingleOpRequiredVars = Docpar.TypedFullDocument.SingleOperation<
+  Docpar.TypedFullDocument.Operation<'getById', { interfaceWithArgs: { id: string | null } | null }, { id: string }>
 >
 
 Ts.Test.exact<SingleOpRequiredVars>()(Possible.gql(`query getById($id: ID!) { interfaceWithArgs(id: $id) { id } }`))
@@ -32,8 +32,8 @@ Ts.Test.exact<SingleOpRequiredVars>()(Possible.gql({ query: { getById: { interfa
 //                                 Single operation, optional variables
 // ==================================================================================================
 
-type SingleOpOptionalVars = TypedFullDocument.SingleOperation<
-  TypedFullDocument.Operation<'search', { stringWithArgs: string | null }, { string?: string | null | undefined }>
+type SingleOpOptionalVars = Docpar.TypedFullDocument.SingleOperation<
+  Docpar.TypedFullDocument.Operation<'search', { stringWithArgs: string | null }, { string?: string | null | undefined }>
 >
 
 Ts.Test.exact<SingleOpOptionalVars>()(
@@ -47,16 +47,16 @@ Ts.Test.exact<SingleOpOptionalVars>()(
 //                                   Anonymous operation (no name)
 // ==================================================================================================
 
-type DefaultOpNoVars = TypedFullDocument.SingleOperation<
-  TypedFullDocument.Operation<'default', { id: string | null }, {}>
+type DefaultOpNoVars = Docpar.TypedFullDocument.SingleOperation<
+  Docpar.TypedFullDocument.Operation<'default', { id: string | null }, {}>
 >
 
-type DefaultOpWithScalar = TypedFullDocument.SingleOperation<
-  TypedFullDocument.Operation<'default', { date: Date | null }, {}>
+type DefaultOpWithScalar = Docpar.TypedFullDocument.SingleOperation<
+  Docpar.TypedFullDocument.Operation<'default', { date: Date | null }, {}>
 >
 
-type DefaultOpOptionalVars = TypedFullDocument.SingleOperation<
-  TypedFullDocument.Operation<'default', { stringWithArgs: string | null }, { string?: string | null | undefined }>
+type DefaultOpOptionalVars = Docpar.TypedFullDocument.SingleOperation<
+  Docpar.TypedFullDocument.Operation<'default', { stringWithArgs: string | null }, { string?: string | null | undefined }>
 >
 
 // todo: use fixed test lib
@@ -76,9 +76,9 @@ Ts.Test.exact<DefaultOpOptionalVars>()(Possible.gql({ query: { default: { string
 //                                   Multiple operations, no variables
 // ==================================================================================================
 
-type MultiOpNoVars = TypedFullDocument.MultiOperation<{
-  getUser: TypedFullDocument.Operation<'getUser', { id: string | null }, {}>
-  addId: TypedFullDocument.Operation<'addId', { id: string | null }, {}>
+type MultiOpNoVars = Docpar.TypedFullDocument.MultiOperation<{
+  getUser: Docpar.TypedFullDocument.Operation<'getUser', { id: string | null }, {}>
+  addId: Docpar.TypedFullDocument.Operation<'addId', { id: string | null }, {}>
 }>
 
 Ts.Test.exact<MultiOpNoVars>()(Possible.gql(`
@@ -94,9 +94,9 @@ Ts.Test.exact<MultiOpNoVars>()(Possible.gql({
 //                                   Multiple operations with variables
 // ==================================================================================================
 
-type MultiOpWithVars = TypedFullDocument.MultiOperation<{
-  getById: TypedFullDocument.Operation<'getById', { interfaceWithArgs: { id: string | null } | null }, { id: string }>
-  setId: TypedFullDocument.Operation<'setId', { idNonNull: string }, {}>
+type MultiOpWithVars = Docpar.TypedFullDocument.MultiOperation<{
+  getById: Docpar.TypedFullDocument.Operation<'getById', { interfaceWithArgs: { id: string | null } | null }, { id: string }>
+  setId: Docpar.TypedFullDocument.Operation<'setId', { idNonNull: string }, {}>
 }>
 
 Ts.Test.exact<MultiOpWithVars>()(
