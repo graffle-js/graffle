@@ -1,11 +1,11 @@
 import type { Grafaid } from '#lib/grafaid'
 import { sendRequest } from '#src/client/send.js'
 import { type Context } from '#src/context/context.js'
+import { Select } from '#src/docpar/object/Select/$.js'
+import { SelectionSetGraphqlMapper } from '#src/docpar/object/SelectGraphQLMapper/$.js'
 import { getOperationDefinition } from '#src/lib/grafaid/document.js'
 import { isSymbol } from '#src/lib/prelude.js'
 import type { OperationTypeNode } from 'graphql'
-import { Select } from '#src/docpar/object/Select/$.js'
-import { SelectionSetGraphqlMapper } from '#src/docpar/object/SelectGraphQLMapper/$.js'
 
 export const createMethodDocument = (state: Context) => (document: Select.Document.DocumentObject) => {
   const documentNormalized = Select.Document.normalizeOrThrow(document)
