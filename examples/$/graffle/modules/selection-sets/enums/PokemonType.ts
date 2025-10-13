@@ -1,0 +1,16 @@
+/**
+ * The elemental type of a Pokemon.
+ *
+ * Members
+ * "bug" - Bug-type Pokemon are insects and arthropods.
+ * "electric" - Electric-type Pokemon can generate and control electricity.
+ * "fire" - Fire-type Pokemon can create and manipulate flames.
+ * "grass" - Grass-type Pokemon have plant-like characteristics.
+ * "water" - Water-type Pokemon live in or control water.
+ */
+export type PokemonType =
+  | 'bug'
+  | 'electric'
+  | 'fire'
+  | 'grass'
+  | 'water'

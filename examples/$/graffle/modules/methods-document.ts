@@ -1,6 +1,6 @@
 import type * as $$Utilities from 'graffle/utilities-for-generated'
 import type * as $$Schema from './schema/$.js'
-import type * as $$SelectionSets from './selection-sets.js'
+import type * as $$SelectionSets from './selection-sets/$.js'
 
 export interface Document<$Context> {
   <$Document>(

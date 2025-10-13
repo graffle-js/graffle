@@ -4,27 +4,27 @@ import { createGql } from 'graffle/extensions/document-builder'
 import type * as $$ArgumentsMap from './arguments-map.js'
 import { schemaDrivenDataMap as sddm } from './schema-driven-data-map.js'
 import type { Schema } from './schema/$.js'
-import type * as $$SelectionSets from './selection-sets.js'
+import type * as $$SelectionSets from './selection-sets/$.js'
 
 /**
  * Unified `gql` function that accepts either:
- * - A template string for gql-tada (type-only, runtime uses graphql parse)
+ * - A template string for GraphQL syntax with full type inference
  * - A document object for document builder
  *
- * @example Template string (gql-tada)
+ * @example GraphQL string syntax
  * ```ts
  * const doc = gql(`query { user { id } }`)
- * // Returns: TadaDocumentNode<{ user: { id: string } }, {}>
+ * // Returns: TypedFullDocument.SingleOperation<{ user: { id: string } }, {}>
  * ```
  *
- * @example Document object (document builder)
+ * @example Document object syntax
  * ```ts
  * const doc = gql({
  *   query: {
  *     getUser: { user: { id: true, name: true } }
  *   }
  * })
- * // Returns: TypedFullDocument with operation metadata
+ * // Returns: TypedFullDocument.SingleOperation with operation metadata
  * ```
  */
 export const gql = createGql<

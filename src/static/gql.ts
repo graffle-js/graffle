@@ -402,23 +402,23 @@ export type InferOperations<
 
 /**
  * Unified `gql` function that accepts either:
- * - A template string for gql-tada (type-only, runtime uses graphql parse)
+ * - A GraphQL string with full type inference
  * - A document object for document builder
  *
- * @example Template string (gql-tada)
+ * @example GraphQL string syntax
  * ```ts
  * const doc = gql(`query { user { id } }`)
- * // Returns: TadaDocumentNode<{ user: { id: string } }, {}>
+ * // Returns: TypedFullDocument.SingleOperation<{ user: { id: string } }, {}>
  * ```
  *
- * @example Document object (document builder)
+ * @example Document object syntax
  * ```ts
  * const doc = gql({
  *   query: {
  *     getUser: { user: { id: true, name: true } }
  *   }
  * })
- * // Returns: TypedFullDocument with operation metadata
+ * // Returns: TypedFullDocument.SingleOperation with operation metadata
  * ```
  */
 /**

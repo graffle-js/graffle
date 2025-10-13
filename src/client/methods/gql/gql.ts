@@ -1,7 +1,7 @@
 import type { Grafaid } from '#lib/grafaid'
 import type { Context } from '#src/context/$.js'
 import type { Configuration } from '#src/context/fragments/configuration/$.js'
-import type { GraphQLTadaAPI, schemaOfSetup, TadaDocumentNode } from '#src/lib/gql-tada/index.js'
+import type { GraphQLTadaAPI, schemaOfSetup } from '#src/lib/gql-tada/index.js'
 import type { TypedFullDocument } from '#src/lib/grafaid/typed-full-document/$.js'
 import type { ParseGraphQLObject, ParseGraphQLString } from '#src/static/gql.js'
 import type { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
@@ -119,7 +119,6 @@ export interface GqlMethod<$Context extends Context.Context> {
     $doc extends Grafaid.Document.Typed.String            ? DocumentSender<$doc, $Context> :
                                                             UntypedSender<$Context> :
   $doc extends TypedFullDocument.TypedFullDocument      ? DocumentSender<$doc, $Context> :
-  $doc extends TadaDocumentNode                         ? DocumentSender<$doc, $Context> :
   $doc extends string                                   ? HasGlobalRegistry<$Context> extends true
                                                             ? DocumentSender<ParseGraphQLString<$Context, $doc>, $Context>
                                                             : UntypedSender<$Context> :

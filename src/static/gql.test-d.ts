@@ -1,5 +1,4 @@
 import { $ } from '#src/extensions/DocumentBuilder/var/var.js'
-import type { TadaDocumentNode } from '#src/lib/gql-tada/index.js'
 import type { TypedFullDocument } from '#src/lib/grafaid/typed-full-document/$.js'
 import { Possible } from '#test/schema/possible/client/$.js'
 import { Ts } from '@wollybeard/kit'
@@ -12,15 +11,8 @@ type SingleOpNoVars = TypedFullDocument.SingleOperation<
   TypedFullDocument.Operation<'myQuery', { date: Date | null }, {}>
 >
 
-// String syntax
-Ts.Test.exact<SingleOpNoVars>()(
-  Possible.gql(`query myQuery { date }`),
-)
-
-// Object syntax
-Ts.Test.exact<SingleOpNoVars>()(
-  Possible.gql({ query: { myQuery: { date: true } } }),
-)
+Ts.Test.exact<SingleOpNoVars>()(Possible.gql(`query myQuery { date }`))
+Ts.Test.exact<SingleOpNoVars>()(Possible.gql({ query: { myQuery: { date: true } } }))
 
 // ==================================================================================================
 //                                 Single operation, required variables
@@ -30,14 +22,9 @@ type SingleOpRequiredVars = TypedFullDocument.SingleOperation<
   TypedFullDocument.Operation<'getById', { interfaceWithArgs: { id: string | null } | null }, { id: string }>
 >
 
-// String syntax
-Ts.Test.exact<SingleOpRequiredVars>()(
-  Possible.gql(`query getById($id: ID!) { interfaceWithArgs(id: $id) { id } }`),
-)
-
-// Object syntax
-Ts.Test.exact<SingleOpRequiredVars>()(
-  Possible.gql({ query: { getById: { interfaceWithArgs: { $: { id: $.required() }, id: true } } } }),
+Ts.Test.exact<SingleOpRequiredVars>()(Possible.gql(`query getById($id: ID!) { interfaceWithArgs(id: $id) { id } }`))
+// dprint-ignore
+Ts.Test.exact<SingleOpRequiredVars>()(Possible.gql({ query: { getById: { interfaceWithArgs: { $: { id: $.required() }, id: true } } } }),
 )
 
 // ==================================================================================================

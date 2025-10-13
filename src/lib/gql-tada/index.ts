@@ -12,8 +12,6 @@ export type {
   schemaOfSetup,
   setupCache,
   setupSchema,
-  TadaDocumentNode,
-  TadaPersistedDocumentNode,
   VariablesOf,
 } from './api.js'
 
