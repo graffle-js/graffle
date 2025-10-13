@@ -23,12 +23,12 @@ export interface DateFilter extends $$Utilities.SchemaDrivenDataMap.InputObject 
     readonly gte: {
       readonly nt: 'Date'
       readonly it: readonly [0]
-      readonly $t: TypeInputsIndex.Date | undefined
+      readonly $t: TypeInputsIndex.Date | null | undefined
     }
     readonly lte: {
       readonly nt: 'Date'
       readonly it: readonly [0]
-      readonly $t: TypeInputsIndex.Date | undefined
+      readonly $t: TypeInputsIndex.Date | null | undefined
     }
   }
 }
@@ -39,17 +39,17 @@ export interface PokemonFilter extends $$Utilities.SchemaDrivenDataMap.InputObje
     readonly birthday: {
       readonly nt: 'DateFilter'
       readonly it: readonly [0]
-      readonly $t: TypeInputsIndex.DateFilter | undefined
+      readonly $t: TypeInputsIndex.DateFilter | null | undefined
     }
     readonly name: {
       readonly nt: 'StringFilter'
       readonly it: readonly [0]
-      readonly $t: TypeInputsIndex.StringFilter | undefined
+      readonly $t: TypeInputsIndex.StringFilter | null | undefined
     }
     readonly type: {
       readonly nt: 'PokemonType'
       readonly it: readonly [0]
-      readonly $t: TypeInputsIndex.PokemonType | undefined
+      readonly $t: TypeInputsIndex.PokemonType | null | undefined
     }
   }
 }
@@ -60,12 +60,12 @@ export interface StringFilter extends $$Utilities.SchemaDrivenDataMap.InputObjec
     readonly contains: {
       readonly nt: 'String'
       readonly it: readonly [0]
-      readonly $t: TypeInputsIndex.String | undefined
+      readonly $t: TypeInputsIndex.String | null | undefined
     }
     readonly in: {
       readonly nt: 'String'
       readonly it: readonly [0, [1]]
-      readonly $t: readonly TypeInputsIndex.String[] | undefined
+      readonly $t: readonly TypeInputsIndex.String[] | null | undefined
     }
   }
 }
@@ -147,17 +147,17 @@ export interface Mutation extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         readonly attack: {
           readonly nt: 'Int'
           readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.Int | undefined
+          readonly $t: TypeInputsIndex.Int | null | undefined
         }
         readonly defense: {
           readonly nt: 'Int'
           readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.Int | undefined
+          readonly $t: TypeInputsIndex.Int | null | undefined
         }
         readonly hp: {
           readonly nt: 'Int'
           readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.Int | undefined
+          readonly $t: TypeInputsIndex.Int | null | undefined
         }
         readonly name: {
           readonly nt: 'String'
@@ -190,7 +190,7 @@ export interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         readonly filter: {
           readonly nt: 'PokemonFilter'
           readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.PokemonFilter | undefined
+          readonly $t: TypeInputsIndex.PokemonFilter | null | undefined
         }
       }
     }

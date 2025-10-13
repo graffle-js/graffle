@@ -153,10 +153,10 @@ Ts.Test.exact<R4>()(await client.gql(multiNoVars).$send('getUser'))
 Ts.Test.exact<R5>()(await client.gql(multiNoVars).$send('addId'))
 Ts.Test.exact<R4>()(await client.gql(multiNoVars).getUser())
 Ts.Test.exact<R5>()(await client.gql(multiNoVars).addId())
-// Tada only supports first operation in multi-op documents (known limitation)
-Ts.Test.exact<R4>()(await client.gql(multiNoVarsTada).$send())
-// Inline tada (plain string) - only first operation supported
-Ts.Test.exact<R4>()(await client.gql(`query getUser { id } mutation addId { id }`).$send())
+// Multi-op tada documents require operation name
+Ts.Test.exact<R4>()(await client.gql(multiNoVarsTada).$send('getUser'))
+// Inline tada (plain string) - multi-op requires operation name
+Ts.Test.exact<R4>()(await client.gql(`query getUser { id } mutation addId { id }`).$send('getUser'))
 // Inline object
 Ts.Test.exact<R4>()(
   await client.gql({ query: { getUser: { id: true } }, mutation: { addId: { id: true } } }).$send('getUser'),
@@ -172,8 +172,8 @@ client.gql(multiNoVars).$send('bad')
 client.gql(multiNoVars).$send('getUser', {})
 // @ts-expect-error - name required
 client.gql(multiNoVars).$send()
-// @ts-expect-error - unexpected variables (tada - first op only)
-client.gql(multiNoVarsTada).$send({})
+// @ts-expect-error - unexpected variables (tada multi-op)
+client.gql(multiNoVarsTada).$send('getUser', {})
 
 // ==================================================================================================
 //                            MULTI OPERATION - WITH VARIABLES
@@ -185,13 +185,13 @@ Ts.Test.exact<R6a>()(await client.gql(multiRequiredVars).$send('getById', { id: 
 Ts.Test.exact<R6b>()(await client.gql(multiRequiredVars).$send('setId'))
 Ts.Test.exact<R6a>()(await client.gql(multiRequiredVars).getById({ id: 'user-123' }))
 Ts.Test.exact<R6b>()(await client.gql(multiRequiredVars).setId())
-// Tada only supports first operation in multi-op documents (known limitation)
-Ts.Test.exact<R6a>()(await client.gql(multiRequiredVarsTada).$send({ id: 'user-123' }))
-// Inline tada (plain string) - only first operation supported
+// Multi-op tada documents require operation name
+Ts.Test.exact<R6a>()(await client.gql(multiRequiredVarsTada).$send('getById', { id: 'user-123' }))
+// Inline tada (plain string) - multi-op requires operation name
 Ts.Test.exact<R6a>()(
   await client
     .gql(`query getById($id: ID!) { interfaceWithArgs(id: $id) { id } } mutation setId { idNonNull }`)
-    .$send({ id: 'user-123' }),
+    .$send('getById', { id: 'user-123' }),
 )
 // Inline object
 Ts.Test.exact<R6a>()(
@@ -218,10 +218,10 @@ client.gql(multiRequiredVars).$send('getById')
 client.gql(multiRequiredVars).$send('getById', { id: 0 })
 // @ts-expect-error - name required
 client.gql(multiNoVars).$send()
-// @ts-expect-error - missing required variable 'id' (tada - first op only)
-client.gql(multiRequiredVarsTada).$send()
-// @ts-expect-error - wrong type for variable 'id' (tada - first op only)
-client.gql(multiRequiredVarsTada).$send({ id: 0 })
+// @ts-expect-error - missing required variable 'id' (tada multi-op)
+client.gql(multiRequiredVarsTada).$send('getById')
+// @ts-expect-error - wrong type for variable 'id' (tada multi-op)
+client.gql(multiRequiredVarsTada).$send('getById', { id: 0 })
 
 // ==================================================================================================
 //                       TYPED DOCUMENT LIKE VARIANTS (TypedDocumentNode, etc.)
