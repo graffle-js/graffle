@@ -7,7 +7,6 @@ export type * as FooBarUnion from './$$.js'
 
 /**
  * Selection set for {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union}.
- *
  * Union documentation.
  *
  * # Info

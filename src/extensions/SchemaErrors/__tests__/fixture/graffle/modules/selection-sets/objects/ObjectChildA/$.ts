@@ -7,7 +7,6 @@ export type * as ObjectChildA from './$$.js'
 
 /**
  * Selection set for {@link https://graphql.org/learn/schema/#object-types | Object} type.
- *
  * # Info
  *
  * | | |

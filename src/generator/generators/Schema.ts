@@ -5,7 +5,7 @@ import { isObjectEmpty } from '#src/lib/prelude.js'
 import { Obj, Str } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
-import { getKindDocUrl, markdownTable } from '../helpers/jsdoc.js'
+import { extractFieldTypeInfo, getKindDocUrl, markdownTable } from '../helpers/jsdoc.js'
 import { type GeneratedModule, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { type CodeGenerator, createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
 import {
@@ -474,18 +474,12 @@ const getOutputFieldDoc = (
   field: Grafaid.Schema.Field<any, any>,
   parentType: Grafaid.Schema.ObjectType | Grafaid.Schema.InterfaceType,
 ): string | null => {
-  const namedType = Grafaid.Schema.getNamedType(field.type)
-  const typeAndKind = Grafaid.getTypeAndKind(namedType)
+  // Extract type information using foundation helper
+  const { namedType, typeAndKind, isNonNull, isList, typeSignature } = extractFieldTypeInfo(field, '$Schema')
 
   // Get the base description from the schema
   const schemaDescription = getTsDocContents(config, field)
 
-  // Type information
-  const isNonNull = Grafaid.Schema.isNonNullType(field.type)
-  const isList = Grafaid.Schema.isListType(Grafaid.Schema.isNonNullType(field.type) ? field.type.ofType : field.type)
-  const listMarker = isList ? '[]' : ''
-  const nullMarker = isNonNull ? '!' : ''
-  const typeSignature = `{@link $Schema.${typeAndKind.typeName}}${listMarker}${nullMarker}`
   const kindDocUrl = getKindDocUrl(typeAndKind.kindName)
   const hasArgs = field.args.length > 0
   const fieldPath = `${parentType.name}.${field.name}`

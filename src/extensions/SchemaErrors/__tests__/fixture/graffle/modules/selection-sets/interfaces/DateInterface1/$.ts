@@ -8,7 +8,6 @@ export type * as DateInterface1 from './$$.js'
 
 /**
  * Selection set for {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface}.
- *
  * # Info
  *
  * | | |

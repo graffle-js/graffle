@@ -38,6 +38,114 @@ export const getKindDocUrl = (kindName: string): string => {
   return kindToUrl[kindName] || 'https://graphql.org/graphql-js/type/'
 }
 
+// ========================================
+// Foundation Helpers
+// ========================================
+
+/**
+ * Get schema description for a node, respecting config options.
+ * Uses node.description with optional fallback based on config.options.TSDoc.noDocPolicy.
+ *
+ * Note: Does NOT include deprecation or enum member formatting - those are handled
+ * separately in meta tables and enum-specific documentation.
+ */
+export const getSchemaDescription = (
+  config: Config,
+  node: Grafaid.Schema.DescribableTypes,
+): string | null => {
+  if (node.description) return node.description
+
+  // Fallback if config says to show messages for missing descriptions
+  if (config.options.TSDoc.noDocPolicy === 'message') {
+    const kind = 'kind' in node && typeof node.kind === 'string' ? node.kind : 'item'
+    const name = 'name' in node && typeof node.name === 'string' ? node.name : 'unknown'
+    return `Missing description for ${kind} "${name}".`
+  }
+
+  return null
+}
+
+/**
+ * Extract type information from a GraphQL field type.
+ * Returns structured information about nullability, list wrapping, and type signature.
+ */
+export const extractFieldTypeInfo = (
+  field: Grafaid.Schema.Field<any, any>,
+  linkPrefix: '$Schema' | '$NamedTypes' = '$Schema',
+): {
+  namedType: Grafaid.Schema.NamedTypes
+  typeAndKind: { typeName: string; kindName: string }
+  isNonNull: boolean
+  isList: boolean
+  typeSignature: string
+} => {
+  const namedType = Grafaid.Schema.getNamedType(field.type)
+  const typeAndKind = Grafaid.getTypeAndKind(namedType)
+  const isNonNull = Grafaid.Schema.isNonNullType(field.type)
+  const isList = Grafaid.Schema.isListType(Grafaid.Schema.isNonNullType(field.type) ? field.type.ofType : field.type)
+
+  const listMarker = isList ? '[]' : ''
+  const nullMarker = isNonNull ? '!' : ''
+  const linkTarget = linkPrefix === '$NamedTypes'
+    ? `$NamedTypes.$${typeAndKind.typeName}`
+    : `$Schema.${typeAndKind.typeName}`
+  const typeSignature = `{@link ${linkTarget}}${listMarker}${nullMarker}`
+
+  return {
+    namedType,
+    typeAndKind,
+    isNonNull,
+    isList,
+    typeSignature,
+  }
+}
+
+/**
+ * Add GraphQL SDL signature section to documentation parts.
+ * Includes field signature and optionally the named type definition.
+ */
+export const addSdlSignatureSection = (
+  parts: string[],
+  field: Grafaid.Schema.Field<any, any>,
+  namedType: Grafaid.Schema.NamedTypes,
+): void => {
+  if (!field.astNode) return
+
+  const fieldSignature = Grafaid.Document.printWithoutDescriptions(field.astNode)
+  parts.push('```graphql')
+  parts.push(fieldSignature)
+
+  // Add named type definition
+  if (namedType.astNode) {
+    const typeDefinition = Grafaid.Document.printWithoutDescriptions(namedType.astNode)
+    if (typeDefinition.trim()) {
+      parts.push('')
+      parts.push(typeDefinition)
+    }
+  }
+
+  parts.push('```')
+  parts.push('')
+}
+
+/**
+ * Add schema description section to documentation parts.
+ * Handles spacing and null descriptions consistently.
+ */
+export const addDescriptionSection = (
+  parts: string[],
+  description: string | null,
+): void => {
+  if (description) {
+    parts.push(description)
+    parts.push('')
+  }
+}
+
+// ========================================
+// Root Type Documentation
+// ========================================
+
 /**
  * Generate enhanced JSDoc for a root type (Query, Mutation, Subscription).
  */
@@ -46,7 +154,6 @@ export const getRootTypeDoc = (
   type: Grafaid.Schema.ObjectType,
   operationType: 'query' | 'mutation' | 'subscription',
 ): string | null => {
-  const schemaDescription = type.description
   const operationTypeCapitalized = operationType.charAt(0).toUpperCase() + operationType.slice(1)
 
   const parts: string[] = []
@@ -54,10 +161,7 @@ export const getRootTypeDoc = (
     `GraphQL root {@link https://graphql.org/learn/schema/#the-${operationType}-and-mutation-types | ${operationTypeCapitalized}} type.`,
   )
 
-  if (schemaDescription) {
-    parts.push('')
-    parts.push(schemaDescription)
-  }
+  addDescriptionSection(parts, getSchemaDescription(config, type))
 
   return parts.join('\n')
 }
@@ -70,7 +174,6 @@ export const getRootMethodsInterfaceDoc = (
   type: Grafaid.Schema.ObjectType,
   operationType: 'query' | 'mutation' | 'subscription',
 ): string | null => {
-  const schemaDescription = type.description
   const operationTypeCapitalized = operationType.charAt(0).toUpperCase() + operationType.slice(1)
 
   const parts: string[] = []
@@ -80,10 +183,7 @@ export const getRootMethodsInterfaceDoc = (
   parts.push('')
   parts.push(`All methods return Promises. Use \`.${operationType}.$batch(...)\` to select multiple fields at once.`)
 
-  if (schemaDescription) {
-    parts.push('')
-    parts.push(schemaDescription)
-  }
+  addDescriptionSection(parts, getSchemaDescription(config, type))
 
   return parts.join('\n')
 }
@@ -277,21 +377,17 @@ export const getStaticDocumentBuilderDoc = (
 
 /**
  * Generate enhanced JSDoc for an output field in selection sets.
+ *
+ * Note: This function does not require Config because selection sets use direct field.description
+ * without config-based fallbacks.
  */
 export const getOutputFieldSelectionSetDoc = (
   field: Grafaid.Schema.Field<any, any>,
   parentTypeName: string,
   namedType: Grafaid.Schema.NamedTypes,
 ): string => {
-  const typeAndKind = Grafaid.getTypeAndKind(namedType)
-  const schemaDescription = field.description
-
-  // Type information
-  const isNonNull = Grafaid.Schema.isNonNullType(field.type)
-  const isList = Grafaid.Schema.isListType(Grafaid.Schema.isNonNullType(field.type) ? field.type.ofType : field.type)
-  const listMarker = isList ? '[]' : ''
-  const nullMarker = isNonNull ? '!' : ''
-  const typeSignature = `{@link $NamedTypes.$${typeAndKind.typeName}}${listMarker}${nullMarker}`
+  // Extract type information
+  const { typeAndKind, isNonNull, isList, typeSignature } = extractFieldTypeInfo(field, '$NamedTypes')
   const kindDocUrl = getKindDocUrl(typeAndKind.kindName)
   const fieldPath = `${parentTypeName}.${field.name}`
 
@@ -310,27 +406,11 @@ export const getOutputFieldSelectionSetDoc = (
   // Combine parts
   const parts: string[] = []
 
-  if (schemaDescription) {
-    parts.push(schemaDescription)
-    parts.push('')
-  }
+  // Add description
+  addDescriptionSection(parts, field.description ?? null)
 
   // Add GraphQL SDL signature
-  if (field.astNode) {
-    const fieldSignature = Grafaid.Document.printWithoutDescriptions(field.astNode)
-    parts.push('```graphql')
-    parts.push(fieldSignature)
-
-    // Add named type definition
-    if (namedType.astNode) {
-      const typeDefinition = Grafaid.Document.printWithoutDescriptions(namedType.astNode)
-      parts.push('')
-      parts.push(typeDefinition)
-    }
-
-    parts.push('```')
-    parts.push('')
-  }
+  addSdlSignatureSection(parts, field, namedType)
 
   parts.push('# Info')
   parts.push('')
@@ -347,16 +427,8 @@ export const getOutputFieldMethodDoc = (
   field: Grafaid.Schema.Field<any, any>,
   parentType: Grafaid.Schema.ObjectType,
 ): string | null => {
-  const namedType = Grafaid.Schema.getNamedType(field.type)
-  const typeAndKind = Grafaid.getTypeAndKind(namedType)
-  const schemaDescription = field.description
-
-  // Type information
-  const isNonNull = Grafaid.Schema.isNonNullType(field.type)
-  const isList = Grafaid.Schema.isListType(Grafaid.Schema.isNonNullType(field.type) ? field.type.ofType : field.type)
-  const listMarker = isList ? '[]' : ''
-  const nullMarker = isNonNull ? '!' : ''
-  const typeSignature = `{@link $Schema.${typeAndKind.typeName}}${listMarker}${nullMarker}`
+  // Extract type information
+  const { namedType, typeAndKind, isNonNull, isList, typeSignature } = extractFieldTypeInfo(field, '$Schema')
   const kindDocUrl = getKindDocUrl(typeAndKind.kindName)
   const fieldPath = `${parentType.name}.${field.name}`
 
@@ -375,27 +447,11 @@ export const getOutputFieldMethodDoc = (
   // Combine parts
   const parts: string[] = []
 
-  if (schemaDescription) {
-    parts.push(schemaDescription)
-    parts.push('')
-  }
+  // Add description (respecting config)
+  addDescriptionSection(parts, getSchemaDescription(config, field))
 
   // Add GraphQL SDL signature
-  if (field.astNode) {
-    const fieldSignature = Grafaid.Document.printWithoutDescriptions(field.astNode)
-    parts.push('```graphql')
-    parts.push(fieldSignature)
-
-    // Add named type definition
-    if (namedType.astNode) {
-      const typeDefinition = Grafaid.Document.printWithoutDescriptions(namedType.astNode)
-      parts.push('')
-      parts.push(typeDefinition)
-    }
-
-    parts.push('```')
-    parts.push('')
-  }
+  addSdlSignatureSection(parts, field, namedType)
 
   parts.push('# Info')
   parts.push('')
@@ -536,16 +592,8 @@ export const getStaticDocumentFieldDoc = (
   parentType: Grafaid.Schema.ObjectType,
   operationType: 'query' | 'mutation' | 'subscription',
 ): string | null => {
-  const namedType = Grafaid.Schema.getNamedType(field.type)
-  const typeAndKind = Grafaid.getTypeAndKind(namedType)
-  const schemaDescription = field.description
-
-  // Type information
-  const isNonNull = Grafaid.Schema.isNonNullType(field.type)
-  const isList = Grafaid.Schema.isListType(Grafaid.Schema.isNonNullType(field.type) ? field.type.ofType : field.type)
-  const listMarker = isList ? '[]' : ''
-  const nullMarker = isNonNull ? '!' : ''
-  const typeSignature = `{@link $Schema.${typeAndKind.typeName}}${listMarker}${nullMarker}`
+  // Extract type information
+  const { namedType, typeAndKind, isNonNull, isList, typeSignature } = extractFieldTypeInfo(field, '$Schema')
   const kindDocUrl = getKindDocUrl(typeAndKind.kindName)
   const fieldPath = `${parentType.name}.${field.name}`
 
@@ -564,29 +612,11 @@ export const getStaticDocumentFieldDoc = (
   // Combine parts
   const parts: string[] = []
 
-  if (schemaDescription) {
-    parts.push(schemaDescription)
-    parts.push('')
-  }
+  // Add description (respecting config)
+  addDescriptionSection(parts, getSchemaDescription(config, field))
 
   // Add GraphQL SDL signature
-  if (field.astNode) {
-    const fieldSignature = Grafaid.Document.printWithoutDescriptions(field.astNode)
-    parts.push('```graphql')
-    parts.push(fieldSignature)
-
-    // Add named type definition
-    if (namedType.astNode) {
-      const typeDefinition = Grafaid.Document.printWithoutDescriptions(namedType.astNode)
-      if (typeDefinition.trim()) {
-        parts.push('')
-        parts.push(typeDefinition)
-      }
-    }
-
-    parts.push('```')
-    parts.push('')
-  }
+  addSdlSignatureSection(parts, field, namedType)
 
   parts.push('# Info')
   parts.push('')
@@ -651,7 +681,6 @@ export const getObjectTypeSelectionSetDoc = (
   type: Grafaid.Schema.ObjectType,
   isRoot: boolean,
 ): string => {
-  const schemaDescription = type.description
   const kindDocUrl = getKindDocUrl('OutputObject')
   const fields = Object.values(type.getFields())
   const fieldCount = fields.length
@@ -678,12 +707,8 @@ export const getObjectTypeSelectionSetDoc = (
     parts.push(`Selection set for {@link https://graphql.org/learn/schema/#object-types | Object} type.`)
   }
 
-  if (schemaDescription) {
-    parts.push('')
-    parts.push(schemaDescription)
-  }
+  addDescriptionSection(parts, type.description ?? null)
 
-  parts.push('')
   parts.push('# Info')
   parts.push('')
   parts.push(table)
@@ -698,7 +723,6 @@ export const getInterfaceTypeSelectionSetDoc = (
   type: Grafaid.Schema.InterfaceType,
   kindMap: Grafaid.Schema.KindMap,
 ): string => {
-  const schemaDescription = type.description
   const kindDocUrl = getKindDocUrl('Interface')
   const fields = Object.values(type.getFields())
   const fieldCount = fields.length
@@ -719,12 +743,8 @@ export const getInterfaceTypeSelectionSetDoc = (
   const parts: string[] = []
   parts.push(`Selection set for {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface}.`)
 
-  if (schemaDescription) {
-    parts.push('')
-    parts.push(schemaDescription)
-  }
+  addDescriptionSection(parts, type.description ?? null)
 
-  parts.push('')
   parts.push('# Info')
   parts.push('')
   parts.push(table)
@@ -738,7 +758,6 @@ export const getInterfaceTypeSelectionSetDoc = (
 export const getUnionTypeSelectionSetDoc = (
   type: Grafaid.Schema.UnionType,
 ): string => {
-  const schemaDescription = type.description
   const kindDocUrl = getKindDocUrl('Union')
   const members = type.getTypes()
 
@@ -753,12 +772,8 @@ export const getUnionTypeSelectionSetDoc = (
   const parts: string[] = []
   parts.push(`Selection set for {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union}.`)
 
-  if (schemaDescription) {
-    parts.push('')
-    parts.push(schemaDescription)
-  }
+  addDescriptionSection(parts, type.description ?? null)
 
-  parts.push('')
   parts.push('# Info')
   parts.push('')
   parts.push(table)
@@ -772,7 +787,6 @@ export const getUnionTypeSelectionSetDoc = (
 export const getInputObjectTypeSelectionSetDoc = (
   type: Grafaid.Schema.InputObjectType,
 ): string => {
-  const schemaDescription = type.description
   const kindDocUrl = getKindDocUrl('InputObject')
   const fields = Object.values(type.getFields())
   const fieldCount = fields.length
@@ -789,12 +803,8 @@ export const getInputObjectTypeSelectionSetDoc = (
   const parts: string[] = []
   parts.push(`Input for {@link https://graphql.org/learn/schema/#input-types | InputObject}.`)
 
-  if (schemaDescription) {
-    parts.push('')
-    parts.push(schemaDescription)
-  }
+  addDescriptionSection(parts, type.description ?? null)
 
-  parts.push('')
   parts.push('# Info')
   parts.push('')
   parts.push(table)
@@ -808,7 +818,6 @@ export const getInputObjectTypeSelectionSetDoc = (
 export const getEnumTypeSelectionSetDoc = (
   type: Grafaid.Schema.EnumType,
 ): string => {
-  const schemaDescription = type.description
   const kindDocUrl = getKindDocUrl('Enum')
   const members = type.getValues()
   const memberCount = members.length
@@ -823,14 +832,10 @@ export const getEnumTypeSelectionSetDoc = (
   const parts: string[] = []
   parts.push(`Values for {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum}.`)
 
-  if (schemaDescription) {
-    parts.push('')
-    parts.push(schemaDescription)
-  }
+  addDescriptionSection(parts, type.description ?? null)
 
   // Add members list after description
   if (members.length > 0) {
-    parts.push('')
     parts.push('**Members:**')
     for (const member of members) {
       const memberDescription = member.description
@@ -840,9 +845,9 @@ export const getEnumTypeSelectionSetDoc = (
         parts.push(`- \`${member.name}\``)
       }
     }
+    parts.push('')
   }
 
-  parts.push('')
   parts.push('# Info')
   parts.push('')
   parts.push(table)
@@ -959,13 +964,9 @@ export const getSelectInferDoc = (
   type: Grafaid.Schema.NamedTypes,
   kind: 'operation' | 'selectionSet',
 ): string => {
-  const schemaDescription = type.description
   const parts: string[] = []
 
-  if (schemaDescription) {
-    parts.push(schemaDescription)
-    parts.push('')
-  }
+  addDescriptionSection(parts, type.description ?? null)
 
   const text = kind === 'operation'
     ? `Infer result type for ${type.name} operations.`
@@ -981,13 +982,9 @@ export const getSelectInferDoc = (
  * Used in MethodsSelect.ts for selection method interfaces.
  */
 export const getMethodsSelectDoc = (type: Grafaid.Schema.NamedTypes): string => {
-  const schemaDescription = type.description
   const parts: string[] = []
 
-  if (schemaDescription) {
-    parts.push(schemaDescription)
-    parts.push('')
-  }
+  addDescriptionSection(parts, type.description ?? null)
 
   parts.push(`Build type-safe selection set for ${type.name}.`)
 

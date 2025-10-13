@@ -8,7 +8,6 @@ export type * as Interface from './$$.js'
 
 /**
  * Selection set for {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface}.
- *
  * # Info
  *
  * | | |

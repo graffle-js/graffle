@@ -1,7 +1,7 @@
 import type { Grafaid } from '#lib/grafaid'
+import type { Docpar } from '#lib/docpar'
 import type { Context } from '#src/context/$.js'
 import type { Configuration } from '#src/context/fragments/configuration/$.js'
-import type { GraphQLTadaAPI, schemaOfSetup } from '#src/lib/gql-tada/index.js'
 import type { TypedFullDocument } from '#src/lib/grafaid/typed-full-document/$.js'
 import type { ParseGraphQLObject, ParseGraphQLString } from '#src/static/gql.js'
 import type { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
@@ -42,8 +42,8 @@ export type GetSchemaInfo<$Context> = Configuration.Schema.Info<$Context>
  * looks for to identify gql-tada functions and determine which schema to use in multi-schema mode.
  */
 // dprint-ignore
-type TadaAPIFromContext<$Context> = GraphQLTadaAPI<
-  schemaOfSetup<{
+type TadaAPIFromContext<$Context> = Docpar.GraphQLTadaAPI<
+  Docpar.schemaOfSetup<{
     introspection: GlobalRegistry.ForContext<$Context>['tadaIntrospection']
     scalars: GlobalRegistry.ForContext<$Context>['schema']['scalarRegistry']['map']
   }>,

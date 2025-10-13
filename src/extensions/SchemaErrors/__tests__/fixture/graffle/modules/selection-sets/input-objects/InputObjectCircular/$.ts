@@ -8,7 +8,6 @@ export type * as InputObjectCircular from './fields.js'
 
 /**
  * Input for {@link https://graphql.org/learn/schema/#input-types | InputObject}.
- *
  * # Info
  *
  * | | |

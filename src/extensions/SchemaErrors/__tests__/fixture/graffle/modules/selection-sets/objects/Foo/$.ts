@@ -7,7 +7,6 @@ export type * as Foo from './$$.js'
 
 /**
  * Selection set for {@link https://graphql.org/learn/schema/#object-types | Object} type.
- *
  * Object documentation.
  *
  * # Info
