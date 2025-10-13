@@ -1,4 +1,5 @@
-import { expectTypeOf, test } from 'vitest'
+import { Ts } from '@wollybeard/kit'
+import { test } from 'vitest'
 import { PipelineDefinition } from '../$$.js'
 import type { results } from '../_.test-helpers.js'
 import { type initialInput, slots, stepA } from '../_.test-helpers.js'
@@ -11,14 +12,14 @@ const b0 = PipelineDefinition.create().input<initialInput>()
 test(`returns a pipeline`, () => {
   const p0 = b0.type
   const exP0 = Pipeline.create(p0)
-  expectTypeOf<typeof exP0>().toMatchTypeOf<
+  Ts.Test.sub<
     { config: Config; steps: readonly []; input: initialInput; output: initialInput }
-  >()
+  >()(exP0)
   const p1 = b0.step(stepA).type
   const exP1 = Pipeline.create(p1)
-  expectTypeOf<typeof exP1>().toMatchTypeOf<
+  Ts.Test.sub<
     { config: Config; steps: readonly [{ name: 'a' }]; input: initialInput; output: results['a'] }
-  >()
+  >()(exP1)
 })
 
 // Overloads Merging Into Pipeline
@@ -43,10 +44,10 @@ test(`overload input extensions become a pipeline union input`, () => {
     .overload(o => o.create({ discriminant: d2 }).configurator($ => $.input<{ ol2: 2 }>()))
     .type
   const p = Pipeline.create(pDef)
-  expectTypeOf(p.input).toMatchTypeOf<
+  Ts.Test.sub<
     | (initialInput & dObject & { ol1: 1 })
     | (initialInput & dObject2 & { ol2: 2 })
-  >()
+  >()(p.input)
 })
 
 test(`overload step input/output becomes union to step input/output`, () => {
@@ -54,7 +55,7 @@ test(`overload step input/output becomes union to step input/output`, () => {
     b0.step(`a`).overload(o => o.create({ discriminant: d1 }).step(`a`, { run: () => ({ olb: 1 as const }) }))
       .type
   const p = Pipeline.create(pDef)
-  expectTypeOf(p.steps).toMatchTypeOf<
+  Ts.Test.sub<
     readonly [{
       name: 'a'
       input: dObject & initialInput
@@ -62,7 +63,7 @@ test(`overload step input/output becomes union to step input/output`, () => {
       slots: {}
       run: StepRunner<any, any, any>
     }]
-  >()
+  >()(p.steps)
 })
 test(`overloads steps slots all merge onto respective pipeline step (no unions)`, () => {
   const pDef = b0
@@ -81,10 +82,10 @@ test(`overloads steps slots all merge onto respective pipeline step (no unions)`
     )
     .type
   const p = Pipeline.create(pDef)
-  expectTypeOf(p.steps).toMatchTypeOf<
+  Ts.Test.sub<
     readonly [{
       name: 'a'
       slots: { m: slots['m']; n: slots['n'] }
     }]
-  >()
+  >()(p.steps)
 })

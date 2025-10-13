@@ -94,7 +94,8 @@ export interface Schema<
 `;
 
 exports[`root-types-mapped 2`] = `
-"import type * as $$SelectionSets from "./selection-sets.js";
+"import type * as $$SelectionSets from "./selection-sets/$.js";
+import type * as $$SelectionSetsFields from "./selection-sets/$$.fields.js";
 import type * as $$Schema from "./schema/$.js";
 import type * as $$Utilities from "graffle/utilities-for-generated";
 
@@ -172,7 +173,7 @@ export interface RootTypeCustomNameForQueryMethods<
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSets.RootTypeCustomNameForQuery.id<{
+        $$SelectionSetsFields.RootTypeCustomNameForQuery.id<{
           scalars: $Context["scalars"];
         }>
       >,

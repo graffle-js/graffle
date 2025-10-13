@@ -9,9 +9,10 @@
 import type { Schema } from '#src/types/Schema/$.js'
 
 /**
- * Context type that flows through all selection set types
+ * Generic context type - widest context that accepts any scalar registry.
+ * Use this as default for type parameters to accept any context.
  */
-export type SelectionContext = {
+export interface Context {
   /**
    * Registry of custom scalars for this schema
    */
@@ -19,17 +20,28 @@ export type SelectionContext = {
 }
 
 /**
- * Default context for operations.
+ * Context type that flows through all selection set types
+ */
+export type SelectionContext = Context
+
+/**
+ * Empty context for operations.
  * No custom scalars are registered.
  */
-export type DefaultContext = {
+export interface ContextEmpty extends Context {
   scalars: Schema.Scalar.Registry.Empty
 }
 
 /**
- * Context for static document building.
+ * @deprecated Use ContextEmpty instead
  */
-export type StaticBuilderContext = {
+export type DefaultContext = ContextEmpty
+
+/**
+ * Context for static document building.
+ * No custom scalars are registered.
+ */
+export interface StaticBuilderContext extends Context {
   scalars: Schema.Scalar.Registry.Empty
 }
 

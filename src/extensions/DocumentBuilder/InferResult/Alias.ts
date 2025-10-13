@@ -14,7 +14,7 @@ export type Alias<
     ValuesOrEmptyObject<
       {
         [
-          $Select in keyof $SelectionSet as $SelectionSet[$Select] extends Select.SelectAlias.SelectAlias
+          $Select in keyof $SelectionSet as $SelectionSet[$Select] extends Select.SelectAlias.SelectAlias<any>
             ? $Select
             : never
         ]:
@@ -36,9 +36,9 @@ type InferSelectAlias<
   $Schema extends Schema,
   $Node extends Schema.OutputObjectLike,
 > =
-  $SelectAlias extends Select.SelectAlias.SelectAliasOne      ? InferSelectAliasOne<$SelectAlias, $FieldName, $Schema, $Node> :
-  $SelectAlias extends Select.SelectAlias.SelectAliasMultiple ? InferSelectAliasMultiple<$SelectAlias, $FieldName, $Schema, $Node> :
-                                                                never
+  $SelectAlias extends Select.SelectAlias.SelectAliasOne<any>      ?  InferSelectAliasOne<$SelectAlias, $FieldName, $Schema, $Node> :
+  $SelectAlias extends Select.SelectAlias.SelectAliasMultiple<any> ?  InferSelectAliasMultiple<$SelectAlias, $FieldName, $Schema, $Node> :
+                                                                      never
 
 type InferSelectAliasMultiple<
   $SelectAliasMultiple extends Select.SelectAlias.SelectAliasMultiple,

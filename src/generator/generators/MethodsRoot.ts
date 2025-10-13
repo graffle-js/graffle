@@ -12,7 +12,7 @@ import {
 } from '../helpers/jsdoc.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
-import { importUtilities } from '../helpers/pathHelpers.js'
+import { codeImportAll, importUtilities } from '../helpers/pathHelpers.js'
 import { renderName } from '../helpers/render.js'
 import { ModuleGeneratorSchema } from './Schema.js'
 import { ModuleGeneratorSelectionSets } from './SelectionSets.js'
@@ -21,6 +21,8 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
   `MethodsRoot`,
   ({ config, code }) => {
     code(importModuleGenerator(config, ModuleGeneratorSelectionSets, true))
+    // Import field types separately for accessing field.name types
+    code(codeImportAll(config, { as: `$$SelectionSetsFields`, from: './selection-sets/$$.fields', type: true }))
     code(importModuleGenerator(config, ModuleGeneratorSchema, true))
     code(importUtilities(config))
     code``
@@ -141,7 +143,7 @@ const renderFieldMethods = createCodeGenerator<{ node: Grafaid.Schema.ObjectType
       ${field.name}:
         ${$.$$Utilities}.GraffleKit.Context.Configuration.Check.Preflight<
           $Context,
-          <$SelectionSet>(selectionSet${isOptional ? `?` : ``}: ${$.$$Utilities}.Exact<$SelectionSet, ${$.$$SelectionSets}.${renderName(node.name)}.${renderName(field)}<{ scalars: $Context['scalars'] }>>) =>
+          <$SelectionSet>(selectionSet${isOptional ? `?` : ``}: ${$.$$Utilities}.Exact<$SelectionSet, $$SelectionSetsFields.${renderName(node.name)}.${field.name}<{ scalars: $Context['scalars'] }>>) =>
             Promise<
               & (null | {})
               & ${$.$$Utilities}.HandleOutputDocumentBuilderRootField<

@@ -1,6 +1,7 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
 import type * as $$Schema from './schema/$.js'
-import type * as $$SelectionSets from './selection-sets.js'
+import type * as $$SelectionSetsFields from './selection-sets/$$.fields.js'
+import type * as $$SelectionSets from './selection-sets/$.js'
 
 /**
  * GraphQL {@link https://graphql.org/learn/schema/#the-query-and-mutation-types | Query} root methods.
@@ -63,7 +64,10 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   id1: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.id1<{ scalars: $Context['scalars'] }>>,
+      selectionSet?: $$Utilities.Exact<
+        $SelectionSet,
+        $$SelectionSetsFields.Query.id1<{ scalars: $Context['scalars'] }>
+      >,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<

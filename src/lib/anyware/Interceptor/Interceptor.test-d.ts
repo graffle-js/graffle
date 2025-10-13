@@ -1,5 +1,5 @@
-import type { Undefined } from '@wollybeard/kit'
-import { describe, expectTypeOf, test } from 'vitest'
+import { Ts, type Undefined } from '@wollybeard/kit'
+import { describe, test } from 'vitest'
 import type { Interceptor } from '../$$.js'
 import { Pipeline, PipelineDefinition } from '../$$.js'
 import type { initialInput } from '../_.test-helpers.js'
@@ -15,15 +15,15 @@ describe(`interceptor constructor`, () => {
       .step({ name: `b`, run: () => results.b })
       .step({ name: `c`, run: () => results.c })
     const p1 = Pipeline.create(b1.type)
-    type i1 = Interceptor.InferFromPipeline<typeof p1>
-    expectTypeOf<Parameters<i1>>().toMatchTypeOf<[steps: { a: any; b: any; c: any }]>()
-    // const x: Parameters<i1>['0']['a'] = _
-    // x({input:{x:1}}).then(r => r.b({input:{}}))
-    expectTypeOf<Parameters<i1>>().toMatchTypeOf<[steps: {
+    const i1 = Ts.as<Interceptor.InferFromPipeline<typeof p1>>()
+    Ts.Test.parameters<[{ a: any; b: any; c: any }]>()(i1)
+    Ts.Test.parameters<[{
       a: (params: { input?: initialInput }) => Promise<{ b: (params: { input?: results['a'] }) => any }>
       b: (params: { input?: results['a'] }) => Promise<{ c: (params: { input?: results['b'] }) => any }>
       c: (params: { input?: results['b'] }) => Promise<results['c']>
-    }]>()
+    }]>()(i1)
+    // const x: Parameters<i1>['0']['a'] = _
+    // x({input:{x:1}}).then(r => r.b({input:{}}))
   })
 
   // --- trigger ---
@@ -31,13 +31,15 @@ describe(`interceptor constructor`, () => {
   test(`original input on self`, () => {
     const p = b0.step({ name: `a`, run: () => results.a }).done()
     type triggerA = PipelineGetTrigger<typeof p, 'a'>
-    expectTypeOf<triggerA['input']>().toMatchTypeOf<initialInput>()
+    type _ = Ts.Test.Cases<
+      Ts.Test.sub<initialInput, triggerA['input']>
+    >
   })
 
   test(`trigger arguments are optional`, () => {
     const p = b0.step({ name: `a`, run: () => results.a }).done()
-    type triggerA = PipelineGetTrigger<typeof p, 'a'>
-    expectTypeOf<[]>().toMatchTypeOf<Parameters<triggerA>>()
+    const triggerA = Ts.as<PipelineGetTrigger<typeof p, 'a'>>()
+    Ts.Test.parameters<[params?: { input?: initialInput }]>()(triggerA)
   })
 
   // --- slots ---
@@ -46,21 +48,28 @@ describe(`interceptor constructor`, () => {
     const p = b0.step({ name: `a`, slots, run: () => results.a }).step({ name: `b`, run: () => results.b }).done()
     type triggerA = PipelineGetTrigger<typeof p, 'a'>
     type triggerB = PipelineGetTrigger<typeof p, 'b'>
-    expectTypeOf<Parameters<triggerA>>().toEqualTypeOf<[params?: {
-      input?: initialInput
-      using?: {
-        m?: () => Promise<'m' | undefined>
-        n?: () => 'n' | undefined
-      }
-    }]>
-    expectTypeOf<Parameters<triggerB>>().toEqualTypeOf<[params?: { input?: results['a'] }]> // no "using" key!
+    type _ = Ts.Test.Cases<
+      Ts.Test.exact<
+        Parameters<triggerA>,
+        [params?: {
+          input?: initialInput
+          using?: {
+            m?: () => Promise<'m' | undefined>
+            n?: () => 'n' | undefined
+          }
+        }]
+      >,
+      Ts.Test.exact<Parameters<triggerB>, [params?: { input?: results['a'] }]> // no "using" key!
+    >
   })
 
   test(`slots are optional`, () => {
     const p = b0.step({ name: `a`, slots, run: () => results.a }).done()
     type triggerA = PipelineGetTrigger<typeof p, 'a'>
     type triggerASlotInputs = Undefined.Exclude<Undefined.Exclude<Parameters<triggerA>[0]>['using']>
-    expectTypeOf<{ m?: any; n?: any }>().toMatchTypeOf<triggerASlotInputs>()
+    type _ = Ts.Test.Cases<
+      Ts.Test.sub<triggerASlotInputs, { m?: any; n?: any }>
+    >
   })
 
   test(`slot function can return undefined (falls back to default slot)`, () => {
@@ -69,11 +78,13 @@ describe(`interceptor constructor`, () => {
     type triggerASlotMOutput = ReturnType<
       Undefined.Exclude<Undefined.Exclude<Undefined.Exclude<Parameters<triggerA>[0]>['using']>['m']>
     >
-    expectTypeOf<Promise<`m` | undefined>>().toEqualTypeOf<triggerASlotMOutput>()
     type triggerASlotNOutput = ReturnType<
       Undefined.Exclude<Undefined.Exclude<Undefined.Exclude<Parameters<triggerA>[0]>['using']>['n']>
     >
-    expectTypeOf<`n` | undefined>().toEqualTypeOf<triggerASlotNOutput>()
+    type _ = Ts.Test.Cases<
+      Ts.Test.exact<Promise<`m` | undefined>, triggerASlotMOutput>,
+      Ts.Test.exact<`n` | undefined, triggerASlotNOutput>
+    >
   })
 
   // --- output ---
@@ -81,12 +92,19 @@ describe(`interceptor constructor`, () => {
   test(`can return pipeline output or a step envelope`, () => {
     const p = b0.step({ name: `a`, run: () => results.a }).done()
     type i = PipelineGetReturnType<typeof p>
-    expectTypeOf<i>().toEqualTypeOf<Promise<results['a'] | StepTriggerEnvelope>>()
+    type _ = Ts.Test.Cases<
+      Ts.Test.exact<Promise<results['a'] | StepTriggerEnvelope>, i>
+    >
   })
 
   test(`return type awaits pipeline output`, () => {
     const p = b0.step({ name: `a`, run: () => Promise.resolve(results.a) }).done()
-    expectTypeOf<PipelineGetReturnType<typeof p>>().toEqualTypeOf<Promise<results['a'] | StepTriggerEnvelope>>()
+    type _ = Ts.Test.Cases<
+      Ts.Test.exact<
+        Promise<results['a'] | StepTriggerEnvelope>,
+        PipelineGetReturnType<typeof p>
+      >
+    >
   })
 })
 

@@ -168,12 +168,50 @@ export type ToParametersExact<$Input extends object, $Params extends object | un
                                                 [Exact<$Input, $Params>] | []
     : []
 
+/**
+ * Merges a union of objects into a single object type where each key has a union of all possible values for that key.
+ *
+ * @example
+ * ```ts
+ * type A = { x: string, y: number }
+ * type B = { x: boolean, z: string }
+ * type Result = UnionMerge<A | B>
+ * // { x: string | boolean, y: number, z: string }
+ * ```
+ */
 export type UnionMerge<U> = {
   [K in UnionKeys<U>]: UnionValue<U, K>
 }
 
+/**
+ * Collects all keys from all members of a union type.
+ *
+ * Uses distributive conditional types (`U extends any`) to iterate over each union member
+ * and collect their keys into a union.
+ *
+ * @example
+ * ```ts
+ * type A = { x: string, y: number }
+ * type B = { x: boolean, z: string }
+ * type Result = UnionKeys<A | B>
+ * // 'x' | 'y' | 'z'
+ * ```
+ */
 type UnionKeys<U> = U extends any ? keyof U : never
 
+/**
+ * For a given key, collects the union of all values at that key across all members of a union type.
+ *
+ * Uses distributive conditional types to check each union member for the key and collect the value types.
+ *
+ * @example
+ * ```ts
+ * type A = { x: string, y: number }
+ * type B = { x: boolean, z: string }
+ * type Result = UnionValue<A | B, 'x'>
+ * // string | boolean
+ * ```
+ */
 type UnionValue<U, K extends PropertyKey> = U extends any ? K extends keyof U ? U[K]
   : never
   : never

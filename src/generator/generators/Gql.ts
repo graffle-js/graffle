@@ -33,7 +33,7 @@ export const ModuleGeneratorGql = createModuleGenerator(
       import { createGql } from '${config.paths.imports.grafflePackage.extensionDocumentBuilder}'`
     code(codeImportNamed(config, { names: 'Schema', from: './schema/$', type: true }))
     code(codeImportNamed(config, { names: { schemaDrivenDataMap: 'sddm' }, from: './schema-driven-data-map' }))
-    code(codeImportAll(config, { as: '$$SelectionSets', from: './selection-sets', type: true }))
+    code(codeImportAll(config, { as: '$$SelectionSets', from: './selection-sets/$', type: true }))
     code(codeImportAll(config, { as: '$$ArgumentsMap', from: './arguments-map', type: true }))
     code`
 

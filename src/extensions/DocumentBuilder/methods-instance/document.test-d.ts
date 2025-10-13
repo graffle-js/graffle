@@ -1,7 +1,8 @@
 import { MutationOnly } from '#test/schema/mutation-only/client/$.js'
 import { Possible } from '#test/schema/possible/client/$.js'
 import { QueryOnly } from '#test/schema/query-only/client/$.js'
-import { expectTypeOf, test } from 'vitest'
+import { Ts } from '@wollybeard/kit'
+import { test } from 'vitest'
 
 const g = Possible.create({ check: { preflight: false } })
 
@@ -16,7 +17,7 @@ test(`requires input`, () => {
 test(`gql with one query`, async () => {
   const sender = g.gql({ query: { foo: { id: true } } })
   const result = await sender.$send()
-  expectTypeOf(result).toEqualTypeOf<null | { id: string | null }>()
+  Ts.Test.exact<null | { id: string | null }>()(result)
 })
 
 test(`gql with two queries`, async () => {
@@ -26,10 +27,9 @@ test(`gql with two queries`, async () => {
       bar: { date: true },
     },
   })
-  type $Parameters = Parameters<typeof sender.$send>
-  expectTypeOf<$Parameters>().toEqualTypeOf<['foo' | 'bar']>()
+  Ts.Test.parameters<['foo' | 'bar']>()(sender.$send)
   const result = await sender.$send(`foo`)
-  expectTypeOf(result).toEqualTypeOf<null | { id: string | null }>()
+  Ts.Test.exact<null | { id: string | null }>()(result)
 })
 
 test(`gql with two queries of different root types`, async () => {
@@ -41,10 +41,9 @@ test(`gql with two queries of different root types`, async () => {
       bar: { idNonNull: true },
     },
   })
-  type $Parameters = Parameters<typeof sender.$send>
-  expectTypeOf<$Parameters>().toEqualTypeOf<['foo' | 'bar']>()
+  Ts.Test.parameters<['foo' | 'bar']>()(sender.$send)
   const result = await sender.$send(`foo`)
-  expectTypeOf(result).toEqualTypeOf<null | { id: string | null }>()
+  Ts.Test.exact<null | { id: string | null }>()(result)
 })
 
 test.skip(`root operation not available if it is not in schema`, () => {

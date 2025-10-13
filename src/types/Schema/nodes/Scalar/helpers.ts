@@ -1,5 +1,5 @@
 import { type AnyAndUnknownToNever, type EmptyObject, emptyObject } from '#src/lib/prelude.js'
-import { String } from '../../StandardTypes/scalar.js'
+import { Boolean, Float, ID, Int, String } from '../../StandardTypes/scalar.js'
 import type { Mapper } from './codec.js'
 import type { Scalar } from './Scalar.js'
 
@@ -52,12 +52,33 @@ export type ScalarMap = Record<string, Scalar>
 
 // dprint-ignore
 export type LookupCustomScalarOrFallbackToString<$Name extends string, $Scalars extends Registry> =
-  $Name extends keyof $Scalars['map'] ? $Scalars['map'][$Name] : String
+  $Name extends keyof $Scalars['map']  ? $Scalars['map'][$Name]
+  : $Name extends 'String'              ? typeof String
+  : $Name extends 'Int'                 ? typeof Int
+  : $Name extends 'Float'               ? typeof Float
+  : $Name extends 'Boolean'             ? typeof Boolean
+  : $Name extends 'ID'                  ? typeof ID
+  :                                       typeof String
 
 export const lookupCustomScalarOrFallbackToString = (scalars: ScalarMap, name: string): Scalar => {
   const scalar = scalars[name]
   if (scalar) return scalar
-  return String
+
+  // Handle standard GraphQL scalars
+  switch (name) {
+    case 'String':
+      return String
+    case 'Int':
+      return Int
+    case 'Float':
+      return Float
+    case 'Boolean':
+      return Boolean
+    case 'ID':
+      return ID
+    default:
+      return String
+  }
 }
 
 /**
