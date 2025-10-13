@@ -127,7 +127,8 @@ export type VarBuilderToType<
   $Type,
   $VarBuilder extends VarBuilder
 > =
-  $VarBuilder['_']['required'] extends true                         ? Exclude<$Type,undefined> :
+  // When marking as required, exclude both null and undefined (GraphQL ! makes it required AND non-null)
+  $VarBuilder['_']['required'] extends true                         ? Exclude<$Type, undefined | null> :
   NotExtends<$VarBuilder['_']['default'], undefined> extends true   ? $Type | undefined :
                                                                       $Type
 

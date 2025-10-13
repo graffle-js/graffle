@@ -31,21 +31,17 @@ Ts.Test.exact<SingleOpRequiredVars>()(Possible.gql({ query: { getById: { interfa
 //                                 Single operation, optional variables
 // ==================================================================================================
 
-// String syntax (GraphQL parser includes | null for nullable optional variables)
-Ts.Test.exact<
-  TypedFullDocument.SingleOperation<
-    TypedFullDocument.Operation<'search', { stringWithArgs: string | null }, { string?: string | null | undefined }>
-  >
->()(
+type SingleOpOptionalVars = TypedFullDocument.SingleOperation<
+  TypedFullDocument.Operation<'search', { stringWithArgs: string | null }, { string?: string | null | undefined }>
+>
+
+// String syntax
+Ts.Test.exact<SingleOpOptionalVars>()(
   Possible.gql(`query search($string: String) { stringWithArgs(string: $string) }`),
 )
 
-// Object syntax (DocumentBuilder excludes | null for optional variables)
-Ts.Test.exact<
-  TypedFullDocument.SingleOperation<
-    TypedFullDocument.Operation<'search', { stringWithArgs: string | null }, { string?: string | undefined }>
-  >
->()(
+// Object syntax
+Ts.Test.exact<SingleOpOptionalVars>()(
   Possible.gql({ query: { search: { stringWithArgs: { $: { string: $ }, __typename: true } } } }),
 )
 

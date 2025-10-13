@@ -166,12 +166,12 @@ export interface InputObject extends $$Utilities.SchemaDrivenDataMap.InputObject
     readonly abcEnum: {
       readonly nt: 'ABCEnum'
       readonly it: readonly [0]
-      readonly $t: TypeInputsIndex.ABCEnum | undefined
+      readonly $t: TypeInputsIndex.ABCEnum | null | undefined
     }
     readonly date: {
       readonly nt: 'Date'
       readonly it: readonly [0]
-      readonly $t: TypeInputsIndex.Date | undefined
+      readonly $t: TypeInputsIndex.Date | null | undefined
     }
     readonly dateRequired: {
       readonly nt: 'Date'
@@ -181,7 +181,7 @@ export interface InputObject extends $$Utilities.SchemaDrivenDataMap.InputObject
     readonly id: {
       readonly nt: 'ID'
       readonly it: readonly [0]
-      readonly $t: TypeInputsIndex.ID | undefined
+      readonly $t: TypeInputsIndex.ID | null | undefined
     }
     readonly idRequired: {
       readonly nt: 'ID'
@@ -197,12 +197,12 @@ export interface InputObjectCircular extends $$Utilities.SchemaDrivenDataMap.Inp
     readonly circular: {
       readonly nt: 'InputObjectCircular'
       readonly it: readonly [0]
-      readonly $t: TypeInputsIndex.InputObjectCircular | undefined
+      readonly $t: TypeInputsIndex.InputObjectCircular | null | undefined
     }
     readonly date: {
       readonly nt: 'Date'
       readonly it: readonly [0]
-      readonly $t: TypeInputsIndex.Date | undefined
+      readonly $t: TypeInputsIndex.Date | null | undefined
     }
   }
 }
@@ -213,7 +213,7 @@ export interface InputObjectEnum extends $$Utilities.SchemaDrivenDataMap.InputOb
     readonly abcEnum: {
       readonly nt: 'ABCEnum'
       readonly it: readonly [0]
-      readonly $t: TypeInputsIndex.ABCEnum | undefined
+      readonly $t: TypeInputsIndex.ABCEnum | null | undefined
     }
   }
 }
@@ -224,7 +224,7 @@ export interface InputObjectNested extends $$Utilities.SchemaDrivenDataMap.Input
     readonly InputObject: {
       readonly nt: 'InputObject'
       readonly it: readonly [0]
-      readonly $t: TypeInputsIndex.InputObject | undefined
+      readonly $t: TypeInputsIndex.InputObject | null | undefined
     }
   }
 }
@@ -263,7 +263,7 @@ export interface ObjectNestedWithArgs extends $$Utilities.SchemaDrivenDataMap.Ou
         readonly filter: {
           readonly nt: 'ID'
           readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.ID | undefined
+          readonly $t: TypeInputsIndex.ID | null | undefined
         }
       }
     }
@@ -272,22 +272,22 @@ export interface ObjectNestedWithArgs extends $$Utilities.SchemaDrivenDataMap.Ou
         readonly boolean: {
           readonly nt: 'Boolean'
           readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.Boolean | undefined
+          readonly $t: TypeInputsIndex.Boolean | null | undefined
         }
         readonly float: {
           readonly nt: 'Float'
           readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.Float | undefined
+          readonly $t: TypeInputsIndex.Float | null | undefined
         }
         readonly int: {
           readonly nt: 'Int'
           readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.Int | undefined
+          readonly $t: TypeInputsIndex.Int | null | undefined
         }
         readonly string: {
           readonly nt: 'String'
           readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.String | undefined
+          readonly $t: TypeInputsIndex.String | null | undefined
         }
       }
     }
@@ -353,7 +353,7 @@ export interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         readonly input: {
           readonly nt: 'InputObjectNested'
           readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.InputObjectNested | undefined
+          readonly $t: TypeInputsIndex.InputObjectNested | null | undefined
         }
       }
     }
@@ -371,7 +371,7 @@ export interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         readonly input: {
           readonly nt: 'InputObjectCircular'
           readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.InputObjectCircular | undefined
+          readonly $t: TypeInputsIndex.InputObjectCircular | null | undefined
         }
       }
     }
@@ -380,7 +380,7 @@ export interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         readonly date: {
           readonly nt: 'Date'
           readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.Date | undefined
+          readonly $t: TypeInputsIndex.Date | null | undefined
         }
       }
     }
@@ -389,7 +389,7 @@ export interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         readonly input: {
           readonly nt: 'InputObject'
           readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.InputObject | undefined
+          readonly $t: TypeInputsIndex.InputObject | null | undefined
         }
       }
     }
@@ -398,7 +398,7 @@ export interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         readonly date: {
           readonly nt: 'Date'
           readonly it: readonly [0, [1]]
-          readonly $t: readonly TypeInputsIndex.Date[] | undefined
+          readonly $t: readonly TypeInputsIndex.Date[] | null | undefined
         }
       }
     }
@@ -434,7 +434,7 @@ export interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         readonly case: {
           readonly nt: 'String'
           readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.String | undefined
+          readonly $t: TypeInputsIndex.String | null | undefined
         }
       }
     }
@@ -443,7 +443,7 @@ export interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         readonly type: {
           readonly nt: 'ChildAInterfaceHierarchyMember'
           readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.ChildAInterfaceHierarchyMember | undefined
+          readonly $t: TypeInputsIndex.ChildAInterfaceHierarchyMember | null | undefined
         }
       }
     }
@@ -452,7 +452,7 @@ export interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         readonly type: {
           readonly nt: 'ChildBInterfaceHierarchyMember'
           readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.ChildBInterfaceHierarchyMember | undefined
+          readonly $t: TypeInputsIndex.ChildBInterfaceHierarchyMember | null | undefined
         }
       }
     }
@@ -461,7 +461,7 @@ export interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         readonly type: {
           readonly nt: 'GrandparentInterfaceHierarchyMember'
           readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.GrandparentInterfaceHierarchyMember | undefined
+          readonly $t: TypeInputsIndex.GrandparentInterfaceHierarchyMember | null | undefined
         }
       }
     }
@@ -470,7 +470,7 @@ export interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         readonly type: {
           readonly nt: 'ParentInterfaceHierarchyMember'
           readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.ParentInterfaceHierarchyMember | undefined
+          readonly $t: TypeInputsIndex.ParentInterfaceHierarchyMember | null | undefined
         }
       }
     }
@@ -491,27 +491,27 @@ export interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         readonly boolean: {
           readonly nt: 'Boolean'
           readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.Boolean | undefined
+          readonly $t: TypeInputsIndex.Boolean | null | undefined
         }
         readonly float: {
           readonly nt: 'Float'
           readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.Float | undefined
+          readonly $t: TypeInputsIndex.Float | null | undefined
         }
         readonly id: {
           readonly nt: 'ID'
           readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.ID | undefined
+          readonly $t: TypeInputsIndex.ID | null | undefined
         }
         readonly int: {
           readonly nt: 'Int'
           readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.Int | undefined
+          readonly $t: TypeInputsIndex.Int | null | undefined
         }
         readonly string: {
           readonly nt: 'String'
           readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.String | undefined
+          readonly $t: TypeInputsIndex.String | null | undefined
         }
       }
     }
@@ -529,7 +529,7 @@ export interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         readonly case: {
           readonly nt: 'Case'
           readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.Case | undefined
+          readonly $t: TypeInputsIndex.Case | null | undefined
         }
       }
     }
@@ -538,7 +538,7 @@ export interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         readonly ABCEnum: {
           readonly nt: 'ABCEnum'
           readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.ABCEnum | undefined
+          readonly $t: TypeInputsIndex.ABCEnum | null | undefined
         }
       }
     }
@@ -547,7 +547,7 @@ export interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         readonly input: {
           readonly nt: 'InputObject'
           readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.InputObject | undefined
+          readonly $t: TypeInputsIndex.InputObject | null | undefined
         }
       }
     }
@@ -574,27 +574,27 @@ export interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         readonly boolean: {
           readonly nt: 'Boolean'
           readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.Boolean | undefined
+          readonly $t: TypeInputsIndex.Boolean | null | undefined
         }
         readonly float: {
           readonly nt: 'Float'
           readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.Float | undefined
+          readonly $t: TypeInputsIndex.Float | null | undefined
         }
         readonly id: {
           readonly nt: 'ID'
           readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.ID | undefined
+          readonly $t: TypeInputsIndex.ID | null | undefined
         }
         readonly int: {
           readonly nt: 'Int'
           readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.Int | undefined
+          readonly $t: TypeInputsIndex.Int | null | undefined
         }
         readonly string: {
           readonly nt: 'String'
           readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.String | undefined
+          readonly $t: TypeInputsIndex.String | null | undefined
         }
       }
     }
@@ -603,7 +603,7 @@ export interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         readonly ints: {
           readonly nt: 'Int'
           readonly it: readonly [0, [0]]
-          readonly $t: readonly TypeInputsIndex.Int[] | undefined
+          readonly $t: readonly TypeInputsIndex.Int[] | null | undefined
         }
       }
     }
@@ -630,7 +630,7 @@ export interface Query extends $$Utilities.SchemaDrivenDataMap.OutputObject {
         readonly id: {
           readonly nt: 'ID'
           readonly it: readonly [0]
-          readonly $t: TypeInputsIndex.ID | undefined
+          readonly $t: TypeInputsIndex.ID | null | undefined
         }
       }
     }

@@ -22,14 +22,14 @@ type _1 = Ts.Test.Cases<
   // Custom variable name
   Ts.Test.exact<
     InferFromQuery<{ objectWithArgs: { $: { float: $WithCustomName } } }, Possible.$.ArgumentsMap>,
-    { custom?: number | undefined }
+    { custom?: number | null | undefined }
   >,
   // ====================================================================
   //                      Nested Field Arguments
   // ====================================================================
   Ts.Test.exact<
     InferFromQuery<{ objectNestedWithArgs: { object: { $: { int: $ } } } }, Possible.$.ArgumentsMap>,
-    { int?: number | undefined }
+    { int?: number | null | undefined }
   >,
   // ====================================================================
   //                      ALIASES
@@ -37,17 +37,17 @@ type _1 = Ts.Test.Cases<
   // Alias with $ on direct field arguments
   Ts.Test.exact<
     InferFromQuery<{ objectWithArgs: ['x', { $: { id: $ } }] }, Possible.$.ArgumentsMap>,
-    { id?: string | undefined }
+    { id?: string | null | undefined }
   >,
   // Multiple aliases with $ on direct field arguments
   Ts.Test.exact<
     InferFromQuery<{ objectWithArgs: [['x', { $: { id: $ } }]] }, Possible.$.ArgumentsMap>,
-    { id?: string | undefined }
+    { id?: string | null | undefined }
   >,
   // Alias with $ on nested field arguments
   Ts.Test.exact<
     InferFromQuery<{ objectNestedWithArgs: { id: ['id2', { $: { filter: $ } }] } }, Possible.$.ArgumentsMap>,
-    { filter?: string | undefined }
+    { filter?: string | null | undefined }
   >,
   // ====================================================================
   //                      OPTIONAL ARGUMENTS
@@ -55,25 +55,25 @@ type _1 = Ts.Test.Cases<
   // Field with optional string argument
   Ts.Test.exact<
     InferFromQuery<{ objectWithArgs: { $: { id: $ } } }, Possible.$.ArgumentsMap>,
-    { id?: string | undefined }
+    { id?: string | null | undefined }
   >,
 
   // Field with optional boolean argument
   Ts.Test.exact<
     InferFromQuery<{ objectWithArgs: { $: { boolean: $ } } }, Possible.$.ArgumentsMap>,
-    { boolean?: boolean | undefined }
+    { boolean?: boolean | null | undefined }
   >,
 
   // Field with optional int argument
   Ts.Test.exact<
     InferFromQuery<{ objectWithArgs: { $: { int: $ } } }, Possible.$.ArgumentsMap>,
-    { int?: number | undefined }
+    { int?: number | null | undefined }
   >,
 
   // Field with optional float argument
   Ts.Test.exact<
     InferFromQuery<{ objectWithArgs: { $: { float: $ } } }, Possible.$.ArgumentsMap>,
-    { float?: number | undefined }
+    { float?: number | null | undefined }
   >,
 
   // ====================================================================
@@ -90,7 +90,7 @@ type _1 = Ts.Test.Cases<
   // ====================================================================
   Ts.Test.exact<
     InferFromQuery<{ objectWithArgs: { $: { id: $, boolean: $, int: $ } } }, Possible.$.ArgumentsMap>,
-    { id?: string | undefined; boolean?: boolean | undefined; int?: number | undefined }
+    { id?: string | null | undefined; boolean?: boolean | null | undefined; int?: number | null | undefined }
   >,
 
   // ====================================================================
@@ -100,7 +100,7 @@ type _1 = Ts.Test.Cases<
     InferFromQuery<{
       objectWithArgs: { $: { id: $ } }, stringWithRequiredArg: { $: { string: $ } }
     }, Possible.$.ArgumentsMap>,
-    { id?: string | undefined, string: string }
+    { id?: string | null | undefined, string: string }
   >,
 
   // ====================================================================
@@ -109,7 +109,7 @@ type _1 = Ts.Test.Cases<
   // Optional custom scalar (Date)
   Ts.Test.exact<
     InferFromQuery<{ dateArg: { $: { date: $ } } }, Possible.$.ArgumentsMap>,
-    { date?: string | undefined }  // Should be string (encoded type)
+    { date?: string | null | undefined }  // Should be string (encoded type)
   >,
 
   // Required custom scalar (Date)
@@ -124,7 +124,7 @@ type _1 = Ts.Test.Cases<
   // Optional list of required items
   Ts.Test.exact<
     InferFromQuery<{ dateArgList: { $: { date: $ } } }, Possible.$.ArgumentsMap>,
-    { date?: readonly string[] | undefined }
+    { date?: readonly string[] | null | undefined }
   >,
 
   // Required list of required items
@@ -136,7 +136,7 @@ type _1 = Ts.Test.Cases<
   // Optional list of optional items (stringWithListArg has [0, [0]])
   Ts.Test.exact<
     InferFromQuery<{ stringWithListArg: { $: { ints: $ } } }, Possible.$.ArgumentsMap>,
-    { ints?: readonly number[] | undefined }
+    { ints?: readonly number[] | null | undefined }
   >
 >
 
@@ -148,7 +148,7 @@ type _2 = Ts.Test.Cases<
   // Optional input object
   Ts.Test.exact<
     InferFromQuery<{ dateArgInputObject: { $: { input: $ } } }, Possible.$.ArgumentsMap>,
-    { input?: Possible.$.TypeInputsIndex['InputObject'] | undefined }
+    { input?: Possible.$.TypeInputsIndex['InputObject'] | null | undefined }
   >,
 
   // Required input object
@@ -166,13 +166,13 @@ type _2 = Ts.Test.Cases<
   // Nested input object
   Ts.Test.exact<
     InferFromQuery<{ InputObjectNested: { $: { input: $ } } }, Possible.$.ArgumentsMap>,
-    { input?: Possible.$.TypeInputsIndex['InputObjectNested'] | undefined }
+    { input?: Possible.$.TypeInputsIndex['InputObjectNested'] | null | undefined }
   >,
 
   // Circular input object (self-referential)
   Ts.Test.exact<
     InferFromQuery<{ argInputObjectCircular: { $: { input: $ } } }, Possible.$.ArgumentsMap>,
-    { input?: Possible.$.TypeInputsIndex['InputObjectCircular'] | undefined }
+    { input?: Possible.$.TypeInputsIndex['InputObjectCircular'] | null | undefined }
   >,
 
   // ====================================================================
@@ -193,12 +193,12 @@ type _2 = Ts.Test.Cases<
   // Combining required with other arguments
   Ts.Test.exact<
     InferFromQuery<{ objectWithArgs: { $: { id: $Required; boolean: $ } } }, Possible.$.ArgumentsMap>,
-    { id: string; boolean?: boolean | undefined }
+    { id: string; boolean?: boolean | null | undefined }
   >,
 
-  // Default with different types
+  // Default with different types (nullable Int with default still allows null)
   Ts.Test.exact<
     InferFromQuery<{ objectWithArgs: { $: { int: $WithDefault42 } } }, Possible.$.ArgumentsMap>,
-    { int?: number }
+    { int?: number | null }
   >
 >
