@@ -251,13 +251,19 @@ type getFragmentSelectionType<
   : never
 
 /**
+ * Helper type to extract operation name, defaulting to 'default' for anonymous operations.
+ */
+type GetOperationName<Definition> = Definition extends { name: { value: infer Name extends string } } ? Name
+  : 'default'
+
+/**
  * Extract all operations from a GraphQL document.
  * Returns a map of operation name to operation metadata (name, result, variables).
  *
  * Recursively processes all definitions in the document:
- * - Named operations: Added to the operations map
+ * - Named operations: Added to the operations map with their explicit name
+ * - Anonymous operations: Added to the operations map with the name 'default'
  * - Fragment definitions: Collected and passed to subsequent operations
- * - Unnamed operations: Skipped (not supported for multi-operation documents)
  */
 type getDocumentOperations<
   Definitions,
@@ -266,15 +272,15 @@ type getDocumentOperations<
   OperationsAcc = {},
 > = Definitions extends readonly [infer Definition, ...infer Rest]
   ? Definition extends { kind: Kind.OPERATION_DEFINITION; name: any }
-    // Named operation - add to operations map
+    // Operation (named or anonymous) - add to operations map
     ? getDocumentOperations<
       Rest,
       Introspection,
       Fragments,
       & OperationsAcc
       & {
-        [Name in Definition['name']['value']]: {
-          name: Definition['name']['value']
+        [Name in GetOperationName<Definition>]: {
+          name: Name
           result: getOperationSelectionType<Definition, Introspection, Fragments>
           variables: getVariablesType<{ definitions: [Definition] } & DocumentNodeLike, Introspection>
         }
@@ -287,7 +293,7 @@ type getDocumentOperations<
       getFragmentMapRec<[Definition]> & Fragments,
       OperationsAcc
     >
-    // Unnamed operation or other - skip it
+    // Other - skip it
   : getDocumentOperations<Rest, Introspection, Fragments, OperationsAcc>
   : OperationsAcc
 
