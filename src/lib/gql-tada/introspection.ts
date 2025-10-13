@@ -1,3 +1,4 @@
+import type { Schema } from '#src/types/Schema/$.js'
 import type { obj } from './utils.js'
 
 /** Format of introspection data queryied from your schema.
@@ -172,24 +173,13 @@ type mapIntrospectionTypes<Query extends IntrospectionQuery> = obj<
   }
 >
 
-/**
- * Extract decoded TypeScript type from Graffle Scalar or pass through plain types.
- *
- * This allows gql-tada to work directly with Graffle's scalar registry without transformation.
- *
- * @internal
- */
-type ExtractScalarType<T> =
-  T extends { codec: { _typeDecoded: infer $Decoded } }
-    ? $Decoded  // Graffle Scalar - extract decoded type
-    : T         // Plain type - pass through
-
 /** @internal */
 type mapIntrospectionScalarTypes<Scalars extends ScalarsLike = DefaultScalars> = obj<
   {
     [P in keyof Scalars | keyof DefaultScalars]: {
       name: P
-      type: P extends keyof Scalars ? ExtractScalarType<Scalars[P]>
+      type: P extends keyof Scalars ? Scalars[P] extends Schema.Scalar ? Schema.Scalar.GetDecoded<Scalars[P]>
+        : Scalars[P]
         : P extends keyof DefaultScalars ? DefaultScalars[P]
         : never
     }
