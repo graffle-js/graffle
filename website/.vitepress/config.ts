@@ -2,6 +2,7 @@ import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
 import { createFileSystemTypesCache } from '@shikijs/vitepress-twoslash/cache-fs'
 import { ModuleKind, ModuleResolutionKind } from 'typescript'
 import { defineConfig } from 'vitepress'
+import { MermaidMarkdown } from 'vitepress-plugin-mermaid'
 import { tabsMarkdownPlugin } from 'vitepress-plugin-tabs'
 import { generateSidebar } from 'vitepress-sidebar'
 import { SidebarItem, SidebarMulti } from 'vitepress-sidebar/types'
@@ -96,11 +97,12 @@ export default defineConfig({
   markdown: {
     config(md) {
       md.use(tabsMarkdownPlugin)
+      md.use(MermaidMarkdown)
     },
     // Optimize Shiki for performance - only load required languages and themes
     shiki: {
       // Only load the languages we actually use
-      langs: ['typescript', 'javascript', 'json', 'shell', 'text', 'sh'],
+      langs: ['typescript', 'javascript', 'json', 'shell', 'text', 'sh', 'mermaid'],
       // Only load the themes we need (VitePress uses these by default)
       themes: {
         light: 'github-light',
@@ -133,6 +135,9 @@ export default defineConfig({
   },
   srcDir: './content',
   themeConfig: {
+    outline: {
+      level: [2, 3],
+    },
     footer: {
       message: 'Released under the MIT License.',
       copyright: 'Copyright © 2024-present Jason Kuhrt',

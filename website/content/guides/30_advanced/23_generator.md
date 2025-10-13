@@ -1,6 +1,6 @@
-# Generation <GeneratedClientBadge />
+# Generator <GeneratedClientBadge />
 
-This guide is an overview of using generation. Individual features enabled by generation are discussed in other guides. There is a [practical tutorial in getting started](../20_getting-started.md). But if you're trying to build a mental model of what Graffle means when it talks about generation or generally want more detail on generation tools, then this guide is for you.
+This guide is an overview of using the generator. Individual features enabled by generation are discussed in other guides. There is a [practical tutorial in getting started](../20_getting-started.md). But if you're trying to build a mental model of what Graffle means when it talks about generation or generally want more detail on generation tools, then this guide is for you.
 
 ## Benefits
 

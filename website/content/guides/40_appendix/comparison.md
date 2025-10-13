@@ -1,22 +1,22 @@
-# Comparison with Other GraphQL Clients
+# Comparisons
 
 This guide helps you understand how Graffle compares to other popular GraphQL clients in the JavaScript ecosystem and when to choose each one.
 
 ## Quick Comparison Table
 
-| Feature                   | Graffle               | Apollo Client     | Urql                    | graphql-request |
-| ------------------------- | --------------------- | ----------------- | ----------------------- | --------------- |
-| **Primary Use Case**      | General-purpose       | React apps        | React apps              | Simple HTTP     |
-| **Type Safety**           | ⭐⭐⭐ Full inference | ⭐⭐ With codegen | ⭐⭐ With gql.tada      | ⭐ Basic        |
-| **Bundle Size**           | ~50KB                 | ~150KB+           | ~40KB                   | ~8KB            |
-| **Framework Integration** | Basic                 | ⭐⭐⭐ React      | ⭐⭐⭐ React/Vue/Svelte | Basic           |
-| **Caching**               | Extension possible    | ✅ Normalized     | ✅ Optional             | ❌              |
-| **Extension System**      | ✅ Type-safe          | ✅ Apollo Link    | ✅ Exchanges            | ❌              |
-| **Document Builder**      | ✅ Optional           | ❌                | ❌                      | ❌              |
-| **Multi-Transport**       | ✅ HTTP + Memory      | HTTP only         | HTTP + SSR              | HTTP only       |
-| **Custom Scalars**        | ✅ Automatic          | Manual            | Manual                  | Manual          |
-| **Schema Errors**         | ✅ Extension          | Manual            | Manual                  | Manual          |
-| **Learning Curve**        | Medium                | High              | Medium                  | Low             |
+| Feature                   | Graffle                       | Apollo Client     | Urql                    | graphql-request |
+| ------------------------- | ----------------------------- | ----------------- | ----------------------- | --------------- |
+| **Primary Use Case**      | General-purpose               | React apps        | React apps              | Simple HTTP     |
+| **Type Safety**           | ⭐⭐⭐ Inference + Generation | ⭐⭐ With codegen | ⭐⭐ With gql.tada      | ⭐ Basic        |
+| **Bundle Size**           | ~50KB                         | ~150KB+           | ~40KB                   | ~8KB            |
+| **Framework Integration** | Basic                         | ⭐⭐⭐ React      | ⭐⭐⭐ React/Vue/Svelte | Basic           |
+| **Caching**               | Extension possible            | ✅ Normalized     | ✅ Optional             | ❌              |
+| **Extension System**      | ✅ Type-safe                  | ✅ Apollo Link    | ✅ Exchanges            | ❌              |
+| **Document Builder**      | ✅ Optional                   | ❌                | ❌                      | ❌              |
+| **Multi-Transport**       | ✅ HTTP + Memory              | HTTP only         | HTTP + SSR              | HTTP only       |
+| **Custom Scalars**        | ✅ Automatic                  | Manual            | Manual                  | Manual          |
+| **Schema Errors**         | ✅ Extension                  | Manual            | Manual                  | Manual          |
+| **Learning Curve**        | Medium                        | High              | Medium                  | Low             |
 
 ## Detailed Comparisons
 
@@ -33,8 +33,8 @@ Graffle is the **successor to graphql-request**, evolved from the same codebase 
 
 **Graffle Improvements:**
 
-- **Type Safety** - Full type inference for documents and results (vs basic/none)
-- **Document Builder** - Optional TypeScript-native query construction
+- **Type Safety** - Inference for GraphQL strings, optional generation for Document Builder
+- **Document Builder** - Optional generated TypeScript API for type-safe queries
 - **Extensions** - Type-safe extension system (OpenTelemetry, uploads, schema errors, etc.)
 - **Multi-Transport** - Execute against in-memory schemas, not just HTTP
 - **Custom Scalars** - Automatic encoding/decoding with codecs
@@ -83,7 +83,7 @@ Apollo Client is the **most full-featured GraphQL client**, purpose-built for Re
 
 **Graffle Strengths:**
 
-- **Type Safety** - Native type inference without codegen step
+- **Type Safety** - Hybrid approach with inference (gql) and optional generation (Document Builder)
 - **Simplicity** - Straightforward API without cache configuration
 - **Bundle Size** - ~3x smaller
 - **Framework Agnostic** - Works everywhere (Node, Deno, Bun, browsers, workers)
@@ -101,7 +101,7 @@ Apollo Client is the **most full-featured GraphQL client**, purpose-built for Re
 
 - You're building backend services, CLI tools, scripts, or non-React apps
 - You prefer simpler, more predictable behavior
-- You want type safety without codegen
+- You want flexible type safety (inference or generation based on needs)
 - You need multi-runtime support (Node, Deno, Bun, workers)
 
 > [!NOTE]
@@ -123,8 +123,8 @@ Urql is a **lightweight, extensible GraphQL client** with excellent framework in
 
 **Graffle Strengths:**
 
-- **Document Builder** - TypeScript-native alternative to GraphQL syntax
-- **Type Inference** - Built-in without external tools (vs gql.tada setup)
+- **Document Builder** - Optional generated TypeScript API (alternative to GraphQL strings)
+- **Type Safety** - Hybrid with inference (gql) and generation (Document Builder)
 - **Multi-Transport** - In-memory execution alongside HTTP
 - **Custom Scalars** - Automatic encoding/decoding
 - **Schema Errors** - First-class support for error schemas
@@ -146,9 +146,9 @@ Urql is a **lightweight, extensible GraphQL client** with excellent framework in
 **Choose Graffle if:**
 
 - You're building backend services, CLI tools, or scripts
-- You want built-in type inference without additional setup
+- You want flexible type safety options (inference and/or generation)
 - You need multi-transport capabilities (in-memory + HTTP)
-- You prefer Document Builder over GraphQL syntax
+- You prefer optional Document Builder alongside GraphQL syntax
 
 > [!NOTE]
 > Both Urql and Graffle are excellent choices for different use cases. Urql excels in UI applications with its framework integrations, while Graffle excels as a general-purpose client with superior type safety.
@@ -210,8 +210,8 @@ Relay is **Facebook's GraphQL client**, deeply integrated with React and optimiz
 
 **Best Choice: Graffle**
 
-- Native type inference without codegen
-- Document Builder for TypeScript-native queries
+- Hybrid type safety (inference for gql, generation for Document Builder)
+- Optional Document Builder for TypeScript-native queries
 - Progressive enhancement (start simple, add features)
 
 ### Quick Prototypes & Simple Requests

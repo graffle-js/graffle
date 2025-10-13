@@ -1,3 +1,5 @@
+# Glossary
+
 ### SDDM
 
 Abbreviation for [Schema Driven Data Map](#schema-driven-data-map).

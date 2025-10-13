@@ -167,6 +167,7 @@
     "graphql-yoga": "^5.13.4",
     "jsdom": "^26.1.0",
     "memfs": "^4.17.0",
+    "mermaid": "^11.12.0",
     "oxlint": "^1.18.0",
     "prettier": "^3.5.3",
     "publint": "^0.3.12",
@@ -176,6 +177,7 @@
     "typescript": "^5.9.3",
     "vite-tsconfig-paths": "^5.1.4",
     "vitepress": "^1.6.3",
+    "vitepress-plugin-mermaid": "^2.0.17",
     "vitest": "^3.1.1",
     "zod": "^3.24.3"
   },

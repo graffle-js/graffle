@@ -87,20 +87,129 @@ console.log(data)
 
 ## Why Choose Graffle?
 
-Graffle combines the **simplicity of graphql-request** with **powerful type safety** and **extensibility**.
+<div class="why-choose">
 
-**Choose Graffle if you want:**
+<div class="why-column">
 
-- **Full Type Safety** — Complete type inference with optional Document Builder
+### Reasons to use
+
+- **Full Type Safety** — Inference for GraphQL syntax, optional generation for Document Builder
 - **Flexibility** — Start simple, progressively adopt type-safe features
 - **Extensibility** — Powerful extension system (OpenTelemetry, schema errors, custom scalars)
 - **Multi-Transport** — Execute against HTTP or in-memory schemas
 
-**Consider UI-specialized clients if:**
+</div>
+
+<div class="why-column">
+
+### Reasons to not use
 
 - Building React/Vue/Svelte apps needing deep framework integration ([Apollo Client](https://www.apollographql.com/docs/react/), [Urql](https://commerce.nearform.com/open-source/urql/), [Relay](https://relay.dev/))
 
 [Read the detailed comparison →](/guides/appendix/comparison)
+
+</div>
+
+</div>
+
+<div class="feature-showcase">
+
+<div class="feature-row">
+  <div class="feature-text">
+    <h3>Document Builder</h3>
+    <p>Optional generated TypeScript API for building type-safe queries. Get full IntelliSense and compile-time safety with a native TypeScript interface instead of GraphQL strings.</p>
+    <div class="feature-links">
+      <a href="/guides/generation/document-builder">Learn more</a>
+      <a href="https://github.com/graffle-js/graffle/blob/main/examples/55_document-builder/document-builder_root-field.ts">Full example</a>
+    </div>
+  </div>
+  <div class="feature-code">
+
+```ts
+const pokemons = await graffle.query.pokemons({
+  $: { filter: { name: { in: ['Pikachu', 'Charizard'] } } },
+  name: true,
+  hp: true,
+})
+```
+
+</div>
+</div>
+
+<div class="feature-row feature-row-reverse">
+  <div class="feature-text">
+    <h3>GraphQL Strings with Type Inference</h3>
+    <p>Use standard GraphQL syntax with full type inference. Write queries as strings and get complete type safety for variables and results without any code generation.</p>
+    <div class="feature-links">
+      <a href="/guides/core/requests">Learn more</a>
+      <a href="https://github.com/graffle-js/graffle/blob/main/examples/30_gql/gql_gql-string_gql-typed__gql-string-typed.ts">Full example</a>
+    </div>
+  </div>
+  <div class="feature-code">
+
+```ts
+const data = await graffle.gql(`
+  query pokemonByName($name: String!) {
+    pokemonByName(name: $name) {
+      name
+      hp
+    }
+  }
+`).pokemonByName({ name: 'Pikachu' })
+```
+
+</div>
+</div>
+
+<div class="feature-row">
+  <div class="feature-text">
+    <h3>Powerful Extensions</h3>
+    <p>Compose middleware to add observability, file uploads, schema errors, and more. Build your own extensions with a clean, type-safe API.</p>
+    <div class="feature-links">
+      <a href="/guides/advanced/extension-authoring">Learn more</a>
+    </div>
+  </div>
+  <div class="feature-code">
+
+```ts
+const graffle = Graffle
+  .create()
+  .use(OpenTelemetry())
+  .use(SchemaErrors)
+
+const data = await graffle.query.pokemons({ name: true })
+```
+
+</div>
+</div>
+
+<div class="feature-row feature-row-reverse">
+  <div class="feature-text">
+    <h3>Custom Scalars</h3>
+    <p>Register codecs for custom scalars and Graffle automatically encodes arguments and decodes results. Works seamlessly with dates, big integers, or any custom type.</p>
+    <div class="feature-links">
+      <a href="/guides/core/custom-scalars">Learn more</a>
+      <a href="https://github.com/graffle-js/graffle/blob/main/examples/35_custom-scalar/custom-scalar.ts">Full example</a>
+    </div>
+  </div>
+  <div class="feature-code">
+
+```ts
+const graffle = Graffle.create().scalar('Date', {
+  decode: (value: string) => new Date(value),
+  encode: (value: Date) => value.toISOString(),
+})
+
+const pokemons = await graffle.query.pokemons({
+  $: { filter: { birthday: { lte: new Date('1987-01-13') } } },
+  birthday: true, // JavaScript Date
+})
+```
+
+</div>
+</div>
+
+</div>
 
 <script setup>
 import { VPTeamMembers } from 'vitepress/theme'
@@ -161,20 +270,105 @@ const members = [
   margin: 32px 0;
 }
 
+/* Why Choose section - two columns */
+.why-choose {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  margin: 32px 0 48px;
+}
+
+.why-column h3 {
+  font-size: 18px;
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.why-column ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.why-column li {
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+/* Feature showcase - alternating rows */
+.feature-showcase {
+  margin: 32px 0 48px;
+}
+
+.feature-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: center;
+  margin-bottom: 48px;
+}
+
+.feature-row-reverse {
+  direction: rtl;
+}
+
+.feature-row-reverse > * {
+  direction: ltr;
+}
+
+.feature-text h3 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.feature-text p {
+  font-size: 17px;
+  line-height: 1.7;
+  opacity: 0.85;
+  margin: 0 0 16px 0;
+}
+
+.feature-links {
+  display: flex;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.feature-links a {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--vp-c-brand-1);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.feature-links a:hover {
+  color: var(--vp-c-brand-2);
+  text-decoration: underline;
+}
+
+.feature-code div[class*='language-'] {
+  margin: 0;
+}
+
 /* Custom sections container */
 .CustomSections {
   max-width: 960px;
-  margin: 48px auto 0;
+  margin: 64px auto 0;
   padding: 0 24px;
+  border-top: 1px solid var(--vp-c-divider);
+  padding-top: 48px;
 }
 
-/* Team members styling */
+/* Team members styling - simplified footer style */
 .CustomSections .VPTeamMembers {
   margin-top: 0;
 }
 
 .CustomSections .VPTeamMembers .container {
-  max-width: 600px !important;
+  max-width: 100% !important;
   margin: 0 auto;
 }
 
@@ -182,19 +376,47 @@ const members = [
   grid-template-columns: 1fr !important;
 }
 
-/* Better team member card styling */
 .CustomSections .VPTeamMember {
-  padding: 24px !important;
+  padding: 16px 0 !important;
+  background: transparent !important;
+  border: none !important;
 }
 
 .CustomSections .VPTeamMember .profile {
-  margin-bottom: 16px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.CustomSections .VPTeamMember .profile .avatar {
+  width: 48px !important;
+  height: 48px !important;
+}
+
+.CustomSections .VPTeamMember .data {
+  flex: 1;
+}
+
+.CustomSections .VPTeamMember .name {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.CustomSections .VPTeamMember .title {
+  font-size: 13px;
+  opacity: 0.6;
 }
 
 .CustomSections .VPTeamMember .desc {
-  line-height: 1.6;
-  font-size: 14px;
-  opacity: 0.8;
+  line-height: 1.5;
+  font-size: 13px;
+  opacity: 0.7;
+  margin-top: 8px;
+}
+
+.CustomSections .VPTeamMember .links {
+  margin-top: 8px;
 }
 
 /* Responsive adjustments */
@@ -205,6 +427,26 @@ const members = [
 
   .CustomSections {
     max-width: 720px;
+  }
+
+  .why-choose {
+    gap: 32px;
+  }
+
+  .feature-row {
+    gap: 24px;
+  }
+
+  .feature-text h3 {
+    font-size: 24px;
+  }
+
+  .feature-text p {
+    font-size: 16px;
+  }
+
+  .feature-links a {
+    font-size: 14px;
   }
 }
 
@@ -220,6 +462,37 @@ const members = [
 
   .CustomSections .VPTeamMembers .container {
     max-width: 100% !important;
+  }
+
+  .why-choose {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .feature-row {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .feature-row-reverse {
+    direction: ltr;
+  }
+
+  .feature-text h3 {
+    font-size: 22px;
+  }
+
+  .feature-text p {
+    font-size: 16px;
+  }
+
+  .feature-code div[class*='language-'] {
+    font-size: 13px;
+  }
+
+  .feature-links a {
+    font-size: 14px;
   }
 }
 </style>

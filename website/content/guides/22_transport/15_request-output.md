@@ -1,4 +1,4 @@
-# Request Output
+# Response
 
 <!--@include: @/_snippets/example-links/output.md-->
 

@@ -9,7 +9,7 @@
 import './graffle/modules/global.js'
 // ---cut---
 
-import { $ } from 'graffle/extensions/document-builder'
+import { $ } from 'graffle'
 //       ^
 // Variable marker with flexible API
 

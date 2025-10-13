@@ -1,4 +1,4 @@
-# LSP Setup for GraphQL Documents
+# LSP Setup
 
 When using Graffle's `.gql()` method with GraphQL document syntax, you can enhance your development experience with editor validation and autocomplete by configuring the GraphQLSP LSP plugin.
 
