@@ -6,7 +6,17 @@ import type { $FragmentInline } from './fragment.js'
 export type * as Trainer from './$$.js'
 
 /**
+ * Selection set for {@link https://graphql.org/learn/schema/#object-types | Object} type.
+ *
  * A Pokemon trainer who catches and battles with Pokemon.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object} ↗ |
+ * | **Fields** | 5 |
+ * | **Implements** | {@link $Schema.Being} |
  */
 export interface Trainer<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,

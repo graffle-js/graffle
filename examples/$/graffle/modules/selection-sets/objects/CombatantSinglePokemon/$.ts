@@ -6,7 +6,16 @@ import type { $FragmentInline } from './fragment.js'
 export type * as CombatantSinglePokemon from './$$.js'
 
 /**
+ * Selection set for {@link https://graphql.org/learn/schema/#object-types | Object} type.
+ *
  * A combatant in a one-on-one battle with a single Pokemon.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object} ↗ |
+ * | **Fields** | 2 |
  */
 export interface CombatantSinglePokemon<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,

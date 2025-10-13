@@ -1,6 +1,5 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
 import type * as $$Schema from './schema/$.js'
-import type * as $$SelectionSetsFields from './selection-sets/$$.fields.js'
 import type * as $$SelectionSets from './selection-sets/$.js'
 
 /**
@@ -64,7 +63,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   id: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSetsFields.Query.id<{ scalars: $Context['scalars'] }>>,
+      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.id<{ scalars: $Context['scalars'] }>>,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -95,7 +94,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.idNonNull<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.idNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})

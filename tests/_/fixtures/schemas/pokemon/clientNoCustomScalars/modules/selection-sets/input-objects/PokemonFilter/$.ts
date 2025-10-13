@@ -6,6 +6,17 @@ import type * as $Fields from './fields.js'
 
 export type * as PokemonFilter from './fields.js'
 
+/**
+ * Input for {@link https://graphql.org/learn/schema/#input-types | InputObject}.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinputobjecttype | InputObject} ↗ |
+ * | **Fields** | 3 |
+ * | **All Fields Nullable** | Yes |
+ */
 export interface PokemonFilter<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > {

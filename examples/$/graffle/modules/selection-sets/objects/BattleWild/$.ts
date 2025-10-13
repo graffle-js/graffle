@@ -6,7 +6,16 @@ import type { $FragmentInline } from './fragment.js'
 export type * as BattleWild from './$$.js'
 
 /**
+ * Selection set for {@link https://graphql.org/learn/schema/#object-types | Object} type.
+ *
  * A battle between a trainer and wild Pokemon.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object} ↗ |
+ * | **Fields** | 6 |
  */
 export interface BattleWild<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,

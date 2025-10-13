@@ -1,6 +1,5 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
 import type * as $$Schema from './schema/$.js'
-import type * as $$SelectionSetsFields from './selection-sets/$$.fields.js'
 import type * as $$SelectionSets from './selection-sets/$.js'
 
 /**
@@ -67,7 +66,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.InputObjectNested<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.InputObjectNested<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -100,7 +99,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.InputObjectNestedNonNull<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.InputObjectNestedNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -132,10 +131,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   abcEnum: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
-        $SelectionSet,
-        $$SelectionSetsFields.Query.abcEnum<{ scalars: $Context['scalars'] }>
-      >,
+      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.abcEnum<{ scalars: $Context['scalars'] }>>,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -167,7 +163,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.argInputObjectCircular<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.argInputObjectCircular<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -199,7 +195,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.bigintField<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.bigintField<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -231,7 +227,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.bigintFieldNonNull<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.bigintFieldNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -261,10 +257,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   date: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
-        $SelectionSet,
-        $$SelectionSetsFields.Query.date<{ scalars: $Context['scalars'] }>
-      >,
+      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.date<{ scalars: $Context['scalars'] }>>,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -294,10 +287,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   dateArg: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
-        $SelectionSet,
-        $$SelectionSetsFields.Query.dateArg<{ scalars: $Context['scalars'] }>
-      >,
+      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateArg<{ scalars: $Context['scalars'] }>>,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -329,7 +319,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.dateArgInputObject<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.dateArgInputObject<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -362,7 +352,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.dateArgList<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.dateArgList<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -395,7 +385,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.dateArgNonNull<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.dateArgNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -428,7 +418,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.dateArgNonNullList<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.dateArgNonNullList<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -461,7 +451,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.dateArgNonNullListNonNull<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.dateArgNonNullListNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -493,7 +483,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.dateInterface1<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.dateInterface1<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -524,10 +514,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   dateList: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
-        $SelectionSet,
-        $$SelectionSetsFields.Query.dateList<{ scalars: $Context['scalars'] }>
-      >,
+      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateList<{ scalars: $Context['scalars'] }>>,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -559,7 +546,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.dateListList<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.dateListList<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -592,7 +579,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.dateListNonNull<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.dateListNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -624,7 +611,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.dateNonNull<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.dateNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -656,7 +643,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.dateObject1<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.dateObject1<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -686,10 +673,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   dateUnion: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
-        $SelectionSet,
-        $$SelectionSetsFields.Query.dateUnion<{ scalars: $Context['scalars'] }>
-      >,
+      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.dateUnion<{ scalars: $Context['scalars'] }>>,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -719,10 +703,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   error: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
-        $SelectionSet,
-        $$SelectionSetsFields.Query.error<{ scalars: $Context['scalars'] }>
-      >,
+      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.error<{ scalars: $Context['scalars'] }>>,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -751,7 +732,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   id: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSetsFields.Query.id<{ scalars: $Context['scalars'] }>>,
+      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.id<{ scalars: $Context['scalars'] }>>,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -782,7 +763,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.idNonNull<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.idNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -812,10 +793,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   interface: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
-        $SelectionSet,
-        $$SelectionSetsFields.Query.interface<{ scalars: $Context['scalars'] }>
-      >,
+      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.interface<{ scalars: $Context['scalars'] }>>,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -848,7 +826,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.interfaceHierarchyChildA<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.interfaceHierarchyChildA<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -882,7 +860,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.interfaceHierarchyChildB<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.interfaceHierarchyChildB<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -916,7 +894,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.interfaceHierarchyGrandparents<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.interfaceHierarchyGrandparents<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -950,7 +928,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.interfaceHierarchyParents<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.interfaceHierarchyParents<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -982,7 +960,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.interfaceNonNull<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.interfaceNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -1015,7 +993,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.interfaceWithArgs<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.interfaceWithArgs<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -1046,10 +1024,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   listInt: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
-        $SelectionSet,
-        $$SelectionSetsFields.Query.listInt<{ scalars: $Context['scalars'] }>
-      >,
+      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.listInt<{ scalars: $Context['scalars'] }>>,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1081,7 +1056,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.listIntNonNull<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.listIntNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -1114,7 +1089,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.listListInt<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.listListInt<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -1147,7 +1122,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.listListIntNonNull<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.listListIntNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -1179,7 +1154,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.lowerCaseUnion<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.lowerCaseUnion<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -1209,10 +1184,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   object: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
-        $SelectionSet,
-        $$SelectionSetsFields.Query.object<{ scalars: $Context['scalars'] }>
-      >,
+      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.object<{ scalars: $Context['scalars'] }>>,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1244,7 +1216,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.objectList<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.objectList<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -1277,7 +1249,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.objectListNonNull<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.objectListNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -1309,7 +1281,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.objectNested<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.objectNested<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -1341,7 +1313,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.objectNestedWithArgs<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.objectNestedWithArgs<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -1373,7 +1345,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.objectNonNull<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.objectNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -1406,7 +1378,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.objectWithArgs<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.objectWithArgs<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -1437,10 +1409,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   result: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet: $$Utilities.Exact<
-        $SelectionSet,
-        $$SelectionSetsFields.Query.result<{ scalars: $Context['scalars'] }>
-      >,
+      selectionSet: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.result<{ scalars: $Context['scalars'] }>>,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1472,7 +1441,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.resultNonNull<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.resultNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -1502,10 +1471,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
   string: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
-        $SelectionSet,
-        $$SelectionSetsFields.Query.string<{ scalars: $Context['scalars'] }>
-      >,
+      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Query.string<{ scalars: $Context['scalars'] }>>,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -1537,7 +1503,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.stringWithArgEnum<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.stringWithArgEnum<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -1570,7 +1536,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.stringWithArgInputObject<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.stringWithArgInputObject<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -1603,7 +1569,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.stringWithArgInputObjectEnum<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.stringWithArgInputObjectEnum<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -1636,7 +1602,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.stringWithArgInputObjectRequired<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.stringWithArgInputObjectRequired<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -1671,7 +1637,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.stringWithArgs<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.stringWithArgs<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -1704,7 +1670,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.stringWithListArg<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.stringWithListArg<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -1737,7 +1703,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.stringWithListArgRequired<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.stringWithListArgRequired<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -1770,7 +1736,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.stringWithRequiredArg<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.stringWithRequiredArg<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -1802,7 +1768,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.unionFooBar<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.unionFooBar<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -1834,7 +1800,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.unionFooBarNonNull<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.unionFooBarNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -1867,7 +1833,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.unionFooBarWithArgs<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.unionFooBarWithArgs<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -1899,7 +1865,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.unionObject<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.unionObject<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -1931,7 +1897,7 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Query.unionObjectNonNull<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Query.unionObjectNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})
@@ -2008,10 +1974,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
   id: $$Utilities.GraffleKit.Context.Configuration.Check.Preflight<
     $Context,
     <$SelectionSet>(
-      selectionSet?: $$Utilities.Exact<
-        $SelectionSet,
-        $$SelectionSetsFields.Mutation.id<{ scalars: $Context['scalars'] }>
-      >,
+      selectionSet?: $$Utilities.Exact<$SelectionSet, $$SelectionSets.Mutation.id<{ scalars: $Context['scalars'] }>>,
     ) => Promise<
       & (null | {})
       & $$Utilities.HandleOutputDocumentBuilderRootField<
@@ -2042,7 +2005,7 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.Mutation.idNonNull<{ scalars: $Context['scalars'] }>
+        $$SelectionSets.Mutation.idNonNull<{ scalars: $Context['scalars'] }>
       >,
     ) => Promise<
       & (null | {})

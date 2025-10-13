@@ -1,7 +1,21 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
 import type { $DefaultSelectionContext } from '../../_context.js'
 import type * as $Fields from './fields.js'
+import type { $FragmentInline } from './fragment.js'
 
+export type * as Object1ImplementingInterface from './$$.js'
+
+/**
+ * Selection set for {@link https://graphql.org/learn/schema/#object-types | Object} type.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object} ↗ |
+ * | **Fields** | 2 |
+ * | **Implements** | {@link $Schema.Interface} |
+ */
 export interface Object1ImplementingInterface<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
@@ -17,7 +31,7 @@ export interface Object1ImplementingInterface<
    * | **Nullability** | Optional |
    */
   id?:
-    | $Fields.id$Expanded<_$Context>
+    | $Fields.id.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
   /**
    * # Info
@@ -31,7 +45,7 @@ export interface Object1ImplementingInterface<
    * | **Nullability** | Optional |
    */
   int?:
-    | $Fields.int$Expanded<_$Context>
+    | $Fields.int.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.int<_$Context>>
 
   /**
@@ -42,9 +56,7 @@ export interface Object1ImplementingInterface<
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: Object1ImplementingInterface$FragmentInline<_$Context> | Object1ImplementingInterface$FragmentInline<
-    _$Context
-  >[]
+  ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
   /**
    * A meta field. Is the name of the type being selected.
    *
@@ -55,12 +67,4 @@ export interface Object1ImplementingInterface<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
       $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     >
-}
-
-export interface Object1ImplementingInterface$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends
-  Object1ImplementingInterface<_$Context>,
-  $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields
-{
 }

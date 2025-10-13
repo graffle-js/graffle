@@ -643,3 +643,209 @@ export const getStaticDocumentFieldDoc = (
 
   return parts.join('\n')
 }
+
+/**
+ * Generate enhanced JSDoc for selection set object types.
+ */
+export const getObjectTypeSelectionSetDoc = (
+  type: Grafaid.Schema.ObjectType,
+  isRoot: boolean,
+): string => {
+  const schemaDescription = type.description
+  const kindDocUrl = getKindDocUrl('OutputObject')
+  const fields = Object.values(type.getFields())
+  const fieldCount = fields.length
+
+  // Check if this object implements any interfaces
+  const interfaces = type.getInterfaces()
+
+  // Build table
+  const table = markdownTable({
+    'Kind': `{@link ${kindDocUrl} | Object} ↗`,
+    'Fields': `${fieldCount}`,
+    'Implements': interfaces.length > 0
+      ? interfaces.map(i => `{@link $Schema.${i.name}}`).join(', ')
+      : undefined,
+  })
+
+  // Combine parts
+  const parts: string[] = []
+
+  // Add narrative based on whether it's a root type
+  if (isRoot) {
+    parts.push(`Selection set for GraphQL root type.`)
+  } else {
+    parts.push(`Selection set for {@link https://graphql.org/learn/schema/#object-types | Object} type.`)
+  }
+
+  if (schemaDescription) {
+    parts.push('')
+    parts.push(schemaDescription)
+  }
+
+  parts.push('')
+  parts.push('# Info')
+  parts.push('')
+  parts.push(table)
+
+  return parts.join('\n')
+}
+
+/**
+ * Generate enhanced JSDoc for selection set interface types.
+ */
+export const getInterfaceTypeSelectionSetDoc = (
+  type: Grafaid.Schema.InterfaceType,
+  kindMap: Grafaid.Schema.KindMap,
+): string => {
+  const schemaDescription = type.description
+  const kindDocUrl = getKindDocUrl('Interface')
+  const fields = Object.values(type.getFields())
+  const fieldCount = fields.length
+
+  // Get implementors
+  const implementors = Grafaid.Schema.KindMap.getInterfaceImplementors(kindMap, type)
+
+  // Build table
+  const table = markdownTable({
+    'Kind': `{@link ${kindDocUrl} | Interface} ↗`,
+    'Fields': `${fieldCount}`,
+    'Implementors': implementors.length > 0
+      ? implementors.map(i => `{@link $Schema.${i.name}}`).join(', ')
+      : undefined,
+  })
+
+  // Combine parts
+  const parts: string[] = []
+  parts.push(`Selection set for {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface}.`)
+
+  if (schemaDescription) {
+    parts.push('')
+    parts.push(schemaDescription)
+  }
+
+  parts.push('')
+  parts.push('# Info')
+  parts.push('')
+  parts.push(table)
+
+  return parts.join('\n')
+}
+
+/**
+ * Generate enhanced JSDoc for selection set union types.
+ */
+export const getUnionTypeSelectionSetDoc = (
+  type: Grafaid.Schema.UnionType,
+): string => {
+  const schemaDescription = type.description
+  const kindDocUrl = getKindDocUrl('Union')
+  const members = type.getTypes()
+
+  // Build table
+  const table = markdownTable({
+    'Kind': `{@link ${kindDocUrl} | Union} ↗`,
+    'Members': `${members.length}`,
+    'Types': members.map(m => `{@link $Schema.${m.name}}`).join(', '),
+  })
+
+  // Combine parts
+  const parts: string[] = []
+  parts.push(`Selection set for {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union}.`)
+
+  if (schemaDescription) {
+    parts.push('')
+    parts.push(schemaDescription)
+  }
+
+  parts.push('')
+  parts.push('# Info')
+  parts.push('')
+  parts.push(table)
+
+  return parts.join('\n')
+}
+
+/**
+ * Generate enhanced JSDoc for selection set input object types.
+ */
+export const getInputObjectTypeSelectionSetDoc = (
+  type: Grafaid.Schema.InputObjectType,
+): string => {
+  const schemaDescription = type.description
+  const kindDocUrl = getKindDocUrl('InputObject')
+  const fields = Object.values(type.getFields())
+  const fieldCount = fields.length
+  const isAllFieldsNullable = Grafaid.Schema.isAllInputObjectFieldsNullable(type)
+
+  // Build table
+  const table = markdownTable({
+    'Kind': `{@link ${kindDocUrl} | InputObject} ↗`,
+    'Fields': `${fieldCount}`,
+    'All Fields Nullable': isAllFieldsNullable ? 'Yes' : 'No',
+  })
+
+  // Combine parts
+  const parts: string[] = []
+  parts.push(`Input for {@link https://graphql.org/learn/schema/#input-types | InputObject}.`)
+
+  if (schemaDescription) {
+    parts.push('')
+    parts.push(schemaDescription)
+  }
+
+  parts.push('')
+  parts.push('# Info')
+  parts.push('')
+  parts.push(table)
+
+  return parts.join('\n')
+}
+
+/**
+ * Generate enhanced JSDoc for selection set enum types.
+ */
+export const getEnumTypeSelectionSetDoc = (
+  type: Grafaid.Schema.EnumType,
+): string => {
+  const schemaDescription = type.description
+  const kindDocUrl = getKindDocUrl('Enum')
+  const members = type.getValues()
+  const memberCount = members.length
+
+  // Build table
+  const table = markdownTable({
+    'Kind': `{@link ${kindDocUrl} | Enum} ↗`,
+    'Members': `${memberCount}`,
+  })
+
+  // Combine parts
+  const parts: string[] = []
+  parts.push(`Values for {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum}.`)
+
+  if (schemaDescription) {
+    parts.push('')
+    parts.push(schemaDescription)
+  }
+
+  // Add members list after description
+  if (members.length > 0) {
+    parts.push('')
+    parts.push('**Members:**')
+    for (const member of members) {
+      const memberDescription = member.description
+      if (memberDescription) {
+        parts.push(`- \`${member.name}\` - ${memberDescription}`)
+      } else {
+        parts.push(`- \`${member.name}\``)
+      }
+    }
+  }
+
+  parts.push('')
+  parts.push('# Info')
+  parts.push('')
+  parts.push(table)
+
+  return parts.join('\n')
+}

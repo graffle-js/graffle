@@ -1,7 +1,20 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
 import type { $DefaultSelectionContext } from '../../_context.js'
 import type * as $Fields from './fields.js'
+import type { $FragmentInline } from './fragment.js'
 
+export type * as ObjectNestedWithArgs from './$$.js'
+
+/**
+ * Selection set for {@link https://graphql.org/learn/schema/#object-types | Object} type.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object} ↗ |
+ * | **Fields** | 2 |
+ */
 export interface ObjectNestedWithArgs<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
@@ -18,7 +31,7 @@ export interface ObjectNestedWithArgs<
    * | **Arguments** | 1 |
    */
   id?:
-    | $Fields.id$Expanded<_$Context>
+    | $Fields.id.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
   /**
    * # Info
@@ -33,7 +46,7 @@ export interface ObjectNestedWithArgs<
    * | **Arguments** | 4 |
    */
   object?:
-    | $Fields.object$Expanded<_$Context>
+    | $Fields.object.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.object<_$Context>>
 
   /**
@@ -44,7 +57,7 @@ export interface ObjectNestedWithArgs<
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: ObjectNestedWithArgs$FragmentInline<_$Context> | ObjectNestedWithArgs$FragmentInline<_$Context>[]
+  ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
   /**
    * A meta field. Is the name of the type being selected.
    *
@@ -55,12 +68,4 @@ export interface ObjectNestedWithArgs<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
       $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     >
-}
-
-export interface ObjectNestedWithArgs$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends
-  ObjectNestedWithArgs<_$Context>,
-  $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields
-{
 }

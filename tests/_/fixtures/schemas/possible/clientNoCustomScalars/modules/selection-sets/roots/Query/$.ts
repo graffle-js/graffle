@@ -1,6 +1,9 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
 import type { $DefaultSelectionContext } from '../../_context.js'
 import type * as $Fields from './fields.js'
+import type { $FragmentInline } from './fragment.js'
+
+export type * as Query from './$$.js'
 
 /**
  * GraphQL root {@link https://graphql.org/learn/schema/#the-query-and-mutation-types | Query} type.
@@ -21,7 +24,7 @@ export interface Query<
    * | **Arguments** | 1 |
    */
   InputObjectNested?:
-    | $Fields.InputObjectNested$Expanded<_$Context>
+    | $Fields.InputObjectNested.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.InputObjectNested<_$Context>>
   /**
    * # Info
@@ -52,7 +55,7 @@ export interface Query<
    * | **Nullability** | Optional |
    */
   abcEnum?:
-    | $Fields.abcEnum$Expanded<_$Context>
+    | $Fields.abcEnum.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.abcEnum<_$Context>>
   /**
    * # Info
@@ -67,7 +70,7 @@ export interface Query<
    * | **Arguments** | 1 |
    */
   argInputObjectCircular?:
-    | $Fields.argInputObjectCircular$Expanded<_$Context>
+    | $Fields.argInputObjectCircular.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.argInputObjectCircular<_$Context>>
   /**
    * # Info
@@ -81,7 +84,7 @@ export interface Query<
    * | **Nullability** | Optional |
    */
   bigintField?:
-    | $Fields.bigintField$Expanded<_$Context>
+    | $Fields.bigintField.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.bigintField<_$Context>>
   /**
    * # Info
@@ -95,7 +98,7 @@ export interface Query<
    * | **Nullability** | Required |
    */
   bigintFieldNonNull?:
-    | $Fields.bigintFieldNonNull$Expanded<_$Context>
+    | $Fields.bigintFieldNonNull.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.bigintFieldNonNull<_$Context>>
   /**
    * # Info
@@ -109,7 +112,7 @@ export interface Query<
    * | **Nullability** | Optional |
    */
   date?:
-    | $Fields.date$Expanded<_$Context>
+    | $Fields.date.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.date<_$Context>>
   /**
    * # Info
@@ -124,7 +127,7 @@ export interface Query<
    * | **Arguments** | 1 |
    */
   dateArg?:
-    | $Fields.dateArg$Expanded<_$Context>
+    | $Fields.dateArg.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.dateArg<_$Context>>
   /**
    * # Info
@@ -139,7 +142,7 @@ export interface Query<
    * | **Arguments** | 1 |
    */
   dateArgInputObject?:
-    | $Fields.dateArgInputObject$Expanded<_$Context>
+    | $Fields.dateArgInputObject.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.dateArgInputObject<_$Context>>
   /**
    * # Info
@@ -154,7 +157,7 @@ export interface Query<
    * | **Arguments** | 1 |
    */
   dateArgList?:
-    | $Fields.dateArgList$Expanded<_$Context>
+    | $Fields.dateArgList.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.dateArgList<_$Context>>
   /**
    * # Info
@@ -213,7 +216,7 @@ export interface Query<
    * | **Nullability** | Optional |
    */
   dateInterface1?:
-    | $Fields.dateInterface1$Expanded<_$Context>
+    | $Fields.dateInterface1.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.dateInterface1<_$Context>>
   /**
    * # Info
@@ -228,7 +231,7 @@ export interface Query<
    * | **List** | Yes |
    */
   dateList?:
-    | $Fields.dateList$Expanded<_$Context>
+    | $Fields.dateList.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.dateList<_$Context>>
   /**
    * # Info
@@ -243,7 +246,7 @@ export interface Query<
    * | **List** | Yes |
    */
   dateListList?:
-    | $Fields.dateListList$Expanded<_$Context>
+    | $Fields.dateListList.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.dateListList<_$Context>>
   /**
    * # Info
@@ -258,7 +261,7 @@ export interface Query<
    * | **List** | Yes |
    */
   dateListNonNull?:
-    | $Fields.dateListNonNull$Expanded<_$Context>
+    | $Fields.dateListNonNull.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.dateListNonNull<_$Context>>
   /**
    * # Info
@@ -272,7 +275,7 @@ export interface Query<
    * | **Nullability** | Required |
    */
   dateNonNull?:
-    | $Fields.dateNonNull$Expanded<_$Context>
+    | $Fields.dateNonNull.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.dateNonNull<_$Context>>
   /**
    * # Info
@@ -286,7 +289,7 @@ export interface Query<
    * | **Nullability** | Optional |
    */
   dateObject1?:
-    | $Fields.dateObject1$Expanded<_$Context>
+    | $Fields.dateObject1.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.dateObject1<_$Context>>
   /**
    * # Info
@@ -300,7 +303,7 @@ export interface Query<
    * | **Nullability** | Optional |
    */
   dateUnion?:
-    | $Fields.dateUnion$Expanded<_$Context>
+    | $Fields.dateUnion.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.dateUnion<_$Context>>
   /**
    * # Info
@@ -315,7 +318,7 @@ export interface Query<
    * | **Arguments** | 1 |
    */
   error?:
-    | $Fields.error$Expanded<_$Context>
+    | $Fields.error.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.error<_$Context>>
   /**
    * # Info
@@ -329,7 +332,7 @@ export interface Query<
    * | **Nullability** | Optional |
    */
   id?:
-    | $Fields.id$Expanded<_$Context>
+    | $Fields.id.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
   /**
    * # Info
@@ -343,7 +346,7 @@ export interface Query<
    * | **Nullability** | Required |
    */
   idNonNull?:
-    | $Fields.idNonNull$Expanded<_$Context>
+    | $Fields.idNonNull.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.idNonNull<_$Context>>
   /**
    * # Info
@@ -357,7 +360,7 @@ export interface Query<
    * | **Nullability** | Optional |
    */
   interface?:
-    | $Fields.interface$Expanded<_$Context>
+    | $Fields.interface.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.interface<_$Context>>
   /**
    * # Info
@@ -373,7 +376,7 @@ export interface Query<
    * | **Arguments** | 1 |
    */
   interfaceHierarchyChildA?:
-    | $Fields.interfaceHierarchyChildA$Expanded<_$Context>
+    | $Fields.interfaceHierarchyChildA.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.interfaceHierarchyChildA<_$Context>>
   /**
    * # Info
@@ -389,7 +392,7 @@ export interface Query<
    * | **Arguments** | 1 |
    */
   interfaceHierarchyChildB?:
-    | $Fields.interfaceHierarchyChildB$Expanded<_$Context>
+    | $Fields.interfaceHierarchyChildB.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.interfaceHierarchyChildB<_$Context>>
   /**
    * # Info
@@ -405,7 +408,7 @@ export interface Query<
    * | **Arguments** | 1 |
    */
   interfaceHierarchyGrandparents?:
-    | $Fields.interfaceHierarchyGrandparents$Expanded<_$Context>
+    | $Fields.interfaceHierarchyGrandparents.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.interfaceHierarchyGrandparents<_$Context>>
   /**
    * # Info
@@ -421,7 +424,7 @@ export interface Query<
    * | **Arguments** | 1 |
    */
   interfaceHierarchyParents?:
-    | $Fields.interfaceHierarchyParents$Expanded<_$Context>
+    | $Fields.interfaceHierarchyParents.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.interfaceHierarchyParents<_$Context>>
   /**
    * # Info
@@ -435,7 +438,7 @@ export interface Query<
    * | **Nullability** | Required |
    */
   interfaceNonNull?:
-    | $Fields.interfaceNonNull$Expanded<_$Context>
+    | $Fields.interfaceNonNull.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.interfaceNonNull<_$Context>>
   /**
    * # Info
@@ -465,7 +468,7 @@ export interface Query<
    * | **List** | Yes |
    */
   listInt?:
-    | $Fields.listInt$Expanded<_$Context>
+    | $Fields.listInt.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.listInt<_$Context>>
   /**
    * # Info
@@ -480,7 +483,7 @@ export interface Query<
    * | **List** | Yes |
    */
   listIntNonNull?:
-    | $Fields.listIntNonNull$Expanded<_$Context>
+    | $Fields.listIntNonNull.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.listIntNonNull<_$Context>>
   /**
    * # Info
@@ -495,7 +498,7 @@ export interface Query<
    * | **List** | Yes |
    */
   listListInt?:
-    | $Fields.listListInt$Expanded<_$Context>
+    | $Fields.listListInt.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.listListInt<_$Context>>
   /**
    * # Info
@@ -510,7 +513,7 @@ export interface Query<
    * | **List** | Yes |
    */
   listListIntNonNull?:
-    | $Fields.listListIntNonNull$Expanded<_$Context>
+    | $Fields.listListIntNonNull.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.listListIntNonNull<_$Context>>
   /**
    * # Info
@@ -524,7 +527,7 @@ export interface Query<
    * | **Nullability** | Optional |
    */
   lowerCaseUnion?:
-    | $Fields.lowerCaseUnion$Expanded<_$Context>
+    | $Fields.lowerCaseUnion.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.lowerCaseUnion<_$Context>>
   /**
    * # Info
@@ -538,7 +541,7 @@ export interface Query<
    * | **Nullability** | Optional |
    */
   object?:
-    | $Fields.object$Expanded<_$Context>
+    | $Fields.object.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.object<_$Context>>
   /**
    * # Info
@@ -553,7 +556,7 @@ export interface Query<
    * | **List** | Yes |
    */
   objectList?:
-    | $Fields.objectList$Expanded<_$Context>
+    | $Fields.objectList.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.objectList<_$Context>>
   /**
    * # Info
@@ -568,7 +571,7 @@ export interface Query<
    * | **List** | Yes |
    */
   objectListNonNull?:
-    | $Fields.objectListNonNull$Expanded<_$Context>
+    | $Fields.objectListNonNull.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.objectListNonNull<_$Context>>
   /**
    * # Info
@@ -582,7 +585,7 @@ export interface Query<
    * | **Nullability** | Optional |
    */
   objectNested?:
-    | $Fields.objectNested$Expanded<_$Context>
+    | $Fields.objectNested.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.objectNested<_$Context>>
   /**
    * # Info
@@ -596,7 +599,7 @@ export interface Query<
    * | **Nullability** | Optional |
    */
   objectNestedWithArgs?:
-    | $Fields.objectNestedWithArgs$Expanded<_$Context>
+    | $Fields.objectNestedWithArgs.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.objectNestedWithArgs<_$Context>>
   /**
    * # Info
@@ -610,7 +613,7 @@ export interface Query<
    * | **Nullability** | Required |
    */
   objectNonNull?:
-    | $Fields.objectNonNull$Expanded<_$Context>
+    | $Fields.objectNonNull.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.objectNonNull<_$Context>>
   /**
    * # Info
@@ -625,7 +628,7 @@ export interface Query<
    * | **Arguments** | 5 |
    */
   objectWithArgs?:
-    | $Fields.objectWithArgs$Expanded<_$Context>
+    | $Fields.objectWithArgs.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.objectWithArgs<_$Context>>
   /**
    * # Info
@@ -655,7 +658,7 @@ export interface Query<
    * | **Arguments** | 1 |
    */
   resultNonNull?:
-    | $Fields.resultNonNull$Expanded<_$Context>
+    | $Fields.resultNonNull.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.resultNonNull<_$Context>>
   /**
    * # Info
@@ -669,7 +672,7 @@ export interface Query<
    * | **Nullability** | Optional |
    */
   string?:
-    | $Fields.string$Expanded<_$Context>
+    | $Fields.string.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.string<_$Context>>
   /**
    * # Info
@@ -684,7 +687,7 @@ export interface Query<
    * | **Arguments** | 1 |
    */
   stringWithArgEnum?:
-    | $Fields.stringWithArgEnum$Expanded<_$Context>
+    | $Fields.stringWithArgEnum.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.stringWithArgEnum<_$Context>>
   /**
    * # Info
@@ -699,7 +702,7 @@ export interface Query<
    * | **Arguments** | 1 |
    */
   stringWithArgInputObject?:
-    | $Fields.stringWithArgInputObject$Expanded<_$Context>
+    | $Fields.stringWithArgInputObject.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.stringWithArgInputObject<_$Context>>
   /**
    * # Info
@@ -746,7 +749,7 @@ export interface Query<
    * | **Arguments** | 5 |
    */
   stringWithArgs?:
-    | $Fields.stringWithArgs$Expanded<_$Context>
+    | $Fields.stringWithArgs.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.stringWithArgs<_$Context>>
   /**
    * # Info
@@ -761,7 +764,7 @@ export interface Query<
    * | **Arguments** | 1 |
    */
   stringWithListArg?:
-    | $Fields.stringWithListArg$Expanded<_$Context>
+    | $Fields.stringWithListArg.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.stringWithListArg<_$Context>>
   /**
    * # Info
@@ -805,7 +808,7 @@ export interface Query<
    * | **Nullability** | Optional |
    */
   unionFooBar?:
-    | $Fields.unionFooBar$Expanded<_$Context>
+    | $Fields.unionFooBar.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.unionFooBar<_$Context>>
   /**
    * # Info
@@ -819,7 +822,7 @@ export interface Query<
    * | **Nullability** | Required |
    */
   unionFooBarNonNull?:
-    | $Fields.unionFooBarNonNull$Expanded<_$Context>
+    | $Fields.unionFooBarNonNull.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.unionFooBarNonNull<_$Context>>
   /**
    * # Info
@@ -834,7 +837,7 @@ export interface Query<
    * | **Arguments** | 1 |
    */
   unionFooBarWithArgs?:
-    | $Fields.unionFooBarWithArgs$Expanded<_$Context>
+    | $Fields.unionFooBarWithArgs.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.unionFooBarWithArgs<_$Context>>
   /**
    * # Info
@@ -848,7 +851,7 @@ export interface Query<
    * | **Nullability** | Optional |
    */
   unionObject?:
-    | $Fields.unionObject$Expanded<_$Context>
+    | $Fields.unionObject.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.unionObject<_$Context>>
   /**
    * # Info
@@ -862,7 +865,7 @@ export interface Query<
    * | **Nullability** | Required |
    */
   unionObjectNonNull?:
-    | $Fields.unionObjectNonNull$Expanded<_$Context>
+    | $Fields.unionObjectNonNull.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.unionObjectNonNull<_$Context>>
 
   /**
@@ -873,7 +876,7 @@ export interface Query<
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: Query$FragmentInline<_$Context> | Query$FragmentInline<_$Context>[]
+  ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
   /**
    * A meta field. Is the name of the type being selected.
    *
@@ -884,9 +887,4 @@ export interface Query<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
       $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     >
-}
-
-export interface Query$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends Query<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }

@@ -6,7 +6,17 @@ import type { $FragmentInline } from './fragment.js'
 export type * as Battle from './$$.js'
 
 /**
+ * Selection set for {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union}.
+ *
  * Represents any kind of battle that can occur in the Pokemon world.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+ * | **Members** | 3 |
+ * | **Types** | {@link $Schema.BattleRoyale}, {@link $Schema.BattleTrainer}, {@link $Schema.BattleWild} |
  */
 export interface Battle<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,

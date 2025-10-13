@@ -1,7 +1,21 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
 import type { $DefaultSelectionContext } from '../../_context.js'
 import type * as $Fields from './fields.js'
+import type { $FragmentInline } from './fragment.js'
 
+export type * as ErrorTwo from './$$.js'
+
+/**
+ * Selection set for {@link https://graphql.org/learn/schema/#object-types | Object} type.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object} ↗ |
+ * | **Fields** | 2 |
+ * | **Implements** | {@link $Schema.Error} |
+ */
 export interface ErrorTwo<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
@@ -17,7 +31,7 @@ export interface ErrorTwo<
    * | **Nullability** | Optional |
    */
   infoInt?:
-    | $Fields.infoInt$Expanded<_$Context>
+    | $Fields.infoInt.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.infoInt<_$Context>>
   /**
    * # Info
@@ -31,7 +45,7 @@ export interface ErrorTwo<
    * | **Nullability** | Required |
    */
   message?:
-    | $Fields.message$Expanded<_$Context>
+    | $Fields.message.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.message<_$Context>>
 
   /**
@@ -42,7 +56,7 @@ export interface ErrorTwo<
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: ErrorTwo$FragmentInline<_$Context> | ErrorTwo$FragmentInline<_$Context>[]
+  ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
   /**
    * A meta field. Is the name of the type being selected.
    *
@@ -53,9 +67,4 @@ export interface ErrorTwo<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
       $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     >
-}
-
-export interface ErrorTwo$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends ErrorTwo<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }

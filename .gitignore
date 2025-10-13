@@ -14,3 +14,8 @@ bundle-stats.html
 # Generated GraphQL clients
 tests/e2e/github/graffle/
 website/graffle/
+
+# TypeScript diagnostics
+.typescript-trace/
+trace-*/
+*.tsbuildinfo

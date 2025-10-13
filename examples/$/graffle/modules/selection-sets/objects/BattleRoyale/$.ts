@@ -6,7 +6,16 @@ import type { $FragmentInline } from './fragment.js'
 export type * as BattleRoyale from './$$.js'
 
 /**
+ * Selection set for {@link https://graphql.org/learn/schema/#object-types | Object} type.
+ *
  * A battle royale where multiple trainers compete with their Pokemon teams.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object} ↗ |
+ * | **Fields** | 4 |
  */
 export interface BattleRoyale<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,

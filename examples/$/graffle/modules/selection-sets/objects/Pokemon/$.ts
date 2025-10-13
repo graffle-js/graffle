@@ -6,7 +6,17 @@ import type { $FragmentInline } from './fragment.js'
 export type * as Pokemon from './$$.js'
 
 /**
+ * Selection set for {@link https://graphql.org/learn/schema/#object-types | Object} type.
+ *
  * A Pokemon with stats, type, and trainer information.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object} ↗ |
+ * | **Fields** | 8 |
+ * | **Implements** | {@link $Schema.Being} |
  */
 export interface Pokemon<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,

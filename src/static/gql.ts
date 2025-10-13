@@ -2,8 +2,7 @@ import type { DocumentBuilderKit } from '#src/extensions/DocumentBuilder/$.js'
 import { Select } from '#src/extensions/DocumentBuilder/Select/$.js'
 import type { Options } from '#src/extensions/DocumentBuilder/SelectGraphQLMapper/nodes/1_Document.js'
 import { toGraphQLDocument } from '#src/extensions/DocumentBuilder/SelectGraphQLMapper/nodes/1_Document.js'
-import type { getDocumentNode, parseDocument, schemaOfSetup } from '#src/lib/gql-tada/index.js'
-import { type AbstractSetupSchema, type initGraphQLTada } from '#src/lib/gql-tada/index.js'
+import type { AbstractSetupSchema, getDocumentNode, parseDocument, schemaOfSetup } from '#src/lib/gql-tada/index.js'
 import type { getDocumentOperations } from '#src/lib/gql-tada/selection.js'
 import type { TypedDocument } from '#src/lib/grafaid/typed-document/$.js'
 import type { TypedFullDocument } from '#src/lib/grafaid/typed-full-document/$.js'
@@ -21,28 +20,12 @@ import type { Simplify } from 'type-fest'
 //
 //
 // ==================================================================================================
-//                                           GQL-TADA
+//                                   Type-Level GraphQL Parsing
 // ==================================================================================================
 //
 //
 //
 //
-
-/**
- * Extract tada introspection and scalars from context to create a gql-tada function type.
- *
- * This utility reads from the GlobalRegistry to get the schema's introspection types
- * and scalar mappings, then creates a gql-tada function type via `initGraphQLTada`.
- */
-// dprint-ignore
-export type CreateGqlTadaFromContext<$Context> =
-  initGraphQLTada<{
-    introspection: GlobalRegistry.ForContext<$Context>['tadaIntrospection']
-    scalars: {
-      [k in keyof GlobalRegistry.ForContext<$Context>['schema']['scalarRegistry']['map']]:
-        Schema.Scalar.GetDecoded<GlobalRegistry.ForContext<$Context>['schema']['scalarRegistry']['map'][k]>
-    }
-  }>
 
 /**
  * Type-level utility that parses a GraphQL string and returns a typed document with all operations.
@@ -422,23 +405,18 @@ export type InferOperations<
  * ```
  */
 /**
- * Factory for creating an overloaded gql function that handles both:
- * - String inputs (gql-tada)
+ * Unified gql function interface that handles both:
+ * - GraphQL string inputs (parsed via gql-tada's parseDocument)
  * - Document object inputs (document builder)
+ *
+ * This interface unifies static and instance-level typings using Graffle's own type system.
  */
 export interface gql<
   $Introspection extends AbstractSetupSchema['introspection'],
   $Schema extends Schema,
   $DocumentObjectConstraint,
   $ArgumentsMap extends SchemaDrivenDataMap,
-> extends
-  initGraphQLTada<{
-    introspection: $Introspection
-    scalars: {
-      [K in keyof $Schema['scalarRegistry']['map']]: Schema.Scalar.GetDecoded<$Schema['scalarRegistry']['map'][K]>
-    }
-  }>
-{
+> {
   // Override string signature to return TypedFullDocument instead of TadaDocumentNode
   <const $Input extends string>(
     graphqlDocument: $Input,

@@ -34,9 +34,9 @@ type _ = [
   //
   //    Each type contains the selection set for that type.
   //
-  Graffle.SelectionSets.Query['pokemons'],
-  Graffle.SelectionSets.Query['trainers'],
-  Graffle.SelectionSets.Mutation['addPokemon'],
+  Graffle.SelectionSets.Query.pokemons,
+  Graffle.SelectionSets.Query.trainers,
+  Graffle.SelectionSets.Mutation.addPokemon,
   Graffle.SelectionSets.Battle['___on_BattleRoyale'],
 
   // 2. GraphQL Type Fields
@@ -62,16 +62,16 @@ type _ = [
   //
   //    Use the kind of type that suites your use case.
   //
-  Graffle.SelectionSets.Query['pokemons'],
+  Graffle.SelectionSets.Query.pokemons,
   Graffle.SelectionSets.Query.pokemons,
   //
   // 3. TypeScript Types for Arguments
   //    ------------------------------
   //    There are type definitions for GraphQL Type Field Arguments
   //
-  Graffle.SelectionSets.Query.pokemons$Arguments,
-  Graffle.SelectionSets.Query.trainerByName$Arguments,
-  Graffle.SelectionSets.Mutation.addPokemon$Arguments,
+  Graffle.SelectionSets.Query.pokemons.$Arguments,
+  Graffle.SelectionSets.Query.trainerByName.$Arguments,
+  Graffle.SelectionSets.Mutation.addPokemon.$Arguments,
   // ...
   //
   //
@@ -88,15 +88,15 @@ type _ = [
   //    You can leverage them to improve DX in your use-cases.
   //    For more details, refer to their JSDoc.
   //
-  Graffle.SelectionSets.Query.pokemons$Expanded,
-  Graffle.SelectionSets.Mutation.addPokemon$Expanded,
+  Graffle.SelectionSets.Query.pokemons.$Expanded,
+  Graffle.SelectionSets.Mutation.addPokemon.$Expanded,
   // ...
   //
   // 5. Inline Fragments
   //    ----------------
   //
-  Graffle.SelectionSets.Query$FragmentInline,
-  Graffle.SelectionSets.Battle$FragmentInline,
+  Graffle.SelectionSets.Query.$FragmentInline,
+  Graffle.SelectionSets.Battle.$FragmentInline,
   // ...
   //
   // 6. Selection Sets Sans Union with Indicators
@@ -105,7 +105,7 @@ type _ = [
   //    with its explicit selection set type. For example:
   //
   Graffle.SelectionSets.Query.beings,
-  Graffle.SelectionSets.Query.beings$SelectionSet,
+  Graffle.SelectionSets.Query.beings.$SelectionSet,
   //    However, if the GraphQL field IS a scalar-without-arguments, then its type will become an
   //    indicator unioned with the "meta" selection set (meaning stuff like field directives).
   //
@@ -113,12 +113,12 @@ type _ = [
   //    indicator. For example:
   //
   Graffle.SelectionSets.Pokemon.name,
-  Graffle.SelectionSets.Pokemon.name$SelectionSet,
+  Graffle.SelectionSets.Pokemon.name.$SelectionSet,
 ]
 
 const graffle = Graffle.create()
 
-const getPokemonsLike = (filter: Graffle.SelectionSets.Query.pokemons$Arguments['filter']) =>
+const getPokemonsLike = (filter: Graffle.SelectionSets.Query.pokemons.$Arguments['filter']) =>
   graffle.query.pokemons({
     $: { filter },
     hp: true,

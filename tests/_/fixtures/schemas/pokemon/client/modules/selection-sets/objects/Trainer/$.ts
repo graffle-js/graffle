@@ -1,7 +1,21 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
 import type { $DefaultSelectionContext } from '../../_context.js'
 import type * as $Fields from './fields.js'
+import type { $FragmentInline } from './fragment.js'
 
+export type * as Trainer from './$$.js'
+
+/**
+ * Selection set for {@link https://graphql.org/learn/schema/#object-types | Object} type.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object} ↗ |
+ * | **Fields** | 5 |
+ * | **Implements** | {@link $Schema.Being} |
+ */
 export interface Trainer<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
@@ -17,7 +31,7 @@ export interface Trainer<
    * | **Nullability** | Optional |
    */
   class?:
-    | $Fields.class$Expanded<_$Context>
+    | $Fields.class.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.class<_$Context>>
   /**
    * # Info
@@ -32,7 +46,7 @@ export interface Trainer<
    * | **List** | Yes |
    */
   fans?:
-    | $Fields.fans$Expanded<_$Context>
+    | $Fields.fans.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.fans<_$Context>>
   /**
    * # Info
@@ -46,7 +60,7 @@ export interface Trainer<
    * | **Nullability** | Optional |
    */
   id?:
-    | $Fields.id$Expanded<_$Context>
+    | $Fields.id.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
   /**
    * # Info
@@ -60,7 +74,7 @@ export interface Trainer<
    * | **Nullability** | Optional |
    */
   name?:
-    | $Fields.name$Expanded<_$Context>
+    | $Fields.name.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.name<_$Context>>
   /**
    * # Info
@@ -75,7 +89,7 @@ export interface Trainer<
    * | **List** | Yes |
    */
   pokemon?:
-    | $Fields.pokemon$Expanded<_$Context>
+    | $Fields.pokemon.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.pokemon<_$Context>>
 
   /**
@@ -86,7 +100,7 @@ export interface Trainer<
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: Trainer$FragmentInline<_$Context> | Trainer$FragmentInline<_$Context>[]
+  ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
   /**
    * A meta field. Is the name of the type being selected.
    *
@@ -97,9 +111,4 @@ export interface Trainer<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
       $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     >
-}
-
-export interface Trainer$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends Trainer<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }

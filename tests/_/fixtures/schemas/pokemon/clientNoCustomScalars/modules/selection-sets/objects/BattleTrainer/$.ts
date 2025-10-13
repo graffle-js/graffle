@@ -1,7 +1,20 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
 import type { $DefaultSelectionContext } from '../../_context.js'
 import type * as $Fields from './fields.js'
+import type { $FragmentInline } from './fragment.js'
 
+export type * as BattleTrainer from './$$.js'
+
+/**
+ * Selection set for {@link https://graphql.org/learn/schema/#object-types | Object} type.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object} ↗ |
+ * | **Fields** | 5 |
+ */
 export interface BattleTrainer<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
@@ -17,7 +30,7 @@ export interface BattleTrainer<
    * | **Nullability** | Optional |
    */
   combatant1?:
-    | $Fields.combatant1$Expanded<_$Context>
+    | $Fields.combatant1.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.combatant1<_$Context>>
   /**
    * # Info
@@ -31,7 +44,7 @@ export interface BattleTrainer<
    * | **Nullability** | Optional |
    */
   combatant2?:
-    | $Fields.combatant2$Expanded<_$Context>
+    | $Fields.combatant2.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.combatant2<_$Context>>
   /**
    * # Info
@@ -45,7 +58,7 @@ export interface BattleTrainer<
    * | **Nullability** | Optional |
    */
   date?:
-    | $Fields.date$Expanded<_$Context>
+    | $Fields.date.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.date<_$Context>>
   /**
    * # Info
@@ -59,7 +72,7 @@ export interface BattleTrainer<
    * | **Nullability** | Optional |
    */
   id?:
-    | $Fields.id$Expanded<_$Context>
+    | $Fields.id.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
   /**
    * # Info
@@ -73,7 +86,7 @@ export interface BattleTrainer<
    * | **Nullability** | Optional |
    */
   winner?:
-    | $Fields.winner$Expanded<_$Context>
+    | $Fields.winner.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.winner<_$Context>>
 
   /**
@@ -84,7 +97,7 @@ export interface BattleTrainer<
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: BattleTrainer$FragmentInline<_$Context> | BattleTrainer$FragmentInline<_$Context>[]
+  ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
   /**
    * A meta field. Is the name of the type being selected.
    *
@@ -95,9 +108,4 @@ export interface BattleTrainer<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
       $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     >
-}
-
-export interface BattleTrainer$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends BattleTrainer<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }

@@ -99,7 +99,11 @@
     "prepack": "pnpm build",
     "check": "pnpm run '/check:.*/'",
     "prebuild": "pnpm build:clean",
-    "check:types": "tsc"
+    "check:types": "tsc",
+    "ts:check:file": "tsc --noEmit",
+    "ts:check:stats": "tsc --noEmit --extendedDiagnostics 2>&1 | grep -E '(Files|Lines|Identifiers|Symbols|Types|Instantiations|Time)'",
+    "ts:check:trace": "tsc --noEmit --generateTrace .typescript-trace --incremental false",
+    "ts:analyze": "npx @typescript/analyze-trace .typescript-trace"
   },
   "dependencies": {
     "@0no-co/graphql.web": "^1.0.12",

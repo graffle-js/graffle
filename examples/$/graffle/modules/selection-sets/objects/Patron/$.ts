@@ -6,7 +6,17 @@ import type { $FragmentInline } from './fragment.js'
 export type * as Patron from './$$.js'
 
 /**
+ * Selection set for {@link https://graphql.org/learn/schema/#object-types | Object} type.
+ *
  * A patron who is a fan of a particular trainer.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object} ↗ |
+ * | **Fields** | 3 |
+ * | **Implements** | {@link $Schema.Being} |
  */
 export interface Patron<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,

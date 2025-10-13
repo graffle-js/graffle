@@ -1,10 +1,19 @@
 /**
+ * Values for {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum}.
+ *
  * Enum documentation.
  *
- * Members
- * "A" - (DEPRECATED: Enum value A is deprecated.)
- * "B" - Enum B member documentation.
- * "C" - (DEPRECATED: Enum value C is deprecated.)
+ * **Members:**
+ * - `A`
+ * - `B` - Enum B member documentation.
+ * - `C`
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum} ↗ |
+ * | **Members** | 3 |
  */
 export type ABCEnum =
   | 'A'

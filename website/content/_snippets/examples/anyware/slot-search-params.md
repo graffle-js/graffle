@@ -35,7 +35,6 @@ const result = await graffle.gql(`
       pokemons { name }
     }
   `)
-  // @ts-expect-error todo
   .getTrainers()
 
 console.log(result)

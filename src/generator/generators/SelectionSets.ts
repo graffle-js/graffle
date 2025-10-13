@@ -10,9 +10,14 @@ import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
 import {
   getArgumentDoc,
+  getEnumTypeSelectionSetDoc,
   getInlineFragmentDoc,
+  getInputObjectTypeSelectionSetDoc,
+  getInterfaceTypeSelectionSetDoc,
+  getObjectTypeSelectionSetDoc,
   getOutputFieldSelectionSetDoc,
   getRootTypeDoc,
+  getUnionTypeSelectionSetDoc,
 } from '../helpers/jsdoc.js'
 import type { GeneratedModule } from '../helpers/moduleGenerator.js'
 import {
@@ -306,7 +311,7 @@ const generateEnumModule = (config: Config, enumType: Grafaid.Schema.EnumType): 
   const code = Str.Builder()
 
   code(Code.tsAlias$({
-    tsDoc: getTsDocContents(config, enumType),
+    tsDoc: getEnumTypeSelectionSetDoc(enumType),
     export: true,
     name: enumType.name,
     type: Code.tsUnionItems(enumType.getValues().map((value) => Code.string(value.name))),
@@ -368,7 +373,7 @@ const generateUnionModule = (config: Config, unionType: Grafaid.Schema.UnionType
   }).join(`\n`)
 
   mainCode(Code.tsInterface({
-    tsDoc: getTsDocContents(config, unionType),
+    tsDoc: getUnionTypeSelectionSetDoc(unionType),
     export: true,
     name: unionType.name,
     parameters: $ContextTypeParameter,
@@ -433,7 +438,7 @@ const generateInputObjectModule = (config: Config, inputObject: Grafaid.Schema.I
   namespaceCode()
 
   namespaceCode(Code.tsInterface({
-    tsDoc: getTsDocContents(config, inputObject),
+    tsDoc: getInputObjectTypeSelectionSetDoc(inputObject),
     export: true,
     name: inputObject.name,
     parameters: $ContextTypeParameter,
@@ -579,10 +584,14 @@ const generateFieldedTypeModule = (
     else if (config.schema.kindMap.index.Root.subscription?.name === type.name) operationType = 'subscription'
   }
 
+  const tsDoc = isRoot && operationType
+    ? getRootTypeDoc(config, type as Grafaid.Schema.ObjectType, operationType)
+    : isInterface
+    ? getInterfaceTypeSelectionSetDoc(type as Grafaid.Schema.InterfaceType, config.schema.kindMap)
+    : getObjectTypeSelectionSetDoc(type as Grafaid.Schema.ObjectType, isRoot)
+
   namespaceCode(Code.tsInterface({
-    tsDoc: isRoot && operationType
-      ? getRootTypeDoc(config, type as Grafaid.Schema.ObjectType, operationType)
-      : getTsDocContents(config, type),
+    tsDoc,
     export: true,
     name: type.name,
     parameters: $ContextTypeParameter,

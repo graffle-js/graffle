@@ -16,15 +16,6 @@ export const ModuleGeneratorClient = createModuleGenerator(
       import * as ${$.$$Utilities} from '${config.paths.imports.grafflePackage.utilitiesForGenerated}'
       import { TransportHttp } from '${config.paths.imports.grafflePackage.extensionTransportHttp}'
       import { DocumentBuilder } from '${config.paths.imports.grafflePackage.extensionDocumentBuilder}'
-      import { initGraphQLTada } from '${config.paths.imports.grafflePackage.client}'
-
-      // Initialize gql-tada with the generated introspection types and custom scalars
-      type GqlTada = ReturnType<
-        typeof initGraphQLTada<{
-          introspection: $$Tada.introspection
-          scalars: { [K in keyof $$Scalar.$Registry['map']]: $$Utilities.Schema.Scalar.GetDecoded<$$Scalar.$Registry['map'][K]> }
-        }>
-      >
 
       const context = ${$.$$Utilities}.pipe(
         ${$.$$Utilities}.contextEmpty,
@@ -39,11 +30,27 @@ export const ModuleGeneratorClient = createModuleGenerator(
         ctx => ${$.$$Utilities}.Scalars.set(ctx, { scalars: $$Scalar.$registry }),
       )
 
-      const _create = ${$.$$Utilities}.createConstructorWithContext(context)
-
-      export const create = _create as typeof _create & {
-        (input?: Parameters<typeof _create>[0]): Omit<ReturnType<typeof _create>, 'gql'> & { gql: GqlTada }
-      }
+      /**
+       * Create a Graffle client for the ${config.name} GraphQL schema.
+       *
+       * Pre-configured with:
+       * - HTTP transport to {@link $$Data.defaultSchemaUrl}
+       * - Document builder for type-safe queries
+       * - Schema-driven data mapping
+       * - Custom scalar codecs
+       * - GraphQL string parsing via integrated type system
+       *
+       * @param input - Optional client configuration to override defaults
+       *
+       * @example
+       * \`\`\`ts
+       * import { create } from './graffle/client${config.importFormat === 'jsExtension' ? '.js' : ''}'
+       *
+       * const client = create()
+       * const result = await client.query.pokemon({ name: true })
+       * \`\`\`
+       */
+      export const create = ${$.$$Utilities}.createConstructorWithContext(context)
     `
   },
 )

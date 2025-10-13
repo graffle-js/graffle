@@ -1,7 +1,21 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
 import type { $DefaultSelectionContext } from '../../_context.js'
 import type * as $Fields from './fields.js'
+import type { $FragmentInline } from './fragment.js'
 
+export type * as ObjectParent from './$$.js'
+
+/**
+ * Selection set for {@link https://graphql.org/learn/schema/#object-types | Object} type.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object} ↗ |
+ * | **Fields** | 3 |
+ * | **Implements** | {@link $Schema.InterfaceGrandparent}, {@link $Schema.InterfaceParent} |
+ */
 export interface ObjectParent<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
@@ -17,7 +31,7 @@ export interface ObjectParent<
    * | **Nullability** | Required |
    */
   a?:
-    | $Fields.a$Expanded<_$Context>
+    | $Fields.a.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.a<_$Context>>
   /**
    * # Info
@@ -31,7 +45,7 @@ export interface ObjectParent<
    * | **Nullability** | Required |
    */
   b?:
-    | $Fields.b$Expanded<_$Context>
+    | $Fields.b.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.b<_$Context>>
   /**
    * # Info
@@ -45,7 +59,7 @@ export interface ObjectParent<
    * | **Nullability** | Required |
    */
   me?:
-    | $Fields.me$Expanded<_$Context>
+    | $Fields.me.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.me<_$Context>>
 
   /**
@@ -56,7 +70,7 @@ export interface ObjectParent<
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: ObjectParent$FragmentInline<_$Context> | ObjectParent$FragmentInline<_$Context>[]
+  ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
   /**
    * A meta field. Is the name of the type being selected.
    *
@@ -67,9 +81,4 @@ export interface ObjectParent<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
       $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     >
-}
-
-export interface ObjectParent$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends ObjectParent<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }

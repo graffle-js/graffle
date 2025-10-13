@@ -1,7 +1,20 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
 import type { $DefaultSelectionContext } from '../../_context.js'
 import type * as $Fields from './fields.js'
+import type { $FragmentInline } from './fragment.js'
 
+export type * as CombatantSinglePokemon from './$$.js'
+
+/**
+ * Selection set for {@link https://graphql.org/learn/schema/#object-types | Object} type.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object} ↗ |
+ * | **Fields** | 2 |
+ */
 export interface CombatantSinglePokemon<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
@@ -17,7 +30,7 @@ export interface CombatantSinglePokemon<
    * | **Nullability** | Optional |
    */
   pokemon?:
-    | $Fields.pokemon$Expanded<_$Context>
+    | $Fields.pokemon.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.pokemon<_$Context>>
   /**
    * # Info
@@ -31,7 +44,7 @@ export interface CombatantSinglePokemon<
    * | **Nullability** | Optional |
    */
   trainer?:
-    | $Fields.trainer$Expanded<_$Context>
+    | $Fields.trainer.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.trainer<_$Context>>
 
   /**
@@ -42,7 +55,7 @@ export interface CombatantSinglePokemon<
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: CombatantSinglePokemon$FragmentInline<_$Context> | CombatantSinglePokemon$FragmentInline<_$Context>[]
+  ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
   /**
    * A meta field. Is the name of the type being selected.
    *
@@ -53,12 +66,4 @@ export interface CombatantSinglePokemon<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
       $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     >
-}
-
-export interface CombatantSinglePokemon$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends
-  CombatantSinglePokemon<_$Context>,
-  $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields
-{
 }
