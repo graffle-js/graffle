@@ -11,7 +11,14 @@ export { contextEmpty } from '#src/context/ContextEmpty.js'
 export { addAndApplyMany } from '#src/context/fragments/extensions/fragment.js'
 export { type AssertExtendsObject, type Exact, type ExactNonEmpty, type UnionExpanded } from '#src/lib/prelude.js'
 import type { Docpar } from '#docpar'
-export type gql<$Introspection, $Schema, $DocumentObjectConstraint, $ArgumentsMap> = Docpar.gql<
+import type { Schema } from '#src/types/Schema/$.js'
+import type { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
+export type gql<
+  $Introspection extends Docpar.String.IntrospectionLikeInput,
+  $Schema extends Schema,
+  $DocumentObjectConstraint,
+  $ArgumentsMap extends SchemaDrivenDataMap
+> = Docpar.gql<
   $Introspection,
   $Schema,
   $DocumentObjectConstraint,
@@ -27,6 +34,8 @@ export { Extensions } from '../context/fragments/extensions/$.js'
 export { Scalars } from '../context/fragments/scalars/$.js'
 export { Transports } from '../context/fragments/transports/$.js'
 export * from '../docpar/object/$.js'
+import * as _DocumentBuilderKit from '../docpar/object/$$.js'
+export { _DocumentBuilderKit as DocumentBuilderKit }
 export * from '../types/RequestResult/$.js'
 export { Schema } from '../types/Schema/$.js'
 export { type SchemaDrivenDataMap } from '../types/SchemaDrivenDataMap/$.js'
