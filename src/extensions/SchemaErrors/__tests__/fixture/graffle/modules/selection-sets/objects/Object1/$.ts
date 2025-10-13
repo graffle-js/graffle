@@ -1,7 +1,20 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
 import type { $DefaultSelectionContext } from '../../_context.js'
 import type * as $Fields from './fields.js'
+import type { $FragmentInline } from './fragment.js'
 
+export type * as Object1 from './$$.js'
+
+/**
+ * Selection set for {@link https://graphql.org/learn/schema/#object-types | Object} type.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object} ↗ |
+ * | **Fields** | 6 |
+ */
 export interface Object1<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
@@ -17,7 +30,7 @@ export interface Object1<
    * | **Nullability** | Optional |
    */
   ABCEnum?:
-    | $Fields.ABCEnum$Expanded<_$Context>
+    | $Fields.ABCEnum.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.ABCEnum<_$Context>>
   /**
    * # Info
@@ -31,7 +44,7 @@ export interface Object1<
    * | **Nullability** | Optional |
    */
   boolean?:
-    | $Fields.boolean$Expanded<_$Context>
+    | $Fields.boolean.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.boolean<_$Context>>
   /**
    * # Info
@@ -45,7 +58,7 @@ export interface Object1<
    * | **Nullability** | Optional |
    */
   float?:
-    | $Fields.float$Expanded<_$Context>
+    | $Fields.float.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.float<_$Context>>
   /**
    * # Info
@@ -59,7 +72,7 @@ export interface Object1<
    * | **Nullability** | Optional |
    */
   id?:
-    | $Fields.id$Expanded<_$Context>
+    | $Fields.id.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
   /**
    * # Info
@@ -73,7 +86,7 @@ export interface Object1<
    * | **Nullability** | Optional |
    */
   int?:
-    | $Fields.int$Expanded<_$Context>
+    | $Fields.int.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.int<_$Context>>
   /**
    * # Info
@@ -87,7 +100,7 @@ export interface Object1<
    * | **Nullability** | Optional |
    */
   string?:
-    | $Fields.string$Expanded<_$Context>
+    | $Fields.string.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.string<_$Context>>
 
   /**
@@ -98,7 +111,7 @@ export interface Object1<
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: Object1$FragmentInline<_$Context> | Object1$FragmentInline<_$Context>[]
+  ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
   /**
    * A meta field. Is the name of the type being selected.
    *
@@ -109,9 +122,4 @@ export interface Object1<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
       $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     >
-}
-
-export interface Object1$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends Object1<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }

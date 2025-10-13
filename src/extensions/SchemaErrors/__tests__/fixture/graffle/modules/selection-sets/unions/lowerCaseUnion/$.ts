@@ -1,7 +1,21 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
-import type * as $Named from '../$named.js'
-import type { $DefaultSelectionContext } from '../_context.js'
+import type * as $Named from '../../$named.js'
+import type { $DefaultSelectionContext } from '../../_context.js'
+import type { $FragmentInline } from './fragment.js'
 
+export type * as lowerCaseUnion from './$$.js'
+
+/**
+ * Selection set for {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union}.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+ * | **Members** | 2 |
+ * | **Types** | {@link $Schema.lowerCaseObject}, {@link $Schema.lowerCaseObject2} |
+ */
 export interface lowerCaseUnion<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > {
@@ -80,10 +94,5 @@ export interface lowerCaseUnion<
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: lowerCaseUnion$FragmentInline<_$Context> | lowerCaseUnion$FragmentInline<_$Context>[]
-}
-
-export interface lowerCaseUnion$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends lowerCaseUnion<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
 }

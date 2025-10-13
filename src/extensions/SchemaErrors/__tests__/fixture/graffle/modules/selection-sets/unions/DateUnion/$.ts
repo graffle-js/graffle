@@ -1,7 +1,21 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
-import type * as $Named from '../$named.js'
-import type { $DefaultSelectionContext } from '../_context.js'
+import type * as $Named from '../../$named.js'
+import type { $DefaultSelectionContext } from '../../_context.js'
+import type { $FragmentInline } from './fragment.js'
 
+export type * as DateUnion from './$$.js'
+
+/**
+ * Selection set for {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union}.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+ * | **Members** | 2 |
+ * | **Types** | {@link $Schema.DateObject1}, {@link $Schema.DateObject2} |
+ */
 export interface DateUnion<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > {
@@ -80,10 +94,5 @@ export interface DateUnion<
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: DateUnion$FragmentInline<_$Context> | DateUnion$FragmentInline<_$Context>[]
-}
-
-export interface DateUnion$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends DateUnion<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
 }

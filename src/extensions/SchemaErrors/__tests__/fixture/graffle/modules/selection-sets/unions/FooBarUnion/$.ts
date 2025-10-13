@@ -1,9 +1,22 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
-import type * as $Named from '../$named.js'
-import type { $DefaultSelectionContext } from '../_context.js'
+import type * as $Named from '../../$named.js'
+import type { $DefaultSelectionContext } from '../../_context.js'
+import type { $FragmentInline } from './fragment.js'
+
+export type * as FooBarUnion from './$$.js'
 
 /**
+ * Selection set for {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union}.
+ *
  * Union documentation.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+ * | **Members** | 2 |
+ * | **Types** | {@link $Schema.Bar}, {@link $Schema.Foo} |
  */
 export interface FooBarUnion<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
@@ -83,10 +96,5 @@ export interface FooBarUnion<
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: FooBarUnion$FragmentInline<_$Context> | FooBarUnion$FragmentInline<_$Context>[]
-}
-
-export interface FooBarUnion$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends FooBarUnion<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
 }
