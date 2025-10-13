@@ -1,8 +1,8 @@
 import type { Grafaid } from '#lib/grafaid'
 import type { Configuration } from '#src/context/fragments/configuration/$.js'
+import type * as TypedFullDocument from '#src/docpar/typed-full-document.js'
 import type { GetVariablesInputKind, ResultOf, VariablesOf } from '#src/lib/grafaid/typed-document/TypedDocument.js'
 import type { Ts } from '@wollybeard/kit'
-import type * as TypedFullDocument from '#src/docpar/typed-full-document.js'
 import type { HandleOutput } from '../../handle.js'
 
 export type DocumentInput =

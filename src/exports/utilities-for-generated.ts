@@ -11,7 +11,7 @@ export { contextEmpty } from '#src/context/ContextEmpty.js'
 export { addAndApplyMany } from '#src/context/fragments/extensions/fragment.js'
 export { type AssertExtendsObject, type Exact, type ExactNonEmpty, type UnionExpanded } from '#src/lib/prelude.js'
 import type { Docpar } from '#docpar'
-export type gql = Docpar.gql
+export type gql<$Introspection, $Schema, $DocumentObjectConstraint, $ArgumentsMap> = Docpar.gql<$Introspection, $Schema, $DocumentObjectConstraint, $ArgumentsMap>
 export { ContextFragments } from '#src/types/ContextFragment.js'
 export { type GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
 export * from '#src/types/Schema/StandardTypes/scalar.js'

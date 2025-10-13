@@ -1,8 +1,8 @@
 import { Graffle } from '#graffle'
+import { Throws } from '#src/extensions/Throws/Throws.js'
 import { test } from '#test/helpers'
 import { Possible } from '#test/schema/possible/client/$.js'
 import { describe, expect } from 'vitest'
-import { Throws } from '#src/extensions/Throws/Throws.js'
 import { DocumentBuilder } from './DocumentBuilder.js'
 
 describe(`without a registered client, document builder is not statically available but still works at runtime`, () => {

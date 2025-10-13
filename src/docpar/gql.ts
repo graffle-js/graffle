@@ -1,10 +1,4 @@
-import type * as Docpar from './string/$$.js'
-import type * as DocumentBuilderKit from './object/$$.js'
-import { Select } from './object/Select/$.js'
-import type { Options } from './object/SelectGraphQLMapper/nodes/1_Document.js'
-import { toGraphQLDocument } from './object/SelectGraphQLMapper/nodes/1_Document.js'
 import type { TypedDocument } from '#src/lib/grafaid/typed-document/$.js'
-import * as TypedFullDocument from './typed-full-document.js'
 import { isSymbol } from '#src/lib/prelude.js'
 import type { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
 import type { RequestResult } from '#src/types/RequestResult/$.js'
@@ -13,6 +7,12 @@ import type { SchemaDrivenDataMap } from '#src/types/SchemaDrivenDataMap/$.js'
 import { print } from '@0no-co/graphql.web'
 import type { OperationTypeNode } from 'graphql'
 import type { Simplify } from 'type-fest'
+import type * as DocumentBuilderKit from './object/$$.js'
+import { Select } from './object/Select/$.js'
+import type { Options } from './object/SelectGraphQLMapper/nodes/1_Document.js'
+import { toGraphQLDocument } from './object/SelectGraphQLMapper/nodes/1_Document.js'
+import type * as Docpar from './string/$$.js'
+import * as TypedFullDocument from './typed-full-document.js'
 
 //
 //

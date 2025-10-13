@@ -1,7 +1,7 @@
+import type { Docpar } from '#docpar'
 import type { Grafaid } from '#lib/grafaid'
 import type { Context } from '#src/context/$.js'
 import type { Configuration } from '#src/context/fragments/configuration/$.js'
-import type { Docpar } from '#docpar'
 import type * as TypedFullDocument from '#src/docpar/typed-full-document.js'
 import type { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
 

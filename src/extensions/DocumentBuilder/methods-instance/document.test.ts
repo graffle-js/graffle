@@ -1,9 +1,9 @@
 import { Graffle } from '#graffle'
 import type { Errors } from '#lib/errors'
+import { TransportMemory } from '#src/extensions/TransportMemory/TransportMemory.js'
 import { db } from '#test/schema/possible/db.js'
 import { possibleSchema } from '#test/schema/possible/schema.js'
 import { describe, expect, test } from 'vitest'
-import { TransportMemory } from '#src/extensions/TransportMemory/TransportMemory.js'
 
 // todo test with custom scalars
 
