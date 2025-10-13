@@ -525,6 +525,15 @@ export namespace Code {
     return content === null ? `` : `/**\n${linesPrepend(`* `, linesTrim(content)) || `*`}\n*/`
   }
 
+  /**
+   * Generate JSDoc comment with indentation applied to each line.
+   * Useful for JSDoc inside interface blocks or nested structures.
+   */
+  export const TSDocIndented = (content: string | null, indent: string): string => {
+    if (content === null) return ``
+    return TSDoc(content).split('\n').map(line => `${indent}${line}`).join('\n')
+  }
+
   export const group = (...content: string[]) => content.join(`\n`)
   export const commentSectionTitle = (title: string) => {
     const lineSize = 60

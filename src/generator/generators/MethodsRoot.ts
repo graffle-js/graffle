@@ -33,7 +33,7 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
     code(`export interface BuilderMethodsRoot<$Context extends ${$.$$Utilities}.Context> {`)
     config.schema.kindMap.root.list.forEach(node => {
       const propertyDoc = getRootPropertyDoc(node.operationType)
-      code(Code.TSDoc(propertyDoc).split('\n').map(line => `  ${line}`).join('\n'))
+      code(Code.TSDocIndented(propertyDoc, `  `))
       code(`  ${node.operationType}: ${node.name.canonical}Methods<$Context>`)
     })
     code(`}`)
@@ -62,7 +62,7 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
 
   // $batch JSDoc
   const batchDoc = getBatchMethodDoc(operationType)
-  code(Code.TSDoc(batchDoc).split('\n').map(line => `  ${line}`).join('\n'))
+  code(Code.TSDocIndented(batchDoc, `  `))
 
   // dprint-ignore
   code`
@@ -82,7 +82,7 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
 
   // __typename JSDoc
   const typenameDoc = getTypenameMethodDoc(node.name, operationType)
-  code(Code.TSDoc(typenameDoc).split('\n').map(line => `  ${line}`).join('\n'))
+  code(Code.TSDocIndented(typenameDoc, `  `))
 
   // dprint-ignore
   code`

@@ -716,9 +716,13 @@ const getEnumTypeDoc = (
   config: Config,
   type: Grafaid.Schema.EnumType,
 ): string | null => {
-  // For enums, don't use getTsDocContents because it already formats members
-  // We want to format them our own way
+  // Get enum description respecting config
   const schemaDescription = type.description
+    ? type.description
+    : (config.options.TSDoc.noDocPolicy === 'message'
+      ? `Missing description for Enum "${type.name}".`
+      : null)
+
   const kindDocUrl = getKindDocUrl('Enum')
   const members = type.getValues()
   const memberCount = members.length
@@ -743,7 +747,13 @@ const getEnumTypeDoc = (
     parts.push('')
     parts.push('**Members:**')
     for (const member of members) {
+      // Respect config for member descriptions
       const memberDescription = member.description
+        ? member.description
+        : (config.options.TSDoc.noDocPolicy === 'message'
+          ? `Missing description for member "${member.name}".`
+          : null)
+
       if (memberDescription) {
         parts.push(`- \`${member.name}\` - ${memberDescription}`)
       } else {
