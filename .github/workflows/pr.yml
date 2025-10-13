@@ -31,6 +31,17 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/setup
       - run: pnpm check:types
+  types-examples:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - run: pnpm build
+      - name: Install Examples Dependencies
+        working-directory: examples
+        run: pnpm install
+      - run: pnpm check:types
+        working-directory: examples
   # While we do not deploy website for PRs we still want to know that it can be built.
   # This catches issues before merging such as broken twoslash examples.
   website:

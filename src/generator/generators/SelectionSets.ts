@@ -356,7 +356,7 @@ const generateUnionModule = (config: Config, unionType: Grafaid.Schema.UnionType
   mainCode(codeImportAll(config, { as: `$Named`, from: '../../$named', type: true }))
   mainCode()
   // Export fragments as namespace to enable potential member access patterns
-  mainCode(`export type * as ${unionType.name} from './$$.js'`)
+  mainCode(codeReexportNamespace(config, { as: unionType.name, from: './$$', type: true }))
   mainCode()
 
   const fragmentsInlineType = unionType.getTypes().map((memberType) => {
@@ -535,7 +535,7 @@ const generateFieldedTypeModule = (
   }
   namespaceCode()
   // Export the fields as a namespace to enable Query.pokemons.$Arguments syntax (merges with interface)
-  namespaceCode(`export type * as ${type.name} from './$$.js'`)
+  namespaceCode(codeReexportNamespace(config, { as: type.name, from: './$$', type: true }))
   namespaceCode()
 
   const fieldKeys = fields.map(field => {
