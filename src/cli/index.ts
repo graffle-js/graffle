@@ -71,7 +71,7 @@ const args = Command.create()
     `outputCase`,
     z
       .nativeEnum(OutputCase)
-      .default(`kebab`)
+      .optional()
       .describe(`The case format to use for the generated file names.`),
   )
   .parameter(
@@ -87,7 +87,7 @@ const args = Command.create()
     `importFormat`,
     z
       .nativeEnum(ImportFormat)
-      .default(`jsExtension`)
+      .optional()
       .describe(
         `How should import identifiers be generated? For example "tsExtension" would yield modules that import like "import ... from './foo.ts'".`,
       ),
@@ -158,7 +158,6 @@ const input: ConfigInit = {
   ...configModule.builder?._.input,
   currentWorkingDirectory,
   schema,
-  outputCase: args.outputCase,
 }
 
 if (defaultSchemaUrl !== undefined) input.defaultSchemaUrl = defaultSchemaUrl
@@ -167,8 +166,8 @@ if (args.name !== undefined) input.name = args.name
 if (args.output !== undefined) {
   input.outputDirPath = toAbsolutePath(process.cwd(), args.output)
 }
-
-input.importFormat = args.importFormat
+if (args.outputCase !== undefined) input.outputCase = args.outputCase
+if (args.importFormat !== undefined) input.importFormat = args.importFormat
 
 // --- Generate ---
 
