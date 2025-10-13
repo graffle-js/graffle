@@ -8,7 +8,6 @@ export type * as DateFilter from './fields.js'
 
 /**
  * Input for {@link https://graphql.org/learn/schema/#input-types | InputObject}.
- *
  * Input filter for querying by date ranges.
  *
  * # Info

@@ -1,6 +1,5 @@
 /**
  * Values for {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum}.
- *
  * The class or specialty of a Pokemon trainer.
  *
  * **Members:**

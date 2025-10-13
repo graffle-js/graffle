@@ -1,6 +1,5 @@
 /**
  * Values for {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum}.
- *
  * The elemental type of a Pokemon.
  *
  * **Members:**

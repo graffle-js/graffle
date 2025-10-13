@@ -1,16 +1,43 @@
 # Generation <GeneratedClientBadge />
 
-This guide is an overview of using generation. Individual features enabled by generation are discussed in other guides. There is a [practical tutorial in getting started](../overview/getting-started-generated.md). But if you're trying to build a mental model of what Graffle means when it talks about generation or generally want more detail on generation tools, then this guide is for you.
+This guide is an overview of using generation. Individual features enabled by generation are discussed in other guides. There is a [practical tutorial in getting started](../20_getting-started.md). But if you're trying to build a mental model of what Graffle means when it talks about generation or generally want more detail on generation tools, then this guide is for you.
 
 ## Benefits
 
-If you haven't read the [introduction](../overview/introduction.md), here is a recap of benefits from generation:
+If you haven't read the [introduction](../index.md), here is a recap of benefits from generation:
 
 <!--@include: @/_snippets/benefits.md-->
 
 ## Architecture
 
-TODO
+The generator transforms your GraphQL schema into TypeScript code that augments Graffle's runtime client. At build time, the generator analyzes your schema and outputs type definitions and minimal runtime data. At runtime, Graffle uses this generated code to provide type-safe APIs.
+
+```mermaid
+flowchart TD
+    Schema[GraphQL Schema] --> Generator[Graffle Generator]
+    Generator --> Types[TypeScript Types]
+    Generator --> SDDM[Schema Driven Data Map]
+    Types --> GlobalTypes[Global Type Augmentation]
+    SDDM --> Runtime[Runtime Client]
+    GlobalTypes --> Runtime
+    Runtime --> App[Your Application]
+
+    style Schema fill:#e1f5ff
+    style Generator fill:#fff4e1
+    style Types fill:#e8f5e9
+    style SDDM fill:#e8f5e9
+    style Runtime fill:#f3e5f5
+```
+
+**Components:**
+
+- **Generator**: CLI or API that parses your schema and generates code
+- **TypeScript Types**: Generated types that provide IDE autocomplete and type checking
+- **Global Type Augmentation**: Types that extend Graffle's core types via TypeScript's module augmentation
+- **SDDM**: Optional runtime data structure for features like custom scalars and schema errors (only included if needed)
+- **Runtime Client**: Graffle's core client that reads the generated types via Proxy to provide type-safe methods
+
+The key insight is that most of the generated code is types, not runtime code. This keeps bundle sizes small while providing full type safety.
 
 ## Multiple Clients
 

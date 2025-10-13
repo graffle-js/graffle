@@ -534,6 +534,27 @@ export namespace Code {
     return TSDoc(content).split('\n').map(line => `${indent}${line}`).join('\n')
   }
 
+  /**
+   * Escape user-provided content for safe inclusion in JSDoc comments.
+   *
+   * Escapes characters that could break JSDoc syntax:
+   * - `*\/` - Ends the JSDoc comment prematurely
+   * - `@tag` at line start - Could be interpreted as JSDoc tags
+   *
+   * @param content - User-provided text (e.g., GraphQL descriptions)
+   * @returns Escaped content safe for JSDoc
+   */
+  export const escapeJSDocContent = (content: string | null): string | null => {
+    if (content === null) return null
+
+    return content
+      // Escape */ to prevent closing the JSDoc comment
+      .replace(/\*\//g, '* /')
+      // Escape @ at line start to prevent unintended JSDoc tags
+      // Only escape if followed by common tag names
+      .replace(/^@(param|returns|deprecated|see|example|link|remarks|throws|since|alpha|beta|public|private|internal)/gm, '\\@$1')
+  }
+
   export const group = (...content: string[]) => content.join(`\n`)
   export const commentSectionTitle = (title: string) => {
     const lineSize = 60

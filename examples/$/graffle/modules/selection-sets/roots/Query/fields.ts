@@ -13,6 +13,11 @@ export namespace battles {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Battle<_$Context> {
   }
 
+  /**
+   * This is the "expanded" version of the `battles` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -30,6 +35,11 @@ export namespace beings {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Being<_$Context> {
   }
 
+  /**
+   * This is the "expanded" version of the `beings` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -69,6 +79,11 @@ export namespace pokemonByName {
     name: $Scalars.String$NonNull<_$Context>
   }
 
+  /**
+   * This is the "expanded" version of the `pokemonByName` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -108,6 +123,11 @@ export namespace pokemons {
     filter?: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.PokemonFilter<_$Context> | null | undefined>
   }
 
+  /**
+   * This is the "expanded" version of the `pokemons` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -147,6 +167,11 @@ export namespace trainerByName {
     name: $Scalars.String$NonNull<_$Context>
   }
 
+  /**
+   * This is the "expanded" version of the `trainerByName` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<
@@ -164,6 +189,11 @@ export namespace trainers {
   > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Trainer<_$Context> {
   }
 
+  /**
+   * This is the "expanded" version of the `trainers` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
   export type $Expanded<
     _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
   > = $$Utilities.Simplify<

@@ -716,9 +716,9 @@ const getEnumTypeDoc = (
   config: Config,
   type: Grafaid.Schema.EnumType,
 ): string | null => {
-  // Get enum description respecting config
+  // Get enum description respecting config and escape it for safety
   const schemaDescription = type.description
-    ? type.description
+    ? Code.escapeJSDocContent(type.description)
     : (config.options.TSDoc.noDocPolicy === 'message'
       ? `Missing description for Enum "${type.name}".`
       : null)
@@ -747,9 +747,9 @@ const getEnumTypeDoc = (
     parts.push('')
     parts.push('**Members:**')
     for (const member of members) {
-      // Respect config for member descriptions
+      // Respect config for member descriptions and escape them for safety
       const memberDescription = member.description
-        ? member.description
+        ? Code.escapeJSDocContent(member.description)
         : (config.options.TSDoc.noDocPolicy === 'message'
           ? `Missing description for member "${member.name}".`
           : null)

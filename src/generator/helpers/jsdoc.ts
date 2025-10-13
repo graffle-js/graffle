@@ -3,6 +3,7 @@
  */
 
 import { Grafaid } from '#lib/grafaid'
+import { Code } from '#src/lib/Code.js'
 import type { Config } from '../config/config.js'
 
 /**
@@ -48,12 +49,14 @@ export const getKindDocUrl = (kindName: string): string => {
  *
  * Note: Does NOT include deprecation or enum member formatting - those are handled
  * separately in meta tables and enum-specific documentation.
+ *
+ * **Security:** Escapes user-provided content to prevent JSDoc injection.
  */
 export const getSchemaDescription = (
   config: Config,
   node: Grafaid.Schema.DescribableTypes,
 ): string | null => {
-  if (node.description) return node.description
+  if (node.description) return Code.escapeJSDocContent(node.description)
 
   // Fallback if config says to show messages for missing descriptions
   if (config.options.TSDoc.noDocPolicy === 'message') {
@@ -131,13 +134,15 @@ export const addSdlSignatureSection = (
 /**
  * Add schema description section to documentation parts.
  * Handles spacing and null descriptions consistently.
+ *
+ * **Security:** Escapes description content to prevent JSDoc injection.
  */
 export const addDescriptionSection = (
   parts: string[],
   description: string | null,
 ): void => {
   if (description) {
-    parts.push(description)
+    parts.push(Code.escapeJSDocContent(description) ?? '')
     parts.push('')
   }
 }

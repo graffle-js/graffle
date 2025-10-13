@@ -7,7 +7,6 @@ export type * as CombatantSinglePokemon from './$$.js'
 
 /**
  * Selection set for {@link https://graphql.org/learn/schema/#object-types | Object} type.
- *
  * A combatant in a one-on-one battle with a single Pokemon.
  *
  * # Info

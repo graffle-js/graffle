@@ -6,7 +6,6 @@ import type * as $$SelectionSets from './selection-sets/$.js'
  * GraphQL {@link https://graphql.org/learn/schema/#the-query-and-mutation-types | Query} root methods.
  *
  * All methods return Promises. Use `.query.$batch(...)` to select multiple fields at once.
- *
  * Root query type for fetching Pokemon data.
  */
 export interface QueryMethods<$Context extends $$Utilities.Context> {
@@ -95,8 +94,8 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
    * beings: [Being!]!
    *
    * interface Being {
-   *   id: ID
-   *   name: String
+   * id: ID
+   * name: String
    * }
    * ```
    *
@@ -136,14 +135,14 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
    * pokemonByName(name: String!): [Pokemon!]
    *
    * type Pokemon implements Being {
-   *   attack: Int!
-   *   birthday: Date!
-   *   defense: Int!
-   *   hp: Int!
-   *   id: ID!
-   *   name: String!
-   *   trainer: Trainer
-   *   type: PokemonType!
+   * attack: Int!
+   * birthday: Date!
+   * defense: Int!
+   * hp: Int!
+   * id: ID!
+   * name: String!
+   * trainer: Trainer
+   * type: PokemonType!
    * }
    * ```
    *
@@ -187,14 +186,14 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
    * pokemons(filter: PokemonFilter): [Pokemon!]
    *
    * type Pokemon implements Being {
-   *   attack: Int!
-   *   birthday: Date!
-   *   defense: Int!
-   *   hp: Int!
-   *   id: ID!
-   *   name: String!
-   *   trainer: Trainer
-   *   type: PokemonType!
+   * attack: Int!
+   * birthday: Date!
+   * defense: Int!
+   * hp: Int!
+   * id: ID!
+   * name: String!
+   * trainer: Trainer
+   * type: PokemonType!
    * }
    * ```
    *
@@ -235,11 +234,11 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
    * trainerByName(name: String!): Trainer
    *
    * type Trainer implements Being {
-   *   class: TrainerClass
-   *   fans: [Patron!]
-   *   id: ID
-   *   name: String
-   *   pokemon: [Pokemon!]
+   * class: TrainerClass
+   * fans: [Patron!]
+   * id: ID
+   * name: String
+   * pokemon: [Pokemon!]
    * }
    * ```
    *
@@ -282,11 +281,11 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
    * trainers: [Trainer!]
    *
    * type Trainer implements Being {
-   *   class: TrainerClass
-   *   fans: [Patron!]
-   *   id: ID
-   *   name: String
-   *   pokemon: [Pokemon!]
+   * class: TrainerClass
+   * fans: [Patron!]
+   * id: ID
+   * name: String
+   * pokemon: [Pokemon!]
    * }
    * ```
    *
@@ -324,7 +323,6 @@ export interface QueryMethods<$Context extends $$Utilities.Context> {
  * GraphQL {@link https://graphql.org/learn/schema/#the-mutation-and-mutation-types | Mutation} root methods.
  *
  * All methods return Promises. Use `.mutation.$batch(...)` to select multiple fields at once.
- *
  * Root mutation type for modifying Pokemon data.
  */
 export interface MutationMethods<$Context extends $$Utilities.Context> {
@@ -375,14 +373,14 @@ export interface MutationMethods<$Context extends $$Utilities.Context> {
    * addPokemon(attack: Int, defense: Int, hp: Int, name: String!, type: PokemonType!): Pokemon
    *
    * type Pokemon implements Being {
-   *   attack: Int!
-   *   birthday: Date!
-   *   defense: Int!
-   *   hp: Int!
-   *   id: ID!
-   *   name: String!
-   *   trainer: Trainer
-   *   type: PokemonType!
+   * attack: Int!
+   * birthday: Date!
+   * defense: Int!
+   * hp: Int!
+   * id: ID!
+   * name: String!
+   * trainer: Trainer
+   * type: PokemonType!
    * }
    * ```
    *
@@ -434,8 +432,8 @@ export interface BuilderMethodsRoot<$Context extends $$Utilities.Context> {
    * @example Multiple fields with $batch
    * ```ts
    * const data = await graffle.query.$batch({
-   *   user: { id: true, name: true },
-   *   posts: { title: true, content: true }
+   * user: { id: true, name: true },
+   * posts: { title: true, content: true }
    * })
    * ```
    */
@@ -449,16 +447,16 @@ export interface BuilderMethodsRoot<$Context extends $$Utilities.Context> {
    * @example Single field
    * ```ts
    * const result = await graffle.mutation.createUser({
-   *   id: true,
-   *   name: true
+   * id: true,
+   * name: true
    * })
    * ```
    *
    * @example Multiple fields with $batch
    * ```ts
    * const data = await graffle.mutation.$batch({
-   *   createUser: { id: true, name: true },
-   *   createPost: { id: true, title: true }
+   * createUser: { id: true, name: true },
+   * createPost: { id: true, title: true }
    * })
    * ```
    */

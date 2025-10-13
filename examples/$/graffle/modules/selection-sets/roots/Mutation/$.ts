@@ -7,7 +7,6 @@ export type * as Mutation from './$$.js'
 
 /**
  * GraphQL root {@link https://graphql.org/learn/schema/#the-mutation-and-mutation-types | Mutation} type.
- *
  * Root mutation type for modifying Pokemon data.
  */
 export interface Mutation<

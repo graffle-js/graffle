@@ -8,7 +8,6 @@ export type * as StringFilter from './fields.js'
 
 /**
  * Input for {@link https://graphql.org/learn/schema/#input-types | InputObject}.
- *
  * Input filter for querying by string values.
  *
  * # Info

@@ -8,7 +8,6 @@ export type * as Being from './$$.js'
 
 /**
  * Selection set for {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface}.
- *
  * A being in the Pokemon world - either a Pokemon, Trainer, or Patron.
  *
  * # Info

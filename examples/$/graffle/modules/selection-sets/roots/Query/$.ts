@@ -7,7 +7,6 @@ export type * as Query from './$$.js'
 
 /**
  * GraphQL root {@link https://graphql.org/learn/schema/#the-query-and-mutation-types | Query} type.
- *
  * Root query type for fetching Pokemon data.
  */
 export interface Query<

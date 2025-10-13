@@ -7,7 +7,6 @@ export type * as Battle from './$$.js'
 
 /**
  * Selection set for {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union}.
- *
  * Represents any kind of battle that can occur in the Pokemon world.
  *
  * # Info

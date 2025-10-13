@@ -7,7 +7,6 @@ export type * as CombatantMultiPokemon from './$$.js'
 
 /**
  * Selection set for {@link https://graphql.org/learn/schema/#object-types | Object} type.
- *
  * A combatant in a battle royale with multiple Pokemon.
  *
  * # Info

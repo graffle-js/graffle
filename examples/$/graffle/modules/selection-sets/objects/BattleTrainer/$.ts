@@ -7,7 +7,6 @@ export type * as BattleTrainer from './$$.js'
 
 /**
  * Selection set for {@link https://graphql.org/learn/schema/#object-types | Object} type.
- *
  * A one-on-one battle between two trainers.
  *
  * # Info

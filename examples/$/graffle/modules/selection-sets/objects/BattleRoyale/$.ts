@@ -7,7 +7,6 @@ export type * as BattleRoyale from './$$.js'
 
 /**
  * Selection set for {@link https://graphql.org/learn/schema/#object-types | Object} type.
- *
  * A battle royale where multiple trainers compete with their Pokemon teams.
  *
  * # Info

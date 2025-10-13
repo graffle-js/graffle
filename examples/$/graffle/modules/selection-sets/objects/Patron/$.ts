@@ -7,7 +7,6 @@ export type * as Patron from './$$.js'
 
 /**
  * Selection set for {@link https://graphql.org/learn/schema/#object-types | Object} type.
- *
  * A patron who is a fan of a particular trainer.
  *
  * # Info
