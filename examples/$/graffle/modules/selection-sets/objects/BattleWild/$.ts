@@ -7,13 +7,14 @@ export type * as BattleWild from './$$.js'
 
 /**
  * Selection set for {@link https://graphql.org/learn/schema/#object-types | Object} type.
+ *
  * A battle between a trainer and wild Pokemon.
  *
  * # Info
  *
  * | | |
  * | - | - |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object ↗} |
  * | **Fields** | 6 |
  */
 export interface BattleWild<
@@ -31,7 +32,7 @@ export interface BattleWild<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Float} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$BattleWild} |
    * | **Path** | `BattleWild.date` |
    * | **Nullability** | Optional |
@@ -51,7 +52,7 @@ export interface BattleWild<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$ID} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$BattleWild} |
    * | **Path** | `BattleWild.id` |
    * | **Nullability** | Optional |
@@ -82,7 +83,7 @@ export interface BattleWild<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Pokemon} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
    * | **Parent** | {@link $NamedTypes.$BattleWild} |
    * | **Path** | `BattleWild.pokemon` |
    * | **Nullability** | Optional |
@@ -108,7 +109,7 @@ export interface BattleWild<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$BattleWildResult} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum ↗} |
    * | **Parent** | {@link $NamedTypes.$BattleWild} |
    * | **Path** | `BattleWild.result` |
    * | **Nullability** | Optional |
@@ -136,7 +137,7 @@ export interface BattleWild<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Trainer} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
    * | **Parent** | {@link $NamedTypes.$BattleWild} |
    * | **Path** | `BattleWild.trainer` |
    * | **Nullability** | Optional |
@@ -167,7 +168,7 @@ export interface BattleWild<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Pokemon}[] |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
    * | **Parent** | {@link $NamedTypes.$BattleWild} |
    * | **Path** | `BattleWild.wildPokemons` |
    * | **Nullability** | Optional |
@@ -183,13 +184,13 @@ export interface BattleWild<
    * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
    * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
    *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments}
    */
   ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
   /**
    * A meta field. Is the name of the type being selected.
    *
-   * @see https://graphql.org/learn/queries/#meta-fields
+   * @see {@link https://graphql.org/learn/queries/#meta-fields | Meta Fields}
    */
   __typename?:
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator

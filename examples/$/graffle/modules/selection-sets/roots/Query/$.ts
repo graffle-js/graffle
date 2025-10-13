@@ -7,6 +7,7 @@ export type * as Query from './$$.js'
 
 /**
  * GraphQL root {@link https://graphql.org/learn/schema/#the-query-and-mutation-types | Query} type.
+ *
  * Root query type for fetching Pokemon data.
  */
 export interface Query<
@@ -26,7 +27,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Battle}[]! |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.battles` |
    * | **Nullability** | Required |
@@ -52,7 +53,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Being}[]! |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.beings` |
    * | **Nullability** | Required |
@@ -84,7 +85,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Pokemon}[] |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.pokemonByName` |
    * | **Nullability** | Optional |
@@ -117,7 +118,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Pokemon}[] |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.pokemons` |
    * | **Nullability** | Optional |
@@ -147,7 +148,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Trainer} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.trainerByName` |
    * | **Nullability** | Optional |
@@ -176,7 +177,7 @@ export interface Query<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Trainer}[] |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
    * | **Parent** | {@link $NamedTypes.$Query} |
    * | **Path** | `Query.trainers` |
    * | **Nullability** | Optional |
@@ -192,13 +193,13 @@ export interface Query<
    * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
    * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
    *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments}
    */
   ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
   /**
    * A meta field. Is the name of the type being selected.
    *
-   * @see https://graphql.org/learn/queries/#meta-fields
+   * @see {@link https://graphql.org/learn/queries/#meta-fields | Meta Fields}
    */
   __typename?:
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator

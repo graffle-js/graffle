@@ -7,13 +7,14 @@ export type * as CombatantSinglePokemon from './$$.js'
 
 /**
  * Selection set for {@link https://graphql.org/learn/schema/#object-types | Object} type.
+ *
  * A combatant in a one-on-one battle with a single Pokemon.
  *
  * # Info
  *
  * | | |
  * | - | - |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object ↗} |
  * | **Fields** | 2 |
  */
 export interface CombatantSinglePokemon<
@@ -42,7 +43,7 @@ export interface CombatantSinglePokemon<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Pokemon} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
    * | **Parent** | {@link $NamedTypes.$CombatantSinglePokemon} |
    * | **Path** | `CombatantSinglePokemon.pokemon` |
    * | **Nullability** | Optional |
@@ -70,7 +71,7 @@ export interface CombatantSinglePokemon<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Trainer} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
    * | **Parent** | {@link $NamedTypes.$CombatantSinglePokemon} |
    * | **Path** | `CombatantSinglePokemon.trainer` |
    * | **Nullability** | Optional |
@@ -85,13 +86,13 @@ export interface CombatantSinglePokemon<
    * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
    * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
    *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments}
    */
   ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
   /**
    * A meta field. Is the name of the type being selected.
    *
-   * @see https://graphql.org/learn/queries/#meta-fields
+   * @see {@link https://graphql.org/learn/queries/#meta-fields | Meta Fields}
    */
   __typename?:
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator

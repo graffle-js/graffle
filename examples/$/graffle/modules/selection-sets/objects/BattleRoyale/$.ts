@@ -7,13 +7,14 @@ export type * as BattleRoyale from './$$.js'
 
 /**
  * Selection set for {@link https://graphql.org/learn/schema/#object-types | Object} type.
+ *
  * A battle royale where multiple trainers compete with their Pokemon teams.
  *
  * # Info
  *
  * | | |
  * | - | - |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object ↗} |
  * | **Fields** | 4 |
  */
 export interface BattleRoyale<
@@ -36,7 +37,7 @@ export interface BattleRoyale<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$CombatantMultiPokemon}[] |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
    * | **Parent** | {@link $NamedTypes.$BattleRoyale} |
    * | **Path** | `BattleRoyale.combatants` |
    * | **Nullability** | Optional |
@@ -57,7 +58,7 @@ export interface BattleRoyale<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Float} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$BattleRoyale} |
    * | **Path** | `BattleRoyale.date` |
    * | **Nullability** | Optional |
@@ -77,7 +78,7 @@ export interface BattleRoyale<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$ID} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$BattleRoyale} |
    * | **Path** | `BattleRoyale.id` |
    * | **Nullability** | Optional |
@@ -105,7 +106,7 @@ export interface BattleRoyale<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$Trainer} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
    * | **Parent** | {@link $NamedTypes.$BattleRoyale} |
    * | **Path** | `BattleRoyale.winner` |
    * | **Nullability** | Optional |
@@ -120,13 +121,13 @@ export interface BattleRoyale<
    * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
    * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
    *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments}
    */
   ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
   /**
    * A meta field. Is the name of the type being selected.
    *
-   * @see https://graphql.org/learn/queries/#meta-fields
+   * @see {@link https://graphql.org/learn/queries/#meta-fields | Meta Fields}
    */
   __typename?:
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator

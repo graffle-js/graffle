@@ -28,7 +28,7 @@ export interface __typename {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Float} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.BattleWild} |
  * | **Path** | `BattleWild.date` |
  * | **Nullability** | Optional |
@@ -51,7 +51,7 @@ export interface date {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.ID} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.BattleWild} |
  * | **Path** | `BattleWild.id` |
  * | **Nullability** | Optional |
@@ -74,7 +74,7 @@ export interface id {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Pokemon} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
  * | **Parent** | {@link $Schema.BattleWild} |
  * | **Path** | `BattleWild.pokemon` |
  * | **Nullability** | Optional |
@@ -97,7 +97,7 @@ export interface pokemon {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.BattleWildResult} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum ↗} |
  * | **Parent** | {@link $Schema.BattleWild} |
  * | **Path** | `BattleWild.result` |
  * | **Nullability** | Optional |
@@ -120,7 +120,7 @@ export interface result {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Trainer} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
  * | **Parent** | {@link $Schema.BattleWild} |
  * | **Path** | `BattleWild.trainer` |
  * | **Nullability** | Optional |
@@ -143,7 +143,7 @@ export interface trainer {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Pokemon}[] |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
  * | **Parent** | {@link $Schema.BattleWild} |
  * | **Path** | `BattleWild.wildPokemons` |
  * | **Nullability** | Optional |

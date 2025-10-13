@@ -10,7 +10,7 @@ import type { Schema as $Schema } from '../../$.js'
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Date} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom ↗} |
  * | **Parent** | {@link $Schema.DateFilter} |
  * | **Path** | `DateFilter.gte` |
  * | **Nullability** | Optional |
@@ -32,7 +32,7 @@ export interface gte {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Date} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom ↗} |
  * | **Parent** | {@link $Schema.DateFilter} |
  * | **Path** | `DateFilter.lte` |
  * | **Nullability** | Optional |

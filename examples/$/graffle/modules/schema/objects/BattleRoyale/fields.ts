@@ -28,7 +28,7 @@ export interface __typename {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.CombatantMultiPokemon}[] |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
  * | **Parent** | {@link $Schema.BattleRoyale} |
  * | **Path** | `BattleRoyale.combatants` |
  * | **Nullability** | Optional |
@@ -52,7 +52,7 @@ export interface combatants {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Float} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.BattleRoyale} |
  * | **Path** | `BattleRoyale.date` |
  * | **Nullability** | Optional |
@@ -75,7 +75,7 @@ export interface date {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.ID} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.BattleRoyale} |
  * | **Path** | `BattleRoyale.id` |
  * | **Nullability** | Optional |
@@ -98,7 +98,7 @@ export interface id {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Trainer} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
  * | **Parent** | {@link $Schema.BattleRoyale} |
  * | **Path** | `BattleRoyale.winner` |
  * | **Nullability** | Optional |

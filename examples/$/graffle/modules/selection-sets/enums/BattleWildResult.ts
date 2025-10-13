@@ -1,5 +1,6 @@
 /**
  * Values for {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum}.
+ *
  * Possible outcomes of a wild Pokemon battle.
  *
  * **Members:**
@@ -11,7 +12,7 @@
  *
  * | | |
  * | - | - |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum ↗} |
  * | **Members** | 3 |
  */
 export type BattleWildResult =

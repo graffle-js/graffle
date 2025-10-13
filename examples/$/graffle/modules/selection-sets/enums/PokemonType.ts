@@ -1,5 +1,6 @@
 /**
  * Values for {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum}.
+ *
  * The elemental type of a Pokemon.
  *
  * **Members:**
@@ -13,7 +14,7 @@
  *
  * | | |
  * | - | - |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum ↗} |
  * | **Members** | 5 |
  */
 export type PokemonType =
