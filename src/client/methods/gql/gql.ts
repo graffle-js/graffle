@@ -1,5 +1,5 @@
-import type { Grafaid } from '#lib/grafaid'
 import type { Docpar } from '#lib/docpar'
+import type { Grafaid } from '#lib/grafaid'
 import type { Context } from '#src/context/$.js'
 import type { Configuration } from '#src/context/fragments/configuration/$.js'
 import type { TypedFullDocument } from '#src/lib/grafaid/typed-full-document/$.js'

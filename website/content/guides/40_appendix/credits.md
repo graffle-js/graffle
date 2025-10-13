@@ -7,6 +7,7 @@ Graffle builds upon insights and learnings from previous GraphQL client projects
 Graffle's type-level GraphQL document parsing and type inference system was **inspired by and drew foundational concepts from** [gql.tada](https://gql-tada.0no.co/) by the [urql team](https://github.com/urql-graphql/urql).
 
 The initial implementation in Graffle benefited from studying gql.tada's approach to:
+
 - Type-level GraphQL document parsing
 - Selection set type inference
 - Fragment composition
