@@ -2,7 +2,7 @@ import type { DocumentBuilderKit } from '#src/extensions/DocumentBuilder/$.js'
 import { Select } from '#src/extensions/DocumentBuilder/Select/$.js'
 import type { Options } from '#src/extensions/DocumentBuilder/SelectGraphQLMapper/nodes/1_Document.js'
 import { toGraphQLDocument } from '#src/extensions/DocumentBuilder/SelectGraphQLMapper/nodes/1_Document.js'
-import type { AbstractSetupSchema, getDocumentNode, parseDocument, schemaOfSetup } from '#src/lib/gql-tada/index.js'
+import type { AbstractSetupSchema, parseDocument, schemaOfSetup } from '#src/lib/gql-tada/index.js'
 import type { getDocumentOperations } from '#src/lib/gql-tada/selection.js'
 import type { TypedDocument } from '#src/lib/grafaid/typed-document/$.js'
 import type { TypedFullDocument } from '#src/lib/grafaid/typed-full-document/$.js'
@@ -28,17 +28,20 @@ import type { Simplify } from 'type-fest'
 //
 
 /**
- * Type-level utility that parses a GraphQL string and returns a typed document with all operations.
+ * Type-level utility that parses GraphQL documents (strings or typed documents) and returns a typed document with all operations.
  *
- * This utility:
+ * For plain strings:
  * 1. Parses the GraphQL string into an AST using `parseDocument`
  * 2. Extracts introspection data from the context's GlobalRegistry
  * 3. Uses `schemaOfSetup` to combine introspection with scalar mappings into a `SchemaLike`
  * 4. Extracts ALL operations from the document using `getDocumentOperations`
  * 5. Wraps the result in `TypedFullDocument.FromObject` to produce either SingleOperation or MultiOperation
  *
+ * For typed documents (TypedDocumentString, TypedFullDocument):
+ * - Extracts and preserves the existing type information
+ *
  * @typeParam $Context - The client context containing schema introspection
- * @typeParam $Input - The GraphQL document string to parse
+ * @typeParam $Input - The GraphQL document (string or typed document) to parse
  *
  * @example
  * ```ts
@@ -59,10 +62,7 @@ export type ParseGraphQLString<
       parseDocument<$Input>['definitions'],
       schemaOfSetup<{
         introspection: GlobalRegistry.ForContext<$Context>['tadaIntrospection']
-        scalars: {
-          [k in keyof GlobalRegistry.ForContext<$Context>['schema']['scalarRegistry']['map']]:
-            Schema.Scalar.GetDecoded<GlobalRegistry.ForContext<$Context>['schema']['scalarRegistry']['map'][k]>
-        }
+        scalars: GlobalRegistry.ForContext<$Context>['schema']['scalarRegistry']['map']
       }>
     >
   >
@@ -426,9 +426,7 @@ export interface gql<
         parseDocument<$Input>['definitions'],
         schemaOfSetup<{
           introspection: $Introspection
-          scalars: {
-            [K in keyof $Schema['scalarRegistry']['map']]: Schema.Scalar.GetDecoded<$Schema['scalarRegistry']['map'][K]>
-          }
+          scalars: $Schema['scalarRegistry']['map']
         }>
       >
     >

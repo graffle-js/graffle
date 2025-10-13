@@ -5,7 +5,7 @@ import type { GraphQLTadaAPI, schemaOfSetup } from '#src/lib/gql-tada/index.js'
 import type { TypedFullDocument } from '#src/lib/grafaid/typed-full-document/$.js'
 import type { ParseGraphQLObject, ParseGraphQLString } from '#src/static/gql.js'
 import type { GlobalRegistry } from '#src/types/GlobalRegistry/GlobalRegistry.js'
-import type { Schema } from '#src/types/Schema/$.js'
+
 import type { DocumentNode } from '@0no-co/graphql.web'
 import type { DocumentSender, UntypedSender } from './DocumentSender.js'
 
@@ -45,10 +45,7 @@ export type GetSchemaInfo<$Context> = Configuration.Schema.Info<$Context>
 type TadaAPIFromContext<$Context> = GraphQLTadaAPI<
   schemaOfSetup<{
     introspection: GlobalRegistry.ForContext<$Context>['tadaIntrospection']
-    scalars: {
-      [k in keyof GlobalRegistry.ForContext<$Context>['schema']['scalarRegistry']['map']]:
-        Schema.Scalar.GetDecoded<GlobalRegistry.ForContext<$Context>['schema']['scalarRegistry']['map'][k]>
-    }
+    scalars: GlobalRegistry.ForContext<$Context>['schema']['scalarRegistry']['map']
   }>,
   { isMaskingDisabled: false }
 >
