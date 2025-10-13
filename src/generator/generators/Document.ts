@@ -1,7 +1,11 @@
 import { Code } from '#src/lib/Code.js'
 import { Obj } from '@wollybeard/kit'
 import type { GraphQLObjectType } from 'graphql'
-import { getStaticDocumentBuilderDoc, getStaticDocumentFieldDoc } from '../helpers/jsdoc.js'
+import {
+  getStaticDocumentBuilderDoc,
+  getStaticDocumentContextDoc,
+  getStaticDocumentFieldDoc,
+} from '../helpers/jsdoc.js'
 import { createModuleGenerator } from '../helpers/moduleGenerator.js'
 import { codeImportAll, codeImportNamed, importUtilities } from '../helpers/pathHelpers.js'
 
@@ -49,11 +53,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
       code(importUtilities(config))
       code(codeImportAll(config, { as: '$$Schema', from: './schema/$', type: true }))
       code``
-      code(
-        Code.TSDoc(
-          `Context for static document type inference.\nStatic documents have no runtime extensions, hence typeHookRequestResultDataTypes is never.`,
-        ),
-      )
+      code(Code.TSDoc(getStaticDocumentContextDoc()))
       code(`interface StaticDocumentContext {`)
       code(`  typeHookRequestResultDataTypes: never`)
       code(`  scalars: $$Scalar.$Registry`)
@@ -95,11 +95,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
       }
       if (!queryType) {
         code``
-        code(
-          Code.TSDoc(
-            `Context for static document type inference.\nStatic documents have no runtime extensions, hence typeHookRequestResultDataTypes is never.`,
-          ),
-        )
+        code(Code.TSDoc(getStaticDocumentContextDoc()))
         code(`interface StaticDocumentContext {`)
         code(`  typeHookRequestResultDataTypes: never`)
         code(`  scalars: $$Scalar.$Registry`)
@@ -142,11 +138,7 @@ export const ModuleGeneratorDocument = createModuleGenerator(
       }
       if (!queryType && !mutationType) {
         code``
-        code(
-          Code.TSDoc(
-            `Context for static document type inference.\nStatic documents have no runtime extensions, hence typeHookRequestResultDataTypes is never.`,
-          ),
-        )
+        code(Code.TSDoc(getStaticDocumentContextDoc()))
         code(`interface StaticDocumentContext {`)
         code(`  typeHookRequestResultDataTypes: never`)
         code(`  scalars: $$Scalar.$Registry`)

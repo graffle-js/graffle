@@ -7,34 +7,38 @@ export type infoId<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | infoId$SelectionSet<_$Context>
+  | infoId.$SelectionSet<_$Context>
 
-export interface infoId$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace infoId {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+  }
+
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $SelectionSet<_$Context>
+  >
 }
-
-export type infoId$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | infoId$SelectionSet<_$Context>
->
 
 export type message<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | message$SelectionSet<_$Context>
+  | message.$SelectionSet<_$Context>
 
-export interface message$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace message {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+  }
+
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $SelectionSet<_$Context>
+  >
 }
-
-export type message$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | message$SelectionSet<_$Context>
->

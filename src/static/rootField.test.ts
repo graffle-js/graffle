@@ -56,7 +56,7 @@ test('type input validation', () => {
 test('type output inference', () => {
   // Nested object args
   const q0 = Possible.query.objectNestedWithArgs({ object: { $: { int: $ }, id:true}})
-  Ts.Test.exact<Grafaid.Document.Typed.String<{objectNestedWithArgs:{object:{id:null|string}|null}|null}, { int?: number | undefined }, true>>()(q0)
+  Ts.Test.exact<Grafaid.Document.Typed.String<{objectNestedWithArgs:{object:{id:null|string}|null}|null}, { int?: number | null | undefined }, true>>()(q0)
 
   // Scalar fields
   const q1 = Possible.query.string(true)
@@ -85,7 +85,7 @@ test('type output inference', () => {
 
   // Field with $
   const q9 = Possible.query.stringWithArgs({ $: { boolean: $ } })
-  Ts.Test.exact<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { boolean?: boolean | undefined }, true>>()(q9)
+  Ts.Test.exact<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { boolean?: boolean | null | undefined }, true>>()(q9)
 
   // Required argument with $
   const q10 = Possible.query.stringWithRequiredArg({ $: { string: $ } })
@@ -97,7 +97,7 @@ test('type output inference', () => {
 
   // $ with custom name
   const q12 = Possible.query.stringWithArgs({ $: { boolean: $.name('isActive') } })
-  Ts.Test.exact<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { isActive?: boolean | undefined }, true>>()(q12)
+  Ts.Test.exact<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { isActive?: boolean | null | undefined }, true>>()(q12)
 
   // $.required() on optional argument
   const q12b = Possible.query.stringWithArgs({ $: { string: $.required() } })
@@ -105,7 +105,7 @@ test('type output inference', () => {
 
   // List argument with $
   const q13 = Possible.query.stringWithListArg({ $: { ints: $ } })
-  Ts.Test.exact<Grafaid.Document.Typed.String<{ stringWithListArg: string | null }, { ints?: readonly (number)[] | undefined }, true>>()(q13)
+  Ts.Test.exact<Grafaid.Document.Typed.String<{ stringWithListArg: string | null }, { ints?: readonly (number)[] | null | undefined }, true>>()(q13)
 
   const q14 = Possible.query.stringWithListArgRequired({ $: { ints: $ } })
   Ts.Test.exact<Grafaid.Document.Typed.String<{ stringWithListArgRequired: string | null }, { ints: readonly number[] }, true>>()(q14)
@@ -114,13 +114,13 @@ test('type output inference', () => {
   const q15 = Possible.query.stringWithArgs({ $: { boolean: $, string: $ } })
   Ts.Test.exact<Grafaid.Document.Typed.String<
     { stringWithArgs: string | null },
-    { boolean?: boolean | undefined, string?: string | undefined },
+    { boolean?: boolean | null | undefined, string?: string | null | undefined },
     true
   >>()(q15)
 
   // Mixed $ and literals
   const q16 = Possible.query.stringWithArgs({ $: { boolean: true, string: $, int: 42 } })
-  Ts.Test.exact<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { string?: string | undefined }, true>>()(q16)
+  Ts.Test.exact<Grafaid.Document.Typed.String<{ stringWithArgs: string | null }, { string?: string | null | undefined }, true>>()(q16)
 
   // Alias with $ on nested object field
   const q20 = Possible.query.objectNestedWithArgs({
@@ -132,7 +132,7 @@ test('type output inference', () => {
   })
   Ts.Test.exact<Grafaid.Document.Typed.String<
     { objectNestedWithArgs: { object2: { id: string | null } | null } | null },
-    { int?: number | undefined },
+    { int?: number | null | undefined },
     true
   >>()(q20)
 })

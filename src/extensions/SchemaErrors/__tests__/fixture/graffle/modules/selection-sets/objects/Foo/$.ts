@@ -1,9 +1,21 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
 import type { $DefaultSelectionContext } from '../../_context.js'
 import type * as $Fields from './fields.js'
+import type { $FragmentInline } from './fragment.js'
+
+export type * as Foo from './$$.js'
 
 /**
+ * Selection set for {@link https://graphql.org/learn/schema/#object-types | Object} type.
+ *
  * Object documentation.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object ↗} |
+ * | **Fields** | 1 |
  */
 export interface Foo<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
@@ -11,19 +23,21 @@ export interface Foo<
   /**
    * Field documentation.
    *
+   * @deprecated Field a is deprecated.
+   *
    * # Info
    *
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$ID} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$Foo} |
    * | **Path** | `Foo.id` |
    * | **⚠ Deprecated** | Field a is deprecated. |
    * | **Nullability** | Optional |
    */
   id?:
-    | $Fields.id$Expanded<_$Context>
+    | $Fields.id.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
 
   /**
@@ -32,22 +46,17 @@ export interface Foo<
    * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
    * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
    *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments}
    */
-  ___?: Foo$FragmentInline<_$Context> | Foo$FragmentInline<_$Context>[]
+  ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
   /**
    * A meta field. Is the name of the type being selected.
    *
-   * @see https://graphql.org/learn/queries/#meta-fields
+   * @see {@link https://graphql.org/learn/queries/#meta-fields | Meta Fields}
    */
   __typename?:
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
       $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     >
-}
-
-export interface Foo$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends Foo<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }

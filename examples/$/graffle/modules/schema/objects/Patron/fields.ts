@@ -28,7 +28,7 @@ export interface __typename {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.ID} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.Patron} |
  * | **Path** | `Patron.id` |
  * | **Nullability** | Optional |
@@ -51,7 +51,7 @@ export interface id {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Int} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.Patron} |
  * | **Path** | `Patron.money` |
  * | **Nullability** | Optional |
@@ -74,7 +74,7 @@ export interface money {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.String} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.Patron} |
  * | **Path** | `Patron.name` |
  * | **Nullability** | Optional |

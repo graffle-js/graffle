@@ -15,6 +15,16 @@ export type GetDecoded<$Scalar extends Scalar> =
     ? $Decoded
     : never
 
+/**
+ * Extract decoded types from a scalar map for use with gql-tada.
+ *
+ * Transforms `{ DateTime: Scalar<'DateTime', Date, string> }` into `{ DateTime: Date }`.
+ */
+// dprint-ignore
+export type GetDecodedMap<$Map extends ScalarMap> = {
+  [k in keyof $Map]: GetDecoded<$Map[k]>
+}
+
 export interface Registry<
   $Map extends ScalarMap = ScalarMap,
   $TypesEncoded = any,

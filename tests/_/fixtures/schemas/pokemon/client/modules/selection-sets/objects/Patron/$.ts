@@ -1,7 +1,21 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
 import type { $DefaultSelectionContext } from '../../_context.js'
 import type * as $Fields from './fields.js'
+import type { $FragmentInline } from './fragment.js'
 
+export type * as Patron from './$$.js'
+
+/**
+ * Selection set for {@link https://graphql.org/learn/schema/#object-types | Object} type.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object} ↗ |
+ * | **Fields** | 3 |
+ * | **Implements** | {@link $Schema.Being} |
+ */
 export interface Patron<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
@@ -17,7 +31,7 @@ export interface Patron<
    * | **Nullability** | Optional |
    */
   id?:
-    | $Fields.id$Expanded<_$Context>
+    | $Fields.id.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
   /**
    * # Info
@@ -31,7 +45,7 @@ export interface Patron<
    * | **Nullability** | Optional |
    */
   money?:
-    | $Fields.money$Expanded<_$Context>
+    | $Fields.money.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.money<_$Context>>
   /**
    * # Info
@@ -45,7 +59,7 @@ export interface Patron<
    * | **Nullability** | Optional |
    */
   name?:
-    | $Fields.name$Expanded<_$Context>
+    | $Fields.name.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.name<_$Context>>
 
   /**
@@ -56,7 +70,7 @@ export interface Patron<
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: Patron$FragmentInline<_$Context> | Patron$FragmentInline<_$Context>[]
+  ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
   /**
    * A meta field. Is the name of the type being selected.
    *
@@ -67,9 +81,4 @@ export interface Patron<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
       $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     >
-}
-
-export interface Patron$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends Patron<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }

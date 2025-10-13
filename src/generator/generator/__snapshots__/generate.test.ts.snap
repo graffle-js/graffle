@@ -17,9 +17,26 @@ import * as CustomScalars from "../../scalars.js";
 //
 //
 
+/**
+ * Custom scalar codec for the \`Date\` type.
+ *
+ * Handles encoding (TypeScript → GraphQL) and decoding (GraphQL → TypeScript)
+ * transformations for this custom scalar.
+ */
 export const Date = CustomScalars.Date;
 export type Date = typeof CustomScalars.Date;
+/**
+ * The decoded (TypeScript-side) type for the \`Date\` scalar.
+ *
+ * This is the type you work with in your application code after the scalar
+ * has been decoded from its GraphQL wire format.
+ */
 export type DateDecoded = $$Utilities.Schema.Scalar.GetDecoded<Date>;
+/**
+ * The encoded (GraphQL wire format) type for the \`Date\` scalar.
+ *
+ * This is the type used when transmitting the scalar value over the network.
+ */
 export type DateEncoded = $$Utilities.Schema.Scalar.GetEncoded<Date>;
 
 export * from "graffle/generator-helpers/standard-scalar-types";
@@ -40,12 +57,23 @@ export * from "graffle/generator-helpers/standard-scalar-types";
 //
 //
 
+/**
+ * Runtime registry of custom scalar codecs.
+ *
+ * Maps scalar type names to their codec implementations for encoding/decoding.
+ */
+
 export const $registry = {
   map: {
     Date: CustomScalars.Date,
   },
 } as $Registry;
 
+/**
+ * Type-level registry of custom scalars.
+ *
+ * Provides type information about custom scalars for the type system.
+ */
 export type $Registry = $$Utilities.Schema.Scalar.Registry<
   {
     Date: Date;
@@ -95,7 +123,6 @@ export interface Schema<
 
 exports[`root-types-mapped 2`] = `
 "import type * as $$SelectionSets from "./selection-sets/$.js";
-import type * as $$SelectionSetsFields from "./selection-sets/$$.fields.js";
 import type * as $$Schema from "./schema/$.js";
 import type * as $$Utilities from "graffle/utilities-for-generated";
 
@@ -136,7 +163,7 @@ export interface RootTypeCustomNameForQueryMethods<
   >;
 
   /**
-   * Request the {@link https://graphql.org/learn/schema/#the-__typename-field | \`__typename\`} meta-field.
+   * Request the {@link https://graphql.org/learn/schema/#the-__typename-field | __typename} meta-field.
    *
    * The \`__typename\` field returns the name of the object type. In this case, it will always return \`"RootTypeCustomNameForQuery"\`.
    */
@@ -162,7 +189,7 @@ export interface RootTypeCustomNameForQueryMethods<
    * | | |
    * | - | - |
    * | **Type** | {@link $Schema.ID} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $Schema.RootTypeCustomNameForQuery} |
    * | **Path** | \`RootTypeCustomNameForQuery.id\` |
    * | **Nullability** | Optional |
@@ -173,7 +200,7 @@ export interface RootTypeCustomNameForQueryMethods<
     <$SelectionSet>(
       selectionSet?: $$Utilities.Exact<
         $SelectionSet,
-        $$SelectionSetsFields.RootTypeCustomNameForQuery.id<{
+        $$SelectionSets.RootTypeCustomNameForQuery.id<{
           scalars: $Context["scalars"];
         }>
       >,
@@ -202,12 +229,11 @@ export interface BuilderMethodsRoot<$Context extends $$Utilities.Context> {
    * \`\`\`ts
    * const user = await graffle.query.user({ id: true, name: true })
    * \`\`\`
-   *
    * @example Multiple fields with $batch
    * \`\`\`ts
    * const data = await graffle.query.$batch({
-   *   user: { id: true, name: true },
-   *   posts: { title: true, content: true }
+   * user: { id: true, name: true },
+   * posts: { title: true, content: true }
    * })
    * \`\`\`
    */

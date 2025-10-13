@@ -1,5 +1,4 @@
 export { type Client, create } from '#src/client/client.js'
-export { initGraphQLTada } from '#src/lib/gql-tada/index.js'
 export { type Operation, type TypedFullDocument } from '#src/lib/grafaid/typed-full-document/typed-full-document.js'
 export { create as createSelect, select } from '#src/select/select.js'
 export { Var } from '../extensions/DocumentBuilder/var/$.js'

@@ -27,7 +27,7 @@ export interface __typename extends $.Schema.OutputField {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.ID} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.Mutation} |
  * | **Path** | `Mutation.id` |
  * | **Nullability** | Optional |
@@ -48,7 +48,7 @@ export interface id extends $.Schema.OutputField {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.ID}! |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.Mutation} |
  * | **Path** | `Mutation.idNonNull` |
  * | **Nullability** | Required |

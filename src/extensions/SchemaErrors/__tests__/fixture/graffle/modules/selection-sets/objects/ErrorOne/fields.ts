@@ -7,34 +7,48 @@ export type infoId<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | infoId$SelectionSet<_$Context>
+  | infoId.$SelectionSet<_$Context>
 
-export interface infoId$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace infoId {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+  }
+
+  /**
+   * This is the "expanded" version of the `infoId` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $SelectionSet<_$Context>
+  >
 }
-
-export type infoId$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | infoId$SelectionSet<_$Context>
->
 
 export type message<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | message$SelectionSet<_$Context>
+  | message.$SelectionSet<_$Context>
 
-export interface message$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace message {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+  }
+
+  /**
+   * This is the "expanded" version of the `message` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $SelectionSet<_$Context>
+  >
 }
-
-export type message$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | message$SelectionSet<_$Context>
->

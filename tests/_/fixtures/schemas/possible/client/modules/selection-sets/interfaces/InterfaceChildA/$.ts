@@ -2,7 +2,21 @@ import type * as $$Utilities from '#graffle/utilities-for-generated'
 import type * as $Named from '../../$named.js'
 import type { $DefaultSelectionContext } from '../../_context.js'
 import type * as $Fields from './fields.js'
+import type { $FragmentInline } from './fragment.js'
 
+export type * as InterfaceChildA from './$$.js'
+
+/**
+ * Selection set for {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface}.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+ * | **Fields** | 3 |
+ * | **Implementors** | {@link $Schema.ObjectChildA} |
+ */
 export interface InterfaceChildA<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
@@ -18,7 +32,7 @@ export interface InterfaceChildA<
    * | **Nullability** | Required |
    */
   a?:
-    | $Fields.a$Expanded<_$Context>
+    | $Fields.a.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.a<_$Context>>
   /**
    * # Info
@@ -32,7 +46,7 @@ export interface InterfaceChildA<
    * | **Nullability** | Required |
    */
   b?:
-    | $Fields.b$Expanded<_$Context>
+    | $Fields.b.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.b<_$Context>>
   /**
    * # Info
@@ -46,7 +60,7 @@ export interface InterfaceChildA<
    * | **Nullability** | Required |
    */
   c1?:
-    | $Fields.c1$Expanded<_$Context>
+    | $Fields.c1.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.c1<_$Context>>
   /**
    * Inline fragment selection for {@link $Schema.ObjectChildA} implementor.
@@ -85,7 +99,7 @@ export interface InterfaceChildA<
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: InterfaceChildA$FragmentInline<_$Context> | InterfaceChildA$FragmentInline<_$Context>[]
+  ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
   /**
    * A meta field. Is the name of the type being selected. Since this is a interface type and thus polymorphic,
    * the name is one of the implementor type names, whichever is ultimately returned at runtime.
@@ -97,9 +111,4 @@ export interface InterfaceChildA<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
       $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     >
-}
-
-export interface InterfaceChildA$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends InterfaceChildA<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }

@@ -5,48 +5,54 @@ import type * as $Scalars from '../../scalars/$.js'
 
 export type id<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
   | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | id$SelectionSet<_$Context>
+  | id.$SelectionSet<_$Context>
 
-export interface id$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace id {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+  }
+
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $SelectionSet<_$Context>
+  >
 }
-
-export type id$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | id$SelectionSet<_$Context>
->
 
 export type money<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
   | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | money$SelectionSet<_$Context>
+  | money.$SelectionSet<_$Context>
 
-export interface money$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace money {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+  }
+
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $SelectionSet<_$Context>
+  >
 }
-
-export type money$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | money$SelectionSet<_$Context>
->
 
 export type name<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
   | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | name$SelectionSet<_$Context>
+  | name.$SelectionSet<_$Context>
 
-export interface name$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace name {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+  }
+
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $SelectionSet<_$Context>
+  >
 }
-
-export type name$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | name$SelectionSet<_$Context>
->

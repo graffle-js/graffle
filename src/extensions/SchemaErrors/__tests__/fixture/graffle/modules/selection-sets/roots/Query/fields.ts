@@ -7,1573 +7,1978 @@ export type InputObjectNested<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | InputObjectNested$SelectionSet<_$Context>
+  | InputObjectNested.$SelectionSet<_$Context>
 
-export interface InputObjectNested$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace InputObjectNested {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+    /**
+     * Arguments for `InputObjectNested` field. No arguments are required so you may omit this.
+     */
+    $?: $Arguments<_$Context>
+  }
+
+  export interface $Arguments<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `InputObjectNested` |
+     * | **Parent** | {@link $NamedTypes.$Query}.InputObjectNested |
+     * | **Path** | `Query.InputObjectNested(input)` |
+     * | **Nullability** | Optional |
+     */
+    input?: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.InputObjectNested<_$Context> | null | undefined>
+  }
+
   /**
-   * Arguments for `InputObjectNested` field. No arguments are required so you may omit this.
+   * This is the "expanded" version of the `InputObjectNested` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  $?: InputObjectNested$Arguments<_$Context>
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $SelectionSet<_$Context>
+  >
 }
-
-export interface InputObjectNested$Arguments<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> {
-  /**
-   * # Info
-   *
-   * | | |
-   * | - | - |
-   * | **GraphQL Type** | `InputObjectNested` |
-   * | **Parent** | {@link $NamedTypes.$Query}.InputObjectNested |
-   * | **Path** | `Query.InputObjectNested(input)` |
-   * | **Nullability** | Optional |
-   */
-  input?: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.InputObjectNested<_$Context> | null | undefined>
-}
-
-export type InputObjectNested$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | InputObjectNested$SelectionSet<_$Context>
->
 
 export type InputObjectNestedNonNull<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = InputObjectNestedNonNull$SelectionSet<_$Context>
+> = InputObjectNestedNonNull.$SelectionSet<_$Context>
 
-export interface InputObjectNestedNonNull$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace InputObjectNestedNonNull {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+    /**
+     * Arguments for `InputObjectNestedNonNull` field. All arguments are required so you must include this.
+     */
+    $: $Arguments<_$Context>
+  }
+
+  export interface $Arguments<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `InputObjectNestedNonNull!` |
+     * | **Parent** | {@link $NamedTypes.$Query}.InputObjectNestedNonNull |
+     * | **Path** | `Query.InputObjectNestedNonNull(input)` |
+     * | **Nullability** | Required |
+     */
+    input: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.InputObjectNestedNonNull<_$Context>>
+  }
+
   /**
-   * Arguments for `InputObjectNestedNonNull` field. All arguments are required so you must include this.
+   * This is the "expanded" version of the `InputObjectNestedNonNull` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  $: InputObjectNestedNonNull$Arguments<_$Context>
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    $SelectionSet<_$Context>
+  >
 }
-
-export interface InputObjectNestedNonNull$Arguments<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> {
-  /**
-   * # Info
-   *
-   * | | |
-   * | - | - |
-   * | **GraphQL Type** | `InputObjectNestedNonNull!` |
-   * | **Parent** | {@link $NamedTypes.$Query}.InputObjectNestedNonNull |
-   * | **Path** | `Query.InputObjectNestedNonNull(input)` |
-   * | **Nullability** | Required |
-   */
-  input: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.InputObjectNestedNonNull<_$Context>>
-}
-
-export type InputObjectNestedNonNull$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  InputObjectNestedNonNull$SelectionSet<_$Context>
->
 
 export type abcEnum<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | abcEnum$SelectionSet<_$Context>
+  | abcEnum.$SelectionSet<_$Context>
 
-export interface abcEnum$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace abcEnum {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+  }
+
+  /**
+   * This is the "expanded" version of the `abcEnum` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $SelectionSet<_$Context>
+  >
 }
-
-export type abcEnum$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | abcEnum$SelectionSet<_$Context>
->
 
 export type argInputObjectCircular<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | argInputObjectCircular$SelectionSet<_$Context>
+  | argInputObjectCircular.$SelectionSet<_$Context>
 
-export interface argInputObjectCircular$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace argInputObjectCircular {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+    /**
+     * Arguments for `argInputObjectCircular` field. No arguments are required so you may omit this.
+     */
+    $?: $Arguments<_$Context>
+  }
+
+  export interface $Arguments<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `InputObjectCircular` |
+     * | **Parent** | {@link $NamedTypes.$Query}.argInputObjectCircular |
+     * | **Path** | `Query.argInputObjectCircular(input)` |
+     * | **Nullability** | Optional |
+     */
+    input?: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.InputObjectCircular<_$Context> | null | undefined>
+  }
+
   /**
-   * Arguments for `argInputObjectCircular` field. No arguments are required so you may omit this.
+   * This is the "expanded" version of the `argInputObjectCircular` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  $?: argInputObjectCircular$Arguments<_$Context>
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $SelectionSet<_$Context>
+  >
 }
-
-export interface argInputObjectCircular$Arguments<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> {
-  /**
-   * # Info
-   *
-   * | | |
-   * | - | - |
-   * | **GraphQL Type** | `InputObjectCircular` |
-   * | **Parent** | {@link $NamedTypes.$Query}.argInputObjectCircular |
-   * | **Path** | `Query.argInputObjectCircular(input)` |
-   * | **Nullability** | Optional |
-   */
-  input?: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.InputObjectCircular<_$Context> | null | undefined>
-}
-
-export type argInputObjectCircular$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | argInputObjectCircular$SelectionSet<_$Context>
->
 
 export type bigintField<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | bigintField$SelectionSet<_$Context>
+  | bigintField.$SelectionSet<_$Context>
 
-export interface bigintField$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace bigintField {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+  }
+
+  /**
+   * This is the "expanded" version of the `bigintField` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $SelectionSet<_$Context>
+  >
 }
-
-export type bigintField$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | bigintField$SelectionSet<_$Context>
->
 
 export type bigintFieldNonNull<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | bigintFieldNonNull$SelectionSet<_$Context>
+  | bigintFieldNonNull.$SelectionSet<_$Context>
 
-export interface bigintFieldNonNull$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace bigintFieldNonNull {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+  }
+
+  /**
+   * This is the "expanded" version of the `bigintFieldNonNull` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $SelectionSet<_$Context>
+  >
 }
-
-export type bigintFieldNonNull$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | bigintFieldNonNull$SelectionSet<_$Context>
->
 
 export type date<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
   | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | date$SelectionSet<_$Context>
+  | date.$SelectionSet<_$Context>
 
-export interface date$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace date {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+  }
+
+  /**
+   * This is the "expanded" version of the `date` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $SelectionSet<_$Context>
+  >
 }
-
-export type date$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | date$SelectionSet<_$Context>
->
 
 export type dateArg<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | dateArg$SelectionSet<_$Context>
+  | dateArg.$SelectionSet<_$Context>
 
-export interface dateArg$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace dateArg {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+    /**
+     * Arguments for `dateArg` field. No arguments are required so you may omit this.
+     */
+    $?: $Arguments<_$Context>
+  }
+
+  export interface $Arguments<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `Date` |
+     * | **Parent** | {@link $NamedTypes.$Query}.dateArg |
+     * | **Path** | `Query.dateArg(date)` |
+     * | **Nullability** | Optional |
+     */
+    date?: $Scalars.Date<_$Context>
+  }
+
   /**
-   * Arguments for `dateArg` field. No arguments are required so you may omit this.
+   * This is the "expanded" version of the `dateArg` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  $?: dateArg$Arguments<_$Context>
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $SelectionSet<_$Context>
+  >
 }
-
-export interface dateArg$Arguments<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> {
-  /**
-   * # Info
-   *
-   * | | |
-   * | - | - |
-   * | **GraphQL Type** | `Date` |
-   * | **Parent** | {@link $NamedTypes.$Query}.dateArg |
-   * | **Path** | `Query.dateArg(date)` |
-   * | **Nullability** | Optional |
-   */
-  date?: $Scalars.Date<_$Context>
-}
-
-export type dateArg$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | dateArg$SelectionSet<_$Context>
->
 
 export type dateArgInputObject<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | dateArgInputObject$SelectionSet<_$Context>
+  | dateArgInputObject.$SelectionSet<_$Context>
 
-export interface dateArgInputObject$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace dateArgInputObject {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+    /**
+     * Arguments for `dateArgInputObject` field. No arguments are required so you may omit this.
+     */
+    $?: $Arguments<_$Context>
+  }
+
+  export interface $Arguments<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `InputObject` |
+     * | **Parent** | {@link $NamedTypes.$Query}.dateArgInputObject |
+     * | **Path** | `Query.dateArgInputObject(input)` |
+     * | **Nullability** | Optional |
+     */
+    input?: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.InputObject<_$Context> | null | undefined>
+  }
+
   /**
-   * Arguments for `dateArgInputObject` field. No arguments are required so you may omit this.
+   * This is the "expanded" version of the `dateArgInputObject` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  $?: dateArgInputObject$Arguments<_$Context>
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $SelectionSet<_$Context>
+  >
 }
-
-export interface dateArgInputObject$Arguments<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> {
-  /**
-   * # Info
-   *
-   * | | |
-   * | - | - |
-   * | **GraphQL Type** | `InputObject` |
-   * | **Parent** | {@link $NamedTypes.$Query}.dateArgInputObject |
-   * | **Path** | `Query.dateArgInputObject(input)` |
-   * | **Nullability** | Optional |
-   */
-  input?: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.InputObject<_$Context> | null | undefined>
-}
-
-export type dateArgInputObject$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | dateArgInputObject$SelectionSet<_$Context>
->
 
 export type dateArgList<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | dateArgList$SelectionSet<_$Context>
+  | dateArgList.$SelectionSet<_$Context>
 
-export interface dateArgList$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace dateArgList {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+    /**
+     * Arguments for `dateArgList` field. No arguments are required so you may omit this.
+     */
+    $?: $Arguments<_$Context>
+  }
+
+  export interface $Arguments<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `[Date!]` |
+     * | **Parent** | {@link $NamedTypes.$Query}.dateArgList |
+     * | **Path** | `Query.dateArgList(date)` |
+     * | **Nullability** | Optional |
+     */
+    date?: $$Utilities.DocumentBuilderKit.Var.Maybe<Array<$Scalars.Date<_$Context>> | null | undefined>
+  }
+
   /**
-   * Arguments for `dateArgList` field. No arguments are required so you may omit this.
+   * This is the "expanded" version of the `dateArgList` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  $?: dateArgList$Arguments<_$Context>
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $SelectionSet<_$Context>
+  >
 }
-
-export interface dateArgList$Arguments<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> {
-  /**
-   * # Info
-   *
-   * | | |
-   * | - | - |
-   * | **GraphQL Type** | `[Date!]` |
-   * | **Parent** | {@link $NamedTypes.$Query}.dateArgList |
-   * | **Path** | `Query.dateArgList(date)` |
-   * | **Nullability** | Optional |
-   */
-  date?: $$Utilities.DocumentBuilderKit.Var.Maybe<Array<$Scalars.Date<_$Context>> | null | undefined>
-}
-
-export type dateArgList$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | dateArgList$SelectionSet<_$Context>
->
 
 export type dateArgNonNull<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = dateArgNonNull$SelectionSet<_$Context>
+> = dateArgNonNull.$SelectionSet<_$Context>
 
-export interface dateArgNonNull$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace dateArgNonNull {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+    /**
+     * Arguments for `dateArgNonNull` field. All arguments are required so you must include this.
+     */
+    $: $Arguments<_$Context>
+  }
+
+  export interface $Arguments<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `Date!` |
+     * | **Parent** | {@link $NamedTypes.$Query}.dateArgNonNull |
+     * | **Path** | `Query.dateArgNonNull(date)` |
+     * | **Nullability** | Required |
+     */
+    date: $Scalars.Date$NonNull<_$Context>
+  }
+
   /**
-   * Arguments for `dateArgNonNull` field. All arguments are required so you must include this.
+   * This is the "expanded" version of the `dateArgNonNull` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  $: dateArgNonNull$Arguments<_$Context>
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    $SelectionSet<_$Context>
+  >
 }
-
-export interface dateArgNonNull$Arguments<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> {
-  /**
-   * # Info
-   *
-   * | | |
-   * | - | - |
-   * | **GraphQL Type** | `Date!` |
-   * | **Parent** | {@link $NamedTypes.$Query}.dateArgNonNull |
-   * | **Path** | `Query.dateArgNonNull(date)` |
-   * | **Nullability** | Required |
-   */
-  date: $Scalars.Date$NonNull<_$Context>
-}
-
-export type dateArgNonNull$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  dateArgNonNull$SelectionSet<_$Context>
->
 
 export type dateArgNonNullList<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = dateArgNonNullList$SelectionSet<_$Context>
+> = dateArgNonNullList.$SelectionSet<_$Context>
 
-export interface dateArgNonNullList$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace dateArgNonNullList {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+    /**
+     * Arguments for `dateArgNonNullList` field. All arguments are required so you must include this.
+     */
+    $: $Arguments<_$Context>
+  }
+
+  export interface $Arguments<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `[Date]!` |
+     * | **Parent** | {@link $NamedTypes.$Query}.dateArgNonNullList |
+     * | **Path** | `Query.dateArgNonNullList(date)` |
+     * | **Nullability** | Required |
+     */
+    date: $$Utilities.DocumentBuilderKit.Var.Maybe<Array<$Scalars.Date<_$Context>>>
+  }
+
   /**
-   * Arguments for `dateArgNonNullList` field. All arguments are required so you must include this.
+   * This is the "expanded" version of the `dateArgNonNullList` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  $: dateArgNonNullList$Arguments<_$Context>
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    $SelectionSet<_$Context>
+  >
 }
-
-export interface dateArgNonNullList$Arguments<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> {
-  /**
-   * # Info
-   *
-   * | | |
-   * | - | - |
-   * | **GraphQL Type** | `[Date]!` |
-   * | **Parent** | {@link $NamedTypes.$Query}.dateArgNonNullList |
-   * | **Path** | `Query.dateArgNonNullList(date)` |
-   * | **Nullability** | Required |
-   */
-  date: $$Utilities.DocumentBuilderKit.Var.Maybe<Array<$Scalars.Date<_$Context>>>
-}
-
-export type dateArgNonNullList$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  dateArgNonNullList$SelectionSet<_$Context>
->
 
 export type dateArgNonNullListNonNull<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = dateArgNonNullListNonNull$SelectionSet<_$Context>
+> = dateArgNonNullListNonNull.$SelectionSet<_$Context>
 
-export interface dateArgNonNullListNonNull$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace dateArgNonNullListNonNull {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+    /**
+     * Arguments for `dateArgNonNullListNonNull` field. All arguments are required so you must include this.
+     */
+    $: $Arguments<_$Context>
+  }
+
+  export interface $Arguments<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `[Date!]!` |
+     * | **Parent** | {@link $NamedTypes.$Query}.dateArgNonNullListNonNull |
+     * | **Path** | `Query.dateArgNonNullListNonNull(date)` |
+     * | **Nullability** | Required |
+     */
+    date: $$Utilities.DocumentBuilderKit.Var.Maybe<Array<$Scalars.Date<_$Context>>>
+  }
+
   /**
-   * Arguments for `dateArgNonNullListNonNull` field. All arguments are required so you must include this.
+   * This is the "expanded" version of the `dateArgNonNullListNonNull` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  $: dateArgNonNullListNonNull$Arguments<_$Context>
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    $SelectionSet<_$Context>
+  >
 }
-
-export interface dateArgNonNullListNonNull$Arguments<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> {
-  /**
-   * # Info
-   *
-   * | | |
-   * | - | - |
-   * | **GraphQL Type** | `[Date!]!` |
-   * | **Parent** | {@link $NamedTypes.$Query}.dateArgNonNullListNonNull |
-   * | **Path** | `Query.dateArgNonNullListNonNull(date)` |
-   * | **Nullability** | Required |
-   */
-  date: $$Utilities.DocumentBuilderKit.Var.Maybe<Array<$Scalars.Date<_$Context>>>
-}
-
-export type dateArgNonNullListNonNull$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  dateArgNonNullListNonNull$SelectionSet<_$Context>
->
 
 export type dateInterface1<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = dateInterface1$SelectionSet<_$Context>
+> = dateInterface1.$SelectionSet<_$Context>
 
-export interface dateInterface1$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.DateInterface1<_$Context> {
+export namespace dateInterface1 {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.DateInterface1<_$Context> {
+  }
+
+  /**
+   * This is the "expanded" version of the `dateInterface1` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    $SelectionSet<_$Context>
+  >
 }
-
-export type dateInterface1$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  dateInterface1$SelectionSet<_$Context>
->
 
 export type dateList<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | dateList$SelectionSet<_$Context>
+  | dateList.$SelectionSet<_$Context>
 
-export interface dateList$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace dateList {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+  }
+
+  /**
+   * This is the "expanded" version of the `dateList` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $SelectionSet<_$Context>
+  >
 }
-
-export type dateList$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | dateList$SelectionSet<_$Context>
->
 
 export type dateListList<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | dateListList$SelectionSet<_$Context>
+  | dateListList.$SelectionSet<_$Context>
 
-export interface dateListList$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace dateListList {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+  }
+
+  /**
+   * This is the "expanded" version of the `dateListList` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $SelectionSet<_$Context>
+  >
 }
-
-export type dateListList$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | dateListList$SelectionSet<_$Context>
->
 
 export type dateListNonNull<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | dateListNonNull$SelectionSet<_$Context>
+  | dateListNonNull.$SelectionSet<_$Context>
 
-export interface dateListNonNull$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace dateListNonNull {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+  }
+
+  /**
+   * This is the "expanded" version of the `dateListNonNull` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $SelectionSet<_$Context>
+  >
 }
-
-export type dateListNonNull$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | dateListNonNull$SelectionSet<_$Context>
->
 
 export type dateNonNull<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | dateNonNull$SelectionSet<_$Context>
+  | dateNonNull.$SelectionSet<_$Context>
 
-export interface dateNonNull$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace dateNonNull {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+  }
+
+  /**
+   * This is the "expanded" version of the `dateNonNull` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $SelectionSet<_$Context>
+  >
 }
-
-export type dateNonNull$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | dateNonNull$SelectionSet<_$Context>
->
 
 export type dateObject1<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = dateObject1$SelectionSet<_$Context>
+> = dateObject1.$SelectionSet<_$Context>
 
-export interface dateObject1$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.DateObject1<_$Context> {
+export namespace dateObject1 {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.DateObject1<_$Context> {
+  }
+
+  /**
+   * This is the "expanded" version of the `dateObject1` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    $SelectionSet<_$Context>
+  >
 }
-
-export type dateObject1$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  dateObject1$SelectionSet<_$Context>
->
 
 export type dateUnion<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = dateUnion$SelectionSet<_$Context>
+> = dateUnion.$SelectionSet<_$Context>
 
-export interface dateUnion$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.DateUnion<_$Context> {
+export namespace dateUnion {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.DateUnion<_$Context> {
+  }
+
+  /**
+   * This is the "expanded" version of the `dateUnion` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    $SelectionSet<_$Context>
+  >
 }
-
-export type dateUnion$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  dateUnion$SelectionSet<_$Context>
->
 
 export type error<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
   | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | error$SelectionSet<_$Context>
+  | error.$SelectionSet<_$Context>
 
-export interface error$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace error {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+    /**
+     * Arguments for `error` field. No arguments are required so you may omit this.
+     */
+    $?: $Arguments<_$Context>
+  }
+
+  export interface $Arguments<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `String` |
+     * | **Parent** | {@link $NamedTypes.$Query}.error |
+     * | **Path** | `Query.error(case)` |
+     * | **Nullability** | Optional |
+     */
+    case?: $Scalars.String<_$Context>
+  }
+
   /**
-   * Arguments for `error` field. No arguments are required so you may omit this.
+   * This is the "expanded" version of the `error` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  $?: error$Arguments<_$Context>
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $SelectionSet<_$Context>
+  >
 }
-
-export interface error$Arguments<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> {
-  /**
-   * # Info
-   *
-   * | | |
-   * | - | - |
-   * | **GraphQL Type** | `String` |
-   * | **Parent** | {@link $NamedTypes.$Query}.error |
-   * | **Path** | `Query.error(case)` |
-   * | **Nullability** | Optional |
-   */
-  case?: $Scalars.String<_$Context>
-}
-
-export type error$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | error$SelectionSet<_$Context>
->
 
 export type id<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
   | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | id$SelectionSet<_$Context>
+  | id.$SelectionSet<_$Context>
 
-export interface id$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace id {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+  }
+
+  /**
+   * This is the "expanded" version of the `id` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $SelectionSet<_$Context>
+  >
 }
-
-export type id$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | id$SelectionSet<_$Context>
->
 
 export type idNonNull<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | idNonNull$SelectionSet<_$Context>
+  | idNonNull.$SelectionSet<_$Context>
 
-export interface idNonNull$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace idNonNull {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+  }
+
+  /**
+   * This is the "expanded" version of the `idNonNull` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $SelectionSet<_$Context>
+  >
 }
-
-export type idNonNull$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | idNonNull$SelectionSet<_$Context>
->
 
 type $interface<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
-  $interface$SelectionSet<_$Context>
+  $interface.$SelectionSet<_$Context>
 
-export interface $interface$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Interface<_$Context> {
+namespace $interface {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Interface<_$Context> {
+  }
+
+  /**
+   * This is the "expanded" version of the `interface` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    $SelectionSet<_$Context>
+  >
 }
 
-type $interface$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  $interface$SelectionSet<_$Context>
->
-
-export { type $interface as interface }
-export { type $interface$Expanded as interface$Expanded }
+export type { $interface as interface }
 
 export type interfaceHierarchyChildA<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = interfaceHierarchyChildA$SelectionSet<_$Context>
+> = interfaceHierarchyChildA.$SelectionSet<_$Context>
 
-export interface interfaceHierarchyChildA$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.InterfaceChildA<_$Context> {
+export namespace interfaceHierarchyChildA {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.InterfaceChildA<_$Context> {
+    /**
+     * Arguments for `interfaceHierarchyChildA` field. No arguments are required so you may omit this.
+     */
+    $?: $Arguments<_$Context>
+  }
+
+  export interface $Arguments<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `ChildAInterfaceHierarchyMember` |
+     * | **Parent** | {@link $NamedTypes.$Query}.interfaceHierarchyChildA |
+     * | **Path** | `Query.interfaceHierarchyChildA(type)` |
+     * | **Nullability** | Optional |
+     */
+    $type?: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.ChildAInterfaceHierarchyMember | null | undefined>
+  }
+
   /**
-   * Arguments for `interfaceHierarchyChildA` field. No arguments are required so you may omit this.
+   * This is the "expanded" version of the `interfaceHierarchyChildA` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  $?: interfaceHierarchyChildA$Arguments<_$Context>
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    $SelectionSet<_$Context>
+  >
 }
-
-export interface interfaceHierarchyChildA$Arguments<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> {
-  /**
-   * # Info
-   *
-   * | | |
-   * | - | - |
-   * | **GraphQL Type** | `ChildAInterfaceHierarchyMember` |
-   * | **Parent** | {@link $NamedTypes.$Query}.interfaceHierarchyChildA |
-   * | **Path** | `Query.interfaceHierarchyChildA(type)` |
-   * | **Nullability** | Optional |
-   */
-  $type?: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.ChildAInterfaceHierarchyMember | null | undefined>
-}
-
-export type interfaceHierarchyChildA$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  interfaceHierarchyChildA$SelectionSet<_$Context>
->
 
 export type interfaceHierarchyChildB<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = interfaceHierarchyChildB$SelectionSet<_$Context>
+> = interfaceHierarchyChildB.$SelectionSet<_$Context>
 
-export interface interfaceHierarchyChildB$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.InterfaceChildB<_$Context> {
+export namespace interfaceHierarchyChildB {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.InterfaceChildB<_$Context> {
+    /**
+     * Arguments for `interfaceHierarchyChildB` field. No arguments are required so you may omit this.
+     */
+    $?: $Arguments<_$Context>
+  }
+
+  export interface $Arguments<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `ChildBInterfaceHierarchyMember` |
+     * | **Parent** | {@link $NamedTypes.$Query}.interfaceHierarchyChildB |
+     * | **Path** | `Query.interfaceHierarchyChildB(type)` |
+     * | **Nullability** | Optional |
+     */
+    $type?: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.ChildBInterfaceHierarchyMember | null | undefined>
+  }
+
   /**
-   * Arguments for `interfaceHierarchyChildB` field. No arguments are required so you may omit this.
+   * This is the "expanded" version of the `interfaceHierarchyChildB` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  $?: interfaceHierarchyChildB$Arguments<_$Context>
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    $SelectionSet<_$Context>
+  >
 }
-
-export interface interfaceHierarchyChildB$Arguments<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> {
-  /**
-   * # Info
-   *
-   * | | |
-   * | - | - |
-   * | **GraphQL Type** | `ChildBInterfaceHierarchyMember` |
-   * | **Parent** | {@link $NamedTypes.$Query}.interfaceHierarchyChildB |
-   * | **Path** | `Query.interfaceHierarchyChildB(type)` |
-   * | **Nullability** | Optional |
-   */
-  $type?: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.ChildBInterfaceHierarchyMember | null | undefined>
-}
-
-export type interfaceHierarchyChildB$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  interfaceHierarchyChildB$SelectionSet<_$Context>
->
 
 export type interfaceHierarchyGrandparents<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = interfaceHierarchyGrandparents$SelectionSet<_$Context>
+> = interfaceHierarchyGrandparents.$SelectionSet<_$Context>
 
-export interface interfaceHierarchyGrandparents$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.InterfaceGrandparent<_$Context> {
+export namespace interfaceHierarchyGrandparents {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.InterfaceGrandparent<_$Context> {
+    /**
+     * Arguments for `interfaceHierarchyGrandparents` field. No arguments are required so you may omit this.
+     */
+    $?: $Arguments<_$Context>
+  }
+
+  export interface $Arguments<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `GrandparentInterfaceHierarchyMember` |
+     * | **Parent** | {@link $NamedTypes.$Query}.interfaceHierarchyGrandparents |
+     * | **Path** | `Query.interfaceHierarchyGrandparents(type)` |
+     * | **Nullability** | Optional |
+     */
+    $type?: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.GrandparentInterfaceHierarchyMember | null | undefined>
+  }
+
   /**
-   * Arguments for `interfaceHierarchyGrandparents` field. No arguments are required so you may omit this.
+   * This is the "expanded" version of the `interfaceHierarchyGrandparents` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  $?: interfaceHierarchyGrandparents$Arguments<_$Context>
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    $SelectionSet<_$Context>
+  >
 }
-
-export interface interfaceHierarchyGrandparents$Arguments<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> {
-  /**
-   * # Info
-   *
-   * | | |
-   * | - | - |
-   * | **GraphQL Type** | `GrandparentInterfaceHierarchyMember` |
-   * | **Parent** | {@link $NamedTypes.$Query}.interfaceHierarchyGrandparents |
-   * | **Path** | `Query.interfaceHierarchyGrandparents(type)` |
-   * | **Nullability** | Optional |
-   */
-  $type?: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.GrandparentInterfaceHierarchyMember | null | undefined>
-}
-
-export type interfaceHierarchyGrandparents$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  interfaceHierarchyGrandparents$SelectionSet<_$Context>
->
 
 export type interfaceHierarchyParents<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = interfaceHierarchyParents$SelectionSet<_$Context>
+> = interfaceHierarchyParents.$SelectionSet<_$Context>
 
-export interface interfaceHierarchyParents$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.InterfaceParent<_$Context> {
+export namespace interfaceHierarchyParents {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.InterfaceParent<_$Context> {
+    /**
+     * Arguments for `interfaceHierarchyParents` field. No arguments are required so you may omit this.
+     */
+    $?: $Arguments<_$Context>
+  }
+
+  export interface $Arguments<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `ParentInterfaceHierarchyMember` |
+     * | **Parent** | {@link $NamedTypes.$Query}.interfaceHierarchyParents |
+     * | **Path** | `Query.interfaceHierarchyParents(type)` |
+     * | **Nullability** | Optional |
+     */
+    $type?: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.ParentInterfaceHierarchyMember | null | undefined>
+  }
+
   /**
-   * Arguments for `interfaceHierarchyParents` field. No arguments are required so you may omit this.
+   * This is the "expanded" version of the `interfaceHierarchyParents` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  $?: interfaceHierarchyParents$Arguments<_$Context>
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    $SelectionSet<_$Context>
+  >
 }
-
-export interface interfaceHierarchyParents$Arguments<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> {
-  /**
-   * # Info
-   *
-   * | | |
-   * | - | - |
-   * | **GraphQL Type** | `ParentInterfaceHierarchyMember` |
-   * | **Parent** | {@link $NamedTypes.$Query}.interfaceHierarchyParents |
-   * | **Path** | `Query.interfaceHierarchyParents(type)` |
-   * | **Nullability** | Optional |
-   */
-  $type?: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.ParentInterfaceHierarchyMember | null | undefined>
-}
-
-export type interfaceHierarchyParents$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  interfaceHierarchyParents$SelectionSet<_$Context>
->
 
 export type interfaceNonNull<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = interfaceNonNull$SelectionSet<_$Context>
+> = interfaceNonNull.$SelectionSet<_$Context>
 
-export interface interfaceNonNull$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Interface<_$Context> {
+export namespace interfaceNonNull {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Interface<_$Context> {
+  }
+
+  /**
+   * This is the "expanded" version of the `interfaceNonNull` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    $SelectionSet<_$Context>
+  >
 }
-
-export type interfaceNonNull$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  interfaceNonNull$SelectionSet<_$Context>
->
 
 export type interfaceWithArgs<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = interfaceWithArgs$SelectionSet<_$Context>
+> = interfaceWithArgs.$SelectionSet<_$Context>
 
-export interface interfaceWithArgs$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Interface<_$Context> {
+export namespace interfaceWithArgs {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Interface<_$Context> {
+    /**
+     * Arguments for `interfaceWithArgs` field. All arguments are required so you must include this.
+     */
+    $: $Arguments<_$Context>
+  }
+
+  export interface $Arguments<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `ID!` |
+     * | **Parent** | {@link $NamedTypes.$Query}.interfaceWithArgs |
+     * | **Path** | `Query.interfaceWithArgs(id)` |
+     * | **Nullability** | Required |
+     */
+    id: $Scalars.ID$NonNull<_$Context>
+  }
+
   /**
-   * Arguments for `interfaceWithArgs` field. All arguments are required so you must include this.
+   * This is the "expanded" version of the `interfaceWithArgs` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  $: interfaceWithArgs$Arguments<_$Context>
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    $SelectionSet<_$Context>
+  >
 }
-
-export interface interfaceWithArgs$Arguments<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> {
-  /**
-   * # Info
-   *
-   * | | |
-   * | - | - |
-   * | **GraphQL Type** | `ID!` |
-   * | **Parent** | {@link $NamedTypes.$Query}.interfaceWithArgs |
-   * | **Path** | `Query.interfaceWithArgs(id)` |
-   * | **Nullability** | Required |
-   */
-  id: $Scalars.ID$NonNull<_$Context>
-}
-
-export type interfaceWithArgs$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  interfaceWithArgs$SelectionSet<_$Context>
->
 
 export type listInt<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | listInt$SelectionSet<_$Context>
+  | listInt.$SelectionSet<_$Context>
 
-export interface listInt$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace listInt {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+  }
+
+  /**
+   * This is the "expanded" version of the `listInt` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $SelectionSet<_$Context>
+  >
 }
-
-export type listInt$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | listInt$SelectionSet<_$Context>
->
 
 export type listIntNonNull<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | listIntNonNull$SelectionSet<_$Context>
+  | listIntNonNull.$SelectionSet<_$Context>
 
-export interface listIntNonNull$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace listIntNonNull {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+  }
+
+  /**
+   * This is the "expanded" version of the `listIntNonNull` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $SelectionSet<_$Context>
+  >
 }
-
-export type listIntNonNull$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | listIntNonNull$SelectionSet<_$Context>
->
 
 export type listListInt<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | listListInt$SelectionSet<_$Context>
+  | listListInt.$SelectionSet<_$Context>
 
-export interface listListInt$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace listListInt {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+  }
+
+  /**
+   * This is the "expanded" version of the `listListInt` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $SelectionSet<_$Context>
+  >
 }
-
-export type listListInt$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | listListInt$SelectionSet<_$Context>
->
 
 export type listListIntNonNull<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | listListIntNonNull$SelectionSet<_$Context>
+  | listListIntNonNull.$SelectionSet<_$Context>
 
-export interface listListIntNonNull$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace listListIntNonNull {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+  }
+
+  /**
+   * This is the "expanded" version of the `listListIntNonNull` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $SelectionSet<_$Context>
+  >
 }
-
-export type listListIntNonNull$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | listListIntNonNull$SelectionSet<_$Context>
->
 
 export type lowerCaseUnion<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = lowerCaseUnion$SelectionSet<_$Context>
+> = lowerCaseUnion.$SelectionSet<_$Context>
 
-export interface lowerCaseUnion$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.lowerCaseUnion<_$Context> {
+export namespace lowerCaseUnion {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.lowerCaseUnion<_$Context> {
+  }
+
+  /**
+   * This is the "expanded" version of the `lowerCaseUnion` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    $SelectionSet<_$Context>
+  >
 }
-
-export type lowerCaseUnion$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  lowerCaseUnion$SelectionSet<_$Context>
->
 
 type $object<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
-  $object$SelectionSet<_$Context>
+  $object.$SelectionSet<_$Context>
 
-export interface $object$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Object1<_$Context> {
+namespace $object {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Object1<_$Context> {
+  }
+
+  /**
+   * This is the "expanded" version of the `object` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    $SelectionSet<_$Context>
+  >
 }
 
-type $object$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  $object$SelectionSet<_$Context>
->
-
-export { type $object as object }
-export { type $object$Expanded as object$Expanded }
+export type { $object as object }
 
 export type objectList<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = objectList$SelectionSet<_$Context>
+> = objectList.$SelectionSet<_$Context>
 
-export interface objectList$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Object1<_$Context> {
+export namespace objectList {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Object1<_$Context> {
+  }
+
+  /**
+   * This is the "expanded" version of the `objectList` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    $SelectionSet<_$Context>
+  >
 }
-
-export type objectList$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  objectList$SelectionSet<_$Context>
->
 
 export type objectListNonNull<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = objectListNonNull$SelectionSet<_$Context>
+> = objectListNonNull.$SelectionSet<_$Context>
 
-export interface objectListNonNull$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Object1<_$Context> {
+export namespace objectListNonNull {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Object1<_$Context> {
+  }
+
+  /**
+   * This is the "expanded" version of the `objectListNonNull` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    $SelectionSet<_$Context>
+  >
 }
-
-export type objectListNonNull$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  objectListNonNull$SelectionSet<_$Context>
->
 
 export type objectNested<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = objectNested$SelectionSet<_$Context>
+> = objectNested.$SelectionSet<_$Context>
 
-export interface objectNested$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.ObjectNested<_$Context> {
+export namespace objectNested {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.ObjectNested<_$Context> {
+  }
+
+  /**
+   * This is the "expanded" version of the `objectNested` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    $SelectionSet<_$Context>
+  >
 }
-
-export type objectNested$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  objectNested$SelectionSet<_$Context>
->
 
 export type objectNestedWithArgs<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = objectNestedWithArgs$SelectionSet<_$Context>
+> = objectNestedWithArgs.$SelectionSet<_$Context>
 
-export interface objectNestedWithArgs$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.ObjectNestedWithArgs<_$Context> {
+export namespace objectNestedWithArgs {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.ObjectNestedWithArgs<_$Context> {
+  }
+
+  /**
+   * This is the "expanded" version of the `objectNestedWithArgs` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    $SelectionSet<_$Context>
+  >
 }
-
-export type objectNestedWithArgs$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  objectNestedWithArgs$SelectionSet<_$Context>
->
 
 export type objectNonNull<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = objectNonNull$SelectionSet<_$Context>
+> = objectNonNull.$SelectionSet<_$Context>
 
-export interface objectNonNull$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Object1<_$Context> {
+export namespace objectNonNull {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Object1<_$Context> {
+  }
+
+  /**
+   * This is the "expanded" version of the `objectNonNull` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    $SelectionSet<_$Context>
+  >
 }
-
-export type objectNonNull$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  objectNonNull$SelectionSet<_$Context>
->
 
 export type objectWithArgs<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = objectWithArgs$SelectionSet<_$Context>
+> = objectWithArgs.$SelectionSet<_$Context>
 
-export interface objectWithArgs$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Object1<_$Context> {
+export namespace objectWithArgs {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Object1<_$Context> {
+    /**
+     * Arguments for `objectWithArgs` field. No arguments are required so you may omit this.
+     */
+    $?: $Arguments<_$Context>
+  }
+
+  export interface $Arguments<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `Boolean` |
+     * | **Parent** | {@link $NamedTypes.$Query}.objectWithArgs |
+     * | **Path** | `Query.objectWithArgs(boolean)` |
+     * | **Nullability** | Optional |
+     */
+    boolean?: $Scalars.Boolean<_$Context>
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `Float` |
+     * | **Parent** | {@link $NamedTypes.$Query}.objectWithArgs |
+     * | **Path** | `Query.objectWithArgs(float)` |
+     * | **Nullability** | Optional |
+     */
+    float?: $Scalars.Float<_$Context>
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `ID` |
+     * | **Parent** | {@link $NamedTypes.$Query}.objectWithArgs |
+     * | **Path** | `Query.objectWithArgs(id)` |
+     * | **Nullability** | Optional |
+     */
+    id?: $Scalars.ID<_$Context>
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `Int` |
+     * | **Parent** | {@link $NamedTypes.$Query}.objectWithArgs |
+     * | **Path** | `Query.objectWithArgs(int)` |
+     * | **Nullability** | Optional |
+     */
+    int?: $Scalars.Int<_$Context>
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `String` |
+     * | **Parent** | {@link $NamedTypes.$Query}.objectWithArgs |
+     * | **Path** | `Query.objectWithArgs(string)` |
+     * | **Nullability** | Optional |
+     */
+    string?: $Scalars.String<_$Context>
+  }
+
   /**
-   * Arguments for `objectWithArgs` field. No arguments are required so you may omit this.
+   * This is the "expanded" version of the `objectWithArgs` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  $?: objectWithArgs$Arguments<_$Context>
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    $SelectionSet<_$Context>
+  >
 }
-
-export interface objectWithArgs$Arguments<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> {
-  /**
-   * # Info
-   *
-   * | | |
-   * | - | - |
-   * | **GraphQL Type** | `Boolean` |
-   * | **Parent** | {@link $NamedTypes.$Query}.objectWithArgs |
-   * | **Path** | `Query.objectWithArgs(boolean)` |
-   * | **Nullability** | Optional |
-   */
-  boolean?: $Scalars.Boolean<_$Context>
-  /**
-   * # Info
-   *
-   * | | |
-   * | - | - |
-   * | **GraphQL Type** | `Float` |
-   * | **Parent** | {@link $NamedTypes.$Query}.objectWithArgs |
-   * | **Path** | `Query.objectWithArgs(float)` |
-   * | **Nullability** | Optional |
-   */
-  float?: $Scalars.Float<_$Context>
-  /**
-   * # Info
-   *
-   * | | |
-   * | - | - |
-   * | **GraphQL Type** | `ID` |
-   * | **Parent** | {@link $NamedTypes.$Query}.objectWithArgs |
-   * | **Path** | `Query.objectWithArgs(id)` |
-   * | **Nullability** | Optional |
-   */
-  id?: $Scalars.ID<_$Context>
-  /**
-   * # Info
-   *
-   * | | |
-   * | - | - |
-   * | **GraphQL Type** | `Int` |
-   * | **Parent** | {@link $NamedTypes.$Query}.objectWithArgs |
-   * | **Path** | `Query.objectWithArgs(int)` |
-   * | **Nullability** | Optional |
-   */
-  int?: $Scalars.Int<_$Context>
-  /**
-   * # Info
-   *
-   * | | |
-   * | - | - |
-   * | **GraphQL Type** | `String` |
-   * | **Parent** | {@link $NamedTypes.$Query}.objectWithArgs |
-   * | **Path** | `Query.objectWithArgs(string)` |
-   * | **Nullability** | Optional |
-   */
-  string?: $Scalars.String<_$Context>
-}
-
-export type objectWithArgs$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  objectWithArgs$SelectionSet<_$Context>
->
 
 export type result<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = result$SelectionSet<_$Context>
+> = result.$SelectionSet<_$Context>
 
-export interface result$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Result<_$Context> {
+export namespace result {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Result<_$Context> {
+    /**
+     * Arguments for `result` field. All arguments are required so you must include this.
+     */
+    $: $Arguments<_$Context>
+  }
+
+  export interface $Arguments<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `Case!` |
+     * | **Parent** | {@link $NamedTypes.$Query}.result |
+     * | **Path** | `Query.result(case)` |
+     * | **Nullability** | Required |
+     */
+    $case: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.Case>
+  }
+
   /**
-   * Arguments for `result` field. All arguments are required so you must include this.
+   * This is the "expanded" version of the `result` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  $: result$Arguments<_$Context>
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    $SelectionSet<_$Context>
+  >
 }
-
-export interface result$Arguments<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> {
-  /**
-   * # Info
-   *
-   * | | |
-   * | - | - |
-   * | **GraphQL Type** | `Case!` |
-   * | **Parent** | {@link $NamedTypes.$Query}.result |
-   * | **Path** | `Query.result(case)` |
-   * | **Nullability** | Required |
-   */
-  $case: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.Case>
-}
-
-export type result$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  result$SelectionSet<_$Context>
->
 
 export type resultNonNull<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = resultNonNull$SelectionSet<_$Context>
+> = resultNonNull.$SelectionSet<_$Context>
 
-export interface resultNonNull$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Result<_$Context> {
+export namespace resultNonNull {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Result<_$Context> {
+    /**
+     * Arguments for `resultNonNull` field. No arguments are required so you may omit this.
+     */
+    $?: $Arguments<_$Context>
+  }
+
+  export interface $Arguments<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `Case` |
+     * | **Parent** | {@link $NamedTypes.$Query}.resultNonNull |
+     * | **Path** | `Query.resultNonNull(case)` |
+     * | **Nullability** | Optional |
+     */
+    $case?: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.Case | null | undefined>
+  }
+
   /**
-   * Arguments for `resultNonNull` field. No arguments are required so you may omit this.
+   * This is the "expanded" version of the `resultNonNull` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  $?: resultNonNull$Arguments<_$Context>
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    $SelectionSet<_$Context>
+  >
 }
-
-export interface resultNonNull$Arguments<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> {
-  /**
-   * # Info
-   *
-   * | | |
-   * | - | - |
-   * | **GraphQL Type** | `Case` |
-   * | **Parent** | {@link $NamedTypes.$Query}.resultNonNull |
-   * | **Path** | `Query.resultNonNull(case)` |
-   * | **Nullability** | Optional |
-   */
-  $case?: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.Case | null | undefined>
-}
-
-export type resultNonNull$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  resultNonNull$SelectionSet<_$Context>
->
 
 type $string<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
   | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | $string$SelectionSet<_$Context>
+  | $string.$SelectionSet<_$Context>
 
-export interface $string$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+namespace $string {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+  }
+
+  /**
+   * This is the "expanded" version of the `string` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $SelectionSet<_$Context>
+  >
 }
 
-type $string$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | $string$SelectionSet<_$Context>
->
-
-export { type $string as string }
-export { type $string$Expanded as string$Expanded }
+export type { $string as string }
 
 export type stringWithArgEnum<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | stringWithArgEnum$SelectionSet<_$Context>
+  | stringWithArgEnum.$SelectionSet<_$Context>
 
-export interface stringWithArgEnum$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace stringWithArgEnum {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+    /**
+     * Arguments for `stringWithArgEnum` field. No arguments are required so you may omit this.
+     */
+    $?: $Arguments<_$Context>
+  }
+
+  export interface $Arguments<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `ABCEnum` |
+     * | **Parent** | {@link $NamedTypes.$Query}.stringWithArgEnum |
+     * | **Path** | `Query.stringWithArgEnum(ABCEnum)` |
+     * | **Nullability** | Optional |
+     */
+    $ABCEnum?: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.ABCEnum | null | undefined>
+  }
+
   /**
-   * Arguments for `stringWithArgEnum` field. No arguments are required so you may omit this.
+   * This is the "expanded" version of the `stringWithArgEnum` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  $?: stringWithArgEnum$Arguments<_$Context>
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $SelectionSet<_$Context>
+  >
 }
-
-export interface stringWithArgEnum$Arguments<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> {
-  /**
-   * # Info
-   *
-   * | | |
-   * | - | - |
-   * | **GraphQL Type** | `ABCEnum` |
-   * | **Parent** | {@link $NamedTypes.$Query}.stringWithArgEnum |
-   * | **Path** | `Query.stringWithArgEnum(ABCEnum)` |
-   * | **Nullability** | Optional |
-   */
-  $ABCEnum?: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.ABCEnum | null | undefined>
-}
-
-export type stringWithArgEnum$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | stringWithArgEnum$SelectionSet<_$Context>
->
 
 export type stringWithArgInputObject<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | stringWithArgInputObject$SelectionSet<_$Context>
+  | stringWithArgInputObject.$SelectionSet<_$Context>
 
-export interface stringWithArgInputObject$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace stringWithArgInputObject {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+    /**
+     * Arguments for `stringWithArgInputObject` field. No arguments are required so you may omit this.
+     */
+    $?: $Arguments<_$Context>
+  }
+
+  export interface $Arguments<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `InputObject` |
+     * | **Parent** | {@link $NamedTypes.$Query}.stringWithArgInputObject |
+     * | **Path** | `Query.stringWithArgInputObject(input)` |
+     * | **Nullability** | Optional |
+     */
+    input?: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.InputObject<_$Context> | null | undefined>
+  }
+
   /**
-   * Arguments for `stringWithArgInputObject` field. No arguments are required so you may omit this.
+   * This is the "expanded" version of the `stringWithArgInputObject` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  $?: stringWithArgInputObject$Arguments<_$Context>
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $SelectionSet<_$Context>
+  >
 }
-
-export interface stringWithArgInputObject$Arguments<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> {
-  /**
-   * # Info
-   *
-   * | | |
-   * | - | - |
-   * | **GraphQL Type** | `InputObject` |
-   * | **Parent** | {@link $NamedTypes.$Query}.stringWithArgInputObject |
-   * | **Path** | `Query.stringWithArgInputObject(input)` |
-   * | **Nullability** | Optional |
-   */
-  input?: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.InputObject<_$Context> | null | undefined>
-}
-
-export type stringWithArgInputObject$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | stringWithArgInputObject$SelectionSet<_$Context>
->
 
 export type stringWithArgInputObjectEnum<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = stringWithArgInputObjectEnum$SelectionSet<_$Context>
+> = stringWithArgInputObjectEnum.$SelectionSet<_$Context>
 
-export interface stringWithArgInputObjectEnum$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace stringWithArgInputObjectEnum {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+    /**
+     * Arguments for `stringWithArgInputObjectEnum` field. All arguments are required so you must include this.
+     */
+    $: $Arguments<_$Context>
+  }
+
+  export interface $Arguments<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `InputObjectEnum!` |
+     * | **Parent** | {@link $NamedTypes.$Query}.stringWithArgInputObjectEnum |
+     * | **Path** | `Query.stringWithArgInputObjectEnum(input)` |
+     * | **Nullability** | Required |
+     */
+    input: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.InputObjectEnum<_$Context>>
+  }
+
   /**
-   * Arguments for `stringWithArgInputObjectEnum` field. All arguments are required so you must include this.
+   * This is the "expanded" version of the `stringWithArgInputObjectEnum` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  $: stringWithArgInputObjectEnum$Arguments<_$Context>
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    $SelectionSet<_$Context>
+  >
 }
-
-export interface stringWithArgInputObjectEnum$Arguments<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> {
-  /**
-   * # Info
-   *
-   * | | |
-   * | - | - |
-   * | **GraphQL Type** | `InputObjectEnum!` |
-   * | **Parent** | {@link $NamedTypes.$Query}.stringWithArgInputObjectEnum |
-   * | **Path** | `Query.stringWithArgInputObjectEnum(input)` |
-   * | **Nullability** | Required |
-   */
-  input: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.InputObjectEnum<_$Context>>
-}
-
-export type stringWithArgInputObjectEnum$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  stringWithArgInputObjectEnum$SelectionSet<_$Context>
->
 
 export type stringWithArgInputObjectRequired<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = stringWithArgInputObjectRequired$SelectionSet<_$Context>
+> = stringWithArgInputObjectRequired.$SelectionSet<_$Context>
 
-export interface stringWithArgInputObjectRequired$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace stringWithArgInputObjectRequired {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+    /**
+     * Arguments for `stringWithArgInputObjectRequired` field. All arguments are required so you must include this.
+     */
+    $: $Arguments<_$Context>
+  }
+
+  export interface $Arguments<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `InputObject!` |
+     * | **Parent** | {@link $NamedTypes.$Query}.stringWithArgInputObjectRequired |
+     * | **Path** | `Query.stringWithArgInputObjectRequired(input)` |
+     * | **Nullability** | Required |
+     */
+    input: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.InputObject<_$Context>>
+  }
+
   /**
-   * Arguments for `stringWithArgInputObjectRequired` field. All arguments are required so you must include this.
+   * This is the "expanded" version of the `stringWithArgInputObjectRequired` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  $: stringWithArgInputObjectRequired$Arguments<_$Context>
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    $SelectionSet<_$Context>
+  >
 }
-
-export interface stringWithArgInputObjectRequired$Arguments<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> {
-  /**
-   * # Info
-   *
-   * | | |
-   * | - | - |
-   * | **GraphQL Type** | `InputObject!` |
-   * | **Parent** | {@link $NamedTypes.$Query}.stringWithArgInputObjectRequired |
-   * | **Path** | `Query.stringWithArgInputObjectRequired(input)` |
-   * | **Nullability** | Required |
-   */
-  input: $$Utilities.DocumentBuilderKit.Var.Maybe<$Named.InputObject<_$Context>>
-}
-
-export type stringWithArgInputObjectRequired$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  stringWithArgInputObjectRequired$SelectionSet<_$Context>
->
 
 export type stringWithArgs<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | stringWithArgs$SelectionSet<_$Context>
+  | stringWithArgs.$SelectionSet<_$Context>
 
-export interface stringWithArgs$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace stringWithArgs {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+    /**
+     * Arguments for `stringWithArgs` field. No arguments are required so you may omit this.
+     */
+    $?: $Arguments<_$Context>
+  }
+
+  export interface $Arguments<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `Boolean` |
+     * | **Parent** | {@link $NamedTypes.$Query}.stringWithArgs |
+     * | **Path** | `Query.stringWithArgs(boolean)` |
+     * | **Nullability** | Optional |
+     */
+    boolean?: $Scalars.Boolean<_$Context>
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `Float` |
+     * | **Parent** | {@link $NamedTypes.$Query}.stringWithArgs |
+     * | **Path** | `Query.stringWithArgs(float)` |
+     * | **Nullability** | Optional |
+     */
+    float?: $Scalars.Float<_$Context>
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `ID` |
+     * | **Parent** | {@link $NamedTypes.$Query}.stringWithArgs |
+     * | **Path** | `Query.stringWithArgs(id)` |
+     * | **Nullability** | Optional |
+     */
+    id?: $Scalars.ID<_$Context>
+    /**
+     * @deprecated Example of argument deprecation reason here.
+     *
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `Int` |
+     * | **Parent** | {@link $NamedTypes.$Query}.stringWithArgs |
+     * | **Path** | `Query.stringWithArgs(int)` |
+     * | **Nullability** | Optional |
+     * | **⚠ Deprecated** | Example of argument deprecation reason here. |
+     */
+    int?: $Scalars.Int<_$Context>
+    /**
+     * Example of some argument documentation here.
+     *
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `String` |
+     * | **Parent** | {@link $NamedTypes.$Query}.stringWithArgs |
+     * | **Path** | `Query.stringWithArgs(string)` |
+     * | **Nullability** | Optional |
+     */
+    string?: $Scalars.String<_$Context>
+  }
+
   /**
-   * Arguments for `stringWithArgs` field. No arguments are required so you may omit this.
+   * This is the "expanded" version of the `stringWithArgs` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  $?: stringWithArgs$Arguments<_$Context>
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $SelectionSet<_$Context>
+  >
 }
-
-export interface stringWithArgs$Arguments<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> {
-  /**
-   * # Info
-   *
-   * | | |
-   * | - | - |
-   * | **GraphQL Type** | `Boolean` |
-   * | **Parent** | {@link $NamedTypes.$Query}.stringWithArgs |
-   * | **Path** | `Query.stringWithArgs(boolean)` |
-   * | **Nullability** | Optional |
-   */
-  boolean?: $Scalars.Boolean<_$Context>
-  /**
-   * # Info
-   *
-   * | | |
-   * | - | - |
-   * | **GraphQL Type** | `Float` |
-   * | **Parent** | {@link $NamedTypes.$Query}.stringWithArgs |
-   * | **Path** | `Query.stringWithArgs(float)` |
-   * | **Nullability** | Optional |
-   */
-  float?: $Scalars.Float<_$Context>
-  /**
-   * # Info
-   *
-   * | | |
-   * | - | - |
-   * | **GraphQL Type** | `ID` |
-   * | **Parent** | {@link $NamedTypes.$Query}.stringWithArgs |
-   * | **Path** | `Query.stringWithArgs(id)` |
-   * | **Nullability** | Optional |
-   */
-  id?: $Scalars.ID<_$Context>
-  /**
-   * # Info
-   *
-   * | | |
-   * | - | - |
-   * | **GraphQL Type** | `Int` |
-   * | **Parent** | {@link $NamedTypes.$Query}.stringWithArgs |
-   * | **Path** | `Query.stringWithArgs(int)` |
-   * | **Nullability** | Optional |
-   * | **⚠ Deprecated** | Example of argument deprecation reason here. |
-   */
-  int?: $Scalars.Int<_$Context>
-  /**
-   * Example of some argument documentation here.
-   *
-   * # Info
-   *
-   * | | |
-   * | - | - |
-   * | **GraphQL Type** | `String` |
-   * | **Parent** | {@link $NamedTypes.$Query}.stringWithArgs |
-   * | **Path** | `Query.stringWithArgs(string)` |
-   * | **Nullability** | Optional |
-   */
-  string?: $Scalars.String<_$Context>
-}
-
-export type stringWithArgs$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | stringWithArgs$SelectionSet<_$Context>
->
 
 export type stringWithListArg<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > =
   | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | stringWithListArg$SelectionSet<_$Context>
+  | stringWithListArg.$SelectionSet<_$Context>
 
-export interface stringWithListArg$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace stringWithListArg {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+    /**
+     * Arguments for `stringWithListArg` field. No arguments are required so you may omit this.
+     */
+    $?: $Arguments<_$Context>
+  }
+
+  export interface $Arguments<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `[Int]` |
+     * | **Parent** | {@link $NamedTypes.$Query}.stringWithListArg |
+     * | **Path** | `Query.stringWithListArg(ints)` |
+     * | **Nullability** | Optional |
+     */
+    ints?: $$Utilities.DocumentBuilderKit.Var.Maybe<Array<$Scalars.Int<_$Context>> | null | undefined>
+  }
+
   /**
-   * Arguments for `stringWithListArg` field. No arguments are required so you may omit this.
+   * This is the "expanded" version of the `stringWithListArg` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  $?: stringWithListArg$Arguments<_$Context>
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $SelectionSet<_$Context>
+  >
 }
-
-export interface stringWithListArg$Arguments<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> {
-  /**
-   * # Info
-   *
-   * | | |
-   * | - | - |
-   * | **GraphQL Type** | `[Int]` |
-   * | **Parent** | {@link $NamedTypes.$Query}.stringWithListArg |
-   * | **Path** | `Query.stringWithListArg(ints)` |
-   * | **Nullability** | Optional |
-   */
-  ints?: $$Utilities.DocumentBuilderKit.Var.Maybe<Array<$Scalars.Int<_$Context>> | null | undefined>
-}
-
-export type stringWithListArg$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | stringWithListArg$SelectionSet<_$Context>
->
 
 export type stringWithListArgRequired<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = stringWithListArgRequired$SelectionSet<_$Context>
+> = stringWithListArgRequired.$SelectionSet<_$Context>
 
-export interface stringWithListArgRequired$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace stringWithListArgRequired {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+    /**
+     * Arguments for `stringWithListArgRequired` field. All arguments are required so you must include this.
+     */
+    $: $Arguments<_$Context>
+  }
+
+  export interface $Arguments<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `[Int!]!` |
+     * | **Parent** | {@link $NamedTypes.$Query}.stringWithListArgRequired |
+     * | **Path** | `Query.stringWithListArgRequired(ints)` |
+     * | **Nullability** | Required |
+     */
+    ints: $$Utilities.DocumentBuilderKit.Var.Maybe<Array<$Scalars.Int<_$Context>>>
+  }
+
   /**
-   * Arguments for `stringWithListArgRequired` field. All arguments are required so you must include this.
+   * This is the "expanded" version of the `stringWithListArgRequired` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  $: stringWithListArgRequired$Arguments<_$Context>
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    $SelectionSet<_$Context>
+  >
 }
-
-export interface stringWithListArgRequired$Arguments<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> {
-  /**
-   * # Info
-   *
-   * | | |
-   * | - | - |
-   * | **GraphQL Type** | `[Int!]!` |
-   * | **Parent** | {@link $NamedTypes.$Query}.stringWithListArgRequired |
-   * | **Path** | `Query.stringWithListArgRequired(ints)` |
-   * | **Nullability** | Required |
-   */
-  ints: $$Utilities.DocumentBuilderKit.Var.Maybe<Array<$Scalars.Int<_$Context>>>
-}
-
-export type stringWithListArgRequired$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  stringWithListArgRequired$SelectionSet<_$Context>
->
 
 export type stringWithRequiredArg<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = stringWithRequiredArg$SelectionSet<_$Context>
+> = stringWithRequiredArg.$SelectionSet<_$Context>
 
-export interface stringWithRequiredArg$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace stringWithRequiredArg {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+    /**
+     * Arguments for `stringWithRequiredArg` field. All arguments are required so you must include this.
+     */
+    $: $Arguments<_$Context>
+  }
+
+  export interface $Arguments<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `String!` |
+     * | **Parent** | {@link $NamedTypes.$Query}.stringWithRequiredArg |
+     * | **Path** | `Query.stringWithRequiredArg(string)` |
+     * | **Nullability** | Required |
+     */
+    string: $Scalars.String$NonNull<_$Context>
+  }
+
   /**
-   * Arguments for `stringWithRequiredArg` field. All arguments are required so you must include this.
+   * This is the "expanded" version of the `stringWithRequiredArg` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  $: stringWithRequiredArg$Arguments<_$Context>
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    $SelectionSet<_$Context>
+  >
 }
-
-export interface stringWithRequiredArg$Arguments<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> {
-  /**
-   * # Info
-   *
-   * | | |
-   * | - | - |
-   * | **GraphQL Type** | `String!` |
-   * | **Parent** | {@link $NamedTypes.$Query}.stringWithRequiredArg |
-   * | **Path** | `Query.stringWithRequiredArg(string)` |
-   * | **Nullability** | Required |
-   */
-  string: $Scalars.String$NonNull<_$Context>
-}
-
-export type stringWithRequiredArg$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  stringWithRequiredArg$SelectionSet<_$Context>
->
 
 export type unionFooBar<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = unionFooBar$SelectionSet<_$Context>
+> = unionFooBar.$SelectionSet<_$Context>
 
-export interface unionFooBar$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.FooBarUnion<_$Context> {
+export namespace unionFooBar {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.FooBarUnion<_$Context> {
+  }
+
+  /**
+   * This is the "expanded" version of the `unionFooBar` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    $SelectionSet<_$Context>
+  >
 }
-
-export type unionFooBar$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  unionFooBar$SelectionSet<_$Context>
->
 
 export type unionFooBarNonNull<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = unionFooBarNonNull$SelectionSet<_$Context>
+> = unionFooBarNonNull.$SelectionSet<_$Context>
 
-export interface unionFooBarNonNull$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.FooBarUnion<_$Context> {
+export namespace unionFooBarNonNull {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.FooBarUnion<_$Context> {
+  }
+
+  /**
+   * This is the "expanded" version of the `unionFooBarNonNull` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    $SelectionSet<_$Context>
+  >
 }
-
-export type unionFooBarNonNull$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  unionFooBarNonNull$SelectionSet<_$Context>
->
 
 export type unionFooBarWithArgs<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = unionFooBarWithArgs$SelectionSet<_$Context>
+> = unionFooBarWithArgs.$SelectionSet<_$Context>
 
-export interface unionFooBarWithArgs$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.FooBarUnion<_$Context> {
+export namespace unionFooBarWithArgs {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.FooBarUnion<_$Context> {
+    /**
+     * Arguments for `unionFooBarWithArgs` field. No arguments are required so you may omit this.
+     */
+    $?: $Arguments<_$Context>
+  }
+
+  export interface $Arguments<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > {
+    /**
+     * # Info
+     *
+     * | | |
+     * | - | - |
+     * | **GraphQL Type** | `ID` |
+     * | **Parent** | {@link $NamedTypes.$Query}.unionFooBarWithArgs |
+     * | **Path** | `Query.unionFooBarWithArgs(id)` |
+     * | **Nullability** | Optional |
+     */
+    id?: $Scalars.ID<_$Context>
+  }
+
   /**
-   * Arguments for `unionFooBarWithArgs` field. No arguments are required so you may omit this.
+   * This is the "expanded" version of the `unionFooBarWithArgs` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
    */
-  $?: unionFooBarWithArgs$Arguments<_$Context>
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    $SelectionSet<_$Context>
+  >
 }
-
-export interface unionFooBarWithArgs$Arguments<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> {
-  /**
-   * # Info
-   *
-   * | | |
-   * | - | - |
-   * | **GraphQL Type** | `ID` |
-   * | **Parent** | {@link $NamedTypes.$Query}.unionFooBarWithArgs |
-   * | **Path** | `Query.unionFooBarWithArgs(id)` |
-   * | **Nullability** | Optional |
-   */
-  id?: $Scalars.ID<_$Context>
-}
-
-export type unionFooBarWithArgs$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  unionFooBarWithArgs$SelectionSet<_$Context>
->
 
 export type unionObject<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = unionObject$SelectionSet<_$Context>
+> = unionObject.$SelectionSet<_$Context>
 
-export interface unionObject$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.ObjectUnion<_$Context> {
+export namespace unionObject {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.ObjectUnion<_$Context> {
+  }
+
+  /**
+   * This is the "expanded" version of the `unionObject` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    $SelectionSet<_$Context>
+  >
 }
-
-export type unionObject$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  unionObject$SelectionSet<_$Context>
->
 
 export type unionObjectNonNull<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = unionObjectNonNull$SelectionSet<_$Context>
+> = unionObjectNonNull.$SelectionSet<_$Context>
 
-export interface unionObjectNonNull$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.ObjectUnion<_$Context> {
+export namespace unionObjectNonNull {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.ObjectUnion<_$Context> {
+  }
+
+  /**
+   * This is the "expanded" version of the `unionObjectNonNull` type. It is identical except for the fact
+   * that IDEs will display its contents (a union type) directly, rather than the name of this type.
+   * In some cases, this is a preferable DX, making the types easier to read for users.
+   */
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    $SelectionSet<_$Context>
+  >
 }
-
-export type unionObjectNonNull$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  unionObjectNonNull$SelectionSet<_$Context>
->

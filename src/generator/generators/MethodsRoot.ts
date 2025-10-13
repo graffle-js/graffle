@@ -1,5 +1,6 @@
 // todo remove use of Utils.Aug when schema errors not in use
 import { Grafaid } from '#lib/grafaid'
+import { Code } from '#src/lib/Code.js'
 import { createFromObjectTypeAndMapOrThrow } from '#src/lib/grafaid/schema/RootDetails.js'
 import { Str } from '@wollybeard/kit'
 import { $ } from '../helpers/identifiers.js'
@@ -21,8 +22,6 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
   `MethodsRoot`,
   ({ config, code }) => {
     code(importModuleGenerator(config, ModuleGeneratorSelectionSets, true))
-    // Import field types separately for accessing field.name types
-    code(codeImportAll(config, { as: `$$SelectionSetsFields`, from: './selection-sets/$$.fields', type: true }))
     code(importModuleGenerator(config, ModuleGeneratorSchema, true))
     code(importUtilities(config))
     code``
@@ -34,11 +33,7 @@ export const ModuleGeneratorMethodsRoot = createModuleGenerator(
     code(`export interface BuilderMethodsRoot<$Context extends ${$.$$Utilities}.Context> {`)
     config.schema.kindMap.root.list.forEach(node => {
       const propertyDoc = getRootPropertyDoc(node.operationType)
-      code(`  /**`)
-      propertyDoc.split('\n').forEach(line => {
-        code(`   * ${line}`)
-      })
-      code(`   */`)
+      code(Code.TSDocIndented(propertyDoc, `  `))
       code(`  ${node.operationType}: ${node.name.canonical}Methods<$Context>`)
     })
     code(`}`)
@@ -59,11 +54,7 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
   // Interface JSDoc
   const interfaceDoc = getRootMethodsInterfaceDoc(config, node, operationType)
   if (interfaceDoc) {
-    code(`/**`)
-    interfaceDoc.split('\n').forEach(line => {
-      code(` * ${line}`)
-    })
-    code(` */`)
+    code(Code.TSDoc(interfaceDoc))
   }
 
   // dprint-ignore
@@ -71,11 +62,7 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
 
   // $batch JSDoc
   const batchDoc = getBatchMethodDoc(operationType)
-  code(`  /**`)
-  batchDoc.split('\n').forEach(line => {
-    code(`   * ${line}`)
-  })
-  code(`   */`)
+  code(Code.TSDocIndented(batchDoc, `  `))
 
   // dprint-ignore
   code`
@@ -95,11 +82,7 @@ const renderRootType = createCodeGenerator<{ node: Grafaid.Schema.ObjectType }>(
 
   // __typename JSDoc
   const typenameDoc = getTypenameMethodDoc(node.name, operationType)
-  code(`  /**`)
-  typenameDoc.split('\n').forEach(line => {
-    code(`   * ${line}`)
-  })
-  code(`   */`)
+  code(Code.TSDocIndented(typenameDoc, `  `))
 
   // dprint-ignore
   code`
@@ -125,11 +108,7 @@ const renderFieldMethods = createCodeGenerator<{ node: Grafaid.Schema.ObjectType
   for (const field of Object.values(node.getFields())) {
     const docContent = getOutputFieldMethodDoc(config, field, node)
     if (docContent) {
-      code(`/**`)
-      docContent.split('\n').forEach(line => {
-        code(` * ${line}`)
-      })
-      code(` */`)
+      code(Code.TSDoc(docContent))
     }
 
     const fieldTypeUnwrapped = Grafaid.Schema.getNamedType(field.type)
@@ -143,7 +122,7 @@ const renderFieldMethods = createCodeGenerator<{ node: Grafaid.Schema.ObjectType
       ${field.name}:
         ${$.$$Utilities}.GraffleKit.Context.Configuration.Check.Preflight<
           $Context,
-          <$SelectionSet>(selectionSet${isOptional ? `?` : ``}: ${$.$$Utilities}.Exact<$SelectionSet, $$SelectionSetsFields.${renderName(node.name)}.${field.name}<{ scalars: $Context['scalars'] }>>) =>
+          <$SelectionSet>(selectionSet${isOptional ? `?` : ``}: ${$.$$Utilities}.Exact<$SelectionSet, ${$.$$SelectionSets}.${renderName(node.name)}.${field.name}<{ scalars: $Context['scalars'] }>>) =>
             Promise<
               & (null | {})
               & ${$.$$Utilities}.HandleOutputDocumentBuilderRootField<

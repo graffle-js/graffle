@@ -1,3 +1,5 @@
+# Glossary
+
 ### SDDM
 
 Abbreviation for [Schema Driven Data Map](#schema-driven-data-map).
@@ -20,5 +22,5 @@ It can be extended by extensions.
 
 Some features that require SDDM:
 
-1. [Custom Scalars](../20_topics/05_custom-scalars.md)
+1. [Custom Scalars](../20_core/05_custom-scalars.md)
 2. [Schema Errors](../../extensions/schema-errors.md)

@@ -6,7 +6,7 @@
 
 This extension adds an `http` transport to your client. It implements the ["GraphQL Over HTTP" specification](https://github.com/graphql/graphql-over-http).
 
-This extension is included in [presets](../../../website/content/guides/20_topics/presets.md) `minimal` and `basic`. Therefore we show usage here with the `bare` preset which does not include this extension.
+This extension is included in [presets](../../../website/content/guides/20_core/presets.md) `minimal` and `basic`. Therefore we show usage here with the `bare` preset which does not include this extension.
 
 ```ts
 import { TransportHttp } from 'graffle/extensions/transport-http'

@@ -466,8 +466,12 @@ const renderResolvedType = (type: Grafaid.Schema.Types, indexName: string): stri
   }
 
   // Add nullability
+  // According to GraphQL spec, nullable arguments can be:
+  // - undefined (omitted)
+  // - null (explicitly null)
+  // - the actual value
   if (Grafaid.Schema.isNullableType(type)) {
-    resultType = `${resultType} | undefined`
+    resultType = `${resultType} | null | undefined`
   }
 
   return resultType

@@ -10,7 +10,7 @@ import type * as $ from '#graffle/utilities-for-generated'
  *
  * | | |
  * | - | - |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum ↗} |
  * | **Members** | 1 |
  */
 export interface ChildBInterfaceHierarchyMember extends $.Schema.Enum {

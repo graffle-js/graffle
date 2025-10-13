@@ -1,7 +1,20 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
 import type { $DefaultSelectionContext } from '../../_context.js'
 import type * as $Fields from './fields.js'
+import type { $FragmentInline } from './fragment.js'
 
+export type * as ObjectUnion from './$$.js'
+
+/**
+ * Selection set for {@link https://graphql.org/learn/schema/#object-types | Object} type.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object} ↗ |
+ * | **Fields** | 1 |
+ */
 export interface ObjectUnion<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
@@ -17,7 +30,7 @@ export interface ObjectUnion<
    * | **Nullability** | Optional |
    */
   fooBarUnion?:
-    | $Fields.fooBarUnion$Expanded<_$Context>
+    | $Fields.fooBarUnion.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.fooBarUnion<_$Context>>
 
   /**
@@ -28,7 +41,7 @@ export interface ObjectUnion<
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: ObjectUnion$FragmentInline<_$Context> | ObjectUnion$FragmentInline<_$Context>[]
+  ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
   /**
    * A meta field. Is the name of the type being selected.
    *
@@ -39,9 +52,4 @@ export interface ObjectUnion<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
       $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     >
-}
-
-export interface ObjectUnion$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends ObjectUnion<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }

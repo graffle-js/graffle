@@ -12,7 +12,7 @@ export * as Being from './fields.js'
  *
  * | | |
  * | - | - |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface ↗} |
  * | **Fields** | 2 |
  * | **Implementors** | {@link $Schema.Patron}, {@link $Schema.Pokemon}, {@link $Schema.Trainer} |
  */

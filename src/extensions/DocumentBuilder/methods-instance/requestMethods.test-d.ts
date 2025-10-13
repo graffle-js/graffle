@@ -10,9 +10,9 @@ Ts.Test.exact<string | null>()(await g.query.id())
 // scalar none-nullable
 Ts.Test.exact<string>()(await g.query.idNonNull())
 // scalar with optional arguments
-Ts.Test.parameters<[input?: Possible.$Fields.Query.stringWithArgs]>()(g.query.stringWithArgs)
+Ts.Test.parameters<[input?: Possible.$Fields.Query['stringWithArgs']]>()(g.query.stringWithArgs)
 // scalar with required arguments
-Ts.Test.parameters<[input: Possible.$Fields.Query.stringWithRequiredArg]>()(g.query.stringWithRequiredArg)
+Ts.Test.parameters<[input: Possible.$Fields.Query['stringWithRequiredArg']]>()(g.query.stringWithRequiredArg)
 // scalar custom
 Ts.Test.sub<Date | null>()(await g.query.date())
 // scalar with explicit indicators

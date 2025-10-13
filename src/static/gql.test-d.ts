@@ -1,112 +1,111 @@
 import { $ } from '#src/extensions/DocumentBuilder/var/var.js'
-import type { TadaDocumentNode } from '#src/lib/gql-tada/index.js'
 import type { TypedFullDocument } from '#src/lib/grafaid/typed-full-document/$.js'
 import { Possible } from '#test/schema/possible/client/$.js'
-import { PossibleNoCustomScalars } from '#test/schema/possible/clientNoCustomScalars/$.js'
 import { Ts } from '@wollybeard/kit'
+import type { IsNever } from 'type-fest'
 
 // ==================================================================================================
 //                                   Single operation, no variables
 // ==================================================================================================
 
-Ts.Test.exact<TadaDocumentNode<{ date: Date | null }, {}, void>>()(
-  Possible.gql(`query { date }`),
-)
+type SingleOpNoVars = TypedFullDocument.SingleOperation<
+  TypedFullDocument.Operation<'myQuery', { date: Date | null }, {}>
+>
 
-Ts.Test.exact<TadaDocumentNode<{ date: unknown }, {}, void>>()(
-  PossibleNoCustomScalars.gql(`query { date }`),
-)
-
-Ts.Test.exact<
-  TypedFullDocument.SingleOperation<
-    TypedFullDocument.Operation<'myQuery', { date: Date | null }, {}>
-  >
->()(
-  Possible.gql({ query: { myQuery: { date: true } } }),
-)
-
-Ts.Test.exact<
-  TypedFullDocument.SingleOperation<
-    TypedFullDocument.Operation<'myQuery', { date: string | null }, {}>
-  >
->()(
-  PossibleNoCustomScalars.gql({ query: { myQuery: { date: true } } }),
-)
+Ts.Test.exact<SingleOpNoVars>()(Possible.gql(`query myQuery { date }`))
+Ts.Test.exact<SingleOpNoVars>()(Possible.gql({ query: { myQuery: { date: true } } }))
 
 // ==================================================================================================
 //                                 Single operation, required variables
 // ==================================================================================================
 
-Ts.Test.exact<
-  TadaDocumentNode<
-    { interfaceWithArgs: { id: string | null } | null },
-    { id: string },
-    void
-  >
->()(
-  Possible.gql(`query GetById($id: ID!) { interfaceWithArgs(id: $id) { id } }`),
-)
+type SingleOpRequiredVars = TypedFullDocument.SingleOperation<
+  TypedFullDocument.Operation<'getById', { interfaceWithArgs: { id: string | null } | null }, { id: string }>
+>
 
-Ts.Test.exact<
-  TypedFullDocument.SingleOperation<
-    TypedFullDocument.Operation<'getById', { interfaceWithArgs: { id: string | null } | null }, { id: string }>
-  >
->()(
-  Possible.gql({ query: { getById: { interfaceWithArgs: { $: { id: $.required() }, id: true } } } }),
+Ts.Test.exact<SingleOpRequiredVars>()(Possible.gql(`query getById($id: ID!) { interfaceWithArgs(id: $id) { id } }`))
+// dprint-ignore
+Ts.Test.exact<SingleOpRequiredVars>()(Possible.gql({ query: { getById: { interfaceWithArgs: { $: { id: $.required() }, id: true } } } }),
 )
 
 // ==================================================================================================
 //                                 Single operation, optional variables
 // ==================================================================================================
 
-Ts.Test.exact<TadaDocumentNode<{ stringWithArgs: string | null }, { string?: string | null }, void>>()(
-  Possible.gql(`query Search($string: String) { stringWithArgs(string: $string) }`),
+type SingleOpOptionalVars = TypedFullDocument.SingleOperation<
+  TypedFullDocument.Operation<'search', { stringWithArgs: string | null }, { string?: string | null | undefined }>
+>
+
+Ts.Test.exact<SingleOpOptionalVars>()(
+  Possible.gql(`query search($string: String) { stringWithArgs(string: $string) }`),
+)
+Ts.Test.exact<SingleOpOptionalVars>()(
+  Possible.gql({ query: { search: { stringWithArgs: { $: { string: $ }, __typename: true } } } }),
 )
 
-Ts.Test.exact<
-  TypedFullDocument.SingleOperation<
-    TypedFullDocument.Operation<'searchStrings', { stringWithArgs: string | null }, { string?: string | undefined }>
-  >
->()(Possible.gql({ query: { searchStrings: { stringWithArgs: { $: { string: $ }, __typename: true } } } }))
+// ==================================================================================================
+//                                   Anonymous operation (no name)
+// ==================================================================================================
+
+type DefaultOpNoVars = TypedFullDocument.SingleOperation<
+  TypedFullDocument.Operation<'default', { id: string | null }, {}>
+>
+
+type DefaultOpWithScalar = TypedFullDocument.SingleOperation<
+  TypedFullDocument.Operation<'default', { date: Date | null }, {}>
+>
+
+type DefaultOpOptionalVars = TypedFullDocument.SingleOperation<
+  TypedFullDocument.Operation<'default', { stringWithArgs: string | null }, { string?: string | null | undefined }>
+>
+
+// todo: use fixed test lib
+const x = Possible.gql(`{ id }`)
+const y: IsNever<typeof x> = false
+
+Ts.Test.exact<DefaultOpNoVars>()(Possible.gql(`{ id }`))
+Ts.Test.exact<DefaultOpNoVars>()(Possible.gql({ query: { default: { id: true } } }))
+
+Ts.Test.exact<DefaultOpWithScalar>()(Possible.gql(`{ date }`))
+Ts.Test.exact<DefaultOpWithScalar>()(Possible.gql({ query: { default: { date: true } } }))
+
+Ts.Test.exact<DefaultOpOptionalVars>()(Possible.gql(`query ($string: String) { stringWithArgs(string: $string) }`))
+Ts.Test.exact<DefaultOpOptionalVars>()(Possible.gql({ query: { default: { stringWithArgs: { $: { string: $ } } } } }))
 
 // ==================================================================================================
 //                                   Multiple operations, no variables
 // ==================================================================================================
 
-Ts.Test.exact<TadaDocumentNode<{ id: string | null }, {}, void>>()(
-  Possible.gql(`query GetUser { id } mutation AddId { id }`),
-)
+type MultiOpNoVars = TypedFullDocument.MultiOperation<{
+  getUser: TypedFullDocument.Operation<'getUser', { id: string | null }, {}>
+  addId: TypedFullDocument.Operation<'addId', { id: string | null }, {}>
+}>
 
-Ts.Test.exact<
-  TypedFullDocument.MultiOperation<{
-    getUser: TypedFullDocument.Operation<'getUser', { id: string | null }, {}>
-    addId: TypedFullDocument.Operation<'addId', { id: string | null }, {}>
-  }>
->()(Possible.gql({ query: { getUser: { id: true } }, mutation: { addId: { id: true } } }))
+Ts.Test.exact<MultiOpNoVars>()(Possible.gql(`
+  query getUser { id }
+  mutation addId { id }
+`))
+Ts.Test.exact<MultiOpNoVars>()(Possible.gql({
+  query: { getUser: { id: true } },
+  mutation: { addId: { id: true } },
+}))
 
 // ==================================================================================================
 //                                   Multiple operations with variables
 // ==================================================================================================
 
-Ts.Test.exact<
-  TadaDocumentNode<
-    { interfaceWithArgs: { id: string | null } | null },
-    { id: string },
-    void
-  >
->()(
+type MultiOpWithVars = TypedFullDocument.MultiOperation<{
+  getById: TypedFullDocument.Operation<'getById', { interfaceWithArgs: { id: string | null } | null }, { id: string }>
+  setId: TypedFullDocument.Operation<'setId', { idNonNull: string }, {}>
+}>
+
+Ts.Test.exact<MultiOpWithVars>()(
   Possible.gql(`
-    query GetById($id: ID!) { interfaceWithArgs(id: $id) { id } }
-    mutation SetId { idNonNull }
+    query getById($id: ID!) { interfaceWithArgs(id: $id) { id } }
+    mutation setId { idNonNull }
   `),
 )
-
-Ts.Test.exact<
-  TypedFullDocument.MultiOperation<{
-    getById: TypedFullDocument.Operation<'getById', { interfaceWithArgs: { id: string | null } | null }, { id: string }>
-    setId: TypedFullDocument.Operation<'setId', { idNonNull: string }, {}>
-  }>
->()(
+Ts.Test.exact<MultiOpWithVars>()(
   Possible.gql({
     query: {
       getById: { interfaceWithArgs: { $: { id: $.required() }, id: true } },

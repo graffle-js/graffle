@@ -5,7 +5,7 @@ import { isObjectEmpty } from '#src/lib/prelude.js'
 import { Obj, Str } from '@wollybeard/kit'
 import type { Config } from '../config/config.js'
 import { $ } from '../helpers/identifiers.js'
-import { getKindDocUrl, markdownTable } from '../helpers/jsdoc.js'
+import { extractFieldTypeInfo, getKindDocUrl } from '../helpers/jsdoc.js'
 import { type GeneratedModule, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { type CodeGenerator, createCodeGenerator } from '../helpers/moduleGeneratorRunner.js'
 import {
@@ -203,7 +203,6 @@ const getInputFieldDoc = (
   const fieldPath = `${parentType.name}.${field.name}`
 
   // Check for deprecation
-  const isDeprecated = field.deprecationReason !== undefined && field.deprecationReason !== null
   const deprecationReason = field.deprecationReason
 
   // Check for default value
@@ -214,28 +213,20 @@ const getInputFieldDoc = (
   const customDirectives =
     field.astNode?.directives?.filter(d => !['deprecated', 'skip', 'include'].includes(d.name.value)) ?? []
 
-  // Build markdown table (empty headers but required for table syntax)
-  const tableLines: string[] = []
-  tableLines.push(`| | |`)
-  tableLines.push(`| - | - |`)
-  tableLines.push(`| **Type** | ${typeSignature} |`)
-  tableLines.push(`| **Kind** | {@link ${kindDocUrl} | ${typeAndKind.kindName}} ↗ |`)
-  tableLines.push(`| **Parent** | {@link $Schema.${parentType.name}} |`)
-  tableLines.push(`| **Path** | \`${fieldPath}\` |`)
-  if (isDeprecated) {
-    tableLines.push(`| **⚠ Deprecated** | ${deprecationReason} |`)
-  }
-  if (hasDefaultValue) {
-    tableLines.push(`| **Default** | \`${JSON.stringify(defaultValue)}\` |`)
-  }
-  tableLines.push(`| **Nullability** | ${isNonNull ? 'Required' : 'Optional'} |`)
-  if (isList) {
-    tableLines.push(`| **List** | Yes |`)
-  }
-  if (customDirectives.length > 0) {
-    const directiveNames = customDirectives.map(d => `@${d.name.value}`).join(', ')
-    tableLines.push(`| **Directives** | ${directiveNames} |`)
-  }
+  // Build markdown table
+  const table = Code.markdownTable({
+    'Type': typeSignature,
+    'Kind': Code.jsdoc.tag.link(kindDocUrl, `${typeAndKind.kindName} ↗`).content,
+    'Parent': Code.jsdoc.tag.link(`$Schema.${parentType.name}`).content,
+    'Path': Code.markdownCode(fieldPath).content,
+    '⚠ Deprecated': deprecationReason,
+    'Default': hasDefaultValue ? Code.markdownCode(JSON.stringify(defaultValue)).content : undefined,
+    'Nullability': isNonNull ? 'Required' : 'Optional',
+    'List': isList ? 'Yes' : undefined,
+    'Directives': customDirectives.length > 0
+      ? customDirectives.map(d => `@${d.name.value}`).join(', ')
+      : undefined,
+  })
 
   // Combine parts with proper formatting
   const parts: string[] = []
@@ -253,7 +244,7 @@ const getInputFieldDoc = (
   parts.push('') // blank line before table
   parts.push('# Info')
   parts.push('') // blank line after heading
-  parts.push(tableLines.join('\n'))
+  parts.push(table)
 
   return parts.join('\n')
 }
@@ -474,52 +465,37 @@ const getOutputFieldDoc = (
   field: Grafaid.Schema.Field<any, any>,
   parentType: Grafaid.Schema.ObjectType | Grafaid.Schema.InterfaceType,
 ): string | null => {
-  const namedType = Grafaid.Schema.getNamedType(field.type)
-  const typeAndKind = Grafaid.getTypeAndKind(namedType)
+  // Extract type information using foundation helper
+  const { namedType, typeAndKind, isNonNull, isList, typeSignature } = extractFieldTypeInfo(field, '$Schema')
 
   // Get the base description from the schema
   const schemaDescription = getTsDocContents(config, field)
 
-  // Type information
-  const isNonNull = Grafaid.Schema.isNonNullType(field.type)
-  const isList = Grafaid.Schema.isListType(Grafaid.Schema.isNonNullType(field.type) ? field.type.ofType : field.type)
-  const listMarker = isList ? '[]' : ''
-  const nullMarker = isNonNull ? '!' : ''
-  const typeSignature = `{@link $Schema.${typeAndKind.typeName}}${listMarker}${nullMarker}`
   const kindDocUrl = getKindDocUrl(typeAndKind.kindName)
   const hasArgs = field.args.length > 0
   const fieldPath = `${parentType.name}.${field.name}`
 
   // Check for deprecation
-  const isDeprecated = field.deprecationReason !== undefined && field.deprecationReason !== null
   const deprecationReason = field.deprecationReason
 
   // Check for custom directives
   const customDirectives =
     field.astNode?.directives?.filter(d => !['deprecated', 'skip', 'include'].includes(d.name.value)) ?? []
 
-  // Build markdown table (empty headers but required for table syntax)
-  const tableLines: string[] = []
-  tableLines.push(`| | |`)
-  tableLines.push(`| - | - |`)
-  tableLines.push(`| **Type** | ${typeSignature} |`)
-  tableLines.push(`| **Kind** | {@link ${kindDocUrl} | ${typeAndKind.kindName}} ↗ |`)
-  tableLines.push(`| **Parent** | {@link $Schema.${parentType.name}} |`)
-  tableLines.push(`| **Path** | \`${fieldPath}\` |`)
-  if (isDeprecated) {
-    tableLines.push(`| **⚠ Deprecated** | ${deprecationReason} |`)
-  }
-  tableLines.push(`| **Nullability** | ${isNonNull ? 'Required' : 'Optional'} |`)
-  if (isList) {
-    tableLines.push(`| **List** | Yes |`)
-  }
-  if (hasArgs) {
-    tableLines.push(`| **Arguments** | ${field.args.length} |`)
-  }
-  if (customDirectives.length > 0) {
-    const directiveNames = customDirectives.map(d => `@${d.name.value}`).join(', ')
-    tableLines.push(`| **Directives** | ${directiveNames} |`)
-  }
+  // Build markdown table
+  const table = Code.markdownTable({
+    'Type': typeSignature,
+    'Kind': Code.jsdoc.tag.link(kindDocUrl, `${typeAndKind.kindName} ↗`).content,
+    'Parent': Code.jsdoc.tag.link(`$Schema.${parentType.name}`).content,
+    'Path': Code.markdownCode(fieldPath).content,
+    '⚠ Deprecated': deprecationReason,
+    'Nullability': isNonNull ? 'Required' : 'Optional',
+    'List': isList ? 'Yes' : undefined,
+    'Arguments': hasArgs ? `${field.args.length}` : undefined,
+    'Directives': customDirectives.length > 0
+      ? customDirectives.map(d => `@${d.name.value}`).join(', ')
+      : undefined,
+  })
 
   // Combine parts with proper formatting
   const parts: string[] = []
@@ -537,7 +513,7 @@ const getOutputFieldDoc = (
   parts.push('') // blank line before table
   parts.push('# Info')
   parts.push('') // blank line after heading
-  parts.push(tableLines.join('\n'))
+  parts.push(table)
 
   return parts.join('\n')
 }
@@ -567,11 +543,11 @@ const getObjectTypeDoc = (
   }
 
   // Build table
-  const table = markdownTable({
-    'Kind': `{@link ${kindDocUrl} | Object} ↗`,
+  const table = Code.markdownTable({
+    'Kind': Code.jsdoc.tag.link(kindDocUrl, 'Object ↗').content,
     'Fields': `${fieldCount}`,
     'Implements': interfaces.length > 0
-      ? interfaces.map(i => `{@link $Schema.${i.name}}`).join(', ')
+      ? interfaces.map(i => Code.jsdoc.tag.link(`$Schema.${i.name}`).content).join(', ')
       : undefined,
   })
 
@@ -618,11 +594,11 @@ const getInterfaceTypeDoc = (
   const implementors = Grafaid.Schema.KindMap.getInterfaceImplementors(kindMap, type)
 
   // Build table
-  const table = markdownTable({
-    'Kind': `{@link ${kindDocUrl} | Interface} ↗`,
+  const table = Code.markdownTable({
+    'Kind': Code.jsdoc.tag.link(kindDocUrl, 'Interface ↗').content,
     'Fields': `${fieldCount}`,
     'Implementors': implementors.length > 0
-      ? implementors.map(i => `{@link $Schema.${i.name}}`).join(', ')
+      ? implementors.map(i => Code.jsdoc.tag.link(`$Schema.${i.name}`).content).join(', ')
       : undefined,
   })
 
@@ -655,10 +631,10 @@ const getUnionTypeDoc = (
   const members = type.getTypes()
 
   // Build table
-  const table = markdownTable({
-    'Kind': `{@link ${kindDocUrl} | Union} ↗`,
+  const table = Code.markdownTable({
+    'Kind': Code.jsdoc.tag.link(kindDocUrl, 'Union ↗').content,
     'Members': `${members.length}`,
-    'Types': members.map(m => `{@link $Schema.${m.name}}`).join(', '),
+    'Types': members.map(m => Code.jsdoc.tag.link(`$Schema.${m.name}`).content).join(', '),
   })
 
   // Combine parts
@@ -692,8 +668,8 @@ const getInputObjectTypeDoc = (
   const isAllFieldsNullable = Grafaid.Schema.isAllInputObjectFieldsNullable(type)
 
   // Build table
-  const table = markdownTable({
-    'Kind': `{@link ${kindDocUrl} | InputObject} ↗`,
+  const table = Code.markdownTable({
+    'Kind': Code.jsdoc.tag.link(kindDocUrl, 'InputObject ↗').content,
     'Fields': `${fieldCount}`,
     'All Fields Nullable': isAllFieldsNullable ? 'Yes' : 'No',
   })
@@ -722,16 +698,20 @@ const getEnumTypeDoc = (
   config: Config,
   type: Grafaid.Schema.EnumType,
 ): string | null => {
-  // For enums, don't use getTsDocContents because it already formats members
-  // We want to format them our own way
+  // Get enum description respecting config and escape it for safety
   const schemaDescription = type.description
+    ? Code.escapeJSDocContent(type.description)
+    : (config.options.TSDoc.noDocPolicy === 'message'
+      ? `Missing description for Enum "${type.name}".`
+      : null)
+
   const kindDocUrl = getKindDocUrl('Enum')
   const members = type.getValues()
   const memberCount = members.length
 
   // Build table
-  const table = markdownTable({
-    'Kind': `{@link ${kindDocUrl} | Enum} ↗`,
+  const table = Code.markdownTable({
+    'Kind': Code.jsdoc.tag.link(kindDocUrl, 'Enum ↗').content,
     'Members': `${memberCount}`,
   })
 
@@ -749,7 +729,13 @@ const getEnumTypeDoc = (
     parts.push('')
     parts.push('**Members:**')
     for (const member of members) {
+      // Respect config for member descriptions and escape them for safety
       const memberDescription = member.description
+        ? Code.escapeJSDocContent(member.description)
+        : (config.options.TSDoc.noDocPolicy === 'message'
+          ? `Missing description for member "${member.name}".`
+          : null)
+
       if (memberDescription) {
         parts.push(`- \`${member.name}\` - ${memberDescription}`)
       } else {

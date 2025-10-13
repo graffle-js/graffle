@@ -5,11 +5,9 @@
  * No client needed (•̀ᴗ•́)و
  */
 
-import { $ } from 'graffle/extensions/document-builder'
-//       ^
+import { $, Graffle as PlainGraffle } from 'graffle'
+//                                ^
 // Variable marker with flexible API
-
-import { Graffle as PlainGraffle } from 'graffle'
 import { Graffle } from '../$/graffle/$.js'
 import { show } from '../$/show.js'
 

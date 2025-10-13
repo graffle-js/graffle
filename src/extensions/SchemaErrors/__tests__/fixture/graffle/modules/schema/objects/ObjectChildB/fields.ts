@@ -27,7 +27,7 @@ export interface __typename extends $.Schema.OutputField {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.String}! |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.ObjectChildB} |
  * | **Path** | `ObjectChildB.a` |
  * | **Nullability** | Required |
@@ -48,7 +48,7 @@ export interface a extends $.Schema.OutputField {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.String}! |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.ObjectChildB} |
  * | **Path** | `ObjectChildB.b` |
  * | **Nullability** | Required |
@@ -69,7 +69,7 @@ export interface b extends $.Schema.OutputField {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.String}! |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.ObjectChildB} |
  * | **Path** | `ObjectChildB.c2` |
  * | **Nullability** | Required |
@@ -90,7 +90,7 @@ export interface c2 extends $.Schema.OutputField {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Int}[]! |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.ObjectChildB} |
  * | **Path** | `ObjectChildB.me` |
  * | **Nullability** | Required |

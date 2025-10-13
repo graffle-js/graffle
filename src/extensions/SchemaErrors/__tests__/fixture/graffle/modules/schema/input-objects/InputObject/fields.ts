@@ -9,7 +9,7 @@ import type { Schema as $Schema } from '../../$.js'
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.ABCEnum} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlenumtype | Enum ↗} |
  * | **Parent** | {@link $Schema.InputObject} |
  * | **Path** | `InputObject.abcEnum` |
  * | **Nullability** | Optional |
@@ -29,7 +29,7 @@ export interface abcEnum extends $.Schema.InputField {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Date} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom ↗} |
  * | **Parent** | {@link $Schema.InputObject} |
  * | **Path** | `InputObject.date` |
  * | **Nullability** | Optional |
@@ -49,7 +49,7 @@ export interface date extends $.Schema.InputField {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Date}! |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom ↗} |
  * | **Parent** | {@link $Schema.InputObject} |
  * | **Path** | `InputObject.dateRequired` |
  * | **Nullability** | Required |
@@ -69,7 +69,7 @@ export interface dateRequired extends $.Schema.InputField {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.ID} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.InputObject} |
  * | **Path** | `InputObject.id` |
  * | **Nullability** | Optional |
@@ -89,7 +89,7 @@ export interface id extends $.Schema.InputField {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.ID}! |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.InputObject} |
  * | **Path** | `InputObject.idRequired` |
  * | **Nullability** | Required |

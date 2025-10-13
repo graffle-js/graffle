@@ -11,7 +11,7 @@ export * as Interface from './fields.js'
  *
  * | | |
  * | - | - |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface ↗} |
  * | **Fields** | 1 |
  * | **Implementors** | {@link $Schema.Object1ImplementingInterface}, {@link $Schema.Object2ImplementingInterface} |
  */

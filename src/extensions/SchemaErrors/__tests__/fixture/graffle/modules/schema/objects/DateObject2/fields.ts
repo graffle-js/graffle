@@ -27,7 +27,7 @@ export interface __typename extends $.Schema.OutputField {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Date} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlscalartype | ScalarCustom ↗} |
  * | **Parent** | {@link $Schema.DateObject2} |
  * | **Path** | `DateObject2.date2` |
  * | **Nullability** | Optional |

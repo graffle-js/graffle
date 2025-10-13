@@ -10,7 +10,7 @@ import type { lowerCaseObject2 } from '../objects/lowerCaseObject2/$.js'
  *
  * | | |
  * | - | - |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union ↗} |
  * | **Members** | 2 |
  * | **Types** | {@link $Schema.lowerCaseObject}, {@link $Schema.lowerCaseObject2} |
  */

@@ -2,7 +2,21 @@ import type * as $$Utilities from '#graffle/utilities-for-generated'
 import type * as $Named from '../../$named.js'
 import type { $DefaultSelectionContext } from '../../_context.js'
 import type * as $Fields from './fields.js'
+import type { $FragmentInline } from './fragment.js'
 
+export type * as InterfaceGrandparent from './$$.js'
+
+/**
+ * Selection set for {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface}.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+ * | **Fields** | 1 |
+ * | **Implementors** | {@link $Schema.ObjectChildA}, {@link $Schema.ObjectChildB}, {@link $Schema.ObjectGrandparent}, {@link $Schema.ObjectParent}, {@link $Schema.InterfaceChildA}, {@link $Schema.InterfaceChildB}, {@link $Schema.InterfaceParent} |
+ */
 export interface InterfaceGrandparent<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
@@ -18,7 +32,7 @@ export interface InterfaceGrandparent<
    * | **Nullability** | Required |
    */
   a?:
-    | $Fields.a$Expanded<_$Context>
+    | $Fields.a.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.a<_$Context>>
   /**
    * Inline fragment selection for {@link $Schema.ObjectChildA} implementor.
@@ -231,7 +245,7 @@ export interface InterfaceGrandparent<
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: InterfaceGrandparent$FragmentInline<_$Context> | InterfaceGrandparent$FragmentInline<_$Context>[]
+  ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
   /**
    * A meta field. Is the name of the type being selected. Since this is a interface type and thus polymorphic,
    * the name is one of the implementor type names, whichever is ultimately returned at runtime.
@@ -243,12 +257,4 @@ export interface InterfaceGrandparent<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
       $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     >
-}
-
-export interface InterfaceGrandparent$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends
-  InterfaceGrandparent<_$Context>,
-  $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields
-{
 }

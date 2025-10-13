@@ -27,7 +27,7 @@ export interface __typename extends $.Schema.OutputField {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Int} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
  * | **Parent** | {@link $Schema.lowerCaseObject2} |
  * | **Path** | `lowerCaseObject2.int` |
  * | **Nullability** | Optional |

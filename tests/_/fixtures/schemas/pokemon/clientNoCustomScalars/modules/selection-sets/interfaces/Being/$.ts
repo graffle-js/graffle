@@ -2,7 +2,21 @@ import type * as $$Utilities from '#graffle/utilities-for-generated'
 import type * as $Named from '../../$named.js'
 import type { $DefaultSelectionContext } from '../../_context.js'
 import type * as $Fields from './fields.js'
+import type { $FragmentInline } from './fragment.js'
 
+export type * as Being from './$$.js'
+
+/**
+ * Selection set for {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface}.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+ * | **Fields** | 2 |
+ * | **Implementors** | {@link $Schema.Patron}, {@link $Schema.Pokemon}, {@link $Schema.Trainer} |
+ */
 export interface Being<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
@@ -18,7 +32,7 @@ export interface Being<
    * | **Nullability** | Optional |
    */
   id?:
-    | $Fields.id$Expanded<_$Context>
+    | $Fields.id.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
   /**
    * # Info
@@ -32,7 +46,7 @@ export interface Being<
    * | **Nullability** | Optional |
    */
   name?:
-    | $Fields.name$Expanded<_$Context>
+    | $Fields.name.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.name<_$Context>>
   /**
    * Inline fragment selection for {@link $Schema.Patron} implementor.
@@ -129,7 +143,7 @@ export interface Being<
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: Being$FragmentInline<_$Context> | Being$FragmentInline<_$Context>[]
+  ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
   /**
    * A meta field. Is the name of the type being selected. Since this is a interface type and thus polymorphic,
    * the name is one of the implementor type names, whichever is ultimately returned at runtime.
@@ -141,9 +155,4 @@ export interface Being<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
       $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     >
-}
-
-export interface Being$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends Being<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }

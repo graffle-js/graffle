@@ -2,7 +2,21 @@ import type * as $$Utilities from '#graffle/utilities-for-generated'
 import type * as $Named from '../../$named.js'
 import type { $DefaultSelectionContext } from '../../_context.js'
 import type * as $Fields from './fields.js'
+import type { $FragmentInline } from './fragment.js'
 
+export type * as Interface from './$$.js'
+
+/**
+ * Selection set for {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface}.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface ↗} |
+ * | **Fields** | 1 |
+ * | **Implementors** | {@link $Schema.Object1ImplementingInterface}, {@link $Schema.Object2ImplementingInterface} |
+ */
 export interface Interface<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
@@ -12,13 +26,13 @@ export interface Interface<
    * | | |
    * | - | - |
    * | **Type** | {@link $NamedTypes.$ID} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#scalars | ScalarStandard ↗} |
    * | **Parent** | {@link $NamedTypes.$Interface} |
    * | **Path** | `Interface.id` |
    * | **Nullability** | Optional |
    */
   id?:
-    | $Fields.id$Expanded<_$Context>
+    | $Fields.id.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
   /**
    * Inline fragment selection for {@link $Schema.Object1ImplementingInterface} implementor.
@@ -34,8 +48,8 @@ export interface Interface<
    * | **Parent** | {@link $Schema.Interface} |
    * | **Path** | `Interface -> Object1ImplementingInterface` |
    *
-   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
-   * @see {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface Types} ↗
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments}
+   * @see {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface Types}
    *
    * @example
    * ```ts
@@ -63,8 +77,8 @@ export interface Interface<
    * | **Parent** | {@link $Schema.Interface} |
    * | **Path** | `Interface -> Object2ImplementingInterface` |
    *
-   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments} ↗
-   * @see {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface Types} ↗
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments | Inline Fragments}
+   * @see {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface Types}
    *
    * @example
    * ```ts
@@ -84,23 +98,18 @@ export interface Interface<
    * Generally a niche feature. This can be useful for example to apply an `@include` directive to a subset of the
    * selection set in turn allowing you to pass a variable to opt in/out of that selection during execution on the server.
    *
-   * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
+   * @see {@link https://spec.graphql.org/draft/#sec-Inline-Fragments}
    */
-  ___?: Interface$FragmentInline<_$Context> | Interface$FragmentInline<_$Context>[]
+  ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
   /**
    * A meta field. Is the name of the type being selected. Since this is a interface type and thus polymorphic,
    * the name is one of the implementor type names, whichever is ultimately returned at runtime.
    *
-   * @see https://graphql.org/learn/queries/#meta-fields
+   * @see {@link https://graphql.org/learn/queries/#meta-fields | Meta Fields}
    */
   __typename?:
     | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
       $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     >
-}
-
-export interface Interface$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends Interface<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }

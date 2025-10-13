@@ -10,7 +10,7 @@ export * as Object1ImplementingInterface from './fields.js'
  *
  * | | |
  * | - | - |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object ↗} |
  * | **Fields** | 2 |
  * | **Implements** | {@link $Schema.Interface} |
  */

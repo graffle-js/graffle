@@ -28,7 +28,7 @@ export interface __typename {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Pokemon}[] |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
  * | **Parent** | {@link $Schema.CombatantMultiPokemon} |
  * | **Path** | `CombatantMultiPokemon.pokemons` |
  * | **Nullability** | Optional |
@@ -52,7 +52,7 @@ export interface pokemons {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.Trainer} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
  * | **Parent** | {@link $Schema.CombatantMultiPokemon} |
  * | **Path** | `CombatantMultiPokemon.trainer` |
  * | **Nullability** | Optional |

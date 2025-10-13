@@ -99,7 +99,11 @@
     "prepack": "pnpm build",
     "check": "pnpm run '/check:.*/'",
     "prebuild": "pnpm build:clean",
-    "check:types": "tsc"
+    "check:types": "tsc",
+    "ts:check:file": "tsc --noEmit",
+    "ts:check:stats": "tsc --noEmit --extendedDiagnostics 2>&1 | grep -E '(Files|Lines|Identifiers|Symbols|Types|Instantiations|Time)'",
+    "ts:check:trace": "tsc --noEmit --generateTrace .typescript-trace --incremental false",
+    "ts:analyze": "npx @typescript/analyze-trace .typescript-trace"
   },
   "dependencies": {
     "@0no-co/graphql.web": "^1.0.12",
@@ -163,6 +167,7 @@
     "graphql-yoga": "^5.13.4",
     "jsdom": "^26.1.0",
     "memfs": "^4.17.0",
+    "mermaid": "^11.12.0",
     "oxlint": "^1.18.0",
     "prettier": "^3.5.3",
     "publint": "^0.3.12",
@@ -172,6 +177,7 @@
     "typescript": "^5.9.3",
     "vite-tsconfig-paths": "^5.1.4",
     "vitepress": "^1.6.3",
+    "vitepress-plugin-mermaid": "^2.0.17",
     "vitest": "^3.1.1",
     "zod": "^3.24.3"
   },
@@ -196,6 +202,7 @@
     "#lib/config-manager": "./build/lib/config-manager/$.js",
     "#lib/errors": "./build/lib/errors/$.js",
     "#lib/grafaid": "./build/lib/grafaid/$.js",
+    "#lib/docpar": "./build/lib/docpar/$.js",
     "#lib/md-jsdoc": "./build/lib/md-jsdoc/$.js",
     "#lib/tex": "./build/lib/tex/$.js",
     "#lib/type-function": "./build/lib/type-function/$.js",

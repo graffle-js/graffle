@@ -1,7 +1,20 @@
 import type * as $$Utilities from '#graffle/utilities-for-generated'
 import type { $DefaultSelectionContext } from '../../_context.js'
 import type * as $Fields from './fields.js'
+import type { $FragmentInline } from './fragment.js'
 
+export type * as BattleRoyale from './$$.js'
+
+/**
+ * Selection set for {@link https://graphql.org/learn/schema/#object-types | Object} type.
+ *
+ * # Info
+ *
+ * | | |
+ * | - | - |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | Object} ↗ |
+ * | **Fields** | 4 |
+ */
 export interface BattleRoyale<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
 > extends $$Utilities.DocumentBuilderKit.Select.Bases.ObjectLike {
@@ -18,7 +31,7 @@ export interface BattleRoyale<
    * | **List** | Yes |
    */
   combatants?:
-    | $Fields.combatants$Expanded<_$Context>
+    | $Fields.combatants.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.combatants<_$Context>>
   /**
    * # Info
@@ -32,7 +45,7 @@ export interface BattleRoyale<
    * | **Nullability** | Optional |
    */
   date?:
-    | $Fields.date$Expanded<_$Context>
+    | $Fields.date.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.date<_$Context>>
   /**
    * # Info
@@ -46,7 +59,7 @@ export interface BattleRoyale<
    * | **Nullability** | Optional |
    */
   id?:
-    | $Fields.id$Expanded<_$Context>
+    | $Fields.id.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
   /**
    * # Info
@@ -60,7 +73,7 @@ export interface BattleRoyale<
    * | **Nullability** | Optional |
    */
   winner?:
-    | $Fields.winner$Expanded<_$Context>
+    | $Fields.winner.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.winner<_$Context>>
 
   /**
@@ -71,7 +84,7 @@ export interface BattleRoyale<
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: BattleRoyale$FragmentInline<_$Context> | BattleRoyale$FragmentInline<_$Context>[]
+  ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
   /**
    * A meta field. Is the name of the type being selected.
    *
@@ -82,9 +95,4 @@ export interface BattleRoyale<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
       $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     >
-}
-
-export interface BattleRoyale$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends BattleRoyale<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }

@@ -4,13 +4,14 @@ import { OperationTypeNode } from 'graphql'
 import type * as ArgumentsMap from './arguments-map.js'
 import type * as $$Scalar from './scalar.js'
 import { schemaDrivenDataMap as sddm } from './schema-driven-data-map.js'
-import type * as SelectionSets from './selection-sets.js'
+import type * as SelectionSets from './selection-sets/$.js'
 
 import type * as $$Utilities from 'graffle/utilities-for-generated'
 import type * as $$Schema from './schema/$.js'
 
 /**
  * Context for static document type inference.
+ *
  * Static documents have no runtime extensions, hence typeHookRequestResultDataTypes is never.
  */
 interface StaticDocumentContext {
@@ -22,7 +23,7 @@ interface StaticDocumentContext {
  * Static query builder for compile-time GraphQL document generation.
  *
  * @remarks
- * Each field method generates a fully typed GraphQL document string with:
+ * Each field method generates a fully typed GraphQL  document string with:
  * - Type-safe selection sets matching your schema
  * - Automatic variable inference from `$` usage
  * - Compile-time validation of field selections
@@ -69,7 +70,7 @@ export interface QueryBuilder {
    * | | |
    * | - | - |
    * | **Type** | {@link $Schema.Battle}[]! |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union ↗} |
    * | **Parent** | {@link $Schema.Query} |
    * | **Path** | `Query.battles` |
    * | **Nullability** | Required |
@@ -123,7 +124,7 @@ export interface QueryBuilder {
    * | | |
    * | - | - |
    * | **Type** | {@link $Schema.Being}[]! |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlinterfacetype | Interface ↗} |
    * | **Parent** | {@link $Schema.Query} |
    * | **Path** | `Query.beings` |
    * | **Nullability** | Required |
@@ -183,7 +184,7 @@ export interface QueryBuilder {
    * | | |
    * | - | - |
    * | **Type** | {@link $Schema.Pokemon}[] |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
    * | **Parent** | {@link $Schema.Query} |
    * | **Path** | `Query.pokemonByName` |
    * | **Nullability** | Optional |
@@ -245,7 +246,7 @@ export interface QueryBuilder {
    * | | |
    * | - | - |
    * | **Type** | {@link $Schema.Pokemon}[] |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
    * | **Parent** | {@link $Schema.Query} |
    * | **Path** | `Query.pokemons` |
    * | **Nullability** | Optional |
@@ -304,7 +305,7 @@ export interface QueryBuilder {
    * | | |
    * | - | - |
    * | **Type** | {@link $Schema.Trainer} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
    * | **Parent** | {@link $Schema.Query} |
    * | **Path** | `Query.trainerByName` |
    * | **Nullability** | Optional |
@@ -362,7 +363,7 @@ export interface QueryBuilder {
    * | | |
    * | - | - |
    * | **Type** | {@link $Schema.Trainer}[] |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
    * | **Parent** | {@link $Schema.Query} |
    * | **Path** | `Query.trainers` |
    * | **Nullability** | Optional |
@@ -404,7 +405,7 @@ export interface QueryBuilder {
  * Static query builder for compile-time GraphQL document generation.
  *
  * @remarks
- * Each field method generates a fully typed GraphQL document string with:
+ * Each field method generates a fully typed GraphQL  document string with:
  * - Type-safe selection sets matching your schema
  * - Automatic variable inference from `$` usage
  * - Compile-time validation of field selections
@@ -441,7 +442,7 @@ export const query: QueryBuilder = createStaticRootType(OperationTypeNode.QUERY,
  * Static mutation builder for compile-time GraphQL document generation.
  *
  * @remarks
- * Each field method generates a fully typed GraphQL mutation document with:
+ * Each field method generates a fully typed GraphQL mutation document  with:
  * - Type-safe selection sets and input types
  * - Automatic variable inference from `$` usage
  * - Compile-time validation of mutations
@@ -486,7 +487,7 @@ export interface MutationBuilder {
    * | | |
    * | - | - |
    * | **Type** | {@link $Schema.Pokemon} |
-   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject} ↗ |
+   * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqlobjecttype | OutputObject ↗} |
    * | **Parent** | {@link $Schema.Mutation} |
    * | **Path** | `Mutation.addPokemon` |
    * | **Nullability** | Optional |
@@ -529,7 +530,7 @@ export interface MutationBuilder {
  * Static mutation builder for compile-time GraphQL document generation.
  *
  * @remarks
- * Each field method generates a fully typed GraphQL mutation document with:
+ * Each field method generates a fully typed GraphQL mutation document  with:
  * - Type-safe selection sets and input types
  * - Automatic variable inference from `$` usage
  * - Compile-time validation of mutations

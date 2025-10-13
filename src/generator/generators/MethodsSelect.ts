@@ -1,8 +1,8 @@
-// todo jsdoc
 import { Tex } from '#lib/tex'
 import { Code } from '#src/lib/Code.js'
 import { Obj } from '@wollybeard/kit'
 import { $ } from '../helpers/identifiers.js'
+import { getMethodsSelectDoc } from '../helpers/jsdoc.js'
 import { createModuleGenerator, importModuleGenerator } from '../helpers/moduleGenerator.js'
 import { importUtilities } from '../helpers/pathHelpers.js'
 import { renderName } from '../helpers/render.js'
@@ -19,6 +19,15 @@ export const ModuleGeneratorMethodsSelect = createModuleGenerator(
     code``
     code(Tex.title1(`Select Methods Interface`))
     code``
+    code`
+      /**
+       * Selection method types for building native GraphQL documents.
+       *
+       * Maps each GraphQL schema type to its corresponding selection method interface.
+       * These methods are available on \`.select()\` to build type-safe selection sets
+       * that return the selection set itself (for document building).
+       */
+    `
     code(Code.tsInterface({
       name: `$MethodsSelect`,
       block: Obj.values(kindMap).flatMap(type => {
@@ -32,6 +41,7 @@ export const ModuleGeneratorMethodsSelect = createModuleGenerator(
       code(Tex.title1(kindName))
       code``
       for (const type of kind) {
+        code(Code.TSDoc(getMethodsSelectDoc(type)))
         code(Code.tsInterface({
           name: type.name,
           block: `

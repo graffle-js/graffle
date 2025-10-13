@@ -27,7 +27,7 @@ export interface __typename extends $.Schema.OutputField {
  * | | |
  * | - | - |
  * | **Type** | {@link $Schema.FooBarUnion} |
- * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union} ↗ |
+ * | **Kind** | {@link https://graphql.org/graphql-js/type/#graphqluniontype | Union ↗} |
  * | **Parent** | {@link $Schema.ObjectUnion} |
  * | **Path** | `ObjectUnion.fooBarUnion` |
  * | **Nullability** | Optional |
