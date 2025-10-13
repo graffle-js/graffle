@@ -15,7 +15,7 @@ export type { Pokemon } from './objects/Pokemon/$.js'
 export type { Trainer } from './objects/Trainer/$.js'
 export type { Mutation } from './roots/Mutation/$.js'
 export type { Query } from './roots/Query/$.js'
-export type { Battle } from './unions/Battle.js'
+export type { Battle } from './unions/Battle/$.js'
 
 // Scalar types
 export * from './scalars/$$.js'

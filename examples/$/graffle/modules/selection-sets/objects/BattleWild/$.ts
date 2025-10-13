@@ -1,6 +1,9 @@
 import type * as $$Utilities from 'graffle/utilities-for-generated'
 import type { $DefaultSelectionContext } from '../../_context.js'
 import type * as $Fields from './fields.js'
+import type { $FragmentInline } from './fragment.js'
+
+export type * as BattleWild from './$$.js'
 
 /**
  * A battle between a trainer and wild Pokemon.
@@ -26,7 +29,7 @@ export interface BattleWild<
    * | **Nullability** | Optional |
    */
   date?:
-    | $Fields.date$Expanded<_$Context>
+    | $Fields.date.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.date<_$Context>>
   /**
    * The unique identifier for this battle.
@@ -46,7 +49,7 @@ export interface BattleWild<
    * | **Nullability** | Optional |
    */
   id?:
-    | $Fields.id$Expanded<_$Context>
+    | $Fields.id.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
   /**
    * The trainer's Pokemon that participated in this battle.
@@ -77,7 +80,7 @@ export interface BattleWild<
    * | **Nullability** | Optional |
    */
   pokemon?:
-    | $Fields.pokemon$Expanded<_$Context>
+    | $Fields.pokemon.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.pokemon<_$Context>>
   /**
    * The outcome of this wild Pokemon battle.
@@ -103,7 +106,7 @@ export interface BattleWild<
    * | **Nullability** | Optional |
    */
   result?:
-    | $Fields.result$Expanded<_$Context>
+    | $Fields.result.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.result<_$Context>>
   /**
    * The trainer who engaged in this wild battle.
@@ -131,7 +134,7 @@ export interface BattleWild<
    * | **Nullability** | Optional |
    */
   trainer?:
-    | $Fields.trainer$Expanded<_$Context>
+    | $Fields.trainer.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.trainer<_$Context>>
   /**
    * The wild Pokemon encountered in this battle.
@@ -163,7 +166,7 @@ export interface BattleWild<
    * | **List** | Yes |
    */
   wildPokemons?:
-    | $Fields.wildPokemons$Expanded<_$Context>
+    | $Fields.wildPokemons.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.wildPokemons<_$Context>>
 
   /**
@@ -174,7 +177,7 @@ export interface BattleWild<
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: BattleWild$FragmentInline<_$Context> | BattleWild$FragmentInline<_$Context>[]
+  ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
   /**
    * A meta field. Is the name of the type being selected.
    *
@@ -185,9 +188,4 @@ export interface BattleWild<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
       $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     >
-}
-
-export interface BattleWild$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends BattleWild<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }

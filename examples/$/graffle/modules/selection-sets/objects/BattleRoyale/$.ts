@@ -1,6 +1,9 @@
 import type * as $$Utilities from 'graffle/utilities-for-generated'
 import type { $DefaultSelectionContext } from '../../_context.js'
 import type * as $Fields from './fields.js'
+import type { $FragmentInline } from './fragment.js'
+
+export type * as BattleRoyale from './$$.js'
 
 /**
  * A battle royale where multiple trainers compete with their Pokemon teams.
@@ -32,7 +35,7 @@ export interface BattleRoyale<
    * | **List** | Yes |
    */
   combatants?:
-    | $Fields.combatants$Expanded<_$Context>
+    | $Fields.combatants.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.combatants<_$Context>>
   /**
    * The date when this battle took place, stored as a Unix timestamp.
@@ -52,7 +55,7 @@ export interface BattleRoyale<
    * | **Nullability** | Optional |
    */
   date?:
-    | $Fields.date$Expanded<_$Context>
+    | $Fields.date.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.date<_$Context>>
   /**
    * The unique identifier for this battle.
@@ -72,7 +75,7 @@ export interface BattleRoyale<
    * | **Nullability** | Optional |
    */
   id?:
-    | $Fields.id$Expanded<_$Context>
+    | $Fields.id.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
   /**
    * The trainer who won this battle royale.
@@ -100,7 +103,7 @@ export interface BattleRoyale<
    * | **Nullability** | Optional |
    */
   winner?:
-    | $Fields.winner$Expanded<_$Context>
+    | $Fields.winner.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.winner<_$Context>>
 
   /**
@@ -111,7 +114,7 @@ export interface BattleRoyale<
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: BattleRoyale$FragmentInline<_$Context> | BattleRoyale$FragmentInline<_$Context>[]
+  ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
   /**
    * A meta field. Is the name of the type being selected.
    *
@@ -122,9 +125,4 @@ export interface BattleRoyale<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
       $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     >
-}
-
-export interface BattleRoyale$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends BattleRoyale<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }

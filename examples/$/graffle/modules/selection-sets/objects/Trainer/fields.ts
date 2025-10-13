@@ -5,80 +5,89 @@ import type * as $Scalars from '../../scalars/$.js'
 
 type $class<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
   | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | $class$SelectionSet<_$Context>
+  | $class.$SelectionSet<_$Context>
 
-export interface $class$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+namespace $class {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+  }
+
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $SelectionSet<_$Context>
+  >
 }
 
-type $class$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | $class$SelectionSet<_$Context>
->
-
-export { type $class as class }
-export { type $class$Expanded as class$Expanded }
+export type { $class as class }
 
 export type fans<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
-  fans$SelectionSet<_$Context>
+  fans.$SelectionSet<_$Context>
 
-export interface fans$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Patron<_$Context> {
+export namespace fans {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Patron<_$Context> {
+  }
+
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    $SelectionSet<_$Context>
+  >
 }
-
-export type fans$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  fans$SelectionSet<_$Context>
->
 
 export type id<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
   | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | id$SelectionSet<_$Context>
+  | id.$SelectionSet<_$Context>
 
-export interface id$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace id {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+  }
+
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $SelectionSet<_$Context>
+  >
 }
-
-export type id$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | id$SelectionSet<_$Context>
->
 
 export type name<_$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext> =
   | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | name$SelectionSet<_$Context>
+  | name.$SelectionSet<_$Context>
 
-export interface name$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+export namespace name {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base {
+  }
+
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
+    | $SelectionSet<_$Context>
+  >
 }
-
-export type name$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  | $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
-  | name$SelectionSet<_$Context>
->
 
 export type pokemon<
   _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = pokemon$SelectionSet<_$Context>
+> = pokemon.$SelectionSet<_$Context>
 
-export interface pokemon$SelectionSet<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Pokemon<_$Context> {
+export namespace pokemon {
+  export interface $SelectionSet<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > extends $$Utilities.DocumentBuilderKit.Select.Bases.Base, $Named.Pokemon<_$Context> {
+  }
+
+  export type $Expanded<
+    _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
+  > = $$Utilities.Simplify<
+    $SelectionSet<_$Context>
+  >
 }
-
-export type pokemon$Expanded<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> = $$Utilities.Simplify<
-  pokemon$SelectionSet<_$Context>
->

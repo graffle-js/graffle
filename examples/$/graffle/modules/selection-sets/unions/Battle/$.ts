@@ -1,6 +1,9 @@
 import type * as $$Utilities from 'graffle/utilities-for-generated'
-import type * as $Named from '../$named.js'
-import type { $DefaultSelectionContext } from '../_context.js'
+import type * as $Named from '../../$named.js'
+import type { $DefaultSelectionContext } from '../../_context.js'
+import type { $FragmentInline } from './fragment.js'
+
+export type * as Battle from './$$.js'
 
 /**
  * Represents any kind of battle that can occur in the Pokemon world.
@@ -111,10 +114,5 @@ export interface Battle<
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: Battle$FragmentInline<_$Context> | Battle$FragmentInline<_$Context>[]
-}
-
-export interface Battle$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends Battle<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
+  ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
 }

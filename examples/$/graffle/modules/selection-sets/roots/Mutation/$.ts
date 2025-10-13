@@ -1,6 +1,9 @@
 import type * as $$Utilities from 'graffle/utilities-for-generated'
 import type { $DefaultSelectionContext } from '../../_context.js'
 import type * as $Fields from './fields.js'
+import type { $FragmentInline } from './fragment.js'
+
+export type * as Mutation from './$$.js'
 
 /**
  * GraphQL root {@link https://graphql.org/learn/schema/#the-mutation-and-mutation-types | Mutation} type.
@@ -51,7 +54,7 @@ export interface Mutation<
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: Mutation$FragmentInline<_$Context> | Mutation$FragmentInline<_$Context>[]
+  ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
   /**
    * A meta field. Is the name of the type being selected.
    *
@@ -62,9 +65,4 @@ export interface Mutation<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
       $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     >
-}
-
-export interface Mutation$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends Mutation<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }

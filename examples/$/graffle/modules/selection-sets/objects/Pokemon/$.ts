@@ -1,6 +1,9 @@
 import type * as $$Utilities from 'graffle/utilities-for-generated'
 import type { $DefaultSelectionContext } from '../../_context.js'
 import type * as $Fields from './fields.js'
+import type { $FragmentInline } from './fragment.js'
+
+export type * as Pokemon from './$$.js'
 
 /**
  * A Pokemon with stats, type, and trainer information.
@@ -26,7 +29,7 @@ export interface Pokemon<
    * | **Nullability** | Required |
    */
   attack?:
-    | $Fields.attack$Expanded<_$Context>
+    | $Fields.attack.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.attack<_$Context>>
   /**
    * The date this Pokemon was born or caught.
@@ -48,7 +51,7 @@ export interface Pokemon<
    * | **Nullability** | Required |
    */
   birthday?:
-    | $Fields.birthday$Expanded<_$Context>
+    | $Fields.birthday.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.birthday<_$Context>>
   /**
    * The defense power of this Pokemon.
@@ -68,7 +71,7 @@ export interface Pokemon<
    * | **Nullability** | Required |
    */
   defense?:
-    | $Fields.defense$Expanded<_$Context>
+    | $Fields.defense.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.defense<_$Context>>
   /**
    * The health points (HP) of this Pokemon.
@@ -88,7 +91,7 @@ export interface Pokemon<
    * | **Nullability** | Required |
    */
   hp?:
-    | $Fields.hp$Expanded<_$Context>
+    | $Fields.hp.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.hp<_$Context>>
   /**
    * The unique identifier for this Pokemon.
@@ -108,7 +111,7 @@ export interface Pokemon<
    * | **Nullability** | Required |
    */
   id?:
-    | $Fields.id$Expanded<_$Context>
+    | $Fields.id.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
   /**
    * The name of this Pokemon.
@@ -128,7 +131,7 @@ export interface Pokemon<
    * | **Nullability** | Required |
    */
   name?:
-    | $Fields.name$Expanded<_$Context>
+    | $Fields.name.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.name<_$Context>>
   /**
    * The trainer who owns this Pokemon, if any.
@@ -156,7 +159,7 @@ export interface Pokemon<
    * | **Nullability** | Optional |
    */
   trainer?:
-    | $Fields.trainer$Expanded<_$Context>
+    | $Fields.trainer.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.trainer<_$Context>>
   /**
    * The elemental type of this Pokemon.
@@ -184,7 +187,7 @@ export interface Pokemon<
    * | **Nullability** | Required |
    */
   type?:
-    | $Fields.type$Expanded<_$Context>
+    | $Fields.type.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.type<_$Context>>
 
   /**
@@ -195,7 +198,7 @@ export interface Pokemon<
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: Pokemon$FragmentInline<_$Context> | Pokemon$FragmentInline<_$Context>[]
+  ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
   /**
    * A meta field. Is the name of the type being selected.
    *
@@ -206,9 +209,4 @@ export interface Pokemon<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
       $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     >
-}
-
-export interface Pokemon$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends Pokemon<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }

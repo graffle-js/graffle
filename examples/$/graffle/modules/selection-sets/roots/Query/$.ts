@@ -1,6 +1,9 @@
 import type * as $$Utilities from 'graffle/utilities-for-generated'
 import type { $DefaultSelectionContext } from '../../_context.js'
 import type * as $Fields from './fields.js'
+import type { $FragmentInline } from './fragment.js'
+
+export type * as Query from './$$.js'
 
 /**
  * GraphQL root {@link https://graphql.org/learn/schema/#the-query-and-mutation-types | Query} type.
@@ -31,7 +34,7 @@ export interface Query<
    * | **List** | Yes |
    */
   battles?:
-    | $Fields.battles$Expanded<_$Context>
+    | $Fields.battles.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.battles<_$Context>>
   /**
    * Retrieve all beings (Pokemon, Trainers, and Patrons).
@@ -57,7 +60,7 @@ export interface Query<
    * | **List** | Yes |
    */
   beings?:
-    | $Fields.beings$Expanded<_$Context>
+    | $Fields.beings.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.beings<_$Context>>
   /**
    * Find Pokemon by their name.
@@ -123,7 +126,7 @@ export interface Query<
    * | **Arguments** | 1 |
    */
   pokemons?:
-    | $Fields.pokemons$Expanded<_$Context>
+    | $Fields.pokemons.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.pokemons<_$Context>>
   /**
    * Find a trainer by their name.
@@ -181,7 +184,7 @@ export interface Query<
    * | **List** | Yes |
    */
   trainers?:
-    | $Fields.trainers$Expanded<_$Context>
+    | $Fields.trainers.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.trainers<_$Context>>
 
   /**
@@ -192,7 +195,7 @@ export interface Query<
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: Query$FragmentInline<_$Context> | Query$FragmentInline<_$Context>[]
+  ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
   /**
    * A meta field. Is the name of the type being selected.
    *
@@ -203,9 +206,4 @@ export interface Query<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
       $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     >
-}
-
-export interface Query$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends Query<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }

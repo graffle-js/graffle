@@ -1,6 +1,9 @@
 import type * as $$Utilities from 'graffle/utilities-for-generated'
 import type { $DefaultSelectionContext } from '../../_context.js'
 import type * as $Fields from './fields.js'
+import type { $FragmentInline } from './fragment.js'
+
+export type * as CombatantMultiPokemon from './$$.js'
 
 /**
  * A combatant in a battle royale with multiple Pokemon.
@@ -38,7 +41,7 @@ export interface CombatantMultiPokemon<
    * | **List** | Yes |
    */
   pokemons?:
-    | $Fields.pokemons$Expanded<_$Context>
+    | $Fields.pokemons.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.pokemons<_$Context>>
   /**
    * The trainer commanding this team of Pokemon.
@@ -66,7 +69,7 @@ export interface CombatantMultiPokemon<
    * | **Nullability** | Optional |
    */
   trainer?:
-    | $Fields.trainer$Expanded<_$Context>
+    | $Fields.trainer.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.trainer<_$Context>>
 
   /**
@@ -77,7 +80,7 @@ export interface CombatantMultiPokemon<
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: CombatantMultiPokemon$FragmentInline<_$Context> | CombatantMultiPokemon$FragmentInline<_$Context>[]
+  ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
   /**
    * A meta field. Is the name of the type being selected.
    *
@@ -88,12 +91,4 @@ export interface CombatantMultiPokemon<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
       $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     >
-}
-
-export interface CombatantMultiPokemon$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends
-  CombatantMultiPokemon<_$Context>,
-  $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields
-{
 }

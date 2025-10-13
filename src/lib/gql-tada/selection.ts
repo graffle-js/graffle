@@ -271,7 +271,8 @@ type getDocumentOperations<
       Rest,
       Introspection,
       Fragments,
-      OperationsAcc & {
+      & OperationsAcc
+      & {
         [Name in Definition['name']['value']]: {
           name: Definition['name']['value']
           result: getOperationSelectionType<Definition, Introspection, Fragments>
@@ -280,15 +281,14 @@ type getDocumentOperations<
       }
     >
     // Fragment definition - collect it and continue
-    : Definition extends { kind: Kind.FRAGMENT_DEFINITION; name: any }
-      ? getDocumentOperations<
-        Rest,
-        Introspection,
-        getFragmentMapRec<[Definition]> & Fragments,
-        OperationsAcc
-      >
-      // Unnamed operation or other - skip it
-      : getDocumentOperations<Rest, Introspection, Fragments, OperationsAcc>
+  : Definition extends { kind: Kind.FRAGMENT_DEFINITION; name: any } ? getDocumentOperations<
+      Rest,
+      Introspection,
+      getFragmentMapRec<[Definition]> & Fragments,
+      OperationsAcc
+    >
+    // Unnamed operation or other - skip it
+  : getDocumentOperations<Rest, Introspection, Fragments, OperationsAcc>
   : OperationsAcc
 
 /**

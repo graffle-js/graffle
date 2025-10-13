@@ -1,6 +1,9 @@
 import type * as $$Utilities from 'graffle/utilities-for-generated'
 import type { $DefaultSelectionContext } from '../../_context.js'
 import type * as $Fields from './fields.js'
+import type { $FragmentInline } from './fragment.js'
+
+export type * as Trainer from './$$.js'
 
 /**
  * A Pokemon trainer who catches and battles with Pokemon.
@@ -42,7 +45,7 @@ export interface Trainer<
    * | **Nullability** | Optional |
    */
   class?:
-    | $Fields.class$Expanded<_$Context>
+    | $Fields.class.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.class<_$Context>>
   /**
    * The patrons who are fans of this trainer.
@@ -69,7 +72,7 @@ export interface Trainer<
    * | **List** | Yes |
    */
   fans?:
-    | $Fields.fans$Expanded<_$Context>
+    | $Fields.fans.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.fans<_$Context>>
   /**
    * The unique identifier for this trainer.
@@ -89,7 +92,7 @@ export interface Trainer<
    * | **Nullability** | Optional |
    */
   id?:
-    | $Fields.id$Expanded<_$Context>
+    | $Fields.id.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.id<_$Context>>
   /**
    * The name of this trainer.
@@ -109,7 +112,7 @@ export interface Trainer<
    * | **Nullability** | Optional |
    */
   name?:
-    | $Fields.name$Expanded<_$Context>
+    | $Fields.name.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.name<_$Context>>
   /**
    * The Pokemon owned by this trainer.
@@ -141,7 +144,7 @@ export interface Trainer<
    * | **List** | Yes |
    */
   pokemon?:
-    | $Fields.pokemon$Expanded<_$Context>
+    | $Fields.pokemon.$Expanded<_$Context>
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<$Fields.pokemon<_$Context>>
 
   /**
@@ -152,7 +155,7 @@ export interface Trainer<
    *
    * @see https://spec.graphql.org/draft/#sec-Inline-Fragments
    */
-  ___?: Trainer$FragmentInline<_$Context> | Trainer$FragmentInline<_$Context>[]
+  ___?: $FragmentInline<_$Context> | $FragmentInline<_$Context>[]
   /**
    * A meta field. Is the name of the type being selected.
    *
@@ -163,9 +166,4 @@ export interface Trainer<
     | $$Utilities.DocumentBuilderKit.Select.SelectAlias.SelectAlias<
       $$Utilities.DocumentBuilderKit.Select.Indicator.NoArgsIndicator
     >
-}
-
-export interface Trainer$FragmentInline<
-  _$Context extends $$Utilities.DocumentBuilderKit.Select.SelectionContext = $DefaultSelectionContext,
-> extends Trainer<_$Context>, $$Utilities.DocumentBuilderKit.Select.Directive.$Groups.InlineFragment.Fields {
 }
